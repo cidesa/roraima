@@ -1,0 +1,9 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Catiprec
+    theme:            default
+    list:
+      title:   Lista de Recaudos 
+      display:        [=codtiprec, destiprec]      
+      filters: [codtiprec]

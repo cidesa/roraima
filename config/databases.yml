@@ -1,0 +1,5 @@
+all:
+  propel:
+    class:          sfPropelDatabase
+    param:
+      dsn:          pgsql://postgres:postgres@localhost/SIMA?schema=SIMA055

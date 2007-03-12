@@ -1,0 +1,14 @@
+---
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: none, package: lib.model }
+  catiprec:
+    codtiprec: 
+      type: VARCHAR
+      size: 4
+      required: true
+    destiprec: 
+      type: VARCHAR
+      size: 100
+    id:
+    
+      
