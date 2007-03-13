@@ -72,6 +72,67 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-            
+  fortipfin: 
+    codfin: 
+      type: VARCHAR
+      size: 4
+      required: true
+    #  primaryKey: true
+    nomext: 
+      type: VARCHAR
+      size: 100
+      required: true
+    nomabr: 
+      type: VARCHAR
+      size: 10
+      required: true
+    apofis: 
+      type: VARCHAR
+      size: 1
+    tipfin: 
+      type: VARCHAR
+      size: 1
+    montoing: 
+      type: NUMERIC
+      size: 20
+      scale: 2
+    montodis: 
+      type: NUMERIC
+      size: 20
+      scale: 2
+    montodisaux: 
+      type: NUMERIC
+      size: 20
+      scale: 2
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  optipben: 
+    codtipben: 
+      type: VARCHAR
+      size: 3
+      required: true
+    destipben: 
+      type: VARCHAR
+      size: 50
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  bnubica: 
+    codubi: 
+      type: VARCHAR
+      size: 30
+      required: true
+    desubi: 
+      type: VARCHAR
+      size: 250
+    stacod: 
+      type: VARCHAR
+      size: 1
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
     
-      
