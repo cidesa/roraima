@@ -1,0 +1,17 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnubica
+    theme:            default
+    fields:
+      codubi: { name: Codigo de Ubicacion}
+      desubi: { name: Descripcion de la Ubicacion}
+            
+    list:
+      title:          Lista de Ubicacion
+      filters:        [codubi, desubi]
+      display:        [=codubi, desubi]
+      
+    edit:
+      title:          Edicion de Ubicacion
+      display:        [=codubi, desubi]

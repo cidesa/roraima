@@ -1,0 +1,17 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Optipben
+    theme:            default
+    fields:
+      codtipben: { name: Codigo del Tipo Beneficiario}
+      destipben: { name: Descripcion del Tipo Beneficiario}      
+      
+    list:
+      title:          Tipos de Beneficiario
+      filters:        [codtipben, destipben]
+      display:        [=codtipben, destipben]
+      
+    edit:
+      title:          Edicion de Tipos de Beneficiario
+      display:        [=codtipben, destipben]
