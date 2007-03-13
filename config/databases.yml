@@ -3,7 +3,7 @@ all:
     class:          sfPropelDatabase
     param:
       dsn:          pgsql://postgres:postgres@localhost/IABIM?schema=SIMA_USER
-  sima002:
+  propel:
     class:          sfPropelDatabase
     param:
       dsn:          pgsql://postgres:postgres@localhost/IABIM?schema=SIMA002

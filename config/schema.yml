@@ -9,6 +9,69 @@ propel:
     destiprec: 
       type: VARCHAR
       size: 100
-    id:
+  caforent:  #almforent
+    _attributes: 
+      idMethod: native
+    codforent: 
+      type: VARCHAR
+      size: 4
+      required: true
+      primaryKey: true
+    desforent: 
+      type: VARCHAR
+      size: 255
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  carazcom:  #almrazcom
+    _attributes: 
+      idMethod: native
+    codrazcom: 
+      type: VARCHAR
+      size: 4
+      required: true
+    desrazcom: 
+      type: VARCHAR
+      size: 255
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  camotfal: 	#almmotfal
+    _attributes: 
+      idMethod: native
+    codfal: 
+      type: VARCHAR
+      size: 3
+      required: true
+    desfal: 
+      type: VARCHAR
+      size: 250
+    tipfal: 
+      type: VARCHAR
+      size: 3
+      required: true
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  caramart: 	#almramart
+    _attributes: 
+      idMethod: native
+    ramart: 
+      type: VARCHAR
+      size: 6
+      required: true
+      primaryKey: true
+    nomram: 
+      type: VARCHAR
+      size: 100
+      required: true
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+            
     
       
