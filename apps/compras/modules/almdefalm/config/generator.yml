@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cadefalm
+    theme:            default
+
+    fields:
+      codalm:      { name : Codigo }
+      nomalm:      { name : Descripcion }
+      codcat:      { name : Unidad Asociada } 
+
+    list:
+      title:          Almacen
+      display:        [=codalm, nomalm, codcat]
+      filters:		  [codalm, nomalm, codcat]
+      max_per_page:	  6
+      
+    edit:
+      title:          Edicion de Almacen
+      display:        [codalm, nomalm, codcat]  
+      fields:
+        codalm:      { params : maxlength=6 }	       

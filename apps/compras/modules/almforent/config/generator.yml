@@ -14,4 +14,8 @@ generator:
       filters:		  [codforent, desforent]
       max_per_page:	  6
   
-	  
+    edit:
+      title:          Edicion de Forma de Entrega
+      display:        [codforent, desforent]  
+      fields:
+        codforent:      { params : maxlength=6 }	  
