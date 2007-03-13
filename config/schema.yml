@@ -10,13 +10,10 @@ propel:
       type: VARCHAR
       size: 100
   caforent:  #almforent
-    _attributes: 
-      idMethod: native
     codforent: 
       type: VARCHAR
       size: 4
       required: true
-      primaryKey: true
     desforent: 
       type: VARCHAR
       size: 255
@@ -133,7 +130,6 @@ propel:
       type: VARCHAR
       size: 6
       required: true
-      primaryKey: true
     nomalm: 
       type: VARCHAR
       size: 100
