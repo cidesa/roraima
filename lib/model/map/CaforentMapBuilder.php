@@ -32,11 +32,11 @@ class CaforentMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('CODFORENT', 'Codforent', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addPrimaryKey('CODFORENT', 'Codforent', 'string', CreoleTypes::VARCHAR, true, 4);
 
 		$tMap->addColumn('DESFORENT', 'Desforent', 'string', CreoleTypes::VARCHAR, false, 255);
 
-		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
+		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, true);
 				
     } 
 } 

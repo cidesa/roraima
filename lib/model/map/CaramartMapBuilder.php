@@ -32,11 +32,11 @@ class CaramartMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('RAMART', 'Ramart', 'string', CreoleTypes::VARCHAR, true, 6);
+		$tMap->addPrimaryKey('RAMART', 'Ramart', 'string', CreoleTypes::VARCHAR, true, 6);
 
 		$tMap->addColumn('NOMRAM', 'Nomram', 'string', CreoleTypes::VARCHAR, true, 100);
 
-		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
+		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, true);
 				
     } 
 } 

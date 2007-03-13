@@ -292,7 +292,7 @@ abstract class BaseCaforent extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(CaforentPeer::DATABASE_NAME);
 
-		$criteria->add(CaforentPeer::ID, $this->id);
+		$criteria->add(CaforentPeer::CODFORENT, $this->codforent);
 
 		return $criteria;
 	}
@@ -300,27 +300,27 @@ abstract class BaseCaforent extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getId();
+		return $this->getCodforent();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setId($key);
+		$this->setCodforent($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodforent($this->codforent);
-
 		$copyObj->setDesforent($this->desforent);
+
+		$copyObj->setId($this->id);
 
 
 		$copyObj->setNew(true);
 
-		$copyObj->setId(NULL); 
+		$copyObj->setCodforent(NULL); 
 	}
 
 	

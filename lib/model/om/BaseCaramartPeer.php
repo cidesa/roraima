@@ -107,8 +107,8 @@ abstract class BaseCaramartPeer {
 
 	}
 
-	const COUNT = 'COUNT(caramart.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT caramart.ID)';
+	const COUNT = 'COUNT(caramart.RAMART)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT caramart.RAMART)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -231,8 +231,8 @@ abstract class BaseCaramartPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(CaramartPeer::ID);
-			$selectCriteria->add(CaramartPeer::ID, $criteria->remove(CaramartPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(CaramartPeer::RAMART);
+			$selectCriteria->add(CaramartPeer::RAMART, $criteria->remove(CaramartPeer::RAMART), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -271,7 +271,7 @@ abstract class BaseCaramartPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CaramartPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(CaramartPeer::RAMART, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -333,7 +333,7 @@ abstract class BaseCaramartPeer {
 
 		$criteria = new Criteria(CaramartPeer::DATABASE_NAME);
 
-		$criteria->add(CaramartPeer::ID, $pk);
+		$criteria->add(CaramartPeer::RAMART, $pk);
 
 
 		$v = CaramartPeer::doSelect($criteria, $con);
@@ -353,7 +353,7 @@ abstract class BaseCaramartPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(CaramartPeer::ID, $pks, Criteria::IN);
+			$criteria->add(CaramartPeer::RAMART, $pks, Criteria::IN);
 			$objs = CaramartPeer::doSelect($criteria, $con);
 		}
 		return $objs;
