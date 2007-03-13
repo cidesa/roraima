@@ -3,3 +3,13 @@ generator:
   param:
     model_class:      Camotfal
     theme:            default
+
+    fields:
+      codfal:      { name : Codigo }
+      desfals:      { name : Descripcion }
+
+    list:
+      title:          Motivo de Faltante
+      display:        [=codfal, desfal]
+      filters:		  [codfal, desfal]
+      max_per_page:	  10

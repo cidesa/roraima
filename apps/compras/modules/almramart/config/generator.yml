@@ -3,3 +3,15 @@ generator:
   param:
     model_class:      Caramart
     theme:            default
+
+    fields:
+      ramart:      { name : Codigo }
+      nomram:      { name : Descripcion }
+
+    list:
+      title:          Ramo de Articulo
+      display:        [=ramart, nomram]
+      filters:		  [ramart, nomram]
+      max_per_page:	  10
+  
+	  
