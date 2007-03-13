@@ -1,0 +1,17 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caforent
+    theme:            default
+
+    fields:
+      codforent:      { name : Codigo }
+      desforent:      { name : Descripcion }
+
+    list:
+      title:          Forma de Entrega
+      display:        [=codforent, desforent]
+      filters:		  [codforent, desforent]
+      max_per_page:	  6
+  
+	  
