@@ -8680,3 +8680,137 @@ Mar 09 12:28:34 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_td_t
 Mar 09 12:28:34 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_td_actions" 12.11 ms (9)
 Mar 09 12:28:34 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_actions" 1.73 ms (1)
 Mar 09 12:28:34 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_footer" 1.57 ms (1)
+Mar 13 10:48:40 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 13 10:48:40 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 13 10:48:40 symfony [info] {sfContext} initialization
+Mar 13 10:48:43 symfony [info] {sfController} initialization
+Mar 13 10:48:43 symfony [info] {sfRouting} match route [default] "/:module/:action/*"
+Mar 13 10:48:43 symfony [info] {sfRequest} request parameters array (  'module' => 'almtiprecpro',  'action' => 'edit',  'id' => '4',)
+Mar 13 10:48:43 symfony [info] {sfController} dispatch request
+Mar 13 10:48:44 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 13 10:48:44 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 13 10:48:44 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 13 10:48:44 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 13 10:48:44 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 13 10:48:44 symfony [info] {sfAction} call "almtiprecproActions->executeEdit()"
+Mar 13 10:48:45 symfony [err] {sfException} 
+Mar 13 10:49:13 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 13 10:49:13 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 13 10:49:13 symfony [info] {sfContext} initialization
+Mar 13 10:49:13 symfony [info] {sfController} initialization
+Mar 13 10:49:13 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 13 10:49:13 symfony [info] {sfRequest} request parameters array (  'module' => 'almtiprecpro',  'action' => 'index',)
+Mar 13 10:49:13 symfony [info] {sfController} dispatch request
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 13 10:49:13 symfony [info] {sfAction} call "almtiprecproActions->executeIndex()"
+Mar 13 10:49:13 symfony [info] {sfAction} forward to action "almtiprecpro/list"
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 13 10:49:13 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 13 10:49:13 symfony [info] {sfAction} call "almtiprecproActions->executeList()"
+Mar 13 10:49:14 symfony [err] {sfException} 
+Mar 13 10:50:10 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 13 10:50:10 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 13 10:50:10 symfony [info] {sfRouting} connect "/"
+Mar 13 10:50:10 symfony [info] {sfRouting} connect "/symfony/:action/*"
+Mar 13 10:50:10 symfony [info] {sfRouting} connect "/:module"
+Mar 13 10:50:10 symfony [info] {sfRouting} connect "/:module/:action/*"
+Mar 13 10:50:10 symfony [info] {sfContext} initialization
+Mar 13 10:50:11 symfony [info] {sfController} initialization
+Mar 13 10:50:11 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 13 10:50:11 symfony [info] {sfRequest} request parameters array (  'module' => 'almtiprecpro',  'action' => 'index',)
+Mar 13 10:50:11 symfony [info] {sfController} dispatch request
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 13 10:50:12 symfony [info] {sfAction} call "almtiprecproActions->executeIndex()"
+Mar 13 10:50:12 symfony [info] {sfAction} forward to action "almtiprecpro/list"
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 13 10:50:12 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 13 10:50:12 symfony [info] {sfAction} call "almtiprecproActions->executeList()"
+Mar 13 10:50:12 symfony [err] {sfException} 
+Mar 13 10:51:21 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 13 10:51:21 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 13 10:51:21 symfony [info] {sfContext} initialization
+Mar 13 10:51:22 symfony [info] {sfController} initialization
+Mar 13 10:51:22 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 13 10:51:22 symfony [info] {sfRequest} request parameters array (  'module' => 'almtiprecpro',  'action' => 'index',)
+Mar 13 10:51:22 symfony [info] {sfController} dispatch request
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 13 10:51:23 symfony [info] {sfAction} call "almtiprecproActions->executeIndex()"
+Mar 13 10:51:23 symfony [info] {sfAction} forward to action "almtiprecpro/list"
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 13 10:51:23 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 13 10:51:23 symfony [info] {sfAction} call "almtiprecproActions->executeList()"
+Mar 13 10:51:23 symfony [info] {sfCreole} connect(): DSN: array (   'database' => 'IABIM',   'encoding' => NULL,   'hostspec' => 'localhost',   'password' => 'postgres',   'persistent' => NULL,   'phptype' => 'pgsql',   'port' => NULL,   'protocol' => NULL,   'schema' => 'SIMA002',   'username' => 'postgres', ), FLAGS: 0
+Mar 13 10:51:24 symfony [info] {sfCreole} prepareStatement(): SELECT COUNT(catiprec.ID) FROM catiprec
+Mar 13 10:51:24 symfony [info] {sfCreole} executeQuery(): [182.97 ms] SELECT COUNT(catiprec.ID) FROM catiprec
+Mar 13 10:51:24 symfony [info] {sfView} initialize view for "almtiprecpro/list"
+Mar 13 10:51:24 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/listSuccess.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_header"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_header.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_messages"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_messages.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_filters"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_filters.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_th_tabular"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_th_tabular.php"
+Mar 13 10:51:26 symfony [info] {sfCreole} prepareStatement(): SELECT catiprec.CODTIPREC, catiprec.DESTIPREC, catiprec.ID FROM catiprec
+Mar 13 10:51:26 symfony [info] {sfCreole} applyLimit(): SELECT catiprec.CODTIPREC, catiprec.DESTIPREC, catiprec.ID FROM catiprec, offset: 0, limit: 20
+Mar 13 10:51:26 symfony [info] {sfCreole} executeQuery(): [1.66 ms] SELECT catiprec.CODTIPREC, catiprec.DESTIPREC, catiprec.ID FROM catiprec LIMIT 20
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_td_tabular"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_td_tabular.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_td_actions"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_td_actions.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_td_tabular"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_td_tabular.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_td_actions"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_td_actions.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_td_tabular"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_td_tabular.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_td_actions"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_td_actions.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_actions"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_actions.php"
+Mar 13 10:51:26 symfony [info] {sfView} initialize view for "almtiprecpro/_list_footer"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\cache\compras\dev\modules/autoAlmtiprecpro/templates/_list_footer.php"
+Mar 13 10:51:26 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\compras\templates/layout.php"
+Mar 13 10:51:26 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\compras\templates/layout.php"
+Mar 13 10:51:27 symfony [info] {sfFilter} render to client
+Mar 13 10:51:27 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 13 10:51:27 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 13 10:51:27 symfony [info] {sfResponse} send content (40016 o)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Configuration 453.01 ms (16)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Action "almtiprecpro/index" 4005.20 ms (1)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Action "almtiprecpro/list" 1706.86 ms (1)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Database 184.60 ms (2)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} View "Success" for "almtiprecpro/list" 2012.67 ms (1)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_header" 5.37 ms (1)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_messages" 18.53 ms (1)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Partial "almtiprecpro/_filters" 93.08 ms (1)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list" 296.06 ms (1)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_th_tabular" 17.40 ms (1)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_td_tabular" 14.28 ms (3)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_td_actions" 11.68 ms (3)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_actions" 7.22 ms (1)
+Mar 13 10:51:27 symfony [info] {sfTimerManager} Partial "almtiprecpro/_list_footer" 4.91 ms (1)
