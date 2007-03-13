@@ -25,8 +25,6 @@ propel:
       required: true
       autoIncrement: true
   carazcom:  #almrazcom
-    _attributes: 
-      idMethod: native
     codrazcom: 
       type: VARCHAR
       size: 4
@@ -39,8 +37,6 @@ propel:
       required: true
       autoIncrement: true
   camotfal: 	#almmotfal
-    _attributes: 
-      idMethod: native
     codfal: 
       type: VARCHAR
       size: 3
@@ -57,13 +53,10 @@ propel:
       required: true
       autoIncrement: true
   caramart: 	#almramart
-    _attributes: 
-      idMethod: native
     ramart: 
       type: VARCHAR
       size: 6
       required: true
-      primaryKey: true
     nomram: 
       type: VARCHAR
       size: 100
@@ -131,6 +124,23 @@ propel:
     stacod: 
       type: VARCHAR
       size: 1
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cadefalm:
+    codalm: 
+      type: VARCHAR
+      size: 6
+      required: true
+      primaryKey: true
+    nomalm: 
+      type: VARCHAR
+      size: 100
+      required: true
+    codcat: 
+      type: VARCHAR
+      size: 16
     id: 
       type: INTEGER
       required: true
