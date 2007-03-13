@@ -30,9 +30,7 @@ class CamotfalMapBuilder {
 		$tMap = $this->dbMap->addTable('camotfal');
 		$tMap->setPhpName('Camotfal');
 
-		$tMap->setUseIdGenerator(true);
- 
-		$tMap->setPrimaryKeyMethodInfo('camotfal_SEQ');
+		$tMap->setUseIdGenerator(false);
 
 		$tMap->addColumn('CODFAL', 'Codfal', 'string', CreoleTypes::VARCHAR, true, 3);
 

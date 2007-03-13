@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class BaseCamotfal extends BaseObject  implements Persistent {
+abstract class BaseCadefalm extends BaseObject  implements Persistent {
 
 
 	
@@ -9,15 +9,15 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 
 
 	
-	protected $codfal;
+	protected $codalm;
 
 
 	
-	protected $desfal;
+	protected $nomalm;
 
 
 	
-	protected $tipfal;
+	protected $codcat;
 
 
 	
@@ -30,24 +30,24 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
 	
-	public function getCodfal()
+	public function getCodalm()
 	{
 
-		return $this->codfal;
+		return $this->codalm;
 	}
 
 	
-	public function getDesfal()
+	public function getNomalm()
 	{
 
-		return $this->desfal;
+		return $this->nomalm;
 	}
 
 	
-	public function getTipfal()
+	public function getCodcat()
 	{
 
-		return $this->tipfal;
+		return $this->codcat;
 	}
 
 	
@@ -58,32 +58,32 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	}
 
 	
-	public function setCodfal($v)
+	public function setCodalm($v)
 	{
 
-		if ($this->codfal !== $v) {
-			$this->codfal = $v;
-			$this->modifiedColumns[] = CamotfalPeer::CODFAL;
+		if ($this->codalm !== $v) {
+			$this->codalm = $v;
+			$this->modifiedColumns[] = CadefalmPeer::CODALM;
 		}
 
 	} 
 	
-	public function setDesfal($v)
+	public function setNomalm($v)
 	{
 
-		if ($this->desfal !== $v) {
-			$this->desfal = $v;
-			$this->modifiedColumns[] = CamotfalPeer::DESFAL;
+		if ($this->nomalm !== $v) {
+			$this->nomalm = $v;
+			$this->modifiedColumns[] = CadefalmPeer::NOMALM;
 		}
 
 	} 
 	
-	public function setTipfal($v)
+	public function setCodcat($v)
 	{
 
-		if ($this->tipfal !== $v) {
-			$this->tipfal = $v;
-			$this->modifiedColumns[] = CamotfalPeer::TIPFAL;
+		if ($this->codcat !== $v) {
+			$this->codcat = $v;
+			$this->modifiedColumns[] = CadefalmPeer::CODCAT;
 		}
 
 	} 
@@ -93,7 +93,7 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = CamotfalPeer::ID;
+			$this->modifiedColumns[] = CadefalmPeer::ID;
 		}
 
 	} 
@@ -102,11 +102,11 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	{
 		try {
 
-			$this->codfal = $rs->getString($startcol + 0);
+			$this->codalm = $rs->getString($startcol + 0);
 
-			$this->desfal = $rs->getString($startcol + 1);
+			$this->nomalm = $rs->getString($startcol + 1);
 
-			$this->tipfal = $rs->getString($startcol + 2);
+			$this->codcat = $rs->getString($startcol + 2);
 
 			$this->id = $rs->getInt($startcol + 3);
 
@@ -116,7 +116,7 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 
 						return $startcol + 4; 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating Camotfal object", $e);
+			throw new PropelException("Error populating Cadefalm object", $e);
 		}
 	}
 
@@ -128,12 +128,12 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(CamotfalPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CadefalmPeer::DATABASE_NAME);
 		}
 
 		try {
 			$con->begin();
-			CamotfalPeer::doDelete($this, $con);
+			CadefalmPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -150,7 +150,7 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(CamotfalPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CadefalmPeer::DATABASE_NAME);
 		}
 
 		try {
@@ -173,11 +173,11 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = CamotfalPeer::doInsert($this, $con);
+					$pk = CadefalmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
 					$this->setNew(false);
 				} else {
-					$affectedRows += CamotfalPeer::doUpdate($this, $con);
+					$affectedRows += CadefalmPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
 
@@ -217,7 +217,7 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			if (($retval = CamotfalPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = CadefalmPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -232,7 +232,7 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = CamotfalPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = CadefalmPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
@@ -241,13 +241,13 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodfal();
+				return $this->getCodalm();
 				break;
 			case 1:
-				return $this->getDesfal();
+				return $this->getNomalm();
 				break;
 			case 2:
-				return $this->getTipfal();
+				return $this->getCodcat();
 				break;
 			case 3:
 				return $this->getId();
@@ -260,11 +260,11 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = CamotfalPeer::getFieldNames($keyType);
+		$keys = CadefalmPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodfal(),
-			$keys[1] => $this->getDesfal(),
-			$keys[2] => $this->getTipfal(),
+			$keys[0] => $this->getCodalm(),
+			$keys[1] => $this->getNomalm(),
+			$keys[2] => $this->getCodcat(),
 			$keys[3] => $this->getId(),
 		);
 		return $result;
@@ -273,7 +273,7 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = CamotfalPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = CadefalmPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -282,13 +282,13 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodfal($value);
+				$this->setCodalm($value);
 				break;
 			case 1:
-				$this->setDesfal($value);
+				$this->setNomalm($value);
 				break;
 			case 2:
-				$this->setTipfal($value);
+				$this->setCodcat($value);
 				break;
 			case 3:
 				$this->setId($value);
@@ -298,23 +298,23 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = CamotfalPeer::getFieldNames($keyType);
+		$keys = CadefalmPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodfal($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setDesfal($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setTipfal($arr[$keys[2]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodalm($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setNomalm($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodcat($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
 	}
 
 	
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(CamotfalPeer::DATABASE_NAME);
+		$criteria = new Criteria(CadefalmPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(CamotfalPeer::CODFAL)) $criteria->add(CamotfalPeer::CODFAL, $this->codfal);
-		if ($this->isColumnModified(CamotfalPeer::DESFAL)) $criteria->add(CamotfalPeer::DESFAL, $this->desfal);
-		if ($this->isColumnModified(CamotfalPeer::TIPFAL)) $criteria->add(CamotfalPeer::TIPFAL, $this->tipfal);
-		if ($this->isColumnModified(CamotfalPeer::ID)) $criteria->add(CamotfalPeer::ID, $this->id);
+		if ($this->isColumnModified(CadefalmPeer::CODALM)) $criteria->add(CadefalmPeer::CODALM, $this->codalm);
+		if ($this->isColumnModified(CadefalmPeer::NOMALM)) $criteria->add(CadefalmPeer::NOMALM, $this->nomalm);
+		if ($this->isColumnModified(CadefalmPeer::CODCAT)) $criteria->add(CadefalmPeer::CODCAT, $this->codcat);
+		if ($this->isColumnModified(CadefalmPeer::ID)) $criteria->add(CadefalmPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -322,9 +322,9 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(CamotfalPeer::DATABASE_NAME);
+		$criteria = new Criteria(CadefalmPeer::DATABASE_NAME);
 
-		$criteria->add(CamotfalPeer::ID, $this->id);
+		$criteria->add(CadefalmPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -345,11 +345,11 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodfal($this->codfal);
+		$copyObj->setCodalm($this->codalm);
 
-		$copyObj->setDesfal($this->desfal);
+		$copyObj->setNomalm($this->nomalm);
 
-		$copyObj->setTipfal($this->tipfal);
+		$copyObj->setCodcat($this->codcat);
 
 
 		$copyObj->setNew(true);
@@ -370,7 +370,7 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new CamotfalPeer();
+			self::$peer = new CadefalmPeer();
 		}
 		return self::$peer;
 	}

@@ -30,9 +30,7 @@ class CarazcomMapBuilder {
 		$tMap = $this->dbMap->addTable('carazcom');
 		$tMap->setPhpName('Carazcom');
 
-		$tMap->setUseIdGenerator(true);
- 
-		$tMap->setPrimaryKeyMethodInfo('carazcom_SEQ');
+		$tMap->setUseIdGenerator(false);
 
 		$tMap->addColumn('CODRAZCOM', 'Codrazcom', 'string', CreoleTypes::VARCHAR, true, 4);
 

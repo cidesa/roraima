@@ -1,32 +1,35 @@
 <?php
 
 
-abstract class BaseCaramartPeer {
+abstract class BaseCadefalmPeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'caramart';
+	const TABLE_NAME = 'cadefalm';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Caramart';
+	const CLASS_DEFAULT = 'lib.model.Cadefalm';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const RAMART = 'caramart.RAMART';
+	const CODALM = 'cadefalm.CODALM';
 
 	
-	const NOMRAM = 'caramart.NOMRAM';
+	const NOMALM = 'cadefalm.NOMALM';
 
 	
-	const ID = 'caramart.ID';
+	const CODCAT = 'cadefalm.CODCAT';
+
+	
+	const ID = 'cadefalm.ID';
 
 	
 	private static $phpNameMap = null;
@@ -34,31 +37,31 @@ abstract class BaseCaramartPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Ramart', 'Nomram', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaramartPeer::RAMART, CaramartPeer::NOMRAM, CaramartPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('ramart', 'nomram', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Codalm', 'Nomalm', 'Codcat', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM, CadefalmPeer::NOMALM, CadefalmPeer::CODCAT, CadefalmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codalm', 'nomalm', 'codcat', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Ramart' => 0, 'Nomram' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (CaramartPeer::RAMART => 0, CaramartPeer::NOMRAM => 1, CaramartPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('ramart' => 0, 'nomram' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Codalm' => 0, 'Nomalm' => 1, 'Codcat' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM => 0, CadefalmPeer::NOMALM => 1, CadefalmPeer::CODCAT => 2, CadefalmPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('codalm' => 0, 'nomalm' => 1, 'codcat' => 2, 'id' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/CaramartMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.CaramartMapBuilder');
+		include_once 'lib/model/map/CadefalmMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.CadefalmMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = CaramartPeer::getTableMap();
+			$map = CadefalmPeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -92,23 +95,25 @@ abstract class BaseCaramartPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(CaramartPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(CadefalmPeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(CaramartPeer::RAMART);
+		$criteria->addSelectColumn(CadefalmPeer::CODALM);
 
-		$criteria->addSelectColumn(CaramartPeer::NOMRAM);
+		$criteria->addSelectColumn(CadefalmPeer::NOMALM);
 
-		$criteria->addSelectColumn(CaramartPeer::ID);
+		$criteria->addSelectColumn(CadefalmPeer::CODCAT);
+
+		$criteria->addSelectColumn(CadefalmPeer::ID);
 
 	}
 
-	const COUNT = 'COUNT(caramart.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT caramart.ID)';
+	const COUNT = 'COUNT(cadefalm.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT cadefalm.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -117,9 +122,9 @@ abstract class BaseCaramartPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(CaramartPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(CadefalmPeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(CaramartPeer::COUNT);
+			$criteria->addSelectColumn(CadefalmPeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -127,7 +132,7 @@ abstract class BaseCaramartPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = CaramartPeer::doSelectRS($criteria, $con);
+		$rs = CadefalmPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -139,7 +144,7 @@ abstract class BaseCaramartPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = CaramartPeer::doSelect($critcopy, $con);
+		$objects = CadefalmPeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -148,7 +153,7 @@ abstract class BaseCaramartPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return CaramartPeer::populateObjects(CaramartPeer::doSelectRS($criteria, $con));
+		return CadefalmPeer::populateObjects(CadefalmPeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -159,7 +164,7 @@ abstract class BaseCaramartPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			CaramartPeer::addSelectColumns($criteria);
+			CadefalmPeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -171,7 +176,7 @@ abstract class BaseCaramartPeer {
 	{
 		$results = array();
 	
-				$cls = CaramartPeer::getOMClass();
+				$cls = CadefalmPeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -191,7 +196,7 @@ abstract class BaseCaramartPeer {
 	
 	public static function getOMClass()
 	{
-		return CaramartPeer::CLASS_DEFAULT;
+		return CadefalmPeer::CLASS_DEFAULT;
 	}
 
 	
@@ -231,8 +236,8 @@ abstract class BaseCaramartPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(CaramartPeer::ID);
-			$selectCriteria->add(CaramartPeer::ID, $criteria->remove(CaramartPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(CadefalmPeer::ID);
+			$selectCriteria->add(CadefalmPeer::ID, $criteria->remove(CadefalmPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -249,7 +254,7 @@ abstract class BaseCaramartPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(CaramartPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(CadefalmPeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -262,16 +267,16 @@ abstract class BaseCaramartPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(CaramartPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CadefalmPeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Caramart) {
+			$criteria = clone $values; 		} elseif ($values instanceof Cadefalm) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CaramartPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(CadefalmPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -290,13 +295,13 @@ abstract class BaseCaramartPeer {
 	}
 
 	
-	public static function doValidate(Caramart $obj, $cols = null)
+	public static function doValidate(Cadefalm $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(CaramartPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(CaramartPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(CadefalmPeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(CadefalmPeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -312,11 +317,11 @@ abstract class BaseCaramartPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(CaramartPeer::DATABASE_NAME, CaramartPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(CadefalmPeer::DATABASE_NAME, CadefalmPeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = CaramartPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = CadefalmPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -331,12 +336,12 @@ abstract class BaseCaramartPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(CaramartPeer::DATABASE_NAME);
+		$criteria = new Criteria(CadefalmPeer::DATABASE_NAME);
 
-		$criteria->add(CaramartPeer::ID, $pk);
+		$criteria->add(CadefalmPeer::ID, $pk);
 
 
-		$v = CaramartPeer::doSelect($criteria, $con);
+		$v = CadefalmPeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -353,8 +358,8 @@ abstract class BaseCaramartPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(CaramartPeer::ID, $pks, Criteria::IN);
-			$objs = CaramartPeer::doSelect($criteria, $con);
+			$criteria->add(CadefalmPeer::ID, $pks, Criteria::IN);
+			$objs = CadefalmPeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -362,11 +367,11 @@ abstract class BaseCaramartPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseCaramartPeer::getMapBuilder();
+		BaseCadefalmPeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/CaramartMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.CaramartMapBuilder');
+			require_once 'lib/model/map/CadefalmMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.CadefalmMapBuilder');
 }

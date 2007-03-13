@@ -2,10 +2,10 @@
 
 
 	
-class CaramartMapBuilder {
+class CadefalmMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CaramartMapBuilder';	
+	const CLASS_NAME = 'lib.model.map.CadefalmMapBuilder';	
 
     
     private $dbMap;
@@ -27,14 +27,16 @@ class CaramartMapBuilder {
     {
 		$this->dbMap = Propel::getDatabaseMap('propel');
 		
-		$tMap = $this->dbMap->addTable('caramart');
-		$tMap->setPhpName('Caramart');
+		$tMap = $this->dbMap->addTable('cadefalm');
+		$tMap->setPhpName('Cadefalm');
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('RAMART', 'Ramart', 'string', CreoleTypes::VARCHAR, true, 6);
+		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 6);
 
-		$tMap->addColumn('NOMRAM', 'Nomram', 'string', CreoleTypes::VARCHAR, true, 100);
+		$tMap->addColumn('NOMALM', 'Nomalm', 'string', CreoleTypes::VARCHAR, true, 100);
+
+		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, false, 16);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				

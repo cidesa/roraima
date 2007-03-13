@@ -152,7 +152,6 @@ abstract class BaseCarazcom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CarazcomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
-					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CarazcomPeer::doUpdate($this, $con);

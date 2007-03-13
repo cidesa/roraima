@@ -30,15 +30,13 @@ class CaforentMapBuilder {
 		$tMap = $this->dbMap->addTable('caforent');
 		$tMap->setPhpName('Caforent');
 
-		$tMap->setUseIdGenerator(true);
- 
-		$tMap->setPrimaryKeyMethodInfo('caforent_SEQ');
+		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODFORENT', 'Codforent', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('CODFORENT', 'Codforent', 'string', CreoleTypes::VARCHAR, true, 4);
 
 		$tMap->addColumn('DESFORENT', 'Desforent', 'string', CreoleTypes::VARCHAR, false, 255);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, true);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 
