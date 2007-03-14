@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Catipent
+    theme:            default
+    fields:
+      codtipent:  {  name: Código}
+      destipent:  {  name: Descripción}
+    list:
+      title:          Lista de Articulos
+      display:        [=codtipent, destipent]    
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      filters:        [codtipent]
+      max_per_page:   5
+    edit:
+      title:          Editar Articulos
+      display:
+        Editable:     [codtipent, destipent]

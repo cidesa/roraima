@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Catipsal
+    theme:            default
+    fields:
+      codtipsal:  {  name: Codigo}
+      destipsal:  {  name: Descripcion}
+    list:
+      title:          Definición de Tipos de Salida
+      display:        [=codtipsal, destipsal]     
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [codtipsal, destipsal] 
+      max_per_page:   5
+    edit:
+      title:          Definición de Tipos de Salida
+      display:
+        Editable:     [codtipsal, destipsal]

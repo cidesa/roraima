@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cadefubi
+    theme:            default
+    fields:
+      codubi:  {  name: Codigo}
+      nomubi:  {  name: Descripcion}
+    list:
+      title:          Definición de Ubicaciones
+      display:        [=codubi, nomubi]     
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [codubi, nomubi] 
+      max_per_page:   5
+    edit:
+      title:          Definición de Ubicaciones
+      display:
+        Editable:     [codubi, nomubi]

@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Carancot
+    theme:            default
+    fields:
+      candes:  {  name: Desde[UT]}
+      canhas:  {  name: Hasta[UT]}
+      cancot:  {  name: Cantidad de Cotizaciones}      
+    list:
+      title:          Definición de Rangos de Cotizaciones
+      display:        [=candes, canhas, cancot]     
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [candes, canhas, cancot] 
+      max_per_page:   5
+    edit:
+      title:          Definición de Rangos de Cotizaciones
+      display:
+        Editable:     [candes, canhas, cancot]
+
