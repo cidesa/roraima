@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cadefart
+    theme:            default
+
+    fields:
+      lonart:     	   { name : Longitud del Codigo }
+      forart:     	   { name : Formato }
+      desart:     	   { name : Descripcion }
+      
+ 
+    list:
+      title:          Definicion de Articulo
+      display:        [=lonart, forart, desart]
+      filters:		  [lonart, forart, desart]
+      max_per_page:	  6
+      object_actions:
+        _edit:        ~      

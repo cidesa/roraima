@@ -13,3 +13,6 @@ generator:
       display:        [=codrazcom, desrazcom]
       filters:		  [codrazcom, desrazcom]
       max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~      

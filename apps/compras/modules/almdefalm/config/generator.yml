@@ -14,6 +14,9 @@ generator:
       display:        [=codalm, nomalm, codcat]
       filters:		  [codalm, nomalm, codcat]
       max_per_page:	  6
+      object_actions:
+        _edit:        ~
+        _delete:      ~
       
     edit:
       title:          Edicion de Almacen

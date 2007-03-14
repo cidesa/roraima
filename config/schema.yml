@@ -141,4 +141,154 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  cadefart: 
+    codemp: 
+      type: VARCHAR
+      size: 3
+      required: true
+    lonart: 
+      type: NUMERIC
+      size: 2
+      required: true
+    rupart: 
+      type: NUMERIC
+      size: 2
+      required: true
+    forart: 
+      type: VARCHAR
+      size: 30
+      required: true
+    desart: 
+      type: VARCHAR
+      size: 30
+      required: true
+    forubi: 
+      type: VARCHAR
+      size: 30
+      required: true
+    desubi: 
+      type: VARCHAR
+      size: 30
+      required: true
+    correq: 
+      type: VARCHAR
+      size: 8
+    corord: 
+      type: VARCHAR
+      size: 8
+    correc: 
+      type: VARCHAR
+      size: 8
+    cordes: 
+      type: VARCHAR
+      size: 8
+    generaop: 
+      type: VARCHAR
+      size: 1
+    asiparrec: 
+      type: VARCHAR
+      size: 1
+    generacom: 
+      type: VARCHAR
+      size: 1
+    mercon: 
+      type: VARCHAR
+      size: 20
+    ctadev: 
+      type: VARCHAR
+      size: 32
+    ctavco: 
+      type: VARCHAR
+      size: 32
+    univta: 
+      type: VARCHAR
+      size: 32
+    artven: 
+      type: VARCHAR
+      size: 20
+    artins: 
+      type: VARCHAR
+      size: 20
+    artser: 
+      type: VARCHAR
+      size: 20
+    codalmven: 
+      type: VARCHAR
+      size: 6
+    recart: 
+      type: NUMERIC
+      size: 8
+    ordcom: 
+      type: NUMERIC
+      size: 8
+    reqart: 
+      type: NUMERIC
+      size: 8
+    dphart: 
+      type: NUMERIC
+      size: 8
+    ordser: 
+      type: NUMERIC
+      size: 8
+    tipimprec: 
+      type: VARCHAR
+      size: 1
+    artvenhas: 
+      type: VARCHAR
+      size: 20
+    corcot: 
+      type: VARCHAR
+      size: 8
+    solart: 
+      type: VARCHAR
+      size: 8
+    apliclades: 
+      type: VARCHAR
+      size: 1
+    solcom: 
+      type: NUMERIC
+      size: 8
+    unidad: 
+      type: VARCHAR
+      size: 100
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  weblog_post:
+    _attributes: { phpName: Post }
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    title:
+      type: VARCHAR
+      size: 255
+    excerpt:
+      type: VARCHAR
+      size: 255
+    body:
+      type: VARCHAR
+      size: 255
+    created_at:      
+  weblog_comment:
+    _attributes: { phpName: Comment }
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    post_id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    author:
+      type: VARCHAR
+      size: 255
+    email:
+      type: VARCHAR
+      size: 255
+    body:
+      type: VARCHAR
+      size: 255
+    created_at:
     
