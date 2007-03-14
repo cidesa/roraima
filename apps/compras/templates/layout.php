@@ -49,7 +49,7 @@
 						</span></td>
 						<td valign="middle" background="/images/borrar_06.jpg"
 							height="22" align="right"><a
-							href="../../login.php?var=<? echo '9';?>">[Cerrar Sesi&oacute;n]</a>&nbsp;&nbsp;</td>
+							href="/login.php?var=<? echo '9';?>">[Cerrar Sesi&oacute;n]</a>&nbsp;&nbsp;</td>
 					</tr>
 					<tr>
 						<td valign="top"><img src="/images/borrar_07.jpg" width="341"
