@@ -43,12 +43,12 @@ all:
 #    unavailable_module:     default   # To be called when a user requests a page
 #    unavailable_action:  unavailable  # From an application disabled via the available setting below
 #
-#  .settings:
-#    available:              on        # Enable the whole application. Switch to off to redirect all requests to the unavailable module and action.
+  .settings:
+    available:              on        # Enable the whole application. Switch to off to redirect all requests to the unavailable module and action.
 #
 #    # Optional features. Deactivating unused features boots performance a bit.
 #    use_database:           on        # Enable database manager. Set to off if you don't use a database.
-#    use_security:           on        # Enable security features (login and credentials). Set to off for public applications.
+    use_security:           on        # Enable security features (login and credentials). Set to off for public applications.
 #    use_flash:              on        # Enable flash parameter feature. Set to off if you never use the set_flash() method in actions.
 #    i18n:                   off       # Enable interface translation. Set to off if your application should not be translated.
 #    check_symfony_version:  off       # Enable check of symfony version for every request. Set to on to have symfony clear the cache automatically when the framework is upgraded. Set to off if you always clear the cache after an upgrade.

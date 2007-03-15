@@ -17,14 +17,8 @@ class principalActions extends sfActions
   public function executeIndex()
   {
   	
-	if ($this)
-	{
-		//$this->getUser()->loginOut();
-		$this->getUser()->setAttribute('error', 'Principal - Usuario Login');
-	}else 
-	{
-		$this->getUser()->setAttribute('error', 'Usuario Sin Autenticar');
-	}
+  	
   	
   }
+  
 }

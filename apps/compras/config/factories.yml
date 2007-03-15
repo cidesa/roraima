@@ -10,7 +10,7 @@ test:
   storage:
     class: sfSessionTestStorage
 
-#all:
+all:
 #  controller:
 #    class: sfFrontWebController
 #
@@ -20,8 +20,8 @@ test:
 #  response:
 #    class: sfWebResponse
 #
-#  user:
-#    class: myUser
+  user:
+    class: myUser
 #
 #  storage:
 #    class: sfSessionStorage

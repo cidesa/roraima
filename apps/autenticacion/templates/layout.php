@@ -4,7 +4,6 @@
 
 <?php include_http_metas() ?>
 <?php include_metas() ?>
-<?php use_helper('Javascript') ?>
 
 <?php include_title() ?>
 
@@ -12,8 +11,6 @@
 
 </head>
 <body>
-
-<?php echo $sf_data->getRaw('sf_content') ?>
-
+			<?php echo $sf_data->getRaw('sf_content') ?>
 </body>
 </html>

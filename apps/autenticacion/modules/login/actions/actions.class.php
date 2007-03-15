@@ -27,7 +27,16 @@ class loginActions extends sfActions
 	{
 		$this->getUser()->setAttribute('error', 'Usuario Sin Autenticar');
 	}
-
+	
+	$c = new Criteria();
+	$lista_emp = EmpresaPeer::doSelect($c);
+	
+	$this->empresas = array();
+	
+	foreach($lista_emp as $obj_emp)
+	{
+		$this->empresas += array($obj_emp->getPassemp() => $obj_emp->getNomemp());    
+	}
 
   }
 
@@ -39,20 +48,46 @@ class loginActions extends sfActions
 	$user = $this->getUser();
 	if (!$user->isAuthenticated())
 	{
-		$n = $this->getRequestParameter('textnombre');
-		$p = $this->getRequestParameter('textpasswd');
-		if($user->loginIn($n,$p,"005"))
+		$n = $this->getRequestParameter('textnombre','tabla');
+		$p = $this->getRequestParameter('textpasswd', 'passwd');
+		$emp = $this->getRequestParameter('selectemp', 'empresa');
+		
+		if($user->loginIn($n,$p,$emp))
 		{
 			$user->setAttribute('error','Usu Autenticado');
-			$this->logMessage('Usuario Autenticado = '.$user->getAttribute('usuario'), 'info');
+			$this->logMessage(Constantes::Autenticacion.'Usuario Autenticado = '.$user->getAttribute('usuario').' Schema = '.$user->getAttribute('schema'), 'info');
 			$this->redirect('principal');
+			return sfView::SUCCESS;
 		}
 		else
 			$user->setAttribute('error','Error al autenticar 1');
 			
 	}else $user->setAttribute('error','Error al autenticar 2');
+	return sfView::SUCCESS;
 	
-	
+  }
+  
+  public function executeLogout()
+  {
+
+  	// Verificar y validar al usuario con
+	// la información del formulario
+	$user = $this->getUser();
+	if ($user->isAuthenticated())
+	{
+		$usu = $this->getRequestParameter('usuario', 'usuario');
+		
+		if($user->loginOut())
+		{
+			$user->setAttribute('error','Usuario Sin Autenticar');
+			$this->logMessage(Constantes::Autenticacion.'Usuario Sesion Cerrada = '.$usu.' Schema = '.$user->getAttribute('schema'), 'info');
+		}
+			
+	}
+  	
+	$this->redirect('login');
+	return sfView::SUCCESS;
+  	
   }
  
   

@@ -16,10 +16,10 @@ class myUser extends sfBasicSecurityUser
 				// para autenticar a los usuarios en base al
 				// tipo de usuario
 				$c = new Criteria();
-				$objApli_user = new Apli_users();
-				$c->add(Apli_usersPeer::LOGUSE,$nombre);
-				$c->add(Apli_usersPeer::CODEMP,$empresa);
-				$objApli_user = Apli_usersPeer::doSelect($c);
+				$objApli_user = new ApliUser();
+				$c->add(ApliUserPeer::LOGUSE,$nombre);
+				$c->add(ApliUserPeer::CODEMP,$empresa);
+				$objApli_user = ApliUserPeer::doSelect($c);
 				// $objApli_user contiene la info de acceso del
 				// usuario a los diferentes formularios
 				// con esta informacion se debe generarar
@@ -27,11 +27,7 @@ class myUser extends sfBasicSecurityUser
 
 				// Carga la base de datos segun la empresa
 				// Cambia el string de conexion (dns de databases.yml) 
-				$bd = "SIMA" + $empresa;
-				$con = sfContext::getInstance()->getDatabaseConnection('sima');
-				//print('Conexion = '.$con->getParameter('database'));
-				//$con->setParameter('database',$bd);
-
+				$this->setAttribute('schema', $empresa);
 				$this->setAttribute('usuario', $objUsuario[0]->getNomuse());
 				$this->addCredential('admin');
 				
@@ -46,6 +42,7 @@ class myUser extends sfBasicSecurityUser
 	{
 		$this->setAuthenticated(false);
 		$this->clearCredentials();
+		return true;
 	}
 	
 }

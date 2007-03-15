@@ -1,0 +1,13 @@
+LEEME AL ACTUALIZAR EL REPOSITORIO
+
+
+15-03-07	Luis
+	* Se coloco una variable en config/config de cada proyecto para hacer un link
+	a las variables globales de librerias y datos de symfony. Solo hay que cambiar
+	la variable "so" por su sistema operativo base.
+	* Al agregar un modulo nuevo debe ser direccionado en el menú principal del proyecto.
+	Este menú se encuentra en un archivo de js en la dirección web/js/tree_items.js. Alli 
+	hay que modificar la redireccion según sea el módulo creado.
+	* La autenticacion ya esta terminada pero hay un problema con el paso de credenciales
+	entre aplicaciones (autenticacion,compras, etc...). Será corregido en la siguiente fase.
+	* Dentro de la carpeta varios se encuentra documentación varia sobre symfony para referencia
