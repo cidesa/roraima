@@ -1,5 +1,6 @@
 prod:
   .settings:
+  i18n: on
     no_script_name:           on
 
 dev:
