@@ -6,10 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
 
-<LINK media=all href="/css/base.css" type=text/css rel=stylesheet>
 
+<link href="/css/main.css" rel="stylesheet" type="text/css">
 
-<link href="/css/siga.css" rel="stylesheet" type="text/css">
 
 <?php include_http_metas() ?>
 <?php include_metas() ?>
