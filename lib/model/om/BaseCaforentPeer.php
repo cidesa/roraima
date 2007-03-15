@@ -107,8 +107,8 @@ abstract class BaseCaforentPeer {
 
 	}
 
-	const COUNT = 'COUNT(caforent.CODFORENT)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT caforent.CODFORENT)';
+	const COUNT = 'COUNT(caforent.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT caforent.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -231,8 +231,8 @@ abstract class BaseCaforentPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(CaforentPeer::CODFORENT);
-			$selectCriteria->add(CaforentPeer::CODFORENT, $criteria->remove(CaforentPeer::CODFORENT), $comparison);
+			$comparison = $criteria->getComparison(CaforentPeer::ID);
+			$selectCriteria->add(CaforentPeer::ID, $criteria->remove(CaforentPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -271,7 +271,7 @@ abstract class BaseCaforentPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CaforentPeer::CODFORENT, (array) $values, Criteria::IN);
+			$criteria->add(CaforentPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -333,7 +333,7 @@ abstract class BaseCaforentPeer {
 
 		$criteria = new Criteria(CaforentPeer::DATABASE_NAME);
 
-		$criteria->add(CaforentPeer::CODFORENT, $pk);
+		$criteria->add(CaforentPeer::ID, $pk);
 
 
 		$v = CaforentPeer::doSelect($criteria, $con);
@@ -353,7 +353,7 @@ abstract class BaseCaforentPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(CaforentPeer::CODFORENT, $pks, Criteria::IN);
+			$criteria->add(CaforentPeer::ID, $pks, Criteria::IN);
 			$objs = CaforentPeer::doSelect($criteria, $con);
 		}
 		return $objs;

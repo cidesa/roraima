@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsdesmon
+    theme:            default
+    fields:
+      codmon: { name: Codigo Moneda, params: maxlength=3}
+      nommon: { name: Descripcion}            
+      fecmon: { name: Fecha, params: date_format='dd/MM/yyyy'} 
+      valmon: { name: Monto} 
+      aumdis: { name: Afecta}           
+    list:
+      title:          Tipos de Moneda
+      filters:        [codmon, nommon]
+      display:        [=codmon, nommon, fecmon, valmon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edicion de Tipos de Moneda

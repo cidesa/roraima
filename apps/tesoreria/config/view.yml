@@ -7,7 +7,7 @@ default:
     robots:       index, follow
     description:  symfony project
     keywords:     symfony, project
-    language:     en
+    language:     es
 
   stylesheets:    [main]
 

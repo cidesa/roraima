@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tstipren
+    theme:            default
+    fields:
+      codtip: { name: Codigo Tipo Rendimiento, params: maxlength=3}
+      destip: { name: Descripcion Tipo Rendimiento}            
+    list:
+      title:          Tipos de Rendimiento
+      filters:        [codtip, destip]
+      display:        [=codtip, destip]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      fields:      
+        codtip:    { params: maxlength=3 } 
+    edit:
+      title:          Edicion de Tipos de Rendimiento    
+        
+    
