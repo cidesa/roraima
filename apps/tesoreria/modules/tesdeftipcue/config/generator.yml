@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tstipcue
+    theme:            default
+
+    fields:
+      codtip:      { name: Codigo }
+      destip:      { name: Descripcion }
+
+    list:
+      title:          Definicion de Tipos de Cuentas Bancarias
+      display:        [codtip, destip]
+      filters:        [codtip, destip]
+      max_per_page:   5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Modificar Tipos de Cuentas Bancarias
+      display:
+        Editable:       [codtip, destip]

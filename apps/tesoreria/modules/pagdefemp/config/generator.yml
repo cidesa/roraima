@@ -1,0 +1,36 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Opdefemp
+    theme:            default
+
+    fields:
+      codemp:      { name: Cod. Empresa }
+      ctapag:      { name: Cuenta por Pagar }
+      ctades:      { name: Cuenta Descuento }
+      numini:      { name: Nro. Inicial O/P }
+      forubi:      { name: Formato Unidad Origen }  
+      unitri:      { name: Unidad Tributaria }
+      ordnom:      { name: Nomina }
+      ordobr:      { name: Aportes }
+      vercomret:   { name: Ver Comprobantes y Retenciones }
+      genctaord:   { name: Generar Comprobante de Orden }
+      gencomadi:   { name: Generar Comprobante Adicional }
+      gencaubon:   { name: Generar Causado Bono Vacacional }
+      tipeje:      { name: Ejecutivo }
+      ordliq:      { name: Liquidacion }
+      
+      
+    list:
+      title:          Definicion de Empresa
+      display:        [codemp, ctapag, numini, forubi]
+      filters:        [codemp]
+      max_per_page:   5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Modificar Definicion de Empresa
+
+      

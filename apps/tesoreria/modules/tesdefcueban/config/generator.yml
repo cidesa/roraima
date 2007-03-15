@@ -1,0 +1,41 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsdefban
+    theme:            default
+
+    fields:
+      numcue:      { name: Numero de Cuenta }
+      nomcue:      { name: Nombre del Banco }
+      tipcue:      { name: Tipo de Cuenta }
+      codcta:      { name: Cuenta Contable }
+      fecreg:      { name: Fecha de Registro, params: date_format='dd/MM/yyyy'}
+      fecven:      { name: Fecha de Vencimiento }  
+      fecper:      { name: Fecha de Periodo }
+      renaut:      { name: Renovacion Automatica }
+      porint:      { name: Porcentaje de Interes }
+      tipint:      { name: Tipo de Interes }
+      numche:      { name: Numero de Cheque }
+      antban:      { name: Saldo Anterior Bancos }
+      debban:      { name: Debitos Bancos }
+      creban:      { name: Credito Bancos }
+      antlib:      { name: Saldo Anterior Libros }
+      debban:      { name: Debitos Libros }
+      creban:      { name: Credito Libros }
+      valche:      { name: Validez del Cheque }
+      concil:      { name: Conciliable }
+      plazo:       { name: Plazo }
+      
+      
+    list:
+      title:          Definicion de Bancos
+      display:        [numcue, nomcue, tipcue, codcta, fecreg, fecven]
+        
+      filters:        [numcue]
+      max_per_page:   10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Modificar Definicion de Bancos
