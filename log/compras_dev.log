@@ -20298,3 +20298,111 @@ Mar 13 15:38:24 symfony [info] {sfTimerManager} Partial "almramart/_edit_message
 Mar 13 15:38:24 symfony [info] {sfTimerManager} Partial "almramart/_edit_form" 13.81 ms (1)
 Mar 13 15:38:24 symfony [info] {sfTimerManager} Partial "almramart/_edit_actions" 3.53 ms (1)
 Mar 13 15:38:24 symfony [info] {sfTimerManager} Partial "almramart/_edit_footer" 2.01 ms (1)
+Mar 15 14:43:57 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 15 14:43:57 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 15 14:43:57 symfony [info] {sfRouting} connect "/"
+Mar 15 14:43:57 symfony [info] {sfRouting} connect "/symfony/:action/*"
+Mar 15 14:43:57 symfony [info] {sfRouting} connect "/:module"
+Mar 15 14:43:57 symfony [info] {sfRouting} connect "/:module/:action/*"
+Mar 15 14:43:57 symfony [info] {sfContext} initialization
+Mar 15 14:43:57 symfony [info] {sfController} initialization
+Mar 15 14:43:57 symfony [info] {sfRouting} match route [homepage] "/"
+Mar 15 14:43:57 symfony [info] {sfRequest} request parameters array (  'module' => 'main',  'action' => 'index',)
+Mar 15 14:43:57 symfony [info] {sfController} dispatch request
+Mar 15 14:43:57 symfony [info] {sfController} action does not exist
+Mar 15 14:43:57 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 15 14:43:57 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 15 14:43:57 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 15 14:43:57 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 15 14:43:57 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 15 14:43:57 symfony [info] {sfAction} call "defaultActions->executeError404()"
+Mar 15 14:43:57 symfony [info] {sfView} initialize view for "default/error404"
+Mar 15 14:43:57 symfony [info] {sfView} render "C:\AppServ\php5\pear\data\symfony/modules/default/templates/error404Success.php"
+Mar 15 14:43:58 symfony [info] {sfView} decorate content with "C:\AppServ\php5\pear\data\symfony/modules/default/templates/defaultLayout.php"
+Mar 15 14:43:58 symfony [info] {sfView} render "C:\AppServ\php5\pear\data\symfony/modules/default/templates/defaultLayout.php"
+Mar 15 14:43:58 symfony [info] {sfFilter} render to client
+Mar 15 14:43:58 symfony [info] {sfResponse} send status "HTTP/1.0 404 Not Found"
+Mar 15 14:43:58 symfony [info] {sfResponse} send header "Status": "404 Not Found"
+Mar 15 14:43:58 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 15 14:43:58 symfony [info] {sfResponse} send content (22314 o)
+Mar 15 14:43:58 symfony [info] {sfTimerManager} Configuration 121.02 ms (10)
+Mar 15 14:43:58 symfony [info] {sfTimerManager} Action "default/error404" 0.20 ms (1)
+Mar 15 14:43:58 symfony [info] {sfTimerManager} View "Success" for "default/error404" 64.09 ms (1)
+Mar 15 15:05:03 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 15 15:05:03 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 15 15:05:03 symfony [info] {sfContext} initialization
+Mar 15 15:05:03 symfony [info] {sfController} initialization
+Mar 15 15:05:03 symfony [info] {sfRouting} match route [homepage] "/"
+Mar 15 15:05:03 symfony [info] {sfRequest} request parameters array (  'module' => 'main',  'action' => 'index',)
+Mar 15 15:05:03 symfony [info] {sfController} dispatch request
+Mar 15 15:05:03 symfony [info] {sfController} action does not exist
+Mar 15 15:05:03 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 15 15:05:03 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 15 15:05:03 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 15 15:05:03 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 15 15:05:03 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 15 15:05:03 symfony [info] {sfAction} call "defaultActions->executeError404()"
+Mar 15 15:05:03 symfony [info] {sfView} initialize view for "default/error404"
+Mar 15 15:05:03 symfony [info] {sfView} render "C:\AppServ\php5\pear\data\symfony/modules/default/templates/error404Success.php"
+Mar 15 15:05:03 symfony [info] {sfView} decorate content with "C:\AppServ\php5\pear\data\symfony/modules/default/templates/defaultLayout.php"
+Mar 15 15:05:03 symfony [info] {sfView} render "C:\AppServ\php5\pear\data\symfony/modules/default/templates/defaultLayout.php"
+Mar 15 15:05:03 symfony [info] {sfFilter} render to client
+Mar 15 15:05:03 symfony [info] {sfResponse} send status "HTTP/1.0 404 Not Found"
+Mar 15 15:05:03 symfony [info] {sfResponse} send header "Status": "404 Not Found"
+Mar 15 15:05:03 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 15 15:05:03 symfony [info] {sfResponse} send content (21215 o)
+Mar 15 15:05:03 symfony [info] {sfTimerManager} Configuration 36.99 ms (11)
+Mar 15 15:05:03 symfony [info] {sfTimerManager} Action "default/error404" 0.21 ms (1)
+Mar 15 15:05:03 symfony [info] {sfTimerManager} View "Success" for "default/error404" 43.94 ms (1)
+Mar 15 15:10:42 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 15 15:10:42 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 15 15:10:42 symfony [info] {sfContext} initialization
+Mar 15 15:10:42 symfony [info] {sfController} initialization
+Mar 15 15:10:42 symfony [info] {sfRouting} match route [homepage] "/"
+Mar 15 15:10:42 symfony [info] {sfRequest} request parameters array (  'module' => 'main',  'action' => 'index',)
+Mar 15 15:10:42 symfony [info] {sfController} dispatch request
+Mar 15 15:10:42 symfony [info] {sfController} action does not exist
+Mar 15 15:10:42 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 15 15:10:42 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 15 15:10:42 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 15 15:10:42 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 15 15:10:42 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 15 15:10:42 symfony [info] {sfAction} call "defaultActions->executeError404()"
+Mar 15 15:10:42 symfony [info] {sfView} initialize view for "default/error404"
+Mar 15 15:10:42 symfony [info] {sfView} render "C:\AppServ\php5\pear\data\symfony/modules/default/templates/error404Success.php"
+Mar 15 15:10:42 symfony [info] {sfView} decorate content with "C:\AppServ\php5\pear\data\symfony/modules/default/templates/defaultLayout.php"
+Mar 15 15:10:42 symfony [info] {sfView} render "C:\AppServ\php5\pear\data\symfony/modules/default/templates/defaultLayout.php"
+Mar 15 15:10:42 symfony [info] {sfFilter} render to client
+Mar 15 15:10:42 symfony [info] {sfResponse} send status "HTTP/1.0 404 Not Found"
+Mar 15 15:10:42 symfony [info] {sfResponse} send header "Status": "404 Not Found"
+Mar 15 15:10:42 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 15 15:10:42 symfony [info] {sfResponse} send content (21214 o)
+Mar 15 15:10:42 symfony [info] {sfTimerManager} Configuration 39.32 ms (11)
+Mar 15 15:10:42 symfony [info] {sfTimerManager} Action "default/error404" 0.34 ms (1)
+Mar 15 15:10:42 symfony [info] {sfTimerManager} View "Success" for "default/error404" 39.92 ms (1)
+Mar 15 16:10:00 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 15 16:10:00 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 15 16:10:00 symfony [info] {sfContext} initialization
+Mar 15 16:10:00 symfony [info] {sfController} initialization
+Mar 15 16:10:00 symfony [info] {sfRouting} match route [homepage] "/"
+Mar 15 16:10:00 symfony [info] {sfRequest} request parameters array (  'module' => 'main',  'action' => 'index',)
+Mar 15 16:10:00 symfony [info] {sfController} dispatch request
+Mar 15 16:10:00 symfony [info] {sfController} action does not exist
+Mar 15 16:10:00 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 15 16:10:00 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 15 16:10:00 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 15 16:10:00 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 15 16:10:00 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 15 16:10:00 symfony [info] {sfAction} call "defaultActions->executeError404()"
+Mar 15 16:10:00 symfony [info] {sfView} initialize view for "default/error404"
+Mar 15 16:10:00 symfony [info] {sfView} render "C:\AppServ\php5\pear\data\symfony/modules/default/templates/error404Success.php"
+Mar 15 16:10:00 symfony [info] {sfView} decorate content with "C:\AppServ\php5\pear\data\symfony/modules/default/templates/defaultLayout.php"
+Mar 15 16:10:00 symfony [info] {sfView} render "C:\AppServ\php5\pear\data\symfony/modules/default/templates/defaultLayout.php"
+Mar 15 16:10:00 symfony [info] {sfFilter} render to client
+Mar 15 16:10:00 symfony [info] {sfResponse} send status "HTTP/1.0 404 Not Found"
+Mar 15 16:10:00 symfony [info] {sfResponse} send header "Status": "404 Not Found"
+Mar 15 16:10:00 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 15 16:10:00 symfony [info] {sfResponse} send content (21273 o)
+Mar 15 16:10:00 symfony [info] {sfTimerManager} Configuration 39.71 ms (11)
+Mar 15 16:10:00 symfony [info] {sfTimerManager} Action "default/error404" 0.20 ms (1)
+Mar 15 16:10:00 symfony [info] {sfTimerManager} View "Success" for "default/error404" 41.96 ms (1)

@@ -12,9 +12,11 @@ generator:
       fecreg:      { name: Fecha de Registro, params: date_format='dd/MM/yyyy'}
       fecven:      { name: Fecha de Vencimiento }  
       fecper:      { name: Fecha de Periodo }
+      fecape:      { name: Fecha de Apertura }
       renaut:      { name: Renovacion Automatica }
       porint:      { name: Porcentaje de Interes }
       tipint:      { name: Tipo de Interes }
+      usocue:      { name: Uso de la Cuenta }
       numche:      { name: Numero de Cheque }
       antban:      { name: Saldo Anterior Bancos }
       debban:      { name: Debitos Bancos }

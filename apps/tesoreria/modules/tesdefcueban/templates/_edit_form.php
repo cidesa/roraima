@@ -51,14 +51,17 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($tsdefban, 'getTipcue', array (
-  'size' => 20,
-  'control_name' => 'tsdefban[tipcue]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'size' => 5,
+  'control_name' => 'tsdefban[tipcue]', 'maxlength' => 3 
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+<?php echo button_to('...','#')?>&nbsp;
+<?php echo input_tag('nomemp',$tipcue,'size=50,disabled=true'); ?>
+
     </div>
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[codcta]', __($labels['tsdefban{codcta}']), '') ?>
+  <?php echo label_for('tsdefban[codcta]', __($labels['tsdefban{codcta}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{codcta}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{codcta}')): ?>
     <?php echo form_error('tsdefban{codcta}', array('class' => 'form-error-msg')) ?>
@@ -72,7 +75,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[valche]', __($labels['tsdefban{valche}']), '') ?>
+  <?php echo label_for('tsdefban[valche]', __($labels['tsdefban{valche}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{valche}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{valche}')): ?>
     <?php echo form_error('tsdefban{valche}', array('class' => 'form-error-msg')) ?>
@@ -86,7 +89,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[fecper]', __($labels['tsdefban{fecper}']), '') ?>
+  <?php echo label_for('tsdefban[fecper]', __($labels['tsdefban{fecper}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{fecper}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{fecper}')): ?>
     <?php echo form_error('tsdefban{fecper}', array('class' => 'form-error-msg')) ?>
@@ -101,7 +104,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[fecven]', __($labels['tsdefban{fecven}']), '') ?>
+  <?php echo label_for('tsdefban[fecven]', __($labels['tsdefban{fecven}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{fecven}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{fecven}')): ?>
     <?php echo form_error('tsdefban{fecven}', array('class' => 'form-error-msg')) ?>
@@ -115,206 +118,35 @@
     </div>
 </div>
 
-
-
-
-
-
-
-</fieldset>
-
-
-
-
 <div class="form-row">
-  <?php echo label_for('tsdefban[fecreg]', __($labels['tsdefban{fecreg}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{fecreg}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{fecreg}')): ?>
-    <?php echo form_error('tsdefban{fecreg}', array('class' => 'form-error-msg')) ?>
+  <?php echo label_for('tsdefban[concil]', __($labels['tsdefban{concil}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('tsdefban{concil}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{concil}')): ?>
+    <?php echo form_error('tsdefban{concil}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
-  <?php $value = object_input_date_tag($tsdefban, 'getFecreg', array (
-  'rich' => true,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'tsdefban[fecreg]',
-  'date_format' => 'dd/MM/yyyy',
-)); echo $value ? $value : '&nbsp;' ?>
+  
+  <?php if($tsdefban->getConcil()=='S') $val = true; else $val=false; ?>
+  <?php echo "Si ".radiobutton_tag('concil', 'S', $val) ?>&nbsp;
+  <?php echo "No ".radiobutton_tag('concil', 'N', !$val) ?>
+  
     </div>
 </div>
 
-
-
 <div class="form-row">
-  <?php echo label_for('tsdefban[renaut]', __($labels['tsdefban{renaut}']), '') ?>
+  <?php echo label_for('tsdefban[renaut]', __($labels['tsdefban{renaut}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{renaut}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{renaut}')): ?>
     <?php echo form_error('tsdefban{renaut}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($tsdefban, 'getRenaut', array (
-  'size' => 20,
-  'control_name' => 'tsdefban[renaut]',
-)); echo $value ? $value : '&nbsp;' ?>
+  <?php if($tsdefban->getRenaut()=='S') $val = true; else $val=false; ?>
+  <?php echo "Si ".radiobutton_tag('renaut', 'S', $val) ?>&nbsp;
+  <?php echo "No ".radiobutton_tag('renaut', 'N', !$val) ?>
     </div>
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[porint]', __($labels['tsdefban{porint}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{porint}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{porint}')): ?>
-    <?php echo form_error('tsdefban{porint}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getPorint', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[porint]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[tipint]', __($labels['tsdefban{tipint}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{tipint}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{tipint}')): ?>
-    <?php echo form_error('tsdefban{tipint}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getTipint', array (
-  'size' => 20,
-  'control_name' => 'tsdefban[tipint]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[numche]', __($labels['tsdefban{numche}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{numche}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{numche}')): ?>
-    <?php echo form_error('tsdefban{numche}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getNumche', array (
-  'size' => 20,
-  'control_name' => 'tsdefban[numche]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[antban]', __($labels['tsdefban{antban}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{antban}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{antban}')): ?>
-    <?php echo form_error('tsdefban{antban}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getAntban', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[antban]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[debban]', __($labels['tsdefban{debban}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{debban}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{debban}')): ?>
-    <?php echo form_error('tsdefban{debban}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getDebban', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[debban]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[creban]', __($labels['tsdefban{creban}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{creban}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{creban}')): ?>
-    <?php echo form_error('tsdefban{creban}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getCreban', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[creban]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[antlib]', __($labels['tsdefban{antlib}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{antlib}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{antlib}')): ?>
-    <?php echo form_error('tsdefban{antlib}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getAntlib', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[antlib]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[deblib]', __($labels['tsdefban{deblib}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{deblib}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{deblib}')): ?>
-    <?php echo form_error('tsdefban{deblib}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getDeblib', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[deblib]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[crelib]', __($labels['tsdefban{crelib}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{crelib}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{crelib}')): ?>
-    <?php echo form_error('tsdefban{crelib}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getCrelib', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[crelib]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[concil]', __($labels['tsdefban{concil}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{concil}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{concil}')): ?>
-    <?php echo form_error('tsdefban{concil}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getConcil', array (
-  'size' => 20,
-  'control_name' => 'tsdefban[concil]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[plazo]', __($labels['tsdefban{plazo}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{plazo}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{plazo}')): ?>
-    <?php echo form_error('tsdefban{plazo}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getPlazo', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[plazo]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[fecape]', __($labels['tsdefban{fecape}']), '') ?>
+  <?php echo label_for('tsdefban[fecape]', __($labels['tsdefban{fecape}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{fecape}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{fecape}')): ?>
     <?php echo form_error('tsdefban{fecape}', array('class' => 'form-error-msg')) ?>
@@ -328,8 +160,47 @@
     </div>
 </div>
 
+</fieldset>
+
+<fieldset>
+<legend>Informacion General</legend>
+
 <div class="form-row">
-  <?php echo label_for('tsdefban[usocue]', __($labels['tsdefban{usocue}']), '') ?>
+  <?php echo label_for('tsdefban[tipint]', __($labels['tsdefban{tipint}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('tsdefban{tipint}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{tipint}')): ?>
+    <?php echo form_error('tsdefban{tipint}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+  
+  <?php if ($tsdefban->getTipint()=='D')
+  		{
+  			$v1='selected';$v2='';$v3='';$v4='';
+  		}
+  		elseif ($tsdefban->getTipint()=='C')
+  		{
+  			$v1='';$v2='selected';$v3='';$v4='';
+  		}
+		elseif ($tsdefban->getTipint()=='F')
+  		{
+  			$v1='';$v2='';$v3='selected';$v4='';
+  		}
+		elseif ($tsdefban->getTipint()=='O')
+  		{
+  			$v1='';$v2='';$v3='';$v4='selected';
+  		}
+  
+  ?>
+  <?php echo select_tag('tipint',
+  '<option value="D" "'.$v1.'">Disponibilidad Operativa</option>
+   <option value="C" "'.$v2.'">Convenios</option>
+   <option value="F" "'.$v3.'">Fondos Congelados</option>
+   <option value="O" "'.$v4.'">Otros Conceptos</option>')
+  ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('tsdefban[usocue]', __($labels['tsdefban{usocue}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{usocue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{usocue}')): ?>
     <?php echo form_error('tsdefban{usocue}', array('class' => 'form-error-msg')) ?>
@@ -343,7 +214,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[tipren]', __($labels['tsdefban{tipren}']), '') ?>
+  <?php echo label_for('tsdefban[tipren]', __($labels['tsdefban{tipren}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{tipren}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{tipren}')): ?>
     <?php echo form_error('tsdefban{tipren}', array('class' => 'form-error-msg')) ?>
@@ -352,26 +223,192 @@
   <?php $value = object_input_tag($tsdefban, 'getTipren', array (
   'size' => 20,
   'control_name' => 'tsdefban[tipren]',
-)); echo $value ? $value : '&nbsp;' ?>
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+<?php echo button_to('...','#')?>&nbsp;
+<?php echo input_tag('tipren',$tipren,'size=50,disabled=true'); ?>
     </div>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('tsdefban[desenl]', __($labels['tsdefban{desenl}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{desenl}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{desenl}')): ?>
-    <?php echo form_error('tsdefban{desenl}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+</fieldset>
 
-  <?php $value = object_input_tag($tsdefban, 'getDesenl', array (
-  'size' => 80,
-  'control_name' => 'tsdefban[desenl]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('tsdefban[porsalmin]', __($labels['tsdefban{porsalmin}']), '') ?>
+<fieldset>
+<legend>Saldo de la Cuenta</legend>
+
+<table border="0">
+	<tr>
+	
+			<td>
+			<fieldset><legend>...</legend>
+			<table>
+				<tr>
+					<td>	
+							<div align="center">Saldo Anterior</div>
+					</td>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+					<td>
+						 	 <div align="center">Debitos</div>
+					</td>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+					<td>
+						     <div align="center">Creditos</div>		
+					</td>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+				</tr>
+				<tr>
+					<td>
+							<div align="center">Saldo Anterior</div>
+					</td>
+				</tr>
+			</table>
+			</fieldset>
+		</td>
+	
+	
+		<td>
+			<fieldset><legend>Bancos</legend>
+			<table>
+				<tr>
+					<td>
+						<div class="form-row">
+						  <?php $value = object_input_tag($tsdefban, 'getAntban', array (
+						  'size' => 15,
+						  'control_name' => 'tsdefban[antban]',
+						)); echo $value ? $value : '&nbsp;' ?>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						  <div class="form-row">
+							  <?php $value = object_input_tag($tsdefban, 'getDebban', array (
+							  'size' => 15,
+							  'control_name' => 'tsdefban[debban]',
+							)); echo $value ? $value : '&nbsp;' ?>
+						  </div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="form-row">
+						  <?php $value = object_input_tag($tsdefban, 'getCreban', array (
+						  'size' => 15,
+						  'control_name' => 'tsdefban[creban]',
+						)); echo $value ? $value : '&nbsp;' ?>
+						</div>					
+					</td>
+				</tr>
+				<tr>
+					<?php $saldobanco=$tsdefban->getAntban()+$tsdefban->getDebban() - $tsdefban->getCreban(); ?>
+					<td>
+						<?php echo input_tag('saldobanco',$saldobanco,'size=15,disabled=true'); ?>
+					</td>
+				</tr>
+			</table>
+			</fieldset>
+		</td>
+
+		<td>
+		    <fieldset><legend>Libros</legend>
+			<table>
+				<tr>
+					<td>
+						<div class="form-row">
+						  <?php $value = object_input_tag($tsdefban, 'getAntlib', array (
+						  'size' => 15,
+						  'control_name' => 'tsdefban[antlib]',
+						)); echo $value ? $value : '&nbsp;' ?>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="form-row">
+						  <?php $value = object_input_tag($tsdefban, 'getCrelib', array (
+						  'size' => 15,
+						  'control_name' => 'tsdefban[crelib]',
+						)); echo $value ? $value : '&nbsp;' ?>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="form-row">
+						  <?php $value = object_input_tag($tsdefban, 'getDeblib', array (
+						  'size' => 15,
+						  'control_name' => 'tsdefban[deblib]',
+						)); echo $value ? $value : '&nbsp;' ?>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<?php $saldolibro=$tsdefban->getAntlib()+$tsdefban->getDeblib() - $tsdefban->getCrelib(); ?>
+					<td>
+						<?php echo input_tag('saldobanco',$saldobanco,'size=15,disabled=true'); ?>
+					</td>
+				</tr>
+			</table>
+			</fieldset>
+		</td>
+	</tr>
+</table>
+</fieldset>
+
+
+<fieldset>
+<legend>Manejo de Chequeras</legend>
+
+</fieldset>
+
+
+
+<!--<div class="form-row">
+  <?php echo label_for('tsdefban[porsalmin]', __($labels['tsdefban{porsalmin}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{porsalmin}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{porsalmin}')): ?>
     <?php echo form_error('tsdefban{porsalmin}', array('class' => 'form-error-msg')) ?>
@@ -385,7 +422,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[monsalmin]', __($labels['tsdefban{monsalmin}']), '') ?>
+  <?php echo label_for('tsdefban[monsalmin]', __($labels['tsdefban{monsalmin}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{monsalmin}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{monsalmin}')): ?>
     <?php echo form_error('tsdefban{monsalmin}', array('class' => 'form-error-msg')) ?>
@@ -399,7 +436,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[codctaprecoo]', __($labels['tsdefban{codctaprecoo}']), '') ?>
+  <?php echo label_for('tsdefban[codctaprecoo]', __($labels['tsdefban{codctaprecoo}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{codctaprecoo}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{codctaprecoo}')): ?>
     <?php echo form_error('tsdefban{codctaprecoo}', array('class' => 'form-error-msg')) ?>
@@ -413,7 +450,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[codctapreord]', __($labels['tsdefban{codctapreord}']), '') ?>
+  <?php echo label_for('tsdefban[codctapreord]', __($labels['tsdefban{codctapreord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{codctapreord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{codctapreord}')): ?>
     <?php echo form_error('tsdefban{codctapreord}', array('class' => 'form-error-msg')) ?>
@@ -427,7 +464,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('tsdefban[trasitoria]', __($labels['tsdefban{trasitoria}']), '') ?>
+  <?php echo label_for('tsdefban[trasitoria]', __($labels['tsdefban{trasitoria}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{trasitoria}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{trasitoria}')): ?>
     <?php echo form_error('tsdefban{trasitoria}', array('class' => 'form-error-msg')) ?>
@@ -495,7 +532,15 @@
   'control_name' => 'tsdefban[cantdig]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+</div>-->
+
+
+
+
+
+
+
+
 
 </fieldset>
 
