@@ -8,7 +8,7 @@ var tree_tpl = {
 							// other possible values are: _blank, _parent, _search, _self and _top
 
 	'icon_e'  : '/images/js/icons/empty.gif', // empty image
-	'icon_l'  : 'js/icons/line.gif',  // vertical line
+	'icon_l'  : '/images/js/icons/line.gif',  // vertical line
 
         'icon_32' : '/images/js/icons/base.gif',   // root leaf icon normal
         'icon_36' : '/images/js/icons/base.gif',   // root leaf icon selected
