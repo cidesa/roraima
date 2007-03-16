@@ -32,7 +32,7 @@ class EmpresaMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addColumn('NOMEMP', 'Nomemp', 'string', CreoleTypes::VARCHAR, true, 250);
 
@@ -104,7 +104,7 @@ class EmpresaMapBuilder {
 
 		$tMap->addColumn('ENCABEZADO', 'Encabezado', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, true);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

@@ -3,7 +3,14 @@ generator:
   param:
     model_class:      Catiprec
     theme:            default
+    fields:
+      codtiprec:  {  name: Código }
+      destiprec:  {  name: Descripción }
     list:
       title:   Lista de Recaudos 
       display:        [=codtiprec, destiprec]      
       filters: [codtiprec]
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      max_per_page:   5

@@ -36,7 +36,7 @@ class CarecaudMapBuilder {
 
 		$tMap->addColumn('DESREC', 'Desrec', 'string', CreoleTypes::VARCHAR, true, 100);
 
-		$tMap->addColumn('LIMREC', 'Limrec', 'string', CreoleTypes::VARCHAR, true, 1);
+		$tMap->addColumn('LIMREC', 'Limrec', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addColumn('FECEMI', 'Fecemi', 'int', CreoleTypes::DATE, false);
 
