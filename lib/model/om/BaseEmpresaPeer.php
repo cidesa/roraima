@@ -277,8 +277,8 @@ abstract class BaseEmpresaPeer {
 
 	}
 
-	const COUNT = 'COUNT(empresa.CODEMP)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT empresa.CODEMP)';
+	const COUNT = 'COUNT(empresa.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT empresa.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -401,8 +401,8 @@ abstract class BaseEmpresaPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(EmpresaPeer::CODEMP);
-			$selectCriteria->add(EmpresaPeer::CODEMP, $criteria->remove(EmpresaPeer::CODEMP), $comparison);
+			$comparison = $criteria->getComparison(EmpresaPeer::ID);
+			$selectCriteria->add(EmpresaPeer::ID, $criteria->remove(EmpresaPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -441,7 +441,7 @@ abstract class BaseEmpresaPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(EmpresaPeer::CODEMP, (array) $values, Criteria::IN);
+			$criteria->add(EmpresaPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -503,7 +503,7 @@ abstract class BaseEmpresaPeer {
 
 		$criteria = new Criteria(EmpresaPeer::DATABASE_NAME);
 
-		$criteria->add(EmpresaPeer::CODEMP, $pk);
+		$criteria->add(EmpresaPeer::ID, $pk);
 
 
 		$v = EmpresaPeer::doSelect($criteria, $con);
@@ -523,7 +523,7 @@ abstract class BaseEmpresaPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(EmpresaPeer::CODEMP, $pks, Criteria::IN);
+			$criteria->add(EmpresaPeer::ID, $pks, Criteria::IN);
 			$objs = EmpresaPeer::doSelect($criteria, $con);
 		}
 		return $objs;

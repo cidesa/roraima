@@ -52,6 +52,12 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collContabb1s;
+
+	
+	protected $lastContabb1Criteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -386,6 +392,14 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collContabb1s !== null) {
+				foreach($this->collContabb1s as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -426,6 +440,14 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collContabb1s !== null) {
+					foreach($this->collContabb1s as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -634,6 +656,15 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 		$copyObj->setSalprgperfor($this->salprgperfor);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getContabb1s() as $relObj) {
+				$copyObj->addContabb1($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -655,6 +686,76 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 			self::$peer = new ContabbPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initContabb1s()
+	{
+		if ($this->collContabb1s === null) {
+			$this->collContabb1s = array();
+		}
+	}
+
+	
+	public function getContabb1s($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseContabb1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collContabb1s === null) {
+			if ($this->isNew()) {
+			   $this->collContabb1s = array();
+			} else {
+
+				$criteria->add(Contabb1Peer::CODCTA, $this->getCodcta());
+
+				Contabb1Peer::addSelectColumns($criteria);
+				$this->collContabb1s = Contabb1Peer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(Contabb1Peer::CODCTA, $this->getCodcta());
+
+				Contabb1Peer::addSelectColumns($criteria);
+				if (!isset($this->lastContabb1Criteria) || !$this->lastContabb1Criteria->equals($criteria)) {
+					$this->collContabb1s = Contabb1Peer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastContabb1Criteria = $criteria;
+		return $this->collContabb1s;
+	}
+
+	
+	public function countContabb1s($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseContabb1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(Contabb1Peer::CODCTA, $this->getCodcta());
+
+		return Contabb1Peer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addContabb1(Contabb1 $l)
+	{
+		$this->collContabb1s[] = $l;
+		$l->setContabb($this);
 	}
 
 } 

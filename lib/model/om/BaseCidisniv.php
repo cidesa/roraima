@@ -1,0 +1,650 @@
+<?php
+
+
+abstract class BaseCidisniv extends BaseObject  implements Persistent {
+
+
+	
+	protected static $peer;
+
+
+	
+	protected $codpre;
+
+
+	
+	protected $monasi;
+
+
+	
+	protected $modificacion;
+
+
+	
+	protected $asigactual;
+
+
+	
+	protected $monprc;
+
+
+	
+	protected $moncom;
+
+
+	
+	protected $moncau;
+
+
+	
+	protected $monpag;
+
+
+	
+	protected $monaju;
+
+
+	
+	protected $mondis;
+
+
+	
+	protected $deuda;
+
+
+	
+	protected $id;
+
+	
+	protected $alreadyInSave = false;
+
+	
+	protected $alreadyInValidation = false;
+
+	
+	public function getCodpre()
+	{
+
+		return $this->codpre;
+	}
+
+	
+	public function getMonasi()
+	{
+
+		return $this->monasi;
+	}
+
+	
+	public function getModificacion()
+	{
+
+		return $this->modificacion;
+	}
+
+	
+	public function getAsigactual()
+	{
+
+		return $this->asigactual;
+	}
+
+	
+	public function getMonprc()
+	{
+
+		return $this->monprc;
+	}
+
+	
+	public function getMoncom()
+	{
+
+		return $this->moncom;
+	}
+
+	
+	public function getMoncau()
+	{
+
+		return $this->moncau;
+	}
+
+	
+	public function getMonpag()
+	{
+
+		return $this->monpag;
+	}
+
+	
+	public function getMonaju()
+	{
+
+		return $this->monaju;
+	}
+
+	
+	public function getMondis()
+	{
+
+		return $this->mondis;
+	}
+
+	
+	public function getDeuda()
+	{
+
+		return $this->deuda;
+	}
+
+	
+	public function getId()
+	{
+
+		return $this->id;
+	}
+
+	
+	public function setCodpre($v)
+	{
+
+		if ($this->codpre !== $v) {
+			$this->codpre = $v;
+			$this->modifiedColumns[] = CidisnivPeer::CODPRE;
+		}
+
+	} 
+	
+	public function setMonasi($v)
+	{
+
+		if ($this->monasi !== $v) {
+			$this->monasi = $v;
+			$this->modifiedColumns[] = CidisnivPeer::MONASI;
+		}
+
+	} 
+	
+	public function setModificacion($v)
+	{
+
+		if ($this->modificacion !== $v) {
+			$this->modificacion = $v;
+			$this->modifiedColumns[] = CidisnivPeer::MODIFICACION;
+		}
+
+	} 
+	
+	public function setAsigactual($v)
+	{
+
+		if ($this->asigactual !== $v) {
+			$this->asigactual = $v;
+			$this->modifiedColumns[] = CidisnivPeer::ASIGACTUAL;
+		}
+
+	} 
+	
+	public function setMonprc($v)
+	{
+
+		if ($this->monprc !== $v) {
+			$this->monprc = $v;
+			$this->modifiedColumns[] = CidisnivPeer::MONPRC;
+		}
+
+	} 
+	
+	public function setMoncom($v)
+	{
+
+		if ($this->moncom !== $v) {
+			$this->moncom = $v;
+			$this->modifiedColumns[] = CidisnivPeer::MONCOM;
+		}
+
+	} 
+	
+	public function setMoncau($v)
+	{
+
+		if ($this->moncau !== $v) {
+			$this->moncau = $v;
+			$this->modifiedColumns[] = CidisnivPeer::MONCAU;
+		}
+
+	} 
+	
+	public function setMonpag($v)
+	{
+
+		if ($this->monpag !== $v) {
+			$this->monpag = $v;
+			$this->modifiedColumns[] = CidisnivPeer::MONPAG;
+		}
+
+	} 
+	
+	public function setMonaju($v)
+	{
+
+		if ($this->monaju !== $v) {
+			$this->monaju = $v;
+			$this->modifiedColumns[] = CidisnivPeer::MONAJU;
+		}
+
+	} 
+	
+	public function setMondis($v)
+	{
+
+		if ($this->mondis !== $v) {
+			$this->mondis = $v;
+			$this->modifiedColumns[] = CidisnivPeer::MONDIS;
+		}
+
+	} 
+	
+	public function setDeuda($v)
+	{
+
+		if ($this->deuda !== $v) {
+			$this->deuda = $v;
+			$this->modifiedColumns[] = CidisnivPeer::DEUDA;
+		}
+
+	} 
+	
+	public function setId($v)
+	{
+
+		if ($this->id !== $v) {
+			$this->id = $v;
+			$this->modifiedColumns[] = CidisnivPeer::ID;
+		}
+
+	} 
+	
+	public function hydrate(ResultSet $rs, $startcol = 1)
+	{
+		try {
+
+			$this->codpre = $rs->getString($startcol + 0);
+
+			$this->monasi = $rs->getFloat($startcol + 1);
+
+			$this->modificacion = $rs->getFloat($startcol + 2);
+
+			$this->asigactual = $rs->getFloat($startcol + 3);
+
+			$this->monprc = $rs->getFloat($startcol + 4);
+
+			$this->moncom = $rs->getFloat($startcol + 5);
+
+			$this->moncau = $rs->getFloat($startcol + 6);
+
+			$this->monpag = $rs->getFloat($startcol + 7);
+
+			$this->monaju = $rs->getFloat($startcol + 8);
+
+			$this->mondis = $rs->getFloat($startcol + 9);
+
+			$this->deuda = $rs->getFloat($startcol + 10);
+
+			$this->id = $rs->getInt($startcol + 11);
+
+			$this->resetModified();
+
+			$this->setNew(false);
+
+						return $startcol + 12; 
+		} catch (Exception $e) {
+			throw new PropelException("Error populating Cidisniv object", $e);
+		}
+	}
+
+	
+	public function delete($con = null)
+	{
+		if ($this->isDeleted()) {
+			throw new PropelException("This object has already been deleted.");
+		}
+
+		if ($con === null) {
+			$con = Propel::getConnection(CidisnivPeer::DATABASE_NAME);
+		}
+
+		try {
+			$con->begin();
+			CidisnivPeer::doDelete($this, $con);
+			$this->setDeleted(true);
+			$con->commit();
+		} catch (PropelException $e) {
+			$con->rollback();
+			throw $e;
+		}
+	}
+
+	
+	public function save($con = null)
+	{
+		if ($this->isDeleted()) {
+			throw new PropelException("You cannot save an object that has been deleted.");
+		}
+
+		if ($con === null) {
+			$con = Propel::getConnection(CidisnivPeer::DATABASE_NAME);
+		}
+
+		try {
+			$con->begin();
+			$affectedRows = $this->doSave($con);
+			$con->commit();
+			return $affectedRows;
+		} catch (PropelException $e) {
+			$con->rollback();
+			throw $e;
+		}
+	}
+
+	
+	protected function doSave($con)
+	{
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
+			$this->alreadyInSave = true;
+
+
+						if ($this->isModified()) {
+				if ($this->isNew()) {
+					$pk = CidisnivPeer::doInsert($this, $con);
+					$affectedRows += 1; 										 										 
+					$this->setNew(false);
+				} else {
+					$affectedRows += CidisnivPeer::doUpdate($this, $con);
+				}
+				$this->resetModified(); 			}
+
+			$this->alreadyInSave = false;
+		}
+		return $affectedRows;
+	} 
+	
+	protected $validationFailures = array();
+
+	
+	public function getValidationFailures()
+	{
+		return $this->validationFailures;
+	}
+
+	
+	public function validate($columns = null)
+	{
+		$res = $this->doValidate($columns);
+		if ($res === true) {
+			$this->validationFailures = array();
+			return true;
+		} else {
+			$this->validationFailures = $res;
+			return false;
+		}
+	}
+
+	
+	protected function doValidate($columns = null)
+	{
+		if (!$this->alreadyInValidation) {
+			$this->alreadyInValidation = true;
+			$retval = null;
+
+			$failureMap = array();
+
+
+			if (($retval = CidisnivPeer::doValidate($this, $columns)) !== true) {
+				$failureMap = array_merge($failureMap, $retval);
+			}
+
+
+
+			$this->alreadyInValidation = false;
+		}
+
+		return (!empty($failureMap) ? $failureMap : true);
+	}
+
+	
+	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
+	{
+		$pos = CidisnivPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		return $this->getByPosition($pos);
+	}
+
+	
+	public function getByPosition($pos)
+	{
+		switch($pos) {
+			case 0:
+				return $this->getCodpre();
+				break;
+			case 1:
+				return $this->getMonasi();
+				break;
+			case 2:
+				return $this->getModificacion();
+				break;
+			case 3:
+				return $this->getAsigactual();
+				break;
+			case 4:
+				return $this->getMonprc();
+				break;
+			case 5:
+				return $this->getMoncom();
+				break;
+			case 6:
+				return $this->getMoncau();
+				break;
+			case 7:
+				return $this->getMonpag();
+				break;
+			case 8:
+				return $this->getMonaju();
+				break;
+			case 9:
+				return $this->getMondis();
+				break;
+			case 10:
+				return $this->getDeuda();
+				break;
+			case 11:
+				return $this->getId();
+				break;
+			default:
+				return null;
+				break;
+		} 	}
+
+	
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
+	{
+		$keys = CidisnivPeer::getFieldNames($keyType);
+		$result = array(
+			$keys[0] => $this->getCodpre(),
+			$keys[1] => $this->getMonasi(),
+			$keys[2] => $this->getModificacion(),
+			$keys[3] => $this->getAsigactual(),
+			$keys[4] => $this->getMonprc(),
+			$keys[5] => $this->getMoncom(),
+			$keys[6] => $this->getMoncau(),
+			$keys[7] => $this->getMonpag(),
+			$keys[8] => $this->getMonaju(),
+			$keys[9] => $this->getMondis(),
+			$keys[10] => $this->getDeuda(),
+			$keys[11] => $this->getId(),
+		);
+		return $result;
+	}
+
+	
+	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
+	{
+		$pos = CidisnivPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		return $this->setByPosition($pos, $value);
+	}
+
+	
+	public function setByPosition($pos, $value)
+	{
+		switch($pos) {
+			case 0:
+				$this->setCodpre($value);
+				break;
+			case 1:
+				$this->setMonasi($value);
+				break;
+			case 2:
+				$this->setModificacion($value);
+				break;
+			case 3:
+				$this->setAsigactual($value);
+				break;
+			case 4:
+				$this->setMonprc($value);
+				break;
+			case 5:
+				$this->setMoncom($value);
+				break;
+			case 6:
+				$this->setMoncau($value);
+				break;
+			case 7:
+				$this->setMonpag($value);
+				break;
+			case 8:
+				$this->setMonaju($value);
+				break;
+			case 9:
+				$this->setMondis($value);
+				break;
+			case 10:
+				$this->setDeuda($value);
+				break;
+			case 11:
+				$this->setId($value);
+				break;
+		} 	}
+
+	
+	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
+	{
+		$keys = CidisnivPeer::getFieldNames($keyType);
+
+		if (array_key_exists($keys[0], $arr)) $this->setCodpre($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setMonasi($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setModificacion($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setAsigactual($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setMonprc($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setMoncom($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setMoncau($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setMonpag($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setMonaju($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setMondis($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setDeuda($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
+	}
+
+	
+	public function buildCriteria()
+	{
+		$criteria = new Criteria(CidisnivPeer::DATABASE_NAME);
+
+		if ($this->isColumnModified(CidisnivPeer::CODPRE)) $criteria->add(CidisnivPeer::CODPRE, $this->codpre);
+		if ($this->isColumnModified(CidisnivPeer::MONASI)) $criteria->add(CidisnivPeer::MONASI, $this->monasi);
+		if ($this->isColumnModified(CidisnivPeer::MODIFICACION)) $criteria->add(CidisnivPeer::MODIFICACION, $this->modificacion);
+		if ($this->isColumnModified(CidisnivPeer::ASIGACTUAL)) $criteria->add(CidisnivPeer::ASIGACTUAL, $this->asigactual);
+		if ($this->isColumnModified(CidisnivPeer::MONPRC)) $criteria->add(CidisnivPeer::MONPRC, $this->monprc);
+		if ($this->isColumnModified(CidisnivPeer::MONCOM)) $criteria->add(CidisnivPeer::MONCOM, $this->moncom);
+		if ($this->isColumnModified(CidisnivPeer::MONCAU)) $criteria->add(CidisnivPeer::MONCAU, $this->moncau);
+		if ($this->isColumnModified(CidisnivPeer::MONPAG)) $criteria->add(CidisnivPeer::MONPAG, $this->monpag);
+		if ($this->isColumnModified(CidisnivPeer::MONAJU)) $criteria->add(CidisnivPeer::MONAJU, $this->monaju);
+		if ($this->isColumnModified(CidisnivPeer::MONDIS)) $criteria->add(CidisnivPeer::MONDIS, $this->mondis);
+		if ($this->isColumnModified(CidisnivPeer::DEUDA)) $criteria->add(CidisnivPeer::DEUDA, $this->deuda);
+		if ($this->isColumnModified(CidisnivPeer::ID)) $criteria->add(CidisnivPeer::ID, $this->id);
+
+		return $criteria;
+	}
+
+	
+	public function buildPkeyCriteria()
+	{
+		$criteria = new Criteria(CidisnivPeer::DATABASE_NAME);
+
+		$criteria->add(CidisnivPeer::ID, $this->id);
+
+		return $criteria;
+	}
+
+	
+	public function getPrimaryKey()
+	{
+		return $this->getId();
+	}
+
+	
+	public function setPrimaryKey($key)
+	{
+		$this->setId($key);
+	}
+
+	
+	public function copyInto($copyObj, $deepCopy = false)
+	{
+
+		$copyObj->setCodpre($this->codpre);
+
+		$copyObj->setMonasi($this->monasi);
+
+		$copyObj->setModificacion($this->modificacion);
+
+		$copyObj->setAsigactual($this->asigactual);
+
+		$copyObj->setMonprc($this->monprc);
+
+		$copyObj->setMoncom($this->moncom);
+
+		$copyObj->setMoncau($this->moncau);
+
+		$copyObj->setMonpag($this->monpag);
+
+		$copyObj->setMonaju($this->monaju);
+
+		$copyObj->setMondis($this->mondis);
+
+		$copyObj->setDeuda($this->deuda);
+
+
+		$copyObj->setNew(true);
+
+		$copyObj->setId(NULL); 
+	}
+
+	
+	public function copy($deepCopy = false)
+	{
+				$clazz = get_class($this);
+		$copyObj = new $clazz();
+		$this->copyInto($copyObj, $deepCopy);
+		return $copyObj;
+	}
+
+	
+	public function getPeer()
+	{
+		if (self::$peer === null) {
+			self::$peer = new CidisnivPeer();
+		}
+		return self::$peer;
+	}
+
+} 

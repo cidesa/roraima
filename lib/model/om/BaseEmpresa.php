@@ -1380,7 +1380,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(EmpresaPeer::DATABASE_NAME);
 
-		$criteria->add(EmpresaPeer::CODEMP, $this->codemp);
+		$criteria->add(EmpresaPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1388,18 +1388,20 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodemp();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodemp($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodemp($this->codemp);
 
 		$copyObj->setNomemp($this->nomemp);
 
@@ -1471,12 +1473,10 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
 		$copyObj->setEncabezado($this->encabezado);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodemp(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	
