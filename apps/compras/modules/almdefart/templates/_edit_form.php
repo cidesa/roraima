@@ -17,16 +17,19 @@
 <div
 	class="content<?php if ($sf_request->hasError('cadefart{codemp}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('cadefart{codemp}')): ?> <?php echo form_error('cadefart{codemp}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCodemp', array (
+<?php endif; ?> 
+
+<?php if (isset($nomemp)): ?> <?php echo input_tag('nomemp',$nomemp,'size=50,disabled=true'); ?>
+<?php endif; ?> 
+
+
+
+<?php $value = object_input_tag($cadefart, 'getCodemp', array (
 'size' => 20,
 'disabled' => true,
 'control_name' => 'cadefart[codemp]',
 )); echo $value ? $value : '&nbsp;' ?></div>
 
-<?php echo button_to('...','#')?> 
-<?php if (isset($nomemp)): ?>
-	<?php echo input_tag('nomemp',$nomemp,'size=50,disabled=true'); ?>
-<?php endif; ?>
 
 </div>
 </fieldset>
@@ -255,195 +258,6 @@ if ($cadefart->getasiparrec()=='P'){
 
 
 
-<div class="form-row"><?php echo label_for('cadefart[tipimprec]', __($labels['cadefart{tipimprec}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{tipimprec}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{tipimprec}')): ?> <?php echo form_error('cadefart{tipimprec}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getTipimprec', array (
-'size' => 20,
-'control_name' => 'cadefart[tipimprec]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[artvenhas]', __($labels['cadefart{artvenhas}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{artvenhas}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{artvenhas}')): ?> <?php echo form_error('cadefart{artvenhas}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getArtvenhas', array (
-'size' => 20,
-'control_name' => 'cadefart[artvenhas]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[corcot]', __($labels['cadefart{corcot}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{corcot}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{corcot}')): ?> <?php echo form_error('cadefart{corcot}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCorcot', array (
-'size' => 20,
-'control_name' => 'cadefart[corcot]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[solart]', __($labels['cadefart{solart}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{solart}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{solart}')): ?> <?php echo form_error('cadefart{solart}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getSolart', array (
-'size' => 20,
-'control_name' => 'cadefart[solart]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[apliclades]', __($labels['cadefart{apliclades}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{apliclades}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{apliclades}')): ?> <?php echo form_error('cadefart{apliclades}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getApliclades', array (
-'size' => 20,
-'control_name' => 'cadefart[apliclades]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-
-<div class="form-row"><?php echo label_for('cadefart[unidad]', __($labels['cadefart{unidad}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{unidad}')): ?> form-error<?php endif; ?>">
-<p><?php if ($sf_request->hasError('cadefart{unidad}')): ?> <?php echo form_error('cadefart{unidad}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getUnidad', array (
-'size' => 80,
-'control_name' => 'cadefart[unidad]',
-)); echo $value ? $value : '&nbsp;' ?>
-
-</div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[codalmven]', __($labels['cadefart{codalmven}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{codalmven}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{codalmven}')): ?> <?php echo form_error('cadefart{codalmven}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCodalmven', array (
-'size' => 20,
-'control_name' => 'cadefart[codalmven]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-
-
-
-<div class="form-row"><?php echo label_for('cadefart[correq]', __($labels['cadefart{correq}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{correq}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{correq}')): ?> <?php echo form_error('cadefart{correq}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCorreq', array (
-'size' => 20,
-'control_name' => 'cadefart[correq]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[corord]', __($labels['cadefart{corord}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{corord}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{corord}')): ?> <?php echo form_error('cadefart{corord}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCorord', array (
-'size' => 20,
-'control_name' => 'cadefart[corord]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[correc]', __($labels['cadefart{correc}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{correc}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{correc}')): ?> <?php echo form_error('cadefart{correc}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCorrec', array (
-'size' => 20,
-'control_name' => 'cadefart[correc]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-
-<div class="form-row"><?php echo label_for('cadefart[mercon]', __($labels['cadefart{mercon}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{mercon}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{mercon}')): ?> <?php echo form_error('cadefart{mercon}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getMercon', array (
-'size' => 20,
-'control_name' => 'cadefart[mercon]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[ctadev]', __($labels['cadefart{ctadev}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{ctadev}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{ctadev}')): ?> <?php echo form_error('cadefart{ctadev}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCtadev', array (
-'size' => 32,
-'control_name' => 'cadefart[ctadev]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[ctavco]', __($labels['cadefart{ctavco}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{ctavco}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{ctavco}')): ?> <?php echo form_error('cadefart{ctavco}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCtavco', array (
-'size' => 32,
-'control_name' => 'cadefart[ctavco]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[univta]', __($labels['cadefart{univta}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{univta}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{univta}')): ?> <?php echo form_error('cadefart{univta}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getUnivta', array (
-'size' => 32,
-'control_name' => 'cadefart[univta]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[artven]', __($labels['cadefart{artven}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{artven}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{artven}')): ?> <?php echo form_error('cadefart{artven}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getArtven', array (
-'size' => 20,
-'control_name' => 'cadefart[artven]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[artins]', __($labels['cadefart{artins}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{artins}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{artins}')): ?> <?php echo form_error('cadefart{artins}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getArtins', array (
-'size' => 20,
-'control_name' => 'cadefart[artins]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('cadefart[artser]', __($labels['cadefart{artser}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{artser}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{artser}')): ?> <?php echo form_error('cadefart{artser}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getArtser', array (
-'size' => 20,
-'control_name' => 'cadefart[artser]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-</div>
-
-
-<div class="form-row"><?php echo label_for('cadefart[cordes]', __($labels['cadefart{cordes}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{cordes}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{cordes}')): ?> <?php echo form_error('cadefart{cordes}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCordes', array (
-'size' => 20,
-'control_name' => 'cadefart[cordes]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
 
 </fieldset>
 </div>

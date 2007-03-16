@@ -14,19 +14,52 @@ class almdefartActions extends autoalmdefartActions
 	{
 		$c = new Criteria;
 		$this->campo = $this->cadefart->getcodemp();
-		$c->add(ContabbPeer::CODEMP, $this->campo);
-  	  $this->nomcu = ContabbPeer::doSelect($c);
-	  if ($this->nomcu)
-	  	return $this->nomcu[0]->getDescta();
-	  else 
-	    return ' ';
-  }	
-	
-	
+		$c->add(EmpresaPeer::CODEMP, $this->campo);
+		$this->nomemp = EmpresaPeer::doSelect($c);
+		if ($this->nomemp)
+		return $this->nomemp[0]->getnomemp();
+		else
+		return ' ';
+	}
+
+ public function executeEdit()
+ {
+ 	$this->cadefart = $this->getCadefartOrCreate();
+    $this->nomemp = $this->getnomemp();
+
+ 	if ($this->getRequest()->getMethod() == sfRequest::POST)
+ 	{
+ 		$this->updateCadefartFromRequest();
+
+ 		$this->saveCadefart($this->cadefart);
+
+ 		$this->setFlash('notice', 'Your modifications have been saved');
+
+ 		if ($this->getRequestParameter('save_and_add'))
+ 		{
+ 			return $this->redirect('almdefart/create');
+ 		}
+ 		else if ($this->getRequestParameter('save_and_list'))
+ 		{
+ 			return $this->redirect('almdefart/list');
+ 		}
+ 		else
+      {
+        return $this->redirect('almdefart/edit?id='.$this->cadefart->getId());
+      }
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
+  }
+
+   
+  
 	protected function updateCadefartFromRequest()
 	{
-		$cadefart = $this->getRequestParameter('cadefart');
-
+		$cadefart = $this->getRequestParameter('cadefart');		
+		
 		if (isset($cadefart['codemp']))
 		{
 			$this->cadefart->setCodemp($cadefart['codemp']);
