@@ -1,0 +1,23 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsmovtra
+    theme:            default
+    fields:
+      reftra: { name: Referencia, params: maxlength=20}
+      fectra: { name: Fecha, params: date_format='dd/MM/yyyy'}
+      destra: { name: Descripcion}
+      ctaori: { name: Cod. Desde, params: maxlength=20}
+      ctades: { name: Cod. Hasta, params: maxlength=20}
+      montra: { name: Monto, params: size=25}
+      numcom: { name: Numero}
+    list:
+      title:          Transferencias Bancarias
+      filters:        [reftra, destra, fectra]
+      display:        [=reftra, destra, fectra, montra]
+      max_per_page:	  8
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edicion Transferencias Bancarias

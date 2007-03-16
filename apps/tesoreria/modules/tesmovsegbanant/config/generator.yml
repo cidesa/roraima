@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsmovban
+    theme:            default
+    fields:
+      numcue: { name: Cuenta del Banco, params: maxlength=20}
+      refban: { name: Referencia, params: maxlength=20}
+      fecban: { name: Fecha del Movimiento, params: date_format='dd/MM/yyyy'}
+      tipmov: { name: Tipo de Movimiento, params: maxlength=4}
+      desban: { name: Descripcion del Libro}
+      monmov: { name: Monto}
+      status: { name: Estatus}
+      stacon: { name: Estatus Contable}
+    list:
+      title:          Movimientos Segun Bancos de Años Anteriores
+      filters:        [numcue, tipmov, fecban]
+      display:        [=numcue, refban, tipmov, fecban]
+      max_per_page:	  8
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edicion Movimientos Segun Bancos de Años Anteriores      
