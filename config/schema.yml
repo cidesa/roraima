@@ -405,6 +405,135 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+<<<<<<< .mine
+  carecaud: 
+    codrec: 
+      type: VARCHAR
+      size: 10
+      required: true
+    desrec: 
+      type: VARCHAR
+      size: 100
+      required: true
+    limrec: 
+      type: VARCHAR
+      size: 1
+      required: true
+    fecemi: 
+      type: DATE
+    fecven: 
+      type: DATE
+    canutr: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codtiprec: 
+      type: VARCHAR
+      size: 4
+    observ: 
+      type: VARCHAR
+      size: 100
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  caconpag: 
+    codconpag: 
+      type: VARCHAR
+      size: 4
+      required: true
+    desconpag: 
+      type: VARCHAR
+      size: 255
+      required: true
+    tipconpag: 
+      type: VARCHAR
+      size: 1
+    numdia: 
+      type: NUMERIC
+      size: 4
+    generaop: 
+      type: VARCHAR
+      size: 1
+    asiparrec: 
+      type: VARCHAR
+      size: 1
+    generacom: 
+      type: VARCHAR
+      size: 1
+    mercon: 
+      type: VARCHAR
+      size: 20
+    ctadev: 
+      type: VARCHAR
+      size: 32
+    ctavco: 
+      type: VARCHAR
+      size: 32
+    univta: 
+      type: VARCHAR
+      size: 16
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  caentalm: 
+    rcpart: 
+      type: VARCHAR
+      size: 8
+      required: true
+    fecrcp: 
+      type: DATE
+      required: true
+    desrcp: 
+      type: VARCHAR
+      size: 100
+    codpro: 
+      type: VARCHAR
+      size: 10
+    monrcp: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    starcp: 
+      type: VARCHAR
+      size: 1
+    codalm: 
+      type: VARCHAR
+      size: 6
+    tipmov: 
+      type: VARCHAR
+      size: 3
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cadetent: 
+    rcpart: 
+      type: VARCHAR
+      size: 8
+      required: true
+    codart: 
+      type: VARCHAR
+      size: 20
+      required: true
+    canrec: 
+      type: NUMERIC
+      size: 32
+      scale: 8
+    montot: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cosart: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+=======
   tsretiva: 
     codret: 
       type: VARCHAR
@@ -1250,4 +1379,5 @@ propel:
       required: true
       autoIncrement: true
       
+>>>>>>> .r82
       
