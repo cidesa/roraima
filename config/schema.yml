@@ -1,23 +1,19 @@
 ---
 propel:
   _attributes: { noXsd: false, defaultIdMethod: none, package: lib.model }
-  catipent: 
-    codtipent: 
+  catiprec:
+    codtiprec: 
       type: VARCHAR
-      size: 3
-    destipent: 
-      type: VARCHAR
-      size: 50
-    id: 
-      type: INTEGER
+      size: 4
       required: true
-      autoIncrement: true      
+    destiprec: 
+      type: VARCHAR
+      size: 100
   caforent:  #almforent
     codforent: 
       type: VARCHAR
       size: 4
       required: true
-      primaryKey: true
     desforent: 
       type: VARCHAR
       size: 255
@@ -58,7 +54,6 @@ propel:
       type: VARCHAR
       size: 6
       required: true
-      primaryKey: true
     nomram: 
       type: VARCHAR
       size: 100
@@ -67,111 +62,81 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-  carancot:
-    candes: 
-      type: NUMERIC
-      size: 14
-      scale: 2
-      required: true
-    canhas: 
-      type: NUMERIC
-      size: 14
-      scale: 2
-      required: true
-    cancot: 
-      type: NUMERIC
-      size: 14
-      scale: 2
-      required: true
-    nroran: 
+  fortipfin: 
+    codfin: 
       type: VARCHAR
-      size: 2
-    id: 
-      type: INTEGER
+      size: 4
       required: true
-      autoIncrement: true      
-  cadefubi: 
-    codubi: 
-      type: VARCHAR
-      size: 20
-      required: true
-    nomubi: 
+    #  primaryKey: true
+    nomext: 
       type: VARCHAR
       size: 100
       required: true
+    nomabr: 
+      type: VARCHAR
+      size: 10
+      required: true
+    apofis: 
+      type: VARCHAR
+      size: 1
+    tipfin: 
+      type: VARCHAR
+      size: 1
+    montoing: 
+      type: NUMERIC
+      size: 20
+      scale: 2
+    montodis: 
+      type: NUMERIC
+      size: 20
+      scale: 2
+    montodisaux: 
+      type: NUMERIC
+      size: 20
+      scale: 2
     id: 
       type: INTEGER
       required: true
       autoIncrement: true
-  catipsal: 
-    codtipsal: 
+  optipben: 
+    codtipben: 
       type: VARCHAR
       size: 3
-    destipsal: 
+      required: true
+    destipben: 
       type: VARCHAR
       size: 50
     id: 
       type: INTEGER
       required: true
-      autoIncrement: true      
-  catippro: 
-    codpro: 
+      autoIncrement: true
+  bnubica: 
+    codubi: 
       type: VARCHAR
-      size: 4
+      size: 30
       required: true
-    despro: 
+    desubi: 
       type: VARCHAR
-      size: 100
-      required: true
-    ctaord: 
+      size: 250
+    stacod: 
       type: VARCHAR
-      size: 32
-    ctaper: 
-      type: VARCHAR
-      size: 32
+      size: 1
     id: 
       type: INTEGER
       required: true
-      autoIncrement: true      
-  contabb: 
-    codcta: 
+      autoIncrement: true
+  cadefalm:
+    codalm: 
       type: VARCHAR
-      size: 32
+      size: 6
       required: true
-    descta: 
+    nomalm: 
       type: VARCHAR
-      size: 250
+      size: 100
       required: true
-    fecini: 
-      type: DATE
-      required: true
-    feccie: 
-      type: DATE
-      required: true
-    salant: 
-      type: NUMERIC
-      size: 14
-      scale: 2
-    debcre: 
+    codcat: 
       type: VARCHAR
-      size: 1
-      required: true
-    cargab: 
-      type: VARCHAR
-      size: 1
-      required: true
-    salprgper: 
-      type: NUMERIC
-      size: 14
-      scale: 2
-    salacuper: 
-      type: NUMERIC
-      size: 14
-      scale: 2
-    salprgperfor: 
-      type: NUMERIC
-      size: 14
-      scale: 2
+      size: 16
     id: 
       type: INTEGER
       required: true
@@ -290,157 +255,867 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-  catraalm: 
-    codtra: 
+  empresa: 
+    codemp: 
       type: VARCHAR
-      size: 8
+      size: 3
       required: true
-    fectra: 
-      type: DATE
-    destra: 
+      primaryKey: true
+    nomemp: 
       type: VARCHAR
-      size: 255
-    almori: 
-      type: VARCHAR
-      size: 6
+      size: 250
       required: true
-    almdes: 
+    diremp: 
       type: VARCHAR
-      size: 6
+      size: 50
+      required: true
+    tlfemp: 
+      type: VARCHAR
+      size: 15
+      required: true
+    ciuemp: 
+      type: VARCHAR
+      size: 50
+    urlemp: 
+      type: VARCHAR
+      size: 100
+    faxemp: 
+      type: VARCHAR
+      size: 15
+    codpos: 
+      type: VARCHAR
+      size: 15
+    gobedo: 
+      type: VARCHAR
+      size: 100
+    conedo: 
+      type: VARCHAR
+      size: 100
+    cleedo: 
+      type: VARCHAR
+      size: 100
+    dirpre: 
+      type: VARCHAR
+      size: 100
+    munemp: 
+      type: VARCHAR
+      size: 50
+    cieedo: 
+      type: VARCHAR
+      size: 100
+    codctagas: 
+      type: VARCHAR
+      size: 32
+    codctaban: 
+      type: VARCHAR
+      size: 32
+    codctaret: 
+      type: VARCHAR
+      size: 32
+    codctaben: 
+      type: VARCHAR
+      size: 32
+    codctaart: 
+      type: VARCHAR
+      size: 32
+    codctagashas: 
+      type: VARCHAR
+      size: 32
+    codctabanhas: 
+      type: VARCHAR
+      size: 32
+    codctarethas: 
+      type: VARCHAR
+      size: 32
+    codctabenhas: 
+      type: VARCHAR
+      size: 32
+    codctaarthas: 
+      type: VARCHAR
+      size: 32
+    codctapageje: 
+      type: VARCHAR
+      size: 32
+    codctaingdevn: 
+      type: VARCHAR
+      size: 32
+    codctaingdev: 
+      type: VARCHAR
+      size: 32
+    diradm: 
+      type: VARCHAR
+      size: 100
+    dirfin: 
+      type: VARCHAR
+      size: 100
+    dirper: 
+      type: VARCHAR
+      size: 100
+    dirgen: 
+      type: VARCHAR
+      size: 100
+    anapre: 
+      type: VARCHAR
+      size: 100
+    anaper: 
+      type: VARCHAR
+      size: 100
+    anaadm: 
+      type: VARCHAR
+      size: 100
+    edoemp: 
+      type: VARCHAR
+      size: 100
+    encabezado: 
+      type: VARCHAR
+      size: 250
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  carecarg: 
+    codrgo: 
+      type: VARCHAR
+      size: 4
+      required: true
+      #primaryKey: true
+    nomrgo: 
+      type: VARCHAR
+      size: 100
+    codpre: 
+      type: VARCHAR
+      size: 32
+      required: true
+    tiprgo: 
+      type: VARCHAR
+      size: 1
+      required: true
+    monrgo: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    calcul: 
+      type: VARCHAR
+      size: 1
+    codcta: 
+      type: VARCHAR
+      size: 32
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tsretiva: 
+    codret: 
+      type: VARCHAR
+      size: 3
+      required: true
+    codrec: 
+      type: VARCHAR
+      size: 4
+      required: true
+    codpar: 
+      type: VARCHAR
+      size: 32
+      required: true
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true 
+  optipret: 
+    codtip: 
+      type: VARCHAR
+      size: 3
+      required: true
+      #primaryKey: true
+    destip: 
+      type: VARCHAR
+      size: 250
+      required: true
+    codcon: 
+      type: VARCHAR
+      size: 32
+      required: true
+    basimp: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porret: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    unitri: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    porsus: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    factor: 
+      type: NUMERIC
+      size: 16
+      scale: 6
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true 
+  tsdefrengas: 
+    pagrepcaj: 
+      type: VARCHAR
+      size: 4
+    ctarepcaj: 
+      type: VARCHAR
+      size: 32
+    pagcheant: 
+      type: VARCHAR
+      size: 4
+    ctacheant: 
+      type: VARCHAR
+      size: 32
+    movreicaj: 
+      type: VARCHAR
+      size: 4
+    ctareicaj: 
+      type: VARCHAR
+      size: 32
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true 
+  cpdoccau: 
+    tipcau: 
+      type: VARCHAR
+      size: 4
+      required: true
+      # primaryKey: true
+    nomext: 
+      type: VARCHAR
+      size: 100
+      required: true
+    nomabr: 
+      type: VARCHAR
+      size: 4
+      required: true
+    refier: 
+      type: VARCHAR
+      size: 1
+      required: true
+    afeprc: 
+      type: VARCHAR
+      size: 1
+      required: true
+    afecom: 
+      type: VARCHAR
+      size: 1
+      required: true
+    afecau: 
+      type: VARCHAR
+      size: 1
+      required: true
+    afedis: 
+      type: VARCHAR
+      size: 1
       required: true
     id: 
       type: INTEGER
       required: true
       autoIncrement: true
-  cadefalm: 
-    codalm: 
+  contabb: 
+    codcta: 
       type: VARCHAR
-      size: 6
+      size: 32
       required: true
-    nomalm: 
+      # primaryKey: true
+    descta: 
       type: VARCHAR
-      size: 100
+      size: 250
       required: true
-    codcat: 
+    fecini: 
+      type: DATE
+      required: true
+    feccie: 
+      type: DATE
+      required: true
+    salant: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    debcre: 
       type: VARCHAR
-      size: 16
+      size: 1
+      required: true
+    cargab: 
+      type: VARCHAR
+      size: 1
+      required: true
+    salprgper: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salacuper: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salprgperfor: 
+      type: NUMERIC
+      size: 14
+      scale: 2
     id: 
       type: INTEGER
       required: true
-      autoIncrement: true      
-  caregart: 
-    codart: 
+      autoIncrement: true
+    _indexes: 
+      i02contabb: 
+        - codcta
+        - fecini
+        - feccie
+      i10contabb: 
+        - codcta
+        - cargab
+  tstipmov: 
+    codtip: 
+      type: VARCHAR
+      size: 4
+      required: true
+      # primaryKey: true
+    destip: 
+      type: VARCHAR
+      size: 40
+      required: true
+    debcre: 
+      type: VARCHAR
+      size: 1
+      required: true
+    orden: 
+      type: VARCHAR
+      size: 2
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tsdefban: 
+    numcue: 
       type: VARCHAR
       size: 20
       required: true
-    desart: 
+      #primaryKey: true
+    nomcue: 
       type: VARCHAR
-      size: 250
+      size: 40
+      required: true
+    tipcue: 
+      type: VARCHAR
+      size: 3
       required: true
     codcta: 
       type: VARCHAR
       size: 32
-    codpar: 
-      type: VARCHAR
-      size: 16
-    ramart: 
-      type: VARCHAR
-      size: 6
-    cosult: 
-      type: NUMERIC
-      size: 14
-      scale: 2
-    cospro: 
-      type: NUMERIC
-      size: 14
-      scale: 2
-    exitot: 
-      type: NUMERIC
-      size: 14
-      scale: 2
-    unimed: 
-      type: VARCHAR
-      size: 15
-    unialt: 
-      type: VARCHAR
-      size: 15
-    relart: 
-      type: VARCHAR
-      size: 25
-    fecult: 
+    fecreg: 
       type: DATE
-    invini: 
+      required: true
+    fecven: 
+      type: DATE
+    fecper: 
+      type: DATE
+    renaut: 
+      type: VARCHAR
+      size: 1
+    porint: 
+      type: NUMERIC
+      size: 5
+      scale: 2
+    tipint: 
+      type: VARCHAR
+      size: 1
+    numche: 
+      type: VARCHAR
+      size: 8
+    antban: 
       type: NUMERIC
       size: 14
       scale: 2
-    codmar: 
-      type: VARCHAR
-      size: 6
-    codref: 
-      type: VARCHAR
-      size: 15
-    costot: 
+    debban: 
       type: NUMERIC
       size: 14
       scale: 2
-    sigecof: 
+    creban: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    antlib: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    deblib: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    crelib: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    valche: 
+      type: NUMERIC
+      size: 3
+    concil: 
+      type: VARCHAR
+      size: 1
+    plazo: 
+      type: NUMERIC
+      size: 3
+    fecape: 
+      type: DATE
+    usocue: 
       type: VARCHAR
       size: 20
-    codclaart: 
+    tipren: 
+      type: VARCHAR
+      size: 20
+    desenl: 
+      type: VARCHAR
+      size: 250
+    porsalmin: 
       type: NUMERIC
-      size: 4
-    lotuni: 
-      type: VARCHAR
-      size: 1
-    ctavta: 
-      type: VARCHAR
-      size: 32
-    ctacos: 
-      type: VARCHAR
-      size: 32
-    ctapro: 
-      type: VARCHAR
-      size: 32
-    preart: 
-      type: VARCHAR
-      size: 50
-    distot: 
+      size: 5
+      scale: 2
+    monsalmin: 
       type: NUMERIC
       size: 14
       scale: 2
-    tipo: 
-      type: VARCHAR
-      size: 1
-    tip0: 
-      type: VARCHAR
-      size: 1
-    coding: 
+    codctaprecoo: 
       type: VARCHAR
       size: 32
-    mercon: 
+    codctapreord: 
+      type: VARCHAR
+      size: 32
+    trasitoria: 
       type: VARCHAR
       size: 1
+    salact: 
+      type: NUMERIC
+      size: 20
+      scale: 2
+    fecaper: 
+      type: DATE
+    temnumcue: 
+      type: VARCHAR
+      size: 20
+    cantdig: 
+      type: NUMERIC
+      size: 2
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true 
+  tsmovlib: 
+    numcue: 
+      type: VARCHAR
+      size: 20
+      required: true
+      #primaryKey: true
+    reflib: 
+      type: VARCHAR
+      size: 20
+      required: true
+    #  primaryKey: true
+    feclib: 
+      type: DATE
+      required: true
+    tipmov: 
+      type: VARCHAR
+      size: 4
+      required: true
+    deslib: 
+      type: VARCHAR
+      size: 4000
+      required: true
+    monmov: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    codcta: 
+      type: VARCHAR
+      size: 32
+    numcom: 
+      type: VARCHAR
+      size: 8
+    feccom: 
+      type: DATE
+    status: 
+      type: VARCHAR
+      size: 1
+      required: true
+    stacon: 
+      type: VARCHAR
+      size: 1
+      required: true
+    fecing: 
+      type: DATE
+    fecanu: 
+      type: DATE
+    tipmovpad: 
+      type: VARCHAR
+      size: 4
+    reflibpad: 
+      type: VARCHAR
+      size: 20
+    transito: 
+      type: VARCHAR
+      size: 1
+    numcomadi: 
+      type: VARCHAR
+      size: 8
+    feccomadi: 
+      type: DATE
+    nombensus: 
+      type: VARCHAR
+      size: 250
+    orden: 
+      type: NUMERIC
+      size: 14
+    horing: 
+      type: VARCHAR
+      size: 12
+    stacon1: 
+      type: VARCHAR
+      size: 1
+    motanu: 
+      type: VARCHAR
+      size: 250
     id: 
       type: INTEGER
       required: true
       autoIncrement: true
-  cainvfis: 
-    fecinv: 
-      type: DATE
-      required: true
-    codalm: 
-      type: VARCHAR
-      size: 6
-      required: true
-    codart: 
+  tscheemi: 
+    numche: 
       type: VARCHAR
       size: 20
       required: true
-    exiact: 
+      #primaryKey: true
+    numcue: 
+      type: VARCHAR
+      size: 20
+      required: true
+      #primaryKey: true
+    cedrif: 
+      type: VARCHAR
+      size: 15
+      required: true
+    fecemi: 
+      type: DATE
+      required: true
+    monche: 
       type: NUMERIC
       size: 14
       scale: 2
-    exiact2: 
+      required: true
+    status: 
+      type: VARCHAR
+      size: 1
+    codemi: 
+      type: VARCHAR
+      size: 50
+    fecent: 
+      type: DATE
+    codent: 
+      type: VARCHAR
+      size: 50
+    obsent: 
+      type: VARCHAR
+      size: 100
+    fecanu: 
+      type: DATE
+    cedrec: 
+      type: VARCHAR
+      size: 15
+    nomrec: 
+      type: VARCHAR
+      size: 50
+    tipdoc: 
+      type: VARCHAR
+      size: 4
+    fecing: 
+      type: DATE
+    temporal: 
+      type: VARCHAR
+      size: 100
+    temporal2: 
+      type: VARCHAR
+      size: 100
+    nombensus: 
+      type: VARCHAR
+      size: 250
+    anopre: 
+      type: VARCHAR
+      size: 4
+    numtiq: 
+      type: VARCHAR
+      size: 8
+    cedaut: 
+      type: VARCHAR
+      size: 15
+    peraut: 
+      type: VARCHAR
+      size: 40
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes: 
+      itscheemi2: 
+        - numcue
+        - cedrif
+      itscheemi3: 
+        - cedrif
+      itscheemi4: 
+        - fecemi
+  opordpag: 
+    numord: 
+      type: VARCHAR
+      size: 8
+      required: true
+      #primaryKey: true
+    tipcau: 
+      type: VARCHAR
+      size: 4
+      required: true
+    fecemi: 
+      type: DATE
+      required: true
+    cedrif: 
+      type: VARCHAR
+      size: 15
+      required: true
+    nomben: 
+      type: VARCHAR
+      size: 250
+      required: true
+    monord: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    desord: 
+      type: VARCHAR
+      size: 1000
+      required: true
+    mondes: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monret: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    numche: 
+      type: VARCHAR
+      size: 20
+    ctaban: 
+      type: VARCHAR
+      size: 20
+    ctapag: 
+      type: VARCHAR
+      size: 32
+    numcom: 
+      type: VARCHAR
+      size: 8
+    status: 
+      type: VARCHAR
+      size: 1
+      required: true
+    coduni: 
+      type: VARCHAR
+      size: 30
+    fecenvcon: 
+      type: DATE
+    fecenvfin: 
+      type: DATE
+    ctapagfin: 
+      type: VARCHAR
+      size: 32
+    obsord: 
+      type: VARCHAR
+      size: 250
+    fecven: 
+      type: DATE
+    fecanu: 
+      type: DATE
+    desanu: 
+      type: VARCHAR
+      size: 250
+    monpag: 
+      type: NUMERIC
+      size: 16
+      scale: 2
+    aproba: 
+      type: VARCHAR
+      size: 1
+    nombensus: 
+      type: VARCHAR
+      size: 250
+    fecrecfin: 
+      type: DATE
+    anopre: 
+      type: VARCHAR
+      size: 4
+    fecpag: 
+      type: DATE
+    numtiq: 
+      type: VARCHAR
+      size: 8
+    peraut: 
+      type: VARCHAR
+      size: 500
+    cedaut: 
+      type: VARCHAR
+      size: 100
+    nomper2: 
+      type: VARCHAR
+      size: 50
+    nomper1: 
+      type: VARCHAR
+      size: 50
+    horcon: 
+      type: VARCHAR
+      size: 10
+    feccon: 
+      type: DATE
+    nomcat: 
+      type: VARCHAR
+      size: 250
+    numfac: 
+      type: VARCHAR
+      size: 20
+    numconfac: 
+      type: VARCHAR
+      size: 20
+    numcorfac: 
+      type: VARCHAR
+      size: 20
+    fechafac: 
+      type: DATE
+    fecfac: 
+      type: DATE
+    tipfin: 
+      type: VARCHAR
+      size: 4
+    comret: 
+      type: VARCHAR
+      size: 20
+    feccomret: 
+      type: DATE
+    comretislr: 
+      type: VARCHAR
+      size: 20
+    feccomretislr: 
+      type: DATE
+    comretltf: 
+      type: VARCHAR
+      size: 20
+    feccomretltf: 
+      type: DATE
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  opbenefi: 
+    cedrif: 
+      type: VARCHAR
+      size: 15
+      required: true
+      #primaryKey: true
+    nomben: 
+      type: VARCHAR
+      size: 250
+      required: true
+    dirben: 
+      type: VARCHAR
+      size: 100
+    telben: 
+      type: VARCHAR
+      size: 20
+    codcta: 
+      type: VARCHAR
+      size: 32
+    nitben: 
+      type: VARCHAR
+      size: 15
+    codtipben: 
+      type: VARCHAR
+      size: 3
+    tipper: 
+      type: VARCHAR
+      size: 1
+    nacionalidad: 
+      type: VARCHAR
+      size: 1
+    residente: 
+      type: VARCHAR
+      size: 1
+    constituida: 
+      type: VARCHAR
+      size: 1
+    codord: 
+      type: VARCHAR
+      size: 32
+    codpercon: 
+      type: VARCHAR
+      size: 32
+    codordadi: 
+      type: VARCHAR
+      size: 32
+    codperconadi: 
+      type: VARCHAR
+      size: 32
+    codordcontra: 
+      type: VARCHAR
+      size: 32
+    codpercontra: 
+      type: VARCHAR
+      size: 32
+    temcedrif: 
+      type: VARCHAR
+      size: 15
+    codctasec: 
+      type: VARCHAR
+      size: 32
+    codctacajchi: 
+      type: VARCHAR
+      size: 32
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  opretord: 
+    numord: 
+      type: VARCHAR
+      size: 8
+      required: true
+    codtip: 
+      type: VARCHAR
+      size: 3
+      required: true
+    monret: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    codpre: 
+      type: VARCHAR
+      size: 32
+      required: true
+    numret: 
+      type: VARCHAR
+      size: 8
+    refere: 
+      type: VARCHAR
+      size: 8
+    correl: 
+      type: NUMERIC
+      size: 3
+    monbas: 
       type: NUMERIC
       size: 14
       scale: 2
@@ -522,3 +1197,4 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+      
