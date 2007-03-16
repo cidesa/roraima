@@ -102,7 +102,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('opordpag[ctapag]', __($labels['opordpag{ctapag}']), '') ?>
+  <?php echo label_for('opordpag[ctapag]', __($labels['opordpag{ctapag}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{ctapag}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{ctapag}')): ?>
     <?php echo form_error('opordpag{ctapag}', array('class' => 'form-error-msg')) ?>
@@ -116,7 +116,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('opordpag[coduni]', __($labels['opordpag{coduni}']), '') ?>
+  <?php echo label_for('opordpag[coduni]', __($labels['opordpag{coduni}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{coduni}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{coduni}')): ?>
     <?php echo form_error('opordpag{coduni}', array('class' => 'form-error-msg')) ?>
@@ -130,7 +130,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('opordpag[obsord]', __($labels['opordpag{obsord}']), '') ?>
+  <?php echo label_for('opordpag[obsord]', __($labels['opordpag{obsord}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{obsord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{obsord}')): ?>
     <?php echo form_error('opordpag{obsord}', array('class' => 'form-error-msg')) ?>
@@ -145,6 +145,7 @@
 
 </fieldset>
 
+<div class="grid01" id="grid01">
 <fieldset>
 <legend>Imputaciones Presupuestarias</legend>
 <table border="0" class="sf_admin_list">
@@ -170,8 +171,51 @@ foreach ($imppre as $k=>$fila) {
 <? }
   }
 ?></table>
-
 </fieldset>
+</div>
+
+
+<? if(count($ret)>0) { ?>
+<div class="grid01" id="grid01">
+<fieldset>
+<legend>Retenciones</legend>
+<table border="0" class="sf_admin_list">
+<? 
+$titulo2=array(0 => 'Nro. Orden', 1 => 'Tipo', 2 => 'Descripcion', 3 => 'Monto Descuento', 4 => 'Monto');
+
+if (count($ret)>0){
+$i=0;
+foreach ($ret as $k=>$fila) {
+    $i++;
+    if($i==1){?>
+      <thead><tr>
+    <? foreach ($fila as $key => $value){?>
+        <th><?=$titulo2[$key]?></th>
+    <? }?>
+      </tr> </thead>
+    <? }?>
+<tr>
+<? foreach ($fila as $key => $value){?>
+    <td><?=$value?></td>
+<? }?>
+</tr>
+<? }
+  }
+?></table>
+</fieldset>
+</div>
+<? }?>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -744,6 +788,21 @@ foreach ($imppre as $k=>$fila) {
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </fieldset>
 

@@ -27,11 +27,34 @@ class pagemiordActions extends autopagemiordActions
         $this->rs=$resultado;
         return $this->rs;
     }
+    
+    public function retSQL()    
+    {
+        $con2 = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+        $sql2 = "SELECT a.numord, b.codtip, c.destip, b.monret 
+		FROM opordpag a, opretord b, optipret c  
+		where a.numord ='".($this->opordpag->getNumord())."'
+		and a.numord=b.numord
+		and b.codtip=c.codtip";
+        $stmt2 = $con2->createStatement();
+        $stmt2->setLimit(5000);
+        $rs2 = $stmt2->executeQuery($sql2, ResultSet::FETCHMODE_NUM);
+        $resultado2=array();
+        //aqui lleno el array con los resultados:
+           while ($rs2->next())
+             {
+                $resultado2[]=$rs2->getRow();
+             }
+        //y la envio al template:
+        $this->rs2=$resultado2;
+        return $this->rs2;
+    }
 	
   public function executeEdit()
   {
     $this->opordpag = $this->getOpordpagOrCreate();
     $this->imppre = $this->imppreSQL();
+    $this->ret = $this->retSQL();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {

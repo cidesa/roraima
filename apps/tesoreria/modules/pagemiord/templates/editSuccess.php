@@ -18,7 +18,7 @@ array()) ?></h1>
 <div id="sf_admin_content">
 <?php include_partial('pagemiord/edit_messages', array('opordpag' => $opordpag, 'labels' => $labels)) ?>
 <?php include_partial('pagemiord/edit_form', array('opordpag' => $opordpag,
- 'labels' => $labels, 'imppre' => $imppre)) ?>
+ 'labels' => $labels, 'imppre' => $imppre, 'ret' => $ret)) ?>
 </div>
 
 <div id="sf_admin_footer">

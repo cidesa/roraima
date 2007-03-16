@@ -5,9 +5,9 @@ generator:
     theme:            default
 
     fields:
-      numord:     { name: Referencia }
+      numord:     { name: Referencia, params: maxlength = 8,size = 12 }
       fecemi:     { name: Fecha, params: date_format=dd/MM/yyyy }
-      tipcau:     { name: Tipo }
+      tipcau:     { name: Tipo, params: maxlength = 4,size = 5 }
       desord:     { name: Concepto }
       monord:     { name: Monto }
       cedrif:     { name: C.I o R.I.F }
@@ -19,12 +19,12 @@ generator:
     list:
       title:          Orden de Pago
       display:        [numord, fecemi, tipcau, desord, cedrif]
-      filters:        [codcon, codnom, codtip]
+      filters:        [numord, fecemi, tipcau]
       max_per_page:   10
       object_actions:
         _edit:        ~
         _delete:      ~
 
     edit:
-      title:          Modificar orden de Pago
+      title:          Modificar Orden de Pago
       

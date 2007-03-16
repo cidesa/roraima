@@ -9,8 +9,8 @@ generator:
       nomcue:     { name: Nombre del Banco }
       tipcue:     { name: Tipo de Cuenta }
       codcta:     { name: Cuenta Contable }
-      fecreg:     { name: Fecha, params: date_format=dd/MM/yyyy }
-      fecven:     { name: Fecha de Vencimiento }  
+      fecreg:     { name: Fecha de Registro, params: date_format=dd/MM/yyyy }
+      fecven:     { name: Fecha de Vencimiento }
       fecper:     { name: Fecha de Periodo }
       fecape:     { name: Fecha de Apertura }
       renaut:     { name: Renovacion Automatica }
