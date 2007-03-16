@@ -1,5 +1,5 @@
 ---
-propel:
+sima_user:
   _attributes: { noXsd: false, defaultIdMethod: none, package: lib.model }
   apli_user: 
     codapl: 
@@ -22,7 +22,7 @@ propel:
       size: 2
     id:
   empresa: 
-    _attributes: { phpName: sdfa }
+    _attributes: { phpName: EmpresaUser }
     codemp: 
       type: VARCHAR
       size: 3

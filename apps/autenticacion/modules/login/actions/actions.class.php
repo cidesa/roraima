@@ -29,7 +29,7 @@ class loginActions extends sfActions
 	}
 	
 	$c = new Criteria();
-	$lista_emp = EmpresaPeer::doSelect($c);
+	$lista_emp = EmpresaUserPeer::doSelect($c);
 	
 	$this->empresas = array();
 	
