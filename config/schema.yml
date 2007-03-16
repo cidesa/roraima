@@ -1197,4 +1197,57 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  cadphartser: 
+    dphart: 
+      type: VARCHAR
+      size: 8
+      required: true
+      #primaryKey: true
+    fecdph: 
+      type: DATE
+      required: true
+    reqart: 
+      type: VARCHAR
+      size: 8
+      required: true
+    desdph: 
+      type: VARCHAR
+      size: 255
+    codori: 
+      type: VARCHAR
+      size: 16
+    stadph: 
+      type: VARCHAR
+      size: 1
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  caartdphser: 
+    dphart: 
+      type: VARCHAR
+      size: 8
+      required: true
+    codart: 
+      type: VARCHAR
+      size: 20
+      required: true
+    codcat: 
+      type: VARCHAR
+      size: 16
+      required: true
+    fecrea: 
+      type: DATE
+      required: true
+    nomemp: 
+      type: VARCHAR
+      size: 100
+    dphobs: 
+      type: VARCHAR
+      size: 255
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      
       
