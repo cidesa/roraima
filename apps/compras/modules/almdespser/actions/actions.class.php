@@ -10,6 +10,26 @@
  */
 class almdespserActions extends autoalmdespserActions
 {
+	public function executeSQL()
+	{
+		//Funcion que ejecuta sql
+		$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+		$sql = "SELECT dphart, codart,codcat,to_char(fecrea,'dd/mm/yyyy'),nomemp,dphobs FROM caartdphser where dphart ='".$this->cadphartser->getDphart()."'";
+		$stmt = $con->createStatement();
+		$stmt->setLimit(50000);
+		$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+		$resultado=array();
+		//aqui lleno el array con los resultados:
+		while ($rs->next())
+		{
+			$resultado[]=$rs->getRow();
+		}
+		//y la envio al template:
+		$this->rs=$resultado;
+		return $this->rs;
+	}
+	
+	
 	public function getdesreq()
 	{
 		$c = new Criteria;
@@ -83,6 +103,7 @@ class almdespserActions extends autoalmdespserActions
 	{
 		$this->cadphartser = $this->getCadphartserOrCreate();
 	    $this->desreq = $this->getdesreq();
+	    $this->rs = $this->executeSQL();
 	    
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{

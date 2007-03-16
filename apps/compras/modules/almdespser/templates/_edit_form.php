@@ -10,111 +10,109 @@
 
 <?php echo object_input_hidden_tag($cadphartser, 'getId') ?>
 
-<fieldset id="sf_fieldset_none" class="">
 
-<div class="form-row">
-  <?php echo label_for('cadphartser[dphart]', __($labels['cadphartser{dphart}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('cadphartser{dphart}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cadphartser{dphart}')): ?>
-    <?php echo form_error('cadphartser{dphart}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($cadphartser, 'getDphart', array (
+<fieldset id="sf_fieldset_none" class=""><legend> Prestacion de Servicio</legend>
+<div class="form-row"><?php echo label_for('cadphartser[dphart]', __($labels['cadphartser{dphart}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('cadphartser{dphart}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('cadphartser{dphart}')): ?> <?php echo form_error('cadphartser{dphart}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($cadphartser, 'getDphart', array (
   'size' => 20,
   'control_name' => 'cadphartser[dphart]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-<?php echo label_for('cadphartser[desdph]', __($labels['cadphartser{desdph}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('cadphartser{desdph}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cadphartser{desdph}')): ?>
-    <?php echo form_error('cadphartser{desdph}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($cadphartser, 'getDesdph', array (
+<div class="form-row"><?php echo label_for('cadphartser[desdph]', __($labels['cadphartser{desdph}']), 'class="required"') ?>
+<div
+	class="content<?php if ($sf_request->hasError('cadphartser{desdph}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('cadphartser{desdph}')): ?> <?php echo form_error('cadphartser{desdph}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($cadphartser, 'getDesdph', array (
   'size' => 80,
   'control_name' => 'cadphartser[desdph]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('cadphartser[reqart]', __($labels['cadphartser{reqart}']), 'class="required" ') ?>
+<div class="form-row"><?php echo label_for('cadphartser[reqart]', __($labels['cadphartser{reqart}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('cadphartser{reqart}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('cadphartser{reqart}')): ?> <?php echo form_error('cadphartser{reqart}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_tag($cadphartser, 'getReqart', array (
   'size' => 20,
   'control_name' => 'cadphartser[reqart]',
-  )); echo $value ? $value : '&nbsp;' ?> 
-</div>
+  )); echo $value ? $value : '&nbsp;' ?></div>
 <br>
-<?php echo label_for('nombre', 'Nombre', 'class="required" '); ?>
-<?php if (isset($desreq)): ?> 
-<?php echo input_tag('desreq',$desreq,'size=80,disabled=true'); ?>
-<?php endif; ?>
+<?php echo label_for('nombre', 'Nombre', 'class="required" '); ?> <?php if (isset($desreq)): ?>
+<?php echo input_tag('desreq',$desreq,'size=80,disabled=true'); ?> <?php endif; ?>
 
 
 </div>
 
-<div class="form-row">
-  <?php echo label_for('cadphartser[fecdph]', __($labels['cadphartser{fecdph}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('cadphartser{fecdph}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cadphartser{fecdph}')): ?>
-    <?php echo form_error('cadphartser{fecdph}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_date_tag($cadphartser, 'getFecdph', array (
+<div class="form-row"><?php echo label_for('cadphartser[fecdph]', __($labels['cadphartser{fecdph}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('cadphartser{fecdph}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('cadphartser{fecdph}')): ?> <?php echo form_error('cadphartser{fecdph}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_date_tag($cadphartser, 'getFecdph', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'cadphartser[fecdph]',
   'date_format' => 'dd/MM/yyyy',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-<?php echo label_for('cadphartser[codori]', __($labels['cadphartser{codori}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('cadphartser{codori}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cadphartser{codori}')): ?>
-    <?php echo form_error('cadphartser{codori}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($cadphartser, 'getCodori', array (
+<div class="form-row"><?php echo label_for('cadphartser[codori]', __($labels['cadphartser{codori}']), 'class="required"') ?>
+<div
+	class="content<?php if ($sf_request->hasError('cadphartser{codori}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('cadphartser{codori}')): ?> <?php echo form_error('cadphartser{codori}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($cadphartser, 'getCodori', array (
   'size' => 20,
   'control_name' => 'cadphartser[codori]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-<?php echo label_for('cadphartser[stadph]', __($labels['cadphartser{stadph}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('cadphartser{stadph}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cadphartser{stadph}')): ?>
-    <?php echo form_error('cadphartser{stadph}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($cadphartser, 'getStadph', array (
-  'size' => 20,
-  'control_name' => 'cadphartser[stadph]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
 </fieldset>
+
+
+<div class="grid01" id="grid01">
+<fieldset>
+<legend>Detalles del Servicio</legend>
+<table border="0" class="sf_admin_list">
+<?
+$titulo=array(0 => 'Codigo del Servicio', 1 => 'Descripcion', 2 => 'Cod.Unidad', 3 => 'Fecha Realizado', 4 => 'Nombre Empleado', 5 => 'Observacion');
+if ( count($rs)>0){
+	$i=0;
+	foreach ($rs as $k=>$fila) {
+		$i++;
+		if($i==1){?>
+	<thead>
+		<tr>
+		<? foreach ($fila as $key => $value){?>
+			<th><?=$titulo[$key]?></th>
+			<? }?>
+		</tr>
+	</thead>
+	<? }?>
+	<tr>
+	<? foreach ($fila as $key => $value){?>
+		<td><?=$value?></td>
+		<? }?>
+	</tr>
+	<? }
+}
+?>
+</table>
+</fieldset>
+</div>
+
+
 
 <?php include_partial('edit_actions', array('cadphartser' => $cadphartser)) ?>
 
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($cadphartser->getId()): ?>
-<?php echo button_to(__('delete'), 'almdespser/delete?id='.$cadphartser->getId(), array (
+	<li class="float-left"><?php if ($cadphartser->getId()): ?> <?php echo button_to(__('delete'), 'almdespser/delete?id='.$cadphartser->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
   'class' => 'sf_admin_action_delete',
-)) ?><?php endif; ?>
-</li>
-  </ul>
+)) ?><?php endif; ?></li>
+</ul>

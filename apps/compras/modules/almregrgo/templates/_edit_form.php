@@ -10,7 +10,6 @@
 
 <?php echo object_input_hidden_tag($carecarg, 'getId') ?>
 
-<fieldset id="sf_fieldset_none" class="">
 
 <fieldset id="sf_fieldset_none" class="">
 <legend> Datos del Recargo</legend>
@@ -112,7 +111,7 @@
 <?php endif; ?>
 
 </div>
-</fieldset>
+
 </fieldset>
 
 <?php include_partial('edit_actions', array('carecarg' => $carecarg)) ?>
