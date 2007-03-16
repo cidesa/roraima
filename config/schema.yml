@@ -378,7 +378,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      primaryKey: true
+      #primaryKey: true
     nomrgo: 
       type: VARCHAR
       size: 100
