@@ -83,6 +83,7 @@
     </div>
 </div>
 <table border="0" class="sf_admin_list">
+<?php $nombre=array(0 => 'Fecha de Inventario:', 1 => 'Almacen',2 => 'Articulo Desde:', 3 => 'Articulo Hasta'); ?>
 <? if ( count($rs)>0){
 $i=0;
 foreach ($rs as $k=>$fila) {
@@ -90,7 +91,7 @@ foreach ($rs as $k=>$fila) {
     if($i==1){?>
       <thead><tr>
     <? foreach ($fila as $key => $value){?>
-        <th><?=$key?></th>
+        <th><?=$nombre[$key]?></th>
     <? }?>
       </tr> </thead>
     <? }?>

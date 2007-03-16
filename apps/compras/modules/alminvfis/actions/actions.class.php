@@ -16,7 +16,7 @@ class alminvfisActions extends autoalminvfisActions
     	//Funcion que ejecuta sql
         $con =
         sfContext::getInstance()->getDatabaseConnection($connection='propel');
-        $sql = "SELECT * FROM cainvfis where codalm ='".$this->cainvfis->getCodalm()."'";
+        $sql = "SELECT fecinv, codalm, codart, codart FROM cainvfis where codalm ='".$this->cainvfis->getCodalm()."'";
         $stmt = $con->createStatement();
         $stmt->setLimit(50000);
         $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);

@@ -1,0 +1,12 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caordcom
+    theme:            default
+    list:
+      title:          Ordenes de Compra
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      filters:        [ordcom]
+      max_per_page:   5    

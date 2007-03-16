@@ -6,7 +6,7 @@ generator:
     fields:
       fecinv:      { name : Fecha de Inventario }
       codalm:      { name : Almacen }    
-      codart:      { name : Articulo Desdde }
+      codart:      { name : Articulo Desde }
       codart:      { name : Articulo Hasta }    
 
     list:
