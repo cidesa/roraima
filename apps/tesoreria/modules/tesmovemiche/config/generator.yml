@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tscheemi
+    theme:            default
+    fields:
+      tipdoc: { name: Tipo de Documento, params: maxlength=4}       
+      numche: { name: Numero de Cheque, params: maxlength=20}
+      numcue: { name: Cuenta Bancaria, params: maxlength=15}
+      cedrif: { name: C.I. o Rif Beneficiario, params: maxlength=20}
+      fecemi: { name: Fecha de Emision, params: date_format='dd/MM/yyyy'}
+      monche: { name: Monto del Cheque}
+    list:
+      title:          Emision de Cheques
+      filters:        [numche, numcue, cedrif]
+      display:        [=numche, numcue, cedrif, fecemi]
+      max_per_page:	  8
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edicion Emision de Cheques
