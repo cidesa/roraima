@@ -255,40 +255,122 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-  weblog_post:
-    _attributes: { phpName: Post }
-    id:
+  empresa: 
+    codemp: 
+      type: VARCHAR
+      size: 3
+      required: true
+      primaryKey: true
+    nomemp: 
+      type: VARCHAR
+      size: 250
+      required: true
+    diremp: 
+      type: VARCHAR
+      size: 50
+      required: true
+    tlfemp: 
+      type: VARCHAR
+      size: 15
+      required: true
+    ciuemp: 
+      type: VARCHAR
+      size: 50
+    urlemp: 
+      type: VARCHAR
+      size: 100
+    faxemp: 
+      type: VARCHAR
+      size: 15
+    codpos: 
+      type: VARCHAR
+      size: 15
+    gobedo: 
+      type: VARCHAR
+      size: 100
+    conedo: 
+      type: VARCHAR
+      size: 100
+    cleedo: 
+      type: VARCHAR
+      size: 100
+    dirpre: 
+      type: VARCHAR
+      size: 100
+    munemp: 
+      type: VARCHAR
+      size: 50
+    cieedo: 
+      type: VARCHAR
+      size: 100
+    codctagas: 
+      type: VARCHAR
+      size: 32
+    codctaban: 
+      type: VARCHAR
+      size: 32
+    codctaret: 
+      type: VARCHAR
+      size: 32
+    codctaben: 
+      type: VARCHAR
+      size: 32
+    codctaart: 
+      type: VARCHAR
+      size: 32
+    codctagashas: 
+      type: VARCHAR
+      size: 32
+    codctabanhas: 
+      type: VARCHAR
+      size: 32
+    codctarethas: 
+      type: VARCHAR
+      size: 32
+    codctabenhas: 
+      type: VARCHAR
+      size: 32
+    codctaarthas: 
+      type: VARCHAR
+      size: 32
+    codctapageje: 
+      type: VARCHAR
+      size: 32
+    codctaingdevn: 
+      type: VARCHAR
+      size: 32
+    codctaingdev: 
+      type: VARCHAR
+      size: 32
+    diradm: 
+      type: VARCHAR
+      size: 100
+    dirfin: 
+      type: VARCHAR
+      size: 100
+    dirper: 
+      type: VARCHAR
+      size: 100
+    dirgen: 
+      type: VARCHAR
+      size: 100
+    anapre: 
+      type: VARCHAR
+      size: 100
+    anaper: 
+      type: VARCHAR
+      size: 100
+    anaadm: 
+      type: VARCHAR
+      size: 100
+    edoemp: 
+      type: VARCHAR
+      size: 100
+    encabezado: 
+      type: VARCHAR
+      size: 250
+    id: 
       type: INTEGER
       required: true
       autoIncrement: true
-    title:
-      type: VARCHAR
-      size: 255
-    excerpt:
-      type: VARCHAR
-      size: 255
-    body:
-      type: VARCHAR
-      size: 255
-    created_at:      
-  weblog_comment:
-    _attributes: { phpName: Comment }
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
-    post_id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
-    author:
-      type: VARCHAR
-      size: 255
-    email:
-      type: VARCHAR
-      size: 255
-    body:
-      type: VARCHAR
-      size: 255
-    created_at:
-    
+      
