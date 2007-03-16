@@ -22,6 +22,12 @@
 'disabled' => true,
 'control_name' => 'cadefart[codemp]',
 )); echo $value ? $value : '&nbsp;' ?></div>
+
+<?php echo button_to('...','#')?> 
+<?php if (isset($nomemp)): ?>
+	<?php echo input_tag('nomemp',$nomemp,'size=50,disabled=true'); ?>
+<?php endif; ?>
+
 </div>
 </fieldset>
 </div>
@@ -106,15 +112,7 @@
 
 
 
-<div class="form-row"><?php echo label_for('cadefart[cordes]', __($labels['cadefart{cordes}']), 'class="required"') ?>
-<div
-	class="content<?php if ($sf_request->hasError('cadefart{cordes}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('cadefart{cordes}')): ?> <?php echo form_error('cadefart{cordes}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCordes', array (
-'size' => 20,
-'control_name' => 'cadefart[cordes]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
+
 
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class=""><legend>Integracion</legend>
@@ -434,7 +432,17 @@ if ($cadefart->getasiparrec()=='P'){
 )); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
+</div>
 
+
+<div class="form-row"><?php echo label_for('cadefart[cordes]', __($labels['cadefart{cordes}']), 'class="required"') ?>
+<div
+	class="content<?php if ($sf_request->hasError('cadefart{cordes}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('cadefart{cordes}')): ?> <?php echo form_error('cadefart{cordes}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($cadefart, 'getCordes', array (
+'size' => 20,
+'control_name' => 'cadefart[cordes]',
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
 </fieldset>

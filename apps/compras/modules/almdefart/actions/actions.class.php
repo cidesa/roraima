@@ -10,6 +10,19 @@
  */
 class almdefartActions extends autoalmdefartActions
 {
+	public function getnomemp()
+	{
+		$c = new Criteria;
+		$this->campo = $this->cadefart->getcodemp();
+		$c->add(ContabbPeer::CODEMP, $this->campo);
+  	  $this->nomcu = ContabbPeer::doSelect($c);
+	  if ($this->nomcu)
+	  	return $this->nomcu[0]->getDescta();
+	  else 
+	    return ' ';
+  }	
+	
+	
 	protected function updateCadefartFromRequest()
 	{
 		$cadefart = $this->getRequestParameter('cadefart');
