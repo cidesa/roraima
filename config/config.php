@@ -1,7 +1,7 @@
 <?php
 
-$so = 'Windows';
-//$so = 'Linux';
+//$so = 'Windows';
+$so = 'Linux';
 
 if($so == 'Linux')
 {

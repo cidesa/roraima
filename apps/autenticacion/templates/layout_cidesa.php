@@ -2,16 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
 
-<title></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<LINK media=all href="../../css/base.css" type=text/css rel=stylesheet>
-<link href="../../css/siga.css" rel="stylesheet" type="text/css">
-
 <?php include_http_metas() ?>
 <?php include_metas() ?>
 <?php use_helper('Javascript') ?>
 
 <?php include_title() ?>
+
+<LINK media=all href="../../css/base.css" type=text/css rel=stylesheet>
+<link href="../../css/siga.css" rel="stylesheet" type="text/css">
+
 
 <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -54,8 +53,9 @@
           </tr>
           <tr> 
             <td align="CENTER">Elaborado por Cidesa.<BR>
-              Todos Los derechos Resevados.<br>
-              Bajo el estandar de Licencia GPL - GNU/Linux.</td>
+            <?php echo image_tag('poweredbyphp.png','size=75x50'); ?> <BR>
+            Creado con PHP + Postgres
+						</td>
           </tr>
         </table>  </tr>
 </td>

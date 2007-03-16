@@ -2,18 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="es" lang="es">
 <head>
 
-<title></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-
-
-
-<link href="/css/main.css" rel="stylesheet" type="text/css">
-
-
 <?php include_http_metas() ?>
 <?php include_metas() ?>
 
 <?php include_title() ?>
+
+<link href="/css/main.css" rel="stylesheet" type="text/css">
 
 <link rel="shortcut icon" href="/favicon.ico" />
 
