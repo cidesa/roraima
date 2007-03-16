@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Careqartser
+    theme:            default
+
+    fields:
+      reqart: { name: Numero}
+      desreq: { name: Descripcion}
+      fecreq: { name: Fecha, params: date_format=dd/MM/yyyy}
+
+    list:
+      title:          Solicitud de Servicio
+      display:        [=reqart, desreq, fecreq]
+      filters:		  [reqart, desreq, fecreq]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Solicitud de Servicio      
+      display:        [reqart, desreq, fecreq, stareq]
+      fields:
+        #codrgo:      { params : maxlength=6 }	           
+        #fecreq: { params: date_format=dd/MM/yyyy}

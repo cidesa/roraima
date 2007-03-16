@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Carecarg
+    theme:            default
+
+    fields:
+      codrgo: { name: Codigo}
+      nomrgo: { name: Descripcion}
+      codpre: { name: Codigo}
+      tiprgo: { name: Tipo de Recargo}
+      monrgo: { name: Valor}      
+      codcta: { name: Codigo}
+
+    list:
+      title:          Registro del Recargo
+      display:        [=codrgo, nomrgo]
+      filters:		  [codrgo, nomrgo]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Registro del Recargos      
+      display:        [codrgo, nomrgo, codpre, tiprgo, monrgo, codcta]
+      fields:
+        #codrgo:      { params : maxlength=6 }	       

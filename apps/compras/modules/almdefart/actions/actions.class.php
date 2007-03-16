@@ -13,7 +13,7 @@ class almdefartActions extends autoalmdefartActions
 	public function getnomemp()
 	{
 		$c = new Criteria;
-		$this->campo = $this->cadefart->getcodemp();
+		$this->campo = $this->cadefart->getCodemp();
 		$c->add(EmpresaPeer::CODEMP, $this->campo);
 		$this->nomemp = EmpresaPeer::doSelect($c);
 		if ($this->nomemp)
