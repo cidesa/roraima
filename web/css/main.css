@@ -25,3 +25,11 @@ body
 {
   padding: 20px;
 }
+
+.grid01 {
+	color: #00000;
+	width: 575px;
+	height: 192px;
+	overflow:scroll;
+	background-color: #FFFFFF;
+}

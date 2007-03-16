@@ -1,7 +1,7 @@
-#all:
-#  default_culture:     en
-#  source:              XLIFF
-#  debug:               off
-#  cache:               on
-#  untranslated_prefix: "[T]"
-#  untranslated_suffix: "[/T]"
+all:
+  default_culture:     es
+  source:              XLIFF
+  debug:               off
+  cache:               on
+  untranslated_prefix: "[T]"
+  untranslated_suffix: "[/T]"
