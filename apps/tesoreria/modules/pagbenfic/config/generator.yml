@@ -1,0 +1,38 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Opbenefi
+    theme:            default
+
+    fields:
+      cedrif:        { name: C.I o R.I.F }
+      nomben:        { name: Nombre }
+      nitben:        { name: N.I.T }
+      tipper:        { name: Tipo de Persona }
+      nacionalidad:  { name: Nacionalidad }
+      residente:     { name: Residente }  
+      constituida:   { name: Constituida }
+      codcta:        { name: Cuenta Contable }
+      dirben:        { name: Direccion }
+      telben:        { name: Telefono }
+      codcta:        { name: Codigo Contable }
+      codord:        { name: Cuenta de Orden }
+      codpercon:     { name: Cuenta Percontra }
+      codtipben:     { name: Tipo de Beneficiario }
+      codctasec:     { name: Cuenta Contable }
+      codordadi:     { name: Cuenta de Orden }
+      codperconadi:  { name: Cuenta Percontra }
+      codctacajchi:  { name: Cta. Caja Chica }
+      
+    list:
+      title:          Beneficiarios
+      display:        [cedrif, nomben, tipper, telben, nacionalidad, codcta]
+      filters:        [cedrif, nomben]
+      max_per_page:   10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Modificar Beneficiarios
+    
