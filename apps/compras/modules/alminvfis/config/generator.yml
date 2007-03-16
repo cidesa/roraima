@@ -1,0 +1,23 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cainvfis
+    theme:            default
+    fields:
+      fecinv:      { name : Fecha de Inventario }
+      codalm:      { name : Almacen }    
+      codart:      { name : Articulo Desdde }
+      codart:      { name : Articulo Hasta }    
+
+    list:
+      title:          Proyectos
+      display:        [=fecinv, codalm]    
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      filters:        [fecinv, codalm, codart, codart]
+      max_per_page:   5    
+    edit:
+      title:          Proyectos
+      display:
+    

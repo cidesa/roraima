@@ -19,7 +19,7 @@ class almtipproActions extends autoalmtipproActions
 	  if ($this->nomcu)
 	  	return $this->nomcu[0]->getDescta();
 	  else 
-	    return ' ';
+	    return '<!Registro no Encontrado o vacio!> ';
   }
   public function getDes_ctaper()
   {
@@ -30,7 +30,7 @@ class almtipproActions extends autoalmtipproActions
 	  if ($this->nomcu)
 	  	return $this->nomcu[0]->getDescta();
 	  else 
-	    return ' ';	  
+	    return '<!Registro no Encontrado o vacio!> ';
   }  
 
 

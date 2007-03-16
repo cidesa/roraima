@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Catraalm
+    theme:            default
+    fields:
+      codtra:  {  name: Número}
+      fectra:  {  name: Fecha, params: date_format='dd/MM/yyyy'}
+      destra:  {  name: Descripción}
+      almori:  {  name: Almacen Origen}      
+      almdes:  {  name: Almacen Destino}   
+      
+    list:
+      title:          Traspaso de Artículos
+      display:        [=codtra, fectra, destra, almori, almdes]     
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [codtra, fectra, destra, almori, almdes] 
+      max_per_page:   5
+    edit:
+      title:          Traspaso de Artículos
+      Editable:       [codtra, fectra, destra, almori, almdes] 
+
+
