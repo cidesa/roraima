@@ -4,7 +4,7 @@
 */
 
 var tree_tpl = {
-	'target'  : '_top',	// name of the frame links will be opened in
+	'target'  : '_top', // name of the frame links will be opened in
 							// other possible values are: _blank, _parent, _search, _self and _top
 
 	'icon_e'  : '/images/js/icons/empty.gif', // empty image
