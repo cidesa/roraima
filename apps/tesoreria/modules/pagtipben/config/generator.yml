@@ -11,6 +11,9 @@ generator:
       title:          Tipos de Beneficiario
       filters:        [codtipben, destipben]
       display:        [=codtipben, destipben]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
       
     edit:
       title:          Edicion de Tipos de Beneficiario

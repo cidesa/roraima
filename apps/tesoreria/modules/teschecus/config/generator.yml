@@ -1,0 +1,34 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tscheemi
+    theme:            default
+    fields:
+      numche: { name: Numero de Cheque}
+      numcue: { name: Numero de Cuenta}
+      cedrif: { name: Beneficiario}
+      fecemi: { name: Fecha de Emision}
+      monche: { name: Monto}
+      status: { name: Estado del Cheque}
+      fecent: { name: Fecha de entrega}
+      obsent: { name: Observacion}
+      nomrec: { name: Recibido por} 
+      
+        
+    list:
+      title:          Cheques en Custodia
+      filters:        [numche, fecemi]
+      display:        [=numche, cedrif, nomrec, fecemi]
+      fields:
+        fecemi: { params: date_format='dd/MM/yy' }
+        fecent: { params: date_format='dd/MM/yy' }
+        object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Cheques en Custodia
+      display:        [=numche, fecemi, monche, cedrif, numcue, status, fecent, obsent, nomrec]
+      fields:
+        fecemi: { params: date_format='dd/MM/yy' }
+        fecent: { params: date_format='dd/MM/yy' }       

@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsretiva
+    theme:            default
+    fields:
+      codret: { name: Codigo de Retencion}
+      codrec: { name: Codigo de Recargo}
+      codpar: { name: Codigo de Partida}
+      
+    list:
+      title:          Definicion del Iva para Agentes de Retencion
+      filters:        [codret, codrec]
+      display:        [=codret, codrec, codpar]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      
+    edit:
+      title:          Edicion del Iva para Agentes de Retencion
+      display:        [=codret, codrec, codpar]
+    

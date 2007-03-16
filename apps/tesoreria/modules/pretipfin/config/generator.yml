@@ -12,6 +12,9 @@ generator:
       title:          Tipos de Financiamiento
       filters:        [codfin]
       display:        [=codfin, nomext, nomabr]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
       
     edit:
       title:          Edicion de Tipos de Financiamiento

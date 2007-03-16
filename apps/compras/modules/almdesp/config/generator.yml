@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cadphart
+    theme:            default
+    fields:
+      dphart: { name: Numero}
+      fecdph: { name: Fecha}
+      codalm: { name: Codigo de Almacen}
+      reqart: { name: Refiere a Solicitud dde materiales}
+      desdph: { name: Descripcion}
+      codori: { name: Unidad de Origen}
+      mondph: { name: Monto Total}           
+        
+    list:
+      title:          Despachos
+      filters:        [dphart]
+      display:        [=dphart, desdph, fecdph]
+      fields:
+        fecdph: { params: date_format='dd/MM/yy' }       
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Despachos
+      display:       [=dphart, fecdph, codalm, reqart, desdph, codori, mondph]
+      fields:
+        fecdph: { params: date_format='dd/MM/yy' } 

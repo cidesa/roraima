@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Opretord
+    theme:            default
+    fields:
+      numord: { name: Referencia}
+      codtip: { name: Tipo de Orden}
+      monret: { name: Monto}
+      codpre: { name: Codigo Presupuestario}
+      
+    list:
+      title:          Monto de Retenciones por Orden
+      filters:        [numord]
+      display:        [=numord, codtip, monret, codpre]
+      object_actions:
+        _edit:        ~
+      max_per_page:   5
+              
+    edit:
+      title:          Actualizar Monto de Retenciones por Orden
+      display:        [=numord, codtip, monret, codpre]

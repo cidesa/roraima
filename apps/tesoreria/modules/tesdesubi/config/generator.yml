@@ -6,12 +6,16 @@ generator:
     fields:
       codubi: { name: Codigo de Ubicacion}
       desubi: { name: Descripcion de la Ubicacion}
-            
+        
     list:
       title:          Lista de Ubicacion
       filters:        [codubi, desubi]
       display:        [=codubi, desubi]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
       
     edit:
       title:          Edicion de Ubicacion
-      display:        [=codubi, desubi]
+      display:       
+        Editable:     [codubi, desubi]
