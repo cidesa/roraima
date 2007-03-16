@@ -405,7 +405,6 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-<<<<<<< .mine
   carecaud: 
     codrec: 
       type: VARCHAR
@@ -533,7 +532,6 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-=======
   tsretiva: 
     codret: 
       type: VARCHAR
@@ -1378,6 +1376,4 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-      
->>>>>>> .r82
       
