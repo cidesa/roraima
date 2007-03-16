@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Opordpag
+    theme:            default
+
+    fields:
+      numord:     { name: Referencia }
+      fecemi:     { name: Fecha, params: date_format=dd/MM/yyyy }
+      tipcau:     { name: Tipo }
+      desord:     { name: Concepto }
+      monord:     { name: Monto }
+      cedrif:     { name: C.I o R.I.F }
+      nomben:     { name: Beneficiario }
+      ctapag:     { name: Codigo Contable }
+      coduni:     { name: Unidad Origen }
+      obsord:     { name: Observaciones }
+      
+    list:
+      title:          Orden de Pago
+      display:        [numord, fecemi, tipcau, desord, cedrif]
+      filters:        [codcon, codnom, codtip]
+      max_per_page:   10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Modificar orden de Pago
+      
