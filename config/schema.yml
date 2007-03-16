@@ -373,4 +373,36 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  carecarg: 
+    codrgo: 
+      type: VARCHAR
+      size: 4
+      required: true
+      primaryKey: true
+    nomrgo: 
+      type: VARCHAR
+      size: 100
+    codpre: 
+      type: VARCHAR
+      size: 32
+      required: true
+    tiprgo: 
+      type: VARCHAR
+      size: 1
+      required: true
+    monrgo: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    calcul: 
+      type: VARCHAR
+      size: 1
+    codcta: 
+      type: VARCHAR
+      size: 32
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
       
