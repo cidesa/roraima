@@ -56,6 +56,9 @@
             <td height="42" colspan="4" align="CENTER"><!--DWLayoutEmptyCell-->&nbsp;</td>
           </tr>
           <tr>
+            <td height="11" colspan="4" align="CENTER"><hr /></td>
+          </tr>
+          <tr>
             <td height="25" colspan="4" align="CENTER"><strong>Elaborado por Cidesa.</strong></td>
           </tr>
           <tr> 
