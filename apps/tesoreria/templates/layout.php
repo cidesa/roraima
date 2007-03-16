@@ -9,7 +9,6 @@
 <?php include_title() ?>
 
 <link rel="shortcut icon" href="/favicon.ico" />
-
 </head>
 <body>
 <table width="100%" align="center"><!--DWLayoutTable-->
@@ -45,13 +44,42 @@
         <table width="100%" border="0" cellpadding="0" cellspacing="0" >
           <!--DWLayoutTable-->
           <tr> 
-            <td width="100%" height="56" ><?php echo $sf_data->getRaw('sf_content'); ?></td>
+            <td height="56" colspan="4" ><?php echo $sf_data->getRaw('sf_content'); ?></td>
+          </tr>
+          <tr>
+            <td colspan="4" align="CENTER"><!--DWLayoutEmptyCell-->&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan="4" align="CENTER"><!--DWLayoutEmptyCell-->&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="42" colspan="4" align="CENTER"><!--DWLayoutEmptyCell-->&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="25" colspan="4" align="CENTER"><strong>Elaborado por Cidesa.</strong></td>
           </tr>
           <tr> 
-            <td align="CENTER">Elaborado por Cidesa.<BR>
-            <?php echo image_tag('poweredbyphp.png','size=75x50'); ?> <BR>
-            Creado con PHP + Postgres
-						</td>
+            <td width="44%" height="24" align="right" valign="top">
+			<?php echo image_tag('php.jpg','size=50x26'); 		      
+             ?>
+            <BR></td>
+            <td width="6%" align="CENTER">
+			<?php 
+			      echo image_tag('firefox.jpg','size=40x34'); 
+                  
+             ?>			</td>
+            <td width="6%" align="CENTER">
+			<?php 
+                  echo image_tag('postgresql.jpg','size=27x28');
+                  
+             ?>			</td>
+            <td width="44%" align="left">
+			<?php 
+                  echo image_tag('symfony.png');
+             ?>			</td>
+          </tr>
+          <tr>
+            <td colspan="4" align="CENTER"><strong>Creado con PHP + Symfony + Postgres.</strong></td>
           </tr>
         </table>  </tr>
 </td>
