@@ -1,0 +1,94 @@
+<?php
+
+
+	
+class FordefegrgenMapBuilder {
+
+	
+	const CLASS_NAME = 'lib.model.map.FordefegrgenMapBuilder';	
+
+    
+    private $dbMap;
+
+	
+    public function isBuilt()
+    {
+        return ($this->dbMap !== null);
+    }
+
+	
+    public function getDatabaseMap()
+    {
+        return $this->dbMap;
+    }
+
+    
+    public function doBuild()
+    {
+		$this->dbMap = Propel::getDatabaseMap('propel');
+		
+		$tMap = $this->dbMap->addTable('fordefegrgen');
+		$tMap->setPhpName('Fordefegrgen');
+
+		$tMap->setUseIdGenerator(false);
+
+		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
+
+		$tMap->addColumn('NIVPROACC', 'Nivproacc', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('DESPROACC', 'Desproacc', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('HASPROACC', 'Hasproacc', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('LONPROACC', 'Lonproacc', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('FORPROACC', 'Forproacc', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('NIVACCESP', 'Nivaccesp', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('DESACCESP', 'Desaccesp', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('HASACCESP', 'Hasaccesp', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('LONACCESP', 'Lonaccesp', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('FORACCESP', 'Foraccesp', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('NIVSUBACCESP', 'Nivsubaccesp', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('DESSUBACCESP', 'Dessubaccesp', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('HASSUBACCESP', 'Hassubaccesp', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('LONSUBACCESP', 'Lonsubaccesp', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('FORSUBACCESP', 'Forsubaccesp', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('NIVUAE', 'Nivuae', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('DESUAE', 'Desuae', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('HASUAE', 'Hasuae', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('LONUAE', 'Lonuae', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('FORUAE', 'Foruae', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('COREST', 'Corest', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('CORSEC', 'Corsec', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('COREQU', 'Corequ', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('DESPAR', 'Despar', 'int', CreoleTypes::INTEGER, false);
+
+		$tMap->addColumn('HASPAR', 'Haspar', 'int', CreoleTypes::INTEGER, false);
+
+		$tMap->addColumn('LONPAR', 'Lonpar', 'int', CreoleTypes::INTEGER, false);
+
+		$tMap->addColumn('FORPAR', 'Forpar', 'int', CreoleTypes::INTEGER, false);
+
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
+				
+    } 
+} 
