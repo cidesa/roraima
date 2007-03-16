@@ -13,7 +13,7 @@ generator:
       cedrif:     { name: C.I o R.I.F }
       nomben:     { name: Beneficiario }
       ctapag:     { name: Codigo Contable }
-      coduni:     { name: Unidad Origen }
+      coduni:     { name: Unidad Origen, params: maxlength = 3,size = 5 }
       obsord:     { name: Observaciones }
       
     list:

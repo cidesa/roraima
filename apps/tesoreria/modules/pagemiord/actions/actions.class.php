@@ -28,7 +28,7 @@ class pagemiordActions extends autopagemiordActions
         return $this->rs;
     }
     
-    public function retSQL()    
+   public function retSQL()    
     {
         $con2 = sfContext::getInstance()->getDatabaseConnection($connection='propel');
         $sql2 = "SELECT a.numord, b.codtip, c.destip, b.monret 

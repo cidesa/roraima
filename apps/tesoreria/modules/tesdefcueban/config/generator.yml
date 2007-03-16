@@ -27,12 +27,11 @@ generator:
       valche:     { name: Validez del Cheque }
       concil:     { name: Conciliable }
       plazo:      { name: Plazo }
-      
-      
+
     list:
       title:          Definicion de Bancos
       display:        [numcue, nomcue, tipcue, codcta, fecreg, fecven]
-        
+
       filters:        [numcue]
       max_per_page:   10
       object_actions:

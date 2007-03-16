@@ -124,7 +124,7 @@
 
   <?php $value = object_input_tag($opordpag, 'getCoduni', array (
   'size' => 30,
-  'control_name' => 'opordpag[coduni]',
+  'control_name' => 'opordpag[coduni]', 'maxlength' => 3, 'size' => 5
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
