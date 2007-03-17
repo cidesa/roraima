@@ -41,8 +41,11 @@
   'control_name' => 'cadphartser[reqart]',
   )); echo $value ? $value : '&nbsp;' ?></div>
 <br>
-<?php echo label_for('nombre', 'Nombre', 'class="required" '); ?> <?php if (isset($desreq)): ?>
-<?php echo input_tag('desreq',$desreq,'size=80,disabled=true'); ?> <?php endif; ?>
+
+<?php echo label_for('nombre', 'Nombre', 'class="required" '); ?> 
+<?php if (isset($desreq)): ?>
+<?php echo input_tag('desreq',$desreq,'size=80,disabled=true'); ?> 
+<?php endif; ?>
 
 
 </div>
