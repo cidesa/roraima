@@ -13,7 +13,7 @@ generator:
       title:          Almacen
       display:        [=codalm, nomalm, codcat]
       filters:		  [codalm, nomalm, codcat]
-      max_per_page:	  6
+      max_per_page:	  10
       object_actions:
         _edit:        ~
         _delete:      ~
@@ -22,4 +22,4 @@ generator:
       title:          Edicion de Almacen
       display:        [codalm, nomalm, codcat]  
       fields:
-        codalm:      { params : maxlength=6 }	       
+        codalm:       { params : maxlength=6}

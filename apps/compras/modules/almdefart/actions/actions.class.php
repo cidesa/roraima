@@ -22,37 +22,37 @@ class almdefartActions extends autoalmdefartActions
 		return ' ';
 	}
 
- public function executeEdit()
- {
- 	$this->cadefart = $this->getCadefartOrCreate();
-    $this->nomemp = $this->getnomemp();
-
- 	if ($this->getRequest()->getMethod() == sfRequest::POST)
- 	{
- 		$this->updateCadefartFromRequest();
-
- 		$this->saveCadefart($this->cadefart);
-
- 		$this->setFlash('notice', 'Your modifications have been saved');
-
- 		if ($this->getRequestParameter('save_and_add'))
- 		{
- 			return $this->redirect('almdefart/create');
- 		}
- 		else if ($this->getRequestParameter('save_and_list'))
- 		{
- 			return $this->redirect('almdefart/list');
- 		}
- 		else
-      {
-        return $this->redirect('almdefart/edit?id='.$this->cadefart->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
-  }
+	 public function executeEdit()
+	 {
+	 	$this->cadefart = $this->getCadefartOrCreate();
+	    $this->nomemp = $this->getnomemp();
+	
+	 	if ($tSis->getRequest()->getMethod() == sfRequest::POST)
+	 	{
+	 		$this->updateCadefartFromRequest();
+	
+	 		$this->saveCadefart($this->cadefart);
+	
+	 		$this->setFlash('notice', 'Your modifications have been saved');
+	
+	 		if ($this->getRequestParameter('save_and_add'))
+	 		{
+	 			return $this->redirect('almdefart/create');
+	 		}
+	 		else if ($this->getRequestParameter('save_and_list'))
+	 		{
+	 			return $this->redirect('almdefart/list');
+	 		}
+	 		else
+	      {
+	        return $this->redirect('almdefart/edit?id='.$this->cadefart->getId());
+	      }
+	    }
+	    else
+	    {
+	      $this->labels = $this->getLabels();
+	    }
+	  }
 
    
   
