@@ -61,25 +61,25 @@
           <tr>
             <td height="25" colspan="4" align="CENTER"><strong>Elaborado por Cidesa.</strong></td>
           </tr>
-          <tr> 
-            <td width="44%" height="24" align="right" valign="top">
-			<?php echo image_tag('php.jpg','size=50x26'); 		      
-             ?>
-            <BR></td>
-            <td width="6%" align="center">
-			<?php 
-			      echo image_tag('firefox.jpg','size=40x34'); 
-                  
-             ?>			</td>
-            <td width="6%" align="center">
-			<?php 
-                  echo image_tag('postgresql.jpg','size=27x28');
-                  
-             ?>			</td>
-            <td width="44%" align="left">
-			<?php 
-                  echo image_tag('symfony.png');
-             ?>			</td>
+          <tr>
+ 			<td>
+ 				<table ALIGN="CENTER">
+ 					<tr>
+ 					    <td width="33%" align="center" valign="top">
+						<?php echo image_tag('php.jpg','size=50x26');?>
+			            </td>
+			            <td width="33%" align="center" valign="top">
+						<?php echo image_tag('firefox.jpg','size=40x34');?>
+						</td>
+			            <td width="33%" align="center" valign="top">
+			            <?php echo image_tag('postgresql.jpg','size=27x28');?>
+						</td>
+			            <td width="33%" align="center" valign="top">
+						<?php echo image_tag('symfony.png');?>
+						</td>
+ 					</tr>
+ 				</table>
+ 			</td>
           </tr>
           <tr>
             <td colspan="4" align="center"><strong>Creado con PHP + Symfony + Postgres.</strong></td>
