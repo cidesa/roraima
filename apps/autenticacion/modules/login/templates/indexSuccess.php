@@ -17,7 +17,7 @@
           </tr>
           <tr>
             <td class="form_label_01 Order tiny style16">&nbsp;<?php echo label_for('labelpasswd', 'Contraseña') ?></td>
-            <td><span style="font-family: &quot;Sans&quot;;"><?php echo input_tag('textpasswd','cidesa') ?></span><br>
+            <td><span style="font-family: &quot;Sans&quot;;"><?php echo input_password_tag('textpasswd','cidesa') ?></span><br>
             </td>
           </tr>
           <tr>
