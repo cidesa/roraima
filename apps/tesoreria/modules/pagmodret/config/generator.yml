@@ -1,22 +1,27 @@
 generator:
   class:              sfPropelAdminGenerator
   param:
-    model_class:      Opretord
+    model_class:      Opordpag
     theme:            default
     fields:
       numord: { name: Referencia}
-      codtip: { name: Tipo de Orden}
-      monret: { name: Monto}
-      codpre: { name: Codigo Presupuestario}
-      
+      fecemi: { name: Fecha}
+      desord: { name: Descripcion}
+      tipcau: { name: Tipo de Orden}      
+      cedrif: { name: Beneficiario}
+      nomben: { name: Nombre del Beneficiario}
+              
     list:
       title:          Monto de Retenciones por Orden
-      filters:        [numord]
-      display:        [=numord, codtip, monret, codpre]
-      object_actions:
+      filters:        [numord, fecemi]
+      display:        [=numord, desord]
+      fields:
+        fecemi: { params: date_format='dd/MM/yy' }
+        object_actions:
         _edit:        ~
-      max_per_page:   5
-              
+       max_per_page:   5
     edit:
-      title:          Actualizar Monto de Retenciones por Orden
-      display:        [=numord, codtip, monret, codpre]
+      title:          Actualizacion de Monto de Retenciones por Orden
+      display:        [=numord, fecemi, desord, tipcau, cedrif, nomben]
+      fields:
+        fecemi: { params: date_format='dd/MM/yy' }        
