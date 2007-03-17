@@ -124,12 +124,34 @@
 
 </fieldset>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend>Detalle del Despacho</legend>
+<div class="grid01" id="grid01">
+<fieldset>
+<legend>Detalles de Solicitud</legend>
+<table border="0" class="sf_admin_list">
+<? 
+$titulo=array(0 => 'Codigo del Articulo', 1 => 'Descripcion', 2 => 'Cod. unidad', 3 => 'Cant Desp', 4 => 'Cant no Desp', 5 => 'Cod. Unidad', 6 => 'U. Medida', 7 => 'Costo', 8 => 'Motivo');
 
-<strong>En Construccion</strong>
-
+if ( count($rs)>0){
+$i=0;
+foreach ($rs as $k=>$fila) {
+    $i++;
+    if($i==1){?>
+      <thead><tr>
+    <? foreach ($fila as $key => $value){?>
+        <th><?=$titulo[$key]?></th>
+    <? }?>
+      </tr> </thead>
+    <? }?>
+<tr>
+<? foreach ($fila as $key => $value){?>
+    <td><?=$value?></td>
+<? }?>
+</tr>
+<? }
+  }
+?></table>
 </fieldset>
+</div>
 
 <?php include_partial('edit_actions', array('cadphart' => $cadphart)) ?>
 

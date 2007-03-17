@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Casalalm
+    theme:            default
+    fields:
+      codsal: { name: Numero}
+      fecsal: { name: Fecha}
+      codalm: { name: Codigo de Almacen}
+      dessal: { name: Descripcion}
+      codpro: { name: C.I./R.I.F Proveedor}
+      monsal: { name: Total}
+      tipmov: { name: Tipo de Movimiento}           
+        
+    list:
+      title:          Salidas de Almacen
+      filters:        [codsal]
+      display:        [=codsal, dessal, codalm]
+      fields:
+        fecsal: { params: date_format='dd/MM/yy' }       
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Salidas de Almacen
+      display:       [=codsal, fecsal, codalm, codpro, dessal, tipmov, monsal]
+      fields:
+        fecsal: { params: date_format='dd/MM/yy' } 

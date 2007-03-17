@@ -46,12 +46,33 @@ public function getMostrar_Unidad()
 	    return ' ';
   }	
 	
+public function despacho()    
+    {
+        $con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+        $sql = "SELECT caartdph.codart, caregart.desart, caartdph.candph, caartdph.candev, caregart.unimed, caartdph.montot, caartdph.codfal FROM cadphart, caartdph,caregart where (caartdph.dphart ='".($this->cadphart->getDphart())."') AND (caartdph.codart=caregart.codart)";
+        $stmt = $con->createStatement();
+        $stmt->setLimit(5000);
+        $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+        $resultado=array();
+        //aqui lleno el array con los resultados:
+           while ($rs->next())
+             {
+                $resultado[]=$rs->getRow();
+             }
+        //y la envio al template:
+        $this->rs=$resultado;
+        return $this->rs;
+    }   
+  
+  
+  
 	public function executeEdit()
   {
     $this->cadphart = $this->getCadphartOrCreate();
     $this->almacen = $this->getMostrar_Almacen();
     $this->Requision = $this->getMostrar_Requisicion();
     $this->origen = $this->getMostrar_Unidad();
+    $this->rs = $this->despacho();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {

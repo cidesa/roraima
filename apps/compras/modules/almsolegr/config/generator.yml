@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Casolart
+    theme:            default
+    fields:
+      reqart: { name: Numero}
+      fecreq: { name: Fecha}
+      desreq: { name: Descripcion}
+      monreq: { name: Monto Total}
+      tipmon: { name: Moneda}
+      unires: { name: Unidad Responsable}
+      tipfin: { name: Financiamiento}           
+    list:
+      title:          Requisiciones por Dpto.(Solicitud de Egresos)
+      filters:        [reqart]
+      display:        [=reqart, desreq, tipfin]
+      fields:
+        fecreq: { params: date_format='dd/MM/yy' }       
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   5
+    edit:
+      title:         Edicion de Solicitud de Egresos
+      display:        [=reqart, fecreq, tipmon, desreq, unires, monreq, tipfin]
+      fields:
+        fecreq: { params: date_format='dd/MM/yy' } 

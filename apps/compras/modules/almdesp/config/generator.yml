@@ -7,7 +7,7 @@ generator:
       dphart: { name: Numero}
       fecdph: { name: Fecha}
       codalm: { name: Codigo de Almacen}
-      reqart: { name: Refiere a Solicitud dde materiales}
+      reqart: { name: Refiere a Solicitud de materiales}
       desdph: { name: Descripcion}
       codori: { name: Unidad de Origen}
       mondph: { name: Monto Total}           
