@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Careqart
+    theme:            default
+    fields:
+      regart:      { name : Número }
+      fecreq:      { name : Fecha }
+      desreq:      { name : Descripcion }
+      monreq:      { name : Monto }      
+      stareq:      { name : Estatus }
+      codcatreq:      { name : Unidad }
+    list:
+      title:          Requisiciones
+      display:        [=reqart, fecreq, desreq, monreq, stareq, codcatreq ]
+      filters:        [reqart, fecreq, desreq, monreq ]
+      max_per_page:	  5
+    edit:
+      title:          Edicion de Requisiciones
+      display:        [reqart, fecreq, desreq, monreq, codcatreq ]  
