@@ -21,4 +21,10 @@ class principalActions extends sfActions
   	
   }
   
+  public function executeMenu()
+  {
+  	
+  	
+  	
+  }
 }

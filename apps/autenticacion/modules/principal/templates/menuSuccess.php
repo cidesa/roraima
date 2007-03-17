@@ -25,7 +25,12 @@
   <tr>
     <td class="box02_lline"><span class="box02_tline"><?php echo image_tag('spacer.gif', 'size=1x200') ?></span></td>
     <td valign="top" bgcolor="#FFFFFF" class="intd">
-<?php echo javascript_tag("new tree (TREE_ITEMS_MAIN, tree_tpl);") ?>
+    <?php $menu = $sf_request->getParameter('m',''); ?>
+    <?php if($menu=='compras') { ?>
+	<?php echo javascript_tag("new tree (TREE_ITEMSCOM_ALM, tree_tpl);") ?>
+	<?php } elseif($menu=='tesoreria') { ?>
+	<?php echo javascript_tag("new tree (TREE_ITEMS_TER, tree_tpl);") ?>	
+	<?php } ?>
 	</td>
     <td class="box02_rline">&nbsp;</td>
   </tr>

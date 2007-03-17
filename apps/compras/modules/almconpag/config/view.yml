@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Cidesa - Compras - Definición Condiciones de Pago
+    robots:       index, follow
+    description:  Cidesa - Compras - Definición Condiciones de Pago
+    keywords:     cidesa, compras, definición, condiciones, pago
+    language:     es_VE
+
+  stylesheets:    [siga]
+
+  javascripts:    [ ]
+  
+  has_layout:     on
+  layout:         layout
+

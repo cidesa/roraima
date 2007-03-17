@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caconpag
+    theme:            default
+    fields:
+      codconpag:  {  name: Código }
+      desconpag:  {  name: Descripción }
+    list:
+      title:          Definición de Condiciones de Pago
+      display:        [=codconpag, desconpag]
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [codconpag, desconpag] 
+      max_per_page:   5
+    edit:
+      title:          Edición Definición de Condiciones de Pago
+      display:        [=codrec, desrec, limrec, canutr, codtiprec, observ]

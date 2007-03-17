@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Cidesa - Compras - Definición de Recaudos
+    robots:       index, follow
+    description:  Cidesa - Compras - Definición de Recaudos
+    keywords:     cidesa, compras, definición, condiciones, recaudos
+    language:     es_VE
+
+  stylesheets:    [siga]
+
+  javascripts:    [ ]
+  
+  has_layout:     on
+  layout:         layout
+

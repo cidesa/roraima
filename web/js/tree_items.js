@@ -151,8 +151,8 @@ var TREE_ITEMSCON = [
 
 var TREE_ITEMS_TER = [
 	['SIGA', null,
-		['Tesorería', null,
-			['Definiciones Específicas', null,
+		['Tesorer&iacute;a', null,
+			['Definiciones Espec&iacute;ficas', null,
 				['Empresa', Tesoreria+'pagdefemp'],
 				['Tipos de Cuentas Bancarias', Tesoreria+'tesdeftipcue'],
 				['Tipos de Movimientos Bancarios', Tesoreria+'tesdeftipmov'],
@@ -163,7 +163,7 @@ var TREE_ITEMS_TER = [
 				['Tipos de Beneficiario', Tesoreria+'pagtipben'],
 				['Beneficiarios', Tesoreria+'pagbenfic'],
 				['Asociacion Conceptos+Tipos de Retenciones', Tesoreria+'pagretcon'],
-				['Definición de Ubicación', Tesoreria+'tesdesubi'],
+				['Definici&iacute;n de Ubicaci&iacute;n', Tesoreria+'tesdesubi'],
 			],
 
 			['Ordenamiento de Pago', null,
@@ -178,14 +178,14 @@ var TREE_ITEMS_TER = [
 				['Movimientos según Bancos', Tesoreria+'tesmovsegbanant'],
 				['Movimientos según Bancos Años Anteriores', Tesoreria+'tesmovsegbanant'],
 				['Transferencias Bancarias', Tesoreria+'tesmovtraban'],
-				['Conciliación', Tesoreria+'tesmovconban'],
-				['Cierre de Período', Tesoreria+'tesmovcieban'],
+				['Conciliaci&oacute;n', Tesoreria+'tesmovconban'],
+				['Cierre de Per&iacute;odo', Tesoreria+'tesmovcieban'],
 			],
 			['Caja', null,
 				['Cheques en Custodia', Tesoreria+'teschecus'],
 			],
 			['Mantenimiento', null,
-				['Eliminar Movimiento segun Libros Anulados', 'mantenimiento+man_01.htm'],
+				['Eliminar Movimiento seg&uacute;n Libros Anulados', 'mantenimiento+man_01.htm'],
 				['Definir Formato de Archivo de Bancos', Tesoreria+'pagmodret'],
 			],
 		],
@@ -253,3 +253,12 @@ var TREE_ITEMSNOM = [
 		],
 	]
 ];
+
+
+var TREE_ITEMS_MAIN = [
+	['SIGA', null,
+		['Compras Y Almacen', 'principal/menu/m/compras'],
+		['Tesorer&iacute;a', 'principal/menu/m/tesoreria'],
+      ]
+	];
+

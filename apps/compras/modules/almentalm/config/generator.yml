@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caentalm
+    theme:            default
+    fields:
+      rcpart:  {  name: Número }
+      codalm:  {  name: Código Almacen }
+      codpro:  {  name: CI/RIF Proveedor }
+      tipmov:  {  name: Tipo Movimiento }
+      fecrcp:  {  name: Fecha }
+      monrcp:  {  name: Monto Total}
+    list:
+      title:   Entradas en el Almacen
+      display:        [=rcpart, codalm, codpro, monrcp, tipmov, fecrcp]
+      filters: [rcpart, codalm, fecrcp]
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      max_per_page:   5
+    edit:
+      title:   Editar Entradas en el Almacen
+      display:        [=rcpart, codalm, codpro, monrcp, tipmov, fecrcp]
+      
