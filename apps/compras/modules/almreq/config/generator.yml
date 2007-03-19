@@ -5,6 +5,7 @@ generator:
     theme:            default
     fields:
       regart:      { name : Número }
+      reqart:      { name : Numero }
       fecreq:      { name : Fecha }
       desreq:      { name : Descripcion }
       monreq:      { name : Monto }      
