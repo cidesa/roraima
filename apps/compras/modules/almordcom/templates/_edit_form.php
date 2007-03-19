@@ -19,6 +19,7 @@
     <?php echo form_error('caordcom{refcom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
+
   <?php $value = object_input_tag($caordcom, 'getRefcom', array (
   'size' => 20,
   'control_name' => 'caordcom[refcom]',
