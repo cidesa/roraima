@@ -164,10 +164,8 @@ var TREE_ITEMS_TER = [
 				['Definici&oacute;n de Ubicaci&oacute;n', Tesoreria+'tesdesubi'],
 				['Definici&oacute;n del Iva para Agentes de Retenci&oacute;n', Tesoreria+'pagretiva'],
 				['Definici&oacute;n de Cuentas Contables para Rendici&oacute;n de Gastos', Tesoreria+'tesdefrengas'],
-				['Definici&oacute;n de Reportes de Comprobantes de Retenci&oacute;n', Tesoreria+'pagrepret'],
-				['Definici&oacute;n del Iva para Agentes de Retenci&oacute;n', Tesoreria+'pagretiva'],
-				['Definici&oacute;n de Cuentas Contables para Rendici&oacute;n de Gastos', Tesoreria+'tesdefrengas'],
-				['Definici&oacute;n de Reportes de Comprobantes de Retenci&oacute;n', Tesoreria+'pagrepret'],
+				['Definici&oacute;n de Reportes de Comprobantes de Retenci&oacute;n', Tesoreria+'pagrepret'],							
+				
 			],
 
 			['Ordenamiento de Pago', null,
