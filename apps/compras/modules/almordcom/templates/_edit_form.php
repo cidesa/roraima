@@ -11,8 +11,9 @@
 <?php echo object_input_hidden_tag($caordcom, 'getOrdcom') ?>
 
 <fieldset id="sf_fieldset_none" class="">
+<legend>Datos de la Orden</legend>
 <div class="form-row">
-  <?php echo label_for('caordcom[refcom]', __($labels['caordcom{refcom}']), '') ?>
+  <?php echo label_for('caordcom[refcom]', __($labels['caordcom{refcom}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{refcom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{refcom}')): ?>
     <?php echo form_error('caordcom{refcom}', array('class' => 'form-error-msg')) ?>
@@ -22,10 +23,7 @@
   'size' => 20,
   'control_name' => 'caordcom[refcom]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-
-
+   </div>
   <?php echo label_for('caordcom[fecord]', __($labels['caordcom{fecord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{fecord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{fecord}')): ?>
@@ -37,9 +35,8 @@
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'caordcom[fecord]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-  <?php echo label_for('caordcom[tipmon]', __($labels['caordcom{tipmon}']), '') ?>
+   </div>
+  <?php echo label_for('caordcom[tipmon]', __($labels['caordcom{tipmon}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{tipmon}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{tipmon}')): ?>
     <?php echo form_error('caordcom{tipmon}', array('class' => 'form-error-msg')) ?>
@@ -49,81 +46,100 @@
   'size' => 20,
   'control_name' => 'caordcom[tipmon]',
 )); echo $value ? $value : '&nbsp;' ?>
+<?php if (isset($nom_mon)): ?>
+	<?php echo input_tag('nom_mon',$nom_mon,'size=20,disabled=true'); ?>
+<?php endif; ?> 
     </div>
-</div>
+</div><!-- //fin -->
 
 <div class="form-row">
-
   <?php echo label_for('caordcom[codpro]', __($labels['caordcom{codpro}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{codpro}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{codpro}')): ?>
     <?php echo form_error('caordcom{codpro}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
   <?php $value = object_input_tag($caordcom, 'getCodpro', array (
   'size' => 20,
   'control_name' => 'caordcom[codpro]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<?php echo button_to('...','#')?>
-<?php if (isset($nom_pro)): ?>
-	<?php echo input_tag('nom_pro',$nom_pro,'size=50,disabled=true'); ?>
-<?php endif; ?> 
-    </div>
+  )); echo $value ? $value : '&nbsp;' ?>
+  &nbsp;
+  <?php echo button_to('...','#')?>
+  <?php if (isset($nom_pro)): ?>
+	<?php echo input_tag('nom_pro',$nom_pro,'size=70,disabled=true'); ?>
+  <?php endif; ?> 
+  </div>
 
-  <?php echo label_for('caordcom[desord]', __($labels['caordcom{desord}']), '') ?>
+  <?php echo label_for('caordcom[desord]', __($labels['caordcom{desord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{desord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{desord}')): ?>
     <?php echo form_error('caordcom{desord}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
   <?php $value = object_input_tag($caordcom, 'getDesord', array (
   'size' => 80,
   'control_name' => 'caordcom[desord]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+  )); echo $value ? $value : '&nbsp;' ?>
+  </div>
+</div><!-- //fin -->
 
-  <?php echo label_for('caordcom[crecon]', __($labels['caordcom{crecon}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{crecon}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{crecon}')): ?>
-    <?php echo form_error('caordcom{crecon}', array('class' => 'form-error-msg')) ?>
+<div class="form-row">
+  <?php echo label_for('caordcom[doccom]', __($labels['caordcom{doccom}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{doccom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{doccom}')): ?>
+    <?php echo form_error('caordcom{doccom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($caordcom, 'getCrecon', array (
+  <?php $value = object_input_tag($caordcom, 'getDoccom', array (
   'size' => 20,
-  'control_name' => 'caordcom[crecon]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
+  'control_name' => 'caordcom[doccom]',
+  )); echo $value ? $value : '&nbsp;' ?>
+  <?php if (isset($nom_comp)): ?>
+	<?php echo input_tag('nom_comp',$nom_comp,'size=45,disabled=true'); ?>
+  <?php endif; ?> 
+  Refiere S/C
+  <?php if($nomrefprc=='S') $val = true; else $val=false; ?>
+  <?php echo "Si ".radiobutton_tag('renaut', 'S', $val) ?>&nbsp;
+  <?php echo "No ".radiobutton_tag('renaut', 'N', !$val) ?>
+  </div>
+  
+  <?php echo label_for('caordcom[refsol]', __($labels['caordcom{refsol}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{refsol}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{refsol}')): ?>
+  <?php echo form_error('caordcom{refsol}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+  <?php $value = object_input_tag($caordcom, 'getRefsol', array (
+  'size' => 20,
+  'control_name' => 'caordcom[refsol]',
+  )); echo $value ? $value : '&nbsp;' ?>
+  &nbsp;
+  <?php echo button_to('...','#')?>
+  </div>    
 
-<div class="form-row">
-  <?php echo label_for('caordcom[plaent]', __($labels['caordcom{plaent}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{plaent}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{plaent}')): ?>
-    <?php echo form_error('caordcom{plaent}', array('class' => 'form-error-msg')) ?>
+  <?php echo label_for('caordcom[tipord]', __($labels['caordcom{tipord}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{tipord}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{tipord}')): ?>
+    <?php echo form_error('caordcom{tipord}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($caordcom, 'getPlaent', array (
-  'size' => 25,
-  'control_name' => 'caordcom[plaent]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-  <?php echo label_for('caordcom[tiecan]', __($labels['caordcom{tiecan}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{tiecan}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{tiecan}')): ?>
-    <?php echo form_error('caordcom{tiecan}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($caordcom, 'getTiecan', array (
-  'size' => 25,
-  'control_name' => 'caordcom[tiecan]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('caordcom[monord]', __($labels['caordcom{monord}']), '') ?>
+  <?php if ($caordcom->getTipord()=='C')
+  		{
+  			$v1='selected';$v2='';$v3='';$v4='';
+  		}
+  		elseif ($caordcom->getTipord()=='S')
+  		{
+  			$v1='';$v2='selected';$v3='';$v4='';
+  		}
+		elseif ($caordcom->getTipord=='M')
+  		{
+  			$v1='';$v2='';$v3='selected';$v4='';
+  		}
+  ?>
+  <?php echo select_tag('tipord',
+  '<option value="C" "'.$v1.'">Compra</option>
+   <option value="S" "'.$v2.'">Servicio</option>
+   <option value="M" "'.$v3.'">Mixto</option>')
+  ?>
+  </div>
+  <?php echo label_for('caordcom[monord]', __($labels['caordcom{monord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{monord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{monord}')): ?>
     <?php echo form_error('caordcom{monord}', array('class' => 'form-error-msg')) ?>
@@ -133,23 +149,81 @@
   'size' => 7,
   'control_name' => 'caordcom[monord]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-  <?php echo label_for('caordcom[dtoord]', __($labels['caordcom{dtoord}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{dtoord}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{dtoord}')): ?>
-    <?php echo form_error('caordcom{dtoord}', array('class' => 'form-error-msg')) ?>
+   </div>
+</div><!-- //fin -->
+<div class="form-row">
+  <?php echo label_for('caordcom[tipo]', __($labels['caordcom{tipo}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{tipo}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{tipo}')): ?>
+    <?php echo form_error('caordcom{tipo}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
+  <?php if ($caordcom->getTipo()=='A')
+  		{
+  			$v1=true; $v2=false; $v3=false; $v4=false;
+  		}
+  		elseif ($caordcom->getTipo()=='L')
+  		{
+  			$v1=false; $v2=true; $v3=false; $v4=false;
+  		}
+		elseif ($caordcom->getTipo()=='C')
+  		{
+  			$v1=false; $v2=false; $v3=true; $v4=false;
+  		}
+		elseif ($caordcom->getTipo()=='E')
+  		{
+  			$v1=false; $v2=false; $v3=false; $v4=true;
+  		}
+  		?>
 
-  <?php $value = object_input_tag($caordcom, 'getDtoord', array (
-  'size' => 7,
-  'control_name' => 'caordcom[dtoord]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
+  <?php echo "Adjudicación Directa ".radiobutton_tag('tipo', 'A', $v1) ?>&nbsp;
+  <?php echo "Licitación ".radiobutton_tag('tipo', 'L', $v2) ?>&nbsp;
+  <?php echo "Compra Directa ".radiobutton_tag('tipo', 'C', $v3) ?>&nbsp;
+  <?php echo "Compra Eventual ".radiobutton_tag('tipo', 'E', $v4) ?>  
+   <br><strong>Detalle de la Orden:</strong>    
+  <?php echo "Descuento Tipo Porcentaje ".radiobutton_tag('tipo_orden', 'A', $v1) ?>&nbsp;
+  <?php echo "Descuento Tipo Monto ".radiobutton_tag('tipo_orden', 'L', $v2) ?>&nbsp;
+  </div>    
+</div><!-- //fin -->
+
+</fieldset>
+
+<fieldset>
+<legend>Detalles</legend>
 
 <div class="form-row">
-  <?php echo label_for('caordcom[refcom]', __($labels['caordcom{refcom}']), '') ?>
+<div id="grid02" class="grid02">
+<table border="0" class="sf_admin_list">
+<?php $nombre=array(0 => 'Articulo:', 1 => 'Descripcion',2 => 'Unidad:'); ?>
+<? if ( count($rs)>0){
+$i=0;
+foreach ($rs as $k=>$fila) {
+    $i++;
+    if($i==1){?>
+      <thead><tr>
+    <? foreach ($fila as $key => $value){?>
+        <th><?=$nombre[$key]?></th>
+    <? }?>
+      </tr> </thead>
+    <? }?>
+<tr>
+<? foreach ($fila as $key => $value){?>
+    <td><?=$value?></td>
+<? }?>
+</tr>
+<? }
+  }
+?></table> 
+	</div>	
+</div><!-- //fin -->
+
+</fieldset>
+
+<fieldset>
+<legend>Condicion de Pago</legend>
+
+<div class="form-row">   
+
+  <?php echo label_for('caordcom[refcom]', __($labels['caordcom{refcom}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{refcom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{refcom}')): ?>
     <?php echo form_error('caordcom{refcom}', array('class' => 'form-error-msg')) ?>
@@ -159,9 +233,152 @@
   'size' => 20,
   'control_name' => 'caordcom[refcom]',
 )); echo $value ? $value : '&nbsp;' ?>
+  &nbsp;
+  <?php echo button_to('...','#')?>
+  <?php if (isset($descripcion)): ?>
+	<?php echo input_tag('descripcion',$descripcion,'size=45,disabled=true'); ?>
+  <?php endif; ?> 
+    </div>
+    
+  <?php echo label_for('caordcom[tippro]', __($labels['caordcom{tippro}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{tippro}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{tippro}')): ?>
+    <?php echo form_error('caordcom{tippro}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+  <?php $value = object_input_tag($caordcom, 'getTippro', array (
+  'size' => 20,
+  'control_name' => 'caordcom[tippro]',
+)); echo $value ? $value : '&nbsp;' ?>
+  &nbsp;
+  <?php echo button_to('...','#')?>
+  <?php if (isset($nom_proyecto)): ?>
+	<?php echo input_tag('nom_proyecto',$nom_proyecto,'size=45,disabled=true'); ?>
+  <?php endif; ?> 
+ </div>
+</div><!-- //fin -->
+
+</fieldset>
+
+<fieldset>
+
+<legend>Formas de Entrega</legend>
+
+<div class="form-row">    
+        
+<strong>Formas de Entrega:</strong>
+  <?php if (isset($id_entrega)): ?>
+	<?php echo input_tag('id_entrega',$id_entrega,'size=6,disabled=true'); ?>
+  <?php endif; ?> 
+ 
+<?php echo button_to('...','#')?>
+  <?php if (isset($descripcion_entrega)): ?>
+	<?php echo input_tag('descripcion_entrega',$descripcion_entrega,'size=45,disabled=true'); ?>
+  <?php endif; ?> 
+
+  <?php echo label_for('caordcom[tipfin]', __($labels['caordcom{tipfin}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{tipfin}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{tipfin}')): ?>
+    <?php echo form_error('caordcom{tipfin}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getTipfin', array (
+  'size' => 20,
+  'control_name' => 'caordcom[tipfin]',
+)); echo $value ? $value : '&nbsp;' ?>
+<?php echo button_to('...','#')?>
+  <?php if (isset($descripcion_financiamiento)): ?>
+	<?php echo input_tag('descripcion_financiamiento',$descripcion_financiamiento,'size=45,disabled=true'); ?>
+  <?php endif; ?> 
+
     </div>
 
-  <?php echo label_for('caordcom[staord]', __($labels['caordcom{staord}']), '') ?>
+</div><!-- //fin -->
+
+</fieldset>
+
+<fieldset>
+<legend>Resumen</legend>
+
+<div class="form-row">    
+<div id="grid02" class="grid02">
+<table border="0" class="sf_admin_list" whith="100%">
+<?php $nombre=array(0 => 'Codigo Articulo', 1 => 'Descripcion',2 => 'Cod.Art.Proveedor', 3 => 'Cant. Ordenada', 4 => 'Cant. Ajustada', 5=> 'Cant. Recibida', 6 => 'Cant. Total', 7 => 'Costo', 8 => 'Monto Cargo', 9 => 'Total'); ?>
+<? if ( count($rs2)>0){
+$i=0;
+foreach ($rs2 as $k=>$fila) {
+    $i++;
+    if($i==1){?>
+      <thead><tr>
+    <? foreach ($fila as $key => $value){?>
+        <th><?=$nombre[$key]?></th>
+    <? }?>
+      </tr> </thead>
+    <? }?>
+<tr>
+<? foreach ($fila as $key => $value){?>
+    <td><?=$value?></td>
+<? }?>
+</tr>
+<? }
+  }
+?></table>
+	</div> 
+  </div>
+</div>  
+<!-- 
+<div class="form-row">    
+
+
+  <?php echo label_for('caordcom[plaent]', __($labels['caordcom{plaent}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{plaent}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{plaent}')): ?>
+    <?php echo form_error('caordcom{plaent}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getPlaent', array (
+  'size' => 25,
+  'control_name' => 'caordcom[plaent]',
+)); echo $value ? $value : '&nbsp;' ?>
+  &nbsp;
+  </div>
+   
+  <?php echo label_for('caordcom[crecon]', __($labels['caordcom{crecon}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{crecon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{crecon}')): ?>
+    <?php echo form_error('caordcom{crecon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getCrecon', array (
+  'size' => 20,
+  'control_name' => 'caordcom[crecon]',
+)); echo $value ? $value : '&nbsp;' ?>
+  </div>
+
+  <?php echo label_for('caordcom[tiecan]', __($labels['caordcom{tiecan}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{tiecan}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{tiecan}')): ?>
+    <?php echo form_error('caordcom{tiecan}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getTiecan', array (
+  'size' => 25,
+  'control_name' => 'caordcom[tiecan]',
+)); echo $value ? $value : '&nbsp;' ?>
+  </div>
+  
+  <?php echo label_for('caordcom[dtoord]', __($labels['caordcom{dtoord}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('caordcom{dtoord}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caordcom{dtoord}')): ?>
+    <?php echo form_error('caordcom{dtoord}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caordcom, 'getDtoord', array (
+  'size' => 7,
+  'control_name' => 'caordcom[dtoord]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>  
+
+  <?php echo label_for('caordcom[staord]', __($labels['caordcom{staord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{staord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{staord}')): ?>
     <?php echo form_error('caordcom{staord}', array('class' => 'form-error-msg')) ?>
@@ -172,10 +389,8 @@
   'control_name' => 'caordcom[staord]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('caordcom[afepre]', __($labels['caordcom{afepre}']), '') ?>
+    
+  <?php echo label_for('caordcom[afepre]', __($labels['caordcom{afepre}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{afepre}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{afepre}')): ?>
     <?php echo form_error('caordcom{afepre}', array('class' => 'form-error-msg')) ?>
@@ -187,7 +402,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
-  <?php echo label_for('caordcom[conpag]', __($labels['caordcom{conpag}']), '') ?>
+  <?php echo label_for('caordcom[conpag]', __($labels['caordcom{conpag}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{conpag}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{conpag}')): ?>
     <?php echo form_error('caordcom{conpag}', array('class' => 'form-error-msg')) ?>
@@ -198,10 +413,8 @@
   'control_name' => 'caordcom[conpag]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('caordcom[forent]', __($labels['caordcom{forent}']), '') ?>
+  <?php echo label_for('caordcom[forent]', __($labels['caordcom{forent}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{forent}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{forent}')): ?>
     <?php echo form_error('caordcom{forent}', array('class' => 'form-error-msg')) ?>
@@ -213,7 +426,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
-  <?php echo label_for('caordcom[fecanu]', __($labels['caordcom{fecanu}']), '') ?>
+  <?php echo label_for('caordcom[fecanu]', __($labels['caordcom{fecanu}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{fecanu}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{fecanu}')): ?>
     <?php echo form_error('caordcom{fecanu}', array('class' => 'form-error-msg')) ?>
@@ -225,13 +438,8 @@
   'control_name' => 'caordcom[fecanu]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
-
-    </div>
-
-  <?php echo label_for('caordcom[valmon]', __($labels['caordcom{valmon}']), '') ?>
+    
+  <?php echo label_for('caordcom[valmon]', __($labels['caordcom{valmon}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{valmon}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{valmon}')): ?>
     <?php echo form_error('caordcom{valmon}', array('class' => 'form-error-msg')) ?>
@@ -241,11 +449,10 @@
   'size' => 7,
   'control_name' => 'caordcom[valmon]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
+    </div>    
 
-<div class="form-row">
-  <?php echo label_for('caordcom[tipcom]', __($labels['caordcom{tipcom}']), '') ?>
+
+  <?php echo label_for('caordcom[tipcom]', __($labels['caordcom{tipcom}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{tipcom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{tipcom}')): ?>
     <?php echo form_error('caordcom{tipcom}', array('class' => 'form-error-msg')) ?>
@@ -257,33 +464,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
-  <?php echo label_for('caordcom[tipord]', __($labels['caordcom{tipord}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{tipord}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{tipord}')): ?>
-    <?php echo form_error('caordcom{tipord}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($caordcom, 'getTipord', array (
-  'size' => 20,
-  'control_name' => 'caordcom[tipord]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('caordcom[tipo]', __($labels['caordcom{tipo}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{tipo}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{tipo}')): ?>
-    <?php echo form_error('caordcom{tipo}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($caordcom, 'getTipo', array (
-  'size' => 20,
-  'control_name' => 'caordcom[tipo]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-  <?php echo label_for('caordcom[coduni]', __($labels['caordcom{coduni}']), '') ?>
+  <?php echo label_for('caordcom[coduni]', __($labels['caordcom{coduni}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{coduni}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{coduni}')): ?>
     <?php echo form_error('caordcom{coduni}', array('class' => 'form-error-msg')) ?>
@@ -294,10 +475,8 @@
   'control_name' => 'caordcom[coduni]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('caordcom[codemp]', __($labels['caordcom{codemp}']), '') ?>
+  <?php echo label_for('caordcom[codemp]', __($labels['caordcom{codemp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{codemp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{codemp}')): ?>
     <?php echo form_error('caordcom{codemp}', array('class' => 'form-error-msg')) ?>
@@ -309,7 +488,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
-  <?php echo label_for('caordcom[notord]', __($labels['caordcom{notord}']), '') ?>
+  <?php echo label_for('caordcom[notord]', __($labels['caordcom{notord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{notord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{notord}')): ?>
     <?php echo form_error('caordcom{notord}', array('class' => 'form-error-msg')) ?>
@@ -320,10 +499,9 @@
   'control_name' => 'caordcom[notord]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('caordcom[tipdoc]', __($labels['caordcom{tipdoc}']), '') ?>
+
+  <?php echo label_for('caordcom[tipdoc]', __($labels['caordcom{tipdoc}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{tipdoc}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{tipdoc}')): ?>
     <?php echo form_error('caordcom{tipdoc}', array('class' => 'form-error-msg')) ?>
@@ -335,21 +513,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
-  <?php echo label_for('caordcom[tippro]', __($labels['caordcom{tippro}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{tippro}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{tippro}')): ?>
-    <?php echo form_error('caordcom{tippro}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($caordcom, 'getTippro', array (
-  'size' => 20,
-  'control_name' => 'caordcom[tippro]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('caordcom[afepro]', __($labels['caordcom{afepro}']), '') ?>
+  <?php echo label_for('caordcom[afepro]', __($labels['caordcom{afepro}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{afepro}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{afepro}')): ?>
     <?php echo form_error('caordcom{afepro}', array('class' => 'form-error-msg')) ?>
@@ -361,48 +525,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
-  <?php echo label_for('caordcom[doccom]', __($labels['caordcom{doccom}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{doccom}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{doccom}')): ?>
-    <?php echo form_error('caordcom{doccom}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($caordcom, 'getDoccom', array (
-  'size' => 20,
-  'control_name' => 'caordcom[doccom]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('caordcom[refsol]', __($labels['caordcom{refsol}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{refsol}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{refsol}')): ?>
-    <?php echo form_error('caordcom{refsol}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($caordcom, 'getRefsol', array (
-  'size' => 20,
-  'control_name' => 'caordcom[refsol]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-
-
-  <?php echo label_for('caordcom[tipfin]', __($labels['caordcom{tipfin}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('caordcom{tipfin}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('caordcom{tipfin}')): ?>
-    <?php echo form_error('caordcom{tipfin}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($caordcom, 'getTipfin', array (
-  'size' => 20,
-  'control_name' => 'caordcom[tipfin]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('caordcom[justif]', __($labels['caordcom{justif}']), '') ?>
+  <?php echo label_for('caordcom[justif]', __($labels['caordcom{justif}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{justif}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{justif}')): ?>
     <?php echo form_error('caordcom{justif}', array('class' => 'form-error-msg')) ?>
@@ -414,7 +537,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
-  <?php echo label_for('caordcom[refprc]', __($labels['caordcom{refprc}']), '') ?>
+  <?php echo label_for('caordcom[refprc]', __($labels['caordcom{refprc}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{refprc}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{refprc}')): ?>
     <?php echo form_error('caordcom{refprc}', array('class' => 'form-error-msg')) ?>
@@ -425,9 +548,7 @@
   'control_name' => 'caordcom[refprc]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
   <?php echo label_for('caordcom[id]', __($labels['caordcom{id}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caordcom{id}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caordcom{id}')): ?>
@@ -440,7 +561,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-
+-->
 </fieldset>
 
 <?php include_partial('edit_actions', array('caordcom' => $caordcom)) ?>

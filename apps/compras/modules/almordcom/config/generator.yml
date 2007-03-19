@@ -3,10 +3,30 @@ generator:
   param:
     model_class:      Caordcom
     theme:            default
+
+    fields:
+      refcom:      { name : Numero }
+      ordcom:      { name : Orden }      
+      fecord:      { name : Fecha, params: date_format='dd/MM/yyyy'}
+      tipmon:      { name : Moneda }   
+      codpro:      { name : Rif. de Proveedor }  
+      desord:      { name : Descripción del Proveedor }  
+      crecon:      { name : Proveedor }  
+      monord:      { name : Monto Total}      
+      doccom:      { name : Tipo de Compromiso }
+      refsol:      { name : Solicitud }
+      tipord:      { name : Tipó }
+      tippro:      { name : Proyecto }
+      tipfin:      { name : Financiamiento }
+
     list:
       title:          Ordenes de Compra
+      display:        [desord, ordcom, fecord, monord]
+      filters:        [ordcom]
       object_actions:
         _edit:        ~
         _delete:      ~              
-      filters:        [ordcom]
       max_per_page:   5    
+    edit:
+      title:          Ordenes de Compra    
+      display:

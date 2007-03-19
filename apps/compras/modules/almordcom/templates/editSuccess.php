@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('edit almordcom', 
+<h1><?php echo __('Ordenes de Compra ', 
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almordcom/edit_messages', array('caordcom' => $caordcom, 'labels' => $labels)) ?>
-<?php include_partial('almordcom/edit_form', array('caordcom' => $caordcom, 'labels' => $labels, 'nom_pro' => $nom_pro, 'nom_mon' => $nom_mon)) ?>
+<?php include_partial('almordcom/edit_form', array('caordcom' => $caordcom, 'labels' => $labels, 'nom_pro' => $nom_pro, 'nom_mon' => $nom_mon,'nom_comp' => $nom_comp, 'nomrefprc' => $nomrefprc, 'rs' => $rs, 'rs2' => $rs2, 'codigo' => $codigo, 'descripcion' => $descripcion, 'nom_proyecto' => $nom_proyecto, 'id_entrega' => $id_entrega, 'descripcion_entrega' => $descripcion_entrega, 'descripcion_financiamiento' => $descripcion_financiamiento)) ?>
 </div>
 
 <div id="sf_admin_footer">
