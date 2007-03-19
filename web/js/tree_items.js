@@ -117,7 +117,7 @@ var TREE_ITEMSCON = [
 				['Proyectos', Compras+'almtippro'],
 			],
 			['Compras', null,
-				['Ordenes de Compra y+o Servicio', Compras+'almordCom'],
+				['Ordenes de Compra y+o Servicio', Compras+'almordcom'],
 				['Registro de Contratos', Compras+'almcontrato'],
 				['Ajuste a Ordenes de Compra', Compras+'almajuoc'],
 				['Cotizaciones', Compras+'almcotiza'],
