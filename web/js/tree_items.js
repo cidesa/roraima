@@ -165,10 +165,9 @@ var TREE_ITEMS_TER = [
 				['Beneficiarios', Tesoreria+'pagbenfic'],
 				['Asociacion Conceptos+Tipos de Retenciones', Tesoreria+'pagretcon'],
 				['Definici&oacute;n de Ubicaci&oacute;n', Tesoreria+'tesdesubi'],
-				['Definicion del Iva para Agentes de Retención', Tesoreria+'pagretiva'],
-				['Definicion de Cuentas Contables para Rendición de Gastos', Tesoreria+'tesdefrengas'],
-				['Definici&iacute;n de Reportes de Comprobantes de Retencion', Tesoreria+'pagrepret'],
-				['Definici&iacute;n de Reportes de Comprobante de Retencion', Tesoreria+'pagrepret'],
+				['Definicion del Iva para Agentes de Retenci&oacute;n', Tesoreria+'pagretiva'],
+				['Definicion de Cuentas Contables para Rendici&oacute;n de Gastos', Tesoreria+'tesdefrengas'],
+				['Definici&iacute;n de Reportes de Comprobantes de Retenci&oacute;n', Tesoreria+'pagrepret'],
 			],
 
 			['Ordenamiento de Pago', null,
