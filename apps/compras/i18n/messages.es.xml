@@ -46,6 +46,10 @@
            <source>save and add</source>
            <target>Guardar y Nuevo</target>
          </trans-unit>
+         <trans-unit id="12">
+           <source>Are you sure?</source>
+           <target>¿Esta seguro de eliminar?</target>
+         </trans-unit>
        </body>
     </file>
 </xliff>
