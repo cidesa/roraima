@@ -27,8 +27,8 @@
   'control_name' => 'opretcon[codcon]',
   'maxlength' => '3,',
 )); echo $value ? $value : '&nbsp;' ?>&nbsp;
-<?php echo button_to('...','#')?>&nbsp;</n>
-<?php echo label_for('des1','Descripcion','')?>&nbsp;
+<?php echo button_to('...','#')?>&nbsp;Descripcion</n>
+&nbsp;
 <?php echo input_tag('descon',$descon,'size=35,disabled=true'); ?>
     </div>
 </div>
@@ -48,8 +48,8 @@
   'control_name' => 'opretcon[codnom]',
   'maxlength' => '3,',
 )); echo $value ? $value : '&nbsp;' ?>&nbsp;
-<?php echo button_to('...','#')?>&nbsp;
-<?php echo label_for('des2','Descripcion','')?>&nbsp;
+<?php echo button_to('...','#')?>&nbsp;Descripcion
+&nbsp;
 <?php echo input_tag('desnom',$desnom,'size=35,disabled=true'); ?>
     </div>
 </div>
@@ -69,8 +69,8 @@
   'control_name' => 'opretcon[codtip]',
   'maxlength' => '3,',
 )); echo $value ? $value : '&nbsp;' ?>&nbsp;
-<?php echo button_to('...','#')?>&nbsp;
-<?php echo label_for('des3','Descripcion','')?>&nbsp;
+<?php echo button_to('...','#')?>&nbsp;Descripcion
+&nbsp;
 <?php echo input_tag('desret',$desret,'size=35,disabled=true'); ?>
     </div>
 </div>
