@@ -34,6 +34,22 @@
            <source>edit</source>
            <target>Editar</target>
          </trans-unit>
+         <trans-unit id="9">
+           <source>list</source>
+           <target>Lista</target>
+         </trans-unit>
+         <trans-unit id="10">
+           <source>save</source>
+           <target>Guardar</target>
+         </trans-unit>
+         <trans-unit id="11">
+           <source>save and add</source>
+           <target>Guardar y Nuevo</target>
+         </trans-unit>
+         <trans-unit id="12">
+           <source>Are you sure?</source>
+           <target>¿Esta seguro de eliminar?</target>
+         </trans-unit>
        </body>
     </file>
 </xliff>
