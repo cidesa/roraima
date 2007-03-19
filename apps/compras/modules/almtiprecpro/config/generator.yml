@@ -14,3 +14,5 @@ generator:
         _edit:        ~
         _delete:      ~      
       max_per_page:   5
+    edit:
+      title:          Edicion de Recaudos
