@@ -56,7 +56,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('carecaud[canutr]', __($labels['carecaud{canutr}']), '') ?>
+  <?php echo label_for('carecaud[canutr]', __($labels['carecaud{canutr}']),'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('carecaud{canutr}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('carecaud{canutr}')): ?>
     <?php echo form_error('carecaud{canutr}', array('class' => 'form-error-msg')) ?>
@@ -70,7 +70,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('carecaud[codtiprec]', __($labels['carecaud{codtiprec}']), '') ?>
+  <?php echo label_for('carecaud[codtiprec]', __($labels['carecaud{codtiprec}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('carecaud{codtiprec}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('carecaud{codtiprec}')): ?>
     <?php echo form_error('carecaud{codtiprec}', array('class' => 'form-error-msg')) ?>
@@ -84,7 +84,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('carecaud[observ]', __($labels['carecaud{observ}']), '') ?>
+  <?php echo label_for('carecaud[observ]', __($labels['carecaud{observ}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('carecaud{observ}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('carecaud{observ}')): ?>
     <?php echo form_error('carecaud{observ}', array('class' => 'form-error-msg')) ?>
