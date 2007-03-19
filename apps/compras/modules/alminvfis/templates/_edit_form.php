@@ -41,47 +41,33 @@
     </div>
 </div>
 
+<!-- 
 <div class="form-row">
-  <?php echo label_for('cainvfis[codart]', __($labels['cainvfis{codart}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('cainvfis{codart}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cainvfis{codart}')): ?>
-    <?php echo form_error('cainvfis{codart}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+  <
+  ?php echo label_for('cainvfis[codart]', __($labels['cainvfis{codart}']), 'class="required" ') ?>
+  <div class="content<
+  ?php if ($sf_request->hasError('cainvfis{codart}')): ?> form-error<
+  ?php endif; ?>">
+  <
+  ?php if ($sf_request->hasError('cainvfis{codart}')): ?>
+    <
+    ?php echo form_error('cainvfis{codart}', array('class' => 'form-error-msg')) ?>
+  <
+  ?php endif; ?>
 
-  <?php $value = object_input_tag($cainvfis, 'getCodart', array (
+  <
+  ?php $value = object_input_tag($cainvfis, 'getCodart', array (
   'size' => 20,
   'control_name' => 'cainvfis[codart]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+ -->
 
-<div class="form-row">
-  <?php echo label_for('cainvfis[exiact]', __($labels['cainvfis{exiact}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('cainvfis{exiact}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cainvfis{exiact}')): ?>
-    <?php echo form_error('cainvfis{exiact}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($cainvfis, 'getExiact', array (
-  'size' => 7,
-  'control_name' => 'cainvfis[exiact]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('cainvfis[exiact2]', __($labels['cainvfis{exiact2}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('cainvfis{exiact2}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cainvfis{exiact2}')): ?>
-    <?php echo form_error('cainvfis{exiact2}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($cainvfis, 'getExiact2', array (
-  'size' => 7,
-  'control_name' => 'cainvfis[exiact2]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
+<div>
+<fieldset>
+<legend>Articulo por Almacen</legend>
+<div class="grid01" id="grid01">
 <table border="0" class="sf_admin_list">
 <?php $nombre=array(0 => 'Fecha de Inventario:', 1 => 'Almacen',2 => 'Articulo Desde:', 3 => 'Articulo Hasta'); ?>
 <? if ( count($rs)>0){
@@ -103,6 +89,9 @@ foreach ($rs as $k=>$fila) {
 <? }
   }
 ?></table> 
+</div>
+</fieldset>
+</div>
 </fieldset>
 
 <?php include_partial('edit_actions', array('cainvfis' => $cainvfis)) ?>
