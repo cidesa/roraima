@@ -164,6 +164,7 @@ var TREE_ITEMS_TER = [
 				['Beneficiarios', Tesoreria+'pagbenfic'],
 				['Asociacion Conceptos+Tipos de Retenciones', Tesoreria+'pagretcon'],
 				['Definici&iacute;n de Ubicaci&iacute;n', Tesoreria+'tesdesubi'],
+				['Definici&iacute;n de Reportes de Comprobante de Retencion', Tesoreria+'pagrepret'],
 			],
 
 			['Ordenamiento de Pago', null,
