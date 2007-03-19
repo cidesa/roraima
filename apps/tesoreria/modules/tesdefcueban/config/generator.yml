@@ -27,6 +27,7 @@ generator:
       valche:     { name: Validez del Cheque }
       concil:     { name: Conciliable }
       plazo:      { name: Plazo }
+      tipren:      { name: Tipo de Rendimiento }
 
     list:
       title:          Definicion de Bancos
