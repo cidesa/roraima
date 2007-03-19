@@ -18,7 +18,7 @@ array()) ?></h1>
 <div id="sf_admin_content">
 <?php include_partial('tesdefcueban/edit_messages', array('tsdefban' => $tsdefban, 'labels' => $labels)) ?>
 <?php include_partial('tesdefcueban/edit_form', array('tsdefban' => $tsdefban, 'labels' => $labels,
-						'tipcue' => $tipcue, 'tipren' => $tipren)) ?>
+'tipcue' => $tipcue, 'tipren' => $tipren, 'chq' => $chq)) ?>
 </div>
 
 <div id="sf_admin_footer">

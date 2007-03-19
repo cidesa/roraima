@@ -402,7 +402,51 @@
 
 <fieldset>
 <legend>Manejo de Chequeras</legend>
+<?php echo label_for('eti', 'Cant. de Digitos Significativos del N° Cheque', 'class="required" ') ?>
+<?php echo input_tag('digitos','','size=10, maxlength=8'); ?>
 
+<div class="grid01" id="grid01">
+<table border="0" class="sf_admin_list">
+<? 
+$titulo2=array(0 => 'Chequera N°.', 1 => 'Desde N°.', 2 => 'Hasta N°.', 3 => 'Activa');
+
+if (count($chq)>0){
+$i=0;
+foreach ($chq as $k=>$fila) {
+    $i++;
+    if($i==1){?>
+      <thead><tr>
+    <? foreach ($fila as $key => $value){?>
+        <th><?=$titulo2[$key]?></th>
+    <? }?>
+      </tr> </thead>
+    <? }?>
+<tr>
+<? foreach ($fila as $key => $value){?>
+    <td><?=$value?></td>
+<? }?>
+</tr>
+<? }
+}
+else///////////////////////////
+{
+?>
+<thead>
+<tr>
+<th><?=$titulo2[0];?></th>
+<th><?=$titulo2[1];?></th>
+<th><?=$titulo2[2];?></th>
+</tr></thead>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<?	
+}
+?></table>
+</div>
 </fieldset>
 
 

@@ -10,6 +10,24 @@
  */
 class tesdefcuebanActions extends autotesdefcuebanActions
 {
+	
+  public function gridchq()    
+    {
+        $con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+        $sql = "SELECT codchq, numchedes, numchehas, activa FROM tsdefchequera where rpad(numcue,20,' ') ='".(str_pad($this->tsdefban->getNumcue(),20,' '))."'";
+        $stmt = $con->createStatement();
+        $stmt->setLimit(5000);
+        $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+        $resultado=array();
+        //aqui lleno el array con los resultados:
+           while ($rs->next())
+             {
+                $resultado[]=$rs->getRow();
+             }
+        //y la envio al template:
+        $this->rs=$resultado;
+        return $this->rs;
+    }
   public function getTipcue()
   {
   	  $c = new Criteria;
@@ -37,6 +55,7 @@ class tesdefcuebanActions extends autotesdefcuebanActions
     $this->tsdefban = $this->getTsdefbanOrCreate();
     $this->tipcue = $this->getTipcue();
     $this->tipren = $this->getTipren();
+    $this->chq = $this->gridchq();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
