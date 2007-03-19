@@ -4,13 +4,13 @@ generator:
     model_class:      Cainvfis
     theme:            default
     fields:
-      fecinv:      { name : Fecha de Inventario }
+      fecinv:      { name : Fecha de Inventario, params: date_format='dd/MM/yyyy'}
       codalm:      { name : Almacen }    
       codart:      { name : Articulo Desde }
       codart:      { name : Articulo Hasta }    
 
     list:
-      title:          Proyectos
+      title:          Inventario Fisico
       display:        [=fecinv, codalm]    
       object_actions:
         _edit:        ~
@@ -18,6 +18,6 @@ generator:
       filters:        [fecinv, codalm, codart, codart]
       max_per_page:   5    
     edit:
-      title:          Proyectos
+      title:          Edicion de Inventario
       display:
     
