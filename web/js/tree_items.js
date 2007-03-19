@@ -170,7 +170,7 @@ var TREE_ITEMS_TER = [
 				['Definici&iacute;n de Reportes de Comprobantes de Retencion', Tesoreria+'pagrepret'],
 				['Definicion del Iva para Agentes de Retenci&oacute;n', Tesoreria+'pagretiva'],
 				['Definicion de Cuentas Contables para Rendici&oacute;n de Gastos', Tesoreria+'tesdefrengas'],
-				['Definici&iacute;n de Reportes de Comprobantes de Retenci&oacute;n', Tesoreria+'pagrepret'],
+				['Definici&oacute;n de Reportes de Comprobantes de Retenci&oacute;n', Tesoreria+'pagrepret'],
 			],
 
 			['Ordenamiento de Pago', null,
