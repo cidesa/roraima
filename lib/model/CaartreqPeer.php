@@ -9,6 +9,13 @@
  */ 
 class CaartreqPeer extends BaseCaartreqPeer
 {
+	
+		public static $columsname = array (
+		BasePeer::TYPE_PHPNAME => array ('Número Requesición', 'Código del Artículo', 'Codcat', 'Cantidad Requerida', 'Cantidad Recibida', 'Monto Total', 'Unidad Medición', 'Relart', 'Id', ),
+	);
+	
+	
+	
 	public static function getPagerByReqart($reqart)
 	{
 		$pager = new sfPropelPager('Caartreq', 6);
