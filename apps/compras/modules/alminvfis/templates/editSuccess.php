@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Proyectos', 
+<h1><?php echo __('Edicion Inventario Fisico', 
 array()) ?></h1>
 
 <div id="sf_admin_header">
