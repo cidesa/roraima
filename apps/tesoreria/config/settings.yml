@@ -21,7 +21,7 @@ test:
     etag:                   off
 
 all:
-#  .actions:
+  .actions:
 #    default_module:         default   # Default module and action to be called when
 #    default_action:         index     # A routing rule doesn't set it
 #
@@ -45,8 +45,8 @@ all:
 #
 #    # Optional features. Deactivating unused features boots performance a bit.
 #    use_database:           on        # Enable database manager. Set to off if you don't use a database.
-#    use_security:           on        # Enable security features (login and credentials). Set to off for public applications.
-#    use_flash:              on        # Enable flash parameter feature. Set to off if you never use the set_flash() method in actions.
+    use_security:           on        # Enable security features (login and credentials). Set to off for public applications.
+    use_flash:              on        # Enable flash parameter feature. Set to off if you never use the set_flash() method in actions.
     i18n:                   on       # Enable interface translation. Set to off if your application should not be translated.
 #    check_symfony_version:  off       # Enable check of symfony version for every request. Set to on to have symfony clear the cache automatically when the framework is upgraded. Set to off if you always clear the cache after an upgrade.
 #    use_process_cache:      on        # Enable symfony optimizations based on PHP accelerators. Set to off for tests or when you have enabled a PHP accelerator in your server but don't want symfony to use it internally.
@@ -68,7 +68,7 @@ all:
 #    validation_error_id_prefix: error_for_
 #
 #    # Cache settings
-#    cache:                  off       # Enable the template cache
+    cache:                  on       # Enable the template cache
 #    etag:                   on        # Enable etag handling
 #
 #    # Logging and debugging settings

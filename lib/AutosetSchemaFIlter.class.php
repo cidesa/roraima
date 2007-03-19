@@ -12,6 +12,8 @@ class AutosetSchemaFIlter extends sfFilter
 		$db->setConnectionParameter('schema',$esquema);
   	}
 
+  	$this->getContext()->getUser()->setCulture('es_VE');
+  	
 	$filterChain->execute();
   }
 }

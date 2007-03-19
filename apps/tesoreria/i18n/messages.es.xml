@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+   <xliff version="1.0">
+       <file orginal="global" source-language="en" datatype="plaintext">
+         <body>
+         <trans-unit id="1">
+           <source>create</source>
+           <target>Nuevo</target>
+         </trans-unit>
+         <trans-unit id="2">
+           <source>filter</source>
+           <target>Filtrar</target>
+         </trans-unit>
+         <trans-unit id="3">
+           <source>reset</source>
+           <target>Limpiar</target>
+         </trans-unit>
+         <trans-unit id="4">
+           <source>results</source>
+           <target>Resultados</target>
+         </trans-unit>
+         <trans-unit id="5">
+           <source>Actions</source>
+           <target>Acciones</target>
+         </trans-unit>
+         <trans-unit id="6">
+           <source>filters</source>
+           <target>Filtro</target>
+         </trans-unit>
+         <trans-unit id="7">
+           <source>delete</source>
+           <target>Borrar</target>
+         </trans-unit>
+         <trans-unit id="8">
+           <source>edit</source>
+           <target>Editar</target>
+         </trans-unit>
+       </body>
+    </file>
+</xliff>
+

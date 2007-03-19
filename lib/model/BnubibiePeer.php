@@ -9,4 +9,13 @@
  */ 
 class BnubibiePeer extends BaseBnubibiePeer
 {
+	public static function getDesUbi($codubi)
+	{
+		$c = new Criteria();
+		$c->add(self::CODUBI,rtrim($codubi).' %',Criteria::LIKE);
+		return self::doSelect($c);
+		
+	}
+	
+	
 }

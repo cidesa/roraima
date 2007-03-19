@@ -7,7 +7,7 @@ default:
     robots:       index, follow
     description:  Módulo Tesorería
     keywords:     Módulo Tesorería
-    language:     es
+    language:     en_US
 
   stylesheets:    [main]
 
