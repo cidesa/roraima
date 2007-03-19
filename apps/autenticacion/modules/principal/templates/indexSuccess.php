@@ -1,8 +1,8 @@
 <?php use_helper('Javascript') ?>
 
-<?php echo javascript_include_tag('tree.js') ?>
-<?php echo javascript_include_tag('tree_items.js') ?>
-<?php echo javascript_include_tag('tree_tpl.js') ?>
+<?php echo javascript_include_tag('tree') ?>
+<?php echo javascript_include_tag('tree_items') ?>
+<?php echo javascript_include_tag('tree_tpl') ?>
 
 
 &nbsp;
