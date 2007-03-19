@@ -38,7 +38,7 @@ public function getMostrar_RIF()
   {
   	  $c = new Criteria;
   	  $c->addJoin(CaproveePeer::CODPRO,CasalalmPeer::CODPRO);
-  	  $c->add(CaproveePeer::CODPRO,$this->casalalm->getCodpro());
+  	  $c->add(CaproveePeer::CODPRO,Str_pad($this->casalalm->getCodpro(),15,' '));
   	  $this->rif = CaproveePeer::doSelect($c);
   	  if ($this->rif)
 	  	{
