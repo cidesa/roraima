@@ -32,11 +32,11 @@ class TstipcueMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addColumn('DESTIP', 'Destip', 'string', CreoleTypes::VARCHAR, true, 40);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, true);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 
