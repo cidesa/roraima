@@ -301,7 +301,7 @@ foreach ($rs as $k=>$fila) {
 <legend>Resumen</legend>
 
 <div class="form-row">    
-<div id="grid02" class="grid02">
+<div id="grid01" class="grid01">
 <table border="0" class="sf_admin_list" whith="100%">
 <?php $nombre=array(0 => 'Codigo Articulo', 1 => 'Descripcion',2 => 'Cod.Art.Proveedor', 3 => 'Cant. Ordenada', 4 => 'Cant. Ajustada', 5=> 'Cant. Recibida', 6 => 'Cant. Total', 7 => 'Costo', 8 => 'Monto Cargo', 9 => 'Total'); ?>
 <? if ( count($rs2)>0){
