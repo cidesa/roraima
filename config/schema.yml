@@ -16359,7 +16359,7 @@ propel:
       required: true
     fecdes: 
       type: DATE
-      default: to_date(01/01/1900
+      #default: to_date(01/01/1900)
     id: 
       type: INTEGER
       required: true
