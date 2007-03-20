@@ -3,3 +3,33 @@ generator:
   param:
     model_class:      Cacotiza
     theme:            default
+
+    fields:
+      refcot:    { name: Numero}
+      feccot:    { name: Fecha, params: date_format='dd/MM/yyyy'}
+      tipmon:    { name: Moneda} 
+      codpro:    { name: RIF del Proveedor}
+      descot:    { name: Descripcion}
+      refsol:    { name: Solicitud}
+      refpro:    { name: Referencia} 
+      moncot:    { name: Monto Total} 
+      #condiciones de pago
+      conpag:    { name: Codigo}
+      #forma de entrega
+      forent:    { name: Codigo}
+      mondes:    { name: Monto Descuento}
+      monrec:    { name: Monto Recargo}
+
+    list:
+      title:          Cotizaciones
+      display:        [=refcot, feccot, descot]
+      filters:		  [refcot, feccot]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Edicion de Cotizaciones
+    #  display:        [refcot, feccot]
+        
