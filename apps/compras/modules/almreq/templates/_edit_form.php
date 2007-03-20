@@ -95,20 +95,25 @@
 <fieldset>
 <legend>Detalle de la requisición</legend>
 <table border="0" class="sf_admin_list">
-
 <thead>
-<tr>
-</tr>
+	<tr>
+	    <th><?php echo CaartreqPeer::getColumName(CaartreqPeer::REQART) ?></th>
+	    <th><?php echo CaartreqPeer::getColumName(CaartreqPeer::CODART)  ?></th>
+	    <th><?php echo CaartreqPeer::getColumName(CaartreqPeer::CODCAT) ?></th>
+	    <th><?php echo CaartreqPeer::getColumName(CaartreqPeer::CANREQ) ?></th>
+	    <th><?php echo CaartreqPeer::getColumName(CaartreqPeer::CANREC) ?></th>
+	    <th><?php echo CaartreqPeer::getColumName(CaartreqPeer::MONTOT) ?></th>
+	</tr>
 </thead>
 <tbody>
 	<?php $i = 1; foreach ($pagerArtreq->getResults() as $caartreq): $odd = fmod(++$i, 2) ?>
 	<tr class="sf_admin_row_<?php echo $odd ?>">
 	    <td><?php echo $caartreq->getReqart() ?></td>
 	    <td><?php echo $caartreq->getCodart()  ?></td>
-	      <td><?php echo $caartreq->getCodcat() ?></td>
-	      <td><?php echo $caartreq->getCanreq() ?></td>
-	      <td><?php echo $caartreq->getCanrec() ?></td>
-	      <td><?php echo $caartreq->getMontot() ?></td>
+	    <td><?php echo $caartreq->getCodcat() ?></td>
+	    <td><?php echo $caartreq->getCanreq() ?></td>
+	    <td><?php echo $caartreq->getCanrec() ?></td>
+	    <td><?php echo $caartreq->getMontot() ?></td>
 	</tr>
 	<?php endforeach; ?>
 </tbody>	

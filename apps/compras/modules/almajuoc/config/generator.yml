@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caajuoc
+    theme:            default
+    fields:
+      ajuoc:      { name : Número }
+      ordcom:     { name : Orden de Compra }
+      fecaju:     { name : Fecha de Ajuste } 
+      desaju:     { name : Descripción } 
+      monaju:     { name : Monto } 
+    list:
+      title:          Ajustes a Ordenes de Compra
+      display:        [=ajuoc, ordcom, fecaju, desaju, monaju]
+      filters:		  [ajuoc, ordcom, fecaju]
+      max_per_page:	  5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      
+    edit:
+      title:          Edicion de Ajustes a Ordenes de Compra
+      display:        [ajuoc, ordcom, fecaju, desaju, monaju]  
+#      fields:
+#        codalm:       { params : maxlength=6}
