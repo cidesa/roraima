@@ -50,6 +50,10 @@
            <source>Are you sure?</source>
            <target>¿Esta seguro de eliminar?</target>
          </trans-unit>
+         <trans-unit id="12">
+           <source>Your modifications have been saved</source>
+           <target>Tus modificaciones han sido guardadas</target>
+         </trans-unit>
        </body>
     </file>
 </xliff>
