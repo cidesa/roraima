@@ -1,0 +1,35 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caregart
+    theme:            default
+    fields:
+      codart: { name: Codigo del Articulo}
+      tipo: { name: Inicial}
+      codcta: { name: Codigo Contable}
+      desart: { name: Descripcion}
+      ramart: { name: Ramo}
+      codpar: { name: Partida}
+      unimed: { name: Unidad Medida}
+      unialt: { name: Unidad Alterna} 
+      relart: { name: Relacion}
+      exitot: { name: Existencia Total}           
+      fecult: { name: Fecha Ult. Compra}
+      cosult: { name: Ultimo}
+      cospro: { name: Promedio}
+      invini: { name: Inicial}      
+    list:
+      title:          Articulos
+      filters:        [codart]
+      display:        [=codart, desart, unimed]
+      fields:
+        fecult: { params: date_format='dd/MM/yy' }       
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   5
+    edit:
+      title:         Registro de Articulos
+      display:        [=codart, tipo, codcta, desart, ramart, codpar, unimed, unialt, relart, exitot, fecult, cosult, cospro, invini]
+      fields:
+        fecult: { params: date_format='dd/MM/yy' } 
