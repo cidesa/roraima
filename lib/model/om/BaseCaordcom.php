@@ -1264,7 +1264,7 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(CaordcomPeer::DATABASE_NAME);
 
-		$criteria->add(CaordcomPeer::ORDCOM, $this->ordcom);
+		$criteria->add(CaordcomPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1272,18 +1272,20 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getOrdcom();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setOrdcom($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setOrdcom($this->ordcom);
 
 		$copyObj->setFecord($this->fecord);
 
@@ -1345,12 +1347,10 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
 		$copyObj->setRefprc($this->refprc);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setOrdcom(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

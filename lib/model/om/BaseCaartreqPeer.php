@@ -52,7 +52,7 @@ abstract class BaseCaartreqPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Número Requesición', 'Código del Artículo', 'Codcat', 'Cantidad Requerida', 'Cantidad Recibida', 'Monto Total', 'Unidad Medición', 'Relart', 'Id', ),
+		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Codart', 'Codcat', 'Canreq', 'Canrec', 'Montot', 'Unimed', 'Relart', 'Id', ),
 		BasePeer::TYPE_COLNAME => array (CaartreqPeer::REQART, CaartreqPeer::CODART, CaartreqPeer::CODCAT, CaartreqPeer::CANREQ, CaartreqPeer::CANREC, CaartreqPeer::MONTOT, CaartreqPeer::UNIMED, CaartreqPeer::RELART, CaartreqPeer::ID, ),
 		BasePeer::TYPE_FIELDNAME => array ('reqart', 'codart', 'codcat', 'canreq', 'canrec', 'montot', 'unimed', 'relart', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )

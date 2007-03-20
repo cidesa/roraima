@@ -252,8 +252,8 @@ abstract class BaseCaordcomPeer {
 
 	}
 
-	const COUNT = 'COUNT(caordcom.ORDCOM)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT caordcom.ORDCOM)';
+	const COUNT = 'COUNT(caordcom.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT caordcom.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -376,8 +376,8 @@ abstract class BaseCaordcomPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(CaordcomPeer::ORDCOM);
-			$selectCriteria->add(CaordcomPeer::ORDCOM, $criteria->remove(CaordcomPeer::ORDCOM), $comparison);
+			$comparison = $criteria->getComparison(CaordcomPeer::ID);
+			$selectCriteria->add(CaordcomPeer::ID, $criteria->remove(CaordcomPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -416,7 +416,7 @@ abstract class BaseCaordcomPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(CaordcomPeer::ORDCOM, (array) $values, Criteria::IN);
+			$criteria->add(CaordcomPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -478,7 +478,7 @@ abstract class BaseCaordcomPeer {
 
 		$criteria = new Criteria(CaordcomPeer::DATABASE_NAME);
 
-		$criteria->add(CaordcomPeer::ORDCOM, $pk);
+		$criteria->add(CaordcomPeer::ID, $pk);
 
 
 		$v = CaordcomPeer::doSelect($criteria, $con);
@@ -498,7 +498,7 @@ abstract class BaseCaordcomPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(CaordcomPeer::ORDCOM, $pks, Criteria::IN);
+			$criteria->add(CaordcomPeer::ID, $pks, Criteria::IN);
 			$objs = CaordcomPeer::doSelect($criteria, $con);
 		}
 		return $objs;

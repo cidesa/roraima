@@ -30,11 +30,9 @@ class CaordcomMapBuilder {
 		$tMap = $this->dbMap->addTable('caordcom');
 		$tMap->setPhpName('Caordcom');
 
-		$tMap->setUseIdGenerator(true);
- 
-		$tMap->setPrimaryKeyMethodInfo('caordcom_SEQ');
+		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('ORDCOM', 'Ordcom', 'string', CreoleTypes::VARCHAR, true, 8);
+		$tMap->addColumn('ORDCOM', 'Ordcom', 'string', CreoleTypes::VARCHAR, true, 8);
 
 		$tMap->addColumn('FECORD', 'Fecord', 'int', CreoleTypes::DATE, true);
 
@@ -96,7 +94,7 @@ class CaordcomMapBuilder {
 
 		$tMap->addColumn('REFPRC', 'Refprc', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, true);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 
