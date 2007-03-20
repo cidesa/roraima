@@ -62,5 +62,25 @@ class alminvfisActions extends autoalminvfisActions
       $this->labels = $this->getLabels();
     }
   }
+  
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/cainvfis/filters');
+
+    // pager
+    $this->pager = new sfPropelPager('Cainvfis', 5);
+    $c = new Criteria();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $c->addJoin(CainvfisPeer::CODALM,CadefalmPeer::CODALM);
+    $c->setDistinct();    
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }  
 
  }
