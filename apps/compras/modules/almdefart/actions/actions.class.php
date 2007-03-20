@@ -27,7 +27,7 @@ class almdefartActions extends autoalmdefartActions
 	 	$this->cadefart = $this->getCadefartOrCreate();
 	    $this->nomemp = $this->getnomemp();
 	
-	 	if ($tSis->getRequest()->getMethod() == sfRequest::POST)
+	 	if ($this->getRequest()->getMethod() == sfRequest::POST)
 	 	{
 	 		$this->updateCadefartFromRequest();
 	
