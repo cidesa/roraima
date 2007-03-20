@@ -160,7 +160,7 @@ class almordcomActions extends autoalmordcomActions
     	//Funcion que ejecuta sql lista
         $con =
         sfContext::getInstance()->getDatabaseConnection($connection='propel');
-        $sql = "select ordcom,desres,codartpro,canord,canaju,canrec,cantot,costo,rgoart,totart from CAResOrdCom";// where a.Codart=b.Codart and a.Ordcom ='".$this->caordcom->getOrdcom()."'";
+        $sql = "select codart,desres,codartpro,canord,canaju,canrec,cantot,costo,rgoart,totart from CAResOrdCom where ordcom ='".$this->caordcom->getOrdcom()."'";// where a.Codart=b.Codart and a.Ordcom ='".$this->caordcom->getOrdcom()."'";
         $stmt = $con->createStatement();
         $stmt->setLimit(50000);
         $rs2 = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
