@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Carcpart
+    theme:            default
+    fields:
+      rcpart:      { name : Numero}
+      ordcom:      { name : Nro. Orden Compra }      
+      fecrcp:      { name : Fecha, params: date_format='dd/MM/yyyy'}
+      desrcp:      { name : Descripción}  
+      codpro:      { name : Codigo del Proveedor}  
+      numfac:      { name : Nro. Factura }  
+      monrcp:      { name : Monto Total}      
+      codalm:      { name : Codigo del Almacen}      
+      nroent:      { name : Nro. Nota de Entrega} 
+
+    list:
+      title:          Recepcion de Articulos por Orden de Compra
+      display:        [=rcpart, fecrcp, desrcp, ordcom, monrcp]
+      filters:        [ordcom, fecrcp, ordcom]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   5    
+    edit:
+      title:          Edicion de Recepcion de Articulos por Orden de Compra    

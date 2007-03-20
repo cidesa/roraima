@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Casolart
+    theme:            default
+    fields:
+      reqart: { name: Numero Solicitud, params: maxlength=8}       
+      desreq: { name: Descripcion, params: maxlength=20}
+      fecreq: { name: Fecha, params: date_format='dd/MM/yyyy'}
+    list:
+      title:          Asignacion de Prioridad a Cotizaciones
+      filters:        [reqart, fecreq]
+      display:        [=reqart, desreq, fecreq]
+      max_per_page:	  8
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Asignacion de Prioridad a Cotizaciones
