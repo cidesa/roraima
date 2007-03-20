@@ -2,8 +2,8 @@
 
 $sg_len_reg = 32;
 
-//$so = 'Windows';
-$so = 'Linux';
+$so = 'Windows';
+//$so = 'Linux';
 
 if($so == 'Linux')
 {
