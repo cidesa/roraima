@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nptipgas
+    theme:            default
+    fields:
+      codtipgas: { name: Código }
+      destipgas: { name: Descripción }
+    list:
+      title:          Tipos de Gastos
+      filters:        [codtipgas, destipgas ]
+      display:        [=codtipgas, destipgas ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:         Edicion de Tipos de Gastos
+      display:       [codtipgas, destipgas]

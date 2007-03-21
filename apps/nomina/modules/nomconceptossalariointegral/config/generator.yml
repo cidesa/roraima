@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npconsalint
+    theme:            default
+    fields:
+      codnom: { name: Tipo Nomina }
+      nomnom: { name: Descripción Nómina }
+      codcon: { name: Código Concepto }
+      nomcon: { name: Descripción Concepto }
+    list:
+      title:          Conceptos para el Salario Integral
+      filters:        [codnom, codcon ]
+      display:        [=codnom, nomnom, codcon, nomcon ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:         Edicion de Conceptos para el Salario Integral
+      display:       [codnom, codcon]

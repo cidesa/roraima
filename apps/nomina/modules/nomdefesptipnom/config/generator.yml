@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomina
+    theme:            default
+    fields:
+      codnom: { name: Código }
+      nomnom: { name: Nombre }
+      frecal: { name: Frecuencia del Cálculo }
+      ultfec: { name: Ultima Fecha de Procesamiento }
+      profec: { name: Proxima Fecha de Procesamiento }
+      numsem: { name: Número de la Semana }
+      ordpag: { name: Genera Orden de Pago }
+        
+    list:
+      title:          Tipos de Nómina
+      filters:        [codnom, nomnom ]
+      display:        [=codnom, nomnom, ultfec, profec, numsem ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:         Edicion de Tipos de Nómina
+      display:       [codnom, nomnom, frecal, ultfec, profec, numsem, ordpag]
+      

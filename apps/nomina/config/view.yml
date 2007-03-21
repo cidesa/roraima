@@ -3,11 +3,11 @@ default:
     content-type: text/html
 
   metas:
-    title:        symfony project
+    title:        Módulo Nómina
     robots:       index, follow
-    description:  symfony project
-    keywords:     symfony, project
-    language:     en
+    description:  Módulo Nómina
+    keywords:     Módulo Nómina
+    language:     en_US
 
   stylesheets:    [main]
 

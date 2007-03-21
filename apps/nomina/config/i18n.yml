@@ -1,5 +1,5 @@
-#all:
-  default_culture:     es_ES
+all:
+  default_culture:     us
   source:              XLIFF
   debug:               off
   cache:               on
