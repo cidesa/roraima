@@ -1,0 +1,23 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npgrulab
+    theme:            default
+
+    fields:
+      codgrulab:    { name: Codigo, params: maxlength=10,size=10  }
+      desgrulab:    { name: Descripcion, params: size=20  }
+
+    list:
+      title:          Datos de la Condicion Contractual
+      display:        [=codgrulab, desgrulab]
+      filters:		  [codgrulab, desgrulab]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Edicion de la Condicion Contractual
+      display:        [codgrulab, desgrulab]
+                

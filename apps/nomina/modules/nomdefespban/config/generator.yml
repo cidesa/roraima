@@ -5,8 +5,8 @@ generator:
     theme:            default
 
     fields:
-      codban:    { name: Codigo, params: maxlength=3,size=3  }
-      nomban:    { name: Descripcion}
+      codban:    { name: Codigo, params: maxlength=2,size=2  }
+      nomban:    { name: Descripcion, params: size=20  }
 
     list:
       title:          Datos del Banco
