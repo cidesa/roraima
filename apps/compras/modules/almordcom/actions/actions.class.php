@@ -49,7 +49,7 @@ class almordcomActions extends autoalmordcomActions
 	  if ($this->nomcomp) 
 	  {
 	  		$this->nom_comp = $this->nomcomp[0]->getNomext();
-	  	    $this->nomrefprc = $this->nomcomp[0]->getRefprc();	  	
+	  	    $this->nomrefprc = $this->nomcomp[0]->getRifpro();	  	
 	  }	  
 	  else
 	  { 
