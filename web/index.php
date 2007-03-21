@@ -1,7 +1,7 @@
 <?php
 
 define('SF_ROOT_DIR',    realpath(dirname(__FILE__).'/..'));
-define('SF_APP',         'compras');
+define('SF_APP',         'autenticacion');
 define('SF_ENVIRONMENT', 'prod');
 define('SF_DEBUG',       false);
 
