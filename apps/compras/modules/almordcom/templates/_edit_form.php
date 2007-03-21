@@ -121,7 +121,7 @@
     <?php echo form_error('caordcom{tipord}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php if ($caordcom->getTipord()=='C')
+  <?php if (($caordcom->getTipord()=='C'))
   		{
   			$v1='selected';$v2='';$v3='';$v4='';
   		}

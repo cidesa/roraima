@@ -49,7 +49,7 @@ class almordcomActions extends autoalmordcomActions
 	  if ($this->nomcomp) 
 	  {
 	  		$this->nom_comp = $this->nomcomp[0]->getNomext();
-	  	    $this->nomrefprc = $this->nomcomp[0]->getRifpro();	  	
+	  		$this->nomrefprc = $this->nomcomp[0]->getRefprc();	  	
 	  }	  
 	  else
 	  { 
@@ -67,7 +67,7 @@ class almordcomActions extends autoalmordcomActions
   	  $c->addJoin(CaconpagPeer::CODCONPAG,CaordconpagPeer::CODCONPAG);
   	  $this->rt = CaconpagPeer::doSelect($c);
   	  if ($this->rt)
-	  	{
+	  	{    
 	  		$this->codigo = $this->rt[0]->getCodconpag();
 	  	    $this->descripcion = $this->rt[0]->getDesconpag();
 	  	}
@@ -387,9 +387,9 @@ class almordcomActions extends autoalmordcomActions
     {
       $this->caordcom->setRefprc($caordcom['refprc']);
     }*/
-    /*if (isset($caordcom['id']))
+    if (isset($caordcom['id']))
     {
       $this->caordcom->setId($caordcom['id']);
-    }*/
+    }
   }  
 }

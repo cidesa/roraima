@@ -21,7 +21,7 @@ generator:
 
     list:
       title:          Ordenes de Compra
-      display:        [desord, ordcom, fecord, monord]
+      display:        [desord, =ordcom, fecord, monord]
       filters:        [ordcom]
       object_actions:
         _edit:        ~
@@ -29,4 +29,3 @@ generator:
       max_per_page:   5    
     edit:
       title:          Ordenes de Compra    
-      display:
