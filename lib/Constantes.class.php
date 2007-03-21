@@ -11,5 +11,12 @@ class Constantes
 	const Autenticacion = '{Autenticacion} ';
 	const Compras = '{Compras} ';
 	const Tesoreria = '{Tesoreria} ';
+
+	public static function ListaGeneraOrdenPago()
+	{return array('N' => '(No Afecta)', 'C' => 'Causa', 'O' => 'Compromete y Causa');}
+	
+	public static function ListaFrecuenciaPago()
+	{return array('Q' => 'Quincenal', 'S' => 'Semanal', 'M' => 'Mensual', 'A' => 'Mensual Anticipo');}
+	
 	
 }
