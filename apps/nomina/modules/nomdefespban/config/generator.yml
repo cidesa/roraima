@@ -1,0 +1,23 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npbancos
+    theme:            default
+
+    fields:
+      codban:    { name: Codigo, params: maxlength=3,size=3  }
+      nomban:    { name: Descripcion}
+
+    list:
+      title:          Datos del Banco
+      display:        [=codban, nomban]
+      filters:		  [codban, nomban]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Edicion de Banco
+      display:        [codban, nomban]
+            
