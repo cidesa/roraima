@@ -9,9 +9,11 @@
  */ 
 class CaartreqPeer extends BaseCaartreqPeer
 {
+	const COLUMNS = 'columns';
 	
-		public static $columsname = array (
-		BasePeer::TYPE_PHPNAME => array ('Número Requesición', 'Código del Artículo', 'Codcat', 'Cantidad Requerida', 'Cantidad Recibida', 'Monto Total', 'Unidad Medición', 'Relart', 'Id', ),
+	
+		private static $columsname = array (
+		self::COLUMNS => array (CaartreqPeer::REQART => 'Número Requesición', CaartreqPeer::CODART => 'Código del Artículo', CaartreqPeer::CODCAT => 'Codcat', CaartreqPeer::CANREQ => 'Cantidad Requerida', CaartreqPeer::CANREC => 'Cantidad Recibida', CaartreqPeer::MONTOT => 'Monto Total', CaartreqPeer::UNIMED => 'Unidad Medición', CaartreqPeer::RELART => 'Relart',CaartreqPeer::ID =>  'Id', ),
 	);
 	
 	
@@ -25,6 +27,11 @@ class CaartreqPeer extends BaseCaartreqPeer
 	    $pager->setPage(1);
 	    $pager->init();
 	    return $pager; 
+	}
+	
+	static public function getColumName($colum)
+	{
+		return self::$columsname[self::COLUMNS][$colum];
 	}
 	
 }

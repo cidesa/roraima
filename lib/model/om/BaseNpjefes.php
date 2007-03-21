@@ -1,0 +1,446 @@
+<?php
+
+
+abstract class BaseNpjefes extends BaseObject  implements Persistent {
+
+
+	
+	protected static $peer;
+
+
+	
+	protected $presupuesto;
+
+
+	
+	protected $administracion;
+
+
+	
+	protected $personal;
+
+
+	
+	protected $rector;
+
+
+	
+	protected $vicerector;
+
+
+	
+	protected $id;
+
+	
+	protected $alreadyInSave = false;
+
+	
+	protected $alreadyInValidation = false;
+
+	
+	public function getPresupuesto()
+	{
+
+		return $this->presupuesto;
+	}
+
+	
+	public function getAdministracion()
+	{
+
+		return $this->administracion;
+	}
+
+	
+	public function getPersonal()
+	{
+
+		return $this->personal;
+	}
+
+	
+	public function getRector()
+	{
+
+		return $this->rector;
+	}
+
+	
+	public function getVicerector()
+	{
+
+		return $this->vicerector;
+	}
+
+	
+	public function getId()
+	{
+
+		return $this->id;
+	}
+
+	
+	public function setPresupuesto($v)
+	{
+
+		if ($this->presupuesto !== $v) {
+			$this->presupuesto = $v;
+			$this->modifiedColumns[] = NpjefesPeer::PRESUPUESTO;
+		}
+
+	} 
+	
+	public function setAdministracion($v)
+	{
+
+		if ($this->administracion !== $v) {
+			$this->administracion = $v;
+			$this->modifiedColumns[] = NpjefesPeer::ADMINISTRACION;
+		}
+
+	} 
+	
+	public function setPersonal($v)
+	{
+
+		if ($this->personal !== $v) {
+			$this->personal = $v;
+			$this->modifiedColumns[] = NpjefesPeer::PERSONAL;
+		}
+
+	} 
+	
+	public function setRector($v)
+	{
+
+		if ($this->rector !== $v) {
+			$this->rector = $v;
+			$this->modifiedColumns[] = NpjefesPeer::RECTOR;
+		}
+
+	} 
+	
+	public function setVicerector($v)
+	{
+
+		if ($this->vicerector !== $v) {
+			$this->vicerector = $v;
+			$this->modifiedColumns[] = NpjefesPeer::VICERECTOR;
+		}
+
+	} 
+	
+	public function setId($v)
+	{
+
+		if ($this->id !== $v) {
+			$this->id = $v;
+			$this->modifiedColumns[] = NpjefesPeer::ID;
+		}
+
+	} 
+	
+	public function hydrate(ResultSet $rs, $startcol = 1)
+	{
+		try {
+
+			$this->presupuesto = $rs->getString($startcol + 0);
+
+			$this->administracion = $rs->getString($startcol + 1);
+
+			$this->personal = $rs->getString($startcol + 2);
+
+			$this->rector = $rs->getString($startcol + 3);
+
+			$this->vicerector = $rs->getString($startcol + 4);
+
+			$this->id = $rs->getInt($startcol + 5);
+
+			$this->resetModified();
+
+			$this->setNew(false);
+
+						return $startcol + 6; 
+		} catch (Exception $e) {
+			throw new PropelException("Error populating Npjefes object", $e);
+		}
+	}
+
+	
+	public function delete($con = null)
+	{
+		if ($this->isDeleted()) {
+			throw new PropelException("This object has already been deleted.");
+		}
+
+		if ($con === null) {
+			$con = Propel::getConnection(NpjefesPeer::DATABASE_NAME);
+		}
+
+		try {
+			$con->begin();
+			NpjefesPeer::doDelete($this, $con);
+			$this->setDeleted(true);
+			$con->commit();
+		} catch (PropelException $e) {
+			$con->rollback();
+			throw $e;
+		}
+	}
+
+	
+	public function save($con = null)
+	{
+		if ($this->isDeleted()) {
+			throw new PropelException("You cannot save an object that has been deleted.");
+		}
+
+		if ($con === null) {
+			$con = Propel::getConnection(NpjefesPeer::DATABASE_NAME);
+		}
+
+		try {
+			$con->begin();
+			$affectedRows = $this->doSave($con);
+			$con->commit();
+			return $affectedRows;
+		} catch (PropelException $e) {
+			$con->rollback();
+			throw $e;
+		}
+	}
+
+	
+	protected function doSave($con)
+	{
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
+			$this->alreadyInSave = true;
+
+
+						if ($this->isModified()) {
+				if ($this->isNew()) {
+					$pk = NpjefesPeer::doInsert($this, $con);
+					$affectedRows += 1; 										 										 
+					$this->setNew(false);
+				} else {
+					$affectedRows += NpjefesPeer::doUpdate($this, $con);
+				}
+				$this->resetModified(); 			}
+
+			$this->alreadyInSave = false;
+		}
+		return $affectedRows;
+	} 
+	
+	protected $validationFailures = array();
+
+	
+	public function getValidationFailures()
+	{
+		return $this->validationFailures;
+	}
+
+	
+	public function validate($columns = null)
+	{
+		$res = $this->doValidate($columns);
+		if ($res === true) {
+			$this->validationFailures = array();
+			return true;
+		} else {
+			$this->validationFailures = $res;
+			return false;
+		}
+	}
+
+	
+	protected function doValidate($columns = null)
+	{
+		if (!$this->alreadyInValidation) {
+			$this->alreadyInValidation = true;
+			$retval = null;
+
+			$failureMap = array();
+
+
+			if (($retval = NpjefesPeer::doValidate($this, $columns)) !== true) {
+				$failureMap = array_merge($failureMap, $retval);
+			}
+
+
+
+			$this->alreadyInValidation = false;
+		}
+
+		return (!empty($failureMap) ? $failureMap : true);
+	}
+
+	
+	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
+	{
+		$pos = NpjefesPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		return $this->getByPosition($pos);
+	}
+
+	
+	public function getByPosition($pos)
+	{
+		switch($pos) {
+			case 0:
+				return $this->getPresupuesto();
+				break;
+			case 1:
+				return $this->getAdministracion();
+				break;
+			case 2:
+				return $this->getPersonal();
+				break;
+			case 3:
+				return $this->getRector();
+				break;
+			case 4:
+				return $this->getVicerector();
+				break;
+			case 5:
+				return $this->getId();
+				break;
+			default:
+				return null;
+				break;
+		} 	}
+
+	
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
+	{
+		$keys = NpjefesPeer::getFieldNames($keyType);
+		$result = array(
+			$keys[0] => $this->getPresupuesto(),
+			$keys[1] => $this->getAdministracion(),
+			$keys[2] => $this->getPersonal(),
+			$keys[3] => $this->getRector(),
+			$keys[4] => $this->getVicerector(),
+			$keys[5] => $this->getId(),
+		);
+		return $result;
+	}
+
+	
+	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
+	{
+		$pos = NpjefesPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		return $this->setByPosition($pos, $value);
+	}
+
+	
+	public function setByPosition($pos, $value)
+	{
+		switch($pos) {
+			case 0:
+				$this->setPresupuesto($value);
+				break;
+			case 1:
+				$this->setAdministracion($value);
+				break;
+			case 2:
+				$this->setPersonal($value);
+				break;
+			case 3:
+				$this->setRector($value);
+				break;
+			case 4:
+				$this->setVicerector($value);
+				break;
+			case 5:
+				$this->setId($value);
+				break;
+		} 	}
+
+	
+	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
+	{
+		$keys = NpjefesPeer::getFieldNames($keyType);
+
+		if (array_key_exists($keys[0], $arr)) $this->setPresupuesto($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setAdministracion($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setPersonal($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setRector($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setVicerector($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+	}
+
+	
+	public function buildCriteria()
+	{
+		$criteria = new Criteria(NpjefesPeer::DATABASE_NAME);
+
+		if ($this->isColumnModified(NpjefesPeer::PRESUPUESTO)) $criteria->add(NpjefesPeer::PRESUPUESTO, $this->presupuesto);
+		if ($this->isColumnModified(NpjefesPeer::ADMINISTRACION)) $criteria->add(NpjefesPeer::ADMINISTRACION, $this->administracion);
+		if ($this->isColumnModified(NpjefesPeer::PERSONAL)) $criteria->add(NpjefesPeer::PERSONAL, $this->personal);
+		if ($this->isColumnModified(NpjefesPeer::RECTOR)) $criteria->add(NpjefesPeer::RECTOR, $this->rector);
+		if ($this->isColumnModified(NpjefesPeer::VICERECTOR)) $criteria->add(NpjefesPeer::VICERECTOR, $this->vicerector);
+		if ($this->isColumnModified(NpjefesPeer::ID)) $criteria->add(NpjefesPeer::ID, $this->id);
+
+		return $criteria;
+	}
+
+	
+	public function buildPkeyCriteria()
+	{
+		$criteria = new Criteria(NpjefesPeer::DATABASE_NAME);
+
+		$criteria->add(NpjefesPeer::ID, $this->id);
+
+		return $criteria;
+	}
+
+	
+	public function getPrimaryKey()
+	{
+		return $this->getId();
+	}
+
+	
+	public function setPrimaryKey($key)
+	{
+		$this->setId($key);
+	}
+
+	
+	public function copyInto($copyObj, $deepCopy = false)
+	{
+
+		$copyObj->setPresupuesto($this->presupuesto);
+
+		$copyObj->setAdministracion($this->administracion);
+
+		$copyObj->setPersonal($this->personal);
+
+		$copyObj->setRector($this->rector);
+
+		$copyObj->setVicerector($this->vicerector);
+
+
+		$copyObj->setNew(true);
+
+		$copyObj->setId(NULL); 
+	}
+
+	
+	public function copy($deepCopy = false)
+	{
+				$clazz = get_class($this);
+		$copyObj = new $clazz();
+		$this->copyInto($copyObj, $deepCopy);
+		return $copyObj;
+	}
+
+	
+	public function getPeer()
+	{
+		if (self::$peer === null) {
+			self::$peer = new NpjefesPeer();
+		}
+		return self::$peer;
+	}
+
+} 
