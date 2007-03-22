@@ -1,0 +1,18 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npperfil
+    theme:            default
+    fields:
+      codperfil: { name: Codigo, params: maxlength=4}
+      desperfil: { name: Descripcion}            
+    list:
+      title:          Definicion de Perfiles
+      filters:        [codperfil, desperfil]
+      display:        [=codperfil, desperfil]
+      max_per_page:	  6      
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edicion de Perfiles

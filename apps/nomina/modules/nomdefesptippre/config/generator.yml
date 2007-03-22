@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nptippre
+    theme:            default
+    fields:
+      codtippre: { name: Codigo, params: maxlength=4}
+      destippre: { name: Descripcion}            
+      codcon:    { name: Cod. Concepto para cobro de cuotas}    
+    list:
+      title:          Tipo de Prestamo
+      filters:        [codtippre, destippre]
+      display:        [=codtippre, destippre]
+      max_per_page:	  6            
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edicion de Tipo de Prestamo
