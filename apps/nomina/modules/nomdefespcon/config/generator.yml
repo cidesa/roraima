@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npdefcpt
+    theme:            default
+
+    fields:
+      codcon:    { name: Codigo, params: maxlength=4,size=5}
+      nomcon:    { name: Descripcion, params: size=100}
+      codpar:    { name: Codigo Partida, params: size=32}
+
+    list:
+      title:          Definicion de Conceptos
+      display:        [=codcon, nomcon, codpar]
+      filters:		  [codcon, nomcon, codpar]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Edicion de Conceptos
+    #  display:        [codcon, nomcon, codpar]
+                    
