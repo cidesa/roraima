@@ -187,6 +187,8 @@ class almordcomActions extends autoalmordcomActions
     $this->nom_proyecto = $this->getDes_proyecto();
     $this->getForm_entrega();
     $this->getForm_financiamiento();    
+    $this->listatipocompra = Constantes::ListaTipoCompra();
+  
     
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -218,6 +220,10 @@ class almordcomActions extends autoalmordcomActions
   {
     $caordcom = $this->getRequestParameter('caordcom');
 
+    if (isset($caordcom['ordcom']))
+    {
+      $this->caordcom->setOrdcom($caordcom['ordcom']);
+    }
     if (isset($caordcom['fecord']))
     {
       if ($caordcom['fecord'])
@@ -262,8 +268,7 @@ class almordcomActions extends autoalmordcomActions
     {
       $this->caordcom->setPlaent($caordcom['plaent']);
     }
-    /*
-    if (isset($caordcom['tiecan']))
+    /*if (isset($caordcom['tiecan']))
     {
       $this->caordcom->setTiecan($caordcom['tiecan']);
     }*/
@@ -282,16 +287,16 @@ class almordcomActions extends autoalmordcomActions
     /*if (isset($caordcom['staord']))
     {
       $this->caordcom->setStaord($caordcom['staord']);
-    }*/
-    /*if (isset($caordcom['afepre']))
+    }
+    if (isset($caordcom['afepre']))
     {
       $this->caordcom->setAfepre($caordcom['afepre']);
-    }*/
-    /*if (isset($caordcom['conpag']))
+    }
+    if (isset($caordcom['conpag']))
     {
       $this->caordcom->setConpag($caordcom['conpag']);
-    }*/
-    /*if (isset($caordcom['forent']))
+    }
+    if (isset($caordcom['forent']))
     {
       $this->caordcom->setForent($caordcom['forent']);
     }
@@ -330,8 +335,8 @@ class almordcomActions extends autoalmordcomActions
     /*if (isset($caordcom['valmon']))
     {
       $this->caordcom->setValmon($caordcom['valmon']);
-    }*/
-    /*if (isset($caordcom['tipcom']))
+    }
+    if (isset($caordcom['tipcom']))
     {
       $this->caordcom->setTipcom($caordcom['tipcom']);
     }*/
@@ -346,16 +351,16 @@ class almordcomActions extends autoalmordcomActions
     /*if (isset($caordcom['coduni']))
     {
       $this->caordcom->setCoduni($caordcom['coduni']);
-    }*/
-    /*if (isset($caordcom['codemp']))
+    }
+    if (isset($caordcom['codemp']))
     {
       $this->caordcom->setCodemp($caordcom['codemp']);
-    }*/
-    /*if (isset($caordcom['notord']))
+    }
+    if (isset($caordcom['notord']))
     {
       $this->caordcom->setNotord($caordcom['notord']);
-    }*/
-    /*if (isset($caordcom['tipdoc']))
+    }
+    if (isset($caordcom['tipdoc']))
     {
       $this->caordcom->setTipdoc($caordcom['tipdoc']);
     }*/
@@ -382,14 +387,29 @@ class almordcomActions extends autoalmordcomActions
     /*if (isset($caordcom['justif']))
     {
       $this->caordcom->setJustif($caordcom['justif']);
-    }*/
-    /*if (isset($caordcom['refprc']))
+    }
+    if (isset($caordcom['refprc']))
     {
       $this->caordcom->setRefprc($caordcom['refprc']);
     }*/
-    if (isset($caordcom['id']))
+  }
+  
+
+  protected function getCaordcomOrCreate($id = 'id')
+  {
+    if (!$this->getRequestParameter($id))
     {
-      $this->caordcom->setId($caordcom['id']);
+      $caordcom = new Caordcom();
+      $this->nom_comp = "";
+      $this->nomrefprc = "";      
     }
-  }  
+    else
+    {
+      $caordcom = CaordcomPeer::retrieveByPk($this->getRequestParameter($id));
+
+      $this->forward404Unless($caordcom);
+    }
+
+    return $caordcom;
+  }
 }
