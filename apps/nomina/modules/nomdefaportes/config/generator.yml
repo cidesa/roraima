@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nptipaportes
+    theme:            default
+    fields:
+      codtipapo: { name: Codigo}
+      destipapo: { name: Descripcion}
+      porret: { name: Porcentaje Retencion}
+      porapo: { name: Porcentaje Aporte Pat}    
+        
+    list:
+      title:          Retenciones y Aportes
+      filters:        [codtipapo]
+      display:        [=codtipapo, destipapo]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Retenciones y Aportes
+      display:       [=codtipapo, destipapo, porret, porapo]

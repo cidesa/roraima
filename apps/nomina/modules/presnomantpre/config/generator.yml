@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npantpre
+    theme:            default
+    fields:
+      codemp: { name: Codigo} 
+      nomemp: { name: Nombre}     
+      monant: { name: Antiguedad Acumulada} 
+      fecant: {name: Fecha del Anticipo}     
+      monto: { name: Monto del Anticipo}  
+            
+    list:
+      title:          Anticipo Sobre Prestaciones
+      filters:        [codemp]
+      display:        [=codemp, nomemp, fecant]
+      fields:
+        fecant: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion Dias Extras
+      display:       [=codemp, monant, fecant, monto]
+      fields:
+        fecant: { params: date_format='dd/MM/yy' }
