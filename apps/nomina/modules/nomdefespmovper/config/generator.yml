@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomina
+    theme:            default
+
+    fields:
+      codnom:    { name: Codigo, params: maxlength=10,size=10  }
+      nomnom:    { name: Descripción, params: size=20  }
+
+    list:
+      title:          Definición de Conceptos Variables
+      display:        [codnom, nomnom, monto, cantidad]
+      filters:		  [codnom, nomnom, monto, cantidad]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Definición de Conceptos Variables
+      display:        [codnom, nomnom, monto, cantidad]

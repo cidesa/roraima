@@ -14,7 +14,6 @@ class nomdefesptipnomActions extends autonomdefesptipnomActions
 	{
 		$this->listafrecpag = Constantes::ListaFrecuenciaPago();
 		$this->listagenordpag = Constantes::ListaGeneraOrdenPago();
-		
 		parent::executeEdit();
 	}
 }
