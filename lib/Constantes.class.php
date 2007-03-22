@@ -18,5 +18,8 @@ class Constantes
 	public static function ListaFrecuenciaPago()
 	{return array('Q' => 'Quincenal', 'S' => 'Semanal', 'M' => 'Mensual', 'A' => 'Mensual Anticipo');}
 	
+	public static function ListaTipoCompra()
+	{return array('C' => 'Compra', 'S' => 'Servicio', 'M' => 'Mixto');}
+	
 	
 }
