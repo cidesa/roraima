@@ -10,4 +10,6 @@
  */
 class nomdefconahoActions extends autonomdefconahoActions
 {
+	
+	//prueba
 }
