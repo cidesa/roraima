@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almordcom/edit_messages', array('caordcom' => $caordcom, 'labels' => $labels)) ?>
-<?php include_partial('almordcom/edit_form', array('caordcom' => $caordcom, 'labels' => $labels, 'nom_pro' => $nom_pro, 'nom_mon' => $nom_mon,'nom_comp' => $nom_comp, 'nomrefprc' => $nomrefprc, 'rs' => $rs, 'rs2' => $rs2, 'codigo' => $codigo, 'descripcion' => $descripcion, 'nom_proyecto' => $nom_proyecto, 'id_entrega' => $id_entrega, 'descripcion_entrega' => $descripcion_entrega, 'descripcion_financiamiento' => $descripcion_financiamiento)) ?>
+<?php include_partial('almordcom/edit_form', array('caordcom' => $caordcom, 'labels' => $labels, 'nom_pro' => $nom_pro, 'nom_mon' => $nom_mon,'nom_comp' => $nom_comp, 'nomrefprc' => $nomrefprc, 'rs' => $rs, 'rs2' => $rs2, 'codigo' => $codigo, 'descripcion' => $descripcion, 'nom_proyecto' => $nom_proyecto, 'id_entrega' => $id_entrega, 'descripcion_entrega' => $descripcion_entrega, 'descripcion_financiamiento' => $descripcion_financiamiento, 'listatipocompra' => $listatipocompra)) ?>
 </div>
 
 <div id="sf_admin_footer">
