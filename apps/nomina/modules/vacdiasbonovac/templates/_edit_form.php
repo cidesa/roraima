@@ -11,7 +11,29 @@
 <?php echo object_input_hidden_tag($npvacdiasbonovac, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
+<legend>Jornada Laboral</legend>
+<div class="form-row">
 
+<br>
+Lunes&nbsp;<input type="checkbox" name="checkbox" value="checkbox" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+Martes&nbsp;<input type="checkbox" name="checkbox" value="checkbox" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+Miercoles&nbsp;<input type="checkbox" name="checkbox" value="checkbox" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+Jueves&nbsp;<input type="checkbox" name="checkbox" value="checkbox" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+Viernes&nbsp;<input type="checkbox" name="checkbox" value="checkbox" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+Sabado&nbsp;<input type="checkbox" name="checkbox" value="checkbox" />
+&nbsp;&nbsp;&nbsp;&nbsp;
+Domingo&nbsp;<input type="checkbox" name="checkbox" value="checkbox" />
+</div>
+
+</fieldset>
+
+<fieldset>
+<legend>Datos de los Dias de Bono Vacacional</legend>
 <div class="form-row">
   <?php echo label_for('npvacdiasbonovac[codnom]', __($labels['npvacdiasbonovac{codnom}']), '') ?>
   <div class="content<?php if ($sf_request->hasError('npvacdiasbonovac{codnom}')): ?> form-error<?php endif; ?>">
