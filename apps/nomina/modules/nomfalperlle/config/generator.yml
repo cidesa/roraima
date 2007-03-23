@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npfalper
+    theme:            default
+    fields:
+      codemp:    { name: Cod. de Empleado}
+      nomemp:    { name: Nombre del Empleado}      
+      codmot:    { name: Cod. Motivo}
+      desmotfal: { name: Motivo}
+      nrodia:    { name: Nro. dias}
+      observ:    { name: Observacion}
+      fecdes:    { name: Fecha Salida, params: date_format='dd/MM/yyyy'  }
+      fechas:    { name: Fecha Llegada, params: date_format='dd/MM/yyyy'  }        
+        
+    list:
+      title:          Llegadas y faltas y/o permisos
+      filters:        [codemp, codmot, fecdes, fechas]
+      display:        [codemp, nomemp, codmot, desmotfal, fecdes, fechas]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Llegadas y faltas y/o permisos
+      display:        [codemp, nomemp, codmot, desmotfal, nrodia, observ, fecdes, fechas]
