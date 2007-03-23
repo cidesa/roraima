@@ -10,10 +10,10 @@
  */
 class nomjorlablotActions extends autonomjorlablotActions
 {
-	protected function executeEdit()
+	public function executeEdit()
 	{
 		$c = new Criteria();
-		$this->pagerNphojint = NphojintPeer::getPagerByCriteria($c);
+		$this->pagerNphojint = NphojintPeer::getPagerByCriteria($c,$this->getRequestParameter('page',1));
 		
 		parent::executeEdit();
 	}
