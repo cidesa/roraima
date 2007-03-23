@@ -28,8 +28,16 @@ body
 
 .grid01 {
 	color: #00000;
-	width: 575px;
+	width: 640px;
 	height: 192px;
+	overflow:scroll;
+	background-color: #FFFFFF;
+}
+
+.grid01 {
+	color: #00000;
+	width: 750px;
+	height: 240px;
 	overflow:scroll;
 	background-color: #FFFFFF;
 }
