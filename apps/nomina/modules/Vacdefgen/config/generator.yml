@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npvacdefgen
+    theme:            default
+
+    fields:
+      codnomvac:   { name: Tipo de Nomina, params: maxlength=6}
+      codconvac:   { name: Codigo, params: maxlength=6}
+      nomnom:      { name: Descripcion}  
+      nomcon:      { name: Concepto de Vacaciones}  
+      pagoad:      { name: Pago Doble, params: maxlength=3}
+        
+    list:
+      title:          Definicion de Conceptos para el Pago Adelantado de Vacaciones
+      filters:        [codnomvac, codconvac]
+      display:        [=codnomvac, nomnom, codconvac, nomcon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edicion de Conceptos para el Pago Adelantado de Vacaciones
+      display:        [codnomvac, nomnom, codconvac, nomcon, pagoad]    
