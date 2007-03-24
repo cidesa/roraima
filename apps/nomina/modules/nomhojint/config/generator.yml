@@ -1,0 +1,95 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nphojint
+    theme:            default
+    fields:
+      codemp: { name: No. Empleado}
+      nomemp: { name: Apellido(s) y Nombre(s)}      
+      cedemp: { name: C.I.}
+      edociv: { name: Estado Civil}
+      numcon: { name: No. Contrato}      
+      nacemp: { name: Nacionalidad}
+      sexemp: { name: Sexo}
+      codniv: { name: Nivel Organizacional}
+      fotemp: { name: Foto}
+      lugnac: { name: Lugar de Nacimiento}
+      fecnac: { name: Fecha de Nacimiento}
+      edaemp: { name: Edad}
+      obsgen: { name: Observaciones}            
+      dirhab: { name: Direccion}
+      codpai: { name: Estado}
+      codest: { name: Municipio}
+      codciu: { name: Parroquia}
+      telhab: { name: Tlf. Hab}
+      telotr: { name: Otro Tlf.}      
+      celemp: { name: Celular}
+      dirotr: { name: Direccion}
+      codpa2: { name: Estado}
+      codes2: { name: Municipio} 
+      codci2: { name: Parroquia}
+      telha2: { name: Telefono}
+      telot2: { name: Otro Tlf.}           
+      emaemp: { name: Email}
+      codpos: { name: Codigo Postal}      
+      fecing: { name: Ingreso}
+      fecret: { name: Egreso}
+      fecrei: { name: Reingreso}
+      obsemp: { name: Motivo de Egreso}
+      staemp: { name: Situacion del Empleado}            
+      codtippag: { name: Forma de Pago}
+      codban: { name: Banco}
+      numcue: { name: Numero de Cuenta}
+      tipcue: { name: Tipo de Cuenta}            
+      fecadmpub: { name: Fecha en la Administracion publica}
+      numsso: { name: Numero de S.S.O}
+      numpolseg: { name: Numero dde Poliza de Seguro}
+      feccotsso: { name: Fecha de Cotizacion de S.S.O}
+      anoadmpub: { name: Años de Continuidad en la Administracion Publica}
+      tiefid: { name: Fideicomiso}                
+      talcam: { name: Talla Camisa}
+      talpan: { name: Talla Pantalon}
+      talcal: { name: No. de Calzado}
+      grusan: { name: Grupo Sanguineo}
+      codregpai: { name: Estado}
+      codregest: { name: Municipio}
+      codregciu: { name: Parroquia}
+      grulab: { name: Grupo Laboral}
+      gruotr: { name: Descripcion}
+      traslado: { name: Forma de Translado}
+      traotr: { name: Descripcion}
+      numexp: { name: Numero}
+      detexp: { name: Contenido}
+      derzur: { name: DerechoZurdo}      
+      tipviv: { name: Tipo de Vivienda}
+      vivotr: { name: Descripcion}
+      forten: { name: Forma de Tenencia}
+      tenotr: { name: Descripcion}
+      sercon: { name: Servicios}           
+      temporal: { name: Temporal}
+               
+    list:
+      title:          Datos Personales
+      filters:        [codemp]
+      display:        [=codemp, nomemp]
+      fields:
+        fecnac: { params: date_format='dd/MM/yy' }
+        fecing: { params: date_format='dd/MM/yy' }
+        fecret: { params: date_format='dd/MM/yy' }
+        fecrei: { params: date_format='dd/MM/yy' }
+        fecadmpub: { params: date_format='dd/MM/yy' }
+        feccotsso: { params: date_format='dd/MM/yy' }        
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Datos Personales
+      display:       [=codemp, nomemp, cedemp, edociv, numcon, nacemp, sexemp, codniv, fotemp, lugnac, fecnac, edaemp, obsgen, dirhab, codpai, codest, codciu, telhab, telotr, celemp, dirotr, codpa2, codes2, codci2, telha2, telot2, emaemp, codpos, fecing, fecret, fecrei, obsemp, staemp, codtippag, codban, numcue, tipcue, fecadmpub, numsso, numpolseg, feccotsso, anoadmpub, tiefid, talcam, talpan, talcal, grusan, codregpai, codregest, codregciu, grulab, gruotr, traslado, traotr, numexp, detexp, derzur, tipviv, vivotr, forten, tenotr, sercon, temporal]
+      fields:
+        fecnac: { params: date_format='dd/MM/yy' }
+        fecing: { params: date_format='dd/MM/yy' }
+        fecret: { params: date_format='dd/MM/yy' }
+        fecrei: { params: date_format='dd/MM/yy' }
+        fecadmpub: { params: date_format='dd/MM/yy' }
+        feccotsso: { params: date_format='dd/MM/yy' }
