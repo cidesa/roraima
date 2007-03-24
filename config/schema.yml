@@ -12081,12 +12081,15 @@ propel:
     coduni: 
       type: VARCHAR
       size: 3
-    objsec: 
+    objesp: 
       type: VARCHAR
       size: 1000
-    codemp: 
+    mision: 
       type: VARCHAR
-      size: 16
+      size: 1000
+    vision: 
+      type: VARCHAR
+      size: 1000
     id: 
       type: INTEGER
       required: true
