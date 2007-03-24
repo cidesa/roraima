@@ -40,9 +40,11 @@ class FordefcatpreMapBuilder {
 
 		$tMap->addColumn('CODUNI', 'Coduni', 'string', CreoleTypes::VARCHAR, false, 3);
 
-		$tMap->addColumn('OBJSEC', 'Objsec', 'string', CreoleTypes::VARCHAR, false, 1000);
+		$tMap->addColumn('OBJESP', 'Objesp', 'string', CreoleTypes::VARCHAR, false, 1000);
 
-		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('MISION', 'Mision', 'string', CreoleTypes::VARCHAR, false, 1000);
+
+		$tMap->addColumn('VISION', 'Vision', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
