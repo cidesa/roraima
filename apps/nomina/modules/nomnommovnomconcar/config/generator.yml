@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npasicaremp
+    theme:            default
+
+    fields:
+      codemp:       { name: Codigo Empleado}
+      codcar:       { name: Codigo Cargo}
+      codnom:       { name: Codigo Nomina}  
+      #codcon:       { name: Codigo Concepto}  
+      sueldo:       { name: Sueldo}  
+      nomemp:       { name: Nombre Empleado, params: maxlength=50}
+        
+    list:
+      title:          Movimientos de Conceptos y Cargos
+      filters:        [codemp, nomemp, codcar, codnom]
+      display:        [=codemp, nomemp, codcar, codnom]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edicion de Movimientos de Conceptos y Cargos
+      display:        [codemp, nomemp, codcar, codnom]        
