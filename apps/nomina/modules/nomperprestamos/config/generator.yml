@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nptippre
+    theme:            default
+    fields:
+      codtippre: { name: Codigo del Tipo de Prestamo}
+      destippre: {name: Descripcion del Tipo de Prestamo}
+      codcon: { name: Codigo del Concepto}
+      nomcon: { name: Descripcion del Concepto}      
+      tippre: { name: Tipo}  
+            
+    list:
+      title:          Prestamos
+      display:        [=codcon, nomcon, codtippre, destippre]
+      object_actions:
+        _edit:        ~
+     max_per_page:   5
+    edit:
+      title:          Edicion de Prestamos
+      display:       [codtippre, destippre]

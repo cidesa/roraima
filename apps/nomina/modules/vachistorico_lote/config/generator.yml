@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npvacdisfrute
+    theme:            default
+    fields:
+      perini: { name: Periodo Desde}
+      perfin: { name: Periodo hasta}
+      codemp: { name: Codigo del Trabajador} 
+      nomemp: { name: Nombre(s) y Apellido(s)}     
+      diasdisfutar: { name: Dias a Disfrutar}
+      diasdisfrutados: { name: Dias Disfrutados}  
+            
+    list:
+      title:          Vacaciones Disfrutadas en Lote
+      filters:        [perini]
+      display:        [=perfin, perfin, codemp, nomemp]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Registro de Vacaciones Disfrutadas en Lote
+      display:       [=perini, perfin, codemp, diasdisfutar, diasdisfrutados]

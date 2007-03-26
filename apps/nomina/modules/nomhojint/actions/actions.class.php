@@ -10,7 +10,7 @@
  */
 class nomhojintActions extends autonomhojintActions
 {
-	public function CargarBancos()
+  public function CargarBancos()
 	{
 	$c = new Criteria();
 	$lista_ban = NpbancosPeer::doSelect($c);

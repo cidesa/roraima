@@ -9,6 +9,7 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($nphojint, 'getId') ?>
+<a name="Back"></a>
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
   <?php echo label_for('nphojint[codemp]', __($labels['nphojint{codemp}']), 'class="required" ') ?>
@@ -37,51 +38,64 @@
 &nbsp;
 &nbsp;
 &nbsp;
+<div class="form-row"><span lang=ES-VE>
+<img src=" /images/vineta.gif"  >&nbsp; &nbsp;<a href="#Datos">Datos Personales</a> 
+<img src=" /images/vineta.gif" >&nbsp; &nbsp;<a href="#Habita"> <span lang=ES-VE>Habitacion</span></a>
+<img src=" /images/vineta.gif" >&nbsp; &nbsp;<a href="#Ingre"> <span lang=ES-VE>Ingresos</span></a>
+<img src=" /images/vineta.gif" >&nbsp; &nbsp;<a href="#Bancaria"> <span lang=ES-VE>Informacion Bancaria</span></a>
+<img src=" /images/vineta.gif" >&nbsp; &nbsp;<a href="#Publica"> <span lang=ES-VE>Informacion de Administracion Publica</span></a>
+<img src=" /images/vineta.gif" >&nbsp; &nbsp;<a href="#Laboral"> <span lang=ES-VE>Experiencia Laboral</span></a>
+<img src=" /images/vineta.gif" >&nbsp; &nbsp;<a href="#Curricular"> <span lang=ES-VE>Informacion Curricular</span></a>
+<img src=" /images/vineta.gif" >&nbsp; &nbsp;<a href="#Familiar"> <span lang=ES-VE>Informacion Familiar</span></a>
+<img src=" /images/vineta.gif" >&nbsp; &nbsp;<a href="#Otras"> <span lang=ES-VE>Otras Carecteristicas</span></a>
+<img src=" /images/vineta.gif" >&nbsp; &nbsp;<a href="#Vivienda"> <span lang=ES-VE>Condiciones de Vivienda</span></a>
+<img src=" /images/vineta.gif">&nbsp; &nbsp;<a href="#Guardar"> <span
+	lang=ES-VE>Ir a  Guardar</span></a>
+</div>
 &nbsp;
-<fieldset id="sf_fieldset_none" class="">
-<legend>Datos Personales</legend>
+<a name="Datos"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Datos Personales</legend>
 <div class="form-row">
-<table width="95%" border="0">
-  <tr valign="middle"> 
-    <td width="36%" height="21"><?php echo label_for('nphojint[cedemp]', __($labels['nphojint{cedemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{cedemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{cedemp}')): ?>
-    <?php echo form_error('nphojint{cedemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = object_input_tag($nphojint, 'getCedemp', array (
+<table width="95%" border="0">
+	<tr valign="middle">
+		<td width="36%" height="21"><?php echo label_for('nphojint[cedemp]', __($labels['nphojint{cedemp}']), 'class="required" ') ?>
+		<div
+			class="content<?php if ($sf_request->hasError('nphojint{cedemp}')): ?> form-error<?php endif; ?>">
+		<?php if ($sf_request->hasError('nphojint{cedemp}')): ?> <?php echo form_error('nphojint{cedemp}', array('class' => 'form-error-msg')) ?>
+		<?php endif; ?> <?php $value = object_input_tag($nphojint, 'getCedemp', array (
   'size' => 20,
   'control_name' => 'nphojint[cedemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div></td>
-    <td width="41%"><?php echo label_for('nphojint[edociv]', __($labels['nphojint{edociv}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{edociv}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{edociv}')): ?>
-    <?php echo form_error('nphojint{edociv}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>  
-<?php echo select_tag('nphojint[edociv]', options_for_select($listaestadocivil,$nphojint->getEdociv())) ?>
-    </div></td>
-    <td width="23%" rowspan="3"><div align="center"><strong> Foto </strong></div>
-   
-   </td>
-  </tr>
-  <tr valign="middle"> 
-    <td height="21" colspan="2"><?php echo label_for('nphojint[numcon]', __($labels['nphojint{numcon}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{numcon}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{numcon}')): ?>
-    <?php echo form_error('nphojint{numcon}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+)); echo $value ? $value : '&nbsp;' ?></div>
+		</td>
+		<td width="41%"><?php echo label_for('nphojint[edociv]', __($labels['nphojint{edociv}']), 'class="required" ') ?>
+		<div
+			class="content<?php if ($sf_request->hasError('nphojint{edociv}')): ?> form-error<?php endif; ?>">
+		<?php if ($sf_request->hasError('nphojint{edociv}')): ?> <?php echo form_error('nphojint{edociv}', array('class' => 'form-error-msg')) ?>
+		<?php endif; ?> <?php echo select_tag('nphojint[edociv]', options_for_select($listaestadocivil,$nphojint->getEdociv())) ?>
+		</div>
+		</td>
+		<td width="23%" rowspan="3">
+		<div align="center"><strong> Foto </strong></div>
 
-  <?php $value = object_input_tag($nphojint, 'getNumcon', array (
+		</td>
+	</tr>
+	<tr valign="middle">
+		<td height="21" colspan="2"><?php echo label_for('nphojint[numcon]', __($labels['nphojint{numcon}']), 'class="required" ') ?>
+		<div
+			class="content<?php if ($sf_request->hasError('nphojint{numcon}')): ?> form-error<?php endif; ?>">
+		<?php if ($sf_request->hasError('nphojint{numcon}')): ?> <?php echo form_error('nphojint{numcon}', array('class' => 'form-error-msg')) ?>
+		<?php endif; ?> <?php $value = object_input_tag($nphojint, 'getNumcon', array (
   'size' => 20,
   'control_name' => 'nphojint[numcon]',
-)); echo $value ? $value : '&nbsp;' ?></td>    
-  </tr>
-  <tr valign="middle"> 
-    <td height="23"><fieldset id="sf_fieldset_none" class="">
-<legend>Nacionalidad</legend>
-<div class="form-row">
-<?
+)); echo $value ? $value : '&nbsp;' ?>
+		
+		</td>
+	</tr>
+	<tr valign="middle">
+		<td height="23">
+		<fieldset id="sf_fieldset_none" class=""><legend>Nacionalidad</legend>
+		<div class="form-row"><?
 if ($nphojint->getNacemp()=='V')	{
   ?><?php echo radiobutton_tag('nphojint[nacemp]', 'V', true)        ."Venezolano(a)".'&nbsp;&nbsp;';
 		  echo radiobutton_tag('nphojint[nacemp]', 'E', false)."   Extranjero(a)";?>
@@ -91,13 +105,12 @@ if ($nphojint->getNacemp()=='V')	{
 	echo radiobutton_tag('nphojint[nacemp]', 'V', false)        ."Venezolano(a)".'&nbsp;&nbsp;';
 	echo radiobutton_tag('nphojint[nacemp]', 'E', true)."   Extranjero(a)";
 
-} ?>    
-</div>
-</fieldset></td>
-    <td><fieldset id="sf_fieldset_none" class="">
-<legend>Sexo</legend>
-<div class="form-row">
-<?
+} ?></div>
+		</fieldset>
+		</td>
+		<td>
+		<fieldset id="sf_fieldset_none" class=""><legend>Sexo</legend>
+		<div class="form-row"><?
 if ($nphojint->getSexemp()=='M')	{
   ?><?php echo radiobutton_tag('nphojint[sexemp]', 'M', true)        ."   Masculino".'&nbsp;&nbsp;';
 		  echo radiobutton_tag('nphojint[sexemp]', 'F', false)."     Femenino";?>
@@ -107,310 +120,193 @@ if ($nphojint->getSexemp()=='M')	{
 	echo radiobutton_tag('nphojint[sexemp]', 'M', false)        ."Masculino".'&nbsp;&nbsp;';
 	echo radiobutton_tag('nphojint[sexemp]', 'F', true)."   Femenino";
 
-} ?>    
-</div>
-</fieldset></td>
-  </tr>
+} ?></div>
+		</fieldset>
+		</td>
+	</tr>
 </table>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[codniv]', __($labels['nphojint{codniv}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{codniv}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{codniv}')): ?>
-    <?php echo form_error('nphojint{codniv}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getCodniv', array (
+<div class="form-row"><?php echo label_for('nphojint[codniv]', __($labels['nphojint{codniv}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{codniv}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{codniv}')): ?> <?php echo form_error('nphojint{codniv}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($nphojint, 'getCodniv', array (
   'size' => 20,
   'control_name' => 'nphojint[codniv]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<?php echo button_to('...','#')?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#')?>
+</div>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[lugnac]', __($labels['nphojint{lugnac}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{lugnac}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{lugnac}')): ?>
-    <?php echo form_error('nphojint{lugnac}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getLugnac', array (
+<div class="form-row"><?php echo label_for('nphojint[lugnac]', __($labels['nphojint{lugnac}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{lugnac}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{lugnac}')): ?> <?php echo form_error('nphojint{lugnac}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($nphojint, 'getLugnac', array (
   'size' => 30,
   'control_name' => 'nphojint[lugnac]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-<strong>Fecha de Nac.</strong>
-<?php $value = object_input_date_tag($nphojint, 'getFecnac', array (
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; <strong>Fecha de
+Nac.</strong> <?php $value = object_input_date_tag($nphojint, 'getFecnac', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecnac]',
   'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Edad</strong>
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; &nbsp; &nbsp; <strong>Edad</strong>
 <?php $value = object_input_tag($nphojint, 'getEdaemp', array (
   'size' => 7,
   'control_name' => 'nphojint[edaemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[obsgen]', __($labels['nphojint{obsgen}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{obsgen}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{obsgen}')): ?>
-    <?php echo form_error('nphojint{obsgen}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_textarea_tag($nphojint, 'getObsgen', array (
+<div class="form-row"><?php echo label_for('nphojint[obsgen]', __($labels['nphojint{obsgen}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{obsgen}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{obsgen}')): ?> <?php echo form_error('nphojint{obsgen}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_textarea_tag($nphojint, 'getObsgen', array (
   'size' => '80x5',
   'control_name' => 'nphojint[obsgen]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
+<div align="right"><img src=" /images/vineta.gif" >&nbsp;
+&nbsp;<a href="#Back"> <span lang=ES-VE>Arriba</span></a></div>
 </div>
 </fieldset>
-&nbsp;
-&nbsp;
-&nbsp;
-<fieldset id="sf_fieldset_none" class="">
-<legend>Habitacion</legend>
-<div class="form-row">
-  <?php echo label_for('nphojint[dirhab]', __($labels['nphojint{dirhab}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{dirhab}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{dirhab}')): ?>
-    <?php echo form_error('nphojint{dirhab}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_textarea_tag($nphojint, 'getDirhab', array (
+&nbsp; &nbsp; &nbsp;
+<a name="Habita"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Habitacion</legend>
+<div class="form-row"><?php echo label_for('nphojint[dirhab]', __($labels['nphojint{dirhab}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{dirhab}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{dirhab}')): ?> <?php echo form_error('nphojint{dirhab}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_textarea_tag($nphojint, 'getDirhab', array (
   'size' => '80x5',
   'control_name' => 'nphojint[dirhab]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-<strong>Estado</strong>
-<?php echo select_tag('getCodpai',
+<div class="form-row"><strong>Estado</strong> <?php echo select_tag('getCodpai',
   '<option selected="selected">       </option>
    <option>0001 Venezuela</option>')
-   ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Municipio</strong>
+   ?> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Municipio</strong>
 <?php echo select_tag('getCodest',
   '<option selected="selected">    </option>
   <option>0001 Lara</option>')
-   ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Parroquia</strong>
+   ?> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Parroquia</strong>
 <?php echo select_tag('getCodciu',
   '<option selected="selected">      </option>
   <option>0001 Irribaren</option>')
-   ?>
-</div>
+   ?></div>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[telhab]', __($labels['nphojint{telhab}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{telhab}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{telhab}')): ?>
-    <?php echo form_error('nphojint{telhab}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getTelhab', array (
+<div class="form-row"><?php echo label_for('nphojint[telhab]', __($labels['nphojint{telhab}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{telhab}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{telhab}')): ?> <?php echo form_error('nphojint{telhab}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($nphojint, 'getTelhab', array (
   'size' => 20,
   'control_name' => 'nphojint[telhab]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-<strong>Otro Tlf.</strong>
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; <strong>Otro Tlf.</strong>
 <?php $value = object_input_tag($nphojint, 'getTelotr', array (
   'size' => 20,
   'control_name' => 'nphojint[telotr]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-<strong>Celular</strong>
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; <strong>Celular</strong>
 <?php $value = object_input_tag($nphojint, 'getCelemp', array (
   'size' => 20,
   'control_name' => 'nphojint[celemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend>Otra Ubicacion</legend>
-<div class="form-row">
-  <?php echo label_for('nphojint[dirotr]', __($labels['nphojint{dirotr}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{dirotr}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{dirotr}')): ?>
-    <?php echo form_error('nphojint{dirotr}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_textarea_tag($nphojint, 'getDirotr', array (
+<fieldset id="sf_fieldset_none" class=""><legend>Otra Ubicacion</legend>
+<div class="form-row"><?php echo label_for('nphojint[dirotr]', __($labels['nphojint{dirotr}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{dirotr}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{dirotr}')): ?> <?php echo form_error('nphojint{dirotr}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_textarea_tag($nphojint, 'getDirotr', array (
   'size' => '80x5',
   'control_name' => 'nphojint[dirotr]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-<strong>Estado</strong>
-<?php echo select_tag('getCodpa2',
+<div class="form-row"><strong>Estado</strong> <?php echo select_tag('getCodpa2',
   '<option selected="selected">       </option>
    <option>0001 Venezuela</option>')
- ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Municipio</strong>
+ ?> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Municipio</strong>
 <?php echo select_tag('getCodes2',
   '<option selected="selected">    </option>
   <option>0001 Lara</option>')
- ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Parroquia</strong>
+ ?> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Parroquia</strong>
 <?php echo select_tag('getCodci2',
   '<option selected="selected">    </option>
   <option>0001 Irribaren</option>')
- ?>
-</div>
+ ?></div>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[telha2]', __($labels['nphojint{telha2}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{telha2}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{telha2}')): ?>
-    <?php echo form_error('nphojint{telha2}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getTelha2', array (
+<div class="form-row"><?php echo label_for('nphojint[telha2]', __($labels['nphojint{telha2}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{telha2}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{telha2}')): ?> <?php echo form_error('nphojint{telha2}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($nphojint, 'getTelha2', array (
   'size' => 20,
   'control_name' => 'nphojint[telha2]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Otro Tlf.</strong>
-<?php $value = object_input_tag($nphojint, 'getTelot2', array (
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; &nbsp; <strong>Otro
+Tlf.</strong> <?php $value = object_input_tag($nphojint, 'getTelot2', array (
   'size' => 20,
   'control_name' => 'nphojint[telot2]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[emaemp]', __($labels['nphojint{emaemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{emaemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{emaemp}')): ?>
-    <?php echo form_error('nphojint{emaemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getEmaemp', array (
+<div class="form-row"><?php echo label_for('nphojint[emaemp]', __($labels['nphojint{emaemp}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{emaemp}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{emaemp}')): ?> <?php echo form_error('nphojint{emaemp}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($nphojint, 'getEmaemp', array (
   'size' => 40,
   'control_name' => 'nphojint[emaemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Codigo postal</strong>
-<?php $value = object_input_tag($nphojint, 'getCodpos', array (
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; &nbsp; <strong>Codigo
+postal</strong> <?php $value = object_input_tag($nphojint, 'getCodpos', array (
   'size' => 20,
   'control_name' => 'nphojint[codpos]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
+<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
+	href="#Back"> <span lang=ES-VE>Arriba</span></a></div>
 </div>
 </fieldset>
 </fieldset>
+&nbsp; &nbsp; &nbsp;
+<a name="Ingre"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Ingresos</legend>
 &nbsp;
-&nbsp;
-&nbsp;
-<fieldset id="sf_fieldset_none" class="">
-<legend>Ingresos</legend>
-&nbsp;
-<fieldset id="sf_fieldset_none" class="">
-<legend>Fechas</legend>
-<div class="form-row">
-<strong>Ingreso:</strong>
-  <?php $value = object_input_date_tag($nphojint, 'getFecing', array (
+<fieldset id="sf_fieldset_none" class=""><legend>Fechas</legend>
+<div class="form-row"><strong>Ingreso:</strong> <?php $value = object_input_date_tag($nphojint, 'getFecing', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecing]',
   'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Motivo del Egreso:</strong>
-  <?php $value = object_textarea_tag($nphojint, 'getObsemp', array (
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; &nbsp; &nbsp; <strong>Motivo
+del Egreso:</strong> <?php $value = object_textarea_tag($nphojint, 'getObsemp', array (
   'size' => '65x5',
   'control_name' => 'nphojint[obsemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;    
-<strong>Egreso</strong>
-    <?php $value = object_input_date_tag($nphojint, 'getFecret', array (
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; <strong>Egreso</strong> <?php $value = object_input_date_tag($nphojint, 'getFecret', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecret]',
   'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?>
-</div>
-<div class="form-row">
-  <?php echo label_for('nphojint[fecrei]', __($labels['nphojint{fecrei}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{fecrei}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{fecrei}')): ?>
-    <?php echo form_error('nphojint{fecrei}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_date_tag($nphojint, 'getFecrei', array (
+)); echo $value ? $value : '&nbsp;' ?></div>
+<div class="form-row"><?php echo label_for('nphojint[fecrei]', __($labels['nphojint{fecrei}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{fecrei}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{fecrei}')): ?> <?php echo form_error('nphojint{fecrei}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_date_tag($nphojint, 'getFecrei', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecrei]',
   'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 </fieldset>
-&nbsp;
-&nbsp;
+&nbsp; &nbsp;
 <div class="grid01" id="grid01">
-<fieldset>
-<legend>Historial de Ingresos y Egresos</legend>
-<? if ($rs!='')
+<fieldset><legend>Historial de Ingresos y Egresos</legend> <? if ($rs!='')
 { ?>
 <table border="0" class="sf_admin_list">
-<? 
+	<? 
 $titulo=array(0 => 'Ingresos', 1 => 'Egresos', 2 => 'Observaciones');
 
 if ( count($rs)>0){
@@ -418,177 +314,155 @@ $i=0;
 foreach ($rs as $k=>$fila) {
     $i++;
     if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$titulo[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
+	<thead>
+		<tr>
+			<? foreach ($fila as $key => $value){?>
+			<th><?=$titulo[$key]?></th>
+			<? }?>
+		</tr>
+	</thead>
+	<? }?>
+	<tr>
+		<? foreach ($fila as $key => $value){?>
+		<td><?=$value?></td>
+		<? }?>
+	</tr>
+	<? }
   }
-?></table>
+?>
+</table>
 <?
 }
-?>
-</fieldset>
+?></fieldset>
 </div>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend>Otros Datos</legend>
-<div class="form-row">
-  <?php echo label_for('nphojint[staemp]', __($labels['nphojint{staemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{staemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{staemp}')): ?>
-    <?php echo form_error('nphojint{staemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-<?php echo select_tag('nphojint[staemp]', options_for_select($listaestatus,$nphojint->getStaemp())) ?>
-    </div>
+<fieldset id="sf_fieldset_none" class=""><legend>Otros Datos</legend>
+<div class="form-row"><?php echo label_for('nphojint[staemp]', __($labels['nphojint{staemp}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{staemp}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{staemp}')): ?> <?php echo form_error('nphojint{staemp}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php echo select_tag('nphojint[staemp]', options_for_select($listaestatus,$nphojint->getStaemp())) ?>
+</div>
+<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
+	href="#Back"> <span lang=ES-VE>Arriba</span></a></div>
 </div>
 </fieldset>
 
 </fieldset>
-&nbsp;
-&nbsp;
-&nbsp;
-
-<fieldset id="sf_fieldset_none" class="">
-<legend>Informacion Bancaria</legend>
-<div class="form-row">
-  <?php echo label_for('nphojint[codtippag]', __($labels['nphojint{codtippag}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{codtippag}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{codtippag}')): ?>
-    <?php echo form_error('nphojint{codtippag}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-<?php echo select_tag('nphojint[codtippag]', options_for_select($listaformapago,$nphojint->getCodtippag())) ?>
-    </div>
+&nbsp; &nbsp; &nbsp;
+<a name="Bancaria"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Informacion Bancaria</legend>
+<div class="form-row"><?php echo label_for('nphojint[codtippag]', __($labels['nphojint{codtippag}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{codtippag}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{codtippag}')): ?> <?php echo form_error('nphojint{codtippag}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php echo select_tag('nphojint[codtippag]', options_for_select($listaformapago,$nphojint->getCodtippag())) ?>
 </div>
-<div class="form-row">
-  <?php echo label_for('nphojint[codban]', __($labels['nphojint{codban}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{codban}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{codban}')): ?>
-    <?php echo form_error('nphojint{codban}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-  <?php echo select_tag('nphojint[codban]', options_for_select($bancos,$nphojint->getCodban())); ?>
+</div>
+<div class="form-row"><?php echo label_for('nphojint[codban]', __($labels['nphojint{codban}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{codban}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{codban}')): ?> <?php echo form_error('nphojint{codban}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php echo select_tag('nphojint[codban]', options_for_select($bancos,$nphojint->getCodban())); ?>
 
-    </div>
+</div>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[numcue]', __($labels['nphojint{numcue}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{numcue}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{numcue}')): ?>
-    <?php echo form_error('nphojint{numcue}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getNumcue', array (
+<div class="form-row"><?php echo label_for('nphojint[numcue]', __($labels['nphojint{numcue}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{numcue}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{numcue}')): ?> <?php echo form_error('nphojint{numcue}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($nphojint, 'getNumcue', array (
   'size' => 31,
   'control_name' => 'nphojint[numcue]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[tipcue]', __($labels['nphojint{tipcue}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{tipcue}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{tipcue}')): ?>
-    <?php echo form_error('nphojint{tipcue}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-<?php echo select_tag('nphojint[tipcue]', options_for_select($listatipocuenta,$nphojint->getTipcue())) ?>
-    </div>
+<div class="form-row"><?php echo label_for('nphojint[tipcue]', __($labels['nphojint{tipcue}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{tipcue}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{tipcue}')): ?> <?php echo form_error('nphojint{tipcue}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php echo select_tag('nphojint[tipcue]', options_for_select($listatipocuenta,$nphojint->getTipcue())) ?>
+</div>
+<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
+	href="#Back"> <span lang=ES-VE>Arriba</span></a></div>
 </div>
 </fieldset>
-&nbsp;
-&nbsp;
-&nbsp;
-<fieldset id="sf_fieldset_none" class="">
-<legend>Informacion de Administracion Publica</legend>
-<div class="form-row">
-<strong>Fecha en la Administracion P&uacute;blica</strong>
- &nbsp;
-  <?php $value = object_input_date_tag($nphojint, 'getFecadmpub', array (
+&nbsp; &nbsp; &nbsp;
+
+<a name="Publica"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Informacion de
+Administracion Publica</legend>
+<div class="form-row"><strong>Fecha en la Administracion P&uacute;blica</strong>
+&nbsp; <?php $value = object_input_date_tag($nphojint, 'getFecadmpub', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[fecadmpub]',
   'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?>
-</div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[numsso]', __($labels['nphojint{numsso}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{numsso}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{numsso}')): ?>
-    <?php echo form_error('nphojint{numsso}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($nphojint, 'getNumsso', array (
+<div class="form-row"><?php echo label_for('nphojint[numsso]', __($labels['nphojint{numsso}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{numsso}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{numsso}')): ?> <?php echo form_error('nphojint{numsso}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($nphojint, 'getNumsso', array (
   'size' => 31,
   'control_name' => 'nphojint[numsso]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-<strong>No. de Poliza de Seguro</strong>
-&nbsp;
-  <?php $value = object_input_tag($nphojint, 'getNumpolseg', array (
+<div class="form-row"><strong>No. de Poliza de Seguro</strong> &nbsp; <?php $value = object_input_tag($nphojint, 'getNumpolseg', array (
   'size' => 31,
   'control_name' => 'nphojint[numpolseg]',
-)); echo $value ? $value : '&nbsp;' ?>
+)); echo $value ? $value : '&nbsp;' ?></div>
 
-</div>
-
-<div class="form-row">
-<strong>Fecha de cotizaciond del S.S.O</strong>
-  <?php $value = object_input_date_tag($nphojint, 'getFeccotsso', array (
+<div class="form-row"><strong>Fecha de cotizaciond del S.S.O</strong> <?php $value = object_input_date_tag($nphojint, 'getFeccotsso', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'nphojint[feccotsso]',
   'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?>    
-</div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 <div class="form-row">
 <table width="74%" border="0">
-  <tr>
-    <td><div align="left"><strong>A&ntilde;os en la Administracion Publica</strong>
-&nbsp;
-<?php $value = object_input_tag($nphojint, 'getAnoadmpub', array (
+	<tr>
+		<td>
+		<div align="left"><strong>A&ntilde;os en la Administracion Publica</strong>
+		&nbsp; <?php $value = object_input_tag($nphojint, 'getAnoadmpub', array (
   'size' => 7,
   'control_name' => 'nphojint[anoadmpub]',
-)); echo $value ? $value : '&nbsp;' ?></div></td>
-    <td><div align="right"><fieldset id="sf_fieldset_none" class="">
-<legend>Tiene Fideicomiso</legend>
-<div class="form-row">
-<?
+)); echo $value ? $value : '&nbsp;' ?></div>
+		</td>
+		<td>
+		<div align="right">
+		<fieldset id="sf_fieldset_none" class=""><legend>Tiene Fideicomiso</legend>
+		<div class="form-row"><?
 if ($nphojint->getTiefid()=='S')	{
   ?><?php echo radiobutton_tag('nphojint[tiefid]', 'S', true)        ."Si".'&nbsp;&nbsp;';
-		  echo radiobutton_tag('nphojint[tiefid]', 'N', false)."   No";?>
-		<?
+		  echo radiobutton_tag('nphojint[tiefid]', 'N', false)."   No";?> <?
 
 }else{
 	echo radiobutton_tag('nphojint[tiefid]', 'S', false)        ."Si".'&nbsp;&nbsp;';
 	echo radiobutton_tag('nphojint[tiefid]', 'N', true)."   No";
 
-} ?>    
-</div>
-</fieldset></div></td>
-  </tr>
-</table>    
+} ?></div>
+		</fieldset>
+		</div>
+		</td>
+	</tr>
+</table>
+<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
+	href="#Back"> <span lang=ES-VE>Arriba</span></a></div>
 </div>
 </fieldset>
-&nbsp;
-&nbsp;
-&nbsp;
-
+&nbsp; &nbsp; &nbsp;
+<a name="Laboral"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Experiencia Laboral</legend>
 <div class="grid01" id="grid01">
-<fieldset>
-<legend>Dentro de la Empresa</legend>
+<fieldset><legend>Dentro de la Empresa</legend>
+<? if ($dentro!='')
+{ ?>
 <table border="0" class="sf_admin_list">
-<? 
+	<? 
 $Barra1=array(0 => 'Codigo', 1 => 'Descripcion del Cargo', 2 => 'Fecha de Inicio', 3 => 'Fecha Fin', 4 => 'Sueldo', 5 => 'Compensacion');
 
 if ( count($dentro)>0){
@@ -596,29 +470,35 @@ $i=0;
 foreach ($dentro as $k=>$fila) {
     $i++;
     if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$Barra1[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
+	<thead>
+		<tr>
+			<? foreach ($fila as $key => $value){?>
+			<th><?=$Barra1[$key]?></th>
+			<? }?>
+		</tr>
+	</thead>
+	<? }?>
+	<tr>
+		<? foreach ($fila as $key => $value){?>
+		<td><?=$value?></td>
+		<? }?>
+	</tr>
+	<? }
   }
-?></table>
-</fieldset>
+?>
+</table>
+<?
+}
+?></fieldset>
 </div>
 
 
 <div class="grid01" id="grid01">
-<fieldset>
-<legend>Fuera de la Empresa</legend>
+<fieldset><legend>Fuera de la Empresa</legend>
+<? if ($fuera!='')
+{ ?>
 <table border="0" class="sf_admin_list">
-<? 
+	<? 
 $Barra2=array(0 => 'Institucion', 1 => 'Descripcion del Cargo', 2 => 'Fecha de Inicio', 3 => 'Fecha Fin', 4 => 'Sueldo', 5 => 'Tipo de Organismo');
 
 if ( count($fuera)>0){
@@ -626,29 +506,40 @@ $z=0;
 foreach ($fuera as $f=>$fila1) {
     $z++;
     if($z==1){?>
-      <thead><tr>
-    <? foreach ($fila1 as $key1 => $value1){?>
-        <th><?=$Barra2[$key1]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila1 as $key1 => $value1){?>
-    <td><?=$value1?></td>
-<? }?>
-</tr>
-<? }
+	<thead>
+		<tr>
+			<? foreach ($fila1 as $key1 => $value1){?>
+			<th><?=$Barra2[$key1]?></th>
+			<? }?>
+		</tr>
+	</thead>
+	<? }?>
+	<tr>
+		<? foreach ($fila1 as $key1 => $value1){?>
+		<td><?=$value1?></td>
+		<? }?>
+	</tr>
+	<? }
   }
-?></table>
-</fieldset>
+?>
+</table>
+<?
+}
+?></fieldset>
 </div>
+<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
+	href="#Back"> <span lang=ES-VE>Arriba</span></a></div>
+</fieldset>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend>Informacion Curricular</legend>
+&nbsp;&nbsp;
+<a name="Curricular"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Informacion Curricular</legend>
 <div class="grid01" id="grid01">
 <fieldset>
+<? if ($curricular!='')
+{ ?>
 <table border="0" class="sf_admin_list">
-<? 
+	<? 
 $Barra3=array(0 => 'Estudios Realizados/Titulo Obtenido', 1 => 'Descripcion', 2 => 'Nombre del Instituto', 3 => 'Duracion', 4 => 'An&tilde;o de Culminacion');
 
 if ( count($curricular)>0){
@@ -656,30 +547,38 @@ $i=0;
 foreach ($curricular as $k=>$fila) {
     $i++;
     if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$Barra3[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
+	<thead>
+		<tr>
+			<? foreach ($fila as $key => $value){?>
+			<th><?=$Barra3[$key]?></th>
+			<? }?>
+		</tr>
+	</thead>
+	<? }?>
+	<tr>
+		<? foreach ($fila as $key => $value){?>
+		<td><?=$value?></td>
+		<? }?>
+	</tr>
+	<? }
   }
-?></table>
-</fieldset>
+?>
+</table>
+<?
+}
+?></fieldset>
 </div>
+<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
+	href="#Back"> <span lang=ES-VE>Arriba</span></a></div>
 </fieldset>
-
-<fieldset id="sf_fieldset_none" class="">
-<legend>Informacion Familiar</legend>
+&nbsp;&nbsp;
+<a name="Familiar"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Informacion Familiar</legend>
 <div class="grid01" id="grid01">
-<fieldset>
+<fieldset><? if ($familiar!='')
+{ ?>
 <table border="0" class="sf_admin_list">
-<? 
+	<? 
 $Barra4=array(0 => 'CI', 1 => 'Nombre del Familiar', 2 => 'Sexo', 3 => 'Fecha Nacimiento', 4 => 'Edad', 5 => 'Parentesco', 6 => 'Edo. Civil', 7 => 'Grado de Instruccion', 8 => 'Trabajo u Oficio/Lugar de Trabajo', 9 => 'Guarderia', 10 => 'Seguro HCM');
 
 if ( count($familiar)>0){
@@ -687,171 +586,118 @@ $i=0;
 foreach ($familiar as $k=>$fila) {
     $i++;
     if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$Barra4[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
+	<thead>
+		<tr>
+			<? foreach ($fila as $key => $value){?>
+			<th><?=$Barra4[$key]?></th>
+			<? }?>
+		</tr>
+	</thead>
+	<? }?>
+	<tr>
+		<? foreach ($fila as $key => $value){?>
+		<td><?=$value?></td>
+		<? }?>
+	</tr>
+	<? }
   }
-?></table>
-</fieldset>
+?>
+</table>
+<?
+}
+?></fieldset>
 </div>
+<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
+	href="#Back"> <span lang=ES-VE>Arriba</span></a></div>
 </fieldset>
-
-<fieldset id="sf_fieldset_none" class="">
-<legend>Otras Caracteristicas</legend>
-<div class="form-row">
-  <?php echo label_for('nphojint[talcam]', __($labels['nphojint{talcam}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{talcam}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{talcam}')): ?>
-    <?php echo form_error('nphojint{talcam}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>  
-<?php echo select_tag('nphojint[talcam]', options_for_select($listatalla,$nphojint->getTalcam())) ?>
-&nbsp;
-&nbsp;
-<strong>Talla Pantalon</strong>
-  <?php $value = object_input_tag($nphojint, 'getTalpan', array (
+&nbsp;&nbsp;
+<a name="Otras"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Otras Caracteristicas</legend>
+<div class="form-row"><?php echo label_for('nphojint[talcam]', __($labels['nphojint{talcam}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('nphojint{talcam}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('nphojint{talcam}')): ?> <?php echo form_error('nphojint{talcam}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php echo select_tag('nphojint[talcam]', options_for_select($listatalla,$nphojint->getTalcam())) ?>
+&nbsp; &nbsp; <strong>Talla Pantalon</strong> <?php $value = object_input_tag($nphojint, 'getTalpan', array (
   'size' => 7,
   'control_name' => 'nphojint[talpan]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-<strong>No. de Calzado</strong>
- <?php $value = object_input_tag($nphojint, 'getTalcal', array (
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; <strong>No. de
+Calzado</strong> <?php $value = object_input_tag($nphojint, 'getTalcal', array (
   'size' => 7,
   'control_name' => 'nphojint[talcal]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-<strong>Grupo Sanguineo</strong>
-<?php echo select_tag('nphojint[grusan]', options_for_select($listagruposanguineo,$nphojint->getGrusan())) ?>
- </div>
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; <strong>Grupo
+Sanguineo</strong> <?php echo select_tag('nphojint[grusan]', options_for_select($listagruposanguineo,$nphojint->getGrusan())) ?>
 </div>
-<fieldset id="sf_fieldset_none" class="">
-<legend>Ubicacion Laboral</legend>
-<div class="form-row">
-<strong>Estado</strong>
-<?php echo select_tag('getCodregpai',
+</div>
+<fieldset id="sf_fieldset_none" class=""><legend>Ubicacion Laboral</legend>
+<div class="form-row"><strong>Estado</strong> <?php echo select_tag('getCodregpai',
   '<option selected="selected">       </option>
    <option>0001 Venezuela</option>')
-   ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Municipio</strong>
+   ?> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Municipio</strong>
 <?php echo select_tag('getCodregest',
   '<option selected="selected">    </option>
   <option>0001 Lara</option>')
-   ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Parroquia</strong>
+   ?> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>Parroquia</strong>
 <?php echo select_tag('getCodregciu',
   '<option selected="selected">      </option>
   <option>0001 Irribaren</option>')
-   ?>
-</div>
+   ?></div>
 </fieldset>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
 
 <table width="99%" border="0" align="left">
-  <tr>
-    <td><fieldset id="sf_fieldset_none" class="">
-    <div class="form-row">
-<legend>Condicion Contractual</legend>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
- <?php echo select_tag('nphojint[grulab]', options_for_select($grupol,$nphojint->getGrulab())) ?>
-&nbsp;<br>
-&nbsp;
-&nbsp;
-<br><strong>Descripcion</strong>
-  <?php $value = object_input_tag($nphojint, 'getGruotr', array (
+	<tr>
+		<td>
+		<fieldset id="sf_fieldset_none" class="">
+		<div class="form-row"><legend>Condicion Contractual</legend> &nbsp;
+		&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		<?php echo select_tag('nphojint[grulab]', options_for_select($grupol,$nphojint->getGrulab())) ?>
+		&nbsp;<br>
+		&nbsp; &nbsp; <br>
+		<strong>Descripcion</strong> <?php $value = object_input_tag($nphojint, 'getGruotr', array (
   'size' => 30,
   'control_name' => 'nphojint[gruotr]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp; &nbsp;
-<div class="form-row">
-</fieldset>&nbsp; &nbsp;</td>
-    <td><fieldset id="sf_fieldset_none" class="">
-<legend>Forma de Translado al Trabajo</legend>
-<div class="form-row">
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<?php echo select_tag('nphojint[traslado]', options_for_select($listaformatraslado,$nphojint->getTraslado())) ?>
-&nbsp;<br>
-&nbsp;
-&nbsp;
-&nbsp;
-<br><strong>Descripcion</strong>
-  <?php $value = object_input_tag($nphojint, 'getTraotr', array (
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp;
+		<div class="form-row">
+		
+		</fieldset>
+		&nbsp; &nbsp;</td>
+		<td>
+		<fieldset id="sf_fieldset_none" class=""><legend>Forma de Translado al
+		Trabajo</legend>
+		<div class="form-row">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+		&nbsp; &nbsp; &nbsp; &nbsp; <?php echo select_tag('nphojint[traslado]', options_for_select($listaformatraslado,$nphojint->getTraslado())) ?>
+		&nbsp;<br>
+		&nbsp; &nbsp; &nbsp; <br>
+		<strong>Descripcion</strong> <?php $value = object_input_tag($nphojint, 'getTraotr', array (
   'size' => 30,
   'control_name' => 'nphojint[traotr]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
- </div>  
-</fieldset></td>
-  </tr>
+)); echo $value ? $value : '&nbsp;' ?> &nbsp;&nbsp;&nbsp;</div>
+		</fieldset>
+		</td>
+	</tr>
 </table>
 
 </fieldset>
 </div>
 <div class="form-row">
-<fieldset id="sf_fieldset_none" class="">
-<legend>Expediente</legend>
+<fieldset id="sf_fieldset_none" class=""><legend>Expediente</legend>
 <table width="98%" border="0">
-  <tr valign="middle">
-    <td width="35%"><strong>Numero</strong>
- <?php $value = object_input_tag($nphojint, 'getNumexp', array (
+	<tr valign="middle">
+		<td width="35%"><strong>Numero</strong> <?php $value = object_input_tag($nphojint, 'getNumexp', array (
   'size' => 15,
   'control_name' => 'nphojint[numexp]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div></td>
-    <td width="44%"><strong>Contenido</strong>  
- <?php $value = object_textarea_tag($nphojint, 'getDetexp', array (
+		</div>
+		</td>
+		<td width="44%"><strong>Contenido</strong> <?php $value = object_textarea_tag($nphojint, 'getDetexp', array (
   'size' => '20x4',
   'control_name' => 'nphojint[detexp]',
 )); echo $value ? $value : '&nbsp;' ?></td>
-    <td width="21%"><fieldset id="sf_fieldset_none" class="">
-    <div class="form-row">
-<?
+		<td width="21%">
+		<fieldset id="sf_fieldset_none" class="">
+		<div class="form-row"><?
 if ($nphojint->getDerzur()=='D')	{
   ?><?php echo radiobutton_tag('nphojint[derzur]', 'D', true)        ."   Derecho".'&nbsp;&nbsp;'."<Br>";
 		  echo radiobutton_tag('nphojint[derzur]', 'Z', false)."     Zurdo"."<Br>";?>
@@ -861,72 +707,48 @@ if ($nphojint->getDerzur()=='D')	{
 	echo radiobutton_tag('nphojint[derzur]', 'D', false)        ."Derecho".'&nbsp;&nbsp;'."<Br>";
 	echo radiobutton_tag('nphojint[derzur]', 'Z', true)."   Zurdo"."<Br>";
 
-} ?>  
-</div>  
-</fieldset></td>
-  </tr>
+} ?></div>
+		</fieldset>
+		</td>
+	</tr>
 </table>
-</div>
-</fieldset>
+<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
+	href="#Back"> <span lang=ES-VE>Arriba</span></a></div></div>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend>Condiciones dde Vivienda</legend>
-<fieldset id="sf_fieldset_none" class="">
-<legend>Tipo de Vivienda</legend>
-<div class="form-row">
+</fieldset>
 &nbsp;
 &nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<?php echo select_tag('nphojint[tipviv]', options_for_select($listatipovivienda,$nphojint->getTipviv())) ?>
-<strong>Descripcion</strong>
-&nbsp;
-<?php $value = object_input_tag($nphojint, 'getVivotr', array (
+<a name="Vivienda"></a>
+<fieldset id="sf_fieldset_none" class=""><legend>Condiciones dde
+Vivienda</legend>
+<fieldset id="sf_fieldset_none" class=""><legend>Tipo de Vivienda</legend>
+<div class="form-row">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <?php echo select_tag('nphojint[tipviv]', options_for_select($listatipovivienda,$nphojint->getTipviv())) ?>
+<strong>Descripcion</strong> &nbsp; <?php $value = object_input_tag($nphojint, 'getVivotr', array (
   'size' => 30,
   'control_name' => 'nphojint[vivotr]',
-)); echo $value ? $value : '&nbsp;' ?>
-</div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </fielddset>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend>Forma de Tenencia</legend>
-<div class="form-row">
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<?php echo select_tag('nphojint[forten]', options_for_select($listaformatenencia,$nphojint->getForten())) ?>
-<strong>Descripcion</strong>
- <?php $value = object_input_tag($nphojint, 'getTenotr', array (
+<fieldset id="sf_fieldset_none" class=""><legend>Forma de Tenencia</legend>
+<div class="form-row">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <?php echo select_tag('nphojint[forten]', options_for_select($listaformatenencia,$nphojint->getForten())) ?>
+<strong>Descripcion</strong> <?php $value = object_input_tag($nphojint, 'getTenotr', array (
   'size' => 30,
   'control_name' => 'nphojint[tenotr]',
-)); echo $value ? $value : '&nbsp;' ?>
-</div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </fieldset>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend>Servicios a la Comunidad donde Vive</legend>
-<div class="form-row">
-
-<?php echo select_tag('nphojint[Sercon]', options_for_select(
+<fieldset id="sf_fieldset_none" class=""><legend>Servicios a la
+Comunidad donde Vive</legend>
+<div class="form-row"><?php echo select_tag('nphojint[Sercon]', options_for_select(
   array('1' => 'Aguas Blancas', '2' => 'Electrificacion', '3' => 'Aseo Urbano', '4' => 'Gas Domestico', '5' => 'Aguas Servidas', '6' => 'Telefono', '7' => 'Parques Recreacionales', '8' => 'Canchas Deportivas', '9' => 'Escuelas primarias', 'A' => 'Liceos', 'B' => 'Telefonos Publicos', 'C' => 'Puestos de Salud', 'D' => 'Abastos o Panaderia', 'E' => 'Vigilancia Policial', 'F' => 'Transporte Publico', 'G' => 'Puestos Periodicos'),
   array('Aguas Blancas', 'Puestos Periodicos',),$nphojint->getSercon()
-), 'multiple=multiple size=4') ?>
-    </div>
+), 'multiple=multiple size=4') ?></div>
+<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
+	href="#Back"> <span lang=ES-VE>Arriba</span></a></div>
 </div>
 </fieldset>
 
-
-<div class="form-row">
-&nbsp;
-<?php echo button_to('<-Anterior ','#')?>&nbsp;<?php echo button_to('Siguiente->.','#')?>
-</div>
+<a name="Guardar"></a>
 
 <?php include_partial('edit_actions', array('nphojint' => $nphojint)) ?>
 

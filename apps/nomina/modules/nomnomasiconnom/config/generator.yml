@@ -1,0 +1,35 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npasiconemp
+    theme:            default
+    fields:
+      codemp: { name: Codigo de Trabajador}
+      codcon: { name: Concepto}
+      codcar: { name: Codigo del Cargo}
+      nomemp: { name: Nombre}
+      nomcon: { name: Nombre del Concepto}
+      nomcar: { name: Descripcion del Cargo}
+      cantidad: { name: Cantidad}
+      monto: { name: Monto}
+      fecini: { name: Fecha de Inicio}
+      fecexp: { name: Fecha de Expiracion}
+      frecon: { name: Frecuencia de Pago}
+      asided: { name: Tipo de Expiracion}
+      acucon: { name: Concepto Acumulativo}
+      calcon: { name: Concepto Calculable}
+      activo: { name: Concepto Activo}
+      acumulado: { name: Acumulado}
+    list:
+      title:          Empleados con Conceptos Asignados
+      filters:        [codcon]
+      display:        [=codcon, nomcon, codemp, nomemp, fecini]
+      fields:
+        fecini: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Asignacion de Conceptos a Empleados
+     display:       [codcon, nomcon]

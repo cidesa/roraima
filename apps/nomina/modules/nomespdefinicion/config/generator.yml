@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomesptipos
+    theme:            default
+    fields:
+      codnomesp: { name: Codigo}
+      desnomesp: { name: Descripcion} 
+      fecnomdes: { name: Desde}     
+      fecnomhas: { name: Hasta}     
+    list:
+      title:          Definicion
+      filters:        [codnomesp]
+      display:        [=codnomesp, desnomesp]
+      fields:
+        fecnomdes: { params: date_format='dd/MM/yy' }
+        fecnomhas: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Definicion
+      display:       [=codnomesp, desnomesp, fecnomdes, fecnomhas]
+      fields:
+        fecnomdes: { params: date_format='dd/MM/yy' }
+        fecnomhas: { params: date_format='dd/MM/yy' }
