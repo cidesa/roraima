@@ -30,7 +30,9 @@
 	<?php echo javascript_tag("new tree (TREE_ITEMSCOM_ALM, tree_tpl);") ?>
 	<?php } elseif($menu=='tesoreria') { ?>
 	<?php echo javascript_tag("new tree (TREE_ITEMS_TER, tree_tpl);") ?>	
-	<?php } ?>
+	<?php } elseif($menu=='nomina') { ?> 
+	<?php echo javascript_tag("new tree (TREE_ITEMS_NOM, tree_tpl);"); 
+          } ?>
 	</td>
     <td class="box02_rline">&nbsp;</td>
   </tr>
