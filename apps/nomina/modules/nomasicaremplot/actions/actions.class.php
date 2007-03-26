@@ -40,7 +40,8 @@ class nomasicaremplotActions extends autonomasicaremplotActions
   {
     $this->npnomina = $this->getNpnominaOrCreate();
     $this->detalles = $this->detalleSQL();
-
+    if ($this->npnomina->getId())  $this->nuevo='N';
+  	
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
     
@@ -62,7 +63,29 @@ class nomasicaremplotActions extends autonomasicaremplotActions
     else
     {
       $this->labels = $this->getLabels();
+      if (!$this->npnomina->getId())  $this->nuevo='S';    
     }
   }
-    
+
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/npnomina/filters');
+
+    // pager
+    $this->pager = new sfPropelPager('Npnomina', 8);
+    $c = new Criteria();	   
+    $c->addJoin(NpasicarempPeer::CODNOM,NpnominaPeer::CODNOM);
+    $c->Setdistinct();  
+    $c->add(NpasicarempPeer::STATUS,'V');	 
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+  
 }

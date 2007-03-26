@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('nomasicaremplot/edit_messages', array('npnomina' => $npnomina, 'labels' => $labels)) ?>
-<?php include_partial('nomasicaremplot/edit_form', array('npnomina' => $npnomina, 'detalles' => $detalles, 'labels' => $labels)) ?>
+<?php include_partial('nomasicaremplot/edit_form', array('npnomina' => $npnomina, 'nuevo' => $nuevo,  'detalles' => $detalles, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

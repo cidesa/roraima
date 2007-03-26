@@ -1,0 +1,18 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomina
+    theme:            default
+    fields:
+      codnom: { name: Cod. Tipo Nomina, params: maxlength=3 }
+      nomnom: { name: Nombre Tipo Nomina }     
+    list:
+      title:          Asignacion de Conceptos a Nomina
+      filters:        [codnom, nomnom ]
+      display:        [=codnom, nomnom ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~        
+      max_per_page:  8
+    edit:
+      title:          Asignacion de Conceptos a Nomina

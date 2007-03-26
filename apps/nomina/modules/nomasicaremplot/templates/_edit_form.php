@@ -32,42 +32,65 @@
 </div>
 </fieldset>
 &nbsp;&nbsp;
-<? 
-if ($detalles!=''){
-?>
 <div>
 <fieldset>
-<legend>Conceptos Asociados</legend>
+<legend>Datos del Empleado</legend>
 <div id="grid02" class="grid01">
 <table border="0" class="sf_admin_list">
 <? 
-$titulo=array(0 => 'Codigo', 1 => 'Nombre', 2 => 'Codigo del Cargo', 3 => 'Descripcion del Cargo', 4 => 'Codigo de Categoria', 5 => 'Descripcion de Categoria', 6 => 'Tipo de Gasto',7 => 'Descipcion Tipo de Gasto');
-
-if ( count($detalles)>0){
-$i=0;
-foreach ($detalles as $k=>$fila) {
-    $i++;
-    if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$titulo[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
-  }
+$titulo=array(0 => '', 1 => 'Codigo', 2 => 'Nombre', 3 => 'Codigo del Cargo', 4 => 'Descripcion del Cargo', 5 => 'Codigo de Categoria', 6 => 'Descripcion de Categoria', 7 => 'Tipo de Gasto',8 => 'Descipcion Tipo de Gasto');
+if ($nuevo=='S')
+{
+  	?>
+  	 <thead><tr>
+  	<?
+	$i=0;
+	while ($i<=8)
+	{
+	?>	  
+	  <th><?php if ($i==0) echo image_tag('/images/magnifier.png'); else echo $titulo[$i] ?></th>
+    <?
+	 $i=$i+1;	
+	}//end while
+?>
+   	</tr> </thead>   	  
+	<tr>
+	<? $i=0;
+	  while ($i<=8)
+	  {
+	  ?>
+	    <td><?php if ($i==0) echo' '; else echo input_tag($i,'','style=border:none') ?></td>
+	<? $i=$i+1;
+	  } //end while?>
+	</tr>	
+<?		
+}
+else
+{
+	if ( count($detalles)>0){
+	$i=0;
+	foreach ($detalles as $k=>$fila) {
+	    $i++;
+	    if($i==1){?>
+	      <thead><tr>
+	    <? foreach ($fila as $key => $value){?>
+	        <th><?=$titulo[$key]?></th>
+	    <? }?>
+	      </tr> </thead>
+	    <? }?>
+	<tr>
+	<? foreach ($fila as $key => $value){?>
+	    <td><?=$value?></td>
+	<? }?>
+	</tr>
+	<? }
+	  } //if ( count($detalles)>0){
+   }  //else if ($nuevo=='S')
 ?></table>
 </div>
 </fieldset>
 </div>
-<?
-}
-?>
+
 <?php include_partial('edit_actions', array('npnomina' => $npnomina)) ?>
 
 </form>
