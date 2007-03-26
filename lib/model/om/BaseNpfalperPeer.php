@@ -13,11 +13,14 @@ abstract class BaseNpfalperPeer {
 	const CLASS_DEFAULT = 'lib.model.Npfalper';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
+
+	
+	const CODNOM = 'npfalper.CODNOM';
 
 	
 	const CODEMP = 'npfalper.CODEMP';
@@ -46,18 +49,18 @@ abstract class BaseNpfalperPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Codmot', 'Nrodia', 'Observ', 'Fecdes', 'Fechas', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpfalperPeer::CODEMP, NpfalperPeer::CODMOT, NpfalperPeer::NRODIA, NpfalperPeer::OBSERV, NpfalperPeer::FECDES, NpfalperPeer::FECHAS, NpfalperPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'codmot', 'nrodia', 'observ', 'fecdes', 'fechas', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codnom', 'Codemp', 'Codmot', 'Nrodia', 'Observ', 'Fecdes', 'Fechas', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpfalperPeer::CODNOM, NpfalperPeer::CODEMP, NpfalperPeer::CODMOT, NpfalperPeer::NRODIA, NpfalperPeer::OBSERV, NpfalperPeer::FECDES, NpfalperPeer::FECHAS, NpfalperPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnom', 'codemp', 'codmot', 'nrodia', 'observ', 'fecdes', 'fechas', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Codmot' => 1, 'Nrodia' => 2, 'Observ' => 3, 'Fecdes' => 4, 'Fechas' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (NpfalperPeer::CODEMP => 0, NpfalperPeer::CODMOT => 1, NpfalperPeer::NRODIA => 2, NpfalperPeer::OBSERV => 3, NpfalperPeer::FECDES => 4, NpfalperPeer::FECHAS => 5, NpfalperPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'codmot' => 1, 'nrodia' => 2, 'observ' => 3, 'fecdes' => 4, 'fechas' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codnom' => 0, 'Codemp' => 1, 'Codmot' => 2, 'Nrodia' => 3, 'Observ' => 4, 'Fecdes' => 5, 'Fechas' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (NpfalperPeer::CODNOM => 0, NpfalperPeer::CODEMP => 1, NpfalperPeer::CODMOT => 2, NpfalperPeer::NRODIA => 3, NpfalperPeer::OBSERV => 4, NpfalperPeer::FECDES => 5, NpfalperPeer::FECHAS => 6, NpfalperPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnom' => 0, 'codemp' => 1, 'codmot' => 2, 'nrodia' => 3, 'observ' => 4, 'fecdes' => 5, 'fechas' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -110,6 +113,8 @@ abstract class BaseNpfalperPeer {
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
+
+		$criteria->addSelectColumn(NpfalperPeer::CODNOM);
 
 		$criteria->addSelectColumn(NpfalperPeer::CODEMP);
 

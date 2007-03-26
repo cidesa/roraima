@@ -9,6 +9,10 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 
 
 	
+	protected $codnom;
+
+
+	
 	protected $codemp;
 
 
@@ -40,6 +44,13 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 
 	
 	protected $alreadyInValidation = false;
+
+	
+	public function getCodnom()
+	{
+
+		return $this->codnom;
+	}
 
 	
 	public function getCodemp()
@@ -120,6 +131,16 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 		return $this->id;
 	}
 
+	
+	public function setCodnom($v)
+	{
+
+		if ($this->codnom !== $v) {
+			$this->codnom = $v;
+			$this->modifiedColumns[] = NpfalperPeer::CODNOM;
+		}
+
+	} 
 	
 	public function setCodemp($v)
 	{
@@ -209,25 +230,27 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	{
 		try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+			$this->codnom = $rs->getString($startcol + 0);
 
-			$this->codmot = $rs->getString($startcol + 1);
+			$this->codemp = $rs->getString($startcol + 1);
 
-			$this->nrodia = $rs->getFloat($startcol + 2);
+			$this->codmot = $rs->getString($startcol + 2);
 
-			$this->observ = $rs->getString($startcol + 3);
+			$this->nrodia = $rs->getFloat($startcol + 3);
 
-			$this->fecdes = $rs->getDate($startcol + 4, null);
+			$this->observ = $rs->getString($startcol + 4);
 
-			$this->fechas = $rs->getDate($startcol + 5, null);
+			$this->fecdes = $rs->getDate($startcol + 5, null);
 
-			$this->id = $rs->getInt($startcol + 6);
+			$this->fechas = $rs->getDate($startcol + 6, null);
+
+			$this->id = $rs->getInt($startcol + 7);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 7; 
+						return $startcol + 8; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Npfalper object", $e);
 		}
@@ -354,24 +377,27 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodemp();
+				return $this->getCodnom();
 				break;
 			case 1:
-				return $this->getCodmot();
+				return $this->getCodemp();
 				break;
 			case 2:
-				return $this->getNrodia();
+				return $this->getCodmot();
 				break;
 			case 3:
-				return $this->getObserv();
+				return $this->getNrodia();
 				break;
 			case 4:
-				return $this->getFecdes();
+				return $this->getObserv();
 				break;
 			case 5:
-				return $this->getFechas();
+				return $this->getFecdes();
 				break;
 			case 6:
+				return $this->getFechas();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -384,13 +410,14 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	{
 		$keys = NpfalperPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodemp(),
-			$keys[1] => $this->getCodmot(),
-			$keys[2] => $this->getNrodia(),
-			$keys[3] => $this->getObserv(),
-			$keys[4] => $this->getFecdes(),
-			$keys[5] => $this->getFechas(),
-			$keys[6] => $this->getId(),
+			$keys[0] => $this->getCodnom(),
+			$keys[1] => $this->getCodemp(),
+			$keys[2] => $this->getCodmot(),
+			$keys[3] => $this->getNrodia(),
+			$keys[4] => $this->getObserv(),
+			$keys[5] => $this->getFecdes(),
+			$keys[6] => $this->getFechas(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
@@ -407,24 +434,27 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodemp($value);
+				$this->setCodnom($value);
 				break;
 			case 1:
-				$this->setCodmot($value);
+				$this->setCodemp($value);
 				break;
 			case 2:
-				$this->setNrodia($value);
+				$this->setCodmot($value);
 				break;
 			case 3:
-				$this->setObserv($value);
+				$this->setNrodia($value);
 				break;
 			case 4:
-				$this->setFecdes($value);
+				$this->setObserv($value);
 				break;
 			case 5:
-				$this->setFechas($value);
+				$this->setFecdes($value);
 				break;
 			case 6:
+				$this->setFechas($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -434,13 +464,14 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	{
 		$keys = NpfalperPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodemp($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setCodmot($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setNrodia($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setObserv($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setFecdes($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setFechas($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodnom($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCodemp($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodmot($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setNrodia($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setObserv($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFecdes($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setFechas($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
 	
@@ -448,6 +479,7 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(NpfalperPeer::DATABASE_NAME);
 
+		if ($this->isColumnModified(NpfalperPeer::CODNOM)) $criteria->add(NpfalperPeer::CODNOM, $this->codnom);
 		if ($this->isColumnModified(NpfalperPeer::CODEMP)) $criteria->add(NpfalperPeer::CODEMP, $this->codemp);
 		if ($this->isColumnModified(NpfalperPeer::CODMOT)) $criteria->add(NpfalperPeer::CODMOT, $this->codmot);
 		if ($this->isColumnModified(NpfalperPeer::NRODIA)) $criteria->add(NpfalperPeer::NRODIA, $this->nrodia);
@@ -484,6 +516,8 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodnom($this->codnom);
 
 		$copyObj->setCodemp($this->codemp);
 
