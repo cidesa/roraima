@@ -194,7 +194,7 @@ var TREE_ITEMS_TER = [
 	]
 ];
 
-var TREE_ITEMSNOM = [
+var TREE_ITEMS_NOM = [
 	['SIGA', null,		
 		['Nomina', null,
 			['Reportes', null,
@@ -261,6 +261,7 @@ var TREE_ITEMS_MAIN = [
 	['SIGA', null,
 		['Compras Y Almacen', 'principal/menu/m/compras'],
 		['Tesorer&iacute;a', 'principal/menu/m/tesoreria'],
+		['Nomina', 'principal/menu/m/nomina'],
       ]
 	];
 
