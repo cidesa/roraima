@@ -28,11 +28,115 @@
 <?php echo button_to('...','#') ?>
 &nbsp;&nbsp;
 <strong><? echo $npnomina->getNomnom() ?></strong>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<br>
+<br>
+<? $vale=false;$valc=false;$valo=false;$nomconded=''?>
+<? if (trim($datosconaho[0])!='')
+{ 
+ $nomconded=$datosconaho[2];	
+ if($datosconaho[1]=='E') $vale = true; else $vale=false;  
+ if($datosconaho[1]=='C') $valc = true; else $valc=false;
+ if($datosconaho[1]=='O') $valo = true; else $valo=false;
+}
+ ?>
+<?php echo "Empleado" .radiobutton_tag('radio', 'E', $vale)?>
+&nbsp;&nbsp;
+<?php echo "Contratado" .radiobutton_tag('radio', 'C', $valc) ?>
+&nbsp;&nbsp;
+<?php echo "Obrero" .radiobutton_tag('radio', 'O', $valo) ?>
     </div>
 </div>
 </fieldset>
 &nbsp;&nbsp;
 
+<? 
+$nomconapo='';
+$nomconajuded='';
+$nomconajuapo='';
+if (trim($aporte[0])!='') $nomconapo=$aporte[1];
+if (trim($ajudeduccion[0])!='') $nomconajuded=$ajudeduccion[1];
+if (trim($ajuaporte[0])!='') $nomconajuapo=$ajuaporte[1];
+?>	
+<fieldset id="sf_fieldset_none" class="">
+<legend>Conceptos Deduccion y Aporte</legend>
+<div class="form-row">
+<?php echo label_for('deduccion','Deduccion', 'class="required" ') ?>  
+<?php echo input_tag('txtdeduccion',$datosconaho[0])?>
+&nbsp;
+<?php echo button_to('...','#') ?>
+&nbsp;&nbsp;
+<strong><? echo $nomconded ?></strong>
+</div>
+<div class="form-row">
+<?php echo label_for('aportes','Aporte', 'class="required" ') ?>  
+<?php echo input_tag('txtaportes',$aporte[0])?>
+&nbsp;
+<?php echo button_to('...','#') ?>
+&nbsp;&nbsp;
+<strong><? echo $nomconapo ?></strong>
+</div>
+</fieldset>
+&nbsp;&nbsp;
+<fieldset id="sf_fieldset_none" class="">
+<legend>Conceptos Ajustes Deduccion y Aporte</legend>
+<div class="form-row">
+<?php echo label_for('ajudeduccion','Ajuste Deduccion', 'class="required" ') ?>  
+<?php echo input_tag('txtajudeduccion',$ajudeduccion[0])?>
+&nbsp;
+<?php echo button_to('...','#') ?>
+&nbsp;&nbsp;
+<strong><? echo $nomconajuded ?></strong>
+</div>
+<div class="form-row">
+<?php echo label_for('ajuaportes','Ajuste Aporte', 'class="required" ') ?>  
+<?php echo input_tag('txtajuaportes',$ajuaporte[0])?>
+&nbsp;
+<?php echo button_to('...','#') ?>
+&nbsp;&nbsp;
+<strong><? echo $nomconajuapo ?></strong>
+</div>
+</fieldset>
+&nbsp;&nbsp;
+<? 
+if ($detalles!=''){
+?>
+<div>
+<fieldset>
+<legend>Conceptos para el Calculo</legend>
+<div id="grid02" class="grid01">
+<table border="0" class="sf_admin_list">
+<?
+if ($nuevo=='S') 
+ $titulo=array(0 => 'Codigo', 1 => 'Nombre del Concepto',2 => '',);
+else
+  $titulo=array(0 => 'Codigo', 1 => 'Nombre del Concepto');
+
+if ( count($detalles)>0){
+$i=0;
+foreach ($detalles as $k=>$fila) {
+    $i++;
+    if($i==1){?>
+      <thead><tr>
+    <? foreach ($fila as $key => $value){?>
+        <th><?=$titulo[$key]?></th>
+    <? }?>
+      </tr> </thead>
+    <? }?>
+<tr>
+<? foreach ($fila as $key => $value){?>
+    <td><? if (trim($value)!='K') echo $value; else echo checkbox_tag($i,'1',false)?></td>
+<? }?>
+</tr>
+<? }
+  }
+?></table>
+</div>
+</fieldset>
+</div>
+<?
+}
+?>
 <?php include_partial('edit_actions', array('npnomina' => $npnomina)) ?>
 
 </form>
