@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npasiconemp
+    theme:            default
+    fields:
+      codemp:       { name: Codigo Empleado, params: maxlength=10,size=10  }
+      nomemp:       { name: Nombre empleado }
+      codcar:       { name: Codigo Cargo, params: size=20  }
+      nomcar:       { name: Nombre del Cargo }
+      nomnom:       { name: Nomina }
+      nomcon:       { name: Concepto: }
+      monto:        { name: Monto }
+      cantidad:     { name: Cantidad }
+              
+
+    list:
+      title:          Liquidacion Final de Prestaciones
+      display:        [nomnom, nomcon, codemp, nomemp, codcar, nomcar]
+      filters:		  [codemp, codcon, codcar]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Liquidacion Final de Prestaciones
+      display:        [codemp, nomemp, codcar, nomcar, monto, cantidad]
