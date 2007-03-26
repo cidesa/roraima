@@ -43,6 +43,9 @@
       <td valign="top" > 
         <table width="100%" border="0" cellpadding="0" cellspacing="0" >
           <!--DWLayoutTable-->
+          <tr>
+            <td height="19" colspan="4" align="right"> <img src="/images/flecha.gif" width="8" height="15" align="absmiddle" />&nbsp;<a href="javascript:history.back(1)">Atras </a>&nbsp;</td>
+          </tr>
           <tr> 
             <td height="56" colspan="4" ><?php echo $sf_data->getRaw('sf_content'); ?></td>
           </tr>
@@ -90,5 +93,3 @@
 
 </body>
 </html>
-
-
