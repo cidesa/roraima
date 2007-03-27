@@ -28676,3 +28676,16 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  fordefdirec: 
+    #_attributes: 
+      #idMethod: native
+    coddir: 
+      type: VARCHAR
+      size: 3
+    desdir: 
+      type: VARCHAR
+      size: 1000
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true           
