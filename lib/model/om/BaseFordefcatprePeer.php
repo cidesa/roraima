@@ -13,7 +13,7 @@ abstract class BaseFordefcatprePeer {
 	const CLASS_DEFAULT = 'lib.model.Fordefcatpre';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseFordefcatprePeer {
 	const OBJESP = 'fordefcatpre.OBJESP';
 
 	
+	const CODEMP = 'fordefcatpre.CODEMP';
+
+	
 	const MISION = 'fordefcatpre.MISION';
 
 	
@@ -49,18 +52,18 @@ abstract class BaseFordefcatprePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcat', 'Nomcat', 'Descat', 'Coduni', 'Objesp', 'Mision', 'Vision', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FordefcatprePeer::CODCAT, FordefcatprePeer::NOMCAT, FordefcatprePeer::DESCAT, FordefcatprePeer::CODUNI, FordefcatprePeer::OBJESP, FordefcatprePeer::MISION, FordefcatprePeer::VISION, FordefcatprePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcat', 'nomcat', 'descat', 'coduni', 'objesp', 'mision', 'vision', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codcat', 'Nomcat', 'Descat', 'Coduni', 'Objesp', 'Codemp', 'Mision', 'Vision', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FordefcatprePeer::CODCAT, FordefcatprePeer::NOMCAT, FordefcatprePeer::DESCAT, FordefcatprePeer::CODUNI, FordefcatprePeer::OBJESP, FordefcatprePeer::CODEMP, FordefcatprePeer::MISION, FordefcatprePeer::VISION, FordefcatprePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcat', 'nomcat', 'descat', 'coduni', 'objesp', 'codemp', 'mision', 'vision', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcat' => 0, 'Nomcat' => 1, 'Descat' => 2, 'Coduni' => 3, 'Objesp' => 4, 'Mision' => 5, 'Vision' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (FordefcatprePeer::CODCAT => 0, FordefcatprePeer::NOMCAT => 1, FordefcatprePeer::DESCAT => 2, FordefcatprePeer::CODUNI => 3, FordefcatprePeer::OBJESP => 4, FordefcatprePeer::MISION => 5, FordefcatprePeer::VISION => 6, FordefcatprePeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcat' => 0, 'nomcat' => 1, 'descat' => 2, 'coduni' => 3, 'objesp' => 4, 'mision' => 5, 'vision' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codcat' => 0, 'Nomcat' => 1, 'Descat' => 2, 'Coduni' => 3, 'Objesp' => 4, 'Codemp' => 5, 'Mision' => 6, 'Vision' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (FordefcatprePeer::CODCAT => 0, FordefcatprePeer::NOMCAT => 1, FordefcatprePeer::DESCAT => 2, FordefcatprePeer::CODUNI => 3, FordefcatprePeer::OBJESP => 4, FordefcatprePeer::CODEMP => 5, FordefcatprePeer::MISION => 6, FordefcatprePeer::VISION => 7, FordefcatprePeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcat' => 0, 'nomcat' => 1, 'descat' => 2, 'coduni' => 3, 'objesp' => 4, 'codemp' => 5, 'mision' => 6, 'vision' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -123,6 +126,8 @@ abstract class BaseFordefcatprePeer {
 		$criteria->addSelectColumn(FordefcatprePeer::CODUNI);
 
 		$criteria->addSelectColumn(FordefcatprePeer::OBJESP);
+
+		$criteria->addSelectColumn(FordefcatprePeer::CODEMP);
 
 		$criteria->addSelectColumn(FordefcatprePeer::MISION);
 
