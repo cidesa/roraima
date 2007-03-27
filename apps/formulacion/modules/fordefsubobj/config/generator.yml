@@ -1,0 +1,23 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefsubobj
+    theme:            default
+
+    fields:
+      codequ:    { name: Equilibrio}
+      codsubobj: { name: Codigo}
+      dessubobj: { name: Descripcion}         
+      desequ:    { name: Equilibrio}         
+        
+    list:
+      title:          Area Estrategica - Defincicion de Sub Objetivos
+      filters:        [codsubobj, dessubobj, desequ]
+      display:        [=codsubobj, dessubobj, desequ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edicion de Area Estrategica - Defincicion de Sub Objetivoss
+      display:       [=codsubobj, dessubobj, codequ, desequ]            
