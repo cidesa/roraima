@@ -9,15 +9,16 @@ generator:
       codsubobj: { name: Codigo}
       dessubobj: { name: Descripcion}         
       desequ:    { name: Equilibrio}         
+      codequ:    { name: Codigo}         
         
     list:
       title:          Area Estrategica - Defincicion de Sub Objetivos
       filters:        [codsubobj, dessubobj, desequ]
-      display:        [=codsubobj, dessubobj, desequ]
+      display:        [=codsubobj, dessubobj, codequ, desequ]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   10
     edit:
-      title:          Edicion de Area Estrategica - Defincicion de Sub Objetivoss
+      title:          Edicion de Area Estrategica - Defincicion de Sub Objetivos
       display:       [=codsubobj, dessubobj, codequ, desequ]            
