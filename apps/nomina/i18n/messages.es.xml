@@ -54,6 +54,18 @@
            <source>Your modifications have been saved</source>
            <target>Tus modificaciones han sido guardadas</target>
          </trans-unit>
+         <trans-unit id="13">
+           <source>no result</source>
+           <target>Sin Resultados</target>
+         </trans-unit>
+         <trans-unit id="14">
+           <source>result</source>
+           <target>Resultado</target>
+         </trans-unit>
+         <trans-unit id="15">
+           <source>results</source>
+           <target>Resultados</target>
+         </trans-unit>
        </body>
     </file>
 </xliff>

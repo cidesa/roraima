@@ -1,0 +1,18 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nptipded
+    theme:            default
+    fields:
+      codtip: { name: Código }
+      destip: { name: Descripcion }
+    list:
+      title:          Definción de Tipo de Dedicación
+      filters:        [codtip, destip ]
+      display:        [=codtip, destip ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Tipo de Dedicación

@@ -7,7 +7,7 @@ default:
     robots:       index, follow
     description:  Módulo Nómina
     keywords:     Módulo Nómina
-    language:     en_US
+    language:     en
 
   stylesheets:    [main]
 

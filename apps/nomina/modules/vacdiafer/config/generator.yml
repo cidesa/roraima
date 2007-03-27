@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npvacdiafer
+    theme:            default
+    fields:
+      descripcion: { name: Descripción }
+      dia: { name: Día }
+      mes: { name: Mes }
+    list:
+      title:          Definción de Días Feriados
+      filters:        [descripcion ]
+      display:        [=descripcion, dia, mes ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Días Feriados

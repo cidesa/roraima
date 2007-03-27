@@ -17,5 +17,4 @@ generator:
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Edición Jonadas Laborales
-#      display:       [codnom, nomnom, frecal, ultfec, profec, numsem, ordpag]
+      title:          Edición Jornadas Laborales

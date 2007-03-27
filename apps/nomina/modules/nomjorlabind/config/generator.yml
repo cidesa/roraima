@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nphojint
+    theme:            default
+    fields:
+      cedemp: { name: Cédula Empleado }
+      nomemp: { name: Nombre Empleado }
+      nomcar: { name: Cargo }              # Tabla Npcargos
+      nomnom: { name: Nómina }             # Tabla Npasicaremp
+    list:
+      title:          Definción de Jornadas Laborales por Empleado
+      filters:        [cedemp, nomemp ]
+      display:        [=cedemp, nomemp, nomcar, nomnom]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición Jonadas Laborales del empleado
+      display:       [cedemp, nomemp, nomcar, nomnom]
