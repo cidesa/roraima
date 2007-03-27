@@ -15,7 +15,7 @@ generator:
               
 
     list:
-      title:          Liquidacion Final de Prestaciones
+      title:          Liquidación Final de Prestaciones
       display:        [nomnom, nomcon, codemp, nomemp, codcar, nomcar]
       filters:		  [codemp, codcon, codcar]
       max_per_page:	  10
@@ -24,5 +24,5 @@ generator:
         _delete:      ~      
                         
     edit:
-      title:          Liquidacion Final de Prestaciones
+      title:          Liquidación Final de Prestaciones
       display:        [codemp, nomemp, codcar, nomcar, monto, cantidad]
