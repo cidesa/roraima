@@ -9,4 +9,15 @@
  */ 
 class Npdefvar extends BaseNpdefvar
 {
+	public function getNomnom()
+  {
+  	  $c = new Criteria();
+  	  $c->add(NpnominaPeer::CODNOM,self::getCodnom());
+  	  $nombre = NpnominaPeer::doSelectone($c);
+	  if ($nombre)
+	  	return $nombre->getNomnom();
+	  else 
+	    return ' ';
+  }
+	
 }
