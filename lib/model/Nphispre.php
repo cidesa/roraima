@@ -9,4 +9,14 @@
  */ 
 class Nphispre extends BaseNphispre
 {
+  public function getNomemp()
+  {
+  	  $c = new Criteria();
+  	  $c->add(NphojintPeer::CODEMP,self::getCodemp());
+  	  $nombre = NphojintPeer::doSelectone($c);
+	  if ($nombre)
+	  	return $nombre->getNomemp();
+	  else 
+	    return ' ';
+  }
 }
