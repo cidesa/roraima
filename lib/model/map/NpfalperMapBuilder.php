@@ -32,11 +32,11 @@ class NpfalperMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('CODNOM', 'Codnom', 'string', CreoleTypes::VARCHAR, true, 3);
-
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 16);
 
 		$tMap->addColumn('CODMOT', 'Codmot', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('CODNOM', 'Codnom', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addColumn('NRODIA', 'Nrodia', 'double', CreoleTypes::NUMERIC, false);
 
