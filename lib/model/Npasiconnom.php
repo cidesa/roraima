@@ -9,4 +9,14 @@
  */ 
 class Npasiconnom extends BaseNpasiconnom
 {
+
+	
+	public function getNomcon()
+	{
+		$c = new Criteria();
+		$c->add(NpdefcptPeer::CODCON,self::getCodcon());
+		$reg = NpdefcptPeer::doSelectOne($c);
+		if($reg) return $reg->getNomcon();
+		else return null;
+	}
 }

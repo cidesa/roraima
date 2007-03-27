@@ -41,4 +41,15 @@ class Npfalper extends BaseNpfalper
 	  else 
 	    return ' ';
   } 
+	
+	public function getDesmotfal()
+	{
+
+		$c = new Criteria();
+		$c->add(NpmotfalPeer::CODMOTFAL,self::getCodmot());
+		$registro = NpmotfalPeer::doSelectOne($c);
+		if($registro) return $registro->getDesmotfal();
+		else return null; 
+		
+	}
 }
