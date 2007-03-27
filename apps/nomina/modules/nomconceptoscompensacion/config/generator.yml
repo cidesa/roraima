@@ -5,12 +5,14 @@ generator:
     theme:            default
     fields:
       codnom: { name: Tipo de Nomina}
-      codcon: { name: Codigo del Concepto}         
+      nomnom: { name: Descripcion}
+      codcon: { name: Codigo del Concepto} 
+      nomcon: { name: Descripcion}        
         
     list:
       title:          Conceptos Compensacion por Nomina
       filters:        [codnom]
-      display:        [=codnom, codcon]
+      display:        [=codnom, nomnom, codcon, nomcon]
       object_actions:
         _edit:        ~
         _delete:      ~
