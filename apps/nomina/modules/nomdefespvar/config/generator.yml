@@ -4,9 +4,10 @@ generator:
     model_class:      Npdefvar
     theme:            default
     fields:
-      codvar: { name: Codigo}
+      codvar: { name: Codigo de la Variable}
       desvar: { name: Nombre}
-      codnom: { name: Codigo}
+      codnom: { name: Codigo de Nomina}
+      nomnom: { name: Descripcion}
       valor1: { name: Valor No. 1}    
       valor2: { name: Valor No. 2} 
       valor3: { name: Valor No. 3} 
@@ -16,7 +17,7 @@ generator:
     list:
       title:          Variables
       filters:        [codvar]
-      display:        [=codvar, desvar, codnom]
+      display:        [=codvar, desvar, codnom, nomnom]
       object_actions:
         _edit:        ~
         _delete:      ~

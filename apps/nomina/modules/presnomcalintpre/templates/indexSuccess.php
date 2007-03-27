@@ -119,6 +119,8 @@ array()) ?></h1>
     <td>
 <div class="form-row">
 <?php echo button_to('Calcular','#')?>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo button_to('Guardar','#')?>
 </div>
 </td>
     <td><fieldset id="sf_fieldset_none" class="">

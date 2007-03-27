@@ -54,7 +54,8 @@
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 <?php echo button_to('...','#')?>
-<?php echo label_for('',$tipo, 'size=200') ?>
+&nbsp;&nbsp;&nbsp;
+<?php echo $tipo ?>
     </div>
     &nbsp;
 &nbsp;
