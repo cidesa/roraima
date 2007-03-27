@@ -12084,6 +12084,9 @@ propel:
     objesp: 
       type: VARCHAR
       size: 1000
+    codemp: 
+      type: VARCHAR
+      size: 16     
     mision: 
       type: VARCHAR
       size: 1000
