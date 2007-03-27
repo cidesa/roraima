@@ -28617,3 +28617,58 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  fordefaccpoa: 
+    #_attributes: 
+      #idMethod: native
+    codsubacc: 
+      type: VARCHAR
+      size: 5
+      required: true
+    dessubacc: 
+      type: VARCHAR
+      size: 250
+    metsubacc: 
+      type: VARCHAR
+      size: 250
+    locsubacc: 
+      type: VARCHAR
+      size: 250
+    indgessubacc: 
+      type: VARCHAR
+      size: 250
+    indgessubacc: 
+      type: VARCHAR
+      size: 250
+    codunimed: 
+      type: VARCHAR
+      size: 3
+    medversubacc: 
+      type: VARCHAR
+      size: 250
+    supsubacc: 
+      type: VARCHAR
+      size: 250
+    metpritri: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    metsegtri: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mettertri: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    metcuatri: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mettot: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true
