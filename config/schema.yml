@@ -28636,9 +28636,6 @@ propel:
     indgessubacc: 
       type: VARCHAR
       size: 250
-    indgessubacc: 
-      type: VARCHAR
-      size: 250
     codunimed: 
       type: VARCHAR
       size: 3
