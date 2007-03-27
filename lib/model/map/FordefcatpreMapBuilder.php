@@ -42,6 +42,8 @@ class FordefcatpreMapBuilder {
 
 		$tMap->addColumn('OBJESP', 'Objesp', 'string', CreoleTypes::VARCHAR, false, 1000);
 
+		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, false, 16);
+
 		$tMap->addColumn('MISION', 'Mision', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addColumn('VISION', 'Vision', 'string', CreoleTypes::VARCHAR, false, 1000);
