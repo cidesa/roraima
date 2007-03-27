@@ -12074,7 +12074,7 @@ propel:
     nomcat: 
       type: VARCHAR
       size: 250
-      required: true
+      required: true       
     descat: 
       type: VARCHAR
       size: 1000
@@ -17590,6 +17590,10 @@ propel:
     codmot: 
       type: VARCHAR
       size: 4
+    codnom: 
+      type: VARCHAR
+      size: 3
+      required: true
     nrodia: 
       type: NUMERIC
       size: 4
