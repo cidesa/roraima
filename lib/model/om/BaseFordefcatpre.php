@@ -29,6 +29,10 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 
 
 	
+	protected $codemp;
+
+
+	
 	protected $mision;
 
 
@@ -78,6 +82,13 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 	{
 
 		return $this->objesp;
+	}
+
+	
+	public function getCodemp()
+	{
+
+		return $this->codemp;
 	}
 
 	
@@ -152,6 +163,16 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setCodemp($v)
+	{
+
+		if ($this->codemp !== $v) {
+			$this->codemp = $v;
+			$this->modifiedColumns[] = FordefcatprePeer::CODEMP;
+		}
+
+	} 
+	
 	public function setMision($v)
 	{
 
@@ -196,17 +217,19 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 
 			$this->objesp = $rs->getString($startcol + 4);
 
-			$this->mision = $rs->getString($startcol + 5);
+			$this->codemp = $rs->getString($startcol + 5);
 
-			$this->vision = $rs->getString($startcol + 6);
+			$this->mision = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+			$this->vision = $rs->getString($startcol + 7);
+
+			$this->id = $rs->getInt($startcol + 8);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 8; 
+						return $startcol + 9; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Fordefcatpre object", $e);
 		}
@@ -348,12 +371,15 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 				return $this->getObjesp();
 				break;
 			case 5:
-				return $this->getMision();
+				return $this->getCodemp();
 				break;
 			case 6:
-				return $this->getVision();
+				return $this->getMision();
 				break;
 			case 7:
+				return $this->getVision();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -371,9 +397,10 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 			$keys[2] => $this->getDescat(),
 			$keys[3] => $this->getCoduni(),
 			$keys[4] => $this->getObjesp(),
-			$keys[5] => $this->getMision(),
-			$keys[6] => $this->getVision(),
-			$keys[7] => $this->getId(),
+			$keys[5] => $this->getCodemp(),
+			$keys[6] => $this->getMision(),
+			$keys[7] => $this->getVision(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -405,12 +432,15 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 				$this->setObjesp($value);
 				break;
 			case 5:
-				$this->setMision($value);
+				$this->setCodemp($value);
 				break;
 			case 6:
-				$this->setVision($value);
+				$this->setMision($value);
 				break;
 			case 7:
+				$this->setVision($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -425,9 +455,10 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setDescat($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCoduni($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setObjesp($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setMision($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setVision($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodemp($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setMision($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setVision($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -440,6 +471,7 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FordefcatprePeer::DESCAT)) $criteria->add(FordefcatprePeer::DESCAT, $this->descat);
 		if ($this->isColumnModified(FordefcatprePeer::CODUNI)) $criteria->add(FordefcatprePeer::CODUNI, $this->coduni);
 		if ($this->isColumnModified(FordefcatprePeer::OBJESP)) $criteria->add(FordefcatprePeer::OBJESP, $this->objesp);
+		if ($this->isColumnModified(FordefcatprePeer::CODEMP)) $criteria->add(FordefcatprePeer::CODEMP, $this->codemp);
 		if ($this->isColumnModified(FordefcatprePeer::MISION)) $criteria->add(FordefcatprePeer::MISION, $this->mision);
 		if ($this->isColumnModified(FordefcatprePeer::VISION)) $criteria->add(FordefcatprePeer::VISION, $this->vision);
 		if ($this->isColumnModified(FordefcatprePeer::ID)) $criteria->add(FordefcatprePeer::ID, $this->id);
@@ -482,6 +514,8 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 		$copyObj->setCoduni($this->coduni);
 
 		$copyObj->setObjesp($this->objesp);
+
+		$copyObj->setCodemp($this->codemp);
 
 		$copyObj->setMision($this->mision);
 
