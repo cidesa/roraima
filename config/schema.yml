@@ -28688,4 +28688,23 @@ propel:
     id: 
       type: INTEGER
       required: true
-      autoIncrement: true           
+      autoIncrement: true
+  forasopryaccespsubacc: 
+    #_attributes: 
+      #idMethod: native
+    codpro: 
+      type: VARCHAR
+      size: 20
+      required: true
+    codaccesp: 
+      type: VARCHAR
+      size: 20
+      required: true
+    codsubacc: 
+      type: VARCHAR
+      size: 5
+      required: true  
+    id: 
+      type: INTEGER
+      required: true
+      autoIncrement: true            
