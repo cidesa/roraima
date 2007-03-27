@@ -34,7 +34,7 @@ class nomdefconahoActions extends autonomdefconahoActions
 	  	else return ' ';	
   }
   
-   public function getAporte($tipo)
+  public function getAporte($tipo)
   {
   	  $c = new Criteria;
   	  $c->add(NpconahoPeer::CODNOM,$this->npnomina->getCodnom());
@@ -57,7 +57,7 @@ class nomdefconahoActions extends autonomdefconahoActions
 	  	else return ' ';	
   }
   
- public function getAjuaporte($tipo)
+  public function getAjuaporte($tipo)
   {
   	  $c = new Criteria;
   	  $c->add(NpconahoPeer::CODNOM,$this->npnomina->getCodnom());
