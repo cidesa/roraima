@@ -42,6 +42,6 @@ class Fordefparing extends BaseFordefparing
 		if ($nomext)		
 		    return $nomext->getNomext();
 	    else 
-	        return ' 1';
+	        return ' ';
     }	    
 }
