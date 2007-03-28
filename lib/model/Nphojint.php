@@ -9,7 +9,7 @@
  */
 class Nphojint extends BaseNphojint
 {
-	public function getfeccal()
+	public function getfFeccal()
 	{
 		$c = new Criteria();
 		$c->add(NpasiempcontPeer::CODEMP,self::getCodemp());		
@@ -21,6 +21,7 @@ class Nphojint extends BaseNphojint
 		}
 	}
 
+	/*
 	public function getcodnom()
 	{
 		$c = new Criteria();
@@ -31,7 +32,8 @@ class Nphojint extends BaseNphojint
 		}else{
 			return ' ';
 		}
-	}	
+	}
+*/	
 	
 	public function getNomcar()
 	{
