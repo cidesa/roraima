@@ -7,11 +7,6 @@ var Obra_cont='/obra_cont_dev.php/';
 var Inv_coloc='/inv_coloc_dev.php/';
 var Cred_cobr='/cred_cobr_dev.php/';
 
-
-		['Obras y Contratos', 'principal/menu/m/obra_cont'],
-		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
-		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
-
 var ReportesCompras='http://'+window.location.host+'/vb-libre/reportes/compras/';
 var ReportesTesoreria='http://'+window.location.host+'/vb-libre/reportes/tesoreria/';
 var ReportesNomina='http://'+window.location.host+'/vb-libre/reportes/nomina/';
@@ -469,7 +464,7 @@ var TREE_ITEMS_MAIN = [
 		['Nomina', 'principal/menu/m/nomina'],
 		['Formulacicn', 'principal/menu/m/formulacion'],
 		['Obras y Contratos', 'principal/menu/m/obra_cont'],
-		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_colocs'],
+		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
 		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
       ]
 	];
