@@ -1,0 +1,258 @@
+Mar 25 15:37:24 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 25 15:37:24 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 25 15:37:24 symfony [info] {sfRouting} connect "/"
+Mar 25 15:37:24 symfony [info] {sfRouting} connect "/symfony/:action/*"
+Mar 25 15:37:24 symfony [info] {sfRouting} connect "/:module"
+Mar 25 15:37:24 symfony [info] {sfRouting} connect "/:module/:action/*"
+Mar 25 15:37:24 symfony [info] {sfContext} initialization
+Mar 25 15:37:24 symfony [info] {sfController} initialization
+Mar 25 15:37:24 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 25 15:37:24 symfony [info] {sfRequest} request parameters array (  'module' => 'pagrepret',  'action' => 'index',)
+Mar 25 15:37:24 symfony [info] {sfController} dispatch request
+Mar 25 15:37:24 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 25 15:37:24 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 25 15:37:24 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 25 15:37:24 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 25 15:37:24 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 25 15:37:24 symfony [info] {sfAction} call "pagrepretActions->executeIndex()"
+Mar 25 15:37:24 symfony [info] {sfView} initialize view for "pagrepret/index"
+Mar 25 15:37:24 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/pagrepret/templates/indexSuccess.php"
+Mar 25 15:37:24 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 25 15:37:24 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 25 15:37:24 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 25 15:37:24 symfony [info] {sfFilter} render to client
+Mar 25 15:37:24 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 25 15:37:24 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 25 15:37:24 symfony [info] {sfResponse} send content (26250 o)
+Mar 25 15:37:25 symfony [info] {sfTimerManager} Configuration 124.86 ms (11)
+Mar 25 15:37:25 symfony [info] {sfTimerManager} Action "pagrepret/index" 0.27 ms (1)
+Mar 25 15:37:25 symfony [info] {sfTimerManager} View "Success" for "pagrepret/index" 78.02 ms (1)
+Mar 25 15:40:08 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 25 15:40:08 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 25 15:40:08 symfony [info] {sfContext} initialization
+Mar 25 15:40:09 symfony [info] {sfController} initialization
+Mar 25 15:40:09 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 25 15:40:09 symfony [info] {sfRequest} request parameters array (  'module' => 'tesmovconban',  'action' => 'index',)
+Mar 25 15:40:09 symfony [info] {sfController} dispatch request
+Mar 25 15:40:09 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 25 15:40:09 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 25 15:40:09 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 25 15:40:09 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 25 15:40:09 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 25 15:40:09 symfony [info] {sfAction} call "tesmovconbanActions->executeIndex()"
+Mar 25 15:40:09 symfony [info] {sfView} initialize view for "tesmovconban/index"
+Mar 25 15:40:09 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/tesmovconban/templates/indexSuccess.php"
+Mar 25 15:40:09 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 25 15:40:09 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 25 15:40:09 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 25 15:40:09 symfony [info] {sfFilter} render to client
+Mar 25 15:40:09 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 25 15:40:09 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 25 15:40:09 symfony [info] {sfResponse} send content (24960 o)
+Mar 25 15:40:09 symfony [info] {sfTimerManager} Configuration 114.57 ms (13)
+Mar 25 15:40:09 symfony [info] {sfTimerManager} Action "tesmovconban/index" 0.27 ms (1)
+Mar 25 15:40:09 symfony [info] {sfTimerManager} View "Success" for "tesmovconban/index" 91.37 ms (1)
+Mar 25 15:45:00 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 25 15:45:00 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 25 15:45:01 symfony [info] {sfContext} initialization
+Mar 25 15:45:01 symfony [info] {sfController} initialization
+Mar 25 15:45:01 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 25 15:45:01 symfony [info] {sfRequest} request parameters array (  'module' => 'pagrepret',  'action' => 'index',)
+Mar 25 15:45:01 symfony [info] {sfController} dispatch request
+Mar 25 15:45:01 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 25 15:45:01 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 25 15:45:01 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 25 15:45:01 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 25 15:45:01 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 25 15:45:01 symfony [info] {sfAction} call "pagrepretActions->executeIndex()"
+Mar 25 15:45:01 symfony [info] {sfView} initialize view for "pagrepret/index"
+Mar 25 15:45:01 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/pagrepret/templates/indexSuccess.php"
+Mar 25 15:45:01 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 25 15:45:01 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 25 15:45:01 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 25 15:45:01 symfony [info] {sfFilter} render to client
+Mar 25 15:45:01 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 25 15:45:01 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 25 15:45:01 symfony [info] {sfResponse} send content (25150 o)
+Mar 25 15:45:01 symfony [info] {sfTimerManager} Configuration 37.20 ms (12)
+Mar 25 15:45:01 symfony [info] {sfTimerManager} Action "pagrepret/index" 0.27 ms (1)
+Mar 25 15:45:01 symfony [info] {sfTimerManager} View "Success" for "pagrepret/index" 70.15 ms (1)
+Mar 25 15:47:57 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 25 15:47:57 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 25 15:47:57 symfony [info] {sfContext} initialization
+Mar 25 15:47:57 symfony [info] {sfController} initialization
+Mar 25 15:47:57 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 25 15:47:57 symfony [info] {sfRequest} request parameters array (  'module' => 'pagrepret',  'action' => 'index',)
+Mar 25 15:47:57 symfony [info] {sfController} dispatch request
+Mar 25 15:47:57 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 25 15:47:57 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 25 15:47:57 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 25 15:47:57 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 25 15:47:57 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 25 15:47:57 symfony [info] {sfAction} call "pagrepretActions->executeIndex()"
+Mar 25 15:47:57 symfony [info] {sfView} initialize view for "pagrepret/index"
+Mar 25 15:47:57 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/pagrepret/templates/indexSuccess.php"
+Mar 25 15:47:57 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 25 15:47:57 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 25 15:47:57 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 25 15:47:57 symfony [info] {sfFilter} render to client
+Mar 25 15:47:57 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 25 15:47:57 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 25 15:47:57 symfony [info] {sfResponse} send content (25150 o)
+Mar 25 15:47:57 symfony [info] {sfTimerManager} Configuration 36.43 ms (12)
+Mar 25 15:47:57 symfony [info] {sfTimerManager} Action "pagrepret/index" 0.27 ms (1)
+Mar 25 15:47:57 symfony [info] {sfTimerManager} View "Success" for "pagrepret/index" 67.98 ms (1)
+Mar 26 01:30:20 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:30:20 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:30:20 symfony [info] {sfRouting} connect "/"
+Mar 26 01:30:20 symfony [info] {sfRouting} connect "/symfony/:action/*"
+Mar 26 01:30:20 symfony [info] {sfRouting} connect "/:module"
+Mar 26 01:30:20 symfony [info] {sfRouting} connect "/:module/:action/*"
+Mar 26 01:30:20 symfony [info] {sfContext} initialization
+Mar 26 01:30:20 symfony [info] {sfController} initialization
+Mar 26 01:30:20 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 26 01:30:20 symfony [info] {sfRequest} request parameters array (  'module' => 'tesmovconban',  'action' => 'index',)
+Mar 26 01:30:20 symfony [info] {sfController} dispatch request
+Mar 26 01:30:20 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 26 01:30:20 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 26 01:30:20 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 26 01:30:20 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 26 01:30:20 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 26 01:30:20 symfony [info] {sfAction} call "tesmovconbanActions->executeIndex()"
+Mar 26 01:30:20 symfony [info] {sfView} initialize view for "tesmovconban/index"
+Mar 26 01:30:20 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/tesmovconban/templates/indexSuccess.php"
+Mar 26 01:30:20 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:30:20 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:30:20 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 26 01:30:20 symfony [info] {sfFilter} render to client
+Mar 26 01:30:20 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 26 01:30:20 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 26 01:30:20 symfony [info] {sfResponse} send content (26059 o)
+Mar 26 01:30:20 symfony [info] {sfTimerManager} Configuration 133.08 ms (11)
+Mar 26 01:30:20 symfony [info] {sfTimerManager} Action "tesmovconban/index" 0.29 ms (1)
+Mar 26 01:30:20 symfony [info] {sfTimerManager} View "Success" for "tesmovconban/index" 127.90 ms (1)
+Mar 26 01:30:36 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:30:36 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:30:36 symfony [info] {sfContext} initialization
+Mar 26 01:30:36 symfony [info] {sfController} initialization
+Mar 26 01:30:36 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 26 01:30:36 symfony [info] {sfRequest} request parameters array (  'module' => 'pagrepret',  'action' => 'index',)
+Mar 26 01:30:36 symfony [info] {sfController} dispatch request
+Mar 26 01:30:36 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 26 01:30:36 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 26 01:30:36 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 26 01:30:36 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 26 01:30:36 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 26 01:30:36 symfony [info] {sfAction} call "pagrepretActions->executeIndex()"
+Mar 26 01:30:36 symfony [info] {sfView} initialize view for "pagrepret/index"
+Mar 26 01:30:36 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/pagrepret/templates/indexSuccess.php"
+Mar 26 01:30:36 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:30:36 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:30:36 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 26 01:30:36 symfony [info] {sfFilter} render to client
+Mar 26 01:30:36 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 26 01:30:36 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 26 01:30:36 symfony [info] {sfResponse} send content (25151 o)
+Mar 26 01:30:36 symfony [info] {sfTimerManager} Configuration 132.56 ms (13)
+Mar 26 01:30:36 symfony [info] {sfTimerManager} Action "pagrepret/index" 0.32 ms (1)
+Mar 26 01:30:36 symfony [info] {sfTimerManager} View "Success" for "pagrepret/index" 98.74 ms (1)
+Mar 26 01:37:38 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:37:38 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:37:38 symfony [info] {sfContext} initialization
+Mar 26 01:37:38 symfony [info] {sfController} initialization
+Mar 26 01:37:38 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 26 01:37:38 symfony [info] {sfRequest} request parameters array (  'module' => 'tesmovconban',  'action' => 'index',)
+Mar 26 01:37:38 symfony [info] {sfController} dispatch request
+Mar 26 01:37:38 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 26 01:37:38 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 26 01:37:38 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 26 01:37:38 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 26 01:37:38 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 26 01:37:38 symfony [info] {sfAction} call "tesmovconbanActions->executeIndex()"
+Mar 26 01:37:38 symfony [info] {sfView} initialize view for "tesmovconban/index"
+Mar 26 01:37:38 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/tesmovconban/templates/indexSuccess.php"
+Mar 26 01:37:39 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:37:39 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:37:39 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 26 01:37:39 symfony [info] {sfFilter} render to client
+Mar 26 01:37:39 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 26 01:37:39 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 26 01:37:39 symfony [info] {sfResponse} send content (24958 o)
+Mar 26 01:37:39 symfony [info] {sfTimerManager} Configuration 40.67 ms (12)
+Mar 26 01:37:39 symfony [info] {sfTimerManager} Action "tesmovconban/index" 0.28 ms (1)
+Mar 26 01:37:39 symfony [info] {sfTimerManager} View "Success" for "tesmovconban/index" 73.24 ms (1)
+Mar 26 01:45:31 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:45:31 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:45:31 symfony [info] {sfContext} initialization
+Mar 26 01:45:31 symfony [info] {sfController} initialization
+Mar 26 01:45:31 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 26 01:45:31 symfony [info] {sfRequest} request parameters array (  'module' => 'pagrepret',  'action' => 'index',)
+Mar 26 01:45:31 symfony [info] {sfController} dispatch request
+Mar 26 01:45:31 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 26 01:45:31 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 26 01:45:31 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 26 01:45:31 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 26 01:45:31 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 26 01:45:31 symfony [info] {sfAction} call "pagrepretActions->executeIndex()"
+Mar 26 01:45:31 symfony [info] {sfView} initialize view for "pagrepret/index"
+Mar 26 01:45:31 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/pagrepret/templates/indexSuccess.php"
+Mar 26 01:45:32 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:45:32 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:45:32 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 26 01:45:32 symfony [info] {sfFilter} render to client
+Mar 26 01:45:32 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 26 01:45:32 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 26 01:45:32 symfony [info] {sfResponse} send content (25149 o)
+Mar 26 01:45:32 symfony [info] {sfTimerManager} Configuration 46.32 ms (12)
+Mar 26 01:45:32 symfony [info] {sfTimerManager} Action "pagrepret/index" 0.28 ms (1)
+Mar 26 01:45:32 symfony [info] {sfTimerManager} View "Success" for "pagrepret/index" 68.93 ms (1)
+Mar 26 01:51:05 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:51:05 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:51:05 symfony [info] {sfContext} initialization
+Mar 26 01:51:05 symfony [info] {sfController} initialization
+Mar 26 01:51:05 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 26 01:51:05 symfony [info] {sfRequest} request parameters array (  'module' => 'pagrepret',  'action' => 'index',)
+Mar 26 01:51:05 symfony [info] {sfController} dispatch request
+Mar 26 01:51:05 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 26 01:51:05 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 26 01:51:05 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 26 01:51:05 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 26 01:51:05 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 26 01:51:05 symfony [info] {sfAction} call "pagrepretActions->executeIndex()"
+Mar 26 01:51:05 symfony [info] {sfView} initialize view for "pagrepret/index"
+Mar 26 01:51:05 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/pagrepret/templates/indexSuccess.php"
+Mar 26 01:51:05 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:51:05 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:51:05 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 26 01:51:05 symfony [info] {sfFilter} render to client
+Mar 26 01:51:05 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 26 01:51:05 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 26 01:51:05 symfony [info] {sfResponse} send content (25150 o)
+Mar 26 01:51:05 symfony [info] {sfTimerManager} Configuration 42.46 ms (12)
+Mar 26 01:51:05 symfony [info] {sfTimerManager} Action "pagrepret/index" 0.28 ms (1)
+Mar 26 01:51:05 symfony [info] {sfTimerManager} View "Success" for "pagrepret/index" 72.00 ms (1)
+Mar 26 01:51:20 symfony [warning] {sfPhpConfigHandler} php.ini "magic_quotes_gpc" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:51:20 symfony [warning] {sfPhpConfigHandler} php.ini "register_globals" key is better set to "false" (current value is "'1'" - php.ini location: "C:\WINDOWS\php.ini")
+Mar 26 01:51:20 symfony [info] {sfContext} initialization
+Mar 26 01:51:20 symfony [info] {sfController} initialization
+Mar 26 01:51:20 symfony [info] {sfRouting} match route [default_index] "/:module"
+Mar 26 01:51:20 symfony [info] {sfRequest} request parameters array (  'module' => 'tesmovconban',  'action' => 'index',)
+Mar 26 01:51:20 symfony [info] {sfController} dispatch request
+Mar 26 01:51:20 symfony [info] {sfFilter} executing filter "sfRenderingFilter"
+Mar 26 01:51:20 symfony [info] {sfFilter} executing filter "sfWebDebugFilter"
+Mar 26 01:51:20 symfony [info] {sfFilter} executing filter "sfCommonFilter"
+Mar 26 01:51:20 symfony [info] {sfFilter} executing filter "sfFlashFilter"
+Mar 26 01:51:20 symfony [info] {sfFilter} executing filter "sfExecutionFilter"
+Mar 26 01:51:20 symfony [info] {sfAction} call "tesmovconbanActions->executeIndex()"
+Mar 26 01:51:20 symfony [info] {sfView} initialize view for "tesmovconban/index"
+Mar 26 01:51:20 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\modules/tesmovconban/templates/indexSuccess.php"
+Mar 26 01:51:20 symfony [info] {sfView} decorate content with "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:51:20 symfony [info] {sfView} render "C:\AppServ\www\siga\apps\tesoreria\templates/layout.php"
+Mar 26 01:51:20 symfony [info] {sfFilter} executing filter "AutosetSchemaFIlter"
+Mar 26 01:51:20 symfony [info] {sfFilter} render to client
+Mar 26 01:51:20 symfony [info] {sfResponse} send status "HTTP/1.0 200 OK"
+Mar 26 01:51:20 symfony [info] {sfResponse} send header "Content-Type": "text/html; charset=utf-8"
+Mar 26 01:51:20 symfony [info] {sfResponse} send content (24958 o)
+Mar 26 01:51:20 symfony [info] {sfTimerManager} Configuration 39.09 ms (12)
+Mar 26 01:51:20 symfony [info] {sfTimerManager} Action "tesmovconban/index" 0.32 ms (1)
+Mar 26 01:51:20 symfony [info] {sfTimerManager} View "Success" for "tesmovconban/index" 71.28 ms (1)
