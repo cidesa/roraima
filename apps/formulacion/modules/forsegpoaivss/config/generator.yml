@@ -3,3 +3,27 @@ generator:
   param:
     model_class:      Fordisactperpryaccmet
     theme:            default
+    fields:
+      codpro: { name: Codigo del proyecto}
+      nompro: { name: Nombre}
+      codaccesp: { name: Codigo}
+      codmet: { name: Codigo de la Meta}
+      desmet: {name: Descripcion}
+      codact: { name: Actividad}
+      perpre: { name: Mes}
+      canact: { name: Cantidad Programada Anual}
+      canacteje: { name: Cantidad Ejecutada Anual}
+      canmet: { name: Programado Acumulado}
+      canmeteje: { name: Ejecutado}
+              
+    list:
+      title:          Segumientos de Metas Formuladas en el POA
+      filters:        [codpro]
+      display:        [=codpro, nompro, codmet, desmet]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Segumientos de Metas Formuladas en el POA
+      display:       [=codpro, codaccesp, codmet, codact, perpre, canact, canacteje, canmet, canmeteje] 
