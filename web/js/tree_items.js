@@ -2,9 +2,11 @@
 var Compras = '/compras_dev.php/';
 var Tesoreria= '/tesoreria_dev.php/';
 var Nomina='/nomina_dev.php/';
+var Formulacion='/formulacion_dev.php/';
 var ReportesCompras='http://'+window.location.host+'/vb-libre/reportes/compras/';
 var ReportesTesoreria='http://'+window.location.host+'/vb-libre/reportes/tesoreria/';
 var ReportesNomina='http://'+window.location.host+'/vb-libre/reportes/nomina/';
+var ReportesFormulacion='http://'+window.location.host+'/vb-libre/reportes/formulacion/';
 var servidor='http://'+window.location.host;
 
 var TREE_ITEMSCOM_ALM = [
@@ -366,27 +368,27 @@ var TREE_ITEMS_NOM = [
 				],
 				['Personal', null,
 					['Datos Personales', ReportesNomina+'nprhojint.php'],
-					['Asignación de Cargos', ReportesNomina+'nprasicaremp.php'],
-					['Ingresos y Egresos del Personal por Períodos', ReportesNomina+'npringegr.php'],
+					['Asignaci&oacute;n de Cargos', ReportesNomina+'nprasicaremp.php'],
+					['Ingresos y Egresos del Personal por Per&iacute;odos', ReportesNomina+'npringegr.php'],
 				],
 				['Prestaciones', null,
 					['Antiguedad Prestaciones Sociales Nuevo Regimen', ReportesNomina+'npcalpresoc_rn.php'],
 					['Antiguedad Prestaciones Sociales Antiguo Regimen', ReportesNomina+'npcalpresoc_rv.php'],
 					['Anticipos sobre Prestaciones Sociales', ReportesNomina+'nprcalantpresoc.php'],
-					['Compensación Bono Transferencia', ReportesNomina+'nprbonotransf.php'],
+					['Compensaci&oacute;n Bono Transferencia', ReportesNomina+'nprbonotransf.php'],
 					['Intereses sobre Prestaciones Sociales Nuevo Regimen', ReportesNomina+'nprintpresoc_rn.php'],
-					['Liquidación de Cuentas', ReportesNomina+'nprprestliquidacion.php'],
+					['Liquidaci&oacute;n de Cuentas', ReportesNomina+'nprprestliquidacion.php'],
 				],
 				['Vacaciones', null,
 					['Solicitud de Vacaciones', ReportesNomina+'npvac_solicitud.php'],
 					['Historico de Vacaciones disfrutadas por Empleado', ReportesNomina+'npvac_historico.php'],
-					['Relación de Vacaciones disfrutadas por Empleado en lote', ReportesNomina+'npvac_relacionhistoricos.php'],
-					['Relación de Vacaciones Procesadas', ReportesNomina+'npvac_relacionsalidas.php'],
+					['Relaci&oacute;n de Vacaciones disfrutadas por Empleado en lote', ReportesNomina+'npvac_relacionhistoricos.php'],
+					['Relaci&oacute;n de Vacaciones Procesadas', ReportesNomina+'npvac_relacionsalidas.php'],
 				],
 				['Listados de Nomina', null,
-					['Listados de Nómina Definitiva por Categoria', ReportesNomina+'nprnomdefcat.php'],
-					['Listados de Nómina Definitiva por Nivel', ReportesNomina+'nprnomdefniv.php'],
-					['Listado de Nómina para la firma por Categoría', ReportesNomina+'nprnomfircat.php'],
+					['Listados de N&oacute;mina Definitiva por Categoria', ReportesNomina+'nprnomdefcat.php'],
+					['Listados de N&oacute;mina Definitiva por Nivel', ReportesNomina+'nprnomdefniv.php'],
+					['Listado de N&oacute;mina para la firma por Categor&iacute;a', ReportesNomina+'nprnomfircat.php'],
 					['Consolidado de Nómina', ReportesNomina+'nprconsolidado.php'],
 				],
 				['Recibos de Pago', null,
@@ -394,17 +396,17 @@ var TREE_ITEMS_NOM = [
 				],
 				['Listado de Conceptos', null,
 					['Listados por Conceptos *', ReportesNomina+'nprlistconc.php'],
-					['Relación Categoria - Conceptos', ReportesNomina+'nprconniv.php'],
+					['Relaci&oacute;n Categoria - Conceptos', ReportesNomina+'nprconniv.php'],
 				],
 				['Relaciones Presupuestarias', null,
-					['Relación Nómina/Presupuesto', ReportesNomina+'nprnompre.php'],
-					['Disponibilidad Presupuestaria por Nómina', ReportesNomina+'disponibilidadpresupnomina.php'],
+					['Relaci&oacute;n N&oacute;mina/Presupuesto', ReportesNomina+'nprnompre.php'],
+					['Disponibilidad Presupuestaria por N&oacute;mina', ReportesNomina+'disponibilidadpresupnomina.php'],
 				],
 				['Relaciones de Pago', null,
-					['Relación Cuentas Bancarias/ Nómina', ReportesNomina+'nprrelbanc.php'],
+					['Relaci&oacute;n Cuentas Bancarias/ N&oacute;mina', ReportesNomina+'nprrelbanc.php'],
 				],
 				['Diskettes', null,
-					['Relación Deposito/Banco', ReportesNomina+'nprrelbancdisc.php'],
+					['Relaci&oacute;n Deposito/Banco', ReportesNomina+'nprrelbancdisc.php'],
 				],
 				['Historicos', null,
 					['Historico Listado por Conceptos', ReportesNomina+'nprhistlistconc.php'],
@@ -420,6 +422,50 @@ var TREE_ITEMS_NOM = [
 	],
 ];
 
+var TREE_ITEMSCOM_FOR = [
+	['SIGA', null,
+		['Formulaci&oacute;n de Presupuesto', null,
+			['Definiciones Generales', null,
+				['Areas Estrategicas', null,
+					['Equilibrios', Formulacion+'fordefequ'],
+					['Sub Objetivos', Formulacion+'fordefsubobj'],
+					['Sub Sub Objetivos', Formulacion+'fordefsubsubobj'],
+					['Unidades de Medidas', Formulacion+'fordefunimed'],
+					['Definiciones de Estatus', Formulacion+'fordefstatus'],
+					['Organismos P&uacute;blicos', Formulacion+'fordeforgpub'],
+				],
+			],
+			['Ingresos', null,
+				['Clasificador Presupuestario (Recursos)', Formulacion+'pretiting'],
+				['Formulaci&oacute;n', null,
+					['Formulaci&oacute;n Presupuesto de Ingresos Directa', Formulacion+'fortitingivss'],
+				],				
+			],
+			
+			['Egreso', null,
+				['Definiciones Especificas', null,
+					['Registro de Directrices', Formulacion+'fordefdirectriz'],
+					['Proyectos y Acciones Centralizadas IVSS', Formulacion+'fordefproyectoivss'],
+					['Acciones Espec&iacute;ficas IVSS', Formulacion+'fordefaccespivss'],
+					['Acciones POA IVSS', Formulacion+'fordefaccpoaivss'],
+					['Asociaci&oacute;n de Acciones POA a Acciones Especificas - Proyectos', Formulacion+'fordefpryaccsubaccivss'],
+					['Actividades por Sub Acciones - Acciones Especificas - Proyectos IVSS', Formulacion+'fordefpryaccactivss'],
+					['Unidades Ejecutoras IVSS', Formulacion+'fordefcatpreivss'],
+				],
+				['Formulaci&oacute;n', null,
+					['Seguimientos Metas Formuladas en el POA', Formulacion+'forsegpoaivss'],
+				],
+			],
+			['Reportes',null,
+				['Generales',null,
+					['Marco Macro-Econ&oacute;mico', ReportesFormulacion+'forrmarmaceco.php'],
+					['Recursos Humanos del Ente Clasificados por Tipo de Cargos', ReportesFormulacion+'forrrhclatipcar.php'],
+					['Clasificaci&oacute;n del Personal del Ente por Escala de Sueldos', ReportesFormulacion+'forrclaperescsue.php'],
+				],	
+			],	                                                                                        
+		],
+	],
+];
 
 var TREE_ITEMS_MAIN = [
 	['SIGA', null,
@@ -428,6 +474,7 @@ var TREE_ITEMS_MAIN = [
 		['Compras Y Almacen', 'principal/menu/m/compras'],
 		['Tesorer&iacute;a', 'principal/menu/m/tesoreria'],
 		['Nomina', 'principal/menu/m/nomina'],
+		['Formulaci&oacute;n', 'principal/menu/m/formulacion'],
       ]
 	];
 
