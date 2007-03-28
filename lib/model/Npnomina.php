@@ -9,6 +9,20 @@
  */ 
 class Npnomina extends BaseNpnomina
 {
+  public function getDesfrecal()
+  {
+  	 if (($this->getFrecal())=='Q')
+	  	return 'Quincenal';
+	  else 
+	   if (($this->getFrecal())=='S')
+	  	return 'Semanal';
+	   else 
+	     if (($this->getFrecal())=='M')
+	  	   return 'Mensual';
+	     else 
+	       return ' ';
+  }
+
 	public function getMonto()
 	{
 		//consulta a 3 tablas para saber la foma de entrega
@@ -82,6 +96,17 @@ class Npnomina extends BaseNpnomina
     	$nomcon = NpdefcptPeer::doSelectone($c);
     	if ($nomcon)
     	  return $nomcon->getNomcon();
+	    else
+	      return ' ';
+    }
+    
+    public function getFecdes()
+    {
+    	$c = new Criteria();
+    	$c->add(NpfalperPeer::CODNOM,self::getCodnom());
+    	$fecdes = NpfalperPeer::doSelectone($c);
+    	if ($fecdes)
+    	  return $fecdes->getFecdes();
 	    else
 	      return ' ';
     }
