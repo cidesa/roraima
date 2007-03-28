@@ -223,32 +223,34 @@
 
 <fieldset>
 <legend>Detalles</legend>
-
 <div class="form-row">
-<div id="grid02" class="grid02">
-<table border="0" class="sf_admin_list">
+<div id="grid01" class="grid01">
+<table border="0" class="sf_admin_list" whith="100%">
 <?php $nombre=array(0 => 'Articulo:', 1 => 'Descripcion',2 => 'Unidad:'); ?>
 <? if ( count($rs)>0){
-$i=0;
-foreach ($rs as $k=>$fila) {
-    $i++;
-    if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$nombre[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
-  }
-?></table> 
-	</div>	
-</div><!-- //fin -->
+	$i=0;
+	foreach ($rs as $k=>$fila) {
+		$i++;
+		if($i==1){?>
+	<thead>
+		<tr>
+		<? foreach ($fila as $key => $value){?>
+			<th><?=$nombre[$key]?></th>
+			<? }?>
+		</tr>
+	</thead>
+	<? }?>
+	<tr>
+	<? foreach ($fila as $key => $value){?>
+		<td><?=$value?></td>
+		<? }?>
+	</tr>
+	<? }
+}
+?>
+</table>
+</div>
+</div>
 
 </fieldset>
 
