@@ -428,6 +428,7 @@ var TREE_ITEMSCOM_FOR = [
 					['Acciones POA IVSS', Formulacion+'fordefaccpoaivss'],
 					['Asociaci&oacute;n de Acciones POA a Acciones Especificas - Proyectos', Formulacion+'fordefpryaccsubaccivss'],
 					['Actividades por Sub Acciones - Acciones Especificas - Proyectos IVSS', Formulacion+'fordefpryaccactivss'],
+					['Clasificador Presupuestario (Gastos)', Formulacion+'pretitgas'],
 					['Unidades Ejecutoras IVSS', Formulacion+'fordefcatpreivss'],
 				],
 				['Formulaci&oacute;n', null,
