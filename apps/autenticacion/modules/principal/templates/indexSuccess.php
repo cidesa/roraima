@@ -4,16 +4,6 @@
 <?php echo javascript_include_tag('tree_items') ?>
 <?php echo javascript_include_tag('tree_tpl') ?>
 
-
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
 <table aling="center" >
 <tr>
 <table border="0" align="center" cellpadding="0" cellspacing="0">
