@@ -13262,6 +13262,14 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    canmet: 
+      type: NUMERIC
+      size: 14
+      scale: 2
+    canmeteje: 
+      type: NUMERIC
+      size: 14
+      scale: 2
     id: 
       type: INTEGER
       required: true
