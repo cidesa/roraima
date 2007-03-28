@@ -15,7 +15,7 @@ class Nphojint extends BaseNphojint
 		$c->add(NpasiempcontPeer::CODEMP,self::getCodemp());
 		$feccal = NpasiempcontPeer::doSelectone($c);
 		if ($feccal){
-			return $feccal->getfeccal();
+			return $feccal->getFeccal();
 		}else{
 			return ' ';
 		}
