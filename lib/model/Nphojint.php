@@ -12,7 +12,7 @@ class Nphojint extends BaseNphojint
 	public function getfFeccal()
 	{
 		$c = new Criteria();
-		$c->add(NpasiempcontPeer::CODEMP,self::getCodemp());		
+		$c->add(NpasiempcontPeer::CODEMP,self::getCodemp());
 		$feccal = NpasiempcontPeer::doSelectone($c);
 		if ($feccal){
 			return $feccal->getfeccal();
@@ -21,19 +21,19 @@ class Nphojint extends BaseNphojint
 		}
 	}
 
-	/*
-	public function getcodnom()
+
+	public function getCodnom()
 	{
 		$c = new Criteria();
-		$c->add(NpasiempcontPeer::CODEMP,self::getCodemp());		
-		$codnom = NpasiempcontPeer::doSelectone($c);
-		if ($codnom){
-			return $codnom->getcodnom();
+		$c->add(NpasiempcontPeer::CODEMP,str_pad(self::getCodemp(), 16 , ' '));		
+		$nomemp = NpasiempcontPeer::doSelectone($c);
+		if ($nomemp){
+			return $nomemp->getCodnom();
 		}else{
-			return ' ';
+			return '<!Nombre no encontrado!>';
 		}
 	}
-*/	
+	
 	
 	public function getNomcar()
 	{
@@ -76,7 +76,7 @@ class Nphojint extends BaseNphojint
 		
 	}
 	
-	public function getCodnom()
+	public function getCodnom_duplicado()
 	{
 		// Se obtiene Nomnom de la tabla Npasicaremp
 		
