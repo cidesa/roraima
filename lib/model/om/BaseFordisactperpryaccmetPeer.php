@@ -13,7 +13,7 @@ abstract class BaseFordisactperpryaccmetPeer {
 	const CLASS_DEFAULT = 'lib.model.Fordisactperpryaccmet';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,12 @@ abstract class BaseFordisactperpryaccmetPeer {
 	const CANACTEJE = 'fordisactperpryaccmet.CANACTEJE';
 
 	
+	const CANMET = 'fordisactperpryaccmet.CANMET';
+
+	
+	const CANMETEJE = 'fordisactperpryaccmet.CANMETEJE';
+
+	
 	const ID = 'fordisactperpryaccmet.ID';
 
 	
@@ -49,18 +55,18 @@ abstract class BaseFordisactperpryaccmetPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codaccesp', 'Codmet', 'Codact', 'Perpre', 'Canact', 'Canacteje', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FordisactperpryaccmetPeer::CODPRO, FordisactperpryaccmetPeer::CODACCESP, FordisactperpryaccmetPeer::CODMET, FordisactperpryaccmetPeer::CODACT, FordisactperpryaccmetPeer::PERPRE, FordisactperpryaccmetPeer::CANACT, FordisactperpryaccmetPeer::CANACTEJE, FordisactperpryaccmetPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codaccesp', 'codmet', 'codact', 'perpre', 'canact', 'canacteje', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codaccesp', 'Codmet', 'Codact', 'Perpre', 'Canact', 'Canacteje', 'Canmet', 'Canmeteje', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FordisactperpryaccmetPeer::CODPRO, FordisactperpryaccmetPeer::CODACCESP, FordisactperpryaccmetPeer::CODMET, FordisactperpryaccmetPeer::CODACT, FordisactperpryaccmetPeer::PERPRE, FordisactperpryaccmetPeer::CANACT, FordisactperpryaccmetPeer::CANACTEJE, FordisactperpryaccmetPeer::CANMET, FordisactperpryaccmetPeer::CANMETEJE, FordisactperpryaccmetPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codaccesp', 'codmet', 'codact', 'perpre', 'canact', 'canacteje', 'canmet', 'canmeteje', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codaccesp' => 1, 'Codmet' => 2, 'Codact' => 3, 'Perpre' => 4, 'Canact' => 5, 'Canacteje' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (FordisactperpryaccmetPeer::CODPRO => 0, FordisactperpryaccmetPeer::CODACCESP => 1, FordisactperpryaccmetPeer::CODMET => 2, FordisactperpryaccmetPeer::CODACT => 3, FordisactperpryaccmetPeer::PERPRE => 4, FordisactperpryaccmetPeer::CANACT => 5, FordisactperpryaccmetPeer::CANACTEJE => 6, FordisactperpryaccmetPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codaccesp' => 1, 'codmet' => 2, 'codact' => 3, 'perpre' => 4, 'canact' => 5, 'canacteje' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codaccesp' => 1, 'Codmet' => 2, 'Codact' => 3, 'Perpre' => 4, 'Canact' => 5, 'Canacteje' => 6, 'Canmet' => 7, 'Canmeteje' => 8, 'Id' => 9, ),
+		BasePeer::TYPE_COLNAME => array (FordisactperpryaccmetPeer::CODPRO => 0, FordisactperpryaccmetPeer::CODACCESP => 1, FordisactperpryaccmetPeer::CODMET => 2, FordisactperpryaccmetPeer::CODACT => 3, FordisactperpryaccmetPeer::PERPRE => 4, FordisactperpryaccmetPeer::CANACT => 5, FordisactperpryaccmetPeer::CANACTEJE => 6, FordisactperpryaccmetPeer::CANMET => 7, FordisactperpryaccmetPeer::CANMETEJE => 8, FordisactperpryaccmetPeer::ID => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codaccesp' => 1, 'codmet' => 2, 'codact' => 3, 'perpre' => 4, 'canact' => 5, 'canacteje' => 6, 'canmet' => 7, 'canmeteje' => 8, 'id' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
@@ -127,6 +133,10 @@ abstract class BaseFordisactperpryaccmetPeer {
 		$criteria->addSelectColumn(FordisactperpryaccmetPeer::CANACT);
 
 		$criteria->addSelectColumn(FordisactperpryaccmetPeer::CANACTEJE);
+
+		$criteria->addSelectColumn(FordisactperpryaccmetPeer::CANMET);
+
+		$criteria->addSelectColumn(FordisactperpryaccmetPeer::CANMETEJE);
 
 		$criteria->addSelectColumn(FordisactperpryaccmetPeer::ID);
 

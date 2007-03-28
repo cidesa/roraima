@@ -46,6 +46,10 @@ class FordisactperpryaccmetMapBuilder {
 
 		$tMap->addColumn('CANACTEJE', 'Canacteje', 'double', CreoleTypes::NUMERIC, false);
 
+		$tMap->addColumn('CANMET', 'Canmet', 'double', CreoleTypes::NUMERIC, false);
+
+		$tMap->addColumn('CANMETEJE', 'Canmeteje', 'double', CreoleTypes::NUMERIC, false);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 

@@ -37,6 +37,14 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 
 
 	
+	protected $canmet;
+
+
+	
+	protected $canmeteje;
+
+
+	
 	protected $id;
 
 	
@@ -92,6 +100,20 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 	{
 
 		return $this->canacteje;
+	}
+
+	
+	public function getCanmet()
+	{
+
+		return $this->canmet;
+	}
+
+	
+	public function getCanmeteje()
+	{
+
+		return $this->canmeteje;
 	}
 
 	
@@ -172,6 +194,26 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 
 	} 
 	
+	public function setCanmet($v)
+	{
+
+		if ($this->canmet !== $v) {
+			$this->canmet = $v;
+			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CANMET;
+		}
+
+	} 
+	
+	public function setCanmeteje($v)
+	{
+
+		if ($this->canmeteje !== $v) {
+			$this->canmeteje = $v;
+			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CANMETEJE;
+		}
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -200,13 +242,17 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 
 			$this->canacteje = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+			$this->canmet = $rs->getFloat($startcol + 7);
+
+			$this->canmeteje = $rs->getFloat($startcol + 8);
+
+			$this->id = $rs->getInt($startcol + 9);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 8; 
+						return $startcol + 10; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Fordisactperpryaccmet object", $e);
 		}
@@ -354,6 +400,12 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 				return $this->getCanacteje();
 				break;
 			case 7:
+				return $this->getCanmet();
+				break;
+			case 8:
+				return $this->getCanmeteje();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -373,7 +425,9 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 			$keys[4] => $this->getPerpre(),
 			$keys[5] => $this->getCanact(),
 			$keys[6] => $this->getCanacteje(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getCanmet(),
+			$keys[8] => $this->getCanmeteje(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -411,6 +465,12 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 				$this->setCanacteje($value);
 				break;
 			case 7:
+				$this->setCanmet($value);
+				break;
+			case 8:
+				$this->setCanmeteje($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -427,7 +487,9 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 		if (array_key_exists($keys[4], $arr)) $this->setPerpre($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setCanact($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCanacteje($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCanmet($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCanmeteje($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -442,6 +504,8 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 		if ($this->isColumnModified(FordisactperpryaccmetPeer::PERPRE)) $criteria->add(FordisactperpryaccmetPeer::PERPRE, $this->perpre);
 		if ($this->isColumnModified(FordisactperpryaccmetPeer::CANACT)) $criteria->add(FordisactperpryaccmetPeer::CANACT, $this->canact);
 		if ($this->isColumnModified(FordisactperpryaccmetPeer::CANACTEJE)) $criteria->add(FordisactperpryaccmetPeer::CANACTEJE, $this->canacteje);
+		if ($this->isColumnModified(FordisactperpryaccmetPeer::CANMET)) $criteria->add(FordisactperpryaccmetPeer::CANMET, $this->canmet);
+		if ($this->isColumnModified(FordisactperpryaccmetPeer::CANMETEJE)) $criteria->add(FordisactperpryaccmetPeer::CANMETEJE, $this->canmeteje);
 		if ($this->isColumnModified(FordisactperpryaccmetPeer::ID)) $criteria->add(FordisactperpryaccmetPeer::ID, $this->id);
 
 		return $criteria;
@@ -486,6 +550,10 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 		$copyObj->setCanact($this->canact);
 
 		$copyObj->setCanacteje($this->canacteje);
+
+		$copyObj->setCanmet($this->canmet);
+
+		$copyObj->setCanmeteje($this->canmeteje);
 
 
 		$copyObj->setNew(true);
