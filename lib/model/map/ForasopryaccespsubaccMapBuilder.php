@@ -34,9 +34,9 @@ class ForasopryaccespsubaccMapBuilder {
 
 		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 20);
 
-		$tMap->addColumn('CODACCESP', 'Codaccesp', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addColumn('CODACCESP', 'Codaccesp', 'string', CreoleTypes::VARCHAR, true, 20);
 
-		$tMap->addColumn('CODSUBACC', 'Codsubacc', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addColumn('CODSUBACC', 'Codsubacc', 'string', CreoleTypes::VARCHAR, true, 5);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
