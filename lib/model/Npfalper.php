@@ -39,17 +39,7 @@ class Npfalper extends BaseNpfalper
 	  if ($nombre)
 	  	return $nombre->getNomnom();
 	  else 
-	    return ' ';
+	    return '<!Nombre no encontrado!>';
   } 
 	
-	public function getDesmotfal()
-	{
-
-		$c = new Criteria();
-		$c->add(NpmotfalPeer::CODMOTFAL,self::getCodmot());
-		$registro = NpmotfalPeer::doSelectOne($c);
-		if($registro) return $registro->getDesmotfal();
-		else return null; 
-		
-	}
 }
