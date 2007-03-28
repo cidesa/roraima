@@ -2,9 +2,10 @@
 var Compras = '/compras_dev.php/';
 var Tesoreria= '/tesoreria_dev.php/';
 var Nomina='/nomina_dev.php/';
-var ReportesCompras='http://localhost/vb-libre/reportes/compras/';
-var ReportesTesoreria='http://localhost/vb-libre/reportes/tesoreria/';
-var ReportesNomina='http://localhost/vb-libre/reportes/nomina/';
+var ReportesCompras='http://'+window.location.host+'/vb-libre/reportes/compras/';
+var ReportesTesoreria='http://'+window.location.host+'/vb-libre/reportes/tesoreria/';
+var ReportesNomina='http://'+window.location.host+'/vb-libre/reportes/nomina/';
+var servidor='http://'+window.location.host;
 
 var TREE_ITEMSCOM_ALM = [
 	['SIGA', null,
@@ -422,8 +423,8 @@ var TREE_ITEMS_NOM = [
 
 var TREE_ITEMS_MAIN = [
 	['SIGA', null,
-		['Contabilidad Presupuestaria', 'http://localhost/sistemafull/aplicaciones/presupuesto/index.php'],
-		['Contabilidad Financiera', 'http://localhost/sistemafull/aplicaciones/contabilidad/index.php'],
+		['Contabilidad Presupuestaria', servidor+'/sistemafull/aplicaciones/presupuesto/index.php'],
+		['Contabilidad Financiera', servidor+'/sistemafull/aplicaciones/contabilidad/index.php'],
 		['Compras Y Almacen', 'principal/menu/m/compras'],
 		['Tesorer&iacute;a', 'principal/menu/m/tesoreria'],
 		['Nomina', 'principal/menu/m/nomina'],
