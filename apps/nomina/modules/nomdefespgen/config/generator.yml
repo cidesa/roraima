@@ -1,0 +1,31 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npdefgen
+    theme:            default
+
+    fields:
+      codemp:     { name: Codigo Empresa }
+      nomemp:     { name: Nombre Empresa }
+      forcar:     { name: Cargo }
+      foremp:     { name: Empleado }
+      fororg:     { name: Nivel Organizacional }
+      foruni:     { name: Unidad Ejecutora }
+      unitrib:    { name: Valor Unidad Tributaria }
+      redmon:     { name: Redondeo para los Calculos }
+      codpre:     { name: Presupuestar Cargos }
+      asiconnom:  { name: Asignar Conceptos a la Nomina }
+
+    list:
+      title:          Institucion
+      display:        [=codemp, nomemp, forcar, foremp, fororg, foruni, unitrib, redmon, codpre, asiconnom]
+
+      filters:        [codemp]
+      max_per_page:   5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Modificar Institucion
+      display:        [codemp, nomemp, forcar, foremp, fororg, foruni, unitrib, redmon, codpre, asiconnom]
