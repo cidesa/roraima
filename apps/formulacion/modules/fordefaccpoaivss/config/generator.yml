@@ -1,0 +1,31 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefaccpoa
+    theme:            default
+    fields:
+      codsubacc: { name: Codigo}
+      dessubacc: { name: Descripcion}
+      metsubacc: { name: Descripcion de la Meta}
+      codunimed: { name: Unidad de Medida}     
+      metpritri: { name: Programacion Fisica por Trimestre}     
+      metsegtri: { name: II}     
+      mettertri: { name: III}     
+      metcuatri: { name: IV}     
+      mettot: { name: Total Meta Fisica}     
+      locsubacc: { name: Localizacion}     
+      indgessubacc: { name: Indicador de Gestion}     
+      medversubacc: { name: Medios de Verificacion}     
+      supsubacc: { name: Supuesto}
+              
+    list:
+      title:          Acciones POA IVSS
+      filters:        [codsubacc]
+      display:        [=codsubacc, dessubacc]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Acciones POA IVSS
+      display:       [=codsubacc, dessubacc, metsubacc, codunimed, metpritri, metsegtri, mettertri, metcuatri, mettot, locsubacc, indgessubacc, medversubacc, supsubacc]

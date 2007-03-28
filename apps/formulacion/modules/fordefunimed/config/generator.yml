@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefunimed
+    theme:            default
+    fields:
+      codunimed: { name: Codigo}
+      desunimed: { name: Descripcion}
+      nomabrunimed: { name: Nombre Abreviado}  
+              
+    list:
+      title:          Unidades de Medidas
+      filters:        [codunimed]
+      display:        [=codunimed, nomabrunimed]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Unidades de Medidas
+      display:       [=codunimed, desunimed, nomabrunimed] 

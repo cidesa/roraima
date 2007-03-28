@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Forasopryaccespsubacc
+    theme:            default
+    fields:
+      codpro: { name: Codigo}
+      codaccesp: { name: Codigo}
+      codsubacc: { name: Codigo}
+                    
+    list:
+      title:          Asociaciones de Acciones POA a Acciones Especoficas - Proyectos
+      filters:        [codpro]
+      display:        [=codpro, nompro]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Asociaciones de Acciones POA a Acciones Especoficas - Proyectos
+      display:       [=codpro, codaccesp, codsubacc]

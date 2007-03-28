@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefsubsubobj
+    theme:            default
+    fields:
+      codequ: { name: Equilibrio}
+      codsubobj: { name: SubObjetivo}
+      codsubsubobj: { name: Codigo}  
+      dessubsubobj: { name: Descripcion}     
+        
+    list:
+      title:          Sub Sub Objetivos
+      filters:        [codsubsubobj]
+      display:        [=codsubsubobj, dessubsubobj]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Sub Sub Objetivos
+      display:       [codequ, codsubobj, codsubsubobj, dessubsubobj] 

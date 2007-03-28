@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefparegr
+    theme:            default
+    fields:
+      codparegr: { name: Codigo}
+      nomparegr: { name: Nombre}
+                    
+    list:
+      title:          Unidades de Medidas
+      filters:        [codparegr]
+      display:        [=codparegr, nomparegr]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Unidades de Medidas
+      display:       [=codparegr, nomparegr]
