@@ -27,9 +27,9 @@
                   <td rowspan="3" background="/images/borrar_05.jpg" valign="bottom"><span class="Quote Order">Usuario: <?php echo $sf_user->getAttribute('usuario','Sin Autenticar') ?> <br>
                     M&oacute;dulo: <?php echo $sf_context->getModuleName() ?></span></td>
                   <td valign="middle" background=" /images/borrar_06.jpg" height="22" align="right">
-				  <a href="javascript:history.back(1)">[ <img src="/images/flecha.gif" width="8" height="15" align="absmiddle" /> :: Atras ::]</a>&nbsp;
-				   <a href="/autenticacion_dev.php/principal">[ ::Men&uacute; Principal:: ]</a>&nbsp;
-				  <a href=" /autenticacion_dev.php/login/logout">[ ::Cerrar Sesi&oacute;n::]</a>				  </td>
+				  <a href="javascript:history.back(1)">[ <img src="/images/flecha.gif" width="8" height="15" align="absmiddle" /> Atras ]</a>&nbsp;
+				   <a href="/autenticacion_dev.php/principal">[ Men&uacute; Principal ]</a>&nbsp;
+				  <a href=" /autenticacion_dev.php/login/logout">[ Cerrar Sesi&oacute;n ]</a>				  </td>
                 </tr>
                 <tr>
                   <td valign="top"><img src="/images/borrar_07.jpg" width="341" height="2"></td>

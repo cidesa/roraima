@@ -29,9 +29,9 @@
                   <td valign="middle" background=" /images/borrar_06.jpg" height="22" align="right">
 				 
 				  &nbsp;
-				  <a href="javascript:history.back(1)">[ <img src="/images/flecha.gif" width="8" height="15" align="absmiddle" /> :: Atras ::]</a>&nbsp;
-				   <a href="/autenticacion_dev.php/principal">[ ::Men&uacute; Principal:: ]</a>&nbsp;
-				  <a href=" /autenticacion_dev.php/login/logout">[ ::Cerrar Sesi&oacute;n::]</a>&nbsp;&nbsp;				  </td>
+				  <a href="javascript:history.back(1)">[ <img src="/images/flecha.gif" width="8" height="15" align="absmiddle" /> Atras ]</a>&nbsp;
+				   <a href="/autenticacion_dev.php/principal">[ Men&uacute; Principal ]</a>&nbsp;
+				  <a href=" /autenticacion_dev.php/login/logout">[ Cerrar Sesi&oacute;n ]</a>&nbsp;&nbsp;				  </td>
                 </tr>
                 <tr>
                   <td valign="top"><img src="/images/borrar_07.jpg" width="341" height="2"></td>
