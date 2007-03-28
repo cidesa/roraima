@@ -4,10 +4,10 @@ generator:
     model_class:      Catipent
     theme:            default
     fields:
-      codtipent:  {  name: C�digo}
-      destipent:  {  name: Descripci�n}
+      codtipent:  {  name: Código}
+      destipent:  {  name: Descripción}
     list:
-      title:          Lista de Articulos
+      title:          Lista de Artículos
       display:        [=codtipent, destipent]    
       object_actions:
         _edit:        ~
@@ -15,6 +15,6 @@ generator:
       filters:        [codtipent]
       max_per_page:   5
     edit:
-      title:          Editar Articulos
+      title:          Editar Artículos
       display:
         Editable:     [codtipent, destipent]

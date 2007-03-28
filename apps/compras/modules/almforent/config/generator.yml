@@ -5,8 +5,8 @@ generator:
     theme:            default
 
     fields:
-      codforent:      { name : Codigo }
-      desforent:      { name : Descripcion }
+      codforent:      { name : Código }
+      desforent:      { name : Descripción }
 
     list:
       title:          Forma de Entrega
@@ -15,7 +15,7 @@ generator:
       max_per_page:	  6
   
     edit:
-      title:          Edicion de Forma de Entrega
+      title:          Edición de Forma de Entrega
       display:        [codforent, desforent]  
       fields:
         codforent:      { params : maxlength=6 }	  

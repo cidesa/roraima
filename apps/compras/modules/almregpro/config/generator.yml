@@ -5,22 +5,22 @@ generator:
     theme:            default
 
     fields:
-      codpro:       { name : Codigo}
+      codpro:       { name : Código}
       nompro:       { name : Nombre del Proveedor}
       rifpro:       { name : RIF}
       nitpro:       { name : NIT}
-      dirpro:       { name : Direccion}
-      telpro:       { name : telefono}
+      dirpro:       { name : Dirección}
+      telpro:       { name : Teléfono}
       nrocei:       { name : Nro.RNC}
       email:        { name : Nro.RNC}
       codram:       { name : Ramo que Provee}
-      limcre:       { name : Limite de Credito}
+      limcre:       { name : Limite de Crédito}
       codcta:       { name : Cta. Contable Asoc.}
       codord:       { name : Cta. de Orden Asoc.}
       codpercon:    { name : Cta.PerContra Asoc.}
-      fecinscir:    { name : Fecha de Inscripcion}
+      fecinscir:    { name : Fecha de Inscripción}
       faxpro:       { name : Fax}
-      numinscir:    { name : Circunscripcion Judicial}
+      numinscir:    { name : Circunscripción Judicial}
       regmer:       { name : Registro Mercantil}      	
       tomreg:       { name : Tomo}      	
       capsus:       { name : Capital Suscrito}
@@ -30,7 +30,7 @@ generator:
       fecven:       { name : Fecha Venc}	      
       rifrepleg:    { name : C.I./R.I.F.}
       nomrepleg:    { name : Nombre}
-      dirrepleg:    { name : Direccion}
+      dirrepleg:    { name : Dirección}
       codtiprec:    { name : Grupo}   
       nacpro:       { name : Nacionalidad}
       tipo:         { name : Actividad Principal}      

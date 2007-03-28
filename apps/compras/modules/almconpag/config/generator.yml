@@ -16,4 +16,4 @@ generator:
       max_per_page:   5
     edit:
       title:          Edición Definición de Condiciones de Pago
-      display:        [=codrec, desrec, limrec, canutr, codtiprec, observ]
+      display:        [codconpag, desconpag]

@@ -4,17 +4,17 @@ generator:
     model_class:      Catipsal
     theme:            default
     fields:
-      codtipsal:  {  name: Codigo}
-      destipsal:  {  name: Descripcion}
+      codtipsal:  {  name: C贸digo}
+      destipsal:  {  name: Descripci贸n}
     list:
-      title:          Definici髇 de Tipos de Salida
-      display:        [=codtipsal, destipsal]     
+      title:          Definici贸n de Tipos de Salida
+      display:        [=codtipsal, destipsal]
       object_actions:
         _edit:        ~
         _delete:      ~      
-      filters:        [codtipsal, destipsal] 
+      filters:        [codtipsal, destipsal]
       max_per_page:   5
     edit:
-      title:          Definici髇 de Tipos de Salida
+      title:          Definici贸n de Tipos de Salida
       display:
         Editable:     [codtipsal, destipsal]

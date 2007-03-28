@@ -4,31 +4,29 @@ generator:
     model_class:      Cadefart
     theme:            default
     fields:
-      codemp:     { name: Nombre de la Institucion}
-      lonart:     { name: Longitud del Codigo}
+      codemp:     { name: Nombre de la Institución}
+      lonart:     { name: Longitud del Código}
       rupart:     { name: Rupturas de Control} 
       forart:     { name: Formato}
-      desart:     { name: Descripcion}      
+      desart:     { name: Descripción}      
       forubi:     { name: Formato}         
-      desubi:     { name: Descripcion}      
-      generaop:   { name: Generar Orden de Pago al Momento de la Recepcion}      
-      generacom:  { name: Generar Comprobantes contables al momento de la Recepcion y el Despacho}      
-      asiparrec:  { name: Generar Comprobantes contables al momento de la Recepcion y el Despacho}      
+      desubi:     { name: Descripción}      
+      generaop:   { name: Generar Orden de Pago al Momento de la Recepción}      
+      generacom:  { name: Generar Comprobantes contables al momento de la Recepción y el Despacho}      
+      asiparrec:  { name: Generar Comprobantes contables al momento de la Recepción y el Despacho}      
       ordcom:     { name: Orden de Compra}      
       recart:     { name: Recepciones}
       reqart:     { name: Requisiciones}
       dphart:     { name: Despacho}
       ordser:     { name: Orden de Servicio}
       solcom:     { name: Solicitud  de Compras y/o Trabajo}
-    
-          
     list:
-      title:          Definicion de Articulo
+      title:          Definición de Articulo
       display:        [=lonart, forart, desart]
       max_per_page:	  10
       object_actions:
         _edit:        ~      
         _delete:      ~        
     edit:
-      title:          Edicion de Articulo
+      title:          Edición de Articulo
       

@@ -9,7 +9,7 @@ generator:
       limrec:  {  name: Limitante }
       canutr:  {  name: UT }
       codtiprec:{ name: Grupo}
-      observ:{ name: Observacion}
+      observ:{ name: Observación}
     list:
       title:          Definición de Recaudos
       display:        [=codrec, desrec, limrec, canutr, codtiprec]

@@ -5,11 +5,11 @@ generator:
     theme:            default
 
     fields:
-      ramart:      { name : Codigo }
-      nomram:      { name : Descripcion }
+      ramart:      { name : Código }
+      nomram:      { name : Descripción }
 
     list:
-      title:          Ramo de Articulo
+      title:          Ramo de Artículo
       display:        [=ramart, nomram]
       filters:		  [ramart, nomram]
       max_per_page:	  10
@@ -18,7 +18,7 @@ generator:
         _delete:      ~      
 
     edit:
-      title:          Edicion de Ramo de Articulo
+      title:          Edición de Ramo de Artículo
       display:        [ramart, nomram]  
       fields:
         ramart:      { params : maxlength=6 }	  

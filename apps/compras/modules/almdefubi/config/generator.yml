@@ -4,17 +4,17 @@ generator:
     model_class:      Cadefubi
     theme:            default
     fields:
-      codubi:  {  name: Codigo}
-      nomubi:  {  name: Descripcion}
+      codubi:  {  name: C贸digo}
+      nomubi:  {  name: Descripci贸n}
     list:
-      title:          Definici髇 de Ubicaciones
-      display:        [=codubi, nomubi]     
+      title:          Definici贸n de Ubicaciones
+      display:        [=codubi, nomubi]
       object_actions:
         _edit:        ~
         _delete:      ~      
       filters:        [codubi, nomubi] 
       max_per_page:   5
     edit:
-      title:          Definici髇 de Ubicaciones
+      title:          Definici贸n de Ubicaciones
       display:
         Editable:     [codubi, nomubi]

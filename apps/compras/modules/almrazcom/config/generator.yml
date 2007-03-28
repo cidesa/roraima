@@ -5,14 +5,16 @@ generator:
     theme:            default
 
     fields:
-      codrazcom:      { name : Codigo }
-      desrazcom:      { name : Descripcion }
+      codrazcom:      { name : Código }
+      desrazcom:      { name : Descripción }
 
     list:
-      title:          Razon de Compra
+      title:          Razón de Compra
       display:        [=codrazcom, desrazcom]
       filters:		  [codrazcom, desrazcom]
       max_per_page:	  10
       object_actions:
         _edit:        ~
         _delete:      ~      
+    edit:
+      title:          Editar Razón de Compra
