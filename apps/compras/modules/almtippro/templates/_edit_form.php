@@ -40,7 +40,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('catippro[ctaord]', __($labels['catippro{ctaord}']), '') ?>
+<?php echo label_for('catippro[ctaord]', __($labels['catippro{ctaord}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('catippro{ctaord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('catippro{ctaord}')): ?>
     <?php echo form_error('catippro{ctaord}', array('class' => 'form-error-msg')) ?>
@@ -60,7 +60,7 @@
 
 
 <div class="form-row">
-  <?php echo label_for('catippro[ctaper]', __($labels['catippro{ctaper}']), '') ?>
+<?php echo label_for('catippro[ctaper]', __($labels['catippro{ctaper}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('catippro{ctaper}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('catippro{ctaper}')): ?>
     <?php echo form_error('catippro{ctaper}', array('class' => 'form-error-msg')) ?>
