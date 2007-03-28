@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefsta
+    theme:            default
+
+    fields:
+      codsta:      { name : Codigo }
+      dessta:      { name : Descripción }      
+
+    list:
+      title:          Definición de Estatus
+      display:        [codsta, dessta]
+      filters:        [codsta]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   5    
+    edit:
+      title:          Definición de Estatus   
+      display:        [codsta, dessta]      

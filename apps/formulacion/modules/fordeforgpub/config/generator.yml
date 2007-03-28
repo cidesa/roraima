@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordeforgpub
+    theme:            default
+
+    fields:
+      codorg:      { name : Codigo }
+      nomorg:      { name : Descripción }  
+      ubiorg:      { name : Ubicación }  
+      tiporg:      { name : Tipo de Organismo }  
+      preanu:      { name : Presupuesto Anual }  
+      capsoc:      { name : Capital Social }      
+
+    list:
+      title:          Definición de Organismo Publico
+      display:        [codorg, nomorg]
+      filters:        [codorg]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   5    
+    edit:
+      title:          Definición de Organismo Publico
+      display:        [codorg, nomorg, ubiorg, tiporg, preanu, capsoc]      
