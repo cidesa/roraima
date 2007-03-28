@@ -3,6 +3,15 @@ var Compras = '/compras_dev.php/';
 var Tesoreria= '/tesoreria_dev.php/';
 var Nomina='/nomina_dev.php/';
 var Formulacion='/formulacion_dev.php/';
+var Obra_cont='/obra_cont_dev.php/';
+var Inv_coloc='/inv_coloc_dev.php/';
+var Cred_cobr='/cred_cobr_dev.php/';
+
+
+		['Obras y Contratos', 'principal/menu/m/obra_cont'],
+		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
+		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
+
 var ReportesCompras='http://'+window.location.host+'/vb-libre/reportes/compras/';
 var ReportesTesoreria='http://'+window.location.host+'/vb-libre/reportes/tesoreria/';
 var ReportesNomina='http://'+window.location.host+'/vb-libre/reportes/nomina/';
@@ -31,14 +40,12 @@ var TREE_ITEMSCOM_ALM = [
 				['Registro de Art&iacute;culos y+o Servicios', Compras+'almregart'],
 				['Registro de Recargos', Compras+'almregrgo'],
 				['Asociaci&oacute;n de Retenciones a Servicios', Compras+'almretser'],
-				['Registro de Productos Terminados', Compras+'faexiart'],
 				['Proyectos', Compras+'almtippro'],
 			],
 			['Compras', null,
 				['Ordenes de Compra y+o Servicio', Compras+'almordcom'],
 				['Registro de Contratos', Compras+'almcontrato'],
-				['Ajuste a Ordenes de Compra', Compras+'almajuoc'],
-				['Cotizaciones', Compras+'almcotiza'],
+				['Ajuste a Ordenes de Compra', Compras+'almajuoc'],				
 				['Asignaci&oacute;n de Prioridad a Cotizaciones', Compras+'almpriori'],
 			],
 			['Almacen',null,
@@ -395,6 +402,7 @@ var TREE_ITEMS_NOM = [
 			['Mantenimiento', null,
 				['Importar Hoja Integral', Nomina+'importarhojaintegral'],
 				['Importar Valores de Conceptos', Nomina+'importarvaloresconceptos'],
+				['Actualizar Saldos de Pr&eacute;stamos', Nomina+'nomactpre'],
 			],
 		],
 	],
@@ -459,7 +467,10 @@ var TREE_ITEMS_MAIN = [
 		['Compras Y Almacen', 'principal/menu/m/compras'],
 		['Tesorer&iacute;a', 'principal/menu/m/tesoreria'],
 		['Nomina', 'principal/menu/m/nomina'],
-		['Formulaci&oacute;n', 'principal/menu/m/formulacion'],
+		['Formulacicn', 'principal/menu/m/formulacion'],
+		['Obras y Contratos', 'principal/menu/m/obra_cont'],
+		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_colocs'],
+		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
       ]
 	];
 
