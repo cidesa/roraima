@@ -1,0 +1,23 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npconfon
+    theme:            default
+    fields:
+      codnom: { name: Codigo de la Nomina}
+      nomnom: {name: Nombre}
+      codcon: { name: Codigo del Concepto}
+      nomcon: {name: Nombre} 
+      tipcon: { name: Tipo de Concepto}
+              
+    list:
+      title:          Conceptos para el Fondo de Jubilacion y Pensiones
+      filters:        [codnom]
+      display:        [=codnom, nomnom, codcon, nomcon, tipcon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Conceptos para el Fondo de Jubilacion y Pensiones
+      display:       [=codnom, codcon, tipcon]

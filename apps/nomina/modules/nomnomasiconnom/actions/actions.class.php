@@ -13,7 +13,7 @@ class nomnomasiconnomActions extends autonomnomasiconnomActions
 public function executeEdit()
   {
     $c = new Criteria();
-		$this->pagerNpasiconemp = NpasiconempPeer::getPagerByCriteria($c,$this->getRequestParameter('page',1));
+	$this->pagerNpasiconemp = NpasiconempPeer::getPagerByCriteria($c,$this->getRequestParameter('page',1));
 		
   $this->npasiconemp = $this->getNpasiconempOrCreate();
 
