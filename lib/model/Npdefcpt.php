@@ -11,7 +11,7 @@ class Npdefcpt extends BaseNpdefcpt
 {
 	public function getestado()
 	{
-		if (($this->getNomcon())=='S')
+		if (($this->getConact())=='S')
 			return 'Activo';
 		else
  		   return 'Inactivo';
