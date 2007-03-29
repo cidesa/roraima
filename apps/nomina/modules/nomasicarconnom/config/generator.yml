@@ -1,0 +1,31 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npasicaremp
+    theme:            default
+    fields:
+      codemp:   { name: Cod. Empleado }
+      nomemp:   { name: Nombre Empleado }
+      codcar:   { name: Cod. Cargo}     
+      nomcar:   { name: Nombre Cargo }          
+      codnom:   { name: Cod. Nomina, params: maxlength=3 } 
+      nomnom:   { name: Nombre Nomina } 
+      codcat:   { name: Asignacion Categoria}
+      nomcat:   { name: Nombre Categoria, params: maxlength=3 }
+      paso:     { name: Paso, params: maxlength=3 }
+      despaso:  { name: Descripcion Paso }
+      fecasi:   { name: Fecha de Asignacion, params: date_format='dd/MM/yyyy'}
+      codtipgas:{ name: Cod. Gasto, params: maxlength=3 }
+      destipgas:{ name: Tipo de Gasto }
+      
+    list:
+      title:          Asignacion de Cargos y Conceptos a Empleados
+      filters:        [codemp]
+      display:        [codemp, nomemp, codnom, nomnom, codcar, nomcar, paso]
+      object_actions:
+        _edit:        ~
+        _delete:      ~        
+      max_per_page:  8
+    edit:
+      title:          Asignacion de Cargos y Conceptos a Empleados
+      display:        [codemp, nomemp, codnom, nomnom, codcar, nomcar, paso, despaso, fecasi, codtipgas, destipgas]    
