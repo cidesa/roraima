@@ -2,7 +2,7 @@
 <?php use_stylesheet('/sf/sf_admin/css/main') ?>
 <div id="sf_admin_container">
 
-<h1><?php echo __('Importar Productos', 
+<h1><?php echo __('Importar Valores de Conceptos', 
 array()) ?></h1>
 
 
@@ -22,9 +22,9 @@ array()) ?></h1>
         <tbody>
           <tr>
             <td>
-				<p><?php echo form_tag('importarproducto/procesar') ?></p>
+				<p><?php echo form_tag('importarvaloresconceptos/procesar') ?></p>
 				<p><?php echo input_file_tag('archivo') ?></p>
-				<p><?php echo submit_tag('Importar Productos') ?></p>
+				<p><?php echo submit_tag('Revisar los Datos') ?></p>
 				</form>
             </td>
           </tr>

@@ -13,7 +13,7 @@
         <tbody>
           <tr>
             <td>
-				<p><?php if($procesados) $r='Productos Importados Satisfactoriamente'; else $r='Error al Importar los Productos';  ?></p>
+				<p><?php if($procesados) $r='Revisados los Datos Satisfactoriamente'; else $r='Produjo un error en la revision';  ?></p>
 				<p><?php echo $r  ?></p>
             </td>
           </tr>
