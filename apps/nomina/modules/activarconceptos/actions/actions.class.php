@@ -10,4 +10,21 @@
  */
 class activarconceptosActions extends autoactivarconceptosActions
 {
+	protected function updateNpdefcptFromRequest()
+	{
+		$npdefcpt = $this->getRequestParameter('npdefcpt');
+
+		/*if (isset($npdefcpt['codcon']))
+		{
+			$this->npdefcpt->setCodcon($npdefcpt['codcon']);
+		}
+		if (isset($npdefcpt['nomcon']))
+    {
+      $this->npdefcpt->setNomcon($npdefcpt['nomcon']);
+    }*/
+    //if (isset($npdefcpt['estados']))
+   //{
+      $this->npdefcpt->setConact($this->getRequestParameter('radio1'));
+    //}
+  }	
 }

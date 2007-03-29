@@ -7,7 +7,7 @@ generator:
     fields:
       codcon:    { name: C&oacute;digo}
       nomcon:    { name: Nombre del Concepto}
-      #conact:    { name: Estado}
+      conact:    { name: Estado}
       estado:    { name: Estado}
       
 
@@ -22,4 +22,4 @@ generator:
                         
     edit:
       title:          Activar/Desactivar Conceptos
-      display:        [codcon, nomcon, estadoss]            
+      display:        [codcon, nomcon, estados]            

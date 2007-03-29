@@ -41,17 +41,18 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('npdefcpt[conact]', __($labels['npdefcpt{conact}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npdefcpt{conact}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npdefcpt{conact}')): ?>
-    <?php echo form_error('npdefcpt{conact}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npdefcpt, 'getConact', array (
-  'size' => 20,
-  'control_name' => 'npdefcpt[conact]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+	<?
+	echo "Estado: ".'&nbsp;&nbsp;';
+	if ($npdefcpt->getConact()=='S'){
+		echo radiobutton_tag('radio1', 'S', true)        ."  Activo".'&nbsp;&nbsp;';
+		echo radiobutton_tag('radio1', 'N', false)."   Inactivo";
+	
+	}else{
+		echo radiobutton_tag('radio1', 'S', false)        ."  Activo".'&nbsp;&nbsp;';
+		echo radiobutton_tag('radio1', 'N', true)."   Inactivo";
+	
+	}
+	?>
 </div>
 
 </fieldset>
