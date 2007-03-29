@@ -9,7 +9,7 @@
  */ 
 class Npdiaext extends BaseNpdiaext
 {
-public function getNomnom()
+  public function getNomnom()
   {
   	  $c = new Criteria();
   	  $c->add(NpnominaPeer::CODNOM,self::getCodnom());
