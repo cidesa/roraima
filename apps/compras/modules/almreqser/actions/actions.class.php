@@ -12,21 +12,28 @@ class almreqserActions extends autoalmreqserActions
 {
 	public function executeSQL()
 	{
-		//Funcion que ejecuta sql
-		$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
-		$sql = "SELECT reqart,codart,codcat,fecrea FROM caartreqser where reqart ='".$this->careqartser->getReqart()."'";
-		$stmt = $con->createStatement();
-		$stmt->setLimit(50000);
-		$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
-		$resultado=array();
-		//aqui lleno el array con los resultados:
-		while ($rs->next())
-		{
-			$resultado[]=$rs->getRow();
-		}
-		//y la envio al template:
-		$this->rs=$resultado;
-		return $this->rs;
+	    if ($this->careqartser->getReqart()!='')
+    	{		
+			//Funcion que ejecuta sql
+			$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+			$sql = "SELECT reqart,codart,codcat,fecrea FROM caartreqser where reqart ='".$this->careqartser->getReqart()."'";
+			$stmt = $con->createStatement();
+			$stmt->setLimit(50000);
+			$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+			$resultado=array();
+			//aqui lleno el array con los resultados:
+			while ($rs->next())
+			{
+				$resultado[]=$rs->getRow();
+			}
+			//y la envio al template:
+			$this->rs=$resultado;
+			return $this->rs;
+    	}
+	    else
+	    {
+	    	return '';
+	    }        	
 	}
 
 	public function executeEdit()

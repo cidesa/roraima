@@ -12,21 +12,23 @@ class almcotizaActions extends autoalmcotizaActions
 {
 	public function executeSQL()
 	{
-		//Funcion que ejecuta sql
-		$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
-		$sql = "SELECT codart,codart,canord,costo,totdet,fecent  FROM cadetcot where refcot ='".$this->cacotiza->getrefcot()."'";
-		$stmt = $con->createStatement();
-		$stmt->setLimit(50000);
-		$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
-		$resultado=array();
-		//aqui lleno el array con los resultados:
-		while ($rs->next())
-		{
-			$resultado[]=$rs->getRow();
+		if ($this->cacotiza->getrefcot()!=''){		
+				//Funcion que ejecuta sql
+				$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+				$sql = "SELECT codart,codart,canord,costo,totdet,fecent  FROM cadetcot where refcot ='".$this->cacotiza->getrefcot()."'";
+				$stmt = $con->createStatement();
+				$stmt->setLimit(50000);
+				$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+				$resultado=array();
+				//aqui lleno el array con los resultados:
+				while ($rs->next())
+				{
+					$resultado[]=$rs->getRow();
+				}
+				//y la envio al template:
+				$this->rs=$resultado;
+				return $this->rs;
 		}
-		//y la envio al template:
-		$this->rs=$resultado;
-		return $this->rs;
 	}
 
 	public function busq_prov()

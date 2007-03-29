@@ -3,11 +3,11 @@ default:
     content-type: text/html
 
   metas:
-    title:        Modulo de Compras
+    title:        Módulo de Compras
     robots:       index, follow
-    description:  symfony project
-    keywords:     symfony, project
-    language:     us
+    description:  Módulo de Compras
+    keywords:     Módulo de Compras
+    language:     en
 
   stylesheets:    [main]
 

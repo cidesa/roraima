@@ -48,27 +48,31 @@
 <br>
 <table border="0" class="sf_admin_list">
 	<?
-$nombre=array(0 => 'Codigo', 1 => 'Descripcion',2 => 'Cod.Unidad', 3 => 'Realizado el');
-if ( count($rs)>0){
-	$i=0;
-	foreach ($rs as $k=>$fila) {
-		$i++;
-		if($i==1){?>
-	<thead>
-		<tr>
-			<? foreach ($fila as $key => $value){?>
-			<th><?=$nombre[$key]?></th>
+	if ($rs!=''){ 	
+		$nombre=array(0 => 'Codigo', 1 => 'Descripcion',2 => 'Cod.Unidad', 3 => 'Realizado el');		
+		if ( count($rs)>0){
+			$i=0;
+			foreach ($rs as $k=>$fila) {
+				$i++;
+				if($i==1){?>
+			<thead>
+				<tr>
+					<? foreach ($fila as $key => $value){?>
+					<th><?=$nombre[$key]?></th>
+					<? }?>
+				</tr>
+			</thead>
 			<? }?>
-		</tr>
-	</thead>
-	<? }?>
-	<tr>
-		<? foreach ($fila as $key => $value){?>
-		<td><?=$value?></td>
-		<? }?>
-	</tr>
+			<tr>
+				<? foreach ($fila as $key => $value){?>
+				<td><?=$value?></td>
+				<? }?>
+			</tr>
+			<? }
+		}		
+	}else{ ?>
+		<tr><td>Nuevo</td></tr>
 	<? }
-}
 ?>
 </table>
 </fieldset>
