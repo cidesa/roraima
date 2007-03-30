@@ -17,5 +17,6 @@ class nommanclapreActions extends sfActions
   public function executeIndex()
   {
     //$this->forward('default', 'module');
+
   }
 }
