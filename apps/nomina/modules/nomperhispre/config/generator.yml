@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nphispre
+    theme:            default
+    fields:
+      codtippre: { name: Cod. Tipo Prestamo, params: maxlength=4 }
+      deshispre: { name: Descripcion Prestamo }     
+      fechispre: { name: Fecha de Prestamo, params: date_format='dd/MM/yyyy'}  
+      codemp: { name: Codigo Empleado, params: maxlength=16 }     
+      monpre: { name: Monto del Prestamo }     
+      saldo:  { name: Saldo Actual }     
+      nomtippre: { name: Descripcion Tipo Prestamo}     
+      nomemp: { name: Nombre Empleado}     
+    list:
+      title:          Movimientos de Prestamos
+      filters:        [codemp, deshispre, fechispre, codtippre]
+      display:        [=codemp, nomemp, deshispre, fechispre, codtippre, nomtippre]
+      object_actions:
+        _edit:        ~
+        _delete:      ~        
+      max_per_page:  8
+    edit:
+      title:          Movimientos de Prestamos

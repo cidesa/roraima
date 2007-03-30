@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomina
+    theme:            default
+    fields:
+      codnom: { name: Cod. Tipo Nomina, params: maxlength=3 }
+      nomnom: { name: Nombre Tipo Nomina }     
+      fecdiaext: { name: Fecha Dia Extra, params: date_format='dd/MM/yyyy'}  
+    list:
+      title:          Registro de Dias Extras Laborados por Nomina en Lote
+      filters:        [codnom ]
+      display:        [=codnom, nomnom, fecdiaext ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~        
+      max_per_page:  8
+    edit:
+      title:          Registro de Dias Extras Laborados por Nomina en Lote

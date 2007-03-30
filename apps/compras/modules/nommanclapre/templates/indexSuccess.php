@@ -14,7 +14,7 @@
       </tr>
       <tr>
         <td height="107">&nbsp;</td>
-        <td><div align="center"><?php echo button_to('Crear Classificador','#')?></div></td>
+        <td><div align="center"><?php echo button_to('Crear Clasificador','#')?></div></td>
       </tr>
     </table></td>
   </tr>
