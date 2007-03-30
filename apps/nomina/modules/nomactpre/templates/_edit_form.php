@@ -13,9 +13,8 @@
 <fieldset id="sf_fieldset_none" class="">
 
 <div align=center> 
-  <?php echo submit_tag('Actualizar Saldos de prestamos') ?>  
+  <?php echo button_to_function('Actualizar Saldos de prestamos', "alert('Prestamos Actualizados')") ?>  
 </div>
-
 </fieldset>
 
 <?php include_partial('edit_actions', array('nphispre' => $nphispre)) ?>
