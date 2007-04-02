@@ -8,3 +8,6 @@ cache:     ~
 common:    ~
 flash:     ~
 execution: ~
+
+AutosetSchemaFIlter:
+  class: AutosetSchemaFIlter

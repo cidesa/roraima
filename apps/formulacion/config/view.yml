@@ -3,11 +3,11 @@ default:
     content-type: text/html
 
   metas:
-    title:        symfony project
-    robots:       index, follow
-    description:  symfony project
-    keywords:     symfony, project
-    language:     en
+    title:        Módulo Formulación
+    robots:       Módulo Formulación
+    description:  Módulo Formulación
+    keywords:     Módulo,Formulación
+    language:     en_US
 
   stylesheets:    [main]
 
