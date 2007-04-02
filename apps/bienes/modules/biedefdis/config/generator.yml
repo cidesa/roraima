@@ -5,7 +5,7 @@ generator:
     theme:            default
 
     fields:
-      coddis:      { name : Codigo }
+      coddis:      { name : C贸digo }
       desdis:      { name : Nombre }      
       afecon:      { name : Afecta Contabilidad }
       desinc:      { name : Desincorpora }  
@@ -13,7 +13,7 @@ generator:
 
 
     list:
-      title:          Definici髇 de Disposici髇
+      title:          Definici贸n de Disposici贸n
       display:        [coddis, desdis]
       filters:        [coddis]
       object_actions:
@@ -21,5 +21,5 @@ generator:
         _delete:      ~              
       max_per_page:   5    
     edit:
-      title:          Definici髇 de Disposici髇  
+      title:          Definici贸n de Disposici贸n  
       display:        [coddis, desdis, afecon, desinc, adimej]

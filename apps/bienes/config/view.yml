@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        Módulo Bienes Nacionales
+    title:        MÃ³dulo Bienes Nacionales
     robots:       index, follow
-    description:  Módulo Bienes Nacionales
-    keywords:     Módulo, Bienes, Nacionales
+    description:  MÃ³dulo Bienes Nacionales
+    keywords:     MÃ³dulo, Bienes, Nacionales
     language:     en
 
   stylesheets:    [main]

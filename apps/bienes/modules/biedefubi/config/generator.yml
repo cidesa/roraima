@@ -5,12 +5,12 @@ generator:
     theme:            default
 
     fields:
-      codubi: {name: C骴igo}
-      desubi: {name: Descripci髇}
-      dirubi: {name: Direcci髇}
+      codubi: {name: C贸digo}
+      desubi: {name: Descripci贸n}
+      dirubi: {name: Direcci贸n}
               
     list:
-      title:          Definici髇 de Ubicaci髇
+      title:          Definici贸n de Ubicaci贸n
       filters:        [codubi, desubi]
       display:        [=codubi, desubi, dirubi]
       object_actions:
@@ -18,5 +18,5 @@ generator:
         _delete:      ~
       max_per_page:   10
     edit:
-      title:          Edici髇 de Ubicaci髇
+      title:          Edici贸n de Ubicaci贸n
       display:        [=codubi, desubi, dirubi]    
