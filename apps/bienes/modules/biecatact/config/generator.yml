@@ -1,0 +1,23 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bndefact
+    theme:            default
+
+    fields:
+      codact: {name: Código}
+      desact: {name: Descripción}
+      viduti: {name: Vida Util} 
+      canact: {name: Cantidad de Activos}      
+              
+    list:
+      title:          Definición de Catálogo de Activos
+      filters:        [codact, desact]
+      display:        [=codact, desact]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edición de Catálogo de Activos
+      display:        [=codact, desact, viduti, canact]        
