@@ -1,0 +1,40 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bndefins
+    theme:            default
+    fields:
+      codins: { name: C&oacute;digo}
+      nomins: { name: Nombre}
+      dirins: { name: Direcci&oacute;n}
+      telins: { name: Tel&eacute;fono}
+      faxins: { name: Fax}
+      email: { name: Email}
+      edoins: { name: Estado}
+      munins: { name: Municipio}
+      paqins: { name: Parroquia}
+      foract: { name: C&oacute;digo}
+      desact: { name: Descripci&oacute;n}  
+      lonact: { name: Longitud de Activo}
+      forubi: { name: C&oacute;digo}
+      desubi: { name: Descripci&oacute;n}
+      lonubi: { name: Longitud de Ubicaci&oacute;n}
+      fecper: { name: Per&iacute;odo}
+      feceje: { name: Ejercicio}
+      coddes: { name: C&oacute;digo}
+      porrev: { name: Valor}   
+        
+    list:
+      title:          Definici&oacute;n de Empresa     
+      display:        [codins, nomins]
+      fields:
+        fecper: { params: date_format='dd/MM/yy' }
+        feceje: { params: date_format='dd/MM/yy' }        
+      object_actions:
+        _edit:        ~     
+    edit:
+      title:          Edici&oacute;n de Empresa
+      display:       [=codins, nomins, dirins, telins, faxins, email, edoins, munins, paqins, foract, desact, forubi, desubi, fecper, feceje, coddes, porrev]
+      fields:
+        fecper: { params: date_format='dd/MM/yy' }
+        feceje: { params: date_format='dd/MM/yy' } 
