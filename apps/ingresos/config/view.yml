@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        Módulo Bienes Nacionales
-    robots:       index, follow
-    description:  Módulo Bienes Nacionales
-    keywords:     Módulo, Bienes, Nacionales
+    title:        Módulo Ingresos
+    robots:       modulo, ingresos
+    description:  Módulo de Ingresos
+    keywords:     Módulo, Ingresos
     language:     en
 
   stylesheets:    [main]
