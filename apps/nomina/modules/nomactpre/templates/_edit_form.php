@@ -7,7 +7,7 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
+<?php use_helper('Javascript') ?>
 <?php echo object_input_hidden_tag($nphispre, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">

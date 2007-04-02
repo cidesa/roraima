@@ -1,0 +1,46 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomcal
+    theme:            default
+    fields:
+      codnom: { name: C&oacute;digo de la N&oacute;mina}
+      nomnom: { name: Descripci&oacute;n}
+      frecal: { name: Frecuencia de Calculo}
+      codemp: { name: Codigo del Empleado}
+      nomemp: { name: Nombre}
+      codcar: { name: Codigo del Cargo}
+      codcon: { name: Codigo del Concepto}
+      frecon: { name: Frecuencia de Pago}
+      asided: { name: Tipo de Operacion}
+      fecnom: { name: Hasta}
+      nomcon: { name: Descripcion del Concepto}     
+      cantidad: { name: Cantidad}
+      monto: { name: Monto}
+      acucon: { name: Concepto Acumulativo}
+      acumulado: { name: Acumulado}
+      saldo: { name: Saldo}
+      numrec: { name: Numero}
+      fecnomdes: { name: Desde}
+      especial: { name: Si/No Especial}
+      fecnomespdes: { name: Fecha Desde}
+      fecnomesphas: { name: Fecha Hasta}
+      codnomesp: { name: Codigo}
+      nomnomesp: { name: Nombre}
+    list:
+      title:          C&aacute;lculo de N&oacute;mina por Empleado
+      filters:        [codnom]
+      display:        [=codnom, nomnom, codemp, nomemp]
+      fields:
+        fecnom: { params: date_format='dd/MM/yy' }
+        fecnomdes: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          C&aacute;lculo de N&oacute;mina por Empleado
+      display:       [=codnom, nomnom, fecnom, fecnomdes, codemp]
+      fields:
+        fecnom: { params: date_format='dd/MM/yy' }
+        fecnomdes: { params: date_format='dd/MM/yy' }

@@ -8,6 +8,7 @@
   'multipart' => true,
 )) ?>
 
+<?php use_helper('Javascript') ?>
 <?php echo object_input_hidden_tag($npconcomp, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
@@ -25,6 +26,8 @@
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 <?php echo button_to('...','#')?>
+<!-- <
+?php echo button_to_function('...', "catalogo()") ?>-->
 &nbsp;
 <?php echo input_tag('nomina',$nomina,'size=50,disabled=true') ?>
     </div>
@@ -53,7 +56,15 @@
 <?php include_partial('edit_actions', array('npconcomp' => $npconcomp)) ?>
 
 </form>
-
+<!-- 
+<
+?php echo javascript_tag("
+  function catalogo()
+  {
+  $pagina="catalogo.php?sql="select id as campo1, codnom as campo2, nomnom as campo3 from Npnomina order by id&titulo1=ID&titulo2=Tipo de Nomina&titulo3=Nombre&caja=id";  
+  window.open($pagina,'catalogo','menubar=no toolbar=no scrollbars=yes width=500 height=400 left=50 top=50location=no resizable=yes');
+  }
+") ?> -->
 <ul class="sf_admin_actions">
       <li class="float-left"><?php if ($npconcomp->getId()): ?>
 <?php echo button_to(__('delete'), 'nomconceptoscompensacion/delete?id='.$npconcomp->getId(), array (
