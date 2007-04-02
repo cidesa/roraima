@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bndisbie
+    theme:            default
+
+    fields:
+      coddis:      { name : Codigo }
+      desdis:      { name : Nombre }      
+      afecon:      { name : Afecta Contabilidad }
+      desinc:      { name : Desincorpora }  
+      adimej:      { name : Mejora el Bien }  
+
+
+    list:
+      title:          Definición de Disposición
+      display:        [coddis, desdis]
+      filters:        [coddis]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   5    
+    edit:
+      title:          Definición de Disposición  
+      display:        [coddis, desdis, afecon, desinc, adimej]
