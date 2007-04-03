@@ -57,7 +57,7 @@ class biedisactmuenewActions extends autobiedisactmuenewActions
   }
 	
   
-protected function updateBndismueFromRequest()
+  protected function updateBndismueFromRequest()
   {
     $bndismue = $this->getRequestParameter('bndismue');
 

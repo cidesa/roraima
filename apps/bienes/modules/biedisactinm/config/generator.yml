@@ -1,0 +1,39 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bndisinm
+    theme:            default
+    fields:
+      codact: { name: Código Nivel}
+      codmue: { name: Código Activo}
+      desinm: { name: Descripción}
+      nrodisinm: { name: Número de Orden}
+      tipdisinm: { name: Tipo}
+      motdisinm: { name: Motivo}      
+      fecdisinm: { name: Fecha}
+      fecdevdis: { name: Fecha Devolución}
+      mondisinm: { name: Monto}
+      detdisinm: { name: Detalles}
+      codubiori: { name: Origen}
+      desubiori: { name: Descripción}
+      codubides: { name: Ubicación}
+      desubides: { name: Descripción}
+      obsdisinm: { name: Observación}   
+      stadisinm: { name: Estatus}      
+    list:
+      title:          Disposición de Inmuebles
+      filters:        [codact]
+      display:        [=codact, codmue, desinm, stadisinm]
+      fields:
+        fecdisinm: { params: date_format='dd/MM/yy' }
+        fecdevdis: { params: date_format='dd/MM/yy' } 
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Disposición de Inmuebles
+      display:        [=codact, codmue, desinm, nrodisinm, tipdisinm, motdisinm, fecdisinm, fecdevdis, mondisinm, detdisinm, codubiori, desubiori, codubides, desubides, obsdisinm, stadisinm]
+      fields:
+        fecdisinm: { params: date_format='dd/MM/yy' }
+        fecdevdis: { params: date_format='dd/MM/yy' } 
