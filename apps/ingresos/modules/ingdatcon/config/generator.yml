@@ -1,0 +1,37 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ciconrep
+    theme:            default
+
+    fields:
+      rifcon:      { name : C.I./R.I.F/Código }
+      nomcon:      { name : Nombre / Razón Social }      
+      nitcon:      { name : N.I.T }
+      naccon:      { name : Nacionalidad } 
+      dircon:      { name : Dirección } 
+      #repcon:      { name : Tipo } 
+      ciucon:      { name : Ciudad } 
+      cpocon:      { name : Código Postal } 
+      apocon:      { name : Cod. Apartado Postal } 
+      telcon:      { name : Teléfono } 
+      faxcon:      { name : Fax } 
+      emacon:      { name : E-Mail } 
+      urlcon:      { name : URL } 
+      tipcon:      { name : Tipo } 
+     
+    
+    list:
+      title:          Contribuyentes
+      display:        [rifcon, codinm, desmue]
+      filters:        [rifcon, nitcon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   5    
+    edit:
+      title:          Contribuyentes
+      display:       [rifcon, nomcon, nitcon, naccon, dircon, ciucon, cpocon, apocon, telcon, faxcon, emacon, urlcon, tipcon ]
+      
+      
+      
