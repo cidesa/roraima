@@ -45,7 +45,7 @@ generator:
       numsso: { name: Numero de S.S.O}
       numpolseg: { name: Numero dde Poliza de Seguro}
       feccotsso: { name: Fecha de Cotizacion de S.S.O}
-      anoadmpub: { name: Años de Continuidad en la Administracion Publica}
+      anoadmpub: { name: Aï¿½os de Continuidad en la Administracion Publica}
       tiefid: { name: Fideicomiso}                
       talcam: { name: Talla Camisa}
       talpan: { name: Talla Pantalon}

@@ -19,4 +19,15 @@ class Nphispre extends BaseNphispre
 	  else 
 	    return ' ';
   }
+  
+  public function getNomtippre()
+  {
+  	  $c = new Criteria();
+  	  $c->add(NptipprePeer::CODTIPPRE,self::getCodtippre());
+  	  $nombre = NptipprePeer::doSelectone($c);
+	  if ($nombre)
+	  	return $nombre->getDestippre();
+	  else 
+	    return ' ';
+  }
 }

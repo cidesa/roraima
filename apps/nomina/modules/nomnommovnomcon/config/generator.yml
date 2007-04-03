@@ -12,11 +12,10 @@ generator:
       nomcon:       { name: Concepto: }
       monto:        { name: Monto }
       cantidad:     { name: Cantidad }
-              
-
+      codcon:		{ name: Cod. Concepto }
     list:
-      title:          Liquidación Final de Prestaciones
-      display:        [nomnom, nomcon, codemp, nomemp, codcar, nomcar]
+      title:          Movimientos por Concepto
+      display:        [nomnom, codcon, nomcon, codemp, nomemp, codcar, nomcar]
       filters:		  [codemp, codcon, codcar]
       max_per_page:	  10
       object_actions:
@@ -24,5 +23,5 @@ generator:
         _delete:      ~      
                         
     edit:
-      title:          Liquidación Final de Prestaciones
+      title:          Movimientos por Concepto
       display:        [codemp, nomemp, codcar, nomcar, monto, cantidad]

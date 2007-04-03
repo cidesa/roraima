@@ -110,6 +110,18 @@ class Npnomina extends BaseNpnomina
 	    else
 	      return ' ';
     }
+    
+    public function getFecdiaext()
+    {
+    	$c = new Criteria();
+    	$c->add(NpdiaextPeer::CODNOM,self::getCodnom());
+    	$fecdiaext = NpdiaextPeer::doSelectone($c);
+    	if ($fecdiaext)
+    	  return $fecdiaext->getFecha();
+	    else
+	      return ' ';
+    }
+      
       //$c->addJoin(NpcestaticketsPeer::CODNOM,NpnominaPeer::CODNOM);
       // $c->addJoin(NpdefcptPeer::CODCON,NpcestaticketsPeer::CODCON);  
 }
