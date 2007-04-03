@@ -22,7 +22,7 @@
   <?php $value = object_input_tag($bndefact, 'getCodact', array (
   'size' => 30,
   'control_name' => 'bndefact[codact]',
-)); echo $value ? $value : '&nbsp;' ?>
+  )); echo $value ? $value : '&nbsp;' ?> &nbsp;&nbsp;<?php echo button_to('...','#') ?>
     </div>
 </div>
 
