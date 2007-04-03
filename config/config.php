@@ -1,9 +1,7 @@
 <?php
 
-$sg_len_reg = 32;
-
-$so = 'Windows';
-//$so = 'Linux';
+//$so = 'Windows';
+$so = 'Linux';
 
 if($so == 'Linux')
 {
@@ -15,7 +13,6 @@ if($so == 'Linux')
 else
 {
 	// directorios symfony para windows 
-	$sf_symfony_lib_dir  = 'C:\AppServ\php5\PEAR\symfony';
-	$sf_symfony_data_dir = 'C:\AppServ\php5\PEAR\data\symfony';
+	$sf_symfony_lib_dir  = 'C:\AppServ\php5\pear\symfony';
+	$sf_symfony_data_dir = 'C:\AppServ\php5\pear\data\symfony';	
 }
-
