@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnmotdis
+    theme:            default
+    fields:
+      codmot: { name: Código}
+      desmot: { name: Nombre}
+      afecon: { name: Afecta}
+      desinc: { name: Desincorpora}
+      adimej: { name: Mejora el Bien}       
+        
+    list:
+      title:          Definición de Motivos de Disposición 
+      filters:        [codmot]    
+      display:        [=codmot, desmot]            
+      object_actions:
+        _edit:        ~     
+        _delete:      ~     
+    edit:
+      title:          Edición de Motivos de Disposición
+      display:        [=codmot, desmot, afecon, desinc, adimej]       
