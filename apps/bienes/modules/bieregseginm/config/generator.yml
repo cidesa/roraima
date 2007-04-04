@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnseginm
+    theme:            default
+
+    fields:
+      codact:        { name : Código Nivel}
+      codmue:        { name : Código Activo}
+      nroseginm:     { name : Número}
+      fecseginm:     { name : Fecha}
+      nomseginm:     { name : Compañia Aseguradora}   
+      cobseginm:     { name : Cobertura}   
+      monseginm:     { name : Monto}
+      fecsegven:     { name : Fecha Vencimiento}
+      proseginm:     { name : Promotor}
+      obsseginm:     { name : Observaciones}
+      desmue:        { name : Descripción}
+
+              
+    list:
+      title:         Registro de Seguro [Inmuebles]
+      filters:       [codact, codmue]
+      display:       [=codact, codmue, desmue]      
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edición de Seguro [Inmuebles]    
