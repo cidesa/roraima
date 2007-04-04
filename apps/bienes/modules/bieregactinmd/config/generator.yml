@@ -1,0 +1,54 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnreginm
+    theme:            default
+    fields:
+      codact:      { name : Cod. Nivel }
+      codinm:      { name : Cod. Activo }      
+      desinm:      { name : Descripción }
+      ordcom:      { name : Orden de Compra }
+      codpro:      { name : Cod. Proveedor }
+      feccom:      { name : Fecha Compra, params: date_format=dd/MM/yyyy }
+      fecreg:      { name : Fecha Cálculo, params: date_format=dd/MM/yyyy }
+      fecrcp:      { name : Fecha Recepción, params: date_format=dd/MM/yyyy }
+      deninm:      { name : Denominación } 
+      nroexp:      { name : Nro. de Expediente } 
+      detinm:      { name : Detalle } 
+      avaact:      { name : Avaluo Actual } 
+      clafun:      { name : Clasificación Funcional } 
+      avacom:      { name : Avaluo Comisión } 
+      edoleg:      { name : Edo. Legal de la Construcción } 
+      viduti:      { name : Vida Util (Meses) } 
+      obsinm:      { name : Observación } 
+      linnor:      { name : Norte} 
+      linsur:      { name : Sur } 
+      linest:      { name : Este } 
+      linoes:      { name : Oeste } 
+      areter:      { name : Area del Terreno } 
+      arecub:      { name : Area Cubierta } 
+      arecon:      { name : Area Construida } 
+      areotr:      { name : Otras Instalaciones } 
+      aretot:      { name : Area Total } 
+      valini:      { name : Valor Inicial }      	  	  
+      valres:      { name : Valor Rescate }      	  	   	  
+      vallib:      { name : Valor Libros }      	  	   	   	  
+      depmen:      { name : Depreciación Mensual }     	     	  	   	   	   	  
+      depacu:      { name : Depreciación Acumulada }     	     	  	   	   	   	   	  
+      valrex:      { name : Valor Reexpresado }     	     	  	   	   	   	   	   	  
+      cosrep:      { name : Costo Reposición }     	     	  	   	   	   	   	   	  
+      codubi:      { name : Cod. Ubicación }     	     	  	   	   	   	   	   	  
+    list:
+      title:          Registro de Activos Inmuebles
+      display:        [=codact, codinm, desinm]
+      filters:        [codact, codinm]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   8
+    edit:
+      title:          Registro de Activos Inmuebles
+    
+
+
+   
