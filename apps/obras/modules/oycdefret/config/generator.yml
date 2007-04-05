@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octipret
+    theme:            default
+    fields:
+      codtip:    { name: Código}
+      destip:    { name: Descripción}
+      codcon:    { name: Código}
+      descta:    { name: Descripción}
+      basimp:    { name: Sobre el } 
+      porret:    { name: Porcentaje a Retener}
+      unitri:    { name: A Partir de}
+      factor:    { name: Grupo}
+      porsus:    { name: Descripción del Grupo} 
+      stamon:    { name: Monto}      
+              
+    list:
+      title:          Recaudos
+      filters:        [codtip]
+      display:        [codtip, destip]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Recaudos
+      display:       [codtip, destip, porret, basimp, stamon, codcon, descta]
