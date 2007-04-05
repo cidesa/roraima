@@ -3,3 +3,19 @@ generator:
   param:
     model_class:      Ocdefequ
     theme:            default
+    fields:
+      codequ:       { name: Código }
+      desequ:       { name: Descripción}
+         
+     
+    list:
+      title:          Definición de Equipos
+      filters:        [codequ]
+      display:        [codequ, desequ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Definición de Equipos
+      display:        [codequ, desequ]
