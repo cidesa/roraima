@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Carecaud
+    theme:            default
+    fields:
+      codrec:    { name: Código}
+      desrec:    { name: Descripción}
+      limrec:    { name: Limitante}
+      fecemi:    { name: Nombre} 
+      fecven:    { name: Tipo de Concepto}
+      
+      canutr:    { name: A Partir de}
+      codtiprec: { name: Grupo}
+      destiprec: { name: Descripción del Grupo} 
+      observ:    { name: Tipo de Concepto}      
+              
+    list:
+      title:          Recaudos
+      filters:        [codrec]
+      display:        [codrec, desrec, codtiprec, destiprec, limrec]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Recaudos
+      display:       [codrec, desrec, limrec, canutr, codtiprec, destiprec]
