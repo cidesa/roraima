@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octipesp
+    theme:            default
+    fields:
+      codtipesp:       { name: Código }
+      destipesp:       { name: Descripción}
+         
+     
+    list:
+      title:          Definición de Especialidades
+      filters:        [codtipesp]
+      display:        [codtipesp, destipesp]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Definición de Especialidades
+      display:        [codtipesp, destipesp]
