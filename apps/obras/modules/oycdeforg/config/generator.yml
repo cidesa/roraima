@@ -1,0 +1,33 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocdeforg
+    theme:            default
+    fields:
+      codorg:       { name: Código }
+      desorg:       { name: Descripción}
+      codtiporg:    { name: Tipo Organismo}
+      destiporg:    { name: Descripción de Organismo}
+      entorg:       { name: Ente}
+      dirorg:       { name: Dirección}   
+      codpai:       { name: Pais}   
+      nompai:       { name: Descripción de Pais}  
+      codedo:       { name: Estado} 
+      nomedo:       { name: Descripción de Estado}   
+      codciu:       { name: Ciudad}   
+      nomciu:       { name: Descripción de Ciudad}         
+      telorg:       { name: Teléfono(s)}   
+      faxorg:       { name: Fax}   
+      emaorg:       { name: E-Mail}   
+     
+    list:
+      title:          Definición de Organismos
+      filters:        [codorg]
+      display:        [codorg, desorg]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Definición de Organismos
+      display:        [codorg, desorg, codtiporg, destiporg, entorg, dirorg, codpai, nompai, codedo, nomedo, codciu, nomciu, telorg, faxorg, emaorg]
