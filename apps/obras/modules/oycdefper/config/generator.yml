@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocdefper
+    theme:            default
+    fields:
+      cedper:       { name: Cédula}
+      nomper:       { name: Nombres y Apellidos}
+      telper:       { name: Teléfono(s)}
+      codtipcar:    { name: Cargo }
+      destipcar:    { name: Descripción}       
+      codtippro:    { name: Profesión}
+      destippro:    { name: Descripción}            
+     
+    list:
+      title:          Definición de Empleados
+      filters:        [cedper]
+      display:        [cedper, nomper]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Definición de Empleados
+      display:        [cedper, nomper, telper, codtipcar, destipcar, codtippro, destippro]
