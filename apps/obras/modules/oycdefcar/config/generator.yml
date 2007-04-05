@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octipcar
+    theme:            default
+    fields:
+      codtipcar:    { name: Código}
+      destipcar:    { name: Descripción}
+              
+    list:
+      title:          Definición de Cargos
+      filters:        [codtipcar]
+      display:        [codtipcar, destipcar]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Definición de Cargos
+      display:        [codtipcar, destipcar]
