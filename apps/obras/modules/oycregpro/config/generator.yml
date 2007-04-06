@@ -1,0 +1,63 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caprovee
+    theme:            default
+    fields:
+      codpro:       { name:  Código Contratista}
+      nompro:       { name:  Nombre} 
+      destipesp:    { name:  Descripción de Especialidad} 
+      rifpro:       { name:  C.I. / Rif Proveedor} 
+      nitpro:       { name:  N.I.T.} 
+      dirpro:       { name:  Dirección} 
+      telpro:       { name:  Teléfono(s)} 
+      faxpro:       { name:  Fax} 
+      email:        { name:  E-Mail} 
+      limcre:       { name:  Limite del Crédito} 
+      codcta:       { name:  Cta. Contable Asoc.} 
+      descta:       { name:  Descripción Cta. Contable Asoc.} 
+      regmer:       { name:  Registro Mercantil} 
+      fecreg:       { name:  Fecha Reg.} 
+      tomreg:       { name:  Tomo} 
+      folreg:       { name:  Folio} 
+      capsus:       { name:  Capital Suscrito} 
+      cappag:       { name:  Capital Pagado} 
+      rifrepleg:    { name:  C.I. / Rif repleg} 
+      nomrepleg:    { name:  Nombre repleg}
+      dirrepleg:    { name:  Dirección repleg} 
+      nrocei:       { name:  Nro. OCEI}
+      codram:       { name:  Ramo que Provee}
+      nomram:       { name:  Descripción Ramo} 
+      #fecinscir:    { name:  } 
+      #numinscir:    { name:  } 
+      #nacpro:       { name:  } 
+      #codord:       { name:  } 
+      #codpercon:    { name:  } 
+      codtiprec:    { name:  Grupo} 
+      destiprec:    { name:  Descripción Grupo}
+      #codordadi:    { name:  } 
+      #codperconadi: { name:  } 
+      #tipo:         { name:  } 
+      #fecven:       { name:  } 
+      #ciudad:       { name:  } 
+      #codordmercon: { name:  } 
+      #codpermercon: { name:  } 
+      #codordcontra: { name:  } 
+      #codpercontra: { name:  } 
+      #temcodpro:    { name:  } 
+      #temrifpro:    { name:  } 
+      #codctasec:    { name:  }    
+
+     
+    list:      
+      title:          Definición de Contratista
+      filters:        [codpro]
+      display:        [codpro, nompro]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Definición de Contratista
+      display:        [codpro, nompro, destipesp, rifpro, nitpro, dirpro, telpro, faxpro, nrocei, email, codram, nomram, limcre, codcta, descta, regmer, fecreg, tomreg, folreg, capsus, cappag, rifrepleg, nomrepleg, dirrepleg, codtiprec, destiprec]
+      #display:        [codpro, nompro,rifpro,nitpro,dirpro,telpro,faxpro,email,limcre,codcta,regmer,fecreg,tomreg,folreg,capsus,cappag,rifrepleg,nomrepleg,dirrepleg,nrocei,codram,fecinscir,numinscir,nacpro,codord,codpercon,codtiprec,codordadi,codperconadi,tipo,fecven,ciudad,codordmercon,codpermercon,codordcontra,codpercontra,temcodpro,temrifpro,codctasec]
