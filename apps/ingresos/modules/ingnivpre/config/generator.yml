@@ -1,0 +1,37 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cidefniv
+    theme:            default
+    fields:
+      codemp: { name: Nombre Empresa}      
+      rupcat: { name: Clasificador de Categorías}      
+      ruppar: { name: Clasificador de Partidas}  
+      nivdis: { name: Nivel de Disponibilidad}  
+      forpre: { name: Formato de Código Presupuestario} 
+      fecini: { name: Inicio de Ejercicio}  
+      feccie: { name: Fin de Ejercicio}  
+      fecper: { name: Período}  
+      asiper: { name: Estimación Periódica}  
+      numper: { name: Clasificador de Partidas}  
+      peract: { name: Clasificador de Partidas} 
+      etadef: { name: Clasificador de Partidas}  
+      staprc: { name: Clasificador de Partidas}  
+      coraep: { name: Clasificador de Partidas}  
+      loncod: {name: Descripcion}
+            
+    list:
+      title:          Registro de Dias Extras
+      filters:        [codnom]
+      display:        [=codnom, nomnom, codemp]
+      fields:
+        fecha: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion Dias Extras
+      display:       [=codnom, fecha, codemp]
+      fields:
+        fecha: { params: date_format='dd/MM/yy' }
