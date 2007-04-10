@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ciajuste
+    theme:            default
+    fields:
+      refaju:     { name : Código }
+      fecaju:     { name : Fecha Ajuste }
+      anoaju:     { name : Año Ajuste }
+      refere:     { name : Referencia }
+      desaju:     { name : Descripción Ajuste }
+      desanu:     { name : Descripción Anulación }
+      totaju:     { name : Total }
+      staaju:     { name : Estado }
+      fecanu:     { name : Fecha Anulación }
+    list:
+      title:          Tipos de Ingresos
+      display:        [=refaju, fecaju, desaju, refere, desanu, totaju ]
+      filters:		  [refaju, fecaju]
+      max_per_page:	  5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      
+    edit:
+      title:          Edición de Tipos de Ingresos
+      display:        [refaju, fecaju, desaju, refere, desanu, totaju]

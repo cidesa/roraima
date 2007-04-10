@@ -1,0 +1,33 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cireging
+    theme:            default
+    fields:
+      refing: { name: Código }
+      fecing: { name: Fecha Ingreso }
+      desing: { name: Descripción }         
+      codtip: { name: Código Tipo }
+      rifcon: { name: C.I./RIF }
+      moning: { name: Monto Ingreso }            
+      monrec: { name: Monto Recargo }                  
+      mondes: { name: Monto Descuento }                  
+      montot: { name: Monto Neto }            
+#      desanu: { name: desanu }            
+#      fecanu: { name: fecanu }
+#      staing: { name: staing } #="A"
+      ctaban: { name: Cuenta Bancaria }
+      tipmov: { name: Tipo Movimiento }
+#      previs: { name: previs } #="S"
+      anoing: { name: Año Ingreso }
+    list:
+      title:          Registro de Ingresos
+      filters:        [refing, fecing, codtip, rifcon, moning, montot, ctaban, tipmov ]
+      display:        [=refing, fecing, desing, tipmov ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:         Edición de Ingresos
+      display:       [refing, fecing, desing, codtip, rifcon, moning, monrec, mondes, montot, ctaban, tipmov ]

@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Citrasla
+    theme:            default
+    fields:
+      reftra: { name: Código }
+      fectra: { name: Fecha Traslado }
+      anotra: { name: Año }         
+      pertra: { name: Periodo }
+      destra: { name: Descripción }
+      desanu: { name: Descripción Anulación }            
+      tottra: { name: Total }                  
+      statra: { name: Status }
+      fecanu: { name: Fecha Anulación }            
+    list:
+      title:          Registro de Ingresos
+      filters:        [reftra, fectra, pertra ]
+      display:        [=reftra, fectra, pertra, destra]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:         Edición de Ingresos
+      display:       [reftra, fectra, pertra, destra, anotra ]
