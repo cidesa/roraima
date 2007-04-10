@@ -13,3 +13,11 @@ default_index:
 
 default:
   url:   /:module/:action/*
+  
+#applications:
+#  .dev:
+#    compras:
+#      url: /compras_dev.php
+#  .prod:
+#    compras:
+#      url: /compras.php

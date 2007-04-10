@@ -3,13 +3,12 @@ generator:
   param:
     model_class:      Fordefcatpre
     theme:            default
-
     fields:
-      codcat: { name: Codigo }
+      codcat: { name: Código }
       nomcat: { name: Nombre }
-      descat: { name: Descripci�n }         
+      descat: { name: Descripción }         
       objesp: { name: Objetivo Sectorial }
-      codemp: { name: Codigo Responsable }
+      codemp: { name: Código Responsable }
       nomemp: { name: Nombre del Responsable }            
            
     list:

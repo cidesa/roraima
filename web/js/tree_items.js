@@ -15,7 +15,7 @@ var servidor='http://'+window.location.host;
 
 var TREE_ITEMSCOM_ALM = [
 	['SIGA', null,
-		['Compras y Almacen', null,
+		['Compras y Almac&eacute;n', null,
 			['Proveedores', null,
 				['Definici&oacute;n de Grupos de Recaudos', Compras+'almtiprecpro'],
 				['Definici&oacute;n de Recaudos', Compras+'almregrec'],

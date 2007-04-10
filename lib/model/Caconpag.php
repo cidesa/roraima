@@ -9,4 +9,5 @@
  */ 
 class Caconpag extends BaseCaconpag
 {
+	
 }
