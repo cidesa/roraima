@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octipobr
+    theme:            default
+
+    fields:
+      codtipobr:      { name: Código}
+      destipobr:      { name: Descripción}      
+ 
+    list:
+      title:          Definición de Tipos de Obras
+      filters:		  [codtipobr, destipobr]
+      display:        [=codtipobr, destipobr]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Edición de Tipos de Obras

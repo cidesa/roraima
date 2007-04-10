@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octipact
+    theme:            default
+
+    fields:
+      codtipact:      { name: Código}
+      destipact:      { name: Descripción}
+
+    list:
+      title:          Definición de Tipo de Actas
+      filters:		  [codtipact, destipact]
+      display:        [=codtipact, destipact]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Edición de Tipo de Actas
+      #display:        [codcon, nomcon, estados]                

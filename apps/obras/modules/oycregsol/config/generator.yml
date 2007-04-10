@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocregsol
+    theme:            default
+
+    fields:
+      numsol:         { name: Número}
+      cedste:         { name: Solicitante}      
+      nomste:         { name: Nombre}
+      dessol:         { name: Descripción}
+      codsol:         { name: Tipo de Solicitante}      
+      codorg:         { name: Organismo}      
+      fecsol:         { name: Fecha de Solicitud}
+      fecres:         { name: Fecha de Respuesta}      
+      obssol:         { name: Observación}      
+      codemp:         { name: Atendido por}      
+
+    list:
+      title:          Definición de Solicitudes
+      filters:		  [numsol, dessol]
+      display:        [=numsol, dessol]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Edición de Solicitudes
+      display:        [numsol, cedste, nomste, dessol, codsol, codorg, fecsol, fecres, obssol, codemp, dessol, desorg, nomemp]              
