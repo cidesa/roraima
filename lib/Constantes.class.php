@@ -26,31 +26,57 @@ class Constantes
 	{return array('S' => 'Soltero', 'C' => 'Casado', 'D' => 'Divorciado', 'V' => 'Viudo');}
 	
     public static function ListaEstatus()
-	{return array('A' => 'Activo', 'P' => 'Permiso Remunerado', 'R' => 'Retirado', 'V' => 'Vacaciones', '-' => 'Permiso No Remunerado');}
+    {return array('A' => 'Activo', 'P' => 'Permiso Remunerado', 'R' => 'Retirado', 'V' => 'Vacaciones', '-' => 'Permiso No Remunerado');}
 
     public static function ListaFormaPago()
-	{return array('01' => 'Deposito', '02' => 'Cheque', '03' => 'Efectivo');}
+    {return array('01' => 'Deposito', '02' => 'Cheque', '03' => 'Efectivo');}
 
     public static function ListaTipoCuenta()
-	{return array('Cta Corriente' => 'Cta. Corriente', 'Cta de Ahorros' => 'Cta. de Ahorros');}
+    {return array('Cta Corriente' => 'Cta. Corriente', 'Cta de Ahorros' => 'Cta. de Ahorros');}
 
     public static function ListaTalla()
-	{return array('S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL');}
-	
+    {return array('S' => 'S', 'M' => 'M', 'L' => 'L', 'XL' => 'XL', 'XXL' => 'XXL', 'XXXL' => 'XXXL');}
+
     public static function ListaGrupoSanguineo()
-	{return array('ARH+' => 'ARH+', 'ARH-' => 'ARH-', 'BRH+' => 'BRH+', 'BRH-' => 'BRH-', 'ABRH+' => 'ABRH+', 'ABRH-' => 'ABRH-', 'ORH+' => 'ORH+');}
+    {return array('ARH+' => 'ARH+', 'ARH-' => 'ARH-', 'BRH+' => 'BRH+', 'BRH-' => 'BRH-', 'ABRH+' => 'ABRH+', 'ABRH-' => 'ABRH-', 'ORH+' => 'ORH+');}
 	
     public static function ListaGrupoLaboral()
-	{return array('0001' => 'Fijo', '0002' => 'Contratado', '0003' => 'Pasantia', '0004' => 'Periodo de Prueba');}
-	
+    {return array('0001' => 'Fijo', '0002' => 'Contratado', '0003' => 'Pasantia', '0004' => 'Periodo de Prueba');}
+
     public static function ListaFormaTraslado()
-	{return array('1' => 'Bicicleta', '2' => 'Motocicleta', '3' => 'Carro Propio', '4' => 'A Pie', '5' => 'En Cola', '6' => 'Transporte Publico', '7' => 'Transporte Privado');}
-	
+    {return array('1' => 'Bicicleta', '2' => 'Motocicleta', '3' => 'Carro Propio', '4' => 'A Pie', '5' => 'En Cola', '6' => 'Transporte Publico', '7' => 'Transporte Privado');}
+
     public static function ListaTipoVivienda()
-	{return array('1' => 'Rancho', '2' => 'Casa', '3' => 'Apartamento', '4' => 'Otro');}
-	
+    {return array('1' => 'Rancho', '2' => 'Casa', '3' => 'Apartamento', '4' => 'Otro');}
+
     public static function ListaFormaTenencia()
-	{return array('1' => 'Propia', '2' => 'Alquilada', '3' => 'Prestada', '4' => 'Otra');}
+    {return array('1' => 'Propia', '2' => 'Alquilada', '3' => 'Prestada', '4' => 'Otra');}
+
+    public function BuscarDatos($sql)
+    {
+    	$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+    	$stmt = $con->createStatement();
+    	$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+    	$i = pg_num_fields($rs2->getResource());
+    	$fieldname = array();
+    	$resultado = array();
+    	$output = array();
+    	for ($j = 0; $j < $i; $j++)
+    	{
+    		$fieldname[]  = pg_field_name($rs2->getResource(),$j);
+    	}
+    	while ($rs->next())
+    	{
+    		$resultado[]=$rs2->getRow();
+		}
+		$output[0]=$fieldname;
+		$output[1]=$resultado;
+		$this->output=$output;
+		return $this->output;
+    }
+
 	
+	
+ 	
 	
 }
