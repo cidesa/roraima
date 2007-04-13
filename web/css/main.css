@@ -41,3 +41,77 @@ body
 	overflow:scroll;
 	background-color: #FFFFFF;
 }
+
+.grid_txtleft {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	height: 15px;
+	border-width: 0px;
+	padding-left: 3px;
+	font-size: 12px;
+	text-align:left;
+}
+.grid_txtright {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	height: 15px;
+	border-width: 0px;
+	padding-left: 3px;
+	font-size: 12px;
+	text-align:right;
+}
+
+.grid_txtcenter {
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	height: 15px;
+	border-width: 0px;
+	padding-left: 3px;
+	font-size: 12px;
+	text-align:center;
+}
+
+.grid_fila {
+	border-color: #999999;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-right-style: solid;
+	border-right-width: 1px;	
+}
+
+.grid_titulo{
+	font-weight:bold;
+	background-color:#0B63A2;
+	border-right:1px #021746 solid;
+	border-left:1px #61B5CD solid;
+	border-bottom:2px #021746 solid;
+	padding:4px;
+	padding-bottom:2px;
+	text-align:center;
+}
+
+.imagenborrar{
+	background: transparent url("/images/delete.png") no-repeat center;
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	height: 16px;
+	border-width: 0px;
+	padding-left: 0px;
+	font-size: 7px;
+	text-align:left;
+	cursor: pointer;
+	}
+
+
+
+
+
+
+
+
+
+
