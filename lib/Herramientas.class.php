@@ -2,31 +2,43 @@
 
 class Herramientas
 {
-	public function BuscarDatos($sql, &$output)
+	public static function BuscarDatos($sql,$numbr=false)
 	{
 		$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
 		$stmt = $con->createStatement();
 		$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
 		$i = pg_num_fields($rs->getResource());
-		//print $i;
 		$fieldname = array();
 		$result = array();
 		$output = array();
-		for ($j = 0; $j < $i; $j++)
+		if ($numbr)
 		{
-			$fieldname[]  = pg_field_name($rs->getResource(),$j);
+			for ($j = 0; $j < $i; $j++)
+			{
+				$fieldname[]  = pg_field_name($rs->getResource(),$j);
+			}
 		}
+		else
+		{
+			for ($j = 0; $j < $i; $j++)
+			{
+				$fieldname[]  = pg_field_name($rs->getResource(),$j);
+			}
+		}
+		$b=0;
 		while ($rs->next())
 		{
-			while ($a <= $i)
+			$a=0;
+			while ($a < $i)
 			{
 				$fila = $rs->getRow();
+				$result[$fieldname[$a]] = $fila[$a];
 				$a++;
-				$result += array($fieldname[$a] => $fila[$a]);
 			}
-			$output += array($result);
+			$output[] = $result;
 		}
-		return $this->output;
+		//print $output[0]['codemp'];
+		return $output;
 	}
 }
 
