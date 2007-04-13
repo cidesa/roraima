@@ -2,7 +2,12 @@
 
 class Herramientas
 {
-	public static function BuscarDatos($sql,$numbr=false)
+	public static function BuscarDatos($sql,&$rg,$numbr=false)
+	// no esta terminada todavia
+	//BuscarDatos($sql,&$rg,true);
+	//$sql=la tira sql
+	//$rg=trae true si encontro registros
+	//true= dice si queremos traajar los campos con [n][n], si esta en false sera [n][nombre del campo] donde n es un indice
 	{
 		$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
 		$stmt = $con->createStatement();
@@ -38,6 +43,14 @@ class Herramientas
 			$output[] = $result;
 		}
 		//print $output[0]['codemp'];
+		if (count($rs)>0) 
+		{
+		    $rg = true;
+		}
+		else
+		{
+			$rg = false;
+		}
 		return $output;
 	}
 }
