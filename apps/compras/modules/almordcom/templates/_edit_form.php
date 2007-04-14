@@ -99,7 +99,8 @@
   'control_name' => 'caordcom[codpro]',
 )); echo $value ? $value : '&nbsp;' ?>
   &nbsp;
-  <?php echo button_to('...','#')?>
+  <!--Prueba popup -->
+  <?php echo button_to_popup('...','generales/catalogo?clase=Caprovee&frame=sf_admin_edit_form&objeto=caordcom_codpro')?>
   <?php if (isset($nom_pro)): ?>
 	<?php echo input_tag('nom_pro',$nom_pro,'size=70,disabled=true'); ?>
   <?php endif; ?> 

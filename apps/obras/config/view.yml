@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        symfony project
+    title:        Módulo Obras
     robots:       index, follow
-    description:  symfony project
-    keywords:     symfony, project
+    description:  Módulo Obras
+    keywords:     Módulo, Obras
     language:     en
 
   stylesheets:    [main]

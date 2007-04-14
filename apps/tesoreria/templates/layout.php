@@ -30,9 +30,9 @@
 				 
 				  &nbsp;
 				  <a href="javascript:history.back(1)">[ <img src="/images/flecha.gif" width="8" height="15" align="absmiddle" /> Atras ]</a>&nbsp;
-				   <a href="/autenticacion_dev.php/principal">[ Men&uacute; Principal ]</a>&nbsp;
-				  <a href=" /autenticacion_dev.php/login/logout">[ Cerrar Sesi&oacute;n ]</a>&nbsp;&nbsp;				  </td>
-                </tr>
+				   <a href="<?php if (SF_ENVIRONMENT=='dev') echo "/".sfConfig::get('app_autenticacion')."_dev.php/principal/menu/m/".sfConfig::get('app_this'); else echo "/".sfConfig::get('app_autenticacion').".php/principal/menu/m/".sfConfig::get('app_this'); ?>">[ Men&uacute; Principal ]</a>&nbsp;
+				  <a href="<?php if (SF_ENVIRONMENT=='dev') echo "/".sfConfig::get('app_autenticacion')."_dev.php/login/logout"; else echo "/".sfConfig::get('app_autenticacion').".php/login/logout"; ?>">[ Cerrar Sesi&oacute;n ]</a>&nbsp;&nbsp;				  </td>
+               </tr>
                 <tr>
                   <td valign="top"><img src="/images/borrar_07.jpg" width="341" height="2"></td>
                 </tr>
