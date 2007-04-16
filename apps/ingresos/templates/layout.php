@@ -6,6 +6,7 @@
 <?php include_metas() ?>
 <?php use_helper('Javascript') ?>
 
+
 <?php include_title() ?>
 
 <link rel="shortcut icon" href="/favicon.ico" />
