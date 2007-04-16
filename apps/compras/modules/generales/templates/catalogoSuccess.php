@@ -1,10 +1,26 @@
 <?php use_helper('Javascript') ?>
 
+<?php 
+	$i=1;
+	$cod='';
+	while ($sf_request->hasParameter('objeto'.$i))
+	{
+		$cod=$cod."f.".$sf_request->getParameter('frame','formid').".".$sf_request->getParameter('objeto'.$i,'objeto'.$i).".value=val[".$i."];
+";	
+		$i++;
+	}
+	
+
+
+
+
+ ?>
+
 <?php $js = "  
    function aceptar(val)
    {     
-     f=opener.document; 
-     f.".$sf_request->getParameter('frame','formid').".".$sf_request->getParameter('objeto','objeto').".value=val;
+     f=opener.document;".
+	 "".$cod."
      window.close();
    }
 "; ?>
@@ -57,12 +73,28 @@
 		  	 		$i=0;
 		  	 		echo '<tr>';
           	 		foreach($campos as $c)														
-          				{																			
+          				{
+         					$dat='$par="a=new Array(';
+         					$k=1;
+							while ($sf_request->hasParameter('objeto'.$k))
+							{
+								$info = '$infoget = $fila->get'.$campos[$k].'();';
+								eval($info);
+								$dat = $dat."'".$infoget."',";
+								$k++;
+							}
+							$dat = $dat.');";';
+          					
+          					
           					$cod= '$val=$fila->get'.$c.'();';	
           					//print $cod;						 
           					if($c!='Id') eval($cod);									
 																		
-		  					if($i==0) {echo '<td>'; echo link_to_function($val, 'javascript:aceptar("'.$val.'")'); echo '</td>';};
+		  					if($i==0) {
+		  						eval($dat);
+		  						//print $par;
+		  						echo '<td>'; echo link_to_function($val, 'javascript:aceptar('.$par.')'); echo '</td>';
+		  								};
 		  					if($i!=0 && $c!='Id') echo '<td>'.$val.'</td>';										
 											
 		  					$i++;																

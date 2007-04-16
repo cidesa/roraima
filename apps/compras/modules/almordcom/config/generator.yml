@@ -10,12 +10,12 @@ generator:
       fecord:      { name : Fecha, params: date_format='dd/MM/yyyy'}
       tipmon:      { name : Moneda }   
       codpro:      { name : Rif. de Proveedor }  
-      desord:      { name : Descripción del Proveedor }  
+      desord:      { name : DescripciÃ³n del Proveedor }  
       crecon:      { name : Proveedor }  
       monord:      { name : Monto Total}      
       doccom:      { name : Tipo de Compromiso }
       refsol:      { name : Solicitud }
-      tipord:      { name : Tipó }
+      tipord:      { name : Tipo }
       tippro:      { name : Proyecto }
       tipfin:      { name : Financiamiento }
 

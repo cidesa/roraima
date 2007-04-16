@@ -10,7 +10,7 @@ test:
   storage:
     class: sfSessionTestStorage
 
-#all:
+all:
 #  controller:
 #    class: sfFrontWebController
 #
@@ -20,13 +20,13 @@ test:
 #  response:
 #    class: sfWebResponse
 #
-#  user:
-#    class: myUser
-#
-#  storage:
-#    class: sfSessionStorage
-#    param:
-#      session_name: symfony
+  user:
+    class: myUser
+
+  storage:
+    class: sfSessionStorage
+    param:
+      session_name: cidesa
 #
 #  view_cache:
 #    class: sfFileCache
