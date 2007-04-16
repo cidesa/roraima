@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almregart/edit_messages', array('caregart' => $caregart, 'labels' => $labels)) ?>
-<?php include_partial('almregart/edit_form', array('caregart' => $caregart, 'tiporamo' => $tiporamo, 'rs' => $rs, 'labels' => $labels)) ?>
+<?php include_partial('almregart/edit_form', array('caregart' => $caregart, 'tiporamo' => $tiporamo, 'rs' => $rs, 'mascaraarticulo' => $mascaraarticulo, 'mascaracontabilidad' => $mascaracontabilidad, 'mascarapartida' => $mascarapartida, 'mascaraubicacion' => $mascaraubicacion, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

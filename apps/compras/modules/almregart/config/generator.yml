@@ -13,7 +13,7 @@ generator:
       unimed: { name: Unidad Medida}
       unialt: { name: Unidad Alterna} 
       relart: { name: Relacion}
-      exitot: { name: Existencia Total}           
+      exitot: { name: Existencia Total}          
       fecult: { name: Fecha Ult. Compra}
       cosult: { name: Ultimo}
       cospro: { name: Promedio}
@@ -22,8 +22,8 @@ generator:
       title:          Articulos
       filters:        [codart]
       display:        [=codart, desart, unimed]
-      fields:
-        fecult: { params: date_format='dd/MM/yy' }       
+      fields:        
+        fecult: { params: date_format='dd/MM/yy' }             
       object_actions:
         _edit:        ~
         _delete:        ~
@@ -32,4 +32,5 @@ generator:
       title:         Registro de Articulos
       display:        [=codart, tipo, codcta, desart, ramart, codpar, unimed, unialt, relart, exitot, fecult, cosult, cospro, invini]
       fields:
-        fecult: { params: date_format='dd/MM/yy' } 
+        fecult: { params: date_format='dd/MM/yy' }
+        ramart: { help: Máximo 6 caracteres}        

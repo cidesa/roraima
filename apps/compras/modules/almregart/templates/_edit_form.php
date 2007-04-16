@@ -4,9 +4,13 @@
 ?>
 <?php echo form_tag('almregart/edit', array(
   'id'        => 'sf_admin_edit_form',
-  'name'      => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',  
   'multipart' => true,
 )) ?>
+<?php use_helper('Javascript') ?>
+<?php use_helper('Number') ?>
+<?php echo javascript_include_tag('dFilter') ?>
+<?php echo javascript_include_tag('validaciones') ?>
 
 <?php echo object_input_hidden_tag($caregart, 'getId') ?>
 
@@ -24,22 +28,25 @@
   <?php $value = object_input_tag($caregart, 'getCodart', array (
   'size' => 15,
   'control_name' => 'caregart[codart]',
+  'maxlegth' => 20,
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraarticulo')",
 )); echo $value ? $value : '&nbsp;' ?> </div></td>
     <td width="27%"><?
 if ($caregart->getTipo()=='A')	{
-  ?><?php echo radiobutton_tag('radio2', 'A', true)        ."Articulo".'&nbsp;&nbsp;';
-		  echo "<br>".radiobutton_tag('radio2', 'S', false)."   Servicio";?>
+  ?><?php echo radiobutton_tag('caregart[tipo]', 'A', true)        ."Articulo".'&nbsp;&nbsp;';
+		  echo "<br>".radiobutton_tag('caregart[tipo]', 'S', false)."   Servicio";?>
 		<?
 
 }else{
-	echo radiobutton_tag('radio2', 'A', false)        ."Articulo".'&nbsp;&nbsp;';
-	echo "<br>".radiobutton_tag('radio2', 'S', true)."   Servicio";
+	echo radiobutton_tag('caregart[tipo]', 'A', false)        ."Articulo".'&nbsp;&nbsp;';
+	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', true)."   Servicio";
 
 } ?></td>
-    <td width="50%"><strong>Codigo Contable</strong>
+    <td width="50%"><strong>Codigo Contable</strong>    
 <?php $value = object_input_tag($caregart, 'getCodcta', array (
   'size' => 20,
   'control_name' => 'caregart[codcta]',
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 <?php echo button_to('...','#')?></td>
@@ -53,12 +60,13 @@ if ($caregart->getTipo()=='A')	{
   <?php if ($sf_request->hasError('caregart{desart}')): ?>
     <?php echo form_error('caregart{desart}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
-  <?php $value = object_textarea_tag($caregart, 'getDesart', array (
+  
+ <?php $value = object_textarea_tag($caregart, 'getDesart', array (
   'size' => '80x5',
   'control_name' => 'caregart[desart]',
+  'maxlength' => 250,
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
+   </div>
 </div>
 
 <div class="form-row">
@@ -71,13 +79,14 @@ if ($caregart->getTipo()=='A')	{
   <?php $value = object_input_tag($caregart, 'getRamart', array (
   'size' => 20,
   'control_name' => 'caregart[ramart]',
+  'maxlength' => 6,  
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 <?php echo button_to('...','#')?>
 &nbsp;
 <?php echo input_tag('tiporamo',$tiporamo,'size=50,disabled=true') ?>
 
-    </div>
+  <!-- <div class="sf_admin_edit_help">< ?php echo __('Máximo 6 caracteres') ?></div>  --> </div>
 </div>
 
 <div class="form-row">
@@ -90,6 +99,8 @@ if ($caregart->getTipo()=='A')	{
   <?php $value = object_input_tag($caregart, 'getCodpar', array (
   'size' => 20,
   'control_name' => 'caregart[codpar]',
+  'maxlength' => 16,   
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascarapartida')",
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 <?php echo button_to('...','#')?>
@@ -117,6 +128,7 @@ if ($caregart->getTipo()=='A')	{
 <?php $value = object_input_tag($caregart, 'getUnimed', array (
   'size' => 20,
   'control_name' => 'caregart[unimed]',
+  'maxlength' => 15,
 )); echo $value ? $value : '&nbsp;' ?>
 
     </div>
@@ -133,6 +145,7 @@ if ($caregart->getTipo()=='A')	{
   <?php $value = object_input_tag($caregart, 'getUnialt', array (
   'size' => 20,
   'control_name' => 'caregart[unialt]',
+  'maxlength' => 15,
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 &nbsp;
@@ -163,6 +176,7 @@ if ($caregart->getTipo()=='A')	{
   <?php $value = object_input_tag($caregart, 'getRelart', array (
   'size' => 25,
   'control_name' => 'caregart[relart]',
+  'maxlength' => 26,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -173,11 +187,12 @@ if ($caregart->getTipo()=='A')	{
   <?php if ($sf_request->hasError('caregart{exitot}')): ?>
     <?php echo form_error('caregart{exitot}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
+  
   <?php $value = object_input_tag($caregart, 'getExitot', array (
   'size' => 7,
   'control_name' => 'caregart[exitot]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'onKeyPres' => "javascript:return entermonto(event, this.id,this.id)",  
+), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 &nbsp;
 &nbsp;
@@ -220,11 +235,13 @@ if ($caregart->getTipo()=='A')	{
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'caregart[fecult]',
   'date_format' => 'dd/MM/yy',
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'##/##/####')",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 </fieldset>
 <fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
 <table width="100%" height="117" border="0">
   <tr>
     <td width="55%">
@@ -235,7 +252,8 @@ if ($caregart->getTipo()=='A')	{
 <?php $value = object_input_tag($caregart, 'getCosult', array (
   'size' => 7,
   'control_name' => 'caregart[cosult]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'onKeyPress' => "javascript:return entermonto(event, this.id,this.id)",
+), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 &nbsp;
 &nbsp;
@@ -244,8 +262,8 @@ if ($caregart->getTipo()=='A')	{
 <?php $value = object_input_tag($caregart, 'getCospro', array (
   'size' => 7,
   'control_name' => 'caregart[cospro]',
-)); echo $value ? $value : '&nbsp;' ?>
-    
+  'onKeyPress' => "javascript:return entermonto(event, this.id,this.id)",
+), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
 </div>
 </fielddset></td>
     <td width="45%">
@@ -261,12 +279,14 @@ if ($caregart->getTipo()=='A')	{
   <?php $value = object_input_tag($caregart, 'getInvini', array (
   'size' => 7,
   'control_name' => 'caregart[invini]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'onKeyPress' => "javascript:return entermonto(event, this.id,this.id)",
+), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 </fieldset></td>
   </tr>
 </table>
+</div>
 </fieldset>
 &nbsp;
 &nbsp;
@@ -274,6 +294,8 @@ if ($caregart->getTipo()=='A')	{
 <div class="grid01" id="grid01">
 <fieldset>
 <legend>Existencia por Almacenes</legend>
+<? if ($rs!='')
+{ ?>
 <table border="0" class="sf_admin_list">
 <? 
 $titulo=array(0 => 'Cod. Almacen', 1 => 'Descripcion', 2 => 'Ubicacion', 3 => 'Exi. Minima', 4 => 'Exi. Maxima', 5 => 'Exi. Actual', 6 => 'Reorden');
@@ -297,6 +319,9 @@ foreach ($rs as $k=>$fila) {
 <? }
   }
 ?></table>
+<?
+}
+?>
 </fieldset>
 </div>
 
