@@ -68,7 +68,7 @@
 
 
 <?
-$filas=15;
+$filas=17;
 $eliminar=true;
 $titulos=array("Periodo","Monto");
 $anchos=array("3%","94%");
