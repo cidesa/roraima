@@ -23,8 +23,10 @@
 	<?php } elseif($menu=='nomina') { ?> 
 	<?php echo javascript_tag("new tree (TREE_ITEMS_NOM, tree_tpl);"); ?>
 	<?php } elseif($menu=='formulacion') { ?>
-	<?php echo javascript_tag("new tree (TREE_ITEMSCOM_FOR, tree_tpl);");
-          } ?>
+	<?php echo javascript_tag("new tree (TREE_ITEMSCOM_FOR, tree_tpl);");?>
+    <?php } elseif($menu=='ingresos') { ?>
+	<?php echo javascript_tag("new tree (TREE_ITEMS_ING, tree_tpl);");?>
+    <?php }?>
 	</td>
     <td class="box02_rline">&nbsp;</td>
   </tr>
