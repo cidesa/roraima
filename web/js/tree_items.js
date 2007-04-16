@@ -2,6 +2,7 @@
 var Compras = '/compras_dev.php/';
 var Tesoreria= '/tesoreria_dev.php/';
 var Nomina='/nomina_dev.php/';
+var Ingresos='/ingresos_dev.php/';
 var Formulacion='/formulacion_dev.php/';
 var Obra_cont='/obra_cont_dev.php/';
 var Inv_coloc='/inv_coloc_dev.php/';
@@ -476,11 +477,23 @@ var TREE_ITEMSCOM_FOR = [
 	],
 ];
 
+var TREE_ITEMS_ING = [
+	['SIGA', null,
+		['Ingresos', null,
+			['Definiciones Generales', null,
+				['Asignacion Inicial', Ingresos+'ingasiini'],
+			],
+		],
+	],
+];
+
+
 var TREE_ITEMS_MAIN = [
 	['SIGA', null,
 		['Contabilidad Presupuestaria', servidor+'/sistemafull/aplicaciones/presupuesto/index.php'],
 		['Contabilidad Financiera', servidor+'/sistemafull/aplicaciones/contabilidad/index.php'],
 		['Compras Y Almacen', 'principal/menu/m/compras'],
+		['Ingresos', 'principal/menu/m/ingresos'],
 		['Tesorer&iacute;a', 'principal/menu/m/tesoreria'],
 		['Nomina', 'principal/menu/m/nomina'],
 		['Formulacicn', 'principal/menu/m/formulacion'],
