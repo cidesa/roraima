@@ -66,6 +66,10 @@
            <source>results</source>
            <target>Resultados</target>
          </trans-unit>
+         <trans-unit id="17">
+           <source>There are some errors that prevent the form to validate</source>
+           <target>Hay algunos Errores en el Formulario</target>
+         </trans-unit>
        </body>
     </file>
 </xliff>
