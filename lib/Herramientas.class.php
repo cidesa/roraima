@@ -7,7 +7,7 @@
  * @package    Siga
  * @subpackage lib
  * @author     Grupo Desarrollo Cidesa <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: Herramientas.class.php $
+ * @version    SVN: $Id: $
  * @copyright  Copyright 2007, Cidesa C.A.
  * 
  */
