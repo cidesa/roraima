@@ -3,17 +3,12 @@
 <?php 
 	$i=1;
 	$cod='';
-	while ($sf_request->hasParameter('objeto'.$i))
+	while ($sf_request->hasParameter('obj'.$i))
 	{
-		$cod=$cod."f.".$sf_request->getParameter('frame','formid').".".$sf_request->getParameter('objeto'.$i,'objeto'.$i).".value=val[".$i."];
+		$cod=$cod."f.".$sf_request->getParameter('frame','formid').".".$sf_request->getParameter('obj'.$i,'obj'.$i).".value=val[".($i-1)."];
 ";	
 		$i++;
 	}
-	
-
-
-
-
  ?>
 
 <?php $js = "  
@@ -74,16 +69,20 @@
 		  	 		echo '<tr>';
           	 		foreach($campos as $c)														
           				{
-         					$dat='$par="a=new Array(';
+         					$dat='$par="var a=new Array(';
          					$k=1;
-							while ($sf_request->hasParameter('objeto'.$k))
+							while ($sf_request->hasParameter('obj'.$k))
 							{
-								$info = '$infoget = $fila->get'.$campos[$k].'();';
+								if($k!=1) $dat = $dat.",";
+								$info = '$infoget = $fila->get'.$campos[$k-1].'();';
 								eval($info);
-								$dat = $dat."'".$infoget."',";
+								$dat = $dat."'".$infoget."'";
 								$k++;
 							}
 							$dat = $dat.');";';
+							//print $dat; 
+							
+							
           					
           					
           					$cod= '$val=$fila->get'.$c.'();';	
@@ -93,7 +92,7 @@
 		  					if($i==0) {
 		  						eval($dat);
 		  						//print $par;
-		  						echo '<td>'; echo link_to_function($val, 'javascript:aceptar('.$par.')'); echo '</td>';
+		  						echo '<td>'; echo link_to_function($val, $par.'javascript:aceptar(a)'); echo '</td>';
 		  								};
 		  					if($i!=0 && $c!='Id') echo '<td>'.$val.'</td>';										
 											
