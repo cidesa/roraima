@@ -76,7 +76,7 @@ echo grid_tag($obj);
 
 
 
-<?php include_partial('edit_actions', array('ciasiini' => $ciasiini,'obj'=>$this->obj)) ?>
+<?php include_partial('edit_actions', array('ciasiini' => $ciasiini,'obj'=>$obj)) ?>
 
 </form>
 

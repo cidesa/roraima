@@ -70,6 +70,7 @@ class ingasiiniActions extends autoingasiiniActions
 	$alignf=array("center","right");
 	$alignt=array("center","right");
 	$campos=array("Perpre","Mondis");
+	$tipos=array("t","m"); //texto, monto, fecha
 	$montos=array("2");
 	$totales=array("total");
 	$html=array('type="text" size="2"','type="text" size="10"');
@@ -77,8 +78,8 @@ class ingasiiniActions extends autoingasiiniActions
 	$grabar=array("1","2");
 	
 	$this->obj=array('filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 'anchos'=>$anchos,
-	'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'montos'=>$montos, 'totales'=>$totales,
-	'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
+	'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'tipos' => $tipos, 'montos'=>$montos, 
+	'totales'=>$totales, 'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
 	//////////////////////
 
 
@@ -150,36 +151,44 @@ class ingasiiniActions extends autoingasiiniActions
   	$col=count($this->obj["grabar"]);
   	$grabar=$this->obj["grabar"];
   	$campos=$this->obj["campos"];
-  	while ($i<2)
+  	while ($i<$fil)
   	{
 	  	$id='x'.$i.'id';
-		
 	  	if ($this->getRequestParameter($id)!="") //modificacion
 	  	{
 	  		$tabla = 'Ciasiini';
-	  		//$clase = $this->getCiasiiniOrCreate();
 	  		$clase = CiasiiniPeer::retrieveByPk($this->getRequestParameter($id));
 	  		$j=0;
 	  		
 			while ($j<$col)
 			{
-				$pos=$grabar[$j];
+				$pos=intval($grabar[$j]);
 				$caja='x'.$i.$pos;
-				eval('$clase->set'.$campos[$pos+1].'($this->getRequestParameter('.$caja.'));');
+				$tira1='$clase->set';
+				$tira2='(';
+				$tira3=');';
+				$valor = $this->getRequestParameter($caja);
+				eval($tira1.$campos[$pos-1].$tira2.$valor.$tira3);
 	  		$j++;
 			}
 	  	}
 	  	else //nuevo
 	  	{
+	  		$clase = new Ciasiini();
+	  		
+	  		
 	  		
 	  		
 	  	}
   	
-	$clase->save();
+	  	$objetos[] = $clase;
+	//$clase->save();
 	  	
   	$i++;
   	} 	
-  	
+      
+   //return sfView::SUCCESS;
+	//exit();
   	
   	//////////////////
     //$ciasiini->save();
