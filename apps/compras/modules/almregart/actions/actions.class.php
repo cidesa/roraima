@@ -10,7 +10,7 @@
  */
 class almregartActions extends autoalmregartActions
 {
- public function validateEdit()
+ public function validate11Edit()
   {
   	$formarp=array();
   	$formarp=$this->FormarCodigoPadre(&$nivelcodigo,&$padre);
@@ -141,7 +141,7 @@ class almregartActions extends autoalmregartActions
  public function FormarCodigoPadre(&$nivelcodigo,&$padre)
  {  
  	 $codigo=$this->caregart[0]->getCodart;
- 	 $nivelcodigo='';
+ 	 
  	 $padre=array();
  	 $c = new Criteria();  	  
   	 $this->arti = CadefartPeer::doSelect($c);
@@ -344,5 +344,9 @@ class almregartActions extends autoalmregartActions
       'caregart{invini}' => 'Inicial:',
     );
   } 
-  
+
+ protected function saveCaregart($caregart)
+  {
+    Articulos::salvarAlmregart($caregart);    
+  }  
 }
