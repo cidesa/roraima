@@ -1,7 +1,19 @@
 <?php
-function grid_tag($filas,$eliminar,$titulos,$anchos,$alignf,$alignt,$campos,$montos,$totales,$html,$js,$datos)
+function grid_tag($obj)
 {
-
+	$filas=$obj["filas"];	
+	$eliminar=$obj["eliminar"];
+	$titulos=$obj["titulos"];
+	$anchos=$obj["anchos"];
+	$alignf=$obj["alignf"];
+	$alignt=$obj["alignt"];
+	$campos=$obj["campos"];
+	$montos=$obj["montos"];
+	$totales=$obj["totales"];
+	$html=$obj["html"];
+	$js=$obj["js"];
+	$datos=$obj["datos"];
+	
 	$cuantos2=count($montos);
 	
 	
@@ -60,9 +72,17 @@ function grid_tag($filas,$eliminar,$titulos,$anchos,$alignf,$alignt,$campos,$mon
 				{
 					$get="";		
 				}
-	 			
+
+				if ($j==1)
+				{
 	 				$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
+								  value="'.$get.'" ><input type="hidden" id="x'.$i.'id" name="x'.$i.'id" value="'.$datos[$i]->getId().'"></td>';
+				}
+				else
+				{
+					$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
 								  value="'.$get.'" ></td>';
+				}
 	 			$acumtagw = $acumtagw.$tagw;
 	 		$j++;
 	 		}
@@ -92,8 +112,16 @@ function grid_tag($filas,$eliminar,$titulos,$anchos,$alignf,$alignt,$campos,$mon
 	 			$jmasuno=$j+1;
 	 			$campo=$campos[$j];
 	 			
+	 			if ($j==1)
+	 			{
+	 				$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
+								  value="" ><input type="hidden" id="x'.$i.'id" name="x'.$i.'id" value=""></td>';
+	 			}
+	 			else
+	 			{
 	 				$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
 								  value="" ></td>';
+	 			}
 	 			$acumtagw = $acumtagw.$tagw;
 	 		$j++;
 	 		}

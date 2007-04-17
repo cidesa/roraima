@@ -66,30 +66,20 @@
 
 
 
-
+<form name="form1" id="form1">
 <?
-$filas=17;
-$eliminar=true;
-$titulos=array("Periodo","Monto");
-$anchos=array("3%","94%");
-$alignf=array("center","right");
-$alignt=array("center","right");
-$campos=array("Perpre","Mondis");
-$montos=array("2");
-$totales=array("total");
-$html=array('type="text" size="2"','type="text" size="10"');
-$js=array('','onKeypress="entermonto(event,this.id)"');
-
-
-
-echo grid_tag($filas,$eliminar,$titulos,$anchos,$alignf,$alignt,$campos,$montos,$totales,$html,$js,$per);
+echo grid_tag($obj);
 ?>
+</form>
 
 
 
-<?php include_partial('edit_actions', array('ciasiini' => $ciasiini)) ?>
+
+
+<?php include_partial('edit_actions', array('ciasiini' => $ciasiini,'obj'=>$this->obj)) ?>
 
 </form>
+
 
 <ul class="sf_admin_actions">
       <li class="float-left"><?php if ($ciasiini->getId()): ?>

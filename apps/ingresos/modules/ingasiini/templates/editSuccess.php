@@ -18,7 +18,7 @@ array()) ?></h1>
 <div id="sf_admin_content">
 <?php include_partial('ingasiini/edit_messages', array('ciasiini' => $ciasiini, 'labels' => $labels)) ?>
 <?php include_partial('ingasiini/edit_form', array('ciasiini' => $ciasiini,
- 'labels' => $labels, 'per' => $per)) ?>
+ 'labels' => $labels, 'obj' => $obj)) ?>
 </div>
 
 <div id="sf_admin_footer">

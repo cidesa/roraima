@@ -10,8 +10,8 @@
  */
 class ingasiiniActions extends autoingasiiniActions
 {
-
-    public function periodo2()    
+    
+   public function periodo2()    
     {
     if ($this->ciasiini->getCodpre()!='')
     {
@@ -54,15 +54,34 @@ class ingasiiniActions extends autoingasiiniActions
   public function executeEdit()
   {
     $this->ciasiini = $this->getCiasiiniOrCreate();
-    
+
+    //////////////////////
+    //GRID
     $c = new Criteria();
 	$c->add(CiasiiniPeer::CODPRE,str_pad($this->ciasiini->getCodpre(),32,' '));
 	$c->add(CiasiiniPeer::PERPRE,'00',Criteria::NOT_EQUAL);
 	$c->addAscendingOrderByColumn(CiasiiniPeer::PERPRE);
-	$this->per = CiasiiniPeer::doSelect($c);
+	$per = CiasiiniPeer::doSelect($c);
 	
+	$filas=17;
+	$eliminar=true;
+	$titulos=array("Periodo","Monto");
+	$anchos=array("3%","94%");
+	$alignf=array("center","right");
+	$alignt=array("center","right");
+	$campos=array("Perpre","Mondis");
+	$montos=array("2");
+	$totales=array("total");
+	$html=array('type="text" size="2"','type="text" size="10"');
+	$js=array('','onKeypress="entermonto(event,this.id)"');
+	$grabar=array("1","2");
+	
+	$this->obj=array('filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 'anchos'=>$anchos,
+	'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'montos'=>$montos, 'totales'=>$totales,
+	'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
+	//////////////////////
 
-    //$this->per = $this->periodo();
+
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -91,7 +110,7 @@ class ingasiiniActions extends autoingasiiniActions
     }
   }
   
-    protected function updateCiasiiniFromRequest()
+  protected function updateCiasiiniFromRequest()
     {
     $ciasiini = $this->getRequestParameter('ciasiini');
 
@@ -120,9 +139,51 @@ class ingasiiniActions extends autoingasiiniActions
     $this->ciasiini->setMondis(250);
     $this->ciasiini->setDifere(0);
     $this->ciasiini->setStatus('A');
-    
-    
+     
   }
   
+  protected function saveCiasiini($ciasiini)
+  {
+  	
+  	$i=0;
+  	$fil=$this->obj["filas"];
+  	$col=count($this->obj["grabar"]);
+  	$grabar=$this->obj["grabar"];
+  	$campos=$this->obj["campos"];
+  	while ($i<2)
+  	{
+	  	$id='x'.$i.'id';
+		
+	  	if ($this->getRequestParameter($id)!="") //modificacion
+	  	{
+	  		$tabla = 'Ciasiini';
+	  		//$clase = $this->getCiasiiniOrCreate();
+	  		$clase = CiasiiniPeer::retrieveByPk($this->getRequestParameter($id));
+	  		$j=0;
+	  		
+			while ($j<$col)
+			{
+				$pos=$grabar[$j];
+				$caja='x'.$i.$pos;
+				eval('$clase->set'.$campos[$pos+1].'($this->getRequestParameter('.$caja.'));');
+	  		$j++;
+			}
+	  	}
+	  	else //nuevo
+	  	{
+	  		
+	  		
+	  	}
+  	
+	$clase->save();
+	  	
+  	$i++;
+  	} 	
+  	
+  	
+  	//////////////////
+    //$ciasiini->save();
+
+  }
     
 }
