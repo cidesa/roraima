@@ -60,7 +60,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
     <? echo label_for('lab','Monto a Estimar','class="required"');?>
-    <? echo input_tag('monto','','class="required",size=20');?>
+    <? echo input_tag('monto','','class="required",size=25');?>
 </div>
 </fieldset>
 

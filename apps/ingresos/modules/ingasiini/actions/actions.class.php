@@ -70,10 +70,10 @@ class ingasiiniActions extends autoingasiiniActions
 	$alignf=array("center","right");
 	$alignt=array("center","right");
 	$campos=array("Perpre","Mondis");
-	$tipos=array("t","m"); //texto, monto, fecha
+	$tipos=array("t","m"); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
 	$montos=array("2");
 	$totales=array("total");
-	$html=array('type="text" size="2"','type="text" size="10"');
+	$html=array('type="text" size="2"','type="text" size="25"');
 	$js=array('','onKeypress="entermonto(event,this.id)"');
 	$grabar=array("1","2");
 	
@@ -151,14 +151,17 @@ class ingasiiniActions extends autoingasiiniActions
   	$col=count($this->obj["grabar"]);
   	$grabar=$this->obj["grabar"];
   	$campos=$this->obj["campos"];
+  	$tipos=$this->obj["tipos"];
   	while ($i<$fil)
   	{
+  		$j=0;
+  		$tabla = 'Ciasiini';
 	  	$id='x'.$i.'id';
+	  	$cajchk='x'.$i.'1';
+	  	
 	  	if ($this->getRequestParameter($id)!="") //modificacion
 	  	{
-	  		$tabla = 'Ciasiini';
 	  		$clase = CiasiiniPeer::retrieveByPk($this->getRequestParameter($id));
-	  		$j=0;
 	  		
 			while ($j<$col)
 			{
@@ -167,23 +170,46 @@ class ingasiiniActions extends autoingasiiniActions
 				$tira1='$clase->set';
 				$tira2='(';
 				$tira3=');';
-				$valor = $this->getRequestParameter($caja);
+				if ($tipos[$j]=="t")
+				{
+					$valor = "'".$this->getRequestParameter($caja)."'";
+				}
+				elseif ($tipos[$j]=="m")
+				{
+					$valor = str_replace(",","",$this->getRequestParameter($caja));
+				}
 				eval($tira1.$campos[$pos-1].$tira2.$valor.$tira3);
 	  		$j++;
 			}
 	  	}
-	  	else //nuevo
+	  	elseif ( ($this->getRequestParameter($id)=="") && (trim($this->getRequestParameter($cajchk)!="")) ) //nuevo
 	  	{
 	  		$clase = new Ciasiini();
 	  		
-	  		
-	  		
+	  		while ($j<$col)
+			{
+				$pos=intval($grabar[$j]);
+				$caja='x'.$i.$pos;
+				$tira1='$clase->set';
+				$tira2='(';
+				$tira3=');';
+				if ($tipos[$j]=="t")
+				{
+					$valor = "'".$this->getRequestParameter($caja)."'";
+				}
+				elseif ($tipos[$j]=="m")
+				{
+					$valor = str_replace(",","",$this->getRequestParameter($caja));
+				}
+				eval($tira1.$campos[$pos-1].$tira2.$valor.$tira3);
+	  		$j++;
+			}
 	  		
 	  	}
   	
-	  	$objetos[] = $clase;
+	$objetos[] = $clase;
 	//$clase->save();
-	  	
+	 	
   	$i++;
   	} 	
       
