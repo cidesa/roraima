@@ -119,3 +119,25 @@ function format(nStr, inD, outD, sep)
 			document.getElementById(id).value=format(valor.toFixed(2),'.','.',',');			
 			}
 		}
+  function rayitas(tira)
+		{				
+				long=tira.length;
+				i=1;
+				if (long > 1)
+				{
+					i=long;
+					while (i>0)
+					{
+						if ( (tira.charAt(i)=='0') || (tira.charAt(i)=='1') || (tira.charAt(i)=='2') || (tira.charAt(i)=='3') || (tira.charAt(i)=='4') || (tira.charAt(i)=='5') || (tira.charAt(i)=='6') || (tira.charAt(i)=='7') || (tira.charAt(i)=='8') || (tira.charAt(i)=='9'))
+						{
+							hasta=i+1;
+							i=0;
+						}
+						i=i-1;
+					}
+				tira= tira.substring(0,hasta);
+				return tira;
+				}
+			
+			
+		}
