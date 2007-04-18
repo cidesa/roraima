@@ -1,7 +1,8 @@
 <?php
 function grid_tag($obj)
 {
-	$filas=$obj["filas"];	
+	$filas=$obj["filas"];
+	$cabeza=$obj["cabeza"];	
 	$eliminar=$obj["eliminar"];
 	$titulos=$obj["titulos"];
 	$anchos=$obj["anchos"];
@@ -9,6 +10,7 @@ function grid_tag($obj)
 	$alignt=$obj["alignt"];
 	$campos=$obj["campos"];
 	$montos=$obj["montos"];
+	$filatotal=$obj["filatotal"];
 	$totales=$obj["totales"];
 	$html=$obj["html"];
 	$js=$obj["js"];
@@ -19,9 +21,9 @@ function grid_tag($obj)
 	
  $tagsrc='<script language="JavaScript"  src="/js/tools.js"></script>';
  $tag = ' <fieldset>
-			<legend>Estimacion Periodica</legend>
+			<legend>'.$cabeza.'</legend>
 			
-			
+			'.$filatotal.'
 			<table border="0" cellpad="0" cellspace="0" class="sf_admin_list">
 			     <tr valign="bottom" bgcolor="#ECEBE6"> 
 			         <td height="1"> 
@@ -138,17 +140,10 @@ function grid_tag($obj)
 			             </div>
 			         </td>
 			      </tr>
-			      <tr>
-			      	<td width="80%" align="right">
-			      		<input class="grid_txtright" type="text" id="total" name="total">
-			      	</td>
-			      	<td width="20%">
-			      	</td>
-			      </tr>
 			</table>	
 			
 			</fieldset>
-
+			<input type="hidden" name="txtidborrar" id="txtidborrar" value="">
 			<script type="text/javascript">
 				actualizarsaldos();
 			</script>';
@@ -233,10 +228,28 @@ function grid_tag($obj)
 
 		function eliminar(i,c)
 	    {
-	   		f=document.form1;
+			
+			// guardamos el id a borrar
+			var id = "x"+i+"id";
+			var aux = "txtidborrar";
+			if (document.getElementById(id).value!="") //chekeamos q sea no sea una fila nueva
+			{
+				if (document.getElementById(aux).value=="") //PARA Q NO LE PONGA RAYITA
+				{
+					document.getElementById(aux).value=document.getElementById(id).value;
+				}
+				else
+				{
+					document.getElementById(aux).value=document.getElementById(aux).value + "-" + document.getElementById(id).value;
+				}
+			}
+			////////////////////////////
+
 			var fila;
 			for (fila=i;fila<'.$filas.'-1;fila++)
-			{				
+			{
+					
+
 				for (col=1;col<=c;col++)
 				{							
 					var x="x"+fila+col;

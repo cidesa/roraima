@@ -63,7 +63,9 @@ class ingasiiniActions extends autoingasiiniActions
 	$c->addAscendingOrderByColumn(CiasiiniPeer::PERPRE);
 	$per = CiasiiniPeer::doSelect($c);
 	
+	
 	$filas=17;
+	$cabeza="Estimacion Periodica";
 	$eliminar=true;
 	$titulos=array("Periodo","Monto");
 	$anchos=array("3%","94%");
@@ -76,10 +78,20 @@ class ingasiiniActions extends autoingasiiniActions
 	$html=array('type="text" size="2"','type="text" size="25"');
 	$js=array('','onKeypress="entermonto(event,this.id)"');
 	$grabar=array("1","2");
+	$filatotal='<table>
+				   <tr>
+				   	<th width="72%">
+				   	</th>
+				   	<th width="28%">
+				   		<input class="grid_txtright" type="text" id="total" name="total" size="25">
+				   	</th>
+				   </tr>
+				</table>';
 	
-	$this->obj=array('filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 'anchos'=>$anchos,
-	'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'tipos' => $tipos, 'montos'=>$montos, 
-	'totales'=>$totales, 'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
+	$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
+	'anchos'=>$anchos, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'tipos' => $tipos, 
+	'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 'html'=>$html, 'js'=>$js, 
+	'datos'=>$per, 'grabar'=>$grabar);
 	//////////////////////
 
 
@@ -152,6 +164,11 @@ class ingasiiniActions extends autoingasiiniActions
   	$grabar=$this->obj["grabar"];
   	$campos=$this->obj["campos"];
   	$tipos=$this->obj["tipos"];
+  	$eliminar=split("-",$this->getRequestParameter('eliminar'));
+  	
+  	
+  	////////////////////////////////////////
+	// CREAMOS EL ARREGLO DE OBJETOS A INCLUIR Y MODIFICAR 
   	while ($i<$fil)
   	{
   		$j=0;
@@ -213,10 +230,22 @@ class ingasiiniActions extends autoingasiiniActions
   	$i++;
   	} 	
       
-   //return sfView::SUCCESS;
-	//exit();
+	////////////////////////////////////////
+	// CREAMOS EL ARREGLO DE OBJETOS A ELIMINAR
+  	$i=0;
   	
-  	//////////////////
+  	while ($i<count($eliminar))
+  	{
+  		
+		$clase2 = CiasiiniPeer::retrieveByPk($eliminar[$i]);
+		
+		$objetos2[] = $clase;
+		
+  	$i++;	
+  	}
+  	
+  	$resultado=array($objetos,$objetos2);
+	//exit();
     //$ciasiini->save();
 
   }

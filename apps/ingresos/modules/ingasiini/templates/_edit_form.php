@@ -70,9 +70,8 @@
 <?
 echo grid_tag($obj);
 ?>
+<input type="button" value="mostrar" onclick="alert(document.getElementById('txtidborrar').value)">
 </form>
-
-
 
 
 
