@@ -9,17 +9,22 @@
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
  */
 class almregartActions extends autoalmregartActions
-{ private $coderror=-1;
+{ 
+    private static $coderror=-1;
+    
 	public function validateEdit()
 	  {  
 	  	
 	  	if($this->getRequest()->getMethod() == sfRequest::POST)
 	    { 
-	    	$coderror=Articulos::validarAlmregart($this->caregart);
-	    	if ($coderror<>-1){
+	    	$this->caregart = $this->getCaregartOrCreate();
+	    	$this->updateCaregartFromRequest();
+	    	self::$coderror=Articulos::validarAlmregart($this->caregart);
+	    	//print 'CodError='.self::$coderror;
+	    	if (self::$coderror<>-1){
 	    		return false;
-	    	}
-	    }return true;   
+	    	}else return true;
+	    }else return true;   
 	  }  
 	public function getObtener_Mascaracontable()
 	  {
@@ -113,6 +118,7 @@ class almregartActions extends autoalmregartActions
 	    	return '';
 	    }    
 	 }  
+	 
 	public function executeList()
 	  {
 	    $this->processSort();
@@ -138,7 +144,9 @@ class almregartActions extends autoalmregartActions
 	    $this->mascaraarticulo = $this->getObtener_Mascaraarticulo();
 	    $this->mascaracontabilidad = $this->getObtener_Mascaracontable();    
 	    $this->mascarapartida = $this->getObtener_Mascarapartida();
-	    $this->mascaraubicacion = $this->getObtener_Mascaraubicacion();    
+	    $this->mascaraubicacion = $this->getObtener_Mascaraubicacion();
+
+	    //if($result) print count($obj); 
 	
 	    if ($this->getRequest()->getMethod() == sfRequest::POST)
 	    {
@@ -171,8 +179,14 @@ class almregartActions extends autoalmregartActions
 	    $this->preExecute();
 	    $this->caregart = $this->getCaregartOrCreate();
 	    $this->updateCaregartFromRequest();
-	    Herramientas::ObtenerDescripcionError($coderror);	    
-	    $this->labels = $this->getLabels();   
+	    $this->labels = $this->getLabels();
+	    
+	    //print self::$coderror.'>>>===>>>';
+	    
+	    $err = Herramientas::obtenerMensajeError(self::$coderror);
+	    
+	    $this->getRequest()->setError('caregart{codart}',$err);
+
 	    return sfView::SUCCESS;
 	  }  
 	protected function updateCaregartFromRequest()

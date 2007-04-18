@@ -200,7 +200,7 @@ if ($caregart->getTipo()=='A')	{
   <?php $value = object_input_tag($caregart, 'getExitot', array (
   'size' => 7,
   'control_name' => 'caregart[exitot]',
-  'onKeyPres' => "javascript:return entermonto(event, this.id,this.id)",  
+  'onKeyPress' => "javascript:return entermonto(event, this.id,this.id)",  
 ), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 &nbsp;
