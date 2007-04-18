@@ -25,8 +25,11 @@
 	<?php } elseif($menu=='formulacion') { ?>
 	<?php echo javascript_tag("new tree (TREE_ITEMSCOM_FOR, tree_tpl);");?>
     <?php } elseif($menu=='ingresos') { ?>
-	<?php echo javascript_tag("new tree (TREE_ITEMS_ING, tree_tpl);");?>
-    <?php }?>
+    <?php echo javascript_tag("new tree (TREE_ITEMS_ING, tree_tpl);");?> 
+    <?php } elseif($menu=='obra') { ?>
+    <?php echo javascript_tag("new tree (TREE_ITEMSCOM_OBR, tree_tpl);");?>
+	<?php }?>
+    
 	</td>
     <td class="box02_rline">&nbsp;</td>
   </tr>
