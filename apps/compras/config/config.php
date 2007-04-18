@@ -11,9 +11,11 @@ if($so == 'Windows')
 else
 {
 	// symfony bootstraping para Linux
-	require_once($sf_symfony_lib_dir.'/util/sfCore.class.php');	
+	require_once($sf_symfony_lib_dir.'/util/sfCore.class.php');		
 }
 
 sfCore::bootstrap($sf_symfony_lib_dir, $sf_symfony_data_dir);
 
+
 include('Constantes.class.php');
+include('lib/business/compras/Articulos.class.php');

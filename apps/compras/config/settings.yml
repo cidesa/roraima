@@ -65,11 +65,11 @@ all:
 #    suffix:                 .         # Default suffix for generated URLs. If set to a single dot (.), no suffix is added. Possible values: .html, .php, and so on.
 #    no_script_name:         off       # Enable the front controller name in generated URLs
 #
-#    # Validation settings, used for error generation by the Validation helper
-#    validation_error_prefix:    ' &darr;&nbsp;'
-#    validation_error_suffix:    ' &nbsp;&darr;'
-#    validation_error_class:     form_error
-#    validation_error_id_prefix: error_for_
+     Validation settings, used for error generation by the Validation helper
+     validation_error_prefix:    ' &darr;&nbsp;'
+     validation_error_suffix:    ' &nbsp;&darr;'
+     validation_error_class:     form_error
+     validation_error_id_prefix: error_for_
 #
 #    # Cache settings
 #    cache:                  off       # Enable the template cache
@@ -86,7 +86,7 @@ all:
 #    web_debug_web_dir:      /sf/sf_web_debug
 #
 #    # Helpers included in all templates by default
-#    standard_helpers:       [Partial, Cache, Form]
+    standard_helpers:       [Partial, Cache, Form]
 #
 #    # Activated modules from plugins or from the symfony core
 #    enabled_modules:        [default]
