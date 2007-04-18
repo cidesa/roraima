@@ -57,6 +57,7 @@ class Herramientas
 		if (count($rs)>0) return true; else return false;
 	}
 	
+	
 	public static function instr($palabra,$busqueda,$comienzo,$concurrencia){
 		
 		$tamano=strlen($palabra);
@@ -81,6 +82,7 @@ class Herramientas
 		
 		return $instr=$cont;
 		}
+		
 		
 	public static function FormarCodigoPadre($codigo,&$nivelcodigo,&$ultimo)
 	 {   $nivelcodigo=''; 	 
@@ -128,6 +130,16 @@ class Herramientas
 		    	}
 		    }		
 	     }
+	     
+  public static function obtenerMensajeError($cod)
+  {
+  	
+  	$errores = sfYaml::load('../config/errores.yml');
+  	
+  	return $errores[$cod]['msj'];
+  	
+  }
+	     
 }
 
 

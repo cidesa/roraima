@@ -15,27 +15,21 @@ class Articulos
 //
 	public static function validarAlmregart($articulo)
 		{
-			self::validarCodart($articulo);
+			return self::validarCodart($articulo);
 		
 	    }
 	public static function validarCodart($articulo)
 	{
-	//$error = False;
-	
-  	$codart=($articulo['codart']);  		
-  	Herramientas::FormarCodigoPadre($codart,&$nivelcodigo,&$ultimo);  	  		
-  	  if (!(Herramientas::buscar_codigo_padre($ultimo))){
-  	  	If ($nivelcodigo <> 1){
-  	  		return 1;
-  	  		//$this->getRequest()->setError('caregart{codart}','El Nivel Anterior No Existe'); 
-  	  		//$error = TRUE;  	  		
-  	  	} 
-  	  	return -1; 	  	
-  	  }  	
-   /*if($error)
-      {
-        return false;
-      }*/
+
+	  	$codart=$articulo->getCodart();  
+
+	  	Herramientas::FormarCodigoPadre($codart,&$nivelcodigo,&$ultimo);  	  		
+	  	  if (!(Herramientas::buscar_codigo_padre($ultimo))){
+	  	  	If ($nivelcodigo == 0){
+	  	  		return 11;
+	  	  	} else return -1;	
+	  	  }else return -1;
+	  	    	
 	}
 }
 
