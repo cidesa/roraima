@@ -4,7 +4,7 @@ var Tesoreria= '/tesoreria_dev.php/';
 var Nomina='/nomina_dev.php/';
 var Ingresos='/ingresos_dev.php/';
 var Formulacion='/formulacion_dev.php/';
-var Obra_cont='/obra_cont_dev.php/';
+var Obra='/obras_dev.php/';
 var Inv_coloc='/inv_coloc_dev.php/';
 var Cred_cobr='/cred_cobr_dev.php/';
 
@@ -488,6 +488,22 @@ var TREE_ITEMS_ING = [
 ];
 
 
+var TREE_ITEMSCOM_OBR = [
+	['SIGA', null,
+		['Obras y Contrato', null,
+			['Definiciones Generales', null,
+				['Registro de Información del Sistema', null,
+					['Recaudos', Obra+'oycdatsol'],
+					['Retenciones', Obra+'oycdefret'],
+					['Tipos de Actas', Obra+'oycdeftipact'],
+					['Unidades', Obra+'oycdefuni'],
+				],
+			],
+		],
+	],
+];
+
+
 var TREE_ITEMS_MAIN = [
 	['SIGA', null,
 		['Contabilidad Presupuestaria', servidor+'/sistemafull/aplicaciones/presupuesto/index.php'],
@@ -497,7 +513,7 @@ var TREE_ITEMS_MAIN = [
 		['Tesorer&iacute;a', 'principal/menu/m/tesoreria'],
 		['Nomina', 'principal/menu/m/nomina'],
 		['Formulacicn', 'principal/menu/m/formulacion'],
-		['Obras y Contratos', 'principal/menu/m/obra_cont'],
+		['Obras y Contratos', 'principal/menu/m/obra'],
 		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
 		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
       ]
