@@ -15,10 +15,10 @@ class Articulos
 //
 	public static function validarAlmregart($articulo)
 		{
-			self::validarCodart($articulo, &$coderror);
+			self::validarCodart($articulo);
 		
 	    }
-	public static function validarCodart($articulo,&$coderror)
+	public static function validarCodart($articulo)
 	{
 	//$error = False;
 	
@@ -26,10 +26,11 @@ class Articulos
   	Herramientas::FormarCodigoPadre($codart,&$nivelcodigo,&$ultimo);  	  		
   	  if (!(Herramientas::buscar_codigo_padre($ultimo))){
   	  	If ($nivelcodigo <> 1){
-  	  		$coderror=1;
+  	  		return 1;
   	  		//$this->getRequest()->setError('caregart{codart}','El Nivel Anterior No Existe'); 
   	  		//$error = TRUE;  	  		
-  	  	}  	  	
+  	  	} 
+  	  	return -1; 	  	
   	  }  	
    /*if($error)
       {

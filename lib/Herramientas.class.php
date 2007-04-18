@@ -114,5 +114,20 @@ class Herramientas
 		   else{	   
 		      return false;}	
 		}
+		
+	public static function ObtenerDescripcionError($codigoerror)
+		{
+		if ($codigoerror=1)
+			{
+			return 'El Nivel Anterior No Existe';		
+		    }
+		    else
+		    { if ($codigoerror=2)
+		    	{
+		    		return 'XXXXXXX';
+		    	}
+		    }		
+	     }
 }
+
 
