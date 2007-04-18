@@ -16,7 +16,7 @@
    {     
      f=opener.document;".
 	 "".$cod."
-     window.close();
+     self.close();
    }
 "; ?>
 <?php echo javascript_tag($js); ?>
@@ -39,8 +39,8 @@
         <tbody>
           <tr>
             <td style="width: 182px; text-align: right;">Filtro</td>
-            <td><?php echo input_tag('filtro', '') ?></td>
-            <td><?php echo submit_tag('Buscar') ?></td>
+            <td><?php echo input_tag('filtro', '') ?><?php echo submit_tag('Buscar') ?></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
