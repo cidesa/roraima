@@ -14,7 +14,7 @@
     <div class="form-row">
     <label for="codart"><?php echo __('Codigo del Articulo:') ?></label>
     <div class="content">
-    <?php echo input_tag('filters[codart]', isset($filters['codart']) ? $filters['codart'] : null, array (
+    <?php echo input_tag('filters[codart]', isset($filters['codart']) ? str_pad($filters['codart'], 20 , ' '): null, array (
   'size' => 15,
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraarticulo')",  
 )) ?>

@@ -8,9 +8,10 @@
   'multipart' => true,
 )) ?>
 <?php use_helper('Javascript') ?>
-<?php use_helper('Number') ?>
+<?php use_helper('PopUp') ?>
 <?php echo javascript_include_tag('dFilter') ?>
 <?php echo javascript_include_tag('validaciones') ?>
+<?php echo javascript_include_tag('ajax') ?>
 
 <?php echo object_input_hidden_tag($caregart, 'getId') ?>
 
@@ -29,6 +30,7 @@
   'size' => 15,
   'control_name' => 'caregart[codart]',
   'maxlegth' => 20,
+  'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('caregart_codart').value=cadena;",
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraarticulo')",
 )); echo $value ? $value : '&nbsp;' ?> </div></td>
     <td width="27%"><?
@@ -49,7 +51,8 @@ if ($caregart->getTipo()=='A')	{
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
-<?php echo button_to('...','#')?></td>
+<?php echo button_to_popup('...','generales/catalogo?clase=Contabb&frame=sf_admin_edit_form&obj1=caregart_codcta')?>
+</td>
   </tr>
 </table>   
 </div>
@@ -79,14 +82,19 @@ if ($caregart->getTipo()=='A')	{
   <?php $value = object_input_tag($caregart, 'getRamart', array (
   'size' => 20,
   'control_name' => 'caregart[ramart]',
-  'maxlength' => 6,  
+  'maxlength' => 6,    
+  'onBlur'=> remote_function(array(
+			  'url'      => 'almregart/mostrardato?par=1',  			   
+			  'complete' => 'mostrardatosJSON(request, json)',
+  			  'with' => "'codigo='+this.value"
+			  )),    
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;
-<?php echo input_tag('tiporamo',$tiporamo,'size=50,disabled=true') ?>
-
-  <!-- <div class="sf_admin_edit_help">< ?php echo __('Máximo 6 caracteres') ?></div>  --> </div>
+ <?php echo button_to_popup('...','generales/catalogo?clase=Caramart&frame=sf_admin_edit_form&obj1=caregart_ramart&obj2=nom_ram')?>
+  <?php if (isset($nom_ram)): ?>
+	<?php echo input_tag('nom_ram',$nom_ram,'size=50,disabled=true'); ?>
+  <?php endif; ?> 
+  </div>
 </div>
 
 <div class="form-row">
@@ -103,7 +111,8 @@ if ($caregart->getTipo()=='A')	{
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascarapartida')",
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
-<?php echo button_to('...','#')?>
+<?php echo button_to_popup('...','generales/catalogo?clase=Nppartidas&frame=sf_admin_edit_form&obj1=caregart_codpar')?>
+   
 &nbsp;
 &nbsp;
 &nbsp;
