@@ -13,6 +13,28 @@ class Articulos
 			self::Grabar_Articulo($articulo);			
 		}
 //
-
+	public static function validarAlmregart($articulo)
+		{
+			self::validarCodart($articulo, &$coderror);
+		
+	    }
+	public static function validarCodart($articulo,&$coderror)
+	{
+	//$error = False;
+	
+  	$codart=($articulo['codart']);  		
+  	Herramientas::FormarCodigoPadre($codart,&$nivelcodigo,&$ultimo);  	  		
+  	  if (!(Herramientas::buscar_codigo_padre($ultimo))){
+  	  	If ($nivelcodigo <> 1){
+  	  		$coderror=1;
+  	  		//$this->getRequest()->setError('caregart{codart}','El Nivel Anterior No Existe'); 
+  	  		//$error = TRUE;  	  		
+  	  	}  	  	
+  	  }  	
+   /*if($error)
+      {
+        return false;
+      }*/
+	}
 }
 
