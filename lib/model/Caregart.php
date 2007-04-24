@@ -36,4 +36,11 @@ class Caregart extends BaseCaregart
 		if($data!='') return number_format($data,2,'.',',');
 
 	}
+ 
+	
+  public function getNomram()
+  {
+  	return Herramientas::getX('RAMART','Caramart','Nomram',self::getRamart());
+  }
+	 
 }

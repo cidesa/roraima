@@ -9,4 +9,5 @@
  */ 
 class Caramart extends BaseCaramart
 {
+	
 }

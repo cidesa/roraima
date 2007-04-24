@@ -267,6 +267,8 @@ function grid_tag($obj)
 				{
 					document.getElementById(aux).value=document.getElementById(aux).value + "-" + document.getElementById(id).value;
 				}
+
+				document.getElementById(id).value="";
 			}
 			////////////////////////////
 

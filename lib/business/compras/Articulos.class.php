@@ -3,14 +3,47 @@
 class Articulos
 {
 //Almregart	
-	public static function Grabar_Articulo($articulo)
-		{			
+	public static function Grabar_Articulo($articulo,$grid)
+	{	
+			// Se graba el Artículo		
 			$articulo->save();
-		}
 			
-	public static function salvarAlmregart($articulo)
+			// Se graban los almacenes del articulo
+			self::Grabar_ArticulosAlmacen($articulo,$grid);
+			
+	}
+	
+	public static function Grabar_ArticulosAlmacen($articulo,$grid)
+	{
+		$codart=$articulo->getCodart();
+		$x=$grid[0];		
+			$j=0;	
+			while ($j<count($x))
+			{
+				$x[$j]->setCodart($codart);
+				$codubi=$x[$j]->getCodubi();
+				$x[$j]->setCodubi(str_pad($codubi, 20 , ' '));
+								
+				$x[$j]->save();
+			$j++;			
+			}
+			$z=$grid[1];		  
+			$j=0;
+			if ($z[$j])	
+			{
+			while ($j<count($z))
+			{											
+				$z[$j]->delete();				
+			$j++;
+			}
+			
+			}
+			
+	} 
+			
+	public static function salvarAlmregart($articulo,$grid)
 		{
-			self::Grabar_Articulo($articulo);			
+			self::Grabar_Articulo($articulo,$grid);			
 		}
 //
 	public static function validarAlmregart($articulo)

@@ -117,20 +117,7 @@ class Herramientas
 		      return false;}	
 		}
 		
-	public static function ObtenerDescripcionError($codigoerror)
-		{
-		if ($codigoerror=1)
-			{
-			return 'El Nivel Anterior No Existe';		
-		    }
-		    else
-		    { if ($codigoerror=2)
-		    	{
-		    		return 'XXXXXXX';
-		    	}
-		    }		
-	     }
-	     
+    
   public static function obtenerMensajeError($cod)
   {
   	
@@ -139,7 +126,180 @@ class Herramientas
   	return $errores[$cod]['msj'];
   	
   }
-	     
+
+  public static function getX($fieldjoin, $join, $result, $data)
+  {
+	eval ('$field = '.$join.'Peer::'.$fieldjoin.';');
+	
+	$c = new Criteria();
+	$c->add($field,$data);
+	eval ('$reg = '.$join.'Peer::doSelectone($c);');
+	if ($reg){
+		eval('$r = $reg->get'.$result.'();');
+		return $r;
+	}else{
+		return 'No Encontrado';
+	}
+  	
+  }
+  
+  	public static function getMascaraContable()
+	  {
+	  	  $c = new Criteria();  	  
+	  	  $conta = ContabaPeer::doSelect($c);
+		  if ($conta)
+		  	return $conta[0]->getForcta();
+		  else 
+		    return ' ';
+	  }  
+	public static function getMascaraPartida()
+	  {
+	  	  $c = new Criteria();
+	  	  $c->add(CpnivelesPeer::CATPAR,'P');
+	  	  $c->addAscendingOrderByColumn(CpnivelesPeer::CONSEC);  	    	  
+	  	  $par = CpnivelesPeer::doSelect($c);
+	  	  $i=0; 
+	  	  $formato="";
+	  	  $ruptura="";  	  
+	  	  while ($i<count($par))   	   
+	  	   {
+	  	   		$lon=$par[$i]->getLonniv();
+	  	   		$num='';
+	  	   		$j=0;
+	  	   		while ($j<$lon)
+	  	   		{
+	  	   			$num=$num.'#';
+	  	   		$j++;	
+	  	   		}
+	  	   		
+	  	   		if ($i!=(count($par)-1))
+	  	   		{
+	  	   			$num=$num.'-';
+	  	   		}
+	
+	  	   		$ruptura=$ruptura.$num;
+	  	   		$i++;
+	  	   }  	   
+		  	return $ruptura;	 
+	  }  
+	public static function getMascaraUbicacion()
+	  {
+	  	  $c = new Criteria();  	  
+	  	  $ubi = CadefartPeer::doSelect($c);
+		  if ($ubi)
+		  	return $ubi[0]->getForubi();
+		  else 
+		    return ' ';
+	  }	
+	public static function getMascaraArticulo()
+	  {
+	  	  $c = new Criteria();  	  
+	  	  $arti = CadefartPeer::doSelect($c);  	  
+		  if ($arti)
+		  	return str_pad($arti[0]->getForart(), 20 , ' ');
+		  else 
+		    return ' ';
+	  }  
+  
+ public static function CargarDatosGrid(&$form)
+   {
+   	   	$i=0;
+	  	$fil=$form->obj["filas"];
+	  	$col=count($form->obj["grabar"]);
+	  	$grabar=$form->obj["grabar"];
+	  	$campos=$form->obj["campos"];
+	  	$tipos=$form->obj["tipos"];
+	  	$eliminar=split("-",$form->getRequestParameter('txtidborrar'));
+	  	
+  	
+  	////////////////////////////////////////
+	// CREAMOS EL ARREGLO DE OBJETOS A INCLUIR Y MODIFICAR
+	$objetos=array();
+	$objetos2=array(); 
+  	while ($i<$fil)
+  	{
+  		$j=0;
+  		$tabla = 'caartalm';
+	  	$id='x'.$i.'id';
+	  	$cajchk='x'.$i.'1';
+	  	
+	  	
+	  	if ( ($form->getRequestParameter($id)!="") )//modificacion
+	  	{
+	  		$clase = CaartalmPeer::retrieveByPk($form->getRequestParameter($id));
+	  		
+			while ($j<$col)
+			{
+				$pos=intval($grabar[$j]);
+				$caja='x'.$i.$pos;
+				$tira1='$clase->set';
+				$tira2='(';
+				$tira3=');';
+				if ($tipos[$j]=="t")
+				{
+					$valor = "'".$form->getRequestParameter($caja)."'";
+				}
+				elseif ($tipos[$j]=="m")
+				{
+					$valor = str_replace(",","",$form->getRequestParameter($caja));
+				}
+				
+				eval($tira1.$campos[$pos-1].$tira2.$valor.$tira3);
+				
+	  		$j++;
+			}
+			$objetos[] = $clase;
+			
+	  	}
+	  	elseif ( ($form->getRequestParameter($id)=="") && (trim($form->getRequestParameter($cajchk)!="")) ) //nuevo
+	  	{
+	  		$clase = new Caartalm();
+	  		
+	  		while ($j<$col)
+			{
+				$pos=intval($grabar[$j]);
+				$caja='x'.$i.$pos;
+				$tira1='$clase->set';
+				$tira2='(';
+				$tira3=');';
+				if ($tipos[$j]=="t")
+				{
+					$valor = "'".$form->getRequestParameter($caja)."'";
+				}
+				elseif ($tipos[$j]=="m")
+				{
+					$valor = str_replace(",","",$form->getRequestParameter($caja));
+				}
+				eval($tira1.$campos[$pos-1].$tira2.$valor.$tira3);
+	  		$j++;
+			}
+			$objetos[] = $clase;
+	  		
+	  	}
+	 	
+  	$i++;
+  	} 	
+      
+	////////////////////////////////////////
+	// CREAMOS EL ARREGLO DE OBJETOS A ELIMINAR
+  	$i=0;
+  	
+  	while ($i<count($eliminar))
+  	{
+  		
+		$clase2 = CaartalmPeer::retrieveByPk($eliminar[$i]);
+		
+		$objetos2[] = $clase2;
+		
+  	$i++;	
+  	}
+  	
+  	$form->resultado=array($objetos,$objetos2);
+  	
+  	 return $form->resultado;
+   }
+  
 }
+
 
 
