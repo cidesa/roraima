@@ -20,7 +20,6 @@ class almregartActions extends autoalmregartActions
 	    	$this->caregart = $this->getCaregartOrCreate();
 	    	$this->updateCaregartFromRequest();
 	    	self::$coderror=Articulos::validarAlmregart($this->caregart);
-	    	//print 'CodError='.self::$coderror;
 	    	if (self::$coderror<>-1){
 	    		return false;
 	    	}else return true;
@@ -29,8 +28,7 @@ class almregartActions extends autoalmregartActions
 	 
 	public function executeList()
 	  {
-	    $this->processSort();
-	    
+	    $this->processSort();	    
 	    $this->processFilters();
 		$this->setVars();
 	    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/caregart/filters');
@@ -85,10 +83,12 @@ class almregartActions extends autoalmregartActions
 	  	$this->caregart = $this->getCaregartOrCreate();
 	    $this->updateCaregartFromRequest();
 	    $this->labels = $this->getLabels();
+	    if (!$this->validateEdit())
+	    {
+	     $err = Herramientas::obtenerMensajeError(self::$coderror);
 	    
-	    $err = Herramientas::obtenerMensajeError(self::$coderror);
-	    
-	    $this->getRequest()->setError('caregart{codart}',$err);
+	    $this->getRequest()->setError('caregart{codart}',$err);	
+	    }   
 
 	    return sfView::SUCCESS;
 	  }  
@@ -191,7 +191,7 @@ class almregartActions extends autoalmregartActions
 		$per = CaartalmPeer::doSelect($c);
 		
 		$filas=17;
-		$cabeza="Existencia";
+		$cabeza="Existencia por Almacenes";
 		$eliminar=true;
 		$titulos=array("Cod. Almacen","Descripción","Cod. Ubicacion","Ubicación","Exi. Mínima","Exi. Máxima","Exi. Actual","Reorden");
 		$anchos=array("10%","20%","10%","20%","10%","10%","10%","10%");
@@ -203,7 +203,7 @@ class almregartActions extends autoalmregartActions
 		$totales=array("", "", "", "");
 		$mascaraubicacion=$this->mascaraubicacion;
 		$html=array('type="text" size="5"','type="text" size="25" disabled=true','type="text" size="5"','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
-		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
+		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onBlur="javascript:cadena=rayitas(this.value);document.getElementById(this.id).value=cadena;"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
 		$grabar=array("1","3","5","6","7","8");
 		$filatotal='';
 		 

@@ -34,7 +34,7 @@
   'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('caregart_codart').value=cadena;",
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraarticulo')",
 )); echo $value ? $value : '&nbsp;' ?> </div></td>
-    <td width="27%"><?
+    <td width="20%"><?
 if ($caregart->getTipo()=='A')	{ $valor1 = true;
 
 }else{ $valor1=false;
@@ -44,7 +44,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo'),true);",))."   Servicio";
 
 ?></td>
-    <td width="50%"><strong>Codigo Contable</strong>    
+    <td width="57%"><strong>Codigo Contable</strong>    
 <?php $value = object_input_tag($caregart, 'getCodcta', array (
   'size' => 20,
   'control_name' => 'caregart[codcta]',
@@ -91,6 +91,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
  <?php echo button_to_popup('...','generales/catalogo?clase=Caramart&frame=sf_admin_edit_form&obj1=caregart_ramart&obj2=nomram')?>
+
  <?php echo input_tag('nomram',$caregart->getNomram(),'size=50,disabled=true'); ?>
   </div>
 </div>
@@ -137,7 +138,6 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   'control_name' => 'caregart[unimed]',
   'maxlength' => 15,
 )); echo $value ? $value : '&nbsp;' ?>
-
     </div>
 </div>
 
@@ -193,12 +193,12 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   <div class="content<?php if ($sf_request->hasError('caregart{exitot}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caregart{exitot}')): ?>
     <?php echo form_error('caregart{exitot}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+  <?php endif; ?></div>
   
   <?php $value = object_input_tag($caregart, 'getExitot', array (
   'size' => 7,
   'control_name' => 'caregart[exitot]',
-  'onKeyPress' => "javascript:return entermonto(event, this.id,this.id)",  
+  'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",  
 ), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 &nbsp;
@@ -244,7 +244,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   'date_format' => 'dd/MM/yy',
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'##/##/####')",
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
+    
 </div>
 </fieldset>
 <fieldset id="sf_fieldset_none" class="">
@@ -259,7 +259,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 <?php $value = object_input_tag($caregart, 'getCosult', array (
   'size' => 7,
   'control_name' => 'caregart[cosult]',
-  'onKeyPress' => "javascript:return entermonto(event, this.id,this.id)",
+  'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",
 ), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 &nbsp;
@@ -269,7 +269,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 <?php $value = object_input_tag($caregart, 'getCospro', array (
   'size' => 7,
   'control_name' => 'caregart[cospro]',
-  'onKeyPress' => "javascript:return entermonto(event, this.id,this.id)",
+  'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",
 ), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
 </div>
 </fielddset></td>
@@ -286,7 +286,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   <?php $value = object_input_tag($caregart, 'getInvini', array (
   'size' => 7,
   'control_name' => 'caregart[invini]',
-  'onKeyPress' => "javascript:return entermonto(event, this.id,this.id)",
+  'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",
 ), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
