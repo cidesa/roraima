@@ -9,6 +9,7 @@ function grid_tag($obj)
 	$alignf=$obj["alignf"];
 	$alignt=$obj["alignt"];
 	$campos=$obj["campos"];
+	$catalogos=$obj["catalogos"];
 	$montos=$obj["montos"];
 	$filatotal=$obj["filatotal"];
 	$totales=$obj["totales"];
@@ -18,16 +19,16 @@ function grid_tag($obj)
 	
 	$cuantos2=count($montos);
 	
-	
+ use_helper('PopUp');	
  $tagsrc='<script language="JavaScript"  src="/js/tools.js"></script>';
  $tag = ' <fieldset>
 			<legend>'.$cabeza.'</legend>
 			
-			<table border="0" cellpad="0" cellspace="0" class="sf_admin_list">
+			<table border="0" cellpad="0" cellspace="0" class="sf_admin_list" width="100%">
 			     <tr valign="bottom" bgcolor="#ECEBE6"> 
 			         <td height="1"> 
 			             <div class="grid01" id="grid01"> 
-			             <table cellpad="0" cellspace="0" border="0" class="sf_admin_list">
+			             <table cellpad="0" cellspace="0" border="0" class="sf_admin_list" width="100%">
 			             <thead><tr>';
  				if ($eliminar)
  				{
@@ -37,7 +38,7 @@ function grid_tag($obj)
  				$tagciclo1='';
 				while ($i<count($titulos))
  				{
-	$tagfila =		            '<th width="'.$anchos[$i].'" align="center" class="grid_titulo">'.$titulos[$i].'</th>';
+	$tagfila =		            '<th align="center" class="grid_titulo">'.$titulos[$i].'</th>';
 
 	$tagciclo1=$tagciclo1.$tagfila;
 				$i++;
@@ -62,9 +63,29 @@ function grid_tag($obj)
 			$acumtagw='';
 	 		while ($j<count($campos))
 	 		{
+	 			
 	 			$jmasuno=$j+1;
 	 			$campo=$campos[$j];
-	 			//eval('$get = '.'$datos['.$i.']->get'.$campo.'();'.';');
+	 			//catalogo
+				if ($catalogos[$j]!="")
+				{
+					$cat=split("-",$catalogos[$j]);
+					if (count($cat)==3) // devuelve 1 solo valor
+					{
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$cat[2]);
+					}
+					else // devuelve 2 valores
+					{
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$cat[2].'&obj2='.$cat[3]);
+					}
+				}
+				else
+				{
+					$catobj='';
+				}
+	 			
+	 			///////////
+
 				if (trim($campo)!="")
 				{
 					eval('$get = '.'$datos['.$i.']->get'.$campo.'();');
@@ -77,12 +98,12 @@ function grid_tag($obj)
 				if ($j==1)
 				{
 	 				$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
-								  value="'.$get.'" ><input type="hidden" id="x'.$i.'id" name="x'.$i.'id" value="'.$datos[$i]->getId().'"></td>';
+								  value="'.$get.'" ><input type="hidden" id="x'.$i.'id" name="x'.$i.'id" value="'.$datos[$i]->getId().'">'.$catobj.'</td>';
 				}
 				else
 				{
 					$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
-								  value="'.$get.'" ></td>';
+								  value="'.$get.'" >'.$catobj.'</td>';
 				}
 	 			$acumtagw = $acumtagw.$tagw;
 	 		$j++;
@@ -113,15 +134,35 @@ function grid_tag($obj)
 	 			$jmasuno=$j+1;
 	 			$campo=$campos[$j];
 	 			
+	 			//catalogo
+				if ($catalogos[$j]!="")
+				{
+					if (count($cat)==3) // devuelve 1 solo valor
+					{
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$cat[2]);
+					}
+					else // devuelve 2 valores
+					{
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$cat[2].'&obj2='.$cat[3]);
+					}
+				}
+				else
+				{
+					$catobj='';
+				}
+	 			
+	 			///////////
+	 			
+	 			
 	 			if ($j==1)
 	 			{
 	 				$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
-								  value="" ><input type="hidden" id="x'.$i.'id" name="x'.$i.'id" value=""></td>';
+								  value="" ><input type="hidden" id="x'.$i.'id" name="x'.$i.'id" value="">'.$catobj.'</td>';
 	 			}
 	 			else
 	 			{
 	 				$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
-								  value="" ></td>';
+								  value="" >'.$catobj.'</td>';
 	 			}
 	 			$acumtagw = $acumtagw.$tagw;
 	 		$j++;
@@ -143,7 +184,7 @@ function grid_tag($obj)
 			      	'.$filatotal.'
 			      </tr>
 			</table>	
-			<input type"hidden" id="txtidborrar" name="txtidborrar" value="">
+			<input type="hidden" id="txtidborrar" name="txtidborrar" value="">
 			</fieldset>
 			
 			<script type="text/javascript">
@@ -309,7 +350,9 @@ function grid_tag($obj)
 	$tagactsal = str_replace("?","'",$tagactsal); 
 	$tagentermonto = str_replace("?","'",$tagentermonto); 
 	$tagciclo2 = str_replace("?","'",$tagciclo2);
+	$tagciclo2 = str_replace("*","?",$tagciclo2);
 	$tagciclo3 = str_replace("?","'",$tagciclo3);
+	$tagciclo3 = str_replace("*","?",$tagciclo3);
 	 
    $tagt=$tagsrc.$tagactsal.$tag.$tagciclo1.$tagb.$tagciclo2.$tagciclo3.$tag2.$tagentermonto.$tageliminar;
 	 
