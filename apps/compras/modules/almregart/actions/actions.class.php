@@ -11,8 +11,8 @@
 class almregartActions extends autoalmregartActions
 { 
     private static $coderror=-1;
-    
-	public function validateEdit()
+    	
+    public function validateEdit()
 	  {  
 	  	
 	  	if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -26,105 +26,13 @@ class almregartActions extends autoalmregartActions
 	    	}else return true;
 	    }else return true;   
 	  }  
-	public function getObtener_Mascaracontable()
-	  {
-	  	  $c = new Criteria();  	  
-	  	  $this->conta = ContabaPeer::doSelect($c);
-		  if ($this->conta)
-		  	return $this->conta[0]->getForcta();
-		  else 
-		    return ' ';
-	  }  
-	public function getObtener_Mascarapartida()
-	  {
-	  	  $c = new Criteria();
-	  	  $c->add(CpnivelesPeer::CATPAR,'P');
-	  	  $c->addAscendingOrderByColumn(CpnivelesPeer::CONSEC);  	    	  
-	  	  $this->par = CpnivelesPeer::doSelect($c);
-	  	  $i=0; 
-	  	  $formato="";
-	  	  $ruptura="";  	  
-	  	  while ($i<count($this->par))   	   
-	  	   {
-	  	   		$lon=$this->par[$i]->getLonniv();
-	  	   		$num='';
-	  	   		$j=0;
-	  	   		while ($j<$lon)
-	  	   		{
-	  	   			$num=$num.'#';
-	  	   		$j++;	
-	  	   		}
-	  	   		
-	  	   		if ($i!=(count($this->par)-1))
-	  	   		{
-	  	   			$num=$num.'-';
-	  	   		}
-	
-	  	   		$ruptura=$ruptura.$num;
-	  	   		$i++;
-	  	   }  	   
-		  	return $ruptura;	 
-	  }  
-	public function getObtener_Mascaraubicacion()
-	  {
-	  	  $c = new Criteria();  	  
-	  	  $this->ubi = CadefartPeer::doSelect($c);
-		  if ($this->ubi)
-		  	return $this->ubi[0]->getForubi();
-		  else 
-		    return ' ';
-	  }	
-	public function getObtener_Mascaraarticulo()
-	  {
-	  	  $c = new Criteria();  	  
-	  	  $this->arti = CadefartPeer::doSelect($c);  	  
-		  if ($this->arti)
-		  	return str_pad($this->arti[0]->getForart(), 20 , ' ');
-		  else 
-		    return ' ';
-	  }  
-	public function getMostrar_Ramo()
-	  {
-	  	  $c = new Criteria;
-	  	  $this->campo = str_pad($this->caregart->getRamart(),6,' ');
-	  	  $c->add(CaramartPeer::RAMART, $this->campo);
-	  	  $this->ram = CaramartPeer::doSelect($c);
-		  if ($this->ram)
-		  	return $this->ram[0]->getNomram();
-		  else 
-		    return ' ';
-	  }	
-	public function Existencia()    
-	 { 
-	    if ($this->caregart->getCodart()!='')
-	    {
-	        $con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
-	        $sql = "SELECT DISTINCT caartalm.codalm, cadefalm.nomalm, cadefubi.nomubi, caartalm.eximin, caartalm.eximax, caartalm.exiact, caartalm.ptoreo FROM caartalm, caregart, cadefalm, cadefubi WHERE ((caartalm.codart='".($this->caregart->getCodart())."') AND (caartalm.codalm=cadefalm.codalm) AND (caartalm.codubi=cadefubi.codubi))";
-	        $stmt = $con->createStatement();
-	        $stmt->setLimit(5000);
-	        $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
-	        $resultado=array();
-	        //aqui lleno el array con los resultados:
-	           while ($rs->next())
-	             {
-	                $resultado[]=$rs->getRow();
-	             }
-	        //y la envio al template:
-	        $this->rs=$resultado;
-	        return $this->rs;
-	      }
-	    else
-	    {
-	    	return '';
-	    }    
-	 }  
 	 
 	public function executeList()
 	  {
 	    $this->processSort();
 	    
 	    $this->processFilters();
-	    $this->mascaraarticulo = $this->getObtener_Mascaraarticulo();
+		$this->setVars();
 	    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/caregart/filters');
 	
 	    // pager
@@ -136,17 +44,12 @@ class almregartActions extends autoalmregartActions
 	    $this->pager->setPage($this->getRequestParameter('page', 1));
 	    $this->pager->init();
 	  }
+
 	public function executeEdit()
 	  {  	
-	    $this->caregart = $this->getCaregartOrCreate();   
-	    $this->nom_ram = $this->getMostrar_Ramo();
-	    $this->rs = $this->Existencia();    
-	    $this->mascaraarticulo = $this->getObtener_Mascaraarticulo();
-	    $this->mascaracontabilidad = $this->getObtener_Mascaracontable();    
-	    $this->mascarapartida = $this->getObtener_Mascarapartida();
-	    $this->mascaraubicacion = $this->getObtener_Mascaraubicacion();
-
-	    //if($result) print count($obj); 
+	    $this->caregart = $this->getCaregartOrCreate();
+	    $this->setVars();   
+        $this->configGrid();
 	
 	    if ($this->getRequest()->getMethod() == sfRequest::POST)
 	    {
@@ -174,14 +77,14 @@ class almregartActions extends autoalmregartActions
 	      $this->labels = $this->getLabels();
 	    }
 	  }
+
 	public function handleErrorEdit()
-	  {  	 
+	  {
+
 	    $this->preExecute();
-	    $this->caregart = $this->getCaregartOrCreate();
+	  	$this->caregart = $this->getCaregartOrCreate();
 	    $this->updateCaregartFromRequest();
 	    $this->labels = $this->getLabels();
-	    
-	    //print self::$coderror.'>>>===>>>';
 	    
 	    $err = Herramientas::obtenerMensajeError(self::$coderror);
 	    
@@ -189,15 +92,13 @@ class almregartActions extends autoalmregartActions
 
 	    return sfView::SUCCESS;
 	  }  
+
 	protected function updateCaregartFromRequest()
 	  {
 	    $caregart = $this->getRequestParameter('caregart');
-	    $this->nom_ram = $this->getMostrar_Ramo();
-	    $this->rs = $this->Existencia();    
-	    $this->mascaraarticulo = $this->getObtener_Mascaraarticulo();
-	    $this->mascaracontabilidad = $this->getObtener_Mascaracontable();    
-	    $this->mascarapartida = $this->getObtener_Mascarapartida();
-	    $this->mascaraubicacion = $this->getObtener_Mascaraubicacion(); 
+	    
+	    $this->setVars();
+        $this->configGrid();
 	
 	    if (isset($caregart['codart']))
 	    {
@@ -280,6 +181,39 @@ class almregartActions extends autoalmregartActions
 	      $this->caregart->setInvini($caregart['invini']);
 	    }
 	  }  
+	  
+	  public function configGrid()
+	  {
+	  	 //////////////////////
+	    //GRID
+	    $c = new Criteria();
+		$c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
+		$per = CaartalmPeer::doSelect($c);
+		
+		$filas=17;
+		$cabeza="Existencia";
+		$eliminar=true;
+		$titulos=array("Cod. Almacen","Descripción","Cod. Ubicacion","Ubicación","Exi. Mínima","Exi. Máxima","Exi. Actual","Reorden");
+		$anchos=array("10%","20%","10%","20%","10%","10%","10%","10%");
+		$alignf=array('center','left','center','left','right','right','right','right');
+		$alignt=array('center','left','center','l0eft','right','right','right','right');
+		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
+		$tipos=array('t','t','m','m','m','m'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
+		$montos=array("5","6","7","8");
+		$totales=array("", "", "", "");
+		$mascaraubicacion=$this->mascaraubicacion;
+		$html=array('type="text" size="5"','type="text" size="25" disabled=true','type="text" size="5"','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
+		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
+		$grabar=array("1","3","5","6","7","8");
+		$filatotal='';
+		 
+		
+		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
+		'anchos'=>$anchos, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'tipos' => $tipos, 
+		'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 'html'=>$html, 'js'=>$js, 
+		'datos'=>$per, 'grabar'=>$grabar);
+		////////////////////// 
+	  }
 	protected function processFilters()
 	  {
 	    if ($this->getRequest()->hasParameter('filter'))
@@ -290,6 +224,7 @@ class almregartActions extends autoalmregartActions
 	      $this->getUser()->getAttributeHolder()->add($filters, 'sf_admin/caregart/filters');
 	    }
 	  }
+
 	protected function getLabels()
 	  {
 	    return array(
@@ -309,23 +244,36 @@ class almregartActions extends autoalmregartActions
 	      'caregart{invini}' => 'Inicial:',
 	    );
 	  } 
+
 	protected function saveCaregart($caregart)
 	  {
-	    Articulos::salvarAlmregart($caregart);    
+		$grid=Herramientas::CargarDatosGrid($this);
+
+	  	Articulos::salvarAlmregart($caregart,$grid);    
 	  } 
-	public function executeMostrardato()
+
+	public function executeAjax()
 	{
-	  if ($this->getRequestParameter('par')=='1')
+	  if ($this->getRequestParameter('ajax')=='1')
 	    {
 	  		$dato=CaramartPeer::getDesramo($this->getRequestParameter('codigo'));
-	  		$cajtexact='nom_ram';
+	  		$cajtexact='nomram';
             $cajtexcom='caregart_ramart';	  		 			 	    
 	    } 		  	    
 	    $output = '[["'.$cajtexact.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')'); 
 	    return sfView::HEADER_ONLY;
-	}	  
-	
+	}	 
+
+	public function setVars()
+	{
+		$this->mascaraarticulo = Herramientas::getMascaraArticulo();
+	    $this->mascaracontabilidad = Herramientas::getMascaraContable();    
+	    $this->mascarapartida = Herramientas::getMascaraPartida();
+		$this->mascaraubicacion = Herramientas::getMascaraUbicacion();
+		
+	}
+  	
 	
 }
 	  

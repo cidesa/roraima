@@ -12,6 +12,7 @@
 <?php echo javascript_include_tag('dFilter') ?>
 <?php echo javascript_include_tag('validaciones') ?>
 <?php echo javascript_include_tag('ajax') ?>
+<?php echo javascript_include_tag('tools') ?>
 
 <?php echo object_input_hidden_tag($caregart, 'getId') ?>
 
@@ -34,16 +35,15 @@
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraarticulo')",
 )); echo $value ? $value : '&nbsp;' ?> </div></td>
     <td width="27%"><?
-if ($caregart->getTipo()=='A')	{
-  ?><?php echo radiobutton_tag('caregart[tipo]', 'A', true)        ."Articulo".'&nbsp;&nbsp;';
-		  echo "<br>".radiobutton_tag('caregart[tipo]', 'S', false)."   Servicio";?>
-		<?
+if ($caregart->getTipo()=='A')	{ $valor1 = true;
 
-}else{
-	echo radiobutton_tag('caregart[tipo]', 'A', false)        ."Articulo".'&nbsp;&nbsp;';
-	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', true)."   Servicio";
+}else{ $valor1=false;
 
-} ?></td>
+} 
+	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array(),false);",))        ."Articulo".'&nbsp;&nbsp;';
+	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo'),true);",))."   Servicio";
+
+?></td>
     <td width="50%"><strong>Codigo Contable</strong>    
 <?php $value = object_input_tag($caregart, 'getCodcta', array (
   'size' => 20,
@@ -84,16 +84,14 @@ if ($caregart->getTipo()=='A')	{
   'control_name' => 'caregart[ramart]',
   'maxlength' => 6,    
   'onBlur'=> remote_function(array(
-			  'url'      => 'almregart/mostrardato?par=1',  			   
-			  'complete' => 'mostrardatosJSON(request, json)',
+			  'url'      => 'almregart/ajax?ajax=1',  			   
+			  'complete' => 'AjaxJSON(request, json)',
   			  'with' => "'codigo='+this.value"
 			  )),    
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
- <?php echo button_to_popup('...','generales/catalogo?clase=Caramart&frame=sf_admin_edit_form&obj1=caregart_ramart&obj2=nom_ram')?>
-  <?php if (isset($nom_ram)): ?>
-	<?php echo input_tag('nom_ram',$nom_ram,'size=50,disabled=true'); ?>
-  <?php endif; ?> 
+ <?php echo button_to_popup('...','generales/catalogo?clase=Caramart&frame=sf_admin_edit_form&obj1=caregart_ramart&obj2=nomram')?>
+ <?php echo input_tag('nomram',$caregart->getNomram(),'size=50,disabled=true'); ?>
   </div>
 </div>
 
@@ -300,39 +298,12 @@ if ($caregart->getTipo()=='A')	{
 &nbsp;
 &nbsp;
 &nbsp;
-<div class="grid01" id="grid01">
-<fieldset>
-<legend>Existencia por Almacenes</legend>
-<? if ($rs!='')
-{ ?>
-<table border="0" class="sf_admin_list">
-<? 
-$titulo=array(0 => 'Cod. Almacen', 1 => 'Descripcion', 2 => 'Ubicacion', 3 => 'Exi. Minima', 4 => 'Exi. Maxima', 5 => 'Exi. Actual', 6 => 'Reorden');
-
-if ( count($rs)>0){
-$i=0;
-foreach ($rs as $k=>$fila) {
-    $i++;
-    if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$titulo[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
-  }
-?></table>
+<form name="form1" id="form1">
 <?
-}
+echo grid_tag($obj);
 ?>
-</fieldset>
-</div>
+<input type="button" value="x" onClick="alert(document.getElementById('txtidborrar').value)">
+</form>
 
 <?php include_partial('edit_actions', array('caregart' => $caregart)) ?>
 

@@ -72,7 +72,7 @@ MyString2Validator:
 MyString3Validator:
     class: sfStringValidator
     param:
-        min:       2
+        min:       0
         min_error: La Unidad de Medida no puede tener menos de 2 caracteres
         max:       
         max_error: La Unidad de Medida no puede pasar mas de 15 caracteres
@@ -80,7 +80,7 @@ MyString3Validator:
 MyString4Validator:
     class: sfStringValidator
     param:
-        min:       2
+        min:       0
         min_error: La Unidad Alternativa no puede tener menos de 2 caracteres
         max:       15
         max_error: La Unidad Alternativa no puede pasar mas de 15 caracteres
@@ -88,7 +88,7 @@ MyString4Validator:
 MyString5Validator:
     class: sfStringValidator
     param:
-        min:       2
+        min:       0
         min_error: La Relación no puede tener menos de 2 caracteres
         max:       25 
         max_error: La Relación no puede pasar mas de 25 caracteres
