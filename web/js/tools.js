@@ -92,18 +92,20 @@
 		if ( (ano%4 != 0) && (mes ==02) && (dia > 28) ) { fecha=fecha.substr(0,2)+"/"; }
 		}
 		return (fecha);
-	}	
-	
-	function disableObjetos(obj,val)
-	{
-		for(i=0;i<obj.length;i++) document.getElementById(obj[i]).disabled = val;
-	}
+		}	
 
-	function disableAllObjetos(obj,val,form)
-	{
-		for(i=0;i<document.forms[0].elements.length;i++) document.forms[0].elements[i].disabled = val;
-		
-		for(i=0;i<obj.length;i++) document.getElementById(obj[i]).disabled = !val;
-	}
+		/////////////////////////////////////////////////////////////////////////
+		function disableObjetos(obj,val) // Deshabilita los objetos segun un arreglo de objetos
+		{
+			for(i=0;i<obj.length;i++) document.getElementById(obj[i]).disabled = val;
+		}
+	
+		/////////////////////////////////////////////////////////////////////////
+		function disableAllObjetos(obj,val) // Desahabilita todos los objetos menos los del arreglo
+		{
+			for(i=0;i<document.forms[0].elements.length;i++) document.forms[0].elements[i].disabled = val;
+			
+			for(i=0;i<obj.length;i++) document.getElementById(obj[i]).disabled = !val;
+		}
 	
 	

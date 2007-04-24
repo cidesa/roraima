@@ -106,7 +106,13 @@ body
 	cursor: pointer;
 	}
 
-
+.gridcatalogo {
+	color: #00000;
+	width: 433px;
+	height: 370px;
+	overflow:scroll;
+	background-color: #FFFFFF;
+}
 
 
 
