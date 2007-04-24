@@ -302,7 +302,6 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 <?
 echo grid_tag($obj);
 ?>
-<input type="button" value="x" onClick="alert(document.getElementById('txtidborrar').value)">
 </form>
 
 <?php include_partial('edit_actions', array('caregart' => $caregart)) ?>
