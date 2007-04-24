@@ -4,7 +4,7 @@ String.prototype.pad = function(l, s, t){
 		+ this + s.substr(0, l - t) : this;
          };
          
-function mostrardatosJSON(request, json)
+function AjaxJSON(request, json)
 {
   var nbElementsInResponse = json.length;
   for (var i = 0; i < nbElementsInResponse; i++)
