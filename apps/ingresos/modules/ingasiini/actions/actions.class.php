@@ -74,7 +74,7 @@ class ingasiiniActions extends autoingasiiniActions
 	$campos=array("Perpre","Mondis");
 	$tipos=array("t","m"); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
 	$montos=array("2");
-	$totales=array("total");
+	$totales=array("");// totales por filas de montos, si no tiene total, se pone en blanco
 	$html=array('type="text" size="2"','type="text" size="25"');
 	$js=array('','onKeypress="entermonto(event,this.id)"');
 	$grabar=array("1","2");

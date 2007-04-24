@@ -23,7 +23,6 @@ function grid_tag($obj)
  $tag = ' <fieldset>
 			<legend>'.$cabeza.'</legend>
 			
-			'.$filatotal.'
 			<table border="0" cellpad="0" cellspace="0" class="sf_admin_list">
 			     <tr valign="bottom" bgcolor="#ECEBE6"> 
 			         <td height="1"> 
@@ -140,14 +139,18 @@ function grid_tag($obj)
 			             </div>
 			         </td>
 			      </tr>
+			      <tr>
+			      	'.$filatotal.'
+			      </tr>
 			</table>	
 			
 			</fieldset>
-			<input type="hidden" name="txtidborrar" id="txtidborrar" value="">
+
 			<script type="text/javascript">
 				actualizarsaldos();
 			</script>';
-	
+
+
 	$tagentermonto='<script type="text/javascript">
 
 				function entermonto(e,id)
@@ -204,12 +207,20 @@ function grid_tag($obj)
 								var num'.$montos[$j].'=parseFloat(str'.$montos[$j].');
 								
 								acum'.$montos[$j].'=acum'.$montos[$j].'+num'.$montos[$j].';
-								document.getElementById(x'.$montos[$j].').value=format(num'.$montos[$j].'.toFixed(2),?.?,?.?,?,?);
+								document.getElementById(x'.$montos[$j].').value=format(num'.$montos[$j].'.toFixed(2),?.?,?.?,?,?);';
+			if ($totales[$j]!="")
+			{
+					$tagactw2='
 								document.getElementById('."'".$totales[$j]."'".').value="";
 								document.getElementById('."'".$totales[$j]."'".').value=format(acum'.$montos[$j].'.toFixed(2),?.?,?.?,?,?);';
+			}		
+			else
+			{
+					$tagactw2='';
+			}
 			/////////////////////
 							$j=$j+1;
-			$tagactsalciclo=$tagactsalciclo.$tagactw;
+			$tagactsalciclo=$tagactsalciclo.$tagactw.$tagactw2;
 							}
 							
 			$tagactsal2='		i=i+1;
