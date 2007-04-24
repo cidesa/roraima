@@ -51,6 +51,7 @@ class Articulos
 			return self::validarCodart($articulo);
 		
 	    }
+	    
 	public static function validarCodart($articulo)
 	{
 
@@ -59,7 +60,7 @@ class Articulos
 	  	Herramientas::FormarCodigoPadre($codart,&$nivelcodigo,&$ultimo);  	  		
 	  	  if (!(Herramientas::buscar_codigo_padre($ultimo))){
 	  	  	If ($nivelcodigo == 0){
-	  	  		return 11;
+	  	  		return 1;
 	  	  	} else return -1;	
 	  	  }else return -1;
 	  	    	

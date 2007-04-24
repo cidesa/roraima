@@ -82,8 +82,7 @@ class Herramientas
 		
 		return $instr=$cont;
 		}
-		
-		
+				
 	public static function FormarCodigoPadre($codigo,&$nivelcodigo,&$ultimo)
 	 {   $nivelcodigo=''; 	 
 	 	 $c = new Criteria();  	  
@@ -105,6 +104,7 @@ class Herramientas
 	  	    return true; 	
 	  	  } 
  	}
+ 	
 	public static function buscar_codigo_padre($codigo2)
 		{  
 		  $c = new Criteria;  	      
@@ -116,14 +116,13 @@ class Herramientas
 		   else{	   
 		      return false;}	
 		}
-		
     
   public static function obtenerMensajeError($cod)
   {
   	
   	$errores = sfYaml::load('../config/errores.yml');
   	
-  	return $errores[$cod]['msj'];
+  	return $errores[$cod]['msj']; 	
   	
   }
 
