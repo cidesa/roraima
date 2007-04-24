@@ -143,9 +143,9 @@ function grid_tag($obj)
 			      	'.$filatotal.'
 			      </tr>
 			</table>	
-			
+			<input type"hidden" id="txtidborrar" name="txtidborrar" value="">
 			</fieldset>
-
+			
 			<script type="text/javascript">
 				actualizarsaldos();
 			</script>';
@@ -180,7 +180,21 @@ function grid_tag($obj)
 					function actualizarsaldos()
 					{
 						i=0;
+						var acum1=0;
 						var acum2=0;
+						var acum3=0;
+						var acum4=0;
+						var acum5=0;
+						var acum6=0;
+						var acum7=0;
+						var acum8=0;
+						var acum9=0;
+						var acum11=0;
+						var acum12=0;
+						var acum13=0;
+						var acum14=0;
+						var acum15=0;
+
 						var cuantos=parseFloat("'.$filas.'");
 						
 						while (i<cuantos)
