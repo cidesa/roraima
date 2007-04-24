@@ -198,6 +198,7 @@ class almregartActions extends autoalmregartActions
 		$alignf=array('center','left','center','left','right','right','right','right');
 		$alignt=array('center','left','center','l0eft','right','right','right','right');
 		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
+		$catalogos=array('Cadefalm-sf_admin_edit_form-caregart_codpar','','','','','','','');
 		$tipos=array('t','t','m','m','m','m'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
 		$montos=array("5","6","7","8");
 		$totales=array("", "", "", "");
@@ -209,9 +210,9 @@ class almregartActions extends autoalmregartActions
 		 
 		
 		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
-		'anchos'=>$anchos, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'tipos' => $tipos, 
-		'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 'html'=>$html, 'js'=>$js, 
-		'datos'=>$per, 'grabar'=>$grabar);
+		'anchos'=>$anchos, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
+		'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 'html'=>$html,
+		'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
 		////////////////////// 
 	  }
 	protected function processFilters()
