@@ -40,9 +40,9 @@ function format(nStr, inD, outD, sep)
 			return nStr + nStrEnd;
 		}
 	
-  function entermonto(e,id,fc)
+  function entermontootro(e,id,fc)
    {
-	if (e.keyCode==9)		
+	if (e.keyCode==13)		
 	 {				
 		if (validarnumero(id)==true)                    
 		 {
