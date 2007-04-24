@@ -1,6 +1,6 @@
-10:
-  cod: 10
-  msj: Mensaje error 10
-11:
-  cod: 11
-  msj: Mensaje erro 11
+1:
+  cod: 1
+  msj: Nivel Anterior No Existe
+2:
+  cod: 2
+  msj: Otro
