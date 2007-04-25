@@ -114,6 +114,18 @@ body
 	background-color: #FFFFFF;
 }
 
+.imagencatgrid{
+	background: transparent url("/images/search.gif") no-repeat center;
+	border: none;
+	margin: 0px;
+	padding: 0px;
+	height: 16px;
+	border-width: 0px;
+	padding-left: 0px;
+	font-size: 7px;
+	text-align:left;
+	cursor: pointer;
+	}
 
 
 

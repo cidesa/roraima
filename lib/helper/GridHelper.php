@@ -92,13 +92,13 @@ function grid_tag($obj)
 					if (count($cat)==3) // devuelve 1 solo valor
 					{
 						$caj1=substr($cat[2],0,1).$i.substr($cat[2],1,strlen($cat[2]));
-						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1);
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1,'imagencatgrid');
 					}
 					else // devuelve 2 valores
 					{
 						$caj1=substr($cat[2],0,1).$i.substr($cat[2],1,strlen($cat[2]));
 						$caj2=substr($cat[3],0,1).$i.substr($cat[3],1,strlen($cat[3]));
-						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1.'&obj2='.$caj2);
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1.'&obj2='.$caj2,'imagencatgrid');
 					}
 				}
 				else
@@ -163,13 +163,13 @@ function grid_tag($obj)
 					if (count($cat)==3) // devuelve 1 solo valor
 					{
 						$caj1=substr($cat[2],0,1).$i.substr($cat[2],1,strlen($cat[2]));
-						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1);
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1,'imagencatgrid');
 					}
 					else // devuelve 2 valores
 					{
 						$caj1=substr($cat[2],0,1).$i.substr($cat[2],1,strlen($cat[2]));
 						$caj2=substr($cat[3],0,1).$i.substr($cat[3],1,strlen($cat[3]));
-						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1.'&obj2='.$caj2);
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1.'&obj2='.$caj2,'imagencatgrid');
 					}
 				}
 				else
