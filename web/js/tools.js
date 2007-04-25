@@ -220,10 +220,12 @@
 			
 			
 		}
-  function rayitas2(e,tira)
-		{				
-			if (e.KeyCode==13)
+  function rayaenter(e,tira)
+		{			
+			
+			if (e.keyCode==13 || e.keyCode==9)
 			{
+
 				long=tira.length;
 				i=1;
 				if (long > 1)

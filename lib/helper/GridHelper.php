@@ -39,7 +39,7 @@ function grid_tag($obj)
  				$tagciclo1='';
 				while ($i<count($titulos))
  				{
-	$tagfila =		            '<th align="center" class="grid_titulo">'.$titulos[$i].'</th>';
+	$tagfila =		            '<th width="'.$anchos[$i].'" align="center" class="grid_titulo">'.$titulos[$i].'</th>';
 
 	$tagciclo1=$tagciclo1.$tagfila;
 				$i++;
