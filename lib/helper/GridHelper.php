@@ -51,6 +51,7 @@ function grid_tag($obj)
 	//DATOS
 	$i=0;
 	$contdatos=count($datos);
+	$filas=$contdatos+$filas;
 	$tagciclo2='';
 	 while ($i<$contdatos)
 	 {

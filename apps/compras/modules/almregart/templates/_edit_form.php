@@ -10,7 +10,6 @@
 <?php use_helper('Javascript') ?>
 <?php use_helper('PopUp') ?>
 <?php echo javascript_include_tag('dFilter') ?>
-<?php echo javascript_include_tag('validaciones') ?>
 <?php echo javascript_include_tag('ajax') ?>
 <?php echo javascript_include_tag('tools') ?>
 
@@ -83,9 +82,9 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   'control_name' => 'caregart[ramart]',
   'maxlength' => 6,    
   'onBlur'=> remote_function(array(
-			  'url'      => 'almregart/ajax?ajax=1',  			   
+			  'url'      => 'almregart/ajax',  			   
 			  'complete' => 'AjaxJSON(request, json)',
-  			  'with' => "'codigo='+this.value"
+  			  'with' => "'ajax=1&cajtexmos=nomram&cajtexcom=caregart_ramart&codigo='+this.value"
 			  )),    
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;

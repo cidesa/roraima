@@ -199,7 +199,7 @@ class almregartActions extends autoalmregartActions
 		$alignt=array('center','left','center','l0eft','right','right','right','right');
 		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
 		$catalogos=array('Cadefalm-sf_admin_edit_form-x1-x2','','','','','','','');// por todas las columnas, si no tiene, se coloca vacio
-		$ajax=array('1-x2-x1','','','','','','',''); //parametro-cajitamostrar-autocompletar
+		$ajax=array('2-x2-x1','','2-x2-x1','','','','',''); //parametro-cajitamostrar-autocompletar
 		$tipos=array('t','t','m','m','m','m'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
 		$montos=array("5","6","7","8");
 		$totales=array("", "", "caregart_exitot", "");
@@ -263,7 +263,17 @@ class almregartActions extends autoalmregartActions
 	    {
 	  		$dato=CaramartPeer::getDesramo($this->getRequestParameter('codigo'));	  			 
             $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';		 			 	    
+	    } 
+	    else  if ($this->getRequestParameter('ajax')=='2')
+	    {
+	  		$dato=CadefalmPeer::getDesalmacen($this->getRequestParameter('codigo'));	  			 
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';		 			 	    
 	    } 		  	    
+		 else  if ($this->getRequestParameter('ajax')=='3')
+	    {
+	  		$dato=CadefubiPeer::getDesubicacion($this->getRequestParameter('codigo'));	  			 
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';		 			 	    
+	    } 	    		  	    
 
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')'); 
 	    return sfView::HEADER_ONLY;
