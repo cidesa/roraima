@@ -10,10 +10,25 @@
  */
 class oycdatsolActions extends autooycdatsolActions
 {
+	public function Cargarpais()
+	{
+		$c = new Criteria();
+		$lista_pais = OcpaisPeer::doSelect($c);
+		
+		$pais = array();
+		
+		foreach($lista_pais as $obj_pais)
+		{
+			$pais += array($obj_pais->getCodpai() => $obj_pais->getNompai());
+		}
+		return $pais;
+    } 	
+	
 	public function executeEdit()
 	{
 		$this->ocdatste = $this->getOcdatsteOrCreate();
 		$this->desste ='';
+		$this->pais = $this->Cargarpais();
 
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{
