@@ -183,10 +183,10 @@ class almregartActions extends autoalmregartActions
 	  }  
 	  
     public function configGrid()
-	  {
-	  	 //////////////////////
-	    //GRID
-	    $c = new Criteria();
+	{
+		//////////////////////
+		//GRID
+		$c = new Criteria();
 		$c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
 		$per = CaartalmPeer::doSelect($c);
 		
@@ -216,7 +216,7 @@ class almregartActions extends autoalmregartActions
 		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
 		////////////////////// 
 	}
-	
+	  
 	protected function processFilters()
 	  {
 	    if ($this->getRequest()->hasParameter('filter'))
