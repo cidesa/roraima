@@ -40,7 +40,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 }else{ $valor1=false;
 
 } 
-	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array(),false);",))        ."Articulo".'&nbsp;&nbsp;';
+	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
 	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo'),true);",))."   Servicio";
 
 ?></td>
@@ -198,6 +198,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   <?php $value = object_input_tag($caregart, 'getExitot', array (
   'size' => 7,
   'control_name' => 'caregart[exitot]',
+  'disabled' => true,
   'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",  
 ), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
 &nbsp;

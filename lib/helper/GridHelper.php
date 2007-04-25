@@ -10,6 +10,7 @@ function grid_tag($obj)
 	$alignt=$obj["alignt"];
 	$campos=$obj["campos"];
 	$catalogos=$obj["catalogos"];
+	$ajax=$obj["ajax"];
 	$montos=$obj["montos"];
 	$filatotal=$obj["filatotal"];
 	$totales=$obj["totales"];
@@ -63,20 +64,40 @@ function grid_tag($obj)
 			$acumtagw='';
 	 		while ($j<count($campos))
 	 		{
-	 			
 	 			$jmasuno=$j+1;
 	 			$campo=$campos[$j];
+	 			////ajax
+	 			if ($ajax[$j]!="")
+				{
+	 				$aj=split("-",$ajax[$j]);
+	 				$mos=substr($aj[1],0,1).$i.substr($aj[1],1,strlen($aj[1]));
+	 				$com=substr($aj[2],0,1).$i.substr($aj[2],1,strlen($aj[2]));
+					$blur="onBlur=".chr(34).
+						  remote_function(array(
+						  "url"      => "almregart/ajax",  			   
+						  "complete" => "AjaxJSON(request, json)",
+			  			  "with" => "'ajax=$aj[0]&cajtexmos=$mos&cajtexcom=$com&codigo='+this.value")).chr(34);
+				}
+				else
+				{
+					$blur='';		
+				}
+	 			//////////
+
 	 			//catalogo
 				if ($catalogos[$j]!="")
 				{
 					$cat=split("-",$catalogos[$j]);
 					if (count($cat)==3) // devuelve 1 solo valor
 					{
-						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$cat[2]);
+						$caj1=substr($cat[2],0,1).$i.substr($cat[2],1,strlen($cat[2]));
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1);
 					}
 					else // devuelve 2 valores
 					{
-						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$cat[2].'&obj2='.$cat[3]);
+						$caj1=substr($cat[2],0,1).$i.substr($cat[2],1,strlen($cat[2]));
+						$caj2=substr($cat[3],0,1).$i.substr($cat[3],1,strlen($cat[3]));
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1.'&obj2='.$caj2);
 					}
 				}
 				else
@@ -98,12 +119,12 @@ function grid_tag($obj)
 				if ($j==1)
 				{
 	 				$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
-								  value="'.$get.'" ><input type="hidden" id="x'.$i.'id" name="x'.$i.'id" value="'.$datos[$i]->getId().'">'.$catobj.'</td>';
+								  value="'.$get.'" ><input type="hidden" id="x'.$i.'id" name="x'.$i.'id" value="'.$datos[$i]->getId().'" '.$blur.'>'.$catobj.'</td>';
 				}
 				else
 				{
 					$tagw ='     <td class="grid_fila" align="'.$alignf[$j].'" height="15"><input style="border:none" class="grid_txt'.$alignt[$j].'" name="x'.$i.$jmasuno.'" id="x'.$i.$jmasuno.'" '.$html[$j].' '.$js[$j].'	 
-								  value="'.$get.'" >'.$catobj.'</td>';
+								  value="'.$get.'" '.$blur.'>'.$catobj.'</td>';
 				}
 	 			$acumtagw = $acumtagw.$tagw;
 	 		$j++;
@@ -137,13 +158,17 @@ function grid_tag($obj)
 	 			//catalogo
 				if ($catalogos[$j]!="")
 				{
+					$cat=split("-",$catalogos[$j]);
 					if (count($cat)==3) // devuelve 1 solo valor
 					{
-						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$cat[2]);
+						$caj1=substr($cat[2],0,1).$i.substr($cat[2],1,strlen($cat[2]));
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1);
 					}
 					else // devuelve 2 valores
 					{
-						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$cat[2].'&obj2='.$cat[3]);
+						$caj1=substr($cat[2],0,1).$i.substr($cat[2],1,strlen($cat[2]));
+						$caj2=substr($cat[3],0,1).$i.substr($cat[3],1,strlen($cat[3]));
+						$catobj=button_to_popup('...','generales/catalogo?clase='.$cat[0].'&frame='.$cat[1].'&obj1='.$caj1.'&obj2='.$caj2);
 					}
 				}
 				else

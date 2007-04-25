@@ -198,10 +198,11 @@ class almregartActions extends autoalmregartActions
 		$alignf=array('center','left','center','left','right','right','right','right');
 		$alignt=array('center','left','center','l0eft','right','right','right','right');
 		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
-		$catalogos=array('Cadefalm-sf_admin_edit_form-caregart_codpar','','','','','','','');
+		$catalogos=array('Cadefalm-sf_admin_edit_form-x1-x2','','','','','','','');// por todas las columnas, si no tiene, se coloca vacio
+		$ajax=array('1-x2-x1','','','','','','',''); //parametro-cajitamostrar-autocompletar
 		$tipos=array('t','t','m','m','m','m'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
 		$montos=array("5","6","7","8");
-		$totales=array("", "", "", "");
+		$totales=array("", "", "caregart_exitot", "");
 		$mascaraubicacion=$this->mascaraubicacion;
 		$html=array('type="text" size="5"','type="text" size="25" disabled=true','type="text" size="5"','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
 		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onBlur="javascript:cadena=rayitas(this.value);document.getElementById(this.id).value=cadena;"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
@@ -211,8 +212,8 @@ class almregartActions extends autoalmregartActions
 		
 		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
 		'anchos'=>$anchos, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
-		'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 'html'=>$html,
-		'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
+		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 
+		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
 		////////////////////// 
 	  }
 	protected function processFilters()
@@ -255,13 +256,14 @@ class almregartActions extends autoalmregartActions
 
 	public function executeAjax()
 	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
 	  if ($this->getRequestParameter('ajax')=='1')
 	    {
-	  		$dato=CaramartPeer::getDesramo($this->getRequestParameter('codigo'));
-	  		$cajtexact='nomram';
-            $cajtexcom='caregart_ramart';	  		 			 	    
+	  		$dato=CaramartPeer::getDesramo($this->getRequestParameter('codigo'));	  			 
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';		 			 	    
 	    } 		  	    
-	    $output = '[["'.$cajtexact.'","'.$dato.'",""],["'.$cajtexcom.'","6","c"]]';
+
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')'); 
 	    return sfView::HEADER_ONLY;
 	}	 
