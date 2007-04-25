@@ -26,11 +26,20 @@ body
   padding: 20px;
 }
 
+.gridout {
+	color: #00000;
+	width: 900px;
+	height: 290px;
+	overflow:scroll;
+	background-color: #FFFFFF;
+}
+
+
 .grid01 {
 	color: #00000;
-	width: 910px;
+	width: 1080px;
 	height: 260px;
-	overflow:scroll;
+
 	background-color: #FFFFFF;
 }
 

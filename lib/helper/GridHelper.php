@@ -5,7 +5,7 @@ function grid_tag($obj)
 	$cabeza=$obj["cabeza"];	
 	$eliminar=$obj["eliminar"];
 	$titulos=$obj["titulos"];
-	$anchos=$obj["anchos"];
+	$ancho=$obj["ancho"];
 	$alignf=$obj["alignf"];
 	$alignt=$obj["alignt"];
 	$campos=$obj["campos"];
@@ -21,25 +21,36 @@ function grid_tag($obj)
 	$cuantos2=count($montos);
 	
  use_helper('PopUp');	
- $tagsrc='<script language="JavaScript"  src="/js/tools.js"></script>';
+ $tagsrc='
+			<style type="text/css">
+				.gridint {
+					color: #00000;
+					width: '.$ancho.'px;
+					height: 260px;
+				
+					background-color: #FFFFFF;
+				}
+			</style>
+			<script language="JavaScript"  src="/js/tools.js"></script>';
  $tag = ' <fieldset>
 			<legend>'.$cabeza.'</legend>
-			
+<div class="gridout" id="gridout">			
 			<table border="0" cellpad="0" cellspace="0" class="sf_admin_list" width="100%">
 			     <tr valign="bottom" bgcolor="#ECEBE6"> 
 			         <td> 
-			             <div class="grid01" id="grid01"> 
+						<div class="gridint" id="gridint">
 			             <table cellpad="0" cellspace="0" border="0" class="sf_admin_list" width="100%">
 			             <thead><tr>';
  				if ($eliminar)
  				{
- 					$tag=$tag.'<th width="3%" align="center"></th>';
+ 					$tag=$tag.'<th width="" align="center"></th>';
  				}
  				$i=0;
  				$tagciclo1='';
+ 				//'.$anchos[$i].'
 				while ($i<count($titulos))
  				{
-	$tagfila =		            '<th width="'.$anchos[$i].'" align="center" class="grid_titulo">'.$titulos[$i].'</th>';
+	$tagfila =		            '<th width="400px" align="center" class="grid_titulo">'.$titulos[$i].'</th>';
 
 	$tagciclo1=$tagciclo1.$tagfila;
 				$i++;
@@ -210,6 +221,7 @@ function grid_tag($obj)
 			      	'.$filatotal.'
 			      </tr>
 			</table>	
+</div>
 			<input type="hidden" id="txtidborrar" name="txtidborrar" value="">
 			</fieldset>
 			

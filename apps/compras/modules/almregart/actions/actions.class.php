@@ -194,7 +194,7 @@ class almregartActions extends autoalmregartActions
 		$cabeza="Existencia por Almacenes";
 		$eliminar=true;
 		$titulos=array("Cod. Almacen","Descripción","Cod. Ubicacion","Ubicación","Exi. Mínima","Exi. Máxima","Exi. Actual","Reorden");
-		$anchos=array("30%","20%","10%","20%","5%","5%","5%","5%");
+		$ancho="1000";
 		$alignf=array('center','left','center','left','right','right','right','right');
 		$alignt=array('center','left','center','l0eft','right','right','right','right');
 		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
@@ -211,7 +211,7 @@ class almregartActions extends autoalmregartActions
 		 
 		
 		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
-		'anchos'=>$anchos, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
+		'ancho'=>$ancho, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
 		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 
 		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
 		////////////////////// 
