@@ -182,7 +182,7 @@ class almregartActions extends autoalmregartActions
 	    }
 	  }  
 	  
-	  public function configGrid()
+    public function configGrid()
 	  {
 	  	 //////////////////////
 	    //GRID
@@ -215,7 +215,8 @@ class almregartActions extends autoalmregartActions
 		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 
 		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
 		////////////////////// 
-	  }
+	}
+	
 	protected function processFilters()
 	  {
 	    if ($this->getRequest()->hasParameter('filter'))

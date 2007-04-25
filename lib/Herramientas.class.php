@@ -56,8 +56,7 @@ class Herramientas
 		}
 		if (count($rs)>0) return true; else return false;
 	}
-	
-	
+		
 	public static function instr($palabra,$busqueda,$comienzo,$concurrencia){
 		
 		$tamano=strlen($palabra);
@@ -117,28 +116,26 @@ class Herramientas
 		      return false;}	
 		}
     
-  public static function obtenerMensajeError($cod)
-  {
+    public static function obtenerMensajeError($cod)
+     {  	
+  	   $errores = sfYaml::load('../config/errores.yml');
   	
-  	$errores = sfYaml::load('../config/errores.yml');
-  	
-  	return $errores[$cod]['msj']; 	
-  	
-  }
+  	   return $errores[$cod]['msj']; 	  	
+    }
 
-  public static function getX($fieldjoin, $join, $result, $data)
-  {
-	eval ('$field = '.$join.'Peer::'.$fieldjoin.';');
+    public static function getX($fieldjoin, $join, $result, $data)
+     {
+	   eval ('$field = '.$join.'Peer::'.$fieldjoin.';');
 	
-	$c = new Criteria();
-	$c->add($field,$data);
-	eval ('$reg = '.$join.'Peer::doSelectone($c);');
-	if ($reg){
-		eval('$r = $reg->get'.$result.'();');
-		return $r;
-	}else{
-		return 'No Encontrado';
-	}
+	   $c = new Criteria();
+	   $c->add($field,$data);
+	   eval ('$reg = '.$join.'Peer::doSelectone($c);');
+	   if ($reg){
+		 eval('$r = $reg->get'.$result.'();');
+		 return $r;
+	  }else{
+		 return 'No Encontrado';
+	  }
   	
   }
   
@@ -150,7 +147,8 @@ class Herramientas
 		  	return $conta[0]->getForcta();
 		  else 
 		    return ' ';
-	  }  
+	  } 
+	   
 	public static function getMascaraPartida()
 	  {
 	  	  $c = new Criteria();
@@ -180,7 +178,8 @@ class Herramientas
 	  	   		$i++;
 	  	   }  	   
 		  	return $ruptura;	 
-	  }  
+	  } 
+	   
 	public static function getMascaraUbicacion()
 	  {
 	  	  $c = new Criteria();  	  
@@ -190,6 +189,7 @@ class Herramientas
 		  else 
 		    return ' ';
 	  }	
+	  
 	public static function getMascaraArticulo()
 	  {
 	  	  $c = new Criteria();  	  
@@ -200,8 +200,8 @@ class Herramientas
 		    return ' ';
 	  }  
   
- public static function CargarDatosGrid(&$form)
-   {
+    public static function CargarDatosGrid(&$form)
+     {
    	   	$i=0;
 	  	$fil=$form->obj["filas"];
 	  	$col=count($form->obj["grabar"]);
@@ -213,10 +213,10 @@ class Herramientas
   	
   	////////////////////////////////////////
 	// CREAMOS EL ARREGLO DE OBJETOS A INCLUIR Y MODIFICAR
-	$objetos=array();
-	$objetos2=array(); 
-  	while ($i<$fil)
-  	{
+	  $objetos=array();
+	  $objetos2=array(); 
+  	  while ($i<$fil)
+  	   {
   		$j=0;
   		$tabla = 'caartalm';
 	  	$id='x'.$i.'id';
@@ -274,24 +274,24 @@ class Herramientas
 			}
 			$objetos[] = $clase;
 	  		
-	  	}
+	  	 }
 	 	
-  	$i++;
-  	} 	
+  	   $i++;
+  	  } 	
       
 	////////////////////////////////////////
 	// CREAMOS EL ARREGLO DE OBJETOS A ELIMINAR
-  	$i=0;
+  	  $i=0;
   	
-  	while ($i<count($eliminar))
-  	{
+  	 while ($i<count($eliminar))
+  	  {
   		
 		$clase2 = CaartalmPeer::retrieveByPk($eliminar[$i]);
 		
 		$objetos2[] = $clase2;
 		
-  	$i++;	
-  	}
+  	  $i++;	
+  	 }
   	
   	$form->resultado=array($objetos,$objetos2);
   	
