@@ -39,8 +39,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 
 }else{ $valor1=false;
 
-} 
-	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
+} 	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
 	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo'),true);",))."   Servicio";
 
 ?></td>
@@ -111,27 +110,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 <?php echo button_to_popup('...','generales/catalogo?clase=Nppartidas&frame=sf_admin_edit_form&obj1=caregart_codpar')?>
-   
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong>Unidad Medida</strong>
 <?php $value = object_input_tag($caregart, 'getUnimed', array (
   'size' => 20,
@@ -140,7 +119,6 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-
 
 <div class="form-row">
   <?php echo label_for('caregart[unialt]', __($labels['caregart{unialt}']), 'class="required" ') ?>
@@ -154,31 +132,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   'control_name' => 'caregart[unialt]',
   'maxlength' => 15,
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong>Relacion</strong>
   <?php $value = object_input_tag($caregart, 'getRelart', array (
   'size' => 25,
@@ -199,44 +153,10 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   'size' => 7,
   'control_name' => 'caregart[exitot]',
   'disabled' => true,
+  'disabled' => true,
   'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",  
 ), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong>Fecha Ult. Compra</strong>
 <?php $value = object_input_date_tag($caregart, 'getFecult', array (
   'rich' => true,
@@ -244,10 +164,11 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   'control_name' => 'caregart[fecult]',
   'date_format' => 'dd/MM/yy',
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'##/##/####')",
-)); echo $value ? $value : '&nbsp;' ?>
-    
+)); echo $value ? $value : '&nbsp;' ?>    
 </div>
+
 </fieldset>
+
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <table width="100%" height="117" border="0">
@@ -262,10 +183,7 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
   'control_name' => 'caregart[cosult]',
   'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",
 ), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
 <strong>Promedio</strong>
 <?php $value = object_input_tag($caregart, 'getCospro', array (
   'size' => 7,
@@ -296,9 +214,8 @@ if ($caregart->getTipo()=='A')	{ $valor1 = true;
 </table>
 </div>
 </fieldset>
-&nbsp;
-&nbsp;
-&nbsp;
+
+&nbsp;&nbsp;&nbsp;
 <form name="form1" id="form1">
 <?
 echo grid_tag($obj);
