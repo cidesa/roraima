@@ -27,7 +27,7 @@ function grid_tag($obj)
 			
 			<table border="0" cellpad="0" cellspace="0" class="sf_admin_list" width="100%">
 			     <tr valign="bottom" bgcolor="#ECEBE6"> 
-			         <td height="1"> 
+			         <td> 
 			             <div class="grid01" id="grid01"> 
 			             <table cellpad="0" cellspace="0" border="0" class="sf_admin_list" width="100%">
 			             <thead><tr>';
