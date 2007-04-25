@@ -194,7 +194,7 @@ class almregartActions extends autoalmregartActions
 		$cabeza="Existencia por Almacenes";
 		$eliminar=true;
 		$titulos=array("Cod. Almacen","Descripción","Cod. Ubicacion","Ubicación","Exi. Mínima","Exi. Máxima","Exi. Actual","Reorden");
-		$ancho="1000";
+		$ancho="1100";
 		$alignf=array('center','left','center','left','right','right','right','right');
 		$alignt=array('center','left','center','l0eft','right','right','right','right');
 		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
