@@ -21,7 +21,7 @@ generator:
       emaorg:       { name: E-Mail}   
      
     list:
-      title:          Definición de Organismos
+      title:          Definición de Organismos Editando 
       filters:        [codorg]
       display:        [codorg, desorg]
       object_actions:

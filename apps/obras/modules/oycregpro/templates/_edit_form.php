@@ -311,7 +311,7 @@ Legal</legend>
 <div id="grid02" class="grid02">
 <table border="0" class="sf_admin_list">
 <?php $nombre=array(0 => 'Cédula:', 1 => 'Nombre',2 => 'Profesión'); ?>
-<? if ( count($rs2)>0){
+<? if (count($rs2)>0){
 	$i=0;
 	foreach ($rs2 as $k=>$fila) {
 		$i++;
@@ -337,7 +337,6 @@ Legal</legend>
 </div>
 
 </fieldset>
-
 <fieldset id="sf_fieldset_none" class=""><legend>Equipos</legend>
 <div class="form-row">
 <div id="grid02" class="grid02">

@@ -27,7 +27,7 @@ class generalesActions extends sfActions
   		$this->registros = array();
   		$this->campos = array();
   		$this->columnas = array();
-  		$this->tabla = '';  		
+  		$this->tabla = '';  	
   		$str = '$this->registros = '.$clase.'Peer::doSelect($c);';
   		eval($str);
   		$str = '$this->campos = '.$clase.'Peer::getArrayFieldsNames();';

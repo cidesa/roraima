@@ -69,7 +69,7 @@ class oycregproActions extends autooycregproActions
 		$this->rs3=$resultado;
 		return $this->rs3;
 	}
-		
+
 	public function executeEdit()
 	{
 		$this->caprovee = $this->getCaproveeOrCreate();
@@ -94,15 +94,15 @@ class oycregproActions extends autooycregproActions
 				return $this->redirect('oycregpro/list');
 			}
 			else
-      {
-        return $this->redirect('oycregpro/edit?id='.$this->caprovee->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
-  }
-    
+			{
+				return $this->redirect('oycregpro/edit?id='.$this->caprovee->getId());
+			}
+		}
+		else
+		{
+			$this->labels = $this->getLabels();
+		}
+	}
+
 }
 

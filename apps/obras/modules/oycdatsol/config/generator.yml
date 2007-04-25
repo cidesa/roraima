@@ -1,0 +1,37 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocdatste
+    theme:            default
+    fields:
+      cedste:    { name: C.I./RIF} 
+      nomste:    { name: Nombre} 
+      codste:    { name: Tipo} 
+      dirste:    { name: Dirección} 
+      telste:    { name: Teléfono(s)}
+      faxste:    { name: Fax} 
+      emaste:    { name: E-Mail} 
+      cedrep:    { name: C. I./RIFp} 
+      nomrep:    { name: Nombre} 
+      dirrep:    { name: Dirección} 
+      telrep:    { name: Teléfono(s)}  
+      faxrep:    { name: Fax}  
+      emarep:    { name: E-Mail}  
+      codpai:    { name: País}  
+      codedo:    { name: Estado}  
+      codmun:    { name: Municipio}  
+      codpar:    { name: Parroquia}  
+      codsec:    { name: Sector}  
+              
+    list:
+      title:          Datos del Solicitante
+      filters:        [cedste]
+      display:        [cedste, nomste]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Datos del Solicitante
+      display:        [cedste, nomste, codste, dirste, telste, faxste, emaste, cedrep, nomrep, dirrep, telrep, faxrep, emarep, codpai, codedo, codmun, codpar, codsec]
+     
