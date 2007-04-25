@@ -288,6 +288,18 @@ class almregartActions extends autoalmregartActions
 		
 	}
   	
-	
+   protected function addFiltersCriteria($c)
+   {
+     if (isset($this->filters['codart_is_empty']))
+      {
+      $criterion = $c->getNewCriterion(CaregartPeer::CODART, '');
+      $criterion->addOr($c->getNewCriterion(CaregartPeer::CODART, null, Criteria::ISNULL));
+      $c->add($criterion);
+     }
+    else if (isset($this->filters['codart']) && $this->filters['codart'] !== '')
+      {
+      $c->add(CaregartPeer::CODART, strtr(str_pad($this->filters['codart'],20,' '), '*', '%'), Criteria::LIKE);
+      }
+   }
 }
 	  

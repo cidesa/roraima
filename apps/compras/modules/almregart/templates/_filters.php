@@ -5,7 +5,7 @@
 <?php use_helper('Object') ?>
 <?php use_helper('Javascript') ?>
 <?php echo javascript_include_tag('dFilter') ?>
-<?php echo javascript_include_tag('validaciones') ?>
+<?php echo javascript_include_tag('tools') ?>
 
 <div class="sf_admin_filters">
 <?php echo form_tag('almregart/list', array('method' => 'get')) ?>
@@ -17,7 +17,7 @@
     <div class="content">
     <?php echo input_tag('filters[codart]', isset($filters['codart']) ? str_pad($filters['codart'], 20 , ' '): null, array (
   'size' => 15,
-  'onBlur' => "javascript:return rayitas(this.value);document.getElementById('filters_codart').value=cadena;",
+  'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('filters_codart').value=cadena;",
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraarticulo')",  
 )) ?>
     </div>
