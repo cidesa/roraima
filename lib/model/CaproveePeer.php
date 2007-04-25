@@ -9,6 +9,17 @@
  */ 
 class CaproveePeer extends BaseCaproveePeer
 {
+	public static function getNomprovee($codpro)
+	{
+		$c = new Criteria();
+		$c->add(CaproveePeer::CODPRO,str_pad($codpro, 10 , ' '));
+		$despro = CaproveePeer::doSelectone($c);
+		if ($despro){
+			return $despro->getNompro();
+		}else{
+			return '<!Nombre no encontrado!>';
+		}
+	}
 	const COLUMNS = 'columns';
 	
 	public static $columsname = array (

@@ -17,5 +17,15 @@ class BnubibiePeer extends BaseBnubibiePeer
 		
 	}
 	
-	
+    public static  function getNomubicac($codubi)
+	{
+		$c = new Criteria();
+		$c->add(self::CODUBI,str_pad($codubi, 30 , ' '));
+		$des = self::doSelectone($c);
+		if ($des){
+			return $des->getDesubi();
+		}else{
+			return '<!Nombre no encontrado!>';
+		}
+	}
 }

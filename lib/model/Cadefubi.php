@@ -9,4 +9,5 @@
  */ 
 class Cadefubi extends BaseCadefubi
 {
+
 }

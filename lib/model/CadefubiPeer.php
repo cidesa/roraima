@@ -9,4 +9,8 @@
  */ 
 class CadefubiPeer extends BaseCadefubiPeer
 {
+	public static function getDesubicacion($codubi)
+	{
+    	return Herramientas::getX('CODUBI','Cadefubi','Nomubi',str_pad($codubi, 20 , ' '));		
+	}
 }

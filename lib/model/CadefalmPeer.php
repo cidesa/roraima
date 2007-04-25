@@ -9,6 +9,11 @@
  */ 
 class CadefalmPeer extends BaseCadefalmPeer
 {
+	public static function getDesalmacen($codalm)
+	{
+    	return Herramientas::getX('CODALM','Cadefalm','Nomalm',str_pad($codalm, 6 , '0','STR_PAD_LEFT'));		
+	}
+	
 	const COLUMNS = 'columns';
 	
 	public static $columsname = array (
