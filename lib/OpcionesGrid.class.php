@@ -21,9 +21,9 @@ class OpcionesGrid
   private $tabla ='';
 	
 			
-  public function newColumn()
+  public function newColumn($name='')
   {
-	$colums[] = new Columna(); 
+	$colums[] = new Columna($name); 
   }
 
   public function setEliminar($val){
@@ -54,7 +54,7 @@ class OpcionesGrid
 
   public function setTabla($val){
     
-    self::$tabla = $val;
+    self::$tabla = ucfirst(strtolower($val));
     
   }
   
@@ -178,7 +178,7 @@ class Columna
   private $idfuncion = '';
   private $objmostrar = '';
   private $objcompletar= '';
-  private $htmltoatlfilas='';
+  private $htmltotalfilas='';
   
   public function setTitulo($val){ // $titulos
       use_helper('I18N');
@@ -239,7 +239,9 @@ class Columna
   }
   
  
-  public function Columna(){ // Constructor ****************  
+  public function Columna($name){ // Constructor ****************  
+    self::setTitulo($name);  
+    
     
     }
   
