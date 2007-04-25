@@ -14,8 +14,8 @@ class OpcionesGrid
 {
 	private $colums = array();
 	private $eliminar = true;
-	private $eliminar = 'Título';
-	private $filas = 17;
+	private $titulo = 'Título';
+	private $filas = 10;
 	
 			
 	public function newColumn()
@@ -25,9 +25,10 @@ class OpcionesGrid
 	}
 
     public function setEliminar($val){
-    
-    
-      
+
+      if(is_bool($val)){
+        $eliminar = $val;
+      }
       
 	}
 
@@ -36,39 +37,62 @@ class OpcionesGrid
       $titulo = __($val);
     }
 	
-	public function setFilas($val) {$filas=$val;}
+	public function setFilas($val){
+	  
+	  if(is_int($val)){
+	    $filas=$val;
+	  }
+	  
+	}
 	
-	
-}
+	public function getConfig(){
+	  
+      foreach ($colums as $key => $col){
 
-		//////////////////////
-		//GRID
-		$c = new Criteria();
-		$c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
-		$per = CaartalmPeer::doSelect($c);
-		
-		//$filas=17;
+        //$filas=17;
 		//$cabeza="Existencia";
 		//$eliminar=true;
-		//$titulos=array("Cod. Almacen","Descripción","Cod. Ubicacion","Ubicación","Exi. Mínima","Exi. Máxima","Exi. Actual","Reorden");
-		//$anchos=array("10%","20%","10%","20%","10%","10%","10%","10%");
-		//$alignf=array('center','left','center','left','right','right','right','right');
-		//$alignt=array('center','left','center','left','right','right','right','right');
-		//$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
-		//$tipos=array('t','t','m','m','m','m'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
-		//$montos=array("5","6","7","8");
-		//$totales=array("", "", "", "");
-		$mascaraubicacion=$this->mascaraubicacion;
-		//$html=array('type="text" size="5"','type="text" size="25" disabled=true','type="text" size="5"','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
-		//$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
-		//$grabar=array("1","3","5","6","7","8");
-		//$filatotal='';
+
+        $titulos[]  =    $col->getTitulo();
+		$anchos[]   =    $col->getAncho();
+		$alignf[]   =    $col->getAlineacionObjeto();
+		$alignt[]   =    $col->getAlineacionContenido();
+		$campos     =    $col->getNombreCampo();
+		if($col->isGrabable()){
+		  $t = $col->getTipo();
+		  $tipos    =    $t; //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
+          if($t == Columna::MONTO){
+            $montos =    $key+1;
+			if($col->isTotal()){
+			  $totales[] = $col->getTotal();
+			  $filatotal[] = $col->getObjetoTotal();
+			}else{
+			  $totales[] = '';
+			  $filatotal[] = '';
+			}
+			
+          }		  
+		}
+
+		$html[]     =    $col->getHTML();
+		$js[]       =    $col->getJScript();
 		
-		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
+		if($col->isGrabable()){
+		  $grabar[] =    $key+1;
+		}
+		
+		
+		
+
+		$obj=array('cabeza'=>self::$titulo, 'filas'=>self::$filas, 'eliminar'=>self::$eliminar, 'titulos'=>$titulos, 
 		'anchos'=>$anchos, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'tipos' => $tipos, 
 		'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 'html'=>$html, 'js'=>$js, 
 		'datos'=>$per, 'grabar'=>$grabar);
-
+        
+      }
+	}
+	
+}
 
 class Columna
 {
@@ -78,9 +102,9 @@ class Columna
   
   CONST TEXTO = 't';
   CONST MONTO = 'm';
+  CONST FECHA = 'f';
   
-  
-  
+    
   private $titulo='';
   private $ancho='';
   private $alignf='';
@@ -89,6 +113,7 @@ class Columna
   private $type='';
   private $isnumeric=false;
   private $istotal=false;
+  private $objtotal='';
   private $js='';
   private $html = 'type="text" size="10"';
   private $save = false;
@@ -103,28 +128,29 @@ class Columna
 	  $ancho = $val;
 	}
 
-  public function setAlingObject($val){ // $alignf
+  public function setAlineacionObjecto($val){ // $alignf
 	  $alignf = $val;
 	}
 
-  public function setAlingContent($val){ // $alignt
+  public function setAlineacionContenido($val){ // $alignt
 	  $alignt = $val;
 	}
 
-  public function setFieldName($val){ // $campos
+  public function setNombreCampo($val){ // $campos
 	  $field = ucfirst(strtolower($val));
 	}
 	
-  public function setType($val){ // $tipos
+  public function seTipo($val){ // $tipos
 	  $type = $val;
 	}
 	
-  public function isNumeric($val){ // $montos
+  public function setEsNumerico($val){ // $montos
 	  $isnumeric = $val; 
 	}
 
-  public function isTotal($val){ // $totales
-	  $istotal = $val; 
+  public function setEsTotal($val,$obj){ // $totales
+	  $istotal = $val;
+	  $objtotal = $obj;
 	}
 	
   public function setJScript($val){ // $js
@@ -135,7 +161,7 @@ class Columna
 	  $html = $val; 
 	}
 
-  public function isSave($val){ // $grabar
+  public function setEsGrabable($val){ // $grabar
 	  $save = $val; 
 	}
 	
@@ -143,7 +169,57 @@ class Columna
     
     }
   
+
+  public function getTitulo(){ // $titulos
+      return self::$titulo;
+	}
 	
+  public function getAncho(){ // $anchos
+	  return $ancho;
+	}
+
+  public function getAlineacionObjecto(){ // $alignf
+	  return $alignf;
+	}
+
+  public function getAlingContent(){ // $alignt
+	  return $alignt;
+	}
+
+  public function getNombreCampo(){ // $campos
+	  return $field;
+	}
+	
+  public function getTipo(){ // $tipos
+	  return $type;
+	}
+	
+  public function isNumerico(){ // $montos
+	  return $isnumeric; 
+	}
+
+  public function isTotal(){ // $totales
+	  return $istotal; 
+	}
+	
+  public function getObjetoTotal(){ // $totales
+	  return $objtotal; 
+	}
+	
+  public function getJScript(){ // $js
+	  return $js; 
+	}
+
+  public function getHTML(){ // $html
+	  return $html; 
+	}
+
+  public function isGrabable(){ // $grabar
+	  return $save; 
+	}
+	
+    
+    
 }
 
 ?>
