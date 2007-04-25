@@ -11,19 +11,14 @@
 <?php echo object_input_hidden_tag($ocdatste, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-
-<div class="form-row">
-  <?php echo label_for('ocdatste[cedste]', __($labels['ocdatste{cedste}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('ocdatste{cedste}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('ocdatste{cedste}')): ?>
-    <?php echo form_error('ocdatste{cedste}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($ocdatste, 'getCedste', array (
+<div class="form-row"><?php echo label_for('ocdatste[cedste]', __($labels['ocdatste{cedste}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('ocdatste{cedste}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('ocdatste{cedste}')): ?> <?php echo form_error('ocdatste{cedste}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($ocdatste, 'getCedste', array (
   'size' => 20,
   'control_name' => 'ocdatste[cedste]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
 <div class="form-row">
@@ -52,9 +47,7 @@
   'control_name' => 'ocdatste[codste]',
 )); echo $value ? $value : '&nbsp;' ?>
 <?php echo button_to_popup('...','generales/catalogo?clase=Octipste&frame=sf_admin_edit_form&obj1=ocdatste_codste&obj2=desste')?>
-<?php if (isset($desste)): ?>
-	<?php echo input_tag('desste',$desste,'size=70,disabled=true'); ?>
-<?php endif; ?> 
+&nbsp;<?php echo input_tag('desste',$desste,'size=70,disabled=true'); ?>
 	</div>
 </div>
 
@@ -203,13 +196,8 @@
   <div class="content<?php if ($sf_request->hasError('ocdatste{codpai}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocdatste{codpai}')): ?>
     <?php echo form_error('ocdatste{codpai}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($ocdatste, 'getCodpai', array (
-  'size' => 20,
-  'control_name' => 'ocdatste[codpai]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+    <?php endif; ?> <?php echo select_tag('ocdatste[codpai]', options_for_select($pais,$ocdatste->getCodpai())); ?>
+</div>
 </div>
 
 <div class="form-row">
@@ -219,10 +207,7 @@
     <?php echo form_error('ocdatste{codedo}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocdatste, 'getCodedo', array (
-  'size' => 20,
-  'control_name' => 'ocdatste[codedo]',
-)); echo $value ? $value : '&nbsp;' ?>
+  <?php echo select_tag('ocdatste[codpai]', options_for_select($pais,$ocdatste->getCodpai())); ?>
     </div>
 </div>
 
@@ -233,10 +218,7 @@
     <?php echo form_error('ocdatste{codmun}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocdatste, 'getCodmun', array (
-  'size' => 20,
-  'control_name' => 'ocdatste[codmun]',
-)); echo $value ? $value : '&nbsp;' ?>
+  <?php echo select_tag('ocdatste[codpai]', options_for_select($pais,$ocdatste->getCodpai())); ?>
     </div>
 </div>
 
@@ -247,10 +229,7 @@
     <?php echo form_error('ocdatste{codpar}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocdatste, 'getCodpar', array (
-  'size' => 20,
-  'control_name' => 'ocdatste[codpar]',
-)); echo $value ? $value : '&nbsp;' ?>
+  <?php echo select_tag('ocdatste[codpai]', options_for_select($pais,$ocdatste->getCodpai())); ?>
     </div>
 </div>
 
@@ -261,11 +240,8 @@
     <?php echo form_error('ocdatste{codsec}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocdatste, 'getCodsec', array (
-  'size' => 20,
-  'control_name' => 'ocdatste[codsec]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+  <?php echo select_tag('ocdatste[codpai]', options_for_select($pais,$ocdatste->getCodpai())); ?>
+   </div>
 </div>
 
 </fieldset>
