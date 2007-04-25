@@ -200,14 +200,14 @@ class Herramientas
 		    return ' ';
 	  }  
   
-    public static function CargarDatosGrid(&$form)
+    public static function CargarDatosGrid(&$form,$obj)
      {
    	   	$i=0;
-	  	$fil=$form->obj["filas"];
-	  	$col=count($form->obj["grabar"]);
-	  	$grabar=$form->obj["grabar"];
-	  	$campos=$form->obj["campos"];
-	  	$tipos=$form->obj["tipos"];
+	  	$fil=$obj["filas"];
+	  	$col=count($obj["grabar"]);
+	  	$grabar=$obj["grabar"];
+	  	$campos=$obj["campos"];
+	  	$tipos=$obj["tipos"];
 	  	$eliminar=split("-",$form->getRequestParameter('txtidborrar'));
 	  	
   	
@@ -218,14 +218,14 @@ class Herramientas
   	  while ($i<$fil)
   	   {
   		$j=0;
-  		$tabla = 'caartalm';
+  		$tabla = $obj['tabla'];
 	  	$id='x'.$i.'id';
 	  	$cajchk='x'.$i.'1';
 	  	
 	  	
 	  	if ( ($form->getRequestParameter($id)!="") )//modificacion
 	  	{
-	  		$clase = CaartalmPeer::retrieveByPk($form->getRequestParameter($id));
+	  		eval('$clase = '.$tabla.'Peer::retrieveByPk($form->getRequestParameter($id));');
 	  		
 			while ($j<$col)
 			{
@@ -286,7 +286,7 @@ class Herramientas
   	 while ($i<count($eliminar))
   	  {
   		
-		$clase2 = CaartalmPeer::retrieveByPk($eliminar[$i]);
+		eval('$clase2 = '.$tabla.'Peer::retrieveByPk($eliminar[$i]);');
 		
 		$objetos2[] = $clase2;
 		
