@@ -34,19 +34,19 @@
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraarticulo')",
 )); echo $value ? $value : '&nbsp;' ?> </div></td>
     <td width="20%"><div><?
-if ($caregart->getTipo()=='S')	{ $valor1 = false;
-
-}else{ $valor1=true;
-
-} 	if ($caregart->getId()=='')
-{
-   echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
-	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo'),true);",))."   Servicio";
-}else
-{
-    echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('disabled'=> true, 'onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
-	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('disabled'=> true, 'onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo'),true);",))."   Servicio";
-}
+	if ($caregart->getTipo()=='S'){$valor1 = false;}else{ $valor1=true;}
+	
+	if ($caregart->getId()=='') //Es una Articulo o Servicio Nuevo
+	{
+	   	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
+		echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo-2'),true);",))."   Servicio";
+	}
+	else //Aqui es modo Consulta  o Edicion
+	{
+    	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('disabled'=> true))        ."Articulo".'&nbsp;&nbsp;';
+		echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('disabled'=> true))."   Servicio";
+				
+	}
 ?></div></td>
     <td width="57%"><strong>Codigo Contable</strong>    
 <?php $value = object_input_tag($caregart, 'getCodcta', array (
@@ -227,6 +227,14 @@ echo grid_tag($obj);
 ?>
 </form>
 
+<?
+if ( ($caregart->getId()!='') and $caregart->getTipo()=='S') //ES UN SERVICIO
+		{
+			echo javascript_tag("
+                    javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart'),true);
+				"); 
+		}
+?>
 <?php include_partial('edit_actions', array('caregart' => $caregart)) ?>
 
 </form>
