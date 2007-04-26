@@ -16,7 +16,7 @@
 <?php echo object_input_hidden_tag($caregart, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend>Datos del Articulo y/o Servicio</legend>
+<legend>Datos del Artículo ó Servicio</legend>
 <div class="form-row">
 <table width="93%" height="5" border="0">
   <tr>
@@ -38,17 +38,17 @@
 	
 	if ($caregart->getId()=='') //Es una Articulo o Servicio Nuevo
 	{
-	   	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
+	   	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Artículo".'&nbsp;&nbsp;';
 		echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo-2'),true);",))."   Servicio";
 	}
 	else //Aqui es modo Consulta  o Edicion
 	{
-    	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('disabled'=> true))        ."Articulo".'&nbsp;&nbsp;';
+    	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('disabled'=> true))        ."Artículo".'&nbsp;&nbsp;';
 		echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('disabled'=> true))."   Servicio";
 				
 	}
 ?></div></td>
-    <td width="57%"><strong>Codigo Contable</strong>    
+    <td width="57%"><strong>C&oacute;digo Contable</strong>    
 <?php $value = object_input_tag($caregart, 'getCodcta', array (
   'size' => 20,
   'control_name' => 'caregart[codcta]',
@@ -138,7 +138,7 @@
   'maxlength' => 15,
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong>Relacion</strong>
+<strong>Relaci&oacute;n</strong>
   <?php $value = object_input_tag($caregart, 'getRelart', array (
   'size' => 25,
   'control_name' => 'caregart[relart]',
@@ -162,7 +162,7 @@
   'onKeyPress' => "javascript:return entermontootro(event, this.id,this.id)",  
 ), $default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong>Fecha Ult. Compra</strong>
+<strong>Fecha &Uacute;lt. Compra</strong>
 <?php $value = object_input_date_tag($caregart, 'getFecult', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
@@ -182,7 +182,7 @@
     <fieldset id="sf_fieldset_none" class="">
 <legend>Costos</legend>
 <div class="form-row">
-<strong>Ultimo</strong>
+<strong>&Uacute;ltimo</strong>
 <?php $value = object_input_tag($caregart, 'getCosult', array (
   'size' => 7,
   'control_name' => 'caregart[cosult]',

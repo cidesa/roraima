@@ -239,20 +239,20 @@ class almregartActions extends autoalmregartActions
 	protected function getLabels()
 	  {
 	    return array(
-	      'caregart{codart}' => 'Codigo del Articulo:',
-	      'caregart{tipo}' => 'Inicial:',
-	      'caregart{codcta}' => 'Codigo Contable:',
-	      'caregart{desart}' => 'Descripcion:',
-	      'caregart{ramart}' => 'Ramo:',
-	      'caregart{codpar}' => 'Partida:',
-	      'caregart{unimed}' => 'Unidad Medida:',
-	      'caregart{unialt}' => 'Unidad Alterna:',
-	      'caregart{relart}' => 'Relacion:',
-	      'caregart{exitot}' => 'Existencia Total:',
-	      'caregart{fecult}' => 'Fecha Ult. Compra:',
-	      'caregart{cosult}' => 'Ultimo:',
-	      'caregart{cospro}' => 'Promedio:',
-	      'caregart{invini}' => 'Inicial:',
+	      'caregart{codart}' => 'Código',
+	      'caregart{tipo}' => 'Inicial',
+	      'caregart{codcta}' => 'Código Contable',
+	      'caregart{desart}' => 'Descripción',
+	      'caregart{ramart}' => 'Ramo',
+	      'caregart{codpar}' => 'Partida',
+	      'caregart{unimed}' => 'Unidad Medida',
+	      'caregart{unialt}' => 'Unidad Alterna',
+	      'caregart{relart}' => 'Relación',
+	      'caregart{exitot}' => 'Existencia Total',
+	      'caregart{fecult}' => 'Fecha Últ. Compra',
+	      'caregart{cosult}' => 'Último',
+	      'caregart{cospro}' => 'Promedio',
+	      'caregart{invini}' => 'Inicial',
 	    );
 	  } 
 

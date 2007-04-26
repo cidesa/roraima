@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Articulos', 
+<h1><?php echo __('Artículos y Servicios', 
 array()) ?></h1>
 
 <div id="sf_admin_header">

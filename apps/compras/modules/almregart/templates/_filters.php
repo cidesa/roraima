@@ -13,7 +13,7 @@
   <fieldset>
     <h2><?php echo __('filters') ?></h2>
     <div class="form-row">
-    <label for="codart"><?php echo __('Codigo del Articulo:') ?></label>
+    <label for="codart"><?php echo __('Código') ?></label>
     <div class="content">
     <?php echo input_tag('filters[codart]', isset($filters['codart']) ? str_pad($filters['codart'], 20 , ' '): null, array (
   'size' => 15,
