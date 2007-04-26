@@ -22,6 +22,16 @@
 )) ?>
     </div>
     </div>
+    
+           <div class="form-row">
+    <label for="tipo"><?php echo __('Tipo') ?></label>
+    <div class="content">
+    <?php echo input_tag('filters[tipo]', isset($filters['tipo']) ? $filters['tipo'] : null, array (
+  'size' => 1,
+  'onBlur' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('filters_tipo').value=cadena"
+)) ?>
+    </div>
+    </div>
 
       </fieldset>
 

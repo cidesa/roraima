@@ -20,7 +20,7 @@ generator:
       invini: { name: Inicial}      
     list:
       title:          Artículos y Servicios
-      filters:        [codart]
+      filters:        [codart, tipo]
       display:        [=codart, desart, tipo]
       fields:        
         fecult: { params: date_format='dd/MM/yy' }             

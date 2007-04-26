@@ -10,11 +10,10 @@
  */
 class almregartActions extends autoalmregartActions
 { 
-    private static $coderror=-1;
-    	
+    private static $coderror=-1; 
+       	
     public function validateEdit()
-	  {  
-	 
+	  {  	 
 	  	if($this->getRequest()->getMethod() == sfRequest::POST)
 	    { 
 	    	$this->caregart = $this->getCaregartOrCreate();
@@ -87,9 +86,8 @@ class almregartActions extends autoalmregartActions
 	  
 	    if(!$this->validateEdit())
 	    {
-	     $err = Herramientas::obtenerMensajeError(self::$coderror);
-	    
-	    $this->getRequest()->setError('caregart{codart}',$err);	
+	     $err = Herramientas::obtenerMensajeError(self::$coderror);	    
+	     $this->getRequest()->setError('caregart{codart}',$err);	
 	    }
 	    return sfView::SUCCESS;
 	
@@ -308,6 +306,16 @@ class almregartActions extends autoalmregartActions
       {
       $c->add(CaregartPeer::CODART, strtr(str_pad($this->filters['codart'],20,' '), '*', '%'), Criteria::LIKE);
       }
+   if (isset($this->filters['tipo_is_empty']))
+    {
+      $criterion = $c->getNewCriterion(CaregartPeer::TIPO, '');
+      $criterion->addOr($c->getNewCriterion(CaregartPeer::TIPO, null, Criteria::ISNULL));
+      $c->add($criterion);
+    }
+    else if (isset($this->filters['tipo']) && $this->filters['tipo'] !== '')
+    {
+      $c->add(CaregartPeer::TIPO, strtr($this->filters['tipo'], '*', '%'), Criteria::LIKE);
+    }
    }
 }
 	  
