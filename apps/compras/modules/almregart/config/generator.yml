@@ -4,8 +4,8 @@ generator:
     model_class:      Caregart
     theme:            default
     fields:
-      codart: { name: Codigo del Articulo}
-      tipo: { name: Inicial}
+      codart: { name: Codigo}
+      tipo: { name: (A)rticulo ó (S)ervicio}
       codcta: { name: Codigo Contable}
       desart: { name: Descripcion}
       ramart: { name: Ramo}
@@ -19,9 +19,9 @@ generator:
       cospro: { name: Promedio}
       invini: { name: Inicial}      
     list:
-      title:          Articulos
+      title:          Articulos y Servicios
       filters:        [codart]
-      display:        [=codart, desart, unimed]
+      display:        [=codart, desart, tipo]
       fields:        
         fecult: { params: date_format='dd/MM/yy' }             
       object_actions:
@@ -29,7 +29,7 @@ generator:
         _delete:        ~
       max_per_page:   5
     edit:
-      title:         Registro de Articulos
+      title:         Registro de Articulos ó Servicios
       display:        [=codart, tipo, codcta, desart, ramart, codpar, unimed, unialt, relart, exitot, fecult, cosult, cospro, invini]
       fields:
         fecult: { params: date_format='dd/MM/yy' }
