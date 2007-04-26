@@ -85,11 +85,12 @@ class almregartActions extends autoalmregartActions
 	    $this->updateCaregartFromRequest();
 	    $this->labels = $this->getLabels();
 	  
-	    
+	    if(!$this->validateEdit())
+	    {
 	     $err = Herramientas::obtenerMensajeError(self::$coderror);
 	    
 	    $this->getRequest()->setError('caregart{codart}',$err);	
-	   
+	    }
 	    return sfView::SUCCESS;
 	
   } 
