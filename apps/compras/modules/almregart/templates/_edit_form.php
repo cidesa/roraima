@@ -33,15 +33,21 @@
   'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('caregart_codart').value=cadena;",
   'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaraarticulo')",
 )); echo $value ? $value : '&nbsp;' ?> </div></td>
-    <td width="20%"><?
-if ($caregart->getTipo()=='A')	{ $valor1 = true;
+    <td width="20%"><div><?
+if ($caregart->getTipo()=='S')	{ $valor1 = false;
 
-}else{ $valor1=false;
+}else{ $valor1=true;
 
-} 	echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
+} 	if ($caregart->getId()=='')
+{
+   echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
 	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo'),true);",))."   Servicio";
-
-?></td>
+}else
+{
+    echo radiobutton_tag('caregart[tipo]', 'A', $valor1, array('disabled'=> true, 'onClick' => "javascript:disableAllObjetos(a=new Array('caregart_exitot'),false);",))        ."Articulo".'&nbsp;&nbsp;';
+	echo "<br>".radiobutton_tag('caregart[tipo]', 'S', !$valor1, array('disabled'=> true, 'onClick' => "javascript:disableAllObjetos(a=new Array('caregart_codart','caregart_desart','caregart_tipo'),true);",))."   Servicio";
+}
+?></div></td>
     <td width="57%"><strong>Codigo Contable</strong>    
 <?php $value = object_input_tag($caregart, 'getCodcta', array (
   'size' => 20,
