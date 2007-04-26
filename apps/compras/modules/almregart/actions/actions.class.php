@@ -14,18 +14,19 @@ class almregartActions extends autoalmregartActions
     	
     public function validateEdit()
 	  {  
-	  	
+	 
 	  	if($this->getRequest()->getMethod() == sfRequest::POST)
 	    { 
 	    	$this->caregart = $this->getCaregartOrCreate();
 	    	$this->updateCaregartFromRequest();
+	    	
 	    	self::$coderror=Articulos::validarAlmregart($this->caregart);
-	    	if (self::$coderror<>-1){
+	    	if (self::$coderror<>-1){	    		 	
 	    		return false;
 	    	}else return true;
 	    }else return true;   
 	  }  
-	 
+	  
 	public function executeList()
 	  {
 	    $this->processSort();	    
@@ -83,16 +84,15 @@ class almregartActions extends autoalmregartActions
 	  	$this->caregart = $this->getCaregartOrCreate();
 	    $this->updateCaregartFromRequest();
 	    $this->labels = $this->getLabels();
-	    if (!$this->validateEdit())
-	    {
+	  
+	    
 	     $err = Herramientas::obtenerMensajeError(self::$coderror);
 	    
 	    $this->getRequest()->setError('caregart{codart}',$err);	
-	    }   
-
+	   
 	    return sfView::SUCCESS;
-	  }  
-
+	
+  } 
 	protected function updateCaregartFromRequest()
 	  {
 	    $caregart = $this->getRequestParameter('caregart');

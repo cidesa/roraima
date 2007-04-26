@@ -14,7 +14,8 @@ methods:
 names: 
   caregart{codart}:
     required:  Yes
-    required_msg: El Código del Articulo no puedo estar en Blanco        
+    required_msg: El Código del Articulo no puedo estar en Blanco
+    validators: MyStringValidator6        
 
   caregart{desart}:
     required:  Yes
@@ -60,6 +61,12 @@ MyStringValidator:
         min_error: La Descripción no puede tener menos de 2 caracteres
         max:       250
         max_error: La Descripción no puede pasar mas de 250 caracteres
+
+MyStringValidator6:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 2 caracteres        
         
 MyString2Validator:
     class: sfStringValidator

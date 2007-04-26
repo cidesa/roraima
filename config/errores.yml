@@ -3,4 +3,4 @@
   msj: Nivel Anterior No Existe
 2:
   cod: 2
-  msj: Otro
+  msj: El Codigo no puede estar en Blanco ó No puede Contener menos de 4 Carácteres

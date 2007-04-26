@@ -62,8 +62,8 @@ class Herramientas
 		$tamano=strlen($palabra);
 		$cont=0;
 		$cont_conc=0;
-		
-		for ($i=$comienzo;$i<=$tamano;$i++){
+				
+		for ($i=$comienzo;$i<$tamano;$i++){
 			$cont=$cont+1;
 			if ($palabra[$i]==$busqueda):
 				$cont_conc=$cont_conc+1;
@@ -79,7 +79,7 @@ class Herramientas
 				 $cont;
 			endif;
 		
-		return $instr=$cont;
+		return $instr=$cont;		
 		}
 				
 	public static function FormarCodigoPadre($codigo,&$nivelcodigo,&$ultimo)
@@ -90,13 +90,13 @@ class Herramientas
 	  	 $loncad=split("-",$cadena);
 	  	 $lonniv=strlen($loncad[0]);
 	  	 $loncodigo=(strlen($codigo));  	 	 
-	  	  if ($lonniv==$loncodigo){  	  	
+	  	  if ($lonniv==$loncodigo || $loncodigo==0){  	  	
 	  	  	$nivelcodigo=1;
 	  	   	$padre=''; 
 	  	   	return false; 	  	
 	  	  }else{  	  
 	  	  	$nivelcodigo=0;
-	  	  	$padre=Herramientas::instr($codigo,'-',0,1);  
+	  	  	$padre=Herramientas::instr($codigo,'-',0,4);  
 	  	  	$pad=($padre-1);
 	  	  	$cad=(substr($codigo,0,$pad));
 	  	  	$ultimo=str_pad($cad,20,' ');  	  	  

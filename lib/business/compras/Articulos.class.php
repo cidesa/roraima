@@ -54,9 +54,12 @@ class Articulos
 	    
 	public static function validarCodart($articulo)
 	{
-
-	  	$codart=$articulo->getCodart();  
-
+       	$codart=$articulo->getCodart();
+       	if (strlen(trim($codart))<4)
+       	{
+       		return 2;
+       	}
+        
 	  	Herramientas::FormarCodigoPadre($codart,&$nivelcodigo,&$ultimo);  	  		
 	  	  if (!(Herramientas::buscar_codigo_padre($ultimo))){
 	  	  	If ($nivelcodigo == 0){
