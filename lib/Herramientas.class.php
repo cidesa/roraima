@@ -90,13 +90,13 @@ class Herramientas
 	  	 $loncad=split("-",$cadena);
 	  	 $lonniv=strlen($loncad[0]);
 	  	 $loncodigo=(strlen($codigo));  	 	 
-	  	  if ($lonniv==$loncodigo || $loncodigo==0){  	  	
+	  	  if ($lonniv==$loncodigo){  	  	
 	  	  	$nivelcodigo=1;
 	  	   	$padre=''; 
 	  	   	return false; 	  	
 	  	  }else{  	  
 	  	  	$nivelcodigo=0;
-	  	  	$padre=Herramientas::instr($codigo,'-',0,4);  
+	  	  	$padre=Herramientas::instr($codigo,'-',0,1);  
 	  	  	$pad=($padre-1);
 	  	  	$cad=(substr($codigo,0,$pad));
 	  	  	$ultimo=str_pad($cad,20,' ');  	  	  
