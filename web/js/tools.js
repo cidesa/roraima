@@ -105,7 +105,20 @@
 		{
 			for(i=0;i<document.forms[0].elements.length;i++) document.forms[0].elements[i].disabled = val;
 			
-			for(i=0;i<obj.length;i++) document.getElementById(obj[i]).disabled = !val;
+
+			for(i=0;i<obj.length;i++) 
+			{
+ 			 tip=obj[i].split('-');
+ 			 if (tip.length==1) //Verifico que no sea radio button
+ 			 	 document.getElementById(obj[i]).disabled = !val;
+ 			 else // Es un radio button, entonces se activa o desactiva segun el nro de radio button indicados			 
+ 			 {
+ 			    cont=parseInt(tip[1]);
+ 			    nombre=tip[0];
+			  	for(j=0;j<cont;j++)
+			  	   eval('document.forms[0].'+nombre+'[j].disabled=!val');
+ 			 }
+			} 		
 		}
 	
 	
