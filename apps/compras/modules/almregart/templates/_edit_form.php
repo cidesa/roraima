@@ -16,7 +16,7 @@
 <?php echo object_input_hidden_tag($caregart, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend>Datos del Articulo</legend>
+<legend>Datos del Articulo y/o Servicio</legend>
 <div class="form-row">
 <table width="93%" height="5" border="0">
   <tr>
