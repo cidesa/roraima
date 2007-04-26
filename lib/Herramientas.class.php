@@ -203,7 +203,8 @@ class Herramientas
     public static function CargarDatosGrid(&$form,$obj)
      {
    	   	$i=0;
-	  	$fil=$obj["filas"];
+
+	  	$fil=count($obj["datos"])+$obj["filas"];
 	  	$col=count($obj["grabar"]);
 	  	$grabar=$obj["grabar"];
 	  	$campos=$obj["campos"];
