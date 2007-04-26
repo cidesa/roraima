@@ -184,6 +184,7 @@ class almregartActions extends autoalmregartActions
 	  
     public function configGrid()
 	{
+	  if(true){
 		//////////////////////
 		//GRID
 		$c = new Criteria();
@@ -213,8 +214,14 @@ class almregartActions extends autoalmregartActions
 		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
 		'ancho'=>$ancho, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
 		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 
-		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar);
+		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar, 'tabla' => 'Caartalm');
 		////////////////////// 
+
+	  }else {
+	    
+	    
+	  }
+	  
 	}
 	  
 	protected function processFilters()
@@ -250,9 +257,9 @@ class almregartActions extends autoalmregartActions
 
 	protected function saveCaregart($caregart)
 	  {
-		$grid=Herramientas::CargarDatosGrid($this);
+		$grid=Herramientas::CargarDatosGrid($this,$this->obj);
 
-	  	Articulos::salvarAlmregart($caregart,$grid);    
+	  	Articulos::salvarAlmregart($caregart,$grid);
 	  } 
 
 	public function executeAjax()
