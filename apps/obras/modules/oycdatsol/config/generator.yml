@@ -7,6 +7,7 @@ generator:
       cedste:    { name: C.I./RIF} 
       nomste:    { name: Nombre} 
       codste:    { name: Tipo} 
+      desste:    { name: Descripci�n Tipo} 
       dirste:    { name: Dirección} 
       telste:    { name: Teléfono(s)}
       faxste:    { name: Fax} 
@@ -33,5 +34,5 @@ generator:
       max_per_page:   5
     edit:
       title:          Datos del Solicitante
-      display:        [cedste, nomste, codste, dirste, telste, faxste, emaste, cedrep, nomrep, dirrep, telrep, faxrep, emarep, codpai, codedo, codmun, codpar, codsec]
+      display:        [cedste, nomste, codste, desste, dirste, telste, faxste, emaste, cedrep, nomrep, dirrep, telrep, faxrep, emarep, codpai, codedo, codmun, codpar, codsec]
      
