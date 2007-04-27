@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edicion de Niveles', 
+<h1><?php echo __('Niveles Presupuestarios', 
 array()) ?></h1>
 
 <div id="sf_admin_header">
