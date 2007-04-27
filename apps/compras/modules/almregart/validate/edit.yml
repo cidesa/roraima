@@ -1,126 +1,112 @@
 methods:
   post:
-   - "ocdatste{cedste}"      
-   - "ocdatste{nomste}"
-   - "ocdatste{codste}"
-   - "ocdatste{dirste}"
-   - "ocdatste{telste}"
-   - "ocdatste{faxste}"
-   - "ocdatste{emaste}"   
-   - "ocdatste{cedrep}"
-   - "ocdatste{nomrep}"
-   - "ocdatste{dirrep}"
-   - "ocdatste{telrep}"
-   - "ocdatste{faxrep}"
-   - "ocdatste{emarep}"
-      
+   - "caregart{codart}"      
+   - "caregart{desart}"
+   - "caregart{ramart}"
+   - "caregart{unimed}"
+   - "caregart{unialt}"
+   - "caregart{relart}"
+   - "caregart{exitot}"   
+   - "caregart{cosult}"
+   - "caregart{cospro}"
+   - "caregart{invini}"
+   
 names: 
-  ocdatste{cedste}:
+  caregart{codart}:
     required:  Yes
-    required_msg: El C.I./RIF no puedo estar en Blanco        
-    validators: Validator_rif
-    
-  ocdatste{nomste}:
-    required:  Yes
-    required_msg: El Nombre no puedo estar en Blanco        
-    validators: Validator_nomste
-    
-  ocdatste{codste}:
-    required:  Yes
-    required_msg: El Nombre no puedo estar en Blanco        
+    required_msg: El C贸digo del Articulo no puedo estar en Blanco
+    validators: MyStringValidator6        
 
+  caregart{desart}:
+    required:  Yes
+    required_msg: El Descripci贸n no puedo estar en Blanco        
+    validators: MyStringValidator
+    
+  caregart{ramart}:
+    required:  No
+    validators: MyString2Validator
   
-  ocdatste{dirste}:
-    required:  Yes
-    required_msg: La Direcci髇 no puedo estar en Blanco      
-    validators: Validator_dirste
-    
-  ocdatste{telste}:
-    required:  Yes
-    required_msg: El Numero Telef髇ico no puedo estar en Blanco      
-    validators: Validator_telste
-    
-  ocdatste{faxste}:
+  caregart{unimed}:
     required:  No
-    required_msg: El Numero del Fax no puedo estar en Blanco      
-    validators: Validator_faxste
+    validators: MyString3Validator
     
-  ocdatste{emaste}:
+  caregart{unialt}:
     required:  No
-    validators: Validator_email
+    validators: MyString4Validator
     
-  ocdatste{cedrep}:
+  caregart{relart}:
     required:  No
-    validators: Validator_rif
+    validators: MyString5Validator
     
-  ocdatste{nomrep}:
+  caregart{exitot}:
     required:  No
-    validators: Validator_nomste
+    validators: MyNumberValidator
     
-  ocdatste{dirrep}:
+  caregart{cosult}:
     required:  No
-    validators: Validator_dirste
-
-  ocdatste{telrep}:
-    required:  Yes
-    required_msg: El Numero Telef髇ico no puedo estar en Blanco      
-    validators: Validator_telste
+    validators: MyNumberValidator
     
-  ocdatste{faxrep}:
+  caregart{cospro}:
     required:  No
-    validators: Validator_faxste
+    validators: MyNumberValidator
     
-  ocdatste{emarep}:
+  caregart{invini}:
     required:  No
-    validators: Validator_email
-
-
-
+    validators: MyNumberValidator
     
-    
-    
-Validator_rif:
+MyStringValidator:
     class: sfStringValidator
     param:
         min:       2
-        min_error: El C.I./RIF no puede tener menos de 2 caracteres
+        min_error: La Descripci贸n no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La Descripci贸n no puede pasar mas de 250 caracteres
+
+MyStringValidator6:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripci贸n no puede tener menos de 2 caracteres        
+        
+MyString2Validator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Ramo del Articulo no puede tener menos de 2 caracteres
+        max:       
+        max_error: El Estatus no puede pasar mas de 6 caracteres
+        
+MyString3Validator:
+    class: sfStringValidator
+    param:
+        min:       0
+        min_error: La Unidad de Medida no puede tener menos de 2 caracteres
+        max:       
+        max_error: La Unidad de Medida no puede pasar mas de 15 caracteres
+
+MyString4Validator:
+    class: sfStringValidator
+    param:
+        min:       0
+        min_error: La Unidad Alternativa no puede tener menos de 2 caracteres
         max:       15
-        max_error: El C.I./RIF no puede pasar mas de 250 caracteres
-        
-Validator_nomste:
-    class: sfStringValidator
-    param:
-        min:       2
-        min_error: El Nombre no puede tener menos de 2 caracteres
-        max:       50
-        max_error: El Nombre no puede pasar mas de 6 caracteres
-        
-Validator_dirste:
-    class: sfStringValidator
-    param:
-        min:       2
-        min_error: La Direcci髇 no puede tener menos de 2 caracteres
-        max:       100
-        max_error: La Direcci髇 no puede pasar mas de 6 caracteres        
-        
-Validator_telste:
-    class: sfStringValidator
-    param:
-        min:       2
-        min_error: El Numero Telef髇ico no puede tener menos de 2 caracteres
-        max:       30
-        max_error: El Numero Telef髇ico no puede pasar mas de 6 caracteres             
-        
-Validator_faxste:
-    class: sfStringValidator
-    param:
-        min:       2
-        min_error: El Numero del Fax no puede tener menos de 2 caracteres
-        max:       12
-        max_error: El Numero del Fax no puede pasar mas de 6 caracteres                     
+        max_error: La Unidad Alternativa no puede pasar mas de 15 caracteres
 
-Validator_email:
-    class: sfEmailValidator
+MyString5Validator:
+    class: sfStringValidator
     param:
-      strict:       true
-      email_error:  Error en Email  
+        min:       0
+        min_error: La Relaci贸n no puede tener menos de 2 caracteres
+        max:       25 
+        max_error: La Relaci贸n no puede pasar mas de 25 caracteres
+                
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         float
+        type_error:   Por favor, Introduzca N煤meros Decimales               
+        nan_error:    Por Favor, introduzca un N煤mero Decimal
+        min:          0000000000.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999.99
+        max_error:    El valor debe contener maximo 9999999999.99
