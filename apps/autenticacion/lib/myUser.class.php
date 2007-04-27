@@ -2,7 +2,7 @@
 
 class myUser extends sfBasicSecurityUser
 {
-	public function loginIn($nombre,$passwd,$empresa)
+	public function loginIn($nombre,$passwd,$codemp)
 	{
 		if(!$this->isAuthenticated())
 		{
@@ -12,13 +12,18 @@ class myUser extends sfBasicSecurityUser
 			$objUsuario = UsuariosPeer::doSelect($c); 
 			if($objUsuario)
 			{
+			  
+			    $c = new Criteria();
+		        $c->add(EmpresaUserPeer::CODEMP,$codemp);
+	            $objemp = EmpresaUserPeer::doSelectOne($c);
+			  
 				// TODO: Agregar las credenciales 
 				// para autenticar a los usuarios en base al
 				// tipo de usuario
 				$c = new Criteria();
 				$objApli_user = new ApliUser();
 				$c->add(ApliUserPeer::LOGUSE,$nombre);
-				$c->add(ApliUserPeer::CODEMP,$empresa);
+				$c->add(ApliUserPeer::CODEMP,$codemp);
 				$objApli_user = ApliUserPeer::doSelect($c);
 				// $objApli_user contiene la info de acceso del
 				// usuario a los diferentes formularios
@@ -27,7 +32,8 @@ class myUser extends sfBasicSecurityUser
 
 				// Carga la base de datos segun la empresa
 				// Cambia el string de conexion (dns de databases.yml) 
-				$this->setAttribute('schema', $empresa);
+				$this->setAttribute('schema', $objemp->getPassemp());
+				$this->setAttribute('empresa', $codemp);
 				$this->setAttribute('usuario', $objUsuario[0]->getNomuse());
 				$this->addCredential('admin');
 				

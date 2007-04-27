@@ -35,7 +35,7 @@ class loginActions extends sfActions
 	
 	foreach($lista_emp as $obj_emp)
 	{
-		$this->empresas += array($obj_emp->getPassemp() => $obj_emp->getNomemp());    
+		$this->empresas += array($obj_emp->getCodemp() => $obj_emp->getNomemp());    
 	}
 
   }
@@ -61,7 +61,6 @@ class loginActions extends sfActions
 		}
 		else
 			$user->setAttribute('error','Error al autenticar 1');
-			
 	}else $user->setAttribute('error','Error al autenticar 2');
 	return sfView::SUCCESS;
 	
