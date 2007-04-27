@@ -9,4 +9,8 @@
  */ 
 class Cidefniv extends BaseCidefniv
 {
+public function getNomemp()
+  {
+  	return Herramientas::getX('CODEMP','EmpresaUser','Nomemp',self::getCodemp());
+  }
 }

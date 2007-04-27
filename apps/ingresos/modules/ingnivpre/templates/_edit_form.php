@@ -189,6 +189,9 @@ foreach ($per as $k=>$fila) {
 ?>
 </fieldset>
 </div>
+<div class="form-row" align="center">
+    <?php echo submit_image_tag('/images/salir.gif') ?>
+    </div>
 </div>
 
 </fieldset>

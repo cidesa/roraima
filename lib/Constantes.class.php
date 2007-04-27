@@ -51,6 +51,9 @@ class Constantes
 
     public static function ListaFormaTenencia()
     {return array('1' => 'Propia', '2' => 'Alquilada', '3' => 'Prestada', '4' => 'Otra');}
+    
+    public static function ListaCategorias()
+    {return array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6','7' => '7');}
 
     public function BuscarDatos($sql)
     {
