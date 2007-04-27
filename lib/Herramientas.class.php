@@ -125,13 +125,13 @@ class Herramientas
 
     public static function getX($fieldjoin, $join, $result, $data)
      {
-	   eval ('$field = '.$join.'Peer::'.$fieldjoin.';');
+     	eval ('$field = '.ucfirst(strtolower($join)).'Peer::'.strtoupper($fieldjoin).';');
 	
 	   $c = new Criteria();
 	   $c->add($field,$data);
-	   eval ('$reg = '.$join.'Peer::doSelectone($c);');
+	   eval ('$reg = '.ucfirst(strtolower($join)).'Peer::doSelectone($c);');
 	   if ($reg){
-		 eval('$r = $reg->get'.$result.'();');
+	   	eval('$r = $reg->get'.ucfirst(strtolower($result)).'();');
 		 return $r;
 	  }else{
 		 return 'No Encontrado';
@@ -308,6 +308,7 @@ class Herramientas
 	  		for($a=0;$a<count($filtros_tablas);$a++)
 	  		{
 	  			eval('$c->add('.ucfirst(strtolower($tablas[0])).'Peer::'.strtoupper($filtros_tablas[$a]).','.chr(39).ucfirst(strtolower($filtros_variales[$a])).chr(39).');');
+	  			//print ('$c->add('.ucfirst(strtolower($tablas[0])).'Peer::'.strtoupper($filtros_tablas[$a]).','.chr(39).ucfirst(strtolower($filtros_variales[$a])).chr(39).');');
 	  		}
 	  	}
 	  	eval('$lista_arreglo = '.ucfirst(strtolower($tablas[0])).'Peer::doSelect($c);');
