@@ -12,20 +12,49 @@
  */
 class OpcionesGrid
 {
-  private $colums = array();
+  public $colums = array();
   private $eliminar = true;
   private $titulo = 'Título';
-  private $ancho = 0;
+  private $ancho = 1000;
   private $filas = 10;
   private $htmltotalfilas = '';
   private $tabla ='';
 	
-			
-  public function newColumn($name='')
+  /**
+   * Crea una nueva columna dentro del objeto de opciones
+   * Esta columna contiene los datos de configuracion
+   * Cada columna nueva contiene informacion predeterminada
+   *  
+   * @param $name Titulo de la nueva columna
+   * @return bool 
+   */ 
+  public function newColumna($name='')
   {
-	$colums[] = new Columna($name); 
+      $this->colums[] = new Columna($obj);      
+          
   }
 
+  /**
+   * Crea una nueva columna dentro del objeto de opciones
+   * Esta columna contiene los datos de configuracion
+   * Cada columna nueva contiene informacion predeterminada
+   *  
+   * @param $obj Objeto Columna
+   * @return bool 
+   */ 
+  public function addColumna($obj)
+  {
+    if($obj instanceof Columna){
+      $this->colums[] = $obj;
+    }
+  }
+  
+  /**
+   * Establece si se coloca el icono de eliminar en cada fila 
+   *  
+   * @param $val (bool) true/false
+   * @return bool
+   */ 
   public function setEliminar($val){
 
     if(is_bool($val)){
@@ -34,45 +63,103 @@ class OpcionesGrid
        
   }
 
+  /**
+   * Establece el título del Grid 
+   *  
+   * @param $val (string) Título del Grid 
+   * @return bool
+   */ 
   public function setTitulo($val){
-    use_helper('I18N');
-    $titulo = __($val);
+    //use_helper('I18N');
+    $this->titulo = $val;
   }
-	
+
+  /**
+   * Establece el Nro de filas adicionales para insertar
+   * nuevos datos en el grid. Por defecto 15
+   *  
+   * @param $val (int) Cantidad de fila nuevas 
+   * @return bool
+   */ 
   public function setFilas($val){
   
     if(is_int($val)){
       $filas=$val;
     }
   }
-	
+
+  /**
+   * Establece el código HTML que se colocará al final del grid para
+   * generar los objetos con los totales
+   *  
+   * @param $val (string) Código HTML a ser introducido al final de grid 
+   * @return bool
+   */ 
   public function setHTMLTotalFilas($val){
     
-    self::$htmltotalfilas = $val;
+    $this->htmltotalfilas = $val;
     
   }
 
+  /**
+   * Establece la tabla de la cual se traen los datos del grid
+   *  
+   * @param $val (string) Nombre de la Tabla/Clase  
+   * @return bool
+   */ 
   public function setTabla($val){
     
-    self::$tabla = ucfirst(strtolower($val));
+    $this->tabla = ucfirst(strtolower($val));
+    
+  }
+
+  /**
+   * Estable el ancho total del Grid
+   *  
+   * @param $val (string) Nombre de la Tabla/Clase  
+   * @return bool
+   */ 
+  public function setAnchoGrid($val){
+    
+    $this->ancho = (int)$val;
     
   }
   
   
-  public function getConfig(){
-	  
-    foreach ($colums as $key => $col){
+  /**
+   * Genera el arreglo de configuracion que será enviado al GridHelper
+   * 
+   * @param $per (object) Arreglo de objetos/registros
+   * @return array
+   */ 
+  public function getConfig($per){
+	$htmlfilatotal = array();;
+    $titulos   =    array();
+    $ancho    =    (string)$this->ancho;
+    $alignf    =    array();
+    $alignt    =    array();
+    $campos    =    array();
+    $totales   =    array();
+    $filatotal =    array();
+    $grabar    =    array();
+    $html      =    array();
+    $js        =    array();
+    $catalogos =    array();// por todas las columnas, si no tiene, se coloca vacio
+    $ajax      =    array();
+    $tipos     =    array();
+    $montos     =    array();
+
+    foreach ($this->colums as $key => $col){
 
       $titulos[]  =    $col->getTitulo();
-      $anchos[]   =    (string)self::$ancho;
       $alignf[]   =    $col->getAlineacionObjeto();
       $alignt[]   =    $col->getAlineacionContenido();
       $campos[]   =    $col->getNombreCampo();
 	  if($col->isGrabable()){
 	    $t = $col->getTipo();
-	    $tipos    =    $t; //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
+	    $tipos[]    =    $t; //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
         if($t == Columna::MONTO){
-            $montos =    (string)($key+1);
+            $montos[] =    (string)($key+1);
 		  if($col->isTotal()){
 		    $objtotal = $col->getObjetoTotal();
 		    if($objtotal==''){
@@ -83,7 +170,8 @@ class OpcionesGrid
 		    $totales[] = '';
 		    $filatotal[] = '';
 		  }
-        }		  
+        }
+        $grabar[] =    (string)($key+1);		  
 	  }
 
       $html[]     =    $col->getHTML();
@@ -91,11 +179,7 @@ class OpcionesGrid
       $catalogos[]=    $col->getCatalogo((string)($key+1));// por todas las columnas, si no tiene, se coloca vacio
       $ajax[]     =    $col->getAjax((string)($key+1));
 	
-      if($col->isGrabable()){
-	    $grabar[] =    (string)($key+1);
-	  }
-	
-	  $htmlfilatotal = '<input class="grid_txtright" type="text" id="total'.($key+1).'" name="total" size="25">';
+	  $htmlfilatotal[] = '<input class="grid_txtright" type="text" id="total'.($key+1).'" name="total" size="25">';
 
 					//$filas=17;
 					//$cabeza="Existencia por Almacenes";
@@ -116,194 +200,31 @@ class OpcionesGrid
 					//$filatotal='';
       
     } //foreach
-    if(self::$htmltotalfilas ==''){
+    if($this->htmltotalfilas ==''){
 	    $filatotal = '<table>
 						<tr>
 							<th width="72%">
 							</th>
 							<th width="28%">
-								'.implode('',$htmlfilatotal).'
+								'.implode(' ',$htmlfilatotal).'
 							</th>
 				   		</tr>
 					</table>';
-    }else {$filatotal=self::$htmltotalfilas;}
-     
-    $obj=array('cabeza'=>self::$titulo, 'filas'=>self::$filas, 'eliminar'=>self::$eliminar, 'titulos'=>$titulos, 
-	'anchos'=>$anchos, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
-	'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 
-	'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar, 'tabla' => self::$tabla);
-      
-      
-	}
-	
-}
+    }else {$filatotal=$this->htmltotalfilas;}
 
-
-
-/**
- * Clase para el manejo de las columnas del grid
- *
- * @package    Siga
- * @subpackage lib
- * @author     Grupo Desarrollo Cidesa <desarrollo@cidesa.com.ve>
- * @version    SVN: $Id: $
- * @copyright  Copyright 2007, Cidesa C.A.
- * 
- */
-class Columna
-{
-  CONST CENTRO = 'center';
-  CONST IZQUIERDA = 'left';
-  CONST DERECHA = 'right';
-  
-  CONST TEXTO = 't';
-  CONST MONTO = 'm';
-  CONST FECHA = 'f';
-  
-    
-  private $titulo='';
-  private $alignf='';
-  private $alignt='';
-  private $field='';
-  private $type='';
-  private $isnumeric=false;
-  private $istotal=false;
-  private $objtotal='';
-  private $js='';
-  private $html = 'type="text" size="10"';
-  private $save = false;
-  private $catalogoform = '';
-  private $catalogoclass = '';
-  private $catalogoobjadic = '';
-  private $idfuncion = '';
-  private $objmostrar = '';
-  private $objcompletar= '';
-  private $htmltotalfilas='';
-  
-  public function setTitulo($val){ // $titulos
-      use_helper('I18N');
-      self::$titulo = __($val);
-	}
-	
-  public function setAlineacionObjecto($val){ // $alignf
-	  self::$alignf = $val;
-	}
-
-  public function setAlineacionContenido($val){ // $alignt
-	  self::$alignt = $val;
-	}
-
-  public function setNombreCampo($val){ // $campos
-	  self::$field = ucfirst(strtolower($val));
-	}
-	
-  public function seTipo($val){ // $tipos
-	  self::$type = $val;
-	}
-	
-  public function setEsNumerico($val){ // $montos
-	  self::$isnumeric = $val; 
-	}
-
-  public function setEsTotal($val,$obj=''){ // $totales
-	  self::$istotal = (bool)$val;
-	  self::$objtotal = $obj;
-	}
-	
-  public function setJScript($val){ // $js
-	  self::$js = $val; 
-	}
-
-  public function setHTML($val){ // $html
-	  self::$html = $val; 
-	}
-
-  public function setEsGrabable($val){ // $grabar
-	  self::$save = (bool)$val; 
-	}
-	
-  public function setCatalogo($clase,$form,$objadic=''){
-    
-    self::$catalogoform = $form;
-    self::$catalogoclass = $clase;
-    self::$catalogoobjadic = $objadic;
-    
-  }
-
-  public function setAjax($idFunc,$objmost){
-    
-    self::$idfuncion = (int)$idFunc;
-    self::$objmostrar = (int)$objmost;
-    //self::$objcompletar= $objcompl;
-    
-  }
-  
- 
-  public function Columna($name){ // Constructor ****************  
-    self::setTitulo($name);  
     
     
-    }
-  
-
-  public function getTitulo(){ // $titulos
-      return self::$titulo;
-	}
-	
-  public function getAlineacionObjecto(){ // $alignf
-	  return self::$alignf;
-	}
-
-  public function getAlingContent(){ // $alignt
-	  return self::$alignt;
-	}
-
-  public function getNombreCampo(){ // $campos
-	  return self::$field;
-	}
-	
-  public function getTipo(){ // $tipos
-	  return self::$type;
-	}
-	
-  public function isNumerico(){ // $montos
-	  return self::$isnumeric; 
-	}
-
-  public function isTotal(){ // $totales
-	  return self::$istotal; 
-	}
-	
-  public function getObjetoTotal(){ // $totales
-	  return self::$objtotal; 
-	}
-	
-  public function getJScript(){ // $js
-	  return self::$js; 
-	}
-
-  public function getHTML(){ // $html
-	  return self::$html; 
-	}
-
-  public function isGrabable(){ // $grabar
-	  return self::$save; 
-	}
-	
-  public function getCatalogo($pos='#'){ // $grabar
-
-      if(self::$catalogoobjadic)
-        return ucfirst(strtolower(self::$catalogoclass)).'-'.self::$catalogoform.'-x'.$pos.'-x'.self::$catalogoobjadic;
-      else return ucfirst(strtolower(self::$catalogoclass)).'-'.self::$catalogoform.'-x'.$pos;
-       
-	}
-	
-  public function getAjax($objcompl='#'){
+    $obj=array('cabeza'=> $this->titulo, 'filas'=> $this->filas, 'eliminar'=> $this->eliminar, 'titulos'=> $titulos, 
+	'ancho'=> $ancho, 'alignf'=> $alignf, 'alignt'=> $alignt, 'campos'=> $campos, 'catalogos' => $catalogos, 
+	'ajax' => $ajax, 'tipos' => $tipos, 'montos'=> $montos, 'filatotal' => $filatotal, 'totales'=> $totales, 
+	'html'=> $html, 'js'=> $js, 'datos'=> $per, 'grabar'=> $grabar, 'tabla' => $this->tabla);
     
-    return (string)self::$idfuncion.'-x'.(string)self::$objmostrar.'-x'.$objcompl; 
+    //print $filatotal;
+
+    return $obj;
     
-  }
-      
+	}
+	
 }
 
 ?>

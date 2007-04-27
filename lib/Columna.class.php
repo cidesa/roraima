@@ -34,36 +34,34 @@ class Columna
   private $save = false;
   private $catalogoform = '';
   private $catalogoclass = '';
-  private $catalogoobjadic = '';
+  private $catalogoobjadic = 0;
   private $idfuncion = '';
   private $objmostrar = '';
   private $objcompletar= '';
   private $htmltotalfilas='';
-  
 
   /**
    * Estable el nombre de la cabecera de la columna
    *  
-   * @static
-   * @param $val Nombre de la cabecera (string) 
-   * @return bool
+   * @param $val (string) Nombre de la cabecera 
+   * @return void
    */ 
   public function setTitulo($val){ // $titulos
-      use_helper('I18N');
-      self::$titulo = __($val);
-	}
+        
+      $this->titulo = $val;
+      
+    }
 	
   /**
    * Estable la Alineación del objeto, puede ser las 
    * constantes CENTRO,IZQUIERDA o DERECHA.
    * Por defecto IZQUIERDA
    *  
-   * @static
-   * @param $val Alineación, ej. Columna::CENTRO 
-   * @return bool
+   * @param $val (string) Alineación, ej. Columna::CENTRO 
+   * @return void
    */ 
-  public function setAlineacionObjecto($val){ // $alignf
-	  self::$alignf = $val;
+  public function setAlineacionObjeto($val){ // $alignf
+	  $this->alignf = $val;
 	}
 
   /**
@@ -71,122 +69,260 @@ class Columna
    * constantes CENTRO,IZQUIERDA o DERECHA
    * Por defecto IZQUIERDA
    *   
-   * @static
-   * @param $val Alineación, ej. Columna::CENTRO 
-   * @return bool
+   * @param $val (string) Alineación, ej. Columna::CENTRO 
+   * @return void
    */ 
   public function setAlineacionContenido($val){ // $alignt
-	  self::$alignt = $val;
+	  $this->alignt = $val;
 	}
 
+  /**
+   * Estable el nombre del campo en la tabla que
+   * contiene los datos del campo.  
+   *   
+   * @param $val (string) Nombre del Campo en la BD 
+   * @return void
+   */ 
   public function setNombreCampo($val){ // $campos
-	  self::$field = ucfirst(strtolower($val));
+	  $this->field = ucfirst(strtolower($val));
 	}
 	
-  public function seTipo($val){ // $tipos
-	  self::$type = $val;
+  /**
+   * Estable el tipo de objeto que es la columna
+   * ej.   TEXTO, MONTO o FECHA
+   *   
+   * @param $val (string) Tipo de Objeto Columna::TEXTO 
+   * @return void
+   */ 
+  public function setTipo($val){ // $tipos
+	  $this->type = $val;
 	}
 	
+  /**
+   * Estable si la columna es numérica o no
+   *   
+   * @param $val (bool) true/false 
+   * @return void
+   */ 
   public function setEsNumerico($val){ // $montos
-	  self::$isnumeric = $val; 
+	  $this->isnumeric = (bool)$val; 
 	}
 
+  /**
+   * Estable si la columna numérica debe ser totalizada,
+   * y el objeto que contendrá el valor
+   *   
+   * @param $val (bool) true/false 
+   * @param $obj Nombre del Objeto Html donde se colocara el resultado de la totalización (string) 
+   * @return void
+   */ 	
   public function setEsTotal($val,$obj=''){ // $totales
-	  self::$istotal = (bool)$val;
-	  self::$objtotal = $obj;
+	  $this->istotal = (bool)$val;
+	  $this->objtotal = $obj;
 	}
 	
+  /**
+   * Estable el código JS que se colocará en cada objeto de la columna
+   *   
+   * @param $val (string) Código JS 
+   * @return void
+   */ 	
   public function setJScript($val){ // $js
-	  self::$js = $val; 
+	  $this->js = $val; 
 	}
 
+  /**
+   * Estable el código HTML adicional a ser insertado en los
+   * objetos de la columna 
+   *   
+   * @param $val (string) Código HTML 
+   * @return void
+   */ 	
   public function setHTML($val){ // $html
-	  self::$html = $val; 
+	  $this->html = $val; 
 	}
 
+  /**
+   * Estable si los objetos de la columa deben ser guardados
+   *   
+   * @param $val (bool) true/false 
+   * @return void
+   */ 	
   public function setEsGrabable($val){ // $grabar
-	  self::$save = (bool)$val; 
+	  $this->save = (bool)$val; 
 	}
 	
-  public function setCatalogo($clase,$form,$objadic=''){
+  /**
+   * Estable si los objetos de la columna tendrán un catálogo
+   * para busqueda rápida de datos
+   *   
+   * @param $clase (string) Nombre de la tabla/clase de donde se genera el catalogo
+   * @param $form (string) Objeto html form donde estan los objetos a actualizar por el catálogo
+   * @param $objadic (string) Objeto donde se colcorá la información adicional del catálogo 
+   * @return void
+   */ 	
+  public function setCatalogo($clase,$form,$objadic=0){
     
-    self::$catalogoform = $form;
-    self::$catalogoclass = $clase;
-    self::$catalogoobjadic = $objadic;
+    $this->catalogoform = $form;
+    $this->catalogoclass = $clase;
+    $this->catalogoobjadic = (int)$objadic;
     
   }
-
+  
+  /**
+   * Estable si los objetos de la columa deben ser guardados
+   *   
+   * @param $idFunc (int) Identificador del codigo a ejecutar (con respecto a la función executeAjax())
+   * @param $objmost (int) Indice del objeto donde se mostrar la informacion adicional 
+   * @return void
+   */ 	
   public function setAjax($idFunc,$objmost){
     
-    self::$idfuncion = (int)$idFunc;
-    self::$objmostrar = (int)$objmost;
-    //self::$objcompletar= $objcompl;
+    $this->idfuncion = (int)$idFunc;
+    $this->objmostrar = (int)$objmost;
+    //$this->objcompletar= $objcompl;
     
   }
   
  
+  /**
+   * Constructor de la columna
+   *   
+   * @param $val (string) Título de la columna 
+   * @return void
+   */ 	
   public function Columna($name){ // Constructor ****************  
     self::setTitulo($name);  
-    
     
     }
   
 
+  /**
+   * Obtiene el Título de la columna
+   *   
+   * @return string
+   */ 	
   public function getTitulo(){ // $titulos
-      return self::$titulo;
+      return $this->titulo;
 	}
 	
-  public function getAlineacionObjecto(){ // $alignf
-	  return self::$alignf;
+  /**
+   * Obtiene la alineación del Objeto
+   *   
+   * @return string
+   */ 	
+  public function getAlineacionObjeto(){ // $alignf
+	  return $this->alignf;
 	}
 
-  public function getAlingContent(){ // $alignt
-	  return self::$alignt;
+  /**
+   * Obtiene La alineación del contenido del objeto
+   *   
+   * @return string
+   */ 	
+  public function getAlineacionContenido(){ // $alignt
+	  return $this->alignt;
 	}
 
+  /**
+   * Obtiene el nombre del campo en la tabla a la que hace referencia
+   *   
+   * @return string
+   */ 	
   public function getNombreCampo(){ // $campos
-	  return self::$field;
+	  return $this->field;
 	}
 	
+  /**
+   * Obtiene el tipo de objeto que contendra la columna
+   *   
+   * @return string
+   */ 	
   public function getTipo(){ // $tipos
-	  return self::$type;
+	  return $this->type;
 	}
 	
+  /**
+   * Indica si la columna es o no numérica
+   *   
+   * @return bool
+   */ 	
   public function isNumerico(){ // $montos
-	  return self::$isnumeric; 
+	  return $this->isnumeric; 
 	}
 
+  /**
+   * Indica si la columan debe ser totalizada
+   *   
+   * @return bool
+   */ 	
   public function isTotal(){ // $totales
-	  return self::$istotal; 
+	  return $this->istotal; 
 	}
 	
+  /**
+   * Obtiene el Objeto donde se colcará el resultado de la totalización de la columna  
+   *   
+   * @return string
+   */ 	
   public function getObjetoTotal(){ // $totales
-	  return self::$objtotal; 
+	  return $this->objtotal; 
 	}
 	
+  /**
+   * Obtiene el código JavaScript que se insertará en los objetos de la columna
+   *   
+   * @return string
+   */ 	
   public function getJScript(){ // $js
-	  return self::$js; 
+	  return $this->js; 
 	}
 
+  /**
+   * Obtiene el código HTML que se insertará en los objetos de la columna
+   *   
+   * @return string
+   */ 	
   public function getHTML(){ // $html
-	  return self::$html; 
+	  return $this->html; 
 	}
 
+  /**
+   * Indica si los objetos de la columan deben tomados en cuenta para
+   * ser guardados en la base de datos.
+   *   
+   * @return bool
+   */ 	
   public function isGrabable(){ // $grabar
-	  return self::$save; 
+	  return $this->save; 
 	}
 	
+  /**
+   * Obtiene La codificación para insertar una busqueda por catálogo
+   * en los objetos de la columna 
+   * 
+   * @param $pos (int) Posicion de la columna donde se colocará el dato adicional
+   * @return string
+   */ 	
   public function getCatalogo($pos='#'){ // $grabar
 
-      if(self::$catalogoobjadic)
-        return ucfirst(strtolower(self::$catalogoclass)).'-'.self::$catalogoform.'-x'.$pos.'-x'.self::$catalogoobjadic;
-      else return ucfirst(strtolower(self::$catalogoclass)).'-'.self::$catalogoform.'-x'.$pos;
-       
-	}
+    if($this->catalogoclass!='' && $this->catalogoform!=''){
+      if($this->catalogoobjadic!=0)
+        return ucfirst(strtolower($this->catalogoclass)).'-'.$this->catalogoform.'-x'.$pos.'-x'.(string)$this->catalogoobjadic;
+      else return ucfirst(strtolower($this->catalogoclass)).'-'.$this->catalogoform.'-x'.$pos;
+    }
+
+  }
 	
+  /**
+   * Obtiene La codificación para hacer el llamado a una funcion AJAX
+   * en los objetos de la columna 
+   *    
+   * @return string
+   */ 	
   public function getAjax($objcompl='#'){
     
-    return (string)self::$idfuncion.'-x'.(string)self::$objmostrar.'-x'.$objcompl; 
+    return (string)$this->idfuncion.'-x'.(string)$this->objmostrar.'-x'.$objcompl; 
     
   }
       
