@@ -566,7 +566,7 @@ var TREE_ITEMS_MAIN = [
 		['Ingresos', 'principal/menu/m/ingresos'],
 		['Tesorer&iacute;a', 'principal/menu/m/tesoreria'],
 		['Nomina', 'principal/menu/m/nomina'],
-		['Formulacicn', 'principal/menu/m/formulacion'],
+		['Formulaci&oacute;n', 'principal/menu/m/formulacion'],
 		['Obras y Contratos', 'principal/menu/m/obra'],
 		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
 		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
