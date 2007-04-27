@@ -4,7 +4,8 @@ generator:
     model_class:      Cidefniv
     theme:            default
     fields:
-      codemp: { name: Nombre Empresa}      
+      codemp: { name: Código}
+      nomemp: { name: Nombre Empresa}     
       rupcat: { name: Clasificador de Categorías}      
       ruppar: { name: Clasificador de Partidas}  
       nivdis: { name: Nivel de Disponibilidad}  
@@ -13,25 +14,29 @@ generator:
       feccie: { name: Fin de Ejercicio}  
       fecper: { name: Período}  
       asiper: { name: Estimación Periódica}  
-      numper: { name: Clasificador de Partidas}  
-      peract: { name: Clasificador de Partidas} 
-      etadef: { name: Clasificador de Partidas}  
-      staprc: { name: Clasificador de Partidas}  
-      coraep: { name: Clasificador de Partidas}  
-      loncod: {name: Descripcion}
+      numper: { name: Números de Períodos}
+      coraep: { name: Inicio de Correlativo de AEP}  
+      peract: { name: Activo} 
+      etadef: { name: Estatus def}  
+      staprc: { name: Estatus pre}         
+      loncod: {name: Longitud}
             
     list:
-      title:          Registro de Dias Extras
-      filters:        [codnom]
-      display:        [=codnom, nomnom, codemp]
+      title:          Niveles
+      filters:        [codemp]
+      display:        [=codemp, nomemp]
       fields:
-        fecha: { params: date_format='dd/MM/yy' }
+        fecini: { params: date_format='dd/MM/yy'}
+        feccie: { params: date_format='dd/MM/yy'}
+        fecper: { params: date_format='dd/MM/yy'}
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Edicion Dias Extras
-      display:       [=codnom, fecha, codemp]
+      title:          Edicion de Niveles
+      display:       [=codemp, nomemp, rupcat, ruppar, nivdis, forpre, fecini, feccie, fecper, asiper, numper, coraep, peract, etadef, staprc, loncod]
       fields:
-        fecha: { params: date_format='dd/MM/yy' }
+        fecini: { params: date_format='dd/MM/yy'}
+        feccie: { params: date_format='dd/MM/yy'}
+        fecper: { params: date_format='dd/MM/yy'}
