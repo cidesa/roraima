@@ -83,7 +83,7 @@
     <?php echo form_error('caregart{ramart}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($caregart, 'getRamart', array (
+<!--   $value = object_input_tag($caregart, 'getRamart', array (
   'size' => 20,
   'control_name' => 'caregart[ramart]',
   'maxlength' => 6,    
@@ -92,9 +92,18 @@
 			  'complete' => 'AjaxJSON(request, json)',
   			  'with' => "'ajax=1&cajtexmos=nomram&cajtexcom=caregart_ramart&codigo='+this.value"
 			  )),    
-)); echo $value ? $value : '&nbsp;' ?>
+)); echo $value ? $value : '&nbsp;'  -->
+<?php echo input_auto_complete_tag('ramart', $caregart->getRamart(), 
+    'almregart/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 6, 'onBlur'=> remote_function(array(
+			  'url'      => 'almregart/ajax',  			   
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=1&cajtexmos=nomram&cajtexcom=ramart&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  ) 
+?>  
 &nbsp;
- <?php echo button_to_popup('...','generales/catalogo?clase=Caramart&frame=sf_admin_edit_form&obj1=caregart_ramart&obj2=nomram')?>
+ <?php echo button_to_popup('...','generales/catalogo?clase=Caramart&frame=sf_admin_edit_form&obj1=ramart&obj2=nomram')?>
 
  <?php echo input_tag('nomram',$caregart->getNomram(),'size=50,disabled=true'); ?>
   </div>
