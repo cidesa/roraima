@@ -30,6 +30,7 @@ class Herramientas
 	 * @param array &$output Arreglo bidimencional de respuesta.
 	 * @return bool verdadero si encontro datos.
 	 */ 
+	
 	public static function BuscarDatos($sql,&$output)
     {
 		$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
@@ -56,7 +57,8 @@ class Herramientas
 		}
 		if (count($rs)>0) return true; else return false;
 	}
-		
+	
+
 	public static function instr($palabra,$busqueda,$comienzo,$concurrencia){
 		
 		$tamano=strlen($palabra);
@@ -320,7 +322,25 @@ class Herramientas
 	  	return $arreglo;
 	  }
 
-
+    public static function autocompleteAjax($fieldjoin, $join, $result, $data)
+     {
+	   eval ('$field = '.$join.'Peer::'.$fieldjoin.';');
+	   $resultado=array();
+	   $c = new Criteria();
+	   $c->add($field, $data.'%', Criteria::LIKE);
+	   eval ('$des = '.$join.'Peer::doSelect($c);');
+	   if ($des){
+	      $i=0;		 
+		  while ($i<count($des))
+		  {	
+			eval('$resultado[$i] = $des[$i]->get'.$result.'();');
+		 	$i++;
+		  }	
+		}else{
+			 $resultado[0]='No encontrado';
+		}		
+		 return $resultado;  	
+  }
 }
 
 
