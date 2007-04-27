@@ -298,7 +298,28 @@ class Herramientas
   	
   	 return $form->resultado;
    }
-  
+   
+   
+   public static function Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados)
+	  {
+	  	$c = new Criteria();
+	  	if ($filtros_tablas[0]!='')
+	  	{
+	  		for($a=0;$a<count($filtros_tablas);$a++)
+	  		{
+	  			eval('$c->add('.ucfirst(strtolower($tablas[0])).'Peer::'.strtoupper($filtros_tablas[$a]).','.chr(39).ucfirst(strtolower($filtros_variales[$a])).chr(39).');');
+	  		}
+	  	}
+	  	eval('$lista_arreglo = '.ucfirst(strtolower($tablas[0])).'Peer::doSelect($c);');
+	  	$arreglo = array();
+	  	foreach($lista_arreglo as $obj_estado)
+	  	{
+	  		eval('$arreglo[$obj_estado->get'.ucfirst(strtolower($campos_retornados[0])).'()] = $obj_estado->get'.ucfirst(strtolower($campos_retornados[1])).'();');
+	  	}
+	  	return $arreglo;
+	  }
+
+
 }
 
 
