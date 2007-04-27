@@ -1,6 +1,6 @@
 methods:
   post:
-   - "caregart{codart}"      
+   - "caregart{codart}"   
    - "caregart{desart}"
    - "caregart{ramart}"
    - "caregart{unimed}"
@@ -10,7 +10,7 @@ methods:
    - "caregart{cosult}"
    - "caregart{cospro}"
    - "caregart{invini}"
-   
+
 names: 
   caregart{codart}:
     required:  Yes
