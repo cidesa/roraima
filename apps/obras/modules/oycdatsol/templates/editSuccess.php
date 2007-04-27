@@ -23,7 +23,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('oycdatsol/edit_messages', array('ocdatste' => $ocdatste, 'labels' => $labels)) ?>
-<?php include_partial('oycdatsol/edit_form', array('ocdatste' => $ocdatste, 'labels' => $labels, 'desste' => $desste, 'pais' => $pais )) ?>
+<?php include_partial('oycdatsol/edit_form', array('ocdatste' => $ocdatste, 'labels' => $labels, 'desste' => $desste, 'pais' => $pais, 'estados' => $estados, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sector' => $sector, )) ?>
 </div>
 
 <div id="sf_admin_footer">
