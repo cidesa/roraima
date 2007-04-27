@@ -115,10 +115,15 @@ class almregartActions extends autoalmregartActions
 	    {
 	      $this->caregart->setDesart($caregart['desart']);
 	    }
-	    if (isset($caregart['ramart']))
+	   /* if (isset($caregart['ramart']))
 	    {
 	      $this->caregart->setRamart($caregart['ramart']);
+	    }*/
+	  	if (trim($this->getRequestParameter('ramart'))!='')
+	    {
+	      $this->caregart->setRamart($this->getRequestParameter('ramart'));
 	    }
+	    
 	    if (isset($caregart['codpar']))
 	    {
 	      $this->caregart->setCodpar($caregart['codpar']);
@@ -284,7 +289,15 @@ class almregartActions extends autoalmregartActions
   	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')'); 
 	    return sfView::HEADER_ONLY;
 	}	 
-
+ 
+	public function executeAutocomplete()
+	{
+		if ($this->getRequestParameter('ajax')=='1')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('RAMART','Caramart','Ramart',trim($this->getRequestParameter('ramart')));
+	    }	   
+	}
+		
 	public function setVars()
 	{
 		$this->mascaraarticulo = Herramientas::getMascaraArticulo();
