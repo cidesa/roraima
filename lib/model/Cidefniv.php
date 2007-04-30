@@ -10,7 +10,14 @@
 class Cidefniv extends BaseCidefniv
 {
 public function getNomemp()
-  {
-  	return Herramientas::getX('CODEMP','EmpresaUser','Nomemp',self::getCodemp());
+  {  
+  	  $c = new Criteria();
+  	  $c->add(EmpresaUserPeer::CODEMP,self::getCodemp());
+  	  $nombre = EmpresaUserPeer::doSelectone($c);
+	  if ($nombre)
+	  	return $nombre->getNomemp();
+	  else 
+	    return 'No encontrado';  
   }
+  
 }

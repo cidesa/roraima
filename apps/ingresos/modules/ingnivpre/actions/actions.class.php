@@ -12,8 +12,8 @@ class ingnivpreActions extends autoingnivpreActions
 {
 	public function executeIndex()
 	  {
-	   	$codempresa = $this->getUser()->getAttribute('empresa');	  	
-	  	$id=Herramientas::getX('CODEMP','Cidefniv','Id',$codempresa);	  	
+	   	$codempresa = $this->getUser()->getAttribute('empresa');	   	
+	  	$id=Herramientas::getX('CODEMP','Cidefniv','Id',$codempresa);	  	 	
 	    return $this->redirect('ingnivpre/edit?id='.$id);
 	  }
 	  
@@ -66,7 +66,7 @@ class ingnivpreActions extends autoingnivpreActions
 	  {
 	    $cidefniv = $this->getRequestParameter('cidefniv');
 	    $this->listacategorias=Constantes::ListaCategorias();	   
-	  	$codempresa = $this->getUser()->getAttribute('empresa');
+	  	$codempresa = $this->getUser()->getAttribute('empresa');	  	
 	
 	    if (isset($cidefniv['codemp']))
 	    {
