@@ -17,8 +17,6 @@ class Herramientas
 	 * @static 
 	 * @var string $prueba Definición del comentario de una variable.
 	 */
-	static $prueba = 'Variable de Prueba'; 
-	
 
 	/**
 	 * Función para retornar datos a partir de una sentencia sql.
