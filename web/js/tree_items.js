@@ -564,7 +564,7 @@ var TREE_ITEMSCOM_BIE = [
 			['Definiciones',null,
 				['Definici&oacute;n de Empresa', Bienes+'biedefemp'],
 				['Definici&oacute;n de Ubicaci&oacute;n', Bienes+'biedefubi'],
-				['Definici&oacute;n de Proveedores', Bienes+'almregpro'],
+				['Definici&oacute;n de Proveedores', Compras+'almregpro'],
 				['Definici&oacute;n de Catalogo de Activos', Bienes+'biecatact'],
 				['Definici&oacute;n de Disposici&oacute;n', Bienes+'biedefdis'],
 				['Definici&oacute;n de Motivos de Disposici&oacute;n', Bienes+'biedefmotdis'],
