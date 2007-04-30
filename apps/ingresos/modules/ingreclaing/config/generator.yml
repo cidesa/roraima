@@ -1,0 +1,44 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cireging
+    theme:            default
+    fields:
+      refing: { name: Referencia}
+      fecing: { name: Fecha}     
+      desing: { name: Descripción}      
+      codtip: { name: Tipo}
+      destip1: { name: Descrición1}  
+      rifcon: { name: C.I./RIF del Contribuyente}
+      nomcon: { name: Nombre}
+      ctaban: { name: Cuenta Bancaria Nro}
+      nomcue: { name: Nombre de la Cuenta}
+      tipmov: { name: Tipo de Movimiento}
+      destip2: { name: Descripción2}      
+      moning: { name: Ingreso} 
+      monrec: { name: Recargo}  
+      mondes: { name: Descuento}  
+      montot: { name: Neto}  
+      previs: { name: Previsto}
+      desanu: { name: Descripción de Anulación}  
+      fecanu: { name: Fecha de Anulación}
+      staing: { name: Estatus}              
+      anoing: {name: Anno}
+            
+    list:
+      title:          Reclasificación de Ingresos
+      filters:        [refing, fecing]
+      display:        [=refing, desing, fecing]
+      fields:
+        fecing: { params: date_format='dd/MM/yy'}
+        fecanu: { params: date_format='dd/MM/yy'}        
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Reclasificación de Ingresos
+      display:       [=refing, fecing, desing, codtip, destip1, rifcon, nomcon, ctaban, nomcue, tipmov, destip2, moning, monrec, mondes, montot, previs, desanu, fecanu, staing, anoing]
+      fields:
+        fecing: { params: date_format='dd/MM/yy'}
+        fecanu: { params: date_format='dd/MM/yy'}
