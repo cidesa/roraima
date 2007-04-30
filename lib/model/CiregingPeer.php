@@ -8,5 +8,6 @@
  * @package lib.model
  */ 
 class CiregingPeer extends BaseCiregingPeer
-{
+{  
+	  	
 }
