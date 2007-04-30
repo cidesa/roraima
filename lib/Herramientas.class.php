@@ -28,7 +28,6 @@ class Herramientas
 	 * @param array &$output Arreglo bidimencional de respuesta.
 	 * @return bool verdadero si encontro datos.
 	 */ 
-	
 	public static function BuscarDatos($sql,&$output)
     {
 		$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
