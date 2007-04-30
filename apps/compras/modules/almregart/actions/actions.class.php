@@ -188,12 +188,15 @@ class almregartActions extends autoalmregartActions
 	  
     public function configGrid()
 	{
-	  if(true){
+
+      $c = new Criteria();
+      $c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
+      $per = CaartalmPeer::doSelect($c);
+	  
+	  
+	  if(false){
 		//////////////////////
 		//GRID
-		$c = new Criteria();
-		$c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
-		$per = CaartalmPeer::doSelect($c);
 		
 		$filas=17;
 		$cabeza="Existencia por Almacenes";
@@ -201,7 +204,7 @@ class almregartActions extends autoalmregartActions
 		$titulos=array("Cod. Almacen","Descripción","Cod. Ubicacion","Ubicación","Exi. Mínima","Exi. Máxima","Exi. Actual","Reorden");
 		$ancho="1100";
 		$alignf=array('center','left','center','left','right','right','right','right');
-		$alignt=array('center','left','center','l0eft','right','right','right','right');
+		$alignt=array('center','left','center','left','right','right','right','right');
 		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
 		$catalogos=array('Cadefalm-sf_admin_edit_form-x1-x2','','Cadefubi-sf_admin_edit_form-x3-x4','','','','','');// por todas las columnas, si no tiene, se coloca vacio
 		$ajax=array('2-x2-x1','','3-x4-x3','','','','',''); //parametro-cajitamostrar-autocompletar
@@ -223,6 +226,78 @@ class almregartActions extends autoalmregartActions
 
 	  }else {
 	    
+	    $mascaraubicacion=$this->mascaraubicacion;
+	    // $i18n = $this->getContext()->getI18N();
+	    // Se crea el objeto principal de la clase OpcionesGrid
+	    $opciones = new OpcionesGrid();
+	    // Se configuran las opciones globales del Grid 
+        $opciones->setEliminar(true);
+        $opciones->setTabla('Caartalm');
+        $opciones->setAnchoGrid(1150);
+        $opciones->setTitulo('Existencia por Almacenes');
+        $opciones->setHTMLTotalFilas(' ');
+        // Se generan las columnas
+        $col1 = new Columna('Cod. Almacen');
+        $col1->setTipo(Columna::TEXTO);
+        $col1->setEsGrabable(true);
+        $col1->setAlineacionObjeto(Columna::CENTRO);
+        $col1->setAlineacionContenido(Columna::CENTRO);
+        $col1->setNombreCampo('codalm');
+        $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
+        $col1->setAjax(2,2);
+        
+        $col2 = new Columna('Descripción');
+        $col2->setTipo(Columna::TEXTO);
+        $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+        $col2->setAlineacionContenido(Columna::IZQUIERDA);
+        $col2->setNombreCampo('codalm');
+        $col2->setHTML('type="text" size="25" disabled=true');
+        
+        $col3 = clone $col1;
+        $col3->setTitulo('Cod. Ubicacion');
+        $col3->setNombreCampo('codubi');
+        $col3->setCatalogo('cadefubi','sf_admin_edit_form','4');
+        $col3->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
+        $col3->setAjax(3,4);
+        
+        $col4 = clone $col2;
+        $col4->setTitulo('Ubicación');
+        $col4->setNombreCampo('Nomubi');
+        
+        $col5 = new Columna('Exi. Mínima');
+        $col5->setTipo(Columna::MONTO);
+        $col5->setEsGrabable(true);
+        $col5->setAlineacionContenido(Columna::IZQUIERDA);
+        $col5->setAlineacionObjeto(Columna::IZQUIERDA);
+        $col5->setNombreCampo('Eximin');
+        $col5->setEsNumerico(true);
+        $col5->setHTML('type="text" size="10"');
+        $col5->setJScript('onKeypress="entermonto(event,this.id)"');
+
+        $col6 = clone $col5;
+        $col6->setTitulo('Exi. Máxima');
+        $col6->setNombreCampo('Eximax');
+        
+        $col7 = clone $col5;
+        $col7->setTitulo('Exi. Actual');
+        $col7->setNombreCampo('Exiact');
+        $col7->setEsTotal(true,'caregart_exitot');
+        
+        $col8 = clone $col5;
+        $col8->setTitulo('Reorden');
+        $col8->setNombreCampo('Ptoreo');
+        
+        // Se guardan las columnas en el objetos de opciones        
+        $opciones->addColumna($col1);
+        $opciones->addColumna($col2);
+        $opciones->addColumna($col3);
+        $opciones->addColumna($col4);
+        $opciones->addColumna($col5);
+        $opciones->addColumna($col6);
+        $opciones->addColumna($col7);
+        $opciones->addColumna($col8);
+	    // Ee genera el arreglo de opciones necesario para generar el grid
+        $this->obj = $opciones->getConfig($per); 
 	    
 	  }
 	  
@@ -330,5 +405,6 @@ class almregartActions extends autoalmregartActions
       $c->add(CaregartPeer::TIPO, strtr($this->filters['tipo'], '*', '%'), Criteria::LIKE);
     }
    }
+   
 }
 	  
