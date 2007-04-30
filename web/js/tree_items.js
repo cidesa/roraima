@@ -7,6 +7,7 @@ var Formulacion='/formulacion_dev.php/';
 var Obra='/obras_dev.php/';
 var Inv_coloc='/inv_coloc_dev.php/';
 var Cred_cobr='/cred_cobr_dev.php/';
+var Bienes = '/bienes_dev.php/';
 
 var ReportesCompras='http://'+window.location.host+'/vb-libre/reportes/compras/';
 var ReportesTesoreria='http://'+window.location.host+'/vb-libre/reportes/tesoreria/';
@@ -557,6 +558,54 @@ var TREE_ITEMSCOM_OBR = [
 	],
 ];
 
+var TREE_ITEMSCOM_BIE = [
+	['SIGA', null,
+		['Bienes Nacionales', null,
+			['Definiciones',null,
+				['Definici&oacute;n de Empresa', Bienes+'biedefemp'],
+				['Definici&oacute;n de Ubicaci&oacute;n', Bienes+'biedefubi'],
+				['Definici&oacute;n de Proveedores', Bienes+'almregpro'],
+				['Definici&oacute;n de Catalogo de Activos', Bienes+'biecatact'],
+				['Definici&oacute;n de Disposici&oacute;n', Bienes+'biedefdis'],
+				['Definici&oacute;n de Motivos de Disposici&oacute;n', Bienes+'biedefmotdis'],
+				['Definici&oacute;n de Partidas', Bienes+'biedefpar'],
+				['Definici&oacute;n de Clasificaci&oacute;n Funcional', Bienes+'biedefclafun'],
+				['Definici&oacute;n de Cobertura Para Seguros', Bienes+'biecobseg'],
+			],
+			['Registro de Activos',null,
+				['Registro Muebles', Bienes+'bieregactmued'],
+				['Registro Inmuebles', Bienes+'bieregactinmd'],
+				['Registro Semovientes', Bienes+'bieregactsemd'],
+			],
+			['Disposici&oacute;n de Activos',null,
+				['Disposici&oacute;n de Muebles', Bienes+'biedisactmue'],
+				['Disposici&oacute;n de Inmuebles', Bienes+'biedisactinm'],
+				['Disposici&oacute;n de Semoviente', Bienes+'biedisactsem'],
+			],
+			['Registro de Seguros',null,
+				['Seguros de Muebles', Bienes+'bieregsegmue'],
+				['Seguros de Inmuebles', Bienes+'bieregseginm'],
+				['Seguros de Semovientes', Bienes+'bieregsegsem'],
+			],
+			['Contabilidad de Activos',null,
+				['Tabla de IPC', Bienes+'bieipcact'],
+				['Definici&oacute;n Contable',null,
+					['Definici&oacute;n Contable de Muebles', Bienes+'biedefconm'],
+					['Definici&oacute;n Contable de Muebles por Lotes', Bienes+'biedefconlotm'],
+					['Definici&oacute;n Contable de Inmuebles', Bienes+'biedefconi'],
+					['Definici&oacute;n Contable de Inmuebles por Lotes', Bienes+'biedefconloti'],
+					['Definici&oacute;n Contable de Semovientes', Bienes+'biedefcons'],
+					['Definici&oacute;n Contable de Semovientes por Lotes', Bienes+'biedefconlots'],
+				],
+				['Revalorizacion', Bienes+'bieajuinf'],
+			],
+			['Mantenimiento',null,
+				['Cierre de Mes', Bienes+'bieciemesdan'],
+			],
+		],
+	 ],
+];
+
 
 var TREE_ITEMS_MAIN = [
 	['SIGA', null,
@@ -566,6 +615,7 @@ var TREE_ITEMS_MAIN = [
 		['Ingresos', 'principal/menu/m/ingresos'],
 		['Tesorer&iacute;a', 'principal/menu/m/tesoreria'],
 		['Nomina', 'principal/menu/m/nomina'],
+		['Bienes Nacionales', 'principal/menu/m/bienes'],
 		['Formulaci&oacute;n', 'principal/menu/m/formulacion'],
 		['Obras y Contratos', 'principal/menu/m/obra'],
 		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
