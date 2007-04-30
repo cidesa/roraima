@@ -28,6 +28,8 @@
     <?php echo javascript_tag("new tree (TREE_ITEMS_ING, tree_tpl);");?> 
     <?php } elseif($menu=='obra') { ?>
     <?php echo javascript_tag("new tree (TREE_ITEMSCOM_OBR, tree_tpl);");?>
+    <?php } elseif($menu=='bienes') { ?>
+    <?php echo javascript_tag("new tree (TREE_ITEMSCOM_BIE, tree_tpl);");?> 
 	<?php }?>
     
 	</td>
