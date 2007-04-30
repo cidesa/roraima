@@ -578,7 +578,7 @@ var TREE_ITEMSCOM_BIE = [
 				['Registro Semovientes', Bienes+'bieregactsemd'],
 			],
 			['Disposici&oacute;n de Activos',null,
-				['Disposici&oacute;n de Muebles', Bienes+'biedisactmue'],
+				['Disposici&oacute;n de Muebles', Bienes+'biedisactmuenew'],
 				['Disposici&oacute;n de Inmuebles', Bienes+'biedisactinm'],
 				['Disposici&oacute;n de Semoviente', Bienes+'biedisactsem'],
 			],
