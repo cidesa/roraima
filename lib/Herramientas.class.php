@@ -17,6 +17,8 @@ class Herramientas
 	 * @static 
 	 * @var string $prueba Definición del comentario de una variable.
 	 */
+	static $prueba = 'Variable de Prueba'; 
+	
 
 	/**
 	 * Función para retornar datos a partir de una sentencia sql.
@@ -28,6 +30,7 @@ class Herramientas
 	 * @param array &$output Arreglo bidimencional de respuesta.
 	 * @return bool verdadero si encontro datos.
 	 */ 
+	
 	public static function BuscarDatos($sql,&$output)
     {
 		$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
@@ -65,47 +68,47 @@ class Herramientas
 		for ($i=$comienzo;$i<$tamano;$i++){
 			$cont=$cont+1;
 			if ($palabra[$i]==$busqueda):
-				$cont_conc=$cont_conc+1;
-				
-				if ($cont_conc==$concurrencia): 
-					$i=$tamano;
-				endif;
+			$cont_conc=$cont_conc+1;
+
+			if ($cont_conc==$concurrencia):
+			$i=$tamano;
+			endif;
 			endif;
 		}
-			if ($concurrencia > $cont_conc ):
-				 $cont=0;
-			else:
-				 $cont;
-			endif;
-		
-		return $instr=$cont;		
-		}
-				
+		if ($concurrencia > $cont_conc ):
+		$cont=0;
+		else:
+		$cont;
+		endif;
+
+		return $instr=$cont;
+	}
+
 	public static function FormarCodigoPadre($codigo,&$nivelcodigo,&$ultimo)
-	 {   $nivelcodigo=''; 	 
-	 	 $c = new Criteria();  	  
-	  	 $arti = CadefartPeer::doSelect($c);
-	  	 $cadena=$arti[0]->getForart();
-	  	 $loncad=split("-",$cadena);
-	  	 $lonniv=strlen($loncad[0]);
-	  	 $loncodigo=(strlen($codigo));  	 	 
-	  	  if ($lonniv==$loncodigo){  	  	
-	  	  	$nivelcodigo=1;
-	  	   	$padre=''; 
-	  	   	return false; 	  	
-	  	  }else{  	  
-	  	  	$nivelcodigo=0;
-	  	  	$padre=Herramientas::instr($codigo,'-',0,1);  
-	  	  	$pad=($padre-1);
-	  	  	$cad=(substr($codigo,0,$pad));
-	  	  	$ultimo=str_pad($cad,20,' ');  	  	  
-	  	    return true; 	
-	  	  } 
- 	}
- 	
+	{   $nivelcodigo='';
+	$c = new Criteria();
+	$arti = CadefartPeer::doSelect($c);
+	$cadena=$arti[0]->getForart();
+	$loncad=split("-",$cadena);
+	$lonniv=strlen($loncad[0]);
+	$loncodigo=(strlen($codigo));
+	if ($lonniv==$loncodigo){
+		$nivelcodigo=1;
+		$padre='';
+		return false;
+	}else{
+		$nivelcodigo=0;
+		$padre=Herramientas::instr($codigo,'-',0,1);
+		$pad=($padre-1);
+		$cad=(substr($codigo,0,$pad));
+		$ultimo=str_pad($cad,20,' ');
+		return true;
+	}
+	}
+
 	public static function buscar_codigo_padre($codigo2)
-		{  
-		  $c = new Criteria;  	      
+	{
+		$c = new Criteria;
 	  	  $c->add(CaregartPeer::CODART, $codigo2);
 	  	  $datos = CaregartPeer::doSelect($c);
 		   if ($datos){	   
@@ -133,7 +136,7 @@ class Herramientas
 	   	eval('$r = $reg->get'.ucfirst(strtolower($result)).'();');
 		 return $r;
 	  }else{
-		 return 'No Encontrado';
+	  	return '<¡Registro no Encontrado o Vacio!>';
 	  }
   	
   }
@@ -318,6 +321,25 @@ class Herramientas
 	  	}
 	  	return $arreglo;
 	  }
+	  
+
+   public static function getXx($tabla,$filtros,$variables,$campo_retornado)
+	{
+	  	$c = new Criteria();
+	  	print $variables[0];
+	  	if (($filtros[0]!='') && ($variables[0]!=''))
+	  	{
+	  		for($a=0;$a<count($filtros);$a++)
+	  		{
+	  			print('$c->add('.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($filtros[$a]).','.$variables[$a].');');
+	  		}
+	  	}
+	  	eval('$arreglo = '.ucfirst(strtolower($tabla)).'Peer::doSelectOne($c);');
+	  	if($arreglo) return eval('$arreglo->get'.ucfirst(strtolower($campo_retornado)).'();');
+		else return '<¡Registro no Encontrado o Vacio!>'; 	  	
+	}	  
+	  
+	  
 
     public static function autocompleteAjax($fieldjoin, $join, $result, $data)
      {
@@ -334,7 +356,7 @@ class Herramientas
 		 	$i++;
 		  }	
 		}else{
-			 $resultado[0]='No encontrado';
+			$resultado[0]='<¡Registro no Encontrado o Vacio!>';
 		}		
 		 return $resultado;  	
   }
