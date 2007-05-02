@@ -1,0 +1,582 @@
+<?php
+
+
+abstract class BaseFccobrad extends BaseObject  implements Persistent {
+
+
+	
+	protected static $peer;
+
+
+	
+	protected $codcob;
+
+
+	
+	protected $cedcob;
+
+
+	
+	protected $nomcob;
+
+
+	
+	protected $dircob;
+
+
+	
+	protected $telcob;
+
+
+	
+	protected $id;
+
+	
+	protected $collFcrutcobs;
+
+	
+	protected $lastFcrutcobCriteria = null;
+
+	
+	protected $alreadyInSave = false;
+
+	
+	protected $alreadyInValidation = false;
+
+	
+	public function getCodcob()
+	{
+
+		return $this->codcob;
+	}
+
+	
+	public function getCedcob()
+	{
+
+		return $this->cedcob;
+	}
+
+	
+	public function getNomcob()
+	{
+
+		return $this->nomcob;
+	}
+
+	
+	public function getDircob()
+	{
+
+		return $this->dircob;
+	}
+
+	
+	public function getTelcob()
+	{
+
+		return $this->telcob;
+	}
+
+	
+	public function getId()
+	{
+
+		return $this->id;
+	}
+
+	
+	public function setCodcob($v)
+	{
+
+		if ($this->codcob !== $v) {
+			$this->codcob = $v;
+			$this->modifiedColumns[] = FccobradPeer::CODCOB;
+		}
+
+	} 
+	
+	public function setCedcob($v)
+	{
+
+		if ($this->cedcob !== $v) {
+			$this->cedcob = $v;
+			$this->modifiedColumns[] = FccobradPeer::CEDCOB;
+		}
+
+	} 
+	
+	public function setNomcob($v)
+	{
+
+		if ($this->nomcob !== $v) {
+			$this->nomcob = $v;
+			$this->modifiedColumns[] = FccobradPeer::NOMCOB;
+		}
+
+	} 
+	
+	public function setDircob($v)
+	{
+
+		if ($this->dircob !== $v) {
+			$this->dircob = $v;
+			$this->modifiedColumns[] = FccobradPeer::DIRCOB;
+		}
+
+	} 
+	
+	public function setTelcob($v)
+	{
+
+		if ($this->telcob !== $v) {
+			$this->telcob = $v;
+			$this->modifiedColumns[] = FccobradPeer::TELCOB;
+		}
+
+	} 
+	
+	public function setId($v)
+	{
+
+		if ($this->id !== $v) {
+			$this->id = $v;
+			$this->modifiedColumns[] = FccobradPeer::ID;
+		}
+
+	} 
+	
+	public function hydrate(ResultSet $rs, $startcol = 1)
+	{
+		try {
+
+			$this->codcob = $rs->getString($startcol + 0);
+
+			$this->cedcob = $rs->getString($startcol + 1);
+
+			$this->nomcob = $rs->getString($startcol + 2);
+
+			$this->dircob = $rs->getString($startcol + 3);
+
+			$this->telcob = $rs->getString($startcol + 4);
+
+			$this->id = $rs->getInt($startcol + 5);
+
+			$this->resetModified();
+
+			$this->setNew(false);
+
+						return $startcol + 6; 
+		} catch (Exception $e) {
+			throw new PropelException("Error populating Fccobrad object", $e);
+		}
+	}
+
+	
+	public function delete($con = null)
+	{
+		if ($this->isDeleted()) {
+			throw new PropelException("This object has already been deleted.");
+		}
+
+		if ($con === null) {
+			$con = Propel::getConnection(FccobradPeer::DATABASE_NAME);
+		}
+
+		try {
+			$con->begin();
+			FccobradPeer::doDelete($this, $con);
+			$this->setDeleted(true);
+			$con->commit();
+		} catch (PropelException $e) {
+			$con->rollback();
+			throw $e;
+		}
+	}
+
+	
+	public function save($con = null)
+	{
+		if ($this->isDeleted()) {
+			throw new PropelException("You cannot save an object that has been deleted.");
+		}
+
+		if ($con === null) {
+			$con = Propel::getConnection(FccobradPeer::DATABASE_NAME);
+		}
+
+		try {
+			$con->begin();
+			$affectedRows = $this->doSave($con);
+			$con->commit();
+			return $affectedRows;
+		} catch (PropelException $e) {
+			$con->rollback();
+			throw $e;
+		}
+	}
+
+	
+	protected function doSave($con)
+	{
+		$affectedRows = 0; 		if (!$this->alreadyInSave) {
+			$this->alreadyInSave = true;
+
+
+						if ($this->isModified()) {
+				if ($this->isNew()) {
+					$pk = FccobradPeer::doInsert($this, $con);
+					$affectedRows += 1; 										 										 
+					$this->setNew(false);
+				} else {
+					$affectedRows += FccobradPeer::doUpdate($this, $con);
+				}
+				$this->resetModified(); 			}
+
+			if ($this->collFcrutcobs !== null) {
+				foreach($this->collFcrutcobs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			$this->alreadyInSave = false;
+		}
+		return $affectedRows;
+	} 
+	
+	protected $validationFailures = array();
+
+	
+	public function getValidationFailures()
+	{
+		return $this->validationFailures;
+	}
+
+	
+	public function validate($columns = null)
+	{
+		$res = $this->doValidate($columns);
+		if ($res === true) {
+			$this->validationFailures = array();
+			return true;
+		} else {
+			$this->validationFailures = $res;
+			return false;
+		}
+	}
+
+	
+	protected function doValidate($columns = null)
+	{
+		if (!$this->alreadyInValidation) {
+			$this->alreadyInValidation = true;
+			$retval = null;
+
+			$failureMap = array();
+
+
+			if (($retval = FccobradPeer::doValidate($this, $columns)) !== true) {
+				$failureMap = array_merge($failureMap, $retval);
+			}
+
+
+				if ($this->collFcrutcobs !== null) {
+					foreach($this->collFcrutcobs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+
+			$this->alreadyInValidation = false;
+		}
+
+		return (!empty($failureMap) ? $failureMap : true);
+	}
+
+	
+	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
+	{
+		$pos = FccobradPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		return $this->getByPosition($pos);
+	}
+
+	
+	public function getByPosition($pos)
+	{
+		switch($pos) {
+			case 0:
+				return $this->getCodcob();
+				break;
+			case 1:
+				return $this->getCedcob();
+				break;
+			case 2:
+				return $this->getNomcob();
+				break;
+			case 3:
+				return $this->getDircob();
+				break;
+			case 4:
+				return $this->getTelcob();
+				break;
+			case 5:
+				return $this->getId();
+				break;
+			default:
+				return null;
+				break;
+		} 	}
+
+	
+	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
+	{
+		$keys = FccobradPeer::getFieldNames($keyType);
+		$result = array(
+			$keys[0] => $this->getCodcob(),
+			$keys[1] => $this->getCedcob(),
+			$keys[2] => $this->getNomcob(),
+			$keys[3] => $this->getDircob(),
+			$keys[4] => $this->getTelcob(),
+			$keys[5] => $this->getId(),
+		);
+		return $result;
+	}
+
+	
+	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
+	{
+		$pos = FccobradPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		return $this->setByPosition($pos, $value);
+	}
+
+	
+	public function setByPosition($pos, $value)
+	{
+		switch($pos) {
+			case 0:
+				$this->setCodcob($value);
+				break;
+			case 1:
+				$this->setCedcob($value);
+				break;
+			case 2:
+				$this->setNomcob($value);
+				break;
+			case 3:
+				$this->setDircob($value);
+				break;
+			case 4:
+				$this->setTelcob($value);
+				break;
+			case 5:
+				$this->setId($value);
+				break;
+		} 	}
+
+	
+	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
+	{
+		$keys = FccobradPeer::getFieldNames($keyType);
+
+		if (array_key_exists($keys[0], $arr)) $this->setCodcob($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCedcob($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setNomcob($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setDircob($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTelcob($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+	}
+
+	
+	public function buildCriteria()
+	{
+		$criteria = new Criteria(FccobradPeer::DATABASE_NAME);
+
+		if ($this->isColumnModified(FccobradPeer::CODCOB)) $criteria->add(FccobradPeer::CODCOB, $this->codcob);
+		if ($this->isColumnModified(FccobradPeer::CEDCOB)) $criteria->add(FccobradPeer::CEDCOB, $this->cedcob);
+		if ($this->isColumnModified(FccobradPeer::NOMCOB)) $criteria->add(FccobradPeer::NOMCOB, $this->nomcob);
+		if ($this->isColumnModified(FccobradPeer::DIRCOB)) $criteria->add(FccobradPeer::DIRCOB, $this->dircob);
+		if ($this->isColumnModified(FccobradPeer::TELCOB)) $criteria->add(FccobradPeer::TELCOB, $this->telcob);
+		if ($this->isColumnModified(FccobradPeer::ID)) $criteria->add(FccobradPeer::ID, $this->id);
+
+		return $criteria;
+	}
+
+	
+	public function buildPkeyCriteria()
+	{
+		$criteria = new Criteria(FccobradPeer::DATABASE_NAME);
+
+		$criteria->add(FccobradPeer::CODCOB, $this->codcob);
+
+		return $criteria;
+	}
+
+	
+	public function getPrimaryKey()
+	{
+		return $this->getCodcob();
+	}
+
+	
+	public function setPrimaryKey($key)
+	{
+		$this->setCodcob($key);
+	}
+
+	
+	public function copyInto($copyObj, $deepCopy = false)
+	{
+
+		$copyObj->setCedcob($this->cedcob);
+
+		$copyObj->setNomcob($this->nomcob);
+
+		$copyObj->setDircob($this->dircob);
+
+		$copyObj->setTelcob($this->telcob);
+
+		$copyObj->setId($this->id);
+
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getFcrutcobs() as $relObj) {
+				$copyObj->addFcrutcob($relObj->copy($deepCopy));
+			}
+
+		} 
+
+		$copyObj->setNew(true);
+
+		$copyObj->setCodcob(NULL); 
+	}
+
+	
+	public function copy($deepCopy = false)
+	{
+				$clazz = get_class($this);
+		$copyObj = new $clazz();
+		$this->copyInto($copyObj, $deepCopy);
+		return $copyObj;
+	}
+
+	
+	public function getPeer()
+	{
+		if (self::$peer === null) {
+			self::$peer = new FccobradPeer();
+		}
+		return self::$peer;
+	}
+
+	
+	public function initFcrutcobs()
+	{
+		if ($this->collFcrutcobs === null) {
+			$this->collFcrutcobs = array();
+		}
+	}
+
+	
+	public function getFcrutcobs($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseFcrutcobPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collFcrutcobs === null) {
+			if ($this->isNew()) {
+			   $this->collFcrutcobs = array();
+			} else {
+
+				$criteria->add(FcrutcobPeer::CODCOB, $this->getCodcob());
+
+				FcrutcobPeer::addSelectColumns($criteria);
+				$this->collFcrutcobs = FcrutcobPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(FcrutcobPeer::CODCOB, $this->getCodcob());
+
+				FcrutcobPeer::addSelectColumns($criteria);
+				if (!isset($this->lastFcrutcobCriteria) || !$this->lastFcrutcobCriteria->equals($criteria)) {
+					$this->collFcrutcobs = FcrutcobPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastFcrutcobCriteria = $criteria;
+		return $this->collFcrutcobs;
+	}
+
+	
+	public function countFcrutcobs($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseFcrutcobPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(FcrutcobPeer::CODCOB, $this->getCodcob());
+
+		return FcrutcobPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addFcrutcob(Fcrutcob $l)
+	{
+		$this->collFcrutcobs[] = $l;
+		$l->setFccobrad($this);
+	}
+
+
+	
+	public function getFcrutcobsJoinFcrutas($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseFcrutcobPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collFcrutcobs === null) {
+			if ($this->isNew()) {
+				$this->collFcrutcobs = array();
+			} else {
+
+				$criteria->add(FcrutcobPeer::CODCOB, $this->getCodcob());
+
+				$this->collFcrutcobs = FcrutcobPeer::doSelectJoinFcrutas($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(FcrutcobPeer::CODCOB, $this->getCodcob());
+
+			if (!isset($this->lastFcrutcobCriteria) || !$this->lastFcrutcobCriteria->equals($criteria)) {
+				$this->collFcrutcobs = FcrutcobPeer::doSelectJoinFcrutas($criteria, $con);
+			}
+		}
+		$this->lastFcrutcobCriteria = $criteria;
+
+		return $this->collFcrutcobs;
+	}
+
+} 
