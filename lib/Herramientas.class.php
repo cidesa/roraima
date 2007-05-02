@@ -331,7 +331,7 @@ class Herramientas
 	  	{
 	  		for($a=0;$a<count($filtros);$a++)
 	  		{
-	  			print('$c->add('.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($filtros[$a]).','.$variables[$a].');');
+	  			eval('$c->add('.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($filtros[$a]).','.$variables[$a].');');
 	  		}
 	  	}
 	  	eval('$arreglo = '.ucfirst(strtolower($tabla)).'Peer::doSelectOne($c);');
