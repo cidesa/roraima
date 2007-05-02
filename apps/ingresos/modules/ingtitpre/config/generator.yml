@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cideftit
+    theme:            default
+    fields:
+      codpre: { name: Código}
+      nompre: { name: Nombre}     
+      codcta: { name: Código} 
+      descta: { name: Nombre}     
+      stacod: { name: Estatus}
+      coduni: { name: Código de Unidad}  
+      estatus: { name: Estatus2}     
+            
+    list:
+      title:          Titulos Presupuestarios
+      filters:        [codpre]
+      display:        [=codpre, nompre]             
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Titulos Presupuestarios
+      display:       [=codpre, nompre, codcta, descta, stacod, coduni, estatus]
