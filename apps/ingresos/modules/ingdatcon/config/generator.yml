@@ -23,8 +23,8 @@ generator:
     
     list:
       title:          Contribuyentes
-      display:        [rifcon, codinm, desmue]
-      filters:        [rifcon, nitcon]
+      display:        [rifcon, nomcon]
+      filters:        [rifcon, nomcon]
       object_actions:
         _edit:        ~
         _delete:      ~              
