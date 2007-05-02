@@ -18,8 +18,9 @@ class almregartActions extends autoalmregartActions
 	    { 
 	    	$this->caregart = $this->getCaregartOrCreate();
 	    	$this->updateCaregartFromRequest();
+	    	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
 	    	
-	    	self::$coderror=Articulos::validarAlmregart($this->caregart);
+	    	self::$coderror=Articulos::validarAlmregart($this->caregart,$grid);
 	    	if (self::$coderror<>-1){	    		 	
 	    		return false;
 	    	}else return true;
