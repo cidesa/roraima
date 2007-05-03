@@ -127,15 +127,14 @@ class Herramientas
 
 
 	/**
-	 * Función para retornar datos a partir de una sentencia sql.
-	 * Esta función retorna un arreglo de registros (Arreglo Bidimencional).
-	 * @todo Agregar el manejo de errores de base de datos
+	 * Función para retornar datos a una variale con un filtro.
+	 * Esta función retorna un registro.
 	 *  
 	 * @static
 	 * @param string $fieldjoin Campo de la tabla a comparar.
 	 * @param string $join Tabla a la que se va a consultar
 	 * @return string $result es el nombre del campo que se quiere traer la data
-	 * @param string $data variale conla que se va hacer el filtro 
+	 * @param string $data variale con la que se va hacer el filtro.
 	 */     
     public static function getX($fieldjoin, $join, $result, $data)
      {
@@ -334,7 +333,16 @@ class Herramientas
 	  	return $arreglo;
 	  }
 	  
-
+	/**
+	 * Función para retornar datos a una variable pero con mas de un filtro.
+	 * Esta función retorna un registro.
+	 *  
+	 * @static
+	 * @param string $tabla tabla a comparar.
+	 * @param string $filtros arreglo de campos de la Tabla a la que se van a consultar y comparar.
+	 * @return string $variables es el nombre del campo que se quiere traer la data.
+	 * @param string $variables arreglo de variables o campos con la que se va hacer el filtro.
+	 */   
    public static function getXx($tabla,$filtros,$variables,$campo_retornado)
 	{
 	  	$c = new Criteria();
