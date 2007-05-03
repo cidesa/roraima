@@ -9,4 +9,6 @@
  */ 
 class Acatencion extends BaseAcatencion
 {
+  
+  
 }
