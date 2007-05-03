@@ -1,0 +1,17 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocregobr
+    theme:            default
+    fields:
+      codobr:      { name: Código}
+      desobr:      { name: Descripción}       
+    list:
+      title:          Situación de la Obra
+      filters:		  [codobr, desobr]
+      display:        [=codobr, desobr]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~                                
+    edit:
+      title:          Situación de la Obra
