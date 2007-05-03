@@ -1,2 +1,4 @@
-# default values
-#all:
+all:
+   .apps:
+     autenticacion:    autenticacion
+     this:             obras      #cambiar en cada app

@@ -40,8 +40,8 @@ all:
 #    unavailable_module:     default   # To be called when a user requests a page
 #    unavailable_action:  unavailable  # From an application disabled via the available setting below
 #
-#  .settings:
-#    available:              on        # Enable the whole application. Switch to off to redirect all requests to the unavailable module and action.
+  .settings:
+    available:              on        # Enable the whole application. Switch to off to redirect all requests to the unavailable module and action.
 #
 #    # Optional features. Deactivating unused features boots performance a bit.
     use_database:           on        # Enable database manager. Set to off if you don't use a database.
