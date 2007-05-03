@@ -37,9 +37,9 @@ body
 
 .grid01 {
 	color: #00000;
-	width: 1080px;
+	width: 700px;
 	height: 260px;
-
+	overflow:scroll;
 	background-color: #FFFFFF;
 }
 
