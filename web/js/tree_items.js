@@ -561,7 +561,7 @@ var TREE_ITEMSCOM_OBR = [
 						],
 						['Registro de Contratos', Obra+'oycdescon'],				
 						['Registro de Actas',  Obra+'oycregact'],		
-						['Registro de Valuaci&oacute;n', Obra+'oycval'],				
+						['Registro de Valuaciones', Obra+'oycval'],				
 						['Registro de Inspecciones',  Obra+'oycinscon'],								
 						['Situaci&oacute;n del Contrato',  Obra+'oycsitcon'],														
 					],	
