@@ -346,12 +346,12 @@ class Herramientas
    public static function getXx($tabla,$filtros,$variables,$campo_retornado)
 	{
 	  	$c = new Criteria();
-	  	print $variables[0];
+	  	//print $variables[0];
 	  	if (($filtros[0]!='') && ($variables[0]!=''))
 	  	{
 	  		for($a=0;$a<count($filtros);$a++)
 	  		{
-	  			eval('$c->add('.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($filtros[$a]).','.$variables[$a].');');
+	  			eval('$c->add('.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($filtros[$a]).','.chr(39).$variables[$a].chr(39).');');
 	  		}
 	  	}
 	  	eval('$arreglo = '.ucfirst(strtolower($tabla)).'Peer::doSelectOne($c);');
