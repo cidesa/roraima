@@ -24,16 +24,16 @@ class Herramientas
 	 * Función para retornar datos a partir de una sentencia sql.
 	 * Esta función retorna un arreglo de registros (Arreglo Bidimencional).
 	 * @todo Agregar el manejo de errores de base de datos
-	 *  
+	 *
 	 * @static
 	 * @param string $sql Instrucción SQL.
 	 * @param array &$output Arreglo bidimencional de respuesta.
 	 * @return bool verdadero si encontro datos.
-	 */ 
-	
+	 */
+
 	public static function BuscarDatos($sql,&$output)
     {
-		$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+    	$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
 		$stmt = $con->createStatement();
 		$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
 		$i = pg_num_fields($rs->getResource());
@@ -125,6 +125,18 @@ class Herramientas
   	   return $errores[$cod]['msj']; 	  	
     }
 
+
+	/**
+	 * Función para retornar datos a partir de una sentencia sql.
+	 * Esta función retorna un arreglo de registros (Arreglo Bidimencional).
+	 * @todo Agregar el manejo de errores de base de datos
+	 *  
+	 * @static
+	 * @param string $fieldjoin Campo de la tabla a comparar.
+	 * @param string $join Tabla a la que se va a consultar
+	 * @return string $result es el nombre del campo que se quiere traer la data
+	 * @param string $data variale conla que se va hacer el filtro 
+	 */     
     public static function getX($fieldjoin, $join, $result, $data)
      {
      	eval ('$field = '.ucfirst(strtolower($join)).'Peer::'.strtoupper($fieldjoin).';');
