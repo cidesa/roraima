@@ -7,8 +7,8 @@ generator:
     fields:
       codobr:      { name: Código}
       codtipobr:   { name: Tipo}
-	  destipobr:   { name: Descripcion}
-      desobr:      { name: Descripción}
+      destipobr:   { name: Descripcion}
+      desobr:      { name: Descripción}	  
       fecini:      { name: Fecha Inicio}
       fecfin:      { name: Fecha Culminación}
       codpai:      { name: Código Pais}
@@ -31,4 +31,4 @@ generator:
                         
     edit:
       title:          Edición Registro de Obras
-      display:        [codobr, codtipobr, destipobr, desobr, fecini, fecfin, codpai, codedo, codmun, codpar, codsec, dirobr, codpre, despre]
+      display:        [codobr, codtipobr, desobr, fecini, fecfin, codpai, codedo, codmun, codpar, codsec, dirobr, codpre, despre]

@@ -39,9 +39,9 @@
   'size' => 4,
   'control_name' => 'ocregobr[codtipobr]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;
+&nbsp;
 <?php echo button_to('...','#') ?>
-
+&nbsp;
   <?php $value = object_input_tag($ocregobr, 'getDestipobr', array (
   'disabled' => true,
   'size'=> 40,
@@ -62,6 +62,7 @@
   'size' => 80,
   'control_name' => 'ocregobr[desobr]',
 )); echo $value ? $value : '&nbsp;' ?>
+
     </div>
 </div>
 
@@ -75,6 +76,7 @@
   <?php $value = object_input_date_tag($ocregobr, 'getFecini', array (
   'rich' => true,
   'size' => 10,
+  'maxlength' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'ocregobr[fecini]',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -91,6 +93,7 @@
   <?php $value = object_input_date_tag($ocregobr, 'getFecfin', array (
   'rich' => true,
   'size' => 10,
+  'maxlength' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'ocregobr[fecfin]',
 )); echo $value ? $value : '&nbsp;' ?>
@@ -106,8 +109,18 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($ocregobr, 'getCodpai', array (
-  'size' => 20,
+  'size' => 4,
+  'maxlength' => 4,  
   'control_name' => 'ocregobr[codpai]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo button_to('...','#') ?>
+&nbsp;
+  <?php $value = object_input_tag($ocregobr, 'getNompai', array (
+  'disabled' => true,
+  'size'=> 40,
+  'control_name' => 'ocregobr[nompai]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -121,12 +134,13 @@
 
   <?php $value = object_input_tag($ocregobr, 'getCodedo', array (
   'size' => 4,
+  'maxlength' => 4,
   'control_name' => 'ocregobr[codedo]',
 )); echo $value ? $value : '&nbsp;' ?>
 
-&nbsp;&nbsp;
+&nbsp;
 <?php echo button_to('...','#') ?>
-
+&nbsp;
   <?php $value = object_input_tag($ocregobr, 'getNomedo', array (
   'disabled' => true,
   'size'=> 40,
@@ -144,8 +158,18 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($ocregobr, 'getCodmun', array (
-  'size' => 20,
+  'size' => 4,
+  'maxlength' => 4,  
   'control_name' => 'ocregobr[codmun]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo button_to('...','#') ?>
+&nbsp;
+  <?php $value = object_input_tag($ocregobr, 'getNommun', array (
+  'disabled' => true,
+  'size'=> 40,
+  'control_name' => 'ocregobr[nommun]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -158,9 +182,20 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($ocregobr, 'getCodpar', array (
-  'size' => 20,
+  'size' => 4,
+  'maxlength' => 4,  
   'control_name' => 'ocregobr[codpar]',
 )); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo button_to('...','#') ?>
+&nbsp;
+  <?php $value = object_input_tag($ocregobr, 'getNompar', array (
+  'disabled' => true,
+  'size'=> 40,
+  'control_name' => 'ocregobr[nompar]',
+)); echo $value ? $value : '&nbsp;' ?>
+
     </div>
 </div>
 
@@ -172,9 +207,20 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($ocregobr, 'getCodsec', array (
-  'size' => 20,
+  'size' => 4,
+  'maxlength' => 4,  
   'control_name' => 'ocregobr[codsec]',
 )); echo $value ? $value : '&nbsp;' ?>
+
+&nbsp;
+<?php echo button_to('...','#') ?>
+&nbsp;
+  <?php $value = object_input_tag($ocregobr, 'getNomsec', array (
+  'disabled' => true,
+  'size'=> 40,
+  'control_name' => 'ocregobr[nomsec]',
+)); echo $value ? $value : '&nbsp;' ?>
+
     </div>
 </div>
 
@@ -193,6 +239,16 @@
 </div>
 
 <?php tabPageOpenClose("tp1", "tabPage2", 'Presupuesto');?> 
+
+<legend>Datos Generales</legend>
+<div class="form-row">
+<form name="form1" id="form1">
+<?
+echo grid_tag($obj);
+?>
+</form>
+
+
 <?php tabPageOpenClose("tp1", "tabPage2", 'Asignacion');?> 
 <div class="form-row">
   <?php echo label_for('ocregobr[codpre]', __($labels['ocregobr{codpre}']), 'class="required"') ?>
@@ -203,6 +259,7 @@
 
   <?php $value = object_input_tag($ocregobr, 'getCodpre', array (
   'size' => 32,
+  'maxlength' => 32,  
   'control_name' => 'ocregobr[codpre]',
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;
