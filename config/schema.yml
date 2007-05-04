@@ -8,25 +8,25 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     loguse: 
       type: VARCHAR
       size: 15
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     estado: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecrec: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     horrec: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecate: 
       type: DATE
     horate: 
@@ -55,7 +55,7 @@ propel:
       type: VARCHAR
       size: 15
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomdes: 
       type: VARCHAR
       size: 250
@@ -80,7 +80,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipdoc: 
       type: VARCHAR
       size: 4
@@ -115,7 +115,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomdoc: 
       type: VARCHAR
       size: 100
@@ -135,7 +135,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomuni: 
       type: VARCHAR
       size: 30
@@ -241,7 +241,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descla: 
       type: VARCHAR
       size: 250
@@ -259,7 +259,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descob: 
       type: VARCHAR
       size: 500
@@ -274,7 +274,7 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desact: 
       type: VARCHAR
       size: 250
@@ -318,12 +318,12 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmue: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ctadepcar: 
       type: VARCHAR
       size: 32
@@ -362,12 +362,12 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codinm: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ctadepcar: 
       type: VARCHAR
       size: 18
@@ -406,12 +406,12 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codsem: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ctadepcar: 
       type: VARCHAR
       size: 18
@@ -579,7 +579,7 @@ propel:
     fecdep: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monmue: 
       type: NUMERIC
       size: 14
@@ -634,7 +634,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desdis: 
       type: VARCHAR
       size: 250
@@ -664,17 +664,17 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmue: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nrodisinm: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     motdisinm: 
       type: VARCHAR
       size: 50
@@ -715,17 +715,17 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmue: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nrodismue: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     motdismue: 
       type: VARCHAR
       size: 50
@@ -772,17 +772,17 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codsem: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nrodissem: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     motdissem: 
       type: VARCHAR
       size: 50
@@ -823,7 +823,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomedo: 
       type: VARCHAR
       size: 30
@@ -839,7 +839,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ipcene: 
       type: NUMERIC
       size: 14
@@ -928,12 +928,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codedo: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nommun: 
       type: VARCHAR
       size: 30
@@ -949,12 +949,12 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     parhas: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     valrcp: 
       type: VARCHAR
       size: 1
@@ -970,12 +970,12 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codinm: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desinm: 
       type: VARCHAR
       size: 250
@@ -1120,12 +1120,12 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmue: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desmue: 
       type: VARCHAR
       size: 250
@@ -1289,12 +1289,12 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codsem: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     dessem: 
       type: VARCHAR
       size: 250
@@ -1408,17 +1408,17 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmue: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nroseginm: 
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecseginm: 
       type: DATE
     nomseginm: 
@@ -1453,17 +1453,17 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmue: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nrosegmue: 
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecsegmue: 
       type: DATE
     nomsegmue: 
@@ -1498,17 +1498,17 @@ propel:
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codsem: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nrosegsem: 
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecsegsem: 
       type: DATE
     nomsegsem: 
@@ -1580,7 +1580,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ordcom: 
       type: VARCHAR
       size: 8
@@ -1624,12 +1624,12 @@ propel:
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codubi: 
       type: VARCHAR
       size: 20
@@ -1668,17 +1668,17 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcat: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canord: 
       type: NUMERIC
       size: 14
@@ -1714,17 +1714,17 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcat: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     candph: 
       type: NUMERIC
       size: 14
@@ -1748,17 +1748,17 @@ propel:
       type: VARCHAR
       size: 15
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcat: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     candph: 
       type: NUMERIC
       size: 14
@@ -1824,17 +1824,17 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcat: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canrec: 
       type: NUMERIC
       size: 14
@@ -1956,12 +1956,12 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codprec: 
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     preuni: 
       type: NUMERIC
       size: 14
@@ -1980,12 +1980,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tieent: 
       type: VARCHAR
       size: 20
@@ -2004,12 +2004,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ordcom: 
       type: VARCHAR
       size: 8
@@ -2064,17 +2064,17 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcat: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canreq: 
       type: NUMERIC
       size: 14
@@ -2105,17 +2105,17 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcat: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecrea: 
       type: DATE
     id: 
@@ -2129,17 +2129,17 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcat: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canreq: 
       type: NUMERIC
       size: 14
@@ -2192,7 +2192,7 @@ propel:
       type: NUMERIC
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     clasificacion: 
       type: VARCHAR
       size: 50
@@ -2243,7 +2243,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desconpag: 
       type: VARCHAR
       size: 255
@@ -2317,7 +2317,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccot: 
       type: DATE
       required: true
@@ -2377,7 +2377,7 @@ propel:
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomalm: 
       type: VARCHAR
       size: 100
@@ -2396,7 +2396,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     lonart: 
       type: NUMERIC
       size: 2
@@ -2513,7 +2513,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     numcon: 
       type: VARCHAR
       size: 1
@@ -2536,7 +2536,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomprec: 
       type: VARCHAR
       size: 100
@@ -2551,7 +2551,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomser: 
       type: VARCHAR
       size: 100
@@ -2566,7 +2566,7 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomubi: 
       type: VARCHAR
       size: 100
@@ -2582,7 +2582,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desdesc: 
       type: VARCHAR
       size: 100
@@ -2616,12 +2616,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canord: 
       type: NUMERIC
       size: 14
@@ -2710,12 +2710,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpre: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     preser: 
       type: NUMERIC
       size: 14
@@ -2784,12 +2784,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canart: 
       type: NUMERIC
       size: 14
@@ -2805,7 +2805,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecdev: 
       type: DATE
       required: true
@@ -2837,7 +2837,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecdev: 
       type: DATE
       required: true
@@ -2902,7 +2902,7 @@ propel:
       type: VARCHAR
       size: 15
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecdph: 
       type: DATE
       required: true
@@ -2960,7 +2960,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecdph: 
       type: DATE
       required: true
@@ -3021,7 +3021,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desforent: 
       type: VARCHAR
       size: 255
@@ -3035,17 +3035,17 @@ propel:
     fecinv: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codalm: 
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     exiact: 
       type: NUMERIC
       size: 14
@@ -3065,7 +3065,7 @@ propel:
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nommar: 
       type: VARCHAR
       size: 100
@@ -3130,7 +3130,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecord: 
       type: DATE
       required: true
@@ -3291,12 +3291,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codconpag: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -3308,12 +3308,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codforent: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -3325,7 +3325,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecser: 
       type: DATE
       required: true
@@ -3391,7 +3391,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompro: 
       type: VARCHAR
       size: 250
@@ -3522,7 +3522,7 @@ propel:
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomram: 
       type: VARCHAR
       size: 100
@@ -3539,19 +3539,19 @@ propel:
       size: 14
       scale: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canhas: 
       type: NUMERIC
       size: 14
       scale: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     cancot: 
       type: NUMERIC
       size: 14
       scale: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nroran: 
       type: VARCHAR
       size: 2
@@ -3580,7 +3580,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecrcp: 
       type: DATE
       required: true
@@ -3635,7 +3635,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomrgo: 
       type: VARCHAR
       size: 100
@@ -3669,7 +3669,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desrec: 
       type: VARCHAR
       size: 100
@@ -3702,12 +3702,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codrec: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecent: 
       type: DATE
     fecven: 
@@ -3919,7 +3919,7 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desart: 
       type: VARCHAR
       size: 250
@@ -4119,7 +4119,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecreq: 
       type: DATE
       required: true
@@ -4150,7 +4150,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecreq: 
       type: DATE
       required: true
@@ -4220,12 +4220,12 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codret: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -4237,12 +4237,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codrgo: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monrgo: 
       type: NUMERIC
       size: 14
@@ -4252,7 +4252,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -4297,7 +4297,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecreq: 
       type: DATE
       required: true
@@ -4356,7 +4356,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecreq: 
       type: DATE
       required: true
@@ -4406,12 +4406,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codrazcom: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -4517,7 +4517,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fectra: 
       type: DATE
     destra: 
@@ -4696,7 +4696,7 @@ propel:
       type: VARCHAR
       size: 34
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompre: 
       type: VARCHAR
       size: 100
@@ -4704,12 +4704,12 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     anopre: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monasi: 
       type: NUMERIC
       size: 14
@@ -4772,7 +4772,7 @@ propel:
       type: VARCHAR
       size: 14
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     repcon: 
       type: VARCHAR
       size: 1
@@ -4830,7 +4830,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     loncod: 
       type: NUMERIC
       size: 2
@@ -4889,7 +4889,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompre: 
       type: VARCHAR
       size: 100
@@ -5179,11 +5179,11 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecing: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desing: 
       type: VARCHAR
       size: 500
@@ -5296,7 +5296,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destip: 
       type: VARCHAR
       size: 250
@@ -5312,7 +5312,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fectra: 
       type: DATE
       required: true
@@ -5349,7 +5349,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomcli: 
       type: VARCHAR
       size: 50
@@ -5459,7 +5459,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcli: 
       type: VARCHAR
       size: 10
@@ -5468,7 +5468,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecdes: 
       type: DATE
     mondes: 
@@ -5486,12 +5486,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     refdoc: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcli: 
       type: VARCHAR
       size: 10
@@ -5500,7 +5500,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecdes: 
       type: DATE
     mondes: 
@@ -5518,17 +5518,17 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcli: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     correl: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codfor: 
       type: VARCHAR
       size: 4
@@ -5554,12 +5554,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     refdoc: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcli: 
       type: VARCHAR
       size: 10
@@ -5568,7 +5568,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monpag: 
       type: NUMERIC
       size: 14
@@ -5596,12 +5596,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcli: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmov: 
       type: VARCHAR
       size: 3
@@ -5670,7 +5670,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomban: 
       type: VARCHAR
       size: 50
@@ -5722,12 +5722,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codrec: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -5739,7 +5739,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcli: 
       type: VARCHAR
       size: 10
@@ -5748,7 +5748,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecrec: 
       type: DATE
     monrec: 
@@ -5766,12 +5766,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     refdoc: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcli: 
       type: VARCHAR
       size: 10
@@ -5780,7 +5780,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecrec: 
       type: DATE
     monrec: 
@@ -5798,12 +5798,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     numges: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecges: 
       type: DATE
     nomcon: 
@@ -5823,7 +5823,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desdes: 
       type: VARCHAR
       size: 50
@@ -5859,7 +5859,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desmov: 
       type: VARCHAR
       size: 50
@@ -5883,7 +5883,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desrec: 
       type: VARCHAR
       size: 50
@@ -5916,7 +5916,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fectra: 
       type: DATE
       required: true
@@ -5924,7 +5924,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmov: 
       type: VARCHAR
       size: 3
@@ -6168,7 +6168,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     loncta: 
       type: NUMERIC
       size: 2
@@ -6345,7 +6345,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descta: 
       type: VARCHAR
       size: 250
@@ -6399,7 +6399,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
       foreignTable: contabb
       foreignReference: codcta
       onDelete: 
@@ -6407,16 +6407,16 @@ propel:
     fecini: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccie: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     pereje: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     totdeb: 
       type: NUMERIC
       size: 14
@@ -6549,7 +6549,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descta: 
       type: VARCHAR
       size: 250
@@ -6603,11 +6603,11 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccom: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descom: 
       type: VARCHAR
       size: 250
@@ -6739,7 +6739,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecadi: 
       type: DATE
       required: true
@@ -6784,7 +6784,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipaju: 
       type: VARCHAR
       size: 4
@@ -6934,7 +6934,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompre: 
       type: VARCHAR
       size: 250
@@ -6942,12 +6942,12 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     anopre: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monasi: 
       type: NUMERIC
       size: 14
@@ -7016,7 +7016,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompre: 
       type: VARCHAR
       size: 250
@@ -7024,12 +7024,12 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     anopre: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monasi: 
       type: NUMERIC
       size: 14
@@ -7127,7 +7127,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipcau: 
       type: VARCHAR
       size: 4
@@ -7181,7 +7181,7 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descen: 
       type: VARCHAR
       size: 100
@@ -7197,7 +7197,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipcom: 
       type: VARCHAR
       size: 4
@@ -7317,7 +7317,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     loncod: 
       type: NUMERIC
       size: 2
@@ -7420,7 +7420,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompre: 
       type: VARCHAR
       size: 250
@@ -7451,7 +7451,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompre: 
       type: VARCHAR
       size: 250
@@ -7482,7 +7482,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompre: 
       type: VARCHAR
       size: 250
@@ -7513,7 +7513,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -7689,7 +7689,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -7713,7 +7713,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -7753,7 +7753,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -7789,7 +7789,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -7833,7 +7833,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -7853,7 +7853,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     rifemp: 
       type: VARCHAR
       size: 15
@@ -7883,7 +7883,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desent: 
       type: VARCHAR
       size: 100
@@ -7907,7 +7907,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     valini: 
       type: NUMERIC
       size: 14
@@ -8266,12 +8266,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpre: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     perpre: 
       type: VARCHAR
       size: 2
@@ -8315,12 +8315,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpre: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monaju: 
       type: NUMERIC
       size: 14
@@ -8382,17 +8382,17 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codori: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     coddes: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monmov: 
       type: NUMERIC
       size: 14
@@ -8414,12 +8414,12 @@ propel:
       type: VARCHAR
       size: 1
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     consec: 
       type: NUMERIC
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomabr: 
       type: VARCHAR
       size: 10
@@ -8445,12 +8445,12 @@ propel:
       type: VARCHAR
       size: 1
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     consec: 
       type: NUMERIC
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomabr: 
       type: VARCHAR
       size: 10
@@ -8476,7 +8476,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tippag: 
       type: VARCHAR
       size: 4
@@ -8571,7 +8571,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 32
@@ -8642,7 +8642,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipprc: 
       type: VARCHAR
       size: 4
@@ -8701,7 +8701,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tiprel: 
       type: VARCHAR
       size: 4
@@ -8748,11 +8748,11 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecsit: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     expsit: 
       type: VARCHAR
       size: 250
@@ -8985,7 +8985,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destipobr: 
       type: VARCHAR
       size: 100
@@ -9014,7 +9014,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fectra: 
       type: DATE
       required: true
@@ -9075,7 +9075,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -9520,25 +9520,25 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     loguse: 
       type: VARCHAR
       size: 15
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     estado: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecrec: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     horrec: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecate: 
       type: DATE
     horate: 
@@ -9560,7 +9560,7 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     anuate: 
       type: VARCHAR
       size: 1
@@ -9603,7 +9603,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipdoc: 
       type: VARCHAR
       size: 4
@@ -9661,12 +9661,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomtab: 
       type: VARCHAR
       size: 30
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     vidutil: 
       type: VARCHAR
       size: 2
@@ -10071,7 +10071,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomemp: 
       type: VARCHAR
       size: 250
@@ -10191,7 +10191,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipaju: 
       type: VARCHAR
       size: 2
@@ -10242,17 +10242,17 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     numlot: 
       type: VARCHAR
       size: 25
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     candes: 
       type: NUMERIC
       size: 14
@@ -10314,17 +10314,17 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     numlot: 
       type: VARCHAR
       size: 25
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     cansol: 
       type: NUMERIC
       size: 14
@@ -10368,12 +10368,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canord: 
       type: NUMERIC
       size: 14
@@ -10409,17 +10409,17 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codalm: 
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     comisi: 
       type: NUMERIC
       size: 14
@@ -10435,12 +10435,12 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpvp: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     pvpart: 
       type: NUMERIC
       size: 14
@@ -10688,7 +10688,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecdev: 
       type: DATE
       required: true
@@ -10729,12 +10729,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     coddto: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -10806,12 +10806,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canent: 
       type: NUMERIC
       size: 14
@@ -10823,7 +10823,7 @@ propel:
     fecent: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecaju: 
       type: DATE
     stafec: 
@@ -10840,7 +10840,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomdes: 
       type: VARCHAR
       size: 20
@@ -10885,7 +10885,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomsol: 
       type: VARCHAR
       size: 100
@@ -10928,7 +10928,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nommar: 
       type: VARCHAR
       size: 20
@@ -10944,12 +10944,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     numlot: 
       type: VARCHAR
       size: 25
@@ -10976,7 +10976,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecnot: 
       type: DATE
       required: true
@@ -11045,7 +11045,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecped: 
       type: DATE
       required: true
@@ -11214,12 +11214,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -11231,12 +11231,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -11248,7 +11248,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomtipcte: 
       type: VARCHAR
       size: 30
@@ -11264,7 +11264,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomtidev: 
       type: VARCHAR
       size: 255
@@ -11280,7 +11280,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destippag: 
       type: VARCHAR
       size: 30
@@ -11316,7 +11316,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomtivta: 
       type: VARCHAR
       size: 20
@@ -11362,7 +11362,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nroinm: 
       type: VARCHAR
       size: 8
@@ -11399,7 +11399,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     plaveh: 
       type: VARCHAR
       size: 8
@@ -11436,7 +11436,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomunimon: 
       type: VARCHAR
       size: 30
@@ -11456,7 +11456,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomusoinm: 
       type: VARCHAR
       size: 250
@@ -11472,12 +11472,12 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     anovig: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desuso: 
       type: VARCHAR
       size: 250
@@ -11520,12 +11520,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     coduni: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -11595,12 +11595,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -11612,17 +11612,17 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -11634,17 +11634,17 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codunimet: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -11656,12 +11656,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcta: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -11673,12 +11673,12 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmet: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -11690,12 +11690,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmet: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -11722,12 +11722,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ubigeo: 
       type: VARCHAR
       size: 100
@@ -11825,7 +11825,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomcat: 
       type: VARCHAR
       size: 250
@@ -11969,7 +11969,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canrem: 
       type: NUMERIC
       size: 14
@@ -12005,12 +12005,12 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codtip: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monfin: 
       type: NUMERIC
       size: 14
@@ -12026,12 +12026,12 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codaccesp: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desaccesp: 
       type: VARCHAR
       size: 1000
@@ -12052,7 +12052,7 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desact: 
       type: VARCHAR
       size: 1000
@@ -12070,7 +12070,7 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomcat: 
       type: VARCHAR
       size: 250
@@ -12104,12 +12104,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descon: 
       type: VARCHAR
       size: 250
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -12121,7 +12121,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nivproacc: 
       type: NUMERIC
       size: 2
@@ -12210,7 +12210,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desejedes: 
       type: VARCHAR
       size: 100
@@ -12226,7 +12226,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desequ: 
       type: VARCHAR
       size: 50
@@ -12245,7 +12245,7 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desest: 
       type: VARCHAR
       size: 100
@@ -12261,7 +12261,7 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desind: 
       type: VARCHAR
       size: 100
@@ -12277,7 +12277,7 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desmet: 
       type: VARCHAR
       size: 1000
@@ -12308,12 +12308,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmun: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desmun: 
       type: VARCHAR
       size: 250
@@ -12393,7 +12393,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desniv: 
       type: VARCHAR
       size: 100
@@ -12408,7 +12408,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desnucdes: 
       type: VARCHAR
       size: 100
@@ -12424,7 +12424,7 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desobj: 
       type: VARCHAR
       size: 1000
@@ -12480,7 +12480,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomorg: 
       type: VARCHAR
       size: 100
@@ -12505,7 +12505,7 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomorg: 
       type: VARCHAR
       size: 100
@@ -12544,17 +12544,17 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmun: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpar: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     despar: 
       type: VARCHAR
       size: 250
@@ -12570,7 +12570,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomparegr: 
       type: VARCHAR
       size: 250
@@ -12586,7 +12586,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomparing: 
       type: VARCHAR
       size: 250
@@ -12613,7 +12613,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desprg: 
       type: VARCHAR
       size: 1000
@@ -12633,7 +12633,7 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     despro: 
       type: VARCHAR
       size: 500
@@ -12651,7 +12651,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompro: 
       type: VARCHAR
       size: 250
@@ -12666,7 +12666,7 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompro: 
       type: VARCHAR
       size: 1000
@@ -12870,17 +12870,17 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codaccesp: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desact: 
       type: VARCHAR
       size: 250
@@ -12898,17 +12898,17 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codaccesp: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmet: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desmet: 
       type: VARCHAR
       size: 250
@@ -12940,7 +12940,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomsec: 
       type: VARCHAR
       size: 250
@@ -12956,7 +12956,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     dessitpre: 
       type: VARCHAR
       size: 100
@@ -12972,7 +12972,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     dessta: 
       type: VARCHAR
       size: 100
@@ -12988,12 +12988,12 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codsubobj: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     dessubobj: 
       type: VARCHAR
       size: 1000
@@ -13009,12 +13009,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codsubsec: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomsubsec: 
       type: VARCHAR
       size: 250
@@ -13030,17 +13030,17 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codsubobj: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codsubsubobj: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     dessubsubobj: 
       type: VARCHAR
       size: 1000
@@ -13056,7 +13056,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompre: 
       type: VARCHAR
       size: 250
@@ -13075,7 +13075,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomuni: 
       type: VARCHAR
       size: 250
@@ -13093,7 +13093,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desunimed: 
       type: VARCHAR
       size: 30
@@ -13111,7 +13111,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -13139,7 +13139,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     deszoneco: 
       type: VARCHAR
       size: 100
@@ -13155,12 +13155,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecpre: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monaco: 
       type: NUMERIC
       size: 14
@@ -13233,27 +13233,27 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codaccesp: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmet: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     perpre: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canact: 
       type: NUMERIC
       size: 14
@@ -13318,7 +13318,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ingtot: 
       type: NUMERIC
       size: 20
@@ -13334,22 +13334,22 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codaccesp: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmet: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     perpre: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canmet: 
       type: NUMERIC
       size: 14
@@ -13407,17 +13407,17 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     perpre: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canper: 
       type: NUMERIC
       size: 14
@@ -13433,7 +13433,7 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ultcen: 
       type: NUMERIC
       size: 14
@@ -13483,22 +13483,22 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpar: 
       type: VARCHAR
       size: 16
@@ -13565,27 +13565,27 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     perpre: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canper: 
       type: NUMERIC
       size: 14
@@ -13601,27 +13601,27 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codart: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codparing: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monfin: 
       type: NUMERIC
       size: 14
@@ -13637,17 +13637,17 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codparegr: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codparing: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monfin: 
       type: NUMERIC
       size: 14
@@ -13664,17 +13664,17 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codvaruno: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codvardos: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codvartre: 
       type: VARCHAR
       size: 4
@@ -13692,7 +13692,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     escapr: 
       type: VARCHAR
       size: 1
@@ -13778,12 +13778,12 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     perpar: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monpar: 
       type: NUMERIC
       size: 14
@@ -13859,12 +13859,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     permet: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canmet: 
       type: NUMERIC
       size: 14
@@ -13881,27 +13881,27 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codparegr: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codparing: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monfin: 
       type: NUMERIC
       size: 14
@@ -13961,27 +13961,27 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codact: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codparegr: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     perpre: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monper: 
       type: NUMERIC
       size: 14
@@ -13998,12 +13998,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codunimet: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -14057,12 +14057,12 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codparegr: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monpre: 
       type: NUMERIC
       size: 14
@@ -14092,7 +14092,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     cuopar: 
       type: NUMERIC
       size: 14
@@ -14102,12 +14102,12 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpar: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     observ: 
       type: VARCHAR
       size: 1500
@@ -14122,7 +14122,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     montoing: 
       type: NUMERIC
       size: 20
@@ -14149,7 +14149,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompar: 
       type: VARCHAR
       size: 250
@@ -14200,17 +14200,17 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codparegr: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     perpre: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monper: 
       type: NUMERIC
       size: 14
@@ -14240,12 +14240,12 @@ propel:
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpremun: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpregob: 
       type: VARCHAR
       size: 32
@@ -14259,7 +14259,7 @@ propel:
       size: 14
       scale: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -14271,17 +14271,17 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpreorg: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpregob: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     despreorg: 
       type: VARCHAR
       size: 100
@@ -14306,12 +14306,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codorg: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     totasi: 
       type: NUMERIC
       size: 14
@@ -14349,22 +14349,22 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codest: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmun: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpar: 
       type: VARCHAR
       size: 5
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -14376,7 +14376,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -14414,7 +14414,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destip: 
       type: VARCHAR
       size: 100
@@ -14438,7 +14438,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -14450,12 +14450,12 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     coduni: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -14467,7 +14467,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codniv: 
       type: VARCHAR
       size: 16
@@ -14488,7 +14488,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomext: 
       type: VARCHAR
       size: 100
@@ -14506,7 +14506,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomextuni: 
       type: VARCHAR
       size: 100
@@ -14524,7 +14524,7 @@ propel:
       type: VARCHAR
       size: 18
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descta: 
       type: VARCHAR
       size: 40
@@ -14566,20 +14566,20 @@ propel:
       type: VARCHAR
       size: 18
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecini: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccie: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     pereje: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     totdeb: 
       type: NUMERIC
       size: 14
@@ -14603,11 +14603,11 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccom: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descom: 
       type: VARCHAR
       size: 50
@@ -14633,26 +14633,26 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccom: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     debcre: 
       type: VARCHAR
       size: 1
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcta: 
       type: VARCHAR
       size: 18
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     numasi: 
       type: NUMERIC
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     refasi: 
       type: VARCHAR
       size: 8
@@ -14808,7 +14808,7 @@ propel:
     id: 
       type: NUMERIC
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     amount: 
       type: NUMERIC
     price: 
@@ -14824,7 +14824,7 @@ propel:
     order_id: 
       type: NUMERIC
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     product_id: 
       type: NUMERIC
       required: true
@@ -14885,7 +14885,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desocp: 
       type: VARCHAR
       size: 100
@@ -14901,7 +14901,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destip: 
       type: VARCHAR
       size: 100
@@ -14970,16 +14970,16 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codemp: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecade: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monade: 
       type: NUMERIC
       size: 14
@@ -14996,11 +14996,11 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecant: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monant: 
       type: NUMERIC
       size: 14
@@ -15021,26 +15021,26 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codnom: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcat: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecasi: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomemp: 
       type: VARCHAR
       size: 510
@@ -15064,7 +15064,7 @@ propel:
       type: VARCHAR
       size: 1
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nronom: 
       type: VARCHAR
       size: 16
@@ -15252,17 +15252,17 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcon: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomsus: 
       type: VARCHAR
       size: 30
@@ -15312,17 +15312,17 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcon: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomemp: 
       type: VARCHAR
       size: 31
@@ -15518,26 +15518,26 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codnom: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codemp: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomemp: 
       type: VARCHAR
       size: 250
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccal: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -15549,12 +15549,12 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codnom: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -15566,12 +15566,12 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codasi: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desasi: 
       type: VARCHAR
       size: 50
@@ -15587,12 +15587,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcla: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -15604,12 +15604,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codconact: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -15621,7 +15621,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomban: 
       type: VARCHAR
       size: 30
@@ -15668,21 +15668,21 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     anovig: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desde: 
       type: NUMERIC
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     hasta: 
       type: NUMERIC
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     diauti: 
       type: NUMERIC
       size: 3
@@ -15781,17 +15781,17 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcla: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcon: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     cantra: 
       type: NUMERIC
       size: 5
@@ -15821,25 +15821,25 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecini: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccie: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     mesper: 
       type: NUMERIC
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     anoper: 
       type: NUMERIC
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     remune: 
       type: NUMERIC
       size: 14
@@ -15859,20 +15859,20 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     caudes: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     cauhas: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     disdes: 
       type: DATE
     dishas: 
@@ -15929,7 +15929,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomcar: 
       type: VARCHAR
       size: 100
@@ -16002,7 +16002,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomcar: 
       type: VARCHAR
       size: 100
@@ -16020,12 +16020,12 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codocp: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     punmin: 
       type: NUMERIC
       size: 14
@@ -16075,7 +16075,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descar: 
       type: VARCHAR
       size: 50
@@ -16092,7 +16092,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     funcar: 
       type: VARCHAR
       size: 2500
@@ -16119,12 +16119,12 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     canpre: 
       type: NUMERIC
       size: 6
@@ -16179,7 +16179,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomcat: 
       type: VARCHAR
       size: 100
@@ -16195,7 +16195,7 @@ propel:
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomcat: 
       type: VARCHAR
       size: 100
@@ -16324,17 +16324,17 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codedo: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpai: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomciu: 
       type: VARCHAR
       size: 100
@@ -16435,17 +16435,17 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codasi: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcpt: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -16587,20 +16587,20 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcon: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecini: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccie: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monto: 
       type: NUMERIC
       size: 14
@@ -16690,7 +16690,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codnom: 
       type: VARCHAR
       size: 3
@@ -16727,7 +16727,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descla: 
       type: VARCHAR
       size: 250
@@ -16759,7 +16759,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomcon: 
       type: VARCHAR
       size: 100
@@ -16812,12 +16812,12 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcon: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcta: 
       type: VARCHAR
       size: 18
@@ -16841,7 +16841,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     loncodcar: 
       type: NUMERIC
       size: 2
@@ -16960,12 +16960,12 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     idejor: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     lunes: 
       type: VARCHAR
       size: 1
@@ -16998,17 +16998,17 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcon: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     status: 
       type: VARCHAR
       size: 1
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     mensaje: 
       type: VARCHAR
       size: 250
@@ -17123,7 +17123,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desvar: 
       type: VARCHAR
       size: 30
@@ -17132,7 +17132,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     valor1: 
       type: NUMERIC
       size: 14
@@ -17282,12 +17282,12 @@ propel:
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     consec: 
       type: NUMERIC
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomabr: 
       type: VARCHAR
       size: 10
@@ -17310,12 +17310,12 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcon: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -17362,17 +17362,17 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     idejor: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codemp: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -17411,7 +17411,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     caudes: 
       type: DATE
       required: true
@@ -17470,7 +17470,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     valini: 
       type: NUMERIC
       size: 14
@@ -17511,12 +17511,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpai: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomedo: 
       type: VARCHAR
       size: 100
@@ -17532,7 +17532,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desniv: 
       type: VARCHAR
       size: 100
@@ -17594,7 +17594,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmot: 
       type: VARCHAR
       size: 4
@@ -17611,11 +17611,11 @@ propel:
     fecdes: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fechas: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -17810,15 +17810,15 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecing: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecegr: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     observ: 
       type: VARCHAR
       size: 250
@@ -18089,7 +18089,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
@@ -18098,11 +18098,11 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecnom: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monto: 
       type: NUMERIC
       size: 14
@@ -18246,7 +18246,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomemp: 
       type: VARCHAR
       size: 100
@@ -18957,11 +18957,11 @@ propel:
     feciniref: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecfinref: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tasint: 
       type: NUMERIC
       size: 5
@@ -19062,7 +19062,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     despre: 
       type: DATE
       required: true
@@ -19128,7 +19128,7 @@ propel:
       type: NUMERIC
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipcau: 
       type: VARCHAR
       size: 4
@@ -19287,7 +19287,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desmotant: 
       type: VARCHAR
       size: 250
@@ -19303,7 +19303,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desmotfal: 
       type: VARCHAR
       size: 250
@@ -19323,7 +19323,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desmotliq: 
       type: VARCHAR
       size: 250
@@ -19476,32 +19476,32 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codemp: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcon: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     frecon: 
       type: VARCHAR
       size: 1
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     asided: 
       type: VARCHAR
       size: 1
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecnom: 
       type: DATE
     nomcon: 
@@ -19539,7 +19539,7 @@ propel:
       type: VARCHAR
       size: 1
       required: true
-      #primaryKey: true
+      ##primaryKey: true
       default: N
     fecnomespdes: 
       type: DATE
@@ -19703,7 +19703,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomnom: 
       type: VARCHAR
       size: 100
@@ -19754,7 +19754,7 @@ propel:
       type: NUMERIC
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipcau: 
       type: VARCHAR
       size: 4
@@ -19853,11 +19853,11 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecpag: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monpag: 
       type: NUMERIC
       size: 14
@@ -19879,7 +19879,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompai: 
       type: VARCHAR
       size: 20
@@ -19895,7 +19895,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nompar: 
       type: VARCHAR
       size: 500
@@ -19974,17 +19974,17 @@ propel:
     fecvig: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codnom: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     mes: 
       type: NUMERIC
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     diapre: 
       type: NUMERIC
       size: 14
@@ -20016,11 +20016,11 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccor: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccal: 
       type: DATE
     codcon: 
@@ -20090,11 +20090,11 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccor: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccal: 
       type: DATE
     codcon: 
@@ -20164,15 +20164,15 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecdes: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fechas: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     monacu: 
       type: NUMERIC
       size: 14
@@ -20218,7 +20218,7 @@ propel:
       type: VARCHAR
       size: 6
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     forcod: 
       type: VARCHAR
       size: 50
@@ -20457,7 +20457,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codemp: 
       type: VARCHAR
       size: 16
@@ -20491,12 +20491,12 @@ propel:
     fecpre: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcon: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     diames: 
       type: NUMERIC
       size: 2
@@ -20550,7 +20550,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destit: 
       type: VARCHAR
       size: 40
@@ -20656,7 +20656,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destipcon: 
       type: VARCHAR
       size: 50
@@ -20692,7 +20692,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destip: 
       type: VARCHAR
       size: 100
@@ -20762,7 +20762,7 @@ propel:
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomtippag: 
       type: VARCHAR
       size: 18
@@ -20853,12 +20853,12 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcat: 
       type: VARCHAR
       size: 32
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -20870,7 +20870,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codniv: 
       type: VARCHAR
       size: 16
@@ -20917,20 +20917,20 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     caudes: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     cauhas: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     diavac: 
       type: NUMERIC
       size: 6
@@ -20960,15 +20960,15 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     disdes: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     dishas: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecreg: 
       type: DATE
     diavac: 
@@ -21097,20 +21097,20 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     caudes: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     cauhas: 
       type: DATE
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     diavac: 
       type: NUMERIC
       size: 6
@@ -21346,12 +21346,12 @@ propel:
       type: NUMERIC
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     pos: 
       type: NUMERIC
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomnum: 
       type: VARCHAR
       size: 20
@@ -21366,12 +21366,12 @@ propel:
       type: NUMERIC
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     pos: 
       type: NUMERIC
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomnum: 
       type: VARCHAR
       size: 20
@@ -23200,7 +23200,7 @@ propel:
       type: VARCHAR
       size: 15
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomben: 
       type: VARCHAR
       size: 250
@@ -23427,7 +23427,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ctapag: 
       type: VARCHAR
       size: 32
@@ -23590,12 +23590,12 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     refcuo: 
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecinicuo: 
       type: DATE
       required: true
@@ -23765,7 +23765,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     tipcau: 
       type: VARCHAR
       size: 4
@@ -23916,7 +23916,7 @@ propel:
       type: VARCHAR
       size: 8
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desopp: 
       type: VARCHAR
       size: 250
@@ -23983,7 +23983,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codtip: 
       type: VARCHAR
       size: 3
@@ -23992,7 +23992,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     id: 
       type: INTEGER
       required: true
@@ -24059,7 +24059,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destip: 
       type: VARCHAR
       size: 250
@@ -24099,12 +24099,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codpro: 
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmov: 
       type: VARCHAR
       size: 3
@@ -24170,7 +24170,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desfor: 
       type: VARCHAR
       size: 50
@@ -24185,7 +24185,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fectra: 
       type: DATE
       required: true
@@ -24193,7 +24193,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codmov: 
       type: VARCHAR
       size: 3
@@ -24653,7 +24653,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desarecur: 
       type: VARCHAR
       size: 250
@@ -24668,17 +24668,17 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     numcla: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codemp: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     asicla: 
       type: VARCHAR
       size: 1
@@ -24693,12 +24693,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     numcla: 
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccla: 
       type: DATE
     horini: 
@@ -24720,7 +24720,7 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codevor: 
       type: VARCHAR
       size: 16
@@ -24744,7 +24744,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     descur: 
       type: VARCHAR
       size: 250
@@ -24783,7 +24783,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     faxemp: 
       type: VARCHAR
       size: 15
@@ -24806,7 +24806,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desind: 
       type: VARCHAR
       size: 250
@@ -24824,7 +24824,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desniv: 
       type: VARCHAR
       size: 250
@@ -24839,7 +24839,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desobj: 
       type: VARCHAR
       size: 250
@@ -24854,7 +24854,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     desvalins: 
       type: VARCHAR
       size: 250
@@ -24872,17 +24872,17 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codniv: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codvalins: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     pesval: 
       type: NUMERIC
       size: 14
@@ -24902,17 +24902,17 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codniv: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codobj: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     plaobj: 
       type: NUMERIC
       size: 14
@@ -24932,12 +24932,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codind: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     porind: 
       type: NUMERIC
       size: 14
@@ -24953,12 +24953,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codemp: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcar: 
       type: VARCHAR
       size: 16
@@ -24975,12 +24975,12 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codemp: 
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     notcur: 
       type: NUMERIC
       size: 14
@@ -24999,17 +24999,17 @@ propel:
       type: VARCHAR
       size: 16
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codniv: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codobj: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codind: 
       type: VARCHAR
       size: 4
@@ -25033,7 +25033,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destipcur: 
       type: VARCHAR
       size: 250
@@ -25051,7 +25051,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomtit: 
       type: VARCHAR
       size: 250
@@ -25066,12 +25066,12 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codvalins: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     porvalins: 
       type: NUMERIC
       size: 14
@@ -27595,12 +27595,12 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     numcue: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     cedrif: 
       type: VARCHAR
       size: 15
@@ -27705,22 +27705,22 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     mescon: 
       type: VARCHAR
       size: 2
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     anocon: 
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     refere: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     movlib: 
       type: VARCHAR
       size: 4
@@ -27819,7 +27819,7 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     nomcue: 
       type: VARCHAR
       size: 40
@@ -27961,7 +27961,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feccon: 
       type: DATE
       required: true
@@ -28050,7 +28050,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     ctaori: 
       type: VARCHAR
       size: 18
@@ -28131,7 +28131,7 @@ propel:
       type: VARCHAR
       size: 10
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fectra: 
       type: DATE
       required: true
@@ -28155,7 +28155,7 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     codcta: 
       type: VARCHAR
       size: 32
@@ -28163,7 +28163,7 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fecban: 
       type: DATE
       required: true
@@ -28210,12 +28210,12 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     reflib: 
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     feclib: 
       type: DATE
       required: true
@@ -28311,7 +28311,7 @@ propel:
       type: VARCHAR
       size: 20
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     fectra: 
       type: DATE
       required: true
@@ -28537,7 +28537,7 @@ propel:
       type: VARCHAR
       size: 3
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destip: 
       type: VARCHAR
       size: 40
@@ -28568,7 +28568,7 @@ propel:
       type: VARCHAR
       size: 4
       required: true
-      #primaryKey: true
+      ##primaryKey: true
     destip: 
       type: VARCHAR
       size: 40
@@ -28722,18 +28722,18 @@ propel:
     numpag: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     fecpag: 
       type: DATE
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     fueing: 
       type: VARCHAR
       size: 2
-      #required: true
+      required: true
     despag: 
       type: VARCHAR
       size: 250
@@ -28748,7 +28748,7 @@ propel:
     funpag: 
       type: VARCHAR
       size: 40
-      #required: true
+      required: true
     codrec: 
       type: VARCHAR
       size: 10
@@ -28769,7 +28769,7 @@ propel:
       size: 15
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcacceso: 
     #_attributes: 
@@ -28791,7 +28791,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcactcom: 
     #_attributes: 
@@ -28802,12 +28802,12 @@ propel:
     desact: 
       type: VARCHAR
       size: 255
-      #required: true
+      required: true
     mintri: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     exoner: 
       type: VARCHAR
       size: 1
@@ -28843,7 +28843,7 @@ propel:
       size: 4
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcactcom_i01fcactcom: 
@@ -28896,7 +28896,7 @@ propel:
       size: 4
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcactpic_i01fcactpic: 
@@ -28939,7 +28939,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcaliinm: 
     #_attributes: 
@@ -28947,41 +28947,41 @@ propel:
     codcatfis: 
       type: VARCHAR
       size: 30
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     coduso: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     anovig: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     valorm: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     porvf: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     aliter: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     alicon: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcaliuso: 
     #_attributes: 
@@ -28989,17 +28989,17 @@ propel:
     coduso: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     anovig: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomuso: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     alimon: 
       type: NUMERIC
       size: 14
@@ -29009,7 +29009,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcapulic: 
     #_attributes: 
@@ -29017,19 +29017,19 @@ propel:
     nrocon: 
       type: VARCHAR
       size: 8
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     fecreg: 
       type: DATE
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     tipapu: 
       type: VARCHAR
       size: 4
-      #required: true
+      required: true
     desapu: 
       type: VARCHAR
       size: 250
@@ -29063,7 +29063,7 @@ propel:
       size: 50
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcapulic_i02fcapulic: 
@@ -29074,12 +29074,12 @@ propel:
     coddoc: 
       type: VARCHAR
       size: 5
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codfun: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
       foreignTable: fcdeffun
       foreignReference: codfun
       onDelete: 
@@ -29087,7 +29087,7 @@ propel:
     codentext: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
       foreignTable: fcdefentext
       foreignReference: codentext
       onDelete: 
@@ -29095,7 +29095,7 @@ propel:
     codtipdoc: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
       foreignTable: fcdeftipdoc
       foreignReference: codtipdoc
       onDelete: 
@@ -29133,7 +29133,7 @@ propel:
       type: DATE
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcbansal: 
     #_attributes: 
@@ -29141,12 +29141,12 @@ propel:
     coddoc: 
       type: VARCHAR
       size: 5
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codfun: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
       foreignTable: fcdeffun
       foreignReference: codfun
       onDelete: 
@@ -29154,7 +29154,7 @@ propel:
     codentext: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
       foreignTable: fcdefentext
       foreignReference: codentext
       onDelete: 
@@ -29162,7 +29162,7 @@ propel:
     codtipdoc: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
       foreignTable: fcdeftipdoc
       foreignReference: codtipdoc
       onDelete: 
@@ -29198,7 +29198,7 @@ propel:
       type: DATE
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fccajero: 
     #_attributes: 
@@ -29206,16 +29206,16 @@ propel:
     codcaj: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     cedcaj: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     nomcaj: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     dircaj: 
       type: VARCHAR
       size: 50
@@ -29224,7 +29224,7 @@ propel:
       size: 11
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fccarinm: 
     #_attributes: 
@@ -29232,19 +29232,19 @@ propel:
     codcarinm: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomcarinm: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     stacarinm: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fccatfis: 
     #_attributes: 
@@ -29252,12 +29252,12 @@ propel:
     codcatfis: 
       type: VARCHAR
       size: 30
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomcatfis: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     linnor: 
       type: VARCHAR
       size: 250
@@ -29272,7 +29272,7 @@ propel:
       size: 250
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcclaesp: 
     #_attributes: 
@@ -29280,13 +29280,13 @@ propel:
     codcla: 
       type: VARCHAR
       size: 4
-      #required: true
+      required: true
     descla: 
       type: VARCHAR
       size: 50
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fccobrad: 
     #_attributes: 
@@ -29294,16 +29294,16 @@ propel:
     codcob: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     cedcob: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     nomcob: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     dircob: 
       type: VARCHAR
       size: 50
@@ -29312,7 +29312,7 @@ propel:
       size: 11
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fccon: 
     #_attributes: 
@@ -29373,7 +29373,7 @@ propel:
       size: 4
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcconpag: 
     #_attributes: 
@@ -29381,32 +29381,32 @@ propel:
     refcon: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     feccon: 
       type: DATE
-      #required: true
+      required: true
     moncon: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     numcuo: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     monini: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     estcon: 
       type: VARCHAR
       size: 1
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     obscon: 
       type: VARCHAR
       size: 250
@@ -29417,7 +29417,7 @@ propel:
       type: DATE
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcconrep: 
     #_attributes: 
@@ -29506,7 +29506,7 @@ propel:
       size: 8
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcconrep_ifcconrep_rifcon: 
@@ -29595,7 +29595,7 @@ propel:
       size: 100
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcconrep2: 
     #_attributes: 
@@ -29681,7 +29681,7 @@ propel:
       size: 100
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcconrepco: 
     #_attributes: 
@@ -29761,7 +29761,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcconrepres1: 
     #_attributes: 
@@ -29847,7 +29847,7 @@ propel:
       size: 100
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdecatp: 
     #_attributes: 
@@ -29855,35 +29855,35 @@ propel:
     numdec: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     numsol: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     numlic: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     fecdec: 
       type: DATE
-      #required: true
+      required: true
     mondec: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     fundec: 
       type: VARCHAR
       size: 40
-      #required: true
+      required: true
     edodec: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdeclar: 
     #_attributes: 
@@ -29973,7 +29973,7 @@ propel:
       type: DATE
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcdeclar_i01fcdeclar: 
@@ -30064,7 +30064,7 @@ propel:
       size: 255
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdecpag: 
     #_attributes: 
@@ -30072,7 +30072,7 @@ propel:
     numpag: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     numdec: 
       type: VARCHAR
       size: 10
@@ -30081,7 +30081,7 @@ propel:
       size: 15
     fecven: 
       type: DATE
-      #required: true
+      required: true
     mondec: 
       type: NUMERIC
       size: 14
@@ -30098,7 +30098,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcdecpag_i01fcdecpag: 
@@ -30116,8 +30116,8 @@ propel:
     coddes: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomdes: 
       type: VARCHAR
       size: 250
@@ -30141,7 +30141,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefdetsol: 
     #_attributes: 
@@ -30163,7 +30163,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefdetsol2: 
     #_attributes: 
@@ -30185,7 +30185,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefentext: 
     #_attributes: 
@@ -30193,18 +30193,18 @@ propel:
     codentext: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomentext: 
       type: VARCHAR
       size: 50
-      #required: true
+      required: true
     pernatjur: 
       type: VARCHAR
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdeffun: 
     #_attributes: 
@@ -30212,23 +30212,23 @@ propel:
     codfun: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomfun: 
       type: VARCHAR
       size: 50
-      #required: true
+      required: true
     coduniadm: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
       foreignTable: fcdefuniadm
       foreignReference: coduniadm
       onDelete: 
       onUpdate: 
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefins: 
     #_attributes: 
@@ -30236,8 +30236,8 @@ propel:
     codemp: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      ##primaryKey: true
     loncodact: 
       type: NUMERIC
       size: 2
@@ -30271,39 +30271,39 @@ propel:
     foract: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     forveh: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     forcat: 
       type: VARCHAR
       size: 20
-      #required: true
+      required: true
     forubifis: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     forubimag: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     porpic: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     porveh: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     porinm: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     unipic: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     valunitri: 
       type: NUMERIC
       size: 14
@@ -30334,7 +30334,7 @@ propel:
       size: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefnca: 
     #_attributes: 
@@ -30354,19 +30354,19 @@ propel:
     numniv: 
       type: NUMERIC
       size: 2
-      #required: true
+      required: true
     nomext1: 
       type: VARCHAR
       size: 210
-      #required: true
+      required: true
     nomabr1: 
       type: VARCHAR
       size: 9
-      #required: true
+      required: true
     tamano1: 
       type: NUMERIC
       size: 1
-      #required: true
+      required: true
     nomext2: 
       type: VARCHAR
       size: 210
@@ -30459,7 +30459,7 @@ propel:
       size: 20
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefpgi: 
     #_attributes: 
@@ -30468,17 +30468,17 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     monhas: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     monpag: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     numpor: 
       type: VARCHAR
       size: 3
@@ -30490,7 +30490,7 @@ propel:
       size: 3
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefrecdes: 
     #_attributes: 
@@ -30503,7 +30503,7 @@ propel:
       size: 10
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefrecint: 
     #_attributes: 
@@ -30530,7 +30530,7 @@ propel:
       default: N
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdeftipdoc: 
     #_attributes: 
@@ -30538,18 +30538,18 @@ propel:
     codtipdoc: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomtipdoc: 
       type: VARCHAR
       size: 50
-      #required: true
+      required: true
     temtipdoc: 
       type: VARCHAR
       size: 8
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefubifis: 
     #_attributes: 
@@ -30557,15 +30557,15 @@ propel:
     codubifis: 
       type: VARCHAR
       size: 16
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomubifis: 
       type: VARCHAR
       size: 50
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefubimag: 
     #_attributes: 
@@ -30573,15 +30573,15 @@ propel:
     codubimag: 
       type: VARCHAR
       size: 16
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomubimag: 
       type: VARCHAR
       size: 50
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdefuniadm: 
     #_attributes: 
@@ -30589,15 +30589,15 @@ propel:
     coduniadm: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomuniadm: 
       type: VARCHAR
       size: 50
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdesveh: 
     #_attributes: 
@@ -30605,26 +30605,26 @@ propel:
     numdes: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     plaveh: 
       type: VARCHAR
       size: 8
-      #required: true
+      required: true
     fecdes: 
       type: DATE
-      #required: true
+      required: true
     motdes: 
       type: VARCHAR
       size: 200
-      #required: true
+      required: true
     funrec: 
       type: VARCHAR
       size: 40
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdetabo: 
     #_attributes: 
@@ -30632,11 +30632,11 @@ propel:
     numpag: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     nrodet: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     monpag: 
       type: NUMERIC
       size: 14
@@ -30644,10 +30644,10 @@ propel:
     tippag: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdetcon: 
     #_attributes: 
@@ -30655,11 +30655,11 @@ propel:
     refcon: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     numdec: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     moncuo: 
       type: NUMERIC
       size: 14
@@ -30678,7 +30678,7 @@ propel:
       type: DATE
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdetconfue: 
     #_attributes: 
@@ -30686,11 +30686,11 @@ propel:
     refcon: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     numdec: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     moncuo: 
       type: NUMERIC
       size: 14
@@ -30712,7 +30712,7 @@ propel:
       size: 100
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdetpag: 
     #_attributes: 
@@ -30720,8 +30720,8 @@ propel:
     numpag: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
       foreignTable: fcpagos
       foreignReference: numpag
       onDelete: 
@@ -30729,8 +30729,8 @@ propel:
     nrodet: 
       type: VARCHAR
       size: 30
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     monpag: 
       type: NUMERIC
       size: 14
@@ -30738,14 +30738,14 @@ propel:
     tippag: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
       foreignTable: fctippag
       foreignReference: tippag
       onDelete: CASCADE
       onUpdate: 
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdetreccob: 
     #_attributes: 
@@ -30753,20 +30753,20 @@ propel:
     nument: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codrec: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codcob: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdetrep: 
     #_attributes: 
@@ -30786,7 +30786,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdetret: 
     #_attributes: 
@@ -30794,11 +30794,11 @@ propel:
     numret: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     numref: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     monasi: 
       type: NUMERIC
       size: 14
@@ -30816,7 +30816,7 @@ propel:
       default: 0
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcdeucon: 
     #_attributes: 
@@ -30824,17 +30824,17 @@ propel:
     refcon: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     numdec: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     numero: 
       type: VARCHAR
       size: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcesppub: 
     #_attributes: 
@@ -30842,15 +30842,15 @@ propel:
     nrocon: 
       type: VARCHAR
       size: 8
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     fecreg: 
       type: DATE
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     rifrep: 
       type: VARCHAR
       size: 14
@@ -30908,7 +30908,7 @@ propel:
       size: 50
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcestado: 
     #_attributes: 
@@ -30916,13 +30916,13 @@ propel:
     codedo: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codpai: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
       foreignTable: fcpais
       foreignReference: codpai
       onDelete: 
@@ -30930,10 +30930,10 @@ propel:
     nomedo: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcesting: 
     #_attributes: 
@@ -30941,22 +30941,22 @@ propel:
     codpar: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     ano: 
       type: VARCHAR
       size: 4
-      #required: true
+      required: true
     perest: 
       type: VARCHAR
       size: 2
-      #required: true
+      required: true
     monto: 
       type: NUMERIC
       size: 14
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcesting_i01fcesting: 
@@ -30979,7 +30979,7 @@ propel:
       size: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcfuentesrec: 
     #_attributes: 
@@ -30995,7 +30995,7 @@ propel:
       size: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcfuepre: 
     #_attributes: 
@@ -31003,16 +31003,16 @@ propel:
     codfue: 
       type: VARCHAR
       size: 2
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomfue: 
       type: VARCHAR
       size: 100
-      #required: true
+      required: true
     nomabr: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
     frecob: 
       type: NUMERIC
       size: 3
@@ -31062,15 +31062,15 @@ propel:
     deufra: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     autliq: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     simpre: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     feccie: 
       type: DATE
     tipmul: 
@@ -31078,7 +31078,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcfuepre_i02fcfuepre: 
@@ -31092,7 +31092,7 @@ propel:
     codcatfis: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     coduso: 
       type: VARCHAR
       size: 3
@@ -31276,7 +31276,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcinmmod: 
     #_attributes: 
@@ -31287,7 +31287,7 @@ propel:
     codcatfis: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     coduso: 
       type: VARCHAR
       size: 3
@@ -31471,7 +31471,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcmodapu: 
     #_attributes: 
@@ -31479,15 +31479,15 @@ propel:
     refmod: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nrocon: 
       type: VARCHAR
       size: 8
-      #required: true
+      required: true
     fecmod: 
       type: DATE
-      #required: true
+      required: true
     tipapu: 
       type: VARCHAR
       size: 4
@@ -31521,7 +31521,7 @@ propel:
       size: 50
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcmodesp: 
     #_attributes: 
@@ -31529,19 +31529,19 @@ propel:
     refmod: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nrocon: 
       type: VARCHAR
       size: 8
-      #required: true
+      required: true
       foreignTable: fcesppub
       foreignReference: nrocon
       onDelete: CASCADE
       onUpdate: 
     fecmod: 
       type: DATE
-      #required: true
+      required: true
     nomesp: 
       type: VARCHAR
       size: 100
@@ -31617,7 +31617,7 @@ propel:
       size: 50
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcmodinm: 
     #_attributes: 
@@ -31625,27 +31625,27 @@ propel:
     refmod: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nroinm: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     fecmod: 
       type: DATE
-      #required: true
+      required: true
     codcatfis: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     coduso: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
     codcarinm: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
     codsitinm: 
       type: VARCHAR
       size: 3
@@ -31690,15 +31690,15 @@ propel:
     codcatfisant: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     codusoant: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
     codcarinmant: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
     codsitinmant: 
       type: VARCHAR
       size: 3
@@ -31748,7 +31748,7 @@ propel:
       size: 30
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcmodpro: 
     #_attributes: 
@@ -31756,19 +31756,19 @@ propel:
     refmod: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nrocon: 
       type: VARCHAR
       size: 8
-      #required: true
+      required: true
       foreignTable: fcprolic
       foreignReference: nrocon
       onDelete: CASCADE
       onUpdate: 
     fecmod: 
       type: DATE
-      #required: true
+      required: true
     tippro: 
       type: VARCHAR
       size: 4
@@ -31808,7 +31808,7 @@ propel:
       size: 50
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcmodveh: 
     #_attributes: 
@@ -31816,23 +31816,23 @@ propel:
     refmod: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     plaveh: 
       type: VARCHAR
       size: 8
-      #required: true
+      required: true
     fecmod: 
       type: DATE
-      #required: true
+      required: true
     coduso: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     anoveh: 
       type: NUMERIC
       size: 4
-      #required: true
+      required: true
     sermot: 
       type: VARCHAR
       size: 15
@@ -31852,7 +31852,7 @@ propel:
     modveh: 
       type: VARCHAR
       size: 20
-      #required: true
+      required: true
     dueant: 
       type: VARCHAR
       size: 50
@@ -31865,11 +31865,11 @@ propel:
     codusoant: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     anovehant: 
       type: NUMERIC
       size: 4
-      #required: true
+      required: true
     sermotant: 
       type: VARCHAR
       size: 15
@@ -31889,7 +31889,7 @@ propel:
     modvehant: 
       type: VARCHAR
       size: 20
-      #required: true
+      required: true
     dueantant: 
       type: VARCHAR
       size: 50
@@ -31902,10 +31902,10 @@ propel:
     funrec: 
       type: VARCHAR
       size: 40
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcmultas: 
     #_attributes: 
@@ -31927,7 +31927,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcmunici: 
     #_attributes: 
@@ -31935,18 +31935,18 @@ propel:
     codmun: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codedo: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codpai: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
       foreignTable: fcestado
       foreignReference: codpai
       onDelete: 
@@ -31954,10 +31954,10 @@ propel:
     nommun: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fconrep: 
     #_attributes: 
@@ -31993,7 +31993,7 @@ propel:
       size: 4
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcotring: 
     #_attributes: 
@@ -32001,19 +32001,19 @@ propel:
     nrocon: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codfue: 
       type: VARCHAR
       size: 2
-      #required: true
+      required: true
     fecreg: 
       type: DATE
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     desing: 
       type: VARCHAR
       size: 250
@@ -32047,7 +32047,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcpaging: 
     #_attributes: 
@@ -32055,8 +32055,8 @@ propel:
     refere: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     tippag: 
       type: VARCHAR
       size: 2
@@ -32072,7 +32072,7 @@ propel:
       size: 40
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcpagos: 
     #_attributes: 
@@ -32080,15 +32080,15 @@ propel:
     numpag: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     fecpag: 
       type: DATE
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 20
-      #required: true
+      required: true
     despag: 
       type: VARCHAR
       size: 200
@@ -32103,7 +32103,7 @@ propel:
     funpag: 
       type: VARCHAR
       size: 40
-      #required: true
+      required: true
     codrec: 
       type: VARCHAR
       size: 10
@@ -32123,7 +32123,7 @@ propel:
       size: 14
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcpagos_i02fcpagos: 
@@ -32138,15 +32138,15 @@ propel:
     codpai: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nompai: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcparroq: 
     #_attributes: 
@@ -32154,23 +32154,23 @@ propel:
     codpar: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codmun: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codedo: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codpai: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
       foreignTable: fcmunici
       foreignReference: codpai
       onDelete: 
@@ -32178,10 +32178,10 @@ propel:
     nompar: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcpreing: 
     #_attributes: 
@@ -32189,11 +32189,11 @@ propel:
     codpar: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     nompar: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     estima: 
       type: VARCHAR
       size: 1
@@ -32206,7 +32206,7 @@ propel:
       default: N
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcpreing_i01fcpreing: 
@@ -32220,15 +32220,15 @@ propel:
     nrocon: 
       type: VARCHAR
       size: 8
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     fecreg: 
       type: DATE
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     tippro: 
       type: VARCHAR
       size: 4
@@ -32272,7 +32272,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrangosdes: 
     #_attributes: 
@@ -32288,7 +32288,7 @@ propel:
       type: NUMERIC
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrangosmul: 
     #_attributes: 
@@ -32307,7 +32307,7 @@ propel:
       default: 0
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrangosrec: 
     #_attributes: 
@@ -32326,7 +32326,7 @@ propel:
       default: 0
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcreccob: 
     #_attributes: 
@@ -32334,17 +32334,17 @@ propel:
     nument: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     fecent: 
       type: DATE
-      #required: true
+      required: true
     codcob: 
       type: VARCHAR
       size: 3
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcreccob_i_fcreccob: 
@@ -32355,7 +32355,7 @@ propel:
     codrec: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     fecent: 
       type: DATE
     fecven: 
@@ -32374,7 +32374,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrecdes: 
     #_attributes: 
@@ -32382,23 +32382,23 @@ propel:
     codrede: 
       type: VARCHAR
       size: 2
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     recdes: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     desrede: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     codcta: 
       type: VARCHAR
       size: 18
     porrede: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     codfue: 
       type: VARCHAR
       size: 2
@@ -32411,7 +32411,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcrecdes_i01fcrecdes: 
@@ -32422,7 +32422,7 @@ propel:
     codrede: 
       type: VARCHAR
       size: 2
-      #required: true
+      required: true
     dias: 
       type: NUMERIC
       size: 3
@@ -32432,7 +32432,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrecdespag: 
     #_attributes: 
@@ -32440,13 +32440,13 @@ propel:
     numpag: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     codrede: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
       foreignTable: fcdefdesc
       foreignReference: coddes
       onDelete: 
@@ -32457,7 +32457,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcrecdespag_i02fcrecdespag: 
@@ -32468,27 +32468,27 @@ propel:
     codrec: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     fecrec: 
       type: DATE
-      #required: true
+      required: true
     desrec: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     numlic: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     monrec: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     nomcon: 
       type: VARCHAR
       size: 50
@@ -32499,7 +32499,7 @@ propel:
       type: DATE
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcrecibo_i01fcrecibo: 
@@ -32513,8 +32513,8 @@ propel:
     coding: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     desing: 
       type: VARCHAR
       size: 100
@@ -32524,7 +32524,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcreginm: 
     #_attributes: 
@@ -32535,7 +32535,7 @@ propel:
     codcatfis: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     coduso: 
       type: VARCHAR
       size: 3
@@ -32723,7 +32723,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcreginm_ifcreginm_codcatinm: 
@@ -32864,7 +32864,7 @@ propel:
       size: 110
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcreginm2: 
     #_attributes: 
@@ -32872,11 +32872,11 @@ propel:
     nroinm: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     codcatfis: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     coduso: 
       type: VARCHAR
       size: 3
@@ -32987,7 +32987,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcreginm3: 
     #_attributes: 
@@ -32995,10 +32995,10 @@ propel:
     codcatfis: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcregveh: 
     #_attributes: 
@@ -33006,18 +33006,18 @@ propel:
     plaveh: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     anoveh: 
       type: NUMERIC
       size: 4
-      #required: true
+      required: true
     fecreg: 
       type: DATE
-      #required: true
+      required: true
     sermot: 
       type: VARCHAR
       size: 15
@@ -33033,7 +33033,7 @@ propel:
     coduso: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     impveh: 
       type: NUMERIC
       size: 14
@@ -33077,10 +33077,10 @@ propel:
     modveh: 
       type: VARCHAR
       size: 20
-      #required: true
+      required: true
     fecrec: 
       type: DATE
-      #required: true
+      required: true
     dueant: 
       type: VARCHAR
       size: 50
@@ -33093,7 +33093,7 @@ propel:
     estdec: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     nomcon: 
       type: VARCHAR
       size: 50
@@ -33116,7 +33116,7 @@ propel:
       size: 30
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcregveh1: 
     #_attributes: 
@@ -33124,18 +33124,18 @@ propel:
     plaveh: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     anoveh: 
       type: NUMERIC
       size: 4
-      #required: true
+      required: true
     fecreg: 
       type: DATE
-      #required: true
+      required: true
     sermot: 
       type: VARCHAR
       size: 15
@@ -33151,7 +33151,7 @@ propel:
     coduso: 
       type: VARCHAR
       size: 16
-      #required: true
+      required: true
     impveh: 
       type: NUMERIC
       size: 14
@@ -33195,10 +33195,10 @@ propel:
     modveh: 
       type: VARCHAR
       size: 20
-      #required: true
+      required: true
     fecrec: 
       type: DATE
-      #required: true
+      required: true
     dueant: 
       type: VARCHAR
       size: 50
@@ -33211,7 +33211,7 @@ propel:
     estdec: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     nomcon: 
       type: VARCHAR
       size: 50
@@ -33231,7 +33231,7 @@ propel:
       type: DATE
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrenlic: 
     #_attributes: 
@@ -33239,16 +33239,16 @@ propel:
     numlic: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     fecven: 
       type: DATE
-      #required: true
+      required: true
     fecren: 
       type: DATE
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrepfis: 
     #_attributes: 
@@ -33256,23 +33256,23 @@ propel:
     numlic: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     funrec: 
       type: VARCHAR
       size: 50
-      #required: true
+      required: true
     fecrep: 
       type: DATE
-      #required: true
+      required: true
     numrep: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     monrep: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     conrep: 
       type: VARCHAR
       size: 250
@@ -33285,7 +33285,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrepliq: 
     #_attributes: 
@@ -33310,7 +33310,7 @@ propel:
       size: 10
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcretencion: 
     #_attributes: 
@@ -33318,11 +33318,11 @@ propel:
     numret: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     fueing: 
       type: VARCHAR
       size: 2
-      #required: true
+      required: true
     fecret: 
       type: DATE
     fecreg: 
@@ -33343,7 +33343,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrutas: 
     #_attributes: 
@@ -33351,15 +33351,15 @@ propel:
     codrut: 
       type: VARCHAR
       size: 6
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     desrut: 
       type: VARCHAR
       size: 120
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcrutcob: 
     #_attributes: 
@@ -33367,8 +33367,8 @@ propel:
     codcob: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
       foreignTable: fccobrad
       foreignReference: codcob
       onDelete: CASCADE
@@ -33376,15 +33376,15 @@ propel:
     codrut: 
       type: VARCHAR
       size: 6
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
       foreignTable: fcrutas
       foreignReference: codrut
       onDelete: 
       onUpdate: 
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcsitjurinm: 
     #_attributes: 
@@ -33392,19 +33392,19 @@ propel:
     codsitinm: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomsitinm: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     stasitinm: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcsollic: 
     #_attributes: 
@@ -33590,7 +33590,7 @@ propel:
       size: 16
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcsollic_i02fcsollic: 
@@ -33727,7 +33727,7 @@ propel:
     estser: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     telneg: 
       type: VARCHAR
       size: 15
@@ -33739,7 +33739,7 @@ propel:
       size: 15
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcsolneg: 
     #_attributes: 
@@ -33747,18 +33747,18 @@ propel:
     numneg: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     numsol: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     motneg: 
       type: VARCHAR
       size: 210
     fecneg: 
       type: DATE
-      #required: true
+      required: true
     resolu: 
       type: VARCHAR
       size: 10
@@ -33776,7 +33776,7 @@ propel:
       size: 15
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcsolvencia: 
     #_attributes: 
@@ -33784,28 +33784,28 @@ propel:
     codsol: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     codtip: 
       type: VARCHAR
       size: 2
-      #required: true
+      required: true
       foreignTable: fctipsol
       foreignReference: codtip
       onDelete: 
       onUpdate: 
     fecexp: 
       type: DATE
-      #required: true
+      required: true
     fecven: 
       type: DATE
-      #required: true
+      required: true
     numlic: 
       type: VARCHAR
       size: 10
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     codcat: 
       type: VARCHAR
       size: 30
@@ -33826,7 +33826,7 @@ propel:
       size: 254
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
     _indexes: 
       fcsolvencia_i01fcsolvencia: 
@@ -33837,27 +33837,27 @@ propel:
     numsus: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     numsol: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     numlic: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     estlic: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     motsus: 
       type: VARCHAR
       size: 210
-      #required: true
+      required: true
     fecsus: 
       type: DATE
-      #required: true
+      required: true
     resolu: 
       type: VARCHAR
       size: 10
@@ -33873,10 +33873,10 @@ propel:
     funsus: 
       type: VARCHAR
       size: 15
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fctasban: 
     #_attributes: 
@@ -33893,7 +33893,7 @@ propel:
       size: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fctipapu: 
     #_attributes: 
@@ -33901,21 +33901,21 @@ propel:
     tipapu: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     anovig: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     destip: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     pormon: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     alimon: 
       type: NUMERIC
       size: 14
@@ -33925,7 +33925,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fctipesp: 
     #_attributes: 
@@ -33933,17 +33933,17 @@ propel:
     tipesp: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     anovig: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     destip: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     pormon: 
       type: VARCHAR
       size: 1
@@ -33960,7 +33960,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fctippag: 
     #_attributes: 
@@ -33968,15 +33968,15 @@ propel:
     tippag: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     despag: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fctippro: 
     #_attributes: 
@@ -33984,19 +33984,19 @@ propel:
     tippro: 
       type: VARCHAR
       size: 4
-      #required: true
+      required: true
     anovig: 
       type: VARCHAR
       size: 4
-      #required: true
+      required: true
     destip: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     pormon: 
       type: VARCHAR
       size: 1
-      #required: true
+      required: true
     alimon: 
       type: NUMERIC
       size: 14
@@ -34006,7 +34006,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fctipsol: 
     #_attributes: 
@@ -34014,8 +34014,8 @@ propel:
     codtip: 
       type: VARCHAR
       size: 2
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     destip: 
       type: VARCHAR
       size: 100
@@ -34044,7 +34044,7 @@ propel:
       size: 1
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fctrainm: 
     #_attributes: 
@@ -34052,36 +34052,36 @@ propel:
     numtra: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nroinm: 
       type: VARCHAR
       size: 8
-      #required: true
+      required: true
     fectra: 
       type: DATE
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     rifrep: 
       type: VARCHAR
       size: 14
     rifconant: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     rifrepant: 
       type: VARCHAR
       size: 14
     funrec: 
       type: VARCHAR
       size: 40
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fctralic: 
     #_attributes: 
@@ -34089,34 +34089,34 @@ propel:
     numtra: 
       type: VARCHAR
       size: 10
-      #required: true
+      required: true
     fectra: 
       type: DATE
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     rifrep: 
       type: VARCHAR
       size: 14
     rifconant: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     rifrepant: 
       type: VARCHAR
       size: 14
     funrec: 
       type: VARCHAR
       size: 40
-      #required: true
+      required: true
     numlic: 
       type: VARCHAR
       size: 12
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fctraveh: 
     #_attributes: 
@@ -34124,36 +34124,36 @@ propel:
     numtra: 
       type: VARCHAR
       size: 10
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     plaveh: 
       type: VARCHAR
       size: 8
-      #required: true
+      required: true
     fectra: 
       type: DATE
-      #required: true
+      required: true
     rifcon: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     rifrep: 
       type: VARCHAR
       size: 14
     rifconant: 
       type: VARCHAR
       size: 14
-      #required: true
+      required: true
     rifrepant: 
       type: VARCHAR
       size: 14
     funrec: 
       type: VARCHAR
       size: 40
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcunimon: 
     #_attributes: 
@@ -34161,19 +34161,19 @@ propel:
     codunimon: 
       type: VARCHAR
       size: 4
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomunimon: 
       type: VARCHAR
       size: 30
-      #required: true
+      required: true
     valunimon: 
       type: NUMERIC
       size: 14
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcusoinm: 
     #_attributes: 
@@ -34181,19 +34181,19 @@ propel:
     coduso: 
       type: VARCHAR
       size: 3
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     nomuso: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     factor: 
       type: NUMERIC
       size: 14
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcusoveh: 
     #_attributes: 
@@ -34201,34 +34201,34 @@ propel:
     coduso: 
       type: VARCHAR
       size: 16
-      #required: true
-      primaryKey: true
+      required: true
+      #primaryKey: true
     anovig: 
       type: VARCHAR
       size: 4
-      #required: true
+      required: true
       primaryKey: true
     desuso: 
       type: VARCHAR
       size: 250
-      #required: true
+      required: true
     monafo: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     porali: 
       type: NUMERIC
       size: 14
       scale: 2
-      #required: true
+      required: true
     anolim: 
       type: VARCHAR
       size: 4
-      #required: true
+      required: true
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcvalinm: 
     #_attributes: 
@@ -34278,7 +34278,7 @@ propel:
       scale: 2
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true
   fcvalinm1: 
     #_attributes: 
@@ -34339,5 +34339,5 @@ propel:
       scale: 3
     id: 
       type: INTEGER
-      #required: true
+      required: true
       autoIncrement: true      
