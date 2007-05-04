@@ -30,6 +30,8 @@
     <?php echo javascript_tag("new tree (TREE_ITEMSCOM_OBR, tree_tpl);");?>
     <?php } elseif($menu=='bienes') { ?>
     <?php echo javascript_tag("new tree (TREE_ITEMSCOM_BIE, tree_tpl);");?> 
+    <?php } elseif($menu=='hacienda') { ?> 
+    <?php echo javascript_tag("new tree (TREE_ITEMSCOM_HAC, tree_tpl);");?>
 	<?php }?>
     
 	</td>

@@ -233,7 +233,7 @@ class almregartActions extends autoalmregartActions
 	    $opciones = new OpcionesGrid();
 	    // Se configuran las opciones globales del Grid 
         $opciones->setEliminar(true);
-        $opciones->setTabla('Caartalm');
+        $opciones->setTabla('Ocregact');
         $opciones->setAnchoGrid(1150);
         $opciones->setTitulo('Existencia por Almacenes');
         $opciones->setHTMLTotalFilas(' ');

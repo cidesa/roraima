@@ -244,16 +244,13 @@ if ( ($caregart->getId()!='') and $caregart->getTipo()=='S') //ES UN SERVICIO
 				"); 
 		}
 ?>
-<?php include_partial('edit_actions', array('caregart' => $caregart)) ?>
-
+	<?php include_partial('edit_actions', array('caregart' => $caregart)) ?>
 </form>
 
-<ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($caregart->getId()): ?>
-<?php echo button_to(__('delete'), 'almregart/delete?id='.$caregart->getId(), array (
+	<ul class="sf_admin_actions">
+		<li class="float-rigth"><?php if ($caregart->getId()): ?> <?php echo button_to(__('delete'), 'almregart/delete?id='.$caregart->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
   'class' => 'sf_admin_action_delete',
-)) ?><?php endif; ?>
-</li>
-  </ul>
+)) ?><?php endif; ?></li>
+	</ul>
