@@ -8,6 +8,7 @@ var Obra='/obras_dev.php/';
 var Inv_coloc='/inv_coloc_dev.php/';
 var Cred_cobr='/cred_cobr_dev.php/';
 var Bienes = '/bienes_dev.php/';
+var Hacienda = '/hacienda_dev.php/';
 
 var ReportesCompras='http://'+window.location.host+'/vb-libre/reportes/compras/';
 var ReportesTesoreria='http://'+window.location.host+'/vb-libre/reportes/tesoreria/';
@@ -619,6 +620,18 @@ var TREE_ITEMSCOM_BIE = [
 ];
 
 
+var TREE_ITEMSCOM_HAC = [
+	['SIGA', null,
+		['Hacienda Municipal', null,
+			['Definiciones',null,
+				['Definici&oacute;n de Tasas de Interes Bancarios', Hacienda+'facdefesptasban'],
+			],
+		],
+	 ],
+];
+
+
+
 var TREE_ITEMS_MAIN = [
 	['SIGA', null,
 		['Contabilidad Presupuestaria', servidor+'/sistemafull/aplicaciones/presupuesto/index.php'],
@@ -632,6 +645,7 @@ var TREE_ITEMS_MAIN = [
 		['Obras y Contratos', 'principal/menu/m/obra'],
 		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
 		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
+		['Hacienda Municipal', 'principal/menu/m/hacienda'],		
       ]
 	];
 
