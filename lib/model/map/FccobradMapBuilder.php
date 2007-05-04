@@ -32,17 +32,17 @@ class FccobradMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODCOB', 'Codcob', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODCOB', 'Codcob', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('CEDCOB', 'Cedcob', 'string', CreoleTypes::VARCHAR, false, 15);
+		$tMap->addColumn('CEDCOB', 'Cedcob', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('NOMCOB', 'Nomcob', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('NOMCOB', 'Nomcob', 'string', CreoleTypes::VARCHAR, true, 30);
 
 		$tMap->addColumn('DIRCOB', 'Dircob', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addColumn('TELCOB', 'Telcob', 'string', CreoleTypes::VARCHAR, false, 11);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

@@ -122,8 +122,8 @@ abstract class BaseFcparroqPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcparroq.CODPAR)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcparroq.CODPAR)';
+	const COUNT = 'COUNT(fcparroq.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcparroq.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -407,17 +407,8 @@ abstract class BaseFcparroqPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcparroqPeer::CODPAR);
-			$selectCriteria->add(FcparroqPeer::CODPAR, $criteria->remove(FcparroqPeer::CODPAR), $comparison);
-
-			$comparison = $criteria->getComparison(FcparroqPeer::CODMUN);
-			$selectCriteria->add(FcparroqPeer::CODMUN, $criteria->remove(FcparroqPeer::CODMUN), $comparison);
-
-			$comparison = $criteria->getComparison(FcparroqPeer::CODEDO);
-			$selectCriteria->add(FcparroqPeer::CODEDO, $criteria->remove(FcparroqPeer::CODEDO), $comparison);
-
-			$comparison = $criteria->getComparison(FcparroqPeer::CODPAI);
-			$selectCriteria->add(FcparroqPeer::CODPAI, $criteria->remove(FcparroqPeer::CODPAI), $comparison);
+			$comparison = $criteria->getComparison(FcparroqPeer::ID);
+			$selectCriteria->add(FcparroqPeer::ID, $criteria->remove(FcparroqPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -456,24 +447,7 @@ abstract class BaseFcparroqPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-				$vals[2][] = $value[2];
-				$vals[3][] = $value[3];
-			}
-
-			$criteria->add(FcparroqPeer::CODPAR, $vals[0], Criteria::IN);
-			$criteria->add(FcparroqPeer::CODMUN, $vals[1], Criteria::IN);
-			$criteria->add(FcparroqPeer::CODEDO, $vals[2], Criteria::IN);
-			$criteria->add(FcparroqPeer::CODPAI, $vals[3], Criteria::IN);
+			$criteria->add(FcparroqPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -527,19 +501,40 @@ abstract class BaseFcparroqPeer {
 	}
 
 	
-	public static function retrieveByPK( $codpar, $codmun, $codedo, $codpai, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FcparroqPeer::CODPAR, $codpar);
-		$criteria->add(FcparroqPeer::CODMUN, $codmun);
-		$criteria->add(FcparroqPeer::CODEDO, $codedo);
-		$criteria->add(FcparroqPeer::CODPAI, $codpai);
+
+		$criteria = new Criteria(FcparroqPeer::DATABASE_NAME);
+
+		$criteria->add(FcparroqPeer::ID, $pk);
+
+
 		$v = FcparroqPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FcparroqPeer::ID, $pks, Criteria::IN);
+			$objs = FcparroqPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {

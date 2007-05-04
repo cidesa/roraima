@@ -167,8 +167,8 @@ abstract class BaseFcmodproPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcmodpro.REFMOD)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcmodpro.REFMOD)';
+	const COUNT = 'COUNT(fcmodpro.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcmodpro.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -452,8 +452,8 @@ abstract class BaseFcmodproPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcmodproPeer::REFMOD);
-			$selectCriteria->add(FcmodproPeer::REFMOD, $criteria->remove(FcmodproPeer::REFMOD), $comparison);
+			$comparison = $criteria->getComparison(FcmodproPeer::ID);
+			$selectCriteria->add(FcmodproPeer::ID, $criteria->remove(FcmodproPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -492,7 +492,7 @@ abstract class BaseFcmodproPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcmodproPeer::REFMOD, (array) $values, Criteria::IN);
+			$criteria->add(FcmodproPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -554,7 +554,7 @@ abstract class BaseFcmodproPeer {
 
 		$criteria = new Criteria(FcmodproPeer::DATABASE_NAME);
 
-		$criteria->add(FcmodproPeer::REFMOD, $pk);
+		$criteria->add(FcmodproPeer::ID, $pk);
 
 
 		$v = FcmodproPeer::doSelect($criteria, $con);
@@ -574,7 +574,7 @@ abstract class BaseFcmodproPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcmodproPeer::REFMOD, $pks, Criteria::IN);
+			$criteria->add(FcmodproPeer::ID, $pks, Criteria::IN);
 			$objs = FcmodproPeer::doSelect($criteria, $con);
 		}
 		return $objs;

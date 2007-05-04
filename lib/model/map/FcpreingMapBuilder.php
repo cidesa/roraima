@@ -32,9 +32,9 @@ class FcpreingMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('NOMPAR', 'Nompar', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('NOMPAR', 'Nompar', 'string', CreoleTypes::VARCHAR, true, 250);
 
 		$tMap->addColumn('ESTIMA', 'Estima', 'string', CreoleTypes::VARCHAR, false, 1);
 

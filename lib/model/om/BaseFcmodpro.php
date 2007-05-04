@@ -722,7 +722,7 @@ abstract class BaseFcmodpro extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcmodproPeer::DATABASE_NAME);
 
-		$criteria->add(FcmodproPeer::REFMOD, $this->refmod);
+		$criteria->add(FcmodproPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -730,18 +730,20 @@ abstract class BaseFcmodpro extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getRefmod();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setRefmod($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setRefmod($this->refmod);
 
 		$copyObj->setNrocon($this->nrocon);
 
@@ -769,12 +771,10 @@ abstract class BaseFcmodpro extends BaseObject  implements Persistent {
 
 		$copyObj->setFunrec($this->funrec);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setRefmod(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

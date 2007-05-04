@@ -132,8 +132,8 @@ abstract class BaseFcaliinmPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcaliinm.CODCATFIS)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcaliinm.CODCATFIS)';
+	const COUNT = 'COUNT(fcaliinm.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcaliinm.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -256,14 +256,8 @@ abstract class BaseFcaliinmPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcaliinmPeer::CODCATFIS);
-			$selectCriteria->add(FcaliinmPeer::CODCATFIS, $criteria->remove(FcaliinmPeer::CODCATFIS), $comparison);
-
-			$comparison = $criteria->getComparison(FcaliinmPeer::CODUSO);
-			$selectCriteria->add(FcaliinmPeer::CODUSO, $criteria->remove(FcaliinmPeer::CODUSO), $comparison);
-
-			$comparison = $criteria->getComparison(FcaliinmPeer::ANOVIG);
-			$selectCriteria->add(FcaliinmPeer::ANOVIG, $criteria->remove(FcaliinmPeer::ANOVIG), $comparison);
+			$comparison = $criteria->getComparison(FcaliinmPeer::ID);
+			$selectCriteria->add(FcaliinmPeer::ID, $criteria->remove(FcaliinmPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -302,22 +296,7 @@ abstract class BaseFcaliinmPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-				$vals[2][] = $value[2];
-			}
-
-			$criteria->add(FcaliinmPeer::CODCATFIS, $vals[0], Criteria::IN);
-			$criteria->add(FcaliinmPeer::CODUSO, $vals[1], Criteria::IN);
-			$criteria->add(FcaliinmPeer::ANOVIG, $vals[2], Criteria::IN);
+			$criteria->add(FcaliinmPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -371,18 +350,40 @@ abstract class BaseFcaliinmPeer {
 	}
 
 	
-	public static function retrieveByPK( $codcatfis, $coduso, $anovig, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FcaliinmPeer::CODCATFIS, $codcatfis);
-		$criteria->add(FcaliinmPeer::CODUSO, $coduso);
-		$criteria->add(FcaliinmPeer::ANOVIG, $anovig);
+
+		$criteria = new Criteria(FcaliinmPeer::DATABASE_NAME);
+
+		$criteria->add(FcaliinmPeer::ID, $pk);
+
+
 		$v = FcaliinmPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FcaliinmPeer::ID, $pks, Criteria::IN);
+			$objs = FcaliinmPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {

@@ -32,17 +32,17 @@ class FcsolvenciaMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('CODSOL', 'Codsol', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('CODSOL', 'Codsol', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addForeignKey('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, 'fctipsol', 'CODTIP', false, 2);
+		$tMap->addForeignKey('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, 'fctipsol', 'CODTIP', true, 2);
 
-		$tMap->addColumn('FECEXP', 'Fecexp', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECEXP', 'Fecexp', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, true);
 
 		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 14);
+		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, true, 14);
 
 		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, false, 30);
 

@@ -107,8 +107,8 @@ abstract class BaseFcrutcobPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcrutcob.CODCOB)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcrutcob.CODCOB)';
+	const COUNT = 'COUNT(fcrutcob.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcrutcob.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -667,11 +667,8 @@ abstract class BaseFcrutcobPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcrutcobPeer::CODCOB);
-			$selectCriteria->add(FcrutcobPeer::CODCOB, $criteria->remove(FcrutcobPeer::CODCOB), $comparison);
-
-			$comparison = $criteria->getComparison(FcrutcobPeer::CODRUT);
-			$selectCriteria->add(FcrutcobPeer::CODRUT, $criteria->remove(FcrutcobPeer::CODRUT), $comparison);
+			$comparison = $criteria->getComparison(FcrutcobPeer::ID);
+			$selectCriteria->add(FcrutcobPeer::ID, $criteria->remove(FcrutcobPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -710,20 +707,7 @@ abstract class BaseFcrutcobPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-			}
-
-			$criteria->add(FcrutcobPeer::CODCOB, $vals[0], Criteria::IN);
-			$criteria->add(FcrutcobPeer::CODRUT, $vals[1], Criteria::IN);
+			$criteria->add(FcrutcobPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -777,17 +761,40 @@ abstract class BaseFcrutcobPeer {
 	}
 
 	
-	public static function retrieveByPK( $codcob, $codrut, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FcrutcobPeer::CODCOB, $codcob);
-		$criteria->add(FcrutcobPeer::CODRUT, $codrut);
+
+		$criteria = new Criteria(FcrutcobPeer::DATABASE_NAME);
+
+		$criteria->add(FcrutcobPeer::ID, $pk);
+
+
 		$v = FcrutcobPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FcrutcobPeer::ID, $pks, Criteria::IN);
+			$objs = FcrutcobPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {

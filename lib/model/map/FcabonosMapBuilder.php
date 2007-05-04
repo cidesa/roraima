@@ -32,13 +32,13 @@ class FcabonosMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('FECPAG', 'Fecpag', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECPAG', 'Fecpag', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 14);
+		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, true, 14);
 
-		$tMap->addColumn('FUEING', 'Fueing', 'string', CreoleTypes::VARCHAR, false, 2);
+		$tMap->addColumn('FUEING', 'Fueing', 'string', CreoleTypes::VARCHAR, true, 2);
 
 		$tMap->addColumn('DESPAG', 'Despag', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -46,7 +46,7 @@ class FcabonosMapBuilder {
 
 		$tMap->addColumn('MONEFE', 'Monefe', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('FUNPAG', 'Funpag', 'string', CreoleTypes::VARCHAR, false, 40);
+		$tMap->addColumn('FUNPAG', 'Funpag', 'string', CreoleTypes::VARCHAR, true, 40);
 
 		$tMap->addColumn('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, false, 10);
 

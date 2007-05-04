@@ -388,7 +388,7 @@ abstract class BaseFcpaging extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcpagingPeer::DATABASE_NAME);
 
-		$criteria->add(FcpagingPeer::REFERE, $this->refere);
+		$criteria->add(FcpagingPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -396,18 +396,20 @@ abstract class BaseFcpaging extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getRefere();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setRefere($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setRefere($this->refere);
 
 		$copyObj->setTippag($this->tippag);
 
@@ -417,12 +419,10 @@ abstract class BaseFcpaging extends BaseObject  implements Persistent {
 
 		$copyObj->setNomref($this->nomref);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setRefere(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

@@ -107,8 +107,8 @@ abstract class BaseFcdefubimagPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcdefubimag.CODUBIMAG)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcdefubimag.CODUBIMAG)';
+	const COUNT = 'COUNT(fcdefubimag.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcdefubimag.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -231,8 +231,8 @@ abstract class BaseFcdefubimagPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcdefubimagPeer::CODUBIMAG);
-			$selectCriteria->add(FcdefubimagPeer::CODUBIMAG, $criteria->remove(FcdefubimagPeer::CODUBIMAG), $comparison);
+			$comparison = $criteria->getComparison(FcdefubimagPeer::ID);
+			$selectCriteria->add(FcdefubimagPeer::ID, $criteria->remove(FcdefubimagPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -271,7 +271,7 @@ abstract class BaseFcdefubimagPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcdefubimagPeer::CODUBIMAG, (array) $values, Criteria::IN);
+			$criteria->add(FcdefubimagPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -333,7 +333,7 @@ abstract class BaseFcdefubimagPeer {
 
 		$criteria = new Criteria(FcdefubimagPeer::DATABASE_NAME);
 
-		$criteria->add(FcdefubimagPeer::CODUBIMAG, $pk);
+		$criteria->add(FcdefubimagPeer::ID, $pk);
 
 
 		$v = FcdefubimagPeer::doSelect($criteria, $con);
@@ -353,7 +353,7 @@ abstract class BaseFcdefubimagPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcdefubimagPeer::CODUBIMAG, $pks, Criteria::IN);
+			$criteria->add(FcdefubimagPeer::ID, $pks, Criteria::IN);
 			$objs = FcdefubimagPeer::doSelect($criteria, $con);
 		}
 		return $objs;

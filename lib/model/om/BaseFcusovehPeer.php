@@ -127,8 +127,8 @@ abstract class BaseFcusovehPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcusoveh.CODUSO)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcusoveh.CODUSO)';
+	const COUNT = 'COUNT(fcusoveh.ANOVIG)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcusoveh.ANOVIG)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -251,9 +251,6 @@ abstract class BaseFcusovehPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcusovehPeer::CODUSO);
-			$selectCriteria->add(FcusovehPeer::CODUSO, $criteria->remove(FcusovehPeer::CODUSO), $comparison);
-
 			$comparison = $criteria->getComparison(FcusovehPeer::ANOVIG);
 			$selectCriteria->add(FcusovehPeer::ANOVIG, $criteria->remove(FcusovehPeer::ANOVIG), $comparison);
 
@@ -294,20 +291,7 @@ abstract class BaseFcusovehPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-			}
-
-			$criteria->add(FcusovehPeer::CODUSO, $vals[0], Criteria::IN);
-			$criteria->add(FcusovehPeer::ANOVIG, $vals[1], Criteria::IN);
+			$criteria->add(FcusovehPeer::ANOVIG, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -361,17 +345,40 @@ abstract class BaseFcusovehPeer {
 	}
 
 	
-	public static function retrieveByPK( $coduso, $anovig, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FcusovehPeer::CODUSO, $coduso);
-		$criteria->add(FcusovehPeer::ANOVIG, $anovig);
+
+		$criteria = new Criteria(FcusovehPeer::DATABASE_NAME);
+
+		$criteria->add(FcusovehPeer::ANOVIG, $pk);
+
+
 		$v = FcusovehPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FcusovehPeer::ANOVIG, $pks, Criteria::IN);
+			$objs = FcusovehPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {

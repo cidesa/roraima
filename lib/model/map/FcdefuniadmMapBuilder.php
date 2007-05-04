@@ -32,11 +32,11 @@ class FcdefuniadmMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODUNIADM', 'Coduniadm', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODUNIADM', 'Coduniadm', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('NOMUNIADM', 'Nomuniadm', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('NOMUNIADM', 'Nomuniadm', 'string', CreoleTypes::VARCHAR, true, 50);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

@@ -880,7 +880,7 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcbansalPeer::DATABASE_NAME);
 
-		$criteria->add(FcbansalPeer::CODDOC, $this->coddoc);
+		$criteria->add(FcbansalPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -888,18 +888,20 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCoddoc();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCoddoc($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCoddoc($this->coddoc);
 
 		$copyObj->setCodfun($this->codfun);
 
@@ -925,12 +927,10 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 
 		$copyObj->setHorubimag($this->horubimag);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCoddoc(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

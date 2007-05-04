@@ -32,17 +32,17 @@ class FcaliusoMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addPrimaryKey('ANOVIG', 'Anovig', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('ANOVIG', 'Anovig', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('NOMUSO', 'Nomuso', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('NOMUSO', 'Nomuso', 'string', CreoleTypes::VARCHAR, true, 250);
 
 		$tMap->addColumn('ALIMON', 'Alimon', 'double', CreoleTypes::NUMERIC, false);
 
 		$tMap->addColumn('PORMON', 'Pormon', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

@@ -32,9 +32,9 @@ class FcdeuconMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('REFCON', 'Refcon', 'string', CreoleTypes::VARCHAR, false, 15);
+		$tMap->addColumn('REFCON', 'Refcon', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('NUMDEC', 'Numdec', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMDEC', 'Numdec', 'string', CreoleTypes::VARCHAR, true, 10);
 
 		$tMap->addColumn('NUMERO', 'Numero', 'string', CreoleTypes::VARCHAR, false, 2);
 

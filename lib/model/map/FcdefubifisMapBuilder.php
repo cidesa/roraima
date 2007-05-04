@@ -32,11 +32,11 @@ class FcdefubifisMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODUBIFIS', 'Codubifis', 'string', CreoleTypes::VARCHAR, true, 16);
+		$tMap->addColumn('CODUBIFIS', 'Codubifis', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('NOMUBIFIS', 'Nomubifis', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('NOMUBIFIS', 'Nomubifis', 'string', CreoleTypes::VARCHAR, true, 50);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

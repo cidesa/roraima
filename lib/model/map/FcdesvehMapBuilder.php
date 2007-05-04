@@ -32,17 +32,17 @@ class FcdesvehMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('NUMDES', 'Numdes', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('NUMDES', 'Numdes', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('PLAVEH', 'Plaveh', 'string', CreoleTypes::VARCHAR, false, 8);
+		$tMap->addColumn('PLAVEH', 'Plaveh', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECDES', 'Fecdes', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDES', 'Fecdes', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('MOTDES', 'Motdes', 'string', CreoleTypes::VARCHAR, false, 200);
+		$tMap->addColumn('MOTDES', 'Motdes', 'string', CreoleTypes::VARCHAR, true, 200);
 
-		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, false, 40);
+		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, true, 40);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

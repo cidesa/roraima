@@ -32,13 +32,13 @@ class FcregvehMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('PLAVEH', 'Plaveh', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('PLAVEH', 'Plaveh', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 14);
+		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, true, 14);
 
-		$tMap->addColumn('ANOVEH', 'Anoveh', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ANOVEH', 'Anoveh', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, true);
 
 		$tMap->addColumn('SERMOT', 'Sermot', 'string', CreoleTypes::VARCHAR, false, 15);
 
@@ -48,7 +48,7 @@ class FcregvehMapBuilder {
 
 		$tMap->addColumn('COLVEH', 'Colveh', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, true, 16);
 
 		$tMap->addColumn('IMPVEH', 'Impveh', 'double', CreoleTypes::NUMERIC, false);
 
@@ -72,9 +72,9 @@ class FcregvehMapBuilder {
 
 		$tMap->addColumn('RIFREP', 'Rifrep', 'string', CreoleTypes::VARCHAR, false, 14);
 
-		$tMap->addColumn('MODVEH', 'Modveh', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addColumn('MODVEH', 'Modveh', 'string', CreoleTypes::VARCHAR, true, 20);
 
-		$tMap->addColumn('FECREC', 'Fecrec', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREC', 'Fecrec', 'int', CreoleTypes::DATE, true);
 
 		$tMap->addColumn('DUEANT', 'Dueant', 'string', CreoleTypes::VARCHAR, false, 50);
 
@@ -82,7 +82,7 @@ class FcregvehMapBuilder {
 
 		$tMap->addColumn('PLAANT', 'Plaant', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('ESTDEC', 'Estdec', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('ESTDEC', 'Estdec', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('NOMCON', 'Nomcon', 'string', CreoleTypes::VARCHAR, false, 50);
 

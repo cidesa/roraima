@@ -162,8 +162,8 @@ abstract class BaseFcbansalPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcbansal.CODDOC)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcbansal.CODDOC)';
+	const COUNT = 'COUNT(fcbansal.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcbansal.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -1727,8 +1727,8 @@ abstract class BaseFcbansalPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcbansalPeer::CODDOC);
-			$selectCriteria->add(FcbansalPeer::CODDOC, $criteria->remove(FcbansalPeer::CODDOC), $comparison);
+			$comparison = $criteria->getComparison(FcbansalPeer::ID);
+			$selectCriteria->add(FcbansalPeer::ID, $criteria->remove(FcbansalPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -1767,7 +1767,7 @@ abstract class BaseFcbansalPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcbansalPeer::CODDOC, (array) $values, Criteria::IN);
+			$criteria->add(FcbansalPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -1829,7 +1829,7 @@ abstract class BaseFcbansalPeer {
 
 		$criteria = new Criteria(FcbansalPeer::DATABASE_NAME);
 
-		$criteria->add(FcbansalPeer::CODDOC, $pk);
+		$criteria->add(FcbansalPeer::ID, $pk);
 
 
 		$v = FcbansalPeer::doSelect($criteria, $con);
@@ -1849,7 +1849,7 @@ abstract class BaseFcbansalPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcbansalPeer::CODDOC, $pks, Criteria::IN);
+			$criteria->add(FcbansalPeer::ID, $pks, Criteria::IN);
 			$objs = FcbansalPeer::doSelect($criteria, $con);
 		}
 		return $objs;

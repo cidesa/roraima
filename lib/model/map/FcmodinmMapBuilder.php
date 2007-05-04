@@ -32,17 +32,17 @@ class FcmodinmMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('REFMOD', 'Refmod', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('REFMOD', 'Refmod', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('NROINM', 'Nroinm', 'string', CreoleTypes::VARCHAR, false, 15);
+		$tMap->addColumn('NROINM', 'Nroinm', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('FECMOD', 'Fecmod', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECMOD', 'Fecmod', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('CODCATFIS', 'Codcatfis', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('CODCATFIS', 'Codcatfis', 'string', CreoleTypes::VARCHAR, true, 30);
 
-		$tMap->addColumn('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('CODCARINM', 'Codcarinm', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('CODCARINM', 'Codcarinm', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addColumn('CODSITINM', 'Codsitinm', 'string', CreoleTypes::VARCHAR, false, 3);
 
@@ -70,11 +70,11 @@ class FcmodinmMapBuilder {
 
 		$tMap->addColumn('DOCPRO', 'Docpro', 'string', CreoleTypes::VARCHAR, false, 200);
 
-		$tMap->addColumn('CODCATFISANT', 'Codcatfisant', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('CODCATFISANT', 'Codcatfisant', 'string', CreoleTypes::VARCHAR, true, 30);
 
-		$tMap->addColumn('CODUSOANT', 'Codusoant', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('CODUSOANT', 'Codusoant', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('CODCARINMANT', 'Codcarinmant', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('CODCARINMANT', 'Codcarinmant', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addColumn('CODSITINMANT', 'Codsitinmant', 'string', CreoleTypes::VARCHAR, false, 3);
 
@@ -106,7 +106,7 @@ class FcmodinmMapBuilder {
 
 		$tMap->addColumn('CODCATINM', 'Codcatinm', 'string', CreoleTypes::VARCHAR, false, 30);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

@@ -324,7 +324,7 @@ abstract class BaseFcunimon extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcunimonPeer::DATABASE_NAME);
 
-		$criteria->add(FcunimonPeer::CODUNIMON, $this->codunimon);
+		$criteria->add(FcunimonPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -332,29 +332,29 @@ abstract class BaseFcunimon extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodunimon();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodunimon($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setCodunimon($this->codunimon);
+
 		$copyObj->setNomunimon($this->nomunimon);
 
 		$copyObj->setValunimon($this->valunimon);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodunimon(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

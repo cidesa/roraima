@@ -32,13 +32,13 @@ class FcunimonMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODUNIMON', 'Codunimon', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('CODUNIMON', 'Codunimon', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('NOMUNIMON', 'Nomunimon', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('NOMUNIMON', 'Nomunimon', 'string', CreoleTypes::VARCHAR, true, 30);
 
 		$tMap->addColumn('VALUNIMON', 'Valunimon', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

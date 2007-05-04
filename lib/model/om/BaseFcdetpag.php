@@ -400,8 +400,7 @@ abstract class BaseFcdetpag extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdetpagPeer::DATABASE_NAME);
 
-		$criteria->add(FcdetpagPeer::NUMPAG, $this->numpag);
-		$criteria->add(FcdetpagPeer::NRODET, $this->nrodet);
+		$criteria->add(FcdetpagPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -409,40 +408,31 @@ abstract class BaseFcdetpag extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getNumpag();
-
-		$pks[1] = $this->getNrodet();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setNumpag($keys[0]);
-
-		$this->setNrodet($keys[1]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setNumpag($this->numpag);
+
+		$copyObj->setNrodet($this->nrodet);
+
 		$copyObj->setMonpag($this->monpag);
 
 		$copyObj->setTippag($this->tippag);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNumpag(NULL); 
-		$copyObj->setNrodet(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

@@ -324,7 +324,7 @@ abstract class BaseFccarinm extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FccarinmPeer::DATABASE_NAME);
 
-		$criteria->add(FccarinmPeer::CODCARINM, $this->codcarinm);
+		$criteria->add(FccarinmPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -332,29 +332,29 @@ abstract class BaseFccarinm extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodcarinm();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodcarinm($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setCodcarinm($this->codcarinm);
+
 		$copyObj->setNomcarinm($this->nomcarinm);
 
 		$copyObj->setStacarinm($this->stacarinm);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodcarinm(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

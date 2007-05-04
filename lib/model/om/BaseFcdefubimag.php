@@ -336,7 +336,7 @@ abstract class BaseFcdefubimag extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdefubimagPeer::DATABASE_NAME);
 
-		$criteria->add(FcdefubimagPeer::CODUBIMAG, $this->codubimag);
+		$criteria->add(FcdefubimagPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -344,22 +344,22 @@ abstract class BaseFcdefubimag extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodubimag();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodubimag($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setNomubimag($this->nomubimag);
+		$copyObj->setCodubimag($this->codubimag);
 
-		$copyObj->setId($this->id);
+		$copyObj->setNomubimag($this->nomubimag);
 
 
 		if ($deepCopy) {
@@ -377,7 +377,7 @@ abstract class BaseFcdefubimag extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodubimag(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

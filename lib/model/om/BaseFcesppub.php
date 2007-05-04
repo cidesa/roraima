@@ -988,7 +988,7 @@ abstract class BaseFcesppub extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcesppubPeer::DATABASE_NAME);
 
-		$criteria->add(FcesppubPeer::NROCON, $this->nrocon);
+		$criteria->add(FcesppubPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -996,18 +996,20 @@ abstract class BaseFcesppub extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNrocon();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNrocon($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNrocon($this->nrocon);
 
 		$copyObj->setFecreg($this->fecreg);
 
@@ -1049,8 +1051,6 @@ abstract class BaseFcesppub extends BaseObject  implements Persistent {
 
 		$copyObj->setDircon($this->dircon);
 
-		$copyObj->setId($this->id);
-
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -1063,7 +1063,7 @@ abstract class BaseFcesppub extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNrocon(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

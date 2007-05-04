@@ -32,13 +32,13 @@ class FccarinmMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODCARINM', 'Codcarinm', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODCARINM', 'Codcarinm', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('NOMCARINM', 'Nomcarinm', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('NOMCARINM', 'Nomcarinm', 'string', CreoleTypes::VARCHAR, true, 250);
 
-		$tMap->addColumn('STACARINM', 'Stacarinm', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('STACARINM', 'Stacarinm', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

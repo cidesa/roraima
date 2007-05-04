@@ -806,7 +806,7 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcprolicPeer::DATABASE_NAME);
 
-		$criteria->add(FcprolicPeer::NROCON, $this->nrocon);
+		$criteria->add(FcprolicPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -814,18 +814,20 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNrocon();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNrocon($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNrocon($this->nrocon);
 
 		$copyObj->setFecreg($this->fecreg);
 
@@ -857,8 +859,6 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 
 		$copyObj->setSemdia($this->semdia);
 
-		$copyObj->setId($this->id);
-
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -871,7 +871,7 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNrocon(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

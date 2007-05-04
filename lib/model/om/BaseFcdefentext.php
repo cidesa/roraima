@@ -368,7 +368,7 @@ abstract class BaseFcdefentext extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdefentextPeer::DATABASE_NAME);
 
-		$criteria->add(FcdefentextPeer::CODENTEXT, $this->codentext);
+		$criteria->add(FcdefentextPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -376,24 +376,24 @@ abstract class BaseFcdefentext extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodentext();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodentext($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setCodentext($this->codentext);
+
 		$copyObj->setNomentext($this->nomentext);
 
 		$copyObj->setPernatjur($this->pernatjur);
-
-		$copyObj->setId($this->id);
 
 
 		if ($deepCopy) {
@@ -411,7 +411,7 @@ abstract class BaseFcdefentext extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodentext(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

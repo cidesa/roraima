@@ -484,7 +484,7 @@ abstract class BaseFcrecdes extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcrecdesPeer::DATABASE_NAME);
 
-		$criteria->add(FcrecdesPeer::CODREDE, $this->codrede);
+		$criteria->add(FcrecdesPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -492,18 +492,20 @@ abstract class BaseFcrecdes extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodrede();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodrede($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodrede($this->codrede);
 
 		$copyObj->setRecdes($this->recdes);
 
@@ -519,12 +521,10 @@ abstract class BaseFcrecdes extends BaseObject  implements Persistent {
 
 		$copyObj->setPorcien($this->porcien);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodrede(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

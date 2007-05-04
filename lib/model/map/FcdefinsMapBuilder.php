@@ -32,7 +32,7 @@ class FcdefinsMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addColumn('LONCODACT', 'Loncodact', 'double', CreoleTypes::NUMERIC, false);
 
@@ -54,23 +54,23 @@ class FcdefinsMapBuilder {
 
 		$tMap->addColumn('RUPUBIMAG', 'Rupubimag', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('FORACT', 'Foract', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('FORACT', 'Foract', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('FORVEH', 'Forveh', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('FORVEH', 'Forveh', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('FORCAT', 'Forcat', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addColumn('FORCAT', 'Forcat', 'string', CreoleTypes::VARCHAR, true, 20);
 
-		$tMap->addColumn('FORUBIFIS', 'Forubifis', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('FORUBIFIS', 'Forubifis', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('FORUBIMAG', 'Forubimag', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('FORUBIMAG', 'Forubimag', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('PORPIC', 'Porpic', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('PORPIC', 'Porpic', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('PORVEH', 'Porveh', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('PORVEH', 'Porveh', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('PORINM', 'Porinm', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('PORINM', 'Porinm', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('UNIPIC', 'Unipic', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('UNIPIC', 'Unipic', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('VALUNITRI', 'Valunitri', 'double', CreoleTypes::NUMERIC, false);
 
@@ -90,7 +90,7 @@ class FcdefinsMapBuilder {
 
 		$tMap->addColumn('CODAJUPIC', 'Codajupic', 'string', CreoleTypes::VARCHAR, false, 2);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

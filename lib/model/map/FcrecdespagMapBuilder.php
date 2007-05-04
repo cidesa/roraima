@@ -32,13 +32,13 @@ class FcrecdespagMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addForeignPrimaryKey('CODREDE', 'Codrede', 'string' , CreoleTypes::VARCHAR, 'fcdefdesc', 'CODDES', true, 4);
+		$tMap->addForeignKey('CODREDE', 'Codrede', 'string', CreoleTypes::VARCHAR, 'fcdefdesc', 'CODDES', true, 4);
 
 		$tMap->addColumn('MONTO', 'Monto', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

@@ -32,9 +32,9 @@ class FccatfisMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODCATFIS', 'Codcatfis', 'string', CreoleTypes::VARCHAR, true, 30);
+		$tMap->addColumn('CODCATFIS', 'Codcatfis', 'string', CreoleTypes::VARCHAR, true, 30);
 
-		$tMap->addColumn('NOMCATFIS', 'Nomcatfis', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('NOMCATFIS', 'Nomcatfis', 'string', CreoleTypes::VARCHAR, true, 250);
 
 		$tMap->addColumn('LINNOR', 'Linnor', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -44,7 +44,7 @@ class FccatfisMapBuilder {
 
 		$tMap->addColumn('LINOES', 'Linoes', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

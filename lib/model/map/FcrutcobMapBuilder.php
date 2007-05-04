@@ -32,11 +32,11 @@ class FcrutcobMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addForeignPrimaryKey('CODCOB', 'Codcob', 'string' , CreoleTypes::VARCHAR, 'fccobrad', 'CODCOB', true, 3);
+		$tMap->addForeignKey('CODCOB', 'Codcob', 'string', CreoleTypes::VARCHAR, 'fccobrad', 'CODCOB', true, 3);
 
-		$tMap->addForeignPrimaryKey('CODRUT', 'Codrut', 'string' , CreoleTypes::VARCHAR, 'fcrutas', 'CODRUT', true, 6);
+		$tMap->addForeignKey('CODRUT', 'Codrut', 'string', CreoleTypes::VARCHAR, 'fcrutas', 'CODRUT', true, 6);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

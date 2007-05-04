@@ -324,7 +324,7 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcusoinmPeer::DATABASE_NAME);
 
-		$criteria->add(FcusoinmPeer::CODUSO, $this->coduso);
+		$criteria->add(FcusoinmPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -332,29 +332,29 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCoduso();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCoduso($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setCoduso($this->coduso);
+
 		$copyObj->setNomuso($this->nomuso);
 
 		$copyObj->setFactor($this->factor);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCoduso(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

@@ -32,15 +32,15 @@ class FcrepfisMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, true, 50);
 
-		$tMap->addColumn('FECREP', 'Fecrep', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREP', 'Fecrep', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('NUMREP', 'Numrep', 'string', CreoleTypes::VARCHAR, false, 15);
+		$tMap->addColumn('NUMREP', 'Numrep', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('MONREP', 'Monrep', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONREP', 'Monrep', 'double', CreoleTypes::NUMERIC, true);
 
 		$tMap->addColumn('CONREP', 'Conrep', 'string', CreoleTypes::VARCHAR, false, 250);
 

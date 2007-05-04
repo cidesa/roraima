@@ -32,7 +32,7 @@ class FcclaespMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('CODCLA', 'Codcla', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addColumn('CODCLA', 'Codcla', 'string', CreoleTypes::VARCHAR, true, 4);
 
 		$tMap->addColumn('DESCLA', 'Descla', 'string', CreoleTypes::VARCHAR, false, 50);
 

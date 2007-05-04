@@ -112,8 +112,8 @@ abstract class BaseFcdefentextPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcdefentext.CODENTEXT)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcdefentext.CODENTEXT)';
+	const COUNT = 'COUNT(fcdefentext.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcdefentext.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -236,8 +236,8 @@ abstract class BaseFcdefentextPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcdefentextPeer::CODENTEXT);
-			$selectCriteria->add(FcdefentextPeer::CODENTEXT, $criteria->remove(FcdefentextPeer::CODENTEXT), $comparison);
+			$comparison = $criteria->getComparison(FcdefentextPeer::ID);
+			$selectCriteria->add(FcdefentextPeer::ID, $criteria->remove(FcdefentextPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -276,7 +276,7 @@ abstract class BaseFcdefentextPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcdefentextPeer::CODENTEXT, (array) $values, Criteria::IN);
+			$criteria->add(FcdefentextPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -338,7 +338,7 @@ abstract class BaseFcdefentextPeer {
 
 		$criteria = new Criteria(FcdefentextPeer::DATABASE_NAME);
 
-		$criteria->add(FcdefentextPeer::CODENTEXT, $pk);
+		$criteria->add(FcdefentextPeer::ID, $pk);
 
 
 		$v = FcdefentextPeer::doSelect($criteria, $con);
@@ -358,7 +358,7 @@ abstract class BaseFcdefentextPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcdefentextPeer::CODENTEXT, $pks, Criteria::IN);
+			$criteria->add(FcdefentextPeer::ID, $pks, Criteria::IN);
 			$objs = FcdefentextPeer::doSelect($criteria, $con);
 		}
 		return $objs;

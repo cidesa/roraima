@@ -538,7 +538,7 @@ abstract class BaseFctipsol extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FctipsolPeer::DATABASE_NAME);
 
-		$criteria->add(FctipsolPeer::CODTIP, $this->codtip);
+		$criteria->add(FctipsolPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -546,18 +546,20 @@ abstract class BaseFctipsol extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodtip();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodtip($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodtip($this->codtip);
 
 		$copyObj->setDestip($this->destip);
 
@@ -575,8 +577,6 @@ abstract class BaseFctipsol extends BaseObject  implements Persistent {
 
 		$copyObj->setGendeu($this->gendeu);
 
-		$copyObj->setId($this->id);
-
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -589,7 +589,7 @@ abstract class BaseFctipsol extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodtip(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

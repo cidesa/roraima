@@ -324,7 +324,7 @@ abstract class BaseFcsitjurinm extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcsitjurinmPeer::DATABASE_NAME);
 
-		$criteria->add(FcsitjurinmPeer::CODSITINM, $this->codsitinm);
+		$criteria->add(FcsitjurinmPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -332,29 +332,29 @@ abstract class BaseFcsitjurinm extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodsitinm();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodsitinm($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setCodsitinm($this->codsitinm);
+
 		$copyObj->setNomsitinm($this->nomsitinm);
 
 		$copyObj->setStasitinm($this->stasitinm);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodsitinm(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

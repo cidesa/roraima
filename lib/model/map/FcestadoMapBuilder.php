@@ -32,13 +32,13 @@ class FcestadoMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addForeignPrimaryKey('CODPAI', 'Codpai', 'string' , CreoleTypes::VARCHAR, 'fcpais', 'CODPAI', true, 4);
+		$tMap->addForeignKey('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, 'fcpais', 'CODPAI', true, 4);
 
-		$tMap->addColumn('NOMEDO', 'Nomedo', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('NOMEDO', 'Nomedo', 'string', CreoleTypes::VARCHAR, true, 30);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

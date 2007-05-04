@@ -32,7 +32,7 @@ class FctipsolMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, true, 2);
+		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, true, 2);
 
 		$tMap->addColumn('DESTIP', 'Destip', 'string', CreoleTypes::VARCHAR, false, 100);
 
@@ -50,7 +50,7 @@ class FctipsolMapBuilder {
 
 		$tMap->addColumn('GENDEU', 'Gendeu', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

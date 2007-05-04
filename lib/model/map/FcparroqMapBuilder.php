@@ -32,17 +32,17 @@ class FcparroqMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addPrimaryKey('CODMUN', 'Codmun', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('CODMUN', 'Codmun', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addPrimaryKey('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('CODEDO', 'Codedo', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addForeignPrimaryKey('CODPAI', 'Codpai', 'string' , CreoleTypes::VARCHAR, 'fcmunici', 'CODPAI', true, 4);
+		$tMap->addForeignKey('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, 'fcmunici', 'CODPAI', true, 4);
 
-		$tMap->addColumn('NOMPAR', 'Nompar', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('NOMPAR', 'Nompar', 'string', CreoleTypes::VARCHAR, true, 30);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

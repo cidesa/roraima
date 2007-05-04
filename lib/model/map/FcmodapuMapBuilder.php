@@ -32,11 +32,11 @@ class FcmodapuMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('REFMOD', 'Refmod', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('REFMOD', 'Refmod', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('NROCON', 'Nrocon', 'string', CreoleTypes::VARCHAR, false, 8);
+		$tMap->addColumn('NROCON', 'Nrocon', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECMOD', 'Fecmod', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECMOD', 'Fecmod', 'int', CreoleTypes::DATE, true);
 
 		$tMap->addColumn('TIPAPU', 'Tipapu', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -56,7 +56,7 @@ class FcmodapuMapBuilder {
 
 		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

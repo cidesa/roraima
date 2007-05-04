@@ -162,8 +162,8 @@ abstract class BaseFcpagosPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcpagos.NUMPAG)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcpagos.NUMPAG)';
+	const COUNT = 'COUNT(fcpagos.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcpagos.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -286,8 +286,8 @@ abstract class BaseFcpagosPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcpagosPeer::NUMPAG);
-			$selectCriteria->add(FcpagosPeer::NUMPAG, $criteria->remove(FcpagosPeer::NUMPAG), $comparison);
+			$comparison = $criteria->getComparison(FcpagosPeer::ID);
+			$selectCriteria->add(FcpagosPeer::ID, $criteria->remove(FcpagosPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -326,7 +326,7 @@ abstract class BaseFcpagosPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcpagosPeer::NUMPAG, (array) $values, Criteria::IN);
+			$criteria->add(FcpagosPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -388,7 +388,7 @@ abstract class BaseFcpagosPeer {
 
 		$criteria = new Criteria(FcpagosPeer::DATABASE_NAME);
 
-		$criteria->add(FcpagosPeer::NUMPAG, $pk);
+		$criteria->add(FcpagosPeer::ID, $pk);
 
 
 		$v = FcpagosPeer::doSelect($criteria, $con);
@@ -408,7 +408,7 @@ abstract class BaseFcpagosPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcpagosPeer::NUMPAG, $pks, Criteria::IN);
+			$criteria->add(FcpagosPeer::ID, $pks, Criteria::IN);
 			$objs = FcpagosPeer::doSelect($criteria, $con);
 		}
 		return $objs;

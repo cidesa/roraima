@@ -32,11 +32,11 @@ class FcestingMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('ANO', 'Ano', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addColumn('ANO', 'Ano', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('PEREST', 'Perest', 'string', CreoleTypes::VARCHAR, false, 2);
+		$tMap->addColumn('PEREST', 'Perest', 'string', CreoleTypes::VARCHAR, true, 2);
 
 		$tMap->addColumn('MONTO', 'Monto', 'double', CreoleTypes::NUMERIC, false);
 

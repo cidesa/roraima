@@ -142,8 +142,8 @@ abstract class BaseFctipsolPeer {
 
 	}
 
-	const COUNT = 'COUNT(fctipsol.CODTIP)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fctipsol.CODTIP)';
+	const COUNT = 'COUNT(fctipsol.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fctipsol.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -266,8 +266,8 @@ abstract class BaseFctipsolPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FctipsolPeer::CODTIP);
-			$selectCriteria->add(FctipsolPeer::CODTIP, $criteria->remove(FctipsolPeer::CODTIP), $comparison);
+			$comparison = $criteria->getComparison(FctipsolPeer::ID);
+			$selectCriteria->add(FctipsolPeer::ID, $criteria->remove(FctipsolPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -306,7 +306,7 @@ abstract class BaseFctipsolPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FctipsolPeer::CODTIP, (array) $values, Criteria::IN);
+			$criteria->add(FctipsolPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -368,7 +368,7 @@ abstract class BaseFctipsolPeer {
 
 		$criteria = new Criteria(FctipsolPeer::DATABASE_NAME);
 
-		$criteria->add(FctipsolPeer::CODTIP, $pk);
+		$criteria->add(FctipsolPeer::ID, $pk);
 
 
 		$v = FctipsolPeer::doSelect($criteria, $con);
@@ -388,7 +388,7 @@ abstract class BaseFctipsolPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FctipsolPeer::CODTIP, $pks, Criteria::IN);
+			$criteria->add(FctipsolPeer::ID, $pks, Criteria::IN);
 			$objs = FctipsolPeer::doSelect($criteria, $con);
 		}
 		return $objs;

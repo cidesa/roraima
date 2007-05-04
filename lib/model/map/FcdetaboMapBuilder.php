@@ -32,13 +32,13 @@ class FcdetaboMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('NRODET', 'Nrodet', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('NRODET', 'Nrodet', 'string', CreoleTypes::VARCHAR, true, 30);
 
 		$tMap->addColumn('MONPAG', 'Monpag', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('TIPPAG', 'Tippag', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('TIPPAG', 'Tippag', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				

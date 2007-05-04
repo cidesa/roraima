@@ -336,8 +336,7 @@ abstract class BaseFcrutcob extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcrutcobPeer::DATABASE_NAME);
 
-		$criteria->add(FcrutcobPeer::CODCOB, $this->codcob);
-		$criteria->add(FcrutcobPeer::CODRUT, $this->codrut);
+		$criteria->add(FcrutcobPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -345,36 +344,27 @@ abstract class BaseFcrutcob extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getCodcob();
-
-		$pks[1] = $this->getCodrut();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setCodcob($keys[0]);
-
-		$this->setCodrut($keys[1]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setId($this->id);
+		$copyObj->setCodcob($this->codcob);
+
+		$copyObj->setCodrut($this->codrut);
 
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodcob(NULL); 
-		$copyObj->setCodrut(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

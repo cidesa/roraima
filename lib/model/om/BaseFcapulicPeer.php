@@ -167,8 +167,8 @@ abstract class BaseFcapulicPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcapulic.NROCON)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcapulic.NROCON)';
+	const COUNT = 'COUNT(fcapulic.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcapulic.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -291,8 +291,8 @@ abstract class BaseFcapulicPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcapulicPeer::NROCON);
-			$selectCriteria->add(FcapulicPeer::NROCON, $criteria->remove(FcapulicPeer::NROCON), $comparison);
+			$comparison = $criteria->getComparison(FcapulicPeer::ID);
+			$selectCriteria->add(FcapulicPeer::ID, $criteria->remove(FcapulicPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -331,7 +331,7 @@ abstract class BaseFcapulicPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcapulicPeer::NROCON, (array) $values, Criteria::IN);
+			$criteria->add(FcapulicPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -393,7 +393,7 @@ abstract class BaseFcapulicPeer {
 
 		$criteria = new Criteria(FcapulicPeer::DATABASE_NAME);
 
-		$criteria->add(FcapulicPeer::NROCON, $pk);
+		$criteria->add(FcapulicPeer::ID, $pk);
 
 
 		$v = FcapulicPeer::doSelect($criteria, $con);
@@ -413,7 +413,7 @@ abstract class BaseFcapulicPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcapulicPeer::NROCON, $pks, Criteria::IN);
+			$criteria->add(FcapulicPeer::ID, $pks, Criteria::IN);
 			$objs = FcapulicPeer::doSelect($criteria, $con);
 		}
 		return $objs;

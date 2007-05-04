@@ -32,11 +32,11 @@ class FcfuepreMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODFUE', 'Codfue', 'string', CreoleTypes::VARCHAR, true, 2);
+		$tMap->addColumn('CODFUE', 'Codfue', 'string', CreoleTypes::VARCHAR, true, 2);
 
-		$tMap->addColumn('NOMFUE', 'Nomfue', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('NOMFUE', 'Nomfue', 'string', CreoleTypes::VARCHAR, true, 100);
 
-		$tMap->addColumn('NOMABR', 'Nomabr', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('NOMABR', 'Nomabr', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addColumn('FRECOB', 'Frecob', 'double', CreoleTypes::NUMERIC, false);
 
@@ -68,17 +68,17 @@ class FcfuepreMapBuilder {
 
 		$tMap->addColumn('CODPREI', 'Codprei', 'string', CreoleTypes::VARCHAR, false, 16);
 
-		$tMap->addColumn('DEUFRA', 'Deufra', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('DEUFRA', 'Deufra', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('AUTLIQ', 'Autliq', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('AUTLIQ', 'Autliq', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('SIMPRE', 'Simpre', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('SIMPRE', 'Simpre', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('FECCIE', 'Feccie', 'int', CreoleTypes::DATE, false);
 
 		$tMap->addColumn('TIPMUL', 'Tipmul', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

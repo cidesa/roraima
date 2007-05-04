@@ -410,7 +410,7 @@ abstract class BaseFccobrad extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FccobradPeer::DATABASE_NAME);
 
-		$criteria->add(FccobradPeer::CODCOB, $this->codcob);
+		$criteria->add(FccobradPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -418,18 +418,20 @@ abstract class BaseFccobrad extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodcob();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodcob($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodcob($this->codcob);
 
 		$copyObj->setCedcob($this->cedcob);
 
@@ -438,8 +440,6 @@ abstract class BaseFccobrad extends BaseObject  implements Persistent {
 		$copyObj->setDircob($this->dircob);
 
 		$copyObj->setTelcob($this->telcob);
-
-		$copyObj->setId($this->id);
 
 
 		if ($deepCopy) {
@@ -453,7 +453,7 @@ abstract class BaseFccobrad extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodcob(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

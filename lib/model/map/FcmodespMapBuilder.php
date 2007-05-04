@@ -32,11 +32,11 @@ class FcmodespMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('REFMOD', 'Refmod', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('REFMOD', 'Refmod', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addForeignKey('NROCON', 'Nrocon', 'string', CreoleTypes::VARCHAR, 'fcesppub', 'NROCON', false, 8);
+		$tMap->addForeignKey('NROCON', 'Nrocon', 'string', CreoleTypes::VARCHAR, 'fcesppub', 'NROCON', true, 8);
 
-		$tMap->addColumn('FECMOD', 'Fecmod', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECMOD', 'Fecmod', 'int', CreoleTypes::DATE, true);
 
 		$tMap->addColumn('NOMESP', 'Nomesp', 'string', CreoleTypes::VARCHAR, false, 100);
 
@@ -84,7 +84,7 @@ class FcmodespMapBuilder {
 
 		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

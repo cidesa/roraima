@@ -107,8 +107,8 @@ abstract class BaseFctippagPeer {
 
 	}
 
-	const COUNT = 'COUNT(fctippag.TIPPAG)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fctippag.TIPPAG)';
+	const COUNT = 'COUNT(fctippag.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fctippag.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -231,8 +231,8 @@ abstract class BaseFctippagPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FctippagPeer::TIPPAG);
-			$selectCriteria->add(FctippagPeer::TIPPAG, $criteria->remove(FctippagPeer::TIPPAG), $comparison);
+			$comparison = $criteria->getComparison(FctippagPeer::ID);
+			$selectCriteria->add(FctippagPeer::ID, $criteria->remove(FctippagPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -271,7 +271,7 @@ abstract class BaseFctippagPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FctippagPeer::TIPPAG, (array) $values, Criteria::IN);
+			$criteria->add(FctippagPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -333,7 +333,7 @@ abstract class BaseFctippagPeer {
 
 		$criteria = new Criteria(FctippagPeer::DATABASE_NAME);
 
-		$criteria->add(FctippagPeer::TIPPAG, $pk);
+		$criteria->add(FctippagPeer::ID, $pk);
 
 
 		$v = FctippagPeer::doSelect($criteria, $con);
@@ -353,7 +353,7 @@ abstract class BaseFctippagPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FctippagPeer::TIPPAG, $pks, Criteria::IN);
+			$criteria->add(FctippagPeer::ID, $pks, Criteria::IN);
 			$objs = FctippagPeer::doSelect($criteria, $con);
 		}
 		return $objs;

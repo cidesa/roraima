@@ -1522,7 +1522,7 @@ abstract class BaseFcmodinm extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcmodinmPeer::DATABASE_NAME);
 
-		$criteria->add(FcmodinmPeer::REFMOD, $this->refmod);
+		$criteria->add(FcmodinmPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1530,18 +1530,20 @@ abstract class BaseFcmodinm extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getRefmod();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setRefmod($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setRefmod($this->refmod);
 
 		$copyObj->setNroinm($this->nroinm);
 
@@ -1615,12 +1617,10 @@ abstract class BaseFcmodinm extends BaseObject  implements Persistent {
 
 		$copyObj->setCodcatinm($this->codcatinm);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setRefmod(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

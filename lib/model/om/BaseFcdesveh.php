@@ -410,7 +410,7 @@ abstract class BaseFcdesveh extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdesvehPeer::DATABASE_NAME);
 
-		$criteria->add(FcdesvehPeer::NUMDES, $this->numdes);
+		$criteria->add(FcdesvehPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -418,18 +418,20 @@ abstract class BaseFcdesveh extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNumdes();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNumdes($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNumdes($this->numdes);
 
 		$copyObj->setPlaveh($this->plaveh);
 
@@ -439,12 +441,10 @@ abstract class BaseFcdesveh extends BaseObject  implements Persistent {
 
 		$copyObj->setFunrec($this->funrec);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNumdes(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

@@ -32,9 +32,9 @@ class FcdetretMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('NUMRET', 'Numret', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMRET', 'Numret', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('NUMREF', 'Numref', 'string', CreoleTypes::VARCHAR, false, 15);
+		$tMap->addColumn('NUMREF', 'Numref', 'string', CreoleTypes::VARCHAR, true, 15);
 
 		$tMap->addColumn('MONASI', 'Monasi', 'double', CreoleTypes::NUMERIC, false);
 

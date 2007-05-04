@@ -314,7 +314,7 @@ abstract class BaseFctippag extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FctippagPeer::DATABASE_NAME);
 
-		$criteria->add(FctippagPeer::TIPPAG, $this->tippag);
+		$criteria->add(FctippagPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -322,22 +322,22 @@ abstract class BaseFctippag extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getTippag();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setTippag($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setDespag($this->despag);
+		$copyObj->setTippag($this->tippag);
 
-		$copyObj->setId($this->id);
+		$copyObj->setDespag($this->despag);
 
 
 		if ($deepCopy) {
@@ -351,7 +351,7 @@ abstract class BaseFctippag extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setTippag(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

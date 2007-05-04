@@ -32,13 +32,13 @@ class FcdetreccobMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('NUMENT', 'Nument', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('NUMENT', 'Nument', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addPrimaryKey('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('CODCOB', 'Codcob', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('CODCOB', 'Codcob', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

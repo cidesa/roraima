@@ -32,17 +32,17 @@ class FcsuscanMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('NUMSUS', 'Numsus', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('NUMSUS', 'Numsus', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('NUMSOL', 'Numsol', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMSOL', 'Numsol', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('ESTLIC', 'Estlic', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('ESTLIC', 'Estlic', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('MOTSUS', 'Motsus', 'string', CreoleTypes::VARCHAR, false, 210);
+		$tMap->addColumn('MOTSUS', 'Motsus', 'string', CreoleTypes::VARCHAR, true, 210);
 
-		$tMap->addColumn('FECSUS', 'Fecsus', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECSUS', 'Fecsus', 'int', CreoleTypes::DATE, true);
 
 		$tMap->addColumn('RESOLU', 'Resolu', 'string', CreoleTypes::VARCHAR, false, 10);
 
@@ -52,9 +52,9 @@ class FcsuscanMapBuilder {
 
 		$tMap->addColumn('NUMERO', 'Numero', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('FUNSUS', 'Funsus', 'string', CreoleTypes::VARCHAR, false, 15);
+		$tMap->addColumn('FUNSUS', 'Funsus', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

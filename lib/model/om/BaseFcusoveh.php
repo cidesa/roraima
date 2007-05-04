@@ -420,7 +420,6 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcusovehPeer::DATABASE_NAME);
 
-		$criteria->add(FcusovehPeer::CODUSO, $this->coduso);
 		$criteria->add(FcusovehPeer::ANOVIG, $this->anovig);
 
 		return $criteria;
@@ -429,28 +428,20 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getCoduso();
-
-		$pks[1] = $this->getAnovig();
-
-		return $pks;
+		return $this->getAnovig();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setCoduso($keys[0]);
-
-		$this->setAnovig($keys[1]);
-
+		$this->setAnovig($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCoduso($this->coduso);
 
 		$copyObj->setDesuso($this->desuso);
 
@@ -465,7 +456,6 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCoduso(NULL); 
 		$copyObj->setAnovig(NULL); 
 	}
 

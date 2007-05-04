@@ -474,7 +474,7 @@ abstract class BaseFcdecatp extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdecatpPeer::DATABASE_NAME);
 
-		$criteria->add(FcdecatpPeer::NUMDEC, $this->numdec);
+		$criteria->add(FcdecatpPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -482,18 +482,20 @@ abstract class BaseFcdecatp extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNumdec();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNumdec($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNumdec($this->numdec);
 
 		$copyObj->setNumsol($this->numsol);
 
@@ -507,12 +509,10 @@ abstract class BaseFcdecatp extends BaseObject  implements Persistent {
 
 		$copyObj->setEdodec($this->edodec);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNumdec(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

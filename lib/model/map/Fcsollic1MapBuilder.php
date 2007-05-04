@@ -120,7 +120,7 @@ class Fcsollic1MapBuilder {
 
 		$tMap->addColumn('TIPO', 'Tipo', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ESTSER', 'Estser', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('ESTSER', 'Estser', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('TELNEG', 'Telneg', 'string', CreoleTypes::VARCHAR, false, 15);
 

@@ -506,7 +506,7 @@ abstract class BaseFctraveh extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FctravehPeer::DATABASE_NAME);
 
-		$criteria->add(FctravehPeer::NUMTRA, $this->numtra);
+		$criteria->add(FctravehPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -514,18 +514,20 @@ abstract class BaseFctraveh extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNumtra();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNumtra($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNumtra($this->numtra);
 
 		$copyObj->setPlaveh($this->plaveh);
 
@@ -541,12 +543,10 @@ abstract class BaseFctraveh extends BaseObject  implements Persistent {
 
 		$copyObj->setFunrec($this->funrec);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNumtra(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

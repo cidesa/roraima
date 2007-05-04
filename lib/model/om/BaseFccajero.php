@@ -388,7 +388,7 @@ abstract class BaseFccajero extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FccajeroPeer::DATABASE_NAME);
 
-		$criteria->add(FccajeroPeer::CODCAJ, $this->codcaj);
+		$criteria->add(FccajeroPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -396,18 +396,20 @@ abstract class BaseFccajero extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodcaj();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodcaj($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodcaj($this->codcaj);
 
 		$copyObj->setCedcaj($this->cedcaj);
 
@@ -417,12 +419,10 @@ abstract class BaseFccajero extends BaseObject  implements Persistent {
 
 		$copyObj->setTelcaj($this->telcaj);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodcaj(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

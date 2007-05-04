@@ -602,7 +602,7 @@ abstract class BaseFcsuscan extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcsuscanPeer::DATABASE_NAME);
 
-		$criteria->add(FcsuscanPeer::NUMSUS, $this->numsus);
+		$criteria->add(FcsuscanPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -610,18 +610,20 @@ abstract class BaseFcsuscan extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNumsus();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNumsus($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNumsus($this->numsus);
 
 		$copyObj->setNumsol($this->numsol);
 
@@ -643,12 +645,10 @@ abstract class BaseFcsuscan extends BaseObject  implements Persistent {
 
 		$copyObj->setFunsus($this->funsus);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNumsus(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

@@ -32,11 +32,11 @@ class FcdefpgiMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('MONDES', 'Mondes', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONDES', 'Mondes', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('MONHAS', 'Monhas', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONHAS', 'Monhas', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('MONPAG', 'Monpag', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONPAG', 'Monpag', 'double', CreoleTypes::NUMERIC, true);
 
 		$tMap->addColumn('NUMPOR', 'Numpor', 'string', CreoleTypes::VARCHAR, false, 3);
 

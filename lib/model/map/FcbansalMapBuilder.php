@@ -32,13 +32,13 @@ class FcbansalMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODDOC', 'Coddoc', 'string', CreoleTypes::VARCHAR, true, 5);
+		$tMap->addColumn('CODDOC', 'Coddoc', 'string', CreoleTypes::VARCHAR, true, 5);
 
-		$tMap->addForeignKey('CODFUN', 'Codfun', 'string', CreoleTypes::VARCHAR, 'fcdeffun', 'CODFUN', false, 3);
+		$tMap->addForeignKey('CODFUN', 'Codfun', 'string', CreoleTypes::VARCHAR, 'fcdeffun', 'CODFUN', true, 3);
 
-		$tMap->addForeignKey('CODENTEXT', 'Codentext', 'string', CreoleTypes::VARCHAR, 'fcdefentext', 'CODENTEXT', false, 3);
+		$tMap->addForeignKey('CODENTEXT', 'Codentext', 'string', CreoleTypes::VARCHAR, 'fcdefentext', 'CODENTEXT', true, 3);
 
-		$tMap->addForeignKey('CODTIPDOC', 'Codtipdoc', 'string', CreoleTypes::VARCHAR, 'fcdeftipdoc', 'CODTIPDOC', false, 3);
+		$tMap->addForeignKey('CODTIPDOC', 'Codtipdoc', 'string', CreoleTypes::VARCHAR, 'fcdeftipdoc', 'CODTIPDOC', true, 3);
 
 		$tMap->addColumn('FECDOC', 'Fecdoc', 'int', CreoleTypes::DATE, false);
 
@@ -58,7 +58,7 @@ class FcbansalMapBuilder {
 
 		$tMap->addColumn('HORUBIMAG', 'Horubimag', 'int', CreoleTypes::DATE, false);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

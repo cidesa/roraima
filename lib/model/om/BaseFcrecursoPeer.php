@@ -112,8 +112,8 @@ abstract class BaseFcrecursoPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcrecurso.CODING)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcrecurso.CODING)';
+	const COUNT = 'COUNT(fcrecurso.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcrecurso.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -236,8 +236,8 @@ abstract class BaseFcrecursoPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcrecursoPeer::CODING);
-			$selectCriteria->add(FcrecursoPeer::CODING, $criteria->remove(FcrecursoPeer::CODING), $comparison);
+			$comparison = $criteria->getComparison(FcrecursoPeer::ID);
+			$selectCriteria->add(FcrecursoPeer::ID, $criteria->remove(FcrecursoPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -276,7 +276,7 @@ abstract class BaseFcrecursoPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcrecursoPeer::CODING, (array) $values, Criteria::IN);
+			$criteria->add(FcrecursoPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -338,7 +338,7 @@ abstract class BaseFcrecursoPeer {
 
 		$criteria = new Criteria(FcrecursoPeer::DATABASE_NAME);
 
-		$criteria->add(FcrecursoPeer::CODING, $pk);
+		$criteria->add(FcrecursoPeer::ID, $pk);
 
 
 		$v = FcrecursoPeer::doSelect($criteria, $con);
@@ -358,7 +358,7 @@ abstract class BaseFcrecursoPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcrecursoPeer::CODING, $pks, Criteria::IN);
+			$criteria->add(FcrecursoPeer::ID, $pks, Criteria::IN);
 			$objs = FcrecursoPeer::doSelect($criteria, $con);
 		}
 		return $objs;

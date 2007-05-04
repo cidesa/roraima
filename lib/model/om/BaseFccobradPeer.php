@@ -122,8 +122,8 @@ abstract class BaseFccobradPeer {
 
 	}
 
-	const COUNT = 'COUNT(fccobrad.CODCOB)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fccobrad.CODCOB)';
+	const COUNT = 'COUNT(fccobrad.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fccobrad.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -246,8 +246,8 @@ abstract class BaseFccobradPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FccobradPeer::CODCOB);
-			$selectCriteria->add(FccobradPeer::CODCOB, $criteria->remove(FccobradPeer::CODCOB), $comparison);
+			$comparison = $criteria->getComparison(FccobradPeer::ID);
+			$selectCriteria->add(FccobradPeer::ID, $criteria->remove(FccobradPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -286,7 +286,7 @@ abstract class BaseFccobradPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FccobradPeer::CODCOB, (array) $values, Criteria::IN);
+			$criteria->add(FccobradPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -348,7 +348,7 @@ abstract class BaseFccobradPeer {
 
 		$criteria = new Criteria(FccobradPeer::DATABASE_NAME);
 
-		$criteria->add(FccobradPeer::CODCOB, $pk);
+		$criteria->add(FccobradPeer::ID, $pk);
 
 
 		$v = FccobradPeer::doSelect($criteria, $con);
@@ -368,7 +368,7 @@ abstract class BaseFccobradPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FccobradPeer::CODCOB, $pks, Criteria::IN);
+			$criteria->add(FccobradPeer::ID, $pks, Criteria::IN);
 			$objs = FccobradPeer::doSelect($criteria, $con);
 		}
 		return $objs;

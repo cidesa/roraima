@@ -402,9 +402,7 @@ abstract class BaseFcmunici extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcmuniciPeer::DATABASE_NAME);
 
-		$criteria->add(FcmuniciPeer::CODMUN, $this->codmun);
-		$criteria->add(FcmuniciPeer::CODEDO, $this->codedo);
-		$criteria->add(FcmuniciPeer::CODPAI, $this->codpai);
+		$criteria->add(FcmuniciPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -412,36 +410,26 @@ abstract class BaseFcmunici extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getCodmun();
-
-		$pks[1] = $this->getCodedo();
-
-		$pks[2] = $this->getCodpai();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setCodmun($keys[0]);
-
-		$this->setCodedo($keys[1]);
-
-		$this->setCodpai($keys[2]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setNommun($this->nommun);
+		$copyObj->setCodmun($this->codmun);
 
-		$copyObj->setId($this->id);
+		$copyObj->setCodedo($this->codedo);
+
+		$copyObj->setCodpai($this->codpai);
+
+		$copyObj->setNommun($this->nommun);
 
 
 		if ($deepCopy) {
@@ -455,9 +443,7 @@ abstract class BaseFcmunici extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodmun(NULL); 
-		$copyObj->setCodedo(NULL); 
-		$copyObj->setCodpai(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

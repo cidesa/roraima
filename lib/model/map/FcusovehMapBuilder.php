@@ -32,19 +32,19 @@ class FcusovehMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, true, 16);
+		$tMap->addColumn('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, true, 16);
 
 		$tMap->addPrimaryKey('ANOVIG', 'Anovig', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('DESUSO', 'Desuso', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESUSO', 'Desuso', 'string', CreoleTypes::VARCHAR, true, 250);
 
-		$tMap->addColumn('MONAFO', 'Monafo', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONAFO', 'Monafo', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('PORALI', 'Porali', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORALI', 'Porali', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('ANOLIM', 'Anolim', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addColumn('ANOLIM', 'Anolim', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, true);
 				
     } 
 } 

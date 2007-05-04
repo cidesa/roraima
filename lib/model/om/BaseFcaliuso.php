@@ -388,8 +388,7 @@ abstract class BaseFcaliuso extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcaliusoPeer::DATABASE_NAME);
 
-		$criteria->add(FcaliusoPeer::CODUSO, $this->coduso);
-		$criteria->add(FcaliusoPeer::ANOVIG, $this->anovig);
+		$criteria->add(FcaliusoPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -397,28 +396,22 @@ abstract class BaseFcaliuso extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getCoduso();
-
-		$pks[1] = $this->getAnovig();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setCoduso($keys[0]);
-
-		$this->setAnovig($keys[1]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCoduso($this->coduso);
+
+		$copyObj->setAnovig($this->anovig);
 
 		$copyObj->setNomuso($this->nomuso);
 
@@ -426,13 +419,10 @@ abstract class BaseFcaliuso extends BaseObject  implements Persistent {
 
 		$copyObj->setPormon($this->pormon);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCoduso(NULL); 
-		$copyObj->setAnovig(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

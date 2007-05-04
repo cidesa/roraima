@@ -32,11 +32,11 @@ class FcpagosMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('FECPAG', 'Fecpag', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECPAG', 'Fecpag', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('DESPAG', 'Despag', 'string', CreoleTypes::VARCHAR, false, 200);
 
@@ -44,7 +44,7 @@ class FcpagosMapBuilder {
 
 		$tMap->addColumn('MONEFE', 'Monefe', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('FUNPAG', 'Funpag', 'string', CreoleTypes::VARCHAR, false, 40);
+		$tMap->addColumn('FUNPAG', 'Funpag', 'string', CreoleTypes::VARCHAR, true, 40);
 
 		$tMap->addColumn('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, false, 10);
 
@@ -58,7 +58,7 @@ class FcpagosMapBuilder {
 
 		$tMap->addColumn('CEDANU', 'Cedanu', 'string', CreoleTypes::VARCHAR, false, 14);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

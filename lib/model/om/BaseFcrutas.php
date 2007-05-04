@@ -314,7 +314,7 @@ abstract class BaseFcrutas extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcrutasPeer::DATABASE_NAME);
 
-		$criteria->add(FcrutasPeer::CODRUT, $this->codrut);
+		$criteria->add(FcrutasPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -322,22 +322,22 @@ abstract class BaseFcrutas extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodrut();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodrut($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setDesrut($this->desrut);
+		$copyObj->setCodrut($this->codrut);
 
-		$copyObj->setId($this->id);
+		$copyObj->setDesrut($this->desrut);
 
 
 		if ($deepCopy) {
@@ -351,7 +351,7 @@ abstract class BaseFcrutas extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodrut(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

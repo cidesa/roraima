@@ -32,11 +32,11 @@ class FctippagMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('TIPPAG', 'Tippag', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('TIPPAG', 'Tippag', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('DESPAG', 'Despag', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('DESPAG', 'Despag', 'string', CreoleTypes::VARCHAR, true, 30);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

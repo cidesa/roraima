@@ -32,15 +32,15 @@ class FcdetpagMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addForeignPrimaryKey('NUMPAG', 'Numpag', 'string' , CreoleTypes::VARCHAR, 'fcpagos', 'NUMPAG', true, 10);
+		$tMap->addForeignKey('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, 'fcpagos', 'NUMPAG', true, 10);
 
-		$tMap->addPrimaryKey('NRODET', 'Nrodet', 'string', CreoleTypes::VARCHAR, true, 30);
+		$tMap->addColumn('NRODET', 'Nrodet', 'string', CreoleTypes::VARCHAR, true, 30);
 
 		$tMap->addColumn('MONPAG', 'Monpag', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addForeignKey('TIPPAG', 'Tippag', 'string', CreoleTypes::VARCHAR, 'fctippag', 'TIPPAG', false, 3);
+		$tMap->addForeignKey('TIPPAG', 'Tippag', 'string', CreoleTypes::VARCHAR, 'fctippag', 'TIPPAG', true, 3);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

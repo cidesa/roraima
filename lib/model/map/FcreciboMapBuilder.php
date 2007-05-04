@@ -32,17 +32,17 @@ class FcreciboMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('FECREC', 'Fecrec', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREC', 'Fecrec', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('DESREC', 'Desrec', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESREC', 'Desrec', 'string', CreoleTypes::VARCHAR, true, 250);
 
-		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 15);
+		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('MONREC', 'Monrec', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONREC', 'Monrec', 'double', CreoleTypes::NUMERIC, true);
 
 		$tMap->addColumn('NOMCON', 'Nomcon', 'string', CreoleTypes::VARCHAR, false, 50);
 

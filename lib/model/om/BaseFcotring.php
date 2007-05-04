@@ -720,7 +720,7 @@ abstract class BaseFcotring extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcotringPeer::DATABASE_NAME);
 
-		$criteria->add(FcotringPeer::NROCON, $this->nrocon);
+		$criteria->add(FcotringPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -728,18 +728,20 @@ abstract class BaseFcotring extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNrocon();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNrocon($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNrocon($this->nrocon);
 
 		$copyObj->setCodfue($this->codfue);
 
@@ -767,12 +769,10 @@ abstract class BaseFcotring extends BaseObject  implements Persistent {
 
 		$copyObj->setMonsal($this->monsal);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNrocon(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

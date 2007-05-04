@@ -152,8 +152,8 @@ abstract class BaseFcsuscanPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcsuscan.NUMSUS)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcsuscan.NUMSUS)';
+	const COUNT = 'COUNT(fcsuscan.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcsuscan.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -276,8 +276,8 @@ abstract class BaseFcsuscanPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcsuscanPeer::NUMSUS);
-			$selectCriteria->add(FcsuscanPeer::NUMSUS, $criteria->remove(FcsuscanPeer::NUMSUS), $comparison);
+			$comparison = $criteria->getComparison(FcsuscanPeer::ID);
+			$selectCriteria->add(FcsuscanPeer::ID, $criteria->remove(FcsuscanPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -316,7 +316,7 @@ abstract class BaseFcsuscanPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcsuscanPeer::NUMSUS, (array) $values, Criteria::IN);
+			$criteria->add(FcsuscanPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -378,7 +378,7 @@ abstract class BaseFcsuscanPeer {
 
 		$criteria = new Criteria(FcsuscanPeer::DATABASE_NAME);
 
-		$criteria->add(FcsuscanPeer::NUMSUS, $pk);
+		$criteria->add(FcsuscanPeer::ID, $pk);
 
 
 		$v = FcsuscanPeer::doSelect($criteria, $con);
@@ -398,7 +398,7 @@ abstract class BaseFcsuscanPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcsuscanPeer::NUMSUS, $pks, Criteria::IN);
+			$criteria->add(FcsuscanPeer::ID, $pks, Criteria::IN);
 			$objs = FcsuscanPeer::doSelect($criteria, $con);
 		}
 		return $objs;

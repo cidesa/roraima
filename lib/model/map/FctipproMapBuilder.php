@@ -32,13 +32,13 @@ class FctipproMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('TIPPRO', 'Tippro', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addColumn('TIPPRO', 'Tippro', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('ANOVIG', 'Anovig', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addColumn('ANOVIG', 'Anovig', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('DESTIP', 'Destip', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESTIP', 'Destip', 'string', CreoleTypes::VARCHAR, true, 250);
 
-		$tMap->addColumn('PORMON', 'Pormon', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('PORMON', 'Pormon', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('ALIMON', 'Alimon', 'double', CreoleTypes::NUMERIC, false);
 

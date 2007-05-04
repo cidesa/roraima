@@ -32,11 +32,11 @@ class FcrutasMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODRUT', 'Codrut', 'string', CreoleTypes::VARCHAR, true, 6);
+		$tMap->addColumn('CODRUT', 'Codrut', 'string', CreoleTypes::VARCHAR, true, 6);
 
-		$tMap->addColumn('DESRUT', 'Desrut', 'string', CreoleTypes::VARCHAR, false, 120);
+		$tMap->addColumn('DESRUT', 'Desrut', 'string', CreoleTypes::VARCHAR, true, 120);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

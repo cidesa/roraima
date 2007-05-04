@@ -32,13 +32,13 @@ class FcdeffunMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODFUN', 'Codfun', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODFUN', 'Codfun', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('NOMFUN', 'Nomfun', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('NOMFUN', 'Nomfun', 'string', CreoleTypes::VARCHAR, true, 50);
 
-		$tMap->addForeignKey('CODUNIADM', 'Coduniadm', 'string', CreoleTypes::VARCHAR, 'fcdefuniadm', 'CODUNIADM', false, 3);
+		$tMap->addForeignKey('CODUNIADM', 'Coduniadm', 'string', CreoleTypes::VARCHAR, 'fcdefuniadm', 'CODUNIADM', true, 3);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

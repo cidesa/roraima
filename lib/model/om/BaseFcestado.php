@@ -370,8 +370,7 @@ abstract class BaseFcestado extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcestadoPeer::DATABASE_NAME);
 
-		$criteria->add(FcestadoPeer::CODEDO, $this->codedo);
-		$criteria->add(FcestadoPeer::CODPAI, $this->codpai);
+		$criteria->add(FcestadoPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -379,32 +378,24 @@ abstract class BaseFcestado extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getCodedo();
-
-		$pks[1] = $this->getCodpai();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setCodedo($keys[0]);
-
-		$this->setCodpai($keys[1]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setNomedo($this->nomedo);
+		$copyObj->setCodedo($this->codedo);
 
-		$copyObj->setId($this->id);
+		$copyObj->setCodpai($this->codpai);
+
+		$copyObj->setNomedo($this->nomedo);
 
 
 		if ($deepCopy) {
@@ -418,8 +409,7 @@ abstract class BaseFcestado extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodedo(NULL); 
-		$copyObj->setCodpai(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

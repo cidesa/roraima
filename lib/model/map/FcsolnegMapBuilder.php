@@ -32,13 +32,13 @@ class FcsolnegMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('NUMNEG', 'Numneg', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('NUMNEG', 'Numneg', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('NUMSOL', 'Numsol', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMSOL', 'Numsol', 'string', CreoleTypes::VARCHAR, true, 10);
 
 		$tMap->addColumn('MOTNEG', 'Motneg', 'string', CreoleTypes::VARCHAR, false, 210);
 
-		$tMap->addColumn('FECNEG', 'Fecneg', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECNEG', 'Fecneg', 'int', CreoleTypes::DATE, true);
 
 		$tMap->addColumn('RESOLU', 'Resolu', 'string', CreoleTypes::VARCHAR, false, 10);
 
@@ -50,7 +50,7 @@ class FcsolnegMapBuilder {
 
 		$tMap->addColumn('FUNNEG', 'Funneg', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

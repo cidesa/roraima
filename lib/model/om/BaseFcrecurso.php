@@ -324,7 +324,7 @@ abstract class BaseFcrecurso extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcrecursoPeer::DATABASE_NAME);
 
-		$criteria->add(FcrecursoPeer::CODING, $this->coding);
+		$criteria->add(FcrecursoPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -332,29 +332,29 @@ abstract class BaseFcrecurso extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCoding();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCoding($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setCoding($this->coding);
+
 		$copyObj->setDesing($this->desing);
 
 		$copyObj->setMoning($this->moning);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCoding(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

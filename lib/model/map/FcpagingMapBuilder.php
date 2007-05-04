@@ -32,7 +32,7 @@ class FcpagingMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('REFERE', 'Refere', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('REFERE', 'Refere', 'string', CreoleTypes::VARCHAR, true, 10);
 
 		$tMap->addColumn('TIPPAG', 'Tippag', 'string', CreoleTypes::VARCHAR, false, 2);
 
@@ -42,7 +42,7 @@ class FcpagingMapBuilder {
 
 		$tMap->addColumn('NOMREF', 'Nomref', 'string', CreoleTypes::VARCHAR, false, 40);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

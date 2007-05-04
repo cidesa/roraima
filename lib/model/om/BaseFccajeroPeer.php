@@ -122,8 +122,8 @@ abstract class BaseFccajeroPeer {
 
 	}
 
-	const COUNT = 'COUNT(fccajero.CODCAJ)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fccajero.CODCAJ)';
+	const COUNT = 'COUNT(fccajero.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fccajero.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -246,8 +246,8 @@ abstract class BaseFccajeroPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FccajeroPeer::CODCAJ);
-			$selectCriteria->add(FccajeroPeer::CODCAJ, $criteria->remove(FccajeroPeer::CODCAJ), $comparison);
+			$comparison = $criteria->getComparison(FccajeroPeer::ID);
+			$selectCriteria->add(FccajeroPeer::ID, $criteria->remove(FccajeroPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -286,7 +286,7 @@ abstract class BaseFccajeroPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FccajeroPeer::CODCAJ, (array) $values, Criteria::IN);
+			$criteria->add(FccajeroPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -348,7 +348,7 @@ abstract class BaseFccajeroPeer {
 
 		$criteria = new Criteria(FccajeroPeer::DATABASE_NAME);
 
-		$criteria->add(FccajeroPeer::CODCAJ, $pk);
+		$criteria->add(FccajeroPeer::ID, $pk);
 
 
 		$v = FccajeroPeer::doSelect($criteria, $con);
@@ -368,7 +368,7 @@ abstract class BaseFccajeroPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FccajeroPeer::CODCAJ, $pks, Criteria::IN);
+			$criteria->add(FccajeroPeer::ID, $pks, Criteria::IN);
 			$objs = FccajeroPeer::doSelect($criteria, $con);
 		}
 		return $objs;

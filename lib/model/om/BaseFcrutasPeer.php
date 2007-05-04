@@ -107,8 +107,8 @@ abstract class BaseFcrutasPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcrutas.CODRUT)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcrutas.CODRUT)';
+	const COUNT = 'COUNT(fcrutas.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcrutas.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -231,8 +231,8 @@ abstract class BaseFcrutasPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcrutasPeer::CODRUT);
-			$selectCriteria->add(FcrutasPeer::CODRUT, $criteria->remove(FcrutasPeer::CODRUT), $comparison);
+			$comparison = $criteria->getComparison(FcrutasPeer::ID);
+			$selectCriteria->add(FcrutasPeer::ID, $criteria->remove(FcrutasPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -271,7 +271,7 @@ abstract class BaseFcrutasPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcrutasPeer::CODRUT, (array) $values, Criteria::IN);
+			$criteria->add(FcrutasPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -333,7 +333,7 @@ abstract class BaseFcrutasPeer {
 
 		$criteria = new Criteria(FcrutasPeer::DATABASE_NAME);
 
-		$criteria->add(FcrutasPeer::CODRUT, $pk);
+		$criteria->add(FcrutasPeer::ID, $pk);
 
 
 		$v = FcrutasPeer::doSelect($criteria, $con);
@@ -353,7 +353,7 @@ abstract class BaseFcrutasPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcrutasPeer::CODRUT, $pks, Criteria::IN);
+			$criteria->add(FcrutasPeer::ID, $pks, Criteria::IN);
 			$objs = FcrutasPeer::doSelect($criteria, $con);
 		}
 		return $objs;

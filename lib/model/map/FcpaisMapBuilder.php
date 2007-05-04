@@ -32,11 +32,11 @@ class FcpaisMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('NOMPAI', 'Nompai', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('NOMPAI', 'Nompai', 'string', CreoleTypes::VARCHAR, true, 30);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

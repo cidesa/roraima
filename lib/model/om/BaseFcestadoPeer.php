@@ -112,8 +112,8 @@ abstract class BaseFcestadoPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcestado.CODEDO)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcestado.CODEDO)';
+	const COUNT = 'COUNT(fcestado.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcestado.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -397,11 +397,8 @@ abstract class BaseFcestadoPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcestadoPeer::CODEDO);
-			$selectCriteria->add(FcestadoPeer::CODEDO, $criteria->remove(FcestadoPeer::CODEDO), $comparison);
-
-			$comparison = $criteria->getComparison(FcestadoPeer::CODPAI);
-			$selectCriteria->add(FcestadoPeer::CODPAI, $criteria->remove(FcestadoPeer::CODPAI), $comparison);
+			$comparison = $criteria->getComparison(FcestadoPeer::ID);
+			$selectCriteria->add(FcestadoPeer::ID, $criteria->remove(FcestadoPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -440,20 +437,7 @@ abstract class BaseFcestadoPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-			}
-
-			$criteria->add(FcestadoPeer::CODEDO, $vals[0], Criteria::IN);
-			$criteria->add(FcestadoPeer::CODPAI, $vals[1], Criteria::IN);
+			$criteria->add(FcestadoPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -507,17 +491,40 @@ abstract class BaseFcestadoPeer {
 	}
 
 	
-	public static function retrieveByPK( $codedo, $codpai, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FcestadoPeer::CODEDO, $codedo);
-		$criteria->add(FcestadoPeer::CODPAI, $codpai);
+
+		$criteria = new Criteria(FcestadoPeer::DATABASE_NAME);
+
+		$criteria->add(FcestadoPeer::ID, $pk);
+
+
 		$v = FcestadoPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FcestadoPeer::ID, $pks, Criteria::IN);
+			$objs = FcestadoPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {

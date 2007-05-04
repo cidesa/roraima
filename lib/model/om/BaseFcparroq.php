@@ -412,10 +412,7 @@ abstract class BaseFcparroq extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcparroqPeer::DATABASE_NAME);
 
-		$criteria->add(FcparroqPeer::CODPAR, $this->codpar);
-		$criteria->add(FcparroqPeer::CODMUN, $this->codmun);
-		$criteria->add(FcparroqPeer::CODEDO, $this->codedo);
-		$criteria->add(FcparroqPeer::CODPAI, $this->codpai);
+		$criteria->add(FcparroqPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -423,48 +420,33 @@ abstract class BaseFcparroq extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getCodpar();
-
-		$pks[1] = $this->getCodmun();
-
-		$pks[2] = $this->getCodedo();
-
-		$pks[3] = $this->getCodpai();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setCodpar($keys[0]);
-
-		$this->setCodmun($keys[1]);
-
-		$this->setCodedo($keys[2]);
-
-		$this->setCodpai($keys[3]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setNompar($this->nompar);
+		$copyObj->setCodpar($this->codpar);
 
-		$copyObj->setId($this->id);
+		$copyObj->setCodmun($this->codmun);
+
+		$copyObj->setCodedo($this->codedo);
+
+		$copyObj->setCodpai($this->codpai);
+
+		$copyObj->setNompar($this->nompar);
 
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodpar(NULL); 
-		$copyObj->setCodmun(NULL); 
-		$copyObj->setCodedo(NULL); 
-		$copyObj->setCodpai(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

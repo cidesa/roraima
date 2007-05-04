@@ -420,7 +420,7 @@ abstract class BaseFccatfis extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FccatfisPeer::DATABASE_NAME);
 
-		$criteria->add(FccatfisPeer::CODCATFIS, $this->codcatfis);
+		$criteria->add(FccatfisPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -428,18 +428,20 @@ abstract class BaseFccatfis extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodcatfis();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodcatfis($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodcatfis($this->codcatfis);
 
 		$copyObj->setNomcatfis($this->nomcatfis);
 
@@ -451,12 +453,10 @@ abstract class BaseFccatfis extends BaseObject  implements Persistent {
 
 		$copyObj->setLinoes($this->linoes);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodcatfis(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

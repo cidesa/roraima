@@ -324,8 +324,7 @@ abstract class BaseFcdetreccob extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdetreccobPeer::DATABASE_NAME);
 
-		$criteria->add(FcdetreccobPeer::NUMENT, $this->nument);
-		$criteria->add(FcdetreccobPeer::CODREC, $this->codrec);
+		$criteria->add(FcdetreccobPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -333,38 +332,29 @@ abstract class BaseFcdetreccob extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getNument();
-
-		$pks[1] = $this->getCodrec();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setNument($keys[0]);
-
-		$this->setCodrec($keys[1]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodcob($this->codcob);
+		$copyObj->setNument($this->nument);
 
-		$copyObj->setId($this->id);
+		$copyObj->setCodrec($this->codrec);
+
+		$copyObj->setCodcob($this->codcob);
 
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNument(NULL); 
-		$copyObj->setCodrec(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

@@ -34,9 +34,9 @@ class FcactcomMapBuilder {
 
 		$tMap->addColumn('CODACT', 'Codact', 'string', CreoleTypes::VARCHAR, false, 16);
 
-		$tMap->addColumn('DESACT', 'Desact', 'string', CreoleTypes::VARCHAR, false, 255);
+		$tMap->addColumn('DESACT', 'Desact', 'string', CreoleTypes::VARCHAR, true, 255);
 
-		$tMap->addColumn('MINTRI', 'Mintri', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MINTRI', 'Mintri', 'double', CreoleTypes::NUMERIC, true);
 
 		$tMap->addColumn('EXONER', 'Exoner', 'string', CreoleTypes::VARCHAR, false, 1);
 

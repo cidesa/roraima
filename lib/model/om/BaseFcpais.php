@@ -314,7 +314,7 @@ abstract class BaseFcpais extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcpaisPeer::DATABASE_NAME);
 
-		$criteria->add(FcpaisPeer::CODPAI, $this->codpai);
+		$criteria->add(FcpaisPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -322,22 +322,22 @@ abstract class BaseFcpais extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodpai();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodpai($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setNompai($this->nompai);
+		$copyObj->setCodpai($this->codpai);
 
-		$copyObj->setId($this->id);
+		$copyObj->setNompai($this->nompai);
 
 
 		if ($deepCopy) {
@@ -351,7 +351,7 @@ abstract class BaseFcpais extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodpai(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

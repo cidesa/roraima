@@ -32,21 +32,21 @@ class FcaliinmMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODCATFIS', 'Codcatfis', 'string', CreoleTypes::VARCHAR, true, 30);
+		$tMap->addColumn('CODCATFIS', 'Codcatfis', 'string', CreoleTypes::VARCHAR, true, 30);
 
-		$tMap->addPrimaryKey('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addPrimaryKey('ANOVIG', 'Anovig', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('ANOVIG', 'Anovig', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('VALORM', 'Valorm', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALORM', 'Valorm', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('PORVF', 'Porvf', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORVF', 'Porvf', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('ALITER', 'Aliter', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ALITER', 'Aliter', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('ALICON', 'Alicon', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ALICON', 'Alicon', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

@@ -634,7 +634,7 @@ abstract class BaseFcmodapu extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcmodapuPeer::DATABASE_NAME);
 
-		$criteria->add(FcmodapuPeer::REFMOD, $this->refmod);
+		$criteria->add(FcmodapuPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -642,18 +642,20 @@ abstract class BaseFcmodapu extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getRefmod();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setRefmod($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setRefmod($this->refmod);
 
 		$copyObj->setNrocon($this->nrocon);
 
@@ -677,12 +679,10 @@ abstract class BaseFcmodapu extends BaseObject  implements Persistent {
 
 		$copyObj->setFunrec($this->funrec);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setRefmod(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

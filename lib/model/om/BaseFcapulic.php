@@ -720,7 +720,7 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcapulicPeer::DATABASE_NAME);
 
-		$criteria->add(FcapulicPeer::NROCON, $this->nrocon);
+		$criteria->add(FcapulicPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -728,18 +728,20 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNrocon();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNrocon($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNrocon($this->nrocon);
 
 		$copyObj->setFecreg($this->fecreg);
 
@@ -767,12 +769,10 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 
 		$copyObj->setDircon($this->dircon);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNrocon(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

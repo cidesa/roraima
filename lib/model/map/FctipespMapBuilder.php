@@ -32,11 +32,11 @@ class FctipespMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('TIPESP', 'Tipesp', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('TIPESP', 'Tipesp', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addPrimaryKey('ANOVIG', 'Anovig', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('ANOVIG', 'Anovig', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('DESTIP', 'Destip', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('DESTIP', 'Destip', 'string', CreoleTypes::VARCHAR, true, 250);
 
 		$tMap->addColumn('PORMON', 'Pormon', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -46,7 +46,7 @@ class FctipespMapBuilder {
 
 		$tMap->addColumn('MINTRI', 'Mintri', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

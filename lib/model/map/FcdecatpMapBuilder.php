@@ -32,21 +32,21 @@ class FcdecatpMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('NUMDEC', 'Numdec', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('NUMDEC', 'Numdec', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('NUMSOL', 'Numsol', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMSOL', 'Numsol', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('FECDEC', 'Fecdec', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDEC', 'Fecdec', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('MONDEC', 'Mondec', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONDEC', 'Mondec', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('FUNDEC', 'Fundec', 'string', CreoleTypes::VARCHAR, false, 40);
+		$tMap->addColumn('FUNDEC', 'Fundec', 'string', CreoleTypes::VARCHAR, true, 40);
 
-		$tMap->addColumn('EDODEC', 'Edodec', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('EDODEC', 'Edodec', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

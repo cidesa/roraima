@@ -117,8 +117,8 @@ abstract class BaseFcmuniciPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcmunici.CODMUN)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcmunici.CODMUN)';
+	const COUNT = 'COUNT(fcmunici.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcmunici.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -402,14 +402,8 @@ abstract class BaseFcmuniciPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcmuniciPeer::CODMUN);
-			$selectCriteria->add(FcmuniciPeer::CODMUN, $criteria->remove(FcmuniciPeer::CODMUN), $comparison);
-
-			$comparison = $criteria->getComparison(FcmuniciPeer::CODEDO);
-			$selectCriteria->add(FcmuniciPeer::CODEDO, $criteria->remove(FcmuniciPeer::CODEDO), $comparison);
-
-			$comparison = $criteria->getComparison(FcmuniciPeer::CODPAI);
-			$selectCriteria->add(FcmuniciPeer::CODPAI, $criteria->remove(FcmuniciPeer::CODPAI), $comparison);
+			$comparison = $criteria->getComparison(FcmuniciPeer::ID);
+			$selectCriteria->add(FcmuniciPeer::ID, $criteria->remove(FcmuniciPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -448,22 +442,7 @@ abstract class BaseFcmuniciPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-				$vals[2][] = $value[2];
-			}
-
-			$criteria->add(FcmuniciPeer::CODMUN, $vals[0], Criteria::IN);
-			$criteria->add(FcmuniciPeer::CODEDO, $vals[1], Criteria::IN);
-			$criteria->add(FcmuniciPeer::CODPAI, $vals[2], Criteria::IN);
+			$criteria->add(FcmuniciPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -517,18 +496,40 @@ abstract class BaseFcmuniciPeer {
 	}
 
 	
-	public static function retrieveByPK( $codmun, $codedo, $codpai, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FcmuniciPeer::CODMUN, $codmun);
-		$criteria->add(FcmuniciPeer::CODEDO, $codedo);
-		$criteria->add(FcmuniciPeer::CODPAI, $codpai);
+
+		$criteria = new Criteria(FcmuniciPeer::DATABASE_NAME);
+
+		$criteria->add(FcmuniciPeer::ID, $pk);
+
+
 		$v = FcmuniciPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FcmuniciPeer::ID, $pks, Criteria::IN);
+			$objs = FcmuniciPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {

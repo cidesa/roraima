@@ -1052,7 +1052,7 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcfueprePeer::DATABASE_NAME);
 
-		$criteria->add(FcfueprePeer::CODFUE, $this->codfue);
+		$criteria->add(FcfueprePeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1060,18 +1060,20 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodfue();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodfue($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodfue($this->codfue);
 
 		$copyObj->setNomfue($this->nomfue);
 
@@ -1117,12 +1119,10 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 
 		$copyObj->setTipmul($this->tipmul);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodfue(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

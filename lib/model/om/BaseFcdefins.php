@@ -1156,7 +1156,7 @@ abstract class BaseFcdefins extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdefinsPeer::DATABASE_NAME);
 
-		$criteria->add(FcdefinsPeer::CODEMP, $this->codemp);
+		$criteria->add(FcdefinsPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1164,18 +1164,20 @@ abstract class BaseFcdefins extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodemp();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodemp($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodemp($this->codemp);
 
 		$copyObj->setLoncodact($this->loncodact);
 
@@ -1233,12 +1235,10 @@ abstract class BaseFcdefins extends BaseObject  implements Persistent {
 
 		$copyObj->setCodajupic($this->codajupic);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodemp(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

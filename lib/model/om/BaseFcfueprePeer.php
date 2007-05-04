@@ -212,8 +212,8 @@ abstract class BaseFcfueprePeer {
 
 	}
 
-	const COUNT = 'COUNT(fcfuepre.CODFUE)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcfuepre.CODFUE)';
+	const COUNT = 'COUNT(fcfuepre.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcfuepre.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -336,8 +336,8 @@ abstract class BaseFcfueprePeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcfueprePeer::CODFUE);
-			$selectCriteria->add(FcfueprePeer::CODFUE, $criteria->remove(FcfueprePeer::CODFUE), $comparison);
+			$comparison = $criteria->getComparison(FcfueprePeer::ID);
+			$selectCriteria->add(FcfueprePeer::ID, $criteria->remove(FcfueprePeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -376,7 +376,7 @@ abstract class BaseFcfueprePeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcfueprePeer::CODFUE, (array) $values, Criteria::IN);
+			$criteria->add(FcfueprePeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -438,7 +438,7 @@ abstract class BaseFcfueprePeer {
 
 		$criteria = new Criteria(FcfueprePeer::DATABASE_NAME);
 
-		$criteria->add(FcfueprePeer::CODFUE, $pk);
+		$criteria->add(FcfueprePeer::ID, $pk);
 
 
 		$v = FcfueprePeer::doSelect($criteria, $con);
@@ -458,7 +458,7 @@ abstract class BaseFcfueprePeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcfueprePeer::CODFUE, $pks, Criteria::IN);
+			$criteria->add(FcfueprePeer::ID, $pks, Criteria::IN);
 			$objs = FcfueprePeer::doSelect($criteria, $con);
 		}
 		return $objs;

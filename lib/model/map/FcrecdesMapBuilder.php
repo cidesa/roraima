@@ -32,15 +32,15 @@ class FcrecdesMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODREDE', 'Codrede', 'string', CreoleTypes::VARCHAR, true, 2);
+		$tMap->addColumn('CODREDE', 'Codrede', 'string', CreoleTypes::VARCHAR, true, 2);
 
-		$tMap->addColumn('RECDES', 'Recdes', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('RECDES', 'Recdes', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('DESREDE', 'Desrede', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('DESREDE', 'Desrede', 'string', CreoleTypes::VARCHAR, true, 30);
 
 		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, false, 18);
 
-		$tMap->addColumn('PORREDE', 'Porrede', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('PORREDE', 'Porrede', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('CODFUE', 'Codfue', 'string', CreoleTypes::VARCHAR, false, 2);
 
@@ -48,7 +48,7 @@ class FcrecdesMapBuilder {
 
 		$tMap->addColumn('PORCIEN', 'Porcien', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

@@ -420,8 +420,7 @@ abstract class BaseFctipapu extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FctipapuPeer::DATABASE_NAME);
 
-		$criteria->add(FctipapuPeer::TIPAPU, $this->tipapu);
-		$criteria->add(FctipapuPeer::ANOVIG, $this->anovig);
+		$criteria->add(FctipapuPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -429,28 +428,22 @@ abstract class BaseFctipapu extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getTipapu();
-
-		$pks[1] = $this->getAnovig();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setTipapu($keys[0]);
-
-		$this->setAnovig($keys[1]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setTipapu($this->tipapu);
+
+		$copyObj->setAnovig($this->anovig);
 
 		$copyObj->setDestip($this->destip);
 
@@ -460,13 +453,10 @@ abstract class BaseFctipapu extends BaseObject  implements Persistent {
 
 		$copyObj->setStatip($this->statip);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setTipapu(NULL); 
-		$copyObj->setAnovig(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

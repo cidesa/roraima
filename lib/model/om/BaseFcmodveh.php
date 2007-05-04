@@ -1082,7 +1082,7 @@ abstract class BaseFcmodveh extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcmodvehPeer::DATABASE_NAME);
 
-		$criteria->add(FcmodvehPeer::REFMOD, $this->refmod);
+		$criteria->add(FcmodvehPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -1090,18 +1090,20 @@ abstract class BaseFcmodveh extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getRefmod();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setRefmod($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setRefmod($this->refmod);
 
 		$copyObj->setPlaveh($this->plaveh);
 
@@ -1153,12 +1155,10 @@ abstract class BaseFcmodveh extends BaseObject  implements Persistent {
 
 		$copyObj->setFunrec($this->funrec);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setRefmod(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

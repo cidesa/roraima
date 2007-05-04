@@ -452,9 +452,7 @@ abstract class BaseFcaliinm extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcaliinmPeer::DATABASE_NAME);
 
-		$criteria->add(FcaliinmPeer::CODCATFIS, $this->codcatfis);
-		$criteria->add(FcaliinmPeer::CODUSO, $this->coduso);
-		$criteria->add(FcaliinmPeer::ANOVIG, $this->anovig);
+		$criteria->add(FcaliinmPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -462,32 +460,24 @@ abstract class BaseFcaliinm extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getCodcatfis();
-
-		$pks[1] = $this->getCoduso();
-
-		$pks[2] = $this->getAnovig();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setCodcatfis($keys[0]);
-
-		$this->setCoduso($keys[1]);
-
-		$this->setAnovig($keys[2]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCodcatfis($this->codcatfis);
+
+		$copyObj->setCoduso($this->coduso);
+
+		$copyObj->setAnovig($this->anovig);
 
 		$copyObj->setValorm($this->valorm);
 
@@ -497,14 +487,10 @@ abstract class BaseFcaliinm extends BaseObject  implements Persistent {
 
 		$copyObj->setAlicon($this->alicon);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodcatfis(NULL); 
-		$copyObj->setCoduso(NULL); 
-		$copyObj->setAnovig(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

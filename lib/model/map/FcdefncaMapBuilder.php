@@ -40,13 +40,13 @@ class FcdefncaMapBuilder {
 
 		$tMap->addColumn('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('NUMNIV', 'Numniv', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('NUMNIV', 'Numniv', 'double', CreoleTypes::NUMERIC, true);
 
-		$tMap->addColumn('NOMEXT1', 'Nomext1', 'string', CreoleTypes::VARCHAR, false, 210);
+		$tMap->addColumn('NOMEXT1', 'Nomext1', 'string', CreoleTypes::VARCHAR, true, 210);
 
-		$tMap->addColumn('NOMABR1', 'Nomabr1', 'string', CreoleTypes::VARCHAR, false, 9);
+		$tMap->addColumn('NOMABR1', 'Nomabr1', 'string', CreoleTypes::VARCHAR, true, 9);
 
-		$tMap->addColumn('TAMANO1', 'Tamano1', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TAMANO1', 'Tamano1', 'double', CreoleTypes::NUMERIC, true);
 
 		$tMap->addColumn('NOMEXT2', 'Nomext2', 'string', CreoleTypes::VARCHAR, false, 210);
 

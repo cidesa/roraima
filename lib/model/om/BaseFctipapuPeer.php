@@ -127,8 +127,8 @@ abstract class BaseFctipapuPeer {
 
 	}
 
-	const COUNT = 'COUNT(fctipapu.TIPAPU)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fctipapu.TIPAPU)';
+	const COUNT = 'COUNT(fctipapu.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fctipapu.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -251,11 +251,8 @@ abstract class BaseFctipapuPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FctipapuPeer::TIPAPU);
-			$selectCriteria->add(FctipapuPeer::TIPAPU, $criteria->remove(FctipapuPeer::TIPAPU), $comparison);
-
-			$comparison = $criteria->getComparison(FctipapuPeer::ANOVIG);
-			$selectCriteria->add(FctipapuPeer::ANOVIG, $criteria->remove(FctipapuPeer::ANOVIG), $comparison);
+			$comparison = $criteria->getComparison(FctipapuPeer::ID);
+			$selectCriteria->add(FctipapuPeer::ID, $criteria->remove(FctipapuPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -294,20 +291,7 @@ abstract class BaseFctipapuPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-			}
-
-			$criteria->add(FctipapuPeer::TIPAPU, $vals[0], Criteria::IN);
-			$criteria->add(FctipapuPeer::ANOVIG, $vals[1], Criteria::IN);
+			$criteria->add(FctipapuPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -361,17 +345,40 @@ abstract class BaseFctipapuPeer {
 	}
 
 	
-	public static function retrieveByPK( $tipapu, $anovig, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FctipapuPeer::TIPAPU, $tipapu);
-		$criteria->add(FctipapuPeer::ANOVIG, $anovig);
+
+		$criteria = new Criteria(FctipapuPeer::DATABASE_NAME);
+
+		$criteria->add(FctipapuPeer::ID, $pk);
+
+
 		$v = FctipapuPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FctipapuPeer::ID, $pks, Criteria::IN);
+			$objs = FctipapuPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {

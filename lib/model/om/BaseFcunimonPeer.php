@@ -112,8 +112,8 @@ abstract class BaseFcunimonPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcunimon.CODUNIMON)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcunimon.CODUNIMON)';
+	const COUNT = 'COUNT(fcunimon.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcunimon.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -236,8 +236,8 @@ abstract class BaseFcunimonPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcunimonPeer::CODUNIMON);
-			$selectCriteria->add(FcunimonPeer::CODUNIMON, $criteria->remove(FcunimonPeer::CODUNIMON), $comparison);
+			$comparison = $criteria->getComparison(FcunimonPeer::ID);
+			$selectCriteria->add(FcunimonPeer::ID, $criteria->remove(FcunimonPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -276,7 +276,7 @@ abstract class BaseFcunimonPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcunimonPeer::CODUNIMON, (array) $values, Criteria::IN);
+			$criteria->add(FcunimonPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -338,7 +338,7 @@ abstract class BaseFcunimonPeer {
 
 		$criteria = new Criteria(FcunimonPeer::DATABASE_NAME);
 
-		$criteria->add(FcunimonPeer::CODUNIMON, $pk);
+		$criteria->add(FcunimonPeer::ID, $pk);
 
 
 		$v = FcunimonPeer::doSelect($criteria, $con);
@@ -358,7 +358,7 @@ abstract class BaseFcunimonPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcunimonPeer::CODUNIMON, $pks, Criteria::IN);
+			$criteria->add(FcunimonPeer::ID, $pks, Criteria::IN);
 			$objs = FcunimonPeer::doSelect($criteria, $con);
 		}
 		return $objs;

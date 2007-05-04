@@ -167,8 +167,8 @@ abstract class BaseFcotringPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcotring.NROCON)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcotring.NROCON)';
+	const COUNT = 'COUNT(fcotring.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcotring.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -291,8 +291,8 @@ abstract class BaseFcotringPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcotringPeer::NROCON);
-			$selectCriteria->add(FcotringPeer::NROCON, $criteria->remove(FcotringPeer::NROCON), $comparison);
+			$comparison = $criteria->getComparison(FcotringPeer::ID);
+			$selectCriteria->add(FcotringPeer::ID, $criteria->remove(FcotringPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -331,7 +331,7 @@ abstract class BaseFcotringPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcotringPeer::NROCON, (array) $values, Criteria::IN);
+			$criteria->add(FcotringPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -393,7 +393,7 @@ abstract class BaseFcotringPeer {
 
 		$criteria = new Criteria(FcotringPeer::DATABASE_NAME);
 
-		$criteria->add(FcotringPeer::NROCON, $pk);
+		$criteria->add(FcotringPeer::ID, $pk);
 
 
 		$v = FcotringPeer::doSelect($criteria, $con);
@@ -413,7 +413,7 @@ abstract class BaseFcotringPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcotringPeer::NROCON, $pks, Criteria::IN);
+			$criteria->add(FcotringPeer::ID, $pks, Criteria::IN);
 			$objs = FcotringPeer::doSelect($criteria, $con);
 		}
 		return $objs;

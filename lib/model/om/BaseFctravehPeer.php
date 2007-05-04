@@ -137,8 +137,8 @@ abstract class BaseFctravehPeer {
 
 	}
 
-	const COUNT = 'COUNT(fctraveh.NUMTRA)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fctraveh.NUMTRA)';
+	const COUNT = 'COUNT(fctraveh.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fctraveh.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -261,8 +261,8 @@ abstract class BaseFctravehPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FctravehPeer::NUMTRA);
-			$selectCriteria->add(FctravehPeer::NUMTRA, $criteria->remove(FctravehPeer::NUMTRA), $comparison);
+			$comparison = $criteria->getComparison(FctravehPeer::ID);
+			$selectCriteria->add(FctravehPeer::ID, $criteria->remove(FctravehPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -301,7 +301,7 @@ abstract class BaseFctravehPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FctravehPeer::NUMTRA, (array) $values, Criteria::IN);
+			$criteria->add(FctravehPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -363,7 +363,7 @@ abstract class BaseFctravehPeer {
 
 		$criteria = new Criteria(FctravehPeer::DATABASE_NAME);
 
-		$criteria->add(FctravehPeer::NUMTRA, $pk);
+		$criteria->add(FctravehPeer::ID, $pk);
 
 
 		$v = FctravehPeer::doSelect($criteria, $con);
@@ -383,7 +383,7 @@ abstract class BaseFctravehPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FctravehPeer::NUMTRA, $pks, Criteria::IN);
+			$criteria->add(FctravehPeer::ID, $pks, Criteria::IN);
 			$objs = FctravehPeer::doSelect($criteria, $con);
 		}
 		return $objs;

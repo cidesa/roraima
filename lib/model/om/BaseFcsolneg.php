@@ -538,7 +538,7 @@ abstract class BaseFcsolneg extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcsolnegPeer::DATABASE_NAME);
 
-		$criteria->add(FcsolnegPeer::NUMNEG, $this->numneg);
+		$criteria->add(FcsolnegPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -546,18 +546,20 @@ abstract class BaseFcsolneg extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNumneg();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNumneg($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNumneg($this->numneg);
 
 		$copyObj->setNumsol($this->numsol);
 
@@ -575,12 +577,10 @@ abstract class BaseFcsolneg extends BaseObject  implements Persistent {
 
 		$copyObj->setFunneg($this->funneg);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNumneg(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

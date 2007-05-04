@@ -107,8 +107,8 @@ abstract class BaseFcpaisPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcpais.CODPAI)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcpais.CODPAI)';
+	const COUNT = 'COUNT(fcpais.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcpais.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -231,8 +231,8 @@ abstract class BaseFcpaisPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcpaisPeer::CODPAI);
-			$selectCriteria->add(FcpaisPeer::CODPAI, $criteria->remove(FcpaisPeer::CODPAI), $comparison);
+			$comparison = $criteria->getComparison(FcpaisPeer::ID);
+			$selectCriteria->add(FcpaisPeer::ID, $criteria->remove(FcpaisPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -271,7 +271,7 @@ abstract class BaseFcpaisPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcpaisPeer::CODPAI, (array) $values, Criteria::IN);
+			$criteria->add(FcpaisPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -333,7 +333,7 @@ abstract class BaseFcpaisPeer {
 
 		$criteria = new Criteria(FcpaisPeer::DATABASE_NAME);
 
-		$criteria->add(FcpaisPeer::CODPAI, $pk);
+		$criteria->add(FcpaisPeer::ID, $pk);
 
 
 		$v = FcpaisPeer::doSelect($criteria, $con);
@@ -353,7 +353,7 @@ abstract class BaseFcpaisPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcpaisPeer::CODPAI, $pks, Criteria::IN);
+			$criteria->add(FcpaisPeer::ID, $pks, Criteria::IN);
 			$objs = FcpaisPeer::doSelect($criteria, $con);
 		}
 		return $objs;

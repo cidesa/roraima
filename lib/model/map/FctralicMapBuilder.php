@@ -32,19 +32,19 @@ class FctralicMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('NUMTRA', 'Numtra', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMTRA', 'Numtra', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('FECTRA', 'Fectra', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECTRA', 'Fectra', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 14);
+		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, true, 14);
 
 		$tMap->addColumn('RIFREP', 'Rifrep', 'string', CreoleTypes::VARCHAR, false, 14);
 
-		$tMap->addColumn('RIFCONANT', 'Rifconant', 'string', CreoleTypes::VARCHAR, false, 14);
+		$tMap->addColumn('RIFCONANT', 'Rifconant', 'string', CreoleTypes::VARCHAR, true, 14);
 
 		$tMap->addColumn('RIFREPANT', 'Rifrepant', 'string', CreoleTypes::VARCHAR, false, 14);
 
-		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, false, 40);
+		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, true, 40);
 
 		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, false, 12);
 

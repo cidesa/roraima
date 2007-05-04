@@ -32,13 +32,13 @@ class FcdefentextMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODENTEXT', 'Codentext', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODENTEXT', 'Codentext', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('NOMENTEXT', 'Nomentext', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('NOMENTEXT', 'Nomentext', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addColumn('PERNATJUR', 'Pernatjur', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

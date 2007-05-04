@@ -32,11 +32,11 @@ class FcrenlicMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('FECREN', 'Fecren', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREN', 'Fecren', 'int', CreoleTypes::DATE, true);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				

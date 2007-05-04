@@ -32,17 +32,17 @@ class FccajeroMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODCAJ', 'Codcaj', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODCAJ', 'Codcaj', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('CEDCAJ', 'Cedcaj', 'string', CreoleTypes::VARCHAR, false, 15);
+		$tMap->addColumn('CEDCAJ', 'Cedcaj', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('NOMCAJ', 'Nomcaj', 'string', CreoleTypes::VARCHAR, false, 30);
+		$tMap->addColumn('NOMCAJ', 'Nomcaj', 'string', CreoleTypes::VARCHAR, true, 30);
 
 		$tMap->addColumn('DIRCAJ', 'Dircaj', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addColumn('TELCAJ', 'Telcaj', 'string', CreoleTypes::VARCHAR, false, 11);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

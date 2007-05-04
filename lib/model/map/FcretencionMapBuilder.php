@@ -32,9 +32,9 @@ class FcretencionMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('NUMRET', 'Numret', 'string', CreoleTypes::VARCHAR, false, 15);
+		$tMap->addColumn('NUMRET', 'Numret', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('FUEING', 'Fueing', 'string', CreoleTypes::VARCHAR, false, 2);
+		$tMap->addColumn('FUEING', 'Fueing', 'string', CreoleTypes::VARCHAR, true, 2);
 
 		$tMap->addColumn('FECRET', 'Fecret', 'int', CreoleTypes::DATE, false);
 

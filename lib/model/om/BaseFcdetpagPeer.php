@@ -117,8 +117,8 @@ abstract class BaseFcdetpagPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcdetpag.NUMPAG)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcdetpag.NUMPAG)';
+	const COUNT = 'COUNT(fcdetpag.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcdetpag.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -677,11 +677,8 @@ abstract class BaseFcdetpagPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcdetpagPeer::NUMPAG);
-			$selectCriteria->add(FcdetpagPeer::NUMPAG, $criteria->remove(FcdetpagPeer::NUMPAG), $comparison);
-
-			$comparison = $criteria->getComparison(FcdetpagPeer::NRODET);
-			$selectCriteria->add(FcdetpagPeer::NRODET, $criteria->remove(FcdetpagPeer::NRODET), $comparison);
+			$comparison = $criteria->getComparison(FcdetpagPeer::ID);
+			$selectCriteria->add(FcdetpagPeer::ID, $criteria->remove(FcdetpagPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -720,20 +717,7 @@ abstract class BaseFcdetpagPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-			}
-
-			$criteria->add(FcdetpagPeer::NUMPAG, $vals[0], Criteria::IN);
-			$criteria->add(FcdetpagPeer::NRODET, $vals[1], Criteria::IN);
+			$criteria->add(FcdetpagPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -787,17 +771,40 @@ abstract class BaseFcdetpagPeer {
 	}
 
 	
-	public static function retrieveByPK( $numpag, $nrodet, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FcdetpagPeer::NUMPAG, $numpag);
-		$criteria->add(FcdetpagPeer::NRODET, $nrodet);
+
+		$criteria = new Criteria(FcdetpagPeer::DATABASE_NAME);
+
+		$criteria->add(FcdetpagPeer::ID, $pk);
+
+
 		$v = FcdetpagPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FcdetpagPeer::ID, $pks, Criteria::IN);
+			$objs = FcdetpagPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {

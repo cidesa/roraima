@@ -32,7 +32,7 @@ class FcrecdesgMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('CODREDE', 'Codrede', 'string', CreoleTypes::VARCHAR, false, 2);
+		$tMap->addColumn('CODREDE', 'Codrede', 'string', CreoleTypes::VARCHAR, true, 2);
 
 		$tMap->addColumn('DIAS', 'Dias', 'double', CreoleTypes::NUMERIC, false);
 

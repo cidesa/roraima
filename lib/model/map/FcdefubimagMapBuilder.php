@@ -32,11 +32,11 @@ class FcdefubimagMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODUBIMAG', 'Codubimag', 'string', CreoleTypes::VARCHAR, true, 16);
+		$tMap->addColumn('CODUBIMAG', 'Codubimag', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('NOMUBIMAG', 'Nomubimag', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('NOMUBIMAG', 'Nomubimag', 'string', CreoleTypes::VARCHAR, true, 50);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

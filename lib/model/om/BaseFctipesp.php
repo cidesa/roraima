@@ -452,8 +452,7 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FctipespPeer::DATABASE_NAME);
 
-		$criteria->add(FctipespPeer::TIPESP, $this->tipesp);
-		$criteria->add(FctipespPeer::ANOVIG, $this->anovig);
+		$criteria->add(FctipespPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -461,28 +460,22 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		$pks = array();
-
-		$pks[0] = $this->getTipesp();
-
-		$pks[1] = $this->getAnovig();
-
-		return $pks;
+		return $this->getId();
 	}
 
 	
-	public function setPrimaryKey($keys)
+	public function setPrimaryKey($key)
 	{
-
-		$this->setTipesp($keys[0]);
-
-		$this->setAnovig($keys[1]);
-
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setTipesp($this->tipesp);
+
+		$copyObj->setAnovig($this->anovig);
 
 		$copyObj->setDestip($this->destip);
 
@@ -494,13 +487,10 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 
 		$copyObj->setMintri($this->mintri);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setTipesp(NULL); 
-		$copyObj->setAnovig(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

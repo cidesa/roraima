@@ -122,8 +122,8 @@ abstract class BaseFcpagingPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcpaging.REFERE)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcpaging.REFERE)';
+	const COUNT = 'COUNT(fcpaging.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcpaging.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -246,8 +246,8 @@ abstract class BaseFcpagingPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcpagingPeer::REFERE);
-			$selectCriteria->add(FcpagingPeer::REFERE, $criteria->remove(FcpagingPeer::REFERE), $comparison);
+			$comparison = $criteria->getComparison(FcpagingPeer::ID);
+			$selectCriteria->add(FcpagingPeer::ID, $criteria->remove(FcpagingPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -286,7 +286,7 @@ abstract class BaseFcpagingPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcpagingPeer::REFERE, (array) $values, Criteria::IN);
+			$criteria->add(FcpagingPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -348,7 +348,7 @@ abstract class BaseFcpagingPeer {
 
 		$criteria = new Criteria(FcpagingPeer::DATABASE_NAME);
 
-		$criteria->add(FcpagingPeer::REFERE, $pk);
+		$criteria->add(FcpagingPeer::ID, $pk);
 
 
 		$v = FcpagingPeer::doSelect($criteria, $con);
@@ -368,7 +368,7 @@ abstract class BaseFcpagingPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcpagingPeer::REFERE, $pks, Criteria::IN);
+			$criteria->add(FcpagingPeer::ID, $pks, Criteria::IN);
 			$objs = FcpagingPeer::doSelect($criteria, $con);
 		}
 		return $objs;

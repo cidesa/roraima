@@ -392,7 +392,7 @@ abstract class BaseFcdeffun extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdeffunPeer::DATABASE_NAME);
 
-		$criteria->add(FcdeffunPeer::CODFUN, $this->codfun);
+		$criteria->add(FcdeffunPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -400,24 +400,24 @@ abstract class BaseFcdeffun extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodfun();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodfun($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setCodfun($this->codfun);
+
 		$copyObj->setNomfun($this->nomfun);
 
 		$copyObj->setCoduniadm($this->coduniadm);
-
-		$copyObj->setId($this->id);
 
 
 		if ($deepCopy) {
@@ -435,7 +435,7 @@ abstract class BaseFcdeffun extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodfun(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

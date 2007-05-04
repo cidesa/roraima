@@ -506,7 +506,7 @@ abstract class BaseFcdefdesc extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdefdescPeer::DATABASE_NAME);
 
-		$criteria->add(FcdefdescPeer::CODDES, $this->coddes);
+		$criteria->add(FcdefdescPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -514,18 +514,20 @@ abstract class BaseFcdefdesc extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCoddes();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCoddes($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setCoddes($this->coddes);
 
 		$copyObj->setNomdes($this->nomdes);
 
@@ -541,8 +543,6 @@ abstract class BaseFcdefdesc extends BaseObject  implements Persistent {
 
 		$copyObj->setAnoact($this->anoact);
 
-		$copyObj->setId($this->id);
-
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -555,7 +555,7 @@ abstract class BaseFcdefdesc extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCoddes(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

@@ -368,7 +368,7 @@ abstract class BaseFcdeftipdoc extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdeftipdocPeer::DATABASE_NAME);
 
-		$criteria->add(FcdeftipdocPeer::CODTIPDOC, $this->codtipdoc);
+		$criteria->add(FcdeftipdocPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -376,24 +376,24 @@ abstract class BaseFcdeftipdoc extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodtipdoc();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodtipdoc($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
+		$copyObj->setCodtipdoc($this->codtipdoc);
+
 		$copyObj->setNomtipdoc($this->nomtipdoc);
 
 		$copyObj->setTemtipdoc($this->temtipdoc);
-
-		$copyObj->setId($this->id);
 
 
 		if ($deepCopy) {
@@ -411,7 +411,7 @@ abstract class BaseFcdeftipdoc extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodtipdoc(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

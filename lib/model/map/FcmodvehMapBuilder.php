@@ -32,15 +32,15 @@ class FcmodvehMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('REFMOD', 'Refmod', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('REFMOD', 'Refmod', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('PLAVEH', 'Plaveh', 'string', CreoleTypes::VARCHAR, false, 8);
+		$tMap->addColumn('PLAVEH', 'Plaveh', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECMOD', 'Fecmod', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECMOD', 'Fecmod', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('CODUSO', 'Coduso', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('ANOVEH', 'Anoveh', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ANOVEH', 'Anoveh', 'double', CreoleTypes::NUMERIC, true);
 
 		$tMap->addColumn('SERMOT', 'Sermot', 'string', CreoleTypes::VARCHAR, false, 15);
 
@@ -52,7 +52,7 @@ class FcmodvehMapBuilder {
 
 		$tMap->addColumn('VALORI', 'Valori', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('MODVEH', 'Modveh', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addColumn('MODVEH', 'Modveh', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('DUEANT', 'Dueant', 'string', CreoleTypes::VARCHAR, false, 50);
 
@@ -60,9 +60,9 @@ class FcmodvehMapBuilder {
 
 		$tMap->addColumn('PLAANT', 'Plaant', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('CODUSOANT', 'Codusoant', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->addColumn('CODUSOANT', 'Codusoant', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('ANOVEHANT', 'Anovehant', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ANOVEHANT', 'Anovehant', 'double', CreoleTypes::NUMERIC, true);
 
 		$tMap->addColumn('SERMOTANT', 'Sermotant', 'string', CreoleTypes::VARCHAR, false, 15);
 
@@ -74,7 +74,7 @@ class FcmodvehMapBuilder {
 
 		$tMap->addColumn('VALORIANT', 'Valoriant', 'double', CreoleTypes::NUMERIC, false);
 
-		$tMap->addColumn('MODVEHANT', 'Modvehant', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addColumn('MODVEHANT', 'Modvehant', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('DUEANTANT', 'Dueantant', 'string', CreoleTypes::VARCHAR, false, 50);
 
@@ -82,9 +82,9 @@ class FcmodvehMapBuilder {
 
 		$tMap->addColumn('PLAANTANT', 'Plaantant', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, false, 40);
+		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, true, 40);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

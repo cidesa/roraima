@@ -314,7 +314,7 @@ abstract class BaseFcdefuniadm extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdefuniadmPeer::DATABASE_NAME);
 
-		$criteria->add(FcdefuniadmPeer::CODUNIADM, $this->coduniadm);
+		$criteria->add(FcdefuniadmPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -322,22 +322,22 @@ abstract class BaseFcdefuniadm extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCoduniadm();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCoduniadm($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setNomuniadm($this->nomuniadm);
+		$copyObj->setCoduniadm($this->coduniadm);
 
-		$copyObj->setId($this->id);
+		$copyObj->setNomuniadm($this->nomuniadm);
 
 
 		if ($deepCopy) {
@@ -351,7 +351,7 @@ abstract class BaseFcdefuniadm extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCoduniadm(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

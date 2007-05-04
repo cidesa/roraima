@@ -32,13 +32,13 @@ class FcsitjurinmMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODSITINM', 'Codsitinm', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODSITINM', 'Codsitinm', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('NOMSITINM', 'Nomsitinm', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('NOMSITINM', 'Nomsitinm', 'string', CreoleTypes::VARCHAR, true, 250);
 
-		$tMap->addColumn('STASITINM', 'Stasitinm', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('STASITINM', 'Stasitinm', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

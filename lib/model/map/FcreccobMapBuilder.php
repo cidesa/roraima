@@ -32,11 +32,11 @@ class FcreccobMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('NUMENT', 'Nument', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMENT', 'Nument', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('FECENT', 'Fecent', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECENT', 'Fecent', 'int', CreoleTypes::DATE, true);
 
-		$tMap->addColumn('CODCOB', 'Codcob', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('CODCOB', 'Codcob', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				

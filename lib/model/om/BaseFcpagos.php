@@ -710,7 +710,7 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcpagosPeer::DATABASE_NAME);
 
-		$criteria->add(FcpagosPeer::NUMPAG, $this->numpag);
+		$criteria->add(FcpagosPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -718,18 +718,20 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNumpag();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNumpag($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNumpag($this->numpag);
 
 		$copyObj->setFecpag($this->fecpag);
 
@@ -755,8 +757,6 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 
 		$copyObj->setCedanu($this->cedanu);
 
-		$copyObj->setId($this->id);
-
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
@@ -769,7 +769,7 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNumpag(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

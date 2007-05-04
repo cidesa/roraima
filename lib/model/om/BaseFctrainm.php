@@ -506,7 +506,7 @@ abstract class BaseFctrainm extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FctrainmPeer::DATABASE_NAME);
 
-		$criteria->add(FctrainmPeer::NUMTRA, $this->numtra);
+		$criteria->add(FctrainmPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -514,18 +514,20 @@ abstract class BaseFctrainm extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getNumtra();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setNumtra($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setNumtra($this->numtra);
 
 		$copyObj->setNroinm($this->nroinm);
 
@@ -541,12 +543,10 @@ abstract class BaseFctrainm extends BaseObject  implements Persistent {
 
 		$copyObj->setFunrec($this->funrec);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setNumtra(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

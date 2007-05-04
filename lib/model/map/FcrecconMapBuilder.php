@@ -32,7 +32,7 @@ class FcrecconMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, true, 10);
 
 		$tMap->addColumn('FECENT', 'Fecent', 'int', CreoleTypes::DATE, false);
 

@@ -32,7 +32,7 @@ class FcdefdescMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, true, 4);
+		$tMap->addColumn('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, true, 4);
 
 		$tMap->addColumn('NOMDES', 'Nomdes', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -48,7 +48,7 @@ class FcdefdescMapBuilder {
 
 		$tMap->addColumn('ANOACT', 'Anoact', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

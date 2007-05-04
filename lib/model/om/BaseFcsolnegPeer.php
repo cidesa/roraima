@@ -142,8 +142,8 @@ abstract class BaseFcsolnegPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcsolneg.NUMNEG)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcsolneg.NUMNEG)';
+	const COUNT = 'COUNT(fcsolneg.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcsolneg.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -266,8 +266,8 @@ abstract class BaseFcsolnegPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcsolnegPeer::NUMNEG);
-			$selectCriteria->add(FcsolnegPeer::NUMNEG, $criteria->remove(FcsolnegPeer::NUMNEG), $comparison);
+			$comparison = $criteria->getComparison(FcsolnegPeer::ID);
+			$selectCriteria->add(FcsolnegPeer::ID, $criteria->remove(FcsolnegPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -306,7 +306,7 @@ abstract class BaseFcsolnegPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcsolnegPeer::NUMNEG, (array) $values, Criteria::IN);
+			$criteria->add(FcsolnegPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -368,7 +368,7 @@ abstract class BaseFcsolnegPeer {
 
 		$criteria = new Criteria(FcsolnegPeer::DATABASE_NAME);
 
-		$criteria->add(FcsolnegPeer::NUMNEG, $pk);
+		$criteria->add(FcsolnegPeer::ID, $pk);
 
 
 		$v = FcsolnegPeer::doSelect($criteria, $con);
@@ -388,7 +388,7 @@ abstract class BaseFcsolnegPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcsolnegPeer::NUMNEG, $pks, Criteria::IN);
+			$criteria->add(FcsolnegPeer::ID, $pks, Criteria::IN);
 			$objs = FcsolnegPeer::doSelect($criteria, $con);
 		}
 		return $objs;

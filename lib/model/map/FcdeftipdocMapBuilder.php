@@ -32,13 +32,13 @@ class FcdeftipdocMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addPrimaryKey('CODTIPDOC', 'Codtipdoc', 'string', CreoleTypes::VARCHAR, true, 3);
+		$tMap->addColumn('CODTIPDOC', 'Codtipdoc', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('NOMTIPDOC', 'Nomtipdoc', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('NOMTIPDOC', 'Nomtipdoc', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addColumn('TEMTIPDOC', 'Temtipdoc', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('ID', 'Id', 'int', CreoleTypes::INTEGER, false);
+		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 				
     } 
 } 

@@ -112,8 +112,8 @@ abstract class BaseFcdetreccobPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcdetreccob.NUMENT)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcdetreccob.NUMENT)';
+	const COUNT = 'COUNT(fcdetreccob.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcdetreccob.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -236,11 +236,8 @@ abstract class BaseFcdetreccobPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcdetreccobPeer::NUMENT);
-			$selectCriteria->add(FcdetreccobPeer::NUMENT, $criteria->remove(FcdetreccobPeer::NUMENT), $comparison);
-
-			$comparison = $criteria->getComparison(FcdetreccobPeer::CODREC);
-			$selectCriteria->add(FcdetreccobPeer::CODREC, $criteria->remove(FcdetreccobPeer::CODREC), $comparison);
+			$comparison = $criteria->getComparison(FcdetreccobPeer::ID);
+			$selectCriteria->add(FcdetreccobPeer::ID, $criteria->remove(FcdetreccobPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -279,20 +276,7 @@ abstract class BaseFcdetreccobPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-			}
-
-			$criteria->add(FcdetreccobPeer::NUMENT, $vals[0], Criteria::IN);
-			$criteria->add(FcdetreccobPeer::CODREC, $vals[1], Criteria::IN);
+			$criteria->add(FcdetreccobPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -346,17 +330,40 @@ abstract class BaseFcdetreccobPeer {
 	}
 
 	
-	public static function retrieveByPK( $nument, $codrec, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FcdetreccobPeer::NUMENT, $nument);
-		$criteria->add(FcdetreccobPeer::CODREC, $codrec);
+
+		$criteria = new Criteria(FcdetreccobPeer::DATABASE_NAME);
+
+		$criteria->add(FcdetreccobPeer::ID, $pk);
+
+
 		$v = FcdetreccobPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FcdetreccobPeer::ID, $pks, Criteria::IN);
+			$objs = FcdetreccobPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {

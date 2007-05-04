@@ -336,7 +336,7 @@ abstract class BaseFcdefubifis extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcdefubifisPeer::DATABASE_NAME);
 
-		$criteria->add(FcdefubifisPeer::CODUBIFIS, $this->codubifis);
+		$criteria->add(FcdefubifisPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -344,22 +344,22 @@ abstract class BaseFcdefubifis extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getCodubifis();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setCodubifis($key);
+		$this->setId($key);
 	}
 
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setNomubifis($this->nomubifis);
+		$copyObj->setCodubifis($this->codubifis);
 
-		$copyObj->setId($this->id);
+		$copyObj->setNomubifis($this->nomubifis);
 
 
 		if ($deepCopy) {
@@ -377,7 +377,7 @@ abstract class BaseFcdefubifis extends BaseObject  implements Persistent {
 
 		$copyObj->setNew(true);
 
-		$copyObj->setCodubifis(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

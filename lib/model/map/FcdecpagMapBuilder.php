@@ -32,13 +32,13 @@ class FcdecpagMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
-		$tMap->addColumn('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('NUMPAG', 'Numpag', 'string', CreoleTypes::VARCHAR, true, 10);
 
 		$tMap->addColumn('NUMDEC', 'Numdec', 'string', CreoleTypes::VARCHAR, false, 10);
 
 		$tMap->addColumn('NUMREF', 'Numref', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, true);
 
 		$tMap->addColumn('MONDEC', 'Mondec', 'double', CreoleTypes::NUMERIC, false);
 

@@ -122,8 +122,8 @@ abstract class BaseFcaliusoPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcaliuso.CODUSO)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcaliuso.CODUSO)';
+	const COUNT = 'COUNT(fcaliuso.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcaliuso.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -246,11 +246,8 @@ abstract class BaseFcaliusoPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcaliusoPeer::CODUSO);
-			$selectCriteria->add(FcaliusoPeer::CODUSO, $criteria->remove(FcaliusoPeer::CODUSO), $comparison);
-
-			$comparison = $criteria->getComparison(FcaliusoPeer::ANOVIG);
-			$selectCriteria->add(FcaliusoPeer::ANOVIG, $criteria->remove(FcaliusoPeer::ANOVIG), $comparison);
+			$comparison = $criteria->getComparison(FcaliusoPeer::ID);
+			$selectCriteria->add(FcaliusoPeer::ID, $criteria->remove(FcaliusoPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -289,20 +286,7 @@ abstract class BaseFcaliusoPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-												if(count($values) == count($values, COUNT_RECURSIVE))
-			{
-								$values = array($values);
-			}
-			$vals = array();
-			foreach($values as $value)
-			{
-
-				$vals[0][] = $value[0];
-				$vals[1][] = $value[1];
-			}
-
-			$criteria->add(FcaliusoPeer::CODUSO, $vals[0], Criteria::IN);
-			$criteria->add(FcaliusoPeer::ANOVIG, $vals[1], Criteria::IN);
+			$criteria->add(FcaliusoPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -356,17 +340,40 @@ abstract class BaseFcaliusoPeer {
 	}
 
 	
-	public static function retrieveByPK( $coduso, $anovig, $con = null) {
+	public static function retrieveByPK($pk, $con = null)
+	{
 		if ($con === null) {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
-		$criteria = new Criteria();
-		$criteria->add(FcaliusoPeer::CODUSO, $coduso);
-		$criteria->add(FcaliusoPeer::ANOVIG, $anovig);
+
+		$criteria = new Criteria(FcaliusoPeer::DATABASE_NAME);
+
+		$criteria->add(FcaliusoPeer::ID, $pk);
+
+
 		$v = FcaliusoPeer::doSelect($criteria, $con);
 
-		return !empty($v) ? $v[0] : null;
+		return !empty($v) > 0 ? $v[0] : null;
 	}
+
+	
+	public static function retrieveByPKs($pks, $con = null)
+	{
+		if ($con === null) {
+			$con = Propel::getConnection(self::DATABASE_NAME);
+		}
+
+		$objs = null;
+		if (empty($pks)) {
+			$objs = array();
+		} else {
+			$criteria = new Criteria();
+			$criteria->add(FcaliusoPeer::ID, $pks, Criteria::IN);
+			$objs = FcaliusoPeer::doSelect($criteria, $con);
+		}
+		return $objs;
+	}
+
 } 
 if (Propel::isInit()) {
 			try {
