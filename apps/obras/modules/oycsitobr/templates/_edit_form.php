@@ -124,7 +124,7 @@ $titulo=array(0 =>'Codigo', 1 => 'Descripción', 2 => 'Programada', 3 =>'Ejecuta
 <div id="grid01" class="grid01">
 <table border="0" class="sf_admin_list">
 <? 
-$titulo=array(0 =>'Codigo', 1 => 'Descripción', 2 => 'Programada', 3 =>'Ejecutada', 4 =>'Rep',  5 => '% Eje.',  6 =>'Adicional');
+$titulo=array(0 =>'Codigo', 1 => 'Descripción', 2 => 'Programada', 3 =>'Ejecutada', 4 =>'%Rep',  5 => '% Eje.',  6 =>'Adicional');
 ?>
 <thead><tr>
   	<?

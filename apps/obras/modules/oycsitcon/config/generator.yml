@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocregcon
+    theme:            default
+    fields:
+      codcon:      { name: Código Contrato}
+      descon:      { name: Descripción}    
+      codobr:      { name: Código Obra}   
+      desobr:      { name: Descripción Obra}    
+      nompro:      { name: Contratista}    
+    list:
+      title:          Situación del Contrato
+      filters:		  [codcon, descon]
+      display:        [=codcon, descon, codobr, desobr]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~                                
+    edit:
+      title:          Situación del Contrato
+      display:        [codcon, descon, codobr, desobr, nompro]
