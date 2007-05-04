@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocregcon
+    theme:            default
+    fields:
+      codcon:      { name: Nro. Contrato}
+      codobr:      { name: Obra} 
+      desobr:      { name: Descripción Obra}   
+      codpro:      { name: Contratista}
+      descon:      { name: Objeto}    
+      tipcon:      { name: Tipo Contrato}     
+      nomtipcon:   { name: Des. Tipo Contrato}     
+      moncon:      { name: Monto del Contrato (+)}     
+      monext:      { name: Monto Extras (+)}     
+      monmod:      { name: Monto Modificado (+)}     
+    list:
+      title:          Registro de Contratos
+      filters:		  [codcon, descon]
+      display:        [=codcon, descon, codobr, desobr, tipcon, nomtipcon]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~                                
+    edit:
+      title:          Registro de Contratos
+      display:        [codcon, tipcon, nomtipcon, codobr, desobr, codpro, nompro, descon, moncon, monext, monmod]
