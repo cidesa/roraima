@@ -1,0 +1,58 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocregval
+    theme:            default
+    fields:
+      codcon: { name: Contrato No.}
+      codtipval: { name: Tipo}      
+      numval: { name: Nro}
+      desobr: { name: Obra}
+      nompro: { name: Contratista}
+      tipcon: { name: Tipo de Contrato}
+      gasree2: { name: Gastos de reembolso}
+      moncon: { name: Monto Original del Contrato(+)}
+      fecini: { name: Del}
+      fecfin: { name: Al}      
+      fecreg: { name: Fecha}
+      aumobr: { name: Aumentos de Obra}
+      disobr: { name: Disminución de Obras}
+      obrext: { name: Obras Extras}
+      monful: { name: Monto total del Contrato}
+      monper: { name: Sub Total (1)-(2)-(3)}
+      monperiva: { name: Monto IVA}
+      totded: { name: Total Retenciones(Sin Fianza)}            
+      monpag: { name: Saldo Neto a Pagar}
+      monfia: { name: Fianza(3)}
+      moniva: { name: IVA}
+      subtot: { name: SubTotal sin IVA}
+      gasree: { name: Gastos Reembolsables}
+      poriva: { name: IVA}      
+      porant: { name: Anticipo}
+      monval: { name: Monto Total Valuaciones Presentadas}
+      salliq: { name: Saldo por Liquidar}
+      retacu: { name: Retenciones Acumuladas} 
+      monant: { name: Monto del Anticipo}
+      amoant: { name: Amortización del Anticipo}
+      staval: { name: Estatus}           
+      salant: { name: Saldo Anterior}      
+               
+    list:
+      title:          Registro de Valuaciones
+      filters:        [codcon]
+      display:        [=codcon, codtipval, fecreg]
+      fields:
+        fecini: { params: date_format='dd/MM/yy' }
+        fecfin: { params: date_format='dd/MM/yy' }
+        fecreg: { params: date_format='dd/MM/yy' }              
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edicion de Valuaciones
+      display:       [=codcon, codtipval, numval, desobr, nompro, tipcon, gasree, moncon, fecini, fecfin, fecreg, aumobr, disobr, obrext, monful, monper, monperiva, totded, monpag, monfia, moniva, subtot, gasree, poriva, porant, monval, salliq, retacu, monant, amoant, staval, salant]
+      fields:
+        fecini: { params: date_format='dd/MM/yy' }
+        fecfin: { params: date_format='dd/MM/yy' }
+        fecreg: { params: date_format='dd/MM/yy' } 
