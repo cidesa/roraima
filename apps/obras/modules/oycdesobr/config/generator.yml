@@ -1,0 +1,33 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocregobr
+    theme:            default
+
+    fields:
+      codobr:      { name: Código}
+      codtipobr:   { name: Tipo}
+      desobr:      { name: Descripción}      
+      fecini:      { name: Fecha Inicio}      
+      fecfin:      { name: Fecha Culminación}   
+      cedpai:      { name: Código Pais}         
+      cededo:      { name: Código Estado}               
+      cededo:      { name: Código Estado}
+      cedpar:      { name: Código Parroquia}
+      cedsec:      { name: Código Sector}
+      dirobr:      { name: Dirección}
+      codpre:      { name: Código Presupuestario}
+      despre:      { name: Descripción}
+
+    list:
+      title:          Definición Registro de Obras
+      filters:		  [codobr, codtipobr]
+      display:        [=codobr, codtipobr]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Edición Registro de Obras
+      #display:        [codcon, nomcon, estados]                   
