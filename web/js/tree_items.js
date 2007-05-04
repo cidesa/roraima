@@ -90,7 +90,7 @@ var TREE_ITEMSCOM_ALM = [
 					['Ordenes de Servicio', ReportesCompras+'carordser.php'],
 					['Constancia de Inscripción Provisional De Proveedores', ReportesCompras+'carconinspro.php'],
 				],
-				['Almacén', null,
+				['Almacén',null,
 					['Relación Inventario Almacén', ReportesCompras+'carrelinvalm.php'],
 					['Hoja de Conteo Físico', ReportesCompras+'carconfis.php'],
 					['Inventario Físico Valorado', ReportesCompras+'carinvfis.php'],

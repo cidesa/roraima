@@ -40,14 +40,18 @@ margin:1px -6px -2px 0px;
 padding:2px 6px 5px;
 top:-2px;
 z-index:3;
+
 }
 .dynamic-tab-pane-control .tab-row .tab a {
 color:#0042AE;
 cursor:pointer;
 font-family:Verdana,Helvetica,Arial;
-font-size:13px;
+padding:		2px 5px 3px 5px;
+/*font-size:13px;*/
 text-decoration:none;
 }
+
+	
 .dynamic-tab-pane-control .tab-row .hover a {
 color:#0042AE;
 }
@@ -60,7 +64,7 @@ border:1px solid #78ACFF;
 clear:both;
 color:Black;
 font-family:Verdana,Helvetica,Arial;
-font-size:13px;
+/*font-size:13px;*/
 padding:10px;
 position:relative;
 top:-2px;
