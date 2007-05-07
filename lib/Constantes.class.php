@@ -57,6 +57,15 @@ class Constantes
     
 	public static function ListaTasa()
 	    {return array('B' => 'Bolivares(Bs.)', 'U' => 'Unidades Tributarias');}    
+	    
+	public static function ListaPeriodos()
+		    {return array('0' => '1 Porcion', '1' => '2 Porciones', '2' => '3 Porciones', '3' => '4 Porciones', '4' => '6 Porciones', '5' => '12 Porciones', '6' => '24 Porciones');}	    
+		    
+	public static function ListaDescripcion()
+			    {return array('0' => 'Anualidad', '1' => 'Semestre', '2' => 'Cuatrisemestre', '3' => 'Trimestre', '4' => 'Bimestre', '5' => 'Mensualidad', '6' => 'Quincena');}		    
+			    
+	public static function ListaNivelesInmueble()
+				    {return array('0' => '2', '1' => '3', '2' => '3', '3' => '4', '4' => '5', '5' => '6', '6' => '7', '7' => '8');}			    
 
     public function BuscarDatos($sql)
     {
