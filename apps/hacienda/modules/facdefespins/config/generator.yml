@@ -1,0 +1,55 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcdefins
+    theme:            default
+    fields:
+      codemp: { name: Código}
+      nomemp: { name: Nombre}            
+      loncodubifis: { name: Longitud del Código}
+      rupubifis: { name: Rupturas de Control}
+      forubifis: { name: Formato del Código}
+      loncodubimag: { name: Longitud del Codigo}      
+      rupubimag: { name: Rupturas de Control} 
+      forubimag: { name: Formato del Código}
+      codpic: { name: Patente Industria y Comercio}
+      nomfuep: { name: Patente Industria y Comercio}
+      codveh: { name: Vehiculos}
+      nomfuep: { name: Vehiculos}
+      codinm: { name: Inmuebles Urbanos}
+      nomfuei: { name: Inmuebles Urbanos}
+      codpro: { name: Propaganda Comercial}
+      nomfuepr: { name: Propaganda Comercial} 
+      codesp: { name: Espectáculos Públicos}
+      nomfuee: { name: Espectáculos Públicos}
+      codapu: { name: Apuesta Lícita}
+      nomfuea: { name: Apuesta Lícita}     
+      loncodact: { name: Longitud del Código}
+      rupact: { name: Rupturas de Control}
+      foract: { name: Formato del Código}
+      codajupic: { name: Fuente de Ingreso para el Ajuste}
+      porpic: { name: Alicuota en Porcentaje para Actividad Comercial}
+      unitas: { name: Criterio para Calculo de Tasa}
+      unipic: { name: Unidad}
+      valunitri: { name: Valor de Unidad Tributaria}                  
+      loncodveh: { name: Longitud del Codigo}
+      rupveh: { name: Rupturas de Control}
+      forveh: { name: Formato del Codigo}
+      porveh: { name: Alicuota en Porcentaje para Vehiculos}            
+      loncodcat: { name: Longitud del Codigo}      
+      rupcat: { name: Rupturas de Control}      
+      forcat: { name: Formato del Codigo}       
+      porinm: { name: Alicuota en Porcentaje para Vehiculos}
+                     
+    list:
+      title:          Institucion
+      filters:        [codemp]
+      display:        [=codemp, nomemp]                    
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5      
+    edit:
+      title:          Edicion de Institucion
+      display:        [=codemp, nomemp, loncodubifis, rupubifis, forubifis, loncodubimag, rupubimag, forubimag, codpic, nomfuep, codveh, nomfuev, codinm, nomfuei, codpro, nomfuepr, codesp, nomfuee, codapu, nomfuea, loncodact, rupact, foract, codajupic, porpic, unitas, unipic, valunitri, loncodveh, rupveh, forveh, porveh, loncodcat, rupcat, forcat, porinm]
+      
