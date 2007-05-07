@@ -18,6 +18,12 @@ echo grid_tag($obj);
 ?>
 </form>
 
+<table width="850">
+  <tr>
+    <th><input type="button" value="Restaurar Distribucion" name="btn"></th>
+  </tr>
+</table>
+
 
 
 <?php include_partial('edit_actions', array('fcdefpgi' => $fcdefpgi)) ?>

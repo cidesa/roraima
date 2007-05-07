@@ -49,13 +49,13 @@ class facranpagimpActions extends autofacranpagimpActions
     }
   }
   
-  
-	
+  	
 	public function configGrid()
 	{
 
-        //$per = FcdefpgiPeer::doSelect();
-		$per = array();
+		$c = new Criteria();
+        $per = FcdefpgiPeer::doSelect($c);
+		//$per = array();
 	  
 	    
 	    // Se crea el objeto principal de la clase OpcionesGrid

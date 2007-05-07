@@ -3,9 +3,8 @@ generator:
   param:
     model_class:      Fcdefpgi
     theme:            default
-
-    list:
-      title:          Rango para el Pago de la Tasa para la Tramitacion de la Licencia
-
+    fields:
+      mondes: { name: Monto desde}
     edit:
       title:          Rango para el Pago de la Tasa para la Tramitacion de la Licencia
+      display:        [mondes]
