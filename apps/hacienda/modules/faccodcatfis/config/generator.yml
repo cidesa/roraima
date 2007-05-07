@@ -1,0 +1,55 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcdefnca
+    theme:            default
+    fields:
+      codpar: { name: Parroquia}
+      codmun: { name: Mundo}            
+      codedo: { name: Estado}
+      codpai: { name: Pais}
+      numper: { name: Número de Períodos por Año}
+      denumper: { name: Descripción}
+      numniv: { name: Número de Niveles}
+      nivinm: { name: Nivel del Inmuebles}                
+      nomext1: { name: Nombre Extendido}      
+      nomabr1: { name: Nombre Abreviado} 
+      tamano1: { name: Tamaño}
+      nomext2: { name: Nombre Extendido}
+      nomabr2: { name: Nombre Abreviado}
+      tamano2: { name: Tamaño}
+      nomext3: { name: Nombre Extendido}
+      nomabr3: { name: Nombre Abreviado}
+      tamano3: { name: Tamaño}
+      nomext4: { name: Nombre Extendido}
+      nomabr4: { name: Nombre Abreviado} 
+      tamano4: { name: Tamaño}
+      nomext5: { name: Nombre Extendido}
+      nomabr5: { name: Nombre Abreviado}
+      tamano5: { name: Tamaño}     
+      nomext6: { name: Nombre Extendido}
+      nomabr6: { name: Nombre Abreviado}
+      tamano6: { name: Tamaño}
+      nomext7: { name: Nombre Extendido}
+      nomabr7: { name: Nombre Abreviado}
+      tamano7: { name: Tamaño}
+      nomext8: { name: Nombre Extendido}
+      nomabr8: { name: Nombre Abreviado}                  
+      tamano8: { name: Tamaño}
+      nomext9: { name: Nombre Extendido}
+      nomabr9: { name: Nombre Abreviado}
+      tamano9: { name: Tamaño}            
+      nomext10: { name: Nombre Extendido}      
+      nomabr10: { name: Nombre Abreviado}      
+      tamano10: { name: Tamaño}      
+                     
+    list:
+      title:          Código Catastral Fiscal     
+      display:        [=numper, denumper]                    
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5      
+    edit:
+      title:          Edicion del Código Catastral Fiscal
+      display:        [codpar, codmun, codedo, codpai, numper, denumper, numniv, nivinm, nomext1, nomabr1, tamano1, nomext2, nomabr2, tamano2, nomext3, nomabr3, tamano3, nomext4, nomabr4, tamano4, nomext5, nomabr5, tamano5, nomext6, nomabr6, tamano6, nomext7, nomabr7, tamano7, nomext8, nomabr8, tamano8, nomext9, nomabr9, tamano9, nomext10, nomabr10, tamano10]
