@@ -1,2 +1,5 @@
-# default values
-#all:
+all:
+   .apps:
+     autenticacion:    autenticacion
+     this:             hacienda      #cambiar en cada app
+     
