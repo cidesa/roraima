@@ -54,6 +54,9 @@ class Constantes
     
     public static function ListaCategorias()
     {return array('1' => '1', '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6','7' => '7');}
+    
+	public static function ListaTasa()
+	    {return array('B' => 'Bolivares(Bs.)', 'U' => 'Unidades Tributarias');}    
 
     public function BuscarDatos($sql)
     {
