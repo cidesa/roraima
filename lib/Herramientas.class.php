@@ -60,11 +60,11 @@ class Herramientas
 	
 
 	public static function instr($palabra,$busqueda,$comienzo,$concurrencia){
-		
+
 		$tamano=strlen($palabra);
 		$cont=0;
 		$cont_conc=0;
-				
+
 		for ($i=$comienzo;$i<$tamano;$i++){
 			$cont=$cont+1;
 			if ($palabra[$i]==$busqueda):
@@ -380,6 +380,13 @@ class Herramientas
 		}		
 		 return $resultado;  	
   }
+  
+    public static function mediaNumber($numero)
+	{
+	    $resto = $numero % 2;
+	    if ($resto == 0) return 0;
+	    else return 1;
+	}  
 }
 
 
