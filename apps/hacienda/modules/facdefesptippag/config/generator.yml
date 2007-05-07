@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fctippag
+    theme:            default
+    fields:
+      tippag: { name: Código}
+      despag: { name: Descripción}      
+        
+    list:
+      title:          Definición de Tipos de Pagos  
+      filters:        [tippag]
+      display:        [=tippag, despag]           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~     
+    edit:
+      title:          Edición de Tipos de Pagos
+      display:       [=tippag, despag]
