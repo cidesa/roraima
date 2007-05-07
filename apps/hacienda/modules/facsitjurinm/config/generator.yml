@@ -3,3 +3,19 @@ generator:
   param:
     model_class:      Fcsitjurinm
     theme:            default
+    fields:
+      codsitinm:  {  name: Código}
+      nomsitinm:  {  name: Descripción}
+      stasitinm:  {  name: Exento}
+      
+    list:
+      title:          Situaciones Jurídicas de Inmuebles
+      display:        [=codsitinm, nomsitinm]     
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [=codsitinm, nomsitinm] 
+      max_per_page:   5
+    edit:
+      title:          Edición de Situaciones Jurídicas de Inmuebles
+      Editable:       [codsitinm, nomsitinm, stasitinm]     
