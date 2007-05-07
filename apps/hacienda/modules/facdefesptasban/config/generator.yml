@@ -3,3 +3,20 @@ generator:
   param:
     model_class:      Fctasban
     theme:            default
+
+    fields:
+      tasano:      { name : Año }
+      taspor:      { name : Orden }      
+      tasmes:      { name : Fecha, params: date_format='dd/MM/yyyy'}
+
+    list:
+      title:          Tasas de Intereses Bancarios 
+      display:        [=tasano]
+      filters:        [tasano]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   10    
+    edit:
+      title:          Tasas de Intereses Bancarios 
+      display:        [tasano]  
