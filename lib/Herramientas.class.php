@@ -140,11 +140,11 @@ class Herramientas
     //public static function getX($fieldjoin, $join, $result, $data)
     public static function getX($campos, $tabla, $result, $data)
      {
-     	eval ('$field = '.ucfirst(strtolower($join)).'Peer::'.strtoupper($fieldjoin).';');
+     	eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campos).';');
 	
 	   $c = new Criteria();
 	   $c->add($field,$data);
-	   eval ('$reg = '.ucfirst(strtolower($join)).'Peer::doSelectone($c);');
+	   eval ('$reg = '.ucfirst(strtolower($tabla)).'Peer::doSelectone($c);');
 	   if ($reg){
 	   	eval('$r = $reg->get'.ucfirst(strtolower($result)).'();');
 		 return $r;
