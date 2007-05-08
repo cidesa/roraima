@@ -18,8 +18,7 @@ generator:
       codsec:      { name: Código Sector}
       dirobr:      { name: Dirección}
       codpre:      { name: Código Presupuestario}
-      despre:      { name: Descripción}
-      nommun:      { name: dsfsd}
+      nompre:      { name: Nombre Presupuestario}      
 
     list:
       title:          Definición Registro de Obras
@@ -32,4 +31,4 @@ generator:
                         
     edit:
       title:          Edición Registro de Obras
-      display:        [codobr, codtipobr, desobr, fecini, fecfin, codpai, codedo, codmun, nommun, codpar, codsec, dirobr, codpre, despre]
+      display:        [codobr, codtipobr, desobr, fecini, fecfin, codpai, codedo, codmun, codpar, codsec, dirobr, codpre, nompre]
