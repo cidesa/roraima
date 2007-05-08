@@ -85,25 +85,26 @@ class Herramientas
 	}
 
 	public static function FormarCodigoPadre($codigo,&$nivelcodigo,&$ultimo)
-	{   $nivelcodigo='';
-	$c = new Criteria();
-	$arti = CadefartPeer::doSelect($c);
-	$cadena=$arti[0]->getForart();
-	$loncad=split("-",$cadena);
-	$lonniv=strlen($loncad[0]);
-	$loncodigo=(strlen($codigo));
-	if ($lonniv==$loncodigo){
-		$nivelcodigo=1;
-		$padre='';
-		return false;
-	}else{
-		$nivelcodigo=0;
-		$padre=Herramientas::instr($codigo,'-',0,1);
-		$pad=($padre-1);
-		$cad=(substr($codigo,0,$pad));
-		$ultimo=str_pad($cad,20,' ');
-		return true;
-	}
+	{   
+	  $nivelcodigo='';
+	  $c = new Criteria();
+	  $arti = CadefartPeer::doSelect($c);
+	  $cadena=$arti[0]->getForart();
+	  $loncad=split("-",$cadena);
+	  $lonniv=strlen($loncad[0]);
+	  $loncodigo=(strlen($codigo));
+	    if ($lonniv==$loncodigo){
+		  $nivelcodigo=1;
+		  $padre='';
+		  return false;
+	    }else{
+		  $nivelcodigo=0;
+		  $padre=Herramientas::instr($codigo,'-',0,1);
+		  $pad=($padre-1);
+		  $cad=(substr($codigo,0,$pad));
+		  $ultimo=str_pad($cad,20,' ');
+		  return true;
+	    } 
 	}
 
 	public static function buscar_codigo_padre($codigo2)
