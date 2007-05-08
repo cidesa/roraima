@@ -66,11 +66,12 @@ class faccatfinfisActions extends autofaccatfinfisActions
     if (isset($fccatfis['codcatfis']))
     {
       $codcatfis = $fccatfis['codcatfis'];
-      if(strrchr($codcatfis,' ')) $codcatfis = str_replace(' ','-',$fccatfis['codcatfis']);
+      print strrchr($codcatfis,' ');
+      if(strrchr($codcatfis,' ')!=false) $codcatfis = str_replace(' ','-',$codcatfis);
       
-      $codcatfis = rpad($codcatfis,30,' ');
+      $codcatfis = str_pad($codcatfis,30,' ');
  
-      $this->fccatfis->setCodcatfis($fccatfis['codcatfis']);
+      $this->fccatfis->setCodcatfis($codcatfis);
     }
     if (isset($fccatfis['nomcatfis']))
     {
