@@ -8,8 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición Registro de Obras', 
-array()) ?></h1>
+<h1><?php echo __('Edición Registro de Obras',array()) ?></h1>
 
 <div id="sf_admin_header">
 <?php include_partial('oycdesobr/edit_header', array('ocregobr' => $ocregobr)) ?>

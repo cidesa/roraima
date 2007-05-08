@@ -25,35 +25,34 @@ class Ocregobr extends BaseOcregobr
   {
   	return Herramientas::getX('CODPAI','Ocpais','Nompai',self::getCodpai());  	
   }	 
- public function getNomedo()
-  {
-/*
-		return $destipact= Herramientas::getXx('Ocasiact',$filtros_tablas,$filtros_variables,'Destipact');
-  */
-		$filtros_tablas=array('CODPAI','CODEDO');//arreglo donde mando los filtros de las clases
-		$filtros_variables=array(self::getCodpai(),self::getCodedo());//arreglo donde mando los parametros de la funcion
-  
-  	//return $nomedo= Herramientas::getX('Ocestado',$filtros_tablas,$filtros_variables,'Nomedo');  	
+	/**
+	 * Función para retornar el nombre del Estado.
+	 * Esta función retorna un registro.
+	 *  
+	 */     
+ public function getNomedo() 
+  {  	
+  	return Herramientas::getX('CODEDO','Ocestado','Nomedo',self::getCodedo());  	
+
   }	 
- public function getNommun()
+	/**
+	 * Función para retornar el nombre del Municipio.
+	 * Esta función retorna un registro.
+	 *  
+	 */      
+  public function getNommun() 
   {
-/*
-		return $destipact= Herramientas::getXx('Ocasiact',$filtros_tablas,$filtros_variables,'Destipact');
-  */
-		$filtros_tablas=array('CODPAI','CODEDO');//arreglo donde mando los filtros de las clases
-		$filtros_variables=array(self::getCodpai(),self::getCodedo());//arreglo donde mando los parametros de la funcion
+		$filtros_tablas=array('CODPAI','CODEDO'); 
+		$filtros_variables=array(self::getCodpai(),self::getCodedo());
   
-  	//return $nomedo= Herramientas::getX('Ocestado',$filtros_tablas,$filtros_variables,'Nomedo');  	
+  	return Herramientas::getXx('Ocmunici',$filtros_tablas,$filtros_variables,'Nommun');  	
   }	 
- public function getNompar()
+ public function getNompar()  //Nombre de la Parroquia
   {
-/*
-		return $destipact= Herramientas::getXx('Ocasiact',$filtros_tablas,$filtros_variables,'Destipact');
-  */
-		$filtros_tablas=array('CODPAI','CODEDO');//arreglo donde mando los filtros de las clases
-		$filtros_variables=array(self::getCodpai(),self::getCodedo());//arreglo donde mando los parametros de la funcion
+		$filtros_tablas=array('CODPAI','CODEDO','CODMUN');
+		$filtros_variables=array(self::getCodpai(),self::getCodedo(),self::getCodmun());
   
-  	//return $nomedo= Herramientas::getX('Ocestado',$filtros_tablas,$filtros_variables,'Nomedo');  	
+  	return Herramientas::getXx('Ocparroq',$filtros_tablas,$filtros_variables,'Nompar');  	
   }	 
  public function getNomsec()
   {

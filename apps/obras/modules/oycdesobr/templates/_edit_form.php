@@ -169,7 +169,7 @@
   <?php $value = object_input_tag($ocregobr, 'getNommun', array (
   'disabled' => true,
   'size'=> 40,
-  'control_name' => 'ocregobr[nommun]',
+  'control_name' => 'ocregobr[Nommun]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -193,7 +193,7 @@
   <?php $value = object_input_tag($ocregobr, 'getNompar', array (
   'disabled' => true,
   'size'=> 40,
-  'control_name' => 'ocregobr[nompar]',
+  'control_name' => 'ocregobr[Nompar]',
 )); echo $value ? $value : '&nbsp;' ?>
 
     </div>
