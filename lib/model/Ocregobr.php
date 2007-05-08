@@ -35,5 +35,36 @@ class Ocregobr extends BaseOcregobr
   
   	//return $nomedo= Herramientas::getX('Ocestado',$filtros_tablas,$filtros_variables,'Nomedo');  	
   }	 
+ public function getNommun()
+  {
+/*
+		return $destipact= Herramientas::getXx('Ocasiact',$filtros_tablas,$filtros_variables,'Destipact');
+  */
+		$filtros_tablas=array('CODPAI','CODEDO');//arreglo donde mando los filtros de las clases
+		$filtros_variables=array(self::getCodpai(),self::getCodedo());//arreglo donde mando los parametros de la funcion
+  
+  	//return $nomedo= Herramientas::getX('Ocestado',$filtros_tablas,$filtros_variables,'Nomedo');  	
+  }	 
+ public function getNompar()
+  {
+/*
+		return $destipact= Herramientas::getXx('Ocasiact',$filtros_tablas,$filtros_variables,'Destipact');
+  */
+		$filtros_tablas=array('CODPAI','CODEDO');//arreglo donde mando los filtros de las clases
+		$filtros_variables=array(self::getCodpai(),self::getCodedo());//arreglo donde mando los parametros de la funcion
+  
+  	//return $nomedo= Herramientas::getX('Ocestado',$filtros_tablas,$filtros_variables,'Nomedo');  	
+  }	 
+ public function getNomsec()
+  {
+/*
+		return $destipact= Herramientas::getXx('Ocasiact',$filtros_tablas,$filtros_variables,'Destipact');
+  */
+		$filtros_tablas=array('CODPAI','CODEDO');//arreglo donde mando los filtros de las clases
+		$filtros_variables=array(self::getCodpai(),self::getCodedo());//arreglo donde mando los parametros de la funcion
+  
+  	//return $nomedo= Herramientas::getX('Ocestado',$filtros_tablas,$filtros_variables,'Nomedo');  	
+  }	 
+
 
 }
