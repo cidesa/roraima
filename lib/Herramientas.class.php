@@ -136,7 +136,8 @@ class Herramientas
 	 * @return string $result es el nombre del campo que se quiere traer la data
 	 * @param string $data variale con la que se va hacer el filtro.
 	 */     
-    public static function getX($fieldjoin, $join, $result, $data)
+    //public static function getX($fieldjoin, $join, $result, $data)
+    public static function getX($campos, $tabla, $result, $data)
      {
      	eval ('$field = '.ucfirst(strtolower($join)).'Peer::'.strtoupper($fieldjoin).';');
 	
