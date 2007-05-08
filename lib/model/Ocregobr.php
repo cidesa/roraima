@@ -36,34 +36,14 @@ class Ocregobr extends BaseOcregobr
 
   }	 
 	/**
-	 * Función para retornar el nombre del Municipio.
+	 * Función para retornar el nombre del Titulo Presupuestario.
 	 * Esta función retorna un registro.
 	 *  
-	 */      
-  public function getNommun() 
-  {
-		$filtros_tablas=array('CODPAI','CODEDO'); 
-		$filtros_variables=array(self::getCodpai(),self::getCodedo());
-  
-  	return Herramientas::getXx('Ocmunici',$filtros_tablas,$filtros_variables,'Nommun');  	
-  }	 
- public function getNompar()  //Nombre de la Parroquia
-  {
-		$filtros_tablas=array('CODPAI','CODEDO','CODMUN');
-		$filtros_variables=array(self::getCodpai(),self::getCodedo(),self::getCodmun());
-  
-  	return Herramientas::getXx('Ocparroq',$filtros_tablas,$filtros_variables,'Nompar');  	
-  }	 
- public function getNomsec()
-  {
-/*
-		return $destipact= Herramientas::getXx('Ocasiact',$filtros_tablas,$filtros_variables,'Destipact');
-  */
-		$filtros_tablas=array('CODPAI','CODEDO');//arreglo donde mando los filtros de las clases
-		$filtros_variables=array(self::getCodpai(),self::getCodedo());//arreglo donde mando los parametros de la funcion
-  
-  	//return $nomedo= Herramientas::getX('Ocestado',$filtros_tablas,$filtros_variables,'Nomedo');  	
-  }	 
+	 */     
+ public function getNompre() 
+  {  	
+  	return Herramientas::getX('CODPRE','Cpdeftit','Codpre',self::getCodpre());  	
 
+  }	 
 
 }
