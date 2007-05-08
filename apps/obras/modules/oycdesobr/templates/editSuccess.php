@@ -16,7 +16,7 @@
 
 <div id="sf_admin_content">
 <?php include_partial('oycdesobr/edit_messages', array('ocregobr' => $ocregobr, 'labels' => $labels)) ?>
-<?php include_partial('oycdesobr/edit_form', array('ocregobr' => $ocregobr, 'labels' => $labels, 'obj' => $obj)) ?>
+<?php include_partial('oycdesobr/edit_form', array('ocregobr' => $ocregobr, 'labels' => $labels, 'obj' => $obj, 'pais' => $pais, 'estados' => $estados, 'municipio' => $municipio, 'parroquia' => $parroquia, 'sector' => $sector)) ?>
 </div>
 
 <div id="sf_admin_footer">

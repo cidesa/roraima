@@ -100,130 +100,67 @@
     </div>
 </div>
 
-<?php tabPageOpenClose("tp1", "tabPage2", 'Datos Ubicacion');?> 
-<div class="form-row">
-  <?php echo label_for('ocregobr[codpai]', __($labels['ocregobr{codpai}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('ocregobr{codpai}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('ocregobr{codpai}')): ?>
-    <?php echo form_error('ocregobr{codpai}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregobr, 'getCodpai', array (
-  'size' => 4,
-  'maxlength' => 4,  
-  'control_name' => 'ocregobr[codpai]',
-)); echo $value ? $value : '&nbsp;' ?>
-
-&nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;
-  <?php $value = object_input_tag($ocregobr, 'getNompai', array (
-  'disabled' => true,
-  'size'=> 40,
-  'control_name' => 'ocregobr[nompai]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+<?php tabPageOpenClose("tp1", "tabPage2", 'Datos Ubicacion');?>
+<div class="form-row"><?php echo label_for('ocregobr[codpai]', __($labels['ocregobr{codpai}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('ocregobr{codpai}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('ocregobr{codpai}')): ?><?php echo form_error('ocregobr{codpai}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php echo select_tag('ocregobr[codpai]', options_for_select($pais,'001'),array('onChange'=> remote_function(array(
+		'update'   => 'divEstados',
+		'url'      => 'oycdatsol/combo?par=1',
+		'with' => "'pais='+this.value"
+  ))));?></div>
+<br>
+<?php echo label_for('ocregobr[codedo]', __($labels['ocregobr{codedo}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('ocregobr{codedo}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('ocregobr{codedo}')): ?> <?php echo form_error('ocregobr{codedo}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+<div id="divEstados"><?php echo select_tag('ocregobr[codedo]', options_for_select($estados,'001'),array('onChange'=> remote_function(array(
+		'update'   => 'divMunicipios',
+		'url'      => 'oycdatsol/combo?par=2',
+		'with' => "'pais='+document.getElementById('ocregobr_codpai').value+'&estado='+this.value"
+  ))));?></div>
 </div>
-
-<div class="form-row">
-  <?php echo label_for('ocregobr[codedo]', __($labels['ocregobr{codedo}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('ocregobr{codedo}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('ocregobr{codedo}')): ?>
-    <?php echo form_error('ocregobr{codedo}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($ocregobr, 'getCodedo', array (
-  'size' => 4,
-  'maxlength' => 4,
-  'control_name' => 'ocregobr[codedo]',
-)); echo $value ? $value : '&nbsp;' ?>
-
-&nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;
-  <?php $value = object_input_tag($ocregobr, 'getNomedo', array (
-  'disabled' => true,
-  'size'=> 40,
-  'control_name' => 'ocregobr[Nomedo]',
-)); echo $value ? $value : '&nbsp;' ?>
-
-    </div>
+<br>
+<?php echo label_for('ocregobr[codmun]', __($labels['ocregobr{codmun}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('ocregobr{codmun}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('ocregobr{codmun}')): ?> <?php echo form_error('ocregobr{codmun}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+<div id="divMunicipios"><?php echo select_tag('ocregobr[codmun]', options_for_select($municipio,'001'),array('onChange'=> remote_function(array(
+		'update'   => 'divParroquia',
+		'url'      => 'oycdatsol/combo?par=3',
+		'with' => "'pais='+document.getElementById('ocregobr_codpai').value+'&estado='+document.getElementById('ocregobr_codedo').value+'&municipio='+this.value"
+  ))));?></div>
 </div>
-
-<div class="form-row">
-  <?php echo label_for('ocregobr[codmun]', __($labels['ocregobr{codmun}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('ocregobr{codmun}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('ocregobr{codmun}')): ?>
-    <?php echo form_error('ocregobr{codmun}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($ocregobr, 'getCodmun', array (
-  'size' => 4,
-  'maxlength' => 4,  
-  'control_name' => 'ocregobr[codmun]',
-)); echo $value ? $value : '&nbsp;' ?>
-
-&nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;
-  <?php $value = object_input_tag($ocregobr, 'getNommun', array (
-  'disabled' => true,
-  'size'=> 40,
-  'control_name' => 'ocregobr[Nommun]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+<br>
+<?php echo label_for('ocregobr[codpar]', __($labels['ocregobr{codpar}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('ocregobr{codpar}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('ocregobr{codpar}')): ?> <?php echo form_error('ocregobr{codpar}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+<div id="divParroquia"><?php echo select_tag('ocregobr[codpar]', options_for_select($parroquia,'001'),array('onChange'=> remote_function(array(
+'update'   => 'divSector',
+'url'      => 'oycdatsol/combo?par=4',
+'with' => "'pais='+document.getElementById('ocregobr_codpai').value+'&estado='+document.getElementById('ocregobr_codedo').value+'&municipio='+document.getElementById('ocregobr_codmun').value+'&parroquia='+this.value"
+  ))));?></div>
 </div>
-
-<div class="form-row">
-  <?php echo label_for('ocregobr[codpar]', __($labels['ocregobr{codpar}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('ocregobr{codpar}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('ocregobr{codpar}')): ?>
-    <?php echo form_error('ocregobr{codpar}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($ocregobr, 'getCodpar', array (
-  'size' => 4,
-  'maxlength' => 4,  
-  'control_name' => 'ocregobr[codpar]',
-)); echo $value ? $value : '&nbsp;' ?>
-
-&nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;
-  <?php $value = object_input_tag($ocregobr, 'getNompar', array (
-  'disabled' => true,
-  'size'=> 40,
-  'control_name' => 'ocregobr[Nompar]',
-)); echo $value ? $value : '&nbsp;' ?>
-
-    </div>
+<br>
+<?php echo label_for('ocregobr[codsec]', __($labels['ocregobr{codsec}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('ocregobr{codsec}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('ocregobr{codsec}')): ?> <?php echo form_error('ocregobr{codsec}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+<div id="divSector"><?php echo select_tag('ocregobr[codsec]', options_for_select($sector,'001'),array('onChange'=> remote_function(array(
+'update'   => 'divCasa',
+'url'      => 'oycdatsol/combo?par=5',
+'with' => "'pais='+document.getElementById('ocregobr_codpai').value+'&estado='+document.getElementById('ocregobr_codedo').value+'&municipio='+document.getElementById('ocregobr_codmun').value+'&parroquia='+document.getElementById('ocregobr_codpar').value+'&sector='+this.value"
+  ))));?></div>
 </div>
-
-<div class="form-row">
-  <?php echo label_for('ocregobr[codsec]', __($labels['ocregobr{codsec}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('ocregobr{codsec}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('ocregobr{codsec}')): ?>
-    <?php echo form_error('ocregobr{codsec}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($ocregobr, 'getCodsec', array (
-  'size' => 4,
-  'maxlength' => 4,  
-  'control_name' => 'ocregobr[codsec]',
-)); echo $value ? $value : '&nbsp;' ?>
-
-&nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;
-  <?php $value = object_input_tag($ocregobr, 'getNomsec', array (
-  'disabled' => true,
-  'size'=> 40,
-  'control_name' => 'ocregobr[nomsec]',
-)); echo $value ? $value : '&nbsp;' ?>
-
-    </div>
 </div>
-
+ 
 <div class="form-row">
   <?php echo label_for('ocregobr[dirobr]', __($labels['ocregobr{dirobr}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('ocregobr{dirobr}')): ?> form-error<?php endif; ?>">
