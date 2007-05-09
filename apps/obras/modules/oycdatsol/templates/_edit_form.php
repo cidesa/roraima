@@ -7,10 +7,10 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
+<?php use_helper('tabs') ?>
 <?php echo object_input_hidden_tag($ocdatste, 'getId') ?>
 
-
+<?php tabMainJS("tp1","tabPane1", "tabPage1", 'Datos de Solicitante');?>
 <fieldset><legend><strong>Datos de Solicitante</strong></legend>
 <div class="form-row"><?php echo label_for('ocdatste[cedste]', __($labels['ocdatste{cedste}']), 'class="required" ') ?>
 <div
@@ -82,7 +82,7 @@
 </div>
 
 </fieldset>
-
+<?php tabPageOpenClose("tp1", "tabPage2", 'Datos Representante');?>
 <fieldset><legend><strong>Datos Representante</strong></legend>
 
 
@@ -142,7 +142,7 @@
 </div>
 
 </fieldset>
-
+<?php tabPageOpenClose("tp1", "tabPage3", 'Datos Ubicación del Solicitante');?>
 <fieldset><legend><strong>Datos Ubicación del Solicitante</strong></legend>
 
 
@@ -150,7 +150,12 @@
 <div
 	class="content<?php if ($sf_request->hasError('ocdatste{codpai}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('ocdatste{codpai}')): ?><?php echo form_error('ocdatste{codpai}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php echo select_tag('ocdatste[codpai]', options_for_select($pais,'0001'),array('onChange'=> remote_function(array(
+<?php endif; ?> 
+<?php 
+$pais['S'] = 'Seleccione'; 
+if ($ocdatste->getCodpai()) $var=''; else $var='S';
+?>
+ <?php echo select_tag('ocdatste[codpai]', options_for_select($pais,$var),array('onChange'=> remote_function(array(
 		'update'   => 'divEstados',
 		'url'      => 'oycdatsol/combo?par=1',
 		'with' => "'pais='+this.value"
@@ -161,7 +166,12 @@
 	class="content<?php if ($sf_request->hasError('ocdatste{codedo}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('ocdatste{codedo}')): ?> <?php echo form_error('ocdatste{codedo}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?>
-<div id="divEstados"><?php echo select_tag('ocdatste[codedo]', options_for_select($estados,'0001'),array('onChange'=> remote_function(array(
+<div id="divEstados">
+<?php
+$estados['S'] = 'Seleccione';
+if ($ocdatste->getCodedo()) $var=''; else $var='S';
+?>
+<?php echo select_tag('ocdatste[codedo]', options_for_select($estados,$var),array('onChange'=> remote_function(array(
 		'update'   => 'divMunicipios',
 		'url'      => 'oycdatsol/combo?par=2',
 		'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+this.value"
@@ -173,7 +183,12 @@
 	class="content<?php if ($sf_request->hasError('ocdatste{codmun}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('ocdatste{codmun}')): ?> <?php echo form_error('ocdatste{codmun}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?>
-<div id="divMunicipios"><?php echo select_tag('ocdatste[codmun]', options_for_select($municipio,'0001'),array('onChange'=> remote_function(array(
+<div id="divMunicipios">
+<?php
+$municipio['S'] = 'Seleccione';
+if ($ocdatste->getCodmun()) $var=''; else $var='S';
+?>
+<?php echo select_tag('ocdatste[codmun]', options_for_select($municipio,$var),array('onChange'=> remote_function(array(
 		'update'   => 'divParroquia',
 		'url'      => 'oycdatsol/combo?par=3',
 		'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+document.getElementById('ocdatste_codedo').value+'&municipio='+this.value"
@@ -185,7 +200,13 @@
 	class="content<?php if ($sf_request->hasError('ocdatste{codpar}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('ocdatste{codpar}')): ?> <?php echo form_error('ocdatste{codpar}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?>
-<div id="divParroquia"><?php echo select_tag('ocdatste[codpar]', options_for_select($parroquia,'0001'),array('onChange'=> remote_function(array(
+<div id="divParroquia">
+<?php
+$parroquia['S'] = 'Seleccione';
+if ($ocdatste->getCodpar()) $var=''; else $var='S';
+?>
+<?php $parroquia['S'] = 'Seleccione' ?>
+<?php echo select_tag('ocdatste[codpar]', options_for_select($parroquia,$var),array('onChange'=> remote_function(array(
 'update'   => 'divSector',
 'url'      => 'oycdatsol/combo?par=4',
 'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+document.getElementById('ocdatste_codedo').value+'&municipio='+document.getElementById('ocdatste_codmun').value+'&parroquia='+this.value"
@@ -197,7 +218,12 @@
 	class="content<?php if ($sf_request->hasError('ocdatste{codsec}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('ocdatste{codsec}')): ?> <?php echo form_error('ocdatste{codsec}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?>
-<div id="divSector"><?php echo select_tag('ocdatste[codsec]', options_for_select($sector,'0001'),array('onChange'=> remote_function(array(
+<div id="divSector">
+<?php
+$sector['S'] = 'Seleccione';
+if ($ocdatste->getCodsec()) $var=''; else $var='S';
+?>
+<?php echo select_tag('ocdatste[codsec]', options_for_select($sector,$var),array('onChange'=> remote_function(array(
 'update'   => 'divCasa',
 'url'      => 'oycdatsol/combo?par=5',
 'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+document.getElementById('ocdatste_codedo').value+'&municipio='+document.getElementById('ocdatste_codmun').value+'&parroquia='+document.getElementById('ocdatste_codpar').value+'&sector='+this.value"
@@ -206,7 +232,7 @@
 </div>
 
 </fieldset>
-
+<?php tabInit();?>
 <?php include_partial('edit_actions', array('ocdatste' => $ocdatste)) ?>
 
 </form>
