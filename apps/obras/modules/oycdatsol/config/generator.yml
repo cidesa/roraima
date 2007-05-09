@@ -7,7 +7,7 @@ generator:
       cedste:    { name: C.I./RIF} 
       nomste:    { name: Nombre} 
       codste:    { name: Tipo} 
-      desste:    { name: Descripci�n Tipo} 
+      desste:    { name: Descripcin Tipo} 
       dirste:    { name: Dirección} 
       telste:    { name: Teléfono(s)}
       faxste:    { name: Fax} 
@@ -27,7 +27,7 @@ generator:
     list:
       title:          Datos del Solicitante
       filters:        [cedste]
-      display:        [cedste, nomste]
+      display:        [=cedste, nomste]
       object_actions:
         _edit:        ~
         _delete:      ~
