@@ -3,18 +3,19 @@
 // date: 2007/04/09 17:27:37
 ?>
 <?php use_helper('Object', 'Validation', 'Javascript') ?>
-
 <?php if ($tipo=='P')
 {
- echo select_tag('ocdatste[codedo]', options_for_select($estados,'0001'),array('onChange'=> remote_function(array(
-'update'   => 'divMunicipios',
-'url'      => 'oycdatsol/combo?par=2',
-'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+this.value"
+	$estados['S'] = 'Seleccione';
+ echo select_tag('ocdatste[codedo]', options_for_select($estados,'S'),array('onChange'=> remote_function(array(
+ 'update'   => 'divMunicipios',
+ 'url'      => 'oycdatsol/combo?par=2',
+ 'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+this.value"
   ))));
 }
 else if ($tipo=='E')
 {
-	echo select_tag('ocdatste[codmun]', options_for_select($municipio,'0001'),array('onChange'=> remote_function(array(
+	$municipio['S'] = 'Seleccione';
+	echo select_tag('ocdatste[codmun]', options_for_select($municipio,'S'),array('onChange'=> remote_function(array(
 	'update'   => 'divParroquia',
 	'url'      => 'oycdatsol/combo?par=3',
 	'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+document.getElementById('ocdatste_codedo').value+'&municipio='+this.value"
@@ -22,7 +23,8 @@ else if ($tipo=='E')
 }
 else if ($tipo=='M')
 {
-	echo select_tag('ocdatste[codpar]', options_for_select($parroquia,'0001'),array('onChange'=> remote_function(array(
+	$parroquia['S'] = 'Seleccione';
+	echo select_tag('ocdatste[codpar]', options_for_select($parroquia,'S'),array('onChange'=> remote_function(array(
 	'update'   => 'divSector',
 	'url'      => 'oycdatsol/combo?par=4',
 	'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+document.getElementById('ocdatste_codedo').value+'&municipio='+document.getElementById('ocdatste_codmun').value+'&parroquia='+this.value"
@@ -30,11 +32,11 @@ else if ($tipo=='M')
 }
 else if ($tipo=='S')
 {
-	echo select_tag('ocdatste[codsec]', options_for_select($sector,'0001'),array('onChange'=> remote_function(array(
+	$sector['S'] = 'Seleccione';
+	echo select_tag('ocdatste[codsec]', options_for_select($sector,'S'),array('onChange'=> remote_function(array(
 	'update'   => 'divCasa',
 	'url'      => 'oycdatsol/combo?par=5',
 	'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+document.getElementById('ocdatste_codedo').value+'&municipio='+document.getElementById('ocdatste_codmun').value+'&parroquia='+document.getElementById('ocdatste_codpar').value+'&sector='+this.value"
   ))));
 }
 ?>
-
