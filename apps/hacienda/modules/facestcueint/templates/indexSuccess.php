@@ -38,13 +38,13 @@
   <thead> <tr>
     <td width="50"><fieldset id="sf_fieldset_none" class="">
 <legend>Nacionalidad</legend>
-<?php echo radiobutton_tag('Nacionalidad[]', 'S', true) ."Venezolano(a)"?>
-<?php echo radiobutton_tag('Nacionalidad[]', 'N', false)       .          "Extranjero(a)"?></td>
+<?php echo radiobutton_tag('Nacionalidad[]', 'V', true) ."Venezolano(a)"?>
+<?php echo radiobutton_tag('Nacionalidad[]', 'E', false)       .          "Extranjero(a)"?></td>
 </fieldset>
     <td width="50"><fieldset id="sf_fieldset_none" class="">
 <legend>Tipo</legend>
-<?php echo radiobutton_tag('Tipo[]', 'S', true) ."Natural"?>
-<?php echo radiobutton_tag('Tipo[]', 'N', false)        .           "Jurídica"?>
+<?php echo radiobutton_tag('Tipo[]', 'N', true) ."Natural"?>
+<?php echo radiobutton_tag('Tipo[]', 'J', false)        .           "Jurídica"?>
 </fieldset></td>
   </tr></thead>
 </table>

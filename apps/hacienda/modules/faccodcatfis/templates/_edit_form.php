@@ -31,14 +31,14 @@
     <?php echo form_error('fcdefnca{codpar}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
   
-<?php echo select_tag('fcdefnca[codpar]', options_for_select($lista,$fcdefnca->getCodpar())) ?>
+<?php echo select_tag('fcdefnca[codpar]', options_for_select($lista,$fcdefnca->getCodpar(), 'include_blank=true')) ?>
 </div>
 
 <div class="form-row">
 <strong>Número de Períodos por Año</strong>
-<?php echo select_tag('fcdefnca[numper]', options_for_select($listaperiodos,$fcdefnca->getNumper())) ?>
+<?php echo select_tag('fcdefnca[numper]', options_for_select($listaperiodos,$fcdefnca->getNumper(), 'include_custom=Seleccione uno')) ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<?php echo select_tag('fcdefnca[denumper]', options_for_select($listadescripcion,$fcdefnca->getDenumper())) ?>  
+<?php echo select_tag('fcdefnca[denumper]', options_for_select($listadescripcion,$fcdefnca->getDenumper(), 'include_custom=Seleccione uno')) ?>  
 </div>
 </fieldset>
 </div>
@@ -48,10 +48,10 @@
 <legend>Variable</legend>
 <div class="form-row">
  <strong>Número de Niveles</strong>
-<?php echo select_tag('fcdefnca[numniv]', options_for_select($listanivelinmueble,$fcdefnca->getNumniv())) ?>  
+<?php echo select_tag('fcdefnca[numniv]', options_for_select($listanivelinmueble,$fcdefnca->getNumniv(), 'include_custom=Seleccione uno')) ?>  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong>Nivel del Inmueble</strong>
-<?php echo select_tag('fcdefnca[nivinm]', options_for_select($listanivelinmueble,$fcdefnca->getNivinm())) ?> 
+<?php echo select_tag('fcdefnca[nivinm]', options_for_select($listanivelinmueble,$fcdefnca->getNivinm(), 'include_custom=Seleccione uno')) ?> 
 </div>
 </fieldset>
 </div>
