@@ -1,0 +1,90 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcreginm
+    theme:            default
+    fields:
+      nroinm:      {  name: Nro. Inscripción } 
+      codcatfis:   {  name: Código }
+      coduso:      {  name: Código }
+      nomuso:      {  name: Nombre }            # Campo Externo FCUsoInm => Nombre Representante
+      codcarinm:   {  name: Código }
+      nomcarinm:   {  name: Nombre }            # Campo Externo FCCarInm => Nombre
+      codsitinm:   {  name: Código }
+      nomsitinm:   {  name: Nombre }            # Campo Externo FCSitJurInm => Nombre
+      rifcon:      {  name: C.I. / RIF }
+      rifrep:      {  name: C.I. / RIF }
+      rifconant:   {  name: C.I. / RIF }        # Campo Externo FCTraInm.
+      nomcon:      {  name: nombre } 
+      dircon:      {  name: Dirección }
+      fecpag:      {  name: Fecha Último Pago }
+      feccal:      {  name: Fecha Último Avalúo }
+      fecreg:      {  name: Fecha }
+      nomrep:      {  name: Nombre }            # Campo Externo FCConRep => Nombre Representante
+      dirrep:      {  name: Dirección }         # Campo Externo FCConRep => Nombre Representante
+      naccon:      {  name: Nacionalidad }      # Campo Externo FCConRep => Nombre Representante
+      tipcon:      {  name: Tipo  }             # Campo Externo FCConRep => Nombre Representante
+      dirinm:      {  name: Dirección }
+      linnor:      {  name: Norte }
+      linsur:      {  name: Sur }
+      linest:      {  name: Este }
+      linoes:      {  name: Oeste }
+      mtrter:      {  name: M2 }
+      mtrcon:      {  name: M2 }
+      bster:       {  name: Bs }
+      bscon:       {  name: Bs }
+      docpro:      {  name:  }
+      rifrep:      {  name: C.I. / RIF }
+      funrec:      {  name: Funcionario Receptor }
+      fecrec:      {  name:  }
+      estinm:      {  name: Estado }
+      estdec:      {  name:  }
+      codcatinm:   {  name: Código }
+      nomconant:      {  name: Nombre }
+      dirconant:      {  name: Dirección }
+      clacon:      {  name:  }
+      fecadq:      {  name:  }
+      valinm:      {  name: Precio }
+      codman:      {  name:  }
+      codsec:      {  name:  }
+      codpar:      {  name:  }
+      nroinmant:   {  name:  }
+      totter:      {  name:  }
+      totcon:      {  name:  }
+      total:       {  name:  }
+      codtip:      {  name: Código }
+      codzon:      {  name: Código }
+      destip:      {  name: Descripción }
+      deszon:      {  name: Descripción }
+      anual:       {  name: Bs. /M2 Anual Contrucción }
+      folio:       {  name: Fólio }
+      tomo:        {  name: Tomo }
+      numdoc:      {  name: Número }
+      fecdoc:      {  name: Fecha }
+      usoinm:      {  name:  }
+      desde:       {  name:  }
+      hasta:       {  name:  }
+      ord:         {  name:  }
+      art:         {  name:  }
+      fecdir:      {  name:  }
+      fecava:      {  name:  }
+      dirinm1:     {  name:  }
+      fecela:      {  name:  }
+      tri:         {  name:  }
+      prot:        {  name:  }
+      tipobol:     {  name:  }
+      nomsitinm:   {  name:  }
+      impanu:      {  name:  }
+      imptri:      {  name:  }
+      anualt:      {  name: Bs. /M2 Anual Terreno }
+    list:
+      title:          Registro de Inmuebles
+      display:        [=nroinm, fecreg, rifcon, nomcon, rifrep, nomrep ]     
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [nroinm, fecreg, rifcon, nomcon, rifrep, nomrep] 
+      max_per_page:   5
+    edit:
+      title:          Edición de Registro de Inmuebles
+      Editable:       [nroinm, codcatfis, coduso, nomuso, codcarinm, nomcarinm, codsitinm, nomsitinm, rifcon, rifconant, nomcon, dircon, fecpag, feccal, fecreg, nomrep, dirrep, naccon, tipcon, dirinm, linnor, linsur, linest, linoes, mtrter, mtrcon, bster, bscon, rifrep, funrec, estinm, codcatinm, nomconant, dirconant, valinm, codtip, codzon, destip, deszon, anual, folio, tomo, numdoc, fecdoc, anualt]
