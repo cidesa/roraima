@@ -43,6 +43,10 @@ body
 	background-color: #FFFFFF;
 }
 
+INPUT[disabled]{background-color:#FFFFFF;color:black;}
+
+.disabledtext{color:transparent;}
+
 .grid_txtleft {
 	border: none;
 	margin: 0px;
