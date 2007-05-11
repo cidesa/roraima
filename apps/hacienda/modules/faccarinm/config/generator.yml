@@ -1,0 +1,21 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fccarinm
+    theme:            default
+    fields:
+      codcarinm: { name: Código}
+      nomcarinm: { name: Descripción}
+      stacarinm: { name: Usa M2}      
+        
+    list:
+      title:          Características de Inmuebles  
+      filters:        [codcarinm]
+      display:        [=codcarinm, nomcarinm]           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~ 
+      max_per_page:   5    
+    edit:
+      title:          Características de Inmuebles
+      display:       [=codcarinm, nomcarinm, stacarinm]

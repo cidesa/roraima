@@ -85,7 +85,7 @@
 </div>
 
 <div class="form-row">
-<table border="0" class="sf_admin_list">
+<table border="0">
   <thead> <tr>
     <td width="50"><fieldset id="sf_fieldset_none" class="">
 <legend>Nacionalidad</legend>
