@@ -47,6 +47,7 @@
 <br>
 
 <?php tabMainJS("tp1","tabPane1", "tabPage1", 'Datos del Contribuyente');?>
+<fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
   <?php echo label_for('fcotring[rifcon]', __($labels['fcotring{rifcon}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('fcotring{rifcon}')): ?> form-error<?php endif; ?>"></div>
@@ -69,7 +70,7 @@
 )); echo $value ? $value : '&nbsp;' ?>    
 </div>
 
-<div class="form-row">
+<div class="form-row" align="center">
   <?php echo label_for('fcotring[dircon]', __($labels['fcotring{dircon}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('fcotring{dircon}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('fcotring{dircon}')): ?>
@@ -84,10 +85,10 @@
     </div>
 </div>
 
-<div class="form-row">
+<div class="form-row" align="center">
 <table border="0">
-  <thead> <tr>
-    <td width="50"><fieldset id="sf_fieldset_none" class="">
+  <tr>
+    <th><fieldset id="sf_fieldset_none" class="">
 <legend>Nacionalidad</legend>
 <div class="form-row">
 <?
@@ -100,9 +101,9 @@ if ($fcotring->getNaccon()=='V')	{
 	echo radiobutton_tag('fcotring[naccon]', 'V', false, 'disabled=true')        ."Venezolano(a)".'&nbsp;&nbsp;';
 	echo radiobutton_tag('fcotring[naccon]', 'E', true, 'disabled=true')."   Extranjero(a)";
 
-} ?> </div></td>
-</fieldset>
-    <td width="50"><fieldset id="sf_fieldset_none" class="">
+} ?> </div></fieldset></th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th><fieldset id="sf_fieldset_none" class="">
 <legend>Tipo</legend>
 <div class="form-row">
 <?
@@ -115,13 +116,14 @@ if ($fcotring->getTipcon()=='N')	{
 	echo radiobutton_tag('fcotring[tipcon]', 'N', false, 'disabled=true')        ."Natural".'&nbsp;&nbsp;';
 	echo radiobutton_tag('fcotring[tipcon]', 'J', true, 'disabled=true')."   Jurídica";
 
-} ?></div> </td>
-</fieldset>
-  </tr></thead>
+} ?></div></fieldset></th>
+  </tr>
 </table>   
 </div>
+</fieldset>
 
 <?php tabPageOpenClose("tp1", "tabPage2", 'Datos del Representante');?>
+<fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
   <?php echo label_for('fcotring[rifrep]', __($labels['fcotring{rifrep}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('fcotring{rifrep}')): ?> form-error<?php endif; ?>"></div>
@@ -159,10 +161,10 @@ if ($fcotring->getTipcon()=='N')	{
     </div>
 </div>
 
-<div class="form-row">
-<table border="0" class="sf_admin_list">
-  <thead> <tr>
-    <td width="50"><fieldset id="sf_fieldset_none" class="">
+<div class="form-row" align="center">
+<table border="0">
+  <tr>
+    <th><fieldset id="sf_fieldset_none" class="">
 <legend>Nacionalidad</legend>
 <div class="form-row">
 <?
@@ -175,9 +177,9 @@ if ($fcotring->getNacconr()=='V')	{
 	echo radiobutton_tag('fcotring[nacconr]', 'V', false, 'disabled=true')        ."Venezolano(a)".'&nbsp;&nbsp;';
 	echo radiobutton_tag('fcotring[nacconr]', 'E', true, 'disabled=true')."   Extranjero(a)";
 
-} ?> </div></td>
-</fieldset>
-    <td width="50"><fieldset id="sf_fieldset_none" class="">
+} ?> </div></fieldset></th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th><fieldset id="sf_fieldset_none" class="">
 <legend>Tipo</legend>
 <div class="form-row">
 <?
@@ -190,16 +192,18 @@ if ($fcotring->getTipconr()=='N')	{
 	echo radiobutton_tag('fcotring[tipconr]', 'N', false, 'disabled=true')        ."Natural".'&nbsp;&nbsp;';
 	echo radiobutton_tag('fcotring[tipconr]', 'J', true, 'disabled=true')."   Jurídica";
 
-} ?></div> </td>
-</fieldset>
-  </tr></thead>
+} ?></div></fieldset></th>
+  </tr>
 </table>   
 </div>
+</fieldset>
+
 <?php tabInit("tp1", "0");?>
 
 <br>
 
 <?php tabMainJS("tp2","tabPane2", "tabPage1", 'Datos del Registros');?>
+<fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
   <?php echo label_for('fcotring[desing]', __($labels['fcotring{desing}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('fcotring{desing}')): ?> form-error<?php endif; ?>">
@@ -219,13 +223,14 @@ if ($fcotring->getTipconr()=='N')	{
   <?php $value = object_input_tag($fcotring, 'getMonimp', array (
   'size' => 7,
   'control_name' => 'fcotring[monimp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    
+)); echo $value ? $value : '&nbsp;' ?>    
 </div>
+</fieldset>
 
 <?php tabPageOpenClose("tp2", "tabPage2", 'Recepción');?>
+<fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
-  <?php echo label_for('fcotring[funrec]', __($labels['fcotring{funrec}']), 'class="required" ') ?>
+  <?php echo label_for('fcotring[funrec]', __($labels['fcotring{funrec}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('fcotring{funrec}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('fcotring{funrec}')): ?>
     <?php echo form_error('fcotring{funrec}', array('class' => 'form-error-msg')) ?>
@@ -253,9 +258,9 @@ if ($fcotring->getTipconr()=='N')	{
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-
+</fieldset>
 <?php tabPageOpenClose("tp2", "tabPage3", 'Distribución de la Deuda');?>
-
+<fieldset id="sf_fieldset_none" class="">
 <form name="form1" id="form1">
 <?
 echo grid_tag($obj);
@@ -266,7 +271,7 @@ echo grid_tag($obj);
  &nbsp;&nbsp;&nbsp;
 <?php echo input_tag('montodec', '', 'size=20 disabled=true') ?>
 </div>
-
+</fieldset>
 <?php tabInit("tp2", "0");?>
 
 <?php include_partial('edit_actions', array('fcotring' => $fcotring)) ?>
