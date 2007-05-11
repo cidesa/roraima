@@ -1,0 +1,46 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcconrep
+    theme:            default
+    fields:
+      rifcon: { name: C.I/RIF}
+      nitcon: { name: N.I.T}
+      nomcon: { name: Nombre/Razón Social}
+      naccon: { name: Nacionalidad}
+      tipcon: { name: Tipo}      
+      dircon: { name: Dirección}
+      codpar: { name: Partida}
+      ciucon: { name: Cuidad}
+      cpocon: { name: Código Postal}
+      apocon: { name: Cod. Apartado Postal}
+      telcon: { name: Teléfono}
+      emacon: { name: Email}
+      faxcon: { name: Fax}      
+      urlcon: { name: URL}      
+      codmun: { name: Municipio}
+      codedo: { name: Estado}
+      codpai: { name: Pais}
+      repcon: { name: Tipo de Contribuyente} 
+      cedcon: { name: cedula}
+      codsec: { name: Sector}    
+      clacon: { name: clase}
+      fecdescon: { name: Fechacon}
+      fecactcon: { name: Fechacatcon}
+      stacon: { name: Estatus}      
+      origen: { name: Origen}
+      nomneg: { name: Nombre}
+      reccon: { name: recibo}
+      tem: { name: tempo}     
+        
+    list:
+      title:          Contribuyentes  
+      filters:        [rifcon, nitcon]
+      display:        [=rifcon, nitcon, nomcon]           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~ 
+      max_per_page:   5    
+    edit:
+      title:          Registro de Contribuyentes
+      display:       [=rifcon, nitcon, nomcon, naccon, tipcon, dircon, codpar, ciucon, cpocon, apocon, telcon, emacon, faxcon, urlcon, codmun, codedo, codpai, repcon, cedcon, codsec, clacon, fecdescon, fecactcon, stacon, origen, nomneg, reccon, tem]
