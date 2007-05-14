@@ -9,34 +9,28 @@
 )) ?>
 <?php use_helper('tabs') ?>
 <?php echo object_input_hidden_tag($fcdefins, 'getId') ?>
-
 <fieldset id="sf_fieldset_none" class="">
-<div class="form-row">
-  <?php echo label_for('fcdefins[codemp]', __($labels['fcdefins{codemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('fcdefins{codemp}')): ?> form-error<?php endif; ?>">  </div>
-  <?php if ($sf_request->hasError('fcdefins{codemp}')): ?>
-    <?php echo form_error('fcdefins{codemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($fcdefins, 'getCodemp', array (
+<div class="form-row"><?php echo label_for('fcdefins[codemp]', __($labels['fcdefins{codemp}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('fcdefins{codemp}')): ?> form-error<?php endif; ?>">
+</div>
+<?php if ($sf_request->hasError('fcdefins{codemp}')): ?> <?php echo form_error('fcdefins{codemp}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($fcdefins, 'getCodemp', array (
   'size' => 20,
   'control_name' => 'fcdefins[codemp]',
 )); echo $value ? $value : '&nbsp;' ?>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- <strong>Nombre</strong>   
-  <?php $value = object_input_tag($fcdefins, 'getNomemp', array (
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>Nombre</strong> <?php $value = object_input_tag($fcdefins, 'getNomemp', array (
   'size' => 60,
   'disabled' => false,
   'control_name' => 'fcdefins[nomemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-</div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </fieldset>
 
 <legend>Definición de Estructuras de Códigos</legend>
 
 <br>
 
-<?php tabMainJS("tp1","tabPane1", "tabPage1", 'Ubicación Física');?>
+<?php tabMainJS("tp1","tabPane1", "tabPage1", '  Ubicación Física  ');?>
 <div class="form-row">
  <strong>Longitud del Código</strong>
  &nbsp;&nbsp;

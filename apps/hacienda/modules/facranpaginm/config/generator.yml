@@ -3,3 +3,21 @@ generator:
   param:
     model_class:      Fcdefpgi
     theme:            default
+
+    fields:
+      mondes:      { name : Desde }
+      monhas:      { name : Hasta }      
+      monpag:      { name : Monto a Pagar (U.T.)}
+      numpor:      { name : Nro. de Porciones }  
+      
+    list:
+      title:          Rango Para el Pago de La Tasa para la Tramitación de la Licencia
+      display:        [=mondes, monhas, monpag, numpor]
+      filters:        [mondes]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   10    
+    edit:
+      title:          Rango Para el Pago de La Tasa para la Tramitación de la Licencia
+      display:        [mondes]  
