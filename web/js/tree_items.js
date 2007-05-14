@@ -9,6 +9,8 @@ var Inv_coloc='/inv_coloc_dev.php/';
 var Cred_cobr='/cred_cobr_dev.php/';
 var Bienes = '/bienes_dev.php/';
 var Hacienda = '/hacienda_dev.php/';
+var Financiamiento = '/financiamiento_dev.php/';
+
 
 var ReportesCompras='http://'+window.location.host+'/vb-libre/reportes/compras/';
 var ReportesTesoreria='http://'+window.location.host+'/vb-libre/reportes/tesoreria/';
@@ -680,6 +682,17 @@ var TREE_ITEMSCOM_HAC = [
 	 ],
 ];
 
+var TREE_ITEMSCOM_FINAN = [
+	['SIGA', null,
+		['Financiamiento', null,
+			['Definiciones Espec&iacute;ficas',null,
+				['Definición de Recursos Supervisor/Técnico', Financiamiento+'fnrecurs'],
+			],
+		],
+	 ],
+];
+
+
 
 
 var TREE_ITEMS_MAIN = [
@@ -696,6 +709,7 @@ var TREE_ITEMS_MAIN = [
 		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
 		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
 		['Hacienda Municipal', 'principal/menu/m/hacienda'],		
+		['Financiamiento', 'principal/menu/m/financiamiento'],			
       ]
 	];
 
