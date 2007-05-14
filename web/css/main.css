@@ -132,7 +132,15 @@ INPUT[disabled]{background-color:#FFFFFF;color:black;}
 	cursor: pointer;
 	}
 
-
+#sf_admin_container labelnone {
+color:#666666;
+display:block;
+float:none;
+font-weight:normal !important;
+padding:0pt 1em 3px 0pt;
+text-align:left;
+width:8em;
+}
 
 
 
