@@ -1,0 +1,42 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcfuepre
+    theme:            default
+    fields:
+      codfue: { name: Codigo}
+      nomfue: { name: Nombre}
+      nomabr: { name: Nombre Abreviado}     
+      frecob: { name: Frecuencia}
+      deufra: { name: Pagos Fraccionados}
+      autliq: { name: Autos Liquidacion}
+      simpre: { name: Tipo de Facturacion}      
+      ingrec: { name: Contable de Ingreso a Recaudar}      
+      descta: { name: Descripcion}      
+      fueing: { name: Contable de Ingreso}
+      descta1: { name: Descripcion}      
+      codprei: { name: Presupuestario de Ingreso}     
+      descta2: { name: Descripcion}      
+      monmor: { name: Recargo por Mora}            
+      propag: { name: Descuento por pronto pago}            
+      permor: { name: De Mora}      
+      perppg: { name: Pronto Pago}
+      tipmul: { name: Tipo Recargo}
+      inieje: { name: Inicio del Periodo}            
+      fineje: { name: Fin del Periodo}      
+      fecufa: { name: Ultima Facturacion}
+      feccie: { name: Fecha de Cierre}   
+      diavso: { name: Validez Solvencia}   
+        
+    list:
+      title:          Fuentes de Ingresos  
+      filters:        [codfue, nomfue]
+      display:        [=codfue, nomfue]           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~ 
+      max_per_page:   5    
+      
+    edit:
+      title:         Edicion de Fuentes Ingresos
+      display:       [codfue, nomfue, nomabr, frecob, deufra, autliq, simpre, ingrec, descta, fueing, descta1, codprei, descta2, monmor, permor, perppg, tipmul, inieje, fineje, fecufa, feccie, deufec, recfec, propag, diavso]
