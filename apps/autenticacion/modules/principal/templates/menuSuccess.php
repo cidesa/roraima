@@ -32,6 +32,8 @@
     <?php echo javascript_tag("new tree (TREE_ITEMSCOM_BIE, tree_tpl);");?> 
     <?php } elseif($menu=='hacienda') { ?> 
     <?php echo javascript_tag("new tree (TREE_ITEMSCOM_HAC, tree_tpl);");?>
+    <?php } elseif($menu=='financiamiento') { ?> 
+    <?php echo javascript_tag("new tree (TREE_ITEMSCOM_FINAN, tree_tpl);");?>
 	<?php }?>
     
 	</td>
