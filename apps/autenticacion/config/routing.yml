@@ -1,6 +1,6 @@
 # default rules
 homepage:
-  url:   /
+  url:   /autenticacion
   param: { module: default, action: index }
 
 default_symfony:
@@ -8,11 +8,11 @@ default_symfony:
   param: { module: default }
 
 default_index:
-  url:   /:module
+  url:   /autenticacion/:module
   param: { action: index }
 
 default:
-  url:   /:module/:action/*
+  url:   /autenticacion/:module/:action/*
   
 #applications:
 #  .dev:

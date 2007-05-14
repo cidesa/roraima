@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcsolvencia
+    theme:            default
+    fields:
+      codsol: { name: Nro Solvencia }
+      codtip: { name: Uso } # Combo Enlazado con tabla FcTipSol 
+      fecexp: { name: Fecha }
+      fecven: { name: Fecha Vencimiento }
+      numlic: { name: Nro Licitación }
+      rifcon: { name: C.I./RIF }
+      codcat: { name: Código Catastral }
+      nomcon: { name: Nombre }
+      dircon: { name: Dirección }
+      codfue: { name: Código }
+      stasol: { name: Status }
+      motivo: { name: Motivo }
+    list:
+      title:          Definición de Rutas  
+      filters:        [codsol, fecexp, codtip, rifcon, numlic ]
+      display:        [=codsol, fecexp ]
+      object_actions:
+        _edit:        ~     
+        _delete:      ~     
+    edit:
+      title:          Edición de Definición de Rutas
+      display:       [codsol, fecexp, codtip, rifcon, numlic, codcat, nomcon, dircon, motivo, stasol ]
+    

@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcrutas
+    theme:            default
+    fields:
+      codrut: { name: Código}
+      desrut: { name: Descripción}      
+    list:
+      title:          Definición de Rutas  
+      filters:        [codrut, desrut]
+      display:        [=codrut, desrut]           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~     
+    edit:
+      title:          Edición de Definición de Rutas
+      display:       [=codrut, desrut]
+    

@@ -6,6 +6,7 @@ generator:
     fields:
       nroinm:      {  name: Nro. Inscripción } 
       codcatfis:   {  name: Código }
+      nomcatfis:   {  name: Nombre }
       coduso:      {  name: Código }
       nomuso:      {  name: Nombre }            # Campo Externo FCUsoInm => Nombre Representante
       codcarinm:   {  name: Código }
@@ -15,7 +16,7 @@ generator:
       rifcon:      {  name: C.I. / RIF }
       rifrep:      {  name: C.I. / RIF }
       rifconant:   {  name: C.I. / RIF }        # Campo Externo FCTraInm.
-      nomcon:      {  name: nombre } 
+      nomcon:      {  name: Nombre } 
       dircon:      {  name: Dirección }
       fecpag:      {  name: Fecha Último Pago }
       feccal:      {  name: Fecha Último Avalúo }
@@ -33,25 +34,13 @@ generator:
       mtrcon:      {  name: M2 }
       bster:       {  name: Bs }
       bscon:       {  name: Bs }
-      docpro:      {  name:  }
       rifrep:      {  name: C.I. / RIF }
       funrec:      {  name: Funcionario Receptor }
-      fecrec:      {  name:  }
       estinm:      {  name: Estado }
-      estdec:      {  name:  }
       codcatinm:   {  name: Código }
-      nomconant:      {  name: Nombre }
-      dirconant:      {  name: Dirección }
-      clacon:      {  name:  }
-      fecadq:      {  name:  }
+      nomconant:   {  name: Nombre }
+      dirconant:   {  name: Dirección }
       valinm:      {  name: Precio }
-      codman:      {  name:  }
-      codsec:      {  name:  }
-      codpar:      {  name:  }
-      nroinmant:   {  name:  }
-      totter:      {  name:  }
-      totcon:      {  name:  }
-      total:       {  name:  }
       codtip:      {  name: Código }
       codzon:      {  name: Código }
       destip:      {  name: Descripción }
@@ -61,30 +50,19 @@ generator:
       tomo:        {  name: Tomo }
       numdoc:      {  name: Número }
       fecdoc:      {  name: Fecha }
-      usoinm:      {  name:  }
-      desde:       {  name:  }
-      hasta:       {  name:  }
-      ord:         {  name:  }
-      art:         {  name:  }
-      fecdir:      {  name:  }
-      fecava:      {  name:  }
-      dirinm1:     {  name:  }
-      fecela:      {  name:  }
-      tri:         {  name:  }
-      prot:        {  name:  }
-      tipobol:     {  name:  }
-      nomsitinm:   {  name:  }
-      impanu:      {  name:  }
-      imptri:      {  name:  }
       anualt:      {  name: Bs. /M2 Anual Terreno }
+      nacrep:      {  name: Nacionalidad }
+      tiprep:      {  name: Tipo }
     list:
       title:          Registro de Inmuebles
       display:        [=nroinm, fecreg, rifcon, nomcon, rifrep, nomrep ]     
       object_actions:
         _edit:        ~
         _delete:      ~      
-      filters:        [nroinm, fecreg, rifcon, nomcon, rifrep, nomrep] 
+      filters:        [nroinm, fecreg, rifcon, nomcon, rifrep, nomrep ] 
       max_per_page:   5
     edit:
       title:          Edición de Registro de Inmuebles
-      Editable:       [nroinm, codcatfis, coduso, nomuso, codcarinm, nomcarinm, codsitinm, nomsitinm, rifcon, rifconant, nomcon, dircon, fecpag, feccal, fecreg, nomrep, dirrep, naccon, tipcon, dirinm, linnor, linsur, linest, linoes, mtrter, mtrcon, bster, bscon, rifrep, funrec, estinm, codcatinm, nomconant, dirconant, valinm, codtip, codzon, destip, deszon, anual, folio, tomo, numdoc, fecdoc, anualt]
+      display:       [nroinm, fecreg, rifcon, nomcon, dircon, naccon, tipcon, rifrep, nomrep, dirrep, nacrep, tiprep, codcatfis, nomcatfis, codcatinm, codzon, deszon, codtip, destip, codcarinm, nomcarinm, anual, anualt ]
+
+#  coduso, nomuso, codsitinm, nomsitinm, rifconant, fecpag, feccal, naccon, tipcon, dirinm, linnor, linsur, linest, linoes, mtrter, mtrcon, bster, bscon, funrec, estinm, nomconant, dirconant, valinm, folio, tomo, numdoc, fecdoc      
