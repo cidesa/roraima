@@ -54,9 +54,9 @@ class oycregactActions extends autooycregactActions
 		$ocregact = $this->getRequestParameter('ocregact');
         $this->configGrid();
 
-		if (isset($ocregact['codcon']))
-		{
-			$this->ocregact->setCodcon($ocregact['codcon']);
+        if (isset($ocregact['codcon']))
+        {
+        	$this->ocregact->setCodcon($ocregact['codcon']);
 		}
 		if (isset($ocregact['codobr']))
 		{
@@ -216,7 +216,7 @@ class oycregactActions extends autooycregactActions
 			$montos=array("5","6","7","8");
 			$totales=array("", "", "ocregact_exitot", "");
 			$mascaraubicacion=$this->mascaraubicacion;
-			$html=array('type="text" size="5"','type="text" size="25" disabled=true','type="text" size="5"','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
+			$html=array('type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
 			$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
 			$grabar=array("1","3","5","6","7","8");
 			$filatotal='';
