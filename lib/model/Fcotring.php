@@ -60,7 +60,7 @@ class Fcotring extends BaseFcotring
 
 	public function getTipconr()
 	  {  
-		if ($this->datosContribuyente())  
+		if ($this->datosRepresentante())  
 		  {
 		    return $this->tipconr;
 		  }		   	
