@@ -1,0 +1,23 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcusoinm
+    theme:            default
+    fields:
+      coduso: { name: Código}
+      nomuso: { name: Descripción}
+  	  factor: { name: Factor}
+        
+    list:
+      title:          Uso de Inmuebles
+      filters:        [coduso, nomuso]
+      display:        [=coduso, nomuso]           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~ 
+      max_per_page:   10
+      
+    edit:
+      title:         Edicion Uso de Inmuebles
+      #display:       [codfue, nomfue, nomabr, frecob, deufra, autliq, simpre, ingrec, descta, fueing, descta1, codprei, descta2, monmor, permor, perppg, tipmul, inieje, fineje, fecufa, feccie, deufec, recfec, propag, diavso]
+    
