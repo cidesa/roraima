@@ -1,0 +1,31 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcrepfis
+    theme:            default
+    fields:
+      numrep: { name: Número Reparo}
+      fecrep: { name: Fecha Reparo}
+      numlic: { name: Número Licencia}
+      rifcon: { name: C.I/RIF}
+      nomcon: { name: Nombre}
+      dircon: { name: Dirección}
+      naccon: { name: Nacionalidad}
+      tipcon: { name: Tipo}
+      funrec: { name: Funcionario}      
+      monadi: { name: Adición/Disminución(+/-)}
+      monrep: { name: Monto Reparo}
+      conrep: { name: Convenio del Reparo}
+      modo: { name: Tipo}      
+        
+    list:
+      title:          Reparos Fiscales  
+      filters:        [numrep]
+      display:        [=numrep, fecrep]           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~ 
+      max_per_page:   5    
+    edit:
+      title:          Registro de Ajustes y Reparos Fiscales
+      display:       [=numrep, fecrep, numlic, rifcon, nomcon, dircon, naccon, tipcon, funrec, monadi, monrep, conrep, modo]
