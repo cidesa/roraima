@@ -34,6 +34,8 @@
     <?php echo javascript_tag("new tree (TREE_ITEMSCOM_HAC, tree_tpl);");?>
     <?php } elseif($menu=='financiamiento') { ?> 
     <?php echo javascript_tag("new tree (TREE_ITEMSCOM_FINAN, tree_tpl);");?>
+	<?php } elseif($menu=='documentos') { ?> 
+    <?php echo javascript_tag("new tree (TREE_ITEMSCOM_DOCFINAN, tree_tpl);");?>
 	<?php }?>
     
 	</td>

@@ -1,6 +1,6 @@
 <?php
 
-class myUser extends sfBasicSecurityUser
+class cidesaUser extends sfBasicSecurityUser
 {
 	public function loginIn($nombre,$passwd,$codemp)
 	{
