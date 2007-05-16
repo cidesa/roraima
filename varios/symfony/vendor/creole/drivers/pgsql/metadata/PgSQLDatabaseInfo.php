@@ -77,13 +77,13 @@ class PgSQLDatabaseInfo extends DatabaseInfo {
 										ORDER BY relname");
 */
 
-        $result = pg_query($this->conn->getResource(), 
-          "SELECT oid, relname FROM pg_class WHERE relkind = 'r' 
+        $result = pg_query($this->conn->getResource(),"SELECT oid, relname FROM pg_class WHERE relkind = 'r' 
           AND relnamespace in (SELECT oid FROM pg_namespace WHERE 
           nspname NOT IN ('information_schema','pg_catalog') 
-          AND nspname NOT LIKE pg_temp%'".(isset($this->dbschemas)?" 
-          AND nspname IN (".$this->dbschemas.")":"")." AND nspname 
+          AND nspname NOT LIKE 'pg_temp%".(isset($this->dbschemas)?"' 
+          AND nspname IN ('".$this->dbschemas."')":"")." AND nspname 
           NOT LIKE 'pg_toast%') ORDER BY relname");
+
 
         if (!$result) {
             throw new SQLException("Could not list tables", pg_last_error($this->dblink));
