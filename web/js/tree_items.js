@@ -8,6 +8,7 @@ var Inv_coloc='/inv_coloc_dev.php/';
 var Cred_cobr='/cred_cobr_dev.php/';
 var Bienes = '/bienes_dev.php/';
 var Hacienda = '/hacienda_dev.php/';
+var Financiamiento = '/financiamiento_dev.php/';
 
 /*var Compras = '/compras.php/';
 var Tesoreria= '/tesoreria.php/';
@@ -19,7 +20,9 @@ var Inv_coloc='/inv_coloc.php/';
 var Cred_cobr='/cred_cobr.php/';
 var Bienes = '/bienes.php/';
 var Hacienda = '/hacienda.php/';
-var Financiamiento = '/financiamiento_dev.php/';*/
+var Financiamiento = '/financiamiento.php/';
+*/
+
 
 
 var ReportesCompras='http://'+window.location.host+'/vb-libre/reportes/compras/';
