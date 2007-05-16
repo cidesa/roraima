@@ -1,0 +1,31 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcdeclar
+    theme:            default
+    fields:
+      numdec: { name: Número de Declaración}
+      fueing: { name: Fecha Dec}
+      fundec: { name: Funcionario}     
+      rifcon: { name: C.I./R.I.F.}
+      nomcon: { name: Nombre}
+      dircon: { name: Direccion}      
+      tipcon: { name: Tipo}      
+      naccon: { name: Nacionalidad}      
+      #CodCatFis: { name: Código}      
+      #coduso: { name: Código}      
+      #CodSitInm: { name: Código}
+        
+    list:
+      title:          Fuentes de Ingresos  
+      filters:        [numdec, nomcon]
+      display:        [=numdec, nomcon]           
+      object_actions:
+        _edit:        ~     
+        _delete:      ~ 
+      max_per_page:   5    
+      
+    edit:
+      title:         Edicion de Fuentes Ingresos
+      display:       [numdec, fueing, fundec, rifcon, nomcon, dircon, tipcon, naccon]
+    
