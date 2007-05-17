@@ -4,14 +4,14 @@ generator:
     model_class:      Catraalm
     theme:            default
     fields:
-      codtra:  {  name: Número}
+      codtra:  {  name: NÃºmero}
       fectra:  {  name: Fecha, params: date_format='dd/MM/yyyy'}
-      destra:  {  name: Descripción}
+      destra:  {  name: DescripciÃ³n}
       almori:  {  name: Almacen Origen}      
       almdes:  {  name: Almacen Destino}   
       
     list:
-      title:          Traspaso de Artículos
+      title:          Traspaso de ArtÃ­culos
       display:        [=codtra, fectra, destra, almori, almdes]     
       object_actions:
         _edit:        ~
@@ -19,7 +19,7 @@ generator:
       filters:        [codtra, fectra, destra, almori, almdes] 
       max_per_page:   5
     edit:
-      title:          Traspaso de Artículos
+      title:          Traspaso de ArtÃ­culos
       Editable:       [codtra, fectra, destra, almori, almdes] 
 
 

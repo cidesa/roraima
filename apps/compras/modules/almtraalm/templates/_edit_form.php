@@ -27,7 +27,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('catraalm[fectra]', __($labels['catraalm{fectra}']), '') ?>
+  <?php echo label_for('catraalm[fectra]', __($labels['catraalm{fectra}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('catraalm{fectra}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('catraalm{fectra}')): ?>
     <?php echo form_error('catraalm{fectra}', array('class' => 'form-error-msg')) ?>
@@ -43,7 +43,7 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('catraalm[destra]', __($labels['catraalm{destra}']), '') ?>
+  <?php echo label_for('catraalm[destra]', __($labels['catraalm{destra}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('catraalm{destra}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('catraalm{destra}')): ?>
     <?php echo form_error('catraalm{destra}', array('class' => 'form-error-msg')) ?>

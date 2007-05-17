@@ -26,6 +26,6 @@ generator:
       max_per_page:   5    
       
     edit:
-      title:         Edicion de Fuentes Ingresos
+      title:         Edición de Fuentes Ingresos
       display:       [numdec, fueing, fundec, rifcon, nomcon, dircon, tipcon, naccon]
     
