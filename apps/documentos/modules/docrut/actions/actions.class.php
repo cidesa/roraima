@@ -11,25 +11,7 @@
 class docrutActions extends autodocrutActions
 {
   
-  private function getTipdocs(){
-    
-    $c = new Criteria();
-    $reg = DftabtipPeer::doSelect($c);
-    $docs = array();
-
-    if(count($reg)>0){
-      
-      for($i=0;$i<count($reg);$i++){
-        $docs[$reg[0]->getTipdoc()] = $reg[0]->getTipdoc();
-      }
-      return $docs; 
-      
-    }else return array();
-        
-    
-  }
-  
-  
+ 
   public function executeEdit()
   {
     $this->dfrutadoc = $this->getDfrutadocOrCreate();
@@ -65,6 +47,24 @@ class docrutActions extends autodocrutActions
       $this->labels = $this->getLabels();
       $this->executePagerlist($this->dfrutadoc->getTipdoc());
     }
+  }
+  
+  private function getTipdocs(){
+    
+    $c = new Criteria();
+    $reg = DftabtipPeer::doSelect($c);
+    $docs = array();
+
+    if(count($reg)>0){
+      
+      for($i=0;$i<count($reg);$i++){
+        $docs[$reg[0]->getTipdoc()] = $reg[0]->getTipdoc();
+      }
+      return $docs; 
+      
+    }else return array();
+        
+    
   }
   
   public function handleErrorEdit()

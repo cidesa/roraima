@@ -45,7 +45,7 @@
     <?php echo form_error('dftabtip{nomtab}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php echo select_tag('dftabtip[nomtab]', options_for_select($tablas,$dftabtip->getNomtab(),'include_custom=Seleccione...'), array('onChange' => remote_function(array(
+  <?php echo select_tag('dftabtip[nomtab]', options_for_select($tablas,$dftabtip->getNomtab(),'include_custom = Seleccione...'), array('onChange' => remote_function(array(
         'update'   => 'divCombos',//Div a Actualizar
 		'url'      => 'doctab/ajax?par=1',//Variable para el control de la accion(1)
 		'with' => "'campo='+this.value"//Valor de la variale de la caja de texto
