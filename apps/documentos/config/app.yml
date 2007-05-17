@@ -1,0 +1,10 @@
+all:
+   .apps:
+     autenticacion:    autenticacion
+     compras:          compras
+     tesoreria:        tesoreria
+     bienes:           bienes
+     ingresos:         ingresos
+     nomina:           nomina
+     formulacion:      formulacion
+     this:             documentos      #cambiar en cada app

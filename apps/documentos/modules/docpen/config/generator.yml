@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Dfatendoc
+    theme:            default
+    fields:
+      coddoc:         { name : Código }
+      obsdoc:         { name : Observaciones }
+      staate:         { name : Estado Atención }
+      anuate:         { name : Anulado }
+      estado:         { name : Estado del Documento }
+      id_dftabtip:    { name : Tipo Documento }
+    list:
+      title:          Revisión de Documentos
+      display:        [=coddoc, obsdoc, estado ]
+      filters:		  [coddoc ]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+    edit:
+      title:          Atención de Documentos
+      display:        [coddoc, obsdoc, staate, anuate, estado, id_dftabtip ]
