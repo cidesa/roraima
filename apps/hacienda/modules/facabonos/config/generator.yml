@@ -1,0 +1,31 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcabonos
+    theme:            default
+    fields:
+      numpag:  {name: Número de Control}
+      fueing:  {name: Fuente de Ingreso} 
+      fecpag:  {name: Fecha del Registro}     
+      rifcon:  {name: C.I./RIF}     
+      numref:  {name: Referencia}     
+      despag:  {name: Descripción}     
+      monpag:  {name: Monto a Pagar}     
+      funpag:  {name: Funcionario Receptor}     
+      fecrec:  {name: Fecha de Recepción}   
+ 
+      nomcon: { name: Nombre}
+      dircon: { name: Dirección}
+      naccon: { name: Nacionalidad}
+      tipcon: { name: Tipo}
+    list:
+      title:          Registro de Abonos a Estados de Cuenta
+      display:        [=numpag, despag]     
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [numpag, despag]
+      max_per_page:   5
+    edit:
+      title:          Registro de Abonos a Estados de Cuenta
+      display:        [=numpag, fueing, fecpag, rifcon, numref, despag, monpag, funpag, fecrec, nomcon, dircon, naccon, tipcon]

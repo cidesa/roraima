@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fctipsol
+    theme:            default
+    fields:
+      codtip:  {name: Código}
+      destip:  {name: Descripción} 
+      monsol:  {name: Valor Bs.}     
+      valsol:  {name: Validez}     
+      privdeu: {name: Existencia de Deuda Priva la Emisión ?}     
+      privmsg: {name: Mensaje}     
+      anocom:  {name: Valido Hasta Fin de Año ?}     
+      gendeu:  {name: Genera Deuda}     
+      fueing:  {name: Fuente de Ingreso}     
+      nomfueing:  {name: Nombre Fuente de Ingreso}     
+    list:
+      title:          Definición de Tipo de Solvencia
+      display:        [=codtip, destip]     
+      object_actions:
+        _edit:        ~
+        _delete:      ~      
+      filters:        [codtip, destip]
+      max_per_page:   5
+    edit:
+      title:          Definición de Tipo de Solvencia
+      display:        [=codtip, destip, fueing, nomfueing, monsol, valsol, gendeu, privdeu, anocom, privmsg]     
