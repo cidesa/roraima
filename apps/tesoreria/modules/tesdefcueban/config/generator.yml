@@ -5,39 +5,39 @@ generator:
     theme:            default
 
     fields:
-      numcue:     { name: Numero de Cuenta }
+      numcue:     { name: Número de Cuenta }
       nomcue:     { name: Nombre del Banco }
       tipcue:     { name: Tipo de Cuenta }
       codcta:     { name: Cuenta Contable }
       fecreg:     { name: Fecha de Registro, params: date_format=dd/MM/yyyy }
       fecven:     { name: Fecha de Vencimiento }
-      fecper:     { name: Fecha de Periodo }
+      fecper:     { name: Fecha de Período }
       fecape:     { name: Fecha de Apertura }
-      renaut:     { name: Renovacion Automatica }
+      renaut:     { name: Renovación Automatica }
       porint:     { name: Porcentaje de Interes }
       tipint:     { name: Tipo de Interes }
       usocue:     { name: Uso de la Cuenta }
-      numche:     { name: Numero de Cheque }
+      numche:     { name: Número de Cheque }
       antban:     { name: Saldo Anterior Bancos }
-      debban:     { name: Debitos Bancos }
-      creban:     { name: Credito Bancos }
+      debban:     { name: Débitos Bancos }
+      creban:     { name: Crédito Bancos }
       antlib:     { name: Saldo Anterior Libros }
-      debban:     { name: Debitos Libros }
-      creban:     { name: Credito Libros }
+      debban:     { name: Débitos Libros }
+      creban:     { name: Crédito Libros }
       valche:     { name: Validez del Cheque }
       concil:     { name: Conciliable }
       plazo:      { name: Plazo }
       tipren:      { name: Tipo de Rendimiento }
 
     list:
-      title:          Definicion de Bancos
-      display:        [numcue, nomcue, tipcue, codcta, fecreg, fecven]
+      title:          Definición de Bancos
+      display:        [=numcue, nomcue, tipcue, codcta, fecreg, fecven]
 
-      filters:        [numcue]
+      filters:        [=numcue]
       max_per_page:   10
       object_actions:
         _edit:        ~
         _delete:      ~
 
     edit:
-      title:          Modificar Definicion de Bancos
+      title:          Modificar Definición de Bancos

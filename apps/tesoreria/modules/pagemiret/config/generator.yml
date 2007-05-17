@@ -12,13 +12,13 @@ generator:
       monord:     { name: Monto }
       cedrif:     { name: C.I o R.I.F }
       nomben:     { name: Beneficiario }
-      ctapag:     { name: Codigo Contable }
+      ctapag:     { name: Código Contable }
       coduni:     { name: Unidad Origen, params: maxlength = 3,size = 5 }
       obsord:     { name: Observaciones }
       
     list:
       title:          Fondos a Terceros
-      display:        [numord, fecemi, tipcau, desord, cedrif]
+      display:        [=numord, fecemi, tipcau, desord, cedrif]
       filters:        [numord, fecemi, tipcau]
       max_per_page:   10
       object_actions:

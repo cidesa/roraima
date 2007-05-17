@@ -5,13 +5,13 @@ generator:
     theme:            default
 
     fields:
-      codtip:      { name: Codigo }
-      destip:      { name: Descripcion }
+      codtip:      { name: Código }
+      destip:      { name: Descripción }
       debcre:      { name: Tipo }
 
     list:
-      title:          Definicion de Tipos de Movimientos Bancarias
-      display:        [codtip, destip, debcre]
+      title:          Definición de Tipos de Movimientos Bancarias
+      display:        [=codtip, destip, debcre]
       filters:        [codtip, destip]
       max_per_page:   5
       object_actions:

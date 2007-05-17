@@ -5,12 +5,12 @@ generator:
     theme:            default
 
     fields:
-      codtip:      { name: Codigo }
-      destip:      { name: Descripcion }
+      codtip:      { name: Código }
+      destip:      { name: Descripción }
 
     list:
-      title:          Definicion de Tipos de Cuentas Bancarias
-      display:        [codtip, destip]
+      title:          Definición de Tipos de Cuentas Bancarias
+      display:        [=codtip, destip]
       filters:        [codtip, destip]
       max_per_page:   5
       object_actions:
