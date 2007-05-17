@@ -9,4 +9,8 @@
  */ 
 class Fctipsol extends BaseFctipsol
 {
+public function getNomfueing()
+  {
+  	return Herramientas::getX('CODFUE','FCFuePre','Nomfue',self::getFueing());  	
+  }
 }
