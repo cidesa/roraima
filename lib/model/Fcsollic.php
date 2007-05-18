@@ -32,5 +32,15 @@ class Fcsollic extends BaseFcsollic
 	public function getDirinm()
 	{
 		return Herramientas::getX('CodCatInm','FCRegInm','Dirinm',self::getCatcon());
+	}
+	public function getNomcatrasto()
+	{
+		return Herramientas::getX('codcatinm','fcreginm','nomcon',self::getCatcon());
+	}
+	public function getNomruta()
+	{
+		return Herramientas::getX('codrut','fcrutas','desrut',self::getCodrut());
 	}		
 }
+
+
