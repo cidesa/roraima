@@ -85,34 +85,34 @@ class Herramientas
 	}
 
 	public static function FormarCodigoPadre($codigo,&$nivelcodigo,&$ultimo)
-	{   
-	  $nivelcodigo='';
-	  $c = new Criteria();
-	  $arti = CadefartPeer::doSelect($c);
-	  $cadena=$arti[0]->getForart();
-	  $loncad=split("-",$cadena);
-	  $lonniv=strlen($loncad[0]);
-	  $loncodigo=(strlen($codigo));
-	    if ($lonniv==$loncodigo){
-		  $nivelcodigo=1;
-		  $padre='';
-		  return false;
-	    }else{
-		  $nivelcodigo=0;
-		  $padre=Herramientas::instr($codigo,'-',0,1);
-		  $pad=($padre-1);
-		  $cad=(substr($codigo,0,$pad));
-		  $ultimo=str_pad($cad,20,' ');
-		  return true;
-	    } 
+	{
+		$nivelcodigo='';
+		$c = new Criteria();
+		$arti = CadefartPeer::doSelect($c);
+		$cadena=$arti[0]->getForart();
+		$loncad=split("-",$cadena);
+		$lonniv=strlen($loncad[0]);
+		$loncodigo=(strlen($codigo));
+		if ($lonniv==$loncodigo){
+			$nivelcodigo=1;
+			$padre='';
+			return false;
+		}else{
+			$nivelcodigo=0;
+			$padre=Herramientas::instr($codigo,'-',0,1);
+			$pad=($padre-1);
+			$cad=(substr($codigo,0,$pad));
+			$ultimo=str_pad($cad,20,' ');
+			return true;
+		}
 	}
 
 	public static function buscar_codigo_padre($codigo2)
 	{
 		$c = new Criteria;
-	  	  $c->add(CaregartPeer::CODART, $codigo2);
-	  	  $datos = CaregartPeer::doSelect($c);
-		   if ($datos){	   
+		$c->add(CaregartPeer::CODART, $codigo2);
+		$datos = CaregartPeer::doSelect($c);
+		if ($datos){
 		      return true;
 		   }
 		   else{	   
@@ -125,34 +125,6 @@ class Herramientas
   	
   	   return $errores[$cod]['msj']; 	  	
     }
-
-
-	/**
-	 * Función para retornar datos a una variale con un filtro.
-	 * Esta función retorna un registro.
-	 *  
-	 * @static
-	 * @param string $fieldjoin Campo de la tabla a comparar.
-	 * @param string $join Tabla a la que se va a consultar
-	 * @return string $result es el nombre del campo que se quiere traer la data
-	 * @param string $data variale con la que se va hacer el filtro.
-	 */     
-    //public static function getX($fieldjoin, $join, $result, $data)
-    public static function getX($campos, $tabla, $result, $data)
-     {
-     	eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campos).';');
-	
-	   $c = new Criteria();
-	   $c->add($field,$data);
-	   eval ('$reg = '.ucfirst(strtolower($tabla)).'Peer::doSelectone($c);');
-	   if ($reg){
-	   	eval('$r = $reg->get'.ucfirst(strtolower($result)).'();');
-		 return $r;
-	  }else{
-	  	return '<¡Registro no Encontrado o Vacio!>';
-	  }
-  	
-  }
   
   	public static function getMascaraContable()
 	  {
@@ -188,14 +160,14 @@ class Herramientas
 	  	   		{
 	  	   			$num=$num.'-';
 	  	   		}
-	
+
 	  	   		$ruptura=$ruptura.$num;
 	  	   		$i++;
-	  	   }  	   
-		  	return $ruptura;	 
-	  } 
-	   
-	public static function getMascaraUbicacion()
+	  	   }
+	  	   return $ruptura;
+	  }
+
+	  public static function getMascaraUbicacion()
 	  {
 	  	  $c = new Criteria();  	  
 	  	  $ubi = CadefartPeer::doSelect($c);
@@ -344,7 +316,40 @@ class Herramientas
 	 * @param string $filtros arreglo de campos de la Tabla a la que se van a consultar y comparar.
 	 * @return string $variables es el nombre del campo que se quiere traer la data.
 	 * @param string $variables arreglo de variables o campos con la que se va hacer el filtro.
-	 */   
+	 */
+
+	
+
+
+	/**
+	 * Función para retornar datos a una variale con un filtro.
+	 * Esta función retorna un registro.
+	 *  
+	 * @static
+	 * @param string $fieldjoin Campo de la tabla a comparar.
+	 * @param string $join Tabla a la que se va a consultar
+	 * @return string $result es el nombre del campo que se quiere traer la data
+	 * @param string $data variale con la que se va hacer el filtro.
+	 */     
+    //public static function getX($fieldjoin, $join, $result, $data)
+    public static function getX($campos, $tabla, $result, $data)
+     {
+     	eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campos).';');
+	
+	   $c = new Criteria();
+	   $c->add($field,$data);
+	   eval ('$reg = '.ucfirst(strtolower($tabla)).'Peer::doSelectone($c);');
+	   if ($reg)
+	   {
+	   	eval('$r = $reg->get'.ucfirst(strtolower($result)).'();');
+		 return $r;
+	   }else{
+	  	 return '<¡Registro no Encontrado o Vacio!>';
+	   }
+     }	
+     
+     
+     
    public static function getXx($tabla,$filtros,$variables,$campo_retornado)
 	{
 	  	$c = new Criteria();
@@ -356,13 +361,20 @@ class Herramientas
 	  			eval('$c->add('.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($filtros[$a]).','.chr(39).$variables[$a].chr(39).');');
 	  		}
 	  	}
-	  	eval('$arreglo = '.ucfirst(strtolower($tabla)).'Peer::doSelectOne($c);');
-	  	if($arreglo) return eval('$arreglo->get'.ucfirst(strtolower($campo_retornado)).'();');
-		else return '<¡Registro no Encontrado o Vacio!>'; 	  	
+	  	eval('$reg = '.ucfirst(strtolower($tabla)).'Peer::doSelectOne($c);');
+	    if ($reg)
+	    {
+	     	eval('$r = $reg->get'.ucfirst(strtolower($campo_retornado)).'();');
+		    return $r;
+	    }else{
+	    	return '<¡Registro no Encontrado o Vacio!>';
+	    }
 	}	  
-	  
-	  
 
+	
+	
+	
+	
     public static function autocompleteAjax($fieldjoin, $join, $result, $data)
      {
 	   eval ('$field = '.$join.'Peer::'.$fieldjoin.';');
