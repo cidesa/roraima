@@ -65,7 +65,7 @@ var TREE_ITEMSCOM_ALM = [
 			],
 			['Almacen',null,
 				['Definiciones Generales', Compras+'almdefalm'],
-				['Requisiciones', Compras+'AlmReq'],
+				['Requisiciones', Compras+'almreq'],
 				['Recepci&oacute;n de Productos Terminados', Compras+'almordrecter'],
 				['Requisiciones de Servicios', Compras+'almreqser'],
 				['Requisiciones por Departamento (Solicitud de Egresos)', Compras+'almsolegr'],
