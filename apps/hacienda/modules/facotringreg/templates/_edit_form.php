@@ -24,7 +24,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong>Fuente de Ingreso</strong>
-<?php echo select_tag('fcotring[codfue]', options_for_select($fuentes,$fcotring->getCodfue(), 'include_custom=Seleccione Uno')); ?>
+<?php echo select_tag('fcotring[codfue]', options_for_select($periodos,$fcotring->getCodfue(), 'include_custom=Seleccione Uno')); ?>
 </div>
 
 <div class="form-row">
