@@ -734,7 +734,7 @@ var TREE_ITEMS_MAIN = [
 		['Cr&eacute;dito y Cobranza (financiamiento)', '/financiamiento/autenticacion_dev.php/principal/menu/m/financiamiento/'],
 		['Hacienda Municipal', 'principal/menu/m/hacienda'],		
 		/*['Financiamiento', 'principal/menu/m/financiamiento'],*/
-		['Documentos Financieros', 'principal/menu/m/documentos'],
+		['Documentos Financieros', '/documentos/autenticacion_dev.php/principal/menu/m/documentos/'],
 					
       ]
 	];
