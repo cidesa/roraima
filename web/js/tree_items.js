@@ -23,6 +23,7 @@ var Hacienda = '/hacienda.php/';
 var Financiamiento = '/financiamiento.php/';
 */
 
+var Documentos = '/documentos_dev.php/';
 
 
 var ReportesCompras='http://'+window.location.host+'/vb-libre/reportes/compras/';
@@ -699,12 +700,33 @@ var TREE_ITEMSCOM_FINAN = [
 	['SIGA', null,
 		['Financiamiento', null,
 			['Definiciones Espec&iacute;ficas',null,
-				['Definición de Recursos Supervisor/Técnico', Financiamiento+'fnrecurs'],
+				['Definici&oacute;n de Recursos Supervisor/T&eacute;cnico', Financiamiento+'fnrecurs'],
 			],
 		],
 	 ],
 ];
 
+var TREE_ITEMSCOM_DOCFINAN = [
+	['SIGA', null,
+		['Documentos Financieros', null,
+			['Definiciones',null,
+				['Usuarios', Documentos+'docusu'],
+				['Unidades', Documentos+'docuni'],
+				['Asignaci&oacute;n de Tablas', Documentos+'doctab'],
+				['Ruta de Documentos', Documentos+'docrut'],
+			],
+			['Documentos',null,
+				['Pendientes', Documentos+'docpen'],
+			],
+			['Consultas',null,
+				['Avanzadas', Documentos+'docconava'],
+			],			
+			['Mantenimiento',null,
+				['Mantenimiento Regular', Documentos+'docmanreg'],
+			],
+		],
+	 ],
+];
 
 
 
@@ -722,7 +744,9 @@ var TREE_ITEMS_MAIN = [
 		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
 		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
 		['Hacienda Municipal', 'principal/menu/m/hacienda'],		
-		['Financiamiento', 'principal/menu/m/financiamiento'],			
+		['Financiamiento', 'principal/menu/m/financiamiento'],
+		['Documentos Financieros', 'principal/menu/m/documentos'],
+					
       ]
 	];
 
