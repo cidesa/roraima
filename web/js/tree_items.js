@@ -5,24 +5,11 @@ var Ingresos='/ingresos_dev.php/';
 var Formulacion='/formulacion_dev.php/';
 var Obra='/obras_dev.php/';
 var Inv_coloc='/inv_coloc_dev.php/';
-var Cred_cobr='/cred_cobr_dev.php/';
+/*var Cred_cobr='/cred_cobr_dev.php/';*/
+var Cred_cobr='/financiamiento.php/';
 var Bienes = '/bienes_dev.php/';
 var Hacienda = '/hacienda_dev.php/';
-var Financiamiento = '/financiamiento_dev.php/';
-
-/*var Compras = '/compras.php/';
-var Tesoreria= '/tesoreria.php/';
-var Nomina='/nomina.php/';
-var Ingresos='/ingresos.php/';
-var Formulacion='/formulacion.php/';
-var Obra='/obras.php/';
-var Inv_coloc='/inv_coloc.php/';
-var Cred_cobr='/cred_cobr.php/';
-var Bienes = '/bienes.php/';
-var Hacienda = '/hacienda.php/';
-var Financiamiento = '/financiamiento.php/';
-*/
-
+/*var Financiamiento = '/financiamiento_dev.php/';*/
 var Documentos = '/documentos_dev.php/';
 
 
@@ -696,6 +683,7 @@ var TREE_ITEMSCOM_HAC = [
 	 ],
 ];
 
+/*
 var TREE_ITEMSCOM_FINAN = [
 	['SIGA', null,
 		['Financiamiento', null,
@@ -705,6 +693,7 @@ var TREE_ITEMSCOM_FINAN = [
 		],
 	 ],
 ];
+*/
 
 var TREE_ITEMSCOM_DOCFINAN = [
 	['SIGA', null,
@@ -742,11 +731,10 @@ var TREE_ITEMS_MAIN = [
 		['Formulaci&oacute;n', 'principal/menu/m/formulacion'],
 		['Obras y Contratos', 'principal/menu/m/obra'],
 		['Inversi&oacute;n y Colocaci&oacute;n', 'principal/menu/m/inv_coloc'],
-		['Cr&eacute;dito y Cobranza', 'principal/menu/m/cred_cobr'],
+		['Cr&eacute;dito y Cobranza (financiamiento)', '/financiamiento/autenticacion_dev.php/principal/menu/m/financiamiento/'],
 		['Hacienda Municipal', 'principal/menu/m/hacienda'],		
-		['Financiamiento', 'principal/menu/m/financiamiento'],
+		/*['Financiamiento', 'principal/menu/m/financiamiento'],*/
 		['Documentos Financieros', 'principal/menu/m/documentos'],
 					
       ]
 	];
-
