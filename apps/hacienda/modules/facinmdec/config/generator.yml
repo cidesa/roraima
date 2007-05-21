@@ -5,11 +5,11 @@ generator:
     theme:            default
     fields:
       numdec: { name: Número de Declaración}
-      fueing: { name: Fecha Dec}
+      fecdec: { name: Fecha Dec, params: date_format='dd/mm/yyyy'}
       fundec: { name: Funcionario}     
       rifcon: { name: C.I./R.I.F.}
       nomcon: { name: Nombre}
-      dircon: { name: Direccion}      
+      dircon: { name: Dirección}      
       tipcon: { name: Tipo}      
       naccon: { name: Nacionalidad}      
       #CodCatFis: { name: Código}      
@@ -27,5 +27,5 @@ generator:
       
     edit:
       title:         Edición de Fuentes Ingresos
-      display:       [numdec, fueing, fundec, rifcon, nomcon, dircon, tipcon, naccon]
+      display:       [numdec, fecdec, fundec, rifcon, nomcon, dircon, tipcon, naccon]
     
