@@ -9,10 +9,6 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 
 
 	
-	protected $numuni;
-
-
-	
 	protected $nomuni;
 
 
@@ -24,17 +20,28 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collDfrutadocs;
+
+	
+	protected $lastDfrutadocCriteria = null;
+
+	
+	protected $collDfatendocdefsRelatedByIdNumuni;
+
+	
+	protected $lastDfatendocdefRelatedByIdNumuniCriteria = null;
+
+	
+	protected $collDfatendocdefsRelatedByIdNumuniori;
+
+	
+	protected $lastDfatendocdefRelatedByIdNumunioriCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
-
-	
-	public function getNumuni()
-	{
-
-		return $this->numuni;
-	}
 
 	
 	public function getNomuni()
@@ -57,16 +64,6 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 		return $this->id;
 	}
 
-	
-	public function setNumuni($v)
-	{
-
-		if ($this->numuni !== $v) {
-			$this->numuni = $v;
-			$this->modifiedColumns[] = AcunidadPeer::NUMUNI;
-		}
-
-	} 
 	
 	public function setNomuni($v)
 	{
@@ -102,19 +99,17 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	{
 		try {
 
-			$this->numuni = $rs->getString($startcol + 0);
+			$this->nomuni = $rs->getString($startcol + 0);
 
-			$this->nomuni = $rs->getString($startcol + 1);
+			$this->desuni = $rs->getString($startcol + 1);
 
-			$this->desuni = $rs->getString($startcol + 2);
-
-			$this->id = $rs->getInt($startcol + 3);
+			$this->id = $rs->getInt($startcol + 2);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 4; 
+						return $startcol + 3; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Acunidad object", $e);
 		}
@@ -181,6 +176,30 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collDfrutadocs !== null) {
+				foreach($this->collDfrutadocs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collDfatendocdefsRelatedByIdNumuni !== null) {
+				foreach($this->collDfatendocdefsRelatedByIdNumuni as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collDfatendocdefsRelatedByIdNumuniori !== null) {
+				foreach($this->collDfatendocdefsRelatedByIdNumuniori as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -222,6 +241,30 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 			}
 
 
+				if ($this->collDfrutadocs !== null) {
+					foreach($this->collDfrutadocs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collDfatendocdefsRelatedByIdNumuni !== null) {
+					foreach($this->collDfatendocdefsRelatedByIdNumuni as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collDfatendocdefsRelatedByIdNumuniori !== null) {
+					foreach($this->collDfatendocdefsRelatedByIdNumuniori as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -241,15 +284,12 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getNumuni();
-				break;
-			case 1:
 				return $this->getNomuni();
 				break;
-			case 2:
+			case 1:
 				return $this->getDesuni();
 				break;
-			case 3:
+			case 2:
 				return $this->getId();
 				break;
 			default:
@@ -262,10 +302,9 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	{
 		$keys = AcunidadPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getNumuni(),
-			$keys[1] => $this->getNomuni(),
-			$keys[2] => $this->getDesuni(),
-			$keys[3] => $this->getId(),
+			$keys[0] => $this->getNomuni(),
+			$keys[1] => $this->getDesuni(),
+			$keys[2] => $this->getId(),
 		);
 		return $result;
 	}
@@ -282,15 +321,12 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setNumuni($value);
-				break;
-			case 1:
 				$this->setNomuni($value);
 				break;
-			case 2:
+			case 1:
 				$this->setDesuni($value);
 				break;
-			case 3:
+			case 2:
 				$this->setId($value);
 				break;
 		} 	}
@@ -300,10 +336,9 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	{
 		$keys = AcunidadPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setNumuni($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setNomuni($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setDesuni($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNomuni($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setDesuni($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
 	}
 
 	
@@ -311,7 +346,6 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(AcunidadPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(AcunidadPeer::NUMUNI)) $criteria->add(AcunidadPeer::NUMUNI, $this->numuni);
 		if ($this->isColumnModified(AcunidadPeer::NOMUNI)) $criteria->add(AcunidadPeer::NOMUNI, $this->nomuni);
 		if ($this->isColumnModified(AcunidadPeer::DESUNI)) $criteria->add(AcunidadPeer::DESUNI, $this->desuni);
 		if ($this->isColumnModified(AcunidadPeer::ID)) $criteria->add(AcunidadPeer::ID, $this->id);
@@ -345,12 +379,27 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setNumuni($this->numuni);
-
 		$copyObj->setNomuni($this->nomuni);
 
 		$copyObj->setDesuni($this->desuni);
 
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getDfrutadocs() as $relObj) {
+				$copyObj->addDfrutadoc($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getDfatendocdefsRelatedByIdNumuni() as $relObj) {
+				$copyObj->addDfatendocdefRelatedByIdNumuni($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getDfatendocdefsRelatedByIdNumuniori() as $relObj) {
+				$copyObj->addDfatendocdefRelatedByIdNumuniori($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -373,6 +422,356 @@ abstract class BaseAcunidad extends BaseObject  implements Persistent {
 			self::$peer = new AcunidadPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initDfrutadocs()
+	{
+		if ($this->collDfrutadocs === null) {
+			$this->collDfrutadocs = array();
+		}
+	}
+
+	
+	public function getDfrutadocs($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfrutadocPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfrutadocs === null) {
+			if ($this->isNew()) {
+			   $this->collDfrutadocs = array();
+			} else {
+
+				$criteria->add(DfrutadocPeer::ID_ACUNIDAD, $this->getId());
+
+				DfrutadocPeer::addSelectColumns($criteria);
+				$this->collDfrutadocs = DfrutadocPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(DfrutadocPeer::ID_ACUNIDAD, $this->getId());
+
+				DfrutadocPeer::addSelectColumns($criteria);
+				if (!isset($this->lastDfrutadocCriteria) || !$this->lastDfrutadocCriteria->equals($criteria)) {
+					$this->collDfrutadocs = DfrutadocPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastDfrutadocCriteria = $criteria;
+		return $this->collDfrutadocs;
+	}
+
+	
+	public function countDfrutadocs($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfrutadocPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(DfrutadocPeer::ID_ACUNIDAD, $this->getId());
+
+		return DfrutadocPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addDfrutadoc(Dfrutadoc $l)
+	{
+		$this->collDfrutadocs[] = $l;
+		$l->setAcunidad($this);
+	}
+
+	
+	public function initDfatendocdefsRelatedByIdNumuni()
+	{
+		if ($this->collDfatendocdefsRelatedByIdNumuni === null) {
+			$this->collDfatendocdefsRelatedByIdNumuni = array();
+		}
+	}
+
+	
+	public function getDfatendocdefsRelatedByIdNumuni($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdefPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdefsRelatedByIdNumuni === null) {
+			if ($this->isNew()) {
+			   $this->collDfatendocdefsRelatedByIdNumuni = array();
+			} else {
+
+				$criteria->add(DfatendocdefPeer::ID_NUMUNI, $this->getId());
+
+				DfatendocdefPeer::addSelectColumns($criteria);
+				$this->collDfatendocdefsRelatedByIdNumuni = DfatendocdefPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(DfatendocdefPeer::ID_NUMUNI, $this->getId());
+
+				DfatendocdefPeer::addSelectColumns($criteria);
+				if (!isset($this->lastDfatendocdefRelatedByIdNumuniCriteria) || !$this->lastDfatendocdefRelatedByIdNumuniCriteria->equals($criteria)) {
+					$this->collDfatendocdefsRelatedByIdNumuni = DfatendocdefPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastDfatendocdefRelatedByIdNumuniCriteria = $criteria;
+		return $this->collDfatendocdefsRelatedByIdNumuni;
+	}
+
+	
+	public function countDfatendocdefsRelatedByIdNumuni($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdefPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(DfatendocdefPeer::ID_NUMUNI, $this->getId());
+
+		return DfatendocdefPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addDfatendocdefRelatedByIdNumuni(Dfatendocdef $l)
+	{
+		$this->collDfatendocdefsRelatedByIdNumuni[] = $l;
+		$l->setAcunidadRelatedByIdNumuni($this);
+	}
+
+
+	
+	public function getDfatendocdefsRelatedByIdNumuniJoinDfatendoc($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdefPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdefsRelatedByIdNumuni === null) {
+			if ($this->isNew()) {
+				$this->collDfatendocdefsRelatedByIdNumuni = array();
+			} else {
+
+				$criteria->add(DfatendocdefPeer::ID_NUMUNI, $this->getId());
+
+				$this->collDfatendocdefsRelatedByIdNumuni = DfatendocdefPeer::doSelectJoinDfatendoc($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfatendocdefPeer::ID_NUMUNI, $this->getId());
+
+			if (!isset($this->lastDfatendocdefRelatedByIdNumuniCriteria) || !$this->lastDfatendocdefRelatedByIdNumuniCriteria->equals($criteria)) {
+				$this->collDfatendocdefsRelatedByIdNumuni = DfatendocdefPeer::doSelectJoinDfatendoc($criteria, $con);
+			}
+		}
+		$this->lastDfatendocdefRelatedByIdNumuniCriteria = $criteria;
+
+		return $this->collDfatendocdefsRelatedByIdNumuni;
+	}
+
+
+	
+	public function getDfatendocdefsRelatedByIdNumuniJoinDfrutadoc($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdefPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdefsRelatedByIdNumuni === null) {
+			if ($this->isNew()) {
+				$this->collDfatendocdefsRelatedByIdNumuni = array();
+			} else {
+
+				$criteria->add(DfatendocdefPeer::ID_NUMUNI, $this->getId());
+
+				$this->collDfatendocdefsRelatedByIdNumuni = DfatendocdefPeer::doSelectJoinDfrutadoc($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfatendocdefPeer::ID_NUMUNI, $this->getId());
+
+			if (!isset($this->lastDfatendocdefRelatedByIdNumuniCriteria) || !$this->lastDfatendocdefRelatedByIdNumuniCriteria->equals($criteria)) {
+				$this->collDfatendocdefsRelatedByIdNumuni = DfatendocdefPeer::doSelectJoinDfrutadoc($criteria, $con);
+			}
+		}
+		$this->lastDfatendocdefRelatedByIdNumuniCriteria = $criteria;
+
+		return $this->collDfatendocdefsRelatedByIdNumuni;
+	}
+
+	
+	public function initDfatendocdefsRelatedByIdNumuniori()
+	{
+		if ($this->collDfatendocdefsRelatedByIdNumuniori === null) {
+			$this->collDfatendocdefsRelatedByIdNumuniori = array();
+		}
+	}
+
+	
+	public function getDfatendocdefsRelatedByIdNumuniori($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdefPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdefsRelatedByIdNumuniori === null) {
+			if ($this->isNew()) {
+			   $this->collDfatendocdefsRelatedByIdNumuniori = array();
+			} else {
+
+				$criteria->add(DfatendocdefPeer::ID_NUMUNIORI, $this->getId());
+
+				DfatendocdefPeer::addSelectColumns($criteria);
+				$this->collDfatendocdefsRelatedByIdNumuniori = DfatendocdefPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(DfatendocdefPeer::ID_NUMUNIORI, $this->getId());
+
+				DfatendocdefPeer::addSelectColumns($criteria);
+				if (!isset($this->lastDfatendocdefRelatedByIdNumunioriCriteria) || !$this->lastDfatendocdefRelatedByIdNumunioriCriteria->equals($criteria)) {
+					$this->collDfatendocdefsRelatedByIdNumuniori = DfatendocdefPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastDfatendocdefRelatedByIdNumunioriCriteria = $criteria;
+		return $this->collDfatendocdefsRelatedByIdNumuniori;
+	}
+
+	
+	public function countDfatendocdefsRelatedByIdNumuniori($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdefPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(DfatendocdefPeer::ID_NUMUNIORI, $this->getId());
+
+		return DfatendocdefPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addDfatendocdefRelatedByIdNumuniori(Dfatendocdef $l)
+	{
+		$this->collDfatendocdefsRelatedByIdNumuniori[] = $l;
+		$l->setAcunidadRelatedByIdNumuniori($this);
+	}
+
+
+	
+	public function getDfatendocdefsRelatedByIdNumunioriJoinDfatendoc($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdefPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdefsRelatedByIdNumuniori === null) {
+			if ($this->isNew()) {
+				$this->collDfatendocdefsRelatedByIdNumuniori = array();
+			} else {
+
+				$criteria->add(DfatendocdefPeer::ID_NUMUNIORI, $this->getId());
+
+				$this->collDfatendocdefsRelatedByIdNumuniori = DfatendocdefPeer::doSelectJoinDfatendoc($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfatendocdefPeer::ID_NUMUNIORI, $this->getId());
+
+			if (!isset($this->lastDfatendocdefRelatedByIdNumunioriCriteria) || !$this->lastDfatendocdefRelatedByIdNumunioriCriteria->equals($criteria)) {
+				$this->collDfatendocdefsRelatedByIdNumuniori = DfatendocdefPeer::doSelectJoinDfatendoc($criteria, $con);
+			}
+		}
+		$this->lastDfatendocdefRelatedByIdNumunioriCriteria = $criteria;
+
+		return $this->collDfatendocdefsRelatedByIdNumuniori;
+	}
+
+
+	
+	public function getDfatendocdefsRelatedByIdNumunioriJoinDfrutadoc($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdefPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdefsRelatedByIdNumuniori === null) {
+			if ($this->isNew()) {
+				$this->collDfatendocdefsRelatedByIdNumuniori = array();
+			} else {
+
+				$criteria->add(DfatendocdefPeer::ID_NUMUNIORI, $this->getId());
+
+				$this->collDfatendocdefsRelatedByIdNumuniori = DfatendocdefPeer::doSelectJoinDfrutadoc($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfatendocdefPeer::ID_NUMUNIORI, $this->getId());
+
+			if (!isset($this->lastDfatendocdefRelatedByIdNumunioriCriteria) || !$this->lastDfatendocdefRelatedByIdNumunioriCriteria->equals($criteria)) {
+				$this->collDfatendocdefsRelatedByIdNumuniori = DfatendocdefPeer::doSelectJoinDfrutadoc($criteria, $con);
+			}
+		}
+		$this->lastDfatendocdefRelatedByIdNumunioriCriteria = $criteria;
+
+		return $this->collDfatendocdefsRelatedByIdNumuniori;
 	}
 
 } 

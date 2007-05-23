@@ -9,4 +9,11 @@
  */ 
 class Dfrutadoc extends BaseDfrutadoc
 {
+  
+  public function getNomuni(){
+    
+    return Herramientas::getX('id','acunidad','nomuni',self::getIdacunidad());
+    
+  }
+  
 }

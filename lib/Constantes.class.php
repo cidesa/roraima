@@ -12,6 +12,12 @@ class Constantes
 	const Compras = '{Compras} ';
 	const Tesoreria = '{Tesoreria} ';
 	const Nomina = '{Nomina} ';
+	
+	/**
+   	* @static
+   	* @var string REGVACIO Comentario para los registros vacíos.
+   	*/
+    CONST REGVACIO = '<¡Registro no Encontrado o Vacio!>';
 
 	public static function ListaGeneraOrdenPago()
 	{return array('N' => '(No Afecta)', 'C' => 'Causa', 'O' => 'Compromete y Causa');}
@@ -64,10 +70,38 @@ class Constantes
 	public static function ListaDescripcion()
 			    {return array('0' => 'Anualidad', '1' => 'Semestre', '2' => 'Cuatrisemestre', '3' => 'Trimestre', '4' => 'Bimestre', '5' => 'Mensualidad', '6' => 'Quincena');}		    
 			    
-	public static function ListaFrecuencia()
-			    {return array('0' => '1 Anualidad', '1' => '2 Semestral', '2' => '3 Cuatrisemestral', '3' => '4 Trimestre', '4' => '6 Bimestre', '5' => '12 Mensualidad');}
-			    
 	public static function ListaNivelesInmueble()
-				    {return array('0' => '2', '1' => '3', '2' => '3', '3' => '4', '4' => '5', '5' => '6', '6' => '7', '7' => '8');}			    
-	 
+				    {return array('0' => '2', '1' => '3', '2' => '3', '3' => '4', '4' => '5', '5' => '6', '6' => '7', '7' => '8');}			  
+
+	public static function ListaTipoRetencion()
+				    {return array('C' => 'Crédito', 'F' => 'Fondo');}			  
+				    
+/*
+    public function BuscarDatos($sql)
+    {
+    	$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
+    	$stmt = $con->createStatement();
+    	$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
+    	$i = pg_num_fields($rs2->getResource());
+    	$fieldname = array();
+    	$resultado = array();
+    	$output = array();
+    	for ($j = 0; $j < $i; $j++)
+    	{
+    		$fieldname[]  = pg_field_name($rs2->getResource(),$j);
+    	}
+    	while ($rs->next())
+    	{
+    		$resultado[]=$rs2->getRow();
+		}
+		$output[0]=$fieldname;
+		$output[1]=$resultado;
+		$this->output=$output;
+		return $this->output;
+    }
+*/
+	
+	
+ 	
+	
 }

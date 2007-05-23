@@ -48,6 +48,12 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collDfatendocs;
+
+	
+	protected $lastDfatendocCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -319,6 +325,14 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collDfatendocs !== null) {
+				foreach($this->collDfatendocs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -359,6 +373,14 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collDfatendocs !== null) {
+					foreach($this->collDfatendocs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -556,6 +578,15 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		$copyObj->setStadoc($this->stadoc);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getDfatendocs() as $relObj) {
+				$copyObj->addDfatendoc($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -577,6 +608,76 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 			self::$peer = new DftabtipPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initDfatendocs()
+	{
+		if ($this->collDfatendocs === null) {
+			$this->collDfatendocs = array();
+		}
+	}
+
+	
+	public function getDfatendocs($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocs === null) {
+			if ($this->isNew()) {
+			   $this->collDfatendocs = array();
+			} else {
+
+				$criteria->add(DfatendocPeer::ID_DFTABTIP, $this->getId());
+
+				DfatendocPeer::addSelectColumns($criteria);
+				$this->collDfatendocs = DfatendocPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(DfatendocPeer::ID_DFTABTIP, $this->getId());
+
+				DfatendocPeer::addSelectColumns($criteria);
+				if (!isset($this->lastDfatendocCriteria) || !$this->lastDfatendocCriteria->equals($criteria)) {
+					$this->collDfatendocs = DfatendocPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastDfatendocCriteria = $criteria;
+		return $this->collDfatendocs;
+	}
+
+	
+	public function countDfatendocs($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(DfatendocPeer::ID_DFTABTIP, $this->getId());
+
+		return DfatendocPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addDfatendoc(Dfatendoc $l)
+	{
+		$this->collDfatendocs[] = $l;
+		$l->setDftabtip($this);
 	}
 
 } 
