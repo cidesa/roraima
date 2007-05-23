@@ -141,22 +141,6 @@ class Herramientas
    * @return string $result es el nombre del campo que se quiere traer la data
    * @param string $data variale con la que se va hacer el filtro.
    */
-  public static function getX($campos, $tabla, $result, $data)
-  {
-    eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campos).';');
-
-	   $c = new Criteria();
-	   $c->add($field,$data);
-	   eval ('$reg = '.ucfirst(strtolower($tabla)).'Peer::doSelectone($c);');
-	   if ($reg){
-	     eval('$r = $reg->get'.ucfirst(strtolower($result)).'();');
-	     return $r;
-	   }else{
-	     return self::REGVACIO;
-	   }
-	    
-  }
-
   public static function getMascaraContable()
   {
     $c = new Criteria();
