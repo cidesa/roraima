@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Clase para el Manejo de Proveedores
+ * Clase para el Manejo de Proveedor
  *
  * @package    Siga
  * @subpackage lib
@@ -10,10 +10,27 @@
  * @copyright  Copyright 2007, Cidesa C.A.
  * 
  */
-class Proveedores
+class Proveedor
 {
 
 	/**
+	 * Función Principal para guardar datos del formulario Almregpro
+	 * TODO Esta función (y todas las demás de su clase) deben retornar un
+	 * código de error para validar cualquier problema al guardar los datos.
+	 *  
+	 * @static
+	 * @param $caprovee Object Proveedor-Benficiario-Recaudos a guardar	 
+	 * @return void 
+	 */
+    public static function salvarAlmregpro($caprovee)
+    {
+      self::Grabar_Proveedor($caprovee);			
+      self::Grabar_Beneficiario($caprovee);
+      self::Grabar_Recaudosproveedor($caprovee);
+    }
+	
+
+/**
 	 * Función para registrar Proveedor
 	 *  
 	 * @static
@@ -25,7 +42,7 @@ class Proveedores
 	  $caprovee->save();
 	
 		// Se graban el beneficiario
-	  self::Grabar_Beneficiario($caprovee);
+	  //self::Grabar_Beneficiario($caprovee);
     }
 
    	/**
@@ -59,19 +76,7 @@ class Proveedores
 	  }*/
     } 
 			
-	/**
-	 * Función Principal para guardar datos del formulario Almregart
-	 * TODO Esta función (y todas las demás de su clase) deben retornar un
-	 * código de error para validar cualquier problema al guardar los datos.
-	 *  
-	 * @static
-	 * @param $articulo Object Artículo a guardar
-	 * @param $grid Array de Objects Almacen. 
-	 * @return void 
-	 */
-    public static function salvarAlmregart($articulo,$grid){
-      self::Grabar_Articulo($articulo,$grid);			
-    }
+
 
   
 	/**
@@ -109,4 +114,5 @@ class Proveedores
 	  	  }else return -1;
 	    }
     }
+}
 
