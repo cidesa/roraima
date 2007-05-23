@@ -9,6 +9,13 @@
  */ 
 class Cadphart extends BaseCadphart
 {
+   public function getMondph()
+	{
+		$data = parent::getMondph();
+		if($data!='') return number_format($data,2,'.',',');
+
+	}
+	
 	public function getNomalm()
 	{
 		return Herramientas::getX('CODALM','Cadefalm','Nomalm',self::getCodalm());
