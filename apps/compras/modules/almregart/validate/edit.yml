@@ -1,112 +1,66 @@
 methods:
   post:
-   - "caregart{codart}"   
-   - "caregart{desart}"
-   - "caregart{ramart}"
-   - "caregart{unimed}"
-   - "caregart{unialt}"
-   - "caregart{relart}"
-   - "caregart{exitot}"   
-   - "caregart{cosult}"
-   - "caregart{cospro}"
-   - "caregart{invini}"
+   - "careqart{codcatreq}"
+   - "careqart{reqart}"   
+   - "careqart{desreq}"
+   - "careqart{monreq}"
+
+
 
 names: 
-  caregart{codart}:
+  careqart{codcatreq}:
     required:  Yes
-    required_msg: El Código del Articulo no puedo estar en Blanco
-    validators: MyStringValidator6        
+    validators: Validator_codcatreq
+    
+  careqart{reqart}:
+    required:  Yes
+    required_msg: El Número no puedo estar en Blanco
+    validators: Validator_reqart       
 
-  caregart{desart}:
-    required:  Yes
-    required_msg: El Descripción no puedo estar en Blanco        
-    validators: MyStringValidator
-    
-  caregart{ramart}:
+  careqart{desreq}:
     required:  No
-    validators: MyString2Validator
+    validators: Validator_desreq
   
-  caregart{unimed}:
+  careqart{monreq}:
     required:  No
-    validators: MyString3Validator
+    validators: Validator_monreq
     
-  caregart{unialt}:
-    required:  No
-    validators: MyString4Validator
+
+
+Validator_codcatreq:
+    class: sfStringValidator
+    param:
+        min:       0
+        min_error: La Unidad  no puede tener menos de 2 caracteres
+        max:       32
+        max_error: La Unidad  no puede pasar mas de 15 caracteres    
+
     
-  caregart{relart}:
-    required:  No
-    validators: MyString5Validator
-    
-  caregart{exitot}:
-    required:  No
-    validators: MyNumberValidator
-    
-  caregart{cosult}:
-    required:  No
-    validators: MyNumberValidator
-    
-  caregart{cospro}:
-    required:  No
-    validators: MyNumberValidator
-    
-  caregart{invini}:
-    required:  No
-    validators: MyNumberValidator
-    
-MyStringValidator:
+Validator_reqart:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Número no puede tener menos de 2 caracteres
+        max:       8
+        max_error: El Número no puede pasar mas de 8 caracteres
+
+Validator_desreq:
     class: sfStringValidator
     param:
         min:       2
         min_error: La Descripción no puede tener menos de 2 caracteres
-        max:       250
-        max_error: La Descripción no puede pasar mas de 250 caracteres
-
-MyStringValidator6:
-    class: sfStringValidator
-    param:
-        min:       1
-        min_error: La Descripción no puede tener menos de 2 caracteres        
-        
-MyString2Validator:
-    class: sfStringValidator
-    param:
-        min:       2
-        min_error: El Ramo del Articulo no puede tener menos de 2 caracteres
         max:       
-        max_error: El Estatus no puede pasar mas de 6 caracteres
+        max_error: La Descripción no puede pasar mas de 500 caracteres
         
-MyString3Validator:
-    class: sfStringValidator
-    param:
-        min:       0
-        min_error: La Unidad de Medida no puede tener menos de 2 caracteres
-        max:       
-        max_error: La Unidad de Medida no puede pasar mas de 15 caracteres
-
-MyString4Validator:
-    class: sfStringValidator
-    param:
-        min:       0
-        min_error: La Unidad Alternativa no puede tener menos de 2 caracteres
-        max:       15
-        max_error: La Unidad Alternativa no puede pasar mas de 15 caracteres
-
-MyString5Validator:
-    class: sfStringValidator
-    param:
-        min:       0
-        min_error: La Relación no puede tener menos de 2 caracteres
-        max:       25 
-        max_error: La Relación no puede pasar mas de 25 caracteres
-                
-MyNumberValidator:
+Validator_monreq:
     class: sfNumberValidator
     param:
-        type:         float
         type_error:   Por favor, Introduzca Números Decimales               
         nan_error:    Por Favor, introduzca un Número Decimal
-        min:          0000000000.00
+        min:          0000000000,00
         min_error:    El valor tiene que ser mayor que cero
-        max:          9999999999.99
+        max:          9999999999,99
         max_error:    El valor debe contener maximo 9999999999.99
+        
+
+
