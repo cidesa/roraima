@@ -567,7 +567,25 @@ class Herramientas
     }else return array();
 
   }
-
+  
+	public static function getxLike($campos, $tabla, $result, $data)
+	{
+     	eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campos).';');
+	
+	   $c = new Criteria();
+	   $c->add($field,$data,Criteria::LIKE);
+	   eval ('$reg = '.ucfirst(strtolower($tabla)).'Peer::doSelectone($c);');
+	   if ($reg)
+		{
+	   		eval('$r = $reg->get'.ucfirst(strtolower($result)).'();');
+		 	return $r;
+	    }
+	  else
+		{
+	  		return '<¡Registro no Encontrado o Vacio!>';
+	    }
+    }	  
+	
 }
 
 
