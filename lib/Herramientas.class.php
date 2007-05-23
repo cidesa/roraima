@@ -393,7 +393,7 @@ class Herramientas
 	       $i++;
 	     }
 	   }else{
-	     $resultado[0]=self::REGVACIO;
+	     $resultado[0]='';
 	   }
 	   return $resultado;
   }
