@@ -395,6 +395,7 @@ class Herramientas
 
   public static function autocompleteAjax($fieldjoin, $join, $result, $data)
   {
+       $data=strtoupper($data);
 	   eval ('$field = '.$join.'Peer::'.$fieldjoin.';');
 	   $resultado=array();
 	   $c = new Criteria();
