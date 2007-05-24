@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almreq/edit_messages', array('careqart' => $careqart, 'labels' => $labels)) ?>
-<?php include_partial('almreq/edit_form', array('careqart' => $careqart, 'labels' => $labels, 'desubi' => $desubi, 'pagerArtreq' => $pagerArtreq)) ?>
+<?php include_partial('almreq/edit_form', array('careqart' => $careqart, 'labels' => $labels, 'desubi' => $desubi, 'pagerArtreq' => $pagerArtreq, 'obj' => $obj)) ?>
 </div>
 
 <div id="sf_admin_footer">
