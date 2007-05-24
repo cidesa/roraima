@@ -8,16 +8,72 @@
  * @author     Grupo Desarrollo Cidesa <desarrollo@cidesa.com.ve>
  * @version    SVN: $Id: $
  * @copyright  Copyright 2007, Cidesa C.A.
- * 
+ *
  */
 class Articulos
 {
-
+/**************************************************************************
+**         Grid de la Requisición Formulario AmlReq                      **
+**                       Jaime Suárez                                    **
+**************************************************************************/
 	/**
-	 * Función para registrar artículos
-	 *  
+	 * Función para registrar la Requisición
+	 *
 	 * @static
 	 * @param $articulo Object Artículo a guardar
+	 * @param $grid Array de Objects Almacen.
+	 * @return void
+	 */
+	public static function salvarAlmreqart($requisicion,$grid){
+    	self::Grabar_Requisicion($requisicion,$grid);
+    }
+    
+	public static function Grabar_Requisicion($requisicion,$grid)
+	{
+		//Se graba el Artículo
+		$requisicion->save();
+
+		// Se graban los almacenes del articulo
+		self::Grabar_DetallesRequisicion($requisicion,$grid);
+	}
+
+	/**
+	 * Función para registrar los artículos en los diferentes Alamacenes
+	 *
+	 * @static
+	 * @param $articulo Object Artículo a guardar
+	 * @param $grid Array de Objects Almacen.
+	 * @return void
+	 */
+	public static function Grabar_DetallesRequisicion($requisicion,$grid){
+		$reqart=$requisicion->getReqart();
+		$x=$grid[0];
+		$j=0;
+		while ($j<count($x)) {
+			$x[$j]->setReqart($reqart);
+			$Codcat=$x[$j]->getCodcat();
+			$x[$j]->setCodcat($Codcat);
+				
+			$x[$j]->save();
+			$j++;
+		}
+		$z=$grid[1];
+		$j=0;
+		if ($z[$j]) {
+			while ($j<count($z)) {
+				$z[$j]->delete();
+				$j++;
+			}
+
+		}
+	}
+/**************************************************************************
+**           Fin Grid de la Requisición Formulario AmlReq                **
+**                       Jaime Suárez                                    **
+**************************************************************************/	
+	
+	/**
+	 * Función pculo Object Artículo a guardar
 	 * @param $grid Array de Objects Almacen. 
 	 * @return void 
 	 */   
