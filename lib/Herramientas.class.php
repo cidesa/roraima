@@ -255,7 +255,7 @@ class Herramientas
 	  	  }
 	  	  elseif ( ($form->getRequestParameter($id)=="") && (trim($form->getRequestParameter($cajchk)!="")) ) //nuevo
 	  	  {
-	  	    $clase = new Caartalm();
+	  	    eval('$clase = new '.$tabla.'();');
 	  	     
 	  	    while ($j<$col)
 	  	    {
