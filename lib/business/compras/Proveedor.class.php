@@ -26,7 +26,7 @@ class Proveedor
     {
       self::Grabar_Proveedor($caprovee);			
       self::Grabar_Beneficiario($caprovee);
-      self::Grabar_Recaudosproveedor($caprovee);
+      //self::Grabar_Recaudosproveedor($caprovee);
     }
 	
 
@@ -37,43 +37,48 @@ class Proveedor
 	 * @param $caprovee Object Proveedor a guardar	 
 	 * @return void 
 	 */   
-    public static function Grabar_Proveedor($caprovee){	
-	  	//Se graba el proveedor		
-	  $caprovee->save();
-	
-		// Se graban el beneficiario
-	  //self::Grabar_Beneficiario($caprovee);
+    public static function Grabar_Proveedor($caprovee){			
+	  $caprovee->save();	
     }
 
    	/**
-	 * Función para registrar los artículos en los diferentes Alamacenes 
+	 * Función para registrar un Beneficiario
 	 *  
 	 * @static
-	 * @param $articulo Object Artículo a guardar
-	 * @param $grid Array de Objects Almacen. 
+	 * @param $caprovee Object Beneficiario a guardar	 
 	 * @return void 
 	 */   
-    public static function Grabar_Beneficiario($articulo){
-	/*  $codart=$articulo->getCodart();
-	  $x=$grid[0];		
-		  $j=0;	
-		  while ($j<count($x)) {
-			$x[$j]->setCodart($codart);
-			$codubi=$x[$j]->getCodubi();
-			$x[$j]->setCodubi(str_pad($codubi, 20 , ' '));
-							
-			$x[$j]->save();
-		    $j++;			
-		  }
-      $z=$grid[1];		  
-      $j=0;
-      if ($z[$j]) {
-		while ($j<count($z)) {											
-			$z[$j]->delete();				
-		$j++;
-		}
-		
-	  }*/
+    public static function Grabar_Beneficiario($caprovee){
+        //$caprovee = $this->getRequestParameter('caprovee');
+        
+        $c = new Criteria();
+        $c->add(OpbenefiPeer::CEDRIF,$caprovee->getRifpro());
+        $opbenefi = OpbenefiPeer::doSelectOne($c) ;
+        if (isset($opbenefi))
+        {
+    	  $opbenefi->setNitben($caprovee->getNitpro());
+        }
+        else
+        {
+    	  $opbenefi = new Opbenefi();
+        }       
+          $codtipben = Herramientas::getxLike('destipben','optipben','codtipben','%PROVEEDOR%');
+                  
+          $opbenefi->setcodtipben($codtipben);
+	      $opbenefi->setCedrif($caprovee->getRifpro());
+	      $opbenefi->setNitben($caprovee->getNitpro());
+	      $opbenefi->setDirben($caprovee->getDirpro());
+	      $opbenefi->setTelben($caprovee->getTelpro());
+	      $opbenefi->setCodcta($caprovee->getCodcta());
+	      $opbenefi->setCodord($caprovee->getCodord());
+	      $opbenefi->setCodpercon($caprovee->getCodpercon());
+	      $opbenefi->setCodctasec($caprovee->getCodctasec());
+	      $opbenefi->setCodordadi($caprovee->getCodordadi());
+	      $opbenefi->setCodperconadi($caprovee->getCodperconadi());
+	      $opbenefi->setCodpercontra($caprovee->getCodordcontra());
+	      $opbenefi->setCodpercontra($caprovee->getCodpercontra());	      
+
+	    $opbenefi->save();
     } 
 			
 
@@ -114,5 +119,3 @@ class Proveedor
 	  	  }else return -1;
 	    }
     }
-
-
