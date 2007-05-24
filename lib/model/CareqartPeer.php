@@ -41,4 +41,8 @@ class CareqartPeer extends BaseCareqartPeer
 		return $columnas;
 	}
 	
+   public static function getRequision($reqart)
+	{
+    	return Herramientas::getX('REQART','Careqart','Desreq',str_pad($reqart, 6 , '0','STR_PAD_LEFT'));		
+	}
 }

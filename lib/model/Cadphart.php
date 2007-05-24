@@ -31,8 +31,8 @@ class Cadphart extends BaseCadphart
 		return Herramientas::getX('REQART','Careqart','Fecreq',self::getReqart());
 	}
 	
-	public function getDescat()
+	public function getNomcat()
 	{
-		return Herramientas::getX('CODCAT','Npcatpre','Descat',self::getCodori());
+		return Herramientas::getX('CODCAT','Npcatpre','Nomcat',str_pad(self::getCodori(), 32, ' '));
 	}
 }
