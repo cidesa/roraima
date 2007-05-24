@@ -17,6 +17,11 @@ class BnubibiePeer extends BaseBnubibiePeer
 
 	}
 
+	public static function getDesubicacion($codubi)
+	{
+    	return Herramientas::getX('CODUBI','Bnubibie','Desubi',trim($codubi));		
+	}
+
 	public static  function getNomubicac($codubi)
 	{
 		$c = new Criteria();
