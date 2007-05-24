@@ -191,49 +191,17 @@ class almregartActions extends autoalmregartActions
 	{
 
       $c = new Criteria();
-      $c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
+      $c->add(CaartalmPeer::CODART,$this->caregart->getCodart());
       $per = CaartalmPeer::doSelect($c);
 	  
 	  
-	  if(false){
-		//////////////////////
-		//GRID
-		
-		$filas=17;
-		$cabeza="Existencia por Almacenes";
-		$eliminar=true;
-		$titulos=array("Cod. Almacen","Descripción","Cod. Ubicacion","Ubicación","Exi. Mínima","Exi. Máxima","Exi. Actual","Reorden");
-		$ancho="1100";
-		$alignf=array('center','left','center','left','right','right','right','right');
-		$alignt=array('center','left','center','left','right','right','right','right');
-		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
-		$catalogos=array('Cadefalm-sf_admin_edit_form-x1-x2','','Cadefubi-sf_admin_edit_form-x3-x4','','','','','');// por todas las columnas, si no tiene, se coloca vacio
-		$ajax=array('2-x2-x1','','3-x4-x3','','','','',''); //parametro-cajitamostrar-autocompletar
-		$tipos=array('t','t','m','m','m','m'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
-		$montos=array("5","6","7","8");
-		$totales=array("", "", "caregart_exitot", "");
-		$mascaraubicacion=$this->mascaraubicacion;
-		$html=array('type="text" size="5"','type="text" size="25" disabled=true','type="text" size="5"','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
-		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
-		$grabar=array("1","3","5","6","7","8");
-		$filatotal='';
-		 
-		
-		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
-		'ancho'=>$ancho, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
-		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 
-		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar, 'tabla' => 'Caartalm');
-		////////////////////// 
-
-	  }else {
-	    
 	    $mascaraubicacion=$this->mascaraubicacion;
 	    // $i18n = $this->getContext()->getI18N();
 	    // Se crea el objeto principal de la clase OpcionesGrid
 	    $opciones = new OpcionesGrid();
 	    // Se configuran las opciones globales del Grid 
         $opciones->setEliminar(true);
-        $opciones->setTabla('Ocregact');
+        $opciones->setTabla('Caartalm');
         $opciones->setAnchoGrid(1150);
         $opciones->setTitulo('Existencia por Almacenes');
         $opciones->setHTMLTotalFilas(' ');
@@ -251,7 +219,7 @@ class almregartActions extends autoalmregartActions
         $col2->setTipo(Columna::TEXTO);
         $col2->setAlineacionObjeto(Columna::IZQUIERDA);
         $col2->setAlineacionContenido(Columna::IZQUIERDA);
-        $col2->setNombreCampo('codalm');
+        $col2->setNombreCampo('Nomalm');
         $col2->setHTML('type="text" size="25" disabled=true');
         
         $col3 = clone $col1;
@@ -298,9 +266,7 @@ class almregartActions extends autoalmregartActions
         $opciones->addColumna($col7);
         $opciones->addColumna($col8);
 	    // Ee genera el arreglo de opciones necesario para generar el grid
-        $this->obj = $opciones->getConfig($per); 
-	    
-	  }
+        $this->obj = $opciones->getConfig($per);
 	  
 	}
 	  
