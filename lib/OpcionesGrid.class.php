@@ -58,7 +58,7 @@ class OpcionesGrid
   public function setEliminar($val){
 
     if(is_bool($val)){
-      $eliminar = $val;
+      $this->eliminar = $val;
     }
        
   }
