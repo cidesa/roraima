@@ -12,7 +12,7 @@ class NpcatprePeer extends BaseNpcatprePeer
 	const COLUMNS = 'columns';
 	
 	public static $columsname = array (
-	self::COLUMNS => array (NpcatprePeer::CODCAT => 'Código', NpcatprePeer::DESCAT => 'Descripción', ),);
+	self::COLUMNS => array (NpcatprePeer::CODCAT => 'Código', NpcatprePeer::NOMCAT => 'Descripción', ),);
 	
 	
 	static public function getColumName($colum)
