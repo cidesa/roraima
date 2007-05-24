@@ -9,13 +9,16 @@
 )) ?>
 <?php use_helper('Javascript') ?>
 <?php use_helper('PopUp') ?>
+<?php use_helper('Grid') ?>
 <?php echo javascript_include_tag('dFilter') ?>
 <?php echo javascript_include_tag('ajax') ?>
 <?php echo javascript_include_tag('tools') ?>
+<?php use_helper('tabs') ?>
 <?php echo object_input_hidden_tag($careqart, 'getId') ?>
 
-<fieldset id="sf_fieldset_none" class="">
 
+<?php tabMainJS("tp1","tabPane1", "tabPage1", 'Requisicíon');?>
+<fieldset><legend><strong>Requisicíon</strong></legend>
 <div class="form-row"><?php echo label_for('careqart[reqart]', __($labels['careqart{reqart}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('careqart{reqart}')): ?> form-error<?php endif; ?>">
@@ -30,20 +33,16 @@
 </div>
 
 
-<div class="form-row">
-  <?php echo label_for('careqart[fecreq]', __($labels['careqart{fecreq}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('careqart{fecreq}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('careqart{fecreq}')): ?>
-    <?php echo form_error('careqart{fecreq}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_date_tag($careqart, 'getFecreq', array (
+<div class="form-row"><?php echo label_for('careqart[fecreq]', __($labels['careqart{fecreq}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('careqart{fecreq}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('careqart{fecreq}')): ?> <?php echo form_error('careqart{fecreq}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_date_tag($careqart, 'getFecreq', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'careqart[fecreq]',
   'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
 
@@ -51,8 +50,7 @@
 <div
 	class="content<?php if ($sf_request->hasError('careqart{codcatreq}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('careqart{codcatreq}')): ?> <?php echo form_error('careqart{codcatreq}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> 
-<?php echo input_auto_complete_tag('careqart[codcatreq]', $careqart->getCodcatreq(),
+<?php endif; ?> <?php echo input_auto_complete_tag('careqart[codcatreq]', $careqart->getCodcatreq(),
 	'almreq/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 32, 'size' => 16, 'onBlur'=> remote_function(array(
 	'url'      => 'almreq/ajax',
 	'complete' => 'AjaxJSON(request, json)',
@@ -70,37 +68,42 @@
 </div>
 
 
-<div class="form-row">
-<?php echo label_for('careqart[desreq]', __($labels['careqart{desreq}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('careqart{desreq}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('careqart{desreq}')): ?>
-    <?php echo form_error('careqart{desreq}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($careqart, 'getDesreq', array (
+<div class="form-row"><?php echo label_for('careqart[desreq]', __($labels['careqart{desreq}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('careqart{desreq}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('careqart{desreq}')): ?> <?php echo form_error('careqart{desreq}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($careqart, 'getDesreq', array (
   'size' => 80,
   'control_name' => 'careqart[desreq]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row">
-<?php echo label_for('careqart[monreq]', __($labels['careqart{monreq}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('careqart{monreq}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('careqart{monreq}')): ?>
-    <?php echo form_error('careqart{monreq}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($careqart, 'getMonreq', array (
+<div class="form-row"><?php echo label_for('careqart[monreq]', __($labels['careqart{monreq}']), 'class="required" ') ?>
+<div
+	class="content<?php if ($sf_request->hasError('careqart{monreq}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('careqart{monreq}')): ?> <?php echo form_error('careqart{monreq}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_tag($careqart, 'getMonreq', array (
   'size' => 7,
   'control_name' => 'careqart[monreq]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
+
+
+
+
+
 
 
 
 </fieldset>
+
+<?php tabPageOpenClose("tp1", "tabPage2", 'Detalle de la Orden de Requisición');?>
+&nbsp;&nbsp;&nbsp;
+<form name="form1" id="form1"><?
+echo grid_tag($obj);
+?></form>
+
+<?php tabInit();?>
 
 <?php include_partial('edit_actions', array('careqart' => $careqart)) ?>
 
