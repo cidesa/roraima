@@ -21,7 +21,7 @@ class Careqart extends BaseCareqart
 			} */
 	public function getDesubi()
 	{
-		return  Herramientas::getX('codubi','bnubibie','desubi',str_pad(self::getCodcatreq(), 32, ' '));
+		return  Herramientas::getX('codubi','bnubibie','desubi',self::getCodcatreq());
 	}
 
 	public function getMonreq()
