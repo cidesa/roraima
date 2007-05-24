@@ -49,7 +49,6 @@ class Proveedor
 	 * @return void 
 	 */   
     public static function Grabar_Beneficiario($caprovee){
-        //$caprovee = $this->getRequestParameter('caprovee');
         
         $c = new Criteria();
         $c->add(OpbenefiPeer::CEDRIF,$caprovee->getRifpro());
@@ -66,13 +65,14 @@ class Proveedor
                   
           $opbenefi->setcodtipben($codtipben);
 	      $opbenefi->setCedrif($caprovee->getRifpro());
+	      $opbenefi->setNomben($caprovee->getNompro());
 	      $opbenefi->setNitben($caprovee->getNitpro());
 	      $opbenefi->setDirben($caprovee->getDirpro());
 	      $opbenefi->setTelben($caprovee->getTelpro());
 	      $opbenefi->setCodcta($caprovee->getCodcta());
 	      $opbenefi->setCodord($caprovee->getCodord());
 	      $opbenefi->setCodpercon($caprovee->getCodpercon());
-	      $opbenefi->setCodctasec($caprovee->getCodctasec());
+	      //$opbenefi->setCodctasec($caprovee->getCodctasec());
 	      $opbenefi->setCodordadi($caprovee->getCodordadi());
 	      $opbenefi->setCodperconadi($caprovee->getCodperconadi());
 	      $opbenefi->setCodpercontra($caprovee->getCodordcontra());
