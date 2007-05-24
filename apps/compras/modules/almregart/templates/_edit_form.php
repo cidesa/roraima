@@ -174,6 +174,7 @@
 <strong>Fecha &Uacute;lt. Compra</strong>
 <?php $value = object_input_date_tag($caregart, 'getFecult', array (
   'rich' => true,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'caregart[fecult]',
   'date_format' => 'dd/MM/yy',
