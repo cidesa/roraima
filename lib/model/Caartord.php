@@ -9,4 +9,8 @@
  */ 
 class Caartord extends BaseCaartord
 {
+ public function getDesart()
+  {
+  	return Herramientas::getX('CODART','Caregart','Desart',self::getCodart());  	
+  }
 }
