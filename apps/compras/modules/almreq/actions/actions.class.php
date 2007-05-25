@@ -139,7 +139,7 @@ class almreqActions extends autoalmreqActions
 	  	// Se configuran las opciones globales del Grid
 	  	$opciones->setEliminar(true);
 	  	$opciones->setTabla('Caartreq');
-	  	$opciones->setAnchoGrid(1150);
+	  	$opciones->setAnchoGrid(1200);
 	  	$opciones->setTitulo('Detalle de la Orden de Requisición');
 	  	$opciones->setHTMLTotalFilas(' ');
 
@@ -149,7 +149,7 @@ class almreqActions extends autoalmreqActions
 	  	$col1->setEsGrabable(true);
 	  	$col1->setAlineacionObjeto(Columna::CENTRO);
 	  	$col1->setAlineacionContenido(Columna::CENTRO);
-	  	$col1->setNombreCampo('Reqart');
+	  	$col1->setNombreCampo('Codart');
 	  	$col1->setCatalogo('caregart','sf_admin_edit_form','2');
 	  	$col1->setAjax(2,2);
 
@@ -157,7 +157,7 @@ class almreqActions extends autoalmreqActions
 	  	$col2->setTipo(Columna::TEXTO);
 	  	$col2->setAlineacionObjeto(Columna::IZQUIERDA);
 	  	$col2->setAlineacionContenido(Columna::IZQUIERDA);
-	  	$col2->setNombreCampo('Desreq');
+	  	$col2->setNombreCampo('Desart');
 	  	$col2->setHTML('type="text" size="25" disabled=true');
 	  	
 	  	$col3 = new Columna('Cod. Unidad');
@@ -166,7 +166,7 @@ class almreqActions extends autoalmreqActions
 	  	$col3->setAlineacionObjeto(Columna::CENTRO);
 	  	$col3->setAlineacionContenido(Columna::CENTRO);
 	  	$col3->setNombreCampo('Codcat');
-	  	$col3->setCatalogo('NpCAtPre','sf_admin_edit_form','4');
+	  	$col3->setCatalogo('Npcatpre','sf_admin_edit_form','4');
 	  	$col3->setAjax(2,2);
 
 	  	$col4 = new Columna('Descripción');
@@ -174,16 +174,16 @@ class almreqActions extends autoalmreqActions
 	  	$col4->setAlineacionObjeto(Columna::IZQUIERDA);
 	  	$col4->setAlineacionContenido(Columna::IZQUIERDA);
 	  	$col4->setNombreCampo('Nomcat');
-	  	$col4->setHTML('type="text" size="25" disabled=true');	  	
-	  	
-        $col5 = new Columna('Cant. Req.');
-        $col5->setTipo(Columna::MONTO);
-        $col5->setEsGrabable(true);
-        $col5->setAlineacionContenido(Columna::IZQUIERDA);
-        $col5->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col5->setNombreCampo('Canreq');
-        $col5->setEsNumerico(true);
-        $col5->setHTML('type="text" size="10"');
+	  	$col4->setHTML('type="text" size="25" disabled=true');
+
+	  	$col5 = new Columna('Cant. Req.');
+	  	$col5->setTipo(Columna::MONTO);
+	  	$col5->setEsGrabable(true);
+	  	$col5->setAlineacionContenido(Columna::IZQUIERDA);
+	  	$col5->setAlineacionObjeto(Columna::IZQUIERDA);
+	  	$col5->setNombreCampo('Canreq');
+	  	$col5->setEsNumerico(true);
+	  	$col5->setHTML('type="text" size="3"');
         $col5->setJScript('onKeypress="entermonto(event,this.id)"');
 	  	
         $col6 = clone $col5;
@@ -197,8 +197,7 @@ class almreqActions extends autoalmreqActions
         $col8 = clone $col5;
         $col8->setTitulo('Total');
         $col8->setNombreCampo('Montot');
-        //$col8->setEsTotal(true,'careqart_exitot');
-        
+
         // Se guardan las columnas en el objetos de opciones        
         $opciones->addColumna($col1);
         $opciones->addColumna($col2);
@@ -208,6 +207,7 @@ class almreqActions extends autoalmreqActions
         $opciones->addColumna($col6);
         $opciones->addColumna($col7);
         $opciones->addColumna($col8);
+        
 	    // Ee genera el arreglo de opciones necesario para generar el grid
         $this->obj = $opciones->getConfig($per); 
 
