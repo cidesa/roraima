@@ -223,7 +223,8 @@ class Articulos
 	 * @param $grid Array de Objects Articulos. 
 	 * @return void 
 	 */   
-    public static function Grabar_DespachoArticulos($despacho,$grid){
+    public static function Grabar_DespachoArticulos($despacho,$grid)
+    {
 	  $coddph=$despacho->getDphart();
 	  $x=$grid[0];		
 		  $j=0;	
@@ -237,11 +238,11 @@ class Articulos
 		  	  $detalle->setCandev($x[$j]->getCanrec());
 		  	  $detalle->setMontot($x[$j]->getMontot());
 		  	  $detalle->setCodfal($x[$j]->getRelart());		    
-		    }									
+		    									
 			$detalle->save();
 		    $j++;			
-		  }     
-  }    
+		    }  
+     }    
 
     
 /**
