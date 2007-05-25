@@ -90,7 +90,7 @@ class Herramientas
 
   public static function FormarCodigoPadre($codigo,&$nivelcodigo,&$ultimo)
   {
-    $nivelcodigo='';
+  	$nivelcodigo='';
     $c = new Criteria();
     $arti = CadefartPeer::doSelect($c);
     $cadena=$arti[0]->getForart();
@@ -98,36 +98,36 @@ class Herramientas
     $lonniv=strlen($loncad[0]);
     $loncodigo=(strlen($codigo));
     if ($lonniv==$loncodigo){
-      $nivelcodigo=1;
-      $padre='';
-      return false;
+    	$nivelcodigo=1;
+    	$padre='';
+    	return false;
     }else{
-      $nivelcodigo=0;
-      $padre=Herramientas::instr($codigo,'-',0,1);
-      $pad=($padre-1);
-      $cad=(substr($codigo,0,$pad));
-      $ultimo=str_pad($cad,20,' ');
-      return true;
+    	$nivelcodigo=0;
+    	$padre=Herramientas::instr($codigo,'-',0,1);
+    	$pad=($padre-1);
+    	$cad=(substr($codigo,0,$pad));
+    	$ultimo=str_pad($cad,20,' ');
+    	return true;
     }
   }
 
   public static function buscar_codigo_padre($codigo2)
   {
-    $c = new Criteria;
-    $c->add(CaregartPeer::CODART, $codigo2);
-    $datos = CaregartPeer::doSelect($c);
-    if ($datos){
-      return true;
-    }
-    else{
-      return false;}
+  	$c = new Criteria;
+  	$c->add(CaregartPeer::CODART, $codigo2);
+  	$datos = CaregartPeer::doSelect($c);
+  	if ($datos){
+  		return true;
+  	}
+  	else{
+  		return false;}
   }
 
   public static function obtenerMensajeError($cod)
   {
-    $errores = sfYaml::load('../config/errores.yml');
-     
-    return $errores[$cod]['msj'];
+  	$errores = sfYaml::load('../config/errores.yml');
+
+  	return $errores[$cod]['msj'];
   }
 
 
@@ -143,8 +143,8 @@ class Herramientas
    */
   public static function getMascaraContable()
   {
-    $c = new Criteria();
-    $conta = ContabaPeer::doSelect($c);
+  	$c = new Criteria();
+  	$conta = ContabaPeer::doSelect($c);
 		  if ($conta)
 		  return $conta[0]->getForcta();
 		  else
@@ -153,8 +153,8 @@ class Herramientas
 
   public static function getMascaraPartida()
   {
-    $c = new Criteria();
-    $c->add(CpnivelesPeer::CATPAR,'P');
+  	$c = new Criteria();
+  	$c->add(CpnivelesPeer::CATPAR,'P');
     $c->addAscendingOrderByColumn(CpnivelesPeer::CONSEC);
     $par = CpnivelesPeer::doSelect($c);
     $i=0;
@@ -162,7 +162,7 @@ class Herramientas
     $ruptura="";
     while ($i<count($par))
     {
-      $lon=$par[$i]->getLonniv();
+    	$lon=$par[$i]->getLonniv();
       $num='';
       $j=0;
       while ($j<$lon)
@@ -458,7 +458,7 @@ class Herramientas
         return(date("Y",$dateTimeEnd) - date("Y",$dateTimeBegin));
 
       default:
-        return(floor($dif/86400)); //86400s=1d
+      	return(floor($dif/86400)); //86400s=1d
     }
 
   }
@@ -466,54 +466,54 @@ class Herramientas
 
   public static function getConfigGrid($conf,$per)
   {
-    $confgrid = sfYaml::load($conf.'.yml');
+  	$confgrid = sfYaml::load($conf.'.yml');
 
-    //print $conf;
-    //print count($confgrid);
+  	//print $conf;
+  	//print count($confgrid);
 
-    $opciones =  new OpcionesGrid();
-    $colums = array();
+  	$opciones =  new OpcionesGrid();
+  	$colums = array();
 
-    if(isset($confgrid)){
+  	if(isset($confgrid)){
 
-      foreach($confgrid as $confkey => $confval){
+  		foreach($confgrid as $confkey => $confval){
 
-        switch($confkey){
-          case 'opciones':
+  			switch($confkey){
+  				case 'opciones':
 
-            foreach($confgrid[$confkey] as $key => $val){
+  					foreach($confgrid[$confkey] as $key => $val){
 
-              switch($key){
-                case 'htmltotalfilas':
-                  $metodo = 'setHTMLTotalFilas';
-                  $opciones->$metodo($val);
-                  break;
-                case 'anchogrid':
-                  $metodo = 'setAnchoGrid';
-                  $opciones->$metodo($val);
-                  break;
-                default:
-                  $metodo = 'set'.ucfirst(strtolower($key));
-                  $opciones->$metodo($val);
-              }
-            }
+  						switch($key){
+  							case 'htmltotalfilas':
+  								$metodo = 'setHTMLTotalFilas';
+  								$opciones->$metodo($val);
+  								break;
+  							case 'anchogrid':
+  								$metodo = 'setAnchoGrid';
+  								$opciones->$metodo($val);
+  								break;
+  							default:
+  								$metodo = 'set'.ucfirst(strtolower($key));
+  								$opciones->$metodo($val);
+  						}
+  					}
 
-            break;
-                default:
-                  $indice = ((int)$confkey)-1;
-                  $colums[$indice] = new Columna('');
-                  foreach($confgrid[$confkey] as $key => $val){
-                    switch($key){
-                      case 'alineacionobjeto':
+  					break;
+  							default:
+  								$indice = ((int)$confkey)-1;
+  								$colums[$indice] = new Columna('');
+  								foreach($confgrid[$confkey] as $key => $val){
+  									switch($key){
+  										case 'alineacionobjeto':
                         $metodo = 'setAlineacionObjeto';
                         $colums[$indice]->$metodo($val);
                         break;
-                      case 'alineacioncontenido':
-                        $metodo = 'setAlineacionContenido';
+  										case 'alineacioncontenido':
+  											$metodo = 'setAlineacionContenido';
                         $colums[$indice]->$metodo($val);
                         break;
-                      case 'nombrecampo':
-                        $metodo = 'setNombreCampo';
+  										case 'nombrecampo':
+                      	$metodo = 'setNombreCampo';
                         $colums[$indice]->$metodo($val);
                         break;
                       case 'esnumerico':
@@ -568,7 +568,7 @@ class Herramientas
 
   }
   
-	public static function getxLike($campos, $tabla, $result, $data)
+  public static function getxLike($campos, $tabla, $result, $data)
 	{
      	eval ('$field = '.ucfirst(strtolower($tabla)).'Peer::'.strtoupper($campos).';');
 	
@@ -585,7 +585,73 @@ class Herramientas
 	  		return '<¡Registro no Encontrado o Vacio!>';
 	    }
     }	  
-	
+	/**
+   * Función getVerCorrelativo
+   *
+   * @static
+   * @param string $campo Campo a Actualizar la suma del correlativo
+   * @param string $tabla Tabla a Actualizar.
+   * @return string $output mensaje de error
+   * @return function  Retorna True si encuentra el Numero del correlativo de lo contrario false
+   */
+  public static function getVerCorrelativo($campo,$tabla,&$output)
+	{
+	   $c = new Criteria();
+	   eval ('$reg = '.ucfirst(strtolower($tabla)).'Peer::doSelectone($c);');
+	   if ($reg)
+	   {
+	   		eval('$r = $reg->get'.ucfirst(strtolower($campo)).'();');
+	   		$output = $r+1;
+			return true;
+	   }
+	   else
+	   {
+	     	$output='El numero inicial del Correlativo de Requisiciones no ha sido definido';
+	    	return false;
+	   }	   
+	}    
+
+	/**
+   * Función getSalvarCorrelativo
+   *
+   * @static
+   * @param string $campo Campo a Actualizar la suma del correlativo
+   * @param string $tabla Tabla a Actualizar.
+   * @param string $tipo Para definir el tipo de Requerimiento en la salida del mensaje.
+   * @param integer $r Numero a Actualizar en la tabla.
+   * @return string $msg Mensaje a imprimir
+   * @return function  Retorna True si se realizo con exito de lo contraripo false 
+   */
+  public static function getSalvarCorrelativo($campo,$tabla,$tipo,$r,&$msg)
+	{
+	   if ($r)
+	   {
+			$c = new Criteria();
+			$listo=false;
+		    eval ('$obj = '.ucfirst(strtolower($tabla)).'Peer::doSelectone($c);');
+			if ($obj)
+			{
+				eval('$obj->set'.ucfirst(strtolower($campo)).'('.$r.');');
+				eval('$obj->save();');
+				$msg='Desea Imprimir la '.ucfirst(strtolower($tipo)).' N°'.$r;
+				$listo=true;
+			}
+			if ($listo) 
+			{
+				return true; 
+			}
+			else 
+			{
+				$msg='El numero inicial del Correlativo de Requisiciones no ha sido definido';
+				return false;   
+			}
+	   }
+	   else
+	   {
+		 	$msg='El numero inicial del Correlativo de Requisiciones no ha sido definido';
+	     	return false;
+	   }	   
+	}    
 }
 
 
