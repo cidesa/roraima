@@ -229,18 +229,14 @@ class Articulos
 		  $j=0;	
 		  while ($j<count($x)) 
 		  {
-		    $c = new Criteria();		  
-		    $detalle = CaartdphPeer::doSelectOne($c);
-		    if ($detalle)
-		    {
-		  	  $detalle->setDphart($coddph);
+		      $detalle = new Caartdph();
+		   	  $detalle->setDphart($coddph);
 		  	  $detalle->setCodart($x[$j]->getCodart());
 		  	  $detalle->setCodcat($x[$j]->getCodcat());
 		  	  $detalle->setCandph($x[$j]->getCanreq());
 		  	  $detalle->setCandev($x[$j]->getCanrec());
 		  	  $detalle->setMontot($x[$j]->getMontot());
-		  	  $detalle->setCodfal($x[$j]->getRelart());
-		      return true;
+		  	  $detalle->setCodfal($x[$j]->getRelart());		    
 		    }									
 			$detalle->save();
 		    $j++;			
