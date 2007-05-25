@@ -37,7 +37,7 @@ if ($cadphart->getId()=='')
   'size' => 15,
   'maxlegth' => 8,
   'control_name' => 'cadphart[dphart]', 
-  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('cadphart_dphart').value=valor;document.getElementById('cadphart_dphart').disabled=true;",  
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('cadphart_dphart').value=valor;",  
 )); echo $value ? $value : '&nbsp;' ?> 
     </div><?php }else{?>
     <?php echo label_for('cadphart[dphart]', __($labels['cadphart{dphart}']), 'class="required" style="width: 150px"') ?>
