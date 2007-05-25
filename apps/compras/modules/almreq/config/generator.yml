@@ -5,22 +5,22 @@ generator:
     theme:            default
     fields:
       reqart:      { name : Número, params: maxlenght=8 }
-      fecreq:      { name : Fecha }
-      desreq:      { name : Descripcion }
+      fecreq:      { name : Fecha, params: date_format='dd/MM/yy' }
+      desreq:      { name : Descripción }
       monreq:      { name : Monto }      
       stareq:      { name : Estatus }
       codcatreq:   { name : Unidad }
-      desubi:      { name : Descriciòn Unidad }
+      desubi:      { name : Descripción Unidad }
     list:
       title:          Requisiciones
       display:        [=reqart, fecreq, desreq, monreq, stareq, codcatreq, desubi]
-      filters:        [reqart, fecreq, desreq, monreq]
+      filters:        [reqart, fecreq]
       max_per_page:	  5
       object_actions:
         _edit:        ~
         _delete:        ~      
     edit:
-      title:          Edicion de Requisiciones
+      title:          Edición de Requisiciones
       display:        [reqart, fecreq, desreq, monreq, codcatreq, desubi]  
       fields:
         fecreq: { params: date_format='dd/MM/yy' }
