@@ -106,7 +106,8 @@ if ($cadphart->getId()=='')
 
 <?php echo input_auto_complete_tag('cadphart[reqart]', $cadphart->getReqart(), 
     'almdesp/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 8, 'onBlur'=> remote_function(array(
-			  'url'      => 'almdesp/ajax',  			   
+			  'update'   => 'divGrid',
+              'url'      => 'almdesp/grid',  			   
 			  'complete' => 'AjaxJSON(request, json)',
   			  'with' => "'ajax=2&cajtexmos=cadphart_desreq&cajtexcom=cadphart_reqart&codigo='+this.value"
 			  ))),
@@ -179,7 +180,7 @@ if ($cadphart->getId()=='')
 
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<div class="form-row">
+<div class="form-row" id="divGrid">
 <form name="form1" id="form1">
 <?
 echo grid_tag($obj);

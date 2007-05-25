@@ -4,13 +4,26 @@ generator:
     model_class:      Cadphart
     theme:            default
     fields:
-      dphart: { name: Numero}
+      dphart: { name: Número}
       fecdph: { name: Fecha}
-      codalm: { name: Codigo de Almacen}
-      reqart: { name: Refiere a Solicitud de materiales}
-      desdph: { name: Descripcion}
+      codalm: { name: Código de Almacén}
+      nomalm: { name: Nombre Almacén}
+      reqart: { name: Refiere a Solicitud de Materiales}
+      desreq: { name: Descripción}
+      fecreq: { name: Fecha de Requisión}
+      desdph: { name: Descripción}
       codori: { name: Unidad de Origen}
-      mondph: { name: Monto Total}           
+      nomcat: { name: Descripción}
+      mondph: { name: Monto Total}
+      stadph: { name: Estatus}
+      numcom: { name: Numerocom}
+      refpag: { name: refpago}
+      tipdph: { name: Tipodesp}
+      codcli: { name: codigo}
+      obsdph: { name: Observacion}
+      fordesp: { name: fordes}
+      reapor: { name: reapor}
+      fecanu: { name: fechaanu}           
         
     list:
       title:          Despachos
@@ -24,6 +37,6 @@ generator:
       max_per_page:   5
     edit:
       title:          Edicion de Despachos
-      display:       [=dphart, fecdph, codalm, reqart, desdph, codori, mondph]
+      display:       [=dphart, fecdph, codalm, nomalm, reqart, desreq, fecreq, desdph, codori, nomcat, mondph, stadph, numcom, refpag, tipdph, codcli, obsdph, fordesp, reapor, fecanu]
       fields:
         fecdph: { params: date_format='dd/MM/yy' } 
