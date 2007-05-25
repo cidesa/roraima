@@ -14,10 +14,14 @@ generator:
       nrocei:       { name : Nro.RNC}
       email:        { name : Correo Electrónico}
       codram:       { name : Ramo que Provee}
+      nomram:       { name : Nombre del Ramo}
       limcre:       { name : Limite de Crédito}
       codcta:       { name : Cta. Contable Asoc.}
+      descta:       { name : Descripción}
       codord:       { name : Cta. de Orden Asoc.}
+      desctacodord: { name : Descripción}      
       codpercon:    { name : Cta.PerContra Asoc.}
+      desctacodpercon: { name : Descripción}      
       fecinscir:    { name : Fecha de Inscripción}
       faxpro:       { name : Fax}
       numinscir:    { name : Circunscripción Judicial}
@@ -32,17 +36,26 @@ generator:
       nomrepleg:    { name : Nombre}
       dirrepleg:    { name : Dirección}
       codtiprec:    { name : Grupo}   
+      destiprec:    { name : Descripción}   
       nacpro:       { name : Nacionalidad}
       tipo:         { name : Actividad Principal}   
          
-      #codctasec:    { name : Cta. Sociable Asoc}
-      #codorgadi:    { name : Cta. de Orden Asoc}      
-      #codperconadi:    { name : Cta. PreContra Asoc}            
+      codctasec:    { name : Cta. Sociable Asoc}
+      desctacodctasec:    { name : Descripción}          
+      codordadi:    { name : Cta. de Orden Asoc}      
+      desctacodordadi:    { name : Descripción}          
+      codperconadi:    { name : Cta. PreContra Asoc}            
+      desctacodperconadi:    { name : Descripción}            
       
       codordmercon:    { name : Cta. de Orden}      
+      desctacodordmercon:    { name : Descripción}            
       codpermercon:    { name : Cta. PreContra}            
+      desctacodpermercon:    { name : Descripción}                  
       codordcontra:    { name : Cta. de Orden}
+      desctacodordcontra:    { name : Descripción}                        
       codpercontra:    { name : Cta. PreContra}            
+      desctacodpercontra:    { name : Descripción}                        
+
 
     list:
       title:          Registro de Proveedor
@@ -51,7 +64,7 @@ generator:
       max_per_page:	  10
   
     edit:
-      title:          Edicin de Proveedor
-      display:        [codpro, nompro, rifpro, nitpro, dirpro, telpro, nrocei, email, codram, limcre, codcta, codord, codpercon, fecinscir, faxpro, numinscir, regmer, tomreg, capsus, fecreg, folreg, cappag, fecven, rifrepleg, nomrepleg, dirrepleg, codtiprec, nacpro, tipo, codordmercon, codpermercon, codordcontra, codpercontra]
-      fields:
+      title:          Edición de Proveedor
+      display:        [codpro, nompro, rifpro, nitpro, dirpro, telpro, nrocei, email, codram, nomram, limcre, codcta, descta, codord, desctacodord, codpercon, desctacodpercon, fecinscir, faxpro, numinscir, regmer, tomreg, capsus, fecreg, folreg, cappag, fecven, rifrepleg, nomrepleg, dirrepleg, codtiprec, destiprec, nacpro, tipo, codctasec, desctacodctasec, codordadi, desctacodordadi, codperconadi, desctacodperconadi, codordmercon, desctacodordmercon, codpermercon, desctacodpermercon, codordcontra, desctacodordcontra, codpercontra, desctacodpercontra]
+      #fields:
         #codforent:      { params : maxlength=6 }	      

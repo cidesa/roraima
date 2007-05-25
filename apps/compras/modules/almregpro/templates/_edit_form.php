@@ -172,48 +172,103 @@
 )); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
-<div class="form-row"><?php echo label_for('caprovee[codcta]', __($labels['caprovee{codcta}']), 'class="required" ') ?>
-<div
-	class="content<?php if ($sf_request->hasError('caprovee{codcta}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{codcta}')): ?> <?php echo form_error('caprovee{codcta}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getCodcta', array (
+<div class="form-row">
+  <?php echo label_for('caprovee[codcta]', __($labels['caprovee{codcta}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{codcta}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{codcta}')): ?>
+    <?php echo form_error('caprovee{codcta}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getCodcta', array (
   'size' => 32,
   'control_name' => 'caprovee[codcta]',
 )); echo $value ? $value : '&nbsp;' ?>
 
 <?php echo button_to('...','#') ?>
 
-</div>
+
+    </div>
 </div>
 
-<div class="form-row"><?php echo label_for('caprovee[codord]', __($labels['caprovee{codord}']), 'class="required" ') ?>
-<div
-	class="content<?php if ($sf_request->hasError('caprovee{codord}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{codord}')): ?> <?php echo form_error('caprovee{codord}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getCodord', array (
+<div class="form-row">
+  <?php echo label_for('caprovee[descta]', __($labels['caprovee{descta}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{descta}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{descta}')): ?>
+    <?php echo form_error('caprovee{descta}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDescta', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[descta]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[codord]', __($labels['caprovee{codord}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{codord}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{codord}')): ?>
+    <?php echo form_error('caprovee{codord}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getCodord', array (
   'size' => 32,
   'control_name' => 'caprovee[codord]',
 )); echo $value ? $value : '&nbsp;' ?>
 
 <?php echo button_to('...','#') ?>
 
-</div>
+    </div>
 </div>
 
-<div class="form-row"><?php echo label_for('caprovee[codpercon]', __($labels['caprovee{codpercon}']), 'class="required" ') ?>
-<div
-	class="content<?php if ($sf_request->hasError('caprovee{codpercon}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{codpercon}')): ?> <?php echo form_error('caprovee{codpercon}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getCodpercon', array (
+<div class="form-row">
+  <?php echo label_for('caprovee[desctacodord]', __($labels['caprovee{desctacodord}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{desctacodord}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{desctacodord}')): ?>
+    <?php echo form_error('caprovee{desctacodord}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDesctacodord', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[desctacodord]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[codpercon]', __($labels['caprovee{codpercon}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{codpercon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{codpercon}')): ?>
+    <?php echo form_error('caprovee{codpercon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getCodpercon', array (
   'size' => 32,
   'control_name' => 'caprovee[codpercon]',
 )); echo $value ? $value : '&nbsp;' ?>
 
 <?php echo button_to('...','#') ?>
 
-</div>
+
+    </div>
 </div>
 
+<div class="form-row">
+  <?php echo label_for('caprovee[desctacodpercon]', __($labels['caprovee{desctacodpercon}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{desctacodpercon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{desctacodpercon}')): ?>
+    <?php echo form_error('caprovee{desctacodpercon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDesctacodpercon', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[desctacodpercon]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
 <div class="form-row"><?php echo label_for('caprovee[fecinscir]', __($labels['caprovee{fecinscir}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('caprovee{fecinscir}')): ?> form-error<?php endif; ?>">
@@ -330,6 +385,21 @@
 </div>
 
 
+<div class="form-row">
+  <?php echo label_for('caprovee[destiprec]', __($labels['caprovee{destiprec}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{destiprec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{destiprec}')): ?>
+    <?php echo form_error('caprovee{destiprec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getdestiprec', array (
+  'disabled' => true,
+  'size' => 50,
+  'control_name' => 'caprovee[destiprec]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
 <fieldset id="sf_fieldset_none" class="">
 <legend> Datos Persona Contacto</legend>
 
@@ -370,6 +440,103 @@
 <?php tabPageOpenClose("tp1", "tabPage3", 'Recaudos');?>
 <?php tabPageOpenClose("tp1", "tabPage4", 'Otras cuentas contables (Actividad Secundaria)');?>
 
+
+<div class="form-row">
+  <?php echo label_for('caprovee[codctasec]', __($labels['caprovee{codctasec}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{codctasec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{codctasec}')): ?>
+    <?php echo form_error('caprovee{codctasec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getCodctasec', array (
+  'size' => 32,
+  'control_name' => 'caprovee[codctasec]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo button_to('...','#') ?>
+
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[desctacodctasec]', __($labels['caprovee{desctacodctasec}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{desctacodctasec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{desctacodctasec}')): ?>
+    <?php echo form_error('caprovee{desctacodctasec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDesctacodctasec', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[desctacodctasec]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[codordadi]', __($labels['caprovee{codordadi}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{codordadi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{codordadi}')): ?>
+    <?php echo form_error('caprovee{codordadi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getCodordadi', array (
+  'size' => 32,
+  'control_name' => 'caprovee[codordadi]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo button_to('...','#') ?>
+
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[desctacodordadi]', __($labels['caprovee{desctacodordadi}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{desctacodordadi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{desctacodordadi}')): ?>
+    <?php echo form_error('caprovee{desctacodordadi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDesctacodordadi', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[desctacodordadi]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[codperconadi]', __($labels['caprovee{codperconadi}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{codperconadi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{codperconadi}')): ?>
+    <?php echo form_error('caprovee{codperconadi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getCodperconadi', array (
+  'size' => 32,
+  'control_name' => 'caprovee[codperconadi]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo button_to('...','#') ?>
+
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[desctacodperconadi]', __($labels['caprovee{desctacodperconadi}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{desctacodperconadi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{desctacodperconadi}')): ?>
+    <?php echo form_error('caprovee{desctacodperconadi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDesctacodperconadi', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[desctacodperconadi]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
 <div class="form-row">
   <?php echo label_for('caprovee[codordmercon]', __($labels['caprovee{codordmercon}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('caprovee{codordmercon}')): ?> form-error<?php endif; ?>">
@@ -381,6 +548,27 @@
   'size' => 32,
   'control_name' => 'caprovee[codordmercon]',
 )); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo button_to('...','#') ?>
+
+
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[desctacodordmercon]', __($labels['caprovee{desctacodordmercon}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{desctacodordmercon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{desctacodordmercon}')): ?>
+    <?php echo form_error('caprovee{desctacodordmercon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDesctacodordmercon', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[desctacodordmercon]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+
     </div>
 </div>
 
@@ -394,6 +582,25 @@
   <?php $value = object_input_tag($caprovee, 'getCodpermercon', array (
   'size' => 32,
   'control_name' => 'caprovee[codpermercon]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo button_to('...','#') ?>
+
+
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[desctacodpermercon]', __($labels['caprovee{desctacodpermercon}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{desctacodpermercon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{desctacodpermercon}')): ?>
+    <?php echo form_error('caprovee{desctacodpermercon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDesctacodpermercon', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[desctacodpermercon]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -409,6 +616,25 @@
   'size' => 32,
   'control_name' => 'caprovee[codordcontra]',
 )); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo button_to('...','#') ?>
+
+
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[desctacodordcontra]', __($labels['caprovee{desctacodordcontra}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{desctacodordcontra}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{desctacodordcontra}')): ?>
+    <?php echo form_error('caprovee{desctacodordcontra}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDesctacodordcontra', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[desctacodordcontra]',
+)); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
@@ -423,8 +649,32 @@
   'size' => 32,
   'control_name' => 'caprovee[codpercontra]',
 )); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo button_to('...','#') ?>
+
+
     </div>
 </div>
+
+<div class="form-row">
+  <?php echo label_for('caprovee[desctacodpercontra]', __($labels['caprovee{desctacodpercontra}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('caprovee{desctacodpercontra}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('caprovee{desctacodpercontra}')): ?>
+    <?php echo form_error('caprovee{desctacodpercontra}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($caprovee, 'getDesctacodpercontra', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[desctacodpercontra]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+
+
+
+
 
 <?php tabInit();?>
 
