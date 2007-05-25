@@ -606,7 +606,7 @@ class Herramientas
 	   }
 	   else
 	   {
-	     	$output='El numero inicial del Correlativo de Requisiciones no ha sido definido';
+	     	$output='El numero inicial del Correlativo no ha sido definido';
 	    	return false;
 	   }	   
 	}    
@@ -642,13 +642,13 @@ class Herramientas
 			}
 			else 
 			{
-				$msg='El numero inicial del Correlativo de Requisiciones no ha sido definido';
+				$msg='El numero inicial del Correlativo de '.ucfirst(strtolower($tipo)).' no ha sido definido';
 				return false;   
 			}
 	   }
 	   else
 	   {
-		 	$msg='El numero inicial del Correlativo de Requisiciones no ha sido definido';
+		 	$msg='El numero inicial del Correlativo de '.ucfirst(strtolower($tipo)).' no ha sido definido';
 	     	return false;
 	   }	   
 	}    
