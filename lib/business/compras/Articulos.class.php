@@ -135,11 +135,19 @@ class Articulos
     
 	public static function Grabar_Requisicion($requisicion,$grid)
 	{
-		//Se graba el Artículo
-		$requisicion->save();
+		if (Herramientas::getVerCorrelativo('correq','cacorrel',$r))
+		{
+			//Se graba la Requisición
+			if (($requisicion->getReqart()=='########') or (trim($requisicion->getReqart())==''))
+			{
+				$requisicion->setReqart(str_pad($r, 8, '0', STR_PAD_LEFT));
+			}
+			$requisicion->save();
+			// Se graban los detalles de la Requisición
+			self::Grabar_DetallesRequisicion($requisicion,$grid);
+			Herramientas::getSalvarCorrelativo('correq','cacorrel','Requisición',$r,$msg);
+		}
 
-		// Se graban los almacenes del articulo
-		self::Grabar_DetallesRequisicion($requisicion,$grid);
 	}
 
 	/**
