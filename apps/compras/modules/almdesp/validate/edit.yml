@@ -1,0 +1,53 @@
+methods:
+  post:
+   - "cadphart{dphart}"
+   - "cadphart{fecdph}"
+   - "cadphart{codalm}"
+   - "cadphart{reqart}"
+
+names: 
+  cadphart{dphart}:
+    required:  Yes
+    required_msg: El Número de Despacho no puedo estar en Blanco
+
+  cadphart{fecdph}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco        
+    validators: FechaValidator   
+          
+  cadphart{codalm}:
+    required:  No
+    validators: AlmacenValidator
+  
+  cadphart{reqart}:
+    required:  Yes
+    required_msg: El Número de Requisión no puedo estar en Blanco
+    validators: RequisionValidator
+    
+FechaValidator:
+    class:  CidesaDateValidator     
+    param:
+        class:        Cpdefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Inicio del Período
+        date_error:   Fecha Inválida
+
+RequisionValidator:
+    class: sfStringValidator
+    param:
+        values: [0,1,2,3,4,5,6,7,8,9]
+        min:       8
+        min_error: El Código de Requisión no puede tener menos de 8 caracteres
+        max:       8
+        max_error: El Código de Requisión no puede tener mas de 8 caracteres
+        
+AlmacenValidator:
+    class: sfStringValidator
+    param:
+        values: [0,1,2,3,4,5,6,7,8,9]
+        min:       6
+        min_error: El Código del Almacén no puede tener menos de 6 caracteres
+        max:       6
+        max_error: El Código del Almacén no puede tener mas de 6 caracteres
