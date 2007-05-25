@@ -4,16 +4,18 @@ generator:
     model_class:      Carcpart
     theme:            default
     fields:
-      rcpart:      { name : Numero}
-      ordcom:      { name : Nro. Orden Compra }      
+      rcpart:      { name : Numero, params: maxlength=8}
+      ordcom:      { name : Nro. Orden Compra, params: maxlength=8 }      
       fecrcp:      { name : Fecha, params: date_format='dd/MM/yyyy'}
-      desrcp:      { name : Descripci�n}  
-      codpro:      { name : Codigo del Proveedor}  
-      numfac:      { name : Nro. Factura }  
+      fecord:      { name : Fecha O/C, params: date_format='dd/MM/yyyy'}
+      desrcp:      { name : Descripción}  
+      codpro:      { name : Codigo del Proveedor, params: maxlength=10}  
+      numfac:      { name : Nro. Factura, params: maxlength=15 }  
       monrcp:      { name : Monto Total}      
-      codalm:      { name : Codigo del Almacen}      
-      nroent:      { name : Nro. Nota de Entrega} 
-
+      codalm:      { name : Codigo del Almacen, params: maxlength=6}      
+      nroent:      { name : Nro. Nota de Entrega, params: maxlength=8}  
+      desconpag:   { name : Condición de Pago}  
+      desforent:   { name : Forma de Entrega}  
     list:
       title:          Recepcion de Articulos por Orden de Compra
       display:        [=rcpart, fecrcp, desrcp, ordcom, monrcp]
@@ -23,4 +25,5 @@ generator:
         _delete:      ~              
       max_per_page:   5    
     edit:
-      title:          Edicion de Recepcion de Articulos por Orden de Compra    
+      title:          Recepción de Articulos por Orden de Compra    
+      display:        [=rcpart, fecrcp, codalm, nomalm, ordcom, fecord, desrcp, codpro, nompro, desconpag, desforent, numfac, nroent, monrcp]
