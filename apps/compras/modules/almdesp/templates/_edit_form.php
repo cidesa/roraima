@@ -8,12 +8,39 @@
   'multipart' => true,
 )) ?>
 
+<?php echo javascript_include_tag('dFilter') ?>
+<?php echo javascript_include_tag('ajax') ?>
+<?php echo javascript_include_tag('tools') ?>
+
 <?php echo object_input_hidden_tag($cadphart, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend>Datos del Despacho</legend>
+
 <div class="form-row">
-  <?php echo label_for('cadphart[dphart]', __($labels['cadphart{dphart}']), 'class="required" ') ?>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Datos del Despacho') ?></legend>
+<div class="form-row">
+<table>
+<tr>
+<th> 
+<?php
+if ($cadphart->getId()=='') 
+	{
+?>
+<?php echo label_for('cadphart[dphart]', __($labels['cadphart{dphart}']), 'class="required" style="width: 150px"') ?>
+  <div class="content<?php if ($sf_request->hasError('cadphart{dphart}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadphart{dphart}')): ?>
+    <?php echo form_error('cadphart{dphart}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($cadphart, 'getDphart', array (
+  'size' => 15,
+  'maxlegth' => 8,
+  'control_name' => 'cadphart[dphart]', 
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('cadphart_dphart').value=valor;document.getElementById('cadphart_dphart').disabled=true;",  
+)); echo $value ? $value : '&nbsp;' ?> 
+    </div><?php }else{?>
+    <?php echo label_for('cadphart[dphart]', __($labels['cadphart{dphart}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{dphart}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{dphart}')): ?>
     <?php echo form_error('cadphart{dphart}', array('class' => 'form-error-msg')) ?>
@@ -21,63 +48,82 @@
 
   <?php $value = object_input_tag($cadphart, 'getDphart', array (
   'size' => 20,
-  'control_name' => 'cadphart[dphart]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Fecha</strong>
-<?php $value = object_input_date_tag($cadphart, 'getFecdph', array (
+  'maxlegth' => 8,
+  'control_name' => 'cadphart[dphart]',    
+)); echo $value ? $value : '&nbsp;' ?> 
+    </div>
+    	
+   <?php } ?> </th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th> <?php echo label_for('cadphart[fecdph]', __($labels['cadphart{fecdph}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('cadphart{fecdph}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('cadphart{fecdph}')): ?>
+    <?php echo form_error('cadphart{fecdph}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($cadphart, 'getFecdph', array (
   'rich' => true,
+  'maxlegth' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'cadphart[fecdph]',
   'date_format' => 'dd/MM/yy',
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'##/##/####')",
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('cadphart[codalm]', __($labels['cadphart{codalm}']), 'class="required" ') ?>
+    </div></th>
+</tr>
+</table> 
+<br>
+  <?php echo label_for('cadphart[codalm]', __($labels['cadphart{codalm}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{codalm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{codalm}')): ?>
     <?php echo form_error('cadphart{codalm}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($cadphart, 'getCodalm', array (
-  'size' => 20,
-  'control_name' => 'cadphart[codalm]',
+ <?php echo input_auto_complete_tag('cadphart[codalm]', $cadphart->getCodalm(), 
+    'almdesp/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 6, 'onBlur'=> remote_function(array(
+			  'url'      => 'almdesp/ajax',  			   
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=1&cajtexmos=cadphart_nomalm&cajtexcom=cadphart_codalm&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  ) 
+?>
+&nbsp;
+<?php echo button_to_popup('...','generales/catalogo?clase=Cadefalm&frame=sf_admin_edit_form&obj1=cadphart_codalm&obj2=cadphart_nomalm')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($cadphart, 'getNomalm', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'cadphart[nomalm]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;
-<?php echo input_tag('almacen',$almacen,'size=50,disabled=true') ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('cadphart[reqart]', __($labels['cadphart{reqart}']), 'class="required" ') ?>
+<br>
+  <?php echo label_for('cadphart[reqart]', __($labels['cadphart{reqart}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{reqart}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{reqart}')): ?>
     <?php echo form_error('cadphart{reqart}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($cadphart, 'getReqart', array (
-  'size' => 20,
-  'control_name' => 'cadphart[reqart]',
+<?php echo input_auto_complete_tag('cadphart[reqart]', $cadphart->getReqart(), 
+    'almdesp/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 8, 'onBlur'=> remote_function(array(
+			  'url'      => 'almdesp/ajax',  			   
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=2&cajtexmos=cadphart_desreq&cajtexcom=cadphart_reqart&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  ) 
+?> 
+&nbsp;
+<?php echo button_to_popup('...','generales/catalogo?clase=Careqart&frame=sf_admin_edit_form&obj1=cadphart_reqart&obj2=cadphart_desreq')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($cadphart, 'getDesreq', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'cadphart[desreq]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;
-<?php echo input_tag('Requision',$Requision,'size=50,disabled=true') ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('cadphart[desdph]', __($labels['cadphart{desdph}']), 'class="required" ') ?>
+<br>
+  <?php echo label_for('cadphart[desdph]', __($labels['cadphart{desdph}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{desdph}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{desdph}')): ?>
     <?php echo form_error('cadphart{desdph}', array('class' => 'form-error-msg')) ?>
@@ -88,28 +134,33 @@
   'control_name' => 'cadphart[desdph]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('cadphart[codori]', __($labels['cadphart{codori}']), 'class="required" ') ?>
+<br>
+  <?php echo label_for('cadphart[codori]', __($labels['cadphart{codori}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{codori}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{codori}')): ?>
     <?php echo form_error('cadphart{codori}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($cadphart, 'getCodori', array (
-  'size' => 20,
-  'control_name' => 'cadphart[codori]',
+<?php echo input_auto_complete_tag('cadphart[codori]', $cadphart->getCodori(), 
+    'almdesp/autocomplete?ajax=3',  array('autocomplete' => 'off','maxlength' => 32,'onBlur'=> remote_function(array(
+			  'url'      => 'almdesp/ajax',  			   
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=3&cajtexmos=cadphart_nomcat&cajtexcom=cadphart_codori&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  ) 
+?>
+&nbsp;
+<?php echo button_to_popup('...','generales/catalogo?clase=Npcatpre&frame=sf_admin_edit_form&obj1=cadphart_codori&obj2=cadphart_nomcat')?>
+&nbsp;&nbsp;
+ <?php $value = object_input_tag($cadphart, 'getNomcat', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'cadphart[nomcat]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;
-<?php echo input_tag('origen',$origen,'size=50,disabled=true') ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('cadphart[mondph]', __($labels['cadphart{mondph}']), 'class="required" ') ?>
+<br>
+  <?php echo label_for('cadphart[mondph]', __($labels['cadphart{mondph}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{mondph}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{mondph}')): ?>
     <?php echo form_error('cadphart{mondph}', array('class' => 'form-error-msg')) ?>
@@ -117,48 +168,55 @@
 
   <?php $value = object_input_tag($cadphart, 'getMondph', array (
   'size' => 7,
+  'disabled' => true,
   'control_name' => 'cadphart[mondph]',
-)); echo $value ? $value : '&nbsp;' ?>
+),$default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
 </fieldset>
+</div>
 
-<div class="grid01" id="grid01">
-<fieldset>
-<legend>Detalles de Solicitud</legend>
-<table border="0" class="sf_admin_list">
-<? 
-$titulo=array(0 => 'Codigo del Articulo', 1 => 'Descripcion', 2 => 'Cod. unidad', 3 => 'Cant Desp', 4 => 'Cant no Desp', 5 => 'Cod. Unidad', 6 => 'U. Medida', 7 => 'Costo', 8 => 'Motivo');
-
-if ( count($rs)>0){
-$i=0;
-foreach ($rs as $k=>$fila) {
-    $i++;
-    if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$titulo[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
-  }
-?></table>
+<div class="form-row">
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+<form name="form1" id="form1">
+<?
+echo grid_tag($obj);
+?>
+</form>
+<br>
+<table>
+ <tr>
+ <th>&nbsp;&nbsp;&nbsp;<?php echo __('Totales') ?></th>
+  <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+  <th><input class="grid_txtright" type="text" id="totalcantd" name="totalcantd" size="10" disabled=true></th>
+  <th>&nbsp;&nbsp;&nbsp;</th>
+  <th><input class="grid_txtright" type="text" id="totalcantnd" name="totalcantnd" size="10" disabled=true></th>
+  <th>&nbsp;&nbsp;&nbsp;</th>
+  <th><input class="grid_txtright" type="text" id="totalcosto" name="totalcosto" size="10" disabled=true></th>  
+ </tr>
+</table>
+</div>
 </fieldset>
 </div>
 
+</fieldset>
+
+<?php
+if ($cadphart->getId()!='') 
+		{
+			echo javascript_tag("
+                    javascript: document.getElementById('cadphart_dphart').disabled=true;
+				"); 
+		}
+?>
 <?php include_partial('edit_actions', array('cadphart' => $cadphart)) ?>
 
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($cadphart->getId()): ?>
+      <li class="float-rigth"><?php if ($cadphart->getId()): ?>
 <?php echo button_to(__('delete'), 'almdesp/delete?id='.$cadphart->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
