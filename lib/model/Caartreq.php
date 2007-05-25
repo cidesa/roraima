@@ -9,12 +9,28 @@
  */ 
 class Caartreq extends BaseCaartreq
 {
-	public function getDesart()
+    public function getDesart()
 	{
-		return Herramientas::getX('CODART','caregart','desart',self::getCodart());
+		return Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
 	}
-	public function getNomcat()
+	
+	public function getUnimed()
 	{
-		return Herramientas::getX('codcat','npcatpre','nomcat',str_pad(self::getCodcat(), 32, ' '));
-	}	
+		return Herramientas::getX('CODART','Caregart','Unimed',self::getCodart());
+	}
+	
+	public function getCospro()
+	{
+		return Herramientas::getX('CODART','Caregart','Cospro',self::getCodart());
+	}
+	
+	public function getDesfal()
+	{
+		return Herramientas::getX('CODFAL','Camotfal','Desfal',self::getRelart());
+	}
+	
+    public function getNomcat()
+	{
+		return Herramientas::getX('codcat','npcatpre','nomcat',self::getCodcat());
+	}
 }
