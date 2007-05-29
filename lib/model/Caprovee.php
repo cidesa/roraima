@@ -53,5 +53,58 @@ class Caprovee extends BaseCaprovee
 		}else{
 			return '<!Descripción no Encontrada o Vacia> ';
 		}
-	}		
+	}
+
+	public function getDesctacodord()
+	{
+	  return Herramientas::getX('codcta','contabb','descta',self::getcodord());
+	}
+
+	public function getDesctacodpercon()
+	{
+	  return Herramientas::getX('codcta','contabb','descta',self::getcodpercon());
+	}
+	
+	public function getCodctasec()
+	{
+	  return Herramientas::getX('cedrif','opbenefi','codctasec',self::getrifpro());
+	}
+
+	public function getDesctacodctasec()
+	{
+	  return Herramientas::getX('codcta','contabb','descta',self::getcodctasec());
+	}
+
+	public function getDesctacodordadi()
+	{
+	  return Herramientas::getX('codcta','contabb','descta',self::getcodordadi());
+	}
+	
+	public function getDesctacodperconadi()
+	{
+	  return Herramientas::getX('codcta','contabb','descta',self::getcodperconadi());
+	}
+
+	public function getDesctacodordmercon()
+	{
+	  return Herramientas::getX('codcta','contabb','descta',self::getcodordmercon());
+	}
+	
+	public function getDesctacodpermercon()
+	{
+	  return Herramientas::getX('codcta','contabb','descta',self::getcodpermercon());
+	}
+
+	public function getDesctacodordcontra()
+	{
+	  return Herramientas::getX('codcta','contabb','descta',self::getcodordcontra());
+	}
+	
+	public function getDesctacodpercontra()
+	{
+	  return Herramientas::getX('codcta','contabb','descta',self::getcodpercontra());
+	}
+	
+	
+		
 }
