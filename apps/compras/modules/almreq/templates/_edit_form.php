@@ -28,7 +28,7 @@
 'size' => 15,
 'maxlegth' => 8,
 'control_name' => 'careqart[reqart]',
-'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '#',0);document.getElementById('careqart_reqart').value=valor;document.getElementById('careqart_reqart').disabled=true;",
+'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '#',0);document.getElementById('careqart_reqart').value=valor;document.getElementById('careqart_reqart').disabled=false;",
 )); echo $value ? $value : '&nbsp;' ?>
 <div class="sf_admin_edit_help"><?php echo __('Máximo 8 caracteres') ?></div>
 </div>
