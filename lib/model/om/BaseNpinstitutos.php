@@ -29,23 +29,20 @@ abstract class BaseNpinstitutos extends BaseObject  implements Persistent {
 	public function getCodins()
 	{
 
-		return $this->codins;
+		return $this->codins; 		
 	}
-
 	
 	public function getNomins()
 	{
 
-		return $this->nomins;
+		return $this->nomins; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodins($v)
 	{

@@ -61,79 +61,69 @@ abstract class BaseNpcarocp extends BaseObject  implements Persistent {
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getDescar()
 	{
 
-		return $this->descar;
+		return $this->descar; 		
 	}
-
 	
 	public function getGracar()
 	{
 
-		return $this->gracar;
+		return $this->gracar; 		
 	}
-
 	
 	public function getSuecar()
 	{
 
-		return $this->suecar;
+		return number_format($this->suecar,2,',','.');
+		
 	}
-
 	
 	public function getTipcar()
 	{
 
-		return $this->tipcar;
+		return $this->tipcar; 		
 	}
-
 	
 	public function getFuncar()
 	{
 
-		return $this->funcar;
+		return $this->funcar; 		
 	}
-
 	
 	public function getAtrcar()
 	{
 
-		return $this->atrcar;
+		return $this->atrcar; 		
 	}
-
 	
 	public function getActcar()
 	{
 
-		return $this->actcar;
+		return $this->actcar; 		
 	}
-
 	
 	public function getRescar()
 	{
 
-		return $this->rescar;
+		return $this->rescar; 		
 	}
-
 	
 	public function getAnocar()
 	{
 
-		return $this->anocar;
+		return $this->anocar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcar($v)
 	{

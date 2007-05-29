@@ -49,58 +49,52 @@ abstract class BaseCsdetsol extends BaseObject  implements Persistent {
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getCantidad()
 	{
 
-		return $this->cantidad;
+		return number_format($this->cantidad,2,',','.');
+		
 	}
-
 	
 	public function getFormato()
 	{
 
-		return $this->formato;
+		return $this->formato; 		
 	}
-
 	
 	public function getPrograma()
 	{
 
-		return $this->programa;
+		return $this->programa; 		
 	}
-
 	
 	public function getCanpre()
 	{
 
-		return $this->canpre;
+		return number_format($this->canpre,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsol($v)
 	{

@@ -97,30 +97,26 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getFecasi($format = 'Y-m-d')
 	{
@@ -147,107 +143,94 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getNomcar()
 	{
 
-		return $this->nomcar;
+		return $this->nomcar; 		
 	}
-
 	
 	public function getNomnom()
 	{
 
-		return $this->nomnom;
+		return $this->nomnom; 		
 	}
-
 	
 	public function getNomcat()
 	{
 
-		return $this->nomcat;
+		return $this->nomcat; 		
 	}
-
 	
 	public function getUnieje()
 	{
 
-		return $this->unieje;
+		return $this->unieje; 		
 	}
-
 	
 	public function getSueldo()
 	{
 
-		return $this->sueldo;
+		return number_format($this->sueldo,2,',','.');
+		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getNronom()
 	{
 
-		return $this->nronom;
+		return $this->nronom; 		
 	}
-
 	
 	public function getMontonomina()
 	{
 
-		return $this->montonomina;
+		return number_format($this->montonomina,2,',','.');
+		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getCodtipgas()
 	{
 
-		return $this->codtipgas;
+		return $this->codtipgas; 		
 	}
-
 	
 	public function getCodniv()
 	{
 
-		return $this->codniv;
+		return $this->codniv; 		
 	}
-
 	
 	public function getGrado()
 	{
 
-		return $this->grado;
+		return $this->grado; 		
 	}
-
 	
 	public function getPaso()
 	{
 
-		return $this->paso;
+		return $this->paso; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

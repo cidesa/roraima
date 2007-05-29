@@ -29,23 +29,20 @@ abstract class BaseNpasocontra extends BaseObject  implements Persistent {
 	public function getCodconant()
 	{
 
-		return $this->codconant;
+		return $this->codconant; 		
 	}
-
 	
 	public function getCodconact()
 	{
 
-		return $this->codconact;
+		return $this->codconact; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodconant($v)
 	{

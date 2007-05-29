@@ -81,44 +81,38 @@ abstract class BaseNpnomcalTemp extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getFrecon()
 	{
 
-		return $this->frecon;
+		return $this->frecon; 		
 	}
-
 	
 	public function getAsided()
 	{
 
-		return $this->asided;
+		return $this->asided; 		
 	}
-
 	
 	public function getFecnom($format = 'Y-m-d')
 	{
@@ -145,65 +139,61 @@ abstract class BaseNpnomcalTemp extends BaseObject  implements Persistent {
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getNomnom()
 	{
 
-		return $this->nomnom;
+		return $this->nomnom; 		
 	}
-
 	
 	public function getCantidad()
 	{
 
-		return $this->cantidad;
+		return number_format($this->cantidad,2,',','.');
+		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getAcucon()
 	{
 
-		return $this->acucon;
+		return $this->acucon; 		
 	}
-
 	
 	public function getAcumulado()
 	{
 
-		return $this->acumulado;
+		return number_format($this->acumulado,2,',','.');
+		
 	}
-
 	
 	public function getSaldo()
 	{
 
-		return $this->saldo;
+		return number_format($this->saldo,2,',','.');
+		
 	}
-
 	
 	public function getNumrec()
 	{
 
-		return $this->numrec;
+		return number_format($this->numrec,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

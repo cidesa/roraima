@@ -29,23 +29,20 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 	public function getForsol()
 	{
 
-		return $this->forsol;
+		return $this->forsol; 		
 	}
-
 	
 	public function getNomsol()
 	{
 
-		return $this->nomsol;
+		return $this->nomsol; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setForsol($v)
 	{

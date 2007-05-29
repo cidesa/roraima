@@ -37,37 +37,32 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 	public function getCodtippag()
 	{
 
-		return $this->codtippag;
+		return $this->codtippag; 		
 	}
-
 	
 	public function getDestippag()
 	{
 
-		return $this->destippag;
+		return $this->destippag; 		
 	}
-
 	
 	public function getTipcan()
 	{
 
-		return $this->tipcan;
+		return $this->tipcan; 		
 	}
-
 	
 	public function getGenmov()
 	{
 
-		return $this->genmov;
+		return $this->genmov; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtippag($v)
 	{

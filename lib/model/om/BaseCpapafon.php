@@ -89,16 +89,14 @@ abstract class BaseCpapafon extends BaseObject  implements Persistent {
 	public function getRefapa()
 	{
 
-		return $this->refapa;
+		return $this->refapa; 		
 	}
-
 	
 	public function getTipapa()
 	{
 
-		return $this->tipapa;
+		return $this->tipapa; 		
 	}
-
 	
 	public function getFecapa($format = 'Y-m-d')
 	{
@@ -125,65 +123,61 @@ abstract class BaseCpapafon extends BaseObject  implements Persistent {
 	public function getAnoapa()
 	{
 
-		return $this->anoapa;
+		return $this->anoapa; 		
 	}
-
 	
 	public function getDesapa()
 	{
 
-		return $this->desapa;
+		return $this->desapa; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getMonapa()
 	{
 
-		return $this->monapa;
+		return number_format($this->monapa,2,',','.');
+		
 	}
-
 	
 	public function getSalcom()
 	{
 
-		return $this->salcom;
+		return number_format($this->salcom,2,',','.');
+		
 	}
-
 	
 	public function getSalcau()
 	{
 
-		return $this->salcau;
+		return number_format($this->salcau,2,',','.');
+		
 	}
-
 	
 	public function getSalpag()
 	{
 
-		return $this->salpag;
+		return number_format($this->salpag,2,',','.');
+		
 	}
-
 	
 	public function getSalaju()
 	{
 
-		return $this->salaju;
+		return number_format($this->salaju,2,',','.');
+		
 	}
-
 	
 	public function getStaapa()
 	{
 
-		return $this->staapa;
+		return $this->staapa; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -210,16 +204,14 @@ abstract class BaseCpapafon extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getEstcie()
 	{
 
-		return $this->estcie;
+		return $this->estcie; 		
 	}
-
 	
 	public function getFeccie($format = 'Y-m-d')
 	{
@@ -246,16 +238,15 @@ abstract class BaseCpapafon extends BaseObject  implements Persistent {
 	public function getMoncie()
 	{
 
-		return $this->moncie;
+		return number_format($this->moncie,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefapa($v)
 	{

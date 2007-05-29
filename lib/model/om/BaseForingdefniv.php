@@ -89,65 +89,61 @@ abstract class BaseForingdefniv extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getLoncod()
 	{
 
-		return $this->loncod;
+		return number_format($this->loncod,2,',','.');
+		
 	}
-
 	
 	public function getRupcat()
 	{
 
-		return $this->rupcat;
+		return number_format($this->rupcat,2,',','.');
+		
 	}
-
 	
 	public function getRuppar()
 	{
 
-		return $this->ruppar;
+		return number_format($this->ruppar,2,',','.');
+		
 	}
-
 	
 	public function getNivdis()
 	{
 
-		return $this->nivdis;
+		return number_format($this->nivdis,2,',','.');
+		
 	}
-
 	
 	public function getForpre()
 	{
 
-		return $this->forpre;
+		return $this->forpre; 		
 	}
-
 	
 	public function getAsiper()
 	{
 
-		return $this->asiper;
+		return $this->asiper; 		
 	}
-
 	
 	public function getNumper()
 	{
 
-		return $this->numper;
+		return number_format($this->numper,2,',','.');
+		
 	}
-
 	
 	public function getPeract()
 	{
 
-		return $this->peract;
+		return $this->peract; 		
 	}
-
 	
 	public function getFecper($format = 'Y-m-d')
 	{
@@ -218,44 +214,39 @@ abstract class BaseForingdefniv extends BaseObject  implements Persistent {
 	public function getEtadef()
 	{
 
-		return $this->etadef;
+		return $this->etadef; 		
 	}
-
 	
 	public function getStaprc()
 	{
 
-		return $this->staprc;
+		return $this->staprc; 		
 	}
-
 	
 	public function getCaraep()
 	{
 
-		return $this->caraep;
+		return $this->caraep; 		
 	}
-
 	
 	public function getCoraep()
 	{
 
-		return $this->coraep;
+		return $this->coraep; 		
 	}
-
 	
 	public function getNivobr()
 	{
 
-		return $this->nivobr;
+		return number_format($this->nivobr,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

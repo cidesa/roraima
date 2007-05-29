@@ -29,23 +29,20 @@ abstract class BaseNpmotliq extends BaseObject  implements Persistent {
 	public function getCodmotliq()
 	{
 
-		return $this->codmotliq;
+		return $this->codmotliq; 		
 	}
-
 	
 	public function getDesmotliq()
 	{
 
-		return $this->desmotliq;
+		return $this->desmotliq; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmotliq($v)
 	{

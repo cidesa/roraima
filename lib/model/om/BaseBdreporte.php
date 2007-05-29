@@ -53,65 +53,56 @@ abstract class BaseBdreporte extends BaseObject  implements Persistent {
 	public function getCampo1()
 	{
 
-		return $this->campo1;
+		return $this->campo1; 		
 	}
-
 	
 	public function getCampo2()
 	{
 
-		return $this->campo2;
+		return $this->campo2; 		
 	}
-
 	
 	public function getCampo3()
 	{
 
-		return $this->campo3;
+		return $this->campo3; 		
 	}
-
 	
 	public function getCampo4()
 	{
 
-		return $this->campo4;
+		return $this->campo4; 		
 	}
-
 	
 	public function getCampo5()
 	{
 
-		return $this->campo5;
+		return $this->campo5; 		
 	}
-
 	
 	public function getCampo6()
 	{
 
-		return $this->campo6;
+		return $this->campo6; 		
 	}
-
 	
 	public function getCampo7()
 	{
 
-		return $this->campo7;
+		return $this->campo7; 		
 	}
-
 	
 	public function getCampo8()
 	{
 
-		return $this->campo8;
+		return $this->campo8; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCampo1($v)
 	{

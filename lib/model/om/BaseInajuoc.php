@@ -49,16 +49,14 @@ abstract class BaseInajuoc extends BaseObject  implements Persistent {
 	public function getAjuoc()
 	{
 
-		return $this->ajuoc;
+		return $this->ajuoc; 		
 	}
-
 	
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getFecaju($format = 'Y-m-d')
 	{
@@ -85,37 +83,33 @@ abstract class BaseInajuoc extends BaseObject  implements Persistent {
 	public function getDesaju()
 	{
 
-		return $this->desaju;
+		return $this->desaju; 		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getStaaju()
 	{
 
-		return $this->staaju;
+		return $this->staaju; 		
 	}
-
 	
 	public function getRefaju()
 	{
 
-		return $this->refaju;
+		return $this->refaju; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setAjuoc($v)
 	{

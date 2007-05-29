@@ -29,23 +29,20 @@ abstract class BaseCaalmunisol extends BaseObject  implements Persistent {
 	public function getCodunisol()
 	{
 
-		return $this->codunisol;
+		return $this->codunisol; 		
 	}
-
 	
 	public function getDesunisol()
 	{
 
-		return $this->desunisol;
+		return $this->desunisol; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodunisol($v)
 	{

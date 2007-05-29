@@ -61,9 +61,8 @@ abstract class BaseTssolpag extends BaseObject  implements Persistent {
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getFecsol($format = 'Y-m-d')
 	{
@@ -90,65 +89,57 @@ abstract class BaseTssolpag extends BaseObject  implements Persistent {
 	public function getNumaep()
 	{
 
-		return $this->numaep;
+		return $this->numaep; 		
 	}
-
 	
 	public function getNumopp()
 	{
 
-		return $this->numopp;
+		return $this->numopp; 		
 	}
-
 	
 	public function getMonsol()
 	{
 
-		return $this->monsol;
+		return number_format($this->monsol,2,',','.');
+		
 	}
-
 	
 	public function getDessol()
 	{
 
-		return $this->dessol;
+		return $this->dessol; 		
 	}
-
 	
 	public function getNumfac()
 	{
 
-		return $this->numfac;
+		return $this->numfac; 		
 	}
-
 	
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getCedsol()
 	{
 
-		return $this->cedsol;
+		return $this->cedsol; 		
 	}
-
 	
 	public function getNomsol()
 	{
 
-		return $this->nomsol;
+		return $this->nomsol; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsol($v)
 	{

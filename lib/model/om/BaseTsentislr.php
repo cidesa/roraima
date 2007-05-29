@@ -37,9 +37,8 @@ abstract class BaseTsentislr extends BaseObject  implements Persistent {
 	public function getNumdep()
 	{
 
-		return $this->numdep;
+		return $this->numdep; 		
 	}
-
 	
 	public function getFecha($format = 'Y-m-d')
 	{
@@ -66,23 +65,20 @@ abstract class BaseTsentislr extends BaseObject  implements Persistent {
 	public function getBanco()
 	{
 
-		return $this->banco;
+		return $this->banco; 		
 	}
-
 	
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumdep($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseOctipprl extends BaseObject  implements Persistent {
 	public function getCodtippro()
 	{
 
-		return $this->codtippro;
+		return $this->codtippro; 		
 	}
-
 	
 	public function getDestippro()
 	{
 
-		return $this->destippro;
+		return $this->destippro; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtippro($v)
 	{

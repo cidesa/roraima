@@ -85,58 +85,52 @@ abstract class BaseConprestamos extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getNomcar()
 	{
 
-		return $this->nomcar;
+		return $this->nomcar; 		
 	}
-
 	
 	public function getCantidad()
 	{
 
-		return $this->cantidad;
+		return number_format($this->cantidad,2,',','.');
+		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -185,51 +179,45 @@ abstract class BaseConprestamos extends BaseObject  implements Persistent {
 	public function getFrecon()
 	{
 
-		return $this->frecon;
+		return $this->frecon; 		
 	}
-
 	
 	public function getAsided()
 	{
 
-		return $this->asided;
+		return $this->asided; 		
 	}
-
 	
 	public function getAcucon()
 	{
 
-		return $this->acucon;
+		return $this->acucon; 		
 	}
-
 	
 	public function getCalcon()
 	{
 
-		return $this->calcon;
+		return $this->calcon; 		
 	}
-
 	
 	public function getActivo()
 	{
 
-		return $this->activo;
+		return $this->activo; 		
 	}
-
 	
 	public function getAcumulado()
 	{
 
-		return $this->acumulado;
+		return number_format($this->acumulado,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

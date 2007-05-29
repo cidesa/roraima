@@ -37,37 +37,33 @@ abstract class BaseFaartpvp extends BaseObject  implements Persistent {
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodpvp()
 	{
 
-		return $this->codpvp;
+		return $this->codpvp; 		
 	}
-
 	
 	public function getPvpart()
 	{
 
-		return $this->pvpart;
+		return number_format($this->pvpart,2,',','.');
+		
 	}
-
 	
 	public function getDespvp()
 	{
 
-		return $this->despvp;
+		return $this->despvp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodart($v)
 	{

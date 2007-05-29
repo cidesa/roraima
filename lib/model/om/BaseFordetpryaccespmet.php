@@ -81,65 +81,57 @@ abstract class BaseFordetpryaccespmet extends BaseObject  implements Persistent 
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodaccesp()
 	{
 
-		return $this->codaccesp;
+		return $this->codaccesp; 		
 	}
-
 	
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getCodunieje()
 	{
 
-		return $this->codunieje;
+		return $this->codunieje; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getDisper()
 	{
 
-		return $this->disper;
+		return $this->disper; 		
 	}
-
 	
 	public function getMonpre()
 	{
 
-		return $this->monpre;
+		return number_format($this->monpre,2,',','.');
+		
 	}
-
 	
 	public function getCodfin()
 	{
 
-		return $this->codfin;
+		return $this->codfin; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -188,37 +180,32 @@ abstract class BaseFordetpryaccespmet extends BaseObject  implements Persistent 
 	public function getUbigeo()
 	{
 
-		return $this->ubigeo;
+		return $this->ubigeo; 		
 	}
-
 	
 	public function getPobapx()
 	{
 
-		return $this->pobapx;
+		return $this->pobapx; 		
 	}
-
 	
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

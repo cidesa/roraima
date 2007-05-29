@@ -45,16 +45,14 @@ abstract class BaseBndepactdet extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodmue()
 	{
 
-		return $this->codmue;
+		return $this->codmue; 		
 	}
-
 	
 	public function getFecdep($format = 'Y-m-d')
 	{
@@ -81,30 +79,29 @@ abstract class BaseBndepactdet extends BaseObject  implements Persistent {
 	public function getDepmue()
 	{
 
-		return $this->depmue;
+		return number_format($this->depmue,2,',','.');
+		
 	}
-
 	
 	public function getDepacu()
 	{
 
-		return $this->depacu;
+		return number_format($this->depacu,2,',','.');
+		
 	}
-
 	
 	public function getVallib()
 	{
 
-		return $this->vallib;
+		return number_format($this->vallib,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

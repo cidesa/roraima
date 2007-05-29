@@ -37,37 +37,32 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getDestip()
 	{
 
-		return $this->destip;
+		return $this->destip; 		
 	}
-
 	
 	public function getDebcre()
 	{
 
-		return $this->debcre;
+		return $this->debcre; 		
 	}
-
 	
 	public function getOrden()
 	{
 
-		return $this->orden;
+		return $this->orden; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtip($v)
 	{

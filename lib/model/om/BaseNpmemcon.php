@@ -29,23 +29,20 @@ abstract class BaseNpmemcon extends BaseObject  implements Persistent {
 	public function getCodmen()
 	{
 
-		return $this->codmen;
+		return $this->codmen; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmen($v)
 	{

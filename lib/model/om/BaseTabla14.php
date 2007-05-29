@@ -73,16 +73,14 @@ abstract class BaseTabla14 extends BaseObject  implements Persistent {
 	public function getRefpag()
 	{
 
-		return $this->refpag;
+		return $this->refpag; 		
 	}
-
 	
 	public function getTippag()
 	{
 
-		return $this->tippag;
+		return $this->tippag; 		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -109,58 +107,52 @@ abstract class BaseTabla14 extends BaseObject  implements Persistent {
 	public function getAnopag()
 	{
 
-		return $this->anopag;
+		return $this->anopag; 		
 	}
-
 	
 	public function getRefcau()
 	{
 
-		return $this->refcau;
+		return $this->refcau; 		
 	}
-
 	
 	public function getTipcau()
 	{
 
-		return $this->tipcau;
+		return $this->tipcau; 		
 	}
-
 	
 	public function getDespag()
 	{
 
-		return $this->despag;
+		return $this->despag; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getSalaju()
 	{
 
-		return $this->salaju;
+		return number_format($this->salaju,2,',','.');
+		
 	}
-
 	
 	public function getStapag()
 	{
 
-		return $this->stapag;
+		return $this->stapag; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -187,16 +179,14 @@ abstract class BaseTabla14 extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefpag($v)
 	{

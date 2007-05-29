@@ -29,23 +29,21 @@ abstract class BaseMigrar extends BaseObject  implements Persistent {
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getSaldo()
 	{
 
-		return $this->saldo;
+		return number_format($this->saldo,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcta($v)
 	{

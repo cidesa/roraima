@@ -129,149 +129,128 @@ abstract class BaseFcconrepres1 extends BaseObject  implements Persistent {
 	public function getCedcon()
 	{
 
-		return $this->cedcon;
+		return $this->cedcon; 		
 	}
-
 	
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getRepcon()
 	{
 
-		return $this->repcon;
+		return $this->repcon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getTelcon()
 	{
 
-		return $this->telcon;
+		return $this->telcon; 		
 	}
-
 	
 	public function getEmacon()
 	{
 
-		return $this->emacon;
+		return $this->emacon; 		
 	}
-
 	
 	public function getCodsec()
 	{
 
-		return $this->codsec;
+		return $this->codsec; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getNitcon()
 	{
 
-		return $this->nitcon;
+		return $this->nitcon; 		
 	}
-
 	
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getCiucon()
 	{
 
-		return $this->ciucon;
+		return $this->ciucon; 		
 	}
-
 	
 	public function getCpocon()
 	{
 
-		return $this->cpocon;
+		return $this->cpocon; 		
 	}
-
 	
 	public function getApocon()
 	{
 
-		return $this->apocon;
+		return $this->apocon; 		
 	}
-
 	
 	public function getUrlcon()
 	{
 
-		return $this->urlcon;
+		return $this->urlcon; 		
 	}
-
 	
 	public function getNaccon()
 	{
 
-		return $this->naccon;
+		return $this->naccon; 		
 	}
-
 	
 	public function getTipcon()
 	{
 
-		return $this->tipcon;
+		return $this->tipcon; 		
 	}
-
 	
 	public function getFaxcon()
 	{
 
-		return $this->faxcon;
+		return $this->faxcon; 		
 	}
-
 	
 	public function getClacon()
 	{
 
-		return $this->clacon;
+		return $this->clacon; 		
 	}
-
 	
 	public function getFecdescon($format = 'Y-m-d')
 	{
@@ -320,37 +299,32 @@ abstract class BaseFcconrepres1 extends BaseObject  implements Persistent {
 	public function getStacon()
 	{
 
-		return $this->stacon;
+		return $this->stacon; 		
 	}
-
 	
 	public function getOrigen()
 	{
 
-		return $this->origen;
+		return $this->origen; 		
 	}
-
 	
 	public function getNomneg()
 	{
 
-		return $this->nomneg;
+		return $this->nomneg; 		
 	}
-
 	
 	public function getReccon()
 	{
 
-		return $this->reccon;
+		return $this->reccon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCedcon($v)
 	{

@@ -29,23 +29,21 @@ abstract class BaseEjecucionpag extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpre($v)
 	{

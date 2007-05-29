@@ -41,44 +41,39 @@ abstract class BaseForcarocp extends BaseObject  implements Persistent {
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getDescar()
 	{
 
-		return $this->descar;
+		return $this->descar; 		
 	}
-
 	
 	public function getGracar()
 	{
 
-		return $this->gracar;
+		return $this->gracar; 		
 	}
-
 	
 	public function getSuecar()
 	{
 
-		return $this->suecar;
+		return number_format($this->suecar,2,',','.');
+		
 	}
-
 	
 	public function getTipcar()
 	{
 
-		return $this->tipcar;
+		return $this->tipcar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcar($v)
 	{

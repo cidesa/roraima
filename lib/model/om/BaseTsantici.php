@@ -53,30 +53,26 @@ abstract class BaseTsantici extends BaseObject  implements Persistent {
 	public function getRefant()
 	{
 
-		return $this->refant;
+		return $this->refant; 		
 	}
-
 	
 	public function getDesant()
 	{
 
-		return $this->desant;
+		return $this->desant; 		
 	}
-
 	
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getFecant($format = 'Y-m-d')
 	{
@@ -103,30 +99,28 @@ abstract class BaseTsantici extends BaseObject  implements Persistent {
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getSaldo()
 	{
 
-		return $this->saldo;
+		return number_format($this->saldo,2,',','.');
+		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefant($v)
 	{

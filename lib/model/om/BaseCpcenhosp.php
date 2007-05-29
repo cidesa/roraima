@@ -29,23 +29,20 @@ abstract class BaseCpcenhosp extends BaseObject  implements Persistent {
 	public function getCodcen()
 	{
 
-		return $this->codcen;
+		return $this->codcen; 		
 	}
-
 	
 	public function getDescen()
 	{
 
-		return $this->descen;
+		return $this->descen; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcen($v)
 	{

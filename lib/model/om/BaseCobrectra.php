@@ -45,30 +45,26 @@ abstract class BaseCobrectra extends BaseObject  implements Persistent {
 	public function getNumtra()
 	{
 
-		return $this->numtra;
+		return $this->numtra; 		
 	}
-
 	
 	public function getRefdoc()
 	{
 
-		return $this->refdoc;
+		return $this->refdoc; 		
 	}
-
 	
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -95,16 +91,15 @@ abstract class BaseCobrectra extends BaseObject  implements Persistent {
 	public function getMonrec()
 	{
 
-		return $this->monrec;
+		return number_format($this->monrec,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumtra($v)
 	{

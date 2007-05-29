@@ -45,51 +45,46 @@ abstract class BaseCpniveles extends BaseObject  implements Persistent {
 	public function getCatpar()
 	{
 
-		return $this->catpar;
+		return $this->catpar; 		
 	}
-
 	
 	public function getConsec()
 	{
 
-		return $this->consec;
+		return number_format($this->consec,2,',','.');
+		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getNomext()
 	{
 
-		return $this->nomext;
+		return $this->nomext; 		
 	}
-
 	
 	public function getLonniv()
 	{
 
-		return $this->lonniv;
+		return number_format($this->lonniv,2,',','.');
+		
 	}
-
 	
 	public function getStaniv()
 	{
 
-		return $this->staniv;
+		return $this->staniv; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCatpar($v)
 	{

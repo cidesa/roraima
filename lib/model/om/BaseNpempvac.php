@@ -57,9 +57,8 @@ abstract class BaseNpempvac extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCaudes($format = 'Y-m-d')
 	{
@@ -174,30 +173,29 @@ abstract class BaseNpempvac extends BaseObject  implements Persistent {
 	public function getBonvac()
 	{
 
-		return $this->bonvac;
+		return number_format($this->bonvac,2,',','.');
+		
 	}
-
 	
 	public function getVacaci()
 	{
 
-		return $this->vacaci;
+		return number_format($this->vacaci,2,',','.');
+		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

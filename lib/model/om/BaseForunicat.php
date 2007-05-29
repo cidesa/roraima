@@ -29,23 +29,20 @@ abstract class BaseForunicat extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

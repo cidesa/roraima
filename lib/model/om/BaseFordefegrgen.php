@@ -133,205 +133,195 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNivproacc()
 	{
 
-		return $this->nivproacc;
+		return number_format($this->nivproacc,2,',','.');
+		
 	}
-
 	
 	public function getDesproacc()
 	{
 
-		return $this->desproacc;
+		return number_format($this->desproacc,2,',','.');
+		
 	}
-
 	
 	public function getHasproacc()
 	{
 
-		return $this->hasproacc;
+		return number_format($this->hasproacc,2,',','.');
+		
 	}
-
 	
 	public function getLonproacc()
 	{
 
-		return $this->lonproacc;
+		return number_format($this->lonproacc,2,',','.');
+		
 	}
-
 	
 	public function getForproacc()
 	{
 
-		return $this->forproacc;
+		return $this->forproacc; 		
 	}
-
 	
 	public function getNivaccesp()
 	{
 
-		return $this->nivaccesp;
+		return number_format($this->nivaccesp,2,',','.');
+		
 	}
-
 	
 	public function getDesaccesp()
 	{
 
-		return $this->desaccesp;
+		return number_format($this->desaccesp,2,',','.');
+		
 	}
-
 	
 	public function getHasaccesp()
 	{
 
-		return $this->hasaccesp;
+		return number_format($this->hasaccesp,2,',','.');
+		
 	}
-
 	
 	public function getLonaccesp()
 	{
 
-		return $this->lonaccesp;
+		return number_format($this->lonaccesp,2,',','.');
+		
 	}
-
 	
 	public function getForaccesp()
 	{
 
-		return $this->foraccesp;
+		return $this->foraccesp; 		
 	}
-
 	
 	public function getNivsubaccesp()
 	{
 
-		return $this->nivsubaccesp;
+		return number_format($this->nivsubaccesp,2,',','.');
+		
 	}
-
 	
 	public function getDessubaccesp()
 	{
 
-		return $this->dessubaccesp;
+		return number_format($this->dessubaccesp,2,',','.');
+		
 	}
-
 	
 	public function getHassubaccesp()
 	{
 
-		return $this->hassubaccesp;
+		return number_format($this->hassubaccesp,2,',','.');
+		
 	}
-
 	
 	public function getLonsubaccesp()
 	{
 
-		return $this->lonsubaccesp;
+		return number_format($this->lonsubaccesp,2,',','.');
+		
 	}
-
 	
 	public function getForsubaccesp()
 	{
 
-		return $this->forsubaccesp;
+		return $this->forsubaccesp; 		
 	}
-
 	
 	public function getNivuae()
 	{
 
-		return $this->nivuae;
+		return number_format($this->nivuae,2,',','.');
+		
 	}
-
 	
 	public function getDesuae()
 	{
 
-		return $this->desuae;
+		return number_format($this->desuae,2,',','.');
+		
 	}
-
 	
 	public function getHasuae()
 	{
 
-		return $this->hasuae;
+		return number_format($this->hasuae,2,',','.');
+		
 	}
-
 	
 	public function getLonuae()
 	{
 
-		return $this->lonuae;
+		return number_format($this->lonuae,2,',','.');
+		
 	}
-
 	
 	public function getForuae()
 	{
 
-		return $this->foruae;
+		return $this->foruae; 		
 	}
-
 	
 	public function getCorest()
 	{
 
-		return $this->corest;
+		return number_format($this->corest,2,',','.');
+		
 	}
-
 	
 	public function getCorsec()
 	{
 
-		return $this->corsec;
+		return number_format($this->corsec,2,',','.');
+		
 	}
-
 	
 	public function getCorequ()
 	{
 
-		return $this->corequ;
+		return number_format($this->corequ,2,',','.');
+		
 	}
-
 	
 	public function getDespar()
 	{
 
-		return $this->despar;
+		return $this->despar; 		
 	}
-
 	
 	public function getHaspar()
 	{
 
-		return $this->haspar;
+		return $this->haspar; 		
 	}
-
 	
 	public function getLonpar()
 	{
 
-		return $this->lonpar;
+		return $this->lonpar; 		
 	}
-
 	
 	public function getForpar()
 	{
 
-		return $this->forpar;
+		return $this->forpar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

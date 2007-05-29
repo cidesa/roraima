@@ -29,23 +29,20 @@ abstract class BaseTssecofi extends BaseObject  implements Persistent {
 	public function getCodsecofi()
 	{
 
-		return $this->codsecofi;
+		return $this->codsecofi; 		
 	}
-
 	
 	public function getDessecofi()
 	{
 
-		return $this->dessecofi;
+		return $this->dessecofi; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsecofi($v)
 	{

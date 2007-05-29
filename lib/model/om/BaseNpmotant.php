@@ -29,23 +29,20 @@ abstract class BaseNpmotant extends BaseObject  implements Persistent {
 	public function getCodmotant()
 	{
 
-		return $this->codmotant;
+		return $this->codmotant; 		
 	}
-
 	
 	public function getDesmotant()
 	{
 
-		return $this->desmotant;
+		return $this->desmotant; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmotant($v)
 	{

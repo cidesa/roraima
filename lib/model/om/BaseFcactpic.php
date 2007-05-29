@@ -73,79 +73,73 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 	public function getNumdoc()
 	{
 
-		return $this->numdoc;
+		return $this->numdoc; 		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getExoner()
 	{
 
-		return $this->exoner;
+		return $this->exoner; 		
 	}
-
 	
 	public function getMonact()
 	{
 
-		return $this->monact;
+		return number_format($this->monact,2,',','.');
+		
 	}
-
 	
 	public function getPorexo()
 	{
 
-		return $this->porexo;
+		return number_format($this->porexo,2,',','.');
+		
 	}
-
 	
 	public function getEstact()
 	{
 
-		return $this->estact;
+		return $this->estact; 		
 	}
-
 	
 	public function getExento()
 	{
 
-		return $this->exento;
+		return $this->exento; 		
 	}
-
 	
 	public function getRebaja()
 	{
 
-		return $this->rebaja;
+		return $this->rebaja; 		
 	}
-
 	
 	public function getPorreb()
 	{
 
-		return $this->porreb;
+		return number_format($this->porreb,2,',','.');
+		
 	}
-
 	
 	public function getMonant()
 	{
 
-		return $this->monant;
+		return number_format($this->monant,2,',','.');
+		
 	}
-
 	
 	public function getImpuesto()
 	{
 
-		return $this->impuesto;
+		return number_format($this->impuesto,2,',','.');
+		
 	}
-
 	
 	public function getFecven($format = 'Y-m-d')
 	{
@@ -172,16 +166,14 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 	public function getAnodec()
 	{
 
-		return $this->anodec;
+		return $this->anodec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumdoc($v)
 	{

@@ -81,9 +81,8 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 	public function getRefcot()
 	{
 
-		return $this->refcot;
+		return $this->refcot; 		
 	}
-
 	
 	public function getFeccot($format = 'Y-m-d')
 	{
@@ -110,100 +109,92 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getDescot()
 	{
 
-		return $this->descot;
+		return $this->descot; 		
 	}
-
 	
 	public function getRefsol()
 	{
 
-		return $this->refsol;
+		return $this->refsol; 		
 	}
-
 	
 	public function getMoncot()
 	{
 
-		return $this->moncot;
+		return number_format($this->moncot,2,',','.');
+		
 	}
-
 	
 	public function getConpag()
 	{
 
-		return $this->conpag;
+		return $this->conpag; 		
 	}
-
 	
 	public function getForent()
 	{
 
-		return $this->forent;
+		return $this->forent; 		
 	}
-
 	
 	public function getPriori()
 	{
 
-		return $this->priori;
+		return number_format($this->priori,2,',','.');
+		
 	}
-
 	
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getMonrec()
 	{
 
-		return $this->monrec;
+		return number_format($this->monrec,2,',','.');
+		
 	}
-
 	
 	public function getTipmon()
 	{
 
-		return $this->tipmon;
+		return $this->tipmon; 		
 	}
-
 	
 	public function getValmon()
 	{
 
-		return $this->valmon;
+		return number_format($this->valmon,2,',','.');
+		
 	}
-
 	
 	public function getRefpro()
 	{
 
-		return $this->refpro;
+		return $this->refpro; 		
 	}
-
 	
 	public function getCorrel()
 	{
 
-		return $this->correl;
+		return number_format($this->correl,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefcot($v)
 	{

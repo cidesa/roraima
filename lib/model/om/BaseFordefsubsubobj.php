@@ -37,37 +37,32 @@ abstract class BaseFordefsubsubobj extends BaseObject  implements Persistent {
 	public function getCodequ()
 	{
 
-		return $this->codequ;
+		return $this->codequ; 		
 	}
-
 	
 	public function getCodsubobj()
 	{
 
-		return $this->codsubobj;
+		return $this->codsubobj; 		
 	}
-
 	
 	public function getCodsubsubobj()
 	{
 
-		return $this->codsubsubobj;
+		return $this->codsubsubobj; 		
 	}
-
 	
 	public function getDessubsubobj()
 	{
 
-		return $this->dessubsubobj;
+		return $this->dessubsubobj; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodequ($v)
 	{

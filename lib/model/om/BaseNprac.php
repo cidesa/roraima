@@ -41,44 +41,38 @@ abstract class BaseNprac extends BaseObject  implements Persistent {
 	public function getCodigo()
 	{
 
-		return $this->codigo;
+		return $this->codigo; 		
 	}
-
 	
 	public function getForcod()
 	{
 
-		return $this->forcod;
+		return $this->forcod; 		
 	}
-
 	
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getAnodes()
 	{
 
-		return $this->anodes;
+		return $this->anodes; 		
 	}
-
 	
 	public function getAnohas()
 	{
 
-		return $this->anohas;
+		return $this->anohas; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodigo($v)
 	{

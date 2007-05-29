@@ -33,30 +33,27 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	public function getCoduso()
 	{
 
-		return $this->coduso;
+		return $this->coduso; 		
 	}
-
 	
 	public function getNomuso()
 	{
 
-		return $this->nomuso;
+		return $this->nomuso; 		
 	}
-
 	
 	public function getFactor()
 	{
 
-		return $this->factor;
+		return number_format($this->factor,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoduso($v)
 	{

@@ -37,37 +37,35 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 	public function getRangodesde()
 	{
 
-		return $this->rangodesde;
+		return number_format($this->rangodesde,2,',','.');
+		
 	}
-
 	
 	public function getRangohasta()
 	{
 
-		return $this->rangohasta;
+		return number_format($this->rangohasta,2,',','.');
+		
 	}
-
 	
 	public function getDiadis()
 	{
 
-		return $this->diadis;
+		return number_format($this->diadis,2,',','.');
+		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRangodesde($v)
 	{

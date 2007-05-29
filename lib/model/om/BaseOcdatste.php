@@ -93,135 +93,116 @@ abstract class BaseOcdatste extends BaseObject  implements Persistent {
 	public function getCedste()
 	{
 
-		return $this->cedste;
+		return $this->cedste; 		
 	}
-
 	
 	public function getNomste()
 	{
 
-		return $this->nomste;
+		return $this->nomste; 		
 	}
-
 	
 	public function getCodste()
 	{
 
-		return $this->codste;
+		return $this->codste; 		
 	}
-
 	
 	public function getDirste()
 	{
 
-		return $this->dirste;
+		return $this->dirste; 		
 	}
-
 	
 	public function getTelste()
 	{
 
-		return $this->telste;
+		return $this->telste; 		
 	}
-
 	
 	public function getFaxste()
 	{
 
-		return $this->faxste;
+		return $this->faxste; 		
 	}
-
 	
 	public function getEmaste()
 	{
 
-		return $this->emaste;
+		return $this->emaste; 		
 	}
-
 	
 	public function getCedrep()
 	{
 
-		return $this->cedrep;
+		return $this->cedrep; 		
 	}
-
 	
 	public function getNomrep()
 	{
 
-		return $this->nomrep;
+		return $this->nomrep; 		
 	}
-
 	
 	public function getDirrep()
 	{
 
-		return $this->dirrep;
+		return $this->dirrep; 		
 	}
-
 	
 	public function getTelrep()
 	{
 
-		return $this->telrep;
+		return $this->telrep; 		
 	}
-
 	
 	public function getFaxrep()
 	{
 
-		return $this->faxrep;
+		return $this->faxrep; 		
 	}
-
 	
 	public function getEmarep()
 	{
 
-		return $this->emarep;
+		return $this->emarep; 		
 	}
-
 	
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCodsec()
 	{
 
-		return $this->codsec;
+		return $this->codsec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCedste($v)
 	{

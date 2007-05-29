@@ -57,72 +57,68 @@ abstract class BaseCaartalm extends BaseObject  implements Persistent {
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodubi()
 	{
 
-		return $this->codubi;
+		return $this->codubi; 		
 	}
-
 	
 	public function getEximin()
 	{
 
-		return $this->eximin;
+		return number_format($this->eximin,2,',','.');
+		
 	}
-
 	
 	public function getEximax()
 	{
 
-		return $this->eximax;
+		return number_format($this->eximax,2,',','.');
+		
 	}
-
 	
 	public function getExiact()
 	{
 
-		return $this->exiact;
+		return number_format($this->exiact,2,',','.');
+		
 	}
-
 	
 	public function getPtoreo()
 	{
 
-		return $this->ptoreo;
+		return number_format($this->ptoreo,2,',','.');
+		
 	}
-
 	
 	public function getPedmin()
 	{
 
-		return $this->pedmin;
+		return number_format($this->pedmin,2,',','.');
+		
 	}
-
 	
 	public function getPedmax()
 	{
 
-		return $this->pedmax;
+		return number_format($this->pedmax,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodalm($v)
 	{

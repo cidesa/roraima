@@ -53,9 +53,8 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 	public function getCodsal()
 	{
 
-		return $this->codsal;
+		return $this->codsal; 		
 	}
-
 	
 	public function getFecsal($format = 'Y-m-d')
 	{
@@ -82,51 +81,45 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 	public function getDessal()
 	{
 
-		return $this->dessal;
+		return $this->dessal; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getMonsal()
 	{
 
-		return $this->monsal;
+		return number_format($this->monsal,2,',','.');
+		
 	}
-
 	
 	public function getStasal()
 	{
 
-		return $this->stasal;
+		return $this->stasal; 		
 	}
-
 	
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsal($v)
 	{

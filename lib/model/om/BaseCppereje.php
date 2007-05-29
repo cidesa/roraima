@@ -93,9 +93,8 @@ abstract class BaseCppereje extends BaseObject  implements Persistent {
 	public function getPereje()
 	{
 
-		return $this->pereje;
+		return $this->pereje; 		
 	}
-
 	
 	public function getFecdes($format = 'Y-m-d')
 	{
@@ -144,23 +143,20 @@ abstract class BaseCppereje extends BaseObject  implements Persistent {
 	public function getEstper()
 	{
 
-		return $this->estper;
+		return $this->estper; 		
 	}
-
 	
 	public function getCerrado()
 	{
 
-		return $this->cerrado;
+		return $this->cerrado; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecini($v)
 	{

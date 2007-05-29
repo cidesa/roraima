@@ -109,58 +109,51 @@ abstract class BaseNpordpag extends BaseObject  implements Persistent {
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return number_format($this->numord,2,',','.');
+		
 	}
-
 	
 	public function getTipcau()
 	{
 
-		return $this->tipcau;
+		return $this->tipcau; 		
 	}
-
 	
 	public function getRefcau()
 	{
 
-		return $this->refcau;
+		return $this->refcau; 		
 	}
-
 	
 	public function getTipprc()
 	{
 
-		return $this->tipprc;
+		return $this->tipprc; 		
 	}
-
 	
 	public function getRefprc()
 	{
 
-		return $this->refprc;
+		return $this->refprc; 		
 	}
-
 	
 	public function getTipcom()
 	{
 
-		return $this->tipcom;
+		return $this->tipcom; 		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getFecemi($format = 'Y-m-d')
 	{
@@ -187,100 +180,90 @@ abstract class BaseNpordpag extends BaseObject  implements Persistent {
 	public function getNumrif()
 	{
 
-		return $this->numrif;
+		return $this->numrif; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getConpag()
 	{
 
-		return $this->conpag;
+		return $this->conpag; 		
 	}
-
 	
 	public function getCaupag()
 	{
 
-		return $this->caupag;
+		return number_format($this->caupag,2,',','.');
+		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getCodcue()
 	{
 
-		return $this->codcue;
+		return $this->codcue; 		
 	}
-
 	
 	public function getCodban()
 	{
 
-		return $this->codban;
+		return $this->codban; 		
 	}
-
 	
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getNomdes()
 	{
 
-		return $this->nomdes;
+		return $this->nomdes; 		
 	}
-
 	
 	public function getCodcuedes()
 	{
 
-		return $this->codcuedes;
+		return $this->codcuedes; 		
 	}
-
 	
 	public function getDespag()
 	{
 
-		return $this->despag;
+		return number_format($this->despag,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumord($v)
 	{

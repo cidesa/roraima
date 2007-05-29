@@ -47,44 +47,38 @@ abstract class BaseFccobrad extends BaseObject  implements Persistent {
 	public function getCodcob()
 	{
 
-		return $this->codcob;
+		return $this->codcob; 		
 	}
-
 	
 	public function getCedcob()
 	{
 
-		return $this->cedcob;
+		return $this->cedcob; 		
 	}
-
 	
 	public function getNomcob()
 	{
 
-		return $this->nomcob;
+		return $this->nomcob; 		
 	}
-
 	
 	public function getDircob()
 	{
 
-		return $this->dircob;
+		return $this->dircob; 		
 	}
-
 	
 	public function getTelcob()
 	{
 
-		return $this->telcob;
+		return $this->telcob; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcob($v)
 	{

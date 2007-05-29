@@ -53,65 +53,61 @@ abstract class BaseNpvacliquidacion extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getPerini()
 	{
 
-		return $this->perini;
+		return $this->perini; 		
 	}
-
 	
 	public function getPerfin()
 	{
 
-		return $this->perfin;
+		return $this->perfin; 		
 	}
-
 	
 	public function getDiadis()
 	{
 
-		return $this->diadis;
+		return number_format($this->diadis,2,',','.');
+		
 	}
-
 	
 	public function getDiasbono()
 	{
 
-		return $this->diasbono;
+		return number_format($this->diasbono,2,',','.');
+		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getUltsue()
 	{
 
-		return $this->ultsue;
+		return number_format($this->ultsue,2,',','.');
+		
 	}
-
 	
 	public function getMontoinci()
 	{
 
-		return $this->montoinci;
+		return number_format($this->montoinci,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

@@ -81,114 +81,100 @@ abstract class BaseNpasicarracemp extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodcarrac()
 	{
 
-		return $this->codcarrac;
+		return $this->codcarrac; 		
 	}
-
 	
 	public function getCodsecue()
 	{
 
-		return $this->codsecue;
+		return $this->codsecue; 		
 	}
-
 	
 	public function getComcar()
 	{
 
-		return $this->comcar;
+		return number_format($this->comcar,2,',','.');
+		
 	}
-
 	
 	public function getPricar()
 	{
 
-		return $this->pricar;
+		return number_format($this->pricar,2,',','.');
+		
 	}
-
 	
 	public function getCodaccadm()
 	{
 
-		return $this->codaccadm;
+		return $this->codaccadm; 		
 	}
-
 	
 	public function getCodregpai()
 	{
 
-		return $this->codregpai;
+		return $this->codregpai; 		
 	}
-
 	
 	public function getCodregedo()
 	{
 
-		return $this->codregedo;
+		return $this->codregedo; 		
 	}
-
 	
 	public function getCodregciu()
 	{
 
-		return $this->codregciu;
+		return $this->codregciu; 		
 	}
-
 	
 	public function getCodcatrac()
 	{
 
-		return $this->codcatrac;
+		return $this->codcatrac; 		
 	}
-
 	
 	public function getCodbanrac()
 	{
 
-		return $this->codbanrac;
+		return $this->codbanrac; 		
 	}
-
 	
 	public function getCodgrulab()
 	{
 
-		return $this->codgrulab;
+		return $this->codgrulab; 		
 	}
-
 	
 	public function getNomsup()
 	{
 
-		return $this->nomsup;
+		return $this->nomsup; 		
 	}
-
 	
 	public function getCarsup()
 	{
 
-		return $this->carsup;
+		return $this->carsup; 		
 	}
-
 	
 	public function getCodnivorg()
 	{
 
-		return $this->codnivorg;
+		return $this->codnivorg; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

@@ -49,58 +49,50 @@ abstract class BaseNpfondoprestaciones extends BaseObject  implements Persistent
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodconacudia()
 	{
 
-		return $this->codconacudia;
+		return $this->codconacudia; 		
 	}
-
 	
 	public function getCodconacumonto()
 	{
 
-		return $this->codconacumonto;
+		return $this->codconacumonto; 		
 	}
-
 	
 	public function getCodconacuinteres()
 	{
 
-		return $this->codconacuinteres;
+		return $this->codconacuinteres; 		
 	}
-
 	
 	public function getCapitalizarinteres()
 	{
 
-		return $this->capitalizarinteres;
+		return $this->capitalizarinteres; 		
 	}
-
 	
 	public function getAcumprestamos()
 	{
 
-		return $this->acumprestamos;
+		return $this->acumprestamos; 		
 	}
-
 	
 	public function getCodconprestamo()
 	{
 
-		return $this->codconprestamo;
+		return $this->codconprestamo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

@@ -41,44 +41,39 @@ abstract class BaseOcparval extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNumval()
 	{
 
-		return $this->numval;
+		return $this->numval; 		
 	}
-
 	
 	public function getCodtipval()
 	{
 
-		return $this->codtipval;
+		return $this->codtipval; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCantidad()
 	{
 
-		return $this->cantidad;
+		return number_format($this->cantidad,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

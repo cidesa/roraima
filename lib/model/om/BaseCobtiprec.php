@@ -45,51 +45,46 @@ abstract class BaseCobtiprec extends BaseObject  implements Persistent {
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getDesrec()
 	{
 
-		return $this->desrec;
+		return $this->desrec; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getTiprec()
 	{
 
-		return $this->tiprec;
+		return $this->tiprec; 		
 	}
-
 	
 	public function getValrec()
 	{
 
-		return $this->valrec;
+		return number_format($this->valrec,2,',','.');
+		
 	}
-
 	
 	public function getDiarec()
 	{
 
-		return $this->diarec;
+		return number_format($this->diarec,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrec($v)
 	{

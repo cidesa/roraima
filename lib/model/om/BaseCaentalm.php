@@ -53,9 +53,8 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 	public function getRcpart()
 	{
 
-		return $this->rcpart;
+		return $this->rcpart; 		
 	}
-
 	
 	public function getFecrcp($format = 'Y-m-d')
 	{
@@ -82,51 +81,45 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 	public function getDesrcp()
 	{
 
-		return $this->desrcp;
+		return $this->desrcp; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getMonrcp()
 	{
 
-		return $this->monrcp;
+		return number_format($this->monrcp,2,',','.');
+		
 	}
-
 	
 	public function getStarcp()
 	{
 
-		return $this->starcp;
+		return $this->starcp; 		
 	}
-
 	
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRcpart($v)
 	{

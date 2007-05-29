@@ -33,30 +33,27 @@ abstract class BaseRhvalniv extends BaseObject  implements Persistent {
 	public function getCodniv()
 	{
 
-		return $this->codniv;
+		return $this->codniv; 		
 	}
-
 	
 	public function getCodvalins()
 	{
 
-		return $this->codvalins;
+		return $this->codvalins; 		
 	}
-
 	
 	public function getPorvalins()
 	{
 
-		return $this->porvalins;
+		return number_format($this->porvalins,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodniv($v)
 	{

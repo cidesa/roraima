@@ -157,247 +157,217 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getDiremp()
 	{
 
-		return $this->diremp;
+		return $this->diremp; 		
 	}
-
 	
 	public function getTelemp()
 	{
 
-		return $this->telemp;
+		return $this->telemp; 		
 	}
-
 	
 	public function getFaxemp()
 	{
 
-		return $this->faxemp;
+		return $this->faxemp; 		
 	}
-
 	
 	public function getEmaemp()
 	{
 
-		return $this->emaemp;
+		return $this->emaemp; 		
 	}
-
 	
 	public function getPorant()
 	{
 
-		return $this->porant;
+		return number_format($this->porant,2,',','.');
+		
 	}
-
 	
 	public function getPlaini()
 	{
 
-		return $this->plaini;
+		return number_format($this->plaini,2,',','.');
+		
 	}
-
 	
 	public function getPoraumobr()
 	{
 
-		return $this->poraumobr;
+		return number_format($this->poraumobr,2,',','.');
+		
 	}
-
 	
 	public function getPormul()
 	{
 
-		return $this->pormul;
+		return number_format($this->pormul,2,',','.');
+		
 	}
-
 	
 	public function getUnitri()
 	{
 
-		return $this->unitri;
+		return number_format($this->unitri,2,',','.');
+		
 	}
-
 	
 	public function getCodactproini()
 	{
 
-		return $this->codactproini;
+		return $this->codactproini; 		
 	}
-
 	
 	public function getCodactini()
 	{
 
-		return $this->codactini;
+		return $this->codactini; 		
 	}
-
 	
 	public function getCodactpar()
 	{
 
-		return $this->codactpar;
+		return $this->codactpar; 		
 	}
-
 	
 	public function getCodactrei()
 	{
 
-		return $this->codactrei;
+		return $this->codactrei; 		
 	}
-
 	
 	public function getCodactproter()
 	{
 
-		return $this->codactproter;
+		return $this->codactproter; 		
 	}
-
 	
 	public function getCodactter()
 	{
 
-		return $this->codactter;
+		return $this->codactter; 		
 	}
-
 	
 	public function getCodactrecpro()
 	{
 
-		return $this->codactrecpro;
+		return $this->codactrecpro; 		
 	}
-
 	
 	public function getCodactrecdef()
 	{
 
-		return $this->codactrecdef;
+		return $this->codactrecdef; 		
 	}
-
 	
 	public function getCodingres()
 	{
 
-		return $this->codingres;
+		return $this->codingres; 		
 	}
-
 	
 	public function getCodconobr()
 	{
 
-		return $this->codconobr;
+		return $this->codconobr; 		
 	}
-
 	
 	public function getCodconins()
 	{
 
-		return $this->codconins;
+		return $this->codconins; 		
 	}
-
 	
 	public function getCodconsup()
 	{
 
-		return $this->codconsup;
+		return $this->codconsup; 		
 	}
-
 	
 	public function getCodconpro()
 	{
 
-		return $this->codconpro;
+		return $this->codconpro; 		
 	}
-
 	
 	public function getCodvalant()
 	{
 
-		return $this->codvalant;
+		return $this->codvalant; 		
 	}
-
 	
 	public function getCodvalpar()
 	{
 
-		return $this->codvalpar;
+		return $this->codvalpar; 		
 	}
-
 	
 	public function getCodvalfin()
 	{
 
-		return $this->codvalfin;
+		return $this->codvalfin; 		
 	}
-
 	
 	public function getCodvalret()
 	{
 
-		return $this->codvalret;
+		return $this->codvalret; 		
 	}
-
 	
 	public function getCodvalrec()
 	{
 
-		return $this->codvalrec;
+		return $this->codvalrec; 		
 	}
-
 	
 	public function getCodparrec()
 	{
 
-		return $this->codparrec;
+		return $this->codparrec; 		
 	}
-
 	
 	public function getIvaant()
 	{
 
-		return $this->ivaant;
+		return $this->ivaant; 		
 	}
-
 	
 	public function getRetant()
 	{
 
-		return $this->retant;
+		return $this->retant; 		
 	}
-
 	
 	public function getGencom()
 	{
 
-		return $this->gencom;
+		return $this->gencom; 		
 	}
-
 	
 	public function getTipcom()
 	{
 
-		return $this->tipcom;
+		return $this->tipcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

@@ -69,16 +69,14 @@ abstract class BaseCprelapa extends BaseObject  implements Persistent {
 	public function getRefrel()
 	{
 
-		return $this->refrel;
+		return $this->refrel; 		
 	}
-
 	
 	public function getTiprel()
 	{
 
-		return $this->tiprel;
+		return $this->tiprel; 		
 	}
-
 	
 	public function getFecrel($format = 'Y-m-d')
 	{
@@ -105,44 +103,40 @@ abstract class BaseCprelapa extends BaseObject  implements Persistent {
 	public function getRefapa()
 	{
 
-		return $this->refapa;
+		return $this->refapa; 		
 	}
-
 	
 	public function getDesrel()
 	{
 
-		return $this->desrel;
+		return $this->desrel; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getMonrel()
 	{
 
-		return $this->monrel;
+		return number_format($this->monrel,2,',','.');
+		
 	}
-
 	
 	public function getSalaju()
 	{
 
-		return $this->salaju;
+		return number_format($this->salaju,2,',','.');
+		
 	}
-
 	
 	public function getStarel()
 	{
 
-		return $this->starel;
+		return $this->starel; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -169,23 +163,20 @@ abstract class BaseCprelapa extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefrel($v)
 	{

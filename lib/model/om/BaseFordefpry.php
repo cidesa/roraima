@@ -277,44 +277,38 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getNompro()
 	{
 
-		return $this->nompro;
+		return $this->nompro; 		
 	}
-
 	
 	public function getProacc()
 	{
 
-		return $this->proacc;
+		return $this->proacc; 		
 	}
-
 	
 	public function getCodsta()
 	{
 
-		return $this->codsta;
+		return $this->codsta; 		
 	}
-
 	
 	public function getCodsitpre()
 	{
 
-		return $this->codsitpre;
+		return $this->codsitpre; 		
 	}
-
 	
 	public function getConpoa()
 	{
 
-		return $this->conpoa;
+		return $this->conpoa; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -363,72 +357,62 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 	public function getUbinac()
 	{
 
-		return $this->ubinac;
+		return $this->ubinac; 		
 	}
-
 	
 	public function getCodequ()
 	{
 
-		return $this->codequ;
+		return $this->codequ; 		
 	}
-
 	
 	public function getCodsubobj()
 	{
 
-		return $this->codsubobj;
+		return $this->codsubobj; 		
 	}
-
 	
 	public function getCodsubsubobj()
 	{
 
-		return $this->codsubsubobj;
+		return $this->codsubsubobj; 		
 	}
-
 	
 	public function getObjestnueeta()
 	{
 
-		return $this->objestnueeta;
+		return $this->objestnueeta; 		
 	}
-
 	
 	public function getObjestins()
 	{
 
-		return $this->objestins;
+		return $this->objestins; 		
 	}
-
 	
 	public function getObjeesppro()
 	{
 
-		return $this->objeesppro;
+		return $this->objeesppro; 		
 	}
-
 	
 	public function getIndpro()
 	{
 
-		return $this->indpro;
+		return $this->indpro; 		
 	}
-
 	
 	public function getEnupro()
 	{
 
-		return $this->enupro;
+		return $this->enupro; 		
 	}
-
 	
 	public function getIndsitact()
 	{
 
-		return $this->indsitact;
+		return $this->indsitact; 		
 	}
-
 	
 	public function getFecultdat($format = 'Y-m-d')
 	{
@@ -455,324 +439,284 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 	public function getForind()
 	{
 
-		return $this->forind;
+		return $this->forind; 		
 	}
-
 	
 	public function getFueind()
 	{
 
-		return $this->fueind;
+		return $this->fueind; 		
 	}
-
 	
 	public function getIndsitobj()
 	{
 
-		return $this->indsitobj;
+		return $this->indsitobj; 		
 	}
-
 	
 	public function getTieimp()
 	{
 
-		return $this->tieimp;
+		return $this->tieimp; 		
 	}
-
 	
 	public function getRespro()
 	{
 
-		return $this->respro;
+		return $this->respro; 		
 	}
-
 	
 	public function getDesmet()
 	{
 
-		return $this->desmet;
+		return $this->desmet; 		
 	}
-
 	
 	public function getCodunimedmet()
 	{
 
-		return $this->codunimedmet;
+		return $this->codunimedmet; 		
 	}
-
 	
 	public function getCantmet()
 	{
 
-		return $this->cantmet;
+		return number_format($this->cantmet,2,',','.');
+		
 	}
-
 	
 	public function getBenpro()
 	{
 
-		return $this->benpro;
+		return $this->benpro; 		
 	}
-
 	
 	public function getCodejedes()
 	{
 
-		return $this->codejedes;
+		return $this->codejedes; 		
 	}
-
 	
 	public function getCodnucdes()
 	{
 
-		return $this->codnucdes;
+		return $this->codnucdes; 		
 	}
-
 	
 	public function getCodzoneco()
 	{
 
-		return $this->codzoneco;
+		return $this->codzoneco; 		
 	}
-
 	
 	public function getComindust()
 	{
 
-		return $this->comindust;
+		return $this->comindust; 		
 	}
-
 	
 	public function getCodsec()
 	{
 
-		return $this->codsec;
+		return $this->codsec; 		
 	}
-
 	
 	public function getCodsubsec()
 	{
 
-		return $this->codsubsec;
+		return $this->codsubsec; 		
 	}
-
 	
 	public function getMontotpry()
 	{
 
-		return $this->montotpry;
+		return number_format($this->montotpry,2,',','.');
+		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getCaremp()
 	{
 
-		return $this->caremp;
+		return $this->caremp; 		
 	}
-
 	
 	public function getUniadsemp()
 	{
 
-		return $this->uniadsemp;
+		return $this->uniadsemp; 		
 	}
-
 	
 	public function getTelemp()
 	{
 
-		return $this->telemp;
+		return $this->telemp; 		
 	}
-
 	
 	public function getFaxemp()
 	{
 
-		return $this->faxemp;
+		return $this->faxemp; 		
 	}
-
 	
 	public function getEmaemp()
 	{
 
-		return $this->emaemp;
+		return $this->emaemp; 		
 	}
-
 	
 	public function getAccotrins()
 	{
 
-		return $this->accotrins;
+		return $this->accotrins; 		
 	}
-
 	
 	public function getObsaccotrins()
 	{
 
-		return $this->obsaccotrins;
+		return $this->obsaccotrins; 		
 	}
-
 	
 	public function getConpryotr()
 	{
 
-		return $this->conpryotr;
+		return $this->conpryotr; 		
 	}
-
 	
 	public function getObsconpryotr()
 	{
 
-		return $this->obsconpryotr;
+		return $this->obsconpryotr; 		
 	}
-
 	
 	public function getConotrpry()
 	{
 
-		return $this->conotrpry;
+		return $this->conotrpry; 		
 	}
-
 	
 	public function getObsconotrpry()
 	{
 
-		return $this->obsconotrpry;
+		return $this->obsconotrpry; 		
 	}
-
 	
 	public function getTipaccage()
 	{
 
-		return $this->tipaccage;
+		return $this->tipaccage; 		
 	}
-
 	
 	public function getPlacontin()
 	{
 
-		return $this->placontin;
+		return $this->placontin; 		
 	}
-
 	
 	public function getObsplacontin()
 	{
 
-		return $this->obsplacontin;
+		return $this->obsplacontin; 		
 	}
-
 	
 	public function getNroempdir()
 	{
 
-		return $this->nroempdir;
+		return number_format($this->nroempdir,2,',','.');
+		
 	}
-
 	
 	public function getNroempind()
 	{
 
-		return $this->nroempind;
+		return number_format($this->nroempind,2,',','.');
+		
 	}
-
 	
 	public function getDesbrepry()
 	{
 
-		return $this->desbrepry;
+		return $this->desbrepry; 		
 	}
-
 	
 	public function getPoravafis()
 	{
 
-		return $this->poravafis;
+		return number_format($this->poravafis,2,',','.');
+		
 	}
-
 	
 	public function getPoravafin()
 	{
 
-		return $this->poravafin;
+		return number_format($this->poravafin,2,',','.');
+		
 	}
-
 	
 	public function getUniejepri()
 	{
 
-		return $this->uniejepri;
+		return $this->uniejepri; 		
 	}
-
 	
 	public function getUbigeo()
 	{
 
-		return $this->ubigeo;
+		return $this->ubigeo; 		
 	}
-
 	
 	public function getPlactg()
 	{
 
-		return $this->plactg;
+		return $this->plactg; 		
 	}
-
 	
 	public function getCoddir()
 	{
 
-		return $this->coddir;
+		return $this->coddir; 		
 	}
-
 	
 	public function getFacrzg()
 	{
 
-		return $this->facrzg;
+		return $this->facrzg; 		
 	}
-
 	
 	public function getObjpndes()
 	{
 
-		return $this->objpndes;
+		return $this->objpndes; 		
 	}
-
 	
 	public function getUnimedres()
 	{
 
-		return $this->unimedres;
+		return $this->unimedres; 		
 	}
-
 	
 	public function getCodprg()
 	{
 
-		return $this->codprg;
+		return $this->codprg; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

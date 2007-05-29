@@ -29,23 +29,20 @@ abstract class BaseOctiporg extends BaseObject  implements Persistent {
 	public function getCodtiporg()
 	{
 
-		return $this->codtiporg;
+		return $this->codtiporg; 		
 	}
-
 	
 	public function getDestiporg()
 	{
 
-		return $this->destiporg;
+		return $this->destiporg; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtiporg($v)
 	{

@@ -45,51 +45,44 @@ abstract class BaseTscomprobantes extends BaseObject  implements Persistent {
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getAno()
 	{
 
-		return $this->ano;
+		return $this->ano; 		
 	}
-
 	
 	public function getMes()
 	{
 
-		return $this->mes;
+		return $this->mes; 		
 	}
-
 	
 	public function getComprobante()
 	{
 
-		return $this->comprobante;
+		return $this->comprobante; 		
 	}
-
 	
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTipo($v)
 	{

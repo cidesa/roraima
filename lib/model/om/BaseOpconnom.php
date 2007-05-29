@@ -37,37 +37,32 @@ abstract class BaseOpconnom extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getRefprc()
 	{
 
-		return $this->refprc;
+		return $this->refprc; 		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

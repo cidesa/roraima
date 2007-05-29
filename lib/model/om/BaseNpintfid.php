@@ -105,9 +105,8 @@ abstract class BaseNpintfid extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFechaint($format = 'Y-m-d')
 	{
@@ -134,51 +133,50 @@ abstract class BaseNpintfid extends BaseObject  implements Persistent {
 	public function getDepos()
 	{
 
-		return $this->depos;
+		return number_format($this->depos,2,',','.');
+		
 	}
-
 	
 	public function getDeposacum()
 	{
 
-		return $this->deposacum;
+		return number_format($this->deposacum,2,',','.');
+		
 	}
-
 	
 	public function getCapital()
 	{
 
-		return $this->capital;
+		return number_format($this->capital,2,',','.');
+		
 	}
-
 	
 	public function getTasa()
 	{
 
-		return $this->tasa;
+		return number_format($this->tasa,2,',','.');
+		
 	}
-
 	
 	public function getInteres()
 	{
 
-		return $this->interes;
+		return number_format($this->interes,2,',','.');
+		
 	}
-
 	
 	public function getInteresacum()
 	{
 
-		return $this->interesacum;
+		return number_format($this->interesacum,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecdesde($v)
 	{

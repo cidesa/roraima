@@ -29,23 +29,20 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 	public function getCodtidev()
 	{
 
-		return $this->codtidev;
+		return $this->codtidev; 		
 	}
-
 	
 	public function getNomtidev()
 	{
 
-		return $this->nomtidev;
+		return $this->nomtidev; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtidev($v)
 	{

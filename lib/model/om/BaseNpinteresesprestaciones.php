@@ -45,16 +45,14 @@ abstract class BaseNpinteresesprestaciones extends BaseObject  implements Persis
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFecpago($format = 'Y-m-d')
 	{
@@ -103,23 +101,22 @@ abstract class BaseNpinteresesprestaciones extends BaseObject  implements Persis
 	public function getAcufondoantiguedad()
 	{
 
-		return $this->acufondoantiguedad;
+		return number_format($this->acufondoantiguedad,2,',','.');
+		
 	}
-
 	
 	public function getAcuinteres()
 	{
 
-		return $this->acuinteres;
+		return number_format($this->acuinteres,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

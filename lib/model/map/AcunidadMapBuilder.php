@@ -32,6 +32,8 @@ class AcunidadMapBuilder {
 
 		$tMap->setUseIdGenerator(false);
 
+		$tMap->addColumn('NUMUNI', 'Numuni', 'string', CreoleTypes::VARCHAR, true, 4);
+
 		$tMap->addColumn('NOMUNI', 'Nomuni', 'string', CreoleTypes::VARCHAR, true, 30);
 
 		$tMap->addColumn('DESUNI', 'Desuni', 'string', CreoleTypes::VARCHAR, false, 200);

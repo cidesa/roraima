@@ -33,30 +33,26 @@ abstract class BaseFordefunimed extends BaseObject  implements Persistent {
 	public function getCodunimed()
 	{
 
-		return $this->codunimed;
+		return $this->codunimed; 		
 	}
-
 	
 	public function getDesunimed()
 	{
 
-		return $this->desunimed;
+		return $this->desunimed; 		
 	}
-
 	
 	public function getNomabrunimed()
 	{
 
-		return $this->nomabrunimed;
+		return $this->nomabrunimed; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodunimed($v)
 	{

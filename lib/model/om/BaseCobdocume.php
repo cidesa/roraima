@@ -93,23 +93,20 @@ abstract class BaseCobdocume extends BaseObject  implements Persistent {
 	public function getRefdoc()
 	{
 
-		return $this->refdoc;
+		return $this->refdoc; 		
 	}
-
 	
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getCodmov()
 	{
 
-		return $this->codmov;
+		return $this->codmov; 		
 	}
-
 	
 	public function getFecemi($format = 'Y-m-d')
 	{
@@ -158,58 +155,55 @@ abstract class BaseCobdocume extends BaseObject  implements Persistent {
 	public function getOridoc()
 	{
 
-		return $this->oridoc;
+		return $this->oridoc; 		
 	}
-
 	
 	public function getDesdoc()
 	{
 
-		return $this->desdoc;
+		return $this->desdoc; 		
 	}
-
 	
 	public function getMondoc()
 	{
 
-		return $this->mondoc;
+		return number_format($this->mondoc,2,',','.');
+		
 	}
-
 	
 	public function getRecdoc()
 	{
 
-		return $this->recdoc;
+		return number_format($this->recdoc,2,',','.');
+		
 	}
-
 	
 	public function getDscdoc()
 	{
 
-		return $this->dscdoc;
+		return number_format($this->dscdoc,2,',','.');
+		
 	}
-
 	
 	public function getAbodoc()
 	{
 
-		return $this->abodoc;
+		return number_format($this->abodoc,2,',','.');
+		
 	}
-
 	
 	public function getSaldoc()
 	{
 
-		return $this->saldoc;
+		return number_format($this->saldoc,2,',','.');
+		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -236,16 +230,14 @@ abstract class BaseCobdocume extends BaseObject  implements Persistent {
 	public function getStadoc()
 	{
 
-		return $this->stadoc;
+		return $this->stadoc; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getFeccom($format = 'Y-m-d')
 	{
@@ -272,16 +264,14 @@ abstract class BaseCobdocume extends BaseObject  implements Persistent {
 	public function getReffac()
 	{
 
-		return $this->reffac;
+		return $this->reffac; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefdoc($v)
 	{

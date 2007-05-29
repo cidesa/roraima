@@ -169,16 +169,14 @@ abstract class BaseFcmodinm extends BaseObject  implements Persistent {
 	public function getRefmod()
 	{
 
-		return $this->refmod;
+		return $this->refmod; 		
 	}
-
 	
 	public function getNroinm()
 	{
 
-		return $this->nroinm;
+		return $this->nroinm; 		
 	}
-
 	
 	public function getFecmod($format = 'Y-m-d')
 	{
@@ -205,30 +203,26 @@ abstract class BaseFcmodinm extends BaseObject  implements Persistent {
 	public function getCodcatfis()
 	{
 
-		return $this->codcatfis;
+		return $this->codcatfis; 		
 	}
-
 	
 	public function getCoduso()
 	{
 
-		return $this->coduso;
+		return $this->coduso; 		
 	}
-
 	
 	public function getCodcarinm()
 	{
 
-		return $this->codcarinm;
+		return $this->codcarinm; 		
 	}
-
 	
 	public function getCodsitinm()
 	{
 
-		return $this->codsitinm;
+		return $this->codsitinm; 		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -277,100 +271,90 @@ abstract class BaseFcmodinm extends BaseObject  implements Persistent {
 	public function getDirinm()
 	{
 
-		return $this->dirinm;
+		return $this->dirinm; 		
 	}
-
 	
 	public function getLinnor()
 	{
 
-		return $this->linnor;
+		return $this->linnor; 		
 	}
-
 	
 	public function getLinsur()
 	{
 
-		return $this->linsur;
+		return $this->linsur; 		
 	}
-
 	
 	public function getLinest()
 	{
 
-		return $this->linest;
+		return $this->linest; 		
 	}
-
 	
 	public function getLinoes()
 	{
 
-		return $this->linoes;
+		return $this->linoes; 		
 	}
-
 	
 	public function getMtrter()
 	{
 
-		return $this->mtrter;
+		return number_format($this->mtrter,2,',','.');
+		
 	}
-
 	
 	public function getMtrcon()
 	{
 
-		return $this->mtrcon;
+		return number_format($this->mtrcon,2,',','.');
+		
 	}
-
 	
 	public function getBster()
 	{
 
-		return $this->bster;
+		return number_format($this->bster,2,',','.');
+		
 	}
-
 	
 	public function getBscon()
 	{
 
-		return $this->bscon;
+		return number_format($this->bscon,2,',','.');
+		
 	}
-
 	
 	public function getDocpro()
 	{
 
-		return $this->docpro;
+		return $this->docpro; 		
 	}
-
 	
 	public function getCodcatfisant()
 	{
 
-		return $this->codcatfisant;
+		return $this->codcatfisant; 		
 	}
-
 	
 	public function getCodusoant()
 	{
 
-		return $this->codusoant;
+		return $this->codusoant; 		
 	}
-
 	
 	public function getCodcarinmant()
 	{
 
-		return $this->codcarinmant;
+		return $this->codcarinmant; 		
 	}
-
 	
 	public function getCodsitinmant()
 	{
 
-		return $this->codsitinmant;
+		return $this->codsitinmant; 		
 	}
-
 	
 	public function getFecpagant($format = 'Y-m-d')
 	{
@@ -419,93 +403,84 @@ abstract class BaseFcmodinm extends BaseObject  implements Persistent {
 	public function getDirinmant()
 	{
 
-		return $this->dirinmant;
+		return $this->dirinmant; 		
 	}
-
 	
 	public function getLinnorant()
 	{
 
-		return $this->linnorant;
+		return $this->linnorant; 		
 	}
-
 	
 	public function getLinsurant()
 	{
 
-		return $this->linsurant;
+		return $this->linsurant; 		
 	}
-
 	
 	public function getLinestant()
 	{
 
-		return $this->linestant;
+		return $this->linestant; 		
 	}
-
 	
 	public function getLinoesant()
 	{
 
-		return $this->linoesant;
+		return $this->linoesant; 		
 	}
-
 	
 	public function getMtrterant()
 	{
 
-		return $this->mtrterant;
+		return number_format($this->mtrterant,2,',','.');
+		
 	}
-
 	
 	public function getMtrconant()
 	{
 
-		return $this->mtrconant;
+		return number_format($this->mtrconant,2,',','.');
+		
 	}
-
 	
 	public function getBsterant()
 	{
 
-		return $this->bsterant;
+		return number_format($this->bsterant,2,',','.');
+		
 	}
-
 	
 	public function getBsconant()
 	{
 
-		return $this->bsconant;
+		return number_format($this->bsconant,2,',','.');
+		
 	}
-
 	
 	public function getDocproant()
 	{
 
-		return $this->docproant;
+		return $this->docproant; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getCodcatinm()
 	{
 
-		return $this->codcatinm;
+		return $this->codcatinm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefmod($v)
 	{

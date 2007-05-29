@@ -69,16 +69,14 @@ abstract class BaseFcmodapu extends BaseObject  implements Persistent {
 	public function getRefmod()
 	{
 
-		return $this->refmod;
+		return $this->refmod; 		
 	}
-
 	
 	public function getNrocon()
 	{
 
-		return $this->nrocon;
+		return $this->nrocon; 		
 	}
-
 	
 	public function getFecmod($format = 'Y-m-d')
 	{
@@ -105,72 +103,66 @@ abstract class BaseFcmodapu extends BaseObject  implements Persistent {
 	public function getTipapu()
 	{
 
-		return $this->tipapu;
+		return $this->tipapu; 		
 	}
-
 	
 	public function getDesapu()
 	{
 
-		return $this->desapu;
+		return $this->desapu; 		
 	}
-
 	
 	public function getMonapu()
 	{
 
-		return $this->monapu;
+		return number_format($this->monapu,2,',','.');
+		
 	}
-
 	
 	public function getMonimp()
 	{
 
-		return $this->monimp;
+		return number_format($this->monimp,2,',','.');
+		
 	}
-
 	
 	public function getTipapuant()
 	{
 
-		return $this->tipapuant;
+		return $this->tipapuant; 		
 	}
-
 	
 	public function getDesapuant()
 	{
 
-		return $this->desapuant;
+		return $this->desapuant; 		
 	}
-
 	
 	public function getMonapuant()
 	{
 
-		return $this->monapuant;
+		return number_format($this->monapuant,2,',','.');
+		
 	}
-
 	
 	public function getMonimpant()
 	{
 
-		return $this->monimpant;
+		return number_format($this->monimpant,2,',','.');
+		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefmod($v)
 	{

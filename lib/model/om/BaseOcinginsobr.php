@@ -37,37 +37,32 @@ abstract class BaseOcinginsobr extends BaseObject  implements Persistent {
 	public function getCodobr()
 	{
 
-		return $this->codobr;
+		return $this->codobr; 		
 	}
-
 	
 	public function getCedins()
 	{
 
-		return $this->cedins;
+		return $this->cedins; 		
 	}
-
 	
 	public function getNomins()
 	{
 
-		return $this->nomins;
+		return $this->nomins; 		
 	}
-
 	
 	public function getNumciv()
 	{
 
-		return $this->numciv;
+		return $this->numciv; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodobr($v)
 	{

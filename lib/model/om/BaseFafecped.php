@@ -49,30 +49,28 @@ abstract class BaseFafecped extends BaseObject  implements Persistent {
 	public function getNroped()
 	{
 
-		return $this->nroped;
+		return $this->nroped; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCanent()
 	{
 
-		return $this->canent;
+		return number_format($this->canent,2,',','.');
+		
 	}
-
 	
 	public function getCanaju()
 	{
 
-		return $this->canaju;
+		return number_format($this->canaju,2,',','.');
+		
 	}
-
 	
 	public function getFecent($format = 'Y-m-d')
 	{
@@ -121,16 +119,14 @@ abstract class BaseFafecped extends BaseObject  implements Persistent {
 	public function getStafec()
 	{
 
-		return $this->stafec;
+		return $this->stafec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNroped($v)
 	{

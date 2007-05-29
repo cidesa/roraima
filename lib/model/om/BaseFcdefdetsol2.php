@@ -41,44 +41,38 @@ abstract class BaseFcdefdetsol2 extends BaseObject  implements Persistent {
 	public function getCodsol()
 	{
 
-		return $this->codsol;
+		return $this->codsol; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getCuantos()
 	{
 
-		return $this->cuantos;
+		return $this->cuantos; 		
 	}
-
 	
 	public function getPropie()
 	{
 
-		return $this->propie;
+		return $this->propie; 		
 	}
-
 	
 	public function getImprim()
 	{
 
-		return $this->imprim;
+		return $this->imprim; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsol($v)
 	{

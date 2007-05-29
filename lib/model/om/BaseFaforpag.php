@@ -45,51 +45,45 @@ abstract class BaseFaforpag extends BaseObject  implements Persistent {
 	public function getReffac()
 	{
 
-		return $this->reffac;
+		return $this->reffac; 		
 	}
-
 	
 	public function getTippag()
 	{
 
-		return $this->tippag;
+		return $this->tippag; 		
 	}
-
 	
 	public function getNropag()
 	{
 
-		return $this->nropag;
+		return $this->nropag; 		
 	}
-
 	
 	public function getNomban()
 	{
 
-		return $this->nomban;
+		return $this->nomban; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getNumero()
 	{
 
-		return $this->numero;
+		return $this->numero; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReffac($v)
 	{

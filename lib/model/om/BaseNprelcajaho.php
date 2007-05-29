@@ -41,44 +41,42 @@ abstract class BaseNprelcajaho extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getConret()
 	{
 
-		return $this->conret;
+		return number_format($this->conret,2,',','.');
+		
 	}
-
 	
 	public function getConapo()
 	{
 
-		return $this->conapo;
+		return number_format($this->conapo,2,',','.');
+		
 	}
-
 	
 	public function getConpre()
 	{
 
-		return $this->conpre;
+		return number_format($this->conpre,2,',','.');
+		
 	}
-
 	
 	public function getConseg()
 	{
 
-		return $this->conseg;
+		return number_format($this->conseg,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

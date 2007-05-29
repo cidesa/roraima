@@ -229,37 +229,32 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodmue()
 	{
 
-		return $this->codmue;
+		return $this->codmue; 		
 	}
-
 	
 	public function getDesmue()
 	{
 
-		return $this->desmue;
+		return $this->desmue; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getFecreg($format = 'Y-m-d')
 	{
@@ -396,247 +391,220 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 	public function getOrdrcp()
 	{
 
-		return $this->ordrcp;
+		return $this->ordrcp; 		
 	}
-
 	
 	public function getFotmue()
 	{
 
-		return $this->fotmue;
+		return $this->fotmue; 		
 	}
-
 	
 	public function getMarmue()
 	{
 
-		return $this->marmue;
+		return $this->marmue; 		
 	}
-
 	
 	public function getModmue()
 	{
 
-		return $this->modmue;
+		return $this->modmue; 		
 	}
-
 	
 	public function getAnomue()
 	{
 
-		return $this->anomue;
+		return $this->anomue; 		
 	}
-
 	
 	public function getColmue()
 	{
 
-		return $this->colmue;
+		return $this->colmue; 		
 	}
-
 	
 	public function getCodubi()
 	{
 
-		return $this->codubi;
+		return $this->codubi; 		
 	}
-
 	
 	public function getPesmue()
 	{
 
-		return $this->pesmue;
+		return $this->pesmue; 		
 	}
-
 	
 	public function getCapmue()
 	{
 
-		return $this->capmue;
+		return $this->capmue; 		
 	}
-
 	
 	public function getTipmue()
 	{
 
-		return $this->tipmue;
+		return $this->tipmue; 		
 	}
-
 	
 	public function getViduti()
 	{
 
-		return $this->viduti;
+		return $this->viduti; 		
 	}
-
 	
 	public function getLngmue()
 	{
 
-		return $this->lngmue;
+		return $this->lngmue; 		
 	}
-
 	
 	public function getNropie()
 	{
 
-		return $this->nropie;
+		return $this->nropie; 		
 	}
-
 	
 	public function getSermue()
 	{
 
-		return $this->sermue;
+		return $this->sermue; 		
 	}
-
 	
 	public function getUsomue()
 	{
 
-		return $this->usomue;
+		return $this->usomue; 		
 	}
-
 	
 	public function getAltmue()
 	{
 
-		return $this->altmue;
+		return $this->altmue; 		
 	}
-
 	
 	public function getLarmue()
 	{
 
-		return $this->larmue;
+		return $this->larmue; 		
 	}
-
 	
 	public function getAncmue()
 	{
 
-		return $this->ancmue;
+		return $this->ancmue; 		
 	}
-
 	
 	public function getCoddis()
 	{
 
-		return $this->coddis;
+		return $this->coddis; 		
 	}
-
 	
 	public function getDetmue()
 	{
 
-		return $this->detmue;
+		return $this->detmue; 		
 	}
-
 	
 	public function getEdomue()
 	{
 
-		return $this->edomue;
+		return $this->edomue; 		
 	}
-
 	
 	public function getMunmue()
 	{
 
-		return $this->munmue;
+		return $this->munmue; 		
 	}
-
 	
 	public function getDepmue()
 	{
 
-		return $this->depmue;
+		return $this->depmue; 		
 	}
-
 	
 	public function getDirmue()
 	{
 
-		return $this->dirmue;
+		return $this->dirmue; 		
 	}
-
 	
 	public function getUbimue()
 	{
 
-		return $this->ubimue;
+		return $this->ubimue; 		
 	}
-
 	
 	public function getMesdep()
 	{
 
-		return $this->mesdep;
+		return number_format($this->mesdep,2,',','.');
+		
 	}
-
 	
 	public function getValini()
 	{
 
-		return $this->valini;
+		return number_format($this->valini,2,',','.');
+		
 	}
-
 	
 	public function getValres()
 	{
 
-		return $this->valres;
+		return number_format($this->valres,2,',','.');
+		
 	}
-
 	
 	public function getVallib()
 	{
 
-		return $this->vallib;
+		return number_format($this->vallib,2,',','.');
+		
 	}
-
 	
 	public function getValrex()
 	{
 
-		return $this->valrex;
+		return number_format($this->valrex,2,',','.');
+		
 	}
-
 	
 	public function getCosrep()
 	{
 
-		return $this->cosrep;
+		return number_format($this->cosrep,2,',','.');
+		
 	}
-
 	
 	public function getDepmen()
 	{
 
-		return $this->depmen;
+		return number_format($this->depmen,2,',','.');
+		
 	}
-
 	
 	public function getDepacu()
 	{
 
-		return $this->depacu;
+		return number_format($this->depacu,2,',','.');
+		
 	}
-
 	
 	public function getStamue()
 	{
 
-		return $this->stamue;
+		return $this->stamue; 		
 	}
-
 	
 	public function getCodalt()
 	{
 
-		return $this->codalt;
+		return $this->codalt; 		
 	}
-
 	
 	public function getFecrcp($format = 'Y-m-d')
 	{
@@ -663,44 +631,41 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 	public function getValadi()
 	{
 
-		return $this->valadi;
+		return number_format($this->valadi,2,',','.');
+		
 	}
-
 	
 	public function getAumviduti()
 	{
 
-		return $this->aumviduti;
+		return number_format($this->aumviduti,2,',','.');
+		
 	}
-
 	
 	public function getDimviduti()
 	{
 
-		return $this->dimviduti;
+		return number_format($this->dimviduti,2,',','.');
+		
 	}
-
 	
 	public function getStasem()
 	{
 
-		return $this->stasem;
+		return $this->stasem; 		
 	}
-
 	
 	public function getStainm()
 	{
 
-		return $this->stainm;
+		return $this->stainm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

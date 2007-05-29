@@ -65,86 +65,78 @@ abstract class BaseCsrecobrdir extends BaseObject  implements Persistent {
 	public function getCodprod()
 	{
 
-		return $this->codprod;
+		return $this->codprod; 		
 	}
-
 	
 	public function getCodfas()
 	{
 
-		return $this->codfas;
+		return $this->codfas; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getCanemp()
 	{
 
-		return $this->canemp;
+		return number_format($this->canemp,2,',','.');
+		
 	}
-
 	
 	public function getHoremp()
 	{
 
-		return $this->horemp;
+		return number_format($this->horemp,2,',','.');
+		
 	}
-
 	
 	public function getTipcon()
 	{
 
-		return $this->tipcon;
+		return $this->tipcon; 		
 	}
-
 	
 	public function getCostot()
 	{
 
-		return $this->costot;
+		return number_format($this->costot,2,',','.');
+		
 	}
-
 	
 	public function getJornada()
 	{
 
-		return $this->jornada;
+		return $this->jornada; 		
 	}
-
 	
 	public function getDiavia()
 	{
 
-		return $this->diavia;
+		return number_format($this->diavia,2,',','.');
+		
 	}
-
 	
 	public function getNroord()
 	{
 
-		return $this->nroord;
+		return $this->nroord; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprod($v)
 	{

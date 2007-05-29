@@ -49,58 +49,53 @@ abstract class BaseNpcalconcol extends BaseObject  implements Persistent {
 	public function getCodctr()
 	{
 
-		return $this->codctr;
+		return $this->codctr; 		
 	}
-
 	
 	public function getCodcla()
 	{
 
-		return $this->codcla;
+		return $this->codcla; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCantra()
 	{
 
-		return $this->cantra;
+		return number_format($this->cantra,2,',','.');
+		
 	}
-
 	
 	public function getMoncla()
 	{
 
-		return $this->moncla;
+		return number_format($this->moncla,2,',','.');
+		
 	}
-
 	
 	public function getTotcla()
 	{
 
-		return $this->totcla;
+		return number_format($this->totcla,2,',','.');
+		
 	}
-
 	
 	public function getBascal()
 	{
 
-		return $this->bascal;
+		return $this->bascal; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodctr($v)
 	{

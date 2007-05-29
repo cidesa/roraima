@@ -53,23 +53,20 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getDesrec()
 	{
 
-		return $this->desrec;
+		return $this->desrec; 		
 	}
-
 	
 	public function getLimrec()
 	{
 
-		return $this->limrec;
+		return $this->limrec; 		
 	}
-
 	
 	public function getFecemi($format = 'Y-m-d')
 	{
@@ -118,30 +115,27 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 	public function getCanutr()
 	{
 
-		return $this->canutr;
+		return number_format($this->canutr,2,',','.');
+		
 	}
-
 	
 	public function getCodtiprec()
 	{
 
-		return $this->codtiprec;
+		return $this->codtiprec; 		
 	}
-
 	
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrec($v)
 	{

@@ -33,30 +33,26 @@ abstract class BaseNpguarde extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNomgua()
 	{
 
-		return $this->nomgua;
+		return $this->nomgua; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

@@ -41,23 +41,20 @@ abstract class BaseNpcontrato extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getDescon()
 	{
 
-		return $this->descon;
+		return $this->descon; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -106,9 +103,8 @@ abstract class BaseNpcontrato extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

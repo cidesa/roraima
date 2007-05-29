@@ -63,37 +63,35 @@ abstract class BaseNptabpre extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getDiames()
 	{
 
-		return $this->diames;
+		return number_format($this->diames,2,',','.');
+		
 	}
-
 	
 	public function getDiaano()
 	{
 
-		return $this->diaano;
+		return number_format($this->diaano,2,',','.');
+		
 	}
-
 	
 	public function getInteres()
 	{
 
-		return $this->interes;
+		return number_format($this->interes,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecpre($v)
 	{

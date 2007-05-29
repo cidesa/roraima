@@ -41,44 +41,38 @@ abstract class BaseNpjefes extends BaseObject  implements Persistent {
 	public function getPresupuesto()
 	{
 
-		return $this->presupuesto;
+		return $this->presupuesto; 		
 	}
-
 	
 	public function getAdministracion()
 	{
 
-		return $this->administracion;
+		return $this->administracion; 		
 	}
-
 	
 	public function getPersonal()
 	{
 
-		return $this->personal;
+		return $this->personal; 		
 	}
-
 	
 	public function getRector()
 	{
 
-		return $this->rector;
+		return $this->rector; 		
 	}
-
 	
 	public function getVicerector()
 	{
 
-		return $this->vicerector;
+		return $this->vicerector; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setPresupuesto($v)
 	{

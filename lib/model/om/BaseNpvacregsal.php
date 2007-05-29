@@ -61,23 +61,20 @@ abstract class BaseNpvacregsal extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getFechasalida($format = 'Y-m-d')
 	{
@@ -126,44 +123,40 @@ abstract class BaseNpvacregsal extends BaseObject  implements Persistent {
 	public function getDiadis()
 	{
 
-		return $this->diadis;
+		return number_format($this->diadis,2,',','.');
+		
 	}
-
 	
 	public function getPerini()
 	{
 
-		return $this->perini;
+		return $this->perini; 		
 	}
-
 	
 	public function getPerfin()
 	{
 
-		return $this->perfin;
+		return $this->perfin; 		
 	}
-
 	
 	public function getDiasbono()
 	{
 
-		return $this->diasbono;
+		return number_format($this->diasbono,2,',','.');
+		
 	}
-
 	
 	public function getStavac()
 	{
 
-		return $this->stavac;
+		return $this->stavac; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

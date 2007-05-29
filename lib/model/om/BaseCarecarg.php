@@ -49,58 +49,51 @@ abstract class BaseCarecarg extends BaseObject  implements Persistent {
 	public function getCodrgo()
 	{
 
-		return $this->codrgo;
+		return $this->codrgo; 		
 	}
-
 	
 	public function getNomrgo()
 	{
 
-		return $this->nomrgo;
+		return $this->nomrgo; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getTiprgo()
 	{
 
-		return $this->tiprgo;
+		return $this->tiprgo; 		
 	}
-
 	
 	public function getMonrgo()
 	{
 
-		return $this->monrgo;
+		return number_format($this->monrgo,2,',','.');
+		
 	}
-
 	
 	public function getCalcul()
 	{
 
-		return $this->calcul;
+		return $this->calcul; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrgo($v)
 	{

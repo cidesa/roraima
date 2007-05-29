@@ -61,51 +61,45 @@ abstract class BaseTsrelfonvia extends BaseObject  implements Persistent {
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getNomben()
 	{
 
-		return $this->nomben;
+		return $this->nomben; 		
 	}
-
 	
 	public function getMonche()
 	{
 
-		return $this->monche;
+		return number_format($this->monche,2,',','.');
+		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getFecemi($format = 'Y-m-d')
 	{
@@ -132,23 +126,20 @@ abstract class BaseTsrelfonvia extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getNumdep()
 	{
 
-		return $this->numdep;
+		return $this->numdep; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsol($v)
 	{

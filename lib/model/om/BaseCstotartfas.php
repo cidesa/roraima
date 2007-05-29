@@ -41,44 +41,39 @@ abstract class BaseCstotartfas extends BaseObject  implements Persistent {
 	public function getCodprod()
 	{
 
-		return $this->codprod;
+		return $this->codprod; 		
 	}
-
 	
 	public function getCodfas()
 	{
 
-		return $this->codfas;
+		return $this->codfas; 		
 	}
-
 	
 	public function getMonfas()
 	{
 
-		return $this->monfas;
+		return number_format($this->monfas,2,',','.');
+		
 	}
-
 	
 	public function getTipcal()
 	{
 
-		return $this->tipcal;
+		return $this->tipcal; 		
 	}
-
 	
 	public function getNroord()
 	{
 
-		return $this->nroord;
+		return $this->nroord; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprod($v)
 	{

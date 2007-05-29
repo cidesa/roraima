@@ -29,23 +29,21 @@ abstract class BaseTslibcom extends BaseObject  implements Persistent {
 	public function getNumlin()
 	{
 
-		return $this->numlin;
+		return number_format($this->numlin,2,',','.');
+		
 	}
-
 	
 	public function getDeslin()
 	{
 
-		return $this->deslin;
+		return $this->deslin; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumlin($v)
 	{

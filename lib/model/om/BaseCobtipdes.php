@@ -49,58 +49,52 @@ abstract class BaseCobtipdes extends BaseObject  implements Persistent {
 	public function getCoddes()
 	{
 
-		return $this->coddes;
+		return $this->coddes; 		
 	}
-
 	
 	public function getDesdes()
 	{
 
-		return $this->desdes;
+		return $this->desdes; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getTipdes()
 	{
 
-		return $this->tipdes;
+		return $this->tipdes; 		
 	}
-
 	
 	public function getValdes()
 	{
 
-		return $this->valdes;
+		return number_format($this->valdes,2,',','.');
+		
 	}
-
 	
 	public function getDiades()
 	{
 
-		return $this->diades;
+		return number_format($this->diades,2,',','.');
+		
 	}
-
 	
 	public function getEstret()
 	{
 
-		return $this->estret;
+		return $this->estret; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddes($v)
 	{

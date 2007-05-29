@@ -33,30 +33,26 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 	public function getCodret()
 	{
 
-		return $this->codret;
+		return $this->codret; 		
 	}
-
 	
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodret($v)
 	{

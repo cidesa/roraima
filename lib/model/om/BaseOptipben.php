@@ -29,23 +29,20 @@ abstract class BaseOptipben extends BaseObject  implements Persistent {
 	public function getCodtipben()
 	{
 
-		return $this->codtipben;
+		return $this->codtipben; 		
 	}
-
 	
 	public function getDestipben()
 	{
 
-		return $this->destipben;
+		return $this->destipben; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipben($v)
 	{

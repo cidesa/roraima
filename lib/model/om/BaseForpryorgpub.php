@@ -37,37 +37,33 @@ abstract class BaseForpryorgpub extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodorg()
 	{
 
-		return $this->codorg;
+		return $this->codorg; 		
 	}
-
 	
 	public function getMonapo()
 	{
 
-		return $this->monapo;
+		return number_format($this->monapo,2,',','.');
+		
 	}
-
 	
 	public function getReseje()
 	{
 
-		return $this->reseje;
+		return $this->reseje; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

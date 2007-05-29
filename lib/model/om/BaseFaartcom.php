@@ -29,23 +29,20 @@ abstract class BaseFaartcom extends BaseObject  implements Persistent {
 	public function getCodcom()
 	{
 
-		return $this->codcom;
+		return $this->codcom; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcom($v)
 	{

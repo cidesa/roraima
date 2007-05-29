@@ -45,9 +45,8 @@ abstract class BaseNphispre extends BaseObject  implements Persistent {
 	public function getCodtippre()
 	{
 
-		return $this->codtippre;
+		return $this->codtippre; 		
 	}
-
 	
 	public function getFechispre($format = 'Y-m-d')
 	{
@@ -74,37 +73,34 @@ abstract class BaseNphispre extends BaseObject  implements Persistent {
 	public function getDeshispre()
 	{
 
-		return $this->deshispre;
+		return $this->deshispre; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getMonpre()
 	{
 
-		return $this->monpre;
+		return number_format($this->monpre,2,',','.');
+		
 	}
-
 	
 	public function getSaldo()
 	{
 
-		return $this->saldo;
+		return number_format($this->saldo,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtippre($v)
 	{

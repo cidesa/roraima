@@ -65,23 +65,20 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getRefban()
 	{
 
-		return $this->refban;
+		return $this->refban; 		
 	}
-
 	
 	public function getFecban($format = 'Y-m-d')
 	{
@@ -108,58 +105,51 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getDesban()
 	{
 
-		return $this->desban;
+		return $this->desban; 		
 	}
-
 	
 	public function getMonmov()
 	{
 
-		return $this->monmov;
+		return number_format($this->monmov,2,',','.');
+		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getStacon()
 	{
 
-		return $this->stacon;
+		return $this->stacon; 		
 	}
-
 	
 	public function getTransito()
 	{
 
-		return $this->transito;
+		return $this->transito; 		
 	}
-
 	
 	public function getStacon1()
 	{
 
-		return $this->stacon1;
+		return $this->stacon1; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumcue($v)
 	{

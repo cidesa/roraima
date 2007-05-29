@@ -41,44 +41,40 @@ abstract class BaseCadetordc extends BaseObject  implements Persistent {
 	public function getOrdcon()
 	{
 
-		return $this->ordcon;
+		return $this->ordcon; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getDescon()
 	{
 
-		return $this->descon;
+		return $this->descon; 		
 	}
-
 	
 	public function getMoncon()
 	{
 
-		return $this->moncon;
+		return number_format($this->moncon,2,',','.');
+		
 	}
-
 	
 	public function getCancon()
 	{
 
-		return $this->cancon;
+		return number_format($this->cancon,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrdcon($v)
 	{

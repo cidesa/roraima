@@ -45,51 +45,44 @@ abstract class BaseOcinsval extends BaseObject  implements Persistent {
 	public function getCedins()
 	{
 
-		return $this->cedins;
+		return $this->cedins; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNumval()
 	{
 
-		return $this->numval;
+		return $this->numval; 		
 	}
-
 	
 	public function getCodtipval()
 	{
 
-		return $this->codtipval;
+		return $this->codtipval; 		
 	}
-
 	
 	public function getNomins()
 	{
 
-		return $this->nomins;
+		return $this->nomins; 		
 	}
-
 	
 	public function getNumciv()
 	{
 
-		return $this->numciv;
+		return $this->numciv; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCedins($v)
 	{

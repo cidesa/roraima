@@ -57,23 +57,20 @@ abstract class BaseFcsolneg extends BaseObject  implements Persistent {
 	public function getNumneg()
 	{
 
-		return $this->numneg;
+		return $this->numneg; 		
 	}
-
 	
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getMotneg()
 	{
 
-		return $this->motneg;
+		return $this->motneg; 		
 	}
-
 	
 	public function getFecneg($format = 'Y-m-d')
 	{
@@ -100,44 +97,38 @@ abstract class BaseFcsolneg extends BaseObject  implements Persistent {
 	public function getResolu()
 	{
 
-		return $this->resolu;
+		return $this->resolu; 		
 	}
-
 	
 	public function getTomon()
 	{
 
-		return $this->tomon;
+		return $this->tomon; 		
 	}
-
 	
 	public function getFolion()
 	{
 
-		return $this->folion;
+		return $this->folion; 		
 	}
-
 	
 	public function getNumeron()
 	{
 
-		return $this->numeron;
+		return $this->numeron; 		
 	}
-
 	
 	public function getFunneg()
 	{
 
-		return $this->funneg;
+		return $this->funneg; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumneg($v)
 	{

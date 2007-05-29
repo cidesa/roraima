@@ -157,16 +157,14 @@ abstract class BaseOpautpag extends BaseObject  implements Persistent {
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getTipcau()
 	{
 
-		return $this->tipcau;
+		return $this->tipcau; 		
 	}
-
 	
 	public function getFecemi($format = 'Y-m-d')
 	{
@@ -193,86 +191,77 @@ abstract class BaseOpautpag extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getNomben()
 	{
 
-		return $this->nomben;
+		return $this->nomben; 		
 	}
-
 	
 	public function getMonord()
 	{
 
-		return $this->monord;
+		return number_format($this->monord,2,',','.');
+		
 	}
-
 	
 	public function getDesord()
 	{
 
-		return $this->desord;
+		return $this->desord; 		
 	}
-
 	
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getMonret()
 	{
 
-		return $this->monret;
+		return number_format($this->monret,2,',','.');
+		
 	}
-
 	
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getCtaban()
 	{
 
-		return $this->ctaban;
+		return $this->ctaban; 		
 	}
-
 	
 	public function getCtapag()
 	{
 
-		return $this->ctapag;
+		return $this->ctapag; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getFecenvcon($format = 'Y-m-d')
 	{
@@ -321,16 +310,14 @@ abstract class BaseOpautpag extends BaseObject  implements Persistent {
 	public function getCtapagfin()
 	{
 
-		return $this->ctapagfin;
+		return $this->ctapagfin; 		
 	}
-
 	
 	public function getNombensus()
 	{
 
-		return $this->nombensus;
+		return $this->nombensus; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -379,9 +366,8 @@ abstract class BaseOpautpag extends BaseObject  implements Persistent {
 	public function getAnopre()
 	{
 
-		return $this->anopre;
+		return $this->anopre; 		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -408,65 +394,57 @@ abstract class BaseOpautpag extends BaseObject  implements Persistent {
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getObsord()
 	{
 
-		return $this->obsord;
+		return $this->obsord; 		
 	}
-
 	
 	public function getNumtiq()
 	{
 
-		return $this->numtiq;
+		return $this->numtiq; 		
 	}
-
 	
 	public function getPeraut()
 	{
 
-		return $this->peraut;
+		return $this->peraut; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getCedaut()
 	{
 
-		return $this->cedaut;
+		return $this->cedaut; 		
 	}
-
 	
 	public function getNomper1()
 	{
 
-		return $this->nomper1;
+		return $this->nomper1; 		
 	}
-
 	
 	public function getNomper2()
 	{
 
-		return $this->nomper2;
+		return $this->nomper2; 		
 	}
-
 	
 	public function getHorcon()
 	{
 
-		return $this->horcon;
+		return $this->horcon; 		
 	}
-
 	
 	public function getFeccon($format = 'Y-m-d')
 	{
@@ -493,16 +471,14 @@ abstract class BaseOpautpag extends BaseObject  implements Persistent {
 	public function getNomcat()
 	{
 
-		return $this->nomcat;
+		return $this->nomcat; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumord($v)
 	{

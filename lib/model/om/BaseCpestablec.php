@@ -65,86 +65,75 @@ abstract class BaseCpestablec extends BaseObject  implements Persistent {
 	public function getCodest()
 	{
 
-		return $this->codest;
+		return $this->codest; 		
 	}
-
 	
 	public function getCodent()
 	{
 
-		return $this->codent;
+		return $this->codent; 		
 	}
-
 	
 	public function getHosamb()
 	{
 
-		return $this->hosamb;
+		return $this->hosamb; 		
 	}
-
 	
 	public function getCodcen()
 	{
 
-		return $this->codcen;
+		return $this->codcen; 		
 	}
-
 	
 	public function getTipest()
 	{
 
-		return $this->tipest;
+		return $this->tipest; 		
 	}
-
 	
 	public function getDirest()
 	{
 
-		return $this->direst;
+		return $this->direst; 		
 	}
-
 	
 	public function getDesest()
 	{
 
-		return $this->desest;
+		return $this->desest; 		
 	}
-
 	
 	public function getUrbrur()
 	{
 
-		return $this->urbrur;
+		return $this->urbrur; 		
 	}
-
 	
 	public function getTiprur()
 	{
 
-		return $this->tiprur;
+		return $this->tiprur; 		
 	}
-
 	
 	public function getNrocam()
 	{
 
-		return $this->nrocam;
+		return number_format($this->nrocam,2,',','.');
+		
 	}
-
 	
 	public function getAtefir()
 	{
 
-		return $this->atefir;
+		return $this->atefir; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodest($v)
 	{

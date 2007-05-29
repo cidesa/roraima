@@ -65,16 +65,14 @@ abstract class BaseOpdetper extends BaseObject  implements Persistent {
 	public function getRefopp()
 	{
 
-		return $this->refopp;
+		return $this->refopp; 		
 	}
-
 	
 	public function getRefcuo()
 	{
 
-		return $this->refcuo;
+		return $this->refcuo; 		
 	}
-
 	
 	public function getFecinicuo($format = 'Y-m-d')
 	{
@@ -123,9 +121,9 @@ abstract class BaseOpdetper extends BaseObject  implements Persistent {
 	public function getMoncuo()
 	{
 
-		return $this->moncuo;
+		return number_format($this->moncuo,2,',','.');
+		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -152,44 +150,39 @@ abstract class BaseOpdetper extends BaseObject  implements Persistent {
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getCtaban()
 	{
 
-		return $this->ctaban;
+		return $this->ctaban; 		
 	}
-
 	
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefopp($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseNptipper extends BaseObject  implements Persistent {
 	public function getCodper()
 	{
 
-		return $this->codper;
+		return $this->codper; 		
 	}
-
 	
 	public function getDesper()
 	{
 
-		return $this->desper;
+		return $this->desper; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodper($v)
 	{

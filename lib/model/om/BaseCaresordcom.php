@@ -65,86 +65,81 @@ abstract class BaseCaresordcom extends BaseObject  implements Persistent {
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getDesres()
 	{
 
-		return $this->desres;
+		return $this->desres; 		
 	}
-
 	
 	public function getCodartpro()
 	{
 
-		return $this->codartpro;
+		return $this->codartpro; 		
 	}
-
 	
 	public function getCanord()
 	{
 
-		return $this->canord;
+		return number_format($this->canord,2,',','.');
+		
 	}
-
 	
 	public function getCanaju()
 	{
 
-		return $this->canaju;
+		return number_format($this->canaju,2,',','.');
+		
 	}
-
 	
 	public function getCanrec()
 	{
 
-		return $this->canrec;
+		return number_format($this->canrec,2,',','.');
+		
 	}
-
 	
 	public function getCantot()
 	{
 
-		return $this->cantot;
+		return number_format($this->cantot,2,',','.');
+		
 	}
-
 	
 	public function getCosto()
 	{
 
-		return $this->costo;
+		return number_format($this->costo,2,',','.');
+		
 	}
-
 	
 	public function getRgoart()
 	{
 
-		return $this->rgoart;
+		return number_format($this->rgoart,2,',','.');
+		
 	}
-
 	
 	public function getTotart()
 	{
 
-		return $this->totart;
+		return number_format($this->totart,2,',','.');
+		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrdcom($v)
 	{

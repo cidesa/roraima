@@ -41,44 +41,38 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 	public function getCodmul()
 	{
 
-		return $this->codmul;
+		return $this->codmul; 		
 	}
-
 	
 	public function getNommul()
 	{
 
-		return $this->nommul;
+		return $this->nommul; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getModo()
 	{
 
-		return $this->modo;
+		return $this->modo; 		
 	}
-
 	
 	public function getMonpro()
 	{
 
-		return $this->monpro;
+		return $this->monpro; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmul($v)
 	{

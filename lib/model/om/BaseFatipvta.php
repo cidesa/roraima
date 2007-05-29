@@ -29,23 +29,20 @@ abstract class BaseFatipvta extends BaseObject  implements Persistent {
 	public function getCodtivta()
 	{
 
-		return $this->codtivta;
+		return $this->codtivta; 		
 	}
-
 	
 	public function getNomtivta()
 	{
 
-		return $this->nomtivta;
+		return $this->nomtivta; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtivta($v)
 	{

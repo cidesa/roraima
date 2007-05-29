@@ -65,86 +65,78 @@ abstract class BaseCsdefemp extends BaseObject  implements Persistent {
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getDiremp()
 	{
 
-		return $this->diremp;
+		return $this->diremp; 		
 	}
-
 	
 	public function getTelemp()
 	{
 
-		return $this->telemp;
+		return $this->telemp; 		
 	}
-
 	
 	public function getFaxemp()
 	{
 
-		return $this->faxemp;
+		return $this->faxemp; 		
 	}
-
 	
 	public function getPorgasadm()
 	{
 
-		return $this->porgasadm;
+		return number_format($this->porgasadm,2,',','.');
+		
 	}
-
 	
 	public function getPormarutil()
 	{
 
-		return $this->pormarutil;
+		return number_format($this->pormarutil,2,',','.');
+		
 	}
-
 	
 	public function getPorpermat()
 	{
 
-		return $this->porpermat;
+		return number_format($this->porpermat,2,',','.');
+		
 	}
-
 	
 	public function getCodtipdig()
 	{
 
-		return $this->codtipdig;
+		return $this->codtipdig; 		
 	}
-
 	
 	public function getCodtipvia()
 	{
 
-		return $this->codtipvia;
+		return $this->codtipvia; 		
 	}
-
 	
 	public function getCodtipfab()
 	{
 
-		return $this->codtipfab;
+		return $this->codtipfab; 		
 	}
-
 	
 	public function getValut()
 	{
 
-		return $this->valut;
+		return number_format($this->valut,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNomemp($v)
 	{

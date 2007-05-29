@@ -125,16 +125,14 @@ abstract class BaseFcmodveh extends BaseObject  implements Persistent {
 	public function getRefmod()
 	{
 
-		return $this->refmod;
+		return $this->refmod; 		
 	}
-
 	
 	public function getPlaveh()
 	{
 
-		return $this->plaveh;
+		return $this->plaveh; 		
 	}
-
 	
 	public function getFecmod($format = 'Y-m-d')
 	{
@@ -161,170 +159,150 @@ abstract class BaseFcmodveh extends BaseObject  implements Persistent {
 	public function getCoduso()
 	{
 
-		return $this->coduso;
+		return $this->coduso; 		
 	}
-
 	
 	public function getAnoveh()
 	{
 
-		return $this->anoveh;
+		return number_format($this->anoveh,2,',','.');
+		
 	}
-
 	
 	public function getSermot()
 	{
 
-		return $this->sermot;
+		return $this->sermot; 		
 	}
-
 	
 	public function getSercar()
 	{
 
-		return $this->sercar;
+		return $this->sercar; 		
 	}
-
 	
 	public function getMarveh()
 	{
 
-		return $this->marveh;
+		return $this->marveh; 		
 	}
-
 	
 	public function getColveh()
 	{
 
-		return $this->colveh;
+		return $this->colveh; 		
 	}
-
 	
 	public function getValori()
 	{
 
-		return $this->valori;
+		return number_format($this->valori,2,',','.');
+		
 	}
-
 	
 	public function getModveh()
 	{
 
-		return $this->modveh;
+		return $this->modveh; 		
 	}
-
 	
 	public function getDueant()
 	{
 
-		return $this->dueant;
+		return $this->dueant; 		
 	}
-
 	
 	public function getDirant()
 	{
 
-		return $this->dirant;
+		return $this->dirant; 		
 	}
-
 	
 	public function getPlaant()
 	{
 
-		return $this->plaant;
+		return $this->plaant; 		
 	}
-
 	
 	public function getCodusoant()
 	{
 
-		return $this->codusoant;
+		return $this->codusoant; 		
 	}
-
 	
 	public function getAnovehant()
 	{
 
-		return $this->anovehant;
+		return number_format($this->anovehant,2,',','.');
+		
 	}
-
 	
 	public function getSermotant()
 	{
 
-		return $this->sermotant;
+		return $this->sermotant; 		
 	}
-
 	
 	public function getSercarant()
 	{
 
-		return $this->sercarant;
+		return $this->sercarant; 		
 	}
-
 	
 	public function getMarvehant()
 	{
 
-		return $this->marvehant;
+		return $this->marvehant; 		
 	}
-
 	
 	public function getColvehant()
 	{
 
-		return $this->colvehant;
+		return $this->colvehant; 		
 	}
-
 	
 	public function getValoriant()
 	{
 
-		return $this->valoriant;
+		return number_format($this->valoriant,2,',','.');
+		
 	}
-
 	
 	public function getModvehant()
 	{
 
-		return $this->modvehant;
+		return $this->modvehant; 		
 	}
-
 	
 	public function getDueantant()
 	{
 
-		return $this->dueantant;
+		return $this->dueantant; 		
 	}
-
 	
 	public function getDirantant()
 	{
 
-		return $this->dirantant;
+		return $this->dirantant; 		
 	}
-
 	
 	public function getPlaantant()
 	{
 
-		return $this->plaantant;
+		return $this->plaantant; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefmod($v)
 	{

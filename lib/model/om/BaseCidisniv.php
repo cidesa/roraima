@@ -65,86 +65,84 @@ abstract class BaseCidisniv extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMonasi()
 	{
 
-		return $this->monasi;
+		return number_format($this->monasi,2,',','.');
+		
 	}
-
 	
 	public function getModificacion()
 	{
 
-		return $this->modificacion;
+		return number_format($this->modificacion,2,',','.');
+		
 	}
-
 	
 	public function getAsigactual()
 	{
 
-		return $this->asigactual;
+		return number_format($this->asigactual,2,',','.');
+		
 	}
-
 	
 	public function getMonprc()
 	{
 
-		return $this->monprc;
+		return number_format($this->monprc,2,',','.');
+		
 	}
-
 	
 	public function getMoncom()
 	{
 
-		return $this->moncom;
+		return number_format($this->moncom,2,',','.');
+		
 	}
-
 	
 	public function getMoncau()
 	{
 
-		return $this->moncau;
+		return number_format($this->moncau,2,',','.');
+		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getMondis()
 	{
 
-		return $this->mondis;
+		return number_format($this->mondis,2,',','.');
+		
 	}
-
 	
 	public function getDeuda()
 	{
 
-		return $this->deuda;
+		return number_format($this->deuda,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpre($v)
 	{

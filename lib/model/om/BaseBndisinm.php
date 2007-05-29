@@ -73,37 +73,32 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodmue()
 	{
 
-		return $this->codmue;
+		return $this->codmue; 		
 	}
-
 	
 	public function getNrodisinm()
 	{
 
-		return $this->nrodisinm;
+		return $this->nrodisinm; 		
 	}
-
 	
 	public function getMotdisinm()
 	{
 
-		return $this->motdisinm;
+		return $this->motdisinm; 		
 	}
-
 	
 	public function getTipdisinm()
 	{
 
-		return $this->tipdisinm;
+		return $this->tipdisinm; 		
 	}
-
 	
 	public function getFecdisinm($format = 'Y-m-d')
 	{
@@ -152,51 +147,45 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 	public function getMondisinm()
 	{
 
-		return $this->mondisinm;
+		return number_format($this->mondisinm,2,',','.');
+		
 	}
-
 	
 	public function getDetdisinm()
 	{
 
-		return $this->detdisinm;
+		return $this->detdisinm; 		
 	}
-
 	
 	public function getCodubiori()
 	{
 
-		return $this->codubiori;
+		return $this->codubiori; 		
 	}
-
 	
 	public function getCodubides()
 	{
 
-		return $this->codubides;
+		return $this->codubides; 		
 	}
-
 	
 	public function getObsdisinm()
 	{
 
-		return $this->obsdisinm;
+		return $this->obsdisinm; 		
 	}
-
 	
 	public function getStadisinm()
 	{
 
-		return $this->stadisinm;
+		return $this->stadisinm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

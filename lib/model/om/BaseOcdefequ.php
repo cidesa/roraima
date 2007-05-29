@@ -29,23 +29,20 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 	public function getCodequ()
 	{
 
-		return $this->codequ;
+		return $this->codequ; 		
 	}
-
 	
 	public function getDesequ()
 	{
 
-		return $this->desequ;
+		return $this->desequ; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodequ($v)
 	{

@@ -37,37 +37,32 @@ abstract class BaseCatippro extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getDespro()
 	{
 
-		return $this->despro;
+		return $this->despro; 		
 	}
-
 	
 	public function getCtaord()
 	{
 
-		return $this->ctaord;
+		return $this->ctaord; 		
 	}
-
 	
 	public function getCtaper()
 	{
 
-		return $this->ctaper;
+		return $this->ctaper; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

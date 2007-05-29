@@ -41,44 +41,38 @@ abstract class BaseFccajero extends BaseObject  implements Persistent {
 	public function getCodcaj()
 	{
 
-		return $this->codcaj;
+		return $this->codcaj; 		
 	}
-
 	
 	public function getCedcaj()
 	{
 
-		return $this->cedcaj;
+		return $this->cedcaj; 		
 	}
-
 	
 	public function getNomcaj()
 	{
 
-		return $this->nomcaj;
+		return $this->nomcaj; 		
 	}
-
 	
 	public function getDircaj()
 	{
 
-		return $this->dircaj;
+		return $this->dircaj; 		
 	}
-
 	
 	public function getTelcaj()
 	{
 
-		return $this->telcaj;
+		return $this->telcaj; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcaj($v)
 	{

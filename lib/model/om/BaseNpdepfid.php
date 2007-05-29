@@ -53,9 +53,8 @@ abstract class BaseNpdepfid extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFecnom($format = 'Y-m-d')
 	{
@@ -104,44 +103,41 @@ abstract class BaseNpdepfid extends BaseObject  implements Persistent {
 	public function getDevengado()
 	{
 
-		return $this->devengado;
+		return number_format($this->devengado,2,',','.');
+		
 	}
-
 	
 	public function getDiasdeposito()
 	{
 
-		return $this->diasdeposito;
+		return number_format($this->diasdeposito,2,',','.');
+		
 	}
-
 	
 	public function getFideicomiso()
 	{
 
-		return $this->fideicomiso;
+		return number_format($this->fideicomiso,2,',','.');
+		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

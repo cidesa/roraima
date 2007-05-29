@@ -29,23 +29,20 @@ abstract class BaseBncobseg extends BaseObject  implements Persistent {
 	public function getCodcob()
 	{
 
-		return $this->codcob;
+		return $this->codcob; 		
 	}
-
 	
 	public function getDescob()
 	{
 
-		return $this->descob;
+		return $this->descob; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcob($v)
 	{

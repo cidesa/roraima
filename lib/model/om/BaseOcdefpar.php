@@ -41,44 +41,39 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 	public function getRenpar()
 	{
 
-		return $this->renpar;
+		return $this->renpar; 		
 	}
-
 	
 	public function getCosuni()
 	{
 
-		return $this->cosuni;
+		return number_format($this->cosuni,2,',','.');
+		
 	}
-
 	
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getDespar()
 	{
 
-		return $this->despar;
+		return $this->despar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRenpar($v)
 	{

@@ -33,30 +33,26 @@ abstract class BaseTsfonpre extends BaseObject  implements Persistent {
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getTipemp()
 	{
 
-		return $this->tipemp;
+		return $this->tipemp; 		
 	}
-
 	
 	public function getTippre()
 	{
 
-		return $this->tippre;
+		return $this->tippre; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumche($v)
 	{

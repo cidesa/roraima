@@ -81,16 +81,14 @@ abstract class BaseCpprecom extends BaseObject  implements Persistent {
 	public function getRefprc()
 	{
 
-		return $this->refprc;
+		return $this->refprc; 		
 	}
-
 	
 	public function getTipprc()
 	{
 
-		return $this->tipprc;
+		return $this->tipprc; 		
 	}
-
 	
 	public function getFecprc($format = 'Y-m-d')
 	{
@@ -117,65 +115,61 @@ abstract class BaseCpprecom extends BaseObject  implements Persistent {
 	public function getAnoprc()
 	{
 
-		return $this->anoprc;
+		return $this->anoprc; 		
 	}
-
 	
 	public function getDesprc()
 	{
 
-		return $this->desprc;
+		return $this->desprc; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getMonprc()
 	{
 
-		return $this->monprc;
+		return number_format($this->monprc,2,',','.');
+		
 	}
-
 	
 	public function getSalcom()
 	{
 
-		return $this->salcom;
+		return number_format($this->salcom,2,',','.');
+		
 	}
-
 	
 	public function getSalcau()
 	{
 
-		return $this->salcau;
+		return number_format($this->salcau,2,',','.');
+		
 	}
-
 	
 	public function getSalpag()
 	{
 
-		return $this->salpag;
+		return number_format($this->salpag,2,',','.');
+		
 	}
-
 	
 	public function getSalaju()
 	{
 
-		return $this->salaju;
+		return number_format($this->salaju,2,',','.');
+		
 	}
-
 	
 	public function getStaprc()
 	{
 
-		return $this->staprc;
+		return $this->staprc; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -202,23 +196,20 @@ abstract class BaseCpprecom extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getRefsol()
 	{
 
-		return $this->refsol;
+		return $this->refsol; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefprc($v)
 	{

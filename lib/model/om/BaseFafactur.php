@@ -85,9 +85,8 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 	public function getReffac()
 	{
 
-		return $this->reffac;
+		return $this->reffac; 		
 	}
-
 	
 	public function getFecfac($format = 'Y-m-d')
 	{
@@ -114,58 +113,52 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getDesfac()
 	{
 
-		return $this->desfac;
+		return $this->desfac; 		
 	}
-
 	
 	public function getTipref()
 	{
 
-		return $this->tipref;
+		return $this->tipref; 		
 	}
-
 	
 	public function getMonfac()
 	{
 
-		return $this->monfac;
+		return number_format($this->monfac,2,',','.');
+		
 	}
-
 	
 	public function getMondesc()
 	{
 
-		return $this->mondesc;
+		return number_format($this->mondesc,2,',','.');
+		
 	}
-
 	
 	public function getConpag()
 	{
 
-		return $this->conpag;
+		return $this->conpag; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getReapor()
 	{
 
-		return $this->reapor;
+		return $this->reapor; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -192,44 +185,39 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getTipmon()
 	{
 
-		return $this->tipmon;
+		return $this->tipmon; 		
 	}
-
 	
 	public function getValmon()
 	{
 
-		return $this->valmon;
+		return number_format($this->valmon,2,',','.');
+		
 	}
-
 	
 	public function getNumcomord()
 	{
 
-		return $this->numcomord;
+		return $this->numcomord; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReffac($v)
 	{

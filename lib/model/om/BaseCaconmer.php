@@ -57,9 +57,8 @@ abstract class BaseCaconmer extends BaseObject  implements Persistent {
 	public function getConmer()
 	{
 
-		return $this->conmer;
+		return $this->conmer; 		
 	}
-
 	
 	public function getFeccon($format = 'Y-m-d')
 	{
@@ -86,58 +85,51 @@ abstract class BaseCaconmer extends BaseObject  implements Persistent {
 	public function getDescon()
 	{
 
-		return $this->descon;
+		return $this->descon; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getNumdoc()
 	{
 
-		return $this->numdoc;
+		return $this->numdoc; 		
 	}
-
 	
 	public function getMoncon()
 	{
 
-		return $this->moncon;
+		return number_format($this->moncon,2,',','.');
+		
 	}
-
 	
 	public function getStacon()
 	{
 
-		return $this->stacon;
+		return $this->stacon; 		
 	}
-
 	
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setConmer($v)
 	{

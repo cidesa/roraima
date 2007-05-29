@@ -89,16 +89,14 @@ abstract class BaseCpajuste extends BaseObject  implements Persistent {
 	public function getRefaju()
 	{
 
-		return $this->refaju;
+		return $this->refaju; 		
 	}
-
 	
 	public function getTipaju()
 	{
 
-		return $this->tipaju;
+		return $this->tipaju; 		
 	}
-
 	
 	public function getFecaju($format = 'Y-m-d')
 	{
@@ -125,44 +123,39 @@ abstract class BaseCpajuste extends BaseObject  implements Persistent {
 	public function getAnoaju()
 	{
 
-		return $this->anoaju;
+		return $this->anoaju; 		
 	}
-
 	
 	public function getRefere()
 	{
 
-		return $this->refere;
+		return $this->refere; 		
 	}
-
 	
 	public function getDesaju()
 	{
 
-		return $this->desaju;
+		return $this->desaju; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getTotaju()
 	{
 
-		return $this->totaju;
+		return number_format($this->totaju,2,',','.');
+		
 	}
-
 	
 	public function getStaaju()
 	{
 
-		return $this->staaju;
+		return $this->staaju; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -189,16 +182,15 @@ abstract class BaseCpajuste extends BaseObject  implements Persistent {
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getCuoanu()
 	{
 
-		return $this->cuoanu;
+		return number_format($this->cuoanu,2,',','.');
+		
 	}
-
 	
 	public function getFecanudes($format = 'Y-m-d')
 	{
@@ -247,9 +239,8 @@ abstract class BaseCpajuste extends BaseObject  implements Persistent {
 	public function getOrdpag()
 	{
 
-		return $this->ordpag;
+		return $this->ordpag; 		
 	}
-
 	
 	public function getFecenvcon($format = 'Y-m-d')
 	{
@@ -298,9 +289,8 @@ abstract class BaseCpajuste extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefaju($v)
 	{

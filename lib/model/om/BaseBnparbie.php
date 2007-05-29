@@ -33,30 +33,26 @@ abstract class BaseBnparbie extends BaseObject  implements Persistent {
 	public function getPardes()
 	{
 
-		return $this->pardes;
+		return $this->pardes; 		
 	}
-
 	
 	public function getParhas()
 	{
 
-		return $this->parhas;
+		return $this->parhas; 		
 	}
-
 	
 	public function getValrcp()
 	{
 
-		return $this->valrcp;
+		return $this->valrcp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setPardes($v)
 	{

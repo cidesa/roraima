@@ -61,9 +61,8 @@ abstract class BaseFcconpag extends BaseObject  implements Persistent {
 	public function getRefcon()
 	{
 
-		return $this->refcon;
+		return $this->refcon; 		
 	}
-
 	
 	public function getFeccon($format = 'Y-m-d')
 	{
@@ -90,51 +89,47 @@ abstract class BaseFcconpag extends BaseObject  implements Persistent {
 	public function getMoncon()
 	{
 
-		return $this->moncon;
+		return number_format($this->moncon,2,',','.');
+		
 	}
-
 	
 	public function getNumcuo()
 	{
 
-		return $this->numcuo;
+		return number_format($this->numcuo,2,',','.');
+		
 	}
-
 	
 	public function getMonini()
 	{
 
-		return $this->monini;
+		return number_format($this->monini,2,',','.');
+		
 	}
-
 	
 	public function getEstcon()
 	{
 
-		return $this->estcon;
+		return $this->estcon; 		
 	}
-
 	
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getObscon()
 	{
 
-		return $this->obscon;
+		return $this->obscon; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -161,9 +156,8 @@ abstract class BaseFcconpag extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefcon($v)
 	{

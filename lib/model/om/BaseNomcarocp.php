@@ -29,23 +29,20 @@ abstract class BaseNomcarocp extends BaseObject  implements Persistent {
 	public function getCodocp()
 	{
 
-		return $this->codocp;
+		return $this->codocp; 		
 	}
-
 	
 	public function getDesocp()
 	{
 
-		return $this->desocp;
+		return $this->desocp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodocp($v)
 	{

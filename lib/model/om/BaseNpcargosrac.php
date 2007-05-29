@@ -93,135 +93,119 @@ abstract class BaseNpcargosrac extends BaseObject  implements Persistent {
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getNomcar()
 	{
 
-		return $this->nomcar;
+		return $this->nomcar; 		
 	}
-
 	
 	public function getSuecar()
 	{
 
-		return $this->suecar;
+		return number_format($this->suecar,2,',','.');
+		
 	}
-
 	
 	public function getStacar()
 	{
 
-		return $this->stacar;
+		return $this->stacar; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCodocp()
 	{
 
-		return $this->codocp;
+		return $this->codocp; 		
 	}
-
 	
 	public function getPunmin()
 	{
 
-		return $this->punmin;
+		return number_format($this->punmin,2,',','.');
+		
 	}
-
 	
 	public function getGraocp()
 	{
 
-		return $this->graocp;
+		return $this->graocp; 		
 	}
-
 	
 	public function getComcar()
 	{
 
-		return $this->comcar;
+		return number_format($this->comcar,2,',','.');
+		
 	}
-
 	
 	public function getPasocp()
 	{
 
-		return $this->pasocp;
+		return $this->pasocp; 		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getTipper()
 	{
 
-		return $this->tipper;
+		return $this->tipper; 		
 	}
-
 	
 	public function getFeccar()
 	{
 
-		return $this->feccar;
+		return $this->feccar; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getNronom()
 	{
 
-		return $this->nronom;
+		return $this->nronom; 		
 	}
-
 	
 	public function getEstorg()
 	{
 
-		return $this->estorg;
+		return $this->estorg; 		
 	}
-
 	
 	public function getAnorac()
 	{
 
-		return $this->anorac;
+		return $this->anorac; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcar($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseFordefsitpre extends BaseObject  implements Persistent {
 	public function getCodsitpre()
 	{
 
-		return $this->codsitpre;
+		return $this->codsitpre; 		
 	}
-
 	
 	public function getDessitpre()
 	{
 
-		return $this->dessitpre;
+		return $this->dessitpre; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsitpre($v)
 	{

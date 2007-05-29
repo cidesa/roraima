@@ -29,23 +29,20 @@ abstract class BaseFaproalt extends BaseObject  implements Persistent {
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodalt()
 	{
 
-		return $this->codalt;
+		return $this->codalt; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodart($v)
 	{

@@ -49,58 +49,52 @@ abstract class BaseCadescto extends BaseObject  implements Persistent {
 	public function getCoddesc()
 	{
 
-		return $this->coddesc;
+		return $this->coddesc; 		
 	}
-
 	
 	public function getDesdesc()
 	{
 
-		return $this->desdesc;
+		return $this->desdesc; 		
 	}
-
 	
 	public function getTipdesc()
 	{
 
-		return $this->tipdesc;
+		return $this->tipdesc; 		
 	}
-
 	
 	public function getMondesc()
 	{
 
-		return $this->mondesc;
+		return number_format($this->mondesc,2,',','.');
+		
 	}
-
 	
 	public function getDiasapl()
 	{
 
-		return $this->diasapl;
+		return number_format($this->diasapl,2,',','.');
+		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getTipret()
 	{
 
-		return $this->tipret;
+		return $this->tipret; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddesc($v)
 	{

@@ -37,37 +37,33 @@ abstract class BaseCsdefmanobr extends BaseObject  implements Persistent {
 	public function getCodmanobr()
 	{
 
-		return $this->codmanobr;
+		return $this->codmanobr; 		
 	}
-
 	
 	public function getDesmanobr()
 	{
 
-		return $this->desmanobr;
+		return $this->desmanobr; 		
 	}
-
 	
 	public function getUnimed()
 	{
 
-		return $this->unimed;
+		return $this->unimed; 		
 	}
-
 	
 	public function getCosuni()
 	{
 
-		return $this->cosuni;
+		return number_format($this->cosuni,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmanobr($v)
 	{

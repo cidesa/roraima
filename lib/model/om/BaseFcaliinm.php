@@ -49,58 +49,54 @@ abstract class BaseFcaliinm extends BaseObject  implements Persistent {
 	public function getCodcatfis()
 	{
 
-		return $this->codcatfis;
+		return $this->codcatfis; 		
 	}
-
 	
 	public function getCoduso()
 	{
 
-		return $this->coduso;
+		return $this->coduso; 		
 	}
-
 	
 	public function getAnovig()
 	{
 
-		return $this->anovig;
+		return $this->anovig; 		
 	}
-
 	
 	public function getValorm()
 	{
 
-		return $this->valorm;
+		return number_format($this->valorm,2,',','.');
+		
 	}
-
 	
 	public function getPorvf()
 	{
 
-		return $this->porvf;
+		return number_format($this->porvf,2,',','.');
+		
 	}
-
 	
 	public function getAliter()
 	{
 
-		return $this->aliter;
+		return number_format($this->aliter,2,',','.');
+		
 	}
-
 	
 	public function getAlicon()
 	{
 
-		return $this->alicon;
+		return number_format($this->alicon,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcatfis($v)
 	{

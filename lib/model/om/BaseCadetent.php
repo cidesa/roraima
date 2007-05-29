@@ -41,44 +41,41 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 	public function getRcpart()
 	{
 
-		return $this->rcpart;
+		return $this->rcpart; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCanrec()
 	{
 
-		return $this->canrec;
+		return number_format($this->canrec,2,',','.');
+		
 	}
-
 	
 	public function getMontot()
 	{
 
-		return $this->montot;
+		return number_format($this->montot,2,',','.');
+		
 	}
-
 	
 	public function getCosart()
 	{
 
-		return $this->cosart;
+		return number_format($this->cosart,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRcpart($v)
 	{

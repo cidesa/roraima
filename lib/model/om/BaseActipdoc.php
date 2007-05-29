@@ -33,30 +33,27 @@ abstract class BaseActipdoc extends BaseObject  implements Persistent {
 	public function getTipdoc()
 	{
 
-		return $this->tipdoc;
+		return $this->tipdoc; 		
 	}
-
 	
 	public function getNomdoc()
 	{
 
-		return $this->nomdoc;
+		return $this->nomdoc; 		
 	}
-
 	
 	public function getVidutil()
 	{
 
-		return $this->vidutil;
+		return number_format($this->vidutil,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTipdoc($v)
 	{

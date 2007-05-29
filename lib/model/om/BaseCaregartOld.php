@@ -133,79 +133,71 @@ abstract class BaseCaregartOld extends BaseObject  implements Persistent {
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getDesart()
 	{
 
-		return $this->desart;
+		return $this->desart; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getRamart()
 	{
 
-		return $this->ramart;
+		return $this->ramart; 		
 	}
-
 	
 	public function getCosult()
 	{
 
-		return $this->cosult;
+		return number_format($this->cosult,2,',','.');
+		
 	}
-
 	
 	public function getCospro()
 	{
 
-		return $this->cospro;
+		return number_format($this->cospro,2,',','.');
+		
 	}
-
 	
 	public function getExitot()
 	{
 
-		return $this->exitot;
+		return number_format($this->exitot,2,',','.');
+		
 	}
-
 	
 	public function getUnimed()
 	{
 
-		return $this->unimed;
+		return $this->unimed; 		
 	}
-
 	
 	public function getUnialt()
 	{
 
-		return $this->unialt;
+		return $this->unialt; 		
 	}
-
 	
 	public function getRelart()
 	{
 
-		return $this->relart;
+		return $this->relart; 		
 	}
-
 	
 	public function getFecult($format = 'Y-m-d')
 	{
@@ -232,121 +224,108 @@ abstract class BaseCaregartOld extends BaseObject  implements Persistent {
 	public function getInvini()
 	{
 
-		return $this->invini;
+		return number_format($this->invini,2,',','.');
+		
 	}
-
 	
 	public function getCodmar()
 	{
 
-		return $this->codmar;
+		return $this->codmar; 		
 	}
-
 	
 	public function getCodref()
 	{
 
-		return $this->codref;
+		return $this->codref; 		
 	}
-
 	
 	public function getCostot()
 	{
 
-		return $this->costot;
+		return number_format($this->costot,2,',','.');
+		
 	}
-
 	
 	public function getSigecof()
 	{
 
-		return $this->sigecof;
+		return $this->sigecof; 		
 	}
-
 	
 	public function getCodclaart()
 	{
 
-		return $this->codclaart;
+		return number_format($this->codclaart,2,',','.');
+		
 	}
-
 	
 	public function getLotuni()
 	{
 
-		return $this->lotuni;
+		return $this->lotuni; 		
 	}
-
 	
 	public function getCtavta()
 	{
 
-		return $this->ctavta;
+		return $this->ctavta; 		
 	}
-
 	
 	public function getCtacos()
 	{
 
-		return $this->ctacos;
+		return $this->ctacos; 		
 	}
-
 	
 	public function getCtapro()
 	{
 
-		return $this->ctapro;
+		return $this->ctapro; 		
 	}
-
 	
 	public function getPreart()
 	{
 
-		return $this->preart;
+		return $this->preart; 		
 	}
-
 	
 	public function getDistot()
 	{
 
-		return $this->distot;
+		return number_format($this->distot,2,',','.');
+		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getTip0()
 	{
 
-		return $this->tip0;
+		return $this->tip0; 		
 	}
-
 	
 	public function getCoding()
 	{
 
-		return $this->coding;
+		return $this->coding; 		
 	}
-
 	
 	public function getMercon()
 	{
 
-		return $this->mercon;
+		return $this->mercon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodart($v)
 	{

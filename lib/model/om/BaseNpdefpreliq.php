@@ -41,44 +41,38 @@ abstract class BaseNpdefpreliq extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getPerdes()
 	{
 
-		return $this->perdes;
+		return $this->perdes; 		
 	}
-
 	
 	public function getPerhas()
 	{
 
-		return $this->perhas;
+		return $this->perhas; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

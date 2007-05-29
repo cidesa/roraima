@@ -37,16 +37,14 @@ abstract class BaseCarecpro extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getFecent($format = 'Y-m-d')
 	{
@@ -95,9 +93,8 @@ abstract class BaseCarecpro extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

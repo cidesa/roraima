@@ -81,9 +81,8 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 	public function getRcpart()
 	{
 
-		return $this->rcpart;
+		return $this->rcpart; 		
 	}
-
 	
 	public function getFecrcp($format = 'Y-m-d')
 	{
@@ -110,86 +109,75 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getDesrcp()
 	{
 
-		return $this->desrcp;
+		return $this->desrcp; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getNumfac()
 	{
 
-		return $this->numfac;
+		return $this->numfac; 		
 	}
-
 	
 	public function getMonrcp()
 	{
 
-		return $this->monrcp;
+		return number_format($this->monrcp,2,',','.');
+		
 	}
-
 	
 	public function getStarcp()
 	{
 
-		return $this->starcp;
+		return $this->starcp; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getCtrper()
 	{
 
-		return $this->ctrper;
+		return $this->ctrper; 		
 	}
-
 	
 	public function getGenord()
 	{
 
-		return $this->genord;
+		return $this->genord; 		
 	}
-
 	
 	public function getNroent()
 	{
 
-		return $this->nroent;
+		return $this->nroent; 		
 	}
-
 	
 	public function getFecfac($format = 'Y-m-d')
 	{
@@ -216,9 +204,8 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRcpart($v)
 	{

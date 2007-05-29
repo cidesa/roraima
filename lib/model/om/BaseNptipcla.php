@@ -29,23 +29,20 @@ abstract class BaseNptipcla extends BaseObject  implements Persistent {
 	public function getCodtipcla()
 	{
 
-		return $this->codtipcla;
+		return $this->codtipcla; 		
 	}
-
 	
 	public function getDestipcla()
 	{
 
-		return $this->destipcla;
+		return $this->destipcla; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcla($v)
 	{

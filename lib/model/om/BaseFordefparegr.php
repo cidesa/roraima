@@ -29,23 +29,20 @@ abstract class BaseFordefparegr extends BaseObject  implements Persistent {
 	public function getCodparegr()
 	{
 
-		return $this->codparegr;
+		return $this->codparegr; 		
 	}
-
 	
 	public function getNomparegr()
 	{
 
-		return $this->nomparegr;
+		return $this->nomparegr; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodparegr($v)
 	{

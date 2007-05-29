@@ -125,44 +125,38 @@ abstract class BaseBnregsem extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodsem()
 	{
 
-		return $this->codsem;
+		return $this->codsem; 		
 	}
-
 	
 	public function getDessem()
 	{
 
-		return $this->dessem;
+		return $this->dessem; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodubi()
 	{
 
-		return $this->codubi;
+		return $this->codubi; 		
 	}
-
 	
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getFecreg($format = 'Y-m-d')
 	{
@@ -233,128 +227,118 @@ abstract class BaseBnregsem extends BaseObject  implements Persistent {
 	public function getOrdrcp()
 	{
 
-		return $this->ordrcp;
+		return $this->ordrcp; 		
 	}
-
 	
 	public function getFotsem()
 	{
 
-		return $this->fotsem;
+		return $this->fotsem; 		
 	}
-
 	
 	public function getSexsem()
 	{
 
-		return $this->sexsem;
+		return $this->sexsem; 		
 	}
-
 	
 	public function getRazsem()
 	{
 
-		return $this->razsem;
+		return $this->razsem; 		
 	}
-
 	
 	public function getEdasem()
 	{
 
-		return $this->edasem;
+		return $this->edasem; 		
 	}
-
 	
 	public function getHersem()
 	{
 
-		return $this->hersem;
+		return $this->hersem; 		
 	}
-
 	
 	public function getObssem()
 	{
 
-		return $this->obssem;
+		return $this->obssem; 		
 	}
-
 	
 	public function getViduti()
 	{
 
-		return $this->viduti;
+		return $this->viduti; 		
 	}
-
 	
 	public function getMesdep()
 	{
 
-		return $this->mesdep;
+		return number_format($this->mesdep,2,',','.');
+		
 	}
-
 	
 	public function getValini()
 	{
 
-		return $this->valini;
+		return number_format($this->valini,2,',','.');
+		
 	}
-
 	
 	public function getValres()
 	{
 
-		return $this->valres;
+		return number_format($this->valres,2,',','.');
+		
 	}
-
 	
 	public function getVallib()
 	{
 
-		return $this->vallib;
+		return number_format($this->vallib,2,',','.');
+		
 	}
-
 	
 	public function getValrex()
 	{
 
-		return $this->valrex;
+		return number_format($this->valrex,2,',','.');
+		
 	}
-
 	
 	public function getCosrep()
 	{
 
-		return $this->cosrep;
+		return number_format($this->cosrep,2,',','.');
+		
 	}
-
 	
 	public function getDepmen()
 	{
 
-		return $this->depmen;
+		return number_format($this->depmen,2,',','.');
+		
 	}
-
 	
 	public function getDepacu()
 	{
 
-		return $this->depacu;
+		return number_format($this->depacu,2,',','.');
+		
 	}
-
 	
 	public function getStasem()
 	{
 
-		return $this->stasem;
+		return $this->stasem; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

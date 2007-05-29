@@ -61,79 +61,72 @@ abstract class BaseCsrecobrind extends BaseObject  implements Persistent {
 	public function getCodprod()
 	{
 
-		return $this->codprod;
+		return $this->codprod; 		
 	}
-
 	
 	public function getCodfas()
 	{
 
-		return $this->codfas;
+		return $this->codfas; 		
 	}
-
 	
 	public function getCodmanobr()
 	{
 
-		return $this->codmanobr;
+		return $this->codmanobr; 		
 	}
-
 	
 	public function getCanemp()
 	{
 
-		return $this->canemp;
+		return number_format($this->canemp,2,',','.');
+		
 	}
-
 	
 	public function getHoremp()
 	{
 
-		return $this->horemp;
+		return number_format($this->horemp,2,',','.');
+		
 	}
-
 	
 	public function getTipcon()
 	{
 
-		return $this->tipcon;
+		return $this->tipcon; 		
 	}
-
 	
 	public function getCostot()
 	{
 
-		return $this->costot;
+		return number_format($this->costot,2,',','.');
+		
 	}
-
 	
 	public function getJornada()
 	{
 
-		return $this->jornada;
+		return $this->jornada; 		
 	}
-
 	
 	public function getNroord()
 	{
 
-		return $this->nroord;
+		return $this->nroord; 		
 	}
-
 	
 	public function getCosobr()
 	{
 
-		return $this->cosobr;
+		return number_format($this->cosobr,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprod($v)
 	{

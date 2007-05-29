@@ -101,30 +101,26 @@ abstract class BaseNphiscon extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getFecnom($format = 'Y-m-d')
 	{
@@ -151,65 +147,59 @@ abstract class BaseNphiscon extends BaseObject  implements Persistent {
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCodescuela()
 	{
 
-		return $this->codescuela;
+		return $this->codescuela; 		
 	}
-
 	
 	public function getCodniv()
 	{
 
-		return $this->codniv;
+		return $this->codniv; 		
 	}
-
 	
 	public function getCodtipgas()
 	{
 
-		return $this->codtipgas;
+		return $this->codtipgas; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getNumrec()
 	{
 
-		return $this->numrec;
+		return number_format($this->numrec,2,',','.');
+		
 	}
-
 	
 	public function getCantidad()
 	{
 
-		return $this->cantidad;
+		return number_format($this->cantidad,2,',','.');
+		
 	}
-
 	
 	public function getFecnomdes($format = 'Y-m-d')
 	{
@@ -236,9 +226,8 @@ abstract class BaseNphiscon extends BaseObject  implements Persistent {
 	public function getEspecial()
 	{
 
-		return $this->especial;
+		return $this->especial; 		
 	}
-
 	
 	public function getFecnomespdes($format = 'Y-m-d')
 	{
@@ -287,23 +276,20 @@ abstract class BaseNphiscon extends BaseObject  implements Persistent {
 	public function getCodnomesp()
 	{
 
-		return $this->codnomesp;
+		return $this->codnomesp; 		
 	}
-
 	
 	public function getNomnomesp()
 	{
 
-		return $this->nomnomesp;
+		return $this->nomnomesp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

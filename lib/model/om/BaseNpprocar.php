@@ -29,23 +29,20 @@ abstract class BaseNpprocar extends BaseObject  implements Persistent {
 	public function getCodprofes()
 	{
 
-		return $this->codprofes;
+		return $this->codprofes; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprofes($v)
 	{

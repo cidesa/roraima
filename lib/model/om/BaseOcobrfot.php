@@ -45,30 +45,26 @@ abstract class BaseOcobrfot extends BaseObject  implements Persistent {
 	public function getCodobr()
 	{
 
-		return $this->codobr;
+		return $this->codobr; 		
 	}
-
 	
 	public function getNumfot()
 	{
 
-		return $this->numfot;
+		return $this->numfot; 		
 	}
-
 	
 	public function getAngfot()
 	{
 
-		return $this->angfot;
+		return $this->angfot; 		
 	}
-
 	
 	public function getDesfot()
 	{
 
-		return $this->desfot;
+		return $this->desfot; 		
 	}
-
 	
 	public function getFecfot($format = 'Y-m-d')
 	{
@@ -95,16 +91,14 @@ abstract class BaseOcobrfot extends BaseObject  implements Persistent {
 	public function getRutfot()
 	{
 
-		return $this->rutfot;
+		return $this->rutfot; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodobr($v)
 	{

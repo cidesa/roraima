@@ -13,11 +13,14 @@ abstract class BaseAcunidadPeer {
 	const CLASS_DEFAULT = 'lib.model.Acunidad';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
+
+	
+	const NUMUNI = 'acunidad.NUMUNI';
 
 	
 	const NOMUNI = 'acunidad.NOMUNI';
@@ -34,18 +37,18 @@ abstract class BaseAcunidadPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nomuni', 'Desuni', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (AcunidadPeer::NOMUNI, AcunidadPeer::DESUNI, AcunidadPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nomuni', 'desuni', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Numuni', 'Nomuni', 'Desuni', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (AcunidadPeer::NUMUNI, AcunidadPeer::NOMUNI, AcunidadPeer::DESUNI, AcunidadPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numuni', 'nomuni', 'desuni', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nomuni' => 0, 'Desuni' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (AcunidadPeer::NOMUNI => 0, AcunidadPeer::DESUNI => 1, AcunidadPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('nomuni' => 0, 'desuni' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Numuni' => 0, 'Nomuni' => 1, 'Desuni' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (AcunidadPeer::NUMUNI => 0, AcunidadPeer::NOMUNI => 1, AcunidadPeer::DESUNI => 2, AcunidadPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('numuni' => 0, 'nomuni' => 1, 'desuni' => 2, 'id' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
@@ -98,6 +101,8 @@ abstract class BaseAcunidadPeer {
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
+
+		$criteria->addSelectColumn(AcunidadPeer::NUMUNI);
 
 		$criteria->addSelectColumn(AcunidadPeer::NOMUNI);
 

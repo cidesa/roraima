@@ -49,37 +49,33 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodmot()
 	{
 
-		return $this->codmot;
+		return $this->codmot; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getNrodia()
 	{
 
-		return $this->nrodia;
+		return number_format($this->nrodia,2,',','.');
+		
 	}
-
 	
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getFecdes($format = 'Y-m-d')
 	{
@@ -128,9 +124,8 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

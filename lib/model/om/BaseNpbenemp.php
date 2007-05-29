@@ -53,65 +53,56 @@ abstract class BaseNpbenemp extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCedben()
 	{
 
-		return $this->cedben;
+		return $this->cedben; 		
 	}
-
 	
 	public function getNomben()
 	{
 
-		return $this->nomben;
+		return $this->nomben; 		
 	}
-
 	
 	public function getCodban()
 	{
 
-		return $this->codban;
+		return $this->codban; 		
 	}
-
 	
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

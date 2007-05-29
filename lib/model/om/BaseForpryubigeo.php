@@ -37,37 +37,32 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodest()
 	{
 
-		return $this->codest;
+		return $this->codest; 		
 	}
-
 	
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

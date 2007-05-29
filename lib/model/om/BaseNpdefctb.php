@@ -41,44 +41,38 @@ abstract class BaseNpdefctb extends BaseObject  implements Persistent {
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getNomcta()
 	{
 
-		return $this->nomcta;
+		return $this->nomcta; 		
 	}
-
 	
 	public function getDebcre()
 	{
 
-		return $this->debcre;
+		return $this->debcre; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoduni($v)
 	{

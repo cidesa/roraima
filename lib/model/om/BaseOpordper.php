@@ -89,16 +89,14 @@ abstract class BaseOpordper extends BaseObject  implements Persistent {
 	public function getRefopp()
 	{
 
-		return $this->refopp;
+		return $this->refopp; 		
 	}
-
 	
 	public function getDesopp()
 	{
 
-		return $this->desopp;
+		return $this->desopp; 		
 	}
-
 	
 	public function getFecemi($format = 'Y-m-d')
 	{
@@ -125,107 +123,94 @@ abstract class BaseOpordper extends BaseObject  implements Persistent {
 	public function getNumcuo()
 	{
 
-		return $this->numcuo;
+		return number_format($this->numcuo,2,',','.');
+		
 	}
-
 	
 	public function getFreopp()
 	{
 
-		return $this->freopp;
+		return $this->freopp; 		
 	}
-
 	
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getMonopp()
 	{
 
-		return $this->monopp;
+		return number_format($this->monopp,2,',','.');
+		
 	}
-
 	
 	public function getStaord()
 	{
 
-		return $this->staord;
+		return $this->staord; 		
 	}
-
 	
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getCtaban()
 	{
 
-		return $this->ctaban;
+		return $this->ctaban; 		
 	}
-
 	
 	public function getTipdoc()
 	{
 
-		return $this->tipdoc;
+		return $this->tipdoc; 		
 	}
-
 	
 	public function getRefere()
 	{
 
-		return $this->refere;
+		return $this->refere; 		
 	}
-
 	
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getTippag()
 	{
 
-		return $this->tippag;
+		return $this->tippag; 		
 	}
-
 	
 	public function getNumtiq()
 	{
 
-		return $this->numtiq;
+		return $this->numtiq; 		
 	}
-
 	
 	public function getPeraut()
 	{
 
-		return $this->peraut;
+		return $this->peraut; 		
 	}
-
 	
 	public function getCedaut()
 	{
 
-		return $this->cedaut;
+		return $this->cedaut; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefopp($v)
 	{

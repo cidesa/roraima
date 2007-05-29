@@ -25,16 +25,14 @@ abstract class BaseFcreginm3 extends BaseObject  implements Persistent {
 	public function getCodcatfis()
 	{
 
-		return $this->codcatfis;
+		return $this->codcatfis; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcatfis($v)
 	{

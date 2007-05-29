@@ -33,30 +33,27 @@ abstract class BaseCptrasori extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMonmov()
 	{
 
-		return $this->monmov;
+		return number_format($this->monmov,2,',','.');
+		
 	}
-
 	
 	public function getEstatus()
 	{
 
-		return $this->estatus;
+		return $this->estatus; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpre($v)
 	{

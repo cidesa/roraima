@@ -37,16 +37,14 @@ abstract class BaseNpdefpagext extends BaseObject  implements Persistent {
 	public function getCodgrunom()
 	{
 
-		return $this->codgrunom;
+		return $this->codgrunom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getFecha1($format = 'Y-m-d')
 	{
@@ -95,9 +93,8 @@ abstract class BaseNpdefpagext extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodgrunom($v)
 	{

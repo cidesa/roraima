@@ -65,23 +65,20 @@ abstract class BaseBnseginm extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodmue()
 	{
 
-		return $this->codmue;
+		return $this->codmue; 		
 	}
-
 	
 	public function getNroseginm()
 	{
 
-		return $this->nroseginm;
+		return $this->nroseginm; 		
 	}
-
 	
 	public function getFecseginm($format = 'Y-m-d')
 	{
@@ -108,23 +105,21 @@ abstract class BaseBnseginm extends BaseObject  implements Persistent {
 	public function getNomseginm()
 	{
 
-		return $this->nomseginm;
+		return $this->nomseginm; 		
 	}
-
 	
 	public function getCobseginm()
 	{
 
-		return $this->cobseginm;
+		return $this->cobseginm; 		
 	}
-
 	
 	public function getMonseginm()
 	{
 
-		return $this->monseginm;
+		return number_format($this->monseginm,2,',','.');
+		
 	}
-
 	
 	public function getFecsegven($format = 'Y-m-d')
 	{
@@ -151,30 +146,26 @@ abstract class BaseBnseginm extends BaseObject  implements Persistent {
 	public function getProseginm()
 	{
 
-		return $this->proseginm;
+		return $this->proseginm; 		
 	}
-
 	
 	public function getObsseginm()
 	{
 
-		return $this->obsseginm;
+		return $this->obsseginm; 		
 	}
-
 	
 	public function getStaseginm()
 	{
 
-		return $this->staseginm;
+		return $this->staseginm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

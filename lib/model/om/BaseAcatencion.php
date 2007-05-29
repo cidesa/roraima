@@ -65,23 +65,20 @@ abstract class BaseAcatencion extends BaseObject  implements Persistent {
 	public function getDocate()
 	{
 
-		return $this->docate;
+		return $this->docate; 		
 	}
-
 	
 	public function getLoguse()
 	{
 
-		return $this->loguse;
+		return $this->loguse; 		
 	}
-
 	
 	public function getEstado()
 	{
 
-		return $this->estado;
+		return $this->estado; 		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -174,37 +171,32 @@ abstract class BaseAcatencion extends BaseObject  implements Persistent {
 	public function getNumuni()
 	{
 
-		return $this->numuni;
+		return $this->numuni; 		
 	}
-
 	
 	public function getNumuniori()
 	{
 
-		return $this->numuniori;
+		return $this->numuniori; 		
 	}
-
 	
 	public function getObsdoc()
 	{
 
-		return $this->obsdoc;
+		return $this->obsdoc; 		
 	}
-
 	
 	public function getStaate()
 	{
 
-		return $this->staate;
+		return $this->staate; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDocate($v)
 	{

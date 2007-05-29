@@ -41,44 +41,38 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 	public function getCodnomvac()
 	{
 
-		return $this->codnomvac;
+		return $this->codnomvac; 		
 	}
-
 	
 	public function getCodconvac()
 	{
 
-		return $this->codconvac;
+		return $this->codconvac; 		
 	}
-
 	
 	public function getPagoad()
 	{
 
-		return $this->pagoad;
+		return $this->pagoad; 		
 	}
-
 	
 	public function getCodconcom()
 	{
 
-		return $this->codconcom;
+		return $this->codconcom; 		
 	}
-
 	
 	public function getCodconuti()
 	{
 
-		return $this->codconuti;
+		return $this->codconuti; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnomvac($v)
 	{

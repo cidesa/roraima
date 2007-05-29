@@ -69,93 +69,80 @@ abstract class BaseNpdefcpt extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getOpecon()
 	{
 
-		return $this->opecon;
+		return $this->opecon; 		
 	}
-
 	
 	public function getAcuhis()
 	{
 
-		return $this->acuhis;
+		return $this->acuhis; 		
 	}
-
 	
 	public function getInimon()
 	{
 
-		return $this->inimon;
+		return $this->inimon; 		
 	}
-
 	
 	public function getConact()
 	{
 
-		return $this->conact;
+		return $this->conact; 		
 	}
-
 	
 	public function getImpcpt()
 	{
 
-		return $this->impcpt;
+		return $this->impcpt; 		
 	}
-
 	
 	public function getOrdpag()
 	{
 
-		return $this->ordpag;
+		return $this->ordpag; 		
 	}
-
 	
 	public function getAfepre()
 	{
 
-		return $this->afepre;
+		return $this->afepre; 		
 	}
-
 	
 	public function getFrecon()
 	{
 
-		return $this->frecon;
+		return $this->frecon; 		
 	}
-
 	
 	public function getNrocta()
 	{
 
-		return $this->nrocta;
+		return $this->nrocta; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

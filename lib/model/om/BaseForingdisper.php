@@ -37,37 +37,34 @@ abstract class BaseForingdisper extends BaseObject  implements Persistent {
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getPerpar()
 	{
 
-		return $this->perpar;
+		return $this->perpar; 		
 	}
-
 	
 	public function getMonpar()
 	{
 
-		return $this->monpar;
+		return number_format($this->monpar,2,',','.');
+		
 	}
-
 	
 	public function getPorper()
 	{
 
-		return $this->porper;
+		return number_format($this->porper,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpar($v)
 	{

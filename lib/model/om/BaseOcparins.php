@@ -41,44 +41,39 @@ abstract class BaseOcparins extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNumins()
 	{
 
-		return $this->numins;
+		return $this->numins; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getPoreje()
 	{
 
-		return $this->poreje;
+		return number_format($this->poreje,2,',','.');
+		
 	}
-
 	
 	public function getObsins()
 	{
 
-		return $this->obsins;
+		return $this->obsins; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

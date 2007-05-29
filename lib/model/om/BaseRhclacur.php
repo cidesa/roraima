@@ -45,16 +45,14 @@ abstract class BaseRhclacur extends BaseObject  implements Persistent {
 	public function getCodcur()
 	{
 
-		return $this->codcur;
+		return $this->codcur; 		
 	}
-
 	
 	public function getNumcla()
 	{
 
-		return $this->numcla;
+		return $this->numcla; 		
 	}
-
 	
 	public function getFeccla($format = 'Y-m-d')
 	{
@@ -125,16 +123,15 @@ abstract class BaseRhclacur extends BaseObject  implements Persistent {
 	public function getNumhor()
 	{
 
-		return $this->numhor;
+		return number_format($this->numhor,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcur($v)
 	{

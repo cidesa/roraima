@@ -49,58 +49,53 @@ abstract class BaseForencpryaccespmet extends BaseObject  implements Persistent 
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodaccesp()
 	{
 
-		return $this->codaccesp;
+		return $this->codaccesp; 		
 	}
-
 	
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getCanmet()
 	{
 
-		return $this->canmet;
+		return number_format($this->canmet,2,',','.');
+		
 	}
-
 	
 	public function getCanact()
 	{
 
-		return $this->canact;
+		return number_format($this->canact,2,',','.');
+		
 	}
-
 	
 	public function getTotpre()
 	{
 
-		return $this->totpre;
+		return number_format($this->totpre,2,',','.');
+		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

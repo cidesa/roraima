@@ -33,16 +33,14 @@ abstract class BaseNpsso extends BaseObject  implements Persistent {
 	public function getNumsso()
 	{
 
-		return $this->numsso;
+		return $this->numsso; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFecinicot($format = 'Y-m-d')
 	{
@@ -69,9 +67,8 @@ abstract class BaseNpsso extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsso($v)
 	{

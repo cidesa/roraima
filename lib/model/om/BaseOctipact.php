@@ -29,23 +29,20 @@ abstract class BaseOctipact extends BaseObject  implements Persistent {
 	public function getCodtipact()
 	{
 
-		return $this->codtipact;
+		return $this->codtipact; 		
 	}
-
 	
 	public function getDestipact()
 	{
 
-		return $this->destipact;
+		return $this->destipact; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipact($v)
 	{

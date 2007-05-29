@@ -85,121 +85,118 @@ abstract class BaseNpforcaremp extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getSuebas()
 	{
 
-		return $this->suebas;
+		return number_format($this->suebas,2,',','.');
+		
 	}
-
 	
 	public function getSuplen()
 	{
 
-		return $this->suplen;
+		return number_format($this->suplen,2,',','.');
+		
 	}
-
 	
 	public function getPriant()
 	{
 
-		return $this->priant;
+		return number_format($this->priant,2,',','.');
+		
 	}
-
 	
 	public function getHediur()
 	{
 
-		return $this->hediur;
+		return number_format($this->hediur,2,',','.');
+		
 	}
-
 	
 	public function getPordiu()
 	{
 
-		return $this->pordiu;
+		return number_format($this->pordiu,2,',','.');
+		
 	}
-
 	
 	public function getHenoct()
 	{
 
-		return $this->henoct;
+		return number_format($this->henoct,2,',','.');
+		
 	}
-
 	
 	public function getPornoc1()
 	{
 
-		return $this->pornoc1;
+		return number_format($this->pornoc1,2,',','.');
+		
 	}
-
 	
 	public function getPornoc2()
 	{
 
-		return $this->pornoc2;
+		return number_format($this->pornoc2,2,',','.');
+		
 	}
-
 	
 	public function getBonvac()
 	{
 
-		return $this->bonvac;
+		return number_format($this->bonvac,2,',','.');
+		
 	}
-
 	
 	public function getClau74()
 	{
 
-		return $this->clau74;
+		return number_format($this->clau74,2,',','.');
+		
 	}
-
 	
 	public function getOtrcom()
 	{
 
-		return $this->otrcom;
+		return number_format($this->otrcom,2,',','.');
+		
 	}
-
 	
 	public function getPriefi()
 	{
 
-		return $this->priefi;
+		return number_format($this->priefi,2,',','.');
+		
 	}
-
 	
 	public function getPritra()
 	{
 
-		return $this->pritra;
+		return number_format($this->pritra,2,',','.');
+		
 	}
-
 	
 	public function getAguinal()
 	{
 
-		return $this->aguinal;
+		return number_format($this->aguinal,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

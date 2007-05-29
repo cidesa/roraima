@@ -45,51 +45,45 @@ abstract class BaseOpdisfue extends BaseObject  implements Persistent {
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getFuefin()
 	{
 
-		return $this->fuefin;
+		return $this->fuefin; 		
 	}
-
 	
 	public function getMonfue()
 	{
 
-		return $this->monfue;
+		return number_format($this->monfue,2,',','.');
+		
 	}
-
 	
 	public function getCorrel()
 	{
 
-		return $this->correl;
+		return $this->correl; 		
 	}
-
 	
 	public function getOrigen()
 	{
 
-		return $this->origen;
+		return $this->origen; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumord($v)
 	{

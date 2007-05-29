@@ -41,44 +41,40 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 	public function getCodevdo()
 	{
 
-		return $this->codevdo;
+		return $this->codevdo; 		
 	}
-
 	
 	public function getCodniv()
 	{
 
-		return $this->codniv;
+		return $this->codniv; 		
 	}
-
 	
 	public function getCodvalins()
 	{
 
-		return $this->codvalins;
+		return $this->codvalins; 		
 	}
-
 	
 	public function getPesval()
 	{
 
-		return $this->pesval;
+		return number_format($this->pesval,2,',','.');
+		
 	}
-
 	
 	public function getPunval()
 	{
 
-		return $this->punval;
+		return number_format($this->punval,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodevdo($v)
 	{

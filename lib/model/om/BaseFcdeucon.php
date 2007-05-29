@@ -33,30 +33,26 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 	public function getRefcon()
 	{
 
-		return $this->refcon;
+		return $this->refcon; 		
 	}
-
 	
 	public function getNumdec()
 	{
 
-		return $this->numdec;
+		return $this->numdec; 		
 	}
-
 	
 	public function getNumero()
 	{
 
-		return $this->numero;
+		return $this->numero; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefcon($v)
 	{

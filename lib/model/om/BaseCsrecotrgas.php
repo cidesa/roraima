@@ -49,58 +49,53 @@ abstract class BaseCsrecotrgas extends BaseObject  implements Persistent {
 	public function getCodprod()
 	{
 
-		return $this->codprod;
+		return $this->codprod; 		
 	}
-
 	
 	public function getCodfas()
 	{
 
-		return $this->codfas;
+		return $this->codfas; 		
 	}
-
 	
 	public function getCodgas()
 	{
 
-		return $this->codgas;
+		return $this->codgas; 		
 	}
-
 	
 	public function getCangas()
 	{
 
-		return $this->cangas;
+		return number_format($this->cangas,2,',','.');
+		
 	}
-
 	
 	public function getCostot()
 	{
 
-		return $this->costot;
+		return number_format($this->costot,2,',','.');
+		
 	}
-
 	
 	public function getNroord()
 	{
 
-		return $this->nroord;
+		return $this->nroord; 		
 	}
-
 	
 	public function getCosgas()
 	{
 
-		return $this->cosgas;
+		return number_format($this->cosgas,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprod($v)
 	{

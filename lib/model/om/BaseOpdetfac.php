@@ -33,30 +33,27 @@ abstract class BaseOpdetfac extends BaseObject  implements Persistent {
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getDesdet()
 	{
 
-		return $this->desdet;
+		return $this->desdet; 		
 	}
-
 	
 	public function getMondet()
 	{
 
-		return $this->mondet;
+		return number_format($this->mondet,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumord($v)
 	{

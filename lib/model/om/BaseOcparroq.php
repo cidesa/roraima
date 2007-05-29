@@ -41,44 +41,38 @@ abstract class BaseOcparroq extends BaseObject  implements Persistent {
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getNompar()
 	{
 
-		return $this->nompar;
+		return $this->nompar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpai($v)
 	{

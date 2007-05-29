@@ -33,30 +33,26 @@ abstract class BaseFcdetreccob extends BaseObject  implements Persistent {
 	public function getNument()
 	{
 
-		return $this->nument;
+		return $this->nument; 		
 	}
-
 	
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getCodcob()
 	{
 
-		return $this->codcob;
+		return $this->codcob; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNument($v)
 	{

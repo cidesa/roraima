@@ -85,9 +85,8 @@ abstract class BasePagtransa extends BaseObject  implements Persistent {
 	public function getNumtra()
 	{
 
-		return $this->numtra;
+		return $this->numtra; 		
 	}
-
 	
 	public function getFectra($format = 'Y-m-d')
 	{
@@ -114,72 +113,66 @@ abstract class BasePagtransa extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodmov()
 	{
 
-		return $this->codmov;
+		return $this->codmov; 		
 	}
-
 	
 	public function getDestra()
 	{
 
-		return $this->destra;
+		return $this->destra; 		
 	}
-
 	
 	public function getMontra()
 	{
 
-		return $this->montra;
+		return number_format($this->montra,2,',','.');
+		
 	}
-
 	
 	public function getTotdsc()
 	{
 
-		return $this->totdsc;
+		return number_format($this->totdsc,2,',','.');
+		
 	}
-
 	
 	public function getTotrec()
 	{
 
-		return $this->totrec;
+		return number_format($this->totrec,2,',','.');
+		
 	}
-
 	
 	public function getTottra()
 	{
 
-		return $this->tottra;
+		return number_format($this->tottra,2,',','.');
+		
 	}
-
 	
 	public function getStaimp()
 	{
 
-		return $this->staimp;
+		return $this->staimp; 		
 	}
-
 	
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -206,16 +199,14 @@ abstract class BasePagtransa extends BaseObject  implements Persistent {
 	public function getRifpro()
 	{
 
-		return $this->rifpro;
+		return $this->rifpro; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getFeccom($format = 'Y-m-d')
 	{
@@ -242,9 +233,8 @@ abstract class BasePagtransa extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumtra($v)
 	{

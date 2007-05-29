@@ -33,30 +33,26 @@ abstract class BaseOcdocact extends BaseObject  implements Persistent {
 	public function getCoddoc()
 	{
 
-		return $this->coddoc;
+		return $this->coddoc; 		
 	}
-
 	
 	public function getDesdoc()
 	{
 
-		return $this->desdoc;
+		return $this->desdoc; 		
 	}
-
 	
 	public function getStadoc()
 	{
 
-		return $this->stadoc;
+		return $this->stadoc; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddoc($v)
 	{

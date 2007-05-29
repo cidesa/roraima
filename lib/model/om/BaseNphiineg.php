@@ -37,9 +37,8 @@ abstract class BaseNphiineg extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFecing($format = 'Y-m-d')
 	{
@@ -88,16 +87,14 @@ abstract class BaseNphiineg extends BaseObject  implements Persistent {
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

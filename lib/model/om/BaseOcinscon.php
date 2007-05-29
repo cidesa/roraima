@@ -45,16 +45,14 @@ abstract class BaseOcinscon extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNumins()
 	{
 
-		return $this->numins;
+		return $this->numins; 		
 	}
-
 	
 	public function getFeccom($format = 'Y-m-d')
 	{
@@ -103,23 +101,22 @@ abstract class BaseOcinscon extends BaseObject  implements Persistent {
 	public function getPorobreje()
 	{
 
-		return $this->porobreje;
+		return number_format($this->porobreje,2,',','.');
+		
 	}
-
 	
 	public function getPortietra()
 	{
 
-		return $this->portietra;
+		return number_format($this->portietra,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

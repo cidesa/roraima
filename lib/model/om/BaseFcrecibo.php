@@ -57,9 +57,8 @@ abstract class BaseFcrecibo extends BaseObject  implements Persistent {
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -86,44 +85,39 @@ abstract class BaseFcrecibo extends BaseObject  implements Persistent {
 	public function getDesrec()
 	{
 
-		return $this->desrec;
+		return $this->desrec; 		
 	}
-
 	
 	public function getNumlic()
 	{
 
-		return $this->numlic;
+		return $this->numlic; 		
 	}
-
 	
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getMonrec()
 	{
 
-		return $this->monrec;
+		return number_format($this->monrec,2,',','.');
+		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getFecha($format = 'Y-m-d')
 	{
@@ -150,9 +144,8 @@ abstract class BaseFcrecibo extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrec($v)
 	{

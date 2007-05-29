@@ -53,65 +53,62 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 	public function getNroped()
 	{
 
-		return $this->nroped;
+		return $this->nroped; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCanord()
 	{
 
-		return $this->canord;
+		return number_format($this->canord,2,',','.');
+		
 	}
-
 	
 	public function getCanaju()
 	{
 
-		return $this->canaju;
+		return number_format($this->canaju,2,',','.');
+		
 	}
-
 	
 	public function getCandes()
 	{
 
-		return $this->candes;
+		return number_format($this->candes,2,',','.');
+		
 	}
-
 	
 	public function getCantot()
 	{
 
-		return $this->cantot;
+		return number_format($this->cantot,2,',','.');
+		
 	}
-
 	
 	public function getPreart()
 	{
 
-		return $this->preart;
+		return number_format($this->preart,2,',','.');
+		
 	}
-
 	
 	public function getTotart()
 	{
 
-		return $this->totart;
+		return number_format($this->totart,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNroped($v)
 	{

@@ -37,37 +37,32 @@ abstract class BaseOctipste extends BaseObject  implements Persistent {
 	public function getCodste()
 	{
 
-		return $this->codste;
+		return $this->codste; 		
 	}
-
 	
 	public function getDesste()
 	{
 
-		return $this->desste;
+		return $this->desste; 		
 	}
-
 	
 	public function getTipste()
 	{
 
-		return $this->tipste;
+		return $this->tipste; 		
 	}
-
 	
 	public function getStaste()
 	{
 
-		return $this->staste;
+		return $this->staste; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodste($v)
 	{

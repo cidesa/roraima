@@ -29,23 +29,20 @@ abstract class BaseCpdefrep extends BaseObject  implements Persistent {
 	public function getNomrep()
 	{
 
-		return $this->nomrep;
+		return $this->nomrep; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNomrep($v)
 	{

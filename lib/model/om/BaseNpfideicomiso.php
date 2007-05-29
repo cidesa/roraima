@@ -45,16 +45,14 @@ abstract class BaseNpfideicomiso extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getFecnom($format = 'Y-m-d')
 	{
@@ -103,23 +101,22 @@ abstract class BaseNpfideicomiso extends BaseObject  implements Persistent {
 	public function getDias()
 	{
 
-		return $this->dias;
+		return number_format($this->dias,2,',','.');
+		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

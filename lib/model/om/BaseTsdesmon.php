@@ -41,30 +41,27 @@ abstract class BaseTsdesmon extends BaseObject  implements Persistent {
 	public function getCodmon()
 	{
 
-		return $this->codmon;
+		return $this->codmon; 		
 	}
-
 	
 	public function getNommon()
 	{
 
-		return $this->nommon;
+		return $this->nommon; 		
 	}
-
 	
 	public function getValmon()
 	{
 
-		return $this->valmon;
+		return number_format($this->valmon,2,',','.');
+		
 	}
-
 	
 	public function getAumdis()
 	{
 
-		return $this->aumdis;
+		return $this->aumdis; 		
 	}
-
 	
 	public function getFecmon($format = 'Y-m-d')
 	{
@@ -91,9 +88,8 @@ abstract class BaseTsdesmon extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmon($v)
 	{

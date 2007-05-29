@@ -69,93 +69,84 @@ abstract class BaseForestcos extends BaseObject  implements Persistent {
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCanuni()
 	{
 
-		return $this->canuni;
+		return number_format($this->canuni,2,',','.');
+		
 	}
-
 	
 	public function getCanart()
 	{
 
-		return $this->canart;
+		return number_format($this->canart,2,',','.');
+		
 	}
-
 	
 	public function getMonart()
 	{
 
-		return $this->monart;
+		return number_format($this->monart,2,',','.');
+		
 	}
-
 	
 	public function getTotpre()
 	{
 
-		return $this->totpre;
+		return number_format($this->totpre,2,',','.');
+		
 	}
-
 	
 	public function getCodfin()
 	{
 
-		return $this->codfin;
+		return $this->codfin; 		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmet($v)
 	{

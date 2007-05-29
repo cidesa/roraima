@@ -59,65 +59,56 @@ abstract class BaseFcdefdesc extends BaseObject  implements Persistent {
 	public function getCoddes()
 	{
 
-		return $this->coddes;
+		return $this->coddes; 		
 	}
-
 	
 	public function getNomdes()
 	{
 
-		return $this->nomdes;
+		return $this->nomdes; 		
 	}
-
 	
 	public function getCodfue()
 	{
 
-		return $this->codfue;
+		return $this->codfue; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getModo()
 	{
 
-		return $this->modo;
+		return $this->modo; 		
 	}
-
 	
 	public function getLimita()
 	{
 
-		return $this->limita;
+		return $this->limita; 		
 	}
-
 	
 	public function getAuto()
 	{
 
-		return $this->auto;
+		return $this->auto; 		
 	}
-
 	
 	public function getAnoact()
 	{
 
-		return $this->anoact;
+		return $this->anoact; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddes($v)
 	{

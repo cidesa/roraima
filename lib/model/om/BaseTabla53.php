@@ -37,9 +37,8 @@ abstract class BaseTabla53 extends BaseObject  implements Persistent {
 	public function getRefpag()
 	{
 
-		return $this->refpag;
+		return $this->refpag; 		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -66,9 +65,8 @@ abstract class BaseTabla53 extends BaseObject  implements Persistent {
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getFeccom($format = 'Y-m-d')
 	{
@@ -95,9 +93,8 @@ abstract class BaseTabla53 extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefpag($v)
 	{

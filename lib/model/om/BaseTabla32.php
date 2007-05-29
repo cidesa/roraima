@@ -85,16 +85,14 @@ abstract class BaseTabla32 extends BaseObject  implements Persistent {
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getTipcom()
 	{
 
-		return $this->tipcom;
+		return $this->tipcom; 		
 	}
-
 	
 	public function getFeccom($format = 'Y-m-d')
 	{
@@ -121,72 +119,66 @@ abstract class BaseTabla32 extends BaseObject  implements Persistent {
 	public function getAnocom()
 	{
 
-		return $this->anocom;
+		return $this->anocom; 		
 	}
-
 	
 	public function getRefprc()
 	{
 
-		return $this->refprc;
+		return $this->refprc; 		
 	}
-
 	
 	public function getTipprc()
 	{
 
-		return $this->tipprc;
+		return $this->tipprc; 		
 	}
-
 	
 	public function getDescom()
 	{
 
-		return $this->descom;
+		return $this->descom; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getMoncom()
 	{
 
-		return $this->moncom;
+		return number_format($this->moncom,2,',','.');
+		
 	}
-
 	
 	public function getSalcau()
 	{
 
-		return $this->salcau;
+		return number_format($this->salcau,2,',','.');
+		
 	}
-
 	
 	public function getSalpag()
 	{
 
-		return $this->salpag;
+		return number_format($this->salpag,2,',','.');
+		
 	}
-
 	
 	public function getSalaju()
 	{
 
-		return $this->salaju;
+		return number_format($this->salaju,2,',','.');
+		
 	}
-
 	
 	public function getStacom()
 	{
 
-		return $this->stacom;
+		return $this->stacom; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -213,23 +205,20 @@ abstract class BaseTabla32 extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefcom($v)
 	{

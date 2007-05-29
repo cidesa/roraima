@@ -89,37 +89,36 @@ abstract class BaseNpintfecrefdaniel extends BaseObject  implements Persistent {
 	public function getTasint()
 	{
 
-		return $this->tasint;
+		return number_format($this->tasint,2,',','.');
+		
 	}
-
 	
 	public function getTasintpro()
 	{
 
-		return $this->tasintpro;
+		return number_format($this->tasintpro,2,',','.');
+		
 	}
-
 	
 	public function getTasintpas()
 	{
 
-		return $this->tasintpas;
+		return number_format($this->tasintpas,2,',','.');
+		
 	}
-
 	
 	public function getTasintact()
 	{
 
-		return $this->tasintact;
+		return number_format($this->tasintact,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFeciniref($v)
 	{

@@ -41,44 +41,39 @@ abstract class BaseForproinvnac extends BaseObject  implements Persistent {
 	public function getCodorg()
 	{
 
-		return $this->codorg;
+		return $this->codorg; 		
 	}
-
 	
 	public function getCodpreorg()
 	{
 
-		return $this->codpreorg;
+		return $this->codpreorg; 		
 	}
-
 	
 	public function getCodpregob()
 	{
 
-		return $this->codpregob;
+		return $this->codpregob; 		
 	}
-
 	
 	public function getDespreorg()
 	{
 
-		return $this->despreorg;
+		return $this->despreorg; 		
 	}
-
 	
 	public function getMonapoorg()
 	{
 
-		return $this->monapoorg;
+		return number_format($this->monapoorg,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodorg($v)
 	{

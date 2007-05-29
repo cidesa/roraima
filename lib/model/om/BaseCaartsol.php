@@ -73,100 +73,94 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 	public function getReqart()
 	{
 
-		return $this->reqart;
+		return $this->reqart; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCanreq()
 	{
 
-		return $this->canreq;
+		return number_format($this->canreq,2,',','.');
+		
 	}
-
 	
 	public function getCanrec()
 	{
 
-		return $this->canrec;
+		return number_format($this->canrec,2,',','.');
+		
 	}
-
 	
 	public function getMontot()
 	{
 
-		return $this->montot;
+		return number_format($this->montot,2,',','.');
+		
 	}
-
 	
 	public function getCosto()
 	{
 
-		return $this->costo;
+		return number_format($this->costo,2,',','.');
+		
 	}
-
 	
 	public function getMonrgo()
 	{
 
-		return $this->monrgo;
+		return number_format($this->monrgo,2,',','.');
+		
 	}
-
 	
 	public function getCanord()
 	{
 
-		return $this->canord;
+		return number_format($this->canord,2,',','.');
+		
 	}
-
 	
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getRelart()
 	{
 
-		return $this->relart;
+		return number_format($this->relart,2,',','.');
+		
 	}
-
 	
 	public function getUnimed()
 	{
 
-		return $this->unimed;
+		return $this->unimed; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReqart($v)
 	{

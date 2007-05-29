@@ -33,30 +33,26 @@ abstract class BaseForcocat extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getNompre()
 	{
 
-		return $this->nompre;
+		return $this->nompre; 		
 	}
-
 	
 	public function getCodmae()
 	{
 
-		return $this->codmae;
+		return $this->codmae; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpre($v)
 	{

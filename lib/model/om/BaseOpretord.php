@@ -53,65 +53,59 @@ abstract class BaseOpretord extends BaseObject  implements Persistent {
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getMonret()
 	{
 
-		return $this->monret;
+		return number_format($this->monret,2,',','.');
+		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getNumret()
 	{
 
-		return $this->numret;
+		return $this->numret; 		
 	}
-
 	
 	public function getRefere()
 	{
 
-		return $this->refere;
+		return $this->refere; 		
 	}
-
 	
 	public function getCorrel()
 	{
 
-		return $this->correl;
+		return number_format($this->correl,2,',','.');
+		
 	}
-
 	
 	public function getMonbas()
 	{
 
-		return $this->monbas;
+		return number_format($this->monbas,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumord($v)
 	{

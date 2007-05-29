@@ -37,37 +37,33 @@ abstract class BaseNpdefpar extends BaseObject  implements Persistent {
 	public function getCodcol()
 	{
 
-		return $this->codcol;
+		return $this->codcol; 		
 	}
-
 	
 	public function getNomcol()
 	{
 
-		return $this->nomcol;
+		return $this->nomcol; 		
 	}
-
 	
 	public function getTipcol()
 	{
 
-		return $this->tipcol;
+		return $this->tipcol; 		
 	}
-
 	
 	public function getLoncol()
 	{
 
-		return $this->loncol;
+		return number_format($this->loncol,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcol($v)
 	{

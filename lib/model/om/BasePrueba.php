@@ -29,23 +29,20 @@ abstract class BasePrueba extends BaseObject  implements Persistent {
 	public function getPasuse()
 	{
 
-		return $this->pasuse;
+		return $this->pasuse; 		
 	}
-
 	
 	public function getEncpas()
 	{
 
-		return $this->encpas;
+		return $this->encpas; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setPasuse($v)
 	{

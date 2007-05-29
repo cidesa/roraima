@@ -41,44 +41,40 @@ abstract class BaseBndefact extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getDesact()
 	{
 
-		return $this->desact;
+		return $this->desact; 		
 	}
-
 	
 	public function getCanact()
 	{
 
-		return $this->canact;
+		return number_format($this->canact,2,',','.');
+		
 	}
-
 	
 	public function getStaact()
 	{
 
-		return $this->staact;
+		return $this->staact; 		
 	}
-
 	
 	public function getViduti()
 	{
 
-		return $this->viduti;
+		return number_format($this->viduti,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

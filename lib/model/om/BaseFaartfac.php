@@ -49,58 +49,54 @@ abstract class BaseFaartfac extends BaseObject  implements Persistent {
 	public function getReffac()
 	{
 
-		return $this->reffac;
+		return $this->reffac; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodref()
 	{
 
-		return $this->codref;
+		return $this->codref; 		
 	}
-
 	
 	public function getCantot()
 	{
 
-		return $this->cantot;
+		return number_format($this->cantot,2,',','.');
+		
 	}
-
 	
 	public function getPrecio()
 	{
 
-		return $this->precio;
+		return number_format($this->precio,2,',','.');
+		
 	}
-
 	
 	public function getMonrgo()
 	{
 
-		return $this->monrgo;
+		return number_format($this->monrgo,2,',','.');
+		
 	}
-
 	
 	public function getTotart()
 	{
 
-		return $this->totart;
+		return number_format($this->totart,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReffac($v)
 	{

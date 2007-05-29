@@ -29,23 +29,20 @@ abstract class BaseNpconian extends BaseObject  implements Persistent {
 	public function getConian()
 	{
 
-		return $this->conian;
+		return $this->conian; 		
 	}
-
 	
 	public function getConcid()
 	{
 
-		return $this->concid;
+		return $this->concid; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setConian($v)
 	{

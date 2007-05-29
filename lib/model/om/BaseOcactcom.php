@@ -33,30 +33,26 @@ abstract class BaseOcactcom extends BaseObject  implements Persistent {
 	public function getCodactcom()
 	{
 
-		return $this->codactcom;
+		return $this->codactcom; 		
 	}
-
 	
 	public function getDesactcom()
 	{
 
-		return $this->desactcom;
+		return $this->desactcom; 		
 	}
-
 	
 	public function getStaactcom()
 	{
 
-		return $this->staactcom;
+		return $this->staactcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodactcom($v)
 	{

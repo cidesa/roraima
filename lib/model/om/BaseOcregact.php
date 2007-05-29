@@ -45,51 +45,44 @@ abstract class BaseOcregact extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCedins()
 	{
 
-		return $this->cedins;
+		return $this->cedins; 		
 	}
-
 	
 	public function getCedtec()
 	{
 
-		return $this->cedtec;
+		return $this->cedtec; 		
 	}
-
 	
 	public function getCedfis()
 	{
 
-		return $this->cedfis;
+		return $this->cedfis; 		
 	}
-
 	
 	public function getCedres()
 	{
 
-		return $this->cedres;
+		return $this->cedres; 		
 	}
-
 	
 	public function getCedtop()
 	{
 
-		return $this->cedtop;
+		return $this->cedtop; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

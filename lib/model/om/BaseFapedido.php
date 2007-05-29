@@ -65,9 +65,8 @@ abstract class BaseFapedido extends BaseObject  implements Persistent {
 	public function getNroped()
 	{
 
-		return $this->nroped;
+		return $this->nroped; 		
 	}
-
 	
 	public function getFecped($format = 'Y-m-d')
 	{
@@ -94,58 +93,51 @@ abstract class BaseFapedido extends BaseObject  implements Persistent {
 	public function getRefped()
 	{
 
-		return $this->refped;
+		return $this->refped; 		
 	}
-
 	
 	public function getTipref()
 	{
 
-		return $this->tipref;
+		return $this->tipref; 		
 	}
-
 	
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getDesped()
 	{
 
-		return $this->desped;
+		return $this->desped; 		
 	}
-
 	
 	public function getMonped()
 	{
 
-		return $this->monped;
+		return number_format($this->monped,2,',','.');
+		
 	}
-
 	
 	public function getObsped()
 	{
 
-		return $this->obsped;
+		return $this->obsped; 		
 	}
-
 	
 	public function getReapor()
 	{
 
-		return $this->reapor;
+		return $this->reapor; 		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -172,9 +164,8 @@ abstract class BaseFapedido extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNroped($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseCobreccli extends BaseObject  implements Persistent {
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcli($v)
 	{

@@ -265,44 +265,38 @@ abstract class BaseFcinmmod extends BaseObject  implements Persistent {
 	public function getNroinm()
 	{
 
-		return $this->nroinm;
+		return $this->nroinm; 		
 	}
-
 	
 	public function getCodcatfis()
 	{
 
-		return $this->codcatfis;
+		return $this->codcatfis; 		
 	}
-
 	
 	public function getCoduso()
 	{
 
-		return $this->coduso;
+		return $this->coduso; 		
 	}
-
 	
 	public function getCodcarinm()
 	{
 
-		return $this->codcarinm;
+		return $this->codcarinm; 		
 	}
-
 	
 	public function getCodsitinm()
 	{
 
-		return $this->codsitinm;
+		return $this->codsitinm; 		
 	}
-
 	
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -373,86 +367,78 @@ abstract class BaseFcinmmod extends BaseObject  implements Persistent {
 	public function getDirinm()
 	{
 
-		return $this->dirinm;
+		return $this->dirinm; 		
 	}
-
 	
 	public function getLinnor()
 	{
 
-		return $this->linnor;
+		return $this->linnor; 		
 	}
-
 	
 	public function getLinsur()
 	{
 
-		return $this->linsur;
+		return $this->linsur; 		
 	}
-
 	
 	public function getLinest()
 	{
 
-		return $this->linest;
+		return $this->linest; 		
 	}
-
 	
 	public function getLinoes()
 	{
 
-		return $this->linoes;
+		return $this->linoes; 		
 	}
-
 	
 	public function getMtrter()
 	{
 
-		return $this->mtrter;
+		return number_format($this->mtrter,2,',','.');
+		
 	}
-
 	
 	public function getMtrcon()
 	{
 
-		return $this->mtrcon;
+		return number_format($this->mtrcon,2,',','.');
+		
 	}
-
 	
 	public function getBster()
 	{
 
-		return $this->bster;
+		return number_format($this->bster,2,',','.');
+		
 	}
-
 	
 	public function getBscon()
 	{
 
-		return $this->bscon;
+		return number_format($this->bscon,2,',','.');
+		
 	}
-
 	
 	public function getDocpro()
 	{
 
-		return $this->docpro;
+		return $this->docpro; 		
 	}
-
 	
 	public function getRifrep()
 	{
 
-		return $this->rifrep;
+		return $this->rifrep; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -479,44 +465,38 @@ abstract class BaseFcinmmod extends BaseObject  implements Persistent {
 	public function getEstinm()
 	{
 
-		return $this->estinm;
+		return $this->estinm; 		
 	}
-
 	
 	public function getEstdec()
 	{
 
-		return $this->estdec;
+		return $this->estdec; 		
 	}
-
 	
 	public function getCodcatinm()
 	{
 
-		return $this->codcatinm;
+		return $this->codcatinm; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getClacon()
 	{
 
-		return $this->clacon;
+		return $this->clacon; 		
 	}
-
 	
 	public function getFecadq($format = 'Y-m-d')
 	{
@@ -543,114 +523,105 @@ abstract class BaseFcinmmod extends BaseObject  implements Persistent {
 	public function getValinm()
 	{
 
-		return $this->valinm;
+		return number_format($this->valinm,2,',','.');
+		
 	}
-
 	
 	public function getCodman()
 	{
 
-		return $this->codman;
+		return $this->codman; 		
 	}
-
 	
 	public function getCodsec()
 	{
 
-		return $this->codsec;
+		return $this->codsec; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getNroinmant()
 	{
 
-		return $this->nroinmant;
+		return $this->nroinmant; 		
 	}
-
 	
 	public function getTotter()
 	{
 
-		return $this->totter;
+		return number_format($this->totter,2,',','.');
+		
 	}
-
 	
 	public function getTotcon()
 	{
 
-		return $this->totcon;
+		return number_format($this->totcon,2,',','.');
+		
 	}
-
 	
 	public function getTotal()
 	{
 
-		return $this->total;
+		return number_format($this->total,2,',','.');
+		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getCodzon()
 	{
 
-		return $this->codzon;
+		return number_format($this->codzon,2,',','.');
+		
 	}
-
 	
 	public function getDestip()
 	{
 
-		return $this->destip;
+		return $this->destip; 		
 	}
-
 	
 	public function getDeszon()
 	{
 
-		return $this->deszon;
+		return $this->deszon; 		
 	}
-
 	
 	public function getAnual()
 	{
 
-		return $this->anual;
+		return number_format($this->anual,2,',','.');
+		
 	}
-
 	
 	public function getFolio()
 	{
 
-		return $this->folio;
+		return $this->folio; 		
 	}
-
 	
 	public function getTomo()
 	{
 
-		return $this->tomo;
+		return $this->tomo; 		
 	}
-
 	
 	public function getNumdoc()
 	{
 
-		return $this->numdoc;
+		return number_format($this->numdoc,2,',','.');
+		
 	}
-
 	
 	public function getFecdoc($format = 'Y-m-d')
 	{
@@ -677,37 +648,32 @@ abstract class BaseFcinmmod extends BaseObject  implements Persistent {
 	public function getUsoinm()
 	{
 
-		return $this->usoinm;
+		return $this->usoinm; 		
 	}
-
 	
 	public function getDesde()
 	{
 
-		return $this->desde;
+		return $this->desde; 		
 	}
-
 	
 	public function getHasta()
 	{
 
-		return $this->hasta;
+		return $this->hasta; 		
 	}
-
 	
 	public function getOrd()
 	{
 
-		return $this->ord;
+		return $this->ord; 		
 	}
-
 	
 	public function getArt()
 	{
 
-		return $this->art;
+		return $this->art; 		
 	}
-
 	
 	public function getFecdir($format = 'Y-m-d')
 	{
@@ -756,9 +722,8 @@ abstract class BaseFcinmmod extends BaseObject  implements Persistent {
 	public function getDirinm1()
 	{
 
-		return $this->dirinm1;
+		return $this->dirinm1; 		
 	}
-
 	
 	public function getFecela($format = 'Y-m-d')
 	{
@@ -785,51 +750,46 @@ abstract class BaseFcinmmod extends BaseObject  implements Persistent {
 	public function getTri()
 	{
 
-		return $this->tri;
+		return $this->tri; 		
 	}
-
 	
 	public function getProt()
 	{
 
-		return $this->prot;
+		return $this->prot; 		
 	}
-
 	
 	public function getTipobol()
 	{
 
-		return $this->tipobol;
+		return $this->tipobol; 		
 	}
-
 	
 	public function getNomsitinm()
 	{
 
-		return $this->nomsitinm;
+		return $this->nomsitinm; 		
 	}
-
 	
 	public function getImpanu()
 	{
 
-		return $this->impanu;
+		return number_format($this->impanu,2,',','.');
+		
 	}
-
 	
 	public function getImptri()
 	{
 
-		return $this->imptri;
+		return number_format($this->imptri,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNroinm($v)
 	{

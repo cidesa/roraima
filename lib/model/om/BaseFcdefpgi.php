@@ -45,51 +45,47 @@ abstract class BaseFcdefpgi extends BaseObject  implements Persistent {
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getMonhas()
 	{
 
-		return $this->monhas;
+		return number_format($this->monhas,2,',','.');
+		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getNumpor()
 	{
 
-		return $this->numpor;
+		return $this->numpor; 		
 	}
-
 	
 	public function getDespgi()
 	{
 
-		return $this->despgi;
+		return $this->despgi; 		
 	}
-
 	
 	public function getDesabr()
 	{
 
-		return $this->desabr;
+		return $this->desabr; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setMondes($v)
 	{

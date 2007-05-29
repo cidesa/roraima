@@ -33,30 +33,27 @@ abstract class BaseNpdepbanusu extends BaseObject  implements Persistent {
 	public function getNumlin()
 	{
 
-		return $this->numlin;
+		return number_format($this->numlin,2,',','.');
+		
 	}
-
 	
 	public function getDesdep()
 	{
 
-		return $this->desdep;
+		return $this->desdep; 		
 	}
-
 	
 	public function getUsuario()
 	{
 
-		return $this->usuario;
+		return $this->usuario; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumlin($v)
 	{

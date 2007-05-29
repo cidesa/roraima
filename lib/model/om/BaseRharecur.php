@@ -29,23 +29,20 @@ abstract class BaseRharecur extends BaseObject  implements Persistent {
 	public function getCodarecur()
 	{
 
-		return $this->codarecur;
+		return $this->codarecur; 		
 	}
-
 	
 	public function getDesarecur()
 	{
 
-		return $this->desarecur;
+		return $this->desarecur; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodarecur($v)
 	{

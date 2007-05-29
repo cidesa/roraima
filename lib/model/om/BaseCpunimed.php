@@ -37,37 +37,33 @@ abstract class BaseCpunimed extends BaseObject  implements Persistent {
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getNomext()
 	{
 
-		return $this->nomext;
+		return $this->nomext; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getCosuni()
 	{
 
-		return $this->cosuni;
+		return number_format($this->cosuni,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoduni($v)
 	{

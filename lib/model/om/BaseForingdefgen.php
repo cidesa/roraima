@@ -37,37 +37,33 @@ abstract class BaseForingdefgen extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getEscapr()
 	{
 
-		return $this->escapr;
+		return $this->escapr; 		
 	}
-
 	
 	public function getGening()
 	{
 
-		return $this->gening;
+		return $this->gening; 		
 	}
-
 	
 	public function getFaccon()
 	{
 
-		return $this->faccon;
+		return number_format($this->faccon,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

@@ -49,58 +49,52 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 	public function getTipesp()
 	{
 
-		return $this->tipesp;
+		return $this->tipesp; 		
 	}
-
 	
 	public function getAnovig()
 	{
 
-		return $this->anovig;
+		return $this->anovig; 		
 	}
-
 	
 	public function getDestip()
 	{
 
-		return $this->destip;
+		return $this->destip; 		
 	}
-
 	
 	public function getPormon()
 	{
 
-		return $this->pormon;
+		return $this->pormon; 		
 	}
-
 	
 	public function getAlimon()
 	{
 
-		return $this->alimon;
+		return number_format($this->alimon,2,',','.');
+		
 	}
-
 	
 	public function getStatip()
 	{
 
-		return $this->statip;
+		return $this->statip; 		
 	}
-
 	
 	public function getMintri()
 	{
 
-		return $this->mintri;
+		return number_format($this->mintri,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTipesp($v)
 	{

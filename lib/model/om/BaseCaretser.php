@@ -29,23 +29,20 @@ abstract class BaseCaretser extends BaseObject  implements Persistent {
 	public function getCodser()
 	{
 
-		return $this->codser;
+		return $this->codser; 		
 	}
-
 	
 	public function getCodret()
 	{
 
-		return $this->codret;
+		return $this->codret; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodser($v)
 	{

@@ -41,44 +41,38 @@ abstract class BaseFaltan extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getNompre()
 	{
 
-		return $this->nompre;
+		return $this->nompre; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getStacod()
 	{
 
-		return $this->stacod;
+		return $this->stacod; 		
 	}
-
 	
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpre($v)
 	{

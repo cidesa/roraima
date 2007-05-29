@@ -29,23 +29,21 @@ abstract class BaseForcorsubsec extends BaseObject  implements Persistent {
 	public function getCodsec()
 	{
 
-		return $this->codsec;
+		return $this->codsec; 		
 	}
-
 	
 	public function getCorsubsec()
 	{
 
-		return $this->corsubsec;
+		return number_format($this->corsubsec,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsec($v)
 	{

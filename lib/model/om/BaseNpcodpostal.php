@@ -29,23 +29,20 @@ abstract class BaseNpcodpostal extends BaseObject  implements Persistent {
 	public function getCodpos()
 	{
 
-		return $this->codpos;
+		return $this->codpos; 		
 	}
-
 	
 	public function getCiupos()
 	{
 
-		return $this->ciupos;
+		return $this->ciupos; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpos($v)
 	{

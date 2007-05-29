@@ -81,37 +81,32 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodmue()
 	{
 
-		return $this->codmue;
+		return $this->codmue; 		
 	}
-
 	
 	public function getNrodismue()
 	{
 
-		return $this->nrodismue;
+		return $this->nrodismue; 		
 	}
-
 	
 	public function getMotdismue()
 	{
 
-		return $this->motdismue;
+		return $this->motdismue; 		
 	}
-
 	
 	public function getTipdismue()
 	{
 
-		return $this->tipdismue;
+		return $this->tipdismue; 		
 	}
-
 	
 	public function getFecdismue($format = 'Y-m-d')
 	{
@@ -160,65 +155,58 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 	public function getMondismue()
 	{
 
-		return $this->mondismue;
+		return number_format($this->mondismue,2,',','.');
+		
 	}
-
 	
 	public function getDetdismue()
 	{
 
-		return $this->detdismue;
+		return $this->detdismue; 		
 	}
-
 	
 	public function getCodubiori()
 	{
 
-		return $this->codubiori;
+		return $this->codubiori; 		
 	}
-
 	
 	public function getCodubides()
 	{
 
-		return $this->codubides;
+		return $this->codubides; 		
 	}
-
 	
 	public function getObsdismue()
 	{
 
-		return $this->obsdismue;
+		return $this->obsdismue; 		
 	}
-
 	
 	public function getStadismue()
 	{
 
-		return $this->stadismue;
+		return $this->stadismue; 		
 	}
-
 	
 	public function getCodmot()
 	{
 
-		return $this->codmot;
+		return $this->codmot; 		
 	}
-
 	
 	public function getVidutil()
 	{
 
-		return $this->vidutil;
+		return number_format($this->vidutil,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

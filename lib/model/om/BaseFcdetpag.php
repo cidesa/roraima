@@ -43,37 +43,33 @@ abstract class BaseFcdetpag extends BaseObject  implements Persistent {
 	public function getNumpag()
 	{
 
-		return $this->numpag;
+		return $this->numpag; 		
 	}
-
 	
 	public function getNrodet()
 	{
 
-		return $this->nrodet;
+		return $this->nrodet; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getTippag()
 	{
 
-		return $this->tippag;
+		return $this->tippag; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumpag($v)
 	{

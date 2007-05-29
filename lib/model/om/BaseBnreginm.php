@@ -201,37 +201,32 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodinm()
 	{
 
-		return $this->codinm;
+		return $this->codinm; 		
 	}
-
 	
 	public function getDesinm()
 	{
 
-		return $this->desinm;
+		return $this->desinm; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getFecreg($format = 'Y-m-d')
 	{
@@ -368,247 +363,222 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 	public function getOrdrcp()
 	{
 
-		return $this->ordrcp;
+		return $this->ordrcp; 		
 	}
-
 	
 	public function getFotinm()
 	{
 
-		return $this->fotinm;
+		return $this->fotinm; 		
 	}
-
 	
 	public function getDeninm()
 	{
 
-		return $this->deninm;
+		return $this->deninm; 		
 	}
-
 	
 	public function getNroexp()
 	{
 
-		return $this->nroexp;
+		return $this->nroexp; 		
 	}
-
 	
 	public function getDetinm()
 	{
 
-		return $this->detinm;
+		return $this->detinm; 		
 	}
-
 	
 	public function getCodubi()
 	{
 
-		return $this->codubi;
+		return $this->codubi; 		
 	}
-
 	
 	public function getAvaact()
 	{
 
-		return $this->avaact;
+		return number_format($this->avaact,2,',','.');
+		
 	}
-
 	
 	public function getClafun()
 	{
 
-		return $this->clafun;
+		return $this->clafun; 		
 	}
-
 	
 	public function getAvacom()
 	{
 
-		return $this->avacom;
+		return number_format($this->avacom,2,',','.');
+		
 	}
-
 	
 	public function getEdoleg()
 	{
 
-		return $this->edoleg;
+		return $this->edoleg; 		
 	}
-
 	
 	public function getViduti()
 	{
 
-		return $this->viduti;
+		return $this->viduti; 		
 	}
-
 	
 	public function getObsinm()
 	{
 
-		return $this->obsinm;
+		return $this->obsinm; 		
 	}
-
 	
 	public function getLinnor()
 	{
 
-		return $this->linnor;
+		return $this->linnor; 		
 	}
-
 	
 	public function getLinsur()
 	{
 
-		return $this->linsur;
+		return $this->linsur; 		
 	}
-
 	
 	public function getLinest()
 	{
 
-		return $this->linest;
+		return $this->linest; 		
 	}
-
 	
 	public function getLinoes()
 	{
 
-		return $this->linoes;
+		return $this->linoes; 		
 	}
-
 	
 	public function getAreter()
 	{
 
-		return $this->areter;
+		return $this->areter; 		
 	}
-
 	
 	public function getArecub()
 	{
 
-		return $this->arecub;
+		return $this->arecub; 		
 	}
-
 	
 	public function getArecon()
 	{
 
-		return $this->arecon;
+		return $this->arecon; 		
 	}
-
 	
 	public function getAreotr()
 	{
 
-		return $this->areotr;
+		return $this->areotr; 		
 	}
-
 	
 	public function getAretot()
 	{
 
-		return $this->aretot;
+		return $this->aretot; 		
 	}
-
 	
 	public function getEdoinm()
 	{
 
-		return $this->edoinm;
+		return $this->edoinm; 		
 	}
-
 	
 	public function getMuninm()
 	{
 
-		return $this->muninm;
+		return $this->muninm; 		
 	}
-
 	
 	public function getDepinm()
 	{
 
-		return $this->depinm;
+		return $this->depinm; 		
 	}
-
 	
 	public function getDirinm()
 	{
 
-		return $this->dirinm;
+		return $this->dirinm; 		
 	}
-
 	
 	public function getMesdep()
 	{
 
-		return $this->mesdep;
+		return number_format($this->mesdep,2,',','.');
+		
 	}
-
 	
 	public function getValini()
 	{
 
-		return $this->valini;
+		return number_format($this->valini,2,',','.');
+		
 	}
-
 	
 	public function getValres()
 	{
 
-		return $this->valres;
+		return number_format($this->valres,2,',','.');
+		
 	}
-
 	
 	public function getVallib()
 	{
 
-		return $this->vallib;
+		return number_format($this->vallib,2,',','.');
+		
 	}
-
 	
 	public function getValrex()
 	{
 
-		return $this->valrex;
+		return number_format($this->valrex,2,',','.');
+		
 	}
-
 	
 	public function getCosrep()
 	{
 
-		return $this->cosrep;
+		return number_format($this->cosrep,2,',','.');
+		
 	}
-
 	
 	public function getDepmen()
 	{
 
-		return $this->depmen;
+		return number_format($this->depmen,2,',','.');
+		
 	}
-
 	
 	public function getDepacu()
 	{
 
-		return $this->depacu;
+		return number_format($this->depacu,2,',','.');
+		
 	}
-
 	
 	public function getStainm()
 	{
 
-		return $this->stainm;
+		return $this->stainm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

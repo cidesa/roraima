@@ -37,37 +37,33 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 	public function getNumrep()
 	{
 
-		return $this->numrep;
+		return $this->numrep; 		
 	}
-
 	
 	public function getDescrip()
 	{
 
-		return $this->descrip;
+		return $this->descrip; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumrep($v)
 	{

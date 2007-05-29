@@ -69,9 +69,8 @@ abstract class BaseDftemporal extends BaseObject  implements Persistent {
 	public function getCodigo()
 	{
 
-		return $this->codigo;
+		return $this->codigo; 		
 	}
-
 	
 	public function getFecha($format = 'Y-m-d')
 	{
@@ -98,23 +97,21 @@ abstract class BaseDftemporal extends BaseObject  implements Persistent {
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getAbr()
 	{
 
-		return $this->abr;
+		return $this->abr; 		
 	}
-
 	
 	public function getBen()
 	{
 
-		return $this->ben;
+		return $this->ben; 		
 	}
-
 	
 	public function getFecharec($format = 'Y-m-d')
 	{
@@ -141,51 +138,44 @@ abstract class BaseDftemporal extends BaseObject  implements Persistent {
 	public function getEstad()
 	{
 
-		return $this->estad;
+		return $this->estad; 		
 	}
-
 	
 	public function getNomtab()
 	{
 
-		return $this->nomtab;
+		return $this->nomtab; 		
 	}
-
 	
 	public function getUni()
 	{
 
-		return $this->uni;
+		return $this->uni; 		
 	}
-
 	
 	public function getUnidad()
 	{
 
-		return $this->unidad;
+		return $this->unidad; 		
 	}
-
 	
 	public function getUnidadori()
 	{
 
-		return $this->unidadori;
+		return $this->unidadori; 		
 	}
-
 	
 	public function getVida()
 	{
 
-		return $this->vida;
+		return $this->vida; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodigo($v)
 	{

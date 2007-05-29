@@ -79,9 +79,8 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 	public function getNumpag()
 	{
 
-		return $this->numpag;
+		return $this->numpag; 		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -108,58 +107,52 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getDespag()
 	{
 
-		return $this->despag;
+		return $this->despag; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getMonefe()
 	{
 
-		return $this->monefe;
+		return number_format($this->monefe,2,',','.');
+		
 	}
-
 	
 	public function getFunpag()
 	{
 
-		return $this->funpag;
+		return $this->funpag; 		
 	}
-
 	
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getNumpagold()
 	{
 
-		return $this->numpagold;
+		return $this->numpagold; 		
 	}
-
 	
 	public function getEdopag()
 	{
 
-		return $this->edopag;
+		return $this->edopag; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -186,23 +179,20 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 	public function getMotanu()
 	{
 
-		return $this->motanu;
+		return $this->motanu; 		
 	}
-
 	
 	public function getCedanu()
 	{
 
-		return $this->cedanu;
+		return $this->cedanu; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumpag($v)
 	{

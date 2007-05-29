@@ -81,16 +81,14 @@ abstract class BaseInabonos extends BaseObject  implements Persistent {
 	public function getNumpag()
 	{
 
-		return $this->numpag;
+		return $this->numpag; 		
 	}
-
 	
 	public function getNumref()
 	{
 
-		return $this->numref;
+		return $this->numref; 		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -117,30 +115,29 @@ abstract class BaseInabonos extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getSalpag()
 	{
 
-		return $this->salpag;
+		return number_format($this->salpag,2,',','.');
+		
 	}
-
 	
 	public function getMonefe()
 	{
 
-		return $this->monefe;
+		return number_format($this->monefe,2,',','.');
+		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -167,37 +164,32 @@ abstract class BaseInabonos extends BaseObject  implements Persistent {
 	public function getDespag()
 	{
 
-		return $this->despag;
+		return $this->despag; 		
 	}
-
 	
 	public function getFunpag()
 	{
 
-		return $this->funpag;
+		return $this->funpag; 		
 	}
-
 	
 	public function getStapag()
 	{
 
-		return $this->stapag;
+		return $this->stapag; 		
 	}
-
 	
 	public function getFueing()
 	{
 
-		return $this->fueing;
+		return $this->fueing; 		
 	}
-
 	
 	public function getMotanu()
 	{
 
-		return $this->motanu;
+		return $this->motanu; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -224,16 +216,14 @@ abstract class BaseInabonos extends BaseObject  implements Persistent {
 	public function getEdopag()
 	{
 
-		return $this->edopag;
+		return $this->edopag; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumpag($v)
 	{

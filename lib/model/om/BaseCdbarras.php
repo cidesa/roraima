@@ -33,30 +33,26 @@ abstract class BaseCdbarras extends BaseObject  implements Persistent {
 	public function getCodigv()
 	{
 
-		return $this->codigv;
+		return $this->codigv; 		
 	}
-
 	
 	public function getCodbar()
 	{
 
-		return $this->codbar;
+		return $this->codbar; 		
 	}
-
 	
 	public function getDescri()
 	{
 
-		return $this->descri;
+		return $this->descri; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodigv($v)
 	{

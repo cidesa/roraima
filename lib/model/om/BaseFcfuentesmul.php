@@ -33,30 +33,26 @@ abstract class BaseFcfuentesmul extends BaseObject  implements Persistent {
 	public function getCodmul()
 	{
 
-		return $this->codmul;
+		return $this->codmul; 		
 	}
-
 	
 	public function getCodfue()
 	{
 
-		return $this->codfue;
+		return $this->codfue; 		
 	}
-
 	
 	public function getCodfuegen()
 	{
 
-		return $this->codfuegen;
+		return $this->codfuegen; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmul($v)
 	{

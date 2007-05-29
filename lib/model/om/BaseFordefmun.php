@@ -33,30 +33,26 @@ abstract class BaseFordefmun extends BaseObject  implements Persistent {
 	public function getCodest()
 	{
 
-		return $this->codest;
+		return $this->codest; 		
 	}
-
 	
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getDesmun()
 	{
 
-		return $this->desmun;
+		return $this->desmun; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodest($v)
 	{

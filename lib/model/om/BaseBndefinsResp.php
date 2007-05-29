@@ -97,107 +97,94 @@ abstract class BaseBndefinsResp extends BaseObject  implements Persistent {
 	public function getCodins()
 	{
 
-		return $this->codins;
+		return $this->codins; 		
 	}
-
 	
 	public function getNomins()
 	{
 
-		return $this->nomins;
+		return $this->nomins; 		
 	}
-
 	
 	public function getDirins()
 	{
 
-		return $this->dirins;
+		return $this->dirins; 		
 	}
-
 	
 	public function getTelins()
 	{
 
-		return $this->telins;
+		return $this->telins; 		
 	}
-
 	
 	public function getFaxins()
 	{
 
-		return $this->faxins;
+		return $this->faxins; 		
 	}
-
 	
 	public function getEmail()
 	{
 
-		return $this->email;
+		return $this->email; 		
 	}
-
 	
 	public function getEdoins()
 	{
 
-		return $this->edoins;
+		return $this->edoins; 		
 	}
-
 	
 	public function getMunins()
 	{
 
-		return $this->munins;
+		return $this->munins; 		
 	}
-
 	
 	public function getPaqins()
 	{
 
-		return $this->paqins;
+		return $this->paqins; 		
 	}
-
 	
 	public function getForact()
 	{
 
-		return $this->foract;
+		return $this->foract; 		
 	}
-
 	
 	public function getDesact()
 	{
 
-		return $this->desact;
+		return $this->desact; 		
 	}
-
 	
 	public function getLonact()
 	{
 
-		return $this->lonact;
+		return number_format($this->lonact,2,',','.');
+		
 	}
-
 	
 	public function getForubi()
 	{
 
-		return $this->forubi;
+		return $this->forubi; 		
 	}
-
 	
 	public function getDesubi()
 	{
 
-		return $this->desubi;
+		return $this->desubi; 		
 	}
-
 	
 	public function getLonubi()
 	{
 
-		return $this->lonubi;
+		return number_format($this->lonubi,2,',','.');
+		
 	}
-
 	
 	public function getFecper($format = 'Y-m-d')
 	{
@@ -246,23 +233,20 @@ abstract class BaseBndefinsResp extends BaseObject  implements Persistent {
 	public function getCoddes()
 	{
 
-		return $this->coddes;
+		return $this->coddes; 		
 	}
-
 	
 	public function getPorrev()
 	{
 
-		return $this->porrev;
+		return $this->porrev; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodins($v)
 	{

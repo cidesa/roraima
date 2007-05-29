@@ -41,44 +41,38 @@ abstract class BaseBdcriterio extends BaseObject  implements Persistent {
 	public function getCriterio()
 	{
 
-		return $this->criterio;
+		return $this->criterio; 		
 	}
-
 	
 	public function getSql()
 	{
 
-		return $this->sql;
+		return $this->sql; 		
 	}
-
 	
 	public function getTemporal()
 	{
 
-		return $this->temporal;
+		return $this->temporal; 		
 	}
-
 	
 	public function getObservacion()
 	{
 
-		return $this->observacion;
+		return $this->observacion; 		
 	}
-
 	
 	public function getNumero()
 	{
 
-		return $this->numero;
+		return $this->numero; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCriterio($v)
 	{

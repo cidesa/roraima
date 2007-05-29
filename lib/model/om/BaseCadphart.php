@@ -85,9 +85,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 	public function getDphart()
 	{
 
-		return $this->dphart;
+		return $this->dphart; 		
 	}
-
 	
 	public function getFecdph($format = 'Y-m-d')
 	{
@@ -114,93 +113,81 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 	public function getReqart()
 	{
 
-		return $this->reqart;
+		return $this->reqart; 		
 	}
-
 	
 	public function getDesdph()
 	{
 
-		return $this->desdph;
+		return $this->desdph; 		
 	}
-
 	
 	public function getCodori()
 	{
 
-		return $this->codori;
+		return $this->codori; 		
 	}
-
 	
 	public function getStadph()
 	{
 
-		return $this->stadph;
+		return $this->stadph; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getRefpag()
 	{
 
-		return $this->refpag;
+		return $this->refpag; 		
 	}
-
 	
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getTipdph()
 	{
 
-		return $this->tipdph;
+		return $this->tipdph; 		
 	}
-
 	
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getMondph()
 	{
 
-		return $this->mondph;
+		return number_format($this->mondph,2,',','.');
+		
 	}
-
 	
 	public function getObsdph()
 	{
 
-		return $this->obsdph;
+		return $this->obsdph; 		
 	}
-
 	
 	public function getFordesp()
 	{
 
-		return $this->fordesp;
+		return $this->fordesp; 		
 	}
-
 	
 	public function getReapor()
 	{
 
-		return $this->reapor;
+		return $this->reapor; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -227,9 +214,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDphart($v)
 	{

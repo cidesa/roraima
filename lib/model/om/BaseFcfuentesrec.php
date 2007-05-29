@@ -33,30 +33,26 @@ abstract class BaseFcfuentesrec extends BaseObject  implements Persistent {
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getCodfue()
 	{
 
-		return $this->codfue;
+		return $this->codfue; 		
 	}
-
 	
 	public function getCodfuegen()
 	{
 
-		return $this->codfuegen;
+		return $this->codfuegen; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrec($v)
 	{

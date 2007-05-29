@@ -41,44 +41,39 @@ abstract class BaseApliUser extends BaseObject  implements Persistent {
 	public function getCodapl()
 	{
 
-		return $this->codapl;
+		return $this->codapl; 		
 	}
-
 	
 	public function getLoguse()
 	{
 
-		return $this->loguse;
+		return $this->loguse; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomopc()
 	{
 
-		return $this->nomopc;
+		return $this->nomopc; 		
 	}
-
 	
 	public function getPriuse()
 	{
 
-		return $this->priuse;
+		return number_format($this->priuse,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodapl($v)
 	{

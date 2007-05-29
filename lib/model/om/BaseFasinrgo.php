@@ -29,23 +29,20 @@ abstract class BaseFasinrgo extends BaseObject  implements Persistent {
 	public function getCodrgo()
 	{
 
-		return $this->codrgo;
+		return $this->codrgo; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrgo($v)
 	{

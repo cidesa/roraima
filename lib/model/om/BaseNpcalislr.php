@@ -49,9 +49,8 @@ abstract class BaseNpcalislr extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -100,37 +99,36 @@ abstract class BaseNpcalislr extends BaseObject  implements Persistent {
 	public function getMesper()
 	{
 
-		return $this->mesper;
+		return number_format($this->mesper,2,',','.');
+		
 	}
-
 	
 	public function getAnoper()
 	{
 
-		return $this->anoper;
+		return number_format($this->anoper,2,',','.');
+		
 	}
-
 	
 	public function getRemune()
 	{
 
-		return $this->remune;
+		return number_format($this->remune,2,',','.');
+		
 	}
-
 	
 	public function getImpret()
 	{
 
-		return $this->impret;
+		return number_format($this->impret,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

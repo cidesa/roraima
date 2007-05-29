@@ -37,37 +37,32 @@ abstract class BaseOcunidad extends BaseObject  implements Persistent {
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getDesuni()
 	{
 
-		return $this->desuni;
+		return $this->desuni; 		
 	}
-
 	
 	public function getAbruni()
 	{
 
-		return $this->abruni;
+		return $this->abruni; 		
 	}
-
 	
 	public function getStauni()
 	{
 
-		return $this->stauni;
+		return $this->stauni; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoduni($v)
 	{

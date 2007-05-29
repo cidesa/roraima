@@ -29,23 +29,20 @@ abstract class BaseNptippag extends BaseObject  implements Persistent {
 	public function getCodtippag()
 	{
 
-		return $this->codtippag;
+		return $this->codtippag; 		
 	}
-
 	
 	public function getNomtippag()
 	{
 
-		return $this->nomtippag;
+		return $this->nomtippag; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtippag($v)
 	{

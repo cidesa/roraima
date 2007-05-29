@@ -45,51 +45,44 @@ abstract class BaseNpcajaho extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodconpat()
 	{
 
-		return $this->codconpat;
+		return $this->codconpat; 		
 	}
-
 	
 	public function getCodcontra()
 	{
 
-		return $this->codcontra;
+		return $this->codcontra; 		
 	}
-
 	
 	public function getCodconpre()
 	{
 
-		return $this->codconpre;
+		return $this->codconpre; 		
 	}
-
 	
 	public function getCodconamo()
 	{
 
-		return $this->codconamo;
+		return $this->codconamo; 		
 	}
-
 	
 	public function getCodconint()
 	{
 
-		return $this->codconint;
+		return $this->codconint; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

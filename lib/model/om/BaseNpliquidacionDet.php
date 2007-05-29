@@ -53,65 +53,58 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getConcepto()
 	{
 
-		return $this->concepto;
+		return $this->concepto; 		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getAsided()
 	{
 
-		return $this->asided;
+		return $this->asided; 		
 	}
-
 	
 	public function getNumreg()
 	{
 
-		return $this->numreg;
+		return number_format($this->numreg,2,',','.');
+		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

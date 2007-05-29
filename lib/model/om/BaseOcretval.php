@@ -45,51 +45,46 @@ abstract class BaseOcretval extends BaseObject  implements Persistent {
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNumval()
 	{
 
-		return $this->numval;
+		return $this->numval; 		
 	}
-
 	
 	public function getCodtipval()
 	{
 
-		return $this->codtipval;
+		return $this->codtipval; 		
 	}
-
 	
 	public function getPorret()
 	{
 
-		return $this->porret;
+		return number_format($this->porret,2,',','.');
+		
 	}
-
 	
 	public function getMonret()
 	{
 
-		return $this->monret;
+		return number_format($this->monret,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtip($v)
 	{

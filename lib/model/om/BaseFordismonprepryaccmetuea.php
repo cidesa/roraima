@@ -53,65 +53,57 @@ abstract class BaseFordismonprepryaccmetuea extends BaseObject  implements Persi
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodaccesp()
 	{
 
-		return $this->codaccesp;
+		return $this->codaccesp; 		
 	}
-
 	
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getPerpre()
 	{
 
-		return $this->perpre;
+		return $this->perpre; 		
 	}
-
 	
 	public function getMonper()
 	{
 
-		return $this->monper;
+		return number_format($this->monper,2,',','.');
+		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

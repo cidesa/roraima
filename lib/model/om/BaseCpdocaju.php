@@ -37,37 +37,32 @@ abstract class BaseCpdocaju extends BaseObject  implements Persistent {
 	public function getTipaju()
 	{
 
-		return $this->tipaju;
+		return $this->tipaju; 		
 	}
-
 	
 	public function getNomext()
 	{
 
-		return $this->nomext;
+		return $this->nomext; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getRefier()
 	{
 
-		return $this->refier;
+		return $this->refier; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTipaju($v)
 	{

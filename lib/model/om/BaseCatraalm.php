@@ -41,9 +41,8 @@ abstract class BaseCatraalm extends BaseObject  implements Persistent {
 	public function getCodtra()
 	{
 
-		return $this->codtra;
+		return $this->codtra; 		
 	}
-
 	
 	public function getFectra($format = 'Y-m-d')
 	{
@@ -70,30 +69,26 @@ abstract class BaseCatraalm extends BaseObject  implements Persistent {
 	public function getDestra()
 	{
 
-		return $this->destra;
+		return $this->destra; 		
 	}
-
 	
 	public function getAlmori()
 	{
 
-		return $this->almori;
+		return $this->almori; 		
 	}
-
 	
 	public function getAlmdes()
 	{
 
-		return $this->almdes;
+		return $this->almdes; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtra($v)
 	{

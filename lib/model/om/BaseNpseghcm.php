@@ -41,44 +41,41 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getTippar()
 	{
 
-		return $this->tippar;
+		return $this->tippar; 		
 	}
-
 	
 	public function getEdaddes()
 	{
 
-		return $this->edaddes;
+		return number_format($this->edaddes,2,',','.');
+		
 	}
-
 	
 	public function getEdadhas()
 	{
 
-		return $this->edadhas;
+		return number_format($this->edadhas,2,',','.');
+		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

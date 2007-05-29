@@ -41,44 +41,39 @@ abstract class BaseFcaliuso extends BaseObject  implements Persistent {
 	public function getCoduso()
 	{
 
-		return $this->coduso;
+		return $this->coduso; 		
 	}
-
 	
 	public function getAnovig()
 	{
 
-		return $this->anovig;
+		return $this->anovig; 		
 	}
-
 	
 	public function getNomuso()
 	{
 
-		return $this->nomuso;
+		return $this->nomuso; 		
 	}
-
 	
 	public function getAlimon()
 	{
 
-		return $this->alimon;
+		return number_format($this->alimon,2,',','.');
+		
 	}
-
 	
 	public function getPormon()
 	{
 
-		return $this->pormon;
+		return $this->pormon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoduso($v)
 	{

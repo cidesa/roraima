@@ -45,51 +45,45 @@ abstract class BaseFormetfinotr extends BaseObject  implements Persistent {
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodparegr()
 	{
 
-		return $this->codparegr;
+		return $this->codparegr; 		
 	}
-
 	
 	public function getCodparing()
 	{
 
-		return $this->codparing;
+		return $this->codparing; 		
 	}
-
 	
 	public function getMonfin()
 	{
 
-		return $this->monfin;
+		return number_format($this->monfin,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmet($v)
 	{

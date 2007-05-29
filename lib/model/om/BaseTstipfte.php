@@ -29,23 +29,20 @@ abstract class BaseTstipfte extends BaseObject  implements Persistent {
 	public function getCodtipfte()
 	{
 
-		return $this->codtipfte;
+		return $this->codtipfte; 		
 	}
-
 	
 	public function getNomtipfte()
 	{
 
-		return $this->nomtipfte;
+		return $this->nomtipfte; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipfte($v)
 	{

@@ -45,51 +45,46 @@ abstract class BaseCondefbalgen extends BaseObject  implements Persistent {
 	public function getTiprep()
 	{
 
-		return $this->tiprep;
+		return $this->tiprep; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getDescta()
 	{
 
-		return $this->descta;
+		return $this->descta; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getNivel()
 	{
 
-		return $this->nivel;
+		return number_format($this->nivel,2,',','.');
+		
 	}
-
 	
 	public function getOrden()
 	{
 
-		return $this->orden;
+		return number_format($this->orden,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTiprep($v)
 	{

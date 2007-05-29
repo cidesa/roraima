@@ -45,30 +45,27 @@ abstract class BaseNpsalint06022007 extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodasi()
 	{
 
-		return $this->codasi;
+		return $this->codasi; 		
 	}
-
 	
 	public function getMonasi()
 	{
 
-		return $this->monasi;
+		return number_format($this->monasi,2,',','.');
+		
 	}
-
 	
 	public function getFecinicon($format = 'Y-m-d')
 	{
@@ -117,9 +114,8 @@ abstract class BaseNpsalint06022007 extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

@@ -41,44 +41,40 @@ abstract class BaseForasicosmet extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getUnimed()
 	{
 
-		return $this->unimed;
+		return $this->unimed; 		
 	}
-
 	
 	public function getCanmet()
 	{
 
-		return $this->canmet;
+		return number_format($this->canmet,2,',','.');
+		
 	}
-
 	
 	public function getCosmet()
 	{
 
-		return $this->cosmet;
+		return number_format($this->cosmet,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

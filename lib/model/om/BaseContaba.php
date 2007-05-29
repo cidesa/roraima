@@ -205,79 +205,70 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getLoncta()
 	{
 
-		return $this->loncta;
+		return number_format($this->loncta,2,',','.');
+		
 	}
-
 	
 	public function getNumrup()
 	{
 
-		return $this->numrup;
+		return number_format($this->numrup,2,',','.');
+		
 	}
-
 	
 	public function getForcta()
 	{
 
-		return $this->forcta;
+		return $this->forcta; 		
 	}
-
 	
 	public function getSitfin()
 	{
 
-		return $this->sitfin;
+		return $this->sitfin; 		
 	}
-
 	
 	public function getSitfis()
 	{
 
-		return $this->sitfis;
+		return $this->sitfis; 		
 	}
-
 	
 	public function getGanper()
 	{
 
-		return $this->ganper;
+		return $this->ganper; 		
 	}
-
 	
 	public function getEjepre()
 	{
 
-		return $this->ejepre;
+		return $this->ejepre; 		
 	}
-
 	
 	public function getHacmun()
 	{
 
-		return $this->hacmun;
+		return $this->hacmun; 		
 	}
-
 	
 	public function getCtlgas()
 	{
 
-		return $this->ctlgas;
+		return $this->ctlgas; 		
 	}
-
 	
 	public function getCtling()
 	{
 
-		return $this->ctling;
+		return $this->ctling; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -326,240 +317,206 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 	public function getCodtes()
 	{
 
-		return $this->codtes;
+		return $this->codtes; 		
 	}
-
 	
 	public function getCodhac()
 	{
 
-		return $this->codhac;
+		return $this->codhac; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getCodord()
 	{
 
-		return $this->codord;
+		return $this->codord; 		
 	}
-
 	
 	public function getCodtesact()
 	{
 
-		return $this->codtesact;
+		return $this->codtesact; 		
 	}
-
 	
 	public function getCodhacact()
 	{
 
-		return $this->codhacact;
+		return $this->codhacact; 		
 	}
-
 	
 	public function getCodhacpat()
 	{
 
-		return $this->codhacpat;
+		return $this->codhacpat; 		
 	}
-
 	
 	public function getCodtespas()
 	{
 
-		return $this->codtespas;
+		return $this->codtespas; 		
 	}
-
 	
 	public function getCodhacpas()
 	{
 
-		return $this->codhacpas;
+		return $this->codhacpas; 		
 	}
-
 	
 	public function getCodind()
 	{
 
-		return $this->codind;
+		return $this->codind; 		
 	}
-
 	
 	public function getCodinh()
 	{
 
-		return $this->codinh;
+		return $this->codinh; 		
 	}
-
 	
 	public function getCodegd()
 	{
 
-		return $this->codegd;
+		return $this->codegd; 		
 	}
-
 	
 	public function getCodegh()
 	{
 
-		return $this->codegh;
+		return $this->codegh; 		
 	}
-
 	
 	public function getCodres()
 	{
 
-		return $this->codres;
+		return $this->codres; 		
 	}
-
 	
 	public function getCodejepre()
 	{
 
-		return $this->codejepre;
+		return $this->codejepre; 		
 	}
-
 	
 	public function getCodctd()
 	{
 
-		return $this->codctd;
+		return $this->codctd; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getCodresant()
 	{
 
-		return $this->codresant;
+		return $this->codresant; 		
 	}
-
 	
 	public function getEtadef()
 	{
 
-		return $this->etadef;
+		return $this->etadef; 		
 	}
-
 	
 	public function getCodctagas()
 	{
 
-		return $this->codctagas;
+		return $this->codctagas; 		
 	}
-
 	
 	public function getCodctaban()
 	{
 
-		return $this->codctaban;
+		return $this->codctaban; 		
 	}
-
 	
 	public function getCodctaret()
 	{
 
-		return $this->codctaret;
+		return $this->codctaret; 		
 	}
-
 	
 	public function getCodctaben()
 	{
 
-		return $this->codctaben;
+		return $this->codctaben; 		
 	}
-
 	
 	public function getCodctaart()
 	{
 
-		return $this->codctaart;
+		return $this->codctaart; 		
 	}
-
 	
 	public function getCodctagashas()
 	{
 
-		return $this->codctagashas;
+		return $this->codctagashas; 		
 	}
-
 	
 	public function getCodctabanhas()
 	{
 
-		return $this->codctabanhas;
+		return $this->codctabanhas; 		
 	}
-
 	
 	public function getCodctarethas()
 	{
 
-		return $this->codctarethas;
+		return $this->codctarethas; 		
 	}
-
 	
 	public function getCodctabenhas()
 	{
 
-		return $this->codctabenhas;
+		return $this->codctabenhas; 		
 	}
-
 	
 	public function getCodctaarthas()
 	{
 
-		return $this->codctaarthas;
+		return $this->codctaarthas; 		
 	}
-
 	
 	public function getCodctapageje()
 	{
 
-		return $this->codctapageje;
+		return $this->codctapageje; 		
 	}
-
 	
 	public function getCodctaingdevn()
 	{
 
-		return $this->codctaingdevn;
+		return $this->codctaingdevn; 		
 	}
-
 	
 	public function getCodctaingdev()
 	{
 
-		return $this->codctaingdev;
+		return $this->codctaingdev; 		
 	}
-
 	
 	public function getUnidad()
 	{
 
-		return $this->unidad;
+		return $this->unidad; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

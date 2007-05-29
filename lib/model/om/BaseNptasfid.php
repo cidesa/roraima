@@ -77,16 +77,15 @@ abstract class BaseNptasfid extends BaseObject  implements Persistent {
 	public function getTasa()
 	{
 
-		return $this->tasa;
+		return number_format($this->tasa,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecdesde($v)
 	{

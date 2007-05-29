@@ -137,212 +137,193 @@ abstract class BaseFcdefins extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getLoncodact()
 	{
 
-		return $this->loncodact;
+		return number_format($this->loncodact,2,',','.');
+		
 	}
-
 	
 	public function getLoncodveh()
 	{
 
-		return $this->loncodveh;
+		return number_format($this->loncodveh,2,',','.');
+		
 	}
-
 	
 	public function getLoncodcat()
 	{
 
-		return $this->loncodcat;
+		return number_format($this->loncodcat,2,',','.');
+		
 	}
-
 	
 	public function getLoncodubifis()
 	{
 
-		return $this->loncodubifis;
+		return number_format($this->loncodubifis,2,',','.');
+		
 	}
-
 	
 	public function getLoncodubimag()
 	{
 
-		return $this->loncodubimag;
+		return number_format($this->loncodubimag,2,',','.');
+		
 	}
-
 	
 	public function getRupact()
 	{
 
-		return $this->rupact;
+		return number_format($this->rupact,2,',','.');
+		
 	}
-
 	
 	public function getRupveh()
 	{
 
-		return $this->rupveh;
+		return number_format($this->rupveh,2,',','.');
+		
 	}
-
 	
 	public function getRupcat()
 	{
 
-		return $this->rupcat;
+		return number_format($this->rupcat,2,',','.');
+		
 	}
-
 	
 	public function getRupubifis()
 	{
 
-		return $this->rupubifis;
+		return number_format($this->rupubifis,2,',','.');
+		
 	}
-
 	
 	public function getRupubimag()
 	{
 
-		return $this->rupubimag;
+		return number_format($this->rupubimag,2,',','.');
+		
 	}
-
 	
 	public function getForact()
 	{
 
-		return $this->foract;
+		return $this->foract; 		
 	}
-
 	
 	public function getForveh()
 	{
 
-		return $this->forveh;
+		return $this->forveh; 		
 	}
-
 	
 	public function getForcat()
 	{
 
-		return $this->forcat;
+		return $this->forcat; 		
 	}
-
 	
 	public function getForubifis()
 	{
 
-		return $this->forubifis;
+		return $this->forubifis; 		
 	}
-
 	
 	public function getForubimag()
 	{
 
-		return $this->forubimag;
+		return $this->forubimag; 		
 	}
-
 	
 	public function getPorpic()
 	{
 
-		return $this->porpic;
+		return $this->porpic; 		
 	}
-
 	
 	public function getPorveh()
 	{
 
-		return $this->porveh;
+		return $this->porveh; 		
 	}
-
 	
 	public function getPorinm()
 	{
 
-		return $this->porinm;
+		return $this->porinm; 		
 	}
-
 	
 	public function getUnipic()
 	{
 
-		return $this->unipic;
+		return $this->unipic; 		
 	}
-
 	
 	public function getValunitri()
 	{
 
-		return $this->valunitri;
+		return number_format($this->valunitri,2,',','.');
+		
 	}
-
 	
 	public function getUnitas()
 	{
 
-		return $this->unitas;
+		return $this->unitas; 		
 	}
-
 	
 	public function getCodpic()
 	{
 
-		return $this->codpic;
+		return $this->codpic; 		
 	}
-
 	
 	public function getCodveh()
 	{
 
-		return $this->codveh;
+		return $this->codveh; 		
 	}
-
 	
 	public function getCodinm()
 	{
 
-		return $this->codinm;
+		return $this->codinm; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodesp()
 	{
 
-		return $this->codesp;
+		return $this->codesp; 		
 	}
-
 	
 	public function getCodapu()
 	{
 
-		return $this->codapu;
+		return $this->codapu; 		
 	}
-
 	
 	public function getCodajupic()
 	{
 
-		return $this->codajupic;
+		return $this->codajupic; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

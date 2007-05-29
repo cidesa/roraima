@@ -61,16 +61,14 @@ abstract class BaseContabbtemp extends BaseObject  implements Persistent {
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getDescta()
 	{
 
-		return $this->descta;
+		return $this->descta; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -119,51 +117,48 @@ abstract class BaseContabbtemp extends BaseObject  implements Persistent {
 	public function getSalant()
 	{
 
-		return $this->salant;
+		return number_format($this->salant,2,',','.');
+		
 	}
-
 	
 	public function getDebcre()
 	{
 
-		return $this->debcre;
+		return $this->debcre; 		
 	}
-
 	
 	public function getCargab()
 	{
 
-		return $this->cargab;
+		return $this->cargab; 		
 	}
-
 	
 	public function getSalprgper()
 	{
 
-		return $this->salprgper;
+		return number_format($this->salprgper,2,',','.');
+		
 	}
-
 	
 	public function getSalacuper()
 	{
 
-		return $this->salacuper;
+		return number_format($this->salacuper,2,',','.');
+		
 	}
-
 	
 	public function getSalprgperfor()
 	{
 
-		return $this->salprgperfor;
+		return number_format($this->salprgperfor,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcta($v)
 	{

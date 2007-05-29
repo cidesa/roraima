@@ -57,44 +57,42 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 	public function getRefing()
 	{
 
-		return $this->refing;
+		return $this->refing; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMoning()
 	{
 
-		return $this->moning;
+		return number_format($this->moning,2,',','.');
+		
 	}
-
 	
 	public function getMonrec()
 	{
 
-		return $this->monrec;
+		return number_format($this->monrec,2,',','.');
+		
 	}
-
 	
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getMontot()
 	{
 
-		return $this->montot;
+		return number_format($this->montot,2,',','.');
+		
 	}
-
 	
 	public function getFecing($format = 'Y-m-d')
 	{
@@ -121,23 +119,21 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 	public function getStaimp()
 	{
 
-		return $this->staimp;
+		return $this->staimp; 		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefing($v)
 	{

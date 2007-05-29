@@ -77,9 +77,8 @@ abstract class BaseFcabonos extends BaseObject  implements Persistent {
 	public function getNumpag()
 	{
 
-		return $this->numpag;
+		return $this->numpag; 		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -106,65 +105,59 @@ abstract class BaseFcabonos extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getFueing()
 	{
 
-		return $this->fueing;
+		return $this->fueing; 		
 	}
-
 	
 	public function getDespag()
 	{
 
-		return $this->despag;
+		return $this->despag; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getMonefe()
 	{
 
-		return $this->monefe;
+		return number_format($this->monefe,2,',','.');
+		
 	}
-
 	
 	public function getFunpag()
 	{
 
-		return $this->funpag;
+		return $this->funpag; 		
 	}
-
 	
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getSalpag()
 	{
 
-		return $this->salpag;
+		return number_format($this->salpag,2,',','.');
+		
 	}
-
 	
 	public function getStapag()
 	{
 
-		return $this->stapag;
+		return $this->stapag; 		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -191,23 +184,20 @@ abstract class BaseFcabonos extends BaseObject  implements Persistent {
 	public function getNumpag2()
 	{
 
-		return $this->numpag2;
+		return $this->numpag2; 		
 	}
-
 	
 	public function getNumref()
 	{
 
-		return $this->numref;
+		return $this->numref; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumpag($v)
 	{

@@ -33,30 +33,26 @@ abstract class BaseBnclafun extends BaseObject  implements Persistent {
 	public function getCodcla()
 	{
 
-		return $this->codcla;
+		return $this->codcla; 		
 	}
-
 	
 	public function getDescla()
 	{
 
-		return $this->descla;
+		return $this->descla; 		
 	}
-
 	
 	public function getStacla()
 	{
 
-		return $this->stacla;
+		return $this->stacla; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcla($v)
 	{

@@ -33,30 +33,26 @@ abstract class BaseNptitulos extends BaseObject  implements Persistent {
 	public function getCodniv()
 	{
 
-		return $this->codniv;
+		return $this->codniv; 		
 	}
-
 	
 	public function getCodtit()
 	{
 
-		return $this->codtit;
+		return $this->codtit; 		
 	}
-
 	
 	public function getDestit()
 	{
 
-		return $this->destit;
+		return $this->destit; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodniv($v)
 	{

@@ -37,37 +37,32 @@ abstract class BaseNptipadi extends BaseObject  implements Persistent {
 	public function getCodtit()
 	{
 
-		return $this->codtit;
+		return $this->codtit; 		
 	}
-
 	
 	public function getDestit()
 	{
 
-		return $this->destit;
+		return $this->destit; 		
 	}
-
 	
 	public function getCodadi()
 	{
 
-		return $this->codadi;
+		return $this->codadi; 		
 	}
-
 	
 	public function getDesadi()
 	{
 
-		return $this->desadi;
+		return $this->desadi; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtit($v)
 	{

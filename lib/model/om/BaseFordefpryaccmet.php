@@ -41,44 +41,38 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodaccesp()
 	{
 
-		return $this->codaccesp;
+		return $this->codaccesp; 		
 	}
-
 	
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getDesmet()
 	{
 
-		return $this->desmet;
+		return $this->desmet; 		
 	}
-
 	
 	public function getCodunimed()
 	{
 
-		return $this->codunimed;
+		return $this->codunimed; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

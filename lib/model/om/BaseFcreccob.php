@@ -33,9 +33,8 @@ abstract class BaseFcreccob extends BaseObject  implements Persistent {
 	public function getNument()
 	{
 
-		return $this->nument;
+		return $this->nument; 		
 	}
-
 	
 	public function getFecent($format = 'Y-m-d')
 	{
@@ -62,16 +61,14 @@ abstract class BaseFcreccob extends BaseObject  implements Persistent {
 	public function getCodcob()
 	{
 
-		return $this->codcob;
+		return $this->codcob; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNument($v)
 	{

@@ -33,30 +33,28 @@ abstract class BaseNpvacdiafer extends BaseObject  implements Persistent {
 	public function getDia()
 	{
 
-		return $this->dia;
+		return number_format($this->dia,2,',','.');
+		
 	}
-
 	
 	public function getMes()
 	{
 
-		return $this->mes;
+		return number_format($this->mes,2,',','.');
+		
 	}
-
 	
 	public function getDescripcion()
 	{
 
-		return $this->descripcion;
+		return $this->descripcion; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDia($v)
 	{

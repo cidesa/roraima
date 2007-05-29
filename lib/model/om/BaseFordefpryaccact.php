@@ -41,44 +41,38 @@ abstract class BaseFordefpryaccact extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodaccesp()
 	{
 
-		return $this->codaccesp;
+		return $this->codaccesp; 		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getDesact()
 	{
 
-		return $this->desact;
+		return $this->desact; 		
 	}
-
 	
 	public function getCodunimed()
 	{
 
-		return $this->codunimed;
+		return $this->codunimed; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

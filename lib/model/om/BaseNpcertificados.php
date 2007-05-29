@@ -33,30 +33,26 @@ abstract class BaseNpcertificados extends BaseObject  implements Persistent {
 	public function getCodadi()
 	{
 
-		return $this->codadi;
+		return $this->codadi; 		
 	}
-
 	
 	public function getCodcer()
 	{
 
-		return $this->codcer;
+		return $this->codcer; 		
 	}
-
 	
 	public function getDescer()
 	{
 
-		return $this->descer;
+		return $this->descer; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodadi($v)
 	{

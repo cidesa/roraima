@@ -65,86 +65,75 @@ abstract class BaseCaconpag extends BaseObject  implements Persistent {
 	public function getCodconpag()
 	{
 
-		return $this->codconpag;
+		return $this->codconpag; 		
 	}
-
 	
 	public function getDesconpag()
 	{
 
-		return $this->desconpag;
+		return $this->desconpag; 		
 	}
-
 	
 	public function getTipconpag()
 	{
 
-		return $this->tipconpag;
+		return $this->tipconpag; 		
 	}
-
 	
 	public function getNumdia()
 	{
 
-		return $this->numdia;
+		return number_format($this->numdia,2,',','.');
+		
 	}
-
 	
 	public function getGeneraop()
 	{
 
-		return $this->generaop;
+		return $this->generaop; 		
 	}
-
 	
 	public function getAsiparrec()
 	{
 
-		return $this->asiparrec;
+		return $this->asiparrec; 		
 	}
-
 	
 	public function getGeneracom()
 	{
 
-		return $this->generacom;
+		return $this->generacom; 		
 	}
-
 	
 	public function getMercon()
 	{
 
-		return $this->mercon;
+		return $this->mercon; 		
 	}
-
 	
 	public function getCtadev()
 	{
 
-		return $this->ctadev;
+		return $this->ctadev; 		
 	}
-
 	
 	public function getCtavco()
 	{
 
-		return $this->ctavco;
+		return $this->ctavco; 		
 	}
-
 	
 	public function getUnivta()
 	{
 
-		return $this->univta;
+		return $this->univta; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodconpag($v)
 	{

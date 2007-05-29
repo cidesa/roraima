@@ -73,44 +73,38 @@ abstract class BaseConsolidadoNuevo extends BaseObject  implements Persistent {
 	public function getIdenti()
 	{
 
-		return $this->identi;
+		return $this->identi; 		
 	}
-
 	
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getRefprc()
 	{
 
-		return $this->refprc;
+		return $this->refprc; 		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getRefcau()
 	{
 
-		return $this->refcau;
+		return $this->refcau; 		
 	}
-
 	
 	public function getRefpag()
 	{
 
-		return $this->refpag;
+		return $this->refpag; 		
 	}
-
 	
 	public function getFecmov($format = 'Y-m-d')
 	{
@@ -137,51 +131,45 @@ abstract class BaseConsolidadoNuevo extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getMonmov()
 	{
 
-		return $this->monmov;
+		return number_format($this->monmov,2,',','.');
+		
 	}
-
 	
 	public function getDesmov()
 	{
 
-		return $this->desmov;
+		return $this->desmov; 		
 	}
-
 	
 	public function getAfedis()
 	{
 
-		return $this->afedis;
+		return $this->afedis; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getNompre()
 	{
 
-		return $this->nompre;
+		return $this->nompre; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setIdenti($v)
 	{

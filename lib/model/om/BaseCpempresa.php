@@ -49,58 +49,50 @@ abstract class BaseCpempresa extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getRifemp()
 	{
 
-		return $this->rifemp;
+		return $this->rifemp; 		
 	}
-
 	
 	public function getNitemp()
 	{
 
-		return $this->nitemp;
+		return $this->nitemp; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getDesemp()
 	{
 
-		return $this->desemp;
+		return $this->desemp; 		
 	}
-
 	
 	public function getDiremp()
 	{
 
-		return $this->diremp;
+		return $this->diremp; 		
 	}
-
 	
 	public function getTelemp()
 	{
 
-		return $this->telemp;
+		return $this->telemp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

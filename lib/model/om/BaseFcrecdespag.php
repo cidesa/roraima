@@ -36,30 +36,27 @@ abstract class BaseFcrecdespag extends BaseObject  implements Persistent {
 	public function getNumpag()
 	{
 
-		return $this->numpag;
+		return $this->numpag; 		
 	}
-
 	
 	public function getCodrede()
 	{
 
-		return $this->codrede;
+		return $this->codrede; 		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumpag($v)
 	{

@@ -33,30 +33,26 @@ abstract class BaseFccarinm extends BaseObject  implements Persistent {
 	public function getCodcarinm()
 	{
 
-		return $this->codcarinm;
+		return $this->codcarinm; 		
 	}
-
 	
 	public function getNomcarinm()
 	{
 
-		return $this->nomcarinm;
+		return $this->nomcarinm; 		
 	}
-
 	
 	public function getStacarinm()
 	{
 
-		return $this->stacarinm;
+		return $this->stacarinm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcarinm($v)
 	{

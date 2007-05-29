@@ -53,65 +53,61 @@ abstract class BaseTabla26 extends BaseObject  implements Persistent {
 	public function getRefprc()
 	{
 
-		return $this->refprc;
+		return $this->refprc; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMonimp()
 	{
 
-		return $this->monimp;
+		return number_format($this->monimp,2,',','.');
+		
 	}
-
 	
 	public function getMoncom()
 	{
 
-		return $this->moncom;
+		return number_format($this->moncom,2,',','.');
+		
 	}
-
 	
 	public function getMoncau()
 	{
 
-		return $this->moncau;
+		return number_format($this->moncau,2,',','.');
+		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getStaimp()
 	{
 
-		return $this->staimp;
+		return $this->staimp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefprc($v)
 	{

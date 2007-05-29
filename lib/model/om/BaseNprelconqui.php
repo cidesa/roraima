@@ -65,37 +65,34 @@ abstract class BaseNprelconqui extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCantidad()
 	{
 
-		return $this->cantidad;
+		return number_format($this->cantidad,2,',','.');
+		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -144,37 +141,32 @@ abstract class BaseNprelconqui extends BaseObject  implements Persistent {
 	public function getCalcon()
 	{
 
-		return $this->calcon;
+		return $this->calcon; 		
 	}
-
 	
 	public function getActcon()
 	{
 
-		return $this->actcon;
+		return $this->actcon; 		
 	}
-
 	
 	public function getNomsus()
 	{
 
-		return $this->nomsus;
+		return $this->nomsus; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

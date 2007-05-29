@@ -29,23 +29,20 @@ abstract class BaseCaforent extends BaseObject  implements Persistent {
 	public function getCodforent()
 	{
 
-		return $this->codforent;
+		return $this->codforent; 		
 	}
-
 	
 	public function getDesforent()
 	{
 
-		return $this->desforent;
+		return $this->desforent; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodforent($v)
 	{

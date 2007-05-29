@@ -41,44 +41,41 @@ abstract class BaseOctartip extends BaseObject  implements Persistent {
 	public function getExppro()
 	{
 
-		return $this->exppro;
+		return number_format($this->exppro,2,',','.');
+		
 	}
-
 	
 	public function getValhor()
 	{
 
-		return $this->valhor;
+		return number_format($this->valhor,2,',','.');
+		
 	}
-
 	
 	public function getNumniv()
 	{
 
-		return $this->numniv;
+		return number_format($this->numniv,2,',','.');
+		
 	}
-
 	
 	public function getCodtippro()
 	{
 
-		return $this->codtippro;
+		return $this->codtippro; 		
 	}
-
 	
 	public function getNivpro()
 	{
 
-		return $this->nivpro;
+		return $this->nivpro; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setExppro($v)
 	{

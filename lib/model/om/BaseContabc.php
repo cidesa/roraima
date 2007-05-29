@@ -45,9 +45,8 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getFeccom($format = 'Y-m-d')
 	{
@@ -74,37 +73,33 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 	public function getDescom()
 	{
 
-		return $this->descom;
+		return $this->descom; 		
 	}
-
 	
 	public function getMoncom()
 	{
 
-		return $this->moncom;
+		return number_format($this->moncom,2,',','.');
+		
 	}
-
 	
 	public function getStacom()
 	{
 
-		return $this->stacom;
+		return $this->stacom; 		
 	}
-
 	
 	public function getTipcom()
 	{
 
-		return $this->tipcom;
+		return $this->tipcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumcom($v)
 	{

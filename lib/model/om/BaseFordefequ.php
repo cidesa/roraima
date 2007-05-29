@@ -33,30 +33,26 @@ abstract class BaseFordefequ extends BaseObject  implements Persistent {
 	public function getCodequ()
 	{
 
-		return $this->codequ;
+		return $this->codequ; 		
 	}
-
 	
 	public function getDesequ()
 	{
 
-		return $this->desequ;
+		return $this->desequ; 		
 	}
-
 	
 	public function getDesobj()
 	{
 
-		return $this->desobj;
+		return $this->desobj; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodequ($v)
 	{

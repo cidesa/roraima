@@ -37,37 +37,32 @@ abstract class BaseNpasiconnomAux extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getFrecon()
 	{
 
-		return $this->frecon;
+		return $this->frecon; 		
 	}
-
 	
 	public function getActivo()
 	{
 
-		return $this->activo;
+		return $this->activo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

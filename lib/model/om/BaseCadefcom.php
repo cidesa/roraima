@@ -37,37 +37,32 @@ abstract class BaseCadefcom extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getNumcon()
 	{
 
-		return $this->numcon;
+		return $this->numcon; 		
 	}
-
 	
 	public function getNroini()
 	{
 
-		return $this->nroini;
+		return $this->nroini; 		
 	}
-
 	
 	public function getAfeuni()
 	{
 
-		return $this->afeuni;
+		return $this->afeuni; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

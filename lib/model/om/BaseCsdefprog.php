@@ -29,23 +29,20 @@ abstract class BaseCsdefprog extends BaseObject  implements Persistent {
 	public function getCodprog()
 	{
 
-		return $this->codprog;
+		return $this->codprog; 		
 	}
-
 	
 	public function getNomprog()
 	{
 
-		return $this->nomprog;
+		return $this->nomprog; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprog($v)
 	{

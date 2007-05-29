@@ -49,30 +49,27 @@ abstract class BaseCpmovfuefin extends BaseObject  implements Persistent {
 	public function getCorrel()
 	{
 
-		return $this->correl;
+		return $this->correl; 		
 	}
-
 	
 	public function getRefmov()
 	{
 
-		return $this->refmov;
+		return $this->refmov; 		
 	}
-
 	
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getMonmov()
 	{
 
-		return $this->monmov;
+		return number_format($this->monmov,2,',','.');
+		
 	}
-
 	
 	public function getFecmov($format = 'Y-m-d')
 	{
@@ -99,23 +96,20 @@ abstract class BaseCpmovfuefin extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getStamov()
 	{
 
-		return $this->stamov;
+		return $this->stamov; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCorrel($v)
 	{

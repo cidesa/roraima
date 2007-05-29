@@ -33,30 +33,26 @@ abstract class BaseRhdefvalins extends BaseObject  implements Persistent {
 	public function getCodvalins()
 	{
 
-		return $this->codvalins;
+		return $this->codvalins; 		
 	}
-
 	
 	public function getDesvalins()
 	{
 
-		return $this->desvalins;
+		return $this->desvalins; 		
 	}
-
 	
 	public function getObsvalins()
 	{
 
-		return $this->obsvalins;
+		return $this->obsvalins; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodvalins($v)
 	{

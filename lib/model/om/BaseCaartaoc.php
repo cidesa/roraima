@@ -57,72 +57,68 @@ abstract class BaseCaartaoc extends BaseObject  implements Persistent {
 	public function getAjuoc()
 	{
 
-		return $this->ajuoc;
+		return $this->ajuoc; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCanord()
 	{
 
-		return $this->canord;
+		return number_format($this->canord,2,',','.');
+		
 	}
-
 	
 	public function getCanaju()
 	{
 
-		return $this->canaju;
+		return number_format($this->canaju,2,',','.');
+		
 	}
-
 	
 	public function getMontot()
 	{
 
-		return $this->montot;
+		return number_format($this->montot,2,',','.');
+		
 	}
-
 	
 	public function getMonrgo()
 	{
 
-		return $this->monrgo;
+		return number_format($this->monrgo,2,',','.');
+		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getMonrec()
 	{
 
-		return $this->monrec;
+		return number_format($this->monrec,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setAjuoc($v)
 	{

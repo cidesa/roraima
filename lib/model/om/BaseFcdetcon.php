@@ -49,44 +49,40 @@ abstract class BaseFcdetcon extends BaseObject  implements Persistent {
 	public function getRefcon()
 	{
 
-		return $this->refcon;
+		return $this->refcon; 		
 	}
-
 	
 	public function getNumdec()
 	{
 
-		return $this->numdec;
+		return $this->numdec; 		
 	}
-
 	
 	public function getMoncuo()
 	{
 
-		return $this->moncuo;
+		return number_format($this->moncuo,2,',','.');
+		
 	}
-
 	
 	public function getNumcuo()
 	{
 
-		return $this->numcuo;
+		return $this->numcuo; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getObscuo()
 	{
 
-		return $this->obscuo;
+		return $this->obscuo; 		
 	}
-
 	
 	public function getFecven($format = 'Y-m-d')
 	{
@@ -113,9 +109,8 @@ abstract class BaseFcdetcon extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefcon($v)
 	{

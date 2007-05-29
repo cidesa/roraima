@@ -53,65 +53,60 @@ abstract class BaseCobdettra extends BaseObject  implements Persistent {
 	public function getNumtra()
 	{
 
-		return $this->numtra;
+		return $this->numtra; 		
 	}
-
 	
 	public function getRefdoc()
 	{
 
-		return $this->refdoc;
+		return $this->refdoc; 		
 	}
-
 	
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getCorrel()
 	{
 
-		return $this->correl;
+		return $this->correl; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getMondsc()
 	{
 
-		return $this->mondsc;
+		return number_format($this->mondsc,2,',','.');
+		
 	}
-
 	
 	public function getMonrec()
 	{
 
-		return $this->monrec;
+		return number_format($this->monrec,2,',','.');
+		
 	}
-
 	
 	public function getTotpag()
 	{
 
-		return $this->totpag;
+		return number_format($this->totpag,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumtra($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseNpdefcla extends BaseObject  implements Persistent {
 	public function getCodcla()
 	{
 
-		return $this->codcla;
+		return $this->codcla; 		
 	}
-
 	
 	public function getDescla()
 	{
 
-		return $this->descla;
+		return $this->descla; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcla($v)
 	{

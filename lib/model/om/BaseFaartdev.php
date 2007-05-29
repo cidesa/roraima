@@ -49,58 +49,54 @@ abstract class BaseFaartdev extends BaseObject  implements Persistent {
 	public function getNrodev()
 	{
 
-		return $this->nrodev;
+		return $this->nrodev; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getNumlot()
 	{
 
-		return $this->numlot;
+		return $this->numlot; 		
 	}
-
 	
 	public function getCandes()
 	{
 
-		return $this->candes;
+		return number_format($this->candes,2,',','.');
+		
 	}
-
 	
 	public function getCandev()
 	{
 
-		return $this->candev;
+		return number_format($this->candev,2,',','.');
+		
 	}
-
 	
 	public function getPreart()
 	{
 
-		return $this->preart;
+		return number_format($this->preart,2,',','.');
+		
 	}
-
 	
 	public function getTotart()
 	{
 
-		return $this->totart;
+		return number_format($this->totart,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNrodev($v)
 	{

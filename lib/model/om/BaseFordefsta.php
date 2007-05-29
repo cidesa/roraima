@@ -29,23 +29,20 @@ abstract class BaseFordefsta extends BaseObject  implements Persistent {
 	public function getCodsta()
 	{
 
-		return $this->codsta;
+		return $this->codsta; 		
 	}
-
 	
 	public function getDessta()
 	{
 
-		return $this->dessta;
+		return $this->dessta; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsta($v)
 	{

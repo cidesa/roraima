@@ -49,9 +49,8 @@ abstract class BaseCadevrcp extends BaseObject  implements Persistent {
 	public function getDevrcp()
 	{
 
-		return $this->devrcp;
+		return $this->devrcp; 		
 	}
-
 	
 	public function getFecdev($format = 'Y-m-d')
 	{
@@ -78,44 +77,39 @@ abstract class BaseCadevrcp extends BaseObject  implements Persistent {
 	public function getRcpart()
 	{
 
-		return $this->rcpart;
+		return $this->rcpart; 		
 	}
-
 	
 	public function getDesdev()
 	{
 
-		return $this->desdev;
+		return $this->desdev; 		
 	}
-
 	
 	public function getMondev()
 	{
 
-		return $this->mondev;
+		return number_format($this->mondev,2,',','.');
+		
 	}
-
 	
 	public function getStadev()
 	{
 
-		return $this->stadev;
+		return $this->stadev; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDevrcp($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseFordefejedes extends BaseObject  implements Persistent {
 	public function getCodejedes()
 	{
 
-		return $this->codejedes;
+		return $this->codejedes; 		
 	}
-
 	
 	public function getDesejedes()
 	{
 
-		return $this->desejedes;
+		return $this->desejedes; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodejedes($v)
 	{

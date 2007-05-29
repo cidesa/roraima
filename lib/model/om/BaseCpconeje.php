@@ -81,51 +81,48 @@ abstract class BaseCpconeje extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getNompre()
 	{
 
-		return $this->nompre;
+		return $this->nompre; 		
 	}
-
 	
 	public function getMondis()
 	{
 
-		return $this->mondis;
+		return number_format($this->mondis,2,',','.');
+		
 	}
-
 	
 	public function getMontra()
 	{
 
-		return $this->montra;
+		return number_format($this->montra,2,',','.');
+		
 	}
-
 	
 	public function getMonadi()
 	{
 
-		return $this->monadi;
+		return number_format($this->monadi,2,',','.');
+		
 	}
-
 	
 	public function getMonasi()
 	{
 
-		return $this->monasi;
+		return number_format($this->monasi,2,',','.');
+		
 	}
-
 	
 	public function getRef()
 	{
 
-		return $this->ref;
+		return $this->ref; 		
 	}
-
 	
 	public function getFecha($format = 'Y-m-d')
 	{
@@ -152,58 +149,54 @@ abstract class BaseCpconeje extends BaseObject  implements Persistent {
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getDescrip()
 	{
 
-		return $this->descrip;
+		return $this->descrip; 		
 	}
-
 	
 	public function getMonimp()
 	{
 
-		return $this->monimp;
+		return number_format($this->monimp,2,',','.');
+		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getMondim()
 	{
 
-		return $this->mondim;
+		return number_format($this->mondim,2,',','.');
+		
 	}
-
 	
 	public function getMontrn()
 	{
 
-		return $this->montrn;
+		return number_format($this->montrn,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpre($v)
 	{

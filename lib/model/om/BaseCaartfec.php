@@ -41,30 +41,27 @@ abstract class BaseCaartfec extends BaseObject  implements Persistent {
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getDesart()
 	{
 
-		return $this->desart;
+		return $this->desart; 		
 	}
-
 	
 	public function getCanart()
 	{
 
-		return $this->canart;
+		return number_format($this->canart,2,',','.');
+		
 	}
-
 	
 	public function getFecent($format = 'Y-m-d')
 	{
@@ -91,9 +88,8 @@ abstract class BaseCaartfec extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrdcom($v)
 	{

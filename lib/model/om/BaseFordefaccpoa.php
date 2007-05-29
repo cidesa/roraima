@@ -73,100 +73,91 @@ abstract class BaseFordefaccpoa extends BaseObject  implements Persistent {
 	public function getCodsubacc()
 	{
 
-		return $this->codsubacc;
+		return $this->codsubacc; 		
 	}
-
 	
 	public function getDessubacc()
 	{
 
-		return $this->dessubacc;
+		return $this->dessubacc; 		
 	}
-
 	
 	public function getMetsubacc()
 	{
 
-		return $this->metsubacc;
+		return $this->metsubacc; 		
 	}
-
 	
 	public function getLocsubacc()
 	{
 
-		return $this->locsubacc;
+		return $this->locsubacc; 		
 	}
-
 	
 	public function getIndgessubacc()
 	{
 
-		return $this->indgessubacc;
+		return $this->indgessubacc; 		
 	}
-
 	
 	public function getCodunimed()
 	{
 
-		return $this->codunimed;
+		return $this->codunimed; 		
 	}
-
 	
 	public function getMedversubacc()
 	{
 
-		return $this->medversubacc;
+		return $this->medversubacc; 		
 	}
-
 	
 	public function getSupsubacc()
 	{
 
-		return $this->supsubacc;
+		return $this->supsubacc; 		
 	}
-
 	
 	public function getMetpritri()
 	{
 
-		return $this->metpritri;
+		return number_format($this->metpritri,2,',','.');
+		
 	}
-
 	
 	public function getMetsegtri()
 	{
 
-		return $this->metsegtri;
+		return number_format($this->metsegtri,2,',','.');
+		
 	}
-
 	
 	public function getMettertri()
 	{
 
-		return $this->mettertri;
+		return number_format($this->mettertri,2,',','.');
+		
 	}
-
 	
 	public function getMetcuatri()
 	{
 
-		return $this->metcuatri;
+		return number_format($this->metcuatri,2,',','.');
+		
 	}
-
 	
 	public function getMettot()
 	{
 
-		return $this->mettot;
+		return number_format($this->mettot,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsubacc($v)
 	{

@@ -65,86 +65,82 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 	public function getNronot()
 	{
 
-		return $this->nronot;
+		return $this->nronot; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getNumlot()
 	{
 
-		return $this->numlot;
+		return $this->numlot; 		
 	}
-
 	
 	public function getCansol()
 	{
 
-		return $this->cansol;
+		return number_format($this->cansol,2,',','.');
+		
 	}
-
 	
 	public function getCanent()
 	{
 
-		return $this->canent;
+		return number_format($this->canent,2,',','.');
+		
 	}
-
 	
 	public function getCandes()
 	{
 
-		return $this->candes;
+		return number_format($this->candes,2,',','.');
+		
 	}
-
 	
 	public function getCanaju()
 	{
 
-		return $this->canaju;
+		return number_format($this->canaju,2,',','.');
+		
 	}
-
 	
 	public function getCandev()
 	{
 
-		return $this->candev;
+		return number_format($this->candev,2,',','.');
+		
 	}
-
 	
 	public function getCantot()
 	{
 
-		return $this->cantot;
+		return number_format($this->cantot,2,',','.');
+		
 	}
-
 	
 	public function getPreart()
 	{
 
-		return $this->preart;
+		return number_format($this->preart,2,',','.');
+		
 	}
-
 	
 	public function getTotart()
 	{
 
-		return $this->totart;
+		return number_format($this->totart,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNronot($v)
 	{

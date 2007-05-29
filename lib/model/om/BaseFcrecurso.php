@@ -33,30 +33,27 @@ abstract class BaseFcrecurso extends BaseObject  implements Persistent {
 	public function getCoding()
 	{
 
-		return $this->coding;
+		return $this->coding; 		
 	}
-
 	
 	public function getDesing()
 	{
 
-		return $this->desing;
+		return $this->desing; 		
 	}
-
 	
 	public function getMoning()
 	{
 
-		return $this->moning;
+		return number_format($this->moning,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoding($v)
 	{

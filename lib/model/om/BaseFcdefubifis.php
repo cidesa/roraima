@@ -41,23 +41,20 @@ abstract class BaseFcdefubifis extends BaseObject  implements Persistent {
 	public function getCodubifis()
 	{
 
-		return $this->codubifis;
+		return $this->codubifis; 		
 	}
-
 	
 	public function getNomubifis()
 	{
 
-		return $this->nomubifis;
+		return $this->nomubifis; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodubifis($v)
 	{

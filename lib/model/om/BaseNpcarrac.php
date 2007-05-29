@@ -41,44 +41,40 @@ abstract class BaseNpcarrac extends BaseObject  implements Persistent {
 	public function getCodcarrac()
 	{
 
-		return $this->codcarrac;
+		return $this->codcarrac; 		
 	}
-
 	
 	public function getCodnivorg()
 	{
 
-		return $this->codnivorg;
+		return $this->codnivorg; 		
 	}
-
 	
 	public function getSueldo()
 	{
 
-		return $this->sueldo;
+		return number_format($this->sueldo,2,',','.');
+		
 	}
-
 	
 	public function getDescar()
 	{
 
-		return $this->descar;
+		return $this->descar; 		
 	}
-
 	
 	public function getCancar()
 	{
 
-		return $this->cancar;
+		return number_format($this->cancar,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcarrac($v)
 	{

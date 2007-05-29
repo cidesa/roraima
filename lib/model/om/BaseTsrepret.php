@@ -29,23 +29,20 @@ abstract class BaseTsrepret extends BaseObject  implements Persistent {
 	public function getCodrep()
 	{
 
-		return $this->codrep;
+		return $this->codrep; 		
 	}
-
 	
 	public function getCodret()
 	{
 
-		return $this->codret;
+		return $this->codret; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrep($v)
 	{

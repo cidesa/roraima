@@ -35,23 +35,20 @@ abstract class BaseFctippag extends BaseObject  implements Persistent {
 	public function getTippag()
 	{
 
-		return $this->tippag;
+		return $this->tippag; 		
 	}
-
 	
 	public function getDespag()
 	{
 
-		return $this->despag;
+		return $this->despag; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTippag($v)
 	{

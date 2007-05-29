@@ -41,44 +41,38 @@ abstract class BaseFcacceso extends BaseObject  implements Persistent {
 	public function getCedula()
 	{
 
-		return $this->cedula;
+		return $this->cedula; 		
 	}
-
 	
 	public function getNomusu()
 	{
 
-		return $this->nomusu;
+		return $this->nomusu; 		
 	}
-
 	
 	public function getPasusu()
 	{
 
-		return $this->pasusu;
+		return $this->pasusu; 		
 	}
-
 	
 	public function getAutsol()
 	{
 
-		return $this->autsol;
+		return $this->autsol; 		
 	}
-
 	
 	public function getAnupag()
 	{
 
-		return $this->anupag;
+		return $this->anupag; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCedula($v)
 	{

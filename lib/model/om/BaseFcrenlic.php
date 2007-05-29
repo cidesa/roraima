@@ -33,9 +33,8 @@ abstract class BaseFcrenlic extends BaseObject  implements Persistent {
 	public function getNumlic()
 	{
 
-		return $this->numlic;
+		return $this->numlic; 		
 	}
-
 	
 	public function getFecven($format = 'Y-m-d')
 	{
@@ -84,9 +83,8 @@ abstract class BaseFcrenlic extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumlic($v)
 	{

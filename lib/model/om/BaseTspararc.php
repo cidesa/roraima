@@ -73,100 +73,98 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getInicue()
 	{
 
-		return $this->inicue;
+		return number_format($this->inicue,2,',','.');
+		
 	}
-
 	
 	public function getFincue()
 	{
 
-		return $this->fincue;
+		return number_format($this->fincue,2,',','.');
+		
 	}
-
 	
 	public function getIniref()
 	{
 
-		return $this->iniref;
+		return number_format($this->iniref,2,',','.');
+		
 	}
-
 	
 	public function getFinref()
 	{
 
-		return $this->finref;
+		return number_format($this->finref,2,',','.');
+		
 	}
-
 	
 	public function getInifec()
 	{
 
-		return $this->inifec;
+		return number_format($this->inifec,2,',','.');
+		
 	}
-
 	
 	public function getFinfec()
 	{
 
-		return $this->finfec;
+		return number_format($this->finfec,2,',','.');
+		
 	}
-
 	
 	public function getInitip()
 	{
 
-		return $this->initip;
+		return number_format($this->initip,2,',','.');
+		
 	}
-
 	
 	public function getFintip()
 	{
 
-		return $this->fintip;
+		return number_format($this->fintip,2,',','.');
+		
 	}
-
 	
 	public function getInides()
 	{
 
-		return $this->inides;
+		return number_format($this->inides,2,',','.');
+		
 	}
-
 	
 	public function getFindes()
 	{
 
-		return $this->findes;
+		return number_format($this->findes,2,',','.');
+		
 	}
-
 	
 	public function getInimon()
 	{
 
-		return $this->inimon;
+		return number_format($this->inimon,2,',','.');
+		
 	}
-
 	
 	public function getFinmon()
 	{
 
-		return $this->finmon;
+		return number_format($this->finmon,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumcue($v)
 	{

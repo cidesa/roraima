@@ -33,30 +33,27 @@ abstract class BaseFcunimon extends BaseObject  implements Persistent {
 	public function getCodunimon()
 	{
 
-		return $this->codunimon;
+		return $this->codunimon; 		
 	}
-
 	
 	public function getNomunimon()
 	{
 
-		return $this->nomunimon;
+		return $this->nomunimon; 		
 	}
-
 	
 	public function getValunimon()
 	{
 
-		return $this->valunimon;
+		return number_format($this->valunimon,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodunimon($v)
 	{

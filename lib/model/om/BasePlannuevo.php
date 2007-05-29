@@ -37,37 +37,32 @@ abstract class BasePlannuevo extends BaseObject  implements Persistent {
 	public function getCodold()
 	{
 
-		return $this->codold;
+		return $this->codold; 		
 	}
-
 	
 	public function getNomold()
 	{
 
-		return $this->nomold;
+		return $this->nomold; 		
 	}
-
 	
 	public function getCodnew()
 	{
 
-		return $this->codnew;
+		return $this->codnew; 		
 	}
-
 	
 	public function getNomnew()
 	{
 
-		return $this->nomnew;
+		return $this->nomnew; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodold($v)
 	{

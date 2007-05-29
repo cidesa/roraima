@@ -53,65 +53,58 @@ abstract class BaseCpimprel extends BaseObject  implements Persistent {
 	public function getRefrel()
 	{
 
-		return $this->refrel;
+		return $this->refrel; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMonrel()
 	{
 
-		return $this->monrel;
+		return number_format($this->monrel,2,',','.');
+		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getStarel()
 	{
 
-		return $this->starel;
+		return $this->starel; 		
 	}
-
 	
 	public function getRefere()
 	{
 
-		return $this->refere;
+		return $this->refere; 		
 	}
-
 	
 	public function getRefprc()
 	{
 
-		return $this->refprc;
+		return $this->refprc; 		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefrel($v)
 	{

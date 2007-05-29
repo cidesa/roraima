@@ -73,23 +73,20 @@ abstract class BaseNpnomina extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getNomnom()
 	{
 
-		return $this->nomnom;
+		return $this->nomnom; 		
 	}
-
 	
 	public function getFrecal()
 	{
 
-		return $this->frecal;
+		return $this->frecal; 		
 	}
-
 	
 	public function getUltfec($format = 'Y-m-d')
 	{
@@ -138,65 +135,57 @@ abstract class BaseNpnomina extends BaseObject  implements Persistent {
 	public function getNumsem()
 	{
 
-		return $this->numsem;
+		return number_format($this->numsem,2,',','.');
+		
 	}
-
 	
 	public function getOrdpag()
 	{
 
-		return $this->ordpag;
+		return $this->ordpag; 		
 	}
-
 	
 	public function getTipcau()
 	{
 
-		return $this->tipcau;
+		return $this->tipcau; 		
 	}
-
 	
 	public function getRefcau()
 	{
 
-		return $this->refcau;
+		return $this->refcau; 		
 	}
-
 	
 	public function getTipprc()
 	{
 
-		return $this->tipprc;
+		return $this->tipprc; 		
 	}
-
 	
 	public function getRefprc()
 	{
 
-		return $this->refprc;
+		return $this->refprc; 		
 	}
-
 	
 	public function getTipcom()
 	{
 
-		return $this->tipcom;
+		return $this->tipcom; 		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

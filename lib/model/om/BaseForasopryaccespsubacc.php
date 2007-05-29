@@ -33,30 +33,26 @@ abstract class BaseForasopryaccespsubacc extends BaseObject  implements Persiste
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodaccesp()
 	{
 
-		return $this->codaccesp;
+		return $this->codaccesp; 		
 	}
-
 	
 	public function getCodsubacc()
 	{
 
-		return $this->codsubacc;
+		return $this->codsubacc; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

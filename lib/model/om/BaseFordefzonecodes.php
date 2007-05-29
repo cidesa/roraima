@@ -29,23 +29,20 @@ abstract class BaseFordefzonecodes extends BaseObject  implements Persistent {
 	public function getCodzoneco()
 	{
 
-		return $this->codzoneco;
+		return $this->codzoneco; 		
 	}
-
 	
 	public function getDeszoneco()
 	{
 
-		return $this->deszoneco;
+		return $this->deszoneco; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodzoneco($v)
 	{

@@ -41,44 +41,38 @@ abstract class BaseNpcontra extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getPeriodico()
 	{
 
-		return $this->periodico;
+		return $this->periodico; 		
 	}
-
 	
 	public function getIdenti()
 	{
 
-		return $this->identi;
+		return $this->identi; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

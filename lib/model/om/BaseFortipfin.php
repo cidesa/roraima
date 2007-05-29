@@ -53,65 +53,59 @@ abstract class BaseFortipfin extends BaseObject  implements Persistent {
 	public function getCodfin()
 	{
 
-		return $this->codfin;
+		return $this->codfin; 		
 	}
-
 	
 	public function getNomext()
 	{
 
-		return $this->nomext;
+		return $this->nomext; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getApofis()
 	{
 
-		return $this->apofis;
+		return $this->apofis; 		
 	}
-
 	
 	public function getTipfin()
 	{
 
-		return $this->tipfin;
+		return $this->tipfin; 		
 	}
-
 	
 	public function getMontoing()
 	{
 
-		return $this->montoing;
+		return number_format($this->montoing,2,',','.');
+		
 	}
-
 	
 	public function getMontodis()
 	{
 
-		return $this->montodis;
+		return number_format($this->montodis,2,',','.');
+		
 	}
-
 	
 	public function getMontodisaux()
 	{
 
-		return $this->montodisaux;
+		return number_format($this->montodisaux,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodfin($v)
 	{

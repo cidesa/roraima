@@ -53,16 +53,14 @@ abstract class BaseFctraveh extends BaseObject  implements Persistent {
 	public function getNumtra()
 	{
 
-		return $this->numtra;
+		return $this->numtra; 		
 	}
-
 	
 	public function getPlaveh()
 	{
 
-		return $this->plaveh;
+		return $this->plaveh; 		
 	}
-
 	
 	public function getFectra($format = 'Y-m-d')
 	{
@@ -89,44 +87,38 @@ abstract class BaseFctraveh extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getRifrep()
 	{
 
-		return $this->rifrep;
+		return $this->rifrep; 		
 	}
-
 	
 	public function getRifconant()
 	{
 
-		return $this->rifconant;
+		return $this->rifconant; 		
 	}
-
 	
 	public function getRifrepant()
 	{
 
-		return $this->rifrepant;
+		return $this->rifrepant; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumtra($v)
 	{

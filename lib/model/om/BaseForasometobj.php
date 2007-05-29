@@ -29,23 +29,20 @@ abstract class BaseForasometobj extends BaseObject  implements Persistent {
 	public function getCodobj()
 	{
 
-		return $this->codobj;
+		return $this->codobj; 		
 	}
-
 	
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodobj($v)
 	{

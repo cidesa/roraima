@@ -41,23 +41,20 @@ abstract class BaseFcdefubimag extends BaseObject  implements Persistent {
 	public function getCodubimag()
 	{
 
-		return $this->codubimag;
+		return $this->codubimag; 		
 	}
-
 	
 	public function getNomubimag()
 	{
 
-		return $this->nomubimag;
+		return $this->nomubimag; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodubimag($v)
 	{

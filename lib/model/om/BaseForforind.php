@@ -41,44 +41,38 @@ abstract class BaseForforind extends BaseObject  implements Persistent {
 	public function getCodind()
 	{
 
-		return $this->codind;
+		return $this->codind; 		
 	}
-
 	
 	public function getCodvaruno()
 	{
 
-		return $this->codvaruno;
+		return $this->codvaruno; 		
 	}
-
 	
 	public function getCodvardos()
 	{
 
-		return $this->codvardos;
+		return $this->codvardos; 		
 	}
-
 	
 	public function getCodvartre()
 	{
 
-		return $this->codvartre;
+		return $this->codvartre; 		
 	}
-
 	
 	public function getOpefor()
 	{
 
-		return $this->opefor;
+		return $this->opefor; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodind($v)
 	{

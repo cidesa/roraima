@@ -57,72 +57,62 @@ abstract class BaseBdcampos extends BaseObject  implements Persistent {
 	public function getNomcamp1()
 	{
 
-		return $this->nomcamp1;
+		return $this->nomcamp1; 		
 	}
-
 	
 	public function getNomcamp2()
 	{
 
-		return $this->nomcamp2;
+		return $this->nomcamp2; 		
 	}
-
 	
 	public function getNomcamp3()
 	{
 
-		return $this->nomcamp3;
+		return $this->nomcamp3; 		
 	}
-
 	
 	public function getNomcamp4()
 	{
 
-		return $this->nomcamp4;
+		return $this->nomcamp4; 		
 	}
-
 	
 	public function getNomcamp5()
 	{
 
-		return $this->nomcamp5;
+		return $this->nomcamp5; 		
 	}
-
 	
 	public function getNomcamp6()
 	{
 
-		return $this->nomcamp6;
+		return $this->nomcamp6; 		
 	}
-
 	
 	public function getNomcamp7()
 	{
 
-		return $this->nomcamp7;
+		return $this->nomcamp7; 		
 	}
-
 	
 	public function getNomcamp8()
 	{
 
-		return $this->nomcamp8;
+		return $this->nomcamp8; 		
 	}
-
 	
 	public function getCriterio()
 	{
 
-		return $this->criterio;
+		return $this->criterio; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNomcamp1($v)
 	{

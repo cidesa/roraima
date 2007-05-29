@@ -33,30 +33,28 @@ abstract class BaseFctasban extends BaseObject  implements Persistent {
 	public function getTasano()
 	{
 
-		return $this->tasano;
+		return $this->tasano; 		
 	}
-
 	
 	public function getTaspor()
 	{
 
-		return $this->taspor;
+		return number_format($this->taspor,2,',','.');
+		
 	}
-
 	
 	public function getTasmes()
 	{
 
-		return $this->tasmes;
+		return number_format($this->tasmes,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTasano($v)
 	{

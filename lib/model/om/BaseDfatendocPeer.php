@@ -13,14 +13,38 @@ abstract class BaseDfatendocPeer {
 	const CLASS_DEFAULT = 'lib.model.Dfatendoc';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 21;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const CODDOC = 'dfatendoc.CODDOC';
+	const CODIGO = 'dfatendoc.CODIGO';
+
+	
+	const LOGUSE = 'dfatendoc.LOGUSE';
+
+	
+	const ESTADO = 'dfatendoc.ESTADO';
+
+	
+	const FECREC = 'dfatendoc.FECREC';
+
+	
+	const HORREC = 'dfatendoc.HORREC';
+
+	
+	const FECATE = 'dfatendoc.FECATE';
+
+	
+	const HORATE = 'dfatendoc.HORATE';
+
+	
+	const NUMUNI = 'dfatendoc.NUMUNI';
+
+	
+	const NUMUNIORI = 'dfatendoc.NUMUNIORI';
 
 	
 	const OBSDOC = 'dfatendoc.OBSDOC';
@@ -29,13 +53,31 @@ abstract class BaseDfatendocPeer {
 	const STAATE = 'dfatendoc.STAATE';
 
 	
-	const ID_DFTABTIP = 'dfatendoc.ID_DFTABTIP';
+	const TABLA = 'dfatendoc.TABLA';
 
 	
 	const ANUATE = 'dfatendoc.ANUATE';
 
 	
-	const ESTADO = 'dfatendoc.ESTADO';
+	const CHKUNI1 = 'dfatendoc.CHKUNI1';
+
+	
+	const CHKUNI2 = 'dfatendoc.CHKUNI2';
+
+	
+	const CHKUNI3 = 'dfatendoc.CHKUNI3';
+
+	
+	const CHKUNI4 = 'dfatendoc.CHKUNI4';
+
+	
+	const CHKUNI5 = 'dfatendoc.CHKUNI5';
+
+	
+	const CHKUNI6 = 'dfatendoc.CHKUNI6';
+
+	
+	const CHKUNI7 = 'dfatendoc.CHKUNI7';
 
 	
 	const ID = 'dfatendoc.ID';
@@ -46,18 +88,18 @@ abstract class BaseDfatendocPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Coddoc', 'Obsdoc', 'Staate', 'IdDftabtip', 'Anuate', 'Estado', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (DfatendocPeer::CODDOC, DfatendocPeer::OBSDOC, DfatendocPeer::STAATE, DfatendocPeer::ID_DFTABTIP, DfatendocPeer::ANUATE, DfatendocPeer::ESTADO, DfatendocPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('coddoc', 'obsdoc', 'staate', 'id_dftabtip', 'anuate', 'estado', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codigo', 'Loguse', 'Estado', 'Fecrec', 'Horrec', 'Fecate', 'Horate', 'Numuni', 'Numuniori', 'Obsdoc', 'Staate', 'Tabla', 'Anuate', 'Chkuni1', 'Chkuni2', 'Chkuni3', 'Chkuni4', 'Chkuni5', 'Chkuni6', 'Chkuni7', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (DfatendocPeer::CODIGO, DfatendocPeer::LOGUSE, DfatendocPeer::ESTADO, DfatendocPeer::FECREC, DfatendocPeer::HORREC, DfatendocPeer::FECATE, DfatendocPeer::HORATE, DfatendocPeer::NUMUNI, DfatendocPeer::NUMUNIORI, DfatendocPeer::OBSDOC, DfatendocPeer::STAATE, DfatendocPeer::TABLA, DfatendocPeer::ANUATE, DfatendocPeer::CHKUNI1, DfatendocPeer::CHKUNI2, DfatendocPeer::CHKUNI3, DfatendocPeer::CHKUNI4, DfatendocPeer::CHKUNI5, DfatendocPeer::CHKUNI6, DfatendocPeer::CHKUNI7, DfatendocPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codigo', 'loguse', 'estado', 'fecrec', 'horrec', 'fecate', 'horate', 'numuni', 'numuniori', 'obsdoc', 'staate', 'tabla', 'anuate', 'chkuni1', 'chkuni2', 'chkuni3', 'chkuni4', 'chkuni5', 'chkuni6', 'chkuni7', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Coddoc' => 0, 'Obsdoc' => 1, 'Staate' => 2, 'IdDftabtip' => 3, 'Anuate' => 4, 'Estado' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (DfatendocPeer::CODDOC => 0, DfatendocPeer::OBSDOC => 1, DfatendocPeer::STAATE => 2, DfatendocPeer::ID_DFTABTIP => 3, DfatendocPeer::ANUATE => 4, DfatendocPeer::ESTADO => 5, DfatendocPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('coddoc' => 0, 'obsdoc' => 1, 'staate' => 2, 'id_dftabtip' => 3, 'anuate' => 4, 'estado' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codigo' => 0, 'Loguse' => 1, 'Estado' => 2, 'Fecrec' => 3, 'Horrec' => 4, 'Fecate' => 5, 'Horate' => 6, 'Numuni' => 7, 'Numuniori' => 8, 'Obsdoc' => 9, 'Staate' => 10, 'Tabla' => 11, 'Anuate' => 12, 'Chkuni1' => 13, 'Chkuni2' => 14, 'Chkuni3' => 15, 'Chkuni4' => 16, 'Chkuni5' => 17, 'Chkuni6' => 18, 'Chkuni7' => 19, 'Id' => 20, ),
+		BasePeer::TYPE_COLNAME => array (DfatendocPeer::CODIGO => 0, DfatendocPeer::LOGUSE => 1, DfatendocPeer::ESTADO => 2, DfatendocPeer::FECREC => 3, DfatendocPeer::HORREC => 4, DfatendocPeer::FECATE => 5, DfatendocPeer::HORATE => 6, DfatendocPeer::NUMUNI => 7, DfatendocPeer::NUMUNIORI => 8, DfatendocPeer::OBSDOC => 9, DfatendocPeer::STAATE => 10, DfatendocPeer::TABLA => 11, DfatendocPeer::ANUATE => 12, DfatendocPeer::CHKUNI1 => 13, DfatendocPeer::CHKUNI2 => 14, DfatendocPeer::CHKUNI3 => 15, DfatendocPeer::CHKUNI4 => 16, DfatendocPeer::CHKUNI5 => 17, DfatendocPeer::CHKUNI6 => 18, DfatendocPeer::CHKUNI7 => 19, DfatendocPeer::ID => 20, ),
+		BasePeer::TYPE_FIELDNAME => array ('codigo' => 0, 'loguse' => 1, 'estado' => 2, 'fecrec' => 3, 'horrec' => 4, 'fecate' => 5, 'horate' => 6, 'numuni' => 7, 'numuniori' => 8, 'obsdoc' => 9, 'staate' => 10, 'tabla' => 11, 'anuate' => 12, 'chkuni1' => 13, 'chkuni2' => 14, 'chkuni3' => 15, 'chkuni4' => 16, 'chkuni5' => 17, 'chkuni6' => 18, 'chkuni7' => 19, 'id' => 20, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
@@ -111,17 +153,45 @@ abstract class BaseDfatendocPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(DfatendocPeer::CODDOC);
+		$criteria->addSelectColumn(DfatendocPeer::CODIGO);
+
+		$criteria->addSelectColumn(DfatendocPeer::LOGUSE);
+
+		$criteria->addSelectColumn(DfatendocPeer::ESTADO);
+
+		$criteria->addSelectColumn(DfatendocPeer::FECREC);
+
+		$criteria->addSelectColumn(DfatendocPeer::HORREC);
+
+		$criteria->addSelectColumn(DfatendocPeer::FECATE);
+
+		$criteria->addSelectColumn(DfatendocPeer::HORATE);
+
+		$criteria->addSelectColumn(DfatendocPeer::NUMUNI);
+
+		$criteria->addSelectColumn(DfatendocPeer::NUMUNIORI);
 
 		$criteria->addSelectColumn(DfatendocPeer::OBSDOC);
 
 		$criteria->addSelectColumn(DfatendocPeer::STAATE);
 
-		$criteria->addSelectColumn(DfatendocPeer::ID_DFTABTIP);
+		$criteria->addSelectColumn(DfatendocPeer::TABLA);
 
 		$criteria->addSelectColumn(DfatendocPeer::ANUATE);
 
-		$criteria->addSelectColumn(DfatendocPeer::ESTADO);
+		$criteria->addSelectColumn(DfatendocPeer::CHKUNI1);
+
+		$criteria->addSelectColumn(DfatendocPeer::CHKUNI2);
+
+		$criteria->addSelectColumn(DfatendocPeer::CHKUNI3);
+
+		$criteria->addSelectColumn(DfatendocPeer::CHKUNI4);
+
+		$criteria->addSelectColumn(DfatendocPeer::CHKUNI5);
+
+		$criteria->addSelectColumn(DfatendocPeer::CHKUNI6);
+
+		$criteria->addSelectColumn(DfatendocPeer::CHKUNI7);
 
 		$criteria->addSelectColumn(DfatendocPeer::ID);
 
@@ -202,167 +272,6 @@ abstract class BaseDfatendocPeer {
 		}
 		return $results;
 	}
-
-	
-	public static function doCountJoinDftabtip(Criteria $criteria, $distinct = false, $con = null)
-	{
-				$criteria = clone $criteria;
-		
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(DfatendocPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(DfatendocPeer::COUNT);
-		}
-		
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(DfatendocPeer::ID_DFTABTIP, DftabtipPeer::ID);
-
-		$rs = DfatendocPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
-	public static function doSelectJoinDftabtip(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		DfatendocPeer::addSelectColumns($c);
-		$startcol = (DfatendocPeer::NUM_COLUMNS - DfatendocPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		DftabtipPeer::addSelectColumns($c);
-
-		$c->addJoin(DfatendocPeer::ID_DFTABTIP, DftabtipPeer::ID);
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-
-		while($rs->next()) {
-
-			$omClass = DfatendocPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-			$omClass = DftabtipPeer::getOMClass();
-
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol);
-
-			$newObject = true;
-			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getDftabtip(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-										$temp_obj2->addDfatendoc($obj1); 					break;
-				}
-			}
-			if ($newObject) {
-				$obj2->initDfatendocs();
-				$obj2->addDfatendoc($obj1); 			}
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
-
-	
-	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
-	{
-		$criteria = clone $criteria;
-
-				$criteria->clearSelectColumns()->clearOrderByColumns();
-		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(DfatendocPeer::COUNT_DISTINCT);
-		} else {
-			$criteria->addSelectColumn(DfatendocPeer::COUNT);
-		}
-		
-				foreach($criteria->getGroupByColumns() as $column)
-		{
-			$criteria->addSelectColumn($column);
-		}
-
-		$criteria->addJoin(DfatendocPeer::ID_DFTABTIP, DftabtipPeer::ID);
-
-		$rs = DfatendocPeer::doSelectRS($criteria, $con);
-		if ($rs->next()) {
-			return $rs->getInt(1);
-		} else {
-						return 0;
-		}
-	}
-
-
-	
-	public static function doSelectJoinAll(Criteria $c, $con = null)
-	{
-		$c = clone $c;
-
-				if ($c->getDbName() == Propel::getDefaultDB()) {
-			$c->setDbName(self::DATABASE_NAME);
-		}
-
-		DfatendocPeer::addSelectColumns($c);
-		$startcol2 = (DfatendocPeer::NUM_COLUMNS - DfatendocPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-
-		DftabtipPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + DftabtipPeer::NUM_COLUMNS;
-
-		$c->addJoin(DfatendocPeer::ID_DFTABTIP, DftabtipPeer::ID);
-
-		$rs = BasePeer::doSelect($c, $con);
-		$results = array();
-		
-		while($rs->next()) {
-
-			$omClass = DfatendocPeer::getOMClass();
-
-			
-			$cls = Propel::import($omClass);
-			$obj1 = new $cls();
-			$obj1->hydrate($rs);
-
-				
-					
-			$omClass = DftabtipPeer::getOMClass();
-
-	
-			$cls = Propel::import($omClass);
-			$obj2 = new $cls();
-			$obj2->hydrate($rs, $startcol2);
-			
-			$newObject = true;
-			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
-				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getDftabtip(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
-					$newObject = false;
-					$temp_obj2->addDfatendoc($obj1); 					break;
-				}
-			}
-			
-			if ($newObject) {
-				$obj2->initDfatendocs();
-				$obj2->addDfatendoc($obj1);
-			}
-
-			$results[] = $obj1;
-		}
-		return $results;
-	}
-
 	
 	public static function getTableMap()
 	{

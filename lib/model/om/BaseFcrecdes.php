@@ -53,65 +53,58 @@ abstract class BaseFcrecdes extends BaseObject  implements Persistent {
 	public function getCodrede()
 	{
 
-		return $this->codrede;
+		return $this->codrede; 		
 	}
-
 	
 	public function getRecdes()
 	{
 
-		return $this->recdes;
+		return $this->recdes; 		
 	}
-
 	
 	public function getDesrede()
 	{
 
-		return $this->desrede;
+		return $this->desrede; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getPorrede()
 	{
 
-		return $this->porrede;
+		return $this->porrede; 		
 	}
-
 	
 	public function getCodfue()
 	{
 
-		return $this->codfue;
+		return $this->codfue; 		
 	}
-
 	
 	public function getDias()
 	{
 
-		return $this->dias;
+		return number_format($this->dias,2,',','.');
+		
 	}
-
 	
 	public function getPorcien()
 	{
 
-		return $this->porcien;
+		return number_format($this->porcien,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrede($v)
 	{

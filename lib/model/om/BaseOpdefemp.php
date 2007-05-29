@@ -105,156 +105,136 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCtapag()
 	{
 
-		return $this->ctapag;
+		return $this->ctapag; 		
 	}
-
 	
 	public function getCtades()
 	{
 
-		return $this->ctades;
+		return $this->ctades; 		
 	}
-
 	
 	public function getNumini()
 	{
 
-		return $this->numini;
+		return $this->numini; 		
 	}
-
 	
 	public function getOrdnom()
 	{
 
-		return $this->ordnom;
+		return $this->ordnom; 		
 	}
-
 	
 	public function getOrdobr()
 	{
 
-		return $this->ordobr;
+		return $this->ordobr; 		
 	}
-
 	
 	public function getUnitri()
 	{
 
-		return $this->unitri;
+		return number_format($this->unitri,2,',','.');
+		
 	}
-
 	
 	public function getVercomret()
 	{
 
-		return $this->vercomret;
+		return $this->vercomret; 		
 	}
-
 	
 	public function getGenctaord()
 	{
 
-		return $this->genctaord;
+		return $this->genctaord; 		
 	}
-
 	
 	public function getForubi()
 	{
 
-		return $this->forubi;
+		return $this->forubi; 		
 	}
-
 	
 	public function getTipaju()
 	{
 
-		return $this->tipaju;
+		return $this->tipaju; 		
 	}
-
 	
 	public function getTipeje()
 	{
 
-		return $this->tipeje;
+		return $this->tipeje; 		
 	}
-
 	
 	public function getNumaut()
 	{
 
-		return $this->numaut;
+		return $this->numaut; 		
 	}
-
 	
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getCoriva()
 	{
 
-		return $this->coriva;
+		return number_format($this->coriva,2,',','.');
+		
 	}
-
 	
 	public function getCtabono()
 	{
 
-		return $this->ctabono;
+		return $this->ctabono; 		
 	}
-
 	
 	public function getCtavaca()
 	{
 
-		return $this->ctavaca;
+		return $this->ctavaca; 		
 	}
-
 	
 	public function getGencaubon()
 	{
 
-		return $this->gencaubon;
+		return $this->gencaubon; 		
 	}
-
 	
 	public function getGencomadi()
 	{
 
-		return $this->gencomadi;
+		return $this->gencomadi; 		
 	}
-
 	
 	public function getUnidad()
 	{
 
-		return $this->unidad;
+		return $this->unidad; 		
 	}
-
 	
 	public function getOrdliq()
 	{
 
-		return $this->ordliq;
+		return $this->ordliq; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

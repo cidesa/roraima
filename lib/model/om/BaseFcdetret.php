@@ -41,44 +41,41 @@ abstract class BaseFcdetret extends BaseObject  implements Persistent {
 	public function getNumret()
 	{
 
-		return $this->numret;
+		return $this->numret; 		
 	}
-
 	
 	public function getNumref()
 	{
 
-		return $this->numref;
+		return $this->numref; 		
 	}
-
 	
 	public function getMonasi()
 	{
 
-		return $this->monasi;
+		return number_format($this->monasi,2,',','.');
+		
 	}
-
 	
 	public function getMonabo()
 	{
 
-		return $this->monabo;
+		return number_format($this->monabo,2,',','.');
+		
 	}
-
 	
 	public function getMondeu()
 	{
 
-		return $this->mondeu;
+		return number_format($this->mondeu,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumret($v)
 	{

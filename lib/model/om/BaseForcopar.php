@@ -33,30 +33,27 @@ abstract class BaseForcopar extends BaseObject  implements Persistent {
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getNompar()
 	{
 
-		return $this->nompar;
+		return $this->nompar; 		
 	}
-
 	
 	public function getMonpar()
 	{
 
-		return $this->monpar;
+		return number_format($this->monpar,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpar($v)
 	{

@@ -41,44 +41,38 @@ abstract class BaseFcpreing extends BaseObject  implements Persistent {
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getNompar()
 	{
 
-		return $this->nompar;
+		return $this->nompar; 		
 	}
-
 	
 	public function getEstima()
 	{
 
-		return $this->estima;
+		return $this->estima; 		
 	}
-
 	
 	public function getEstcie()
 	{
 
-		return $this->estcie;
+		return $this->estcie; 		
 	}
-
 	
 	public function getAcum()
 	{
 
-		return $this->acum;
+		return $this->acum; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpar($v)
 	{

@@ -41,30 +41,26 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 	public function getCodtipcon()
 	{
 
-		return $this->codtipcon;
+		return $this->codtipcon; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getFeccal($format = 'Y-m-d')
 	{
@@ -91,9 +87,8 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcon($v)
 	{

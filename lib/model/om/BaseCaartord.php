@@ -93,86 +93,82 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCanord()
 	{
 
-		return $this->canord;
+		return number_format($this->canord,2,',','.');
+		
 	}
-
 	
 	public function getCanaju()
 	{
 
-		return $this->canaju;
+		return number_format($this->canaju,2,',','.');
+		
 	}
-
 	
 	public function getCanrec()
 	{
 
-		return $this->canrec;
+		return number_format($this->canrec,2,',','.');
+		
 	}
-
 	
 	public function getCantot()
 	{
 
-		return $this->cantot;
+		return number_format($this->cantot,2,',','.');
+		
 	}
-
 	
 	public function getPreart()
 	{
 
-		return $this->preart;
+		return number_format($this->preart,2,',','.');
+		
 	}
-
 	
 	public function getDtoart()
 	{
 
-		return $this->dtoart;
+		return number_format($this->dtoart,2,',','.');
+		
 	}
-
 	
 	public function getCodrgo()
 	{
 
-		return $this->codrgo;
+		return $this->codrgo; 		
 	}
-
 	
 	public function getRgoart()
 	{
 
-		return $this->rgoart;
+		return number_format($this->rgoart,2,',','.');
+		
 	}
-
 	
 	public function getTotart()
 	{
 
-		return $this->totart;
+		return number_format($this->totart,2,',','.');
+		
 	}
-
 	
 	public function getFecent($format = 'Y-m-d')
 	{
@@ -199,44 +195,39 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 	public function getDesart()
 	{
 
-		return $this->desart;
+		return $this->desart; 		
 	}
-
 	
 	public function getRelart()
 	{
 
-		return $this->relart;
+		return number_format($this->relart,2,',','.');
+		
 	}
-
 	
 	public function getUnimed()
 	{
 
-		return $this->unimed;
+		return $this->unimed; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getPartida()
 	{
 
-		return $this->partida;
+		return $this->partida; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrdcom($v)
 	{

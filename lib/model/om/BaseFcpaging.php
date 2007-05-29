@@ -41,44 +41,39 @@ abstract class BaseFcpaging extends BaseObject  implements Persistent {
 	public function getRefere()
 	{
 
-		return $this->refere;
+		return $this->refere; 		
 	}
-
 	
 	public function getTippag()
 	{
 
-		return $this->tippag;
+		return $this->tippag; 		
 	}
-
 	
 	public function getMoning()
 	{
 
-		return $this->moning;
+		return number_format($this->moning,2,',','.');
+		
 	}
-
 	
 	public function getNumref()
 	{
 
-		return $this->numref;
+		return $this->numref; 		
 	}
-
 	
 	public function getNomref()
 	{
 
-		return $this->nomref;
+		return $this->nomref; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefere($v)
 	{

@@ -33,30 +33,26 @@ abstract class BaseCpdocprc extends BaseObject  implements Persistent {
 	public function getTipprc()
 	{
 
-		return $this->tipprc;
+		return $this->tipprc; 		
 	}
-
 	
 	public function getNomext()
 	{
 
-		return $this->nomext;
+		return $this->nomext; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTipprc($v)
 	{

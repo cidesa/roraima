@@ -45,16 +45,14 @@ abstract class BaseNpvacregcondis extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getFechasalida($format = 'Y-m-d')
 	{
@@ -125,16 +123,15 @@ abstract class BaseNpvacregcondis extends BaseObject  implements Persistent {
 	public function getDiadis()
 	{
 
-		return $this->diadis;
+		return number_format($this->diadis,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

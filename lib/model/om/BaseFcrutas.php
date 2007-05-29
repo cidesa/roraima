@@ -35,23 +35,20 @@ abstract class BaseFcrutas extends BaseObject  implements Persistent {
 	public function getCodrut()
 	{
 
-		return $this->codrut;
+		return $this->codrut; 		
 	}
-
 	
 	public function getDesrut()
 	{
 
-		return $this->desrut;
+		return $this->desrut; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrut($v)
 	{

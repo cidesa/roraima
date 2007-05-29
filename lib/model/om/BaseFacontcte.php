@@ -53,65 +53,56 @@ abstract class BaseFacontcte extends BaseObject  implements Persistent {
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getCodcont()
 	{
 
-		return $this->codcont;
+		return $this->codcont; 		
 	}
-
 	
 	public function getCorrcon()
 	{
 
-		return $this->corrcon;
+		return $this->corrcon; 		
 	}
-
 	
 	public function getNomcont()
 	{
 
-		return $this->nomcont;
+		return $this->nomcont; 		
 	}
-
 	
 	public function getCarcont()
 	{
 
-		return $this->carcont;
+		return $this->carcont; 		
 	}
-
 	
 	public function getCelcont()
 	{
 
-		return $this->celcont;
+		return $this->celcont; 		
 	}
-
 	
 	public function getTf1cont()
 	{
 
-		return $this->tf1cont;
+		return $this->tf1cont; 		
 	}
-
 	
 	public function getTf2cont()
 	{
 
-		return $this->tf2cont;
+		return $this->tf2cont; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcli($v)
 	{

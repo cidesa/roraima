@@ -101,149 +101,128 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getNomben()
 	{
 
-		return $this->nomben;
+		return $this->nomben; 		
 	}
-
 	
 	public function getDirben()
 	{
 
-		return $this->dirben;
+		return $this->dirben; 		
 	}
-
 	
 	public function getTelben()
 	{
 
-		return $this->telben;
+		return $this->telben; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getNitben()
 	{
 
-		return $this->nitben;
+		return $this->nitben; 		
 	}
-
 	
 	public function getCodtipben()
 	{
 
-		return $this->codtipben;
+		return $this->codtipben; 		
 	}
-
 	
 	public function getTipper()
 	{
 
-		return $this->tipper;
+		return $this->tipper; 		
 	}
-
 	
 	public function getNacionalidad()
 	{
 
-		return $this->nacionalidad;
+		return $this->nacionalidad; 		
 	}
-
 	
 	public function getResidente()
 	{
 
-		return $this->residente;
+		return $this->residente; 		
 	}
-
 	
 	public function getConstituida()
 	{
 
-		return $this->constituida;
+		return $this->constituida; 		
 	}
-
 	
 	public function getCodord()
 	{
 
-		return $this->codord;
+		return $this->codord; 		
 	}
-
 	
 	public function getCodpercon()
 	{
 
-		return $this->codpercon;
+		return $this->codpercon; 		
 	}
-
 	
 	public function getCodordadi()
 	{
 
-		return $this->codordadi;
+		return $this->codordadi; 		
 	}
-
 	
 	public function getCodperconadi()
 	{
 
-		return $this->codperconadi;
+		return $this->codperconadi; 		
 	}
-
 	
 	public function getCodordcontra()
 	{
 
-		return $this->codordcontra;
+		return $this->codordcontra; 		
 	}
-
 	
 	public function getCodpercontra()
 	{
 
-		return $this->codpercontra;
+		return $this->codpercontra; 		
 	}
-
 	
 	public function getTemcedrif()
 	{
 
-		return $this->temcedrif;
+		return $this->temcedrif; 		
 	}
-
 	
 	public function getCodctasec()
 	{
 
-		return $this->codctasec;
+		return $this->codctasec; 		
 	}
-
 	
 	public function getCodctacajchi()
 	{
 
-		return $this->codctacajchi;
+		return $this->codctacajchi; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCedrif($v)
 	{

@@ -49,37 +49,32 @@ abstract class BaseOcressol extends BaseObject  implements Persistent {
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getNumcor()
 	{
 
-		return $this->numcor;
+		return $this->numcor; 		
 	}
-
 	
 	public function getCedemi()
 	{
 
-		return $this->cedemi;
+		return $this->cedemi; 		
 	}
-
 	
 	public function getCedfir()
 	{
 
-		return $this->cedfir;
+		return $this->cedfir; 		
 	}
-
 	
 	public function getUbiarc()
 	{
 
-		return $this->ubiarc;
+		return $this->ubiarc; 		
 	}
-
 	
 	public function getFecres($format = 'Y-m-d')
 	{
@@ -128,9 +123,8 @@ abstract class BaseOcressol extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsol($v)
 	{

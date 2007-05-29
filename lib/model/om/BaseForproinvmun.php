@@ -41,44 +41,39 @@ abstract class BaseForproinvmun extends BaseObject  implements Persistent {
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getCodpremun()
 	{
 
-		return $this->codpremun;
+		return $this->codpremun; 		
 	}
-
 	
 	public function getCodpregob()
 	{
 
-		return $this->codpregob;
+		return $this->codpregob; 		
 	}
-
 	
 	public function getDespremun()
 	{
 
-		return $this->despremun;
+		return $this->despremun; 		
 	}
-
 	
 	public function getMonapomun()
 	{
 
-		return $this->monapomun;
+		return number_format($this->monapomun,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmun($v)
 	{

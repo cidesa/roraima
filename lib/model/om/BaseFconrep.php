@@ -61,37 +61,32 @@ abstract class BaseFconrep extends BaseObject  implements Persistent {
 	public function getCedcon()
 	{
 
-		return $this->cedcon;
+		return $this->cedcon; 		
 	}
-
 	
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getRepcon()
 	{
 
-		return $this->repcon;
+		return $this->repcon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getFeccon($format = 'Y-m-d')
 	{
@@ -118,37 +113,32 @@ abstract class BaseFconrep extends BaseObject  implements Persistent {
 	public function getTelcon()
 	{
 
-		return $this->telcon;
+		return $this->telcon; 		
 	}
-
 	
 	public function getEmacon()
 	{
 
-		return $this->emacon;
+		return $this->emacon; 		
 	}
-
 	
 	public function getCodsec()
 	{
 
-		return $this->codsec;
+		return $this->codsec; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCedcon($v)
 	{

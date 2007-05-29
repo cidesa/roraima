@@ -45,51 +45,46 @@ abstract class BaseNpcargosocp extends BaseObject  implements Persistent {
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getCodpas()
 	{
 
-		return $this->codpas;
+		return $this->codpas; 		
 	}
-
 	
 	public function getCodgra()
 	{
 
-		return $this->codgra;
+		return $this->codgra; 		
 	}
-
 	
 	public function getSueldo()
 	{
 
-		return $this->sueldo;
+		return number_format($this->sueldo,2,',','.');
+		
 	}
-
 	
 	public function getDescar()
 	{
 
-		return $this->descar;
+		return $this->descar; 		
 	}
-
 	
 	public function getComcar()
 	{
 
-		return $this->comcar;
+		return number_format($this->comcar,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcar($v)
 	{

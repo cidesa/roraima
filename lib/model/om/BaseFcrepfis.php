@@ -53,16 +53,14 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 	public function getNumlic()
 	{
 
-		return $this->numlic;
+		return $this->numlic; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getFecrep($format = 'Y-m-d')
 	{
@@ -89,44 +87,40 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 	public function getNumrep()
 	{
 
-		return $this->numrep;
+		return $this->numrep; 		
 	}
-
 	
 	public function getMonrep()
 	{
 
-		return $this->monrep;
+		return number_format($this->monrep,2,',','.');
+		
 	}
-
 	
 	public function getConrep()
 	{
 
-		return $this->conrep;
+		return $this->conrep; 		
 	}
-
 	
 	public function getModo()
 	{
 
-		return $this->modo;
+		return $this->modo; 		
 	}
-
 	
 	public function getMonadi()
 	{
 
-		return $this->monadi;
+		return number_format($this->monadi,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumlic($v)
 	{

@@ -69,93 +69,88 @@ abstract class BaseCpestform extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getNompre()
 	{
 
-		return $this->nompre;
+		return $this->nompre; 		
 	}
-
 	
 	public function getAnomes()
 	{
 
-		return $this->anomes;
+		return $this->anomes; 		
 	}
-
 	
 	public function getEstimado()
 	{
 
-		return $this->estimado;
+		return number_format($this->estimado,2,',','.');
+		
 	}
-
 	
 	public function getReal()
 	{
 
-		return $this->real;
+		return number_format($this->real,2,',','.');
+		
 	}
-
 	
 	public function getDiferencia()
 	{
 
-		return $this->diferencia;
+		return number_format($this->diferencia,2,',','.');
+		
 	}
-
 	
 	public function getPorc()
 	{
 
-		return $this->porc;
+		return number_format($this->porc,2,',','.');
+		
 	}
-
 	
 	public function getEstimado2()
 	{
 
-		return $this->estimado2;
+		return number_format($this->estimado2,2,',','.');
+		
 	}
-
 	
 	public function getReal2()
 	{
 
-		return $this->real2;
+		return number_format($this->real2,2,',','.');
+		
 	}
-
 	
 	public function getDiferencia2()
 	{
 
-		return $this->diferencia2;
+		return number_format($this->diferencia2,2,',','.');
+		
 	}
-
 	
 	public function getPorc2()
 	{
 
-		return $this->porc2;
+		return number_format($this->porc2,2,',','.');
+		
 	}
-
 	
 	public function getPerpre()
 	{
 
-		return $this->perpre;
+		return $this->perpre; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpre($v)
 	{

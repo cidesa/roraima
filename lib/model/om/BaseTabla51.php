@@ -69,9 +69,8 @@ abstract class BaseTabla51 extends BaseObject  implements Persistent {
 	public function getRefadi()
 	{
 
-		return $this->refadi;
+		return $this->refadi; 		
 	}
-
 	
 	public function getFecadi($format = 'Y-m-d')
 	{
@@ -98,51 +97,45 @@ abstract class BaseTabla51 extends BaseObject  implements Persistent {
 	public function getAnoadi()
 	{
 
-		return $this->anoadi;
+		return $this->anoadi; 		
 	}
-
 	
 	public function getDesadi()
 	{
 
-		return $this->desadi;
+		return $this->desadi; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getAdidis()
 	{
 
-		return $this->adidis;
+		return $this->adidis; 		
 	}
-
 	
 	public function getTotadi()
 	{
 
-		return $this->totadi;
+		return number_format($this->totadi,2,',','.');
+		
 	}
-
 	
 	public function getStaadi()
 	{
 
-		return $this->staadi;
+		return $this->staadi; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -169,23 +162,20 @@ abstract class BaseTabla51 extends BaseObject  implements Persistent {
 	public function getPeradi()
 	{
 
-		return $this->peradi;
+		return $this->peradi; 		
 	}
-
 	
 	public function getTipgas()
 	{
 
-		return $this->tipgas;
+		return $this->tipgas; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefadi($v)
 	{

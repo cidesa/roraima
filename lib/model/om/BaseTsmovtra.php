@@ -61,9 +61,8 @@ abstract class BaseTsmovtra extends BaseObject  implements Persistent {
 	public function getReftra()
 	{
 
-		return $this->reftra;
+		return $this->reftra; 		
 	}
-
 	
 	public function getFectra($format = 'Y-m-d')
 	{
@@ -90,44 +89,39 @@ abstract class BaseTsmovtra extends BaseObject  implements Persistent {
 	public function getDestra()
 	{
 
-		return $this->destra;
+		return $this->destra; 		
 	}
-
 	
 	public function getCtaori()
 	{
 
-		return $this->ctaori;
+		return $this->ctaori; 		
 	}
-
 	
 	public function getCtades()
 	{
 
-		return $this->ctades;
+		return $this->ctades; 		
 	}
-
 	
 	public function getMontra()
 	{
 
-		return $this->montra;
+		return number_format($this->montra,2,',','.');
+		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getFecing($format = 'Y-m-d')
 	{
@@ -176,9 +170,8 @@ abstract class BaseTsmovtra extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReftra($v)
 	{

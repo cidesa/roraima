@@ -33,30 +33,26 @@ abstract class BaseFcsitjurinm extends BaseObject  implements Persistent {
 	public function getCodsitinm()
 	{
 
-		return $this->codsitinm;
+		return $this->codsitinm; 		
 	}
-
 	
 	public function getNomsitinm()
 	{
 
-		return $this->nomsitinm;
+		return $this->nomsitinm; 		
 	}
-
 	
 	public function getStasitinm()
 	{
 
-		return $this->stasitinm;
+		return $this->stasitinm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsitinm($v)
 	{

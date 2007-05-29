@@ -37,37 +37,32 @@ abstract class BaseNpconaho extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getTipcon()
 	{
 
-		return $this->tipcon;
+		return $this->tipcon; 		
 	}
-
 	
 	public function getTipnom()
 	{
 
-		return $this->tipnom;
+		return $this->tipnom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

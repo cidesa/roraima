@@ -45,9 +45,8 @@ abstract class BaseCadphartser extends BaseObject  implements Persistent {
 	public function getDphart()
 	{
 
-		return $this->dphart;
+		return $this->dphart; 		
 	}
-
 	
 	public function getFecdph($format = 'Y-m-d')
 	{
@@ -74,37 +73,32 @@ abstract class BaseCadphartser extends BaseObject  implements Persistent {
 	public function getReqart()
 	{
 
-		return $this->reqart;
+		return $this->reqart; 		
 	}
-
 	
 	public function getDesdph()
 	{
 
-		return $this->desdph;
+		return $this->desdph; 		
 	}
-
 	
 	public function getCodori()
 	{
 
-		return $this->codori;
+		return $this->codori; 		
 	}
-
 	
 	public function getStadph()
 	{
 
-		return $this->stadph;
+		return $this->stadph; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDphart($v)
 	{

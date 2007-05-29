@@ -33,30 +33,26 @@ abstract class BaseRhdefind extends BaseObject  implements Persistent {
 	public function getCodind()
 	{
 
-		return $this->codind;
+		return $this->codind; 		
 	}
-
 	
 	public function getDesind()
 	{
 
-		return $this->desind;
+		return $this->desind; 		
 	}
-
 	
 	public function getTipind()
 	{
 
-		return $this->tipind;
+		return $this->tipind; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodind($v)
 	{

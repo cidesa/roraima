@@ -101,9 +101,8 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 	public function getNumord()
 	{
 
-		return $this->numord;
+		return $this->numord; 		
 	}
-
 	
 	public function getFecfac($format = 'Y-m-d')
 	{
@@ -130,135 +129,128 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 	public function getNumfac()
 	{
 
-		return $this->numfac;
+		return $this->numfac; 		
 	}
-
 	
 	public function getNumctr()
 	{
 
-		return $this->numctr;
+		return $this->numctr; 		
 	}
-
 	
 	public function getTiptra()
 	{
 
-		return $this->tiptra;
+		return $this->tiptra; 		
 	}
-
 	
 	public function getTotfac()
 	{
 
-		return $this->totfac;
+		return number_format($this->totfac,2,',','.');
+		
 	}
-
 	
 	public function getExeiva()
 	{
 
-		return $this->exeiva;
+		return number_format($this->exeiva,2,',','.');
+		
 	}
-
 	
 	public function getBasimp()
 	{
 
-		return $this->basimp;
+		return number_format($this->basimp,2,',','.');
+		
 	}
-
 	
 	public function getPoriva()
 	{
 
-		return $this->poriva;
+		return number_format($this->poriva,2,',','.');
+		
 	}
-
 	
 	public function getMoniva()
 	{
 
-		return $this->moniva;
+		return number_format($this->moniva,2,',','.');
+		
 	}
-
 	
 	public function getMonret()
 	{
 
-		return $this->monret;
+		return number_format($this->monret,2,',','.');
+		
 	}
-
 	
 	public function getBasltf()
 	{
 
-		return $this->basltf;
+		return number_format($this->basltf,2,',','.');
+		
 	}
-
 	
 	public function getPorltf()
 	{
 
-		return $this->porltf;
+		return number_format($this->porltf,2,',','.');
+		
 	}
-
 	
 	public function getMonltf()
 	{
 
-		return $this->monltf;
+		return number_format($this->monltf,2,',','.');
+		
 	}
-
 	
 	public function getBasislr()
 	{
 
-		return $this->basislr;
+		return number_format($this->basislr,2,',','.');
+		
 	}
-
 	
 	public function getPorislr()
 	{
 
-		return $this->porislr;
+		return number_format($this->porislr,2,',','.');
+		
 	}
-
 	
 	public function getMonislr()
 	{
 
-		return $this->monislr;
+		return number_format($this->monislr,2,',','.');
+		
 	}
-
 	
 	public function getCodislr()
 	{
 
-		return $this->codislr;
+		return $this->codislr; 		
 	}
-
 	
 	public function getRifalt()
 	{
 
-		return $this->rifalt;
+		return $this->rifalt; 		
 	}
-
 	
 	public function getFacafe()
 	{
 
-		return $this->facafe;
+		return $this->facafe; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumord($v)
 	{

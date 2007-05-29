@@ -41,44 +41,40 @@ abstract class BaseForparing extends BaseObject  implements Persistent {
 	public function getCodparing()
 	{
 
-		return $this->codparing;
+		return $this->codparing; 		
 	}
-
 	
 	public function getMontoing()
 	{
 
-		return $this->montoing;
+		return number_format($this->montoing,2,',','.');
+		
 	}
-
 	
 	public function getCodtipfin()
 	{
 
-		return $this->codtipfin;
+		return $this->codtipfin; 		
 	}
-
 	
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getMontodis()
 	{
 
-		return $this->montodis;
+		return number_format($this->montodis,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodparing($v)
 	{

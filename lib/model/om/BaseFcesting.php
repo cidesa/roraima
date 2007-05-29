@@ -37,37 +37,33 @@ abstract class BaseFcesting extends BaseObject  implements Persistent {
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getAno()
 	{
 
-		return $this->ano;
+		return $this->ano; 		
 	}
-
 	
 	public function getPerest()
 	{
 
-		return $this->perest;
+		return $this->perest; 		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpar($v)
 	{

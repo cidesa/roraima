@@ -33,30 +33,26 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	public function getCodfal()
 	{
 
-		return $this->codfal;
+		return $this->codfal; 		
 	}
-
 	
 	public function getDesfal()
 	{
 
-		return $this->desfal;
+		return $this->desfal; 		
 	}
-
 	
 	public function getTipfal()
 	{
 
-		return $this->tipfal;
+		return $this->tipfal; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodfal($v)
 	{

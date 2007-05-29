@@ -37,37 +37,34 @@ abstract class BaseRhdefemp extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFaxemp()
 	{
 
-		return $this->faxemp;
+		return $this->faxemp; 		
 	}
-
 	
 	public function getPorcom()
 	{
 
-		return $this->porcom;
+		return number_format($this->porcom,2,',','.');
+		
 	}
-
 	
 	public function getPorobj()
 	{
 
-		return $this->porobj;
+		return number_format($this->porobj,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

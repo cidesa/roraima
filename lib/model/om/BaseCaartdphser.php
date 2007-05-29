@@ -45,23 +45,20 @@ abstract class BaseCaartdphser extends BaseObject  implements Persistent {
 	public function getDphart()
 	{
 
-		return $this->dphart;
+		return $this->dphart; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getFecrea($format = 'Y-m-d')
 	{
@@ -88,23 +85,20 @@ abstract class BaseCaartdphser extends BaseObject  implements Persistent {
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getDphobs()
 	{
 
-		return $this->dphobs;
+		return $this->dphobs; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDphart($v)
 	{

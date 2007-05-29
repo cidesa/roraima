@@ -33,30 +33,27 @@ abstract class BaseCpdiscre extends BaseObject  implements Persistent {
 	public function getSector()
 	{
 
-		return $this->sector;
+		return $this->sector; 		
 	}
-
 	
 	public function getPartida()
 	{
 
-		return $this->partida;
+		return $this->partida; 		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setSector($v)
 	{

@@ -41,16 +41,14 @@ abstract class BaseCobregges extends BaseObject  implements Persistent {
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getNumges()
 	{
 
-		return $this->numges;
+		return $this->numges; 		
 	}
-
 	
 	public function getFecges($format = 'Y-m-d')
 	{
@@ -77,23 +75,20 @@ abstract class BaseCobregges extends BaseObject  implements Persistent {
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getObsges()
 	{
 
-		return $this->obsges;
+		return $this->obsges; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcli($v)
 	{

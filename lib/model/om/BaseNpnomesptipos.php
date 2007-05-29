@@ -37,16 +37,14 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 	public function getCodnomesp()
 	{
 
-		return $this->codnomesp;
+		return $this->codnomesp; 		
 	}
-
 	
 	public function getDesnomesp()
 	{
 
-		return $this->desnomesp;
+		return $this->desnomesp; 		
 	}
-
 	
 	public function getFecnomdes($format = 'Y-m-d')
 	{
@@ -95,9 +93,8 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnomesp($v)
 	{

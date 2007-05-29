@@ -29,23 +29,20 @@ abstract class BaseNpnomespnomtip extends BaseObject  implements Persistent {
 	public function getCodnomesp()
 	{
 
-		return $this->codnomesp;
+		return $this->codnomesp; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnomesp($v)
 	{

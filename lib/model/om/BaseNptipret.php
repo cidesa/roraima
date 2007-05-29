@@ -29,23 +29,20 @@ abstract class BaseNptipret extends BaseObject  implements Persistent {
 	public function getCodret()
 	{
 
-		return $this->codret;
+		return $this->codret; 		
 	}
-
 	
 	public function getDesret()
 	{
 
-		return $this->desret;
+		return $this->desret; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodret($v)
 	{

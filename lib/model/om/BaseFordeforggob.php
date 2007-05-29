@@ -41,44 +41,39 @@ abstract class BaseFordeforggob extends BaseObject  implements Persistent {
 	public function getCodorg()
 	{
 
-		return $this->codorg;
+		return $this->codorg; 		
 	}
-
 	
 	public function getNomorg()
 	{
 
-		return $this->nomorg;
+		return $this->nomorg; 		
 	}
-
 	
 	public function getNumgac()
 	{
 
-		return $this->numgac;
+		return $this->numgac; 		
 	}
-
 	
 	public function getActorg()
 	{
 
-		return $this->actorg;
+		return $this->actorg; 		
 	}
-
 	
 	public function getMonest()
 	{
 
-		return $this->monest;
+		return number_format($this->monest,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodorg($v)
 	{

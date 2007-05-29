@@ -37,9 +37,8 @@ abstract class BaseNppresta extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFecdes($format = 'Y-m-d')
 	{
@@ -88,16 +87,15 @@ abstract class BaseNppresta extends BaseObject  implements Persistent {
 	public function getMonacu()
 	{
 
-		return $this->monacu;
+		return number_format($this->monacu,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

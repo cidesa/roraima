@@ -33,30 +33,27 @@ abstract class BaseFacladto extends BaseObject  implements Persistent {
 	public function getLoguse()
 	{
 
-		return $this->loguse;
+		return $this->loguse; 		
 	}
-
 	
 	public function getDescto()
 	{
 
-		return $this->descto;
+		return number_format($this->descto,2,',','.');
+		
 	}
-
 	
 	public function getClave()
 	{
 
-		return $this->clave;
+		return $this->clave; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setLoguse($v)
 	{

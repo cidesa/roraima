@@ -53,65 +53,64 @@ abstract class BaseCacorrel extends BaseObject  implements Persistent {
 	public function getCorcom()
 	{
 
-		return $this->corcom;
+		return number_format($this->corcom,2,',','.');
+		
 	}
-
 	
 	public function getCorser()
 	{
 
-		return $this->corser;
+		return number_format($this->corser,2,',','.');
+		
 	}
-
 	
 	public function getCorsol()
 	{
 
-		return $this->corsol;
+		return number_format($this->corsol,2,',','.');
+		
 	}
-
 	
 	public function getCorreq()
 	{
 
-		return $this->correq;
+		return number_format($this->correq,2,',','.');
+		
 	}
-
 	
 	public function getCorrec()
 	{
 
-		return $this->correc;
+		return number_format($this->correc,2,',','.');
+		
 	}
-
 	
 	public function getCordes()
 	{
 
-		return $this->cordes;
+		return number_format($this->cordes,2,',','.');
+		
 	}
-
 	
 	public function getCorcot()
 	{
 
-		return $this->corcot;
+		return number_format($this->corcot,2,',','.');
+		
 	}
-
 	
 	public function getCortra()
 	{
 
-		return $this->cortra;
+		return number_format($this->cortra,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCorcom($v)
 	{

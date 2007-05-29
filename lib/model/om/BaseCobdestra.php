@@ -45,30 +45,26 @@ abstract class BaseCobdestra extends BaseObject  implements Persistent {
 	public function getNumtra()
 	{
 
-		return $this->numtra;
+		return $this->numtra; 		
 	}
-
 	
 	public function getRefdoc()
 	{
 
-		return $this->refdoc;
+		return $this->refdoc; 		
 	}
-
 	
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getCoddes()
 	{
 
-		return $this->coddes;
+		return $this->coddes; 		
 	}
-
 	
 	public function getFecdes($format = 'Y-m-d')
 	{
@@ -95,16 +91,15 @@ abstract class BaseCobdestra extends BaseObject  implements Persistent {
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumtra($v)
 	{

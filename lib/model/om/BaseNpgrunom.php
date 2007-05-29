@@ -45,30 +45,26 @@ abstract class BaseNpgrunom extends BaseObject  implements Persistent {
 	public function getCodgrunom()
 	{
 
-		return $this->codgrunom;
+		return $this->codgrunom; 		
 	}
-
 	
 	public function getNomgrunom()
 	{
 
-		return $this->nomgrunom;
+		return $this->nomgrunom; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getFecha1($format = 'Y-m-d')
 	{
@@ -117,9 +113,8 @@ abstract class BaseNpgrunom extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodgrunom($v)
 	{

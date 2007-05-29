@@ -33,30 +33,26 @@ abstract class BaseTsconuni extends BaseObject  implements Persistent {
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getCodsus()
 	{
 
-		return $this->codsus;
+		return $this->codsus; 		
 	}
-
 	
 	public function getNomsus()
 	{
 
-		return $this->nomsus;
+		return $this->nomsus; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcta($v)
 	{

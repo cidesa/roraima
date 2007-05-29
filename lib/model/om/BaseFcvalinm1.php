@@ -85,121 +85,110 @@ abstract class BaseFcvalinm1 extends BaseObject  implements Persistent {
 	public function getCoduso()
 	{
 
-		return $this->coduso;
+		return $this->coduso; 		
 	}
-
 	
 	public function getValini()
 	{
 
-		return $this->valini;
+		return number_format($this->valini,2,',','.');
+		
 	}
-
 	
 	public function getValfin()
 	{
 
-		return $this->valfin;
+		return number_format($this->valfin,2,',','.');
+		
 	}
-
 	
 	public function getAliinm()
 	{
 
-		return $this->aliinm;
+		return number_format($this->aliinm,2,',','.');
+		
 	}
-
 	
 	public function getAnovig()
 	{
 
-		return $this->anovig;
+		return $this->anovig; 		
 	}
-
 	
 	public function getDeduc()
 	{
 
-		return $this->deduc;
+		return number_format($this->deduc,2,',','.');
+		
 	}
-
 	
 	public function getCodref()
 	{
 
-		return $this->codref;
+		return $this->codref; 		
 	}
-
 	
 	public function getZoni()
 	{
 
-		return $this->zoni;
+		return $this->zoni; 		
 	}
-
 	
 	public function getManz()
 	{
 
-		return $this->manz;
+		return $this->manz; 		
 	}
-
 	
 	public function getParmts()
 	{
 
-		return $this->parmts;
+		return $this->parmts; 		
 	}
-
 	
 	public function getValor()
 	{
 
-		return $this->valor;
+		return number_format($this->valor,2,',','.');
+		
 	}
-
 	
 	public function getTipedi()
 	{
 
-		return $this->tipedi;
+		return $this->tipedi; 		
 	}
-
 	
 	public function getDesedi()
 	{
 
-		return $this->desedi;
+		return $this->desedi; 		
 	}
-
 	
 	public function getNivel()
 	{
 
-		return $this->nivel;
+		return $this->nivel; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoduso($v)
 	{

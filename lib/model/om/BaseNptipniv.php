@@ -41,44 +41,41 @@ abstract class BaseNptipniv extends BaseObject  implements Persistent {
 	public function getCodtipniv()
 	{
 
-		return $this->codtipniv;
+		return $this->codtipniv; 		
 	}
-
 	
 	public function getMaxsue()
 	{
 
-		return $this->maxsue;
+		return number_format($this->maxsue,2,',','.');
+		
 	}
-
 	
 	public function getMedsue()
 	{
 
-		return $this->medsue;
+		return number_format($this->medsue,2,',','.');
+		
 	}
-
 	
 	public function getMinsue()
 	{
 
-		return $this->minsue;
+		return number_format($this->minsue,2,',','.');
+		
 	}
-
 	
 	public function getCodtipcla()
 	{
 
-		return $this->codtipcla;
+		return $this->codtipcla; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipniv($v)
 	{

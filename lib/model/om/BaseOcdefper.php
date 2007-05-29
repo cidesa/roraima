@@ -41,44 +41,38 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 	public function getCedper()
 	{
 
-		return $this->cedper;
+		return $this->cedper; 		
 	}
-
 	
 	public function getNomper()
 	{
 
-		return $this->nomper;
+		return $this->nomper; 		
 	}
-
 	
 	public function getTelper()
 	{
 
-		return $this->telper;
+		return $this->telper; 		
 	}
-
 	
 	public function getCodtipcar()
 	{
 
-		return $this->codtipcar;
+		return $this->codtipcar; 		
 	}
-
 	
 	public function getCodtippro()
 	{
 
-		return $this->codtippro;
+		return $this->codtippro; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCedper($v)
 	{

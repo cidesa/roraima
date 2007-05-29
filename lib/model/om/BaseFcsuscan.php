@@ -65,37 +65,32 @@ abstract class BaseFcsuscan extends BaseObject  implements Persistent {
 	public function getNumsus()
 	{
 
-		return $this->numsus;
+		return $this->numsus; 		
 	}
-
 	
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getNumlic()
 	{
 
-		return $this->numlic;
+		return $this->numlic; 		
 	}
-
 	
 	public function getEstlic()
 	{
 
-		return $this->estlic;
+		return $this->estlic; 		
 	}
-
 	
 	public function getMotsus()
 	{
 
-		return $this->motsus;
+		return $this->motsus; 		
 	}
-
 	
 	public function getFecsus($format = 'Y-m-d')
 	{
@@ -122,44 +117,38 @@ abstract class BaseFcsuscan extends BaseObject  implements Persistent {
 	public function getResolu()
 	{
 
-		return $this->resolu;
+		return $this->resolu; 		
 	}
-
 	
 	public function getTomo()
 	{
 
-		return $this->tomo;
+		return $this->tomo; 		
 	}
-
 	
 	public function getFolio()
 	{
 
-		return $this->folio;
+		return $this->folio; 		
 	}
-
 	
 	public function getNumero()
 	{
 
-		return $this->numero;
+		return $this->numero; 		
 	}
-
 	
 	public function getFunsus()
 	{
 
-		return $this->funsus;
+		return $this->funsus; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsus($v)
 	{

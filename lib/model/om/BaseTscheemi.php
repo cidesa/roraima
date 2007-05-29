@@ -109,23 +109,20 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getFecemi($format = 'Y-m-d')
 	{
@@ -152,23 +149,21 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 	public function getMonche()
 	{
 
-		return $this->monche;
+		return number_format($this->monche,2,',','.');
+		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getCodemi()
 	{
 
-		return $this->codemi;
+		return $this->codemi; 		
 	}
-
 	
 	public function getFecent($format = 'Y-m-d')
 	{
@@ -195,16 +190,14 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 	public function getCodent()
 	{
 
-		return $this->codent;
+		return $this->codent; 		
 	}
-
 	
 	public function getObsent()
 	{
 
-		return $this->obsent;
+		return $this->obsent; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -231,23 +224,20 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 	public function getCedrec()
 	{
 
-		return $this->cedrec;
+		return $this->cedrec; 		
 	}
-
 	
 	public function getNomrec()
 	{
 
-		return $this->nomrec;
+		return $this->nomrec; 		
 	}
-
 	
 	public function getTipdoc()
 	{
 
-		return $this->tipdoc;
+		return $this->tipdoc; 		
 	}
-
 	
 	public function getFecing($format = 'Y-m-d')
 	{
@@ -274,58 +264,50 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 	public function getTemporal()
 	{
 
-		return $this->temporal;
+		return $this->temporal; 		
 	}
-
 	
 	public function getTemporal2()
 	{
 
-		return $this->temporal2;
+		return $this->temporal2; 		
 	}
-
 	
 	public function getNombensus()
 	{
 
-		return $this->nombensus;
+		return $this->nombensus; 		
 	}
-
 	
 	public function getAnopre()
 	{
 
-		return $this->anopre;
+		return $this->anopre; 		
 	}
-
 	
 	public function getNumtiq()
 	{
 
-		return $this->numtiq;
+		return $this->numtiq; 		
 	}
-
 	
 	public function getCedaut()
 	{
 
-		return $this->cedaut;
+		return $this->cedaut; 		
 	}
-
 	
 	public function getPeraut()
 	{
 
-		return $this->peraut;
+		return $this->peraut; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumche($v)
 	{

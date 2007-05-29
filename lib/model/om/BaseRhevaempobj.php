@@ -41,44 +41,40 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 	public function getCodevdo()
 	{
 
-		return $this->codevdo;
+		return $this->codevdo; 		
 	}
-
 	
 	public function getCodniv()
 	{
 
-		return $this->codniv;
+		return $this->codniv; 		
 	}
-
 	
 	public function getCodobj()
 	{
 
-		return $this->codobj;
+		return $this->codobj; 		
 	}
-
 	
 	public function getPlaobj()
 	{
 
-		return $this->plaobj;
+		return number_format($this->plaobj,2,',','.');
+		
 	}
-
 	
 	public function getAlcobj()
 	{
 
-		return $this->alcobj;
+		return number_format($this->alcobj,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodevdo($v)
 	{

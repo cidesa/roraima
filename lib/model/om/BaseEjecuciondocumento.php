@@ -89,16 +89,14 @@ abstract class BaseEjecuciondocumento extends BaseObject  implements Persistent 
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getRefdoc()
 	{
 
-		return $this->refdoc;
+		return $this->refdoc; 		
 	}
-
 	
 	public function getFecdoc($format = 'Y-m-d')
 	{
@@ -125,9 +123,8 @@ abstract class BaseEjecuciondocumento extends BaseObject  implements Persistent 
 	public function getStaimp()
 	{
 
-		return $this->staimp;
+		return $this->staimp; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -154,93 +151,88 @@ abstract class BaseEjecuciondocumento extends BaseObject  implements Persistent 
 	public function getRefere()
 	{
 
-		return $this->refere;
+		return $this->refere; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMonprc()
 	{
 
-		return $this->monprc;
+		return number_format($this->monprc,2,',','.');
+		
 	}
-
 	
 	public function getMonajuprc()
 	{
 
-		return $this->monajuprc;
+		return number_format($this->monajuprc,2,',','.');
+		
 	}
-
 	
 	public function getMoncom()
 	{
 
-		return $this->moncom;
+		return number_format($this->moncom,2,',','.');
+		
 	}
-
 	
 	public function getMonajucom()
 	{
 
-		return $this->monajucom;
+		return number_format($this->monajucom,2,',','.');
+		
 	}
-
 	
 	public function getMoncau()
 	{
 
-		return $this->moncau;
+		return number_format($this->moncau,2,',','.');
+		
 	}
-
 	
 	public function getMonajucau()
 	{
 
-		return $this->monajucau;
+		return number_format($this->monajucau,2,',','.');
+		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getMonajupag()
 	{
 
-		return $this->monajupag;
+		return number_format($this->monajupag,2,',','.');
+		
 	}
-
 	
 	public function getTipdoc()
 	{
 
-		return $this->tipdoc;
+		return $this->tipdoc; 		
 	}
-
 	
 	public function getDesdoc()
 	{
 
-		return $this->desdoc;
+		return $this->desdoc; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTipo($v)
 	{

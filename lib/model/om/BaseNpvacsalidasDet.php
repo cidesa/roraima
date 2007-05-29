@@ -49,44 +49,41 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getPerini()
 	{
 
-		return $this->perini;
+		return $this->perini; 		
 	}
-
 	
 	public function getPerfin()
 	{
 
-		return $this->perfin;
+		return $this->perfin; 		
 	}
-
 	
 	public function getDiasdisfutar()
 	{
 
-		return $this->diasdisfutar;
+		return number_format($this->diasdisfutar,2,',','.');
+		
 	}
-
 	
 	public function getDiasdisfrutados()
 	{
 
-		return $this->diasdisfrutados;
+		return number_format($this->diasdisfrutados,2,',','.');
+		
 	}
-
 	
 	public function getDiasvac()
 	{
 
-		return $this->diasvac;
+		return number_format($this->diasvac,2,',','.');
+		
 	}
-
 	
 	public function getFecvac($format = 'Y-m-d')
 	{
@@ -113,9 +110,8 @@ abstract class BaseNpvacsalidasDet extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

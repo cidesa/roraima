@@ -29,23 +29,20 @@ abstract class BaseCpcategoria extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getNomcat()
 	{
 
-		return $this->nomcat;
+		return $this->nomcat; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

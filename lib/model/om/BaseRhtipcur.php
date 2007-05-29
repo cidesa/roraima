@@ -33,30 +33,26 @@ abstract class BaseRhtipcur extends BaseObject  implements Persistent {
 	public function getCodtipcur()
 	{
 
-		return $this->codtipcur;
+		return $this->codtipcur; 		
 	}
-
 	
 	public function getDestipcur()
 	{
 
-		return $this->destipcur;
+		return $this->destipcur; 		
 	}
-
 	
 	public function getCodarecur()
 	{
 
-		return $this->codarecur;
+		return $this->codarecur; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcur($v)
 	{

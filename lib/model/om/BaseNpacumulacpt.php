@@ -41,44 +41,39 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 	public function getCodacu()
 	{
 
-		return $this->codacu;
+		return $this->codacu; 		
 	}
-
 	
 	public function getNomacu()
 	{
 
-		return $this->nomacu;
+		return $this->nomacu; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getTipacu()
 	{
 
-		return $this->tipacu;
+		return $this->tipacu; 		
 	}
-
 	
 	public function getFactor()
 	{
 
-		return $this->factor;
+		return number_format($this->factor,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodacu($v)
 	{

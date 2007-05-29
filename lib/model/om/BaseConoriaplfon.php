@@ -45,51 +45,46 @@ abstract class BaseConoriaplfon extends BaseObject  implements Persistent {
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getDescta()
 	{
 
-		return $this->descta;
+		return $this->descta; 		
 	}
-
 	
 	public function getOyafon()
 	{
 
-		return $this->oyafon;
+		return $this->oyafon; 		
 	}
-
 	
 	public function getOrdenoya()
 	{
 
-		return $this->ordenoya;
+		return number_format($this->ordenoya,2,',','.');
+		
 	}
-
 	
 	public function getFlucaj()
 	{
 
-		return $this->flucaj;
+		return $this->flucaj; 		
 	}
-
 	
 	public function getOrdenflu()
 	{
 
-		return $this->ordenflu;
+		return number_format($this->ordenflu,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcta($v)
 	{

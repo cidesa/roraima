@@ -49,9 +49,8 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 	public function getReqart()
 	{
 
-		return $this->reqart;
+		return $this->reqart; 		
 	}
-
 	
 	public function getFecreq($format = 'Y-m-d')
 	{
@@ -78,44 +77,39 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 	public function getDesreq()
 	{
 
-		return $this->desreq;
+		return $this->desreq; 		
 	}
-
 	
 	public function getMonreq()
 	{
 
-		return $this->monreq;
+		return number_format($this->monreq,2,',','.');
+		
 	}
-
 	
 	public function getStareq()
 	{
 
-		return $this->stareq;
+		return $this->stareq; 		
 	}
-
 	
 	public function getUnisol()
 	{
 
-		return $this->unisol;
+		return $this->unisol; 		
 	}
-
 	
 	public function getCodcatreq()
 	{
 
-		return $this->codcatreq;
+		return $this->codcatreq; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReqart($v)
 	{

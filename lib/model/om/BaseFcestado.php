@@ -42,30 +42,26 @@ abstract class BaseFcestado extends BaseObject  implements Persistent {
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getNomedo()
 	{
 
-		return $this->nomedo;
+		return $this->nomedo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodedo($v)
 	{

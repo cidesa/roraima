@@ -45,51 +45,44 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getDesart()
 	{
 
-		return $this->desart;
+		return $this->desart; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getStacon()
 	{
 
-		return $this->stacon;
+		return $this->stacon; 		
 	}
-
 	
 	public function getStagob()
 	{
 
-		return $this->stagob;
+		return $this->stagob; 		
 	}
-
 	
 	public function getStapre()
 	{
 
-		return $this->stapre;
+		return $this->stapre; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodart($v)
 	{

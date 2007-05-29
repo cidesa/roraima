@@ -45,16 +45,14 @@ abstract class BaseTemp1 extends BaseObject  implements Persistent {
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getDescta()
 	{
 
-		return $this->descta;
+		return $this->descta; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -103,23 +101,20 @@ abstract class BaseTemp1 extends BaseObject  implements Persistent {
 	public function getDebcre()
 	{
 
-		return $this->debcre;
+		return $this->debcre; 		
 	}
-
 	
 	public function getCargab()
 	{
 
-		return $this->cargab;
+		return $this->cargab; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcta($v)
 	{

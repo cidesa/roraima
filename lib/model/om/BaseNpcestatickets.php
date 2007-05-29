@@ -65,86 +65,77 @@ abstract class BaseNpcestatickets extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getMonpor()
 	{
 
-		return $this->monpor;
+		return $this->monpor; 		
 	}
-
 	
 	public function getValtic()
 	{
 
-		return $this->valtic;
+		return number_format($this->valtic,2,',','.');
+		
 	}
-
 	
 	public function getNumtic()
 	{
 
-		return $this->numtic;
+		return number_format($this->numtic,2,',','.');
+		
 	}
-
 	
 	public function getTippag()
 	{
 
-		return $this->tippag;
+		return $this->tippag; 		
 	}
-
 	
 	public function getNumdia()
 	{
 
-		return $this->numdia;
+		return number_format($this->numdia,2,',','.');
+		
 	}
-
 	
 	public function getDiahab()
 	{
 
-		return $this->diahab;
+		return $this->diahab; 		
 	}
-
 	
 	public function getSabado()
 	{
 
-		return $this->sabado;
+		return $this->sabado; 		
 	}
-
 	
 	public function getDoming()
 	{
 
-		return $this->doming;
+		return $this->doming; 		
 	}
-
 	
 	public function getDiafer()
 	{
 
-		return $this->diafer;
+		return $this->diafer; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

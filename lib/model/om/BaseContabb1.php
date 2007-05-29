@@ -60,9 +60,8 @@ abstract class BaseContabb1 extends BaseObject  implements Persistent {
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -111,51 +110,49 @@ abstract class BaseContabb1 extends BaseObject  implements Persistent {
 	public function getPereje()
 	{
 
-		return $this->pereje;
+		return $this->pereje; 		
 	}
-
 	
 	public function getTotdeb()
 	{
 
-		return $this->totdeb;
+		return number_format($this->totdeb,2,',','.');
+		
 	}
-
 	
 	public function getTotcre()
 	{
 
-		return $this->totcre;
+		return number_format($this->totcre,2,',','.');
+		
 	}
-
 	
 	public function getSalact()
 	{
 
-		return $this->salact;
+		return number_format($this->salact,2,',','.');
+		
 	}
-
 	
 	public function getSalprgper()
 	{
 
-		return $this->salprgper;
+		return number_format($this->salprgper,2,',','.');
+		
 	}
-
 	
 	public function getSalprgperfor()
 	{
 
-		return $this->salprgperfor;
+		return number_format($this->salprgperfor,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcta($v)
 	{

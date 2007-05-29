@@ -37,37 +37,32 @@ abstract class BaseRhasicur extends BaseObject  implements Persistent {
 	public function getCodcur()
 	{
 
-		return $this->codcur;
+		return $this->codcur; 		
 	}
-
 	
 	public function getNumcla()
 	{
 
-		return $this->numcla;
+		return $this->numcla; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getAsicla()
 	{
 
-		return $this->asicla;
+		return $this->asicla; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcur($v)
 	{

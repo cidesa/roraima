@@ -29,23 +29,20 @@ abstract class BaseOctipesp extends BaseObject  implements Persistent {
 	public function getCodtipesp()
 	{
 
-		return $this->codtipesp;
+		return $this->codtipesp; 		
 	}
-
 	
 	public function getDestipesp()
 	{
 
-		return $this->destipesp;
+		return $this->destipesp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipesp($v)
 	{

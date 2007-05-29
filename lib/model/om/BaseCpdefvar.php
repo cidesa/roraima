@@ -45,51 +45,45 @@ abstract class BaseCpdefvar extends BaseObject  implements Persistent {
 	public function getCodvar()
 	{
 
-		return $this->codvar;
+		return $this->codvar; 		
 	}
-
 	
 	public function getNomext()
 	{
 
-		return $this->nomext;
+		return $this->nomext; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getValdef()
 	{
 
-		return $this->valdef;
+		return number_format($this->valdef,2,',','.');
+		
 	}
-
 	
 	public function getTipvar()
 	{
 
-		return $this->tipvar;
+		return $this->tipvar; 		
 	}
-
 	
 	public function getStavar()
 	{
 
-		return $this->stavar;
+		return $this->stavar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodvar($v)
 	{

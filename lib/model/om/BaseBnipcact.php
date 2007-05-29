@@ -77,107 +77,104 @@ abstract class BaseBnipcact extends BaseObject  implements Persistent {
 	public function getAnoipc()
 	{
 
-		return $this->anoipc;
+		return $this->anoipc; 		
 	}
-
 	
 	public function getIpcene()
 	{
 
-		return $this->ipcene;
+		return number_format($this->ipcene,2,',','.');
+		
 	}
-
 	
 	public function getIpcfeb()
 	{
 
-		return $this->ipcfeb;
+		return number_format($this->ipcfeb,2,',','.');
+		
 	}
-
 	
 	public function getIpcmar()
 	{
 
-		return $this->ipcmar;
+		return number_format($this->ipcmar,2,',','.');
+		
 	}
-
 	
 	public function getIpcabr()
 	{
 
-		return $this->ipcabr;
+		return number_format($this->ipcabr,2,',','.');
+		
 	}
-
 	
 	public function getIpcmay()
 	{
 
-		return $this->ipcmay;
+		return number_format($this->ipcmay,2,',','.');
+		
 	}
-
 	
 	public function getIpcjun()
 	{
 
-		return $this->ipcjun;
+		return number_format($this->ipcjun,2,',','.');
+		
 	}
-
 	
 	public function getIpcjul()
 	{
 
-		return $this->ipcjul;
+		return number_format($this->ipcjul,2,',','.');
+		
 	}
-
 	
 	public function getIpcago()
 	{
 
-		return $this->ipcago;
+		return number_format($this->ipcago,2,',','.');
+		
 	}
-
 	
 	public function getIpcsep()
 	{
 
-		return $this->ipcsep;
+		return number_format($this->ipcsep,2,',','.');
+		
 	}
-
 	
 	public function getIpcoct()
 	{
 
-		return $this->ipcoct;
+		return number_format($this->ipcoct,2,',','.');
+		
 	}
-
 	
 	public function getIpcnov()
 	{
 
-		return $this->ipcnov;
+		return number_format($this->ipcnov,2,',','.');
+		
 	}
-
 	
 	public function getIpcdic()
 	{
 
-		return $this->ipcdic;
+		return number_format($this->ipcdic,2,',','.');
+		
 	}
-
 	
 	public function getStaipc()
 	{
 
-		return $this->staipc;
+		return $this->staipc; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setAnoipc($v)
 	{

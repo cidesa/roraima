@@ -29,23 +29,20 @@ abstract class BaseFadtocte extends BaseObject  implements Persistent {
 	public function getCodtipcte()
 	{
 
-		return $this->codtipcte;
+		return $this->codtipcte; 		
 	}
-
 	
 	public function getCoddto()
 	{
 
-		return $this->coddto;
+		return $this->coddto; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcte($v)
 	{

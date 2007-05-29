@@ -61,79 +61,71 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getNomcar()
 	{
 
-		return $this->nomcar;
+		return $this->nomcar; 		
 	}
-
 	
 	public function getSuecar()
 	{
 
-		return $this->suecar;
+		return number_format($this->suecar,2,',','.');
+		
 	}
-
 	
 	public function getStacar()
 	{
 
-		return $this->stacar;
+		return $this->stacar; 		
 	}
-
 	
 	public function getCodocp()
 	{
 
-		return $this->codocp;
+		return $this->codocp; 		
 	}
-
 	
 	public function getPunmin()
 	{
 
-		return $this->punmin;
+		return number_format($this->punmin,2,',','.');
+		
 	}
-
 	
 	public function getGraocp()
 	{
 
-		return $this->graocp;
+		return $this->graocp; 		
 	}
-
 	
 	public function getComcar()
 	{
 
-		return $this->comcar;
+		return number_format($this->comcar,2,',','.');
+		
 	}
-
 	
 	public function getPasocp()
 	{
 
-		return $this->pasocp;
+		return $this->pasocp; 		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcar($v)
 	{

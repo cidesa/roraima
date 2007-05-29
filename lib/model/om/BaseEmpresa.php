@@ -165,261 +165,224 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getDiremp()
 	{
 
-		return $this->diremp;
+		return $this->diremp; 		
 	}
-
 	
 	public function getTlfemp()
 	{
 
-		return $this->tlfemp;
+		return $this->tlfemp; 		
 	}
-
 	
 	public function getCiuemp()
 	{
 
-		return $this->ciuemp;
+		return $this->ciuemp; 		
 	}
-
 	
 	public function getUrlemp()
 	{
 
-		return $this->urlemp;
+		return $this->urlemp; 		
 	}
-
 	
 	public function getFaxemp()
 	{
 
-		return $this->faxemp;
+		return $this->faxemp; 		
 	}
-
 	
 	public function getCodpos()
 	{
 
-		return $this->codpos;
+		return $this->codpos; 		
 	}
-
 	
 	public function getGobedo()
 	{
 
-		return $this->gobedo;
+		return $this->gobedo; 		
 	}
-
 	
 	public function getConedo()
 	{
 
-		return $this->conedo;
+		return $this->conedo; 		
 	}
-
 	
 	public function getCleedo()
 	{
 
-		return $this->cleedo;
+		return $this->cleedo; 		
 	}
-
 	
 	public function getDirpre()
 	{
 
-		return $this->dirpre;
+		return $this->dirpre; 		
 	}
-
 	
 	public function getMunemp()
 	{
 
-		return $this->munemp;
+		return $this->munemp; 		
 	}
-
 	
 	public function getCieedo()
 	{
 
-		return $this->cieedo;
+		return $this->cieedo; 		
 	}
-
 	
 	public function getCodctagas()
 	{
 
-		return $this->codctagas;
+		return $this->codctagas; 		
 	}
-
 	
 	public function getCodctaban()
 	{
 
-		return $this->codctaban;
+		return $this->codctaban; 		
 	}
-
 	
 	public function getCodctaret()
 	{
 
-		return $this->codctaret;
+		return $this->codctaret; 		
 	}
-
 	
 	public function getCodctaben()
 	{
 
-		return $this->codctaben;
+		return $this->codctaben; 		
 	}
-
 	
 	public function getCodctaart()
 	{
 
-		return $this->codctaart;
+		return $this->codctaart; 		
 	}
-
 	
 	public function getCodctagashas()
 	{
 
-		return $this->codctagashas;
+		return $this->codctagashas; 		
 	}
-
 	
 	public function getCodctabanhas()
 	{
 
-		return $this->codctabanhas;
+		return $this->codctabanhas; 		
 	}
-
 	
 	public function getCodctarethas()
 	{
 
-		return $this->codctarethas;
+		return $this->codctarethas; 		
 	}
-
 	
 	public function getCodctabenhas()
 	{
 
-		return $this->codctabenhas;
+		return $this->codctabenhas; 		
 	}
-
 	
 	public function getCodctaarthas()
 	{
 
-		return $this->codctaarthas;
+		return $this->codctaarthas; 		
 	}
-
 	
 	public function getCodctapageje()
 	{
 
-		return $this->codctapageje;
+		return $this->codctapageje; 		
 	}
-
 	
 	public function getCodctaingdevn()
 	{
 
-		return $this->codctaingdevn;
+		return $this->codctaingdevn; 		
 	}
-
 	
 	public function getCodctaingdev()
 	{
 
-		return $this->codctaingdev;
+		return $this->codctaingdev; 		
 	}
-
 	
 	public function getDiradm()
 	{
 
-		return $this->diradm;
+		return $this->diradm; 		
 	}
-
 	
 	public function getDirfin()
 	{
 
-		return $this->dirfin;
+		return $this->dirfin; 		
 	}
-
 	
 	public function getDirper()
 	{
 
-		return $this->dirper;
+		return $this->dirper; 		
 	}
-
 	
 	public function getDirgen()
 	{
 
-		return $this->dirgen;
+		return $this->dirgen; 		
 	}
-
 	
 	public function getAnapre()
 	{
 
-		return $this->anapre;
+		return $this->anapre; 		
 	}
-
 	
 	public function getAnaper()
 	{
 
-		return $this->anaper;
+		return $this->anaper; 		
 	}
-
 	
 	public function getAnaadm()
 	{
 
-		return $this->anaadm;
+		return $this->anaadm; 		
 	}
-
 	
 	public function getEdoemp()
 	{
 
-		return $this->edoemp;
+		return $this->edoemp; 		
 	}
-
 	
 	public function getEncabezado()
 	{
 
-		return $this->encabezado;
+		return $this->encabezado; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

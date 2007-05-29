@@ -153,30 +153,26 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getNomcue()
 	{
 
-		return $this->nomcue;
+		return $this->nomcue; 		
 	}
-
 	
 	public function getTipcue()
 	{
 
-		return $this->tipcue;
+		return $this->tipcue; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getFecreg($format = 'Y-m-d')
 	{
@@ -247,93 +243,89 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function getRenaut()
 	{
 
-		return $this->renaut;
+		return $this->renaut; 		
 	}
-
 	
 	public function getPorint()
 	{
 
-		return $this->porint;
+		return number_format($this->porint,2,',','.');
+		
 	}
-
 	
 	public function getTipint()
 	{
 
-		return $this->tipint;
+		return $this->tipint; 		
 	}
-
 	
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getAntban()
 	{
 
-		return $this->antban;
+		return number_format($this->antban,2,',','.');
+		
 	}
-
 	
 	public function getDebban()
 	{
 
-		return $this->debban;
+		return number_format($this->debban,2,',','.');
+		
 	}
-
 	
 	public function getCreban()
 	{
 
-		return $this->creban;
+		return number_format($this->creban,2,',','.');
+		
 	}
-
 	
 	public function getAntlib()
 	{
 
-		return $this->antlib;
+		return number_format($this->antlib,2,',','.');
+		
 	}
-
 	
 	public function getDeblib()
 	{
 
-		return $this->deblib;
+		return number_format($this->deblib,2,',','.');
+		
 	}
-
 	
 	public function getCrelib()
 	{
 
-		return $this->crelib;
+		return number_format($this->crelib,2,',','.');
+		
 	}
-
 	
 	public function getValche()
 	{
 
-		return $this->valche;
+		return number_format($this->valche,2,',','.');
+		
 	}
-
 	
 	public function getConcil()
 	{
 
-		return $this->concil;
+		return $this->concil; 		
 	}
-
 	
 	public function getPlazo()
 	{
 
-		return $this->plazo;
+		return number_format($this->plazo,2,',','.');
+		
 	}
-
 	
 	public function getFecape($format = 'Y-m-d')
 	{
@@ -360,65 +352,59 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function getUsocue()
 	{
 
-		return $this->usocue;
+		return $this->usocue; 		
 	}
-
 	
 	public function getTipren()
 	{
 
-		return $this->tipren;
+		return $this->tipren; 		
 	}
-
 	
 	public function getDesenl()
 	{
 
-		return $this->desenl;
+		return $this->desenl; 		
 	}
-
 	
 	public function getPorsalmin()
 	{
 
-		return $this->porsalmin;
+		return number_format($this->porsalmin,2,',','.');
+		
 	}
-
 	
 	public function getMonsalmin()
 	{
 
-		return $this->monsalmin;
+		return number_format($this->monsalmin,2,',','.');
+		
 	}
-
 	
 	public function getCodctaprecoo()
 	{
 
-		return $this->codctaprecoo;
+		return $this->codctaprecoo; 		
 	}
-
 	
 	public function getCodctapreord()
 	{
 
-		return $this->codctapreord;
+		return $this->codctapreord; 		
 	}
-
 	
 	public function getTrasitoria()
 	{
 
-		return $this->trasitoria;
+		return $this->trasitoria; 		
 	}
-
 	
 	public function getSalact()
 	{
 
-		return $this->salact;
+		return number_format($this->salact,2,',','.');
+		
 	}
-
 	
 	public function getFecaper($format = 'Y-m-d')
 	{
@@ -445,23 +431,21 @@ abstract class BaseTsdefban extends BaseObject  implements Persistent {
 	public function getTemnumcue()
 	{
 
-		return $this->temnumcue;
+		return $this->temnumcue; 		
 	}
-
 	
 	public function getCantdig()
 	{
 
-		return $this->cantdig;
+		return number_format($this->cantdig,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumcue($v)
 	{

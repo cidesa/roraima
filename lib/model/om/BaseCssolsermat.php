@@ -45,16 +45,14 @@ abstract class BaseCssolsermat extends BaseObject  implements Persistent {
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getDessol()
 	{
 
-		return $this->dessol;
+		return $this->dessol; 		
 	}
-
 	
 	public function getFecsol($format = 'Y-m-d')
 	{
@@ -81,30 +79,26 @@ abstract class BaseCssolsermat extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getCoord()
 	{
 
-		return $this->coord;
+		return $this->coord; 		
 	}
-
 	
 	public function getCodubi()
 	{
 
-		return $this->codubi;
+		return $this->codubi; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsol($v)
 	{

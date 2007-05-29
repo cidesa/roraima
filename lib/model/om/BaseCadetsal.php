@@ -41,44 +41,41 @@ abstract class BaseCadetsal extends BaseObject  implements Persistent {
 	public function getCodsal()
 	{
 
-		return $this->codsal;
+		return $this->codsal; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCantot()
 	{
 
-		return $this->cantot;
+		return number_format($this->cantot,2,',','.');
+		
 	}
-
 	
 	public function getTotart()
 	{
 
-		return $this->totart;
+		return number_format($this->totart,2,',','.');
+		
 	}
-
 	
 	public function getCosart()
 	{
 
-		return $this->cosart;
+		return number_format($this->cosart,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsal($v)
 	{

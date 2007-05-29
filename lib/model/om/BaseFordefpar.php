@@ -37,37 +37,32 @@ abstract class BaseFordefpar extends BaseObject  implements Persistent {
 	public function getCodest()
 	{
 
-		return $this->codest;
+		return $this->codest; 		
 	}
-
 	
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getDespar()
 	{
 
-		return $this->despar;
+		return $this->despar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodest($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseNpasinomcont extends BaseObject  implements Persistent {
 	public function getCodtipcon()
 	{
 
-		return $this->codtipcon;
+		return $this->codtipcon; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcon($v)
 	{

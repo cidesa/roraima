@@ -29,23 +29,20 @@ abstract class BaseCaordconpag extends BaseObject  implements Persistent {
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getCodconpag()
 	{
 
-		return $this->codconpag;
+		return $this->codconpag; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrdcom($v)
 	{

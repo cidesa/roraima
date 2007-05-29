@@ -45,51 +45,47 @@ abstract class BaseNpvacdiasbonovac extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getPerini()
 	{
 
-		return $this->perini;
+		return $this->perini; 		
 	}
-
 	
 	public function getPerfin()
 	{
 
-		return $this->perfin;
+		return $this->perfin; 		
 	}
-
 	
 	public function getRangodesde()
 	{
 
-		return $this->rangodesde;
+		return number_format($this->rangodesde,2,',','.');
+		
 	}
-
 	
 	public function getRangohasta()
 	{
 
-		return $this->rangohasta;
+		return number_format($this->rangohasta,2,',','.');
+		
 	}
-
 	
 	public function getDiasbonovac()
 	{
 
-		return $this->diasbonovac;
+		return number_format($this->diasbonovac,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

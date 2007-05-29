@@ -61,9 +61,8 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 	public function getReftra()
 	{
 
-		return $this->reftra;
+		return $this->reftra; 		
 	}
-
 	
 	public function getFectra($format = 'Y-m-d')
 	{
@@ -90,44 +89,39 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 	public function getAnotra()
 	{
 
-		return $this->anotra;
+		return $this->anotra; 		
 	}
-
 	
 	public function getPertra()
 	{
 
-		return $this->pertra;
+		return $this->pertra; 		
 	}
-
 	
 	public function getDestra()
 	{
 
-		return $this->destra;
+		return $this->destra; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getTottra()
 	{
 
-		return $this->tottra;
+		return number_format($this->tottra,2,',','.');
+		
 	}
-
 	
 	public function getStatra()
 	{
 
-		return $this->statra;
+		return $this->statra; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -154,16 +148,14 @@ abstract class BaseCptrasla extends BaseObject  implements Persistent {
 	public function getNrodec()
 	{
 
-		return $this->nrodec;
+		return $this->nrodec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReftra($v)
 	{

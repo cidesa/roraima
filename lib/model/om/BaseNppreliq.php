@@ -75,58 +75,56 @@ abstract class BaseNppreliq extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getMes()
 	{
 
-		return $this->mes;
+		return number_format($this->mes,2,',','.');
+		
 	}
-
 	
 	public function getDiapre()
 	{
 
-		return $this->diapre;
+		return number_format($this->diapre,2,',','.');
+		
 	}
-
 	
 	public function getDiaant()
 	{
 
-		return $this->diaant;
+		return number_format($this->diaant,2,',','.');
+		
 	}
-
 	
 	public function getDiavac()
 	{
 
-		return $this->diavac;
+		return number_format($this->diavac,2,',','.');
+		
 	}
-
 	
 	public function getDiavacfra()
 	{
 
-		return $this->diavacfra;
+		return number_format($this->diavacfra,2,',','.');
+		
 	}
-
 	
 	public function getDiabonvac()
 	{
 
-		return $this->diabonvac;
+		return number_format($this->diabonvac,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecvig($v)
 	{

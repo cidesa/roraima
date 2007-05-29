@@ -129,135 +129,131 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 	public function getMonval()
 	{
 
-		return $this->monval;
+		return number_format($this->monval,2,',','.');
+		
 	}
-
 	
 	public function getSalliq()
 	{
 
-		return $this->salliq;
+		return number_format($this->salliq,2,',','.');
+		
 	}
-
 	
 	public function getRetacu()
 	{
 
-		return $this->retacu;
+		return number_format($this->retacu,2,',','.');
+		
 	}
-
 	
 	public function getMoniva()
 	{
 
-		return $this->moniva;
+		return number_format($this->moniva,2,',','.');
+		
 	}
-
 	
 	public function getAmoant()
 	{
 
-		return $this->amoant;
+		return number_format($this->amoant,2,',','.');
+		
 	}
-
 	
 	public function getStaval()
 	{
 
-		return $this->staval;
+		return $this->staval; 		
 	}
-
 	
 	public function getPoriva()
 	{
 
-		return $this->poriva;
+		return number_format($this->poriva,2,',','.');
+		
 	}
-
 	
 	public function getPorant()
 	{
 
-		return $this->porant;
+		return number_format($this->porant,2,',','.');
+		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getSalant()
 	{
 
-		return $this->salant;
+		return number_format($this->salant,2,',','.');
+		
 	}
-
 	
 	public function getGasree()
 	{
 
-		return $this->gasree;
+		return number_format($this->gasree,2,',','.');
+		
 	}
-
 	
 	public function getSubtot()
 	{
 
-		return $this->subtot;
+		return number_format($this->subtot,2,',','.');
+		
 	}
-
 	
 	public function getMonful()
 	{
 
-		return $this->monful;
+		return number_format($this->monful,2,',','.');
+		
 	}
-
 	
 	public function getMonfia()
 	{
 
-		return $this->monfia;
+		return number_format($this->monfia,2,',','.');
+		
 	}
-
 	
 	public function getMonant()
 	{
 
-		return $this->monant;
+		return number_format($this->monant,2,',','.');
+		
 	}
-
 	
 	public function getMonperiva()
 	{
 
-		return $this->monperiva;
+		return number_format($this->monperiva,2,',','.');
+		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNumval()
 	{
 
-		return $this->numval;
+		return $this->numval; 		
 	}
-
 	
 	public function getCodtipval()
 	{
 
-		return $this->codtipval;
+		return $this->codtipval; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -328,44 +324,43 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 	public function getAumobr()
 	{
 
-		return $this->aumobr;
+		return number_format($this->aumobr,2,',','.');
+		
 	}
-
 	
 	public function getDisobr()
 	{
 
-		return $this->disobr;
+		return number_format($this->disobr,2,',','.');
+		
 	}
-
 	
 	public function getObrext()
 	{
 
-		return $this->obrext;
+		return number_format($this->obrext,2,',','.');
+		
 	}
-
 	
 	public function getMonper()
 	{
 
-		return $this->monper;
+		return number_format($this->monper,2,',','.');
+		
 	}
-
 	
 	public function getTotded()
 	{
 
-		return $this->totded;
+		return number_format($this->totded,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setMonval($v)
 	{

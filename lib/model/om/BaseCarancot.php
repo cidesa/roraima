@@ -37,37 +37,35 @@ abstract class BaseCarancot extends BaseObject  implements Persistent {
 	public function getCandes()
 	{
 
-		return $this->candes;
+		return number_format($this->candes,2,',','.');
+		
 	}
-
 	
 	public function getCanhas()
 	{
 
-		return $this->canhas;
+		return number_format($this->canhas,2,',','.');
+		
 	}
-
 	
 	public function getCancot()
 	{
 
-		return $this->cancot;
+		return number_format($this->cancot,2,',','.');
+		
 	}
-
 	
 	public function getNroran()
 	{
 
-		return $this->nroran;
+		return $this->nroran; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCandes($v)
 	{

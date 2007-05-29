@@ -29,23 +29,20 @@ abstract class BaseCstipser extends BaseObject  implements Persistent {
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getDestip()
 	{
 
-		return $this->destip;
+		return $this->destip; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtip($v)
 	{

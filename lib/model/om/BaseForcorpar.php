@@ -33,30 +33,27 @@ abstract class BaseForcorpar extends BaseObject  implements Persistent {
 	public function getCodest()
 	{
 
-		return $this->codest;
+		return $this->codest; 		
 	}
-
 	
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getCorpar()
 	{
 
-		return $this->corpar;
+		return number_format($this->corpar,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodest($v)
 	{

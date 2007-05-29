@@ -45,51 +45,48 @@ abstract class BaseNpcarpre extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getCanpre()
 	{
 
-		return $this->canpre;
+		return number_format($this->canpre,2,',','.');
+		
 	}
-
 	
 	public function getCanasi()
 	{
 
-		return $this->canasi;
+		return number_format($this->canasi,2,',','.');
+		
 	}
-
 	
 	public function getMonpre()
 	{
 
-		return $this->monpre;
+		return number_format($this->monpre,2,',','.');
+		
 	}
-
 	
 	public function getMonasi()
 	{
 
-		return $this->monasi;
+		return number_format($this->monasi,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

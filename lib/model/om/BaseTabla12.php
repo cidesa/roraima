@@ -77,16 +77,14 @@ abstract class BaseTabla12 extends BaseObject  implements Persistent {
 	public function getRefcau()
 	{
 
-		return $this->refcau;
+		return $this->refcau; 		
 	}
-
 	
 	public function getTipcau()
 	{
 
-		return $this->tipcau;
+		return $this->tipcau; 		
 	}
-
 	
 	public function getFeccau($format = 'Y-m-d')
 	{
@@ -113,65 +111,59 @@ abstract class BaseTabla12 extends BaseObject  implements Persistent {
 	public function getAnocau()
 	{
 
-		return $this->anocau;
+		return $this->anocau; 		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getTipcom()
 	{
 
-		return $this->tipcom;
+		return $this->tipcom; 		
 	}
-
 	
 	public function getDescau()
 	{
 
-		return $this->descau;
+		return $this->descau; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getMoncau()
 	{
 
-		return $this->moncau;
+		return number_format($this->moncau,2,',','.');
+		
 	}
-
 	
 	public function getSalpag()
 	{
 
-		return $this->salpag;
+		return number_format($this->salpag,2,',','.');
+		
 	}
-
 	
 	public function getSalaju()
 	{
 
-		return $this->salaju;
+		return number_format($this->salaju,2,',','.');
+		
 	}
-
 	
 	public function getStacau()
 	{
 
-		return $this->stacau;
+		return $this->stacau; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -198,16 +190,14 @@ abstract class BaseTabla12 extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefcau($v)
 	{

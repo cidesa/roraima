@@ -33,30 +33,28 @@ abstract class BaseCpescsue extends BaseObject  implements Persistent {
 	public function getCodesc()
 	{
 
-		return $this->codesc;
+		return $this->codesc; 		
 	}
-
 	
 	public function getValini()
 	{
 
-		return $this->valini;
+		return number_format($this->valini,2,',','.');
+		
 	}
-
 	
 	public function getValfin()
 	{
 
-		return $this->valfin;
+		return number_format($this->valfin,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodesc($v)
 	{

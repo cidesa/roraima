@@ -29,23 +29,20 @@ abstract class BaseNptippar extends BaseObject  implements Persistent {
 	public function getTippar()
 	{
 
-		return $this->tippar;
+		return $this->tippar; 		
 	}
-
 	
 	public function getDespar()
 	{
 
-		return $this->despar;
+		return $this->despar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTippar($v)
 	{

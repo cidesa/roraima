@@ -65,30 +65,26 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getDescar()
 	{
 
-		return $this->descar;
+		return $this->descar; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -137,44 +133,40 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 	public function getSueobt()
 	{
 
-		return $this->sueobt;
+		return number_format($this->sueobt,2,',','.');
+		
 	}
-
 	
 	public function getStacar()
 	{
 
-		return $this->stacar;
+		return $this->stacar; 		
 	}
-
 	
 	public function getCompobt()
 	{
 
-		return $this->compobt;
+		return number_format($this->compobt,2,',','.');
+		
 	}
-
 	
 	public function getDurexp()
 	{
 
-		return $this->durexp;
+		return $this->durexp; 		
 	}
-
 	
 	public function getTiporg()
 	{
 
-		return $this->tiporg;
+		return $this->tiporg; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

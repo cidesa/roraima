@@ -33,30 +33,26 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 	public function getCodmotfal()
 	{
 
-		return $this->codmotfal;
+		return $this->codmotfal; 		
 	}
-
 	
 	public function getDesmotfal()
 	{
 
-		return $this->desmotfal;
+		return $this->desmotfal; 		
 	}
-
 	
 	public function getCausa()
 	{
 
-		return $this->causa;
+		return $this->causa; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmotfal($v)
 	{

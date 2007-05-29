@@ -49,58 +49,50 @@ abstract class BaseBndisbie extends BaseObject  implements Persistent {
 	public function getCoddis()
 	{
 
-		return $this->coddis;
+		return $this->coddis; 		
 	}
-
 	
 	public function getDesdis()
 	{
 
-		return $this->desdis;
+		return $this->desdis; 		
 	}
-
 	
 	public function getAfecon()
 	{
 
-		return $this->afecon;
+		return $this->afecon; 		
 	}
-
 	
 	public function getStadis()
 	{
 
-		return $this->stadis;
+		return $this->stadis; 		
 	}
-
 	
 	public function getDesinc()
 	{
 
-		return $this->desinc;
+		return $this->desinc; 		
 	}
-
 	
 	public function getAdimej()
 	{
 
-		return $this->adimej;
+		return $this->adimej; 		
 	}
-
 	
 	public function getViduti()
 	{
 
-		return $this->viduti;
+		return $this->viduti; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddis($v)
 	{

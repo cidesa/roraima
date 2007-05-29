@@ -45,51 +45,44 @@ abstract class BaseTsdefchequera extends BaseObject  implements Persistent {
 	public function getCodchq()
 	{
 
-		return $this->codchq;
+		return $this->codchq; 		
 	}
-
 	
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getNumchedes()
 	{
 
-		return $this->numchedes;
+		return $this->numchedes; 		
 	}
-
 	
 	public function getNumchehas()
 	{
 
-		return $this->numchehas;
+		return $this->numchehas; 		
 	}
-
 	
 	public function getActiva()
 	{
 
-		return $this->activa;
+		return $this->activa; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodchq($v)
 	{

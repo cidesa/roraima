@@ -97,9 +97,8 @@ abstract class BaseNppresocant extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFeccor($format = 'Y-m-d')
 	{
@@ -148,121 +147,117 @@ abstract class BaseNppresocant extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getDiaser()
 	{
 
-		return $this->diaser;
+		return number_format($this->diaser,2,',','.');
+		
 	}
-
 	
 	public function getMesser()
 	{
 
-		return $this->messer;
+		return number_format($this->messer,2,',','.');
+		
 	}
-
 	
 	public function getAnoser()
 	{
 
-		return $this->anoser;
+		return number_format($this->anoser,2,',','.');
+		
 	}
-
 	
 	public function getDiatra()
 	{
 
-		return $this->diatra;
+		return number_format($this->diatra,2,',','.');
+		
 	}
-
 	
 	public function getMestra()
 	{
 
-		return $this->mestra;
+		return number_format($this->mestra,2,',','.');
+		
 	}
-
 	
 	public function getAnotra()
 	{
 
-		return $this->anotra;
+		return number_format($this->anotra,2,',','.');
+		
 	}
-
 	
 	public function getAntacu()
 	{
 
-		return $this->antacu;
+		return number_format($this->antacu,2,',','.');
+		
 	}
-
 	
 	public function getIntacu()
 	{
 
-		return $this->intacu;
+		return number_format($this->intacu,2,',','.');
+		
 	}
-
 	
 	public function getBontra()
 	{
 
-		return $this->bontra;
+		return number_format($this->bontra,2,',','.');
+		
 	}
-
 	
 	public function getAdepre()
 	{
 
-		return $this->adepre;
+		return number_format($this->adepre,2,',','.');
+		
 	}
-
 	
 	public function getAdeint()
 	{
 
-		return $this->adeint;
+		return number_format($this->adeint,2,',','.');
+		
 	}
-
 	
 	public function getMonpre()
 	{
 
-		return $this->monpre;
+		return number_format($this->monpre,2,',','.');
+		
 	}
-
 	
 	public function getPasregant()
 	{
 
-		return $this->pasregant;
+		return number_format($this->pasregant,2,',','.');
+		
 	}
-
 	
 	public function getStapre()
 	{
 
-		return $this->stapre;
+		return $this->stapre; 		
 	}
-
 	
 	public function getRegpre()
 	{
 
-		return $this->regpre;
+		return $this->regpre; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

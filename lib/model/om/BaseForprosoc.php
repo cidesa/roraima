@@ -37,37 +37,33 @@ abstract class BaseForprosoc extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodorg()
 	{
 
-		return $this->codorg;
+		return $this->codorg; 		
 	}
-
 	
 	public function getTotasi()
 	{
 
-		return $this->totasi;
+		return number_format($this->totasi,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

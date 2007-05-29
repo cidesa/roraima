@@ -41,44 +41,38 @@ abstract class BaseCobpagemp extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFaxemp()
 	{
 
-		return $this->faxemp;
+		return $this->faxemp; 		
 	}
-
 	
 	public function getCtacob()
 	{
 
-		return $this->ctacob;
+		return $this->ctacob; 		
 	}
-
 	
 	public function getCtapag()
 	{
 
-		return $this->ctapag;
+		return $this->ctapag; 		
 	}
-
 	
 	public function getCodiva()
 	{
 
-		return $this->codiva;
+		return $this->codiva; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

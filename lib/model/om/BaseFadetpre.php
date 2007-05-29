@@ -49,44 +49,42 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 	public function getRefpre()
 	{
 
-		return $this->refpre;
+		return $this->refpre; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCansol()
 	{
 
-		return $this->cansol;
+		return number_format($this->cansol,2,',','.');
+		
 	}
-
 	
 	public function getPrecio()
 	{
 
-		return $this->precio;
+		return number_format($this->precio,2,',','.');
+		
 	}
-
 	
 	public function getMonrgo()
 	{
 
-		return $this->monrgo;
+		return number_format($this->monrgo,2,',','.');
+		
 	}
-
 	
 	public function getTotart()
 	{
 
-		return $this->totart;
+		return number_format($this->totart,2,',','.');
+		
 	}
-
 	
 	public function getFecent($format = 'Y-m-d')
 	{
@@ -113,9 +111,8 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefpre($v)
 	{

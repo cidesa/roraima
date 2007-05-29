@@ -129,9 +129,8 @@ abstract class BaseFcdeclar extends BaseObject  implements Persistent {
 	public function getNumdec()
 	{
 
-		return $this->numdec;
+		return $this->numdec; 		
 	}
-
 	
 	public function getFecven($format = 'Y-m-d')
 	{
@@ -158,9 +157,8 @@ abstract class BaseFcdeclar extends BaseObject  implements Persistent {
 	public function getFueing()
 	{
 
-		return $this->fueing;
+		return $this->fueing; 		
 	}
-
 	
 	public function getFecdec($format = 'Y-m-d')
 	{
@@ -187,142 +185,127 @@ abstract class BaseFcdeclar extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getNumref()
 	{
 
-		return $this->numref;
+		return $this->numref; 		
 	}
-
 	
 	public function getNombre()
 	{
 
-		return $this->nombre;
+		return $this->nombre; 		
 	}
-
 	
 	public function getMondec()
 	{
 
-		return $this->mondec;
+		return number_format($this->mondec,2,',','.');
+		
 	}
-
 	
 	public function getEdodec()
 	{
 
-		return $this->edodec;
+		return $this->edodec; 		
 	}
-
 	
 	public function getMora()
 	{
 
-		return $this->mora;
+		return number_format($this->mora,2,',','.');
+		
 	}
-
 	
 	public function getProntopg()
 	{
 
-		return $this->prontopg;
+		return number_format($this->prontopg,2,',','.');
+		
 	}
-
 	
 	public function getAutliq()
 	{
 
-		return $this->autliq;
+		return number_format($this->autliq,2,',','.');
+		
 	}
-
 	
 	public function getFundec()
 	{
 
-		return $this->fundec;
+		return $this->fundec; 		
 	}
-
 	
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getModo()
 	{
 
-		return $this->modo;
+		return $this->modo; 		
 	}
-
 	
 	public function getNumero()
 	{
 
-		return $this->numero;
+		return $this->numero; 		
 	}
-
 	
 	public function getConpag()
 	{
 
-		return $this->conpag;
+		return $this->conpag; 		
 	}
-
 	
 	public function getMonabo()
 	{
 
-		return $this->monabo;
+		return number_format($this->monabo,2,',','.');
+		
 	}
-
 	
 	public function getNumabo()
 	{
 
-		return $this->numabo;
+		return $this->numabo; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getOtro()
 	{
 
-		return $this->otro;
+		return $this->otro; 		
 	}
-
 	
 	public function getMiginc()
 	{
 
-		return $this->miginc;
+		return $this->miginc; 		
 	}
-
 	
 	public function getAnodec()
 	{
 
-		return $this->anodec;
+		return $this->anodec; 		
 	}
-
 	
 	public function getFecultpag($format = 'Y-m-d')
 	{
@@ -393,9 +376,8 @@ abstract class BaseFcdeclar extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumdec($v)
 	{

@@ -53,65 +53,57 @@ abstract class BaseFordisfuefinpryaccmet extends BaseObject  implements Persiste
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodaccesp()
 	{
 
-		return $this->codaccesp;
+		return $this->codaccesp; 		
 	}
-
 	
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getCodparing()
 	{
 
-		return $this->codparing;
+		return $this->codparing; 		
 	}
-
 	
 	public function getActfue()
 	{
 
-		return $this->actfue;
+		return $this->actfue; 		
 	}
-
 	
 	public function getMonfin()
 	{
 
-		return $this->monfin;
+		return number_format($this->monfin,2,',','.');
+		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

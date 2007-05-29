@@ -77,9 +77,8 @@ abstract class BaseCaordser extends BaseObject  implements Persistent {
 	public function getOrdser()
 	{
 
-		return $this->ordser;
+		return $this->ordser; 		
 	}
-
 	
 	public function getFecser($format = 'Y-m-d')
 	{
@@ -106,79 +105,69 @@ abstract class BaseCaordser extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getDesord()
 	{
 
-		return $this->desord;
+		return $this->desord; 		
 	}
-
 	
 	public function getCrecon()
 	{
 
-		return $this->crecon;
+		return $this->crecon; 		
 	}
-
 	
 	public function getPlaent()
 	{
 
-		return $this->plaent;
+		return $this->plaent; 		
 	}
-
 	
 	public function getTiecan()
 	{
 
-		return $this->tiecan;
+		return $this->tiecan; 		
 	}
-
 	
 	public function getMonord()
 	{
 
-		return $this->monord;
+		return number_format($this->monord,2,',','.');
+		
 	}
-
 	
 	public function getStaord()
 	{
 
-		return $this->staord;
+		return $this->staord; 		
 	}
-
 	
 	public function getAfepre()
 	{
 
-		return $this->afepre;
+		return $this->afepre; 		
 	}
-
 	
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -205,9 +194,8 @@ abstract class BaseCaordser extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrdser($v)
 	{

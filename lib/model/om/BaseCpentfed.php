@@ -37,37 +37,34 @@ abstract class BaseCpentfed extends BaseObject  implements Persistent {
 	public function getCodent()
 	{
 
-		return $this->codent;
+		return $this->codent; 		
 	}
-
 	
 	public function getDesent()
 	{
 
-		return $this->desent;
+		return $this->desent; 		
 	}
-
 	
 	public function getAsient()
 	{
 
-		return $this->asient;
+		return number_format($this->asient,2,',','.');
+		
 	}
-
 	
 	public function getDisent()
 	{
 
-		return $this->disent;
+		return number_format($this->disent,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodent($v)
 	{

@@ -53,16 +53,14 @@ abstract class BaseFcretencion extends BaseObject  implements Persistent {
 	public function getNumret()
 	{
 
-		return $this->numret;
+		return $this->numret; 		
 	}
-
 	
 	public function getFueing()
 	{
 
-		return $this->fueing;
+		return $this->fueing; 		
 	}
-
 	
 	public function getFecret($format = 'Y-m-d')
 	{
@@ -111,37 +109,34 @@ abstract class BaseFcretencion extends BaseObject  implements Persistent {
 	public function getMonret()
 	{
 
-		return $this->monret;
+		return number_format($this->monret,2,',','.');
+		
 	}
-
 	
 	public function getNumrel()
 	{
 
-		return $this->numrel;
+		return $this->numrel; 		
 	}
-
 	
 	public function getDesret()
 	{
 
-		return $this->desret;
+		return $this->desret; 		
 	}
-
 	
 	public function getMonsal()
 	{
 
-		return $this->monsal;
+		return number_format($this->monsal,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumret($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseOpasiordapr extends BaseObject  implements Persistent {
 	public function getCtagas()
 	{
 
-		return $this->ctagas;
+		return $this->ctagas; 		
 	}
-
 	
 	public function getCtapag()
 	{
 
-		return $this->ctapag;
+		return $this->ctapag; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCtagas($v)
 	{

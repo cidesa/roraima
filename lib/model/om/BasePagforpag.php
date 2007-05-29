@@ -29,23 +29,20 @@ abstract class BasePagforpag extends BaseObject  implements Persistent {
 	public function getCodfor()
 	{
 
-		return $this->codfor;
+		return $this->codfor; 		
 	}
-
 	
 	public function getDesfor()
 	{
 
-		return $this->desfor;
+		return $this->desfor; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodfor($v)
 	{

@@ -33,16 +33,14 @@ abstract class BaseOpcominc extends BaseObject  implements Persistent {
 	public function getRefaju()
 	{
 
-		return $this->refaju;
+		return $this->refaju; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getFecaju($format = 'Y-m-d')
 	{
@@ -69,9 +67,8 @@ abstract class BaseOpcominc extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefaju($v)
 	{

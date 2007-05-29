@@ -33,30 +33,27 @@ abstract class BaseRhindniv extends BaseObject  implements Persistent {
 	public function getCodniv()
 	{
 
-		return $this->codniv;
+		return $this->codniv; 		
 	}
-
 	
 	public function getCodind()
 	{
 
-		return $this->codind;
+		return $this->codind; 		
 	}
-
 	
 	public function getPorind()
 	{
 
-		return $this->porind;
+		return number_format($this->porind,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodniv($v)
 	{

@@ -65,9 +65,8 @@ abstract class BaseNpimppresoc1 extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFeccor($format = 'Y-m-d')
 	{
@@ -138,58 +137,57 @@ abstract class BaseNpimppresoc1 extends BaseObject  implements Persistent {
 	public function getTasint()
 	{
 
-		return $this->tasint;
+		return number_format($this->tasint,2,',','.');
+		
 	}
-
 	
 	public function getDiadif()
 	{
 
-		return $this->diadif;
+		return number_format($this->diadif,2,',','.');
+		
 	}
-
 	
 	public function getCapvie()
 	{
 
-		return $this->capvie;
+		return number_format($this->capvie,2,',','.');
+		
 	}
-
 	
 	public function getCapcap()
 	{
 
-		return $this->capcap;
+		return number_format($this->capcap,2,',','.');
+		
 	}
-
 	
 	public function getIntdev()
 	{
 
-		return $this->intdev;
+		return number_format($this->intdev,2,',','.');
+		
 	}
-
 	
 	public function getIntacum()
 	{
 
-		return $this->intacum;
+		return number_format($this->intacum,2,',','.');
+		
 	}
-
 	
 	public function getAdepre()
 	{
 
-		return $this->adepre;
+		return number_format($this->adepre,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

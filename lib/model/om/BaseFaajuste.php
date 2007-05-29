@@ -57,23 +57,20 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 	public function getRefaju()
 	{
 
-		return $this->refaju;
+		return $this->refaju; 		
 	}
-
 	
 	public function getTipaju()
 	{
 
-		return $this->tipaju;
+		return $this->tipaju; 		
 	}
-
 	
 	public function getCodref()
 	{
 
-		return $this->codref;
+		return $this->codref; 		
 	}
-
 	
 	public function getFecaju($format = 'Y-m-d')
 	{
@@ -100,44 +97,39 @@ abstract class BaseFaajuste extends BaseObject  implements Persistent {
 	public function getDesaju()
 	{
 
-		return $this->desaju;
+		return $this->desaju; 		
 	}
-
 	
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getObsaju()
 	{
 
-		return $this->obsaju;
+		return $this->obsaju; 		
 	}
-
 	
 	public function getStaaju()
 	{
 
-		return $this->staaju;
+		return $this->staaju; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefaju($v)
 	{

@@ -45,51 +45,44 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 	public function getNumrep()
 	{
 
-		return $this->numrep;
+		return $this->numrep; 		
 	}
-
 	
 	public function getAno()
 	{
 
-		return $this->ano;
+		return $this->ano; 		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getMoning()
 	{
 
-		return $this->moning;
+		return $this->moning; 		
 	}
-
 	
 	public function getMonimp()
 	{
 
-		return $this->monimp;
+		return $this->monimp; 		
 	}
-
 	
 	public function getMonbom()
 	{
 
-		return $this->monbom;
+		return $this->monbom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumrep($v)
 	{

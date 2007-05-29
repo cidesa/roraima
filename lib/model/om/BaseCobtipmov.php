@@ -41,44 +41,38 @@ abstract class BaseCobtipmov extends BaseObject  implements Persistent {
 	public function getCodmov()
 	{
 
-		return $this->codmov;
+		return $this->codmov; 		
 	}
-
 	
 	public function getDesmov()
 	{
 
-		return $this->desmov;
+		return $this->desmov; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getDebcre()
 	{
 
-		return $this->debcre;
+		return $this->debcre; 		
 	}
-
 	
 	public function getCtacon()
 	{
 
-		return $this->ctacon;
+		return $this->ctacon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmov($v)
 	{

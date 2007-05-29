@@ -61,79 +61,73 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 	public function getDphart()
 	{
 
-		return $this->dphart;
+		return $this->dphart; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCandph()
 	{
 
-		return $this->candph;
+		return number_format($this->candph,2,',','.');
+		
 	}
-
 	
 	public function getCandev()
 	{
 
-		return $this->candev;
+		return number_format($this->candev,2,',','.');
+		
 	}
-
 	
 	public function getCantot()
 	{
 
-		return $this->cantot;
+		return number_format($this->cantot,2,',','.');
+		
 	}
-
 	
 	public function getMontot()
 	{
 
-		return $this->montot;
+		return number_format($this->montot,2,',','.');
+		
 	}
-
 	
 	public function getNumlot()
 	{
 
-		return $this->numlot;
+		return $this->numlot; 		
 	}
-
 	
 	public function getCanent()
 	{
 
-		return $this->canent;
+		return number_format($this->canent,2,',','.');
+		
 	}
-
 	
 	public function getCodfal()
 	{
 
-		return $this->codfal;
+		return $this->codfal; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDphart($v)
 	{

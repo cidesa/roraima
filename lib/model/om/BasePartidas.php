@@ -29,23 +29,20 @@ abstract class BasePartidas extends BaseObject  implements Persistent {
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getNompar()
 	{
 
-		return $this->nompar;
+		return $this->nompar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpar($v)
 	{

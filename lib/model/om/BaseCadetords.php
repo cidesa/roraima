@@ -61,79 +61,74 @@ abstract class BaseCadetords extends BaseObject  implements Persistent {
 	public function getOrdser()
 	{
 
-		return $this->ordser;
+		return $this->ordser; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getPreser()
 	{
 
-		return $this->preser;
+		return number_format($this->preser,2,',','.');
+		
 	}
-
 	
 	public function getDtoser()
 	{
 
-		return $this->dtoser;
+		return number_format($this->dtoser,2,',','.');
+		
 	}
-
 	
 	public function getRgoser()
 	{
 
-		return $this->rgoser;
+		return number_format($this->rgoser,2,',','.');
+		
 	}
-
 	
 	public function getTotser()
 	{
 
-		return $this->totser;
+		return number_format($this->totser,2,',','.');
+		
 	}
-
 	
 	public function getDesser()
 	{
 
-		return $this->desser;
+		return $this->desser; 		
 	}
-
 	
 	public function getMonser()
 	{
 
-		return $this->monser;
+		return number_format($this->monser,2,',','.');
+		
 	}
-
 	
 	public function getCanser()
 	{
 
-		return $this->canser;
+		return number_format($this->canser,2,',','.');
+		
 	}
-
 	
 	public function getCodrgo()
 	{
 
-		return $this->codrgo;
+		return $this->codrgo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrdser($v)
 	{

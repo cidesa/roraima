@@ -113,16 +113,14 @@ abstract class BaseTabla41 extends BaseObject  implements Persistent {
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getReflib()
 	{
 
-		return $this->reflib;
+		return $this->reflib; 		
 	}
-
 	
 	public function getFeclib($format = 'Y-m-d')
 	{
@@ -149,37 +147,33 @@ abstract class BaseTabla41 extends BaseObject  implements Persistent {
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getDeslib()
 	{
 
-		return $this->deslib;
+		return $this->deslib; 		
 	}
-
 	
 	public function getMonmov()
 	{
 
-		return $this->monmov;
+		return number_format($this->monmov,2,',','.');
+		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getFeccom($format = 'Y-m-d')
 	{
@@ -206,16 +200,14 @@ abstract class BaseTabla41 extends BaseObject  implements Persistent {
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getStacon()
 	{
 
-		return $this->stacon;
+		return $this->stacon; 		
 	}
-
 	
 	public function getFecing($format = 'Y-m-d')
 	{
@@ -264,30 +256,26 @@ abstract class BaseTabla41 extends BaseObject  implements Persistent {
 	public function getTipmovpad()
 	{
 
-		return $this->tipmovpad;
+		return $this->tipmovpad; 		
 	}
-
 	
 	public function getReflibpad()
 	{
 
-		return $this->reflibpad;
+		return $this->reflibpad; 		
 	}
-
 	
 	public function getTransito()
 	{
 
-		return $this->transito;
+		return $this->transito; 		
 	}
-
 	
 	public function getNumcomadi()
 	{
 
-		return $this->numcomadi;
+		return $this->numcomadi; 		
 	}
-
 	
 	public function getFeccomadi($format = 'Y-m-d')
 	{
@@ -314,44 +302,39 @@ abstract class BaseTabla41 extends BaseObject  implements Persistent {
 	public function getNombensus()
 	{
 
-		return $this->nombensus;
+		return $this->nombensus; 		
 	}
-
 	
 	public function getOrden()
 	{
 
-		return $this->orden;
+		return number_format($this->orden,2,',','.');
+		
 	}
-
 	
 	public function getHoring()
 	{
 
-		return $this->horing;
+		return $this->horing; 		
 	}
-
 	
 	public function getStacon1()
 	{
 
-		return $this->stacon1;
+		return $this->stacon1; 		
 	}
-
 	
 	public function getMotanu()
 	{
 
-		return $this->motanu;
+		return $this->motanu; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumcue($v)
 	{

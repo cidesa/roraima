@@ -35,23 +35,20 @@ abstract class BaseFcrutcob extends BaseObject  implements Persistent {
 	public function getCodcob()
 	{
 
-		return $this->codcob;
+		return $this->codcob; 		
 	}
-
 	
 	public function getCodrut()
 	{
 
-		return $this->codrut;
+		return $this->codrut; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcob($v)
 	{

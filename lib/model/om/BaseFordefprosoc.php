@@ -29,23 +29,20 @@ abstract class BaseFordefprosoc extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getNompro()
 	{
 
-		return $this->nompro;
+		return $this->nompro; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

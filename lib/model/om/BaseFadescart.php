@@ -41,44 +41,39 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 	public function getCoddesc()
 	{
 
-		return $this->coddesc;
+		return $this->coddesc; 		
 	}
-
 	
 	public function getRefdoc()
 	{
 
-		return $this->refdoc;
+		return $this->refdoc; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getMondesc()
 	{
 
-		return $this->mondesc;
+		return number_format($this->mondesc,2,',','.');
+		
 	}
-
 	
 	public function getTipdoc()
 	{
 
-		return $this->tipdoc;
+		return $this->tipdoc; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddesc($v)
 	{

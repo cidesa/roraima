@@ -53,65 +53,61 @@ abstract class BaseOptipret extends BaseObject  implements Persistent {
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getDestip()
 	{
 
-		return $this->destip;
+		return $this->destip; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getBasimp()
 	{
 
-		return $this->basimp;
+		return number_format($this->basimp,2,',','.');
+		
 	}
-
 	
 	public function getPorret()
 	{
 
-		return $this->porret;
+		return number_format($this->porret,2,',','.');
+		
 	}
-
 	
 	public function getUnitri()
 	{
 
-		return $this->unitri;
+		return number_format($this->unitri,2,',','.');
+		
 	}
-
 	
 	public function getPorsus()
 	{
 
-		return $this->porsus;
+		return number_format($this->porsus,2,',','.');
+		
 	}
-
 	
 	public function getFactor()
 	{
 
-		return $this->factor;
+		return number_format($this->factor,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtip($v)
 	{

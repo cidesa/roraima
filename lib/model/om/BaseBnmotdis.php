@@ -45,51 +45,44 @@ abstract class BaseBnmotdis extends BaseObject  implements Persistent {
 	public function getCodmot()
 	{
 
-		return $this->codmot;
+		return $this->codmot; 		
 	}
-
 	
 	public function getDesmot()
 	{
 
-		return $this->desmot;
+		return $this->desmot; 		
 	}
-
 	
 	public function getAfecon()
 	{
 
-		return $this->afecon;
+		return $this->afecon; 		
 	}
-
 	
 	public function getStadis()
 	{
 
-		return $this->stadis;
+		return $this->stadis; 		
 	}
-
 	
 	public function getDesinc()
 	{
 
-		return $this->desinc;
+		return $this->desinc; 		
 	}
-
 	
 	public function getAdimej()
 	{
 
-		return $this->adimej;
+		return $this->adimej; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmot($v)
 	{

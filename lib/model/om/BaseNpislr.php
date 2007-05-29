@@ -33,30 +33,26 @@ abstract class BaseNpislr extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodconpor()
 	{
 
-		return $this->codconpor;
+		return $this->codconpor; 		
 	}
-
 	
 	public function getCodconimp()
 	{
 
-		return $this->codconimp;
+		return $this->codconimp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

@@ -37,16 +37,14 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFecade($format = 'Y-m-d')
 	{
@@ -73,16 +71,15 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 	public function getMonade()
 	{
 
-		return $this->monade;
+		return number_format($this->monade,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

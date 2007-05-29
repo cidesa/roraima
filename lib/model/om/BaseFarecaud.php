@@ -45,23 +45,20 @@ abstract class BaseFarecaud extends BaseObject  implements Persistent {
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getDesrec()
 	{
 
-		return $this->desrec;
+		return $this->desrec; 		
 	}
-
 	
 	public function getLimrec()
 	{
 
-		return $this->limrec;
+		return $this->limrec; 		
 	}
-
 	
 	public function getFecemi($format = 'Y-m-d')
 	{
@@ -110,16 +107,14 @@ abstract class BaseFarecaud extends BaseObject  implements Persistent {
 	public function getCodtiprec()
 	{
 
-		return $this->codtiprec;
+		return $this->codtiprec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrec($v)
 	{

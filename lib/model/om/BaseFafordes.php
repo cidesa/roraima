@@ -29,23 +29,20 @@ abstract class BaseFafordes extends BaseObject  implements Persistent {
 	public function getFordes()
 	{
 
-		return $this->fordes;
+		return $this->fordes; 		
 	}
-
 	
 	public function getNomdes()
 	{
 
-		return $this->nomdes;
+		return $this->nomdes; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFordes($v)
 	{

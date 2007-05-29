@@ -149,9 +149,8 @@ abstract class BaseCpsoltrasla extends BaseObject  implements Persistent {
 	public function getReftra()
 	{
 
-		return $this->reftra;
+		return $this->reftra; 		
 	}
-
 	
 	public function getFectra($format = 'Y-m-d')
 	{
@@ -178,72 +177,63 @@ abstract class BaseCpsoltrasla extends BaseObject  implements Persistent {
 	public function getAnotra()
 	{
 
-		return $this->anotra;
+		return $this->anotra; 		
 	}
-
 	
 	public function getPertra()
 	{
 
-		return $this->pertra;
+		return $this->pertra; 		
 	}
-
 	
 	public function getDestra()
 	{
 
-		return $this->destra;
+		return $this->destra; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getTottra()
 	{
 
-		return $this->tottra;
+		return number_format($this->tottra,2,',','.');
+		
 	}
-
 	
 	public function getStatra()
 	{
 
-		return $this->statra;
+		return $this->statra; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getStacon()
 	{
 
-		return $this->stacon;
+		return $this->stacon; 		
 	}
-
 	
 	public function getStagob()
 	{
 
-		return $this->stagob;
+		return $this->stagob; 		
 	}
-
 	
 	public function getStapre()
 	{
 
-		return $this->stapre;
+		return $this->stapre; 		
 	}
-
 	
 	public function getFecpre($format = 'Y-m-d')
 	{
@@ -270,9 +260,8 @@ abstract class BaseCpsoltrasla extends BaseObject  implements Persistent {
 	public function getDespre()
 	{
 
-		return $this->despre;
+		return $this->despre; 		
 	}
-
 	
 	public function getFeccon($format = 'Y-m-d')
 	{
@@ -299,16 +288,14 @@ abstract class BaseCpsoltrasla extends BaseObject  implements Persistent {
 	public function getDescon()
 	{
 
-		return $this->descon;
+		return $this->descon; 		
 	}
-
 	
 	public function getDesgob()
 	{
 
-		return $this->desgob;
+		return $this->desgob; 		
 	}
-
 	
 	public function getFecgob($format = 'Y-m-d')
 	{
@@ -335,9 +322,8 @@ abstract class BaseCpsoltrasla extends BaseObject  implements Persistent {
 	public function getJustificacion()
 	{
 
-		return $this->justificacion;
+		return $this->justificacion; 		
 	}
-
 	
 	public function getFeccont($format = 'Y-m-d')
 	{
@@ -364,79 +350,68 @@ abstract class BaseCpsoltrasla extends BaseObject  implements Persistent {
 	public function getJustificacion1()
 	{
 
-		return $this->justificacion1;
+		return $this->justificacion1; 		
 	}
-
 	
 	public function getJustificacion2()
 	{
 
-		return $this->justificacion2;
+		return $this->justificacion2; 		
 	}
-
 	
 	public function getJustificacion3()
 	{
 
-		return $this->justificacion3;
+		return $this->justificacion3; 		
 	}
-
 	
 	public function getJustificacion4()
 	{
 
-		return $this->justificacion4;
+		return $this->justificacion4; 		
 	}
-
 	
 	public function getJustificacion5()
 	{
 
-		return $this->justificacion5;
+		return $this->justificacion5; 		
 	}
-
 	
 	public function getJustificacion6()
 	{
 
-		return $this->justificacion6;
+		return $this->justificacion6; 		
 	}
-
 	
 	public function getJustificacion7()
 	{
 
-		return $this->justificacion7;
+		return $this->justificacion7; 		
 	}
-
 	
 	public function getJustificacion8()
 	{
 
-		return $this->justificacion8;
+		return $this->justificacion8; 		
 	}
-
 	
 	public function getJustificacion9()
 	{
 
-		return $this->justificacion9;
+		return $this->justificacion9; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getTipgas()
 	{
 
-		return $this->tipgas;
+		return $this->tipgas; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -463,9 +438,8 @@ abstract class BaseCpsoltrasla extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReftra($v)
 	{

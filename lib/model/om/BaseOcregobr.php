@@ -97,23 +97,20 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 	public function getCodobr()
 	{
 
-		return $this->codobr;
+		return $this->codobr; 		
 	}
-
 	
 	public function getCodtipobr()
 	{
 
-		return $this->codtipobr;
+		return $this->codtipobr; 		
 	}
-
 	
 	public function getDesobr()
 	{
 
-		return $this->desobr;
+		return $this->desobr; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -162,107 +159,96 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 	public function getUnocon()
 	{
 
-		return $this->unocon;
+		return $this->unocon; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCodsec()
 	{
 
-		return $this->codsec;
+		return $this->codsec; 		
 	}
-
 	
 	public function getDirobr()
 	{
 
-		return $this->dirobr;
+		return $this->dirobr; 		
 	}
-
 	
 	public function getMonobr()
 	{
 
-		return $this->monobr;
+		return number_format($this->monobr,2,',','.');
+		
 	}
-
 	
 	public function getStaobr()
 	{
 
-		return $this->staobr;
+		return $this->staobr; 		
 	}
-
 	
 	public function getDespre()
 	{
 
-		return $this->despre;
+		return $this->despre; 		
 	}
-
 	
 	public function getSubtot()
 	{
 
-		return $this->subtot;
+		return number_format($this->subtot,2,',','.');
+		
 	}
-
 	
 	public function getMoniva()
 	{
 
-		return $this->moniva;
+		return number_format($this->moniva,2,',','.');
+		
 	}
-
 	
 	public function getIvaobr()
 	{
 
-		return $this->ivaobr;
+		return number_format($this->ivaobr,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodobr($v)
 	{

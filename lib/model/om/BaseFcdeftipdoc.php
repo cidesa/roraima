@@ -45,30 +45,26 @@ abstract class BaseFcdeftipdoc extends BaseObject  implements Persistent {
 	public function getCodtipdoc()
 	{
 
-		return $this->codtipdoc;
+		return $this->codtipdoc; 		
 	}
-
 	
 	public function getNomtipdoc()
 	{
 
-		return $this->nomtipdoc;
+		return $this->nomtipdoc; 		
 	}
-
 	
 	public function getTemtipdoc()
 	{
 
-		return $this->temtipdoc;
+		return $this->temtipdoc; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipdoc($v)
 	{

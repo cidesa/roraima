@@ -33,30 +33,28 @@ abstract class BaseNumerosnew extends BaseObject  implements Persistent {
 	public function getNum()
 	{
 
-		return $this->num;
+		return number_format($this->num,2,',','.');
+		
 	}
-
 	
 	public function getPos()
 	{
 
-		return $this->pos;
+		return number_format($this->pos,2,',','.');
+		
 	}
-
 	
 	public function getNomnum()
 	{
 
-		return $this->nomnum;
+		return $this->nomnum; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNum($v)
 	{

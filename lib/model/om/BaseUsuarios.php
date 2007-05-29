@@ -61,79 +61,68 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 	public function getLoguse()
 	{
 
-		return $this->loguse;
+		return $this->loguse; 		
 	}
-
 	
 	public function getNomuse()
 	{
 
-		return $this->nomuse;
+		return $this->nomuse; 		
 	}
-
 	
 	public function getApluse()
 	{
 
-		return $this->apluse;
+		return $this->apluse; 		
 	}
-
 	
 	public function getNumemp()
 	{
 
-		return $this->numemp;
+		return $this->numemp; 		
 	}
-
 	
 	public function getPasuse()
 	{
 
-		return $this->pasuse;
+		return $this->pasuse; 		
 	}
-
 	
 	public function getDiremp()
 	{
 
-		return $this->diremp;
+		return $this->diremp; 		
 	}
-
 	
 	public function getTelemp()
 	{
 
-		return $this->telemp;
+		return $this->telemp; 		
 	}
-
 	
 	public function getCedemp()
 	{
 
-		return $this->cedemp;
+		return $this->cedemp; 		
 	}
-
 	
 	public function getNumuni()
 	{
 
-		return $this->numuni;
+		return $this->numuni; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setLoguse($v)
 	{

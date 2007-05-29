@@ -57,37 +57,35 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 	public function getRefcot()
 	{
 
-		return $this->refcot;
+		return $this->refcot; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCanord()
 	{
 
-		return $this->canord;
+		return number_format($this->canord,2,',','.');
+		
 	}
-
 	
 	public function getCosto()
 	{
 
-		return $this->costo;
+		return number_format($this->costo,2,',','.');
+		
 	}
-
 	
 	public function getTotdet()
 	{
 
-		return $this->totdet;
+		return number_format($this->totdet,2,',','.');
+		
 	}
-
 	
 	public function getFecent($format = 'Y-m-d')
 	{
@@ -114,30 +112,28 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 	public function getPriori()
 	{
 
-		return $this->priori;
+		return number_format($this->priori,2,',','.');
+		
 	}
-
 	
 	public function getJustifica()
 	{
 
-		return $this->justifica;
+		return $this->justifica; 		
 	}
-
 	
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefcot($v)
 	{

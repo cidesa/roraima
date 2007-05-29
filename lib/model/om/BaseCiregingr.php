@@ -81,9 +81,8 @@ abstract class BaseCiregingr extends BaseObject  implements Persistent {
 	public function getRefing()
 	{
 
-		return $this->refing;
+		return $this->refing; 		
 	}
-
 	
 	public function getFecing($format = 'Y-m-d')
 	{
@@ -110,58 +109,54 @@ abstract class BaseCiregingr extends BaseObject  implements Persistent {
 	public function getDesing()
 	{
 
-		return $this->desing;
+		return $this->desing; 		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getMoning()
 	{
 
-		return $this->moning;
+		return number_format($this->moning,2,',','.');
+		
 	}
-
 	
 	public function getMonrec()
 	{
 
-		return $this->monrec;
+		return number_format($this->monrec,2,',','.');
+		
 	}
-
 	
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getMontot()
 	{
 
-		return $this->montot;
+		return number_format($this->montot,2,',','.');
+		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -188,37 +183,32 @@ abstract class BaseCiregingr extends BaseObject  implements Persistent {
 	public function getStaing()
 	{
 
-		return $this->staing;
+		return $this->staing; 		
 	}
-
 	
 	public function getCtaban()
 	{
 
-		return $this->ctaban;
+		return $this->ctaban; 		
 	}
-
 	
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getPrevis()
 	{
 
-		return $this->previs;
+		return $this->previs; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefing($v)
 	{

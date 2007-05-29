@@ -65,23 +65,20 @@ abstract class BaseBnsegsem extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodsem()
 	{
 
-		return $this->codsem;
+		return $this->codsem; 		
 	}
-
 	
 	public function getNrosegsem()
 	{
 
-		return $this->nrosegsem;
+		return $this->nrosegsem; 		
 	}
-
 	
 	public function getFecsegsem($format = 'Y-m-d')
 	{
@@ -108,23 +105,21 @@ abstract class BaseBnsegsem extends BaseObject  implements Persistent {
 	public function getNomsegsem()
 	{
 
-		return $this->nomsegsem;
+		return $this->nomsegsem; 		
 	}
-
 	
 	public function getCobsegsem()
 	{
 
-		return $this->cobsegsem;
+		return $this->cobsegsem; 		
 	}
-
 	
 	public function getMonsegsem()
 	{
 
-		return $this->monsegsem;
+		return number_format($this->monsegsem,2,',','.');
+		
 	}
-
 	
 	public function getFecsegven($format = 'Y-m-d')
 	{
@@ -151,30 +146,26 @@ abstract class BaseBnsegsem extends BaseObject  implements Persistent {
 	public function getProsegsem()
 	{
 
-		return $this->prosegsem;
+		return $this->prosegsem; 		
 	}
-
 	
 	public function getObssegsem()
 	{
 
-		return $this->obssegsem;
+		return $this->obssegsem; 		
 	}
-
 	
 	public function getStasegsem()
 	{
 
-		return $this->stasegsem;
+		return $this->stasegsem; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

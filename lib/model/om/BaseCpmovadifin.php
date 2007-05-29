@@ -33,30 +33,27 @@ abstract class BaseCpmovadifin extends BaseObject  implements Persistent {
 	public function getRefadi()
 	{
 
-		return $this->refadi;
+		return $this->refadi; 		
 	}
-
 	
 	public function getCodfin()
 	{
 
-		return $this->codfin;
+		return $this->codfin; 		
 	}
-
 	
 	public function getMonfin()
 	{
 
-		return $this->monfin;
+		return number_format($this->monfin,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefadi($v)
 	{

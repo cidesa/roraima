@@ -29,23 +29,20 @@ abstract class BaseFcdefrecdes extends BaseObject  implements Persistent {
 	public function getCoddes()
 	{
 
-		return $this->coddes;
+		return $this->coddes; 		
 	}
-
 	
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddes($v)
 	{

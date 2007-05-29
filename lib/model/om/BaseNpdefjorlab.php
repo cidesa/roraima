@@ -57,72 +57,62 @@ abstract class BaseNpdefjorlab extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getIdejor()
 	{
 
-		return $this->idejor;
+		return $this->idejor; 		
 	}
-
 	
 	public function getLunes()
 	{
 
-		return $this->lunes;
+		return $this->lunes; 		
 	}
-
 	
 	public function getMartes()
 	{
 
-		return $this->martes;
+		return $this->martes; 		
 	}
-
 	
 	public function getMiercoles()
 	{
 
-		return $this->miercoles;
+		return $this->miercoles; 		
 	}
-
 	
 	public function getJueves()
 	{
 
-		return $this->jueves;
+		return $this->jueves; 		
 	}
-
 	
 	public function getViernes()
 	{
 
-		return $this->viernes;
+		return $this->viernes; 		
 	}
-
 	
 	public function getSabado()
 	{
 
-		return $this->sabado;
+		return $this->sabado; 		
 	}
-
 	
 	public function getDomingo()
 	{
 
-		return $this->domingo;
+		return $this->domingo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

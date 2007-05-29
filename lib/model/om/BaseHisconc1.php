@@ -53,9 +53,8 @@ abstract class BaseHisconc1 extends BaseObject  implements Persistent {
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getFeccom($format = 'Y-m-d')
 	{
@@ -82,51 +81,46 @@ abstract class BaseHisconc1 extends BaseObject  implements Persistent {
 	public function getDebcre()
 	{
 
-		return $this->debcre;
+		return $this->debcre; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getNumasi()
 	{
 
-		return $this->numasi;
+		return number_format($this->numasi,2,',','.');
+		
 	}
-
 	
 	public function getRefasi()
 	{
 
-		return $this->refasi;
+		return $this->refasi; 		
 	}
-
 	
 	public function getDesasi()
 	{
 
-		return $this->desasi;
+		return $this->desasi; 		
 	}
-
 	
 	public function getMonasi()
 	{
 
-		return $this->monasi;
+		return number_format($this->monasi,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumcom($v)
 	{

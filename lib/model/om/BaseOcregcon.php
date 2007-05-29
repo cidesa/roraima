@@ -153,65 +153,60 @@ abstract class BaseOcregcon extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodobr()
 	{
 
-		return $this->codobr;
+		return $this->codobr; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getDescon()
 	{
 
-		return $this->descon;
+		return $this->descon; 		
 	}
-
 	
 	public function getTipcon()
 	{
 
-		return $this->tipcon;
+		return $this->tipcon; 		
 	}
-
 	
 	public function getMoncon()
 	{
 
-		return $this->moncon;
+		return number_format($this->moncon,2,',','.');
+		
 	}
-
 	
 	public function getMonext()
 	{
 
-		return $this->monext;
+		return number_format($this->monext,2,',','.');
+		
 	}
-
 	
 	public function getMonmul()
 	{
 
-		return $this->monmul;
+		return number_format($this->monmul,2,',','.');
+		
 	}
-
 	
 	public function getMonmod()
 	{
 
-		return $this->monmod;
+		return number_format($this->monmod,2,',','.');
+		
 	}
-
 	
 	public function getFeclic($format = 'Y-m-d')
 	{
@@ -458,37 +453,35 @@ abstract class BaseOcregcon extends BaseObject  implements Persistent {
 	public function getPoriva()
 	{
 
-		return $this->poriva;
+		return number_format($this->poriva,2,',','.');
+		
 	}
-
 	
 	public function getMoniva()
 	{
 
-		return $this->moniva;
+		return number_format($this->moniva,2,',','.');
+		
 	}
-
 	
 	public function getTieejecon()
 	{
 
-		return $this->tieejecon;
+		return number_format($this->tieejecon,2,',','.');
+		
 	}
-
 	
 	public function getStacon()
 	{
 
-		return $this->stacon;
+		return $this->stacon; 		
 	}
-
 	
 	public function getPlatie()
 	{
 
-		return $this->platie;
+		return $this->platie; 		
 	}
-
 	
 	public function getFecfinmod($format = 'Y-m-d')
 	{
@@ -515,58 +508,53 @@ abstract class BaseOcregcon extends BaseObject  implements Persistent {
 	public function getGasree()
 	{
 
-		return $this->gasree;
+		return number_format($this->gasree,2,',','.');
+		
 	}
-
 	
 	public function getSubtot()
 	{
 
-		return $this->subtot;
+		return number_format($this->subtot,2,',','.');
+		
 	}
-
 	
 	public function getMonful()
 	{
 
-		return $this->monful;
+		return number_format($this->monful,2,',','.');
+		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getDespre()
 	{
 
-		return $this->despre;
+		return $this->despre; 		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

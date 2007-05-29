@@ -33,30 +33,26 @@ abstract class BaseNpaccrac extends BaseObject  implements Persistent {
 	public function getCodaccadm()
 	{
 
-		return $this->codaccadm;
+		return $this->codaccadm; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodrac()
 	{
 
-		return $this->codrac;
+		return $this->codrac; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodaccadm($v)
 	{

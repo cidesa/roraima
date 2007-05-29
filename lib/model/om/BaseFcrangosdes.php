@@ -37,37 +37,35 @@ abstract class BaseFcrangosdes extends BaseObject  implements Persistent {
 	public function getCoddes()
 	{
 
-		return $this->coddes;
+		return $this->coddes; 		
 	}
-
 	
 	public function getDiasdesde()
 	{
 
-		return $this->diasdesde;
+		return number_format($this->diasdesde,2,',','.');
+		
 	}
-
 	
 	public function getDiashasta()
 	{
 
-		return $this->diashasta;
+		return number_format($this->diashasta,2,',','.');
+		
 	}
-
 	
 	public function getValor()
 	{
 
-		return $this->valor;
+		return number_format($this->valor,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddes($v)
 	{

@@ -33,30 +33,27 @@ abstract class BaseNppercar extends BaseObject  implements Persistent {
 	public function getCodperfil()
 	{
 
-		return $this->codperfil;
+		return $this->codperfil; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getPuntos()
 	{
 
-		return $this->puntos;
+		return number_format($this->puntos,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodperfil($v)
 	{

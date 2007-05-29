@@ -61,79 +61,74 @@ abstract class BaseOcpreobr extends BaseObject  implements Persistent {
 	public function getCodobr()
 	{
 
-		return $this->codobr;
+		return $this->codobr; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCanobr()
 	{
 
-		return $this->canobr;
+		return number_format($this->canobr,2,',','.');
+		
 	}
-
 	
 	public function getCancon()
 	{
 
-		return $this->cancon;
+		return number_format($this->cancon,2,',','.');
+		
 	}
-
 	
 	public function getCanconfin()
 	{
 
-		return $this->canconfin;
+		return number_format($this->canconfin,2,',','.');
+		
 	}
-
 	
 	public function getAdipar()
 	{
 
-		return $this->adipar;
+		return $this->adipar; 		
 	}
-
 	
 	public function getCosuni()
 	{
 
-		return $this->cosuni;
+		return number_format($this->cosuni,2,',','.');
+		
 	}
-
 	
 	public function getCosunifin()
 	{
 
-		return $this->cosunifin;
+		return number_format($this->cosunifin,2,',','.');
+		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMonpre()
 	{
 
-		return $this->monpre;
+		return number_format($this->monpre,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodobr($v)
 	{

@@ -53,65 +53,57 @@ abstract class BaseForasopromet extends BaseObject  implements Persistent {
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getUbigeo()
 	{
 
-		return $this->ubigeo;
+		return $this->ubigeo; 		
 	}
-
 	
 	public function getIndges()
 	{
 
-		return $this->indges;
+		return $this->indges; 		
 	}
-
 	
 	public function getCalind()
 	{
 
-		return $this->calind;
+		return $this->calind; 		
 	}
-
 	
 	public function getFrelec()
 	{
 
-		return $this->frelec;
+		return $this->frelec; 		
 	}
-
 	
 	public function getCanpro()
 	{
 
-		return $this->canpro;
+		return number_format($this->canpro,2,',','.');
+		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmet($v)
 	{

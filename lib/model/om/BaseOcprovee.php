@@ -129,79 +129,69 @@ abstract class BaseOcprovee extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getNompro()
 	{
 
-		return $this->nompro;
+		return $this->nompro; 		
 	}
-
 	
 	public function getRifpro()
 	{
 
-		return $this->rifpro;
+		return $this->rifpro; 		
 	}
-
 	
 	public function getNitpro()
 	{
 
-		return $this->nitpro;
+		return $this->nitpro; 		
 	}
-
 	
 	public function getDirpro()
 	{
 
-		return $this->dirpro;
+		return $this->dirpro; 		
 	}
-
 	
 	public function getTelpro()
 	{
 
-		return $this->telpro;
+		return $this->telpro; 		
 	}
-
 	
 	public function getFaxpro()
 	{
 
-		return $this->faxpro;
+		return $this->faxpro; 		
 	}
-
 	
 	public function getEmail()
 	{
 
-		return $this->email;
+		return $this->email; 		
 	}
-
 	
 	public function getLimcre()
 	{
 
-		return $this->limcre;
+		return number_format($this->limcre,2,',','.');
+		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getRegmer()
 	{
 
-		return $this->regmer;
+		return $this->regmer; 		
 	}
-
 	
 	public function getFecreg($format = 'Y-m-d')
 	{
@@ -228,51 +218,46 @@ abstract class BaseOcprovee extends BaseObject  implements Persistent {
 	public function getTomreg()
 	{
 
-		return $this->tomreg;
+		return $this->tomreg; 		
 	}
-
 	
 	public function getFolreg()
 	{
 
-		return $this->folreg;
+		return $this->folreg; 		
 	}
-
 	
 	public function getCapsus()
 	{
 
-		return $this->capsus;
+		return number_format($this->capsus,2,',','.');
+		
 	}
-
 	
 	public function getCappag()
 	{
 
-		return $this->cappag;
+		return number_format($this->cappag,2,',','.');
+		
 	}
-
 	
 	public function getRifrepleg()
 	{
 
-		return $this->rifrepleg;
+		return $this->rifrepleg; 		
 	}
-
 	
 	public function getNomrepleg()
 	{
 
-		return $this->nomrepleg;
+		return $this->nomrepleg; 		
 	}
-
 	
 	public function getDirrepleg()
 	{
 
-		return $this->dirrepleg;
+		return $this->dirrepleg; 		
 	}
-
 	
 	public function getFecinscir($format = 'Y-m-d')
 	{
@@ -299,58 +284,50 @@ abstract class BaseOcprovee extends BaseObject  implements Persistent {
 	public function getNuminscir()
 	{
 
-		return $this->numinscir;
+		return $this->numinscir; 		
 	}
-
 	
 	public function getNacpro()
 	{
 
-		return $this->nacpro;
+		return $this->nacpro; 		
 	}
-
 	
 	public function getCodord()
 	{
 
-		return $this->codord;
+		return $this->codord; 		
 	}
-
 	
 	public function getCodpercon()
 	{
 
-		return $this->codpercon;
+		return $this->codpercon; 		
 	}
-
 	
 	public function getCodtiprec()
 	{
 
-		return $this->codtiprec;
+		return $this->codtiprec; 		
 	}
-
 	
 	public function getCodram()
 	{
 
-		return $this->codram;
+		return $this->codram; 		
 	}
-
 	
 	public function getNrocei()
 	{
 
-		return $this->nrocei;
+		return $this->nrocei; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

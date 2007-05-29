@@ -57,72 +57,64 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCanact()
 	{
 
-		return $this->canact;
+		return number_format($this->canact,2,',','.');
+		
 	}
-
 	
 	public function getCodparegr()
 	{
 
-		return $this->codparegr;
+		return $this->codparegr; 		
 	}
-
 	
 	public function getMonpre()
 	{
 
-		return $this->monpre;
+		return number_format($this->monpre,2,',','.');
+		
 	}
-
 	
 	public function getCodorg()
 	{
 
-		return $this->codorg;
+		return $this->codorg; 		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmet($v)
 	{

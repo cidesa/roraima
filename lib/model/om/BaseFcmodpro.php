@@ -80,16 +80,14 @@ abstract class BaseFcmodpro extends BaseObject  implements Persistent {
 	public function getRefmod()
 	{
 
-		return $this->refmod;
+		return $this->refmod; 		
 	}
-
 	
 	public function getNrocon()
 	{
 
-		return $this->nrocon;
+		return $this->nrocon; 		
 	}
-
 	
 	public function getFecmod($format = 'Y-m-d')
 	{
@@ -116,86 +114,78 @@ abstract class BaseFcmodpro extends BaseObject  implements Persistent {
 	public function getTippro()
 	{
 
-		return $this->tippro;
+		return $this->tippro; 		
 	}
-
 	
 	public function getDespro()
 	{
 
-		return $this->despro;
+		return $this->despro; 		
 	}
-
 	
 	public function getDirpro()
 	{
 
-		return $this->dirpro;
+		return $this->dirpro; 		
 	}
-
 	
 	public function getMonpro()
 	{
 
-		return $this->monpro;
+		return number_format($this->monpro,2,',','.');
+		
 	}
-
 	
 	public function getMonimp()
 	{
 
-		return $this->monimp;
+		return number_format($this->monimp,2,',','.');
+		
 	}
-
 	
 	public function getTipproant()
 	{
 
-		return $this->tipproant;
+		return $this->tipproant; 		
 	}
-
 	
 	public function getDesproant()
 	{
 
-		return $this->desproant;
+		return $this->desproant; 		
 	}
-
 	
 	public function getDirproant()
 	{
 
-		return $this->dirproant;
+		return $this->dirproant; 		
 	}
-
 	
 	public function getMonproant()
 	{
 
-		return $this->monproant;
+		return number_format($this->monproant,2,',','.');
+		
 	}
-
 	
 	public function getMonimpant()
 	{
 
-		return $this->monimpant;
+		return number_format($this->monimpant,2,',','.');
+		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefmod($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseFordefind extends BaseObject  implements Persistent {
 	public function getCodind()
 	{
 
-		return $this->codind;
+		return $this->codind; 		
 	}
-
 	
 	public function getDesind()
 	{
 
-		return $this->desind;
+		return $this->desind; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodind($v)
 	{

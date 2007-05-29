@@ -33,30 +33,27 @@ abstract class BaseForcorsubsubobj extends BaseObject  implements Persistent {
 	public function getCodequ()
 	{
 
-		return $this->codequ;
+		return $this->codequ; 		
 	}
-
 	
 	public function getCodsubobj()
 	{
 
-		return $this->codsubobj;
+		return $this->codsubobj; 		
 	}
-
 	
 	public function getCorsubsubobj()
 	{
 
-		return $this->corsubsubobj;
+		return number_format($this->corsubsubobj,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodequ($v)
 	{

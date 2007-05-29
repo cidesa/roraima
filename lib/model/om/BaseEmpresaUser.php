@@ -41,44 +41,38 @@ abstract class BaseEmpresaUser extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getDiremp()
 	{
 
-		return $this->diremp;
+		return $this->diremp; 		
 	}
-
 	
 	public function getTlfemp()
 	{
 
-		return $this->tlfemp;
+		return $this->tlfemp; 		
 	}
-
 	
 	public function getPassemp()
 	{
 
-		return $this->passemp;
+		return $this->passemp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

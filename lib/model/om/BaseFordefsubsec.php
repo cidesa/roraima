@@ -33,30 +33,26 @@ abstract class BaseFordefsubsec extends BaseObject  implements Persistent {
 	public function getCodsec()
 	{
 
-		return $this->codsec;
+		return $this->codsec; 		
 	}
-
 	
 	public function getCodsubsec()
 	{
 
-		return $this->codsubsec;
+		return $this->codsubsec; 		
 	}
-
 	
 	public function getNomsubsec()
 	{
 
-		return $this->nomsubsec;
+		return $this->nomsubsec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsec($v)
 	{

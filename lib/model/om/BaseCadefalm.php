@@ -33,30 +33,26 @@ abstract class BaseCadefalm extends BaseObject  implements Persistent {
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getNomalm()
 	{
 
-		return $this->nomalm;
+		return $this->nomalm; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodalm($v)
 	{

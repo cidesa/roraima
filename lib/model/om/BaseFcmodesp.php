@@ -128,16 +128,14 @@ abstract class BaseFcmodesp extends BaseObject  implements Persistent {
 	public function getRefmod()
 	{
 
-		return $this->refmod;
+		return $this->refmod; 		
 	}
-
 	
 	public function getNrocon()
 	{
 
-		return $this->nrocon;
+		return $this->nrocon; 		
 	}
-
 	
 	public function getFecmod($format = 'Y-m-d')
 	{
@@ -164,16 +162,14 @@ abstract class BaseFcmodesp extends BaseObject  implements Persistent {
 	public function getNomesp()
 	{
 
-		return $this->nomesp;
+		return $this->nomesp; 		
 	}
-
 	
 	public function getDiresp()
 	{
 
-		return $this->diresp;
+		return $this->diresp; 		
 	}
-
 	
 	public function getFecesp($format = 'Y-m-d')
 	{
@@ -200,72 +196,65 @@ abstract class BaseFcmodesp extends BaseObject  implements Persistent {
 	public function getHoresp()
 	{
 
-		return $this->horesp;
+		return $this->horesp; 		
 	}
-
 	
 	public function getTipesp()
 	{
 
-		return $this->tipesp;
+		return $this->tipesp; 		
 	}
-
 	
 	public function getNroent()
 	{
 
-		return $this->nroent;
+		return number_format($this->nroent,2,',','.');
+		
 	}
-
 	
 	public function getMonent()
 	{
 
-		return $this->monent;
+		return number_format($this->monent,2,',','.');
+		
 	}
-
 	
 	public function getMonimp()
 	{
 
-		return $this->monimp;
+		return number_format($this->monimp,2,',','.');
+		
 	}
-
 	
 	public function getNomres()
 	{
 
-		return $this->nomres;
+		return $this->nomres; 		
 	}
-
 	
 	public function getDirres()
 	{
 
-		return $this->dirres;
+		return $this->dirres; 		
 	}
-
 	
 	public function getTelres()
 	{
 
-		return $this->telres;
+		return $this->telres; 		
 	}
-
 	
 	public function getNomespant()
 	{
 
-		return $this->nomespant;
+		return $this->nomespant; 		
 	}
-
 	
 	public function getDirespant()
 	{
 
-		return $this->direspant;
+		return $this->direspant; 		
 	}
-
 	
 	public function getFecespant($format = 'Y-m-d')
 	{
@@ -292,72 +281,65 @@ abstract class BaseFcmodesp extends BaseObject  implements Persistent {
 	public function getHorespant()
 	{
 
-		return $this->horespant;
+		return $this->horespant; 		
 	}
-
 	
 	public function getTipespant()
 	{
 
-		return $this->tipespant;
+		return $this->tipespant; 		
 	}
-
 	
 	public function getNroentant()
 	{
 
-		return $this->nroentant;
+		return number_format($this->nroentant,2,',','.');
+		
 	}
-
 	
 	public function getMonentant()
 	{
 
-		return $this->monentant;
+		return number_format($this->monentant,2,',','.');
+		
 	}
-
 	
 	public function getMonimpant()
 	{
 
-		return $this->monimpant;
+		return number_format($this->monimpant,2,',','.');
+		
 	}
-
 	
 	public function getNomresant()
 	{
 
-		return $this->nomresant;
+		return $this->nomresant; 		
 	}
-
 	
 	public function getDirresant()
 	{
 
-		return $this->dirresant;
+		return $this->dirresant; 		
 	}
-
 	
 	public function getTelresant()
 	{
 
-		return $this->telresant;
+		return $this->telresant; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefmod($v)
 	{

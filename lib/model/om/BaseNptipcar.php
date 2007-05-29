@@ -29,23 +29,20 @@ abstract class BaseNptipcar extends BaseObject  implements Persistent {
 	public function getCodtipcar()
 	{
 
-		return $this->codtipcar;
+		return $this->codtipcar; 		
 	}
-
 	
 	public function getDestipcar()
 	{
 
-		return $this->destipcar;
+		return $this->destipcar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcar($v)
 	{

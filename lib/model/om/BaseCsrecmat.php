@@ -57,72 +57,65 @@ abstract class BaseCsrecmat extends BaseObject  implements Persistent {
 	public function getCodprod()
 	{
 
-		return $this->codprod;
+		return $this->codprod; 		
 	}
-
 	
 	public function getCodfas()
 	{
 
-		return $this->codfas;
+		return $this->codfas; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getTipmat()
 	{
 
-		return $this->tipmat;
+		return $this->tipmat; 		
 	}
-
 	
 	public function getCanmat()
 	{
 
-		return $this->canmat;
+		return number_format($this->canmat,2,',','.');
+		
 	}
-
 	
 	public function getCostot()
 	{
 
-		return $this->costot;
+		return number_format($this->costot,2,',','.');
+		
 	}
-
 	
 	public function getNroord()
 	{
 
-		return $this->nroord;
+		return $this->nroord; 		
 	}
-
 	
 	public function getCosuni()
 	{
 
-		return $this->cosuni;
+		return number_format($this->cosuni,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprod($v)
 	{

@@ -41,44 +41,38 @@ abstract class BaseAcdestina extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getNomdes()
 	{
 
-		return $this->nomdes;
+		return $this->nomdes; 		
 	}
-
 	
 	public function getDirdes()
 	{
 
-		return $this->dirdes;
+		return $this->dirdes; 		
 	}
-
 	
 	public function getTeldes()
 	{
 
-		return $this->teldes;
+		return $this->teldes; 		
 	}
-
 	
 	public function getNitdes()
 	{
 
-		return $this->nitdes;
+		return $this->nitdes; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCedrif($v)
 	{

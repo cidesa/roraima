@@ -89,9 +89,8 @@ abstract class BaseContaba1 extends BaseObject  implements Persistent {
 	public function getPereje()
 	{
 
-		return $this->pereje;
+		return $this->pereje; 		
 	}
-
 	
 	public function getFecdes($format = 'Y-m-d')
 	{
@@ -140,16 +139,14 @@ abstract class BaseContaba1 extends BaseObject  implements Persistent {
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecini($v)
 	{

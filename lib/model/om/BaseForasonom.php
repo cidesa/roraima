@@ -29,23 +29,20 @@ abstract class BaseForasonom extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getNomtip()
 	{
 
-		return $this->nomtip;
+		return $this->nomtip; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

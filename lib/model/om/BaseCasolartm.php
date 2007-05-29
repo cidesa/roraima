@@ -73,9 +73,8 @@ abstract class BaseCasolartm extends BaseObject  implements Persistent {
 	public function getReqart()
 	{
 
-		return $this->reqart;
+		return $this->reqart; 		
 	}
-
 	
 	public function getFecreq($format = 'Y-m-d')
 	{
@@ -102,72 +101,65 @@ abstract class BaseCasolartm extends BaseObject  implements Persistent {
 	public function getDesreq()
 	{
 
-		return $this->desreq;
+		return $this->desreq; 		
 	}
-
 	
 	public function getMonreq()
 	{
 
-		return $this->monreq;
+		return number_format($this->monreq,2,',','.');
+		
 	}
-
 	
 	public function getStareq()
 	{
 
-		return $this->stareq;
+		return $this->stareq; 		
 	}
-
 	
 	public function getMotreq()
 	{
 
-		return $this->motreq;
+		return $this->motreq; 		
 	}
-
 	
 	public function getBenreq()
 	{
 
-		return $this->benreq;
+		return $this->benreq; 		
 	}
-
 	
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getObsreq()
 	{
 
-		return $this->obsreq;
+		return $this->obsreq; 		
 	}
-
 	
 	public function getUnires()
 	{
 
-		return $this->unires;
+		return $this->unires; 		
 	}
-
 	
 	public function getTipmon()
 	{
 
-		return $this->tipmon;
+		return $this->tipmon; 		
 	}
-
 	
 	public function getValmon()
 	{
 
-		return $this->valmon;
+		return number_format($this->valmon,2,',','.');
+		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -194,9 +186,8 @@ abstract class BaseCasolartm extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReqart($v)
 	{

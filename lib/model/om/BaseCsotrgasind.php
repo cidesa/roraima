@@ -37,37 +37,33 @@ abstract class BaseCsotrgasind extends BaseObject  implements Persistent {
 	public function getCodgas()
 	{
 
-		return $this->codgas;
+		return $this->codgas; 		
 	}
-
 	
 	public function getDesgas()
 	{
 
-		return $this->desgas;
+		return $this->desgas; 		
 	}
-
 	
 	public function getCosgas()
 	{
 
-		return $this->cosgas;
+		return number_format($this->cosgas,2,',','.');
+		
 	}
-
 	
 	public function getTipmon()
 	{
 
-		return $this->tipmon;
+		return $this->tipmon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodgas($v)
 	{

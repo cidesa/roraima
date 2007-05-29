@@ -57,9 +57,8 @@ abstract class BaseFcajuste extends BaseObject  implements Persistent {
 	public function getNumaju()
 	{
 
-		return $this->numaju;
+		return $this->numaju; 		
 	}
-
 	
 	public function getFecaju($format = 'Y-m-d')
 	{
@@ -86,58 +85,54 @@ abstract class BaseFcajuste extends BaseObject  implements Persistent {
 	public function getDesaju()
 	{
 
-		return $this->desaju;
+		return $this->desaju; 		
 	}
-
 	
 	public function getNumdec()
 	{
 
-		return $this->numdec;
+		return $this->numdec; 		
 	}
-
 	
 	public function getStaaju()
 	{
 
-		return $this->staaju;
+		return $this->staaju; 		
 	}
-
 	
 	public function getMonaju()
 	{
 
-		return $this->monaju;
+		return number_format($this->monaju,2,',','.');
+		
 	}
-
 	
 	public function getMonreb()
 	{
 
-		return $this->monreb;
+		return number_format($this->monreb,2,',','.');
+		
 	}
-
 	
 	public function getMonexo()
 	{
 
-		return $this->monexo;
+		return number_format($this->monexo,2,',','.');
+		
 	}
-
 	
 	public function getMonimp()
 	{
 
-		return $this->monimp;
+		return number_format($this->monimp,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumaju($v)
 	{

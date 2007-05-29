@@ -37,9 +37,8 @@ abstract class BaseCpsitgen extends BaseObject  implements Persistent {
 	public function getMessit()
 	{
 
-		return $this->messit;
+		return $this->messit; 		
 	}
-
 	
 	public function getFecsit($format = 'Y-m-d')
 	{
@@ -66,23 +65,20 @@ abstract class BaseCpsitgen extends BaseObject  implements Persistent {
 	public function getExpsit()
 	{
 
-		return $this->expsit;
+		return $this->expsit; 		
 	}
-
 	
 	public function getProsit()
 	{
 
-		return $this->prosit;
+		return $this->prosit; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setMessit($v)
 	{

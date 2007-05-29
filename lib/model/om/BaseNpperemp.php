@@ -29,23 +29,20 @@ abstract class BaseNpperemp extends BaseObject  implements Persistent {
 	public function getCodperfil()
 	{
 
-		return $this->codperfil;
+		return $this->codperfil; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodperfil($v)
 	{

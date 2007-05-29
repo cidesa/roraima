@@ -81,114 +81,98 @@ abstract class BaseCiconrep extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getRepcon()
 	{
 
-		return $this->repcon;
+		return $this->repcon; 		
 	}
-
 	
 	public function getNitcon()
 	{
 
-		return $this->nitcon;
+		return $this->nitcon; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getNaccon()
 	{
 
-		return $this->naccon;
+		return $this->naccon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCiucon()
 	{
 
-		return $this->ciucon;
+		return $this->ciucon; 		
 	}
-
 	
 	public function getCpocon()
 	{
 
-		return $this->cpocon;
+		return $this->cpocon; 		
 	}
-
 	
 	public function getApocon()
 	{
 
-		return $this->apocon;
+		return $this->apocon; 		
 	}
-
 	
 	public function getTipcon()
 	{
 
-		return $this->tipcon;
+		return $this->tipcon; 		
 	}
-
 	
 	public function getTelcon()
 	{
 
-		return $this->telcon;
+		return $this->telcon; 		
 	}
-
 	
 	public function getFaxcon()
 	{
 
-		return $this->faxcon;
+		return $this->faxcon; 		
 	}
-
 	
 	public function getEmacon()
 	{
 
-		return $this->emacon;
+		return $this->emacon; 		
 	}
-
 	
 	public function getUrlcon()
 	{
 
-		return $this->urlcon;
+		return $this->urlcon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRifcon($v)
 	{

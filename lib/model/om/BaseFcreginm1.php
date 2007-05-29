@@ -189,72 +189,64 @@ abstract class BaseFcreginm1 extends BaseObject  implements Persistent {
 	public function getSerial()
 	{
 
-		return $this->serial;
+		return number_format($this->serial,2,',','.');
+		
 	}
-
 	
 	public function getTipoBolet()
 	{
 
-		return $this->tipo_bolet;
+		return $this->tipo_bolet; 		
 	}
-
 	
 	public function getNombrePro()
 	{
 
-		return $this->nombre_pro;
+		return $this->nombre_pro; 		
 	}
-
 	
 	public function getCiRifPro()
 	{
 
-		return $this->ci_rif_pro;
+		return $this->ci_rif_pro; 		
 	}
-
 	
 	public function getDirInmueb()
 	{
 
-		return $this->dir_inmueb;
+		return $this->dir_inmueb; 		
 	}
-
 	
 	public function getTelefono()
 	{
 
-		return $this->telefono;
+		return $this->telefono; 		
 	}
-
 	
 	public function getTelefono2()
 	{
 
-		return $this->telefono2;
+		return $this->telefono2; 		
 	}
-
 	
 	public function getNombAdEc()
 	{
 
-		return $this->nomb_ad_ec;
+		return $this->nomb_ad_ec; 		
 	}
-
 	
 	public function getDirAdmEn()
 	{
 
-		return $this->dir_adm_en;
+		return $this->dir_adm_en; 		
 	}
-
 	
 	public function getNDocument()
 	{
 
-		return $this->n_document;
+		return number_format($this->n_document,2,',','.');
+		
 	}
-
 	
 	public function getFechaDocu($format = 'Y-m-d')
 	{
@@ -281,107 +273,101 @@ abstract class BaseFcreginm1 extends BaseObject  implements Persistent {
 	public function getUsoInmueb()
 	{
 
-		return $this->uso_inmueb;
+		return $this->uso_inmueb; 		
 	}
-
 	
 	public function getTenencia()
 	{
 
-		return $this->tenencia;
+		return $this->tenencia; 		
 	}
-
 	
 	public function getArea()
 	{
 
-		return $this->area;
+		return number_format($this->area,2,',','.');
+		
 	}
-
 	
 	public function getArea2()
 	{
 
-		return $this->area2;
+		return number_format($this->area2,2,',','.');
+		
 	}
-
 	
 	public function getUbicacion()
 	{
 
-		return $this->ubicacion;
+		return number_format($this->ubicacion,2,',','.');
+		
 	}
-
 	
 	public function getUbicacion2()
 	{
 
-		return $this->ubicacion2;
+		return number_format($this->ubicacion2,2,',','.');
+		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getTipo2()
 	{
 
-		return $this->tipo2;
+		return $this->tipo2; 		
 	}
-
 	
 	public function getImpAnual()
 	{
 
-		return $this->imp_anual;
+		return number_format($this->imp_anual,2,',','.');
+		
 	}
-
 	
 	public function getImpAnual2()
 	{
 
-		return $this->imp_anual2;
+		return number_format($this->imp_anual2,2,',','.');
+		
 	}
-
 	
 	public function getImpTrim()
 	{
 
-		return $this->imp_trim;
+		return number_format($this->imp_trim,2,',','.');
+		
 	}
-
 	
 	public function getImpTrim2()
 	{
 
-		return $this->imp_trim2;
+		return number_format($this->imp_trim2,2,',','.');
+		
 	}
-
 	
 	public function getMontImp()
 	{
 
-		return $this->mont_imp;
+		return number_format($this->mont_imp,2,',','.');
+		
 	}
-
 	
 	public function getObservacio()
 	{
 
-		return $this->observacio;
+		return $this->observacio; 		
 	}
-
 	
 	public function getCodCatast()
 	{
 
-		return $this->cod_catast;
+		return $this->cod_catast; 		
 	}
-
 	
 	public function getFechaElab($format = 'Y-m-d')
 	{
@@ -408,44 +394,38 @@ abstract class BaseFcreginm1 extends BaseObject  implements Persistent {
 	public function getUbiInmueb()
 	{
 
-		return $this->ubi_inmueb;
+		return $this->ubi_inmueb; 		
 	}
-
 	
 	public function getNorte()
 	{
 
-		return $this->norte;
+		return $this->norte; 		
 	}
-
 	
 	public function getSur()
 	{
 
-		return $this->sur;
+		return $this->sur; 		
 	}
-
 	
 	public function getEste()
 	{
 
-		return $this->este;
+		return $this->este; 		
 	}
-
 	
 	public function getOeste()
 	{
 
-		return $this->oeste;
+		return $this->oeste; 		
 	}
-
 	
 	public function getAdquiere()
 	{
 
-		return $this->adquiere;
+		return $this->adquiere; 		
 	}
-
 	
 	public function getFInscripc($format = 'Y-m-d')
 	{
@@ -472,65 +452,57 @@ abstract class BaseFcreginm1 extends BaseObject  implements Persistent {
 	public function getFolios()
 	{
 
-		return $this->folios;
+		return $this->folios; 		
 	}
-
 	
 	public function getTomo()
 	{
 
-		return $this->tomo;
+		return $this->tomo; 		
 	}
-
 	
 	public function getTrim()
 	{
 
-		return $this->trim;
+		return $this->trim; 		
 	}
-
 	
 	public function getProt()
 	{
 
-		return $this->prot;
+		return $this->prot; 		
 	}
-
 	
 	public function getFrente()
 	{
 
-		return $this->frente;
+		return $this->frente; 		
 	}
-
 	
 	public function getFondo()
 	{
 
-		return $this->fondo;
+		return $this->fondo; 		
 	}
-
 	
 	public function getPrecio()
 	{
 
-		return $this->precio;
+		return number_format($this->precio,2,',','.');
+		
 	}
-
 	
 	public function getDirPropie()
 	{
 
-		return $this->dir_propie;
+		return $this->dir_propie; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setSerial($v)
 	{

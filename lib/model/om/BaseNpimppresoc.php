@@ -113,9 +113,8 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFeccor($format = 'Y-m-d')
 	{
@@ -186,142 +185,139 @@ abstract class BaseNpimppresoc extends BaseObject  implements Persistent {
 	public function getSalemp()
 	{
 
-		return $this->salemp;
+		return number_format($this->salemp,2,',','.');
+		
 	}
-
 	
 	public function getSalempdia()
 	{
 
-		return $this->salempdia;
+		return number_format($this->salempdia,2,',','.');
+		
 	}
-
 	
 	public function getAliuti()
 	{
 
-		return $this->aliuti;
+		return number_format($this->aliuti,2,',','.');
+		
 	}
-
 	
 	public function getAlibono()
 	{
 
-		return $this->alibono;
+		return number_format($this->alibono,2,',','.');
+		
 	}
-
 	
 	public function getSaltot()
 	{
 
-		return $this->saltot;
+		return number_format($this->saltot,2,',','.');
+		
 	}
-
 	
 	public function getDiaart108()
 	{
 
-		return $this->diaart108;
+		return number_format($this->diaart108,2,',','.');
+		
 	}
-
 	
 	public function getCapemp()
 	{
 
-		return $this->capemp;
+		return number_format($this->capemp,2,',','.');
+		
 	}
-
 	
 	public function getAntacum()
 	{
 
-		return $this->antacum;
+		return number_format($this->antacum,2,',','.');
+		
 	}
-
 	
 	public function getValart108()
 	{
 
-		return $this->valart108;
+		return number_format($this->valart108,2,',','.');
+		
 	}
-
 	
 	public function getTasint()
 	{
 
-		return $this->tasint;
+		return number_format($this->tasint,2,',','.');
+		
 	}
-
 	
 	public function getDiadif()
 	{
 
-		return $this->diadif;
+		return number_format($this->diadif,2,',','.');
+		
 	}
-
 	
 	public function getIntdev()
 	{
 
-		return $this->intdev;
+		return number_format($this->intdev,2,',','.');
+		
 	}
-
 	
 	public function getIntacum()
 	{
 
-		return $this->intacum;
+		return number_format($this->intacum,2,',','.');
+		
 	}
-
 	
 	public function getAdeant()
 	{
 
-		return $this->adeant;
+		return number_format($this->adeant,2,',','.');
+		
 	}
-
 	
 	public function getAdepre()
 	{
 
-		return $this->adepre;
+		return number_format($this->adepre,2,',','.');
+		
 	}
-
 	
 	public function getRegpre()
 	{
 
-		return $this->regpre;
+		return $this->regpre; 		
 	}
-
 	
 	public function getSaladi()
 	{
 
-		return $this->saladi;
+		return number_format($this->saladi,2,',','.');
+		
 	}
-
 	
 	public function getAnoser()
 	{
 
-		return $this->anoser;
+		return number_format($this->anoser,2,',','.');
+		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

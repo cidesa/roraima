@@ -29,23 +29,20 @@ abstract class BaseNpaccadm extends BaseObject  implements Persistent {
 	public function getCodaccadm()
 	{
 
-		return $this->codaccadm;
+		return $this->codaccadm; 		
 	}
-
 	
 	public function getDesaccadm()
 	{
 
-		return $this->desaccadm;
+		return $this->desaccadm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodaccadm($v)
 	{

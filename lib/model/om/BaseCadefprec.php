@@ -29,23 +29,20 @@ abstract class BaseCadefprec extends BaseObject  implements Persistent {
 	public function getCodprec()
 	{
 
-		return $this->codprec;
+		return $this->codprec; 		
 	}
-
 	
 	public function getNomprec()
 	{
 
-		return $this->nomprec;
+		return $this->nomprec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprec($v)
 	{

@@ -37,37 +37,33 @@ abstract class BaseForfinotrcre extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCodparegr()
 	{
 
-		return $this->codparegr;
+		return $this->codparegr; 		
 	}
-
 	
 	public function getCodparing()
 	{
 
-		return $this->codparing;
+		return $this->codparing; 		
 	}
-
 	
 	public function getMonfin()
 	{
 
-		return $this->monfin;
+		return number_format($this->monfin,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

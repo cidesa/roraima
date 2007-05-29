@@ -77,16 +77,14 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 	public function getRefpre()
 	{
 
-		return $this->refpre;
+		return $this->refpre; 		
 	}
-
 	
 	public function getDespre()
 	{
 
-		return $this->despre;
+		return $this->despre; 		
 	}
-
 	
 	public function getFecpre($format = 'Y-m-d')
 	{
@@ -113,86 +111,77 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getMonpre()
 	{
 
-		return $this->monpre;
+		return number_format($this->monpre,2,',','.');
+		
 	}
-
 	
 	public function getMondesc()
 	{
 
-		return $this->mondesc;
+		return number_format($this->mondesc,2,',','.');
+		
 	}
-
 	
 	public function getConpag()
 	{
 
-		return $this->conpag;
+		return $this->conpag; 		
 	}
-
 	
 	public function getFordesp()
 	{
 
-		return $this->fordesp;
+		return $this->fordesp; 		
 	}
-
 	
 	public function getForsol()
 	{
 
-		return $this->forsol;
+		return $this->forsol; 		
 	}
-
 	
 	public function getTipmon()
 	{
 
-		return $this->tipmon;
+		return $this->tipmon; 		
 	}
-
 	
 	public function getValmon()
 	{
 
-		return $this->valmon;
+		return number_format($this->valmon,2,',','.');
+		
 	}
-
 	
 	public function getAutpor()
 	{
 
-		return $this->autpor;
+		return $this->autpor; 		
 	}
-
 	
 	public function getObserv()
 	{
 
-		return $this->observ;
+		return $this->observ; 		
 	}
-
 	
 	public function getCodubi()
 	{
 
-		return $this->codubi;
+		return $this->codubi; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefpre($v)
 	{

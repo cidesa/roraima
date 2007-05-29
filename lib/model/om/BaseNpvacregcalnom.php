@@ -53,23 +53,20 @@ abstract class BaseNpvacregcalnom extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getFechasalida($format = 'Y-m-d')
 	{
@@ -118,9 +115,9 @@ abstract class BaseNpvacregcalnom extends BaseObject  implements Persistent {
 	public function getPeriodos()
 	{
 
-		return $this->periodos;
+		return number_format($this->periodos,2,',','.');
+		
 	}
-
 	
 	public function getFechanomina($format = 'Y-m-d')
 	{
@@ -147,16 +144,15 @@ abstract class BaseNpvacregcalnom extends BaseObject  implements Persistent {
 	public function getDiasbono()
 	{
 
-		return $this->diasbono;
+		return number_format($this->diasbono,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

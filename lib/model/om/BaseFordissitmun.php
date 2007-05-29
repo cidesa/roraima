@@ -29,23 +29,21 @@ abstract class BaseFordissitmun extends BaseObject  implements Persistent {
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getUltcen()
 	{
 
-		return $this->ultcen;
+		return number_format($this->ultcen,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmun($v)
 	{

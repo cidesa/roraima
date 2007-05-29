@@ -88,30 +88,26 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	public function getCoddoc()
 	{
 
-		return $this->coddoc;
+		return $this->coddoc; 		
 	}
-
 	
 	public function getCodfun()
 	{
 
-		return $this->codfun;
+		return $this->codfun; 		
 	}
-
 	
 	public function getCodentext()
 	{
 
-		return $this->codentext;
+		return $this->codentext; 		
 	}
-
 	
 	public function getCodtipdoc()
 	{
 
-		return $this->codtipdoc;
+		return $this->codtipdoc; 		
 	}
-
 	
 	public function getFecdoc($format = 'Y-m-d')
 	{
@@ -160,16 +156,14 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	public function getAsunto()
 	{
 
-		return $this->asunto;
+		return $this->asunto; 		
 	}
-
 	
 	public function getCodubifis()
 	{
 
-		return $this->codubifis;
+		return $this->codubifis; 		
 	}
-
 	
 	public function getFecubifis($format = 'Y-m-d')
 	{
@@ -218,9 +212,8 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	public function getCodubimag()
 	{
 
-		return $this->codubimag;
+		return $this->codubimag; 		
 	}
-
 	
 	public function getFecubimag($format = 'Y-m-d')
 	{
@@ -269,9 +262,8 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddoc($v)
 	{

@@ -53,23 +53,20 @@ abstract class BaseCpdisfuefinacu extends BaseObject  implements Persistent {
 	public function getCorrel()
 	{
 
-		return $this->correl;
+		return $this->correl; 		
 	}
-
 	
 	public function getOrigen()
 	{
 
-		return $this->origen;
+		return $this->origen; 		
 	}
-
 	
 	public function getFuefin()
 	{
 
-		return $this->fuefin;
+		return $this->fuefin; 		
 	}
-
 	
 	public function getFecdis($format = 'Y-m-d')
 	{
@@ -96,37 +93,33 @@ abstract class BaseCpdisfuefinacu extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMonasi()
 	{
 
-		return $this->monasi;
+		return number_format($this->monasi,2,',','.');
+		
 	}
-
 	
 	public function getRefdis()
 	{
 
-		return $this->refdis;
+		return $this->refdis; 		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCorrel($v)
 	{

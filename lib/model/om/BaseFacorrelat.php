@@ -49,58 +49,57 @@ abstract class BaseFacorrelat extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return number_format($this->codpre,2,',','.');
+		
 	}
-
 	
 	public function getCodped()
 	{
 
-		return $this->codped;
+		return number_format($this->codped,2,',','.');
+		
 	}
-
 	
 	public function getCodfac()
 	{
 
-		return $this->codfac;
+		return number_format($this->codfac,2,',','.');
+		
 	}
-
 	
 	public function getCodnot()
 	{
 
-		return $this->codnot;
+		return number_format($this->codnot,2,',','.');
+		
 	}
-
 	
 	public function getCoddph()
 	{
 
-		return $this->coddph;
+		return number_format($this->coddph,2,',','.');
+		
 	}
-
 	
 	public function getCoddev()
 	{
 
-		return $this->coddev;
+		return number_format($this->coddev,2,',','.');
+		
 	}
-
 	
 	public function getCodaju()
 	{
 
-		return $this->codaju;
+		return number_format($this->codaju,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpre($v)
 	{

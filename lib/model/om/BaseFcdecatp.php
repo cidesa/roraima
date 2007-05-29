@@ -49,23 +49,20 @@ abstract class BaseFcdecatp extends BaseObject  implements Persistent {
 	public function getNumdec()
 	{
 
-		return $this->numdec;
+		return $this->numdec; 		
 	}
-
 	
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getNumlic()
 	{
 
-		return $this->numlic;
+		return $this->numlic; 		
 	}
-
 	
 	public function getFecdec($format = 'Y-m-d')
 	{
@@ -92,30 +89,27 @@ abstract class BaseFcdecatp extends BaseObject  implements Persistent {
 	public function getMondec()
 	{
 
-		return $this->mondec;
+		return number_format($this->mondec,2,',','.');
+		
 	}
-
 	
 	public function getFundec()
 	{
 
-		return $this->fundec;
+		return $this->fundec; 		
 	}
-
 	
 	public function getEdodec()
 	{
 
-		return $this->edodec;
+		return $this->edodec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumdec($v)
 	{

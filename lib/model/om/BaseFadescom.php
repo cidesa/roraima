@@ -33,30 +33,27 @@ abstract class BaseFadescom extends BaseObject  implements Persistent {
 	public function getCoddesc()
 	{
 
-		return $this->coddesc;
+		return $this->coddesc; 		
 	}
-
 	
 	public function getMoncom()
 	{
 
-		return $this->moncom;
+		return number_format($this->moncom,2,',','.');
+		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddesc($v)
 	{

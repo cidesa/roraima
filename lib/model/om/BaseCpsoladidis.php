@@ -105,30 +105,26 @@ abstract class BaseCpsoladidis extends BaseObject  implements Persistent {
 	public function getDespre()
 	{
 
-		return $this->despre;
+		return $this->despre; 		
 	}
-
 	
 	public function getJustificacion()
 	{
 
-		return $this->justificacion;
+		return $this->justificacion; 		
 	}
-
 	
 	public function getEnunciado()
 	{
 
-		return $this->enunciado;
+		return $this->enunciado; 		
 	}
-
 	
 	public function getRefadi()
 	{
 
-		return $this->refadi;
+		return $this->refadi; 		
 	}
-
 	
 	public function getFecadi($format = 'Y-m-d')
 	{
@@ -155,23 +151,20 @@ abstract class BaseCpsoladidis extends BaseObject  implements Persistent {
 	public function getAnoadi()
 	{
 
-		return $this->anoadi;
+		return $this->anoadi; 		
 	}
-
 	
 	public function getDesadi()
 	{
 
-		return $this->desadi;
+		return $this->desadi; 		
 	}
-
 	
 	public function getDesanu()
 	{
 
-		return $this->desanu;
+		return $this->desanu; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -198,37 +191,33 @@ abstract class BaseCpsoladidis extends BaseObject  implements Persistent {
 	public function getTotadi()
 	{
 
-		return $this->totadi;
+		return number_format($this->totadi,2,',','.');
+		
 	}
-
 	
 	public function getStaadi()
 	{
 
-		return $this->staadi;
+		return $this->staadi; 		
 	}
-
 	
 	public function getAdidis()
 	{
 
-		return $this->adidis;
+		return $this->adidis; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getStacon()
 	{
 
-		return $this->stacon;
+		return $this->stacon; 		
 	}
-
 	
 	public function getFeccon($format = 'Y-m-d')
 	{
@@ -255,16 +244,14 @@ abstract class BaseCpsoladidis extends BaseObject  implements Persistent {
 	public function getDescon()
 	{
 
-		return $this->descon;
+		return $this->descon; 		
 	}
-
 	
 	public function getStagob()
 	{
 
-		return $this->stagob;
+		return $this->stagob; 		
 	}
-
 	
 	public function getFecgob($format = 'Y-m-d')
 	{
@@ -291,16 +278,14 @@ abstract class BaseCpsoladidis extends BaseObject  implements Persistent {
 	public function getDesgob()
 	{
 
-		return $this->desgob;
+		return $this->desgob; 		
 	}
-
 	
 	public function getStapre()
 	{
 
-		return $this->stapre;
+		return $this->stapre; 		
 	}
-
 	
 	public function getFecpre($format = 'Y-m-d')
 	{
@@ -327,9 +312,8 @@ abstract class BaseCpsoladidis extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDespre($v)
 	{

@@ -33,30 +33,26 @@ abstract class BaseFordefprg extends BaseObject  implements Persistent {
 	public function getCodprg()
 	{
 
-		return $this->codprg;
+		return $this->codprg; 		
 	}
-
 	
 	public function getDesprg()
 	{
 
-		return $this->desprg;
+		return $this->desprg; 		
 	}
-
 	
 	public function getPrbasoprg()
 	{
 
-		return $this->prbasoprg;
+		return $this->prbasoprg; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprg($v)
 	{

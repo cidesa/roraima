@@ -33,30 +33,26 @@ abstract class BaseNpsitemp extends BaseObject  implements Persistent {
 	public function getCodsitemp()
 	{
 
-		return $this->codsitemp;
+		return $this->codsitemp; 		
 	}
-
 	
 	public function getDessitemp()
 	{
 
-		return $this->dessitemp;
+		return $this->dessitemp; 		
 	}
-
 	
 	public function getCalnom()
 	{
 
-		return $this->calnom;
+		return $this->calnom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsitemp($v)
 	{

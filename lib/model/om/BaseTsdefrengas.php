@@ -45,51 +45,44 @@ abstract class BaseTsdefrengas extends BaseObject  implements Persistent {
 	public function getPagrepcaj()
 	{
 
-		return $this->pagrepcaj;
+		return $this->pagrepcaj; 		
 	}
-
 	
 	public function getCtarepcaj()
 	{
 
-		return $this->ctarepcaj;
+		return $this->ctarepcaj; 		
 	}
-
 	
 	public function getPagcheant()
 	{
 
-		return $this->pagcheant;
+		return $this->pagcheant; 		
 	}
-
 	
 	public function getCtacheant()
 	{
 
-		return $this->ctacheant;
+		return $this->ctacheant; 		
 	}
-
 	
 	public function getMovreicaj()
 	{
 
-		return $this->movreicaj;
+		return $this->movreicaj; 		
 	}
-
 	
 	public function getCtareicaj()
 	{
 
-		return $this->ctareicaj;
+		return $this->ctareicaj; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setPagrepcaj($v)
 	{

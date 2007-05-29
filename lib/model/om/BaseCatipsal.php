@@ -29,23 +29,20 @@ abstract class BaseCatipsal extends BaseObject  implements Persistent {
 	public function getCodtipsal()
 	{
 
-		return $this->codtipsal;
+		return $this->codtipsal; 		
 	}
-
 	
 	public function getDestipsal()
 	{
 
-		return $this->destipsal;
+		return $this->destipsal; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipsal($v)
 	{

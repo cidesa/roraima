@@ -49,58 +49,51 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 	public function getNumtra()
 	{
 
-		return $this->numtra;
+		return $this->numtra; 		
 	}
-
 	
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getCorrel()
 	{
 
-		return $this->correl;
+		return $this->correl; 		
 	}
-
 	
 	public function getCodfor()
 	{
 
-		return $this->codfor;
+		return $this->codfor; 		
 	}
-
 	
 	public function getNumide()
 	{
 
-		return $this->numide;
+		return $this->numide; 		
 	}
-
 	
 	public function getCodban()
 	{
 
-		return $this->codban;
+		return $this->codban; 		
 	}
-
 	
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumtra($v)
 	{

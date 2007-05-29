@@ -49,58 +49,55 @@ abstract class BaseForcosequ extends BaseObject  implements Persistent {
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCanrem()
 	{
 
-		return $this->canrem;
+		return number_format($this->canrem,2,',','.');
+		
 	}
-
 	
 	public function getCandef()
 	{
 
-		return $this->candef;
+		return number_format($this->candef,2,',','.');
+		
 	}
-
 	
 	public function getTotart()
 	{
 
-		return $this->totart;
+		return number_format($this->totart,2,',','.');
+		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getTotcan()
 	{
 
-		return $this->totcan;
+		return number_format($this->totcan,2,',','.');
+		
 	}
-
 	
 	public function getCosult()
 	{
 
-		return $this->cosult;
+		return number_format($this->cosult,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodart($v)
 	{

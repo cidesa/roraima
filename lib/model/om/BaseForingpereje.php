@@ -89,9 +89,8 @@ abstract class BaseForingpereje extends BaseObject  implements Persistent {
 	public function getPereje()
 	{
 
-		return $this->pereje;
+		return $this->pereje; 		
 	}
-
 	
 	public function getFecdes($format = 'Y-m-d')
 	{
@@ -140,16 +139,14 @@ abstract class BaseForingpereje extends BaseObject  implements Persistent {
 	public function getCerrado()
 	{
 
-		return $this->cerrado;
+		return $this->cerrado; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecini($v)
 	{

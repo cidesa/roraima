@@ -63,72 +63,64 @@ abstract class BaseFctipsol extends BaseObject  implements Persistent {
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getDestip()
 	{
 
-		return $this->destip;
+		return $this->destip; 		
 	}
-
 	
 	public function getMonsol()
 	{
 
-		return $this->monsol;
+		return number_format($this->monsol,2,',','.');
+		
 	}
-
 	
 	public function getValsol()
 	{
 
-		return $this->valsol;
+		return number_format($this->valsol,2,',','.');
+		
 	}
-
 	
 	public function getPrivdeu()
 	{
 
-		return $this->privdeu;
+		return $this->privdeu; 		
 	}
-
 	
 	public function getPrivmsg()
 	{
 
-		return $this->privmsg;
+		return $this->privmsg; 		
 	}
-
 	
 	public function getAnocom()
 	{
 
-		return $this->anocom;
+		return $this->anocom; 		
 	}
-
 	
 	public function getFueing()
 	{
 
-		return $this->fueing;
+		return $this->fueing; 		
 	}
-
 	
 	public function getGendeu()
 	{
 
-		return $this->gendeu;
+		return $this->gendeu; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtip($v)
 	{

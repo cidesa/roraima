@@ -49,58 +49,50 @@ abstract class BaseCobpagban extends BaseObject  implements Persistent {
 	public function getCodban()
 	{
 
-		return $this->codban;
+		return $this->codban; 		
 	}
-
 	
 	public function getNomban()
 	{
 
-		return $this->nomban;
+		return $this->nomban; 		
 	}
-
 	
 	public function getDirban()
 	{
 
-		return $this->dirban;
+		return $this->dirban; 		
 	}
-
 	
 	public function getTelban()
 	{
 
-		return $this->telban;
+		return $this->telban; 		
 	}
-
 	
 	public function getFaxban()
 	{
 
-		return $this->faxban;
+		return $this->faxban; 		
 	}
-
 	
 	public function getEmaban()
 	{
 
-		return $this->emaban;
+		return $this->emaban; 		
 	}
-
 	
 	public function getConban()
 	{
 
-		return $this->conban;
+		return $this->conban; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodban($v)
 	{

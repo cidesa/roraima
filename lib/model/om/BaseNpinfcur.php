@@ -45,51 +45,44 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomtit()
 	{
 
-		return $this->nomtit;
+		return $this->nomtit; 		
 	}
-
 	
 	public function getDescur()
 	{
 
-		return $this->descur;
+		return $this->descur; 		
 	}
-
 	
 	public function getInstit()
 	{
 
-		return $this->instit;
+		return $this->instit; 		
 	}
-
 	
 	public function getDurcur()
 	{
 
-		return $this->durcur;
+		return $this->durcur; 		
 	}
-
 	
 	public function getAnocul()
 	{
 
-		return $this->anocul;
+		return $this->anocul; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

@@ -61,9 +61,8 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 	public function getCodtipcon()
 	{
 
-		return $this->codtipcon;
+		return $this->codtipcon; 		
 	}
-
 	
 	public function getAnovig($format = 'Y-m-d')
 	{
@@ -90,30 +89,30 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 	public function getDesde()
 	{
 
-		return $this->desde;
+		return number_format($this->desde,2,',','.');
+		
 	}
-
 	
 	public function getHasta()
 	{
 
-		return $this->hasta;
+		return number_format($this->hasta,2,',','.');
+		
 	}
-
 	
 	public function getDiauti()
 	{
 
-		return $this->diauti;
+		return number_format($this->diauti,2,',','.');
+		
 	}
-
 	
 	public function getDiavac()
 	{
 
-		return $this->diavac;
+		return number_format($this->diavac,2,',','.');
+		
 	}
-
 	
 	public function getAnovighas($format = 'Y-m-d')
 	{
@@ -140,30 +139,26 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 	public function getCalinc()
 	{
 
-		return $this->calinc;
+		return $this->calinc; 		
 	}
-
 	
 	public function getAntap()
 	{
 
-		return $this->antap;
+		return $this->antap; 		
 	}
-
 	
 	public function getAntapvac()
 	{
 
-		return $this->antapvac;
+		return $this->antapvac; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcon($v)
 	{

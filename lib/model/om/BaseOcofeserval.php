@@ -49,58 +49,52 @@ abstract class BaseOcofeserval extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNumval()
 	{
 
-		return $this->numval;
+		return $this->numval; 		
 	}
-
 	
 	public function getCodtipval()
 	{
 
-		return $this->codtipval;
+		return $this->codtipval; 		
 	}
-
 	
 	public function getCodtippro()
 	{
 
-		return $this->codtippro;
+		return $this->codtippro; 		
 	}
-
 	
 	public function getNivpro()
 	{
 
-		return $this->nivpro;
+		return $this->nivpro; 		
 	}
-
 	
 	public function getExppro()
 	{
 
-		return $this->exppro;
+		return number_format($this->exppro,2,',','.');
+		
 	}
-
 	
 	public function getCantidad()
 	{
 
-		return $this->cantidad;
+		return number_format($this->cantidad,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

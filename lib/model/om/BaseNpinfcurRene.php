@@ -81,37 +81,32 @@ abstract class BaseNpinfcurRene extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomtit()
 	{
 
-		return $this->nomtit;
+		return $this->nomtit; 		
 	}
-
 	
 	public function getDescur()
 	{
 
-		return $this->descur;
+		return $this->descur; 		
 	}
-
 	
 	public function getInstit()
 	{
 
-		return $this->instit;
+		return $this->instit; 		
 	}
-
 	
 	public function getDurcur()
 	{
 
-		return $this->durcur;
+		return $this->durcur; 		
 	}
-
 	
 	public function getFeccur($format = 'Y-m-d')
 	{
@@ -182,58 +177,50 @@ abstract class BaseNpinfcurRene extends BaseObject  implements Persistent {
 	public function getNivest()
 	{
 
-		return $this->nivest;
+		return $this->nivest; 		
 	}
-
 	
 	public function getDiaini()
 	{
 
-		return $this->diaini;
+		return $this->diaini; 		
 	}
-
 	
 	public function getMesini()
 	{
 
-		return $this->mesini;
+		return $this->mesini; 		
 	}
-
 	
 	public function getAnoini()
 	{
 
-		return $this->anoini;
+		return $this->anoini; 		
 	}
-
 	
 	public function getDiafin()
 	{
 
-		return $this->diafin;
+		return $this->diafin; 		
 	}
-
 	
 	public function getMesfin()
 	{
 
-		return $this->mesfin;
+		return $this->mesfin; 		
 	}
-
 	
 	public function getAnofin()
 	{
 
-		return $this->anofin;
+		return $this->anofin; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

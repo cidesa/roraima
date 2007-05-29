@@ -48,30 +48,26 @@ abstract class BaseFcdeffun extends BaseObject  implements Persistent {
 	public function getCodfun()
 	{
 
-		return $this->codfun;
+		return $this->codfun; 		
 	}
-
 	
 	public function getNomfun()
 	{
 
-		return $this->nomfun;
+		return $this->nomfun; 		
 	}
-
 	
 	public function getCoduniadm()
 	{
 
-		return $this->coduniadm;
+		return $this->coduniadm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodfun($v)
 	{

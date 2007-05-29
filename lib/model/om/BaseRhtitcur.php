@@ -29,23 +29,20 @@ abstract class BaseRhtitcur extends BaseObject  implements Persistent {
 	public function getCodtit()
 	{
 
-		return $this->codtit;
+		return $this->codtit; 		
 	}
-
 	
 	public function getNomtit()
 	{
 
-		return $this->nomtit;
+		return $this->nomtit; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtit($v)
 	{

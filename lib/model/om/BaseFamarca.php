@@ -29,23 +29,20 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 	public function getCodmar()
 	{
 
-		return $this->codmar;
+		return $this->codmar; 		
 	}
-
 	
 	public function getNommar()
 	{
 
-		return $this->nommar;
+		return $this->nommar; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmar($v)
 	{

@@ -33,30 +33,26 @@ abstract class BaseOctipval extends BaseObject  implements Persistent {
 	public function getCodtipval()
 	{
 
-		return $this->codtipval;
+		return $this->codtipval; 		
 	}
-
 	
 	public function getDestipval()
 	{
 
-		return $this->destipval;
+		return $this->destipval; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipval($v)
 	{

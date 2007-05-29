@@ -93,16 +93,14 @@ abstract class BaseNpcalvac extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getCaudes($format = 'Y-m-d')
 	{
@@ -239,79 +237,76 @@ abstract class BaseNpcalvac extends BaseObject  implements Persistent {
 	public function getDiavac()
 	{
 
-		return $this->diavac;
+		return number_format($this->diavac,2,',','.');
+		
 	}
-
 	
 	public function getDianhab()
 	{
 
-		return $this->dianhab;
+		return number_format($this->dianhab,2,',','.');
+		
 	}
-
 	
 	public function getDiaant()
 	{
 
-		return $this->diaant;
+		return number_format($this->diaant,2,',','.');
+		
 	}
-
 	
 	public function getDiapag()
 	{
 
-		return $this->diapag;
+		return number_format($this->diapag,2,',','.');
+		
 	}
-
 	
 	public function getDiadis()
 	{
 
-		return $this->diadis;
+		return number_format($this->diadis,2,',','.');
+		
 	}
-
 	
 	public function getDiabon()
 	{
 
-		return $this->diabon;
+		return number_format($this->diabon,2,',','.');
+		
 	}
-
 	
 	public function getMonvac()
 	{
 
-		return $this->monvac;
+		return number_format($this->monvac,2,',','.');
+		
 	}
-
 	
 	public function getMonbon()
 	{
 
-		return $this->monbon;
+		return number_format($this->monbon,2,',','.');
+		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getStapag()
 	{
 
-		return $this->stapag;
+		return $this->stapag; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

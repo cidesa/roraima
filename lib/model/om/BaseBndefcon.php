@@ -65,86 +65,74 @@ abstract class BaseBndefcon extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodmue()
 	{
 
-		return $this->codmue;
+		return $this->codmue; 		
 	}
-
 	
 	public function getCtadepcar()
 	{
 
-		return $this->ctadepcar;
+		return $this->ctadepcar; 		
 	}
-
 	
 	public function getCtadepabo()
 	{
 
-		return $this->ctadepabo;
+		return $this->ctadepabo; 		
 	}
-
 	
 	public function getCtaajucar()
 	{
 
-		return $this->ctaajucar;
+		return $this->ctaajucar; 		
 	}
-
 	
 	public function getCtaajuabo()
 	{
 
-		return $this->ctaajuabo;
+		return $this->ctaajuabo; 		
 	}
-
 	
 	public function getCtarevcar()
 	{
 
-		return $this->ctarevcar;
+		return $this->ctarevcar; 		
 	}
-
 	
 	public function getCtarevabo()
 	{
 
-		return $this->ctarevabo;
+		return $this->ctarevabo; 		
 	}
-
 	
 	public function getStacta()
 	{
 
-		return $this->stacta;
+		return $this->stacta; 		
 	}
-
 	
 	public function getCtapercar()
 	{
 
-		return $this->ctapercar;
+		return $this->ctapercar; 		
 	}
-
 	
 	public function getCtaperabo()
 	{
 
-		return $this->ctaperabo;
+		return $this->ctaperabo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

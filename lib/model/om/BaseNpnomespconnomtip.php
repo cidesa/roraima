@@ -33,30 +33,26 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 	public function getCodnomesp()
 	{
 
-		return $this->codnomesp;
+		return $this->codnomesp; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnomesp($v)
 	{

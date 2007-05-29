@@ -37,37 +37,32 @@ abstract class BaseDftemporal5 extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getNomben()
 	{
 
-		return $this->nomben;
+		return $this->nomben; 		
 	}
-
 	
 	public function getTelben()
 	{
 
-		return $this->telben;
+		return $this->telben; 		
 	}
-
 	
 	public function getNitben()
 	{
 
-		return $this->nitben;
+		return $this->nitben; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCedrif($v)
 	{

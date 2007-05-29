@@ -81,9 +81,8 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 	public function getOrdcon()
 	{
 
-		return $this->ordcon;
+		return $this->ordcon; 		
 	}
-
 	
 	public function getFeccon($format = 'Y-m-d')
 	{
@@ -110,30 +109,26 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 	public function getTipcon()
 	{
 
-		return $this->tipcon;
+		return $this->tipcon; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getDescon()
 	{
 
-		return $this->descon;
+		return $this->descon; 		
 	}
-
 	
 	public function getObjcon()
 	{
 
-		return $this->objcon;
+		return $this->objcon; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -182,37 +177,36 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 	public function getMulatrini()
 	{
 
-		return $this->mulatrini;
+		return number_format($this->mulatrini,2,',','.');
+		
 	}
-
 	
 	public function getLapgar()
 	{
 
-		return $this->lapgar;
+		return number_format($this->lapgar,2,',','.');
+		
 	}
-
 	
 	public function getMulatrcul()
 	{
 
-		return $this->mulatrcul;
+		return number_format($this->mulatrcul,2,',','.');
+		
 	}
-
 	
 	public function getStacon()
 	{
 
-		return $this->stacon;
+		return $this->stacon; 		
 	}
-
 	
 	public function getMoncon()
 	{
 
-		return $this->moncon;
+		return number_format($this->moncon,2,',','.');
+		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -239,16 +233,15 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 	public function getCancuo()
 	{
 
-		return $this->cancuo;
+		return number_format($this->cancuo,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrdcon($v)
 	{

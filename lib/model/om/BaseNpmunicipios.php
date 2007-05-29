@@ -29,23 +29,20 @@ abstract class BaseNpmunicipios extends BaseObject  implements Persistent {
 	public function getCodmunicipio()
 	{
 
-		return $this->codmunicipio;
+		return $this->codmunicipio; 		
 	}
-
 	
 	public function getNombremunicipio()
 	{
 
-		return $this->nombremunicipio;
+		return $this->nombremunicipio; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmunicipio($v)
 	{

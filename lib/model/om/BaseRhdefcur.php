@@ -61,30 +61,26 @@ abstract class BaseRhdefcur extends BaseObject  implements Persistent {
 	public function getCodcur()
 	{
 
-		return $this->codcur;
+		return $this->codcur; 		
 	}
-
 	
 	public function getDescur()
 	{
 
-		return $this->descur;
+		return $this->descur; 		
 	}
-
 	
 	public function getCodtipcur()
 	{
 
-		return $this->codtipcur;
+		return $this->codtipcur; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -133,37 +129,34 @@ abstract class BaseRhdefcur extends BaseObject  implements Persistent {
 	public function getNotapr()
 	{
 
-		return $this->notapr;
+		return number_format($this->notapr,2,',','.');
+		
 	}
-
 	
 	public function getDurcur()
 	{
 
-		return $this->durcur;
+		return number_format($this->durcur,2,',','.');
+		
 	}
-
 	
 	public function getCodtit()
 	{
 
-		return $this->codtit;
+		return $this->codtit; 		
 	}
-
 	
 	public function getTurcur()
 	{
 
-		return $this->turcur;
+		return $this->turcur; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcur($v)
 	{

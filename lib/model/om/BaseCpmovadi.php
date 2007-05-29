@@ -41,44 +41,39 @@ abstract class BaseCpmovadi extends BaseObject  implements Persistent {
 	public function getRefadi()
 	{
 
-		return $this->refadi;
+		return $this->refadi; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getPerpre()
 	{
 
-		return $this->perpre;
+		return $this->perpre; 		
 	}
-
 	
 	public function getMonmov()
 	{
 
-		return $this->monmov;
+		return number_format($this->monmov,2,',','.');
+		
 	}
-
 	
 	public function getStamov()
 	{
 
-		return $this->stamov;
+		return $this->stamov; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefadi($v)
 	{

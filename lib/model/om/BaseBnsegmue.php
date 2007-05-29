@@ -65,23 +65,20 @@ abstract class BaseBnsegmue extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodmue()
 	{
 
-		return $this->codmue;
+		return $this->codmue; 		
 	}
-
 	
 	public function getNrosegmue()
 	{
 
-		return $this->nrosegmue;
+		return $this->nrosegmue; 		
 	}
-
 	
 	public function getFecsegmue($format = 'Y-m-d')
 	{
@@ -108,23 +105,21 @@ abstract class BaseBnsegmue extends BaseObject  implements Persistent {
 	public function getNomsegmue()
 	{
 
-		return $this->nomsegmue;
+		return $this->nomsegmue; 		
 	}
-
 	
 	public function getCobsegmue()
 	{
 
-		return $this->cobsegmue;
+		return $this->cobsegmue; 		
 	}
-
 	
 	public function getMonsegmue()
 	{
 
-		return $this->monsegmue;
+		return number_format($this->monsegmue,2,',','.');
+		
 	}
-
 	
 	public function getFecsegven($format = 'Y-m-d')
 	{
@@ -151,30 +146,26 @@ abstract class BaseBnsegmue extends BaseObject  implements Persistent {
 	public function getProsegmue()
 	{
 
-		return $this->prosegmue;
+		return $this->prosegmue; 		
 	}
-
 	
 	public function getObssegmue()
 	{
 
-		return $this->obssegmue;
+		return $this->obssegmue; 		
 	}
-
 	
 	public function getStasegmue()
 	{
 
-		return $this->stasegmue;
+		return $this->stasegmue; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

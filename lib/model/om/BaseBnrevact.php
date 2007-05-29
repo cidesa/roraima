@@ -63,37 +63,36 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 	public function getMonmuerev()
 	{
 
-		return $this->monmuerev;
+		return number_format($this->monmuerev,2,',','.');
+		
 	}
-
 	
 	public function getMoninmrev()
 	{
 
-		return $this->moninmrev;
+		return number_format($this->moninmrev,2,',','.');
+		
 	}
-
 	
 	public function getMonsemrev()
 	{
 
-		return $this->monsemrev;
+		return number_format($this->monsemrev,2,',','.');
+		
 	}
-
 	
 	public function getMonimnrev()
 	{
 
-		return $this->monimnrev;
+		return number_format($this->monimnrev,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecrev($v)
 	{

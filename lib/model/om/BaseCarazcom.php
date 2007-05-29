@@ -29,23 +29,20 @@ abstract class BaseCarazcom extends BaseObject  implements Persistent {
 	public function getCodrazcom()
 	{
 
-		return $this->codrazcom;
+		return $this->codrazcom; 		
 	}
-
 	
 	public function getDesrazcom()
 	{
 
-		return $this->desrazcom;
+		return $this->desrazcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrazcom($v)
 	{

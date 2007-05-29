@@ -69,44 +69,38 @@ abstract class BaseTsconcilhis extends BaseObject  implements Persistent {
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getMescon()
 	{
 
-		return $this->mescon;
+		return $this->mescon; 		
 	}
-
 	
 	public function getAnocon()
 	{
 
-		return $this->anocon;
+		return $this->anocon; 		
 	}
-
 	
 	public function getRefere()
 	{
 
-		return $this->refere;
+		return $this->refere; 		
 	}
-
 	
 	public function getMovlib()
 	{
 
-		return $this->movlib;
+		return $this->movlib; 		
 	}
-
 	
 	public function getMovban()
 	{
 
-		return $this->movban;
+		return $this->movban; 		
 	}
-
 	
 	public function getFeclib($format = 'Y-m-d')
 	{
@@ -155,37 +149,34 @@ abstract class BaseTsconcilhis extends BaseObject  implements Persistent {
 	public function getDesref()
 	{
 
-		return $this->desref;
+		return $this->desref; 		
 	}
-
 	
 	public function getMonlib()
 	{
 
-		return $this->monlib;
+		return number_format($this->monlib,2,',','.');
+		
 	}
-
 	
 	public function getMonban()
 	{
 
-		return $this->monban;
+		return number_format($this->monban,2,',','.');
+		
 	}
-
 	
 	public function getResult()
 	{
 
-		return $this->result;
+		return $this->result; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumcue($v)
 	{

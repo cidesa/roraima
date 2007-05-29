@@ -33,30 +33,26 @@ abstract class BaseNphojintban extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCtaban()
 	{
 
-		return $this->ctaban;
+		return $this->ctaban; 		
 	}
-
 	
 	public function getCodban()
 	{
 
-		return $this->codban;
+		return $this->codban; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

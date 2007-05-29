@@ -37,37 +37,33 @@ abstract class BaseCaartprec extends BaseObject  implements Persistent {
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCodprec()
 	{
 
-		return $this->codprec;
+		return $this->codprec; 		
 	}
-
 	
 	public function getPreuni()
 	{
 
-		return $this->preuni;
+		return number_format($this->preuni,2,',','.');
+		
 	}
-
 	
 	public function getObsprec()
 	{
 
-		return $this->obsprec;
+		return $this->obsprec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodart($v)
 	{

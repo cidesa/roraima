@@ -29,23 +29,20 @@ abstract class BaseNpprofesion extends BaseObject  implements Persistent {
 	public function getCodprofes()
 	{
 
-		return $this->codprofes;
+		return $this->codprofes; 		
 	}
-
 	
 	public function getDesprofes()
 	{
 
-		return $this->desprofes;
+		return $this->desprofes; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodprofes($v)
 	{

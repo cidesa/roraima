@@ -37,37 +37,33 @@ abstract class BaseRhnotcur extends BaseObject  implements Persistent {
 	public function getCodcur()
 	{
 
-		return $this->codcur;
+		return $this->codcur; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNotcur()
 	{
 
-		return $this->notcur;
+		return number_format($this->notcur,2,',','.');
+		
 	}
-
 	
 	public function getAprcur()
 	{
 
-		return $this->aprcur;
+		return $this->aprcur; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcur($v)
 	{

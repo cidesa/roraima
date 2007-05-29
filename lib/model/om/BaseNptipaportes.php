@@ -37,37 +37,34 @@ abstract class BaseNptipaportes extends BaseObject  implements Persistent {
 	public function getCodtipapo()
 	{
 
-		return $this->codtipapo;
+		return $this->codtipapo; 		
 	}
-
 	
 	public function getDestipapo()
 	{
 
-		return $this->destipapo;
+		return $this->destipapo; 		
 	}
-
 	
 	public function getPorret()
 	{
 
-		return $this->porret;
+		return number_format($this->porret,2,',','.');
+		
 	}
-
 	
 	public function getPorapo()
 	{
 
-		return $this->porapo;
+		return number_format($this->porapo,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipapo($v)
 	{

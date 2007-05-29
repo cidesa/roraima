@@ -49,9 +49,8 @@ abstract class BaseNpvaccol extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getDisdes($format = 'Y-m-d')
 	{
@@ -122,30 +121,28 @@ abstract class BaseNpvaccol extends BaseObject  implements Persistent {
 	public function getDiavac()
 	{
 
-		return $this->diavac;
+		return number_format($this->diavac,2,',','.');
+		
 	}
-
 	
 	public function getDianhab()
 	{
 
-		return $this->dianhab;
+		return number_format($this->dianhab,2,',','.');
+		
 	}
-
 	
 	public function getStareg()
 	{
 
-		return $this->stareg;
+		return $this->stareg; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

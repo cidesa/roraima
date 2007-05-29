@@ -33,30 +33,28 @@ abstract class BaseFcrecdesg extends BaseObject  implements Persistent {
 	public function getCodrede()
 	{
 
-		return $this->codrede;
+		return $this->codrede; 		
 	}
-
 	
 	public function getDias()
 	{
 
-		return $this->dias;
+		return number_format($this->dias,2,',','.');
+		
 	}
-
 	
 	public function getPorcien()
 	{
 
-		return $this->porcien;
+		return number_format($this->porcien,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrede($v)
 	{

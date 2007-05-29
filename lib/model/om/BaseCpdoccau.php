@@ -53,65 +53,56 @@ abstract class BaseCpdoccau extends BaseObject  implements Persistent {
 	public function getTipcau()
 	{
 
-		return $this->tipcau;
+		return $this->tipcau; 		
 	}
-
 	
 	public function getNomext()
 	{
 
-		return $this->nomext;
+		return $this->nomext; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getRefier()
 	{
 
-		return $this->refier;
+		return $this->refier; 		
 	}
-
 	
 	public function getAfeprc()
 	{
 
-		return $this->afeprc;
+		return $this->afeprc; 		
 	}
-
 	
 	public function getAfecom()
 	{
 
-		return $this->afecom;
+		return $this->afecom; 		
 	}
-
 	
 	public function getAfecau()
 	{
 
-		return $this->afecau;
+		return $this->afecau; 		
 	}
-
 	
 	public function getAfedis()
 	{
 
-		return $this->afedis;
+		return $this->afedis; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTipcau($v)
 	{

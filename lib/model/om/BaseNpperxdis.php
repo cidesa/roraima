@@ -33,30 +33,28 @@ abstract class BaseNpperxdis extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getPerini()
 	{
 
-		return $this->perini;
+		return number_format($this->perini,2,',','.');
+		
 	}
-
 	
 	public function getPerfin()
 	{
 
-		return $this->perfin;
+		return number_format($this->perfin,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

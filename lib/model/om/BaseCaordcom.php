@@ -145,9 +145,8 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getFecord($format = 'Y-m-d')
 	{
@@ -174,86 +173,76 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getDesord()
 	{
 
-		return $this->desord;
+		return $this->desord; 		
 	}
-
 	
 	public function getCrecon()
 	{
 
-		return $this->crecon;
+		return $this->crecon; 		
 	}
-
 	
 	public function getPlaent()
 	{
 
-		return $this->plaent;
+		return $this->plaent; 		
 	}
-
 	
 	public function getTiecan()
 	{
 
-		return $this->tiecan;
+		return $this->tiecan; 		
 	}
-
 	
 	public function getMonord()
 	{
 
-		return $this->monord;
+		return number_format($this->monord,2,',','.');
+		
 	}
-
 	
 	public function getDtoord()
 	{
 
-		return $this->dtoord;
+		return number_format($this->dtoord,2,',','.');
+		
 	}
-
 	
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getStaord()
 	{
 
-		return $this->staord;
+		return $this->staord; 		
 	}
-
 	
 	public function getAfepre()
 	{
 
-		return $this->afepre;
+		return $this->afepre; 		
 	}
-
 	
 	public function getConpag()
 	{
 
-		return $this->conpag;
+		return $this->conpag; 		
 	}
-
 	
 	public function getForent()
 	{
 
-		return $this->forent;
+		return $this->forent; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -280,121 +269,105 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	public function getTipmon()
 	{
 
-		return $this->tipmon;
+		return $this->tipmon; 		
 	}
-
 	
 	public function getValmon()
 	{
 
-		return $this->valmon;
+		return number_format($this->valmon,2,',','.');
+		
 	}
-
 	
 	public function getTipcom()
 	{
 
-		return $this->tipcom;
+		return $this->tipcom; 		
 	}
-
 	
 	public function getTipord()
 	{
 
-		return $this->tipord;
+		return $this->tipord; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNotord()
 	{
 
-		return $this->notord;
+		return $this->notord; 		
 	}
-
 	
 	public function getTipdoc()
 	{
 
-		return $this->tipdoc;
+		return $this->tipdoc; 		
 	}
-
 	
 	public function getTippro()
 	{
 
-		return $this->tippro;
+		return $this->tippro; 		
 	}
-
 	
 	public function getAfepro()
 	{
 
-		return $this->afepro;
+		return $this->afepro; 		
 	}
-
 	
 	public function getDoccom()
 	{
 
-		return $this->doccom;
+		return $this->doccom; 		
 	}
-
 	
 	public function getRefsol()
 	{
 
-		return $this->refsol;
+		return $this->refsol; 		
 	}
-
 	
 	public function getTipfin()
 	{
 
-		return $this->tipfin;
+		return $this->tipfin; 		
 	}
-
 	
 	public function getJustif()
 	{
 
-		return $this->justif;
+		return $this->justif; 		
 	}
-
 	
 	public function getRefprc()
 	{
 
-		return $this->refprc;
+		return $this->refprc; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrdcom($v)
 	{

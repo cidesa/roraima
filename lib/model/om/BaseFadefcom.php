@@ -29,23 +29,20 @@ abstract class BaseFadefcom extends BaseObject  implements Persistent {
 	public function getCodcom()
 	{
 
-		return $this->codcom;
+		return $this->codcom; 		
 	}
-
 	
 	public function getNomcom()
 	{
 
-		return $this->nomcom;
+		return $this->nomcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcom($v)
 	{

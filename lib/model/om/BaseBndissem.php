@@ -73,37 +73,32 @@ abstract class BaseBndissem extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getCodsem()
 	{
 
-		return $this->codsem;
+		return $this->codsem; 		
 	}
-
 	
 	public function getNrodissem()
 	{
 
-		return $this->nrodissem;
+		return $this->nrodissem; 		
 	}
-
 	
 	public function getMotdissem()
 	{
 
-		return $this->motdissem;
+		return $this->motdissem; 		
 	}
-
 	
 	public function getTipdissem()
 	{
 
-		return $this->tipdissem;
+		return $this->tipdissem; 		
 	}
-
 	
 	public function getFecdissem($format = 'Y-m-d')
 	{
@@ -152,51 +147,45 @@ abstract class BaseBndissem extends BaseObject  implements Persistent {
 	public function getMondissem()
 	{
 
-		return $this->mondissem;
+		return number_format($this->mondissem,2,',','.');
+		
 	}
-
 	
 	public function getDetdissem()
 	{
 
-		return $this->detdissem;
+		return $this->detdissem; 		
 	}
-
 	
 	public function getCodubiori()
 	{
 
-		return $this->codubiori;
+		return $this->codubiori; 		
 	}
-
 	
 	public function getCodubides()
 	{
 
-		return $this->codubides;
+		return $this->codubides; 		
 	}
-
 	
 	public function getObsdissem()
 	{
 
-		return $this->obsdissem;
+		return $this->obsdissem; 		
 	}
-
 	
 	public function getStadissem()
 	{
 
-		return $this->stadissem;
+		return $this->stadissem; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

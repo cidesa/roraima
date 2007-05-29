@@ -57,9 +57,8 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 	public function getNrodev()
 	{
 
-		return $this->nrodev;
+		return $this->nrodev; 		
 	}
-
 	
 	public function getFecdev($format = 'Y-m-d')
 	{
@@ -86,58 +85,51 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 	public function getRefdes()
 	{
 
-		return $this->refdes;
+		return $this->refdes; 		
 	}
-
 	
 	public function getCodtidev()
 	{
 
-		return $this->codtidev;
+		return $this->codtidev; 		
 	}
-
 	
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getDesdev()
 	{
 
-		return $this->desdev;
+		return $this->desdev; 		
 	}
-
 	
 	public function getStadph()
 	{
 
-		return $this->stadph;
+		return $this->stadph; 		
 	}
-
 	
 	public function getMondev()
 	{
 
-		return $this->mondev;
+		return number_format($this->mondev,2,',','.');
+		
 	}
-
 	
 	public function getObsdev()
 	{
 
-		return $this->obsdev;
+		return $this->obsdev; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNrodev($v)
 	{

@@ -29,23 +29,21 @@ abstract class BaseNpdisccesta extends BaseObject  implements Persistent {
 	public function getNumlin()
 	{
 
-		return $this->numlin;
+		return number_format($this->numlin,2,',','.');
+		
 	}
-
 	
 	public function getDesdep()
 	{
 
-		return $this->desdep;
+		return $this->desdep; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumlin($v)
 	{

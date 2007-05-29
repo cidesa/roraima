@@ -29,23 +29,20 @@ abstract class BaseFordefnucdesend extends BaseObject  implements Persistent {
 	public function getCodnucdes()
 	{
 
-		return $this->codnucdes;
+		return $this->codnucdes; 		
 	}
-
 	
 	public function getDesnucdes()
 	{
 
-		return $this->desnucdes;
+		return $this->desnucdes; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnucdes($v)
 	{

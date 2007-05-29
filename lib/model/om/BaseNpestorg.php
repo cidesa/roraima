@@ -33,30 +33,26 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 	public function getCodniv()
 	{
 
-		return $this->codniv;
+		return $this->codniv; 		
 	}
-
 	
 	public function getDesniv()
 	{
 
-		return $this->desniv;
+		return $this->desniv; 		
 	}
-
 	
 	public function getTelext()
 	{
 
-		return $this->telext;
+		return $this->telext; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodniv($v)
 	{

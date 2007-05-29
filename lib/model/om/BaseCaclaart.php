@@ -29,23 +29,21 @@ abstract class BaseCaclaart extends BaseObject  implements Persistent {
 	public function getCodclaart()
 	{
 
-		return $this->codclaart;
+		return number_format($this->codclaart,2,',','.');
+		
 	}
-
 	
 	public function getClasificacion()
 	{
 
-		return $this->clasificacion;
+		return $this->clasificacion; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodclaart($v)
 	{

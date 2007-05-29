@@ -45,51 +45,44 @@ abstract class BaseFcdefrecint extends BaseObject  implements Persistent {
 	public function getCodrec()
 	{
 
-		return $this->codrec;
+		return $this->codrec; 		
 	}
-
 	
 	public function getNomrec()
 	{
 
-		return $this->nomrec;
+		return $this->nomrec; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getModo()
 	{
 
-		return $this->modo;
+		return $this->modo; 		
 	}
-
 	
 	public function getPeriodo()
 	{
 
-		return $this->periodo;
+		return $this->periodo; 		
 	}
-
 	
 	public function getPromedio()
 	{
 
-		return $this->promedio;
+		return $this->promedio; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrec($v)
 	{

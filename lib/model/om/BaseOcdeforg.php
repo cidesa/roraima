@@ -65,86 +65,74 @@ abstract class BaseOcdeforg extends BaseObject  implements Persistent {
 	public function getCodorg()
 	{
 
-		return $this->codorg;
+		return $this->codorg; 		
 	}
-
 	
 	public function getDesorg()
 	{
 
-		return $this->desorg;
+		return $this->desorg; 		
 	}
-
 	
 	public function getCodtiporg()
 	{
 
-		return $this->codtiporg;
+		return $this->codtiporg; 		
 	}
-
 	
 	public function getEntorg()
 	{
 
-		return $this->entorg;
+		return $this->entorg; 		
 	}
-
 	
 	public function getDirorg()
 	{
 
-		return $this->dirorg;
+		return $this->dirorg; 		
 	}
-
 	
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getCodciu()
 	{
 
-		return $this->codciu;
+		return $this->codciu; 		
 	}
-
 	
 	public function getTelorg()
 	{
 
-		return $this->telorg;
+		return $this->telorg; 		
 	}
-
 	
 	public function getFaxorg()
 	{
 
-		return $this->faxorg;
+		return $this->faxorg; 		
 	}
-
 	
 	public function getEmaorg()
 	{
 
-		return $this->emaorg;
+		return $this->emaorg; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodorg($v)
 	{

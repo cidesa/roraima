@@ -33,30 +33,27 @@ abstract class BaseFordetorggob extends BaseObject  implements Persistent {
 	public function getCodorg()
 	{
 
-		return $this->codorg;
+		return $this->codorg; 		
 	}
-
 	
 	public function getFecpre()
 	{
 
-		return $this->fecpre;
+		return $this->fecpre; 		
 	}
-
 	
 	public function getMonaco()
 	{
 
-		return $this->monaco;
+		return number_format($this->monaco,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodorg($v)
 	{

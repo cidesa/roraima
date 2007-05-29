@@ -33,30 +33,27 @@ abstract class BaseFormetdisper extends BaseObject  implements Persistent {
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getPermet()
 	{
 
-		return $this->permet;
+		return $this->permet; 		
 	}
-
 	
 	public function getCanmet()
 	{
 
-		return $this->canmet;
+		return number_format($this->canmet,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmet($v)
 	{

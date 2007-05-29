@@ -93,9 +93,8 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 	public function getNronot()
 	{
 
-		return $this->nronot;
+		return $this->nronot; 		
 	}
-
 	
 	public function getFecnot($format = 'Y-m-d')
 	{
@@ -122,86 +121,75 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getTipref()
 	{
 
-		return $this->tipref;
+		return $this->tipref; 		
 	}
-
 	
 	public function getCodref()
 	{
 
-		return $this->codref;
+		return $this->codref; 		
 	}
-
 	
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getDesnot()
 	{
 
-		return $this->desnot;
+		return $this->desnot; 		
 	}
-
 	
 	public function getMonnot()
 	{
 
-		return $this->monnot;
+		return number_format($this->monnot,2,',','.');
+		
 	}
-
 	
 	public function getObsnot()
 	{
 
-		return $this->obsnot;
+		return $this->obsnot; 		
 	}
-
 	
 	public function getTipnot()
 	{
 
-		return $this->tipnot;
+		return $this->tipnot; 		
 	}
-
 	
 	public function getReapor()
 	{
 
-		return $this->reapor;
+		return $this->reapor; 		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getRifent()
 	{
 
-		return $this->rifent;
+		return $this->rifent; 		
 	}
-
 	
 	public function getNoment()
 	{
 
-		return $this->noment;
+		return $this->noment; 		
 	}
-
 	
 	public function getFecanu($format = 'Y-m-d')
 	{
@@ -228,9 +216,8 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 	public function getAutori()
 	{
 
-		return $this->autori;
+		return $this->autori; 		
 	}
-
 	
 	public function getFecaut($format = 'Y-m-d')
 	{
@@ -257,16 +244,14 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 	public function getAutpor()
 	{
 
-		return $this->autpor;
+		return $this->autpor; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNronot($v)
 	{

@@ -77,86 +77,81 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 	public function getRcpart()
 	{
 
-		return $this->rcpart;
+		return $this->rcpart; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getOrdcom()
 	{
 
-		return $this->ordcom;
+		return $this->ordcom; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCanrec()
 	{
 
-		return $this->canrec;
+		return number_format($this->canrec,2,',','.');
+		
 	}
-
 	
 	public function getCandev()
 	{
 
-		return $this->candev;
+		return number_format($this->candev,2,',','.');
+		
 	}
-
 	
 	public function getCantot()
 	{
 
-		return $this->cantot;
+		return number_format($this->cantot,2,',','.');
+		
 	}
-
 	
 	public function getMontot()
 	{
 
-		return $this->montot;
+		return number_format($this->montot,2,',','.');
+		
 	}
-
 	
 	public function getMonrgo()
 	{
 
-		return $this->monrgo;
+		return number_format($this->monrgo,2,',','.');
+		
 	}
-
 	
 	public function getMondes()
 	{
 
-		return $this->mondes;
+		return number_format($this->mondes,2,',','.');
+		
 	}
-
 	
 	public function getCanasilot()
 	{
 
-		return $this->canasilot;
+		return number_format($this->canasilot,2,',','.');
+		
 	}
-
 	
 	public function getCodfal()
 	{
 
-		return $this->codfal;
+		return $this->codfal; 		
 	}
-
 	
 	public function getFecest($format = 'Y-m-d')
 	{
@@ -183,16 +178,14 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 	public function getSerial()
 	{
 
-		return $this->serial;
+		return $this->serial; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRcpart($v)
 	{

@@ -53,65 +53,56 @@ abstract class BaseNpcalcon extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getNumcon()
 	{
 
-		return $this->numcon;
+		return $this->numcon; 		
 	}
-
 	
 	public function getCampo()
 	{
 
-		return $this->campo;
+		return $this->campo; 		
 	}
-
 	
 	public function getOperador()
 	{
 
-		return $this->operador;
+		return $this->operador; 		
 	}
-
 	
 	public function getValor()
 	{
 
-		return $this->valor;
+		return $this->valor; 		
 	}
-
 	
 	public function getConfor()
 	{
 
-		return $this->confor;
+		return $this->confor; 		
 	}
-
 	
 	public function getTipcal()
 	{
 
-		return $this->tipcal;
+		return $this->tipcal; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

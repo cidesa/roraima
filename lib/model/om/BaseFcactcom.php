@@ -73,100 +73,90 @@ abstract class BaseFcactcom extends BaseObject  implements Persistent {
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getDesact()
 	{
 
-		return $this->desact;
+		return $this->desact; 		
 	}
-
 	
 	public function getMintri()
 	{
 
-		return $this->mintri;
+		return number_format($this->mintri,2,',','.');
+		
 	}
-
 	
 	public function getExoner()
 	{
 
-		return $this->exoner;
+		return $this->exoner; 		
 	}
-
 	
 	public function getMinofac()
 	{
 
-		return $this->minofac;
+		return $this->minofac; 		
 	}
-
 	
 	public function getTipali()
 	{
 
-		return $this->tipali;
+		return $this->tipali; 		
 	}
-
 	
 	public function getPorreb()
 	{
 
-		return $this->porreb;
+		return number_format($this->porreb,2,',','.');
+		
 	}
-
 	
 	public function getExepto()
 	{
 
-		return $this->exepto;
+		return $this->exepto; 		
 	}
-
 	
 	public function getRebaja()
 	{
 
-		return $this->rebaja;
+		return $this->rebaja; 		
 	}
-
 	
 	public function getExento()
 	{
 
-		return $this->exento;
+		return $this->exento; 		
 	}
-
 	
 	public function getTem()
 	{
 
-		return $this->tem;
+		return number_format($this->tem,2,',','.');
+		
 	}
-
 	
 	public function getAfoact()
 	{
 
-		return $this->afoact;
+		return number_format($this->afoact,2,',','.');
+		
 	}
-
 	
 	public function getAnoact()
 	{
 
-		return $this->anoact;
+		return $this->anoact; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodact($v)
 	{

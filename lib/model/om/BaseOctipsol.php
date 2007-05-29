@@ -41,44 +41,38 @@ abstract class BaseOctipsol extends BaseObject  implements Persistent {
 	public function getCodsol()
 	{
 
-		return $this->codsol;
+		return $this->codsol; 		
 	}
-
 	
 	public function getDessol()
 	{
 
-		return $this->dessol;
+		return $this->dessol; 		
 	}
-
 	
 	public function getTipsol()
 	{
 
-		return $this->tipsol;
+		return $this->tipsol; 		
 	}
-
 	
 	public function getMaxdia()
 	{
 
-		return $this->maxdia;
+		return $this->maxdia; 		
 	}
-
 	
 	public function getStasol()
 	{
 
-		return $this->stasol;
+		return $this->stasol; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsol($v)
 	{

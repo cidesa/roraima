@@ -29,23 +29,20 @@ abstract class BaseCadefubi extends BaseObject  implements Persistent {
 	public function getCodubi()
 	{
 
-		return $this->codubi;
+		return $this->codubi; 		
 	}
-
 	
 	public function getNomubi()
 	{
 
-		return $this->nomubi;
+		return $this->nomubi; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodubi($v)
 	{

@@ -33,30 +33,26 @@ abstract class BaseNpsucban extends BaseObject  implements Persistent {
 	public function getCodban()
 	{
 
-		return $this->codban;
+		return $this->codban; 		
 	}
-
 	
 	public function getNomban()
 	{
 
-		return $this->nomban;
+		return $this->nomban; 		
 	}
-
 	
 	public function getCodsuc()
 	{
 
-		return $this->codsuc;
+		return $this->codsuc; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodban($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseRhdefobj extends BaseObject  implements Persistent {
 	public function getCodobj()
 	{
 
-		return $this->codobj;
+		return $this->codobj; 		
 	}
-
 	
 	public function getDesobj()
 	{
 
-		return $this->desobj;
+		return $this->desobj; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodobj($v)
 	{

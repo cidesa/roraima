@@ -35,23 +35,20 @@ abstract class BaseFcdefuniadm extends BaseObject  implements Persistent {
 	public function getCoduniadm()
 	{
 
-		return $this->coduniadm;
+		return $this->coduniadm; 		
 	}
-
 	
 	public function getNomuniadm()
 	{
 
-		return $this->nomuniadm;
+		return $this->nomuniadm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoduniadm($v)
 	{

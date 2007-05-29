@@ -29,23 +29,20 @@ abstract class BaseFatiprec extends BaseObject  implements Persistent {
 	public function getCodtiprec()
 	{
 
-		return $this->codtiprec;
+		return $this->codtiprec; 		
 	}
-
 	
 	public function getDestiprec()
 	{
 
-		return $this->destiprec;
+		return $this->destiprec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtiprec($v)
 	{

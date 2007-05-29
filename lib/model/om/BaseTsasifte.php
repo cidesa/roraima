@@ -29,23 +29,20 @@ abstract class BaseTsasifte extends BaseObject  implements Persistent {
 	public function getNumche()
 	{
 
-		return $this->numche;
+		return $this->numche; 		
 	}
-
 	
 	public function getCodtipfte()
 	{
 
-		return $this->codtipfte;
+		return $this->codtipfte; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumche($v)
 	{

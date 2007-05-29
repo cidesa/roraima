@@ -57,37 +57,32 @@ abstract class BaseOcregsol extends BaseObject  implements Persistent {
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getDessol()
 	{
 
-		return $this->dessol;
+		return $this->dessol; 		
 	}
-
 	
 	public function getCedste()
 	{
 
-		return $this->cedste;
+		return $this->cedste; 		
 	}
-
 	
 	public function getCodsol()
 	{
 
-		return $this->codsol;
+		return $this->codsol; 		
 	}
-
 	
 	public function getCodorg()
 	{
 
-		return $this->codorg;
+		return $this->codorg; 		
 	}
-
 	
 	public function getFecsol($format = 'Y-m-d')
 	{
@@ -136,23 +131,20 @@ abstract class BaseOcregsol extends BaseObject  implements Persistent {
 	public function getObssol()
 	{
 
-		return $this->obssol;
+		return $this->obssol; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsol($v)
 	{

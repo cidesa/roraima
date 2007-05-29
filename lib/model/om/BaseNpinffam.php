@@ -69,30 +69,26 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCedfam()
 	{
 
-		return $this->cedfam;
+		return $this->cedfam; 		
 	}
-
 	
 	public function getNomfam()
 	{
 
-		return $this->nomfam;
+		return $this->nomfam; 		
 	}
-
 	
 	public function getSexfam()
 	{
 
-		return $this->sexfam;
+		return $this->sexfam; 		
 	}
-
 	
 	public function getFecnac($format = 'Y-m-d')
 	{
@@ -119,58 +115,51 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 	public function getEdafam()
 	{
 
-		return $this->edafam;
+		return number_format($this->edafam,2,',','.');
+		
 	}
-
 	
 	public function getParfam()
 	{
 
-		return $this->parfam;
+		return $this->parfam; 		
 	}
-
 	
 	public function getEdociv()
 	{
 
-		return $this->edociv;
+		return $this->edociv; 		
 	}
-
 	
 	public function getGrains()
 	{
 
-		return $this->grains;
+		return $this->grains; 		
 	}
-
 	
 	public function getTraofi()
 	{
 
-		return $this->traofi;
+		return $this->traofi; 		
 	}
-
 	
 	public function getCodgua()
 	{
 
-		return $this->codgua;
+		return $this->codgua; 		
 	}
-
 	
 	public function getSeghcm()
 	{
 
-		return $this->seghcm;
+		return $this->seghcm; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

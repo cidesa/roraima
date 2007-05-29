@@ -29,23 +29,20 @@ abstract class BaseCsdeffor extends BaseObject  implements Persistent {
 	public function getCodfor()
 	{
 
-		return $this->codfor;
+		return $this->codfor; 		
 	}
-
 	
 	public function getNomfor()
 	{
 
-		return $this->nomfor;
+		return $this->nomfor; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodfor($v)
 	{

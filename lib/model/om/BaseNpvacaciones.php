@@ -45,9 +45,8 @@ abstract class BaseNpvacaciones extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFechavac($format = 'Y-m-d')
 	{
@@ -74,37 +73,35 @@ abstract class BaseNpvacaciones extends BaseObject  implements Persistent {
 	public function getDisfrutar()
 	{
 
-		return $this->disfrutar;
+		return number_format($this->disfrutar,2,',','.');
+		
 	}
-
 	
 	public function getDisfrutados()
 	{
 
-		return $this->disfrutados;
+		return number_format($this->disfrutados,2,',','.');
+		
 	}
-
 	
 	public function getBonovac()
 	{
 
-		return $this->bonovac;
+		return number_format($this->bonovac,2,',','.');
+		
 	}
-
 	
 	public function getBonopagado()
 	{
 
-		return $this->bonopagado;
+		return $this->bonopagado; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

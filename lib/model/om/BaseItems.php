@@ -45,51 +45,48 @@ abstract class BaseItems extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function getAmount()
 	{
 
-		return $this->amount;
+		return number_format($this->amount,2,',','.');
+		
 	}
-
 	
 	public function getPrice()
 	{
 
-		return $this->price;
+		return number_format($this->price,2,',','.');
+		
 	}
-
 	
 	public function getComments()
 	{
 
-		return $this->comments;
+		return $this->comments; 		
 	}
-
 	
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getOrderId()
 	{
 
-		return $this->order_id;
+		return number_format($this->order_id,2,',','.');
+		
 	}
-
 	
 	public function getProductId()
 	{
 
-		return $this->product_id;
+		return number_format($this->product_id,2,',','.');
+		
 	}
-
 	
 	public function setId($v)
 	{

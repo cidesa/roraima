@@ -29,23 +29,20 @@ abstract class BaseCptipobr extends BaseObject  implements Persistent {
 	public function getCodtipobr()
 	{
 
-		return $this->codtipobr;
+		return $this->codtipobr; 		
 	}
-
 	
 	public function getDestipobr()
 	{
 
-		return $this->destipobr;
+		return $this->destipobr; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipobr($v)
 	{

@@ -37,9 +37,8 @@ abstract class BaseNppagint extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFecpag($format = 'Y-m-d')
 	{
@@ -66,23 +65,22 @@ abstract class BaseNppagint extends BaseObject  implements Persistent {
 	public function getMonpag()
 	{
 
-		return $this->monpag;
+		return number_format($this->monpag,2,',','.');
+		
 	}
-
 	
 	public function getSalint()
 	{
 
-		return $this->salint;
+		return number_format($this->salint,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

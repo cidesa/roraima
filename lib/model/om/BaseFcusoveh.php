@@ -45,51 +45,46 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 	public function getCoduso()
 	{
 
-		return $this->coduso;
+		return $this->coduso; 		
 	}
-
 	
 	public function getAnovig()
 	{
 
-		return $this->anovig;
+		return $this->anovig; 		
 	}
-
 	
 	public function getDesuso()
 	{
 
-		return $this->desuso;
+		return $this->desuso; 		
 	}
-
 	
 	public function getMonafo()
 	{
 
-		return $this->monafo;
+		return number_format($this->monafo,2,',','.');
+		
 	}
-
 	
 	public function getPorali()
 	{
 
-		return $this->porali;
+		return number_format($this->porali,2,',','.');
+		
 	}
-
 	
 	public function getAnolim()
 	{
 
-		return $this->anolim;
+		return $this->anolim; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoduso($v)
 	{

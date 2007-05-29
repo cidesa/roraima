@@ -29,23 +29,20 @@ abstract class BaseNptipgas extends BaseObject  implements Persistent {
 	public function getCodtipgas()
 	{
 
-		return $this->codtipgas;
+		return $this->codtipgas; 		
 	}
-
 	
 	public function getDestipgas()
 	{
 
-		return $this->destipgas;
+		return $this->destipgas; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipgas($v)
 	{

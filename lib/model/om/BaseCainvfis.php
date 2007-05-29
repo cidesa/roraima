@@ -63,37 +63,34 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getExiact()
 	{
 
-		return $this->exiact;
+		return number_format($this->exiact,2,',','.');
+		
 	}
-
 	
 	public function getExiact2()
 	{
 
-		return $this->exiact2;
+		return number_format($this->exiact2,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecinv($v)
 	{

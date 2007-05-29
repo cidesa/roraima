@@ -29,23 +29,20 @@ abstract class BaseCsdeffas extends BaseObject  implements Persistent {
 	public function getCodfas()
 	{
 
-		return $this->codfas;
+		return $this->codfas; 		
 	}
-
 	
 	public function getNomfas()
 	{
 
-		return $this->nomfas;
+		return $this->nomfas; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodfas($v)
 	{

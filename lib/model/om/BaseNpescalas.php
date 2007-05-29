@@ -33,30 +33,27 @@ abstract class BaseNpescalas extends BaseObject  implements Persistent {
 	public function getGrado()
 	{
 
-		return $this->grado;
+		return $this->grado; 		
 	}
-
 	
 	public function getPaso()
 	{
 
-		return $this->paso;
+		return $this->paso; 		
 	}
-
 	
 	public function getSalario()
 	{
 
-		return $this->salario;
+		return number_format($this->salario,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setGrado($v)
 	{

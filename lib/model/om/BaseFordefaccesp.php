@@ -41,44 +41,38 @@ abstract class BaseFordefaccesp extends BaseObject  implements Persistent {
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodaccesp()
 	{
 
-		return $this->codaccesp;
+		return $this->codaccesp; 		
 	}
-
 	
 	public function getDesaccesp()
 	{
 
-		return $this->desaccesp;
+		return $this->desaccesp; 		
 	}
-
 	
 	public function getNomabraccesp()
 	{
 
-		return $this->nomabraccesp;
+		return $this->nomabraccesp; 		
 	}
-
 	
 	public function getCodempres()
 	{
 
-		return $this->codempres;
+		return $this->codempres; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

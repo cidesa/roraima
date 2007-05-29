@@ -49,58 +49,51 @@ abstract class BaseFordefmet extends BaseObject  implements Persistent {
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getDesmet()
 	{
 
-		return $this->desmet;
+		return $this->desmet; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getCantidad()
 	{
 
-		return $this->cantidad;
+		return number_format($this->cantidad,2,',','.');
+		
 	}
-
 	
 	public function getIndpro()
 	{
 
-		return $this->indpro;
+		return $this->indpro; 		
 	}
-
 	
 	public function getInvfun()
 	{
 
-		return $this->invfun;
+		return $this->invfun; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodmet($v)
 	{

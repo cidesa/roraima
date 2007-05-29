@@ -341,51 +341,44 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNomemp()
 	{
 
-		return $this->nomemp;
+		return $this->nomemp; 		
 	}
-
 	
 	public function getCedemp()
 	{
 
-		return $this->cedemp;
+		return $this->cedemp; 		
 	}
-
 	
 	public function getNumcon()
 	{
 
-		return $this->numcon;
+		return $this->numcon; 		
 	}
-
 	
 	public function getEdociv()
 	{
 
-		return $this->edociv;
+		return $this->edociv; 		
 	}
-
 	
 	public function getNacemp()
 	{
 
-		return $this->nacemp;
+		return $this->nacemp; 		
 	}
-
 	
 	public function getSexemp()
 	{
 
-		return $this->sexemp;
+		return $this->sexemp; 		
 	}
-
 	
 	public function getFecnac($format = 'Y-m-d')
 	{
@@ -412,86 +405,76 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function getEdaemp()
 	{
 
-		return $this->edaemp;
+		return number_format($this->edaemp,2,',','.');
+		
 	}
-
 	
 	public function getLugnac()
 	{
 
-		return $this->lugnac;
+		return $this->lugnac; 		
 	}
-
 	
 	public function getDirhab()
 	{
 
-		return $this->dirhab;
+		return $this->dirhab; 		
 	}
-
 	
 	public function getCodciu()
 	{
 
-		return $this->codciu;
+		return $this->codciu; 		
 	}
-
 	
 	public function getTelhab()
 	{
 
-		return $this->telhab;
+		return $this->telhab; 		
 	}
-
 	
 	public function getCelemp()
 	{
 
-		return $this->celemp;
+		return $this->celemp; 		
 	}
-
 	
 	public function getEmaemp()
 	{
 
-		return $this->emaemp;
+		return $this->emaemp; 		
 	}
-
 	
 	public function getCodpos()
 	{
 
-		return $this->codpos;
+		return $this->codpos; 		
 	}
-
 	
 	public function getTalpan()
 	{
 
-		return $this->talpan;
+		return $this->talpan; 		
 	}
-
 	
 	public function getTalcam()
 	{
 
-		return $this->talcam;
+		return $this->talcam; 		
 	}
-
 	
 	public function getTalcal()
 	{
 
-		return $this->talcal;
+		return number_format($this->talcal,2,',','.');
+		
 	}
-
 	
 	public function getDerzur()
 	{
 
-		return $this->derzur;
+		return $this->derzur; 		
 	}
-
 	
 	public function getFecing($format = 'Y-m-d')
 	{
@@ -584,30 +567,26 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function getStaemp()
 	{
 
-		return $this->staemp;
+		return $this->staemp; 		
 	}
-
 	
 	public function getFotemp()
 	{
 
-		return $this->fotemp;
+		return $this->fotemp; 		
 	}
-
 	
 	public function getNumsso()
 	{
 
-		return $this->numsso;
+		return $this->numsso; 		
 	}
-
 	
 	public function getNumpolseg()
 	{
 
-		return $this->numpolseg;
+		return $this->numpolseg; 		
 	}
-
 	
 	public function getFeccotsso($format = 'Y-m-d')
 	{
@@ -634,275 +613,237 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function getAnoadmpub()
 	{
 
-		return $this->anoadmpub;
+		return number_format($this->anoadmpub,2,',','.');
+		
 	}
-
 	
 	public function getCodtippag()
 	{
 
-		return $this->codtippag;
+		return $this->codtippag; 		
 	}
-
 	
 	public function getCodban()
 	{
 
-		return $this->codban;
+		return $this->codban; 		
 	}
-
 	
 	public function getTipcue()
 	{
 
-		return $this->tipcue;
+		return $this->tipcue; 		
 	}
-
 	
 	public function getNumcue()
 	{
 
-		return $this->numcue;
+		return $this->numcue; 		
 	}
-
 	
 	public function getObsemp()
 	{
 
-		return $this->obsemp;
+		return $this->obsemp; 		
 	}
-
 	
 	public function getTiefid()
 	{
 
-		return $this->tiefid;
+		return $this->tiefid; 		
 	}
-
 	
 	public function getGrulab()
 	{
 
-		return $this->grulab;
+		return $this->grulab; 		
 	}
-
 	
 	public function getGruotr()
 	{
 
-		return $this->gruotr;
+		return $this->gruotr; 		
 	}
-
 	
 	public function getTraslado()
 	{
 
-		return $this->traslado;
+		return $this->traslado; 		
 	}
-
 	
 	public function getTraotr()
 	{
 
-		return $this->traotr;
+		return $this->traotr; 		
 	}
-
 	
 	public function getTipviv()
 	{
 
-		return $this->tipviv;
+		return $this->tipviv; 		
 	}
-
 	
 	public function getVivotr()
 	{
 
-		return $this->vivotr;
+		return $this->vivotr; 		
 	}
-
 	
 	public function getForten()
 	{
 
-		return $this->forten;
+		return $this->forten; 		
 	}
-
 	
 	public function getTenotr()
 	{
 
-		return $this->tenotr;
+		return $this->tenotr; 		
 	}
-
 	
 	public function getSercon()
 	{
 
-		return $this->sercon;
+		return $this->sercon; 		
 	}
-
 	
 	public function getDirotr()
 	{
 
-		return $this->dirotr;
+		return $this->dirotr; 		
 	}
-
 	
 	public function getTelotr()
 	{
 
-		return $this->telotr;
+		return $this->telotr; 		
 	}
-
 	
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getCodpa2()
 	{
 
-		return $this->codpa2;
+		return $this->codpa2; 		
 	}
-
 	
 	public function getCodest()
 	{
 
-		return $this->codest;
+		return $this->codest; 		
 	}
-
 	
 	public function getCodes2()
 	{
 
-		return $this->codes2;
+		return $this->codes2; 		
 	}
-
 	
 	public function getCodci2()
 	{
 
-		return $this->codci2;
+		return $this->codci2; 		
 	}
-
 	
 	public function getCodrac()
 	{
 
-		return $this->codrac;
+		return $this->codrac; 		
 	}
-
 	
 	public function getCodniv()
 	{
 
-		return $this->codniv;
+		return $this->codniv; 		
 	}
-
 	
 	public function getTelha2()
 	{
 
-		return $this->telha2;
+		return $this->telha2; 		
 	}
-
 	
 	public function getTelot2()
 	{
 
-		return $this->telot2;
+		return $this->telot2; 		
 	}
-
 	
 	public function getCodprofes()
 	{
 
-		return $this->codprofes;
+		return $this->codprofes; 		
 	}
-
 	
 	public function getHcmexo()
 	{
 
-		return $this->hcmexo;
+		return $this->hcmexo; 		
 	}
-
 	
 	public function getCodbanfid()
 	{
 
-		return $this->codbanfid;
+		return $this->codbanfid; 		
 	}
-
 	
 	public function getCodbanlph()
 	{
 
-		return $this->codbanlph;
+		return $this->codbanlph; 		
 	}
-
 	
 	public function getNumcuefid()
 	{
 
-		return $this->numcuefid;
+		return $this->numcuefid; 		
 	}
-
 	
 	public function getNumcuelph()
 	{
 
-		return $this->numcuelph;
+		return $this->numcuelph; 		
 	}
-
 	
 	public function getCodempant()
 	{
 
-		return $this->codempant;
+		return $this->codempant; 		
 	}
-
 	
 	public function getGrusan()
 	{
 
-		return $this->grusan;
+		return $this->grusan; 		
 	}
-
 	
 	public function getObsgen()
 	{
 
-		return $this->obsgen;
+		return $this->obsgen; 		
 	}
-
 	
 	public function getCodregpai()
 	{
 
-		return $this->codregpai;
+		return $this->codregpai; 		
 	}
-
 	
 	public function getCodregest()
 	{
 
-		return $this->codregest;
+		return $this->codregest; 		
 	}
-
 	
 	public function getCodregciu()
 	{
 
-		return $this->codregciu;
+		return $this->codregciu; 		
 	}
-
 	
 	public function getFecgra($format = 'Y-m-d')
 	{
@@ -929,16 +870,14 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function getGrusangre()
 	{
 
-		return $this->grusangre;
+		return $this->grusangre; 		
 	}
-
 	
 	public function getNumgaceta()
 	{
 
-		return $this->numgaceta;
+		return $this->numgaceta; 		
 	}
-
 	
 	public function getFecgaceta($format = 'Y-m-d')
 	{
@@ -965,65 +904,57 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	public function getDiagra()
 	{
 
-		return $this->diagra;
+		return $this->diagra; 		
 	}
-
 	
 	public function getMesgra()
 	{
 
-		return $this->mesgra;
+		return $this->mesgra; 		
 	}
-
 	
 	public function getAnogra()
 	{
 
-		return $this->anogra;
+		return $this->anogra; 		
 	}
-
 	
 	public function getTemporal()
 	{
 
-		return $this->temporal;
+		return number_format($this->temporal,2,',','.');
+		
 	}
-
 	
 	public function getDetexp()
 	{
 
-		return $this->detexp;
+		return $this->detexp; 		
 	}
-
 	
 	public function getNumexp()
 	{
 
-		return $this->numexp;
+		return $this->numexp; 		
 	}
-
 	
 	public function getModpagcestic()
 	{
 
-		return $this->modpagcestic;
+		return $this->modpagcestic; 		
 	}
-
 	
 	public function getCodret()
 	{
 
-		return $this->codret;
+		return $this->codret; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

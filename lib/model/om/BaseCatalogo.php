@@ -49,16 +49,14 @@ abstract class BaseCatalogo extends BaseObject  implements Persistent {
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getDescta()
 	{
 
-		return $this->descta;
+		return $this->descta; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -107,30 +105,27 @@ abstract class BaseCatalogo extends BaseObject  implements Persistent {
 	public function getSalant()
 	{
 
-		return $this->salant;
+		return number_format($this->salant,2,',','.');
+		
 	}
-
 	
 	public function getDebcre()
 	{
 
-		return $this->debcre;
+		return $this->debcre; 		
 	}
-
 	
 	public function getCargab()
 	{
 
-		return $this->cargab;
+		return $this->cargab; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcta($v)
 	{

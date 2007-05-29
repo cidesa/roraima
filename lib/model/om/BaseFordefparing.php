@@ -41,44 +41,40 @@ abstract class BaseFordefparing extends BaseObject  implements Persistent {
 	public function getCodparing()
 	{
 
-		return $this->codparing;
+		return $this->codparing; 		
 	}
-
 	
 	public function getNomparing()
 	{
 
-		return $this->nomparing;
+		return $this->nomparing; 		
 	}
-
 	
 	public function getEstant()
 	{
 
-		return $this->estant;
+		return number_format($this->estant,2,',','.');
+		
 	}
-
 	
 	public function getEstantaju()
 	{
 
-		return $this->estantaju;
+		return number_format($this->estantaju,2,',','.');
+		
 	}
-
 	
 	public function getBascal()
 	{
 
-		return $this->bascal;
+		return $this->bascal; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodparing($v)
 	{

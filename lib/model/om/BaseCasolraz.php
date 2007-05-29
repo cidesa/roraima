@@ -29,23 +29,20 @@ abstract class BaseCasolraz extends BaseObject  implements Persistent {
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getCodrazcom()
 	{
 
-		return $this->codrazcom;
+		return $this->codrazcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsol($v)
 	{

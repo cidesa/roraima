@@ -53,65 +53,59 @@ abstract class BaseCfbalcom extends BaseObject  implements Persistent {
 	public function getOrden()
 	{
 
-		return $this->orden;
+		return $this->orden; 		
 	}
-
 	
 	public function getTitulo()
 	{
 
-		return $this->titulo;
+		return $this->titulo; 		
 	}
-
 	
 	public function getCuenta()
 	{
 
-		return $this->cuenta;
+		return $this->cuenta; 		
 	}
-
 	
 	public function getNombre()
 	{
 
-		return $this->nombre;
+		return $this->nombre; 		
 	}
-
 	
 	public function getDebito()
 	{
 
-		return $this->debito;
+		return number_format($this->debito,2,',','.');
+		
 	}
-
 	
 	public function getCredito()
 	{
 
-		return $this->credito;
+		return number_format($this->credito,2,',','.');
+		
 	}
-
 	
 	public function getSaldo()
 	{
 
-		return $this->saldo;
+		return number_format($this->saldo,2,',','.');
+		
 	}
-
 	
 	public function getCargable()
 	{
 
-		return $this->cargable;
+		return $this->cargable; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setOrden($v)
 	{

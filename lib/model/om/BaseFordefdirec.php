@@ -29,23 +29,20 @@ abstract class BaseFordefdirec extends BaseObject  implements Persistent {
 	public function getCoddir()
 	{
 
-		return $this->coddir;
+		return $this->coddir; 		
 	}
-
 	
 	public function getDesdir()
 	{
 
-		return $this->desdir;
+		return $this->desdir; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCoddir($v)
 	{

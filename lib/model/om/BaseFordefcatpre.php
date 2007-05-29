@@ -53,65 +53,56 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getNomcat()
 	{
 
-		return $this->nomcat;
+		return $this->nomcat; 		
 	}
-
 	
 	public function getDescat()
 	{
 
-		return $this->descat;
+		return $this->descat; 		
 	}
-
 	
 	public function getCoduni()
 	{
 
-		return $this->coduni;
+		return $this->coduni; 		
 	}
-
 	
 	public function getObjesp()
 	{
 
-		return $this->objesp;
+		return $this->objesp; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getMision()
 	{
 
-		return $this->mision;
+		return $this->mision; 		
 	}
-
 	
 	public function getVision()
 	{
 
-		return $this->vision;
+		return $this->vision; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

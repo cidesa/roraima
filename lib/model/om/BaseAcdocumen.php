@@ -53,23 +53,20 @@ abstract class BaseAcdocumen extends BaseObject  implements Persistent {
 	public function getDocate()
 	{
 
-		return $this->docate;
+		return $this->docate; 		
 	}
-
 	
 	public function getTipdoc()
 	{
 
-		return $this->tipdoc;
+		return $this->tipdoc; 		
 	}
-
 	
 	public function getAsudoc()
 	{
 
-		return $this->asudoc;
+		return $this->asudoc; 		
 	}
-
 	
 	public function getFecdoc($format = 'Y-m-d')
 	{
@@ -96,37 +93,32 @@ abstract class BaseAcdocumen extends BaseObject  implements Persistent {
 	public function getCedrif()
 	{
 
-		return $this->cedrif;
+		return $this->cedrif; 		
 	}
-
 	
 	public function getStadoc()
 	{
 
-		return $this->stadoc;
+		return $this->stadoc; 		
 	}
-
 	
 	public function getNomarc()
 	{
 
-		return $this->nomarc;
+		return $this->nomarc; 		
 	}
-
 	
 	public function getContent()
 	{
 
-		return $this->content;
+		return $this->content; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDocate($v)
 	{

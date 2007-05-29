@@ -45,51 +45,44 @@ abstract class BaseFccatfis extends BaseObject  implements Persistent {
 	public function getCodcatfis()
 	{
 
-		return $this->codcatfis;
+		return $this->codcatfis; 		
 	}
-
 	
 	public function getNomcatfis()
 	{
 
-		return $this->nomcatfis;
+		return $this->nomcatfis; 		
 	}
-
 	
 	public function getLinnor()
 	{
 
-		return $this->linnor;
+		return $this->linnor; 		
 	}
-
 	
 	public function getLinsur()
 	{
 
-		return $this->linsur;
+		return $this->linsur; 		
 	}
-
 	
 	public function getLinest()
 	{
 
-		return $this->linest;
+		return $this->linest; 		
 	}
-
 	
 	public function getLinoes()
 	{
 
-		return $this->linoes;
+		return $this->linoes; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcatfis($v)
 	{

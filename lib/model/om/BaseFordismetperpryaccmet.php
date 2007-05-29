@@ -45,51 +45,46 @@ abstract class BaseFordismetperpryaccmet extends BaseObject  implements Persiste
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodaccesp()
 	{
 
-		return $this->codaccesp;
+		return $this->codaccesp; 		
 	}
-
 	
 	public function getCodmet()
 	{
 
-		return $this->codmet;
+		return $this->codmet; 		
 	}
-
 	
 	public function getPerpre()
 	{
 
-		return $this->perpre;
+		return $this->perpre; 		
 	}
-
 	
 	public function getCanmet()
 	{
 
-		return $this->canmet;
+		return number_format($this->canmet,2,',','.');
+		
 	}
-
 	
 	public function getCanmeteje()
 	{
 
-		return $this->canmeteje;
+		return number_format($this->canmeteje,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpro($v)
 	{

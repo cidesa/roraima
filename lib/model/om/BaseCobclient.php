@@ -153,93 +153,81 @@ abstract class BaseCobclient extends BaseObject  implements Persistent {
 	public function getCodcli()
 	{
 
-		return $this->codcli;
+		return $this->codcli; 		
 	}
-
 	
 	public function getNomcli()
 	{
 
-		return $this->nomcli;
+		return $this->nomcli; 		
 	}
-
 	
 	public function getRifcli()
 	{
 
-		return $this->rifcli;
+		return $this->rifcli; 		
 	}
-
 	
 	public function getNitcli()
 	{
 
-		return $this->nitcli;
+		return $this->nitcli; 		
 	}
-
 	
 	public function getDircli()
 	{
 
-		return $this->dircli;
+		return $this->dircli; 		
 	}
-
 	
 	public function getTelcli()
 	{
 
-		return $this->telcli;
+		return $this->telcli; 		
 	}
-
 	
 	public function getFaxcli()
 	{
 
-		return $this->faxcli;
+		return $this->faxcli; 		
 	}
-
 	
 	public function getEmail()
 	{
 
-		return $this->email;
+		return $this->email; 		
 	}
-
 	
 	public function getTipper()
 	{
 
-		return $this->tipper;
+		return $this->tipper; 		
 	}
-
 	
 	public function getNaccli()
 	{
 
-		return $this->naccli;
+		return $this->naccli; 		
 	}
-
 	
 	public function getLimcre()
 	{
 
-		return $this->limcre;
+		return number_format($this->limcre,2,',','.');
+		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getRegmer()
 	{
 
-		return $this->regmer;
+		return $this->regmer; 		
 	}
-
 	
 	public function getFecreg($format = 'Y-m-d')
 	{
@@ -266,100 +254,88 @@ abstract class BaseCobclient extends BaseObject  implements Persistent {
 	public function getTomreg()
 	{
 
-		return $this->tomreg;
+		return $this->tomreg; 		
 	}
-
 	
 	public function getFolreg()
 	{
 
-		return $this->folreg;
+		return $this->folreg; 		
 	}
-
 	
 	public function getCapsus()
 	{
 
-		return $this->capsus;
+		return number_format($this->capsus,2,',','.');
+		
 	}
-
 	
 	public function getCappag()
 	{
 
-		return $this->cappag;
+		return number_format($this->cappag,2,',','.');
+		
 	}
-
 	
 	public function getCirepleg()
 	{
 
-		return $this->cirepleg;
+		return $this->cirepleg; 		
 	}
-
 	
 	public function getNomrepleg()
 	{
 
-		return $this->nomrepleg;
+		return $this->nomrepleg; 		
 	}
-
 	
 	public function getDirrepleg()
 	{
 
-		return $this->dirrepleg;
+		return $this->dirrepleg; 		
 	}
-
 	
 	public function getRiffia()
 	{
 
-		return $this->riffia;
+		return $this->riffia; 		
 	}
-
 	
 	public function getNomfia()
 	{
 
-		return $this->nomfia;
+		return $this->nomfia; 		
 	}
-
 	
 	public function getDirfia()
 	{
 
-		return $this->dirfia;
+		return $this->dirfia; 		
 	}
-
 	
 	public function getTelfia()
 	{
 
-		return $this->telfia;
+		return $this->telfia; 		
 	}
-
 	
 	public function getCodciu()
 	{
 
-		return $this->codciu;
+		return $this->codciu; 		
 	}
-
 	
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getFecnac($format = 'Y-m-d')
 	{
@@ -386,37 +362,32 @@ abstract class BaseCobclient extends BaseObject  implements Persistent {
 	public function getTipcli()
 	{
 
-		return $this->tipcli;
+		return $this->tipcli; 		
 	}
-
 	
 	public function getCodtiprec()
 	{
 
-		return $this->codtiprec;
+		return $this->codtiprec; 		
 	}
-
 	
 	public function getCodordmercon()
 	{
 
-		return $this->codordmercon;
+		return $this->codordmercon; 		
 	}
-
 	
 	public function getCodpermercon()
 	{
 
-		return $this->codpermercon;
+		return $this->codpermercon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcli($v)
 	{

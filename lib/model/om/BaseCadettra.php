@@ -33,30 +33,27 @@ abstract class BaseCadettra extends BaseObject  implements Persistent {
 	public function getCodtra()
 	{
 
-		return $this->codtra;
+		return $this->codtra; 		
 	}
-
 	
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getCanart()
 	{
 
-		return $this->canart;
+		return number_format($this->canart,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtra($v)
 	{

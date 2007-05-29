@@ -37,37 +37,32 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 	public function getCodubi()
 	{
 
-		return $this->codubi;
+		return $this->codubi; 		
 	}
-
 	
 	public function getDesubi()
 	{
 
-		return $this->desubi;
+		return $this->desubi; 		
 	}
-
 	
 	public function getStacod()
 	{
 
-		return $this->stacod;
+		return $this->stacod; 		
 	}
-
 	
 	public function getDirubi()
 	{
 
-		return $this->dirubi;
+		return $this->dirubi; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodubi($v)
 	{

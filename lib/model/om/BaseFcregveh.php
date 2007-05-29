@@ -157,23 +157,21 @@ abstract class BaseFcregveh extends BaseObject  implements Persistent {
 	public function getPlaveh()
 	{
 
-		return $this->plaveh;
+		return $this->plaveh; 		
 	}
-
 	
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getAnoveh()
 	{
 
-		return $this->anoveh;
+		return number_format($this->anoveh,2,',','.');
+		
 	}
-
 	
 	public function getFecreg($format = 'Y-m-d')
 	{
@@ -200,121 +198,111 @@ abstract class BaseFcregveh extends BaseObject  implements Persistent {
 	public function getSermot()
 	{
 
-		return $this->sermot;
+		return $this->sermot; 		
 	}
-
 	
 	public function getSercar()
 	{
 
-		return $this->sercar;
+		return $this->sercar; 		
 	}
-
 	
 	public function getMarveh()
 	{
 
-		return $this->marveh;
+		return $this->marveh; 		
 	}
-
 	
 	public function getColveh()
 	{
 
-		return $this->colveh;
+		return $this->colveh; 		
 	}
-
 	
 	public function getCoduso()
 	{
 
-		return $this->coduso;
+		return $this->coduso; 		
 	}
-
 	
 	public function getImpveh()
 	{
 
-		return $this->impveh;
+		return number_format($this->impveh,2,',','.');
+		
 	}
-
 	
 	public function getSalact()
 	{
 
-		return $this->salact;
+		return number_format($this->salact,2,',','.');
+		
 	}
-
 	
 	public function getSalant()
 	{
 
-		return $this->salant;
+		return number_format($this->salant,2,',','.');
+		
 	}
-
 	
 	public function getValori()
 	{
 
-		return $this->valori;
+		return number_format($this->valori,2,',','.');
+		
 	}
-
 	
 	public function getAboveh()
 	{
 
-		return $this->aboveh;
+		return number_format($this->aboveh,2,',','.');
+		
 	}
-
 	
 	public function getMorveh()
 	{
 
-		return $this->morveh;
+		return number_format($this->morveh,2,',','.');
+		
 	}
-
 	
 	public function getDesveh()
 	{
 
-		return $this->desveh;
+		return number_format($this->desveh,2,',','.');
+		
 	}
-
 	
 	public function getEstveh()
 	{
 
-		return $this->estveh;
+		return $this->estveh; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getObsveh()
 	{
 
-		return $this->obsveh;
+		return $this->obsveh; 		
 	}
-
 	
 	public function getRifrep()
 	{
 
-		return $this->rifrep;
+		return $this->rifrep; 		
 	}
-
 	
 	public function getModveh()
 	{
 
-		return $this->modveh;
+		return $this->modveh; 		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -341,72 +329,65 @@ abstract class BaseFcregveh extends BaseObject  implements Persistent {
 	public function getDueant()
 	{
 
-		return $this->dueant;
+		return $this->dueant; 		
 	}
-
 	
 	public function getDirant()
 	{
 
-		return $this->dirant;
+		return $this->dirant; 		
 	}
-
 	
 	public function getPlaant()
 	{
 
-		return $this->plaant;
+		return $this->plaant; 		
 	}
-
 	
 	public function getEstdec()
 	{
 
-		return $this->estdec;
+		return $this->estdec; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getClacon()
 	{
 
-		return $this->clacon;
+		return $this->clacon; 		
 	}
-
 	
 	public function getCapveh()
 	{
 
-		return $this->capveh;
+		return number_format($this->capveh,2,',','.');
+		
 	}
-
 	
 	public function getPesveh()
 	{
 
-		return $this->pesveh;
+		return number_format($this->pesveh,2,',','.');
+		
 	}
-
 	
 	public function getTipveh()
 	{
 
-		return $this->tipveh;
+		return number_format($this->tipveh,2,',','.');
+		
 	}
-
 	
 	public function getFecact($format = 'Y-m-d')
 	{
@@ -433,16 +414,14 @@ abstract class BaseFcregveh extends BaseObject  implements Persistent {
 	public function getMarcod()
 	{
 
-		return $this->marcod;
+		return $this->marcod; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setPlaveh($v)
 	{

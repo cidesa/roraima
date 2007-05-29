@@ -57,44 +57,41 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 	public function getCodtipcon()
 	{
 
-		return $this->codtipcon;
+		return $this->codtipcon; 		
 	}
-
 	
 	public function getDestipcon()
 	{
 
-		return $this->destipcon;
+		return $this->destipcon; 		
 	}
-
 	
 	public function getFrepagcon()
 	{
 
-		return $this->frepagcon;
+		return $this->frepagcon; 		
 	}
-
 	
 	public function getAlicuocon()
 	{
 
-		return $this->alicuocon;
+		return number_format($this->alicuocon,2,',','.');
+		
 	}
-
 	
 	public function getDiabonfinano()
 	{
 
-		return $this->diabonfinano;
+		return number_format($this->diabonfinano,2,',','.');
+		
 	}
-
 	
 	public function getDiabonvac()
 	{
 
-		return $this->diabonvac;
+		return number_format($this->diabonvac,2,',','.');
+		
 	}
-
 	
 	public function getFecinireg($format = 'Y-m-d')
 	{
@@ -121,23 +118,22 @@ abstract class BaseNptipcon extends BaseObject  implements Persistent {
 	public function getArt146()
 	{
 
-		return $this->art146;
+		return number_format($this->art146,2,',','.');
+		
 	}
-
 	
 	public function getDiaano()
 	{
 
-		return $this->diaano;
+		return number_format($this->diaano,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcon($v)
 	{

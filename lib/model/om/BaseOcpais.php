@@ -29,23 +29,20 @@ abstract class BaseOcpais extends BaseObject  implements Persistent {
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getNompai()
 	{
 
-		return $this->nompai;
+		return $this->nompai; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpai($v)
 	{

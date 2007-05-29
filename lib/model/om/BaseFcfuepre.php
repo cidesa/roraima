@@ -113,79 +113,76 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 	public function getCodfue()
 	{
 
-		return $this->codfue;
+		return $this->codfue; 		
 	}
-
 	
 	public function getNomfue()
 	{
 
-		return $this->nomfue;
+		return $this->nomfue; 		
 	}
-
 	
 	public function getNomabr()
 	{
 
-		return $this->nomabr;
+		return $this->nomabr; 		
 	}
-
 	
 	public function getFrecob()
 	{
 
-		return $this->frecob;
+		return number_format($this->frecob,2,',','.');
+		
 	}
-
 	
 	public function getMonmor()
 	{
 
-		return $this->monmor;
+		return number_format($this->monmor,2,',','.');
+		
 	}
-
 	
 	public function getPermor()
 	{
 
-		return $this->permor;
+		return number_format($this->permor,2,',','.');
+		
 	}
-
 	
 	public function getPropag()
 	{
 
-		return $this->propag;
+		return number_format($this->propag,2,',','.');
+		
 	}
-
 	
 	public function getPerppg()
 	{
 
-		return $this->perppg;
+		return number_format($this->perppg,2,',','.');
+		
 	}
-
 	
 	public function getLiqact()
 	{
 
-		return $this->liqact;
+		return number_format($this->liqact,2,',','.');
+		
 	}
-
 	
 	public function getDeufec()
 	{
 
-		return $this->deufec;
+		return number_format($this->deufec,2,',','.');
+		
 	}
-
 	
 	public function getRecfec()
 	{
 
-		return $this->recfec;
+		return number_format($this->recfec,2,',','.');
+		
 	}
-
 	
 	public function getFecufa($format = 'Y-m-d')
 	{
@@ -212,16 +209,14 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 	public function getIngrec()
 	{
 
-		return $this->ingrec;
+		return $this->ingrec; 		
 	}
-
 	
 	public function getFueing()
 	{
 
-		return $this->fueing;
+		return $this->fueing; 		
 	}
-
 	
 	public function getInieje($format = 'Y-m-d')
 	{
@@ -270,37 +265,33 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 	public function getDiavso()
 	{
 
-		return $this->diavso;
+		return number_format($this->diavso,2,',','.');
+		
 	}
-
 	
 	public function getCodprei()
 	{
 
-		return $this->codprei;
+		return $this->codprei; 		
 	}
-
 	
 	public function getDeufra()
 	{
 
-		return $this->deufra;
+		return $this->deufra; 		
 	}
-
 	
 	public function getAutliq()
 	{
 
-		return $this->autliq;
+		return $this->autliq; 		
 	}
-
 	
 	public function getSimpre()
 	{
 
-		return $this->simpre;
+		return $this->simpre; 		
 	}
-
 	
 	public function getFeccie($format = 'Y-m-d')
 	{
@@ -327,16 +318,14 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 	public function getTipmul()
 	{
 
-		return $this->tipmul;
+		return $this->tipmul; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodfue($v)
 	{

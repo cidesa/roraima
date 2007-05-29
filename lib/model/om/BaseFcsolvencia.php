@@ -72,16 +72,14 @@ abstract class BaseFcsolvencia extends BaseObject  implements Persistent {
 	public function getCodsol()
 	{
 
-		return $this->codsol;
+		return $this->codsol; 		
 	}
-
 	
 	public function getCodtip()
 	{
 
-		return $this->codtip;
+		return $this->codtip; 		
 	}
-
 	
 	public function getFecexp($format = 'Y-m-d')
 	{
@@ -130,65 +128,56 @@ abstract class BaseFcsolvencia extends BaseObject  implements Persistent {
 	public function getNumlic()
 	{
 
-		return $this->numlic;
+		return $this->numlic; 		
 	}
-
 	
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getCodfue()
 	{
 
-		return $this->codfue;
+		return $this->codfue; 		
 	}
-
 	
 	public function getStasol()
 	{
 
-		return $this->stasol;
+		return $this->stasol; 		
 	}
-
 	
 	public function getMotivo()
 	{
 
-		return $this->motivo;
+		return $this->motivo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodsol($v)
 	{

@@ -53,9 +53,8 @@ abstract class BaseFctralic extends BaseObject  implements Persistent {
 	public function getNumtra()
 	{
 
-		return $this->numtra;
+		return $this->numtra; 		
 	}
-
 	
 	public function getFectra($format = 'Y-m-d')
 	{
@@ -82,51 +81,44 @@ abstract class BaseFctralic extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getRifrep()
 	{
 
-		return $this->rifrep;
+		return $this->rifrep; 		
 	}
-
 	
 	public function getRifconant()
 	{
 
-		return $this->rifconant;
+		return $this->rifconant; 		
 	}
-
 	
 	public function getRifrepant()
 	{
 
-		return $this->rifrepant;
+		return $this->rifrepant; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getNumlic()
 	{
 
-		return $this->numlic;
+		return $this->numlic; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumtra($v)
 	{

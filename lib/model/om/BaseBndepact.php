@@ -59,30 +59,29 @@ abstract class BaseBndepact extends BaseObject  implements Persistent {
 	public function getMonmue()
 	{
 
-		return $this->monmue;
+		return number_format($this->monmue,2,',','.');
+		
 	}
-
 	
 	public function getMoninm()
 	{
 
-		return $this->moninm;
+		return number_format($this->moninm,2,',','.');
+		
 	}
-
 	
 	public function getMonsem()
 	{
 
-		return $this->monsem;
+		return number_format($this->monsem,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setFecdep($v)
 	{

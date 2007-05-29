@@ -41,16 +41,14 @@ abstract class BaseFcdesveh extends BaseObject  implements Persistent {
 	public function getNumdes()
 	{
 
-		return $this->numdes;
+		return $this->numdes; 		
 	}
-
 	
 	public function getPlaveh()
 	{
 
-		return $this->plaveh;
+		return $this->plaveh; 		
 	}
-
 	
 	public function getFecdes($format = 'Y-m-d')
 	{
@@ -77,23 +75,20 @@ abstract class BaseFcdesveh extends BaseObject  implements Persistent {
 	public function getMotdes()
 	{
 
-		return $this->motdes;
+		return $this->motdes; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumdes($v)
 	{

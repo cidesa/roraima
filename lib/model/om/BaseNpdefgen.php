@@ -153,240 +153,220 @@ abstract class BaseNpdefgen extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getLoncodcar()
 	{
 
-		return $this->loncodcar;
+		return number_format($this->loncodcar,2,',','.');
+		
 	}
-
 	
 	public function getLoncodemp()
 	{
 
-		return $this->loncodemp;
+		return number_format($this->loncodemp,2,',','.');
+		
 	}
-
 	
 	public function getLoncodorg()
 	{
 
-		return $this->loncodorg;
+		return number_format($this->loncodorg,2,',','.');
+		
 	}
-
 	
 	public function getLoncoduni()
 	{
 
-		return $this->loncoduni;
+		return number_format($this->loncoduni,2,',','.');
+		
 	}
-
 	
 	public function getRupcar()
 	{
 
-		return $this->rupcar;
+		return number_format($this->rupcar,2,',','.');
+		
 	}
-
 	
 	public function getRupemp()
 	{
 
-		return $this->rupemp;
+		return number_format($this->rupemp,2,',','.');
+		
 	}
-
 	
 	public function getRuporg()
 	{
 
-		return $this->ruporg;
+		return number_format($this->ruporg,2,',','.');
+		
 	}
-
 	
 	public function getRupuni()
 	{
 
-		return $this->rupuni;
+		return number_format($this->rupuni,2,',','.');
+		
 	}
-
 	
 	public function getForcar()
 	{
 
-		return $this->forcar;
+		return $this->forcar; 		
 	}
-
 	
 	public function getForemp()
 	{
 
-		return $this->foremp;
+		return $this->foremp; 		
 	}
-
 	
 	public function getFororg()
 	{
 
-		return $this->fororg;
+		return $this->fororg; 		
 	}
-
 	
 	public function getForuni()
 	{
 
-		return $this->foruni;
+		return $this->foruni; 		
 	}
-
 	
 	public function getRedmon()
 	{
 
-		return $this->redmon;
+		return $this->redmon; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getCodvac()
 	{
 
-		return $this->codvac;
+		return $this->codvac; 		
 	}
-
 	
 	public function getCodvacfra()
 	{
 
-		return $this->codvacfra;
+		return $this->codvacfra; 		
 	}
-
 	
 	public function getCodvaccol()
 	{
 
-		return $this->codvaccol;
+		return $this->codvaccol; 		
 	}
-
 	
 	public function getCodislr()
 	{
 
-		return $this->codislr;
+		return $this->codislr; 		
 	}
-
 	
 	public function getCodpres()
 	{
 
-		return $this->codpres;
+		return $this->codpres; 		
 	}
-
 	
 	public function getCodsso()
 	{
 
-		return $this->codsso;
+		return $this->codsso; 		
 	}
-
 	
 	public function getSueint()
 	{
 
-		return $this->sueint;
+		return $this->sueint; 		
 	}
-
 	
 	public function getAsiconnom()
 	{
 
-		return $this->asiconnom;
+		return $this->asiconnom; 		
 	}
-
 	
 	public function getCierac()
 	{
 
-		return $this->cierac;
+		return $this->cierac; 		
 	}
-
 	
 	public function getForesc()
 	{
 
-		return $this->foresc;
+		return $this->foresc; 		
 	}
-
 	
 	public function getNumrec()
 	{
 
-		return $this->numrec;
+		return number_format($this->numrec,2,',','.');
+		
 	}
-
 	
 	public function getForcarrac()
 	{
 
-		return $this->forcarrac;
+		return $this->forcarrac; 		
 	}
-
 	
 	public function getForcarocp()
 	{
 
-		return $this->forcarocp;
+		return $this->forcarocp; 		
 	}
-
 	
 	public function getCorrel()
 	{
 
-		return $this->correl;
+		return number_format($this->correl,2,',','.');
+		
 	}
-
 	
 	public function getPorctick()
 	{
 
-		return $this->porctick;
+		return number_format($this->porctick,2,',','.');
+		
 	}
-
 	
 	public function getUnitrib()
 	{
 
-		return $this->unitrib;
+		return number_format($this->unitrib,2,',','.');
+		
 	}
-
 	
 	public function getNumtick()
 	{
 
-		return $this->numtick;
+		return number_format($this->numtick,2,',','.');
+		
 	}
-
 	
 	public function getDiasem()
 	{
 
-		return $this->diasem;
+		return number_format($this->diasem,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

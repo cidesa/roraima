@@ -29,23 +29,20 @@ abstract class BaseNpgrulab extends BaseObject  implements Persistent {
 	public function getCodgrulab()
 	{
 
-		return $this->codgrulab;
+		return $this->codgrulab; 		
 	}
-
 	
 	public function getDesgrulab()
 	{
 
-		return $this->desgrulab;
+		return $this->desgrulab; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodgrulab($v)
 	{

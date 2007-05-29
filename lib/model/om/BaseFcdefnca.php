@@ -173,275 +173,248 @@ abstract class BaseFcdefnca extends BaseObject  implements Persistent {
 	public function getCodpar()
 	{
 
-		return $this->codpar;
+		return $this->codpar; 		
 	}
-
 	
 	public function getCodmun()
 	{
 
-		return $this->codmun;
+		return $this->codmun; 		
 	}
-
 	
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getNumniv()
 	{
 
-		return $this->numniv;
+		return number_format($this->numniv,2,',','.');
+		
 	}
-
 	
 	public function getNomext1()
 	{
 
-		return $this->nomext1;
+		return $this->nomext1; 		
 	}
-
 	
 	public function getNomabr1()
 	{
 
-		return $this->nomabr1;
+		return $this->nomabr1; 		
 	}
-
 	
 	public function getTamano1()
 	{
 
-		return $this->tamano1;
+		return number_format($this->tamano1,2,',','.');
+		
 	}
-
 	
 	public function getNomext2()
 	{
 
-		return $this->nomext2;
+		return $this->nomext2; 		
 	}
-
 	
 	public function getNomabr2()
 	{
 
-		return $this->nomabr2;
+		return $this->nomabr2; 		
 	}
-
 	
 	public function getTamano2()
 	{
 
-		return $this->tamano2;
+		return number_format($this->tamano2,2,',','.');
+		
 	}
-
 	
 	public function getNomext3()
 	{
 
-		return $this->nomext3;
+		return $this->nomext3; 		
 	}
-
 	
 	public function getNomabr3()
 	{
 
-		return $this->nomabr3;
+		return $this->nomabr3; 		
 	}
-
 	
 	public function getTamano3()
 	{
 
-		return $this->tamano3;
+		return number_format($this->tamano3,2,',','.');
+		
 	}
-
 	
 	public function getNomext4()
 	{
 
-		return $this->nomext4;
+		return $this->nomext4; 		
 	}
-
 	
 	public function getNomabr4()
 	{
 
-		return $this->nomabr4;
+		return $this->nomabr4; 		
 	}
-
 	
 	public function getTamano4()
 	{
 
-		return $this->tamano4;
+		return number_format($this->tamano4,2,',','.');
+		
 	}
-
 	
 	public function getNomext5()
 	{
 
-		return $this->nomext5;
+		return $this->nomext5; 		
 	}
-
 	
 	public function getNomabr5()
 	{
 
-		return $this->nomabr5;
+		return $this->nomabr5; 		
 	}
-
 	
 	public function getTamano5()
 	{
 
-		return $this->tamano5;
+		return number_format($this->tamano5,2,',','.');
+		
 	}
-
 	
 	public function getNomext6()
 	{
 
-		return $this->nomext6;
+		return $this->nomext6; 		
 	}
-
 	
 	public function getNomabr6()
 	{
 
-		return $this->nomabr6;
+		return $this->nomabr6; 		
 	}
-
 	
 	public function getTamano6()
 	{
 
-		return $this->tamano6;
+		return number_format($this->tamano6,2,',','.');
+		
 	}
-
 	
 	public function getNomext7()
 	{
 
-		return $this->nomext7;
+		return $this->nomext7; 		
 	}
-
 	
 	public function getNomabr7()
 	{
 
-		return $this->nomabr7;
+		return $this->nomabr7; 		
 	}
-
 	
 	public function getTamano7()
 	{
 
-		return $this->tamano7;
+		return number_format($this->tamano7,2,',','.');
+		
 	}
-
 	
 	public function getNomext8()
 	{
 
-		return $this->nomext8;
+		return $this->nomext8; 		
 	}
-
 	
 	public function getNomabr8()
 	{
 
-		return $this->nomabr8;
+		return $this->nomabr8; 		
 	}
-
 	
 	public function getTamano8()
 	{
 
-		return $this->tamano8;
+		return number_format($this->tamano8,2,',','.');
+		
 	}
-
 	
 	public function getNomext9()
 	{
 
-		return $this->nomext9;
+		return $this->nomext9; 		
 	}
-
 	
 	public function getNomabr9()
 	{
 
-		return $this->nomabr9;
+		return $this->nomabr9; 		
 	}
-
 	
 	public function getTamano9()
 	{
 
-		return $this->tamano9;
+		return number_format($this->tamano9,2,',','.');
+		
 	}
-
 	
 	public function getNomext10()
 	{
 
-		return $this->nomext10;
+		return $this->nomext10; 		
 	}
-
 	
 	public function getNomabr10()
 	{
 
-		return $this->nomabr10;
+		return $this->nomabr10; 		
 	}
-
 	
 	public function getTamano10()
 	{
 
-		return $this->tamano10;
+		return number_format($this->tamano10,2,',','.');
+		
 	}
-
 	
 	public function getNivinm()
 	{
 
-		return $this->nivinm;
+		return $this->nivinm; 		
 	}
-
 	
 	public function getNumper()
 	{
 
-		return $this->numper;
+		return number_format($this->numper,2,',','.');
+		
 	}
-
 	
 	public function getDenumper()
 	{
 
-		return $this->denumper;
+		return $this->denumper; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodpar($v)
 	{

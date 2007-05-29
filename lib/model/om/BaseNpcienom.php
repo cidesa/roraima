@@ -73,16 +73,14 @@ abstract class BaseNpcienom extends BaseObject  implements Persistent {
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getFecnom($format = 'Y-m-d')
 	{
@@ -109,79 +107,70 @@ abstract class BaseNpcienom extends BaseObject  implements Persistent {
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getCodcta()
 	{
 
-		return $this->codcta;
+		return $this->codcta; 		
 	}
-
 	
 	public function getMonto()
 	{
 
-		return $this->monto;
+		return number_format($this->monto,2,',','.');
+		
 	}
-
 	
 	public function getAsided()
 	{
 
-		return $this->asided;
+		return $this->asided; 		
 	}
-
 	
 	public function getCodtipgas()
 	{
 
-		return $this->codtipgas;
+		return $this->codtipgas; 		
 	}
-
 	
 	public function getCantidad()
 	{
 
-		return $this->cantidad;
+		return number_format($this->cantidad,2,',','.');
+		
 	}
-
 	
 	public function getCodban()
 	{
 
-		return $this->codban;
+		return $this->codban; 		
 	}
-
 	
 	public function getEspecial()
 	{
 
-		return $this->especial;
+		return $this->especial; 		
 	}
-
 	
 	public function getCodnomesp()
 	{
 
-		return $this->codnomesp;
+		return $this->codnomesp; 		
 	}
-
 	
 	public function getNomnomesp()
 	{
 
-		return $this->nomnomesp;
+		return $this->nomnomesp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodnom($v)
 	{

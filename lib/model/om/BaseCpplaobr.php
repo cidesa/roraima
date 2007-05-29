@@ -93,135 +93,124 @@ abstract class BaseCpplaobr extends BaseObject  implements Persistent {
 	public function getRefcom()
 	{
 
-		return $this->refcom;
+		return $this->refcom; 		
 	}
-
 	
 	public function getCodpro()
 	{
 
-		return $this->codpro;
+		return $this->codpro; 		
 	}
-
 	
 	public function getCodest()
 	{
 
-		return $this->codest;
+		return $this->codest; 		
 	}
-
 	
 	public function getCodobr()
 	{
 
-		return $this->codobr;
+		return $this->codobr; 		
 	}
-
 	
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getNrocon()
 	{
 
-		return $this->nrocon;
+		return $this->nrocon; 		
 	}
-
 	
 	public function getMoncon()
 	{
 
-		return $this->moncon;
+		return number_format($this->moncon,2,',','.');
+		
 	}
-
 	
 	public function getMonrea()
 	{
 
-		return $this->monrea;
+		return number_format($this->monrea,2,',','.');
+		
 	}
-
 	
 	public function getMonvar()
 	{
 
-		return $this->monvar;
+		return number_format($this->monvar,2,',','.');
+		
 	}
-
 	
 	public function getPorfis()
 	{
 
-		return $this->porfis;
+		return number_format($this->porfis,2,',','.');
+		
 	}
-
 	
 	public function getPorpre()
 	{
 
-		return $this->porpre;
+		return number_format($this->porpre,2,',','.');
+		
 	}
-
 	
 	public function getCanequ()
 	{
 
-		return $this->canequ;
+		return number_format($this->canequ,2,',','.');
+		
 	}
-
 	
 	public function getDesequ()
 	{
 
-		return $this->desequ;
+		return $this->desequ; 		
 	}
-
 	
 	public function getCanobr()
 	{
 
-		return $this->canobr;
+		return number_format($this->canobr,2,',','.');
+		
 	}
-
 	
 	public function getDesobr()
 	{
 
-		return $this->desobr;
+		return $this->desobr; 		
 	}
-
 	
 	public function getCanrep()
 	{
 
-		return $this->canrep;
+		return number_format($this->canrep,2,',','.');
+		
 	}
-
 	
 	public function getDesrep()
 	{
 
-		return $this->desrep;
+		return $this->desrep; 		
 	}
-
 	
 	public function getStapla()
 	{
 
-		return $this->stapla;
+		return $this->stapla; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRefcom($v)
 	{

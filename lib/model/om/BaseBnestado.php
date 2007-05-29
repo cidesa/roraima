@@ -29,23 +29,20 @@ abstract class BaseBnestado extends BaseObject  implements Persistent {
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getNomedo()
 	{
 
-		return $this->nomedo;
+		return $this->nomedo; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodedo($v)
 	{

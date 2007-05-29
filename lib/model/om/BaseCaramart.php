@@ -29,23 +29,20 @@ abstract class BaseCaramart extends BaseObject  implements Persistent {
 	public function getRamart()
 	{
 
-		return $this->ramart;
+		return $this->ramart; 		
 	}
-
 	
 	public function getNomram()
 	{
 
-		return $this->nomram;
+		return $this->nomram; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setRamart($v)
 	{

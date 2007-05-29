@@ -65,86 +65,74 @@ abstract class BaseFordefobj extends BaseObject  implements Persistent {
 	public function getCodobj()
 	{
 
-		return $this->codobj;
+		return $this->codobj; 		
 	}
-
 	
 	public function getDesobj()
 	{
 
-		return $this->desobj;
+		return $this->desobj; 		
 	}
-
 	
 	public function getAreest()
 	{
 
-		return $this->areest;
+		return $this->areest; 		
 	}
-
 	
 	public function getDirest()
 	{
 
-		return $this->direst;
+		return $this->direst; 		
 	}
-
 	
 	public function getObjein()
 	{
 
-		return $this->objein;
+		return $this->objein; 		
 	}
-
 	
 	public function getObjepr()
 	{
 
-		return $this->objepr;
+		return $this->objepr; 		
 	}
-
 	
 	public function getEnupro()
 	{
 
-		return $this->enupro;
+		return $this->enupro; 		
 	}
-
 	
 	public function getIndact()
 	{
 
-		return $this->indact;
+		return $this->indact; 		
 	}
-
 	
 	public function getIndobj()
 	{
 
-		return $this->indobj;
+		return $this->indobj; 		
 	}
-
 	
 	public function getMetpro()
 	{
 
-		return $this->metpro;
+		return $this->metpro; 		
 	}
-
 	
 	public function getObjnet()
 	{
 
-		return $this->objnet;
+		return $this->objnet; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodobj($v)
 	{

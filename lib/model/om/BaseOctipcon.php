@@ -29,23 +29,20 @@ abstract class BaseOctipcon extends BaseObject  implements Persistent {
 	public function getCodtipcon()
 	{
 
-		return $this->codtipcon;
+		return $this->codtipcon; 		
 	}
-
 	
 	public function getDestipcon()
 	{
 
-		return $this->destipcon;
+		return $this->destipcon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcon($v)
 	{

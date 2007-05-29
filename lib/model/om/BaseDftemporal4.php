@@ -33,30 +33,26 @@ abstract class BaseDftemporal4 extends BaseObject  implements Persistent {
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getAbr()
 	{
 
-		return $this->abr;
+		return $this->abr; 		
 	}
-
 	
 	public function getExt()
 	{
 
-		return $this->ext;
+		return $this->ext; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setTipo($v)
 	{

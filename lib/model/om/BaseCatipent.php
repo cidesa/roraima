@@ -29,23 +29,20 @@ abstract class BaseCatipent extends BaseObject  implements Persistent {
 	public function getCodtipent()
 	{
 
-		return $this->codtipent;
+		return $this->codtipent; 		
 	}
-
 	
 	public function getDestipent()
 	{
 
-		return $this->destipent;
+		return $this->destipent; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipent($v)
 	{

@@ -37,37 +37,32 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	public function getCodciu()
 	{
 
-		return $this->codciu;
+		return $this->codciu; 		
 	}
-
 	
 	public function getCodedo()
 	{
 
-		return $this->codedo;
+		return $this->codedo; 		
 	}
-
 	
 	public function getCodpai()
 	{
 
-		return $this->codpai;
+		return $this->codpai; 		
 	}
-
 	
 	public function getNomciu()
 	{
 
-		return $this->nomciu;
+		return $this->nomciu; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodciu($v)
 	{

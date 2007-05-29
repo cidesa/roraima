@@ -111,9 +111,8 @@ abstract class BaseFcesppub extends BaseObject  implements Persistent {
 	public function getNrocon()
 	{
 
-		return $this->nrocon;
+		return $this->nrocon; 		
 	}
-
 	
 	public function getFecreg($format = 'Y-m-d')
 	{
@@ -140,30 +139,26 @@ abstract class BaseFcesppub extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getRifrep()
 	{
 
-		return $this->rifrep;
+		return $this->rifrep; 		
 	}
-
 	
 	public function getNomesp()
 	{
 
-		return $this->nomesp;
+		return $this->nomesp; 		
 	}
-
 	
 	public function getDiresp()
 	{
 
-		return $this->diresp;
+		return $this->diresp; 		
 	}
-
 	
 	public function getFecesp($format = 'Y-m-d')
 	{
@@ -190,65 +185,59 @@ abstract class BaseFcesppub extends BaseObject  implements Persistent {
 	public function getHoresp()
 	{
 
-		return $this->horesp;
+		return $this->horesp; 		
 	}
-
 	
 	public function getTipesp()
 	{
 
-		return $this->tipesp;
+		return $this->tipesp; 		
 	}
-
 	
 	public function getNroent()
 	{
 
-		return $this->nroent;
+		return number_format($this->nroent,2,',','.');
+		
 	}
-
 	
 	public function getMonent()
 	{
 
-		return $this->monent;
+		return number_format($this->monent,2,',','.');
+		
 	}
-
 	
 	public function getMonimp()
 	{
 
-		return $this->monimp;
+		return number_format($this->monimp,2,',','.');
+		
 	}
-
 	
 	public function getNomres()
 	{
 
-		return $this->nomres;
+		return $this->nomres; 		
 	}
-
 	
 	public function getDirres()
 	{
 
-		return $this->dirres;
+		return $this->dirres; 		
 	}
-
 	
 	public function getTelres()
 	{
 
-		return $this->telres;
+		return $this->telres; 		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -275,37 +264,32 @@ abstract class BaseFcesppub extends BaseObject  implements Persistent {
 	public function getStaesp()
 	{
 
-		return $this->staesp;
+		return $this->staesp; 		
 	}
-
 	
 	public function getStadec()
 	{
 
-		return $this->stadec;
+		return $this->stadec; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNrocon($v)
 	{

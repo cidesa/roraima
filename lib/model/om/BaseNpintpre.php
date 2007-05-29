@@ -37,9 +37,8 @@ abstract class BaseNpintpre extends BaseObject  implements Persistent {
 	public function getNumdec()
 	{
 
-		return $this->numdec;
+		return $this->numdec; 		
 	}
-
 	
 	public function getDespre($format = 'Y-m-d')
 	{
@@ -88,16 +87,15 @@ abstract class BaseNpintpre extends BaseObject  implements Persistent {
 	public function getPorpre()
 	{
 
-		return $this->porpre;
+		return number_format($this->porpre,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumdec($v)
 	{

@@ -77,16 +77,14 @@ abstract class BaseFcotring extends BaseObject  implements Persistent {
 	public function getNrocon()
 	{
 
-		return $this->nrocon;
+		return $this->nrocon; 		
 	}
-
 	
 	public function getCodfue()
 	{
 
-		return $this->codfue;
+		return $this->codfue; 		
 	}
-
 	
 	public function getFecreg($format = 'Y-m-d')
 	{
@@ -113,30 +111,27 @@ abstract class BaseFcotring extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getDesing()
 	{
 
-		return $this->desing;
+		return $this->desing; 		
 	}
-
 	
 	public function getMonimp()
 	{
 
-		return $this->monimp;
+		return number_format($this->monimp,2,',','.');
+		
 	}
-
 	
 	public function getFunrec()
 	{
 
-		return $this->funrec;
+		return $this->funrec; 		
 	}
-
 	
 	public function getFecrec($format = 'Y-m-d')
 	{
@@ -163,51 +158,45 @@ abstract class BaseFcotring extends BaseObject  implements Persistent {
 	public function getRifrep()
 	{
 
-		return $this->rifrep;
+		return $this->rifrep; 		
 	}
-
 	
 	public function getStaapu()
 	{
 
-		return $this->staapu;
+		return $this->staapu; 		
 	}
-
 	
 	public function getStadec()
 	{
 
-		return $this->stadec;
+		return $this->stadec; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getMonsal()
 	{
 
-		return $this->monsal;
+		return number_format($this->monsal,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNrocon($v)
 	{

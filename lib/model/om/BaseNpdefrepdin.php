@@ -53,65 +53,57 @@ abstract class BaseNpdefrepdin extends BaseObject  implements Persistent {
 	public function getCodrep()
 	{
 
-		return $this->codrep;
+		return $this->codrep; 		
 	}
-
 	
 	public function getCodcol()
 	{
 
-		return $this->codcol;
+		return $this->codcol; 		
 	}
-
 	
 	public function getNomcol()
 	{
 
-		return $this->nomcol;
+		return $this->nomcol; 		
 	}
-
 	
 	public function getValdes()
 	{
 
-		return $this->valdes;
+		return $this->valdes; 		
 	}
-
 	
 	public function getValhas()
 	{
 
-		return $this->valhas;
+		return $this->valhas; 		
 	}
-
 	
 	public function getOrden()
 	{
 
-		return $this->orden;
+		return $this->orden; 		
 	}
-
 	
 	public function getTipcol()
 	{
 
-		return $this->tipcol;
+		return $this->tipcol; 		
 	}
-
 	
 	public function getLoncol()
 	{
 
-		return $this->loncol;
+		return number_format($this->loncol,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodrep($v)
 	{

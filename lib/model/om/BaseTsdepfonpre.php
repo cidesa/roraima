@@ -29,23 +29,20 @@ abstract class BaseTsdepfonpre extends BaseObject  implements Persistent {
 	public function getNumdep()
 	{
 
-		return $this->numdep;
+		return $this->numdep; 		
 	}
-
 	
 	public function getTipemp()
 	{
 
-		return $this->tipemp;
+		return $this->tipemp; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumdep($v)
 	{

@@ -29,23 +29,20 @@ abstract class BaseFatipcte extends BaseObject  implements Persistent {
 	public function getCodtipcli()
 	{
 
-		return $this->codtipcli;
+		return $this->codtipcli; 		
 	}
-
 	
 	public function getNomtipcte()
 	{
 
-		return $this->nomtipcte;
+		return $this->nomtipcte; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodtipcli($v)
 	{

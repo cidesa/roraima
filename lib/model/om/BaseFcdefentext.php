@@ -45,30 +45,26 @@ abstract class BaseFcdefentext extends BaseObject  implements Persistent {
 	public function getCodentext()
 	{
 
-		return $this->codentext;
+		return $this->codentext; 		
 	}
-
 	
 	public function getNomentext()
 	{
 
-		return $this->nomentext;
+		return $this->nomentext; 		
 	}
-
 	
 	public function getPernatjur()
 	{
 
-		return $this->pernatjur;
+		return $this->pernatjur; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodentext($v)
 	{

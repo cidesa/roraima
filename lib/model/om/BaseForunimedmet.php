@@ -33,30 +33,26 @@ abstract class BaseForunimedmet extends BaseObject  implements Persistent {
 	public function getCodunimet()
 	{
 
-		return $this->codunimet;
+		return $this->codunimet; 		
 	}
-
 	
 	public function getNomextuni()
 	{
 
-		return $this->nomextuni;
+		return $this->nomextuni; 		
 	}
-
 	
 	public function getNomabruni()
 	{
 
-		return $this->nomabruni;
+		return $this->nomabruni; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodunimet($v)
 	{

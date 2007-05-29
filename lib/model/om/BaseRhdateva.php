@@ -45,23 +45,20 @@ abstract class BaseRhdateva extends BaseObject  implements Persistent {
 	public function getCodevdo()
 	{
 
-		return $this->codevdo;
+		return $this->codevdo; 		
 	}
-
 	
 	public function getCodevor()
 	{
 
-		return $this->codevor;
+		return $this->codevor; 		
 	}
-
 	
 	public function getCodsup()
 	{
 
-		return $this->codsup;
+		return $this->codsup; 		
 	}
-
 	
 	public function getFecdes($format = 'Y-m-d')
 	{
@@ -132,9 +129,8 @@ abstract class BaseRhdateva extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodevdo($v)
 	{

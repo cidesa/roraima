@@ -105,9 +105,8 @@ abstract class BaseDftemporal3 extends BaseObject  implements Persistent {
 	public function getCodigo()
 	{
 
-		return $this->codigo;
+		return $this->codigo; 		
 	}
-
 	
 	public function getFecha($format = 'Y-m-d')
 	{
@@ -134,30 +133,26 @@ abstract class BaseDftemporal3 extends BaseObject  implements Persistent {
 	public function getAbr()
 	{
 
-		return $this->abr;
+		return $this->abr; 		
 	}
-
 	
 	public function getVida()
 	{
 
-		return $this->vida;
+		return $this->vida; 		
 	}
-
 	
 	public function getBen()
 	{
 
-		return $this->ben;
+		return $this->ben; 		
 	}
-
 	
 	public function getUsu()
 	{
 
-		return $this->usu;
+		return $this->usu; 		
 	}
-
 	
 	public function getFecharec($format = 'Y-m-d')
 	{
@@ -206,100 +201,86 @@ abstract class BaseDftemporal3 extends BaseObject  implements Persistent {
 	public function getEstad()
 	{
 
-		return $this->estad;
+		return $this->estad; 		
 	}
-
 	
 	public function getRuta()
 	{
 
-		return $this->ruta;
+		return $this->ruta; 		
 	}
-
 	
 	public function getNomtab()
 	{
 
-		return $this->nomtab;
+		return $this->nomtab; 		
 	}
-
 	
 	public function getUnidadori()
 	{
 
-		return $this->unidadori;
+		return $this->unidadori; 		
 	}
-
 	
 	public function getUnidad()
 	{
 
-		return $this->unidad;
+		return $this->unidad; 		
 	}
-
 	
 	public function getAnuate()
 	{
 
-		return $this->anuate;
+		return $this->anuate; 		
 	}
-
 	
 	public function getChkuni1()
 	{
 
-		return $this->chkuni1;
+		return $this->chkuni1; 		
 	}
-
 	
 	public function getChkuni2()
 	{
 
-		return $this->chkuni2;
+		return $this->chkuni2; 		
 	}
-
 	
 	public function getChkuni3()
 	{
 
-		return $this->chkuni3;
+		return $this->chkuni3; 		
 	}
-
 	
 	public function getChkuni4()
 	{
 
-		return $this->chkuni4;
+		return $this->chkuni4; 		
 	}
-
 	
 	public function getChkuni5()
 	{
 
-		return $this->chkuni5;
+		return $this->chkuni5; 		
 	}
-
 	
 	public function getChkuni6()
 	{
 
-		return $this->chkuni6;
+		return $this->chkuni6; 		
 	}
-
 	
 	public function getChkuni7()
 	{
 
-		return $this->chkuni7;
+		return $this->chkuni7; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodigo($v)
 	{

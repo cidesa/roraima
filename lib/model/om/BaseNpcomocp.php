@@ -41,30 +41,27 @@ abstract class BaseNpcomocp extends BaseObject  implements Persistent {
 	public function getPascar()
 	{
 
-		return $this->pascar;
+		return $this->pascar; 		
 	}
-
 	
 	public function getGracar()
 	{
 
-		return $this->gracar;
+		return $this->gracar; 		
 	}
-
 	
 	public function getSuecar()
 	{
 
-		return $this->suecar;
+		return number_format($this->suecar,2,',','.');
+		
 	}
-
 	
 	public function getCodtipcar()
 	{
 
-		return $this->codtipcar;
+		return $this->codtipcar; 		
 	}
-
 	
 	public function getFecdes($format = 'Y-m-d')
 	{
@@ -91,9 +88,8 @@ abstract class BaseNpcomocp extends BaseObject  implements Persistent {
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setPascar($v)
 	{

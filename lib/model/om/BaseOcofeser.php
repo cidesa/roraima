@@ -49,58 +49,54 @@ abstract class BaseOcofeser extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodtippro()
 	{
 
-		return $this->codtippro;
+		return $this->codtippro; 		
 	}
-
 	
 	public function getNivpro()
 	{
 
-		return $this->nivpro;
+		return $this->nivpro; 		
 	}
-
 	
 	public function getExppro()
 	{
 
-		return $this->exppro;
+		return number_format($this->exppro,2,',','.');
+		
 	}
-
 	
 	public function getNumper()
 	{
 
-		return $this->numper;
+		return number_format($this->numper,2,',','.');
+		
 	}
-
 	
 	public function getCanhor()
 	{
 
-		return $this->canhor;
+		return number_format($this->canhor,2,',','.');
+		
 	}
-
 	
 	public function getCanval()
 	{
 
-		return $this->canval;
+		return number_format($this->canval,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

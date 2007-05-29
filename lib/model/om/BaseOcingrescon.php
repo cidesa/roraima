@@ -37,37 +37,32 @@ abstract class BaseOcingrescon extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCeding()
 	{
 
-		return $this->ceding;
+		return $this->ceding; 		
 	}
-
 	
 	public function getNoming()
 	{
 
-		return $this->noming;
+		return $this->noming; 		
 	}
-
 	
 	public function getNrocoling()
 	{
 
-		return $this->nrocoling;
+		return $this->nrocoling; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

@@ -37,9 +37,8 @@ abstract class BaseTsdefemp extends BaseObject  implements Persistent {
 	public function getCodemp()
 	{
 
-		return $this->codemp;
+		return $this->codemp; 		
 	}
-
 	
 	public function getFeccon($format = 'Y-m-d')
 	{
@@ -88,16 +87,14 @@ abstract class BaseTsdefemp extends BaseObject  implements Persistent {
 	public function getTipmon()
 	{
 
-		return $this->tipmon;
+		return $this->tipmon; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodemp($v)
 	{

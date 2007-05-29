@@ -41,44 +41,39 @@ abstract class BaseCimovtra extends BaseObject  implements Persistent {
 	public function getReftra()
 	{
 
-		return $this->reftra;
+		return $this->reftra; 		
 	}
-
 	
 	public function getCodori()
 	{
 
-		return $this->codori;
+		return $this->codori; 		
 	}
-
 	
 	public function getCoddes()
 	{
 
-		return $this->coddes;
+		return $this->coddes; 		
 	}
-
 	
 	public function getMonmov()
 	{
 
-		return $this->monmov;
+		return number_format($this->monmov,2,',','.');
+		
 	}
-
 	
 	public function getStamov()
 	{
 
-		return $this->stamov;
+		return $this->stamov; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setReftra($v)
 	{

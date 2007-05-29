@@ -29,23 +29,21 @@ abstract class BaseForcormun extends BaseObject  implements Persistent {
 	public function getCodest()
 	{
 
-		return $this->codest;
+		return $this->codest; 		
 	}
-
 	
 	public function getCormun()
 	{
 
-		return $this->cormun;
+		return number_format($this->cormun,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodest($v)
 	{

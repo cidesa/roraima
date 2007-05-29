@@ -57,72 +57,65 @@ abstract class BaseFordeforgpub extends BaseObject  implements Persistent {
 	public function getCodorg()
 	{
 
-		return $this->codorg;
+		return $this->codorg; 		
 	}
-
 	
 	public function getNomorg()
 	{
 
-		return $this->nomorg;
+		return $this->nomorg; 		
 	}
-
 	
 	public function getNumgac()
 	{
 
-		return $this->numgac;
+		return $this->numgac; 		
 	}
-
 	
 	public function getUbiorg()
 	{
 
-		return $this->ubiorg;
+		return $this->ubiorg; 		
 	}
-
 	
 	public function getActorg()
 	{
 
-		return $this->actorg;
+		return $this->actorg; 		
 	}
-
 	
 	public function getTiporg()
 	{
 
-		return $this->tiporg;
+		return $this->tiporg; 		
 	}
-
 	
 	public function getMonest()
 	{
 
-		return $this->monest;
+		return number_format($this->monest,2,',','.');
+		
 	}
-
 	
 	public function getPreanu()
 	{
 
-		return $this->preanu;
+		return number_format($this->preanu,2,',','.');
+		
 	}
-
 	
 	public function getCapsoc()
 	{
 
-		return $this->capsoc;
+		return number_format($this->capsoc,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodorg($v)
 	{

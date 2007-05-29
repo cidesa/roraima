@@ -29,23 +29,21 @@ abstract class BaseForcorsubobj extends BaseObject  implements Persistent {
 	public function getCodequ()
 	{
 
-		return $this->codequ;
+		return $this->codequ; 		
 	}
-
 	
 	public function getCorsubobj()
 	{
 
-		return $this->corsubobj;
+		return number_format($this->corsubobj,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodequ($v)
 	{

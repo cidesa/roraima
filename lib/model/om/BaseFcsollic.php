@@ -269,16 +269,14 @@ abstract class BaseFcsollic extends BaseObject  implements Persistent {
 	public function getNumsol()
 	{
 
-		return $this->numsol;
+		return $this->numsol; 		
 	}
-
 	
 	public function getNumlic()
 	{
 
-		return $this->numlic;
+		return $this->numlic; 		
 	}
-
 	
 	public function getFecsol($format = 'Y-m-d')
 	{
@@ -327,65 +325,57 @@ abstract class BaseFcsollic extends BaseObject  implements Persistent {
 	public function getRifcon()
 	{
 
-		return $this->rifcon;
+		return $this->rifcon; 		
 	}
-
 	
 	public function getCatcon()
 	{
 
-		return $this->catcon;
+		return $this->catcon; 		
 	}
-
 	
 	public function getRifrep()
 	{
 
-		return $this->rifrep;
+		return $this->rifrep; 		
 	}
-
 	
 	public function getNomneg()
 	{
 
-		return $this->nomneg;
+		return $this->nomneg; 		
 	}
-
 	
 	public function getTipinm()
 	{
 
-		return $this->tipinm;
+		return $this->tipinm; 		
 	}
-
 	
 	public function getTipest()
 	{
 
-		return $this->tipest;
+		return $this->tipest; 		
 	}
-
 	
 	public function getDirpri()
 	{
 
-		return $this->dirpri;
+		return $this->dirpri; 		
 	}
-
 	
 	public function getCodrut()
 	{
 
-		return $this->codrut;
+		return $this->codrut; 		
 	}
-
 	
 	public function getCapsoc()
 	{
 
-		return $this->capsoc;
+		return number_format($this->capsoc,2,',','.');
+		
 	}
-
 	
 	public function getHorini($format = 'Y-m-d')
 	{
@@ -478,58 +468,56 @@ abstract class BaseFcsollic extends BaseObject  implements Persistent {
 	public function getDiscli()
 	{
 
-		return $this->discli;
+		return number_format($this->discli,2,',','.');
+		
 	}
-
 	
 	public function getDisbar()
 	{
 
-		return $this->disbar;
+		return number_format($this->disbar,2,',','.');
+		
 	}
-
 	
 	public function getDisdis()
 	{
 
-		return $this->disdis;
+		return number_format($this->disdis,2,',','.');
+		
 	}
-
 	
 	public function getDisins()
 	{
 
-		return $this->disins;
+		return number_format($this->disins,2,',','.');
+		
 	}
-
 	
 	public function getDisfun()
 	{
 
-		return $this->disfun;
+		return number_format($this->disfun,2,',','.');
+		
 	}
-
 	
 	public function getDisest()
 	{
 
-		return $this->disest;
+		return number_format($this->disest,2,',','.');
+		
 	}
-
 	
 	public function getFunres()
 	{
 
-		return $this->funres;
+		return $this->funres; 		
 	}
-
 	
 	public function getFunrel()
 	{
 
-		return $this->funrel;
+		return $this->funrel; 		
 	}
-
 	
 	public function getFecres($format = 'Y-m-d')
 	{
@@ -600,156 +588,141 @@ abstract class BaseFcsollic extends BaseObject  implements Persistent {
 	public function getTomo()
 	{
 
-		return $this->tomo;
+		return $this->tomo; 		
 	}
-
 	
 	public function getFolio()
 	{
 
-		return $this->folio;
+		return $this->folio; 		
 	}
-
 	
 	public function getNumero()
 	{
 
-		return $this->numero;
+		return $this->numero; 		
 	}
-
 	
 	public function getTaslic()
 	{
 
-		return $this->taslic;
+		return number_format($this->taslic,2,',','.');
+		
 	}
-
 	
 	public function getDeuanl()
 	{
 
-		return $this->deuanl;
+		return number_format($this->deuanl,2,',','.');
+		
 	}
-
 	
 	public function getDeuacl()
 	{
 
-		return $this->deuacl;
+		return number_format($this->deuacl,2,',','.');
+		
 	}
-
 	
 	public function getImplic()
 	{
 
-		return $this->implic;
+		return number_format($this->implic,2,',','.');
+		
 	}
-
 	
 	public function getDeuanp()
 	{
 
-		return $this->deuanp;
+		return number_format($this->deuanp,2,',','.');
+		
 	}
-
 	
 	public function getDeuacp()
 	{
 
-		return $this->deuacp;
+		return number_format($this->deuacp,2,',','.');
+		
 	}
-
 	
 	public function getStasol()
 	{
 
-		return $this->stasol;
+		return $this->stasol; 		
 	}
-
 	
 	public function getStalic()
 	{
 
-		return $this->stalic;
+		return $this->stalic; 		
 	}
-
 	
 	public function getStadec()
 	{
 
-		return $this->stadec;
+		return $this->stadec; 		
 	}
-
 	
 	public function getStaliq()
 	{
 
-		return $this->staliq;
+		return $this->staliq; 		
 	}
-
 	
 	public function getNomcon()
 	{
 
-		return $this->nomcon;
+		return $this->nomcon; 		
 	}
-
 	
 	public function getDircon()
 	{
 
-		return $this->dircon;
+		return $this->dircon; 		
 	}
-
 	
 	public function getTipo()
 	{
 
-		return $this->tipo;
+		return $this->tipo; 		
 	}
-
 	
 	public function getEstser()
 	{
 
-		return $this->estser;
+		return $this->estser; 		
 	}
-
 	
 	public function getTelneg()
 	{
 
-		return $this->telneg;
+		return $this->telneg; 		
 	}
-
 	
 	public function getClacon()
 	{
 
-		return $this->clacon;
+		return $this->clacon; 		
 	}
-
 	
 	public function getCapact()
 	{
 
-		return $this->capact;
+		return number_format($this->capact,2,',','.');
+		
 	}
-
 	
 	public function getNumsol1()
 	{
 
-		return $this->numsol1;
+		return $this->numsol1; 		
 	}
-
 	
 	public function getNumlic1()
 	{
 
-		return $this->numlic1;
+		return $this->numlic1; 		
 	}
-
 	
 	public function getHorainie($format = 'Y-m-d')
 	{
@@ -798,79 +771,73 @@ abstract class BaseFcsollic extends BaseObject  implements Persistent {
 	public function getUnitri()
 	{
 
-		return $this->unitri;
+		return number_format($this->unitri,2,',','.');
+		
 	}
-
 	
 	public function getTipsol()
 	{
 
-		return $this->tipsol;
+		return $this->tipsol; 		
 	}
-
 	
 	public function getUnitrialc()
 	{
 
-		return $this->unitrialc;
+		return number_format($this->unitrialc,2,',','.');
+		
 	}
-
 	
 	public function getUnitriotr()
 	{
 
-		return $this->unitriotr;
+		return number_format($this->unitriotr,2,',','.');
+		
 	}
-
 	
 	public function getLicant()
 	{
 
-		return $this->licant;
+		return $this->licant; 		
 	}
-
 	
 	public function getDueant()
 	{
 
-		return $this->dueant;
+		return $this->dueant; 		
 	}
-
 	
 	public function getDirant()
 	{
 
-		return $this->dirant;
+		return $this->dirant; 		
 	}
-
 	
 	public function getImpext()
 	{
 
-		return $this->impext;
+		return number_format($this->impext,2,',','.');
+		
 	}
-
 	
 	public function getImptotal()
 	{
 
-		return $this->imptotal;
+		return number_format($this->imptotal,2,',','.');
+		
 	}
-
 	
 	public function getCodact()
 	{
 
-		return $this->codact;
+		return $this->codact; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNumsol($v)
 	{

@@ -125,30 +125,26 @@ abstract class BaseNpmovrac extends BaseObject  implements Persistent {
 	public function getNronom()
 	{
 
-		return $this->nronom;
+		return $this->nronom; 		
 	}
-
 	
 	public function getPerrac()
 	{
 
-		return $this->perrac;
+		return $this->perrac; 		
 	}
-
 	
 	public function getAnorac()
 	{
 
-		return $this->anorac;
+		return $this->anorac; 		
 	}
-
 	
 	public function getTipmov()
 	{
 
-		return $this->tipmov;
+		return $this->tipmov; 		
 	}
-
 	
 	public function getFecmov($format = 'Y-m-d')
 	{
@@ -175,156 +171,138 @@ abstract class BaseNpmovrac extends BaseObject  implements Persistent {
 	public function getStatus()
 	{
 
-		return $this->status;
+		return $this->status; 		
 	}
-
 	
 	public function getCodcarapr()
 	{
 
-		return $this->codcarapr;
+		return $this->codcarapr; 		
 	}
-
 	
 	public function getNomcarapr()
 	{
 
-		return $this->nomcarapr;
+		return $this->nomcarapr; 		
 	}
-
 	
 	public function getSuecarapr()
 	{
 
-		return $this->suecarapr;
+		return number_format($this->suecarapr,2,',','.');
+		
 	}
-
 	
 	public function getComcarapr()
 	{
 
-		return $this->comcarapr;
+		return number_format($this->comcarapr,2,',','.');
+		
 	}
-
 	
 	public function getCodocpapr()
 	{
 
-		return $this->codocpapr;
+		return $this->codocpapr; 		
 	}
-
 	
 	public function getPasocpapr()
 	{
 
-		return $this->pasocpapr;
+		return $this->pasocpapr; 		
 	}
-
 	
 	public function getCodempapr()
 	{
 
-		return $this->codempapr;
+		return $this->codempapr; 		
 	}
-
 	
 	public function getNomempapr()
 	{
 
-		return $this->nomempapr;
+		return $this->nomempapr; 		
 	}
-
 	
 	public function getCodcatapr()
 	{
 
-		return $this->codcatapr;
+		return $this->codcatapr; 		
 	}
-
 	
 	public function getEstorgapr()
 	{
 
-		return $this->estorgapr;
+		return $this->estorgapr; 		
 	}
-
 	
 	public function getCodcarpro()
 	{
 
-		return $this->codcarpro;
+		return $this->codcarpro; 		
 	}
-
 	
 	public function getNomcarpro()
 	{
 
-		return $this->nomcarpro;
+		return $this->nomcarpro; 		
 	}
-
 	
 	public function getSuecarpro()
 	{
 
-		return $this->suecarpro;
+		return number_format($this->suecarpro,2,',','.');
+		
 	}
-
 	
 	public function getComcarpro()
 	{
 
-		return $this->comcarpro;
+		return number_format($this->comcarpro,2,',','.');
+		
 	}
-
 	
 	public function getCodocppro()
 	{
 
-		return $this->codocppro;
+		return $this->codocppro; 		
 	}
-
 	
 	public function getPasocppro()
 	{
 
-		return $this->pasocppro;
+		return $this->pasocppro; 		
 	}
-
 	
 	public function getCodemppro()
 	{
 
-		return $this->codemppro;
+		return $this->codemppro; 		
 	}
-
 	
 	public function getNomemppro()
 	{
 
-		return $this->nomemppro;
+		return $this->nomemppro; 		
 	}
-
 	
 	public function getCodcatpro()
 	{
 
-		return $this->codcatpro;
+		return $this->codcatpro; 		
 	}
-
 	
 	public function getEstorgpro()
 	{
 
-		return $this->estorgpro;
+		return $this->estorgpro; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setNronom($v)
 	{

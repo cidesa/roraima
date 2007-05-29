@@ -49,37 +49,33 @@ abstract class BaseFadeflot extends BaseObject  implements Persistent {
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getNumlot()
 	{
 
-		return $this->numlot;
+		return $this->numlot; 		
 	}
-
 	
 	public function getDeslot()
 	{
 
-		return $this->deslot;
+		return $this->deslot; 		
 	}
-
 	
 	public function getCodalm()
 	{
 
-		return $this->codalm;
+		return $this->codalm; 		
 	}
-
 	
 	public function getCanlot()
 	{
 
-		return $this->canlot;
+		return number_format($this->canlot,2,',','.');
+		
 	}
-
 	
 	public function getFecven($format = 'Y-m-d')
 	{
@@ -106,16 +102,15 @@ abstract class BaseFadeflot extends BaseObject  implements Persistent {
 	public function getCoslot()
 	{
 
-		return $this->coslot;
+		return number_format($this->coslot,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodart($v)
 	{

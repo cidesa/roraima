@@ -33,30 +33,26 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getCodasi()
 	{
 
-		return $this->codasi;
+		return $this->codasi; 		
 	}
-
 	
 	public function getCodcpt()
 	{
 
-		return $this->codcpt;
+		return $this->codcpt; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcon($v)
 	{

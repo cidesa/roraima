@@ -29,23 +29,21 @@ abstract class BaseFordisingnor extends BaseObject  implements Persistent {
 	public function getCodparing()
 	{
 
-		return $this->codparing;
+		return $this->codparing; 		
 	}
-
 	
 	public function getIngtot()
 	{
 
-		return $this->ingtot;
+		return number_format($this->ingtot,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodparing($v)
 	{

@@ -81,30 +81,26 @@ abstract class BaseNpasicon extends BaseObject  implements Persistent {
 	public function getCodcat()
 	{
 
-		return $this->codcat;
+		return $this->codcat; 		
 	}
-
 	
 	public function getCodcar()
 	{
 
-		return $this->codcar;
+		return $this->codcar; 		
 	}
-
 	
 	public function getCodcon()
 	{
 
-		return $this->codcon;
+		return $this->codcon; 		
 	}
-
 	
 	public function getNomsus()
 	{
 
-		return $this->nomsus;
+		return $this->nomsus; 		
 	}
-
 	
 	public function getFecini($format = 'Y-m-d')
 	{
@@ -153,72 +149,66 @@ abstract class BaseNpasicon extends BaseObject  implements Persistent {
 	public function getSalcon()
 	{
 
-		return $this->salcon;
+		return number_format($this->salcon,2,',','.');
+		
 	}
-
 	
 	public function getMonpre()
 	{
 
-		return $this->monpre;
+		return number_format($this->monpre,2,',','.');
+		
 	}
-
 	
 	public function getCanmon()
 	{
 
-		return $this->canmon;
+		return $this->canmon; 		
 	}
-
 	
 	public function getCalcon()
 	{
 
-		return $this->calcon;
+		return $this->calcon; 		
 	}
-
 	
 	public function getActcon()
 	{
 
-		return $this->actcon;
+		return $this->actcon; 		
 	}
-
 	
 	public function getFrecon()
 	{
 
-		return $this->frecon;
+		return $this->frecon; 		
 	}
-
 	
 	public function getCodpre()
 	{
 
-		return $this->codpre;
+		return $this->codpre; 		
 	}
-
 	
 	public function getMonmen()
 	{
 
-		return $this->monmen;
+		return number_format($this->monmen,2,',','.');
+		
 	}
-
 	
 	public function getFrecue()
 	{
 
-		return $this->frecue;
+		return number_format($this->frecue,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodcat($v)
 	{

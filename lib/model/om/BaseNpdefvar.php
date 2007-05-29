@@ -53,65 +53,61 @@ abstract class BaseNpdefvar extends BaseObject  implements Persistent {
 	public function getCodvar()
 	{
 
-		return $this->codvar;
+		return $this->codvar; 		
 	}
-
 	
 	public function getDesvar()
 	{
 
-		return $this->desvar;
+		return $this->desvar; 		
 	}
-
 	
 	public function getCodnom()
 	{
 
-		return $this->codnom;
+		return $this->codnom; 		
 	}
-
 	
 	public function getValor1()
 	{
 
-		return $this->valor1;
+		return number_format($this->valor1,2,',','.');
+		
 	}
-
 	
 	public function getValor2()
 	{
 
-		return $this->valor2;
+		return number_format($this->valor2,2,',','.');
+		
 	}
-
 	
 	public function getValor3()
 	{
 
-		return $this->valor3;
+		return number_format($this->valor3,2,',','.');
+		
 	}
-
 	
 	public function getValor4()
 	{
 
-		return $this->valor4;
+		return number_format($this->valor4,2,',','.');
+		
 	}
-
 	
 	public function getValor5()
 	{
 
-		return $this->valor5;
+		return number_format($this->valor5,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodvar($v)
 	{

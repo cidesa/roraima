@@ -49,58 +49,54 @@ abstract class BaseInventario extends BaseObject  implements Persistent {
 	public function getCodart()
 	{
 
-		return $this->codart;
+		return $this->codart; 		
 	}
-
 	
 	public function getDescri()
 	{
 
-		return $this->descri;
+		return $this->descri; 		
 	}
-
 	
 	public function getCospro()
 	{
 
-		return $this->cospro;
+		return number_format($this->cospro,2,',','.');
+		
 	}
-
 	
 	public function getUnimed()
 	{
 
-		return $this->unimed;
+		return $this->unimed; 		
 	}
-
 	
 	public function getConteo1()
 	{
 
-		return $this->conteo1;
+		return number_format($this->conteo1,2,',','.');
+		
 	}
-
 	
 	public function getConteo2()
 	{
 
-		return $this->conteo2;
+		return number_format($this->conteo2,2,',','.');
+		
 	}
-
 	
 	public function getDife()
 	{
 
-		return $this->dife;
+		return number_format($this->dife,2,',','.');
+		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setCodart($v)
 	{

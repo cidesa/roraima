@@ -49,9 +49,8 @@ abstract class BaseCadevdph extends BaseObject  implements Persistent {
 	public function getDevdph()
 	{
 
-		return $this->devdph;
+		return $this->devdph; 		
 	}
-
 	
 	public function getFecdev($format = 'Y-m-d')
 	{
@@ -78,44 +77,39 @@ abstract class BaseCadevdph extends BaseObject  implements Persistent {
 	public function getDphart()
 	{
 
-		return $this->dphart;
+		return $this->dphart; 		
 	}
-
 	
 	public function getDesdev()
 	{
 
-		return $this->desdev;
+		return $this->desdev; 		
 	}
-
 	
 	public function getMondev()
 	{
 
-		return $this->mondev;
+		return number_format($this->mondev,2,',','.');
+		
 	}
-
 	
 	public function getStadev()
 	{
 
-		return $this->stadev;
+		return $this->stadev; 		
 	}
-
 	
 	public function getNumcom()
 	{
 
-		return $this->numcom;
+		return $this->numcom; 		
 	}
-
 	
 	public function getId()
 	{
 
-		return $this->id;
+		return $this->id; 		
 	}
-
 	
 	public function setDevdph($v)
 	{
