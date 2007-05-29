@@ -15,7 +15,7 @@ class almreqActions extends autoalmreqActions
   {
   	$this->careqart = $this->getCareqartOrCreate();
     $this->configGrid();
-  	$this->desubi = BnubibiePeer::getDesUbi($this->careqart->getCodcatreq());
+    $this->desubi = BnubibiePeer::getDesUbi($this->careqart->getCodcatreq());
     $this->pagerArtreq = CaartreqPeer::getPagerByReqart($this->careqart->getReqart());
 
 
@@ -54,6 +54,7 @@ class almreqActions extends autoalmreqActions
   	if (isset($careqart['reqart']))
   	{
   		$this->careqart->setReqart($careqart['reqart']);
+  		$this->careqart->setStareq('A');
   	}
   	if (isset($careqart['fecreq']))
   	{
