@@ -81,6 +81,7 @@ class almdespActions extends autoalmdespActions
     $cadphart = $this->getRequestParameter('cadphart');
     $this->setVars();   
     $this->configGridConsulta();
+    $this->executeGrid();
 
     if (isset($cadphart['dphart']))
     {
@@ -213,12 +214,28 @@ class almdespActions extends autoalmdespActions
   
   protected function saveCadphart($cadphart)
   {
-  	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
+  	$grid2=Herramientas::CargarDatosGrid($this,$this->obj);
 
-	  	Articulos::salvarAlmdesp($cadphart,$grid);
+	  	Articulos::salvarAlmdesp($cadphart,$grid2);
     //$cadphart->save();
 
   }
+  
+ protected function getCadphartOrCreate($id = 'id')
+  {
+    if (!$this->getRequestParameter($id))
+    {
+      $cadphart = new Cadphart();
+    }
+    else
+    {
+      $cadphart = CadphartPeer::retrieveByPk($this->getRequestParameter($id));
+
+      $this->forward404Unless($cadphart);
+    }
+
+    return $cadphart;
+  }  
   
     public function configGrid($codigo)
 	{
@@ -372,13 +389,13 @@ class almdespActions extends autoalmdespActions
 
    public function configGridConsulta()
 	 {
-	//////////////////////
-	//GRID
-	$c = new Criteria();
-	$c->add(CaartdphPeer::DPHART,$this->cadphart->getReqart());
-	$per = CaartdphPeer::doSelect($c);
+       //////////////////////
+       //GRID
+	   $c = new Criteria();
+	   $c->add(CaartdphPeer::DPHART,$this->cadphart->getReqart());
+	   $per = CaartdphPeer::doSelect($c);
 				
-	// Se crea el objeto principal de la clase OpcionesGrid
+        // Se crea el objeto principal de la clase OpcionesGrid
 	    $opciones = new OpcionesGrid();
 	    // Se configuran las opciones globales del Grid 
         $opciones->setEliminar(false);
