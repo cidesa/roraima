@@ -38,15 +38,13 @@ generator:
       codtiprec:    { name : Grupo}   
       destiprec:    { name : Descripción}   
       nacpro:       { name : Nacionalidad}
-      tipo:         { name : Actividad Principal}   
-         
+      tipo:         { name : Actividad Principal}            
       codctasec:    { name : Cta. Sociable Asoc}
       desctacodctasec:    { name : Descripción}          
       codordadi:    { name : Cta. de Orden Asoc}      
       desctacodordadi:    { name : Descripción}          
       codperconadi:    { name : Cta. PreContra Asoc}            
-      desctacodperconadi:    { name : Descripción}            
-      
+      desctacodperconadi:    { name : Descripción}                  
       codordmercon:    { name : Cta. de Orden}      
       desctacodordmercon:    { name : Descripción}            
       codpermercon:    { name : Cta. PreContra}            
@@ -55,7 +53,6 @@ generator:
       desctacodordcontra:    { name : Descripción}                        
       codpercontra:    { name : Cta. PreContra}            
       desctacodpercontra:    { name : Descripción}                        
-
 
     list:
       title:          Registro de Proveedor

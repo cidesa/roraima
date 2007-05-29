@@ -46,75 +46,80 @@
 <br>
 <?php tabMainJS("tp1","tabPane1", "tabPage1", 'Datos Personales');?>
 
-<div class="form-row"><?php echo label_for('caprovee[rifpro]', __($labels['caprovee{rifpro}']), 'class="required" ') ?>
-<div
-	class="content<?php if ($sf_request->hasError('caprovee{rifpro}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{rifpro}')): ?> <?php echo form_error('caprovee{rifpro}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getRifpro', array (
-  'size' => 20,
-  'control_name' => 'caprovee[rifpro]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('caprovee[nitpro]', __($labels['caprovee{nitpro}']), 'class="required" ') ?>
-<div
-	class="content<?php if ($sf_request->hasError('caprovee{nitpro}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('caprovee{nitpro}')): ?> <?php echo form_error('caprovee{nitpro}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getNitpro', array (
-  'size' => 20,
-  'control_name' => 'caprovee[nitpro]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
 <div class="form-row">
-<?php echo label_for('caprovee[nacpro]', __($labels['caprovee{nacpro}']), 'class="required" ') ?>
-<?  if ($caprovee->getNacpro()=='N'){
-		echo radiobutton_tag('checkbox1','N', true) .'&nbsp;&nbsp;'. "Nacional"."<br>";
-		echo radiobutton_tag('checkbox1','P', false) .'&nbsp;&nbsp;'. "Internacional"."<br>";
+<table width="100%" border="0" align="left">
+  <tr align="left">
+    <th colspan="2" align="left">   
+	<?php echo label_for('caprovee[rifpro]', __($labels['caprovee{rifpro}']), 'class="required" ') ?>
+	<div
+		class="content<?php if ($sf_request->hasError('caprovee{rifpro}')): ?> form-error<?php endif; ?>">
+	<?php if ($sf_request->hasError('caprovee{rifpro}')): ?> <?php echo form_error('caprovee{rifpro}', array('class' => 'form-error-msg')) ?>
+	<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getRifpro', array (
+	  'size' => 20,
+	  'control_name' => 'caprovee[rifpro]',
+	)); echo $value ? $value : '&nbsp;' ?></div>	</th>
+  </tr>
+  <tr>
+    <th colspan="2" align="left">	<?php echo label_for('caprovee[nitpro]', __($labels['caprovee{nitpro}']), 'class="required" ') ?>
+	<div
+		class="content<?php if ($sf_request->hasError('caprovee{nitpro}')): ?> form-error<?php endif; ?>">
+	<?php if ($sf_request->hasError('caprovee{nitpro}')): ?> <?php echo form_error('caprovee{nitpro}', array('class' => 'form-error-msg')) ?>
+	<?php endif; ?> <?php $value = object_input_tag($caprovee, 'getNitpro', array (
+	  'size' => 20,
+	  'control_name' => 'caprovee[nitpro]',
+	)); echo $value ? $value : '&nbsp;' ?></div></th>
+  </tr>
+  <tr>
+    <td ><fieldset id="sf_fieldset_none" class="">
+		<legend><strong><?php echo  __('Nacionalidad :') ?></strong></legend>
+		<div class="form-row">
+		<?  if ($caprovee->getNacpro()=='N'){
+			
+				echo radiobutton_tag('caprovee[nacpro]','N', true) .'&nbsp;&nbsp;'. "Nacional"."<br>";
+				echo radiobutton_tag('caprovee[nacpro]','P', false) .'&nbsp;&nbsp;'. "Internacional"."<br>";
+				
+			}elseif ($caprovee->getNacpro()=='V'){
+				echo radiobutton_tag('caprovee[nacpro]','N', false) .'&nbsp;&nbsp;'. "Nacional".'&nbsp;&nbsp;'."<br>";
+				echo radiobutton_tag('caprovee[nacpro]','P', true) .'&nbsp;&nbsp;'. "Internacional"."<br>";
+			} 
+		?>
+ </div> </fieldset></td>
+    <td ><fieldset id="sf_fieldset_none" class="">
+		<legend><strong><?php echo  __('Actividad Profesional :') ?></strong></legend>
+		<div class="form-row">
+		<?  if ($caprovee->getTipo()=='P'){
+			echo radiobutton_tag('caprovee[tipo]','P', true) .'&nbsp;&nbsp;'. "Proveedor"."<br>";
+			echo radiobutton_tag('caprovee[tipo]','C', false) .'&nbsp;&nbsp;'. "Contratista"."<br>";
 		
-	}elseif ($caprovee->getNacpro()=='V'){
-		echo radiobutton_tag('checkbox1','N', false) .'&nbsp;&nbsp;'. "Nacional"."<br>";
-		echo radiobutton_tag('checkbox1','P', true) .'&nbsp;&nbsp;'. "Internacional"."<br>";
-	} 
-?>
-</div>
-
-<div class="form-row">
-<?php echo label_for('caprovee[tipo]', __($labels['caprovee{tipo}']), 'class="required" ') ?>
-<?  if ($caprovee->getTipo()=='P'){
-	echo radiobutton_tag('checkbox2','P', true) .'&nbsp;&nbsp;'. "Proveedor"."<br>";
-	echo radiobutton_tag('checkbox2','C', false) .'&nbsp;&nbsp;'. "Contratista"."<br>";
-
-}elseif ($caprovee->getTipo()=='C'){
-	echo radiobutton_tag('checkbox2','P', false) .'&nbsp;&nbsp;'. "Proveedor"."<br>";
-	echo radiobutton_tag('checkbox2','C', true) .'&nbsp;&nbsp;'. "Contratista"."<br>";
-}
-?>
-</div>
-
-
-<div class="form-row"><?php echo label_for('caprovee[dirpro]', __($labels['caprovee{dirpro}']), 'class="required" ') ?>
+		}elseif ($caprovee->getTipo()=='C'){
+			echo radiobutton_tag('caprovee[tipo]','P', false) .'&nbsp;&nbsp;'. "Proveedor"."<br>";
+			echo radiobutton_tag('caprovee[tipo]','C', true) .'&nbsp;&nbsp;'. "Contratista"."<br>";
+		}
+		?>
+  </div> </fieldset></td>
+  </tr>
+  <tr>
+    <th colspan="2" align="left"><?php echo label_for('caprovee[dirpro]', __($labels['caprovee{dirpro}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('caprovee{dirpro}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caprovee{dirpro}')): ?> <?php echo form_error('caprovee{dirpro}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_tag($caprovee, 'getDirpro', array (
   'size' => 80,
   'control_name' => 'caprovee[dirpro]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('caprovee[telpro]', __($labels['caprovee{telpro}']), 'class="required" ') ?>
+)); echo $value ? $value : '&nbsp;' ?></div></th>
+  </tr>
+  <tr>
+    <th colspan="2" align="left"><?php echo label_for('caprovee[telpro]', __($labels['caprovee{telpro}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('caprovee{telpro}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caprovee{telpro}')): ?> <?php echo form_error('caprovee{telpro}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_tag($caprovee, 'getTelpro', array (
   'size' => 30,
   'control_name' => 'caprovee[telpro]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('caprovee[faxpro]', __($labels['caprovee{faxpro}']), 'class="required"') ?>
+)); echo $value ? $value : '&nbsp;' ?></div></th>
+  </tr>
+  <tr>
+    <th colspan="2" align="left">  <?php echo label_for('caprovee[faxpro]', __($labels['caprovee{faxpro}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('caprovee{faxpro}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caprovee{faxpro}')): ?>
     <?php echo form_error('caprovee{faxpro}', array('class' => 'form-error-msg')) ?>
@@ -124,30 +129,30 @@
   'size' => 30,
   'control_name' => 'caprovee[faxpro]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row"><?php echo label_for('caprovee[nrocei]', __($labels['caprovee{nrocei}']), 'class="required" ') ?>
+    </div></th>
+  </tr>
+  <tr>
+    <th colspan="2" align="left"><?php echo label_for('caprovee[nrocei]', __($labels['caprovee{nrocei}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('caprovee{nrocei}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caprovee{nrocei}')): ?> <?php echo form_error('caprovee{nrocei}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_tag($caprovee, 'getNrocei', array (
   'size' => 30,
   'control_name' => 'caprovee[nrocei]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('caprovee[email]', __($labels['caprovee{email}']), 'class="required" ') ?>
+)); echo $value ? $value : '&nbsp;' ?></div></th>
+  </tr>
+  <tr>
+    <th colspan="2" align="left"><?php echo label_for('caprovee[email]', __($labels['caprovee{email}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('caprovee{email}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caprovee{email}')): ?> <?php echo form_error('caprovee{email}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_tag($caprovee, 'getEmail', array (
   'size' => 20,
   'control_name' => 'caprovee[email]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-</div>
-
-<div class="form-row"><?php echo label_for('caprovee[codram]', __($labels['caprovee{codram}']), 'class="required" ') ?>
+)); echo $value ? $value : '&nbsp;' ?></div></th>
+  </tr>
+  <tr>
+    <th><?php echo label_for('caprovee[codram]', __($labels['caprovee{codram}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('caprovee{codram}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caprovee{codram}')): ?> <?php echo form_error('caprovee{codram}', array('class' => 'form-error-msg')) ?>
@@ -157,22 +162,36 @@
   'control_name' => 'caprovee[codram]',
 )); echo $value ? $value : '&nbsp;' ?>
 
-<?php echo button_to('...','#') ?>
+<?php echo button_to_popup('...','generales/catalogo?clase=Caramart&frame=sf_admin_edit_form&obj1=caprovee_codram&obj2=caprovee_nomram')?>
 
-</div>
-</div>
+</div></th>
 
-<div class="form-row"><?php echo label_for('caprovee[limcre]', __($labels['caprovee{limcre}']), 'class="required" ') ?>
+<th>
+<?php $value = object_input_tag($caprovee, 'getnomram', array (
+  'size' => 60,
+  'control_name' => 'caprovee[nomram]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+</th>
+
+  </tr>
+  <tr>
+    <th colspan="2" align="left">
+    <div class="form-row"><?php echo label_for('caprovee[limcre]', __($labels['caprovee{limcre}']), 'class="required" ') ?>
 <div
 	class="content<?php if ($sf_request->hasError('caprovee{limcre}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('caprovee{limcre}')): ?> <?php echo form_error('caprovee{limcre}', array('class' => 'form-error-msg')) ?>
 <?php endif; ?> <?php $value = object_input_tag($caprovee, 'getLimcre', array (
   'size' => 7,
   'control_name' => 'caprovee[limcre]',
-)); echo $value ? $value : '&nbsp;' ?></div>
+)); echo $value ? $value : '&nbsp;' ?>
 </div>
-
-<div class="form-row">
+</div>
+    
+    </th>
+  </tr>
+  <tr>
+    <th colspan="2" align="left"><div class="form-row">
   <?php echo label_for('caprovee[codcta]', __($labels['caprovee{codcta}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('caprovee{codcta}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caprovee{codcta}')): ?>
@@ -184,11 +203,20 @@
   'control_name' => 'caprovee[codcta]',
 )); echo $value ? $value : '&nbsp;' ?>
 
-<?php echo button_to('...','#') ?>
+<?php echo button_to_popup('...','generales/catalogo?clase=Contabb&frame=sf_admin_edit_form&obj1=caprovee_codcta&obj2=caprovee_descta')?>
 
-
+  <?php $value = object_input_tag($caprovee, 'getDescta', array (
+  'disabled' => true,
+  'size' => 80,
+  'control_name' => 'caprovee[descta]',
+)); echo $value ? $value : '&nbsp;' ?>    
+    
     </div>
-</div>
+</div></th>
+  </tr>
+
+
+</table>
 
 <div class="form-row">
   <?php echo label_for('caprovee[descta]', __($labels['caprovee{descta}']), 'class="required"') ?>
