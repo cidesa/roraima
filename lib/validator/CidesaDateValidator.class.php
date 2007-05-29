@@ -177,6 +177,7 @@ class sfDateValidator extends sfValidator
     parent::initialize($context, $parameters);
 
     // Set defaults
+    $this->setParameter('unique_error', 'Uniqueness error');
     $this->getParameterHolder()->set('date_error', 'Invalid date');
     $this->getParameterHolder()->set('compare_error', 'Compare failed');
     $this->getParameterHolder()->set('columnmin', null);
