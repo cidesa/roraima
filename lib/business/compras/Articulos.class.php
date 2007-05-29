@@ -138,7 +138,7 @@ class Articulos
 		if (Herramientas::getVerCorrelativo('correq','cacorrel',$r))
 		{
 			//Se graba la Requisición
-			if (($requisicion->getReqart()=='########') or (trim($requisicion->getReqart())==''))
+			if ($requisicion->getReqart()=='########')
 			{
 				$requisicion->setReqart(str_pad($r, 8, '0', STR_PAD_LEFT));
 			}
@@ -147,9 +147,7 @@ class Articulos
 			self::Grabar_DetallesRequisicion($requisicion,$grid);
 			Herramientas::getSalvarCorrelativo('correq','cacorrel','Requisición',$r,$msg);
 		}
-
 	}
-
 	/**
 	 * Función para registrar los artículos en los diferentes Alamacenes
 	 *
