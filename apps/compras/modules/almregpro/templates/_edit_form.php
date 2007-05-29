@@ -214,8 +214,6 @@
     </div>
 </div></th>
   </tr>
-
-
 </table>
 
 <div class="form-row">
