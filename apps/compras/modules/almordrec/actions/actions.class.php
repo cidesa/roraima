@@ -68,7 +68,7 @@ class almordrecActions extends autoalmordrecActions
 	$c = new Criteria();
 	$c->add(CaartordPeer::ORDCOM,$codigo);
 	$per = CaartordPeer::doSelect($c);
-				
+			
 	$opciones = new OpcionesGrid();
 	// Se configuran las opciones globales del Grid 
 	$opciones->setEliminar(false);
@@ -87,16 +87,15 @@ class almordrecActions extends autoalmordrecActions
 	
 	$col2 = new Columna('Descripción'); 
 	$col2->setTipo(Columna::TEXTO);
-	$col1->setEsGrabable(false);
 	$col2->setNombreCampo('desart');	
 	$col2->setAlineacionObjeto(Columna::CENTRO);
 	$col2->setAlineacionContenido(Columna::CENTRO);		
-	$col2->setHTML('type="text" size="60" disabled=true');
+	$col2->setHTML('type="text" size="40" disabled=true');
 	
 	$col3 = new Columna('Cant. Rec.');
     $col3->setTipo(Columna::MONTO);
     $col3->setEsGrabable(true);
-    $col3->setNombreCampo('canrec');
+    $col3->setNombreCampo('canrecgri');
     $col3->setAlineacionContenido(Columna::IZQUIERDA);
     $col3->setAlineacionObjeto(Columna::IZQUIERDA);
     $col3->setEsNumerico(true);
@@ -104,15 +103,75 @@ class almordrecActions extends autoalmordrecActions
     
     $col4 = clone $col3;
     $col4->setTitulo('Cant. Falta.');
-    $col4->setNombreCampo('canord');
+    $col4->setNombreCampo('');
     
-        
-    	
+    $col5 = clone $col3;
+    $col5->setTitulo('Cant. Dev.');
+    $col5->setNombreCampo(''); 
+
+    $col6 = clone $col3;
+    $col6->setTitulo('Costo');
+    $col3->setEsNumerico(false);
+    $col6->setNombreCampo('preart'); 
+    
+    $col7 = clone $col3;
+    $col7->setTitulo('Descuento');
+    $col7->setNombreCampo('');
+    
+    $col8 = clone $col3;
+    $col8->setTitulo('Recargo');
+    $col8->setNombreCampo('');
+
+    $col9 = clone $col3;
+    $col9->setTitulo('Total');
+    $col9->setNombreCampo('montot');
+    
+    $col10 = new Columna('Cod. Unidad');
+	$col10->setTipo(Columna::TEXTO);
+	$col10->setEsGrabable(true);
+	$col10->setNombreCampo('codcat');
+	$col10->setAlineacionObjeto(Columna::CENTRO);
+	$col10->setAlineacionContenido(Columna::CENTRO);	
+	$col10->setHTML('type="text" size="15" disabled=true');
+	
+    $col11 = new Columna('Cod. Mot. Faltante');
+	$col11->setTipo(Columna::TEXTO);
+	$col11->setEsGrabable(true);
+	$col11->setNombreCampo('');
+	$col11->setAlineacionObjeto(Columna::CENTRO);
+	$col11->setAlineacionContenido(Columna::CENTRO);	
+	$col11->setHTML('type="text" size="5" disabled=true');
+	
+    $col12 = new Columna('Motivo Faltante');
+	$col12->setTipo(Columna::TEXTO);
+	$col12->setEsGrabable(true);
+	$col12->setNombreCampo('');
+	$col12->setAlineacionObjeto(Columna::CENTRO);
+	$col12->setAlineacionContenido(Columna::CENTRO);	
+	$col12->setHTML('type="text" size="20" disabled=true');
+	
+	$col13 = new Columna('Fecha Estimada');
+	$col13->setTipo(Columna::TEXTO);
+	$col13->setEsGrabable(true);
+	$col13->setNombreCampo('');
+	$col13->setAlineacionObjeto(Columna::CENTRO);
+	$col13->setAlineacionContenido(Columna::CENTRO);	
+	$col13->setHTML('type="text" size="10" disabled=true');
+	
 	// Se guardan las columnas en el objetos de opciones        
 	$opciones->addColumna($col1);
 	$opciones->addColumna($col2);
 	$opciones->addColumna($col3);
 	$opciones->addColumna($col4);
+	$opciones->addColumna($col5);
+	$opciones->addColumna($col6);
+	$opciones->addColumna($col7);
+	$opciones->addColumna($col8);
+	$opciones->addColumna($col9);
+	$opciones->addColumna($col10);
+	$opciones->addColumna($col11);
+	$opciones->addColumna($col12);
+	$opciones->addColumna($col13);
 	
 	// Ee genera el arreglo de opciones necesario para generar el grid
 	$this->grid = $opciones->getConfig($per);
@@ -182,6 +241,7 @@ class almordrecActions extends autoalmordrecActions
     $col9 = clone $col3;
     $col9->setTitulo('Total');
     $col9->setNombreCampo('montot');
+    $col9->setEsTotal(true,'carcpart_monrcp');
     
     $col10 = new Columna('Cod. Unidad');
 	$col10->setTipo(Columna::TEXTO);
@@ -238,6 +298,8 @@ class almordrecActions extends autoalmordrecActions
   {
     $this->carcpart = $this->getCarcpartOrCreate();
     $this->configGridConsulta();
+	//$this->configGrid('OC000016');
+
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateCarcpartFromRequest();
