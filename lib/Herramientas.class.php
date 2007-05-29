@@ -585,7 +585,7 @@ class Herramientas
 	  		return '<¡Registro no Encontrado o Vacio!>';
 	    }
     }	  
-	/**
+   /**
    * Función getVerCorrelativo
    *
    * @static
