@@ -1,0 +1,59 @@
+cuentasxcobrar:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Cuentas por Cobrar
+    imagen: bienes.gif
+    nombre: Cuentas por Cobrar
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: cuentasxcobrar.php
+        modulo_dev: cuentasxcobrar_dev.php
+      Grupo de Recaudos:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Recaudos:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Definición de Bancos:
+        modulo: tesoreria.php
+        modulo_dev: tesoreria_dev.php
+      Tipos de Recargos:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Tipos de Movimiento:
+        modulo: facturacion.php
+        modulo_dev: facturacion_dev.php
+      Tipos de Descuentos:
+        modulo: facturacion.php
+        modulo_dev: facturacion_dev.php
+      Clientes:
+        modulo: facturacion.php
+        modulo_dev: facturacion_dev.php
+      Reportes:
+        absoluta: reportes/reportes/cuentasxcobrar
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones Generales:
+     #   Empresa:
+        Grupo de Recaudos:                              almtiprecpro
+        Recaudos:                                       almregrec
+        Formas de Pago:                                 fatippag
+        Tipos de Recargos:                              AlmRegRgo
+        Definición de Bancos:                           TesDefTipCue
+    Cuentas por Cobrar:
+        Definiciones Especificas:
+            Tipos de Movimiento:                        fatipmov
+            Tipos de Descuentos:                        fadescto
+            Clientes:                                   facliente
+        Cobranzas:
+     #       Registro de Gestión:
+     #       Generar Deudas:
+            Documentos:                                 cobdocume
+            Transacciones:                              cobtransa
+    Reportes:
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Litiplic
+    theme:            cidesaGenerator
+    fields:
+       destiplic:    { name: Descripción, params: size=60 maxlength=500}
+       maxunitri:    { name: Máximo de Unidades Tributarias}
+       artley:       { name: Artículo de Ley, type: textarea_tag, params: size=70x3 maxlength=1000 }
+    list:
+      title:  Tipos de Licitación
+      display: [=destiplic]
+      filters: [ destiplic]
+      max_per_page:   10
+      sort: destiplic
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Edición de Tipos de Licitación
+      display:
+        "NONE": [destiplic, maxunitri, artley]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

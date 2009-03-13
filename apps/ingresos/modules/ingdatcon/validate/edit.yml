@@ -1,0 +1,57 @@
+methods:
+  post:
+   - "ciconrep{rifcon}"
+   - "ciconrep{nomcon}"
+   - "ciconrep{dircon}"
+   - "ciconrep{ciucon}"
+   - "ciconrep{telcon}"
+
+
+names:
+  ciconrep{rifcon}:
+    required:  Yes
+    required_msg: El C.I/R.I.F/Código no puede estar en Blanco
+    validators: Validator_rifcon
+
+  ciconrep{nomcon}:
+    required:  Yes
+    required_msg: El  nombre no puede estar en Blanco
+    validators: Validator_nomcon
+
+  ciconrep{dircon}:
+    required:  Yes
+    required_msg: La dirección no puede estar en Blanco
+    validators: Validator_dircon
+
+  ciconrep{ciucon}:
+    required:  Yes
+    required_msg: La ciudad no puede estar en Blanco
+
+  ciconrep{telcon}:
+    required:  Yes
+    required_msg: El teléfono no puede estar en Blanco
+
+
+
+Validator_rifcon:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ciconrep
+        column:       rifcon
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nomcon:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La descripción no puede tener mas de 250 caracteres
+
+Validator_dircon:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La dirección no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La dirección no puede tener mas de 250 caracteres

@@ -1,0 +1,38 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npdefcpt
+    theme:            default
+
+    fields:
+      codcon:    { name: Código, params: maxlength=3,size=4}
+      nomcon:    { name: Descripción, params: size=18}
+      codpar:    { name: Código Partida, params: size=18}
+      nompar: 	 { name: Nombre de la partida}
+      opecon: 	 { name: Operación Contable}
+      conact:	 { name: Concepto Activo}
+      impcpt:	 { name: Concepto Imprimible}
+      inimon: 	 { name: Inicializar Montos}
+      acuhis: 	 { name: Acumula histórico}
+      ordpag:	 { name: Genera orden de Pago}
+      afepre: 	 { name: Afecta Presupuesto}
+
+
+    list:
+      title:          Definición de Conceptos
+      display:        [=codcon, nomcon, codpar, nompar]
+      filters:		  [codcon, nomcon, codpar]
+      max_per_page:	  10
+      sort:  codcon
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codcon
+    edit:
+      title:          Edición de Conceptos
+      display:        [codcon, nomcon, codpar, nompar, opecon, conact, impcpt, inimon, acuhis, ordpag, afepre]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

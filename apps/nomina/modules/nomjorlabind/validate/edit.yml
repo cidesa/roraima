@@ -1,0 +1,26 @@
+methods:
+  post:
+   - "npempjorlab{codemp}"
+   - "npempjorlab{codnom}"  
+   - "npempjorlab{idejor}"
+names: 
+  npempjorlab{codemp}:
+    required:  Yes
+    required_msg: La Cedula del empleado no puede estar en Blanco
+    validators: Validator_codemp
+    
+  npempjorlab{codnom}:
+    required:  Yes
+    required_msg: La Nomina no puede estar en Blanco
+      
+  npempjorlab{idejor}:
+    required:  Yes
+    required_msg: La Jornada no puede estar en Blanco
+       
+Validator_codemp:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npempjorlab
+        column:       codemp
+        unique_error: El registro ya Existe intente con otro.
+    

@@ -1,0 +1,34 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   lidetcom
+  ancho:				   750
+  anchogrid:               700
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Empleado
+  tipo:                    t
+  nombrecampo:             codemp
+  esgrabable:			   true
+  html:                    [size='12']
+2:       # Columna 1
+  titulo:                  Cédula Empleado
+  tipo:                    t
+  nombrecampo:             cedemp
+  esgrabable:			   true
+  html:                    [readonly=true size='12']
+
+3:       # Columna 3
+  titulo:                  Nombre
+  tipo:                    t
+  nombrecampo:             nomemp
+  esgrabable:			   true
+  html:                    [readonly=true size=20]
+4:       # Columna 4
+  titulo:                  Dirección
+  tipo:                    t
+  nombrecampo:             dirhab
+  html:                    [readonly=true size="30" maxlength=1000]
+  esgrabable:              true

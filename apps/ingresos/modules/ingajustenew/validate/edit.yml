@@ -1,0 +1,47 @@
+methods:
+  post:
+   - "citrasla{reftra}"
+   - "citrasla{fectra}"
+   - "citrasla{destra}"
+
+
+names:
+  citrasla{reftra}:
+    required:  Yes
+    required_msg: La referencia no puede estar en Blanco
+    validators: Validator_reftra
+
+  citrasla{fectra}:
+    required:  Yes
+    required_msg: La fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  citrasla{destra}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_destra
+
+Validator_reftra:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Citrasla
+        column:       reftra
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destra:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La descripción no puede tener mas de 250 caracteres
+
+FechaValidator:
+    class: CidesaDateValidator
+    param:
+        class:        Cidefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida

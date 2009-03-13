@@ -1,0 +1,205 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  contabb1_temp:
+    #_attributes:
+      #idMethod: native
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    fecini:
+      type: DATE
+      required: true
+    feccie:
+      type: DATE
+      required: true
+    pereje:
+      type: VARCHAR
+      size: 2
+      required: true
+    totdeb:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totcre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salact:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salprgper:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salprgperfor:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  contabbmod:
+    #_attributes:
+      #idMethod: native
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    descta:
+      type: VARCHAR
+      size: 250
+      required: true
+    fecini:
+      type: DATE
+      required: true
+    feccie:
+      type: DATE
+      required: true
+    salant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    debcre:
+      type: VARCHAR
+      size: 1
+      required: true
+    cargab:
+      type: VARCHAR
+      size: 1
+      required: true
+    salprgper:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salacuper:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salprgperfor:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  contabbtemp:
+    #_attributes:
+      #idMethod: native
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+      ##primaryKey: true
+    descta:
+      type: VARCHAR
+      size: 250
+      required: true
+    fecini:
+      type: DATE
+      required: true
+    feccie:
+      type: DATE
+      required: true
+    salant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    debcre:
+      type: VARCHAR
+      size: 1
+      required: true
+    cargab:
+      type: VARCHAR
+      size: 1
+      required: true
+    salprgper:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salacuper:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salprgperfor:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i02contabb2:
+        - codcta
+        - fecini
+        - feccie
+      i10contabb2:
+        - codcta
+        - cargab
+  contabc1_conv:
+    #_attributes:
+      #idMethod: native
+    numcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    debcre:
+      type: VARCHAR
+      size: 1
+      required: true
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    numasi:
+      type: NUMERIC
+      size: 3
+    refasi:
+      type: VARCHAR
+      size: 8
+    desasi:
+      type: VARCHAR
+      size: 250
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  contabc_conv:
+    #_attributes:
+      #idMethod: native
+    numcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    descom:
+      type: VARCHAR
+      size: 250
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacom:
+      type: VARCHAR
+      size: 1
+      required: true
+    tipcom:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true  

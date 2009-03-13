@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fctippro
+    theme:            cidesaGenerator
+
+    fields:
+      tippro:  { name: Código de Uso, params: size=6 maxlength=4 }
+      anovig:  { name: Año de Vigencia del Uso, params: size=5 maxlength=4 }
+      destip:  { name: Descripcion , params: size=80 maxlength=250 }
+      pormon:  { name: Monto del Aforo, params: size=3 maxlength=1 }
+      alimon:  { name: Alícuota (X/1000), params: size=10  }
+      statip:  { name: Edad Límite, params: size=3 maxlength=1 }
+      unipar:  { name: Fracción U.T, params: size=40 maxlength=50 }
+      frepar:  { name: Frecuencia, params: size=10  }
+      parpro:  { name: Formula, params: size=40 maxlength=300 }
+      grid:  { name: . }
+    list:
+      title:     Clasificador de Apuestas Licitas
+      display:   [=tippro, anovig, destip]
+      sort:      destip
+      filters:   [tippro, anovig, destip]
+      fields:
+        tippro:
+          params: size=18
+        destip:
+          params: size=18
+      max_per_page: 10
+      sort:  anovig
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Clasificador de Apuestas Licitas
+      display:
+        "Datos Generales": [ _tippro, _anovig, destip, unipar, _frepar, parpro, _grid ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

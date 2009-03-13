@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fccarinm
+    theme:            cidesaGenerator
+
+    fields:
+      codcarinm:  { name: Código, params: size=4 maxlength=3 }
+      nomcarinm:  { name: Descripcion, params: size=40 maxlength=240 }
+      stacarinm:  { name: Usa M2, params: size=10 maxlength=1 }
+
+    list:
+      title:     Definición de Uso de Inmuebles
+      display:   [=codcarinm, nomcarinm]
+      sort:      nomcarinm
+      filters:   [codcarinm, nomcarinm]
+      fields:
+        nomcarinm:
+          params: size=18
+      max_per_page: 10
+      sort:  codcarinm
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+
+    edit:
+      title: Edición de Uso de Inmuebles
+      display:
+        "Datos Generales": [ _codcarinm, nomcarinm, _stacarinm]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

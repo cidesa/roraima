@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npdefmov
+    theme:            default
+
+    fields:
+      codnom:    { name: Código}
+      nomnom:    { name: Descripción}
+
+    list:
+      title:          Definición de Conceptos Variables
+      display:        [=codnom, nomnom]
+      filters:		  [codnom]
+      sort:   codnom
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+    edit:
+      title:          Edición de Conceptos Variables
+      display:        [codnom, nomnom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~

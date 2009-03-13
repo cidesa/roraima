@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * Subclass for representing a row from the 'casolart' table.
+ *
+ *
+ *
+ * @package lib.model
+ */
+class Casolart extends BaseCasolart
+{
+  private $tipo = '';
+  protected $actsolegr = '';
+  protected $articulo = '';
+  protected $modifico= '';
+  protected $check= '';
+  protected $obj = array();
+
+  public function getMonreq($val=false)
+  {
+	return parent::getMonreq(true);
+  }
+
+  public function getNomcat()
+  {
+	return Herramientas::getX('CODCAT','Npcatpre','Nomcat',self::getUnires());
+  }
+
+  public function getNomext()
+  {
+	return Herramientas::getX('CODFIN','Fortipfin','Nomext',self::getTipfin());
+  }
+
+  public function setTipo($val)
+  {
+	$this->tipo = $val;
+  }
+
+  public function getTipo()
+  {
+	return $this->tipo;
+  }
+
+  public function getMondes($val=false)
+  {
+	return parent::getMondes(true);
+  }
+
+}

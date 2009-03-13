@@ -1,0 +1,34 @@
+methods:
+  post:
+   - "dfrutadoc{id_dftabtip}"
+   - "dfrutadoc{id_acunidad}"
+   - "dfrutadoc{desuni}"
+   - "dfrutadoc{rutdoc}"
+   - "dfrutadoc{diadoc}"
+   - "dfrutadoc{desrut}"
+
+names:
+  dfrutadoc{id_dftabtip}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dfrutadoc{id_acunidad}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dfrutadoc{desuni}:
+    required:  Yes
+    required_msg: Debe colocar una descripcion.
+
+  dfrutadoc{rutdoc}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dfrutadoc{diadoc}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dfrutadoc{desrut}:
+    required:  Yes
+    required_msg: Debe colocar una descripcion.
+

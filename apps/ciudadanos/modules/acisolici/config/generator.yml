@@ -1,0 +1,82 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atsolici
+    theme:            cidesaGenerator
+
+    fields:
+      cedsol:      { name: Cédula, params: size=10 }
+      nomsol:      { name: Nombre, params: size=60 }
+      apesol:      { name: Nombre, params: size=60 }
+      _tipo:       { name: Pertenece a, params: size=60 } # Cooperativa, Particular, Consejo Comunal, Empresa, Organismo del Estado
+      _sexo:       { name: Teléfono, params: size=20 }
+
+      fecnac:      { name: Fecha Nacimiento }
+      pais:        { name: Pais Nacimiento }
+      conext:      { name: Con Ext }
+      lugnac:      { name: Lugar de Nacimiento }
+      nacsol:      { name: Nacionalidad } # nacionalidad
+      dirnac:      { name: Dirección de Nacimiento } # dirreccion de nacimiento
+      estciv:      { name: Estado Civil }
+      telhab:      { name: Telefono Habitación }
+      teladihab:   { name: Telefono Adicional }
+      prosol:      { name: Profesión } # Profesion Beneficiario
+      atestados_id:     { name: Estado }
+      atmunicipios_id:  { name: Municipio }
+      atparroquias_id:  { name: Parroquia }
+      ciudad:      { name: Ciudad }
+      caserio:     { name: Cacerío }
+      dirhab:      { name: Dirección Habitación }
+      dirtra:      { name: Dirección Trabajo }
+      concomsol:   { name: Consejo Comunal }
+      carconcomsol:     { name: Cargo en el CC }
+      nota:        { name: Inf. Adicional }
+      grains:      { name: Grado de Instrucción }
+      trasol:      { name: ¿Tiene Trabajo? }
+      nomemp:      { name: Empresa }
+      diremp:      { name: Dirección Empresa }
+      telemp:      { name: Telefono Empresa }
+      tiping:      { name: Tipo Ingreso } # Mensual, semanal, quincenal
+      moning:      { name: Monto Ingreso }
+#      tipviv:
+#      tenviv:
+#      carvivsal:  # Caract. Viv. Sala
+#      carvivcom:  # Caract. Viv. Comedor
+#      carvivhab:  # Caract. Viv. Habitaciones
+#      carvivcoc:  # Caract. Viv. Cocina
+#      carvivban:  # Caract. Viv. Banos
+#      carvivpat:  # Caract. Viv. Patio
+#      carvivarever:  # Caract. Viv. Areas Verdes
+#      carvivpis:  # Caract. Viv. Piso
+#      carvivpar:  # Caract. Viv. Paredes
+#      carvivtec:  # Caract. Viv. Techo
+
+      estados:  { name: Estado }
+      municipios:  { name: Municipio }
+      parroquias:  { name: Parroquia }
+
+    list:
+      title:          Definición de Solicitantes
+      display:        [=cedsol, nomsol, apesol]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [cedsol, nomsol, apesol]
+      max_per_page:   5
+    edit:
+      title:          Edición de Solicitantes
+      display:
+        Datos Personales: [cedsol, nomsol, apesol, _sexo, _estciv, telhab, prosol]
+        Datos Nacimiento: [fecnac, pais, conext, lugnac, nacsol, dirnac ]
+        Dirección Habitacion:        [_atestados_id, _atmunicipios_id, _atparroquias_id, ciudad, caserio ]
+        Información de Contacto: [dirhab, telhab, teladihab ]
+        Participación Comunal: [concomsol, carconcomsol ]
+        Información Profesional: [trasol, grains, prosol, nomemp, diremp, dirtra, telemp, tiping, moning ]
+        Procedencia:      [_tipo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+
+

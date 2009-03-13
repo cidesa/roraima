@@ -1,0 +1,22 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Empresa
+    theme:            default
+
+    fields:
+      nomemp: { name: Nombre, params : maxlength=250 }
+      diremp: { name: Dirección, params : maxlength=50 }
+      ciuemp: { name: Ciudad, params: maxlength=50 }
+      tlfemp: { name: Teléfonos, params : maxlength=15 }
+      urlemp: { name: Pág. Web, params : maxlength=100 }
+      faxemp: { name: Fax, params : maxlength=15 }
+      codpos: { name: Código Postal, params : maxlength=15 }
+      cleedo: { name: Presidente de la Institución, params : maxlength=100 }
+      dirpre: { name: Director(a) de Presupuesto, params : maxlength=100 }
+      #coopla: { name: Coordinador(a) de Planificación, params : maxlength=100 }
+      #cooeje: { name: oordinador(a) de Ejecución, params : maxlength=100 }
+
+    edit:
+      title:          Definición de Institución
+      display:        [codemp, nomemp, diremp, ciuemp, tlfemp, urlemp, faxemp, codpos, cleedo, dirpre]

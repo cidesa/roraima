@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "caprocomart{fecprocom}"
+   - "caprocomart{codcat}"
+
+names:
+  caprocomart{fecprocom}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  caprocomart{codcat}:
+    required:  Yes
+    required_msg: El Código de la Unidad que Programa no puede estar en Blanco
+    validators: CoduniValidator
+
+CoduniValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npcatpre
+        column:   codcat
+        unique_error:  El Código de la Unidad no existe...
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

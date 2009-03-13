@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocunidad
+    theme:            default
+    fields:
+      coduni:      { name: Código, params: maxlenght=4}
+      desuni:      { name: Descripción}
+      abruni:      { name: Abreviatura}
+      stauni:      { name: Estado}
+    list:
+      title:          Unidades de Medida
+      filters:		  [coduni, abruni]
+      display:        [=coduni, desuni, abruni]
+      max_per_page:	  5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Unidades de Medidas
+      display:        [coduni, desuni, abruni]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

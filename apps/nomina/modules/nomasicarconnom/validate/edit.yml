@@ -1,0 +1,41 @@
+methods:
+  post:
+   - "npasicaremp{codemp}"
+   - "npasicaremp{codcar}"
+   - "npasicaremp{codcat}"
+
+names:
+  npasicaremp{codemp}:
+    required:  Yes
+    required_msg: El Código del Empleado no puedo estar en Blanco.
+#    validators: UniqueValidator
+
+  npasicaremp{codcar}:
+    required:  Yes
+    required_msg: El Código del Cargo no puedo estar en Blanco.
+    validators: CargoValidator
+
+  npasicaremp{codcat}:
+    required:  No
+    validators: CategoriaValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Npasicaremp
+        column:   codemp
+        unique_error:   El Código del Empleado ya existe. Por Favor, Cambiélo por otro.
+
+CargoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npcargos
+        column:   codcar
+        unique_error:   El Código del Cargo no existe.
+
+CategoriaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npcatpre
+        column:   codcat
+        unique_error:   El Código de la Categoria no existe.

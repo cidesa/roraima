@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Viaregtiptab
+    theme:            cidesaGenerator
+
+    fields:
+      destiptab:    { name: Tabulador, params: size=40 readonly=true}
+      cargos:       { name: .}
+
+    list:
+      title:     Asignacion Tabulador a Cargos
+      display:   [ =destiptab]
+      sort:      destiptab
+      filters:   [ destiptab]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+      actions:
+        _save:        NONE
+
+    edit:
+      title: Edicion Asignacion Tabulador a Cargos
+      display:
+        NONE:     [ destiptab]
+        Cargos:     [ _cargos]
+
+      actions:
+        _list:        ~
+        _save:        ~

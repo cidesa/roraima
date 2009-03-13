@@ -1,0 +1,29 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Intipmul
+    theme:            cidesaGenerator
+    fields:
+      codtipmul:       { name: Código, params: size:4 }
+      destipmul:
+        name:Descripción
+        type: textarea_tag
+        params: size=50x5 maxlength=250
+
+    list:
+      title:          Definición de Tipo de Multa
+      filters:        [codtipmul]
+      display:        [=codtipmul, destipmul]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+
+    edit:
+      title:          Edición de Tipo de Multa
+      display:        [_codtipmul, destipmul]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

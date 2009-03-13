@@ -1,0 +1,36 @@
+documentos:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Control de Documentos
+    imagen: documentos.gif
+    nombre: Control de Documentos
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: documentos.php
+        modulo_dev: documentos_dev.php
+      Reportes:
+        absoluta: reportes/reportes/documentos
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones:
+      Dias Feriados:                                        docdiafer
+      Medio de Transporte:                                  docmedtra
+      Unidades:                                             docuni
+      Asignar Unidades a Usuarios:                          docusu
+      Asignación de Tablas:                                 doctab
+      Ruta de Documentos:                                   docrut
+    Documentos:
+      Pendientes:                                             docpen/pendientes
+    Reportes:
+      Reporte de Asignación de Tablas:                        repasitab.php
+      Reporte de Documentos:                                  repdoc.php
+      Reporte de Ruta de Documentos:                          reprutdoc.php
+      Reporte de Seguimiento de Documentos:                   repseg.php
+      Reporte de Unidades:                                    repuni.php
+      Reporte de Usuarios:                                    repusu.php
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

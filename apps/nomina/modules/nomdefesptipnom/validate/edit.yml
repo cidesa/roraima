@@ -1,0 +1,63 @@
+methods:
+  post:
+   - "npnomina{codnom}"
+   - "npnomina{nomnom}"
+   - "npnomina{ultfec}"
+   - "npnomina{profec}"
+   - "npnomina{numsem}"
+
+names:
+  npnomina{codnom}:
+    required:  Yes
+    required_msg: El código del Tipo de Nómina no puede estar en Blanco
+    validators: Validator_codnom
+
+  npnomina{nomnom}:
+    required:  Yes
+    required_msg: El Nombre del Tipo de Nómina no puede estar en Blanco
+    validators: Validator_MyString
+
+  npnomina{ultfec}:
+    required:  Yes
+    required_msg: La Fecha Desde no puede estar en Blanco
+    validators: FechaValidator
+
+  npnomina{profec}:
+    required:  Yes
+    required_msg: La Fecha Hasta no puede estar en Blanco
+    validators: FechaValidator
+
+  npnomina{numsem}:
+    required:  Yes
+    required_msg: El Numero de Semanas no puede estar en Blanco
+    validators: NumsemValidator
+
+
+Validator_codnom:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npnomina
+        column:       codnom
+        unique_error: El registro ya Existe intente con otro.
+
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre del Tipo de Nómina no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El Nombre del Tipo de Nómina no puede pasar mas de 100 caracteres
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+NumsemValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El Número de Semanas solo puede contener valores númericos

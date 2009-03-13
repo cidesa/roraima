@@ -1,0 +1,40 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   liasplegcrieva
+  ancho:				   650
+  anchogrid:               700
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Seleccione
+  tipo:                    k
+  nombrecampo:             seleccionado
+  html:                    [size="5" ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  lirecaud_id
+  tipo:                    t
+  nombrecampo:             lirecaud_id
+  html:                    [size="5"]
+  oculta:                  true
+  esgrabable:			   true
+2:       # Columna 2
+  titulo:                  Código Recaudo
+  tipo:                    t
+  nombrecampo:             codrec
+  esgrabable:              true
+  html:                    [readonly=true size='8']
+3:       # Columna 3
+  titulo:                  Nombre Recaudo
+  tipo:                    t
+  nombrecampo:             desrec
+  esgrabable:              true
+  html:                    [readonly=true size=35]
+4:       # Columna 4
+  titulo:                  Puntaje
+  tipo:                    m
+  nombrecampo:             puntaje
+  esgrabable:			   true
+  html:                    [size=10]

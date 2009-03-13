@@ -1,0 +1,69 @@
+methods:
+  post:
+   - "npnomesptipos{codnomesp}"
+   - "npnomesptipos{desnomesp}"
+   - "npnomesptipos{fecnomdes}"
+   - "npnomesptipos{fecnomdes}"
+
+names:
+  npnomesptipos{codnomesp}:
+    required:  Yes
+    required_msg: El Código de la Nomina Especial no puede estar en blanco
+
+  npnomesptipos{desnomesp}:
+    required:  Yes
+    required_msg: El Nombre de la Nomina Especial no puede estar en blanco
+
+  npnomesptipos{fecnomdes}:
+    required:  Yes
+    required_msg: La fecha es invalida
+    validators: FechaValidator
+
+  npnomesptipos{fecnomdes}:
+    required:  Yes
+    required_msg: La fecha es invalida
+    validators: FechaValidator
+
+StringValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción de la Requisición no puede tener menos de 5 caracteres
+        max:       100
+        max_error: La Descripción de la Requisición no puede pasar mas de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Careqart
+        column:   reqart
+        unique_error:   El Código de la Requisición ya existe. Por Favor, Cambiélo por otro.
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0000000000,00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999,99
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida

@@ -1,0 +1,32 @@
+methods:
+  post:
+   - "ocregcon{codcon}"
+   - "ocregcon{descon}"
+
+names:
+  ocregcon{codcon}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  ocregcon{descon}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco.
+    validators: DescripcionValidator
+
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocregcon
+        column:       codcon
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La Descripcion no puede pasar mas de 250 caracteres

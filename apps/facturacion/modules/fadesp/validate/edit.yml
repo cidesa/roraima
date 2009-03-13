@@ -1,0 +1,72 @@
+methods:
+  post:
+   - "cadphart{dphart}"
+   - "cadphart{fecdph}"
+   - "cadphart{desdph}"
+   - "cadphart{reqart}"
+
+names:
+  cadphart{dphart}:
+    required:  Yes
+    required_msg: El Número no puede estar en Blanco.
+    #validators: UniqueValidator
+
+  cadphart{fecdph}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  cadphart{desdph}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco.
+    validators: DescripcionValidator
+
+  cadphart{reqart}:
+    required:  Yes
+    required_msg: La Referencia no puede estar en Blanco.
+
+CodalmExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Cadefalm
+        column:       codalm
+        unique_error: El Código de Almacén debe Existir.
+
+CodubiExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Caalmubi
+        column:       codubi
+        unique_error: El Código de Ubicación debe Existir.
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        cadphart
+        column:       dphart
+        unique_error: El Número de Despacho ya existe. Por Favor, Cambiélo por otro.
+
+
+#FechaValidator:
+#    class:         CidesaDateNow
+#    param:
+#        compare: 'now'
+#        compare_error: La Fecha no puede ser menor a la Fecha Actual
+#        operator: '>='
+#        date_error:  Fecha Inválida
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres
+

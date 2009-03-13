@@ -1,0 +1,35 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npcargos
+    theme:            default
+
+    fields:
+      codcar:                          { name: Codigo}
+      nomcar:                          { name: Descripcion }
+      codtip:                          { name: Tipo de Cargo }
+      graocp:                          { name: Grado }
+      suecar:                          { name: Sueldo }
+      punmin:                          { name: Puntuacion Minima }
+      stacar:                          { name: Categoria del Cargo }
+      profecargo:                      { name: Profesiones por Cargos }
+
+    list:
+      title:                           Cargos
+      display:                         [=codcar, nomcar]
+      sort:  codcar
+      filters:                         [codcar, nomcar]
+      max_per_page:                    10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      fields:
+        profecargo:                    { type: admin_double_list, params: through_class=Npprocar}
+      title:                           Edición de Cargos
+      display:                         [=codcar, nomcar, codtip, graocp, suecar, punmin, stacar, profecargo]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _delete:               ~
+        _create:               ~

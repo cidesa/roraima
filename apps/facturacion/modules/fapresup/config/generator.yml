@@ -1,0 +1,47 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fapresup
+    theme:            cidesaGenerator
+    fields:
+      refpre:       { name: Número}
+      despre:       { name: Descripción}
+      fecpre:       { name: Fecha, params: date_format='dd/MM/yyyy'}
+      nompro:       { name: Nombre }
+      rifpro:       { name: CI/RIF Cliente}
+      dirpro:       { name: Dirección}
+      telpro:       { name: Teléfono}
+      monpre:       { name: Monto total}
+      mondesc:      { name: Total Descuento}
+      monrgo:       { name: Total Recargo}
+      faconpag_id:  { name: Condición de Pago}
+      fafordes_id:  { name: Forma de Despacho}
+      faforsol_id:  { name: Forma de Solicitud}
+      tipmon:       { name: Moneda}
+      valmon:       { name: Valor de Cambio de la Moneda}
+      observ:       { name: Observación}
+      codubi:       { name: Codigo de Ubicación}
+      grid:         { name: Detalle Presupuesto}
+    edit:
+      title: Emisión de Presupuesto
+      display:
+        "Presupuesto": [refpre, fecpre, tipmon, rifpro, nompro, dirpro, telpro, despre, faforsol_id, monrgo, mondesc, monpre]
+        "Detalle Presupuesto": [_grid]
+        "Condición de Pago": [faconpag_id]
+        "Forma de Despacho": [fafordes_id]
+        "Observación": [observ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+
+    list:
+      title:          Presupuestos
+      display:        [=refpre, fecpre, despre]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [refpre, fecpre, despre]
+      max_per_page:   10
+      sort:           refpre

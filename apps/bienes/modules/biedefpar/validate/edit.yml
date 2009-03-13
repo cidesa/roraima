@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "bnparbie{pardes}"
+   - "bnparbie{parhas}"
+   - "bnparbie{valrcp}"
+
+names:
+  bnparbie{pardes}:
+    required:  Yes
+    required_msg: El Código de la Partida no puede estar en Blanco.
+    validators: ExistValidator
+
+  bnparbie{parhas}:
+    required:  Yes
+    required_msg: El Código de la Partida no puede estar en Blanco.
+    validators: ExistValidator
+
+  bnparbie{valrcp}:
+    required:  Yes
+    required_msg: Debe seleccionar una Recepción.
+    #validators: ExistValidator
+
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Nppartidas
+        column:       codpar
+        unique_error: El Código de la Partida debe Existir.

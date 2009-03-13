@@ -1,0 +1,68 @@
+methods:
+  post:
+   - "caentalm{rcpart}"
+   - "caentalm{fecrcp}"
+   - "caentalm{codpro}"
+   - "caentalm{desrcp}"
+   - "caentalm{tipmov}"
+#   - "caentalm{monrcp}"
+
+names:
+
+  caentalm{rcpart}:
+    required:  Yes
+    required_msg: El Número de la Recepción no puedo estar en Blanco
+    validators: Validator_rcpart
+
+  caentalm{fecrcp}:
+    required: Yes
+    required_msg: La Fecha de la Recepción no puede estar en blanco
+    validators: FechaValidator
+
+  caentalm{codpro}:
+    required:  Yes
+    required_msg: El Código de la Contratistas de Bienes o Servicio y Cooperativas no puede estar en blanco
+
+  caentalm{desrcp}:
+    required:  Yes
+    required_msg: La descripción de no puede estar en blanco
+
+  caentalm{tipmov}:
+    required:  Yes
+    required_msg: El Tipo de Movimiento no puede estar en blanco
+
+#  caentalm{monrcp}:
+#    required:  Yes
+#    required_msg: El Monto Total de la Requisición no puede estar en blanco
+#    validators: MyNumberValidator
+
+Validator_rcpart:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Caentalm
+        column:       rcpart
+        unique_error: El registro ya Existe intente con otro.
+
+#dateValidator:
+#   class: sfDateValidator
+#    param:
+#        date_error: "El formato de la fecha es erróneo"
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida
+
+
+#MyNumberValidator:
+#    class: sfNumberValidator
+#    param:
+#        type:         integer
+#        type_error:   Por favor, Error Numérico
+#        nan_error:    Por Favor, Error Numérico
+#        min:          1.000,00
+#        min_error:    El valor tiene que ser mayor que cero
+#        max:          999999999999999999,99999999999
+#        max_error:    El valor debe contener maximo 999999999999999999

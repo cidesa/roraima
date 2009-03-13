@@ -1,0 +1,91 @@
+methods:
+  post:
+   - "tsmovtra{reftra}"
+   - "tsmovtra{fectra}"
+   - "tsmovtra{ctaori}"
+   - "tsmovtra{ctades}"
+   - "tsmovtra{tipmovdesd}"
+   - "tsmovtra{tipmovhast}"
+
+names:
+  tsmovtra{reftra}:
+    required:  Yes
+    required_msg: Referencia no puedo estar en Blanco
+    validators: UniqueValidator_reftra
+
+  tsmovtra{fectra}:
+    required:  Yes
+    required_msg: Fecha no puedo estar en Blanco
+    validators: Fecha2Validator, FechaValidator
+
+  tsmovtra{ctaori}:
+    required:  Yes
+    required_msg: Cuenta de Origen no puedo estar en Blanco
+    validators: ExistValidator_ctaori
+
+  tsmovtra{ctades}:
+    required:  Yes
+    required_msg: Cuenta de Destino no puedo estar en Blanco
+    validators: ExistValidator_ctades
+
+  tsmovtra{tipmovdesd}:
+    required:  Yes
+    required_msg: Mov. Debito no puedo estar en Blanco
+    validators: ExistValidator_tipmovdesd
+
+  tsmovtra{tipmovhast}:
+    required:  Yes
+    required_msg: Mov. Credito no puedo estar en Blanco
+    validators: ExistValidator_tipmovhast
+
+UniqueValidator_reftra:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Tsmovtra
+        column:   reftra
+        unique_error:   La Referencia ya existe. Por Favor, Cambiélo por otro.
+
+FechaValidator:
+    class: CidesaDateValidator
+    param:
+        class:        Cpdefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida
+
+ExistValidator_ctaori:
+    class: CidesaExistValidator
+    param:
+        class:        Tsdefban
+        column:       numcue
+        unique_error: Cuenta de Origen debe Existir.
+
+ExistValidator_ctades:
+    class: CidesaExistValidator
+    param:
+        class:        Tsdefban
+        column:       numcue
+        unique_error: Cuenta de Destino debe Existir.
+
+ExistValidator_tipmovdesd:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipmov
+        column:       codtip
+        unique_error: Mov. Debito debe Existir.
+
+ExistValidator_tipmovhast:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipmov
+        column:       codtip
+        unique_error: Mov. Credito debe Existir.
+
+Fecha2Validator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

@@ -1,0 +1,174 @@
+methods:
+  post:
+   - "opbenefi{cedrif}"
+   - "opbenefi{nitben}"
+   - "opbenefi{codcta}"
+   - "opbenefi{codord}"
+   - "opbenefi{codpercon}"
+   - "opbenefi{codtipben}"
+   - "opbenefi{codctasec}"
+   - "opbenefi{codordadi}"
+   - "opbenefi{codperconadi}"
+   - "opbenefi{codctacajchi}"
+
+names:
+  opbenefi{cedrif}:
+    required:  Yes
+    required_msg: C.I o R.I.F no puedo estar en Blanco
+    validators: [Validator_cedrif, String1a15Validator ]
+
+  opbenefi{nitben}:
+    required:  No
+    validators: [Validator_nitben, String1a15Validator ]
+
+  opbenefi{codcta}:
+    required:  Yes
+    required_msg: Código Contable no puedo estar en Blanco
+    validators: [ExistValidator_codcta, String1a32Validator ]
+
+  opbenefi{codord}:
+    required:  No
+    validators: [ExistValidator_codord, String1a32Validator ]
+
+  opbenefi{codpercon}:
+    required:  No
+    validators: [ExistValidator_codpercon, String1a32Validator ]
+
+  opbenefi{codtipben}:
+    required:  Yes
+    required_msg: Tipo de Beneficiario no puedo estar en Blanco
+    validators: [ExistValidator_codtipben, String1a3Validator ]
+
+  opbenefi{codctasec}:
+    required:  No
+    validators: [ExistValidator_codctasec, String1a32Validator ]
+
+  opbenefi{codordadi}:
+    required:  No
+    validators: [ExistValidator_codordadi, String1a32Validator ]
+
+  opbenefi{codperconadi}:
+    required:  No
+    validators: [ExistValidator_codperconadi, String1a32Validator ]
+
+  opbenefi{codctacajchi}:
+    required:  No
+    validators: [ExistValidator_codctacajchi, String1a32Validator ]
+
+
+Validator_cedrif:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Opbenefi
+        column:       cedrif
+        unique_error: El registro C.I o R.I.F ya Existe intente con otro.
+        max:       15
+        max_error: El registro C.I o R.I.F no puede pasar mas de 15 caracteres
+
+
+Validator_nitben:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Opbenefi
+        column:       nitben
+        unique_error: El registro del N.I.T ya Existe intente con otro.
+        max:       15
+        max_error: El registro del N.I.T no puede pasar mas de 15 caracteres
+
+ExistValidator_codcta:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: Codigo Contable debe Existir.
+
+ExistValidator_codord:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: Cuenta de Orden debe Existir.
+
+ExistValidator_codpercon:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: Cuenta Percontra debe Existir.
+
+ExistValidator_codtipben:
+    class: CidesaExistValidator
+    param:
+        class:        Optipben
+        column:       codtipben
+        unique_error: Tipo de Beneficiari debe Existir.
+        max:       3
+        max_error: El Codigo del tipo de Beneficiario  no puede pasar mas de 3 caracteres
+
+ExistValidator_codctasec:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: Cuenta Contable debe Existir.
+
+ExistValidator_codordadi:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: Cuenta de Orden debe Existir.
+
+ExistValidator_codperconadi:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: Cuenta Percontra debe Existir.
+
+ExistValidator_codctacajchi:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: Cuenta Percontra debe Existir.
+
+String1a3Validator:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción del Beneficiario no puede tener menos de 1 caracteres
+        max:       3
+        max_error: La Descripción del Beneficiario no puede tener más de 3 caracteres
+
+String1a32Validator:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción del Beneficiario no puede tener menos de 1 caracteres
+        max:       32
+        max_error: La Descripción del Beneficiario no puede tener más de 32 caracteres
+
+String1a15Validator:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción del Beneficiario no puede tener menos de 1 caracteres
+        max:       15
+        max_error: La Descripción del Beneficiario no puede tener más de 15 caracteres
+
+String1a100Validator:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción del Beneficiario no puede tener menos de 1 caracteres
+        max:       100
+        max_error: La Descripción del Beneficiario no puede tener más de 100 caracteres
+
+String1a250Validator:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción del Beneficiario no puede tener menos de 1 caracteres
+        max:       250
+        max_error: La Descripción del Beneficiario no puede tener más de 250 caracteres

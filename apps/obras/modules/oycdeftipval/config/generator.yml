@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octipval
+    theme:            default
+
+    fields:
+      codtipval:      { name: Código}
+      destipval:      { name: Descripción}
+      nomabr:         { name: Abreviatura}
+
+    list:
+      title:          Tipos de Valuación
+      filters:		  [codtipval, destipval]
+      display:        [=codtipval, destipval]
+      max_per_page:	  10
+      sort:  codtipval
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Edición de Tipos de Valuación
+      display:        [codtipval, destipval, nomabr]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

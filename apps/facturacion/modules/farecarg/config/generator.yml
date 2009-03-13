@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Farecarg
+    theme:            cidesaGenerator
+    fields:
+      codrgo: { name: Código}
+      nomrgo: { name: Descripción}
+      tiprgo: { name: Tipo de Recargo}
+      monrgo: { name: Valor}
+      codpre: { name: Código}
+      nompre: { name: Nombre}
+      codcta: { name: Codigo}
+      descta: { name: Nombre}
+
+    list:
+      title:          Recargos
+      display:        [=codrgo, nomrgo]
+      filters:		  [codrgo, nomrgo]
+      max_per_page:	  10
+      sort:           codrgo
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Recargos
+      display:        [codrgo, nomrgo, tiprgo, monrgo, codpre, nompre, codcta, descta]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

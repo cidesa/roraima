@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Octipins
+    theme:            cidesaGenerator
+    fields:
+      codtipins: { name: Código, params: size=10 maxlength=3 onBlur='this.value=this.value.pad(3, "0",0);'}
+      destipins: { name: Descripción, params: size=60 maxlength=500}
+    list:
+      title:  Tipos de Inspecciones
+      display: [=codtipins, destipins]
+      filters: [codtipins, destipins]
+      max_per_page:   10
+      sort: codtipins
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Edición de Tipos de Inspecciones
+      display:
+        "NONE": [codtipins, destipins]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

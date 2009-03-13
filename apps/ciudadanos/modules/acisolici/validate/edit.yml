@@ -1,0 +1,122 @@
+methods:
+  post:
+   - "atsolici{cedsol}"
+   - "atsolici{nomsol}"
+   - "atsolici{tipo}"
+   - "atsolici{fecnac}"
+   - "atsolici{sexo}"
+   - "atsolici{estciv}"
+   - "atsolici{atestados_id}"
+   - "atsolici{atmunicipios_id}"
+   - "atsolici{ciudad}"
+   - "atsolici{atparroquias_id}"
+   - "atsolici{caserio}"
+   - "atsolici{dirhab}"
+
+names:
+  atsolici{cedsol}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator1
+
+  atsolici{nomsol}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator2
+
+  atsolici{tipo}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator3
+
+  atsolici{fecnac}:
+    required:  Yes
+    required_msg: Debe insertar la fecha de nacimiento
+    validators: Vfecha_1
+
+
+  atsolici{sexo}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator3
+
+  atsolici{estciv}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator3
+
+  atsolici{atestados_id}:
+    required:  Yes
+    required_msg: Este campo es requerido
+
+  atsolici{atmunicipios_id}:
+    required:  Yes
+    required_msg: Este campo es requerido
+
+  atsolici{ciudad}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator2
+
+  atsolici{atparroquias_id}:
+    required:  Yes
+    required_msg: Este campo es requerido
+
+  atsolici{caserio}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator2
+
+  atsolici{dirhab}:
+    required:  Yes
+    required_msg: Este campo es requerido
+    validators: MyStringValidator4
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       12
+        max_error: El campo debe tener menos de 12 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       50
+        max_error: El campo debe tener menos de 50 caracteres
+
+MyStringValidator3:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       1
+        max_error: El campo debe tener menos de 1 caracter
+
+MyStringValidator4:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       100
+        max_error: El campo debe tener menos de 100 caracteres
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type_error:   Por favor, Seleccione una opción
+        nan_error:    Por favor, Seleccione una opción
+        min:          1.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999.99
+        max_error:    El valor debe contener maximo 9999999999.99
+
+Vfecha_1:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

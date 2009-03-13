@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npasicaremp
+    theme:            cidesaGenerator
+
+    fields:
+      codemp:  { name: Codigo Empleado }
+      cedemp:  { name: Cédula Empleado, params: readonly=true }
+      nomemp:  { name: Nombre Empleado}
+      codnom:   { name: Nómina, params: maxlength=3 }
+      nomnom:   { name: Descripción }
+      codcar:   { name: Cargo }
+      nomcar:   { name: Descripción }
+      codcat:   { name: Categoria}
+      nomcat:   { name: Nombre Categoria }
+      fecha:  { name: Fecha de Aplicación }
+      codnomnew: { name: Nómina Nueva }
+      codcarnew: { name: Cargo Nuevo }
+      codcatnew: { name: Categoría Nueva }
+    list:
+      title:    Empleados a aplicar el cambio
+      display:        [=codemp, nomemp, codnom, nomnom, codcar, nomcar]
+      filters:  [codemp, nomemp]
+      max_per_page:   10
+      actions:
+        _create:    NONE
+    edit:
+      title:    Cambiando de Nómina, Cargos o Categoria a Empleado
+      fields:
+        codemp:
+          params: readonly=true
+        nomemp:
+          params: readonly=true
+      display:
+        Información Empleado: [codemp, cedemp, nomemp]
+        Información de Nomina Actual del Empleado: [_codnom, _codcar, _codcat]
+        Información de Cambio: [_fecha, _codnomnew, _codcarnew, _codcatnew]
+      actions:
+        _list:        ~
+        _save:        ~

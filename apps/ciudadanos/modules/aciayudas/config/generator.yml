@@ -1,0 +1,64 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atayudas
+    theme:            cidesaGenerator
+
+    fields:
+      expediente:          { name: Nro. de Expediente, params: disabled=true size=6 }
+      atsolici:
+        name: Solicitante
+      atbenefi:
+        name: Paciente
+      attipayu_id:
+        name: Grupo de Rubros
+        params:     text_method=getDesayu onchange=toAjaxUpdater('divrubros',5,getUrlModulo()+'ajax',this.value,'','');
+      atrubros_id: { name: Rubro }
+      caprovee_id: { name: Proveedor }
+      cedula:      { name: Cedula }
+      desayu:      { name: Descipción, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      motayu:      { name: Motivo, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      detalleayudas: {name: Detalle Ayuda}
+      detallerecaudos: {name: Detalle Recaudos}
+      detayu:      { name: Detalle }
+      atmedico_id:      { name: Médico Tratante }
+      respat:   { name: Resumen de la Patología, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      infmed:   { name: Informe Médico, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      obsmed:   { name: Observación, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      fecdiasoc:     { name: Fecha }
+      usudiasoc:     { name: Elaborado Por, params: size=100 maxlength=100 }
+      resdiasoc:    { name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      fecvisdoc:     { name: Fecha }
+      usuvisdoc:     { name: Elaborado Por, params: size=100 maxlength=100 }
+      resvisdoc:   { name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      monayu:    { name: Monto en Bolívares (Bs.)}
+      fecsol:     { name: Fecha }
+      refdoc:     { name: Orden de Pago }
+    list:
+      title:          Solicitud de Ayudas
+      display:        [=id, =nombre, desayu]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [id, atsolici, attipayu]
+      max_per_page:   5
+      #sort:           atsolici_id
+    edit:
+      title:          Edición de Solicitud de Ayuda
+      display:
+        Expediente:   [ _expediente, fecsol ]
+        Solicitante:  [_atsolici, _atbenefi]
+        Prioridad:    [_priayu]
+#        Proveedor:    [_caprovee_id]
+        Ayuda:        [attipayu_id, _atrubros_id, motayu, desayu]
+        Detalle de Recaudos: [_detallerecaudos]
+        Diagnostico del Caso: [_atmedico_id, respat, infmed, obsmed]
+        Diagnostico Social: [fecdiasoc, usudiasoc, resdiasoc]
+        Informe de Visita Domiciliaria: [fecvisdoc, usuvisdoc, resvisdoc]
+        Detalle de Ayuda: [_detalleayudas]
+ #       Detalle de Ayuda: [_detayu]
+        Monto Total de la Ayuda: [monayu]
+
+      actions:
+        _save:        ~
+        _create:      ~

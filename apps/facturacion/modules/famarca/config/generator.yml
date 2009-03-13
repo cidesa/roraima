@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Famarca
+    theme:            cidesaGenerator
+
+    fields:
+      nommar: { name: Nombre, validate: Vstring_1_20, msj_error: Debe insertar el nombre de la marca}
+
+    list:
+      title:          Marcas
+      display:        [=nommar]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nommar]
+      max_per_page:   10
+
+    edit:
+      title:          Edición de Marca
+      display:        [nommar]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,82 @@
+methods:
+  post:
+   - "bnipcact{anoipc}"
+   - "bnipcact{ipcene}"
+   - "bnipcact{ipcfeb}"
+   - "bnipcact{ipcmar}"
+   - "bnipcact{ipcabr}"
+   - "bnipcact{ipcmay}"
+   - "bnipcact{ipcjun}"
+   - "bnipcact{ipcjul}"
+   - "bnipcact{ipcago}"
+   - "bnipcact{ipcsep}"
+   - "bnipcact{ipcoct}"
+   - "bnipcact{ipcnov}"
+   - "bnipcact{ipcdic}"
+
+names:
+  bnipcact{anoipc}:
+    required:  Yes
+    required_msg: El Año no puede estar en Blanco.
+    validators: UniqueValidator
+
+  bnipcact{ipcene}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcfeb}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcmar}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcabr}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcmay}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcjun}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcjul}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcago}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcsep}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcoct}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcnov}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  bnipcact{ipcdic}:
+    required:  Yes
+    validators: MyNumberValidator
+
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error:El Campo solo puede contener valores númericos
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Bnipcact
+        column:   anoipc
+        unique_error:   El Año ya existe. Por Favor, Cambiélo por otro.

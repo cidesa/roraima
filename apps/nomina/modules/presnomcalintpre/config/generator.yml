@@ -1,0 +1,31 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nppresoc
+    theme:            default
+    fields:
+      codemp: { name: Trabajador, params: maxlength=16}
+      nomemp: { name: Nombre }
+      cedemp: { name: C.I. }
+      fecing: { name: Ingreso, params: date_format='dd/MM/yy' }
+      feccalpres: { name: Fecha de Cálculo, params: date_format='dd/MM/yy' }
+      feccor: { name: Fecha de Corte, params: date_format='dd/MM/yy' }
+      destipcon:{ name: C. Colectivo }
+      mesinicio:{ name: Iniciar el Cálculo al mes}
+      diatra: { name: Dias }
+      mestra: { name: Meses }
+      anotra: { name: Años }
+      diaser: { name: Dias }
+      messer: { name: Meses }
+      anoser: { name: Años }
+    list:
+      title:          Cálculo de Prestaciones Sociales
+      filters:        [codemp, feccor]
+      display:        [=codemp, cedemp, nomemp, fecing]
+      max_per_page:	  10
+
+    edit:
+      title:          Cálculo de Prestaciones Sociales
+      display:        [codemp, cedemp, nomemp, fecing, feccalpres, destipcon, mesinicio, feccor, diatra, mestra, anotra, diaser, messer, anoser, codcon]
+      actions:
+        _save:        ~

@@ -1,0 +1,604 @@
+---
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  atestados:
+    desest:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+  atmunicipios:
+    atestados_id:
+    desmun:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+  atparroquias:
+    atmunicipios_id:
+    despar:at
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+  attipayu:                        # Tipos de Ayudas
+    codayu:
+      type: VARCHAR
+      size: 8
+      required: true
+    desayu:
+      type: VARCHAR
+      size: 50
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 100
+    id:
+  atrecaud:                        # Recaudos
+    codrec:
+      type: VARCHAR
+      size: 8
+      required: true
+    desrec:
+      type: VARCHAR
+      size: 50
+      required: true
+    requerido:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+  atrecayu:                        # Asignar Recaudos a Ayudas
+    attipayu_id:
+    atrecaud_id:
+    id:
+  atciudadano:                         # Ciudadano
+    cedciu:
+      type: VARCHAR
+      size: 12
+      required: true
+    nomciu:
+      type: VARCHAR
+      size: 50
+      required: true
+    apeciu:
+      type: VARCHAR
+      size: 50
+      required: true
+    nacciu:
+      type: VARCHAR
+      size: 50
+      required: true
+    pais:
+      type: VARCHAR
+      size: 50
+    conext:
+      type: VARCHAR
+      size: 100
+    lugnac:
+      type: VARCHAR
+      size: 100
+    tipo:      # Cooperativa, Particular, Consejo Comunal, Empresa, Organismo del Estado
+      type: VARCHAR
+      size: 1
+      required: true
+    sexo:
+      type: VARCHAR
+      size: 1
+    fecnac:
+      type: DATE
+    dirnac:
+      type: VARCHAR
+      size: 100
+    estciv:
+      type: VARCHAR
+      size: 1
+    telhab:
+      type: VARCHAR
+      size: 25
+    teladihab:
+      type: VARCHAR
+      size: 25
+    prociu:
+      type: VARCHAR
+      size: 30
+    atestados_id:
+    atmunicipios_id:
+    atparroquias_id:
+    ciudad:
+      type: VARCHAR
+      size: 50
+    caserio:
+      type: VARCHAR
+      size: 50
+    dirhab:
+      type: VARCHAR
+      size: 100
+    dirtra:
+      type: VARCHAR
+      size: 100
+    concomciu:
+      type: VARCHAR
+      size: 100
+    carconcomciu:
+      type: VARCHAR
+      size: 50
+    nota:
+      type: VARCHAR
+      size: 100
+    grains:
+      type: VARCHAR
+      size: 100
+    traciu:
+      type: BOOLEAN
+    nomemp:
+      type: VARCHAR
+      size: 100
+    diremp:
+      type: VARCHAR
+      size: 100
+    telemp:
+      type: VARCHAR
+      size: 25
+    attiping_id:
+    moning:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+  attiping:                 # Tipo de Ingreso
+    tiping:
+      type: VARCHAR
+      size: 50
+    id:
+  attipviv:                 # Tipo de Vivienda
+    tipviv:
+      type: VARCHAR
+      size: 50
+    id:
+  attipproviv:                 # Tipo de Propiedad de la Vivienda
+    tipproviv:
+      type: VARCHAR
+      size: 50
+    id:
+  atestsoceco:             # Estudio Socio economico
+    atayudas_id:
+    atciudadano_id:
+    attipviv_id:
+    attipproviv_id:          # Tipo de Propiedad de la Vivienda
+    carvivsal:  # Caract. Viv. Sala
+      type: BOOLEAN
+    carvivcom:  # Caract. Viv. Comedor
+      type: BOOLEAN
+    carvivhab:  # Caract. Viv. Habitaciones
+      type: BOOLEAN
+    carvivcoc:  # Caract. Viv. Cocina
+      type: BOOLEAN
+    carvivban:  # Caract. Viv. Banos
+      type: BOOLEAN
+    carvivpat:  # Caract. Viv. Patio
+      type: BOOLEAN
+    carvivarever:  # Caract. Viv. Areas Verdes
+      type: BOOLEAN
+    carvivpis:  # Caract. Viv. Piso
+      type: BOOLEAN
+    carvivpar:  # Caract. Viv. Paredes
+      type: BOOLEAN
+    carvivtec:  # Caract. Viv. Techo
+      type: BOOLEAN
+    anasoceco:  # Analisis SocioEconomico
+      type: VARCHAR
+      size: 1000
+    anafam:  # Analisis Familiar
+      type: VARCHAR
+      size: 1000
+    otros:  # Otras informaciones
+      type: VARCHAR
+      size: 1000
+    id:
+  attrasoc:                     # Trabajadora Social
+    cedtra:
+      type: VARCHAR
+      size: 12
+    nomtra:
+      type: VARCHAR
+      size: 50
+    apetra:
+      type: VARCHAR
+      size: 50
+    nrocol:             # Numero de colegio
+      type: VARCHAR
+      size: 50
+    id:
+  atgrufam:                      # Grupo Familiar
+    atciudadano_id:
+    cedfam:
+      type: VARCHAR
+      size: 12
+    nomfam:
+      type: VARCHAR
+      size: 50
+      required: true
+    apefam:
+      type: VARCHAR
+      size: 50
+      required: true
+    edad:
+      type: INTEGER
+      required: true
+    parfam: # Parentesco del familiar
+      type: VARCHAR
+      size: 50
+      required: true
+    ocufam: # Ocupacion del familiar
+      type: VARCHAR
+      size: 50
+      required: true
+    moning:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+  atayudas:                              # Ayudas a ciudadanos
+    nroexp:
+      type: INTEGER
+      autoIncrement: true
+      required: true
+    atsolici:
+      type: INTEGER
+      required: true
+      foreignTable: atciudadano
+      foreignReference: id
+    atbenefi:
+      type: INTEGER
+      required: true
+      foreignTable: atciudadano
+      foreignReference: id
+    attipayu_id:
+    atestayu_id:
+    attrasoc_id:
+    caprovee_id:
+    proayu:
+      type: VARCHAR
+      size: 100
+    nroofi:
+      type: VARCHAR
+      size: 50
+    desayu:
+      type: VARCHAR
+      size: 50
+      required: true
+    motayu:
+      type: VARCHAR
+      size: 50
+      required: true
+    created_at:
+    updated_at:
+    usucre:
+      type: VARCHAR
+      size: 50
+    usumod:
+      type: VARCHAR
+      size: 50
+    codpre:
+      type: VARCHAR
+      size: 50
+    id:
+  atdetrecayu:                           # Detalle de recaudos entregados para llevar a cabo la ayuda
+    atayudas_id:
+    atrecaud_id:
+    id:
+  atestayu:                     # Estados de Ayudas
+    desest:
+      type: VARCHAR
+      size: 50
+      required: true
+    comest:         # Comportamiento del Estado
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+  atgrudon:                     # Grupos de Articulos a Donar
+    codgru:
+      type: VARCHAR
+      size: 10
+      required: true
+    desgru:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+  atdonaciones:                 # Articuos a Donar
+    atgrudon_id:
+    coddon:
+      type: VARCHAR
+      size: 10
+      required: true
+    desdon:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+  atdetayu:                              # Detalle de la ayuda solicitada
+    atayudas_id:
+    atdonaciones_id:
+    cantidad:
+      type: INTEGER
+    canapr:
+      type: INTEGER
+    aprobado:
+      type: BOOLEAN
+    precio:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    unidad:
+      type: VARCHAR
+      size: 20
+    id:
+  atfacturas:
+    atayudas_id:
+    numfac:
+      type: VARCHAR
+      size: 50
+      required: true
+    basimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    iva:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    exentos:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    total:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    nrospd:
+      type: VARCHAR
+      size: 50
+    id:
+  atunidades:                           # Unidades
+    coduni:
+      type: VARCHAR
+      size: 8
+      required: true
+    desuni:
+      type: VARCHAR
+      size: 30
+      required: true
+    diruni:
+      type: VARCHAR
+      size: 30
+    telfuni:
+      type: VARCHAR
+      size: 30
+    percon:    # Persona de contacto
+      type: VARCHAR
+      size: 30
+    telpercon:
+      type: VARCHAR
+      size: 30
+    mailpercon:
+      type: VARCHAR
+      size: 30
+    horario:
+      type: VARCHAR
+      size: 30
+    id:
+  atreclamos:                                  # Reclamos
+    atsolici:
+      type: VARCHAR
+      size: 50
+      required: true
+    desrec:
+      type: VARCHAR
+      size: 30
+      required: true
+    telefono:
+      type: VARCHAR
+      size: 60
+    atunidades_id:
+    persona:
+      type: VARCHAR
+      size: 30
+    status:
+      type: VARCHAR
+      size: 1
+    respuesta:
+      type: VARCHAR
+      size: 100
+    fechaa:
+      type: DATE
+    fechar:
+      type: DATE
+    id:
+  atdenuncias:                                # Denuncias
+    atsolici:
+      type: VARCHAR
+      size: 30
+      required: true
+    desden:
+      type: VARCHAR
+      size: 30
+      required: true
+    telefono:
+      type: VARCHAR
+      size: 60
+    atunidades_id:
+    persona:
+      type: VARCHAR
+      size: 30
+    status:
+      type: VARCHAR
+      size: 1
+    respuesta:
+      type: VARCHAR
+      size: 100
+    fechaa:
+      type: DATE
+    fechar:
+      type: DATE
+    id:
+  ataudiencias:                               # Audiencias
+    atciudadano_id:
+    motaud:
+      type: VARCHAR
+      size: 30
+      required: true
+    atunidades_id:
+    persona:
+      type: VARCHAR
+      size: 30
+    status:
+      type: VARCHAR
+      size: 1
+    fecha:
+      type: DATE
+    fechar:
+      type: DATE
+    fechaa:
+      type: DATE
+    lugar:
+      type: VARCHAR
+      size: 100
+    observacion:
+      type: VARCHAR
+      size: 30
+    id:
+  caprovee:
+    codpro:
+      type: VARCHAR
+      size: 15
+      required: true
+    nompro:
+      type: VARCHAR
+      size: 250
+      required: true
+    rifpro:
+      type: VARCHAR
+      size: 15
+      required: true
+    nitpro:
+      type: VARCHAR
+      size: 15
+    dirpro:
+      type: VARCHAR
+      size: 100
+    telpro:
+      type: VARCHAR
+      size: 30
+    faxpro:
+      type: VARCHAR
+      size: 15
+    email:
+      type: VARCHAR
+      size: 100
+    limcre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcta:
+      type: VARCHAR
+      size: 32
+    regmer:
+      type: VARCHAR
+      size: 15
+    fecreg:
+      type: DATE
+    tomreg:
+      type: VARCHAR
+      size: 15
+    folreg:
+      type: VARCHAR
+      size: 15
+    capsus:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cappag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    rifrepleg:
+      type: VARCHAR
+      size: 15
+    nomrepleg:
+      type: VARCHAR
+      size: 50
+    dirrepleg:
+      type: VARCHAR
+      size: 100
+    nrocei:
+      type: VARCHAR
+      size: 30
+    codram:
+      type: VARCHAR
+      size: 6
+    fecinscir:
+      type: DATE
+    numinscir:
+      type: VARCHAR
+      size: 20
+    nacpro:
+      type: VARCHAR
+      size: 1
+    codord:
+      type: VARCHAR
+      size: 32
+    codpercon:
+      type: VARCHAR
+      size: 32
+    codtiprec:
+      type: VARCHAR
+      size: 4
+    codordadi:
+      type: VARCHAR
+      size: 32
+    codperconadi:
+      type: VARCHAR
+      size: 32
+    tipo:
+      type: VARCHAR
+      size: 1
+    fecven:
+      type: DATE
+    ciudad:
+      type: VARCHAR
+      size: 100
+    codordmercon:
+      type: VARCHAR
+      size: 32
+    codpermercon:
+      type: VARCHAR
+      size: 32
+    codordcontra:
+      type: VARCHAR
+      size: 32
+    codpercontra:
+      type: VARCHAR
+      size: 32
+    temcodpro:
+      type: VARCHAR
+      size: 10
+    temrifpro:
+      type: VARCHAR
+      size: 15
+    codctasec:
+      type: VARCHAR
+      size: 32
+    codtipemp:
+      type: VARCHAR
+      size: 4
+    id:
+      type: integer
+      required: true
+      primaryKey: true
+      autoincrement: true
+    _uniques:
+      u_caprovee:
+        - rifpro

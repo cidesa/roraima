@@ -1,0 +1,6 @@
+all:
+   .apps:
+     autenticacion:    autenticacion
+     max_per_page:     15
+     this:             viaticos      #cambiar en cada app
+     contabilidadpresupuesto: /var/www/cidesa/cliente_cp/

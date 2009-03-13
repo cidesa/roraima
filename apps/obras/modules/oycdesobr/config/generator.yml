@@ -1,0 +1,48 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocregobr
+    theme:            default
+
+    fields:
+      codobr:      { name: Código}
+      codtipobr:   { name: Tipo}
+      destipobr:   { name: Descripcion}
+      desobr:      { name: Descripción}
+      fecini:      { name: Fecha Inicio}
+      fecfin:      { name: Fecha Culminación}
+      codpai:      { name: Código Pais}
+      codedo:      { name: Código Estado}
+      codpar:      { name: Código Parroquia}
+      codmun:      { name: Código Municipio}
+      codsec:      { name: Código Sector}
+      dirobr:      { name: Dirección}
+      monobr:      { name: Total Presupuestado}
+      subtot:      { name: SubTotal}
+      moniva:      { name:  IVA}
+      ivaobr:      { name: % IVA}
+      codpre:      { name: Código Presupuestario}
+      nompre:      { name: Descripción}
+      codpreiva:      { name: Código Presup. IVA}
+      nompreiva:   { name: Descripción}
+      unocon:      { name: xx}
+      staobr:      { name: Estatus}
+
+    list:
+      title:          Obras
+      filters:		  [codobr, codtipobr]
+      display:        [=codobr, codtipobr]
+      sort: codobr
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Edición de Obras
+      display:        [codobr, codtipobr, desobr, fecini, fecfin, codpai, codedo, codmun, codpar, codsec, dirobr, monobr, subtot, moniva, ivaobr, codpre, nompre, codpreiva, nompreiva, staobr, unocon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

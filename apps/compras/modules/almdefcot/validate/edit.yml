@@ -1,0 +1,32 @@
+methods:
+  post:
+   - "carancot{candes}"
+   - "carancot{canhas}"
+   - "carancot{cancot}"
+
+names:
+
+  carancot{candes}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  carancot{canhas}:
+    required:  Yes
+    validators: MyNumberValidator
+
+  carancot{cancot}:
+    required:  Yes
+    validators: MyNumberValidator
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         integer
+        type_error:   Por favor, Introduzca Números Enteros
+        nan_error:    Por Favor, introduzca un Número Entero
+        min:          0
+        min_error:    El valor tiene que ser mayor que cero
+        max:          99999999
+        max_error:    El valor debe contener maximo 99.999.999
+
+

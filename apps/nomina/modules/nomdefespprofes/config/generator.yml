@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npprofesion
+    theme:            default
+
+    fields:
+      codprofes:    { name: Codigo, params: maxlength=10,size=10  }
+      desprofes:    { name: Descripción, params: size=20  }
+
+    list:
+      title:          Profesiones
+      display:        [=codprofes, desprofes]
+      filters:		  [codprofes, desprofes]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codprofes
+
+    edit:
+      title:          Edición de Profesiones
+      display:        [codprofes, desprofes]
+      actions:
+        _list:            ~
+        _save:            ~
+        _create:          ~
+        _delete:          ~

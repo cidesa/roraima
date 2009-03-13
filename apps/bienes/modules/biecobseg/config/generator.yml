@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bncobseg
+    theme:            default
+    fields:
+      codcob: { name: Código}
+      descob: { name: Descripción}
+
+    list:
+      title:          Definición de Cobertura para Seguros
+      filters:        [codcob]
+      display:        [=codcob, descob]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:  codcob
+    edit:
+      title:          Edición de Cobertura para Seguros
+      display:       [=codcob, descob]
+      actions:
+        _list:       ~
+        _save:       ~
+        _delete:     ~
+        _create:     ~

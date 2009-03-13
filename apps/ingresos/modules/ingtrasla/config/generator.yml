@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Citrasla
+    theme:            cidesaGenerator
+    fields:
+      reftra:      { name: Referencia, params: size=12 }
+      fectra:      { name: Fecha }
+      pertra:      { name: Período, params: size=12 }
+      destra:      { name: Descripción, type: textarea_tag, params: size=50x2 }
+      tottra:      { name: Total }
+      grid:        { name: Movimientos del Traslado }
+
+    list:
+      title:          Traslados
+      display:        [ =reftra, destra ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [ reftra, destra ]
+      max_per_page:   5
+      sort: reftra
+    edit:
+      title:          Edición de Traslados
+      display:
+        Datos del Traslado:  [ _reftra, _fectra, destra]
+        Movimientos del Traslado: [_grid, _tottra]
+
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+        _anular:
+          name: Anular
+          params: class="sf_admin_action_delete" onClick="anular()"

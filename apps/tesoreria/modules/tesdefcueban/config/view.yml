@@ -1,0 +1,17 @@
+gridchequesSuccess:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Tesorería
+    robots:       index, follow
+    description:  Módulo Tesorería
+    keywords:     Módulo Tesorería
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype, tools]
+
+  has_layout:     on
+  layout:         layout_generales

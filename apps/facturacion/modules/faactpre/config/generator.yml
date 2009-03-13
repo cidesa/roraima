@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Faartpvp
+    theme:            cidesaGenerator
+    fields:
+      artdesde:    { name: Desde}
+      desartdesde: { name: Descripción}
+      arthasta:    { name: Hasta}
+      desarthasta: { name: Descripción}
+      codpvp:    { name: Código del Precio}
+      pvpart:    { name: PVP}
+      monaum:    { name: Valor }
+      despvp:    { name: Descripción del Precio}
+      #grid:      { name: Artículos seleccionados}
+    list:
+      title:          Precios en Lote
+      display:        [=codart, desart]
+      object_actions:obj
+        _edit:        ~
+        _delete:      ~
+      filters:        [codart, desart]
+      max_per_page:   10
+      sort:           codart
+
+    edit:
+      title:          Edición de Precios
+      display:
+        "NONE": [artdesde, desartdesde, arthasta, desarthasta, monaum]
+        #"NONE": [_grid]
+      actions:
+        _save:        ~

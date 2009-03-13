@@ -1,0 +1,86 @@
+ciudadanos:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Gestión y Acción Social
+    imagen: documentos.gif
+    nombre: Gestión y Acción Social
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: ciudadanos.php
+        modulo_dev: ciudadanos_dev.php
+      Definicion de Proveedores:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Reportes:
+        absoluta: reportes/reportes/ciudadanos
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones:
+      Empresa:                                                acidefemp
+      Recaudos:                                               acirecaud
+      Definicion de Proveedores:                              AlmRegPro
+      Ayudas:
+        Grupos de Rubros:                                     acitipayu
+        Rubros:                                               acirubros
+      #Asignar Recaudos a Tipos de Donaciones:                 acirecayu
+      Unidades:                                               aciunidad
+      #Grupos de Articulos:                                    acigrupos
+      Articulos a Donar:                                      acidonaciones
+      Médico Tratante:                                        acimedico
+      Estados de Donaciones:                                  aciestayu
+      Trabajadores Sociales:                                  acitrasoc
+      Instituciones que Refieren:                              aciinstituciones
+      Tipos de Ingreso:                                       acitiping
+      Tipos de Vivienda:                                      acitipviv
+      Tipos de Propiedad de Vivienda:                         acitipproviv
+      Ubicaciones:
+        Estados:                                              estados
+        Municipios:                                           municipios
+        Parroquias:                                           parroquias
+    Solicitudes:
+      Pacientes/Solicitantes/Ciudadanos:                  aciciudadano
+      Donaciones:                                             aciayudas
+      Reclamos:                                               acireclam
+      Denuncias:                                              acidenunc
+      Audiencias:                                             aciaudien
+      Estado de Donación:                                     acistasol
+    Atención:
+      Donaciones:
+        Expedientes:                                          aciateayu
+        Estudio Socio-Económico:                              aciestsoceco
+        Cargar Documentos:                                    acidocdig
+      Reclamos:                                               aciaterec
+      Denuncias:                                              aciateden
+      #Audiencias:                                             aciateaud
+    Reportes:
+      Definiciones:
+        Tipos de Donaciones:                                  attipayu.php
+        #Donaciones por Grupo:                                 atdonaciones.php
+        Recaudos:                                             atrecaud.php
+        Recaudos por Rubros:                                  atrecayu.php
+        Unidades:                                             atunidades.php
+        Estados:                                              atestado.php
+        Municipios:                                           atmunicipio.php
+        Parroquias:                                           atparroquia.php
+        Denuncias:                                            atdenuncia.php
+        Reclamos:                                             atreclamo.php
+        Audiencia:                                            ataudiencia.php
+        Tipo de Ingreso:                                      attipingreso.php
+        Tipo de Vivienda:                                     attipvivienda.php
+      Actas:
+        Acta de Donacion:                                     atacta.php
+        #Acta de compromiso:                                   atactacom.php
+        #Acta de materiales:                                   atactamat.php
+        Planilla de Tramitación y Control Interno:             atplatra.php
+        Ficha de Registro:                                     atfichareg.php
+      Relaciones:
+        Casos entregados a la cordinacion de trabajo social:  atrelent.php
+        Visitas domiciliarias a los municipios del estado:    atrelvis.php
+        #Casos remitidos al departamento de donaciones personas: atcasrem.php
+        Casos asignados a las trabajadoras sociales:          atcasasi.php
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

@@ -1,0 +1,18 @@
+methods:
+  post:
+   - "fadefcaj{descaj}"
+
+names:
+
+  fadefcaj{descaj}:
+    required:  Yes
+    required_msg: Debe insertar la descripción de la caja
+    validators: Vstring_1_100_0
+
+Vstring_1_100_0:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       100
+        max_error: La descripción no puede tener más de 100 caracteres

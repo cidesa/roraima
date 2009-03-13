@@ -1,0 +1,39 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caordcon
+    theme:            default
+    fields:
+      ordcon: { name: Referencia}
+      feccon: { name: Fecha}
+      tipcon: { name: Tipo}
+      codpro: { name: Empresa}
+      descon: { name: Descripcion}      
+      objcon: { name: Objeto}
+      fecini: { name: fecha de Inicio}
+      mulatrini: { name: Multa por Atraso de Inicio}
+      feccul: { name: Fecha de Culminacion}      
+      mulatrcul: { name: Multa por Atraso de Culminacion}
+      lapgar: { name: Lapso de Garantia}
+      cancuo: { name: Nro. Cuotas}
+      
+                 
+    list:
+      title:          Contratos
+      filters:        [ordcon]
+      display:        [=ordcon, tipcon, descon]
+      fields:
+        feccon: { params: date_format='dd/MM/yy' }       
+        fecini: { params: date_format='dd/MM/yy' }
+        feccul: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+        _delete:        ~
+      max_per_page:   5
+    edit:
+      title:         Registro de Contratos
+      display:        [=ordcon, feccon, tipcon, codpro, descon, objcon, fecini, mulatrini, feccul, mulatrcul, lapgar, cancuo]
+      fields:
+        feccon: { params: date_format='dd/MM/yy' } 
+        fecini: { params: date_format='dd/MM/yy' } 
+        feccul: { params: date_format='dd/MM/yy' } 

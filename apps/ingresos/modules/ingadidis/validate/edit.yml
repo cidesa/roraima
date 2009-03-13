@@ -1,0 +1,36 @@
+methods:
+  post:
+   - "ciadidis{refadi}"
+   - "ciadidis{fecadi}"
+   - "ciadidis{desadi}"
+
+names:
+  ciadidis{refadi}:
+    required:  Yes
+    required_msg: La referencia no puede estar en Blanco
+    validators: Validator_refadi
+
+  ciadidis{fecadi}:
+    required:  Yes
+    required_msg: La fecha no puede estar en Blanco
+
+
+  ciadidis{desadi}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desadi
+
+Validator_refadi:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ciadidis
+        column:       refadi
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desadi:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La descripción no puede tener mas de 250 caracteres

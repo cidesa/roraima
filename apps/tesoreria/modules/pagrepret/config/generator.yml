@@ -1,0 +1,12 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsrepret
+    theme:            default
+    fields:
+      codrep: { name: Tipo de Comprobante}
+    edit:
+      title:         Comprobantes de Retencion
+      actions:
+        _save:        ~
+

@@ -1,0 +1,8 @@
+methods:
+  post:
+   - "attiping{tiping}"
+
+names:
+  attiping{tiping}:
+    required:  Yes
+    required_msg: Este Campo es requerido

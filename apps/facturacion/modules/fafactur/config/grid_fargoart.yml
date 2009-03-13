@@ -1,0 +1,56 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                true
+  tabla:                   fargoart
+  anchogrid:               900
+  ancho:                   900
+  filas:                   10
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codrgo
+  esgrabable:              true
+  html:                    [size="10"]
+  catalogo:                [carecarg, sf_admin_edit_form, { Codrgo: 1, Nomrgo: 2 , Tiprgo: 6}, Carecarg_Fafactur ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomrgo
+  html:                    [size="40", readonly=true ]
+3:       # Columna 3
+  titulo:                  Recargo Fijo
+  tipo:                    t
+  nombrecampo:             recfij
+  esgrabable:              true
+  html:                    [size="10"]
+4:       # Columna 4
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monrgo
+  esnumerico:              true
+  html:                    [size="10"]
+5:       #columana 5
+  titulo:                  Codcta
+  tipo:                    t
+  nombrecampo:             codcta
+  html:                    [size="10"]
+  oculta:                  true
+  esgrabable:              true
+6:       # Columna 6
+  titulo:                  Tipo
+  tipo:                    t
+  nombrecampo:             tipo
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="10"]
+7:       # Columna 7
+  titulo:                  Monto Original
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monrgo2
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10"]

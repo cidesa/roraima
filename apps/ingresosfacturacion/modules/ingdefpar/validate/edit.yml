@@ -1,0 +1,43 @@
+methods:
+  post:
+   - "inparroquia{inestado_id}"
+   - "inparroquia{inmunicipio_id}"
+   - "inparroquia{codpar}"
+   - "inparroquia{nompar}"
+
+
+names:
+
+  inparroquia{inestado_id}:
+    required:  Yes
+    required_msg: Debe seleccionar un Estado
+
+  inparroquia{inmunicipio_id}:
+    required:  Yes
+    required_msg: Debe seleccionar un Municipio
+
+  inparroquia{codpar}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codpar
+
+  inparroquia{nompar}:
+    required:  Yes
+    required_msg: El nombre no puede estar en Blanco
+    validators: Validator_nompar
+
+
+Validator_codpar:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Inparroquia
+        column:       codpar
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nompar:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres

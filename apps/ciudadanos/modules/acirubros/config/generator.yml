@@ -1,0 +1,34 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atrubros
+    theme:            cidesaGenerator
+
+    fields:
+      attipayu_id:         { name: Grupo de Rubro, validate: Vstring_1_50, msj_error: Debe seleccionar un Tipo de Ayuda }
+      desrub:              { name: Descripción, validate: Vstring_1_100, msj_error: Debe insertar la Descripción del Rubro }
+      destipayu:           { name: Grupo }
+    list:
+        fields:
+          desdon:            { name: Rubros, params: size=10 }
+        title:          Rubros
+        display:        [=desrub, destipayu]
+        object_actions:
+          _edit:        ~
+          _delete:      ~
+        filters:        [desrub, attipayu_id]
+        fields:
+          attipayu_id:
+            params: style:width=20px
+      max_per_page:   5
+      sort:  desrub
+    edit:
+      title:          Edición de Rubros
+      display:
+        none:         [attipayu_id, desrub]
+        Recaudos:     [ _recaudos ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,296 @@
+---
+propel:
+  _attributes:
+    package: lib.model
+  occiudad:
+    #_attributes:
+      #idMethod: native
+    codciu:
+      type: VARCHAR
+      size: 4
+      required: true
+    codedo:
+      type: VARCHAR
+      size: 4
+      required: true
+    codpai:
+      type: VARCHAR
+      size: 4
+      required: true
+    nomciu:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  viaregtiptab:
+    _attributes:
+      idMethod: native
+    destiptab:
+      type: VARCHAR
+      size: 254
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  viaregtipser:
+    _attributes:
+      idMethod: native
+    destipser:
+      type: VARCHAR
+      size: 254
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  viadettipser:
+    _attributes:
+      idMethod: native
+    montoeur:
+      type: NUMERIC
+      size: 12
+      scale: 2
+    montodol:
+      type: NUMERIC
+      size: 12
+      scale: 2
+    montobs:
+      type: NUMERIC
+      size: 12
+      scale: 2
+#    npestorg_codniv:
+#      type: VARCHAR
+#      size: 16
+    viaregtiptab_id:
+      type: INTEGER
+      foreignTable: viaregtiptab
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    occiudad_id:
+      type: INTEGER
+      foreignTable: occiudad
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    viaregtipser_id:
+      type: INTEGER
+      foreignTable: viaregtipser
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  viaregente:
+    _attributes:
+      idMethod: native
+    cedrif:
+      type: VARCHAR
+      size: 20
+      required: true
+    desente:
+      type: VARCHAR
+      size: 100
+      required: true
+    nacent:          #nacionalidad  N - I
+      type: VARCHAR
+      size: 1
+      required: true
+    tipent:          #Tipo de persona: N - J
+      type: VARCHAR
+      size: 1
+      required: true
+#    actpro:         #Actividad Profesional
+#      type: VARCHAR
+#      size: 3
+    dirente:         #Direccion
+      type: VARCHAR
+      size: 254
+    telente:         #Telefono
+      type: VARCHAR
+      size: 50
+    corente:         #Correo
+      type: VARCHAR
+      size: 50
+    actecoente:         #Memor - Actividad Economica
+      type: VARCHAR
+      size: 254
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  viaciuente:    #Registro de Ciudades-Ente
+    _attributes:
+      idMethod: native
+    occiudad_id:
+      type: INTEGER
+      foreignTable: occiudad
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    viaregente_id:
+      type: INTEGER
+      foreignTable: viaregente
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  viaregact:    #registro de actividad
+    _attributes:
+      idMethod: native
+    desact:
+      type: VARCHAR
+      size: 254
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  viaregsolvia:         #Registro de solicitud de viatico
+    _attributes:
+      idMethod: native
+    cedemp:         #Cedula Empleado
+      type: VARCHAR
+      size: 16
+      required: true
+    refcom:         #Refcom Presup Compromiso
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:             #Codigo Presupuestario
+      type: VARCHAR
+      size: 32
+      required: true
+    tipcom:             #Tipo de Documento
+      type: VARCHAR
+      size: 4
+      required: true
+    fecha:              #Fecha
+      type: DATE
+      required: true
+    descr:             #Descripcion
+      type: VARCHAR
+      size: 254
+    viaregtiptab_id:
+      type: INTEGER
+      foreignTable: viaregtiptab
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    monto:              #Monto de los Viaticos
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  viaregdetsolvia:    #Registro de solicitud de viatico
+    _attributes:
+      idMethod: native
+    viaregsolvia_id:
+      type: INTEGER
+      foreignTable: viaregsolvia
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    viaregente_id:    #Ente
+      type: INTEGER
+      foreignTable: viaregente
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    viaregact_id :    #Actividades
+      type: INTEGER
+      foreignTable: viaregact
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    occiudad_id:      #Ciudades
+      type: INTEGER
+      foreignTable: occiudad
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    codmon:           #Moneda
+      type: VARCHAR
+      size: 3
+    valmon:            #Valor de la Moneda
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecha_sal:           #Fecha Salida
+      type: DATE
+      required: true
+    fecha_reg:           #Fecha Regreso
+      type: DATE
+      required: true
+    num_dia:             #Numero de Dia
+      type: NUMERIC
+      size: 2
+    monto:               #Monto de los gastos
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  viaregdetgassolvia:    #Registro de solicitud de gastos
+    _attributes:
+      idMethod: native
+    viaregdetsolvia_id:     #detalle del plan de trabajo
+      type: INTEGER
+      foreignTable: viaregdetsolvia
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    viaregtipser_id:          # tipo de Servicio: Hospedaje, Comida, etc
+      type: INTEGER
+      foreignTable: viaregtipser
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    detgasmont:           #Monto de los Gastos
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true
+  viadettabcar:    #Asociacion Cargos y Tipo de Tabulador
+    _attributes:
+      idMethod: native
+    viaregtiptab_id:
+      type: INTEGER
+      foreignTable: viaregtiptab
+      foreignReference: id
+      onDelete:
+      onUpdate:
+    codcar:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+      primaryKey: true

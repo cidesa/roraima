@@ -1,0 +1,42 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Faajuste
+    theme:            cidesaGenerator
+    fields:
+      refaju: { name: Número}
+      fecaju: { name: Fecha}
+      codref: { name: Nro. Referencia}
+      codpro: { name: CI/RIF Cliente}
+      rifpro: { name: RIF}
+      nompro: { name: Nombre}
+      dirpro: { name: Dirección}
+      telpro: { name: Teléfono}
+      desaju: { name: Descripción}
+      codalm: { name: Cod Almacén}
+      monaju: { name: Monto Total}
+      obsaju: { name: Observación}
+      grid:   { name: Detalle del Ajuste}
+      tipaju: { name: Refiere a}
+    list:
+      title:          Ajustes
+      display:        [=refaju, codpro]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [refaju, codpro]
+      max_per_page:   10
+      sort:           refaju
+    edit:
+      title:          Ajustes
+      display:
+        "Datos del Ajuste": [refaju, fecaju, tipaju, codref, codpro, rifpro, dirpro, telpro, desaju, _codalm, monaju]
+        "Observación": [obsaju]
+      fields:
+        desaju:
+          params: size = 30
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,60 @@
+methods:
+  post:
+   - "ocdatste{cedste}"
+   - "ocdatste{nomste}"
+   - "ocdatste{codste}"
+   - "ocdatste{dirste}"
+
+names:
+  ocdatste{cedste}:
+    required:  Yes
+    required_msg: La C.I/Rif no puede estar en Blanco.
+    validators: UniqueValidator
+
+  ocdatste{nomste}:
+    required:  Yes
+    required_msg: El Nombre no puede estar en Blanco
+    validators: DescripcionValidator
+
+  ocdatste{codste}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco.
+    validators: ExistValidator
+
+  ocdatste{dirste}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco.
+    validators: DescripcionValidator2
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocdatste
+        column:       cedste
+        unique_error: La C.I/Rif ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre no puede tener menos de 2 caracteres
+        max:       254
+        max_error: El Nombre no puede pasar mas de 254 caracteres
+
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Octipste
+        column:       codste
+        unique_error: El Tipo debe Existir.
+
+DescripcionValidator2:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La Descripcion no puede pasar mas de 254 caracteres
+

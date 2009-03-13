@@ -1,0 +1,50 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caprovee
+    theme:            default
+    fields:
+      codpro:       { name:  Código Contratista}
+      nompro:       { name:  Nombre}
+      codtipesp:    { name:  Código Especialidad}
+      destipesp:    { name:  Descripción}
+      rifpro:       { name:  C.I. / Rif Proveedor}
+      nitpro:       { name:  N.I.T.}
+      dirpro:       { name:  Dirección}
+      telpro:       { name:  Teléfono(s)}
+      faxpro:       { name:  Fax}
+      email:        { name:  E-Mail}
+      limcre:       { name:  Limite del Crédito}
+      codcta:       { name:  Cta. Contable Asoc.}
+      descta:       { name:  Descripción Cta. Contable Asoc.}
+      regmer:       { name:  Registro Mercantil}
+      fecreg:       { name:  Fecha Reg.}
+      tomreg:       { name:  Tomo}
+      folreg:       { name:  Folio}
+      capsus:       { name:  Capital Suscrito}
+      cappag:       { name:  Capital Pagado}
+      rifrepleg:    { name:  C.I. / Rif}
+      nomrepleg:    { name:  Nombre}
+      dirrepleg:    { name:  Dirección}
+      nrocei:       { name:  Nro. OCEI}
+      codram:       { name:  Ramo que Provee}
+      nomram:       { name:  Descripción Ramo}
+      codtiprec:    { name:  Grupo}
+      destiprec:    { name:  Descripción Grupo}
+    list:
+      title:          Contratistas
+      filters:        [codpro]
+      display:        [=codpro, nompro]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:           codpro
+    edit:
+      title:          Edición de Contratista
+      display:        [codpro, nompro, codtipesp, destipesp, rifpro, nitpro, dirpro, telpro, faxpro, nrocei, email, codram, nomram, limcre, codcta, descta, regmer, fecreg, tomreg, folreg, capsus, cappag, rifrepleg, nomrepleg, dirrepleg, codtiprec, destiprec]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

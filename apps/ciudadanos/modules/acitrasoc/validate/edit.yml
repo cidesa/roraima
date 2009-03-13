@@ -1,0 +1,24 @@
+methods:
+  post:
+   - "attrasoc{cedtra}"
+   - "attrasoc{nomtra}"
+   - "attrasoc{apetra}"
+   - "attrasoc{nrocol}"
+
+names:
+  attrasoc{cedtra}:
+    required:  Yes
+    required_msg: Este Campo es requerido
+
+  attrasoc{nomtra}:
+    required:  Yes
+    required_msg: Este Campo es requerido
+
+  attrasoc{apetra}:
+    required:  Yes
+    required_msg: Este Campo es requerido
+
+  attrasoc{nrocol}:
+    required:  Yes
+    required_msg: Este Campo es requerido
+

@@ -1,0 +1,8 @@
+modules/*/config/security.yml:
+  class:    cidesaSecurityConfigHandler
+modules/generales/config/security.yml:
+  class:    sfSecurityConfigHandler
+modules/docpen/config/security.yml:
+  class:    sfSecurityConfigHandler
+modules/docpendet/config/security.yml:
+  class:    sfSecurityConfigHandler

@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocmunici
+    theme:            default
+    fields:
+      codpai:       { name: Código Paìs }
+      codedo:       { name: Código Estado }
+      codmun:       { name: Código Municipio}
+      nommun:       { name: Nombre Municipio}
+      nompai:       { name: País}
+      nomedo:       { name: Estado}
+
+    list:
+      title:          Municipios
+      filters:        [codciu]
+      display:        [=codmun, nommun, nomedo, nompai]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Municipio
+      display:        [codpai, codedo, codmun, nommun]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

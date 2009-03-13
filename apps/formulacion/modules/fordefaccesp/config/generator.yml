@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefaccesp
+    theme:            default
+
+    fields:
+      codpro:    { name: Código }
+      nompro:    { name: Descripción}
+      proacc:    { name: Acción }
+
+
+    list:
+      title:          Acciones Especificas
+      filters:        [codpro]
+      display:        [=codpro, nompro, proacc]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:   codpro
+    edit:
+      title:         Acciones Especificas
+      display:       [codpro, tippro, nompro, proacc]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

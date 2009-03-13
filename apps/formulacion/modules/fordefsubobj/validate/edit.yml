@@ -1,0 +1,41 @@
+methods:
+  post:
+   - "fordefsubobj{codequ}"
+   - "fordefsubobj{codsubobj}"
+   - "fordefsubobj{dessubobj}"   
+
+
+names: 
+  fordefsubobj{codequ}:
+    required:  Yes
+    required_msg: El Código de la Directriz no puedo estar en Blanco
+
+  fordefsubobj{codsubobj}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_codsubobj
+    
+  fordefsubobj{dessubobj}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_dessubobj       
+
+Validator_codsubobj:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fordefsubobj
+        column:       codsubobj
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_dessubobj:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       1000
+        max_error: La descripción no puede pasar mas de 1000 caracteres
+
+     
+        
+
+

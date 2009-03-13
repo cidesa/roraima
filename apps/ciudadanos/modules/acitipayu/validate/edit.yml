@@ -1,0 +1,44 @@
+methods:
+  post:
+   - "attipayu{codayu}"
+   - "attipayu{desayu}"
+   - "attipayu{codpre}"
+
+names:
+  attipayu{codayu}:
+    required:  Yes
+    required_msg: Se debe colocar el código del tipo de ayuda
+    validators: MyStringValidator1
+
+  attipayu{desayu}:
+    required:  Yes
+    required_msg: Se debe colocar la descripción del tipo de ayuda
+    validators: MyStringValidator2
+
+  attipayu{codpre}:
+    required:  No
+    validators: MyStringValidator3
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El código no debe tener menos de 1 caracter
+        max:       8
+        max_error: El código no debe tener mas de 8 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no debe tener mas de 1 caracter
+        max:       50
+        max_error: La descripción debe tener menos de 50 caracteres
+
+MyStringValidator3:
+    class: sfStringValidator
+    param:
+        min:       0
+        min_error: El código presupuestario debe tener al menos 1 caracter
+        max:       100
+        max_error: El código presupuestario debe tener menos de 100 caracteres

@@ -1,0 +1,49 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cacotiza
+    theme:            default
+
+    fields:
+      refcot:    { name: Número, params: maxlength=8}
+      feccot:    { name: Fecha, params: date_format='dd/MM/yyyy'}
+      tipmon:    { name: Moneda}
+      valmon:    { name: Valor}
+      codpro:    { name: Código del Contratistas de Bienes o Servicio y Cooperativas, params: maxlength=15}
+      rifpro:    { name: RIF de la Contratistas de Bienes o Servicio y Cooperativas, params: maxlength=15}
+      nompro:    { name: Descripción}
+      descot:    { name: Descripción}
+      refsol:    { name: Solicitud}
+      refpro:    { name: Referencia}
+      tipo:      { name: Descuenta}
+      moncot:    { name: Monto Total, params: maxlength=18}
+      #condiciones de pago
+      conpag:    { name: Código, params: maxlength=4}
+      desconpag: { name: Descripción}
+      #forma de entrega
+      forent:    { name: Código, params: maxlength=4}
+      desforent: { name: Descripción}
+      mondes:    { name: Monto Descuento}
+      monrec:    { name: Monto Recargo}
+      porvan:    { name: % del VAN de las Ofertas}
+      porant:    { name: % del Anticipo}
+    list:
+      title:          Cotizaciones
+      display:        [=refcot, feccot, descot, refsol]
+      filters:		  [refcot, feccot, codpro]
+      max_per_page:	  10
+      sort:    refcot
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      fields:
+        refcot:      { params : maxlength=8 }
+
+    edit:
+      title:          Edición de Cotizaciones
+      display:        [refcot, feccot, tipmon, valmon, codpro, rifpro, nompro, descot, refsol, desreq, refpro, moncot, conpag, desconpag, forent, desforent, mondes, monrec, tipo, porvan, porant]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

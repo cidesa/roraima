@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Forparing
+    theme:            default
+    fields:
+      codparing: { name: Código}
+      despar: { name: Descripción, params : maxlength=100 }     
+      montoing: { name: Monto }
+      codtipfin: { name: Código, params : maxlength=4 }
+      desfin: { name: Descripción, params : maxlength=50 }
+    list:
+      title:          Formulación Presupuesto de Ingresos
+      filters:        [codparing]
+      display:        [=codparing, despar]
+      object_actions:
+        _edit:        ~
+      max_per_page:   10
+      sort:      codparing
+    edit:
+      title:          Edición Formulación Presupuesto de Ingresos
+      display:      [codparing, despar, montoing, codtipfin, desfin]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

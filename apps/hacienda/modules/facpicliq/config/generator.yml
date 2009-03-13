@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcdeclar
+    theme:            default
+    fields:
+      numdec:      { name: Número Declaración}
+      fecdec:      { name: Fecha Declaración, params: date_format='dd/MM/yyyy'} 
+      numref:      { name: Datos Licencia} 
+      fundec:      { name: Funcionario}
+      rifcon:      { name: C.I. / RIF.}
+      anodec:      { name: Año de Declaración}
+      fecini:      { name: Fecha Inicio }
+      feccie:      { name: Fecha Fin }
+      numlic:      { name: Número Licencia }
+      nomcon:      { name: Nombre }
+      dircon:      { name: Dirección }
+      capsoc:      { name: Fecha Fin }
+      modo:        { name: Tipo de Declaracion }
+    list:
+      title:          Declaración de Licencia - Actividades Económicas
+      display:        [=numdec, fecdec, numref, modo] 
+      filters:        [numsol]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   10    
+    edit:
+      title:          Declaración de Licencia - Actividades Económicas
+      display:        [numdec, fecdec, numref, fundec, rifcon, anodec, modo, fecini, feccie]  

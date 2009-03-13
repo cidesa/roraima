@@ -1,0 +1,163 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  dftemporal2:
+    #_attributes:
+      #idMethod: native
+    codigo:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecha:
+      type: DATE
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    abr:
+      type: VARCHAR
+      size: 4
+      required: true
+    ben:
+      type: VARCHAR
+      size: 250
+      required: true
+    estad:
+      type: VARCHAR
+      size: 20
+      required: true
+    nomtab:
+      type: VARCHAR
+      size: 20
+    vida:
+      type: VARCHAR
+      size: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  dftemporal3:
+    #_attributes:
+      #idMethod: native
+    codigo:
+      type: VARCHAR
+      size: 15
+      required: true
+    fecha:
+      type: DATE
+      required: true
+    abr:
+      type: VARCHAR
+      size: 4
+      required: true
+    vida:
+      type: VARCHAR
+      size: 2
+      required: true
+    ben:
+      type: VARCHAR
+      size: 250
+      required: true
+    usu:
+      type: CHAR
+      size: 50
+      required: true
+    fecharec:
+      type: DATE
+      required: true
+    fechaate:
+      type: DATE
+    estad:
+      type: VARCHAR
+      size: 20
+      required: true
+    ruta:
+      type: VARCHAR
+      size: 4
+      required: true
+    nomtab:
+      type: VARCHAR
+      size: 20
+    unidadori:
+      type: VARCHAR
+      size: 4
+    unidad:
+      type: VARCHAR
+      size: 4
+    anuate:
+      type: VARCHAR
+      size: 1
+    chkuni1:
+      type: VARCHAR
+      size: 1
+      default: 0
+    chkuni2:
+      type: VARCHAR
+      size: 1
+      default: 0
+    chkuni3:
+      type: VARCHAR
+      size: 1
+      default: 0
+    chkuni4:
+      type: VARCHAR
+      size: 1
+      default: 0
+    chkuni5:
+      type: VARCHAR
+      size: 1
+      default: 0
+    chkuni6:
+      type: VARCHAR
+      size: 1
+      default: 0
+    chkuni7:
+      type: VARCHAR
+      size: 1
+      default: 0
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  dftemporal4:
+    #_attributes:
+      #idMethod: native
+    tipo:
+      type: VARCHAR
+      size: 4
+      required: true
+    abr:
+      type: VARCHAR
+      size: 4
+      required: true
+    ext:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  dftemporal5:
+    #_attributes:
+      #idMethod: native
+    cedrif:
+      type: VARCHAR
+      size: 15
+      required: true
+    nomben:
+      type: VARCHAR
+      size: 250
+      required: true
+    telben:
+      type: VARCHAR
+      size: 20
+    nitben:
+      type: VARCHAR
+      size: 15
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

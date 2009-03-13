@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fortipfin
+    theme:            default
+    fields:
+      codfin:      { name : Código, params: maxlength=4 }
+      nomabr:      { name : Nombre Abreviado, params: maxlength=10}  
+      nomext:      { name : Nombre Extendido, params: maxlength=100 }        
+      tipfin:      { name : Tipo de Financiamiento }   
+    list:
+      title:          Tipo de Financiamiento
+      display:        [=codfin, nomext, nomabr]
+      filters:        [codfin, nomext]
+      object_actions:
+        _edit:        ~                 
+      max_per_page:   5    
+      sort:     codfin
+    edit:
+      title:          Edición de Tipo de Financiamiento
+      display:        [codfin, nomext, nomabr, tipfin]          
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

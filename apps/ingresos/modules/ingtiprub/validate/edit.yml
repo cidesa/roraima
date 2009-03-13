@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "cirubro{codtiprub}"
+   - "cirubro{destiprub}"
+
+names:
+  cirubro{codtiprub}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codtiprub
+
+  cirubro{destiprub}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_destiprub
+
+Validator_codtiprub:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cirubro
+        column:       codtiprub
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destiprub:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La descripción no puede tener mas de 250 caracteres

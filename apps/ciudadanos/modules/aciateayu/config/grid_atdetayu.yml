@@ -1,0 +1,88 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   atdetayu
+  anchogrid:               750
+  ancho:                   750
+  filas:                   7
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Aprobado
+  tipo:                    k
+  nombrecampo:             aprobado
+  html:                    [ '' ]
+  esgrabable:              true
+2:       # Columna 1
+  titulo:                  atgrudonid
+  tipo:                    t
+  nombrecampo:             atgrudonid
+  html:                    [ '' ]
+  oculta:                  true
+  esgrabable:              false
+3:       # Columna 2
+  titulo:                  Grupo
+  tipo:                    t
+  nombrecampo:             codgru
+  html:                    [size="4" ]
+  esgrabable:              false
+  oculta:                  true
+4:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desgru
+  html:                    [ '' ]
+  esgrabable:              false
+  oculta:                  true
+5:       # Columna 3
+  titulo:                  atdonaciones_id
+  tipo:                    t
+  nombrecampo:             atdonaciones_id
+  html:                    [ '' ]
+  oculta:                  true
+  esgrabable:              true
+6:       # Columna 4
+  titulo:                  Donación
+  tipo:                    t
+  nombrecampo:             coddon
+  html:                    [size="4" ]
+  oculta:                  false
+  esgrabable:              true
+  ajaxfila:                false
+7:       # Columna 4
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desdon
+  html:                    [size="15" readonly="true" ]
+  oculta:                  false
+  esgrabable:              true
+8:       # Columna 6
+  titulo:                  Cantidad
+  tipo:                    m
+  nombrecampo:             cantidad
+  html:                    [size="3" readonly="true" ]
+  esgrabable:              true
+  esnumerico:              true
+9:       # Columna 7
+  titulo:                  Cantidad Aprobada
+  tipo:                    m
+  nombrecampo:             canapr
+  html:                    [size="3" ]
+  esgrabable:              true
+  esnumerico:              true
+10:       # Columna 8
+  titulo:                  Precio
+  tipo:                    m
+  nombrecampo:             precio
+  html:                    [size="4" ]
+  esgrabable:              true
+  esnumerico:              true
+11:       # Columna 6
+  titulo:                  Unidad
+  tipo:                    t
+  nombrecampo:             unidad
+  html:                    [size="4" ]
+  oculta:                  false
+  esgrabable:              true
+
+

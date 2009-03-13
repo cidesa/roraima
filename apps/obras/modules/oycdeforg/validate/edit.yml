@@ -1,0 +1,56 @@
+methods:
+  post:
+   - "ocdeforg{codorg}"
+   - "ocdeforg{desorg}"
+   - "ocdeforg{codtiporg}"
+   - "ocdeforg{emaorg}"
+
+names:
+  ocdeforg{codorg}:
+    required:  Yes
+    required_msg: La Código no puede estar en Blanco.
+    validators: UniqueValidator
+
+  ocdeforg{desorg}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco
+    validators: DescripcionValidator
+
+  ocdeforg{codtiporg}:
+    required:  Yes
+    required_msg: El Tipo de Organismo no puede estar en Blanco.
+    validators: ExistValidator
+
+  ocdeforg{emaorg}:
+    required:  No
+    validators: EmailValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocdeforg
+        column:       codorg
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La Descripción no puede pasar mas de 250 caracteres
+
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Octiporg
+        column:       codtiporg
+        unique_error: El Código del Tipo de Organismo debe Existir.
+
+EmailValidator:
+    class: sfEmailValidator
+    param:
+        strict:       true
+        email_error:  Dirección de Email Inválida.

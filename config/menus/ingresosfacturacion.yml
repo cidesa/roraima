@@ -1,0 +1,52 @@
+ingresosfacturacion:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Ingresos
+    imagen: ingresos.gif
+    nombre: Ingresos INPSASEL
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: ingresosfacturacion.php
+        modulo_dev: ingresosfacturacion_dev.php
+      Reportes:
+        absoluta: reportes/reportes/ingresos
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones:
+      Estado:                                        ingdefest
+      Municipio:                                     ingdefmun
+      Parroquia:                                     ingdefpar
+      #Forma de Solicitud:                            ingformsol
+      #Recaudos:
+        #Grupo de Recaudos:                           inggruprec
+        #Registro:                                    ingdefrec
+      #Descuentos:                                    ingdefdes
+      Bancos:                                        ingdefban
+      Sanciones:
+        Registro:                                    ingregsan
+        Multas:
+          #Tipo:                                      ingtipmul
+          Registro:                                  ingregmul
+      Tipo de Solicitud:                             ingtipsol
+      Ingresos por Profesionales:                    ingingprof
+    Profesionales:
+      Tipo:                                          ingtippro
+      Especialidad:                                  ingesppro
+      Registro:                                      ingregprof
+    Empresas:
+      Tipo:                                          ingtipemp
+      Registro:                                      ingregempr
+    Emisión de Factura o Recibo de Cancelación:      ingemifac
+    Reportes:
+      Ingresos por Sanciones:                        iningsan
+      Ingresos por Registros Profesionales:          inregprof
+      Ingresos por Bancos:                           ingbanco
+      Cierre Diario:                                 ingciedia
+      Ingresos o Multas canceladas:                  ingempper
+      Factura:                                       ingfactura
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

@@ -1,0 +1,52 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   Fcvalinm
+  ancho:                   400
+  anchogrid:               750
+  filas:                   6
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+
+1:       # Columna 1
+  titulo:                  Tipo
+  tipo:                    t
+  nombrecampo:             codtip
+  esgrabable:			   true
+  html:                    [size=2]
+
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             destip
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Alícuota Inm
+  tipo:                    m
+  nombrecampo:             alitip
+  esgrabable:			   true
+  html:                    [size=10 onBlur=Calculo_fila2(this.id)]
+
+4:       # Columna 4
+  titulo:                  Bs./M2 Anual
+  tipo:                    m
+  nombrecampo:             anual
+  esgrabable:			   true
+  html:                    [size="15", readonly=true ]
+
+5:       # Columna 5
+  titulo:                  Alícuota Terr
+  tipo:                    m
+  nombrecampo:             alitipt
+  esgrabable:			   true
+  html:                    [size=10 onBlur=Calculo_fila4(this.id)]
+
+6:       # Columna 6
+  titulo:                  Bs./M2 Anual
+  tipo:                    m
+  nombrecampo:             anualt
+  esgrabable:			   true
+  html:                    [size="15", readonly=true ]
+

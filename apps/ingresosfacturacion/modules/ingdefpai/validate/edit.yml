@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "inpais{codpai}"
+   - "inpais{nompai}"
+names:
+  inpais{codpai}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codpai
+
+  inpais{nompai}:
+    required:  Yes
+    required_msg: El nombre no puede estar en Blanco
+    validators: Validator_nompai
+
+Validator_codpai:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Inpais
+        column:       codpai
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nompai:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres

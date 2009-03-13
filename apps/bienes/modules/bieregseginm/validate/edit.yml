@@ -1,0 +1,107 @@
+methods:
+  post:
+   - "bnseginm{codact}"
+   - "bnseginm{codmue}"
+   - "bnseginm{nroseginm}"
+   - "bnseginm{fecseginm}"
+   - "bnseginm{nomseginm}"
+   - "bnseginm{cobseginm}"
+   - "bnseginm{monseginm}"
+   - "bnseginm{fecsegven}"
+   - "bnseginm{proseginm}"
+
+names:
+  bnseginm{codact}:
+    required:  Yes
+    required_msg: El Código de Nivel no puede estar en Blanco.
+
+  bnseginm{codmue}:
+    required:  Yes
+    required_msg: El Código del Activo no puede estar en Blanco.
+
+  bnseginm{nroseginm}:
+    required:  Yes
+    required_msg: El número de la Poliza no puede estar en Blanco.
+
+  bnseginm{fecseginm}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  bnseginm{nomseginm}:
+    required:  Yes
+    required_msg: La Compañia Aseguradora no puede estar en Blanco.
+    validators: DescripcionValidator
+
+  bnseginm{cobseginm}:
+    required:  Yes
+    required_msg: La Cobertura no puede estar en Blanco.
+    #validators: ExistValidator
+
+  bnseginm{monseginm}:
+    required:  Yes
+    required_msg: El Monto no puede estar en Blanco.
+    validators: MyNumberValidator 
+    
+  bnseginm{fecsegven}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator
+
+
+  bnseginm{proseginm}:
+    required:  Yes
+    required_msg: El promotor no puede estar en Blanco.
+    validators: DescripcionValidator2
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Bnseginm
+        column:       Codmue
+        unique_error: El Código del Activo ya existe. Por Favor, Cambiélo por otro.
+
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Bncobseg
+        column:       cobcod
+        unique_error: La Cobertura debe Existir.
+
+ExistValidator2:
+    class: CidesaExistValidator
+    param:
+        class:        Bnseginm
+        column:       Nroseginm
+        unique_error: La Cobertura debe Existir.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Compañia Aseguradora no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La Compañia Aseguradora no puede pasar mas de 254 caracteres
+
+DescripcionValidator2:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Promotor no puede tener menos de 2 caracteres
+        max:       254
+        max_error: El Promotor no puede pasar mas de 254 caracteres
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error:El Campo solo puede contener valores númericos

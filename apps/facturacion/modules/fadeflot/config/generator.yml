@@ -1,0 +1,19 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fadeflot
+    theme:            cidesaGenerator
+
+   fields:
+      codart: { name: Código del Artículo }
+      numlot: { name: Número de Lote }
+      deslot: { name: Descripción del Lote }
+      codalm: { name: Código del Almacen }
+      canlot: { name: Cantidad del Lote }
+      fecven: { name: Fecha de Vencimiento }
+      coslot: { name: Costo del Lote }
+      numlot: { name: Número de Lote }
+      codubi: { name: Código de Ubicación }
+      desart: { name: Descripción del Artículo }
+	  lotuni: { name: Maneja Lote Unitario }
+

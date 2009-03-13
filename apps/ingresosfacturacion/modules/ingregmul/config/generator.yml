@@ -1,0 +1,40 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Inmulta
+    theme:            cidesaGenerator
+    fields:
+      insancion_id:
+        name:Sanción
+        params: size=4
+
+      codmul:
+        name:Código
+        params: size=4
+
+      desmul:
+        name:Descripción
+        type: textarea_tag
+        params: size=50x5 maxlength=250
+
+      unitri:
+        name: Unidades Tributarias
+
+    edit:
+      title:    Edición de Multas
+      display:  [_insancion_id, _codmul, desmul, unitri]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+
+    list:
+      title:          Definición de Multas
+      filters:        [codmul]
+      display:        [=codmul, desmul]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codmul

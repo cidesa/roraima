@@ -1,0 +1,60 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fafactur
+    theme:            cidesaGenerator
+    fields:
+      codcaj:  { name: Clave}
+      reffac:  { name: Número, params: maxlength=8}
+      fecfac:  { name: Fecha Emisión, params: date_format='dd/MM/yyyy' size=10 maxlength=10}
+      tipref:  { name: Refiere a}
+      tipmon:  { name: Tipo de Moneda}
+      codcli:  { name: Cod. Cliente}
+      rifpro:  { name: C.I/R.I.F Cliente, params: maxlength=8 disabled=false}
+      nompro:  { name: Nombre, params: readonly=true}
+      telpro:  { name: Teléfono(s), params: readonly=true}
+      dirpro:  { name: Dirección, params: readonly=true}
+      tipper:  { name: Tipo de Persona, params: readonly=true}
+      codconpag:  { name: Condición de Pago, params: maxlength=4}
+      desconpag:  { name: Descripción}
+      desfac:  { name: Descripción, params: maxlength=255}
+      monto:   { name: Monto}
+      monrgo:   { name: Recargo}
+      mondesc: { name: Descuento}
+      monfac:  { name: Total}
+      moncan:  { name: Monto Cancelado}
+      monres:  { name: Monto Resto}
+      vuelto:  { name: Monto Vuelto}
+      observ:  { name: Descripción Detallada, type: textarea_tag, params: size=80x5 maxlength=500 onkeyup=" return ismaxlength(this)"}
+      sucursal:  { name: Sucursal, params: maxlength=50}
+      grid_fapeddes:    { name: Pedidos/Despachos}
+      grid_faartfac:    { name: Detalle}
+      grid_fadescart:    { name: Descuento}
+      totdesc:  { name: Total Descuentos}
+      grid_fargoart:    { name: Recargos}
+      totrec:  { name: Total Recargos}
+      grid_faforpag:    { name: Forma de Pago}
+      combo: { name: Combos de Artículos}
+      listaart: { name: Artículos}
+    list:
+      title:          Facturas
+      display:        [=reffac, fecfac]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [reffac, fecfac, codcli]
+      max_per_page:   10
+      sort:           reffac
+    edit:
+      title: Edición de Factura
+      display:
+        "Datos de la Factura": [codcaj, reffac, fecfac, _tipref, _tipmon, _rifpro, telpro, dirpro, tipper, _codconpag, desfac, monto, monrgo, mondesc, monfac, combo]
+        "Detalle": [listaart, _grid_fapeddes, _grid_faartfac, _grid_fadescart, totdesc, _grid_fargoart, totrec]
+        "Forma de Pago": [_grid_faforpag, moncan, monres, vuelto]
+        "Descripción Detallada/Sucursal": [observ, sucursal, usuarios, password]
+      hide: [codcli, reapor, status, valmon, numcom, numcomord, numcominv, incluircliente, tipconpag, tipo, apliclades, docrefiera, esretencion, tottotart, totmonrgo, monedaanterior, trajo, porcentajedescto, totcanpreart, totprecio, ctasociada]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

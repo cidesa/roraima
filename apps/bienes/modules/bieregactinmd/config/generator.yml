@@ -1,0 +1,74 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnreginm
+    theme:            default
+    fields:
+      codact:      { name : Código Catálogo }
+      codinm:      { name : Cod. Activo }
+      codalt:      { name : Cod. Alterno }
+      desinm:      { name : Descripción }
+      ordcom:      { name : Orden de Compra }
+      codpro:      { name : Cod. Proveedor }
+      nomprovee:   { name : Proveedor }
+      desubi:      { name : Ubicación }
+      viduti:      { name : Vida Util (Meses) }
+      aumviduti:   { name : (+) }
+      dimviduti:   { name : (-) }
+      coddis:      { name : Cod. Disposición }
+      disposicion  { name : Disposición }
+      valadis:     { name : Valor Adición }
+      fecrcp:      { name : Fecha Recepción, params: date_format=dd/MM/yyyy }
+      feccom:      { name : Fecha Compra, params: date_format=dd/MM/yyyy }
+      fecreg:      { name : Fecha Cálculo, params: date_format=dd/MM/yyyy }
+      deninm:      { name : Denominación }
+      nroexp:      { name : Nro. de Expediente }
+      detinm:      { name : Detalle }
+      avaact:      { name : Avaluo Actual }
+      clafun:      { name : Clasificación Funcional }
+      avacom:      { name : Avaluo Comisión }
+      edoleg:      { name : Edo. Legal de la Construcción }
+      obsinm:      { name : Observación }
+      linnor:      { name : Norte}
+      linsur:      { name : Sur }
+      linest:      { name : Este }
+      linoes:      { name : Oeste }
+      areter:      { name : Area del Terreno }
+      arecub:      { name : Area Cubierta }
+      arecon:      { name : Area Construida }
+      areotr:      { name : Otras Instalaciones }
+      aretot:      { name : Area Total }
+      valini:      { name : Valor Inicial }
+      valres:      { name : Valor Rescate }
+      vallib:      { name : Valor Libros }
+      depmen:      { name : Depreciación Mensual }
+      depacu:      { name : Depreciación Acumulada }
+      valrex:      { name : Valor Reexpresado }
+      cosrep:      { name : Costo Reposición }
+      codubi:      { name : Cod. Ubicación }
+      fecexp:      { name : fecha}
+      ordrcp:      { name : Factura}
+      valactual:   { name : Valor Actual }
+
+            
+    list:
+      title:          Registro de Activos Inmuebles
+      display:        [=codact, codinm, desinm]
+      filters:        [codact, codinm]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort: codact
+    edit:
+      title:          Edición Activos Inmuebles
+      display:        [codact, codinm, codalt, desinm, ordcom, codpro, nomprovee, desubi, viduti, aumviduti, dimviduti, coddis, disposicion, fecrcp, fecreg, deninm, nroexp, detinm, avaact, clafun, avacom, edoleg, obsinm, linnor, linsur, linest, linoes, areter, arecub, arecon, areotr, aretot, valini, valres, vallib, depmen, depacu, valrex, cosrep, codubi, fecexp, ordrcp, valactual, valadis, feccom]
+      actions:
+         _list:     ~
+         _save:     ~
+         _create:   ~
+         _delete:   ~
+
+
+
+

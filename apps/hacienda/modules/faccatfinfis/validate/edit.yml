@@ -1,0 +1,21 @@
+methods:
+  post:
+   - "fccatfis{codcatfis}"
+   - "fccatfis{nomcatfis}"
+
+names:
+  fccatfis{codcatfis}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_codcatfis
+
+  fccatfis{nomcatfis}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+Validator_codcatfis:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fccatfis
+        column:       codcatfis
+        unique_error: El registro ya Existe intente con otro.

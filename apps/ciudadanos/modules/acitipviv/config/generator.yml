@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Attipviv
+    theme:            cidesaGenerator
+
+    fields:
+      tipviv:      { name: Descripción }
+    list:
+      title:          Definición de Tipos de Viviendas
+      display:        [=tipviv]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [tipviv]
+      max_per_page:   5
+      sort:  tipviv
+    edit:
+      title:          Edición de Tipos de Viviendas
+      display:        [tipviv]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

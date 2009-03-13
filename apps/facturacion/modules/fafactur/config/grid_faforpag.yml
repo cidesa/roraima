@@ -1,0 +1,49 @@
+opciones:                  # Opciones generales
+  name:                    d
+  eliminar:                true
+  tabla:                   faforpag
+  anchogrid:               900
+  ancho:                   1250
+  filas:                   10
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo de Pago
+  tipo:                    t
+  nombrecampo:             tippag
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="5"]
+2:       # Columna 2
+  titulo:                  Tipo de Pago
+  tipo:                    t
+  nombrecampo:             destippag
+  esgrabable:              true
+  html:                    [size="20", readonly=true ]
+  catalogo:                [fatippag, sf_admin_edit_form, { Id: 1, Destippag: 2 }, Fatippag_Fafactur ]
+3:       # Columna 3
+  titulo:                  Banco
+  tipo:                    t
+  nombrecampo:             nomcue
+  esgrabable:              true
+  html:                    [size="40"]
+  catalogo:                [faallbancos, sf_admin_edit_form, { Banco: 3, Ctaban: 4 }, Fabancos_Fafactur ]
+4:       # Columna 4
+  titulo:                  Cuenta Bancaria
+  tipo:                    t
+  nombrecampo:             nomban
+  esgrabable:              true
+  html:                    [size="20"]
+5:       # Columna 5
+  titulo:                  N° de Documento
+  tipo:                    t
+  nombrecampo:             numero
+  esgrabable:              true
+  html:                    [size="10"]
+6:       # Columna 6
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monpag
+  esnumerico:              true
+  html:                    [size="10"]

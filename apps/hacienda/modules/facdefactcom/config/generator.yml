@@ -1,0 +1,46 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcactcom
+    theme:            cidesaGenerator
+
+    fields:
+      codact:	{ name: Código, params: size=6 maxlength=4}
+      desact:	{ name: Descripción, params: size=40 maxlength=256}
+      mintri:	{ name: Minimo Tributable, params: size=40 maxlength=256}
+      exoner:	{ name: . , params: size=40 maxlength=1}
+      minofac:	{ name: . , params: size=10 maxlength=1}
+      tipali:	{ name: Valor Bs./Mt2, params: size=40 maxlength=119}
+      porreb:	{ name: Porcentaje , params: size=40 maxlength=6}
+      exepto:	{ name: Código, params: size=8 maxlength=6}
+      rebaja:	{ name: . , params: size=40 maxlength=256}
+      exento:	{ name: . , params: size=40 maxlength=1}
+      tem:	{ name: . , params: size=10 maxlength=1}
+      afoact:	{ name: Alicuota [X/1000], params: size=40 maxlength=119}
+      anoact:	{ name: Año, params: size=6 maxlength=4}
+
+    list:
+      title:     Definición Actividades Comerciales:
+      display:   [ =codact, desact]
+      sort:      desact
+      filters:   [codact, desact]
+      fields:
+        desact:
+          params: size=10
+      max_per_page: 5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  codact
+    edit:
+      title:          Edición Actividades Comerciales
+      display:
+        "Datos Generales":   [ anoact, _codact, desact, _minofac, afoact, mintri ]
+        "Exonerable":   [ _exoner ]
+        "Evento":   [ _exento ]
+        "Rebajas":   [ _rebaja, porreb ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

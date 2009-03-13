@@ -1,0 +1,46 @@
+methods:
+  post:
+   - "ocdefequ{codequ}"
+   - "ocdefequ{desequ}"
+   - "ocdefequ{codtipequ}"
+
+names:
+  ocdefequ{codequ}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  ocdefequ{desequ}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco.
+    validators: DescripcionValidator
+
+  ocdefequ{codtipequ}:
+    required:  Yes
+    required_msg: La Tipo no puede estar en Blanco.
+    validators: ExistValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocdefequ
+        column:       codequ
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La Descripcion no puede pasar mas de 254 caracteres
+
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Octipequ
+        column:       codtipequ
+        unique_error: El Código del Tipo de Equipo debe Existir.
+

@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npvacdiadis
+    theme:            default
+
+    fields:
+      codnom:        { name: Nomina }
+      nomnom:        { name: Nomina }
+      rangodesde:    { name: Años Desde }
+      rangohasta:    { name: Años Hasta }
+      diadis:        { name: Dias de Disfrute}
+    list:
+      title:          Dias de Disfrute
+      filters:		  [rangodesde, rangohasta]
+      display:        [=codnom, nomnom]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codnom
+    edit:
+      title:          Edicion Dias de Disfrute
+      display:        [codnom, nomnom, rangodesde, rangohasta, diadis]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,60 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcsollic
+    theme:            cidesaGenerator
+    fields:
+      numsol:      { name: Número}
+      fecsol:      { name: Fecha}
+      rifcon:      { name: C.I. / RIF. }
+      nomcon:      { name: Nombre }
+      dircon:      { name: Dirección }
+      nacconrep:   { name: Nacionalidad}
+      rifrep:      { name: C.I. / RIF. Representante}
+      nomconrep:   { name: Nombre}
+      dirconrep:   { name: Dirección}
+      nomneg:      { name: Nombre}
+      dirpri:      { name: Dirección Principal}
+      tipinm:      { name: Tipo de Inmueble}
+      catcon:      { name: Catastro}
+      nomcatrasto: { name: Nombre Catastro}
+      tipest:      { name: Establecimiento}
+      codrut:      { name: Código}
+      nomruta:     { name: Nombre Ruta}
+      disbar:      { name: Bar (mts.)}
+      disins:      { name: Inst. Educacional (mts.)}
+      discli:      { name: Clinica - Hospital (mts.)}
+      disfun:      { name: Funeraria (mts.)}
+      disdis:      { name: Dispensario (mts.)}
+      disest:      { name: Est. de Servicio (mts.)}
+      horini:      { name: Hora de Inicio}
+      horcie:      { name: Hora de Terminación}
+      fecini:      { name: Fecha de Inicio, params: date_format='dd/MM/yyyy'}
+      fecfin:      { name: Fecha de Cierre, params: date_format='dd/MM/yyyy'}
+      capsoc:      { name: Capital Social}
+      funres:      { name: Fecha de Inicio, params: date_format='dd/MM/yyyy'}
+      fecres:      { name: Fecha de Inicio, params: date_format='dd/MM/yyyy'}
+    list:
+      title:     Solicitud de Licencia - Patente de Industria y Comercio
+      display:   [ =numsol, =rifcon, nomcon]
+      sort:      nomcon
+      filters:   [numsol, fecsol, nomcon]
+      fields:
+        nomcon:
+          params: size=10
+        fecsol:
+          params: size=10
+      max_per_page: 5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  numsol
+    edit:
+      title:          Edición Solicitud de Licencia - Patente de Industria y Comercio
+      display:
+        "Datos Personales":   [ numsol, fecsol, rifcon, nomcon, dircon, nacconrep, rifrep, nomconrep, dirconrep, nomneg, dirpri, tipinm, catcon, nomcatrasto, tipest, codrut, nomruta, disbar, disins, discli, disfun, disdis, disest, horini, horcie, fecini, fecfin, capsoc, funres, fecres ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

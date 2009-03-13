@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octiporg
+    theme:            default
+    fields:
+      codtiporg:    { name: Código}
+      destiporg:    { name: Descripción}
+
+    list:
+      title:          Tipos de Organismos
+      filters:        [codtiporg]
+      display:        [=codtiporg, destiporg]
+      sort:  codtiporg
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Tipos de Organismos
+      display:        [codtiporg, destiporg]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

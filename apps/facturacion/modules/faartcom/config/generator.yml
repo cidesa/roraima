@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Faartcom
+    theme:            cidesaGenerator
+    fields:
+      codcom: { name: Código del Combo}
+      nomcom: { name: Nombre del Combo}
+      codart: { name: Código del Artículo}
+      desart: { name: Descripción del Artículo}
+      grid: { name: Artículos Asociados}
+    list:
+      title:          Artículos por Combo
+      display:        [=codcom, nomcom]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codcom, nomcom]
+      max_per_page:   10
+      sort:           codcom
+    edit:
+      title:          Artículos por Combo
+      display:
+        "Datos del Combo": [_codcom]
+        "Artículos Asociados": [_grid]
+      fields:
+        nomcom:
+          params: size = 30
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

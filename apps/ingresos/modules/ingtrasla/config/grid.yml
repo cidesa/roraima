@@ -1,0 +1,29 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   cimovtra
+  ancho:                   600
+  anchogrid:               600
+  filas:                   10
+  titulo:                  ' '
+
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario Origen
+  tipo:                    t
+  nombrecampo:             codori
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Código Presupuestario Destino
+  tipo:                    t
+  nombrecampo:             coddes
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monmov
+  esgrabable:			   true
+  html:                    []

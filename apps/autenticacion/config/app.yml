@@ -1,0 +1,7 @@
+all:
+   .apps:
+     autenticacion:    autenticacion
+     max_per_page:     15
+     contabilidadpresupuesto: /home/ovidio/www/siga_cp/
+     reportes:         /home/ovidio/www/suvinca_reportes/
+     this: autenticacion

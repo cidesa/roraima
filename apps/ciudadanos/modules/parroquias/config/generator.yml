@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atparroquias
+    theme:            cidesaGenerator
+
+    fields:
+      despar:         { name: Parroquia, validate: Vstring_1_30, msj_error: Debe insertar el nombre del municipio }
+      estados:        { name: Estado, validate: Vstring_1_30, msj_error: Debe seleccionar el nombre del estado }
+      atmunicipios_id: { name: Municipio, validate: Vstring_1_30, msj_error: Debe seleccionar el nombre del municipio }
+      desmun:         { name: Municipios }
+      desest:         { name: Estados }
+    list:
+      fields:
+        atmunicipios_atestados_desest: { name: Estado }
+        atmunicipios_desmun: { name: Municipio }
+      title:          Parroquias
+      display:        [=despar, desmun, desest]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [desmun]
+      max_per_page:   5
+    edit:
+      title:          Edición de Parroquias
+      display:        [_estados, _atmunicipios_id , despar ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

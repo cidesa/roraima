@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npsitemp
+    theme:            default
+
+    fields:
+      codsitemp: { name: Código }
+      dessitemp: { name: Descripción }
+      calnom: { name: Calculable en Nómina }
+
+    list:
+      title: Situación del Empleado
+      display: [=codsitemp, dessitemp, calnom]
+      sort:  codsitemp
+
+    edit:
+      title:   Edición de la Situación del Empleado
+      display: [codsitemp, dessitemp, calnom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

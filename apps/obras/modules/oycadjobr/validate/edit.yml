@@ -1,0 +1,55 @@
+methods:
+  post:
+   - "ocadjobr{codadj}"
+   - "ocadjobr{tipadj}"
+   - "ocadjobr{fecadj}"
+   - "ocadjobr{codobr}"
+
+names:
+  ocadjobr{codadj}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  ocadjobr{tipadj}:
+    required:  Yes
+    required_msg: Debe Seleccionar el Tipo de Adjudicación.
+
+  ocadjobr{fecadj}:
+    required:  Yes
+    required_msg: La Fecha de Adjudicación no puede estar en Blanco.
+
+  ocadjobr{codobr}:
+    required:  Yes
+    required_msg: El Código de la Obra no puede estar en Blanco.
+    validators: UniqueObraValidator, Obra_Validator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocadjobr
+        column:       codadj
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La Descripcion no puede pasar mas de 250 caracteres
+
+Obra_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Ocregobr
+        column:   codobr
+        unique_error: El Código de la Obra no existe.
+
+UniqueObraValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocadjobr
+        column:       codobr
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.

@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnubica
+    theme:            default
+    fields:
+      codubi: { name: Código}
+      desubi: { name: Descripción}
+      stacod: { name: Estatus}
+
+    list:
+      title:          Lista de Ubicación
+      filters:        [codubi, desubi]
+      display:        [=codubi, desubi]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codubi
+    edit:
+      title:          Edición de Ubicación
+      display:
+        Editable:     [codubi, desubi, stacod]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

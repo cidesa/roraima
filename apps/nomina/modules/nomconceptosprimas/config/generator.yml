@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npconpri
+    theme:            default
+
+    fields:
+      codnom:    { name: Código de la Nomina, params: maxlength=10,size=10  }
+      codcon:    { name: Código del Concepto, params: size=20  }
+      nomina:    { name: Nombre de la Nomina, params: size=20  }
+      concepto:  { name: Nombre del Concepto, params: size=20  }
+
+    list:
+      title:          Conceptos para las Primas
+      display:        [=codnom, nomina, codcon, concepto]
+      filters:		  [codnom, codcon]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:    codnom
+    edit:
+      title:          Edición de Conceptos para las Primas
+      display:        [codnom, codcon, nomina, concepto]
+      actions:
+        _list:         ~
+        _save:         ~
+        _create:       ~
+        _delete:       ~

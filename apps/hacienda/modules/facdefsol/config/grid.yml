@@ -1,0 +1,36 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   Fcdefdetsol
+  ancho:                   700
+  anchogrid:               750
+  filas:                   4
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo Verificacion
+  tipo:                    c
+  nombrecampo:             tipo
+  esgrabable:			   true
+  html:                    []
+
+2:       # Columna 2
+  titulo:                  Cuanto
+  tipo:                    c
+  nombrecampo:             cuantos
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Propietario
+  tipo:                    c
+  nombrecampo:             propie
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 4
+  titulo:                  Mostrar
+  tipo:                    c
+  nombrecampo:             imprim
+  esgrabable:			   true
+  html:                    []

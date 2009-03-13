@@ -1,0 +1,40 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   caartrcp
+  anchogrid:               1250
+  ancho:                   1250
+  filas:                   1
+  titulo:                  Detalle de la Recepción
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod. Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [size="10", readonly=true ]
+  catalogo:               [caregart, sf_admin_edit_form, {desart: 2} ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [size="20", readonly=true ]
+3:
+  titulo:                  Cant. Recibida
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canrec
+  esnumerico:              true
+  html:                    [size="10", readonly=true  ]
+4:
+  titulo:                  Cant. Devuelta
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             candev
+  esnumerico:              true
+  html:                    [size="10", readonly=true  ]
+5:
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             montot
+  esnumerico:              true
+  html:                    [size="10", readonly=true  ]

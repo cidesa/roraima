@@ -1,0 +1,45 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fapedido
+    theme:            cidesaGenerator
+    fields:
+      nroped: { name: Número}
+      fecped: { name: Fecha, params: date_format='dd/MM/yyyy'}
+      refped: { name: Referencia}
+      tipref: { name: Refiere a}
+      codcli: { name: Cod. Cliente}
+      rifpro: { name: C.I/R.I.F Cliente}
+      nitcli: { name: N.I.T}
+      nompro: { name: Nombre}
+      dircli: { name: Dirección}
+      telcli: { name: Teléfono}
+      desped: { name: Descripción}
+      monped: { name: Monto Total}
+      obsped: { name: Observaciones}
+      grid: { name: Pedido}
+      grid_fafecped: { name: Fecha de Entrega}
+      combo: { name: Cargar Artículos en Combos}
+
+    list:
+      title:          Pedidos
+      display:        [=nroped, fecped, codcli]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nroped, fecped, codcli]
+      max_per_page:   10
+      sort:           nroped
+    edit:
+      title:          Pedidos
+      display:
+        "Datos del Pedido": [nroped, fecped, tipref, refped, _rifpro, nitcli, dircli, telcli, desped, monped, combo]
+        "Detalle Pedido": [_grid]
+        "Fecha(s) de Entrega": [_grid_fafecped]
+        "Observación": [obsped]
+      hide: [reapor, codcli, entrega]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

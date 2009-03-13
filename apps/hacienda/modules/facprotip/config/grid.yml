@@ -1,0 +1,29 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   fctipprodet
+  ancho:                   400
+  anchogrid:               600
+  filas:                   6
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Variable
+  tipo:                    t
+  nombrecampo:             tipvar
+  esgrabable:			   true
+  html:                    []
+
+2:       # Columna 2
+  titulo:                  Valor
+  tipo:                    m
+  nombrecampo:             valor
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Tipo de Variable
+  tipo:                    t
+  nombrecampo:             tipo
+  esgrabable:			   true
+  html:                    []

@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Inparroquia
+    theme:            cidesaGenerator
+    fields:
+      codpar:        { name: Código, parameters: size=4 }
+      nompar:         { name: Nombre }
+      inestado_id:   { name: Estado }
+      inmunicipio_id: { name: Municipio }
+      nomedo:        { name: Estado}
+      nommun:        { name: Municipio }
+    list:
+      title:          Parroquias
+      fields:
+        inestado_nomedo: { name: Estado }
+        inmunicipio_nommun: { name: Municipio }
+      display:        [=codpar, nompar, nommun, nomedo]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codpar, despar]
+      max_per_page:   5
+      sort: codpar
+    edit:
+      title:          Edición de Parroquias
+      display:        [_inestado_id, _inmunicipio_id, _codpar, nompar ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,48 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Facorrelat
+    theme:            cidesaGenerator
+    fields:
+      codemp: { name: Código Empresa }
+      nomemp: { name: Nombre de la  Institucón }
+      diremp: { name: Dirección }
+      tlfemp: { name: Teléfono }
+      lonart: { name: Longitud del Código }
+      rupart: { name: Rupturas de Control }
+      forart: { name: Formato , params: maxlength=30 }
+      desart: { name: Descripción , params: maxlength=30 }
+      forubi: { name: Formato , params: maxlength=30 }
+      desubi: { name: Descripción , params: maxlength=30 }
+      generaop: { name: Generar Orden de Pago al Momento de la Recepción }
+      generacom: { name: Generar Comprobantes contables al momento de la Recepcion y el Despacho }
+      asiparrec: { name: Imputacón del Recargo }
+      corpre: { name: Presupuesto, validate: CorrelValidator, msj_error: Debe insertar el correlativo de presupuesto }
+      corped: { name: Pedido }
+      corfac: { name: Factura }
+      cornot: { name: Nota de Entrega }
+      cordph: { name: Despacho }
+      cordev: { name: Devolución }
+      coraju: { name: Ajuste }
+      prcasopre: { name: Asociación Presupuestaria}
+      prcreqapr: { name: Requiere Aprobación}
+      comasopre: { name: Asociación Presupuestaria}
+      comreqapr: { name: Requiere Aprobación}
+      almcorre:  { name: Traspaso de Artículos}
+      forsnc:    { name: Formato}
+      dessnc:    { name: Descripción}
+      numlot:    { name: Número de Lote }
+      codcat:    { name: Código de Categoría }
+
+    edit:
+      title:         Definición de Artículos
+      display:        [codemp, nomemp, diremp, tlfemp, lonart, rupart, forart, desart, forubi, desubi, generaop, generacom, asiparrec, corpre, corped, corfac, cornot, cordph, cordev, coraju, prcasopre, prcreqapr, comasopre, comreqapr, almcorre, forsnc, dessnc, numlot, codcat]
+      fields:
+        generaop:  {type: checkbox_tag}
+        generacom: {type: checkbox_tag}
+        prcasopre: {type: checkbox_tag}
+        prcreqapr: {type: checkbox_tag}
+        comasopre: {type: checkbox_tag}
+        comreqapr: {type: checkbox_tag}
+      actions:
+        _save:        ~

@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "bnubibie{codubi}"
+   - "bnubibie{desubi}"
+   
+names: 
+  bnubibie{codubi}:
+    required:  Yes
+    required_msg: El Código de la Ubicación no puede estar en Blanco.
+    validators: UniqueValidator
+    
+  bnubibie{desubi}:
+    required:  Yes
+    required_msg: El Nombre de la Ubicación no puede estar en Blanco.
+    validators: NombreValidator     
+    
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Bnubibie
+        column:   codubi
+        unique_error:   El Código de la Ubicación ya existe. Por Favor, Cambiélo por otro.       
+        
+NombreValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Nombre de la Ubicación no puede tener menos de 5 carácteres
+        max:       250
+        max_error: El Nombre de la Ubicación no puede tener más de 250 carácteres
+        

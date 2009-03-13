@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npfalper
+    theme:            default
+    fields:
+      codnom: { name: Cod. Tipo Nomina, params: maxlength=3 }
+      nomnom: { name: Nombre Tipo Nomina }
+      fecdes: { name : Fecha, params: date_format='dd/MM/yyyy'}
+    list:
+      title:          Registro de Faltas y Permisos por Nomina en Lote
+      filters:        [codnom ]
+      display:        [=codnom, nomnom, fecdes ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+    edit:
+      title:          Registro de Faltas y Permisos por Nomina en Lote
+      display:        [codnom, nomnom, fecdes ]

@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atdonaciones
+    theme:            cidesaGenerator
+
+    fields:
+      coddon:              { name: Código Artículos, validate: Vstring_1_50, msj_error: Debe tipear un código }
+      desdon:              { name: Descripción, validate: Vstring_1_50, msj_error: Debe insertar la descripción de la Donación/Ayuda }
+      unidon:              { name: Unidad de Medida, validate: Vstring_1_50, msj_error: Debe insertar la Unidad de Medida }
+    list:
+      fields:
+        desdon:            { name: Donación/Ayuda, params: size=10 }
+      title:          Artículos a Donar
+      display:        [=coddon, desdon, unidon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [coddon, desdon]
+      max_per_page:   5
+    edit:
+      title:          Edición de Artículos a Donar
+      display:        [coddon, desdon, unidon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

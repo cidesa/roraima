@@ -1,0 +1,25 @@
+methods:
+  post:
+   - "faestado{fapais_id}"
+   - "faestado{nomedo}"
+
+
+names:
+
+  faestado{nomedo}:
+    required:  Yes
+    required_msg: Debe insertar el nombre del estado
+    validators: Vstring_1_30_0
+
+  faestado{fapais_id}:
+    required:  Yes
+    required_msg: Debe seleccionar el nombre del país
+
+
+Vstring_1_30_0:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       30
+        max_error: La descripción no puede tener más de 30 caracteres

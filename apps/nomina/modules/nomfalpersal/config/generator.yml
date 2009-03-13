@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npfalper
+    theme:            default
+
+    fields:
+      codemp:  { name: Codigo, params: maxlength=16,size=16  }
+      codmot:  { name: Motivo, params: maxlength=4,size=4  }
+      nrodia:  { name: Codigo}
+      observ:  { name: Observacion}
+      fechas:  { name: Fecha Hasta, params: date_format='dd/MM/yyyy'}
+      fecdes:  { name: Fecha Desde, params: date_format='dd/MM/yyyy'}
+      nomemp:  { name: Nombre}
+      desmotfal:  { name: Descripcion}
+
+    list:
+      title:          Definicion de Salida
+      filters:        [codemp, nomemp, fechas]
+      display:        [=codemp, nomemp, desmotfal, fechas]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edición de Salida
+      display:       [=codemp, nomemp, codmot, desmotfal, observ, fecdes, fechas]

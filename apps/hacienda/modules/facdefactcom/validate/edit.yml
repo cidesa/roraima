@@ -1,0 +1,27 @@
+methods:
+  post:
+   - "fcactcom{anoact}"
+   - "fcactcom{codact}"
+   - "fcactcom{desact}"
+
+names:
+  fcactcom{codact}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_codact
+
+  fcactcom{desact}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+  fcactcom{anoact}:
+    required:  Yes
+    required_msg: Año es un campo requerido
+
+Validator_codact:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcactcom
+        column:       codact
+        unique_error: El registro ya Existe intente con otro.
+

@@ -1,0 +1,20 @@
+columna1
+  titulo:             Hola Mundo
+  alignf:             left
+  alignt:             left
+  field:              Campo
+  type:               t
+  isnumeric:          false
+  istotal:            false
+  objtotal:           
+  js:                 
+  html:               type="text" size="15"
+  save:               true
+  catalogoform:       
+  catalogoclass:      
+  catalogoobjadic:    
+  idfuncion:          
+  objmostrar:         
+  objcompletar:       
+  htmltotalfilas:
+  

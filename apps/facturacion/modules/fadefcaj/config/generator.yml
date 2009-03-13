@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fadefcaj
+    theme:            cidesaGenerator
+
+    fields:
+      descaj: { name: Descripción, validate: Vstring_1_100, msj_error: Debe insertar la descripción de la caja }
+
+    list:
+      title:          Cajas
+      display:        [=descaj]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [descaj]
+      max_per_page:   10
+
+    edit:
+      title:          Edición de Caja
+      display:        [descaj]
+      fields:
+        descaj: { params: size=40}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

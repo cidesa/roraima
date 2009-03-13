@@ -1,0 +1,74 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   viadettipser
+  anchogrid:               850
+  ancho:                   1250
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod Pais
+  tipo:                    t
+  nombrecampo:             codpai
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ size=4 ]
+2:       # Columna 2
+  titulo:                  Pais
+  tipo:                    t
+  nombrecampo:             nompai
+  esgrabable:              true
+  html:                    [ size=6 ]
+
+3:       # Columna 3
+  titulo:                  Estado
+  tipo:                    t
+  nombrecampo:             nomedo
+  esgrabable:              true
+  html:                    [ size=6 ]
+4:       # Columna 4
+  titulo:                  Cod Estado
+  tipo:                    t
+  nombrecampo:             codedo
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ size=4 ]
+5:       # Columna 5
+  titulo:                  Ciudad
+  tipo:                    t
+  nombrecampo:             nomciu
+  esgrabable:              true
+  html:                    [ size=6 ]
+6:       # Columna 6
+  titulo:                  Cod Ciudad
+  tipo:                    t
+  nombrecampo:             occiudad_id
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ size=4 ]
+7:       # Columna 7
+  titulo:                  Descripcion/Tabulador
+  tipo:                    c
+  nombrecampo:             viaregtiptab_id
+#    nombrecampo:             npestorg_codniv
+  esgrabable:              true
+  html:                    [ ]
+8:       # Columna 8
+  titulo:                  Monto Bs
+  tipo:                    m
+  nombrecampo:             montobs
+  esgrabable:              true
+  html:                    [size=10 ]
+9:       # Columna 9
+  titulo:                  Monto Dolar
+  tipo:                    m
+  nombrecampo:             montodol
+  esgrabable:              true
+  html:                    [size=10 ]
+10:       # Columna 10
+  titulo:                  Monto Euro
+  tipo:                    m
+  nombrecampo:             montoeur
+  esgrabable:              true
+  html:                    [size=10 ]

@@ -1,0 +1,12 @@
+methods:
+  post:
+   - "fcrutas{codrut}"
+   - "fcrutas{desrut}"
+names:
+  fcrutas{codrut}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+
+  fcrutas{desrut}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido

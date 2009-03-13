@@ -1,0 +1,61 @@
+methods:
+  post:
+   - "atunidades{coduni}"
+   - "atunidades{desuni}"
+   - "atunidades{diruni}"
+   - "atunidades{telfuni}"
+   - "atunidades{percon}"
+   - "atunidades{telpercon}"
+   - "atunidades{horario}"
+
+names:
+  atunidades{coduni}:
+    required:  Yes
+    required_msg: Debe existir un Código de unidad
+    validators: MyStringValidator1
+
+  atunidades{desuni}:
+    required:  Yes
+    required_msg: Debe existir una descripción de la Unidad
+    validators: MyStringValidator2
+
+  atunidades{diruni}:
+    required:  Yes
+    required_msg: Debe existir la dirección
+    validators: MyStringValidator2
+
+  atunidades{telfuni}:
+    required:  Yes
+    required_msg: Debe existir el telefono de la unidad
+    validators: MyStringValidator2
+
+  atunidades{percon}:
+    required:  Yes
+    required_msg: Debe existir una persona de contacto
+    validators: MyStringValidator2
+
+  atunidades{telpercon}:
+    required:  Yes
+    required_msg: Debe existir el telefono de la persona de contacto
+    validators: MyStringValidator2
+
+  atunidades{horario}:
+    required:  Yes
+    required_msg: Debe existir el horario de la unidad
+    validators: MyStringValidator2
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Debe existir el código de la unidad
+        max:       8
+        max_error: El código de la unidad debe tener menos de 9 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       30
+        max_error: El campo debe tener menos de 31 Caracteres

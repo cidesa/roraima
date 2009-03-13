@@ -1,0 +1,58 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnregmue
+    theme:            default
+    fields:
+      codact:      { name : Cod. Catálogo }
+      codmue:      { name : Cod. Activo }
+      desmue:      { name : Descripción }
+      codalt:      { name : Código Alterno }
+      ordcom:      { name : Orden de Compra }
+      codpro:      { name : Cod. Proveedor }
+      feccom:      { name : Fecha Compra, params: date_format=dd/MM/yyyy }
+      fecreg:      { name : Fecha Cálculo, params: date_format=dd/MM/yyyy }
+      fecrcp:      { name : Fecha Recepción, params: date_format=dd/MM/yyyy }
+      marmue:      { name : Marca }
+      modmue:      { name : Modelo }
+      anomue:      { name : Año }
+      colmue:      { name : Color }
+      capmue:      { name : Capacidad }
+      tipmue:      { name : Tip1o }
+      nropie:      { name : Nro. Piezas }
+      sermue:      { name : Seriales }
+      usomue:      { name : Uso }
+      pesmue:      { name : Placa }
+      larmue:      { name : Largo }
+      ancmue:      { name : Ancho }
+      altmue:      { name : Alto }
+      coddis:      { name : Cod. Disposición }
+      valini:      { name : Valor Inicial }
+      valres:      { name : Valor Rescate }
+      vallib:      { name : Valor Libros }
+      valadi:      { name : Valor Adición }
+      valactual:   { name : Valor Actual }
+      depmen:      { name : Depreciación Mensual }
+      depacu:      { name : Depreciación Acumulada }
+      valrex:      { name : Valor Reexpresado }
+      cosrep:      { name : Costo Reposición }
+      codubi:      { name : Cod. Ubicación }
+
+    list:
+      title:          Registro de Activos Muebles
+      display:        [=codact, codmue, desmue]
+      filters:        [codact, codmue]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:    codact
+    edit:
+      title:          Registro de Activos Muebles
+      display:        [codact, codmue, desmue, codalt, ordcom, codpro, feccom, fecreg, fecrcp, marmue, modmue, anomue, colmue, capmue, tipmue, nropie, sermue, usomue, pesmue, larmue, ancmue, altmue, coddis, valini, valres, valres, vallib, valadi, valactual, depmen, depacu, valrex, cosrep, codubi]
+      actions:
+         _list:     ~
+         _save:     ~
+         _create:   ~
+         _delete:   ~
+

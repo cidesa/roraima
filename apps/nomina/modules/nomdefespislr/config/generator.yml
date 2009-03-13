@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npislr
+    theme:            default
+    fields:
+      codnom:       { name: Código Nomina}
+      codconpor:    { name: Porcentaje a Retener}
+      codconimp:    { name: Monto de la Retención}
+      nomnom:       { name: Descripción  }
+      nomconpor:    { name: Concepto (Porcentaje)}
+      nomconimp:    { name: Concepto (Retención)}
+    list:
+      title:          Definición de Impuesto sobre la Renta
+      filters:		  [codnom]
+      display:        [=codnom, nomnom, nomconpor, nomconimp]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort: codnom
+    edit:
+      title:          Edición de Impuesto sobre la Renta
+      display:        [codnom, nomnom, codconpor, nomconpor, codconimp, nomconimp]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _delete:               ~
+        _create:               ~

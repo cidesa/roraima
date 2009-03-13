@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npestorg
+    theme:            default
+    fields:
+      codniv: { name: Código }
+      desniv: { name: Descripción }
+      telext: { name: Teléfono / Extensión }
+    list:
+      title:          Niveles Organizacionales
+      filters:        [codniv, desniv ]
+      display:        [=codniv, desniv]
+      sort:  codniv
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:         Edición de Niveles Organizacionales
+      display:       [codniv, desniv, telext ]
+      actions:
+        _list:       ~
+        _save:       ~
+        _create:     ~
+        _delete:     ~

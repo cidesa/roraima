@@ -1,0 +1,26 @@
+methods:
+  post:
+   - "npincapa{codinc}"
+   - "npincapa{desinc}"
+   - "npincapa{obsinc}"
+
+names:
+  npincapa{codinc}:
+    required:  Yes
+    required_msg: El Código de la Incapacidad no puede estar en blanco
+    validators: UniqueValidator
+
+  npincapa{desinc}:
+    required:  Yes
+    required_msg: La Descripción de la Incapacidad no puede estar en blanco
+
+  npincapa{obsinc}:
+    required:  Yes
+    required_msg: La Observación de la Incapacidad no puede estar en blanco
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Npincapa
+        column:   codinc
+        unique_error:   El Código de la Incapacidad ya existe. Por favor, cámbielo por otro.

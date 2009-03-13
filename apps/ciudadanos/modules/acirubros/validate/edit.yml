@@ -1,0 +1,15 @@
+methods:
+  post:
+   - "atrubros{attipayu_id}"
+   - "atrubros{desrub}"
+
+names:
+  atrubros{attipayu_id}:
+    required:  Yes
+    required_msg: Debe seleccionar el Grupo del Rubro
+
+  atrubros{desrub}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+

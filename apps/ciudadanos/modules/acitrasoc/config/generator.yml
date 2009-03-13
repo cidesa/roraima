@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Attrasoc
+    theme:            cidesaGenerator
+
+    fields:
+      cedtra:      { name: Cedula }
+      nomtra:      { name: Nombre }
+      apetra:      { name: Apellido }
+      nrocol:      { name: Nro. Colegio }
+    list:
+      title:          Registro de Trabajadores Sociales
+      display:        [=cedtra, nomtra, apetra, nrocol]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [cedtra]
+      max_per_page:   5
+      sort:  cedtra
+    edit:
+      title:          Edición de Trabajadores Sociales
+      display:        [cedtra, nomtra, apetra, nrocol]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

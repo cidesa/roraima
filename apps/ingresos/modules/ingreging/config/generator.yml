@@ -1,0 +1,46 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cireging
+    theme:            cidesaGenerator
+    fields:
+      refing:      { name: Referencia, params: size=12 }
+      fecing:      { name: Fecha }
+      desing:      { name: Descripción, type: textarea_tag, params: size=50x2}
+      codtip:      { name: Tipo }
+      rifcon:      { name: C.I/R.I.F Contribuyente }
+      ctaban:      { name: Cuenta Bancaria Nro. }
+      tipmov:      { name: Tipo de Movimiento }
+      numdep:      { name: Número de Depósito }
+      numofi:      { name: Número de Oficio }
+      moning:      { name: Ingreso }
+      monrec:      { name: Recargo }
+      mondes:      { name: Descuento }
+      montot:      { name: Neto }
+      previs:      { name: Previsto }
+      grid:        { name: Detalles del Ingreso }
+      #comprobante: { name: Generar Comprobante }
+
+    list:
+      title:          Ingresos
+      display:        [ =refing, desing ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [ refing, desing ]
+      max_per_page:   5
+      sort: refing
+    edit:
+      title:          Edición de Ingresos
+      display:
+        Datos del Ingreso:   [ _refing, _fecing, desing, _codtip, _rifcon, _ctaban, _tipmov, _numdep, _numofi, _previs ]
+        Detalles del Ingreso: [ _grid, _moning, _monrec, _mondes, _montot, _comprobante ]
+      hide:  [ idrefer ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+        _anular:
+          name: Anular
+          params: class="sf_admin_action_save" onClick="anular()"

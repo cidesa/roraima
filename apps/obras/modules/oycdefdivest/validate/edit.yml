@@ -1,0 +1,37 @@
+methods:
+  post:
+   - "ocestado{codedo}"
+   - "ocestado{codpai}"   
+   - "ocestado{nomedo}"
+   
+names: 
+  ocestado{codedo}:
+    required:  Yes
+    required_msg: El Código de Estado no puedo estar en Blanco
+    #validators: Validator_codedo
+
+  ocestado{codpai}:
+    required:  Yes
+    required_msg: El Código de País no puedo estar en Blanco
+
+  ocestado{nomedo}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_nomedo      
+
+
+Validator_codedo:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocestado
+        column:       codedo
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_nomedo:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+

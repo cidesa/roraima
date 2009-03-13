@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Intipemp
+    theme:            cidesaGenerator
+    fields:
+      codtipemp:       { name: Código, parameters: size=4}
+      destipemp:
+        name:Descripción
+        type: textarea_tag
+        params: size=50x5 maxlength=250
+
+    list:
+      title:          Definición de Tipo de Empresa
+      filters:        [codtipemp]
+      display:        [=codtipemp, destipemp]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codtipemp
+
+    edit:
+      title:          Edición de Tipo de Empresa
+      display:        [_codtipemp, destipemp]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

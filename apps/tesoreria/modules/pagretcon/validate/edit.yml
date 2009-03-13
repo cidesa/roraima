@@ -1,0 +1,49 @@
+methods:
+  post:
+   - "opretcon{codcon}"
+   - "opretcon{codtip}"
+   - "opretcon{codnom}"
+names:
+  opretcon{codcon}:
+    required:  Yes
+    required_msg: El código del Concepto no puedo estar en Blanco
+    validators: [Validator_codcon, String1a3Validator]
+
+  opretcon{codtip}:
+    required:  Yes
+    required_msg: La descripción de la Retención no puedo estar en Blanco
+    validators: [Validator_codtip, String1a3Validator]
+
+  opretcon{codnom}:
+    required:  Yes
+    required_msg: El código de la Nómina no puedo estar en Blanco
+    validators: [Validator_codnom, String1a3Validator]
+
+Validator_codcon:
+    class: CidesaExistValidator
+    param:
+        class:        Npdefcpt
+        column:       codcon
+        unique_error: Este código de concepto no existe
+
+Validator_codtip:
+    class: CidesaExistValidator
+    param:
+        class:        Optipret
+        column:       codtip
+        unique_error: Este código de Retención no existe
+
+Validator_codnom:
+    class: CidesaExistValidator
+    param:
+        class:        Npnomina
+        column:       codnom
+        unique_error: Este código de Nómina no existe
+
+String1a3Validator:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción del Beneficiario no puede tener menos de 1 caracteres
+        max:       3
+        max_error: La Descripción del Beneficiario no puede tener más de 3 caracteres

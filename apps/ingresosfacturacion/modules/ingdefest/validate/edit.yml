@@ -1,0 +1,32 @@
+methods:
+  post:
+   - "inestado{codedo}"
+   - "inestado{nomedo}"
+
+names:
+
+  inestado{codedo}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codedo
+
+  inestado{nomedo}:
+    required:  Yes
+    required_msg: El nombre no puede estar en Blanco
+    validators: Validator_nomedo
+
+
+Validator_codedo:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Inestado
+        column:       codedo
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_nomedo:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres

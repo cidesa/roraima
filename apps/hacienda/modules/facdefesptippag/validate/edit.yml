@@ -1,0 +1,12 @@
+methods:
+  post:
+   - "fctippag{tippag}"
+   - "fctippag{despag}"
+names:
+  fctippag{tippag}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+
+  fctippag{despag}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido

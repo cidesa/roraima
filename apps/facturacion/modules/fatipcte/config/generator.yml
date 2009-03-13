@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fatipcte
+    theme:            cidesaGenerator
+
+    fields:
+      nomtipcte: { name: Nombre, validate: Vstring_1_30, msj_error: Debe insertar el nombre del tipo de cliente }
+
+    list:
+      title: Tipos de Cliente
+      display: [=nomtipcte]
+      filters: [nomtipcte]
+      object_actions:
+       _edit:        ~
+       _delete:        ~
+      max_per_page:	  10
+      sort:    nomtipcte
+
+    edit:
+      title: Definición de Tipo de Cliente
+      display:
+        "NONE": [nomtipcte]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

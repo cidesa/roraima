@@ -1,0 +1,40 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cidefniv
+    theme:            cidesaGenerator
+    fields:
+      nomemp:      { name: Nombre de la Empresa, params: size=50 }
+      rupcat:      { name: Clasificador de Categorías }
+      ruppar:      { name: Clasificador de Partidas }
+      nivdis:      { name: Nivel Disponibilidad }
+      forpre:      { name: Formato Código Presupuestario, params: size=40,maxlength=32 }
+      asiper:      { name: Asignación Periódica }
+      numper:      { name: Número de Períodos }
+      fecper:      { name: Período }
+      fecini:      { name: Inicio del Ejercicio }
+      feccie:      { name: Fin del Ejercicio}
+      staprc:      { name: Precompromiso }
+      coraep:      { name: Inicio de Correlativo de AEP, params: maxlength=8,size=10}
+      #periodos:    { name: Períodos }
+      grid:        { name: Detalle Códigos Presupuestarios }
+      gridper:     { name: Períodos }
+
+
+    list:
+      title:          Definición de Niveles Presupuestarios
+      display:        []
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        []
+      max_per_page:   5
+    edit:
+      title:          Edición de Niveles Presupuestarios
+      display:
+        Datos del Código Presupuestario:        [ nomemp, _rupcat, _ruppar, _nivdis ]
+        Detalles del Código Presupuestario:     [ _grid, _forpre]
+        Configuraciones Generales:              [ _asiper, _fecper, _fecini, _feccie, _numper, _staprc, coraep]
+        Distribución de los Períodos:           [ _gridper ]
+      actions:
+        _save:        ~

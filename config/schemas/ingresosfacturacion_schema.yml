@@ -1,0 +1,902 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  inestado:
+    #_attributes:
+      #idMethod: native
+    codedo:
+      type: VARCHAR
+      size: 4
+      required: true
+    nomedo:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inmunicipio:
+    #_attributes:
+      #idMethod: native
+    inestado_id:
+      type: INTEGER
+      foreignTable: inestado
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    codmun:
+      type: VARCHAR
+      size: 4
+      required: true
+    nommun:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inparroquia:
+    #_attributes:
+      #idMethod: native
+    inestado_id:
+      type: INTEGER
+      foreignTable: inestado
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    inmunicipio_id:
+      type: INTEGER
+      foreignTable: inmunicipio
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    codpar:
+      type: VARCHAR
+      size: 4
+      required: true
+    nompar:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  intippag:
+    #_attributes:
+      #idMethod: native
+    codtippag:
+      type: VARCHAR
+      size: 4
+      required: true
+    destippag:
+      type: VARCHAR
+      size: 200
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  ingruprec:
+    #_attributes:
+      #idMethod: native
+    codgrup:
+      type: VARCHAR
+      size: 4
+      required: true
+    desgrup:
+      type: VARCHAR
+      size: 200
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  indefban:
+    #_attributes:
+      #idMethod: native
+    codban:
+      type: VARCHAR
+      size: 4
+      required: true
+    desban:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  indefcaj:
+    #_attributes:
+      #idMethod: native
+    codcaj:
+      type: VARCHAR
+      size: 4
+      required: true
+    descaj:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inrecaud:
+    #_attributes:
+      #idMethod: native
+    ingruprec_id:
+      type: INTEGER
+      foreignTable: ingruprec
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    codrec:
+      type: VARCHAR
+      size: 4
+      required: true
+    desrec:
+      type: VARCHAR
+      size: 30
+      required: true
+    limita:
+      type: BOOLEAN
+      required: true
+    unitri:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  indestipcli:
+    #_attributes:
+      #idMethod: native
+    indefdes_id:
+      type: INTEGER
+      foreignTable: indefdes
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    intipcli_id:
+      type: INTEGER
+      foreignTable: intipcli
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  incondpag:
+    #_attributes:
+      #idMethod: native
+    codcond:
+      type: VARCHAR
+      size: 4
+      required: true
+    descond:
+      type: VARCHAR
+      size: 250
+      required: true
+    tipcond:
+      type: VARCHAR
+      size: 100
+      required: true
+    genord:
+      type: VARCHAR
+      size: 200
+      required: true
+    diascond:
+      type: INTEGER
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  incliente:
+    #_attributes:
+      #idMethod: native
+    codcli:
+      type: VARCHAR
+      size: 15
+      required: true
+    nomcli:
+      type: VARCHAR
+      size: 250
+      required: true
+    rifcli:
+      type: VARCHAR
+      size: 15
+      required: true
+    dircli:
+      type: VARCHAR
+      size: 100
+    telcli:
+      type: VARCHAR
+      size: 30
+    faxcli:
+      type: VARCHAR
+      size: 15
+    email:
+      type: VARCHAR
+      size: 100
+    limcre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codctacon:
+      type: VARCHAR
+      size: 32
+    codctaord:
+      type: VARCHAR
+      size: 32
+    codctaper:
+      type: VARCHAR
+      size: 32
+    fecreg:
+      type: DATE
+    cirjud:
+      type: VARCHAR
+      size: 30
+    regmer:
+      type: VARCHAR
+      size: 15
+    tomreg:
+      type: VARCHAR
+      size: 15
+    folreg:
+      type: VARCHAR
+      size: 15
+    capsus:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cappag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    rifrepleg:
+      type: VARCHAR
+      size: 15
+    nomrepleg:
+      type: VARCHAR
+      size: 50
+    dirrepleg:
+      type: VARCHAR
+      size: 100
+    telrepleg:
+      type: VARCHAR
+      size: 30
+    emailrepleg:
+      type: VARCHAR
+      size: 100
+    rifpercon:
+      type: VARCHAR
+      size: 15
+    nompercon:
+      type: VARCHAR
+      size: 50
+    dirpercon:
+      type: VARCHAR
+      size: 100
+    telpercon:
+      type: VARCHAR
+      size: 30
+    emailpercon:
+      type: VARCHAR
+      size: 100
+    fecvenreg:
+      type: DATE
+    codgruprec:
+      type: VARCHAR
+      size: 4
+    ctaconasoc:
+      type: VARCHAR
+      size: 32
+    ctaordasoc:
+      type: VARCHAR
+      size: 32
+    ctaperasoc:
+      type: VARCHAR
+      size: 32
+    ctaordart:
+      type: VARCHAR
+      size: 32
+    ctaperart:
+      type: VARCHAR
+      size: 32
+    ctaordcont:
+      type: VARCHAR
+      size: 32
+    ctapercont:
+      type: VARCHAR
+      size: 32
+    nacpro:
+      type: VARCHAR
+      size: 1
+    actprof:
+      type: VARCHAR
+      size: 1
+    codtipemp:
+      type: VARCHAR
+      size: 4
+    id:
+      type: integer
+      required: true
+      autoincrement: true
+  infactura:
+    #_attributes:
+      #idMethod: native
+    incliente_id:
+      type: INTEGER
+      foreignTable: incliente
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    incondpag_id:
+      type: INTEGER
+      foreignTable: incondpag
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    numfac:
+      type: VARCHAR
+      size: 15
+      required: true
+    numcon:
+      type: VARCHAR
+      size: 15
+      required: true
+    tipmon:
+      type: VARCHAR
+      size: 30
+      required: true
+    tipper:
+      type: VARCHAR
+      size: 1
+      required: true
+    codcondpag:
+      type: VARCHAR
+      size: 4
+      required: true
+    desfac:
+      type: VARCHAR
+      size: 250
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    monrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    mondes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    monfac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  ingruprub:
+    #_attributes:
+      #idMethod: native
+    codgruprub:
+      type: VARCHAR
+      size: 4
+      required: true
+    desgruprub:
+      type: VARCHAR
+      size: 200
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inrubro:
+    #_attributes:
+      #idMethod: native
+    ingruprub_id:
+      type: INTEGER
+      foreignTable: ingruprub
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    codrub:
+      type: VARCHAR
+      size: 4
+      required: true
+    desrub:
+      type: VARCHAR
+      size: 200
+      required: true
+    monrub:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  indetfac:
+    #_attributes:
+      #idMethod: native
+    infactura_id:
+      type: INTEGER
+      foreignTable: infactura
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    inarticulo_id:
+      type: INTEGER
+      foreignTable: inarticulo
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    canart:
+      type: INTEGER
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  intipcli:
+    #_attributes:
+      #idMethod: native
+    codtipcli:
+      type: VARCHAR
+      size: 4
+      required: true
+    destipcli:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  indefdes:
+    #_attributes:
+      #idMethod: native
+    coddes:
+      type: VARCHAR
+      size: 4
+      required: true
+    desdes:
+      type: VARCHAR
+      size: 250
+      required: true
+    tipdes:
+      type: VARCHAR
+      size: 1
+      required: true
+    valdes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    diades:
+      type: INTEGER
+      required: true
+    tipret:
+      type: VARCHAR
+      size: 250
+      required: true
+    cuecon:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inarticulo:
+    #_attributes:
+      #idMethod: native
+    codart:
+      type: VARCHAR
+      size: 4
+      required: true
+    desart:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inforpag:
+    #_attributes:
+      #idMethod: native
+    codforpag:
+      type: VARCHAR
+      size: 4
+      required: true
+    desforpag:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  insancion:
+    #_attributes:
+      #idMethod: native
+    codsan:
+      type: VARCHAR
+      size: 4
+      required: true
+    dessan:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inmulta:
+    #_attributes:
+      #idMethod: native
+    insancion_id:
+      type: INTEGER
+      foreignTable: insancion
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    codmul:
+      type: VARCHAR
+      size: 4
+      required: true
+    desmul:
+      type: VARCHAR
+      size: 250
+      required: true
+    unitri:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  intipmul:
+    #_attributes:
+      #idMethod: native
+    codtipmul:
+      type: VARCHAR
+      size: 4
+      required: true
+    destipmul:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  intipprof:
+     #_attributes:
+      #idMethod: native
+    codtipprof:
+      type: VARCHAR
+      size: 4
+      required: true
+    destipprof:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inespeci:
+     #_attributes:
+      #idMethod: native
+    codespeci:
+      type: VARCHAR
+      size: 4
+      required: true
+    desespeci:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  intipemp:
+    #_attributes:
+      #idMethod: native
+    codtipemp:
+      type: VARCHAR
+      size: 4
+      required: true
+    destipemp:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  informsol:
+    #_attributes:
+      #idMethod: native
+    codformsol:
+      type: VARCHAR
+      size: 4
+      required: true
+    desformsol:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inprofes:
+    #_attributes:
+      #idMethod: native
+    venext:
+      type: VARCHAR
+      size: 1
+      required: true
+    cedprof:
+      type: VARCHAR
+      size: 12
+      required: true
+    nomprof:
+      type: VARCHAR
+      size: 50
+      required: true
+    apeprof:
+      type: VARCHAR
+      size: 50
+      required: true
+    nacprof:
+      type: VARCHAR
+      size: 50
+      required: true
+    pais:
+      type: VARCHAR
+      size: 50
+    lugnac:
+      type: VARCHAR
+      size: 100
+    sexo:
+      type: VARCHAR
+      size: 1
+    fecnac:
+      type: DATE
+    dirnac:
+      type: VARCHAR
+      size: 100
+    estciv:
+      type: VARCHAR
+      size: 1
+    telhab:
+      type: VARCHAR
+      size: 25
+    telcel:
+      type: VARCHAR
+      size: 25
+    inestado_id:
+      type: INTEGER
+      foreignTable: inestado
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    inmunicipio_id:
+      type: INTEGER
+      foreignTable: inmunicipio
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    inparroquia_id:
+      type: INTEGER
+      foreignTable: inparroquia
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    inespeci_id:
+      type: INTEGER
+      foreignTable: inespeci
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    dirhab:
+      type: VARCHAR
+      size: 100
+    codpost:
+      type: VARCHAR
+      size: 50
+    email:
+      type: VARCHAR
+      size: 50
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  inempresa:
+    #_attributes:
+      #idMethod: native
+    rifemp:
+      type: VARCHAR
+      size: 12
+      required: true
+    razsoc:
+      type: VARCHAR
+      size: 50
+      required: true
+    intipemp_id:
+      type: INTEGER
+      foreignTable: intipemp
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    inestado_id:
+      type: INTEGER
+      foreignTable: inestado
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    inmunicipio_id:
+      type: INTEGER
+      foreignTable: inmunicipio
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    inparroquia_id:
+      type: INTEGER
+      foreignTable: inparroquia
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    diremp:
+      type: VARCHAR
+      size: 100
+    codpost:
+      type: VARCHAR
+      size: 50
+    telemp:
+      type: VARCHAR
+      size: 25
+    email:
+      type: VARCHAR
+      size: 50
+    cedrepleg:
+      type: VARCHAR
+      size: 12
+      required: true
+    venextrepleg:
+      type: VARCHAR
+      size: 1
+      required: true
+    nomrepleg:
+      type: VARCHAR
+      size: 50
+      required: true
+    aperepleg:
+      type: VARCHAR
+      size: 50
+      required: true
+    sexo:
+      type: VARCHAR
+      size: 1
+    fecnac:
+      type: DATE
+    estciv:
+      type: VARCHAR
+      size: 1
+    telhab:
+      type: VARCHAR
+      size: 25
+    telcel:
+      type: VARCHAR
+      size: 25
+    emailrepleg:
+      type: VARCHAR
+      size: 50
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  infactura:
+    #_attributes:
+      #idMethod: native
+    numfac:
+      type: VARCHAR
+      size: 12
+      required: true
+    tipper:
+      type: VARCHAR
+      size: 1
+      required: true
+    cedrif:
+      type: VARCHAR
+      size: 12
+      required: true
+    tipconc:
+      type: VARCHAR
+      size: 1
+      required: true
+    idconc:
+      type: INTEGER
+      required: true
+    moncan:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    indefban_id:
+      type: INTEGER
+      foreignTable: indefban
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    numdep:
+      type: VARCHAR
+      size: 100
+    fecemi:
+      type: DATE
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  intipsol:
+    #_attributes:
+      #idMethod: native
+    codtipsol:
+      type: VARCHAR
+      size: 4
+      required: true
+    destipsol:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  iningprof:
+    #_attributes:
+      #idMethod: native
+    intipsol_id:
+      type: INTEGER
+      foreignTable: intipsol
+      foreignReference: id
+      OnDelete:
+      OnUpdate:
+    codingprof:
+      type: VARCHAR
+      size: 4
+      required: true
+    desingprof:
+      type: VARCHAR
+      size: 250
+      required: true
+    unitri:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

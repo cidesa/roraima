@@ -1,0 +1,21 @@
+methods:
+  post:
+   - "fctipesp{tipesp}"
+   - "fctipesp{destip}"
+
+names:
+  fctipesp{tipesp}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_tipesp
+
+  fctipesp{destip}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+Validator_tipesp:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fctipesp
+        column:       tipesp
+        unique_error: El registro ya Existe intente con otro.

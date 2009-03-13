@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npconceptoscategoria
+    theme:            default
+    fields:
+      codcon:       { name: Codigo Del Concepto, params: maxlength=10,size=10  }
+      codcat:       { name: Codigo De La Categoria }
+      descat:       { name: Descripcion De La Categoria, params: size=20  }
+
+    list:
+      title:          Asignación De Conceptos Por Categorias Presupuestarias Especiales
+      display:        [=codcat, descat]
+      filters:		  [codcat]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  codcat
+
+    edit:
+      title:          Asignación De Conceptos Por Categorias Presupuestarias Especiales
+      display:        [codcat, descat]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create       ~

@@ -1,0 +1,17 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomina
+    theme:            default
+    fields:
+      codnom: { name: Cod. Tipo Nomina, params: maxlength=3 }
+      nomnom: { name: Nombre Tipo Nomina }     
+    list:
+      title:          Asignacion de Cargos a Empleados en Lote
+      filters:        [codnom, nomnom ]
+      display:        [=codnom, nomnom ]
+      object_actions:
+        _edit:        ~
+      max_per_page:  8
+    edit:
+      title:          Asignacion de Cargos a Empleados en Lote

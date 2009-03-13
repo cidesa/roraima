@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npnomespnomtip
+    theme:            default
+    fields:
+      codnomesp: { name: Cód. Nom. Especial, params: maxlength=3}
+      nomnomesp: { name: Descripción Nomina Especial}
+      codnom: { name: Código de Nómina, params: maxlength=3}
+      nomnom: { name: Descripción Nómina}
+    list:
+      title:          Conceptos para Nominas Especiales
+      filters:        [codnomesp, nomnomesp, codnom, nomnom]
+      display:        [=codnomesp, nomnomesp, codnom, nomnom]
+      max_per_page:	  6
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición Conceptos para Nominas Especiales
+      display:        [codnomesp, nomnomesp, codnom, nomnom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

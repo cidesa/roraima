@@ -1,0 +1,21 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   viadettabcar
+  anchogrid:               500
+  ancho:                   450
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Codigo/Cargo
+  tipo:                    t
+  nombrecampo:             codcar
+  esgrabable:              true
+  html:                    [ size=16 ]
+2:       # Columna 2
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             nomcar
+  esgrabable:              false
+  html:                    [ size=30 readonly=true]

@@ -1,0 +1,42 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Inrecaud
+    theme:            cidesaGenerator
+    fields:
+      codrec:
+        name:Código
+
+      desrec:
+        name:Descripción
+        type: textarea_tag
+        params: size=50x5 maxlength=250
+
+      ingruprec_id:
+        name: Grupo
+
+      limita:
+        name: Limitante
+
+      unitri:
+        name: A partir de (UT)
+        type:input_tag
+
+    edit:
+      title:    Edición de Recaudos
+      display:  [_codrec, desrec, _ingruprec_id, limita, unitri]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+
+    list:
+      title:          Definición de Recaudos
+      filters:        [codrec]
+      display:        [=codrec, desrec]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codrec

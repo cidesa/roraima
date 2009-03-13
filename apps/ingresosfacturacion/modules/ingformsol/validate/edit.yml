@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "informsol{codformsol}"
+   - "informsol{desformsol}"
+names:
+  informsol{codformsol}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codformsol
+
+  informsol{desformsol}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desformsol
+
+Validator_codformsol:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Informsol
+        column:       codformsol
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desformsol:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres

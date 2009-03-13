@@ -1,0 +1,62 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   licalvan
+  ancho:				   950
+  anchogrid:               900
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Empresa
+  tipo:                    t
+  nombrecampo:             codpro
+  esgrabable:			   true
+  html:                    [size='12']
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nompro
+  html:                    [readonly=true size=25]
+3:       # Columna 3
+  titulo:                  VAN Declarado por la Empresa
+  tipo:                    m
+  nombrecampo:             vandecla
+  esgrabable:			   true
+  html:                    [size=10]
+4:
+  titulo:                  VAN de la Oferta Presentada con mayor VAN
+  tipo:                    m
+  nombrecampo:             vanmayor
+  esgrabable:			   true
+  html:                    [size=10]
+5:
+  titulo:                  Preferencia VAN
+  tipo:                    m
+  nombrecampo:             vanprefer
+  esgrabable:			   true
+  html:                    [size=10]
+6:
+  titulo:                  Preferencia Adicional a las PYMIS
+  tipo:                    m
+  nombrecampo:             preadipym
+  esgrabable:			   true
+  html:                    [size=10]
+7:
+  titulo:                  Preferencia Porcentual Total
+  tipo:                    m
+  nombrecampo:             preportot
+  esgrabable:			   true
+  html:                    [size=10]
+8:
+  titulo:                  Precio Evaluado (Oferta sin IVA)
+  tipo:                    m
+  nombrecampo:             preevaofe
+  esgrabable:			   true
+  html:                    [size=10]
+9:
+  titulo:                  Precio Ajustado
+  tipo:                    m
+  nombrecampo:             preajusta
+  esgrabable:			   true
+  html:                    [size=10]

@@ -1,0 +1,48 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                true
+  tabla:                   viaciuente
+  anchogrid:               450
+  ancho:                   390
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod Pais
+  tipo:                    t
+  nombrecampo:             codpai
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ size=4 ]
+2:       # Columna 2
+  titulo:                  Pais
+  tipo:                    t
+  nombrecampo:             nompai
+  esgrabable:              true
+  html:                    [ size=10 ]
+3:       # Columna 3
+  titulo:                  Cod Estado
+  tipo:                    t
+  nombrecampo:             codedo
+  esgrabable:              true
+  oculta:                  true
+  html:                    [ size=4 ]
+4:       # Columna 4
+  titulo:                  Estado
+  tipo:                    t
+  nombrecampo:             nomedo
+  esgrabable:              true
+  html:                    [ size=10]
+5:       # Columna 5
+  titulo:                  Cod Ciudad
+  tipo:                    t
+  nombrecampo:             occiudad_id
+  esgrabable:              true
+  oculta:                  true
+6:       # Columna 6
+  html:                    [ size=4 ]
+  titulo:                  Ciudad
+  tipo:                    t
+  nombrecampo:             nomciu
+  esgrabable:              true
+  html:                    [ size=10]

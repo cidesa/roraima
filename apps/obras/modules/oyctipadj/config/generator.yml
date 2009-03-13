@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Octipadj
+    theme:            cidesaGenerator
+    fields:
+      codtipadj: { name: Código, params: size=10 maxlength=3 onBlur='this.value=this.value.pad(3, "0",0);'}
+      destipadj: { name: Descripción, params: size=60 maxlength=50}
+    list:
+      title:  Tipos de Adjudicación
+      display: [=codtipadj, destipadj]
+      filters: [codtipadj, destipadj]
+      max_per_page:   10
+      sort: codtipadj
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Edición de Tipos de Adjudicación
+      display:
+        "NONE": [codtipadj, destipadj]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

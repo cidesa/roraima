@@ -1,0 +1,74 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      NpliquidacionDet
+    theme:            cidesaGenerator
+
+    fields:
+      display: [sue311296, sue180697, ultimosueldo, fecing, feccor, fecegr, diaefe, mesefe, anoefe, diarn, mesrn, anorn, diara, mesra, anora]
+      codemp:
+        name: Código Empleado
+        msj_error: El numero del expediente es necesario
+        catalogo:  
+          catalogoweb: Nphispre_Presnomcalintpre
+          clase: Nphojint 
+          ajax: 1
+          parametros: getprincipal="getCodemp" getsecundario="getNomemp" campoprincipal="codemp" camposecundario="nomemp" campobase = "id"           
+          #catalogoparams:
+          #ajaxparams:  
+          divupdate: divgridvaca     
+          #id:
+      sue311296:
+        name: Al 31/12/1996
+      sue180697:
+        name: Al 18/06/1997
+      ultimosueldo:
+        name: A la Fecha de Egreso
+      salarios:
+        name: .
+      fecing:
+        name: Ingreso
+      feccor:
+        name: Corte
+      fecegr:
+        name: Egreso
+      fechas:
+        name:.
+      diaefe:
+        name: Dia
+      mesefe:
+        name: Mes
+      anoefe:
+        name: Año
+      diarn:
+        name: Dia
+      mesrn:
+        name: Mes
+      anorn:
+        name: Año
+      diara:
+        name: Dia
+      mesra:
+        name: Mes
+      anora:
+        name: Año
+      tiempo:
+        name: .
+      vacaciones:
+        name: .
+      asignaciones:
+        name: .
+      deducciones:
+        name: .
+
+
+    edit:
+      title:  Liquidación de Prestaciones
+      display:
+        Datos del Empleados: [codemp]
+        Datos Generales de la Liquidacion de Prestaciones: [ _salarios, _fechas, _tiempo, _vacaciones]
+        Asignaciones/Deducciones para la Liquidacion de Prestaciones: [_asignaciones, _deducciones]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

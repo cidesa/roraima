@@ -1,0 +1,20 @@
+all:
+  propel:
+    class:          sfPropelDatabase
+    param:
+      phptype:            pgsql
+      hostspec:           localhost
+      database:           BARCELONA
+      username:           postgres
+      password:           postgres
+      schema:             SIMA002
+  sima_user:
+    class:          sfPropelDatabase
+    param:
+      phptype:            pgsql
+      hostspec:           localhost
+      database:           BARCELONA
+      username:           cidesa
+      password:           cidesa
+      schema:             SIMA_USER
+

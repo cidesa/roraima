@@ -1,0 +1,37 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fcsollic
+    theme:            default
+    fields:
+      numsol:      { name: N�mero}
+      fecsol:      { name: Fecha, params: date_format='dd/MM/yyyy'} 
+      numlic:      { name: N�mero de Licencia}
+      feclic:      { name: Fecha, params: date_format='dd/MM/yyyy'}  
+      rifcon:      { name: C.I. / RIF. }
+      nomcon:      { name: Nombre }
+      dircon:      { name: Direcci�n }
+      nacconrep:   { name: Nacionalidad}
+      rifrep:      { name: C.I. / RIF. Representante}
+      nomconrep:   { name: Nombre}
+      dirconrep:   { name: Direcci�n}
+      tomo:        { name: Tomo}
+      folio:       { name: Folio}
+      numero:      { name: Numero}
+      implic:      { name: Impuesto a Pagar}
+      fecapr:      { name: Aprobaci�n}
+      #fecha:       { name: Renovacion}
+      fecven:      { name: Vencimiento}
+    list:
+      title:          Actualizaci�n de Deudas por Retenciones
+      display:        [=numsol, numlic, fecsol]
+      filters:        [numsol]
+      object_actions:
+        _edit:        ~
+        _delete:      ~              
+      max_per_page:   10    
+    edit:
+      title:          Actualizaci�n de Deudas por Retenciones
+      display:        [numsol, fecsol, rifcon, numlic, feclic, nomcon, dircon, nacconrep, rifrep, nomconrep, dirconrep, tomo, folio, numero, implic, fecapr, fecha, fecven]          
+
+     

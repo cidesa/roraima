@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npdefcpt
+    theme:            default
+
+    fields:
+      codcon:    { name: C&oacute;digo}
+      nomcon:    { name: Nombre del Concepto}
+      conact:    { name: Estado}
+      estado:    { name: Estado}
+      
+
+    list:
+      title:          Activar/Desactivar Conceptos
+      filters:		  [codcon, nomcon, estado]
+      display:        [=codcon, nomcon, estado]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~      
+        _delete:      ~      
+                        
+    edit:
+      title:          Activar/Desactivar Conceptos
+      display:        [codcon, nomcon, estados]            

@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octipste
+    theme:            default
+
+    fields:
+      codste:      { name: Código}
+      desste:      { name: Descripción}
+      tipste:      { name: Tipo}
+
+    list:
+      title:          Tipo de Solicitante
+      filters:		  [codste, desste]
+      display:        [=codste, desste]
+      max_per_page:	  10
+      sort:  codste
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Edición de Tipo de Solicitante
+      display:        [codste, desste, tipste]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

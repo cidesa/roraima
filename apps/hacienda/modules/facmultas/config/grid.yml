@@ -1,0 +1,29 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   fcrangosmul
+  ancho:                   400
+  anchogrid:               600
+  filas:                   6
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Desde
+  tipo:                    m
+  nombrecampo:             diasdesde
+  esgrabable:			   true
+  html:                    []
+
+2:       # Columna 2
+  titulo:                  Hasta
+  tipo:                    m
+  nombrecampo:             diashasta
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Valor
+  tipo:                    m
+  nombrecampo:             valor
+  esgrabable:			   true
+  html:                    []

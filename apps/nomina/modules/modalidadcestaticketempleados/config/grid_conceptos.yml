@@ -1,0 +1,27 @@
+opciones:                  # Opciones generales
+  name:                    conceptos
+  eliminar:                false
+  tabla:                   nphojint
+  anchogrid:               530
+  ancho:                   500
+  filas:                   0
+  titulo:                  ''
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cedula
+  tipo:                    t
+  nombrecampo:             codemp
+  html:                    [size="10" readonly=true]
+  esgrabable:              false
+2:       # Columna 2
+  titulo:                  Descripcion/Empleado
+  tipo:                    t
+  nombrecampo:             nomemp
+  html:                    [size=25 readonly=true]
+  esgrabable:              false
+3:       # Columna 3
+  titulo:                  Modalidad
+  tipo:                    c
+  nombrecampo:             modpagcestic
+  html:                    []
+  esgrabable:              true

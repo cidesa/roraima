@@ -1,0 +1,44 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcmultas
+    theme:            cidesaGenerator
+
+    fields:
+      codmul:  { name: Código, params: size=4 maxlength=240 }
+      nommul:  { name: Descripción, params: size=40 maxlength=240 }
+      tipo:  { name: . , params: size=1 maxlength=1 }
+      modo:  { name: Modo, params: size=1 maxlength=1 }
+      monpro:  { name: . , params: size=1 maxlength=1 }
+      tipdec:	{ name: . , params: size=1 maxlength=1 }
+      grid:  { name: . }
+      gridb:  { name: . }
+
+    list:
+      title:     Definición de Multas en Declaración
+      display:   [=codmul, nommul]
+      sort:      nommul
+      filters:   [codmul, nommul]
+      fields:
+        nommul:
+          params: size=18
+      max_per_page: 10
+      sort:  codmul
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+
+    edit:
+      title: Edición de Multas en Declaración
+      display:
+        "Datos Generales": [ _codmul, nommul ]
+        "Declaración": [ _tipdec ]
+        "Tipos": [ _tipo ]
+        "Modos de Calculo": [ _modo, _monpro, _grid ]
+        "Asociación Fuentes": [ _gridb ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

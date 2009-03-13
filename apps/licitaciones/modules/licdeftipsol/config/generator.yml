@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Litipsol
+    theme:            cidesaGenerator
+    fields:
+      dessol:      { name: Descripción, params: size=80 maxlength=100}
+      tipsol:      { name: Tipo}
+      maxdia:      { name: Número de Días}
+    list:
+      title:          Tipo de Solicitud de Servicio/Obra/Bien
+      display:        [=dessol]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [dessol]
+      fields:
+        dessol:
+          params: size=18
+      max_per_page:   5
+    edit:
+      title:          Edición de Tipo de Solicitud de Servicio/Obra/Bien
+      display:
+        Datos Principales:  [dessol, _tipsol]
+        Tiempo Máximo en el cual debe ser respondido el Tipo de Solicitud: [maxdia]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

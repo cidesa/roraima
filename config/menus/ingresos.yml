@@ -1,0 +1,55 @@
+ingresos:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Ingresos
+    imagen: ingresos.gif
+    nombre: Ingresos
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: ingresos.php
+        modulo_dev: ingresos_dev.php
+      Reportes:
+        absoluta: reportes/reportes/ingresos
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones:
+      Definiciones Especificas:
+        Niveles:                                              ingnivpre
+        Titulos:                                              ingtitpre
+        Asignación Inicial:                                  ingasiini
+        Contribuyentes:                                       ingdatcon
+        Tipos de Ingresos:                                    ingdeftiping
+        Tipos de Rubros:                                      ingtiprub
+      Registro de Ingresos:                                   ingreging
+      Ejecución Global:                                      ingejeglo
+      Reclasificación de Ingresos:                           ingreclaing
+      Ajuste de Ingresos:                                    ingajustenew
+      Traslados:                                              ingtrasla
+      Adiciones Disminuciones:                                ingadidis
+    Reportes:
+      Ingresos por Sanciones:                        iningsan
+      Ingresos por Registros Profesionales:          inregprof
+      Ingresos por Bancos:                           ingbanco
+      Cierre Diario:                                 ingciedia
+      Ingresos o Multas canceladas:                  ingempper
+      Factura:                                       ingfactura
+      Catálogo de Fuentes Ingresos:                           INRFUEING.php
+      Alfabético de Contribuyentes:                           INRALFCON.php
+      Ingresos de Recaudación:                                INRUNIREC.php
+      Catálogo de Proveedores:                                CARPROVEE2.php
+      Catálogo de Recaudos:                                   CARRECAUD.php
+      Especies Fiscales:                                      INRESPFIS.php
+      Conceptos de Ley de Timbre Fiscal:                      INRTASSERPRES.php
+      Listado de Venta de Especies:                           INRLISESPVEN.php
+      Listado de Liquidaciones:                               INRLISLIQ.php
+      Listado de Liquidación por Contribuyente:               INRLISLIQCONT.php
+      Planilla de Liquidación:                                inrplaliq.php
+      Planilla de Reintegro:                                  inrplarei.php
+      Relación de Planillas de Liquidación:                   inrrelplaliq.php
+      Relación de Planillas de Reintegro:                     inrrelplarei.php
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

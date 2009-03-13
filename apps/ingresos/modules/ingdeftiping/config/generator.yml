@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Citiping
+    theme:            cidesaGenerator
+    fields:
+      codtip:      { name: Código }
+      destip:      { name: Descripción }
+
+    list:
+      title:          Tipos de Ingresos
+      display:        [ =codtip, destip ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [ codtip, destip ]
+      max_per_page:   5
+      sort: codtip
+    edit:
+      title:          Edición de Tipos de Ingresos
+      display:        [ codtip, destip ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

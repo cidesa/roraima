@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npincapa
+    theme:            cidesaGenerator
+    fields:
+      codinc:  { name: Código }
+      desinc:  { name: Descripción }
+      obsinc:  { name: Observación }
+
+    list:
+      title:          Incapacidades
+      filters:        [codinc, desinc]
+      display:        [=codinc, desinc]
+      max_per_page:	  5
+      sort:           codinc
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Incapacidad
+      display:        [_codinc, desinc, obsinc]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

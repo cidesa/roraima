@@ -1,0 +1,38 @@
+methods:
+  post:
+   - "catipent{codtipent}"
+   - "catipent{destipent}"
+names:
+  catipent{codtipent}:
+    required:  Yes
+    required_msg: El código del Tipo de Entrada no puedo estar en Blanco
+    validators: Validator_codtipent, CorrelValidator
+
+  catipent{destipent}:
+    required:  Yes
+    required_msg: La Descripción del Tipo de Entrada no puedo estar en Blanco
+    validators: Validator_destipent
+
+Validator_codtipent:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Catipent
+        column:       codtipent
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destipent:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 50 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+
+

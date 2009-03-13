@@ -1,0 +1,120 @@
+methods:
+  post:
+   - "fapresup{refpre}"
+   - "fapresup{fecpre}"
+   - "fapresup{rifpro}"
+   - "fapresup{despre}"
+   - "fapresup{faforsol_id}"
+   - "fapresup{faconpag_id}"
+   - "fapresup{tipmon}"
+   - "fapresup{fafordes_id}"
+
+
+names:
+  fapresup{refpre}:
+    required:  Yes
+    required_msg: El Número no puede estar en Blanco.
+    validators: UniqueValidator
+
+  fapresup{fecpre}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  fapresup{rifpro}:
+    required:  Yes
+    required_msg: CI/Rif no puede estar en Blanco.
+    #validators: ExistValidator
+
+  fapresup{despre}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco.
+    validators: DescripcionValidator
+
+  fapresup{faforsol_id}:
+    required:  Yes
+    required_msg: Seleccione Forma de solicitud
+    validators: FaforsolExistValidator
+
+  fapresup{faconpag_id}:
+    required:  Yes
+    required_msg: Seleccione Condición de Pago
+    validators: FaconpagExistValidator
+
+  fapresup{tipmon}:
+    required:  Yes
+    required_msg: Debe seleccionar el tipo de Moneda.
+    #validators: TipmonExistValidator
+
+  fapresup{fafordes_id}:
+    required:  Yes
+    required_msg: Seleccione Forma de despacho
+    validators: FafordesExistValidator
+
+FaforsolExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Faforsol
+        column:       id
+        unique_error: El Código de la Forma de Solicitud debe Existir.
+
+
+FaconpagExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Faconpag
+        column:       id
+        unique_error: El Código de la Condición de pago debe Existir.
+
+TipmonExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Caforent
+        column:       codforent
+        unique_error: El Código de la Forma de Entrega debe Existir.
+
+FafordesExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Fafordes
+        column:       id
+        unique_error: El Código de la Forma de Despacho debe Existir.
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Facliente
+        column:       codpro
+        unique_error: El Código del Proveedor debe Existir.
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fapresup
+        column:       refpre
+        unique_error: El Número del Presupuesto ya existe. Por Favor, Cambiélo por otro.
+
+
+#FechaValidator:
+#    class:         CidesaDateNow
+#    param:
+#        compare: 'now'
+#        compare_error: La Fecha no puede ser menor a la Fecha Actual
+#        operator: '>='
+#        date_error:  Fecha Inválida
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+

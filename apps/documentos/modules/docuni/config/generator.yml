@@ -1,0 +1,24 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Acunidad
+    theme:            default
+    fields:
+      numuni:     { name : Código }
+      nomuni:     { name : Unidad }
+      desuni:     { name : Descripción }
+    list:
+      title:          Administración de Unidades
+      display:        [=nomuni, desuni ]
+      filters:      [nomuni, desuni ]
+      max_per_page:    5
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Edicion de Unidades
+      display:        [numuni, nomuni, desuni ]
+      actions:
+        _list:        ~
+        _save:        ~

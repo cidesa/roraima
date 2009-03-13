@@ -1,0 +1,17 @@
+methods:
+  post:
+   - "viaregtiptab{destiptab}"
+
+names:
+  viaregtiptab{destiptab}:
+    required:  Yes
+    required_msg: La Descripcion no puedo estar en Blanco
+    validators: [String1aValidator ]
+
+
+String1aValidator:
+  class: sfStringValidator
+  param:
+    min:       1
+    min_error: La Descripcion no puede tener menos de 1 caracteres
+

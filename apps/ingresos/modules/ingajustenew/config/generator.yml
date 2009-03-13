@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ciajuste
+    theme:            cidesaGenerator
+    fields:
+      refaju:      { name: Referencia, params: size=12 }
+      fecaju:      { name: Fecha }
+      desaju:      { name: Descripción, type: textarea_tag, params: size=50x2 }
+      refere:      { name: Referencia }
+      totaju:      { name: Total }
+      refmov:      { name: Refiere a Movimiento }
+      grid:        { name: Movimientos del Ajuste }
+
+    list:
+      title:          Ajustes Ejecución
+      display:        [ =refaju, desaju ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [ refaju, desaju ]
+      max_per_page:   5
+      sort: refaju
+    edit:
+      title:          Edición de Ajustes Ejecución
+      display:
+        Datos del Ajuste:   [ _refaju, _fecaju, desaju, _refmov, _refere ]
+        Movimientos del Ajuste: [ _grid, totaju ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+        _anular:
+          name: Anular
+          params: class="sf_admin_action_save" onClick="anular()"

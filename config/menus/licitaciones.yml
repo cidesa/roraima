@@ -1,0 +1,90 @@
+licitaciones:
+  opciones:
+    activo: true
+    descripcion: Módulo de Licitaciones
+    imagen: licitaciones.gif
+    nombre: Licitaciones
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: licitaciones.php
+        modulo_dev: licitaciones_dev.php
+      Documentación Legal:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Empresas:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Grupo de Recaudos:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Partidas:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Organismos:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Unidades de Medida:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      División Territorial:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Catálogo de Clasificación de Compras:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Reportes:
+        absoluta: reportes/reportes/licitaciones
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones Generales:
+        Institución:                                    licdefemp
+       # Grupo de Recaudos:                              almtiprecpro
+       # Documentación Legal:                            oycdefrec
+        Unidades de Medida:                             oycdefuni
+        Catálogo de Clasificación de Compras:           oycclacomp
+        Situaciones Posibles de la Licitación:          licsicact
+        Comisión de Licitación:                         liccomlic
+        Recaudos:                                       licrecaudos
+        Organismos:
+          Tipo:                                         oycdeftiporg
+          Registro:                                     oycdeforg
+        Empresas:                                       almregpro
+        División Territorial:
+          Pais:                                         oycdefdivpai
+          Estado:                                       oycdefdivest
+          Ciudad:                                       oycdefdivciu
+          Municipio:                                    oycdefdivmun
+          Parroquia:                                    oycdefdivpar
+          Sector:                                       oycdefdivsec
+    Partidas:
+        Tipo:                                          oyctippar
+        Registro:                                      oycdefpar
+    Unidad Solicitante:
+        Tipo:                                           lictipuniste
+        Registro:                                       licuniste
+    Solicitudes:
+        Tipo:                                            licdeftipsol
+        Registro:                                        licregsol
+        Respuesta:                                       licressol
+    Licitaciones:
+        Tipo:                                           lictiplic
+        Registro:                                       licreglic
+        Empresas Participantes:                         liemppar
+        Empresas Oferentes:                             licempofe
+    Análisis de Ofertas:
+      Aspecto Legal:
+        Análisis:                                       licasplegcriterios
+      Aspecto Técnico:
+        Criterios de Evaluación:                        licaspteccriterios
+        Análisis:                                       licasptecanalisis
+      Aspecto Financiero:
+        Criterios de Evaluación:                        licaspfincriterios
+        Análisis:                                       licaspfinanalisis
+        Presupuesto:                                    licoferpresupuesto
+      Cálculo del V.A.N.:                               liccalculovan
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

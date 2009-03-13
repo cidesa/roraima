@@ -1,0 +1,12 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Bndisinm
+    theme:            cidesaGenerator
+
+
+    edit:
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

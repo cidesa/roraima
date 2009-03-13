@@ -1,0 +1,56 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atestsoceco
+    theme:            cidesaGenerator
+
+
+    fields:
+      atciudadano_id: { name: Ciudadano }
+      atayudas_id:  { name: Expediente }
+      expediente:  { name: Expediente }
+      nroexp:      { name: Expediente }
+      attipviv_id: { name: Tipo de Vivienda }
+      attipproviv_id: { name: Forma de Propiedad de la Vivienda }
+      carvivsal:   { name: Sala  }  # Caract. Viv. Sala
+      carvivcom:   { name: Comedor  }  # Caract. Viv. Comedor
+      carvivhab:   { name: Habitaciones  } # Caract. Viv. Habitaciones
+      carvivcoc:   { name: Cocina  } # Caract. Viv. Cocina
+      carvivban:   { name: Baños  } # Caract. Viv. Baños
+      carvivpat:   { name: Patio  } # Caract. Viv. Patio
+      carvivarever: { name: Areas Verdes  }  # Caract. Viv. Areas Verdes
+      carvivpis:   { name: Pisos  } # Caract. Viv. Piso
+      carvivpar:   { name: Paredes  } # Caract. Viv. Paredes
+      carvivtec:   { name: Techo  } # Caract. Viv. Techo
+      anasoceco:   { name: Analisis Socio-Economico,  type: textarea_tag, params: size=100x10  } # Analisis socio-economico
+      anafam:      { name: Analisis Familiar,  type: textarea_tag, params: size=100x10  } # Analisis familiar
+      otros:       { name: Observaciones Adicionales,  type: textarea_tag, params: size=100x10  } # Observaciones
+      nomsol:      { name: Nombre Solicitante }
+      nomben:      { name: Nombre Beneficiario }
+
+    list:
+      fields:
+        atayudas_id:  {name: Expediente, type: input_tag }
+      title:          Registro de Estudios Socio-Economicos
+      display:        [=nroexp, nomsol, nomben]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [_atayudas_id]
+      max_per_page:   5
+    edit:
+      title:          Edición de Estudios Socio-Economicos
+      display:
+        Expediente:         [_expediente]
+        Estado de Vivienda: [attipviv_id, attipproviv_id ]
+        Características de la Vivienda: [carvivsal, carvivcom, carvivhab, carvivcoc, carvivban, carvivpat, carvivarever, carvivpis, carvivpar, carvivtec]
+        #Informacion Familiar:  [_grufam]
+        Analisis Familiar: [anafam]
+        Analisis Socio-Economico: [anasoceco]
+        Informacion Adicional:    [otros]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

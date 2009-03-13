@@ -1,0 +1,35 @@
+methods:
+  post:
+   - "tstipren{codtip}"
+   - "tstipren{destip}"
+names:
+  tstipren{codtip}:
+    required:  Yes
+    required_msg: El código no puedo estar en Blanco
+    validators: Validator_codtip, CorrelValidator
+
+  tstipren{destip}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_destip
+
+Validator_codtip:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Tstipren
+        column:       codtip
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destip:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       50
+        max_error: La descripción no puede pasar mas de 50 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos

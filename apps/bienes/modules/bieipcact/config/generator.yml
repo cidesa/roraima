@@ -1,0 +1,37 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Bnipcact
+    theme:            default
+
+    fields:
+      anoipc: { name: Años}
+      ipcene: { name: Enero}
+      ipcfeb: { name: Febrero}
+      ipcmar: { name: Marzo}
+      ipcabr: { name: Abril}
+      ipcmay: { name: Mayo}
+      ipcjun: { name: Junio}
+      ipcjul: { name: Julio}
+      ipcago: { name: Agosto}
+      ipcsep: { name: Septiembre}
+      ipcoct: { name: Octubre}
+      ipcnov: { name: Noviembre}
+      ipcdic: { name: Diciembre}
+      staipc: { name: Status}
+
+    list:
+      title:          Tabla del IPC
+      filters:        [anoipc]
+      display:        [=anoipc]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edición Tabla del IPC
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

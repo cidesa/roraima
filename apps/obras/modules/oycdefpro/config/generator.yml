@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Octippro
+    theme:            default
+    fields:
+      codtippro:    { name: Código}
+      destippro:    { name: Descripción}
+
+    list:
+      title:          Profesiones
+      filters:        [codtippro]
+      display:        [=codtippro, destippro]
+      sort:  codtippro
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Profesiones
+      display:        [codtippro, destippro]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

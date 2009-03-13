@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caramart
+    theme:            default
+
+    fields:
+      ramart:      { name : Código, params: maxlength=6 }
+      nomram:      { name : Descripción }
+
+    list:
+      title:          Ramo de Artículo
+      display:        [=ramart, nomram]
+      filters:		  [ramart, nomram]
+      max_per_page:	  10
+      sort:           ramart
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
+    edit:
+      title:          Edición de Ramo de Artículo
+      display:        [ramart, nomram]
+      fields:
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

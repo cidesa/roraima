@@ -1,0 +1,52 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsdefban
+    theme:            default
+
+    fields:
+      numcue:     { name: Número de Cuenta, params: maxlength=20 }
+      nomcue:     { name: Nombre del Banco, params: maxlength=40 }
+      tipcue:     { name: Tipo de Cuenta, params: maxlength=3 }
+      codcta:     { name: Código Contable, params: maxlength=32 }
+      fecreg:     { name: Fecha de Registro, params: date_format=dd/MM/yyyy }
+      fecven:     { name: Fecha de Vencimiento, params: date_format=dd/MM/yyyy }
+      fecper:     { name: Fecha de Período, params: date_format=dd/MM/yyyy }
+      fecape:     { name: Fecha de Apertura, params: date_format=dd/MM/yyyy }
+      renaut:     { name: Renovación Automatica, params: maxlength=1 }
+      porint:     { name: Porcentaje de Interes }
+      tipint:     { name: Grupo, params: maxlength=1 }
+      usocue:     { name: Uso de la Cuenta, params: maxlength=20 }
+      numche:     { name: Número de Cheque, params: maxlength=8}
+      antban:     { name: Saldo Anterior Bancos }
+      debban:     { name: Débitos Bancos }
+      creban:     { name: Crédito Bancos }
+      antlib:     { name: Saldo Anterior Libros }
+      deblib:     { name: Débitos Libros }
+      crelib:     { name: Crédito Libros }
+      deblibdis:  { name: Débitos Libros }
+      crelibdis:  { name: Crédito Libros }
+      valche:     { name: Validez del Documento (Días) }
+      concil:     { name: Conciliable, params: maxlength=1 }
+      plazo:      { name: Plazo }
+      tipren:     { name: Tipo de Rendimiento, params: maxlength=20 }
+      cantdig:    { name: Cant. de Digitos Significativos del N° Cheque }
+      destip:     { name: Tipo de Cuenta}
+      destipren:  { name: Tipo de Rendimiento}
+    list:
+      title:         Definición de Bancos
+      display:       [=numcue, nomcue, tipcue, codcta, fecreg, fecven]
+      filters:       [=numcue]
+      sort:          numcue
+      max_per_page:   8
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:         Edición de Bancos
+      display:       [numcue, nomcue, tipcue, destip, codcta, fecreg, fecven, fecper, fecape, renaut, porint, tipint, usocue, numche, antban, debban, creban, antlib, deblib, crelib, valche, concil, plazo, tipren, destipren, cantdig, saltotlib, saltotban, deblibdis, crelibdis]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~        
+        _delete:      ~

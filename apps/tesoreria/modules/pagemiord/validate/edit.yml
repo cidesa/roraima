@@ -1,0 +1,128 @@
+methods:
+  post:
+   - "opordpag{numord}"
+   - "opordpag{fecemi}"
+   - "opordpag{tipcau}"
+   - "opordpag{desord}"
+   - "opordpag{cedrif}"
+   - "opordpag{monord}"
+   - "opordpag{ctapag}"
+   - "opordpag{coduni}"
+   - "opordpag{tipfin}"
+   - "opordpag{obsord}"
+
+
+names:
+  opordpag{numord}:
+    required:  Yes
+    required_msg: La Referencia no puedo estar en Blanco
+    validators: UniqueValidator
+
+  opordpag{fecemi}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: Fecha2Validator, FechaValidator
+
+  opordpag{tipcau}:
+    required:  Yes
+    required_msg: El tipo de Causado no puedo estar en Blanco
+    validators: CausadoValidator
+
+  opordpag{desord}:
+    required:  Yes
+    required_msg: El Concepto no puedo estar en Blanco
+    validators: DescripcionValidator
+
+  opordpag{cedrif}:
+    required:  Yes
+    required_msg: El C.I/RIF no puedo estar en Blanco
+
+
+  opordpag{monord}:
+    required:  Yes
+    required_msg: El Monto Total de la Orden no puedo estar en Blanco
+
+  opordpag{ctapag}:
+    required:  No
+    validators: CuentaValidator
+
+  opordpag{coduni}:
+    required:  No
+    validators: OrigenValidator
+
+  opordpag{tipfin}:
+    required:  No
+    validators: FinanciamientoValidator
+
+  opordpag{obsord}:
+    required:  No
+    validators: ObservacionValidator
+
+
+FechaValidator:
+    class: CidesaDateValidator
+    param:
+        class:        Cpdefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Concepto no puede tener menos de 5 caracteres
+        max:       1000
+        max_error: El Concepto no puede tener más de 1000 caracteres
+
+ObservacionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: Las Observaciones no puede tener menos de 5 caracteres
+        max:       250
+        max_error: Las Observaciones no puede tener más de 250 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Opordpag
+        column:   numord
+        unique_error:   La Referencia ya existe. Por Favor, Cambiélo por otro.
+
+CausadoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cpdoccau
+        column:   tipcau
+        unique_error:   El Tipo de Causado no existe.
+
+CuentaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Contabb
+        column:   codcta
+        unique_error:   El Número de Cuenta no existe.
+
+OrigenValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Bnubica
+        column:   codubi
+        unique_error:   La Unidad de Origen no existe.
+
+FinanciamientoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fortipfin
+        column:   codfin
+        unique_error:   El Financiamiento no existe.
+        
+Fecha2Validator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida        

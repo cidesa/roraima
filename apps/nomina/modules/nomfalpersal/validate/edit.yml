@@ -1,0 +1,59 @@
+methods:
+  post:
+   - "npfalper{codemp}"
+   - "npfalper{codmot}"
+   - "npfalper{fechas}"
+   - "npfalper{fecdes}"
+
+names:
+
+  npfalper{codemp}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_codemp
+
+  npfalper{codmot}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_codmot
+
+  npfalper{fechas}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: lastDay
+
+  npfalper{fecdes}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: firstDay
+
+Validator_codemp:
+    class: CidesaExistValidator
+    param:
+        class:        Npasicaremp
+        column:       codemp
+        unique_error: El Código del Empleado no esta asociado a ningun cargo .
+
+
+
+Validator_codmot:
+    class: CidesaExistValidator
+    param:
+        class:        Npmotfal
+        column:       codmotfal
+        unique_error: El Código del Motivo debe Existir.
+firstDay:
+    class: CidesaDateCompareValidator
+    param:
+      date_error:    El campo debe ser una fecha
+      compare:       npfalper[fechas]
+      operator:      <
+      compare_error: La fecha inicio debe ser anterior a la fecha fin
+
+lastDay:
+    class: CidesaDateCompareValidator
+    param:
+        date_error:    EL campo debe ser una fecha
+        compare:       npfalper[fecdes]
+        operator:      >
+        compare_error: La fecha fin debe ser posterior a la fecha inicio

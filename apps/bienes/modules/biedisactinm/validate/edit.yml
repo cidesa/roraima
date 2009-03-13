@@ -1,0 +1,44 @@
+methods:
+  post:
+   - "bndisinm{codmue}"
+   - "bndisinm{mondisinm}" 
+   - "bndisinm{fecdevdis}" 
+   - "bndisinm{fecdisinm}"    
+
+names:
+  bndisinm{codmue}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: UniqueValidator
+ 
+  bndisinm{mondisinm}:
+    required:  No
+    validators: MyNumberValidator
+
+  bndisinm{fecdevdis}:
+    required:  No
+    validators: FechaValidator
+
+  bndisinm{fecdisinm}:
+    required:  No
+    validators: FechaValidator
+        
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error:El Campo solo puede contener valores númericos
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Bndisinm
+        column:   codmue
+        unique_error:   El Código ya existe. Por Favor, Cambiélo por otro.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

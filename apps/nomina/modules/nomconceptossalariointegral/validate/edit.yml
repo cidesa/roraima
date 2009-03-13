@@ -1,0 +1,23 @@
+methods:
+  post:
+   - "npnomina{codnom}"
+
+names:
+  npnomina{codnom}:
+    required:  Yes
+    required_msg: El código de la Nómina no puede estar en Blanco
+    validators: CodNomValidator
+
+CodNomValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npnomina
+        column:   codnom
+        unique_error:   El Código no existe.
+
+CodConValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npdefcpt
+        column:   codcon
+        unique_error:   El Código no existe.

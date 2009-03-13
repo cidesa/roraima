@@ -1,0 +1,70 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atayudas
+    theme:            cidesaGenerator
+
+    fields:
+      expediente:  { name: Nro. de Expediente, params: disabled=true size=6 }
+      nroexp:      { name: Nro. de Expediente }
+      atsolici:    { name: Solicitante }
+      atbenefi:    { name: Paciente }
+      nomsol:      { name: Solicitante }
+      nomsol:      { name: Nombre }
+      attipayu:
+        name: Tipo Ayuda
+      cedula:      { name: Cédula, params: readonly=true }
+      desayu:      { name: Descripción, type: textarea_tag, params: cols=60 rows=2 rich=false readonly=true }
+      motayu:      { name: Motivo, type: textarea_tag, params: cols=60 rows=2 rich=false readonly=true }
+      detalleayudas: {name: Detalle Ayuda }
+      detallerecaudos: {name: Detalle Recaudos}
+      caprovee_id: { name: Proveedor }
+      atestayu_id:      { name: Estatus, params: disabled=true style=font-size:20px!important }
+      caprovee_id: { name: Nombre }
+      attrasoc_id: { name: Nombre }
+      attipayu_id: { name: Grupo de Rubros }
+      atrubros_id: { name: Rubro }
+      desest:      { name: Estado, params: disabled=true style=font-size:20px!important }
+      created_at:      { type: plain, name: Fecha Solicitud, params: disabled=true }
+      estsoceco: { name: Estudio }
+      detayu:      { name: Detalle }
+      atmedico_id:      { name: Médico Tratante }
+      respat: 	{ name: Resumen de la Patología, type: textarea_tag, params: size=70x3 maxlength=5000 disabled=true}
+      infmed: 	{ name: Informe Médico, type: textarea_tag, params: size=70x3 maxlength=5000 disabled=true}
+      obsmed: 	{ name: Observación, type: textarea_tag, params: size=70x3 maxlength=5000 disabled=true}
+      fecdiasoc:     { name: Fecha, params: disabled=true }
+      usudiasoc:     { name: Elaborado Por, params: size=100 maxlength=100 disabled=true }
+      resdiasoc: 	 { name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 disabled=true}
+      fecvisdoc:     { name: Fecha, params: disabled=true }
+      usuvisdoc:     { name: Elaborado Por, params: size=100 maxlength=100 disabled=true}
+      resvisdoc: 	{ name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 disabled=true}
+      monayu:    { name: Monto en Bolívares (Bs.), params: disabled=true}
+    list:
+      title:          Estatus de Donaciones
+      display:        [=nroexp, cedsol, nomsol, desayu, desest]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nroexp, attipayu_id]
+      max_per_page:   5
+      #sort:           atsolici_id
+    edit:
+      title:          Estado de Solicitud de Donacion
+      display:
+        Expediente:         [ _expediente ]
+        Inf. Estado:        [ desest, created_at ]
+        Solicitante:        [ _atsolici ]
+        Solicitante:        [ _atbenefi ]
+        Trabajadora Social: [ _attrasoc_id ]
+        Estudio Socio-Economico: [_estsoceco]
+        Proveedor:          [ _caprovee_id ]
+        Ayuda:        [ _attipayu_id, _atrubros_id, motayu, desayu ]
+        Detalle de Recaudos: [ _detallerecaudos ]
+        Diagnostico del Caso: [_atmedico_id, respat, infmed, obsmed]
+        Diagnostico Social: [fecdiasoc, usudiasoc, resdiasoc]
+        Informe de Visita Domiciliaria: [fecvisdoc, usuvisdoc, resvisdoc]
+        Detalle de Ayuda: [_detalleayudas]
+   #     Detalle de Ayuda: [_detayu]
+        Monto Total de la Ayuda: [monayu]
+      actions:
+        _list:        ~

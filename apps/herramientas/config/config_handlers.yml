@@ -1,0 +1,2 @@
+modules/*/config/security.yml:
+  class:    sfSecurityConfigHandler

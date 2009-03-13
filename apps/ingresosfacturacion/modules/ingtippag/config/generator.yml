@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Intippag
+    theme:            cidesaGenerator
+    fields:
+      codtippag:       { name: Código }
+      destippag:       { name: Descripción}
+
+    list:
+      title:          Definición de Tipo de Pago
+      filters:        [codtippag]
+      display:        [=codtippag, destippag]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+
+    edit:
+      title:          Edición de Tipo de Pago
+      display:        [codtippag, destippag]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

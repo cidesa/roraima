@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Cacatsnc
+    theme:            default
+
+    fields:
+      codsnc:        { name: Código }
+      dessnc:        { name: Descripción }
+    list:
+      title:         Catalogo SNC
+      display:       [=codsnc, dessnc]
+      filters:       [codsnc, dessnc]
+      max_per_page:  10
+      sort:          codsnc
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Catalogo SNC
+      display:       [codsnc, dessnc]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

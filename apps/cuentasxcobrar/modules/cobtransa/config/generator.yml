@@ -1,0 +1,41 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cobtransa
+    theme:            cidesaGenerator
+    fields:
+      codcli: { name: Código Cliente }
+      nompro: { name: Nombre }
+      rifpro: { name: C.I. o R.I.F. }
+      numtra: { name: Nro. Transacción, params: size=12 maxlength=10 onBlur="this.value=this.value.pad(10, '0',0);" }
+      fectra: { name: Fecha Emisión, params:  size=10 maxlength=10 onkeyup= "mascara(this,'/',patron,true)" }
+      fatipmov_id: { name: Tipo de Movimiento }
+      destra: { name: Descripción, type: textarea_tag, params: size=80x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      documentos: { name: .}
+      formasdepago: { name: .}
+      montra: { name: Monto a Pagar, params: readonly=true }
+    list:
+      title: Cobranzas-Transacciones
+      display: [=numtra, destra, fectra, codcli, nompro ]
+      filters: [numtra, fectra, codcli]
+      fields:
+        fectra:
+          params: date_format='dd/MM/yyyy'
+      object_actions:
+       _edit:        ~
+       _delete:      ~
+      max_per_page:	  10
+      sort:    numtra
+
+    edit:
+      title:  Cobranzas-Transacciones
+      display:
+        "Datos del Cliente": [_codcli, rifpro]
+        "Datos Transacción": [numtra, _fatipmov_id, fectra, destra]
+        "Documentos": [_documentos, montra]
+        "Formas de Pago": [_formasdepago]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

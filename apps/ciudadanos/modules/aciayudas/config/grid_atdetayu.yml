@@ -1,0 +1,47 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   atdetayu
+  anchogrid:               750
+  ancho:                   700
+  filas:                   7
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  atdonaciones_id
+  tipo:                    t
+  nombrecampo:             atdonaciones_id
+  html:                    [ '' ]
+  oculta:                  true
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Artículo
+  tipo:                    t
+  nombrecampo:             coddon
+  html:                    [size="10" ]
+  oculta:                  false
+  esgrabable:              true
+  ajaxfila:                false
+3:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desdon
+  html:                    [size="15" readonly="true" ]
+  oculta:                  false
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Cantidad
+  tipo:                    m
+  nombrecampo:             cantidad
+  html:                    [size="5" ]
+  esgrabable:              true
+  esnumerico:              true
+5:       # Columna 5
+  titulo:                  Unidad
+  tipo:                    t
+  nombrecampo:             unidad
+  html:                    [size="8" ]
+  oculta:                  false
+  esgrabable:              true
+
+

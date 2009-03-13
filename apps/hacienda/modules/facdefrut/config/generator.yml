@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcrutas
+    theme:            cidesaGenerator
+
+    fields:
+      codrut:	{ name: Código, params: size=10 maxlength=6}
+      desrut:	{ name: Descripcion, params: size=40 maxlength=119}
+    list:
+      title:     Definición Tipos de Licencias
+      display:   [=codrut, desrut]
+      sort:      desrut
+      filters:   [codrut, desrut]
+      fields:
+        desrut:
+          params: size=18
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  codrut
+    edit:
+      title:          Edición Tipos de Licencias
+      display:
+        "Datos Generales":   [ _codrut, desrut ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

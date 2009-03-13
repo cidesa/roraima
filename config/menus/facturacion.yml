@@ -1,0 +1,128 @@
+facturacion:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Facturación
+    imagen: bienes.gif
+    nombre: Facturación
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: facturacion.php
+        modulo_dev: facturacion_dev.php
+      Grupos de Recaudos:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Recaudos:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Entradas:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Salidas:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Traspaso:bienes
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Registro Artículos/Productos:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Compra:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Terminado:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Reportes:
+        absoluta: reportes/reportes/facturacion
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones:
+      Artículo:                                             fadefart
+      División Territorial:
+        Paises:                                             fapais
+        Estado:                                             faestado
+        Ciudad:                                             faciudad
+      Clientes:
+        Grupos de Recaudos:                                 almtiprecpro
+        Recaudos:                                           almregrec
+        Tipo:                                               fatipcte
+        Registro:                                           facliente
+        Descuentos:                                         fadtocte
+        Condiciones de Pago:                                faconpag
+      Movimientos:
+        Cajas:                                              fadefcaj
+        Bancos:                                             fabancos
+        Forma de Despacho:                                  fafordes
+        Forma de Solicitud:                                 faforsolic
+        Tipo de Devolución:                                 fatipdev
+        Tipo de Pago:                                       fatippag
+        Tipo de Movimiento:                                 fatipmov
+    Artículos/Productos:
+      Definición de Marca:                                  famarca
+      Registro Artículos/Productos:                         almregart
+      Productos Alternos:                                   faproalt
+      Definición de Precios:                                faartpvp
+      Actualización de Precios en Lotes:                    faactpre
+      Registro de Recargos:                                 farecarg
+      Registro de Descuentos:                               fadescto
+      Consignación:                                         faartpro
+      Recargos por Artículos:                               farecart
+    Almacén:
+      Tipo:                                                 fatipalm
+      Registro:                                             fadefalm
+      Movimientos:
+        Entradas:                                           almentalm
+        Salidas:                                            almsalalm
+        Traspaso:                                           almtraalm
+      Recepción de Productos:
+        Compra:                                             almordrec
+        #Terminado:                                         almordrecter
+    Movimientos:
+      Presupuestos:                                         fapresup
+      Pedidos:                                              fapedido
+      Emisión de Factura:                                   fafactur
+      Nota de Entrega:                                      fanotent
+      Autorización de Notas de Entrega:                     faautdes
+      Despachos:                                            fadesp
+      Devoluciones:                                         fadevolu
+      Ajustes:                                              faajuste
+    Reportes:
+      Generales:
+        División Territorial:
+          Países:                                           farpaises.php
+          Estados:                                          farestado.php
+          Ciudades:                                         farciudades.php
+        Catálogo de Marcas:                                 farfamarca.php
+        Catálogo de Artículos:                              carcatart.php
+        Catálogo de Recaudos:                               farrecaud.php
+        Catálogo de Recargos:                               farreccarg.php
+        Catalogo de Descuentos:                             fardescto.php
+        Catálogo de Productos Alternos:                     farproalt.php
+        #Catálogo de Lotes por Artículo:                     fardeflot.php
+        Catálogo de Precios por Artículo:                   fardefpre.php
+        Catálogo de Clientes:                               farcliente.php
+        Condición de Pago:                                  farconpag.php
+        Bancos:                                             farintipban.php
+        Tipos de Cliente:                                   fartipcte.php
+        Tipos de Devoluciones:                              fartipdev.php
+        Recargos por Artículos:                             farrecpart.php
+        Resumen de Artículos y Servicios:                   artser.php
+      Movimientos:
+        Listado de Pedidos:                                 farpedart.php
+        #Notas de Entrega:                                   farnotent.php
+        Listado de Despachos:                               fardphart.php
+        Listado Detallado de Facturas:                      farfactur.php
+        Listado de Facturas:                                farffactura.php
+        Listado de Mercancía entregada en Consignación:     farlisentmer.php
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd
+
+
+
+
+
+

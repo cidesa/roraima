@@ -1,0 +1,25 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Attiping
+    theme:            cidesaGenerator
+
+    fields:
+      tiping:      { name: Descripción }
+    list:
+      title:          Definición de Tipos de Ingresos
+      display:        [=tiping]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [tiping]
+      max_per_page:   5
+      sort:  tiping
+    edit:
+      title:          Edición de Tipos de Ingresos
+      display:        [tiping]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

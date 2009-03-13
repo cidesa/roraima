@@ -1,0 +1,29 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Catippro
+    theme:            default
+    fields:
+      codpro:      { name : Código }
+      despro:      { name : Descripción }
+      ctaord:      { name : Cuenta de Orden }
+      ctaper:      { name : Cuenta PerContra }
+      descta:      { name : Cuenta de Orden }
+
+    list:
+      title:          Proyectos
+      display:        [=codpro, despro, ctaord, ctaper]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codpro, despro, ctaord, ctaper]
+      max_per_page:   10
+      sort:           codpro
+    edit:
+      title:          Proyectos
+      display:
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,142 @@
+obras:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Obras y Contratos
+    imagen: obras.gif
+    nombre: Obras y Contratos
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Orden de Pago:
+        modulo: tesoreria.php
+        modulo_dev: tesoreria_dev.php
+      Análisis:
+        absoluta: reportes/reportes/obras
+      Reportes:
+        absoluta: reportes/reportes/obras
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones Generales:
+        Institución:                                    oycdefemp
+        Documentación Legal:                            oycdefrec
+        Retenciones:                                    oycdefret
+        Unidades de Medida:                             oycdefuni
+        Catálogo de Clasificación de Compras:           oycclacomp
+        División Territorial:
+          Pais:                                         oycdefdivpai
+          Estado:                                       oycdefdivest
+          Ciudad:                                       oycdefdivciu
+          Municipio:                                    oycdefdivmun
+          Parroquia:                                    oycdefdivpar
+          Sector:                                       oycdefdivsec
+        Profesionales:
+          Tipo:                                        oycdeftippro
+          Tarifas:                                      oyctartip
+        Otras Organizaciones:
+          Tipo:                                          oycdeftiporg
+          Registro:                                       oycdeforg
+    Atención al Ciudadano:
+      Solicitante:
+        Tipo:                                            oycdeftipste
+        Registro:                                        oycdatsol
+      Solicitudes:
+        Tipo:                                            oycdeftipsol
+        Registro:                                        oycregsol
+        Respuesta:                                       oycressol
+    Obras:
+      Tipo:                                              oycdeftipobr
+      Registro:                                          oycdesobr
+      #Formulación:                                       oycforotrcrepre
+      Partidas de Construcción:
+        Tipo:                                          oyctippar
+        Registro:                                       oycdefpar
+      Licitaciones:
+        Tipo:                                           oyctiplic
+        Registro:                                       oycreglic
+        Empresas Participantes:                         oycemppar
+      Situación:                                        oycsitobr
+      Contratistas:
+        #Tipo:                                           oyctipcon
+        Registro:                                       oycregpro
+      Ofertas:
+        Presupuesto:                                    oycoferpre
+        Análisis:                                       ocradjobr.php
+        Tipo de Adjudicación:                           oyctipadj
+        Adjudicación:                                   oycadjobr
+      Contratos:
+        Tipo:                                           oyctipcon
+        Registro:                                       oycdescon
+        Situación:                                      oycsitcon
+      Actas:
+        Tipo:                                          oycdeftipact
+        Registro:                                       oycregact
+      Inspecciones:
+        Tipo:                                           oyctipins
+        Registro:                                       oycinscon
+      Personal:
+        Tipo:                                             oyctipper
+        Cargos:                                           oycdefcar
+        Profesiones:                                      oycdefpro
+        Especialidades:                                   oycdefesp
+        Registro:                                         oycdefper
+      Equipos Técnicos:
+        Tipo:                                            oyctipequ
+        Registro:                                        oycdefequ
+      Valuaciones:
+        Tipo:                                            oycdeftipval
+        Registro:                                        oycval #oycregval
+        Orden de Pago:                                   pagemiord
+    Reportes:
+      Generales:
+        Catálogo de Documentación Legal:                carrecaudoc.php
+        Catálogo de Retenciones:                        ocrdeduc.php
+        Catálogo de Unidad de Medidas:                  ocrdefuni.php
+        Profesionales:
+          Catálogo de tipo de Profesionales:            ocrtippro.php
+          Tarifas por Profesionales:                    ocrtarpro.php
+        Otras Organizaciones:
+          Catálogo de Tipos de Organismos:              ocrtiporg.php
+          Listado de Organismos:                        ocrdeforg.php
+      Personal:
+        Definiciones Específicas:
+          Catálago de Cargos:                           ocrcargos.php
+          Catálogo de Equipos:                          ocrdefequ.php
+          Catálago de Especialidades:                   octipesp.php
+          Cátalogo de Profesiones:                      ocrprofes.php
+        Catálogo de Proveedores:                        CARPROVEE.php
+      Partidas en Construcción:
+        Catálogo de Tipos de Partidas:                  ocrtippar.php
+        Listados de Partidas:                           ocrdefpar.php
+      Obras:
+        Catálogo de Tipos de Obra:                      OCRTipObr.php
+        Listado de Obras:                               ocregobr.php
+        Obras Presupuestadas:                           OCRObrPre.php
+        Listado de Empresas Participantes:              ocremppar.php
+        Situación de la Obra:                           ocsitobreje.php
+        Contratos:
+          Catálogo de Tipos de Contratos:               ocrtipcon.php
+          Listado de Contratos:                         ocregcon.php
+          Situación del Contrato:                       ocsitcon.php
+          Forma Preimpresa:                             ocrcontratopre.php
+          Corte de cuenta:                              ocrcorcuenta.php
+          Cuadro de Cierre:                             ocrcuacierre.php
+        Actas:
+          Catálogo de Tipos de Actas:                   octipact.php
+          Listado de Actas:                             ocregact.php
+          Forma Preimpresa:                             ocregactpre.php
+          Otorgamiento de Prorroga:                     ocrotorpro.php
+        Inspecciones:
+          Catálogo de Tipos de Inspecciones:            ocrtipins.php
+          Listado de Inspecciones:                      ocregins.php
+          Forma Preimpresa:                             ocrinspec.php
+        Valuaciones:
+          Catálogo de Tipos de Valuaciones:             ocrtipval.php
+          Listado de Valuaciones:                       ocrregval.php
+          Forma Preimpresa:                             ocrvaluacion.php
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

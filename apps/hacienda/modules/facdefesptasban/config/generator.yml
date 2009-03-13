@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fctasban
+    theme:            cidesaGenerator
+    fields:
+      tasano:    { name: Año, params: size=10 maxlength=4}
+      enero:    { name: Enero %, params: size=10 maxlength=4 disabled=false }
+      febrero:  { name: Febrero %, params: size=10 maxlength=4 disabled=false }
+      marzo:    { name: Marzo %, params: size=10 maxlength=4 disabled=false }
+      abril:    { name: Abril %, params: size=10 maxlength=4 disabled=false }
+      mayo:	    { name: Mayo %, params: size=10 maxlength=4 disabled=false }
+      junio:    { name: Junio %, params: size=10 maxlength=4 disabled=false }
+      julio:    { name: Julio %, params: size=10 maxlength=4 disabled=false }
+      agosto:   { name: Agosto %, params: size=10 maxlength=4 disabled=false }
+      septiembre:  { name: Septiembre %, params: size=10 maxlength=4 disabled=false }
+      octubre:  { name: Octubre %, params: size=10 maxlength=4 disabled=false }
+      noviembre:  { name: Noviembre %, params: size=10 maxlength=4 disabled=false }
+      diciembre:  { name: Diciembre %, params: size=10 maxlength=4 disabled=false }
+    list:
+      title:     Definición Tasas de Intereses Bancarios
+      display:   [=tasano]
+      filters:   [=tasano, tasmes]
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición Tasas de Intereses Bancarios
+      display:
+        "Datos Generales":   [tasano, enero, febrero, marzo, abril, mayo, junio, julio, agosto, septiembre, octubre, noviembre, diciembre]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

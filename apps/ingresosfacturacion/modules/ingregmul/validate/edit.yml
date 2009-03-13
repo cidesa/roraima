@@ -1,0 +1,48 @@
+methods:
+  post:
+   - "inmulta{codmul}"
+   - "inmulta{desmul}"
+   - "inmulta{unitri}"
+   - "inmulta{insancion_id}"
+
+names:
+  inmulta{codmul}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codmul
+
+  inmulta{desmul}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desmul
+
+  inmulta{unitri}:
+    required:  Yes
+    required_msg: Las unidades tributarias no pueden estar en blanco
+    validators: Validator_unitri
+
+  inmulta{insancion_id}:
+    required:  Yes
+    required_msg: El codigo de la sanción no puede estar en Blanco
+
+
+Validator_codmul:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Inmulta
+        column:       codmul
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desmul:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres
+
+Validator_unitri:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos

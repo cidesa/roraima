@@ -1,0 +1,29 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   fcdprinm
+  ancho:                   400
+  anchogrid:               600
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Antiguedad
+  tipo:                    t
+  nombrecampo:             antinm
+  esgrabable:			   true
+  html:                    []
+
+2:       # Columna 2
+  titulo:                  Estado
+  tipo:                    c
+  nombrecampo:             codestinm
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             mondpr
+  esgrabable:			   true
+  html:                    []

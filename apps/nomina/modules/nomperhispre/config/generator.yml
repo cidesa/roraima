@@ -1,0 +1,40 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Nphispre
+    theme:            cidesaGenerator
+    fields:
+      codtippre: { name: Cod. Tipo Prestamo, params: maxlength=4 }
+      deshispre: { name: Descripcion Prestamo, validate: Vstring_1_255, msj_error: Debe insertar la descripcion  }
+      fechispre: { name: Fecha de Prestamo, params: date_format='dd/MM/yyyy', validate: Vfecha_2, msj_error: Debe insertar una fecha válida }
+      codemp: { name: Codigo Empleado, params: maxlength=16 }
+      monpre: { name: Monto del Prestamo, params: onBlur="javascript:return  ObtenerSalActual()" , validate: Vdecimal_6, msj_error: Debe insertar el monto del prestamo }
+      saldo:  { name: Saldo Actual, params:  readonly=true}
+      moncuota: { name: Monto de la cuota }
+      salant: { name: Saldo Anterior, params: readonly=true }
+      signo: { name: Signo }
+
+
+    list:
+      title:          Movimientos de Prestamos
+      filters:        [codemp, deshispre, fechispre, codtippre]
+      display:        [=codemp, nomemp, deshispre, fechispre, codtippre, nomtippre]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:  8
+
+    edit:
+      title:          Movimientos de Prestamos
+      display:
+         Fecha Préstamo: [ fechispre]
+         Empleado: [ _codemp]
+         Tipo Préstamo: [ _codtippre]
+         Descripción del Préstamo: [ deshispre]
+         Datos del Préstamo: [ salant, _signo, monpre, _moncuota, saldo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:        ~
+
+

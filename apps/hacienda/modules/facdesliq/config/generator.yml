@@ -1,0 +1,42 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcdefdesc
+    theme:            cidesaGenerator
+    fields:
+      coddes:    { name: Código, params: size=10 maxlength=4}
+      nomdes:    { name: Descripción, params: size=40 maxlength=249 }
+      codfue:    { name: Código, params: size=10 maxlength=4}
+      tipo:      { name: . , params: size=4 maxlength=1 }
+      modo:      { name: Modo , params: size=4 maxlength=1}
+      limita:    { name: Limitar pagar Año Completo, params: size=4 maxlength=1 }
+      auto:      { name: Automatico, params: size=4 maxlength=1}
+      anoact:    { name: Solo aplicables a deudas del Año actual, params: size=4 maxlength=1 }
+      grid:      { name: . }
+      gridb:    { name: . }
+    list:
+      title:     Definición de Descuentos
+      display:   [=coddes, nomdes]
+      sort:      nomdes
+      filters:   [coddes, nomdes]
+      fields:
+        nomdes:
+          params: size=10
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  coddes
+    edit:
+      title:          Edición de Descuentos
+      display:
+        "Datos Generales":   [ _coddes, nomdes ]
+        "Tipo":   [ _tipo ]
+        "Aplicable":   [ _anoact ]
+        "Modo de Cálculo":   [ _limita, _auto, _modo, _grid ]
+        "Asociación de Recaudos":   [ _gridb ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

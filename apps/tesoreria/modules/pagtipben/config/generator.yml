@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Optipben
+    theme:            default
+    fields:
+      codtipben: { name: Código}
+      destipben: { name: Descripción }
+
+    list:
+      title:          Tipos de Beneficiario
+      filters:        [codtipben, destipben]
+      sort:           codtipben
+      display:        [=codtipben, destipben]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Tipos de Beneficiario
+      display:        [codtipben, destipben]
+      fields:
+        codtipben:    { params: onBlur='this.value=this.value.pad(3, "0",0);' maxlength=3 }
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

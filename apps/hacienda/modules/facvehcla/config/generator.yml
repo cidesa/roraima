@@ -1,0 +1,37 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcusoveh
+    theme:            cidesaGenerator
+
+    fields:
+      coduso:  { name: Código de Uso, params: size=20 maxlength=16 }
+      desuso:  { name: Descripcion, params: size=40 maxlength=240 }
+      anovig:  { name: Año de Vigencia del Uso , params: size=5 maxlength=4 }
+      monafo:  { name: Monto del Aforo, params: size=10 maxlength=1 }
+      porali:  { name: Alícuota (X/1000), params: size=10 maxlength=1 }
+      anolim:  { name: Edad Límite para Empezar a Pagar el Aforo (1-99), params: size=10 maxlength=4 }
+    list:
+      title:     Clasificador de Vehículos
+      display:   [=coduso, anovig, desuso]
+      sort:      desuso
+      filters:   [coduso, anovig, desuso]
+      fields:
+        coduso:
+          params: size=18
+        desuso:
+          params: size=18
+      max_per_page: 10
+      sort:  anovig
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Clasificador de Vehículos
+      display:
+        "Datos Generales": [ _coduso, _anovig, desuso, monafo, porali, anolim ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

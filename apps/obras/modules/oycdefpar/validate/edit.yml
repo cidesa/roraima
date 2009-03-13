@@ -1,0 +1,48 @@
+methods:
+  post:
+   - "ocdefpar{codpar}"
+   - "ocdefpar{despar}"
+   - "ocdefpar{cosuni}"
+   - "ocdefpar{coduni}"
+
+names:
+  ocdefpar{codpar}:
+    required:  Yes
+    required_msg: El Codigo no puedo estar en Blanco
+    validators: Validator_codpar
+
+  ocdefpar{despar}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_despar
+
+  ocdefpar{cosuni}:
+    required:  Yes
+    required_msg: El Costo Unitario no puedo estar en 0
+
+  ocdefpar{coduni}:
+    required:  Yes
+    required_msg: El Codigo de la Unidad no puedo estar en Blanco
+    validators: Unidad_Validator
+
+Validator_codpar:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Ocdefpar
+        column:   codpar
+        unique_error:   El Código ya existe. Por Favor, Intente con otro.
+
+Validator_despar:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: Las Descripción no puede tener menos de 5 caracteres
+        max:       250
+        max_error: Las Descripción no puede tener mas de 250 caracteres
+
+Unidad_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Ocunidad
+        column:   coduni
+        unique_error: El Código de Unidad no existe.

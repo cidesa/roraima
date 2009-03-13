@@ -1,0 +1,22 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   cobdesdoc
+  ancho:				   500
+  anchogrid:               600
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Descuentos
+  tipo:                    c
+  nombrecampo:             coddes
+  html:                    [ ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             mondes
+  esnumerico:              true
+  html:                    [size="10"]

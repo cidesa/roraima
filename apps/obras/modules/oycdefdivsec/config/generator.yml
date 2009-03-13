@@ -1,0 +1,33 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocsector
+    theme:            default
+    fields:
+      codpai:       { name: Paìs }
+      codedo:       { name: Estado }
+      codmun:       { name: Municipio }
+      codpar:       { name: Parroquia }
+      codsec:       { name: Código }
+      nomsec:       { name: Nombre }
+      nompai:       { name: País}
+      nomedo:       { name: Estado}
+      nommun:       { name: Municipio}
+      nompar:       { name: Parroquia}
+
+    list:
+      title:          Sectores
+      filters:        [codsec]
+      display:        [=codsec, nomsec, nomedo, nompai, nommun, nompar]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Sector
+      display:        [codpai, codedo, codmun, codpar, codsec, nomsec]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

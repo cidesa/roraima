@@ -1,0 +1,35 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   fortipfin
+  anchogrid:               550
+  ancho:                   500
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Codigo/Financiamiento
+  tipo:                    t
+  nombrecampo:             codfin
+  esgrabable:              true
+  html:                    [ size="4" ]
+2:       # Columna 2
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             nomext
+  esgrabable:              false
+  html:                    [ size="25" readonly=true ]
+3:       # Columna 3
+  titulo:                  codpre
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="15" ]
+4:       # Columna 4
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monasi
+  esgrabable:              true
+  html:                    [size="15" ]
+  estotal:                 [true, 'cpasiini_monmov']

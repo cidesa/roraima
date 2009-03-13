@@ -1,0 +1,114 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nphojint
+    theme:            default
+    fields:
+      codemp: { name: No. Empleado}
+      nomemp: { name: Apellido(s) y Nombre(s)}
+      cedemp: { name: C.I.}
+      edociv: { name: Estado Civil}
+      numcon: { name: No. Contrato}
+      nacemp: { name: Nacionalidad}
+      sexemp: { name: Sexo}
+      codniv: { name: Nivel Organizacional}
+      fotemp: { name: Foto}
+      fotemp:
+        help: Tamaño de la foto 90x100 (jpg, gif o png)
+        type: admin_input_file_tag
+        upload_dir: fotos
+        params: include_link = fotos include_remove=true
+      lugnac: { name: Lugar de Nacimiento}
+      fecnac: { name: Fecha de Nacimiento}
+      edaemp: { name: Edad}
+      obsgen: { name: Observaciones}
+      dirhab: { name: Dirección}
+      codpai: { name: Estado}
+      codest: { name: Municipio}
+      codciu: { name: Parroquia}
+      telhab: { name: Tlf. Hab}
+      telotr: { name: Otro Tlf.}
+      celemp: { name: Celular}
+      dirotr: { name: Dirección}
+      codpa2: { name: Estado}
+      codes2: { name: Municipio}
+      codci2: { name: Parroquia}
+      telha2: { name: Telefono}
+      telot2: { name: Otro Tlf.}
+      emaemp: { name: Email}
+      codpos: { name: Código Postal}
+      fecing: { name: Ingreso}
+      fecret: { name: Egreso}
+      fecrei: { name: Reingreso}
+      obsemp: { name: Motivo de Egreso}
+      staemp: { name: Estatus del Empleado}
+      codtippag: { name: Forma de Pago}
+      codban: { name: Banco}
+      numcue: { name: Número de Cuenta}
+      tipcue: { name: Tipo de Cuenta}
+      fecadmpub: { name: Fecha en la Administración Pública}
+      numsso: { name: Numero de S.S.O}
+      numpolseg: { name: Número dde Póliza de Seguro}
+      feccotsso: { name: Fecha de Cotización de S.S.O}
+      anoadmpub: { name: Años de Continuidad en la Administración Pública}
+      tiefid: { name: Fideicomiso}
+      talcam: { name: Talla Camisa}
+      talpan: { name: Talla Pantalón}
+      talcal: { name: No. de Calzado}
+      grusan: { name: Grupo Sanguineo}
+      codregpai: { name: Estado}
+      codregest: { name: Municipio}
+      codregciu: { name: Parroquia}
+      grulab: { name: Grupo Laboral}
+      gruotr: { name: Descripción}
+      traslado: { name: Forma de Translado}
+      traotr: { name: Descripción}
+      numexp: { name: Número}
+      detexp: { name: Contenido}
+      derzur: { name: DerechoZurdo}
+      tipviv: { name: Tipo de Vivienda}
+      vivotr: { name: Descripción}
+      forten: { name: Forma de Tenencia}
+      tenotr: { name: Descripción}
+      sercon: { name: Servicios}
+      temporal: { name: Temporal}
+      incapacidades: { name: Incapacidades}
+      situac: { name: Situación}
+      profes: { name: Profesional}
+
+    list:
+      title:          Datos Personales
+      filters:        [codemp, nomemp]
+      display:        [=_fotemp, codemp, nomemp]
+      fields:
+        fecnac: { params: date_format='dd/MM/yy' }
+        fecing: { params: date_format='dd/MM/yy' }
+        fecret: { params: date_format='dd/MM/yy' }
+        fecrei: { params: date_format='dd/MM/yy' }
+        fecadmpub: { params: date_format='dd/MM/yy' }
+        feccotsso: { params: date_format='dd/MM/yy' }
+      object_actions:
+        _edit:        ~
+      max_per_page:   5
+      sort: codemp
+    edit:
+      title:          Edición de Datos Personales
+      display:       [=codemp, nomemp, cedemp, edociv, numcon, nacemp, sexemp, codniv, _fotemp, fotemp, lugnac, fecnac, edaemp, obsgen, dirhab, codpai, codest, codciu, telhab, telotr, celemp, dirotr, codpa2, codes2, codci2, telha2, telot2, emaemp, codpos, fecing, fecret, fecrei, obsemp, staemp, codtippag, codban, numcue, tipcue, fecadmpub, numsso, numpolseg, feccotsso, anoadmpub, tiefid, talcam, talpan, talcal, grusan, codregpai, codregest, codregciu, grulab, gruotr, traslado, traotr, numexp, detexp, derzur, tipviv, vivotr, forten, tenotr, sercon, temporal, incapacidades, situac, profes]
+      fields:
+        fecnac: { params: date_format='dd/MM/yy' }
+        fecing: { params: date_format='dd/MM/yy' }
+        fecret: { params: date_format='dd/MM/yy' }
+        fecrei: { params: date_format='dd/MM/yy' }
+        fecadmpub: { params: date_format='dd/MM/yy' }
+        feccotsso: { params: date_format='dd/MM/yy' }
+        incapacidades: { type: admin_double_list, params: through_class=Nphojintinc}
+        #fotemp:
+        #  help: Tamano de la foto 90x100 (jpg,gif o png)
+        #  type: admin_input_file_tag
+        #  upload_dir: fotos
+        #  params: include_link=photos include_remove=true
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

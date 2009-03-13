@@ -1,0 +1,19 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Nphojint
+    theme:            default
+    fields:
+      codemp: { name: Cédula }
+      nomemp: { name: Nombre }
+    list:
+      title:          Permisos
+      filters:        [codemp, nomemp ]
+      display:        [=codemp, nomemp ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+    edit:
+      title:          Edición Permisos
+      display:        [codemp, nomemp ]

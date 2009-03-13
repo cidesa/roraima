@@ -1,0 +1,45 @@
+methods:
+  post:
+   - "occiudad{codpai}"
+   - "occiudad{codedo}"   
+   - "occiudad{codciu}"
+   - "occiudad{nomciu}"   
+   
+names: 
+  occiudad{codpai}:
+    required:  Yes
+    required_msg: El Código de País no puedo estar en Blanco
+    
+  occiudad{codedo}:
+    required:  Yes
+    required_msg: El Código de Estado no puedo estar en Blanco    
+    
+  occiudad{codciu}:
+    required:  Yes
+    required_msg: El Código de Ciudad no puedo estar en Blanco
+    #validators: Validator_codciu
+
+  occiudad{nomciu}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    #validators: Validator_nomciu      
+
+
+Validator_codciu:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Occiudad
+        column:       codciu
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_nomciu:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+
+
+
+

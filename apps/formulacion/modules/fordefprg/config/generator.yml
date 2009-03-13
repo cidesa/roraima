@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefprg
+    theme:            default
+    fields:
+      codprg:         {name:    Código }
+      desprg:         {name:    Descripción }
+      prbasoprg:      {name:    Problema Asociado al Programa}
+
+    list:
+      title:          Lista de Programas
+      display:        [=codprg, desprg, prbasoprg]
+      filters:        [codprg, desprg]
+      object_actions:
+        _edit:       ~
+        _delete:     ~
+
+    edit:
+      title:         Edición de Programas
+      display:        [codprg, desprg, prbasoprg]
+      fields:
+        prbasoprg:       {type: textarea_tag, params: cols=50 rows=3}
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

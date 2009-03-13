@@ -1,0 +1,34 @@
+methods:
+  post:
+   - "fccominm{anovig}"
+   - "fccominm{codcom}"
+   - "fccominm{descom}"
+   - "fccominm{afeinm}"
+   - "fccominm{opecom}"
+   - "fccominm{valcom}"
+
+names:
+  fccominm{anovig}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+
+  fccominm{codcom}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+  fccominm{descom}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+
+  fccominm{afeinm}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+  fccominm{opecom}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+
+  fccominm{valcom}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
