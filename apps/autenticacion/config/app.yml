@@ -2,6 +2,6 @@ all:
    .apps:
      autenticacion:    autenticacion
      max_per_page:     15
-     contabilidadpresupuesto: /home/ovidio/www/siga_cp/
-     reportes:         /home/ovidio/www/suvinca_reportes/
+     contabilidadpresupuesto: /var/www/cidesa/CLIENTE_CP/
+     reportes:         /var/www/cidesa/CLIENTE_REPORTES/
      this: autenticacion
