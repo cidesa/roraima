@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+#kwicks_container {
+  height: 100px;
+}
+#kwicks {
+  position: relative;
+}
+
+#kwicks .kwick {
+  float: left;
+  display: block;
+  width: 75px;
+  height: 80px;
+}
+
+
+.panel_menu {
+  border: solid;
+  border-width: 0 0 0 0px;
+  height: 100%;
+  float: center;
+  width: 238px;
+  border-right: 1;
+}

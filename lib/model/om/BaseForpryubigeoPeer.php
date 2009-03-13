@@ -13,7 +13,7 @@ abstract class BaseForpryubigeoPeer {
 	const CLASS_DEFAULT = 'lib.model.Forpryubigeo';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseForpryubigeoPeer {
 	const CODPAR = 'forpryubigeo.CODPAR';
 
 	
+	const ESPADIUBIGEO = 'forpryubigeo.ESPADIUBIGEO';
+
+	
 	const ID = 'forpryubigeo.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseForpryubigeoPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codest', 'Codmun', 'Codpar', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ForpryubigeoPeer::CODPRO, ForpryubigeoPeer::CODEST, ForpryubigeoPeer::CODMUN, ForpryubigeoPeer::CODPAR, ForpryubigeoPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codest', 'codmun', 'codpar', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codest', 'Codmun', 'Codpar', 'Espadiubigeo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ForpryubigeoPeer::CODPRO, ForpryubigeoPeer::CODEST, ForpryubigeoPeer::CODMUN, ForpryubigeoPeer::CODPAR, ForpryubigeoPeer::ESPADIUBIGEO, ForpryubigeoPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codest', 'codmun', 'codpar', 'espadiubigeo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codest' => 1, 'Codmun' => 2, 'Codpar' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (ForpryubigeoPeer::CODPRO => 0, ForpryubigeoPeer::CODEST => 1, ForpryubigeoPeer::CODMUN => 2, ForpryubigeoPeer::CODPAR => 3, ForpryubigeoPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codest' => 1, 'codmun' => 2, 'codpar' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codest' => 1, 'Codmun' => 2, 'Codpar' => 3, 'Espadiubigeo' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (ForpryubigeoPeer::CODPRO => 0, ForpryubigeoPeer::CODEST => 1, ForpryubigeoPeer::CODMUN => 2, ForpryubigeoPeer::CODPAR => 3, ForpryubigeoPeer::ESPADIUBIGEO => 4, ForpryubigeoPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codest' => 1, 'codmun' => 2, 'codpar' => 3, 'espadiubigeo' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseForpryubigeoPeer {
 		$criteria->addSelectColumn(ForpryubigeoPeer::CODMUN);
 
 		$criteria->addSelectColumn(ForpryubigeoPeer::CODPAR);
+
+		$criteria->addSelectColumn(ForpryubigeoPeer::ESPADIUBIGEO);
 
 		$criteria->addSelectColumn(ForpryubigeoPeer::ID);
 
@@ -215,6 +220,7 @@ abstract class BaseForpryubigeoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForpryubigeoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

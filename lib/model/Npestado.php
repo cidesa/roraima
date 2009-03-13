@@ -9,4 +9,9 @@
  */ 
 class Npestado extends BaseNpestado
 {
+ public function getNompai()
+  {
+	return Herramientas::getX('CODPAI','Nppais','Nompai',self::getCodpai());	  
+  }
+	
 }

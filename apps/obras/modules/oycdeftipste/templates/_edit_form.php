@@ -9,6 +9,13 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($octipste, 'getId') ?>
+<?php use_helper('Javascript') ?>
+<?php use_helper('tabs') ?>
+<?php echo javascript_include_tag('dFilter','Linktoapp') ?>
+<?php echo javascript_include_tag('tools','observe') ?>
+<?php echo javascript_include_tag('ajax') ?>
+<?php use_helper('PopUp') ?>
+
 
 <fieldset id="sf_fieldset_none" class="">
 
@@ -21,13 +28,15 @@
 
   <?php $value = object_input_tag($octipste, 'getCodste', array (
   'size' => 4,
-  'maxlength' => 4,  
+  'maxlength' => 4,
   'control_name' => 'octipste[codste]',
+  'readonly'  =>  $octipste->getId()!='' ? true : false ,
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('octipste_codste').value=valor",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('octipste[desste]', __($labels['octipste{desste}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('octipste{desste}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('octipste{desste}')): ?>
@@ -36,27 +45,33 @@
 
   <?php $value = object_input_tag($octipste, 'getDesste', array (
   'size' => 80,
+  'maxlength' => 250,
   'control_name' => 'octipste[desste]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
-<fieldset id="sf_fieldset_none" class=""><legend> <? echo $labels['octipste{tipste}']; ?></legend>
-<?  if ($octipste->getTipste()=='P'){
-	echo radiobutton_tag('checkbox1','P', true) .'  '. "Personal"."<br>";
-	echo radiobutton_tag('checkbox1','J', false) .'  '. "Jurídico"."<br>";
+<br>
 
-}elseif ($octipste->getTipste()=='J'){
-	echo radiobutton_tag('checkbox1','P', false) .'  '. "Personal"."<br>";
-	echo radiobutton_tag('checkbox1','J', true) .'  '. "Jurídico"."<br>";
+  <?php echo label_for('octipste[tipste]', __($labels['octipste{tipste}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('octipste{tipste}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('octipste{tipste}')): ?>
+    <?php echo form_error('octipste{tipste}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
-}else{
-	echo radiobutton_tag('checkbox1','P', false) .'  '. "Personal"."<br>";
-	echo radiobutton_tag('checkbox1','J', false) .'  '. "Jurídico"."<br>";
+<?php	if($octipste->getTipste()=='P')
+	{
+		$val = true;
+	}
+	else
+	{
+		$val = false;
+	}
+	?>
+	<?php echo "Personal ".radiobutton_tag('octipste[tipste]', 'P', $val) ?>
+	&nbsp;
+	<?php echo "Jurídico ".radiobutton_tag('octipste[tipste]', 'J', !$val) ?>
+    </div>
 
-}
-?></fieldset>
 </div>
 
 </fieldset>

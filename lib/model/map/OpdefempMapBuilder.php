@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class OpdefempMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.OpdefempMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.OpdefempMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('opdefemp');
 		$tMap->setPhpName('Opdefemp');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('opdefemp_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -44,7 +46,7 @@ class OpdefempMapBuilder {
 
 		$tMap->addColumn('ORDOBR', 'Ordobr', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('UNITRI', 'Unitri', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('UNITRI', 'Unitri', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('VERCOMRET', 'Vercomret', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -60,7 +62,7 @@ class OpdefempMapBuilder {
 
 		$tMap->addColumn('TIPMOV', 'Tipmov', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('CORIVA', 'Coriva', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CORIVA', 'Coriva', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CTABONO', 'Ctabono', 'string', CreoleTypes::VARCHAR, false, 32);
 
@@ -74,7 +76,31 @@ class OpdefempMapBuilder {
 
 		$tMap->addColumn('ORDLIQ', 'Ordliq', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('ORDFID', 'Ordfid', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('ORDVAL', 'Ordval', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('GENORDRET', 'Genordret', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('EMICHEPAG', 'Emichepag', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('CUECAJCHI', 'Cuecajchi', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('TIPCAJCHI', 'Tipcajchi', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('MONAPECAJCHI', 'Monapecajchi', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('PORREPCAJCHI', 'Porrepcajchi', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('TIPRENCAJCHI', 'Tiprencajchi', 'string', CreoleTypes::VARCHAR, false, 4);
+
+		$tMap->addColumn('NUMINICAJCHI', 'Numinicajchi', 'string', CreoleTypes::VARCHAR, false, 8);
+
+		$tMap->addColumn('CEDRIFCAJCHI', 'Cedrifcajchi', 'string', CreoleTypes::VARCHAR, false, 15);
+
+		$tMap->addColumn('CODCATCAJCHI', 'Codcatcajchi', 'string', CreoleTypes::VARCHAR, false, 32);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

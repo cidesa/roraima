@@ -4,16 +4,26 @@ generator:
     model_class:      Casolart
     theme:            default
     fields:
-      reqart: { name: Numero Solicitud, params: maxlength=8}       
-      desreq: { name: Descripcion, params: maxlength=20}
+      reqart: { name: Número Solicitud, params: maxlength=8}
+      desreq: { name: Descripción, params: maxlength=20}
       fecreq: { name: Fecha, params: date_format='dd/MM/yyyy'}
+      articulo: { name: Articulos de la Solicitud}
+      actsolegr: { name: Actualizar Solicitud}
     list:
-      title:          Asignacion de Prioridad a Cotizaciones
+      title:          Asignación de Prioridad a Cotizaciones
       filters:        [reqart, fecreq]
       display:        [=reqart, desreq, fecreq]
-      max_per_page:	  8
+      max_per_page:	  10
+      sort:           reqart
       object_actions:
         _edit:        ~
-        _delete:      ~
+
     edit:
-      title:          Asignacion de Prioridad a Cotizaciones
+      title:          Asignación de Prioridad a Cotizaciones
+      display:       [reqart, fecreq , desreq, articulo, actsolegr]
+      fields:
+        actsolegr:  {type: checkbox_tag}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

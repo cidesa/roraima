@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class ForasiconMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ForasiconMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ForasiconMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('forasicon');
 		$tMap->setPhpName('Forasicon');
 
@@ -36,9 +36,9 @@ class ForasiconMapBuilder {
 
 		$tMap->addColumn('CODCON', 'Codcon', 'string', CreoleTypes::VARCHAR, false, 3);
 
-		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

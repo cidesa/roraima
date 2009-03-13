@@ -37,6 +37,10 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipo;
+
+
+	
 	protected $id;
 
 	
@@ -45,165 +49,214 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReqart()
-	{
+  
+  public function getReqart()
+  {
 
-		return $this->reqart; 		
-	}
-	
-	public function getCodcat()
-	{
+    return trim($this->reqart);
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodart()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getCodrgo()
-	{
+    return trim($this->codcat);
 
-		return $this->codrgo; 		
-	}
-	
-	public function getMonrgo()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return number_format($this->monrgo,2,',','.');
-		
-	}
-	
-	public function getTipdoc()
-	{
+    return trim($this->codart);
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getCodrgo()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codrgo);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonrgo($val=false)
+  {
+
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
+
+  }
+  
+  public function getTipdoc()
+  {
+
+    return trim($this->tipdoc);
+
+  }
+  
+  public function getCodpre()
+  {
+
+    return trim($this->codpre);
+
+  }
+  
+  public function getTipo()
+  {
+
+    return trim($this->tipo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReqart($v)
 	{
 
-		if ($this->reqart !== $v) {
-			$this->reqart = $v;
-			$this->modifiedColumns[] = CadisrgoPeer::REQART;
-		}
-
+    if ($this->reqart !== $v) {
+        $this->reqart = $v;
+        $this->modifiedColumns[] = CadisrgoPeer::REQART;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CadisrgoPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CadisrgoPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CadisrgoPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CadisrgoPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodrgo($v)
 	{
 
-		if ($this->codrgo !== $v) {
-			$this->codrgo = $v;
-			$this->modifiedColumns[] = CadisrgoPeer::CODRGO;
-		}
-
+    if ($this->codrgo !== $v) {
+        $this->codrgo = $v;
+        $this->modifiedColumns[] = CadisrgoPeer::CODRGO;
+      }
+  
 	} 
 	
 	public function setMonrgo($v)
 	{
 
-		if ($this->monrgo !== $v) {
-			$this->monrgo = $v;
-			$this->modifiedColumns[] = CadisrgoPeer::MONRGO;
-		}
-
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadisrgoPeer::MONRGO;
+      }
+  
 	} 
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = CadisrgoPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = CadisrgoPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CadisrgoPeer::CODPRE;
-		}
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CadisrgoPeer::CODPRE;
+      }
+  
+	} 
+	
+	public function setTipo($v)
+	{
 
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = CadisrgoPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadisrgoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadisrgoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reqart = $rs->getString($startcol + 0);
+      $this->reqart = $rs->getString($startcol + 0);
 
-			$this->codcat = $rs->getString($startcol + 1);
+      $this->codcat = $rs->getString($startcol + 1);
 
-			$this->codart = $rs->getString($startcol + 2);
+      $this->codart = $rs->getString($startcol + 2);
 
-			$this->codrgo = $rs->getString($startcol + 3);
+      $this->codrgo = $rs->getString($startcol + 3);
 
-			$this->monrgo = $rs->getFloat($startcol + 4);
+      $this->monrgo = $rs->getFloat($startcol + 4);
 
-			$this->tipdoc = $rs->getString($startcol + 5);
+      $this->tipdoc = $rs->getString($startcol + 5);
 
-			$this->codpre = $rs->getString($startcol + 6);
+      $this->codpre = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->tipo = $rs->getString($startcol + 7);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadisrgo object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadisrgo object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -260,6 +313,7 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CadisrgoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadisrgoPeer::doUpdate($this, $con);
@@ -347,6 +401,9 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 				return $this->getCodpre();
 				break;
 			case 7:
+				return $this->getTipo();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -366,7 +423,8 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 			$keys[4] => $this->getMonrgo(),
 			$keys[5] => $this->getTipdoc(),
 			$keys[6] => $this->getCodpre(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getTipo(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -404,6 +462,9 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 				$this->setCodpre($value);
 				break;
 			case 7:
+				$this->setTipo($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -420,7 +481,8 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setMonrgo($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setTipdoc($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodpre($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setTipo($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -435,6 +497,7 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadisrgoPeer::MONRGO)) $criteria->add(CadisrgoPeer::MONRGO, $this->monrgo);
 		if ($this->isColumnModified(CadisrgoPeer::TIPDOC)) $criteria->add(CadisrgoPeer::TIPDOC, $this->tipdoc);
 		if ($this->isColumnModified(CadisrgoPeer::CODPRE)) $criteria->add(CadisrgoPeer::CODPRE, $this->codpre);
+		if ($this->isColumnModified(CadisrgoPeer::TIPO)) $criteria->add(CadisrgoPeer::TIPO, $this->tipo);
 		if ($this->isColumnModified(CadisrgoPeer::ID)) $criteria->add(CadisrgoPeer::ID, $this->id);
 
 		return $criteria;
@@ -479,6 +542,8 @@ abstract class BaseCadisrgo extends BaseObject  implements Persistent {
 		$copyObj->setTipdoc($this->tipdoc);
 
 		$copyObj->setCodpre($this->codpre);
+
+		$copyObj->setTipo($this->tipo);
 
 
 		$copyObj->setNew(true);

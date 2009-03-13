@@ -57,268 +57,299 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipcon()
-	{
+  
+  public function getCodtipcon()
+  {
 
-		return $this->codtipcon; 		
-	}
-	
-	public function getAnovig($format = 'Y-m-d')
-	{
+    return trim($this->codtipcon);
 
-		if ($this->anovig === null || $this->anovig === '') {
-			return null;
-		} elseif (!is_int($this->anovig)) {
-						$ts = strtotime($this->anovig);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [anovig] as date/time value: " . var_export($this->anovig, true));
-			}
-		} else {
-			$ts = $this->anovig;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getAnovig($format = 'Y-m-d')
+  {
 
-	
-	public function getDesde()
-	{
+    if ($this->anovig === null || $this->anovig === '') {
+      return null;
+    } elseif (!is_int($this->anovig)) {
+            $ts = adodb_strtotime($this->anovig);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [anovig] as date/time value: " . var_export($this->anovig, true));
+      }
+    } else {
+      $ts = $this->anovig;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->desde,2,',','.');
-		
-	}
-	
-	public function getHasta()
-	{
+  
+  public function getDesde($val=false)
+  {
 
-		return number_format($this->hasta,2,',','.');
-		
-	}
-	
-	public function getDiauti()
-	{
+    if($val) return number_format($this->desde,2,',','.');
+    else return $this->desde;
 
-		return number_format($this->diauti,2,',','.');
-		
-	}
-	
-	public function getDiavac()
-	{
+  }
+  
+  public function getHasta($val=false)
+  {
 
-		return number_format($this->diavac,2,',','.');
-		
-	}
-	
-	public function getAnovighas($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->hasta,2,',','.');
+    else return $this->hasta;
 
-		if ($this->anovighas === null || $this->anovighas === '') {
-			return null;
-		} elseif (!is_int($this->anovighas)) {
-						$ts = strtotime($this->anovighas);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [anovighas] as date/time value: " . var_export($this->anovighas, true));
-			}
-		} else {
-			$ts = $this->anovighas;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDiauti($val=false)
+  {
 
-	
-	public function getCalinc()
-	{
+    if($val) return number_format($this->diauti,2,',','.');
+    else return $this->diauti;
 
-		return $this->calinc; 		
-	}
-	
-	public function getAntap()
-	{
+  }
+  
+  public function getDiavac($val=false)
+  {
 
-		return $this->antap; 		
-	}
-	
-	public function getAntapvac()
-	{
+    if($val) return number_format($this->diavac,2,',','.');
+    else return $this->diavac;
 
-		return $this->antapvac; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getAnovighas($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->anovighas === null || $this->anovighas === '') {
+      return null;
+    } elseif (!is_int($this->anovighas)) {
+            $ts = adodb_strtotime($this->anovighas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [anovighas] as date/time value: " . var_export($this->anovighas, true));
+      }
+    } else {
+      $ts = $this->anovighas;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCalinc()
+  {
+
+    return trim($this->calinc);
+
+  }
+  
+  public function getAntap()
+  {
+
+    return trim($this->antap);
+
+  }
+  
+  public function getAntapvac()
+  {
+
+    return trim($this->antapvac);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipcon($v)
 	{
 
-		if ($this->codtipcon !== $v) {
-			$this->codtipcon = $v;
-			$this->modifiedColumns[] = NpbonocontPeer::CODTIPCON;
-		}
-
+    if ($this->codtipcon !== $v) {
+        $this->codtipcon = $v;
+        $this->modifiedColumns[] = NpbonocontPeer::CODTIPCON;
+      }
+  
 	} 
 	
 	public function setAnovig($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [anovig] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->anovig !== $ts) {
-			$this->anovig = $ts;
-			$this->modifiedColumns[] = NpbonocontPeer::ANOVIG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [anovig] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->anovig !== $ts) {
+      $this->anovig = $ts;
+      $this->modifiedColumns[] = NpbonocontPeer::ANOVIG;
+    }
 
 	} 
 	
 	public function setDesde($v)
 	{
 
-		if ($this->desde !== $v) {
-			$this->desde = $v;
-			$this->modifiedColumns[] = NpbonocontPeer::DESDE;
-		}
-
+    if ($this->desde !== $v) {
+        $this->desde = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpbonocontPeer::DESDE;
+      }
+  
 	} 
 	
 	public function setHasta($v)
 	{
 
-		if ($this->hasta !== $v) {
-			$this->hasta = $v;
-			$this->modifiedColumns[] = NpbonocontPeer::HASTA;
-		}
-
+    if ($this->hasta !== $v) {
+        $this->hasta = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpbonocontPeer::HASTA;
+      }
+  
 	} 
 	
 	public function setDiauti($v)
 	{
 
-		if ($this->diauti !== $v) {
-			$this->diauti = $v;
-			$this->modifiedColumns[] = NpbonocontPeer::DIAUTI;
-		}
-
+    if ($this->diauti !== $v) {
+        $this->diauti = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpbonocontPeer::DIAUTI;
+      }
+  
 	} 
 	
 	public function setDiavac($v)
 	{
 
-		if ($this->diavac !== $v) {
-			$this->diavac = $v;
-			$this->modifiedColumns[] = NpbonocontPeer::DIAVAC;
-		}
-
+    if ($this->diavac !== $v) {
+        $this->diavac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpbonocontPeer::DIAVAC;
+      }
+  
 	} 
 	
 	public function setAnovighas($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [anovighas] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->anovighas !== $ts) {
-			$this->anovighas = $ts;
-			$this->modifiedColumns[] = NpbonocontPeer::ANOVIGHAS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [anovighas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->anovighas !== $ts) {
+      $this->anovighas = $ts;
+      $this->modifiedColumns[] = NpbonocontPeer::ANOVIGHAS;
+    }
 
 	} 
 	
 	public function setCalinc($v)
 	{
 
-		if ($this->calinc !== $v || $v === '') {
-			$this->calinc = $v;
-			$this->modifiedColumns[] = NpbonocontPeer::CALINC;
-		}
-
+    if ($this->calinc !== $v || $v === '') {
+        $this->calinc = $v;
+        $this->modifiedColumns[] = NpbonocontPeer::CALINC;
+      }
+  
 	} 
 	
 	public function setAntap($v)
 	{
 
-		if ($this->antap !== $v) {
-			$this->antap = $v;
-			$this->modifiedColumns[] = NpbonocontPeer::ANTAP;
-		}
-
+    if ($this->antap !== $v) {
+        $this->antap = $v;
+        $this->modifiedColumns[] = NpbonocontPeer::ANTAP;
+      }
+  
 	} 
 	
 	public function setAntapvac($v)
 	{
 
-		if ($this->antapvac !== $v) {
-			$this->antapvac = $v;
-			$this->modifiedColumns[] = NpbonocontPeer::ANTAPVAC;
-		}
-
+    if ($this->antapvac !== $v) {
+        $this->antapvac = $v;
+        $this->modifiedColumns[] = NpbonocontPeer::ANTAPVAC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpbonocontPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpbonocontPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipcon = $rs->getString($startcol + 0);
+      $this->codtipcon = $rs->getString($startcol + 0);
 
-			$this->anovig = $rs->getDate($startcol + 1, null);
+      $this->anovig = $rs->getDate($startcol + 1, null);
 
-			$this->desde = $rs->getFloat($startcol + 2);
+      $this->desde = $rs->getFloat($startcol + 2);
 
-			$this->hasta = $rs->getFloat($startcol + 3);
+      $this->hasta = $rs->getFloat($startcol + 3);
 
-			$this->diauti = $rs->getFloat($startcol + 4);
+      $this->diauti = $rs->getFloat($startcol + 4);
 
-			$this->diavac = $rs->getFloat($startcol + 5);
+      $this->diavac = $rs->getFloat($startcol + 5);
 
-			$this->anovighas = $rs->getDate($startcol + 6, null);
+      $this->anovighas = $rs->getDate($startcol + 6, null);
 
-			$this->calinc = $rs->getString($startcol + 7);
+      $this->calinc = $rs->getString($startcol + 7);
 
-			$this->antap = $rs->getString($startcol + 8);
+      $this->antap = $rs->getString($startcol + 8);
 
-			$this->antapvac = $rs->getString($startcol + 9);
+      $this->antapvac = $rs->getString($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npbonocont object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npbonocont object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -375,6 +406,7 @@ abstract class BaseNpbonocont extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpbonocontPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpbonocontPeer::doUpdate($this, $con);

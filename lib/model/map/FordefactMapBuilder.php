@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class FordefactMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FordefactMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FordefactMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fordefact');
 		$tMap->setPhpName('Fordefact');
 
@@ -39,6 +39,6 @@ class FordefactMapBuilder {
 		$tMap->addColumn('NOMABR', 'Nomabr', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

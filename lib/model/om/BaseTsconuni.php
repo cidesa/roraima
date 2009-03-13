@@ -29,92 +29,118 @@ abstract class BaseTsconuni extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcta()
-	{
+  
+  public function getCodcta()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getCodsus()
-	{
+    return trim($this->codcta);
 
-		return $this->codsus; 		
-	}
-	
-	public function getNomsus()
-	{
+  }
+  
+  public function getCodsus()
+  {
 
-		return $this->nomsus; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codsus);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomsus()
+  {
+
+    return trim($this->nomsus);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = TsconuniPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = TsconuniPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setCodsus($v)
 	{
 
-		if ($this->codsus !== $v) {
-			$this->codsus = $v;
-			$this->modifiedColumns[] = TsconuniPeer::CODSUS;
-		}
-
+    if ($this->codsus !== $v) {
+        $this->codsus = $v;
+        $this->modifiedColumns[] = TsconuniPeer::CODSUS;
+      }
+  
 	} 
 	
 	public function setNomsus($v)
 	{
 
-		if ($this->nomsus !== $v) {
-			$this->nomsus = $v;
-			$this->modifiedColumns[] = TsconuniPeer::NOMSUS;
-		}
-
+    if ($this->nomsus !== $v) {
+        $this->nomsus = $v;
+        $this->modifiedColumns[] = TsconuniPeer::NOMSUS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsconuniPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsconuniPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcta = $rs->getString($startcol + 0);
+      $this->codcta = $rs->getString($startcol + 0);
 
-			$this->codsus = $rs->getString($startcol + 1);
+      $this->codsus = $rs->getString($startcol + 1);
 
-			$this->nomsus = $rs->getString($startcol + 2);
+      $this->nomsus = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsconuni object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsconuni object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseTsconuni extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsconuniPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsconuniPeer::doUpdate($this, $con);

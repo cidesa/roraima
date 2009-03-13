@@ -41,148 +41,177 @@ abstract class BaseCobtiprec extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrec()
-	{
+  
+  public function getCodrec()
+  {
 
-		return $this->codrec; 		
-	}
-	
-	public function getDesrec()
-	{
+    return trim($this->codrec);
 
-		return $this->desrec; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getDesrec()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getTiprec()
-	{
+    return trim($this->desrec);
 
-		return $this->tiprec; 		
-	}
-	
-	public function getValrec()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return number_format($this->valrec,2,',','.');
-		
-	}
-	
-	public function getDiarec()
-	{
+    return trim($this->codcon);
 
-		return number_format($this->diarec,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTiprec()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tiprec);
+
+  }
+  
+  public function getValrec($val=false)
+  {
+
+    if($val) return number_format($this->valrec,2,',','.');
+    else return $this->valrec;
+
+  }
+  
+  public function getDiarec($val=false)
+  {
+
+    if($val) return number_format($this->diarec,2,',','.');
+    else return $this->diarec;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = CobtiprecPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = CobtiprecPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setDesrec($v)
 	{
 
-		if ($this->desrec !== $v) {
-			$this->desrec = $v;
-			$this->modifiedColumns[] = CobtiprecPeer::DESREC;
-		}
-
+    if ($this->desrec !== $v) {
+        $this->desrec = $v;
+        $this->modifiedColumns[] = CobtiprecPeer::DESREC;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = CobtiprecPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = CobtiprecPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setTiprec($v)
 	{
 
-		if ($this->tiprec !== $v) {
-			$this->tiprec = $v;
-			$this->modifiedColumns[] = CobtiprecPeer::TIPREC;
-		}
-
+    if ($this->tiprec !== $v) {
+        $this->tiprec = $v;
+        $this->modifiedColumns[] = CobtiprecPeer::TIPREC;
+      }
+  
 	} 
 	
 	public function setValrec($v)
 	{
 
-		if ($this->valrec !== $v) {
-			$this->valrec = $v;
-			$this->modifiedColumns[] = CobtiprecPeer::VALREC;
-		}
-
+    if ($this->valrec !== $v) {
+        $this->valrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobtiprecPeer::VALREC;
+      }
+  
 	} 
 	
 	public function setDiarec($v)
 	{
 
-		if ($this->diarec !== $v) {
-			$this->diarec = $v;
-			$this->modifiedColumns[] = CobtiprecPeer::DIAREC;
-		}
-
+    if ($this->diarec !== $v) {
+        $this->diarec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobtiprecPeer::DIAREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CobtiprecPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CobtiprecPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrec = $rs->getString($startcol + 0);
+      $this->codrec = $rs->getString($startcol + 0);
 
-			$this->desrec = $rs->getString($startcol + 1);
+      $this->desrec = $rs->getString($startcol + 1);
 
-			$this->codcon = $rs->getString($startcol + 2);
+      $this->codcon = $rs->getString($startcol + 2);
 
-			$this->tiprec = $rs->getString($startcol + 3);
+      $this->tiprec = $rs->getString($startcol + 3);
 
-			$this->valrec = $rs->getFloat($startcol + 4);
+      $this->valrec = $rs->getFloat($startcol + 4);
 
-			$this->diarec = $rs->getFloat($startcol + 5);
+      $this->diarec = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cobtiprec object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cobtiprec object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +268,7 @@ abstract class BaseCobtiprec extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CobtiprecPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CobtiprecPeer::doUpdate($this, $con);

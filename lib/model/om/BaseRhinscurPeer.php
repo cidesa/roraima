@@ -215,6 +215,7 @@ abstract class BaseRhinscurPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(RhinscurPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

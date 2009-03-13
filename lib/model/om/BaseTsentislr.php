@@ -33,133 +33,159 @@ abstract class BaseTsentislr extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumdep()
-	{
+  
+  public function getNumdep()
+  {
 
-		return $this->numdep; 		
-	}
-	
-	public function getFecha($format = 'Y-m-d')
-	{
+    return trim($this->numdep);
 
-		if ($this->fecha === null || $this->fecha === '') {
-			return null;
-		} elseif (!is_int($this->fecha)) {
-						$ts = strtotime($this->fecha);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
-			}
-		} else {
-			$ts = $this->fecha;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecha($format = 'Y-m-d')
+  {
 
-	
-	public function getBanco()
-	{
+    if ($this->fecha === null || $this->fecha === '') {
+      return null;
+    } elseif (!is_int($this->fecha)) {
+            $ts = adodb_strtotime($this->fecha);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
+      }
+    } else {
+      $ts = $this->fecha;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->banco; 		
-	}
-	
-	public function getNumord()
-	{
+  
+  public function getBanco()
+  {
 
-		return $this->numord; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->banco);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumord()
+  {
+
+    return trim($this->numord);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumdep($v)
 	{
 
-		if ($this->numdep !== $v) {
-			$this->numdep = $v;
-			$this->modifiedColumns[] = TsentislrPeer::NUMDEP;
-		}
-
+    if ($this->numdep !== $v) {
+        $this->numdep = $v;
+        $this->modifiedColumns[] = TsentislrPeer::NUMDEP;
+      }
+  
 	} 
 	
 	public function setFecha($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecha !== $ts) {
-			$this->fecha = $ts;
-			$this->modifiedColumns[] = TsentislrPeer::FECHA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha !== $ts) {
+      $this->fecha = $ts;
+      $this->modifiedColumns[] = TsentislrPeer::FECHA;
+    }
 
 	} 
 	
 	public function setBanco($v)
 	{
 
-		if ($this->banco !== $v) {
-			$this->banco = $v;
-			$this->modifiedColumns[] = TsentislrPeer::BANCO;
-		}
-
+    if ($this->banco !== $v) {
+        $this->banco = $v;
+        $this->modifiedColumns[] = TsentislrPeer::BANCO;
+      }
+  
 	} 
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = TsentislrPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = TsentislrPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsentislrPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsentislrPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numdep = $rs->getString($startcol + 0);
+      $this->numdep = $rs->getString($startcol + 0);
 
-			$this->fecha = $rs->getDate($startcol + 1, null);
+      $this->fecha = $rs->getDate($startcol + 1, null);
 
-			$this->banco = $rs->getString($startcol + 2);
+      $this->banco = $rs->getString($startcol + 2);
 
-			$this->numord = $rs->getString($startcol + 3);
+      $this->numord = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsentislr object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsentislr object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +242,7 @@ abstract class BaseTsentislr extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsentislrPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsentislrPeer::doUpdate($this, $con);

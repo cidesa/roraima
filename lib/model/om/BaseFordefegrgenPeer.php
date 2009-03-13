@@ -13,7 +13,7 @@ abstract class BaseFordefegrgenPeer {
 	const CLASS_DEFAULT = 'lib.model.Fordefegrgen';
 
 	
-	const NUM_COLUMNS = 29;
+	const NUM_COLUMNS = 32;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -104,6 +104,15 @@ abstract class BaseFordefegrgenPeer {
 	const FORPAR = 'fordefegrgen.FORPAR';
 
 	
+	const CODPARIVA = 'fordefegrgen.CODPARIVA';
+
+	
+	const MANIVAFOR = 'fordefegrgen.MANIVAFOR';
+
+	
+	const PORIVAFOR = 'fordefegrgen.PORIVAFOR';
+
+	
 	const ID = 'fordefegrgen.ID';
 
 	
@@ -112,18 +121,18 @@ abstract class BaseFordefegrgenPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nivproacc', 'Desproacc', 'Hasproacc', 'Lonproacc', 'Forproacc', 'Nivaccesp', 'Desaccesp', 'Hasaccesp', 'Lonaccesp', 'Foraccesp', 'Nivsubaccesp', 'Dessubaccesp', 'Hassubaccesp', 'Lonsubaccesp', 'Forsubaccesp', 'Nivuae', 'Desuae', 'Hasuae', 'Lonuae', 'Foruae', 'Corest', 'Corsec', 'Corequ', 'Despar', 'Haspar', 'Lonpar', 'Forpar', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FordefegrgenPeer::CODEMP, FordefegrgenPeer::NIVPROACC, FordefegrgenPeer::DESPROACC, FordefegrgenPeer::HASPROACC, FordefegrgenPeer::LONPROACC, FordefegrgenPeer::FORPROACC, FordefegrgenPeer::NIVACCESP, FordefegrgenPeer::DESACCESP, FordefegrgenPeer::HASACCESP, FordefegrgenPeer::LONACCESP, FordefegrgenPeer::FORACCESP, FordefegrgenPeer::NIVSUBACCESP, FordefegrgenPeer::DESSUBACCESP, FordefegrgenPeer::HASSUBACCESP, FordefegrgenPeer::LONSUBACCESP, FordefegrgenPeer::FORSUBACCESP, FordefegrgenPeer::NIVUAE, FordefegrgenPeer::DESUAE, FordefegrgenPeer::HASUAE, FordefegrgenPeer::LONUAE, FordefegrgenPeer::FORUAE, FordefegrgenPeer::COREST, FordefegrgenPeer::CORSEC, FordefegrgenPeer::COREQU, FordefegrgenPeer::DESPAR, FordefegrgenPeer::HASPAR, FordefegrgenPeer::LONPAR, FordefegrgenPeer::FORPAR, FordefegrgenPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nivproacc', 'desproacc', 'hasproacc', 'lonproacc', 'forproacc', 'nivaccesp', 'desaccesp', 'hasaccesp', 'lonaccesp', 'foraccesp', 'nivsubaccesp', 'dessubaccesp', 'hassubaccesp', 'lonsubaccesp', 'forsubaccesp', 'nivuae', 'desuae', 'hasuae', 'lonuae', 'foruae', 'corest', 'corsec', 'corequ', 'despar', 'haspar', 'lonpar', 'forpar', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nivproacc', 'Desproacc', 'Hasproacc', 'Lonproacc', 'Forproacc', 'Nivaccesp', 'Desaccesp', 'Hasaccesp', 'Lonaccesp', 'Foraccesp', 'Nivsubaccesp', 'Dessubaccesp', 'Hassubaccesp', 'Lonsubaccesp', 'Forsubaccesp', 'Nivuae', 'Desuae', 'Hasuae', 'Lonuae', 'Foruae', 'Corest', 'Corsec', 'Corequ', 'Despar', 'Haspar', 'Lonpar', 'Forpar', 'Codpariva', 'Manivafor', 'Porivafor', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FordefegrgenPeer::CODEMP, FordefegrgenPeer::NIVPROACC, FordefegrgenPeer::DESPROACC, FordefegrgenPeer::HASPROACC, FordefegrgenPeer::LONPROACC, FordefegrgenPeer::FORPROACC, FordefegrgenPeer::NIVACCESP, FordefegrgenPeer::DESACCESP, FordefegrgenPeer::HASACCESP, FordefegrgenPeer::LONACCESP, FordefegrgenPeer::FORACCESP, FordefegrgenPeer::NIVSUBACCESP, FordefegrgenPeer::DESSUBACCESP, FordefegrgenPeer::HASSUBACCESP, FordefegrgenPeer::LONSUBACCESP, FordefegrgenPeer::FORSUBACCESP, FordefegrgenPeer::NIVUAE, FordefegrgenPeer::DESUAE, FordefegrgenPeer::HASUAE, FordefegrgenPeer::LONUAE, FordefegrgenPeer::FORUAE, FordefegrgenPeer::COREST, FordefegrgenPeer::CORSEC, FordefegrgenPeer::COREQU, FordefegrgenPeer::DESPAR, FordefegrgenPeer::HASPAR, FordefegrgenPeer::LONPAR, FordefegrgenPeer::FORPAR, FordefegrgenPeer::CODPARIVA, FordefegrgenPeer::MANIVAFOR, FordefegrgenPeer::PORIVAFOR, FordefegrgenPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nivproacc', 'desproacc', 'hasproacc', 'lonproacc', 'forproacc', 'nivaccesp', 'desaccesp', 'hasaccesp', 'lonaccesp', 'foraccesp', 'nivsubaccesp', 'dessubaccesp', 'hassubaccesp', 'lonsubaccesp', 'forsubaccesp', 'nivuae', 'desuae', 'hasuae', 'lonuae', 'foruae', 'corest', 'corsec', 'corequ', 'despar', 'haspar', 'lonpar', 'forpar', 'codpariva', 'manivafor', 'porivafor', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nivproacc' => 1, 'Desproacc' => 2, 'Hasproacc' => 3, 'Lonproacc' => 4, 'Forproacc' => 5, 'Nivaccesp' => 6, 'Desaccesp' => 7, 'Hasaccesp' => 8, 'Lonaccesp' => 9, 'Foraccesp' => 10, 'Nivsubaccesp' => 11, 'Dessubaccesp' => 12, 'Hassubaccesp' => 13, 'Lonsubaccesp' => 14, 'Forsubaccesp' => 15, 'Nivuae' => 16, 'Desuae' => 17, 'Hasuae' => 18, 'Lonuae' => 19, 'Foruae' => 20, 'Corest' => 21, 'Corsec' => 22, 'Corequ' => 23, 'Despar' => 24, 'Haspar' => 25, 'Lonpar' => 26, 'Forpar' => 27, 'Id' => 28, ),
-		BasePeer::TYPE_COLNAME => array (FordefegrgenPeer::CODEMP => 0, FordefegrgenPeer::NIVPROACC => 1, FordefegrgenPeer::DESPROACC => 2, FordefegrgenPeer::HASPROACC => 3, FordefegrgenPeer::LONPROACC => 4, FordefegrgenPeer::FORPROACC => 5, FordefegrgenPeer::NIVACCESP => 6, FordefegrgenPeer::DESACCESP => 7, FordefegrgenPeer::HASACCESP => 8, FordefegrgenPeer::LONACCESP => 9, FordefegrgenPeer::FORACCESP => 10, FordefegrgenPeer::NIVSUBACCESP => 11, FordefegrgenPeer::DESSUBACCESP => 12, FordefegrgenPeer::HASSUBACCESP => 13, FordefegrgenPeer::LONSUBACCESP => 14, FordefegrgenPeer::FORSUBACCESP => 15, FordefegrgenPeer::NIVUAE => 16, FordefegrgenPeer::DESUAE => 17, FordefegrgenPeer::HASUAE => 18, FordefegrgenPeer::LONUAE => 19, FordefegrgenPeer::FORUAE => 20, FordefegrgenPeer::COREST => 21, FordefegrgenPeer::CORSEC => 22, FordefegrgenPeer::COREQU => 23, FordefegrgenPeer::DESPAR => 24, FordefegrgenPeer::HASPAR => 25, FordefegrgenPeer::LONPAR => 26, FordefegrgenPeer::FORPAR => 27, FordefegrgenPeer::ID => 28, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nivproacc' => 1, 'desproacc' => 2, 'hasproacc' => 3, 'lonproacc' => 4, 'forproacc' => 5, 'nivaccesp' => 6, 'desaccesp' => 7, 'hasaccesp' => 8, 'lonaccesp' => 9, 'foraccesp' => 10, 'nivsubaccesp' => 11, 'dessubaccesp' => 12, 'hassubaccesp' => 13, 'lonsubaccesp' => 14, 'forsubaccesp' => 15, 'nivuae' => 16, 'desuae' => 17, 'hasuae' => 18, 'lonuae' => 19, 'foruae' => 20, 'corest' => 21, 'corsec' => 22, 'corequ' => 23, 'despar' => 24, 'haspar' => 25, 'lonpar' => 26, 'forpar' => 27, 'id' => 28, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nivproacc' => 1, 'Desproacc' => 2, 'Hasproacc' => 3, 'Lonproacc' => 4, 'Forproacc' => 5, 'Nivaccesp' => 6, 'Desaccesp' => 7, 'Hasaccesp' => 8, 'Lonaccesp' => 9, 'Foraccesp' => 10, 'Nivsubaccesp' => 11, 'Dessubaccesp' => 12, 'Hassubaccesp' => 13, 'Lonsubaccesp' => 14, 'Forsubaccesp' => 15, 'Nivuae' => 16, 'Desuae' => 17, 'Hasuae' => 18, 'Lonuae' => 19, 'Foruae' => 20, 'Corest' => 21, 'Corsec' => 22, 'Corequ' => 23, 'Despar' => 24, 'Haspar' => 25, 'Lonpar' => 26, 'Forpar' => 27, 'Codpariva' => 28, 'Manivafor' => 29, 'Porivafor' => 30, 'Id' => 31, ),
+		BasePeer::TYPE_COLNAME => array (FordefegrgenPeer::CODEMP => 0, FordefegrgenPeer::NIVPROACC => 1, FordefegrgenPeer::DESPROACC => 2, FordefegrgenPeer::HASPROACC => 3, FordefegrgenPeer::LONPROACC => 4, FordefegrgenPeer::FORPROACC => 5, FordefegrgenPeer::NIVACCESP => 6, FordefegrgenPeer::DESACCESP => 7, FordefegrgenPeer::HASACCESP => 8, FordefegrgenPeer::LONACCESP => 9, FordefegrgenPeer::FORACCESP => 10, FordefegrgenPeer::NIVSUBACCESP => 11, FordefegrgenPeer::DESSUBACCESP => 12, FordefegrgenPeer::HASSUBACCESP => 13, FordefegrgenPeer::LONSUBACCESP => 14, FordefegrgenPeer::FORSUBACCESP => 15, FordefegrgenPeer::NIVUAE => 16, FordefegrgenPeer::DESUAE => 17, FordefegrgenPeer::HASUAE => 18, FordefegrgenPeer::LONUAE => 19, FordefegrgenPeer::FORUAE => 20, FordefegrgenPeer::COREST => 21, FordefegrgenPeer::CORSEC => 22, FordefegrgenPeer::COREQU => 23, FordefegrgenPeer::DESPAR => 24, FordefegrgenPeer::HASPAR => 25, FordefegrgenPeer::LONPAR => 26, FordefegrgenPeer::FORPAR => 27, FordefegrgenPeer::CODPARIVA => 28, FordefegrgenPeer::MANIVAFOR => 29, FordefegrgenPeer::PORIVAFOR => 30, FordefegrgenPeer::ID => 31, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nivproacc' => 1, 'desproacc' => 2, 'hasproacc' => 3, 'lonproacc' => 4, 'forproacc' => 5, 'nivaccesp' => 6, 'desaccesp' => 7, 'hasaccesp' => 8, 'lonaccesp' => 9, 'foraccesp' => 10, 'nivsubaccesp' => 11, 'dessubaccesp' => 12, 'hassubaccesp' => 13, 'lonsubaccesp' => 14, 'forsubaccesp' => 15, 'nivuae' => 16, 'desuae' => 17, 'hasuae' => 18, 'lonuae' => 19, 'foruae' => 20, 'corest' => 21, 'corsec' => 22, 'corequ' => 23, 'despar' => 24, 'haspar' => 25, 'lonpar' => 26, 'forpar' => 27, 'codpariva' => 28, 'manivafor' => 29, 'porivafor' => 30, 'id' => 31, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, )
 	);
 
 	
@@ -233,6 +242,12 @@ abstract class BaseFordefegrgenPeer {
 
 		$criteria->addSelectColumn(FordefegrgenPeer::FORPAR);
 
+		$criteria->addSelectColumn(FordefegrgenPeer::CODPARIVA);
+
+		$criteria->addSelectColumn(FordefegrgenPeer::MANIVAFOR);
+
+		$criteria->addSelectColumn(FordefegrgenPeer::PORIVAFOR);
+
 		$criteria->addSelectColumn(FordefegrgenPeer::ID);
 
 	}
@@ -335,6 +350,7 @@ abstract class BaseFordefegrgenPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefegrgenPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

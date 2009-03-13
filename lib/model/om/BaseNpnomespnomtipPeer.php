@@ -205,6 +205,7 @@ abstract class BaseNpnomespnomtipPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpnomespnomtipPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

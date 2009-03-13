@@ -13,7 +13,7 @@ abstract class BaseNpantprePeer {
 	const CLASS_DEFAULT = 'lib.model.Npantpre';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseNpantprePeer {
 	const MONTO = 'npantpre.MONTO';
 
 	
+	const OBSERVACION = 'npantpre.OBSERVACION';
+
+	
 	const ID = 'npantpre.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseNpantprePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Fecant', 'Monant', 'Monto', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpantprePeer::CODEMP, NpantprePeer::FECANT, NpantprePeer::MONANT, NpantprePeer::MONTO, NpantprePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'fecant', 'monant', 'monto', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Fecant', 'Monant', 'Monto', 'Observacion', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpantprePeer::CODEMP, NpantprePeer::FECANT, NpantprePeer::MONANT, NpantprePeer::MONTO, NpantprePeer::OBSERVACION, NpantprePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'fecant', 'monant', 'monto', 'observacion', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Fecant' => 1, 'Monant' => 2, 'Monto' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (NpantprePeer::CODEMP => 0, NpantprePeer::FECANT => 1, NpantprePeer::MONANT => 2, NpantprePeer::MONTO => 3, NpantprePeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'fecant' => 1, 'monant' => 2, 'monto' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Fecant' => 1, 'Monant' => 2, 'Monto' => 3, 'Observacion' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (NpantprePeer::CODEMP => 0, NpantprePeer::FECANT => 1, NpantprePeer::MONANT => 2, NpantprePeer::MONTO => 3, NpantprePeer::OBSERVACION => 4, NpantprePeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'fecant' => 1, 'monant' => 2, 'monto' => 3, 'observacion' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseNpantprePeer {
 		$criteria->addSelectColumn(NpantprePeer::MONANT);
 
 		$criteria->addSelectColumn(NpantprePeer::MONTO);
+
+		$criteria->addSelectColumn(NpantprePeer::OBSERVACION);
 
 		$criteria->addSelectColumn(NpantprePeer::ID);
 
@@ -215,6 +220,7 @@ abstract class BaseNpantprePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpantprePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -37,128 +37,156 @@ abstract class BaseNpdefctb extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoduni()
-	{
+  
+  public function getCoduni()
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->coduni);
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodcta()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getNomcta()
-	{
+    return trim($this->codcon);
 
-		return $this->nomcta; 		
-	}
-	
-	public function getDebcre()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->debcre; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codcta);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomcta()
+  {
+
+    return trim($this->nomcta);
+
+  }
+  
+  public function getDebcre()
+  {
+
+    return trim($this->debcre);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = NpdefctbPeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = NpdefctbPeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpdefctbPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpdefctbPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = NpdefctbPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = NpdefctbPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setNomcta($v)
 	{
 
-		if ($this->nomcta !== $v) {
-			$this->nomcta = $v;
-			$this->modifiedColumns[] = NpdefctbPeer::NOMCTA;
-		}
-
+    if ($this->nomcta !== $v) {
+        $this->nomcta = $v;
+        $this->modifiedColumns[] = NpdefctbPeer::NOMCTA;
+      }
+  
 	} 
 	
 	public function setDebcre($v)
 	{
 
-		if ($this->debcre !== $v) {
-			$this->debcre = $v;
-			$this->modifiedColumns[] = NpdefctbPeer::DEBCRE;
-		}
-
+    if ($this->debcre !== $v) {
+        $this->debcre = $v;
+        $this->modifiedColumns[] = NpdefctbPeer::DEBCRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdefctbPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdefctbPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduni = $rs->getString($startcol + 0);
+      $this->coduni = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->codcta = $rs->getString($startcol + 2);
+      $this->codcta = $rs->getString($startcol + 2);
 
-			$this->nomcta = $rs->getString($startcol + 3);
+      $this->nomcta = $rs->getString($startcol + 3);
 
-			$this->debcre = $rs->getString($startcol + 4);
+      $this->debcre = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdefctb object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdefctb object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseNpdefctb extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdefctbPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefctbPeer::doUpdate($this, $con);

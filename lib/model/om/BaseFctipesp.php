@@ -33,7 +33,19 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 
 
 	
-	protected $mintri;
+	protected $unipar;
+
+
+	
+	protected $frepar;
+
+
+	
+	protected $paresp;
+
+
+	
+	protected $exoesp;
 
 
 	
@@ -45,166 +57,252 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTipesp()
-	{
+  
+  public function getTipesp()
+  {
 
-		return $this->tipesp; 		
-	}
-	
-	public function getAnovig()
-	{
+    return trim($this->tipesp);
 
-		return $this->anovig; 		
-	}
-	
-	public function getDestip()
-	{
+  }
+  
+  public function getAnovig()
+  {
 
-		return $this->destip; 		
-	}
-	
-	public function getPormon()
-	{
+    return trim($this->anovig);
 
-		return $this->pormon; 		
-	}
-	
-	public function getAlimon()
-	{
+  }
+  
+  public function getDestip()
+  {
 
-		return number_format($this->alimon,2,',','.');
-		
-	}
-	
-	public function getStatip()
-	{
+    return trim($this->destip);
 
-		return $this->statip; 		
-	}
-	
-	public function getMintri()
-	{
+  }
+  
+  public function getPormon()
+  {
 
-		return number_format($this->mintri,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->pormon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getAlimon($val=false)
+  {
+
+    if($val) return number_format($this->alimon,2,',','.');
+    else return $this->alimon;
+
+  }
+  
+  public function getStatip()
+  {
+
+    return trim($this->statip);
+
+  }
+  
+  public function getUnipar()
+  {
+
+    return trim($this->unipar);
+
+  }
+  
+  public function getFrepar()
+  {
+
+    return $this->frepar;
+
+  }
+  
+  public function getParesp()
+  {
+
+    return trim($this->paresp);
+
+  }
+  
+  public function getExoesp()
+  {
+
+    return trim($this->exoesp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTipesp($v)
 	{
 
-		if ($this->tipesp !== $v) {
-			$this->tipesp = $v;
-			$this->modifiedColumns[] = FctipespPeer::TIPESP;
-		}
-
+    if ($this->tipesp !== $v) {
+        $this->tipesp = $v;
+        $this->modifiedColumns[] = FctipespPeer::TIPESP;
+      }
+  
 	} 
 	
 	public function setAnovig($v)
 	{
 
-		if ($this->anovig !== $v) {
-			$this->anovig = $v;
-			$this->modifiedColumns[] = FctipespPeer::ANOVIG;
-		}
-
+    if ($this->anovig !== $v) {
+        $this->anovig = $v;
+        $this->modifiedColumns[] = FctipespPeer::ANOVIG;
+      }
+  
 	} 
 	
 	public function setDestip($v)
 	{
 
-		if ($this->destip !== $v) {
-			$this->destip = $v;
-			$this->modifiedColumns[] = FctipespPeer::DESTIP;
-		}
-
+    if ($this->destip !== $v) {
+        $this->destip = $v;
+        $this->modifiedColumns[] = FctipespPeer::DESTIP;
+      }
+  
 	} 
 	
 	public function setPormon($v)
 	{
 
-		if ($this->pormon !== $v) {
-			$this->pormon = $v;
-			$this->modifiedColumns[] = FctipespPeer::PORMON;
-		}
-
+    if ($this->pormon !== $v) {
+        $this->pormon = $v;
+        $this->modifiedColumns[] = FctipespPeer::PORMON;
+      }
+  
 	} 
 	
 	public function setAlimon($v)
 	{
 
-		if ($this->alimon !== $v) {
-			$this->alimon = $v;
-			$this->modifiedColumns[] = FctipespPeer::ALIMON;
-		}
-
+    if ($this->alimon !== $v) {
+        $this->alimon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FctipespPeer::ALIMON;
+      }
+  
 	} 
 	
 	public function setStatip($v)
 	{
 
-		if ($this->statip !== $v) {
-			$this->statip = $v;
-			$this->modifiedColumns[] = FctipespPeer::STATIP;
-		}
-
+    if ($this->statip !== $v) {
+        $this->statip = $v;
+        $this->modifiedColumns[] = FctipespPeer::STATIP;
+      }
+  
 	} 
 	
-	public function setMintri($v)
+	public function setUnipar($v)
 	{
 
-		if ($this->mintri !== $v) {
-			$this->mintri = $v;
-			$this->modifiedColumns[] = FctipespPeer::MINTRI;
-		}
+    if ($this->unipar !== $v) {
+        $this->unipar = $v;
+        $this->modifiedColumns[] = FctipespPeer::UNIPAR;
+      }
+  
+	} 
+	
+	public function setFrepar($v)
+	{
 
+    if ($this->frepar !== $v) {
+        $this->frepar = $v;
+        $this->modifiedColumns[] = FctipespPeer::FREPAR;
+      }
+  
+	} 
+	
+	public function setParesp($v)
+	{
+
+    if ($this->paresp !== $v) {
+        $this->paresp = $v;
+        $this->modifiedColumns[] = FctipespPeer::PARESP;
+      }
+  
+	} 
+	
+	public function setExoesp($v)
+	{
+
+    if ($this->exoesp !== $v) {
+        $this->exoesp = $v;
+        $this->modifiedColumns[] = FctipespPeer::EXOESP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FctipespPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FctipespPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tipesp = $rs->getString($startcol + 0);
+      $this->tipesp = $rs->getString($startcol + 0);
 
-			$this->anovig = $rs->getString($startcol + 1);
+      $this->anovig = $rs->getString($startcol + 1);
 
-			$this->destip = $rs->getString($startcol + 2);
+      $this->destip = $rs->getString($startcol + 2);
 
-			$this->pormon = $rs->getString($startcol + 3);
+      $this->pormon = $rs->getString($startcol + 3);
 
-			$this->alimon = $rs->getFloat($startcol + 4);
+      $this->alimon = $rs->getFloat($startcol + 4);
 
-			$this->statip = $rs->getString($startcol + 5);
+      $this->statip = $rs->getString($startcol + 5);
 
-			$this->mintri = $rs->getFloat($startcol + 6);
+      $this->unipar = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->frepar = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->paresp = $rs->getString($startcol + 8);
 
-			$this->setNew(false);
+      $this->exoesp = $rs->getString($startcol + 9);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fctipesp object", $e);
-		}
-	}
+      $this->id = $rs->getInt($startcol + 10);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fctipesp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -261,6 +359,7 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FctipespPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FctipespPeer::doUpdate($this, $con);
@@ -345,9 +444,18 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 				return $this->getStatip();
 				break;
 			case 6:
-				return $this->getMintri();
+				return $this->getUnipar();
 				break;
 			case 7:
+				return $this->getFrepar();
+				break;
+			case 8:
+				return $this->getParesp();
+				break;
+			case 9:
+				return $this->getExoesp();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -366,8 +474,11 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 			$keys[3] => $this->getPormon(),
 			$keys[4] => $this->getAlimon(),
 			$keys[5] => $this->getStatip(),
-			$keys[6] => $this->getMintri(),
-			$keys[7] => $this->getId(),
+			$keys[6] => $this->getUnipar(),
+			$keys[7] => $this->getFrepar(),
+			$keys[8] => $this->getParesp(),
+			$keys[9] => $this->getExoesp(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -402,9 +513,18 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 				$this->setStatip($value);
 				break;
 			case 6:
-				$this->setMintri($value);
+				$this->setUnipar($value);
 				break;
 			case 7:
+				$this->setFrepar($value);
+				break;
+			case 8:
+				$this->setParesp($value);
+				break;
+			case 9:
+				$this->setExoesp($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -420,8 +540,11 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setPormon($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setAlimon($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setStatip($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setMintri($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[6], $arr)) $this->setUnipar($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFrepar($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setParesp($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setExoesp($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -435,7 +558,10 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FctipespPeer::PORMON)) $criteria->add(FctipespPeer::PORMON, $this->pormon);
 		if ($this->isColumnModified(FctipespPeer::ALIMON)) $criteria->add(FctipespPeer::ALIMON, $this->alimon);
 		if ($this->isColumnModified(FctipespPeer::STATIP)) $criteria->add(FctipespPeer::STATIP, $this->statip);
-		if ($this->isColumnModified(FctipespPeer::MINTRI)) $criteria->add(FctipespPeer::MINTRI, $this->mintri);
+		if ($this->isColumnModified(FctipespPeer::UNIPAR)) $criteria->add(FctipespPeer::UNIPAR, $this->unipar);
+		if ($this->isColumnModified(FctipespPeer::FREPAR)) $criteria->add(FctipespPeer::FREPAR, $this->frepar);
+		if ($this->isColumnModified(FctipespPeer::PARESP)) $criteria->add(FctipespPeer::PARESP, $this->paresp);
+		if ($this->isColumnModified(FctipespPeer::EXOESP)) $criteria->add(FctipespPeer::EXOESP, $this->exoesp);
 		if ($this->isColumnModified(FctipespPeer::ID)) $criteria->add(FctipespPeer::ID, $this->id);
 
 		return $criteria;
@@ -479,7 +605,13 @@ abstract class BaseFctipesp extends BaseObject  implements Persistent {
 
 		$copyObj->setStatip($this->statip);
 
-		$copyObj->setMintri($this->mintri);
+		$copyObj->setUnipar($this->unipar);
+
+		$copyObj->setFrepar($this->frepar);
+
+		$copyObj->setParesp($this->paresp);
+
+		$copyObj->setExoesp($this->exoesp);
 
 
 		$copyObj->setNew(true);

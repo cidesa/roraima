@@ -242,14 +242,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinFcdeffun(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -270,14 +270,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinFcdefentext(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -298,14 +298,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinFcdeftipdoc(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -326,14 +326,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinFcdefubifis(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -354,14 +354,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinFcdefubimag(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -624,7 +624,7 @@ abstract class BaseFcbansalPeer {
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -688,25 +688,25 @@ abstract class BaseFcbansalPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcbansalPeer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = FcdeffunPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -715,21 +715,21 @@ abstract class BaseFcbansalPeer {
 					$temp_obj2->addFcbansal($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcbansals();
 				$obj2->addFcbansal($obj1);
 			}
 
-				
+
 					
 			$omClass = FcdefentextPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj3 = new $cls();
 			$obj3->hydrate($rs, $startcol3);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -738,21 +738,21 @@ abstract class BaseFcbansalPeer {
 					$temp_obj3->addFcbansal($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj3->initFcbansals();
 				$obj3->addFcbansal($obj1);
 			}
 
-				
+
 					
 			$omClass = FcdeftipdocPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj4 = new $cls();
 			$obj4->hydrate($rs, $startcol4);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -761,21 +761,21 @@ abstract class BaseFcbansalPeer {
 					$temp_obj4->addFcbansal($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj4->initFcbansals();
 				$obj4->addFcbansal($obj1);
 			}
 
-				
+
 					
 			$omClass = FcdefubifisPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj5 = new $cls();
 			$obj5->hydrate($rs, $startcol5);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -784,21 +784,21 @@ abstract class BaseFcbansalPeer {
 					$temp_obj5->addFcbansal($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj5->initFcbansals();
 				$obj5->addFcbansal($obj1);
 			}
 
-				
+
 					
 			$omClass = FcdefubimagPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj6 = new $cls();
 			$obj6->hydrate($rs, $startcol6);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -807,7 +807,7 @@ abstract class BaseFcbansalPeer {
 					$temp_obj6->addFcbansal($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj6->initFcbansals();
 				$obj6->addFcbansal($obj1);
@@ -823,14 +823,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinAllExceptFcdeffun(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -857,14 +857,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinAllExceptFcdefentext(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -891,14 +891,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinAllExceptFcdeftipdoc(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -925,14 +925,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinAllExceptFcdefubifis(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -959,14 +959,14 @@ abstract class BaseFcbansalPeer {
 	public static function doCountJoinAllExceptFcdefubimag(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcbansalPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -1024,22 +1024,22 @@ abstract class BaseFcbansalPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcbansalPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
-			$obj1->hydrate($rs);		
+			$obj1->hydrate($rs);
 
 			$omClass = FcdefentextPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2  = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1049,7 +1049,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcbansals();
 				$obj2->addFcbansal($obj1);
@@ -1057,11 +1057,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdeftipdocPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj3  = new $cls();
 			$obj3->hydrate($rs, $startcol3);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1071,7 +1071,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj3->initFcbansals();
 				$obj3->addFcbansal($obj1);
@@ -1079,11 +1079,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefubifisPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj4  = new $cls();
 			$obj4->hydrate($rs, $startcol4);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1093,7 +1093,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj4->initFcbansals();
 				$obj4->addFcbansal($obj1);
@@ -1101,11 +1101,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefubimagPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj5  = new $cls();
 			$obj5->hydrate($rs, $startcol5);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1115,7 +1115,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj5->initFcbansals();
 				$obj5->addFcbansal($obj1);
@@ -1162,22 +1162,22 @@ abstract class BaseFcbansalPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcbansalPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
-			$obj1->hydrate($rs);		
+			$obj1->hydrate($rs);
 
 			$omClass = FcdeffunPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2  = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1187,7 +1187,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcbansals();
 				$obj2->addFcbansal($obj1);
@@ -1195,11 +1195,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdeftipdocPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj3  = new $cls();
 			$obj3->hydrate($rs, $startcol3);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1209,7 +1209,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj3->initFcbansals();
 				$obj3->addFcbansal($obj1);
@@ -1217,11 +1217,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefubifisPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj4  = new $cls();
 			$obj4->hydrate($rs, $startcol4);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1231,7 +1231,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj4->initFcbansals();
 				$obj4->addFcbansal($obj1);
@@ -1239,11 +1239,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefubimagPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj5  = new $cls();
 			$obj5->hydrate($rs, $startcol5);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1253,7 +1253,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj5->initFcbansals();
 				$obj5->addFcbansal($obj1);
@@ -1300,22 +1300,22 @@ abstract class BaseFcbansalPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcbansalPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
-			$obj1->hydrate($rs);		
+			$obj1->hydrate($rs);
 
 			$omClass = FcdeffunPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2  = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1325,7 +1325,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcbansals();
 				$obj2->addFcbansal($obj1);
@@ -1333,11 +1333,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefentextPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj3  = new $cls();
 			$obj3->hydrate($rs, $startcol3);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1347,7 +1347,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj3->initFcbansals();
 				$obj3->addFcbansal($obj1);
@@ -1355,11 +1355,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefubifisPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj4  = new $cls();
 			$obj4->hydrate($rs, $startcol4);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1369,7 +1369,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj4->initFcbansals();
 				$obj4->addFcbansal($obj1);
@@ -1377,11 +1377,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefubimagPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj5  = new $cls();
 			$obj5->hydrate($rs, $startcol5);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1391,7 +1391,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj5->initFcbansals();
 				$obj5->addFcbansal($obj1);
@@ -1438,22 +1438,22 @@ abstract class BaseFcbansalPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcbansalPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
-			$obj1->hydrate($rs);		
+			$obj1->hydrate($rs);
 
 			$omClass = FcdeffunPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2  = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1463,7 +1463,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcbansals();
 				$obj2->addFcbansal($obj1);
@@ -1471,11 +1471,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefentextPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj3  = new $cls();
 			$obj3->hydrate($rs, $startcol3);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1485,7 +1485,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj3->initFcbansals();
 				$obj3->addFcbansal($obj1);
@@ -1493,11 +1493,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdeftipdocPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj4  = new $cls();
 			$obj4->hydrate($rs, $startcol4);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1507,7 +1507,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj4->initFcbansals();
 				$obj4->addFcbansal($obj1);
@@ -1515,11 +1515,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefubimagPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj5  = new $cls();
 			$obj5->hydrate($rs, $startcol5);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1529,7 +1529,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj5->initFcbansals();
 				$obj5->addFcbansal($obj1);
@@ -1576,22 +1576,22 @@ abstract class BaseFcbansalPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcbansalPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
-			$obj1->hydrate($rs);		
+			$obj1->hydrate($rs);
 
 			$omClass = FcdeffunPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2  = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1601,7 +1601,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcbansals();
 				$obj2->addFcbansal($obj1);
@@ -1609,11 +1609,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefentextPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj3  = new $cls();
 			$obj3->hydrate($rs, $startcol3);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1623,7 +1623,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj3->initFcbansals();
 				$obj3->addFcbansal($obj1);
@@ -1631,11 +1631,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdeftipdocPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj4  = new $cls();
 			$obj4->hydrate($rs, $startcol4);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1645,7 +1645,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj4->initFcbansals();
 				$obj4->addFcbansal($obj1);
@@ -1653,11 +1653,11 @@ abstract class BaseFcbansalPeer {
 
 			$omClass = FcdefubifisPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj5  = new $cls();
 			$obj5->hydrate($rs, $startcol5);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -1667,7 +1667,7 @@ abstract class BaseFcbansalPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj5->initFcbansals();
 				$obj5->addFcbansal($obj1);
@@ -1701,6 +1701,7 @@ abstract class BaseFcbansalPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcbansalPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

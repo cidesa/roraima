@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class OctipsteMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.OctipsteMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.OctipsteMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('octipste');
 		$tMap->setPhpName('Octipste');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('octipste_SEQ');
 
 		$tMap->addColumn('CODSTE', 'Codste', 'string', CreoleTypes::VARCHAR, true, 4);
 
@@ -41,6 +43,6 @@ class OctipsteMapBuilder {
 		$tMap->addColumn('STASTE', 'Staste', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

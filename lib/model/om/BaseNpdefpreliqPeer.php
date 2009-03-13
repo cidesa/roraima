@@ -220,6 +220,7 @@ abstract class BaseNpdefpreliqPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpdefpreliqPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

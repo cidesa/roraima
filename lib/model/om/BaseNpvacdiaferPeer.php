@@ -210,6 +210,7 @@ abstract class BaseNpvacdiaferPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpvacdiaferPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

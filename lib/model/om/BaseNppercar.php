@@ -29,93 +29,119 @@ abstract class BaseNppercar extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodperfil()
-	{
+  
+  public function getCodperfil()
+  {
 
-		return $this->codperfil; 		
-	}
-	
-	public function getCodcar()
-	{
+    return trim($this->codperfil);
 
-		return $this->codcar; 		
-	}
-	
-	public function getPuntos()
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		return number_format($this->puntos,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codcar);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPuntos($val=false)
+  {
+
+    if($val) return number_format($this->puntos,2,',','.');
+    else return $this->puntos;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodperfil($v)
 	{
 
-		if ($this->codperfil !== $v) {
-			$this->codperfil = $v;
-			$this->modifiedColumns[] = NppercarPeer::CODPERFIL;
-		}
-
+    if ($this->codperfil !== $v) {
+        $this->codperfil = $v;
+        $this->modifiedColumns[] = NppercarPeer::CODPERFIL;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NppercarPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NppercarPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setPuntos($v)
 	{
 
-		if ($this->puntos !== $v) {
-			$this->puntos = $v;
-			$this->modifiedColumns[] = NppercarPeer::PUNTOS;
-		}
-
+    if ($this->puntos !== $v) {
+        $this->puntos = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NppercarPeer::PUNTOS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NppercarPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NppercarPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codperfil = $rs->getString($startcol + 0);
+      $this->codperfil = $rs->getString($startcol + 0);
 
-			$this->codcar = $rs->getString($startcol + 1);
+      $this->codcar = $rs->getString($startcol + 1);
 
-			$this->puntos = $rs->getFloat($startcol + 2);
+      $this->puntos = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nppercar object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nppercar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseNppercar extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NppercarPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NppercarPeer::doUpdate($this, $con);

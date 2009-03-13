@@ -1,0 +1,22 @@
+methods:
+  post:
+   - "fcdefrecint{codrec}"
+   - "fcdefrecint{nomrec}"
+
+names:
+  fcdefrecint{codrec}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_codrec
+
+  fcdefrecint{nomrec}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+
+Validator_codrec:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcdefrecint
+        column:       codrec
+        unique_error: El registro ya Existe intente con otro.

@@ -285,6 +285,7 @@ abstract class BaseNpcargosracPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcargosracPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

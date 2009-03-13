@@ -20,10 +20,10 @@ abstract class BaseFcusoinmPeer {
 
 
 	
-	const CODUSO = 'fcusoinm.CODUSO';
+	const CODUSOINM = 'fcusoinm.CODUSOINM';
 
 	
-	const NOMUSO = 'fcusoinm.NOMUSO';
+	const NOMUSOINM = 'fcusoinm.NOMUSOINM';
 
 	
 	const FACTOR = 'fcusoinm.FACTOR';
@@ -37,17 +37,17 @@ abstract class BaseFcusoinmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Coduso', 'Nomuso', 'Factor', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcusoinmPeer::CODUSO, FcusoinmPeer::NOMUSO, FcusoinmPeer::FACTOR, FcusoinmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('coduso', 'nomuso', 'factor', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Codusoinm', 'Nomusoinm', 'Factor', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcusoinmPeer::CODUSOINM, FcusoinmPeer::NOMUSOINM, FcusoinmPeer::FACTOR, FcusoinmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codusoinm', 'nomusoinm', 'factor', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Coduso' => 0, 'Nomuso' => 1, 'Factor' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (FcusoinmPeer::CODUSO => 0, FcusoinmPeer::NOMUSO => 1, FcusoinmPeer::FACTOR => 2, FcusoinmPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('coduso' => 0, 'nomuso' => 1, 'factor' => 2, 'id' => 3, ),
+		BasePeer::TYPE_PHPNAME => array ('Codusoinm' => 0, 'Nomusoinm' => 1, 'Factor' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (FcusoinmPeer::CODUSOINM => 0, FcusoinmPeer::NOMUSOINM => 1, FcusoinmPeer::FACTOR => 2, FcusoinmPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('codusoinm' => 0, 'nomusoinm' => 1, 'factor' => 2, 'id' => 3, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
@@ -102,9 +102,9 @@ abstract class BaseFcusoinmPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(FcusoinmPeer::CODUSO);
+		$criteria->addSelectColumn(FcusoinmPeer::CODUSOINM);
 
-		$criteria->addSelectColumn(FcusoinmPeer::NOMUSO);
+		$criteria->addSelectColumn(FcusoinmPeer::NOMUSOINM);
 
 		$criteria->addSelectColumn(FcusoinmPeer::FACTOR);
 
@@ -210,6 +210,7 @@ abstract class BaseFcusoinmPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcusoinmPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -45,166 +45,196 @@ abstract class BaseOcofeserval extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getNumval()
-	{
+    return trim($this->codcon);
 
-		return $this->numval; 		
-	}
-	
-	public function getCodtipval()
-	{
+  }
+  
+  public function getNumval()
+  {
 
-		return $this->codtipval; 		
-	}
-	
-	public function getCodtippro()
-	{
+    return trim($this->numval);
 
-		return $this->codtippro; 		
-	}
-	
-	public function getNivpro()
-	{
+  }
+  
+  public function getCodtipval()
+  {
 
-		return $this->nivpro; 		
-	}
-	
-	public function getExppro()
-	{
+    return trim($this->codtipval);
 
-		return number_format($this->exppro,2,',','.');
-		
-	}
-	
-	public function getCantidad()
-	{
+  }
+  
+  public function getCodtippro()
+  {
 
-		return number_format($this->cantidad,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codtippro);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNivpro()
+  {
+
+    return trim($this->nivpro);
+
+  }
+  
+  public function getExppro($val=false)
+  {
+
+    if($val) return number_format($this->exppro,2,',','.');
+    else return $this->exppro;
+
+  }
+  
+  public function getCantidad($val=false)
+  {
+
+    if($val) return number_format($this->cantidad,2,',','.');
+    else return $this->cantidad;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcofeservalPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcofeservalPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNumval($v)
 	{
 
-		if ($this->numval !== $v) {
-			$this->numval = $v;
-			$this->modifiedColumns[] = OcofeservalPeer::NUMVAL;
-		}
-
+    if ($this->numval !== $v) {
+        $this->numval = $v;
+        $this->modifiedColumns[] = OcofeservalPeer::NUMVAL;
+      }
+  
 	} 
 	
 	public function setCodtipval($v)
 	{
 
-		if ($this->codtipval !== $v) {
-			$this->codtipval = $v;
-			$this->modifiedColumns[] = OcofeservalPeer::CODTIPVAL;
-		}
-
+    if ($this->codtipval !== $v) {
+        $this->codtipval = $v;
+        $this->modifiedColumns[] = OcofeservalPeer::CODTIPVAL;
+      }
+  
 	} 
 	
 	public function setCodtippro($v)
 	{
 
-		if ($this->codtippro !== $v) {
-			$this->codtippro = $v;
-			$this->modifiedColumns[] = OcofeservalPeer::CODTIPPRO;
-		}
-
+    if ($this->codtippro !== $v) {
+        $this->codtippro = $v;
+        $this->modifiedColumns[] = OcofeservalPeer::CODTIPPRO;
+      }
+  
 	} 
 	
 	public function setNivpro($v)
 	{
 
-		if ($this->nivpro !== $v) {
-			$this->nivpro = $v;
-			$this->modifiedColumns[] = OcofeservalPeer::NIVPRO;
-		}
-
+    if ($this->nivpro !== $v) {
+        $this->nivpro = $v;
+        $this->modifiedColumns[] = OcofeservalPeer::NIVPRO;
+      }
+  
 	} 
 	
 	public function setExppro($v)
 	{
 
-		if ($this->exppro !== $v) {
-			$this->exppro = $v;
-			$this->modifiedColumns[] = OcofeservalPeer::EXPPRO;
-		}
-
+    if ($this->exppro !== $v) {
+        $this->exppro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcofeservalPeer::EXPPRO;
+      }
+  
 	} 
 	
 	public function setCantidad($v)
 	{
 
-		if ($this->cantidad !== $v) {
-			$this->cantidad = $v;
-			$this->modifiedColumns[] = OcofeservalPeer::CANTIDAD;
-		}
-
+    if ($this->cantidad !== $v) {
+        $this->cantidad = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcofeservalPeer::CANTIDAD;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcofeservalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcofeservalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->numval = $rs->getString($startcol + 1);
+      $this->numval = $rs->getString($startcol + 1);
 
-			$this->codtipval = $rs->getString($startcol + 2);
+      $this->codtipval = $rs->getString($startcol + 2);
 
-			$this->codtippro = $rs->getString($startcol + 3);
+      $this->codtippro = $rs->getString($startcol + 3);
 
-			$this->nivpro = $rs->getString($startcol + 4);
+      $this->nivpro = $rs->getString($startcol + 4);
 
-			$this->exppro = $rs->getFloat($startcol + 5);
+      $this->exppro = $rs->getFloat($startcol + 5);
 
-			$this->cantidad = $rs->getFloat($startcol + 6);
+      $this->cantidad = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocofeserval object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocofeserval object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -261,6 +291,7 @@ abstract class BaseOcofeserval extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcofeservalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcofeservalPeer::doUpdate($this, $con);

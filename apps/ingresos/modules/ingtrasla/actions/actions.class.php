@@ -10,103 +10,229 @@
  */
 class ingtraslaActions extends autoingtraslaActions
 {
-	
-  public function executeEdit()
+
+  // Para incluir funcionalidades al executeEdit()
+  public function editing()
   {
-    $this->citrasla = $this->getCitraslaOrCreate();
-
-    if ($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->updateCitraslaFromRequest();
-
-      $this->saveCitrasla($this->citrasla);
-
-      $this->setFlash('notice', 'Your modifications have been saved');
-
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('ingtrasla/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('ingtrasla/list');
-      }
-      else
-      {
-        return $this->redirect('ingtrasla/edit?id='.$this->citrasla->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
+	$this->setVars();
+	$this->configGrid();
   }
-  
-  
-  protected function updateCitraslaFromRequest()
-  {
-    $citrasla = $this->getRequestParameter('citrasla');
 
-    if (isset($citrasla['reftra']))
-    {
-      $this->citrasla->setReftra($citrasla['reftra']);
+
+   public function configGrid(){
+
+    $c = new Criteria();
+    $c->add(CimovtraPeer::REFTRA,$this->citrasla->getReftra());
+    $per = CimovtraPeer::doSelect($c);
+	$mascara=$this->mascarapresupuesto;
+	$longitud=$this->longpre;
+
+
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/ingtrasla/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
+
+    $obj= array('codpre' => 1);
+    $params= array('param1' => $longitud, 'val2');
+    $this->columnas[1][0]->setCatalogo('Cideftit','sf_admin_edit_form',$obj,'Cideftit_Ingtrasla',$params);
+    $this->columnas[1][1]->setCatalogo('Cideftit','sf_admin_edit_form',$obj,'Cideftit_Ingtrasla',$params);
+    $this->columnas[1][0]->setHTML('type="text" size="17" maxlength="'.chr(39).$longitud.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="vacio(event,this.id),ajaxexiste(event,this.id),escodigodestino(event,this.id)"');
+    $this->columnas[1][1]->setHTML('type="text" size="17" maxlength="'.chr(39).$longitud.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="vacio(event,this.id),ajaxexiste(event,this.id),escodigoorigen(event,this.id),ajaxcodpre(event,this.id)"');
+    $this->columnas[1][2]->setHTML('onBlur="event.keyCode=13;return formatoDecimal(event,this.id),valcod(event,this.id),haydisponibilidad(event,this.id),vacios(event,this.id),movimientorepetido(event,this.id),calculartotal()"');
+    $this->columnas[1][2]->setEsTotal(true,'citrasla_tottra');
+
+    $this->grid = $this->columnas[0]->getConfig($per);
+    $this->citrasla->setGrid($this->grid);
+  }
+
+  public function setVars()
+  {
+
+
+  	$this->mascarapresupuesto = Herramientas::getX('Codemp','Cidefniv','Forpre','001');
+  	$this->longpre=strlen($this->mascarapresupuesto);
+
+
     }
-    if (isset($citrasla['fectra']))
+
+    public function executeSalvaranu()
+  {
+    $refanu=$this->getRequestParameter('refanu');
+    $fecanu=$this->getRequestParameter('fecanu');
+    $desanu=$this->getRequestParameter('desanu');
+
+
+    $c = new Criteria();
+    $c->add(CitraslaPeer::REFTRA,$refanu);
+    $this->citrasla = CitraslaPeer::doSelectOne($c);
+
+
+    $this->citrasla->setDesanu($desanu);
+    $this->citrasla->setFecanu($fecanu);
+    $this->citrasla->setStatra('N');
+    $this->citrasla->save();
+
+	//Anular Mov_tra
+  	$c = new Criteria();
+  	$c->add(CimovtraPeer::REFTRA,$refanu);
+    $per = CimovtraPeer::doSelect($c);
+
+    foreach ($per as $dato){
+    	$dato->setStamov('N');
+        $dato->save();
+    }
+
+
+    sfView::SUCCESS;
+  }
+
+    public function executeAnular()
     {
-      if ($citrasla['fectra'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($citrasla['fectra']))
-          {
-            $value = $dateFormat->format($citrasla['fectra'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $citrasla['fectra'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->citrasla->setFectra($value);
+    $reftra=$this->getRequestParameter('reftra');
+    $fectra=$this->getRequestParameter('fectra');
+
+    $c = new Criteria();
+    $c->add(CitraslaPeer::REFTRA,$reftra);
+    $c->add(CitraslaPeer::FECTRA,$fectra);
+    $this->citrasla = CitraslaPeer::doSelectOne($c);
+    sfView::SUCCESS;
+  }
+
+
+  public function executeAjax()
+  {
+
+    $codigo = $this->getRequestParameter('codigo','');
+    // Esta variable ajax debe ser usada en cada llamado para identificar
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
+    $ajax = $this->getRequestParameter('ajax','');
+
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
+    // los datos de los objetos de la vista como pasa en un submit normal.
+
+    switch ($ajax){
+      case '1':
+        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
+        // objetos en la vista. mas informacion en
+        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+        $output = '[["","",""],["","",""],["","",""]]';
+      case '2':
+      	$codigo = $this->getRequestParameter('codigo');
+      	$cajtexcom = $this->getRequestParameter('cajtexcom');
+
+        $c= new Criteria();
+        $c->add(CideftitPeer::CODPRE,$codigo);
+        $reg=CideftitPeer::doSelectOne($c);
+
+      	if ($reg)
+      	{
+          $output = '[["","",""]]';
         }
-        catch (sfException $e)
+        else
         {
-          // not a date
+          $javascript="alert('Código presupuestario no existe');$(id).value='';";
+
+        $output = '[["javascript","'.$javascript.'",""]]';
+    	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    	return sfView::HEADER_ONLY;
         }
-      }
-      else
-      {
-        $this->citrasla->setFectra(null);
-      }
+        break;
+
+      case '3':
+
+        $codigo = $this->getRequestParameter('codigo');
+      	$monto = $this->getRequestParameter('monto');
+      	$javascript="";
+
+        $c= new Criteria();
+        $c->add(CiasiiniPeer::CODPRE,$codigo);
+        $c->add(CiasiiniPeer::ANOPRE,substr((CidefnivPeer::FECCIE),0,4));
+        $reg=CiasiiniPeer::doSelectOne($c);
+
+
+        if ($monto>$reg->getMondis()){
+          $javascript="alert('No existe disponibilidad para hacer este traslado');$(id).value='0,00';";
+        }
+        $output = '[["javascript","'.$javascript.'",""]]';
+    	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    	return sfView::HEADER_ONLY;
+    	break;
+
+      case '4':
+
+        $codigo= $this->getRequestParameter('codigo');
+        $c = new Criteria();
+  		$c->add(CiasiiniPeer::PERPRE,'00');
+  		$c->add(CiasiiniPeer::CODPRE,$codigo);
+    	$asignacion = CiasiiniPeer::doSelect($c);
+
+
+        if (count($asignacion)==0){
+
+        	$javascript = "alert('El t&iacute;tulo presupuestario no tiene asignaci&oacute;n inicial');$(cod).value='';$(id).value='';";
+        	$output = '[["javascript","'.$javascript.'",""]]';
+    		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    		return sfView::HEADER_ONLY;
+        }
+
+    	break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
     }
-    if (isset($citrasla['pertra']))
-    {
-      $this->citrasla->setPertra($citrasla['pertra']);
-    }
-    if (isset($citrasla['destra']))
-    {
-      $this->citrasla->setDestra($citrasla['destra']);
-    }
-    if (isset($citrasla['anotra']))
-    {
-      $this->citrasla->setAnotra($citrasla['anotra']);
-    }
+
+    // Instruccion para escribir en la cabecera los datos a enviar a la vista
+    //$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+    // mantener habilitar esta instrucción
+    //return sfView::HEADER_ONLY;
+
+    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
   }
-  
-  protected function getCitraslaOrCreate($id = 'id')
+
+
+  public function validateEdit()
   {
-    if (!$this->getRequestParameter($id))
-    {
-      $citrasla = new Citrasla();
-    }
-    else
-    {
-      $citrasla = CitraslaPeer::retrieveByPk($this->getRequestParameter($id));
+    $this->coderr =-1;
 
-      $this->forward404Unless($citrasla);
-    }
 
-    return $citrasla;
+
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+
+
+
+      if($this->coderr!=-1){
+        return false;
+      } else return true;
+
+    }else return true;
+
+
+
   }
-  
+
+  protected function saving($citrasla)
+  {
+    $fecha=$citrasla->getFectra();
+    $sql="select pereje from cipereje where '".$fecha."'>=fecdes and '".$fecha."'<=fechas";
+	H::BuscarDatos($sql,&$dato);
+	$citrasla->setPertra($dato[0]["pereje"]);
+	$citrasla->setAnotra(substr($fecha,0,4));
+	$citrasla->setStatra('A');
+    $citrasla->save();
+    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+    Ingresos::salvarDetalletraslado($citrasla, $grid);
+    return -1;
+
+  }
+
+  protected function deleting($citrasla)
+  {
+    $citrasla->delete();
+  }
+
+
 }

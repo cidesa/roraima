@@ -25,74 +25,99 @@ abstract class BaseCaretser extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodser()
-	{
+  
+  public function getCodser()
+  {
 
-		return $this->codser; 		
-	}
-	
-	public function getCodret()
-	{
+    return trim($this->codser);
 
-		return $this->codret; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodret()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codret);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodser($v)
 	{
 
-		if ($this->codser !== $v) {
-			$this->codser = $v;
-			$this->modifiedColumns[] = CaretserPeer::CODSER;
-		}
-
+    if ($this->codser !== $v) {
+        $this->codser = $v;
+        $this->modifiedColumns[] = CaretserPeer::CODSER;
+      }
+  
 	} 
 	
 	public function setCodret($v)
 	{
 
-		if ($this->codret !== $v) {
-			$this->codret = $v;
-			$this->modifiedColumns[] = CaretserPeer::CODRET;
-		}
-
+    if ($this->codret !== $v) {
+        $this->codret = $v;
+        $this->modifiedColumns[] = CaretserPeer::CODRET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaretserPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaretserPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codser = $rs->getString($startcol + 0);
+      $this->codser = $rs->getString($startcol + 0);
 
-			$this->codret = $rs->getString($startcol + 1);
+      $this->codret = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caretser object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caretser object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseCaretser extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaretserPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaretserPeer::doUpdate($this, $con);

@@ -29,115 +29,140 @@ abstract class BaseFcreccob extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNument()
-	{
+  
+  public function getNument()
+  {
 
-		return $this->nument; 		
-	}
-	
-	public function getFecent($format = 'Y-m-d')
-	{
+    return trim($this->nument);
 
-		if ($this->fecent === null || $this->fecent === '') {
-			return null;
-		} elseif (!is_int($this->fecent)) {
-						$ts = strtotime($this->fecent);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
-			}
-		} else {
-			$ts = $this->fecent;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecent($format = 'Y-m-d')
+  {
 
-	
-	public function getCodcob()
-	{
+    if ($this->fecent === null || $this->fecent === '') {
+      return null;
+    } elseif (!is_int($this->fecent)) {
+            $ts = adodb_strtotime($this->fecent);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
+      }
+    } else {
+      $ts = $this->fecent;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codcob; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getCodcob()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codcob);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNument($v)
 	{
 
-		if ($this->nument !== $v) {
-			$this->nument = $v;
-			$this->modifiedColumns[] = FcreccobPeer::NUMENT;
-		}
-
+    if ($this->nument !== $v) {
+        $this->nument = $v;
+        $this->modifiedColumns[] = FcreccobPeer::NUMENT;
+      }
+  
 	} 
 	
 	public function setFecent($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecent !== $ts) {
-			$this->fecent = $ts;
-			$this->modifiedColumns[] = FcreccobPeer::FECENT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecent !== $ts) {
+      $this->fecent = $ts;
+      $this->modifiedColumns[] = FcreccobPeer::FECENT;
+    }
 
 	} 
 	
 	public function setCodcob($v)
 	{
 
-		if ($this->codcob !== $v) {
-			$this->codcob = $v;
-			$this->modifiedColumns[] = FcreccobPeer::CODCOB;
-		}
-
+    if ($this->codcob !== $v) {
+        $this->codcob = $v;
+        $this->modifiedColumns[] = FcreccobPeer::CODCOB;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcreccobPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcreccobPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nument = $rs->getString($startcol + 0);
+      $this->nument = $rs->getString($startcol + 0);
 
-			$this->fecent = $rs->getDate($startcol + 1, null);
+      $this->fecent = $rs->getDate($startcol + 1, null);
 
-			$this->codcob = $rs->getString($startcol + 2);
+      $this->codcob = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcreccob object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcreccob object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +219,7 @@ abstract class BaseFcreccob extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcreccobPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcreccobPeer::doUpdate($this, $con);

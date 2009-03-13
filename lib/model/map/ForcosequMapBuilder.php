@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class ForcosequMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ForcosequMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ForcosequMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('forcosequ');
 		$tMap->setPhpName('Forcosequ');
 
@@ -34,19 +34,19 @@ class ForcosequMapBuilder {
 
 		$tMap->addColumn('CODART', 'Codart', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('CANREM', 'Canrem', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANREM', 'Canrem', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CANDEF', 'Candef', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANDEF', 'Candef', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('TOTART', 'Totart', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TOTART', 'Totart', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('TOTCAN', 'Totcan', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TOTCAN', 'Totcan', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('COSULT', 'Cosult', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COSULT', 'Cosult', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

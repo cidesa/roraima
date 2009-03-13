@@ -85,441 +85,477 @@ abstract class BasePagdocume extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefdoc()
-	{
+  
+  public function getRefdoc()
+  {
 
-		return $this->refdoc; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->refdoc);
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodmov()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->codmov; 		
-	}
-	
-	public function getFecemi($format = 'Y-m-d')
-	{
+    return trim($this->codpro);
 
-		if ($this->fecemi === null || $this->fecemi === '') {
-			return null;
-		} elseif (!is_int($this->fecemi)) {
-						$ts = strtotime($this->fecemi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
-			}
-		} else {
-			$ts = $this->fecemi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodmov()
+  {
 
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+    return trim($this->codmov);
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecemi($format = 'Y-m-d')
+  {
 
-	
-	public function getOridoc()
-	{
+    if ($this->fecemi === null || $this->fecemi === '') {
+      return null;
+    } elseif (!is_int($this->fecemi)) {
+            $ts = adodb_strtotime($this->fecemi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
+      }
+    } else {
+      $ts = $this->fecemi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->oridoc; 		
-	}
-	
-	public function getDesdoc()
-	{
+  
+  public function getFecven($format = 'Y-m-d')
+  {
 
-		return $this->desdoc; 		
-	}
-	
-	public function getMondoc()
-	{
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->mondoc,2,',','.');
-		
-	}
-	
-	public function getRecdoc()
-	{
+  
+  public function getOridoc()
+  {
 
-		return number_format($this->recdoc,2,',','.');
-		
-	}
-	
-	public function getDscdoc()
-	{
+    return trim($this->oridoc);
 
-		return number_format($this->dscdoc,2,',','.');
-		
-	}
-	
-	public function getAbodoc()
-	{
+  }
+  
+  public function getDesdoc()
+  {
 
-		return number_format($this->abodoc,2,',','.');
-		
-	}
-	
-	public function getSaldoc()
-	{
+    return trim($this->desdoc);
 
-		return number_format($this->saldoc,2,',','.');
-		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+  }
+  
+  public function getMondoc($val=false)
+  {
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->mondoc,2,',','.');
+    else return $this->mondoc;
 
-	
-	public function getDesanu()
-	{
+  }
+  
+  public function getRecdoc($val=false)
+  {
 
-		return $this->desanu; 		
-	}
-	
-	public function getStadoc()
-	{
+    if($val) return number_format($this->recdoc,2,',','.');
+    else return $this->recdoc;
 
-		return $this->stadoc; 		
-	}
-	
-	public function getNumcom()
-	{
+  }
+  
+  public function getDscdoc($val=false)
+  {
 
-		return $this->numcom; 		
-	}
-	
-	public function getFeccom($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->dscdoc,2,',','.');
+    else return $this->dscdoc;
 
-		if ($this->feccom === null || $this->feccom === '') {
-			return null;
-		} elseif (!is_int($this->feccom)) {
-						$ts = strtotime($this->feccom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
-			}
-		} else {
-			$ts = $this->feccom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getAbodoc($val=false)
+  {
 
-	
-	public function getId()
-	{
+    if($val) return number_format($this->abodoc,2,',','.');
+    else return $this->abodoc;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getSaldoc($val=false)
+  {
+
+    if($val) return number_format($this->saldoc,2,',','.');
+    else return $this->saldoc;
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getDesanu()
+  {
+
+    return trim($this->desanu);
+
+  }
+  
+  public function getStadoc()
+  {
+
+    return trim($this->stadoc);
+
+  }
+  
+  public function getNumcom()
+  {
+
+    return trim($this->numcom);
+
+  }
+  
+  public function getFeccom($format = 'Y-m-d')
+  {
+
+    if ($this->feccom === null || $this->feccom === '') {
+      return null;
+    } elseif (!is_int($this->feccom)) {
+            $ts = adodb_strtotime($this->feccom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
+      }
+    } else {
+      $ts = $this->feccom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefdoc($v)
 	{
 
-		if ($this->refdoc !== $v) {
-			$this->refdoc = $v;
-			$this->modifiedColumns[] = PagdocumePeer::REFDOC;
-		}
-
+    if ($this->refdoc !== $v) {
+        $this->refdoc = $v;
+        $this->modifiedColumns[] = PagdocumePeer::REFDOC;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = PagdocumePeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = PagdocumePeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodmov($v)
 	{
 
-		if ($this->codmov !== $v) {
-			$this->codmov = $v;
-			$this->modifiedColumns[] = PagdocumePeer::CODMOV;
-		}
-
+    if ($this->codmov !== $v) {
+        $this->codmov = $v;
+        $this->modifiedColumns[] = PagdocumePeer::CODMOV;
+      }
+  
 	} 
 	
 	public function setFecemi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecemi !== $ts) {
-			$this->fecemi = $ts;
-			$this->modifiedColumns[] = PagdocumePeer::FECEMI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecemi !== $ts) {
+      $this->fecemi = $ts;
+      $this->modifiedColumns[] = PagdocumePeer::FECEMI;
+    }
 
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = PagdocumePeer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = PagdocumePeer::FECVEN;
+    }
 
 	} 
 	
 	public function setOridoc($v)
 	{
 
-		if ($this->oridoc !== $v) {
-			$this->oridoc = $v;
-			$this->modifiedColumns[] = PagdocumePeer::ORIDOC;
-		}
-
+    if ($this->oridoc !== $v) {
+        $this->oridoc = $v;
+        $this->modifiedColumns[] = PagdocumePeer::ORIDOC;
+      }
+  
 	} 
 	
 	public function setDesdoc($v)
 	{
 
-		if ($this->desdoc !== $v) {
-			$this->desdoc = $v;
-			$this->modifiedColumns[] = PagdocumePeer::DESDOC;
-		}
-
+    if ($this->desdoc !== $v) {
+        $this->desdoc = $v;
+        $this->modifiedColumns[] = PagdocumePeer::DESDOC;
+      }
+  
 	} 
 	
 	public function setMondoc($v)
 	{
 
-		if ($this->mondoc !== $v) {
-			$this->mondoc = $v;
-			$this->modifiedColumns[] = PagdocumePeer::MONDOC;
-		}
-
+    if ($this->mondoc !== $v) {
+        $this->mondoc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = PagdocumePeer::MONDOC;
+      }
+  
 	} 
 	
 	public function setRecdoc($v)
 	{
 
-		if ($this->recdoc !== $v) {
-			$this->recdoc = $v;
-			$this->modifiedColumns[] = PagdocumePeer::RECDOC;
-		}
-
+    if ($this->recdoc !== $v) {
+        $this->recdoc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = PagdocumePeer::RECDOC;
+      }
+  
 	} 
 	
 	public function setDscdoc($v)
 	{
 
-		if ($this->dscdoc !== $v) {
-			$this->dscdoc = $v;
-			$this->modifiedColumns[] = PagdocumePeer::DSCDOC;
-		}
-
+    if ($this->dscdoc !== $v) {
+        $this->dscdoc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = PagdocumePeer::DSCDOC;
+      }
+  
 	} 
 	
 	public function setAbodoc($v)
 	{
 
-		if ($this->abodoc !== $v) {
-			$this->abodoc = $v;
-			$this->modifiedColumns[] = PagdocumePeer::ABODOC;
-		}
-
+    if ($this->abodoc !== $v) {
+        $this->abodoc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = PagdocumePeer::ABODOC;
+      }
+  
 	} 
 	
 	public function setSaldoc($v)
 	{
 
-		if ($this->saldoc !== $v) {
-			$this->saldoc = $v;
-			$this->modifiedColumns[] = PagdocumePeer::SALDOC;
-		}
-
+    if ($this->saldoc !== $v) {
+        $this->saldoc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = PagdocumePeer::SALDOC;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = PagdocumePeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = PagdocumePeer::FECANU;
+    }
 
 	} 
 	
 	public function setDesanu($v)
 	{
 
-		if ($this->desanu !== $v) {
-			$this->desanu = $v;
-			$this->modifiedColumns[] = PagdocumePeer::DESANU;
-		}
-
+    if ($this->desanu !== $v) {
+        $this->desanu = $v;
+        $this->modifiedColumns[] = PagdocumePeer::DESANU;
+      }
+  
 	} 
 	
 	public function setStadoc($v)
 	{
 
-		if ($this->stadoc !== $v) {
-			$this->stadoc = $v;
-			$this->modifiedColumns[] = PagdocumePeer::STADOC;
-		}
-
+    if ($this->stadoc !== $v) {
+        $this->stadoc = $v;
+        $this->modifiedColumns[] = PagdocumePeer::STADOC;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = PagdocumePeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = PagdocumePeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setFeccom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccom !== $ts) {
-			$this->feccom = $ts;
-			$this->modifiedColumns[] = PagdocumePeer::FECCOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccom !== $ts) {
+      $this->feccom = $ts;
+      $this->modifiedColumns[] = PagdocumePeer::FECCOM;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = PagdocumePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = PagdocumePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refdoc = $rs->getString($startcol + 0);
+      $this->refdoc = $rs->getString($startcol + 0);
 
-			$this->codpro = $rs->getString($startcol + 1);
+      $this->codpro = $rs->getString($startcol + 1);
 
-			$this->codmov = $rs->getString($startcol + 2);
+      $this->codmov = $rs->getString($startcol + 2);
 
-			$this->fecemi = $rs->getDate($startcol + 3, null);
+      $this->fecemi = $rs->getDate($startcol + 3, null);
 
-			$this->fecven = $rs->getDate($startcol + 4, null);
+      $this->fecven = $rs->getDate($startcol + 4, null);
 
-			$this->oridoc = $rs->getString($startcol + 5);
+      $this->oridoc = $rs->getString($startcol + 5);
 
-			$this->desdoc = $rs->getString($startcol + 6);
+      $this->desdoc = $rs->getString($startcol + 6);
 
-			$this->mondoc = $rs->getFloat($startcol + 7);
+      $this->mondoc = $rs->getFloat($startcol + 7);
 
-			$this->recdoc = $rs->getFloat($startcol + 8);
+      $this->recdoc = $rs->getFloat($startcol + 8);
 
-			$this->dscdoc = $rs->getFloat($startcol + 9);
+      $this->dscdoc = $rs->getFloat($startcol + 9);
 
-			$this->abodoc = $rs->getFloat($startcol + 10);
+      $this->abodoc = $rs->getFloat($startcol + 10);
 
-			$this->saldoc = $rs->getFloat($startcol + 11);
+      $this->saldoc = $rs->getFloat($startcol + 11);
 
-			$this->fecanu = $rs->getDate($startcol + 12, null);
+      $this->fecanu = $rs->getDate($startcol + 12, null);
 
-			$this->desanu = $rs->getString($startcol + 13);
+      $this->desanu = $rs->getString($startcol + 13);
 
-			$this->stadoc = $rs->getString($startcol + 14);
+      $this->stadoc = $rs->getString($startcol + 14);
 
-			$this->numcom = $rs->getString($startcol + 15);
+      $this->numcom = $rs->getString($startcol + 15);
 
-			$this->feccom = $rs->getDate($startcol + 16, null);
+      $this->feccom = $rs->getDate($startcol + 16, null);
 
-			$this->id = $rs->getInt($startcol + 17);
+      $this->id = $rs->getInt($startcol + 17);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 18; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Pagdocume object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 18; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Pagdocume object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -576,6 +612,7 @@ abstract class BasePagdocume extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = PagdocumePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += PagdocumePeer::doUpdate($this, $con);

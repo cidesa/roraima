@@ -41,216 +41,242 @@ abstract class BaseNpvacregcondis extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodnom()
-	{
+    return trim($this->codemp);
 
-		return $this->codnom; 		
-	}
-	
-	public function getFechasalida($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		if ($this->fechasalida === null || $this->fechasalida === '') {
-			return null;
-		} elseif (!is_int($this->fechasalida)) {
-						$ts = strtotime($this->fechasalida);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechasalida] as date/time value: " . var_export($this->fechasalida, true));
-			}
-		} else {
-			$ts = $this->fechasalida;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codnom);
 
-	
-	public function getFechaentrada($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFechasalida($format = 'Y-m-d')
+  {
 
-		if ($this->fechaentrada === null || $this->fechaentrada === '') {
-			return null;
-		} elseif (!is_int($this->fechaentrada)) {
-						$ts = strtotime($this->fechaentrada);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechaentrada] as date/time value: " . var_export($this->fechaentrada, true));
-			}
-		} else {
-			$ts = $this->fechaentrada;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fechasalida === null || $this->fechasalida === '') {
+      return null;
+    } elseif (!is_int($this->fechasalida)) {
+            $ts = adodb_strtotime($this->fechasalida);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechasalida] as date/time value: " . var_export($this->fechasalida, true));
+      }
+    } else {
+      $ts = $this->fechasalida;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getFechanomina($format = 'Y-m-d')
-	{
+  
+  public function getFechaentrada($format = 'Y-m-d')
+  {
 
-		if ($this->fechanomina === null || $this->fechanomina === '') {
-			return null;
-		} elseif (!is_int($this->fechanomina)) {
-						$ts = strtotime($this->fechanomina);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechanomina] as date/time value: " . var_export($this->fechanomina, true));
-			}
-		} else {
-			$ts = $this->fechanomina;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fechaentrada === null || $this->fechaentrada === '') {
+      return null;
+    } elseif (!is_int($this->fechaentrada)) {
+            $ts = adodb_strtotime($this->fechaentrada);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechaentrada] as date/time value: " . var_export($this->fechaentrada, true));
+      }
+    } else {
+      $ts = $this->fechaentrada;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getDiadis()
-	{
+  
+  public function getFechanomina($format = 'Y-m-d')
+  {
 
-		return number_format($this->diadis,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if ($this->fechanomina === null || $this->fechanomina === '') {
+      return null;
+    } elseif (!is_int($this->fechanomina)) {
+            $ts = adodb_strtotime($this->fechanomina);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechanomina] as date/time value: " . var_export($this->fechanomina, true));
+      }
+    } else {
+      $ts = $this->fechanomina;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getDiadis($val=false)
+  {
+
+    if($val) return number_format($this->diadis,2,',','.');
+    else return $this->diadis;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpvacregcondisPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpvacregcondisPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpvacregcondisPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpvacregcondisPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setFechasalida($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechasalida] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechasalida !== $ts) {
-			$this->fechasalida = $ts;
-			$this->modifiedColumns[] = NpvacregcondisPeer::FECHASALIDA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechasalida] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechasalida !== $ts) {
+      $this->fechasalida = $ts;
+      $this->modifiedColumns[] = NpvacregcondisPeer::FECHASALIDA;
+    }
 
 	} 
 	
 	public function setFechaentrada($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechaentrada] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechaentrada !== $ts) {
-			$this->fechaentrada = $ts;
-			$this->modifiedColumns[] = NpvacregcondisPeer::FECHAENTRADA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechaentrada] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechaentrada !== $ts) {
+      $this->fechaentrada = $ts;
+      $this->modifiedColumns[] = NpvacregcondisPeer::FECHAENTRADA;
+    }
 
 	} 
 	
 	public function setFechanomina($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechanomina] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechanomina !== $ts) {
-			$this->fechanomina = $ts;
-			$this->modifiedColumns[] = NpvacregcondisPeer::FECHANOMINA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechanomina] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechanomina !== $ts) {
+      $this->fechanomina = $ts;
+      $this->modifiedColumns[] = NpvacregcondisPeer::FECHANOMINA;
+    }
 
 	} 
 	
 	public function setDiadis($v)
 	{
 
-		if ($this->diadis !== $v) {
-			$this->diadis = $v;
-			$this->modifiedColumns[] = NpvacregcondisPeer::DIADIS;
-		}
-
+    if ($this->diadis !== $v) {
+        $this->diadis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacregcondisPeer::DIADIS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacregcondisPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacregcondisPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codnom = $rs->getString($startcol + 1);
+      $this->codnom = $rs->getString($startcol + 1);
 
-			$this->fechasalida = $rs->getDate($startcol + 2, null);
+      $this->fechasalida = $rs->getDate($startcol + 2, null);
 
-			$this->fechaentrada = $rs->getDate($startcol + 3, null);
+      $this->fechaentrada = $rs->getDate($startcol + 3, null);
 
-			$this->fechanomina = $rs->getDate($startcol + 4, null);
+      $this->fechanomina = $rs->getDate($startcol + 4, null);
 
-			$this->diadis = $rs->getFloat($startcol + 5);
+      $this->diadis = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacregcondis object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacregcondis object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -307,6 +333,7 @@ abstract class BaseNpvacregcondis extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacregcondisPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacregcondisPeer::doUpdate($this, $con);

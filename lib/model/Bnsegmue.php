@@ -9,16 +9,14 @@
  */
 class Bnsegmue extends BaseBnsegmue
 {
-	public function getDesmue()
-	{
-		$c = new Criteria();
-		$c->add(BnregmuePeer::CODACT,self::getCodact());
-		$c->add(BnregmuePeer::CODMUE,self::getCodmue());
-		$registro = BnregmuePeer::doSelectOne($c);
-		if($registro)
-		return $registro->getDesmue();
-		else 
-                         return null; 
-		
-	}	
+	
+  public function getDesmue()
+  {    
+    return Herramientas::getXx('Bnregmue',array('CODACT','CODMUE'),array(self::getCodact(),self::getCodmue()),'Desmue');    		
+  }		
+
+  public function getDescob()
+  {
+    return Herramientas::getX('CODCOB','Bncobseg','Descob',self::getCobsegmue());	
+  }		  
 }

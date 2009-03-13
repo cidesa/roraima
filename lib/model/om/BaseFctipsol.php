@@ -59,202 +59,234 @@ abstract class BaseFctipsol extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtip()
-	{
+  
+  public function getCodtip()
+  {
 
-		return $this->codtip; 		
-	}
-	
-	public function getDestip()
-	{
+    return trim($this->codtip);
 
-		return $this->destip; 		
-	}
-	
-	public function getMonsol()
-	{
+  }
+  
+  public function getDestip()
+  {
 
-		return number_format($this->monsol,2,',','.');
-		
-	}
-	
-	public function getValsol()
-	{
+    return trim($this->destip);
 
-		return number_format($this->valsol,2,',','.');
-		
-	}
-	
-	public function getPrivdeu()
-	{
+  }
+  
+  public function getMonsol($val=false)
+  {
 
-		return $this->privdeu; 		
-	}
-	
-	public function getPrivmsg()
-	{
+    if($val) return number_format($this->monsol,2,',','.');
+    else return $this->monsol;
 
-		return $this->privmsg; 		
-	}
-	
-	public function getAnocom()
-	{
+  }
+  
+  public function getValsol($val=false)
+  {
 
-		return $this->anocom; 		
-	}
-	
-	public function getFueing()
-	{
+    if($val) return number_format($this->valsol,2,',','.');
+    else return $this->valsol;
 
-		return $this->fueing; 		
-	}
-	
-	public function getGendeu()
-	{
+  }
+  
+  public function getPrivdeu()
+  {
 
-		return $this->gendeu; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->privdeu);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPrivmsg()
+  {
+
+    return trim($this->privmsg);
+
+  }
+  
+  public function getAnocom()
+  {
+
+    return trim($this->anocom);
+
+  }
+  
+  public function getFueing()
+  {
+
+    return trim($this->fueing);
+
+  }
+  
+  public function getGendeu()
+  {
+
+    return trim($this->gendeu);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = FctipsolPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = FctipsolPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setDestip($v)
 	{
 
-		if ($this->destip !== $v) {
-			$this->destip = $v;
-			$this->modifiedColumns[] = FctipsolPeer::DESTIP;
-		}
-
+    if ($this->destip !== $v) {
+        $this->destip = $v;
+        $this->modifiedColumns[] = FctipsolPeer::DESTIP;
+      }
+  
 	} 
 	
 	public function setMonsol($v)
 	{
 
-		if ($this->monsol !== $v) {
-			$this->monsol = $v;
-			$this->modifiedColumns[] = FctipsolPeer::MONSOL;
-		}
-
+    if ($this->monsol !== $v) {
+        $this->monsol = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FctipsolPeer::MONSOL;
+      }
+  
 	} 
 	
 	public function setValsol($v)
 	{
 
-		if ($this->valsol !== $v) {
-			$this->valsol = $v;
-			$this->modifiedColumns[] = FctipsolPeer::VALSOL;
-		}
-
+    if ($this->valsol !== $v) {
+        $this->valsol = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FctipsolPeer::VALSOL;
+      }
+  
 	} 
 	
 	public function setPrivdeu($v)
 	{
 
-		if ($this->privdeu !== $v) {
-			$this->privdeu = $v;
-			$this->modifiedColumns[] = FctipsolPeer::PRIVDEU;
-		}
-
+    if ($this->privdeu !== $v) {
+        $this->privdeu = $v;
+        $this->modifiedColumns[] = FctipsolPeer::PRIVDEU;
+      }
+  
 	} 
 	
 	public function setPrivmsg($v)
 	{
 
-		if ($this->privmsg !== $v) {
-			$this->privmsg = $v;
-			$this->modifiedColumns[] = FctipsolPeer::PRIVMSG;
-		}
-
+    if ($this->privmsg !== $v) {
+        $this->privmsg = $v;
+        $this->modifiedColumns[] = FctipsolPeer::PRIVMSG;
+      }
+  
 	} 
 	
 	public function setAnocom($v)
 	{
 
-		if ($this->anocom !== $v) {
-			$this->anocom = $v;
-			$this->modifiedColumns[] = FctipsolPeer::ANOCOM;
-		}
-
+    if ($this->anocom !== $v) {
+        $this->anocom = $v;
+        $this->modifiedColumns[] = FctipsolPeer::ANOCOM;
+      }
+  
 	} 
 	
 	public function setFueing($v)
 	{
 
-		if ($this->fueing !== $v) {
-			$this->fueing = $v;
-			$this->modifiedColumns[] = FctipsolPeer::FUEING;
-		}
-
+    if ($this->fueing !== $v) {
+        $this->fueing = $v;
+        $this->modifiedColumns[] = FctipsolPeer::FUEING;
+      }
+  
 	} 
 	
 	public function setGendeu($v)
 	{
 
-		if ($this->gendeu !== $v) {
-			$this->gendeu = $v;
-			$this->modifiedColumns[] = FctipsolPeer::GENDEU;
-		}
-
+    if ($this->gendeu !== $v) {
+        $this->gendeu = $v;
+        $this->modifiedColumns[] = FctipsolPeer::GENDEU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FctipsolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FctipsolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtip = $rs->getString($startcol + 0);
+      $this->codtip = $rs->getString($startcol + 0);
 
-			$this->destip = $rs->getString($startcol + 1);
+      $this->destip = $rs->getString($startcol + 1);
 
-			$this->monsol = $rs->getFloat($startcol + 2);
+      $this->monsol = $rs->getFloat($startcol + 2);
 
-			$this->valsol = $rs->getFloat($startcol + 3);
+      $this->valsol = $rs->getFloat($startcol + 3);
 
-			$this->privdeu = $rs->getString($startcol + 4);
+      $this->privdeu = $rs->getString($startcol + 4);
 
-			$this->privmsg = $rs->getString($startcol + 5);
+      $this->privmsg = $rs->getString($startcol + 5);
 
-			$this->anocom = $rs->getString($startcol + 6);
+      $this->anocom = $rs->getString($startcol + 6);
 
-			$this->fueing = $rs->getString($startcol + 7);
+      $this->fueing = $rs->getString($startcol + 7);
 
-			$this->gendeu = $rs->getString($startcol + 8);
+      $this->gendeu = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fctipsol object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fctipsol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -311,6 +343,7 @@ abstract class BaseFctipsol extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FctipsolPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FctipsolPeer::doUpdate($this, $con);

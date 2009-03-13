@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpmovracMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpmovracMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpmovracMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npmovrac');
 		$tMap->setPhpName('Npmovrac');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npmovrac_SEQ');
 
 		$tMap->addColumn('NRONOM', 'Nronom', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -40,7 +42,7 @@ class NpmovracMapBuilder {
 
 		$tMap->addColumn('TIPMOV', 'Tipmov', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('FECMOV', 'Fecmov', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECMOV', 'Fecmov', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, true, 1);
 
@@ -48,9 +50,9 @@ class NpmovracMapBuilder {
 
 		$tMap->addColumn('NOMCARAPR', 'Nomcarapr', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('SUECARAPR', 'Suecarapr', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('SUECARAPR', 'Suecarapr', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('COMCARAPR', 'Comcarapr', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COMCARAPR', 'Comcarapr', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODOCPAPR', 'Codocpapr', 'string', CreoleTypes::VARCHAR, false, 16);
 
@@ -68,9 +70,9 @@ class NpmovracMapBuilder {
 
 		$tMap->addColumn('NOMCARPRO', 'Nomcarpro', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('SUECARPRO', 'Suecarpro', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('SUECARPRO', 'Suecarpro', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('COMCARPRO', 'Comcarpro', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COMCARPRO', 'Comcarpro', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODOCPPRO', 'Codocppro', 'string', CreoleTypes::VARCHAR, false, 16);
 
@@ -85,6 +87,6 @@ class NpmovracMapBuilder {
 		$tMap->addColumn('ESTORGPRO', 'Estorgpro', 'string', CreoleTypes::VARCHAR, false, 16);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

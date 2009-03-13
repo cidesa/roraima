@@ -225,6 +225,7 @@ abstract class BaseFamovajuPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FamovajuPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

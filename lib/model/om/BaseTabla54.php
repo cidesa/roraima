@@ -33,156 +33,181 @@ abstract class BaseTabla54 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefpag()
-	{
+  
+  public function getRefpag()
+  {
 
-		return $this->refpag; 		
-	}
-	
-	public function getFecpag($format = 'Y-m-d')
-	{
+    return trim($this->refpag);
 
-		if ($this->fecpag === null || $this->fecpag === '') {
-			return null;
-		} elseif (!is_int($this->fecpag)) {
-						$ts = strtotime($this->fecpag);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
-			}
-		} else {
-			$ts = $this->fecpag;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecpag($format = 'Y-m-d')
+  {
 
-	
-	public function getRefcau()
-	{
+    if ($this->fecpag === null || $this->fecpag === '') {
+      return null;
+    } elseif (!is_int($this->fecpag)) {
+            $ts = adodb_strtotime($this->fecpag);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
+      }
+    } else {
+      $ts = $this->fecpag;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->refcau; 		
-	}
-	
-	public function getFeccau($format = 'Y-m-d')
-	{
+  
+  public function getRefcau()
+  {
 
-		if ($this->feccau === null || $this->feccau === '') {
-			return null;
-		} elseif (!is_int($this->feccau)) {
-						$ts = strtotime($this->feccau);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccau] as date/time value: " . var_export($this->feccau, true));
-			}
-		} else {
-			$ts = $this->feccau;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->refcau);
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getFeccau($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->feccau === null || $this->feccau === '') {
+      return null;
+    } elseif (!is_int($this->feccau)) {
+            $ts = adodb_strtotime($this->feccau);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccau] as date/time value: " . var_export($this->feccau, true));
+      }
+    } else {
+      $ts = $this->feccau;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefpag($v)
 	{
 
-		if ($this->refpag !== $v) {
-			$this->refpag = $v;
-			$this->modifiedColumns[] = Tabla54Peer::REFPAG;
-		}
-
+    if ($this->refpag !== $v) {
+        $this->refpag = $v;
+        $this->modifiedColumns[] = Tabla54Peer::REFPAG;
+      }
+  
 	} 
 	
 	public function setFecpag($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecpag !== $ts) {
-			$this->fecpag = $ts;
-			$this->modifiedColumns[] = Tabla54Peer::FECPAG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecpag !== $ts) {
+      $this->fecpag = $ts;
+      $this->modifiedColumns[] = Tabla54Peer::FECPAG;
+    }
 
 	} 
 	
 	public function setRefcau($v)
 	{
 
-		if ($this->refcau !== $v) {
-			$this->refcau = $v;
-			$this->modifiedColumns[] = Tabla54Peer::REFCAU;
-		}
-
+    if ($this->refcau !== $v) {
+        $this->refcau = $v;
+        $this->modifiedColumns[] = Tabla54Peer::REFCAU;
+      }
+  
 	} 
 	
 	public function setFeccau($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccau] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccau !== $ts) {
-			$this->feccau = $ts;
-			$this->modifiedColumns[] = Tabla54Peer::FECCAU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccau] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccau !== $ts) {
+      $this->feccau = $ts;
+      $this->modifiedColumns[] = Tabla54Peer::FECCAU;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Tabla54Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Tabla54Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refpag = $rs->getString($startcol + 0);
+      $this->refpag = $rs->getString($startcol + 0);
 
-			$this->fecpag = $rs->getDate($startcol + 1, null);
+      $this->fecpag = $rs->getDate($startcol + 1, null);
 
-			$this->refcau = $rs->getString($startcol + 2);
+      $this->refcau = $rs->getString($startcol + 2);
 
-			$this->feccau = $rs->getDate($startcol + 3, null);
+      $this->feccau = $rs->getDate($startcol + 3, null);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tabla54 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tabla54 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +264,7 @@ abstract class BaseTabla54 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Tabla54Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Tabla54Peer::doUpdate($this, $con);

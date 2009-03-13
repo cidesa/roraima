@@ -205,6 +205,7 @@ abstract class BaseFadefcomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FadefcomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

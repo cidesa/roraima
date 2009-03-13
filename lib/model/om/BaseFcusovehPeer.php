@@ -127,8 +127,8 @@ abstract class BaseFcusovehPeer {
 
 	}
 
-	const COUNT = 'COUNT(fcusoveh.ANOVIG)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT fcusoveh.ANOVIG)';
+	const COUNT = 'COUNT(fcusoveh.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT fcusoveh.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -225,6 +225,7 @@ abstract class BaseFcusovehPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcusovehPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -251,8 +252,8 @@ abstract class BaseFcusovehPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(FcusovehPeer::ANOVIG);
-			$selectCriteria->add(FcusovehPeer::ANOVIG, $criteria->remove(FcusovehPeer::ANOVIG), $comparison);
+			$comparison = $criteria->getComparison(FcusovehPeer::ID);
+			$selectCriteria->add(FcusovehPeer::ID, $criteria->remove(FcusovehPeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -291,7 +292,7 @@ abstract class BaseFcusovehPeer {
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(FcusovehPeer::ANOVIG, (array) $values, Criteria::IN);
+			$criteria->add(FcusovehPeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -353,7 +354,7 @@ abstract class BaseFcusovehPeer {
 
 		$criteria = new Criteria(FcusovehPeer::DATABASE_NAME);
 
-		$criteria->add(FcusovehPeer::ANOVIG, $pk);
+		$criteria->add(FcusovehPeer::ID, $pk);
 
 
 		$v = FcusovehPeer::doSelect($criteria, $con);
@@ -373,7 +374,7 @@ abstract class BaseFcusovehPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(FcusovehPeer::ANOVIG, $pks, Criteria::IN);
+			$criteria->add(FcusovehPeer::ID, $pks, Criteria::IN);
 			$objs = FcusovehPeer::doSelect($criteria, $con);
 		}
 		return $objs;

@@ -53,204 +53,236 @@ abstract class BaseFordisactperpryaccmet extends BaseObject  implements Persiste
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodaccesp()
-	{
+    return trim($this->codpro);
 
-		return $this->codaccesp; 		
-	}
-	
-	public function getCodmet()
-	{
+  }
+  
+  public function getCodaccesp()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getCodact()
-	{
+    return trim($this->codaccesp);
 
-		return $this->codact; 		
-	}
-	
-	public function getPerpre()
-	{
+  }
+  
+  public function getCodmet()
+  {
 
-		return $this->perpre; 		
-	}
-	
-	public function getCanact()
-	{
+    return trim($this->codmet);
 
-		return number_format($this->canact,2,',','.');
-		
-	}
-	
-	public function getCanacteje()
-	{
+  }
+  
+  public function getCodact()
+  {
 
-		return number_format($this->canacteje,2,',','.');
-		
-	}
-	
-	public function getCanmet()
-	{
+    return trim($this->codact);
 
-		return number_format($this->canmet,2,',','.');
-		
-	}
-	
-	public function getCanmeteje()
-	{
+  }
+  
+  public function getPerpre()
+  {
 
-		return number_format($this->canmeteje,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->perpre);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCanact($val=false)
+  {
+
+    if($val) return number_format($this->canact,2,',','.');
+    else return $this->canact;
+
+  }
+  
+  public function getCanacteje($val=false)
+  {
+
+    if($val) return number_format($this->canacteje,2,',','.');
+    else return $this->canacteje;
+
+  }
+  
+  public function getCanmet($val=false)
+  {
+
+    if($val) return number_format($this->canmet,2,',','.');
+    else return $this->canmet;
+
+  }
+  
+  public function getCanmeteje($val=false)
+  {
+
+    if($val) return number_format($this->canmeteje,2,',','.');
+    else return $this->canmeteje;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodaccesp($v)
 	{
 
-		if ($this->codaccesp !== $v) {
-			$this->codaccesp = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CODACCESP;
-		}
-
+    if ($this->codaccesp !== $v) {
+        $this->codaccesp = $v;
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::CODACCESP;
+      }
+  
 	} 
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setPerpre($v)
 	{
 
-		if ($this->perpre !== $v) {
-			$this->perpre = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::PERPRE;
-		}
-
+    if ($this->perpre !== $v) {
+        $this->perpre = $v;
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::PERPRE;
+      }
+  
 	} 
 	
 	public function setCanact($v)
 	{
 
-		if ($this->canact !== $v) {
-			$this->canact = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CANACT;
-		}
-
+    if ($this->canact !== $v) {
+        $this->canact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::CANACT;
+      }
+  
 	} 
 	
 	public function setCanacteje($v)
 	{
 
-		if ($this->canacteje !== $v) {
-			$this->canacteje = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CANACTEJE;
-		}
-
+    if ($this->canacteje !== $v) {
+        $this->canacteje = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::CANACTEJE;
+      }
+  
 	} 
 	
 	public function setCanmet($v)
 	{
 
-		if ($this->canmet !== $v) {
-			$this->canmet = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CANMET;
-		}
-
+    if ($this->canmet !== $v) {
+        $this->canmet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::CANMET;
+      }
+  
 	} 
 	
 	public function setCanmeteje($v)
 	{
 
-		if ($this->canmeteje !== $v) {
-			$this->canmeteje = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::CANMETEJE;
-		}
-
+    if ($this->canmeteje !== $v) {
+        $this->canmeteje = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::CANMETEJE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordisactperpryaccmetPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordisactperpryaccmetPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codaccesp = $rs->getString($startcol + 1);
+      $this->codaccesp = $rs->getString($startcol + 1);
 
-			$this->codmet = $rs->getString($startcol + 2);
+      $this->codmet = $rs->getString($startcol + 2);
 
-			$this->codact = $rs->getString($startcol + 3);
+      $this->codact = $rs->getString($startcol + 3);
 
-			$this->perpre = $rs->getString($startcol + 4);
+      $this->perpre = $rs->getString($startcol + 4);
 
-			$this->canact = $rs->getFloat($startcol + 5);
+      $this->canact = $rs->getFloat($startcol + 5);
 
-			$this->canacteje = $rs->getFloat($startcol + 6);
+      $this->canacteje = $rs->getFloat($startcol + 6);
 
-			$this->canmet = $rs->getFloat($startcol + 7);
+      $this->canmet = $rs->getFloat($startcol + 7);
 
-			$this->canmeteje = $rs->getFloat($startcol + 8);
+      $this->canmeteje = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordisactperpryaccmet object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordisactperpryaccmet object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

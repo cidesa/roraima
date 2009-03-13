@@ -21,6 +21,14 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecven;
+
+
+	
+	protected $fueing;
+
+
+	
 	protected $id;
 
 	
@@ -29,92 +37,178 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefcon()
-	{
+  
+  public function getRefcon()
+  {
 
-		return $this->refcon; 		
-	}
-	
-	public function getNumdec()
-	{
+    return trim($this->refcon);
 
-		return $this->numdec; 		
-	}
-	
-	public function getNumero()
-	{
+  }
+  
+  public function getNumdec()
+  {
 
-		return $this->numero; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->numdec);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumero()
+  {
+
+    return trim($this->numero);
+
+  }
+  
+  public function getFecven($format = 'Y-m-d')
+  {
+
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFueing()
+  {
+
+    return trim($this->fueing);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefcon($v)
 	{
 
-		if ($this->refcon !== $v) {
-			$this->refcon = $v;
-			$this->modifiedColumns[] = FcdeuconPeer::REFCON;
-		}
-
+    if ($this->refcon !== $v) {
+        $this->refcon = $v;
+        $this->modifiedColumns[] = FcdeuconPeer::REFCON;
+      }
+  
 	} 
 	
 	public function setNumdec($v)
 	{
 
-		if ($this->numdec !== $v) {
-			$this->numdec = $v;
-			$this->modifiedColumns[] = FcdeuconPeer::NUMDEC;
-		}
-
+    if ($this->numdec !== $v) {
+        $this->numdec = $v;
+        $this->modifiedColumns[] = FcdeuconPeer::NUMDEC;
+      }
+  
 	} 
 	
 	public function setNumero($v)
 	{
 
-		if ($this->numero !== $v) {
-			$this->numero = $v;
-			$this->modifiedColumns[] = FcdeuconPeer::NUMERO;
-		}
+    if ($this->numero !== $v) {
+        $this->numero = $v;
+        $this->modifiedColumns[] = FcdeuconPeer::NUMERO;
+      }
+  
+	} 
+	
+	public function setFecven($v)
+	{
 
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = FcdeuconPeer::FECVEN;
+    }
+
+	} 
+	
+	public function setFueing($v)
+	{
+
+    if ($this->fueing !== $v) {
+        $this->fueing = $v;
+        $this->modifiedColumns[] = FcdeuconPeer::FUEING;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdeuconPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdeuconPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refcon = $rs->getString($startcol + 0);
+      $this->refcon = $rs->getString($startcol + 0);
 
-			$this->numdec = $rs->getString($startcol + 1);
+      $this->numdec = $rs->getString($startcol + 1);
 
-			$this->numero = $rs->getString($startcol + 2);
+      $this->numero = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->fecven = $rs->getDate($startcol + 3, null);
 
-			$this->resetModified();
+      $this->fueing = $rs->getString($startcol + 4);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 5);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdeucon object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdeucon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +265,7 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdeuconPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdeuconPeer::doUpdate($this, $con);
@@ -246,6 +341,12 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 				return $this->getNumero();
 				break;
 			case 3:
+				return $this->getFecven();
+				break;
+			case 4:
+				return $this->getFueing();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -261,7 +362,9 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 			$keys[0] => $this->getRefcon(),
 			$keys[1] => $this->getNumdec(),
 			$keys[2] => $this->getNumero(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getFecven(),
+			$keys[4] => $this->getFueing(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -287,6 +390,12 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 				$this->setNumero($value);
 				break;
 			case 3:
+				$this->setFecven($value);
+				break;
+			case 4:
+				$this->setFueing($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -299,7 +408,9 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setRefcon($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setNumdec($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setNumero($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setFecven($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setFueing($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -310,6 +421,8 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcdeuconPeer::REFCON)) $criteria->add(FcdeuconPeer::REFCON, $this->refcon);
 		if ($this->isColumnModified(FcdeuconPeer::NUMDEC)) $criteria->add(FcdeuconPeer::NUMDEC, $this->numdec);
 		if ($this->isColumnModified(FcdeuconPeer::NUMERO)) $criteria->add(FcdeuconPeer::NUMERO, $this->numero);
+		if ($this->isColumnModified(FcdeuconPeer::FECVEN)) $criteria->add(FcdeuconPeer::FECVEN, $this->fecven);
+		if ($this->isColumnModified(FcdeuconPeer::FUEING)) $criteria->add(FcdeuconPeer::FUEING, $this->fueing);
 		if ($this->isColumnModified(FcdeuconPeer::ID)) $criteria->add(FcdeuconPeer::ID, $this->id);
 
 		return $criteria;
@@ -346,6 +459,10 @@ abstract class BaseFcdeucon extends BaseObject  implements Persistent {
 		$copyObj->setNumdec($this->numdec);
 
 		$copyObj->setNumero($this->numero);
+
+		$copyObj->setFecven($this->fecven);
+
+		$copyObj->setFueing($this->fueing);
 
 
 		$copyObj->setNew(true);

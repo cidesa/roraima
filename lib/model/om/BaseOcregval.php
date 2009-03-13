@@ -117,6 +117,10 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 
 
 	
+	protected $obsval;
+
+
+	
 	protected $id;
 
 	
@@ -125,613 +129,679 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getMonval()
-	{
+  
+  public function getMonval($val=false)
+  {
 
-		return number_format($this->monval,2,',','.');
-		
-	}
-	
-	public function getSalliq()
-	{
+    if($val) return number_format($this->monval,2,',','.');
+    else return $this->monval;
 
-		return number_format($this->salliq,2,',','.');
-		
-	}
-	
-	public function getRetacu()
-	{
+  }
+  
+  public function getSalliq($val=false)
+  {
 
-		return number_format($this->retacu,2,',','.');
-		
-	}
-	
-	public function getMoniva()
-	{
+    if($val) return number_format($this->salliq,2,',','.');
+    else return $this->salliq;
 
-		return number_format($this->moniva,2,',','.');
-		
-	}
-	
-	public function getAmoant()
-	{
+  }
+  
+  public function getRetacu($val=false)
+  {
 
-		return number_format($this->amoant,2,',','.');
-		
-	}
-	
-	public function getStaval()
-	{
+    if($val) return number_format($this->retacu,2,',','.');
+    else return $this->retacu;
 
-		return $this->staval; 		
-	}
-	
-	public function getPoriva()
-	{
+  }
+  
+  public function getMoniva($val=false)
+  {
 
-		return number_format($this->poriva,2,',','.');
-		
-	}
-	
-	public function getPorant()
-	{
+    if($val) return number_format($this->moniva,2,',','.');
+    else return $this->moniva;
 
-		return number_format($this->porant,2,',','.');
-		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getAmoant($val=false)
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getSalant()
-	{
+    if($val) return number_format($this->amoant,2,',','.');
+    else return $this->amoant;
 
-		return number_format($this->salant,2,',','.');
-		
-	}
-	
-	public function getGasree()
-	{
+  }
+  
+  public function getStaval()
+  {
 
-		return number_format($this->gasree,2,',','.');
-		
-	}
-	
-	public function getSubtot()
-	{
+    return trim($this->staval);
 
-		return number_format($this->subtot,2,',','.');
-		
-	}
-	
-	public function getMonful()
-	{
+  }
+  
+  public function getPoriva($val=false)
+  {
 
-		return number_format($this->monful,2,',','.');
-		
-	}
-	
-	public function getMonfia()
-	{
+    if($val) return number_format($this->poriva,2,',','.');
+    else return $this->poriva;
 
-		return number_format($this->monfia,2,',','.');
-		
-	}
-	
-	public function getMonant()
-	{
+  }
+  
+  public function getPorant($val=false)
+  {
 
-		return number_format($this->monant,2,',','.');
-		
-	}
-	
-	public function getMonperiva()
-	{
+    if($val) return number_format($this->porant,2,',','.');
+    else return $this->porant;
 
-		return number_format($this->monperiva,2,',','.');
-		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getNumval()
-	{
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
 
-		return $this->numval; 		
-	}
-	
-	public function getCodtipval()
-	{
+  }
+  
+  public function getSalant($val=false)
+  {
 
-		return $this->codtipval; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->salant,2,',','.');
+    else return $this->salant;
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getGasree($val=false)
+  {
 
-	
-	public function getFecfin($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->gasree,2,',','.');
+    else return $this->gasree;
 
-		if ($this->fecfin === null || $this->fecfin === '') {
-			return null;
-		} elseif (!is_int($this->fecfin)) {
-						$ts = strtotime($this->fecfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
-			}
-		} else {
-			$ts = $this->fecfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getSubtot($val=false)
+  {
 
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->subtot,2,',','.');
+    else return $this->subtot;
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMonful($val=false)
+  {
 
-	
-	public function getAumobr()
-	{
+    if($val) return number_format($this->monful,2,',','.');
+    else return $this->monful;
 
-		return number_format($this->aumobr,2,',','.');
-		
-	}
-	
-	public function getDisobr()
-	{
+  }
+  
+  public function getMonfia($val=false)
+  {
 
-		return number_format($this->disobr,2,',','.');
-		
-	}
-	
-	public function getObrext()
-	{
+    if($val) return number_format($this->monfia,2,',','.');
+    else return $this->monfia;
 
-		return number_format($this->obrext,2,',','.');
-		
-	}
-	
-	public function getMonper()
-	{
+  }
+  
+  public function getMonant($val=false)
+  {
 
-		return number_format($this->monper,2,',','.');
-		
-	}
-	
-	public function getTotded()
-	{
+    if($val) return number_format($this->monant,2,',','.');
+    else return $this->monant;
 
-		return number_format($this->totded,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonperiva($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monperiva,2,',','.');
+    else return $this->monperiva;
+
+  }
+  
+  public function getCodcon()
+  {
+
+    return trim($this->codcon);
+
+  }
+  
+  public function getNumval()
+  {
+
+    return trim($this->numval);
+
+  }
+  
+  public function getCodtipval()
+  {
+
+    return trim($this->codtipval);
+
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
+
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecfin($format = 'Y-m-d')
+  {
+
+    if ($this->fecfin === null || $this->fecfin === '') {
+      return null;
+    } elseif (!is_int($this->fecfin)) {
+            $ts = adodb_strtotime($this->fecfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
+      }
+    } else {
+      $ts = $this->fecfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
+
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getAumobr($val=false)
+  {
+
+    if($val) return number_format($this->aumobr,2,',','.');
+    else return $this->aumobr;
+
+  }
+  
+  public function getDisobr($val=false)
+  {
+
+    if($val) return number_format($this->disobr,2,',','.');
+    else return $this->disobr;
+
+  }
+  
+  public function getObrext($val=false)
+  {
+
+    if($val) return number_format($this->obrext,2,',','.');
+    else return $this->obrext;
+
+  }
+  
+  public function getMonper($val=false)
+  {
+
+    if($val) return number_format($this->monper,2,',','.');
+    else return $this->monper;
+
+  }
+  
+  public function getTotded($val=false)
+  {
+
+    if($val) return number_format($this->totded,2,',','.');
+    else return $this->totded;
+
+  }
+  
+  public function getObsval()
+  {
+
+    return trim($this->obsval);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setMonval($v)
 	{
 
-		if ($this->monval !== $v) {
-			$this->monval = $v;
-			$this->modifiedColumns[] = OcregvalPeer::MONVAL;
-		}
-
+    if ($this->monval !== $v) {
+        $this->monval = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::MONVAL;
+      }
+  
 	} 
 	
 	public function setSalliq($v)
 	{
 
-		if ($this->salliq !== $v) {
-			$this->salliq = $v;
-			$this->modifiedColumns[] = OcregvalPeer::SALLIQ;
-		}
-
+    if ($this->salliq !== $v) {
+        $this->salliq = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::SALLIQ;
+      }
+  
 	} 
 	
 	public function setRetacu($v)
 	{
 
-		if ($this->retacu !== $v) {
-			$this->retacu = $v;
-			$this->modifiedColumns[] = OcregvalPeer::RETACU;
-		}
-
+    if ($this->retacu !== $v) {
+        $this->retacu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::RETACU;
+      }
+  
 	} 
 	
 	public function setMoniva($v)
 	{
 
-		if ($this->moniva !== $v) {
-			$this->moniva = $v;
-			$this->modifiedColumns[] = OcregvalPeer::MONIVA;
-		}
-
+    if ($this->moniva !== $v) {
+        $this->moniva = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::MONIVA;
+      }
+  
 	} 
 	
 	public function setAmoant($v)
 	{
 
-		if ($this->amoant !== $v) {
-			$this->amoant = $v;
-			$this->modifiedColumns[] = OcregvalPeer::AMOANT;
-		}
-
+    if ($this->amoant !== $v) {
+        $this->amoant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::AMOANT;
+      }
+  
 	} 
 	
 	public function setStaval($v)
 	{
 
-		if ($this->staval !== $v) {
-			$this->staval = $v;
-			$this->modifiedColumns[] = OcregvalPeer::STAVAL;
-		}
-
+    if ($this->staval !== $v) {
+        $this->staval = $v;
+        $this->modifiedColumns[] = OcregvalPeer::STAVAL;
+      }
+  
 	} 
 	
 	public function setPoriva($v)
 	{
 
-		if ($this->poriva !== $v) {
-			$this->poriva = $v;
-			$this->modifiedColumns[] = OcregvalPeer::PORIVA;
-		}
-
+    if ($this->poriva !== $v) {
+        $this->poriva = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::PORIVA;
+      }
+  
 	} 
 	
 	public function setPorant($v)
 	{
 
-		if ($this->porant !== $v) {
-			$this->porant = $v;
-			$this->modifiedColumns[] = OcregvalPeer::PORANT;
-		}
-
+    if ($this->porant !== $v) {
+        $this->porant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::PORANT;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = OcregvalPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setSalant($v)
 	{
 
-		if ($this->salant !== $v) {
-			$this->salant = $v;
-			$this->modifiedColumns[] = OcregvalPeer::SALANT;
-		}
-
+    if ($this->salant !== $v) {
+        $this->salant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::SALANT;
+      }
+  
 	} 
 	
 	public function setGasree($v)
 	{
 
-		if ($this->gasree !== $v) {
-			$this->gasree = $v;
-			$this->modifiedColumns[] = OcregvalPeer::GASREE;
-		}
-
+    if ($this->gasree !== $v) {
+        $this->gasree = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::GASREE;
+      }
+  
 	} 
 	
 	public function setSubtot($v)
 	{
 
-		if ($this->subtot !== $v) {
-			$this->subtot = $v;
-			$this->modifiedColumns[] = OcregvalPeer::SUBTOT;
-		}
-
+    if ($this->subtot !== $v) {
+        $this->subtot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::SUBTOT;
+      }
+  
 	} 
 	
 	public function setMonful($v)
 	{
 
-		if ($this->monful !== $v) {
-			$this->monful = $v;
-			$this->modifiedColumns[] = OcregvalPeer::MONFUL;
-		}
-
+    if ($this->monful !== $v) {
+        $this->monful = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::MONFUL;
+      }
+  
 	} 
 	
 	public function setMonfia($v)
 	{
 
-		if ($this->monfia !== $v) {
-			$this->monfia = $v;
-			$this->modifiedColumns[] = OcregvalPeer::MONFIA;
-		}
-
+    if ($this->monfia !== $v) {
+        $this->monfia = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::MONFIA;
+      }
+  
 	} 
 	
 	public function setMonant($v)
 	{
 
-		if ($this->monant !== $v) {
-			$this->monant = $v;
-			$this->modifiedColumns[] = OcregvalPeer::MONANT;
-		}
-
+    if ($this->monant !== $v) {
+        $this->monant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::MONANT;
+      }
+  
 	} 
 	
 	public function setMonperiva($v)
 	{
 
-		if ($this->monperiva !== $v) {
-			$this->monperiva = $v;
-			$this->modifiedColumns[] = OcregvalPeer::MONPERIVA;
-		}
-
+    if ($this->monperiva !== $v) {
+        $this->monperiva = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::MONPERIVA;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcregvalPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcregvalPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNumval($v)
 	{
 
-		if ($this->numval !== $v) {
-			$this->numval = $v;
-			$this->modifiedColumns[] = OcregvalPeer::NUMVAL;
-		}
-
+    if ($this->numval !== $v) {
+        $this->numval = $v;
+        $this->modifiedColumns[] = OcregvalPeer::NUMVAL;
+      }
+  
 	} 
 	
 	public function setCodtipval($v)
 	{
 
-		if ($this->codtipval !== $v) {
-			$this->codtipval = $v;
-			$this->modifiedColumns[] = OcregvalPeer::CODTIPVAL;
-		}
-
+    if ($this->codtipval !== $v) {
+        $this->codtipval = $v;
+        $this->modifiedColumns[] = OcregvalPeer::CODTIPVAL;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = OcregvalPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = OcregvalPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfin !== $ts) {
-			$this->fecfin = $ts;
-			$this->modifiedColumns[] = OcregvalPeer::FECFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfin !== $ts) {
+      $this->fecfin = $ts;
+      $this->modifiedColumns[] = OcregvalPeer::FECFIN;
+    }
 
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = OcregvalPeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = OcregvalPeer::FECREG;
+    }
 
 	} 
 	
 	public function setAumobr($v)
 	{
 
-		if ($this->aumobr !== $v) {
-			$this->aumobr = $v;
-			$this->modifiedColumns[] = OcregvalPeer::AUMOBR;
-		}
-
+    if ($this->aumobr !== $v) {
+        $this->aumobr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::AUMOBR;
+      }
+  
 	} 
 	
 	public function setDisobr($v)
 	{
 
-		if ($this->disobr !== $v) {
-			$this->disobr = $v;
-			$this->modifiedColumns[] = OcregvalPeer::DISOBR;
-		}
-
+    if ($this->disobr !== $v) {
+        $this->disobr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::DISOBR;
+      }
+  
 	} 
 	
 	public function setObrext($v)
 	{
 
-		if ($this->obrext !== $v) {
-			$this->obrext = $v;
-			$this->modifiedColumns[] = OcregvalPeer::OBREXT;
-		}
-
+    if ($this->obrext !== $v) {
+        $this->obrext = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::OBREXT;
+      }
+  
 	} 
 	
 	public function setMonper($v)
 	{
 
-		if ($this->monper !== $v) {
-			$this->monper = $v;
-			$this->modifiedColumns[] = OcregvalPeer::MONPER;
-		}
-
+    if ($this->monper !== $v) {
+        $this->monper = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::MONPER;
+      }
+  
 	} 
 	
 	public function setTotded($v)
 	{
 
-		if ($this->totded !== $v) {
-			$this->totded = $v;
-			$this->modifiedColumns[] = OcregvalPeer::TOTDED;
-		}
+    if ($this->totded !== $v) {
+        $this->totded = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregvalPeer::TOTDED;
+      }
+  
+	} 
+	
+	public function setObsval($v)
+	{
 
+    if ($this->obsval !== $v) {
+        $this->obsval = $v;
+        $this->modifiedColumns[] = OcregvalPeer::OBSVAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcregvalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcregvalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->monval = $rs->getFloat($startcol + 0);
+      $this->monval = $rs->getFloat($startcol + 0);
 
-			$this->salliq = $rs->getFloat($startcol + 1);
+      $this->salliq = $rs->getFloat($startcol + 1);
 
-			$this->retacu = $rs->getFloat($startcol + 2);
+      $this->retacu = $rs->getFloat($startcol + 2);
 
-			$this->moniva = $rs->getFloat($startcol + 3);
+      $this->moniva = $rs->getFloat($startcol + 3);
 
-			$this->amoant = $rs->getFloat($startcol + 4);
+      $this->amoant = $rs->getFloat($startcol + 4);
 
-			$this->staval = $rs->getString($startcol + 5);
+      $this->staval = $rs->getString($startcol + 5);
 
-			$this->poriva = $rs->getFloat($startcol + 6);
+      $this->poriva = $rs->getFloat($startcol + 6);
 
-			$this->porant = $rs->getFloat($startcol + 7);
+      $this->porant = $rs->getFloat($startcol + 7);
 
-			$this->monpag = $rs->getFloat($startcol + 8);
+      $this->monpag = $rs->getFloat($startcol + 8);
 
-			$this->salant = $rs->getFloat($startcol + 9);
+      $this->salant = $rs->getFloat($startcol + 9);
 
-			$this->gasree = $rs->getFloat($startcol + 10);
+      $this->gasree = $rs->getFloat($startcol + 10);
 
-			$this->subtot = $rs->getFloat($startcol + 11);
+      $this->subtot = $rs->getFloat($startcol + 11);
 
-			$this->monful = $rs->getFloat($startcol + 12);
+      $this->monful = $rs->getFloat($startcol + 12);
 
-			$this->monfia = $rs->getFloat($startcol + 13);
+      $this->monfia = $rs->getFloat($startcol + 13);
 
-			$this->monant = $rs->getFloat($startcol + 14);
+      $this->monant = $rs->getFloat($startcol + 14);
 
-			$this->monperiva = $rs->getFloat($startcol + 15);
+      $this->monperiva = $rs->getFloat($startcol + 15);
 
-			$this->codcon = $rs->getString($startcol + 16);
+      $this->codcon = $rs->getString($startcol + 16);
 
-			$this->numval = $rs->getString($startcol + 17);
+      $this->numval = $rs->getString($startcol + 17);
 
-			$this->codtipval = $rs->getString($startcol + 18);
+      $this->codtipval = $rs->getString($startcol + 18);
 
-			$this->fecini = $rs->getDate($startcol + 19, null);
+      $this->fecini = $rs->getDate($startcol + 19, null);
 
-			$this->fecfin = $rs->getDate($startcol + 20, null);
+      $this->fecfin = $rs->getDate($startcol + 20, null);
 
-			$this->fecreg = $rs->getDate($startcol + 21, null);
+      $this->fecreg = $rs->getDate($startcol + 21, null);
 
-			$this->aumobr = $rs->getFloat($startcol + 22);
+      $this->aumobr = $rs->getFloat($startcol + 22);
 
-			$this->disobr = $rs->getFloat($startcol + 23);
+      $this->disobr = $rs->getFloat($startcol + 23);
 
-			$this->obrext = $rs->getFloat($startcol + 24);
+      $this->obrext = $rs->getFloat($startcol + 24);
 
-			$this->monper = $rs->getFloat($startcol + 25);
+      $this->monper = $rs->getFloat($startcol + 25);
 
-			$this->totded = $rs->getFloat($startcol + 26);
+      $this->totded = $rs->getFloat($startcol + 26);
 
-			$this->id = $rs->getInt($startcol + 27);
+      $this->obsval = $rs->getString($startcol + 27);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 28);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 28; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocregval object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 29; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocregval object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -788,6 +858,7 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcregvalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcregvalPeer::doUpdate($this, $con);
@@ -935,6 +1006,9 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 				return $this->getTotded();
 				break;
 			case 27:
+				return $this->getObsval();
+				break;
+			case 28:
 				return $this->getId();
 				break;
 			default:
@@ -974,7 +1048,8 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 			$keys[24] => $this->getObrext(),
 			$keys[25] => $this->getMonper(),
 			$keys[26] => $this->getTotded(),
-			$keys[27] => $this->getId(),
+			$keys[27] => $this->getObsval(),
+			$keys[28] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1072,6 +1147,9 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 				$this->setTotded($value);
 				break;
 			case 27:
+				$this->setObsval($value);
+				break;
+			case 28:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1108,7 +1186,8 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[24], $arr)) $this->setObrext($arr[$keys[24]]);
 		if (array_key_exists($keys[25], $arr)) $this->setMonper($arr[$keys[25]]);
 		if (array_key_exists($keys[26], $arr)) $this->setTotded($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setId($arr[$keys[27]]);
+		if (array_key_exists($keys[27], $arr)) $this->setObsval($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setId($arr[$keys[28]]);
 	}
 
 	
@@ -1143,6 +1222,7 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OcregvalPeer::OBREXT)) $criteria->add(OcregvalPeer::OBREXT, $this->obrext);
 		if ($this->isColumnModified(OcregvalPeer::MONPER)) $criteria->add(OcregvalPeer::MONPER, $this->monper);
 		if ($this->isColumnModified(OcregvalPeer::TOTDED)) $criteria->add(OcregvalPeer::TOTDED, $this->totded);
+		if ($this->isColumnModified(OcregvalPeer::OBSVAL)) $criteria->add(OcregvalPeer::OBSVAL, $this->obsval);
 		if ($this->isColumnModified(OcregvalPeer::ID)) $criteria->add(OcregvalPeer::ID, $this->id);
 
 		return $criteria;
@@ -1227,6 +1307,8 @@ abstract class BaseOcregval extends BaseObject  implements Persistent {
 		$copyObj->setMonper($this->monper);
 
 		$copyObj->setTotded($this->totded);
+
+		$copyObj->setObsval($this->obsval);
 
 
 		$copyObj->setNew(true);

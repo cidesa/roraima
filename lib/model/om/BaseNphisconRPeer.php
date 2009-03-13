@@ -260,6 +260,7 @@ abstract class BaseNphisconRPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NphisconRPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

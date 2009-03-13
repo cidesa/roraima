@@ -1,50 +1,52 @@
 <?php
 
 
-	
+
 class NpintfecrefMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpintfecrefMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpintfecrefMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npintfecref');
 		$tMap->setPhpName('Npintfecref');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
 
-		$tMap->addColumn('FECINIREF', 'Feciniref', 'int', CreoleTypes::DATE, true);
+		$tMap->setPrimaryKeyMethodInfo('npintfecref_SEQ');
 
-		$tMap->addColumn('FECFINREF', 'Fecfinref', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECINIREF', 'Feciniref', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('TASINT', 'Tasint', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('FECFINREF', 'Fecfinref', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('TASINTPRO', 'Tasintpro', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('TASINT', 'Tasint', 'double', CreoleTypes::NUMERIC, false, 5);
 
-		$tMap->addColumn('TASINTPAS', 'Tasintpas', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('TASINTPRO', 'Tasintpro', 'double', CreoleTypes::NUMERIC, true, 5);
 
-		$tMap->addColumn('TASINTACT', 'Tasintact', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TASINTPAS', 'Tasintpas', 'double', CreoleTypes::NUMERIC, true, 5);
+
+		$tMap->addColumn('TASINTACT', 'Tasintact', 'double', CreoleTypes::NUMERIC, false, 5);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

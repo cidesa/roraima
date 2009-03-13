@@ -13,7 +13,7 @@ abstract class BaseFcfueprePeer {
 	const CLASS_DEFAULT = 'lib.model.Fcfuepre';
 
 	
-	const NUM_COLUMNS = 24;
+	const NUM_COLUMNS = 28;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -89,6 +89,18 @@ abstract class BaseFcfueprePeer {
 	const TIPMUL = 'fcfuepre.TIPMUL';
 
 	
+	const FECEST = 'fcfuepre.FECEST';
+
+	
+	const DIAVEN = 'fcfuepre.DIAVEN';
+
+	
+	const TIPVEN = 'fcfuepre.TIPVEN';
+
+	
+	const TIPFUE = 'fcfuepre.TIPFUE';
+
+	
 	const ID = 'fcfuepre.ID';
 
 	
@@ -97,18 +109,18 @@ abstract class BaseFcfueprePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codfue', 'Nomfue', 'Nomabr', 'Frecob', 'Monmor', 'Permor', 'Propag', 'Perppg', 'Liqact', 'Deufec', 'Recfec', 'Fecufa', 'Ingrec', 'Fueing', 'Inieje', 'Fineje', 'Diavso', 'Codprei', 'Deufra', 'Autliq', 'Simpre', 'Feccie', 'Tipmul', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcfueprePeer::CODFUE, FcfueprePeer::NOMFUE, FcfueprePeer::NOMABR, FcfueprePeer::FRECOB, FcfueprePeer::MONMOR, FcfueprePeer::PERMOR, FcfueprePeer::PROPAG, FcfueprePeer::PERPPG, FcfueprePeer::LIQACT, FcfueprePeer::DEUFEC, FcfueprePeer::RECFEC, FcfueprePeer::FECUFA, FcfueprePeer::INGREC, FcfueprePeer::FUEING, FcfueprePeer::INIEJE, FcfueprePeer::FINEJE, FcfueprePeer::DIAVSO, FcfueprePeer::CODPREI, FcfueprePeer::DEUFRA, FcfueprePeer::AUTLIQ, FcfueprePeer::SIMPRE, FcfueprePeer::FECCIE, FcfueprePeer::TIPMUL, FcfueprePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codfue', 'nomfue', 'nomabr', 'frecob', 'monmor', 'permor', 'propag', 'perppg', 'liqact', 'deufec', 'recfec', 'fecufa', 'ingrec', 'fueing', 'inieje', 'fineje', 'diavso', 'codprei', 'deufra', 'autliq', 'simpre', 'feccie', 'tipmul', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
+		BasePeer::TYPE_PHPNAME => array ('Codfue', 'Nomfue', 'Nomabr', 'Frecob', 'Monmor', 'Permor', 'Propag', 'Perppg', 'Liqact', 'Deufec', 'Recfec', 'Fecufa', 'Ingrec', 'Fueing', 'Inieje', 'Fineje', 'Diavso', 'Codprei', 'Deufra', 'Autliq', 'Simpre', 'Feccie', 'Tipmul', 'Fecest', 'Diaven', 'Tipven', 'Tipfue', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcfueprePeer::CODFUE, FcfueprePeer::NOMFUE, FcfueprePeer::NOMABR, FcfueprePeer::FRECOB, FcfueprePeer::MONMOR, FcfueprePeer::PERMOR, FcfueprePeer::PROPAG, FcfueprePeer::PERPPG, FcfueprePeer::LIQACT, FcfueprePeer::DEUFEC, FcfueprePeer::RECFEC, FcfueprePeer::FECUFA, FcfueprePeer::INGREC, FcfueprePeer::FUEING, FcfueprePeer::INIEJE, FcfueprePeer::FINEJE, FcfueprePeer::DIAVSO, FcfueprePeer::CODPREI, FcfueprePeer::DEUFRA, FcfueprePeer::AUTLIQ, FcfueprePeer::SIMPRE, FcfueprePeer::FECCIE, FcfueprePeer::TIPMUL, FcfueprePeer::FECEST, FcfueprePeer::DIAVEN, FcfueprePeer::TIPVEN, FcfueprePeer::TIPFUE, FcfueprePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codfue', 'nomfue', 'nomabr', 'frecob', 'monmor', 'permor', 'propag', 'perppg', 'liqact', 'deufec', 'recfec', 'fecufa', 'ingrec', 'fueing', 'inieje', 'fineje', 'diavso', 'codprei', 'deufra', 'autliq', 'simpre', 'feccie', 'tipmul', 'fecest', 'diaven', 'tipven', 'tipfue', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codfue' => 0, 'Nomfue' => 1, 'Nomabr' => 2, 'Frecob' => 3, 'Monmor' => 4, 'Permor' => 5, 'Propag' => 6, 'Perppg' => 7, 'Liqact' => 8, 'Deufec' => 9, 'Recfec' => 10, 'Fecufa' => 11, 'Ingrec' => 12, 'Fueing' => 13, 'Inieje' => 14, 'Fineje' => 15, 'Diavso' => 16, 'Codprei' => 17, 'Deufra' => 18, 'Autliq' => 19, 'Simpre' => 20, 'Feccie' => 21, 'Tipmul' => 22, 'Id' => 23, ),
-		BasePeer::TYPE_COLNAME => array (FcfueprePeer::CODFUE => 0, FcfueprePeer::NOMFUE => 1, FcfueprePeer::NOMABR => 2, FcfueprePeer::FRECOB => 3, FcfueprePeer::MONMOR => 4, FcfueprePeer::PERMOR => 5, FcfueprePeer::PROPAG => 6, FcfueprePeer::PERPPG => 7, FcfueprePeer::LIQACT => 8, FcfueprePeer::DEUFEC => 9, FcfueprePeer::RECFEC => 10, FcfueprePeer::FECUFA => 11, FcfueprePeer::INGREC => 12, FcfueprePeer::FUEING => 13, FcfueprePeer::INIEJE => 14, FcfueprePeer::FINEJE => 15, FcfueprePeer::DIAVSO => 16, FcfueprePeer::CODPREI => 17, FcfueprePeer::DEUFRA => 18, FcfueprePeer::AUTLIQ => 19, FcfueprePeer::SIMPRE => 20, FcfueprePeer::FECCIE => 21, FcfueprePeer::TIPMUL => 22, FcfueprePeer::ID => 23, ),
-		BasePeer::TYPE_FIELDNAME => array ('codfue' => 0, 'nomfue' => 1, 'nomabr' => 2, 'frecob' => 3, 'monmor' => 4, 'permor' => 5, 'propag' => 6, 'perppg' => 7, 'liqact' => 8, 'deufec' => 9, 'recfec' => 10, 'fecufa' => 11, 'ingrec' => 12, 'fueing' => 13, 'inieje' => 14, 'fineje' => 15, 'diavso' => 16, 'codprei' => 17, 'deufra' => 18, 'autliq' => 19, 'simpre' => 20, 'feccie' => 21, 'tipmul' => 22, 'id' => 23, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
+		BasePeer::TYPE_PHPNAME => array ('Codfue' => 0, 'Nomfue' => 1, 'Nomabr' => 2, 'Frecob' => 3, 'Monmor' => 4, 'Permor' => 5, 'Propag' => 6, 'Perppg' => 7, 'Liqact' => 8, 'Deufec' => 9, 'Recfec' => 10, 'Fecufa' => 11, 'Ingrec' => 12, 'Fueing' => 13, 'Inieje' => 14, 'Fineje' => 15, 'Diavso' => 16, 'Codprei' => 17, 'Deufra' => 18, 'Autliq' => 19, 'Simpre' => 20, 'Feccie' => 21, 'Tipmul' => 22, 'Fecest' => 23, 'Diaven' => 24, 'Tipven' => 25, 'Tipfue' => 26, 'Id' => 27, ),
+		BasePeer::TYPE_COLNAME => array (FcfueprePeer::CODFUE => 0, FcfueprePeer::NOMFUE => 1, FcfueprePeer::NOMABR => 2, FcfueprePeer::FRECOB => 3, FcfueprePeer::MONMOR => 4, FcfueprePeer::PERMOR => 5, FcfueprePeer::PROPAG => 6, FcfueprePeer::PERPPG => 7, FcfueprePeer::LIQACT => 8, FcfueprePeer::DEUFEC => 9, FcfueprePeer::RECFEC => 10, FcfueprePeer::FECUFA => 11, FcfueprePeer::INGREC => 12, FcfueprePeer::FUEING => 13, FcfueprePeer::INIEJE => 14, FcfueprePeer::FINEJE => 15, FcfueprePeer::DIAVSO => 16, FcfueprePeer::CODPREI => 17, FcfueprePeer::DEUFRA => 18, FcfueprePeer::AUTLIQ => 19, FcfueprePeer::SIMPRE => 20, FcfueprePeer::FECCIE => 21, FcfueprePeer::TIPMUL => 22, FcfueprePeer::FECEST => 23, FcfueprePeer::DIAVEN => 24, FcfueprePeer::TIPVEN => 25, FcfueprePeer::TIPFUE => 26, FcfueprePeer::ID => 27, ),
+		BasePeer::TYPE_FIELDNAME => array ('codfue' => 0, 'nomfue' => 1, 'nomabr' => 2, 'frecob' => 3, 'monmor' => 4, 'permor' => 5, 'propag' => 6, 'perppg' => 7, 'liqact' => 8, 'deufec' => 9, 'recfec' => 10, 'fecufa' => 11, 'ingrec' => 12, 'fueing' => 13, 'inieje' => 14, 'fineje' => 15, 'diavso' => 16, 'codprei' => 17, 'deufra' => 18, 'autliq' => 19, 'simpre' => 20, 'feccie' => 21, 'tipmul' => 22, 'fecest' => 23, 'diaven' => 24, 'tipven' => 25, 'tipfue' => 26, 'id' => 27, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, )
 	);
 
 	
@@ -207,6 +219,14 @@ abstract class BaseFcfueprePeer {
 		$criteria->addSelectColumn(FcfueprePeer::FECCIE);
 
 		$criteria->addSelectColumn(FcfueprePeer::TIPMUL);
+
+		$criteria->addSelectColumn(FcfueprePeer::FECEST);
+
+		$criteria->addSelectColumn(FcfueprePeer::DIAVEN);
+
+		$criteria->addSelectColumn(FcfueprePeer::TIPVEN);
+
+		$criteria->addSelectColumn(FcfueprePeer::TIPFUE);
 
 		$criteria->addSelectColumn(FcfueprePeer::ID);
 
@@ -310,6 +330,7 @@ abstract class BaseFcfueprePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcfueprePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

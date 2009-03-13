@@ -13,7 +13,7 @@ abstract class BaseFctipespPeer {
 	const CLASS_DEFAULT = 'lib.model.Fctipesp';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,7 +38,16 @@ abstract class BaseFctipespPeer {
 	const STATIP = 'fctipesp.STATIP';
 
 	
-	const MINTRI = 'fctipesp.MINTRI';
+	const UNIPAR = 'fctipesp.UNIPAR';
+
+	
+	const FREPAR = 'fctipesp.FREPAR';
+
+	
+	const PARESP = 'fctipesp.PARESP';
+
+	
+	const EXOESP = 'fctipesp.EXOESP';
 
 	
 	const ID = 'fctipesp.ID';
@@ -49,18 +58,18 @@ abstract class BaseFctipespPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Tipesp', 'Anovig', 'Destip', 'Pormon', 'Alimon', 'Statip', 'Mintri', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FctipespPeer::TIPESP, FctipespPeer::ANOVIG, FctipespPeer::DESTIP, FctipespPeer::PORMON, FctipespPeer::ALIMON, FctipespPeer::STATIP, FctipespPeer::MINTRI, FctipespPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('tipesp', 'anovig', 'destip', 'pormon', 'alimon', 'statip', 'mintri', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Tipesp', 'Anovig', 'Destip', 'Pormon', 'Alimon', 'Statip', 'Unipar', 'Frepar', 'Paresp', 'Exoesp', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FctipespPeer::TIPESP, FctipespPeer::ANOVIG, FctipespPeer::DESTIP, FctipespPeer::PORMON, FctipespPeer::ALIMON, FctipespPeer::STATIP, FctipespPeer::UNIPAR, FctipespPeer::FREPAR, FctipespPeer::PARESP, FctipespPeer::EXOESP, FctipespPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('tipesp', 'anovig', 'destip', 'pormon', 'alimon', 'statip', 'unipar', 'frepar', 'paresp', 'exoesp', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Tipesp' => 0, 'Anovig' => 1, 'Destip' => 2, 'Pormon' => 3, 'Alimon' => 4, 'Statip' => 5, 'Mintri' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (FctipespPeer::TIPESP => 0, FctipespPeer::ANOVIG => 1, FctipespPeer::DESTIP => 2, FctipespPeer::PORMON => 3, FctipespPeer::ALIMON => 4, FctipespPeer::STATIP => 5, FctipespPeer::MINTRI => 6, FctipespPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('tipesp' => 0, 'anovig' => 1, 'destip' => 2, 'pormon' => 3, 'alimon' => 4, 'statip' => 5, 'mintri' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Tipesp' => 0, 'Anovig' => 1, 'Destip' => 2, 'Pormon' => 3, 'Alimon' => 4, 'Statip' => 5, 'Unipar' => 6, 'Frepar' => 7, 'Paresp' => 8, 'Exoesp' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (FctipespPeer::TIPESP => 0, FctipespPeer::ANOVIG => 1, FctipespPeer::DESTIP => 2, FctipespPeer::PORMON => 3, FctipespPeer::ALIMON => 4, FctipespPeer::STATIP => 5, FctipespPeer::UNIPAR => 6, FctipespPeer::FREPAR => 7, FctipespPeer::PARESP => 8, FctipespPeer::EXOESP => 9, FctipespPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('tipesp' => 0, 'anovig' => 1, 'destip' => 2, 'pormon' => 3, 'alimon' => 4, 'statip' => 5, 'unipar' => 6, 'frepar' => 7, 'paresp' => 8, 'exoesp' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -126,7 +135,13 @@ abstract class BaseFctipespPeer {
 
 		$criteria->addSelectColumn(FctipespPeer::STATIP);
 
-		$criteria->addSelectColumn(FctipespPeer::MINTRI);
+		$criteria->addSelectColumn(FctipespPeer::UNIPAR);
+
+		$criteria->addSelectColumn(FctipespPeer::FREPAR);
+
+		$criteria->addSelectColumn(FctipespPeer::PARESP);
+
+		$criteria->addSelectColumn(FctipespPeer::EXOESP);
 
 		$criteria->addSelectColumn(FctipespPeer::ID);
 
@@ -230,6 +245,7 @@ abstract class BaseFctipespPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FctipespPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

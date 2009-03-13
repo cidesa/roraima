@@ -29,6 +29,14 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 
 
 	
+	protected $codalm;
+
+
+	
+	protected $codubi;
+
+
+	
 	protected $id;
 
 	
@@ -37,131 +45,197 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRcpart()
-	{
+  
+  public function getRcpart()
+  {
 
-		return $this->rcpart; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->rcpart);
 
-		return $this->codart; 		
-	}
-	
-	public function getCanrec()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return number_format($this->canrec,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    return trim($this->codart);
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getCosart()
-	{
+  }
+  
+  public function getCanrec($val=false)
+  {
 
-		return number_format($this->cosart,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->canrec,2,',','.');
+    else return $this->canrec;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMontot($val=false)
+  {
+
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
+
+  }
+  
+  public function getCosart($val=false)
+  {
+
+    if($val) return number_format($this->cosart,2,',','.');
+    else return $this->cosart;
+
+  }
+  
+  public function getCodalm()
+  {
+
+    return trim($this->codalm);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRcpart($v)
 	{
 
-		if ($this->rcpart !== $v) {
-			$this->rcpart = $v;
-			$this->modifiedColumns[] = CadetentPeer::RCPART;
-		}
-
+    if ($this->rcpart !== $v) {
+        $this->rcpart = $v;
+        $this->modifiedColumns[] = CadetentPeer::RCPART;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CadetentPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CadetentPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCanrec($v)
 	{
 
-		if ($this->canrec !== $v) {
-			$this->canrec = $v;
-			$this->modifiedColumns[] = CadetentPeer::CANREC;
-		}
-
+    if ($this->canrec !== $v) {
+        $this->canrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetentPeer::CANREC;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CadetentPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetentPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setCosart($v)
 	{
 
-		if ($this->cosart !== $v) {
-			$this->cosart = $v;
-			$this->modifiedColumns[] = CadetentPeer::COSART;
-		}
+    if ($this->cosart !== $v) {
+        $this->cosart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetentPeer::COSART;
+      }
+  
+	} 
+	
+	public function setCodalm($v)
+	{
 
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CadetentPeer::CODALM;
+      }
+  
+	} 
+	
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CadetentPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadetentPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadetentPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->rcpart = $rs->getString($startcol + 0);
+      $this->rcpart = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->canrec = $rs->getFloat($startcol + 2);
+      $this->canrec = $rs->getFloat($startcol + 2);
 
-			$this->montot = $rs->getFloat($startcol + 3);
+      $this->montot = $rs->getFloat($startcol + 3);
 
-			$this->cosart = $rs->getFloat($startcol + 4);
+      $this->cosart = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->codalm = $rs->getString($startcol + 5);
 
-			$this->resetModified();
+      $this->codubi = $rs->getString($startcol + 6);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 7);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadetent object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadetent object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -218,6 +292,7 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CadetentPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadetentPeer::doUpdate($this, $con);
@@ -299,6 +374,12 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				return $this->getCosart();
 				break;
 			case 5:
+				return $this->getCodalm();
+				break;
+			case 6:
+				return $this->getCodubi();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -316,7 +397,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 			$keys[2] => $this->getCanrec(),
 			$keys[3] => $this->getMontot(),
 			$keys[4] => $this->getCosart(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getCodalm(),
+			$keys[6] => $this->getCodubi(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
@@ -348,6 +431,12 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 				$this->setCosart($value);
 				break;
 			case 5:
+				$this->setCodalm($value);
+				break;
+			case 6:
+				$this->setCodubi($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -362,7 +451,9 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setCanrec($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMontot($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCosart($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodalm($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCodubi($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
 	
@@ -375,6 +466,8 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadetentPeer::CANREC)) $criteria->add(CadetentPeer::CANREC, $this->canrec);
 		if ($this->isColumnModified(CadetentPeer::MONTOT)) $criteria->add(CadetentPeer::MONTOT, $this->montot);
 		if ($this->isColumnModified(CadetentPeer::COSART)) $criteria->add(CadetentPeer::COSART, $this->cosart);
+		if ($this->isColumnModified(CadetentPeer::CODALM)) $criteria->add(CadetentPeer::CODALM, $this->codalm);
+		if ($this->isColumnModified(CadetentPeer::CODUBI)) $criteria->add(CadetentPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CadetentPeer::ID)) $criteria->add(CadetentPeer::ID, $this->id);
 
 		return $criteria;
@@ -415,6 +508,10 @@ abstract class BaseCadetent extends BaseObject  implements Persistent {
 		$copyObj->setMontot($this->montot);
 
 		$copyObj->setCosart($this->cosart);
+
+		$copyObj->setCodalm($this->codalm);
+
+		$copyObj->setCodubi($this->codubi);
 
 
 		$copyObj->setNew(true);

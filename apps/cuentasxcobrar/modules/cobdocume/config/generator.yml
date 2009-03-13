@@ -1,0 +1,49 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cobdocume
+    theme:            cidesaGenerator
+    fields:
+      codcli: { name: Código Cliente }
+      nompro: { name: Nombre }
+      rifpro: { name: C.I. o R.I.F. }
+      refdoc: { name: Referencia, params: size=12 maxlength=10 onBlur="this.value=this.value.pad(10, '0',0);" }
+      fecemi: { name: Fecha Emisión, params:  size=10 maxlength=10 onkeyup= "mascara(this,'/',patron,true)" }
+      fecven: { name: Feha de Vencimiento, params: size=10 maxlength=10 onkeyup= "mascara(this,'/',patron,true)"}
+      fatipmov_id: { name: Tipo de Movimiento }
+      desdoc: { name: Descripción, type: textarea_tag, params: size=80x5 maxlength=1000 onkeyup="ismaxlength(this)"}
+      mondoc: { name: Saldo Original, params: onBlur="event.keyCode=13; formatoDecimal(event,this.id); toAjax(2,getUrlModulo()+'ajax',this.value,'','&codcli='+$('cobdocume_codcli').value+'')" }
+      recdoc: { name: Recargos }
+      dscdoc: { name: Descuentos }
+      abodoc: { name: Abonos }
+      saldoc: { name: Saldo Actual }
+      grid_recargos: { name: . }
+      grid_descuentos: { name: . }
+
+    list:
+      title: Cobranzas-Documentos
+      display: [=refdoc, desdoc, fecemi, codcli, nompro ]
+      filters: [refdoc, fecemi, codcli]
+      fields:
+        fecemi:
+          params: date_format='dd/MM/yyyy'
+      object_actions:
+       _edit:        ~
+       _delete:      ~
+      max_per_page:	  10
+      sort:    refdoc
+
+    edit:
+      title:  Cobranzas-Documentos
+      display:
+        "Datos del Cliente": [_codcli, rifpro]
+        "Datos del Documento": [refdoc, _fatipmov_id, fecemi, fecven, desdoc]
+        "Saldos": [mondoc, recdoc, dscdoc, abodoc, saldoc ]
+        "Recargos": [ _grid_recargos ]
+        "Descuentos": [ _grid_descuentos ]
+
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

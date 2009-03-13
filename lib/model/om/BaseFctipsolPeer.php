@@ -240,6 +240,7 @@ abstract class BaseFctipsolPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FctipsolPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

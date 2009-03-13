@@ -1,40 +1,42 @@
 <?php
 
 
-	
+
 class CadphartserMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CadphartserMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CadphartserMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cadphartser');
 		$tMap->setPhpName('Cadphartser');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('cadphartser_SEQ');
 
 		$tMap->addColumn('DPHART', 'Dphart', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECDPH', 'Fecdph', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECDPH', 'Fecdph', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('REQART', 'Reqart', 'string', CreoleTypes::VARCHAR, true, 8);
 
@@ -45,6 +47,6 @@ class CadphartserMapBuilder {
 		$tMap->addColumn('STADPH', 'Stadph', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

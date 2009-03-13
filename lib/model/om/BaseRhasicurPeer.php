@@ -215,6 +215,7 @@ abstract class BaseRhasicurPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(RhasicurPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

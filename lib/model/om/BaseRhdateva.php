@@ -41,215 +41,241 @@ abstract class BaseRhdateva extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodevdo()
-	{
+  
+  public function getCodevdo()
+  {
 
-		return $this->codevdo; 		
-	}
-	
-	public function getCodevor()
-	{
+    return trim($this->codevdo);
 
-		return $this->codevor; 		
-	}
-	
-	public function getCodsup()
-	{
+  }
+  
+  public function getCodevor()
+  {
 
-		return $this->codsup; 		
-	}
-	
-	public function getFecdes($format = 'Y-m-d')
-	{
+    return trim($this->codevor);
 
-		if ($this->fecdes === null || $this->fecdes === '') {
-			return null;
-		} elseif (!is_int($this->fecdes)) {
-						$ts = strtotime($this->fecdes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
-			}
-		} else {
-			$ts = $this->fecdes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodsup()
+  {
 
-	
-	public function getFechas($format = 'Y-m-d')
-	{
+    return trim($this->codsup);
 
-		if ($this->fechas === null || $this->fechas === '') {
-			return null;
-		} elseif (!is_int($this->fechas)) {
-						$ts = strtotime($this->fechas);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechas] as date/time value: " . var_export($this->fechas, true));
-			}
-		} else {
-			$ts = $this->fechas;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecdes($format = 'Y-m-d')
+  {
 
-	
-	public function getFecela($format = 'Y-m-d')
-	{
+    if ($this->fecdes === null || $this->fecdes === '') {
+      return null;
+    } elseif (!is_int($this->fecdes)) {
+            $ts = adodb_strtotime($this->fecdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
+      }
+    } else {
+      $ts = $this->fecdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecela === null || $this->fecela === '') {
-			return null;
-		} elseif (!is_int($this->fecela)) {
-						$ts = strtotime($this->fecela);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecela] as date/time value: " . var_export($this->fecela, true));
-			}
-		} else {
-			$ts = $this->fecela;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFechas($format = 'Y-m-d')
+  {
 
-	
-	public function getId()
-	{
+    if ($this->fechas === null || $this->fechas === '') {
+      return null;
+    } elseif (!is_int($this->fechas)) {
+            $ts = adodb_strtotime($this->fechas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechas] as date/time value: " . var_export($this->fechas, true));
+      }
+    } else {
+      $ts = $this->fechas;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getFecela($format = 'Y-m-d')
+  {
+
+    if ($this->fecela === null || $this->fecela === '') {
+      return null;
+    } elseif (!is_int($this->fecela)) {
+            $ts = adodb_strtotime($this->fecela);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecela] as date/time value: " . var_export($this->fecela, true));
+      }
+    } else {
+      $ts = $this->fecela;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodevdo($v)
 	{
 
-		if ($this->codevdo !== $v) {
-			$this->codevdo = $v;
-			$this->modifiedColumns[] = RhdatevaPeer::CODEVDO;
-		}
-
+    if ($this->codevdo !== $v) {
+        $this->codevdo = $v;
+        $this->modifiedColumns[] = RhdatevaPeer::CODEVDO;
+      }
+  
 	} 
 	
 	public function setCodevor($v)
 	{
 
-		if ($this->codevor !== $v) {
-			$this->codevor = $v;
-			$this->modifiedColumns[] = RhdatevaPeer::CODEVOR;
-		}
-
+    if ($this->codevor !== $v) {
+        $this->codevor = $v;
+        $this->modifiedColumns[] = RhdatevaPeer::CODEVOR;
+      }
+  
 	} 
 	
 	public function setCodsup($v)
 	{
 
-		if ($this->codsup !== $v) {
-			$this->codsup = $v;
-			$this->modifiedColumns[] = RhdatevaPeer::CODSUP;
-		}
-
+    if ($this->codsup !== $v) {
+        $this->codsup = $v;
+        $this->modifiedColumns[] = RhdatevaPeer::CODSUP;
+      }
+  
 	} 
 	
 	public function setFecdes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdes !== $ts) {
-			$this->fecdes = $ts;
-			$this->modifiedColumns[] = RhdatevaPeer::FECDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdes !== $ts) {
+      $this->fecdes = $ts;
+      $this->modifiedColumns[] = RhdatevaPeer::FECDES;
+    }
 
 	} 
 	
 	public function setFechas($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechas] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechas !== $ts) {
-			$this->fechas = $ts;
-			$this->modifiedColumns[] = RhdatevaPeer::FECHAS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechas !== $ts) {
+      $this->fechas = $ts;
+      $this->modifiedColumns[] = RhdatevaPeer::FECHAS;
+    }
 
 	} 
 	
 	public function setFecela($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecela] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecela !== $ts) {
-			$this->fecela = $ts;
-			$this->modifiedColumns[] = RhdatevaPeer::FECELA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecela] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecela !== $ts) {
+      $this->fecela = $ts;
+      $this->modifiedColumns[] = RhdatevaPeer::FECELA;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhdatevaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhdatevaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codevdo = $rs->getString($startcol + 0);
+      $this->codevdo = $rs->getString($startcol + 0);
 
-			$this->codevor = $rs->getString($startcol + 1);
+      $this->codevor = $rs->getString($startcol + 1);
 
-			$this->codsup = $rs->getString($startcol + 2);
+      $this->codsup = $rs->getString($startcol + 2);
 
-			$this->fecdes = $rs->getDate($startcol + 3, null);
+      $this->fecdes = $rs->getDate($startcol + 3, null);
 
-			$this->fechas = $rs->getDate($startcol + 4, null);
+      $this->fechas = $rs->getDate($startcol + 4, null);
 
-			$this->fecela = $rs->getDate($startcol + 5, null);
+      $this->fecela = $rs->getDate($startcol + 5, null);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhdateva object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhdateva object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -306,6 +332,7 @@ abstract class BaseRhdateva extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhdatevaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhdatevaPeer::doUpdate($this, $con);

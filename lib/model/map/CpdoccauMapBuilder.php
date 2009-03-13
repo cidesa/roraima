@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class CpdoccauMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CpdoccauMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CpdoccauMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cpdoccau');
 		$tMap->setPhpName('Cpdoccau');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('cpdoccau_SEQ');
 
 		$tMap->addColumn('TIPCAU', 'Tipcau', 'string', CreoleTypes::VARCHAR, true, 4);
 
@@ -49,6 +51,6 @@ class CpdoccauMapBuilder {
 		$tMap->addColumn('AFEDIS', 'Afedis', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

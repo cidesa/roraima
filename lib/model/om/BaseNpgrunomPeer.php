@@ -225,6 +225,7 @@ abstract class BaseNpgrunomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpgrunomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

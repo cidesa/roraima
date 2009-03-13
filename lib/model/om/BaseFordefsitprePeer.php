@@ -205,6 +205,7 @@ abstract class BaseFordefsitprePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefsitprePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

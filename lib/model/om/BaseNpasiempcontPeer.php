@@ -220,6 +220,7 @@ abstract class BaseNpasiempcontPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpasiempcontPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

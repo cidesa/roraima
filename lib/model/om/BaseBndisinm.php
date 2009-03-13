@@ -69,319 +69,353 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodmue()
-	{
+    return trim($this->codact);
 
-		return $this->codmue; 		
-	}
-	
-	public function getNrodisinm()
-	{
+  }
+  
+  public function getCodmue()
+  {
 
-		return $this->nrodisinm; 		
-	}
-	
-	public function getMotdisinm()
-	{
+    return trim($this->codmue);
 
-		return $this->motdisinm; 		
-	}
-	
-	public function getTipdisinm()
-	{
+  }
+  
+  public function getNrodisinm()
+  {
 
-		return $this->tipdisinm; 		
-	}
-	
-	public function getFecdisinm($format = 'Y-m-d')
-	{
+    return trim($this->nrodisinm);
 
-		if ($this->fecdisinm === null || $this->fecdisinm === '') {
-			return null;
-		} elseif (!is_int($this->fecdisinm)) {
-						$ts = strtotime($this->fecdisinm);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdisinm] as date/time value: " . var_export($this->fecdisinm, true));
-			}
-		} else {
-			$ts = $this->fecdisinm;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMotdisinm()
+  {
 
-	
-	public function getFecdevdis($format = 'Y-m-d')
-	{
+    return trim($this->motdisinm);
 
-		if ($this->fecdevdis === null || $this->fecdevdis === '') {
-			return null;
-		} elseif (!is_int($this->fecdevdis)) {
-						$ts = strtotime($this->fecdevdis);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdevdis] as date/time value: " . var_export($this->fecdevdis, true));
-			}
-		} else {
-			$ts = $this->fecdevdis;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getTipdisinm()
+  {
 
-	
-	public function getMondisinm()
-	{
+    return trim($this->tipdisinm);
 
-		return number_format($this->mondisinm,2,',','.');
-		
-	}
-	
-	public function getDetdisinm()
-	{
+  }
+  
+  public function getFecdisinm($format = 'Y-m-d')
+  {
 
-		return $this->detdisinm; 		
-	}
-	
-	public function getCodubiori()
-	{
+    if ($this->fecdisinm === null || $this->fecdisinm === '') {
+      return null;
+    } elseif (!is_int($this->fecdisinm)) {
+            $ts = adodb_strtotime($this->fecdisinm);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdisinm] as date/time value: " . var_export($this->fecdisinm, true));
+      }
+    } else {
+      $ts = $this->fecdisinm;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codubiori; 		
-	}
-	
-	public function getCodubides()
-	{
+  
+  public function getFecdevdis($format = 'Y-m-d')
+  {
 
-		return $this->codubides; 		
-	}
-	
-	public function getObsdisinm()
-	{
+    if ($this->fecdevdis === null || $this->fecdevdis === '') {
+      return null;
+    } elseif (!is_int($this->fecdevdis)) {
+            $ts = adodb_strtotime($this->fecdevdis);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdevdis] as date/time value: " . var_export($this->fecdevdis, true));
+      }
+    } else {
+      $ts = $this->fecdevdis;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->obsdisinm; 		
-	}
-	
-	public function getStadisinm()
-	{
+  
+  public function getMondisinm($val=false)
+  {
 
-		return $this->stadisinm; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->mondisinm,2,',','.');
+    else return $this->mondisinm;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDetdisinm()
+  {
+
+    return trim($this->detdisinm);
+
+  }
+  
+  public function getCodubiori()
+  {
+
+    return trim($this->codubiori);
+
+  }
+  
+  public function getCodubides()
+  {
+
+    return trim($this->codubides);
+
+  }
+  
+  public function getObsdisinm()
+  {
+
+    return trim($this->obsdisinm);
+
+  }
+  
+  public function getStadisinm()
+  {
+
+    return trim($this->stadisinm);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BndisinmPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BndisinmPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodmue($v)
 	{
 
-		if ($this->codmue !== $v) {
-			$this->codmue = $v;
-			$this->modifiedColumns[] = BndisinmPeer::CODMUE;
-		}
-
+    if ($this->codmue !== $v) {
+        $this->codmue = $v;
+        $this->modifiedColumns[] = BndisinmPeer::CODMUE;
+      }
+  
 	} 
 	
 	public function setNrodisinm($v)
 	{
 
-		if ($this->nrodisinm !== $v) {
-			$this->nrodisinm = $v;
-			$this->modifiedColumns[] = BndisinmPeer::NRODISINM;
-		}
-
+    if ($this->nrodisinm !== $v) {
+        $this->nrodisinm = $v;
+        $this->modifiedColumns[] = BndisinmPeer::NRODISINM;
+      }
+  
 	} 
 	
 	public function setMotdisinm($v)
 	{
 
-		if ($this->motdisinm !== $v) {
-			$this->motdisinm = $v;
-			$this->modifiedColumns[] = BndisinmPeer::MOTDISINM;
-		}
-
+    if ($this->motdisinm !== $v) {
+        $this->motdisinm = $v;
+        $this->modifiedColumns[] = BndisinmPeer::MOTDISINM;
+      }
+  
 	} 
 	
 	public function setTipdisinm($v)
 	{
 
-		if ($this->tipdisinm !== $v) {
-			$this->tipdisinm = $v;
-			$this->modifiedColumns[] = BndisinmPeer::TIPDISINM;
-		}
-
+    if ($this->tipdisinm !== $v) {
+        $this->tipdisinm = $v;
+        $this->modifiedColumns[] = BndisinmPeer::TIPDISINM;
+      }
+  
 	} 
 	
 	public function setFecdisinm($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdisinm] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdisinm !== $ts) {
-			$this->fecdisinm = $ts;
-			$this->modifiedColumns[] = BndisinmPeer::FECDISINM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdisinm] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdisinm !== $ts) {
+      $this->fecdisinm = $ts;
+      $this->modifiedColumns[] = BndisinmPeer::FECDISINM;
+    }
 
 	} 
 	
 	public function setFecdevdis($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdevdis] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdevdis !== $ts) {
-			$this->fecdevdis = $ts;
-			$this->modifiedColumns[] = BndisinmPeer::FECDEVDIS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdevdis] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdevdis !== $ts) {
+      $this->fecdevdis = $ts;
+      $this->modifiedColumns[] = BndisinmPeer::FECDEVDIS;
+    }
 
 	} 
 	
 	public function setMondisinm($v)
 	{
 
-		if ($this->mondisinm !== $v) {
-			$this->mondisinm = $v;
-			$this->modifiedColumns[] = BndisinmPeer::MONDISINM;
-		}
-
+    if ($this->mondisinm !== $v) {
+        $this->mondisinm = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndisinmPeer::MONDISINM;
+      }
+  
 	} 
 	
 	public function setDetdisinm($v)
 	{
 
-		if ($this->detdisinm !== $v) {
-			$this->detdisinm = $v;
-			$this->modifiedColumns[] = BndisinmPeer::DETDISINM;
-		}
-
+    if ($this->detdisinm !== $v) {
+        $this->detdisinm = $v;
+        $this->modifiedColumns[] = BndisinmPeer::DETDISINM;
+      }
+  
 	} 
 	
 	public function setCodubiori($v)
 	{
 
-		if ($this->codubiori !== $v) {
-			$this->codubiori = $v;
-			$this->modifiedColumns[] = BndisinmPeer::CODUBIORI;
-		}
-
+    if ($this->codubiori !== $v) {
+        $this->codubiori = $v;
+        $this->modifiedColumns[] = BndisinmPeer::CODUBIORI;
+      }
+  
 	} 
 	
 	public function setCodubides($v)
 	{
 
-		if ($this->codubides !== $v) {
-			$this->codubides = $v;
-			$this->modifiedColumns[] = BndisinmPeer::CODUBIDES;
-		}
-
+    if ($this->codubides !== $v) {
+        $this->codubides = $v;
+        $this->modifiedColumns[] = BndisinmPeer::CODUBIDES;
+      }
+  
 	} 
 	
 	public function setObsdisinm($v)
 	{
 
-		if ($this->obsdisinm !== $v) {
-			$this->obsdisinm = $v;
-			$this->modifiedColumns[] = BndisinmPeer::OBSDISINM;
-		}
-
+    if ($this->obsdisinm !== $v) {
+        $this->obsdisinm = $v;
+        $this->modifiedColumns[] = BndisinmPeer::OBSDISINM;
+      }
+  
 	} 
 	
 	public function setStadisinm($v)
 	{
 
-		if ($this->stadisinm !== $v) {
-			$this->stadisinm = $v;
-			$this->modifiedColumns[] = BndisinmPeer::STADISINM;
-		}
-
+    if ($this->stadisinm !== $v) {
+        $this->stadisinm = $v;
+        $this->modifiedColumns[] = BndisinmPeer::STADISINM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndisinmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndisinmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->codmue = $rs->getString($startcol + 1);
+      $this->codmue = $rs->getString($startcol + 1);
 
-			$this->nrodisinm = $rs->getString($startcol + 2);
+      $this->nrodisinm = $rs->getString($startcol + 2);
 
-			$this->motdisinm = $rs->getString($startcol + 3);
+      $this->motdisinm = $rs->getString($startcol + 3);
 
-			$this->tipdisinm = $rs->getString($startcol + 4);
+      $this->tipdisinm = $rs->getString($startcol + 4);
 
-			$this->fecdisinm = $rs->getDate($startcol + 5, null);
+      $this->fecdisinm = $rs->getDate($startcol + 5, null);
 
-			$this->fecdevdis = $rs->getDate($startcol + 6, null);
+      $this->fecdevdis = $rs->getDate($startcol + 6, null);
 
-			$this->mondisinm = $rs->getFloat($startcol + 7);
+      $this->mondisinm = $rs->getFloat($startcol + 7);
 
-			$this->detdisinm = $rs->getString($startcol + 8);
+      $this->detdisinm = $rs->getString($startcol + 8);
 
-			$this->codubiori = $rs->getString($startcol + 9);
+      $this->codubiori = $rs->getString($startcol + 9);
 
-			$this->codubides = $rs->getString($startcol + 10);
+      $this->codubides = $rs->getString($startcol + 10);
 
-			$this->obsdisinm = $rs->getString($startcol + 11);
+      $this->obsdisinm = $rs->getString($startcol + 11);
 
-			$this->stadisinm = $rs->getString($startcol + 12);
+      $this->stadisinm = $rs->getString($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bndisinm object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bndisinm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -438,6 +472,7 @@ abstract class BaseBndisinm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BndisinmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BndisinmPeer::doUpdate($this, $con);

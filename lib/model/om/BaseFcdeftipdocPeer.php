@@ -210,6 +210,7 @@ abstract class BaseFcdeftipdocPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdeftipdocPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

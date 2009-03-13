@@ -9,113 +9,13 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($npempleados_banco, 'getId') ?>
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-
+<legend><?php echo __('Tipos De Nominas')?></legend>
 <div class="form-row">
-  <?php echo label_for('npempleados_banco[codemp]', __($labels['npempleados_banco{codemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npempleados_banco{codemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npempleados_banco{codemp}')): ?>
-    <?php echo form_error('npempleados_banco{codemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npempleados_banco, 'getCodemp', array (
-  'size' => 10,
-  'control_name' => 'npempleados_banco[codemp]',
-  'maxlength' => '10,',
-  )); echo $value ? $value : '&nbsp;' ?> 
-  &nbsp; <?php echo button_to('...','#')?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npempleados_banco[nomemp]', __($labels['npempleados_banco{nomemp}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('npempleados_banco{nomemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npempleados_banco{nomemp}')): ?>
-    <?php echo form_error('npempleados_banco{nomemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npempleados_banco, 'getNomemp', array (
-  'disabled' => true,
-  'control_name' => 'npempleados_banco[nomemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npempleados_banco[codban]', __($labels['npempleados_banco{codban}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('npempleados_banco{codban}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npempleados_banco{codban}')): ?>
-    <?php echo form_error('npempleados_banco{codban}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npempleados_banco, 'getCodban', array (
-  'size' => 100,
-  'control_name' => 'npempleados_banco[codban]',
-  )); echo $value ? $value : '&nbsp;' ?> 
-  &nbsp; <?php echo button_to('...','#')?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npempleados_banco[nomban]', __($labels['npempleados_banco{nomban}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('npempleados_banco{nomban}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npempleados_banco{nomban}')): ?>
-    <?php echo form_error('npempleados_banco{nomban}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npempleados_banco, 'getNomban', array (
-  'disabled' => true,
-  'control_name' => 'npempleados_banco[nomban]',
-  'size' => 100,
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npempleados_banco[codempant]', __($labels['npempleados_banco{codempant}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('npempleados_banco{codempant}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npempleados_banco{codempant}')): ?>
-    <?php echo form_error('npempleados_banco{codempant}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npempleados_banco, 'getCodempant', array (
-  'size' => 20,
-  'control_name' => 'npempleados_banco[codempant]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npempleados_banco[codban]', __($labels['npempleados_banco{codban}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('npempleados_banco{codban}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npempleados_banco{codban}')): ?>
-    <?php echo form_error('npempleados_banco{codban}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npempleados_banco, 'getCodban', array (
-  'size' => 100,
-  'control_name' => 'npempleados_banco[codban]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npempleados_banco[cuenta_banco]', __($labels['npempleados_banco{cuenta_banco}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('npempleados_banco{cuenta_banco}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npempleados_banco{cuenta_banco}')): ?>
-    <?php echo form_error('npempleados_banco{cuenta_banco}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npempleados_banco, 'getCuentaBanco', array (
-  'size' => 20,
-  'control_name' => 'npempleados_banco[cuenta_banco]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npempleados_banco[codnom]', __($labels['npempleados_banco{codnom}']), '') ?>
+  <?php echo label_for('npempleados_banco[codnom]', __($labels['npempleados_banco{codnom}']),'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npempleados_banco{codnom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npempleados_banco{codnom}')): ?>
     <?php echo form_error('npempleados_banco{codnom}', array('class' => 'form-error-msg')) ?>
@@ -123,23 +23,38 @@
 
   <?php $value = object_input_tag($npempleados_banco, 'getCodnom', array (
   'size' => 20,
+  'readonly' => $npempleados_banco->getId()!='' ? true : false ,
   'control_name' => 'npempleados_banco[codnom]',
+  'onBlur'=> remote_function(array(
+        'update'   => 'grid',
+        'condition' => "$('npempleados_banco_codnom').value!=''",
+        'url'      => 'empleadosbanco/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=npempleados_banco_desnom&cajtexcom=npempleados_banco_codnom&codigo='+this.value",
+        )),
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
+&nbsp;&nbsp;&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Empleadobanco_Npnomina/clase/Npnomina/frame/sf_admin_edit_form/obj1/npempleados_banco_codnom/obj2/npempleados_banco_desnom/campo1/codnom/campo2/nomnom/param1/')?>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<?php $value = object_input_tag($npempleados_banco, 'getDesnom', array (
+  'size' => 30,  
+  'readonly' => $npempleados_banco->getId()!='' ? true : false ,
+  'control_name' => 'npempleados_banco[desnom]',
+)); echo $value ? $value : '&nbsp;' ?></div>
 </div>
 
+<div id="grid" class="form-row">
+<?
+echo grid_tag($obj);
+?>
+</div>
+
+
 </fieldset>
+
 
 <?php include_partial('edit_actions', array('npempleados_banco' => $npempleados_banco)) ?>
 
 </form>
 
-<ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($npempleados_banco->getId()): ?>
-<?php echo button_to(__('delete'), 'empleadosbanco/delete?id='.$npempleados_banco->getId(), array (
-  'post' => true,
-  'confirm' => __('Are you sure?'),
-  'class' => 'sf_admin_action_delete',
-)) ?><?php endif; ?>
-</li>
-  </ul>

@@ -49,207 +49,237 @@ abstract class BaseFcdecpag extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumpag()
-	{
+  
+  public function getNumpag()
+  {
 
-		return $this->numpag; 		
-	}
-	
-	public function getNumdec()
-	{
+    return trim($this->numpag);
 
-		return $this->numdec; 		
-	}
-	
-	public function getNumref()
-	{
+  }
+  
+  public function getNumdec()
+  {
 
-		return $this->numref; 		
-	}
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+    return trim($this->numdec);
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getNumref()
+  {
 
-	
-	public function getMondec()
-	{
+    return trim($this->numref);
 
-		return number_format($this->mondec,2,',','.');
-		
-	}
-	
-	public function getNumero()
-	{
+  }
+  
+  public function getFecven($format = 'Y-m-d')
+  {
 
-		return $this->numero; 		
-	}
-	
-	public function getFueing()
-	{
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->fueing; 		
-	}
-	
-	public function getMonpag()
-	{
+  
+  public function getMondec($val=false)
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->mondec,2,',','.');
+    else return $this->mondec;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumero()
+  {
+
+    return trim($this->numero);
+
+  }
+  
+  public function getFueing()
+  {
+
+    return trim($this->fueing);
+
+  }
+  
+  public function getMonpag($val=false)
+  {
+
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumpag($v)
 	{
 
-		if ($this->numpag !== $v) {
-			$this->numpag = $v;
-			$this->modifiedColumns[] = FcdecpagPeer::NUMPAG;
-		}
-
+    if ($this->numpag !== $v) {
+        $this->numpag = $v;
+        $this->modifiedColumns[] = FcdecpagPeer::NUMPAG;
+      }
+  
 	} 
 	
 	public function setNumdec($v)
 	{
 
-		if ($this->numdec !== $v) {
-			$this->numdec = $v;
-			$this->modifiedColumns[] = FcdecpagPeer::NUMDEC;
-		}
-
+    if ($this->numdec !== $v) {
+        $this->numdec = $v;
+        $this->modifiedColumns[] = FcdecpagPeer::NUMDEC;
+      }
+  
 	} 
 	
 	public function setNumref($v)
 	{
 
-		if ($this->numref !== $v) {
-			$this->numref = $v;
-			$this->modifiedColumns[] = FcdecpagPeer::NUMREF;
-		}
-
+    if ($this->numref !== $v) {
+        $this->numref = $v;
+        $this->modifiedColumns[] = FcdecpagPeer::NUMREF;
+      }
+  
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = FcdecpagPeer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = FcdecpagPeer::FECVEN;
+    }
 
 	} 
 	
 	public function setMondec($v)
 	{
 
-		if ($this->mondec !== $v) {
-			$this->mondec = $v;
-			$this->modifiedColumns[] = FcdecpagPeer::MONDEC;
-		}
-
+    if ($this->mondec !== $v) {
+        $this->mondec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdecpagPeer::MONDEC;
+      }
+  
 	} 
 	
 	public function setNumero($v)
 	{
 
-		if ($this->numero !== $v) {
-			$this->numero = $v;
-			$this->modifiedColumns[] = FcdecpagPeer::NUMERO;
-		}
-
+    if ($this->numero !== $v) {
+        $this->numero = $v;
+        $this->modifiedColumns[] = FcdecpagPeer::NUMERO;
+      }
+  
 	} 
 	
 	public function setFueing($v)
 	{
 
-		if ($this->fueing !== $v) {
-			$this->fueing = $v;
-			$this->modifiedColumns[] = FcdecpagPeer::FUEING;
-		}
-
+    if ($this->fueing !== $v) {
+        $this->fueing = $v;
+        $this->modifiedColumns[] = FcdecpagPeer::FUEING;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = FcdecpagPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdecpagPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdecpagPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdecpagPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numpag = $rs->getString($startcol + 0);
+      $this->numpag = $rs->getString($startcol + 0);
 
-			$this->numdec = $rs->getString($startcol + 1);
+      $this->numdec = $rs->getString($startcol + 1);
 
-			$this->numref = $rs->getString($startcol + 2);
+      $this->numref = $rs->getString($startcol + 2);
 
-			$this->fecven = $rs->getDate($startcol + 3, null);
+      $this->fecven = $rs->getDate($startcol + 3, null);
 
-			$this->mondec = $rs->getFloat($startcol + 4);
+      $this->mondec = $rs->getFloat($startcol + 4);
 
-			$this->numero = $rs->getString($startcol + 5);
+      $this->numero = $rs->getString($startcol + 5);
 
-			$this->fueing = $rs->getString($startcol + 6);
+      $this->fueing = $rs->getString($startcol + 6);
 
-			$this->monpag = $rs->getFloat($startcol + 7);
+      $this->monpag = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdecpag object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdecpag object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -306,6 +336,7 @@ abstract class BaseFcdecpag extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdecpagPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdecpagPeer::doUpdate($this, $con);

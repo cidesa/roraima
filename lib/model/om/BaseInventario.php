@@ -45,168 +45,198 @@ abstract class BaseInventario extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodart()
-	{
+  
+  public function getCodart()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getDescri()
-	{
+    return trim($this->codart);
 
-		return $this->descri; 		
-	}
-	
-	public function getCospro()
-	{
+  }
+  
+  public function getDescri()
+  {
 
-		return number_format($this->cospro,2,',','.');
-		
-	}
-	
-	public function getUnimed()
-	{
+    return trim($this->descri);
 
-		return $this->unimed; 		
-	}
-	
-	public function getConteo1()
-	{
+  }
+  
+  public function getCospro($val=false)
+  {
 
-		return number_format($this->conteo1,2,',','.');
-		
-	}
-	
-	public function getConteo2()
-	{
+    if($val) return number_format($this->cospro,2,',','.');
+    else return $this->cospro;
 
-		return number_format($this->conteo2,2,',','.');
-		
-	}
-	
-	public function getDife()
-	{
+  }
+  
+  public function getUnimed()
+  {
 
-		return number_format($this->dife,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->unimed);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getConteo1($val=false)
+  {
+
+    if($val) return number_format($this->conteo1,2,',','.');
+    else return $this->conteo1;
+
+  }
+  
+  public function getConteo2($val=false)
+  {
+
+    if($val) return number_format($this->conteo2,2,',','.');
+    else return $this->conteo2;
+
+  }
+  
+  public function getDife($val=false)
+  {
+
+    if($val) return number_format($this->dife,2,',','.');
+    else return $this->dife;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = InventarioPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = InventarioPeer::CODART;
+      }
+  
 	} 
 	
 	public function setDescri($v)
 	{
 
-		if ($this->descri !== $v) {
-			$this->descri = $v;
-			$this->modifiedColumns[] = InventarioPeer::DESCRI;
-		}
-
+    if ($this->descri !== $v) {
+        $this->descri = $v;
+        $this->modifiedColumns[] = InventarioPeer::DESCRI;
+      }
+  
 	} 
 	
 	public function setCospro($v)
 	{
 
-		if ($this->cospro !== $v) {
-			$this->cospro = $v;
-			$this->modifiedColumns[] = InventarioPeer::COSPRO;
-		}
-
+    if ($this->cospro !== $v) {
+        $this->cospro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = InventarioPeer::COSPRO;
+      }
+  
 	} 
 	
 	public function setUnimed($v)
 	{
 
-		if ($this->unimed !== $v) {
-			$this->unimed = $v;
-			$this->modifiedColumns[] = InventarioPeer::UNIMED;
-		}
-
+    if ($this->unimed !== $v) {
+        $this->unimed = $v;
+        $this->modifiedColumns[] = InventarioPeer::UNIMED;
+      }
+  
 	} 
 	
 	public function setConteo1($v)
 	{
 
-		if ($this->conteo1 !== $v || $v === 0) {
-			$this->conteo1 = $v;
-			$this->modifiedColumns[] = InventarioPeer::CONTEO1;
-		}
-
+    if ($this->conteo1 !== $v || $v === 0) {
+        $this->conteo1 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = InventarioPeer::CONTEO1;
+      }
+  
 	} 
 	
 	public function setConteo2($v)
 	{
 
-		if ($this->conteo2 !== $v || $v === 0) {
-			$this->conteo2 = $v;
-			$this->modifiedColumns[] = InventarioPeer::CONTEO2;
-		}
-
+    if ($this->conteo2 !== $v || $v === 0) {
+        $this->conteo2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = InventarioPeer::CONTEO2;
+      }
+  
 	} 
 	
 	public function setDife($v)
 	{
 
-		if ($this->dife !== $v) {
-			$this->dife = $v;
-			$this->modifiedColumns[] = InventarioPeer::DIFE;
-		}
-
+    if ($this->dife !== $v) {
+        $this->dife = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = InventarioPeer::DIFE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = InventarioPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = InventarioPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codart = $rs->getString($startcol + 0);
+      $this->codart = $rs->getString($startcol + 0);
 
-			$this->descri = $rs->getString($startcol + 1);
+      $this->descri = $rs->getString($startcol + 1);
 
-			$this->cospro = $rs->getFloat($startcol + 2);
+      $this->cospro = $rs->getFloat($startcol + 2);
 
-			$this->unimed = $rs->getString($startcol + 3);
+      $this->unimed = $rs->getString($startcol + 3);
 
-			$this->conteo1 = $rs->getFloat($startcol + 4);
+      $this->conteo1 = $rs->getFloat($startcol + 4);
 
-			$this->conteo2 = $rs->getFloat($startcol + 5);
+      $this->conteo2 = $rs->getFloat($startcol + 5);
 
-			$this->dife = $rs->getFloat($startcol + 6);
+      $this->dife = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Inventario object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Inventario object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -1,40 +1,42 @@
 <?php
 
 
-	
+
 class OpfacturMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.OpfacturMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.OpfacturMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('opfactur');
 		$tMap->setPhpName('Opfactur');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('opfactur_SEQ');
 
 		$tMap->addColumn('NUMORD', 'Numord', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('FECFAC', 'Fecfac', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECFAC', 'Fecfac', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('NUMFAC', 'Numfac', 'string', CreoleTypes::VARCHAR, false, 50);
 
@@ -42,29 +44,29 @@ class OpfacturMapBuilder {
 
 		$tMap->addColumn('TIPTRA', 'Tiptra', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('TOTFAC', 'Totfac', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TOTFAC', 'Totfac', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('EXEIVA', 'Exeiva', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('EXEIVA', 'Exeiva', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('BASIMP', 'Basimp', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('BASIMP', 'Basimp', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('PORIVA', 'Poriva', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORIVA', 'Poriva', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('MONIVA', 'Moniva', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONIVA', 'Moniva', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('MONRET', 'Monret', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONRET', 'Monret', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('BASLTF', 'Basltf', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('BASLTF', 'Basltf', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('PORLTF', 'Porltf', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORLTF', 'Porltf', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('MONLTF', 'Monltf', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONLTF', 'Monltf', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('BASISLR', 'Basislr', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('BASISLR', 'Basislr', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('PORISLR', 'Porislr', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORISLR', 'Porislr', 'double', CreoleTypes::NUMERIC, false, 18);
 
-		$tMap->addColumn('MONISLR', 'Monislr', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONISLR', 'Monislr', 'double', CreoleTypes::NUMERIC, false, 18);
 
 		$tMap->addColumn('CODISLR', 'Codislr', 'string', CreoleTypes::VARCHAR, false, 50);
 
@@ -73,6 +75,6 @@ class OpfacturMapBuilder {
 		$tMap->addColumn('FACAFE', 'Facafe', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

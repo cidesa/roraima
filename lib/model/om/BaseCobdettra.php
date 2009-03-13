@@ -49,186 +49,217 @@ abstract class BaseCobdettra extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumtra()
-	{
+  
+  public function getNumtra()
+  {
 
-		return $this->numtra; 		
-	}
-	
-	public function getRefdoc()
-	{
+    return trim($this->numtra);
 
-		return $this->refdoc; 		
-	}
-	
-	public function getCodcli()
-	{
+  }
+  
+  public function getRefdoc()
+  {
 
-		return $this->codcli; 		
-	}
-	
-	public function getCorrel()
-	{
+    return trim($this->refdoc);
 
-		return $this->correl; 		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getCodcli()
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMondsc()
-	{
+    return trim($this->codcli);
 
-		return number_format($this->mondsc,2,',','.');
-		
-	}
-	
-	public function getMonrec()
-	{
+  }
+  
+  public function getCorrel()
+  {
 
-		return number_format($this->monrec,2,',','.');
-		
-	}
-	
-	public function getTotpag()
-	{
+    return trim($this->correl);
 
-		return number_format($this->totpag,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getMondsc($val=false)
+  {
+
+    if($val) return number_format($this->mondsc,2,',','.');
+    else return $this->mondsc;
+
+  }
+  
+  public function getMonrec($val=false)
+  {
+
+    if($val) return number_format($this->monrec,2,',','.');
+    else return $this->monrec;
+
+  }
+  
+  public function getTotpag($val=false)
+  {
+
+    if($val) return number_format($this->totpag,2,',','.');
+    else return $this->totpag;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumtra($v)
 	{
 
-		if ($this->numtra !== $v) {
-			$this->numtra = $v;
-			$this->modifiedColumns[] = CobdettraPeer::NUMTRA;
-		}
-
+    if ($this->numtra !== $v) {
+        $this->numtra = $v;
+        $this->modifiedColumns[] = CobdettraPeer::NUMTRA;
+      }
+  
 	} 
 	
 	public function setRefdoc($v)
 	{
 
-		if ($this->refdoc !== $v) {
-			$this->refdoc = $v;
-			$this->modifiedColumns[] = CobdettraPeer::REFDOC;
-		}
-
+    if ($this->refdoc !== $v) {
+        $this->refdoc = $v;
+        $this->modifiedColumns[] = CobdettraPeer::REFDOC;
+      }
+  
 	} 
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = CobdettraPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = CobdettraPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setCorrel($v)
 	{
 
-		if ($this->correl !== $v) {
-			$this->correl = $v;
-			$this->modifiedColumns[] = CobdettraPeer::CORREL;
-		}
-
+    if ($this->correl !== $v) {
+        $this->correl = $v;
+        $this->modifiedColumns[] = CobdettraPeer::CORREL;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = CobdettraPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobdettraPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMondsc($v)
 	{
 
-		if ($this->mondsc !== $v) {
-			$this->mondsc = $v;
-			$this->modifiedColumns[] = CobdettraPeer::MONDSC;
-		}
-
+    if ($this->mondsc !== $v) {
+        $this->mondsc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobdettraPeer::MONDSC;
+      }
+  
 	} 
 	
 	public function setMonrec($v)
 	{
 
-		if ($this->monrec !== $v) {
-			$this->monrec = $v;
-			$this->modifiedColumns[] = CobdettraPeer::MONREC;
-		}
-
+    if ($this->monrec !== $v) {
+        $this->monrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobdettraPeer::MONREC;
+      }
+  
 	} 
 	
 	public function setTotpag($v)
 	{
 
-		if ($this->totpag !== $v) {
-			$this->totpag = $v;
-			$this->modifiedColumns[] = CobdettraPeer::TOTPAG;
-		}
-
+    if ($this->totpag !== $v) {
+        $this->totpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobdettraPeer::TOTPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CobdettraPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CobdettraPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numtra = $rs->getString($startcol + 0);
+      $this->numtra = $rs->getString($startcol + 0);
 
-			$this->refdoc = $rs->getString($startcol + 1);
+      $this->refdoc = $rs->getString($startcol + 1);
 
-			$this->codcli = $rs->getString($startcol + 2);
+      $this->codcli = $rs->getString($startcol + 2);
 
-			$this->correl = $rs->getString($startcol + 3);
+      $this->correl = $rs->getString($startcol + 3);
 
-			$this->monpag = $rs->getFloat($startcol + 4);
+      $this->monpag = $rs->getFloat($startcol + 4);
 
-			$this->mondsc = $rs->getFloat($startcol + 5);
+      $this->mondsc = $rs->getFloat($startcol + 5);
 
-			$this->monrec = $rs->getFloat($startcol + 6);
+      $this->monrec = $rs->getFloat($startcol + 6);
 
-			$this->totpag = $rs->getFloat($startcol + 7);
+      $this->totpag = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cobdettra object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cobdettra object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -285,6 +316,7 @@ abstract class BaseCobdettra extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CobdettraPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CobdettraPeer::doUpdate($this, $con);

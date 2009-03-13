@@ -1,0 +1,81 @@
+opciones:                  # Opciones generales
+  name:                    p
+  eliminar:                true
+  tabla:                   viaregdetsolvia
+  anchogrid:               800
+  ancho:                   1280
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod/Ente
+  tipo:                    t
+  nombrecampo:             viaregente_id
+  esgrabable:              true
+  html:                    [ size="10"]
+2:       # Columna 2
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             desente
+  esgrabable:              false
+  html:                    [size="15", readonly=true ]
+3:       # Columna 3
+  titulo:                  Cod/Actividad
+  tipo:                    t
+  esgrabable:              true
+  nombrecampo:             viaregact_id
+  html:                    [size="10"]
+4:       # Columna 4
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             desact
+  esgrabable:              true
+  html:                    [size="15", readonly=true ]
+5:       # Columna 5
+  titulo:                  Destino/Ciudad
+  tipo:                    c
+  nombrecampo:             occiudad_id
+#  nombrecampo:             nomciu
+  esgrabable:              true
+  html:                    [ ]
+#  $this->columnas[1][12]->setHTML('onChange=toAjaxUpdater(obtenerColumnaSiguiente(this.id),3,getUrlModulo()+"ajax",this.value,"",{"objid" : ""+obtenerColumnaSiguiente(this.id) })');
+6:       # Columna 6
+  titulo:                  Moneda
+  tipo:                    c
+  nombrecampo:             codmon
+  esgrabable:              true
+  html:                    [ ]
+#  html:                    [ onChange=toAjaxUpdater(obtenerColumnaSiguiente(this.id),3,getUrlModulo()+"ajax",this.value,"",{"moneda" : ""+obtenerColumnaSiguiente(this.id) }) 	]
+7:       # Columna 7
+  titulo:                  Fecha Salida
+  tipo:                    f
+  nombrecampo:             fecha_sal
+  esgrabable:              true
+#  html:                    [size=10 onBlur=Calculo(this.id)]
+8:       # Columna 8
+  titulo:                  Fecha Regreso
+  tipo:                    f
+  nombrecampo:             fecha_reg
+  esgrabable:              true
+#  html:                    [size=10 onBlur=Calculo(this.id)]
+9:       # Columna 9
+  titulo:                  Num.Dias
+  tipo:                    m
+  nombrecampo:             num_dia
+  esgrabable:              false
+  oculta:                  true
+#  estotal:                 [true, 'viaregsolvia_monto']
+
+#  html:                    [size=10 onBlur=Calculo(this.id)]
+10:       # Columna 10
+  titulo:                  Gastos
+  tipo:                    t
+  esgrabable:              false
+  nombrecampo:             anadir
+  html:                    'type="text" size="1" style="border:none" class="imagenalmacen" onClick="mostrar(this.id)"'
+11:       # Columna 11
+  titulo:                  gastos
+  tipo:                    t
+  esgrabable:              true
+  oculta:                  true
+  nombrecampo:             gastos

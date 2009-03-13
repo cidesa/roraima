@@ -1,0 +1,66 @@
+methods:
+  post:
+   - "faajuste{refaju}"
+   - "faajuste{fecaju}"
+   - "faajuste{codref}"
+   - "faajuste{tipaju}"
+   - "faajuste{desaju}"
+   - "faajuste{obsaju}"
+
+names:
+  faajuste{refaju}:
+    required:  Yes
+    required_msg: El Número no puede estar en Blanco.
+
+  faajuste{fecaju}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  faajuste{tipaju}:
+    required:  Yes
+    required_msg: Seleccione Refiere a
+
+  faajuste{codref}:
+    required:  Yes
+    required_msg: El número de Referencia no puede estar en Blanco.
+
+  faajuste{desaju}:
+    required:  No
+    validators: DescripcionValidator
+
+  faajuste{obsaju}:
+    required:  No
+    validators: ObservacionValidator
+
+
+#FechaValidator:
+#    class:         CidesaDateNow
+#    param:
+#        compare: 'now'
+#        compare_error: La Fecha no puede ser menor a la Fecha Actual
+#        operator: '>='
+#        date_error:  Fecha Inválida
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       255
+        max_error: La descripción no puede tener más de 255 caracteres
+
+ObservacionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La observación no puede tener menos de 2 caracteres
+        max:       255
+        max_error: La observación no puede tener más de 255 caracteres

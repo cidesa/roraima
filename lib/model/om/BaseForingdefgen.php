@@ -33,111 +33,138 @@ abstract class BaseForingdefgen extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getEscapr()
-	{
+    return trim($this->codemp);
 
-		return $this->escapr; 		
-	}
-	
-	public function getGening()
-	{
+  }
+  
+  public function getEscapr()
+  {
 
-		return $this->gening; 		
-	}
-	
-	public function getFaccon()
-	{
+    return trim($this->escapr);
 
-		return number_format($this->faccon,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getGening()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->gening);
+
+  }
+  
+  public function getFaccon($val=false)
+  {
+
+    if($val) return number_format($this->faccon,2,',','.');
+    else return $this->faccon;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = ForingdefgenPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = ForingdefgenPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setEscapr($v)
 	{
 
-		if ($this->escapr !== $v) {
-			$this->escapr = $v;
-			$this->modifiedColumns[] = ForingdefgenPeer::ESCAPR;
-		}
-
+    if ($this->escapr !== $v) {
+        $this->escapr = $v;
+        $this->modifiedColumns[] = ForingdefgenPeer::ESCAPR;
+      }
+  
 	} 
 	
 	public function setGening($v)
 	{
 
-		if ($this->gening !== $v) {
-			$this->gening = $v;
-			$this->modifiedColumns[] = ForingdefgenPeer::GENING;
-		}
-
+    if ($this->gening !== $v) {
+        $this->gening = $v;
+        $this->modifiedColumns[] = ForingdefgenPeer::GENING;
+      }
+  
 	} 
 	
 	public function setFaccon($v)
 	{
 
-		if ($this->faccon !== $v) {
-			$this->faccon = $v;
-			$this->modifiedColumns[] = ForingdefgenPeer::FACCON;
-		}
-
+    if ($this->faccon !== $v) {
+        $this->faccon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForingdefgenPeer::FACCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForingdefgenPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForingdefgenPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->escapr = $rs->getString($startcol + 1);
+      $this->escapr = $rs->getString($startcol + 1);
 
-			$this->gening = $rs->getString($startcol + 2);
+      $this->gening = $rs->getString($startcol + 2);
 
-			$this->faccon = $rs->getFloat($startcol + 3);
+      $this->faccon = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Foringdefgen object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Foringdefgen object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

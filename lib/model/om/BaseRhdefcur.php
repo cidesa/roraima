@@ -57,266 +57,297 @@ abstract class BaseRhdefcur extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcur()
-	{
+  
+  public function getCodcur()
+  {
 
-		return $this->codcur; 		
-	}
-	
-	public function getDescur()
-	{
+    return trim($this->codcur);
 
-		return $this->descur; 		
-	}
-	
-	public function getCodtipcur()
-	{
+  }
+  
+  public function getDescur()
+  {
 
-		return $this->codtipcur; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->descur);
 
-		return $this->codpro; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodtipcur()
+  {
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codtipcur);
 
-	
-	public function getFecfin($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		if ($this->fecfin === null || $this->fecfin === '') {
-			return null;
-		} elseif (!is_int($this->fecfin)) {
-						$ts = strtotime($this->fecfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
-			}
-		} else {
-			$ts = $this->fecfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codpro);
 
-	
-	public function getNotapr()
-	{
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		return number_format($this->notapr,2,',','.');
-		
-	}
-	
-	public function getDurcur()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->durcur,2,',','.');
-		
-	}
-	
-	public function getCodtit()
-	{
+  
+  public function getFecfin($format = 'Y-m-d')
+  {
 
-		return $this->codtit; 		
-	}
-	
-	public function getTurcur()
-	{
+    if ($this->fecfin === null || $this->fecfin === '') {
+      return null;
+    } elseif (!is_int($this->fecfin)) {
+            $ts = adodb_strtotime($this->fecfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
+      }
+    } else {
+      $ts = $this->fecfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->turcur; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getNotapr($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->notapr,2,',','.');
+    else return $this->notapr;
+
+  }
+  
+  public function getDurcur($val=false)
+  {
+
+    if($val) return number_format($this->durcur,2,',','.');
+    else return $this->durcur;
+
+  }
+  
+  public function getCodtit()
+  {
+
+    return trim($this->codtit);
+
+  }
+  
+  public function getTurcur()
+  {
+
+    return trim($this->turcur);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcur($v)
 	{
 
-		if ($this->codcur !== $v) {
-			$this->codcur = $v;
-			$this->modifiedColumns[] = RhdefcurPeer::CODCUR;
-		}
-
+    if ($this->codcur !== $v) {
+        $this->codcur = $v;
+        $this->modifiedColumns[] = RhdefcurPeer::CODCUR;
+      }
+  
 	} 
 	
 	public function setDescur($v)
 	{
 
-		if ($this->descur !== $v) {
-			$this->descur = $v;
-			$this->modifiedColumns[] = RhdefcurPeer::DESCUR;
-		}
-
+    if ($this->descur !== $v) {
+        $this->descur = $v;
+        $this->modifiedColumns[] = RhdefcurPeer::DESCUR;
+      }
+  
 	} 
 	
 	public function setCodtipcur($v)
 	{
 
-		if ($this->codtipcur !== $v) {
-			$this->codtipcur = $v;
-			$this->modifiedColumns[] = RhdefcurPeer::CODTIPCUR;
-		}
-
+    if ($this->codtipcur !== $v) {
+        $this->codtipcur = $v;
+        $this->modifiedColumns[] = RhdefcurPeer::CODTIPCUR;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = RhdefcurPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = RhdefcurPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = RhdefcurPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = RhdefcurPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfin !== $ts) {
-			$this->fecfin = $ts;
-			$this->modifiedColumns[] = RhdefcurPeer::FECFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfin !== $ts) {
+      $this->fecfin = $ts;
+      $this->modifiedColumns[] = RhdefcurPeer::FECFIN;
+    }
 
 	} 
 	
 	public function setNotapr($v)
 	{
 
-		if ($this->notapr !== $v) {
-			$this->notapr = $v;
-			$this->modifiedColumns[] = RhdefcurPeer::NOTAPR;
-		}
-
+    if ($this->notapr !== $v) {
+        $this->notapr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhdefcurPeer::NOTAPR;
+      }
+  
 	} 
 	
 	public function setDurcur($v)
 	{
 
-		if ($this->durcur !== $v) {
-			$this->durcur = $v;
-			$this->modifiedColumns[] = RhdefcurPeer::DURCUR;
-		}
-
+    if ($this->durcur !== $v) {
+        $this->durcur = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhdefcurPeer::DURCUR;
+      }
+  
 	} 
 	
 	public function setCodtit($v)
 	{
 
-		if ($this->codtit !== $v) {
-			$this->codtit = $v;
-			$this->modifiedColumns[] = RhdefcurPeer::CODTIT;
-		}
-
+    if ($this->codtit !== $v) {
+        $this->codtit = $v;
+        $this->modifiedColumns[] = RhdefcurPeer::CODTIT;
+      }
+  
 	} 
 	
 	public function setTurcur($v)
 	{
 
-		if ($this->turcur !== $v) {
-			$this->turcur = $v;
-			$this->modifiedColumns[] = RhdefcurPeer::TURCUR;
-		}
-
+    if ($this->turcur !== $v) {
+        $this->turcur = $v;
+        $this->modifiedColumns[] = RhdefcurPeer::TURCUR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhdefcurPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhdefcurPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcur = $rs->getString($startcol + 0);
+      $this->codcur = $rs->getString($startcol + 0);
 
-			$this->descur = $rs->getString($startcol + 1);
+      $this->descur = $rs->getString($startcol + 1);
 
-			$this->codtipcur = $rs->getString($startcol + 2);
+      $this->codtipcur = $rs->getString($startcol + 2);
 
-			$this->codpro = $rs->getString($startcol + 3);
+      $this->codpro = $rs->getString($startcol + 3);
 
-			$this->fecini = $rs->getDate($startcol + 4, null);
+      $this->fecini = $rs->getDate($startcol + 4, null);
 
-			$this->fecfin = $rs->getDate($startcol + 5, null);
+      $this->fecfin = $rs->getDate($startcol + 5, null);
 
-			$this->notapr = $rs->getFloat($startcol + 6);
+      $this->notapr = $rs->getFloat($startcol + 6);
 
-			$this->durcur = $rs->getFloat($startcol + 7);
+      $this->durcur = $rs->getFloat($startcol + 7);
 
-			$this->codtit = $rs->getString($startcol + 8);
+      $this->codtit = $rs->getString($startcol + 8);
 
-			$this->turcur = $rs->getString($startcol + 9);
+      $this->turcur = $rs->getString($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhdefcur object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhdefcur object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -373,6 +404,7 @@ abstract class BaseRhdefcur extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhdefcurPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhdefcurPeer::doUpdate($this, $con);

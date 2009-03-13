@@ -9,34 +9,20 @@
  */
 class BnubibiePeer extends BaseBnubibiePeer
 {
-	public static function getDesUbi($codubi)
-	{
-		$c = new Criteria();
-		$c->add(self::CODUBI,rtrim($codubi).' %',Criteria::LIKE);
-		return self::doSelect($c);
-
-	}
-
 	public static function getDesubicacion($codubi)
 	{
-    	return Herramientas::getX('CODUBI','Bnubibie','Desubi',trim($codubi));		
+    	return Herramientas::getX('CODUBI','Bnubibie','Desubi',trim($codubi));
 	}
 
-	public static  function getNomubicac($codubi)
+	public static function getNomubi($codubi)
 	{
-		$c = new Criteria();
-		$c->add(self::CODUBI,str_pad($codubi, 30 , ' '));
-		$des = self::doSelectone($c);
-		if ($des){
-			return $des->getDesubi();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+    	return Herramientas::getX('CODUBI','Bnubibie','Dirubi',trim($codubi));
 	}
+
 	const COLUMNS = 'columns';
 
 	public static $columsname = array (
-	self::COLUMNS => array (BnubibiePeer::CODUBI => 'Código', BnubibiePeer::DESUBI => 'Descripción', ),);
+	self::COLUMNS => array (BnubibiePeer::CODUBI => 'Código', BnubibiePeer::DESUBI => 'Descripción', BnubibiePeer::DIRUBI=> 'Dirección', BnubibiePeer::ID=> 'Id', ),);
 
 
 	static public function getColumName($colum)
@@ -60,9 +46,9 @@ class BnubibiePeer extends BaseBnubibiePeer
 			$tabla = substr($key,0,$punto);
 			$campo = substr($key,$punto+1);
 			$columnas[] = ucfirst(strtolower($campo));
-			
+
 		}
 		return $columnas;
 	}
-	
+
 }

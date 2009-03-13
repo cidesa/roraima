@@ -210,6 +210,7 @@ abstract class BaseFordefmunPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefmunPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

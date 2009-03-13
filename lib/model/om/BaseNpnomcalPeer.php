@@ -300,6 +300,7 @@ abstract class BaseNpnomcalPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpnomcalPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -9,4 +9,9 @@
  */ 
 class Npprofesion extends BaseNpprofesion
 {
+   public function __toString()
+    {
+		return $this->getDesprofes();
+    }	
+
 }

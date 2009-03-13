@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class BnseginmMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.BnseginmMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.BnseginmMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('bnseginm');
 		$tMap->setPhpName('Bnseginm');
 
@@ -38,15 +38,15 @@ class BnseginmMapBuilder {
 
 		$tMap->addColumn('NROSEGINM', 'Nroseginm', 'string', CreoleTypes::VARCHAR, true, 6);
 
-		$tMap->addColumn('FECSEGINM', 'Fecseginm', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECSEGINM', 'Fecseginm', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('NOMSEGINM', 'Nomseginm', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('COBSEGINM', 'Cobseginm', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('MONSEGINM', 'Monseginm', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONSEGINM', 'Monseginm', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('FECSEGVEN', 'Fecsegven', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECSEGVEN', 'Fecsegven', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('PROSEGINM', 'Proseginm', 'string', CreoleTypes::VARCHAR, false, 100);
 
@@ -55,6 +55,6 @@ class BnseginmMapBuilder {
 		$tMap->addColumn('STASEGINM', 'Staseginm', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

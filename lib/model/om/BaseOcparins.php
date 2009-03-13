@@ -37,129 +37,157 @@ abstract class BaseOcparins extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getNumins()
-	{
+    return trim($this->codcon);
 
-		return $this->numins; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getNumins()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getPoreje()
-	{
+    return trim($this->numins);
 
-		return number_format($this->poreje,2,',','.');
-		
-	}
-	
-	public function getObsins()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return $this->obsins; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codpar);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPoreje($val=false)
+  {
+
+    if($val) return number_format($this->poreje,2,',','.');
+    else return $this->poreje;
+
+  }
+  
+  public function getObsins()
+  {
+
+    return trim($this->obsins);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcparinsPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcparinsPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNumins($v)
 	{
 
-		if ($this->numins !== $v) {
-			$this->numins = $v;
-			$this->modifiedColumns[] = OcparinsPeer::NUMINS;
-		}
-
+    if ($this->numins !== $v) {
+        $this->numins = $v;
+        $this->modifiedColumns[] = OcparinsPeer::NUMINS;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = OcparinsPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = OcparinsPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setPoreje($v)
 	{
 
-		if ($this->poreje !== $v) {
-			$this->poreje = $v;
-			$this->modifiedColumns[] = OcparinsPeer::POREJE;
-		}
-
+    if ($this->poreje !== $v) {
+        $this->poreje = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcparinsPeer::POREJE;
+      }
+  
 	} 
 	
 	public function setObsins($v)
 	{
 
-		if ($this->obsins !== $v) {
-			$this->obsins = $v;
-			$this->modifiedColumns[] = OcparinsPeer::OBSINS;
-		}
-
+    if ($this->obsins !== $v) {
+        $this->obsins = $v;
+        $this->modifiedColumns[] = OcparinsPeer::OBSINS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcparinsPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcparinsPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->numins = $rs->getString($startcol + 1);
+      $this->numins = $rs->getString($startcol + 1);
 
-			$this->codpar = $rs->getString($startcol + 2);
+      $this->codpar = $rs->getString($startcol + 2);
 
-			$this->poreje = $rs->getFloat($startcol + 3);
+      $this->poreje = $rs->getFloat($startcol + 3);
 
-			$this->obsins = $rs->getString($startcol + 4);
+      $this->obsins = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocparins object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocparins object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +244,7 @@ abstract class BaseOcparins extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcparinsPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcparinsPeer::doUpdate($this, $con);

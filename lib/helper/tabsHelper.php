@@ -18,8 +18,10 @@
  */
  
 $response = sfContext::getInstance()->getResponse();
+$response->addJavascript('/sf/calendar/calendar.js');
 $response->addJavascript('/js/tabpane.js');
 $response->addStylesheet('/css/tab.webfx.css');
+$response->addStylesheet('/sf/calendar/skins/aqua/theme.css');
  
 /**
  * Opens a new TabPane object and creates first tab

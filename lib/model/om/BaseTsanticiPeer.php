@@ -235,6 +235,7 @@ abstract class BaseTsanticiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsanticiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

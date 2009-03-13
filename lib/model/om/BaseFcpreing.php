@@ -37,128 +37,156 @@ abstract class BaseFcpreing extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpar()
-	{
+  
+  public function getCodpar()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getNompar()
-	{
+    return trim($this->codpar);
 
-		return $this->nompar; 		
-	}
-	
-	public function getEstima()
-	{
+  }
+  
+  public function getNompar()
+  {
 
-		return $this->estima; 		
-	}
-	
-	public function getEstcie()
-	{
+    return trim($this->nompar);
 
-		return $this->estcie; 		
-	}
-	
-	public function getAcum()
-	{
+  }
+  
+  public function getEstima()
+  {
 
-		return $this->acum; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->estima);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getEstcie()
+  {
+
+    return trim($this->estcie);
+
+  }
+  
+  public function getAcum()
+  {
+
+    return trim($this->acum);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = FcpreingPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = FcpreingPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setNompar($v)
 	{
 
-		if ($this->nompar !== $v) {
-			$this->nompar = $v;
-			$this->modifiedColumns[] = FcpreingPeer::NOMPAR;
-		}
-
+    if ($this->nompar !== $v) {
+        $this->nompar = $v;
+        $this->modifiedColumns[] = FcpreingPeer::NOMPAR;
+      }
+  
 	} 
 	
 	public function setEstima($v)
 	{
 
-		if ($this->estima !== $v) {
-			$this->estima = $v;
-			$this->modifiedColumns[] = FcpreingPeer::ESTIMA;
-		}
-
+    if ($this->estima !== $v) {
+        $this->estima = $v;
+        $this->modifiedColumns[] = FcpreingPeer::ESTIMA;
+      }
+  
 	} 
 	
 	public function setEstcie($v)
 	{
 
-		if ($this->estcie !== $v) {
-			$this->estcie = $v;
-			$this->modifiedColumns[] = FcpreingPeer::ESTCIE;
-		}
-
+    if ($this->estcie !== $v) {
+        $this->estcie = $v;
+        $this->modifiedColumns[] = FcpreingPeer::ESTCIE;
+      }
+  
 	} 
 	
 	public function setAcum($v)
 	{
 
-		if ($this->acum !== $v || $v === '') {
-			$this->acum = $v;
-			$this->modifiedColumns[] = FcpreingPeer::ACUM;
-		}
-
+    if ($this->acum !== $v || $v === '') {
+        $this->acum = $v;
+        $this->modifiedColumns[] = FcpreingPeer::ACUM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcpreingPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcpreingPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpar = $rs->getString($startcol + 0);
+      $this->codpar = $rs->getString($startcol + 0);
 
-			$this->nompar = $rs->getString($startcol + 1);
+      $this->nompar = $rs->getString($startcol + 1);
 
-			$this->estima = $rs->getString($startcol + 2);
+      $this->estima = $rs->getString($startcol + 2);
 
-			$this->estcie = $rs->getString($startcol + 3);
+      $this->estcie = $rs->getString($startcol + 3);
 
-			$this->acum = $rs->getString($startcol + 4);
+      $this->acum = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcpreing object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcpreing object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseFcpreing extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcpreingPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcpreingPeer::doUpdate($this, $con);

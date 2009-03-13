@@ -1,0 +1,32 @@
+opciones:                  # Opciones generales
+  eliminar:                true
+  tabla:                   forcfgrepins
+  anchogrid:               900
+  ancho:                   900
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Tipo Cuenta
+  tipo:                    c
+  esgrabable:              true
+  nombrecampo:             tipo
+  html:                    [size="1" onChange=quitarcatalogo(this.id)]
+2:       # Columna 1
+  titulo:                  Cuenta
+  tipo:                    t
+  nombrecampo:             cuenta
+  esgrabable:              true
+  html:                    [size="20"]
+3:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomcue
+  html:                    [size="50", readonly=true]
+4:
+  titulo:                  Orden
+  tipo:                    t
+  esgrabable:              true
+  nombrecampo:             orden
+  esnumerico:              true
+  html:                    [size="5"]

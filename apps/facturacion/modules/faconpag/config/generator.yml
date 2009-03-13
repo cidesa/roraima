@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Faconpag
+    theme:            cidesaGenerator
+
+    fields:
+      desconpag: { name: Descripción, validate: Vstring_1_255, msj_error: Debe insertar la descripción de la condición de pago }
+      tipconpag: { name: Tipo }
+      numdia:    { name: Número de Días }
+
+    edit:
+      title: Edición de Condición de Pago
+      display:
+        "NONE": [desconpag, numdia, tipconpag]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+
+    list:
+      title: Condiciones de Pago
+      display: [=desconpag]
+      filters: [desconpag]
+      object_actions:
+       _edit:        ~
+       _delete:        ~
+      max_per_page:	  10
+      sort:    desconpag

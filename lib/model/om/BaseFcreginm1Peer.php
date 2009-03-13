@@ -405,6 +405,7 @@ abstract class BaseFcreginm1Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Fcreginm1Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -10,17 +10,27 @@
  */
 class oycdefequActions extends autooycdefequActions
 {
-	protected function updateOcdefequFromRequest()
-	{
-		$ocdefequ = $this->getRequestParameter('ocdefequ');
-	
-		if (isset($ocdefequ['codequ']))
-	    {
-	      $this->ocdefequ->setCodequ(str_pad($ocdefequ['codequ'],4,'0',STR_PAD_LEFT));
-	    }
-	    if (isset($ocdefequ['desequ']))
-	    {
-	      $this->ocdefequ->setDesequ($ocdefequ['desequ']);
-	    }
-    }	
+  public function executeAjax()
+  {
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+	 $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+	 if ($this->getRequestParameter('ajax')=='1')
+	 {
+	 	$dato=OctipequPeer::getDestipo($this->getRequestParameter('codigo'));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 	return sfView::HEADER_ONLY;
+	 }
+  }
+
+  protected function deleteOcdefequ($ocdefequ)
+  {
+  	if (Herramientas::getX_vacio('CodEqu','OCProEqu','CodEqu',$ocdefequ->getCodequ())=='')
+    {
+    	$ocdefequ->delete();
+    }
+  }
+
+
 }

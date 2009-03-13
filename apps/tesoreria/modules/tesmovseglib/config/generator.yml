@@ -4,36 +4,35 @@ generator:
     model_class:      Tsmovlib
     theme:            default
     fields:
-      numcue: { name: Numero de Cuenta}
-      reflib: { name: Referencia del Libro}
-      feclib: { name: Fecha del Libro}
-      tipmov: { name: Tipo de Movimiento}
-      deslib: { name: Descripcion del Libro}
-      fecing: { name: Fecha del Registro}
+      numcue: { name: Cuenta del Banco}
+      nomcue: { name: d}
+      reflib: { name: Referencia}
+      feclib: { name: Fecha del Movimientos, params: date_format='dd/MM/yyyy'}
+      tipmov: { name: Tipo}
+      destip: { name: d}
+      deslib: { name: Descripcion}
+      fecing: { name: Fecha del Registro, params: date_format='dd/MM/yyyy'}
       monmov: { name: Monto}
       numcom: { name: Numero de Comprobante}
-      feccom: { name: Fecha}
+      feccom: { name: Fecha, params: date_format='dd/MM/yyyy'}
       status: { name: Estatus}
       stacon: { name: Estatus Contable}
-      
-        
+      refpag: { name: Referencia del Pagado}
+
+
     list:
       title:          Movimientos Segun Libros
-      filters:        [numcue, feclib]
-      display:        [=numcue, reflib, deslib, feclib]
-      fields:
-        feclib: { params: date_format='dd/MM/yy' }
-        feccom: { params: date_format='dd/MM/yy' }
-        fecing: { params: date_format='dd/MM/yy' }
+      filters:        [numcue, reflib, feclib, tipmov]
+      display:        [=numcue, reflib, tipmov, deslib, feclib]
+      sort:           numcue
       object_actions:
         _edit:        ~
-        _delete:      ~
-      max_per_page:   5
+      max_per_page:   10
     edit:
       title:          Movimientos Segun Libros
-      display:       [=numcue, reflib, feclib, tipmov, deslib, status, stacon, monmov, fecing, numcom, feccom]
-      fields:
-        feclib: { params: date_format='dd/MM/yy' }
-        feccom: { params: date_format='dd/MM/yy' }
-        fecing: { params: date_format='dd/MM/yy' }
-        
+      display:       [=numcue, nomcue, reflib, feclib, tipmov, destip, deslib, monmov, fecing, numcom, feccom, debcre, codcta, status, stacon, refpag]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:        ~
+        _delete:      ~

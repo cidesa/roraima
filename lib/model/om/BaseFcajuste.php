@@ -53,227 +53,258 @@ abstract class BaseFcajuste extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumaju()
-	{
+  
+  public function getNumaju()
+  {
 
-		return $this->numaju; 		
-	}
-	
-	public function getFecaju($format = 'Y-m-d')
-	{
+    return trim($this->numaju);
 
-		if ($this->fecaju === null || $this->fecaju === '') {
-			return null;
-		} elseif (!is_int($this->fecaju)) {
-						$ts = strtotime($this->fecaju);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
-			}
-		} else {
-			$ts = $this->fecaju;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecaju($format = 'Y-m-d')
+  {
 
-	
-	public function getDesaju()
-	{
+    if ($this->fecaju === null || $this->fecaju === '') {
+      return null;
+    } elseif (!is_int($this->fecaju)) {
+            $ts = adodb_strtotime($this->fecaju);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
+      }
+    } else {
+      $ts = $this->fecaju;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desaju; 		
-	}
-	
-	public function getNumdec()
-	{
+  
+  public function getDesaju()
+  {
 
-		return $this->numdec; 		
-	}
-	
-	public function getStaaju()
-	{
+    return trim($this->desaju);
 
-		return $this->staaju; 		
-	}
-	
-	public function getMonaju()
-	{
+  }
+  
+  public function getNumdec()
+  {
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getMonreb()
-	{
+    return trim($this->numdec);
 
-		return number_format($this->monreb,2,',','.');
-		
-	}
-	
-	public function getMonexo()
-	{
+  }
+  
+  public function getStaaju()
+  {
 
-		return number_format($this->monexo,2,',','.');
-		
-	}
-	
-	public function getMonimp()
-	{
+    return trim($this->staaju);
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonaju($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getMonreb($val=false)
+  {
+
+    if($val) return number_format($this->monreb,2,',','.');
+    else return $this->monreb;
+
+  }
+  
+  public function getMonexo($val=false)
+  {
+
+    if($val) return number_format($this->monexo,2,',','.');
+    else return $this->monexo;
+
+  }
+  
+  public function getMonimp($val=false)
+  {
+
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumaju($v)
 	{
 
-		if ($this->numaju !== $v) {
-			$this->numaju = $v;
-			$this->modifiedColumns[] = FcajustePeer::NUMAJU;
-		}
-
+    if ($this->numaju !== $v) {
+        $this->numaju = $v;
+        $this->modifiedColumns[] = FcajustePeer::NUMAJU;
+      }
+  
 	} 
 	
 	public function setFecaju($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecaju !== $ts) {
-			$this->fecaju = $ts;
-			$this->modifiedColumns[] = FcajustePeer::FECAJU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecaju !== $ts) {
+      $this->fecaju = $ts;
+      $this->modifiedColumns[] = FcajustePeer::FECAJU;
+    }
 
 	} 
 	
 	public function setDesaju($v)
 	{
 
-		if ($this->desaju !== $v) {
-			$this->desaju = $v;
-			$this->modifiedColumns[] = FcajustePeer::DESAJU;
-		}
-
+    if ($this->desaju !== $v) {
+        $this->desaju = $v;
+        $this->modifiedColumns[] = FcajustePeer::DESAJU;
+      }
+  
 	} 
 	
 	public function setNumdec($v)
 	{
 
-		if ($this->numdec !== $v) {
-			$this->numdec = $v;
-			$this->modifiedColumns[] = FcajustePeer::NUMDEC;
-		}
-
+    if ($this->numdec !== $v) {
+        $this->numdec = $v;
+        $this->modifiedColumns[] = FcajustePeer::NUMDEC;
+      }
+  
 	} 
 	
 	public function setStaaju($v)
 	{
 
-		if ($this->staaju !== $v) {
-			$this->staaju = $v;
-			$this->modifiedColumns[] = FcajustePeer::STAAJU;
-		}
-
+    if ($this->staaju !== $v) {
+        $this->staaju = $v;
+        $this->modifiedColumns[] = FcajustePeer::STAAJU;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = FcajustePeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcajustePeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setMonreb($v)
 	{
 
-		if ($this->monreb !== $v) {
-			$this->monreb = $v;
-			$this->modifiedColumns[] = FcajustePeer::MONREB;
-		}
-
+    if ($this->monreb !== $v) {
+        $this->monreb = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcajustePeer::MONREB;
+      }
+  
 	} 
 	
 	public function setMonexo($v)
 	{
 
-		if ($this->monexo !== $v) {
-			$this->monexo = $v;
-			$this->modifiedColumns[] = FcajustePeer::MONEXO;
-		}
-
+    if ($this->monexo !== $v) {
+        $this->monexo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcajustePeer::MONEXO;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = FcajustePeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcajustePeer::MONIMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcajustePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcajustePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numaju = $rs->getString($startcol + 0);
+      $this->numaju = $rs->getString($startcol + 0);
 
-			$this->fecaju = $rs->getDate($startcol + 1, null);
+      $this->fecaju = $rs->getDate($startcol + 1, null);
 
-			$this->desaju = $rs->getString($startcol + 2);
+      $this->desaju = $rs->getString($startcol + 2);
 
-			$this->numdec = $rs->getString($startcol + 3);
+      $this->numdec = $rs->getString($startcol + 3);
 
-			$this->staaju = $rs->getString($startcol + 4);
+      $this->staaju = $rs->getString($startcol + 4);
 
-			$this->monaju = $rs->getFloat($startcol + 5);
+      $this->monaju = $rs->getFloat($startcol + 5);
 
-			$this->monreb = $rs->getFloat($startcol + 6);
+      $this->monreb = $rs->getFloat($startcol + 6);
 
-			$this->monexo = $rs->getFloat($startcol + 7);
+      $this->monexo = $rs->getFloat($startcol + 7);
 
-			$this->monimp = $rs->getFloat($startcol + 8);
+      $this->monimp = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcajuste object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcajuste object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -330,6 +361,7 @@ abstract class BaseFcajuste extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcajustePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcajustePeer::doUpdate($this, $con);

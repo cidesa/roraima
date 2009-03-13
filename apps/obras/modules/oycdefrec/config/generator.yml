@@ -7,22 +7,28 @@ generator:
       codrec:    { name: Código}
       desrec:    { name: Descripción}
       limrec:    { name: Limitante}
-      fecemi:    { name: Nombre} 
+      fecemi:    { name: Nombre}
       fecven:    { name: Tipo de Concepto}
-      
       canutr:    { name: A Partir de}
       codtiprec: { name: Grupo}
-      destiprec: { name: Descripción del Grupo} 
-      observ:    { name: Tipo de Concepto}      
-              
+      destiprec: { name: Descripción del Grupo}
+      observ:    { name: Tipo de Concepto}
+
     list:
-      title:          Recaudos
-      filters:        [codrec]
-      display:        [codrec, desrec, codtiprec, destiprec, limrec]
+      title:          Documentación Legal
+      display:        [=codrec, desrec, codtiprec, destiprec]
+      filters:        [codrec, desrec, codtiprec]
+      sort            codrec
       object_actions:
         _edit:        ~
         _delete:      ~
-      max_per_page:   5
+      max_per_page:   10
+      sort:    codrec
     edit:
-      title:          Recaudos
-      display:       [codrec, desrec, limrec, canutr, codtiprec, destiprec]
+      title:          Documentación Legal
+      display:        [codrec, desrec, limrec, canutr, codtiprec, destiprec]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

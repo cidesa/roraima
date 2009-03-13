@@ -192,6 +192,442 @@ abstract class BaseCarecproPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinCaprovee(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CarecproPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CarecproPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CarecproPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$rs = CarecproPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinCarecaud(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CarecproPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CarecproPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CarecproPeer::CODREC, CarecaudPeer::CODREC);
+
+		$rs = CarecproPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinCaprovee(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CarecproPeer::addSelectColumns($c);
+		$startcol = (CarecproPeer::NUM_COLUMNS - CarecproPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CaproveePeer::addSelectColumns($c);
+
+		$c->addJoin(CarecproPeer::CODPRO, CaproveePeer::CODPRO);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CarecproPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaproveePeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCarecpro($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCarecpros();
+				$obj2->addCarecpro($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinCarecaud(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CarecproPeer::addSelectColumns($c);
+		$startcol = (CarecproPeer::NUM_COLUMNS - CarecproPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CarecaudPeer::addSelectColumns($c);
+
+		$c->addJoin(CarecproPeer::CODREC, CarecaudPeer::CODREC);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CarecproPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CarecaudPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCarecaud(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCarecpro($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCarecpros();
+				$obj2->addCarecpro($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CarecproPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CarecproPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CarecproPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$criteria->addJoin(CarecproPeer::CODREC, CarecaudPeer::CODREC);
+
+		$rs = CarecproPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CarecproPeer::addSelectColumns($c);
+		$startcol2 = (CarecproPeer::NUM_COLUMNS - CarecproPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CaproveePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CaproveePeer::NUM_COLUMNS;
+
+		CarecaudPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + CarecaudPeer::NUM_COLUMNS;
+
+		$c->addJoin(CarecproPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$c->addJoin(CarecproPeer::CODREC, CarecaudPeer::CODREC);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CarecproPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = CaproveePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCarecpro($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCarecpros();
+				$obj2->addCarecpro($obj1);
+			}
+
+
+					
+			$omClass = CarecaudPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3 = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getCarecaud(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addCarecpro($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initCarecpros();
+				$obj3->addCarecpro($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAllExceptCaprovee(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CarecproPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CarecproPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CarecproPeer::CODREC, CarecaudPeer::CODREC);
+
+		$rs = CarecproPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptCarecaud(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CarecproPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CarecproPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CarecproPeer::CODPRO, CaproveePeer::CODPRO);
+
+		$rs = CarecproPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAllExceptCaprovee(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CarecproPeer::addSelectColumns($c);
+		$startcol2 = (CarecproPeer::NUM_COLUMNS - CarecproPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CarecaudPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CarecaudPeer::NUM_COLUMNS;
+
+		$c->addJoin(CarecproPeer::CODREC, CarecaudPeer::CODREC);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CarecproPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CarecaudPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCarecaud(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCarecpro($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCarecpros();
+				$obj2->addCarecpro($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptCarecaud(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CarecproPeer::addSelectColumns($c);
+		$startcol2 = (CarecproPeer::NUM_COLUMNS - CarecproPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CaproveePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CaproveePeer::NUM_COLUMNS;
+
+		$c->addJoin(CarecproPeer::CODPRO, CaproveePeer::CODPRO);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CarecproPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CaproveePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCarecpro($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCarecpros();
+				$obj2->addCarecpro($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -215,6 +651,7 @@ abstract class BaseCarecproPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CarecproPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

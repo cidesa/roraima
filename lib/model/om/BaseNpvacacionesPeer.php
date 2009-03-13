@@ -225,6 +225,7 @@ abstract class BaseNpvacacionesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpvacacionesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

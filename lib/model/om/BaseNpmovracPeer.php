@@ -325,6 +325,7 @@ abstract class BaseNpmovracPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpmovracPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

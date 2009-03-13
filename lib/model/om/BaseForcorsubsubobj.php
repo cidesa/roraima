@@ -29,93 +29,119 @@ abstract class BaseForcorsubsubobj extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodequ()
-	{
+  
+  public function getCodequ()
+  {
 
-		return $this->codequ; 		
-	}
-	
-	public function getCodsubobj()
-	{
+    return trim($this->codequ);
 
-		return $this->codsubobj; 		
-	}
-	
-	public function getCorsubsubobj()
-	{
+  }
+  
+  public function getCodsubobj()
+  {
 
-		return number_format($this->corsubsubobj,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codsubobj);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCorsubsubobj($val=false)
+  {
+
+    if($val) return number_format($this->corsubsubobj,2,',','.');
+    else return $this->corsubsubobj;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodequ($v)
 	{
 
-		if ($this->codequ !== $v) {
-			$this->codequ = $v;
-			$this->modifiedColumns[] = ForcorsubsubobjPeer::CODEQU;
-		}
-
+    if ($this->codequ !== $v) {
+        $this->codequ = $v;
+        $this->modifiedColumns[] = ForcorsubsubobjPeer::CODEQU;
+      }
+  
 	} 
 	
 	public function setCodsubobj($v)
 	{
 
-		if ($this->codsubobj !== $v) {
-			$this->codsubobj = $v;
-			$this->modifiedColumns[] = ForcorsubsubobjPeer::CODSUBOBJ;
-		}
-
+    if ($this->codsubobj !== $v) {
+        $this->codsubobj = $v;
+        $this->modifiedColumns[] = ForcorsubsubobjPeer::CODSUBOBJ;
+      }
+  
 	} 
 	
 	public function setCorsubsubobj($v)
 	{
 
-		if ($this->corsubsubobj !== $v) {
-			$this->corsubsubobj = $v;
-			$this->modifiedColumns[] = ForcorsubsubobjPeer::CORSUBSUBOBJ;
-		}
-
+    if ($this->corsubsubobj !== $v) {
+        $this->corsubsubobj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcorsubsubobjPeer::CORSUBSUBOBJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForcorsubsubobjPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForcorsubsubobjPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codequ = $rs->getString($startcol + 0);
+      $this->codequ = $rs->getString($startcol + 0);
 
-			$this->codsubobj = $rs->getString($startcol + 1);
+      $this->codsubobj = $rs->getString($startcol + 1);
 
-			$this->corsubsubobj = $rs->getFloat($startcol + 2);
+      $this->corsubsubobj = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forcorsubsubobj object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forcorsubsubobj object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

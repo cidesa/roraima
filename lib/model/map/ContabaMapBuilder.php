@@ -1,42 +1,44 @@
 <?php
 
 
-	
+
 class ContabaMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ContabaMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ContabaMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('contaba');
 		$tMap->setPhpName('Contaba');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('contaba_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('LONCTA', 'Loncta', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('LONCTA', 'Loncta', 'double', CreoleTypes::NUMERIC, true, 2);
 
-		$tMap->addColumn('NUMRUP', 'Numrup', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('NUMRUP', 'Numrup', 'double', CreoleTypes::NUMERIC, true, 2);
 
 		$tMap->addColumn('FORCTA', 'Forcta', 'string', CreoleTypes::VARCHAR, true, 32);
 
@@ -54,9 +56,9 @@ class ContabaMapBuilder {
 
 		$tMap->addColumn('CTLING', 'Ctling', 'string', CreoleTypes::VARCHAR, false, 32);
 
-		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('FECCIE', 'Feccie', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECCIE', 'Feccie', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('CODTES', 'Codtes', 'string', CreoleTypes::VARCHAR, false, 32);
 
@@ -125,6 +127,6 @@ class ContabaMapBuilder {
 		$tMap->addColumn('UNIDAD', 'Unidad', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

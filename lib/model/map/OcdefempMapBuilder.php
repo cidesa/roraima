@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class OcdefempMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.OcdefempMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.OcdefempMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('ocdefemp');
 		$tMap->setPhpName('Ocdefemp');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('ocdefemp_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 15);
 
@@ -44,15 +46,15 @@ class OcdefempMapBuilder {
 
 		$tMap->addColumn('EMAEMP', 'Emaemp', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('PORANT', 'Porant', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORANT', 'Porant', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PLAINI', 'Plaini', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PLAINI', 'Plaini', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PORAUMOBR', 'Poraumobr', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORAUMOBR', 'Poraumobr', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PORMUL', 'Pormul', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORMUL', 'Pormul', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('UNITRI', 'Unitri', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('UNITRI', 'Unitri', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODACTPROINI', 'Codactproini', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -101,6 +103,6 @@ class OcdefempMapBuilder {
 		$tMap->addColumn('TIPCOM', 'Tipcom', 'string', CreoleTypes::VARCHAR, false, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

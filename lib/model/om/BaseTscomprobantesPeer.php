@@ -225,6 +225,7 @@ abstract class BaseTscomprobantesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TscomprobantesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -37,174 +37,200 @@ abstract class BaseNpcontrato extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodnom()
-	{
+    return trim($this->codcon);
 
-		return $this->codnom; 		
-	}
-	
-	public function getDescon()
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		return $this->descon; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    return trim($this->codnom);
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDescon()
+  {
 
-	
-	public function getFecfin($format = 'Y-m-d')
-	{
+    return trim($this->descon);
 
-		if ($this->fecfin === null || $this->fecfin === '') {
-			return null;
-		} elseif (!is_int($this->fecfin)) {
-						$ts = strtotime($this->fecfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
-			}
-		} else {
-			$ts = $this->fecfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-	
-	public function getId()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getFecfin($format = 'Y-m-d')
+  {
+
+    if ($this->fecfin === null || $this->fecfin === '') {
+      return null;
+    } elseif (!is_int($this->fecfin)) {
+            $ts = adodb_strtotime($this->fecfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
+      }
+    } else {
+      $ts = $this->fecfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpcontratoPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpcontratoPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpcontratoPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpcontratoPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setDescon($v)
 	{
 
-		if ($this->descon !== $v) {
-			$this->descon = $v;
-			$this->modifiedColumns[] = NpcontratoPeer::DESCON;
-		}
-
+    if ($this->descon !== $v) {
+        $this->descon = $v;
+        $this->modifiedColumns[] = NpcontratoPeer::DESCON;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = NpcontratoPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = NpcontratoPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfin !== $ts) {
-			$this->fecfin = $ts;
-			$this->modifiedColumns[] = NpcontratoPeer::FECFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfin !== $ts) {
+      $this->fecfin = $ts;
+      $this->modifiedColumns[] = NpcontratoPeer::FECFIN;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcontratoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcontratoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->codnom = $rs->getString($startcol + 1);
+      $this->codnom = $rs->getString($startcol + 1);
 
-			$this->descon = $rs->getString($startcol + 2);
+      $this->descon = $rs->getString($startcol + 2);
 
-			$this->fecini = $rs->getDate($startcol + 3, null);
+      $this->fecini = $rs->getDate($startcol + 3, null);
 
-			$this->fecfin = $rs->getDate($startcol + 4, null);
+      $this->fecfin = $rs->getDate($startcol + 4, null);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcontrato object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcontrato object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -261,6 +287,7 @@ abstract class BaseNpcontrato extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcontratoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcontratoPeer::doUpdate($this, $con);

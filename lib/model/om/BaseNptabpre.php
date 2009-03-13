@@ -37,154 +37,181 @@ abstract class BaseNptabpre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getFecpre($format = 'Y-m-d')
-	{
+  
+  public function getFecpre($format = 'Y-m-d')
+  {
 
-		if ($this->fecpre === null || $this->fecpre === '') {
-			return null;
-		} elseif (!is_int($this->fecpre)) {
-						$ts = strtotime($this->fecpre);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecpre] as date/time value: " . var_export($this->fecpre, true));
-			}
-		} else {
-			$ts = $this->fecpre;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecpre === null || $this->fecpre === '') {
+      return null;
+    } elseif (!is_int($this->fecpre)) {
+            $ts = adodb_strtotime($this->fecpre);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecpre] as date/time value: " . var_export($this->fecpre, true));
+      }
+    } else {
+      $ts = $this->fecpre;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getDiames()
-	{
+    return trim($this->codcon);
 
-		return number_format($this->diames,2,',','.');
-		
-	}
-	
-	public function getDiaano()
-	{
+  }
+  
+  public function getDiames($val=false)
+  {
 
-		return number_format($this->diaano,2,',','.');
-		
-	}
-	
-	public function getInteres()
-	{
+    if($val) return number_format($this->diames,2,',','.');
+    else return $this->diames;
 
-		return number_format($this->interes,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDiaano($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->diaano,2,',','.');
+    else return $this->diaano;
+
+  }
+  
+  public function getInteres($val=false)
+  {
+
+    if($val) return number_format($this->interes,2,',','.');
+    else return $this->interes;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setFecpre($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecpre] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecpre !== $ts) {
-			$this->fecpre = $ts;
-			$this->modifiedColumns[] = NptabprePeer::FECPRE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpre] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecpre !== $ts) {
+      $this->fecpre = $ts;
+      $this->modifiedColumns[] = NptabprePeer::FECPRE;
+    }
 
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NptabprePeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NptabprePeer::CODCON;
+      }
+  
 	} 
 	
 	public function setDiames($v)
 	{
 
-		if ($this->diames !== $v) {
-			$this->diames = $v;
-			$this->modifiedColumns[] = NptabprePeer::DIAMES;
-		}
-
+    if ($this->diames !== $v) {
+        $this->diames = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptabprePeer::DIAMES;
+      }
+  
 	} 
 	
 	public function setDiaano($v)
 	{
 
-		if ($this->diaano !== $v) {
-			$this->diaano = $v;
-			$this->modifiedColumns[] = NptabprePeer::DIAANO;
-		}
-
+    if ($this->diaano !== $v) {
+        $this->diaano = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptabprePeer::DIAANO;
+      }
+  
 	} 
 	
 	public function setInteres($v)
 	{
 
-		if ($this->interes !== $v) {
-			$this->interes = $v;
-			$this->modifiedColumns[] = NptabprePeer::INTERES;
-		}
-
+    if ($this->interes !== $v) {
+        $this->interes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptabprePeer::INTERES;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NptabprePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NptabprePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->fecpre = $rs->getDate($startcol + 0, null);
+      $this->fecpre = $rs->getDate($startcol + 0, null);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->diames = $rs->getFloat($startcol + 2);
+      $this->diames = $rs->getFloat($startcol + 2);
 
-			$this->diaano = $rs->getFloat($startcol + 3);
+      $this->diaano = $rs->getFloat($startcol + 3);
 
-			$this->interes = $rs->getFloat($startcol + 4);
+      $this->interes = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nptabpre object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nptabpre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -241,6 +268,7 @@ abstract class BaseNptabpre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NptabprePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NptabprePeer::doUpdate($this, $con);

@@ -125,573 +125,621 @@ abstract class BaseOcprovee extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getNompro()
-	{
+    return trim($this->codpro);
 
-		return $this->nompro; 		
-	}
-	
-	public function getRifpro()
-	{
+  }
+  
+  public function getNompro()
+  {
 
-		return $this->rifpro; 		
-	}
-	
-	public function getNitpro()
-	{
+    return trim($this->nompro);
 
-		return $this->nitpro; 		
-	}
-	
-	public function getDirpro()
-	{
+  }
+  
+  public function getRifpro()
+  {
 
-		return $this->dirpro; 		
-	}
-	
-	public function getTelpro()
-	{
+    return trim($this->rifpro);
 
-		return $this->telpro; 		
-	}
-	
-	public function getFaxpro()
-	{
+  }
+  
+  public function getNitpro()
+  {
 
-		return $this->faxpro; 		
-	}
-	
-	public function getEmail()
-	{
+    return trim($this->nitpro);
 
-		return $this->email; 		
-	}
-	
-	public function getLimcre()
-	{
+  }
+  
+  public function getDirpro()
+  {
 
-		return number_format($this->limcre,2,',','.');
-		
-	}
-	
-	public function getCodcta()
-	{
+    return trim($this->dirpro);
 
-		return $this->codcta; 		
-	}
-	
-	public function getRegmer()
-	{
+  }
+  
+  public function getTelpro()
+  {
 
-		return $this->regmer; 		
-	}
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    return trim($this->telpro);
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFaxpro()
+  {
 
-	
-	public function getTomreg()
-	{
+    return trim($this->faxpro);
 
-		return $this->tomreg; 		
-	}
-	
-	public function getFolreg()
-	{
+  }
+  
+  public function getEmail()
+  {
 
-		return $this->folreg; 		
-	}
-	
-	public function getCapsus()
-	{
+    return trim($this->email);
 
-		return number_format($this->capsus,2,',','.');
-		
-	}
-	
-	public function getCappag()
-	{
+  }
+  
+  public function getLimcre($val=false)
+  {
 
-		return number_format($this->cappag,2,',','.');
-		
-	}
-	
-	public function getRifrepleg()
-	{
+    if($val) return number_format($this->limcre,2,',','.');
+    else return $this->limcre;
 
-		return $this->rifrepleg; 		
-	}
-	
-	public function getNomrepleg()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->nomrepleg; 		
-	}
-	
-	public function getDirrepleg()
-	{
+    return trim($this->codcta);
 
-		return $this->dirrepleg; 		
-	}
-	
-	public function getFecinscir($format = 'Y-m-d')
-	{
+  }
+  
+  public function getRegmer()
+  {
 
-		if ($this->fecinscir === null || $this->fecinscir === '') {
-			return null;
-		} elseif (!is_int($this->fecinscir)) {
-						$ts = strtotime($this->fecinscir);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecinscir] as date/time value: " . var_export($this->fecinscir, true));
-			}
-		} else {
-			$ts = $this->fecinscir;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->regmer);
 
-	
-	public function getNuminscir()
-	{
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-		return $this->numinscir; 		
-	}
-	
-	public function getNacpro()
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->nacpro; 		
-	}
-	
-	public function getCodord()
-	{
+  
+  public function getTomreg()
+  {
 
-		return $this->codord; 		
-	}
-	
-	public function getCodpercon()
-	{
+    return trim($this->tomreg);
 
-		return $this->codpercon; 		
-	}
-	
-	public function getCodtiprec()
-	{
+  }
+  
+  public function getFolreg()
+  {
 
-		return $this->codtiprec; 		
-	}
-	
-	public function getCodram()
-	{
+    return trim($this->folreg);
 
-		return $this->codram; 		
-	}
-	
-	public function getNrocei()
-	{
+  }
+  
+  public function getCapsus($val=false)
+  {
 
-		return $this->nrocei; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->capsus,2,',','.');
+    else return $this->capsus;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCappag($val=false)
+  {
+
+    if($val) return number_format($this->cappag,2,',','.');
+    else return $this->cappag;
+
+  }
+  
+  public function getRifrepleg()
+  {
+
+    return trim($this->rifrepleg);
+
+  }
+  
+  public function getNomrepleg()
+  {
+
+    return trim($this->nomrepleg);
+
+  }
+  
+  public function getDirrepleg()
+  {
+
+    return trim($this->dirrepleg);
+
+  }
+  
+  public function getFecinscir($format = 'Y-m-d')
+  {
+
+    if ($this->fecinscir === null || $this->fecinscir === '') {
+      return null;
+    } elseif (!is_int($this->fecinscir)) {
+            $ts = adodb_strtotime($this->fecinscir);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecinscir] as date/time value: " . var_export($this->fecinscir, true));
+      }
+    } else {
+      $ts = $this->fecinscir;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getNuminscir()
+  {
+
+    return trim($this->numinscir);
+
+  }
+  
+  public function getNacpro()
+  {
+
+    return trim($this->nacpro);
+
+  }
+  
+  public function getCodord()
+  {
+
+    return trim($this->codord);
+
+  }
+  
+  public function getCodpercon()
+  {
+
+    return trim($this->codpercon);
+
+  }
+  
+  public function getCodtiprec()
+  {
+
+    return trim($this->codtiprec);
+
+  }
+  
+  public function getCodram()
+  {
+
+    return trim($this->codram);
+
+  }
+  
+  public function getNrocei()
+  {
+
+    return trim($this->nrocei);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = OcproveePeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = OcproveePeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setNompro($v)
 	{
 
-		if ($this->nompro !== $v) {
-			$this->nompro = $v;
-			$this->modifiedColumns[] = OcproveePeer::NOMPRO;
-		}
-
+    if ($this->nompro !== $v) {
+        $this->nompro = $v;
+        $this->modifiedColumns[] = OcproveePeer::NOMPRO;
+      }
+  
 	} 
 	
 	public function setRifpro($v)
 	{
 
-		if ($this->rifpro !== $v) {
-			$this->rifpro = $v;
-			$this->modifiedColumns[] = OcproveePeer::RIFPRO;
-		}
-
+    if ($this->rifpro !== $v) {
+        $this->rifpro = $v;
+        $this->modifiedColumns[] = OcproveePeer::RIFPRO;
+      }
+  
 	} 
 	
 	public function setNitpro($v)
 	{
 
-		if ($this->nitpro !== $v) {
-			$this->nitpro = $v;
-			$this->modifiedColumns[] = OcproveePeer::NITPRO;
-		}
-
+    if ($this->nitpro !== $v) {
+        $this->nitpro = $v;
+        $this->modifiedColumns[] = OcproveePeer::NITPRO;
+      }
+  
 	} 
 	
 	public function setDirpro($v)
 	{
 
-		if ($this->dirpro !== $v) {
-			$this->dirpro = $v;
-			$this->modifiedColumns[] = OcproveePeer::DIRPRO;
-		}
-
+    if ($this->dirpro !== $v) {
+        $this->dirpro = $v;
+        $this->modifiedColumns[] = OcproveePeer::DIRPRO;
+      }
+  
 	} 
 	
 	public function setTelpro($v)
 	{
 
-		if ($this->telpro !== $v) {
-			$this->telpro = $v;
-			$this->modifiedColumns[] = OcproveePeer::TELPRO;
-		}
-
+    if ($this->telpro !== $v) {
+        $this->telpro = $v;
+        $this->modifiedColumns[] = OcproveePeer::TELPRO;
+      }
+  
 	} 
 	
 	public function setFaxpro($v)
 	{
 
-		if ($this->faxpro !== $v) {
-			$this->faxpro = $v;
-			$this->modifiedColumns[] = OcproveePeer::FAXPRO;
-		}
-
+    if ($this->faxpro !== $v) {
+        $this->faxpro = $v;
+        $this->modifiedColumns[] = OcproveePeer::FAXPRO;
+      }
+  
 	} 
 	
 	public function setEmail($v)
 	{
 
-		if ($this->email !== $v) {
-			$this->email = $v;
-			$this->modifiedColumns[] = OcproveePeer::EMAIL;
-		}
-
+    if ($this->email !== $v) {
+        $this->email = $v;
+        $this->modifiedColumns[] = OcproveePeer::EMAIL;
+      }
+  
 	} 
 	
 	public function setLimcre($v)
 	{
 
-		if ($this->limcre !== $v) {
-			$this->limcre = $v;
-			$this->modifiedColumns[] = OcproveePeer::LIMCRE;
-		}
-
+    if ($this->limcre !== $v) {
+        $this->limcre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcproveePeer::LIMCRE;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = OcproveePeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = OcproveePeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setRegmer($v)
 	{
 
-		if ($this->regmer !== $v) {
-			$this->regmer = $v;
-			$this->modifiedColumns[] = OcproveePeer::REGMER;
-		}
-
+    if ($this->regmer !== $v) {
+        $this->regmer = $v;
+        $this->modifiedColumns[] = OcproveePeer::REGMER;
+      }
+  
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = OcproveePeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = OcproveePeer::FECREG;
+    }
 
 	} 
 	
 	public function setTomreg($v)
 	{
 
-		if ($this->tomreg !== $v) {
-			$this->tomreg = $v;
-			$this->modifiedColumns[] = OcproveePeer::TOMREG;
-		}
-
+    if ($this->tomreg !== $v) {
+        $this->tomreg = $v;
+        $this->modifiedColumns[] = OcproveePeer::TOMREG;
+      }
+  
 	} 
 	
 	public function setFolreg($v)
 	{
 
-		if ($this->folreg !== $v) {
-			$this->folreg = $v;
-			$this->modifiedColumns[] = OcproveePeer::FOLREG;
-		}
-
+    if ($this->folreg !== $v) {
+        $this->folreg = $v;
+        $this->modifiedColumns[] = OcproveePeer::FOLREG;
+      }
+  
 	} 
 	
 	public function setCapsus($v)
 	{
 
-		if ($this->capsus !== $v) {
-			$this->capsus = $v;
-			$this->modifiedColumns[] = OcproveePeer::CAPSUS;
-		}
-
+    if ($this->capsus !== $v) {
+        $this->capsus = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcproveePeer::CAPSUS;
+      }
+  
 	} 
 	
 	public function setCappag($v)
 	{
 
-		if ($this->cappag !== $v) {
-			$this->cappag = $v;
-			$this->modifiedColumns[] = OcproveePeer::CAPPAG;
-		}
-
+    if ($this->cappag !== $v) {
+        $this->cappag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcproveePeer::CAPPAG;
+      }
+  
 	} 
 	
 	public function setRifrepleg($v)
 	{
 
-		if ($this->rifrepleg !== $v) {
-			$this->rifrepleg = $v;
-			$this->modifiedColumns[] = OcproveePeer::RIFREPLEG;
-		}
-
+    if ($this->rifrepleg !== $v) {
+        $this->rifrepleg = $v;
+        $this->modifiedColumns[] = OcproveePeer::RIFREPLEG;
+      }
+  
 	} 
 	
 	public function setNomrepleg($v)
 	{
 
-		if ($this->nomrepleg !== $v) {
-			$this->nomrepleg = $v;
-			$this->modifiedColumns[] = OcproveePeer::NOMREPLEG;
-		}
-
+    if ($this->nomrepleg !== $v) {
+        $this->nomrepleg = $v;
+        $this->modifiedColumns[] = OcproveePeer::NOMREPLEG;
+      }
+  
 	} 
 	
 	public function setDirrepleg($v)
 	{
 
-		if ($this->dirrepleg !== $v) {
-			$this->dirrepleg = $v;
-			$this->modifiedColumns[] = OcproveePeer::DIRREPLEG;
-		}
-
+    if ($this->dirrepleg !== $v) {
+        $this->dirrepleg = $v;
+        $this->modifiedColumns[] = OcproveePeer::DIRREPLEG;
+      }
+  
 	} 
 	
 	public function setFecinscir($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecinscir] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecinscir !== $ts) {
-			$this->fecinscir = $ts;
-			$this->modifiedColumns[] = OcproveePeer::FECINSCIR;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecinscir] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecinscir !== $ts) {
+      $this->fecinscir = $ts;
+      $this->modifiedColumns[] = OcproveePeer::FECINSCIR;
+    }
 
 	} 
 	
 	public function setNuminscir($v)
 	{
 
-		if ($this->numinscir !== $v) {
-			$this->numinscir = $v;
-			$this->modifiedColumns[] = OcproveePeer::NUMINSCIR;
-		}
-
+    if ($this->numinscir !== $v) {
+        $this->numinscir = $v;
+        $this->modifiedColumns[] = OcproveePeer::NUMINSCIR;
+      }
+  
 	} 
 	
 	public function setNacpro($v)
 	{
 
-		if ($this->nacpro !== $v) {
-			$this->nacpro = $v;
-			$this->modifiedColumns[] = OcproveePeer::NACPRO;
-		}
-
+    if ($this->nacpro !== $v) {
+        $this->nacpro = $v;
+        $this->modifiedColumns[] = OcproveePeer::NACPRO;
+      }
+  
 	} 
 	
 	public function setCodord($v)
 	{
 
-		if ($this->codord !== $v) {
-			$this->codord = $v;
-			$this->modifiedColumns[] = OcproveePeer::CODORD;
-		}
-
+    if ($this->codord !== $v) {
+        $this->codord = $v;
+        $this->modifiedColumns[] = OcproveePeer::CODORD;
+      }
+  
 	} 
 	
 	public function setCodpercon($v)
 	{
 
-		if ($this->codpercon !== $v) {
-			$this->codpercon = $v;
-			$this->modifiedColumns[] = OcproveePeer::CODPERCON;
-		}
-
+    if ($this->codpercon !== $v) {
+        $this->codpercon = $v;
+        $this->modifiedColumns[] = OcproveePeer::CODPERCON;
+      }
+  
 	} 
 	
 	public function setCodtiprec($v)
 	{
 
-		if ($this->codtiprec !== $v) {
-			$this->codtiprec = $v;
-			$this->modifiedColumns[] = OcproveePeer::CODTIPREC;
-		}
-
+    if ($this->codtiprec !== $v) {
+        $this->codtiprec = $v;
+        $this->modifiedColumns[] = OcproveePeer::CODTIPREC;
+      }
+  
 	} 
 	
 	public function setCodram($v)
 	{
 
-		if ($this->codram !== $v) {
-			$this->codram = $v;
-			$this->modifiedColumns[] = OcproveePeer::CODRAM;
-		}
-
+    if ($this->codram !== $v) {
+        $this->codram = $v;
+        $this->modifiedColumns[] = OcproveePeer::CODRAM;
+      }
+  
 	} 
 	
 	public function setNrocei($v)
 	{
 
-		if ($this->nrocei !== $v) {
-			$this->nrocei = $v;
-			$this->modifiedColumns[] = OcproveePeer::NROCEI;
-		}
-
+    if ($this->nrocei !== $v) {
+        $this->nrocei = $v;
+        $this->modifiedColumns[] = OcproveePeer::NROCEI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcproveePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcproveePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->nompro = $rs->getString($startcol + 1);
+      $this->nompro = $rs->getString($startcol + 1);
 
-			$this->rifpro = $rs->getString($startcol + 2);
+      $this->rifpro = $rs->getString($startcol + 2);
 
-			$this->nitpro = $rs->getString($startcol + 3);
+      $this->nitpro = $rs->getString($startcol + 3);
 
-			$this->dirpro = $rs->getString($startcol + 4);
+      $this->dirpro = $rs->getString($startcol + 4);
 
-			$this->telpro = $rs->getString($startcol + 5);
+      $this->telpro = $rs->getString($startcol + 5);
 
-			$this->faxpro = $rs->getString($startcol + 6);
+      $this->faxpro = $rs->getString($startcol + 6);
 
-			$this->email = $rs->getString($startcol + 7);
+      $this->email = $rs->getString($startcol + 7);
 
-			$this->limcre = $rs->getFloat($startcol + 8);
+      $this->limcre = $rs->getFloat($startcol + 8);
 
-			$this->codcta = $rs->getString($startcol + 9);
+      $this->codcta = $rs->getString($startcol + 9);
 
-			$this->regmer = $rs->getString($startcol + 10);
+      $this->regmer = $rs->getString($startcol + 10);
 
-			$this->fecreg = $rs->getDate($startcol + 11, null);
+      $this->fecreg = $rs->getDate($startcol + 11, null);
 
-			$this->tomreg = $rs->getString($startcol + 12);
+      $this->tomreg = $rs->getString($startcol + 12);
 
-			$this->folreg = $rs->getString($startcol + 13);
+      $this->folreg = $rs->getString($startcol + 13);
 
-			$this->capsus = $rs->getFloat($startcol + 14);
+      $this->capsus = $rs->getFloat($startcol + 14);
 
-			$this->cappag = $rs->getFloat($startcol + 15);
+      $this->cappag = $rs->getFloat($startcol + 15);
 
-			$this->rifrepleg = $rs->getString($startcol + 16);
+      $this->rifrepleg = $rs->getString($startcol + 16);
 
-			$this->nomrepleg = $rs->getString($startcol + 17);
+      $this->nomrepleg = $rs->getString($startcol + 17);
 
-			$this->dirrepleg = $rs->getString($startcol + 18);
+      $this->dirrepleg = $rs->getString($startcol + 18);
 
-			$this->fecinscir = $rs->getDate($startcol + 19, null);
+      $this->fecinscir = $rs->getDate($startcol + 19, null);
 
-			$this->numinscir = $rs->getString($startcol + 20);
+      $this->numinscir = $rs->getString($startcol + 20);
 
-			$this->nacpro = $rs->getString($startcol + 21);
+      $this->nacpro = $rs->getString($startcol + 21);
 
-			$this->codord = $rs->getString($startcol + 22);
+      $this->codord = $rs->getString($startcol + 22);
 
-			$this->codpercon = $rs->getString($startcol + 23);
+      $this->codpercon = $rs->getString($startcol + 23);
 
-			$this->codtiprec = $rs->getString($startcol + 24);
+      $this->codtiprec = $rs->getString($startcol + 24);
 
-			$this->codram = $rs->getString($startcol + 25);
+      $this->codram = $rs->getString($startcol + 25);
 
-			$this->nrocei = $rs->getString($startcol + 26);
+      $this->nrocei = $rs->getString($startcol + 26);
 
-			$this->id = $rs->getInt($startcol + 27);
+      $this->id = $rs->getInt($startcol + 27);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 28; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocprovee object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 28; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocprovee object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -748,6 +796,7 @@ abstract class BaseOcprovee extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcproveePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcproveePeer::doUpdate($this, $con);

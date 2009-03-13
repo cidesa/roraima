@@ -13,7 +13,7 @@ abstract class BaseFcreginmPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcreginm';
 
 	
-	const NUM_COLUMNS = 63;
+	const NUM_COLUMNS = 44;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -74,9 +74,6 @@ abstract class BaseFcreginmPeer {
 	const BSCON = 'fcreginm.BSCON';
 
 	
-	const DOCPRO = 'fcreginm.DOCPRO';
-
-	
 	const RIFREP = 'fcreginm.RIFREP';
 
 	
@@ -101,49 +98,7 @@ abstract class BaseFcreginmPeer {
 	const DIRCON = 'fcreginm.DIRCON';
 
 	
-	const CLACON = 'fcreginm.CLACON';
-
-	
-	const FECADQ = 'fcreginm.FECADQ';
-
-	
 	const VALINM = 'fcreginm.VALINM';
-
-	
-	const CODMAN = 'fcreginm.CODMAN';
-
-	
-	const CODSEC = 'fcreginm.CODSEC';
-
-	
-	const CODPAR = 'fcreginm.CODPAR';
-
-	
-	const NROINMANT = 'fcreginm.NROINMANT';
-
-	
-	const TOTTER = 'fcreginm.TOTTER';
-
-	
-	const TOTCON = 'fcreginm.TOTCON';
-
-	
-	const TOTAL = 'fcreginm.TOTAL';
-
-	
-	const CODTIP = 'fcreginm.CODTIP';
-
-	
-	const CODZON = 'fcreginm.CODZON';
-
-	
-	const DESTIP = 'fcreginm.DESTIP';
-
-	
-	const DESZON = 'fcreginm.DESZON';
-
-	
-	const ANUAL = 'fcreginm.ANUAL';
 
 	
 	const FOLIO = 'fcreginm.FOLIO';
@@ -161,49 +116,37 @@ abstract class BaseFcreginmPeer {
 	const USOINM = 'fcreginm.USOINM';
 
 	
-	const DESDE = 'fcreginm.DESDE';
+	const AVEINM = 'fcreginm.AVEINM';
 
 	
-	const HASTA = 'fcreginm.HASTA';
+	const NROCIV = 'fcreginm.NROCIV';
 
 	
-	const ORD = 'fcreginm.ORD';
+	const URBINM = 'fcreginm.URBINM';
 
 	
-	const ART = 'fcreginm.ART';
+	const TIPOPE = 'fcreginm.TIPOPE';
 
 	
-	const FECDIR = 'fcreginm.FECDIR';
+	const PRODOC = 'fcreginm.PRODOC';
 
 	
-	const FECAVA = 'fcreginm.FECAVA';
+	const TRIDOC = 'fcreginm.TRIDOC';
 
 	
-	const DIRINM1 = 'fcreginm.DIRINM1';
+	const AREDOC = 'fcreginm.AREDOC';
 
 	
-	const FECELA = 'fcreginm.FECELA';
+	const LINNORDOC = 'fcreginm.LINNORDOC';
 
 	
-	const TRI = 'fcreginm.TRI';
+	const LINSURDOC = 'fcreginm.LINSURDOC';
 
 	
-	const PROT = 'fcreginm.PROT';
+	const LINESTDOC = 'fcreginm.LINESTDOC';
 
 	
-	const TIPOBOL = 'fcreginm.TIPOBOL';
-
-	
-	const NOMSITINM = 'fcreginm.NOMSITINM';
-
-	
-	const IMPANU = 'fcreginm.IMPANU';
-
-	
-	const IMPTRI = 'fcreginm.IMPTRI';
-
-	
-	const ANUALT = 'fcreginm.ANUALT';
+	const LINOESDOC = 'fcreginm.LINOESDOC';
 
 	
 	const ID = 'fcreginm.ID';
@@ -214,18 +157,18 @@ abstract class BaseFcreginmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroinm', 'Codcatfis', 'Coduso', 'Codcarinm', 'Codsitinm', 'Rifcon', 'Fecpag', 'Feccal', 'Fecreg', 'Dirinm', 'Linnor', 'Linsur', 'Linest', 'Linoes', 'Mtrter', 'Mtrcon', 'Bster', 'Bscon', 'Docpro', 'Rifrep', 'Funrec', 'Fecrec', 'Estinm', 'Estdec', 'Codcatinm', 'Nomcon', 'Dircon', 'Clacon', 'Fecadq', 'Valinm', 'Codman', 'Codsec', 'Codpar', 'Nroinmant', 'Totter', 'Totcon', 'Total', 'Codtip', 'Codzon', 'Destip', 'Deszon', 'Anual', 'Folio', 'Tomo', 'Numdoc', 'Fecdoc', 'Usoinm', 'Desde', 'Hasta', 'Ord', 'Art', 'Fecdir', 'Fecava', 'Dirinm1', 'Fecela', 'Tri', 'Prot', 'Tipobol', 'Nomsitinm', 'Impanu', 'Imptri', 'Anualt', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcreginmPeer::NROINM, FcreginmPeer::CODCATFIS, FcreginmPeer::CODUSO, FcreginmPeer::CODCARINM, FcreginmPeer::CODSITINM, FcreginmPeer::RIFCON, FcreginmPeer::FECPAG, FcreginmPeer::FECCAL, FcreginmPeer::FECREG, FcreginmPeer::DIRINM, FcreginmPeer::LINNOR, FcreginmPeer::LINSUR, FcreginmPeer::LINEST, FcreginmPeer::LINOES, FcreginmPeer::MTRTER, FcreginmPeer::MTRCON, FcreginmPeer::BSTER, FcreginmPeer::BSCON, FcreginmPeer::DOCPRO, FcreginmPeer::RIFREP, FcreginmPeer::FUNREC, FcreginmPeer::FECREC, FcreginmPeer::ESTINM, FcreginmPeer::ESTDEC, FcreginmPeer::CODCATINM, FcreginmPeer::NOMCON, FcreginmPeer::DIRCON, FcreginmPeer::CLACON, FcreginmPeer::FECADQ, FcreginmPeer::VALINM, FcreginmPeer::CODMAN, FcreginmPeer::CODSEC, FcreginmPeer::CODPAR, FcreginmPeer::NROINMANT, FcreginmPeer::TOTTER, FcreginmPeer::TOTCON, FcreginmPeer::TOTAL, FcreginmPeer::CODTIP, FcreginmPeer::CODZON, FcreginmPeer::DESTIP, FcreginmPeer::DESZON, FcreginmPeer::ANUAL, FcreginmPeer::FOLIO, FcreginmPeer::TOMO, FcreginmPeer::NUMDOC, FcreginmPeer::FECDOC, FcreginmPeer::USOINM, FcreginmPeer::DESDE, FcreginmPeer::HASTA, FcreginmPeer::ORD, FcreginmPeer::ART, FcreginmPeer::FECDIR, FcreginmPeer::FECAVA, FcreginmPeer::DIRINM1, FcreginmPeer::FECELA, FcreginmPeer::TRI, FcreginmPeer::PROT, FcreginmPeer::TIPOBOL, FcreginmPeer::NOMSITINM, FcreginmPeer::IMPANU, FcreginmPeer::IMPTRI, FcreginmPeer::ANUALT, FcreginmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroinm', 'codcatfis', 'coduso', 'codcarinm', 'codsitinm', 'rifcon', 'fecpag', 'feccal', 'fecreg', 'dirinm', 'linnor', 'linsur', 'linest', 'linoes', 'mtrter', 'mtrcon', 'bster', 'bscon', 'docpro', 'rifrep', 'funrec', 'fecrec', 'estinm', 'estdec', 'codcatinm', 'nomcon', 'dircon', 'clacon', 'fecadq', 'valinm', 'codman', 'codsec', 'codpar', 'nroinmant', 'totter', 'totcon', 'total', 'codtip', 'codzon', 'destip', 'deszon', 'anual', 'folio', 'tomo', 'numdoc', 'fecdoc', 'usoinm', 'desde', 'hasta', 'ord', 'art', 'fecdir', 'fecava', 'dirinm1', 'fecela', 'tri', 'prot', 'tipobol', 'nomsitinm', 'impanu', 'imptri', 'anualt', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, )
+		BasePeer::TYPE_PHPNAME => array ('Nroinm', 'Codcatfis', 'Coduso', 'Codcarinm', 'Codsitinm', 'Rifcon', 'Fecpag', 'Feccal', 'Fecreg', 'Dirinm', 'Linnor', 'Linsur', 'Linest', 'Linoes', 'Mtrter', 'Mtrcon', 'Bster', 'Bscon', 'Rifrep', 'Funrec', 'Fecrec', 'Estinm', 'Estdec', 'Codcatinm', 'Nomcon', 'Dircon', 'Valinm', 'Folio', 'Tomo', 'Numdoc', 'Fecdoc', 'Usoinm', 'Aveinm', 'Nrociv', 'Urbinm', 'Tipope', 'Prodoc', 'Tridoc', 'Aredoc', 'Linnordoc', 'Linsurdoc', 'Linestdoc', 'Linoesdoc', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcreginmPeer::NROINM, FcreginmPeer::CODCATFIS, FcreginmPeer::CODUSO, FcreginmPeer::CODCARINM, FcreginmPeer::CODSITINM, FcreginmPeer::RIFCON, FcreginmPeer::FECPAG, FcreginmPeer::FECCAL, FcreginmPeer::FECREG, FcreginmPeer::DIRINM, FcreginmPeer::LINNOR, FcreginmPeer::LINSUR, FcreginmPeer::LINEST, FcreginmPeer::LINOES, FcreginmPeer::MTRTER, FcreginmPeer::MTRCON, FcreginmPeer::BSTER, FcreginmPeer::BSCON, FcreginmPeer::RIFREP, FcreginmPeer::FUNREC, FcreginmPeer::FECREC, FcreginmPeer::ESTINM, FcreginmPeer::ESTDEC, FcreginmPeer::CODCATINM, FcreginmPeer::NOMCON, FcreginmPeer::DIRCON, FcreginmPeer::VALINM, FcreginmPeer::FOLIO, FcreginmPeer::TOMO, FcreginmPeer::NUMDOC, FcreginmPeer::FECDOC, FcreginmPeer::USOINM, FcreginmPeer::AVEINM, FcreginmPeer::NROCIV, FcreginmPeer::URBINM, FcreginmPeer::TIPOPE, FcreginmPeer::PRODOC, FcreginmPeer::TRIDOC, FcreginmPeer::AREDOC, FcreginmPeer::LINNORDOC, FcreginmPeer::LINSURDOC, FcreginmPeer::LINESTDOC, FcreginmPeer::LINOESDOC, FcreginmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroinm', 'codcatfis', 'coduso', 'codcarinm', 'codsitinm', 'rifcon', 'fecpag', 'feccal', 'fecreg', 'dirinm', 'linnor', 'linsur', 'linest', 'linoes', 'mtrter', 'mtrcon', 'bster', 'bscon', 'rifrep', 'funrec', 'fecrec', 'estinm', 'estdec', 'codcatinm', 'nomcon', 'dircon', 'valinm', 'folio', 'tomo', 'numdoc', 'fecdoc', 'usoinm', 'aveinm', 'nrociv', 'urbinm', 'tipope', 'prodoc', 'tridoc', 'aredoc', 'linnordoc', 'linsurdoc', 'linestdoc', 'linoesdoc', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroinm' => 0, 'Codcatfis' => 1, 'Coduso' => 2, 'Codcarinm' => 3, 'Codsitinm' => 4, 'Rifcon' => 5, 'Fecpag' => 6, 'Feccal' => 7, 'Fecreg' => 8, 'Dirinm' => 9, 'Linnor' => 10, 'Linsur' => 11, 'Linest' => 12, 'Linoes' => 13, 'Mtrter' => 14, 'Mtrcon' => 15, 'Bster' => 16, 'Bscon' => 17, 'Docpro' => 18, 'Rifrep' => 19, 'Funrec' => 20, 'Fecrec' => 21, 'Estinm' => 22, 'Estdec' => 23, 'Codcatinm' => 24, 'Nomcon' => 25, 'Dircon' => 26, 'Clacon' => 27, 'Fecadq' => 28, 'Valinm' => 29, 'Codman' => 30, 'Codsec' => 31, 'Codpar' => 32, 'Nroinmant' => 33, 'Totter' => 34, 'Totcon' => 35, 'Total' => 36, 'Codtip' => 37, 'Codzon' => 38, 'Destip' => 39, 'Deszon' => 40, 'Anual' => 41, 'Folio' => 42, 'Tomo' => 43, 'Numdoc' => 44, 'Fecdoc' => 45, 'Usoinm' => 46, 'Desde' => 47, 'Hasta' => 48, 'Ord' => 49, 'Art' => 50, 'Fecdir' => 51, 'Fecava' => 52, 'Dirinm1' => 53, 'Fecela' => 54, 'Tri' => 55, 'Prot' => 56, 'Tipobol' => 57, 'Nomsitinm' => 58, 'Impanu' => 59, 'Imptri' => 60, 'Anualt' => 61, 'Id' => 62, ),
-		BasePeer::TYPE_COLNAME => array (FcreginmPeer::NROINM => 0, FcreginmPeer::CODCATFIS => 1, FcreginmPeer::CODUSO => 2, FcreginmPeer::CODCARINM => 3, FcreginmPeer::CODSITINM => 4, FcreginmPeer::RIFCON => 5, FcreginmPeer::FECPAG => 6, FcreginmPeer::FECCAL => 7, FcreginmPeer::FECREG => 8, FcreginmPeer::DIRINM => 9, FcreginmPeer::LINNOR => 10, FcreginmPeer::LINSUR => 11, FcreginmPeer::LINEST => 12, FcreginmPeer::LINOES => 13, FcreginmPeer::MTRTER => 14, FcreginmPeer::MTRCON => 15, FcreginmPeer::BSTER => 16, FcreginmPeer::BSCON => 17, FcreginmPeer::DOCPRO => 18, FcreginmPeer::RIFREP => 19, FcreginmPeer::FUNREC => 20, FcreginmPeer::FECREC => 21, FcreginmPeer::ESTINM => 22, FcreginmPeer::ESTDEC => 23, FcreginmPeer::CODCATINM => 24, FcreginmPeer::NOMCON => 25, FcreginmPeer::DIRCON => 26, FcreginmPeer::CLACON => 27, FcreginmPeer::FECADQ => 28, FcreginmPeer::VALINM => 29, FcreginmPeer::CODMAN => 30, FcreginmPeer::CODSEC => 31, FcreginmPeer::CODPAR => 32, FcreginmPeer::NROINMANT => 33, FcreginmPeer::TOTTER => 34, FcreginmPeer::TOTCON => 35, FcreginmPeer::TOTAL => 36, FcreginmPeer::CODTIP => 37, FcreginmPeer::CODZON => 38, FcreginmPeer::DESTIP => 39, FcreginmPeer::DESZON => 40, FcreginmPeer::ANUAL => 41, FcreginmPeer::FOLIO => 42, FcreginmPeer::TOMO => 43, FcreginmPeer::NUMDOC => 44, FcreginmPeer::FECDOC => 45, FcreginmPeer::USOINM => 46, FcreginmPeer::DESDE => 47, FcreginmPeer::HASTA => 48, FcreginmPeer::ORD => 49, FcreginmPeer::ART => 50, FcreginmPeer::FECDIR => 51, FcreginmPeer::FECAVA => 52, FcreginmPeer::DIRINM1 => 53, FcreginmPeer::FECELA => 54, FcreginmPeer::TRI => 55, FcreginmPeer::PROT => 56, FcreginmPeer::TIPOBOL => 57, FcreginmPeer::NOMSITINM => 58, FcreginmPeer::IMPANU => 59, FcreginmPeer::IMPTRI => 60, FcreginmPeer::ANUALT => 61, FcreginmPeer::ID => 62, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroinm' => 0, 'codcatfis' => 1, 'coduso' => 2, 'codcarinm' => 3, 'codsitinm' => 4, 'rifcon' => 5, 'fecpag' => 6, 'feccal' => 7, 'fecreg' => 8, 'dirinm' => 9, 'linnor' => 10, 'linsur' => 11, 'linest' => 12, 'linoes' => 13, 'mtrter' => 14, 'mtrcon' => 15, 'bster' => 16, 'bscon' => 17, 'docpro' => 18, 'rifrep' => 19, 'funrec' => 20, 'fecrec' => 21, 'estinm' => 22, 'estdec' => 23, 'codcatinm' => 24, 'nomcon' => 25, 'dircon' => 26, 'clacon' => 27, 'fecadq' => 28, 'valinm' => 29, 'codman' => 30, 'codsec' => 31, 'codpar' => 32, 'nroinmant' => 33, 'totter' => 34, 'totcon' => 35, 'total' => 36, 'codtip' => 37, 'codzon' => 38, 'destip' => 39, 'deszon' => 40, 'anual' => 41, 'folio' => 42, 'tomo' => 43, 'numdoc' => 44, 'fecdoc' => 45, 'usoinm' => 46, 'desde' => 47, 'hasta' => 48, 'ord' => 49, 'art' => 50, 'fecdir' => 51, 'fecava' => 52, 'dirinm1' => 53, 'fecela' => 54, 'tri' => 55, 'prot' => 56, 'tipobol' => 57, 'nomsitinm' => 58, 'impanu' => 59, 'imptri' => 60, 'anualt' => 61, 'id' => 62, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, )
+		BasePeer::TYPE_PHPNAME => array ('Nroinm' => 0, 'Codcatfis' => 1, 'Coduso' => 2, 'Codcarinm' => 3, 'Codsitinm' => 4, 'Rifcon' => 5, 'Fecpag' => 6, 'Feccal' => 7, 'Fecreg' => 8, 'Dirinm' => 9, 'Linnor' => 10, 'Linsur' => 11, 'Linest' => 12, 'Linoes' => 13, 'Mtrter' => 14, 'Mtrcon' => 15, 'Bster' => 16, 'Bscon' => 17, 'Rifrep' => 18, 'Funrec' => 19, 'Fecrec' => 20, 'Estinm' => 21, 'Estdec' => 22, 'Codcatinm' => 23, 'Nomcon' => 24, 'Dircon' => 25, 'Valinm' => 26, 'Folio' => 27, 'Tomo' => 28, 'Numdoc' => 29, 'Fecdoc' => 30, 'Usoinm' => 31, 'Aveinm' => 32, 'Nrociv' => 33, 'Urbinm' => 34, 'Tipope' => 35, 'Prodoc' => 36, 'Tridoc' => 37, 'Aredoc' => 38, 'Linnordoc' => 39, 'Linsurdoc' => 40, 'Linestdoc' => 41, 'Linoesdoc' => 42, 'Id' => 43, ),
+		BasePeer::TYPE_COLNAME => array (FcreginmPeer::NROINM => 0, FcreginmPeer::CODCATFIS => 1, FcreginmPeer::CODUSO => 2, FcreginmPeer::CODCARINM => 3, FcreginmPeer::CODSITINM => 4, FcreginmPeer::RIFCON => 5, FcreginmPeer::FECPAG => 6, FcreginmPeer::FECCAL => 7, FcreginmPeer::FECREG => 8, FcreginmPeer::DIRINM => 9, FcreginmPeer::LINNOR => 10, FcreginmPeer::LINSUR => 11, FcreginmPeer::LINEST => 12, FcreginmPeer::LINOES => 13, FcreginmPeer::MTRTER => 14, FcreginmPeer::MTRCON => 15, FcreginmPeer::BSTER => 16, FcreginmPeer::BSCON => 17, FcreginmPeer::RIFREP => 18, FcreginmPeer::FUNREC => 19, FcreginmPeer::FECREC => 20, FcreginmPeer::ESTINM => 21, FcreginmPeer::ESTDEC => 22, FcreginmPeer::CODCATINM => 23, FcreginmPeer::NOMCON => 24, FcreginmPeer::DIRCON => 25, FcreginmPeer::VALINM => 26, FcreginmPeer::FOLIO => 27, FcreginmPeer::TOMO => 28, FcreginmPeer::NUMDOC => 29, FcreginmPeer::FECDOC => 30, FcreginmPeer::USOINM => 31, FcreginmPeer::AVEINM => 32, FcreginmPeer::NROCIV => 33, FcreginmPeer::URBINM => 34, FcreginmPeer::TIPOPE => 35, FcreginmPeer::PRODOC => 36, FcreginmPeer::TRIDOC => 37, FcreginmPeer::AREDOC => 38, FcreginmPeer::LINNORDOC => 39, FcreginmPeer::LINSURDOC => 40, FcreginmPeer::LINESTDOC => 41, FcreginmPeer::LINOESDOC => 42, FcreginmPeer::ID => 43, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroinm' => 0, 'codcatfis' => 1, 'coduso' => 2, 'codcarinm' => 3, 'codsitinm' => 4, 'rifcon' => 5, 'fecpag' => 6, 'feccal' => 7, 'fecreg' => 8, 'dirinm' => 9, 'linnor' => 10, 'linsur' => 11, 'linest' => 12, 'linoes' => 13, 'mtrter' => 14, 'mtrcon' => 15, 'bster' => 16, 'bscon' => 17, 'rifrep' => 18, 'funrec' => 19, 'fecrec' => 20, 'estinm' => 21, 'estdec' => 22, 'codcatinm' => 23, 'nomcon' => 24, 'dircon' => 25, 'valinm' => 26, 'folio' => 27, 'tomo' => 28, 'numdoc' => 29, 'fecdoc' => 30, 'usoinm' => 31, 'aveinm' => 32, 'nrociv' => 33, 'urbinm' => 34, 'tipope' => 35, 'prodoc' => 36, 'tridoc' => 37, 'aredoc' => 38, 'linnordoc' => 39, 'linsurdoc' => 40, 'linestdoc' => 41, 'linoesdoc' => 42, 'id' => 43, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, )
 	);
 
 	
@@ -315,8 +258,6 @@ abstract class BaseFcreginmPeer {
 
 		$criteria->addSelectColumn(FcreginmPeer::BSCON);
 
-		$criteria->addSelectColumn(FcreginmPeer::DOCPRO);
-
 		$criteria->addSelectColumn(FcreginmPeer::RIFREP);
 
 		$criteria->addSelectColumn(FcreginmPeer::FUNREC);
@@ -333,35 +274,7 @@ abstract class BaseFcreginmPeer {
 
 		$criteria->addSelectColumn(FcreginmPeer::DIRCON);
 
-		$criteria->addSelectColumn(FcreginmPeer::CLACON);
-
-		$criteria->addSelectColumn(FcreginmPeer::FECADQ);
-
 		$criteria->addSelectColumn(FcreginmPeer::VALINM);
-
-		$criteria->addSelectColumn(FcreginmPeer::CODMAN);
-
-		$criteria->addSelectColumn(FcreginmPeer::CODSEC);
-
-		$criteria->addSelectColumn(FcreginmPeer::CODPAR);
-
-		$criteria->addSelectColumn(FcreginmPeer::NROINMANT);
-
-		$criteria->addSelectColumn(FcreginmPeer::TOTTER);
-
-		$criteria->addSelectColumn(FcreginmPeer::TOTCON);
-
-		$criteria->addSelectColumn(FcreginmPeer::TOTAL);
-
-		$criteria->addSelectColumn(FcreginmPeer::CODTIP);
-
-		$criteria->addSelectColumn(FcreginmPeer::CODZON);
-
-		$criteria->addSelectColumn(FcreginmPeer::DESTIP);
-
-		$criteria->addSelectColumn(FcreginmPeer::DESZON);
-
-		$criteria->addSelectColumn(FcreginmPeer::ANUAL);
 
 		$criteria->addSelectColumn(FcreginmPeer::FOLIO);
 
@@ -373,35 +286,27 @@ abstract class BaseFcreginmPeer {
 
 		$criteria->addSelectColumn(FcreginmPeer::USOINM);
 
-		$criteria->addSelectColumn(FcreginmPeer::DESDE);
+		$criteria->addSelectColumn(FcreginmPeer::AVEINM);
 
-		$criteria->addSelectColumn(FcreginmPeer::HASTA);
+		$criteria->addSelectColumn(FcreginmPeer::NROCIV);
 
-		$criteria->addSelectColumn(FcreginmPeer::ORD);
+		$criteria->addSelectColumn(FcreginmPeer::URBINM);
 
-		$criteria->addSelectColumn(FcreginmPeer::ART);
+		$criteria->addSelectColumn(FcreginmPeer::TIPOPE);
 
-		$criteria->addSelectColumn(FcreginmPeer::FECDIR);
+		$criteria->addSelectColumn(FcreginmPeer::PRODOC);
 
-		$criteria->addSelectColumn(FcreginmPeer::FECAVA);
+		$criteria->addSelectColumn(FcreginmPeer::TRIDOC);
 
-		$criteria->addSelectColumn(FcreginmPeer::DIRINM1);
+		$criteria->addSelectColumn(FcreginmPeer::AREDOC);
 
-		$criteria->addSelectColumn(FcreginmPeer::FECELA);
+		$criteria->addSelectColumn(FcreginmPeer::LINNORDOC);
 
-		$criteria->addSelectColumn(FcreginmPeer::TRI);
+		$criteria->addSelectColumn(FcreginmPeer::LINSURDOC);
 
-		$criteria->addSelectColumn(FcreginmPeer::PROT);
+		$criteria->addSelectColumn(FcreginmPeer::LINESTDOC);
 
-		$criteria->addSelectColumn(FcreginmPeer::TIPOBOL);
-
-		$criteria->addSelectColumn(FcreginmPeer::NOMSITINM);
-
-		$criteria->addSelectColumn(FcreginmPeer::IMPANU);
-
-		$criteria->addSelectColumn(FcreginmPeer::IMPTRI);
-
-		$criteria->addSelectColumn(FcreginmPeer::ANUALT);
+		$criteria->addSelectColumn(FcreginmPeer::LINOESDOC);
 
 		$criteria->addSelectColumn(FcreginmPeer::ID);
 
@@ -505,6 +410,7 @@ abstract class BaseFcreginmPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcreginmPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

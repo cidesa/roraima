@@ -20,25 +20,25 @@ abstract class BaseFacorrelatPeer {
 
 
 	
-	const CODPRE = 'facorrelat.CODPRE';
+	const CORPRE = 'facorrelat.CORPRE';
 
 	
-	const CODPED = 'facorrelat.CODPED';
+	const CORPED = 'facorrelat.CORPED';
 
 	
-	const CODFAC = 'facorrelat.CODFAC';
+	const CORFAC = 'facorrelat.CORFAC';
 
 	
-	const CODNOT = 'facorrelat.CODNOT';
+	const CORNOT = 'facorrelat.CORNOT';
 
 	
-	const CODDPH = 'facorrelat.CODDPH';
+	const CORDPH = 'facorrelat.CORDPH';
 
 	
-	const CODDEV = 'facorrelat.CODDEV';
+	const CORDEV = 'facorrelat.CORDEV';
 
 	
-	const CODAJU = 'facorrelat.CODAJU';
+	const CORAJU = 'facorrelat.CORAJU';
 
 	
 	const ID = 'facorrelat.ID';
@@ -49,17 +49,17 @@ abstract class BaseFacorrelatPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpre', 'Codped', 'Codfac', 'Codnot', 'Coddph', 'Coddev', 'Codaju', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FacorrelatPeer::CODPRE, FacorrelatPeer::CODPED, FacorrelatPeer::CODFAC, FacorrelatPeer::CODNOT, FacorrelatPeer::CODDPH, FacorrelatPeer::CODDEV, FacorrelatPeer::CODAJU, FacorrelatPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpre', 'codped', 'codfac', 'codnot', 'coddph', 'coddev', 'codaju', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Corpre', 'Corped', 'Corfac', 'Cornot', 'Cordph', 'Cordev', 'Coraju', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FacorrelatPeer::CORPRE, FacorrelatPeer::CORPED, FacorrelatPeer::CORFAC, FacorrelatPeer::CORNOT, FacorrelatPeer::CORDPH, FacorrelatPeer::CORDEV, FacorrelatPeer::CORAJU, FacorrelatPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('corpre', 'corped', 'corfac', 'cornot', 'cordph', 'cordev', 'coraju', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpre' => 0, 'Codped' => 1, 'Codfac' => 2, 'Codnot' => 3, 'Coddph' => 4, 'Coddev' => 5, 'Codaju' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (FacorrelatPeer::CODPRE => 0, FacorrelatPeer::CODPED => 1, FacorrelatPeer::CODFAC => 2, FacorrelatPeer::CODNOT => 3, FacorrelatPeer::CODDPH => 4, FacorrelatPeer::CODDEV => 5, FacorrelatPeer::CODAJU => 6, FacorrelatPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpre' => 0, 'codped' => 1, 'codfac' => 2, 'codnot' => 3, 'coddph' => 4, 'coddev' => 5, 'codaju' => 6, 'id' => 7, ),
+		BasePeer::TYPE_PHPNAME => array ('Corpre' => 0, 'Corped' => 1, 'Corfac' => 2, 'Cornot' => 3, 'Cordph' => 4, 'Cordev' => 5, 'Coraju' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (FacorrelatPeer::CORPRE => 0, FacorrelatPeer::CORPED => 1, FacorrelatPeer::CORFAC => 2, FacorrelatPeer::CORNOT => 3, FacorrelatPeer::CORDPH => 4, FacorrelatPeer::CORDEV => 5, FacorrelatPeer::CORAJU => 6, FacorrelatPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('corpre' => 0, 'corped' => 1, 'corfac' => 2, 'cornot' => 3, 'cordph' => 4, 'cordev' => 5, 'coraju' => 6, 'id' => 7, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
@@ -114,19 +114,19 @@ abstract class BaseFacorrelatPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(FacorrelatPeer::CODPRE);
+		$criteria->addSelectColumn(FacorrelatPeer::CORPRE);
 
-		$criteria->addSelectColumn(FacorrelatPeer::CODPED);
+		$criteria->addSelectColumn(FacorrelatPeer::CORPED);
 
-		$criteria->addSelectColumn(FacorrelatPeer::CODFAC);
+		$criteria->addSelectColumn(FacorrelatPeer::CORFAC);
 
-		$criteria->addSelectColumn(FacorrelatPeer::CODNOT);
+		$criteria->addSelectColumn(FacorrelatPeer::CORNOT);
 
-		$criteria->addSelectColumn(FacorrelatPeer::CODDPH);
+		$criteria->addSelectColumn(FacorrelatPeer::CORDPH);
 
-		$criteria->addSelectColumn(FacorrelatPeer::CODDEV);
+		$criteria->addSelectColumn(FacorrelatPeer::CORDEV);
 
-		$criteria->addSelectColumn(FacorrelatPeer::CODAJU);
+		$criteria->addSelectColumn(FacorrelatPeer::CORAJU);
 
 		$criteria->addSelectColumn(FacorrelatPeer::ID);
 
@@ -230,6 +230,7 @@ abstract class BaseFacorrelatPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FacorrelatPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

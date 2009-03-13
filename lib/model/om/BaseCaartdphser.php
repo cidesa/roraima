@@ -41,169 +41,197 @@ abstract class BaseCaartdphser extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getDphart()
-	{
+  
+  public function getDphart()
+  {
 
-		return $this->dphart; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->dphart);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getFecrea($format = 'Y-m-d')
-	{
+    return trim($this->codart);
 
-		if ($this->fecrea === null || $this->fecrea === '') {
-			return null;
-		} elseif (!is_int($this->fecrea)) {
-						$ts = strtotime($this->fecrea);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrea] as date/time value: " . var_export($this->fecrea, true));
-			}
-		} else {
-			$ts = $this->fecrea;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodcat()
+  {
 
-	
-	public function getNomemp()
-	{
+    return trim($this->codcat);
 
-		return $this->nomemp; 		
-	}
-	
-	public function getDphobs()
-	{
+  }
+  
+  public function getFecrea($format = 'Y-m-d')
+  {
 
-		return $this->dphobs; 		
-	}
-	
-	public function getId()
-	{
+    if ($this->fecrea === null || $this->fecrea === '') {
+      return null;
+    } elseif (!is_int($this->fecrea)) {
+            $ts = adodb_strtotime($this->fecrea);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrea] as date/time value: " . var_export($this->fecrea, true));
+      }
+    } else {
+      $ts = $this->fecrea;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getNomemp()
+  {
+
+    return trim($this->nomemp);
+
+  }
+  
+  public function getDphobs()
+  {
+
+    return trim($this->dphobs);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDphart($v)
 	{
 
-		if ($this->dphart !== $v) {
-			$this->dphart = $v;
-			$this->modifiedColumns[] = CaartdphserPeer::DPHART;
-		}
-
+    if ($this->dphart !== $v) {
+        $this->dphart = $v;
+        $this->modifiedColumns[] = CaartdphserPeer::DPHART;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartdphserPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartdphserPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CaartdphserPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CaartdphserPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setFecrea($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrea] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrea !== $ts) {
-			$this->fecrea = $ts;
-			$this->modifiedColumns[] = CaartdphserPeer::FECREA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrea] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrea !== $ts) {
+      $this->fecrea = $ts;
+      $this->modifiedColumns[] = CaartdphserPeer::FECREA;
+    }
 
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = CaartdphserPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = CaartdphserPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setDphobs($v)
 	{
 
-		if ($this->dphobs !== $v) {
-			$this->dphobs = $v;
-			$this->modifiedColumns[] = CaartdphserPeer::DPHOBS;
-		}
-
+    if ($this->dphobs !== $v) {
+        $this->dphobs = $v;
+        $this->modifiedColumns[] = CaartdphserPeer::DPHOBS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartdphserPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartdphserPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->dphart = $rs->getString($startcol + 0);
+      $this->dphart = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->codcat = $rs->getString($startcol + 2);
+      $this->codcat = $rs->getString($startcol + 2);
 
-			$this->fecrea = $rs->getDate($startcol + 3, null);
+      $this->fecrea = $rs->getDate($startcol + 3, null);
 
-			$this->nomemp = $rs->getString($startcol + 4);
+      $this->nomemp = $rs->getString($startcol + 4);
 
-			$this->dphobs = $rs->getString($startcol + 5);
+      $this->dphobs = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartdphser object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartdphser object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -260,6 +288,7 @@ abstract class BaseCaartdphser extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaartdphserPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaartdphserPeer::doUpdate($this, $con);

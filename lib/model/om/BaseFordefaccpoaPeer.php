@@ -260,6 +260,7 @@ abstract class BaseFordefaccpoaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefaccpoaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

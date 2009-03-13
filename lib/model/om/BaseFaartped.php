@@ -49,188 +49,219 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNroped()
-	{
+  
+  public function getNroped()
+  {
 
-		return $this->nroped; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->nroped);
 
-		return $this->codart; 		
-	}
-	
-	public function getCanord()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return number_format($this->canord,2,',','.');
-		
-	}
-	
-	public function getCanaju()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canaju,2,',','.');
-		
-	}
-	
-	public function getCandes()
-	{
+  }
+  
+  public function getCanord($val=false)
+  {
 
-		return number_format($this->candes,2,',','.');
-		
-	}
-	
-	public function getCantot()
-	{
+    if($val) return number_format($this->canord,2,',','.');
+    else return $this->canord;
 
-		return number_format($this->cantot,2,',','.');
-		
-	}
-	
-	public function getPreart()
-	{
+  }
+  
+  public function getCanaju($val=false)
+  {
 
-		return number_format($this->preart,2,',','.');
-		
-	}
-	
-	public function getTotart()
-	{
+    if($val) return number_format($this->canaju,2,',','.');
+    else return $this->canaju;
 
-		return number_format($this->totart,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCandes($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->candes,2,',','.');
+    else return $this->candes;
+
+  }
+  
+  public function getCantot($val=false)
+  {
+
+    if($val) return number_format($this->cantot,2,',','.');
+    else return $this->cantot;
+
+  }
+  
+  public function getPreart($val=false)
+  {
+
+    if($val) return number_format($this->preart,2,',','.');
+    else return $this->preart;
+
+  }
+  
+  public function getTotart($val=false)
+  {
+
+    if($val) return number_format($this->totart,2,',','.');
+    else return $this->totart;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNroped($v)
 	{
 
-		if ($this->nroped !== $v) {
-			$this->nroped = $v;
-			$this->modifiedColumns[] = FaartpedPeer::NROPED;
-		}
-
+    if ($this->nroped !== $v) {
+        $this->nroped = $v;
+        $this->modifiedColumns[] = FaartpedPeer::NROPED;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FaartpedPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FaartpedPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCanord($v)
 	{
 
-		if ($this->canord !== $v) {
-			$this->canord = $v;
-			$this->modifiedColumns[] = FaartpedPeer::CANORD;
-		}
-
+    if ($this->canord !== $v) {
+        $this->canord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartpedPeer::CANORD;
+      }
+  
 	} 
 	
 	public function setCanaju($v)
 	{
 
-		if ($this->canaju !== $v) {
-			$this->canaju = $v;
-			$this->modifiedColumns[] = FaartpedPeer::CANAJU;
-		}
-
+    if ($this->canaju !== $v) {
+        $this->canaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartpedPeer::CANAJU;
+      }
+  
 	} 
 	
 	public function setCandes($v)
 	{
 
-		if ($this->candes !== $v) {
-			$this->candes = $v;
-			$this->modifiedColumns[] = FaartpedPeer::CANDES;
-		}
-
+    if ($this->candes !== $v) {
+        $this->candes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartpedPeer::CANDES;
+      }
+  
 	} 
 	
 	public function setCantot($v)
 	{
 
-		if ($this->cantot !== $v) {
-			$this->cantot = $v;
-			$this->modifiedColumns[] = FaartpedPeer::CANTOT;
-		}
-
+    if ($this->cantot !== $v) {
+        $this->cantot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartpedPeer::CANTOT;
+      }
+  
 	} 
 	
 	public function setPreart($v)
 	{
 
-		if ($this->preart !== $v) {
-			$this->preart = $v;
-			$this->modifiedColumns[] = FaartpedPeer::PREART;
-		}
-
+    if ($this->preart !== $v) {
+        $this->preart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartpedPeer::PREART;
+      }
+  
 	} 
 	
 	public function setTotart($v)
 	{
 
-		if ($this->totart !== $v) {
-			$this->totart = $v;
-			$this->modifiedColumns[] = FaartpedPeer::TOTART;
-		}
-
+    if ($this->totart !== $v) {
+        $this->totart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartpedPeer::TOTART;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FaartpedPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FaartpedPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nroped = $rs->getString($startcol + 0);
+      $this->nroped = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->canord = $rs->getFloat($startcol + 2);
+      $this->canord = $rs->getFloat($startcol + 2);
 
-			$this->canaju = $rs->getFloat($startcol + 3);
+      $this->canaju = $rs->getFloat($startcol + 3);
 
-			$this->candes = $rs->getFloat($startcol + 4);
+      $this->candes = $rs->getFloat($startcol + 4);
 
-			$this->cantot = $rs->getFloat($startcol + 5);
+      $this->cantot = $rs->getFloat($startcol + 5);
 
-			$this->preart = $rs->getFloat($startcol + 6);
+      $this->preart = $rs->getFloat($startcol + 6);
 
-			$this->totart = $rs->getFloat($startcol + 7);
+      $this->totart = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Faartped object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Faartped object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -287,6 +318,7 @@ abstract class BaseFaartped extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FaartpedPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FaartpedPeer::doUpdate($this, $con);

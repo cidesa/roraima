@@ -41,6 +41,18 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 
 
 	
+	protected $fuerep;
+
+
+	
+	protected $fuesan;
+
+
+	
+	protected $fecrec;
+
+
+	
 	protected $id;
 
 	
@@ -49,207 +61,316 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumlic()
-	{
+  
+  public function getNumlic()
+  {
 
-		return $this->numlic; 		
-	}
-	
-	public function getFunrec()
-	{
+    return trim($this->numlic);
 
-		return $this->funrec; 		
-	}
-	
-	public function getFecrep($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFunrec()
+  {
 
-		if ($this->fecrep === null || $this->fecrep === '') {
-			return null;
-		} elseif (!is_int($this->fecrep)) {
-						$ts = strtotime($this->fecrep);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrep] as date/time value: " . var_export($this->fecrep, true));
-			}
-		} else {
-			$ts = $this->fecrep;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->funrec);
 
-	
-	public function getNumrep()
-	{
+  }
+  
+  public function getFecrep($format = 'Y-m-d')
+  {
 
-		return $this->numrep; 		
-	}
-	
-	public function getMonrep()
-	{
+    if ($this->fecrep === null || $this->fecrep === '') {
+      return null;
+    } elseif (!is_int($this->fecrep)) {
+            $ts = adodb_strtotime($this->fecrep);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrep] as date/time value: " . var_export($this->fecrep, true));
+      }
+    } else {
+      $ts = $this->fecrep;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monrep,2,',','.');
-		
-	}
-	
-	public function getConrep()
-	{
+  
+  public function getNumrep()
+  {
 
-		return $this->conrep; 		
-	}
-	
-	public function getModo()
-	{
+    return trim($this->numrep);
 
-		return $this->modo; 		
-	}
-	
-	public function getMonadi()
-	{
+  }
+  
+  public function getMonrep($val=false)
+  {
 
-		return number_format($this->monadi,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monrep,2,',','.');
+    else return $this->monrep;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getConrep()
+  {
+
+    return trim($this->conrep);
+
+  }
+  
+  public function getModo()
+  {
+
+    return trim($this->modo);
+
+  }
+  
+  public function getMonadi($val=false)
+  {
+
+    if($val) return number_format($this->monadi,2,',','.');
+    else return $this->monadi;
+
+  }
+  
+  public function getFuerep()
+  {
+
+    return trim($this->fuerep);
+
+  }
+  
+  public function getFuesan()
+  {
+
+    return trim($this->fuesan);
+
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
+
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumlic($v)
 	{
 
-		if ($this->numlic !== $v) {
-			$this->numlic = $v;
-			$this->modifiedColumns[] = FcrepfisPeer::NUMLIC;
-		}
-
+    if ($this->numlic !== $v) {
+        $this->numlic = $v;
+        $this->modifiedColumns[] = FcrepfisPeer::NUMLIC;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FcrepfisPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FcrepfisPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setFecrep($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrep] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrep !== $ts) {
-			$this->fecrep = $ts;
-			$this->modifiedColumns[] = FcrepfisPeer::FECREP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrep] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrep !== $ts) {
+      $this->fecrep = $ts;
+      $this->modifiedColumns[] = FcrepfisPeer::FECREP;
+    }
 
 	} 
 	
 	public function setNumrep($v)
 	{
 
-		if ($this->numrep !== $v) {
-			$this->numrep = $v;
-			$this->modifiedColumns[] = FcrepfisPeer::NUMREP;
-		}
-
+    if ($this->numrep !== $v) {
+        $this->numrep = $v;
+        $this->modifiedColumns[] = FcrepfisPeer::NUMREP;
+      }
+  
 	} 
 	
 	public function setMonrep($v)
 	{
 
-		if ($this->monrep !== $v) {
-			$this->monrep = $v;
-			$this->modifiedColumns[] = FcrepfisPeer::MONREP;
-		}
-
+    if ($this->monrep !== $v) {
+        $this->monrep = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrepfisPeer::MONREP;
+      }
+  
 	} 
 	
 	public function setConrep($v)
 	{
 
-		if ($this->conrep !== $v) {
-			$this->conrep = $v;
-			$this->modifiedColumns[] = FcrepfisPeer::CONREP;
-		}
-
+    if ($this->conrep !== $v) {
+        $this->conrep = $v;
+        $this->modifiedColumns[] = FcrepfisPeer::CONREP;
+      }
+  
 	} 
 	
 	public function setModo($v)
 	{
 
-		if ($this->modo !== $v) {
-			$this->modo = $v;
-			$this->modifiedColumns[] = FcrepfisPeer::MODO;
-		}
-
+    if ($this->modo !== $v) {
+        $this->modo = $v;
+        $this->modifiedColumns[] = FcrepfisPeer::MODO;
+      }
+  
 	} 
 	
 	public function setMonadi($v)
 	{
 
-		if ($this->monadi !== $v) {
-			$this->monadi = $v;
-			$this->modifiedColumns[] = FcrepfisPeer::MONADI;
-		}
+    if ($this->monadi !== $v) {
+        $this->monadi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrepfisPeer::MONADI;
+      }
+  
+	} 
+	
+	public function setFuerep($v)
+	{
+
+    if ($this->fuerep !== $v) {
+        $this->fuerep = $v;
+        $this->modifiedColumns[] = FcrepfisPeer::FUEREP;
+      }
+  
+	} 
+	
+	public function setFuesan($v)
+	{
+
+    if ($this->fuesan !== $v) {
+        $this->fuesan = $v;
+        $this->modifiedColumns[] = FcrepfisPeer::FUESAN;
+      }
+  
+	} 
+	
+	public function setFecrec($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = FcrepfisPeer::FECREC;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcrepfisPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcrepfisPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numlic = $rs->getString($startcol + 0);
+      $this->numlic = $rs->getString($startcol + 0);
 
-			$this->funrec = $rs->getString($startcol + 1);
+      $this->funrec = $rs->getString($startcol + 1);
 
-			$this->fecrep = $rs->getDate($startcol + 2, null);
+      $this->fecrep = $rs->getDate($startcol + 2, null);
 
-			$this->numrep = $rs->getString($startcol + 3);
+      $this->numrep = $rs->getString($startcol + 3);
 
-			$this->monrep = $rs->getFloat($startcol + 4);
+      $this->monrep = $rs->getFloat($startcol + 4);
 
-			$this->conrep = $rs->getString($startcol + 5);
+      $this->conrep = $rs->getString($startcol + 5);
 
-			$this->modo = $rs->getString($startcol + 6);
+      $this->modo = $rs->getString($startcol + 6);
 
-			$this->monadi = $rs->getFloat($startcol + 7);
+      $this->monadi = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->fuerep = $rs->getString($startcol + 8);
 
-			$this->resetModified();
+      $this->fuesan = $rs->getString($startcol + 9);
 
-			$this->setNew(false);
+      $this->fecrec = $rs->getDate($startcol + 10, null);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcrepfis object", $e);
-		}
-	}
+      $this->id = $rs->getInt($startcol + 11);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcrepfis object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -306,6 +427,7 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcrepfisPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcrepfisPeer::doUpdate($this, $con);
@@ -396,6 +518,15 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 				return $this->getMonadi();
 				break;
 			case 8:
+				return $this->getFuerep();
+				break;
+			case 9:
+				return $this->getFuesan();
+				break;
+			case 10:
+				return $this->getFecrec();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -416,7 +547,10 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 			$keys[5] => $this->getConrep(),
 			$keys[6] => $this->getModo(),
 			$keys[7] => $this->getMonadi(),
-			$keys[8] => $this->getId(),
+			$keys[8] => $this->getFuerep(),
+			$keys[9] => $this->getFuesan(),
+			$keys[10] => $this->getFecrec(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -457,6 +591,15 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 				$this->setMonadi($value);
 				break;
 			case 8:
+				$this->setFuerep($value);
+				break;
+			case 9:
+				$this->setFuesan($value);
+				break;
+			case 10:
+				$this->setFecrec($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -474,7 +617,10 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setConrep($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setModo($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setMonadi($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFuerep($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setFuesan($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setFecrec($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -490,6 +636,9 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcrepfisPeer::CONREP)) $criteria->add(FcrepfisPeer::CONREP, $this->conrep);
 		if ($this->isColumnModified(FcrepfisPeer::MODO)) $criteria->add(FcrepfisPeer::MODO, $this->modo);
 		if ($this->isColumnModified(FcrepfisPeer::MONADI)) $criteria->add(FcrepfisPeer::MONADI, $this->monadi);
+		if ($this->isColumnModified(FcrepfisPeer::FUEREP)) $criteria->add(FcrepfisPeer::FUEREP, $this->fuerep);
+		if ($this->isColumnModified(FcrepfisPeer::FUESAN)) $criteria->add(FcrepfisPeer::FUESAN, $this->fuesan);
+		if ($this->isColumnModified(FcrepfisPeer::FECREC)) $criteria->add(FcrepfisPeer::FECREC, $this->fecrec);
 		if ($this->isColumnModified(FcrepfisPeer::ID)) $criteria->add(FcrepfisPeer::ID, $this->id);
 
 		return $criteria;
@@ -536,6 +685,12 @@ abstract class BaseFcrepfis extends BaseObject  implements Persistent {
 		$copyObj->setModo($this->modo);
 
 		$copyObj->setMonadi($this->monadi);
+
+		$copyObj->setFuerep($this->fuerep);
+
+		$copyObj->setFuesan($this->fuesan);
+
+		$copyObj->setFecrec($this->fecrec);
 
 
 		$copyObj->setNew(true);

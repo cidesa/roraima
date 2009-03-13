@@ -25,74 +25,99 @@ abstract class BaseNomcarocp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodocp()
-	{
+  
+  public function getCodocp()
+  {
 
-		return $this->codocp; 		
-	}
-	
-	public function getDesocp()
-	{
+    return trim($this->codocp);
 
-		return $this->desocp; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDesocp()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->desocp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodocp($v)
 	{
 
-		if ($this->codocp !== $v) {
-			$this->codocp = $v;
-			$this->modifiedColumns[] = NomcarocpPeer::CODOCP;
-		}
-
+    if ($this->codocp !== $v) {
+        $this->codocp = $v;
+        $this->modifiedColumns[] = NomcarocpPeer::CODOCP;
+      }
+  
 	} 
 	
 	public function setDesocp($v)
 	{
 
-		if ($this->desocp !== $v) {
-			$this->desocp = $v;
-			$this->modifiedColumns[] = NomcarocpPeer::DESOCP;
-		}
-
+    if ($this->desocp !== $v) {
+        $this->desocp = $v;
+        $this->modifiedColumns[] = NomcarocpPeer::DESOCP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NomcarocpPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NomcarocpPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codocp = $rs->getString($startcol + 0);
+      $this->codocp = $rs->getString($startcol + 0);
 
-			$this->desocp = $rs->getString($startcol + 1);
+      $this->desocp = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nomcarocp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nomcarocp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseNomcarocp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NomcarocpPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NomcarocpPeer::doUpdate($this, $con);

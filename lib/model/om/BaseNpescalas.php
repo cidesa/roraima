@@ -29,93 +29,119 @@ abstract class BaseNpescalas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getGrado()
-	{
+  
+  public function getGrado()
+  {
 
-		return $this->grado; 		
-	}
-	
-	public function getPaso()
-	{
+    return trim($this->grado);
 
-		return $this->paso; 		
-	}
-	
-	public function getSalario()
-	{
+  }
+  
+  public function getPaso()
+  {
 
-		return number_format($this->salario,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->paso);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getSalario($val=false)
+  {
+
+    if($val) return number_format($this->salario,2,',','.');
+    else return $this->salario;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setGrado($v)
 	{
 
-		if ($this->grado !== $v) {
-			$this->grado = $v;
-			$this->modifiedColumns[] = NpescalasPeer::GRADO;
-		}
-
+    if ($this->grado !== $v) {
+        $this->grado = $v;
+        $this->modifiedColumns[] = NpescalasPeer::GRADO;
+      }
+  
 	} 
 	
 	public function setPaso($v)
 	{
 
-		if ($this->paso !== $v) {
-			$this->paso = $v;
-			$this->modifiedColumns[] = NpescalasPeer::PASO;
-		}
-
+    if ($this->paso !== $v) {
+        $this->paso = $v;
+        $this->modifiedColumns[] = NpescalasPeer::PASO;
+      }
+  
 	} 
 	
 	public function setSalario($v)
 	{
 
-		if ($this->salario !== $v) {
-			$this->salario = $v;
-			$this->modifiedColumns[] = NpescalasPeer::SALARIO;
-		}
-
+    if ($this->salario !== $v) {
+        $this->salario = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpescalasPeer::SALARIO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpescalasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpescalasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->grado = $rs->getString($startcol + 0);
+      $this->grado = $rs->getString($startcol + 0);
 
-			$this->paso = $rs->getString($startcol + 1);
+      $this->paso = $rs->getString($startcol + 1);
 
-			$this->salario = $rs->getFloat($startcol + 2);
+      $this->salario = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npescalas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npescalas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseNpescalas extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpescalasPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpescalasPeer::doUpdate($this, $con);

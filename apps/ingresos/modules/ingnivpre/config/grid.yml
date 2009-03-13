@@ -1,0 +1,35 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   ciniveles
+  ancho:                   650
+  anchogrid:               550
+  filas:                   16
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo
+  tipo:                    c
+  nombrecampo:             catpar
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Longitud
+  tipo:                    t
+  nombrecampo:             lonniv
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Nombre Abreviado
+  tipo:                    t
+  nombrecampo:             nomabr
+  esgrabable:			   true
+  html:                    []
+
+4:       # Columna 4
+  titulo:                  Nombre Extendido
+  tipo:                    t
+  nombrecampo:             nomext
+  esgrabable:			   true
+  html:                    []

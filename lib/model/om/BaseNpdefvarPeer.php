@@ -235,6 +235,7 @@ abstract class BaseNpdefvarPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpdefvarPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

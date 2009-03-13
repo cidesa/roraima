@@ -73,336 +73,371 @@ abstract class BaseNpinfadi extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomtit()
-	{
+    return trim($this->codemp);
 
-		return $this->nomtit; 		
-	}
-	
-	public function getDescur()
-	{
+  }
+  
+  public function getNomtit()
+  {
 
-		return $this->descur; 		
-	}
-	
-	public function getInstit()
-	{
+    return trim($this->nomtit);
 
-		return $this->instit; 		
-	}
-	
-	public function getDurcur()
-	{
+  }
+  
+  public function getDescur()
+  {
 
-		return $this->durcur; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    return trim($this->descur);
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getInstit()
+  {
 
-	
-	public function getFecfin($format = 'Y-m-d')
-	{
+    return trim($this->instit);
 
-		if ($this->fecfin === null || $this->fecfin === '') {
-			return null;
-		} elseif (!is_int($this->fecfin)) {
-						$ts = strtotime($this->fecfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
-			}
-		} else {
-			$ts = $this->fecfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDurcur()
+  {
 
-	
-	public function getNivest()
-	{
+    return trim($this->durcur);
 
-		return $this->nivest; 		
-	}
-	
-	public function getDiaini()
-	{
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		return $this->diaini; 		
-	}
-	
-	public function getMesini()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->mesini; 		
-	}
-	
-	public function getAnoini()
-	{
+  
+  public function getFecfin($format = 'Y-m-d')
+  {
 
-		return $this->anoini; 		
-	}
-	
-	public function getDiafin()
-	{
+    if ($this->fecfin === null || $this->fecfin === '') {
+      return null;
+    } elseif (!is_int($this->fecfin)) {
+            $ts = adodb_strtotime($this->fecfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
+      }
+    } else {
+      $ts = $this->fecfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->diafin; 		
-	}
-	
-	public function getMesfin()
-	{
+  
+  public function getNivest()
+  {
 
-		return $this->mesfin; 		
-	}
-	
-	public function getAnofin()
-	{
+    return trim($this->nivest);
 
-		return $this->anofin; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDiaini()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->diaini);
+
+  }
+  
+  public function getMesini()
+  {
+
+    return trim($this->mesini);
+
+  }
+  
+  public function getAnoini()
+  {
+
+    return trim($this->anoini);
+
+  }
+  
+  public function getDiafin()
+  {
+
+    return trim($this->diafin);
+
+  }
+  
+  public function getMesfin()
+  {
+
+    return trim($this->mesfin);
+
+  }
+  
+  public function getAnofin()
+  {
+
+    return trim($this->anofin);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomtit($v)
 	{
 
-		if ($this->nomtit !== $v) {
-			$this->nomtit = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::NOMTIT;
-		}
-
+    if ($this->nomtit !== $v) {
+        $this->nomtit = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::NOMTIT;
+      }
+  
 	} 
 	
 	public function setDescur($v)
 	{
 
-		if ($this->descur !== $v) {
-			$this->descur = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::DESCUR;
-		}
-
+    if ($this->descur !== $v) {
+        $this->descur = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::DESCUR;
+      }
+  
 	} 
 	
 	public function setInstit($v)
 	{
 
-		if ($this->instit !== $v) {
-			$this->instit = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::INSTIT;
-		}
-
+    if ($this->instit !== $v) {
+        $this->instit = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::INSTIT;
+      }
+  
 	} 
 	
 	public function setDurcur($v)
 	{
 
-		if ($this->durcur !== $v) {
-			$this->durcur = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::DURCUR;
-		}
-
+    if ($this->durcur !== $v) {
+        $this->durcur = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::DURCUR;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = NpinfadiPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = NpinfadiPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfin !== $ts) {
-			$this->fecfin = $ts;
-			$this->modifiedColumns[] = NpinfadiPeer::FECFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfin !== $ts) {
+      $this->fecfin = $ts;
+      $this->modifiedColumns[] = NpinfadiPeer::FECFIN;
+    }
 
 	} 
 	
 	public function setNivest($v)
 	{
 
-		if ($this->nivest !== $v) {
-			$this->nivest = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::NIVEST;
-		}
-
+    if ($this->nivest !== $v) {
+        $this->nivest = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::NIVEST;
+      }
+  
 	} 
 	
 	public function setDiaini($v)
 	{
 
-		if ($this->diaini !== $v) {
-			$this->diaini = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::DIAINI;
-		}
-
+    if ($this->diaini !== $v) {
+        $this->diaini = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::DIAINI;
+      }
+  
 	} 
 	
 	public function setMesini($v)
 	{
 
-		if ($this->mesini !== $v) {
-			$this->mesini = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::MESINI;
-		}
-
+    if ($this->mesini !== $v) {
+        $this->mesini = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::MESINI;
+      }
+  
 	} 
 	
 	public function setAnoini($v)
 	{
 
-		if ($this->anoini !== $v) {
-			$this->anoini = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::ANOINI;
-		}
-
+    if ($this->anoini !== $v) {
+        $this->anoini = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::ANOINI;
+      }
+  
 	} 
 	
 	public function setDiafin($v)
 	{
 
-		if ($this->diafin !== $v) {
-			$this->diafin = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::DIAFIN;
-		}
-
+    if ($this->diafin !== $v) {
+        $this->diafin = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::DIAFIN;
+      }
+  
 	} 
 	
 	public function setMesfin($v)
 	{
 
-		if ($this->mesfin !== $v) {
-			$this->mesfin = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::MESFIN;
-		}
-
+    if ($this->mesfin !== $v) {
+        $this->mesfin = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::MESFIN;
+      }
+  
 	} 
 	
 	public function setAnofin($v)
 	{
 
-		if ($this->anofin !== $v) {
-			$this->anofin = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::ANOFIN;
-		}
-
+    if ($this->anofin !== $v) {
+        $this->anofin = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::ANOFIN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpinfadiPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpinfadiPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->nomtit = $rs->getString($startcol + 1);
+      $this->nomtit = $rs->getString($startcol + 1);
 
-			$this->descur = $rs->getString($startcol + 2);
+      $this->descur = $rs->getString($startcol + 2);
 
-			$this->instit = $rs->getString($startcol + 3);
+      $this->instit = $rs->getString($startcol + 3);
 
-			$this->durcur = $rs->getString($startcol + 4);
+      $this->durcur = $rs->getString($startcol + 4);
 
-			$this->fecini = $rs->getDate($startcol + 5, null);
+      $this->fecini = $rs->getDate($startcol + 5, null);
 
-			$this->fecfin = $rs->getDate($startcol + 6, null);
+      $this->fecfin = $rs->getDate($startcol + 6, null);
 
-			$this->nivest = $rs->getString($startcol + 7);
+      $this->nivest = $rs->getString($startcol + 7);
 
-			$this->diaini = $rs->getString($startcol + 8);
+      $this->diaini = $rs->getString($startcol + 8);
 
-			$this->mesini = $rs->getString($startcol + 9);
+      $this->mesini = $rs->getString($startcol + 9);
 
-			$this->anoini = $rs->getString($startcol + 10);
+      $this->anoini = $rs->getString($startcol + 10);
 
-			$this->diafin = $rs->getString($startcol + 11);
+      $this->diafin = $rs->getString($startcol + 11);
 
-			$this->mesfin = $rs->getString($startcol + 12);
+      $this->mesfin = $rs->getString($startcol + 12);
 
-			$this->anofin = $rs->getString($startcol + 13);
+      $this->anofin = $rs->getString($startcol + 13);
 
-			$this->id = $rs->getInt($startcol + 14);
+      $this->id = $rs->getInt($startcol + 14);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 15; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npinfadi object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 15; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npinfadi object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -459,6 +494,7 @@ abstract class BaseNpinfadi extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpinfadiPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpinfadiPeer::doUpdate($this, $con);

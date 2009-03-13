@@ -4,26 +4,39 @@ generator:
     model_class:      Casalalm
     theme:            default
     fields:
-      codsal: { name: Numero}
-      fecsal: { name: Fecha}
-      codalm: { name: Codigo de Almacen}
-      dessal: { name: Descripcion}
-      codpro: { name: C.I./R.I.F Proveedor}
+      codsal: { name: Número, params: maxlength=8}
+      fecsal: { name: Fecha, params: date_format='dd/MM/yy'}
+      codalm: { name: Código de Almacén}
+      nomalm: { name: Nombe}
+      dessal: { name: Descripción}
+      codpro: { name: C.I./R.I.F Contratistas de Bienes o Servicio y Cooperativas}
+      rifpro: { name: C.I./R.I.F Contratistas de Bienes o Servicio y Cooperativas}
+      nompro: { name: Nombre}
       monsal: { name: Total}
-      tipmov: { name: Tipo de Movimiento}           
-        
+      tipo: { name: Tipo}
+      tipmov: { name: Tipo de Movimiento}
+      destipsal: { name: Descripción}
+      staalm: { name: estatus}
+      codubi:      { name: Código de la Ubicación}
+      observ:      { name: Observaciones, type: textarea_tag, params: size=60x5 maxlength=1000 onkeyup="ismaxlength(this)}
+
     list:
-      title:          Salidas de Almacen
-      filters:        [codsal]
-      display:        [=codsal, dessal, codalm]
+      title:          Salidas de Almacén
+      filters:        [codsal, codlam, fecsal]
+      display:        [=codsal, dessal, codalm, rifpro, nompro, monsal, fecsal]
       fields:
-        fecsal: { params: date_format='dd/MM/yy' }       
       object_actions:
-        _edit:        ~
+        _edit:          ~
         _delete:        ~
-      max_per_page:   5
+      max_per_page:   10
+      sort:           codsal
     edit:
-      title:          Edicion de Salidas de Almacen
-      display:       [=codsal, fecsal, codalm, codpro, dessal, tipmov, monsal]
+      title:          Edición de Salidas de Almacén
+      display:       [=codsal, fecsal, codpro, rifpro, nompro, dessal, tipo, tipmov, destipsal, monsal, staalm, observ]
       fields:
-        fecsal: { params: date_format='dd/MM/yy' } 
+        fecsal: { params: date_format='dd/MM/yy' }
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -7,7 +7,8 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
 <?php echo object_input_hidden_tag($nphojint, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
@@ -22,82 +23,43 @@
   <?php $value = object_input_tag($nphojint, 'getCodemp', array (
   'size' => 20,
   'control_name' => 'nphojint[codemp]',
-  'disabled' => 'true',
+  'maxlength' => 9,
+  'onBlur'=> remote_function(array(
+        'update'   => 'grid',
+        'url'      => 'nomfalperper/grid',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=nphojint_nomemp&codigo='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Nphojint_Nomfalperper/clase/Nphojint/frame/sf_admin_edit_form/obj1/nphojint_codemp/obj2/nphojint_nomemp/campo1/codemp/campo2/nomemp/param1/')?>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[nomemp]', __($labels['nphojint{nomemp}']), 'class="required" ') ?>
+    </div>
+
+
   <div class="content<?php if ($sf_request->hasError('nphojint{nomemp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nphojint{nomemp}')): ?>
     <?php echo form_error('nphojint{nomemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
+ <br>
+
   <?php $value = object_input_tag($nphojint, 'getNomemp', array (
+  'readonly' => 'true',
   'size' => 80,
   'control_name' => 'nphojint[nomemp]',
-  'disabled' => 'true',
+  'style' => "border-style:none;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
-</fieldset>
-
-<!-- Modifique estas variables y luego coloque las columnas y registros que desee -->
-<?php $tituloTabla = __('Datos del Permiso'); ?>
-<?php $pagerTabla = $pagerNpfalper; ?>
-<?php $modulo = $sf_context->getModuleName(); ?>
-<?php $accion = 'edit'; ?>
-
-<fieldset>
-<legend><?php echo $tituloTabla; ?></legend>
-<table border="0" class="sf_admin_list">
-<thead>
-	<tr>
-		<!-- Nombre de las Columnas -->
-	    <th><?php echo NpfalperPeer::getColumName(NpfalperPeer::FECDES ) ?></th>
-	    <th><?php echo NpfalperPeer::getColumName(NpfalperPeer::FECHAS )  ?></th>
-	    <th><?php echo NpfalperPeer::getColumName(NpfalperPeer::CODMOT )  ?></th>
-	    <th><?php echo NpfalperPeer::getColumName(NpmotfalPeer::DESMOTFAL )  ?></th>
-	</tr>
-</thead>
-<tbody>
-	<?php $i = 1; foreach ($pagerTabla->getResults() as $registro): $odd = fmod(++$i, 2) ?>
-	<tr class="sf_admin_row_<?php echo $odd ?>">
-		<!-- Registros de la tabla -->
-	    <td><?php echo $registro->getFecdes()  ?></td>
-	    <td><?php echo $registro->getFechas() ?></td>
-	    <td><?php echo $registro->getCodmot() ?></td>
-	    <td><?php echo $registro->getDesmotfal() ?></td>
-	</tr>
-	<?php endforeach; ?>	
-</tbody>
-
-<tfoot>
-<tr><th colspan="5">
-<div class="float-right">
-<?php if ($pagerTabla->haveToPaginate()): ?>
-  <?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/first.png', array('align' => 'absmiddle', 'alt' => __('First'), 'title' => __('First'))), $modulo.'/'.$accion.'?page=1') ?>
-  <?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/previous.png', array('align' => 'absmiddle', 'alt' => __('Previous'), 'title' => __('Previous'))), $modulo.'/'.$accion.'?page='.$pagerTabla->getPreviousPage()) ?>
-
-  <?php foreach ($pagerTabla->getLinks() as $page): ?>
-    <?php echo link_to_unless($page == $pagerTabla->getPage(), $page, $modulo.'/list?page='.$page) ?>
-  <?php endforeach; ?>
-
-	<?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/next.png', array('align' => 'absmiddle', 'alt' => __('Next'), 'title' => __('Next'))), $modulo.'/'.$accion.'?page='.$pagerTabla->getNextPage()) ?>
-	<?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/last.png', array('align' => 'absmiddle', 'alt' => __('Last'), 'title' => __('Last'))), $modulo.'/'.$accion.'?page='.$pagerTabla->getLastPage()) ?>
-<?php endif; ?>
+<div id="grid" class="form-row">
+<?
+echo grid_tag($obj);
+?>
 </div>
-<?php echo format_number_choice('[0] '.__('no result').'|[1] 1 '.__('result').'|(1,+Inf] %1% '.__('results'), array('%1%' => $pagerTabla->getNbResults()), $pagerTabla->getNbResults()) ?>
-</th></tr>
-</tfoot>
 
-</table>
-</fieldset>
-
-
-<?php include_partial('edit_actions', array('nphojint' => $nphojint)) ?>
+<?php //include_partial('edit_actions', array('nphojint' => $nphojint)) ?>
 
 </form>
 

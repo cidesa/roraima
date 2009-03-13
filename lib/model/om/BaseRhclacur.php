@@ -41,216 +41,242 @@ abstract class BaseRhclacur extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcur()
-	{
+  
+  public function getCodcur()
+  {
 
-		return $this->codcur; 		
-	}
-	
-	public function getNumcla()
-	{
+    return trim($this->codcur);
 
-		return $this->numcla; 		
-	}
-	
-	public function getFeccla($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNumcla()
+  {
 
-		if ($this->feccla === null || $this->feccla === '') {
-			return null;
-		} elseif (!is_int($this->feccla)) {
-						$ts = strtotime($this->feccla);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccla] as date/time value: " . var_export($this->feccla, true));
-			}
-		} else {
-			$ts = $this->feccla;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->numcla);
 
-	
-	public function getHorini($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFeccla($format = 'Y-m-d')
+  {
 
-		if ($this->horini === null || $this->horini === '') {
-			return null;
-		} elseif (!is_int($this->horini)) {
-						$ts = strtotime($this->horini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [horini] as date/time value: " . var_export($this->horini, true));
-			}
-		} else {
-			$ts = $this->horini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->feccla === null || $this->feccla === '') {
+      return null;
+    } elseif (!is_int($this->feccla)) {
+            $ts = adodb_strtotime($this->feccla);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccla] as date/time value: " . var_export($this->feccla, true));
+      }
+    } else {
+      $ts = $this->feccla;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getHorfin($format = 'Y-m-d')
-	{
+  
+  public function getHorini($format = 'Y-m-d')
+  {
 
-		if ($this->horfin === null || $this->horfin === '') {
-			return null;
-		} elseif (!is_int($this->horfin)) {
-						$ts = strtotime($this->horfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [horfin] as date/time value: " . var_export($this->horfin, true));
-			}
-		} else {
-			$ts = $this->horfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->horini === null || $this->horini === '') {
+      return null;
+    } elseif (!is_int($this->horini)) {
+            $ts = adodb_strtotime($this->horini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [horini] as date/time value: " . var_export($this->horini, true));
+      }
+    } else {
+      $ts = $this->horini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getNumhor()
-	{
+  
+  public function getHorfin($format = 'Y-m-d')
+  {
 
-		return number_format($this->numhor,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if ($this->horfin === null || $this->horfin === '') {
+      return null;
+    } elseif (!is_int($this->horfin)) {
+            $ts = adodb_strtotime($this->horfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [horfin] as date/time value: " . var_export($this->horfin, true));
+      }
+    } else {
+      $ts = $this->horfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getNumhor($val=false)
+  {
+
+    if($val) return number_format($this->numhor,2,',','.');
+    else return $this->numhor;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcur($v)
 	{
 
-		if ($this->codcur !== $v) {
-			$this->codcur = $v;
-			$this->modifiedColumns[] = RhclacurPeer::CODCUR;
-		}
-
+    if ($this->codcur !== $v) {
+        $this->codcur = $v;
+        $this->modifiedColumns[] = RhclacurPeer::CODCUR;
+      }
+  
 	} 
 	
 	public function setNumcla($v)
 	{
 
-		if ($this->numcla !== $v) {
-			$this->numcla = $v;
-			$this->modifiedColumns[] = RhclacurPeer::NUMCLA;
-		}
-
+    if ($this->numcla !== $v) {
+        $this->numcla = $v;
+        $this->modifiedColumns[] = RhclacurPeer::NUMCLA;
+      }
+  
 	} 
 	
 	public function setFeccla($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccla] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccla !== $ts) {
-			$this->feccla = $ts;
-			$this->modifiedColumns[] = RhclacurPeer::FECCLA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccla] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccla !== $ts) {
+      $this->feccla = $ts;
+      $this->modifiedColumns[] = RhclacurPeer::FECCLA;
+    }
 
 	} 
 	
 	public function setHorini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [horini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->horini !== $ts) {
-			$this->horini = $ts;
-			$this->modifiedColumns[] = RhclacurPeer::HORINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [horini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->horini !== $ts) {
+      $this->horini = $ts;
+      $this->modifiedColumns[] = RhclacurPeer::HORINI;
+    }
 
 	} 
 	
 	public function setHorfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [horfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->horfin !== $ts) {
-			$this->horfin = $ts;
-			$this->modifiedColumns[] = RhclacurPeer::HORFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [horfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->horfin !== $ts) {
+      $this->horfin = $ts;
+      $this->modifiedColumns[] = RhclacurPeer::HORFIN;
+    }
 
 	} 
 	
 	public function setNumhor($v)
 	{
 
-		if ($this->numhor !== $v) {
-			$this->numhor = $v;
-			$this->modifiedColumns[] = RhclacurPeer::NUMHOR;
-		}
-
+    if ($this->numhor !== $v) {
+        $this->numhor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhclacurPeer::NUMHOR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhclacurPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhclacurPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcur = $rs->getString($startcol + 0);
+      $this->codcur = $rs->getString($startcol + 0);
 
-			$this->numcla = $rs->getString($startcol + 1);
+      $this->numcla = $rs->getString($startcol + 1);
 
-			$this->feccla = $rs->getDate($startcol + 2, null);
+      $this->feccla = $rs->getDate($startcol + 2, null);
 
-			$this->horini = $rs->getDate($startcol + 3, null);
+      $this->horini = $rs->getDate($startcol + 3, null);
 
-			$this->horfin = $rs->getDate($startcol + 4, null);
+      $this->horfin = $rs->getDate($startcol + 4, null);
 
-			$this->numhor = $rs->getFloat($startcol + 5);
+      $this->numhor = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhclacur object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhclacur object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -307,6 +333,7 @@ abstract class BaseRhclacur extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhclacurPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhclacurPeer::doUpdate($this, $con);

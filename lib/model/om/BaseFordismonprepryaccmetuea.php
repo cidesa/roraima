@@ -49,183 +49,214 @@ abstract class BaseFordismonprepryaccmetuea extends BaseObject  implements Persi
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodaccesp()
-	{
+    return trim($this->codpro);
 
-		return $this->codaccesp; 		
-	}
-	
-	public function getCodmet()
-	{
+  }
+  
+  public function getCodaccesp()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getCodpar()
-	{
+    return trim($this->codaccesp);
 
-		return $this->codpar; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getCodmet()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getPerpre()
-	{
+    return trim($this->codmet);
 
-		return $this->perpre; 		
-	}
-	
-	public function getMonper()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return number_format($this->monper,2,',','.');
-		
-	}
-	
-	public function getCodact()
-	{
+    return trim($this->codpar);
 
-		return $this->codact; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codpre);
+
+  }
+  
+  public function getPerpre()
+  {
+
+    return trim($this->perpre);
+
+  }
+  
+  public function getMonper($val=false)
+  {
+
+    if($val) return number_format($this->monper,2,',','.');
+    else return $this->monper;
+
+  }
+  
+  public function getCodact()
+  {
+
+    return trim($this->codact);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodaccesp($v)
 	{
 
-		if ($this->codaccesp !== $v) {
-			$this->codaccesp = $v;
-			$this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODACCESP;
-		}
-
+    if ($this->codaccesp !== $v) {
+        $this->codaccesp = $v;
+        $this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODACCESP;
+      }
+  
 	} 
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setPerpre($v)
 	{
 
-		if ($this->perpre !== $v) {
-			$this->perpre = $v;
-			$this->modifiedColumns[] = FordismonprepryaccmetueaPeer::PERPRE;
-		}
-
+    if ($this->perpre !== $v) {
+        $this->perpre = $v;
+        $this->modifiedColumns[] = FordismonprepryaccmetueaPeer::PERPRE;
+      }
+  
 	} 
 	
 	public function setMonper($v)
 	{
 
-		if ($this->monper !== $v) {
-			$this->monper = $v;
-			$this->modifiedColumns[] = FordismonprepryaccmetueaPeer::MONPER;
-		}
-
+    if ($this->monper !== $v) {
+        $this->monper = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordismonprepryaccmetueaPeer::MONPER;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = FordismonprepryaccmetueaPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordismonprepryaccmetueaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordismonprepryaccmetueaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codaccesp = $rs->getString($startcol + 1);
+      $this->codaccesp = $rs->getString($startcol + 1);
 
-			$this->codmet = $rs->getString($startcol + 2);
+      $this->codmet = $rs->getString($startcol + 2);
 
-			$this->codpar = $rs->getString($startcol + 3);
+      $this->codpar = $rs->getString($startcol + 3);
 
-			$this->codpre = $rs->getString($startcol + 4);
+      $this->codpre = $rs->getString($startcol + 4);
 
-			$this->perpre = $rs->getString($startcol + 5);
+      $this->perpre = $rs->getString($startcol + 5);
 
-			$this->monper = $rs->getFloat($startcol + 6);
+      $this->monper = $rs->getFloat($startcol + 6);
 
-			$this->codact = $rs->getString($startcol + 7);
+      $this->codact = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordismonprepryaccmetuea object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordismonprepryaccmetuea object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -210,6 +210,7 @@ abstract class BaseFccarinmPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FccarinmPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

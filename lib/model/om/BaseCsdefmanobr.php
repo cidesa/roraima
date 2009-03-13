@@ -33,111 +33,138 @@ abstract class BaseCsdefmanobr extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmanobr()
-	{
+  
+  public function getCodmanobr()
+  {
 
-		return $this->codmanobr; 		
-	}
-	
-	public function getDesmanobr()
-	{
+    return trim($this->codmanobr);
 
-		return $this->desmanobr; 		
-	}
-	
-	public function getUnimed()
-	{
+  }
+  
+  public function getDesmanobr()
+  {
 
-		return $this->unimed; 		
-	}
-	
-	public function getCosuni()
-	{
+    return trim($this->desmanobr);
 
-		return number_format($this->cosuni,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getUnimed()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->unimed);
+
+  }
+  
+  public function getCosuni($val=false)
+  {
+
+    if($val) return number_format($this->cosuni,2,',','.');
+    else return $this->cosuni;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmanobr($v)
 	{
 
-		if ($this->codmanobr !== $v) {
-			$this->codmanobr = $v;
-			$this->modifiedColumns[] = CsdefmanobrPeer::CODMANOBR;
-		}
-
+    if ($this->codmanobr !== $v) {
+        $this->codmanobr = $v;
+        $this->modifiedColumns[] = CsdefmanobrPeer::CODMANOBR;
+      }
+  
 	} 
 	
 	public function setDesmanobr($v)
 	{
 
-		if ($this->desmanobr !== $v) {
-			$this->desmanobr = $v;
-			$this->modifiedColumns[] = CsdefmanobrPeer::DESMANOBR;
-		}
-
+    if ($this->desmanobr !== $v) {
+        $this->desmanobr = $v;
+        $this->modifiedColumns[] = CsdefmanobrPeer::DESMANOBR;
+      }
+  
 	} 
 	
 	public function setUnimed($v)
 	{
 
-		if ($this->unimed !== $v) {
-			$this->unimed = $v;
-			$this->modifiedColumns[] = CsdefmanobrPeer::UNIMED;
-		}
-
+    if ($this->unimed !== $v) {
+        $this->unimed = $v;
+        $this->modifiedColumns[] = CsdefmanobrPeer::UNIMED;
+      }
+  
 	} 
 	
 	public function setCosuni($v)
 	{
 
-		if ($this->cosuni !== $v) {
-			$this->cosuni = $v;
-			$this->modifiedColumns[] = CsdefmanobrPeer::COSUNI;
-		}
-
+    if ($this->cosuni !== $v) {
+        $this->cosuni = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsdefmanobrPeer::COSUNI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsdefmanobrPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsdefmanobrPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmanobr = $rs->getString($startcol + 0);
+      $this->codmanobr = $rs->getString($startcol + 0);
 
-			$this->desmanobr = $rs->getString($startcol + 1);
+      $this->desmanobr = $rs->getString($startcol + 1);
 
-			$this->unimed = $rs->getString($startcol + 2);
+      $this->unimed = $rs->getString($startcol + 2);
 
-			$this->cosuni = $rs->getFloat($startcol + 3);
+      $this->cosuni = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csdefmanobr object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csdefmanobr object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

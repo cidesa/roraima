@@ -41,172 +41,200 @@ abstract class BaseBndepactdet extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodmue()
-	{
+    return trim($this->codact);
 
-		return $this->codmue; 		
-	}
-	
-	public function getFecdep($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodmue()
+  {
 
-		if ($this->fecdep === null || $this->fecdep === '') {
-			return null;
-		} elseif (!is_int($this->fecdep)) {
-						$ts = strtotime($this->fecdep);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdep] as date/time value: " . var_export($this->fecdep, true));
-			}
-		} else {
-			$ts = $this->fecdep;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codmue);
 
-	
-	public function getDepmue()
-	{
+  }
+  
+  public function getFecdep($format = 'Y-m-d')
+  {
 
-		return number_format($this->depmue,2,',','.');
-		
-	}
-	
-	public function getDepacu()
-	{
+    if ($this->fecdep === null || $this->fecdep === '') {
+      return null;
+    } elseif (!is_int($this->fecdep)) {
+            $ts = adodb_strtotime($this->fecdep);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdep] as date/time value: " . var_export($this->fecdep, true));
+      }
+    } else {
+      $ts = $this->fecdep;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->depacu,2,',','.');
-		
-	}
-	
-	public function getVallib()
-	{
+  
+  public function getDepmue($val=false)
+  {
 
-		return number_format($this->vallib,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->depmue,2,',','.');
+    else return $this->depmue;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDepacu($val=false)
+  {
+
+    if($val) return number_format($this->depacu,2,',','.');
+    else return $this->depacu;
+
+  }
+  
+  public function getVallib($val=false)
+  {
+
+    if($val) return number_format($this->vallib,2,',','.');
+    else return $this->vallib;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BndepactdetPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BndepactdetPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodmue($v)
 	{
 
-		if ($this->codmue !== $v) {
-			$this->codmue = $v;
-			$this->modifiedColumns[] = BndepactdetPeer::CODMUE;
-		}
-
+    if ($this->codmue !== $v) {
+        $this->codmue = $v;
+        $this->modifiedColumns[] = BndepactdetPeer::CODMUE;
+      }
+  
 	} 
 	
 	public function setFecdep($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdep] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdep !== $ts) {
-			$this->fecdep = $ts;
-			$this->modifiedColumns[] = BndepactdetPeer::FECDEP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdep] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdep !== $ts) {
+      $this->fecdep = $ts;
+      $this->modifiedColumns[] = BndepactdetPeer::FECDEP;
+    }
 
 	} 
 	
 	public function setDepmue($v)
 	{
 
-		if ($this->depmue !== $v) {
-			$this->depmue = $v;
-			$this->modifiedColumns[] = BndepactdetPeer::DEPMUE;
-		}
-
+    if ($this->depmue !== $v) {
+        $this->depmue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndepactdetPeer::DEPMUE;
+      }
+  
 	} 
 	
 	public function setDepacu($v)
 	{
 
-		if ($this->depacu !== $v) {
-			$this->depacu = $v;
-			$this->modifiedColumns[] = BndepactdetPeer::DEPACU;
-		}
-
+    if ($this->depacu !== $v) {
+        $this->depacu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndepactdetPeer::DEPACU;
+      }
+  
 	} 
 	
 	public function setVallib($v)
 	{
 
-		if ($this->vallib !== $v) {
-			$this->vallib = $v;
-			$this->modifiedColumns[] = BndepactdetPeer::VALLIB;
-		}
-
+    if ($this->vallib !== $v) {
+        $this->vallib = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndepactdetPeer::VALLIB;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndepactdetPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndepactdetPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->codmue = $rs->getString($startcol + 1);
+      $this->codmue = $rs->getString($startcol + 1);
 
-			$this->fecdep = $rs->getDate($startcol + 2, null);
+      $this->fecdep = $rs->getDate($startcol + 2, null);
 
-			$this->depmue = $rs->getFloat($startcol + 3);
+      $this->depmue = $rs->getFloat($startcol + 3);
 
-			$this->depacu = $rs->getFloat($startcol + 4);
+      $this->depacu = $rs->getFloat($startcol + 4);
 
-			$this->vallib = $rs->getFloat($startcol + 5);
+      $this->vallib = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bndepactdet object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bndepactdet object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -263,6 +291,7 @@ abstract class BaseBndepactdet extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BndepactdetPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BndepactdetPeer::doUpdate($this, $con);

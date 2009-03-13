@@ -109,6 +109,38 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
 
 	
+	protected $corprc;
+
+
+	
+	protected $corcom;
+
+
+	
+	protected $corcau;
+
+
+	
+	protected $corpag;
+
+
+	
+	protected $corsoladidis;
+
+
+	
+	protected $corsoltra;
+
+
+	
+	protected $coraju;
+
+
+	
+	protected $corfue;
+
+
+	
 	protected $id;
 
 	
@@ -117,562 +149,767 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getLoncod()
-	{
+    return trim($this->codemp);
 
-		return number_format($this->loncod,2,',','.');
-		
-	}
-	
-	public function getRupcat()
-	{
+  }
+  
+  public function getLoncod($val=false)
+  {
 
-		return number_format($this->rupcat,2,',','.');
-		
-	}
-	
-	public function getRuppar()
-	{
+    if($val) return number_format($this->loncod,2,',','.');
+    else return $this->loncod;
 
-		return number_format($this->ruppar,2,',','.');
-		
-	}
-	
-	public function getNivdis()
-	{
+  }
+  
+  public function getRupcat($val=false)
+  {
 
-		return number_format($this->nivdis,2,',','.');
-		
-	}
-	
-	public function getForpre()
-	{
+    if($val) return number_format($this->rupcat,2,',','.');
+    else return $this->rupcat;
 
-		return $this->forpre; 		
-	}
-	
-	public function getAsiper()
-	{
+  }
+  
+  public function getRuppar($val=false)
+  {
 
-		return $this->asiper; 		
-	}
-	
-	public function getNumper()
-	{
+    if($val) return number_format($this->ruppar,2,',','.');
+    else return $this->ruppar;
 
-		return number_format($this->numper,2,',','.');
-		
-	}
-	
-	public function getPeract()
-	{
+  }
+  
+  public function getNivdis($val=false)
+  {
 
-		return $this->peract; 		
-	}
-	
-	public function getFecper($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->nivdis,2,',','.');
+    else return $this->nivdis;
 
-		if ($this->fecper === null || $this->fecper === '') {
-			return null;
-		} elseif (!is_int($this->fecper)) {
-						$ts = strtotime($this->fecper);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecper] as date/time value: " . var_export($this->fecper, true));
-			}
-		} else {
-			$ts = $this->fecper;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getForpre()
+  {
 
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    return trim($this->forpre);
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getAsiper()
+  {
 
-	
-	public function getFeccie($format = 'Y-m-d')
-	{
+    return trim($this->asiper);
 
-		if ($this->feccie === null || $this->feccie === '') {
-			return null;
-		} elseif (!is_int($this->feccie)) {
-						$ts = strtotime($this->feccie);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
-			}
-		} else {
-			$ts = $this->feccie;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getNumper($val=false)
+  {
 
-	
-	public function getEtadef()
-	{
+    if($val) return number_format($this->numper,2,',','.');
+    else return $this->numper;
 
-		return $this->etadef; 		
-	}
-	
-	public function getStaprc()
-	{
+  }
+  
+  public function getPeract()
+  {
 
-		return $this->staprc; 		
-	}
-	
-	public function getCoraep()
-	{
+    return trim($this->peract);
 
-		return $this->coraep; 		
-	}
-	
-	public function getGencom()
-	{
+  }
+  
+  public function getFecper($format = 'Y-m-d')
+  {
 
-		return $this->gencom; 		
-	}
-	
-	public function getNumcom()
-	{
+    if ($this->fecper === null || $this->fecper === '') {
+      return null;
+    } elseif (!is_int($this->fecper)) {
+            $ts = adodb_strtotime($this->fecper);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecper] as date/time value: " . var_export($this->fecper, true));
+      }
+    } else {
+      $ts = $this->fecper;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->numcom; 		
-	}
-	
-	public function getCaraep()
-	{
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		return $this->caraep; 		
-	}
-	
-	public function getTiptraprc()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->tiptraprc; 		
-	}
-	
-	public function getFueord()
-	{
+  
+  public function getFeccie($format = 'Y-m-d')
+  {
 
-		return $this->fueord; 		
-	}
-	
-	public function getFuecre()
-	{
+    if ($this->feccie === null || $this->feccie === '') {
+      return null;
+    } elseif (!is_int($this->feccie)) {
+            $ts = adodb_strtotime($this->feccie);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
+      }
+    } else {
+      $ts = $this->feccie;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->fuecre; 		
-	}
-	
-	public function getFuetra()
-	{
+  
+  public function getEtadef()
+  {
 
-		return $this->fuetra; 		
-	}
-	
-	public function getNomgob()
-	{
+    return trim($this->etadef);
 
-		return $this->nomgob; 		
-	}
-	
-	public function getNomsec()
-	{
+  }
+  
+  public function getStaprc()
+  {
 
-		return $this->nomsec; 		
-	}
-	
-	public function getUnidad()
-	{
+    return trim($this->staprc);
 
-		return $this->unidad; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCoraep()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->coraep);
+
+  }
+  
+  public function getGencom()
+  {
+
+    return trim($this->gencom);
+
+  }
+  
+  public function getNumcom()
+  {
+
+    return trim($this->numcom);
+
+  }
+  
+  public function getCaraep()
+  {
+
+    return trim($this->caraep);
+
+  }
+  
+  public function getTiptraprc()
+  {
+
+    return trim($this->tiptraprc);
+
+  }
+  
+  public function getFueord()
+  {
+
+    return trim($this->fueord);
+
+  }
+  
+  public function getFuecre()
+  {
+
+    return trim($this->fuecre);
+
+  }
+  
+  public function getFuetra()
+  {
+
+    return trim($this->fuetra);
+
+  }
+  
+  public function getNomgob()
+  {
+
+    return trim($this->nomgob);
+
+  }
+  
+  public function getNomsec()
+  {
+
+    return trim($this->nomsec);
+
+  }
+  
+  public function getUnidad()
+  {
+
+    return trim($this->unidad);
+
+  }
+  
+  public function getCorprc($val=false)
+  {
+
+    if($val) return number_format($this->corprc,2,',','.');
+    else return $this->corprc;
+
+  }
+  
+  public function getCorcom($val=false)
+  {
+
+    if($val) return number_format($this->corcom,2,',','.');
+    else return $this->corcom;
+
+  }
+  
+  public function getCorcau($val=false)
+  {
+
+    if($val) return number_format($this->corcau,2,',','.');
+    else return $this->corcau;
+
+  }
+  
+  public function getCorpag($val=false)
+  {
+
+    if($val) return number_format($this->corpag,2,',','.');
+    else return $this->corpag;
+
+  }
+  
+  public function getCorsoladidis($val=false)
+  {
+
+    if($val) return number_format($this->corsoladidis,2,',','.');
+    else return $this->corsoladidis;
+
+  }
+  
+  public function getCorsoltra($val=false)
+  {
+
+    if($val) return number_format($this->corsoltra,2,',','.');
+    else return $this->corsoltra;
+
+  }
+  
+  public function getCoraju($val=false)
+  {
+
+    if($val) return number_format($this->coraju,2,',','.');
+    else return $this->coraju;
+
+  }
+  
+  public function getCorfue($val=false)
+  {
+
+    if($val) return number_format($this->corfue,2,',','.');
+    else return $this->corfue;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setLoncod($v)
 	{
 
-		if ($this->loncod !== $v) {
-			$this->loncod = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::LONCOD;
-		}
-
+    if ($this->loncod !== $v) {
+        $this->loncod = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::LONCOD;
+      }
+  
 	} 
 	
 	public function setRupcat($v)
 	{
 
-		if ($this->rupcat !== $v) {
-			$this->rupcat = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::RUPCAT;
-		}
-
+    if ($this->rupcat !== $v) {
+        $this->rupcat = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::RUPCAT;
+      }
+  
 	} 
 	
 	public function setRuppar($v)
 	{
 
-		if ($this->ruppar !== $v) {
-			$this->ruppar = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::RUPPAR;
-		}
-
+    if ($this->ruppar !== $v) {
+        $this->ruppar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::RUPPAR;
+      }
+  
 	} 
 	
 	public function setNivdis($v)
 	{
 
-		if ($this->nivdis !== $v) {
-			$this->nivdis = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::NIVDIS;
-		}
-
+    if ($this->nivdis !== $v) {
+        $this->nivdis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::NIVDIS;
+      }
+  
 	} 
 	
 	public function setForpre($v)
 	{
 
-		if ($this->forpre !== $v) {
-			$this->forpre = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::FORPRE;
-		}
-
+    if ($this->forpre !== $v) {
+        $this->forpre = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::FORPRE;
+      }
+  
 	} 
 	
 	public function setAsiper($v)
 	{
 
-		if ($this->asiper !== $v) {
-			$this->asiper = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::ASIPER;
-		}
-
+    if ($this->asiper !== $v) {
+        $this->asiper = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::ASIPER;
+      }
+  
 	} 
 	
 	public function setNumper($v)
 	{
 
-		if ($this->numper !== $v) {
-			$this->numper = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::NUMPER;
-		}
-
+    if ($this->numper !== $v) {
+        $this->numper = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::NUMPER;
+      }
+  
 	} 
 	
 	public function setPeract($v)
 	{
 
-		if ($this->peract !== $v) {
-			$this->peract = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::PERACT;
-		}
-
+    if ($this->peract !== $v) {
+        $this->peract = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::PERACT;
+      }
+  
 	} 
 	
 	public function setFecper($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecper] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecper !== $ts) {
-			$this->fecper = $ts;
-			$this->modifiedColumns[] = CpdefnivPeer::FECPER;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecper] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecper !== $ts) {
+      $this->fecper = $ts;
+      $this->modifiedColumns[] = CpdefnivPeer::FECPER;
+    }
 
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = CpdefnivPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = CpdefnivPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFeccie($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccie !== $ts) {
-			$this->feccie = $ts;
-			$this->modifiedColumns[] = CpdefnivPeer::FECCIE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccie !== $ts) {
+      $this->feccie = $ts;
+      $this->modifiedColumns[] = CpdefnivPeer::FECCIE;
+    }
 
 	} 
 	
 	public function setEtadef($v)
 	{
 
-		if ($this->etadef !== $v) {
-			$this->etadef = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::ETADEF;
-		}
-
+    if ($this->etadef !== $v) {
+        $this->etadef = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::ETADEF;
+      }
+  
 	} 
 	
 	public function setStaprc($v)
 	{
 
-		if ($this->staprc !== $v) {
-			$this->staprc = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::STAPRC;
-		}
-
+    if ($this->staprc !== $v) {
+        $this->staprc = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::STAPRC;
+      }
+  
 	} 
 	
 	public function setCoraep($v)
 	{
 
-		if ($this->coraep !== $v) {
-			$this->coraep = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::CORAEP;
-		}
-
+    if ($this->coraep !== $v) {
+        $this->coraep = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::CORAEP;
+      }
+  
 	} 
 	
 	public function setGencom($v)
 	{
 
-		if ($this->gencom !== $v) {
-			$this->gencom = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::GENCOM;
-		}
-
+    if ($this->gencom !== $v) {
+        $this->gencom = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::GENCOM;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setCaraep($v)
 	{
 
-		if ($this->caraep !== $v) {
-			$this->caraep = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::CARAEP;
-		}
-
+    if ($this->caraep !== $v) {
+        $this->caraep = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::CARAEP;
+      }
+  
 	} 
 	
 	public function setTiptraprc($v)
 	{
 
-		if ($this->tiptraprc !== $v) {
-			$this->tiptraprc = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::TIPTRAPRC;
-		}
-
+    if ($this->tiptraprc !== $v) {
+        $this->tiptraprc = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::TIPTRAPRC;
+      }
+  
 	} 
 	
 	public function setFueord($v)
 	{
 
-		if ($this->fueord !== $v) {
-			$this->fueord = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::FUEORD;
-		}
-
+    if ($this->fueord !== $v) {
+        $this->fueord = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::FUEORD;
+      }
+  
 	} 
 	
 	public function setFuecre($v)
 	{
 
-		if ($this->fuecre !== $v) {
-			$this->fuecre = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::FUECRE;
-		}
-
+    if ($this->fuecre !== $v) {
+        $this->fuecre = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::FUECRE;
+      }
+  
 	} 
 	
 	public function setFuetra($v)
 	{
 
-		if ($this->fuetra !== $v) {
-			$this->fuetra = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::FUETRA;
-		}
-
+    if ($this->fuetra !== $v) {
+        $this->fuetra = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::FUETRA;
+      }
+  
 	} 
 	
 	public function setNomgob($v)
 	{
 
-		if ($this->nomgob !== $v) {
-			$this->nomgob = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::NOMGOB;
-		}
-
+    if ($this->nomgob !== $v) {
+        $this->nomgob = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::NOMGOB;
+      }
+  
 	} 
 	
 	public function setNomsec($v)
 	{
 
-		if ($this->nomsec !== $v) {
-			$this->nomsec = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::NOMSEC;
-		}
-
+    if ($this->nomsec !== $v) {
+        $this->nomsec = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::NOMSEC;
+      }
+  
 	} 
 	
 	public function setUnidad($v)
 	{
 
-		if ($this->unidad !== $v) {
-			$this->unidad = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::UNIDAD;
-		}
+    if ($this->unidad !== $v) {
+        $this->unidad = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::UNIDAD;
+      }
+  
+	} 
+	
+	public function setCorprc($v)
+	{
 
+    if ($this->corprc !== $v) {
+        $this->corprc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::CORPRC;
+      }
+  
+	} 
+	
+	public function setCorcom($v)
+	{
+
+    if ($this->corcom !== $v) {
+        $this->corcom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::CORCOM;
+      }
+  
+	} 
+	
+	public function setCorcau($v)
+	{
+
+    if ($this->corcau !== $v) {
+        $this->corcau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::CORCAU;
+      }
+  
+	} 
+	
+	public function setCorpag($v)
+	{
+
+    if ($this->corpag !== $v) {
+        $this->corpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::CORPAG;
+      }
+  
+	} 
+	
+	public function setCorsoladidis($v)
+	{
+
+    if ($this->corsoladidis !== $v) {
+        $this->corsoladidis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::CORSOLADIDIS;
+      }
+  
+	} 
+	
+	public function setCorsoltra($v)
+	{
+
+    if ($this->corsoltra !== $v) {
+        $this->corsoltra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::CORSOLTRA;
+      }
+  
+	} 
+	
+	public function setCoraju($v)
+	{
+
+    if ($this->coraju !== $v) {
+        $this->coraju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::CORAJU;
+      }
+  
+	} 
+	
+	public function setCorfue($v)
+	{
+
+    if ($this->corfue !== $v) {
+        $this->corfue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdefnivPeer::CORFUE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpdefnivPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->loncod = $rs->getFloat($startcol + 1);
+      $this->loncod = $rs->getFloat($startcol + 1);
 
-			$this->rupcat = $rs->getFloat($startcol + 2);
+      $this->rupcat = $rs->getFloat($startcol + 2);
 
-			$this->ruppar = $rs->getFloat($startcol + 3);
+      $this->ruppar = $rs->getFloat($startcol + 3);
 
-			$this->nivdis = $rs->getFloat($startcol + 4);
+      $this->nivdis = $rs->getFloat($startcol + 4);
 
-			$this->forpre = $rs->getString($startcol + 5);
+      $this->forpre = $rs->getString($startcol + 5);
 
-			$this->asiper = $rs->getString($startcol + 6);
+      $this->asiper = $rs->getString($startcol + 6);
 
-			$this->numper = $rs->getFloat($startcol + 7);
+      $this->numper = $rs->getFloat($startcol + 7);
 
-			$this->peract = $rs->getString($startcol + 8);
+      $this->peract = $rs->getString($startcol + 8);
 
-			$this->fecper = $rs->getDate($startcol + 9, null);
+      $this->fecper = $rs->getDate($startcol + 9, null);
 
-			$this->fecini = $rs->getDate($startcol + 10, null);
+      $this->fecini = $rs->getDate($startcol + 10, null);
 
-			$this->feccie = $rs->getDate($startcol + 11, null);
+      $this->feccie = $rs->getDate($startcol + 11, null);
 
-			$this->etadef = $rs->getString($startcol + 12);
+      $this->etadef = $rs->getString($startcol + 12);
 
-			$this->staprc = $rs->getString($startcol + 13);
+      $this->staprc = $rs->getString($startcol + 13);
 
-			$this->coraep = $rs->getString($startcol + 14);
+      $this->coraep = $rs->getString($startcol + 14);
 
-			$this->gencom = $rs->getString($startcol + 15);
+      $this->gencom = $rs->getString($startcol + 15);
 
-			$this->numcom = $rs->getString($startcol + 16);
+      $this->numcom = $rs->getString($startcol + 16);
 
-			$this->caraep = $rs->getString($startcol + 17);
+      $this->caraep = $rs->getString($startcol + 17);
 
-			$this->tiptraprc = $rs->getString($startcol + 18);
+      $this->tiptraprc = $rs->getString($startcol + 18);
 
-			$this->fueord = $rs->getString($startcol + 19);
+      $this->fueord = $rs->getString($startcol + 19);
 
-			$this->fuecre = $rs->getString($startcol + 20);
+      $this->fuecre = $rs->getString($startcol + 20);
 
-			$this->fuetra = $rs->getString($startcol + 21);
+      $this->fuetra = $rs->getString($startcol + 21);
 
-			$this->nomgob = $rs->getString($startcol + 22);
+      $this->nomgob = $rs->getString($startcol + 22);
 
-			$this->nomsec = $rs->getString($startcol + 23);
+      $this->nomsec = $rs->getString($startcol + 23);
 
-			$this->unidad = $rs->getString($startcol + 24);
+      $this->unidad = $rs->getString($startcol + 24);
 
-			$this->id = $rs->getInt($startcol + 25);
+      $this->corprc = $rs->getFloat($startcol + 25);
 
-			$this->resetModified();
+      $this->corcom = $rs->getFloat($startcol + 26);
 
-			$this->setNew(false);
+      $this->corcau = $rs->getFloat($startcol + 27);
 
-						return $startcol + 26; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpdefniv object", $e);
-		}
-	}
+      $this->corpag = $rs->getFloat($startcol + 28);
+
+      $this->corsoladidis = $rs->getFloat($startcol + 29);
+
+      $this->corsoltra = $rs->getFloat($startcol + 30);
+
+      $this->coraju = $rs->getFloat($startcol + 31);
+
+      $this->corfue = $rs->getFloat($startcol + 32);
+
+      $this->id = $rs->getInt($startcol + 33);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 34; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpdefniv object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -729,6 +966,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpdefnivPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpdefnivPeer::doUpdate($this, $con);
@@ -870,6 +1108,30 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 				return $this->getUnidad();
 				break;
 			case 25:
+				return $this->getCorprc();
+				break;
+			case 26:
+				return $this->getCorcom();
+				break;
+			case 27:
+				return $this->getCorcau();
+				break;
+			case 28:
+				return $this->getCorpag();
+				break;
+			case 29:
+				return $this->getCorsoladidis();
+				break;
+			case 30:
+				return $this->getCorsoltra();
+				break;
+			case 31:
+				return $this->getCoraju();
+				break;
+			case 32:
+				return $this->getCorfue();
+				break;
+			case 33:
 				return $this->getId();
 				break;
 			default:
@@ -907,7 +1169,15 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 			$keys[22] => $this->getNomgob(),
 			$keys[23] => $this->getNomsec(),
 			$keys[24] => $this->getUnidad(),
-			$keys[25] => $this->getId(),
+			$keys[25] => $this->getCorprc(),
+			$keys[26] => $this->getCorcom(),
+			$keys[27] => $this->getCorcau(),
+			$keys[28] => $this->getCorpag(),
+			$keys[29] => $this->getCorsoladidis(),
+			$keys[30] => $this->getCorsoltra(),
+			$keys[31] => $this->getCoraju(),
+			$keys[32] => $this->getCorfue(),
+			$keys[33] => $this->getId(),
 		);
 		return $result;
 	}
@@ -999,6 +1269,30 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 				$this->setUnidad($value);
 				break;
 			case 25:
+				$this->setCorprc($value);
+				break;
+			case 26:
+				$this->setCorcom($value);
+				break;
+			case 27:
+				$this->setCorcau($value);
+				break;
+			case 28:
+				$this->setCorpag($value);
+				break;
+			case 29:
+				$this->setCorsoladidis($value);
+				break;
+			case 30:
+				$this->setCorsoltra($value);
+				break;
+			case 31:
+				$this->setCoraju($value);
+				break;
+			case 32:
+				$this->setCorfue($value);
+				break;
+			case 33:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1033,7 +1327,15 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[22], $arr)) $this->setNomgob($arr[$keys[22]]);
 		if (array_key_exists($keys[23], $arr)) $this->setNomsec($arr[$keys[23]]);
 		if (array_key_exists($keys[24], $arr)) $this->setUnidad($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setId($arr[$keys[25]]);
+		if (array_key_exists($keys[25], $arr)) $this->setCorprc($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setCorcom($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setCorcau($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setCorpag($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setCorsoladidis($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setCorsoltra($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setCoraju($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setCorfue($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setId($arr[$keys[33]]);
 	}
 
 	
@@ -1066,6 +1368,14 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CpdefnivPeer::NOMGOB)) $criteria->add(CpdefnivPeer::NOMGOB, $this->nomgob);
 		if ($this->isColumnModified(CpdefnivPeer::NOMSEC)) $criteria->add(CpdefnivPeer::NOMSEC, $this->nomsec);
 		if ($this->isColumnModified(CpdefnivPeer::UNIDAD)) $criteria->add(CpdefnivPeer::UNIDAD, $this->unidad);
+		if ($this->isColumnModified(CpdefnivPeer::CORPRC)) $criteria->add(CpdefnivPeer::CORPRC, $this->corprc);
+		if ($this->isColumnModified(CpdefnivPeer::CORCOM)) $criteria->add(CpdefnivPeer::CORCOM, $this->corcom);
+		if ($this->isColumnModified(CpdefnivPeer::CORCAU)) $criteria->add(CpdefnivPeer::CORCAU, $this->corcau);
+		if ($this->isColumnModified(CpdefnivPeer::CORPAG)) $criteria->add(CpdefnivPeer::CORPAG, $this->corpag);
+		if ($this->isColumnModified(CpdefnivPeer::CORSOLADIDIS)) $criteria->add(CpdefnivPeer::CORSOLADIDIS, $this->corsoladidis);
+		if ($this->isColumnModified(CpdefnivPeer::CORSOLTRA)) $criteria->add(CpdefnivPeer::CORSOLTRA, $this->corsoltra);
+		if ($this->isColumnModified(CpdefnivPeer::CORAJU)) $criteria->add(CpdefnivPeer::CORAJU, $this->coraju);
+		if ($this->isColumnModified(CpdefnivPeer::CORFUE)) $criteria->add(CpdefnivPeer::CORFUE, $this->corfue);
 		if ($this->isColumnModified(CpdefnivPeer::ID)) $criteria->add(CpdefnivPeer::ID, $this->id);
 
 		return $criteria;
@@ -1146,6 +1456,22 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		$copyObj->setNomsec($this->nomsec);
 
 		$copyObj->setUnidad($this->unidad);
+
+		$copyObj->setCorprc($this->corprc);
+
+		$copyObj->setCorcom($this->corcom);
+
+		$copyObj->setCorcau($this->corcau);
+
+		$copyObj->setCorpag($this->corpag);
+
+		$copyObj->setCorsoladidis($this->corsoladidis);
+
+		$copyObj->setCorsoltra($this->corsoltra);
+
+		$copyObj->setCoraju($this->coraju);
+
+		$copyObj->setCorfue($this->corfue);
 
 
 		$copyObj->setNew(true);

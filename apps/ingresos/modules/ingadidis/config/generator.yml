@@ -1,0 +1,32 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ciadidis
+    theme:            cidesaGenerator
+    fields:
+      refadi:      { name: Referencia, params: size=12 }
+      fecadi:      { name: Fecha }
+      desadi:      { name: Descripción, type: textarea_tag, params: size=50x2}
+      adidis:      { name: Tipo }
+      totadi:      { name: Total }
+      grid:        { name: Movimientos de la Adición/Disminución }
+
+    list:
+      title:          Adiciones/Disminuciones
+      display:        [ =refadi, desadi ]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [ refadi, desadi ]
+      max_per_page:   5
+      sort: refadi
+    edit:
+      title:          Edición de Adiciones/Disminuciones
+      display:
+        Datos de la Adición/Disminución:   [ refadi, fecadi, desadi, _adidis ]
+        Movimientos de la Adición/Disminución: [ _grid, totadi ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

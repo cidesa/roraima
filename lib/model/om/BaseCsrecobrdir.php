@@ -61,240 +61,274 @@ abstract class BaseCsrecobrdir extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodprod()
-	{
+  
+  public function getCodprod()
+  {
 
-		return $this->codprod; 		
-	}
-	
-	public function getCodfas()
-	{
+    return trim($this->codprod);
 
-		return $this->codfas; 		
-	}
-	
-	public function getCodcar()
-	{
+  }
+  
+  public function getCodfas()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getCanemp()
-	{
+    return trim($this->codfas);
 
-		return number_format($this->canemp,2,',','.');
-		
-	}
-	
-	public function getHoremp()
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		return number_format($this->horemp,2,',','.');
-		
-	}
-	
-	public function getTipcon()
-	{
+    return trim($this->codcar);
 
-		return $this->tipcon; 		
-	}
-	
-	public function getCostot()
-	{
+  }
+  
+  public function getCanemp($val=false)
+  {
 
-		return number_format($this->costot,2,',','.');
-		
-	}
-	
-	public function getJornada()
-	{
+    if($val) return number_format($this->canemp,2,',','.');
+    else return $this->canemp;
 
-		return $this->jornada; 		
-	}
-	
-	public function getDiavia()
-	{
+  }
+  
+  public function getHoremp($val=false)
+  {
 
-		return number_format($this->diavia,2,',','.');
-		
-	}
-	
-	public function getNroord()
-	{
+    if($val) return number_format($this->horemp,2,',','.');
+    else return $this->horemp;
 
-		return $this->nroord; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getTipcon()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->tipcon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCostot($val=false)
+  {
+
+    if($val) return number_format($this->costot,2,',','.');
+    else return $this->costot;
+
+  }
+  
+  public function getJornada()
+  {
+
+    return trim($this->jornada);
+
+  }
+  
+  public function getDiavia($val=false)
+  {
+
+    if($val) return number_format($this->diavia,2,',','.');
+    else return $this->diavia;
+
+  }
+  
+  public function getNroord()
+  {
+
+    return trim($this->nroord);
+
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodprod($v)
 	{
 
-		if ($this->codprod !== $v) {
-			$this->codprod = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::CODPROD;
-		}
-
+    if ($this->codprod !== $v) {
+        $this->codprod = $v;
+        $this->modifiedColumns[] = CsrecobrdirPeer::CODPROD;
+      }
+  
 	} 
 	
 	public function setCodfas($v)
 	{
 
-		if ($this->codfas !== $v) {
-			$this->codfas = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::CODFAS;
-		}
-
+    if ($this->codfas !== $v) {
+        $this->codfas = $v;
+        $this->modifiedColumns[] = CsrecobrdirPeer::CODFAS;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = CsrecobrdirPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCanemp($v)
 	{
 
-		if ($this->canemp !== $v) {
-			$this->canemp = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::CANEMP;
-		}
-
+    if ($this->canemp !== $v) {
+        $this->canemp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecobrdirPeer::CANEMP;
+      }
+  
 	} 
 	
 	public function setHoremp($v)
 	{
 
-		if ($this->horemp !== $v) {
-			$this->horemp = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::HOREMP;
-		}
-
+    if ($this->horemp !== $v) {
+        $this->horemp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecobrdirPeer::HOREMP;
+      }
+  
 	} 
 	
 	public function setTipcon($v)
 	{
 
-		if ($this->tipcon !== $v) {
-			$this->tipcon = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::TIPCON;
-		}
-
+    if ($this->tipcon !== $v) {
+        $this->tipcon = $v;
+        $this->modifiedColumns[] = CsrecobrdirPeer::TIPCON;
+      }
+  
 	} 
 	
 	public function setCostot($v)
 	{
 
-		if ($this->costot !== $v) {
-			$this->costot = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::COSTOT;
-		}
-
+    if ($this->costot !== $v) {
+        $this->costot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecobrdirPeer::COSTOT;
+      }
+  
 	} 
 	
 	public function setJornada($v)
 	{
 
-		if ($this->jornada !== $v) {
-			$this->jornada = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::JORNADA;
-		}
-
+    if ($this->jornada !== $v) {
+        $this->jornada = $v;
+        $this->modifiedColumns[] = CsrecobrdirPeer::JORNADA;
+      }
+  
 	} 
 	
 	public function setDiavia($v)
 	{
 
-		if ($this->diavia !== $v) {
-			$this->diavia = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::DIAVIA;
-		}
-
+    if ($this->diavia !== $v) {
+        $this->diavia = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecobrdirPeer::DIAVIA;
+      }
+  
 	} 
 	
 	public function setNroord($v)
 	{
 
-		if ($this->nroord !== $v) {
-			$this->nroord = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::NROORD;
-		}
-
+    if ($this->nroord !== $v) {
+        $this->nroord = $v;
+        $this->modifiedColumns[] = CsrecobrdirPeer::NROORD;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = CsrecobrdirPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsrecobrdirPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsrecobrdirPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codprod = $rs->getString($startcol + 0);
+      $this->codprod = $rs->getString($startcol + 0);
 
-			$this->codfas = $rs->getString($startcol + 1);
+      $this->codfas = $rs->getString($startcol + 1);
 
-			$this->codcar = $rs->getString($startcol + 2);
+      $this->codcar = $rs->getString($startcol + 2);
 
-			$this->canemp = $rs->getFloat($startcol + 3);
+      $this->canemp = $rs->getFloat($startcol + 3);
 
-			$this->horemp = $rs->getFloat($startcol + 4);
+      $this->horemp = $rs->getFloat($startcol + 4);
 
-			$this->tipcon = $rs->getString($startcol + 5);
+      $this->tipcon = $rs->getString($startcol + 5);
 
-			$this->costot = $rs->getFloat($startcol + 6);
+      $this->costot = $rs->getFloat($startcol + 6);
 
-			$this->jornada = $rs->getString($startcol + 7);
+      $this->jornada = $rs->getString($startcol + 7);
 
-			$this->diavia = $rs->getFloat($startcol + 8);
+      $this->diavia = $rs->getFloat($startcol + 8);
 
-			$this->nroord = $rs->getString($startcol + 9);
+      $this->nroord = $rs->getString($startcol + 9);
 
-			$this->codemp = $rs->getString($startcol + 10);
+      $this->codemp = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csrecobrdir object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csrecobrdir object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

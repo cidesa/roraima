@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class OcproveeMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.OcproveeMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.OcproveeMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('ocprovee');
 		$tMap->setPhpName('Ocprovee');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('ocprovee_SEQ');
 
 		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -48,21 +50,21 @@ class OcproveeMapBuilder {
 
 		$tMap->addColumn('EMAIL', 'Email', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('LIMCRE', 'Limcre', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LIMCRE', 'Limcre', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addColumn('REGMER', 'Regmer', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('TOMREG', 'Tomreg', 'string', CreoleTypes::VARCHAR, false, 15);
 
 		$tMap->addColumn('FOLREG', 'Folreg', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('CAPSUS', 'Capsus', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CAPSUS', 'Capsus', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CAPPAG', 'Cappag', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CAPPAG', 'Cappag', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('RIFREPLEG', 'Rifrepleg', 'string', CreoleTypes::VARCHAR, false, 15);
 
@@ -70,7 +72,7 @@ class OcproveeMapBuilder {
 
 		$tMap->addColumn('DIRREPLEG', 'Dirrepleg', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('FECINSCIR', 'Fecinscir', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECINSCIR', 'Fecinscir', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('NUMINSCIR', 'Numinscir', 'string', CreoleTypes::VARCHAR, false, 20);
 
@@ -87,6 +89,6 @@ class OcproveeMapBuilder {
 		$tMap->addColumn('NROCEI', 'Nrocei', 'string', CreoleTypes::VARCHAR, false, 30);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

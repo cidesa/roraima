@@ -210,6 +210,7 @@ abstract class BaseFcfuentesmulPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcfuentesmulPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

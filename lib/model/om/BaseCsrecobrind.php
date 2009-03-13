@@ -57,222 +57,255 @@ abstract class BaseCsrecobrind extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodprod()
-	{
+  
+  public function getCodprod()
+  {
 
-		return $this->codprod; 		
-	}
-	
-	public function getCodfas()
-	{
+    return trim($this->codprod);
 
-		return $this->codfas; 		
-	}
-	
-	public function getCodmanobr()
-	{
+  }
+  
+  public function getCodfas()
+  {
 
-		return $this->codmanobr; 		
-	}
-	
-	public function getCanemp()
-	{
+    return trim($this->codfas);
 
-		return number_format($this->canemp,2,',','.');
-		
-	}
-	
-	public function getHoremp()
-	{
+  }
+  
+  public function getCodmanobr()
+  {
 
-		return number_format($this->horemp,2,',','.');
-		
-	}
-	
-	public function getTipcon()
-	{
+    return trim($this->codmanobr);
 
-		return $this->tipcon; 		
-	}
-	
-	public function getCostot()
-	{
+  }
+  
+  public function getCanemp($val=false)
+  {
 
-		return number_format($this->costot,2,',','.');
-		
-	}
-	
-	public function getJornada()
-	{
+    if($val) return number_format($this->canemp,2,',','.');
+    else return $this->canemp;
 
-		return $this->jornada; 		
-	}
-	
-	public function getNroord()
-	{
+  }
+  
+  public function getHoremp($val=false)
+  {
 
-		return $this->nroord; 		
-	}
-	
-	public function getCosobr()
-	{
+    if($val) return number_format($this->horemp,2,',','.');
+    else return $this->horemp;
 
-		return number_format($this->cosobr,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTipcon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipcon);
+
+  }
+  
+  public function getCostot($val=false)
+  {
+
+    if($val) return number_format($this->costot,2,',','.');
+    else return $this->costot;
+
+  }
+  
+  public function getJornada()
+  {
+
+    return trim($this->jornada);
+
+  }
+  
+  public function getNroord()
+  {
+
+    return trim($this->nroord);
+
+  }
+  
+  public function getCosobr($val=false)
+  {
+
+    if($val) return number_format($this->cosobr,2,',','.');
+    else return $this->cosobr;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodprod($v)
 	{
 
-		if ($this->codprod !== $v) {
-			$this->codprod = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::CODPROD;
-		}
-
+    if ($this->codprod !== $v) {
+        $this->codprod = $v;
+        $this->modifiedColumns[] = CsrecobrindPeer::CODPROD;
+      }
+  
 	} 
 	
 	public function setCodfas($v)
 	{
 
-		if ($this->codfas !== $v) {
-			$this->codfas = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::CODFAS;
-		}
-
+    if ($this->codfas !== $v) {
+        $this->codfas = $v;
+        $this->modifiedColumns[] = CsrecobrindPeer::CODFAS;
+      }
+  
 	} 
 	
 	public function setCodmanobr($v)
 	{
 
-		if ($this->codmanobr !== $v) {
-			$this->codmanobr = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::CODMANOBR;
-		}
-
+    if ($this->codmanobr !== $v) {
+        $this->codmanobr = $v;
+        $this->modifiedColumns[] = CsrecobrindPeer::CODMANOBR;
+      }
+  
 	} 
 	
 	public function setCanemp($v)
 	{
 
-		if ($this->canemp !== $v) {
-			$this->canemp = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::CANEMP;
-		}
-
+    if ($this->canemp !== $v) {
+        $this->canemp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecobrindPeer::CANEMP;
+      }
+  
 	} 
 	
 	public function setHoremp($v)
 	{
 
-		if ($this->horemp !== $v) {
-			$this->horemp = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::HOREMP;
-		}
-
+    if ($this->horemp !== $v) {
+        $this->horemp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecobrindPeer::HOREMP;
+      }
+  
 	} 
 	
 	public function setTipcon($v)
 	{
 
-		if ($this->tipcon !== $v) {
-			$this->tipcon = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::TIPCON;
-		}
-
+    if ($this->tipcon !== $v) {
+        $this->tipcon = $v;
+        $this->modifiedColumns[] = CsrecobrindPeer::TIPCON;
+      }
+  
 	} 
 	
 	public function setCostot($v)
 	{
 
-		if ($this->costot !== $v) {
-			$this->costot = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::COSTOT;
-		}
-
+    if ($this->costot !== $v) {
+        $this->costot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecobrindPeer::COSTOT;
+      }
+  
 	} 
 	
 	public function setJornada($v)
 	{
 
-		if ($this->jornada !== $v) {
-			$this->jornada = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::JORNADA;
-		}
-
+    if ($this->jornada !== $v) {
+        $this->jornada = $v;
+        $this->modifiedColumns[] = CsrecobrindPeer::JORNADA;
+      }
+  
 	} 
 	
 	public function setNroord($v)
 	{
 
-		if ($this->nroord !== $v) {
-			$this->nroord = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::NROORD;
-		}
-
+    if ($this->nroord !== $v) {
+        $this->nroord = $v;
+        $this->modifiedColumns[] = CsrecobrindPeer::NROORD;
+      }
+  
 	} 
 	
 	public function setCosobr($v)
 	{
 
-		if ($this->cosobr !== $v) {
-			$this->cosobr = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::COSOBR;
-		}
-
+    if ($this->cosobr !== $v) {
+        $this->cosobr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecobrindPeer::COSOBR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsrecobrindPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsrecobrindPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codprod = $rs->getString($startcol + 0);
+      $this->codprod = $rs->getString($startcol + 0);
 
-			$this->codfas = $rs->getString($startcol + 1);
+      $this->codfas = $rs->getString($startcol + 1);
 
-			$this->codmanobr = $rs->getString($startcol + 2);
+      $this->codmanobr = $rs->getString($startcol + 2);
 
-			$this->canemp = $rs->getFloat($startcol + 3);
+      $this->canemp = $rs->getFloat($startcol + 3);
 
-			$this->horemp = $rs->getFloat($startcol + 4);
+      $this->horemp = $rs->getFloat($startcol + 4);
 
-			$this->tipcon = $rs->getString($startcol + 5);
+      $this->tipcon = $rs->getString($startcol + 5);
 
-			$this->costot = $rs->getFloat($startcol + 6);
+      $this->costot = $rs->getFloat($startcol + 6);
 
-			$this->jornada = $rs->getString($startcol + 7);
+      $this->jornada = $rs->getString($startcol + 7);
 
-			$this->nroord = $rs->getString($startcol + 8);
+      $this->nroord = $rs->getString($startcol + 8);
 
-			$this->cosobr = $rs->getFloat($startcol + 9);
+      $this->cosobr = $rs->getFloat($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csrecobrind object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csrecobrind object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

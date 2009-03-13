@@ -205,6 +205,7 @@ abstract class BaseNpdiaadicnomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpdiaadicnomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

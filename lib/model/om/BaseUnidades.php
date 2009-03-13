@@ -29,92 +29,118 @@ abstract class BaseUnidades extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodubi()
-	{
+  
+  public function getCodubi()
+  {
 
-		return $this->codubi; 		
-	}
-	
-	public function getDesubi()
-	{
+    return trim($this->codubi);
 
-		return $this->desubi; 		
-	}
-	
-	public function getStacod()
-	{
+  }
+  
+  public function getDesubi()
+  {
 
-		return $this->stacod; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desubi);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStacod()
+  {
+
+    return trim($this->stacod);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodubi($v)
 	{
 
-		if ($this->codubi !== $v) {
-			$this->codubi = $v;
-			$this->modifiedColumns[] = UnidadesPeer::CODUBI;
-		}
-
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = UnidadesPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setDesubi($v)
 	{
 
-		if ($this->desubi !== $v) {
-			$this->desubi = $v;
-			$this->modifiedColumns[] = UnidadesPeer::DESUBI;
-		}
-
+    if ($this->desubi !== $v) {
+        $this->desubi = $v;
+        $this->modifiedColumns[] = UnidadesPeer::DESUBI;
+      }
+  
 	} 
 	
 	public function setStacod($v)
 	{
 
-		if ($this->stacod !== $v) {
-			$this->stacod = $v;
-			$this->modifiedColumns[] = UnidadesPeer::STACOD;
-		}
-
+    if ($this->stacod !== $v) {
+        $this->stacod = $v;
+        $this->modifiedColumns[] = UnidadesPeer::STACOD;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = UnidadesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = UnidadesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codubi = $rs->getString($startcol + 0);
+      $this->codubi = $rs->getString($startcol + 0);
 
-			$this->desubi = $rs->getString($startcol + 1);
+      $this->desubi = $rs->getString($startcol + 1);
 
-			$this->stacod = $rs->getString($startcol + 2);
+      $this->stacod = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Unidades object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Unidades object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseUnidades extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = UnidadesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += UnidadesPeer::doUpdate($this, $con);

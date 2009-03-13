@@ -225,6 +225,7 @@ abstract class BaseNpvacdiasbonovacPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpvacdiasbonovacPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

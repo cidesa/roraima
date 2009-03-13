@@ -1,0 +1,44 @@
+methods:
+  post:
+   - "liaspfincrieva{codcri}"
+   - "liaspfincrieva{descri}"
+   - "liaspfincrieva{puntaje}"
+
+names:
+  liaspfincrieva{codcri}:
+    required:  Yes
+    required_msg: Debe introducir el Código del Criterio de Selección
+    validators: MyStringValidator1, Validator_codcri
+
+  liaspfincrieva{descri}:
+    required:  Yes
+    required_msg: Debe introducir la Descripción del Criterio de Selección
+    validators: MyStringValidator2
+
+  liaspfincrieva{puntaje}:
+    required:  Yes
+    required_msg: El puntaje es un campo obligatorio
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El código del Criterio de Selección debe tener mas de 1 caracter
+        max:       4
+        max_error: El código del Criterio de Selección debe tener menos de 4 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción del Criterio de Selección debe tener mas de 1 caracter
+        max:       100
+        max_error: La descripción del Criterio de Selección debe tener menos de 100 Caracteres
+
+Validator_codcri:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Liaspfincrieva
+        column:   codcri
+        unique_error:   El código del Criterio de Selección ya existe. Por Favor, Intente con otro.
+

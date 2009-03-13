@@ -13,7 +13,7 @@ abstract class BaseFaartproPeer {
 	const CLASS_DEFAULT = 'lib.model.Faartpro';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,12 @@ abstract class BaseFaartproPeer {
 	const COMISI = 'faartpro.COMISI';
 
 	
+	const TIPPER = 'faartpro.TIPPER';
+
+	
+	const CODCTA = 'faartpro.CODCTA';
+
+	
 	const ID = 'faartpro.ID';
 
 	
@@ -40,18 +46,18 @@ abstract class BaseFaartproPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codalm', 'Codart', 'Comisi', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaartproPeer::CODPRO, FaartproPeer::CODALM, FaartproPeer::CODART, FaartproPeer::COMISI, FaartproPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codalm', 'codart', 'comisi', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codalm', 'Codart', 'Comisi', 'Tipper', 'Codcta', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaartproPeer::CODPRO, FaartproPeer::CODALM, FaartproPeer::CODART, FaartproPeer::COMISI, FaartproPeer::TIPPER, FaartproPeer::CODCTA, FaartproPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codalm', 'codart', 'comisi', 'tipper', 'codcta', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codalm' => 1, 'Codart' => 2, 'Comisi' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (FaartproPeer::CODPRO => 0, FaartproPeer::CODALM => 1, FaartproPeer::CODART => 2, FaartproPeer::COMISI => 3, FaartproPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codalm' => 1, 'codart' => 2, 'comisi' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codalm' => 1, 'Codart' => 2, 'Comisi' => 3, 'Tipper' => 4, 'Codcta' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (FaartproPeer::CODPRO => 0, FaartproPeer::CODALM => 1, FaartproPeer::CODART => 2, FaartproPeer::COMISI => 3, FaartproPeer::TIPPER => 4, FaartproPeer::CODCTA => 5, FaartproPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codalm' => 1, 'codart' => 2, 'comisi' => 3, 'tipper' => 4, 'codcta' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -112,6 +118,10 @@ abstract class BaseFaartproPeer {
 		$criteria->addSelectColumn(FaartproPeer::CODART);
 
 		$criteria->addSelectColumn(FaartproPeer::COMISI);
+
+		$criteria->addSelectColumn(FaartproPeer::TIPPER);
+
+		$criteria->addSelectColumn(FaartproPeer::CODCTA);
 
 		$criteria->addSelectColumn(FaartproPeer::ID);
 
@@ -215,6 +225,7 @@ abstract class BaseFaartproPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FaartproPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

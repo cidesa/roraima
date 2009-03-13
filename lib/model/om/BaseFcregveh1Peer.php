@@ -360,6 +360,7 @@ abstract class BaseFcregveh1Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Fcregveh1Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

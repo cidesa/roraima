@@ -25,74 +25,99 @@ abstract class BaseCsdefprog extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodprog()
-	{
+  
+  public function getCodprog()
+  {
 
-		return $this->codprog; 		
-	}
-	
-	public function getNomprog()
-	{
+    return trim($this->codprog);
 
-		return $this->nomprog; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomprog()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomprog);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodprog($v)
 	{
 
-		if ($this->codprog !== $v) {
-			$this->codprog = $v;
-			$this->modifiedColumns[] = CsdefprogPeer::CODPROG;
-		}
-
+    if ($this->codprog !== $v) {
+        $this->codprog = $v;
+        $this->modifiedColumns[] = CsdefprogPeer::CODPROG;
+      }
+  
 	} 
 	
 	public function setNomprog($v)
 	{
 
-		if ($this->nomprog !== $v) {
-			$this->nomprog = $v;
-			$this->modifiedColumns[] = CsdefprogPeer::NOMPROG;
-		}
-
+    if ($this->nomprog !== $v) {
+        $this->nomprog = $v;
+        $this->modifiedColumns[] = CsdefprogPeer::NOMPROG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsdefprogPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsdefprogPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codprog = $rs->getString($startcol + 0);
+      $this->codprog = $rs->getString($startcol + 0);
 
-			$this->nomprog = $rs->getString($startcol + 1);
+      $this->nomprog = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csdefprog object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csdefprog object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

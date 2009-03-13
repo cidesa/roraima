@@ -37,129 +37,157 @@ abstract class BaseOcparval extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getNumval()
-	{
+    return trim($this->codcon);
 
-		return $this->numval; 		
-	}
-	
-	public function getCodtipval()
-	{
+  }
+  
+  public function getNumval()
+  {
 
-		return $this->codtipval; 		
-	}
-	
-	public function getCodpar()
-	{
+    return trim($this->numval);
 
-		return $this->codpar; 		
-	}
-	
-	public function getCantidad()
-	{
+  }
+  
+  public function getCodtipval()
+  {
 
-		return number_format($this->cantidad,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codtipval);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getCantidad($val=false)
+  {
+
+    if($val) return number_format($this->cantidad,2,',','.');
+    else return $this->cantidad;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcparvalPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcparvalPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNumval($v)
 	{
 
-		if ($this->numval !== $v) {
-			$this->numval = $v;
-			$this->modifiedColumns[] = OcparvalPeer::NUMVAL;
-		}
-
+    if ($this->numval !== $v) {
+        $this->numval = $v;
+        $this->modifiedColumns[] = OcparvalPeer::NUMVAL;
+      }
+  
 	} 
 	
 	public function setCodtipval($v)
 	{
 
-		if ($this->codtipval !== $v) {
-			$this->codtipval = $v;
-			$this->modifiedColumns[] = OcparvalPeer::CODTIPVAL;
-		}
-
+    if ($this->codtipval !== $v) {
+        $this->codtipval = $v;
+        $this->modifiedColumns[] = OcparvalPeer::CODTIPVAL;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = OcparvalPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = OcparvalPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCantidad($v)
 	{
 
-		if ($this->cantidad !== $v) {
-			$this->cantidad = $v;
-			$this->modifiedColumns[] = OcparvalPeer::CANTIDAD;
-		}
-
+    if ($this->cantidad !== $v) {
+        $this->cantidad = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcparvalPeer::CANTIDAD;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcparvalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcparvalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->numval = $rs->getString($startcol + 1);
+      $this->numval = $rs->getString($startcol + 1);
 
-			$this->codtipval = $rs->getString($startcol + 2);
+      $this->codtipval = $rs->getString($startcol + 2);
 
-			$this->codpar = $rs->getString($startcol + 3);
+      $this->codpar = $rs->getString($startcol + 3);
 
-			$this->cantidad = $rs->getFloat($startcol + 4);
+      $this->cantidad = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocparval object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocparval object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +244,7 @@ abstract class BaseOcparval extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcparvalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcparvalPeer::doUpdate($this, $con);

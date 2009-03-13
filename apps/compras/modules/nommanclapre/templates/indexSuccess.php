@@ -1,30 +1,69 @@
-<fieldset id="sf_fieldset_none"  class="">
-<legend>Clasificador de Partidas Presupuestarias</legend>
+<?php use_helper('Object', 'Validation', 'ObjectAdmin', 'I18N', 'Date', 'Javascript', 'PopUp', 'Grid') ?>
+<?php use_stylesheet('/sf/sf_admin/css/main') ?>
+<?php echo javascript_include_tag('dFilter') ?>
+<?php echo javascript_include_tag('ajax') ?>
+<?php echo javascript_include_tag('tools') ?>
+<div id="sf_admin_container">
+<h1><?php echo __('Clasificador de Partidas Presupuestarias', array()) ?></h1>
+<div id="sf_admin_content">
+<?php if ($sf_flash->has('notice1')): ?>
+<div class="save-ok">
+<h2><?php echo __($sf_flash->get('notice1')) ?></h2>
+</div>
+<?php endif; ?>
+
+<?php if ($sf_flash->has('notice2')): ?>
+<div class="form-errors">
+<h2><?php echo __($sf_flash->get('notice2')) ?></h2>
+</div>
+<?php endif; ?>
+
+<?php echo form_tag('nommanclapre/index', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+)) ?>
+
+<fieldset id="sf_fieldset_none" class="">
+
 <div class="form-row">
-<table width="725" border="0" cellpadding="1" cellspacing="0" bordercolor="#999999">
-  <tr>
-    <td colspan="3"><span class="Estilo6"></span></td>
-  </tr>
-  <tr>
-    <td height="305" colspan="3" align="center"><table width="389" border="0" cellspacing="0">
-      <tr>
-       <td>&nbsp;</td>
-        <td width="387">&nbsp;</td>
-        <td width="387" bgcolor="#CCCCFF"><div align="center" class="Estilo4"></div></td>
-      </tr>
-      <tr>
-       <td><?php echo image_tag('/images/magnifier.png');?></td>
-        <td height="76"><h2>  Informacion</h2></td>
-        <td>
-         <div align="center"><strong>Este modulo permite crear el clasificador presupuestario, el cual contendra las categorias y partidas existentes en la contabilidad presupuestaria para ser manejadas desde la Nomina.</strong></div></td>
-      </tr>
-      <tr>
-        <td>&nbsp;</td>
-        <td height="107">&nbsp;</td>
-        <td><div align="center"><?php echo button_to('Crear Clasificador','#')?></div></td>
-      </tr>
-    </table></td>
-  </tr>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Información') ?></legend>
+<div class="form-row" >
+<table>
+<tr>
+<th>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+
+<th>
+<?php echo label_for('titulo', __('Este módulo permite crear el clasificador presupuestario, el cual contendra las categorias ' .
+    ' y partidas existentes en la contabilidad presupuestaria para ser manejadas desde la Nomina.') , 'class="required" Style="width:600px"')?>
+</th>
+</tr>
 </table>
+<br>
 </div>
 </fieldset>
+</div>
+
+<br>
+<div class="form-row">
+<div id="divAvisos">
+<table width="100%">
+<tr>
+<th width="35%">
+</th>
+<th width="30%">
+<?php echo button_to(__('Crear Clasificador'), 'nommanclapre/save', array (
+  'class' => '',
+)) ?>
+</th>
+<th width="35%">
+</th>
+</tr>
+</table>
+</div>
+</div>
+</fieldset>
+</form>

@@ -1,0 +1,24 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   atdetayu
+  anchogrid:               400
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Aprobado
+  tipo:                    k
+  nombrecampo:             aprobado
+  html:                    [size="5" ]
+2:       # Columna 2
+  titulo:                  Item
+  tipo:                    t
+  nombrecampo:             item
+  html:                    [size="10" ]
+3:       # Columna 3
+  titulo:                  Cantidad
+  tipo:                    m
+  nombrecampo:             cantidad
+  html:                    [size="10" ]
+
+

@@ -77,405 +77,439 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getOrdcon()
-	{
+  
+  public function getOrdcon()
+  {
 
-		return $this->ordcon; 		
-	}
-	
-	public function getFeccon($format = 'Y-m-d')
-	{
+    return trim($this->ordcon);
 
-		if ($this->feccon === null || $this->feccon === '') {
-			return null;
-		} elseif (!is_int($this->feccon)) {
-						$ts = strtotime($this->feccon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
-			}
-		} else {
-			$ts = $this->feccon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFeccon($format = 'Y-m-d')
+  {
 
-	
-	public function getTipcon()
-	{
+    if ($this->feccon === null || $this->feccon === '') {
+      return null;
+    } elseif (!is_int($this->feccon)) {
+            $ts = adodb_strtotime($this->feccon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
+      }
+    } else {
+      $ts = $this->feccon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->tipcon; 		
-	}
-	
-	public function getCodpro()
-	{
+  
+  public function getTipcon()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getDescon()
-	{
+    return trim($this->tipcon);
 
-		return $this->descon; 		
-	}
-	
-	public function getObjcon()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->objcon; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    return trim($this->codpro);
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDescon()
+  {
 
-	
-	public function getFeccul($format = 'Y-m-d')
-	{
+    return trim($this->descon);
 
-		if ($this->feccul === null || $this->feccul === '') {
-			return null;
-		} elseif (!is_int($this->feccul)) {
-						$ts = strtotime($this->feccul);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccul] as date/time value: " . var_export($this->feccul, true));
-			}
-		} else {
-			$ts = $this->feccul;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getObjcon()
+  {
 
-	
-	public function getMulatrini()
-	{
+    return trim($this->objcon);
 
-		return number_format($this->mulatrini,2,',','.');
-		
-	}
-	
-	public function getLapgar()
-	{
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		return number_format($this->lapgar,2,',','.');
-		
-	}
-	
-	public function getMulatrcul()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->mulatrcul,2,',','.');
-		
-	}
-	
-	public function getStacon()
-	{
+  
+  public function getFeccul($format = 'Y-m-d')
+  {
 
-		return $this->stacon; 		
-	}
-	
-	public function getMoncon()
-	{
+    if ($this->feccul === null || $this->feccul === '') {
+      return null;
+    } elseif (!is_int($this->feccul)) {
+            $ts = adodb_strtotime($this->feccul);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccul] as date/time value: " . var_export($this->feccul, true));
+      }
+    } else {
+      $ts = $this->feccul;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->moncon,2,',','.');
-		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+  
+  public function getMulatrini($val=false)
+  {
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->mulatrini,2,',','.');
+    else return $this->mulatrini;
 
-	
-	public function getCancuo()
-	{
+  }
+  
+  public function getLapgar($val=false)
+  {
 
-		return number_format($this->cancuo,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->lapgar,2,',','.');
+    else return $this->lapgar;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMulatrcul($val=false)
+  {
+
+    if($val) return number_format($this->mulatrcul,2,',','.');
+    else return $this->mulatrcul;
+
+  }
+  
+  public function getStacon()
+  {
+
+    return trim($this->stacon);
+
+  }
+  
+  public function getMoncon($val=false)
+  {
+
+    if($val) return number_format($this->moncon,2,',','.');
+    else return $this->moncon;
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCancuo($val=false)
+  {
+
+    if($val) return number_format($this->cancuo,2,',','.');
+    else return $this->cancuo;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setOrdcon($v)
 	{
 
-		if ($this->ordcon !== $v) {
-			$this->ordcon = $v;
-			$this->modifiedColumns[] = CaordconPeer::ORDCON;
-		}
-
+    if ($this->ordcon !== $v) {
+        $this->ordcon = $v;
+        $this->modifiedColumns[] = CaordconPeer::ORDCON;
+      }
+  
 	} 
 	
 	public function setFeccon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccon !== $ts) {
-			$this->feccon = $ts;
-			$this->modifiedColumns[] = CaordconPeer::FECCON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccon !== $ts) {
+      $this->feccon = $ts;
+      $this->modifiedColumns[] = CaordconPeer::FECCON;
+    }
 
 	} 
 	
 	public function setTipcon($v)
 	{
 
-		if ($this->tipcon !== $v) {
-			$this->tipcon = $v;
-			$this->modifiedColumns[] = CaordconPeer::TIPCON;
-		}
-
+    if ($this->tipcon !== $v) {
+        $this->tipcon = $v;
+        $this->modifiedColumns[] = CaordconPeer::TIPCON;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CaordconPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CaordconPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setDescon($v)
 	{
 
-		if ($this->descon !== $v) {
-			$this->descon = $v;
-			$this->modifiedColumns[] = CaordconPeer::DESCON;
-		}
-
+    if ($this->descon !== $v) {
+        $this->descon = $v;
+        $this->modifiedColumns[] = CaordconPeer::DESCON;
+      }
+  
 	} 
 	
 	public function setObjcon($v)
 	{
 
-		if ($this->objcon !== $v) {
-			$this->objcon = $v;
-			$this->modifiedColumns[] = CaordconPeer::OBJCON;
-		}
-
+    if ($this->objcon !== $v) {
+        $this->objcon = $v;
+        $this->modifiedColumns[] = CaordconPeer::OBJCON;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = CaordconPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = CaordconPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFeccul($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccul] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccul !== $ts) {
-			$this->feccul = $ts;
-			$this->modifiedColumns[] = CaordconPeer::FECCUL;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccul] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccul !== $ts) {
+      $this->feccul = $ts;
+      $this->modifiedColumns[] = CaordconPeer::FECCUL;
+    }
 
 	} 
 	
 	public function setMulatrini($v)
 	{
 
-		if ($this->mulatrini !== $v) {
-			$this->mulatrini = $v;
-			$this->modifiedColumns[] = CaordconPeer::MULATRINI;
-		}
-
+    if ($this->mulatrini !== $v) {
+        $this->mulatrini = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordconPeer::MULATRINI;
+      }
+  
 	} 
 	
 	public function setLapgar($v)
 	{
 
-		if ($this->lapgar !== $v) {
-			$this->lapgar = $v;
-			$this->modifiedColumns[] = CaordconPeer::LAPGAR;
-		}
-
+    if ($this->lapgar !== $v) {
+        $this->lapgar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordconPeer::LAPGAR;
+      }
+  
 	} 
 	
 	public function setMulatrcul($v)
 	{
 
-		if ($this->mulatrcul !== $v) {
-			$this->mulatrcul = $v;
-			$this->modifiedColumns[] = CaordconPeer::MULATRCUL;
-		}
-
+    if ($this->mulatrcul !== $v) {
+        $this->mulatrcul = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordconPeer::MULATRCUL;
+      }
+  
 	} 
 	
 	public function setStacon($v)
 	{
 
-		if ($this->stacon !== $v) {
-			$this->stacon = $v;
-			$this->modifiedColumns[] = CaordconPeer::STACON;
-		}
-
+    if ($this->stacon !== $v) {
+        $this->stacon = $v;
+        $this->modifiedColumns[] = CaordconPeer::STACON;
+      }
+  
 	} 
 	
 	public function setMoncon($v)
 	{
 
-		if ($this->moncon !== $v) {
-			$this->moncon = $v;
-			$this->modifiedColumns[] = CaordconPeer::MONCON;
-		}
-
+    if ($this->moncon !== $v) {
+        $this->moncon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordconPeer::MONCON;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = CaordconPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = CaordconPeer::FECANU;
+    }
 
 	} 
 	
 	public function setCancuo($v)
 	{
 
-		if ($this->cancuo !== $v) {
-			$this->cancuo = $v;
-			$this->modifiedColumns[] = CaordconPeer::CANCUO;
-		}
-
+    if ($this->cancuo !== $v) {
+        $this->cancuo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordconPeer::CANCUO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaordconPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaordconPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->ordcon = $rs->getString($startcol + 0);
+      $this->ordcon = $rs->getString($startcol + 0);
 
-			$this->feccon = $rs->getDate($startcol + 1, null);
+      $this->feccon = $rs->getDate($startcol + 1, null);
 
-			$this->tipcon = $rs->getString($startcol + 2);
+      $this->tipcon = $rs->getString($startcol + 2);
 
-			$this->codpro = $rs->getString($startcol + 3);
+      $this->codpro = $rs->getString($startcol + 3);
 
-			$this->descon = $rs->getString($startcol + 4);
+      $this->descon = $rs->getString($startcol + 4);
 
-			$this->objcon = $rs->getString($startcol + 5);
+      $this->objcon = $rs->getString($startcol + 5);
 
-			$this->fecini = $rs->getDate($startcol + 6, null);
+      $this->fecini = $rs->getDate($startcol + 6, null);
 
-			$this->feccul = $rs->getDate($startcol + 7, null);
+      $this->feccul = $rs->getDate($startcol + 7, null);
 
-			$this->mulatrini = $rs->getFloat($startcol + 8);
+      $this->mulatrini = $rs->getFloat($startcol + 8);
 
-			$this->lapgar = $rs->getFloat($startcol + 9);
+      $this->lapgar = $rs->getFloat($startcol + 9);
 
-			$this->mulatrcul = $rs->getFloat($startcol + 10);
+      $this->mulatrcul = $rs->getFloat($startcol + 10);
 
-			$this->stacon = $rs->getString($startcol + 11);
+      $this->stacon = $rs->getString($startcol + 11);
 
-			$this->moncon = $rs->getFloat($startcol + 12);
+      $this->moncon = $rs->getFloat($startcol + 12);
 
-			$this->fecanu = $rs->getDate($startcol + 13, null);
+      $this->fecanu = $rs->getDate($startcol + 13, null);
 
-			$this->cancuo = $rs->getFloat($startcol + 14);
+      $this->cancuo = $rs->getFloat($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caordcon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caordcon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -532,6 +566,7 @@ abstract class BaseCaordcon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaordconPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaordconPeer::doUpdate($this, $con);

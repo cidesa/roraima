@@ -45,210 +45,238 @@ abstract class BaseOcressol extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumsol()
-	{
+  
+  public function getNumsol()
+  {
 
-		return $this->numsol; 		
-	}
-	
-	public function getNumcor()
-	{
+    return trim($this->numsol);
 
-		return $this->numcor; 		
-	}
-	
-	public function getCedemi()
-	{
+  }
+  
+  public function getNumcor()
+  {
 
-		return $this->cedemi; 		
-	}
-	
-	public function getCedfir()
-	{
+    return trim($this->numcor);
 
-		return $this->cedfir; 		
-	}
-	
-	public function getUbiarc()
-	{
+  }
+  
+  public function getCedemi()
+  {
 
-		return $this->ubiarc; 		
-	}
-	
-	public function getFecres($format = 'Y-m-d')
-	{
+    return trim($this->cedemi);
 
-		if ($this->fecres === null || $this->fecres === '') {
-			return null;
-		} elseif (!is_int($this->fecres)) {
-						$ts = strtotime($this->fecres);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecres] as date/time value: " . var_export($this->fecres, true));
-			}
-		} else {
-			$ts = $this->fecres;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCedfir()
+  {
 
-	
-	public function getFecfir($format = 'Y-m-d')
-	{
+    return trim($this->cedfir);
 
-		if ($this->fecfir === null || $this->fecfir === '') {
-			return null;
-		} elseif (!is_int($this->fecfir)) {
-						$ts = strtotime($this->fecfir);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfir] as date/time value: " . var_export($this->fecfir, true));
-			}
-		} else {
-			$ts = $this->fecfir;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getUbiarc()
+  {
 
-	
-	public function getId()
-	{
+    return trim($this->ubiarc);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFecres($format = 'Y-m-d')
+  {
+
+    if ($this->fecres === null || $this->fecres === '') {
+      return null;
+    } elseif (!is_int($this->fecres)) {
+            $ts = adodb_strtotime($this->fecres);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecres] as date/time value: " . var_export($this->fecres, true));
+      }
+    } else {
+      $ts = $this->fecres;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecfir($format = 'Y-m-d')
+  {
+
+    if ($this->fecfir === null || $this->fecfir === '') {
+      return null;
+    } elseif (!is_int($this->fecfir)) {
+            $ts = adodb_strtotime($this->fecfir);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfir] as date/time value: " . var_export($this->fecfir, true));
+      }
+    } else {
+      $ts = $this->fecfir;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumsol($v)
 	{
 
-		if ($this->numsol !== $v) {
-			$this->numsol = $v;
-			$this->modifiedColumns[] = OcressolPeer::NUMSOL;
-		}
-
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = OcressolPeer::NUMSOL;
+      }
+  
 	} 
 	
 	public function setNumcor($v)
 	{
 
-		if ($this->numcor !== $v) {
-			$this->numcor = $v;
-			$this->modifiedColumns[] = OcressolPeer::NUMCOR;
-		}
-
+    if ($this->numcor !== $v) {
+        $this->numcor = $v;
+        $this->modifiedColumns[] = OcressolPeer::NUMCOR;
+      }
+  
 	} 
 	
 	public function setCedemi($v)
 	{
 
-		if ($this->cedemi !== $v) {
-			$this->cedemi = $v;
-			$this->modifiedColumns[] = OcressolPeer::CEDEMI;
-		}
-
+    if ($this->cedemi !== $v) {
+        $this->cedemi = $v;
+        $this->modifiedColumns[] = OcressolPeer::CEDEMI;
+      }
+  
 	} 
 	
 	public function setCedfir($v)
 	{
 
-		if ($this->cedfir !== $v) {
-			$this->cedfir = $v;
-			$this->modifiedColumns[] = OcressolPeer::CEDFIR;
-		}
-
+    if ($this->cedfir !== $v) {
+        $this->cedfir = $v;
+        $this->modifiedColumns[] = OcressolPeer::CEDFIR;
+      }
+  
 	} 
 	
 	public function setUbiarc($v)
 	{
 
-		if ($this->ubiarc !== $v) {
-			$this->ubiarc = $v;
-			$this->modifiedColumns[] = OcressolPeer::UBIARC;
-		}
-
+    if ($this->ubiarc !== $v) {
+        $this->ubiarc = $v;
+        $this->modifiedColumns[] = OcressolPeer::UBIARC;
+      }
+  
 	} 
 	
 	public function setFecres($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecres] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecres !== $ts) {
-			$this->fecres = $ts;
-			$this->modifiedColumns[] = OcressolPeer::FECRES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecres] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecres !== $ts) {
+      $this->fecres = $ts;
+      $this->modifiedColumns[] = OcressolPeer::FECRES;
+    }
 
 	} 
 	
 	public function setFecfir($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfir] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfir !== $ts) {
-			$this->fecfir = $ts;
-			$this->modifiedColumns[] = OcressolPeer::FECFIR;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfir] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfir !== $ts) {
+      $this->fecfir = $ts;
+      $this->modifiedColumns[] = OcressolPeer::FECFIR;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcressolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcressolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numsol = $rs->getString($startcol + 0);
+      $this->numsol = $rs->getString($startcol + 0);
 
-			$this->numcor = $rs->getString($startcol + 1);
+      $this->numcor = $rs->getString($startcol + 1);
 
-			$this->cedemi = $rs->getString($startcol + 2);
+      $this->cedemi = $rs->getString($startcol + 2);
 
-			$this->cedfir = $rs->getString($startcol + 3);
+      $this->cedfir = $rs->getString($startcol + 3);
 
-			$this->ubiarc = $rs->getString($startcol + 4);
+      $this->ubiarc = $rs->getString($startcol + 4);
 
-			$this->fecres = $rs->getDate($startcol + 5, null);
+      $this->fecres = $rs->getDate($startcol + 5, null);
 
-			$this->fecfir = $rs->getDate($startcol + 6, null);
+      $this->fecfir = $rs->getDate($startcol + 6, null);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocressol object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocressol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -305,6 +333,7 @@ abstract class BaseOcressol extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcressolPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcressolPeer::doUpdate($this, $con);

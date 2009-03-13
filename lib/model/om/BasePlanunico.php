@@ -29,92 +29,118 @@ abstract class BasePlanunico extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcta()
-	{
+  
+  public function getCodcta()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getNompre()
-	{
+    return trim($this->codcta);
 
-		return $this->nompre; 		
-	}
-	
-	public function getCodnew()
-	{
+  }
+  
+  public function getNompre()
+  {
 
-		return $this->codnew; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nompre);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodnew()
+  {
+
+    return trim($this->codnew);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = PlanunicoPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = PlanunicoPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setNompre($v)
 	{
 
-		if ($this->nompre !== $v) {
-			$this->nompre = $v;
-			$this->modifiedColumns[] = PlanunicoPeer::NOMPRE;
-		}
-
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = PlanunicoPeer::NOMPRE;
+      }
+  
 	} 
 	
 	public function setCodnew($v)
 	{
 
-		if ($this->codnew !== $v) {
-			$this->codnew = $v;
-			$this->modifiedColumns[] = PlanunicoPeer::CODNEW;
-		}
-
+    if ($this->codnew !== $v) {
+        $this->codnew = $v;
+        $this->modifiedColumns[] = PlanunicoPeer::CODNEW;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = PlanunicoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = PlanunicoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcta = $rs->getString($startcol + 0);
+      $this->codcta = $rs->getString($startcol + 0);
 
-			$this->nompre = $rs->getString($startcol + 1);
+      $this->nompre = $rs->getString($startcol + 1);
 
-			$this->codnew = $rs->getString($startcol + 2);
+      $this->codnew = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Planunico object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Planunico object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BasePlanunico extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = PlanunicoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += PlanunicoPeer::doUpdate($this, $con);

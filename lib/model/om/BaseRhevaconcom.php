@@ -37,130 +37,158 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodevdo()
-	{
+  
+  public function getCodevdo()
+  {
 
-		return $this->codevdo; 		
-	}
-	
-	public function getCodniv()
-	{
+    return trim($this->codevdo);
 
-		return $this->codniv; 		
-	}
-	
-	public function getCodvalins()
-	{
+  }
+  
+  public function getCodniv()
+  {
 
-		return $this->codvalins; 		
-	}
-	
-	public function getPesval()
-	{
+    return trim($this->codniv);
 
-		return number_format($this->pesval,2,',','.');
-		
-	}
-	
-	public function getPunval()
-	{
+  }
+  
+  public function getCodvalins()
+  {
 
-		return number_format($this->punval,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codvalins);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPesval($val=false)
+  {
+
+    if($val) return number_format($this->pesval,2,',','.');
+    else return $this->pesval;
+
+  }
+  
+  public function getPunval($val=false)
+  {
+
+    if($val) return number_format($this->punval,2,',','.');
+    else return $this->punval;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodevdo($v)
 	{
 
-		if ($this->codevdo !== $v) {
-			$this->codevdo = $v;
-			$this->modifiedColumns[] = RhevaconcomPeer::CODEVDO;
-		}
-
+    if ($this->codevdo !== $v) {
+        $this->codevdo = $v;
+        $this->modifiedColumns[] = RhevaconcomPeer::CODEVDO;
+      }
+  
 	} 
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = RhevaconcomPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = RhevaconcomPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setCodvalins($v)
 	{
 
-		if ($this->codvalins !== $v) {
-			$this->codvalins = $v;
-			$this->modifiedColumns[] = RhevaconcomPeer::CODVALINS;
-		}
-
+    if ($this->codvalins !== $v) {
+        $this->codvalins = $v;
+        $this->modifiedColumns[] = RhevaconcomPeer::CODVALINS;
+      }
+  
 	} 
 	
 	public function setPesval($v)
 	{
 
-		if ($this->pesval !== $v) {
-			$this->pesval = $v;
-			$this->modifiedColumns[] = RhevaconcomPeer::PESVAL;
-		}
-
+    if ($this->pesval !== $v) {
+        $this->pesval = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhevaconcomPeer::PESVAL;
+      }
+  
 	} 
 	
 	public function setPunval($v)
 	{
 
-		if ($this->punval !== $v) {
-			$this->punval = $v;
-			$this->modifiedColumns[] = RhevaconcomPeer::PUNVAL;
-		}
-
+    if ($this->punval !== $v) {
+        $this->punval = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhevaconcomPeer::PUNVAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhevaconcomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhevaconcomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codevdo = $rs->getString($startcol + 0);
+      $this->codevdo = $rs->getString($startcol + 0);
 
-			$this->codniv = $rs->getString($startcol + 1);
+      $this->codniv = $rs->getString($startcol + 1);
 
-			$this->codvalins = $rs->getString($startcol + 2);
+      $this->codvalins = $rs->getString($startcol + 2);
 
-			$this->pesval = $rs->getFloat($startcol + 3);
+      $this->pesval = $rs->getFloat($startcol + 3);
 
-			$this->punval = $rs->getFloat($startcol + 4);
+      $this->punval = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhevaconcom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhevaconcom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +245,7 @@ abstract class BaseRhevaconcom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhevaconcomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhevaconcomPeer::doUpdate($this, $con);

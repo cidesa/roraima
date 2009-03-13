@@ -205,6 +205,7 @@ abstract class BaseNpconceptosprimaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpconceptosprimaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -9,11 +9,26 @@
  */ 
 class Dfrutadoc extends BaseDfrutadoc
 {
-  
-  public function getNomuni(){
-    
-    return Herramientas::getX('id','acunidad','nomuni',self::getIdacunidad());
-    
+  protected $nomuni = '';
+  protected $tipdoc = '';
+
+  public function afterHydrate()
+  {
+
+    $this->nomuni = Herramientas::getX('id','acunidad','nomuni',$this->getIdAcunidad());
+
+    $c = new Criteria();
+    $c->add(DftabtipPeer::ID,$this->getIdDftabtip());
+
+    $dftabtip = DftabtipPeer::doSelectOne($c);
+
+    //H::PrintR($dftabtip);
+
+    if($dftabtip) $this->tipdoc = $dftabtip->getTipdoc().' - '.Documentos::getDesDoc($dftabtip->getTipdoc());
+
+    //$this->tipdoc = Herramientas::getX('id','dftabtip','tipdoc',$this->getIdDftabtip());
+
   }
-  
+
+
 }

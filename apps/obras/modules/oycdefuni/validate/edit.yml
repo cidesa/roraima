@@ -1,0 +1,44 @@
+methods:
+  post:
+   - "ocunidad{coduni}"
+   - "ocunidad{desuni}"
+   - "ocunidad{abruni}"
+
+names:
+  ocunidad{coduni}:
+    required:  Yes
+    required_msg: El Codigo de la Unidad no puedo estar en Blanco
+    validators: Validator_coduni
+
+  ocunidad{desuni}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_desuni
+
+  ocunidad{abruni}:
+    required:  Yes
+    required_msg: La Abreviatura no puedo estar en Blanco
+    validators: Validator_abruni
+
+Validator_coduni:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Ocunidad
+        column:   coduni
+        unique_error:   El Código de la Unidad ya existe. Por Favor, Intente con otro.
+
+Validator_desuni:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: Las Descripciones de la Unidad no puede tener menos de 5 caracteres
+        max:       250
+        max_error: Las Descripciones de la Unidad no puede tener mas de 250 caracteres
+
+Validator_abruni:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Las Descripciones de la Unidad no puede tener menos de 1 caracteres
+        max:       4
+        max_error: Las Descripciones de la Unidad no puede tener mas de 4 caracteres

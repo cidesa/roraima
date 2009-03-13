@@ -220,6 +220,7 @@ abstract class BaseFargoartPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FargoartPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

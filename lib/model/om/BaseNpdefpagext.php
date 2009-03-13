@@ -33,156 +33,181 @@ abstract class BaseNpdefpagext extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodgrunom()
-	{
+  
+  public function getCodgrunom()
+  {
 
-		return $this->codgrunom; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codgrunom);
 
-		return $this->codcon; 		
-	}
-	
-	public function getFecha1($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		if ($this->fecha1 === null || $this->fecha1 === '') {
-			return null;
-		} elseif (!is_int($this->fecha1)) {
-						$ts = strtotime($this->fecha1);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecha1] as date/time value: " . var_export($this->fecha1, true));
-			}
-		} else {
-			$ts = $this->fecha1;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codcon);
 
-	
-	public function getFecha2($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFecha1($format = 'Y-m-d')
+  {
 
-		if ($this->fecha2 === null || $this->fecha2 === '') {
-			return null;
-		} elseif (!is_int($this->fecha2)) {
-						$ts = strtotime($this->fecha2);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecha2] as date/time value: " . var_export($this->fecha2, true));
-			}
-		} else {
-			$ts = $this->fecha2;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecha1 === null || $this->fecha1 === '') {
+      return null;
+    } elseif (!is_int($this->fecha1)) {
+            $ts = adodb_strtotime($this->fecha1);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha1] as date/time value: " . var_export($this->fecha1, true));
+      }
+    } else {
+      $ts = $this->fecha1;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getId()
-	{
+  
+  public function getFecha2($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecha2 === null || $this->fecha2 === '') {
+      return null;
+    } elseif (!is_int($this->fecha2)) {
+            $ts = adodb_strtotime($this->fecha2);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha2] as date/time value: " . var_export($this->fecha2, true));
+      }
+    } else {
+      $ts = $this->fecha2;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodgrunom($v)
 	{
 
-		if ($this->codgrunom !== $v) {
-			$this->codgrunom = $v;
-			$this->modifiedColumns[] = NpdefpagextPeer::CODGRUNOM;
-		}
-
+    if ($this->codgrunom !== $v) {
+        $this->codgrunom = $v;
+        $this->modifiedColumns[] = NpdefpagextPeer::CODGRUNOM;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpdefpagextPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpdefpagextPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setFecha1($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecha1] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecha1 !== $ts) {
-			$this->fecha1 = $ts;
-			$this->modifiedColumns[] = NpdefpagextPeer::FECHA1;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha1] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha1 !== $ts) {
+      $this->fecha1 = $ts;
+      $this->modifiedColumns[] = NpdefpagextPeer::FECHA1;
+    }
 
 	} 
 	
 	public function setFecha2($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecha2] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecha2 !== $ts) {
-			$this->fecha2 = $ts;
-			$this->modifiedColumns[] = NpdefpagextPeer::FECHA2;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha2] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha2 !== $ts) {
+      $this->fecha2 = $ts;
+      $this->modifiedColumns[] = NpdefpagextPeer::FECHA2;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdefpagextPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdefpagextPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codgrunom = $rs->getString($startcol + 0);
+      $this->codgrunom = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->fecha1 = $rs->getDate($startcol + 2, null);
+      $this->fecha1 = $rs->getDate($startcol + 2, null);
 
-			$this->fecha2 = $rs->getDate($startcol + 3, null);
+      $this->fecha2 = $rs->getDate($startcol + 3, null);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdefpagext object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdefpagext object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +264,7 @@ abstract class BaseNpdefpagext extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdefpagextPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefpagextPeer::doUpdate($this, $con);

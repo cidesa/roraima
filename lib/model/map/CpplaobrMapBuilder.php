@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CpplaobrMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CpplaobrMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CpplaobrMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cpplaobr');
 		$tMap->setPhpName('Cpplaobr');
 
@@ -44,31 +44,31 @@ class CpplaobrMapBuilder {
 
 		$tMap->addColumn('NROCON', 'Nrocon', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('MONCON', 'Moncon', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONCON', 'Moncon', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('MONREA', 'Monrea', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONREA', 'Monrea', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('MONVAR', 'Monvar', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONVAR', 'Monvar', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PORFIS', 'Porfis', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORFIS', 'Porfis', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PORPRE', 'Porpre', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORPRE', 'Porpre', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CANEQU', 'Canequ', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANEQU', 'Canequ', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('DESEQU', 'Desequ', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('CANOBR', 'Canobr', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANOBR', 'Canobr', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('DESOBR', 'Desobr', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('CANREP', 'Canrep', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANREP', 'Canrep', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('DESREP', 'Desrep', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('STAPLA', 'Stapla', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -4,22 +4,28 @@ generator:
     model_class:      Caajuoc
     theme:            default
     fields:
-      ajuoc:      { name : Número }
+      ajuoc:      { name : Número, params: maxlegth=8}
       ordcom:     { name : Orden de Compra }
-      fecaju:     { name : Fecha de Ajuste } 
-      desaju:     { name : Descripción } 
-      monaju:     { name : Monto } 
+      desord:     { name : Descripción OC }
+      fecaju:     { name : Fecha de Ajuste, params: date_format='dd/MM/yyyy' }
+      desaju:     { name : Descripción }
+      monaju:     { name : Monto }
+      codpro:     { name : Contratistas de Bienes o Servicio y Cooperativas }
+      nompro:     { name : Nombre Contratistas de Bienes o Servicio y Cooperativas }
     list:
       title:          Ajustes a Ordenes de Compra
       display:        [=ajuoc, ordcom, fecaju, desaju, monaju]
       filters:		  [ajuoc, ordcom, fecaju]
       max_per_page:	  5
+      sort:           ajuoc
       object_actions:
         _edit:        ~
         _delete:      ~
-      
     edit:
-      title:          Edicion de Ajustes a Ordenes de Compra
-      display:        [ajuoc, ordcom, fecaju, desaju, monaju]  
-#      fields:
-#        codalm:       { params : maxlength=6}
+      title:          Edición de Ajustes a Ordenes de Compra
+      display:        [ajuoc, ordcom, fecaju, desaju, monaju, codpro, nompro]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

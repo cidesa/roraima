@@ -49,184 +49,215 @@ abstract class BaseFcrecdes extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrede()
-	{
+  
+  public function getCodrede()
+  {
 
-		return $this->codrede; 		
-	}
-	
-	public function getRecdes()
-	{
+    return trim($this->codrede);
 
-		return $this->recdes; 		
-	}
-	
-	public function getDesrede()
-	{
+  }
+  
+  public function getRecdes()
+  {
 
-		return $this->desrede; 		
-	}
-	
-	public function getCodcta()
-	{
+    return trim($this->recdes);
 
-		return $this->codcta; 		
-	}
-	
-	public function getPorrede()
-	{
+  }
+  
+  public function getDesrede()
+  {
 
-		return $this->porrede; 		
-	}
-	
-	public function getCodfue()
-	{
+    return trim($this->desrede);
 
-		return $this->codfue; 		
-	}
-	
-	public function getDias()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return number_format($this->dias,2,',','.');
-		
-	}
-	
-	public function getPorcien()
-	{
+    return trim($this->codcta);
 
-		return number_format($this->porcien,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPorrede()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->porrede);
+
+  }
+  
+  public function getCodfue()
+  {
+
+    return trim($this->codfue);
+
+  }
+  
+  public function getDias($val=false)
+  {
+
+    if($val) return number_format($this->dias,2,',','.');
+    else return $this->dias;
+
+  }
+  
+  public function getPorcien($val=false)
+  {
+
+    if($val) return number_format($this->porcien,2,',','.');
+    else return $this->porcien;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrede($v)
 	{
 
-		if ($this->codrede !== $v) {
-			$this->codrede = $v;
-			$this->modifiedColumns[] = FcrecdesPeer::CODREDE;
-		}
-
+    if ($this->codrede !== $v) {
+        $this->codrede = $v;
+        $this->modifiedColumns[] = FcrecdesPeer::CODREDE;
+      }
+  
 	} 
 	
 	public function setRecdes($v)
 	{
 
-		if ($this->recdes !== $v) {
-			$this->recdes = $v;
-			$this->modifiedColumns[] = FcrecdesPeer::RECDES;
-		}
-
+    if ($this->recdes !== $v) {
+        $this->recdes = $v;
+        $this->modifiedColumns[] = FcrecdesPeer::RECDES;
+      }
+  
 	} 
 	
 	public function setDesrede($v)
 	{
 
-		if ($this->desrede !== $v) {
-			$this->desrede = $v;
-			$this->modifiedColumns[] = FcrecdesPeer::DESREDE;
-		}
-
+    if ($this->desrede !== $v) {
+        $this->desrede = $v;
+        $this->modifiedColumns[] = FcrecdesPeer::DESREDE;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = FcrecdesPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = FcrecdesPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setPorrede($v)
 	{
 
-		if ($this->porrede !== $v) {
-			$this->porrede = $v;
-			$this->modifiedColumns[] = FcrecdesPeer::PORREDE;
-		}
-
+    if ($this->porrede !== $v) {
+        $this->porrede = $v;
+        $this->modifiedColumns[] = FcrecdesPeer::PORREDE;
+      }
+  
 	} 
 	
 	public function setCodfue($v)
 	{
 
-		if ($this->codfue !== $v) {
-			$this->codfue = $v;
-			$this->modifiedColumns[] = FcrecdesPeer::CODFUE;
-		}
-
+    if ($this->codfue !== $v) {
+        $this->codfue = $v;
+        $this->modifiedColumns[] = FcrecdesPeer::CODFUE;
+      }
+  
 	} 
 	
 	public function setDias($v)
 	{
 
-		if ($this->dias !== $v) {
-			$this->dias = $v;
-			$this->modifiedColumns[] = FcrecdesPeer::DIAS;
-		}
-
+    if ($this->dias !== $v) {
+        $this->dias = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrecdesPeer::DIAS;
+      }
+  
 	} 
 	
 	public function setPorcien($v)
 	{
 
-		if ($this->porcien !== $v) {
-			$this->porcien = $v;
-			$this->modifiedColumns[] = FcrecdesPeer::PORCIEN;
-		}
-
+    if ($this->porcien !== $v) {
+        $this->porcien = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrecdesPeer::PORCIEN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcrecdesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcrecdesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrede = $rs->getString($startcol + 0);
+      $this->codrede = $rs->getString($startcol + 0);
 
-			$this->recdes = $rs->getString($startcol + 1);
+      $this->recdes = $rs->getString($startcol + 1);
 
-			$this->desrede = $rs->getString($startcol + 2);
+      $this->desrede = $rs->getString($startcol + 2);
 
-			$this->codcta = $rs->getString($startcol + 3);
+      $this->codcta = $rs->getString($startcol + 3);
 
-			$this->porrede = $rs->getString($startcol + 4);
+      $this->porrede = $rs->getString($startcol + 4);
 
-			$this->codfue = $rs->getString($startcol + 5);
+      $this->codfue = $rs->getString($startcol + 5);
 
-			$this->dias = $rs->getFloat($startcol + 6);
+      $this->dias = $rs->getFloat($startcol + 6);
 
-			$this->porcien = $rs->getFloat($startcol + 7);
+      $this->porcien = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcrecdes object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcrecdes object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -283,6 +314,7 @@ abstract class BaseFcrecdes extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcrecdesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcrecdesPeer::doUpdate($this, $con);

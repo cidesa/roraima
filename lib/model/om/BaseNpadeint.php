@@ -33,134 +33,160 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->codcon);
 
-		return $this->codemp; 		
-	}
-	
-	public function getFecade($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		if ($this->fecade === null || $this->fecade === '') {
-			return null;
-		} elseif (!is_int($this->fecade)) {
-						$ts = strtotime($this->fecade);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecade] as date/time value: " . var_export($this->fecade, true));
-			}
-		} else {
-			$ts = $this->fecade;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codemp);
 
-	
-	public function getMonade()
-	{
+  }
+  
+  public function getFecade($format = 'Y-m-d')
+  {
 
-		return number_format($this->monade,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if ($this->fecade === null || $this->fecade === '') {
+      return null;
+    } elseif (!is_int($this->fecade)) {
+            $ts = adodb_strtotime($this->fecade);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecade] as date/time value: " . var_export($this->fecade, true));
+      }
+    } else {
+      $ts = $this->fecade;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getMonade($val=false)
+  {
+
+    if($val) return number_format($this->monade,2,',','.');
+    else return $this->monade;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpadeintPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpadeintPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpadeintPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpadeintPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFecade($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecade] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecade !== $ts) {
-			$this->fecade = $ts;
-			$this->modifiedColumns[] = NpadeintPeer::FECADE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecade] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecade !== $ts) {
+      $this->fecade = $ts;
+      $this->modifiedColumns[] = NpadeintPeer::FECADE;
+    }
 
 	} 
 	
 	public function setMonade($v)
 	{
 
-		if ($this->monade !== $v) {
-			$this->monade = $v;
-			$this->modifiedColumns[] = NpadeintPeer::MONADE;
-		}
-
+    if ($this->monade !== $v) {
+        $this->monade = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpadeintPeer::MONADE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpadeintPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpadeintPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->codemp = $rs->getString($startcol + 1);
+      $this->codemp = $rs->getString($startcol + 1);
 
-			$this->fecade = $rs->getDate($startcol + 2, null);
+      $this->fecade = $rs->getDate($startcol + 2, null);
 
-			$this->monade = $rs->getFloat($startcol + 3);
+      $this->monade = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npadeint object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npadeint object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +243,7 @@ abstract class BaseNpadeint extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpadeintPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpadeintPeer::doUpdate($this, $con);

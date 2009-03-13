@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class ForpryubigeoMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ForpryubigeoMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ForpryubigeoMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('forpryubigeo');
 		$tMap->setPhpName('Forpryubigeo');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('forpryubigeo_SEQ');
 
 		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 20);
 
@@ -40,7 +42,9 @@ class ForpryubigeoMapBuilder {
 
 		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, true, 5);
 
+		$tMap->addColumn('ESPADIUBIGEO', 'Espadiubigeo', 'string', CreoleTypes::VARCHAR, true, 250);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

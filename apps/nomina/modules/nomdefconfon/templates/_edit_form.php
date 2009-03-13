@@ -9,119 +9,148 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($npconfon, 'getId') ?>
+<?php echo javascript_include_tag('tools','observe','ajax','dFilter') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-
-<fieldset id="sf_fieldset_none" class="">
-<legend>Tipos de N&oacute;mina</legend>
 <div class="form-row">
- <strong>C&oacute;digo</strong>
-  <?php $value = object_input_tag($npconfon, 'getCodnom', array (
-  'size' => 20,
-  'control_name' => 'npconfon[codnom]',
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><? echo __('Tipo de Nómina')?></legend>
+<div class="form-row">
+<table>
+<tr>
+<th>
+<?php echo label_for('npconfon[codnom]', __($labels['npconfon{codnom}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npconfon{codnom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npconfon{codnom}')): ?>
+    <?php echo form_error('npconfon{codnom}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+
+  <?php echo input_auto_complete_tag('npconfon[codnom]', $npconfon->getCodnom(),
+    'nomdefconfon/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 3,
+    'readonly'  =>  $npconfon->getId()!='' ? true : false ,
+	'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npconfon_codnom').value=cadena",
+ 	'onBlur'=> remote_function(array(
+              'update'  => 'divGrid',
+			  'url'      => 'nomdefconfon/ajax',
+			  'complete' => 'AjaxJSON(request, json), duplicados()',
+			  'condition' => "$('npconfon_codnom').value != '' && $('id').value == ''",
+  			  'with' => "'ajax=1&cajtexmos=npconfon_nomnom&cajtexcom=npconfon_codnom&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+    ?>
+ </div><?php echo input_hidden_tag('duplicado', '') ?>
+</th>
+<th>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npdefcpt_nomdefconaho/clase/Npnomina/frame/sf_admin_edit_form/obj1/npconfon_codnom/obj2/npconfon_nomnom/campo1/codnom/campo2/nomnom/param1/1/param2/y','','','botoncat')?>
+  </th>
+<th>
+<?php $value = object_input_tag($npconfon, 'getNomnom', array (
+  'disabled' => true,
+  'size'=> 60,
+  'control_name' => 'npconfon[nomnom]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;&nbsp;&nbsp;
-<?php echo $nombre ?>
-    </div>
-</div>
-</fieldset>
-
-<fieldset id="sf_fieldset_none" class="">
-<legend>Conceptos Deducci&oacute;n y Aporte</legend>
-<div class="form-row">
- <strong>Deducci&oacute;n</strong>
-  <?php $value = object_input_tag($npconfon, 'getCodcon', array (
-  'size' => 20,
-  'control_name' => 'npconfon[codcon]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;&nbsp;&nbsp;
-<?php echo $nombrec ?>
-</div>
-
-<div class="form-row">
- <strong>Aporte</strong>
- <?php echo input_tag('aporte', '', 'size=5 maxlength=3') ?>
-&nbsp;&nbsp;&nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;&nbsp;&nbsp;    
-</div>
-</fieldset>
-
-<fieldset id="sf_fieldset_none" class="">
-<legend>Conceptos Deducci&oacute;n y Aporte</legend>
-<div class="form-row">
- <strong>Ajuste Deducci&oacute;n</strong>
-  <?php $value = object_input_tag($npconfon, 'getCodcon', array (
-  'size' => 20,
-  'control_name' => 'npconfon[codcon]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;&nbsp;&nbsp;
-</div>
-
-<div class="form-row">
- <strong>Ajuste por Aporte</strong>
- <?php echo input_tag('aporte', '', 'size=5 maxlength=3') ?>
-&nbsp;&nbsp;&nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;&nbsp;&nbsp;    
-</div>
-</fieldset>
-
-<div>
-<fieldset>
-<legend>Conceptos para el C&aacute;lculo</legend>
-<table border="0" class="sf_admin_list">
-<thead>
-	<tr>
-	    <th><?php echo 'Marque' ?></th>	
-	    <th><?php echo NpconfonPeer::getColumName(NpconfonPeer::CODCON) ?></th>
-	    <!--<th><
-	    ?
-	    php echo NpdefcptPeer::getColumName(NpdefcptPeer::NOMCON)  ?></th>-->
-	    </tr>
-</thead>
-<tbody>
-	<?php $i = 1; foreach ($pagerNpconfon->getResults() as $Npconfon): $odd = fmod(++$i, 2) ?>
-	<tr class="sf_admin_row_<?php echo $odd ?>">
-	    <td><?php echo checkbox_tag($Npconfon->getId(),'1',false) ?></td>
-	    <td><?php echo $Npconfon->getCodcon()  ?></td>
-	   <!--  <td><
-	   ?php echo $Npdefcpt->getNomcon() ?></td> -->
-	    </tr>
-	<?php endforeach; ?>	
-</tbody>
-
-<tfoot>
-<tr><th colspan="5">
-<div class="float-right">
-<?php if ($pagerNpconfon->haveToPaginate()): ?>
-  <?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/first.png', array('align' => 'absmiddle', 'alt' => __('First'), 'title' => __('First'))), 'nomdefconfon/list?page=1') ?>
-  <?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/previous.png', array('align' => 'absmiddle', 'alt' => __('Previous'), 'title' => __('Previous'))), 'nomdefconfon/list?page='.$pagerNpconfon->getPreviousPage()) ?>
-
-  <?php foreach ($pagerNpconfon->getLinks() as $page): ?>
-    <?php echo link_to_unless($page == $pagerNpconfon->getPage(), $page, 'nomdefconfon/list?page='.$page) ?>
-  <?php endforeach; ?>
-
-	<?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/next.png', array('align' => 'absmiddle', 'alt' => __('Next'), 'title' => __('Next'))), 'nomdefconfon/edit?page='.$pagerNpconfon->getNextPage()) ?>
-	<?php echo link_to(image_tag(sfConfig::get('sf_admin_web_dir').'/images/last.png', array('align' => 'absmiddle', 'alt' => __('Last'), 'title' => __('Last'))), 'nomdefconfon/edit?page='.$pagerNpconfon->getLastPage()) ?>
-<?php endif; ?>
-</div>
-<?php echo format_number_choice('[0] no result|[1] 1 result|(1,+Inf] %1% results', array('%1%' => $pagerNpconfon->getNbResults()), $pagerNpconfon->getNbResults()) ?>
-</th></tr>
-</tfoot>
-
+</th>
+</tr>
 </table>
-</fieldset>
 </div>
+</fieldset>
+
+
+<br>
+<?php echo input_hidden_tag('existe', '') ?>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Conceptos Deducción y Aporte')?></legend>
 <div class="form-row">
-<strong>Buscar</strong>
-<?php echo input_tag('buscar', '', 'size=80 maxlength=80') ?>
+<?php echo label_for('deduccion','Deducción', 'class="required" ') ?>
+<div>
+<?php echo input_tag('txtdeduccion',$deduccion, array(
+'maxlength' => 3,
+'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('txtdeduccion').value=cadena",
+'onBlur'=> remote_function(array(
+     'url'      => 'nomdefconaho/ajax',
+	 'complete' => 'AjaxJSON(request, json), verificar("1")',
+	 'condition' => "$('txtdeduccion').value != ''",
+	 'with' => "'ajax=2&cajtexmos=desdeduccion&cajtexcom=txtdeduccion&cat=0&nomina='+$('npconfon_codnom').value+'&codigo='+this.value"
+			  )),
+))?>
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefcpt_nomdefconaho/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/txtdeduccion/obj2/desdeduccion/campo1/codcon/campo2/nomcon/param1/'+$('npconfon_codnom').value+'/param2/2")?>
+
+<?php echo input_tag('desdeduccion','', 'disabled="true" size="60"')?></div>
+
+<br>
+
+<?php echo label_for('aportes','Aporte', 'class="required" ') ?>
+<div>
+<?php echo input_tag('txtaportes',$aporte, array(
+'maxlength' => 3,
+'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('txtaportes').value=cadena",
+'onBlur'=> remote_function(array(
+     'url'      => 'nomdefconaho/ajax',
+	 'complete' => 'AjaxJSON(request, json), verificar("2")',
+	 'condition' => "$('txtaportes').value != ''",
+	 'with' => "'ajax=2&cajtexmos=desaportes&cajtexcom=txtaportes&cat=1&nomina='+$('npconfon_codnom').value+'&codigo='+this.value"
+			  )),
+))?>
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefcpt_nomdefconaho/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/txtaportes/obj2/desaportes/campo1/codcon/campo2/nomcon/param1/'+$('npconfon_codnom').value+'/param2/3")?>
+
+<?php echo input_tag('desaportes','', 'disabled="true" size="60"')?></div>
+</div>
+</fieldset>
+
+<br>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><? echo __('Conceptos Ajustes Deduccion y Aporte')?></legend>
+<div class="form-row">
+<?php echo label_for('ajudeduccion','Ajuste Deducción', 'class="required" ') ?>
+<div>
+<?php echo input_tag('txtajudeduccion',$ajudeduccion,array(
+'maxlength' => 3,
+'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('txtajudeduccion').value=cadena",
+'onBlur'=> remote_function(array(
+     'url'      => 'nomdefconaho/ajax',
+	 'complete' => 'AjaxJSON(request, json), verificar("3")',
+	 'condition' => "$('txtajudeduccion').value != ''",
+	 'with' => "'ajax=2&cajtexmos=desajudeduccion&cajtexcom=txtajudeduccion&cat=2&nomina='+$('npconfon_codnom').value+'&codigo='+this.value"
+			  )),
+))?>
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefcpt_nomdefconaho/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/txtajudeduccion/obj2/desajudeduccion/campo1/codcon/campo2/nomcon/param1/'+$('npconfon_codnom').value+'/param2/4")?>
+&nbsp;&nbsp;
+<?php echo input_tag('desajudeduccion','', 'disabled="true" size="60"')?></div>
+
+<br>
+
+<?php echo label_for('ajuaportes','Ajuste Aporte', 'class="required" ') ?>
+<div>
+<?php echo input_tag('txtajuaportes',$ajuaporte, array(
+'maxlength' => 3,
+'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('txtajuaportes').value=cadena",
+'onBlur'=> remote_function(array(
+     'url'      => 'nomdefconaho/ajax',
+	 'complete' => 'AjaxJSON(request, json), verificar("4")',
+	 'condition' => "$('txtajuaportes').value != ''",
+	 'with' => "'ajax=2&cajtexmos=desajuaportes&cajtexcom=txtajuaportes&cat=3&nomina='+$('npconfon_codnom').value+'&codigo='+this.value"
+			  )),
+))?>
+&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefcpt_nomdefconaho/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/txtajuaportes/obj2/desajuaportes/campo1/codcon/campo2/nomcon/param1/'+$('npconfon_codnom').value+'/param2/5")?>
+&nbsp;&nbsp;
+<?php echo input_tag('desajuaportes','', 'disabled="true" size="60"')?></div>
+</div>
+</fieldset>
+
+<br>
+
+<div id="divGrid">
+<?php echo grid_tag($obj);?>
+</div>
+
 </div>
 </fieldset>
 
@@ -131,10 +160,122 @@
 
 <ul class="sf_admin_actions">
       <li class="float-left"><?php if ($npconfon->getId()): ?>
-<?php echo button_to(__('delete'), 'nomdefconfon/delete?id='.$npconfon->getId(), array (
+<?php echo button_to(__('delete'), 'nomdefconfon/delete?id='.$npconfon->getId().'&nomina='.$npconfon->getCodnom(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
   'class' => 'sf_admin_action_delete',
 )) ?><?php endif; ?>
 </li>
   </ul>
+<script language="JavaScript" type="text/javascript">
+  var id='<?php echo $npconfon->getId()?>';
+  if (id)
+  {
+  	$('txtdeduccion').focus();
+  	$('txtaportes').focus();
+  	$('txtajudeduccion').focus();
+  	$('txtajuaportes').focus();
+  	$('npconfon_codnom').focus();
+  	$$('.botoncat')[0].disabled=true;
+  }
+
+   function verificar(nro)
+  {
+  	if (nro==1)
+  	{
+  	  if ($('existe').value=='S')
+  	  {
+  	    alert('El Concepto no esta asociado a la Nomina');
+  	    $('txtdeduccion').value="";
+  	   }
+
+  	  if ($('existe').value=='SS')
+  	  {
+  	    alert('El Concepto no existe');
+  	    $('txtdeduccion').value="";
+  	   }
+  	}
+  	else if (nro==2)
+  	{
+  	  if ($('existe').value=='S')
+  	  {
+  	    alert('El Concepto no esta asociado a la Nomina');
+  	    $('txtaportes').value="";
+  	   }
+
+  	  if ($('existe').value=='SS')
+  	  {
+  	    alert('El Concepto no existe');
+  	    $('txtaportes').value="";
+  	   }
+  	}
+  	else if (nro==3)
+  	{
+  	if ($('existe').value=='S')
+  	  {
+  	    alert('El Concepto no esta asociado a la Nomina');
+  	    $('txtajudeduccion').value="";
+  	   }
+
+  	  if ($('existe').value=='SS')
+  	  {
+  	    alert('El Concepto no existe');
+  	    $('txtajudeduccion').value="";
+  	   }
+  	}
+  	else
+  	{
+  	  if ($('existe').value=='S')
+  	  {
+  	    alert('El Concepto no esta asociado a la Nomina');
+  	    $('txtajuaportes').value="";
+  	   }
+
+  	  if ($('existe').value=='SS')
+  	  {
+  	    alert('El Concepto no existe');
+  	    $('txtajuaportes').value="";
+  	   }
+  	}
+  }
+
+  function duplicados()
+  {
+  	if ($('duplicado').value=='S')
+  	{
+  	  alert('La Nomina ya esta registrada consultela desde la lista para aplicar nuevos cambios');
+  	  $('npconfon_codnom').value="";
+  	}
+  }
+
+  function validar(id)
+  {
+  	var aux = id.split("_");
+	var name=aux[0];
+	var fil=aux[1];
+	var col=parseInt(aux[2]);
+
+	var colconcepto=col+1;
+	var concepto=name+"_"+fil+"_"+colconcepto;
+  	if ($(concepto).value==$('txtdeduccion').value)
+  	{
+  	  alert('El Concepto esta asignado para Concepto por Deducción');
+  	  $(id).checked=false;
+  	}
+  	else if ($(concepto).value==$('txtaportes').value)
+  	{
+  	  alert('El Concepto esta asignado para Concepto por Aportes');
+  	  $(id).checked=false;
+  	}
+    else if ($(concepto).value==$('txtajudeduccion').value)
+  	{
+  	  alert('El Concepto esta asignado para Concepto por Ajuste de Deduccion');
+  	  $(id).checked=false;
+  	}
+  	else if ($(concepto).value==$('txtajuaportes').value)
+  	{
+      alert('El Concepto esta asignado para Concepto por Ajuste de Aportes');
+  	  $(id).checked=false;
+  	}
+  }
+</script>

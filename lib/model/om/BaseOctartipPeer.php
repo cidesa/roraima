@@ -220,6 +220,7 @@ abstract class BaseOctartipPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OctartipPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

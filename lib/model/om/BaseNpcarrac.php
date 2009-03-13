@@ -37,130 +37,158 @@ abstract class BaseNpcarrac extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcarrac()
-	{
+  
+  public function getCodcarrac()
+  {
 
-		return $this->codcarrac; 		
-	}
-	
-	public function getCodnivorg()
-	{
+    return trim($this->codcarrac);
 
-		return $this->codnivorg; 		
-	}
-	
-	public function getSueldo()
-	{
+  }
+  
+  public function getCodnivorg()
+  {
 
-		return number_format($this->sueldo,2,',','.');
-		
-	}
-	
-	public function getDescar()
-	{
+    return trim($this->codnivorg);
 
-		return $this->descar; 		
-	}
-	
-	public function getCancar()
-	{
+  }
+  
+  public function getSueldo($val=false)
+  {
 
-		return number_format($this->cancar,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->sueldo,2,',','.');
+    else return $this->sueldo;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDescar()
+  {
+
+    return trim($this->descar);
+
+  }
+  
+  public function getCancar($val=false)
+  {
+
+    if($val) return number_format($this->cancar,2,',','.');
+    else return $this->cancar;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcarrac($v)
 	{
 
-		if ($this->codcarrac !== $v) {
-			$this->codcarrac = $v;
-			$this->modifiedColumns[] = NpcarracPeer::CODCARRAC;
-		}
-
+    if ($this->codcarrac !== $v) {
+        $this->codcarrac = $v;
+        $this->modifiedColumns[] = NpcarracPeer::CODCARRAC;
+      }
+  
 	} 
 	
 	public function setCodnivorg($v)
 	{
 
-		if ($this->codnivorg !== $v) {
-			$this->codnivorg = $v;
-			$this->modifiedColumns[] = NpcarracPeer::CODNIVORG;
-		}
-
+    if ($this->codnivorg !== $v) {
+        $this->codnivorg = $v;
+        $this->modifiedColumns[] = NpcarracPeer::CODNIVORG;
+      }
+  
 	} 
 	
 	public function setSueldo($v)
 	{
 
-		if ($this->sueldo !== $v) {
-			$this->sueldo = $v;
-			$this->modifiedColumns[] = NpcarracPeer::SUELDO;
-		}
-
+    if ($this->sueldo !== $v) {
+        $this->sueldo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarracPeer::SUELDO;
+      }
+  
 	} 
 	
 	public function setDescar($v)
 	{
 
-		if ($this->descar !== $v) {
-			$this->descar = $v;
-			$this->modifiedColumns[] = NpcarracPeer::DESCAR;
-		}
-
+    if ($this->descar !== $v) {
+        $this->descar = $v;
+        $this->modifiedColumns[] = NpcarracPeer::DESCAR;
+      }
+  
 	} 
 	
 	public function setCancar($v)
 	{
 
-		if ($this->cancar !== $v) {
-			$this->cancar = $v;
-			$this->modifiedColumns[] = NpcarracPeer::CANCAR;
-		}
-
+    if ($this->cancar !== $v) {
+        $this->cancar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarracPeer::CANCAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcarracPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcarracPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcarrac = $rs->getString($startcol + 0);
+      $this->codcarrac = $rs->getString($startcol + 0);
 
-			$this->codnivorg = $rs->getString($startcol + 1);
+      $this->codnivorg = $rs->getString($startcol + 1);
 
-			$this->sueldo = $rs->getFloat($startcol + 2);
+      $this->sueldo = $rs->getFloat($startcol + 2);
 
-			$this->descar = $rs->getString($startcol + 3);
+      $this->descar = $rs->getString($startcol + 3);
 
-			$this->cancar = $rs->getFloat($startcol + 4);
+      $this->cancar = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcarrac object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcarrac object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +245,7 @@ abstract class BaseNpcarrac extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcarracPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcarracPeer::doUpdate($this, $con);

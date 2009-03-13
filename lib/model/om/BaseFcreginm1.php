@@ -185,875 +185,937 @@ abstract class BaseFcreginm1 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getSerial()
-	{
+  
+  public function getSerial($val=false)
+  {
 
-		return number_format($this->serial,2,',','.');
-		
-	}
-	
-	public function getTipoBolet()
-	{
+    if($val) return number_format($this->serial,2,',','.');
+    else return $this->serial;
 
-		return $this->tipo_bolet; 		
-	}
-	
-	public function getNombrePro()
-	{
+  }
+  
+  public function getTipoBolet()
+  {
 
-		return $this->nombre_pro; 		
-	}
-	
-	public function getCiRifPro()
-	{
+    return trim($this->tipo_bolet);
 
-		return $this->ci_rif_pro; 		
-	}
-	
-	public function getDirInmueb()
-	{
+  }
+  
+  public function getNombrePro()
+  {
 
-		return $this->dir_inmueb; 		
-	}
-	
-	public function getTelefono()
-	{
+    return trim($this->nombre_pro);
 
-		return $this->telefono; 		
-	}
-	
-	public function getTelefono2()
-	{
+  }
+  
+  public function getCiRifPro()
+  {
 
-		return $this->telefono2; 		
-	}
-	
-	public function getNombAdEc()
-	{
+    return trim($this->ci_rif_pro);
 
-		return $this->nomb_ad_ec; 		
-	}
-	
-	public function getDirAdmEn()
-	{
+  }
+  
+  public function getDirInmueb()
+  {
 
-		return $this->dir_adm_en; 		
-	}
-	
-	public function getNDocument()
-	{
+    return trim($this->dir_inmueb);
 
-		return number_format($this->n_document,2,',','.');
-		
-	}
-	
-	public function getFechaDocu($format = 'Y-m-d')
-	{
+  }
+  
+  public function getTelefono()
+  {
 
-		if ($this->fecha_docu === null || $this->fecha_docu === '') {
-			return null;
-		} elseif (!is_int($this->fecha_docu)) {
-						$ts = strtotime($this->fecha_docu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecha_docu] as date/time value: " . var_export($this->fecha_docu, true));
-			}
-		} else {
-			$ts = $this->fecha_docu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->telefono);
 
-	
-	public function getUsoInmueb()
-	{
+  }
+  
+  public function getTelefono2()
+  {
 
-		return $this->uso_inmueb; 		
-	}
-	
-	public function getTenencia()
-	{
+    return trim($this->telefono2);
 
-		return $this->tenencia; 		
-	}
-	
-	public function getArea()
-	{
+  }
+  
+  public function getNombAdEc()
+  {
 
-		return number_format($this->area,2,',','.');
-		
-	}
-	
-	public function getArea2()
-	{
+    return trim($this->nomb_ad_ec);
 
-		return number_format($this->area2,2,',','.');
-		
-	}
-	
-	public function getUbicacion()
-	{
+  }
+  
+  public function getDirAdmEn()
+  {
 
-		return number_format($this->ubicacion,2,',','.');
-		
-	}
-	
-	public function getUbicacion2()
-	{
+    return trim($this->dir_adm_en);
 
-		return number_format($this->ubicacion2,2,',','.');
-		
-	}
-	
-	public function getTipo()
-	{
+  }
+  
+  public function getNDocument($val=false)
+  {
 
-		return $this->tipo; 		
-	}
-	
-	public function getTipo2()
-	{
+    if($val) return number_format($this->n_document,2,',','.');
+    else return $this->n_document;
 
-		return $this->tipo2; 		
-	}
-	
-	public function getImpAnual()
-	{
+  }
+  
+  public function getFechaDocu($format = 'Y-m-d')
+  {
 
-		return number_format($this->imp_anual,2,',','.');
-		
-	}
-	
-	public function getImpAnual2()
-	{
+    if ($this->fecha_docu === null || $this->fecha_docu === '') {
+      return null;
+    } elseif (!is_int($this->fecha_docu)) {
+            $ts = adodb_strtotime($this->fecha_docu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha_docu] as date/time value: " . var_export($this->fecha_docu, true));
+      }
+    } else {
+      $ts = $this->fecha_docu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->imp_anual2,2,',','.');
-		
-	}
-	
-	public function getImpTrim()
-	{
+  
+  public function getUsoInmueb()
+  {
 
-		return number_format($this->imp_trim,2,',','.');
-		
-	}
-	
-	public function getImpTrim2()
-	{
+    return trim($this->uso_inmueb);
 
-		return number_format($this->imp_trim2,2,',','.');
-		
-	}
-	
-	public function getMontImp()
-	{
+  }
+  
+  public function getTenencia()
+  {
 
-		return number_format($this->mont_imp,2,',','.');
-		
-	}
-	
-	public function getObservacio()
-	{
+    return trim($this->tenencia);
 
-		return $this->observacio; 		
-	}
-	
-	public function getCodCatast()
-	{
+  }
+  
+  public function getArea($val=false)
+  {
 
-		return $this->cod_catast; 		
-	}
-	
-	public function getFechaElab($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->area,2,',','.');
+    else return $this->area;
 
-		if ($this->fecha_elab === null || $this->fecha_elab === '') {
-			return null;
-		} elseif (!is_int($this->fecha_elab)) {
-						$ts = strtotime($this->fecha_elab);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecha_elab] as date/time value: " . var_export($this->fecha_elab, true));
-			}
-		} else {
-			$ts = $this->fecha_elab;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getArea2($val=false)
+  {
 
-	
-	public function getUbiInmueb()
-	{
+    if($val) return number_format($this->area2,2,',','.');
+    else return $this->area2;
 
-		return $this->ubi_inmueb; 		
-	}
-	
-	public function getNorte()
-	{
+  }
+  
+  public function getUbicacion($val=false)
+  {
 
-		return $this->norte; 		
-	}
-	
-	public function getSur()
-	{
+    if($val) return number_format($this->ubicacion,2,',','.');
+    else return $this->ubicacion;
 
-		return $this->sur; 		
-	}
-	
-	public function getEste()
-	{
+  }
+  
+  public function getUbicacion2($val=false)
+  {
 
-		return $this->este; 		
-	}
-	
-	public function getOeste()
-	{
+    if($val) return number_format($this->ubicacion2,2,',','.');
+    else return $this->ubicacion2;
 
-		return $this->oeste; 		
-	}
-	
-	public function getAdquiere()
-	{
+  }
+  
+  public function getTipo()
+  {
 
-		return $this->adquiere; 		
-	}
-	
-	public function getFInscripc($format = 'Y-m-d')
-	{
+    return trim($this->tipo);
 
-		if ($this->f_inscripc === null || $this->f_inscripc === '') {
-			return null;
-		} elseif (!is_int($this->f_inscripc)) {
-						$ts = strtotime($this->f_inscripc);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [f_inscripc] as date/time value: " . var_export($this->f_inscripc, true));
-			}
-		} else {
-			$ts = $this->f_inscripc;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getTipo2()
+  {
 
-	
-	public function getFolios()
-	{
+    return trim($this->tipo2);
 
-		return $this->folios; 		
-	}
-	
-	public function getTomo()
-	{
+  }
+  
+  public function getImpAnual($val=false)
+  {
 
-		return $this->tomo; 		
-	}
-	
-	public function getTrim()
-	{
+    if($val) return number_format($this->imp_anual,2,',','.');
+    else return $this->imp_anual;
 
-		return $this->trim; 		
-	}
-	
-	public function getProt()
-	{
+  }
+  
+  public function getImpAnual2($val=false)
+  {
 
-		return $this->prot; 		
-	}
-	
-	public function getFrente()
-	{
+    if($val) return number_format($this->imp_anual2,2,',','.');
+    else return $this->imp_anual2;
 
-		return $this->frente; 		
-	}
-	
-	public function getFondo()
-	{
+  }
+  
+  public function getImpTrim($val=false)
+  {
 
-		return $this->fondo; 		
-	}
-	
-	public function getPrecio()
-	{
+    if($val) return number_format($this->imp_trim,2,',','.');
+    else return $this->imp_trim;
 
-		return number_format($this->precio,2,',','.');
-		
-	}
-	
-	public function getDirPropie()
-	{
+  }
+  
+  public function getImpTrim2($val=false)
+  {
 
-		return $this->dir_propie; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->imp_trim2,2,',','.');
+    else return $this->imp_trim2;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMontImp($val=false)
+  {
+
+    if($val) return number_format($this->mont_imp,2,',','.');
+    else return $this->mont_imp;
+
+  }
+  
+  public function getObservacio()
+  {
+
+    return trim($this->observacio);
+
+  }
+  
+  public function getCodCatast()
+  {
+
+    return trim($this->cod_catast);
+
+  }
+  
+  public function getFechaElab($format = 'Y-m-d')
+  {
+
+    if ($this->fecha_elab === null || $this->fecha_elab === '') {
+      return null;
+    } elseif (!is_int($this->fecha_elab)) {
+            $ts = adodb_strtotime($this->fecha_elab);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha_elab] as date/time value: " . var_export($this->fecha_elab, true));
+      }
+    } else {
+      $ts = $this->fecha_elab;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getUbiInmueb()
+  {
+
+    return trim($this->ubi_inmueb);
+
+  }
+  
+  public function getNorte()
+  {
+
+    return trim($this->norte);
+
+  }
+  
+  public function getSur()
+  {
+
+    return trim($this->sur);
+
+  }
+  
+  public function getEste()
+  {
+
+    return trim($this->este);
+
+  }
+  
+  public function getOeste()
+  {
+
+    return trim($this->oeste);
+
+  }
+  
+  public function getAdquiere()
+  {
+
+    return trim($this->adquiere);
+
+  }
+  
+  public function getFInscripc($format = 'Y-m-d')
+  {
+
+    if ($this->f_inscripc === null || $this->f_inscripc === '') {
+      return null;
+    } elseif (!is_int($this->f_inscripc)) {
+            $ts = adodb_strtotime($this->f_inscripc);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [f_inscripc] as date/time value: " . var_export($this->f_inscripc, true));
+      }
+    } else {
+      $ts = $this->f_inscripc;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFolios()
+  {
+
+    return trim($this->folios);
+
+  }
+  
+  public function getTomo()
+  {
+
+    return trim($this->tomo);
+
+  }
+  
+  public function getTrim()
+  {
+
+    return trim($this->trim);
+
+  }
+  
+  public function getProt()
+  {
+
+    return trim($this->prot);
+
+  }
+  
+  public function getFrente()
+  {
+
+    return trim($this->frente);
+
+  }
+  
+  public function getFondo()
+  {
+
+    return trim($this->fondo);
+
+  }
+  
+  public function getPrecio($val=false)
+  {
+
+    if($val) return number_format($this->precio,2,',','.');
+    else return $this->precio;
+
+  }
+  
+  public function getDirPropie()
+  {
+
+    return trim($this->dir_propie);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setSerial($v)
 	{
 
-		if ($this->serial !== $v) {
-			$this->serial = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::SERIAL;
-		}
-
+    if ($this->serial !== $v) {
+        $this->serial = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::SERIAL;
+      }
+  
 	} 
 	
 	public function setTipoBolet($v)
 	{
 
-		if ($this->tipo_bolet !== $v) {
-			$this->tipo_bolet = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::TIPO_BOLET;
-		}
-
+    if ($this->tipo_bolet !== $v) {
+        $this->tipo_bolet = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::TIPO_BOLET;
+      }
+  
 	} 
 	
 	public function setNombrePro($v)
 	{
 
-		if ($this->nombre_pro !== $v) {
-			$this->nombre_pro = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::NOMBRE_PRO;
-		}
-
+    if ($this->nombre_pro !== $v) {
+        $this->nombre_pro = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::NOMBRE_PRO;
+      }
+  
 	} 
 	
 	public function setCiRifPro($v)
 	{
 
-		if ($this->ci_rif_pro !== $v) {
-			$this->ci_rif_pro = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::CI_RIF_PRO;
-		}
-
+    if ($this->ci_rif_pro !== $v) {
+        $this->ci_rif_pro = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::CI_RIF_PRO;
+      }
+  
 	} 
 	
 	public function setDirInmueb($v)
 	{
 
-		if ($this->dir_inmueb !== $v) {
-			$this->dir_inmueb = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::DIR_INMUEB;
-		}
-
+    if ($this->dir_inmueb !== $v) {
+        $this->dir_inmueb = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::DIR_INMUEB;
+      }
+  
 	} 
 	
 	public function setTelefono($v)
 	{
 
-		if ($this->telefono !== $v) {
-			$this->telefono = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::TELEFONO;
-		}
-
+    if ($this->telefono !== $v) {
+        $this->telefono = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::TELEFONO;
+      }
+  
 	} 
 	
 	public function setTelefono2($v)
 	{
 
-		if ($this->telefono2 !== $v) {
-			$this->telefono2 = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::TELEFONO2;
-		}
-
+    if ($this->telefono2 !== $v) {
+        $this->telefono2 = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::TELEFONO2;
+      }
+  
 	} 
 	
 	public function setNombAdEc($v)
 	{
 
-		if ($this->nomb_ad_ec !== $v) {
-			$this->nomb_ad_ec = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::NOMB_AD_EC;
-		}
-
+    if ($this->nomb_ad_ec !== $v) {
+        $this->nomb_ad_ec = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::NOMB_AD_EC;
+      }
+  
 	} 
 	
 	public function setDirAdmEn($v)
 	{
 
-		if ($this->dir_adm_en !== $v) {
-			$this->dir_adm_en = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::DIR_ADM_EN;
-		}
-
+    if ($this->dir_adm_en !== $v) {
+        $this->dir_adm_en = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::DIR_ADM_EN;
+      }
+  
 	} 
 	
 	public function setNDocument($v)
 	{
 
-		if ($this->n_document !== $v) {
-			$this->n_document = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::N_DOCUMENT;
-		}
-
+    if ($this->n_document !== $v) {
+        $this->n_document = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::N_DOCUMENT;
+      }
+  
 	} 
 	
 	public function setFechaDocu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecha_docu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecha_docu !== $ts) {
-			$this->fecha_docu = $ts;
-			$this->modifiedColumns[] = Fcreginm1Peer::FECHA_DOCU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha_docu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha_docu !== $ts) {
+      $this->fecha_docu = $ts;
+      $this->modifiedColumns[] = Fcreginm1Peer::FECHA_DOCU;
+    }
 
 	} 
 	
 	public function setUsoInmueb($v)
 	{
 
-		if ($this->uso_inmueb !== $v) {
-			$this->uso_inmueb = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::USO_INMUEB;
-		}
-
+    if ($this->uso_inmueb !== $v) {
+        $this->uso_inmueb = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::USO_INMUEB;
+      }
+  
 	} 
 	
 	public function setTenencia($v)
 	{
 
-		if ($this->tenencia !== $v) {
-			$this->tenencia = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::TENENCIA;
-		}
-
+    if ($this->tenencia !== $v) {
+        $this->tenencia = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::TENENCIA;
+      }
+  
 	} 
 	
 	public function setArea($v)
 	{
 
-		if ($this->area !== $v) {
-			$this->area = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::AREA;
-		}
-
+    if ($this->area !== $v) {
+        $this->area = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::AREA;
+      }
+  
 	} 
 	
 	public function setArea2($v)
 	{
 
-		if ($this->area2 !== $v) {
-			$this->area2 = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::AREA2;
-		}
-
+    if ($this->area2 !== $v) {
+        $this->area2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::AREA2;
+      }
+  
 	} 
 	
 	public function setUbicacion($v)
 	{
 
-		if ($this->ubicacion !== $v) {
-			$this->ubicacion = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::UBICACION;
-		}
-
+    if ($this->ubicacion !== $v) {
+        $this->ubicacion = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::UBICACION;
+      }
+  
 	} 
 	
 	public function setUbicacion2($v)
 	{
 
-		if ($this->ubicacion2 !== $v) {
-			$this->ubicacion2 = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::UBICACION2;
-		}
-
+    if ($this->ubicacion2 !== $v) {
+        $this->ubicacion2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::UBICACION2;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::TIPO;
+      }
+  
 	} 
 	
 	public function setTipo2($v)
 	{
 
-		if ($this->tipo2 !== $v) {
-			$this->tipo2 = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::TIPO2;
-		}
-
+    if ($this->tipo2 !== $v) {
+        $this->tipo2 = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::TIPO2;
+      }
+  
 	} 
 	
 	public function setImpAnual($v)
 	{
 
-		if ($this->imp_anual !== $v) {
-			$this->imp_anual = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::IMP_ANUAL;
-		}
-
+    if ($this->imp_anual !== $v) {
+        $this->imp_anual = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::IMP_ANUAL;
+      }
+  
 	} 
 	
 	public function setImpAnual2($v)
 	{
 
-		if ($this->imp_anual2 !== $v) {
-			$this->imp_anual2 = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::IMP_ANUAL2;
-		}
-
+    if ($this->imp_anual2 !== $v) {
+        $this->imp_anual2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::IMP_ANUAL2;
+      }
+  
 	} 
 	
 	public function setImpTrim($v)
 	{
 
-		if ($this->imp_trim !== $v) {
-			$this->imp_trim = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::IMP_TRIM;
-		}
-
+    if ($this->imp_trim !== $v) {
+        $this->imp_trim = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::IMP_TRIM;
+      }
+  
 	} 
 	
 	public function setImpTrim2($v)
 	{
 
-		if ($this->imp_trim2 !== $v) {
-			$this->imp_trim2 = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::IMP_TRIM2;
-		}
-
+    if ($this->imp_trim2 !== $v) {
+        $this->imp_trim2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::IMP_TRIM2;
+      }
+  
 	} 
 	
 	public function setMontImp($v)
 	{
 
-		if ($this->mont_imp !== $v) {
-			$this->mont_imp = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::MONT_IMP;
-		}
-
+    if ($this->mont_imp !== $v) {
+        $this->mont_imp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::MONT_IMP;
+      }
+  
 	} 
 	
 	public function setObservacio($v)
 	{
 
-		if ($this->observacio !== $v) {
-			$this->observacio = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::OBSERVACIO;
-		}
-
+    if ($this->observacio !== $v) {
+        $this->observacio = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::OBSERVACIO;
+      }
+  
 	} 
 	
 	public function setCodCatast($v)
 	{
 
-		if ($this->cod_catast !== $v) {
-			$this->cod_catast = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::COD_CATAST;
-		}
-
+    if ($this->cod_catast !== $v) {
+        $this->cod_catast = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::COD_CATAST;
+      }
+  
 	} 
 	
 	public function setFechaElab($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecha_elab] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecha_elab !== $ts) {
-			$this->fecha_elab = $ts;
-			$this->modifiedColumns[] = Fcreginm1Peer::FECHA_ELAB;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha_elab] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha_elab !== $ts) {
+      $this->fecha_elab = $ts;
+      $this->modifiedColumns[] = Fcreginm1Peer::FECHA_ELAB;
+    }
 
 	} 
 	
 	public function setUbiInmueb($v)
 	{
 
-		if ($this->ubi_inmueb !== $v) {
-			$this->ubi_inmueb = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::UBI_INMUEB;
-		}
-
+    if ($this->ubi_inmueb !== $v) {
+        $this->ubi_inmueb = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::UBI_INMUEB;
+      }
+  
 	} 
 	
 	public function setNorte($v)
 	{
 
-		if ($this->norte !== $v) {
-			$this->norte = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::NORTE;
-		}
-
+    if ($this->norte !== $v) {
+        $this->norte = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::NORTE;
+      }
+  
 	} 
 	
 	public function setSur($v)
 	{
 
-		if ($this->sur !== $v) {
-			$this->sur = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::SUR;
-		}
-
+    if ($this->sur !== $v) {
+        $this->sur = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::SUR;
+      }
+  
 	} 
 	
 	public function setEste($v)
 	{
 
-		if ($this->este !== $v) {
-			$this->este = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::ESTE;
-		}
-
+    if ($this->este !== $v) {
+        $this->este = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::ESTE;
+      }
+  
 	} 
 	
 	public function setOeste($v)
 	{
 
-		if ($this->oeste !== $v) {
-			$this->oeste = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::OESTE;
-		}
-
+    if ($this->oeste !== $v) {
+        $this->oeste = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::OESTE;
+      }
+  
 	} 
 	
 	public function setAdquiere($v)
 	{
 
-		if ($this->adquiere !== $v) {
-			$this->adquiere = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::ADQUIERE;
-		}
-
+    if ($this->adquiere !== $v) {
+        $this->adquiere = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::ADQUIERE;
+      }
+  
 	} 
 	
 	public function setFInscripc($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [f_inscripc] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->f_inscripc !== $ts) {
-			$this->f_inscripc = $ts;
-			$this->modifiedColumns[] = Fcreginm1Peer::F_INSCRIPC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [f_inscripc] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->f_inscripc !== $ts) {
+      $this->f_inscripc = $ts;
+      $this->modifiedColumns[] = Fcreginm1Peer::F_INSCRIPC;
+    }
 
 	} 
 	
 	public function setFolios($v)
 	{
 
-		if ($this->folios !== $v) {
-			$this->folios = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::FOLIOS;
-		}
-
+    if ($this->folios !== $v) {
+        $this->folios = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::FOLIOS;
+      }
+  
 	} 
 	
 	public function setTomo($v)
 	{
 
-		if ($this->tomo !== $v) {
-			$this->tomo = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::TOMO;
-		}
-
+    if ($this->tomo !== $v) {
+        $this->tomo = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::TOMO;
+      }
+  
 	} 
 	
 	public function setTrim($v)
 	{
 
-		if ($this->trim !== $v) {
-			$this->trim = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::TRIM;
-		}
-
+    if ($this->trim !== $v) {
+        $this->trim = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::TRIM;
+      }
+  
 	} 
 	
 	public function setProt($v)
 	{
 
-		if ($this->prot !== $v) {
-			$this->prot = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::PROT;
-		}
-
+    if ($this->prot !== $v) {
+        $this->prot = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::PROT;
+      }
+  
 	} 
 	
 	public function setFrente($v)
 	{
 
-		if ($this->frente !== $v) {
-			$this->frente = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::FRENTE;
-		}
-
+    if ($this->frente !== $v) {
+        $this->frente = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::FRENTE;
+      }
+  
 	} 
 	
 	public function setFondo($v)
 	{
 
-		if ($this->fondo !== $v) {
-			$this->fondo = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::FONDO;
-		}
-
+    if ($this->fondo !== $v) {
+        $this->fondo = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::FONDO;
+      }
+  
 	} 
 	
 	public function setPrecio($v)
 	{
 
-		if ($this->precio !== $v) {
-			$this->precio = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::PRECIO;
-		}
-
+    if ($this->precio !== $v) {
+        $this->precio = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcreginm1Peer::PRECIO;
+      }
+  
 	} 
 	
 	public function setDirPropie($v)
 	{
 
-		if ($this->dir_propie !== $v) {
-			$this->dir_propie = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::DIR_PROPIE;
-		}
-
+    if ($this->dir_propie !== $v) {
+        $this->dir_propie = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::DIR_PROPIE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Fcreginm1Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Fcreginm1Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->serial = $rs->getFloat($startcol + 0);
+      $this->serial = $rs->getFloat($startcol + 0);
 
-			$this->tipo_bolet = $rs->getString($startcol + 1);
+      $this->tipo_bolet = $rs->getString($startcol + 1);
 
-			$this->nombre_pro = $rs->getString($startcol + 2);
+      $this->nombre_pro = $rs->getString($startcol + 2);
 
-			$this->ci_rif_pro = $rs->getString($startcol + 3);
+      $this->ci_rif_pro = $rs->getString($startcol + 3);
 
-			$this->dir_inmueb = $rs->getString($startcol + 4);
+      $this->dir_inmueb = $rs->getString($startcol + 4);
 
-			$this->telefono = $rs->getString($startcol + 5);
+      $this->telefono = $rs->getString($startcol + 5);
 
-			$this->telefono2 = $rs->getString($startcol + 6);
+      $this->telefono2 = $rs->getString($startcol + 6);
 
-			$this->nomb_ad_ec = $rs->getString($startcol + 7);
+      $this->nomb_ad_ec = $rs->getString($startcol + 7);
 
-			$this->dir_adm_en = $rs->getString($startcol + 8);
+      $this->dir_adm_en = $rs->getString($startcol + 8);
 
-			$this->n_document = $rs->getFloat($startcol + 9);
+      $this->n_document = $rs->getFloat($startcol + 9);
 
-			$this->fecha_docu = $rs->getDate($startcol + 10, null);
+      $this->fecha_docu = $rs->getDate($startcol + 10, null);
 
-			$this->uso_inmueb = $rs->getString($startcol + 11);
+      $this->uso_inmueb = $rs->getString($startcol + 11);
 
-			$this->tenencia = $rs->getString($startcol + 12);
+      $this->tenencia = $rs->getString($startcol + 12);
 
-			$this->area = $rs->getFloat($startcol + 13);
+      $this->area = $rs->getFloat($startcol + 13);
 
-			$this->area2 = $rs->getFloat($startcol + 14);
+      $this->area2 = $rs->getFloat($startcol + 14);
 
-			$this->ubicacion = $rs->getFloat($startcol + 15);
+      $this->ubicacion = $rs->getFloat($startcol + 15);
 
-			$this->ubicacion2 = $rs->getFloat($startcol + 16);
+      $this->ubicacion2 = $rs->getFloat($startcol + 16);
 
-			$this->tipo = $rs->getString($startcol + 17);
+      $this->tipo = $rs->getString($startcol + 17);
 
-			$this->tipo2 = $rs->getString($startcol + 18);
+      $this->tipo2 = $rs->getString($startcol + 18);
 
-			$this->imp_anual = $rs->getFloat($startcol + 19);
+      $this->imp_anual = $rs->getFloat($startcol + 19);
 
-			$this->imp_anual2 = $rs->getFloat($startcol + 20);
+      $this->imp_anual2 = $rs->getFloat($startcol + 20);
 
-			$this->imp_trim = $rs->getFloat($startcol + 21);
+      $this->imp_trim = $rs->getFloat($startcol + 21);
 
-			$this->imp_trim2 = $rs->getFloat($startcol + 22);
+      $this->imp_trim2 = $rs->getFloat($startcol + 22);
 
-			$this->mont_imp = $rs->getFloat($startcol + 23);
+      $this->mont_imp = $rs->getFloat($startcol + 23);
 
-			$this->observacio = $rs->getString($startcol + 24);
+      $this->observacio = $rs->getString($startcol + 24);
 
-			$this->cod_catast = $rs->getString($startcol + 25);
+      $this->cod_catast = $rs->getString($startcol + 25);
 
-			$this->fecha_elab = $rs->getDate($startcol + 26, null);
+      $this->fecha_elab = $rs->getDate($startcol + 26, null);
 
-			$this->ubi_inmueb = $rs->getString($startcol + 27);
+      $this->ubi_inmueb = $rs->getString($startcol + 27);
 
-			$this->norte = $rs->getString($startcol + 28);
+      $this->norte = $rs->getString($startcol + 28);
 
-			$this->sur = $rs->getString($startcol + 29);
+      $this->sur = $rs->getString($startcol + 29);
 
-			$this->este = $rs->getString($startcol + 30);
+      $this->este = $rs->getString($startcol + 30);
 
-			$this->oeste = $rs->getString($startcol + 31);
+      $this->oeste = $rs->getString($startcol + 31);
 
-			$this->adquiere = $rs->getString($startcol + 32);
+      $this->adquiere = $rs->getString($startcol + 32);
 
-			$this->f_inscripc = $rs->getDate($startcol + 33, null);
+      $this->f_inscripc = $rs->getDate($startcol + 33, null);
 
-			$this->folios = $rs->getString($startcol + 34);
+      $this->folios = $rs->getString($startcol + 34);
 
-			$this->tomo = $rs->getString($startcol + 35);
+      $this->tomo = $rs->getString($startcol + 35);
 
-			$this->trim = $rs->getString($startcol + 36);
+      $this->trim = $rs->getString($startcol + 36);
 
-			$this->prot = $rs->getString($startcol + 37);
+      $this->prot = $rs->getString($startcol + 37);
 
-			$this->frente = $rs->getString($startcol + 38);
+      $this->frente = $rs->getString($startcol + 38);
 
-			$this->fondo = $rs->getString($startcol + 39);
+      $this->fondo = $rs->getString($startcol + 39);
 
-			$this->precio = $rs->getFloat($startcol + 40);
+      $this->precio = $rs->getFloat($startcol + 40);
 
-			$this->dir_propie = $rs->getString($startcol + 41);
+      $this->dir_propie = $rs->getString($startcol + 41);
 
-			$this->id = $rs->getInt($startcol + 42);
+      $this->id = $rs->getInt($startcol + 42);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 43; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcreginm1 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 43; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcreginm1 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -1110,6 +1172,7 @@ abstract class BaseFcreginm1 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Fcreginm1Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Fcreginm1Peer::doUpdate($this, $con);

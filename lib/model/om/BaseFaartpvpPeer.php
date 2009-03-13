@@ -13,7 +13,7 @@ abstract class BaseFaartpvpPeer {
 	const CLASS_DEFAULT = 'lib.model.Faartpvp';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -21,9 +21,6 @@ abstract class BaseFaartpvpPeer {
 
 	
 	const CODART = 'faartpvp.CODART';
-
-	
-	const CODPVP = 'faartpvp.CODPVP';
 
 	
 	const PVPART = 'faartpvp.PVPART';
@@ -40,18 +37,18 @@ abstract class BaseFaartpvpPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codart', 'Codpvp', 'Pvpart', 'Despvp', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaartpvpPeer::CODART, FaartpvpPeer::CODPVP, FaartpvpPeer::PVPART, FaartpvpPeer::DESPVP, FaartpvpPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codart', 'codpvp', 'pvpart', 'despvp', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codart', 'Pvpart', 'Despvp', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaartpvpPeer::CODART, FaartpvpPeer::PVPART, FaartpvpPeer::DESPVP, FaartpvpPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codart', 'pvpart', 'despvp', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codart' => 0, 'Codpvp' => 1, 'Pvpart' => 2, 'Despvp' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (FaartpvpPeer::CODART => 0, FaartpvpPeer::CODPVP => 1, FaartpvpPeer::PVPART => 2, FaartpvpPeer::DESPVP => 3, FaartpvpPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codart' => 0, 'codpvp' => 1, 'pvpart' => 2, 'despvp' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codart' => 0, 'Pvpart' => 1, 'Despvp' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (FaartpvpPeer::CODART => 0, FaartpvpPeer::PVPART => 1, FaartpvpPeer::DESPVP => 2, FaartpvpPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('codart' => 0, 'pvpart' => 1, 'despvp' => 2, 'id' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
@@ -106,8 +103,6 @@ abstract class BaseFaartpvpPeer {
 	{
 
 		$criteria->addSelectColumn(FaartpvpPeer::CODART);
-
-		$criteria->addSelectColumn(FaartpvpPeer::CODPVP);
 
 		$criteria->addSelectColumn(FaartpvpPeer::PVPART);
 
@@ -215,6 +210,7 @@ abstract class BaseFaartpvpPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FaartpvpPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

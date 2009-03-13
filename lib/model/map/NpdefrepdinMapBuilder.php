@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpdefrepdinMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpdefrepdinMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpdefrepdinMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npdefrepdin');
 		$tMap->setPhpName('Npdefrepdin');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npdefrepdin_SEQ');
 
 		$tMap->addColumn('CODREP', 'Codrep', 'string', CreoleTypes::VARCHAR, false, 100);
 
@@ -46,9 +48,9 @@ class NpdefrepdinMapBuilder {
 
 		$tMap->addColumn('TIPCOL', 'Tipcol', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('LONCOL', 'Loncol', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCOL', 'Loncol', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

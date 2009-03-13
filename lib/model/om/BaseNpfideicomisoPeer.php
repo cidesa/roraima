@@ -225,6 +225,7 @@ abstract class BaseNpfideicomisoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpfideicomisoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

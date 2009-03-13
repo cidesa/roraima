@@ -33,113 +33,140 @@ abstract class BaseCarancot extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCandes()
-	{
+  
+  public function getCandes($val=false)
+  {
 
-		return number_format($this->candes,2,',','.');
-		
-	}
-	
-	public function getCanhas()
-	{
+    if($val) return number_format($this->candes,2,',','.');
+    else return $this->candes;
 
-		return number_format($this->canhas,2,',','.');
-		
-	}
-	
-	public function getCancot()
-	{
+  }
+  
+  public function getCanhas($val=false)
+  {
 
-		return number_format($this->cancot,2,',','.');
-		
-	}
-	
-	public function getNroran()
-	{
+    if($val) return number_format($this->canhas,2,',','.');
+    else return $this->canhas;
 
-		return $this->nroran; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCancot($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->cancot,2,',','.');
+    else return $this->cancot;
+
+  }
+  
+  public function getNroran()
+  {
+
+    return trim($this->nroran);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCandes($v)
 	{
 
-		if ($this->candes !== $v) {
-			$this->candes = $v;
-			$this->modifiedColumns[] = CarancotPeer::CANDES;
-		}
-
+    if ($this->candes !== $v) {
+        $this->candes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CarancotPeer::CANDES;
+      }
+  
 	} 
 	
 	public function setCanhas($v)
 	{
 
-		if ($this->canhas !== $v) {
-			$this->canhas = $v;
-			$this->modifiedColumns[] = CarancotPeer::CANHAS;
-		}
-
+    if ($this->canhas !== $v) {
+        $this->canhas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CarancotPeer::CANHAS;
+      }
+  
 	} 
 	
 	public function setCancot($v)
 	{
 
-		if ($this->cancot !== $v) {
-			$this->cancot = $v;
-			$this->modifiedColumns[] = CarancotPeer::CANCOT;
-		}
-
+    if ($this->cancot !== $v) {
+        $this->cancot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CarancotPeer::CANCOT;
+      }
+  
 	} 
 	
 	public function setNroran($v)
 	{
 
-		if ($this->nroran !== $v) {
-			$this->nroran = $v;
-			$this->modifiedColumns[] = CarancotPeer::NRORAN;
-		}
-
+    if ($this->nroran !== $v) {
+        $this->nroran = $v;
+        $this->modifiedColumns[] = CarancotPeer::NRORAN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CarancotPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CarancotPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->candes = $rs->getFloat($startcol + 0);
+      $this->candes = $rs->getFloat($startcol + 0);
 
-			$this->canhas = $rs->getFloat($startcol + 1);
+      $this->canhas = $rs->getFloat($startcol + 1);
 
-			$this->cancot = $rs->getFloat($startcol + 2);
+      $this->cancot = $rs->getFloat($startcol + 2);
 
-			$this->nroran = $rs->getString($startcol + 3);
+      $this->nroran = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Carancot object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Carancot object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -196,6 +223,7 @@ abstract class BaseCarancot extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CarancotPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CarancotPeer::doUpdate($this, $con);

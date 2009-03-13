@@ -230,6 +230,7 @@ abstract class BaseCarecargPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CarecargPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

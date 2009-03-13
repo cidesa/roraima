@@ -21,10 +21,6 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 
 
 	
-	protected $codfor;
-
-
-	
 	protected $numide;
 
 
@@ -37,7 +33,14 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 
 
 	
+	protected $fatippag_id;
+
+
+	
 	protected $id;
+
+	
+	protected $aFatippag;
 
 	
 	protected $alreadyInSave = false;
@@ -45,122 +48,134 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumtra()
-	{
+  
+  public function getNumtra()
+  {
 
-		return $this->numtra; 		
-	}
-	
-	public function getCodcli()
-	{
+    return trim($this->numtra);
 
-		return $this->codcli; 		
-	}
-	
-	public function getCorrel()
-	{
+  }
+  
+  public function getCodcli()
+  {
 
-		return $this->correl; 		
-	}
-	
-	public function getCodfor()
-	{
+    return trim($this->codcli);
 
-		return $this->codfor; 		
-	}
-	
-	public function getNumide()
-	{
+  }
+  
+  public function getCorrel()
+  {
 
-		return $this->numide; 		
-	}
-	
-	public function getCodban()
-	{
+    return trim($this->correl);
 
-		return $this->codban; 		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getNumide()
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->numide);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodban()
+  {
+
+    return trim($this->codban);
+
+  }
+  
+  public function getMonpag($val=false)
+  {
+
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getFatippagId()
+  {
+
+    return $this->fatippag_id;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumtra($v)
 	{
 
-		if ($this->numtra !== $v) {
-			$this->numtra = $v;
-			$this->modifiedColumns[] = CobdetforPeer::NUMTRA;
-		}
-
+    if ($this->numtra !== $v) {
+        $this->numtra = $v;
+        $this->modifiedColumns[] = CobdetforPeer::NUMTRA;
+      }
+  
 	} 
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = CobdetforPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = CobdetforPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setCorrel($v)
 	{
 
-		if ($this->correl !== $v) {
-			$this->correl = $v;
-			$this->modifiedColumns[] = CobdetforPeer::CORREL;
-		}
-
-	} 
-	
-	public function setCodfor($v)
-	{
-
-		if ($this->codfor !== $v) {
-			$this->codfor = $v;
-			$this->modifiedColumns[] = CobdetforPeer::CODFOR;
-		}
-
+    if ($this->correl !== $v) {
+        $this->correl = $v;
+        $this->modifiedColumns[] = CobdetforPeer::CORREL;
+      }
+  
 	} 
 	
 	public function setNumide($v)
 	{
 
-		if ($this->numide !== $v) {
-			$this->numide = $v;
-			$this->modifiedColumns[] = CobdetforPeer::NUMIDE;
-		}
-
+    if ($this->numide !== $v) {
+        $this->numide = $v;
+        $this->modifiedColumns[] = CobdetforPeer::NUMIDE;
+      }
+  
 	} 
 	
 	public function setCodban($v)
 	{
 
-		if ($this->codban !== $v) {
-			$this->codban = $v;
-			$this->modifiedColumns[] = CobdetforPeer::CODBAN;
-		}
-
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = CobdetforPeer::CODBAN;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = CobdetforPeer::MONPAG;
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobdetforPeer::MONPAG;
+      }
+  
+	} 
+	
+	public function setFatippagId($v)
+	{
+
+    if ($this->fatippag_id !== $v) {
+        $this->fatippag_id = $v;
+        $this->modifiedColumns[] = CobdetforPeer::FATIPPAG_ID;
+      }
+  
+		if ($this->aFatippag !== null && $this->aFatippag->getId() !== $v) {
+			$this->aFatippag = null;
 		}
 
 	} 
@@ -168,42 +183,64 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CobdetforPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CobdetforPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numtra = $rs->getString($startcol + 0);
+      $this->numtra = $rs->getString($startcol + 0);
 
-			$this->codcli = $rs->getString($startcol + 1);
+      $this->codcli = $rs->getString($startcol + 1);
 
-			$this->correl = $rs->getString($startcol + 2);
+      $this->correl = $rs->getString($startcol + 2);
 
-			$this->codfor = $rs->getString($startcol + 3);
+      $this->numide = $rs->getString($startcol + 3);
 
-			$this->numide = $rs->getString($startcol + 4);
+      $this->codban = $rs->getString($startcol + 4);
 
-			$this->codban = $rs->getString($startcol + 5);
+      $this->monpag = $rs->getFloat($startcol + 5);
 
-			$this->monpag = $rs->getFloat($startcol + 6);
+      $this->fatippag_id = $rs->getInt($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cobdetfor object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cobdetfor object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -256,10 +293,20 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aFatippag !== null) {
+				if ($this->aFatippag->isModified()) {
+					$affectedRows += $this->aFatippag->save($con);
+				}
+				$this->setFatippag($this->aFatippag);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CobdetforPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CobdetforPeer::doUpdate($this, $con);
@@ -302,6 +349,14 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aFatippag !== null) {
+				if (!$this->aFatippag->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFatippag->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = CobdetforPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -335,16 +390,16 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 				return $this->getCorrel();
 				break;
 			case 3:
-				return $this->getCodfor();
-				break;
-			case 4:
 				return $this->getNumide();
 				break;
-			case 5:
+			case 4:
 				return $this->getCodban();
 				break;
-			case 6:
+			case 5:
 				return $this->getMonpag();
+				break;
+			case 6:
+				return $this->getFatippagId();
 				break;
 			case 7:
 				return $this->getId();
@@ -362,10 +417,10 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 			$keys[0] => $this->getNumtra(),
 			$keys[1] => $this->getCodcli(),
 			$keys[2] => $this->getCorrel(),
-			$keys[3] => $this->getCodfor(),
-			$keys[4] => $this->getNumide(),
-			$keys[5] => $this->getCodban(),
-			$keys[6] => $this->getMonpag(),
+			$keys[3] => $this->getNumide(),
+			$keys[4] => $this->getCodban(),
+			$keys[5] => $this->getMonpag(),
+			$keys[6] => $this->getFatippagId(),
 			$keys[7] => $this->getId(),
 		);
 		return $result;
@@ -392,16 +447,16 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 				$this->setCorrel($value);
 				break;
 			case 3:
-				$this->setCodfor($value);
-				break;
-			case 4:
 				$this->setNumide($value);
 				break;
-			case 5:
+			case 4:
 				$this->setCodban($value);
 				break;
-			case 6:
+			case 5:
 				$this->setMonpag($value);
+				break;
+			case 6:
+				$this->setFatippagId($value);
 				break;
 			case 7:
 				$this->setId($value);
@@ -416,10 +471,10 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setNumtra($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodcli($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCorrel($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCodfor($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setNumide($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setCodban($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setMonpag($arr[$keys[6]]);
+		if (array_key_exists($keys[3], $arr)) $this->setNumide($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCodban($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setMonpag($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setFatippagId($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
@@ -431,10 +486,10 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CobdetforPeer::NUMTRA)) $criteria->add(CobdetforPeer::NUMTRA, $this->numtra);
 		if ($this->isColumnModified(CobdetforPeer::CODCLI)) $criteria->add(CobdetforPeer::CODCLI, $this->codcli);
 		if ($this->isColumnModified(CobdetforPeer::CORREL)) $criteria->add(CobdetforPeer::CORREL, $this->correl);
-		if ($this->isColumnModified(CobdetforPeer::CODFOR)) $criteria->add(CobdetforPeer::CODFOR, $this->codfor);
 		if ($this->isColumnModified(CobdetforPeer::NUMIDE)) $criteria->add(CobdetforPeer::NUMIDE, $this->numide);
 		if ($this->isColumnModified(CobdetforPeer::CODBAN)) $criteria->add(CobdetforPeer::CODBAN, $this->codban);
 		if ($this->isColumnModified(CobdetforPeer::MONPAG)) $criteria->add(CobdetforPeer::MONPAG, $this->monpag);
+		if ($this->isColumnModified(CobdetforPeer::FATIPPAG_ID)) $criteria->add(CobdetforPeer::FATIPPAG_ID, $this->fatippag_id);
 		if ($this->isColumnModified(CobdetforPeer::ID)) $criteria->add(CobdetforPeer::ID, $this->id);
 
 		return $criteria;
@@ -472,13 +527,13 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 
 		$copyObj->setCorrel($this->correl);
 
-		$copyObj->setCodfor($this->codfor);
-
 		$copyObj->setNumide($this->numide);
 
 		$copyObj->setCodban($this->codban);
 
 		$copyObj->setMonpag($this->monpag);
+
+		$copyObj->setFatippagId($this->fatippag_id);
 
 
 		$copyObj->setNew(true);
@@ -502,6 +557,35 @@ abstract class BaseCobdetfor extends BaseObject  implements Persistent {
 			self::$peer = new CobdetforPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setFatippag($v)
+	{
+
+
+		if ($v === null) {
+			$this->setFatippagId(NULL);
+		} else {
+			$this->setFatippagId($v->getId());
+		}
+
+
+		$this->aFatippag = $v;
+	}
+
+
+	
+	public function getFatippag($con = null)
+	{
+		if ($this->aFatippag === null && ($this->fatippag_id !== null)) {
+						include_once 'lib/model/om/BaseFatippagPeer.php';
+
+			$this->aFatippag = FatippagPeer::retrieveByPK($this->fatippag_id, $con);
+
+			
+		}
+		return $this->aFatippag;
 	}
 
 } 

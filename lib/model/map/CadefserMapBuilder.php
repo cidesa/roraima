@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CadefserMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CadefserMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CadefserMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cadefser');
 		$tMap->setPhpName('Cadefser');
 
@@ -37,6 +37,6 @@ class CadefserMapBuilder {
 		$tMap->addColumn('NOMSER', 'Nomser', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

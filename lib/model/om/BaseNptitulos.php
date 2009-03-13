@@ -29,92 +29,118 @@ abstract class BaseNptitulos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodniv()
-	{
+  
+  public function getCodniv()
+  {
 
-		return $this->codniv; 		
-	}
-	
-	public function getCodtit()
-	{
+    return trim($this->codniv);
 
-		return $this->codtit; 		
-	}
-	
-	public function getDestit()
-	{
+  }
+  
+  public function getCodtit()
+  {
 
-		return $this->destit; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codtit);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDestit()
+  {
+
+    return trim($this->destit);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = NptitulosPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = NptitulosPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setCodtit($v)
 	{
 
-		if ($this->codtit !== $v) {
-			$this->codtit = $v;
-			$this->modifiedColumns[] = NptitulosPeer::CODTIT;
-		}
-
+    if ($this->codtit !== $v) {
+        $this->codtit = $v;
+        $this->modifiedColumns[] = NptitulosPeer::CODTIT;
+      }
+  
 	} 
 	
 	public function setDestit($v)
 	{
 
-		if ($this->destit !== $v) {
-			$this->destit = $v;
-			$this->modifiedColumns[] = NptitulosPeer::DESTIT;
-		}
-
+    if ($this->destit !== $v) {
+        $this->destit = $v;
+        $this->modifiedColumns[] = NptitulosPeer::DESTIT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NptitulosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NptitulosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codniv = $rs->getString($startcol + 0);
+      $this->codniv = $rs->getString($startcol + 0);
 
-			$this->codtit = $rs->getString($startcol + 1);
+      $this->codtit = $rs->getString($startcol + 1);
 
-			$this->destit = $rs->getString($startcol + 2);
+      $this->destit = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nptitulos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nptitulos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseNptitulos extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NptitulosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NptitulosPeer::doUpdate($this, $con);

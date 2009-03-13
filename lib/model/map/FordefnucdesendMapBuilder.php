@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class FordefnucdesendMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FordefnucdesendMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FordefnucdesendMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fordefnucdesend');
 		$tMap->setPhpName('Fordefnucdesend');
 
@@ -37,6 +37,6 @@ class FordefnucdesendMapBuilder {
 		$tMap->addColumn('DESNUCDES', 'Desnucdes', 'string', CreoleTypes::VARCHAR, true, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

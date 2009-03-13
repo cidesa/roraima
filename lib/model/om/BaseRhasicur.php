@@ -33,110 +33,137 @@ abstract class BaseRhasicur extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcur()
-	{
+  
+  public function getCodcur()
+  {
 
-		return $this->codcur; 		
-	}
-	
-	public function getNumcla()
-	{
+    return trim($this->codcur);
 
-		return $this->numcla; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getNumcla()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getAsicla()
-	{
+    return trim($this->numcla);
 
-		return $this->asicla; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codemp);
+
+  }
+  
+  public function getAsicla()
+  {
+
+    return trim($this->asicla);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcur($v)
 	{
 
-		if ($this->codcur !== $v) {
-			$this->codcur = $v;
-			$this->modifiedColumns[] = RhasicurPeer::CODCUR;
-		}
-
+    if ($this->codcur !== $v) {
+        $this->codcur = $v;
+        $this->modifiedColumns[] = RhasicurPeer::CODCUR;
+      }
+  
 	} 
 	
 	public function setNumcla($v)
 	{
 
-		if ($this->numcla !== $v) {
-			$this->numcla = $v;
-			$this->modifiedColumns[] = RhasicurPeer::NUMCLA;
-		}
-
+    if ($this->numcla !== $v) {
+        $this->numcla = $v;
+        $this->modifiedColumns[] = RhasicurPeer::NUMCLA;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = RhasicurPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = RhasicurPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setAsicla($v)
 	{
 
-		if ($this->asicla !== $v) {
-			$this->asicla = $v;
-			$this->modifiedColumns[] = RhasicurPeer::ASICLA;
-		}
-
+    if ($this->asicla !== $v) {
+        $this->asicla = $v;
+        $this->modifiedColumns[] = RhasicurPeer::ASICLA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhasicurPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhasicurPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcur = $rs->getString($startcol + 0);
+      $this->codcur = $rs->getString($startcol + 0);
 
-			$this->numcla = $rs->getString($startcol + 1);
+      $this->numcla = $rs->getString($startcol + 1);
 
-			$this->codemp = $rs->getString($startcol + 2);
+      $this->codemp = $rs->getString($startcol + 2);
 
-			$this->asicla = $rs->getString($startcol + 3);
+      $this->asicla = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhasicur object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhasicur object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseRhasicur extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhasicurPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhasicurPeer::doUpdate($this, $con);

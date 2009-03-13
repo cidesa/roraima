@@ -6,8 +6,9 @@ generator:
 
     fields:
       codact:      { name : Código Nivel }
-      codsem:      { name : Código Activo }      
       desmue:      { name : Descripción }
+      codact1:     { name : Código Nivel }
+      desmue1:      { name : Descripción }      
       
       ctadepcar:   { name : Cuenta a Cargar }
       descta:      { name : Descripción Cuenta a Cargar }  
@@ -31,12 +32,12 @@ generator:
 
     list:
       title:          Definición Contable de Semovientes por Lotes
-      display:        [codact, codsem, desmue]
-      filters:        [codact, codsem]
+      display:        [=codact, desmue]
+      filters:        [codact, desmue]
       object_actions:
         _edit:        ~
         _delete:      ~              
       max_per_page:   5    
     edit:
       title:          Definición Contable de Semovientes por Lotes
-      display:        [codact, codsem, desmue, ctadepcar, descta, ctadepabo, desctaabo, ctaajucar, desctaajucar, ctaajuabo, desctaajuabo, ctarevcar, desctarevcar, ctarevabo, desctarevabo, ctapercar, desctapercar, ctaperabo, desctaperabo]
+      display:        [codact, codsem, codact1, desmue, desmue1, ctadepcar, descta, ctadepabo, desctaabo, ctaajucar, desctaajucar, ctaajuabo, desctaajuabo, ctarevcar, desctarevcar, ctarevabo, desctarevabo, ctapercar, desctapercar, ctaperabo, desctaperabo]

@@ -5,16 +5,25 @@ generator:
     theme:            default
     fields:
       pagrepcaj: { name: Tipo de Causado}
+      nomext: { name: Descripción}
       ctarepcaj: { name: Cuenta por Pagar Transitoria}
-      ctacheant: { name: Cuenta de Fondos sujetos a Retencion}
+      descta: { name: Descripción}
+      ctacheant: { name: Cuenta de Fondos sujetos a Retención}
+      descta2: { name: Descripción}
       movreicaj: { name: Tipo de Movimiento}
-        
+      destip: { name: Descripción}
+
     list:
-      title:          Definicion de Cuentas Contables para Rendicion de Gastos
-      display:        [=pagrepcaj, ctarepcaj, ctacheant, movreicaj]
+      title:          Definición de Cuentas Contables para Rendición de Gastos
+      display:        [=pagrepcaj, nomext, ctarepcaj, descta, ctacheant, descta2, movreicaj, destip]
+      sort:           pagrepcaj
       object_actions:
         _edit:        ~
-        
+
     edit:
-      title:          Edicion de Cuentas Contables para Rendicion de Gastos
-      display:        [=pagrepcaj, ctarepcaj, ctacheant, movreicaj]      
+      title:          Edición de Cuentas Contables para Rendición de Gastos
+      display:        [=pagrepcaj, nomext, ctarepcaj, descta, ctacheant, descta2, movreicaj, destip]
+      actions:
+        _save:        ~
+        _list:        ~
+        _delete:      ~

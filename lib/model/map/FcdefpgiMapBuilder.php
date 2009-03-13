@@ -1,42 +1,44 @@
 <?php
 
 
-	
+
 class FcdefpgiMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcdefpgiMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcdefpgiMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcdefpgi');
 		$tMap->setPhpName('Fcdefpgi');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
 
-		$tMap->addColumn('MONDES', 'Mondes', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->setPrimaryKeyMethodInfo('fcdefpgi_SEQ');
 
-		$tMap->addColumn('MONHAS', 'Monhas', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONDES', 'Mondes', 'double', CreoleTypes::NUMERIC, true, 14);
 
-		$tMap->addColumn('MONPAG', 'Monpag', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONHAS', 'Monhas', 'double', CreoleTypes::NUMERIC, true, 14);
+
+		$tMap->addColumn('MONPAG', 'Monpag', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addColumn('NUMPOR', 'Numpor', 'string', CreoleTypes::VARCHAR, false, 3);
 
@@ -45,6 +47,6 @@ class FcdefpgiMapBuilder {
 		$tMap->addColumn('DESABR', 'Desabr', 'string', CreoleTypes::VARCHAR, false, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

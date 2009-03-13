@@ -32,50 +32,54 @@ abstract class BaseFcrecdespag extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumpag()
-	{
+  
+  public function getNumpag()
+  {
 
-		return $this->numpag; 		
-	}
-	
-	public function getCodrede()
-	{
+    return trim($this->numpag);
 
-		return $this->codrede; 		
-	}
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getCodrede()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codrede);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumpag($v)
 	{
 
-		if ($this->numpag !== $v) {
-			$this->numpag = $v;
-			$this->modifiedColumns[] = FcrecdespagPeer::NUMPAG;
-		}
-
+    if ($this->numpag !== $v) {
+        $this->numpag = $v;
+        $this->modifiedColumns[] = FcrecdespagPeer::NUMPAG;
+      }
+  
 	} 
 	
 	public function setCodrede($v)
 	{
 
-		if ($this->codrede !== $v) {
-			$this->codrede = $v;
-			$this->modifiedColumns[] = FcrecdespagPeer::CODREDE;
-		}
-
+    if ($this->codrede !== $v) {
+        $this->codrede = $v;
+        $this->modifiedColumns[] = FcrecdespagPeer::CODREDE;
+      }
+  
 		if ($this->aFcdefdesc !== null && $this->aFcdefdesc->getCoddes() !== $v) {
 			$this->aFcdefdesc = null;
 		}
@@ -85,44 +89,66 @@ abstract class BaseFcrecdespag extends BaseObject  implements Persistent {
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = FcrecdespagPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrecdespagPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcrecdespagPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcrecdespagPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numpag = $rs->getString($startcol + 0);
+      $this->numpag = $rs->getString($startcol + 0);
 
-			$this->codrede = $rs->getString($startcol + 1);
+      $this->codrede = $rs->getString($startcol + 1);
 
-			$this->monto = $rs->getFloat($startcol + 2);
+      $this->monto = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcrecdespag object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcrecdespag object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -188,6 +214,7 @@ abstract class BaseFcrecdespag extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcrecdespagPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcrecdespagPeer::doUpdate($this, $con);
@@ -415,9 +442,8 @@ abstract class BaseFcrecdespag extends BaseObject  implements Persistent {
 	
 	public function getFcdefdesc($con = null)
 	{
-				include_once 'lib/model/om/BaseFcdefdescPeer.php';
-
 		if ($this->aFcdefdesc === null && (($this->codrede !== "" && $this->codrede !== null))) {
+						include_once 'lib/model/om/BaseFcdefdescPeer.php';
 
 			$this->aFcdefdesc = FcdefdescPeer::retrieveByPK($this->codrede, $con);
 

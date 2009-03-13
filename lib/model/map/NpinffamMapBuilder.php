@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpinffamMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpinffamMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpinffamMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npinffam');
 		$tMap->setPhpName('Npinffam');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npinffam_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -40,9 +42,9 @@ class NpinffamMapBuilder {
 
 		$tMap->addColumn('SEXFAM', 'Sexfam', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('FECNAC', 'Fecnac', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECNAC', 'Fecnac', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('EDAFAM', 'Edafam', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('EDAFAM', 'Edafam', 'double', CreoleTypes::NUMERIC, true, 2);
 
 		$tMap->addColumn('PARFAM', 'Parfam', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -54,9 +56,11 @@ class NpinffamMapBuilder {
 
 		$tMap->addColumn('CODGUA', 'Codgua', 'string', CreoleTypes::VARCHAR, false, 3);
 
+		$tMap->addColumn('VALGUA', 'Valgua', 'double', CreoleTypes::NUMERIC, false, 2);
+
 		$tMap->addColumn('SEGHCM', 'Seghcm', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

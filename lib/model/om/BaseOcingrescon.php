@@ -33,110 +33,137 @@ abstract class BaseOcingrescon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCeding()
-	{
+    return trim($this->codcon);
 
-		return $this->ceding; 		
-	}
-	
-	public function getNoming()
-	{
+  }
+  
+  public function getCeding()
+  {
 
-		return $this->noming; 		
-	}
-	
-	public function getNrocoling()
-	{
+    return trim($this->ceding);
 
-		return $this->nrocoling; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNoming()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->noming);
+
+  }
+  
+  public function getNrocoling()
+  {
+
+    return trim($this->nrocoling);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcingresconPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcingresconPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCeding($v)
 	{
 
-		if ($this->ceding !== $v) {
-			$this->ceding = $v;
-			$this->modifiedColumns[] = OcingresconPeer::CEDING;
-		}
-
+    if ($this->ceding !== $v) {
+        $this->ceding = $v;
+        $this->modifiedColumns[] = OcingresconPeer::CEDING;
+      }
+  
 	} 
 	
 	public function setNoming($v)
 	{
 
-		if ($this->noming !== $v) {
-			$this->noming = $v;
-			$this->modifiedColumns[] = OcingresconPeer::NOMING;
-		}
-
+    if ($this->noming !== $v) {
+        $this->noming = $v;
+        $this->modifiedColumns[] = OcingresconPeer::NOMING;
+      }
+  
 	} 
 	
 	public function setNrocoling($v)
 	{
 
-		if ($this->nrocoling !== $v) {
-			$this->nrocoling = $v;
-			$this->modifiedColumns[] = OcingresconPeer::NROCOLING;
-		}
-
+    if ($this->nrocoling !== $v) {
+        $this->nrocoling = $v;
+        $this->modifiedColumns[] = OcingresconPeer::NROCOLING;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcingresconPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcingresconPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->ceding = $rs->getString($startcol + 1);
+      $this->ceding = $rs->getString($startcol + 1);
 
-			$this->noming = $rs->getString($startcol + 2);
+      $this->noming = $rs->getString($startcol + 2);
 
-			$this->nrocoling = $rs->getString($startcol + 3);
+      $this->nrocoling = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocingrescon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocingrescon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseOcingrescon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcingresconPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcingresconPeer::doUpdate($this, $con);

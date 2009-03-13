@@ -230,6 +230,7 @@ abstract class BaseForencpryaccespmetPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForencpryaccespmetPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -53,205 +53,237 @@ abstract class BaseOctipret extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtip()
-	{
+  
+  public function getCodtip()
+  {
 
-		return $this->codtip; 		
-	}
-	
-	public function getDestip()
-	{
+    return trim($this->codtip);
 
-		return $this->destip; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getDestip()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getBasimp()
-	{
+    return trim($this->destip);
 
-		return number_format($this->basimp,2,',','.');
-		
-	}
-	
-	public function getPorret()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return number_format($this->porret,2,',','.');
-		
-	}
-	
-	public function getUnitri()
-	{
+    return trim($this->codcon);
 
-		return number_format($this->unitri,2,',','.');
-		
-	}
-	
-	public function getFactor()
-	{
+  }
+  
+  public function getBasimp($val=false)
+  {
 
-		return number_format($this->factor,2,',','.');
-		
-	}
-	
-	public function getPorsus()
-	{
+    if($val) return number_format($this->basimp,2,',','.');
+    else return $this->basimp;
 
-		return number_format($this->porsus,2,',','.');
-		
-	}
-	
-	public function getStamon()
-	{
+  }
+  
+  public function getPorret($val=false)
+  {
 
-		return $this->stamon; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->porret,2,',','.');
+    else return $this->porret;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getUnitri($val=false)
+  {
+
+    if($val) return number_format($this->unitri,2,',','.');
+    else return $this->unitri;
+
+  }
+  
+  public function getFactor($val=false)
+  {
+
+    if($val) return number_format($this->factor,2,',','.');
+    else return $this->factor;
+
+  }
+  
+  public function getPorsus($val=false)
+  {
+
+    if($val) return number_format($this->porsus,2,',','.');
+    else return $this->porsus;
+
+  }
+  
+  public function getStamon()
+  {
+
+    return trim($this->stamon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = OctipretPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = OctipretPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setDestip($v)
 	{
 
-		if ($this->destip !== $v) {
-			$this->destip = $v;
-			$this->modifiedColumns[] = OctipretPeer::DESTIP;
-		}
-
+    if ($this->destip !== $v) {
+        $this->destip = $v;
+        $this->modifiedColumns[] = OctipretPeer::DESTIP;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OctipretPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OctipretPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setBasimp($v)
 	{
 
-		if ($this->basimp !== $v) {
-			$this->basimp = $v;
-			$this->modifiedColumns[] = OctipretPeer::BASIMP;
-		}
-
+    if ($this->basimp !== $v) {
+        $this->basimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OctipretPeer::BASIMP;
+      }
+  
 	} 
 	
 	public function setPorret($v)
 	{
 
-		if ($this->porret !== $v) {
-			$this->porret = $v;
-			$this->modifiedColumns[] = OctipretPeer::PORRET;
-		}
-
+    if ($this->porret !== $v) {
+        $this->porret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OctipretPeer::PORRET;
+      }
+  
 	} 
 	
 	public function setUnitri($v)
 	{
 
-		if ($this->unitri !== $v) {
-			$this->unitri = $v;
-			$this->modifiedColumns[] = OctipretPeer::UNITRI;
-		}
-
+    if ($this->unitri !== $v) {
+        $this->unitri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OctipretPeer::UNITRI;
+      }
+  
 	} 
 	
 	public function setFactor($v)
 	{
 
-		if ($this->factor !== $v) {
-			$this->factor = $v;
-			$this->modifiedColumns[] = OctipretPeer::FACTOR;
-		}
-
+    if ($this->factor !== $v) {
+        $this->factor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OctipretPeer::FACTOR;
+      }
+  
 	} 
 	
 	public function setPorsus($v)
 	{
 
-		if ($this->porsus !== $v) {
-			$this->porsus = $v;
-			$this->modifiedColumns[] = OctipretPeer::PORSUS;
-		}
-
+    if ($this->porsus !== $v) {
+        $this->porsus = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OctipretPeer::PORSUS;
+      }
+  
 	} 
 	
 	public function setStamon($v)
 	{
 
-		if ($this->stamon !== $v) {
-			$this->stamon = $v;
-			$this->modifiedColumns[] = OctipretPeer::STAMON;
-		}
-
+    if ($this->stamon !== $v) {
+        $this->stamon = $v;
+        $this->modifiedColumns[] = OctipretPeer::STAMON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OctipretPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OctipretPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtip = $rs->getString($startcol + 0);
+      $this->codtip = $rs->getString($startcol + 0);
 
-			$this->destip = $rs->getString($startcol + 1);
+      $this->destip = $rs->getString($startcol + 1);
 
-			$this->codcon = $rs->getString($startcol + 2);
+      $this->codcon = $rs->getString($startcol + 2);
 
-			$this->basimp = $rs->getFloat($startcol + 3);
+      $this->basimp = $rs->getFloat($startcol + 3);
 
-			$this->porret = $rs->getFloat($startcol + 4);
+      $this->porret = $rs->getFloat($startcol + 4);
 
-			$this->unitri = $rs->getFloat($startcol + 5);
+      $this->unitri = $rs->getFloat($startcol + 5);
 
-			$this->factor = $rs->getFloat($startcol + 6);
+      $this->factor = $rs->getFloat($startcol + 6);
 
-			$this->porsus = $rs->getFloat($startcol + 7);
+      $this->porsus = $rs->getFloat($startcol + 7);
 
-			$this->stamon = $rs->getString($startcol + 8);
+      $this->stamon = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Octipret object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Octipret object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -308,6 +340,7 @@ abstract class BaseOctipret extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OctipretPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OctipretPeer::doUpdate($this, $con);

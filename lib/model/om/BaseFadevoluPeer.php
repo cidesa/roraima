@@ -29,7 +29,7 @@ abstract class BaseFadevoluPeer {
 	const REFDES = 'fadevolu.REFDES';
 
 	
-	const CODTIDEV = 'fadevolu.CODTIDEV';
+	const FATIPDEV_ID = 'fadevolu.FATIPDEV_ID';
 
 	
 	const CODALM = 'fadevolu.CODALM';
@@ -55,17 +55,17 @@ abstract class BaseFadevoluPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nrodev', 'Fecdev', 'Refdes', 'Codtidev', 'Codalm', 'Desdev', 'Stadph', 'Mondev', 'Obsdev', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FadevoluPeer::NRODEV, FadevoluPeer::FECDEV, FadevoluPeer::REFDES, FadevoluPeer::CODTIDEV, FadevoluPeer::CODALM, FadevoluPeer::DESDEV, FadevoluPeer::STADPH, FadevoluPeer::MONDEV, FadevoluPeer::OBSDEV, FadevoluPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nrodev', 'fecdev', 'refdes', 'codtidev', 'codalm', 'desdev', 'stadph', 'mondev', 'obsdev', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Nrodev', 'Fecdev', 'Refdes', 'FatipdevId', 'Codalm', 'Desdev', 'Stadph', 'Mondev', 'Obsdev', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FadevoluPeer::NRODEV, FadevoluPeer::FECDEV, FadevoluPeer::REFDES, FadevoluPeer::FATIPDEV_ID, FadevoluPeer::CODALM, FadevoluPeer::DESDEV, FadevoluPeer::STADPH, FadevoluPeer::MONDEV, FadevoluPeer::OBSDEV, FadevoluPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nrodev', 'fecdev', 'refdes', 'fatipdev_id', 'codalm', 'desdev', 'stadph', 'mondev', 'obsdev', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nrodev' => 0, 'Fecdev' => 1, 'Refdes' => 2, 'Codtidev' => 3, 'Codalm' => 4, 'Desdev' => 5, 'Stadph' => 6, 'Mondev' => 7, 'Obsdev' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (FadevoluPeer::NRODEV => 0, FadevoluPeer::FECDEV => 1, FadevoluPeer::REFDES => 2, FadevoluPeer::CODTIDEV => 3, FadevoluPeer::CODALM => 4, FadevoluPeer::DESDEV => 5, FadevoluPeer::STADPH => 6, FadevoluPeer::MONDEV => 7, FadevoluPeer::OBSDEV => 8, FadevoluPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('nrodev' => 0, 'fecdev' => 1, 'refdes' => 2, 'codtidev' => 3, 'codalm' => 4, 'desdev' => 5, 'stadph' => 6, 'mondev' => 7, 'obsdev' => 8, 'id' => 9, ),
+		BasePeer::TYPE_PHPNAME => array ('Nrodev' => 0, 'Fecdev' => 1, 'Refdes' => 2, 'FatipdevId' => 3, 'Codalm' => 4, 'Desdev' => 5, 'Stadph' => 6, 'Mondev' => 7, 'Obsdev' => 8, 'Id' => 9, ),
+		BasePeer::TYPE_COLNAME => array (FadevoluPeer::NRODEV => 0, FadevoluPeer::FECDEV => 1, FadevoluPeer::REFDES => 2, FadevoluPeer::FATIPDEV_ID => 3, FadevoluPeer::CODALM => 4, FadevoluPeer::DESDEV => 5, FadevoluPeer::STADPH => 6, FadevoluPeer::MONDEV => 7, FadevoluPeer::OBSDEV => 8, FadevoluPeer::ID => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('nrodev' => 0, 'fecdev' => 1, 'refdes' => 2, 'fatipdev_id' => 3, 'codalm' => 4, 'desdev' => 5, 'stadph' => 6, 'mondev' => 7, 'obsdev' => 8, 'id' => 9, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
@@ -126,7 +126,7 @@ abstract class BaseFadevoluPeer {
 
 		$criteria->addSelectColumn(FadevoluPeer::REFDES);
 
-		$criteria->addSelectColumn(FadevoluPeer::CODTIDEV);
+		$criteria->addSelectColumn(FadevoluPeer::FATIPDEV_ID);
 
 		$criteria->addSelectColumn(FadevoluPeer::CODALM);
 
@@ -217,6 +217,167 @@ abstract class BaseFadevoluPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinFatipdev(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FadevoluPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FadevoluPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FadevoluPeer::FATIPDEV_ID, FatipdevPeer::ID);
+
+		$rs = FadevoluPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinFatipdev(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FadevoluPeer::addSelectColumns($c);
+		$startcol = (FadevoluPeer::NUM_COLUMNS - FadevoluPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		FatipdevPeer::addSelectColumns($c);
+
+		$c->addJoin(FadevoluPeer::FATIPDEV_ID, FatipdevPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FadevoluPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FatipdevPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getFatipdev(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addFadevolu($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initFadevolus();
+				$obj2->addFadevolu($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FadevoluPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FadevoluPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FadevoluPeer::FATIPDEV_ID, FatipdevPeer::ID);
+
+		$rs = FadevoluPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FadevoluPeer::addSelectColumns($c);
+		$startcol2 = (FadevoluPeer::NUM_COLUMNS - FadevoluPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		FatipdevPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + FatipdevPeer::NUM_COLUMNS;
+
+		$c->addJoin(FadevoluPeer::FATIPDEV_ID, FatipdevPeer::ID);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FadevoluPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = FatipdevPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getFatipdev(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addFadevolu($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initFadevolus();
+				$obj2->addFadevolu($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -240,6 +401,7 @@ abstract class BaseFadevoluPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FadevoluPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

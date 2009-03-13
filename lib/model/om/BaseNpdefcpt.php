@@ -65,254 +65,289 @@ abstract class BaseNpdefcpt extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getNomcon()
-	{
+    return trim($this->codcon);
 
-		return $this->nomcon; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getNomcon()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getOpecon()
-	{
+    return trim($this->nomcon);
 
-		return $this->opecon; 		
-	}
-	
-	public function getAcuhis()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return $this->acuhis; 		
-	}
-	
-	public function getInimon()
-	{
+    return trim($this->codpar);
 
-		return $this->inimon; 		
-	}
-	
-	public function getConact()
-	{
+  }
+  
+  public function getOpecon()
+  {
 
-		return $this->conact; 		
-	}
-	
-	public function getImpcpt()
-	{
+    return trim($this->opecon);
 
-		return $this->impcpt; 		
-	}
-	
-	public function getOrdpag()
-	{
+  }
+  
+  public function getAcuhis()
+  {
 
-		return $this->ordpag; 		
-	}
-	
-	public function getAfepre()
-	{
+    return trim($this->acuhis);
 
-		return $this->afepre; 		
-	}
-	
-	public function getFrecon()
-	{
+  }
+  
+  public function getInimon()
+  {
 
-		return $this->frecon; 		
-	}
-	
-	public function getNrocta()
-	{
+    return trim($this->inimon);
 
-		return $this->nrocta; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getConact()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->conact);
+
+  }
+  
+  public function getImpcpt()
+  {
+
+    return trim($this->impcpt);
+
+  }
+  
+  public function getOrdpag()
+  {
+
+    return trim($this->ordpag);
+
+  }
+  
+  public function getAfepre()
+  {
+
+    return trim($this->afepre);
+
+  }
+  
+  public function getFrecon()
+  {
+
+    return trim($this->frecon);
+
+  }
+  
+  public function getNrocta()
+  {
+
+    return trim($this->nrocta);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setOpecon($v)
 	{
 
-		if ($this->opecon !== $v) {
-			$this->opecon = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::OPECON;
-		}
-
+    if ($this->opecon !== $v) {
+        $this->opecon = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::OPECON;
+      }
+  
 	} 
 	
 	public function setAcuhis($v)
 	{
 
-		if ($this->acuhis !== $v) {
-			$this->acuhis = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::ACUHIS;
-		}
-
+    if ($this->acuhis !== $v) {
+        $this->acuhis = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::ACUHIS;
+      }
+  
 	} 
 	
 	public function setInimon($v)
 	{
 
-		if ($this->inimon !== $v) {
-			$this->inimon = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::INIMON;
-		}
-
+    if ($this->inimon !== $v) {
+        $this->inimon = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::INIMON;
+      }
+  
 	} 
 	
 	public function setConact($v)
 	{
 
-		if ($this->conact !== $v) {
-			$this->conact = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::CONACT;
-		}
-
+    if ($this->conact !== $v) {
+        $this->conact = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::CONACT;
+      }
+  
 	} 
 	
 	public function setImpcpt($v)
 	{
 
-		if ($this->impcpt !== $v) {
-			$this->impcpt = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::IMPCPT;
-		}
-
+    if ($this->impcpt !== $v) {
+        $this->impcpt = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::IMPCPT;
+      }
+  
 	} 
 	
 	public function setOrdpag($v)
 	{
 
-		if ($this->ordpag !== $v) {
-			$this->ordpag = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::ORDPAG;
-		}
-
+    if ($this->ordpag !== $v) {
+        $this->ordpag = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::ORDPAG;
+      }
+  
 	} 
 	
 	public function setAfepre($v)
 	{
 
-		if ($this->afepre !== $v) {
-			$this->afepre = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::AFEPRE;
-		}
-
+    if ($this->afepre !== $v) {
+        $this->afepre = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::AFEPRE;
+      }
+  
 	} 
 	
 	public function setFrecon($v)
 	{
 
-		if ($this->frecon !== $v) {
-			$this->frecon = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::FRECON;
-		}
-
+    if ($this->frecon !== $v) {
+        $this->frecon = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::FRECON;
+      }
+  
 	} 
 	
 	public function setNrocta($v)
 	{
 
-		if ($this->nrocta !== $v) {
-			$this->nrocta = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::NROCTA;
-		}
-
+    if ($this->nrocta !== $v) {
+        $this->nrocta = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::NROCTA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdefcptPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdefcptPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->nomcon = $rs->getString($startcol + 1);
+      $this->nomcon = $rs->getString($startcol + 1);
 
-			$this->codpar = $rs->getString($startcol + 2);
+      $this->codpar = $rs->getString($startcol + 2);
 
-			$this->opecon = $rs->getString($startcol + 3);
+      $this->opecon = $rs->getString($startcol + 3);
 
-			$this->acuhis = $rs->getString($startcol + 4);
+      $this->acuhis = $rs->getString($startcol + 4);
 
-			$this->inimon = $rs->getString($startcol + 5);
+      $this->inimon = $rs->getString($startcol + 5);
 
-			$this->conact = $rs->getString($startcol + 6);
+      $this->conact = $rs->getString($startcol + 6);
 
-			$this->impcpt = $rs->getString($startcol + 7);
+      $this->impcpt = $rs->getString($startcol + 7);
 
-			$this->ordpag = $rs->getString($startcol + 8);
+      $this->ordpag = $rs->getString($startcol + 8);
 
-			$this->afepre = $rs->getString($startcol + 9);
+      $this->afepre = $rs->getString($startcol + 9);
 
-			$this->frecon = $rs->getString($startcol + 10);
+      $this->frecon = $rs->getString($startcol + 10);
 
-			$this->nrocta = $rs->getString($startcol + 11);
+      $this->nrocta = $rs->getString($startcol + 11);
 
-			$this->id = $rs->getInt($startcol + 12);
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 13; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdefcpt object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdefcpt object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -369,6 +404,7 @@ abstract class BaseNpdefcpt extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdefcptPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefcptPeer::doUpdate($this, $con);

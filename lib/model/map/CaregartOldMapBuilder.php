@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CaregartOldMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CaregartOldMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CaregartOldMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('caregart_old');
 		$tMap->setPhpName('CaregartOld');
 
@@ -42,11 +42,11 @@ class CaregartOldMapBuilder {
 
 		$tMap->addColumn('RAMART', 'Ramart', 'string', CreoleTypes::VARCHAR, false, 6);
 
-		$tMap->addColumn('COSULT', 'Cosult', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COSULT', 'Cosult', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('COSPRO', 'Cospro', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COSPRO', 'Cospro', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('EXITOT', 'Exitot', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('EXITOT', 'Exitot', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('UNIMED', 'Unimed', 'string', CreoleTypes::VARCHAR, false, 15);
 
@@ -54,19 +54,19 @@ class CaregartOldMapBuilder {
 
 		$tMap->addColumn('RELART', 'Relart', 'string', CreoleTypes::VARCHAR, false, 25);
 
-		$tMap->addColumn('FECULT', 'Fecult', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECULT', 'Fecult', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('INVINI', 'Invini', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('INVINI', 'Invini', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODMAR', 'Codmar', 'string', CreoleTypes::VARCHAR, false, 6);
 
 		$tMap->addColumn('CODREF', 'Codref', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('COSTOT', 'Costot', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COSTOT', 'Costot', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('SIGECOF', 'Sigecof', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('CODCLAART', 'Codclaart', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CODCLAART', 'Codclaart', 'double', CreoleTypes::NUMERIC, false, 4);
 
 		$tMap->addColumn('LOTUNI', 'Lotuni', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -78,7 +78,7 @@ class CaregartOldMapBuilder {
 
 		$tMap->addColumn('PREART', 'Preart', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('DISTOT', 'Distot', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DISTOT', 'Distot', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('TIPO', 'Tipo', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -89,6 +89,6 @@ class CaregartOldMapBuilder {
 		$tMap->addColumn('MERCON', 'Mercon', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

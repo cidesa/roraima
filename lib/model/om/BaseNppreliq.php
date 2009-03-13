@@ -49,211 +49,241 @@ abstract class BaseNppreliq extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getFecvig($format = 'Y-m-d')
-	{
+  
+  public function getFecvig($format = 'Y-m-d')
+  {
 
-		if ($this->fecvig === null || $this->fecvig === '') {
-			return null;
-		} elseif (!is_int($this->fecvig)) {
-						$ts = strtotime($this->fecvig);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecvig] as date/time value: " . var_export($this->fecvig, true));
-			}
-		} else {
-			$ts = $this->fecvig;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecvig === null || $this->fecvig === '') {
+      return null;
+    } elseif (!is_int($this->fecvig)) {
+            $ts = adodb_strtotime($this->fecvig);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecvig] as date/time value: " . var_export($this->fecvig, true));
+      }
+    } else {
+      $ts = $this->fecvig;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getMes()
-	{
+    return trim($this->codnom);
 
-		return number_format($this->mes,2,',','.');
-		
-	}
-	
-	public function getDiapre()
-	{
+  }
+  
+  public function getMes($val=false)
+  {
 
-		return number_format($this->diapre,2,',','.');
-		
-	}
-	
-	public function getDiaant()
-	{
+    if($val) return number_format($this->mes,2,',','.');
+    else return $this->mes;
 
-		return number_format($this->diaant,2,',','.');
-		
-	}
-	
-	public function getDiavac()
-	{
+  }
+  
+  public function getDiapre($val=false)
+  {
 
-		return number_format($this->diavac,2,',','.');
-		
-	}
-	
-	public function getDiavacfra()
-	{
+    if($val) return number_format($this->diapre,2,',','.');
+    else return $this->diapre;
 
-		return number_format($this->diavacfra,2,',','.');
-		
-	}
-	
-	public function getDiabonvac()
-	{
+  }
+  
+  public function getDiaant($val=false)
+  {
 
-		return number_format($this->diabonvac,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->diaant,2,',','.');
+    else return $this->diaant;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDiavac($val=false)
+  {
+
+    if($val) return number_format($this->diavac,2,',','.');
+    else return $this->diavac;
+
+  }
+  
+  public function getDiavacfra($val=false)
+  {
+
+    if($val) return number_format($this->diavacfra,2,',','.');
+    else return $this->diavacfra;
+
+  }
+  
+  public function getDiabonvac($val=false)
+  {
+
+    if($val) return number_format($this->diabonvac,2,',','.');
+    else return $this->diabonvac;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setFecvig($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecvig] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecvig !== $ts) {
-			$this->fecvig = $ts;
-			$this->modifiedColumns[] = NppreliqPeer::FECVIG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecvig] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecvig !== $ts) {
+      $this->fecvig = $ts;
+      $this->modifiedColumns[] = NppreliqPeer::FECVIG;
+    }
 
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NppreliqPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NppreliqPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setMes($v)
 	{
 
-		if ($this->mes !== $v) {
-			$this->mes = $v;
-			$this->modifiedColumns[] = NppreliqPeer::MES;
-		}
-
+    if ($this->mes !== $v) {
+        $this->mes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NppreliqPeer::MES;
+      }
+  
 	} 
 	
 	public function setDiapre($v)
 	{
 
-		if ($this->diapre !== $v) {
-			$this->diapre = $v;
-			$this->modifiedColumns[] = NppreliqPeer::DIAPRE;
-		}
-
+    if ($this->diapre !== $v) {
+        $this->diapre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NppreliqPeer::DIAPRE;
+      }
+  
 	} 
 	
 	public function setDiaant($v)
 	{
 
-		if ($this->diaant !== $v) {
-			$this->diaant = $v;
-			$this->modifiedColumns[] = NppreliqPeer::DIAANT;
-		}
-
+    if ($this->diaant !== $v) {
+        $this->diaant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NppreliqPeer::DIAANT;
+      }
+  
 	} 
 	
 	public function setDiavac($v)
 	{
 
-		if ($this->diavac !== $v) {
-			$this->diavac = $v;
-			$this->modifiedColumns[] = NppreliqPeer::DIAVAC;
-		}
-
+    if ($this->diavac !== $v) {
+        $this->diavac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NppreliqPeer::DIAVAC;
+      }
+  
 	} 
 	
 	public function setDiavacfra($v)
 	{
 
-		if ($this->diavacfra !== $v) {
-			$this->diavacfra = $v;
-			$this->modifiedColumns[] = NppreliqPeer::DIAVACFRA;
-		}
-
+    if ($this->diavacfra !== $v) {
+        $this->diavacfra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NppreliqPeer::DIAVACFRA;
+      }
+  
 	} 
 	
 	public function setDiabonvac($v)
 	{
 
-		if ($this->diabonvac !== $v) {
-			$this->diabonvac = $v;
-			$this->modifiedColumns[] = NppreliqPeer::DIABONVAC;
-		}
-
+    if ($this->diabonvac !== $v) {
+        $this->diabonvac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NppreliqPeer::DIABONVAC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NppreliqPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NppreliqPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->fecvig = $rs->getDate($startcol + 0, null);
+      $this->fecvig = $rs->getDate($startcol + 0, null);
 
-			$this->codnom = $rs->getString($startcol + 1);
+      $this->codnom = $rs->getString($startcol + 1);
 
-			$this->mes = $rs->getFloat($startcol + 2);
+      $this->mes = $rs->getFloat($startcol + 2);
 
-			$this->diapre = $rs->getFloat($startcol + 3);
+      $this->diapre = $rs->getFloat($startcol + 3);
 
-			$this->diaant = $rs->getFloat($startcol + 4);
+      $this->diaant = $rs->getFloat($startcol + 4);
 
-			$this->diavac = $rs->getFloat($startcol + 5);
+      $this->diavac = $rs->getFloat($startcol + 5);
 
-			$this->diavacfra = $rs->getFloat($startcol + 6);
+      $this->diavacfra = $rs->getFloat($startcol + 6);
 
-			$this->diabonvac = $rs->getFloat($startcol + 7);
+      $this->diabonvac = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nppreliq object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nppreliq object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -310,6 +340,7 @@ abstract class BaseNppreliq extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NppreliqPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NppreliqPeer::doUpdate($this, $con);

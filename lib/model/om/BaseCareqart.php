@@ -37,6 +37,10 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 
 
 	
+	protected $aprreq;
+
+
+	
 	protected $id;
 
 	
@@ -45,188 +49,236 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReqart()
-	{
+  
+  public function getReqart()
+  {
 
-		return $this->reqart; 		
-	}
-	
-	public function getFecreq($format = 'Y-m-d')
-	{
+    return trim($this->reqart);
 
-		if ($this->fecreq === null || $this->fecreq === '') {
-			return null;
-		} elseif (!is_int($this->fecreq)) {
-						$ts = strtotime($this->fecreq);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreq] as date/time value: " . var_export($this->fecreq, true));
-			}
-		} else {
-			$ts = $this->fecreq;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecreq($format = 'Y-m-d')
+  {
 
-	
-	public function getDesreq()
-	{
+    if ($this->fecreq === null || $this->fecreq === '') {
+      return null;
+    } elseif (!is_int($this->fecreq)) {
+            $ts = adodb_strtotime($this->fecreq);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreq] as date/time value: " . var_export($this->fecreq, true));
+      }
+    } else {
+      $ts = $this->fecreq;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desreq; 		
-	}
-	
-	public function getMonreq()
-	{
+  
+  public function getDesreq()
+  {
 
-		return number_format($this->monreq,2,',','.');
-		
-	}
-	
-	public function getStareq()
-	{
+    return trim($this->desreq);
 
-		return $this->stareq; 		
-	}
-	
-	public function getUnisol()
-	{
+  }
+  
+  public function getMonreq($val=false)
+  {
 
-		return $this->unisol; 		
-	}
-	
-	public function getCodcatreq()
-	{
+    if($val) return number_format($this->monreq,2,',','.');
+    else return $this->monreq;
 
-		return $this->codcatreq; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getStareq()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->stareq);
+
+  }
+  
+  public function getUnisol()
+  {
+
+    return trim($this->unisol);
+
+  }
+  
+  public function getCodcatreq()
+  {
+
+    return trim($this->codcatreq);
+
+  }
+  
+  public function getAprreq()
+  {
+
+    return trim($this->aprreq);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReqart($v)
 	{
 
-		if ($this->reqart !== $v) {
-			$this->reqart = $v;
-			$this->modifiedColumns[] = CareqartPeer::REQART;
-		}
-
+    if ($this->reqart !== $v) {
+        $this->reqart = $v;
+        $this->modifiedColumns[] = CareqartPeer::REQART;
+      }
+  
 	} 
 	
 	public function setFecreq($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreq] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreq !== $ts) {
-			$this->fecreq = $ts;
-			$this->modifiedColumns[] = CareqartPeer::FECREQ;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreq] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreq !== $ts) {
+      $this->fecreq = $ts;
+      $this->modifiedColumns[] = CareqartPeer::FECREQ;
+    }
 
 	} 
 	
 	public function setDesreq($v)
 	{
 
-		if ($this->desreq !== $v) {
-			$this->desreq = $v;
-			$this->modifiedColumns[] = CareqartPeer::DESREQ;
-		}
-
+    if ($this->desreq !== $v) {
+        $this->desreq = $v;
+        $this->modifiedColumns[] = CareqartPeer::DESREQ;
+      }
+  
 	} 
 	
 	public function setMonreq($v)
 	{
 
-		if ($this->monreq !== $v) {
-			$this->monreq = $v;
-			$this->modifiedColumns[] = CareqartPeer::MONREQ;
-		}
-
+    if ($this->monreq !== $v) {
+        $this->monreq = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CareqartPeer::MONREQ;
+      }
+  
 	} 
 	
 	public function setStareq($v)
 	{
 
-		if ($this->stareq !== $v) {
-			$this->stareq = $v;
-			$this->modifiedColumns[] = CareqartPeer::STAREQ;
-		}
-
+    if ($this->stareq !== $v) {
+        $this->stareq = $v;
+        $this->modifiedColumns[] = CareqartPeer::STAREQ;
+      }
+  
 	} 
 	
 	public function setUnisol($v)
 	{
 
-		if ($this->unisol !== $v) {
-			$this->unisol = $v;
-			$this->modifiedColumns[] = CareqartPeer::UNISOL;
-		}
-
+    if ($this->unisol !== $v) {
+        $this->unisol = $v;
+        $this->modifiedColumns[] = CareqartPeer::UNISOL;
+      }
+  
 	} 
 	
 	public function setCodcatreq($v)
 	{
 
-		if ($this->codcatreq !== $v) {
-			$this->codcatreq = $v;
-			$this->modifiedColumns[] = CareqartPeer::CODCATREQ;
-		}
+    if ($this->codcatreq !== $v) {
+        $this->codcatreq = $v;
+        $this->modifiedColumns[] = CareqartPeer::CODCATREQ;
+      }
+  
+	} 
+	
+	public function setAprreq($v)
+	{
 
+    if ($this->aprreq !== $v) {
+        $this->aprreq = $v;
+        $this->modifiedColumns[] = CareqartPeer::APRREQ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CareqartPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CareqartPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reqart = $rs->getString($startcol + 0);
+      $this->reqart = $rs->getString($startcol + 0);
 
-			$this->fecreq = $rs->getDate($startcol + 1, null);
+      $this->fecreq = $rs->getDate($startcol + 1, null);
 
-			$this->desreq = $rs->getString($startcol + 2);
+      $this->desreq = $rs->getString($startcol + 2);
 
-			$this->monreq = $rs->getFloat($startcol + 3);
+      $this->monreq = $rs->getFloat($startcol + 3);
 
-			$this->stareq = $rs->getString($startcol + 4);
+      $this->stareq = $rs->getString($startcol + 4);
 
-			$this->unisol = $rs->getString($startcol + 5);
+      $this->unisol = $rs->getString($startcol + 5);
 
-			$this->codcatreq = $rs->getString($startcol + 6);
+      $this->codcatreq = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->aprreq = $rs->getString($startcol + 7);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Careqart object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Careqart object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -283,6 +335,7 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CareqartPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CareqartPeer::doUpdate($this, $con);
@@ -370,6 +423,9 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 				return $this->getCodcatreq();
 				break;
 			case 7:
+				return $this->getAprreq();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -389,7 +445,8 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 			$keys[4] => $this->getStareq(),
 			$keys[5] => $this->getUnisol(),
 			$keys[6] => $this->getCodcatreq(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getAprreq(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -427,6 +484,9 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 				$this->setCodcatreq($value);
 				break;
 			case 7:
+				$this->setAprreq($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -443,7 +503,8 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setStareq($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setUnisol($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodcatreq($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setAprreq($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -458,6 +519,7 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CareqartPeer::STAREQ)) $criteria->add(CareqartPeer::STAREQ, $this->stareq);
 		if ($this->isColumnModified(CareqartPeer::UNISOL)) $criteria->add(CareqartPeer::UNISOL, $this->unisol);
 		if ($this->isColumnModified(CareqartPeer::CODCATREQ)) $criteria->add(CareqartPeer::CODCATREQ, $this->codcatreq);
+		if ($this->isColumnModified(CareqartPeer::APRREQ)) $criteria->add(CareqartPeer::APRREQ, $this->aprreq);
 		if ($this->isColumnModified(CareqartPeer::ID)) $criteria->add(CareqartPeer::ID, $this->id);
 
 		return $criteria;
@@ -502,6 +564,8 @@ abstract class BaseCareqart extends BaseObject  implements Persistent {
 		$copyObj->setUnisol($this->unisol);
 
 		$copyObj->setCodcatreq($this->codcatreq);
+
+		$copyObj->setAprreq($this->aprreq);
 
 
 		$copyObj->setNew(true);

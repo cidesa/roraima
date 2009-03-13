@@ -9,10 +9,6 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 
 
 	
-	protected $codtippag;
-
-
-	
 	protected $destippag;
 
 
@@ -25,6 +21,10 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 
 
 	
+	protected $gening;
+
+
+	
 	protected $id;
 
 	
@@ -33,110 +33,137 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtippag()
-	{
+  
+  public function getDestippag()
+  {
 
-		return $this->codtippag; 		
-	}
-	
-	public function getDestippag()
-	{
+    return trim($this->destippag);
 
-		return $this->destippag; 		
-	}
-	
-	public function getTipcan()
-	{
+  }
+  
+  public function getTipcan()
+  {
 
-		return $this->tipcan; 		
-	}
-	
-	public function getGenmov()
-	{
+    return trim($this->tipcan);
 
-		return $this->genmov; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getGenmov()
+  {
 
-		return $this->id; 		
-	}
-	
-	public function setCodtippag($v)
-	{
+    return trim($this->genmov);
 
-		if ($this->codtippag !== $v) {
-			$this->codtippag = $v;
-			$this->modifiedColumns[] = FatippagPeer::CODTIPPAG;
-		}
+  }
+  
+  public function getGening()
+  {
 
-	} 
+    return trim($this->gening);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDestippag($v)
 	{
 
-		if ($this->destippag !== $v) {
-			$this->destippag = $v;
-			$this->modifiedColumns[] = FatippagPeer::DESTIPPAG;
-		}
-
+    if ($this->destippag !== $v) {
+        $this->destippag = $v;
+        $this->modifiedColumns[] = FatippagPeer::DESTIPPAG;
+      }
+  
 	} 
 	
 	public function setTipcan($v)
 	{
 
-		if ($this->tipcan !== $v) {
-			$this->tipcan = $v;
-			$this->modifiedColumns[] = FatippagPeer::TIPCAN;
-		}
-
+    if ($this->tipcan !== $v) {
+        $this->tipcan = $v;
+        $this->modifiedColumns[] = FatippagPeer::TIPCAN;
+      }
+  
 	} 
 	
 	public function setGenmov($v)
 	{
 
-		if ($this->genmov !== $v) {
-			$this->genmov = $v;
-			$this->modifiedColumns[] = FatippagPeer::GENMOV;
-		}
+    if ($this->genmov !== $v) {
+        $this->genmov = $v;
+        $this->modifiedColumns[] = FatippagPeer::GENMOV;
+      }
+  
+	} 
+	
+	public function setGening($v)
+	{
 
+    if ($this->gening !== $v) {
+        $this->gening = $v;
+        $this->modifiedColumns[] = FatippagPeer::GENING;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FatippagPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FatippagPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtippag = $rs->getString($startcol + 0);
+      $this->destippag = $rs->getString($startcol + 0);
 
-			$this->destippag = $rs->getString($startcol + 1);
+      $this->tipcan = $rs->getString($startcol + 1);
 
-			$this->tipcan = $rs->getString($startcol + 2);
+      $this->genmov = $rs->getString($startcol + 2);
 
-			$this->genmov = $rs->getString($startcol + 3);
+      $this->gening = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fatippag object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fatippag object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FatippagPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FatippagPeer::doUpdate($this, $con);
@@ -259,16 +287,16 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodtippag();
-				break;
-			case 1:
 				return $this->getDestippag();
 				break;
-			case 2:
+			case 1:
 				return $this->getTipcan();
 				break;
-			case 3:
+			case 2:
 				return $this->getGenmov();
+				break;
+			case 3:
+				return $this->getGening();
 				break;
 			case 4:
 				return $this->getId();
@@ -283,10 +311,10 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 	{
 		$keys = FatippagPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodtippag(),
-			$keys[1] => $this->getDestippag(),
-			$keys[2] => $this->getTipcan(),
-			$keys[3] => $this->getGenmov(),
+			$keys[0] => $this->getDestippag(),
+			$keys[1] => $this->getTipcan(),
+			$keys[2] => $this->getGenmov(),
+			$keys[3] => $this->getGening(),
 			$keys[4] => $this->getId(),
 		);
 		return $result;
@@ -304,16 +332,16 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodtippag($value);
-				break;
-			case 1:
 				$this->setDestippag($value);
 				break;
-			case 2:
+			case 1:
 				$this->setTipcan($value);
 				break;
-			case 3:
+			case 2:
 				$this->setGenmov($value);
+				break;
+			case 3:
+				$this->setGening($value);
 				break;
 			case 4:
 				$this->setId($value);
@@ -325,10 +353,10 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 	{
 		$keys = FatippagPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodtippag($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setDestippag($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setTipcan($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setGenmov($arr[$keys[3]]);
+		if (array_key_exists($keys[0], $arr)) $this->setDestippag($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setTipcan($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setGenmov($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setGening($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
 	}
 
@@ -337,10 +365,10 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FatippagPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(FatippagPeer::CODTIPPAG)) $criteria->add(FatippagPeer::CODTIPPAG, $this->codtippag);
 		if ($this->isColumnModified(FatippagPeer::DESTIPPAG)) $criteria->add(FatippagPeer::DESTIPPAG, $this->destippag);
 		if ($this->isColumnModified(FatippagPeer::TIPCAN)) $criteria->add(FatippagPeer::TIPCAN, $this->tipcan);
 		if ($this->isColumnModified(FatippagPeer::GENMOV)) $criteria->add(FatippagPeer::GENMOV, $this->genmov);
+		if ($this->isColumnModified(FatippagPeer::GENING)) $criteria->add(FatippagPeer::GENING, $this->gening);
 		if ($this->isColumnModified(FatippagPeer::ID)) $criteria->add(FatippagPeer::ID, $this->id);
 
 		return $criteria;
@@ -372,13 +400,13 @@ abstract class BaseFatippag extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodtippag($this->codtippag);
-
 		$copyObj->setDestippag($this->destippag);
 
 		$copyObj->setTipcan($this->tipcan);
 
 		$copyObj->setGenmov($this->genmov);
+
+		$copyObj->setGening($this->gening);
 
 
 		$copyObj->setNew(true);

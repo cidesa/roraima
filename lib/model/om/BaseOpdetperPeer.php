@@ -250,6 +250,7 @@ abstract class BaseOpdetperPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpdetperPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

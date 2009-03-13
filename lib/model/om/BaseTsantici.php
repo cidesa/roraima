@@ -49,207 +49,237 @@ abstract class BaseTsantici extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefant()
-	{
+  
+  public function getRefant()
+  {
 
-		return $this->refant; 		
-	}
-	
-	public function getDesant()
-	{
+    return trim($this->refant);
 
-		return $this->desant; 		
-	}
-	
-	public function getCedrif()
-	{
+  }
+  
+  public function getDesant()
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getRefcom()
-	{
+    return trim($this->desant);
 
-		return $this->refcom; 		
-	}
-	
-	public function getFecant($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCedrif()
+  {
 
-		if ($this->fecant === null || $this->fecant === '') {
-			return null;
-		} elseif (!is_int($this->fecant)) {
-						$ts = strtotime($this->fecant);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecant] as date/time value: " . var_export($this->fecant, true));
-			}
-		} else {
-			$ts = $this->fecant;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->cedrif);
 
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getRefcom()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getSaldo()
-	{
+    return trim($this->refcom);
 
-		return number_format($this->saldo,2,',','.');
-		
-	}
-	
-	public function getNumcom()
-	{
+  }
+  
+  public function getFecant($format = 'Y-m-d')
+  {
 
-		return $this->numcom; 		
-	}
-	
-	public function getId()
-	{
+    if ($this->fecant === null || $this->fecant === '') {
+      return null;
+    } elseif (!is_int($this->fecant)) {
+            $ts = adodb_strtotime($this->fecant);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecant] as date/time value: " . var_export($this->fecant, true));
+      }
+    } else {
+      $ts = $this->fecant;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getSaldo($val=false)
+  {
+
+    if($val) return number_format($this->saldo,2,',','.');
+    else return $this->saldo;
+
+  }
+  
+  public function getNumcom()
+  {
+
+    return trim($this->numcom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefant($v)
 	{
 
-		if ($this->refant !== $v) {
-			$this->refant = $v;
-			$this->modifiedColumns[] = TsanticiPeer::REFANT;
-		}
-
+    if ($this->refant !== $v) {
+        $this->refant = $v;
+        $this->modifiedColumns[] = TsanticiPeer::REFANT;
+      }
+  
 	} 
 	
 	public function setDesant($v)
 	{
 
-		if ($this->desant !== $v) {
-			$this->desant = $v;
-			$this->modifiedColumns[] = TsanticiPeer::DESANT;
-		}
-
+    if ($this->desant !== $v) {
+        $this->desant = $v;
+        $this->modifiedColumns[] = TsanticiPeer::DESANT;
+      }
+  
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = TsanticiPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = TsanticiPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = TsanticiPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = TsanticiPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setFecant($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecant] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecant !== $ts) {
-			$this->fecant = $ts;
-			$this->modifiedColumns[] = TsanticiPeer::FECANT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecant] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecant !== $ts) {
+      $this->fecant = $ts;
+      $this->modifiedColumns[] = TsanticiPeer::FECANT;
+    }
 
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = TsanticiPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsanticiPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setSaldo($v)
 	{
 
-		if ($this->saldo !== $v) {
-			$this->saldo = $v;
-			$this->modifiedColumns[] = TsanticiPeer::SALDO;
-		}
-
+    if ($this->saldo !== $v) {
+        $this->saldo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsanticiPeer::SALDO;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = TsanticiPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = TsanticiPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsanticiPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsanticiPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refant = $rs->getString($startcol + 0);
+      $this->refant = $rs->getString($startcol + 0);
 
-			$this->desant = $rs->getString($startcol + 1);
+      $this->desant = $rs->getString($startcol + 1);
 
-			$this->cedrif = $rs->getString($startcol + 2);
+      $this->cedrif = $rs->getString($startcol + 2);
 
-			$this->refcom = $rs->getString($startcol + 3);
+      $this->refcom = $rs->getString($startcol + 3);
 
-			$this->fecant = $rs->getDate($startcol + 4, null);
+      $this->fecant = $rs->getDate($startcol + 4, null);
 
-			$this->monto = $rs->getFloat($startcol + 5);
+      $this->monto = $rs->getFloat($startcol + 5);
 
-			$this->saldo = $rs->getFloat($startcol + 6);
+      $this->saldo = $rs->getFloat($startcol + 6);
 
-			$this->numcom = $rs->getString($startcol + 7);
+      $this->numcom = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsantici object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsantici object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -306,6 +336,7 @@ abstract class BaseTsantici extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsanticiPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsanticiPeer::doUpdate($this, $con);

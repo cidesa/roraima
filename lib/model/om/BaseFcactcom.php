@@ -69,276 +69,312 @@ abstract class BaseFcactcom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getDesact()
-	{
+    return trim($this->codact);
 
-		return $this->desact; 		
-	}
-	
-	public function getMintri()
-	{
+  }
+  
+  public function getDesact()
+  {
 
-		return number_format($this->mintri,2,',','.');
-		
-	}
-	
-	public function getExoner()
-	{
+    return trim($this->desact);
 
-		return $this->exoner; 		
-	}
-	
-	public function getMinofac()
-	{
+  }
+  
+  public function getMintri($val=false)
+  {
 
-		return $this->minofac; 		
-	}
-	
-	public function getTipali()
-	{
+    if($val) return number_format($this->mintri,2,',','.');
+    else return $this->mintri;
 
-		return $this->tipali; 		
-	}
-	
-	public function getPorreb()
-	{
+  }
+  
+  public function getExoner()
+  {
 
-		return number_format($this->porreb,2,',','.');
-		
-	}
-	
-	public function getExepto()
-	{
+    return trim($this->exoner);
 
-		return $this->exepto; 		
-	}
-	
-	public function getRebaja()
-	{
+  }
+  
+  public function getMinofac()
+  {
 
-		return $this->rebaja; 		
-	}
-	
-	public function getExento()
-	{
+    return trim($this->minofac);
 
-		return $this->exento; 		
-	}
-	
-	public function getTem()
-	{
+  }
+  
+  public function getTipali()
+  {
 
-		return number_format($this->tem,2,',','.');
-		
-	}
-	
-	public function getAfoact()
-	{
+    return trim($this->tipali);
 
-		return number_format($this->afoact,2,',','.');
-		
-	}
-	
-	public function getAnoact()
-	{
+  }
+  
+  public function getPorreb($val=false)
+  {
 
-		return $this->anoact; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->porreb,2,',','.');
+    else return $this->porreb;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getExepto()
+  {
+
+    return trim($this->exepto);
+
+  }
+  
+  public function getRebaja()
+  {
+
+    return trim($this->rebaja);
+
+  }
+  
+  public function getExento()
+  {
+
+    return trim($this->exento);
+
+  }
+  
+  public function getTem($val=false)
+  {
+
+    if($val) return number_format($this->tem,2,',','.');
+    else return $this->tem;
+
+  }
+  
+  public function getAfoact($val=false)
+  {
+
+    if($val) return number_format($this->afoact,2,',','.');
+    else return $this->afoact;
+
+  }
+  
+  public function getAnoact()
+  {
+
+    return trim($this->anoact);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = FcactcomPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = FcactcomPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setDesact($v)
 	{
 
-		if ($this->desact !== $v) {
-			$this->desact = $v;
-			$this->modifiedColumns[] = FcactcomPeer::DESACT;
-		}
-
+    if ($this->desact !== $v) {
+        $this->desact = $v;
+        $this->modifiedColumns[] = FcactcomPeer::DESACT;
+      }
+  
 	} 
 	
 	public function setMintri($v)
 	{
 
-		if ($this->mintri !== $v) {
-			$this->mintri = $v;
-			$this->modifiedColumns[] = FcactcomPeer::MINTRI;
-		}
-
+    if ($this->mintri !== $v) {
+        $this->mintri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactcomPeer::MINTRI;
+      }
+  
 	} 
 	
 	public function setExoner($v)
 	{
 
-		if ($this->exoner !== $v) {
-			$this->exoner = $v;
-			$this->modifiedColumns[] = FcactcomPeer::EXONER;
-		}
-
+    if ($this->exoner !== $v) {
+        $this->exoner = $v;
+        $this->modifiedColumns[] = FcactcomPeer::EXONER;
+      }
+  
 	} 
 	
 	public function setMinofac($v)
 	{
 
-		if ($this->minofac !== $v) {
-			$this->minofac = $v;
-			$this->modifiedColumns[] = FcactcomPeer::MINOFAC;
-		}
-
+    if ($this->minofac !== $v) {
+        $this->minofac = $v;
+        $this->modifiedColumns[] = FcactcomPeer::MINOFAC;
+      }
+  
 	} 
 	
 	public function setTipali($v)
 	{
 
-		if ($this->tipali !== $v) {
-			$this->tipali = $v;
-			$this->modifiedColumns[] = FcactcomPeer::TIPALI;
-		}
-
+    if ($this->tipali !== $v) {
+        $this->tipali = $v;
+        $this->modifiedColumns[] = FcactcomPeer::TIPALI;
+      }
+  
 	} 
 	
 	public function setPorreb($v)
 	{
 
-		if ($this->porreb !== $v) {
-			$this->porreb = $v;
-			$this->modifiedColumns[] = FcactcomPeer::PORREB;
-		}
-
+    if ($this->porreb !== $v) {
+        $this->porreb = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactcomPeer::PORREB;
+      }
+  
 	} 
 	
 	public function setExepto($v)
 	{
 
-		if ($this->exepto !== $v) {
-			$this->exepto = $v;
-			$this->modifiedColumns[] = FcactcomPeer::EXEPTO;
-		}
-
+    if ($this->exepto !== $v) {
+        $this->exepto = $v;
+        $this->modifiedColumns[] = FcactcomPeer::EXEPTO;
+      }
+  
 	} 
 	
 	public function setRebaja($v)
 	{
 
-		if ($this->rebaja !== $v) {
-			$this->rebaja = $v;
-			$this->modifiedColumns[] = FcactcomPeer::REBAJA;
-		}
-
+    if ($this->rebaja !== $v) {
+        $this->rebaja = $v;
+        $this->modifiedColumns[] = FcactcomPeer::REBAJA;
+      }
+  
 	} 
 	
 	public function setExento($v)
 	{
 
-		if ($this->exento !== $v) {
-			$this->exento = $v;
-			$this->modifiedColumns[] = FcactcomPeer::EXENTO;
-		}
-
+    if ($this->exento !== $v) {
+        $this->exento = $v;
+        $this->modifiedColumns[] = FcactcomPeer::EXENTO;
+      }
+  
 	} 
 	
 	public function setTem($v)
 	{
 
-		if ($this->tem !== $v) {
-			$this->tem = $v;
-			$this->modifiedColumns[] = FcactcomPeer::TEM;
-		}
-
+    if ($this->tem !== $v) {
+        $this->tem = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactcomPeer::TEM;
+      }
+  
 	} 
 	
 	public function setAfoact($v)
 	{
 
-		if ($this->afoact !== $v) {
-			$this->afoact = $v;
-			$this->modifiedColumns[] = FcactcomPeer::AFOACT;
-		}
-
+    if ($this->afoact !== $v) {
+        $this->afoact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactcomPeer::AFOACT;
+      }
+  
 	} 
 	
 	public function setAnoact($v)
 	{
 
-		if ($this->anoact !== $v) {
-			$this->anoact = $v;
-			$this->modifiedColumns[] = FcactcomPeer::ANOACT;
-		}
-
+    if ($this->anoact !== $v) {
+        $this->anoact = $v;
+        $this->modifiedColumns[] = FcactcomPeer::ANOACT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcactcomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcactcomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->desact = $rs->getString($startcol + 1);
+      $this->desact = $rs->getString($startcol + 1);
 
-			$this->mintri = $rs->getFloat($startcol + 2);
+      $this->mintri = $rs->getFloat($startcol + 2);
 
-			$this->exoner = $rs->getString($startcol + 3);
+      $this->exoner = $rs->getString($startcol + 3);
 
-			$this->minofac = $rs->getString($startcol + 4);
+      $this->minofac = $rs->getString($startcol + 4);
 
-			$this->tipali = $rs->getString($startcol + 5);
+      $this->tipali = $rs->getString($startcol + 5);
 
-			$this->porreb = $rs->getFloat($startcol + 6);
+      $this->porreb = $rs->getFloat($startcol + 6);
 
-			$this->exepto = $rs->getString($startcol + 7);
+      $this->exepto = $rs->getString($startcol + 7);
 
-			$this->rebaja = $rs->getString($startcol + 8);
+      $this->rebaja = $rs->getString($startcol + 8);
 
-			$this->exento = $rs->getString($startcol + 9);
+      $this->exento = $rs->getString($startcol + 9);
 
-			$this->tem = $rs->getFloat($startcol + 10);
+      $this->tem = $rs->getFloat($startcol + 10);
 
-			$this->afoact = $rs->getFloat($startcol + 11);
+      $this->afoact = $rs->getFloat($startcol + 11);
 
-			$this->anoact = $rs->getString($startcol + 12);
+      $this->anoact = $rs->getString($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcactcom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcactcom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -395,6 +431,7 @@ abstract class BaseFcactcom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcactcomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcactcomPeer::doUpdate($this, $con);

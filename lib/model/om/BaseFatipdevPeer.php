@@ -13,14 +13,11 @@ abstract class BaseFatipdevPeer {
 	const CLASS_DEFAULT = 'lib.model.Fatipdev';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 2;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
-
-	
-	const CODTIDEV = 'fatipdev.CODTIDEV';
 
 	
 	const NOMTIDEV = 'fatipdev.NOMTIDEV';
@@ -34,18 +31,18 @@ abstract class BaseFatipdevPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtidev', 'Nomtidev', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FatipdevPeer::CODTIDEV, FatipdevPeer::NOMTIDEV, FatipdevPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtidev', 'nomtidev', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nomtidev', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FatipdevPeer::NOMTIDEV, FatipdevPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nomtidev', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtidev' => 0, 'Nomtidev' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (FatipdevPeer::CODTIDEV => 0, FatipdevPeer::NOMTIDEV => 1, FatipdevPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtidev' => 0, 'nomtidev' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nomtidev' => 0, 'Id' => 1, ),
+		BasePeer::TYPE_COLNAME => array (FatipdevPeer::NOMTIDEV => 0, FatipdevPeer::ID => 1, ),
+		BasePeer::TYPE_FIELDNAME => array ('nomtidev' => 0, 'id' => 1, ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
@@ -98,8 +95,6 @@ abstract class BaseFatipdevPeer {
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
-
-		$criteria->addSelectColumn(FatipdevPeer::CODTIDEV);
 
 		$criteria->addSelectColumn(FatipdevPeer::NOMTIDEV);
 
@@ -205,6 +200,7 @@ abstract class BaseFatipdevPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FatipdevPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

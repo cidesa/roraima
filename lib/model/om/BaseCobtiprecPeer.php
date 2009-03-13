@@ -225,6 +225,7 @@ abstract class BaseCobtiprecPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobtiprecPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

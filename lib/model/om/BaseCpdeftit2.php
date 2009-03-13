@@ -45,164 +45,194 @@ abstract class BaseCpdeftit2 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpre()
-	{
+  
+  public function getCodpre()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getNompre()
-	{
+    return trim($this->codpre);
 
-		return $this->nompre; 		
-	}
-	
-	public function getCodcta()
-	{
+  }
+  
+  public function getNompre()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getStacod()
-	{
+    return trim($this->nompre);
 
-		return $this->stacod; 		
-	}
-	
-	public function getCoduni()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getEstatus()
-	{
+    return trim($this->codcta);
 
-		return $this->estatus; 		
-	}
-	
-	public function getCodtip()
-	{
+  }
+  
+  public function getStacod()
+  {
 
-		return $this->codtip; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->stacod);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCoduni()
+  {
+
+    return trim($this->coduni);
+
+  }
+  
+  public function getEstatus()
+  {
+
+    return trim($this->estatus);
+
+  }
+  
+  public function getCodtip()
+  {
+
+    return trim($this->codtip);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = Cpdeftit2Peer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = Cpdeftit2Peer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNompre($v)
 	{
 
-		if ($this->nompre !== $v) {
-			$this->nompre = $v;
-			$this->modifiedColumns[] = Cpdeftit2Peer::NOMPRE;
-		}
-
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = Cpdeftit2Peer::NOMPRE;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = Cpdeftit2Peer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = Cpdeftit2Peer::CODCTA;
+      }
+  
 	} 
 	
 	public function setStacod($v)
 	{
 
-		if ($this->stacod !== $v) {
-			$this->stacod = $v;
-			$this->modifiedColumns[] = Cpdeftit2Peer::STACOD;
-		}
-
+    if ($this->stacod !== $v) {
+        $this->stacod = $v;
+        $this->modifiedColumns[] = Cpdeftit2Peer::STACOD;
+      }
+  
 	} 
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = Cpdeftit2Peer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = Cpdeftit2Peer::CODUNI;
+      }
+  
 	} 
 	
 	public function setEstatus($v)
 	{
 
-		if ($this->estatus !== $v) {
-			$this->estatus = $v;
-			$this->modifiedColumns[] = Cpdeftit2Peer::ESTATUS;
-		}
-
+    if ($this->estatus !== $v) {
+        $this->estatus = $v;
+        $this->modifiedColumns[] = Cpdeftit2Peer::ESTATUS;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = Cpdeftit2Peer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = Cpdeftit2Peer::CODTIP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Cpdeftit2Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Cpdeftit2Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpre = $rs->getString($startcol + 0);
+      $this->codpre = $rs->getString($startcol + 0);
 
-			$this->nompre = $rs->getString($startcol + 1);
+      $this->nompre = $rs->getString($startcol + 1);
 
-			$this->codcta = $rs->getString($startcol + 2);
+      $this->codcta = $rs->getString($startcol + 2);
 
-			$this->stacod = $rs->getString($startcol + 3);
+      $this->stacod = $rs->getString($startcol + 3);
 
-			$this->coduni = $rs->getString($startcol + 4);
+      $this->coduni = $rs->getString($startcol + 4);
 
-			$this->estatus = $rs->getString($startcol + 5);
+      $this->estatus = $rs->getString($startcol + 5);
 
-			$this->codtip = $rs->getString($startcol + 6);
+      $this->codtip = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpdeftit2 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpdeftit2 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

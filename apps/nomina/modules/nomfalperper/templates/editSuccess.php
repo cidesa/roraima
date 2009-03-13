@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición Permisos', 
+<h1><?php echo __('Edición Permisos',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('nomfalperper/edit_messages', array('nphojint' => $nphojint, 'labels' => $labels)) ?>
-<?php include_partial('nomfalperper/edit_form', array('nphojint' => $nphojint, 'labels' => $labels, 'pagerNpfalper' => $pagerNpfalper)) ?>
+<?php include_partial('nomfalperper/edit_form', array('nphojint' => $nphojint, 'labels' => $labels, 'pagerNpfalper' => $pagerNpfalper, 'obj' => $obj)) ?>
 </div>
 
 <div id="sf_admin_footer">

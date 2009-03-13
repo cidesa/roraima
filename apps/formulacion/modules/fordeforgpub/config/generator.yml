@@ -3,23 +3,28 @@ generator:
   param:
     model_class:      Fordeforgpub
     theme:            default
-
     fields:
-      codorg:      { name : Codigo }
-      nomorg:      { name : Descripción }  
-      ubiorg:      { name : Ubicación }  
+      codorg:      { name : Codigo, params: maxlength=4 }
+      nomorg:      { name : Nombre }  
+      ubiorg:      { name : UbicaciÃ³n }  
       tiporg:      { name : Tipo de Organismo }  
-      preanu:      { name : Presupuesto Anual }  
-      capsoc:      { name : Capital Social }      
+      preanu:      { name : Presupuesto Anual Bs. }  
+      capsoc:      { name : Capital Social Bs.}      
 
     list:
-      title:          Definición de Organismo Publico
-      display:        [codorg, nomorg]
-      filters:        [codorg]
+      title:          DefiniciÃ³n de Organismos PÃºblicos
+      display:        [=codorg, nomorg]
+      filters:        [codorg, nomorg]
       object_actions:
         _edit:        ~
         _delete:      ~              
       max_per_page:   5    
+      sort:       codorg
     edit:
-      title:          Definición de Organismo Publico
-      display:        [codorg, nomorg, ubiorg, tiporg, preanu, capsoc]      
+      title:          EdiciÃ³n de Organismos PÃºblicos
+      display:       [codorg, nomorg, ubiorg, tiporg, preanu, capsoc]  
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

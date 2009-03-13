@@ -260,6 +260,7 @@ abstract class BaseBndisinmPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BndisinmPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

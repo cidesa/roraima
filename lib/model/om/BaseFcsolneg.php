@@ -53,223 +53,254 @@ abstract class BaseFcsolneg extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumneg()
-	{
+  
+  public function getNumneg()
+  {
 
-		return $this->numneg; 		
-	}
-	
-	public function getNumsol()
-	{
+    return trim($this->numneg);
 
-		return $this->numsol; 		
-	}
-	
-	public function getMotneg()
-	{
+  }
+  
+  public function getNumsol()
+  {
 
-		return $this->motneg; 		
-	}
-	
-	public function getFecneg($format = 'Y-m-d')
-	{
+    return trim($this->numsol);
 
-		if ($this->fecneg === null || $this->fecneg === '') {
-			return null;
-		} elseif (!is_int($this->fecneg)) {
-						$ts = strtotime($this->fecneg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecneg] as date/time value: " . var_export($this->fecneg, true));
-			}
-		} else {
-			$ts = $this->fecneg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMotneg()
+  {
 
-	
-	public function getResolu()
-	{
+    return trim($this->motneg);
 
-		return $this->resolu; 		
-	}
-	
-	public function getTomon()
-	{
+  }
+  
+  public function getFecneg($format = 'Y-m-d')
+  {
 
-		return $this->tomon; 		
-	}
-	
-	public function getFolion()
-	{
+    if ($this->fecneg === null || $this->fecneg === '') {
+      return null;
+    } elseif (!is_int($this->fecneg)) {
+            $ts = adodb_strtotime($this->fecneg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecneg] as date/time value: " . var_export($this->fecneg, true));
+      }
+    } else {
+      $ts = $this->fecneg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->folion; 		
-	}
-	
-	public function getNumeron()
-	{
+  
+  public function getResolu()
+  {
 
-		return $this->numeron; 		
-	}
-	
-	public function getFunneg()
-	{
+    return trim($this->resolu);
 
-		return $this->funneg; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTomon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tomon);
+
+  }
+  
+  public function getFolion()
+  {
+
+    return trim($this->folion);
+
+  }
+  
+  public function getNumeron()
+  {
+
+    return trim($this->numeron);
+
+  }
+  
+  public function getFunneg()
+  {
+
+    return trim($this->funneg);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumneg($v)
 	{
 
-		if ($this->numneg !== $v) {
-			$this->numneg = $v;
-			$this->modifiedColumns[] = FcsolnegPeer::NUMNEG;
-		}
-
+    if ($this->numneg !== $v) {
+        $this->numneg = $v;
+        $this->modifiedColumns[] = FcsolnegPeer::NUMNEG;
+      }
+  
 	} 
 	
 	public function setNumsol($v)
 	{
 
-		if ($this->numsol !== $v) {
-			$this->numsol = $v;
-			$this->modifiedColumns[] = FcsolnegPeer::NUMSOL;
-		}
-
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = FcsolnegPeer::NUMSOL;
+      }
+  
 	} 
 	
 	public function setMotneg($v)
 	{
 
-		if ($this->motneg !== $v) {
-			$this->motneg = $v;
-			$this->modifiedColumns[] = FcsolnegPeer::MOTNEG;
-		}
-
+    if ($this->motneg !== $v) {
+        $this->motneg = $v;
+        $this->modifiedColumns[] = FcsolnegPeer::MOTNEG;
+      }
+  
 	} 
 	
 	public function setFecneg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecneg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecneg !== $ts) {
-			$this->fecneg = $ts;
-			$this->modifiedColumns[] = FcsolnegPeer::FECNEG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecneg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecneg !== $ts) {
+      $this->fecneg = $ts;
+      $this->modifiedColumns[] = FcsolnegPeer::FECNEG;
+    }
 
 	} 
 	
 	public function setResolu($v)
 	{
 
-		if ($this->resolu !== $v) {
-			$this->resolu = $v;
-			$this->modifiedColumns[] = FcsolnegPeer::RESOLU;
-		}
-
+    if ($this->resolu !== $v) {
+        $this->resolu = $v;
+        $this->modifiedColumns[] = FcsolnegPeer::RESOLU;
+      }
+  
 	} 
 	
 	public function setTomon($v)
 	{
 
-		if ($this->tomon !== $v) {
-			$this->tomon = $v;
-			$this->modifiedColumns[] = FcsolnegPeer::TOMON;
-		}
-
+    if ($this->tomon !== $v) {
+        $this->tomon = $v;
+        $this->modifiedColumns[] = FcsolnegPeer::TOMON;
+      }
+  
 	} 
 	
 	public function setFolion($v)
 	{
 
-		if ($this->folion !== $v) {
-			$this->folion = $v;
-			$this->modifiedColumns[] = FcsolnegPeer::FOLION;
-		}
-
+    if ($this->folion !== $v) {
+        $this->folion = $v;
+        $this->modifiedColumns[] = FcsolnegPeer::FOLION;
+      }
+  
 	} 
 	
 	public function setNumeron($v)
 	{
 
-		if ($this->numeron !== $v) {
-			$this->numeron = $v;
-			$this->modifiedColumns[] = FcsolnegPeer::NUMERON;
-		}
-
+    if ($this->numeron !== $v) {
+        $this->numeron = $v;
+        $this->modifiedColumns[] = FcsolnegPeer::NUMERON;
+      }
+  
 	} 
 	
 	public function setFunneg($v)
 	{
 
-		if ($this->funneg !== $v) {
-			$this->funneg = $v;
-			$this->modifiedColumns[] = FcsolnegPeer::FUNNEG;
-		}
-
+    if ($this->funneg !== $v) {
+        $this->funneg = $v;
+        $this->modifiedColumns[] = FcsolnegPeer::FUNNEG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcsolnegPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcsolnegPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numneg = $rs->getString($startcol + 0);
+      $this->numneg = $rs->getString($startcol + 0);
 
-			$this->numsol = $rs->getString($startcol + 1);
+      $this->numsol = $rs->getString($startcol + 1);
 
-			$this->motneg = $rs->getString($startcol + 2);
+      $this->motneg = $rs->getString($startcol + 2);
 
-			$this->fecneg = $rs->getDate($startcol + 3, null);
+      $this->fecneg = $rs->getDate($startcol + 3, null);
 
-			$this->resolu = $rs->getString($startcol + 4);
+      $this->resolu = $rs->getString($startcol + 4);
 
-			$this->tomon = $rs->getString($startcol + 5);
+      $this->tomon = $rs->getString($startcol + 5);
 
-			$this->folion = $rs->getString($startcol + 6);
+      $this->folion = $rs->getString($startcol + 6);
 
-			$this->numeron = $rs->getString($startcol + 7);
+      $this->numeron = $rs->getString($startcol + 7);
 
-			$this->funneg = $rs->getString($startcol + 8);
+      $this->funneg = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcsolneg object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcsolneg object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -326,6 +357,7 @@ abstract class BaseFcsolneg extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcsolnegPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcsolnegPeer::doUpdate($this, $con);

@@ -1,0 +1,626 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  cobclient:
+    #_attributes:
+      #idMethod: native
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    nomcli:
+      type: VARCHAR
+      size: 50
+      required: true
+    rifcli:
+      type: VARCHAR
+      size: 15
+    nitcli:
+      type: VARCHAR
+      size: 15
+    dircli:
+      type: VARCHAR
+      size: 100
+    telcli:
+      type: VARCHAR
+      size: 30
+    faxcli:
+      type: VARCHAR
+      size: 15
+    email:
+      type: VARCHAR
+      size: 100
+    tipper:
+      type: VARCHAR
+      size: 1
+    naccli:
+      type: VARCHAR
+      size: 1
+    limcre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcta:
+      type: VARCHAR
+      size: 18
+    regmer:
+      type: VARCHAR
+      size: 15
+    fecreg:
+      type: DATE
+    tomreg:
+      type: VARCHAR
+      size: 15
+    folreg:
+      type: VARCHAR
+      size: 15
+    capsus:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cappag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cirepleg:
+      type: VARCHAR
+      size: 15
+    nomrepleg:
+      type: VARCHAR
+      size: 50
+    dirrepleg:
+      type: VARCHAR
+      size: 100
+    riffia:
+      type: VARCHAR
+      size: 15
+    nomfia:
+      type: VARCHAR
+      size: 50
+    dirfia:
+      type: VARCHAR
+      size: 100
+    telfia:
+      type: VARCHAR
+      size: 15
+    codciu:
+      type: VARCHAR
+      size: 4
+    codedo:
+      type: VARCHAR
+      size: 4
+    codpai:
+      type: VARCHAR
+      size: 4
+    fecnac:
+      type: DATE
+    tipcli:
+      type: VARCHAR
+      size: 4
+    codtiprec:
+      type: VARCHAR
+      size: 4
+    codordmercon:
+      type: VARCHAR
+      size: 32
+    codpermercon:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobdesdoc:
+    #_attributes:
+      #idMethod: native
+    refdoc:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+    coddes:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    fecdes:
+      type: DATE
+    mondes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobdestra:
+    #_attributes:
+      #idMethod: native
+    numtra:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    refdoc:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+    coddes:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    fecdes:
+      type: DATE
+    mondes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobdetfor:
+    #_attributes:
+      #idMethod: native
+    numtra:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    correl:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codfor:
+      type: VARCHAR
+      size: 4
+      required: true
+    numide:
+      type: VARCHAR
+      size: 20
+    codban:
+      type: VARCHAR
+      size: 3
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobdettra:
+    #_attributes:
+      #idMethod: native
+    numtra:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    refdoc:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+    correl:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondsc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobdocume:
+    #_attributes:
+      #idMethod: native
+    refdoc:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codmov:
+      type: VARCHAR
+      size: 3
+      required: true
+    fecemi:
+      type: DATE
+      required: true
+    fecven:
+      type: DATE
+    oridoc:
+      type: VARCHAR
+      size: 3
+    desdoc:
+      type: VARCHAR
+      size: 100
+    mondoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    recdoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    dscdoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    abodoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    saldoc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    desanu:
+      type: VARCHAR
+      size: 100
+    fecanu:
+      type: DATE
+    stadoc:
+      type: VARCHAR
+      size: 1
+    numcom:
+      type: VARCHAR
+      size: 8
+    feccom:
+      type: DATE
+    reffac:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      iicobdocume:
+        - refdoc
+        - codcli
+        - codmov
+        - fecemi
+  cobpagban:
+    #_attributes:
+      #idMethod: native
+    codban:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    nomban:
+      type: VARCHAR
+      size: 50
+    dirban:
+      type: VARCHAR
+      size: 100
+    telban:
+      type: VARCHAR
+      size: 15
+    faxban:
+      type: VARCHAR
+      size: 15
+    emaban:
+      type: VARCHAR
+      size: 40
+    conban:
+      type: VARCHAR
+      size: 50
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobpagemp:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 3
+    faxemp:
+      type: VARCHAR
+      size: 15
+    ctacob:
+      type: VARCHAR
+      size: 32
+    ctapag:
+      type: VARCHAR
+      size: 32
+    codiva:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobreccli:
+    #_attributes:
+      #idMethod: native
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codrec:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobrecdoc:
+    #_attributes:
+      #idMethod: native
+    refdoc:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+    codrec:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    fecrec:
+      type: DATE
+    monrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobrectra:
+    #_attributes:
+      #idMethod: native
+    numtra:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    refdoc:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+    codrec:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    fecrec:
+      type: DATE
+    monrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobregges:
+    #_attributes:
+      #idMethod: native
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    numges:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    fecges:
+      type: DATE
+    nomcon:
+      type: VARCHAR
+      size: 50
+    obsges:
+      type: VARCHAR
+      size: 4000
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobtipdes:
+    #_attributes:
+      #idMethod: native
+    coddes:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    desdes:
+      type: VARCHAR
+      size: 50
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 32
+      required: true
+    tipdes:
+      type: VARCHAR
+      size: 1
+      required: true
+    valdes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    diades:
+      type: NUMERIC
+      size: 14
+      required: true
+    estret:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobtipmov:
+    #_attributes:
+      #idMethod: native
+    codmov:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    desmov:
+      type: VARCHAR
+      size: 50
+    nomabr:
+      type: VARCHAR
+      size: 4
+    debcre:
+      type: VARCHAR
+      size: 1
+    ctacon:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobtiprec:
+    #_attributes:
+      #idMethod: native
+    codrec:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    desrec:
+      type: VARCHAR
+      size: 50
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 32
+      required: true
+    tiprec:
+      type: VARCHAR
+      size: 1
+      required: true
+    valrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    diarec:
+      type: NUMERIC
+      size: 14
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  cobtransa:
+    #_attributes:
+      #idMethod: native
+    numtra:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    fectra:
+      type: DATE
+      required: true
+    codcli:
+      type: VARCHAR
+      size: 10
+      required: true
+      ##primaryKey: true
+    codmov:
+      type: VARCHAR
+      size: 3
+      required: true
+    destra:
+      type: VARCHAR
+      size: 100
+    montra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totdsc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tottra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    status:
+      type: VARCHAR
+      size: 1
+    numcom:
+      type: VARCHAR
+      size: 8
+    feccom:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      iicobtransa:
+        - numtra
+        - codcli
+        - codmov
+        - fectra

@@ -9,4 +9,5 @@
  */ 
 class BnseginmPeer extends BaseBnseginmPeer
 {
+
 }

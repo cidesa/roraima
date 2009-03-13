@@ -1,0 +1,48 @@
+methods:
+  post:
+   - "iningprof{codingprof}"
+   - "iningprof{desingprof}"
+   - "iningprof{unitri}"
+   - "iningprof{intipsol_id}"
+
+names:
+  iningprof{codingprof}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codingprof
+
+  iningprof{desingprof}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desingprof
+
+  iningprof{unitri}:
+    required:  Yes
+    required_msg: Las unidades tributarias no pueden estar en blanco
+    validators: Validator_unitri
+
+  iningprof{intipsol_id}:
+    required:  Yes
+    required_msg: Debe seleccionar un Tipo de Solicitud
+
+
+Validator_codingprof:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Iningprof
+        column:       codingprof
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desingprof:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres
+
+Validator_unitri:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos

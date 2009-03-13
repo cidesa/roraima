@@ -49,205 +49,235 @@ abstract class BaseFctrainm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumtra()
-	{
+  
+  public function getNumtra()
+  {
 
-		return $this->numtra; 		
-	}
-	
-	public function getNroinm()
-	{
+    return trim($this->numtra);
 
-		return $this->nroinm; 		
-	}
-	
-	public function getFectra($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNroinm()
+  {
 
-		if ($this->fectra === null || $this->fectra === '') {
-			return null;
-		} elseif (!is_int($this->fectra)) {
-						$ts = strtotime($this->fectra);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fectra] as date/time value: " . var_export($this->fectra, true));
-			}
-		} else {
-			$ts = $this->fectra;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->nroinm);
 
-	
-	public function getRifcon()
-	{
+  }
+  
+  public function getFectra($format = 'Y-m-d')
+  {
 
-		return $this->rifcon; 		
-	}
-	
-	public function getRifrep()
-	{
+    if ($this->fectra === null || $this->fectra === '') {
+      return null;
+    } elseif (!is_int($this->fectra)) {
+            $ts = adodb_strtotime($this->fectra);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fectra] as date/time value: " . var_export($this->fectra, true));
+      }
+    } else {
+      $ts = $this->fectra;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->rifrep; 		
-	}
-	
-	public function getRifconant()
-	{
+  
+  public function getRifcon()
+  {
 
-		return $this->rifconant; 		
-	}
-	
-	public function getRifrepant()
-	{
+    return trim($this->rifcon);
 
-		return $this->rifrepant; 		
-	}
-	
-	public function getFunrec()
-	{
+  }
+  
+  public function getRifrep()
+  {
 
-		return $this->funrec; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->rifrep);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getRifconant()
+  {
+
+    return trim($this->rifconant);
+
+  }
+  
+  public function getRifrepant()
+  {
+
+    return trim($this->rifrepant);
+
+  }
+  
+  public function getFunrec()
+  {
+
+    return trim($this->funrec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumtra($v)
 	{
 
-		if ($this->numtra !== $v) {
-			$this->numtra = $v;
-			$this->modifiedColumns[] = FctrainmPeer::NUMTRA;
-		}
-
+    if ($this->numtra !== $v) {
+        $this->numtra = $v;
+        $this->modifiedColumns[] = FctrainmPeer::NUMTRA;
+      }
+  
 	} 
 	
 	public function setNroinm($v)
 	{
 
-		if ($this->nroinm !== $v) {
-			$this->nroinm = $v;
-			$this->modifiedColumns[] = FctrainmPeer::NROINM;
-		}
-
+    if ($this->nroinm !== $v) {
+        $this->nroinm = $v;
+        $this->modifiedColumns[] = FctrainmPeer::NROINM;
+      }
+  
 	} 
 	
 	public function setFectra($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fectra] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fectra !== $ts) {
-			$this->fectra = $ts;
-			$this->modifiedColumns[] = FctrainmPeer::FECTRA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fectra] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fectra !== $ts) {
+      $this->fectra = $ts;
+      $this->modifiedColumns[] = FctrainmPeer::FECTRA;
+    }
 
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FctrainmPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FctrainmPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setRifrep($v)
 	{
 
-		if ($this->rifrep !== $v) {
-			$this->rifrep = $v;
-			$this->modifiedColumns[] = FctrainmPeer::RIFREP;
-		}
-
+    if ($this->rifrep !== $v) {
+        $this->rifrep = $v;
+        $this->modifiedColumns[] = FctrainmPeer::RIFREP;
+      }
+  
 	} 
 	
 	public function setRifconant($v)
 	{
 
-		if ($this->rifconant !== $v) {
-			$this->rifconant = $v;
-			$this->modifiedColumns[] = FctrainmPeer::RIFCONANT;
-		}
-
+    if ($this->rifconant !== $v) {
+        $this->rifconant = $v;
+        $this->modifiedColumns[] = FctrainmPeer::RIFCONANT;
+      }
+  
 	} 
 	
 	public function setRifrepant($v)
 	{
 
-		if ($this->rifrepant !== $v) {
-			$this->rifrepant = $v;
-			$this->modifiedColumns[] = FctrainmPeer::RIFREPANT;
-		}
-
+    if ($this->rifrepant !== $v) {
+        $this->rifrepant = $v;
+        $this->modifiedColumns[] = FctrainmPeer::RIFREPANT;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FctrainmPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FctrainmPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FctrainmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FctrainmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numtra = $rs->getString($startcol + 0);
+      $this->numtra = $rs->getString($startcol + 0);
 
-			$this->nroinm = $rs->getString($startcol + 1);
+      $this->nroinm = $rs->getString($startcol + 1);
 
-			$this->fectra = $rs->getDate($startcol + 2, null);
+      $this->fectra = $rs->getDate($startcol + 2, null);
 
-			$this->rifcon = $rs->getString($startcol + 3);
+      $this->rifcon = $rs->getString($startcol + 3);
 
-			$this->rifrep = $rs->getString($startcol + 4);
+      $this->rifrep = $rs->getString($startcol + 4);
 
-			$this->rifconant = $rs->getString($startcol + 5);
+      $this->rifconant = $rs->getString($startcol + 5);
 
-			$this->rifrepant = $rs->getString($startcol + 6);
+      $this->rifrepant = $rs->getString($startcol + 6);
 
-			$this->funrec = $rs->getString($startcol + 7);
+      $this->funrec = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fctrainm object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fctrainm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -304,6 +334,7 @@ abstract class BaseFctrainm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FctrainmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FctrainmPeer::doUpdate($this, $con);

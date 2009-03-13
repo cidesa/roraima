@@ -1,5 +1,5 @@
 all:
    .apps:
      autenticacion:    autenticacion
-     this:             hacienda      #cambiar en cada app
-     
+     max_per_page:     15
+     this:             compras      #cambiar en cada app

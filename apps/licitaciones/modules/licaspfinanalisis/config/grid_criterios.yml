@@ -1,0 +1,47 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   liaspfinanalis
+  ancho:				   550
+  anchogrid:               600
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Seleccione
+  tipo:                    k
+  nombrecampo:             seleccionado
+  html:                    [size="5" ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  liaspfincrieva_id
+  tipo:                    t
+  nombrecampo:             liaspfincrieva_id
+  html:                    [size="5"]
+  oculta:                  true
+  esgrabable:			   true
+2:       # Columna 2
+  titulo:                  Código Criterio
+  tipo:                    t
+  nombrecampo:             codcri
+  esgrabable:              true
+  html:                    [readonly=true size='8']
+3:       # Columna 3
+  titulo:                  Nombre Criterios
+  tipo:                    t
+  nombrecampo:             descri
+  esgrabable:              true
+  html:                    [readonly=true size=35]
+4:       # Columna 4
+  titulo:                  Puntaje
+  tipo:                    m
+  nombrecampo:             puntaje
+  esgrabable:			   true
+  html:                    [size=10]
+5:       # Columna 5
+  titulo:                  PuntajeFin
+  tipo:                    m
+  nombrecampo:             puntajeeval
+  esgrabable:			   false
+  oculta:                  true
+  html:                    [size=10]

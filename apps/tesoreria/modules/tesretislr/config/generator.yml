@@ -5,16 +5,23 @@ generator:
     theme:            default
     fields:
       numdep: { name: Deposito Nro., params: maxlength=20}
-      fecha:  { name: Fecha, params: date_format='dd/MM/yyyy'}            
-      banco:  { name: Banco} 
-      numord: { name: Cheque Nro., params: maxlength=8} 
+      feclib: { name: Fecha}
+      fecha:  { name: Fecha, params: date_format='dd/MM/yyyy'}
+      banco:  { name: Banco}
+      numord: { name: Cheque Nro., params: maxlength=8}
     list:
       title:          Enterar Retenciones ISLR
-      filters:        [numord, numdep, banco]
-      display:        [=numord, numdep, banco, fecha]
-      max_per_page:	  8
+      filters:        [numord, numdep]
+      display:        [=numord, numdep, fecha]
+      sort:           numord
+      max_per_page:	  5
       object_actions:
         _edit:        ~
         _delete:      ~
     edit:
-      title:          Edicion Enterar Retenciones ISLR   
+      title:          Edición Enterar Retenciones ISLR
+      display:        [=numord, feclib, numdep, fecha, banco]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~

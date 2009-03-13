@@ -1,0 +1,33 @@
+methods:
+  post:
+   - "fordefsubsubobj{codequ}"
+   - "fordefsubsubobj{codsubobj}"
+   - "fordefsubsubobj{codsubsubobj}"
+   - "fordefsubsubobj{dessubsubobj}"
+
+names:
+  fordefsubsubobj{codequ}:
+    required:  Yes
+    required_msg: Debe Seleccionar una Directriz.
+
+  fordefsubsubobj{codsubobj}:
+    required:  Yes
+    required_msg: Debe Seleccionar una Estrategia.
+
+  fordefsubsubobj{codsubsubobj}:
+    required:  Yes
+    required_msg: El Código de la Política no puede estar en Blanco.
+
+  fordefsubsubobj{dessubsubobj}:
+    required:  Yes
+    required_msg: La Descripción de la política no puede estar en Blanco.
+    validators: DescripcionValidator
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción de la política no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: La Descripción de la política no puede tener más de 1000 carácteres

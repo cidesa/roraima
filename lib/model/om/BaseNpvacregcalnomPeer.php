@@ -235,6 +235,7 @@ abstract class BaseNpvacregcalnomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpvacregcalnomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

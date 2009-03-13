@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "ocregact{codcon}"
+   - "ocregact{codtipact}"
+
+names:
+  ocregact{codcon}:
+    required:  Yes
+    required_msg: El Codigo no puedo estar en Blanco
+    validators: Validator_codcon
+
+  ocregact{codtipact}:
+    required:  Yes
+    required_msg: El Tipo de Acta no puedo estar en Blanco
+    validators: Acta_Validator
+
+Validator_codcon:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Ocregact
+        column:   codcon
+        unique_error:   El Código ya existe. Por Favor, Intente con otro.
+
+Acta_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Octipact
+        column:   codtipact
+        unique_error: El Código del Acta no existe.

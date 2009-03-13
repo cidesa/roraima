@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fcestinm
+    theme:            cidesaGenerator
+
+    fields:
+      codestinm:	{ name: Código, params: size=6}
+      desestinm:	{ name: Descripcion, params: size=40 maxlength=240}
+    list:
+      title:     Definición Tipos de Inmuebles
+      display:   [=codestinm, desestinm]
+      sort:      desestinm
+      filters:   [codestinm, desestinm]
+      fields:
+        desestinm:
+          params: size=18
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  codestinm
+    edit:
+      title:          Edición Tipos de Inmuebles
+      display:
+        "Datos Generales":   [ _codestinm, desestinm ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

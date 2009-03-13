@@ -210,6 +210,7 @@ abstract class BaseBnclafunPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BnclafunPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

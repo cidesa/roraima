@@ -61,284 +61,316 @@ abstract class BaseNprelconqui extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodnom()
-	{
+    return trim($this->codemp);
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCantidad()
-	{
+    return trim($this->codnom);
 
-		return number_format($this->cantidad,2,',','.');
-		
-	}
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    return trim($this->codcon);
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCantidad($val=false)
+  {
 
-	
-	public function getFecexp($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->cantidad,2,',','.');
+    else return $this->cantidad;
 
-		if ($this->fecexp === null || $this->fecexp === '') {
-			return null;
-		} elseif (!is_int($this->fecexp)) {
-						$ts = strtotime($this->fecexp);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
-			}
-		} else {
-			$ts = $this->fecexp;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMonto($val=false)
+  {
 
-	
-	public function getCalcon()
-	{
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
 
-		return $this->calcon; 		
-	}
-	
-	public function getActcon()
-	{
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		return $this->actcon; 		
-	}
-	
-	public function getNomsus()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->nomsus; 		
-	}
-	
-	public function getCodpre()
-	{
+  
+  public function getFecexp($format = 'Y-m-d')
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getId()
-	{
+    if ($this->fecexp === null || $this->fecexp === '') {
+      return null;
+    } elseif (!is_int($this->fecexp)) {
+            $ts = adodb_strtotime($this->fecexp);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
+      }
+    } else {
+      $ts = $this->fecexp;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getCalcon()
+  {
+
+    return trim($this->calcon);
+
+  }
+  
+  public function getActcon()
+  {
+
+    return trim($this->actcon);
+
+  }
+  
+  public function getNomsus()
+  {
+
+    return trim($this->nomsus);
+
+  }
+  
+  public function getCodpre()
+  {
+
+    return trim($this->codpre);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NprelconquiPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NprelconquiPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NprelconquiPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCantidad($v)
 	{
 
-		if ($this->cantidad !== $v) {
-			$this->cantidad = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::CANTIDAD;
-		}
-
+    if ($this->cantidad !== $v) {
+        $this->cantidad = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NprelconquiPeer::CANTIDAD;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NprelconquiPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = NprelconquiPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = NprelconquiPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecexp($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecexp !== $ts) {
-			$this->fecexp = $ts;
-			$this->modifiedColumns[] = NprelconquiPeer::FECEXP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecexp !== $ts) {
+      $this->fecexp = $ts;
+      $this->modifiedColumns[] = NprelconquiPeer::FECEXP;
+    }
 
 	} 
 	
 	public function setCalcon($v)
 	{
 
-		if ($this->calcon !== $v) {
-			$this->calcon = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::CALCON;
-		}
-
+    if ($this->calcon !== $v) {
+        $this->calcon = $v;
+        $this->modifiedColumns[] = NprelconquiPeer::CALCON;
+      }
+  
 	} 
 	
 	public function setActcon($v)
 	{
 
-		if ($this->actcon !== $v) {
-			$this->actcon = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::ACTCON;
-		}
-
+    if ($this->actcon !== $v) {
+        $this->actcon = $v;
+        $this->modifiedColumns[] = NprelconquiPeer::ACTCON;
+      }
+  
 	} 
 	
 	public function setNomsus($v)
 	{
 
-		if ($this->nomsus !== $v) {
-			$this->nomsus = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::NOMSUS;
-		}
-
+    if ($this->nomsus !== $v) {
+        $this->nomsus = $v;
+        $this->modifiedColumns[] = NprelconquiPeer::NOMSUS;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = NprelconquiPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NprelconquiPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NprelconquiPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codnom = $rs->getString($startcol + 1);
+      $this->codnom = $rs->getString($startcol + 1);
 
-			$this->codcon = $rs->getString($startcol + 2);
+      $this->codcon = $rs->getString($startcol + 2);
 
-			$this->cantidad = $rs->getFloat($startcol + 3);
+      $this->cantidad = $rs->getFloat($startcol + 3);
 
-			$this->monto = $rs->getFloat($startcol + 4);
+      $this->monto = $rs->getFloat($startcol + 4);
 
-			$this->fecini = $rs->getDate($startcol + 5, null);
+      $this->fecini = $rs->getDate($startcol + 5, null);
 
-			$this->fecexp = $rs->getDate($startcol + 6, null);
+      $this->fecexp = $rs->getDate($startcol + 6, null);
 
-			$this->calcon = $rs->getString($startcol + 7);
+      $this->calcon = $rs->getString($startcol + 7);
 
-			$this->actcon = $rs->getString($startcol + 8);
+      $this->actcon = $rs->getString($startcol + 8);
 
-			$this->nomsus = $rs->getString($startcol + 9);
+      $this->nomsus = $rs->getString($startcol + 9);
 
-			$this->codpre = $rs->getString($startcol + 10);
+      $this->codpre = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nprelconqui object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nprelconqui object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -395,6 +427,7 @@ abstract class BaseNprelconqui extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NprelconquiPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NprelconquiPeer::doUpdate($this, $con);

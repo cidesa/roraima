@@ -29,92 +29,118 @@ abstract class BaseForasoactuni extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmet()
-	{
+  
+  public function getCodmet()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getCodunimet()
-	{
+    return trim($this->codmet);
 
-		return $this->codunimet; 		
-	}
-	
-	public function getCodact()
-	{
+  }
+  
+  public function getCodunimet()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codunimet);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodact()
+  {
+
+    return trim($this->codact);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = ForasoactuniPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = ForasoactuniPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setCodunimet($v)
 	{
 
-		if ($this->codunimet !== $v) {
-			$this->codunimet = $v;
-			$this->modifiedColumns[] = ForasoactuniPeer::CODUNIMET;
-		}
-
+    if ($this->codunimet !== $v) {
+        $this->codunimet = $v;
+        $this->modifiedColumns[] = ForasoactuniPeer::CODUNIMET;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = ForasoactuniPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = ForasoactuniPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForasoactuniPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForasoactuniPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmet = $rs->getString($startcol + 0);
+      $this->codmet = $rs->getString($startcol + 0);
 
-			$this->codunimet = $rs->getString($startcol + 1);
+      $this->codunimet = $rs->getString($startcol + 1);
 
-			$this->codact = $rs->getString($startcol + 2);
+      $this->codact = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forasoactuni object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forasoactuni object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

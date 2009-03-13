@@ -205,6 +205,7 @@ abstract class BaseOcproespPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcproespPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

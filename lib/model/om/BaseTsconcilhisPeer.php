@@ -255,6 +255,7 @@ abstract class BaseTsconcilhisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsconcilhisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

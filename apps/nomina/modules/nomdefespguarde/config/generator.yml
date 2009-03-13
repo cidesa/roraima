@@ -5,19 +5,25 @@ generator:
     theme:            default
 
     fields:
-      codcon:    { name: Concepto}
-      nomgua:    { name: Descripcion de Concepto}
-      nomcon:    { name: Nombre de Guarderia}
+      codcon:    { name: Concepto, params: maxlength=3,size=5 }
+      nomcon:    { name: Descripción de Concepto}
+      nomgua:    { name: Nombre de Guardería}
 
     list:
-      title:          Definicion de Guarderias
+      title:          Definición de Guarderías
       filters:		  [codcon, nomgua]
-      display:        [=codcon, nomgua, nomcon]
+      display:        [=codcon, nomcon, nomgua]
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+      sort:   codcon
+
     edit:
-      title:          Edicion de Guarderias
-      #display:        [codcon, nomnom, codconpor, nomcon, codconimp, nomconimp]    
+      title:          Edición de Guarderías
+      display:        [codcon, nomcon, nomgua]
+      actions:
+        _list:         ~
+        _save:         ~
+        _delete:       ~
+        _create:       ~

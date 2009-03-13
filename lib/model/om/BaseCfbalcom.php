@@ -49,185 +49,216 @@ abstract class BaseCfbalcom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getOrden()
-	{
+  
+  public function getOrden()
+  {
 
-		return $this->orden; 		
-	}
-	
-	public function getTitulo()
-	{
+    return trim($this->orden);
 
-		return $this->titulo; 		
-	}
-	
-	public function getCuenta()
-	{
+  }
+  
+  public function getTitulo()
+  {
 
-		return $this->cuenta; 		
-	}
-	
-	public function getNombre()
-	{
+    return trim($this->titulo);
 
-		return $this->nombre; 		
-	}
-	
-	public function getDebito()
-	{
+  }
+  
+  public function getCuenta()
+  {
 
-		return number_format($this->debito,2,',','.');
-		
-	}
-	
-	public function getCredito()
-	{
+    return trim($this->cuenta);
 
-		return number_format($this->credito,2,',','.');
-		
-	}
-	
-	public function getSaldo()
-	{
+  }
+  
+  public function getNombre()
+  {
 
-		return number_format($this->saldo,2,',','.');
-		
-	}
-	
-	public function getCargable()
-	{
+    return trim($this->nombre);
 
-		return $this->cargable; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDebito($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->debito,2,',','.');
+    else return $this->debito;
+
+  }
+  
+  public function getCredito($val=false)
+  {
+
+    if($val) return number_format($this->credito,2,',','.');
+    else return $this->credito;
+
+  }
+  
+  public function getSaldo($val=false)
+  {
+
+    if($val) return number_format($this->saldo,2,',','.');
+    else return $this->saldo;
+
+  }
+  
+  public function getCargable()
+  {
+
+    return trim($this->cargable);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setOrden($v)
 	{
 
-		if ($this->orden !== $v) {
-			$this->orden = $v;
-			$this->modifiedColumns[] = CfbalcomPeer::ORDEN;
-		}
-
+    if ($this->orden !== $v) {
+        $this->orden = $v;
+        $this->modifiedColumns[] = CfbalcomPeer::ORDEN;
+      }
+  
 	} 
 	
 	public function setTitulo($v)
 	{
 
-		if ($this->titulo !== $v) {
-			$this->titulo = $v;
-			$this->modifiedColumns[] = CfbalcomPeer::TITULO;
-		}
-
+    if ($this->titulo !== $v) {
+        $this->titulo = $v;
+        $this->modifiedColumns[] = CfbalcomPeer::TITULO;
+      }
+  
 	} 
 	
 	public function setCuenta($v)
 	{
 
-		if ($this->cuenta !== $v) {
-			$this->cuenta = $v;
-			$this->modifiedColumns[] = CfbalcomPeer::CUENTA;
-		}
-
+    if ($this->cuenta !== $v) {
+        $this->cuenta = $v;
+        $this->modifiedColumns[] = CfbalcomPeer::CUENTA;
+      }
+  
 	} 
 	
 	public function setNombre($v)
 	{
 
-		if ($this->nombre !== $v) {
-			$this->nombre = $v;
-			$this->modifiedColumns[] = CfbalcomPeer::NOMBRE;
-		}
-
+    if ($this->nombre !== $v) {
+        $this->nombre = $v;
+        $this->modifiedColumns[] = CfbalcomPeer::NOMBRE;
+      }
+  
 	} 
 	
 	public function setDebito($v)
 	{
 
-		if ($this->debito !== $v) {
-			$this->debito = $v;
-			$this->modifiedColumns[] = CfbalcomPeer::DEBITO;
-		}
-
+    if ($this->debito !== $v) {
+        $this->debito = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CfbalcomPeer::DEBITO;
+      }
+  
 	} 
 	
 	public function setCredito($v)
 	{
 
-		if ($this->credito !== $v) {
-			$this->credito = $v;
-			$this->modifiedColumns[] = CfbalcomPeer::CREDITO;
-		}
-
+    if ($this->credito !== $v) {
+        $this->credito = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CfbalcomPeer::CREDITO;
+      }
+  
 	} 
 	
 	public function setSaldo($v)
 	{
 
-		if ($this->saldo !== $v) {
-			$this->saldo = $v;
-			$this->modifiedColumns[] = CfbalcomPeer::SALDO;
-		}
-
+    if ($this->saldo !== $v) {
+        $this->saldo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CfbalcomPeer::SALDO;
+      }
+  
 	} 
 	
 	public function setCargable($v)
 	{
 
-		if ($this->cargable !== $v) {
-			$this->cargable = $v;
-			$this->modifiedColumns[] = CfbalcomPeer::CARGABLE;
-		}
-
+    if ($this->cargable !== $v) {
+        $this->cargable = $v;
+        $this->modifiedColumns[] = CfbalcomPeer::CARGABLE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CfbalcomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CfbalcomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->orden = $rs->getString($startcol + 0);
+      $this->orden = $rs->getString($startcol + 0);
 
-			$this->titulo = $rs->getString($startcol + 1);
+      $this->titulo = $rs->getString($startcol + 1);
 
-			$this->cuenta = $rs->getString($startcol + 2);
+      $this->cuenta = $rs->getString($startcol + 2);
 
-			$this->nombre = $rs->getString($startcol + 3);
+      $this->nombre = $rs->getString($startcol + 3);
 
-			$this->debito = $rs->getFloat($startcol + 4);
+      $this->debito = $rs->getFloat($startcol + 4);
 
-			$this->credito = $rs->getFloat($startcol + 5);
+      $this->credito = $rs->getFloat($startcol + 5);
 
-			$this->saldo = $rs->getFloat($startcol + 6);
+      $this->saldo = $rs->getFloat($startcol + 6);
 
-			$this->cargable = $rs->getString($startcol + 7);
+      $this->cargable = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cfbalcom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cfbalcom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -69,297 +69,332 @@ abstract class BaseNpcienom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codnom);
 
-		return $this->codcon; 		
-	}
-	
-	public function getFecnom($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		if ($this->fecnom === null || $this->fecnom === '') {
-			return null;
-		} elseif (!is_int($this->fecnom)) {
-						$ts = strtotime($this->fecnom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnom] as date/time value: " . var_export($this->fecnom, true));
-			}
-		} else {
-			$ts = $this->fecnom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codcon);
 
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getFecnom($format = 'Y-m-d')
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getCodcta()
-	{
+    if ($this->fecnom === null || $this->fecnom === '') {
+      return null;
+    } elseif (!is_int($this->fecnom)) {
+            $ts = adodb_strtotime($this->fecnom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnom] as date/time value: " . var_export($this->fecnom, true));
+      }
+    } else {
+      $ts = $this->fecnom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codcta; 		
-	}
-	
-	public function getMonto()
-	{
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getAsided()
-	{
+    return trim($this->codpre);
 
-		return $this->asided; 		
-	}
-	
-	public function getCodtipgas()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->codtipgas; 		
-	}
-	
-	public function getCantidad()
-	{
+    return trim($this->codcta);
 
-		return number_format($this->cantidad,2,',','.');
-		
-	}
-	
-	public function getCodban()
-	{
+  }
+  
+  public function getMonto($val=false)
+  {
 
-		return $this->codban; 		
-	}
-	
-	public function getEspecial()
-	{
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
 
-		return $this->especial; 		
-	}
-	
-	public function getCodnomesp()
-	{
+  }
+  
+  public function getAsided()
+  {
 
-		return $this->codnomesp; 		
-	}
-	
-	public function getNomnomesp()
-	{
+    return trim($this->asided);
 
-		return $this->nomnomesp; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodtipgas()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codtipgas);
+
+  }
+  
+  public function getCantidad($val=false)
+  {
+
+    if($val) return number_format($this->cantidad,2,',','.');
+    else return $this->cantidad;
+
+  }
+  
+  public function getCodban()
+  {
+
+    return trim($this->codban);
+
+  }
+  
+  public function getEspecial()
+  {
+
+    return trim($this->especial);
+
+  }
+  
+  public function getCodnomesp()
+  {
+
+    return trim($this->codnomesp);
+
+  }
+  
+  public function getNomnomesp()
+  {
+
+    return trim($this->nomnomesp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpcienomPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpcienomPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpcienomPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpcienomPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setFecnom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnom !== $ts) {
-			$this->fecnom = $ts;
-			$this->modifiedColumns[] = NpcienomPeer::FECNOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnom !== $ts) {
+      $this->fecnom = $ts;
+      $this->modifiedColumns[] = NpcienomPeer::FECNOM;
+    }
 
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = NpcienomPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = NpcienomPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = NpcienomPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = NpcienomPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NpcienomPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcienomPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setAsided($v)
 	{
 
-		if ($this->asided !== $v) {
-			$this->asided = $v;
-			$this->modifiedColumns[] = NpcienomPeer::ASIDED;
-		}
-
+    if ($this->asided !== $v) {
+        $this->asided = $v;
+        $this->modifiedColumns[] = NpcienomPeer::ASIDED;
+      }
+  
 	} 
 	
 	public function setCodtipgas($v)
 	{
 
-		if ($this->codtipgas !== $v) {
-			$this->codtipgas = $v;
-			$this->modifiedColumns[] = NpcienomPeer::CODTIPGAS;
-		}
-
+    if ($this->codtipgas !== $v) {
+        $this->codtipgas = $v;
+        $this->modifiedColumns[] = NpcienomPeer::CODTIPGAS;
+      }
+  
 	} 
 	
 	public function setCantidad($v)
 	{
 
-		if ($this->cantidad !== $v) {
-			$this->cantidad = $v;
-			$this->modifiedColumns[] = NpcienomPeer::CANTIDAD;
-		}
-
+    if ($this->cantidad !== $v) {
+        $this->cantidad = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcienomPeer::CANTIDAD;
+      }
+  
 	} 
 	
 	public function setCodban($v)
 	{
 
-		if ($this->codban !== $v) {
-			$this->codban = $v;
-			$this->modifiedColumns[] = NpcienomPeer::CODBAN;
-		}
-
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = NpcienomPeer::CODBAN;
+      }
+  
 	} 
 	
 	public function setEspecial($v)
 	{
 
-		if ($this->especial !== $v || $v === '') {
-			$this->especial = $v;
-			$this->modifiedColumns[] = NpcienomPeer::ESPECIAL;
-		}
-
+    if ($this->especial !== $v || $v === '') {
+        $this->especial = $v;
+        $this->modifiedColumns[] = NpcienomPeer::ESPECIAL;
+      }
+  
 	} 
 	
 	public function setCodnomesp($v)
 	{
 
-		if ($this->codnomesp !== $v) {
-			$this->codnomesp = $v;
-			$this->modifiedColumns[] = NpcienomPeer::CODNOMESP;
-		}
-
+    if ($this->codnomesp !== $v) {
+        $this->codnomesp = $v;
+        $this->modifiedColumns[] = NpcienomPeer::CODNOMESP;
+      }
+  
 	} 
 	
 	public function setNomnomesp($v)
 	{
 
-		if ($this->nomnomesp !== $v) {
-			$this->nomnomesp = $v;
-			$this->modifiedColumns[] = NpcienomPeer::NOMNOMESP;
-		}
-
+    if ($this->nomnomesp !== $v) {
+        $this->nomnomesp = $v;
+        $this->modifiedColumns[] = NpcienomPeer::NOMNOMESP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcienomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcienomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->fecnom = $rs->getDate($startcol + 2, null);
+      $this->fecnom = $rs->getDate($startcol + 2, null);
 
-			$this->codpre = $rs->getString($startcol + 3);
+      $this->codpre = $rs->getString($startcol + 3);
 
-			$this->codcta = $rs->getString($startcol + 4);
+      $this->codcta = $rs->getString($startcol + 4);
 
-			$this->monto = $rs->getFloat($startcol + 5);
+      $this->monto = $rs->getFloat($startcol + 5);
 
-			$this->asided = $rs->getString($startcol + 6);
+      $this->asided = $rs->getString($startcol + 6);
 
-			$this->codtipgas = $rs->getString($startcol + 7);
+      $this->codtipgas = $rs->getString($startcol + 7);
 
-			$this->cantidad = $rs->getFloat($startcol + 8);
+      $this->cantidad = $rs->getFloat($startcol + 8);
 
-			$this->codban = $rs->getString($startcol + 9);
+      $this->codban = $rs->getString($startcol + 9);
 
-			$this->especial = $rs->getString($startcol + 10);
+      $this->especial = $rs->getString($startcol + 10);
 
-			$this->codnomesp = $rs->getString($startcol + 11);
+      $this->codnomesp = $rs->getString($startcol + 11);
 
-			$this->nomnomesp = $rs->getString($startcol + 12);
+      $this->nomnomesp = $rs->getString($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcienom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcienom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -416,6 +451,7 @@ abstract class BaseNpcienom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcienomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcienomPeer::doUpdate($this, $con);

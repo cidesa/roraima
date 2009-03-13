@@ -29,92 +29,118 @@ abstract class BaseOcdocact extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoddoc()
-	{
+  
+  public function getCoddoc()
+  {
 
-		return $this->coddoc; 		
-	}
-	
-	public function getDesdoc()
-	{
+    return trim($this->coddoc);
 
-		return $this->desdoc; 		
-	}
-	
-	public function getStadoc()
-	{
+  }
+  
+  public function getDesdoc()
+  {
 
-		return $this->stadoc; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desdoc);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStadoc()
+  {
+
+    return trim($this->stadoc);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoddoc($v)
 	{
 
-		if ($this->coddoc !== $v) {
-			$this->coddoc = $v;
-			$this->modifiedColumns[] = OcdocactPeer::CODDOC;
-		}
-
+    if ($this->coddoc !== $v) {
+        $this->coddoc = $v;
+        $this->modifiedColumns[] = OcdocactPeer::CODDOC;
+      }
+  
 	} 
 	
 	public function setDesdoc($v)
 	{
 
-		if ($this->desdoc !== $v) {
-			$this->desdoc = $v;
-			$this->modifiedColumns[] = OcdocactPeer::DESDOC;
-		}
-
+    if ($this->desdoc !== $v) {
+        $this->desdoc = $v;
+        $this->modifiedColumns[] = OcdocactPeer::DESDOC;
+      }
+  
 	} 
 	
 	public function setStadoc($v)
 	{
 
-		if ($this->stadoc !== $v) {
-			$this->stadoc = $v;
-			$this->modifiedColumns[] = OcdocactPeer::STADOC;
-		}
-
+    if ($this->stadoc !== $v) {
+        $this->stadoc = $v;
+        $this->modifiedColumns[] = OcdocactPeer::STADOC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcdocactPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcdocactPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coddoc = $rs->getString($startcol + 0);
+      $this->coddoc = $rs->getString($startcol + 0);
 
-			$this->desdoc = $rs->getString($startcol + 1);
+      $this->desdoc = $rs->getString($startcol + 1);
 
-			$this->stadoc = $rs->getString($startcol + 2);
+      $this->stadoc = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocdocact object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocdocact object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseOcdocact extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcdocactPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcdocactPeer::doUpdate($this, $con);

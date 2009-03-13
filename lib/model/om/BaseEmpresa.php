@@ -53,6 +53,10 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
 
 	
+	protected $coopla;
+
+
+	
 	protected $dirpre;
 
 
@@ -153,6 +157,26 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
 
 	
+	protected $cooeje;
+
+
+	
+	protected $partidaiva;
+
+
+	
+	protected $codempfonava;
+
+
+	
+	protected $numlot;
+
+
+	
+	protected $codcat;
+
+
+	
 	protected $id;
 
 	
@@ -161,686 +185,859 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomemp()
-	{
+    return trim($this->codemp);
 
-		return $this->nomemp; 		
-	}
-	
-	public function getDiremp()
-	{
+  }
+  
+  public function getNomemp()
+  {
 
-		return $this->diremp; 		
-	}
-	
-	public function getTlfemp()
-	{
+    return trim($this->nomemp);
 
-		return $this->tlfemp; 		
-	}
-	
-	public function getCiuemp()
-	{
+  }
+  
+  public function getDiremp()
+  {
 
-		return $this->ciuemp; 		
-	}
-	
-	public function getUrlemp()
-	{
+    return trim($this->diremp);
 
-		return $this->urlemp; 		
-	}
-	
-	public function getFaxemp()
-	{
+  }
+  
+  public function getTlfemp()
+  {
 
-		return $this->faxemp; 		
-	}
-	
-	public function getCodpos()
-	{
+    return trim($this->tlfemp);
 
-		return $this->codpos; 		
-	}
-	
-	public function getGobedo()
-	{
+  }
+  
+  public function getCiuemp()
+  {
 
-		return $this->gobedo; 		
-	}
-	
-	public function getConedo()
-	{
+    return trim($this->ciuemp);
 
-		return $this->conedo; 		
-	}
-	
-	public function getCleedo()
-	{
+  }
+  
+  public function getUrlemp()
+  {
 
-		return $this->cleedo; 		
-	}
-	
-	public function getDirpre()
-	{
+    return trim($this->urlemp);
 
-		return $this->dirpre; 		
-	}
-	
-	public function getMunemp()
-	{
+  }
+  
+  public function getFaxemp()
+  {
 
-		return $this->munemp; 		
-	}
-	
-	public function getCieedo()
-	{
+    return trim($this->faxemp);
 
-		return $this->cieedo; 		
-	}
-	
-	public function getCodctagas()
-	{
+  }
+  
+  public function getCodpos()
+  {
 
-		return $this->codctagas; 		
-	}
-	
-	public function getCodctaban()
-	{
+    return trim($this->codpos);
 
-		return $this->codctaban; 		
-	}
-	
-	public function getCodctaret()
-	{
+  }
+  
+  public function getGobedo()
+  {
 
-		return $this->codctaret; 		
-	}
-	
-	public function getCodctaben()
-	{
+    return trim($this->gobedo);
 
-		return $this->codctaben; 		
-	}
-	
-	public function getCodctaart()
-	{
+  }
+  
+  public function getConedo()
+  {
 
-		return $this->codctaart; 		
-	}
-	
-	public function getCodctagashas()
-	{
+    return trim($this->conedo);
 
-		return $this->codctagashas; 		
-	}
-	
-	public function getCodctabanhas()
-	{
+  }
+  
+  public function getCleedo()
+  {
 
-		return $this->codctabanhas; 		
-	}
-	
-	public function getCodctarethas()
-	{
+    return trim($this->cleedo);
 
-		return $this->codctarethas; 		
-	}
-	
-	public function getCodctabenhas()
-	{
+  }
+  
+  public function getCoopla()
+  {
 
-		return $this->codctabenhas; 		
-	}
-	
-	public function getCodctaarthas()
-	{
+    return trim($this->coopla);
 
-		return $this->codctaarthas; 		
-	}
-	
-	public function getCodctapageje()
-	{
+  }
+  
+  public function getDirpre()
+  {
 
-		return $this->codctapageje; 		
-	}
-	
-	public function getCodctaingdevn()
-	{
+    return trim($this->dirpre);
 
-		return $this->codctaingdevn; 		
-	}
-	
-	public function getCodctaingdev()
-	{
+  }
+  
+  public function getMunemp()
+  {
 
-		return $this->codctaingdev; 		
-	}
-	
-	public function getDiradm()
-	{
+    return trim($this->munemp);
 
-		return $this->diradm; 		
-	}
-	
-	public function getDirfin()
-	{
+  }
+  
+  public function getCieedo()
+  {
 
-		return $this->dirfin; 		
-	}
-	
-	public function getDirper()
-	{
+    return trim($this->cieedo);
 
-		return $this->dirper; 		
-	}
-	
-	public function getDirgen()
-	{
+  }
+  
+  public function getCodctagas()
+  {
 
-		return $this->dirgen; 		
-	}
-	
-	public function getAnapre()
-	{
+    return trim($this->codctagas);
 
-		return $this->anapre; 		
-	}
-	
-	public function getAnaper()
-	{
+  }
+  
+  public function getCodctaban()
+  {
 
-		return $this->anaper; 		
-	}
-	
-	public function getAnaadm()
-	{
+    return trim($this->codctaban);
 
-		return $this->anaadm; 		
-	}
-	
-	public function getEdoemp()
-	{
+  }
+  
+  public function getCodctaret()
+  {
 
-		return $this->edoemp; 		
-	}
-	
-	public function getEncabezado()
-	{
+    return trim($this->codctaret);
 
-		return $this->encabezado; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodctaben()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codctaben);
+
+  }
+  
+  public function getCodctaart()
+  {
+
+    return trim($this->codctaart);
+
+  }
+  
+  public function getCodctagashas()
+  {
+
+    return trim($this->codctagashas);
+
+  }
+  
+  public function getCodctabanhas()
+  {
+
+    return trim($this->codctabanhas);
+
+  }
+  
+  public function getCodctarethas()
+  {
+
+    return trim($this->codctarethas);
+
+  }
+  
+  public function getCodctabenhas()
+  {
+
+    return trim($this->codctabenhas);
+
+  }
+  
+  public function getCodctaarthas()
+  {
+
+    return trim($this->codctaarthas);
+
+  }
+  
+  public function getCodctapageje()
+  {
+
+    return trim($this->codctapageje);
+
+  }
+  
+  public function getCodctaingdevn()
+  {
+
+    return trim($this->codctaingdevn);
+
+  }
+  
+  public function getCodctaingdev()
+  {
+
+    return trim($this->codctaingdev);
+
+  }
+  
+  public function getDiradm()
+  {
+
+    return trim($this->diradm);
+
+  }
+  
+  public function getDirfin()
+  {
+
+    return trim($this->dirfin);
+
+  }
+  
+  public function getDirper()
+  {
+
+    return trim($this->dirper);
+
+  }
+  
+  public function getDirgen()
+  {
+
+    return trim($this->dirgen);
+
+  }
+  
+  public function getAnapre()
+  {
+
+    return trim($this->anapre);
+
+  }
+  
+  public function getAnaper()
+  {
+
+    return trim($this->anaper);
+
+  }
+  
+  public function getAnaadm()
+  {
+
+    return trim($this->anaadm);
+
+  }
+  
+  public function getEdoemp()
+  {
+
+    return trim($this->edoemp);
+
+  }
+  
+  public function getEncabezado()
+  {
+
+    return trim($this->encabezado);
+
+  }
+  
+  public function getCooeje()
+  {
+
+    return trim($this->cooeje);
+
+  }
+  
+  public function getPartidaiva()
+  {
+
+    return trim($this->partidaiva);
+
+  }
+  
+  public function getCodempfonava()
+  {
+
+    return trim($this->codempfonava);
+
+  }
+  
+  public function getNumlot()
+  {
+
+    return trim($this->numlot);
+
+  }
+  
+  public function getCodcat()
+  {
+
+    return trim($this->codcat);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = EmpresaPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = EmpresaPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setDiremp($v)
 	{
 
-		if ($this->diremp !== $v) {
-			$this->diremp = $v;
-			$this->modifiedColumns[] = EmpresaPeer::DIREMP;
-		}
-
+    if ($this->diremp !== $v) {
+        $this->diremp = $v;
+        $this->modifiedColumns[] = EmpresaPeer::DIREMP;
+      }
+  
 	} 
 	
 	public function setTlfemp($v)
 	{
 
-		if ($this->tlfemp !== $v) {
-			$this->tlfemp = $v;
-			$this->modifiedColumns[] = EmpresaPeer::TLFEMP;
-		}
-
+    if ($this->tlfemp !== $v) {
+        $this->tlfemp = $v;
+        $this->modifiedColumns[] = EmpresaPeer::TLFEMP;
+      }
+  
 	} 
 	
 	public function setCiuemp($v)
 	{
 
-		if ($this->ciuemp !== $v) {
-			$this->ciuemp = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CIUEMP;
-		}
-
+    if ($this->ciuemp !== $v) {
+        $this->ciuemp = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CIUEMP;
+      }
+  
 	} 
 	
 	public function setUrlemp($v)
 	{
 
-		if ($this->urlemp !== $v) {
-			$this->urlemp = $v;
-			$this->modifiedColumns[] = EmpresaPeer::URLEMP;
-		}
-
+    if ($this->urlemp !== $v) {
+        $this->urlemp = $v;
+        $this->modifiedColumns[] = EmpresaPeer::URLEMP;
+      }
+  
 	} 
 	
 	public function setFaxemp($v)
 	{
 
-		if ($this->faxemp !== $v) {
-			$this->faxemp = $v;
-			$this->modifiedColumns[] = EmpresaPeer::FAXEMP;
-		}
-
+    if ($this->faxemp !== $v) {
+        $this->faxemp = $v;
+        $this->modifiedColumns[] = EmpresaPeer::FAXEMP;
+      }
+  
 	} 
 	
 	public function setCodpos($v)
 	{
 
-		if ($this->codpos !== $v) {
-			$this->codpos = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODPOS;
-		}
-
+    if ($this->codpos !== $v) {
+        $this->codpos = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODPOS;
+      }
+  
 	} 
 	
 	public function setGobedo($v)
 	{
 
-		if ($this->gobedo !== $v) {
-			$this->gobedo = $v;
-			$this->modifiedColumns[] = EmpresaPeer::GOBEDO;
-		}
-
+    if ($this->gobedo !== $v) {
+        $this->gobedo = $v;
+        $this->modifiedColumns[] = EmpresaPeer::GOBEDO;
+      }
+  
 	} 
 	
 	public function setConedo($v)
 	{
 
-		if ($this->conedo !== $v) {
-			$this->conedo = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CONEDO;
-		}
-
+    if ($this->conedo !== $v) {
+        $this->conedo = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CONEDO;
+      }
+  
 	} 
 	
 	public function setCleedo($v)
 	{
 
-		if ($this->cleedo !== $v) {
-			$this->cleedo = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CLEEDO;
-		}
+    if ($this->cleedo !== $v) {
+        $this->cleedo = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CLEEDO;
+      }
+  
+	} 
+	
+	public function setCoopla($v)
+	{
 
+    if ($this->coopla !== $v) {
+        $this->coopla = $v;
+        $this->modifiedColumns[] = EmpresaPeer::COOPLA;
+      }
+  
 	} 
 	
 	public function setDirpre($v)
 	{
 
-		if ($this->dirpre !== $v) {
-			$this->dirpre = $v;
-			$this->modifiedColumns[] = EmpresaPeer::DIRPRE;
-		}
-
+    if ($this->dirpre !== $v) {
+        $this->dirpre = $v;
+        $this->modifiedColumns[] = EmpresaPeer::DIRPRE;
+      }
+  
 	} 
 	
 	public function setMunemp($v)
 	{
 
-		if ($this->munemp !== $v) {
-			$this->munemp = $v;
-			$this->modifiedColumns[] = EmpresaPeer::MUNEMP;
-		}
-
+    if ($this->munemp !== $v) {
+        $this->munemp = $v;
+        $this->modifiedColumns[] = EmpresaPeer::MUNEMP;
+      }
+  
 	} 
 	
 	public function setCieedo($v)
 	{
 
-		if ($this->cieedo !== $v) {
-			$this->cieedo = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CIEEDO;
-		}
-
+    if ($this->cieedo !== $v) {
+        $this->cieedo = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CIEEDO;
+      }
+  
 	} 
 	
 	public function setCodctagas($v)
 	{
 
-		if ($this->codctagas !== $v) {
-			$this->codctagas = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTAGAS;
-		}
-
+    if ($this->codctagas !== $v) {
+        $this->codctagas = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTAGAS;
+      }
+  
 	} 
 	
 	public function setCodctaban($v)
 	{
 
-		if ($this->codctaban !== $v) {
-			$this->codctaban = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTABAN;
-		}
-
+    if ($this->codctaban !== $v) {
+        $this->codctaban = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTABAN;
+      }
+  
 	} 
 	
 	public function setCodctaret($v)
 	{
 
-		if ($this->codctaret !== $v) {
-			$this->codctaret = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTARET;
-		}
-
+    if ($this->codctaret !== $v) {
+        $this->codctaret = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTARET;
+      }
+  
 	} 
 	
 	public function setCodctaben($v)
 	{
 
-		if ($this->codctaben !== $v) {
-			$this->codctaben = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTABEN;
-		}
-
+    if ($this->codctaben !== $v) {
+        $this->codctaben = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTABEN;
+      }
+  
 	} 
 	
 	public function setCodctaart($v)
 	{
 
-		if ($this->codctaart !== $v) {
-			$this->codctaart = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTAART;
-		}
-
+    if ($this->codctaart !== $v) {
+        $this->codctaart = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTAART;
+      }
+  
 	} 
 	
 	public function setCodctagashas($v)
 	{
 
-		if ($this->codctagashas !== $v) {
-			$this->codctagashas = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTAGASHAS;
-		}
-
+    if ($this->codctagashas !== $v) {
+        $this->codctagashas = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTAGASHAS;
+      }
+  
 	} 
 	
 	public function setCodctabanhas($v)
 	{
 
-		if ($this->codctabanhas !== $v) {
-			$this->codctabanhas = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTABANHAS;
-		}
-
+    if ($this->codctabanhas !== $v) {
+        $this->codctabanhas = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTABANHAS;
+      }
+  
 	} 
 	
 	public function setCodctarethas($v)
 	{
 
-		if ($this->codctarethas !== $v) {
-			$this->codctarethas = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTARETHAS;
-		}
-
+    if ($this->codctarethas !== $v) {
+        $this->codctarethas = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTARETHAS;
+      }
+  
 	} 
 	
 	public function setCodctabenhas($v)
 	{
 
-		if ($this->codctabenhas !== $v) {
-			$this->codctabenhas = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTABENHAS;
-		}
-
+    if ($this->codctabenhas !== $v) {
+        $this->codctabenhas = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTABENHAS;
+      }
+  
 	} 
 	
 	public function setCodctaarthas($v)
 	{
 
-		if ($this->codctaarthas !== $v) {
-			$this->codctaarthas = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTAARTHAS;
-		}
-
+    if ($this->codctaarthas !== $v) {
+        $this->codctaarthas = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTAARTHAS;
+      }
+  
 	} 
 	
 	public function setCodctapageje($v)
 	{
 
-		if ($this->codctapageje !== $v) {
-			$this->codctapageje = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTAPAGEJE;
-		}
-
+    if ($this->codctapageje !== $v) {
+        $this->codctapageje = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTAPAGEJE;
+      }
+  
 	} 
 	
 	public function setCodctaingdevn($v)
 	{
 
-		if ($this->codctaingdevn !== $v) {
-			$this->codctaingdevn = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTAINGDEVN;
-		}
-
+    if ($this->codctaingdevn !== $v) {
+        $this->codctaingdevn = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTAINGDEVN;
+      }
+  
 	} 
 	
 	public function setCodctaingdev($v)
 	{
 
-		if ($this->codctaingdev !== $v) {
-			$this->codctaingdev = $v;
-			$this->modifiedColumns[] = EmpresaPeer::CODCTAINGDEV;
-		}
-
+    if ($this->codctaingdev !== $v) {
+        $this->codctaingdev = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCTAINGDEV;
+      }
+  
 	} 
 	
 	public function setDiradm($v)
 	{
 
-		if ($this->diradm !== $v) {
-			$this->diradm = $v;
-			$this->modifiedColumns[] = EmpresaPeer::DIRADM;
-		}
-
+    if ($this->diradm !== $v) {
+        $this->diradm = $v;
+        $this->modifiedColumns[] = EmpresaPeer::DIRADM;
+      }
+  
 	} 
 	
 	public function setDirfin($v)
 	{
 
-		if ($this->dirfin !== $v) {
-			$this->dirfin = $v;
-			$this->modifiedColumns[] = EmpresaPeer::DIRFIN;
-		}
-
+    if ($this->dirfin !== $v) {
+        $this->dirfin = $v;
+        $this->modifiedColumns[] = EmpresaPeer::DIRFIN;
+      }
+  
 	} 
 	
 	public function setDirper($v)
 	{
 
-		if ($this->dirper !== $v) {
-			$this->dirper = $v;
-			$this->modifiedColumns[] = EmpresaPeer::DIRPER;
-		}
-
+    if ($this->dirper !== $v) {
+        $this->dirper = $v;
+        $this->modifiedColumns[] = EmpresaPeer::DIRPER;
+      }
+  
 	} 
 	
 	public function setDirgen($v)
 	{
 
-		if ($this->dirgen !== $v) {
-			$this->dirgen = $v;
-			$this->modifiedColumns[] = EmpresaPeer::DIRGEN;
-		}
-
+    if ($this->dirgen !== $v) {
+        $this->dirgen = $v;
+        $this->modifiedColumns[] = EmpresaPeer::DIRGEN;
+      }
+  
 	} 
 	
 	public function setAnapre($v)
 	{
 
-		if ($this->anapre !== $v) {
-			$this->anapre = $v;
-			$this->modifiedColumns[] = EmpresaPeer::ANAPRE;
-		}
-
+    if ($this->anapre !== $v) {
+        $this->anapre = $v;
+        $this->modifiedColumns[] = EmpresaPeer::ANAPRE;
+      }
+  
 	} 
 	
 	public function setAnaper($v)
 	{
 
-		if ($this->anaper !== $v) {
-			$this->anaper = $v;
-			$this->modifiedColumns[] = EmpresaPeer::ANAPER;
-		}
-
+    if ($this->anaper !== $v) {
+        $this->anaper = $v;
+        $this->modifiedColumns[] = EmpresaPeer::ANAPER;
+      }
+  
 	} 
 	
 	public function setAnaadm($v)
 	{
 
-		if ($this->anaadm !== $v) {
-			$this->anaadm = $v;
-			$this->modifiedColumns[] = EmpresaPeer::ANAADM;
-		}
-
+    if ($this->anaadm !== $v) {
+        $this->anaadm = $v;
+        $this->modifiedColumns[] = EmpresaPeer::ANAADM;
+      }
+  
 	} 
 	
 	public function setEdoemp($v)
 	{
 
-		if ($this->edoemp !== $v) {
-			$this->edoemp = $v;
-			$this->modifiedColumns[] = EmpresaPeer::EDOEMP;
-		}
-
+    if ($this->edoemp !== $v) {
+        $this->edoemp = $v;
+        $this->modifiedColumns[] = EmpresaPeer::EDOEMP;
+      }
+  
 	} 
 	
 	public function setEncabezado($v)
 	{
 
-		if ($this->encabezado !== $v) {
-			$this->encabezado = $v;
-			$this->modifiedColumns[] = EmpresaPeer::ENCABEZADO;
-		}
+    if ($this->encabezado !== $v) {
+        $this->encabezado = $v;
+        $this->modifiedColumns[] = EmpresaPeer::ENCABEZADO;
+      }
+  
+	} 
+	
+	public function setCooeje($v)
+	{
 
+    if ($this->cooeje !== $v) {
+        $this->cooeje = $v;
+        $this->modifiedColumns[] = EmpresaPeer::COOEJE;
+      }
+  
+	} 
+	
+	public function setPartidaiva($v)
+	{
+
+    if ($this->partidaiva !== $v) {
+        $this->partidaiva = $v;
+        $this->modifiedColumns[] = EmpresaPeer::PARTIDAIVA;
+      }
+  
+	} 
+	
+	public function setCodempfonava($v)
+	{
+
+    if ($this->codempfonava !== $v) {
+        $this->codempfonava = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODEMPFONAVA;
+      }
+  
+	} 
+	
+	public function setNumlot($v)
+	{
+
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = EmpresaPeer::NUMLOT;
+      }
+  
+	} 
+	
+	public function setCodcat($v)
+	{
+
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = EmpresaPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = EmpresaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = EmpresaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->nomemp = $rs->getString($startcol + 1);
+      $this->nomemp = $rs->getString($startcol + 1);
 
-			$this->diremp = $rs->getString($startcol + 2);
+      $this->diremp = $rs->getString($startcol + 2);
 
-			$this->tlfemp = $rs->getString($startcol + 3);
+      $this->tlfemp = $rs->getString($startcol + 3);
 
-			$this->ciuemp = $rs->getString($startcol + 4);
+      $this->ciuemp = $rs->getString($startcol + 4);
 
-			$this->urlemp = $rs->getString($startcol + 5);
+      $this->urlemp = $rs->getString($startcol + 5);
 
-			$this->faxemp = $rs->getString($startcol + 6);
+      $this->faxemp = $rs->getString($startcol + 6);
 
-			$this->codpos = $rs->getString($startcol + 7);
+      $this->codpos = $rs->getString($startcol + 7);
 
-			$this->gobedo = $rs->getString($startcol + 8);
+      $this->gobedo = $rs->getString($startcol + 8);
 
-			$this->conedo = $rs->getString($startcol + 9);
+      $this->conedo = $rs->getString($startcol + 9);
 
-			$this->cleedo = $rs->getString($startcol + 10);
+      $this->cleedo = $rs->getString($startcol + 10);
 
-			$this->dirpre = $rs->getString($startcol + 11);
+      $this->coopla = $rs->getString($startcol + 11);
 
-			$this->munemp = $rs->getString($startcol + 12);
+      $this->dirpre = $rs->getString($startcol + 12);
 
-			$this->cieedo = $rs->getString($startcol + 13);
+      $this->munemp = $rs->getString($startcol + 13);
 
-			$this->codctagas = $rs->getString($startcol + 14);
+      $this->cieedo = $rs->getString($startcol + 14);
 
-			$this->codctaban = $rs->getString($startcol + 15);
+      $this->codctagas = $rs->getString($startcol + 15);
 
-			$this->codctaret = $rs->getString($startcol + 16);
+      $this->codctaban = $rs->getString($startcol + 16);
 
-			$this->codctaben = $rs->getString($startcol + 17);
+      $this->codctaret = $rs->getString($startcol + 17);
 
-			$this->codctaart = $rs->getString($startcol + 18);
+      $this->codctaben = $rs->getString($startcol + 18);
 
-			$this->codctagashas = $rs->getString($startcol + 19);
+      $this->codctaart = $rs->getString($startcol + 19);
 
-			$this->codctabanhas = $rs->getString($startcol + 20);
+      $this->codctagashas = $rs->getString($startcol + 20);
 
-			$this->codctarethas = $rs->getString($startcol + 21);
+      $this->codctabanhas = $rs->getString($startcol + 21);
 
-			$this->codctabenhas = $rs->getString($startcol + 22);
+      $this->codctarethas = $rs->getString($startcol + 22);
 
-			$this->codctaarthas = $rs->getString($startcol + 23);
+      $this->codctabenhas = $rs->getString($startcol + 23);
 
-			$this->codctapageje = $rs->getString($startcol + 24);
+      $this->codctaarthas = $rs->getString($startcol + 24);
 
-			$this->codctaingdevn = $rs->getString($startcol + 25);
+      $this->codctapageje = $rs->getString($startcol + 25);
 
-			$this->codctaingdev = $rs->getString($startcol + 26);
+      $this->codctaingdevn = $rs->getString($startcol + 26);
 
-			$this->diradm = $rs->getString($startcol + 27);
+      $this->codctaingdev = $rs->getString($startcol + 27);
 
-			$this->dirfin = $rs->getString($startcol + 28);
+      $this->diradm = $rs->getString($startcol + 28);
 
-			$this->dirper = $rs->getString($startcol + 29);
+      $this->dirfin = $rs->getString($startcol + 29);
 
-			$this->dirgen = $rs->getString($startcol + 30);
+      $this->dirper = $rs->getString($startcol + 30);
 
-			$this->anapre = $rs->getString($startcol + 31);
+      $this->dirgen = $rs->getString($startcol + 31);
 
-			$this->anaper = $rs->getString($startcol + 32);
+      $this->anapre = $rs->getString($startcol + 32);
 
-			$this->anaadm = $rs->getString($startcol + 33);
+      $this->anaper = $rs->getString($startcol + 33);
 
-			$this->edoemp = $rs->getString($startcol + 34);
+      $this->anaadm = $rs->getString($startcol + 34);
 
-			$this->encabezado = $rs->getString($startcol + 35);
+      $this->edoemp = $rs->getString($startcol + 35);
 
-			$this->id = $rs->getInt($startcol + 36);
+      $this->encabezado = $rs->getString($startcol + 36);
 
-			$this->resetModified();
+      $this->cooeje = $rs->getString($startcol + 37);
 
-			$this->setNew(false);
+      $this->partidaiva = $rs->getString($startcol + 38);
 
-						return $startcol + 37; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Empresa object", $e);
-		}
-	}
+      $this->codempfonava = $rs->getString($startcol + 39);
+
+      $this->numlot = $rs->getString($startcol + 40);
+
+      $this->codcat = $rs->getString($startcol + 41);
+
+      $this->id = $rs->getInt($startcol + 42);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 43; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Empresa object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -897,6 +1094,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = EmpresaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += EmpresaPeer::doUpdate($this, $con);
@@ -996,81 +1194,99 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 				return $this->getCleedo();
 				break;
 			case 11:
-				return $this->getDirpre();
+				return $this->getCoopla();
 				break;
 			case 12:
-				return $this->getMunemp();
+				return $this->getDirpre();
 				break;
 			case 13:
-				return $this->getCieedo();
+				return $this->getMunemp();
 				break;
 			case 14:
-				return $this->getCodctagas();
+				return $this->getCieedo();
 				break;
 			case 15:
-				return $this->getCodctaban();
+				return $this->getCodctagas();
 				break;
 			case 16:
-				return $this->getCodctaret();
+				return $this->getCodctaban();
 				break;
 			case 17:
-				return $this->getCodctaben();
+				return $this->getCodctaret();
 				break;
 			case 18:
-				return $this->getCodctaart();
+				return $this->getCodctaben();
 				break;
 			case 19:
-				return $this->getCodctagashas();
+				return $this->getCodctaart();
 				break;
 			case 20:
-				return $this->getCodctabanhas();
+				return $this->getCodctagashas();
 				break;
 			case 21:
-				return $this->getCodctarethas();
+				return $this->getCodctabanhas();
 				break;
 			case 22:
-				return $this->getCodctabenhas();
+				return $this->getCodctarethas();
 				break;
 			case 23:
-				return $this->getCodctaarthas();
+				return $this->getCodctabenhas();
 				break;
 			case 24:
-				return $this->getCodctapageje();
+				return $this->getCodctaarthas();
 				break;
 			case 25:
-				return $this->getCodctaingdevn();
+				return $this->getCodctapageje();
 				break;
 			case 26:
-				return $this->getCodctaingdev();
+				return $this->getCodctaingdevn();
 				break;
 			case 27:
-				return $this->getDiradm();
+				return $this->getCodctaingdev();
 				break;
 			case 28:
-				return $this->getDirfin();
+				return $this->getDiradm();
 				break;
 			case 29:
-				return $this->getDirper();
+				return $this->getDirfin();
 				break;
 			case 30:
-				return $this->getDirgen();
+				return $this->getDirper();
 				break;
 			case 31:
-				return $this->getAnapre();
+				return $this->getDirgen();
 				break;
 			case 32:
-				return $this->getAnaper();
+				return $this->getAnapre();
 				break;
 			case 33:
-				return $this->getAnaadm();
+				return $this->getAnaper();
 				break;
 			case 34:
-				return $this->getEdoemp();
+				return $this->getAnaadm();
 				break;
 			case 35:
-				return $this->getEncabezado();
+				return $this->getEdoemp();
 				break;
 			case 36:
+				return $this->getEncabezado();
+				break;
+			case 37:
+				return $this->getCooeje();
+				break;
+			case 38:
+				return $this->getPartidaiva();
+				break;
+			case 39:
+				return $this->getCodempfonava();
+				break;
+			case 40:
+				return $this->getNumlot();
+				break;
+			case 41:
+				return $this->getCodcat();
+				break;
+			case 42:
 				return $this->getId();
 				break;
 			default:
@@ -1094,32 +1310,38 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 			$keys[8] => $this->getGobedo(),
 			$keys[9] => $this->getConedo(),
 			$keys[10] => $this->getCleedo(),
-			$keys[11] => $this->getDirpre(),
-			$keys[12] => $this->getMunemp(),
-			$keys[13] => $this->getCieedo(),
-			$keys[14] => $this->getCodctagas(),
-			$keys[15] => $this->getCodctaban(),
-			$keys[16] => $this->getCodctaret(),
-			$keys[17] => $this->getCodctaben(),
-			$keys[18] => $this->getCodctaart(),
-			$keys[19] => $this->getCodctagashas(),
-			$keys[20] => $this->getCodctabanhas(),
-			$keys[21] => $this->getCodctarethas(),
-			$keys[22] => $this->getCodctabenhas(),
-			$keys[23] => $this->getCodctaarthas(),
-			$keys[24] => $this->getCodctapageje(),
-			$keys[25] => $this->getCodctaingdevn(),
-			$keys[26] => $this->getCodctaingdev(),
-			$keys[27] => $this->getDiradm(),
-			$keys[28] => $this->getDirfin(),
-			$keys[29] => $this->getDirper(),
-			$keys[30] => $this->getDirgen(),
-			$keys[31] => $this->getAnapre(),
-			$keys[32] => $this->getAnaper(),
-			$keys[33] => $this->getAnaadm(),
-			$keys[34] => $this->getEdoemp(),
-			$keys[35] => $this->getEncabezado(),
-			$keys[36] => $this->getId(),
+			$keys[11] => $this->getCoopla(),
+			$keys[12] => $this->getDirpre(),
+			$keys[13] => $this->getMunemp(),
+			$keys[14] => $this->getCieedo(),
+			$keys[15] => $this->getCodctagas(),
+			$keys[16] => $this->getCodctaban(),
+			$keys[17] => $this->getCodctaret(),
+			$keys[18] => $this->getCodctaben(),
+			$keys[19] => $this->getCodctaart(),
+			$keys[20] => $this->getCodctagashas(),
+			$keys[21] => $this->getCodctabanhas(),
+			$keys[22] => $this->getCodctarethas(),
+			$keys[23] => $this->getCodctabenhas(),
+			$keys[24] => $this->getCodctaarthas(),
+			$keys[25] => $this->getCodctapageje(),
+			$keys[26] => $this->getCodctaingdevn(),
+			$keys[27] => $this->getCodctaingdev(),
+			$keys[28] => $this->getDiradm(),
+			$keys[29] => $this->getDirfin(),
+			$keys[30] => $this->getDirper(),
+			$keys[31] => $this->getDirgen(),
+			$keys[32] => $this->getAnapre(),
+			$keys[33] => $this->getAnaper(),
+			$keys[34] => $this->getAnaadm(),
+			$keys[35] => $this->getEdoemp(),
+			$keys[36] => $this->getEncabezado(),
+			$keys[37] => $this->getCooeje(),
+			$keys[38] => $this->getPartidaiva(),
+			$keys[39] => $this->getCodempfonava(),
+			$keys[40] => $this->getNumlot(),
+			$keys[41] => $this->getCodcat(),
+			$keys[42] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1169,81 +1391,99 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 				$this->setCleedo($value);
 				break;
 			case 11:
-				$this->setDirpre($value);
+				$this->setCoopla($value);
 				break;
 			case 12:
-				$this->setMunemp($value);
+				$this->setDirpre($value);
 				break;
 			case 13:
-				$this->setCieedo($value);
+				$this->setMunemp($value);
 				break;
 			case 14:
-				$this->setCodctagas($value);
+				$this->setCieedo($value);
 				break;
 			case 15:
-				$this->setCodctaban($value);
+				$this->setCodctagas($value);
 				break;
 			case 16:
-				$this->setCodctaret($value);
+				$this->setCodctaban($value);
 				break;
 			case 17:
-				$this->setCodctaben($value);
+				$this->setCodctaret($value);
 				break;
 			case 18:
-				$this->setCodctaart($value);
+				$this->setCodctaben($value);
 				break;
 			case 19:
-				$this->setCodctagashas($value);
+				$this->setCodctaart($value);
 				break;
 			case 20:
-				$this->setCodctabanhas($value);
+				$this->setCodctagashas($value);
 				break;
 			case 21:
-				$this->setCodctarethas($value);
+				$this->setCodctabanhas($value);
 				break;
 			case 22:
-				$this->setCodctabenhas($value);
+				$this->setCodctarethas($value);
 				break;
 			case 23:
-				$this->setCodctaarthas($value);
+				$this->setCodctabenhas($value);
 				break;
 			case 24:
-				$this->setCodctapageje($value);
+				$this->setCodctaarthas($value);
 				break;
 			case 25:
-				$this->setCodctaingdevn($value);
+				$this->setCodctapageje($value);
 				break;
 			case 26:
-				$this->setCodctaingdev($value);
+				$this->setCodctaingdevn($value);
 				break;
 			case 27:
-				$this->setDiradm($value);
+				$this->setCodctaingdev($value);
 				break;
 			case 28:
-				$this->setDirfin($value);
+				$this->setDiradm($value);
 				break;
 			case 29:
-				$this->setDirper($value);
+				$this->setDirfin($value);
 				break;
 			case 30:
-				$this->setDirgen($value);
+				$this->setDirper($value);
 				break;
 			case 31:
-				$this->setAnapre($value);
+				$this->setDirgen($value);
 				break;
 			case 32:
-				$this->setAnaper($value);
+				$this->setAnapre($value);
 				break;
 			case 33:
-				$this->setAnaadm($value);
+				$this->setAnaper($value);
 				break;
 			case 34:
-				$this->setEdoemp($value);
+				$this->setAnaadm($value);
 				break;
 			case 35:
-				$this->setEncabezado($value);
+				$this->setEdoemp($value);
 				break;
 			case 36:
+				$this->setEncabezado($value);
+				break;
+			case 37:
+				$this->setCooeje($value);
+				break;
+			case 38:
+				$this->setPartidaiva($value);
+				break;
+			case 39:
+				$this->setCodempfonava($value);
+				break;
+			case 40:
+				$this->setNumlot($value);
+				break;
+			case 41:
+				$this->setCodcat($value);
+				break;
+			case 42:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1264,32 +1504,38 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setGobedo($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setConedo($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setCleedo($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setDirpre($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setMunemp($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setCieedo($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setCodctagas($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setCodctaban($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setCodctaret($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setCodctaben($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setCodctaart($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setCodctagashas($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setCodctabanhas($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setCodctarethas($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setCodctabenhas($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setCodctaarthas($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setCodctapageje($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setCodctaingdevn($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setCodctaingdev($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setDiradm($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setDirfin($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setDirper($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setDirgen($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setAnapre($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setAnaper($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setAnaadm($arr[$keys[33]]);
-		if (array_key_exists($keys[34], $arr)) $this->setEdoemp($arr[$keys[34]]);
-		if (array_key_exists($keys[35], $arr)) $this->setEncabezado($arr[$keys[35]]);
-		if (array_key_exists($keys[36], $arr)) $this->setId($arr[$keys[36]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCoopla($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setDirpre($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setMunemp($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setCieedo($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setCodctagas($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCodctaban($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setCodctaret($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setCodctaben($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setCodctaart($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setCodctagashas($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setCodctabanhas($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setCodctarethas($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setCodctabenhas($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setCodctaarthas($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setCodctapageje($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setCodctaingdevn($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setCodctaingdev($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setDiradm($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setDirfin($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setDirper($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setDirgen($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setAnapre($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setAnaper($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setAnaadm($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setEdoemp($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setEncabezado($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setCooeje($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setPartidaiva($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setCodempfonava($arr[$keys[39]]);
+		if (array_key_exists($keys[40], $arr)) $this->setNumlot($arr[$keys[40]]);
+		if (array_key_exists($keys[41], $arr)) $this->setCodcat($arr[$keys[41]]);
+		if (array_key_exists($keys[42], $arr)) $this->setId($arr[$keys[42]]);
 	}
 
 	
@@ -1308,6 +1554,7 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(EmpresaPeer::GOBEDO)) $criteria->add(EmpresaPeer::GOBEDO, $this->gobedo);
 		if ($this->isColumnModified(EmpresaPeer::CONEDO)) $criteria->add(EmpresaPeer::CONEDO, $this->conedo);
 		if ($this->isColumnModified(EmpresaPeer::CLEEDO)) $criteria->add(EmpresaPeer::CLEEDO, $this->cleedo);
+		if ($this->isColumnModified(EmpresaPeer::COOPLA)) $criteria->add(EmpresaPeer::COOPLA, $this->coopla);
 		if ($this->isColumnModified(EmpresaPeer::DIRPRE)) $criteria->add(EmpresaPeer::DIRPRE, $this->dirpre);
 		if ($this->isColumnModified(EmpresaPeer::MUNEMP)) $criteria->add(EmpresaPeer::MUNEMP, $this->munemp);
 		if ($this->isColumnModified(EmpresaPeer::CIEEDO)) $criteria->add(EmpresaPeer::CIEEDO, $this->cieedo);
@@ -1333,6 +1580,11 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(EmpresaPeer::ANAADM)) $criteria->add(EmpresaPeer::ANAADM, $this->anaadm);
 		if ($this->isColumnModified(EmpresaPeer::EDOEMP)) $criteria->add(EmpresaPeer::EDOEMP, $this->edoemp);
 		if ($this->isColumnModified(EmpresaPeer::ENCABEZADO)) $criteria->add(EmpresaPeer::ENCABEZADO, $this->encabezado);
+		if ($this->isColumnModified(EmpresaPeer::COOEJE)) $criteria->add(EmpresaPeer::COOEJE, $this->cooeje);
+		if ($this->isColumnModified(EmpresaPeer::PARTIDAIVA)) $criteria->add(EmpresaPeer::PARTIDAIVA, $this->partidaiva);
+		if ($this->isColumnModified(EmpresaPeer::CODEMPFONAVA)) $criteria->add(EmpresaPeer::CODEMPFONAVA, $this->codempfonava);
+		if ($this->isColumnModified(EmpresaPeer::NUMLOT)) $criteria->add(EmpresaPeer::NUMLOT, $this->numlot);
+		if ($this->isColumnModified(EmpresaPeer::CODCAT)) $criteria->add(EmpresaPeer::CODCAT, $this->codcat);
 		if ($this->isColumnModified(EmpresaPeer::ID)) $criteria->add(EmpresaPeer::ID, $this->id);
 
 		return $criteria;
@@ -1386,6 +1638,8 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 
 		$copyObj->setCleedo($this->cleedo);
 
+		$copyObj->setCoopla($this->coopla);
+
 		$copyObj->setDirpre($this->dirpre);
 
 		$copyObj->setMunemp($this->munemp);
@@ -1435,6 +1689,16 @@ abstract class BaseEmpresa extends BaseObject  implements Persistent {
 		$copyObj->setEdoemp($this->edoemp);
 
 		$copyObj->setEncabezado($this->encabezado);
+
+		$copyObj->setCooeje($this->cooeje);
+
+		$copyObj->setPartidaiva($this->partidaiva);
+
+		$copyObj->setCodempfonava($this->codempfonava);
+
+		$copyObj->setNumlot($this->numlot);
+
+		$copyObj->setCodcat($this->codcat);
 
 
 		$copyObj->setNew(true);

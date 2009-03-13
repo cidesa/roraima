@@ -53,247 +53,277 @@ abstract class BaseFcrecibo extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrec()
-	{
+  
+  public function getCodrec()
+  {
 
-		return $this->codrec; 		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
+    return trim($this->codrec);
 
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
 
-	
-	public function getDesrec()
-	{
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desrec; 		
-	}
-	
-	public function getNumlic()
-	{
+  
+  public function getDesrec()
+  {
 
-		return $this->numlic; 		
-	}
-	
-	public function getRifcon()
-	{
+    return trim($this->desrec);
 
-		return $this->rifcon; 		
-	}
-	
-	public function getMonrec()
-	{
+  }
+  
+  public function getNumlic()
+  {
 
-		return number_format($this->monrec,2,',','.');
-		
-	}
-	
-	public function getNomcon()
-	{
+    return trim($this->numlic);
 
-		return $this->nomcon; 		
-	}
-	
-	public function getDircon()
-	{
+  }
+  
+  public function getRifcon()
+  {
 
-		return $this->dircon; 		
-	}
-	
-	public function getFecha($format = 'Y-m-d')
-	{
+    return trim($this->rifcon);
 
-		if ($this->fecha === null || $this->fecha === '') {
-			return null;
-		} elseif (!is_int($this->fecha)) {
-						$ts = strtotime($this->fecha);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
-			}
-		} else {
-			$ts = $this->fecha;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMonrec($val=false)
+  {
 
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monrec,2,',','.');
+    else return $this->monrec;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomcon()
+  {
+
+    return trim($this->nomcon);
+
+  }
+  
+  public function getDircon()
+  {
+
+    return trim($this->dircon);
+
+  }
+  
+  public function getFecha($format = 'Y-m-d')
+  {
+
+    if ($this->fecha === null || $this->fecha === '') {
+      return null;
+    } elseif (!is_int($this->fecha)) {
+            $ts = adodb_strtotime($this->fecha);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
+      }
+    } else {
+      $ts = $this->fecha;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = FcreciboPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = FcreciboPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setFecrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = FcreciboPeer::FECREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = FcreciboPeer::FECREC;
+    }
 
 	} 
 	
 	public function setDesrec($v)
 	{
 
-		if ($this->desrec !== $v) {
-			$this->desrec = $v;
-			$this->modifiedColumns[] = FcreciboPeer::DESREC;
-		}
-
+    if ($this->desrec !== $v) {
+        $this->desrec = $v;
+        $this->modifiedColumns[] = FcreciboPeer::DESREC;
+      }
+  
 	} 
 	
 	public function setNumlic($v)
 	{
 
-		if ($this->numlic !== $v) {
-			$this->numlic = $v;
-			$this->modifiedColumns[] = FcreciboPeer::NUMLIC;
-		}
-
+    if ($this->numlic !== $v) {
+        $this->numlic = $v;
+        $this->modifiedColumns[] = FcreciboPeer::NUMLIC;
+      }
+  
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FcreciboPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FcreciboPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setMonrec($v)
 	{
 
-		if ($this->monrec !== $v) {
-			$this->monrec = $v;
-			$this->modifiedColumns[] = FcreciboPeer::MONREC;
-		}
-
+    if ($this->monrec !== $v) {
+        $this->monrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcreciboPeer::MONREC;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = FcreciboPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = FcreciboPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setDircon($v)
 	{
 
-		if ($this->dircon !== $v) {
-			$this->dircon = $v;
-			$this->modifiedColumns[] = FcreciboPeer::DIRCON;
-		}
-
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = FcreciboPeer::DIRCON;
+      }
+  
 	} 
 	
 	public function setFecha($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecha !== $ts) {
-			$this->fecha = $ts;
-			$this->modifiedColumns[] = FcreciboPeer::FECHA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha !== $ts) {
+      $this->fecha = $ts;
+      $this->modifiedColumns[] = FcreciboPeer::FECHA;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcreciboPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcreciboPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrec = $rs->getString($startcol + 0);
+      $this->codrec = $rs->getString($startcol + 0);
 
-			$this->fecrec = $rs->getDate($startcol + 1, null);
+      $this->fecrec = $rs->getDate($startcol + 1, null);
 
-			$this->desrec = $rs->getString($startcol + 2);
+      $this->desrec = $rs->getString($startcol + 2);
 
-			$this->numlic = $rs->getString($startcol + 3);
+      $this->numlic = $rs->getString($startcol + 3);
 
-			$this->rifcon = $rs->getString($startcol + 4);
+      $this->rifcon = $rs->getString($startcol + 4);
 
-			$this->monrec = $rs->getFloat($startcol + 5);
+      $this->monrec = $rs->getFloat($startcol + 5);
 
-			$this->nomcon = $rs->getString($startcol + 6);
+      $this->nomcon = $rs->getString($startcol + 6);
 
-			$this->dircon = $rs->getString($startcol + 7);
+      $this->dircon = $rs->getString($startcol + 7);
 
-			$this->fecha = $rs->getDate($startcol + 8, null);
+      $this->fecha = $rs->getDate($startcol + 8, null);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcrecibo object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcrecibo object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -350,6 +380,7 @@ abstract class BaseFcrecibo extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcreciboPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcreciboPeer::doUpdate($this, $con);

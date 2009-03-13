@@ -435,6 +435,7 @@ abstract class BaseFcsollic1Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Fcsollic1Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

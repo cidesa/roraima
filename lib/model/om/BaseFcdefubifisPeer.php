@@ -205,6 +205,7 @@ abstract class BaseFcdefubifisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdefubifisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -29,92 +29,118 @@ abstract class BaseCppartidas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpre()
-	{
+  
+  public function getCodpre()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getNompre()
-	{
+    return trim($this->codpre);
 
-		return $this->nompre; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getNompre()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nompre);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodcon()
+  {
+
+    return trim($this->codcon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CppartidasPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CppartidasPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNompre($v)
 	{
 
-		if ($this->nompre !== $v) {
-			$this->nompre = $v;
-			$this->modifiedColumns[] = CppartidasPeer::NOMPRE;
-		}
-
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = CppartidasPeer::NOMPRE;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = CppartidasPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = CppartidasPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CppartidasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CppartidasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpre = $rs->getString($startcol + 0);
+      $this->codpre = $rs->getString($startcol + 0);
 
-			$this->nompre = $rs->getString($startcol + 1);
+      $this->nompre = $rs->getString($startcol + 1);
 
-			$this->codcon = $rs->getString($startcol + 2);
+      $this->codcon = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cppartidas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cppartidas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

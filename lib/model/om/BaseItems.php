@@ -41,150 +41,179 @@ abstract class BaseItems extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getId()
-	{
+  
+  public function getId()
+  {
 
-		return $this->id; 		
-	}
-	
-	public function getAmount()
-	{
+    return $this->id;
 
-		return number_format($this->amount,2,',','.');
-		
-	}
-	
-	public function getPrice()
-	{
+  }
+  
+  public function getAmount($val=false)
+  {
 
-		return number_format($this->price,2,',','.');
-		
-	}
-	
-	public function getComments()
-	{
+    if($val) return number_format($this->amount,2,',','.');
+    else return $this->amount;
 
-		return $this->comments; 		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getPrice($val=false)
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getOrderId()
-	{
+    if($val) return number_format($this->price,2,',','.');
+    else return $this->price;
 
-		return number_format($this->order_id,2,',','.');
-		
-	}
-	
-	public function getProductId()
-	{
+  }
+  
+  public function getComments()
+  {
 
-		return number_format($this->product_id,2,',','.');
-		
-	}
+    return trim($this->comments);
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getOrderId($val=false)
+  {
+
+    if($val) return number_format($this->order_id,2,',','.');
+    else return $this->order_id;
+
+  }
+  
+  public function getProductId($val=false)
+  {
+
+    if($val) return number_format($this->product_id,2,',','.');
+    else return $this->product_id;
+
+  }
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ItemsPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ItemsPeer::ID;
+      }
+  
 	} 
 	
 	public function setAmount($v)
 	{
 
-		if ($this->amount !== $v) {
-			$this->amount = $v;
-			$this->modifiedColumns[] = ItemsPeer::AMOUNT;
-		}
-
+    if ($this->amount !== $v) {
+        $this->amount = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ItemsPeer::AMOUNT;
+      }
+  
 	} 
 	
 	public function setPrice($v)
 	{
 
-		if ($this->price !== $v) {
-			$this->price = $v;
-			$this->modifiedColumns[] = ItemsPeer::PRICE;
-		}
-
+    if ($this->price !== $v) {
+        $this->price = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ItemsPeer::PRICE;
+      }
+  
 	} 
 	
 	public function setComments($v)
 	{
 
-		if ($this->comments !== $v) {
-			$this->comments = $v;
-			$this->modifiedColumns[] = ItemsPeer::COMMENTS;
-		}
-
+    if ($this->comments !== $v) {
+        $this->comments = $v;
+        $this->modifiedColumns[] = ItemsPeer::COMMENTS;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = ItemsPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = ItemsPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setOrderId($v)
 	{
 
-		if ($this->order_id !== $v) {
-			$this->order_id = $v;
-			$this->modifiedColumns[] = ItemsPeer::ORDER_ID;
-		}
-
+    if ($this->order_id !== $v) {
+        $this->order_id = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ItemsPeer::ORDER_ID;
+      }
+  
 	} 
 	
 	public function setProductId($v)
 	{
 
-		if ($this->product_id !== $v) {
-			$this->product_id = $v;
-			$this->modifiedColumns[] = ItemsPeer::PRODUCT_ID;
-		}
-
+    if ($this->product_id !== $v) {
+        $this->product_id = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ItemsPeer::PRODUCT_ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->id = $rs->getInt($startcol + 0);
+      $this->id = $rs->getInt($startcol + 0);
 
-			$this->amount = $rs->getFloat($startcol + 1);
+      $this->amount = $rs->getFloat($startcol + 1);
 
-			$this->price = $rs->getFloat($startcol + 2);
+      $this->price = $rs->getFloat($startcol + 2);
 
-			$this->comments = $rs->getString($startcol + 3);
+      $this->comments = $rs->getString($startcol + 3);
 
-			$this->status = $rs->getString($startcol + 4);
+      $this->status = $rs->getString($startcol + 4);
 
-			$this->order_id = $rs->getFloat($startcol + 5);
+      $this->order_id = $rs->getFloat($startcol + 5);
 
-			$this->product_id = $rs->getFloat($startcol + 6);
+      $this->product_id = $rs->getFloat($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Items object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Items object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

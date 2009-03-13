@@ -210,6 +210,7 @@ abstract class BaseOpcomincPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpcomincPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

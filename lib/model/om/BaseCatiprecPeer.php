@@ -205,6 +205,7 @@ abstract class BaseCatiprecPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CatiprecPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

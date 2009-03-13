@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class AcdocumenMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.AcdocumenMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.AcdocumenMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('acdocumen');
 		$tMap->setPhpName('Acdocumen');
 
@@ -38,7 +38,7 @@ class AcdocumenMapBuilder {
 
 		$tMap->addColumn('ASUDOC', 'Asudoc', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('FECDOC', 'Fecdoc', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECDOC', 'Fecdoc', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('CEDRIF', 'Cedrif', 'string', CreoleTypes::VARCHAR, true, 15);
 
@@ -49,6 +49,6 @@ class AcdocumenMapBuilder {
 		$tMap->addColumn('CONTENT', 'Content', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

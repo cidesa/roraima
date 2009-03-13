@@ -57,219 +57,252 @@ abstract class BaseNpcarocp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcar()
-	{
+  
+  public function getCodcar()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getDescar()
-	{
+    return trim($this->codcar);
 
-		return $this->descar; 		
-	}
-	
-	public function getGracar()
-	{
+  }
+  
+  public function getDescar()
+  {
 
-		return $this->gracar; 		
-	}
-	
-	public function getSuecar()
-	{
+    return trim($this->descar);
 
-		return number_format($this->suecar,2,',','.');
-		
-	}
-	
-	public function getTipcar()
-	{
+  }
+  
+  public function getGracar()
+  {
 
-		return $this->tipcar; 		
-	}
-	
-	public function getFuncar()
-	{
+    return trim($this->gracar);
 
-		return $this->funcar; 		
-	}
-	
-	public function getAtrcar()
-	{
+  }
+  
+  public function getSuecar($val=false)
+  {
 
-		return $this->atrcar; 		
-	}
-	
-	public function getActcar()
-	{
+    if($val) return number_format($this->suecar,2,',','.');
+    else return $this->suecar;
 
-		return $this->actcar; 		
-	}
-	
-	public function getRescar()
-	{
+  }
+  
+  public function getTipcar()
+  {
 
-		return $this->rescar; 		
-	}
-	
-	public function getAnocar()
-	{
+    return trim($this->tipcar);
 
-		return $this->anocar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getFuncar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->funcar);
+
+  }
+  
+  public function getAtrcar()
+  {
+
+    return trim($this->atrcar);
+
+  }
+  
+  public function getActcar()
+  {
+
+    return trim($this->actcar);
+
+  }
+  
+  public function getRescar()
+  {
+
+    return trim($this->rescar);
+
+  }
+  
+  public function getAnocar()
+  {
+
+    return trim($this->anocar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setDescar($v)
 	{
 
-		if ($this->descar !== $v) {
-			$this->descar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::DESCAR;
-		}
-
+    if ($this->descar !== $v) {
+        $this->descar = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::DESCAR;
+      }
+  
 	} 
 	
 	public function setGracar($v)
 	{
 
-		if ($this->gracar !== $v) {
-			$this->gracar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::GRACAR;
-		}
-
+    if ($this->gracar !== $v) {
+        $this->gracar = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::GRACAR;
+      }
+  
 	} 
 	
 	public function setSuecar($v)
 	{
 
-		if ($this->suecar !== $v) {
-			$this->suecar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::SUECAR;
-		}
-
+    if ($this->suecar !== $v) {
+        $this->suecar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcarocpPeer::SUECAR;
+      }
+  
 	} 
 	
 	public function setTipcar($v)
 	{
 
-		if ($this->tipcar !== $v) {
-			$this->tipcar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::TIPCAR;
-		}
-
+    if ($this->tipcar !== $v) {
+        $this->tipcar = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::TIPCAR;
+      }
+  
 	} 
 	
 	public function setFuncar($v)
 	{
 
-		if ($this->funcar !== $v) {
-			$this->funcar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::FUNCAR;
-		}
-
+    if ($this->funcar !== $v) {
+        $this->funcar = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::FUNCAR;
+      }
+  
 	} 
 	
 	public function setAtrcar($v)
 	{
 
-		if ($this->atrcar !== $v) {
-			$this->atrcar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::ATRCAR;
-		}
-
+    if ($this->atrcar !== $v) {
+        $this->atrcar = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::ATRCAR;
+      }
+  
 	} 
 	
 	public function setActcar($v)
 	{
 
-		if ($this->actcar !== $v) {
-			$this->actcar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::ACTCAR;
-		}
-
+    if ($this->actcar !== $v) {
+        $this->actcar = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::ACTCAR;
+      }
+  
 	} 
 	
 	public function setRescar($v)
 	{
 
-		if ($this->rescar !== $v) {
-			$this->rescar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::RESCAR;
-		}
-
+    if ($this->rescar !== $v) {
+        $this->rescar = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::RESCAR;
+      }
+  
 	} 
 	
 	public function setAnocar($v)
 	{
 
-		if ($this->anocar !== $v) {
-			$this->anocar = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::ANOCAR;
-		}
-
+    if ($this->anocar !== $v) {
+        $this->anocar = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::ANOCAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcarocpPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcarocpPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcar = $rs->getString($startcol + 0);
+      $this->codcar = $rs->getString($startcol + 0);
 
-			$this->descar = $rs->getString($startcol + 1);
+      $this->descar = $rs->getString($startcol + 1);
 
-			$this->gracar = $rs->getString($startcol + 2);
+      $this->gracar = $rs->getString($startcol + 2);
 
-			$this->suecar = $rs->getFloat($startcol + 3);
+      $this->suecar = $rs->getFloat($startcol + 3);
 
-			$this->tipcar = $rs->getString($startcol + 4);
+      $this->tipcar = $rs->getString($startcol + 4);
 
-			$this->funcar = $rs->getString($startcol + 5);
+      $this->funcar = $rs->getString($startcol + 5);
 
-			$this->atrcar = $rs->getString($startcol + 6);
+      $this->atrcar = $rs->getString($startcol + 6);
 
-			$this->actcar = $rs->getString($startcol + 7);
+      $this->actcar = $rs->getString($startcol + 7);
 
-			$this->rescar = $rs->getString($startcol + 8);
+      $this->rescar = $rs->getString($startcol + 8);
 
-			$this->anocar = $rs->getString($startcol + 9);
+      $this->anocar = $rs->getString($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcarocp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcarocp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -326,6 +359,7 @@ abstract class BaseNpcarocp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcarocpPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcarocpPeer::doUpdate($this, $con);

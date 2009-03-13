@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class ForfinotrcreMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ForfinotrcreMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ForfinotrcreMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('forfinotrcre');
 		$tMap->setPhpName('Forfinotrcre');
 
@@ -38,9 +38,9 @@ class ForfinotrcreMapBuilder {
 
 		$tMap->addColumn('CODPARING', 'Codparing', 'string', CreoleTypes::VARCHAR, true, 32);
 
-		$tMap->addColumn('MONFIN', 'Monfin', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONFIN', 'Monfin', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

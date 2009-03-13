@@ -1,0 +1,90 @@
+methods:
+  post:
+   - "lireglic{codlic}"
+   - "lireglic{deslic}"
+   - "lireglic{codfin}"
+   - "lireglic{codclacomp}"
+   - "lireglic{liregsol_id}"
+   - "lireglic{fecdisdes}"
+   - "lireglic{fecdishas}"
+   - "lireglic{costo}"
+
+names:
+  lireglic{codlic}:
+    required:  Yes
+    required_msg: El Código de la Licitación no puedo estar en Blanco
+    validators: Validator_codlic
+
+  lireglic{deslic}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_deslic
+
+  lireglic{codfin}:
+    required:  No
+    required_msg: La Fuente de Financiamiento no puedo estar en blanco
+    validators: Fuente_Validator
+
+  lireglic{codclacomp}:
+    required:  No
+    validators: Clacomp_Validator
+
+  lireglic{liregsol_id}:
+    required:  Yes
+    required_msg: El Código de la Solicitud no puede estar en Blanco
+    validators: Validator_Obra, Obra_Validator
+
+  lireglic{fecdisdes}:
+    required:  Yes
+    required_msg: La Fecha Disponibilidad del Pliego (Desde) no puede estar en Blanco.
+
+  lireglic{fecdishas}:
+    required:  Yes
+    required_msg: La Fecha Disponibilidad del Pliego (Hasta) no puede estar en Blanco.
+
+  lireglic{costo}:
+    required:  Yes
+    required_msg: Campo no puede estar en Blanco.
+
+Validator_codlic:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Lireglic
+        column:   codlic
+        unique_error:   El Código ya existe. Por Favor, Intente con otro.
+
+Validator_deslic:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: Las Descripción no puede tener menos de 5 caracteres
+        max:       1000
+        max_error: Las Descripción no puede tener mas de 1000 caracteres
+
+Clacomp_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Occlacomp
+        column:   codclacomp
+        unique_error: El Código de la Clasificación de Compras no existe.
+
+Fuente_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Fortipfin
+        column:   codfin
+        unique_error: El Código de la Fuente de Financiamiento no existe.
+
+Obra_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Liregsol
+        column:   id
+        unique_error: El Código de la Solicitud no existe.
+
+Validator_Obra:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Lireglic
+        column:   liregsol_id
+        unique_error:   La solicitud ya tiene una Licitación asociada. Por Favor, Intente con otro.

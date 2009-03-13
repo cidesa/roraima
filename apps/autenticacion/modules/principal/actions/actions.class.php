@@ -16,15 +16,17 @@ class principalActions extends sfActions
    */
   public function executeIndex()
   {
-  	
-  	
-  	
+    $this->menu=$this->getUser()->obtenerModulos();
+
   }
-  
+
   public function executeMenu()
   {
-  	
-  	
-  	
+
+    $this->modulo = $this->getRequestParameter('m','');
+
+    $this->getUser()->setAttribute('menu',$this->modulo,'cidesa/autenticacion');
+
+
   }
 }

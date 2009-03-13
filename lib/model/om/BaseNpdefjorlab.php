@@ -53,200 +53,232 @@ abstract class BaseNpdefjorlab extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getIdejor()
-	{
+    return trim($this->codnom);
 
-		return $this->idejor; 		
-	}
-	
-	public function getLunes()
-	{
+  }
+  
+  public function getIdejor()
+  {
 
-		return $this->lunes; 		
-	}
-	
-	public function getMartes()
-	{
+    return trim($this->idejor);
 
-		return $this->martes; 		
-	}
-	
-	public function getMiercoles()
-	{
+  }
+  
+  public function getLunes()
+  {
 
-		return $this->miercoles; 		
-	}
-	
-	public function getJueves()
-	{
+    return trim($this->lunes);
 
-		return $this->jueves; 		
-	}
-	
-	public function getViernes()
-	{
+  }
+  
+  public function getMartes()
+  {
 
-		return $this->viernes; 		
-	}
-	
-	public function getSabado()
-	{
+    return trim($this->martes);
 
-		return $this->sabado; 		
-	}
-	
-	public function getDomingo()
-	{
+  }
+  
+  public function getMiercoles()
+  {
 
-		return $this->domingo; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->miercoles);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getJueves()
+  {
+
+    return trim($this->jueves);
+
+  }
+  
+  public function getViernes()
+  {
+
+    return trim($this->viernes);
+
+  }
+  
+  public function getSabado()
+  {
+
+    return trim($this->sabado);
+
+  }
+  
+  public function getDomingo()
+  {
+
+    return trim($this->domingo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setIdejor($v)
 	{
 
-		if ($this->idejor !== $v) {
-			$this->idejor = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::IDEJOR;
-		}
-
+    if ($this->idejor !== $v) {
+        $this->idejor = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::IDEJOR;
+      }
+  
 	} 
 	
 	public function setLunes($v)
 	{
 
-		if ($this->lunes !== $v) {
-			$this->lunes = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::LUNES;
-		}
-
+    if ($this->lunes !== $v) {
+        $this->lunes = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::LUNES;
+      }
+  
 	} 
 	
 	public function setMartes($v)
 	{
 
-		if ($this->martes !== $v) {
-			$this->martes = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::MARTES;
-		}
-
+    if ($this->martes !== $v) {
+        $this->martes = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::MARTES;
+      }
+  
 	} 
 	
 	public function setMiercoles($v)
 	{
 
-		if ($this->miercoles !== $v) {
-			$this->miercoles = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::MIERCOLES;
-		}
-
+    if ($this->miercoles !== $v) {
+        $this->miercoles = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::MIERCOLES;
+      }
+  
 	} 
 	
 	public function setJueves($v)
 	{
 
-		if ($this->jueves !== $v) {
-			$this->jueves = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::JUEVES;
-		}
-
+    if ($this->jueves !== $v) {
+        $this->jueves = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::JUEVES;
+      }
+  
 	} 
 	
 	public function setViernes($v)
 	{
 
-		if ($this->viernes !== $v) {
-			$this->viernes = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::VIERNES;
-		}
-
+    if ($this->viernes !== $v) {
+        $this->viernes = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::VIERNES;
+      }
+  
 	} 
 	
 	public function setSabado($v)
 	{
 
-		if ($this->sabado !== $v) {
-			$this->sabado = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::SABADO;
-		}
-
+    if ($this->sabado !== $v) {
+        $this->sabado = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::SABADO;
+      }
+  
 	} 
 	
 	public function setDomingo($v)
 	{
 
-		if ($this->domingo !== $v) {
-			$this->domingo = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::DOMINGO;
-		}
-
+    if ($this->domingo !== $v) {
+        $this->domingo = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::DOMINGO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdefjorlabPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdefjorlabPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->idejor = $rs->getString($startcol + 1);
+      $this->idejor = $rs->getString($startcol + 1);
 
-			$this->lunes = $rs->getString($startcol + 2);
+      $this->lunes = $rs->getString($startcol + 2);
 
-			$this->martes = $rs->getString($startcol + 3);
+      $this->martes = $rs->getString($startcol + 3);
 
-			$this->miercoles = $rs->getString($startcol + 4);
+      $this->miercoles = $rs->getString($startcol + 4);
 
-			$this->jueves = $rs->getString($startcol + 5);
+      $this->jueves = $rs->getString($startcol + 5);
 
-			$this->viernes = $rs->getString($startcol + 6);
+      $this->viernes = $rs->getString($startcol + 6);
 
-			$this->sabado = $rs->getString($startcol + 7);
+      $this->sabado = $rs->getString($startcol + 7);
 
-			$this->domingo = $rs->getString($startcol + 8);
+      $this->domingo = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdefjorlab object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdefjorlab object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -303,6 +335,7 @@ abstract class BaseNpdefjorlab extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdefjorlabPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefjorlabPeer::doUpdate($this, $con);

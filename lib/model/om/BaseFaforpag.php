@@ -41,147 +41,176 @@ abstract class BaseFaforpag extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReffac()
-	{
+  
+  public function getReffac()
+  {
 
-		return $this->reffac; 		
-	}
-	
-	public function getTippag()
-	{
+    return trim($this->reffac);
 
-		return $this->tippag; 		
-	}
-	
-	public function getNropag()
-	{
+  }
+  
+  public function getTippag()
+  {
 
-		return $this->nropag; 		
-	}
-	
-	public function getNomban()
-	{
+    return $this->tippag;
 
-		return $this->nomban; 		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getNropag()
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getNumero()
-	{
+    return trim($this->nropag);
 
-		return $this->numero; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomban()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomban);
+
+  }
+  
+  public function getMonpag($val=false)
+  {
+
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getNumero()
+  {
+
+    return trim($this->numero);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReffac($v)
 	{
 
-		if ($this->reffac !== $v) {
-			$this->reffac = $v;
-			$this->modifiedColumns[] = FaforpagPeer::REFFAC;
-		}
-
+    if ($this->reffac !== $v) {
+        $this->reffac = $v;
+        $this->modifiedColumns[] = FaforpagPeer::REFFAC;
+      }
+  
 	} 
 	
 	public function setTippag($v)
 	{
 
-		if ($this->tippag !== $v) {
-			$this->tippag = $v;
-			$this->modifiedColumns[] = FaforpagPeer::TIPPAG;
-		}
-
+    if ($this->tippag !== $v) {
+        $this->tippag = $v;
+        $this->modifiedColumns[] = FaforpagPeer::TIPPAG;
+      }
+  
 	} 
 	
 	public function setNropag($v)
 	{
 
-		if ($this->nropag !== $v) {
-			$this->nropag = $v;
-			$this->modifiedColumns[] = FaforpagPeer::NROPAG;
-		}
-
+    if ($this->nropag !== $v) {
+        $this->nropag = $v;
+        $this->modifiedColumns[] = FaforpagPeer::NROPAG;
+      }
+  
 	} 
 	
 	public function setNomban($v)
 	{
 
-		if ($this->nomban !== $v) {
-			$this->nomban = $v;
-			$this->modifiedColumns[] = FaforpagPeer::NOMBAN;
-		}
-
+    if ($this->nomban !== $v) {
+        $this->nomban = $v;
+        $this->modifiedColumns[] = FaforpagPeer::NOMBAN;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = FaforpagPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaforpagPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setNumero($v)
 	{
 
-		if ($this->numero !== $v) {
-			$this->numero = $v;
-			$this->modifiedColumns[] = FaforpagPeer::NUMERO;
-		}
-
+    if ($this->numero !== $v) {
+        $this->numero = $v;
+        $this->modifiedColumns[] = FaforpagPeer::NUMERO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FaforpagPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FaforpagPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reffac = $rs->getString($startcol + 0);
+      $this->reffac = $rs->getString($startcol + 0);
 
-			$this->tippag = $rs->getString($startcol + 1);
+      $this->tippag = $rs->getInt($startcol + 1);
 
-			$this->nropag = $rs->getString($startcol + 2);
+      $this->nropag = $rs->getString($startcol + 2);
 
-			$this->nomban = $rs->getString($startcol + 3);
+      $this->nomban = $rs->getString($startcol + 3);
 
-			$this->monpag = $rs->getFloat($startcol + 4);
+      $this->monpag = $rs->getFloat($startcol + 4);
 
-			$this->numero = $rs->getString($startcol + 5);
+      $this->numero = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Faforpag object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Faforpag object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -238,6 +267,7 @@ abstract class BaseFaforpag extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FaforpagPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FaforpagPeer::doUpdate($this, $con);

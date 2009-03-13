@@ -45,169 +45,199 @@ abstract class BaseForcosequ extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodart()
-	{
+  
+  public function getCodart()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getCanrem()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canrem,2,',','.');
-		
-	}
-	
-	public function getCandef()
-	{
+  }
+  
+  public function getCanrem($val=false)
+  {
 
-		return number_format($this->candef,2,',','.');
-		
-	}
-	
-	public function getTotart()
-	{
+    if($val) return number_format($this->canrem,2,',','.');
+    else return $this->canrem;
 
-		return number_format($this->totart,2,',','.');
-		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCandef($val=false)
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getTotcan()
-	{
+    if($val) return number_format($this->candef,2,',','.');
+    else return $this->candef;
 
-		return number_format($this->totcan,2,',','.');
-		
-	}
-	
-	public function getCosult()
-	{
+  }
+  
+  public function getTotart($val=false)
+  {
 
-		return number_format($this->cosult,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->totart,2,',','.');
+    else return $this->totart;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodcat()
+  {
+
+    return trim($this->codcat);
+
+  }
+  
+  public function getTotcan($val=false)
+  {
+
+    if($val) return number_format($this->totcan,2,',','.');
+    else return $this->totcan;
+
+  }
+  
+  public function getCosult($val=false)
+  {
+
+    if($val) return number_format($this->cosult,2,',','.');
+    else return $this->cosult;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = ForcosequPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = ForcosequPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCanrem($v)
 	{
 
-		if ($this->canrem !== $v) {
-			$this->canrem = $v;
-			$this->modifiedColumns[] = ForcosequPeer::CANREM;
-		}
-
+    if ($this->canrem !== $v) {
+        $this->canrem = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcosequPeer::CANREM;
+      }
+  
 	} 
 	
 	public function setCandef($v)
 	{
 
-		if ($this->candef !== $v) {
-			$this->candef = $v;
-			$this->modifiedColumns[] = ForcosequPeer::CANDEF;
-		}
-
+    if ($this->candef !== $v) {
+        $this->candef = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcosequPeer::CANDEF;
+      }
+  
 	} 
 	
 	public function setTotart($v)
 	{
 
-		if ($this->totart !== $v) {
-			$this->totart = $v;
-			$this->modifiedColumns[] = ForcosequPeer::TOTART;
-		}
-
+    if ($this->totart !== $v) {
+        $this->totart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcosequPeer::TOTART;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = ForcosequPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = ForcosequPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setTotcan($v)
 	{
 
-		if ($this->totcan !== $v) {
-			$this->totcan = $v;
-			$this->modifiedColumns[] = ForcosequPeer::TOTCAN;
-		}
-
+    if ($this->totcan !== $v) {
+        $this->totcan = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcosequPeer::TOTCAN;
+      }
+  
 	} 
 	
 	public function setCosult($v)
 	{
 
-		if ($this->cosult !== $v) {
-			$this->cosult = $v;
-			$this->modifiedColumns[] = ForcosequPeer::COSULT;
-		}
-
+    if ($this->cosult !== $v) {
+        $this->cosult = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcosequPeer::COSULT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForcosequPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForcosequPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codart = $rs->getString($startcol + 0);
+      $this->codart = $rs->getString($startcol + 0);
 
-			$this->canrem = $rs->getFloat($startcol + 1);
+      $this->canrem = $rs->getFloat($startcol + 1);
 
-			$this->candef = $rs->getFloat($startcol + 2);
+      $this->candef = $rs->getFloat($startcol + 2);
 
-			$this->totart = $rs->getFloat($startcol + 3);
+      $this->totart = $rs->getFloat($startcol + 3);
 
-			$this->codcat = $rs->getString($startcol + 4);
+      $this->codcat = $rs->getString($startcol + 4);
 
-			$this->totcan = $rs->getFloat($startcol + 5);
+      $this->totcan = $rs->getFloat($startcol + 5);
 
-			$this->cosult = $rs->getFloat($startcol + 6);
+      $this->cosult = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forcosequ object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forcosequ object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

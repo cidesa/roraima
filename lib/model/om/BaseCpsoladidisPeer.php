@@ -300,6 +300,7 @@ abstract class BaseCpsoladidisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpsoladidisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

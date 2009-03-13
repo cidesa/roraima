@@ -29,94 +29,120 @@ abstract class BaseNumeros extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNum()
-	{
+  
+  public function getNum($val=false)
+  {
 
-		return number_format($this->num,2,',','.');
-		
-	}
-	
-	public function getPos()
-	{
+    if($val) return number_format($this->num,2,',','.');
+    else return $this->num;
 
-		return number_format($this->pos,2,',','.');
-		
-	}
-	
-	public function getNomnum()
-	{
+  }
+  
+  public function getPos($val=false)
+  {
 
-		return $this->nomnum; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->pos,2,',','.');
+    else return $this->pos;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomnum()
+  {
+
+    return trim($this->nomnum);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNum($v)
 	{
 
-		if ($this->num !== $v) {
-			$this->num = $v;
-			$this->modifiedColumns[] = NumerosPeer::NUM;
-		}
-
+    if ($this->num !== $v) {
+        $this->num = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NumerosPeer::NUM;
+      }
+  
 	} 
 	
 	public function setPos($v)
 	{
 
-		if ($this->pos !== $v) {
-			$this->pos = $v;
-			$this->modifiedColumns[] = NumerosPeer::POS;
-		}
-
+    if ($this->pos !== $v) {
+        $this->pos = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NumerosPeer::POS;
+      }
+  
 	} 
 	
 	public function setNomnum($v)
 	{
 
-		if ($this->nomnum !== $v) {
-			$this->nomnum = $v;
-			$this->modifiedColumns[] = NumerosPeer::NOMNUM;
-		}
-
+    if ($this->nomnum !== $v) {
+        $this->nomnum = $v;
+        $this->modifiedColumns[] = NumerosPeer::NOMNUM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NumerosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NumerosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->num = $rs->getFloat($startcol + 0);
+      $this->num = $rs->getFloat($startcol + 0);
 
-			$this->pos = $rs->getFloat($startcol + 1);
+      $this->pos = $rs->getFloat($startcol + 1);
 
-			$this->nomnum = $rs->getString($startcol + 2);
+      $this->nomnum = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Numeros object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Numeros object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -173,6 +199,7 @@ abstract class BaseNumeros extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NumerosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NumerosPeer::doUpdate($this, $con);

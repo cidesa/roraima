@@ -205,6 +205,7 @@ abstract class BaseCadefubiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CadefubiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

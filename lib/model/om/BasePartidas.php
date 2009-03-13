@@ -25,74 +25,99 @@ abstract class BasePartidas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpar()
-	{
+  
+  public function getCodpar()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getNompar()
-	{
+    return trim($this->codpar);
 
-		return $this->nompar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNompar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nompar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = PartidasPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = PartidasPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setNompar($v)
 	{
 
-		if ($this->nompar !== $v) {
-			$this->nompar = $v;
-			$this->modifiedColumns[] = PartidasPeer::NOMPAR;
-		}
-
+    if ($this->nompar !== $v) {
+        $this->nompar = $v;
+        $this->modifiedColumns[] = PartidasPeer::NOMPAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = PartidasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = PartidasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpar = $rs->getString($startcol + 0);
+      $this->codpar = $rs->getString($startcol + 0);
 
-			$this->nompar = $rs->getString($startcol + 1);
+      $this->nompar = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Partidas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Partidas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -1,0 +1,47 @@
+methods:
+  post:
+
+   - "nptippre{codtippre}"
+   - "nptippre{destippre}"
+   - "nptippre{codcon}"
+
+
+names:
+  nptippre{codtippre}:
+    required:  Yes
+    required_msg: El código del tipo de préstamo no puede estar en Blanco
+    validators: Validator_codtippre
+
+  nptippre{destippre}:
+    required:  Yes
+    required_msg: La Descripción del tipo de préstamo no puede estar en Blanco
+    validators: Validator_MyString
+
+  nptippre{codcon}:
+    required:  Yes
+    required_msg: El código del concepto no puede estar en Blanco
+    validators: CodConValidator
+
+
+Validator_codtippre:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Nptippre
+        column:       codtippre
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La Descripción no puede pasar mas de 100 caracteres
+
+CodConValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Npdefcpt
+        column:   codcon
+        unique_error:   El Código del concepto no existe.
+

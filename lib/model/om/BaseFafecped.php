@@ -45,212 +45,240 @@ abstract class BaseFafecped extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNroped()
-	{
+  
+  public function getNroped()
+  {
 
-		return $this->nroped; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->nroped);
 
-		return $this->codart; 		
-	}
-	
-	public function getCanent()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return number_format($this->canent,2,',','.');
-		
-	}
-	
-	public function getCanaju()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canaju,2,',','.');
-		
-	}
-	
-	public function getFecent($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCanent($val=false)
+  {
 
-		if ($this->fecent === null || $this->fecent === '') {
-			return null;
-		} elseif (!is_int($this->fecent)) {
-						$ts = strtotime($this->fecent);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
-			}
-		} else {
-			$ts = $this->fecent;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->canent,2,',','.');
+    else return $this->canent;
 
-	
-	public function getFecaju($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCanaju($val=false)
+  {
 
-		if ($this->fecaju === null || $this->fecaju === '') {
-			return null;
-		} elseif (!is_int($this->fecaju)) {
-						$ts = strtotime($this->fecaju);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
-			}
-		} else {
-			$ts = $this->fecaju;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->canaju,2,',','.');
+    else return $this->canaju;
 
-	
-	public function getStafec()
-	{
+  }
+  
+  public function getFecent($format = 'Y-m-d')
+  {
 
-		return $this->stafec; 		
-	}
-	
-	public function getId()
-	{
+    if ($this->fecent === null || $this->fecent === '') {
+      return null;
+    } elseif (!is_int($this->fecent)) {
+            $ts = adodb_strtotime($this->fecent);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
+      }
+    } else {
+      $ts = $this->fecent;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getFecaju($format = 'Y-m-d')
+  {
+
+    if ($this->fecaju === null || $this->fecaju === '') {
+      return null;
+    } elseif (!is_int($this->fecaju)) {
+            $ts = adodb_strtotime($this->fecaju);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
+      }
+    } else {
+      $ts = $this->fecaju;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getStafec()
+  {
+
+    return trim($this->stafec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNroped($v)
 	{
 
-		if ($this->nroped !== $v) {
-			$this->nroped = $v;
-			$this->modifiedColumns[] = FafecpedPeer::NROPED;
-		}
-
+    if ($this->nroped !== $v) {
+        $this->nroped = $v;
+        $this->modifiedColumns[] = FafecpedPeer::NROPED;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FafecpedPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FafecpedPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCanent($v)
 	{
 
-		if ($this->canent !== $v) {
-			$this->canent = $v;
-			$this->modifiedColumns[] = FafecpedPeer::CANENT;
-		}
-
+    if ($this->canent !== $v) {
+        $this->canent = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FafecpedPeer::CANENT;
+      }
+  
 	} 
 	
 	public function setCanaju($v)
 	{
 
-		if ($this->canaju !== $v) {
-			$this->canaju = $v;
-			$this->modifiedColumns[] = FafecpedPeer::CANAJU;
-		}
-
+    if ($this->canaju !== $v) {
+        $this->canaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FafecpedPeer::CANAJU;
+      }
+  
 	} 
 	
 	public function setFecent($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecent !== $ts) {
-			$this->fecent = $ts;
-			$this->modifiedColumns[] = FafecpedPeer::FECENT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecent !== $ts) {
+      $this->fecent = $ts;
+      $this->modifiedColumns[] = FafecpedPeer::FECENT;
+    }
 
 	} 
 	
 	public function setFecaju($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecaju !== $ts) {
-			$this->fecaju = $ts;
-			$this->modifiedColumns[] = FafecpedPeer::FECAJU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecaju !== $ts) {
+      $this->fecaju = $ts;
+      $this->modifiedColumns[] = FafecpedPeer::FECAJU;
+    }
 
 	} 
 	
 	public function setStafec($v)
 	{
 
-		if ($this->stafec !== $v) {
-			$this->stafec = $v;
-			$this->modifiedColumns[] = FafecpedPeer::STAFEC;
-		}
-
+    if ($this->stafec !== $v) {
+        $this->stafec = $v;
+        $this->modifiedColumns[] = FafecpedPeer::STAFEC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FafecpedPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FafecpedPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nroped = $rs->getString($startcol + 0);
+      $this->nroped = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->canent = $rs->getFloat($startcol + 2);
+      $this->canent = $rs->getFloat($startcol + 2);
 
-			$this->canaju = $rs->getFloat($startcol + 3);
+      $this->canaju = $rs->getFloat($startcol + 3);
 
-			$this->fecent = $rs->getDate($startcol + 4, null);
+      $this->fecent = $rs->getDate($startcol + 4, null);
 
-			$this->fecaju = $rs->getDate($startcol + 5, null);
+      $this->fecaju = $rs->getDate($startcol + 5, null);
 
-			$this->stafec = $rs->getString($startcol + 6);
+      $this->stafec = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fafecped object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fafecped object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -307,6 +335,7 @@ abstract class BaseFafecped extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FafecpedPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FafecpedPeer::doUpdate($this, $con);

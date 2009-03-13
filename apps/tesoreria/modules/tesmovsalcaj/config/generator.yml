@@ -1,0 +1,33 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Tssalcaj
+    theme:            cidesaGenerator
+    fields:
+      refsal: { name: Número de Recibo, params: maxlength=8 onBlur="javascript:event.keyCode=13; enter(event,this.value);"}
+      fecsal: { name: Fecha de Emisión, params: date_format='dd/MM/yyyy' maxlength=10}
+      cedrif: { name: C.I/R.I.F del Beneficiario, params: maxlength=15}
+      nomben: { name: Nombre del Beneficiario, params: maxlength=250}
+      dessal: { name: Concepto, type: textarea_tag, params: size=80x5 maxlength=250 onkeyup="javascript:return ismaxlength(this)"}
+      monsal: { name: Neto a Pagar}
+      grid: { name: . }
+    list:
+      title:          Salidas de Caja
+      display:        [=refsal, fecsal, cedrif]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [refsal, fecsal, cedrif]
+      max_per_page:   10
+      sort:           refsal
+    edit:
+      title:          Edición de Salidas de Caja
+      display:
+        "Datos del Recibo": [refsal, _fecsal, _cedrif]
+        "Detalle del Pago": [dessal, _grid, monsal]
+      hide: [ctapag, agregabenefi, numcue, tipdoc]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

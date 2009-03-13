@@ -14,6 +14,12 @@ generator:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
+      sort: codtipgas
     edit:
-      title:         Edicion de Tipos de Gastos
+      title:         Edición de Tipos de Gastos
       display:       [codtipgas, destipgas]
+      actions:
+        _list:         ~
+        _save:         ~
+        _delete:       ~
+        _create:       ~

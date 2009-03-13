@@ -29,93 +29,119 @@ abstract class BaseCpmovadifin extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefadi()
-	{
+  
+  public function getRefadi()
+  {
 
-		return $this->refadi; 		
-	}
-	
-	public function getCodfin()
-	{
+    return trim($this->refadi);
 
-		return $this->codfin; 		
-	}
-	
-	public function getMonfin()
-	{
+  }
+  
+  public function getCodfin()
+  {
 
-		return number_format($this->monfin,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codfin);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonfin($val=false)
+  {
+
+    if($val) return number_format($this->monfin,2,',','.');
+    else return $this->monfin;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefadi($v)
 	{
 
-		if ($this->refadi !== $v) {
-			$this->refadi = $v;
-			$this->modifiedColumns[] = CpmovadifinPeer::REFADI;
-		}
-
+    if ($this->refadi !== $v) {
+        $this->refadi = $v;
+        $this->modifiedColumns[] = CpmovadifinPeer::REFADI;
+      }
+  
 	} 
 	
 	public function setCodfin($v)
 	{
 
-		if ($this->codfin !== $v) {
-			$this->codfin = $v;
-			$this->modifiedColumns[] = CpmovadifinPeer::CODFIN;
-		}
-
+    if ($this->codfin !== $v) {
+        $this->codfin = $v;
+        $this->modifiedColumns[] = CpmovadifinPeer::CODFIN;
+      }
+  
 	} 
 	
 	public function setMonfin($v)
 	{
 
-		if ($this->monfin !== $v) {
-			$this->monfin = $v;
-			$this->modifiedColumns[] = CpmovadifinPeer::MONFIN;
-		}
-
+    if ($this->monfin !== $v) {
+        $this->monfin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpmovadifinPeer::MONFIN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpmovadifinPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpmovadifinPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refadi = $rs->getString($startcol + 0);
+      $this->refadi = $rs->getString($startcol + 0);
 
-			$this->codfin = $rs->getString($startcol + 1);
+      $this->codfin = $rs->getString($startcol + 1);
 
-			$this->monfin = $rs->getFloat($startcol + 2);
+      $this->monfin = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpmovadifin object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpmovadifin object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseCpmovadifin extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpmovadifinPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpmovadifinPeer::doUpdate($this, $con);

@@ -25,74 +25,99 @@ abstract class BaseFcdefrecdes extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoddes()
-	{
+  
+  public function getCoddes()
+  {
 
-		return $this->coddes; 		
-	}
-	
-	public function getCodrec()
-	{
+    return trim($this->coddes);
 
-		return $this->codrec; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodrec()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codrec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoddes($v)
 	{
 
-		if ($this->coddes !== $v) {
-			$this->coddes = $v;
-			$this->modifiedColumns[] = FcdefrecdesPeer::CODDES;
-		}
-
+    if ($this->coddes !== $v) {
+        $this->coddes = $v;
+        $this->modifiedColumns[] = FcdefrecdesPeer::CODDES;
+      }
+  
 	} 
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = FcdefrecdesPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = FcdefrecdesPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdefrecdesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdefrecdesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coddes = $rs->getString($startcol + 0);
+      $this->coddes = $rs->getString($startcol + 0);
 
-			$this->codrec = $rs->getString($startcol + 1);
+      $this->codrec = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdefrecdes object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdefrecdes object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseFcdefrecdes extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdefrecdesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdefrecdesPeer::doUpdate($this, $con);

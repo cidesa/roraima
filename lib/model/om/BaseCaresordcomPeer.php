@@ -250,6 +250,7 @@ abstract class BaseCaresordcomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaresordcomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

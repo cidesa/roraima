@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "ocinscon{numins}"
+   - "ocinscon{codcon}"
+
+names:
+  ocinscon{numins}:
+    required:  Yes
+    required_msg: El Número de Inspección no puedo estar en Blanco
+    validators: Validator_numins
+
+  ocinscon{codcon}:
+    required:  Yes
+    required_msg: El Código del Contrato no puedo estar en Blanco
+    validators: Contrato_Validator
+
+Validator_numins:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Ocinscon
+        column:   numins
+        unique_error:   El Número de Inspección ya existe. Por Favor, Intente con otro.
+
+Contrato_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Ocregcon
+        column:   codcon
+        unique_error: El Código del Contrato no existe.

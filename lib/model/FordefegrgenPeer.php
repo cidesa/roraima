@@ -9,4 +9,9 @@
  */ 
 class FordefegrgenPeer extends BaseFordefegrgenPeer
 {
+		public function getDespar()
+	{
+		return Herramientas::getX('CODPRE','Cpdeftit','Nompre',trim(self::getCodpariva()));
+	}
+	
 }

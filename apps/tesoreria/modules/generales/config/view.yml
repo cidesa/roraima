@@ -11,7 +11,8 @@ default:
 
   stylesheets:    [main]
 
-  javascripts:    []
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype]
 
   has_layout:     on
   layout:         layout_generales
+

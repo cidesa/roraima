@@ -1,0 +1,32 @@
+methods:
+  post:
+   - "octipadj{codtipadj}"
+   - "octipadj{destipadj}"
+
+names:
+  octipadj{codtipadj}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  octipadj{destipadj}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco.
+    validators: DescripcionValidator
+
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Octipadj
+        column:       codtipadj
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La Descripcion no puede pasar mas de 250 caracteres

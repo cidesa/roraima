@@ -220,6 +220,7 @@ abstract class BaseFordefparingPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefparingPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

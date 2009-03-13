@@ -4,20 +4,25 @@ generator:
     model_class:      Npconfon
     theme:            default
     fields:
-      codnom: { name: Codigo de la Nomina}
+      codnom: { name: Código de la Nomina}
       nomnom: {name: Nombre}
-      codcon: { name: Codigo del Concepto}
-      nomcon: {name: Nombre} 
+      codcon: { name: Código del Concepto}
+      nomcon: {name: Nombre}
       tipcon: { name: Tipo de Concepto}
-              
+
     list:
-      title:          Conceptos para el Fondo de Jubilacion y Pensiones
+      title:          Conceptos para el Fondo de Jubilación y Pensiones
       filters:        [codnom]
-      display:        [=codnom, nomnom, codcon, nomcon, tipcon]
+      display:        [=codnom, nomnom]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Edicion de Conceptos para el Fondo de Jubilacion y Pensiones
+      title:          Edición de Conceptos para el Fondo de Jubilación y Pensiones
       display:       [=codnom, codcon, tipcon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

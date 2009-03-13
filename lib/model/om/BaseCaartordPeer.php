@@ -13,7 +13,7 @@ abstract class BaseCaartordPeer {
 	const CLASS_DEFAULT = 'lib.model.Caartord';
 
 	
-	const NUM_COLUMNS = 19;
+	const NUM_COLUMNS = 20;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -50,6 +50,9 @@ abstract class BaseCaartordPeer {
 	const CODRGO = 'caartord.CODRGO';
 
 	
+	const CERART = 'caartord.CERART';
+
+	
 	const RGOART = 'caartord.RGOART';
 
 	
@@ -82,18 +85,18 @@ abstract class BaseCaartordPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Ordcom', 'Codart', 'Codcat', 'Canord', 'Canaju', 'Canrec', 'Cantot', 'Preart', 'Dtoart', 'Codrgo', 'Rgoart', 'Totart', 'Fecent', 'Desart', 'Relart', 'Unimed', 'Codpar', 'Partida', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaartordPeer::ORDCOM, CaartordPeer::CODART, CaartordPeer::CODCAT, CaartordPeer::CANORD, CaartordPeer::CANAJU, CaartordPeer::CANREC, CaartordPeer::CANTOT, CaartordPeer::PREART, CaartordPeer::DTOART, CaartordPeer::CODRGO, CaartordPeer::RGOART, CaartordPeer::TOTART, CaartordPeer::FECENT, CaartordPeer::DESART, CaartordPeer::RELART, CaartordPeer::UNIMED, CaartordPeer::CODPAR, CaartordPeer::PARTIDA, CaartordPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('ordcom', 'codart', 'codcat', 'canord', 'canaju', 'canrec', 'cantot', 'preart', 'dtoart', 'codrgo', 'rgoart', 'totart', 'fecent', 'desart', 'relart', 'unimed', 'codpar', 'partida', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
+		BasePeer::TYPE_PHPNAME => array ('Ordcom', 'Codart', 'Codcat', 'Canord', 'Canaju', 'Canrec', 'Cantot', 'Preart', 'Dtoart', 'Codrgo', 'Cerart', 'Rgoart', 'Totart', 'Fecent', 'Desart', 'Relart', 'Unimed', 'Codpar', 'Partida', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaartordPeer::ORDCOM, CaartordPeer::CODART, CaartordPeer::CODCAT, CaartordPeer::CANORD, CaartordPeer::CANAJU, CaartordPeer::CANREC, CaartordPeer::CANTOT, CaartordPeer::PREART, CaartordPeer::DTOART, CaartordPeer::CODRGO, CaartordPeer::CERART, CaartordPeer::RGOART, CaartordPeer::TOTART, CaartordPeer::FECENT, CaartordPeer::DESART, CaartordPeer::RELART, CaartordPeer::UNIMED, CaartordPeer::CODPAR, CaartordPeer::PARTIDA, CaartordPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('ordcom', 'codart', 'codcat', 'canord', 'canaju', 'canrec', 'cantot', 'preart', 'dtoart', 'codrgo', 'cerart', 'rgoart', 'totart', 'fecent', 'desart', 'relart', 'unimed', 'codpar', 'partida', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Ordcom' => 0, 'Codart' => 1, 'Codcat' => 2, 'Canord' => 3, 'Canaju' => 4, 'Canrec' => 5, 'Cantot' => 6, 'Preart' => 7, 'Dtoart' => 8, 'Codrgo' => 9, 'Rgoart' => 10, 'Totart' => 11, 'Fecent' => 12, 'Desart' => 13, 'Relart' => 14, 'Unimed' => 15, 'Codpar' => 16, 'Partida' => 17, 'Id' => 18, ),
-		BasePeer::TYPE_COLNAME => array (CaartordPeer::ORDCOM => 0, CaartordPeer::CODART => 1, CaartordPeer::CODCAT => 2, CaartordPeer::CANORD => 3, CaartordPeer::CANAJU => 4, CaartordPeer::CANREC => 5, CaartordPeer::CANTOT => 6, CaartordPeer::PREART => 7, CaartordPeer::DTOART => 8, CaartordPeer::CODRGO => 9, CaartordPeer::RGOART => 10, CaartordPeer::TOTART => 11, CaartordPeer::FECENT => 12, CaartordPeer::DESART => 13, CaartordPeer::RELART => 14, CaartordPeer::UNIMED => 15, CaartordPeer::CODPAR => 16, CaartordPeer::PARTIDA => 17, CaartordPeer::ID => 18, ),
-		BasePeer::TYPE_FIELDNAME => array ('ordcom' => 0, 'codart' => 1, 'codcat' => 2, 'canord' => 3, 'canaju' => 4, 'canrec' => 5, 'cantot' => 6, 'preart' => 7, 'dtoart' => 8, 'codrgo' => 9, 'rgoart' => 10, 'totart' => 11, 'fecent' => 12, 'desart' => 13, 'relart' => 14, 'unimed' => 15, 'codpar' => 16, 'partida' => 17, 'id' => 18, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
+		BasePeer::TYPE_PHPNAME => array ('Ordcom' => 0, 'Codart' => 1, 'Codcat' => 2, 'Canord' => 3, 'Canaju' => 4, 'Canrec' => 5, 'Cantot' => 6, 'Preart' => 7, 'Dtoart' => 8, 'Codrgo' => 9, 'Cerart' => 10, 'Rgoart' => 11, 'Totart' => 12, 'Fecent' => 13, 'Desart' => 14, 'Relart' => 15, 'Unimed' => 16, 'Codpar' => 17, 'Partida' => 18, 'Id' => 19, ),
+		BasePeer::TYPE_COLNAME => array (CaartordPeer::ORDCOM => 0, CaartordPeer::CODART => 1, CaartordPeer::CODCAT => 2, CaartordPeer::CANORD => 3, CaartordPeer::CANAJU => 4, CaartordPeer::CANREC => 5, CaartordPeer::CANTOT => 6, CaartordPeer::PREART => 7, CaartordPeer::DTOART => 8, CaartordPeer::CODRGO => 9, CaartordPeer::CERART => 10, CaartordPeer::RGOART => 11, CaartordPeer::TOTART => 12, CaartordPeer::FECENT => 13, CaartordPeer::DESART => 14, CaartordPeer::RELART => 15, CaartordPeer::UNIMED => 16, CaartordPeer::CODPAR => 17, CaartordPeer::PARTIDA => 18, CaartordPeer::ID => 19, ),
+		BasePeer::TYPE_FIELDNAME => array ('ordcom' => 0, 'codart' => 1, 'codcat' => 2, 'canord' => 3, 'canaju' => 4, 'canrec' => 5, 'cantot' => 6, 'preart' => 7, 'dtoart' => 8, 'codrgo' => 9, 'cerart' => 10, 'rgoart' => 11, 'totart' => 12, 'fecent' => 13, 'desart' => 14, 'relart' => 15, 'unimed' => 16, 'codpar' => 17, 'partida' => 18, 'id' => 19, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
 	
@@ -166,6 +169,8 @@ abstract class BaseCaartordPeer {
 		$criteria->addSelectColumn(CaartordPeer::DTOART);
 
 		$criteria->addSelectColumn(CaartordPeer::CODRGO);
+
+		$criteria->addSelectColumn(CaartordPeer::CERART);
 
 		$criteria->addSelectColumn(CaartordPeer::RGOART);
 
@@ -285,6 +290,7 @@ abstract class BaseCaartordPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaartordPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

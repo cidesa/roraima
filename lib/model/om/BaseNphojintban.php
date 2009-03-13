@@ -29,92 +29,118 @@ abstract class BaseNphojintban extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCtaban()
-	{
+    return trim($this->codemp);
 
-		return $this->ctaban; 		
-	}
-	
-	public function getCodban()
-	{
+  }
+  
+  public function getCtaban()
+  {
 
-		return $this->codban; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->ctaban);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodban()
+  {
+
+    return trim($this->codban);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NphojintbanPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NphojintbanPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCtaban($v)
 	{
 
-		if ($this->ctaban !== $v) {
-			$this->ctaban = $v;
-			$this->modifiedColumns[] = NphojintbanPeer::CTABAN;
-		}
-
+    if ($this->ctaban !== $v) {
+        $this->ctaban = $v;
+        $this->modifiedColumns[] = NphojintbanPeer::CTABAN;
+      }
+  
 	} 
 	
 	public function setCodban($v)
 	{
 
-		if ($this->codban !== $v) {
-			$this->codban = $v;
-			$this->modifiedColumns[] = NphojintbanPeer::CODBAN;
-		}
-
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = NphojintbanPeer::CODBAN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NphojintbanPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NphojintbanPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->ctaban = $rs->getString($startcol + 1);
+      $this->ctaban = $rs->getString($startcol + 1);
 
-			$this->codban = $rs->getString($startcol + 2);
+      $this->codban = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nphojintban object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nphojintban object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseNphojintban extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NphojintbanPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NphojintbanPeer::doUpdate($this, $con);

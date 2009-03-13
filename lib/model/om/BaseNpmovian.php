@@ -29,93 +29,119 @@ abstract class BaseNpmovian extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codemp);
 
-		return $this->codcon; 		
-	}
-	
-	public function getMoncon()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return number_format($this->moncon,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codcon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMoncon($val=false)
+  {
+
+    if($val) return number_format($this->moncon,2,',','.');
+    else return $this->moncon;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpmovianPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpmovianPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpmovianPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpmovianPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setMoncon($v)
 	{
 
-		if ($this->moncon !== $v) {
-			$this->moncon = $v;
-			$this->modifiedColumns[] = NpmovianPeer::MONCON;
-		}
-
+    if ($this->moncon !== $v) {
+        $this->moncon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpmovianPeer::MONCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpmovianPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpmovianPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->moncon = $rs->getFloat($startcol + 2);
+      $this->moncon = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npmovian object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npmovian object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseNpmovian extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpmovianPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpmovianPeer::doUpdate($this, $con);

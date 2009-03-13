@@ -37,6 +37,10 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 
 
 	
+	protected $reqaut;
+
+
+	
 	protected $id;
 
 	
@@ -45,164 +49,213 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTipcom()
-	{
+  
+  public function getTipcom()
+  {
 
-		return $this->tipcom; 		
-	}
-	
-	public function getNomext()
-	{
+    return trim($this->tipcom);
 
-		return $this->nomext; 		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getNomext()
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getRefprc()
-	{
+    return trim($this->nomext);
 
-		return $this->refprc; 		
-	}
-	
-	public function getAfeprc()
-	{
+  }
+  
+  public function getNomabr()
+  {
 
-		return $this->afeprc; 		
-	}
-	
-	public function getAfecom()
-	{
+    return trim($this->nomabr);
 
-		return $this->afecom; 		
-	}
-	
-	public function getAfedis()
-	{
+  }
+  
+  public function getRefprc()
+  {
 
-		return $this->afedis; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->refprc);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getAfeprc()
+  {
+
+    return trim($this->afeprc);
+
+  }
+  
+  public function getAfecom()
+  {
+
+    return trim($this->afecom);
+
+  }
+  
+  public function getAfedis()
+  {
+
+    return trim($this->afedis);
+
+  }
+  
+  public function getReqaut()
+  {
+
+    return trim($this->reqaut);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTipcom($v)
 	{
 
-		if ($this->tipcom !== $v) {
-			$this->tipcom = $v;
-			$this->modifiedColumns[] = CpdoccomPeer::TIPCOM;
-		}
-
+    if ($this->tipcom !== $v) {
+        $this->tipcom = $v;
+        $this->modifiedColumns[] = CpdoccomPeer::TIPCOM;
+      }
+  
 	} 
 	
 	public function setNomext($v)
 	{
 
-		if ($this->nomext !== $v) {
-			$this->nomext = $v;
-			$this->modifiedColumns[] = CpdoccomPeer::NOMEXT;
-		}
-
+    if ($this->nomext !== $v) {
+        $this->nomext = $v;
+        $this->modifiedColumns[] = CpdoccomPeer::NOMEXT;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = CpdoccomPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = CpdoccomPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = CpdoccomPeer::REFPRC;
-		}
-
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = CpdoccomPeer::REFPRC;
+      }
+  
 	} 
 	
 	public function setAfeprc($v)
 	{
 
-		if ($this->afeprc !== $v) {
-			$this->afeprc = $v;
-			$this->modifiedColumns[] = CpdoccomPeer::AFEPRC;
-		}
-
+    if ($this->afeprc !== $v) {
+        $this->afeprc = $v;
+        $this->modifiedColumns[] = CpdoccomPeer::AFEPRC;
+      }
+  
 	} 
 	
 	public function setAfecom($v)
 	{
 
-		if ($this->afecom !== $v) {
-			$this->afecom = $v;
-			$this->modifiedColumns[] = CpdoccomPeer::AFECOM;
-		}
-
+    if ($this->afecom !== $v) {
+        $this->afecom = $v;
+        $this->modifiedColumns[] = CpdoccomPeer::AFECOM;
+      }
+  
 	} 
 	
 	public function setAfedis($v)
 	{
 
-		if ($this->afedis !== $v) {
-			$this->afedis = $v;
-			$this->modifiedColumns[] = CpdoccomPeer::AFEDIS;
-		}
+    if ($this->afedis !== $v) {
+        $this->afedis = $v;
+        $this->modifiedColumns[] = CpdoccomPeer::AFEDIS;
+      }
+  
+	} 
+	
+	public function setReqaut($v)
+	{
 
+    if ($this->reqaut !== $v) {
+        $this->reqaut = $v;
+        $this->modifiedColumns[] = CpdoccomPeer::REQAUT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpdoccomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpdoccomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tipcom = $rs->getString($startcol + 0);
+      $this->tipcom = $rs->getString($startcol + 0);
 
-			$this->nomext = $rs->getString($startcol + 1);
+      $this->nomext = $rs->getString($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->refprc = $rs->getString($startcol + 3);
+      $this->refprc = $rs->getString($startcol + 3);
 
-			$this->afeprc = $rs->getString($startcol + 4);
+      $this->afeprc = $rs->getString($startcol + 4);
 
-			$this->afecom = $rs->getString($startcol + 5);
+      $this->afecom = $rs->getString($startcol + 5);
 
-			$this->afedis = $rs->getString($startcol + 6);
+      $this->afedis = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->reqaut = $rs->getString($startcol + 7);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpdoccom object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpdoccom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -259,6 +312,7 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpdoccomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpdoccomPeer::doUpdate($this, $con);
@@ -346,6 +400,9 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 				return $this->getAfedis();
 				break;
 			case 7:
+				return $this->getReqaut();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -365,7 +422,8 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 			$keys[4] => $this->getAfeprc(),
 			$keys[5] => $this->getAfecom(),
 			$keys[6] => $this->getAfedis(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getReqaut(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -403,6 +461,9 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 				$this->setAfedis($value);
 				break;
 			case 7:
+				$this->setReqaut($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -419,7 +480,8 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setAfeprc($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setAfecom($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setAfedis($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setReqaut($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -434,6 +496,7 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CpdoccomPeer::AFEPRC)) $criteria->add(CpdoccomPeer::AFEPRC, $this->afeprc);
 		if ($this->isColumnModified(CpdoccomPeer::AFECOM)) $criteria->add(CpdoccomPeer::AFECOM, $this->afecom);
 		if ($this->isColumnModified(CpdoccomPeer::AFEDIS)) $criteria->add(CpdoccomPeer::AFEDIS, $this->afedis);
+		if ($this->isColumnModified(CpdoccomPeer::REQAUT)) $criteria->add(CpdoccomPeer::REQAUT, $this->reqaut);
 		if ($this->isColumnModified(CpdoccomPeer::ID)) $criteria->add(CpdoccomPeer::ID, $this->id);
 
 		return $criteria;
@@ -478,6 +541,8 @@ abstract class BaseCpdoccom extends BaseObject  implements Persistent {
 		$copyObj->setAfecom($this->afecom);
 
 		$copyObj->setAfedis($this->afedis);
+
+		$copyObj->setReqaut($this->reqaut);
 
 
 		$copyObj->setNew(true);

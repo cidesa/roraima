@@ -9,4 +9,14 @@
  */ 
 class Tstipmov extends BaseTstipmov
 {
+
+    public function getDesdebcre()
+	  {
+	  	if (self::getDebcre()=='C')
+	  	       return 'Crédito';
+	  	else if (self::getDebcre()=='D')
+	  	       return 'Débito';
+	    else return 'Indefinido';	       
+	  }
+
 }

@@ -29,92 +29,118 @@ abstract class BaseCpdocprc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTipprc()
-	{
+  
+  public function getTipprc()
+  {
 
-		return $this->tipprc; 		
-	}
-	
-	public function getNomext()
-	{
+    return trim($this->tipprc);
 
-		return $this->nomext; 		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getNomext()
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomext);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomabr()
+  {
+
+    return trim($this->nomabr);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTipprc($v)
 	{
 
-		if ($this->tipprc !== $v) {
-			$this->tipprc = $v;
-			$this->modifiedColumns[] = CpdocprcPeer::TIPPRC;
-		}
-
+    if ($this->tipprc !== $v) {
+        $this->tipprc = $v;
+        $this->modifiedColumns[] = CpdocprcPeer::TIPPRC;
+      }
+  
 	} 
 	
 	public function setNomext($v)
 	{
 
-		if ($this->nomext !== $v) {
-			$this->nomext = $v;
-			$this->modifiedColumns[] = CpdocprcPeer::NOMEXT;
-		}
-
+    if ($this->nomext !== $v) {
+        $this->nomext = $v;
+        $this->modifiedColumns[] = CpdocprcPeer::NOMEXT;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = CpdocprcPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = CpdocprcPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpdocprcPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpdocprcPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tipprc = $rs->getString($startcol + 0);
+      $this->tipprc = $rs->getString($startcol + 0);
 
-			$this->nomext = $rs->getString($startcol + 1);
+      $this->nomext = $rs->getString($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpdocprc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpdocprc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseCpdocprc extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpdocprcPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpdocprcPeer::doUpdate($this, $con);

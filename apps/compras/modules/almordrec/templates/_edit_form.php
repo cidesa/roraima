@@ -7,13 +7,15 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-<?php use_helper('Javascript') ?>
-<?php echo javascript_include_tag('ajax') ?>
-
+<?php use_helper('Javascript','Linktoapp') ?>
+<?php echo javascript_include_tag('dFilter', 'ajax', 'compras/almordrec', 'tools','observe') ?>
 <?php echo object_input_hidden_tag($carcpart, 'getId') ?>
+<?php echo input_hidden_tag('verificaexisydisp', '') ?>
+<?php echo input_hidden_tag('mensaje', '') ?>
+<?php echo input_hidden_tag('existeubicacion', '') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend>Recepción</legend>
+<legend> <?php echo __('Recepción')?></legend>
 <div class="form-row">
 <table>
 <tr>
@@ -23,12 +25,13 @@
   <?php if ($sf_request->hasError('carcpart{rcpart}')): ?>
     <?php echo form_error('carcpart{rcpart}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
   <?php $value = object_input_tag($carcpart, 'getRcpart', array (
-  'size' => 20,
+  'size' => 16,
   'control_name' => 'carcpart[rcpart]',
   'maxlength' => 8,
-)); echo $value ? $value : '&nbsp;' ?>
+  'readonly'  =>  $carcpart->getId()!='' ? true : false ,
+  'onBlur'  => "javascript:enter(this.value);",
+ )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </th>
 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -38,42 +41,21 @@
   <?php if ($sf_request->hasError('carcpart{fecrcp}')): ?>
     <?php echo form_error('carcpart{fecrcp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
   <?php $value = object_input_date_tag($carcpart, 'getFecrcp', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'carcpart[fecrcp]',
   'date_format' => 'dd/MM/yyyy',
-)); echo $value ? $value : '&nbsp;' ?>
+  'readonly'  =>  $carcpart->getId()!='' ? true : false ,
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
     </div>
-
 </tr>
 </table>
 <br>
-  <?php echo label_for('carcpart[codalm]', __($labels['carcpart{codalm}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('carcpart{codalm}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('carcpart{codalm}')): ?>
-    <?php echo form_error('carcpart{codalm}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-<?php echo input_auto_complete_tag('carcpart[codalm]', $carcpart->getCodalm(), 
-    'almordrec/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 6, 'onBlur'=> remote_function(array(
-			  'url'      => 'almordrec/ajax',  			   
-			  'complete' => 'AjaxJSON(request, json)',
-  			  'with' => "'ajax=1&cajtexmos=carcpart_nomalm&cajtexcom=carcpart_codalm&codigo='+this.value"
-			  ))),
-     array('use_style' => 'true')
-  ) 
-?>  
-&nbsp;
- <?php echo button_to_popup('...','generales/catalogo?clase=Cadefalm&frame=sf_admin_edit_form&obj1=carcpart_codalm&obj2=carcpart_nomalm')?>
-&nbsp;
-  <?php $value = object_input_tag($carcpart, 'getNomalm', array (
-  'disabled' => true,
-   'size' => 60,
-  'control_name' => 'carcpart[nomalm]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-<br>
+<table>
+<tr>
+<th>&nbsp;</th>
 <table>
 <tr>
 <th>
@@ -82,47 +64,43 @@
   <?php if ($sf_request->hasError('carcpart{ordcom}')): ?>
     <?php echo form_error('carcpart{ordcom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
- <!--  
- echo input_auto_complete_tag('carcpart[ordcom]', $carcpart->getOrdcom(), 
-    'almordrec/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 8,'onBlur'=> remote_function(array(
-			  'url'      => 'almordrec/ajax',  			   
-			  'complete' => 'AjaxJSON(request, json)',
-  			  'with' => "'ajax=2&cajtexmos=carcpart_fecord&cajtexcom=carcpart_ordcom&codigo='+this.value"
-			  ))),
-     array('use_style' => 'true')
-  ) 
- 
--->
-<?php echo input_auto_complete_tag('carcpart[ordcom]', $carcpart->getOrdcom(), 
-    'almordrec/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 8,'onBlur'=> remote_function(array(
+<?php echo input_auto_complete_tag('carcpart[ordcom]', $carcpart->getOrdcom(),
+    'almordrec/autocomplete?ajax=2',  array('autocomplete' => 'off','size' => 16, 'maxlength' => 8,
+	'readonly'  =>  $carcpart->getId()!='' ? true : false ,
+    'onBlur'=> remote_function(array(
 		   'update'   => 'divGrid',
 		   'url'      => 'almordrec/grid',
-		   'complete' => 'AjaxJSON(request, json)',
-		   'with' => "'ajax=2&cajtexcom=carcpart_ordcom&numero='+document.getElementById('carcpart_rcpart').value+'&codigo='+this.value"
+		   'condition' => "$('carcpart_ordcom').value != '' && $('id').value == ''",
+		   'script'   => true,
+		   'complete' => 'AjaxJSON(request, json),actualizarsaldos();',
+		   'with' => "'ajax=2&cajtexcom=carcpart_ordcom&codigo='+this.value+'&fecrec='+$('carcpart_fecrcp').value+'&numero='+$('carcpart_rcpart').value"
 			  ))),
      array('use_style' => 'true')
-  ) 
-?>
-&nbsp;
- <?php echo button_to_popup('...','generales/catalogo?clase=Caordcom&frame=sf_admin_edit_form&obj1=carcpart_ordcom&obj2=carcpart_fecord')?>
-&nbsp;
+  ) ?>&nbsp;
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/CaOrdCom_Almordrec/clase/CaOrdCom/frame/sf_admin_edit_form/obj1/carcpart_ordcom/campo1/ordcom/",'','','botoncat')?>
+
     </div>
 </th>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <th>
 <?php echo label_for('carcpart[fecord]', __($labels['carcpart{fecord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('carcpart{fecord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('carcpart{fecord}')): ?>
     <?php echo form_error('carcpart{fecord}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
-
-<?php echo input_tag('carcpart[fecord]',date("d/m/Y",strtotime($carcpart->getFecord())),'disabled=true'); ?>
+ <?php $value = object_input_date_tag($carcpart, 'getFecord', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'carcpart[fecord]',
+  'readonly' => true,
+  'date_format' => 'dd/MM/yyyy',
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+)); echo $value ? $value : '&nbsp;' ?>
 </div>
-</th>	
+</th>
 </tr>
 </table>
-<br> 
+<br>
   <?php echo label_for('carcpart[desrcp]', __($labels['carcpart{desrcp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('carcpart{desrcp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('carcpart{desrcp}')): ?>
@@ -130,12 +108,12 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($carcpart, 'getDesrcp', array (
-  'size' => 90,
+  'size' => 88,
   'control_name' => 'carcpart[desrcp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
-  <?php echo label_for('carcpart[codpro]', __($labels['carcpart{codpro}']), 'class="required" ') ?>
+  <?php echo label_for('carcpart[codpro]', __($labels['carcpart{codpro}']), 'class="required" Style="width:200px"') ?>
   <div class="content<?php if ($sf_request->hasError('carcpart{codpro}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('carcpart{codpro}')): ?>
     <?php echo form_error('carcpart{codpro}', array('class' => 'form-error-msg')) ?>
@@ -145,10 +123,12 @@
   'size' => 20,
   'control_name' => 'carcpart[codpro]',
   'maxlength' => 10,
+  'readonly' => true,
 )); echo $value ? $value : '&nbsp;' ?>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <?php $value = object_input_tag($carcpart, 'getNompro', array (
   'disabled' => true,
-    'size' => 63,
+  'size' => 57,
   'control_name' => 'carcpart[nompro]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -224,16 +204,15 @@
     <?php echo form_error('carcpart{monrcp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($carcpart, 'getMonrcp', array (
-  'size' => 7,
+  <?php $value = object_input_tag($carcpart, array('getMonrcp',true), array (
+  'size' => 12,
+  'readonly' => true,
   'control_name' => 'carcpart[monrcp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </th>
 </tr>
 </table>
-  
- 
 </div>
 
 </fieldset>
@@ -244,20 +223,16 @@
 ?>
 </form>
 </div>
-<?
-if ( ($carcpart->getId()!='') ) //ES UNA CONSULTA
-		{
-			echo javascript_tag("
-                    javascript:disableAllObjetos(a=new Array('carcpart_desrcp'),true);
-				"); 
-		}
-?>
+<script type="text/javascript">
+  var id="";
+  var id='<?php echo $carcpart->getId()?>';
+  actualiza(id);
+</script>
 
 <?php include_partial('edit_actions', array('carcpart' => $carcpart)) ?>
 
 
 </form>
-
 <ul class="sf_admin_actions">
       <li class="float-left"><?php if ($carcpart->getId()): ?>
 <?php echo button_to(__('delete'), 'almordrec/delete?id='.$carcpart->getId(), array (

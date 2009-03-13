@@ -45,211 +45,239 @@ abstract class BaseCatalogo extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcta()
-	{
+  
+  public function getCodcta()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getDescta()
-	{
+    return trim($this->codcta);
 
-		return $this->descta; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDescta()
+  {
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->descta);
 
-	
-	public function getFeccie($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		if ($this->feccie === null || $this->feccie === '') {
-			return null;
-		} elseif (!is_int($this->feccie)) {
-						$ts = strtotime($this->feccie);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
-			}
-		} else {
-			$ts = $this->feccie;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getSalant()
-	{
+  
+  public function getFeccie($format = 'Y-m-d')
+  {
 
-		return number_format($this->salant,2,',','.');
-		
-	}
-	
-	public function getDebcre()
-	{
+    if ($this->feccie === null || $this->feccie === '') {
+      return null;
+    } elseif (!is_int($this->feccie)) {
+            $ts = adodb_strtotime($this->feccie);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
+      }
+    } else {
+      $ts = $this->feccie;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->debcre; 		
-	}
-	
-	public function getCargab()
-	{
+  
+  public function getSalant($val=false)
+  {
 
-		return $this->cargab; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->salant,2,',','.');
+    else return $this->salant;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDebcre()
+  {
+
+    return trim($this->debcre);
+
+  }
+  
+  public function getCargab()
+  {
+
+    return trim($this->cargab);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = CatalogoPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = CatalogoPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setDescta($v)
 	{
 
-		if ($this->descta !== $v) {
-			$this->descta = $v;
-			$this->modifiedColumns[] = CatalogoPeer::DESCTA;
-		}
-
+    if ($this->descta !== $v) {
+        $this->descta = $v;
+        $this->modifiedColumns[] = CatalogoPeer::DESCTA;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = CatalogoPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = CatalogoPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFeccie($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccie !== $ts) {
-			$this->feccie = $ts;
-			$this->modifiedColumns[] = CatalogoPeer::FECCIE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccie !== $ts) {
+      $this->feccie = $ts;
+      $this->modifiedColumns[] = CatalogoPeer::FECCIE;
+    }
 
 	} 
 	
 	public function setSalant($v)
 	{
 
-		if ($this->salant !== $v) {
-			$this->salant = $v;
-			$this->modifiedColumns[] = CatalogoPeer::SALANT;
-		}
-
+    if ($this->salant !== $v) {
+        $this->salant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CatalogoPeer::SALANT;
+      }
+  
 	} 
 	
 	public function setDebcre($v)
 	{
 
-		if ($this->debcre !== $v) {
-			$this->debcre = $v;
-			$this->modifiedColumns[] = CatalogoPeer::DEBCRE;
-		}
-
+    if ($this->debcre !== $v) {
+        $this->debcre = $v;
+        $this->modifiedColumns[] = CatalogoPeer::DEBCRE;
+      }
+  
 	} 
 	
 	public function setCargab($v)
 	{
 
-		if ($this->cargab !== $v) {
-			$this->cargab = $v;
-			$this->modifiedColumns[] = CatalogoPeer::CARGAB;
-		}
-
+    if ($this->cargab !== $v) {
+        $this->cargab = $v;
+        $this->modifiedColumns[] = CatalogoPeer::CARGAB;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CatalogoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CatalogoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcta = $rs->getString($startcol + 0);
+      $this->codcta = $rs->getString($startcol + 0);
 
-			$this->descta = $rs->getString($startcol + 1);
+      $this->descta = $rs->getString($startcol + 1);
 
-			$this->fecini = $rs->getDate($startcol + 2, null);
+      $this->fecini = $rs->getDate($startcol + 2, null);
 
-			$this->feccie = $rs->getDate($startcol + 3, null);
+      $this->feccie = $rs->getDate($startcol + 3, null);
 
-			$this->salant = $rs->getFloat($startcol + 4);
+      $this->salant = $rs->getFloat($startcol + 4);
 
-			$this->debcre = $rs->getString($startcol + 5);
+      $this->debcre = $rs->getString($startcol + 5);
 
-			$this->cargab = $rs->getString($startcol + 6);
+      $this->cargab = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Catalogo object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Catalogo object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -306,6 +334,7 @@ abstract class BaseCatalogo extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CatalogoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CatalogoPeer::doUpdate($this, $con);

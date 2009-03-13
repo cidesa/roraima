@@ -1,0 +1,9 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fortipfin
+    theme:            default
+    list:
+      title:          Actualización Totales de Fuentes de Ingreso
+    edit:
+      title:          Actualización Totales de Fuentes de Ingreso

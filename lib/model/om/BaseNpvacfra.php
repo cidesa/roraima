@@ -49,232 +49,261 @@ abstract class BaseNpvacfra extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodcar()
-	{
+    return trim($this->codemp);
 
-		return $this->codcar; 		
-	}
-	
-	public function getCaudes($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		if ($this->caudes === null || $this->caudes === '') {
-			return null;
-		} elseif (!is_int($this->caudes)) {
-						$ts = strtotime($this->caudes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [caudes] as date/time value: " . var_export($this->caudes, true));
-			}
-		} else {
-			$ts = $this->caudes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codcar);
 
-	
-	public function getCauhas($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCaudes($format = 'Y-m-d')
+  {
 
-		if ($this->cauhas === null || $this->cauhas === '') {
-			return null;
-		} elseif (!is_int($this->cauhas)) {
-						$ts = strtotime($this->cauhas);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [cauhas] as date/time value: " . var_export($this->cauhas, true));
-			}
-		} else {
-			$ts = $this->cauhas;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->caudes === null || $this->caudes === '') {
+      return null;
+    } elseif (!is_int($this->caudes)) {
+            $ts = adodb_strtotime($this->caudes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [caudes] as date/time value: " . var_export($this->caudes, true));
+      }
+    } else {
+      $ts = $this->caudes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getDiavac()
-	{
+  
+  public function getCauhas($format = 'Y-m-d')
+  {
 
-		return number_format($this->diavac,2,',','.');
-		
-	}
-	
-	public function getDiabon()
-	{
+    if ($this->cauhas === null || $this->cauhas === '') {
+      return null;
+    } elseif (!is_int($this->cauhas)) {
+            $ts = adodb_strtotime($this->cauhas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [cauhas] as date/time value: " . var_export($this->cauhas, true));
+      }
+    } else {
+      $ts = $this->cauhas;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->diabon,2,',','.');
-		
-	}
-	
-	public function getMonvac()
-	{
+  
+  public function getDiavac($val=false)
+  {
 
-		return number_format($this->monvac,2,',','.');
-		
-	}
-	
-	public function getMonbon()
-	{
+    if($val) return number_format($this->diavac,2,',','.');
+    else return $this->diavac;
 
-		return number_format($this->monbon,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDiabon($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->diabon,2,',','.');
+    else return $this->diabon;
+
+  }
+  
+  public function getMonvac($val=false)
+  {
+
+    if($val) return number_format($this->monvac,2,',','.');
+    else return $this->monvac;
+
+  }
+  
+  public function getMonbon($val=false)
+  {
+
+    if($val) return number_format($this->monbon,2,',','.');
+    else return $this->monbon;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpvacfraPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpvacfraPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpvacfraPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpvacfraPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCaudes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [caudes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->caudes !== $ts) {
-			$this->caudes = $ts;
-			$this->modifiedColumns[] = NpvacfraPeer::CAUDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [caudes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->caudes !== $ts) {
+      $this->caudes = $ts;
+      $this->modifiedColumns[] = NpvacfraPeer::CAUDES;
+    }
 
 	} 
 	
 	public function setCauhas($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [cauhas] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->cauhas !== $ts) {
-			$this->cauhas = $ts;
-			$this->modifiedColumns[] = NpvacfraPeer::CAUHAS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [cauhas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->cauhas !== $ts) {
+      $this->cauhas = $ts;
+      $this->modifiedColumns[] = NpvacfraPeer::CAUHAS;
+    }
 
 	} 
 	
 	public function setDiavac($v)
 	{
 
-		if ($this->diavac !== $v) {
-			$this->diavac = $v;
-			$this->modifiedColumns[] = NpvacfraPeer::DIAVAC;
-		}
-
+    if ($this->diavac !== $v) {
+        $this->diavac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacfraPeer::DIAVAC;
+      }
+  
 	} 
 	
 	public function setDiabon($v)
 	{
 
-		if ($this->diabon !== $v) {
-			$this->diabon = $v;
-			$this->modifiedColumns[] = NpvacfraPeer::DIABON;
-		}
-
+    if ($this->diabon !== $v) {
+        $this->diabon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacfraPeer::DIABON;
+      }
+  
 	} 
 	
 	public function setMonvac($v)
 	{
 
-		if ($this->monvac !== $v) {
-			$this->monvac = $v;
-			$this->modifiedColumns[] = NpvacfraPeer::MONVAC;
-		}
-
+    if ($this->monvac !== $v) {
+        $this->monvac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacfraPeer::MONVAC;
+      }
+  
 	} 
 	
 	public function setMonbon($v)
 	{
 
-		if ($this->monbon !== $v) {
-			$this->monbon = $v;
-			$this->modifiedColumns[] = NpvacfraPeer::MONBON;
-		}
-
+    if ($this->monbon !== $v) {
+        $this->monbon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacfraPeer::MONBON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacfraPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacfraPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codcar = $rs->getString($startcol + 1);
+      $this->codcar = $rs->getString($startcol + 1);
 
-			$this->caudes = $rs->getDate($startcol + 2, null);
+      $this->caudes = $rs->getDate($startcol + 2, null);
 
-			$this->cauhas = $rs->getDate($startcol + 3, null);
+      $this->cauhas = $rs->getDate($startcol + 3, null);
 
-			$this->diavac = $rs->getFloat($startcol + 4);
+      $this->diavac = $rs->getFloat($startcol + 4);
 
-			$this->diabon = $rs->getFloat($startcol + 5);
+      $this->diabon = $rs->getFloat($startcol + 5);
 
-			$this->monvac = $rs->getFloat($startcol + 6);
+      $this->monvac = $rs->getFloat($startcol + 6);
 
-			$this->monbon = $rs->getFloat($startcol + 7);
+      $this->monbon = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacfra object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacfra object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -331,6 +360,7 @@ abstract class BaseNpvacfra extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacfraPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacfraPeer::doUpdate($this, $con);

@@ -1,0 +1,27 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Catipalm
+    theme:            cidesaGenerator
+    fields:
+      nomtip: { name: Nombre, validate: Vstring_1_100, msj_error: Debe insertar el nombre del tipo de almacén}
+    list:
+      title:          Tipos de Almacén
+      display:        [nomtip]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nomtip]
+      max_per_page:   10
+      sort:           nomtip
+    edit:
+      title:          Edición de Tipo de Almacén
+      display:
+        "NONE": [nomtip]
+      fields:
+        nomtip: { params:  size=40}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

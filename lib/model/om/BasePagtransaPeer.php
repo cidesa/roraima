@@ -275,6 +275,7 @@ abstract class BasePagtransaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(PagtransaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

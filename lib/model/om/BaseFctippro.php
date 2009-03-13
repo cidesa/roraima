@@ -33,6 +33,18 @@ abstract class BaseFctippro extends BaseObject  implements Persistent {
 
 
 	
+	protected $unipar;
+
+
+	
+	protected $frepar;
+
+
+	
+	protected $parpro;
+
+
+	
 	protected $id;
 
 	
@@ -41,147 +53,233 @@ abstract class BaseFctippro extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTippro()
-	{
+  
+  public function getTippro()
+  {
 
-		return $this->tippro; 		
-	}
-	
-	public function getAnovig()
-	{
+    return trim($this->tippro);
 
-		return $this->anovig; 		
-	}
-	
-	public function getDestip()
-	{
+  }
+  
+  public function getAnovig()
+  {
 
-		return $this->destip; 		
-	}
-	
-	public function getPormon()
-	{
+    return trim($this->anovig);
 
-		return $this->pormon; 		
-	}
-	
-	public function getAlimon()
-	{
+  }
+  
+  public function getDestip()
+  {
 
-		return number_format($this->alimon,2,',','.');
-		
-	}
-	
-	public function getStatip()
-	{
+    return trim($this->destip);
 
-		return $this->statip; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPormon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->pormon);
+
+  }
+  
+  public function getAlimon($val=false)
+  {
+
+    if($val) return number_format($this->alimon,2,',','.');
+    else return $this->alimon;
+
+  }
+  
+  public function getStatip()
+  {
+
+    return trim($this->statip);
+
+  }
+  
+  public function getUnipar()
+  {
+
+    return trim($this->unipar);
+
+  }
+  
+  public function getFrepar()
+  {
+
+    return $this->frepar;
+
+  }
+  
+  public function getParpro()
+  {
+
+    return trim($this->parpro);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTippro($v)
 	{
 
-		if ($this->tippro !== $v) {
-			$this->tippro = $v;
-			$this->modifiedColumns[] = FctipproPeer::TIPPRO;
-		}
-
+    if ($this->tippro !== $v) {
+        $this->tippro = $v;
+        $this->modifiedColumns[] = FctipproPeer::TIPPRO;
+      }
+  
 	} 
 	
 	public function setAnovig($v)
 	{
 
-		if ($this->anovig !== $v) {
-			$this->anovig = $v;
-			$this->modifiedColumns[] = FctipproPeer::ANOVIG;
-		}
-
+    if ($this->anovig !== $v) {
+        $this->anovig = $v;
+        $this->modifiedColumns[] = FctipproPeer::ANOVIG;
+      }
+  
 	} 
 	
 	public function setDestip($v)
 	{
 
-		if ($this->destip !== $v) {
-			$this->destip = $v;
-			$this->modifiedColumns[] = FctipproPeer::DESTIP;
-		}
-
+    if ($this->destip !== $v) {
+        $this->destip = $v;
+        $this->modifiedColumns[] = FctipproPeer::DESTIP;
+      }
+  
 	} 
 	
 	public function setPormon($v)
 	{
 
-		if ($this->pormon !== $v) {
-			$this->pormon = $v;
-			$this->modifiedColumns[] = FctipproPeer::PORMON;
-		}
-
+    if ($this->pormon !== $v) {
+        $this->pormon = $v;
+        $this->modifiedColumns[] = FctipproPeer::PORMON;
+      }
+  
 	} 
 	
 	public function setAlimon($v)
 	{
 
-		if ($this->alimon !== $v) {
-			$this->alimon = $v;
-			$this->modifiedColumns[] = FctipproPeer::ALIMON;
-		}
-
+    if ($this->alimon !== $v) {
+        $this->alimon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FctipproPeer::ALIMON;
+      }
+  
 	} 
 	
 	public function setStatip($v)
 	{
 
-		if ($this->statip !== $v) {
-			$this->statip = $v;
-			$this->modifiedColumns[] = FctipproPeer::STATIP;
-		}
+    if ($this->statip !== $v) {
+        $this->statip = $v;
+        $this->modifiedColumns[] = FctipproPeer::STATIP;
+      }
+  
+	} 
+	
+	public function setUnipar($v)
+	{
 
+    if ($this->unipar !== $v) {
+        $this->unipar = $v;
+        $this->modifiedColumns[] = FctipproPeer::UNIPAR;
+      }
+  
+	} 
+	
+	public function setFrepar($v)
+	{
+
+    if ($this->frepar !== $v) {
+        $this->frepar = $v;
+        $this->modifiedColumns[] = FctipproPeer::FREPAR;
+      }
+  
+	} 
+	
+	public function setParpro($v)
+	{
+
+    if ($this->parpro !== $v) {
+        $this->parpro = $v;
+        $this->modifiedColumns[] = FctipproPeer::PARPRO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FctipproPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FctipproPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tippro = $rs->getString($startcol + 0);
+      $this->tippro = $rs->getString($startcol + 0);
 
-			$this->anovig = $rs->getString($startcol + 1);
+      $this->anovig = $rs->getString($startcol + 1);
 
-			$this->destip = $rs->getString($startcol + 2);
+      $this->destip = $rs->getString($startcol + 2);
 
-			$this->pormon = $rs->getString($startcol + 3);
+      $this->pormon = $rs->getString($startcol + 3);
 
-			$this->alimon = $rs->getFloat($startcol + 4);
+      $this->alimon = $rs->getFloat($startcol + 4);
 
-			$this->statip = $rs->getString($startcol + 5);
+      $this->statip = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->unipar = $rs->getString($startcol + 6);
 
-			$this->resetModified();
+      $this->frepar = $rs->getInt($startcol + 7);
 
-			$this->setNew(false);
+      $this->parpro = $rs->getString($startcol + 8);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fctippro object", $e);
-		}
-	}
+      $this->id = $rs->getInt($startcol + 9);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fctippro object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -238,6 +336,7 @@ abstract class BaseFctippro extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FctipproPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FctipproPeer::doUpdate($this, $con);
@@ -322,6 +421,15 @@ abstract class BaseFctippro extends BaseObject  implements Persistent {
 				return $this->getStatip();
 				break;
 			case 6:
+				return $this->getUnipar();
+				break;
+			case 7:
+				return $this->getFrepar();
+				break;
+			case 8:
+				return $this->getParpro();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -340,7 +448,10 @@ abstract class BaseFctippro extends BaseObject  implements Persistent {
 			$keys[3] => $this->getPormon(),
 			$keys[4] => $this->getAlimon(),
 			$keys[5] => $this->getStatip(),
-			$keys[6] => $this->getId(),
+			$keys[6] => $this->getUnipar(),
+			$keys[7] => $this->getFrepar(),
+			$keys[8] => $this->getParpro(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -375,6 +486,15 @@ abstract class BaseFctippro extends BaseObject  implements Persistent {
 				$this->setStatip($value);
 				break;
 			case 6:
+				$this->setUnipar($value);
+				break;
+			case 7:
+				$this->setFrepar($value);
+				break;
+			case 8:
+				$this->setParpro($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -390,7 +510,10 @@ abstract class BaseFctippro extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setPormon($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setAlimon($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setStatip($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[6], $arr)) $this->setUnipar($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFrepar($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setParpro($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -404,6 +527,9 @@ abstract class BaseFctippro extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FctipproPeer::PORMON)) $criteria->add(FctipproPeer::PORMON, $this->pormon);
 		if ($this->isColumnModified(FctipproPeer::ALIMON)) $criteria->add(FctipproPeer::ALIMON, $this->alimon);
 		if ($this->isColumnModified(FctipproPeer::STATIP)) $criteria->add(FctipproPeer::STATIP, $this->statip);
+		if ($this->isColumnModified(FctipproPeer::UNIPAR)) $criteria->add(FctipproPeer::UNIPAR, $this->unipar);
+		if ($this->isColumnModified(FctipproPeer::FREPAR)) $criteria->add(FctipproPeer::FREPAR, $this->frepar);
+		if ($this->isColumnModified(FctipproPeer::PARPRO)) $criteria->add(FctipproPeer::PARPRO, $this->parpro);
 		if ($this->isColumnModified(FctipproPeer::ID)) $criteria->add(FctipproPeer::ID, $this->id);
 
 		return $criteria;
@@ -446,6 +572,12 @@ abstract class BaseFctippro extends BaseObject  implements Persistent {
 		$copyObj->setAlimon($this->alimon);
 
 		$copyObj->setStatip($this->statip);
+
+		$copyObj->setUnipar($this->unipar);
+
+		$copyObj->setFrepar($this->frepar);
+
+		$copyObj->setParpro($this->parpro);
 
 
 		$copyObj->setNew(true);

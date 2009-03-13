@@ -235,6 +235,7 @@ abstract class BaseFctralicPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FctralicPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

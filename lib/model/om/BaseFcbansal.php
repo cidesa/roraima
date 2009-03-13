@@ -84,205 +84,213 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoddoc()
-	{
+  
+  public function getCoddoc()
+  {
 
-		return $this->coddoc; 		
-	}
-	
-	public function getCodfun()
-	{
+    return trim($this->coddoc);
 
-		return $this->codfun; 		
-	}
-	
-	public function getCodentext()
-	{
+  }
+  
+  public function getCodfun()
+  {
 
-		return $this->codentext; 		
-	}
-	
-	public function getCodtipdoc()
-	{
+    return trim($this->codfun);
 
-		return $this->codtipdoc; 		
-	}
-	
-	public function getFecdoc($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodentext()
+  {
 
-		if ($this->fecdoc === null || $this->fecdoc === '') {
-			return null;
-		} elseif (!is_int($this->fecdoc)) {
-						$ts = strtotime($this->fecdoc);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdoc] as date/time value: " . var_export($this->fecdoc, true));
-			}
-		} else {
-			$ts = $this->fecdoc;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codentext);
 
-	
-	public function getHordoc($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodtipdoc()
+  {
 
-		if ($this->hordoc === null || $this->hordoc === '') {
-			return null;
-		} elseif (!is_int($this->hordoc)) {
-						$ts = strtotime($this->hordoc);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [hordoc] as date/time value: " . var_export($this->hordoc, true));
-			}
-		} else {
-			$ts = $this->hordoc;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codtipdoc);
 
-	
-	public function getAsunto()
-	{
+  }
+  
+  public function getFecdoc($format = 'Y-m-d')
+  {
 
-		return $this->asunto; 		
-	}
-	
-	public function getCodubifis()
-	{
+    if ($this->fecdoc === null || $this->fecdoc === '') {
+      return null;
+    } elseif (!is_int($this->fecdoc)) {
+            $ts = adodb_strtotime($this->fecdoc);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdoc] as date/time value: " . var_export($this->fecdoc, true));
+      }
+    } else {
+      $ts = $this->fecdoc;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codubifis; 		
-	}
-	
-	public function getFecubifis($format = 'Y-m-d')
-	{
+  
+  public function getHordoc($format = 'Y-m-d')
+  {
 
-		if ($this->fecubifis === null || $this->fecubifis === '') {
-			return null;
-		} elseif (!is_int($this->fecubifis)) {
-						$ts = strtotime($this->fecubifis);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecubifis] as date/time value: " . var_export($this->fecubifis, true));
-			}
-		} else {
-			$ts = $this->fecubifis;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->hordoc === null || $this->hordoc === '') {
+      return null;
+    } elseif (!is_int($this->hordoc)) {
+            $ts = adodb_strtotime($this->hordoc);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [hordoc] as date/time value: " . var_export($this->hordoc, true));
+      }
+    } else {
+      $ts = $this->hordoc;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getHorubifis($format = 'Y-m-d')
-	{
+  
+  public function getAsunto()
+  {
 
-		if ($this->horubifis === null || $this->horubifis === '') {
-			return null;
-		} elseif (!is_int($this->horubifis)) {
-						$ts = strtotime($this->horubifis);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [horubifis] as date/time value: " . var_export($this->horubifis, true));
-			}
-		} else {
-			$ts = $this->horubifis;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->asunto);
 
-	
-	public function getCodubimag()
-	{
+  }
+  
+  public function getCodubifis()
+  {
 
-		return $this->codubimag; 		
-	}
-	
-	public function getFecubimag($format = 'Y-m-d')
-	{
+    return trim($this->codubifis);
 
-		if ($this->fecubimag === null || $this->fecubimag === '') {
-			return null;
-		} elseif (!is_int($this->fecubimag)) {
-						$ts = strtotime($this->fecubimag);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecubimag] as date/time value: " . var_export($this->fecubimag, true));
-			}
-		} else {
-			$ts = $this->fecubimag;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecubifis($format = 'Y-m-d')
+  {
 
-	
-	public function getHorubimag($format = 'Y-m-d')
-	{
+    if ($this->fecubifis === null || $this->fecubifis === '') {
+      return null;
+    } elseif (!is_int($this->fecubifis)) {
+            $ts = adodb_strtotime($this->fecubifis);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecubifis] as date/time value: " . var_export($this->fecubifis, true));
+      }
+    } else {
+      $ts = $this->fecubifis;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->horubimag === null || $this->horubimag === '') {
-			return null;
-		} elseif (!is_int($this->horubimag)) {
-						$ts = strtotime($this->horubimag);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [horubimag] as date/time value: " . var_export($this->horubimag, true));
-			}
-		} else {
-			$ts = $this->horubimag;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getHorubifis($format = 'Y-m-d')
+  {
 
-	
-	public function getId()
-	{
+    if ($this->horubifis === null || $this->horubifis === '') {
+      return null;
+    } elseif (!is_int($this->horubifis)) {
+            $ts = adodb_strtotime($this->horubifis);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [horubifis] as date/time value: " . var_export($this->horubifis, true));
+      }
+    } else {
+      $ts = $this->horubifis;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getCodubimag()
+  {
+
+    return trim($this->codubimag);
+
+  }
+  
+  public function getFecubimag($format = 'Y-m-d')
+  {
+
+    if ($this->fecubimag === null || $this->fecubimag === '') {
+      return null;
+    } elseif (!is_int($this->fecubimag)) {
+            $ts = adodb_strtotime($this->fecubimag);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecubimag] as date/time value: " . var_export($this->fecubimag, true));
+      }
+    } else {
+      $ts = $this->fecubimag;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getHorubimag($format = 'Y-m-d')
+  {
+
+    if ($this->horubimag === null || $this->horubimag === '') {
+      return null;
+    } elseif (!is_int($this->horubimag)) {
+            $ts = adodb_strtotime($this->horubimag);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [horubimag] as date/time value: " . var_export($this->horubimag, true));
+      }
+    } else {
+      $ts = $this->horubimag;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoddoc($v)
 	{
 
-		if ($this->coddoc !== $v) {
-			$this->coddoc = $v;
-			$this->modifiedColumns[] = FcbansalPeer::CODDOC;
-		}
-
+    if ($this->coddoc !== $v) {
+        $this->coddoc = $v;
+        $this->modifiedColumns[] = FcbansalPeer::CODDOC;
+      }
+  
 	} 
 	
 	public function setCodfun($v)
 	{
 
-		if ($this->codfun !== $v) {
-			$this->codfun = $v;
-			$this->modifiedColumns[] = FcbansalPeer::CODFUN;
-		}
-
+    if ($this->codfun !== $v) {
+        $this->codfun = $v;
+        $this->modifiedColumns[] = FcbansalPeer::CODFUN;
+      }
+  
 		if ($this->aFcdeffun !== null && $this->aFcdeffun->getCodfun() !== $v) {
 			$this->aFcdeffun = null;
 		}
@@ -292,11 +300,11 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	public function setCodentext($v)
 	{
 
-		if ($this->codentext !== $v) {
-			$this->codentext = $v;
-			$this->modifiedColumns[] = FcbansalPeer::CODENTEXT;
-		}
-
+    if ($this->codentext !== $v) {
+        $this->codentext = $v;
+        $this->modifiedColumns[] = FcbansalPeer::CODENTEXT;
+      }
+  
 		if ($this->aFcdefentext !== null && $this->aFcdefentext->getCodentext() !== $v) {
 			$this->aFcdefentext = null;
 		}
@@ -306,11 +314,11 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	public function setCodtipdoc($v)
 	{
 
-		if ($this->codtipdoc !== $v) {
-			$this->codtipdoc = $v;
-			$this->modifiedColumns[] = FcbansalPeer::CODTIPDOC;
-		}
-
+    if ($this->codtipdoc !== $v) {
+        $this->codtipdoc = $v;
+        $this->modifiedColumns[] = FcbansalPeer::CODTIPDOC;
+      }
+  
 		if ($this->aFcdeftipdoc !== null && $this->aFcdeftipdoc->getCodtipdoc() !== $v) {
 			$this->aFcdeftipdoc = null;
 		}
@@ -320,55 +328,55 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	public function setFecdoc($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdoc] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdoc !== $ts) {
-			$this->fecdoc = $ts;
-			$this->modifiedColumns[] = FcbansalPeer::FECDOC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdoc] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdoc !== $ts) {
+      $this->fecdoc = $ts;
+      $this->modifiedColumns[] = FcbansalPeer::FECDOC;
+    }
 
 	} 
 	
 	public function setHordoc($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [hordoc] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->hordoc !== $ts) {
-			$this->hordoc = $ts;
-			$this->modifiedColumns[] = FcbansalPeer::HORDOC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [hordoc] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->hordoc !== $ts) {
+      $this->hordoc = $ts;
+      $this->modifiedColumns[] = FcbansalPeer::HORDOC;
+    }
 
 	} 
 	
 	public function setAsunto($v)
 	{
 
-		if ($this->asunto !== $v) {
-			$this->asunto = $v;
-			$this->modifiedColumns[] = FcbansalPeer::ASUNTO;
-		}
-
+    if ($this->asunto !== $v) {
+        $this->asunto = $v;
+        $this->modifiedColumns[] = FcbansalPeer::ASUNTO;
+      }
+  
 	} 
 	
 	public function setCodubifis($v)
 	{
 
-		if ($this->codubifis !== $v) {
-			$this->codubifis = $v;
-			$this->modifiedColumns[] = FcbansalPeer::CODUBIFIS;
-		}
-
+    if ($this->codubifis !== $v) {
+        $this->codubifis = $v;
+        $this->modifiedColumns[] = FcbansalPeer::CODUBIFIS;
+      }
+  
 		if ($this->aFcdefubifis !== null && $this->aFcdefubifis->getCodubifis() !== $v) {
 			$this->aFcdefubifis = null;
 		}
@@ -378,45 +386,45 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	public function setFecubifis($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecubifis] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecubifis !== $ts) {
-			$this->fecubifis = $ts;
-			$this->modifiedColumns[] = FcbansalPeer::FECUBIFIS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecubifis] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecubifis !== $ts) {
+      $this->fecubifis = $ts;
+      $this->modifiedColumns[] = FcbansalPeer::FECUBIFIS;
+    }
 
 	} 
 	
 	public function setHorubifis($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [horubifis] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->horubifis !== $ts) {
-			$this->horubifis = $ts;
-			$this->modifiedColumns[] = FcbansalPeer::HORUBIFIS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [horubifis] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->horubifis !== $ts) {
+      $this->horubifis = $ts;
+      $this->modifiedColumns[] = FcbansalPeer::HORUBIFIS;
+    }
 
 	} 
 	
 	public function setCodubimag($v)
 	{
 
-		if ($this->codubimag !== $v) {
-			$this->codubimag = $v;
-			$this->modifiedColumns[] = FcbansalPeer::CODUBIMAG;
-		}
-
+    if ($this->codubimag !== $v) {
+        $this->codubimag = $v;
+        $this->modifiedColumns[] = FcbansalPeer::CODUBIMAG;
+      }
+  
 		if ($this->aFcdefubimag !== null && $this->aFcdefubimag->getCodubimag() !== $v) {
 			$this->aFcdefubimag = null;
 		}
@@ -426,88 +434,110 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	public function setFecubimag($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecubimag] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecubimag !== $ts) {
-			$this->fecubimag = $ts;
-			$this->modifiedColumns[] = FcbansalPeer::FECUBIMAG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecubimag] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecubimag !== $ts) {
+      $this->fecubimag = $ts;
+      $this->modifiedColumns[] = FcbansalPeer::FECUBIMAG;
+    }
 
 	} 
 	
 	public function setHorubimag($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [horubimag] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->horubimag !== $ts) {
-			$this->horubimag = $ts;
-			$this->modifiedColumns[] = FcbansalPeer::HORUBIMAG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [horubimag] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->horubimag !== $ts) {
+      $this->horubimag = $ts;
+      $this->modifiedColumns[] = FcbansalPeer::HORUBIMAG;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcbansalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcbansalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coddoc = $rs->getString($startcol + 0);
+      $this->coddoc = $rs->getString($startcol + 0);
 
-			$this->codfun = $rs->getString($startcol + 1);
+      $this->codfun = $rs->getString($startcol + 1);
 
-			$this->codentext = $rs->getString($startcol + 2);
+      $this->codentext = $rs->getString($startcol + 2);
 
-			$this->codtipdoc = $rs->getString($startcol + 3);
+      $this->codtipdoc = $rs->getString($startcol + 3);
 
-			$this->fecdoc = $rs->getDate($startcol + 4, null);
+      $this->fecdoc = $rs->getDate($startcol + 4, null);
 
-			$this->hordoc = $rs->getDate($startcol + 5, null);
+      $this->hordoc = $rs->getDate($startcol + 5, null);
 
-			$this->asunto = $rs->getString($startcol + 6);
+      $this->asunto = $rs->getString($startcol + 6);
 
-			$this->codubifis = $rs->getString($startcol + 7);
+      $this->codubifis = $rs->getString($startcol + 7);
 
-			$this->fecubifis = $rs->getDate($startcol + 8, null);
+      $this->fecubifis = $rs->getDate($startcol + 8, null);
 
-			$this->horubifis = $rs->getDate($startcol + 9, null);
+      $this->horubifis = $rs->getDate($startcol + 9, null);
 
-			$this->codubimag = $rs->getString($startcol + 10);
+      $this->codubimag = $rs->getString($startcol + 10);
 
-			$this->fecubimag = $rs->getDate($startcol + 11, null);
+      $this->fecubimag = $rs->getDate($startcol + 11, null);
 
-			$this->horubimag = $rs->getDate($startcol + 12, null);
+      $this->horubimag = $rs->getDate($startcol + 12, null);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcbansal object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcbansal object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -601,6 +631,7 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcbansalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcbansalPeer::doUpdate($this, $con);
@@ -962,9 +993,8 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	
 	public function getFcdeffun($con = null)
 	{
-				include_once 'lib/model/om/BaseFcdeffunPeer.php';
-
 		if ($this->aFcdeffun === null && (($this->codfun !== "" && $this->codfun !== null))) {
+						include_once 'lib/model/om/BaseFcdeffunPeer.php';
 
 			$this->aFcdeffun = FcdeffunPeer::retrieveByPK($this->codfun, $con);
 
@@ -992,9 +1022,8 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	
 	public function getFcdefentext($con = null)
 	{
-				include_once 'lib/model/om/BaseFcdefentextPeer.php';
-
 		if ($this->aFcdefentext === null && (($this->codentext !== "" && $this->codentext !== null))) {
+						include_once 'lib/model/om/BaseFcdefentextPeer.php';
 
 			$this->aFcdefentext = FcdefentextPeer::retrieveByPK($this->codentext, $con);
 
@@ -1022,9 +1051,8 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	
 	public function getFcdeftipdoc($con = null)
 	{
-				include_once 'lib/model/om/BaseFcdeftipdocPeer.php';
-
 		if ($this->aFcdeftipdoc === null && (($this->codtipdoc !== "" && $this->codtipdoc !== null))) {
+						include_once 'lib/model/om/BaseFcdeftipdocPeer.php';
 
 			$this->aFcdeftipdoc = FcdeftipdocPeer::retrieveByPK($this->codtipdoc, $con);
 
@@ -1052,9 +1080,8 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	
 	public function getFcdefubifis($con = null)
 	{
-				include_once 'lib/model/om/BaseFcdefubifisPeer.php';
-
 		if ($this->aFcdefubifis === null && (($this->codubifis !== "" && $this->codubifis !== null))) {
+						include_once 'lib/model/om/BaseFcdefubifisPeer.php';
 
 			$this->aFcdefubifis = FcdefubifisPeer::retrieveByPK($this->codubifis, $con);
 
@@ -1082,9 +1109,8 @@ abstract class BaseFcbansal extends BaseObject  implements Persistent {
 	
 	public function getFcdefubimag($con = null)
 	{
-				include_once 'lib/model/om/BaseFcdefubimagPeer.php';
-
 		if ($this->aFcdefubimag === null && (($this->codubimag !== "" && $this->codubimag !== null))) {
+						include_once 'lib/model/om/BaseFcdefubimagPeer.php';
 
 			$this->aFcdefubimag = FcdefubimagPeer::retrieveByPK($this->codubimag, $con);
 

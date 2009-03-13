@@ -235,6 +235,7 @@ abstract class BaseCpimprelPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpimprelPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

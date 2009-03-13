@@ -260,6 +260,7 @@ abstract class BaseFcactcomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcactcomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

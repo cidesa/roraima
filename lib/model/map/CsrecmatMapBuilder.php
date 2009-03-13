@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CsrecmatMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CsrecmatMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CsrecmatMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('csrecmat');
 		$tMap->setPhpName('Csrecmat');
 
@@ -42,15 +42,15 @@ class CsrecmatMapBuilder {
 
 		$tMap->addColumn('TIPMAT', 'Tipmat', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('CANMAT', 'Canmat', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANMAT', 'Canmat', 'double', CreoleTypes::NUMERIC, false, 20);
 
-		$tMap->addColumn('COSTOT', 'Costot', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COSTOT', 'Costot', 'double', CreoleTypes::NUMERIC, false, 20);
 
 		$tMap->addColumn('NROORD', 'Nroord', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('COSUNI', 'Cosuni', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COSUNI', 'Cosuni', 'double', CreoleTypes::NUMERIC, false, 20);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

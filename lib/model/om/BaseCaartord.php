@@ -49,6 +49,10 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 
 
 	
+	protected $cerart;
+
+
+	
 	protected $rgoart;
 
 
@@ -89,394 +93,453 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getOrdcom()
-	{
+  
+  public function getOrdcom()
+  {
 
-		return $this->ordcom; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->ordcom);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCanord()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canord,2,',','.');
-		
-	}
-	
-	public function getCanaju()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return number_format($this->canaju,2,',','.');
-		
-	}
-	
-	public function getCanrec()
-	{
+    return trim($this->codcat);
 
-		return number_format($this->canrec,2,',','.');
-		
-	}
-	
-	public function getCantot()
-	{
+  }
+  
+  public function getCanord($val=false)
+  {
 
-		return number_format($this->cantot,2,',','.');
-		
-	}
-	
-	public function getPreart()
-	{
+    if($val) return number_format($this->canord,2,',','.');
+    else return $this->canord;
 
-		return number_format($this->preart,2,',','.');
-		
-	}
-	
-	public function getDtoart()
-	{
+  }
+  
+  public function getCanaju($val=false)
+  {
 
-		return number_format($this->dtoart,2,',','.');
-		
-	}
-	
-	public function getCodrgo()
-	{
+    if($val) return number_format($this->canaju,2,',','.');
+    else return $this->canaju;
 
-		return $this->codrgo; 		
-	}
-	
-	public function getRgoart()
-	{
+  }
+  
+  public function getCanrec($val=false)
+  {
 
-		return number_format($this->rgoart,2,',','.');
-		
-	}
-	
-	public function getTotart()
-	{
+    if($val) return number_format($this->canrec,2,',','.');
+    else return $this->canrec;
 
-		return number_format($this->totart,2,',','.');
-		
-	}
-	
-	public function getFecent($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCantot($val=false)
+  {
 
-		if ($this->fecent === null || $this->fecent === '') {
-			return null;
-		} elseif (!is_int($this->fecent)) {
-						$ts = strtotime($this->fecent);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
-			}
-		} else {
-			$ts = $this->fecent;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->cantot,2,',','.');
+    else return $this->cantot;
 
-	
-	public function getDesart()
-	{
+  }
+  
+  public function getPreart($val=false)
+  {
 
-		return $this->desart; 		
-	}
-	
-	public function getRelart()
-	{
+    if($val) return number_format($this->preart,2,',','.');
+    else return $this->preart;
 
-		return number_format($this->relart,2,',','.');
-		
-	}
-	
-	public function getUnimed()
-	{
+  }
+  
+  public function getDtoart($val=false)
+  {
 
-		return $this->unimed; 		
-	}
-	
-	public function getCodpar()
-	{
+    if($val) return number_format($this->dtoart,2,',','.');
+    else return $this->dtoart;
 
-		return $this->codpar; 		
-	}
-	
-	public function getPartida()
-	{
+  }
+  
+  public function getCodrgo()
+  {
 
-		return $this->partida; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codrgo);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCerart()
+  {
+
+    return trim($this->cerart);
+
+  }
+  
+  public function getRgoart($val=false)
+  {
+
+    if($val) return number_format($this->rgoart,2,',','.');
+    else return $this->rgoart;
+
+  }
+  
+  public function getTotart($val=false)
+  {
+
+    if($val) return number_format($this->totart,2,',','.');
+    else return $this->totart;
+
+  }
+  
+  public function getFecent($format = 'Y-m-d')
+  {
+
+    if ($this->fecent === null || $this->fecent === '') {
+      return null;
+    } elseif (!is_int($this->fecent)) {
+            $ts = adodb_strtotime($this->fecent);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
+      }
+    } else {
+      $ts = $this->fecent;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getDesart()
+  {
+
+    return trim($this->desart);
+
+  }
+  
+  public function getRelart($val=false)
+  {
+
+    if($val) return number_format($this->relart,2,',','.');
+    else return $this->relart;
+
+  }
+  
+  public function getUnimed()
+  {
+
+    return trim($this->unimed);
+
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getPartida()
+  {
+
+    return trim($this->partida);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setOrdcom($v)
 	{
 
-		if ($this->ordcom !== $v) {
-			$this->ordcom = $v;
-			$this->modifiedColumns[] = CaartordPeer::ORDCOM;
-		}
-
+    if ($this->ordcom !== $v) {
+        $this->ordcom = $v;
+        $this->modifiedColumns[] = CaartordPeer::ORDCOM;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartordPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartordPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CaartordPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CaartordPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCanord($v)
 	{
 
-		if ($this->canord !== $v) {
-			$this->canord = $v;
-			$this->modifiedColumns[] = CaartordPeer::CANORD;
-		}
-
+    if ($this->canord !== $v) {
+        $this->canord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartordPeer::CANORD;
+      }
+  
 	} 
 	
 	public function setCanaju($v)
 	{
 
-		if ($this->canaju !== $v) {
-			$this->canaju = $v;
-			$this->modifiedColumns[] = CaartordPeer::CANAJU;
-		}
-
+    if ($this->canaju !== $v) {
+        $this->canaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartordPeer::CANAJU;
+      }
+  
 	} 
 	
 	public function setCanrec($v)
 	{
 
-		if ($this->canrec !== $v) {
-			$this->canrec = $v;
-			$this->modifiedColumns[] = CaartordPeer::CANREC;
-		}
-
+    if ($this->canrec !== $v) {
+        $this->canrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartordPeer::CANREC;
+      }
+  
 	} 
 	
 	public function setCantot($v)
 	{
 
-		if ($this->cantot !== $v) {
-			$this->cantot = $v;
-			$this->modifiedColumns[] = CaartordPeer::CANTOT;
-		}
-
+    if ($this->cantot !== $v) {
+        $this->cantot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartordPeer::CANTOT;
+      }
+  
 	} 
 	
 	public function setPreart($v)
 	{
 
-		if ($this->preart !== $v) {
-			$this->preart = $v;
-			$this->modifiedColumns[] = CaartordPeer::PREART;
-		}
-
+    if ($this->preart !== $v) {
+        $this->preart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartordPeer::PREART;
+      }
+  
 	} 
 	
 	public function setDtoart($v)
 	{
 
-		if ($this->dtoart !== $v) {
-			$this->dtoart = $v;
-			$this->modifiedColumns[] = CaartordPeer::DTOART;
-		}
-
+    if ($this->dtoart !== $v) {
+        $this->dtoart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartordPeer::DTOART;
+      }
+  
 	} 
 	
 	public function setCodrgo($v)
 	{
 
-		if ($this->codrgo !== $v) {
-			$this->codrgo = $v;
-			$this->modifiedColumns[] = CaartordPeer::CODRGO;
-		}
+    if ($this->codrgo !== $v) {
+        $this->codrgo = $v;
+        $this->modifiedColumns[] = CaartordPeer::CODRGO;
+      }
+  
+	} 
+	
+	public function setCerart($v)
+	{
 
+    if ($this->cerart !== $v) {
+        $this->cerart = $v;
+        $this->modifiedColumns[] = CaartordPeer::CERART;
+      }
+  
 	} 
 	
 	public function setRgoart($v)
 	{
 
-		if ($this->rgoart !== $v) {
-			$this->rgoart = $v;
-			$this->modifiedColumns[] = CaartordPeer::RGOART;
-		}
-
+    if ($this->rgoart !== $v) {
+        $this->rgoart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartordPeer::RGOART;
+      }
+  
 	} 
 	
 	public function setTotart($v)
 	{
 
-		if ($this->totart !== $v) {
-			$this->totart = $v;
-			$this->modifiedColumns[] = CaartordPeer::TOTART;
-		}
-
+    if ($this->totart !== $v) {
+        $this->totart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartordPeer::TOTART;
+      }
+  
 	} 
 	
 	public function setFecent($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecent !== $ts) {
-			$this->fecent = $ts;
-			$this->modifiedColumns[] = CaartordPeer::FECENT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecent !== $ts) {
+      $this->fecent = $ts;
+      $this->modifiedColumns[] = CaartordPeer::FECENT;
+    }
 
 	} 
 	
 	public function setDesart($v)
 	{
 
-		if ($this->desart !== $v) {
-			$this->desart = $v;
-			$this->modifiedColumns[] = CaartordPeer::DESART;
-		}
-
+    if ($this->desart !== $v) {
+        $this->desart = $v;
+        $this->modifiedColumns[] = CaartordPeer::DESART;
+      }
+  
 	} 
 	
 	public function setRelart($v)
 	{
 
-		if ($this->relart !== $v) {
-			$this->relart = $v;
-			$this->modifiedColumns[] = CaartordPeer::RELART;
-		}
-
+    if ($this->relart !== $v) {
+        $this->relart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartordPeer::RELART;
+      }
+  
 	} 
 	
 	public function setUnimed($v)
 	{
 
-		if ($this->unimed !== $v) {
-			$this->unimed = $v;
-			$this->modifiedColumns[] = CaartordPeer::UNIMED;
-		}
-
+    if ($this->unimed !== $v) {
+        $this->unimed = $v;
+        $this->modifiedColumns[] = CaartordPeer::UNIMED;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = CaartordPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = CaartordPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setPartida($v)
 	{
 
-		if ($this->partida !== $v) {
-			$this->partida = $v;
-			$this->modifiedColumns[] = CaartordPeer::PARTIDA;
-		}
-
+    if ($this->partida !== $v) {
+        $this->partida = $v;
+        $this->modifiedColumns[] = CaartordPeer::PARTIDA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartordPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartordPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->ordcom = $rs->getString($startcol + 0);
+      $this->ordcom = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->codcat = $rs->getString($startcol + 2);
+      $this->codcat = $rs->getString($startcol + 2);
 
-			$this->canord = $rs->getFloat($startcol + 3);
+      $this->canord = $rs->getFloat($startcol + 3);
 
-			$this->canaju = $rs->getFloat($startcol + 4);
+      $this->canaju = $rs->getFloat($startcol + 4);
 
-			$this->canrec = $rs->getFloat($startcol + 5);
+      $this->canrec = $rs->getFloat($startcol + 5);
 
-			$this->cantot = $rs->getFloat($startcol + 6);
+      $this->cantot = $rs->getFloat($startcol + 6);
 
-			$this->preart = $rs->getFloat($startcol + 7);
+      $this->preart = $rs->getFloat($startcol + 7);
 
-			$this->dtoart = $rs->getFloat($startcol + 8);
+      $this->dtoart = $rs->getFloat($startcol + 8);
 
-			$this->codrgo = $rs->getString($startcol + 9);
+      $this->codrgo = $rs->getString($startcol + 9);
 
-			$this->rgoart = $rs->getFloat($startcol + 10);
+      $this->cerart = $rs->getString($startcol + 10);
 
-			$this->totart = $rs->getFloat($startcol + 11);
+      $this->rgoart = $rs->getFloat($startcol + 11);
 
-			$this->fecent = $rs->getDate($startcol + 12, null);
+      $this->totart = $rs->getFloat($startcol + 12);
 
-			$this->desart = $rs->getString($startcol + 13);
+      $this->fecent = $rs->getDate($startcol + 13, null);
 
-			$this->relart = $rs->getFloat($startcol + 14);
+      $this->desart = $rs->getString($startcol + 14);
 
-			$this->unimed = $rs->getString($startcol + 15);
+      $this->relart = $rs->getFloat($startcol + 15);
 
-			$this->codpar = $rs->getString($startcol + 16);
+      $this->unimed = $rs->getString($startcol + 16);
 
-			$this->partida = $rs->getString($startcol + 17);
+      $this->codpar = $rs->getString($startcol + 17);
 
-			$this->id = $rs->getInt($startcol + 18);
+      $this->partida = $rs->getString($startcol + 18);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 19);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 19; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartord object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 20; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartord object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -533,6 +596,7 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaartordPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaartordPeer::doUpdate($this, $con);
@@ -629,30 +693,33 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 				return $this->getCodrgo();
 				break;
 			case 10:
-				return $this->getRgoart();
+				return $this->getCerart();
 				break;
 			case 11:
-				return $this->getTotart();
+				return $this->getRgoart();
 				break;
 			case 12:
-				return $this->getFecent();
+				return $this->getTotart();
 				break;
 			case 13:
-				return $this->getDesart();
+				return $this->getFecent();
 				break;
 			case 14:
-				return $this->getRelart();
+				return $this->getDesart();
 				break;
 			case 15:
-				return $this->getUnimed();
+				return $this->getRelart();
 				break;
 			case 16:
-				return $this->getCodpar();
+				return $this->getUnimed();
 				break;
 			case 17:
-				return $this->getPartida();
+				return $this->getCodpar();
 				break;
 			case 18:
+				return $this->getPartida();
+				break;
+			case 19:
 				return $this->getId();
 				break;
 			default:
@@ -675,15 +742,16 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 			$keys[7] => $this->getPreart(),
 			$keys[8] => $this->getDtoart(),
 			$keys[9] => $this->getCodrgo(),
-			$keys[10] => $this->getRgoart(),
-			$keys[11] => $this->getTotart(),
-			$keys[12] => $this->getFecent(),
-			$keys[13] => $this->getDesart(),
-			$keys[14] => $this->getRelart(),
-			$keys[15] => $this->getUnimed(),
-			$keys[16] => $this->getCodpar(),
-			$keys[17] => $this->getPartida(),
-			$keys[18] => $this->getId(),
+			$keys[10] => $this->getCerart(),
+			$keys[11] => $this->getRgoart(),
+			$keys[12] => $this->getTotart(),
+			$keys[13] => $this->getFecent(),
+			$keys[14] => $this->getDesart(),
+			$keys[15] => $this->getRelart(),
+			$keys[16] => $this->getUnimed(),
+			$keys[17] => $this->getCodpar(),
+			$keys[18] => $this->getPartida(),
+			$keys[19] => $this->getId(),
 		);
 		return $result;
 	}
@@ -730,30 +798,33 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 				$this->setCodrgo($value);
 				break;
 			case 10:
-				$this->setRgoart($value);
+				$this->setCerart($value);
 				break;
 			case 11:
-				$this->setTotart($value);
+				$this->setRgoart($value);
 				break;
 			case 12:
-				$this->setFecent($value);
+				$this->setTotart($value);
 				break;
 			case 13:
-				$this->setDesart($value);
+				$this->setFecent($value);
 				break;
 			case 14:
-				$this->setRelart($value);
+				$this->setDesart($value);
 				break;
 			case 15:
-				$this->setUnimed($value);
+				$this->setRelart($value);
 				break;
 			case 16:
-				$this->setCodpar($value);
+				$this->setUnimed($value);
 				break;
 			case 17:
-				$this->setPartida($value);
+				$this->setCodpar($value);
 				break;
 			case 18:
+				$this->setPartida($value);
+				break;
+			case 19:
 				$this->setId($value);
 				break;
 		} 	}
@@ -773,15 +844,16 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setPreart($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setDtoart($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setCodrgo($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setRgoart($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setTotart($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setFecent($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setDesart($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setRelart($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setUnimed($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setCodpar($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setPartida($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCerart($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setRgoart($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setTotart($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setFecent($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setDesart($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setRelart($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setUnimed($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setCodpar($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setPartida($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
 	}
 
 	
@@ -799,6 +871,7 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaartordPeer::PREART)) $criteria->add(CaartordPeer::PREART, $this->preart);
 		if ($this->isColumnModified(CaartordPeer::DTOART)) $criteria->add(CaartordPeer::DTOART, $this->dtoart);
 		if ($this->isColumnModified(CaartordPeer::CODRGO)) $criteria->add(CaartordPeer::CODRGO, $this->codrgo);
+		if ($this->isColumnModified(CaartordPeer::CERART)) $criteria->add(CaartordPeer::CERART, $this->cerart);
 		if ($this->isColumnModified(CaartordPeer::RGOART)) $criteria->add(CaartordPeer::RGOART, $this->rgoart);
 		if ($this->isColumnModified(CaartordPeer::TOTART)) $criteria->add(CaartordPeer::TOTART, $this->totart);
 		if ($this->isColumnModified(CaartordPeer::FECENT)) $criteria->add(CaartordPeer::FECENT, $this->fecent);
@@ -857,6 +930,8 @@ abstract class BaseCaartord extends BaseObject  implements Persistent {
 		$copyObj->setDtoart($this->dtoart);
 
 		$copyObj->setCodrgo($this->codrgo);
+
+		$copyObj->setCerart($this->cerart);
 
 		$copyObj->setRgoart($this->rgoart);
 

@@ -6,31 +6,51 @@ generator:
 
     fields:
       codemp:      { name: Cod. Empresa }
-      ctapag:      { name: Cuenta por Pagar }
-      ctades:      { name: Cuenta Descuento }
-      numini:      { name: Nro. Inicial O/P }
-      forubi:      { name: Formato Unidad Origen }  
-      unitri:      { name: Unidad Tributaria }
-      ordnom:      { name: Nomina }
-      ordobr:      { name: Aportes }
-      vercomret:   { name: Ver Comprobantes y Retenciones }
-      genctaord:   { name: Generar Comprobante de Orden }
-      gencomadi:   { name: Generar Comprobante Adicional }
-      gencaubon:   { name: Generar Causado Bono Vacacional }
-      tipeje:      { name: Ejecutivo }
-      ordliq:      { name: Liquidacion }
-      
-      
+      nomemp:      { name: Nombre }
+      diremp:      { name: Dirección }
+      ctapag:      { name: Cuenta por Pagar  }
+      ctades:      { name: Cuenta de Descuento  }
+      numini:      { name: Número Inicial para la Orden de Pago   }
+      forubi:      { name: Formato Unidad Origen   }
+      ordnom:      { name: Nómina  }
+      ordobr:      { name: Aportes  }
+      tipeje:      { name: Ejecutivo  }
+      ordliq:      { name: Liquidación  }
+      ordfid:      { name: Fideicomiso  }
+      ordval:      { name: Obras  }
+      unitri:      { name: Valor de la Unidad Tributaria  }
+      genctaord:   { name: Activar}
+      gencomadi:   { name: Activar}
+      vercomret:   { name: Comprobantes y Retenciones  }
+      gencaubon:   { name: Activar}
+      genordret:   { name: Generar Orden de Pago de Retenciones despues de guardar la Orden de Pago}
+      emichepag:   { name: Mostrar sólo Órdenes de Pago con cheque entregado (Fondos a Terceros)}
+      cuecajchi:   { name: Cuenta Bancaria}
+      nomcuecajchi:  { name: Cuenta Bancaria}
+      tipcajchi:   { name: Movimiento de Salida}
+      nomtipcajchi:  { name: Movimiento de Salida}
+      monapecajchi:  { name: Monto de Apertura}
+      porrepcajchi:  { name: Porcentaje de Reposición}
+      tiprencajchi:  { name: Movimiento de Rendición}
+      nomtiprencajchi:  Movimiento de Rendicion}
+      numinicajchi:  { name: N° Inicial Caja Chica}
+      cedrifcajchi:  { name: Beneficiario}
+      nomben:  { name: Beneficiario}
+      codcatcajchi:  { name: Código Categoría}
+      nomcat:  { name: Nombre}
     list:
-      title:          Definicion de Empresa
-      display:        [codemp, ctapag, numini, forubi]
+      title:          Definición de Empresa
+      display:        [=codemp, nomemp, diremp]
       filters:        [codemp]
-      max_per_page:   5
-      object_actions:
-        _edit:        ~
-        _delete:      ~
-
+      sort:           codemp
+      max_per_page:   1
     edit:
-      title:          Modificar Definicion de Empresa
-
-      
+      title:          Definición de Empresa
+      display:        [codemp, nomemp, diremp, ctapag, nomctapag, ctades, nomctades, numini, forubi, ordnom, ordobr, tipeje, ordliq, ordfid, ordval, unitri, genctaord, gencomadi, gencaubon, vercomret, genordret, emichepag, cuecajchi, nomcuecajchi, tipcajchi, nomtipcajchi, monapecajchi, porrepcajchi, tiprencajchi, nomtiprencajchi, numinicajchi, cedrifcajchi, nomben, codcatcajchi, nomcat]
+      fields:
+        genctaord:  {type: checkbox_tag}
+        gencomadi: {type: checkbox_tag}
+        vercomret: {type: checkbox_tag}
+        gencaubon: {type: checkbox_tag}
+      actions:
+        _save:        ~

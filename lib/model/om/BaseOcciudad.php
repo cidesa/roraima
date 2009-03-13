@@ -28,115 +28,160 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collViadettipsers;
+
+	
+	protected $lastViadettipserCriteria = null;
+
+	
+	protected $collViaciuentes;
+
+	
+	protected $lastViaciuenteCriteria = null;
+
+	
+	protected $collViaregdetsolvias;
+
+	
+	protected $lastViaregdetsolviaCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodciu()
-	{
+  
+  public function getCodciu()
+  {
 
-		return $this->codciu; 		
-	}
-	
-	public function getCodedo()
-	{
+    return trim($this->codciu);
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodpai()
-	{
+  }
+  
+  public function getCodedo()
+  {
 
-		return $this->codpai; 		
-	}
-	
-	public function getNomciu()
-	{
+    return trim($this->codedo);
 
-		return $this->nomciu; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodpai()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codpai);
+
+  }
+  
+  public function getNomciu()
+  {
+
+    return trim($this->nomciu);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodciu($v)
 	{
 
-		if ($this->codciu !== $v) {
-			$this->codciu = $v;
-			$this->modifiedColumns[] = OcciudadPeer::CODCIU;
-		}
-
+    if ($this->codciu !== $v) {
+        $this->codciu = $v;
+        $this->modifiedColumns[] = OcciudadPeer::CODCIU;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = OcciudadPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = OcciudadPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = OcciudadPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = OcciudadPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setNomciu($v)
 	{
 
-		if ($this->nomciu !== $v) {
-			$this->nomciu = $v;
-			$this->modifiedColumns[] = OcciudadPeer::NOMCIU;
-		}
-
+    if ($this->nomciu !== $v) {
+        $this->nomciu = $v;
+        $this->modifiedColumns[] = OcciudadPeer::NOMCIU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcciudadPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcciudadPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codciu = $rs->getString($startcol + 0);
+      $this->codciu = $rs->getString($startcol + 0);
 
-			$this->codedo = $rs->getString($startcol + 1);
+      $this->codedo = $rs->getString($startcol + 1);
 
-			$this->codpai = $rs->getString($startcol + 2);
+      $this->codpai = $rs->getString($startcol + 2);
 
-			$this->nomciu = $rs->getString($startcol + 3);
+      $this->nomciu = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Occiudad object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Occiudad object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,11 +238,36 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcciudadPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcciudadPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collViadettipsers !== null) {
+				foreach($this->collViadettipsers as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collViaciuentes !== null) {
+				foreach($this->collViaciuentes as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collViaregdetsolvias !== null) {
+				foreach($this->collViaregdetsolvias as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -239,6 +309,30 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collViadettipsers !== null) {
+					foreach($this->collViadettipsers as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collViaciuentes !== null) {
+					foreach($this->collViaciuentes as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collViaregdetsolvias !== null) {
+					foreach($this->collViaregdetsolvias as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -381,6 +475,23 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 		$copyObj->setNomciu($this->nomciu);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getViadettipsers() as $relObj) {
+				$copyObj->addViadettipser($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getViaciuentes() as $relObj) {
+				$copyObj->addViaciuente($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getViaregdetsolvias() as $relObj) {
+				$copyObj->addViaregdetsolvia($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -402,6 +513,426 @@ abstract class BaseOcciudad extends BaseObject  implements Persistent {
 			self::$peer = new OcciudadPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initViadettipsers()
+	{
+		if ($this->collViadettipsers === null) {
+			$this->collViadettipsers = array();
+		}
+	}
+
+	
+	public function getViadettipsers($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViadettipserPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViadettipsers === null) {
+			if ($this->isNew()) {
+			   $this->collViadettipsers = array();
+			} else {
+
+				$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+
+				ViadettipserPeer::addSelectColumns($criteria);
+				$this->collViadettipsers = ViadettipserPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+
+				ViadettipserPeer::addSelectColumns($criteria);
+				if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
+					$this->collViadettipsers = ViadettipserPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastViadettipserCriteria = $criteria;
+		return $this->collViadettipsers;
+	}
+
+	
+	public function countViadettipsers($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseViadettipserPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+
+		return ViadettipserPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addViadettipser(Viadettipser $l)
+	{
+		$this->collViadettipsers[] = $l;
+		$l->setOcciudad($this);
+	}
+
+
+	
+	public function getViadettipsersJoinViaregtiptab($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViadettipserPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViadettipsers === null) {
+			if ($this->isNew()) {
+				$this->collViadettipsers = array();
+			} else {
+
+				$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+
+				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtiptab($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+
+			if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
+				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtiptab($criteria, $con);
+			}
+		}
+		$this->lastViadettipserCriteria = $criteria;
+
+		return $this->collViadettipsers;
+	}
+
+
+	
+	public function getViadettipsersJoinViaregtipser($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViadettipserPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViadettipsers === null) {
+			if ($this->isNew()) {
+				$this->collViadettipsers = array();
+			} else {
+
+				$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+
+				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtipser($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(ViadettipserPeer::OCCIUDAD_ID, $this->getId());
+
+			if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
+				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtipser($criteria, $con);
+			}
+		}
+		$this->lastViadettipserCriteria = $criteria;
+
+		return $this->collViadettipsers;
+	}
+
+	
+	public function initViaciuentes()
+	{
+		if ($this->collViaciuentes === null) {
+			$this->collViaciuentes = array();
+		}
+	}
+
+	
+	public function getViaciuentes($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViaciuentePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViaciuentes === null) {
+			if ($this->isNew()) {
+			   $this->collViaciuentes = array();
+			} else {
+
+				$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+
+				ViaciuentePeer::addSelectColumns($criteria);
+				$this->collViaciuentes = ViaciuentePeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+
+				ViaciuentePeer::addSelectColumns($criteria);
+				if (!isset($this->lastViaciuenteCriteria) || !$this->lastViaciuenteCriteria->equals($criteria)) {
+					$this->collViaciuentes = ViaciuentePeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastViaciuenteCriteria = $criteria;
+		return $this->collViaciuentes;
+	}
+
+	
+	public function countViaciuentes($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseViaciuentePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+
+		return ViaciuentePeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addViaciuente(Viaciuente $l)
+	{
+		$this->collViaciuentes[] = $l;
+		$l->setOcciudad($this);
+	}
+
+
+	
+	public function getViaciuentesJoinViaregente($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViaciuentePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViaciuentes === null) {
+			if ($this->isNew()) {
+				$this->collViaciuentes = array();
+			} else {
+
+				$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+
+				$this->collViaciuentes = ViaciuentePeer::doSelectJoinViaregente($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(ViaciuentePeer::OCCIUDAD_ID, $this->getId());
+
+			if (!isset($this->lastViaciuenteCriteria) || !$this->lastViaciuenteCriteria->equals($criteria)) {
+				$this->collViaciuentes = ViaciuentePeer::doSelectJoinViaregente($criteria, $con);
+			}
+		}
+		$this->lastViaciuenteCriteria = $criteria;
+
+		return $this->collViaciuentes;
+	}
+
+	
+	public function initViaregdetsolvias()
+	{
+		if ($this->collViaregdetsolvias === null) {
+			$this->collViaregdetsolvias = array();
+		}
+	}
+
+	
+	public function getViaregdetsolvias($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViaregdetsolvias === null) {
+			if ($this->isNew()) {
+			   $this->collViaregdetsolvias = array();
+			} else {
+
+				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+
+				ViaregdetsolviaPeer::addSelectColumns($criteria);
+				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+
+				ViaregdetsolviaPeer::addSelectColumns($criteria);
+				if (!isset($this->lastViaregdetsolviaCriteria) || !$this->lastViaregdetsolviaCriteria->equals($criteria)) {
+					$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastViaregdetsolviaCriteria = $criteria;
+		return $this->collViaregdetsolvias;
+	}
+
+	
+	public function countViaregdetsolvias($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+
+		return ViaregdetsolviaPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addViaregdetsolvia(Viaregdetsolvia $l)
+	{
+		$this->collViaregdetsolvias[] = $l;
+		$l->setOcciudad($this);
+	}
+
+
+	
+	public function getViaregdetsolviasJoinViaregsolvia($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViaregdetsolvias === null) {
+			if ($this->isNew()) {
+				$this->collViaregdetsolvias = array();
+			} else {
+
+				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+
+				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregsolvia($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+
+			if (!isset($this->lastViaregdetsolviaCriteria) || !$this->lastViaregdetsolviaCriteria->equals($criteria)) {
+				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregsolvia($criteria, $con);
+			}
+		}
+		$this->lastViaregdetsolviaCriteria = $criteria;
+
+		return $this->collViaregdetsolvias;
+	}
+
+
+	
+	public function getViaregdetsolviasJoinViaregente($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViaregdetsolvias === null) {
+			if ($this->isNew()) {
+				$this->collViaregdetsolvias = array();
+			} else {
+
+				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+
+				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregente($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+
+			if (!isset($this->lastViaregdetsolviaCriteria) || !$this->lastViaregdetsolviaCriteria->equals($criteria)) {
+				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregente($criteria, $con);
+			}
+		}
+		$this->lastViaregdetsolviaCriteria = $criteria;
+
+		return $this->collViaregdetsolvias;
+	}
+
+
+	
+	public function getViaregdetsolviasJoinViaregact($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViaregdetsolviaPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViaregdetsolvias === null) {
+			if ($this->isNew()) {
+				$this->collViaregdetsolvias = array();
+			} else {
+
+				$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+
+				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregact($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(ViaregdetsolviaPeer::OCCIUDAD_ID, $this->getId());
+
+			if (!isset($this->lastViaregdetsolviaCriteria) || !$this->lastViaregdetsolviaCriteria->equals($criteria)) {
+				$this->collViaregdetsolvias = ViaregdetsolviaPeer::doSelectJoinViaregact($criteria, $con);
+			}
+		}
+		$this->lastViaregdetsolviaCriteria = $criteria;
+
+		return $this->collViaregdetsolvias;
 	}
 
 } 

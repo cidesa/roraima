@@ -10,44 +10,21 @@
  */
 class almtipproActions extends autoalmtipproActions
 {
-  public function getDes_ctaord()
-  {
-  	  $c = new Criteria;
-  	  $this->campo = str_pad($this->catippro->getCtaord(),32,' ');
-  	  $c->add(ContabbPeer::CODCTA, $this->campo);
-  	  $this->nomcu = ContabbPeer::doSelect($c);
-	  if ($this->nomcu)
-	  	return $this->nomcu[0]->getDescta();
-	  else 
-	    return '<!Registro no Encontrado o vacio!> ';
-  }
-  public function getDes_ctaper()
-  {
-  	  $c = new Criteria;
-  	  $this->campo = str_pad($this->catippro->getCtaper(),32,' ');
-  	  $c->add(ContabbPeer::CODCTA, $this->campo);  	  
-  	  $this->nomcu = ContabbPeer::doSelect($c);
-	  if ($this->nomcu)
-	  	return $this->nomcu[0]->getDescta();
-	  else 
-	    return '<!Registro no Encontrado o vacio!> ';
-  }  
-
-
-  
   public function executeEdit()
   {
     $this->catippro = $this->getCatipproOrCreate();
-    $this->des_ctaord = $this->getDes_ctaord();
-    $this->des_ctaper = $this->getDes_ctaper();
-        
+    $this->setVars();
+
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateCatipproFromRequest();
 
       $this->saveCatippro($this->catippro);
 
+   // $this->catippro->setId(Herramientas::getX_vacio('codpro','catippro','id',$this->catippro->getCodpro()));
+
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -67,26 +44,57 @@ class almtipproActions extends autoalmtipproActions
       $this->labels = $this->getLabels();
     }
   }
-	
-  protected function updateCatipproFromRequest()
-  {
-    $catippro = $this->getRequestParameter('catippro');
 
-    if (isset($catippro['codpro']))
-    {
-      $this->catippro->setCodpro($catippro['codpro']);
-    }
-    if (isset($catippro['despro']))
-    {
-      $this->catippro->setDespro($catippro['despro']);
-    }
-    if (isset($catippro['ctaord']))
-    {
-      $this->catippro->setCtaord(str_pad($catippro['ctaord'],32,' '));    	
-    }
-    if (isset($catippro['ctaper']))
-    {
-      $this->catippro->setCtaper(str_pad($catippro['ctaper'],32,' '));
-    }
-  }  
+
+public function executeAjax()
+  {
+   $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+     if ($this->getRequestParameter('ajax')=='1')
+      {
+        $dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+      }
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+  }
+
+  public function executeAutocomplete()
+  {
+    if ($this->getRequestParameter('ajax')=='1')
+      {
+       $this->tags=Herramientas::autocompleteAjax('CODCTA','Contabb','codcta',trim($this->getRequestParameter('catippro[ctaord]')));
+      }
+    else  if ($this->getRequestParameter('ajax')=='2')
+      {
+       $this->tags=Herramientas::autocompleteAjax('CODCTA','Contabb','codcta',trim($this->getRequestParameter('catippro[ctaper]')));
+      }
+  }
+
+  protected function saveCatippro($catippro)
+  {
+    $catippro->save();
+  }
+
+
+  public function setVars()
+  {
+    $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
+    $this->loncta=strlen($this->mascara);
+  }
+
+  public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->catippro = $this->getCatipproOrCreate();
+    $this->updateCatipproFromRequest();
+    $this->setVars();
+
+    $this->labels = $this->getLabels();
+
+    return sfView::SUCCESS;
+  }
+
+
 }

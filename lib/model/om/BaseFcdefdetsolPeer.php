@@ -220,6 +220,7 @@ abstract class BaseFcdefdetsolPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdefdetsolPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

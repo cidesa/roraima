@@ -49,183 +49,214 @@ abstract class BaseCpmovaju extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefaju()
-	{
+  
+  public function getRefaju()
+  {
 
-		return $this->refaju; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->refaju);
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonaju()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getStamov()
-	{
+    return trim($this->codpre);
 
-		return $this->stamov; 		
-	}
-	
-	public function getRefprc()
-	{
+  }
+  
+  public function getMonaju($val=false)
+  {
 
-		return $this->refprc; 		
-	}
-	
-	public function getRefcom()
-	{
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
 
-		return $this->refcom; 		
-	}
-	
-	public function getRefcau()
-	{
+  }
+  
+  public function getStamov()
+  {
 
-		return $this->refcau; 		
-	}
-	
-	public function getRefpag()
-	{
+    return trim($this->stamov);
 
-		return $this->refpag; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getRefprc()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->refprc);
+
+  }
+  
+  public function getRefcom()
+  {
+
+    return trim($this->refcom);
+
+  }
+  
+  public function getRefcau()
+  {
+
+    return trim($this->refcau);
+
+  }
+  
+  public function getRefpag()
+  {
+
+    return trim($this->refpag);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefaju($v)
 	{
 
-		if ($this->refaju !== $v) {
-			$this->refaju = $v;
-			$this->modifiedColumns[] = CpmovajuPeer::REFAJU;
-		}
-
+    if ($this->refaju !== $v) {
+        $this->refaju = $v;
+        $this->modifiedColumns[] = CpmovajuPeer::REFAJU;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpmovajuPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpmovajuPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CpmovajuPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpmovajuPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setStamov($v)
 	{
 
-		if ($this->stamov !== $v) {
-			$this->stamov = $v;
-			$this->modifiedColumns[] = CpmovajuPeer::STAMOV;
-		}
-
+    if ($this->stamov !== $v) {
+        $this->stamov = $v;
+        $this->modifiedColumns[] = CpmovajuPeer::STAMOV;
+      }
+  
 	} 
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = CpmovajuPeer::REFPRC;
-		}
-
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = CpmovajuPeer::REFPRC;
+      }
+  
 	} 
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = CpmovajuPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = CpmovajuPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setRefcau($v)
 	{
 
-		if ($this->refcau !== $v) {
-			$this->refcau = $v;
-			$this->modifiedColumns[] = CpmovajuPeer::REFCAU;
-		}
-
+    if ($this->refcau !== $v) {
+        $this->refcau = $v;
+        $this->modifiedColumns[] = CpmovajuPeer::REFCAU;
+      }
+  
 	} 
 	
 	public function setRefpag($v)
 	{
 
-		if ($this->refpag !== $v) {
-			$this->refpag = $v;
-			$this->modifiedColumns[] = CpmovajuPeer::REFPAG;
-		}
-
+    if ($this->refpag !== $v) {
+        $this->refpag = $v;
+        $this->modifiedColumns[] = CpmovajuPeer::REFPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpmovajuPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpmovajuPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refaju = $rs->getString($startcol + 0);
+      $this->refaju = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->monaju = $rs->getFloat($startcol + 2);
+      $this->monaju = $rs->getFloat($startcol + 2);
 
-			$this->stamov = $rs->getString($startcol + 3);
+      $this->stamov = $rs->getString($startcol + 3);
 
-			$this->refprc = $rs->getString($startcol + 4);
+      $this->refprc = $rs->getString($startcol + 4);
 
-			$this->refcom = $rs->getString($startcol + 5);
+      $this->refcom = $rs->getString($startcol + 5);
 
-			$this->refcau = $rs->getString($startcol + 6);
+      $this->refcau = $rs->getString($startcol + 6);
 
-			$this->refpag = $rs->getString($startcol + 7);
+      $this->refpag = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpmovaju object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpmovaju object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -282,6 +313,7 @@ abstract class BaseCpmovaju extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpmovajuPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpmovajuPeer::doUpdate($this, $con);

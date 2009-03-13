@@ -29,93 +29,119 @@ abstract class BaseNpdepbanusu extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumlin()
-	{
+  
+  public function getNumlin($val=false)
+  {
 
-		return number_format($this->numlin,2,',','.');
-		
-	}
-	
-	public function getDesdep()
-	{
+    if($val) return number_format($this->numlin,2,',','.');
+    else return $this->numlin;
 
-		return $this->desdep; 		
-	}
-	
-	public function getUsuario()
-	{
+  }
+  
+  public function getDesdep()
+  {
 
-		return $this->usuario; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desdep);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getUsuario()
+  {
+
+    return trim($this->usuario);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumlin($v)
 	{
 
-		if ($this->numlin !== $v) {
-			$this->numlin = $v;
-			$this->modifiedColumns[] = NpdepbanusuPeer::NUMLIN;
-		}
-
+    if ($this->numlin !== $v) {
+        $this->numlin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdepbanusuPeer::NUMLIN;
+      }
+  
 	} 
 	
 	public function setDesdep($v)
 	{
 
-		if ($this->desdep !== $v) {
-			$this->desdep = $v;
-			$this->modifiedColumns[] = NpdepbanusuPeer::DESDEP;
-		}
-
+    if ($this->desdep !== $v) {
+        $this->desdep = $v;
+        $this->modifiedColumns[] = NpdepbanusuPeer::DESDEP;
+      }
+  
 	} 
 	
 	public function setUsuario($v)
 	{
 
-		if ($this->usuario !== $v) {
-			$this->usuario = $v;
-			$this->modifiedColumns[] = NpdepbanusuPeer::USUARIO;
-		}
-
+    if ($this->usuario !== $v) {
+        $this->usuario = $v;
+        $this->modifiedColumns[] = NpdepbanusuPeer::USUARIO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdepbanusuPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdepbanusuPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numlin = $rs->getFloat($startcol + 0);
+      $this->numlin = $rs->getFloat($startcol + 0);
 
-			$this->desdep = $rs->getString($startcol + 1);
+      $this->desdep = $rs->getString($startcol + 1);
 
-			$this->usuario = $rs->getString($startcol + 2);
+      $this->usuario = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdepbanusu object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdepbanusu object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseNpdepbanusu extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdepbanusuPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdepbanusuPeer::doUpdate($this, $con);

@@ -29,9 +29,6 @@ abstract class BaseCobdetforPeer {
 	const CORREL = 'cobdetfor.CORREL';
 
 	
-	const CODFOR = 'cobdetfor.CODFOR';
-
-	
 	const NUMIDE = 'cobdetfor.NUMIDE';
 
 	
@@ -39,6 +36,9 @@ abstract class BaseCobdetforPeer {
 
 	
 	const MONPAG = 'cobdetfor.MONPAG';
+
+	
+	const FATIPPAG_ID = 'cobdetfor.FATIPPAG_ID';
 
 	
 	const ID = 'cobdetfor.ID';
@@ -49,17 +49,17 @@ abstract class BaseCobdetforPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numtra', 'Codcli', 'Correl', 'Codfor', 'Numide', 'Codban', 'Monpag', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CobdetforPeer::NUMTRA, CobdetforPeer::CODCLI, CobdetforPeer::CORREL, CobdetforPeer::CODFOR, CobdetforPeer::NUMIDE, CobdetforPeer::CODBAN, CobdetforPeer::MONPAG, CobdetforPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numtra', 'codcli', 'correl', 'codfor', 'numide', 'codban', 'monpag', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Numtra', 'Codcli', 'Correl', 'Numide', 'Codban', 'Monpag', 'FatippagId', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CobdetforPeer::NUMTRA, CobdetforPeer::CODCLI, CobdetforPeer::CORREL, CobdetforPeer::NUMIDE, CobdetforPeer::CODBAN, CobdetforPeer::MONPAG, CobdetforPeer::FATIPPAG_ID, CobdetforPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numtra', 'codcli', 'correl', 'numide', 'codban', 'monpag', 'fatippag_id', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numtra' => 0, 'Codcli' => 1, 'Correl' => 2, 'Codfor' => 3, 'Numide' => 4, 'Codban' => 5, 'Monpag' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (CobdetforPeer::NUMTRA => 0, CobdetforPeer::CODCLI => 1, CobdetforPeer::CORREL => 2, CobdetforPeer::CODFOR => 3, CobdetforPeer::NUMIDE => 4, CobdetforPeer::CODBAN => 5, CobdetforPeer::MONPAG => 6, CobdetforPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('numtra' => 0, 'codcli' => 1, 'correl' => 2, 'codfor' => 3, 'numide' => 4, 'codban' => 5, 'monpag' => 6, 'id' => 7, ),
+		BasePeer::TYPE_PHPNAME => array ('Numtra' => 0, 'Codcli' => 1, 'Correl' => 2, 'Numide' => 3, 'Codban' => 4, 'Monpag' => 5, 'FatippagId' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (CobdetforPeer::NUMTRA => 0, CobdetforPeer::CODCLI => 1, CobdetforPeer::CORREL => 2, CobdetforPeer::NUMIDE => 3, CobdetforPeer::CODBAN => 4, CobdetforPeer::MONPAG => 5, CobdetforPeer::FATIPPAG_ID => 6, CobdetforPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('numtra' => 0, 'codcli' => 1, 'correl' => 2, 'numide' => 3, 'codban' => 4, 'monpag' => 5, 'fatippag_id' => 6, 'id' => 7, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
@@ -120,13 +120,13 @@ abstract class BaseCobdetforPeer {
 
 		$criteria->addSelectColumn(CobdetforPeer::CORREL);
 
-		$criteria->addSelectColumn(CobdetforPeer::CODFOR);
-
 		$criteria->addSelectColumn(CobdetforPeer::NUMIDE);
 
 		$criteria->addSelectColumn(CobdetforPeer::CODBAN);
 
 		$criteria->addSelectColumn(CobdetforPeer::MONPAG);
+
+		$criteria->addSelectColumn(CobdetforPeer::FATIPPAG_ID);
 
 		$criteria->addSelectColumn(CobdetforPeer::ID);
 
@@ -207,6 +207,167 @@ abstract class BaseCobdetforPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinFatippag(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CobdetforPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CobdetforPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CobdetforPeer::FATIPPAG_ID, FatippagPeer::ID);
+
+		$rs = CobdetforPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinFatippag(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CobdetforPeer::addSelectColumns($c);
+		$startcol = (CobdetforPeer::NUM_COLUMNS - CobdetforPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		FatippagPeer::addSelectColumns($c);
+
+		$c->addJoin(CobdetforPeer::FATIPPAG_ID, FatippagPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CobdetforPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FatippagPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getFatippag(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCobdetfor($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCobdetfors();
+				$obj2->addCobdetfor($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CobdetforPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CobdetforPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CobdetforPeer::FATIPPAG_ID, FatippagPeer::ID);
+
+		$rs = CobdetforPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CobdetforPeer::addSelectColumns($c);
+		$startcol2 = (CobdetforPeer::NUM_COLUMNS - CobdetforPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		FatippagPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + FatippagPeer::NUM_COLUMNS;
+
+		$c->addJoin(CobdetforPeer::FATIPPAG_ID, FatippagPeer::ID);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CobdetforPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = FatippagPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getFatippag(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCobdetfor($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCobdetfors();
+				$obj2->addCobdetfor($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -230,6 +391,7 @@ abstract class BaseCobdetforPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobdetforPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Tipos de Contratos Colectivos', 
+<h1><?php echo __('Tipos de Contratos Colectivos',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('presnomtipcon/edit_messages', array('nptipcon' => $nptipcon, 'labels' => $labels)) ?>
-<?php include_partial('presnomtipcon/edit_form', array('nptipcon' => $nptipcon, 'labels' => $labels, 'rs' => $rs, 'rs2' => $rs2)) ?>
+<?php include_partial('presnomtipcon/edit_form', array('nptipcon' => $nptipcon, 'labels' => $labels, 'obj' => $obj, 'obj_nomina' => $obj_nomina, 'listaFrecuenciaPago' => $listaFrecuenciaPago)) ?>
 </div>
 
 <div id="sf_admin_footer">

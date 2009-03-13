@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FcestingMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcestingMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcestingMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcesting');
 		$tMap->setPhpName('Fcesting');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcesting_SEQ');
 
 		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -38,9 +40,9 @@ class FcestingMapBuilder {
 
 		$tMap->addColumn('PEREST', 'Perest', 'string', CreoleTypes::VARCHAR, true, 2);
 
-		$tMap->addColumn('MONTO', 'Monto', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONTO', 'Monto', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

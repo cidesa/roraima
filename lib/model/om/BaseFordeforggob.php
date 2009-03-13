@@ -37,129 +37,157 @@ abstract class BaseFordeforggob extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodorg()
-	{
+  
+  public function getCodorg()
+  {
 
-		return $this->codorg; 		
-	}
-	
-	public function getNomorg()
-	{
+    return trim($this->codorg);
 
-		return $this->nomorg; 		
-	}
-	
-	public function getNumgac()
-	{
+  }
+  
+  public function getNomorg()
+  {
 
-		return $this->numgac; 		
-	}
-	
-	public function getActorg()
-	{
+    return trim($this->nomorg);
 
-		return $this->actorg; 		
-	}
-	
-	public function getMonest()
-	{
+  }
+  
+  public function getNumgac()
+  {
 
-		return number_format($this->monest,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->numgac);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getActorg()
+  {
+
+    return trim($this->actorg);
+
+  }
+  
+  public function getMonest($val=false)
+  {
+
+    if($val) return number_format($this->monest,2,',','.');
+    else return $this->monest;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodorg($v)
 	{
 
-		if ($this->codorg !== $v) {
-			$this->codorg = $v;
-			$this->modifiedColumns[] = FordeforggobPeer::CODORG;
-		}
-
+    if ($this->codorg !== $v) {
+        $this->codorg = $v;
+        $this->modifiedColumns[] = FordeforggobPeer::CODORG;
+      }
+  
 	} 
 	
 	public function setNomorg($v)
 	{
 
-		if ($this->nomorg !== $v) {
-			$this->nomorg = $v;
-			$this->modifiedColumns[] = FordeforggobPeer::NOMORG;
-		}
-
+    if ($this->nomorg !== $v) {
+        $this->nomorg = $v;
+        $this->modifiedColumns[] = FordeforggobPeer::NOMORG;
+      }
+  
 	} 
 	
 	public function setNumgac($v)
 	{
 
-		if ($this->numgac !== $v) {
-			$this->numgac = $v;
-			$this->modifiedColumns[] = FordeforggobPeer::NUMGAC;
-		}
-
+    if ($this->numgac !== $v) {
+        $this->numgac = $v;
+        $this->modifiedColumns[] = FordeforggobPeer::NUMGAC;
+      }
+  
 	} 
 	
 	public function setActorg($v)
 	{
 
-		if ($this->actorg !== $v) {
-			$this->actorg = $v;
-			$this->modifiedColumns[] = FordeforggobPeer::ACTORG;
-		}
-
+    if ($this->actorg !== $v) {
+        $this->actorg = $v;
+        $this->modifiedColumns[] = FordeforggobPeer::ACTORG;
+      }
+  
 	} 
 	
 	public function setMonest($v)
 	{
 
-		if ($this->monest !== $v) {
-			$this->monest = $v;
-			$this->modifiedColumns[] = FordeforggobPeer::MONEST;
-		}
-
+    if ($this->monest !== $v) {
+        $this->monest = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordeforggobPeer::MONEST;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordeforggobPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordeforggobPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codorg = $rs->getString($startcol + 0);
+      $this->codorg = $rs->getString($startcol + 0);
 
-			$this->nomorg = $rs->getString($startcol + 1);
+      $this->nomorg = $rs->getString($startcol + 1);
 
-			$this->numgac = $rs->getString($startcol + 2);
+      $this->numgac = $rs->getString($startcol + 2);
 
-			$this->actorg = $rs->getString($startcol + 3);
+      $this->actorg = $rs->getString($startcol + 3);
 
-			$this->monest = $rs->getFloat($startcol + 4);
+      $this->monest = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordeforggob object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordeforggob object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

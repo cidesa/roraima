@@ -205,6 +205,7 @@ abstract class BaseTstiprenPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TstiprenPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

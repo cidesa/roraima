@@ -9,181 +9,321 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($bndefcon, 'getId') ?>
-<fieldset id="sf_fieldset_none" class="">
-<div class="form-row"><?php echo label_for('bndefcon[codact]', __($labels['bndefcon{codact}']), 'class="required" ') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{codact}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{codact}')): ?> <?php echo form_error('bndefcon{codact}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCodact', array (
-'size' => 30,
-'control_name' => 'bndefcon[codact]',
-)); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#')?></div>
-<br>
-<?php echo label_for('bndefcon[codact]', __($labels['bndefcon{codact}']), 'class="required" ') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{codact}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{codact}')): ?> <?php echo form_error('bndefcon{codact}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCodact', array (
-'size' => 30,
-'control_name' => 'bndefcon[codact]',
-)); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#')?></div>
-<br>
+<?php use_helper('Javascript') ?>
+<?php use_helper('tabs') ?>
+<?php echo javascript_include_tag('dFilter') ?>
+<?php echo javascript_include_tag('tools','observe') ?>
+<?php echo javascript_include_tag('ajax') ?>
+<?php use_helper('Grid'); ?>
+<?php use_helper('PopUp') ?>
 
-<fieldset><legend>Incorporación/Desincorporación</legend>
-<div class="form-row"><?php echo label_for('bndefcon[ctadepcar]', __($labels['bndefcon{ctadepcar}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{ctadepcar}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{ctadepcar}')): ?> <?php echo form_error('bndefcon{ctadepcar}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCtadepcar', array (
-'size' => 32,
-'control_name' => 'bndefcon[ctadepcar]',
-)); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#')?></div>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[codact]', __($labels['bndefcon{codact}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{codact}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndefcon{codact}')): ?> <?php echo form_error('bndefcon{codact}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+
+<?php $value = object_input_tag($bndefcon, 'getCodact', array (
+  'size' => 30,
+  'control_name' => 'bndefcon[codact]',
+  'onKeypress' => "javascript:cadena=rayitas(this.value);document.getElementById('bndefcon_codact').value=cadena;",
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
+  'onBlur'=>remote_function(array(
+  			'url'      => 'biedefconlotm/ajax',
+  			'complete' => 'AjaxJSON(request, json)',
+  			'with' => "'ajax=0&cajtexmos=bndefcon_desact&codigo='+this.value",
+       		)),
+
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bndefact_Biedefconlotm/clase/Bndefact/frame/sf_admin_edit_form/obj1/bndefcon_codact/obj2/bndefcon_desact/campo1/codact/campo2/desact'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDesact', array (
+'size' => 35,
+'control_name' => 'bndefcon[desact]',
+'disable' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
 <br>
-<?php echo label_for('bndefcon[descta]', __($labels['bndefcon{descta}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{descta}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{descta}')): ?> <?php echo form_error('bndefcon{descta}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getDescta', array (
-'disabled' => true,
-'control_name' => 'bndefcon[descta]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-<br>
-<?php echo label_for('bndefcon[ctadepabo]', __($labels['bndefcon{ctadepabo}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{ctadepabo}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{ctadepabo}')): ?> <?php echo form_error('bndefcon{ctadepabo}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCtadepabo', array (
-'size' => 32,
-'control_name' => 'bndefcon[ctadepabo]',
-)); echo $value ? $value : '&nbsp;' ?> <?php echo button_to('...','#')?></div>
-<br>
-<?php echo label_for('bndefcon[desctaabo]', __($labels['bndefcon{desctaabo}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{desctaabo}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{desctaabo}')): ?> <?php echo form_error('bndefcon{desctaabo}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getDesctaabo', array (
-'disabled' => true,
-'control_name' => 'bndefcon[desctaabo]',
-)); echo $value ? $value : '&nbsp;' ?></div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[codact1]', __($labels['bndefcon{codact}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{codact}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndefcon{codact}')): ?> <?php echo form_error('bndefcon{codact}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+<?php $value = object_input_tag($bndefcon, 'getCodact', array (
+	'size' => 30,
+	'control_name' => 'bndefcon[codact1]',
+	'onKeypress' => "javascript:cadena=rayitas(this.value);document.getElementById('bndefcon_codact1').value=cadena;",
+    'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
+	'onBlur'=>remote_function(array(
+  			'url'      => 'biedefconlotm/ajax',
+  			'complete' => 'AjaxJSON(request, json)',
+  			'with' => "'ajax=1&cajtexmos=bndefcon_desact1&codigo='+this.value",
+       		)),
+)); echo $value ? $value : '&nbsp;' ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bndefact_Biedefconlotm/clase/Bndefact/frame/sf_admin_edit_form/obj1/bndefcon_codact1/obj2/bndefcon_desact1/campo1/codact/campo2/desact'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDesact1', array (
+'size' => 35,
+'control_name' => 'bndefcon[desact1]',
+
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
 </div>
 </fieldset>
 
-<fieldset><legend>Depreciación Mensual</legend>
-<div class="form-row"><?php echo label_for('bndefcon[ctaajucar]', __($labels['bndefcon{ctaajucar}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{ctaajucar}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{ctaajucar}')): ?> <?php echo form_error('bndefcon{ctaajucar}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCtaajucar', array (
-'size' => 32,
-'control_name' => 'bndefcon[ctaajucar]',
-)); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#')?></div>
 <br>
-<?php echo label_for('bndefcon[desctaajucar]', __($labels['bndefcon{desctaajucar}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{desctaajucar}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{desctaajucar}')): ?> <?php echo form_error('bndefcon{desctaajucar}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getDesctaajucar', array (
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Incorporación/Desincorporación')?></legend>
+<div class="form-row">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[ctadepcar]', __($labels['bndefcon{ctadepcar}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{ctadepcar}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndefcon{ctadepcar}')): ?> <?php echo form_error('bndefcon{ctadepcar}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+<?php echo input_auto_complete_tag('bndefcon[codcta]', $bndefcon->getCodcta(),
+    'biedefconlotm/autocomplete?ajax=1', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
+      'url'      => 'biedefconlotm/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'script'   => true,
+      'with' => "'ajax=2&cajtexmos=bndefcon_descta&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+  ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_codcta/obj2/bndefcon_descta/campo1/codcta/campo2/descta'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDescta', array (
+'disabled' => true,
+'size' => 35,
+'control_name' => 'bndefcon[descta]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[ctadepabo]', __($labels['bndefcon{ctadepabo}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{ctadepabo}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndefcon{ctadepabo}')): ?> <?php echo form_error('bndefcon{ctadepabo}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+
+<?php echo input_auto_complete_tag('bndefcon[ctadepabo]', $bndefcon->getCtadepabo(),
+    'biedefconlotm/autocomplete?ajax=2', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
+      'url'      => 'biedefconlotm/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'script'   => true,
+      'with' => "'ajax=2&cajtexmos=bndefcon_desctaabo&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+  ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_ctadepabo/obj2/bndefcon_desctaabo/campo1/codcta/campo2/descta'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDesctaabo', array (
+'disabled' => true,
+'size' => 35,
+'control_name' => 'bndefcon[desctaabo]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+</div>
+</fieldset>
+<br>
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Depreciación Mensual')?></legend>
+<div class="form-row">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[ctaajucar]', __($labels['bndefcon{ctaajucar}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{ctaajucar}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndefcon{ctaajucar}')): ?> <?php echo form_error('bndefcon{ctaajucar}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+
+<?php echo input_auto_complete_tag('bndefcon[ctaajucar]', $bndefcon->getCtaajucar(),
+    'biedefconlotm/autocomplete?ajax=2', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
+      'url'      => 'biedefconlotm/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'script'   => true,
+      'with' => "'ajax=2&cajtexmos=bndefcon_desctaajucar&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+  ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_ctaajucar/obj2/bndefcon_desctaajucar/campo1/codcta/campo2/descta'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDesctaajucar', array (
 'disabled' => true,
 'control_name' => 'bndefcon[desctaajucar]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-<br>
-<?php echo label_for('bndefcon[ctaajuabo]', __($labels['bndefcon{ctaajuabo}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{ctaajuabo}')): ?> form-error<?php endif; ?>">
+'size' => 35,
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[ctaajuabo]', __($labels['bndefcon{ctaajuabo}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{ctaajuabo}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('bndefcon{ctaajuabo}')): ?> <?php echo form_error('bndefcon{ctaajuabo}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCtaajuabo', array (
-'size' => 32,
-'control_name' => 'bndefcon[ctaajuabo]',
-)); echo $value ? $value : '&nbsp;' ?> <?php echo button_to('...','#')?></div>
-<br>
-<?php echo label_for('bndefcon[desctaajuabo]', __($labels['bndefcon{desctaajuabo}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{desctaajuabo}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{desctaajuabo}')): ?> <?php echo form_error('bndefcon{desctaajuabo}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getDesctaajuabo', array (
+<?php endif; ?>
+
+
+<?php echo input_auto_complete_tag('bndefcon[ctaajuabo]', $bndefcon->getCtaajuabo(),
+    'biedefconlotm/autocomplete?ajax=2', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
+      'url'      => 'biedefconlotm/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'script'   => true,
+      'with' => "'ajax=2&cajtexmos=bndefcon_desctaajuabo&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+  ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_ctaajuabo/obj2/bndefcon_desctaajuabo/campo1/codcta/campo2/descta'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDesctaajuabo', array (
 'disabled' => true,
 'control_name' => 'bndefcon[desctaajuabo]',
-)); echo $value ? $value : '&nbsp;' ?></div>
+'size' => 35,
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
 </div>
 </fieldset>
 
-<fieldset><legend>Depreciación Acumulada</legend>
-<div class="form-row"><?php echo label_for('bndefcon[ctarevcar]', __($labels['bndefcon{ctarevcar}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{ctarevcar}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{ctarevcar}')): ?> <?php echo form_error('bndefcon{ctarevcar}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCtarevcar', array (
-'size' => 32,
-'control_name' => 'bndefcon[ctarevcar]',
-)); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#')?></div>
 <br>
-<?php echo label_for('bndefcon[desctarevcar]', __($labels['bndefcon{desctarevcar}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{desctarevcar}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{desctarevcar}')): ?> <?php echo form_error('bndefcon{desctarevcar}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getDesctarevcar', array (
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Depreciación Acumulada')?></legend>
+<div class="form-row">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[ctarevcar]', __($labels['bndefcon{ctarevcar}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{ctarevcar}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndefcon{ctarevcar}')): ?> <?php echo form_error('bndefcon{ctarevcar}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+<?php echo input_auto_complete_tag('bndefcon[ctarevcar]', $bndefcon->getCtarevcar(),
+    'biedefconlotm/autocomplete?ajax=2', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
+      'url'      => 'biedefconlotm/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'script'   => true,
+      'with' => "'ajax=2&cajtexmos=bndefcon_desctarevcar&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+  ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_ctarevcar/obj2/bndefcon_desctarevcar/campo1/codcta/campo2/descta'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDesctarevcar', array (
 'disabled' => true,
 'control_name' => 'bndefcon[desctarevcar]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-<br>
-<?php echo label_for('bndefcon[ctarevabo]', __($labels['bndefcon{ctarevabo}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{ctarevabo}')): ?> form-error<?php endif; ?>">
+'size' => 35,
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[ctarevabo]', __($labels['bndefcon{ctarevabo}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{ctarevabo}')): ?> form-error<?php endif; ?>">
 <?php if ($sf_request->hasError('bndefcon{ctarevabo}')): ?> <?php echo form_error('bndefcon{ctarevabo}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCtarevabo', array (
-'size' => 32,
-'control_name' => 'bndefcon[ctarevabo]',
-)); echo $value ? $value : '&nbsp;' ?> <?php echo button_to('...','#')?></div>
-<br>
-<?php echo label_for('bndefcon[desctarevabo]', __($labels['bndefcon{desctarevabo}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{desctarevabo}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{desctarevabo}')): ?> <?php echo form_error('bndefcon{desctarevabo}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getDesctarevabo', array (
+<?php endif; ?>
+
+
+<?php echo input_auto_complete_tag('bndefcon[ctarevabo]', $bndefcon->getCtarevabo(),
+    'biedefconlotm/autocomplete?ajax=2', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
+      'url'      => 'biedefconlotm/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'script'   => true,
+      'with' => "'ajax=2&cajtexmos=bndefcon_desctarevabo&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+  ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_ctarevabo/obj2/bndefcon_desctarevabo/campo1/codcta/campo2/descta'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDesctarevabo', array (
 'disabled' => true,
 'control_name' => 'bndefcon[desctarevabo]',
-)); echo $value ? $value : '&nbsp;' ?></div>
+'size' => 35,
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+<br>
 </div>
 </fieldset>
-
-<fieldset><legend>Pérdida por Desincorporación</legend>
-<div class="form-row"><?php echo label_for('bndefcon[ctapercar]', __($labels['bndefcon{ctapercar}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{ctapercar}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{ctapercar}')): ?> <?php echo form_error('bndefcon{ctapercar}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCtapercar', array (
-'size' => 32,
-'control_name' => 'bndefcon[ctapercar]',
-)); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#')?></div>
 <br>
-<?php echo label_for('bndefcon[desctapercar]', __($labels['bndefcon{desctapercar}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{desctapercar}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{desctapercar}')): ?> <?php echo form_error('bndefcon{desctapercar}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getDesctapercar', array (
+
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Pérdida por Desincorporación')?></legend>
+<div class="form-row">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[ctapercar]', __($labels['bndefcon{ctapercar}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{ctapercar}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndefcon{ctapercar}')): ?> <?php echo form_error('bndefcon{ctapercar}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+
+<?php echo input_auto_complete_tag('bndefcon[ctapercar]', $bndefcon->getCtapercar(),
+    'biedefconlotm/autocomplete?ajax=2', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
+      'url'      => 'biedefconlotm/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'script'   => true,
+      'with' => "'ajax=2&cajtexmos=bndefcon_desctapercar&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+  ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_ctapercar/obj2/bndefcon_desctapercar/campo1/codcta/campo2/descta'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDesctapercar', array (
 'disabled' => true,
 'control_name' => 'bndefcon[desctapercar]',
-)); echo $value ? $value : '&nbsp;' ?></div>
-<br>
-<?php echo label_for('bndefcon[ctaperabo]', __($labels['bndefcon{ctaperabo}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{ctaperabo}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{ctaperabo}')): ?> <?php echo form_error('bndefcon{ctaperabo}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getCtaperabo', array (
-'size' => 32,
-'control_name' => 'bndefcon[ctaperabo]',
-)); echo $value ? $value : '&nbsp;' ?> <?php echo button_to('...','#')?></div>
-<br>
-<?php echo label_for('bndefcon[desctaperabo]', __($labels['bndefcon{desctaperabo}']), '') ?>
-<div
-	class="content<?php if ($sf_request->hasError('bndefcon{desctaperabo}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('bndefcon{desctaperabo}')): ?> <?php echo form_error('bndefcon{desctaperabo}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_tag($bndefcon, 'getDesctaperabo', array (
-'disabled' => true,
-'control_name' => 'bndefcon[desctaperabo]',
-)); echo $value ? $value : '&nbsp;' ?></div>
+'size'=> 35,
+)); echo $value ? $value : '&nbsp;' ?>
 </div>
 
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo label_for('bndefcon[ctaperabo]', __($labels['bndefcon{ctaperabo}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('bndefcon{ctaperabo}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('bndefcon{ctaperabo}')): ?> <?php echo form_error('bndefcon{ctaperabo}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?>
+
+<?php echo input_auto_complete_tag('bndefcon[ctaperabo]', $bndefcon->getCtaperabo(),
+    'biedefconlotm/autocomplete?ajax=2', array('size' => 30, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
+      'url'      => 'biedefconlotm/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'script'   => true,
+      'with' => "'ajax=2&cajtexmos=bndefcon_desctaperabo&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+  ?>
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_Biedefconlotm/clase/Contabb/frame/sf_admin_edit_form/obj1/bndefcon_ctaperabo/obj2/bndefcon_desctaperabo/campo1/codcta/campo2/descta'); ?>
+
+<?php $value = object_input_tag($bndefcon, 'getDesctaperabo', array (
+'disabled' => true,
+'control_name' => 'bndefcon[desctaperabo]',
+'size'=> 35,
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+
+<br>
+</div>
 </fieldset>
  <?php include_partial('edit_actions', array('bndefcon' => $bndefcon)) ?>
 

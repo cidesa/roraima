@@ -13,7 +13,7 @@ abstract class BaseCaartdphPeer {
 	const CLASS_DEFAULT = 'lib.model.Caartdph';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,9 @@ abstract class BaseCaartdphPeer {
 	const CANTOT = 'caartdph.CANTOT';
 
 	
+	const PREART = 'caartdph.PREART';
+
+	
 	const MONTOT = 'caartdph.MONTOT';
 
 	
@@ -50,6 +53,12 @@ abstract class BaseCaartdphPeer {
 	const CODFAL = 'caartdph.CODFAL';
 
 	
+	const CODALM = 'caartdph.CODALM';
+
+	
+	const CODUBI = 'caartdph.CODUBI';
+
+	
 	const ID = 'caartdph.ID';
 
 	
@@ -58,18 +67,18 @@ abstract class BaseCaartdphPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Dphart', 'Codart', 'Codcat', 'Candph', 'Candev', 'Cantot', 'Montot', 'Numlot', 'Canent', 'Codfal', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaartdphPeer::DPHART, CaartdphPeer::CODART, CaartdphPeer::CODCAT, CaartdphPeer::CANDPH, CaartdphPeer::CANDEV, CaartdphPeer::CANTOT, CaartdphPeer::MONTOT, CaartdphPeer::NUMLOT, CaartdphPeer::CANENT, CaartdphPeer::CODFAL, CaartdphPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('dphart', 'codart', 'codcat', 'candph', 'candev', 'cantot', 'montot', 'numlot', 'canent', 'codfal', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Dphart', 'Codart', 'Codcat', 'Candph', 'Candev', 'Cantot', 'Preart', 'Montot', 'Numlot', 'Canent', 'Codfal', 'Codalm', 'Codubi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaartdphPeer::DPHART, CaartdphPeer::CODART, CaartdphPeer::CODCAT, CaartdphPeer::CANDPH, CaartdphPeer::CANDEV, CaartdphPeer::CANTOT, CaartdphPeer::PREART, CaartdphPeer::MONTOT, CaartdphPeer::NUMLOT, CaartdphPeer::CANENT, CaartdphPeer::CODFAL, CaartdphPeer::CODALM, CaartdphPeer::CODUBI, CaartdphPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('dphart', 'codart', 'codcat', 'candph', 'candev', 'cantot', 'preart', 'montot', 'numlot', 'canent', 'codfal', 'codalm', 'codubi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Dphart' => 0, 'Codart' => 1, 'Codcat' => 2, 'Candph' => 3, 'Candev' => 4, 'Cantot' => 5, 'Montot' => 6, 'Numlot' => 7, 'Canent' => 8, 'Codfal' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (CaartdphPeer::DPHART => 0, CaartdphPeer::CODART => 1, CaartdphPeer::CODCAT => 2, CaartdphPeer::CANDPH => 3, CaartdphPeer::CANDEV => 4, CaartdphPeer::CANTOT => 5, CaartdphPeer::MONTOT => 6, CaartdphPeer::NUMLOT => 7, CaartdphPeer::CANENT => 8, CaartdphPeer::CODFAL => 9, CaartdphPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('dphart' => 0, 'codart' => 1, 'codcat' => 2, 'candph' => 3, 'candev' => 4, 'cantot' => 5, 'montot' => 6, 'numlot' => 7, 'canent' => 8, 'codfal' => 9, 'id' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Dphart' => 0, 'Codart' => 1, 'Codcat' => 2, 'Candph' => 3, 'Candev' => 4, 'Cantot' => 5, 'Preart' => 6, 'Montot' => 7, 'Numlot' => 8, 'Canent' => 9, 'Codfal' => 10, 'Codalm' => 11, 'Codubi' => 12, 'Id' => 13, ),
+		BasePeer::TYPE_COLNAME => array (CaartdphPeer::DPHART => 0, CaartdphPeer::CODART => 1, CaartdphPeer::CODCAT => 2, CaartdphPeer::CANDPH => 3, CaartdphPeer::CANDEV => 4, CaartdphPeer::CANTOT => 5, CaartdphPeer::PREART => 6, CaartdphPeer::MONTOT => 7, CaartdphPeer::NUMLOT => 8, CaartdphPeer::CANENT => 9, CaartdphPeer::CODFAL => 10, CaartdphPeer::CODALM => 11, CaartdphPeer::CODUBI => 12, CaartdphPeer::ID => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('dphart' => 0, 'codart' => 1, 'codcat' => 2, 'candph' => 3, 'candev' => 4, 'cantot' => 5, 'preart' => 6, 'montot' => 7, 'numlot' => 8, 'canent' => 9, 'codfal' => 10, 'codalm' => 11, 'codubi' => 12, 'id' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -135,6 +144,8 @@ abstract class BaseCaartdphPeer {
 
 		$criteria->addSelectColumn(CaartdphPeer::CANTOT);
 
+		$criteria->addSelectColumn(CaartdphPeer::PREART);
+
 		$criteria->addSelectColumn(CaartdphPeer::MONTOT);
 
 		$criteria->addSelectColumn(CaartdphPeer::NUMLOT);
@@ -142,6 +153,10 @@ abstract class BaseCaartdphPeer {
 		$criteria->addSelectColumn(CaartdphPeer::CANENT);
 
 		$criteria->addSelectColumn(CaartdphPeer::CODFAL);
+
+		$criteria->addSelectColumn(CaartdphPeer::CODALM);
+
+		$criteria->addSelectColumn(CaartdphPeer::CODUBI);
 
 		$criteria->addSelectColumn(CaartdphPeer::ID);
 
@@ -245,6 +260,7 @@ abstract class BaseCaartdphPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaartdphPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

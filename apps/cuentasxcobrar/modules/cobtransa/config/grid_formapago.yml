@@ -1,0 +1,47 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                false
+  tabla:                   fatippag
+  anchogrid:               800
+  ancho:                   700
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Tipo de Pago
+  tipo:                    t
+  nombrecampo:             destippag
+  esgrabable:              true
+  html:                    [size="20"]
+2:
+  titulo:                  Id
+  tipo:                    t
+  esgrabable:              true
+  nombrecampo:             id
+  oculta:                  true
+  html:                    [size="5"]
+3:
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monpag
+  esnumerico:              true
+  html:                    [size="10"]
+4:
+  titulo:                  Número
+  tipo:                    t
+  nombrecampo:             numero
+  esgrabable:              true
+  html:                    [size="10"]
+5:
+  titulo:                  Código de Banco
+  tipo:                    t
+  nombrecampo:             codban
+  esgrabable:              true
+  html:                    [size="10"]
+6:
+  titulo:                  Banco
+  tipo:                    t
+  nombrecampo:             desban
+  esgrabable:              true
+  html:                    [size="20"]

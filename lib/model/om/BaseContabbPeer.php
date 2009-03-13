@@ -245,6 +245,7 @@ abstract class BaseContabbPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ContabbPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

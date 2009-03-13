@@ -235,6 +235,7 @@ abstract class BaseNpvacliquidacionPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpvacliquidacionPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

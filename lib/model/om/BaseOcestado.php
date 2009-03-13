@@ -29,92 +29,118 @@ abstract class BaseOcestado extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodedo()
-	{
+  
+  public function getCodedo()
+  {
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodpai()
-	{
+    return trim($this->codedo);
 
-		return $this->codpai; 		
-	}
-	
-	public function getNomedo()
-	{
+  }
+  
+  public function getCodpai()
+  {
 
-		return $this->nomedo; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codpai);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomedo()
+  {
+
+    return trim($this->nomedo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = OcestadoPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = OcestadoPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = OcestadoPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = OcestadoPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setNomedo($v)
 	{
 
-		if ($this->nomedo !== $v) {
-			$this->nomedo = $v;
-			$this->modifiedColumns[] = OcestadoPeer::NOMEDO;
-		}
-
+    if ($this->nomedo !== $v) {
+        $this->nomedo = $v;
+        $this->modifiedColumns[] = OcestadoPeer::NOMEDO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcestadoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcestadoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codedo = $rs->getString($startcol + 0);
+      $this->codedo = $rs->getString($startcol + 0);
 
-			$this->codpai = $rs->getString($startcol + 1);
+      $this->codpai = $rs->getString($startcol + 1);
 
-			$this->nomedo = $rs->getString($startcol + 2);
+      $this->nomedo = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocestado object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocestado object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseOcestado extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcestadoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcestadoPeer::doUpdate($this, $con);

@@ -69,6 +69,10 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 
 
 	
+	protected $codubi;
+
+
+	
 	protected $id;
 
 	
@@ -77,355 +81,410 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRcpart()
-	{
+  
+  public function getRcpart()
+  {
 
-		return $this->rcpart; 		
-	}
-	
-	public function getFecrcp($format = 'Y-m-d')
-	{
+    return trim($this->rcpart);
 
-		if ($this->fecrcp === null || $this->fecrcp === '') {
-			return null;
-		} elseif (!is_int($this->fecrcp)) {
-						$ts = strtotime($this->fecrcp);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrcp] as date/time value: " . var_export($this->fecrcp, true));
-			}
-		} else {
-			$ts = $this->fecrcp;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecrcp($format = 'Y-m-d')
+  {
 
-	
-	public function getOrdcom()
-	{
+    if ($this->fecrcp === null || $this->fecrcp === '') {
+      return null;
+    } elseif (!is_int($this->fecrcp)) {
+            $ts = adodb_strtotime($this->fecrcp);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrcp] as date/time value: " . var_export($this->fecrcp, true));
+      }
+    } else {
+      $ts = $this->fecrcp;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->ordcom; 		
-	}
-	
-	public function getDesrcp()
-	{
+  
+  public function getOrdcom()
+  {
 
-		return $this->desrcp; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->ordcom);
 
-		return $this->codpro; 		
-	}
-	
-	public function getNumfac()
-	{
+  }
+  
+  public function getDesrcp()
+  {
 
-		return $this->numfac; 		
-	}
-	
-	public function getMonrcp()
-	{
+    return trim($this->desrcp);
 
-		return number_format($this->monrcp,2,',','.');
-		
-	}
-	
-	public function getStarcp()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->starcp; 		
-	}
-	
-	public function getNumcom()
-	{
+    return trim($this->codpro);
 
-		return $this->numcom; 		
-	}
-	
-	public function getNumord()
-	{
+  }
+  
+  public function getNumfac()
+  {
 
-		return $this->numord; 		
-	}
-	
-	public function getCodalm()
-	{
+    return trim($this->numfac);
 
-		return $this->codalm; 		
-	}
-	
-	public function getCtrper()
-	{
+  }
+  
+  public function getMonrcp($val=false)
+  {
 
-		return $this->ctrper; 		
-	}
-	
-	public function getGenord()
-	{
+    if($val) return number_format($this->monrcp,2,',','.');
+    else return $this->monrcp;
 
-		return $this->genord; 		
-	}
-	
-	public function getNroent()
-	{
+  }
+  
+  public function getStarcp()
+  {
 
-		return $this->nroent; 		
-	}
-	
-	public function getFecfac($format = 'Y-m-d')
-	{
+    return trim($this->starcp);
 
-		if ($this->fecfac === null || $this->fecfac === '') {
-			return null;
-		} elseif (!is_int($this->fecfac)) {
-						$ts = strtotime($this->fecfac);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfac] as date/time value: " . var_export($this->fecfac, true));
-			}
-		} else {
-			$ts = $this->fecfac;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getNumcom()
+  {
 
-	
-	public function getId()
-	{
+    return trim($this->numcom);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumord()
+  {
+
+    return trim($this->numord);
+
+  }
+  
+  public function getCodalm()
+  {
+
+    return trim($this->codalm);
+
+  }
+  
+  public function getCtrper()
+  {
+
+    return trim($this->ctrper);
+
+  }
+  
+  public function getGenord()
+  {
+
+    return trim($this->genord);
+
+  }
+  
+  public function getNroent()
+  {
+
+    return trim($this->nroent);
+
+  }
+  
+  public function getFecfac($format = 'Y-m-d')
+  {
+
+    if ($this->fecfac === null || $this->fecfac === '') {
+      return null;
+    } elseif (!is_int($this->fecfac)) {
+            $ts = adodb_strtotime($this->fecfac);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfac] as date/time value: " . var_export($this->fecfac, true));
+      }
+    } else {
+      $ts = $this->fecfac;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRcpart($v)
 	{
 
-		if ($this->rcpart !== $v) {
-			$this->rcpart = $v;
-			$this->modifiedColumns[] = CarcpartPeer::RCPART;
-		}
-
+    if ($this->rcpart !== $v) {
+        $this->rcpart = $v;
+        $this->modifiedColumns[] = CarcpartPeer::RCPART;
+      }
+  
 	} 
 	
 	public function setFecrcp($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrcp] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrcp !== $ts) {
-			$this->fecrcp = $ts;
-			$this->modifiedColumns[] = CarcpartPeer::FECRCP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrcp] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrcp !== $ts) {
+      $this->fecrcp = $ts;
+      $this->modifiedColumns[] = CarcpartPeer::FECRCP;
+    }
 
 	} 
 	
 	public function setOrdcom($v)
 	{
 
-		if ($this->ordcom !== $v) {
-			$this->ordcom = $v;
-			$this->modifiedColumns[] = CarcpartPeer::ORDCOM;
-		}
-
+    if ($this->ordcom !== $v) {
+        $this->ordcom = $v;
+        $this->modifiedColumns[] = CarcpartPeer::ORDCOM;
+      }
+  
 	} 
 	
 	public function setDesrcp($v)
 	{
 
-		if ($this->desrcp !== $v) {
-			$this->desrcp = $v;
-			$this->modifiedColumns[] = CarcpartPeer::DESRCP;
-		}
-
+    if ($this->desrcp !== $v) {
+        $this->desrcp = $v;
+        $this->modifiedColumns[] = CarcpartPeer::DESRCP;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CarcpartPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CarcpartPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setNumfac($v)
 	{
 
-		if ($this->numfac !== $v) {
-			$this->numfac = $v;
-			$this->modifiedColumns[] = CarcpartPeer::NUMFAC;
-		}
-
+    if ($this->numfac !== $v) {
+        $this->numfac = $v;
+        $this->modifiedColumns[] = CarcpartPeer::NUMFAC;
+      }
+  
 	} 
 	
 	public function setMonrcp($v)
 	{
 
-		if ($this->monrcp !== $v) {
-			$this->monrcp = $v;
-			$this->modifiedColumns[] = CarcpartPeer::MONRCP;
-		}
-
+    if ($this->monrcp !== $v) {
+        $this->monrcp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CarcpartPeer::MONRCP;
+      }
+  
 	} 
 	
 	public function setStarcp($v)
 	{
 
-		if ($this->starcp !== $v) {
-			$this->starcp = $v;
-			$this->modifiedColumns[] = CarcpartPeer::STARCP;
-		}
-
+    if ($this->starcp !== $v) {
+        $this->starcp = $v;
+        $this->modifiedColumns[] = CarcpartPeer::STARCP;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = CarcpartPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = CarcpartPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = CarcpartPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = CarcpartPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = CarcpartPeer::CODALM;
-		}
-
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CarcpartPeer::CODALM;
+      }
+  
 	} 
 	
 	public function setCtrper($v)
 	{
 
-		if ($this->ctrper !== $v) {
-			$this->ctrper = $v;
-			$this->modifiedColumns[] = CarcpartPeer::CTRPER;
-		}
-
+    if ($this->ctrper !== $v) {
+        $this->ctrper = $v;
+        $this->modifiedColumns[] = CarcpartPeer::CTRPER;
+      }
+  
 	} 
 	
 	public function setGenord($v)
 	{
 
-		if ($this->genord !== $v) {
-			$this->genord = $v;
-			$this->modifiedColumns[] = CarcpartPeer::GENORD;
-		}
-
+    if ($this->genord !== $v) {
+        $this->genord = $v;
+        $this->modifiedColumns[] = CarcpartPeer::GENORD;
+      }
+  
 	} 
 	
 	public function setNroent($v)
 	{
 
-		if ($this->nroent !== $v) {
-			$this->nroent = $v;
-			$this->modifiedColumns[] = CarcpartPeer::NROENT;
-		}
-
+    if ($this->nroent !== $v) {
+        $this->nroent = $v;
+        $this->modifiedColumns[] = CarcpartPeer::NROENT;
+      }
+  
 	} 
 	
 	public function setFecfac($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfac] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfac !== $ts) {
-			$this->fecfac = $ts;
-			$this->modifiedColumns[] = CarcpartPeer::FECFAC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfac] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfac !== $ts) {
+      $this->fecfac = $ts;
+      $this->modifiedColumns[] = CarcpartPeer::FECFAC;
+    }
 
+	} 
+	
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CarcpartPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CarcpartPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CarcpartPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->rcpart = $rs->getString($startcol + 0);
+      $this->rcpart = $rs->getString($startcol + 0);
 
-			$this->fecrcp = $rs->getDate($startcol + 1, null);
+      $this->fecrcp = $rs->getDate($startcol + 1, null);
 
-			$this->ordcom = $rs->getString($startcol + 2);
+      $this->ordcom = $rs->getString($startcol + 2);
 
-			$this->desrcp = $rs->getString($startcol + 3);
+      $this->desrcp = $rs->getString($startcol + 3);
 
-			$this->codpro = $rs->getString($startcol + 4);
+      $this->codpro = $rs->getString($startcol + 4);
 
-			$this->numfac = $rs->getString($startcol + 5);
+      $this->numfac = $rs->getString($startcol + 5);
 
-			$this->monrcp = $rs->getFloat($startcol + 6);
+      $this->monrcp = $rs->getFloat($startcol + 6);
 
-			$this->starcp = $rs->getString($startcol + 7);
+      $this->starcp = $rs->getString($startcol + 7);
 
-			$this->numcom = $rs->getString($startcol + 8);
+      $this->numcom = $rs->getString($startcol + 8);
 
-			$this->numord = $rs->getString($startcol + 9);
+      $this->numord = $rs->getString($startcol + 9);
 
-			$this->codalm = $rs->getString($startcol + 10);
+      $this->codalm = $rs->getString($startcol + 10);
 
-			$this->ctrper = $rs->getString($startcol + 11);
+      $this->ctrper = $rs->getString($startcol + 11);
 
-			$this->genord = $rs->getString($startcol + 12);
+      $this->genord = $rs->getString($startcol + 12);
 
-			$this->nroent = $rs->getString($startcol + 13);
+      $this->nroent = $rs->getString($startcol + 13);
 
-			$this->fecfac = $rs->getDate($startcol + 14, null);
+      $this->fecfac = $rs->getDate($startcol + 14, null);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->codubi = $rs->getString($startcol + 15);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 16);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Carcpart object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 17; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Carcpart object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -482,6 +541,7 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CarcpartPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CarcpartPeer::doUpdate($this, $con);
@@ -593,6 +653,9 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 				return $this->getFecfac();
 				break;
 			case 15:
+				return $this->getCodubi();
+				break;
+			case 16:
 				return $this->getId();
 				break;
 			default:
@@ -620,7 +683,8 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 			$keys[12] => $this->getGenord(),
 			$keys[13] => $this->getNroent(),
 			$keys[14] => $this->getFecfac(),
-			$keys[15] => $this->getId(),
+			$keys[15] => $this->getCodubi(),
+			$keys[16] => $this->getId(),
 		);
 		return $result;
 	}
@@ -682,6 +746,9 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 				$this->setFecfac($value);
 				break;
 			case 15:
+				$this->setCodubi($value);
+				break;
+			case 16:
 				$this->setId($value);
 				break;
 		} 	}
@@ -706,7 +773,8 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[12], $arr)) $this->setGenord($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setNroent($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setFecfac($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
+		if (array_key_exists($keys[15], $arr)) $this->setCodubi($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
 	}
 
 	
@@ -729,6 +797,7 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CarcpartPeer::GENORD)) $criteria->add(CarcpartPeer::GENORD, $this->genord);
 		if ($this->isColumnModified(CarcpartPeer::NROENT)) $criteria->add(CarcpartPeer::NROENT, $this->nroent);
 		if ($this->isColumnModified(CarcpartPeer::FECFAC)) $criteria->add(CarcpartPeer::FECFAC, $this->fecfac);
+		if ($this->isColumnModified(CarcpartPeer::CODUBI)) $criteria->add(CarcpartPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CarcpartPeer::ID)) $criteria->add(CarcpartPeer::ID, $this->id);
 
 		return $criteria;
@@ -789,6 +858,8 @@ abstract class BaseCarcpart extends BaseObject  implements Persistent {
 		$copyObj->setNroent($this->nroent);
 
 		$copyObj->setFecfac($this->fecfac);
+
+		$copyObj->setCodubi($this->codubi);
 
 
 		$copyObj->setNew(true);

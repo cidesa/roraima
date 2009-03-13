@@ -6,15 +6,20 @@ generator:
     fields:
       codcon: { name: Tipo de Contrato, params: maxlength=3}
       nomcon: { name: Nombre Tip. Contrato}
-      codasi: { name: Codigo de Grupo, params: maxlength=3}            
-      desasi: { name: Descripcion}    
+      codasi: { name: Codigo de Grupo, params: maxlength=3}
+      desasi: { name: Descripcion}
     list:
       title:          Registro de Tipo de Asignaciones
       filters:        [codcon, codasi, desasi]
       display:        [=codcon, nomcon, codasi, desasi]
-      max_per_page:	  6            
+      max_per_page:	  6
       object_actions:
         _edit:        ~
         _delete:      ~
     edit:
       title:          Registro de Tipo de Asignaciones
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

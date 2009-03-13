@@ -33,110 +33,137 @@ abstract class BaseCadefcom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcat()
-	{
+  
+  public function getCodcat()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getNumcon()
-	{
+    return trim($this->codcat);
 
-		return $this->numcon; 		
-	}
-	
-	public function getNroini()
-	{
+  }
+  
+  public function getNumcon()
+  {
 
-		return $this->nroini; 		
-	}
-	
-	public function getAfeuni()
-	{
+    return trim($this->numcon);
 
-		return $this->afeuni; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNroini()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nroini);
+
+  }
+  
+  public function getAfeuni()
+  {
+
+    return trim($this->afeuni);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CadefcomPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CadefcomPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setNumcon($v)
 	{
 
-		if ($this->numcon !== $v) {
-			$this->numcon = $v;
-			$this->modifiedColumns[] = CadefcomPeer::NUMCON;
-		}
-
+    if ($this->numcon !== $v) {
+        $this->numcon = $v;
+        $this->modifiedColumns[] = CadefcomPeer::NUMCON;
+      }
+  
 	} 
 	
 	public function setNroini($v)
 	{
 
-		if ($this->nroini !== $v) {
-			$this->nroini = $v;
-			$this->modifiedColumns[] = CadefcomPeer::NROINI;
-		}
-
+    if ($this->nroini !== $v) {
+        $this->nroini = $v;
+        $this->modifiedColumns[] = CadefcomPeer::NROINI;
+      }
+  
 	} 
 	
 	public function setAfeuni($v)
 	{
 
-		if ($this->afeuni !== $v) {
-			$this->afeuni = $v;
-			$this->modifiedColumns[] = CadefcomPeer::AFEUNI;
-		}
-
+    if ($this->afeuni !== $v) {
+        $this->afeuni = $v;
+        $this->modifiedColumns[] = CadefcomPeer::AFEUNI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadefcomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadefcomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcat = $rs->getString($startcol + 0);
+      $this->codcat = $rs->getString($startcol + 0);
 
-			$this->numcon = $rs->getString($startcol + 1);
+      $this->numcon = $rs->getString($startcol + 1);
 
-			$this->nroini = $rs->getString($startcol + 2);
+      $this->nroini = $rs->getString($startcol + 2);
 
-			$this->afeuni = $rs->getString($startcol + 3);
+      $this->afeuni = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadefcom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadefcom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

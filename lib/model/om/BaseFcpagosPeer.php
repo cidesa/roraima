@@ -13,7 +13,7 @@ abstract class BaseFcpagosPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcpagos';
 
 	
-	const NUM_COLUMNS = 14;
+	const NUM_COLUMNS = 16;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -59,6 +59,12 @@ abstract class BaseFcpagosPeer {
 	const CEDANU = 'fcpagos.CEDANU';
 
 	
+	const NOMCON = 'fcpagos.NOMCON';
+
+	
+	const DIRCON = 'fcpagos.DIRCON';
+
+	
 	const ID = 'fcpagos.ID';
 
 	
@@ -67,18 +73,18 @@ abstract class BaseFcpagosPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numpag', 'Fecpag', 'Rifcon', 'Despag', 'Monpag', 'Monefe', 'Funpag', 'Codrec', 'Numpagold', 'Edopag', 'Fecanu', 'Motanu', 'Cedanu', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcpagosPeer::NUMPAG, FcpagosPeer::FECPAG, FcpagosPeer::RIFCON, FcpagosPeer::DESPAG, FcpagosPeer::MONPAG, FcpagosPeer::MONEFE, FcpagosPeer::FUNPAG, FcpagosPeer::CODREC, FcpagosPeer::NUMPAGOLD, FcpagosPeer::EDOPAG, FcpagosPeer::FECANU, FcpagosPeer::MOTANU, FcpagosPeer::CEDANU, FcpagosPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numpag', 'fecpag', 'rifcon', 'despag', 'monpag', 'monefe', 'funpag', 'codrec', 'numpagold', 'edopag', 'fecanu', 'motanu', 'cedanu', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Numpag', 'Fecpag', 'Rifcon', 'Despag', 'Monpag', 'Monefe', 'Funpag', 'Codrec', 'Numpagold', 'Edopag', 'Fecanu', 'Motanu', 'Cedanu', 'Nomcon', 'Dircon', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcpagosPeer::NUMPAG, FcpagosPeer::FECPAG, FcpagosPeer::RIFCON, FcpagosPeer::DESPAG, FcpagosPeer::MONPAG, FcpagosPeer::MONEFE, FcpagosPeer::FUNPAG, FcpagosPeer::CODREC, FcpagosPeer::NUMPAGOLD, FcpagosPeer::EDOPAG, FcpagosPeer::FECANU, FcpagosPeer::MOTANU, FcpagosPeer::CEDANU, FcpagosPeer::NOMCON, FcpagosPeer::DIRCON, FcpagosPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numpag', 'fecpag', 'rifcon', 'despag', 'monpag', 'monefe', 'funpag', 'codrec', 'numpagold', 'edopag', 'fecanu', 'motanu', 'cedanu', 'nomcon', 'dircon', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numpag' => 0, 'Fecpag' => 1, 'Rifcon' => 2, 'Despag' => 3, 'Monpag' => 4, 'Monefe' => 5, 'Funpag' => 6, 'Codrec' => 7, 'Numpagold' => 8, 'Edopag' => 9, 'Fecanu' => 10, 'Motanu' => 11, 'Cedanu' => 12, 'Id' => 13, ),
-		BasePeer::TYPE_COLNAME => array (FcpagosPeer::NUMPAG => 0, FcpagosPeer::FECPAG => 1, FcpagosPeer::RIFCON => 2, FcpagosPeer::DESPAG => 3, FcpagosPeer::MONPAG => 4, FcpagosPeer::MONEFE => 5, FcpagosPeer::FUNPAG => 6, FcpagosPeer::CODREC => 7, FcpagosPeer::NUMPAGOLD => 8, FcpagosPeer::EDOPAG => 9, FcpagosPeer::FECANU => 10, FcpagosPeer::MOTANU => 11, FcpagosPeer::CEDANU => 12, FcpagosPeer::ID => 13, ),
-		BasePeer::TYPE_FIELDNAME => array ('numpag' => 0, 'fecpag' => 1, 'rifcon' => 2, 'despag' => 3, 'monpag' => 4, 'monefe' => 5, 'funpag' => 6, 'codrec' => 7, 'numpagold' => 8, 'edopag' => 9, 'fecanu' => 10, 'motanu' => 11, 'cedanu' => 12, 'id' => 13, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Numpag' => 0, 'Fecpag' => 1, 'Rifcon' => 2, 'Despag' => 3, 'Monpag' => 4, 'Monefe' => 5, 'Funpag' => 6, 'Codrec' => 7, 'Numpagold' => 8, 'Edopag' => 9, 'Fecanu' => 10, 'Motanu' => 11, 'Cedanu' => 12, 'Nomcon' => 13, 'Dircon' => 14, 'Id' => 15, ),
+		BasePeer::TYPE_COLNAME => array (FcpagosPeer::NUMPAG => 0, FcpagosPeer::FECPAG => 1, FcpagosPeer::RIFCON => 2, FcpagosPeer::DESPAG => 3, FcpagosPeer::MONPAG => 4, FcpagosPeer::MONEFE => 5, FcpagosPeer::FUNPAG => 6, FcpagosPeer::CODREC => 7, FcpagosPeer::NUMPAGOLD => 8, FcpagosPeer::EDOPAG => 9, FcpagosPeer::FECANU => 10, FcpagosPeer::MOTANU => 11, FcpagosPeer::CEDANU => 12, FcpagosPeer::NOMCON => 13, FcpagosPeer::DIRCON => 14, FcpagosPeer::ID => 15, ),
+		BasePeer::TYPE_FIELDNAME => array ('numpag' => 0, 'fecpag' => 1, 'rifcon' => 2, 'despag' => 3, 'monpag' => 4, 'monefe' => 5, 'funpag' => 6, 'codrec' => 7, 'numpagold' => 8, 'edopag' => 9, 'fecanu' => 10, 'motanu' => 11, 'cedanu' => 12, 'nomcon' => 13, 'dircon' => 14, 'id' => 15, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
@@ -157,6 +163,10 @@ abstract class BaseFcpagosPeer {
 		$criteria->addSelectColumn(FcpagosPeer::MOTANU);
 
 		$criteria->addSelectColumn(FcpagosPeer::CEDANU);
+
+		$criteria->addSelectColumn(FcpagosPeer::NOMCON);
+
+		$criteria->addSelectColumn(FcpagosPeer::DIRCON);
 
 		$criteria->addSelectColumn(FcpagosPeer::ID);
 
@@ -260,6 +270,7 @@ abstract class BaseFcpagosPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcpagosPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

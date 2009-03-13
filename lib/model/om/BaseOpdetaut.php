@@ -41,149 +41,178 @@ abstract class BaseOpdetaut extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumord()
-	{
+  
+  public function getNumord()
+  {
 
-		return $this->numord; 		
-	}
-	
-	public function getRefcom()
-	{
+    return trim($this->numord);
 
-		return $this->refcom; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getRefcom()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getMoncau()
-	{
+    return trim($this->refcom);
 
-		return number_format($this->moncau,2,',','.');
-		
-	}
-	
-	public function getMondes()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getMonret()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->monret,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMoncau($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->moncau,2,',','.');
+    else return $this->moncau;
+
+  }
+  
+  public function getMondes($val=false)
+  {
+
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
+
+  }
+  
+  public function getMonret($val=false)
+  {
+
+    if($val) return number_format($this->monret,2,',','.');
+    else return $this->monret;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = OpdetautPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = OpdetautPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = OpdetautPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = OpdetautPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = OpdetautPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = OpdetautPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMoncau($v)
 	{
 
-		if ($this->moncau !== $v) {
-			$this->moncau = $v;
-			$this->modifiedColumns[] = OpdetautPeer::MONCAU;
-		}
-
+    if ($this->moncau !== $v) {
+        $this->moncau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdetautPeer::MONCAU;
+      }
+  
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = OpdetautPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdetautPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setMonret($v)
 	{
 
-		if ($this->monret !== $v) {
-			$this->monret = $v;
-			$this->modifiedColumns[] = OpdetautPeer::MONRET;
-		}
-
+    if ($this->monret !== $v) {
+        $this->monret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdetautPeer::MONRET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpdetautPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpdetautPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numord = $rs->getString($startcol + 0);
+      $this->numord = $rs->getString($startcol + 0);
 
-			$this->refcom = $rs->getString($startcol + 1);
+      $this->refcom = $rs->getString($startcol + 1);
 
-			$this->codpre = $rs->getString($startcol + 2);
+      $this->codpre = $rs->getString($startcol + 2);
 
-			$this->moncau = $rs->getFloat($startcol + 3);
+      $this->moncau = $rs->getFloat($startcol + 3);
 
-			$this->mondes = $rs->getFloat($startcol + 4);
+      $this->mondes = $rs->getFloat($startcol + 4);
 
-			$this->monret = $rs->getFloat($startcol + 5);
+      $this->monret = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opdetaut object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opdetaut object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -240,6 +269,7 @@ abstract class BaseOpdetaut extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpdetautPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpdetautPeer::doUpdate($this, $con);

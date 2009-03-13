@@ -25,74 +25,99 @@ abstract class BaseBnestado extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodedo()
-	{
+  
+  public function getCodedo()
+  {
 
-		return $this->codedo; 		
-	}
-	
-	public function getNomedo()
-	{
+    return trim($this->codedo);
 
-		return $this->nomedo; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomedo()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomedo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = BnestadoPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = BnestadoPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setNomedo($v)
 	{
 
-		if ($this->nomedo !== $v) {
-			$this->nomedo = $v;
-			$this->modifiedColumns[] = BnestadoPeer::NOMEDO;
-		}
-
+    if ($this->nomedo !== $v) {
+        $this->nomedo = $v;
+        $this->modifiedColumns[] = BnestadoPeer::NOMEDO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnestadoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnestadoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codedo = $rs->getString($startcol + 0);
+      $this->codedo = $rs->getString($startcol + 0);
 
-			$this->nomedo = $rs->getString($startcol + 1);
+      $this->nomedo = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnestado object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnestado object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

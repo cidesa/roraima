@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fapais
+    theme:            cidesaGenerator
+
+    fields:
+      nompai: { name: Nombre, validate: Vstring_1_20, msj_error: Debe insertar el nombre del país }
+
+    list:
+      title: Paises
+      display: [=nompai]
+      filters: [nompai]
+      object_actions:
+       _edit:        ~
+       _delete:        ~
+      max_per_page:	  10
+      sort:    nompai
+
+    edit:
+      title: Definición de País
+      display:
+        "NONE": [nompai]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

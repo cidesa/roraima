@@ -1,40 +1,42 @@
 <?php
 
 
-	
+
 class Tabla51MapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.Tabla51MapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.Tabla51MapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('tabla51');
 		$tMap->setPhpName('Tabla51');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('tabla51_SEQ');
 
 		$tMap->addColumn('REFADI', 'Refadi', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECADI', 'Fecadi', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECADI', 'Fecadi', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('ANOADI', 'Anoadi', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -44,19 +46,19 @@ class Tabla51MapBuilder {
 
 		$tMap->addColumn('ADIDIS', 'Adidis', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('TOTADI', 'Totadi', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TOTADI', 'Totadi', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('STAADI', 'Staadi', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addColumn('NUMCOM', 'Numcom', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('PERADI', 'Peradi', 'string', CreoleTypes::VARCHAR, false, 2);
 
 		$tMap->addColumn('TIPGAS', 'Tipgas', 'string', CreoleTypes::VARCHAR, false, 250);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -1,0 +1,118 @@
+hacienda:
+  opciones:
+    activo: false #true/false
+    imagen: hacienda.gif
+    descripcion: Módulo de Hacienda
+    nombre: Hacienda Municipal
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: hacienda.php
+        modulo_dev: hacienda_dev.php
+      Ubicaciones:
+        modulo: obras.php
+        modulo_dev: obras_dev.php
+      Reportes:
+        absoluta: reportes/reportes/hacienda
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones Generales:
+      Definiciones de la Alcaldía:                            facdefespins
+      Catalogo de Fuente de Ingresos:                         facfueing
+      Definición de Tipos de Solvencias:                      facdefsol
+      Definición de Ruta:                                     facdefrut
+      Definición Tipos de Pagos:                              facdefesptippag
+      Definición Tasas de Intereses Bancarios:                facdefesptasban
+      Definición de Descuentos:                               facdesliq
+      Definición de Recargos:                                 facrecliq
+      Definición de Multas en Declaraciones:                  facmultas
+      Actividades Economicas:
+        Definición de Tipos de Licencias:                     facdeftiplic
+        Definición Actividades Comerciales:                   facdefactcom
+        Rango en Bs. para el pago de Impuestos:               facranpagimp
+      Inmuebles:
+        Definición de Uso de Inmuebles:                       facusoinm
+        Definición de Estados de Inmuebles:                   facdefestinm
+        Definición de Caracteristicas de Inmuebles:           faccarinm
+        Definición de Situaciones Juridicas de Inmuebles:     facsitjurinm
+        Catastro:
+          Código Catastral Fiscal:                            faccodcatfis
+          Catastro con Fines Fiscales:                        faccatfinfis
+          Definición de Tabla de Depreciación:                facdefdprinm
+          Definición Complementos de Inmuebles:               facdefcominm
+          Definición Inmuebles Urbanos:                       facranpaginm
+      Vehiculos:
+        Clasificador de Vehiculos:                            facvehcla
+      Apuestas Licitas:
+        Clasificador de Apuestas Licitas:                     facaputip
+      Propaganda Comercial:
+        Clasificador de Propaganda Comercial:                 facprotip
+      Espectáculos Públicos:
+        Clasificador de Espectaculos Públicos:                facesptip
+      Ubicaciones:
+        Pais:                                                 oycdefdivpai
+        Estado:                                               oycdefdivest
+        Ciudad:                                               oycdefdivciu
+    Atención al Contribuyente:
+      Registro de Contribuyente:                              facdatcon
+    Desarrollando:
+      Licencia de Actividades Economicas:
+        Solicitud:                                            facpicsollic
+        Otorgamiento:                                         facpiclic
+    Definiciones Especificas faltantes:
+      Registro de Informacion del Sistema:                    IngDefIns
+      Catálogo de Fuentes de Ingresos:                        IngFueIng
+      Definición de Recargos:                                 facrecliq
+      Definición de Unidades Receptoras:                      IngDefUniRec
+      Definición de Recaudos:                                 almregrec   #Éste Módulo es de compras, hay que configurarlo
+      Definiciones para las Fuentes de Ingresos:
+      Actividades Económicas:
+        Rango en Bs. para el pago de Impuestos:               facranpagimp
+        Actividades Comerciales:                              facdefactcom
+      Inmuebles:
+        Uso de Inmuebles:                                     facusoinm
+        Caracteristicas de Inmuebles:                         faccarinm
+        Situaciones Juridicas de Inmuebles:                   facsitjurinm
+        Catastro:
+          Codigo Catastral Fiscal:                            faccodcatfis
+          Catastro con Fines Fiscales:                        faccatfinfis
+          #Cuadro para Calculo del Impuesto:                  facranpaginm
+      Tipos de Solvencias:                                    facdefsol
+      Rutas:                                                  facdefrut
+      Definiciones de la Alcaldía:                            facdefespins
+      Atención al Contribuyente:
+        Registro de Cajeros:                                  fcajero
+        Registro de Contribuyente:                            facdatcon
+        Licencia de Actividades Economicas:
+          Solicitud:                                          facpicsollic
+          #Otorgamiento:                                      Facpiclic
+        Inmuebles Urbanos:                                    facinmreg
+        Estado de Cuenta Integral:                            facestcueint
+        #Estado de Cuenta por Referencia:                     facestcueintref
+        #Solvencias:                                          facsolvencia
+        Reparos Fiscales:                                     facrepfisliq
+      Declaración/Liquidación:
+        Actividades Económicas:                               facpicliq
+        #Inmuebles Urbanos:                                   facinmdec
+        Otros Ingresos:                                       facotringreg
+      Recaudación:
+        Convenios de Pago:                                    facconvenio
+        Pagos:                                                facrecpag
+        Abonos:                                               facabonos
+        Deudas:                                               facrecdeu
+        #Actualizacion de Deudas:                             facactdeuret
+        Generar Comprobante Contable:                         facingresos
+    Reportes:
+      Catálogo de Fuentes Ingresos:                           inrfueing
+      Alfabético de Contribuyentes:                           inralfcon
+      Listado de Proveedores:                                 carprovee2
+      Recaudos:                                               carrecaud
+      Planilla de Liquidacion:                                inrplaliq
+      Listado de Liquidaciones:                               inrlisliq
+      Listado de Liquidacion por Contribuyente:               inrlisliqcont
+      Planilla de Reintegro:                                  inrplarei
+    Mantenimiento:
+      Cambiar Contraseña:                                     cambiopasswd

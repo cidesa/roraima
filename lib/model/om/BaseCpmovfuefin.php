@@ -45,188 +45,217 @@ abstract class BaseCpmovfuefin extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCorrel()
-	{
+  
+  public function getCorrel()
+  {
 
-		return $this->correl; 		
-	}
-	
-	public function getRefmov()
-	{
+    return trim($this->correl);
 
-		return $this->refmov; 		
-	}
-	
-	public function getTipmov()
-	{
+  }
+  
+  public function getRefmov()
+  {
 
-		return $this->tipmov; 		
-	}
-	
-	public function getMonmov()
-	{
+    return trim($this->refmov);
 
-		return number_format($this->monmov,2,',','.');
-		
-	}
-	
-	public function getFecmov($format = 'Y-m-d')
-	{
+  }
+  
+  public function getTipmov()
+  {
 
-		if ($this->fecmov === null || $this->fecmov === '') {
-			return null;
-		} elseif (!is_int($this->fecmov)) {
-						$ts = strtotime($this->fecmov);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecmov] as date/time value: " . var_export($this->fecmov, true));
-			}
-		} else {
-			$ts = $this->fecmov;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->tipmov);
 
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getMonmov($val=false)
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getStamov()
-	{
+    if($val) return number_format($this->monmov,2,',','.');
+    else return $this->monmov;
 
-		return $this->stamov; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getFecmov($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecmov === null || $this->fecmov === '') {
+      return null;
+    } elseif (!is_int($this->fecmov)) {
+            $ts = adodb_strtotime($this->fecmov);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecmov] as date/time value: " . var_export($this->fecmov, true));
+      }
+    } else {
+      $ts = $this->fecmov;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCodpre()
+  {
+
+    return trim($this->codpre);
+
+  }
+  
+  public function getStamov()
+  {
+
+    return trim($this->stamov);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCorrel($v)
 	{
 
-		if ($this->correl !== $v) {
-			$this->correl = $v;
-			$this->modifiedColumns[] = CpmovfuefinPeer::CORREL;
-		}
-
+    if ($this->correl !== $v) {
+        $this->correl = $v;
+        $this->modifiedColumns[] = CpmovfuefinPeer::CORREL;
+      }
+  
 	} 
 	
 	public function setRefmov($v)
 	{
 
-		if ($this->refmov !== $v) {
-			$this->refmov = $v;
-			$this->modifiedColumns[] = CpmovfuefinPeer::REFMOV;
-		}
-
+    if ($this->refmov !== $v) {
+        $this->refmov = $v;
+        $this->modifiedColumns[] = CpmovfuefinPeer::REFMOV;
+      }
+  
 	} 
 	
 	public function setTipmov($v)
 	{
 
-		if ($this->tipmov !== $v) {
-			$this->tipmov = $v;
-			$this->modifiedColumns[] = CpmovfuefinPeer::TIPMOV;
-		}
-
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = CpmovfuefinPeer::TIPMOV;
+      }
+  
 	} 
 	
 	public function setMonmov($v)
 	{
 
-		if ($this->monmov !== $v) {
-			$this->monmov = $v;
-			$this->modifiedColumns[] = CpmovfuefinPeer::MONMOV;
-		}
-
+    if ($this->monmov !== $v) {
+        $this->monmov = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpmovfuefinPeer::MONMOV;
+      }
+  
 	} 
 	
 	public function setFecmov($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecmov] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecmov !== $ts) {
-			$this->fecmov = $ts;
-			$this->modifiedColumns[] = CpmovfuefinPeer::FECMOV;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecmov] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecmov !== $ts) {
+      $this->fecmov = $ts;
+      $this->modifiedColumns[] = CpmovfuefinPeer::FECMOV;
+    }
 
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpmovfuefinPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpmovfuefinPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setStamov($v)
 	{
 
-		if ($this->stamov !== $v) {
-			$this->stamov = $v;
-			$this->modifiedColumns[] = CpmovfuefinPeer::STAMOV;
-		}
-
+    if ($this->stamov !== $v) {
+        $this->stamov = $v;
+        $this->modifiedColumns[] = CpmovfuefinPeer::STAMOV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpmovfuefinPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpmovfuefinPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->correl = $rs->getString($startcol + 0);
+      $this->correl = $rs->getString($startcol + 0);
 
-			$this->refmov = $rs->getString($startcol + 1);
+      $this->refmov = $rs->getString($startcol + 1);
 
-			$this->tipmov = $rs->getString($startcol + 2);
+      $this->tipmov = $rs->getString($startcol + 2);
 
-			$this->monmov = $rs->getFloat($startcol + 3);
+      $this->monmov = $rs->getFloat($startcol + 3);
 
-			$this->fecmov = $rs->getDate($startcol + 4, null);
+      $this->fecmov = $rs->getDate($startcol + 4, null);
 
-			$this->codpre = $rs->getString($startcol + 5);
+      $this->codpre = $rs->getString($startcol + 5);
 
-			$this->stamov = $rs->getString($startcol + 6);
+      $this->stamov = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpmovfuefin object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpmovfuefin object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -283,6 +312,7 @@ abstract class BaseCpmovfuefin extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpmovfuefinPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpmovfuefinPeer::doUpdate($this, $con);

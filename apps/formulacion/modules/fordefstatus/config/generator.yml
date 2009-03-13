@@ -5,17 +5,24 @@ generator:
     theme:            default
 
     fields:
-      codsta:      { name : Codigo }
-      dessta:      { name : Descripci髇 }      
+      codsta:      { name : C贸digo, params : maxlength=2}
+      dessta:      { name : Descripci贸n, params : maxlength=100}
 
     list:
-      title:          Definici髇 de Estatus
-      display:        [codsta, dessta]
+      title:          Definici贸n de Estatus
+      display:        [=codsta, dessta]
+      sort:           codsta
       filters:        [codsta]
       object_actions:
         _edit:        ~
-        _delete:      ~              
-      max_per_page:   5    
+        _delete:      ~
+      max_per_page:   5
+      sort:      codsta
     edit:
-      title:          Definici髇 de Estatus   
-      display:        [codsta, dessta]      
+      title:          Edici贸n de Estatus
+      display:       [codsta, dessta]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

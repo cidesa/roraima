@@ -225,6 +225,7 @@ abstract class BaseOpdetordPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpdetordPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

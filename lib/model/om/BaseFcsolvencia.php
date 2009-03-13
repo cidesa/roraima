@@ -68,135 +68,146 @@ abstract class BaseFcsolvencia extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsol()
-	{
+  
+  public function getCodsol()
+  {
 
-		return $this->codsol; 		
-	}
-	
-	public function getCodtip()
-	{
+    return trim($this->codsol);
 
-		return $this->codtip; 		
-	}
-	
-	public function getFecexp($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodtip()
+  {
 
-		if ($this->fecexp === null || $this->fecexp === '') {
-			return null;
-		} elseif (!is_int($this->fecexp)) {
-						$ts = strtotime($this->fecexp);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
-			}
-		} else {
-			$ts = $this->fecexp;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codtip);
 
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFecexp($format = 'Y-m-d')
+  {
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecexp === null || $this->fecexp === '') {
+      return null;
+    } elseif (!is_int($this->fecexp)) {
+            $ts = adodb_strtotime($this->fecexp);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
+      }
+    } else {
+      $ts = $this->fecexp;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getNumlic()
-	{
+  
+  public function getFecven($format = 'Y-m-d')
+  {
 
-		return $this->numlic; 		
-	}
-	
-	public function getRifcon()
-	{
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->rifcon; 		
-	}
-	
-	public function getCodcat()
-	{
+  
+  public function getNumlic()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getNomcon()
-	{
+    return trim($this->numlic);
 
-		return $this->nomcon; 		
-	}
-	
-	public function getDircon()
-	{
+  }
+  
+  public function getRifcon()
+  {
 
-		return $this->dircon; 		
-	}
-	
-	public function getCodfue()
-	{
+    return trim($this->rifcon);
 
-		return $this->codfue; 		
-	}
-	
-	public function getStasol()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return $this->stasol; 		
-	}
-	
-	public function getMotivo()
-	{
+    return trim($this->codcat);
 
-		return $this->motivo; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomcon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomcon);
+
+  }
+  
+  public function getDircon()
+  {
+
+    return trim($this->dircon);
+
+  }
+  
+  public function getCodfue()
+  {
+
+    return trim($this->codfue);
+
+  }
+  
+  public function getStasol()
+  {
+
+    return trim($this->stasol);
+
+  }
+  
+  public function getMotivo()
+  {
+
+    return trim($this->motivo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsol($v)
 	{
 
-		if ($this->codsol !== $v) {
-			$this->codsol = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::CODSOL;
-		}
-
+    if ($this->codsol !== $v) {
+        $this->codsol = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::CODSOL;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::CODTIP;
+      }
+  
 		if ($this->aFctipsol !== null && $this->aFctipsol->getCodtip() !== $v) {
 			$this->aFctipsol = null;
 		}
@@ -206,166 +217,188 @@ abstract class BaseFcsolvencia extends BaseObject  implements Persistent {
 	public function setFecexp($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecexp !== $ts) {
-			$this->fecexp = $ts;
-			$this->modifiedColumns[] = FcsolvenciaPeer::FECEXP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecexp !== $ts) {
+      $this->fecexp = $ts;
+      $this->modifiedColumns[] = FcsolvenciaPeer::FECEXP;
+    }
 
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = FcsolvenciaPeer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = FcsolvenciaPeer::FECVEN;
+    }
 
 	} 
 	
 	public function setNumlic($v)
 	{
 
-		if ($this->numlic !== $v) {
-			$this->numlic = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::NUMLIC;
-		}
-
+    if ($this->numlic !== $v) {
+        $this->numlic = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::NUMLIC;
+      }
+  
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setDircon($v)
 	{
 
-		if ($this->dircon !== $v) {
-			$this->dircon = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::DIRCON;
-		}
-
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::DIRCON;
+      }
+  
 	} 
 	
 	public function setCodfue($v)
 	{
 
-		if ($this->codfue !== $v) {
-			$this->codfue = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::CODFUE;
-		}
-
+    if ($this->codfue !== $v) {
+        $this->codfue = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::CODFUE;
+      }
+  
 	} 
 	
 	public function setStasol($v)
 	{
 
-		if ($this->stasol !== $v) {
-			$this->stasol = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::STASOL;
-		}
-
+    if ($this->stasol !== $v) {
+        $this->stasol = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::STASOL;
+      }
+  
 	} 
 	
 	public function setMotivo($v)
 	{
 
-		if ($this->motivo !== $v) {
-			$this->motivo = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::MOTIVO;
-		}
-
+    if ($this->motivo !== $v) {
+        $this->motivo = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::MOTIVO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcsolvenciaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcsolvenciaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsol = $rs->getString($startcol + 0);
+      $this->codsol = $rs->getString($startcol + 0);
 
-			$this->codtip = $rs->getString($startcol + 1);
+      $this->codtip = $rs->getString($startcol + 1);
 
-			$this->fecexp = $rs->getDate($startcol + 2, null);
+      $this->fecexp = $rs->getDate($startcol + 2, null);
 
-			$this->fecven = $rs->getDate($startcol + 3, null);
+      $this->fecven = $rs->getDate($startcol + 3, null);
 
-			$this->numlic = $rs->getString($startcol + 4);
+      $this->numlic = $rs->getString($startcol + 4);
 
-			$this->rifcon = $rs->getString($startcol + 5);
+      $this->rifcon = $rs->getString($startcol + 5);
 
-			$this->codcat = $rs->getString($startcol + 6);
+      $this->codcat = $rs->getString($startcol + 6);
 
-			$this->nomcon = $rs->getString($startcol + 7);
+      $this->nomcon = $rs->getString($startcol + 7);
 
-			$this->dircon = $rs->getString($startcol + 8);
+      $this->dircon = $rs->getString($startcol + 8);
 
-			$this->codfue = $rs->getString($startcol + 9);
+      $this->codfue = $rs->getString($startcol + 9);
 
-			$this->stasol = $rs->getString($startcol + 10);
+      $this->stasol = $rs->getString($startcol + 10);
 
-			$this->motivo = $rs->getString($startcol + 11);
+      $this->motivo = $rs->getString($startcol + 11);
 
-			$this->id = $rs->getInt($startcol + 12);
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 13; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcsolvencia object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcsolvencia object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -431,6 +464,7 @@ abstract class BaseFcsolvencia extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcsolvenciaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcsolvenciaPeer::doUpdate($this, $con);
@@ -757,9 +791,8 @@ abstract class BaseFcsolvencia extends BaseObject  implements Persistent {
 	
 	public function getFctipsol($con = null)
 	{
-				include_once 'lib/model/om/BaseFctipsolPeer.php';
-
 		if ($this->aFctipsol === null && (($this->codtip !== "" && $this->codtip !== null))) {
+						include_once 'lib/model/om/BaseFctipsolPeer.php';
 
 			$this->aFctipsol = FctipsolPeer::retrieveByPK($this->codtip, $con);
 

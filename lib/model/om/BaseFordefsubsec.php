@@ -29,92 +29,118 @@ abstract class BaseFordefsubsec extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsec()
-	{
+  
+  public function getCodsec()
+  {
 
-		return $this->codsec; 		
-	}
-	
-	public function getCodsubsec()
-	{
+    return trim($this->codsec);
 
-		return $this->codsubsec; 		
-	}
-	
-	public function getNomsubsec()
-	{
+  }
+  
+  public function getCodsubsec()
+  {
 
-		return $this->nomsubsec; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codsubsec);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomsubsec()
+  {
+
+    return trim($this->nomsubsec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsec($v)
 	{
 
-		if ($this->codsec !== $v) {
-			$this->codsec = $v;
-			$this->modifiedColumns[] = FordefsubsecPeer::CODSEC;
-		}
-
+    if ($this->codsec !== $v) {
+        $this->codsec = $v;
+        $this->modifiedColumns[] = FordefsubsecPeer::CODSEC;
+      }
+  
 	} 
 	
 	public function setCodsubsec($v)
 	{
 
-		if ($this->codsubsec !== $v) {
-			$this->codsubsec = $v;
-			$this->modifiedColumns[] = FordefsubsecPeer::CODSUBSEC;
-		}
-
+    if ($this->codsubsec !== $v) {
+        $this->codsubsec = $v;
+        $this->modifiedColumns[] = FordefsubsecPeer::CODSUBSEC;
+      }
+  
 	} 
 	
 	public function setNomsubsec($v)
 	{
 
-		if ($this->nomsubsec !== $v) {
-			$this->nomsubsec = $v;
-			$this->modifiedColumns[] = FordefsubsecPeer::NOMSUBSEC;
-		}
-
+    if ($this->nomsubsec !== $v) {
+        $this->nomsubsec = $v;
+        $this->modifiedColumns[] = FordefsubsecPeer::NOMSUBSEC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefsubsecPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefsubsecPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsec = $rs->getString($startcol + 0);
+      $this->codsec = $rs->getString($startcol + 0);
 
-			$this->codsubsec = $rs->getString($startcol + 1);
+      $this->codsubsec = $rs->getString($startcol + 1);
 
-			$this->nomsubsec = $rs->getString($startcol + 2);
+      $this->nomsubsec = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefsubsec object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefsubsec object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseFordefsubsec extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefsubsecPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefsubsecPeer::doUpdate($this, $con);

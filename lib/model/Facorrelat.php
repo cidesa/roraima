@@ -3,10 +3,83 @@
 /**
  * Subclass for representing a row from the 'facorrelat' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class Facorrelat extends BaseFacorrelat
 {
+	public $obj = array();
+
+   	public function getNomemp()
+	{
+	  return Herramientas::getX('CODEMP','Empresa','Nomemp','001');
+	}
+
+	public function getDiremp()
+	{
+	  return Herramientas::getX('CODEMP','Empresa','Diremp','001');
+	}
+
+	public function getTlfemp()
+	{
+	  return Herramientas::getX('CODEMP','Empresa','Tlfemp','001');
+	}
+
+	public function getNumlot()
+	{
+	  return Herramientas::getX('CODEMP','Empresa','Numlot','001');
+	}
+
+	public function getCodcat()
+	{
+	  return Herramientas::getX('CODEMP','Empresa','Codcat','001');
+	}
+
+	public function getLonart()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Lonart','001');
+	}
+
+	public function getRupart()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Rupart','001');
+	}
+
+	public function getForart()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Forart','001');
+	}
+
+	public function getDesart()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Desart','001');
+	}
+
+	public function getForubi()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Forubi','001');
+	}
+
+	public function getDesubi()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Desubi','001');
+	}
+
+	public function getForsnc()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Forsnc','001');
+	}
+
+	public function getDessnc()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Dessnc','001');
+	}
+
+	public function getAsiparrec()
+	{
+	  return Herramientas::getX('CODEMP','Cadefart','Asiparrec','001');
+	}
+
+
 }

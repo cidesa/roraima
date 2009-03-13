@@ -133,571 +133,623 @@ abstract class BaseFcdefins extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getLoncodact()
-	{
+    return trim($this->codemp);
 
-		return number_format($this->loncodact,2,',','.');
-		
-	}
-	
-	public function getLoncodveh()
-	{
+  }
+  
+  public function getLoncodact($val=false)
+  {
 
-		return number_format($this->loncodveh,2,',','.');
-		
-	}
-	
-	public function getLoncodcat()
-	{
+    if($val) return number_format($this->loncodact,2,',','.');
+    else return $this->loncodact;
 
-		return number_format($this->loncodcat,2,',','.');
-		
-	}
-	
-	public function getLoncodubifis()
-	{
+  }
+  
+  public function getLoncodveh($val=false)
+  {
 
-		return number_format($this->loncodubifis,2,',','.');
-		
-	}
-	
-	public function getLoncodubimag()
-	{
+    if($val) return number_format($this->loncodveh,2,',','.');
+    else return $this->loncodveh;
 
-		return number_format($this->loncodubimag,2,',','.');
-		
-	}
-	
-	public function getRupact()
-	{
+  }
+  
+  public function getLoncodcat($val=false)
+  {
 
-		return number_format($this->rupact,2,',','.');
-		
-	}
-	
-	public function getRupveh()
-	{
+    if($val) return number_format($this->loncodcat,2,',','.');
+    else return $this->loncodcat;
 
-		return number_format($this->rupveh,2,',','.');
-		
-	}
-	
-	public function getRupcat()
-	{
+  }
+  
+  public function getLoncodubifis($val=false)
+  {
 
-		return number_format($this->rupcat,2,',','.');
-		
-	}
-	
-	public function getRupubifis()
-	{
+    if($val) return number_format($this->loncodubifis,2,',','.');
+    else return $this->loncodubifis;
 
-		return number_format($this->rupubifis,2,',','.');
-		
-	}
-	
-	public function getRupubimag()
-	{
+  }
+  
+  public function getLoncodubimag($val=false)
+  {
 
-		return number_format($this->rupubimag,2,',','.');
-		
-	}
-	
-	public function getForact()
-	{
+    if($val) return number_format($this->loncodubimag,2,',','.');
+    else return $this->loncodubimag;
 
-		return $this->foract; 		
-	}
-	
-	public function getForveh()
-	{
+  }
+  
+  public function getRupact($val=false)
+  {
 
-		return $this->forveh; 		
-	}
-	
-	public function getForcat()
-	{
+    if($val) return number_format($this->rupact,2,',','.');
+    else return $this->rupact;
 
-		return $this->forcat; 		
-	}
-	
-	public function getForubifis()
-	{
+  }
+  
+  public function getRupveh($val=false)
+  {
 
-		return $this->forubifis; 		
-	}
-	
-	public function getForubimag()
-	{
+    if($val) return number_format($this->rupveh,2,',','.');
+    else return $this->rupveh;
 
-		return $this->forubimag; 		
-	}
-	
-	public function getPorpic()
-	{
+  }
+  
+  public function getRupcat($val=false)
+  {
 
-		return $this->porpic; 		
-	}
-	
-	public function getPorveh()
-	{
+    if($val) return number_format($this->rupcat,2,',','.');
+    else return $this->rupcat;
 
-		return $this->porveh; 		
-	}
-	
-	public function getPorinm()
-	{
+  }
+  
+  public function getRupubifis($val=false)
+  {
 
-		return $this->porinm; 		
-	}
-	
-	public function getUnipic()
-	{
+    if($val) return number_format($this->rupubifis,2,',','.');
+    else return $this->rupubifis;
 
-		return $this->unipic; 		
-	}
-	
-	public function getValunitri()
-	{
+  }
+  
+  public function getRupubimag($val=false)
+  {
 
-		return number_format($this->valunitri,2,',','.');
-		
-	}
-	
-	public function getUnitas()
-	{
+    if($val) return number_format($this->rupubimag,2,',','.');
+    else return $this->rupubimag;
 
-		return $this->unitas; 		
-	}
-	
-	public function getCodpic()
-	{
+  }
+  
+  public function getForact()
+  {
 
-		return $this->codpic; 		
-	}
-	
-	public function getCodveh()
-	{
+    return trim($this->foract);
 
-		return $this->codveh; 		
-	}
-	
-	public function getCodinm()
-	{
+  }
+  
+  public function getForveh()
+  {
 
-		return $this->codinm; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->forveh);
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodesp()
-	{
+  }
+  
+  public function getForcat()
+  {
 
-		return $this->codesp; 		
-	}
-	
-	public function getCodapu()
-	{
+    return trim($this->forcat);
 
-		return $this->codapu; 		
-	}
-	
-	public function getCodajupic()
-	{
+  }
+  
+  public function getForubifis()
+  {
 
-		return $this->codajupic; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->forubifis);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getForubimag()
+  {
+
+    return trim($this->forubimag);
+
+  }
+  
+  public function getPorpic()
+  {
+
+    return trim($this->porpic);
+
+  }
+  
+  public function getPorveh()
+  {
+
+    return trim($this->porveh);
+
+  }
+  
+  public function getPorinm()
+  {
+
+    return trim($this->porinm);
+
+  }
+  
+  public function getUnipic()
+  {
+
+    return trim($this->unipic);
+
+  }
+  
+  public function getValunitri($val=false)
+  {
+
+    if($val) return number_format($this->valunitri,2,',','.');
+    else return $this->valunitri;
+
+  }
+  
+  public function getUnitas()
+  {
+
+    return trim($this->unitas);
+
+  }
+  
+  public function getCodpic()
+  {
+
+    return trim($this->codpic);
+
+  }
+  
+  public function getCodveh()
+  {
+
+    return trim($this->codveh);
+
+  }
+  
+  public function getCodinm()
+  {
+
+    return trim($this->codinm);
+
+  }
+  
+  public function getCodpro()
+  {
+
+    return trim($this->codpro);
+
+  }
+  
+  public function getCodesp()
+  {
+
+    return trim($this->codesp);
+
+  }
+  
+  public function getCodapu()
+  {
+
+    return trim($this->codapu);
+
+  }
+  
+  public function getCodajupic()
+  {
+
+    return trim($this->codajupic);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setLoncodact($v)
 	{
 
-		if ($this->loncodact !== $v) {
-			$this->loncodact = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::LONCODACT;
-		}
-
+    if ($this->loncodact !== $v) {
+        $this->loncodact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::LONCODACT;
+      }
+  
 	} 
 	
 	public function setLoncodveh($v)
 	{
 
-		if ($this->loncodveh !== $v) {
-			$this->loncodveh = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::LONCODVEH;
-		}
-
+    if ($this->loncodveh !== $v) {
+        $this->loncodveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::LONCODVEH;
+      }
+  
 	} 
 	
 	public function setLoncodcat($v)
 	{
 
-		if ($this->loncodcat !== $v) {
-			$this->loncodcat = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::LONCODCAT;
-		}
-
+    if ($this->loncodcat !== $v) {
+        $this->loncodcat = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::LONCODCAT;
+      }
+  
 	} 
 	
 	public function setLoncodubifis($v)
 	{
 
-		if ($this->loncodubifis !== $v) {
-			$this->loncodubifis = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::LONCODUBIFIS;
-		}
-
+    if ($this->loncodubifis !== $v) {
+        $this->loncodubifis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::LONCODUBIFIS;
+      }
+  
 	} 
 	
 	public function setLoncodubimag($v)
 	{
 
-		if ($this->loncodubimag !== $v) {
-			$this->loncodubimag = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::LONCODUBIMAG;
-		}
-
+    if ($this->loncodubimag !== $v) {
+        $this->loncodubimag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::LONCODUBIMAG;
+      }
+  
 	} 
 	
 	public function setRupact($v)
 	{
 
-		if ($this->rupact !== $v) {
-			$this->rupact = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::RUPACT;
-		}
-
+    if ($this->rupact !== $v) {
+        $this->rupact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::RUPACT;
+      }
+  
 	} 
 	
 	public function setRupveh($v)
 	{
 
-		if ($this->rupveh !== $v) {
-			$this->rupveh = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::RUPVEH;
-		}
-
+    if ($this->rupveh !== $v) {
+        $this->rupveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::RUPVEH;
+      }
+  
 	} 
 	
 	public function setRupcat($v)
 	{
 
-		if ($this->rupcat !== $v) {
-			$this->rupcat = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::RUPCAT;
-		}
-
+    if ($this->rupcat !== $v) {
+        $this->rupcat = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::RUPCAT;
+      }
+  
 	} 
 	
 	public function setRupubifis($v)
 	{
 
-		if ($this->rupubifis !== $v) {
-			$this->rupubifis = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::RUPUBIFIS;
-		}
-
+    if ($this->rupubifis !== $v) {
+        $this->rupubifis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::RUPUBIFIS;
+      }
+  
 	} 
 	
 	public function setRupubimag($v)
 	{
 
-		if ($this->rupubimag !== $v) {
-			$this->rupubimag = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::RUPUBIMAG;
-		}
-
+    if ($this->rupubimag !== $v) {
+        $this->rupubimag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::RUPUBIMAG;
+      }
+  
 	} 
 	
 	public function setForact($v)
 	{
 
-		if ($this->foract !== $v) {
-			$this->foract = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::FORACT;
-		}
-
+    if ($this->foract !== $v) {
+        $this->foract = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::FORACT;
+      }
+  
 	} 
 	
 	public function setForveh($v)
 	{
 
-		if ($this->forveh !== $v) {
-			$this->forveh = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::FORVEH;
-		}
-
+    if ($this->forveh !== $v) {
+        $this->forveh = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::FORVEH;
+      }
+  
 	} 
 	
 	public function setForcat($v)
 	{
 
-		if ($this->forcat !== $v) {
-			$this->forcat = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::FORCAT;
-		}
-
+    if ($this->forcat !== $v) {
+        $this->forcat = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::FORCAT;
+      }
+  
 	} 
 	
 	public function setForubifis($v)
 	{
 
-		if ($this->forubifis !== $v) {
-			$this->forubifis = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::FORUBIFIS;
-		}
-
+    if ($this->forubifis !== $v) {
+        $this->forubifis = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::FORUBIFIS;
+      }
+  
 	} 
 	
 	public function setForubimag($v)
 	{
 
-		if ($this->forubimag !== $v) {
-			$this->forubimag = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::FORUBIMAG;
-		}
-
+    if ($this->forubimag !== $v) {
+        $this->forubimag = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::FORUBIMAG;
+      }
+  
 	} 
 	
 	public function setPorpic($v)
 	{
 
-		if ($this->porpic !== $v) {
-			$this->porpic = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::PORPIC;
-		}
-
+    if ($this->porpic !== $v) {
+        $this->porpic = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::PORPIC;
+      }
+  
 	} 
 	
 	public function setPorveh($v)
 	{
 
-		if ($this->porveh !== $v) {
-			$this->porveh = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::PORVEH;
-		}
-
+    if ($this->porveh !== $v) {
+        $this->porveh = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::PORVEH;
+      }
+  
 	} 
 	
 	public function setPorinm($v)
 	{
 
-		if ($this->porinm !== $v) {
-			$this->porinm = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::PORINM;
-		}
-
+    if ($this->porinm !== $v) {
+        $this->porinm = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::PORINM;
+      }
+  
 	} 
 	
 	public function setUnipic($v)
 	{
 
-		if ($this->unipic !== $v) {
-			$this->unipic = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::UNIPIC;
-		}
-
+    if ($this->unipic !== $v) {
+        $this->unipic = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::UNIPIC;
+      }
+  
 	} 
 	
 	public function setValunitri($v)
 	{
 
-		if ($this->valunitri !== $v) {
-			$this->valunitri = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::VALUNITRI;
-		}
-
+    if ($this->valunitri !== $v) {
+        $this->valunitri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefinsPeer::VALUNITRI;
+      }
+  
 	} 
 	
 	public function setUnitas($v)
 	{
 
-		if ($this->unitas !== $v) {
-			$this->unitas = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::UNITAS;
-		}
-
+    if ($this->unitas !== $v) {
+        $this->unitas = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::UNITAS;
+      }
+  
 	} 
 	
 	public function setCodpic($v)
 	{
 
-		if ($this->codpic !== $v) {
-			$this->codpic = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::CODPIC;
-		}
-
+    if ($this->codpic !== $v) {
+        $this->codpic = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::CODPIC;
+      }
+  
 	} 
 	
 	public function setCodveh($v)
 	{
 
-		if ($this->codveh !== $v) {
-			$this->codveh = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::CODVEH;
-		}
-
+    if ($this->codveh !== $v) {
+        $this->codveh = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::CODVEH;
+      }
+  
 	} 
 	
 	public function setCodinm($v)
 	{
 
-		if ($this->codinm !== $v) {
-			$this->codinm = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::CODINM;
-		}
-
+    if ($this->codinm !== $v) {
+        $this->codinm = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::CODINM;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodesp($v)
 	{
 
-		if ($this->codesp !== $v) {
-			$this->codesp = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::CODESP;
-		}
-
+    if ($this->codesp !== $v) {
+        $this->codesp = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::CODESP;
+      }
+  
 	} 
 	
 	public function setCodapu($v)
 	{
 
-		if ($this->codapu !== $v) {
-			$this->codapu = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::CODAPU;
-		}
-
+    if ($this->codapu !== $v) {
+        $this->codapu = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::CODAPU;
+      }
+  
 	} 
 	
 	public function setCodajupic($v)
 	{
 
-		if ($this->codajupic !== $v) {
-			$this->codajupic = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::CODAJUPIC;
-		}
-
+    if ($this->codajupic !== $v) {
+        $this->codajupic = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::CODAJUPIC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdefinsPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdefinsPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->loncodact = $rs->getFloat($startcol + 1);
+      $this->loncodact = $rs->getFloat($startcol + 1);
 
-			$this->loncodveh = $rs->getFloat($startcol + 2);
+      $this->loncodveh = $rs->getFloat($startcol + 2);
 
-			$this->loncodcat = $rs->getFloat($startcol + 3);
+      $this->loncodcat = $rs->getFloat($startcol + 3);
 
-			$this->loncodubifis = $rs->getFloat($startcol + 4);
+      $this->loncodubifis = $rs->getFloat($startcol + 4);
 
-			$this->loncodubimag = $rs->getFloat($startcol + 5);
+      $this->loncodubimag = $rs->getFloat($startcol + 5);
 
-			$this->rupact = $rs->getFloat($startcol + 6);
+      $this->rupact = $rs->getFloat($startcol + 6);
 
-			$this->rupveh = $rs->getFloat($startcol + 7);
+      $this->rupveh = $rs->getFloat($startcol + 7);
 
-			$this->rupcat = $rs->getFloat($startcol + 8);
+      $this->rupcat = $rs->getFloat($startcol + 8);
 
-			$this->rupubifis = $rs->getFloat($startcol + 9);
+      $this->rupubifis = $rs->getFloat($startcol + 9);
 
-			$this->rupubimag = $rs->getFloat($startcol + 10);
+      $this->rupubimag = $rs->getFloat($startcol + 10);
 
-			$this->foract = $rs->getString($startcol + 11);
+      $this->foract = $rs->getString($startcol + 11);
 
-			$this->forveh = $rs->getString($startcol + 12);
+      $this->forveh = $rs->getString($startcol + 12);
 
-			$this->forcat = $rs->getString($startcol + 13);
+      $this->forcat = $rs->getString($startcol + 13);
 
-			$this->forubifis = $rs->getString($startcol + 14);
+      $this->forubifis = $rs->getString($startcol + 14);
 
-			$this->forubimag = $rs->getString($startcol + 15);
+      $this->forubimag = $rs->getString($startcol + 15);
 
-			$this->porpic = $rs->getString($startcol + 16);
+      $this->porpic = $rs->getString($startcol + 16);
 
-			$this->porveh = $rs->getString($startcol + 17);
+      $this->porveh = $rs->getString($startcol + 17);
 
-			$this->porinm = $rs->getString($startcol + 18);
+      $this->porinm = $rs->getString($startcol + 18);
 
-			$this->unipic = $rs->getString($startcol + 19);
+      $this->unipic = $rs->getString($startcol + 19);
 
-			$this->valunitri = $rs->getFloat($startcol + 20);
+      $this->valunitri = $rs->getFloat($startcol + 20);
 
-			$this->unitas = $rs->getString($startcol + 21);
+      $this->unitas = $rs->getString($startcol + 21);
 
-			$this->codpic = $rs->getString($startcol + 22);
+      $this->codpic = $rs->getString($startcol + 22);
 
-			$this->codveh = $rs->getString($startcol + 23);
+      $this->codveh = $rs->getString($startcol + 23);
 
-			$this->codinm = $rs->getString($startcol + 24);
+      $this->codinm = $rs->getString($startcol + 24);
 
-			$this->codpro = $rs->getString($startcol + 25);
+      $this->codpro = $rs->getString($startcol + 25);
 
-			$this->codesp = $rs->getString($startcol + 26);
+      $this->codesp = $rs->getString($startcol + 26);
 
-			$this->codapu = $rs->getString($startcol + 27);
+      $this->codapu = $rs->getString($startcol + 27);
 
-			$this->codajupic = $rs->getString($startcol + 28);
+      $this->codajupic = $rs->getString($startcol + 28);
 
-			$this->id = $rs->getInt($startcol + 29);
+      $this->id = $rs->getInt($startcol + 29);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 30; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdefins object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 30; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdefins object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -754,6 +806,7 @@ abstract class BaseFcdefins extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdefinsPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdefinsPeer::doUpdate($this, $con);

@@ -37,128 +37,156 @@ abstract class BaseConceptos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getNomcon()
-	{
+    return trim($this->codcon);
 
-		return $this->nomcon; 		
-	}
-	
-	public function getAfecon()
-	{
+  }
+  
+  public function getNomcon()
+  {
 
-		return $this->afecon; 		
-	}
-	
-	public function getCodpar()
-	{
+    return trim($this->nomcon);
 
-		return $this->codpar; 		
-	}
-	
-	public function getFrecon()
-	{
+  }
+  
+  public function getAfecon()
+  {
 
-		return $this->frecon; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->afecon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getFrecon()
+  {
+
+    return trim($this->frecon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = ConceptosPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = ConceptosPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = ConceptosPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = ConceptosPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setAfecon($v)
 	{
 
-		if ($this->afecon !== $v) {
-			$this->afecon = $v;
-			$this->modifiedColumns[] = ConceptosPeer::AFECON;
-		}
-
+    if ($this->afecon !== $v) {
+        $this->afecon = $v;
+        $this->modifiedColumns[] = ConceptosPeer::AFECON;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = ConceptosPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = ConceptosPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setFrecon($v)
 	{
 
-		if ($this->frecon !== $v) {
-			$this->frecon = $v;
-			$this->modifiedColumns[] = ConceptosPeer::FRECON;
-		}
-
+    if ($this->frecon !== $v) {
+        $this->frecon = $v;
+        $this->modifiedColumns[] = ConceptosPeer::FRECON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ConceptosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ConceptosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->nomcon = $rs->getString($startcol + 1);
+      $this->nomcon = $rs->getString($startcol + 1);
 
-			$this->afecon = $rs->getString($startcol + 2);
+      $this->afecon = $rs->getString($startcol + 2);
 
-			$this->codpar = $rs->getString($startcol + 3);
+      $this->codpar = $rs->getString($startcol + 3);
 
-			$this->frecon = $rs->getString($startcol + 4);
+      $this->frecon = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Conceptos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Conceptos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

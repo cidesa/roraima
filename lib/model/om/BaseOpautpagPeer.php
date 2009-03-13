@@ -365,6 +365,7 @@ abstract class BaseOpautpagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpautpagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

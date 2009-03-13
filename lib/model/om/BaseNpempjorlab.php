@@ -29,92 +29,118 @@ abstract class BaseNpempjorlab extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getIdejor()
-	{
+    return trim($this->codnom);
 
-		return $this->idejor; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getIdejor()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->idejor);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpempjorlabPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpempjorlabPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setIdejor($v)
 	{
 
-		if ($this->idejor !== $v) {
-			$this->idejor = $v;
-			$this->modifiedColumns[] = NpempjorlabPeer::IDEJOR;
-		}
-
+    if ($this->idejor !== $v) {
+        $this->idejor = $v;
+        $this->modifiedColumns[] = NpempjorlabPeer::IDEJOR;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpempjorlabPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpempjorlabPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpempjorlabPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpempjorlabPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->idejor = $rs->getString($startcol + 1);
+      $this->idejor = $rs->getString($startcol + 1);
 
-			$this->codemp = $rs->getString($startcol + 2);
+      $this->codemp = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npempjorlab object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npempjorlab object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseNpempjorlab extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpempjorlabPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpempjorlabPeer::doUpdate($this, $con);

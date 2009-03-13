@@ -1,0 +1,18 @@
+methods:
+  post:
+   - "atmedico{cedrifmed}"
+   - "atmedico{nombremed}"
+   - "atmedico{apellimed}"
+
+names:
+  atmedico{cedrifmed}:
+    required:  Yes
+    required_msg: Cédula/Rif es un campo requerido
+
+  atmedico{nombremed}:
+    required:  Yes
+    required_msg: Nombre es un campo requerido
+
+  atmedico{apellimed}:
+    required:  Yes
+    required_msg: Apellido es un campo requerido

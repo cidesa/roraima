@@ -1,0 +1,159 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  condefbalgen:
+    #_attributes:
+      #idMethod: native
+    tiprep:
+      type: VARCHAR
+      size: 1
+    codcta:
+      type: VARCHAR
+      size: 32
+    descta:
+      type: VARCHAR
+      size: 250
+    tipo:
+      type: VARCHAR
+      size: 50
+    nivel:
+      type: NUMERIC
+    orden:
+      type: NUMERIC
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  conoriaplfon:
+    #_attributes:
+      #idMethod: native
+    codcta:
+      type: VARCHAR
+      size: 32
+    descta:
+      type: VARCHAR
+      size: 100
+    oyafon:
+      type: VARCHAR
+      size: 1
+    ordenoya:
+      type: NUMERIC
+      size: 2
+    flucaj:
+      type: VARCHAR
+      size: 1
+    ordenflu:
+      type: NUMERIC
+      size: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  conprestamos:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    nomemp:
+      type: VARCHAR
+      size: 31
+      required: true
+    nomcon:
+      type: VARCHAR
+      size: 100
+      required: true
+    nomcar:
+      type: VARCHAR
+      size: 100
+      required: true
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecini:
+      type: DATE
+    fecexp:
+      type: DATE
+    frecon:
+      type: VARCHAR
+      size: 1
+    asided:
+      type: VARCHAR
+      size: 1
+    acucon:
+      type: VARCHAR
+      size: 1
+    calcon:
+      type: VARCHAR
+      size: 1
+    activo:
+      type: VARCHAR
+      size: 1
+      required: true
+    acumulado:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  consolidado_nuevo:
+    #_attributes:
+      #idMethod: native
+    identi:
+      type: VARCHAR
+      size: 3
+    tipmov:
+      type: VARCHAR
+      size: 4
+    refprc:
+      type: VARCHAR
+      size: 8
+    refcom:
+      type: VARCHAR
+      size: 8
+    refcau:
+      type: VARCHAR
+      size: 8
+    refpag:
+      type: VARCHAR
+      size: 8
+    fecmov:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    monmov:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    desmov:
+      type: VARCHAR
+      size: 250
+    afedis:
+      type: VARCHAR
+      size: 1
+    codpre:
+      type: VARCHAR
+      size: 32
+    nompre:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

@@ -33,110 +33,137 @@ abstract class BaseForunieje extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoduni()
-	{
+  
+  public function getCoduni()
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getCodniv()
-	{
+    return trim($this->coduni);
 
-		return $this->codniv; 		
-	}
-	
-	public function getNomuni()
-	{
+  }
+  
+  public function getCodniv()
+  {
 
-		return $this->nomuni; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->codniv);
 
-		return $this->codemp; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomuni()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomuni);
+
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = ForuniejePeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = ForuniejePeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = ForuniejePeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = ForuniejePeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setNomuni($v)
 	{
 
-		if ($this->nomuni !== $v) {
-			$this->nomuni = $v;
-			$this->modifiedColumns[] = ForuniejePeer::NOMUNI;
-		}
-
+    if ($this->nomuni !== $v) {
+        $this->nomuni = $v;
+        $this->modifiedColumns[] = ForuniejePeer::NOMUNI;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = ForuniejePeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = ForuniejePeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForuniejePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForuniejePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduni = $rs->getString($startcol + 0);
+      $this->coduni = $rs->getString($startcol + 0);
 
-			$this->codniv = $rs->getString($startcol + 1);
+      $this->codniv = $rs->getString($startcol + 1);
 
-			$this->nomuni = $rs->getString($startcol + 2);
+      $this->nomuni = $rs->getString($startcol + 2);
 
-			$this->codemp = $rs->getString($startcol + 3);
+      $this->codemp = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forunieje object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forunieje object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseForunieje extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForuniejePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForuniejePeer::doUpdate($this, $con);

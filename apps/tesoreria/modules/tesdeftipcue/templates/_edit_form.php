@@ -9,10 +9,8 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($tstipcue, 'getId') ?>
-
+<?php echo javascript_include_tag('tools','observe') ?>
 <fieldset id="sf_fieldset_editable" class="">
-<h2><?php echo __('Editable') ?></h2>
-
 
 <div class="form-row">
   <?php echo label_for('tstipcue[codtip]', __($labels['tstipcue{codtip}']), 'class="required" ') ?>
@@ -23,12 +21,15 @@
 
   <?php $value = object_input_tag($tstipcue, 'getCodtip', array (
   'size' => 20,
-  'control_name' => 'tstipcue[codtip]', 'maxlength' => 3
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+  'readonly'  =>  $tstipcue->getId()!='' ? true : false ,
+  'control_name' => 'tstipcue[codtip]', 'maxlength' => 3,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('tstipcue_codtip').value=cadena",
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(3, '0',0);document.getElementById('tstipcue_codtip').value=valor;",
+  )); echo $value ? $value : '&nbsp;' ?>
 </div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('tstipcue[destip]', __($labels['tstipcue{destip}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tstipcue{destip}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tstipcue{destip}')): ?>
@@ -37,9 +38,10 @@
 
   <?php $value = object_input_tag($tstipcue, 'getDestip', array (
   'size' => 40,
+  'maxlength' => 40,
   'control_name' => 'tstipcue[destip]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
+  </div>
 </div>
 
 </fieldset>
@@ -49,7 +51,7 @@
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($tstipcue->getId()): ?>
+      <li class="float-rigth"><?php if ($tstipcue->getId()): ?>
 <?php echo button_to(__('delete'), 'tesdeftipcue/delete?id='.$tstipcue->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),

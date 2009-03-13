@@ -29,93 +29,119 @@ abstract class BaseRhindniv extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodniv()
-	{
+  
+  public function getCodniv()
+  {
 
-		return $this->codniv; 		
-	}
-	
-	public function getCodind()
-	{
+    return trim($this->codniv);
 
-		return $this->codind; 		
-	}
-	
-	public function getPorind()
-	{
+  }
+  
+  public function getCodind()
+  {
 
-		return number_format($this->porind,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codind);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPorind($val=false)
+  {
+
+    if($val) return number_format($this->porind,2,',','.');
+    else return $this->porind;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = RhindnivPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = RhindnivPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setCodind($v)
 	{
 
-		if ($this->codind !== $v) {
-			$this->codind = $v;
-			$this->modifiedColumns[] = RhindnivPeer::CODIND;
-		}
-
+    if ($this->codind !== $v) {
+        $this->codind = $v;
+        $this->modifiedColumns[] = RhindnivPeer::CODIND;
+      }
+  
 	} 
 	
 	public function setPorind($v)
 	{
 
-		if ($this->porind !== $v) {
-			$this->porind = $v;
-			$this->modifiedColumns[] = RhindnivPeer::PORIND;
-		}
-
+    if ($this->porind !== $v) {
+        $this->porind = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhindnivPeer::PORIND;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhindnivPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhindnivPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codniv = $rs->getString($startcol + 0);
+      $this->codniv = $rs->getString($startcol + 0);
 
-			$this->codind = $rs->getString($startcol + 1);
+      $this->codind = $rs->getString($startcol + 1);
 
-			$this->porind = $rs->getFloat($startcol + 2);
+      $this->porind = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhindniv object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhindniv object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseRhindniv extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhindnivPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhindnivPeer::doUpdate($this, $con);

@@ -29,138 +29,162 @@ abstract class BaseFcrenlic extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumlic()
-	{
+  
+  public function getNumlic()
+  {
 
-		return $this->numlic; 		
-	}
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+    return trim($this->numlic);
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecven($format = 'Y-m-d')
+  {
 
-	
-	public function getFecren($format = 'Y-m-d')
-	{
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecren === null || $this->fecren === '') {
-			return null;
-		} elseif (!is_int($this->fecren)) {
-						$ts = strtotime($this->fecren);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecren] as date/time value: " . var_export($this->fecren, true));
-			}
-		} else {
-			$ts = $this->fecren;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecren($format = 'Y-m-d')
+  {
 
-	
-	public function getId()
-	{
+    if ($this->fecren === null || $this->fecren === '') {
+      return null;
+    } elseif (!is_int($this->fecren)) {
+            $ts = adodb_strtotime($this->fecren);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecren] as date/time value: " . var_export($this->fecren, true));
+      }
+    } else {
+      $ts = $this->fecren;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumlic($v)
 	{
 
-		if ($this->numlic !== $v) {
-			$this->numlic = $v;
-			$this->modifiedColumns[] = FcrenlicPeer::NUMLIC;
-		}
-
+    if ($this->numlic !== $v) {
+        $this->numlic = $v;
+        $this->modifiedColumns[] = FcrenlicPeer::NUMLIC;
+      }
+  
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = FcrenlicPeer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = FcrenlicPeer::FECVEN;
+    }
 
 	} 
 	
 	public function setFecren($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecren] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecren !== $ts) {
-			$this->fecren = $ts;
-			$this->modifiedColumns[] = FcrenlicPeer::FECREN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecren] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecren !== $ts) {
+      $this->fecren = $ts;
+      $this->modifiedColumns[] = FcrenlicPeer::FECREN;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcrenlicPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcrenlicPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numlic = $rs->getString($startcol + 0);
+      $this->numlic = $rs->getString($startcol + 0);
 
-			$this->fecven = $rs->getDate($startcol + 1, null);
+      $this->fecven = $rs->getDate($startcol + 1, null);
 
-			$this->fecren = $rs->getDate($startcol + 2, null);
+      $this->fecren = $rs->getDate($startcol + 2, null);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcrenlic object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcrenlic object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +241,7 @@ abstract class BaseFcrenlic extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcrenlicPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcrenlicPeer::doUpdate($this, $con);

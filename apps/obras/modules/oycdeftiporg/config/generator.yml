@@ -6,11 +6,12 @@ generator:
     fields:
       codtiporg:    { name: Código}
       destiporg:    { name: Descripción}
-              
+
     list:
       title:          Tipos de Organismos
       filters:        [codtiporg]
-      display:        [codtiporg, destiporg]
+      display:        [=codtiporg, destiporg]
+      sort:  codtiporg
       object_actions:
         _edit:        ~
         _delete:      ~
@@ -18,3 +19,8 @@ generator:
     edit:
       title:          Tipos de Organismos
       display:        [codtiporg, destiporg]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

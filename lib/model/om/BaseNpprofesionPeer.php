@@ -13,7 +13,7 @@ abstract class BaseNpprofesionPeer {
 	const CLASS_DEFAULT = 'lib.model.Npprofesion';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -26,6 +26,9 @@ abstract class BaseNpprofesionPeer {
 	const DESPROFES = 'npprofesion.DESPROFES';
 
 	
+	const NIVPRO = 'npprofesion.NIVPRO';
+
+	
 	const ID = 'npprofesion.ID';
 
 	
@@ -34,18 +37,18 @@ abstract class BaseNpprofesionPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codprofes', 'Desprofes', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpprofesionPeer::CODPROFES, NpprofesionPeer::DESPROFES, NpprofesionPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codprofes', 'desprofes', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Codprofes', 'Desprofes', 'Nivpro', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpprofesionPeer::CODPROFES, NpprofesionPeer::DESPROFES, NpprofesionPeer::NIVPRO, NpprofesionPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codprofes', 'desprofes', 'nivpro', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codprofes' => 0, 'Desprofes' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (NpprofesionPeer::CODPROFES => 0, NpprofesionPeer::DESPROFES => 1, NpprofesionPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('codprofes' => 0, 'desprofes' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Codprofes' => 0, 'Desprofes' => 1, 'Nivpro' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (NpprofesionPeer::CODPROFES => 0, NpprofesionPeer::DESPROFES => 1, NpprofesionPeer::NIVPRO => 2, NpprofesionPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('codprofes' => 0, 'desprofes' => 1, 'nivpro' => 2, 'id' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
@@ -102,6 +105,8 @@ abstract class BaseNpprofesionPeer {
 		$criteria->addSelectColumn(NpprofesionPeer::CODPROFES);
 
 		$criteria->addSelectColumn(NpprofesionPeer::DESPROFES);
+
+		$criteria->addSelectColumn(NpprofesionPeer::NIVPRO);
 
 		$criteria->addSelectColumn(NpprofesionPeer::ID);
 
@@ -205,6 +210,7 @@ abstract class BaseNpprofesionPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpprofesionPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

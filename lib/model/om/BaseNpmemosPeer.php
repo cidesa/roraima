@@ -215,6 +215,7 @@ abstract class BaseNpmemosPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpmemosPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

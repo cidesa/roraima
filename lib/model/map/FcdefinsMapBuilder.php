@@ -1,58 +1,60 @@
 <?php
 
 
-	
+
 class FcdefinsMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcdefinsMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcdefinsMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcdefins');
 		$tMap->setPhpName('Fcdefins');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcdefins_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('LONCODACT', 'Loncodact', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCODACT', 'Loncodact', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('LONCODVEH', 'Loncodveh', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCODVEH', 'Loncodveh', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('LONCODCAT', 'Loncodcat', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCODCAT', 'Loncodcat', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('LONCODUBIFIS', 'Loncodubifis', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCODUBIFIS', 'Loncodubifis', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('LONCODUBIMAG', 'Loncodubimag', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCODUBIMAG', 'Loncodubimag', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('RUPACT', 'Rupact', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RUPACT', 'Rupact', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('RUPVEH', 'Rupveh', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RUPVEH', 'Rupveh', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('RUPCAT', 'Rupcat', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RUPCAT', 'Rupcat', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('RUPUBIFIS', 'Rupubifis', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RUPUBIFIS', 'Rupubifis', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('RUPUBIMAG', 'Rupubimag', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RUPUBIMAG', 'Rupubimag', 'double', CreoleTypes::NUMERIC, false, 2);
 
 		$tMap->addColumn('FORACT', 'Foract', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -72,7 +74,7 @@ class FcdefinsMapBuilder {
 
 		$tMap->addColumn('UNIPIC', 'Unipic', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('VALUNITRI', 'Valunitri', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALUNITRI', 'Valunitri', 'double', CreoleTypes::NUMERIC, false, 19);
 
 		$tMap->addColumn('UNITAS', 'Unitas', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -91,6 +93,6 @@ class FcdefinsMapBuilder {
 		$tMap->addColumn('CODAJUPIC', 'Codajupic', 'string', CreoleTypes::VARCHAR, false, 2);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

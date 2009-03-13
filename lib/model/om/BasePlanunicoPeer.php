@@ -210,6 +210,7 @@ abstract class BasePlanunicoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(PlanunicoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class FordefzonecodesMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FordefzonecodesMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FordefzonecodesMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fordefzonecodes');
 		$tMap->setPhpName('Fordefzonecodes');
 
@@ -37,6 +37,6 @@ class FordefzonecodesMapBuilder {
 		$tMap->addColumn('DESZONECO', 'Deszoneco', 'string', CreoleTypes::VARCHAR, true, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

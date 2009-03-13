@@ -76,135 +76,149 @@ abstract class BaseFcmodpro extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefmod()
-	{
+  
+  public function getRefmod()
+  {
 
-		return $this->refmod; 		
-	}
-	
-	public function getNrocon()
-	{
+    return trim($this->refmod);
 
-		return $this->nrocon; 		
-	}
-	
-	public function getFecmod($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNrocon()
+  {
 
-		if ($this->fecmod === null || $this->fecmod === '') {
-			return null;
-		} elseif (!is_int($this->fecmod)) {
-						$ts = strtotime($this->fecmod);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecmod] as date/time value: " . var_export($this->fecmod, true));
-			}
-		} else {
-			$ts = $this->fecmod;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->nrocon);
 
-	
-	public function getTippro()
-	{
+  }
+  
+  public function getFecmod($format = 'Y-m-d')
+  {
 
-		return $this->tippro; 		
-	}
-	
-	public function getDespro()
-	{
+    if ($this->fecmod === null || $this->fecmod === '') {
+      return null;
+    } elseif (!is_int($this->fecmod)) {
+            $ts = adodb_strtotime($this->fecmod);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecmod] as date/time value: " . var_export($this->fecmod, true));
+      }
+    } else {
+      $ts = $this->fecmod;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->despro; 		
-	}
-	
-	public function getDirpro()
-	{
+  
+  public function getTippro()
+  {
 
-		return $this->dirpro; 		
-	}
-	
-	public function getMonpro()
-	{
+    return trim($this->tippro);
 
-		return number_format($this->monpro,2,',','.');
-		
-	}
-	
-	public function getMonimp()
-	{
+  }
+  
+  public function getDespro()
+  {
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getTipproant()
-	{
+    return trim($this->despro);
 
-		return $this->tipproant; 		
-	}
-	
-	public function getDesproant()
-	{
+  }
+  
+  public function getDirpro()
+  {
 
-		return $this->desproant; 		
-	}
-	
-	public function getDirproant()
-	{
+    return trim($this->dirpro);
 
-		return $this->dirproant; 		
-	}
-	
-	public function getMonproant()
-	{
+  }
+  
+  public function getMonpro($val=false)
+  {
 
-		return number_format($this->monproant,2,',','.');
-		
-	}
-	
-	public function getMonimpant()
-	{
+    if($val) return number_format($this->monpro,2,',','.');
+    else return $this->monpro;
 
-		return number_format($this->monimpant,2,',','.');
-		
-	}
-	
-	public function getFunrec()
-	{
+  }
+  
+  public function getMonimp($val=false)
+  {
 
-		return $this->funrec; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTipproant()
+  {
+
+    return trim($this->tipproant);
+
+  }
+  
+  public function getDesproant()
+  {
+
+    return trim($this->desproant);
+
+  }
+  
+  public function getDirproant()
+  {
+
+    return trim($this->dirproant);
+
+  }
+  
+  public function getMonproant($val=false)
+  {
+
+    if($val) return number_format($this->monproant,2,',','.');
+    else return $this->monproant;
+
+  }
+  
+  public function getMonimpant($val=false)
+  {
+
+    if($val) return number_format($this->monimpant,2,',','.');
+    else return $this->monimpant;
+
+  }
+  
+  public function getFunrec()
+  {
+
+    return trim($this->funrec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefmod($v)
 	{
 
-		if ($this->refmod !== $v) {
-			$this->refmod = $v;
-			$this->modifiedColumns[] = FcmodproPeer::REFMOD;
-		}
-
+    if ($this->refmod !== $v) {
+        $this->refmod = $v;
+        $this->modifiedColumns[] = FcmodproPeer::REFMOD;
+      }
+  
 	} 
 	
 	public function setNrocon($v)
 	{
 
-		if ($this->nrocon !== $v) {
-			$this->nrocon = $v;
-			$this->modifiedColumns[] = FcmodproPeer::NROCON;
-		}
-
+    if ($this->nrocon !== $v) {
+        $this->nrocon = $v;
+        $this->modifiedColumns[] = FcmodproPeer::NROCON;
+      }
+  
 		if ($this->aFcprolic !== null && $this->aFcprolic->getNrocon() !== $v) {
 			$this->aFcprolic = null;
 		}
@@ -214,183 +228,205 @@ abstract class BaseFcmodpro extends BaseObject  implements Persistent {
 	public function setFecmod($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecmod] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecmod !== $ts) {
-			$this->fecmod = $ts;
-			$this->modifiedColumns[] = FcmodproPeer::FECMOD;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecmod] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecmod !== $ts) {
+      $this->fecmod = $ts;
+      $this->modifiedColumns[] = FcmodproPeer::FECMOD;
+    }
 
 	} 
 	
 	public function setTippro($v)
 	{
 
-		if ($this->tippro !== $v) {
-			$this->tippro = $v;
-			$this->modifiedColumns[] = FcmodproPeer::TIPPRO;
-		}
-
+    if ($this->tippro !== $v) {
+        $this->tippro = $v;
+        $this->modifiedColumns[] = FcmodproPeer::TIPPRO;
+      }
+  
 	} 
 	
 	public function setDespro($v)
 	{
 
-		if ($this->despro !== $v) {
-			$this->despro = $v;
-			$this->modifiedColumns[] = FcmodproPeer::DESPRO;
-		}
-
+    if ($this->despro !== $v) {
+        $this->despro = $v;
+        $this->modifiedColumns[] = FcmodproPeer::DESPRO;
+      }
+  
 	} 
 	
 	public function setDirpro($v)
 	{
 
-		if ($this->dirpro !== $v) {
-			$this->dirpro = $v;
-			$this->modifiedColumns[] = FcmodproPeer::DIRPRO;
-		}
-
+    if ($this->dirpro !== $v) {
+        $this->dirpro = $v;
+        $this->modifiedColumns[] = FcmodproPeer::DIRPRO;
+      }
+  
 	} 
 	
 	public function setMonpro($v)
 	{
 
-		if ($this->monpro !== $v) {
-			$this->monpro = $v;
-			$this->modifiedColumns[] = FcmodproPeer::MONPRO;
-		}
-
+    if ($this->monpro !== $v) {
+        $this->monpro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodproPeer::MONPRO;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = FcmodproPeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodproPeer::MONIMP;
+      }
+  
 	} 
 	
 	public function setTipproant($v)
 	{
 
-		if ($this->tipproant !== $v) {
-			$this->tipproant = $v;
-			$this->modifiedColumns[] = FcmodproPeer::TIPPROANT;
-		}
-
+    if ($this->tipproant !== $v) {
+        $this->tipproant = $v;
+        $this->modifiedColumns[] = FcmodproPeer::TIPPROANT;
+      }
+  
 	} 
 	
 	public function setDesproant($v)
 	{
 
-		if ($this->desproant !== $v) {
-			$this->desproant = $v;
-			$this->modifiedColumns[] = FcmodproPeer::DESPROANT;
-		}
-
+    if ($this->desproant !== $v) {
+        $this->desproant = $v;
+        $this->modifiedColumns[] = FcmodproPeer::DESPROANT;
+      }
+  
 	} 
 	
 	public function setDirproant($v)
 	{
 
-		if ($this->dirproant !== $v) {
-			$this->dirproant = $v;
-			$this->modifiedColumns[] = FcmodproPeer::DIRPROANT;
-		}
-
+    if ($this->dirproant !== $v) {
+        $this->dirproant = $v;
+        $this->modifiedColumns[] = FcmodproPeer::DIRPROANT;
+      }
+  
 	} 
 	
 	public function setMonproant($v)
 	{
 
-		if ($this->monproant !== $v) {
-			$this->monproant = $v;
-			$this->modifiedColumns[] = FcmodproPeer::MONPROANT;
-		}
-
+    if ($this->monproant !== $v) {
+        $this->monproant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodproPeer::MONPROANT;
+      }
+  
 	} 
 	
 	public function setMonimpant($v)
 	{
 
-		if ($this->monimpant !== $v) {
-			$this->monimpant = $v;
-			$this->modifiedColumns[] = FcmodproPeer::MONIMPANT;
-		}
-
+    if ($this->monimpant !== $v) {
+        $this->monimpant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodproPeer::MONIMPANT;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FcmodproPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FcmodproPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcmodproPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcmodproPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refmod = $rs->getString($startcol + 0);
+      $this->refmod = $rs->getString($startcol + 0);
 
-			$this->nrocon = $rs->getString($startcol + 1);
+      $this->nrocon = $rs->getString($startcol + 1);
 
-			$this->fecmod = $rs->getDate($startcol + 2, null);
+      $this->fecmod = $rs->getDate($startcol + 2, null);
 
-			$this->tippro = $rs->getString($startcol + 3);
+      $this->tippro = $rs->getString($startcol + 3);
 
-			$this->despro = $rs->getString($startcol + 4);
+      $this->despro = $rs->getString($startcol + 4);
 
-			$this->dirpro = $rs->getString($startcol + 5);
+      $this->dirpro = $rs->getString($startcol + 5);
 
-			$this->monpro = $rs->getFloat($startcol + 6);
+      $this->monpro = $rs->getFloat($startcol + 6);
 
-			$this->monimp = $rs->getFloat($startcol + 7);
+      $this->monimp = $rs->getFloat($startcol + 7);
 
-			$this->tipproant = $rs->getString($startcol + 8);
+      $this->tipproant = $rs->getString($startcol + 8);
 
-			$this->desproant = $rs->getString($startcol + 9);
+      $this->desproant = $rs->getString($startcol + 9);
 
-			$this->dirproant = $rs->getString($startcol + 10);
+      $this->dirproant = $rs->getString($startcol + 10);
 
-			$this->monproant = $rs->getFloat($startcol + 11);
+      $this->monproant = $rs->getFloat($startcol + 11);
 
-			$this->monimpant = $rs->getFloat($startcol + 12);
+      $this->monimpant = $rs->getFloat($startcol + 12);
 
-			$this->funrec = $rs->getString($startcol + 13);
+      $this->funrec = $rs->getString($startcol + 13);
 
-			$this->id = $rs->getInt($startcol + 14);
+      $this->id = $rs->getInt($startcol + 14);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 15; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcmodpro object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 15; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcmodpro object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -456,6 +492,7 @@ abstract class BaseFcmodpro extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcmodproPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcmodproPeer::doUpdate($this, $con);
@@ -804,9 +841,8 @@ abstract class BaseFcmodpro extends BaseObject  implements Persistent {
 	
 	public function getFcprolic($con = null)
 	{
-				include_once 'lib/model/om/BaseFcprolicPeer.php';
-
 		if ($this->aFcprolic === null && (($this->nrocon !== "" && $this->nrocon !== null))) {
+						include_once 'lib/model/om/BaseFcprolicPeer.php';
 
 			$this->aFcprolic = FcprolicPeer::retrieveByPK($this->nrocon, $con);
 

@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Dfrutadoc
+    theme:            default
+    fields:
+      id_dftabtip:      { name : Tipo de Documento }
+      tipdoc:         { name : Tipo de Documento } # Foráneo
+      id_acunidad:    { name : Unidad }
+      rutdoc:         { name : Orden }
+      diadoc:         { name : Días }
+      nomuni:         { name : Unidad } # Foráneo
+      desuni:         { name : Sub Unidad }
+      desrut:         { name : Descripcion del Paso }
+    list:
+      title:          Definición de la Ruta del Documento
+      display:        [=tipdoc, desuni ]
+      #filters:        [tipdoc, id_acunidad,  ]
+      max_per_page:    10
+      #object_actions:
+      #  _edit:        ~
+      #  _delete:      ~
+    edit:
+      title:          Edición de la Ruta del Documento
+      display:        [id_dftabtip, id_acunidad, nomuni, desuni, rutdoc, diadoc, desrut ]
+      actions:
+        _list:        ~
+        _save:        ~

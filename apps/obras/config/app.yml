@@ -1,4 +1,5 @@
 all:
    .apps:
      autenticacion:    autenticacion
-     this:             obras      #cambiar en cada app
+     max_per_page:     15
+     this:             obra      #cambiar en cada app

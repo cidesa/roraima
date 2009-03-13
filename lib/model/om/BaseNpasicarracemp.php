@@ -77,310 +77,348 @@ abstract class BaseNpasicarracemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodcarrac()
-	{
+    return trim($this->codemp);
 
-		return $this->codcarrac; 		
-	}
-	
-	public function getCodsecue()
-	{
+  }
+  
+  public function getCodcarrac()
+  {
 
-		return $this->codsecue; 		
-	}
-	
-	public function getComcar()
-	{
+    return trim($this->codcarrac);
 
-		return number_format($this->comcar,2,',','.');
-		
-	}
-	
-	public function getPricar()
-	{
+  }
+  
+  public function getCodsecue()
+  {
 
-		return number_format($this->pricar,2,',','.');
-		
-	}
-	
-	public function getCodaccadm()
-	{
+    return trim($this->codsecue);
 
-		return $this->codaccadm; 		
-	}
-	
-	public function getCodregpai()
-	{
+  }
+  
+  public function getComcar($val=false)
+  {
 
-		return $this->codregpai; 		
-	}
-	
-	public function getCodregedo()
-	{
+    if($val) return number_format($this->comcar,2,',','.');
+    else return $this->comcar;
 
-		return $this->codregedo; 		
-	}
-	
-	public function getCodregciu()
-	{
+  }
+  
+  public function getPricar($val=false)
+  {
 
-		return $this->codregciu; 		
-	}
-	
-	public function getCodcatrac()
-	{
+    if($val) return number_format($this->pricar,2,',','.');
+    else return $this->pricar;
 
-		return $this->codcatrac; 		
-	}
-	
-	public function getCodbanrac()
-	{
+  }
+  
+  public function getCodaccadm()
+  {
 
-		return $this->codbanrac; 		
-	}
-	
-	public function getCodgrulab()
-	{
+    return trim($this->codaccadm);
 
-		return $this->codgrulab; 		
-	}
-	
-	public function getNomsup()
-	{
+  }
+  
+  public function getCodregpai()
+  {
 
-		return $this->nomsup; 		
-	}
-	
-	public function getCarsup()
-	{
+    return trim($this->codregpai);
 
-		return $this->carsup; 		
-	}
-	
-	public function getCodnivorg()
-	{
+  }
+  
+  public function getCodregedo()
+  {
 
-		return $this->codnivorg; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codregedo);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodregciu()
+  {
+
+    return trim($this->codregciu);
+
+  }
+  
+  public function getCodcatrac()
+  {
+
+    return trim($this->codcatrac);
+
+  }
+  
+  public function getCodbanrac()
+  {
+
+    return trim($this->codbanrac);
+
+  }
+  
+  public function getCodgrulab()
+  {
+
+    return trim($this->codgrulab);
+
+  }
+  
+  public function getNomsup()
+  {
+
+    return trim($this->nomsup);
+
+  }
+  
+  public function getCarsup()
+  {
+
+    return trim($this->carsup);
+
+  }
+  
+  public function getCodnivorg()
+  {
+
+    return trim($this->codnivorg);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodcarrac($v)
 	{
 
-		if ($this->codcarrac !== $v) {
-			$this->codcarrac = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODCARRAC;
-		}
-
+    if ($this->codcarrac !== $v) {
+        $this->codcarrac = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODCARRAC;
+      }
+  
 	} 
 	
 	public function setCodsecue($v)
 	{
 
-		if ($this->codsecue !== $v) {
-			$this->codsecue = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODSECUE;
-		}
-
+    if ($this->codsecue !== $v) {
+        $this->codsecue = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODSECUE;
+      }
+  
 	} 
 	
 	public function setComcar($v)
 	{
 
-		if ($this->comcar !== $v) {
-			$this->comcar = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::COMCAR;
-		}
-
+    if ($this->comcar !== $v) {
+        $this->comcar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasicarracempPeer::COMCAR;
+      }
+  
 	} 
 	
 	public function setPricar($v)
 	{
 
-		if ($this->pricar !== $v) {
-			$this->pricar = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::PRICAR;
-		}
-
+    if ($this->pricar !== $v) {
+        $this->pricar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasicarracempPeer::PRICAR;
+      }
+  
 	} 
 	
 	public function setCodaccadm($v)
 	{
 
-		if ($this->codaccadm !== $v) {
-			$this->codaccadm = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODACCADM;
-		}
-
+    if ($this->codaccadm !== $v) {
+        $this->codaccadm = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODACCADM;
+      }
+  
 	} 
 	
 	public function setCodregpai($v)
 	{
 
-		if ($this->codregpai !== $v) {
-			$this->codregpai = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODREGPAI;
-		}
-
+    if ($this->codregpai !== $v) {
+        $this->codregpai = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODREGPAI;
+      }
+  
 	} 
 	
 	public function setCodregedo($v)
 	{
 
-		if ($this->codregedo !== $v) {
-			$this->codregedo = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODREGEDO;
-		}
-
+    if ($this->codregedo !== $v) {
+        $this->codregedo = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODREGEDO;
+      }
+  
 	} 
 	
 	public function setCodregciu($v)
 	{
 
-		if ($this->codregciu !== $v) {
-			$this->codregciu = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODREGCIU;
-		}
-
+    if ($this->codregciu !== $v) {
+        $this->codregciu = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODREGCIU;
+      }
+  
 	} 
 	
 	public function setCodcatrac($v)
 	{
 
-		if ($this->codcatrac !== $v) {
-			$this->codcatrac = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODCATRAC;
-		}
-
+    if ($this->codcatrac !== $v) {
+        $this->codcatrac = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODCATRAC;
+      }
+  
 	} 
 	
 	public function setCodbanrac($v)
 	{
 
-		if ($this->codbanrac !== $v) {
-			$this->codbanrac = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODBANRAC;
-		}
-
+    if ($this->codbanrac !== $v) {
+        $this->codbanrac = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODBANRAC;
+      }
+  
 	} 
 	
 	public function setCodgrulab($v)
 	{
 
-		if ($this->codgrulab !== $v) {
-			$this->codgrulab = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODGRULAB;
-		}
-
+    if ($this->codgrulab !== $v) {
+        $this->codgrulab = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODGRULAB;
+      }
+  
 	} 
 	
 	public function setNomsup($v)
 	{
 
-		if ($this->nomsup !== $v) {
-			$this->nomsup = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::NOMSUP;
-		}
-
+    if ($this->nomsup !== $v) {
+        $this->nomsup = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::NOMSUP;
+      }
+  
 	} 
 	
 	public function setCarsup($v)
 	{
 
-		if ($this->carsup !== $v) {
-			$this->carsup = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CARSUP;
-		}
-
+    if ($this->carsup !== $v) {
+        $this->carsup = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CARSUP;
+      }
+  
 	} 
 	
 	public function setCodnivorg($v)
 	{
 
-		if ($this->codnivorg !== $v) {
-			$this->codnivorg = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::CODNIVORG;
-		}
-
+    if ($this->codnivorg !== $v) {
+        $this->codnivorg = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::CODNIVORG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpasicarracempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpasicarracempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codcarrac = $rs->getString($startcol + 1);
+      $this->codcarrac = $rs->getString($startcol + 1);
 
-			$this->codsecue = $rs->getString($startcol + 2);
+      $this->codsecue = $rs->getString($startcol + 2);
 
-			$this->comcar = $rs->getFloat($startcol + 3);
+      $this->comcar = $rs->getFloat($startcol + 3);
 
-			$this->pricar = $rs->getFloat($startcol + 4);
+      $this->pricar = $rs->getFloat($startcol + 4);
 
-			$this->codaccadm = $rs->getString($startcol + 5);
+      $this->codaccadm = $rs->getString($startcol + 5);
 
-			$this->codregpai = $rs->getString($startcol + 6);
+      $this->codregpai = $rs->getString($startcol + 6);
 
-			$this->codregedo = $rs->getString($startcol + 7);
+      $this->codregedo = $rs->getString($startcol + 7);
 
-			$this->codregciu = $rs->getString($startcol + 8);
+      $this->codregciu = $rs->getString($startcol + 8);
 
-			$this->codcatrac = $rs->getString($startcol + 9);
+      $this->codcatrac = $rs->getString($startcol + 9);
 
-			$this->codbanrac = $rs->getString($startcol + 10);
+      $this->codbanrac = $rs->getString($startcol + 10);
 
-			$this->codgrulab = $rs->getString($startcol + 11);
+      $this->codgrulab = $rs->getString($startcol + 11);
 
-			$this->nomsup = $rs->getString($startcol + 12);
+      $this->nomsup = $rs->getString($startcol + 12);
 
-			$this->carsup = $rs->getString($startcol + 13);
+      $this->carsup = $rs->getString($startcol + 13);
 
-			$this->codnivorg = $rs->getString($startcol + 14);
+      $this->codnivorg = $rs->getString($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npasicarracemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npasicarracemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -437,6 +475,7 @@ abstract class BaseNpasicarracemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpasicarracempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpasicarracempPeer::doUpdate($this, $con);

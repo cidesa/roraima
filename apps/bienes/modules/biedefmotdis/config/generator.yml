@@ -3,20 +3,28 @@ generator:
   param:
     model_class:      Bnmotdis
     theme:            default
+
     fields:
-      codmot: { name: Código}
-      desmot: { name: Nombre}
+      codmot: { name: Código, params: maxlength=4 }
+      desmot: { name: Nombre, params: maxlength=250 }
       afecon: { name: Afecta}
       desinc: { name: Desincorpora}
-      adimej: { name: Mejora el Bien}       
-        
+      adimej: { name: Mejora el Bien}
+
     list:
-      title:          Definición de Motivos de Disposición 
-      filters:        [codmot]    
-      display:        [=codmot, desmot]            
+      title:          Definición de Motivos de Disposición
+      filters:        [codmot]
+      display:        [=codmot, desmot]
       object_actions:
-        _edit:        ~     
-        _delete:      ~     
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:  codmot
     edit:
       title:          Edición de Motivos de Disposición
-      display:        [=codmot, desmot, afecon, desinc, adimej]       
+      display:       [=codmot, desmot]
+      actions:
+        _list:     ~
+        _save:     ~
+        _delete:   ~
+        _create:   ~

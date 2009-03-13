@@ -49,185 +49,216 @@ abstract class BaseOpretord extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumord()
-	{
+  
+  public function getNumord()
+  {
 
-		return $this->numord; 		
-	}
-	
-	public function getCodtip()
-	{
+    return trim($this->numord);
 
-		return $this->codtip; 		
-	}
-	
-	public function getMonret()
-	{
+  }
+  
+  public function getCodtip()
+  {
 
-		return number_format($this->monret,2,',','.');
-		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->codtip);
 
-		return $this->codpre; 		
-	}
-	
-	public function getNumret()
-	{
+  }
+  
+  public function getMonret($val=false)
+  {
 
-		return $this->numret; 		
-	}
-	
-	public function getRefere()
-	{
+    if($val) return number_format($this->monret,2,',','.');
+    else return $this->monret;
 
-		return $this->refere; 		
-	}
-	
-	public function getCorrel()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->correl,2,',','.');
-		
-	}
-	
-	public function getMonbas()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->monbas,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNumret()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->numret);
+
+  }
+  
+  public function getRefere()
+  {
+
+    return trim($this->refere);
+
+  }
+  
+  public function getCorrel($val=false)
+  {
+
+    if($val) return number_format($this->correl,2,',','.');
+    else return $this->correl;
+
+  }
+  
+  public function getMonbas($val=false)
+  {
+
+    if($val) return number_format($this->monbas,2,',','.');
+    else return $this->monbas;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = OpretordPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = OpretordPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = OpretordPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = OpretordPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setMonret($v)
 	{
 
-		if ($this->monret !== $v) {
-			$this->monret = $v;
-			$this->modifiedColumns[] = OpretordPeer::MONRET;
-		}
-
+    if ($this->monret !== $v) {
+        $this->monret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpretordPeer::MONRET;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = OpretordPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = OpretordPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNumret($v)
 	{
 
-		if ($this->numret !== $v) {
-			$this->numret = $v;
-			$this->modifiedColumns[] = OpretordPeer::NUMRET;
-		}
-
+    if ($this->numret !== $v) {
+        $this->numret = $v;
+        $this->modifiedColumns[] = OpretordPeer::NUMRET;
+      }
+  
 	} 
 	
 	public function setRefere($v)
 	{
 
-		if ($this->refere !== $v) {
-			$this->refere = $v;
-			$this->modifiedColumns[] = OpretordPeer::REFERE;
-		}
-
+    if ($this->refere !== $v) {
+        $this->refere = $v;
+        $this->modifiedColumns[] = OpretordPeer::REFERE;
+      }
+  
 	} 
 	
 	public function setCorrel($v)
 	{
 
-		if ($this->correl !== $v) {
-			$this->correl = $v;
-			$this->modifiedColumns[] = OpretordPeer::CORREL;
-		}
-
+    if ($this->correl !== $v) {
+        $this->correl = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpretordPeer::CORREL;
+      }
+  
 	} 
 	
 	public function setMonbas($v)
 	{
 
-		if ($this->monbas !== $v) {
-			$this->monbas = $v;
-			$this->modifiedColumns[] = OpretordPeer::MONBAS;
-		}
-
+    if ($this->monbas !== $v) {
+        $this->monbas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpretordPeer::MONBAS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpretordPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpretordPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numord = $rs->getString($startcol + 0);
+      $this->numord = $rs->getString($startcol + 0);
 
-			$this->codtip = $rs->getString($startcol + 1);
+      $this->codtip = $rs->getString($startcol + 1);
 
-			$this->monret = $rs->getFloat($startcol + 2);
+      $this->monret = $rs->getFloat($startcol + 2);
 
-			$this->codpre = $rs->getString($startcol + 3);
+      $this->codpre = $rs->getString($startcol + 3);
 
-			$this->numret = $rs->getString($startcol + 4);
+      $this->numret = $rs->getString($startcol + 4);
 
-			$this->refere = $rs->getString($startcol + 5);
+      $this->refere = $rs->getString($startcol + 5);
 
-			$this->correl = $rs->getFloat($startcol + 6);
+      $this->correl = $rs->getFloat($startcol + 6);
 
-			$this->monbas = $rs->getFloat($startcol + 7);
+      $this->monbas = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opretord object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opretord object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -284,6 +315,7 @@ abstract class BaseOpretord extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpretordPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpretordPeer::doUpdate($this, $con);

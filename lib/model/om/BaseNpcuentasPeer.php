@@ -205,6 +205,7 @@ abstract class BaseNpcuentasPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcuentasPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

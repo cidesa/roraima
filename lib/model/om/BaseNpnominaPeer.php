@@ -260,6 +260,7 @@ abstract class BaseNpnominaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpnominaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

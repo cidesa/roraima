@@ -25,6 +25,10 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 
 
 	
+	protected $observacion;
+
+
+	
 	protected $id;
 
 	
@@ -33,135 +37,180 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getFecant($format = 'Y-m-d')
-	{
+    return trim($this->codemp);
 
-		if ($this->fecant === null || $this->fecant === '') {
-			return null;
-		} elseif (!is_int($this->fecant)) {
-						$ts = strtotime($this->fecant);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecant] as date/time value: " . var_export($this->fecant, true));
-			}
-		} else {
-			$ts = $this->fecant;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecant($format = 'Y-m-d')
+  {
 
-	
-	public function getMonant()
-	{
+    if ($this->fecant === null || $this->fecant === '') {
+      return null;
+    } elseif (!is_int($this->fecant)) {
+            $ts = adodb_strtotime($this->fecant);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecant] as date/time value: " . var_export($this->fecant, true));
+      }
+    } else {
+      $ts = $this->fecant;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monant,2,',','.');
-		
-	}
-	
-	public function getMonto()
-	{
+  
+  public function getMonant($val=false)
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monant,2,',','.');
+    else return $this->monant;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getObservacion()
+  {
+
+    return trim($this->observacion);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpantprePeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpantprePeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFecant($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecant] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecant !== $ts) {
-			$this->fecant = $ts;
-			$this->modifiedColumns[] = NpantprePeer::FECANT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecant] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecant !== $ts) {
+      $this->fecant = $ts;
+      $this->modifiedColumns[] = NpantprePeer::FECANT;
+    }
 
 	} 
 	
 	public function setMonant($v)
 	{
 
-		if ($this->monant !== $v) {
-			$this->monant = $v;
-			$this->modifiedColumns[] = NpantprePeer::MONANT;
-		}
-
+    if ($this->monant !== $v) {
+        $this->monant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpantprePeer::MONANT;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NpantprePeer::MONTO;
-		}
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpantprePeer::MONTO;
+      }
+  
+	} 
+	
+	public function setObservacion($v)
+	{
 
+    if ($this->observacion !== $v) {
+        $this->observacion = $v;
+        $this->modifiedColumns[] = NpantprePeer::OBSERVACION;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpantprePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpantprePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->fecant = $rs->getDate($startcol + 1, null);
+      $this->fecant = $rs->getDate($startcol + 1, null);
 
-			$this->monant = $rs->getFloat($startcol + 2);
+      $this->monant = $rs->getFloat($startcol + 2);
 
-			$this->monto = $rs->getFloat($startcol + 3);
+      $this->monto = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->observacion = $rs->getString($startcol + 4);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npantpre object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npantpre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -218,6 +267,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpantprePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpantprePeer::doUpdate($this, $con);
@@ -296,6 +346,9 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 				return $this->getMonto();
 				break;
 			case 4:
+				return $this->getObservacion();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -312,7 +365,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 			$keys[1] => $this->getFecant(),
 			$keys[2] => $this->getMonant(),
 			$keys[3] => $this->getMonto(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getObservacion(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -341,6 +395,9 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 				$this->setMonto($value);
 				break;
 			case 4:
+				$this->setObservacion($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -354,7 +411,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setFecant($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setMonant($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMonto($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setObservacion($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -366,6 +424,7 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpantprePeer::FECANT)) $criteria->add(NpantprePeer::FECANT, $this->fecant);
 		if ($this->isColumnModified(NpantprePeer::MONANT)) $criteria->add(NpantprePeer::MONANT, $this->monant);
 		if ($this->isColumnModified(NpantprePeer::MONTO)) $criteria->add(NpantprePeer::MONTO, $this->monto);
+		if ($this->isColumnModified(NpantprePeer::OBSERVACION)) $criteria->add(NpantprePeer::OBSERVACION, $this->observacion);
 		if ($this->isColumnModified(NpantprePeer::ID)) $criteria->add(NpantprePeer::ID, $this->id);
 
 		return $criteria;
@@ -404,6 +463,8 @@ abstract class BaseNpantpre extends BaseObject  implements Persistent {
 		$copyObj->setMonant($this->monant);
 
 		$copyObj->setMonto($this->monto);
+
+		$copyObj->setObservacion($this->observacion);
 
 
 		$copyObj->setNew(true);

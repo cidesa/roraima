@@ -13,7 +13,7 @@ abstract class BaseFaartnotPeer {
 	const CLASS_DEFAULT = 'lib.model.Faartnot';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 13;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseFaartnotPeer {
 
 	
 	const CODART = 'faartnot.CODART';
+
+	
+	const CODALM = 'faartnot.CODALM';
 
 	
 	const NUMLOT = 'faartnot.NUMLOT';
@@ -61,18 +64,18 @@ abstract class BaseFaartnotPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nronot', 'Codart', 'Numlot', 'Cansol', 'Canent', 'Candes', 'Canaju', 'Candev', 'Cantot', 'Preart', 'Totart', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaartnotPeer::NRONOT, FaartnotPeer::CODART, FaartnotPeer::NUMLOT, FaartnotPeer::CANSOL, FaartnotPeer::CANENT, FaartnotPeer::CANDES, FaartnotPeer::CANAJU, FaartnotPeer::CANDEV, FaartnotPeer::CANTOT, FaartnotPeer::PREART, FaartnotPeer::TOTART, FaartnotPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nronot', 'codart', 'numlot', 'cansol', 'canent', 'candes', 'canaju', 'candev', 'cantot', 'preart', 'totart', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Nronot', 'Codart', 'Codalm', 'Numlot', 'Cansol', 'Canent', 'Candes', 'Canaju', 'Candev', 'Cantot', 'Preart', 'Totart', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaartnotPeer::NRONOT, FaartnotPeer::CODART, FaartnotPeer::CODALM, FaartnotPeer::NUMLOT, FaartnotPeer::CANSOL, FaartnotPeer::CANENT, FaartnotPeer::CANDES, FaartnotPeer::CANAJU, FaartnotPeer::CANDEV, FaartnotPeer::CANTOT, FaartnotPeer::PREART, FaartnotPeer::TOTART, FaartnotPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nronot', 'codart', 'codalm', 'numlot', 'cansol', 'canent', 'candes', 'canaju', 'candev', 'cantot', 'preart', 'totart', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nronot' => 0, 'Codart' => 1, 'Numlot' => 2, 'Cansol' => 3, 'Canent' => 4, 'Candes' => 5, 'Canaju' => 6, 'Candev' => 7, 'Cantot' => 8, 'Preart' => 9, 'Totart' => 10, 'Id' => 11, ),
-		BasePeer::TYPE_COLNAME => array (FaartnotPeer::NRONOT => 0, FaartnotPeer::CODART => 1, FaartnotPeer::NUMLOT => 2, FaartnotPeer::CANSOL => 3, FaartnotPeer::CANENT => 4, FaartnotPeer::CANDES => 5, FaartnotPeer::CANAJU => 6, FaartnotPeer::CANDEV => 7, FaartnotPeer::CANTOT => 8, FaartnotPeer::PREART => 9, FaartnotPeer::TOTART => 10, FaartnotPeer::ID => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('nronot' => 0, 'codart' => 1, 'numlot' => 2, 'cansol' => 3, 'canent' => 4, 'candes' => 5, 'canaju' => 6, 'candev' => 7, 'cantot' => 8, 'preart' => 9, 'totart' => 10, 'id' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Nronot' => 0, 'Codart' => 1, 'Codalm' => 2, 'Numlot' => 3, 'Cansol' => 4, 'Canent' => 5, 'Candes' => 6, 'Canaju' => 7, 'Candev' => 8, 'Cantot' => 9, 'Preart' => 10, 'Totart' => 11, 'Id' => 12, ),
+		BasePeer::TYPE_COLNAME => array (FaartnotPeer::NRONOT => 0, FaartnotPeer::CODART => 1, FaartnotPeer::CODALM => 2, FaartnotPeer::NUMLOT => 3, FaartnotPeer::CANSOL => 4, FaartnotPeer::CANENT => 5, FaartnotPeer::CANDES => 6, FaartnotPeer::CANAJU => 7, FaartnotPeer::CANDEV => 8, FaartnotPeer::CANTOT => 9, FaartnotPeer::PREART => 10, FaartnotPeer::TOTART => 11, FaartnotPeer::ID => 12, ),
+		BasePeer::TYPE_FIELDNAME => array ('nronot' => 0, 'codart' => 1, 'codalm' => 2, 'numlot' => 3, 'cansol' => 4, 'canent' => 5, 'candes' => 6, 'canaju' => 7, 'candev' => 8, 'cantot' => 9, 'preart' => 10, 'totart' => 11, 'id' => 12, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
@@ -129,6 +132,8 @@ abstract class BaseFaartnotPeer {
 		$criteria->addSelectColumn(FaartnotPeer::NRONOT);
 
 		$criteria->addSelectColumn(FaartnotPeer::CODART);
+
+		$criteria->addSelectColumn(FaartnotPeer::CODALM);
 
 		$criteria->addSelectColumn(FaartnotPeer::NUMLOT);
 
@@ -250,6 +255,7 @@ abstract class BaseFaartnotPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FaartnotPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

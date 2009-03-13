@@ -240,6 +240,7 @@ abstract class BaseHisconbPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(HisconbPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

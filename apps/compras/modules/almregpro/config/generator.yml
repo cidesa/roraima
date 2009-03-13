@@ -6,62 +6,77 @@ generator:
 
     fields:
       codpro:       { name : Código}
-      nompro:       { name : Nombre del Proveedor}
-      rifpro:       { name : RIF}
+      nompro:       { name : Nombre}
+      rifpro:       { name : C.I./RIF}
       nitpro:       { name : NIT}
       dirpro:       { name : Dirección}
       telpro:       { name : Teléfono}
       nrocei:       { name : Nro.RNC}
       email:        { name : Correo Electrónico}
-      codram:       { name : Ramo que Provee}
+      codram:       { name : Ramo}
       nomram:       { name : Nombre del Ramo}
       limcre:       { name : Limite de Crédito}
       codcta:       { name : Cta. Contable Asoc.}
       descta:       { name : Descripción}
       codord:       { name : Cta. de Orden Asoc.}
-      desctacodord: { name : Descripción}      
+      desctacodord: { name : Descripción}
       codpercon:    { name : Cta.PerContra Asoc.}
-      desctacodpercon: { name : Descripción}      
+      desctacodpercon: { name : Descripción}
       fecinscir:    { name : Fecha de Inscripción}
       faxpro:       { name : Fax}
       numinscir:    { name : Circunscripción Judicial}
-      regmer:       { name : Registro Mercantil}      	
-      tomreg:       { name : Tomo}      	
+      regmer:       { name : Registro Mercantil}
+      tomreg:       { name : Tomo}
       capsus:       { name : Capital Suscrito}
-      fecreg:       { name : Fecha Reg}      	
-      folreg:       { name : Folio}      
+      fecreg:       { name : Fecha Reg}
+      folreg:       { name : Folio}
       cappag:       { name : Capital Pagado}
-      fecven:       { name : Fecha Venc}	      
+      fecven:       { name : Fecha Venc}
       rifrepleg:    { name : C.I./R.I.F.}
       nomrepleg:    { name : Nombre}
       dirrepleg:    { name : Dirección}
-      codtiprec:    { name : Grupo}   
-      destiprec:    { name : Descripción}   
+      telrepleg:    { name : Teléfono}
+      codtiprec:    { name : Grupo}
+      destiprec:    { name : Descripción}
       nacpro:       { name : Nacionalidad}
-      tipo:         { name : Actividad Principal}            
-      codctasec:    { name : Cta. Sociable Asoc}
-      desctacodctasec:    { name : Descripción}          
-      codordadi:    { name : Cta. de Orden Asoc}      
-      desctacodordadi:    { name : Descripción}          
-      codperconadi:    { name : Cta. PreContra Asoc}            
-      desctacodperconadi:    { name : Descripción}                  
-      codordmercon:    { name : Cta. de Orden}      
-      desctacodordmercon:    { name : Descripción}            
-      codpermercon:    { name : Cta. PreContra}            
-      desctacodpermercon:    { name : Descripción}                  
-      codordcontra:    { name : Cta. de Orden}
-      desctacodordcontra:    { name : Descripción}                        
-      codpercontra:    { name : Cta. PreContra}            
-      desctacodpercontra:    { name : Descripción}                        
+      tipo:         { name : Actividad Principal}
+      codctasec:    { name : Cta. Contable Asoc}
+      desctacodctasec:    { name : Descripción}
+      codordadi:          { name : Cta. de Orden Asoc}
+      desctacodordadi:    { name : Descripción}
+      codperconadi:       { name : Cta. PerContra Asoc}
+      desctacodperconadi: { name : Descripción}
+      codordmercon:       { name : Cta. de Orden}
+      desctacodordmercon: { name : Descripción}
+      codpermercon:       { name : Cta. PerContra}
+      desctacodpermercon: { name : Descripción}
+      codordcontra:       { name : Cta. de Orden}
+      desctacodordcontra: { name : Descripción}
+      codpercontra:       { name : Cta. PerContra}
+      desctacodpercontra: { name : Descripción}
+      recargo:            { name : Recaudos}
+      codtipemp:          { name : Tipo de Empresa}
+      destip:             { name : Descripción}
 
     list:
-      title:          Registro de Proveedor
-      display:        [=codpro, nompro]
-      filters:		  [codpro, nompro]
+      title:          Registro de Contratistas de Bienes o Servicio y Cooperativas
+      display:        [=codpro, nompro, rifpro]
+      filters:		  [codpro, nompro, rifpro]
       max_per_page:	  10
-  
+      sort:           codpro
+      fields:
+        codpro:      { params : maxlength=8 }
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+
     edit:
-      title:          Edición de Proveedor
-      display:        [codpro, nompro, rifpro, nitpro, dirpro, telpro, nrocei, email, codram, nomram, limcre, codcta, descta, codord, desctacodord, codpercon, desctacodpercon, fecinscir, faxpro, numinscir, regmer, tomreg, capsus, fecreg, folreg, cappag, fecven, rifrepleg, nomrepleg, dirrepleg, codtiprec, destiprec, nacpro, tipo, codctasec, desctacodctasec, codordadi, desctacodordadi, codperconadi, desctacodperconadi, codordmercon, desctacodordmercon, codpermercon, desctacodpermercon, codordcontra, desctacodordcontra, codpercontra, desctacodpercontra]
-      #fields:
-        #codforent:      { params : maxlength=6 }	      
+      title:          Edición de Contratistas de Bienes o Servicio y Cooperativas
+      display:        [codpro, nompro, rifpro, nitpro, dirpro, telpro, nrocei, email, codram, nomram, limcre, codcta, descta, codord, desctacodord, codpercon, desctacodpercon, fecinscir, faxpro, numinscir, regmer, tomreg, capsus, fecreg, folreg, cappag, fecven, rifrepleg, nomrepleg, dirrepleg, codtiprec, destiprec, nacpro, tipo, codctasec, desctacodctasec, codordadi, desctacodordadi, codperconadi, desctacodperconadi, codordmercon, desctacodordmercon, codpermercon, desctacodpermercon, codordcontra, desctacodordcontra, codpercontra, desctacodpercontra, recargo, codtipemp, destip, telrepleg]
+      fields:
+        recargo:    { type: admin_double_list, params: through_class=Carecpro}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -9,4 +9,8 @@
  */ 
 class ForencpryaccespmetPeer extends BaseForencpryaccespmetPeer
 {
+	public function getNompro()
+	{
+	  return Herramientas::getX('codpro','Fordefpry','nompro',self::getCodpro());
+	}	
 }

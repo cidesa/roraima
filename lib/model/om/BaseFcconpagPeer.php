@@ -13,7 +13,7 @@ abstract class BaseFcconpagPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcconpag';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 24;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -27,12 +27,6 @@ abstract class BaseFcconpagPeer {
 
 	
 	const MONCON = 'fcconpag.MONCON';
-
-	
-	const NUMCUO = 'fcconpag.NUMCUO';
-
-	
-	const MONINI = 'fcconpag.MONINI';
 
 	
 	const ESTCON = 'fcconpag.ESTCON';
@@ -50,6 +44,51 @@ abstract class BaseFcconpagPeer {
 	const FECREC = 'fcconpag.FECREC';
 
 	
+	const NUMCUO = 'fcconpag.NUMCUO';
+
+	
+	const MONCUO = 'fcconpag.MONCUO';
+
+	
+	const TOTCUO = 'fcconpag.TOTCUO';
+
+	
+	const PORINI = 'fcconpag.PORINI';
+
+	
+	const MONINI = 'fcconpag.MONINI';
+
+	
+	const PORFIN = 'fcconpag.PORFIN';
+
+	
+	const MONFIN = 'fcconpag.MONFIN';
+
+	
+	const DATCED = 'fcconpag.DATCED';
+
+	
+	const DATNAC = 'fcconpag.DATNAC';
+
+	
+	const DATNOM = 'fcconpag.DATNOM';
+
+	
+	const DATDIR = 'fcconpag.DATDIR';
+
+	
+	const DATTEL = 'fcconpag.DATTEL';
+
+	
+	const DATCAR = 'fcconpag.DATCAR';
+
+	
+	const DATREG = 'fcconpag.DATREG';
+
+	
+	const DATCON = 'fcconpag.DATCON';
+
+	
 	const ID = 'fcconpag.ID';
 
 	
@@ -58,18 +97,18 @@ abstract class BaseFcconpagPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcon', 'Feccon', 'Moncon', 'Numcuo', 'Monini', 'Estcon', 'Rifcon', 'Obscon', 'Funrec', 'Fecrec', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcconpagPeer::REFCON, FcconpagPeer::FECCON, FcconpagPeer::MONCON, FcconpagPeer::NUMCUO, FcconpagPeer::MONINI, FcconpagPeer::ESTCON, FcconpagPeer::RIFCON, FcconpagPeer::OBSCON, FcconpagPeer::FUNREC, FcconpagPeer::FECREC, FcconpagPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcon', 'feccon', 'moncon', 'numcuo', 'monini', 'estcon', 'rifcon', 'obscon', 'funrec', 'fecrec', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Refcon', 'Feccon', 'Moncon', 'Estcon', 'Rifcon', 'Obscon', 'Funrec', 'Fecrec', 'Numcuo', 'Moncuo', 'Totcuo', 'Porini', 'Monini', 'Porfin', 'Monfin', 'Datced', 'Datnac', 'Datnom', 'Datdir', 'Dattel', 'Datcar', 'Datreg', 'Datcon', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcconpagPeer::REFCON, FcconpagPeer::FECCON, FcconpagPeer::MONCON, FcconpagPeer::ESTCON, FcconpagPeer::RIFCON, FcconpagPeer::OBSCON, FcconpagPeer::FUNREC, FcconpagPeer::FECREC, FcconpagPeer::NUMCUO, FcconpagPeer::MONCUO, FcconpagPeer::TOTCUO, FcconpagPeer::PORINI, FcconpagPeer::MONINI, FcconpagPeer::PORFIN, FcconpagPeer::MONFIN, FcconpagPeer::DATCED, FcconpagPeer::DATNAC, FcconpagPeer::DATNOM, FcconpagPeer::DATDIR, FcconpagPeer::DATTEL, FcconpagPeer::DATCAR, FcconpagPeer::DATREG, FcconpagPeer::DATCON, FcconpagPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcon', 'feccon', 'moncon', 'estcon', 'rifcon', 'obscon', 'funrec', 'fecrec', 'numcuo', 'moncuo', 'totcuo', 'porini', 'monini', 'porfin', 'monfin', 'datced', 'datnac', 'datnom', 'datdir', 'dattel', 'datcar', 'datreg', 'datcon', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcon' => 0, 'Feccon' => 1, 'Moncon' => 2, 'Numcuo' => 3, 'Monini' => 4, 'Estcon' => 5, 'Rifcon' => 6, 'Obscon' => 7, 'Funrec' => 8, 'Fecrec' => 9, 'Id' => 10, ),
-		BasePeer::TYPE_COLNAME => array (FcconpagPeer::REFCON => 0, FcconpagPeer::FECCON => 1, FcconpagPeer::MONCON => 2, FcconpagPeer::NUMCUO => 3, FcconpagPeer::MONINI => 4, FcconpagPeer::ESTCON => 5, FcconpagPeer::RIFCON => 6, FcconpagPeer::OBSCON => 7, FcconpagPeer::FUNREC => 8, FcconpagPeer::FECREC => 9, FcconpagPeer::ID => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcon' => 0, 'feccon' => 1, 'moncon' => 2, 'numcuo' => 3, 'monini' => 4, 'estcon' => 5, 'rifcon' => 6, 'obscon' => 7, 'funrec' => 8, 'fecrec' => 9, 'id' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Refcon' => 0, 'Feccon' => 1, 'Moncon' => 2, 'Estcon' => 3, 'Rifcon' => 4, 'Obscon' => 5, 'Funrec' => 6, 'Fecrec' => 7, 'Numcuo' => 8, 'Moncuo' => 9, 'Totcuo' => 10, 'Porini' => 11, 'Monini' => 12, 'Porfin' => 13, 'Monfin' => 14, 'Datced' => 15, 'Datnac' => 16, 'Datnom' => 17, 'Datdir' => 18, 'Dattel' => 19, 'Datcar' => 20, 'Datreg' => 21, 'Datcon' => 22, 'Id' => 23, ),
+		BasePeer::TYPE_COLNAME => array (FcconpagPeer::REFCON => 0, FcconpagPeer::FECCON => 1, FcconpagPeer::MONCON => 2, FcconpagPeer::ESTCON => 3, FcconpagPeer::RIFCON => 4, FcconpagPeer::OBSCON => 5, FcconpagPeer::FUNREC => 6, FcconpagPeer::FECREC => 7, FcconpagPeer::NUMCUO => 8, FcconpagPeer::MONCUO => 9, FcconpagPeer::TOTCUO => 10, FcconpagPeer::PORINI => 11, FcconpagPeer::MONINI => 12, FcconpagPeer::PORFIN => 13, FcconpagPeer::MONFIN => 14, FcconpagPeer::DATCED => 15, FcconpagPeer::DATNAC => 16, FcconpagPeer::DATNOM => 17, FcconpagPeer::DATDIR => 18, FcconpagPeer::DATTEL => 19, FcconpagPeer::DATCAR => 20, FcconpagPeer::DATREG => 21, FcconpagPeer::DATCON => 22, FcconpagPeer::ID => 23, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcon' => 0, 'feccon' => 1, 'moncon' => 2, 'estcon' => 3, 'rifcon' => 4, 'obscon' => 5, 'funrec' => 6, 'fecrec' => 7, 'numcuo' => 8, 'moncuo' => 9, 'totcuo' => 10, 'porini' => 11, 'monini' => 12, 'porfin' => 13, 'monfin' => 14, 'datced' => 15, 'datnac' => 16, 'datnom' => 17, 'datdir' => 18, 'dattel' => 19, 'datcar' => 20, 'datreg' => 21, 'datcon' => 22, 'id' => 23, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, )
 	);
 
 	
@@ -129,10 +168,6 @@ abstract class BaseFcconpagPeer {
 
 		$criteria->addSelectColumn(FcconpagPeer::MONCON);
 
-		$criteria->addSelectColumn(FcconpagPeer::NUMCUO);
-
-		$criteria->addSelectColumn(FcconpagPeer::MONINI);
-
 		$criteria->addSelectColumn(FcconpagPeer::ESTCON);
 
 		$criteria->addSelectColumn(FcconpagPeer::RIFCON);
@@ -142,6 +177,36 @@ abstract class BaseFcconpagPeer {
 		$criteria->addSelectColumn(FcconpagPeer::FUNREC);
 
 		$criteria->addSelectColumn(FcconpagPeer::FECREC);
+
+		$criteria->addSelectColumn(FcconpagPeer::NUMCUO);
+
+		$criteria->addSelectColumn(FcconpagPeer::MONCUO);
+
+		$criteria->addSelectColumn(FcconpagPeer::TOTCUO);
+
+		$criteria->addSelectColumn(FcconpagPeer::PORINI);
+
+		$criteria->addSelectColumn(FcconpagPeer::MONINI);
+
+		$criteria->addSelectColumn(FcconpagPeer::PORFIN);
+
+		$criteria->addSelectColumn(FcconpagPeer::MONFIN);
+
+		$criteria->addSelectColumn(FcconpagPeer::DATCED);
+
+		$criteria->addSelectColumn(FcconpagPeer::DATNAC);
+
+		$criteria->addSelectColumn(FcconpagPeer::DATNOM);
+
+		$criteria->addSelectColumn(FcconpagPeer::DATDIR);
+
+		$criteria->addSelectColumn(FcconpagPeer::DATTEL);
+
+		$criteria->addSelectColumn(FcconpagPeer::DATCAR);
+
+		$criteria->addSelectColumn(FcconpagPeer::DATREG);
+
+		$criteria->addSelectColumn(FcconpagPeer::DATCON);
 
 		$criteria->addSelectColumn(FcconpagPeer::ID);
 
@@ -245,6 +310,7 @@ abstract class BaseFcconpagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcconpagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -210,6 +210,7 @@ abstract class BaseOcestadoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcestadoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

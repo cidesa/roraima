@@ -7,69 +7,135 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
 
 <?php echo object_input_hidden_tag($npasicaremp, 'getId') ?>
 
-<fieldset id="sf_fieldset_none" class="">
 
+<fieldset>
+<legend>Tipo de N&oacute;mina</legend>
 <div class="form-row">
-  <?php echo label_for('npasicaremp[codemp]', __($labels['npasicaremp{codemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{codemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{codemp}')): ?>
-    <?php echo form_error('npasicaremp{codemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = object_input_tag($npasicaremp, 'getCodemp', array (
-  'size' => 20,
-  'control_name' => 'npasicaremp[codemp]',
-  )); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#') ?>
-&nbsp;&nbsp;</div>
-</div>
-
-<div class="form-row">
-<?php echo label_for('npasicaremp[nomemp]', __($labels['npasicaremp{nomemp}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{nomemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{nomemp}')): ?>
-    <?php echo form_error('npasicaremp{nomemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasicaremp, 'getNomemp', array (
-  'size' => 80,
-  'control_name' => 'npasicaremp[nomemp]',
-  'maxlength' => 50,
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npasicaremp[codcar]', __($labels['npasicaremp{codcar}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{codcar}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{codcar}')): ?>
-    <?php echo form_error('npasicaremp{codcar}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasicaremp, 'getCodcar', array (
-  'size' => 20,
-  'control_name' => 'npasicaremp[codcar]',
-  )); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#') ?>
-&nbsp;&nbsp;</div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npasicaremp[codnom]', __($labels['npasicaremp{codnom}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{codnom}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{codnom}')): ?>
-    <?php echo form_error('npasicaremp{codnom}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+ <strong>C&oacute;digo</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
   <?php $value = object_input_tag($npasicaremp, 'getCodnom', array (
-  'size' => 20,
-  'control_name' => 'npasicaremp[codnom]',
-  )); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#') ?>
-&nbsp;&nbsp;</div>
+  'size' => 10,
+  'control_name' => 'codigonomina',
+  'maxlength' => '12,',
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomnommovnomconcar/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=codigonomina&cajtexcom=nombrenomina&codigo='+this.value"
+        ))
+
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefmov_nomnommovnomcon/clase/Npnomina/frame/sf_admin_edit_form/obj1/codigonomina/obj2/nombrenomina/campo1/codnom/campo2/nomnom/param1/")?>
+
+<?php $value = object_input_tag($npasicaremp, 'getNomnom', array (
+  'size' => 50,
+  'control_name' => 'nombrenomina',
+  'maxlength' => '40,',
+  'readonly' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+
 </div>
 
 </fieldset>
+
+
+<fieldset>
+<legend>Conceptos</legend>
+<div class="form-row">
+
+ <strong>C&oacute;digo</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<?php $value = object_input_tag($npasicaremp, 'getCodcon', array (
+  'size' => 10,
+  'control_name' => 'codigoconcepto',
+  'maxlength' => '12,',
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomnommovnomconcar/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=4&cajtexmos=codigoconcepto&cajtexcom=nombreconcepto&codcon='+this.value+'&codnom='+$('codigonomina').value"
+        ))
+
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefcpt_nomnommovnomcon/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/codigoconcepto/obj2/nombreconcepto/campo1/codcon/campo2/nomcon/param1/'+$('codigonomina').value+'")?>
+
+<?php $value = object_input_tag($npasicaremp, 'getNomcon', array (
+  'size' => 50,
+  'control_name' => 'nombreconcepto',
+  'maxlength' => '40,',
+  'readonly' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+<br><br>
+<strong>Cantidad</strong>&nbsp;&nbsp;
+<?php echo radiobutton_tag('radiovalor', 'C',false ,array('onClick'=> remote_function(array(
+       'update'   => 'grid',
+       'url'      => 'nomnommovnomconcar/ajax',
+       'complete' => 'AjaxJSON(request, json)',
+       'script'   => true,
+           'with' => "'ajax=3&valor=C&codigonomina='+$('codigonomina').value+'&codigoconcepto='+$('codigoconcepto').value+'&codigocargo='+$('codigocargo').value"
+        )))) ?>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong>Monto</strong>&nbsp;&nbsp;
+  <?php echo radiobutton_tag('radiovalor', 'M', true,array('onClick'=> remote_function(array(
+       'update'   => 'grid',
+       'url'      => 'nomnommovnomconcar/ajax',
+       'complete' => 'AjaxJSON(request, json)',
+       'script'   => true,
+         'with'   => "'ajax=3&valor=M&codigonomina='+$('codigonomina').value+'&codigoconcepto='+$('codigoconcepto').value+'&codigocargo='+$('codigocargo').value"
+        ))))?>
+
+</div>
+
+</fieldset>
+
+
+<fieldset>
+<legend>Cargos</legend>
+<div class="form-row">
+
+ <strong>C&oacute;digo</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<?php $value = object_input_tag($npasicaremp, 'getCodcar', array (
+  'size' => 10,
+  'control_name' => 'codigocargo',
+  'maxlength' => '12,',
+  'onBlur'=> remote_function(array(
+        'update'   => 'grid',
+        'url'      => 'nomnommovnomconcar/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=2&cajtexcom=nombrecargo&codigonomina='+$('codigonomina').value+'&codigoconcepto='+$('codigoconcepto').value+'&codigocargo='+this.value+'&valor='+document.sf_admin_edit_form.radiovalor[0].checked"
+  )),
+
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npasiconemp_nomnommovnomconcar/clase/Npasiconemp/frame/sf_admin_edit_form/obj1/codigocargo/obj2/nombrecargo/campo1/codcar/campo2/nomcar/param1/'+$('codigoconcepto').value+'")?>
+
+<?php $value = object_input_tag($npasicaremp, 'getNomcar', array (
+  'size' => 50,
+  'control_name' => 'nombrecargo',
+  'maxlength' => '50,',
+  'readonly' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+
+</div>
+
+</fieldset>
+
+<div id="grid" class="form-row">
+<?
+echo grid_tag($obj);
+?>
+</div>
+
 
 <?php include_partial('edit_actions', array('npasicaremp' => $npasicaremp)) ?>
 

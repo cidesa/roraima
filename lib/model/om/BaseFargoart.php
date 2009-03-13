@@ -37,129 +37,157 @@ abstract class BaseFargoart extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrgo()
-	{
+  
+  public function getCodrgo()
+  {
 
-		return $this->codrgo; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->codrgo);
 
-		return $this->codart; 		
-	}
-	
-	public function getRefdoc()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->refdoc; 		
-	}
-	
-	public function getMonrgo()
-	{
+    return trim($this->codart);
 
-		return number_format($this->monrgo,2,',','.');
-		
-	}
-	
-	public function getTipdoc()
-	{
+  }
+  
+  public function getRefdoc()
+  {
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->refdoc);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonrgo($val=false)
+  {
+
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
+
+  }
+  
+  public function getTipdoc()
+  {
+
+    return trim($this->tipdoc);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrgo($v)
 	{
 
-		if ($this->codrgo !== $v) {
-			$this->codrgo = $v;
-			$this->modifiedColumns[] = FargoartPeer::CODRGO;
-		}
-
+    if ($this->codrgo !== $v) {
+        $this->codrgo = $v;
+        $this->modifiedColumns[] = FargoartPeer::CODRGO;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FargoartPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FargoartPeer::CODART;
+      }
+  
 	} 
 	
 	public function setRefdoc($v)
 	{
 
-		if ($this->refdoc !== $v) {
-			$this->refdoc = $v;
-			$this->modifiedColumns[] = FargoartPeer::REFDOC;
-		}
-
+    if ($this->refdoc !== $v) {
+        $this->refdoc = $v;
+        $this->modifiedColumns[] = FargoartPeer::REFDOC;
+      }
+  
 	} 
 	
 	public function setMonrgo($v)
 	{
 
-		if ($this->monrgo !== $v) {
-			$this->monrgo = $v;
-			$this->modifiedColumns[] = FargoartPeer::MONRGO;
-		}
-
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FargoartPeer::MONRGO;
+      }
+  
 	} 
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = FargoartPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = FargoartPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FargoartPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FargoartPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrgo = $rs->getString($startcol + 0);
+      $this->codrgo = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->refdoc = $rs->getString($startcol + 2);
+      $this->refdoc = $rs->getString($startcol + 2);
 
-			$this->monrgo = $rs->getFloat($startcol + 3);
+      $this->monrgo = $rs->getFloat($startcol + 3);
 
-			$this->tipdoc = $rs->getString($startcol + 4);
+      $this->tipdoc = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fargoart object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fargoart object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +244,7 @@ abstract class BaseFargoart extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FargoartPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FargoartPeer::doUpdate($this, $con);

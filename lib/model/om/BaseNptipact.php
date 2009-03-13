@@ -25,74 +25,99 @@ abstract class BaseNptipact extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipact()
-	{
+  
+  public function getCodtipact()
+  {
 
-		return $this->codtipact; 		
-	}
-	
-	public function getDestipact()
-	{
+    return trim($this->codtipact);
 
-		return $this->destipact; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDestipact()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->destipact);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipact($v)
 	{
 
-		if ($this->codtipact !== $v) {
-			$this->codtipact = $v;
-			$this->modifiedColumns[] = NptipactPeer::CODTIPACT;
-		}
-
+    if ($this->codtipact !== $v) {
+        $this->codtipact = $v;
+        $this->modifiedColumns[] = NptipactPeer::CODTIPACT;
+      }
+  
 	} 
 	
 	public function setDestipact($v)
 	{
 
-		if ($this->destipact !== $v) {
-			$this->destipact = $v;
-			$this->modifiedColumns[] = NptipactPeer::DESTIPACT;
-		}
-
+    if ($this->destipact !== $v) {
+        $this->destipact = $v;
+        $this->modifiedColumns[] = NptipactPeer::DESTIPACT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NptipactPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NptipactPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipact = $rs->getString($startcol + 0);
+      $this->codtipact = $rs->getString($startcol + 0);
 
-			$this->destipact = $rs->getString($startcol + 1);
+      $this->destipact = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nptipact object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nptipact object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseNptipact extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NptipactPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NptipactPeer::doUpdate($this, $con);

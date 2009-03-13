@@ -189,6 +189,18 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 
 
 	
+	protected $codalt;
+
+
+	
+	protected $coddis;
+
+
+	
+	protected $valadis;
+
+
+	
 	protected $id;
 
 	
@@ -197,996 +209,1116 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodinm()
-	{
+    return trim($this->codact);
 
-		return $this->codinm; 		
-	}
-	
-	public function getDesinm()
-	{
+  }
+  
+  public function getCodinm()
+  {
 
-		return $this->desinm; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->codinm);
 
-		return $this->codpro; 		
-	}
-	
-	public function getOrdcom()
-	{
+  }
+  
+  public function getDesinm()
+  {
 
-		return $this->ordcom; 		
-	}
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    return trim($this->desinm);
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodpro()
+  {
 
-	
-	public function getFeccom($format = 'Y-m-d')
-	{
+    return trim($this->codpro);
 
-		if ($this->feccom === null || $this->feccom === '') {
-			return null;
-		} elseif (!is_int($this->feccom)) {
-						$ts = strtotime($this->feccom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
-			}
-		} else {
-			$ts = $this->feccom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getOrdcom()
+  {
 
-	
-	public function getFecdep($format = 'Y-m-d')
-	{
+    return trim($this->ordcom);
 
-		if ($this->fecdep === null || $this->fecdep === '') {
-			return null;
-		} elseif (!is_int($this->fecdep)) {
-						$ts = strtotime($this->fecdep);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdep] as date/time value: " . var_export($this->fecdep, true));
-			}
-		} else {
-			$ts = $this->fecdep;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-	
-	public function getFecaju($format = 'Y-m-d')
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecaju === null || $this->fecaju === '') {
-			return null;
-		} elseif (!is_int($this->fecaju)) {
-						$ts = strtotime($this->fecaju);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
-			}
-		} else {
-			$ts = $this->fecaju;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFeccom($format = 'Y-m-d')
+  {
 
-	
-	public function getFecact($format = 'Y-m-d')
-	{
+    if ($this->feccom === null || $this->feccom === '') {
+      return null;
+    } elseif (!is_int($this->feccom)) {
+            $ts = adodb_strtotime($this->feccom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
+      }
+    } else {
+      $ts = $this->feccom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecact === null || $this->fecact === '') {
-			return null;
-		} elseif (!is_int($this->fecact)) {
-						$ts = strtotime($this->fecact);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecact] as date/time value: " . var_export($this->fecact, true));
-			}
-		} else {
-			$ts = $this->fecact;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecdep($format = 'Y-m-d')
+  {
 
-	
-	public function getFecexp($format = 'Y-m-d')
-	{
+    if ($this->fecdep === null || $this->fecdep === '') {
+      return null;
+    } elseif (!is_int($this->fecdep)) {
+            $ts = adodb_strtotime($this->fecdep);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdep] as date/time value: " . var_export($this->fecdep, true));
+      }
+    } else {
+      $ts = $this->fecdep;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecexp === null || $this->fecexp === '') {
-			return null;
-		} elseif (!is_int($this->fecexp)) {
-						$ts = strtotime($this->fecexp);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
-			}
-		} else {
-			$ts = $this->fecexp;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecaju($format = 'Y-m-d')
+  {
 
-	
-	public function getOrdrcp()
-	{
+    if ($this->fecaju === null || $this->fecaju === '') {
+      return null;
+    } elseif (!is_int($this->fecaju)) {
+            $ts = adodb_strtotime($this->fecaju);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
+      }
+    } else {
+      $ts = $this->fecaju;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->ordrcp; 		
-	}
-	
-	public function getFotinm()
-	{
+  
+  public function getFecact($format = 'Y-m-d')
+  {
 
-		return $this->fotinm; 		
-	}
-	
-	public function getDeninm()
-	{
+    if ($this->fecact === null || $this->fecact === '') {
+      return null;
+    } elseif (!is_int($this->fecact)) {
+            $ts = adodb_strtotime($this->fecact);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecact] as date/time value: " . var_export($this->fecact, true));
+      }
+    } else {
+      $ts = $this->fecact;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->deninm; 		
-	}
-	
-	public function getNroexp()
-	{
+  
+  public function getFecexp($format = 'Y-m-d')
+  {
 
-		return $this->nroexp; 		
-	}
-	
-	public function getDetinm()
-	{
+    if ($this->fecexp === null || $this->fecexp === '') {
+      return null;
+    } elseif (!is_int($this->fecexp)) {
+            $ts = adodb_strtotime($this->fecexp);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
+      }
+    } else {
+      $ts = $this->fecexp;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->detinm; 		
-	}
-	
-	public function getCodubi()
-	{
+  
+  public function getOrdrcp()
+  {
 
-		return $this->codubi; 		
-	}
-	
-	public function getAvaact()
-	{
+    return trim($this->ordrcp);
 
-		return number_format($this->avaact,2,',','.');
-		
-	}
-	
-	public function getClafun()
-	{
+  }
+  
+  public function getFotinm()
+  {
 
-		return $this->clafun; 		
-	}
-	
-	public function getAvacom()
-	{
+    return trim($this->fotinm);
 
-		return number_format($this->avacom,2,',','.');
-		
-	}
-	
-	public function getEdoleg()
-	{
+  }
+  
+  public function getDeninm()
+  {
 
-		return $this->edoleg; 		
-	}
-	
-	public function getViduti()
-	{
+    return trim($this->deninm);
 
-		return $this->viduti; 		
-	}
-	
-	public function getObsinm()
-	{
+  }
+  
+  public function getNroexp()
+  {
 
-		return $this->obsinm; 		
-	}
-	
-	public function getLinnor()
-	{
+    return trim($this->nroexp);
 
-		return $this->linnor; 		
-	}
-	
-	public function getLinsur()
-	{
+  }
+  
+  public function getDetinm()
+  {
 
-		return $this->linsur; 		
-	}
-	
-	public function getLinest()
-	{
+    return trim($this->detinm);
 
-		return $this->linest; 		
-	}
-	
-	public function getLinoes()
-	{
+  }
+  
+  public function getCodubi()
+  {
 
-		return $this->linoes; 		
-	}
-	
-	public function getAreter()
-	{
+    return trim($this->codubi);
 
-		return $this->areter; 		
-	}
-	
-	public function getArecub()
-	{
+  }
+  
+  public function getAvaact($val=false)
+  {
 
-		return $this->arecub; 		
-	}
-	
-	public function getArecon()
-	{
+    if($val) return number_format($this->avaact,2,',','.');
+    else return $this->avaact;
 
-		return $this->arecon; 		
-	}
-	
-	public function getAreotr()
-	{
+  }
+  
+  public function getClafun()
+  {
 
-		return $this->areotr; 		
-	}
-	
-	public function getAretot()
-	{
+    return trim($this->clafun);
 
-		return $this->aretot; 		
-	}
-	
-	public function getEdoinm()
-	{
+  }
+  
+  public function getAvacom($val=false)
+  {
 
-		return $this->edoinm; 		
-	}
-	
-	public function getMuninm()
-	{
+    if($val) return number_format($this->avacom,2,',','.');
+    else return $this->avacom;
 
-		return $this->muninm; 		
-	}
-	
-	public function getDepinm()
-	{
+  }
+  
+  public function getEdoleg()
+  {
 
-		return $this->depinm; 		
-	}
-	
-	public function getDirinm()
-	{
+    return trim($this->edoleg);
 
-		return $this->dirinm; 		
-	}
-	
-	public function getMesdep()
-	{
+  }
+  
+  public function getViduti()
+  {
 
-		return number_format($this->mesdep,2,',','.');
-		
-	}
-	
-	public function getValini()
-	{
+    return trim($this->viduti);
 
-		return number_format($this->valini,2,',','.');
-		
-	}
-	
-	public function getValres()
-	{
+  }
+  
+  public function getObsinm()
+  {
 
-		return number_format($this->valres,2,',','.');
-		
-	}
-	
-	public function getVallib()
-	{
+    return trim($this->obsinm);
 
-		return number_format($this->vallib,2,',','.');
-		
-	}
-	
-	public function getValrex()
-	{
+  }
+  
+  public function getLinnor()
+  {
 
-		return number_format($this->valrex,2,',','.');
-		
-	}
-	
-	public function getCosrep()
-	{
+    return trim($this->linnor);
 
-		return number_format($this->cosrep,2,',','.');
-		
-	}
-	
-	public function getDepmen()
-	{
+  }
+  
+  public function getLinsur()
+  {
 
-		return number_format($this->depmen,2,',','.');
-		
-	}
-	
-	public function getDepacu()
-	{
+    return trim($this->linsur);
 
-		return number_format($this->depacu,2,',','.');
-		
-	}
-	
-	public function getStainm()
-	{
+  }
+  
+  public function getLinest()
+  {
 
-		return $this->stainm; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->linest);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getLinoes()
+  {
+
+    return trim($this->linoes);
+
+  }
+  
+  public function getAreter()
+  {
+
+    return trim($this->areter);
+
+  }
+  
+  public function getArecub()
+  {
+
+    return trim($this->arecub);
+
+  }
+  
+  public function getArecon()
+  {
+
+    return trim($this->arecon);
+
+  }
+  
+  public function getAreotr()
+  {
+
+    return trim($this->areotr);
+
+  }
+  
+  public function getAretot()
+  {
+
+    return trim($this->aretot);
+
+  }
+  
+  public function getEdoinm()
+  {
+
+    return trim($this->edoinm);
+
+  }
+  
+  public function getMuninm()
+  {
+
+    return trim($this->muninm);
+
+  }
+  
+  public function getDepinm()
+  {
+
+    return trim($this->depinm);
+
+  }
+  
+  public function getDirinm()
+  {
+
+    return trim($this->dirinm);
+
+  }
+  
+  public function getMesdep($val=false)
+  {
+
+    if($val) return number_format($this->mesdep,2,',','.');
+    else return $this->mesdep;
+
+  }
+  
+  public function getValini($val=false)
+  {
+
+    if($val) return number_format($this->valini,2,',','.');
+    else return $this->valini;
+
+  }
+  
+  public function getValres($val=false)
+  {
+
+    if($val) return number_format($this->valres,2,',','.');
+    else return $this->valres;
+
+  }
+  
+  public function getVallib($val=false)
+  {
+
+    if($val) return number_format($this->vallib,2,',','.');
+    else return $this->vallib;
+
+  }
+  
+  public function getValrex($val=false)
+  {
+
+    if($val) return number_format($this->valrex,2,',','.');
+    else return $this->valrex;
+
+  }
+  
+  public function getCosrep($val=false)
+  {
+
+    if($val) return number_format($this->cosrep,2,',','.');
+    else return $this->cosrep;
+
+  }
+  
+  public function getDepmen($val=false)
+  {
+
+    if($val) return number_format($this->depmen,2,',','.');
+    else return $this->depmen;
+
+  }
+  
+  public function getDepacu($val=false)
+  {
+
+    if($val) return number_format($this->depacu,2,',','.');
+    else return $this->depacu;
+
+  }
+  
+  public function getStainm()
+  {
+
+    return trim($this->stainm);
+
+  }
+  
+  public function getCodalt()
+  {
+
+    return trim($this->codalt);
+
+  }
+  
+  public function getCoddis()
+  {
+
+    return trim($this->coddis);
+
+  }
+  
+  public function getValadis($val=false)
+  {
+
+    if($val) return number_format($this->valadis,2,',','.');
+    else return $this->valadis;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BnreginmPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BnreginmPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodinm($v)
 	{
 
-		if ($this->codinm !== $v) {
-			$this->codinm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::CODINM;
-		}
-
+    if ($this->codinm !== $v) {
+        $this->codinm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::CODINM;
+      }
+  
 	} 
 	
 	public function setDesinm($v)
 	{
 
-		if ($this->desinm !== $v) {
-			$this->desinm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::DESINM;
-		}
-
+    if ($this->desinm !== $v) {
+        $this->desinm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::DESINM;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = BnreginmPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = BnreginmPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setOrdcom($v)
 	{
 
-		if ($this->ordcom !== $v) {
-			$this->ordcom = $v;
-			$this->modifiedColumns[] = BnreginmPeer::ORDCOM;
-		}
-
+    if ($this->ordcom !== $v) {
+        $this->ordcom = $v;
+        $this->modifiedColumns[] = BnreginmPeer::ORDCOM;
+      }
+  
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = BnreginmPeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = BnreginmPeer::FECREG;
+    }
 
 	} 
 	
 	public function setFeccom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccom !== $ts) {
-			$this->feccom = $ts;
-			$this->modifiedColumns[] = BnreginmPeer::FECCOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccom !== $ts) {
+      $this->feccom = $ts;
+      $this->modifiedColumns[] = BnreginmPeer::FECCOM;
+    }
 
 	} 
 	
 	public function setFecdep($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdep] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdep !== $ts) {
-			$this->fecdep = $ts;
-			$this->modifiedColumns[] = BnreginmPeer::FECDEP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdep] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdep !== $ts) {
+      $this->fecdep = $ts;
+      $this->modifiedColumns[] = BnreginmPeer::FECDEP;
+    }
 
 	} 
 	
 	public function setFecaju($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecaju !== $ts) {
-			$this->fecaju = $ts;
-			$this->modifiedColumns[] = BnreginmPeer::FECAJU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecaju !== $ts) {
+      $this->fecaju = $ts;
+      $this->modifiedColumns[] = BnreginmPeer::FECAJU;
+    }
 
 	} 
 	
 	public function setFecact($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecact] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecact !== $ts) {
-			$this->fecact = $ts;
-			$this->modifiedColumns[] = BnreginmPeer::FECACT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecact] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecact !== $ts) {
+      $this->fecact = $ts;
+      $this->modifiedColumns[] = BnreginmPeer::FECACT;
+    }
 
 	} 
 	
 	public function setFecexp($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecexp !== $ts) {
-			$this->fecexp = $ts;
-			$this->modifiedColumns[] = BnreginmPeer::FECEXP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecexp !== $ts) {
+      $this->fecexp = $ts;
+      $this->modifiedColumns[] = BnreginmPeer::FECEXP;
+    }
 
 	} 
 	
 	public function setOrdrcp($v)
 	{
 
-		if ($this->ordrcp !== $v) {
-			$this->ordrcp = $v;
-			$this->modifiedColumns[] = BnreginmPeer::ORDRCP;
-		}
-
+    if ($this->ordrcp !== $v) {
+        $this->ordrcp = $v;
+        $this->modifiedColumns[] = BnreginmPeer::ORDRCP;
+      }
+  
 	} 
 	
 	public function setFotinm($v)
 	{
 
-		if ($this->fotinm !== $v) {
-			$this->fotinm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::FOTINM;
-		}
-
+    if ($this->fotinm !== $v) {
+        $this->fotinm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::FOTINM;
+      }
+  
 	} 
 	
 	public function setDeninm($v)
 	{
 
-		if ($this->deninm !== $v) {
-			$this->deninm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::DENINM;
-		}
-
+    if ($this->deninm !== $v) {
+        $this->deninm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::DENINM;
+      }
+  
 	} 
 	
 	public function setNroexp($v)
 	{
 
-		if ($this->nroexp !== $v) {
-			$this->nroexp = $v;
-			$this->modifiedColumns[] = BnreginmPeer::NROEXP;
-		}
-
+    if ($this->nroexp !== $v) {
+        $this->nroexp = $v;
+        $this->modifiedColumns[] = BnreginmPeer::NROEXP;
+      }
+  
 	} 
 	
 	public function setDetinm($v)
 	{
 
-		if ($this->detinm !== $v) {
-			$this->detinm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::DETINM;
-		}
-
+    if ($this->detinm !== $v) {
+        $this->detinm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::DETINM;
+      }
+  
 	} 
 	
 	public function setCodubi($v)
 	{
 
-		if ($this->codubi !== $v) {
-			$this->codubi = $v;
-			$this->modifiedColumns[] = BnreginmPeer::CODUBI;
-		}
-
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = BnreginmPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setAvaact($v)
 	{
 
-		if ($this->avaact !== $v) {
-			$this->avaact = $v;
-			$this->modifiedColumns[] = BnreginmPeer::AVAACT;
-		}
-
+    if ($this->avaact !== $v) {
+        $this->avaact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::AVAACT;
+      }
+  
 	} 
 	
 	public function setClafun($v)
 	{
 
-		if ($this->clafun !== $v) {
-			$this->clafun = $v;
-			$this->modifiedColumns[] = BnreginmPeer::CLAFUN;
-		}
-
+    if ($this->clafun !== $v) {
+        $this->clafun = $v;
+        $this->modifiedColumns[] = BnreginmPeer::CLAFUN;
+      }
+  
 	} 
 	
 	public function setAvacom($v)
 	{
 
-		if ($this->avacom !== $v) {
-			$this->avacom = $v;
-			$this->modifiedColumns[] = BnreginmPeer::AVACOM;
-		}
-
+    if ($this->avacom !== $v) {
+        $this->avacom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::AVACOM;
+      }
+  
 	} 
 	
 	public function setEdoleg($v)
 	{
 
-		if ($this->edoleg !== $v) {
-			$this->edoleg = $v;
-			$this->modifiedColumns[] = BnreginmPeer::EDOLEG;
-		}
-
+    if ($this->edoleg !== $v) {
+        $this->edoleg = $v;
+        $this->modifiedColumns[] = BnreginmPeer::EDOLEG;
+      }
+  
 	} 
 	
 	public function setViduti($v)
 	{
 
-		if ($this->viduti !== $v) {
-			$this->viduti = $v;
-			$this->modifiedColumns[] = BnreginmPeer::VIDUTI;
-		}
-
+    if ($this->viduti !== $v) {
+        $this->viduti = $v;
+        $this->modifiedColumns[] = BnreginmPeer::VIDUTI;
+      }
+  
 	} 
 	
 	public function setObsinm($v)
 	{
 
-		if ($this->obsinm !== $v) {
-			$this->obsinm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::OBSINM;
-		}
-
+    if ($this->obsinm !== $v) {
+        $this->obsinm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::OBSINM;
+      }
+  
 	} 
 	
 	public function setLinnor($v)
 	{
 
-		if ($this->linnor !== $v) {
-			$this->linnor = $v;
-			$this->modifiedColumns[] = BnreginmPeer::LINNOR;
-		}
-
+    if ($this->linnor !== $v) {
+        $this->linnor = $v;
+        $this->modifiedColumns[] = BnreginmPeer::LINNOR;
+      }
+  
 	} 
 	
 	public function setLinsur($v)
 	{
 
-		if ($this->linsur !== $v) {
-			$this->linsur = $v;
-			$this->modifiedColumns[] = BnreginmPeer::LINSUR;
-		}
-
+    if ($this->linsur !== $v) {
+        $this->linsur = $v;
+        $this->modifiedColumns[] = BnreginmPeer::LINSUR;
+      }
+  
 	} 
 	
 	public function setLinest($v)
 	{
 
-		if ($this->linest !== $v) {
-			$this->linest = $v;
-			$this->modifiedColumns[] = BnreginmPeer::LINEST;
-		}
-
+    if ($this->linest !== $v) {
+        $this->linest = $v;
+        $this->modifiedColumns[] = BnreginmPeer::LINEST;
+      }
+  
 	} 
 	
 	public function setLinoes($v)
 	{
 
-		if ($this->linoes !== $v) {
-			$this->linoes = $v;
-			$this->modifiedColumns[] = BnreginmPeer::LINOES;
-		}
-
+    if ($this->linoes !== $v) {
+        $this->linoes = $v;
+        $this->modifiedColumns[] = BnreginmPeer::LINOES;
+      }
+  
 	} 
 	
 	public function setAreter($v)
 	{
 
-		if ($this->areter !== $v) {
-			$this->areter = $v;
-			$this->modifiedColumns[] = BnreginmPeer::ARETER;
-		}
-
+    if ($this->areter !== $v) {
+        $this->areter = $v;
+        $this->modifiedColumns[] = BnreginmPeer::ARETER;
+      }
+  
 	} 
 	
 	public function setArecub($v)
 	{
 
-		if ($this->arecub !== $v) {
-			$this->arecub = $v;
-			$this->modifiedColumns[] = BnreginmPeer::ARECUB;
-		}
-
+    if ($this->arecub !== $v) {
+        $this->arecub = $v;
+        $this->modifiedColumns[] = BnreginmPeer::ARECUB;
+      }
+  
 	} 
 	
 	public function setArecon($v)
 	{
 
-		if ($this->arecon !== $v) {
-			$this->arecon = $v;
-			$this->modifiedColumns[] = BnreginmPeer::ARECON;
-		}
-
+    if ($this->arecon !== $v) {
+        $this->arecon = $v;
+        $this->modifiedColumns[] = BnreginmPeer::ARECON;
+      }
+  
 	} 
 	
 	public function setAreotr($v)
 	{
 
-		if ($this->areotr !== $v) {
-			$this->areotr = $v;
-			$this->modifiedColumns[] = BnreginmPeer::AREOTR;
-		}
-
+    if ($this->areotr !== $v) {
+        $this->areotr = $v;
+        $this->modifiedColumns[] = BnreginmPeer::AREOTR;
+      }
+  
 	} 
 	
 	public function setAretot($v)
 	{
 
-		if ($this->aretot !== $v) {
-			$this->aretot = $v;
-			$this->modifiedColumns[] = BnreginmPeer::ARETOT;
-		}
-
+    if ($this->aretot !== $v) {
+        $this->aretot = $v;
+        $this->modifiedColumns[] = BnreginmPeer::ARETOT;
+      }
+  
 	} 
 	
 	public function setEdoinm($v)
 	{
 
-		if ($this->edoinm !== $v) {
-			$this->edoinm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::EDOINM;
-		}
-
+    if ($this->edoinm !== $v) {
+        $this->edoinm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::EDOINM;
+      }
+  
 	} 
 	
 	public function setMuninm($v)
 	{
 
-		if ($this->muninm !== $v) {
-			$this->muninm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::MUNINM;
-		}
-
+    if ($this->muninm !== $v) {
+        $this->muninm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::MUNINM;
+      }
+  
 	} 
 	
 	public function setDepinm($v)
 	{
 
-		if ($this->depinm !== $v) {
-			$this->depinm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::DEPINM;
-		}
-
+    if ($this->depinm !== $v) {
+        $this->depinm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::DEPINM;
+      }
+  
 	} 
 	
 	public function setDirinm($v)
 	{
 
-		if ($this->dirinm !== $v) {
-			$this->dirinm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::DIRINM;
-		}
-
+    if ($this->dirinm !== $v) {
+        $this->dirinm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::DIRINM;
+      }
+  
 	} 
 	
 	public function setMesdep($v)
 	{
 
-		if ($this->mesdep !== $v) {
-			$this->mesdep = $v;
-			$this->modifiedColumns[] = BnreginmPeer::MESDEP;
-		}
-
+    if ($this->mesdep !== $v) {
+        $this->mesdep = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::MESDEP;
+      }
+  
 	} 
 	
 	public function setValini($v)
 	{
 
-		if ($this->valini !== $v) {
-			$this->valini = $v;
-			$this->modifiedColumns[] = BnreginmPeer::VALINI;
-		}
-
+    if ($this->valini !== $v) {
+        $this->valini = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::VALINI;
+      }
+  
 	} 
 	
 	public function setValres($v)
 	{
 
-		if ($this->valres !== $v) {
-			$this->valres = $v;
-			$this->modifiedColumns[] = BnreginmPeer::VALRES;
-		}
-
+    if ($this->valres !== $v) {
+        $this->valres = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::VALRES;
+      }
+  
 	} 
 	
 	public function setVallib($v)
 	{
 
-		if ($this->vallib !== $v) {
-			$this->vallib = $v;
-			$this->modifiedColumns[] = BnreginmPeer::VALLIB;
-		}
-
+    if ($this->vallib !== $v) {
+        $this->vallib = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::VALLIB;
+      }
+  
 	} 
 	
 	public function setValrex($v)
 	{
 
-		if ($this->valrex !== $v) {
-			$this->valrex = $v;
-			$this->modifiedColumns[] = BnreginmPeer::VALREX;
-		}
-
+    if ($this->valrex !== $v) {
+        $this->valrex = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::VALREX;
+      }
+  
 	} 
 	
 	public function setCosrep($v)
 	{
 
-		if ($this->cosrep !== $v) {
-			$this->cosrep = $v;
-			$this->modifiedColumns[] = BnreginmPeer::COSREP;
-		}
-
+    if ($this->cosrep !== $v) {
+        $this->cosrep = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::COSREP;
+      }
+  
 	} 
 	
 	public function setDepmen($v)
 	{
 
-		if ($this->depmen !== $v) {
-			$this->depmen = $v;
-			$this->modifiedColumns[] = BnreginmPeer::DEPMEN;
-		}
-
+    if ($this->depmen !== $v) {
+        $this->depmen = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::DEPMEN;
+      }
+  
 	} 
 	
 	public function setDepacu($v)
 	{
 
-		if ($this->depacu !== $v) {
-			$this->depacu = $v;
-			$this->modifiedColumns[] = BnreginmPeer::DEPACU;
-		}
-
+    if ($this->depacu !== $v) {
+        $this->depacu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::DEPACU;
+      }
+  
 	} 
 	
 	public function setStainm($v)
 	{
 
-		if ($this->stainm !== $v) {
-			$this->stainm = $v;
-			$this->modifiedColumns[] = BnreginmPeer::STAINM;
-		}
+    if ($this->stainm !== $v) {
+        $this->stainm = $v;
+        $this->modifiedColumns[] = BnreginmPeer::STAINM;
+      }
+  
+	} 
+	
+	public function setCodalt($v)
+	{
 
+    if ($this->codalt !== $v) {
+        $this->codalt = $v;
+        $this->modifiedColumns[] = BnreginmPeer::CODALT;
+      }
+  
+	} 
+	
+	public function setCoddis($v)
+	{
+
+    if ($this->coddis !== $v) {
+        $this->coddis = $v;
+        $this->modifiedColumns[] = BnreginmPeer::CODDIS;
+      }
+  
+	} 
+	
+	public function setValadis($v)
+	{
+
+    if ($this->valadis !== $v) {
+        $this->valadis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnreginmPeer::VALADIS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnreginmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnreginmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->codinm = $rs->getString($startcol + 1);
+      $this->codinm = $rs->getString($startcol + 1);
 
-			$this->desinm = $rs->getString($startcol + 2);
+      $this->desinm = $rs->getString($startcol + 2);
 
-			$this->codpro = $rs->getString($startcol + 3);
+      $this->codpro = $rs->getString($startcol + 3);
 
-			$this->ordcom = $rs->getString($startcol + 4);
+      $this->ordcom = $rs->getString($startcol + 4);
 
-			$this->fecreg = $rs->getDate($startcol + 5, null);
+      $this->fecreg = $rs->getDate($startcol + 5, null);
 
-			$this->feccom = $rs->getDate($startcol + 6, null);
+      $this->feccom = $rs->getDate($startcol + 6, null);
 
-			$this->fecdep = $rs->getDate($startcol + 7, null);
+      $this->fecdep = $rs->getDate($startcol + 7, null);
 
-			$this->fecaju = $rs->getDate($startcol + 8, null);
+      $this->fecaju = $rs->getDate($startcol + 8, null);
 
-			$this->fecact = $rs->getDate($startcol + 9, null);
+      $this->fecact = $rs->getDate($startcol + 9, null);
 
-			$this->fecexp = $rs->getDate($startcol + 10, null);
+      $this->fecexp = $rs->getDate($startcol + 10, null);
 
-			$this->ordrcp = $rs->getString($startcol + 11);
+      $this->ordrcp = $rs->getString($startcol + 11);
 
-			$this->fotinm = $rs->getString($startcol + 12);
+      $this->fotinm = $rs->getString($startcol + 12);
 
-			$this->deninm = $rs->getString($startcol + 13);
+      $this->deninm = $rs->getString($startcol + 13);
 
-			$this->nroexp = $rs->getString($startcol + 14);
+      $this->nroexp = $rs->getString($startcol + 14);
 
-			$this->detinm = $rs->getString($startcol + 15);
+      $this->detinm = $rs->getString($startcol + 15);
 
-			$this->codubi = $rs->getString($startcol + 16);
+      $this->codubi = $rs->getString($startcol + 16);
 
-			$this->avaact = $rs->getFloat($startcol + 17);
+      $this->avaact = $rs->getFloat($startcol + 17);
 
-			$this->clafun = $rs->getString($startcol + 18);
+      $this->clafun = $rs->getString($startcol + 18);
 
-			$this->avacom = $rs->getFloat($startcol + 19);
+      $this->avacom = $rs->getFloat($startcol + 19);
 
-			$this->edoleg = $rs->getString($startcol + 20);
+      $this->edoleg = $rs->getString($startcol + 20);
 
-			$this->viduti = $rs->getString($startcol + 21);
+      $this->viduti = $rs->getString($startcol + 21);
 
-			$this->obsinm = $rs->getString($startcol + 22);
+      $this->obsinm = $rs->getString($startcol + 22);
 
-			$this->linnor = $rs->getString($startcol + 23);
+      $this->linnor = $rs->getString($startcol + 23);
 
-			$this->linsur = $rs->getString($startcol + 24);
+      $this->linsur = $rs->getString($startcol + 24);
 
-			$this->linest = $rs->getString($startcol + 25);
+      $this->linest = $rs->getString($startcol + 25);
 
-			$this->linoes = $rs->getString($startcol + 26);
+      $this->linoes = $rs->getString($startcol + 26);
 
-			$this->areter = $rs->getString($startcol + 27);
+      $this->areter = $rs->getString($startcol + 27);
 
-			$this->arecub = $rs->getString($startcol + 28);
+      $this->arecub = $rs->getString($startcol + 28);
 
-			$this->arecon = $rs->getString($startcol + 29);
+      $this->arecon = $rs->getString($startcol + 29);
 
-			$this->areotr = $rs->getString($startcol + 30);
+      $this->areotr = $rs->getString($startcol + 30);
 
-			$this->aretot = $rs->getString($startcol + 31);
+      $this->aretot = $rs->getString($startcol + 31);
 
-			$this->edoinm = $rs->getString($startcol + 32);
+      $this->edoinm = $rs->getString($startcol + 32);
 
-			$this->muninm = $rs->getString($startcol + 33);
+      $this->muninm = $rs->getString($startcol + 33);
 
-			$this->depinm = $rs->getString($startcol + 34);
+      $this->depinm = $rs->getString($startcol + 34);
 
-			$this->dirinm = $rs->getString($startcol + 35);
+      $this->dirinm = $rs->getString($startcol + 35);
 
-			$this->mesdep = $rs->getFloat($startcol + 36);
+      $this->mesdep = $rs->getFloat($startcol + 36);
 
-			$this->valini = $rs->getFloat($startcol + 37);
+      $this->valini = $rs->getFloat($startcol + 37);
 
-			$this->valres = $rs->getFloat($startcol + 38);
+      $this->valres = $rs->getFloat($startcol + 38);
 
-			$this->vallib = $rs->getFloat($startcol + 39);
+      $this->vallib = $rs->getFloat($startcol + 39);
 
-			$this->valrex = $rs->getFloat($startcol + 40);
+      $this->valrex = $rs->getFloat($startcol + 40);
 
-			$this->cosrep = $rs->getFloat($startcol + 41);
+      $this->cosrep = $rs->getFloat($startcol + 41);
 
-			$this->depmen = $rs->getFloat($startcol + 42);
+      $this->depmen = $rs->getFloat($startcol + 42);
 
-			$this->depacu = $rs->getFloat($startcol + 43);
+      $this->depacu = $rs->getFloat($startcol + 43);
 
-			$this->stainm = $rs->getString($startcol + 44);
+      $this->stainm = $rs->getString($startcol + 44);
 
-			$this->id = $rs->getInt($startcol + 45);
+      $this->codalt = $rs->getString($startcol + 45);
 
-			$this->resetModified();
+      $this->coddis = $rs->getString($startcol + 46);
 
-			$this->setNew(false);
+      $this->valadis = $rs->getFloat($startcol + 47);
 
-						return $startcol + 46; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnreginm object", $e);
-		}
-	}
+      $this->id = $rs->getInt($startcol + 48);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 49; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnreginm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -1243,6 +1375,7 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BnreginmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnreginmPeer::doUpdate($this, $con);
@@ -1444,6 +1577,15 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 				return $this->getStainm();
 				break;
 			case 45:
+				return $this->getCodalt();
+				break;
+			case 46:
+				return $this->getCoddis();
+				break;
+			case 47:
+				return $this->getValadis();
+				break;
+			case 48:
 				return $this->getId();
 				break;
 			default:
@@ -1501,7 +1643,10 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 			$keys[42] => $this->getDepmen(),
 			$keys[43] => $this->getDepacu(),
 			$keys[44] => $this->getStainm(),
-			$keys[45] => $this->getId(),
+			$keys[45] => $this->getCodalt(),
+			$keys[46] => $this->getCoddis(),
+			$keys[47] => $this->getValadis(),
+			$keys[48] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1653,6 +1798,15 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 				$this->setStainm($value);
 				break;
 			case 45:
+				$this->setCodalt($value);
+				break;
+			case 46:
+				$this->setCoddis($value);
+				break;
+			case 47:
+				$this->setValadis($value);
+				break;
+			case 48:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1707,7 +1861,10 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[42], $arr)) $this->setDepmen($arr[$keys[42]]);
 		if (array_key_exists($keys[43], $arr)) $this->setDepacu($arr[$keys[43]]);
 		if (array_key_exists($keys[44], $arr)) $this->setStainm($arr[$keys[44]]);
-		if (array_key_exists($keys[45], $arr)) $this->setId($arr[$keys[45]]);
+		if (array_key_exists($keys[45], $arr)) $this->setCodalt($arr[$keys[45]]);
+		if (array_key_exists($keys[46], $arr)) $this->setCoddis($arr[$keys[46]]);
+		if (array_key_exists($keys[47], $arr)) $this->setValadis($arr[$keys[47]]);
+		if (array_key_exists($keys[48], $arr)) $this->setId($arr[$keys[48]]);
 	}
 
 	
@@ -1760,6 +1917,9 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(BnreginmPeer::DEPMEN)) $criteria->add(BnreginmPeer::DEPMEN, $this->depmen);
 		if ($this->isColumnModified(BnreginmPeer::DEPACU)) $criteria->add(BnreginmPeer::DEPACU, $this->depacu);
 		if ($this->isColumnModified(BnreginmPeer::STAINM)) $criteria->add(BnreginmPeer::STAINM, $this->stainm);
+		if ($this->isColumnModified(BnreginmPeer::CODALT)) $criteria->add(BnreginmPeer::CODALT, $this->codalt);
+		if ($this->isColumnModified(BnreginmPeer::CODDIS)) $criteria->add(BnreginmPeer::CODDIS, $this->coddis);
+		if ($this->isColumnModified(BnreginmPeer::VALADIS)) $criteria->add(BnreginmPeer::VALADIS, $this->valadis);
 		if ($this->isColumnModified(BnreginmPeer::ID)) $criteria->add(BnreginmPeer::ID, $this->id);
 
 		return $criteria;
@@ -1880,6 +2040,12 @@ abstract class BaseBnreginm extends BaseObject  implements Persistent {
 		$copyObj->setDepacu($this->depacu);
 
 		$copyObj->setStainm($this->stainm);
+
+		$copyObj->setCodalt($this->codalt);
+
+		$copyObj->setCoddis($this->coddis);
+
+		$copyObj->setValadis($this->valadis);
 
 
 		$copyObj->setNew(true);

@@ -13,7 +13,7 @@ abstract class BaseCaartsolPeer {
 	const CLASS_DEFAULT = 'lib.model.Caartsol';
 
 	
-	const NUM_COLUMNS = 14;
+	const NUM_COLUMNS = 15;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseCaartsolPeer {
 
 	
 	const CODART = 'caartsol.CODART';
+
+	
+	const DESART = 'caartsol.DESART';
 
 	
 	const CODCAT = 'caartsol.CODCAT';
@@ -67,18 +70,18 @@ abstract class BaseCaartsolPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Codart', 'Codcat', 'Canreq', 'Canrec', 'Montot', 'Costo', 'Monrgo', 'Canord', 'Mondes', 'Relart', 'Unimed', 'Codpar', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaartsolPeer::REQART, CaartsolPeer::CODART, CaartsolPeer::CODCAT, CaartsolPeer::CANREQ, CaartsolPeer::CANREC, CaartsolPeer::MONTOT, CaartsolPeer::COSTO, CaartsolPeer::MONRGO, CaartsolPeer::CANORD, CaartsolPeer::MONDES, CaartsolPeer::RELART, CaartsolPeer::UNIMED, CaartsolPeer::CODPAR, CaartsolPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart', 'codart', 'codcat', 'canreq', 'canrec', 'montot', 'costo', 'monrgo', 'canord', 'mondes', 'relart', 'unimed', 'codpar', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Codart', 'Desart', 'Codcat', 'Canreq', 'Canrec', 'Montot', 'Costo', 'Monrgo', 'Canord', 'Mondes', 'Relart', 'Unimed', 'Codpar', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaartsolPeer::REQART, CaartsolPeer::CODART, CaartsolPeer::DESART, CaartsolPeer::CODCAT, CaartsolPeer::CANREQ, CaartsolPeer::CANREC, CaartsolPeer::MONTOT, CaartsolPeer::COSTO, CaartsolPeer::MONRGO, CaartsolPeer::CANORD, CaartsolPeer::MONDES, CaartsolPeer::RELART, CaartsolPeer::UNIMED, CaartsolPeer::CODPAR, CaartsolPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart', 'codart', 'desart', 'codcat', 'canreq', 'canrec', 'montot', 'costo', 'monrgo', 'canord', 'mondes', 'relart', 'unimed', 'codpar', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Codart' => 1, 'Codcat' => 2, 'Canreq' => 3, 'Canrec' => 4, 'Montot' => 5, 'Costo' => 6, 'Monrgo' => 7, 'Canord' => 8, 'Mondes' => 9, 'Relart' => 10, 'Unimed' => 11, 'Codpar' => 12, 'Id' => 13, ),
-		BasePeer::TYPE_COLNAME => array (CaartsolPeer::REQART => 0, CaartsolPeer::CODART => 1, CaartsolPeer::CODCAT => 2, CaartsolPeer::CANREQ => 3, CaartsolPeer::CANREC => 4, CaartsolPeer::MONTOT => 5, CaartsolPeer::COSTO => 6, CaartsolPeer::MONRGO => 7, CaartsolPeer::CANORD => 8, CaartsolPeer::MONDES => 9, CaartsolPeer::RELART => 10, CaartsolPeer::UNIMED => 11, CaartsolPeer::CODPAR => 12, CaartsolPeer::ID => 13, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'codart' => 1, 'codcat' => 2, 'canreq' => 3, 'canrec' => 4, 'montot' => 5, 'costo' => 6, 'monrgo' => 7, 'canord' => 8, 'mondes' => 9, 'relart' => 10, 'unimed' => 11, 'codpar' => 12, 'id' => 13, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Codart' => 1, 'Desart' => 2, 'Codcat' => 3, 'Canreq' => 4, 'Canrec' => 5, 'Montot' => 6, 'Costo' => 7, 'Monrgo' => 8, 'Canord' => 9, 'Mondes' => 10, 'Relart' => 11, 'Unimed' => 12, 'Codpar' => 13, 'Id' => 14, ),
+		BasePeer::TYPE_COLNAME => array (CaartsolPeer::REQART => 0, CaartsolPeer::CODART => 1, CaartsolPeer::DESART => 2, CaartsolPeer::CODCAT => 3, CaartsolPeer::CANREQ => 4, CaartsolPeer::CANREC => 5, CaartsolPeer::MONTOT => 6, CaartsolPeer::COSTO => 7, CaartsolPeer::MONRGO => 8, CaartsolPeer::CANORD => 9, CaartsolPeer::MONDES => 10, CaartsolPeer::RELART => 11, CaartsolPeer::UNIMED => 12, CaartsolPeer::CODPAR => 13, CaartsolPeer::ID => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'codart' => 1, 'desart' => 2, 'codcat' => 3, 'canreq' => 4, 'canrec' => 5, 'montot' => 6, 'costo' => 7, 'monrgo' => 8, 'canord' => 9, 'mondes' => 10, 'relart' => 11, 'unimed' => 12, 'codpar' => 13, 'id' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
@@ -135,6 +138,8 @@ abstract class BaseCaartsolPeer {
 		$criteria->addSelectColumn(CaartsolPeer::REQART);
 
 		$criteria->addSelectColumn(CaartsolPeer::CODART);
+
+		$criteria->addSelectColumn(CaartsolPeer::DESART);
 
 		$criteria->addSelectColumn(CaartsolPeer::CODCAT);
 
@@ -260,6 +265,7 @@ abstract class BaseCaartsolPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaartsolPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

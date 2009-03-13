@@ -4,31 +4,32 @@ generator:
     model_class:      Tscheemi
     theme:            default
     fields:
-      numche: { name: Numero de Cheque}
-      numcue: { name: Numero de Cuenta}
-      cedrif: { name: Beneficiario}
-      fecemi: { name: Fecha de Emision}
-      monche: { name: Monto}
-      status: { name: Estado del Cheque}
-      fecent: { name: Fecha de entrega}
-      obsent: { name: Observacion}
-      nomrec: { name: Recibido por} 
-      
-        
+      numche: { name: Nro. Cheque, params : maxlength=20 }
+      monche: { name: Monto }
+      fecemi: { name: Fecha de Emisión, params: date_format='dd/MM/yyyy'}
+      cedrif: { name: Beneficiario, params : maxlength=15 }
+      benefi: { name: benefi, params : maxlength=80 }
+      numcue: { name: Número de Cuenta, params : maxlength=20 }
+      nomcue: { name: nomcue, params : maxlength=60 }
+      orden:  { name: Orden de Pago, params : maxlength=8 }
+      numcom: { name: Número de Comprobante, params : maxlength=8 }
+      fecent: { name: Fecha Entrega, params: date_format='dd/MM/yyyy'}
+      obsent: { name: Observación, params : maxlength=80 }
+      nomrec: { name: Recibido por, params : maxlength=50 }
+      codent: { name: Entregado por, params : maxlength=50 }
+      status: { name: Estado del Cheque, params : maxlength=1 }
+
     list:
       title:          Cheques en Custodia
-      filters:        [numche, fecemi]
-      display:        [=numche, cedrif, nomrec, fecemi]
-      fields:
-        fecemi: { params: date_format='dd/MM/yy' }
-        fecent: { params: date_format='dd/MM/yy' }
-        object_actions:
+      filters:        [numche, numcue]
+      display:        [=numche, numcue, fecemi, cedrif, fecent]
+      sort:           numche
+      object_actions:
         _edit:        ~
-        _delete:      ~
-      max_per_page:   5
+      max_per_page:   10
     edit:
-      title:          Edicion de Cheques en Custodia
-      display:        [=numche, fecemi, monche, cedrif, numcue, status, fecent, obsent, nomrec]
-      fields:
-        fecemi: { params: date_format='dd/MM/yy' }
-        fecent: { params: date_format='dd/MM/yy' }       
+      title:          Edición Cheques en Custodia
+      display:        [numche, monche, fecemi, cedrif, benefi, numcue, nomcue, orden, numcom, fecent, obsent, nomrec, codent, status]
+      actions:
+        _list:        ~
+        _save:        ~

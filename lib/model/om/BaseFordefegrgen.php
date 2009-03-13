@@ -121,6 +121,18 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 
 
 	
+	protected $codpariva;
+
+
+	
+	protected $manivafor;
+
+
+	
+	protected $porivafor;
+
+
+	
 	protected $id;
 
 	
@@ -129,561 +141,670 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNivproacc()
-	{
+    return trim($this->codemp);
 
-		return number_format($this->nivproacc,2,',','.');
-		
-	}
-	
-	public function getDesproacc()
-	{
+  }
+  
+  public function getNivproacc($val=false)
+  {
 
-		return number_format($this->desproacc,2,',','.');
-		
-	}
-	
-	public function getHasproacc()
-	{
+    if($val) return number_format($this->nivproacc,2,',','.');
+    else return $this->nivproacc;
 
-		return number_format($this->hasproacc,2,',','.');
-		
-	}
-	
-	public function getLonproacc()
-	{
+  }
+  
+  public function getDesproacc($val=false)
+  {
 
-		return number_format($this->lonproacc,2,',','.');
-		
-	}
-	
-	public function getForproacc()
-	{
+    if($val) return number_format($this->desproacc,2,',','.');
+    else return $this->desproacc;
 
-		return $this->forproacc; 		
-	}
-	
-	public function getNivaccesp()
-	{
+  }
+  
+  public function getHasproacc($val=false)
+  {
 
-		return number_format($this->nivaccesp,2,',','.');
-		
-	}
-	
-	public function getDesaccesp()
-	{
+    if($val) return number_format($this->hasproacc,2,',','.');
+    else return $this->hasproacc;
 
-		return number_format($this->desaccesp,2,',','.');
-		
-	}
-	
-	public function getHasaccesp()
-	{
+  }
+  
+  public function getLonproacc($val=false)
+  {
 
-		return number_format($this->hasaccesp,2,',','.');
-		
-	}
-	
-	public function getLonaccesp()
-	{
+    if($val) return number_format($this->lonproacc,2,',','.');
+    else return $this->lonproacc;
 
-		return number_format($this->lonaccesp,2,',','.');
-		
-	}
-	
-	public function getForaccesp()
-	{
+  }
+  
+  public function getForproacc()
+  {
 
-		return $this->foraccesp; 		
-	}
-	
-	public function getNivsubaccesp()
-	{
+    return trim($this->forproacc);
 
-		return number_format($this->nivsubaccesp,2,',','.');
-		
-	}
-	
-	public function getDessubaccesp()
-	{
+  }
+  
+  public function getNivaccesp($val=false)
+  {
 
-		return number_format($this->dessubaccesp,2,',','.');
-		
-	}
-	
-	public function getHassubaccesp()
-	{
+    if($val) return number_format($this->nivaccesp,2,',','.');
+    else return $this->nivaccesp;
 
-		return number_format($this->hassubaccesp,2,',','.');
-		
-	}
-	
-	public function getLonsubaccesp()
-	{
+  }
+  
+  public function getDesaccesp($val=false)
+  {
 
-		return number_format($this->lonsubaccesp,2,',','.');
-		
-	}
-	
-	public function getForsubaccesp()
-	{
+    if($val) return number_format($this->desaccesp,2,',','.');
+    else return $this->desaccesp;
 
-		return $this->forsubaccesp; 		
-	}
-	
-	public function getNivuae()
-	{
+  }
+  
+  public function getHasaccesp($val=false)
+  {
 
-		return number_format($this->nivuae,2,',','.');
-		
-	}
-	
-	public function getDesuae()
-	{
+    if($val) return number_format($this->hasaccesp,2,',','.');
+    else return $this->hasaccesp;
 
-		return number_format($this->desuae,2,',','.');
-		
-	}
-	
-	public function getHasuae()
-	{
+  }
+  
+  public function getLonaccesp($val=false)
+  {
 
-		return number_format($this->hasuae,2,',','.');
-		
-	}
-	
-	public function getLonuae()
-	{
+    if($val) return number_format($this->lonaccesp,2,',','.');
+    else return $this->lonaccesp;
 
-		return number_format($this->lonuae,2,',','.');
-		
-	}
-	
-	public function getForuae()
-	{
+  }
+  
+  public function getForaccesp()
+  {
 
-		return $this->foruae; 		
-	}
-	
-	public function getCorest()
-	{
+    return trim($this->foraccesp);
 
-		return number_format($this->corest,2,',','.');
-		
-	}
-	
-	public function getCorsec()
-	{
+  }
+  
+  public function getNivsubaccesp($val=false)
+  {
 
-		return number_format($this->corsec,2,',','.');
-		
-	}
-	
-	public function getCorequ()
-	{
+    if($val) return number_format($this->nivsubaccesp,2,',','.');
+    else return $this->nivsubaccesp;
 
-		return number_format($this->corequ,2,',','.');
-		
-	}
-	
-	public function getDespar()
-	{
+  }
+  
+  public function getDessubaccesp($val=false)
+  {
 
-		return $this->despar; 		
-	}
-	
-	public function getHaspar()
-	{
+    if($val) return number_format($this->dessubaccesp,2,',','.');
+    else return $this->dessubaccesp;
 
-		return $this->haspar; 		
-	}
-	
-	public function getLonpar()
-	{
+  }
+  
+  public function getHassubaccesp($val=false)
+  {
 
-		return $this->lonpar; 		
-	}
-	
-	public function getForpar()
-	{
+    if($val) return number_format($this->hassubaccesp,2,',','.');
+    else return $this->hassubaccesp;
 
-		return $this->forpar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getLonsubaccesp($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->lonsubaccesp,2,',','.');
+    else return $this->lonsubaccesp;
+
+  }
+  
+  public function getForsubaccesp()
+  {
+
+    return trim($this->forsubaccesp);
+
+  }
+  
+  public function getNivuae($val=false)
+  {
+
+    if($val) return number_format($this->nivuae,2,',','.');
+    else return $this->nivuae;
+
+  }
+  
+  public function getDesuae($val=false)
+  {
+
+    if($val) return number_format($this->desuae,2,',','.');
+    else return $this->desuae;
+
+  }
+  
+  public function getHasuae($val=false)
+  {
+
+    if($val) return number_format($this->hasuae,2,',','.');
+    else return $this->hasuae;
+
+  }
+  
+  public function getLonuae($val=false)
+  {
+
+    if($val) return number_format($this->lonuae,2,',','.');
+    else return $this->lonuae;
+
+  }
+  
+  public function getForuae()
+  {
+
+    return trim($this->foruae);
+
+  }
+  
+  public function getCorest($val=false)
+  {
+
+    if($val) return number_format($this->corest,2,',','.');
+    else return $this->corest;
+
+  }
+  
+  public function getCorsec($val=false)
+  {
+
+    if($val) return number_format($this->corsec,2,',','.');
+    else return $this->corsec;
+
+  }
+  
+  public function getCorequ($val=false)
+  {
+
+    if($val) return number_format($this->corequ,2,',','.');
+    else return $this->corequ;
+
+  }
+  
+  public function getDespar()
+  {
+
+    return $this->despar;
+
+  }
+  
+  public function getHaspar()
+  {
+
+    return $this->haspar;
+
+  }
+  
+  public function getLonpar()
+  {
+
+    return $this->lonpar;
+
+  }
+  
+  public function getForpar()
+  {
+
+    return trim($this->forpar);
+
+  }
+  
+  public function getCodpariva()
+  {
+
+    return trim($this->codpariva);
+
+  }
+  
+  public function getManivafor()
+  {
+
+    return trim($this->manivafor);
+
+  }
+  
+  public function getPorivafor($val=false)
+  {
+
+    if($val) return number_format($this->porivafor,2,',','.');
+    else return $this->porivafor;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNivproacc($v)
 	{
 
-		if ($this->nivproacc !== $v) {
-			$this->nivproacc = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::NIVPROACC;
-		}
-
+    if ($this->nivproacc !== $v) {
+        $this->nivproacc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::NIVPROACC;
+      }
+  
 	} 
 	
 	public function setDesproacc($v)
 	{
 
-		if ($this->desproacc !== $v) {
-			$this->desproacc = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::DESPROACC;
-		}
-
+    if ($this->desproacc !== $v) {
+        $this->desproacc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::DESPROACC;
+      }
+  
 	} 
 	
 	public function setHasproacc($v)
 	{
 
-		if ($this->hasproacc !== $v) {
-			$this->hasproacc = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::HASPROACC;
-		}
-
+    if ($this->hasproacc !== $v) {
+        $this->hasproacc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::HASPROACC;
+      }
+  
 	} 
 	
 	public function setLonproacc($v)
 	{
 
-		if ($this->lonproacc !== $v) {
-			$this->lonproacc = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::LONPROACC;
-		}
-
+    if ($this->lonproacc !== $v) {
+        $this->lonproacc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::LONPROACC;
+      }
+  
 	} 
 	
 	public function setForproacc($v)
 	{
 
-		if ($this->forproacc !== $v) {
-			$this->forproacc = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::FORPROACC;
-		}
-
+    if ($this->forproacc !== $v) {
+        $this->forproacc = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::FORPROACC;
+      }
+  
 	} 
 	
 	public function setNivaccesp($v)
 	{
 
-		if ($this->nivaccesp !== $v) {
-			$this->nivaccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::NIVACCESP;
-		}
-
+    if ($this->nivaccesp !== $v) {
+        $this->nivaccesp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::NIVACCESP;
+      }
+  
 	} 
 	
 	public function setDesaccesp($v)
 	{
 
-		if ($this->desaccesp !== $v) {
-			$this->desaccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::DESACCESP;
-		}
-
+    if ($this->desaccesp !== $v) {
+        $this->desaccesp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::DESACCESP;
+      }
+  
 	} 
 	
 	public function setHasaccesp($v)
 	{
 
-		if ($this->hasaccesp !== $v) {
-			$this->hasaccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::HASACCESP;
-		}
-
+    if ($this->hasaccesp !== $v) {
+        $this->hasaccesp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::HASACCESP;
+      }
+  
 	} 
 	
 	public function setLonaccesp($v)
 	{
 
-		if ($this->lonaccesp !== $v) {
-			$this->lonaccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::LONACCESP;
-		}
-
+    if ($this->lonaccesp !== $v) {
+        $this->lonaccesp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::LONACCESP;
+      }
+  
 	} 
 	
 	public function setForaccesp($v)
 	{
 
-		if ($this->foraccesp !== $v) {
-			$this->foraccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::FORACCESP;
-		}
-
+    if ($this->foraccesp !== $v) {
+        $this->foraccesp = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::FORACCESP;
+      }
+  
 	} 
 	
 	public function setNivsubaccesp($v)
 	{
 
-		if ($this->nivsubaccesp !== $v) {
-			$this->nivsubaccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::NIVSUBACCESP;
-		}
-
+    if ($this->nivsubaccesp !== $v) {
+        $this->nivsubaccesp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::NIVSUBACCESP;
+      }
+  
 	} 
 	
 	public function setDessubaccesp($v)
 	{
 
-		if ($this->dessubaccesp !== $v) {
-			$this->dessubaccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::DESSUBACCESP;
-		}
-
+    if ($this->dessubaccesp !== $v) {
+        $this->dessubaccesp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::DESSUBACCESP;
+      }
+  
 	} 
 	
 	public function setHassubaccesp($v)
 	{
 
-		if ($this->hassubaccesp !== $v) {
-			$this->hassubaccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::HASSUBACCESP;
-		}
-
+    if ($this->hassubaccesp !== $v) {
+        $this->hassubaccesp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::HASSUBACCESP;
+      }
+  
 	} 
 	
 	public function setLonsubaccesp($v)
 	{
 
-		if ($this->lonsubaccesp !== $v) {
-			$this->lonsubaccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::LONSUBACCESP;
-		}
-
+    if ($this->lonsubaccesp !== $v) {
+        $this->lonsubaccesp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::LONSUBACCESP;
+      }
+  
 	} 
 	
 	public function setForsubaccesp($v)
 	{
 
-		if ($this->forsubaccesp !== $v) {
-			$this->forsubaccesp = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::FORSUBACCESP;
-		}
-
+    if ($this->forsubaccesp !== $v) {
+        $this->forsubaccesp = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::FORSUBACCESP;
+      }
+  
 	} 
 	
 	public function setNivuae($v)
 	{
 
-		if ($this->nivuae !== $v) {
-			$this->nivuae = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::NIVUAE;
-		}
-
+    if ($this->nivuae !== $v) {
+        $this->nivuae = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::NIVUAE;
+      }
+  
 	} 
 	
 	public function setDesuae($v)
 	{
 
-		if ($this->desuae !== $v) {
-			$this->desuae = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::DESUAE;
-		}
-
+    if ($this->desuae !== $v) {
+        $this->desuae = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::DESUAE;
+      }
+  
 	} 
 	
 	public function setHasuae($v)
 	{
 
-		if ($this->hasuae !== $v) {
-			$this->hasuae = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::HASUAE;
-		}
-
+    if ($this->hasuae !== $v) {
+        $this->hasuae = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::HASUAE;
+      }
+  
 	} 
 	
 	public function setLonuae($v)
 	{
 
-		if ($this->lonuae !== $v) {
-			$this->lonuae = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::LONUAE;
-		}
-
+    if ($this->lonuae !== $v) {
+        $this->lonuae = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::LONUAE;
+      }
+  
 	} 
 	
 	public function setForuae($v)
 	{
 
-		if ($this->foruae !== $v) {
-			$this->foruae = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::FORUAE;
-		}
-
+    if ($this->foruae !== $v) {
+        $this->foruae = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::FORUAE;
+      }
+  
 	} 
 	
 	public function setCorest($v)
 	{
 
-		if ($this->corest !== $v) {
-			$this->corest = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::COREST;
-		}
-
+    if ($this->corest !== $v) {
+        $this->corest = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::COREST;
+      }
+  
 	} 
 	
 	public function setCorsec($v)
 	{
 
-		if ($this->corsec !== $v) {
-			$this->corsec = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::CORSEC;
-		}
-
+    if ($this->corsec !== $v) {
+        $this->corsec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::CORSEC;
+      }
+  
 	} 
 	
 	public function setCorequ($v)
 	{
 
-		if ($this->corequ !== $v) {
-			$this->corequ = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::COREQU;
-		}
-
+    if ($this->corequ !== $v) {
+        $this->corequ = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::COREQU;
+      }
+  
 	} 
 	
 	public function setDespar($v)
 	{
 
-		if ($this->despar !== $v) {
-			$this->despar = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::DESPAR;
-		}
-
+    if ($this->despar !== $v) {
+        $this->despar = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::DESPAR;
+      }
+  
 	} 
 	
 	public function setHaspar($v)
 	{
 
-		if ($this->haspar !== $v) {
-			$this->haspar = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::HASPAR;
-		}
-
+    if ($this->haspar !== $v) {
+        $this->haspar = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::HASPAR;
+      }
+  
 	} 
 	
 	public function setLonpar($v)
 	{
 
-		if ($this->lonpar !== $v) {
-			$this->lonpar = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::LONPAR;
-		}
-
+    if ($this->lonpar !== $v) {
+        $this->lonpar = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::LONPAR;
+      }
+  
 	} 
 	
 	public function setForpar($v)
 	{
 
-		if ($this->forpar !== $v) {
-			$this->forpar = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::FORPAR;
-		}
+    if ($this->forpar !== $v) {
+        $this->forpar = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::FORPAR;
+      }
+  
+	} 
+	
+	public function setCodpariva($v)
+	{
 
+    if ($this->codpariva !== $v) {
+        $this->codpariva = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::CODPARIVA;
+      }
+  
+	} 
+	
+	public function setManivafor($v)
+	{
+
+    if ($this->manivafor !== $v) {
+        $this->manivafor = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::MANIVAFOR;
+      }
+  
+	} 
+	
+	public function setPorivafor($v)
+	{
+
+    if ($this->porivafor !== $v) {
+        $this->porivafor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefegrgenPeer::PORIVAFOR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefegrgenPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefegrgenPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->nivproacc = $rs->getFloat($startcol + 1);
+      $this->nivproacc = $rs->getFloat($startcol + 1);
 
-			$this->desproacc = $rs->getFloat($startcol + 2);
+      $this->desproacc = $rs->getFloat($startcol + 2);
 
-			$this->hasproacc = $rs->getFloat($startcol + 3);
+      $this->hasproacc = $rs->getFloat($startcol + 3);
 
-			$this->lonproacc = $rs->getFloat($startcol + 4);
+      $this->lonproacc = $rs->getFloat($startcol + 4);
 
-			$this->forproacc = $rs->getString($startcol + 5);
+      $this->forproacc = $rs->getString($startcol + 5);
 
-			$this->nivaccesp = $rs->getFloat($startcol + 6);
+      $this->nivaccesp = $rs->getFloat($startcol + 6);
 
-			$this->desaccesp = $rs->getFloat($startcol + 7);
+      $this->desaccesp = $rs->getFloat($startcol + 7);
 
-			$this->hasaccesp = $rs->getFloat($startcol + 8);
+      $this->hasaccesp = $rs->getFloat($startcol + 8);
 
-			$this->lonaccesp = $rs->getFloat($startcol + 9);
+      $this->lonaccesp = $rs->getFloat($startcol + 9);
 
-			$this->foraccesp = $rs->getString($startcol + 10);
+      $this->foraccesp = $rs->getString($startcol + 10);
 
-			$this->nivsubaccesp = $rs->getFloat($startcol + 11);
+      $this->nivsubaccesp = $rs->getFloat($startcol + 11);
 
-			$this->dessubaccesp = $rs->getFloat($startcol + 12);
+      $this->dessubaccesp = $rs->getFloat($startcol + 12);
 
-			$this->hassubaccesp = $rs->getFloat($startcol + 13);
+      $this->hassubaccesp = $rs->getFloat($startcol + 13);
 
-			$this->lonsubaccesp = $rs->getFloat($startcol + 14);
+      $this->lonsubaccesp = $rs->getFloat($startcol + 14);
 
-			$this->forsubaccesp = $rs->getString($startcol + 15);
+      $this->forsubaccesp = $rs->getString($startcol + 15);
 
-			$this->nivuae = $rs->getFloat($startcol + 16);
+      $this->nivuae = $rs->getFloat($startcol + 16);
 
-			$this->desuae = $rs->getFloat($startcol + 17);
+      $this->desuae = $rs->getFloat($startcol + 17);
 
-			$this->hasuae = $rs->getFloat($startcol + 18);
+      $this->hasuae = $rs->getFloat($startcol + 18);
 
-			$this->lonuae = $rs->getFloat($startcol + 19);
+      $this->lonuae = $rs->getFloat($startcol + 19);
 
-			$this->foruae = $rs->getString($startcol + 20);
+      $this->foruae = $rs->getString($startcol + 20);
 
-			$this->corest = $rs->getFloat($startcol + 21);
+      $this->corest = $rs->getFloat($startcol + 21);
 
-			$this->corsec = $rs->getFloat($startcol + 22);
+      $this->corsec = $rs->getFloat($startcol + 22);
 
-			$this->corequ = $rs->getFloat($startcol + 23);
+      $this->corequ = $rs->getFloat($startcol + 23);
 
-			$this->despar = $rs->getInt($startcol + 24);
+      $this->despar = $rs->getInt($startcol + 24);
 
-			$this->haspar = $rs->getInt($startcol + 25);
+      $this->haspar = $rs->getInt($startcol + 25);
 
-			$this->lonpar = $rs->getInt($startcol + 26);
+      $this->lonpar = $rs->getInt($startcol + 26);
 
-			$this->forpar = $rs->getInt($startcol + 27);
+      $this->forpar = $rs->getString($startcol + 27);
 
-			$this->id = $rs->getInt($startcol + 28);
+      $this->codpariva = $rs->getString($startcol + 28);
 
-			$this->resetModified();
+      $this->manivafor = $rs->getString($startcol + 29);
 
-			$this->setNew(false);
+      $this->porivafor = $rs->getFloat($startcol + 30);
 
-						return $startcol + 29; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefegrgen object", $e);
-		}
-	}
+      $this->id = $rs->getInt($startcol + 31);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 32; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefegrgen object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -740,6 +861,7 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefegrgenPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefegrgenPeer::doUpdate($this, $con);
@@ -890,6 +1012,15 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 				return $this->getForpar();
 				break;
 			case 28:
+				return $this->getCodpariva();
+				break;
+			case 29:
+				return $this->getManivafor();
+				break;
+			case 30:
+				return $this->getPorivafor();
+				break;
+			case 31:
 				return $this->getId();
 				break;
 			default:
@@ -930,7 +1061,10 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 			$keys[25] => $this->getHaspar(),
 			$keys[26] => $this->getLonpar(),
 			$keys[27] => $this->getForpar(),
-			$keys[28] => $this->getId(),
+			$keys[28] => $this->getCodpariva(),
+			$keys[29] => $this->getManivafor(),
+			$keys[30] => $this->getPorivafor(),
+			$keys[31] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1031,6 +1165,15 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 				$this->setForpar($value);
 				break;
 			case 28:
+				$this->setCodpariva($value);
+				break;
+			case 29:
+				$this->setManivafor($value);
+				break;
+			case 30:
+				$this->setPorivafor($value);
+				break;
+			case 31:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1068,7 +1211,10 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[25], $arr)) $this->setHaspar($arr[$keys[25]]);
 		if (array_key_exists($keys[26], $arr)) $this->setLonpar($arr[$keys[26]]);
 		if (array_key_exists($keys[27], $arr)) $this->setForpar($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setId($arr[$keys[28]]);
+		if (array_key_exists($keys[28], $arr)) $this->setCodpariva($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setManivafor($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setPorivafor($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setId($arr[$keys[31]]);
 	}
 
 	
@@ -1104,6 +1250,9 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FordefegrgenPeer::HASPAR)) $criteria->add(FordefegrgenPeer::HASPAR, $this->haspar);
 		if ($this->isColumnModified(FordefegrgenPeer::LONPAR)) $criteria->add(FordefegrgenPeer::LONPAR, $this->lonpar);
 		if ($this->isColumnModified(FordefegrgenPeer::FORPAR)) $criteria->add(FordefegrgenPeer::FORPAR, $this->forpar);
+		if ($this->isColumnModified(FordefegrgenPeer::CODPARIVA)) $criteria->add(FordefegrgenPeer::CODPARIVA, $this->codpariva);
+		if ($this->isColumnModified(FordefegrgenPeer::MANIVAFOR)) $criteria->add(FordefegrgenPeer::MANIVAFOR, $this->manivafor);
+		if ($this->isColumnModified(FordefegrgenPeer::PORIVAFOR)) $criteria->add(FordefegrgenPeer::PORIVAFOR, $this->porivafor);
 		if ($this->isColumnModified(FordefegrgenPeer::ID)) $criteria->add(FordefegrgenPeer::ID, $this->id);
 
 		return $criteria;
@@ -1190,6 +1339,12 @@ abstract class BaseFordefegrgen extends BaseObject  implements Persistent {
 		$copyObj->setLonpar($this->lonpar);
 
 		$copyObj->setForpar($this->forpar);
+
+		$copyObj->setCodpariva($this->codpariva);
+
+		$copyObj->setManivafor($this->manivafor);
+
+		$copyObj->setPorivafor($this->porivafor);
 
 
 		$copyObj->setNew(true);

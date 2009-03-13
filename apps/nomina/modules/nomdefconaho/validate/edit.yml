@@ -1,0 +1,8 @@
+methods:
+  post:
+   - "npconaho{codnom}"
+
+names:
+  npconaho{codnom}:
+    required:  Yes
+    required_msg: El código de la Nómina no puede estar en Blanco

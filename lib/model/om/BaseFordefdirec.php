@@ -25,74 +25,99 @@ abstract class BaseFordefdirec extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoddir()
-	{
+  
+  public function getCoddir()
+  {
 
-		return $this->coddir; 		
-	}
-	
-	public function getDesdir()
-	{
+    return trim($this->coddir);
 
-		return $this->desdir; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDesdir()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->desdir);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoddir($v)
 	{
 
-		if ($this->coddir !== $v) {
-			$this->coddir = $v;
-			$this->modifiedColumns[] = FordefdirecPeer::CODDIR;
-		}
-
+    if ($this->coddir !== $v) {
+        $this->coddir = $v;
+        $this->modifiedColumns[] = FordefdirecPeer::CODDIR;
+      }
+  
 	} 
 	
 	public function setDesdir($v)
 	{
 
-		if ($this->desdir !== $v) {
-			$this->desdir = $v;
-			$this->modifiedColumns[] = FordefdirecPeer::DESDIR;
-		}
-
+    if ($this->desdir !== $v) {
+        $this->desdir = $v;
+        $this->modifiedColumns[] = FordefdirecPeer::DESDIR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefdirecPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefdirecPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coddir = $rs->getString($startcol + 0);
+      $this->coddir = $rs->getString($startcol + 0);
 
-			$this->desdir = $rs->getString($startcol + 1);
+      $this->desdir = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefdirec object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefdirec object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseFordefdirec extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefdirecPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefdirecPeer::doUpdate($this, $con);

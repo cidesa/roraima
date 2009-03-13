@@ -1,0 +1,9 @@
+methods:
+  post:
+   - "dfdiafer{diafer}"
+
+names:
+  dfdiafer{diafer}:
+    required:  Yes
+    required_msg: Debe Seleccionar una fecha.
+

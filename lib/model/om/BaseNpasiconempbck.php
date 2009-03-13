@@ -81,375 +81,412 @@ abstract class BaseNpasiconempbck extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codemp);
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodcar()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getNomemp()
-	{
+    return trim($this->codcon);
 
-		return $this->nomemp; 		
-	}
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getNomcar()
-	{
+    return trim($this->codcar);
 
-		return $this->nomcar; 		
-	}
-	
-	public function getCantidad()
-	{
+  }
+  
+  public function getNomemp()
+  {
 
-		return number_format($this->cantidad,2,',','.');
-		
-	}
-	
-	public function getMonto()
-	{
+    return trim($this->nomemp);
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNomcon()
+  {
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->nomcon);
 
-	
-	public function getFecexp($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNomcar()
+  {
 
-		if ($this->fecexp === null || $this->fecexp === '') {
-			return null;
-		} elseif (!is_int($this->fecexp)) {
-						$ts = strtotime($this->fecexp);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
-			}
-		} else {
-			$ts = $this->fecexp;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->nomcar);
 
-	
-	public function getFrecon()
-	{
+  }
+  
+  public function getCantidad($val=false)
+  {
 
-		return $this->frecon; 		
-	}
-	
-	public function getAsided()
-	{
+    if($val) return number_format($this->cantidad,2,',','.');
+    else return $this->cantidad;
 
-		return $this->asided; 		
-	}
-	
-	public function getAcucon()
-	{
+  }
+  
+  public function getMonto($val=false)
+  {
 
-		return $this->acucon; 		
-	}
-	
-	public function getCalcon()
-	{
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
 
-		return $this->calcon; 		
-	}
-	
-	public function getActivo()
-	{
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		return $this->activo; 		
-	}
-	
-	public function getAcumulado()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->acumulado,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  
+  public function getFecexp($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecexp === null || $this->fecexp === '') {
+      return null;
+    } elseif (!is_int($this->fecexp)) {
+            $ts = adodb_strtotime($this->fecexp);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
+      }
+    } else {
+      $ts = $this->fecexp;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFrecon()
+  {
+
+    return trim($this->frecon);
+
+  }
+  
+  public function getAsided()
+  {
+
+    return trim($this->asided);
+
+  }
+  
+  public function getAcucon()
+  {
+
+    return trim($this->acucon);
+
+  }
+  
+  public function getCalcon()
+  {
+
+    return trim($this->calcon);
+
+  }
+  
+  public function getActivo()
+  {
+
+    return trim($this->activo);
+
+  }
+  
+  public function getAcumulado($val=false)
+  {
+
+    if($val) return number_format($this->acumulado,2,',','.');
+    else return $this->acumulado;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setNomcar($v)
 	{
 
-		if ($this->nomcar !== $v) {
-			$this->nomcar = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::NOMCAR;
-		}
-
+    if ($this->nomcar !== $v) {
+        $this->nomcar = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::NOMCAR;
+      }
+  
 	} 
 	
 	public function setCantidad($v)
 	{
 
-		if ($this->cantidad !== $v) {
-			$this->cantidad = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::CANTIDAD;
-		}
-
+    if ($this->cantidad !== $v) {
+        $this->cantidad = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasiconempbckPeer::CANTIDAD;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasiconempbckPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = NpasiconempbckPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = NpasiconempbckPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecexp($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecexp !== $ts) {
-			$this->fecexp = $ts;
-			$this->modifiedColumns[] = NpasiconempbckPeer::FECEXP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecexp !== $ts) {
+      $this->fecexp = $ts;
+      $this->modifiedColumns[] = NpasiconempbckPeer::FECEXP;
+    }
 
 	} 
 	
 	public function setFrecon($v)
 	{
 
-		if ($this->frecon !== $v) {
-			$this->frecon = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::FRECON;
-		}
-
+    if ($this->frecon !== $v) {
+        $this->frecon = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::FRECON;
+      }
+  
 	} 
 	
 	public function setAsided($v)
 	{
 
-		if ($this->asided !== $v) {
-			$this->asided = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::ASIDED;
-		}
-
+    if ($this->asided !== $v) {
+        $this->asided = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::ASIDED;
+      }
+  
 	} 
 	
 	public function setAcucon($v)
 	{
 
-		if ($this->acucon !== $v) {
-			$this->acucon = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::ACUCON;
-		}
-
+    if ($this->acucon !== $v) {
+        $this->acucon = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::ACUCON;
+      }
+  
 	} 
 	
 	public function setCalcon($v)
 	{
 
-		if ($this->calcon !== $v) {
-			$this->calcon = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::CALCON;
-		}
-
+    if ($this->calcon !== $v) {
+        $this->calcon = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::CALCON;
+      }
+  
 	} 
 	
 	public function setActivo($v)
 	{
 
-		if ($this->activo !== $v) {
-			$this->activo = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::ACTIVO;
-		}
-
+    if ($this->activo !== $v) {
+        $this->activo = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::ACTIVO;
+      }
+  
 	} 
 	
 	public function setAcumulado($v)
 	{
 
-		if ($this->acumulado !== $v) {
-			$this->acumulado = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::ACUMULADO;
-		}
-
+    if ($this->acumulado !== $v) {
+        $this->acumulado = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasiconempbckPeer::ACUMULADO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpasiconempbckPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpasiconempbckPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->codcar = $rs->getString($startcol + 2);
+      $this->codcar = $rs->getString($startcol + 2);
 
-			$this->nomemp = $rs->getString($startcol + 3);
+      $this->nomemp = $rs->getString($startcol + 3);
 
-			$this->nomcon = $rs->getString($startcol + 4);
+      $this->nomcon = $rs->getString($startcol + 4);
 
-			$this->nomcar = $rs->getString($startcol + 5);
+      $this->nomcar = $rs->getString($startcol + 5);
 
-			$this->cantidad = $rs->getFloat($startcol + 6);
+      $this->cantidad = $rs->getFloat($startcol + 6);
 
-			$this->monto = $rs->getFloat($startcol + 7);
+      $this->monto = $rs->getFloat($startcol + 7);
 
-			$this->fecini = $rs->getDate($startcol + 8, null);
+      $this->fecini = $rs->getDate($startcol + 8, null);
 
-			$this->fecexp = $rs->getDate($startcol + 9, null);
+      $this->fecexp = $rs->getDate($startcol + 9, null);
 
-			$this->frecon = $rs->getString($startcol + 10);
+      $this->frecon = $rs->getString($startcol + 10);
 
-			$this->asided = $rs->getString($startcol + 11);
+      $this->asided = $rs->getString($startcol + 11);
 
-			$this->acucon = $rs->getString($startcol + 12);
+      $this->acucon = $rs->getString($startcol + 12);
 
-			$this->calcon = $rs->getString($startcol + 13);
+      $this->calcon = $rs->getString($startcol + 13);
 
-			$this->activo = $rs->getString($startcol + 14);
+      $this->activo = $rs->getString($startcol + 14);
 
-			$this->acumulado = $rs->getFloat($startcol + 15);
+      $this->acumulado = $rs->getFloat($startcol + 15);
 
-			$this->id = $rs->getInt($startcol + 16);
+      $this->id = $rs->getInt($startcol + 16);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 17; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npasiconempbck object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 17; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npasiconempbck object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -506,6 +543,7 @@ abstract class BaseNpasiconempbck extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpasiconempbckPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpasiconempbckPeer::doUpdate($this, $con);

@@ -13,7 +13,7 @@ abstract class BaseCpdoccomPeer {
 	const CLASS_DEFAULT = 'lib.model.Cpdoccom';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,9 @@ abstract class BaseCpdoccomPeer {
 	const AFEDIS = 'cpdoccom.AFEDIS';
 
 	
+	const REQAUT = 'cpdoccom.REQAUT';
+
+	
 	const ID = 'cpdoccom.ID';
 
 	
@@ -49,18 +52,18 @@ abstract class BaseCpdoccomPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Tipcom', 'Nomext', 'Nomabr', 'Refprc', 'Afeprc', 'Afecom', 'Afedis', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CpdoccomPeer::TIPCOM, CpdoccomPeer::NOMEXT, CpdoccomPeer::NOMABR, CpdoccomPeer::REFPRC, CpdoccomPeer::AFEPRC, CpdoccomPeer::AFECOM, CpdoccomPeer::AFEDIS, CpdoccomPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('tipcom', 'nomext', 'nomabr', 'refprc', 'afeprc', 'afecom', 'afedis', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Tipcom', 'Nomext', 'Nomabr', 'Refprc', 'Afeprc', 'Afecom', 'Afedis', 'Reqaut', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CpdoccomPeer::TIPCOM, CpdoccomPeer::NOMEXT, CpdoccomPeer::NOMABR, CpdoccomPeer::REFPRC, CpdoccomPeer::AFEPRC, CpdoccomPeer::AFECOM, CpdoccomPeer::AFEDIS, CpdoccomPeer::REQAUT, CpdoccomPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('tipcom', 'nomext', 'nomabr', 'refprc', 'afeprc', 'afecom', 'afedis', 'reqaut', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Tipcom' => 0, 'Nomext' => 1, 'Nomabr' => 2, 'Refprc' => 3, 'Afeprc' => 4, 'Afecom' => 5, 'Afedis' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (CpdoccomPeer::TIPCOM => 0, CpdoccomPeer::NOMEXT => 1, CpdoccomPeer::NOMABR => 2, CpdoccomPeer::REFPRC => 3, CpdoccomPeer::AFEPRC => 4, CpdoccomPeer::AFECOM => 5, CpdoccomPeer::AFEDIS => 6, CpdoccomPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('tipcom' => 0, 'nomext' => 1, 'nomabr' => 2, 'refprc' => 3, 'afeprc' => 4, 'afecom' => 5, 'afedis' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Tipcom' => 0, 'Nomext' => 1, 'Nomabr' => 2, 'Refprc' => 3, 'Afeprc' => 4, 'Afecom' => 5, 'Afedis' => 6, 'Reqaut' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (CpdoccomPeer::TIPCOM => 0, CpdoccomPeer::NOMEXT => 1, CpdoccomPeer::NOMABR => 2, CpdoccomPeer::REFPRC => 3, CpdoccomPeer::AFEPRC => 4, CpdoccomPeer::AFECOM => 5, CpdoccomPeer::AFEDIS => 6, CpdoccomPeer::REQAUT => 7, CpdoccomPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('tipcom' => 0, 'nomext' => 1, 'nomabr' => 2, 'refprc' => 3, 'afeprc' => 4, 'afecom' => 5, 'afedis' => 6, 'reqaut' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -127,6 +130,8 @@ abstract class BaseCpdoccomPeer {
 		$criteria->addSelectColumn(CpdoccomPeer::AFECOM);
 
 		$criteria->addSelectColumn(CpdoccomPeer::AFEDIS);
+
+		$criteria->addSelectColumn(CpdoccomPeer::REQAUT);
 
 		$criteria->addSelectColumn(CpdoccomPeer::ID);
 
@@ -230,6 +235,7 @@ abstract class BaseCpdoccomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpdoccomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

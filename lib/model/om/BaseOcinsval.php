@@ -41,146 +41,175 @@ abstract class BaseOcinsval extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCedins()
-	{
+  
+  public function getCedins()
+  {
 
-		return $this->cedins; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->cedins);
 
-		return $this->codcon; 		
-	}
-	
-	public function getNumval()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return $this->numval; 		
-	}
-	
-	public function getCodtipval()
-	{
+    return trim($this->codcon);
 
-		return $this->codtipval; 		
-	}
-	
-	public function getNomins()
-	{
+  }
+  
+  public function getNumval()
+  {
 
-		return $this->nomins; 		
-	}
-	
-	public function getNumciv()
-	{
+    return trim($this->numval);
 
-		return $this->numciv; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodtipval()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codtipval);
+
+  }
+  
+  public function getNomins()
+  {
+
+    return trim($this->nomins);
+
+  }
+  
+  public function getNumciv()
+  {
+
+    return trim($this->numciv);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCedins($v)
 	{
 
-		if ($this->cedins !== $v) {
-			$this->cedins = $v;
-			$this->modifiedColumns[] = OcinsvalPeer::CEDINS;
-		}
-
+    if ($this->cedins !== $v) {
+        $this->cedins = $v;
+        $this->modifiedColumns[] = OcinsvalPeer::CEDINS;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcinsvalPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcinsvalPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNumval($v)
 	{
 
-		if ($this->numval !== $v) {
-			$this->numval = $v;
-			$this->modifiedColumns[] = OcinsvalPeer::NUMVAL;
-		}
-
+    if ($this->numval !== $v) {
+        $this->numval = $v;
+        $this->modifiedColumns[] = OcinsvalPeer::NUMVAL;
+      }
+  
 	} 
 	
 	public function setCodtipval($v)
 	{
 
-		if ($this->codtipval !== $v) {
-			$this->codtipval = $v;
-			$this->modifiedColumns[] = OcinsvalPeer::CODTIPVAL;
-		}
-
+    if ($this->codtipval !== $v) {
+        $this->codtipval = $v;
+        $this->modifiedColumns[] = OcinsvalPeer::CODTIPVAL;
+      }
+  
 	} 
 	
 	public function setNomins($v)
 	{
 
-		if ($this->nomins !== $v) {
-			$this->nomins = $v;
-			$this->modifiedColumns[] = OcinsvalPeer::NOMINS;
-		}
-
+    if ($this->nomins !== $v) {
+        $this->nomins = $v;
+        $this->modifiedColumns[] = OcinsvalPeer::NOMINS;
+      }
+  
 	} 
 	
 	public function setNumciv($v)
 	{
 
-		if ($this->numciv !== $v) {
-			$this->numciv = $v;
-			$this->modifiedColumns[] = OcinsvalPeer::NUMCIV;
-		}
-
+    if ($this->numciv !== $v) {
+        $this->numciv = $v;
+        $this->modifiedColumns[] = OcinsvalPeer::NUMCIV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcinsvalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcinsvalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->cedins = $rs->getString($startcol + 0);
+      $this->cedins = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->numval = $rs->getString($startcol + 2);
+      $this->numval = $rs->getString($startcol + 2);
 
-			$this->codtipval = $rs->getString($startcol + 3);
+      $this->codtipval = $rs->getString($startcol + 3);
 
-			$this->nomins = $rs->getString($startcol + 4);
+      $this->nomins = $rs->getString($startcol + 4);
 
-			$this->numciv = $rs->getString($startcol + 5);
+      $this->numciv = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocinsval object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocinsval object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseOcinsval extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcinsvalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcinsvalPeer::doUpdate($this, $con);

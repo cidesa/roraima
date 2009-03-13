@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "inespeci{codespeci}"
+   - "inespeci{desespeci}"
+names:
+  inespeci{codespeci}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codespeci
+
+  inespeci{desespeci}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desespeci
+
+Validator_codespeci:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Inespeci
+        column:       codespeci
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desespeci:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres

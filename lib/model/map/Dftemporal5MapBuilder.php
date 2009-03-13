@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class Dftemporal5MapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.Dftemporal5MapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.Dftemporal5MapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('dftemporal5');
 		$tMap->setPhpName('Dftemporal5');
 
@@ -41,6 +41,6 @@ class Dftemporal5MapBuilder {
 		$tMap->addColumn('NITBEN', 'Nitben', 'string', CreoleTypes::VARCHAR, false, 15);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

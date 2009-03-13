@@ -29,6 +29,18 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 
 
 	
+	protected $codtippar;
+
+
+	
+	protected $coscoling;
+
+
+	
+	protected $cosconstruc;
+
+
+	
 	protected $id;
 
 	
@@ -37,129 +49,216 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRenpar()
-	{
+  
+  public function getRenpar()
+  {
 
-		return $this->renpar; 		
-	}
-	
-	public function getCosuni()
-	{
+    return trim($this->renpar);
 
-		return number_format($this->cosuni,2,',','.');
-		
-	}
-	
-	public function getCoduni()
-	{
+  }
+  
+  public function getCosuni($val=false)
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getCodpar()
-	{
+    if($val) return number_format($this->cosuni,2,',','.');
+    else return $this->cosuni;
 
-		return $this->codpar; 		
-	}
-	
-	public function getDespar()
-	{
+  }
+  
+  public function getCoduni()
+  {
 
-		return $this->despar; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->coduni);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getDespar()
+  {
+
+    return trim($this->despar);
+
+  }
+  
+  public function getCodtippar()
+  {
+
+    return trim($this->codtippar);
+
+  }
+  
+  public function getCoscoling($val=false)
+  {
+
+    if($val) return number_format($this->coscoling,2,',','.');
+    else return $this->coscoling;
+
+  }
+  
+  public function getCosconstruc($val=false)
+  {
+
+    if($val) return number_format($this->cosconstruc,2,',','.');
+    else return $this->cosconstruc;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRenpar($v)
 	{
 
-		if ($this->renpar !== $v) {
-			$this->renpar = $v;
-			$this->modifiedColumns[] = OcdefparPeer::RENPAR;
-		}
-
+    if ($this->renpar !== $v) {
+        $this->renpar = $v;
+        $this->modifiedColumns[] = OcdefparPeer::RENPAR;
+      }
+  
 	} 
 	
 	public function setCosuni($v)
 	{
 
-		if ($this->cosuni !== $v) {
-			$this->cosuni = $v;
-			$this->modifiedColumns[] = OcdefparPeer::COSUNI;
-		}
-
+    if ($this->cosuni !== $v) {
+        $this->cosuni = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcdefparPeer::COSUNI;
+      }
+  
 	} 
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = OcdefparPeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = OcdefparPeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = OcdefparPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = OcdefparPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setDespar($v)
 	{
 
-		if ($this->despar !== $v) {
-			$this->despar = $v;
-			$this->modifiedColumns[] = OcdefparPeer::DESPAR;
-		}
+    if ($this->despar !== $v) {
+        $this->despar = $v;
+        $this->modifiedColumns[] = OcdefparPeer::DESPAR;
+      }
+  
+	} 
+	
+	public function setCodtippar($v)
+	{
 
+    if ($this->codtippar !== $v) {
+        $this->codtippar = $v;
+        $this->modifiedColumns[] = OcdefparPeer::CODTIPPAR;
+      }
+  
+	} 
+	
+	public function setCoscoling($v)
+	{
+
+    if ($this->coscoling !== $v) {
+        $this->coscoling = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcdefparPeer::COSCOLING;
+      }
+  
+	} 
+	
+	public function setCosconstruc($v)
+	{
+
+    if ($this->cosconstruc !== $v) {
+        $this->cosconstruc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcdefparPeer::COSCONSTRUC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcdefparPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcdefparPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->renpar = $rs->getString($startcol + 0);
+      $this->renpar = $rs->getString($startcol + 0);
 
-			$this->cosuni = $rs->getFloat($startcol + 1);
+      $this->cosuni = $rs->getFloat($startcol + 1);
 
-			$this->coduni = $rs->getString($startcol + 2);
+      $this->coduni = $rs->getString($startcol + 2);
 
-			$this->codpar = $rs->getString($startcol + 3);
+      $this->codpar = $rs->getString($startcol + 3);
 
-			$this->despar = $rs->getString($startcol + 4);
+      $this->despar = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->codtippar = $rs->getString($startcol + 5);
 
-			$this->resetModified();
+      $this->coscoling = $rs->getFloat($startcol + 6);
 
-			$this->setNew(false);
+      $this->cosconstruc = $rs->getFloat($startcol + 7);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocdefpar object", $e);
-		}
-	}
+      $this->id = $rs->getInt($startcol + 8);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocdefpar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +315,7 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcdefparPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcdefparPeer::doUpdate($this, $con);
@@ -297,6 +397,15 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 				return $this->getDespar();
 				break;
 			case 5:
+				return $this->getCodtippar();
+				break;
+			case 6:
+				return $this->getCoscoling();
+				break;
+			case 7:
+				return $this->getCosconstruc();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -314,7 +423,10 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 			$keys[2] => $this->getCoduni(),
 			$keys[3] => $this->getCodpar(),
 			$keys[4] => $this->getDespar(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getCodtippar(),
+			$keys[6] => $this->getCoscoling(),
+			$keys[7] => $this->getCosconstruc(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -346,6 +458,15 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 				$this->setDespar($value);
 				break;
 			case 5:
+				$this->setCodtippar($value);
+				break;
+			case 6:
+				$this->setCoscoling($value);
+				break;
+			case 7:
+				$this->setCosconstruc($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -360,7 +481,10 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setCoduni($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCodpar($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setDespar($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodtippar($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCoscoling($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCosconstruc($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -373,6 +497,9 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OcdefparPeer::CODUNI)) $criteria->add(OcdefparPeer::CODUNI, $this->coduni);
 		if ($this->isColumnModified(OcdefparPeer::CODPAR)) $criteria->add(OcdefparPeer::CODPAR, $this->codpar);
 		if ($this->isColumnModified(OcdefparPeer::DESPAR)) $criteria->add(OcdefparPeer::DESPAR, $this->despar);
+		if ($this->isColumnModified(OcdefparPeer::CODTIPPAR)) $criteria->add(OcdefparPeer::CODTIPPAR, $this->codtippar);
+		if ($this->isColumnModified(OcdefparPeer::COSCOLING)) $criteria->add(OcdefparPeer::COSCOLING, $this->coscoling);
+		if ($this->isColumnModified(OcdefparPeer::COSCONSTRUC)) $criteria->add(OcdefparPeer::COSCONSTRUC, $this->cosconstruc);
 		if ($this->isColumnModified(OcdefparPeer::ID)) $criteria->add(OcdefparPeer::ID, $this->id);
 
 		return $criteria;
@@ -413,6 +540,12 @@ abstract class BaseOcdefpar extends BaseObject  implements Persistent {
 		$copyObj->setCodpar($this->codpar);
 
 		$copyObj->setDespar($this->despar);
+
+		$copyObj->setCodtippar($this->codtippar);
+
+		$copyObj->setCoscoling($this->coscoling);
+
+		$copyObj->setCosconstruc($this->cosconstruc);
 
 
 		$copyObj->setNew(true);

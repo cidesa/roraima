@@ -93,405 +93,446 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodcar()
-	{
+    return trim($this->codemp);
 
-		return $this->codcar; 		
-	}
-	
-	public function getCodnom()
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodcat()
-	{
+    return trim($this->codcar);
 
-		return $this->codcat; 		
-	}
-	
-	public function getFecasi($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		if ($this->fecasi === null || $this->fecasi === '') {
-			return null;
-		} elseif (!is_int($this->fecasi)) {
-						$ts = strtotime($this->fecasi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecasi] as date/time value: " . var_export($this->fecasi, true));
-			}
-		} else {
-			$ts = $this->fecasi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codnom);
 
-	
-	public function getNomemp()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return $this->nomemp; 		
-	}
-	
-	public function getNomcar()
-	{
+    return trim($this->codcat);
 
-		return $this->nomcar; 		
-	}
-	
-	public function getNomnom()
-	{
+  }
+  
+  public function getFecasi($format = 'Y-m-d')
+  {
 
-		return $this->nomnom; 		
-	}
-	
-	public function getNomcat()
-	{
+    if ($this->fecasi === null || $this->fecasi === '') {
+      return null;
+    } elseif (!is_int($this->fecasi)) {
+            $ts = adodb_strtotime($this->fecasi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecasi] as date/time value: " . var_export($this->fecasi, true));
+      }
+    } else {
+      $ts = $this->fecasi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->nomcat; 		
-	}
-	
-	public function getUnieje()
-	{
+  
+  public function getNomemp()
+  {
 
-		return $this->unieje; 		
-	}
-	
-	public function getSueldo()
-	{
+    return trim($this->nomemp);
 
-		return number_format($this->sueldo,2,',','.');
-		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getNomcar()
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getNronom()
-	{
+    return trim($this->nomcar);
 
-		return $this->nronom; 		
-	}
-	
-	public function getMontonomina()
-	{
+  }
+  
+  public function getNomnom()
+  {
 
-		return number_format($this->montonomina,2,',','.');
-		
-	}
-	
-	public function getCodtip()
-	{
+    return trim($this->nomnom);
 
-		return $this->codtip; 		
-	}
-	
-	public function getCodtipgas()
-	{
+  }
+  
+  public function getNomcat()
+  {
 
-		return $this->codtipgas; 		
-	}
-	
-	public function getCodniv()
-	{
+    return trim($this->nomcat);
 
-		return $this->codniv; 		
-	}
-	
-	public function getGrado()
-	{
+  }
+  
+  public function getUnieje()
+  {
 
-		return $this->grado; 		
-	}
-	
-	public function getPaso()
-	{
+    return trim($this->unieje);
 
-		return $this->paso; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getSueldo($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->sueldo,2,',','.');
+    else return $this->sueldo;
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getNronom()
+  {
+
+    return trim($this->nronom);
+
+  }
+  
+  public function getMontonomina($val=false)
+  {
+
+    if($val) return number_format($this->montonomina,2,',','.');
+    else return $this->montonomina;
+
+  }
+  
+  public function getCodtip()
+  {
+
+    return trim($this->codtip);
+
+  }
+  
+  public function getCodtipgas()
+  {
+
+    return trim($this->codtipgas);
+
+  }
+  
+  public function getCodniv()
+  {
+
+    return trim($this->codniv);
+
+  }
+  
+  public function getGrado()
+  {
+
+    return trim($this->grado);
+
+  }
+  
+  public function getPaso()
+  {
+
+    return trim($this->paso);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setFecasi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecasi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecasi !== $ts) {
-			$this->fecasi = $ts;
-			$this->modifiedColumns[] = NpasicarempPeer::FECASI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecasi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecasi !== $ts) {
+      $this->fecasi = $ts;
+      $this->modifiedColumns[] = NpasicarempPeer::FECASI;
+    }
 
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setNomcar($v)
 	{
 
-		if ($this->nomcar !== $v) {
-			$this->nomcar = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::NOMCAR;
-		}
-
+    if ($this->nomcar !== $v) {
+        $this->nomcar = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::NOMCAR;
+      }
+  
 	} 
 	
 	public function setNomnom($v)
 	{
 
-		if ($this->nomnom !== $v) {
-			$this->nomnom = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::NOMNOM;
-		}
-
+    if ($this->nomnom !== $v) {
+        $this->nomnom = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::NOMNOM;
+      }
+  
 	} 
 	
 	public function setNomcat($v)
 	{
 
-		if ($this->nomcat !== $v) {
-			$this->nomcat = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::NOMCAT;
-		}
-
+    if ($this->nomcat !== $v) {
+        $this->nomcat = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::NOMCAT;
+      }
+  
 	} 
 	
 	public function setUnieje($v)
 	{
 
-		if ($this->unieje !== $v) {
-			$this->unieje = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::UNIEJE;
-		}
-
+    if ($this->unieje !== $v) {
+        $this->unieje = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::UNIEJE;
+      }
+  
 	} 
 	
 	public function setSueldo($v)
 	{
 
-		if ($this->sueldo !== $v) {
-			$this->sueldo = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::SUELDO;
-		}
-
+    if ($this->sueldo !== $v) {
+        $this->sueldo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasicarempPeer::SUELDO;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setNronom($v)
 	{
 
-		if ($this->nronom !== $v) {
-			$this->nronom = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::NRONOM;
-		}
-
+    if ($this->nronom !== $v) {
+        $this->nronom = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::NRONOM;
+      }
+  
 	} 
 	
 	public function setMontonomina($v)
 	{
 
-		if ($this->montonomina !== $v) {
-			$this->montonomina = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::MONTONOMINA;
-		}
-
+    if ($this->montonomina !== $v) {
+        $this->montonomina = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasicarempPeer::MONTONOMINA;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setCodtipgas($v)
 	{
 
-		if ($this->codtipgas !== $v) {
-			$this->codtipgas = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::CODTIPGAS;
-		}
-
+    if ($this->codtipgas !== $v) {
+        $this->codtipgas = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::CODTIPGAS;
+      }
+  
 	} 
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setGrado($v)
 	{
 
-		if ($this->grado !== $v) {
-			$this->grado = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::GRADO;
-		}
-
+    if ($this->grado !== $v) {
+        $this->grado = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::GRADO;
+      }
+  
 	} 
 	
 	public function setPaso($v)
 	{
 
-		if ($this->paso !== $v) {
-			$this->paso = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::PASO;
-		}
-
+    if ($this->paso !== $v) {
+        $this->paso = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::PASO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpasicarempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpasicarempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codcar = $rs->getString($startcol + 1);
+      $this->codcar = $rs->getString($startcol + 1);
 
-			$this->codnom = $rs->getString($startcol + 2);
+      $this->codnom = $rs->getString($startcol + 2);
 
-			$this->codcat = $rs->getString($startcol + 3);
+      $this->codcat = $rs->getString($startcol + 3);
 
-			$this->fecasi = $rs->getDate($startcol + 4, null);
+      $this->fecasi = $rs->getDate($startcol + 4, null);
 
-			$this->nomemp = $rs->getString($startcol + 5);
+      $this->nomemp = $rs->getString($startcol + 5);
 
-			$this->nomcar = $rs->getString($startcol + 6);
+      $this->nomcar = $rs->getString($startcol + 6);
 
-			$this->nomnom = $rs->getString($startcol + 7);
+      $this->nomnom = $rs->getString($startcol + 7);
 
-			$this->nomcat = $rs->getString($startcol + 8);
+      $this->nomcat = $rs->getString($startcol + 8);
 
-			$this->unieje = $rs->getString($startcol + 9);
+      $this->unieje = $rs->getString($startcol + 9);
 
-			$this->sueldo = $rs->getFloat($startcol + 10);
+      $this->sueldo = $rs->getFloat($startcol + 10);
 
-			$this->status = $rs->getString($startcol + 11);
+      $this->status = $rs->getString($startcol + 11);
 
-			$this->nronom = $rs->getString($startcol + 12);
+      $this->nronom = $rs->getString($startcol + 12);
 
-			$this->montonomina = $rs->getFloat($startcol + 13);
+      $this->montonomina = $rs->getFloat($startcol + 13);
 
-			$this->codtip = $rs->getString($startcol + 14);
+      $this->codtip = $rs->getString($startcol + 14);
 
-			$this->codtipgas = $rs->getString($startcol + 15);
+      $this->codtipgas = $rs->getString($startcol + 15);
 
-			$this->codniv = $rs->getString($startcol + 16);
+      $this->codniv = $rs->getString($startcol + 16);
 
-			$this->grado = $rs->getString($startcol + 17);
+      $this->grado = $rs->getString($startcol + 17);
 
-			$this->paso = $rs->getString($startcol + 18);
+      $this->paso = $rs->getString($startcol + 18);
 
-			$this->id = $rs->getInt($startcol + 19);
+      $this->id = $rs->getInt($startcol + 19);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 20; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npasicaremp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 20; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npasicaremp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -548,6 +589,7 @@ abstract class BaseNpasicaremp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpasicarempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpasicarempPeer::doUpdate($this, $con);

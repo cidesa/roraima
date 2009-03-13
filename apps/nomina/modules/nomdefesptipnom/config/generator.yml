@@ -6,21 +6,27 @@ generator:
     fields:
       codnom: { name: Código }
       nomnom: { name: Nombre }
-      frecal: { name: Frecuencia del Cálculo }
-      ultfec: { name: Ultima Fecha de Procesamiento }
-      profec: { name: Proxima Fecha de Procesamiento }
-      numsem: { name: Número de la Semana }
+      frecal: { name: Frecuencia de Pago }
+      ultfec: { name: Desde, params: date_format='dd/MM/yyyy' }
+      profec: { name: Hasta, params: date_format='dd/MM/yyyy' }
+      numsem: { name: Semana Nro }
       ordpag: { name: Genera Orden de Pago }
-        
+
     list:
       title:          Tipos de Nómina
       filters:        [codnom, nomnom ]
-      display:        [=codnom, nomnom, ultfec, profec, numsem ]
+      display:        [=codnom, nomnom, ultfec, profec]
+      sort:  codnom
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
+      sort: codnom
     edit:
-      title:         Edicion de Tipos de Nómina
+      title:         Edición de Tipos de Nómina
       display:       [codnom, nomnom, frecal, ultfec, profec, numsem, ordpag]
-      
+      actions:
+        _list:       ~
+        _save:       ~
+        _create:     ~
+        _delete:     ~

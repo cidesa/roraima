@@ -25,74 +25,99 @@ abstract class BaseNpperemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodperfil()
-	{
+  
+  public function getCodperfil()
+  {
 
-		return $this->codperfil; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->codperfil);
 
-		return $this->codemp; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodperfil($v)
 	{
 
-		if ($this->codperfil !== $v) {
-			$this->codperfil = $v;
-			$this->modifiedColumns[] = NpperempPeer::CODPERFIL;
-		}
-
+    if ($this->codperfil !== $v) {
+        $this->codperfil = $v;
+        $this->modifiedColumns[] = NpperempPeer::CODPERFIL;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpperempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpperempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpperempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpperempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codperfil = $rs->getString($startcol + 0);
+      $this->codperfil = $rs->getString($startcol + 0);
 
-			$this->codemp = $rs->getString($startcol + 1);
+      $this->codemp = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npperemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npperemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseNpperemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpperempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpperempPeer::doUpdate($this, $con);

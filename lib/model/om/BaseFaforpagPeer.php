@@ -225,6 +225,7 @@ abstract class BaseFaforpagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FaforpagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

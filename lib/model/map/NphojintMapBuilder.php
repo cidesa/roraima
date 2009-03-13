@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NphojintMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NphojintMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NphojintMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('nphojint');
 		$tMap->setPhpName('Nphojint');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('nphojint_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -46,9 +48,9 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('SEXEMP', 'Sexemp', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('FECNAC', 'Fecnac', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECNAC', 'Fecnac', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('EDAEMP', 'Edaemp', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('EDAEMP', 'Edaemp', 'double', CreoleTypes::NUMERIC, false, 2);
 
 		$tMap->addColumn('LUGNAC', 'Lugnac', 'string', CreoleTypes::VARCHAR, false, 30);
 
@@ -68,17 +70,17 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('TALCAM', 'Talcam', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('TALCAL', 'Talcal', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TALCAL', 'Talcal', 'double', CreoleTypes::NUMERIC, false, 2);
 
 		$tMap->addColumn('DERZUR', 'Derzur', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('FECING', 'Fecing', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECING', 'Fecing', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECRET', 'Fecret', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECRET', 'Fecret', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECREI', 'Fecrei', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREI', 'Fecrei', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECADMPUB', 'Fecadmpub', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECADMPUB', 'Fecadmpub', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('STAEMP', 'Staemp', 'string', CreoleTypes::VARCHAR, true, 1);
 
@@ -88,9 +90,9 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('NUMPOLSEG', 'Numpolseg', 'string', CreoleTypes::VARCHAR, false, 31);
 
-		$tMap->addColumn('FECCOTSSO', 'Feccotsso', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECCOTSSO', 'Feccotsso', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('ANOADMPUB', 'Anoadmpub', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ANOADMPUB', 'Anoadmpub', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODTIPPAG', 'Codtippag', 'string', CreoleTypes::VARCHAR, false, 2);
 
@@ -168,13 +170,13 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('CODREGCIU', 'Codregciu', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('FECGRA', 'Fecgra', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECGRA', 'Fecgra', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('GRUSANGRE', 'Grusangre', 'string', CreoleTypes::VARCHAR, false, 5);
 
 		$tMap->addColumn('NUMGACETA', 'Numgaceta', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('FECGACETA', 'Fecgaceta', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECGACETA', 'Fecgaceta', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('DIAGRA', 'Diagra', 'string', CreoleTypes::VARCHAR, false, 2);
 
@@ -182,7 +184,7 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('ANOGRA', 'Anogra', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('TEMPORAL', 'Temporal', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TEMPORAL', 'Temporal', 'double', CreoleTypes::NUMERIC, false, 1);
 
 		$tMap->addColumn('DETEXP', 'Detexp', 'string', CreoleTypes::VARCHAR, false, 15);
 
@@ -192,7 +194,11 @@ class NphojintMapBuilder {
 
 		$tMap->addColumn('CODRET', 'Codret', 'string', CreoleTypes::VARCHAR, false, 2);
 
+		$tMap->addColumn('SITUAC', 'Situac', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('PROFES', 'Profes', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

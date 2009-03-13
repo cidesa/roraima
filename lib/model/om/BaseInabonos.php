@@ -77,380 +77,415 @@ abstract class BaseInabonos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumpag()
-	{
+  
+  public function getNumpag()
+  {
 
-		return $this->numpag; 		
-	}
-	
-	public function getNumref()
-	{
+    return trim($this->numpag);
 
-		return $this->numref; 		
-	}
-	
-	public function getFecpag($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNumref()
+  {
 
-		if ($this->fecpag === null || $this->fecpag === '') {
-			return null;
-		} elseif (!is_int($this->fecpag)) {
-						$ts = strtotime($this->fecpag);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
-			}
-		} else {
-			$ts = $this->fecpag;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->numref);
 
-	
-	public function getRifcon()
-	{
+  }
+  
+  public function getFecpag($format = 'Y-m-d')
+  {
 
-		return $this->rifcon; 		
-	}
-	
-	public function getMonpag()
-	{
+    if ($this->fecpag === null || $this->fecpag === '') {
+      return null;
+    } elseif (!is_int($this->fecpag)) {
+            $ts = adodb_strtotime($this->fecpag);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
+      }
+    } else {
+      $ts = $this->fecpag;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getSalpag()
-	{
+  
+  public function getRifcon()
+  {
 
-		return number_format($this->salpag,2,',','.');
-		
-	}
-	
-	public function getMonefe()
-	{
+    return trim($this->rifcon);
 
-		return number_format($this->monefe,2,',','.');
-		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
 
-	
-	public function getDespag()
-	{
+  }
+  
+  public function getSalpag($val=false)
+  {
 
-		return $this->despag; 		
-	}
-	
-	public function getFunpag()
-	{
+    if($val) return number_format($this->salpag,2,',','.');
+    else return $this->salpag;
 
-		return $this->funpag; 		
-	}
-	
-	public function getStapag()
-	{
+  }
+  
+  public function getMonefe($val=false)
+  {
 
-		return $this->stapag; 		
-	}
-	
-	public function getFueing()
-	{
+    if($val) return number_format($this->monefe,2,',','.');
+    else return $this->monefe;
 
-		return $this->fueing; 		
-	}
-	
-	public function getMotanu()
-	{
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
 
-		return $this->motanu; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getDespag()
+  {
 
-	
-	public function getEdopag()
-	{
+    return trim($this->despag);
 
-		return $this->edopag; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getFunpag()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->funpag);
+
+  }
+  
+  public function getStapag()
+  {
+
+    return trim($this->stapag);
+
+  }
+  
+  public function getFueing()
+  {
+
+    return trim($this->fueing);
+
+  }
+  
+  public function getMotanu()
+  {
+
+    return trim($this->motanu);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getEdopag()
+  {
+
+    return trim($this->edopag);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumpag($v)
 	{
 
-		if ($this->numpag !== $v) {
-			$this->numpag = $v;
-			$this->modifiedColumns[] = InabonosPeer::NUMPAG;
-		}
-
+    if ($this->numpag !== $v) {
+        $this->numpag = $v;
+        $this->modifiedColumns[] = InabonosPeer::NUMPAG;
+      }
+  
 	} 
 	
 	public function setNumref($v)
 	{
 
-		if ($this->numref !== $v) {
-			$this->numref = $v;
-			$this->modifiedColumns[] = InabonosPeer::NUMREF;
-		}
-
+    if ($this->numref !== $v) {
+        $this->numref = $v;
+        $this->modifiedColumns[] = InabonosPeer::NUMREF;
+      }
+  
 	} 
 	
 	public function setFecpag($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecpag !== $ts) {
-			$this->fecpag = $ts;
-			$this->modifiedColumns[] = InabonosPeer::FECPAG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecpag !== $ts) {
+      $this->fecpag = $ts;
+      $this->modifiedColumns[] = InabonosPeer::FECPAG;
+    }
 
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = InabonosPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = InabonosPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = InabonosPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = InabonosPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setSalpag($v)
 	{
 
-		if ($this->salpag !== $v) {
-			$this->salpag = $v;
-			$this->modifiedColumns[] = InabonosPeer::SALPAG;
-		}
-
+    if ($this->salpag !== $v) {
+        $this->salpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = InabonosPeer::SALPAG;
+      }
+  
 	} 
 	
 	public function setMonefe($v)
 	{
 
-		if ($this->monefe !== $v) {
-			$this->monefe = $v;
-			$this->modifiedColumns[] = InabonosPeer::MONEFE;
-		}
-
+    if ($this->monefe !== $v) {
+        $this->monefe = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = InabonosPeer::MONEFE;
+      }
+  
 	} 
 	
 	public function setFecrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = InabonosPeer::FECREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = InabonosPeer::FECREC;
+    }
 
 	} 
 	
 	public function setDespag($v)
 	{
 
-		if ($this->despag !== $v) {
-			$this->despag = $v;
-			$this->modifiedColumns[] = InabonosPeer::DESPAG;
-		}
-
+    if ($this->despag !== $v) {
+        $this->despag = $v;
+        $this->modifiedColumns[] = InabonosPeer::DESPAG;
+      }
+  
 	} 
 	
 	public function setFunpag($v)
 	{
 
-		if ($this->funpag !== $v) {
-			$this->funpag = $v;
-			$this->modifiedColumns[] = InabonosPeer::FUNPAG;
-		}
-
+    if ($this->funpag !== $v) {
+        $this->funpag = $v;
+        $this->modifiedColumns[] = InabonosPeer::FUNPAG;
+      }
+  
 	} 
 	
 	public function setStapag($v)
 	{
 
-		if ($this->stapag !== $v) {
-			$this->stapag = $v;
-			$this->modifiedColumns[] = InabonosPeer::STAPAG;
-		}
-
+    if ($this->stapag !== $v) {
+        $this->stapag = $v;
+        $this->modifiedColumns[] = InabonosPeer::STAPAG;
+      }
+  
 	} 
 	
 	public function setFueing($v)
 	{
 
-		if ($this->fueing !== $v) {
-			$this->fueing = $v;
-			$this->modifiedColumns[] = InabonosPeer::FUEING;
-		}
-
+    if ($this->fueing !== $v) {
+        $this->fueing = $v;
+        $this->modifiedColumns[] = InabonosPeer::FUEING;
+      }
+  
 	} 
 	
 	public function setMotanu($v)
 	{
 
-		if ($this->motanu !== $v) {
-			$this->motanu = $v;
-			$this->modifiedColumns[] = InabonosPeer::MOTANU;
-		}
-
+    if ($this->motanu !== $v) {
+        $this->motanu = $v;
+        $this->modifiedColumns[] = InabonosPeer::MOTANU;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = InabonosPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = InabonosPeer::FECANU;
+    }
 
 	} 
 	
 	public function setEdopag($v)
 	{
 
-		if ($this->edopag !== $v) {
-			$this->edopag = $v;
-			$this->modifiedColumns[] = InabonosPeer::EDOPAG;
-		}
-
+    if ($this->edopag !== $v) {
+        $this->edopag = $v;
+        $this->modifiedColumns[] = InabonosPeer::EDOPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = InabonosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = InabonosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numpag = $rs->getString($startcol + 0);
+      $this->numpag = $rs->getString($startcol + 0);
 
-			$this->numref = $rs->getString($startcol + 1);
+      $this->numref = $rs->getString($startcol + 1);
 
-			$this->fecpag = $rs->getDate($startcol + 2, null);
+      $this->fecpag = $rs->getDate($startcol + 2, null);
 
-			$this->rifcon = $rs->getString($startcol + 3);
+      $this->rifcon = $rs->getString($startcol + 3);
 
-			$this->monpag = $rs->getFloat($startcol + 4);
+      $this->monpag = $rs->getFloat($startcol + 4);
 
-			$this->salpag = $rs->getFloat($startcol + 5);
+      $this->salpag = $rs->getFloat($startcol + 5);
 
-			$this->monefe = $rs->getFloat($startcol + 6);
+      $this->monefe = $rs->getFloat($startcol + 6);
 
-			$this->fecrec = $rs->getDate($startcol + 7, null);
+      $this->fecrec = $rs->getDate($startcol + 7, null);
 
-			$this->despag = $rs->getString($startcol + 8);
+      $this->despag = $rs->getString($startcol + 8);
 
-			$this->funpag = $rs->getString($startcol + 9);
+      $this->funpag = $rs->getString($startcol + 9);
 
-			$this->stapag = $rs->getString($startcol + 10);
+      $this->stapag = $rs->getString($startcol + 10);
 
-			$this->fueing = $rs->getString($startcol + 11);
+      $this->fueing = $rs->getString($startcol + 11);
 
-			$this->motanu = $rs->getString($startcol + 12);
+      $this->motanu = $rs->getString($startcol + 12);
 
-			$this->fecanu = $rs->getDate($startcol + 13, null);
+      $this->fecanu = $rs->getDate($startcol + 13, null);
 
-			$this->edopag = $rs->getString($startcol + 14);
+      $this->edopag = $rs->getString($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Inabonos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Inabonos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

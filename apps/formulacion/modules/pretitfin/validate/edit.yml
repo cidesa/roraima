@@ -1,0 +1,45 @@
+methods:
+  post:
+   - "fortipfin{codfin}"
+   - "fortipfin{nomabr}"   
+   - "fortipfin{nomext}"      
+names: 
+  fortipfin{codfin}:
+    required:  Yes
+    required_msg: El Código del Tipo de Financiamiento no puede estar en Blanco
+    validators: Validator_codfin
+    
+  fortipfin{nomabr}:
+    required:  Yes
+    required_msg: El Nombre Abreviado del Tipo de Financiamiento no puede estar en Blanco
+    validators: Validator_nomabr   
+    
+  fortipfin{nomext}:
+    required:  Yes
+    required_msg: El Nombre del Tipo de Financiamiento no puede estar en Blanco
+    validators: Validator_nomext      
+
+Validator_codfin:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fortipfin
+        column:       codfin
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_nomext:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre del tipo de financiamiento no puede tener menos de 2 caracteres
+        max:       100
+        max_error: El nombre del tipo de financiamiento no puede pasar mas de 100 caracteres
+     
+        
+Validator_nomabr:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre abreviado del tipo de financiamiento no puede tener menos de 2 caracteres
+        max:       10
+        max_error: El nombre abreviado del tipo de financiamiento no puede pasar mas de 100 caracteres
+

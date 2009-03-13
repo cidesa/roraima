@@ -31,74 +31,99 @@ abstract class BaseFctippag extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTippag()
-	{
+  
+  public function getTippag()
+  {
 
-		return $this->tippag; 		
-	}
-	
-	public function getDespag()
-	{
+    return trim($this->tippag);
 
-		return $this->despag; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDespag()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->despag);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTippag($v)
 	{
 
-		if ($this->tippag !== $v) {
-			$this->tippag = $v;
-			$this->modifiedColumns[] = FctippagPeer::TIPPAG;
-		}
-
+    if ($this->tippag !== $v) {
+        $this->tippag = $v;
+        $this->modifiedColumns[] = FctippagPeer::TIPPAG;
+      }
+  
 	} 
 	
 	public function setDespag($v)
 	{
 
-		if ($this->despag !== $v) {
-			$this->despag = $v;
-			$this->modifiedColumns[] = FctippagPeer::DESPAG;
-		}
-
+    if ($this->despag !== $v) {
+        $this->despag = $v;
+        $this->modifiedColumns[] = FctippagPeer::DESPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FctippagPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FctippagPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tippag = $rs->getString($startcol + 0);
+      $this->tippag = $rs->getString($startcol + 0);
 
-			$this->despag = $rs->getString($startcol + 1);
+      $this->despag = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fctippag object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fctippag object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -155,6 +180,7 @@ abstract class BaseFctippag extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FctippagPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FctippagPeer::doUpdate($this, $con);

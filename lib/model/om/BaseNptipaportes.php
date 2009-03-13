@@ -33,112 +33,139 @@ abstract class BaseNptipaportes extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipapo()
-	{
+  
+  public function getCodtipapo()
+  {
 
-		return $this->codtipapo; 		
-	}
-	
-	public function getDestipapo()
-	{
+    return trim($this->codtipapo);
 
-		return $this->destipapo; 		
-	}
-	
-	public function getPorret()
-	{
+  }
+  
+  public function getDestipapo()
+  {
 
-		return number_format($this->porret,2,',','.');
-		
-	}
-	
-	public function getPorapo()
-	{
+    return trim($this->destipapo);
 
-		return number_format($this->porapo,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPorret($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->porret,2,',','.');
+    else return $this->porret;
+
+  }
+  
+  public function getPorapo($val=false)
+  {
+
+    if($val) return number_format($this->porapo,2,',','.');
+    else return $this->porapo;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipapo($v)
 	{
 
-		if ($this->codtipapo !== $v) {
-			$this->codtipapo = $v;
-			$this->modifiedColumns[] = NptipaportesPeer::CODTIPAPO;
-		}
-
+    if ($this->codtipapo !== $v) {
+        $this->codtipapo = $v;
+        $this->modifiedColumns[] = NptipaportesPeer::CODTIPAPO;
+      }
+  
 	} 
 	
 	public function setDestipapo($v)
 	{
 
-		if ($this->destipapo !== $v) {
-			$this->destipapo = $v;
-			$this->modifiedColumns[] = NptipaportesPeer::DESTIPAPO;
-		}
-
+    if ($this->destipapo !== $v) {
+        $this->destipapo = $v;
+        $this->modifiedColumns[] = NptipaportesPeer::DESTIPAPO;
+      }
+  
 	} 
 	
 	public function setPorret($v)
 	{
 
-		if ($this->porret !== $v) {
-			$this->porret = $v;
-			$this->modifiedColumns[] = NptipaportesPeer::PORRET;
-		}
-
+    if ($this->porret !== $v) {
+        $this->porret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipaportesPeer::PORRET;
+      }
+  
 	} 
 	
 	public function setPorapo($v)
 	{
 
-		if ($this->porapo !== $v) {
-			$this->porapo = $v;
-			$this->modifiedColumns[] = NptipaportesPeer::PORAPO;
-		}
-
+    if ($this->porapo !== $v) {
+        $this->porapo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipaportesPeer::PORAPO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NptipaportesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NptipaportesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipapo = $rs->getString($startcol + 0);
+      $this->codtipapo = $rs->getString($startcol + 0);
 
-			$this->destipapo = $rs->getString($startcol + 1);
+      $this->destipapo = $rs->getString($startcol + 1);
 
-			$this->porret = $rs->getFloat($startcol + 2);
+      $this->porret = $rs->getFloat($startcol + 2);
 
-			$this->porapo = $rs->getFloat($startcol + 3);
+      $this->porapo = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nptipaportes object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nptipaportes object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -195,6 +222,7 @@ abstract class BaseNptipaportes extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NptipaportesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NptipaportesPeer::doUpdate($this, $con);

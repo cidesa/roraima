@@ -41,172 +41,200 @@ abstract class BaseNpvacaciones extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getFechavac($format = 'Y-m-d')
-	{
+    return trim($this->codemp);
 
-		if ($this->fechavac === null || $this->fechavac === '') {
-			return null;
-		} elseif (!is_int($this->fechavac)) {
-						$ts = strtotime($this->fechavac);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechavac] as date/time value: " . var_export($this->fechavac, true));
-			}
-		} else {
-			$ts = $this->fechavac;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFechavac($format = 'Y-m-d')
+  {
 
-	
-	public function getDisfrutar()
-	{
+    if ($this->fechavac === null || $this->fechavac === '') {
+      return null;
+    } elseif (!is_int($this->fechavac)) {
+            $ts = adodb_strtotime($this->fechavac);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechavac] as date/time value: " . var_export($this->fechavac, true));
+      }
+    } else {
+      $ts = $this->fechavac;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->disfrutar,2,',','.');
-		
-	}
-	
-	public function getDisfrutados()
-	{
+  
+  public function getDisfrutar($val=false)
+  {
 
-		return number_format($this->disfrutados,2,',','.');
-		
-	}
-	
-	public function getBonovac()
-	{
+    if($val) return number_format($this->disfrutar,2,',','.');
+    else return $this->disfrutar;
 
-		return number_format($this->bonovac,2,',','.');
-		
-	}
-	
-	public function getBonopagado()
-	{
+  }
+  
+  public function getDisfrutados($val=false)
+  {
 
-		return $this->bonopagado; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->disfrutados,2,',','.');
+    else return $this->disfrutados;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getBonovac($val=false)
+  {
+
+    if($val) return number_format($this->bonovac,2,',','.');
+    else return $this->bonovac;
+
+  }
+  
+  public function getBonopagado()
+  {
+
+    return trim($this->bonopagado);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpvacacionesPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpvacacionesPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFechavac($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechavac] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechavac !== $ts) {
-			$this->fechavac = $ts;
-			$this->modifiedColumns[] = NpvacacionesPeer::FECHAVAC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechavac] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechavac !== $ts) {
+      $this->fechavac = $ts;
+      $this->modifiedColumns[] = NpvacacionesPeer::FECHAVAC;
+    }
 
 	} 
 	
 	public function setDisfrutar($v)
 	{
 
-		if ($this->disfrutar !== $v) {
-			$this->disfrutar = $v;
-			$this->modifiedColumns[] = NpvacacionesPeer::DISFRUTAR;
-		}
-
+    if ($this->disfrutar !== $v) {
+        $this->disfrutar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacacionesPeer::DISFRUTAR;
+      }
+  
 	} 
 	
 	public function setDisfrutados($v)
 	{
 
-		if ($this->disfrutados !== $v) {
-			$this->disfrutados = $v;
-			$this->modifiedColumns[] = NpvacacionesPeer::DISFRUTADOS;
-		}
-
+    if ($this->disfrutados !== $v) {
+        $this->disfrutados = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacacionesPeer::DISFRUTADOS;
+      }
+  
 	} 
 	
 	public function setBonovac($v)
 	{
 
-		if ($this->bonovac !== $v) {
-			$this->bonovac = $v;
-			$this->modifiedColumns[] = NpvacacionesPeer::BONOVAC;
-		}
-
+    if ($this->bonovac !== $v) {
+        $this->bonovac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacacionesPeer::BONOVAC;
+      }
+  
 	} 
 	
 	public function setBonopagado($v)
 	{
 
-		if ($this->bonopagado !== $v) {
-			$this->bonopagado = $v;
-			$this->modifiedColumns[] = NpvacacionesPeer::BONOPAGADO;
-		}
-
+    if ($this->bonopagado !== $v) {
+        $this->bonopagado = $v;
+        $this->modifiedColumns[] = NpvacacionesPeer::BONOPAGADO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacacionesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacacionesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->fechavac = $rs->getDate($startcol + 1, null);
+      $this->fechavac = $rs->getDate($startcol + 1, null);
 
-			$this->disfrutar = $rs->getFloat($startcol + 2);
+      $this->disfrutar = $rs->getFloat($startcol + 2);
 
-			$this->disfrutados = $rs->getFloat($startcol + 3);
+      $this->disfrutados = $rs->getFloat($startcol + 3);
 
-			$this->bonovac = $rs->getFloat($startcol + 4);
+      $this->bonovac = $rs->getFloat($startcol + 4);
 
-			$this->bonopagado = $rs->getString($startcol + 5);
+      $this->bonopagado = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacaciones object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacaciones object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -263,6 +291,7 @@ abstract class BaseNpvacaciones extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacacionesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacacionesPeer::doUpdate($this, $con);

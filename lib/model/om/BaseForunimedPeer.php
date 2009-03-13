@@ -210,6 +210,7 @@ abstract class BaseForunimedPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForunimedPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

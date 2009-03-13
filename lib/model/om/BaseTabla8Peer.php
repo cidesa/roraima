@@ -270,6 +270,7 @@ abstract class BaseTabla8Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Tabla8Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

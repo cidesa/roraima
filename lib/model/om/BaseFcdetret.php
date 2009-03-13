@@ -37,131 +37,159 @@ abstract class BaseFcdetret extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumret()
-	{
+  
+  public function getNumret()
+  {
 
-		return $this->numret; 		
-	}
-	
-	public function getNumref()
-	{
+    return trim($this->numret);
 
-		return $this->numref; 		
-	}
-	
-	public function getMonasi()
-	{
+  }
+  
+  public function getNumref()
+  {
 
-		return number_format($this->monasi,2,',','.');
-		
-	}
-	
-	public function getMonabo()
-	{
+    return trim($this->numref);
 
-		return number_format($this->monabo,2,',','.');
-		
-	}
-	
-	public function getMondeu()
-	{
+  }
+  
+  public function getMonasi($val=false)
+  {
 
-		return number_format($this->mondeu,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monasi,2,',','.');
+    else return $this->monasi;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonabo($val=false)
+  {
+
+    if($val) return number_format($this->monabo,2,',','.');
+    else return $this->monabo;
+
+  }
+  
+  public function getMondeu($val=false)
+  {
+
+    if($val) return number_format($this->mondeu,2,',','.');
+    else return $this->mondeu;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumret($v)
 	{
 
-		if ($this->numret !== $v) {
-			$this->numret = $v;
-			$this->modifiedColumns[] = FcdetretPeer::NUMRET;
-		}
-
+    if ($this->numret !== $v) {
+        $this->numret = $v;
+        $this->modifiedColumns[] = FcdetretPeer::NUMRET;
+      }
+  
 	} 
 	
 	public function setNumref($v)
 	{
 
-		if ($this->numref !== $v) {
-			$this->numref = $v;
-			$this->modifiedColumns[] = FcdetretPeer::NUMREF;
-		}
-
+    if ($this->numref !== $v) {
+        $this->numref = $v;
+        $this->modifiedColumns[] = FcdetretPeer::NUMREF;
+      }
+  
 	} 
 	
 	public function setMonasi($v)
 	{
 
-		if ($this->monasi !== $v || $v === 0) {
-			$this->monasi = $v;
-			$this->modifiedColumns[] = FcdetretPeer::MONASI;
-		}
-
+    if ($this->monasi !== $v || $v === 0) {
+        $this->monasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdetretPeer::MONASI;
+      }
+  
 	} 
 	
 	public function setMonabo($v)
 	{
 
-		if ($this->monabo !== $v || $v === 0) {
-			$this->monabo = $v;
-			$this->modifiedColumns[] = FcdetretPeer::MONABO;
-		}
-
+    if ($this->monabo !== $v || $v === 0) {
+        $this->monabo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdetretPeer::MONABO;
+      }
+  
 	} 
 	
 	public function setMondeu($v)
 	{
 
-		if ($this->mondeu !== $v || $v === 0) {
-			$this->mondeu = $v;
-			$this->modifiedColumns[] = FcdetretPeer::MONDEU;
-		}
-
+    if ($this->mondeu !== $v || $v === 0) {
+        $this->mondeu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdetretPeer::MONDEU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdetretPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdetretPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numret = $rs->getString($startcol + 0);
+      $this->numret = $rs->getString($startcol + 0);
 
-			$this->numref = $rs->getString($startcol + 1);
+      $this->numref = $rs->getString($startcol + 1);
 
-			$this->monasi = $rs->getFloat($startcol + 2);
+      $this->monasi = $rs->getFloat($startcol + 2);
 
-			$this->monabo = $rs->getFloat($startcol + 3);
+      $this->monabo = $rs->getFloat($startcol + 3);
 
-			$this->mondeu = $rs->getFloat($startcol + 4);
+      $this->mondeu = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdetret object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdetret object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -218,6 +246,7 @@ abstract class BaseFcdetret extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdetretPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdetretPeer::doUpdate($this, $con);

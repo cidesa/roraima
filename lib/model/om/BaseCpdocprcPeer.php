@@ -210,6 +210,7 @@ abstract class BaseCpdocprcPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpdocprcPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -7,18 +7,23 @@ generator:
     fields:
       codemp:      { name: Codigo}
       nomemp:      { name: Empleado, params: maxlength=100}
-      feccal:      { name: Fecha de Ingreso, params: date_format='dd/MM/yyyy'} 
-      fecret:      { name: Fecha de Egreso, params: date_format='dd/MM/yyyy'} 
-      codnom:      { name: Nomina }     
-        
+      fecing:      { name: Fecha de Ingreso, params: date_format='dd/MM/yyyy'}
+      fecret:      { name: Fecha de Egreso, params: date_format='dd/MM/yyyy'}
+
+
     list:
-      title:          Liquidación de Vacaciones  por Egreso
-      filters:        [codemp, nomemp, feccal]
-      display:        [=codemp, nomemp, feccal]
+      title:          LiquidaciÃ³n de Vacaciones  por Egreso
+      filters:        [codemp, nomemp, fecing]
+      display:        [=codemp, nomemp, fecing]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Definición de Liquidación de Vacaciones  por Egreso
-      display:        [codemp, nomemp, feccal, fecret, codnom]
+      title:          LiquidaciÃ³n de Vacaciones  por Egreso
+      display:        [codemp, nomemp, fecing, fecret]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:         ~

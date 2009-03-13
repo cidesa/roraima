@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Registro de Vacaciones Disfrutadas en Lote', 
+<h1><?php echo __('Registro de Vacaciones Disfrutadas en Lote',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('vachistorico_lote/edit_messages', array('npvacdisfrute' => $npvacdisfrute, 'labels' => $labels)) ?>
-<?php include_partial('vachistorico_lote/edit_form', array('npvacdisfrute' => $npvacdisfrute, 'labels' => $labels)) ?>
+<?php include_partial('vachistorico_lote/edit_form', array('npvacdisfrute' => $npvacdisfrute, 'labels' => $labels, 'obj' => $obj, 'arranos' => $arranos, 'arranom' => $arranom)) ?>
 </div>
 
 <div id="sf_admin_footer">

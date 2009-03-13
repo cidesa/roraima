@@ -13,7 +13,7 @@ abstract class BaseNpinffamPeer {
 	const CLASS_DEFAULT = 'lib.model.Npinffam';
 
 	
-	const NUM_COLUMNS = 13;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -53,6 +53,9 @@ abstract class BaseNpinffamPeer {
 	const CODGUA = 'npinffam.CODGUA';
 
 	
+	const VALGUA = 'npinffam.VALGUA';
+
+	
 	const SEGHCM = 'npinffam.SEGHCM';
 
 	
@@ -64,18 +67,18 @@ abstract class BaseNpinffamPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Cedfam', 'Nomfam', 'Sexfam', 'Fecnac', 'Edafam', 'Parfam', 'Edociv', 'Grains', 'Traofi', 'Codgua', 'Seghcm', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpinffamPeer::CODEMP, NpinffamPeer::CEDFAM, NpinffamPeer::NOMFAM, NpinffamPeer::SEXFAM, NpinffamPeer::FECNAC, NpinffamPeer::EDAFAM, NpinffamPeer::PARFAM, NpinffamPeer::EDOCIV, NpinffamPeer::GRAINS, NpinffamPeer::TRAOFI, NpinffamPeer::CODGUA, NpinffamPeer::SEGHCM, NpinffamPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'cedfam', 'nomfam', 'sexfam', 'fecnac', 'edafam', 'parfam', 'edociv', 'grains', 'traofi', 'codgua', 'seghcm', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Cedfam', 'Nomfam', 'Sexfam', 'Fecnac', 'Edafam', 'Parfam', 'Edociv', 'Grains', 'Traofi', 'Codgua', 'Valgua', 'Seghcm', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpinffamPeer::CODEMP, NpinffamPeer::CEDFAM, NpinffamPeer::NOMFAM, NpinffamPeer::SEXFAM, NpinffamPeer::FECNAC, NpinffamPeer::EDAFAM, NpinffamPeer::PARFAM, NpinffamPeer::EDOCIV, NpinffamPeer::GRAINS, NpinffamPeer::TRAOFI, NpinffamPeer::CODGUA, NpinffamPeer::VALGUA, NpinffamPeer::SEGHCM, NpinffamPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'cedfam', 'nomfam', 'sexfam', 'fecnac', 'edafam', 'parfam', 'edociv', 'grains', 'traofi', 'codgua', 'valgua', 'seghcm', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Cedfam' => 1, 'Nomfam' => 2, 'Sexfam' => 3, 'Fecnac' => 4, 'Edafam' => 5, 'Parfam' => 6, 'Edociv' => 7, 'Grains' => 8, 'Traofi' => 9, 'Codgua' => 10, 'Seghcm' => 11, 'Id' => 12, ),
-		BasePeer::TYPE_COLNAME => array (NpinffamPeer::CODEMP => 0, NpinffamPeer::CEDFAM => 1, NpinffamPeer::NOMFAM => 2, NpinffamPeer::SEXFAM => 3, NpinffamPeer::FECNAC => 4, NpinffamPeer::EDAFAM => 5, NpinffamPeer::PARFAM => 6, NpinffamPeer::EDOCIV => 7, NpinffamPeer::GRAINS => 8, NpinffamPeer::TRAOFI => 9, NpinffamPeer::CODGUA => 10, NpinffamPeer::SEGHCM => 11, NpinffamPeer::ID => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'cedfam' => 1, 'nomfam' => 2, 'sexfam' => 3, 'fecnac' => 4, 'edafam' => 5, 'parfam' => 6, 'edociv' => 7, 'grains' => 8, 'traofi' => 9, 'codgua' => 10, 'seghcm' => 11, 'id' => 12, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Cedfam' => 1, 'Nomfam' => 2, 'Sexfam' => 3, 'Fecnac' => 4, 'Edafam' => 5, 'Parfam' => 6, 'Edociv' => 7, 'Grains' => 8, 'Traofi' => 9, 'Codgua' => 10, 'Valgua' => 11, 'Seghcm' => 12, 'Id' => 13, ),
+		BasePeer::TYPE_COLNAME => array (NpinffamPeer::CODEMP => 0, NpinffamPeer::CEDFAM => 1, NpinffamPeer::NOMFAM => 2, NpinffamPeer::SEXFAM => 3, NpinffamPeer::FECNAC => 4, NpinffamPeer::EDAFAM => 5, NpinffamPeer::PARFAM => 6, NpinffamPeer::EDOCIV => 7, NpinffamPeer::GRAINS => 8, NpinffamPeer::TRAOFI => 9, NpinffamPeer::CODGUA => 10, NpinffamPeer::VALGUA => 11, NpinffamPeer::SEGHCM => 12, NpinffamPeer::ID => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'cedfam' => 1, 'nomfam' => 2, 'sexfam' => 3, 'fecnac' => 4, 'edafam' => 5, 'parfam' => 6, 'edociv' => 7, 'grains' => 8, 'traofi' => 9, 'codgua' => 10, 'valgua' => 11, 'seghcm' => 12, 'id' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -150,6 +153,8 @@ abstract class BaseNpinffamPeer {
 		$criteria->addSelectColumn(NpinffamPeer::TRAOFI);
 
 		$criteria->addSelectColumn(NpinffamPeer::CODGUA);
+
+		$criteria->addSelectColumn(NpinffamPeer::VALGUA);
 
 		$criteria->addSelectColumn(NpinffamPeer::SEGHCM);
 
@@ -255,6 +260,7 @@ abstract class BaseNpinffamPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpinffamPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

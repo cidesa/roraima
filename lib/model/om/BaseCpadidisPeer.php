@@ -255,6 +255,7 @@ abstract class BaseCpadidisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpadidisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

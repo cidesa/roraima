@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Inespeci
+    theme:            cidesaGenerator
+    fields:
+      codespeci:       { name: Código, params: size=4 }
+      desespeci:
+        name:Descripción
+        type: textarea_tag
+        params: size=50x5 maxlength=250
+
+    list:
+      title:          Definición de Especialidad
+      filters:        [codespeci]
+      display:        [=codespeci, desespeci]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codespeci
+
+    edit:
+      title:          Edición de Especialidad
+      display:        [_codespeci, desespeci]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

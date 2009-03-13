@@ -41,146 +41,175 @@ abstract class BaseBnmotdis extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmot()
-	{
+  
+  public function getCodmot()
+  {
 
-		return $this->codmot; 		
-	}
-	
-	public function getDesmot()
-	{
+    return trim($this->codmot);
 
-		return $this->desmot; 		
-	}
-	
-	public function getAfecon()
-	{
+  }
+  
+  public function getDesmot()
+  {
 
-		return $this->afecon; 		
-	}
-	
-	public function getStadis()
-	{
+    return trim($this->desmot);
 
-		return $this->stadis; 		
-	}
-	
-	public function getDesinc()
-	{
+  }
+  
+  public function getAfecon()
+  {
 
-		return $this->desinc; 		
-	}
-	
-	public function getAdimej()
-	{
+    return trim($this->afecon);
 
-		return $this->adimej; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getStadis()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->stadis);
+
+  }
+  
+  public function getDesinc()
+  {
+
+    return trim($this->desinc);
+
+  }
+  
+  public function getAdimej()
+  {
+
+    return trim($this->adimej);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmot($v)
 	{
 
-		if ($this->codmot !== $v) {
-			$this->codmot = $v;
-			$this->modifiedColumns[] = BnmotdisPeer::CODMOT;
-		}
-
+    if ($this->codmot !== $v) {
+        $this->codmot = $v;
+        $this->modifiedColumns[] = BnmotdisPeer::CODMOT;
+      }
+  
 	} 
 	
 	public function setDesmot($v)
 	{
 
-		if ($this->desmot !== $v) {
-			$this->desmot = $v;
-			$this->modifiedColumns[] = BnmotdisPeer::DESMOT;
-		}
-
+    if ($this->desmot !== $v) {
+        $this->desmot = $v;
+        $this->modifiedColumns[] = BnmotdisPeer::DESMOT;
+      }
+  
 	} 
 	
 	public function setAfecon($v)
 	{
 
-		if ($this->afecon !== $v) {
-			$this->afecon = $v;
-			$this->modifiedColumns[] = BnmotdisPeer::AFECON;
-		}
-
+    if ($this->afecon !== $v) {
+        $this->afecon = $v;
+        $this->modifiedColumns[] = BnmotdisPeer::AFECON;
+      }
+  
 	} 
 	
 	public function setStadis($v)
 	{
 
-		if ($this->stadis !== $v) {
-			$this->stadis = $v;
-			$this->modifiedColumns[] = BnmotdisPeer::STADIS;
-		}
-
+    if ($this->stadis !== $v) {
+        $this->stadis = $v;
+        $this->modifiedColumns[] = BnmotdisPeer::STADIS;
+      }
+  
 	} 
 	
 	public function setDesinc($v)
 	{
 
-		if ($this->desinc !== $v) {
-			$this->desinc = $v;
-			$this->modifiedColumns[] = BnmotdisPeer::DESINC;
-		}
-
+    if ($this->desinc !== $v) {
+        $this->desinc = $v;
+        $this->modifiedColumns[] = BnmotdisPeer::DESINC;
+      }
+  
 	} 
 	
 	public function setAdimej($v)
 	{
 
-		if ($this->adimej !== $v) {
-			$this->adimej = $v;
-			$this->modifiedColumns[] = BnmotdisPeer::ADIMEJ;
-		}
-
+    if ($this->adimej !== $v) {
+        $this->adimej = $v;
+        $this->modifiedColumns[] = BnmotdisPeer::ADIMEJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnmotdisPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnmotdisPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmot = $rs->getString($startcol + 0);
+      $this->codmot = $rs->getString($startcol + 0);
 
-			$this->desmot = $rs->getString($startcol + 1);
+      $this->desmot = $rs->getString($startcol + 1);
 
-			$this->afecon = $rs->getString($startcol + 2);
+      $this->afecon = $rs->getString($startcol + 2);
 
-			$this->stadis = $rs->getString($startcol + 3);
+      $this->stadis = $rs->getString($startcol + 3);
 
-			$this->desinc = $rs->getString($startcol + 4);
+      $this->desinc = $rs->getString($startcol + 4);
 
-			$this->adimej = $rs->getString($startcol + 5);
+      $this->adimej = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnmotdis object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnmotdis object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseBnmotdis extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BnmotdisPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnmotdisPeer::doUpdate($this, $con);

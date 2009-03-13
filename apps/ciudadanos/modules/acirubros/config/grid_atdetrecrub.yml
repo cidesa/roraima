@@ -1,0 +1,37 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   atdetrecrub
+  anchogrid:               750
+  ancho:                   300
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Seleccione
+  tipo:                    k
+  nombrecampo:             recaudo
+  html:                    [size="40" ]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Recaudo
+  tipo:                    t
+  nombrecampo:             desrec
+  html:                    [size="50" readonly="true" ]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Código Recaudo
+  tipo:                    t
+  nombrecampo:             Recaudid
+  html:                    [size="10" readonly="true"]
+  oculta:                  true
+  esgrabable:              true
+4:       # Columna 4
+  titulo:                  Requerido
+  tipo:                    c
+  nombrecampo:             requerido
+  html:                    ''
+  esgrabable:              true
+
+
+

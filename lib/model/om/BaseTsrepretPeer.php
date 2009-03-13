@@ -205,6 +205,7 @@ abstract class BaseTsrepretPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsrepretPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

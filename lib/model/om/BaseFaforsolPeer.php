@@ -13,14 +13,11 @@ abstract class BaseFaforsolPeer {
 	const CLASS_DEFAULT = 'lib.model.Faforsol';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 2;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
-
-	
-	const FORSOL = 'faforsol.FORSOL';
 
 	
 	const NOMSOL = 'faforsol.NOMSOL';
@@ -34,18 +31,18 @@ abstract class BaseFaforsolPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Forsol', 'Nomsol', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaforsolPeer::FORSOL, FaforsolPeer::NOMSOL, FaforsolPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('forsol', 'nomsol', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nomsol', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaforsolPeer::NOMSOL, FaforsolPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nomsol', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Forsol' => 0, 'Nomsol' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (FaforsolPeer::FORSOL => 0, FaforsolPeer::NOMSOL => 1, FaforsolPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('forsol' => 0, 'nomsol' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nomsol' => 0, 'Id' => 1, ),
+		BasePeer::TYPE_COLNAME => array (FaforsolPeer::NOMSOL => 0, FaforsolPeer::ID => 1, ),
+		BasePeer::TYPE_FIELDNAME => array ('nomsol' => 0, 'id' => 1, ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
@@ -98,8 +95,6 @@ abstract class BaseFaforsolPeer {
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
-
-		$criteria->addSelectColumn(FaforsolPeer::FORSOL);
 
 		$criteria->addSelectColumn(FaforsolPeer::NOMSOL);
 
@@ -205,6 +200,7 @@ abstract class BaseFaforsolPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FaforsolPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

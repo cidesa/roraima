@@ -215,6 +215,7 @@ abstract class BaseNpciudadPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpciudadPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

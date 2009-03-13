@@ -13,7 +13,7 @@ abstract class BaseFadescartPeer {
 	const CLASS_DEFAULT = 'lib.model.Fadescart';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseFadescartPeer {
 	const MONDESC = 'fadescart.MONDESC';
 
 	
+	const MONDETDESC = 'fadescart.MONDETDESC';
+
+	
 	const TIPDOC = 'fadescart.TIPDOC';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseFadescartPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Coddesc', 'Refdoc', 'Codart', 'Mondesc', 'Tipdoc', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FadescartPeer::CODDESC, FadescartPeer::REFDOC, FadescartPeer::CODART, FadescartPeer::MONDESC, FadescartPeer::TIPDOC, FadescartPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('coddesc', 'refdoc', 'codart', 'mondesc', 'tipdoc', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Coddesc', 'Refdoc', 'Codart', 'Mondesc', 'Mondetdesc', 'Tipdoc', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FadescartPeer::CODDESC, FadescartPeer::REFDOC, FadescartPeer::CODART, FadescartPeer::MONDESC, FadescartPeer::MONDETDESC, FadescartPeer::TIPDOC, FadescartPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('coddesc', 'refdoc', 'codart', 'mondesc', 'mondetdesc', 'tipdoc', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Coddesc' => 0, 'Refdoc' => 1, 'Codart' => 2, 'Mondesc' => 3, 'Tipdoc' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (FadescartPeer::CODDESC => 0, FadescartPeer::REFDOC => 1, FadescartPeer::CODART => 2, FadescartPeer::MONDESC => 3, FadescartPeer::TIPDOC => 4, FadescartPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('coddesc' => 0, 'refdoc' => 1, 'codart' => 2, 'mondesc' => 3, 'tipdoc' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Coddesc' => 0, 'Refdoc' => 1, 'Codart' => 2, 'Mondesc' => 3, 'Mondetdesc' => 4, 'Tipdoc' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (FadescartPeer::CODDESC => 0, FadescartPeer::REFDOC => 1, FadescartPeer::CODART => 2, FadescartPeer::MONDESC => 3, FadescartPeer::MONDETDESC => 4, FadescartPeer::TIPDOC => 5, FadescartPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('coddesc' => 0, 'refdoc' => 1, 'codart' => 2, 'mondesc' => 3, 'mondetdesc' => 4, 'tipdoc' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -115,6 +118,8 @@ abstract class BaseFadescartPeer {
 		$criteria->addSelectColumn(FadescartPeer::CODART);
 
 		$criteria->addSelectColumn(FadescartPeer::MONDESC);
+
+		$criteria->addSelectColumn(FadescartPeer::MONDETDESC);
 
 		$criteria->addSelectColumn(FadescartPeer::TIPDOC);
 
@@ -220,6 +225,7 @@ abstract class BaseFadescartPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FadescartPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

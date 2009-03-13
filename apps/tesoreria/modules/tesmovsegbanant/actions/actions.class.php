@@ -1,57 +1,41 @@
 <?php
 
 /**
- * tesmovsegbanant actions.
+ * tesmovsegban actions.
  *
  * @package    siga
- * @subpackage tesmovsegbanant
+ * @subpackage tesmovsegban
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
  */
 class tesmovsegbanantActions extends autotesmovsegbanantActions
 {
-  public function getNomcue()
+  public function executeIndex()
   {
-  	  $c = new Criteria;
-  	  $c->add(TsdefbanPeer::NUMCUE,str_pad($this->tsmovban->getNumcue(),20,' '));
-  	  $this->misdatos = TsdefbanPeer::doSelect($c);
-  	  if ($this->misdatos)
-	  	return $this->misdatos[0]->getNomcue();
-	  	else return ' ';	
+     return $this->redirect('tesmovsegbanant/edit');
   }
-  public function getNomTipMov()
-  {
-  	  $c = new Criteria;
-  	  $c->add(TstipmovPeer::CODTIP,str_pad($this->tsmovban->getTipmov(),4,' '));
-  	  $this->misdatos = TstipmovPeer::doSelect($c);
-  	  if ($this->misdatos)
-	  	return $this->misdatos[0]->getDestip();
-	  	else return ' ';	
-  }
-  public function executeEdit()
-  {
-    $this->tsmovban = $this->getTsmovbanOrCreate();
-    $this->nomcue = $this->getNomcue();
-    $this->nomtipmov = $this->getNomTipMov();
-    
-    
-    if ($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->updateTsmovbanFromRequest();
+	public function executeEdit()
+	{
+		$this->tsmovban = $this->getTsmovbanOrCreate();
 
-      $this->saveTsmovban($this->tsmovban);
+		if ($this->getRequest()->getMethod() == sfRequest::POST)
+		{
+			$this->updateTsmovbanFromRequest();
 
-      $this->setFlash('notice', 'Your modifications have been saved');
+			$this->saveTsmovban($this->tsmovban);
 
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('tesmovsegbanant/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('tesmovsegbanant/list');
-      }
-      else
+			$this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
+
+			if ($this->getRequestParameter('save_and_add'))
+			{
+				return $this->redirect('tesmovsegbanant/create');
+			}
+			else if ($this->getRequestParameter('save_and_list'))
+			{
+				return $this->redirect('tesmovsegbanant/list');
+			}
+			else
       {
         return $this->redirect('tesmovsegbanant/edit?id='.$this->tsmovban->getId());
       }
@@ -61,76 +45,157 @@ class tesmovsegbanantActions extends autotesmovsegbanantActions
       $this->labels = $this->getLabels();
     }
   }
-  
-	protected function updateTsmovbanFromRequest()
-  {
-    $tsmovban = $this->getRequestParameter('tsmovban');
 
-    if (isset($tsmovban['numcue']))
-    {
-      $this->tsmovban->setNumcue($tsmovban['numcue']);
-    }
-    if (isset($tsmovban['codcta']))
-    {
-      $this->tsmovban->setCodcta($tsmovban['codcta']);
-    }
-    if (isset($tsmovban['refban']))
-    {
-      $this->tsmovban->setRefban($tsmovban['refban']);
-    }
-    if (isset($tsmovban['fecban']))
-    {
-      if ($tsmovban['fecban'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($tsmovban['fecban']))
+
+	protected function saveTsmovban($tsmovban)
+	{
+		if ($tsmovban->getId()!="")
+		{
+			$tsmovban->save();
+		}
+		else
+		{
+			$tsmovban->save();
+			$debcre=Herramientas::getX('codtip','tstipmov','debcre',$this->tsmovban->getTipmov());
+			$this->Actualiza_Bancos('A',$debcre);
+		}
+	}
+	function  Actualiza_Bancos($accion,$debcre)
+	{
+	  $c= new Criteria();
+  	  $c->add(TsdefbanPeer::NUMCUE,$this->tsmovban->getNumcue());
+  	  $dato=TsdefbanPeer::doSelectOne($c);
+  	  if ($dato)
+  	  {
+  	   switch($dato->getDebcre())
+       {
+        case "D":
+          if ($accion=='A')
           {
-            $value = $dateFormat->format($tsmovban['fecban'], 'i', $dateFormat->getInputPattern('d'));
+          	$debito=$dato->getDeblib();
+          	$total= $debito + $this->tsmovban->getMonmov();
+          	$dato->setDeblib($total);
           }
-          else
+          if ($accion=='E')
           {
-            $value_array = $tsmovban['fecban'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+            $debito=$dato->getDeblib();
+          	$total= $debito - $this->tsmovban->getMonmov();
+          	$dato->setDeblib($total);
           }
-          $this->tsmovban->setFecban($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
+          break;
+       case "C":
+         if ($accion=='A')
+          {
+          	$credito=$dato->getCrelib();
+          	$total= $credito + $this->tsmovban->getMonmov();
+          	$dato->setCrelib($total);
+          }
+          if ($accion=='E')
+          {
+            $credito=$dato->getCrelib();
+          	$total= $credito - $this->tsmovban->getMonmov();
+          	$dato->setCrelib($total);
+          }
+         break;
       }
-      else
-      {
-        $this->tsmovban->setFecban(null);
-      }
-    }
-    if (isset($tsmovban['tipmov']))
-    {
-      $this->tsmovban->setTipmov($tsmovban['tipmov']);
-    }
-    if (isset($tsmovban['desban']))
-    {
-      $this->tsmovban->setDesban($tsmovban['desban']);
-    }
-    if (isset($tsmovban['monmov']))
-    {
-      $this->tsmovban->setMonmov($tsmovban['monmov']);
-    }
-
-      $this->tsmovban->setStatus('C');
-
-      $this->tsmovban->setStacon('N');
-
-    if (isset($tsmovban['transito']))
-    {
-      $this->tsmovban->setTransito($tsmovban['transito']);
-    }
-    if (isset($tsmovban['stacon1']))
-    {
-      $this->tsmovban->setStacon1($tsmovban['stacon1']);
-    }
+      $dato->save();
+  	}
   }
-	
+
+	protected function updateTsmovbanFromRequest()
+	{
+		$tsmovban = $this->getRequestParameter('tsmovban');
+
+		if (isset($tsmovban['numcue']))
+		{
+			$this->tsmovban->setNumcue($tsmovban['numcue']);
+		}
+		if (isset($tsmovban['nombanco']))
+		{
+			$this->tsmovban->setNombanco($tsmovban['nombanco']);
+		}
+		if (isset($tsmovban['refban']))
+		{
+			$this->tsmovban->setRefban($tsmovban['refban']);
+		}
+		if (isset($tsmovban['tipmov']))
+		{
+			$this->tsmovban->setTipmov($tsmovban['tipmov']);
+		}
+		if (isset($tsmovban['nommovim']))
+		{
+			$this->tsmovban->setNommovim($tsmovban['nommovim']);
+		}
+		if (isset($tsmovban['fecban']))
+		{
+			if ($tsmovban['fecban'])
+			{
+				try
+				{
+					$dateFormat = new sfDateFormat($this->getUser()->getCulture());
+					if (!is_array($tsmovban['fecban']))
+					{
+						$value = $dateFormat->format($tsmovban['fecban'], 'i', $dateFormat->getInputPattern('d'));
+					}
+					else
+					{
+						$value_array = $tsmovban['fecban'];
+						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+					}
+					$this->tsmovban->setFecban($value);
+				}
+				catch (sfException $e)
+				{
+					// not a date
+				}
+			}
+			else
+			{
+				$this->tsmovban->setFecban(null);
+			}
+		}
+		if (isset($tsmovban['desban']))
+		{
+			$this->tsmovban->setDesban($tsmovban['desban']);
+		}
+		if (isset($tsmovban['monmov']))
+		{
+			$this->tsmovban->setMonmov($tsmovban['monmov']);
+		}
+		$this->tsmovban->setStatus('C');
+		$this->tsmovban->setStacon('N');
+		$this->tsmovban->setCodcta(Herramientas::getX('Numcue','Tsdefban','Codcta',$tsmovban['numcue']));
+	}
+
+	public function executeAjax()
+	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+	 $cajtexcom=$this->getRequestParameter('cajtexcom');
+	 if ($this->getRequestParameter('ajax')=='1')
+	 {
+	 	$dato=TsdefbanPeer::getNomcue($this->getRequestParameter('codigo'));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 }
+	 else  if ($this->getRequestParameter('ajax')=='2')
+	 {
+	 	$dato=TstipmovPeer::getDestip($this->getRequestParameter('codigo'));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 }
+
+	 $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 return sfView::HEADER_ONLY;
+	}
+
+	public function executeAutocomplete()
+	{
+		if ($this->getRequestParameter('ajax')=='1')
+		{
+			$this->tags=Herramientas::autocompleteAjax('numcue','tsdefban','numcue',$this->getRequestParameter('tsmovban[numcue]'));
+		}
+		if ($this->getRequestParameter('ajax')=='2')
+		{
+			$this->tags=Herramientas::autocompleteAjax('CodTip','TsTipMov','CodTip',$this->getRequestParameter('tsmovban[tipmov]'));
+	    }
+	}
+
 }

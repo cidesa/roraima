@@ -245,6 +245,7 @@ abstract class BaseTssolpagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TssolpagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -215,6 +215,7 @@ abstract class BaseFcrangosmulPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcrangosmulPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

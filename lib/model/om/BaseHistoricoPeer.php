@@ -210,6 +210,7 @@ abstract class BaseHistoricoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(HistoricoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

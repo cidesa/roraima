@@ -29,92 +29,118 @@ abstract class BaseFcsitjurinm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsitinm()
-	{
+  
+  public function getCodsitinm()
+  {
 
-		return $this->codsitinm; 		
-	}
-	
-	public function getNomsitinm()
-	{
+    return trim($this->codsitinm);
 
-		return $this->nomsitinm; 		
-	}
-	
-	public function getStasitinm()
-	{
+  }
+  
+  public function getNomsitinm()
+  {
 
-		return $this->stasitinm; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomsitinm);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStasitinm()
+  {
+
+    return trim($this->stasitinm);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsitinm($v)
 	{
 
-		if ($this->codsitinm !== $v) {
-			$this->codsitinm = $v;
-			$this->modifiedColumns[] = FcsitjurinmPeer::CODSITINM;
-		}
-
+    if ($this->codsitinm !== $v) {
+        $this->codsitinm = $v;
+        $this->modifiedColumns[] = FcsitjurinmPeer::CODSITINM;
+      }
+  
 	} 
 	
 	public function setNomsitinm($v)
 	{
 
-		if ($this->nomsitinm !== $v) {
-			$this->nomsitinm = $v;
-			$this->modifiedColumns[] = FcsitjurinmPeer::NOMSITINM;
-		}
-
+    if ($this->nomsitinm !== $v) {
+        $this->nomsitinm = $v;
+        $this->modifiedColumns[] = FcsitjurinmPeer::NOMSITINM;
+      }
+  
 	} 
 	
 	public function setStasitinm($v)
 	{
 
-		if ($this->stasitinm !== $v) {
-			$this->stasitinm = $v;
-			$this->modifiedColumns[] = FcsitjurinmPeer::STASITINM;
-		}
-
+    if ($this->stasitinm !== $v) {
+        $this->stasitinm = $v;
+        $this->modifiedColumns[] = FcsitjurinmPeer::STASITINM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcsitjurinmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcsitjurinmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsitinm = $rs->getString($startcol + 0);
+      $this->codsitinm = $rs->getString($startcol + 0);
 
-			$this->nomsitinm = $rs->getString($startcol + 1);
+      $this->nomsitinm = $rs->getString($startcol + 1);
 
-			$this->stasitinm = $rs->getString($startcol + 2);
+      $this->stasitinm = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcsitjurinm object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcsitjurinm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseFcsitjurinm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcsitjurinmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcsitjurinmPeer::doUpdate($this, $con);

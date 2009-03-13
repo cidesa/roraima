@@ -9,6 +9,7 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($npdefvar, 'getId') ?>
+<?php echo javascript_include_tag('ajax','tools','observe') ?>
 
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
@@ -19,13 +20,14 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($npdefvar, 'getCodvar', array (
-  'size' => 20,
+  'size' => 3,
+  'maxlength' => 3,
+  'readonly'  =>  $npdefvar->getId()!='' ? true : false ,
   'control_name' => 'npdefvar[codvar]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(3, '0',0);$('npdefvar_codvar').value=valor",
+ )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
+<br>
   <?php echo label_for('npdefvar[desvar]', __($labels['npdefvar{desvar}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npdefvar{desvar}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npdefvar{desvar}')): ?>
@@ -34,128 +36,155 @@
 
   <?php $value = object_input_tag($npdefvar, 'getDesvar', array (
   'size' => 30,
+  'maxlength' => 30,
   'control_name' => 'npdefvar[desvar]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend>Tipo de Nomina</legend>
 <div class="form-row">
-  <?php echo label_for('npdefvar[codnom]', __($labels['npdefvar{codnom}']), 'class="required" ') ?>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Tipo de Nomina') ?></legend>
+<div class="form-row">
+<table>
+<tr>
+<th>
+<?php echo label_for('npdefvar[codnom]', __($labels['npdefvar{codnom}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npdefvar{codnom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npdefvar{codnom}')): ?>
     <?php echo form_error('npdefvar{codnom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npdefvar, 'getCodnom', array (
-  'size' => 20,
-  'control_name' => 'npdefvar[codnom]',
+  <?php echo input_auto_complete_tag('npdefvar[codnom]', $npdefvar->getCodnom(),
+    'nomdefespvar/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 3,
+	'onBlur'=> remote_function(array(
+			  'url'      => 'nomdefespvar/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=1&cajtexmos=npdefvar_nomnom&cajtexcom=npdefvar_codnom&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+?>
+ </div>
+</th>
+<th>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npnomina_nomdefespvar/clase/Npnomina/frame/sf_admin_edit_form/obj1/npdefvar_codnom/obj2/npdefvar_nomnom')?>
+  </th>
+<th>
+<?php $value = object_input_tag($npdefvar, 'getNomnom', array (
+  'disabled' => true,
+  'size'=> 30,
+  'control_name' => 'npdefvar[nomnom]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;&nbsp;&nbsp;
-<?php echo $tipo ?>
-    </div>
-    &nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+</th>
+</tr>
+</table>
+
 </div>
 </fieldset>
+</div>
 
-<fieldset id="sf_fieldset_none" class="">
-<legend>Valores para la Variable</legend>
+
 <div class="form-row">
-  <?php echo label_for('npdefvar[valor1]', __($labels['npdefvar{valor1}']), 'class="required" ') ?>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Valores para la Variable') ?></legend>
+<div class="form-row">
+<table>
+<tr>
+  <th>
+   <?php echo label_for('npdefvar[valor1]', __($labels['npdefvar{valor1}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('npdefvar{valor1}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npdefvar{valor1}')): ?>
     <?php echo form_error('npdefvar{valor1}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npdefvar, 'getValor1', array (
+  <?php $value = object_input_tag($npdefvar,  array('getValor1',true), array (
   'size' => 7,
+  'maxlength' => 21,
   'control_name' => 'npdefvar[valor1]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Valor No. 4</strong>
-<?php $value = object_input_tag($npdefvar, 'getValor4', array (
-  'size' => 7,
-  'control_name' => 'npdefvar[valor4]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npdefvar[valor2]', __($labels['npdefvar{valor2}']), 'class="required" ') ?>
+</th>
+<th>
+ <?php echo label_for('npdefvar[valor2]', __($labels['npdefvar{valor2}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('npdefvar{valor2}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npdefvar{valor2}')): ?>
     <?php echo form_error('npdefvar{valor2}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npdefvar, 'getValor2', array (
+  <?php $value = object_input_tag($npdefvar,  array('getValor2',true), array (
   'size' => 7,
+  'maxlength' => 21,
   'control_name' => 'npdefvar[valor2]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-&nbsp;
-&nbsp;
-<strong>Valor No. 5</strong>
-<?php $value = object_input_tag($npdefvar, 'getValor5', array (
-  'size' => 7,
-  'control_name' => 'npdefvar[valor5]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+</th>
+</tr>
 
-<div class="form-row">
-  <?php echo label_for('npdefvar[valor3]', __($labels['npdefvar{valor3}']), 'class="required" ') ?>
+<tr>
+<th>
+  <?php echo label_for('npdefvar[valor3]', __($labels['npdefvar{valor3}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('npdefvar{valor3}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npdefvar{valor3}')): ?>
     <?php echo form_error('npdefvar{valor3}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npdefvar, 'getValor3', array (
+  <?php $value = object_input_tag($npdefvar, array('getValor3',true), array (
   'size' => 7,
+  'maxlength' => 21,
   'control_name' => 'npdefvar[valor3]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+</th>
+<th>
+<?php echo label_for('npdefvar[valor4]', __($labels['npdefvar{valor4}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npdefvar{valor4}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdefvar{valor4}')): ?>
+    <?php echo form_error('npdefvar{valor4}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npdefvar, array('getValor4',true), array (
+  'size' => 7,
+  'control_name' => 'npdefvar[valor4]',
+  'maxlength' => 21,
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th>
+</tr>
+
+<tr>
+<th>
+ <?php echo label_for('npdefvar[valor5]', __($labels['npdefvar{valor5}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npdefvar{valor5}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdefvar{valor5}')): ?>
+    <?php echo form_error('npdefvar{valor5}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npdefvar, array('getValor5',true), array (
+  'size' => 7,
+  'maxlength' => 21,
+  'control_name' => 'npdefvar[valor5]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+</th>
+</tr>
+</table>
 </div>
 </fieldset>
+</div>
 </fieldset>
 <?php include_partial('edit_actions', array('npdefvar' => $npdefvar)) ?>
 
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($npdefvar->getId()): ?>
+      <li class="float-rigth"><?php if ($npdefvar->getId()): ?>
 <?php echo button_to(__('delete'), 'nomdefespvar/delete?id='.$npdefvar->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),

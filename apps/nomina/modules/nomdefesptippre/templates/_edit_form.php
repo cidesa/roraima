@@ -9,7 +9,7 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($nptippre, 'getId') ?>
-
+<?php echo javascript_include_tag('ajax', 'tools', 'observe', 'dFilter') ?>
 <fieldset id="sf_fieldset_none" class="">
 
 <div class="form-row">
@@ -25,9 +25,9 @@
   'maxlength' => 4,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('nptippre[destippre]', __($labels['nptippre{destippre}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nptippre{destippre}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nptippre{destippre}')): ?>
@@ -37,31 +37,40 @@
   <?php $value = object_input_tag($nptippre, 'getDestippre', array (
   'size' => 80,
   'control_name' => 'nptippre[destippre]',
+  'maxlength' => 255,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+<br>
 
-<div class="form-row">
-  <?php echo label_for('nptippre[codcon]', __($labels['nptippre{codcon}']),  'class="required" ') ?>
+  <?php echo label_for('nptippre[codcon]', __($labels['nptippre{codcon}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nptippre{codcon}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nptippre{codcon}')): ?>
     <?php echo form_error('nptippre{codcon}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($nptippre, 'getCodcon', array (
-  'size' => 20,
+&nbsp;
+
+<?php echo object_input_tag($nptippre, 'getCodcon', array (
+  'size' => 10,
   'control_name' => 'nptippre[codcon]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'maxlength' => 3,
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomdefesptippre/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=1&cajtexmos=nptippre_nomcon&cajtexcom=nptippre_codcon&codcon='+this.value"
+        ))));
+?>&nbsp;&nbsp;&nbsp;
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npconceto_Nomdefesptippre/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/nptippre_codcon/obj2/nptippre_nomcon/campo1/codcon/campo2/nomcon')?>
 &nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<strong> <?php echo $nomcon ?></strong>
+
+<?php echo object_input_tag($nptippre, 'getNomcon', array (
+  'readonly' => true,
+  'size'=> 50,
+  'control_name' => 'nptippre[nomcon]',
+)); ?>
+<br><br>
+
     </div>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    
 </div>
 </fieldset>
 

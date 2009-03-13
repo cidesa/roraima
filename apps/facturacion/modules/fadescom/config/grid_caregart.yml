@@ -1,0 +1,19 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   caregart
+  anchogrid:               600
+  ancho:                   600
+  filas:                   1
+  titulo:                  Articulos Asociados
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod. Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [size="10", readonly=true ]
+  catalogo:               [caregart, sf_admin_edit_form, {desart: 2} ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [size="20", readonly=true ]

@@ -1,6 +1,7 @@
 prod:
   .settings:
-    no_script_name:           off
+    i18n: on
+    no_script_name:         off
 
 dev:
   .settings:
@@ -10,6 +11,7 @@ dev:
     cache:                  off
     no_script_name:         off
     etag:                   off
+    i18n:                   on
 
 test:
   .settings:
@@ -21,24 +23,26 @@ test:
     etag:                   off
 
 all:
+  .settings:
+    rich_text_js_dir:  js/tiny_mce
   .actions:
-#    default_module:         default   # Default module and action to be called when
-#    default_action:         index     # A routing rule doesn't set it
-#
-#    error_404_module:       default   # To be called when a 404 error is raised
-#    error_404_action:       error404  # Or when the requested URL doesn't match any route
-#
+    default_module:         generales   # Default module and action to be called when
+    default_action:         routing     # A routing rule doesn't set it
+
+    error_404_module:       generales   # To be called when a 404 error is raised
+    error_404_action:       error404  # Or when the requested URL doesn't match any route
+
     login_module:           generales   # To be called when a non-authenticated user
-    login_action:           login     # Tries to access a secure page
-#
+    login_action:           nologin     # Tries to access a secure page
+
     secure_module:          generales   # To be called when a user doesn't have
-    secure_action:          login    # The credentials required for an action
-#
-#    module_disabled_module: default   # To be called when a user requests 
-#    module_disabled_action: disabled  # A module disabled in the module.yml
-#
-#    unavailable_module:     default   # To be called when a user requests a page
-#    unavailable_action:  unavailable  # From an application disabled via the available setting below
+    secure_action:          nocredentials    # The credentials required for an action
+
+    module_disabled_module: generales   # To be called when a user requests
+    module_disabled_action: disabled  # A module disabled in the module.yml
+
+    unavailable_module:     generales   # To be called when a user requests a page
+    unavailable_action:     disabled  # From an application disabled via the available setting below
 #
   .settings:
     available:              on        # Enable the whole application. Switch to off to redirect all requests to the unavailable module and action.
@@ -61,11 +65,11 @@ all:
 #    suffix:                 .         # Default suffix for generated URLs. If set to a single dot (.), no suffix is added. Possible values: .html, .php, and so on.
 #    no_script_name:         off       # Enable the front controller name in generated URLs
 #
-#    # Validation settings, used for error generation by the Validation helper
-#    validation_error_prefix:    ' &darr;&nbsp;'
-#    validation_error_suffix:    ' &nbsp;&darr;'
-#    validation_error_class:     form_error
-#    validation_error_id_prefix: error_for_
+#     Validation settings, used for error generation by the Validation helper
+#     validation_error_prefix:    ' &darr;&nbsp;'
+#     validation_error_suffix:    ' &nbsp;&darr;'
+#     validation_error_class:     form_error
+#     validation_error_id_prefix: error_for_
 #
 #    # Cache settings
 #    cache:                  off       # Enable the template cache
@@ -82,7 +86,8 @@ all:
 #    web_debug_web_dir:      /sf/sf_web_debug
 #
 #    # Helpers included in all templates by default
-#    standard_helpers:       [Partial, Cache, Form]
+    standard_helpers:       [Partial, Cache, Form, SubmitClick, Javascript, tabs, PopUp, Linktoapp]
+
 #
 #    # Activated modules from plugins or from the symfony core
 #    enabled_modules:        [default]
@@ -93,7 +98,7 @@ all:
 #    # Miscellaneous
 #    strip_comments:         on         # Remove comments in core framework classes as defined in the core_compile.yml
 #    autoloading_functions:  ~          # Functions called when a class is requested and this it is not already loaded. Expects an array of callables. Used by the framework bridges.
-#    timeout:                1800       # Session timeout, in seconds
+    timeout:                1800       # Session timeout, in seconds
 #    max_forwards:           5
 #    path_info_array:        SERVER
 #    path_info_key:          PATH_INFO

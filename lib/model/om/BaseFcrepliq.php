@@ -29,7 +29,15 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 
 
 	
-	protected $monbom;
+	protected $monfis;
+
+
+	
+	protected $porali;
+
+
+	
+	protected $monliq;
 
 
 	
@@ -41,146 +49,218 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumrep()
-	{
+  
+  public function getNumrep()
+  {
 
-		return $this->numrep; 		
-	}
-	
-	public function getAno()
-	{
+    return trim($this->numrep);
 
-		return $this->ano; 		
-	}
-	
-	public function getCodact()
-	{
+  }
+  
+  public function getAno()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getMoning()
-	{
+    return trim($this->ano);
 
-		return $this->moning; 		
-	}
-	
-	public function getMonimp()
-	{
+  }
+  
+  public function getCodact()
+  {
 
-		return $this->monimp; 		
-	}
-	
-	public function getMonbom()
-	{
+    return trim($this->codact);
 
-		return $this->monbom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMoning($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->moning,2,',','.');
+    else return $this->moning;
+
+  }
+  
+  public function getMonimp($val=false)
+  {
+
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
+
+  }
+  
+  public function getMonfis($val=false)
+  {
+
+    if($val) return number_format($this->monfis,2,',','.');
+    else return $this->monfis;
+
+  }
+  
+  public function getPorali($val=false)
+  {
+
+    if($val) return number_format($this->porali,2,',','.');
+    else return $this->porali;
+
+  }
+  
+  public function getMonliq($val=false)
+  {
+
+    if($val) return number_format($this->monliq,2,',','.');
+    else return $this->monliq;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumrep($v)
 	{
 
-		if ($this->numrep !== $v) {
-			$this->numrep = $v;
-			$this->modifiedColumns[] = FcrepliqPeer::NUMREP;
-		}
-
+    if ($this->numrep !== $v) {
+        $this->numrep = $v;
+        $this->modifiedColumns[] = FcrepliqPeer::NUMREP;
+      }
+  
 	} 
 	
 	public function setAno($v)
 	{
 
-		if ($this->ano !== $v) {
-			$this->ano = $v;
-			$this->modifiedColumns[] = FcrepliqPeer::ANO;
-		}
-
+    if ($this->ano !== $v) {
+        $this->ano = $v;
+        $this->modifiedColumns[] = FcrepliqPeer::ANO;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = FcrepliqPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = FcrepliqPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setMoning($v)
 	{
 
-		if ($this->moning !== $v) {
-			$this->moning = $v;
-			$this->modifiedColumns[] = FcrepliqPeer::MONING;
-		}
-
+    if ($this->moning !== $v) {
+        $this->moning = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrepliqPeer::MONING;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = FcrepliqPeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrepliqPeer::MONIMP;
+      }
+  
 	} 
 	
-	public function setMonbom($v)
+	public function setMonfis($v)
 	{
 
-		if ($this->monbom !== $v) {
-			$this->monbom = $v;
-			$this->modifiedColumns[] = FcrepliqPeer::MONBOM;
-		}
+    if ($this->monfis !== $v) {
+        $this->monfis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrepliqPeer::MONFIS;
+      }
+  
+	} 
+	
+	public function setPorali($v)
+	{
 
+    if ($this->porali !== $v) {
+        $this->porali = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrepliqPeer::PORALI;
+      }
+  
+	} 
+	
+	public function setMonliq($v)
+	{
+
+    if ($this->monliq !== $v) {
+        $this->monliq = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrepliqPeer::MONLIQ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcrepliqPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcrepliqPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numrep = $rs->getString($startcol + 0);
+      $this->numrep = $rs->getString($startcol + 0);
 
-			$this->ano = $rs->getString($startcol + 1);
+      $this->ano = $rs->getString($startcol + 1);
 
-			$this->codact = $rs->getString($startcol + 2);
+      $this->codact = $rs->getString($startcol + 2);
 
-			$this->moning = $rs->getString($startcol + 3);
+      $this->moning = $rs->getFloat($startcol + 3);
 
-			$this->monimp = $rs->getString($startcol + 4);
+      $this->monimp = $rs->getFloat($startcol + 4);
 
-			$this->monbom = $rs->getString($startcol + 5);
+      $this->monfis = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->porali = $rs->getFloat($startcol + 6);
 
-			$this->resetModified();
+      $this->monliq = $rs->getFloat($startcol + 7);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 8);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcrepliq object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcrepliq object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +317,7 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcrepliqPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcrepliqPeer::doUpdate($this, $con);
@@ -318,9 +399,15 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 				return $this->getMonimp();
 				break;
 			case 5:
-				return $this->getMonbom();
+				return $this->getMonfis();
 				break;
 			case 6:
+				return $this->getPorali();
+				break;
+			case 7:
+				return $this->getMonliq();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -338,8 +425,10 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 			$keys[2] => $this->getCodact(),
 			$keys[3] => $this->getMoning(),
 			$keys[4] => $this->getMonimp(),
-			$keys[5] => $this->getMonbom(),
-			$keys[6] => $this->getId(),
+			$keys[5] => $this->getMonfis(),
+			$keys[6] => $this->getPorali(),
+			$keys[7] => $this->getMonliq(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -371,9 +460,15 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 				$this->setMonimp($value);
 				break;
 			case 5:
-				$this->setMonbom($value);
+				$this->setMonfis($value);
 				break;
 			case 6:
+				$this->setPorali($value);
+				break;
+			case 7:
+				$this->setMonliq($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -388,8 +483,10 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setCodact($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMoning($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setMonimp($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setMonbom($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[5], $arr)) $this->setMonfis($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setPorali($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setMonliq($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -402,7 +499,9 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcrepliqPeer::CODACT)) $criteria->add(FcrepliqPeer::CODACT, $this->codact);
 		if ($this->isColumnModified(FcrepliqPeer::MONING)) $criteria->add(FcrepliqPeer::MONING, $this->moning);
 		if ($this->isColumnModified(FcrepliqPeer::MONIMP)) $criteria->add(FcrepliqPeer::MONIMP, $this->monimp);
-		if ($this->isColumnModified(FcrepliqPeer::MONBOM)) $criteria->add(FcrepliqPeer::MONBOM, $this->monbom);
+		if ($this->isColumnModified(FcrepliqPeer::MONFIS)) $criteria->add(FcrepliqPeer::MONFIS, $this->monfis);
+		if ($this->isColumnModified(FcrepliqPeer::PORALI)) $criteria->add(FcrepliqPeer::PORALI, $this->porali);
+		if ($this->isColumnModified(FcrepliqPeer::MONLIQ)) $criteria->add(FcrepliqPeer::MONLIQ, $this->monliq);
 		if ($this->isColumnModified(FcrepliqPeer::ID)) $criteria->add(FcrepliqPeer::ID, $this->id);
 
 		return $criteria;
@@ -444,7 +543,11 @@ abstract class BaseFcrepliq extends BaseObject  implements Persistent {
 
 		$copyObj->setMonimp($this->monimp);
 
-		$copyObj->setMonbom($this->monbom);
+		$copyObj->setMonfis($this->monfis);
+
+		$copyObj->setPorali($this->porali);
+
+		$copyObj->setMonliq($this->monliq);
 
 
 		$copyObj->setNew(true);

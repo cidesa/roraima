@@ -1,20 +1,26 @@
 generator:
   class:              sfPropelAdminGenerator
   param:
-    model_class:      Npnomina
+    model_class:      Npdiaadicnom
     theme:            default
     fields:
-      codnom: { name: Código Nomina }
-      nomnom: { name: Descripción Nómina }
-      frecal: { name: Frecuencia }
+      codnom: { name: Código Nómina }
+      nomnom: { name: Descripción Nómina } #viene de npnomina
+      codcon: { name: Código Concepto }
+      nomcon: { name: Descripción Concepto } #viene de npdefcpt
     list:
       title:          Conceptos para Días Adicionales
-      filters:        [codnom, nomnom ]
-      display:        [=codnom, nomnom, frecal ]
+      filters:        [codnom ]
+      display:        [=codnom, nomnom]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
     edit:
-      title:         Edicion de Conceptos para Días Adicionales
-      display:       [codnom, nomnom ]
+      title:         Edición de Conceptos para Días Adicionales
+      display:       [codnom, nomnom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

@@ -29,6 +29,10 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 
 
 	
+	protected $canmet;
+
+
+	
 	protected $id;
 
 	
@@ -37,128 +41,176 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodaccesp()
-	{
+    return trim($this->codpro);
 
-		return $this->codaccesp; 		
-	}
-	
-	public function getCodmet()
-	{
+  }
+  
+  public function getCodaccesp()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getDesmet()
-	{
+    return trim($this->codaccesp);
 
-		return $this->desmet; 		
-	}
-	
-	public function getCodunimed()
-	{
+  }
+  
+  public function getCodmet()
+  {
 
-		return $this->codunimed; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codmet);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDesmet()
+  {
+
+    return trim($this->desmet);
+
+  }
+  
+  public function getCodunimed()
+  {
+
+    return trim($this->codunimed);
+
+  }
+  
+  public function getCanmet($val=false)
+  {
+
+    if($val) return number_format($this->canmet,2,',','.');
+    else return $this->canmet;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FordefpryaccmetPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FordefpryaccmetPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodaccesp($v)
 	{
 
-		if ($this->codaccesp !== $v) {
-			$this->codaccesp = $v;
-			$this->modifiedColumns[] = FordefpryaccmetPeer::CODACCESP;
-		}
-
+    if ($this->codaccesp !== $v) {
+        $this->codaccesp = $v;
+        $this->modifiedColumns[] = FordefpryaccmetPeer::CODACCESP;
+      }
+  
 	} 
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = FordefpryaccmetPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = FordefpryaccmetPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setDesmet($v)
 	{
 
-		if ($this->desmet !== $v) {
-			$this->desmet = $v;
-			$this->modifiedColumns[] = FordefpryaccmetPeer::DESMET;
-		}
-
+    if ($this->desmet !== $v) {
+        $this->desmet = $v;
+        $this->modifiedColumns[] = FordefpryaccmetPeer::DESMET;
+      }
+  
 	} 
 	
 	public function setCodunimed($v)
 	{
 
-		if ($this->codunimed !== $v) {
-			$this->codunimed = $v;
-			$this->modifiedColumns[] = FordefpryaccmetPeer::CODUNIMED;
-		}
+    if ($this->codunimed !== $v) {
+        $this->codunimed = $v;
+        $this->modifiedColumns[] = FordefpryaccmetPeer::CODUNIMED;
+      }
+  
+	} 
+	
+	public function setCanmet($v)
+	{
 
+    if ($this->canmet !== $v) {
+        $this->canmet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryaccmetPeer::CANMET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefpryaccmetPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefpryaccmetPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codaccesp = $rs->getString($startcol + 1);
+      $this->codaccesp = $rs->getString($startcol + 1);
 
-			$this->codmet = $rs->getString($startcol + 2);
+      $this->codmet = $rs->getString($startcol + 2);
 
-			$this->desmet = $rs->getString($startcol + 3);
+      $this->desmet = $rs->getString($startcol + 3);
 
-			$this->codunimed = $rs->getString($startcol + 4);
+      $this->codunimed = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->canmet = $rs->getFloat($startcol + 5);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefpryaccmet object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefpryaccmet object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +267,7 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefpryaccmetPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefpryaccmetPeer::doUpdate($this, $con);
@@ -296,6 +349,9 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 				return $this->getCodunimed();
 				break;
 			case 5:
+				return $this->getCanmet();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -313,7 +369,8 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 			$keys[2] => $this->getCodmet(),
 			$keys[3] => $this->getDesmet(),
 			$keys[4] => $this->getCodunimed(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getCanmet(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -345,6 +402,9 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 				$this->setCodunimed($value);
 				break;
 			case 5:
+				$this->setCanmet($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -359,7 +419,8 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setCodmet($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setDesmet($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCodunimed($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCanmet($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -372,6 +433,7 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FordefpryaccmetPeer::CODMET)) $criteria->add(FordefpryaccmetPeer::CODMET, $this->codmet);
 		if ($this->isColumnModified(FordefpryaccmetPeer::DESMET)) $criteria->add(FordefpryaccmetPeer::DESMET, $this->desmet);
 		if ($this->isColumnModified(FordefpryaccmetPeer::CODUNIMED)) $criteria->add(FordefpryaccmetPeer::CODUNIMED, $this->codunimed);
+		if ($this->isColumnModified(FordefpryaccmetPeer::CANMET)) $criteria->add(FordefpryaccmetPeer::CANMET, $this->canmet);
 		if ($this->isColumnModified(FordefpryaccmetPeer::ID)) $criteria->add(FordefpryaccmetPeer::ID, $this->id);
 
 		return $criteria;
@@ -412,6 +474,8 @@ abstract class BaseFordefpryaccmet extends BaseObject  implements Persistent {
 		$copyObj->setDesmet($this->desmet);
 
 		$copyObj->setCodunimed($this->codunimed);
+
+		$copyObj->setCanmet($this->canmet);
 
 
 		$copyObj->setNew(true);

@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class ConsolidadoNuevoMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ConsolidadoNuevoMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ConsolidadoNuevoMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('consolidado_nuevo');
 		$tMap->setPhpName('ConsolidadoNuevo');
 
@@ -44,11 +44,11 @@ class ConsolidadoNuevoMapBuilder {
 
 		$tMap->addColumn('REFPAG', 'Refpag', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('FECMOV', 'Fecmov', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECMOV', 'Fecmov', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('CEDRIF', 'Cedrif', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('MONMOV', 'Monmov', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONMOV', 'Monmov', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('DESMOV', 'Desmov', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -59,6 +59,6 @@ class ConsolidadoNuevoMapBuilder {
 		$tMap->addColumn('NOMPRE', 'Nompre', 'string', CreoleTypes::VARCHAR, false, 250);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -65,302 +65,335 @@ abstract class BaseTsconcilhis extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumcue()
-	{
+  
+  public function getNumcue()
+  {
 
-		return $this->numcue; 		
-	}
-	
-	public function getMescon()
-	{
+    return trim($this->numcue);
 
-		return $this->mescon; 		
-	}
-	
-	public function getAnocon()
-	{
+  }
+  
+  public function getMescon()
+  {
 
-		return $this->anocon; 		
-	}
-	
-	public function getRefere()
-	{
+    return trim($this->mescon);
 
-		return $this->refere; 		
-	}
-	
-	public function getMovlib()
-	{
+  }
+  
+  public function getAnocon()
+  {
 
-		return $this->movlib; 		
-	}
-	
-	public function getMovban()
-	{
+    return trim($this->anocon);
 
-		return $this->movban; 		
-	}
-	
-	public function getFeclib($format = 'Y-m-d')
-	{
+  }
+  
+  public function getRefere()
+  {
 
-		if ($this->feclib === null || $this->feclib === '') {
-			return null;
-		} elseif (!is_int($this->feclib)) {
-						$ts = strtotime($this->feclib);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feclib] as date/time value: " . var_export($this->feclib, true));
-			}
-		} else {
-			$ts = $this->feclib;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->refere);
 
-	
-	public function getFecban($format = 'Y-m-d')
-	{
+  }
+  
+  public function getMovlib()
+  {
 
-		if ($this->fecban === null || $this->fecban === '') {
-			return null;
-		} elseif (!is_int($this->fecban)) {
-						$ts = strtotime($this->fecban);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecban] as date/time value: " . var_export($this->fecban, true));
-			}
-		} else {
-			$ts = $this->fecban;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->movlib);
 
-	
-	public function getDesref()
-	{
+  }
+  
+  public function getMovban()
+  {
 
-		return $this->desref; 		
-	}
-	
-	public function getMonlib()
-	{
+    return trim($this->movban);
 
-		return number_format($this->monlib,2,',','.');
-		
-	}
-	
-	public function getMonban()
-	{
+  }
+  
+  public function getFeclib($format = 'Y-m-d')
+  {
 
-		return number_format($this->monban,2,',','.');
-		
-	}
-	
-	public function getResult()
-	{
+    if ($this->feclib === null || $this->feclib === '') {
+      return null;
+    } elseif (!is_int($this->feclib)) {
+            $ts = adodb_strtotime($this->feclib);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feclib] as date/time value: " . var_export($this->feclib, true));
+      }
+    } else {
+      $ts = $this->feclib;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->result; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getFecban($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecban === null || $this->fecban === '') {
+      return null;
+    } elseif (!is_int($this->fecban)) {
+            $ts = adodb_strtotime($this->fecban);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecban] as date/time value: " . var_export($this->fecban, true));
+      }
+    } else {
+      $ts = $this->fecban;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getDesref()
+  {
+
+    return trim($this->desref);
+
+  }
+  
+  public function getMonlib($val=false)
+  {
+
+    if($val) return number_format($this->monlib,2,',','.');
+    else return $this->monlib;
+
+  }
+  
+  public function getMonban($val=false)
+  {
+
+    if($val) return number_format($this->monban,2,',','.');
+    else return $this->monban;
+
+  }
+  
+  public function getResult()
+  {
+
+    return trim($this->result);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumcue($v)
 	{
 
-		if ($this->numcue !== $v) {
-			$this->numcue = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::NUMCUE;
-		}
-
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = TsconcilhisPeer::NUMCUE;
+      }
+  
 	} 
 	
 	public function setMescon($v)
 	{
 
-		if ($this->mescon !== $v) {
-			$this->mescon = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::MESCON;
-		}
-
+    if ($this->mescon !== $v) {
+        $this->mescon = $v;
+        $this->modifiedColumns[] = TsconcilhisPeer::MESCON;
+      }
+  
 	} 
 	
 	public function setAnocon($v)
 	{
 
-		if ($this->anocon !== $v) {
-			$this->anocon = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::ANOCON;
-		}
-
+    if ($this->anocon !== $v) {
+        $this->anocon = $v;
+        $this->modifiedColumns[] = TsconcilhisPeer::ANOCON;
+      }
+  
 	} 
 	
 	public function setRefere($v)
 	{
 
-		if ($this->refere !== $v) {
-			$this->refere = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::REFERE;
-		}
-
+    if ($this->refere !== $v) {
+        $this->refere = $v;
+        $this->modifiedColumns[] = TsconcilhisPeer::REFERE;
+      }
+  
 	} 
 	
 	public function setMovlib($v)
 	{
 
-		if ($this->movlib !== $v) {
-			$this->movlib = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::MOVLIB;
-		}
-
+    if ($this->movlib !== $v) {
+        $this->movlib = $v;
+        $this->modifiedColumns[] = TsconcilhisPeer::MOVLIB;
+      }
+  
 	} 
 	
 	public function setMovban($v)
 	{
 
-		if ($this->movban !== $v) {
-			$this->movban = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::MOVBAN;
-		}
-
+    if ($this->movban !== $v) {
+        $this->movban = $v;
+        $this->modifiedColumns[] = TsconcilhisPeer::MOVBAN;
+      }
+  
 	} 
 	
 	public function setFeclib($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feclib] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feclib !== $ts) {
-			$this->feclib = $ts;
-			$this->modifiedColumns[] = TsconcilhisPeer::FECLIB;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feclib] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feclib !== $ts) {
+      $this->feclib = $ts;
+      $this->modifiedColumns[] = TsconcilhisPeer::FECLIB;
+    }
 
 	} 
 	
 	public function setFecban($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecban] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecban !== $ts) {
-			$this->fecban = $ts;
-			$this->modifiedColumns[] = TsconcilhisPeer::FECBAN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecban] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecban !== $ts) {
+      $this->fecban = $ts;
+      $this->modifiedColumns[] = TsconcilhisPeer::FECBAN;
+    }
 
 	} 
 	
 	public function setDesref($v)
 	{
 
-		if ($this->desref !== $v) {
-			$this->desref = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::DESREF;
-		}
-
+    if ($this->desref !== $v) {
+        $this->desref = $v;
+        $this->modifiedColumns[] = TsconcilhisPeer::DESREF;
+      }
+  
 	} 
 	
 	public function setMonlib($v)
 	{
 
-		if ($this->monlib !== $v) {
-			$this->monlib = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::MONLIB;
-		}
-
+    if ($this->monlib !== $v) {
+        $this->monlib = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsconcilhisPeer::MONLIB;
+      }
+  
 	} 
 	
 	public function setMonban($v)
 	{
 
-		if ($this->monban !== $v) {
-			$this->monban = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::MONBAN;
-		}
-
+    if ($this->monban !== $v) {
+        $this->monban = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsconcilhisPeer::MONBAN;
+      }
+  
 	} 
 	
 	public function setResult($v)
 	{
 
-		if ($this->result !== $v) {
-			$this->result = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::RESULT;
-		}
-
+    if ($this->result !== $v) {
+        $this->result = $v;
+        $this->modifiedColumns[] = TsconcilhisPeer::RESULT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsconcilhisPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsconcilhisPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numcue = $rs->getString($startcol + 0);
+      $this->numcue = $rs->getString($startcol + 0);
 
-			$this->mescon = $rs->getString($startcol + 1);
+      $this->mescon = $rs->getString($startcol + 1);
 
-			$this->anocon = $rs->getString($startcol + 2);
+      $this->anocon = $rs->getString($startcol + 2);
 
-			$this->refere = $rs->getString($startcol + 3);
+      $this->refere = $rs->getString($startcol + 3);
 
-			$this->movlib = $rs->getString($startcol + 4);
+      $this->movlib = $rs->getString($startcol + 4);
 
-			$this->movban = $rs->getString($startcol + 5);
+      $this->movban = $rs->getString($startcol + 5);
 
-			$this->feclib = $rs->getDate($startcol + 6, null);
+      $this->feclib = $rs->getDate($startcol + 6, null);
 
-			$this->fecban = $rs->getDate($startcol + 7, null);
+      $this->fecban = $rs->getDate($startcol + 7, null);
 
-			$this->desref = $rs->getString($startcol + 8);
+      $this->desref = $rs->getString($startcol + 8);
 
-			$this->monlib = $rs->getFloat($startcol + 9);
+      $this->monlib = $rs->getFloat($startcol + 9);
 
-			$this->monban = $rs->getFloat($startcol + 10);
+      $this->monban = $rs->getFloat($startcol + 10);
 
-			$this->result = $rs->getString($startcol + 11);
+      $this->result = $rs->getString($startcol + 11);
 
-			$this->id = $rs->getInt($startcol + 12);
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 13; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsconcilhis object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsconcilhis object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -417,6 +450,7 @@ abstract class BaseTsconcilhis extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsconcilhisPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsconcilhisPeer::doUpdate($this, $con);

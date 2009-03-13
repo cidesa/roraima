@@ -4,21 +4,27 @@ generator:
     model_class:      Tsmovban
     theme:            default
     fields:
-      numcue: { name: Cuenta del Banco, params: maxlength=20}
-      refban: { name: Referencia, params: maxlength=20}
-      fecban: { name: Fecha del Movimiento, params: date_format='dd/MM/yyyy'}
-      tipmov: { name: Tipo de Movimiento, params: maxlength=4}
-      desban: { name: Descripción del Libro}
-      monmov: { name: Monto}
-      status: { name: Estatus}
-      stacon: { name: Estatus Contable}
+      numcue:   { name: Cuenta del Banco, params: maxlength=20}
+      nombanco: { name: Nombre del Banco, params: maxlength=80}
+      refban:   { name: Referencia, params: maxlength=20}
+      fecban:   { name: Fecha del Movimiento, params: date_format='dd/MM/yyyy'}
+      tipmov:   { name: Tipo de Movimiento, params: maxlength=4}
+      nommovim:   { name: Nombre del Movimiento, params: maxlength=80}
+      desban:   { name: Descripción}
+      monmov:   { name: Monto}
+      status:   { name: Estatus}
+      stacon:   { name: Estatus Contable}
     list:
-      title:          Movimientos Según Bancos de Años Anteriores
+      title:          Movimientos Según Bancos Años Anteriores
       filters:        [numcue, tipmov, fecban]
-      display:        [=numcue, refban, tipmov, fecban]
+      display:        [=numcue, nombanco, refban, tipmov, nommovim, fecban]
+      sort:           numcue
       max_per_page:	  8
       object_actions:
         _edit:        ~
         _delete:      ~
     edit:
-      title:          Edición Movimientos Según Bancos de Años Anteriores      
+      title:          Edición de Movimientos Según Bancos Años Anteriores
+      display:        [=numcue, nombanco, refban, tipmov, nommovim, fecban, desban, monmov]
+      actions:
+        _save:        ~

@@ -17,7 +17,7 @@ class Npconpri extends BaseNpconpri
 	  if ($nomina)
 	  	return $nomina->getNomnom();
 	  else 
-	    return '<!Nombre no encontrado!>';
+	    return '';
   }
   public function getConcepto()
   {
@@ -27,7 +27,7 @@ class Npconpri extends BaseNpconpri
 	  if ($concepto)
 	  	return $concepto->getNomcon();
 	  else 
-	    return '<!Nombre no encontrado!>';
+	    return '';
   }	
   
 }

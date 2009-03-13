@@ -10,129 +10,249 @@
  */
 class nomdefconaportesActions extends autonomdefconaportesActions
 {
-  protected function updateNpcontipaporetFromRequest()
+public function executeEdit()
   {
-    $npcontipaporet = $this->getRequestParameter('npcontipaporet');
+    $this->npcontipaporet = $this->getNpcontipaporetOrCreate();
 
-    if (isset($npcontipaporet['codtipapo']))
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
-      $this->npcontipaporet->setCodtipapo(str_pad($npcontipaporet['codtipapo'],4,'0',STR_PAD_LEFT));
-    }
-    if (isset($npcontipaporet['destipapo']))
-    {
-      $this->npcontipaporet->setDestipapo($npcontipaporet['destipapo']);
-    }
-    if (isset($npcontipaporet['codnom']))
-    {
-      $this->npcontipaporet->setCodnom($npcontipaporet['codnom']);
-    }
-    if (isset($npcontipaporet['nomina']))
-    {
-      $this->npcontipaporet->setNomina($npcontipaporet['nomina']);
-    }
-    if (isset($npcontipaporet['codcon']))
-    {
-      $this->npcontipaporet->setCodcon($npcontipaporet['codcon']);
-    }
-    if (isset($npcontipaporet['concepto']))
-    {
-      $this->npcontipaporet->setConcepto($npcontipaporet['concepto']);
-    }
+      $this->updateNpcontipaporetFromRequest();
 
-    $this->npcontipaporet->setTipo('A');
+      $this->saveNpcontipaporet($this->npcontipaporet);
 
-    
-  }
+      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
-  protected function getNpcontipaporetOrCreate($id = 'id')
-  {
-    if (!$this->getRequestParameter($id))
-    {
-      $npcontipaporet = new Npcontipaporet();
+      if ($this->getRequestParameter('save_and_add'))
+      {
+        return $this->redirect('nomdefconaportes/create');
+      }
+      else if ($this->getRequestParameter('save_and_list'))
+      {
+        return $this->redirect('nomdefconaportes/list');
+      }
+      else
+      {
+        return $this->redirect('nomdefconaportes/edit?id='.$this->npcontipaporet->getId());
+      }
     }
     else
     {
-      $npcontipaporet = NpcontipaporetPeer::retrieveByPk($this->getRequestParameter($id));
+      $this->labels = $this->getLabels();
+    }
+  }
 
+   public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->npcontipaporet = $this->getNpcontipaporetOrCreate();
+    $this->updateNpcontipaporetFromRequest();
+
+    $this->labels = $this->getLabels();
+
+    Herramientas::CargarDatosGrid($this,$this->grid);
+
+    return sfView::SUCCESS;
+  }
+
+protected function getNpcontipaporetOrCreate($id = 'id', $codigo = 'codigo')
+  {
+    if (!$this->getRequestParameter($codigo))
+    {
+      $npcontipaporet = new Npcontipaporet();
+      $this->configGrid();
+    }
+    else
+    {
+
+      $c = new Criteria();
+  	  $c->add(NpcontipaporetPeer::CODTIPAPO,$this->getRequestParameter($codigo));
+  	  $npcontipaporet = NpcontipaporetPeer::doSelectOne($c);
+
+      $this->configGrid($npcontipaporet->getCodtipapo());
       $this->forward404Unless($npcontipaporet);
     }
 
     return $npcontipaporet;
   }
+public function executeAjax()
+	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+	   if ($this->getRequestParameter('ajax')=='1')
+	    {
+			$dato=NpnominaPeer::getDesnom($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+	    else if ($this->getRequestParameter('ajax')=='2')
+	    {
+	      $dato="";
+		  $c= new Criteria();
+          $c->add(NpdefcptPeer::CODCON,$this->getRequestParameter('codigo'));
+          $datos= NpdefcptPeer::doSelectOne($c);
+          if ($datos)
+          {
+          	$c = new Criteria();
+            $c->add(NpasiconnomPeer::CODNOM,$this->getRequestParameter('nomina'));
+            $c->add(NpasiconnomPeer::CODCON,$this->getRequestParameter('codigo'));
+            $resul= NpasiconnomPeer::doSelectOne($c);
+            if ($resul)
+            {
+              $dato=NpdefcptPeer::getDescon($this->getRequestParameter('codigo'));
+              $existe='S';
+            }
+            else
+            {
+          	  $existe='N';
+            }
+          }
+          else
+          {
+            $existe='NN';
+          }
+          $output = '[["existecon","'.$existe.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+		else if ($this->getRequestParameter('ajax')=='3')
+	    {
+			$dato=NptipaportesPeer::getDestip($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
+	    }
 
-  protected function processFilters()
+
+  	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
+	}
+
+  public function configGrid($codigo='')
   {
-    if ($this->getRequest()->hasParameter('filter'))
-    {
-      $filters = $this->getRequestParameter('filters');
+	$c = new Criteria();
+	$c->add(NpcontipaporetPeer::CODTIPAPO,$codigo);
+	$c->add(NpcontipaporetPeer::TIPO,'A');
+	$per = NpcontipaporetPeer::doSelect($c);
 
-      $this->getUser()->getAttributeHolder()->removeNamespace('sf_admin/npcontipaporet/filters');
-      $this->getUser()->getAttributeHolder()->add($filters, 'sf_admin/npcontipaporet/filters');
-    }
+	$opciones = new OpcionesGrid();
+    $opciones->setEliminar(true);
+    $opciones->setTabla('Npcontipaporet');
+	$opciones->setAnchoGrid(850);
+	$opciones->setFilas(50);
+	$opciones->setTitulo('Conceptos para Aportes');
+	$opciones->setHTMLTotalFilas(' ');
+
+	$col1 = new Columna('Codigo de Nomina');
+	$col1->setTipo(Columna::TEXTO);
+	$col1->setEsGrabable(true);
+	$col1->setNombreCampo('codnom');
+	$col1->setAlineacionObjeto(Columna::CENTRO);
+	$col1->setAlineacionContenido(Columna::CENTRO);
+	$col1->setHTML('type="text" size="5" maxlength="3"');
+	$col1->setCatalogo('Npnomina','sf_admin_edit_form',array('codnom' => 1, 'nomnom' => 2),'Npnomina_Nomdefespasicartipnomlot');
+	$col1->setAjax('nomdefconaportes',1,2);
+
+	$col2 = new Columna('Descripción');
+	$col2->setTipo(Columna::TEXTO);
+	$col2->setNombreCampo('nomina');
+	$col2->setAlineacionObjeto(Columna::CENTRO);
+	$col2->setAlineacionContenido(Columna::CENTRO);
+	$col2->setHTML('type="text" size="40" readonly=true');
+
+    $params = array("'+$(this.id).up().previous(1).descendants()[0].value+'",'val2');
+	$col3 = new Columna('Codigo Concepto');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setEsGrabable(true);
+    $col3->setNombreCampo('codcon');
+    $col3->setAlineacionObjeto(Columna::CENTRO);
+	$col3->setAlineacionContenido(Columna::CENTRO);
+	$col3->setHTML('type="text" size="5" maxlength="3"');
+    $col3->setCatalogo('Npdefcpt','sf_admin_edit_form',array('codcon' => 3, 'nomcon' => 4),'Npdefcpt_Nomdefconaportes',$params);
+	$col3->setJScript('onBlur="javascript:event.keyCode=13; ajax(event,this.id);"');
+
+	$col4 = new Columna('Concepto');
+	$col4->setTipo(Columna::TEXTO);
+	$col4->setNombreCampo('concepto');
+	$col4->setAlineacionObjeto(Columna::CENTRO);
+	$col4->setAlineacionContenido(Columna::CENTRO);
+	$col4->setHTML('type="text" size="40" readonly=true');
+
+   	$opciones->addColumna($col1);
+	$opciones->addColumna($col2);
+	$opciones->addColumna($col3);
+	$opciones->addColumna($col4);
+
+	$this->grid = $opciones->getConfig($per);
+	}
+
+protected function saveNpcontipaporet($npcontipaporet)
+  {
+  	$grid2=Herramientas::CargarDatosGrid($this,$this->grid);
+	Nomina::salvarContipaporet($npcontipaporet,$grid2);
   }
 
-  protected function processSort()
-  {
-    if ($this->getRequestParameter('sort'))
-    {
-      $this->getUser()->setAttribute('sort', $this->getRequestParameter('sort'), 'sf_admin/npcontipaporet/sort');
-      $this->getUser()->setAttribute('type', $this->getRequestParameter('type', 'asc'), 'sf_admin/npcontipaporet/sort');
-    }
 
-    if (!$this->getUser()->getAttribute('sort', null, 'sf_admin/npcontipaporet/sort'))
-    {
-    }
+public function executeAutocomplete()
+	{
+		if ($this->getRequestParameter('ajax')=='1')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODNOM','Npnomina','CODNOM',$this->getRequestParameter('npconsalint[codnom]'));
+	    }
+	    else if ($this->getRequestParameter('ajax')=='2')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODCON','Npdefcpt','CODCON',$this->getRequestParameter('npconsalint[codcon]'));
+	    }
+	    else if ($this->getRequestParameter('ajax')=='3')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODTIPAPO','Nptipaportes','CODTIPAPO',$this->getRequestParameter('npcontipaporet[codtipapo]'));
+	    }
+	}
+
+
+  public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/npcontipaporet/filters');
+
+    // pager
+    $this->pager = new sfPropelPager('Nptipaportes', 5);
+    $c = new Criteria();
+	$c->addJoin(NpcontipaporetPeer::CODTIPAPO,NptipaportesPeer::CODTIPAPO);
+	$c->Setdistinct();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
   }
 
-  protected function addFiltersCriteria($c)
+  protected function deleteNpcontipaporet($npcontipaporet)
   {
-    if (isset($this->filters['codtipapo_is_empty']))
-    {
-      $criterion = $c->getNewCriterion(NpcontipaporetPeer::CODTIPAPO, '');
-      $criterion->addOr($c->getNewCriterion(NpcontipaporetPeer::CODTIPAPO, null, Criteria::ISNULL));
-      $c->add($criterion);
-    }
-    else if (isset($this->filters['codtipapo']) && $this->filters['codtipapo'] !== '')
-    {
-      $c->add(NpcontipaporetPeer::CODTIPAPO, strtr($this->filters['codtipapo'], '*', '%'), Criteria::LIKE);
-    }
-    if (isset($this->filters['codcon_is_empty']))
-    {
-      $criterion = $c->getNewCriterion(NpcontipaporetPeer::CODCON, '');
-      $criterion->addOr($c->getNewCriterion(NpcontipaporetPeer::CODCON, null, Criteria::ISNULL));
-      $c->add($criterion);
-    }
-    else if (isset($this->filters['codcon']) && $this->filters['codcon'] !== '')
-    {
-      $c->add(NpcontipaporetPeer::CODCON, strtr($this->filters['codcon'], '*', '%'), Criteria::LIKE);
-    }
+    $c = new Criteria();
+  	$c->add(NpcontipaporetPeer::CODTIPAPO,$npcontipaporet->getCodtipapo());
+  	NpcontipaporetPeer::doDelete($c);
   }
 
-  protected function addSortCriteria($c)
+  public function executeDelete()
   {
-    if ($sort_column = $this->getUser()->getAttribute('sort', null, 'sf_admin/npcontipaporet/sort'))
+    $c = new Criteria();
+  	$c->add(NpcontipaporetPeer::CODTIPAPO,$this->getRequestParameter('codigo'));
+    $this->npcontipaporet = NpcontipaporetPeer::doSelectOne($c);
+
+    $this->forward404Unless($this->npcontipaporet);
+
+    try
     {
-      $sort_column = NpcontipaporetPeer::translateFieldName($sort_column, BasePeer::TYPE_FIELDNAME, BasePeer::TYPE_COLNAME);
-      if ($this->getUser()->getAttribute('type', null, 'sf_admin/npcontipaporet/sort') == 'asc')
-      {
-        $c->addAscendingOrderByColumn($sort_column);
-      }
-      else
-      {
-        $c->addDescendingOrderByColumn($sort_column);
-      }
+      $this->deleteNpcontipaporet($this->npcontipaporet);
     }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'Could not delete the selected Npcontipaporet. Make sure it does not have any associated items.');
+      return $this->forward('nomdefconaportes', 'list');
+    }
+
+    return $this->redirect('nomdefconaportes/list');
   }
 
-  protected function getLabels()
-  {
-    return array(
-      'npcontipaporet{codtipapo}' => 'Cod. de Retencion:',
-      'npcontipaporet{destipapo}' => 'Retencion:',
-      'npcontipaporet{codnom}' => 'Cod. de Nomina:',
-      'npcontipaporet{nomina}' => 'Nomina:',
-      'npcontipaporet{codcon}' => 'Cod. de Concepto:',
-      'npcontipaporet{concepto}' => 'Concepto:',
-    );
-  }	
+
+
 }

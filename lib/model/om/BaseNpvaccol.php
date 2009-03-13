@@ -45,235 +45,262 @@ abstract class BaseNpvaccol extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getDisdes($format = 'Y-m-d')
-	{
+    return trim($this->codnom);
 
-		if ($this->disdes === null || $this->disdes === '') {
-			return null;
-		} elseif (!is_int($this->disdes)) {
-						$ts = strtotime($this->disdes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [disdes] as date/time value: " . var_export($this->disdes, true));
-			}
-		} else {
-			$ts = $this->disdes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDisdes($format = 'Y-m-d')
+  {
 
-	
-	public function getDishas($format = 'Y-m-d')
-	{
+    if ($this->disdes === null || $this->disdes === '') {
+      return null;
+    } elseif (!is_int($this->disdes)) {
+            $ts = adodb_strtotime($this->disdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [disdes] as date/time value: " . var_export($this->disdes, true));
+      }
+    } else {
+      $ts = $this->disdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->dishas === null || $this->dishas === '') {
-			return null;
-		} elseif (!is_int($this->dishas)) {
-						$ts = strtotime($this->dishas);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [dishas] as date/time value: " . var_export($this->dishas, true));
-			}
-		} else {
-			$ts = $this->dishas;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getDishas($format = 'Y-m-d')
+  {
 
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    if ($this->dishas === null || $this->dishas === '') {
+      return null;
+    } elseif (!is_int($this->dishas)) {
+            $ts = adodb_strtotime($this->dishas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [dishas] as date/time value: " . var_export($this->dishas, true));
+      }
+    } else {
+      $ts = $this->dishas;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-	
-	public function getDiavac()
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->diavac,2,',','.');
-		
-	}
-	
-	public function getDianhab()
-	{
+  
+  public function getDiavac($val=false)
+  {
 
-		return number_format($this->dianhab,2,',','.');
-		
-	}
-	
-	public function getStareg()
-	{
+    if($val) return number_format($this->diavac,2,',','.');
+    else return $this->diavac;
 
-		return $this->stareg; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDianhab($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->dianhab,2,',','.');
+    else return $this->dianhab;
+
+  }
+  
+  public function getStareg()
+  {
+
+    return trim($this->stareg);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpvaccolPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpvaccolPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setDisdes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [disdes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->disdes !== $ts) {
-			$this->disdes = $ts;
-			$this->modifiedColumns[] = NpvaccolPeer::DISDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [disdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->disdes !== $ts) {
+      $this->disdes = $ts;
+      $this->modifiedColumns[] = NpvaccolPeer::DISDES;
+    }
 
 	} 
 	
 	public function setDishas($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [dishas] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->dishas !== $ts) {
-			$this->dishas = $ts;
-			$this->modifiedColumns[] = NpvaccolPeer::DISHAS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [dishas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->dishas !== $ts) {
+      $this->dishas = $ts;
+      $this->modifiedColumns[] = NpvaccolPeer::DISHAS;
+    }
 
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = NpvaccolPeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = NpvaccolPeer::FECREG;
+    }
 
 	} 
 	
 	public function setDiavac($v)
 	{
 
-		if ($this->diavac !== $v) {
-			$this->diavac = $v;
-			$this->modifiedColumns[] = NpvaccolPeer::DIAVAC;
-		}
-
+    if ($this->diavac !== $v) {
+        $this->diavac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvaccolPeer::DIAVAC;
+      }
+  
 	} 
 	
 	public function setDianhab($v)
 	{
 
-		if ($this->dianhab !== $v) {
-			$this->dianhab = $v;
-			$this->modifiedColumns[] = NpvaccolPeer::DIANHAB;
-		}
-
+    if ($this->dianhab !== $v) {
+        $this->dianhab = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvaccolPeer::DIANHAB;
+      }
+  
 	} 
 	
 	public function setStareg($v)
 	{
 
-		if ($this->stareg !== $v) {
-			$this->stareg = $v;
-			$this->modifiedColumns[] = NpvaccolPeer::STAREG;
-		}
-
+    if ($this->stareg !== $v) {
+        $this->stareg = $v;
+        $this->modifiedColumns[] = NpvaccolPeer::STAREG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvaccolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvaccolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->disdes = $rs->getDate($startcol + 1, null);
+      $this->disdes = $rs->getDate($startcol + 1, null);
 
-			$this->dishas = $rs->getDate($startcol + 2, null);
+      $this->dishas = $rs->getDate($startcol + 2, null);
 
-			$this->fecreg = $rs->getDate($startcol + 3, null);
+      $this->fecreg = $rs->getDate($startcol + 3, null);
 
-			$this->diavac = $rs->getFloat($startcol + 4);
+      $this->diavac = $rs->getFloat($startcol + 4);
 
-			$this->dianhab = $rs->getFloat($startcol + 5);
+      $this->dianhab = $rs->getFloat($startcol + 5);
 
-			$this->stareg = $rs->getString($startcol + 6);
+      $this->stareg = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvaccol object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvaccol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -330,6 +357,7 @@ abstract class BaseNpvaccol extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvaccolPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvaccolPeer::doUpdate($this, $con);

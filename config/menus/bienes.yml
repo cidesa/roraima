@@ -1,0 +1,89 @@
+bienes:
+  opciones:
+    activo: true #true/false
+    descripcion: Módulo de Bienes Nacionales
+    imagen: bienes.gif
+    nombre: Bienes Nacionales
+    urls:
+      Cambiar Contraseña:
+        modulo: autenticacion.php
+        modulo_dev: autenticacion_dev.php
+      default:
+        modulo: bienes.php
+        modulo_dev: bienes_dev.php
+      Definicion de Proveedores:
+        modulo: compras.php
+        modulo_dev: compras_dev.php
+      Reportes:
+        absoluta: reportes/reportes/bienes
+    imagenes:
+      default: OperatorClass.png
+  menu:
+    Definiciones:
+      Definicion de Empresa:                              BieDefEmp
+      Definicion de Ubicación:                            BieDefUbi
+      Definicion de Proveedores:                          AlmRegPro
+      Definicion de Activos:                              BieCatAct
+      Definicion de Motivos de Disposición:               BieDefMotDis
+      Definicion de Disposición:                          BieDefDis
+      #Definicion de Partidas:                             BieDefPar
+      Definicion de Clasificación Funcional:              BieDefClaFun
+      Definicion de Cobertura Para Seguros:               BieCobSeg
+    Registro de Activos:
+      Registro Muebles:                                   BieRegActMueD
+      Registro Inmuebles:                                 BieRegActInmD
+    Disposición de Activos:
+      Disposición de Muebles:                             BieDisActMueNew
+      Disposición de Inmuebles:                           BieDisActInm
+      En Lotes:
+        Disposición de Muebles:                           BieDisActMueLot
+        Disposición de Inmuebles:                         BieDisActInmLot
+    Registro de Seguros:
+      Seguros de Muebles:                                 BieRegSegMue
+      Seguros de Inmuebles:                               BieRegSegInm
+    Contabilidad de Activos:
+      Tabla de IPC:                                       BieIpcAct
+      Definición Contable:
+        Definición Contable de Muebles:                   BieDefConM
+        Definición Contable de Muebles por Lotes:         BieDefConLotM
+        Definición Contable de Inmuebles:                 BieDefConI
+        Definición Contable de Inmuebles por Lotes:       BieDefConLotI
+      Revalorización:                                     BieAjuInf
+    Reportes:
+      Generales:
+        Catálogo de Activos:                                BNRDEFACT.php
+        Catálogo de Ubicaciones:                            BNRUBICA.php
+        Catálogo de Disposición:                            bnrdefdis.php
+        Catálogo de Clasificación Funcional:                bnrdefclafun.php
+      Listados:
+        Listado de Bienes Muebles:                        bnrlisbiemue.php
+        Listado de Bienes Inmuebles:                      bnrlisbieinm.php
+        Listado de Bienes Muebles(Ubicación):             bnrlismue.php
+        Listado de Bienes Inmuebles(Ubicación):           bnrlisinm.php
+        Listado de IPC:                                   bnripcact.php
+        Listado de Bienes Activos Muebles:              bnrubiactmue.php
+        Listado de Bienes Activos Inmuebles:            bnrubiactinm.php
+      Formularios BM:
+        Inventario de Bienes Muebles (BM-1):              bnrlisbm1.php
+        Listado de Relación de Movimientos de Bienes (BM-2): bnrlisbm3.php
+        Listado de Relación de Bienes Faltantas (BM-3):   bnrlisbm4.php
+        Resumen de la Cuenta de Bienes (BM-4):            bnrrescuebie.php
+        Relacion de Inventario de Bienes:                 bnrinvbiemue.php
+        Formulario Control Interno de Elementos:          bnrbiemueconint.php
+      Disposición Activos:
+        Disposición Activos Muebles:                      BNRDISBIEMUE.php
+        Disposición Activos Inmuebles:                    BNRDISBIEINM.php
+      Seguro Activos:
+        Seguro Activos Muebles:                           BNRSEGBIEMUE.php
+        Seguro Activos Inmuebles:                         BNRSEGBIEINM.php
+      Revalorización:
+        Revalorización de Bienes Muebles:                 BNRLISBIEMUEREV.php
+        Revalorización de Bienes Inmuebles:               BNRLISBIEINMREV.php
+      Etiquetas:
+        Bienes Muebles:                                   bnretqmue.php
+        Bienes Inmuebles:                                 bnretqinm.php
+    Mantenimiento:
+      Cierre_de_Mes:                                      BieCieMesDan
+      Cambiar Contraseña:                                     cambiopasswd
+
+

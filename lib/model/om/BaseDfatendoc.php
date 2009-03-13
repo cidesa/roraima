@@ -9,43 +9,19 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 
 
 	
-	protected $codigo;
+	protected $coddoc;
 
 
 	
-	protected $loguse;
+	protected $desdoc;
 
 
 	
-	protected $estado;
+	protected $mondoc;
 
 
 	
-	protected $fecrec;
-
-
-	
-	protected $horrec;
-
-
-	
-	protected $fecate;
-
-
-	
-	protected $horate;
-
-
-	
-	protected $numuni;
-
-
-	
-	protected $numuniori;
-
-
-	
-	protected $obsdoc;
+	protected $fecdoc;
 
 
 	
@@ -53,43 +29,44 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 
 
 	
-	protected $tabla;
-
-
-	
 	protected $anuate;
 
 
 	
-	protected $chkuni1 = '0';
+	protected $estado;
 
 
 	
-	protected $chkuni2 = '0';
+	protected $id_dftabtip;
 
 
 	
-	protected $chkuni3 = '0';
+	protected $infdoc1;
 
 
 	
-	protected $chkuni4 = '0';
+	protected $infdoc2;
 
 
 	
-	protected $chkuni5 = '0';
+	protected $infdoc3;
 
 
 	
-	protected $chkuni6 = '0';
-
-
-	
-	protected $chkuni7 = '0';
+	protected $infdoc4;
 
 
 	
 	protected $id;
+
+	
+	protected $aDftabtip;
+
+	
+	protected $collDfatendocdets;
+
+	
+	protected $lastDfatendocdetCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -97,490 +74,293 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
+  
+  public function getCoddoc()
+  {
+
+    return trim($this->coddoc);
+
+  }
+  
+  public function getDesdoc()
+  {
+
+    return trim($this->desdoc);
+
+  }
+  
+  public function getMondoc()
+  {
+
+    return trim($this->mondoc);
+
+  }
+  
+  public function getFecdoc()
+  {
+
+    return trim($this->fecdoc);
+
+  }
+  
+  public function getStaate()
+  {
+
+    return trim($this->staate);
+
+  }
+  
+  public function getAnuate()
+  {
+
+    return $this->anuate;
+
+  }
+  
+  public function getEstado()
+  {
+
+    return trim($this->estado);
+
+  }
+  
+  public function getIdDftabtip()
+  {
+
+    return $this->id_dftabtip;
+
+  }
+  
+  public function getInfdoc1()
+  {
+
+    return trim($this->infdoc1);
+
+  }
+  
+  public function getInfdoc2()
+  {
+
+    return trim($this->infdoc2);
+
+  }
+  
+  public function getInfdoc3()
+  {
+
+    return trim($this->infdoc3);
+
+  }
+  
+  public function getInfdoc4()
+  {
+
+    return trim($this->infdoc4);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
-	public function getCodigo()
+	public function setCoddoc($v)
 	{
 
-		return $this->codigo; 		
-	}
-	
-	public function getLoguse()
-	{
-
-		return $this->loguse; 		
-	}
-	
-	public function getEstado()
-	{
-
-		return $this->estado; 		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
-
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getHorrec($format = 'Y-m-d')
-	{
-
-		if ($this->horrec === null || $this->horrec === '') {
-			return null;
-		} elseif (!is_int($this->horrec)) {
-						$ts = strtotime($this->horrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [horrec] as date/time value: " . var_export($this->horrec, true));
-			}
-		} else {
-			$ts = $this->horrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getFecate($format = 'Y-m-d')
-	{
-
-		if ($this->fecate === null || $this->fecate === '') {
-			return null;
-		} elseif (!is_int($this->fecate)) {
-						$ts = strtotime($this->fecate);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecate] as date/time value: " . var_export($this->fecate, true));
-			}
-		} else {
-			$ts = $this->fecate;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getHorate($format = 'Y-m-d')
-	{
-
-		if ($this->horate === null || $this->horate === '') {
-			return null;
-		} elseif (!is_int($this->horate)) {
-						$ts = strtotime($this->horate);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [horate] as date/time value: " . var_export($this->horate, true));
-			}
-		} else {
-			$ts = $this->horate;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getNumuni()
-	{
-
-		return $this->numuni; 		
-	}
-	
-	public function getNumuniori()
-	{
-
-		return $this->numuniori; 		
-	}
-	
-	public function getObsdoc()
-	{
-
-		return $this->obsdoc; 		
-	}
-	
-	public function getStaate()
-	{
-
-		return $this->staate; 		
-	}
-	
-	public function getTabla()
-	{
-
-		return $this->tabla; 		
-	}
-	
-	public function getAnuate()
-	{
-
-		return $this->anuate; 		
-	}
-	
-	public function getChkuni1()
-	{
-
-		return $this->chkuni1; 		
-	}
-	
-	public function getChkuni2()
-	{
-
-		return $this->chkuni2; 		
-	}
-	
-	public function getChkuni3()
-	{
-
-		return $this->chkuni3; 		
-	}
-	
-	public function getChkuni4()
-	{
-
-		return $this->chkuni4; 		
-	}
-	
-	public function getChkuni5()
-	{
-
-		return $this->chkuni5; 		
-	}
-	
-	public function getChkuni6()
-	{
-
-		return $this->chkuni6; 		
-	}
-	
-	public function getChkuni7()
-	{
-
-		return $this->chkuni7; 		
-	}
-	
-	public function getId()
-	{
-
-		return $this->id; 		
-	}
-	
-	public function setCodigo($v)
-	{
-
-		if ($this->codigo !== $v) {
-			$this->codigo = $v;
-			$this->modifiedColumns[] = DfatendocPeer::CODIGO;
-		}
-
+    if ($this->coddoc !== $v) {
+        $this->coddoc = $v;
+        $this->modifiedColumns[] = DfatendocPeer::CODDOC;
+      }
+  
 	} 
 	
-	public function setLoguse($v)
+	public function setDesdoc($v)
 	{
 
-		if ($this->loguse !== $v) {
-			$this->loguse = $v;
-			$this->modifiedColumns[] = DfatendocPeer::LOGUSE;
-		}
-
+    if ($this->desdoc !== $v) {
+        $this->desdoc = $v;
+        $this->modifiedColumns[] = DfatendocPeer::DESDOC;
+      }
+  
 	} 
 	
-	public function setEstado($v)
+	public function setMondoc($v)
 	{
 
-		if ($this->estado !== $v) {
-			$this->estado = $v;
-			$this->modifiedColumns[] = DfatendocPeer::ESTADO;
-		}
-
+    if ($this->mondoc !== $v) {
+        $this->mondoc = $v;
+        $this->modifiedColumns[] = DfatendocPeer::MONDOC;
+      }
+  
 	} 
 	
-	public function setFecrec($v)
+	public function setFecdoc($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = DfatendocPeer::FECREC;
-		}
-
-	} 
-	
-	public function setHorrec($v)
-	{
-
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [horrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->horrec !== $ts) {
-			$this->horrec = $ts;
-			$this->modifiedColumns[] = DfatendocPeer::HORREC;
-		}
-
-	} 
-	
-	public function setFecate($v)
-	{
-
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecate] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecate !== $ts) {
-			$this->fecate = $ts;
-			$this->modifiedColumns[] = DfatendocPeer::FECATE;
-		}
-
-	} 
-	
-	public function setHorate($v)
-	{
-
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [horate] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->horate !== $ts) {
-			$this->horate = $ts;
-			$this->modifiedColumns[] = DfatendocPeer::HORATE;
-		}
-
-	} 
-	
-	public function setNumuni($v)
-	{
-
-		if ($this->numuni !== $v) {
-			$this->numuni = $v;
-			$this->modifiedColumns[] = DfatendocPeer::NUMUNI;
-		}
-
-	} 
-	
-	public function setNumuniori($v)
-	{
-
-		if ($this->numuniori !== $v) {
-			$this->numuniori = $v;
-			$this->modifiedColumns[] = DfatendocPeer::NUMUNIORI;
-		}
-
-	} 
-	
-	public function setObsdoc($v)
-	{
-
-		if ($this->obsdoc !== $v) {
-			$this->obsdoc = $v;
-			$this->modifiedColumns[] = DfatendocPeer::OBSDOC;
-		}
-
+    if ($this->fecdoc !== $v) {
+        $this->fecdoc = $v;
+        $this->modifiedColumns[] = DfatendocPeer::FECDOC;
+      }
+  
 	} 
 	
 	public function setStaate($v)
 	{
 
-		if ($this->staate !== $v) {
-			$this->staate = $v;
-			$this->modifiedColumns[] = DfatendocPeer::STAATE;
-		}
-
-	} 
-	
-	public function setTabla($v)
-	{
-
-		if ($this->tabla !== $v) {
-			$this->tabla = $v;
-			$this->modifiedColumns[] = DfatendocPeer::TABLA;
-		}
-
+    if ($this->staate !== $v) {
+        $this->staate = $v;
+        $this->modifiedColumns[] = DfatendocPeer::STAATE;
+      }
+  
 	} 
 	
 	public function setAnuate($v)
 	{
 
-		if ($this->anuate !== $v) {
-			$this->anuate = $v;
-			$this->modifiedColumns[] = DfatendocPeer::ANUATE;
+    if ($this->anuate !== $v) {
+        $this->anuate = $v;
+        $this->modifiedColumns[] = DfatendocPeer::ANUATE;
+      }
+  
+	} 
+	
+	public function setEstado($v)
+	{
+
+    if ($this->estado !== $v) {
+        $this->estado = $v;
+        $this->modifiedColumns[] = DfatendocPeer::ESTADO;
+      }
+  
+	} 
+	
+	public function setIdDftabtip($v)
+	{
+
+    if ($this->id_dftabtip !== $v) {
+        $this->id_dftabtip = $v;
+        $this->modifiedColumns[] = DfatendocPeer::ID_DFTABTIP;
+      }
+  
+		if ($this->aDftabtip !== null && $this->aDftabtip->getId() !== $v) {
+			$this->aDftabtip = null;
 		}
 
 	} 
 	
-	public function setChkuni1($v)
+	public function setInfdoc1($v)
 	{
 
-		if ($this->chkuni1 !== $v || $v === '0') {
-			$this->chkuni1 = $v;
-			$this->modifiedColumns[] = DfatendocPeer::CHKUNI1;
-		}
-
+    if ($this->infdoc1 !== $v) {
+        $this->infdoc1 = $v;
+        $this->modifiedColumns[] = DfatendocPeer::INFDOC1;
+      }
+  
 	} 
 	
-	public function setChkuni2($v)
+	public function setInfdoc2($v)
 	{
 
-		if ($this->chkuni2 !== $v || $v === '0') {
-			$this->chkuni2 = $v;
-			$this->modifiedColumns[] = DfatendocPeer::CHKUNI2;
-		}
-
+    if ($this->infdoc2 !== $v) {
+        $this->infdoc2 = $v;
+        $this->modifiedColumns[] = DfatendocPeer::INFDOC2;
+      }
+  
 	} 
 	
-	public function setChkuni3($v)
+	public function setInfdoc3($v)
 	{
 
-		if ($this->chkuni3 !== $v || $v === '0') {
-			$this->chkuni3 = $v;
-			$this->modifiedColumns[] = DfatendocPeer::CHKUNI3;
-		}
-
+    if ($this->infdoc3 !== $v) {
+        $this->infdoc3 = $v;
+        $this->modifiedColumns[] = DfatendocPeer::INFDOC3;
+      }
+  
 	} 
 	
-	public function setChkuni4($v)
+	public function setInfdoc4($v)
 	{
 
-		if ($this->chkuni4 !== $v || $v === '0') {
-			$this->chkuni4 = $v;
-			$this->modifiedColumns[] = DfatendocPeer::CHKUNI4;
-		}
-
-	} 
-	
-	public function setChkuni5($v)
-	{
-
-		if ($this->chkuni5 !== $v || $v === '0') {
-			$this->chkuni5 = $v;
-			$this->modifiedColumns[] = DfatendocPeer::CHKUNI5;
-		}
-
-	} 
-	
-	public function setChkuni6($v)
-	{
-
-		if ($this->chkuni6 !== $v || $v === '0') {
-			$this->chkuni6 = $v;
-			$this->modifiedColumns[] = DfatendocPeer::CHKUNI6;
-		}
-
-	} 
-	
-	public function setChkuni7($v)
-	{
-
-		if ($this->chkuni7 !== $v || $v === '0') {
-			$this->chkuni7 = $v;
-			$this->modifiedColumns[] = DfatendocPeer::CHKUNI7;
-		}
-
+    if ($this->infdoc4 !== $v) {
+        $this->infdoc4 = $v;
+        $this->modifiedColumns[] = DfatendocPeer::INFDOC4;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = DfatendocPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = DfatendocPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codigo = $rs->getString($startcol + 0);
+      $this->coddoc = $rs->getString($startcol + 0);
 
-			$this->loguse = $rs->getString($startcol + 1);
+      $this->desdoc = $rs->getString($startcol + 1);
 
-			$this->estado = $rs->getString($startcol + 2);
+      $this->mondoc = $rs->getString($startcol + 2);
 
-			$this->fecrec = $rs->getDate($startcol + 3, null);
+      $this->fecdoc = $rs->getString($startcol + 3);
 
-			$this->horrec = $rs->getDate($startcol + 4, null);
+      $this->staate = $rs->getString($startcol + 4);
 
-			$this->fecate = $rs->getDate($startcol + 5, null);
+      $this->anuate = $rs->getInt($startcol + 5);
 
-			$this->horate = $rs->getDate($startcol + 6, null);
+      $this->estado = $rs->getString($startcol + 6);
 
-			$this->numuni = $rs->getString($startcol + 7);
+      $this->id_dftabtip = $rs->getInt($startcol + 7);
 
-			$this->numuniori = $rs->getString($startcol + 8);
+      $this->infdoc1 = $rs->getString($startcol + 8);
 
-			$this->obsdoc = $rs->getString($startcol + 9);
+      $this->infdoc2 = $rs->getString($startcol + 9);
 
-			$this->staate = $rs->getString($startcol + 10);
+      $this->infdoc3 = $rs->getString($startcol + 10);
 
-			$this->tabla = $rs->getString($startcol + 11);
+      $this->infdoc4 = $rs->getString($startcol + 11);
 
-			$this->anuate = $rs->getString($startcol + 12);
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->chkuni1 = $rs->getString($startcol + 13);
+      $this->resetModified();
 
-			$this->chkuni2 = $rs->getString($startcol + 14);
+      $this->setNew(false);
 
-			$this->chkuni3 = $rs->getString($startcol + 15);
+      $this->afterHydrate();
 
-			$this->chkuni4 = $rs->getString($startcol + 16);
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Dfatendoc object", $e);
+    }
+  }
 
-			$this->chkuni5 = $rs->getString($startcol + 17);
 
-			$this->chkuni6 = $rs->getString($startcol + 18);
+  protected function afterHydrate()
+  {
 
-			$this->chkuni7 = $rs->getString($startcol + 19);
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
 
-			$this->id = $rs->getInt($startcol + 20);
-
-			$this->resetModified();
-
-			$this->setNew(false);
-
-						return $startcol + 21; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Dfatendoc object", $e);
-		}
-	}
+    }
 
 	
 	public function delete($con = null)
@@ -633,15 +413,33 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aDftabtip !== null) {
+				if ($this->aDftabtip->isModified()) {
+					$affectedRows += $this->aDftabtip->save($con);
+				}
+				$this->setDftabtip($this->aDftabtip);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = DfatendocPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += DfatendocPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collDfatendocdets !== null) {
+				foreach($this->collDfatendocdets as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -679,10 +477,26 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aDftabtip !== null) {
+				if (!$this->aDftabtip->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aDftabtip->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = DfatendocPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collDfatendocdets !== null) {
+					foreach($this->collDfatendocdets as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -703,66 +517,42 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodigo();
+				return $this->getCoddoc();
 				break;
 			case 1:
-				return $this->getLoguse();
+				return $this->getDesdoc();
 				break;
 			case 2:
-				return $this->getEstado();
+				return $this->getMondoc();
 				break;
 			case 3:
-				return $this->getFecrec();
+				return $this->getFecdoc();
 				break;
 			case 4:
-				return $this->getHorrec();
-				break;
-			case 5:
-				return $this->getFecate();
-				break;
-			case 6:
-				return $this->getHorate();
-				break;
-			case 7:
-				return $this->getNumuni();
-				break;
-			case 8:
-				return $this->getNumuniori();
-				break;
-			case 9:
-				return $this->getObsdoc();
-				break;
-			case 10:
 				return $this->getStaate();
 				break;
-			case 11:
-				return $this->getTabla();
-				break;
-			case 12:
+			case 5:
 				return $this->getAnuate();
 				break;
-			case 13:
-				return $this->getChkuni1();
+			case 6:
+				return $this->getEstado();
 				break;
-			case 14:
-				return $this->getChkuni2();
+			case 7:
+				return $this->getIdDftabtip();
 				break;
-			case 15:
-				return $this->getChkuni3();
+			case 8:
+				return $this->getInfdoc1();
 				break;
-			case 16:
-				return $this->getChkuni4();
+			case 9:
+				return $this->getInfdoc2();
 				break;
-			case 17:
-				return $this->getChkuni5();
+			case 10:
+				return $this->getInfdoc3();
 				break;
-			case 18:
-				return $this->getChkuni6();
+			case 11:
+				return $this->getInfdoc4();
 				break;
-			case 19:
-				return $this->getChkuni7();
-				break;
-			case 20:
+			case 12:
 				return $this->getId();
 				break;
 			default:
@@ -775,27 +565,19 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		$keys = DfatendocPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodigo(),
-			$keys[1] => $this->getLoguse(),
-			$keys[2] => $this->getEstado(),
-			$keys[3] => $this->getFecrec(),
-			$keys[4] => $this->getHorrec(),
-			$keys[5] => $this->getFecate(),
-			$keys[6] => $this->getHorate(),
-			$keys[7] => $this->getNumuni(),
-			$keys[8] => $this->getNumuniori(),
-			$keys[9] => $this->getObsdoc(),
-			$keys[10] => $this->getStaate(),
-			$keys[11] => $this->getTabla(),
-			$keys[12] => $this->getAnuate(),
-			$keys[13] => $this->getChkuni1(),
-			$keys[14] => $this->getChkuni2(),
-			$keys[15] => $this->getChkuni3(),
-			$keys[16] => $this->getChkuni4(),
-			$keys[17] => $this->getChkuni5(),
-			$keys[18] => $this->getChkuni6(),
-			$keys[19] => $this->getChkuni7(),
-			$keys[20] => $this->getId(),
+			$keys[0] => $this->getCoddoc(),
+			$keys[1] => $this->getDesdoc(),
+			$keys[2] => $this->getMondoc(),
+			$keys[3] => $this->getFecdoc(),
+			$keys[4] => $this->getStaate(),
+			$keys[5] => $this->getAnuate(),
+			$keys[6] => $this->getEstado(),
+			$keys[7] => $this->getIdDftabtip(),
+			$keys[8] => $this->getInfdoc1(),
+			$keys[9] => $this->getInfdoc2(),
+			$keys[10] => $this->getInfdoc3(),
+			$keys[11] => $this->getInfdoc4(),
+			$keys[12] => $this->getId(),
 		);
 		return $result;
 	}
@@ -812,66 +594,42 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodigo($value);
+				$this->setCoddoc($value);
 				break;
 			case 1:
-				$this->setLoguse($value);
+				$this->setDesdoc($value);
 				break;
 			case 2:
-				$this->setEstado($value);
+				$this->setMondoc($value);
 				break;
 			case 3:
-				$this->setFecrec($value);
+				$this->setFecdoc($value);
 				break;
 			case 4:
-				$this->setHorrec($value);
-				break;
-			case 5:
-				$this->setFecate($value);
-				break;
-			case 6:
-				$this->setHorate($value);
-				break;
-			case 7:
-				$this->setNumuni($value);
-				break;
-			case 8:
-				$this->setNumuniori($value);
-				break;
-			case 9:
-				$this->setObsdoc($value);
-				break;
-			case 10:
 				$this->setStaate($value);
 				break;
-			case 11:
-				$this->setTabla($value);
-				break;
-			case 12:
+			case 5:
 				$this->setAnuate($value);
 				break;
-			case 13:
-				$this->setChkuni1($value);
+			case 6:
+				$this->setEstado($value);
 				break;
-			case 14:
-				$this->setChkuni2($value);
+			case 7:
+				$this->setIdDftabtip($value);
 				break;
-			case 15:
-				$this->setChkuni3($value);
+			case 8:
+				$this->setInfdoc1($value);
 				break;
-			case 16:
-				$this->setChkuni4($value);
+			case 9:
+				$this->setInfdoc2($value);
 				break;
-			case 17:
-				$this->setChkuni5($value);
+			case 10:
+				$this->setInfdoc3($value);
 				break;
-			case 18:
-				$this->setChkuni6($value);
+			case 11:
+				$this->setInfdoc4($value);
 				break;
-			case 19:
-				$this->setChkuni7($value);
-				break;
-			case 20:
+			case 12:
 				$this->setId($value);
 				break;
 		} 	}
@@ -881,27 +639,19 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		$keys = DfatendocPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodigo($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setLoguse($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setEstado($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setFecrec($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setHorrec($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setFecate($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setHorate($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setNumuni($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setNumuniori($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setObsdoc($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setStaate($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setTabla($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setAnuate($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setChkuni1($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setChkuni2($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setChkuni3($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setChkuni4($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setChkuni5($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setChkuni6($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setChkuni7($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCoddoc($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setDesdoc($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setMondoc($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setFecdoc($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setStaate($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setAnuate($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setEstado($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setIdDftabtip($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setInfdoc1($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setInfdoc2($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setInfdoc3($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setInfdoc4($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
 	}
 
 	
@@ -909,26 +659,18 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(DfatendocPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(DfatendocPeer::CODIGO)) $criteria->add(DfatendocPeer::CODIGO, $this->codigo);
-		if ($this->isColumnModified(DfatendocPeer::LOGUSE)) $criteria->add(DfatendocPeer::LOGUSE, $this->loguse);
-		if ($this->isColumnModified(DfatendocPeer::ESTADO)) $criteria->add(DfatendocPeer::ESTADO, $this->estado);
-		if ($this->isColumnModified(DfatendocPeer::FECREC)) $criteria->add(DfatendocPeer::FECREC, $this->fecrec);
-		if ($this->isColumnModified(DfatendocPeer::HORREC)) $criteria->add(DfatendocPeer::HORREC, $this->horrec);
-		if ($this->isColumnModified(DfatendocPeer::FECATE)) $criteria->add(DfatendocPeer::FECATE, $this->fecate);
-		if ($this->isColumnModified(DfatendocPeer::HORATE)) $criteria->add(DfatendocPeer::HORATE, $this->horate);
-		if ($this->isColumnModified(DfatendocPeer::NUMUNI)) $criteria->add(DfatendocPeer::NUMUNI, $this->numuni);
-		if ($this->isColumnModified(DfatendocPeer::NUMUNIORI)) $criteria->add(DfatendocPeer::NUMUNIORI, $this->numuniori);
-		if ($this->isColumnModified(DfatendocPeer::OBSDOC)) $criteria->add(DfatendocPeer::OBSDOC, $this->obsdoc);
+		if ($this->isColumnModified(DfatendocPeer::CODDOC)) $criteria->add(DfatendocPeer::CODDOC, $this->coddoc);
+		if ($this->isColumnModified(DfatendocPeer::DESDOC)) $criteria->add(DfatendocPeer::DESDOC, $this->desdoc);
+		if ($this->isColumnModified(DfatendocPeer::MONDOC)) $criteria->add(DfatendocPeer::MONDOC, $this->mondoc);
+		if ($this->isColumnModified(DfatendocPeer::FECDOC)) $criteria->add(DfatendocPeer::FECDOC, $this->fecdoc);
 		if ($this->isColumnModified(DfatendocPeer::STAATE)) $criteria->add(DfatendocPeer::STAATE, $this->staate);
-		if ($this->isColumnModified(DfatendocPeer::TABLA)) $criteria->add(DfatendocPeer::TABLA, $this->tabla);
 		if ($this->isColumnModified(DfatendocPeer::ANUATE)) $criteria->add(DfatendocPeer::ANUATE, $this->anuate);
-		if ($this->isColumnModified(DfatendocPeer::CHKUNI1)) $criteria->add(DfatendocPeer::CHKUNI1, $this->chkuni1);
-		if ($this->isColumnModified(DfatendocPeer::CHKUNI2)) $criteria->add(DfatendocPeer::CHKUNI2, $this->chkuni2);
-		if ($this->isColumnModified(DfatendocPeer::CHKUNI3)) $criteria->add(DfatendocPeer::CHKUNI3, $this->chkuni3);
-		if ($this->isColumnModified(DfatendocPeer::CHKUNI4)) $criteria->add(DfatendocPeer::CHKUNI4, $this->chkuni4);
-		if ($this->isColumnModified(DfatendocPeer::CHKUNI5)) $criteria->add(DfatendocPeer::CHKUNI5, $this->chkuni5);
-		if ($this->isColumnModified(DfatendocPeer::CHKUNI6)) $criteria->add(DfatendocPeer::CHKUNI6, $this->chkuni6);
-		if ($this->isColumnModified(DfatendocPeer::CHKUNI7)) $criteria->add(DfatendocPeer::CHKUNI7, $this->chkuni7);
+		if ($this->isColumnModified(DfatendocPeer::ESTADO)) $criteria->add(DfatendocPeer::ESTADO, $this->estado);
+		if ($this->isColumnModified(DfatendocPeer::ID_DFTABTIP)) $criteria->add(DfatendocPeer::ID_DFTABTIP, $this->id_dftabtip);
+		if ($this->isColumnModified(DfatendocPeer::INFDOC1)) $criteria->add(DfatendocPeer::INFDOC1, $this->infdoc1);
+		if ($this->isColumnModified(DfatendocPeer::INFDOC2)) $criteria->add(DfatendocPeer::INFDOC2, $this->infdoc2);
+		if ($this->isColumnModified(DfatendocPeer::INFDOC3)) $criteria->add(DfatendocPeer::INFDOC3, $this->infdoc3);
+		if ($this->isColumnModified(DfatendocPeer::INFDOC4)) $criteria->add(DfatendocPeer::INFDOC4, $this->infdoc4);
 		if ($this->isColumnModified(DfatendocPeer::ID)) $criteria->add(DfatendocPeer::ID, $this->id);
 
 		return $criteria;
@@ -960,46 +702,39 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodigo($this->codigo);
+		$copyObj->setCoddoc($this->coddoc);
 
-		$copyObj->setLoguse($this->loguse);
+		$copyObj->setDesdoc($this->desdoc);
 
-		$copyObj->setEstado($this->estado);
+		$copyObj->setMondoc($this->mondoc);
 
-		$copyObj->setFecrec($this->fecrec);
-
-		$copyObj->setHorrec($this->horrec);
-
-		$copyObj->setFecate($this->fecate);
-
-		$copyObj->setHorate($this->horate);
-
-		$copyObj->setNumuni($this->numuni);
-
-		$copyObj->setNumuniori($this->numuniori);
-
-		$copyObj->setObsdoc($this->obsdoc);
+		$copyObj->setFecdoc($this->fecdoc);
 
 		$copyObj->setStaate($this->staate);
 
-		$copyObj->setTabla($this->tabla);
-
 		$copyObj->setAnuate($this->anuate);
 
-		$copyObj->setChkuni1($this->chkuni1);
+		$copyObj->setEstado($this->estado);
 
-		$copyObj->setChkuni2($this->chkuni2);
+		$copyObj->setIdDftabtip($this->id_dftabtip);
 
-		$copyObj->setChkuni3($this->chkuni3);
+		$copyObj->setInfdoc1($this->infdoc1);
 
-		$copyObj->setChkuni4($this->chkuni4);
+		$copyObj->setInfdoc2($this->infdoc2);
 
-		$copyObj->setChkuni5($this->chkuni5);
+		$copyObj->setInfdoc3($this->infdoc3);
 
-		$copyObj->setChkuni6($this->chkuni6);
+		$copyObj->setInfdoc4($this->infdoc4);
 
-		$copyObj->setChkuni7($this->chkuni7);
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getDfatendocdets() as $relObj) {
+				$copyObj->addDfatendocdet($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -1022,6 +757,280 @@ abstract class BaseDfatendoc extends BaseObject  implements Persistent {
 			self::$peer = new DfatendocPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setDftabtip($v)
+	{
+
+
+		if ($v === null) {
+			$this->setIdDftabtip(NULL);
+		} else {
+			$this->setIdDftabtip($v->getId());
+		}
+
+
+		$this->aDftabtip = $v;
+	}
+
+
+	
+	public function getDftabtip($con = null)
+	{
+		if ($this->aDftabtip === null && ($this->id_dftabtip !== null)) {
+						include_once 'lib/model/om/BaseDftabtipPeer.php';
+
+			$this->aDftabtip = DftabtipPeer::retrieveByPK($this->id_dftabtip, $con);
+
+			
+		}
+		return $this->aDftabtip;
+	}
+
+	
+	public function initDfatendocdets()
+	{
+		if ($this->collDfatendocdets === null) {
+			$this->collDfatendocdets = array();
+		}
+	}
+
+	
+	public function getDfatendocdets($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdets === null) {
+			if ($this->isNew()) {
+			   $this->collDfatendocdets = array();
+			} else {
+
+				$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+				DfatendocdetPeer::addSelectColumns($criteria);
+				$this->collDfatendocdets = DfatendocdetPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+				DfatendocdetPeer::addSelectColumns($criteria);
+				if (!isset($this->lastDfatendocdetCriteria) || !$this->lastDfatendocdetCriteria->equals($criteria)) {
+					$this->collDfatendocdets = DfatendocdetPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastDfatendocdetCriteria = $criteria;
+		return $this->collDfatendocdets;
+	}
+
+	
+	public function countDfatendocdets($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+		return DfatendocdetPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addDfatendocdet(Dfatendocdet $l)
+	{
+		$this->collDfatendocdets[] = $l;
+		$l->setDfatendoc($this);
+	}
+
+
+	
+	public function getDfatendocdetsJoinUsuarios($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdets === null) {
+			if ($this->isNew()) {
+				$this->collDfatendocdets = array();
+			} else {
+
+				$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinUsuarios($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+			if (!isset($this->lastDfatendocdetCriteria) || !$this->lastDfatendocdetCriteria->equals($criteria)) {
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinUsuarios($criteria, $con);
+			}
+		}
+		$this->lastDfatendocdetCriteria = $criteria;
+
+		return $this->collDfatendocdets;
+	}
+
+
+	
+	public function getDfatendocdetsJoinAcunidadRelatedByIdAcunidadOri($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdets === null) {
+			if ($this->isNew()) {
+				$this->collDfatendocdets = array();
+			} else {
+
+				$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinAcunidadRelatedByIdAcunidadOri($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+			if (!isset($this->lastDfatendocdetCriteria) || !$this->lastDfatendocdetCriteria->equals($criteria)) {
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinAcunidadRelatedByIdAcunidadOri($criteria, $con);
+			}
+		}
+		$this->lastDfatendocdetCriteria = $criteria;
+
+		return $this->collDfatendocdets;
+	}
+
+
+	
+	public function getDfatendocdetsJoinAcunidadRelatedByIdAcunidadDes($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdets === null) {
+			if ($this->isNew()) {
+				$this->collDfatendocdets = array();
+			} else {
+
+				$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinAcunidadRelatedByIdAcunidadDes($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+			if (!isset($this->lastDfatendocdetCriteria) || !$this->lastDfatendocdetCriteria->equals($criteria)) {
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinAcunidadRelatedByIdAcunidadDes($criteria, $con);
+			}
+		}
+		$this->lastDfatendocdetCriteria = $criteria;
+
+		return $this->collDfatendocdets;
+	}
+
+
+	
+	public function getDfatendocdetsJoinDfrutadoc($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdets === null) {
+			if ($this->isNew()) {
+				$this->collDfatendocdets = array();
+			} else {
+
+				$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinDfrutadoc($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+			if (!isset($this->lastDfatendocdetCriteria) || !$this->lastDfatendocdetCriteria->equals($criteria)) {
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinDfrutadoc($criteria, $con);
+			}
+		}
+		$this->lastDfatendocdetCriteria = $criteria;
+
+		return $this->collDfatendocdets;
+	}
+
+
+	
+	public function getDfatendocdetsJoinDfmedtra($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocdetPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocdets === null) {
+			if ($this->isNew()) {
+				$this->collDfatendocdets = array();
+			} else {
+
+				$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinDfmedtra($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfatendocdetPeer::ID_DFATENDOC, $this->getId());
+
+			if (!isset($this->lastDfatendocdetCriteria) || !$this->lastDfatendocdetCriteria->equals($criteria)) {
+				$this->collDfatendocdets = DfatendocdetPeer::doSelectJoinDfmedtra($criteria, $con);
+			}
+		}
+		$this->lastDfatendocdetCriteria = $criteria;
+
+		return $this->collDfatendocdets;
 	}
 
 } 

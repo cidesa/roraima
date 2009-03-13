@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class FordetorggobMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FordetorggobMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FordetorggobMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fordetorggob');
 		$tMap->setPhpName('Fordetorggob');
 
@@ -36,9 +36,9 @@ class FordetorggobMapBuilder {
 
 		$tMap->addColumn('FECPRE', 'Fecpre', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('MONACO', 'Monaco', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONACO', 'Monaco', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

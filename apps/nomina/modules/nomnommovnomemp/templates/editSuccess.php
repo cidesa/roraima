@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Movimientos por Empleados', 
+<h1><?php echo __('Movimientos por Empleados',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('nomnommovnomemp/edit_messages', array('npasicaremp' => $npasicaremp, 'labels' => $labels)) ?>
-<?php include_partial('nomnommovnomemp/edit_form', array('npasicaremp' => $npasicaremp, 'labels' => $labels, 'rs' => $rs)) ?>
+<?php include_partial('nomnommovnomemp/edit_form', array('npasicaremp' => $npasicaremp, 'labels' => $labels, 'rs' => $rs, 'obj' => $obj)) ?>
 </div>
 
 <div id="sf_admin_footer">

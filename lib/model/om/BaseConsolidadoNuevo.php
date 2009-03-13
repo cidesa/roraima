@@ -69,296 +69,331 @@ abstract class BaseConsolidadoNuevo extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getIdenti()
-	{
+  
+  public function getIdenti()
+  {
 
-		return $this->identi; 		
-	}
-	
-	public function getTipmov()
-	{
+    return trim($this->identi);
 
-		return $this->tipmov; 		
-	}
-	
-	public function getRefprc()
-	{
+  }
+  
+  public function getTipmov()
+  {
 
-		return $this->refprc; 		
-	}
-	
-	public function getRefcom()
-	{
+    return trim($this->tipmov);
 
-		return $this->refcom; 		
-	}
-	
-	public function getRefcau()
-	{
+  }
+  
+  public function getRefprc()
+  {
 
-		return $this->refcau; 		
-	}
-	
-	public function getRefpag()
-	{
+    return trim($this->refprc);
 
-		return $this->refpag; 		
-	}
-	
-	public function getFecmov($format = 'Y-m-d')
-	{
+  }
+  
+  public function getRefcom()
+  {
 
-		if ($this->fecmov === null || $this->fecmov === '') {
-			return null;
-		} elseif (!is_int($this->fecmov)) {
-						$ts = strtotime($this->fecmov);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecmov] as date/time value: " . var_export($this->fecmov, true));
-			}
-		} else {
-			$ts = $this->fecmov;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->refcom);
 
-	
-	public function getCedrif()
-	{
+  }
+  
+  public function getRefcau()
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getMonmov()
-	{
+    return trim($this->refcau);
 
-		return number_format($this->monmov,2,',','.');
-		
-	}
-	
-	public function getDesmov()
-	{
+  }
+  
+  public function getRefpag()
+  {
 
-		return $this->desmov; 		
-	}
-	
-	public function getAfedis()
-	{
+    return trim($this->refpag);
 
-		return $this->afedis; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getFecmov($format = 'Y-m-d')
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getNompre()
-	{
+    if ($this->fecmov === null || $this->fecmov === '') {
+      return null;
+    } elseif (!is_int($this->fecmov)) {
+            $ts = adodb_strtotime($this->fecmov);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecmov] as date/time value: " . var_export($this->fecmov, true));
+      }
+    } else {
+      $ts = $this->fecmov;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->nompre; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getCedrif()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->cedrif);
+
+  }
+  
+  public function getMonmov($val=false)
+  {
+
+    if($val) return number_format($this->monmov,2,',','.');
+    else return $this->monmov;
+
+  }
+  
+  public function getDesmov()
+  {
+
+    return trim($this->desmov);
+
+  }
+  
+  public function getAfedis()
+  {
+
+    return trim($this->afedis);
+
+  }
+  
+  public function getCodpre()
+  {
+
+    return trim($this->codpre);
+
+  }
+  
+  public function getNompre()
+  {
+
+    return trim($this->nompre);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setIdenti($v)
 	{
 
-		if ($this->identi !== $v) {
-			$this->identi = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::IDENTI;
-		}
-
+    if ($this->identi !== $v) {
+        $this->identi = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::IDENTI;
+      }
+  
 	} 
 	
 	public function setTipmov($v)
 	{
 
-		if ($this->tipmov !== $v) {
-			$this->tipmov = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::TIPMOV;
-		}
-
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::TIPMOV;
+      }
+  
 	} 
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::REFPRC;
-		}
-
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::REFPRC;
+      }
+  
 	} 
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setRefcau($v)
 	{
 
-		if ($this->refcau !== $v) {
-			$this->refcau = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::REFCAU;
-		}
-
+    if ($this->refcau !== $v) {
+        $this->refcau = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::REFCAU;
+      }
+  
 	} 
 	
 	public function setRefpag($v)
 	{
 
-		if ($this->refpag !== $v) {
-			$this->refpag = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::REFPAG;
-		}
-
+    if ($this->refpag !== $v) {
+        $this->refpag = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::REFPAG;
+      }
+  
 	} 
 	
 	public function setFecmov($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecmov] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecmov !== $ts) {
-			$this->fecmov = $ts;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::FECMOV;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecmov] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecmov !== $ts) {
+      $this->fecmov = $ts;
+      $this->modifiedColumns[] = ConsolidadoNuevoPeer::FECMOV;
+    }
 
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setMonmov($v)
 	{
 
-		if ($this->monmov !== $v) {
-			$this->monmov = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::MONMOV;
-		}
-
+    if ($this->monmov !== $v) {
+        $this->monmov = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::MONMOV;
+      }
+  
 	} 
 	
 	public function setDesmov($v)
 	{
 
-		if ($this->desmov !== $v) {
-			$this->desmov = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::DESMOV;
-		}
-
+    if ($this->desmov !== $v) {
+        $this->desmov = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::DESMOV;
+      }
+  
 	} 
 	
 	public function setAfedis($v)
 	{
 
-		if ($this->afedis !== $v) {
-			$this->afedis = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::AFEDIS;
-		}
-
+    if ($this->afedis !== $v) {
+        $this->afedis = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::AFEDIS;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNompre($v)
 	{
 
-		if ($this->nompre !== $v) {
-			$this->nompre = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::NOMPRE;
-		}
-
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::NOMPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ConsolidadoNuevoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ConsolidadoNuevoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->identi = $rs->getString($startcol + 0);
+      $this->identi = $rs->getString($startcol + 0);
 
-			$this->tipmov = $rs->getString($startcol + 1);
+      $this->tipmov = $rs->getString($startcol + 1);
 
-			$this->refprc = $rs->getString($startcol + 2);
+      $this->refprc = $rs->getString($startcol + 2);
 
-			$this->refcom = $rs->getString($startcol + 3);
+      $this->refcom = $rs->getString($startcol + 3);
 
-			$this->refcau = $rs->getString($startcol + 4);
+      $this->refcau = $rs->getString($startcol + 4);
 
-			$this->refpag = $rs->getString($startcol + 5);
+      $this->refpag = $rs->getString($startcol + 5);
 
-			$this->fecmov = $rs->getDate($startcol + 6, null);
+      $this->fecmov = $rs->getDate($startcol + 6, null);
 
-			$this->cedrif = $rs->getString($startcol + 7);
+      $this->cedrif = $rs->getString($startcol + 7);
 
-			$this->monmov = $rs->getFloat($startcol + 8);
+      $this->monmov = $rs->getFloat($startcol + 8);
 
-			$this->desmov = $rs->getString($startcol + 9);
+      $this->desmov = $rs->getString($startcol + 9);
 
-			$this->afedis = $rs->getString($startcol + 10);
+      $this->afedis = $rs->getString($startcol + 10);
 
-			$this->codpre = $rs->getString($startcol + 11);
+      $this->codpre = $rs->getString($startcol + 11);
 
-			$this->nompre = $rs->getString($startcol + 12);
+      $this->nompre = $rs->getString($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating ConsolidadoNuevo object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating ConsolidadoNuevo object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

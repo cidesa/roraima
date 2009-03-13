@@ -5,22 +5,57 @@ generator:
     theme:            default
     fields:
       codcon:      { name: Nro. Contrato}
-      codobr:      { name: Obra} 
-      desobr:      { name: Descripción Obra}   
+      codobr:      { name: Obra}
+      desobr:      { name: Descripción Obra}
       codpro:      { name: Contratista}
-      descon:      { name: Objeto}    
-      tipcon:      { name: Tipo Contrato}     
-      nomtipcon:   { name: Des. Tipo Contrato}     
-      moncon:      { name: Monto del Contrato (+)}     
-      monext:      { name: Monto Extras (+)}     
-      monmod:      { name: Monto Modificado (+)}     
+      descon:      { name: Objeto}
+      tipcon:      { name: Tipo Contrato}
+      nomtipcon:   { name: Des. Tipo Contrato}
+      feccon: { name: Contratación}
+      fecini: { name: Inicio}
+      feclic: { name: Licitación}
+      fecproini: { name: Inicio según Prórroga}
+      fecrei: { name: Reinicio}
+      fecfin: { name: Terminación Original}
+      fecrecdef: { name: Recep. Definitiva}
+      fecbuepro: { name: Otorg. Buena Pro}
+      fecpar: { name: Paralización}
+      fecpro: { name: Prórroga Terminac.}
+      fecrecprov: { name: Recep. Provisional}
+      fecfinmod: { name: Terminación Modificada}
+      moncon:      { name: Monto del Contrato (+)}
+      monext:      { name: Monto Extras (+)}
+      monmod:      { name: Monto Modificado (+)}
+      monmul: { name: Monto Multas (-)}
+      monful: { name: Monto Total del Contrato}
+      poriva: { name: % Iva}
+      moniva: { name: % Iva}
+      tieejecon: { name: Tiempo Ejecución}
+      subtot: { name: Subtotal}
+      gasree: { name: Gastos Reembolsables}
+      platie: { name: Tiempo}
+      stacon: { name: estatus}
+      codpre: { name: codpre}
+      despre: { name: despre}
+      totcon: { name: Total Contratado}
+      codpreiva: { name: codpreiva}
     list:
-      title:          Registro de Contratos
+      title:          Contratos
       filters:		  [codcon, descon]
       display:        [=codcon, descon, codobr, desobr, tipcon, nomtipcon]
       max_per_page:	  10
       object_actions:
-        _edit:        ~                                
+        _edit:        ~
     edit:
-      title:          Registro de Contratos
-      display:        [codcon, tipcon, nomtipcon, codobr, desobr, codpro, nompro, descon, moncon, monext, monmod]
+      title:          Edición de Contratos
+      display:        [codcon, tipcon, nomtipcon, codobr, desobr, codpro, nompro, descon, feccon, fecini, feclic, fecproini, fecrei, fecfin, fecrecdef, fecbuepro, fecpar, fecpro, fecrecprov, fecfinmod, moncon, monext, monmod, monmul, monful, poriva, moniva, tieejecon, stacon, subtot, gasree, platie, codpre, despre, totcon, codpreiva, contratado, contrapar, disponible]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~
+        anular:
+          name:  Anular
+          action:  anular
+          only_for:  edit
+          params:  class=sf_admin_action_delete post=true confirm=Realmente desea Anular el Contrato?

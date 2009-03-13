@@ -61,236 +61,270 @@ abstract class BaseBndefcons extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodsem()
-	{
+    return trim($this->codact);
 
-		return $this->codsem; 		
-	}
-	
-	public function getCtadepcar()
-	{
+  }
+  
+  public function getCodsem()
+  {
 
-		return $this->ctadepcar; 		
-	}
-	
-	public function getCtadepabo()
-	{
+    return trim($this->codsem);
 
-		return $this->ctadepabo; 		
-	}
-	
-	public function getCtaajucar()
-	{
+  }
+  
+  public function getCtadepcar()
+  {
 
-		return $this->ctaajucar; 		
-	}
-	
-	public function getCtaajuabo()
-	{
+    return trim($this->ctadepcar);
 
-		return $this->ctaajuabo; 		
-	}
-	
-	public function getCtarevcar()
-	{
+  }
+  
+  public function getCtadepabo()
+  {
 
-		return $this->ctarevcar; 		
-	}
-	
-	public function getCtarevabo()
-	{
+    return trim($this->ctadepabo);
 
-		return $this->ctarevabo; 		
-	}
-	
-	public function getStacta()
-	{
+  }
+  
+  public function getCtaajucar()
+  {
 
-		return $this->stacta; 		
-	}
-	
-	public function getCtaperabo()
-	{
+    return trim($this->ctaajucar);
 
-		return $this->ctaperabo; 		
-	}
-	
-	public function getCtapercar()
-	{
+  }
+  
+  public function getCtaajuabo()
+  {
 
-		return $this->ctapercar; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->ctaajuabo);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCtarevcar()
+  {
+
+    return trim($this->ctarevcar);
+
+  }
+  
+  public function getCtarevabo()
+  {
+
+    return trim($this->ctarevabo);
+
+  }
+  
+  public function getStacta()
+  {
+
+    return trim($this->stacta);
+
+  }
+  
+  public function getCtaperabo()
+  {
+
+    return trim($this->ctaperabo);
+
+  }
+  
+  public function getCtapercar()
+  {
+
+    return trim($this->ctapercar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodsem($v)
 	{
 
-		if ($this->codsem !== $v) {
-			$this->codsem = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CODSEM;
-		}
-
+    if ($this->codsem !== $v) {
+        $this->codsem = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CODSEM;
+      }
+  
 	} 
 	
 	public function setCtadepcar($v)
 	{
 
-		if ($this->ctadepcar !== $v) {
-			$this->ctadepcar = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CTADEPCAR;
-		}
-
+    if ($this->ctadepcar !== $v) {
+        $this->ctadepcar = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CTADEPCAR;
+      }
+  
 	} 
 	
 	public function setCtadepabo($v)
 	{
 
-		if ($this->ctadepabo !== $v) {
-			$this->ctadepabo = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CTADEPABO;
-		}
-
+    if ($this->ctadepabo !== $v) {
+        $this->ctadepabo = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CTADEPABO;
+      }
+  
 	} 
 	
 	public function setCtaajucar($v)
 	{
 
-		if ($this->ctaajucar !== $v) {
-			$this->ctaajucar = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CTAAJUCAR;
-		}
-
+    if ($this->ctaajucar !== $v) {
+        $this->ctaajucar = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CTAAJUCAR;
+      }
+  
 	} 
 	
 	public function setCtaajuabo($v)
 	{
 
-		if ($this->ctaajuabo !== $v) {
-			$this->ctaajuabo = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CTAAJUABO;
-		}
-
+    if ($this->ctaajuabo !== $v) {
+        $this->ctaajuabo = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CTAAJUABO;
+      }
+  
 	} 
 	
 	public function setCtarevcar($v)
 	{
 
-		if ($this->ctarevcar !== $v) {
-			$this->ctarevcar = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CTAREVCAR;
-		}
-
+    if ($this->ctarevcar !== $v) {
+        $this->ctarevcar = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CTAREVCAR;
+      }
+  
 	} 
 	
 	public function setCtarevabo($v)
 	{
 
-		if ($this->ctarevabo !== $v) {
-			$this->ctarevabo = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CTAREVABO;
-		}
-
+    if ($this->ctarevabo !== $v) {
+        $this->ctarevabo = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CTAREVABO;
+      }
+  
 	} 
 	
 	public function setStacta($v)
 	{
 
-		if ($this->stacta !== $v) {
-			$this->stacta = $v;
-			$this->modifiedColumns[] = BndefconsPeer::STACTA;
-		}
-
+    if ($this->stacta !== $v) {
+        $this->stacta = $v;
+        $this->modifiedColumns[] = BndefconsPeer::STACTA;
+      }
+  
 	} 
 	
 	public function setCtaperabo($v)
 	{
 
-		if ($this->ctaperabo !== $v) {
-			$this->ctaperabo = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CTAPERABO;
-		}
-
+    if ($this->ctaperabo !== $v) {
+        $this->ctaperabo = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CTAPERABO;
+      }
+  
 	} 
 	
 	public function setCtapercar($v)
 	{
 
-		if ($this->ctapercar !== $v) {
-			$this->ctapercar = $v;
-			$this->modifiedColumns[] = BndefconsPeer::CTAPERCAR;
-		}
-
+    if ($this->ctapercar !== $v) {
+        $this->ctapercar = $v;
+        $this->modifiedColumns[] = BndefconsPeer::CTAPERCAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndefconsPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndefconsPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->codsem = $rs->getString($startcol + 1);
+      $this->codsem = $rs->getString($startcol + 1);
 
-			$this->ctadepcar = $rs->getString($startcol + 2);
+      $this->ctadepcar = $rs->getString($startcol + 2);
 
-			$this->ctadepabo = $rs->getString($startcol + 3);
+      $this->ctadepabo = $rs->getString($startcol + 3);
 
-			$this->ctaajucar = $rs->getString($startcol + 4);
+      $this->ctaajucar = $rs->getString($startcol + 4);
 
-			$this->ctaajuabo = $rs->getString($startcol + 5);
+      $this->ctaajuabo = $rs->getString($startcol + 5);
 
-			$this->ctarevcar = $rs->getString($startcol + 6);
+      $this->ctarevcar = $rs->getString($startcol + 6);
 
-			$this->ctarevabo = $rs->getString($startcol + 7);
+      $this->ctarevabo = $rs->getString($startcol + 7);
 
-			$this->stacta = $rs->getString($startcol + 8);
+      $this->stacta = $rs->getString($startcol + 8);
 
-			$this->ctaperabo = $rs->getString($startcol + 9);
+      $this->ctaperabo = $rs->getString($startcol + 9);
 
-			$this->ctapercar = $rs->getString($startcol + 10);
+      $this->ctapercar = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bndefcons object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bndefcons object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -347,6 +381,7 @@ abstract class BaseBndefcons extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BndefconsPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BndefconsPeer::doUpdate($this, $con);

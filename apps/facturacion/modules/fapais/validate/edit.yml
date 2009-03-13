@@ -1,0 +1,21 @@
+methods:
+  post:
+   - "fapais{nompai}"
+
+
+names:
+
+  fapais{nompai}:
+    required:  Yes
+    required_msg: Debe insertar el nombre del país
+    validators: Vstring_1_20_0
+
+
+
+Vstring_1_20_0:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       20
+        max_error: La descripción no puede tener más de 20 caracteres

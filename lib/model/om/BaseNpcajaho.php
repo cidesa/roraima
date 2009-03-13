@@ -41,146 +41,175 @@ abstract class BaseNpcajaho extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodconpat()
-	{
+    return trim($this->codnom);
 
-		return $this->codconpat; 		
-	}
-	
-	public function getCodcontra()
-	{
+  }
+  
+  public function getCodconpat()
+  {
 
-		return $this->codcontra; 		
-	}
-	
-	public function getCodconpre()
-	{
+    return trim($this->codconpat);
 
-		return $this->codconpre; 		
-	}
-	
-	public function getCodconamo()
-	{
+  }
+  
+  public function getCodcontra()
+  {
 
-		return $this->codconamo; 		
-	}
-	
-	public function getCodconint()
-	{
+    return trim($this->codcontra);
 
-		return $this->codconint; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodconpre()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codconpre);
+
+  }
+  
+  public function getCodconamo()
+  {
+
+    return trim($this->codconamo);
+
+  }
+  
+  public function getCodconint()
+  {
+
+    return trim($this->codconint);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpcajahoPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpcajahoPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodconpat($v)
 	{
 
-		if ($this->codconpat !== $v) {
-			$this->codconpat = $v;
-			$this->modifiedColumns[] = NpcajahoPeer::CODCONPAT;
-		}
-
+    if ($this->codconpat !== $v) {
+        $this->codconpat = $v;
+        $this->modifiedColumns[] = NpcajahoPeer::CODCONPAT;
+      }
+  
 	} 
 	
 	public function setCodcontra($v)
 	{
 
-		if ($this->codcontra !== $v) {
-			$this->codcontra = $v;
-			$this->modifiedColumns[] = NpcajahoPeer::CODCONTRA;
-		}
-
+    if ($this->codcontra !== $v) {
+        $this->codcontra = $v;
+        $this->modifiedColumns[] = NpcajahoPeer::CODCONTRA;
+      }
+  
 	} 
 	
 	public function setCodconpre($v)
 	{
 
-		if ($this->codconpre !== $v) {
-			$this->codconpre = $v;
-			$this->modifiedColumns[] = NpcajahoPeer::CODCONPRE;
-		}
-
+    if ($this->codconpre !== $v) {
+        $this->codconpre = $v;
+        $this->modifiedColumns[] = NpcajahoPeer::CODCONPRE;
+      }
+  
 	} 
 	
 	public function setCodconamo($v)
 	{
 
-		if ($this->codconamo !== $v) {
-			$this->codconamo = $v;
-			$this->modifiedColumns[] = NpcajahoPeer::CODCONAMO;
-		}
-
+    if ($this->codconamo !== $v) {
+        $this->codconamo = $v;
+        $this->modifiedColumns[] = NpcajahoPeer::CODCONAMO;
+      }
+  
 	} 
 	
 	public function setCodconint($v)
 	{
 
-		if ($this->codconint !== $v) {
-			$this->codconint = $v;
-			$this->modifiedColumns[] = NpcajahoPeer::CODCONINT;
-		}
-
+    if ($this->codconint !== $v) {
+        $this->codconint = $v;
+        $this->modifiedColumns[] = NpcajahoPeer::CODCONINT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcajahoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcajahoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codconpat = $rs->getString($startcol + 1);
+      $this->codconpat = $rs->getString($startcol + 1);
 
-			$this->codcontra = $rs->getString($startcol + 2);
+      $this->codcontra = $rs->getString($startcol + 2);
 
-			$this->codconpre = $rs->getString($startcol + 3);
+      $this->codconpre = $rs->getString($startcol + 3);
 
-			$this->codconamo = $rs->getString($startcol + 4);
+      $this->codconamo = $rs->getString($startcol + 4);
 
-			$this->codconint = $rs->getString($startcol + 5);
+      $this->codconint = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcajaho object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcajaho object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseNpcajaho extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcajahoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcajahoPeer::doUpdate($this, $con);

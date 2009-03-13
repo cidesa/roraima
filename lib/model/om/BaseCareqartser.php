@@ -25,6 +25,10 @@ abstract class BaseCareqartser extends BaseObject  implements Persistent {
 
 
 	
+	protected $codcatreq;
+
+
+	
 	protected $id;
 
 	
@@ -33,133 +37,178 @@ abstract class BaseCareqartser extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReqart()
-	{
+  
+  public function getReqart()
+  {
 
-		return $this->reqart; 		
-	}
-	
-	public function getFecreq($format = 'Y-m-d')
-	{
+    return trim($this->reqart);
 
-		if ($this->fecreq === null || $this->fecreq === '') {
-			return null;
-		} elseif (!is_int($this->fecreq)) {
-						$ts = strtotime($this->fecreq);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreq] as date/time value: " . var_export($this->fecreq, true));
-			}
-		} else {
-			$ts = $this->fecreq;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecreq($format = 'Y-m-d')
+  {
 
-	
-	public function getDesreq()
-	{
+    if ($this->fecreq === null || $this->fecreq === '') {
+      return null;
+    } elseif (!is_int($this->fecreq)) {
+            $ts = adodb_strtotime($this->fecreq);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreq] as date/time value: " . var_export($this->fecreq, true));
+      }
+    } else {
+      $ts = $this->fecreq;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desreq; 		
-	}
-	
-	public function getStareq()
-	{
+  
+  public function getDesreq()
+  {
 
-		return $this->stareq; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desreq);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStareq()
+  {
+
+    return trim($this->stareq);
+
+  }
+  
+  public function getCodcatreq()
+  {
+
+    return trim($this->codcatreq);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReqart($v)
 	{
 
-		if ($this->reqart !== $v) {
-			$this->reqart = $v;
-			$this->modifiedColumns[] = CareqartserPeer::REQART;
-		}
-
+    if ($this->reqart !== $v) {
+        $this->reqart = $v;
+        $this->modifiedColumns[] = CareqartserPeer::REQART;
+      }
+  
 	} 
 	
 	public function setFecreq($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreq] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreq !== $ts) {
-			$this->fecreq = $ts;
-			$this->modifiedColumns[] = CareqartserPeer::FECREQ;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreq] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreq !== $ts) {
+      $this->fecreq = $ts;
+      $this->modifiedColumns[] = CareqartserPeer::FECREQ;
+    }
 
 	} 
 	
 	public function setDesreq($v)
 	{
 
-		if ($this->desreq !== $v) {
-			$this->desreq = $v;
-			$this->modifiedColumns[] = CareqartserPeer::DESREQ;
-		}
-
+    if ($this->desreq !== $v) {
+        $this->desreq = $v;
+        $this->modifiedColumns[] = CareqartserPeer::DESREQ;
+      }
+  
 	} 
 	
 	public function setStareq($v)
 	{
 
-		if ($this->stareq !== $v) {
-			$this->stareq = $v;
-			$this->modifiedColumns[] = CareqartserPeer::STAREQ;
-		}
+    if ($this->stareq !== $v) {
+        $this->stareq = $v;
+        $this->modifiedColumns[] = CareqartserPeer::STAREQ;
+      }
+  
+	} 
+	
+	public function setCodcatreq($v)
+	{
 
+    if ($this->codcatreq !== $v) {
+        $this->codcatreq = $v;
+        $this->modifiedColumns[] = CareqartserPeer::CODCATREQ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CareqartserPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CareqartserPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reqart = $rs->getString($startcol + 0);
+      $this->reqart = $rs->getString($startcol + 0);
 
-			$this->fecreq = $rs->getDate($startcol + 1, null);
+      $this->fecreq = $rs->getDate($startcol + 1, null);
 
-			$this->desreq = $rs->getString($startcol + 2);
+      $this->desreq = $rs->getString($startcol + 2);
 
-			$this->stareq = $rs->getString($startcol + 3);
+      $this->stareq = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->codcatreq = $rs->getString($startcol + 4);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Careqartser object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Careqartser object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +265,7 @@ abstract class BaseCareqartser extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CareqartserPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CareqartserPeer::doUpdate($this, $con);
@@ -294,6 +344,9 @@ abstract class BaseCareqartser extends BaseObject  implements Persistent {
 				return $this->getStareq();
 				break;
 			case 4:
+				return $this->getCodcatreq();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -310,7 +363,8 @@ abstract class BaseCareqartser extends BaseObject  implements Persistent {
 			$keys[1] => $this->getFecreq(),
 			$keys[2] => $this->getDesreq(),
 			$keys[3] => $this->getStareq(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getCodcatreq(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -339,6 +393,9 @@ abstract class BaseCareqartser extends BaseObject  implements Persistent {
 				$this->setStareq($value);
 				break;
 			case 4:
+				$this->setCodcatreq($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -352,7 +409,8 @@ abstract class BaseCareqartser extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setFecreq($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setDesreq($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setStareq($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCodcatreq($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -364,6 +422,7 @@ abstract class BaseCareqartser extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CareqartserPeer::FECREQ)) $criteria->add(CareqartserPeer::FECREQ, $this->fecreq);
 		if ($this->isColumnModified(CareqartserPeer::DESREQ)) $criteria->add(CareqartserPeer::DESREQ, $this->desreq);
 		if ($this->isColumnModified(CareqartserPeer::STAREQ)) $criteria->add(CareqartserPeer::STAREQ, $this->stareq);
+		if ($this->isColumnModified(CareqartserPeer::CODCATREQ)) $criteria->add(CareqartserPeer::CODCATREQ, $this->codcatreq);
 		if ($this->isColumnModified(CareqartserPeer::ID)) $criteria->add(CareqartserPeer::ID, $this->id);
 
 		return $criteria;
@@ -402,6 +461,8 @@ abstract class BaseCareqartser extends BaseObject  implements Persistent {
 		$copyObj->setDesreq($this->desreq);
 
 		$copyObj->setStareq($this->stareq);
+
+		$copyObj->setCodcatreq($this->codcatreq);
 
 
 		$copyObj->setNew(true);

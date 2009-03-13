@@ -25,74 +25,99 @@ abstract class BaseRharecur extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodarecur()
-	{
+  
+  public function getCodarecur()
+  {
 
-		return $this->codarecur; 		
-	}
-	
-	public function getDesarecur()
-	{
+    return trim($this->codarecur);
 
-		return $this->desarecur; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDesarecur()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->desarecur);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodarecur($v)
 	{
 
-		if ($this->codarecur !== $v) {
-			$this->codarecur = $v;
-			$this->modifiedColumns[] = RharecurPeer::CODARECUR;
-		}
-
+    if ($this->codarecur !== $v) {
+        $this->codarecur = $v;
+        $this->modifiedColumns[] = RharecurPeer::CODARECUR;
+      }
+  
 	} 
 	
 	public function setDesarecur($v)
 	{
 
-		if ($this->desarecur !== $v) {
-			$this->desarecur = $v;
-			$this->modifiedColumns[] = RharecurPeer::DESARECUR;
-		}
-
+    if ($this->desarecur !== $v) {
+        $this->desarecur = $v;
+        $this->modifiedColumns[] = RharecurPeer::DESARECUR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RharecurPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RharecurPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codarecur = $rs->getString($startcol + 0);
+      $this->codarecur = $rs->getString($startcol + 0);
 
-			$this->desarecur = $rs->getString($startcol + 1);
+      $this->desarecur = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rharecur object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rharecur object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseRharecur extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RharecurPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RharecurPeer::doUpdate($this, $con);

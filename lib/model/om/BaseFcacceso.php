@@ -37,128 +37,156 @@ abstract class BaseFcacceso extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCedula()
-	{
+  
+  public function getCedula()
+  {
 
-		return $this->cedula; 		
-	}
-	
-	public function getNomusu()
-	{
+    return trim($this->cedula);
 
-		return $this->nomusu; 		
-	}
-	
-	public function getPasusu()
-	{
+  }
+  
+  public function getNomusu()
+  {
 
-		return $this->pasusu; 		
-	}
-	
-	public function getAutsol()
-	{
+    return trim($this->nomusu);
 
-		return $this->autsol; 		
-	}
-	
-	public function getAnupag()
-	{
+  }
+  
+  public function getPasusu()
+  {
 
-		return $this->anupag; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->pasusu);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getAutsol()
+  {
+
+    return trim($this->autsol);
+
+  }
+  
+  public function getAnupag()
+  {
+
+    return trim($this->anupag);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCedula($v)
 	{
 
-		if ($this->cedula !== $v) {
-			$this->cedula = $v;
-			$this->modifiedColumns[] = FcaccesoPeer::CEDULA;
-		}
-
+    if ($this->cedula !== $v) {
+        $this->cedula = $v;
+        $this->modifiedColumns[] = FcaccesoPeer::CEDULA;
+      }
+  
 	} 
 	
 	public function setNomusu($v)
 	{
 
-		if ($this->nomusu !== $v) {
-			$this->nomusu = $v;
-			$this->modifiedColumns[] = FcaccesoPeer::NOMUSU;
-		}
-
+    if ($this->nomusu !== $v) {
+        $this->nomusu = $v;
+        $this->modifiedColumns[] = FcaccesoPeer::NOMUSU;
+      }
+  
 	} 
 	
 	public function setPasusu($v)
 	{
 
-		if ($this->pasusu !== $v) {
-			$this->pasusu = $v;
-			$this->modifiedColumns[] = FcaccesoPeer::PASUSU;
-		}
-
+    if ($this->pasusu !== $v) {
+        $this->pasusu = $v;
+        $this->modifiedColumns[] = FcaccesoPeer::PASUSU;
+      }
+  
 	} 
 	
 	public function setAutsol($v)
 	{
 
-		if ($this->autsol !== $v) {
-			$this->autsol = $v;
-			$this->modifiedColumns[] = FcaccesoPeer::AUTSOL;
-		}
-
+    if ($this->autsol !== $v) {
+        $this->autsol = $v;
+        $this->modifiedColumns[] = FcaccesoPeer::AUTSOL;
+      }
+  
 	} 
 	
 	public function setAnupag($v)
 	{
 
-		if ($this->anupag !== $v) {
-			$this->anupag = $v;
-			$this->modifiedColumns[] = FcaccesoPeer::ANUPAG;
-		}
-
+    if ($this->anupag !== $v) {
+        $this->anupag = $v;
+        $this->modifiedColumns[] = FcaccesoPeer::ANUPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcaccesoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcaccesoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->cedula = $rs->getString($startcol + 0);
+      $this->cedula = $rs->getString($startcol + 0);
 
-			$this->nomusu = $rs->getString($startcol + 1);
+      $this->nomusu = $rs->getString($startcol + 1);
 
-			$this->pasusu = $rs->getString($startcol + 2);
+      $this->pasusu = $rs->getString($startcol + 2);
 
-			$this->autsol = $rs->getString($startcol + 3);
+      $this->autsol = $rs->getString($startcol + 3);
 
-			$this->anupag = $rs->getString($startcol + 4);
+      $this->anupag = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcacceso object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcacceso object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseFcacceso extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcaccesoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcaccesoPeer::doUpdate($this, $con);

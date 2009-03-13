@@ -33,136 +33,162 @@ abstract class BaseBndepact extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getFecdep($format = 'Y-m-d')
-	{
+  
+  public function getFecdep($format = 'Y-m-d')
+  {
 
-		if ($this->fecdep === null || $this->fecdep === '') {
-			return null;
-		} elseif (!is_int($this->fecdep)) {
-						$ts = strtotime($this->fecdep);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdep] as date/time value: " . var_export($this->fecdep, true));
-			}
-		} else {
-			$ts = $this->fecdep;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecdep === null || $this->fecdep === '') {
+      return null;
+    } elseif (!is_int($this->fecdep)) {
+            $ts = adodb_strtotime($this->fecdep);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdep] as date/time value: " . var_export($this->fecdep, true));
+      }
+    } else {
+      $ts = $this->fecdep;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getMonmue()
-	{
+  
+  public function getMonmue($val=false)
+  {
 
-		return number_format($this->monmue,2,',','.');
-		
-	}
-	
-	public function getMoninm()
-	{
+    if($val) return number_format($this->monmue,2,',','.');
+    else return $this->monmue;
 
-		return number_format($this->moninm,2,',','.');
-		
-	}
-	
-	public function getMonsem()
-	{
+  }
+  
+  public function getMoninm($val=false)
+  {
 
-		return number_format($this->monsem,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->moninm,2,',','.');
+    else return $this->moninm;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonsem($val=false)
+  {
+
+    if($val) return number_format($this->monsem,2,',','.');
+    else return $this->monsem;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setFecdep($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdep] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdep !== $ts) {
-			$this->fecdep = $ts;
-			$this->modifiedColumns[] = BndepactPeer::FECDEP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdep] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdep !== $ts) {
+      $this->fecdep = $ts;
+      $this->modifiedColumns[] = BndepactPeer::FECDEP;
+    }
 
 	} 
 	
 	public function setMonmue($v)
 	{
 
-		if ($this->monmue !== $v) {
-			$this->monmue = $v;
-			$this->modifiedColumns[] = BndepactPeer::MONMUE;
-		}
-
+    if ($this->monmue !== $v) {
+        $this->monmue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndepactPeer::MONMUE;
+      }
+  
 	} 
 	
 	public function setMoninm($v)
 	{
 
-		if ($this->moninm !== $v) {
-			$this->moninm = $v;
-			$this->modifiedColumns[] = BndepactPeer::MONINM;
-		}
-
+    if ($this->moninm !== $v) {
+        $this->moninm = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndepactPeer::MONINM;
+      }
+  
 	} 
 	
 	public function setMonsem($v)
 	{
 
-		if ($this->monsem !== $v) {
-			$this->monsem = $v;
-			$this->modifiedColumns[] = BndepactPeer::MONSEM;
-		}
-
+    if ($this->monsem !== $v) {
+        $this->monsem = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndepactPeer::MONSEM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndepactPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndepactPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->fecdep = $rs->getDate($startcol + 0, null);
+      $this->fecdep = $rs->getDate($startcol + 0, null);
 
-			$this->monmue = $rs->getFloat($startcol + 1);
+      $this->monmue = $rs->getFloat($startcol + 1);
 
-			$this->moninm = $rs->getFloat($startcol + 2);
+      $this->moninm = $rs->getFloat($startcol + 2);
 
-			$this->monsem = $rs->getFloat($startcol + 3);
+      $this->monsem = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bndepact object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bndepact object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -219,6 +245,7 @@ abstract class BaseBndepact extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BndepactPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BndepactPeer::doUpdate($this, $con);

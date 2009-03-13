@@ -9,4 +9,8 @@
  */ 
 class Casolraz extends BaseCasolraz
 {
+   public function getDesrazcom()
+	{
+		return Herramientas::getX('CODRAZCOM','Carazcom','Desrazcom',self::getCodrazcom());
+	}
 }

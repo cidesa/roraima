@@ -14,7 +14,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Datos del Solicitante', 
+<h1><?php echo __('Edición del Solicitante',
 array()) ?></h1>
 
 <div id="sf_admin_header">

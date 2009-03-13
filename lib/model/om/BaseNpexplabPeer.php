@@ -250,6 +250,7 @@ abstract class BaseNpexplabPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpexplabPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

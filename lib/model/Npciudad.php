@@ -9,4 +9,14 @@
  */ 
 class Npciudad extends BaseNpciudad
 {
+public function getNompai()
+  {
+	return Herramientas::getX('CODPAI','Nppais','Nompai',self::getCodpai());	  
+  }
+  
+public function getNomedo()
+  {
+	return Herramientas::getX('CODEDO','Npestado','Nomedo',self::getCodedo());	  
+  }  
+	
 }

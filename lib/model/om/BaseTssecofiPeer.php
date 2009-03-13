@@ -205,6 +205,7 @@ abstract class BaseTssecofiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TssecofiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

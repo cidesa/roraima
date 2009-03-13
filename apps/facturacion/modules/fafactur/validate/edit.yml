@@ -1,0 +1,41 @@
+methods:
+  post:
+   - "fafactur{reffac}"
+   - "fafactur{fecfac}"
+   - "fafactur{rifpro}"
+
+
+names:
+  fafactur{reffac}:
+    required:  Yes
+    required_msg: El Número de la Factura no puedo estar en Blanco
+    validators: Validator_reffac, CorrelValidator
+
+  fafactur{fecfac}:
+    required:  Yes
+    required_msg: La Fecha de la Factura no puede estar blanco
+
+  fafactur{rifpro}:
+    required:  Yes
+    required_msg: El rif de cliente no puede estar en blanco
+    validators: Cliente_Validator
+
+Validator_reffac:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fafactur
+        column:       reffac
+        unique_error: El registro ya Existe intente con otro.
+
+Cliente_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Facliente
+        column:   Rifpro
+        unique_error:  El Cliente no Existe.
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos

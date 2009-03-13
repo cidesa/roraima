@@ -250,6 +250,7 @@ abstract class BaseNpcestaticketsPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcestaticketsPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

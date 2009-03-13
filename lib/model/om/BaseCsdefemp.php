@@ -61,240 +61,274 @@ abstract class BaseCsdefemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNomemp()
-	{
+  
+  public function getNomemp()
+  {
 
-		return $this->nomemp; 		
-	}
-	
-	public function getDiremp()
-	{
+    return trim($this->nomemp);
 
-		return $this->diremp; 		
-	}
-	
-	public function getTelemp()
-	{
+  }
+  
+  public function getDiremp()
+  {
 
-		return $this->telemp; 		
-	}
-	
-	public function getFaxemp()
-	{
+    return trim($this->diremp);
 
-		return $this->faxemp; 		
-	}
-	
-	public function getPorgasadm()
-	{
+  }
+  
+  public function getTelemp()
+  {
 
-		return number_format($this->porgasadm,2,',','.');
-		
-	}
-	
-	public function getPormarutil()
-	{
+    return trim($this->telemp);
 
-		return number_format($this->pormarutil,2,',','.');
-		
-	}
-	
-	public function getPorpermat()
-	{
+  }
+  
+  public function getFaxemp()
+  {
 
-		return number_format($this->porpermat,2,',','.');
-		
-	}
-	
-	public function getCodtipdig()
-	{
+    return trim($this->faxemp);
 
-		return $this->codtipdig; 		
-	}
-	
-	public function getCodtipvia()
-	{
+  }
+  
+  public function getPorgasadm($val=false)
+  {
 
-		return $this->codtipvia; 		
-	}
-	
-	public function getCodtipfab()
-	{
+    if($val) return number_format($this->porgasadm,2,',','.');
+    else return $this->porgasadm;
 
-		return $this->codtipfab; 		
-	}
-	
-	public function getValut()
-	{
+  }
+  
+  public function getPormarutil($val=false)
+  {
 
-		return number_format($this->valut,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->pormarutil,2,',','.');
+    else return $this->pormarutil;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPorpermat($val=false)
+  {
+
+    if($val) return number_format($this->porpermat,2,',','.');
+    else return $this->porpermat;
+
+  }
+  
+  public function getCodtipdig()
+  {
+
+    return trim($this->codtipdig);
+
+  }
+  
+  public function getCodtipvia()
+  {
+
+    return trim($this->codtipvia);
+
+  }
+  
+  public function getCodtipfab()
+  {
+
+    return trim($this->codtipfab);
+
+  }
+  
+  public function getValut($val=false)
+  {
+
+    if($val) return number_format($this->valut,2,',','.');
+    else return $this->valut;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = CsdefempPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = CsdefempPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setDiremp($v)
 	{
 
-		if ($this->diremp !== $v) {
-			$this->diremp = $v;
-			$this->modifiedColumns[] = CsdefempPeer::DIREMP;
-		}
-
+    if ($this->diremp !== $v) {
+        $this->diremp = $v;
+        $this->modifiedColumns[] = CsdefempPeer::DIREMP;
+      }
+  
 	} 
 	
 	public function setTelemp($v)
 	{
 
-		if ($this->telemp !== $v) {
-			$this->telemp = $v;
-			$this->modifiedColumns[] = CsdefempPeer::TELEMP;
-		}
-
+    if ($this->telemp !== $v) {
+        $this->telemp = $v;
+        $this->modifiedColumns[] = CsdefempPeer::TELEMP;
+      }
+  
 	} 
 	
 	public function setFaxemp($v)
 	{
 
-		if ($this->faxemp !== $v) {
-			$this->faxemp = $v;
-			$this->modifiedColumns[] = CsdefempPeer::FAXEMP;
-		}
-
+    if ($this->faxemp !== $v) {
+        $this->faxemp = $v;
+        $this->modifiedColumns[] = CsdefempPeer::FAXEMP;
+      }
+  
 	} 
 	
 	public function setPorgasadm($v)
 	{
 
-		if ($this->porgasadm !== $v || $v === 0) {
-			$this->porgasadm = $v;
-			$this->modifiedColumns[] = CsdefempPeer::PORGASADM;
-		}
-
+    if ($this->porgasadm !== $v || $v === 0) {
+        $this->porgasadm = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsdefempPeer::PORGASADM;
+      }
+  
 	} 
 	
 	public function setPormarutil($v)
 	{
 
-		if ($this->pormarutil !== $v || $v === 0) {
-			$this->pormarutil = $v;
-			$this->modifiedColumns[] = CsdefempPeer::PORMARUTIL;
-		}
-
+    if ($this->pormarutil !== $v || $v === 0) {
+        $this->pormarutil = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsdefempPeer::PORMARUTIL;
+      }
+  
 	} 
 	
 	public function setPorpermat($v)
 	{
 
-		if ($this->porpermat !== $v || $v === 0) {
-			$this->porpermat = $v;
-			$this->modifiedColumns[] = CsdefempPeer::PORPERMAT;
-		}
-
+    if ($this->porpermat !== $v || $v === 0) {
+        $this->porpermat = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsdefempPeer::PORPERMAT;
+      }
+  
 	} 
 	
 	public function setCodtipdig($v)
 	{
 
-		if ($this->codtipdig !== $v) {
-			$this->codtipdig = $v;
-			$this->modifiedColumns[] = CsdefempPeer::CODTIPDIG;
-		}
-
+    if ($this->codtipdig !== $v) {
+        $this->codtipdig = $v;
+        $this->modifiedColumns[] = CsdefempPeer::CODTIPDIG;
+      }
+  
 	} 
 	
 	public function setCodtipvia($v)
 	{
 
-		if ($this->codtipvia !== $v) {
-			$this->codtipvia = $v;
-			$this->modifiedColumns[] = CsdefempPeer::CODTIPVIA;
-		}
-
+    if ($this->codtipvia !== $v) {
+        $this->codtipvia = $v;
+        $this->modifiedColumns[] = CsdefempPeer::CODTIPVIA;
+      }
+  
 	} 
 	
 	public function setCodtipfab($v)
 	{
 
-		if ($this->codtipfab !== $v) {
-			$this->codtipfab = $v;
-			$this->modifiedColumns[] = CsdefempPeer::CODTIPFAB;
-		}
-
+    if ($this->codtipfab !== $v) {
+        $this->codtipfab = $v;
+        $this->modifiedColumns[] = CsdefempPeer::CODTIPFAB;
+      }
+  
 	} 
 	
 	public function setValut($v)
 	{
 
-		if ($this->valut !== $v) {
-			$this->valut = $v;
-			$this->modifiedColumns[] = CsdefempPeer::VALUT;
-		}
-
+    if ($this->valut !== $v) {
+        $this->valut = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsdefempPeer::VALUT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsdefempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsdefempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nomemp = $rs->getString($startcol + 0);
+      $this->nomemp = $rs->getString($startcol + 0);
 
-			$this->diremp = $rs->getString($startcol + 1);
+      $this->diremp = $rs->getString($startcol + 1);
 
-			$this->telemp = $rs->getString($startcol + 2);
+      $this->telemp = $rs->getString($startcol + 2);
 
-			$this->faxemp = $rs->getString($startcol + 3);
+      $this->faxemp = $rs->getString($startcol + 3);
 
-			$this->porgasadm = $rs->getFloat($startcol + 4);
+      $this->porgasadm = $rs->getFloat($startcol + 4);
 
-			$this->pormarutil = $rs->getFloat($startcol + 5);
+      $this->pormarutil = $rs->getFloat($startcol + 5);
 
-			$this->porpermat = $rs->getFloat($startcol + 6);
+      $this->porpermat = $rs->getFloat($startcol + 6);
 
-			$this->codtipdig = $rs->getString($startcol + 7);
+      $this->codtipdig = $rs->getString($startcol + 7);
 
-			$this->codtipvia = $rs->getString($startcol + 8);
+      $this->codtipvia = $rs->getString($startcol + 8);
 
-			$this->codtipfab = $rs->getString($startcol + 9);
+      $this->codtipfab = $rs->getString($startcol + 9);
 
-			$this->valut = $rs->getFloat($startcol + 10);
+      $this->valut = $rs->getFloat($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csdefemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csdefemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

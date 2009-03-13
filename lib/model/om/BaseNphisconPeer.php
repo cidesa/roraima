@@ -295,6 +295,7 @@ abstract class BaseNphisconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NphisconPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

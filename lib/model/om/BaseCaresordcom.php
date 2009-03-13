@@ -61,243 +61,277 @@ abstract class BaseCaresordcom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getOrdcom()
-	{
+  
+  public function getOrdcom()
+  {
 
-		return $this->ordcom; 		
-	}
-	
-	public function getDesres()
-	{
+    return trim($this->ordcom);
 
-		return $this->desres; 		
-	}
-	
-	public function getCodartpro()
-	{
+  }
+  
+  public function getDesres()
+  {
 
-		return $this->codartpro; 		
-	}
-	
-	public function getCanord()
-	{
+    return trim($this->desres);
 
-		return number_format($this->canord,2,',','.');
-		
-	}
-	
-	public function getCanaju()
-	{
+  }
+  
+  public function getCodartpro()
+  {
 
-		return number_format($this->canaju,2,',','.');
-		
-	}
-	
-	public function getCanrec()
-	{
+    return trim($this->codartpro);
 
-		return number_format($this->canrec,2,',','.');
-		
-	}
-	
-	public function getCantot()
-	{
+  }
+  
+  public function getCanord($val=false)
+  {
 
-		return number_format($this->cantot,2,',','.');
-		
-	}
-	
-	public function getCosto()
-	{
+    if($val) return number_format($this->canord,2,',','.');
+    else return $this->canord;
 
-		return number_format($this->costo,2,',','.');
-		
-	}
-	
-	public function getRgoart()
-	{
+  }
+  
+  public function getCanaju($val=false)
+  {
 
-		return number_format($this->rgoart,2,',','.');
-		
-	}
-	
-	public function getTotart()
-	{
+    if($val) return number_format($this->canaju,2,',','.');
+    else return $this->canaju;
 
-		return number_format($this->totart,2,',','.');
-		
-	}
-	
-	public function getCodart()
-	{
+  }
+  
+  public function getCanrec($val=false)
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->canrec,2,',','.');
+    else return $this->canrec;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCantot($val=false)
+  {
+
+    if($val) return number_format($this->cantot,2,',','.');
+    else return $this->cantot;
+
+  }
+  
+  public function getCosto($val=false)
+  {
+
+    if($val) return number_format($this->costo,2,',','.');
+    else return $this->costo;
+
+  }
+  
+  public function getRgoart($val=false)
+  {
+
+    if($val) return number_format($this->rgoart,2,',','.');
+    else return $this->rgoart;
+
+  }
+  
+  public function getTotart($val=false)
+  {
+
+    if($val) return number_format($this->totart,2,',','.');
+    else return $this->totart;
+
+  }
+  
+  public function getCodart()
+  {
+
+    return trim($this->codart);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setOrdcom($v)
 	{
 
-		if ($this->ordcom !== $v) {
-			$this->ordcom = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::ORDCOM;
-		}
-
+    if ($this->ordcom !== $v) {
+        $this->ordcom = $v;
+        $this->modifiedColumns[] = CaresordcomPeer::ORDCOM;
+      }
+  
 	} 
 	
 	public function setDesres($v)
 	{
 
-		if ($this->desres !== $v) {
-			$this->desres = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::DESRES;
-		}
-
+    if ($this->desres !== $v) {
+        $this->desres = $v;
+        $this->modifiedColumns[] = CaresordcomPeer::DESRES;
+      }
+  
 	} 
 	
 	public function setCodartpro($v)
 	{
 
-		if ($this->codartpro !== $v) {
-			$this->codartpro = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::CODARTPRO;
-		}
-
+    if ($this->codartpro !== $v) {
+        $this->codartpro = $v;
+        $this->modifiedColumns[] = CaresordcomPeer::CODARTPRO;
+      }
+  
 	} 
 	
 	public function setCanord($v)
 	{
 
-		if ($this->canord !== $v) {
-			$this->canord = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::CANORD;
-		}
-
+    if ($this->canord !== $v) {
+        $this->canord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaresordcomPeer::CANORD;
+      }
+  
 	} 
 	
 	public function setCanaju($v)
 	{
 
-		if ($this->canaju !== $v) {
-			$this->canaju = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::CANAJU;
-		}
-
+    if ($this->canaju !== $v) {
+        $this->canaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaresordcomPeer::CANAJU;
+      }
+  
 	} 
 	
 	public function setCanrec($v)
 	{
 
-		if ($this->canrec !== $v) {
-			$this->canrec = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::CANREC;
-		}
-
+    if ($this->canrec !== $v) {
+        $this->canrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaresordcomPeer::CANREC;
+      }
+  
 	} 
 	
 	public function setCantot($v)
 	{
 
-		if ($this->cantot !== $v) {
-			$this->cantot = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::CANTOT;
-		}
-
+    if ($this->cantot !== $v) {
+        $this->cantot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaresordcomPeer::CANTOT;
+      }
+  
 	} 
 	
 	public function setCosto($v)
 	{
 
-		if ($this->costo !== $v) {
-			$this->costo = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::COSTO;
-		}
-
+    if ($this->costo !== $v) {
+        $this->costo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaresordcomPeer::COSTO;
+      }
+  
 	} 
 	
 	public function setRgoart($v)
 	{
 
-		if ($this->rgoart !== $v) {
-			$this->rgoart = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::RGOART;
-		}
-
+    if ($this->rgoart !== $v) {
+        $this->rgoart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaresordcomPeer::RGOART;
+      }
+  
 	} 
 	
 	public function setTotart($v)
 	{
 
-		if ($this->totart !== $v) {
-			$this->totart = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::TOTART;
-		}
-
+    if ($this->totart !== $v) {
+        $this->totart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaresordcomPeer::TOTART;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaresordcomPeer::CODART;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaresordcomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaresordcomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->ordcom = $rs->getString($startcol + 0);
+      $this->ordcom = $rs->getString($startcol + 0);
 
-			$this->desres = $rs->getString($startcol + 1);
+      $this->desres = $rs->getString($startcol + 1);
 
-			$this->codartpro = $rs->getString($startcol + 2);
+      $this->codartpro = $rs->getString($startcol + 2);
 
-			$this->canord = $rs->getFloat($startcol + 3);
+      $this->canord = $rs->getFloat($startcol + 3);
 
-			$this->canaju = $rs->getFloat($startcol + 4);
+      $this->canaju = $rs->getFloat($startcol + 4);
 
-			$this->canrec = $rs->getFloat($startcol + 5);
+      $this->canrec = $rs->getFloat($startcol + 5);
 
-			$this->cantot = $rs->getFloat($startcol + 6);
+      $this->cantot = $rs->getFloat($startcol + 6);
 
-			$this->costo = $rs->getFloat($startcol + 7);
+      $this->costo = $rs->getFloat($startcol + 7);
 
-			$this->rgoart = $rs->getFloat($startcol + 8);
+      $this->rgoart = $rs->getFloat($startcol + 8);
 
-			$this->totart = $rs->getFloat($startcol + 9);
+      $this->totart = $rs->getFloat($startcol + 9);
 
-			$this->codart = $rs->getString($startcol + 10);
+      $this->codart = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caresordcom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caresordcom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -354,6 +388,7 @@ abstract class BaseCaresordcom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaresordcomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaresordcomPeer::doUpdate($this, $con);

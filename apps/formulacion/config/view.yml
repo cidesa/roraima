@@ -7,11 +7,11 @@ default:
     robots:       Módulo Formulación
     description:  Módulo Formulación
     keywords:     Módulo,Formulación
-    language:     en_US
+    language:     en
 
   stylesheets:    [main]
 
-  javascripts:    []
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype, tools, observe]
 
   has_layout:     on
   layout:         layout

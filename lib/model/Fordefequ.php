@@ -9,5 +9,5 @@
  */
 class Fordefequ extends BaseFordefequ
 {
-
+  
 }

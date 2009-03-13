@@ -1,18 +1,23 @@
 generator:
   class:              sfPropelAdminGenerator
   param:
-    model_class:      Npnomina
+    model_class:      Npasicarnom
     theme:            default
     fields:
       codnom: { name: Cod. Tipo Nomina, params: maxlength=3 }
-      nomnom: { name: Nombre Tipo Nomina }     
+      codcar: { name: Cod. Tipo Cargo, params: maxlength=3 }
+      nomnom: { name: Nombre Tipo Nomina }
     list:
-      title:          Asignacion de Cargos a Nomina
-      filters:        [codnom, nomnom ]
-      display:        [=codnom, nomnom ]
+      title:          Asignación de Cargos a Nomina
+      filters:        [codnom, codcar]
+      display:        [=codnom, codcar, nomnom]
       object_actions:
         _edit:        ~
-        _delete:      ~        
+        _delete:      ~
       max_per_page:  8
     edit:
-      title:          Asignacion de Cargos a Nomina
+      title:          Asignación de Cargos a Nomina
+      display:        [codnom, codcar, nomnom]
+      actions:
+        _list:         ~
+        _save:         ~

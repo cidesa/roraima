@@ -10,52 +10,103 @@
  */
 class biedisactinmActions extends autobiedisactinmActions
 {
+  private static $coderror=-1;
+
   public function CargarTipos()
-	{
-	$c = new Criteria();
-	$lista_tip = BndisbiePeer::doSelect($c);
-	
-	$tipos = array();
-	
-	foreach($lista_tip as $obj_tip)
-	{
-		$tipos += array($obj_tip->getCoddis()." - ".$obj_tip->getDesdis() => $obj_tip->getCoddis()." - ".$obj_tip->getDesdis());    
-	}
-	return $tipos;
+  {
+  $c = new Criteria();
+  $lista_tip = BndisbiePeer::doSelect($c);
+
+  $tipos = array();
+
+  foreach($lista_tip as $obj_tip)
+  {
+    $tipos += array($obj_tip->getCoddis()." - ".$obj_tip->getDesdis() => $obj_tip->getCoddis()." - ".$obj_tip->getDesdis());
+  }
+  return $tipos;
     }
-	
+
   public function executeEdit()
   {
     $this->bndisinm = $this->getBndisinmOrCreate();
+    $this->setVars();
     $this->tipos = $this->CargarTipos();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateBndisinmFromRequest();
 
-      $this->saveBndisinm($this->bndisinm);
+       if ($this->saveBndisinm($this->bndisinm)==-1)
 
-      $this->setFlash('notice', 'Your modifications have been saved');
+         {
 
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('biedisactinm/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('biedisactinm/list');
-      }
-      else
-      {
-        return $this->redirect('biedisactinm/edit?id='.$this->bndisinm->getId());
-      }
+          $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
+
+          if ($this->getRequestParameter('save_and_add'))
+          {
+            return $this->redirect('biedisactinm/create');
+          }
+          else if ($this->getRequestParameter('save_and_list'))
+          {
+            return $this->redirect('biedisactinm/list');
+          }
+          else
+          {
+            return $this->redirect('biedisactinm/edit?id='.$this->bndisinm->getId());
+          }
+
+         }
+         else
+        {
+              $this->labels = $this->getLabels();
+              $err = Herramientas::obtenerMensajeError($this->coderror);
+              $this->getRequest()->setError('',$err);
+              return sfView::SUCCESS;
+        }
+
     }
     else
     {
       $this->labels = $this->getLabels();
     }
   }
-  
+
+public function setVars()
+  {
+      $this->mascaracatalogo = Herramientas::getX_vacio('codins','bndefins','ForAct','001');
+      $this->mascaraformatoubi = Herramientas::getX_vacio('codins','bndefins','ForUbi','001');
+      $this->mascaralonformato = Herramientas::getX_vacio('codins','bndefins','LonAct','001');
+      $this->mascaralonubicacion = Herramientas::getX_vacio('codins','bndefins','LonUbi','001');
+  }
+
+
+
+  public function executeAjax()
+  {
+     $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+    if ($this->getRequestParameter('ajax')=='1')
+      {
+        $c = new Criteria();
+        $c->add(BnreginmPeer::CODINM,$this->getRequestParameter('codigo'));
+        $bnreginm = BnreginmPeer::doSelectOne($c);
+
+        if($bnreginm) $output = '[["'.$cajtexmos.'","'.$bnreginm->getCodact().'",""],["'.$cajtexcom.'","'.$bnreginm->getDesinm().'"],["bndisinm_codubiori","'.$bnreginm->getCodubi().'"],["bndisinm_desubiori","'.$bnreginm->getDesubi().'"]]';
+        else $output = '[["'.$cajtexmos.'","",""],["'.$cajtexcom.'","'.Constantes::REGVACIO.'"]]';
+
+      }
+      else if($this->getRequestParameter('ajax')=='2')
+      {
+        $dato=BnreginmPeer::getDescrinm($this->getRequestParameter('codigo'),$cajtexcom);
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+      }
+
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      return sfView::HEADER_ONLY;
+  }
+
   protected function updateBndisinmFromRequest()
   {
     $bndisinm = $this->getRequestParameter('bndisinm');
@@ -168,8 +219,39 @@ class biedisactinmActions extends autobiedisactinmActions
     {
       $this->bndisinm->setObsdisinm($bndisinm['obsdisinm']);
     }
-    
+
       $this->bndisinm->setStadisinm('A');
-    
+
   }
+
+  public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->bndisinm = $this->getBndisinmOrCreate();
+    $this->updateBndisinmFromRequest();
+    $this->tipos = $this->CargarTipos();
+    $this->setVars();
+    $this->labels = $this->getLabels();
+
+    return sfView::SUCCESS;
+  }
+
+protected function saveBndisinm($bndisinm)
+
+ {
+
+    $this->coderror = Inmuebles::Validar_biedisactinm($bndisinm->getFecdisinm(),$bndisinm->getFecdevdis());
+
+    if ($this->coderror==-1)
+    {
+     $bndisinm->save();
+    return $this->coderror;
+    }
+
+    return $this->coderror;
+ }
+
+
+
+
 }

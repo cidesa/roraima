@@ -245,6 +245,7 @@ abstract class BaseUsuariosPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(UsuariosPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

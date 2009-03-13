@@ -230,6 +230,7 @@ abstract class BaseFafecpedPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FafecpedPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

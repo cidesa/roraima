@@ -5,15 +5,19 @@ generator:
     theme:            default
     fields:
       descripcion: { name: Descripción }
-      dia: { name: Día }
-      mes: { name: Mes }
+      dia: { name: Día, params: maxlength=2}
+      mes: { name: Mes, params: maxlength=2 }
     list:
-      title:          Definción de Días Feriados
-      filters:        [descripcion ]
+      title:          Definición de Días Feriados
+      filters:        [descripcion, mes ]
       display:        [=descripcion, dia, mes ]
       object_actions:
         _edit:        ~
         _delete:      ~
-      max_per_page:   5
+      max_per_page:   10
+      sort: mes
     edit:
       title:          Edición de Días Feriados
+      actions:
+        _save:        ~
+        _create:      ~

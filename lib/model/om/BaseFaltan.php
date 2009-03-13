@@ -37,128 +37,156 @@ abstract class BaseFaltan extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpre()
-	{
+  
+  public function getCodpre()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getNompre()
-	{
+    return trim($this->codpre);
 
-		return $this->nompre; 		
-	}
-	
-	public function getCodcta()
-	{
+  }
+  
+  public function getNompre()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getStacod()
-	{
+    return trim($this->nompre);
 
-		return $this->stacod; 		
-	}
-	
-	public function getCoduni()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codcta);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStacod()
+  {
+
+    return trim($this->stacod);
+
+  }
+  
+  public function getCoduni()
+  {
+
+    return trim($this->coduni);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = FaltanPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = FaltanPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNompre($v)
 	{
 
-		if ($this->nompre !== $v) {
-			$this->nompre = $v;
-			$this->modifiedColumns[] = FaltanPeer::NOMPRE;
-		}
-
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = FaltanPeer::NOMPRE;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = FaltanPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = FaltanPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setStacod($v)
 	{
 
-		if ($this->stacod !== $v) {
-			$this->stacod = $v;
-			$this->modifiedColumns[] = FaltanPeer::STACOD;
-		}
-
+    if ($this->stacod !== $v) {
+        $this->stacod = $v;
+        $this->modifiedColumns[] = FaltanPeer::STACOD;
+      }
+  
 	} 
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = FaltanPeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = FaltanPeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FaltanPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FaltanPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpre = $rs->getString($startcol + 0);
+      $this->codpre = $rs->getString($startcol + 0);
 
-			$this->nompre = $rs->getString($startcol + 1);
+      $this->nompre = $rs->getString($startcol + 1);
 
-			$this->codcta = $rs->getString($startcol + 2);
+      $this->codcta = $rs->getString($startcol + 2);
 
-			$this->stacod = $rs->getString($startcol + 3);
+      $this->stacod = $rs->getString($startcol + 3);
 
-			$this->coduni = $rs->getString($startcol + 4);
+      $this->coduni = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Faltan object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Faltan object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

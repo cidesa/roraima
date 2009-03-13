@@ -41,148 +41,177 @@ abstract class BaseCondefbalgen extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTiprep()
-	{
+  
+  public function getTiprep()
+  {
 
-		return $this->tiprep; 		
-	}
-	
-	public function getCodcta()
-	{
+    return trim($this->tiprep);
 
-		return $this->codcta; 		
-	}
-	
-	public function getDescta()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->descta; 		
-	}
-	
-	public function getTipo()
-	{
+    return trim($this->codcta);
 
-		return $this->tipo; 		
-	}
-	
-	public function getNivel()
-	{
+  }
+  
+  public function getDescta()
+  {
 
-		return number_format($this->nivel,2,',','.');
-		
-	}
-	
-	public function getOrden()
-	{
+    return trim($this->descta);
 
-		return number_format($this->orden,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTipo()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipo);
+
+  }
+  
+  public function getNivel($val=false)
+  {
+
+    if($val) return number_format($this->nivel,2,',','.');
+    else return $this->nivel;
+
+  }
+  
+  public function getOrden($val=false)
+  {
+
+    if($val) return number_format($this->orden,2,',','.');
+    else return $this->orden;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTiprep($v)
 	{
 
-		if ($this->tiprep !== $v) {
-			$this->tiprep = $v;
-			$this->modifiedColumns[] = CondefbalgenPeer::TIPREP;
-		}
-
+    if ($this->tiprep !== $v) {
+        $this->tiprep = $v;
+        $this->modifiedColumns[] = CondefbalgenPeer::TIPREP;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = CondefbalgenPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = CondefbalgenPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setDescta($v)
 	{
 
-		if ($this->descta !== $v) {
-			$this->descta = $v;
-			$this->modifiedColumns[] = CondefbalgenPeer::DESCTA;
-		}
-
+    if ($this->descta !== $v) {
+        $this->descta = $v;
+        $this->modifiedColumns[] = CondefbalgenPeer::DESCTA;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = CondefbalgenPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = CondefbalgenPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setNivel($v)
 	{
 
-		if ($this->nivel !== $v) {
-			$this->nivel = $v;
-			$this->modifiedColumns[] = CondefbalgenPeer::NIVEL;
-		}
-
+    if ($this->nivel !== $v) {
+        $this->nivel = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CondefbalgenPeer::NIVEL;
+      }
+  
 	} 
 	
 	public function setOrden($v)
 	{
 
-		if ($this->orden !== $v) {
-			$this->orden = $v;
-			$this->modifiedColumns[] = CondefbalgenPeer::ORDEN;
-		}
-
+    if ($this->orden !== $v) {
+        $this->orden = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CondefbalgenPeer::ORDEN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CondefbalgenPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CondefbalgenPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tiprep = $rs->getString($startcol + 0);
+      $this->tiprep = $rs->getString($startcol + 0);
 
-			$this->codcta = $rs->getString($startcol + 1);
+      $this->codcta = $rs->getString($startcol + 1);
 
-			$this->descta = $rs->getString($startcol + 2);
+      $this->descta = $rs->getString($startcol + 2);
 
-			$this->tipo = $rs->getString($startcol + 3);
+      $this->tipo = $rs->getString($startcol + 3);
 
-			$this->nivel = $rs->getFloat($startcol + 4);
+      $this->nivel = $rs->getFloat($startcol + 4);
 
-			$this->orden = $rs->getFloat($startcol + 5);
+      $this->orden = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Condefbalgen object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Condefbalgen object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

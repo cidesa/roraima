@@ -10,45 +10,33 @@
  */
 class pagretconActions extends autopagretconActions
 {
-  public function getDescon()
+  public  $coderror1=-1;
+
+  public function validateEdit()
   {
-  	  $c = new Criteria;
-  	  $c->add(NpdefcptPeer::CODCON,$this->opretcon->getCodcon());
-  	  $this->Nomcom = NpdefcptPeer::doSelect($c);
-  	  if ($this->Nomcom)
-	    return $this->Nomcom[0]->getNomcon();
-	  else 
-	    return ' ';
-  }	
-	
-  public function getDesnom()
-  {
-  	  $c = new Criteria;
-  	  $c->add(NpnominaPeer::CODNOM,$this->opretcon->getCodnom());
-  	  $this->Nomnom = NpnominaPeer::doSelect($c);
-  	  if ($this->Nomnom)
-	    return $this->Nomnom[0]->getNomnom();
-	  else 
-	    return ' ';
-  }	
-  
-  public function getDesret()
-  {
-  	  $c = new Criteria;
-  	  $c->add(OptipretPeer::CODTIP,$this->opretcon->getCodtip());
-  	  $this->Nomret = OptipretPeer::doSelect($c);
-  	  if ($this->Nomret)
-	    return $this->Nomret[0]->getDestip();
-	  else 
-	    return ' ';
+    if(($this->getRequest()->getMethod() == sfRequest::POST) && ($this->getRequestParameter('id')==""))
+    {
+      $this->opretcon = $this->getOpretconOrCreate();
+      $this->updateOpretconFromRequest();
+      
+      $c= new Criteria();
+      $c->add(OpretconPeer::CODNOM,$this->opretcon->getCodnom());
+      $c->add(OpretconPeer::CODCON,$this->opretcon->getCodcon());
+      $c->add(OpretconPeer::CODTIP,$this->opretcon->getCodtip());
+      $resul= OpretconPeer::doSelectOne($c);
+      if ($resul)
+      {	$this->coderror1=509;}
+      else { $this->coderror1=-1;}
+      
+      if ($this->coderror1<>-1)
+      {return false; }
+      else return true;      
+    }else return true;
   }
   
   public function executeEdit()
   {
     $this->opretcon = $this->getOpretconOrCreate();
-    $this->descon = $this->getDescon();
-    $this->desnom = $this->getDesnom();
-    $this->desret = $this->getDesret();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -56,7 +44,10 @@ class pagretconActions extends autopagretconActions
 
       $this->saveOpretcon($this->opretcon);
 
+      $this->opretcon->setId(self::obtenerId($this->opretcon->getCodnom(),$this->opretcon->getCodcon(),$this->opretcon->getCodtip()));
+      
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -76,4 +67,72 @@ class pagretconActions extends autopagretconActions
       $this->labels = $this->getLabels();
     }
   }
+  
+  public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->opretcon = $this->getOpretconOrCreate();
+    $this->updateOpretconFromRequest();
+
+    $this->labels = $this->getLabels();
+    
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderror1!=-1)
+      {
+       $err = Herramientas::obtenerMensajeError($this->coderror1);
+       $this->getRequest()->setError('',$err);
+      }
+    }
+
+    return sfView::SUCCESS;
+  }
+  
+  public function executeAjax()
+  {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    if ($this->getRequestParameter('ajax')=='1')
+    {
+      $dato=NpdefcptPeer::getDescon($this->getRequestParameter('codigo'));
+      $c= new Criteria();
+      $c->add(NpasiconnomPeer::CODNOM,$this->getRequestParameter('nomina'));
+      $c->add(NpasiconnomPeer::CODCON,$this->getRequestParameter('codigo'));
+      $resul= NpasiconnomPeer::doSelect($c);
+      if (!$resul)
+      {	$dato2='N';}
+      else{ $dato2='';}
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""], ["pertenece","'.$dato2.'",""]]';
+    }
+    else if ($this->getRequestParameter('ajax')=='2')
+    {
+      $dato=OptipretPeer::getRetencion($this->getRequestParameter('codigo'));
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+    }
+    else if ($this->getRequestParameter('ajax')=='3')
+    {
+      $dato=NpnominaPeer::getDesnom($this->getRequestParameter('codigo'));
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+    }
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      return sfView::HEADER_ONLY;
+  } 
+  
+  public function obtenerId($dato1,$dato2,$dato3)
+  {
+  	$c= new Criteria();
+  	$c->add(OpretconPeer::CODNOM,$dato1);
+    $c->add(OpretconPeer::CODCON,$dato2);
+    $c->add(OpretconPeer::CODTIP,$dato3);  	
+  	$resul= OpretconPeer::doSelectOne($c);
+  	if ($resul)
+  	{
+  	  return $resul->getId();
+  	}
+  	else
+  	{
+  		return '';
+  	}
+  }
+
 }

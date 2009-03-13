@@ -105,462 +105,506 @@ abstract class BaseNpliqemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNumord()
-	{
+    return trim($this->codemp);
 
-		return number_format($this->numord,2,',','.');
-		
-	}
-	
-	public function getTipcau()
-	{
+  }
+  
+  public function getNumord($val=false)
+  {
 
-		return $this->tipcau; 		
-	}
-	
-	public function getRefcau()
-	{
+    if($val) return number_format($this->numord,2,',','.');
+    else return $this->numord;
 
-		return $this->refcau; 		
-	}
-	
-	public function getTipprc()
-	{
+  }
+  
+  public function getTipcau()
+  {
 
-		return $this->tipprc; 		
-	}
-	
-	public function getRefprc()
-	{
+    return trim($this->tipcau);
 
-		return $this->refprc; 		
-	}
-	
-	public function getTipcom()
-	{
+  }
+  
+  public function getRefcau()
+  {
 
-		return $this->tipcom; 		
-	}
-	
-	public function getRefcom()
-	{
+    return trim($this->refcau);
 
-		return $this->refcom; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getTipprc()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getFecemi($format = 'Y-m-d')
-	{
+    return trim($this->tipprc);
 
-		if ($this->fecemi === null || $this->fecemi === '') {
-			return null;
-		} elseif (!is_int($this->fecemi)) {
-						$ts = strtotime($this->fecemi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
-			}
-		} else {
-			$ts = $this->fecemi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getRefprc()
+  {
 
-	
-	public function getNumrif()
-	{
+    return trim($this->refprc);
 
-		return $this->numrif; 		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getTipcom()
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMonaju()
-	{
+    return trim($this->tipcom);
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getConpag()
-	{
+  }
+  
+  public function getRefcom()
+  {
 
-		return $this->conpag; 		
-	}
-	
-	public function getCaupag()
-	{
+    return trim($this->refcom);
 
-		return number_format($this->caupag,2,',','.');
-		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getCodcue()
-	{
+    return trim($this->codpre);
 
-		return $this->codcue; 		
-	}
-	
-	public function getCodban()
-	{
+  }
+  
+  public function getFecemi($format = 'Y-m-d')
+  {
 
-		return $this->codban; 		
-	}
-	
-	public function getNumche()
-	{
+    if ($this->fecemi === null || $this->fecemi === '') {
+      return null;
+    } elseif (!is_int($this->fecemi)) {
+            $ts = adodb_strtotime($this->fecemi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
+      }
+    } else {
+      $ts = $this->fecemi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->numche; 		
-	}
-	
-	public function getNomdes()
-	{
+  
+  public function getNumrif()
+  {
 
-		return $this->nomdes; 		
-	}
-	
-	public function getCodcuedes()
-	{
+    return trim($this->numrif);
 
-		return $this->codcuedes; 		
-	}
-	
-	public function getDespag()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return number_format($this->despag,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonaju($val=false)
+  {
+
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getConpag()
+  {
+
+    return trim($this->conpag);
+
+  }
+  
+  public function getCaupag($val=false)
+  {
+
+    if($val) return number_format($this->caupag,2,',','.');
+    else return $this->caupag;
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getCodcue()
+  {
+
+    return trim($this->codcue);
+
+  }
+  
+  public function getCodban()
+  {
+
+    return trim($this->codban);
+
+  }
+  
+  public function getNumche()
+  {
+
+    return trim($this->numche);
+
+  }
+  
+  public function getNomdes()
+  {
+
+    return trim($this->nomdes);
+
+  }
+  
+  public function getCodcuedes()
+  {
+
+    return trim($this->codcuedes);
+
+  }
+  
+  public function getDespag($val=false)
+  {
+
+    if($val) return number_format($this->despag,2,',','.');
+    else return $this->despag;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpliqempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpliqempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = NpliqempPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpliqempPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setTipcau($v)
 	{
 
-		if ($this->tipcau !== $v) {
-			$this->tipcau = $v;
-			$this->modifiedColumns[] = NpliqempPeer::TIPCAU;
-		}
-
+    if ($this->tipcau !== $v) {
+        $this->tipcau = $v;
+        $this->modifiedColumns[] = NpliqempPeer::TIPCAU;
+      }
+  
 	} 
 	
 	public function setRefcau($v)
 	{
 
-		if ($this->refcau !== $v) {
-			$this->refcau = $v;
-			$this->modifiedColumns[] = NpliqempPeer::REFCAU;
-		}
-
+    if ($this->refcau !== $v) {
+        $this->refcau = $v;
+        $this->modifiedColumns[] = NpliqempPeer::REFCAU;
+      }
+  
 	} 
 	
 	public function setTipprc($v)
 	{
 
-		if ($this->tipprc !== $v) {
-			$this->tipprc = $v;
-			$this->modifiedColumns[] = NpliqempPeer::TIPPRC;
-		}
-
+    if ($this->tipprc !== $v) {
+        $this->tipprc = $v;
+        $this->modifiedColumns[] = NpliqempPeer::TIPPRC;
+      }
+  
 	} 
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = NpliqempPeer::REFPRC;
-		}
-
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = NpliqempPeer::REFPRC;
+      }
+  
 	} 
 	
 	public function setTipcom($v)
 	{
 
-		if ($this->tipcom !== $v) {
-			$this->tipcom = $v;
-			$this->modifiedColumns[] = NpliqempPeer::TIPCOM;
-		}
-
+    if ($this->tipcom !== $v) {
+        $this->tipcom = $v;
+        $this->modifiedColumns[] = NpliqempPeer::TIPCOM;
+      }
+  
 	} 
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = NpliqempPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = NpliqempPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = NpliqempPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = NpliqempPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setFecemi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecemi !== $ts) {
-			$this->fecemi = $ts;
-			$this->modifiedColumns[] = NpliqempPeer::FECEMI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecemi !== $ts) {
+      $this->fecemi = $ts;
+      $this->modifiedColumns[] = NpliqempPeer::FECEMI;
+    }
 
 	} 
 	
 	public function setNumrif($v)
 	{
 
-		if ($this->numrif !== $v) {
-			$this->numrif = $v;
-			$this->modifiedColumns[] = NpliqempPeer::NUMRIF;
-		}
-
+    if ($this->numrif !== $v) {
+        $this->numrif = $v;
+        $this->modifiedColumns[] = NpliqempPeer::NUMRIF;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = NpliqempPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpliqempPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = NpliqempPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpliqempPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setConpag($v)
 	{
 
-		if ($this->conpag !== $v) {
-			$this->conpag = $v;
-			$this->modifiedColumns[] = NpliqempPeer::CONPAG;
-		}
-
+    if ($this->conpag !== $v) {
+        $this->conpag = $v;
+        $this->modifiedColumns[] = NpliqempPeer::CONPAG;
+      }
+  
 	} 
 	
 	public function setCaupag($v)
 	{
 
-		if ($this->caupag !== $v) {
-			$this->caupag = $v;
-			$this->modifiedColumns[] = NpliqempPeer::CAUPAG;
-		}
-
+    if ($this->caupag !== $v) {
+        $this->caupag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpliqempPeer::CAUPAG;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = NpliqempPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = NpliqempPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setCodcue($v)
 	{
 
-		if ($this->codcue !== $v) {
-			$this->codcue = $v;
-			$this->modifiedColumns[] = NpliqempPeer::CODCUE;
-		}
-
+    if ($this->codcue !== $v) {
+        $this->codcue = $v;
+        $this->modifiedColumns[] = NpliqempPeer::CODCUE;
+      }
+  
 	} 
 	
 	public function setCodban($v)
 	{
 
-		if ($this->codban !== $v) {
-			$this->codban = $v;
-			$this->modifiedColumns[] = NpliqempPeer::CODBAN;
-		}
-
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = NpliqempPeer::CODBAN;
+      }
+  
 	} 
 	
 	public function setNumche($v)
 	{
 
-		if ($this->numche !== $v) {
-			$this->numche = $v;
-			$this->modifiedColumns[] = NpliqempPeer::NUMCHE;
-		}
-
+    if ($this->numche !== $v) {
+        $this->numche = $v;
+        $this->modifiedColumns[] = NpliqempPeer::NUMCHE;
+      }
+  
 	} 
 	
 	public function setNomdes($v)
 	{
 
-		if ($this->nomdes !== $v) {
-			$this->nomdes = $v;
-			$this->modifiedColumns[] = NpliqempPeer::NOMDES;
-		}
-
+    if ($this->nomdes !== $v) {
+        $this->nomdes = $v;
+        $this->modifiedColumns[] = NpliqempPeer::NOMDES;
+      }
+  
 	} 
 	
 	public function setCodcuedes($v)
 	{
 
-		if ($this->codcuedes !== $v) {
-			$this->codcuedes = $v;
-			$this->modifiedColumns[] = NpliqempPeer::CODCUEDES;
-		}
-
+    if ($this->codcuedes !== $v) {
+        $this->codcuedes = $v;
+        $this->modifiedColumns[] = NpliqempPeer::CODCUEDES;
+      }
+  
 	} 
 	
 	public function setDespag($v)
 	{
 
-		if ($this->despag !== $v) {
-			$this->despag = $v;
-			$this->modifiedColumns[] = NpliqempPeer::DESPAG;
-		}
-
+    if ($this->despag !== $v) {
+        $this->despag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpliqempPeer::DESPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpliqempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpliqempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->numord = $rs->getFloat($startcol + 1);
+      $this->numord = $rs->getFloat($startcol + 1);
 
-			$this->tipcau = $rs->getString($startcol + 2);
+      $this->tipcau = $rs->getString($startcol + 2);
 
-			$this->refcau = $rs->getString($startcol + 3);
+      $this->refcau = $rs->getString($startcol + 3);
 
-			$this->tipprc = $rs->getString($startcol + 4);
+      $this->tipprc = $rs->getString($startcol + 4);
 
-			$this->refprc = $rs->getString($startcol + 5);
+      $this->refprc = $rs->getString($startcol + 5);
 
-			$this->tipcom = $rs->getString($startcol + 6);
+      $this->tipcom = $rs->getString($startcol + 6);
 
-			$this->refcom = $rs->getString($startcol + 7);
+      $this->refcom = $rs->getString($startcol + 7);
 
-			$this->codpre = $rs->getString($startcol + 8);
+      $this->codpre = $rs->getString($startcol + 8);
 
-			$this->fecemi = $rs->getDate($startcol + 9, null);
+      $this->fecemi = $rs->getDate($startcol + 9, null);
 
-			$this->numrif = $rs->getString($startcol + 10);
+      $this->numrif = $rs->getString($startcol + 10);
 
-			$this->monpag = $rs->getFloat($startcol + 11);
+      $this->monpag = $rs->getFloat($startcol + 11);
 
-			$this->monaju = $rs->getFloat($startcol + 12);
+      $this->monaju = $rs->getFloat($startcol + 12);
 
-			$this->conpag = $rs->getString($startcol + 13);
+      $this->conpag = $rs->getString($startcol + 13);
 
-			$this->caupag = $rs->getFloat($startcol + 14);
+      $this->caupag = $rs->getFloat($startcol + 14);
 
-			$this->status = $rs->getString($startcol + 15);
+      $this->status = $rs->getString($startcol + 15);
 
-			$this->codcue = $rs->getString($startcol + 16);
+      $this->codcue = $rs->getString($startcol + 16);
 
-			$this->codban = $rs->getString($startcol + 17);
+      $this->codban = $rs->getString($startcol + 17);
 
-			$this->numche = $rs->getString($startcol + 18);
+      $this->numche = $rs->getString($startcol + 18);
 
-			$this->nomdes = $rs->getString($startcol + 19);
+      $this->nomdes = $rs->getString($startcol + 19);
 
-			$this->codcuedes = $rs->getString($startcol + 20);
+      $this->codcuedes = $rs->getString($startcol + 20);
 
-			$this->despag = $rs->getFloat($startcol + 21);
+      $this->despag = $rs->getFloat($startcol + 21);
 
-			$this->id = $rs->getInt($startcol + 22);
+      $this->id = $rs->getInt($startcol + 22);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 23; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npliqemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 23; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npliqemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -617,6 +661,7 @@ abstract class BaseNpliqemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpliqempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpliqempPeer::doUpdate($this, $con);

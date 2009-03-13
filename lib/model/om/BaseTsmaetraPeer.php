@@ -215,6 +215,7 @@ abstract class BaseTsmaetraPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsmaetraPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

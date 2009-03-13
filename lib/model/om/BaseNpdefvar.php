@@ -49,187 +49,218 @@ abstract class BaseNpdefvar extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodvar()
-	{
+  
+  public function getCodvar()
+  {
 
-		return $this->codvar; 		
-	}
-	
-	public function getDesvar()
-	{
+    return trim($this->codvar);
 
-		return $this->desvar; 		
-	}
-	
-	public function getCodnom()
-	{
+  }
+  
+  public function getDesvar()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getValor1()
-	{
+    return trim($this->desvar);
 
-		return number_format($this->valor1,2,',','.');
-		
-	}
-	
-	public function getValor2()
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		return number_format($this->valor2,2,',','.');
-		
-	}
-	
-	public function getValor3()
-	{
+    return trim($this->codnom);
 
-		return number_format($this->valor3,2,',','.');
-		
-	}
-	
-	public function getValor4()
-	{
+  }
+  
+  public function getValor1($val=false)
+  {
 
-		return number_format($this->valor4,2,',','.');
-		
-	}
-	
-	public function getValor5()
-	{
+    if($val) return number_format($this->valor1,2,',','.');
+    else return $this->valor1;
 
-		return number_format($this->valor5,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getValor2($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->valor2,2,',','.');
+    else return $this->valor2;
+
+  }
+  
+  public function getValor3($val=false)
+  {
+
+    if($val) return number_format($this->valor3,2,',','.');
+    else return $this->valor3;
+
+  }
+  
+  public function getValor4($val=false)
+  {
+
+    if($val) return number_format($this->valor4,2,',','.');
+    else return $this->valor4;
+
+  }
+  
+  public function getValor5($val=false)
+  {
+
+    if($val) return number_format($this->valor5,2,',','.');
+    else return $this->valor5;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodvar($v)
 	{
 
-		if ($this->codvar !== $v) {
-			$this->codvar = $v;
-			$this->modifiedColumns[] = NpdefvarPeer::CODVAR;
-		}
-
+    if ($this->codvar !== $v) {
+        $this->codvar = $v;
+        $this->modifiedColumns[] = NpdefvarPeer::CODVAR;
+      }
+  
 	} 
 	
 	public function setDesvar($v)
 	{
 
-		if ($this->desvar !== $v) {
-			$this->desvar = $v;
-			$this->modifiedColumns[] = NpdefvarPeer::DESVAR;
-		}
-
+    if ($this->desvar !== $v) {
+        $this->desvar = $v;
+        $this->modifiedColumns[] = NpdefvarPeer::DESVAR;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpdefvarPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpdefvarPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setValor1($v)
 	{
 
-		if ($this->valor1 !== $v) {
-			$this->valor1 = $v;
-			$this->modifiedColumns[] = NpdefvarPeer::VALOR1;
-		}
-
+    if ($this->valor1 !== $v) {
+        $this->valor1 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdefvarPeer::VALOR1;
+      }
+  
 	} 
 	
 	public function setValor2($v)
 	{
 
-		if ($this->valor2 !== $v) {
-			$this->valor2 = $v;
-			$this->modifiedColumns[] = NpdefvarPeer::VALOR2;
-		}
-
+    if ($this->valor2 !== $v) {
+        $this->valor2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdefvarPeer::VALOR2;
+      }
+  
 	} 
 	
 	public function setValor3($v)
 	{
 
-		if ($this->valor3 !== $v) {
-			$this->valor3 = $v;
-			$this->modifiedColumns[] = NpdefvarPeer::VALOR3;
-		}
-
+    if ($this->valor3 !== $v) {
+        $this->valor3 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdefvarPeer::VALOR3;
+      }
+  
 	} 
 	
 	public function setValor4($v)
 	{
 
-		if ($this->valor4 !== $v) {
-			$this->valor4 = $v;
-			$this->modifiedColumns[] = NpdefvarPeer::VALOR4;
-		}
-
+    if ($this->valor4 !== $v) {
+        $this->valor4 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdefvarPeer::VALOR4;
+      }
+  
 	} 
 	
 	public function setValor5($v)
 	{
 
-		if ($this->valor5 !== $v) {
-			$this->valor5 = $v;
-			$this->modifiedColumns[] = NpdefvarPeer::VALOR5;
-		}
-
+    if ($this->valor5 !== $v) {
+        $this->valor5 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdefvarPeer::VALOR5;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdefvarPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdefvarPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codvar = $rs->getString($startcol + 0);
+      $this->codvar = $rs->getString($startcol + 0);
 
-			$this->desvar = $rs->getString($startcol + 1);
+      $this->desvar = $rs->getString($startcol + 1);
 
-			$this->codnom = $rs->getString($startcol + 2);
+      $this->codnom = $rs->getString($startcol + 2);
 
-			$this->valor1 = $rs->getFloat($startcol + 3);
+      $this->valor1 = $rs->getFloat($startcol + 3);
 
-			$this->valor2 = $rs->getFloat($startcol + 4);
+      $this->valor2 = $rs->getFloat($startcol + 4);
 
-			$this->valor3 = $rs->getFloat($startcol + 5);
+      $this->valor3 = $rs->getFloat($startcol + 5);
 
-			$this->valor4 = $rs->getFloat($startcol + 6);
+      $this->valor4 = $rs->getFloat($startcol + 6);
 
-			$this->valor5 = $rs->getFloat($startcol + 7);
+      $this->valor5 = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdefvar object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdefvar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -286,6 +317,7 @@ abstract class BaseNpdefvar extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdefvarPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefvarPeer::doUpdate($this, $con);

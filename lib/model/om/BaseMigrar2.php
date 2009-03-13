@@ -25,75 +25,100 @@ abstract class BaseMigrar2 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcta()
-	{
+  
+  public function getCodcta()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getSaldo()
-	{
+    return trim($this->codcta);
 
-		return number_format($this->saldo,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getSaldo($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->saldo,2,',','.');
+    else return $this->saldo;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = Migrar2Peer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = Migrar2Peer::CODCTA;
+      }
+  
 	} 
 	
 	public function setSaldo($v)
 	{
 
-		if ($this->saldo !== $v) {
-			$this->saldo = $v;
-			$this->modifiedColumns[] = Migrar2Peer::SALDO;
-		}
-
+    if ($this->saldo !== $v) {
+        $this->saldo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Migrar2Peer::SALDO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Migrar2Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Migrar2Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcta = $rs->getString($startcol + 0);
+      $this->codcta = $rs->getString($startcol + 0);
 
-			$this->saldo = $rs->getFloat($startcol + 1);
+      $this->saldo = $rs->getFloat($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Migrar2 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Migrar2 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -150,6 +175,7 @@ abstract class BaseMigrar2 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Migrar2Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Migrar2Peer::doUpdate($this, $con);

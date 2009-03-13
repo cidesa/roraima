@@ -325,6 +325,7 @@ abstract class BaseBnregsemPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BnregsemPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

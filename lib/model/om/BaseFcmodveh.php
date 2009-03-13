@@ -121,533 +121,581 @@ abstract class BaseFcmodveh extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefmod()
-	{
+  
+  public function getRefmod()
+  {
 
-		return $this->refmod; 		
-	}
-	
-	public function getPlaveh()
-	{
+    return trim($this->refmod);
 
-		return $this->plaveh; 		
-	}
-	
-	public function getFecmod($format = 'Y-m-d')
-	{
+  }
+  
+  public function getPlaveh()
+  {
 
-		if ($this->fecmod === null || $this->fecmod === '') {
-			return null;
-		} elseif (!is_int($this->fecmod)) {
-						$ts = strtotime($this->fecmod);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecmod] as date/time value: " . var_export($this->fecmod, true));
-			}
-		} else {
-			$ts = $this->fecmod;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->plaveh);
 
-	
-	public function getCoduso()
-	{
+  }
+  
+  public function getFecmod($format = 'Y-m-d')
+  {
 
-		return $this->coduso; 		
-	}
-	
-	public function getAnoveh()
-	{
+    if ($this->fecmod === null || $this->fecmod === '') {
+      return null;
+    } elseif (!is_int($this->fecmod)) {
+            $ts = adodb_strtotime($this->fecmod);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecmod] as date/time value: " . var_export($this->fecmod, true));
+      }
+    } else {
+      $ts = $this->fecmod;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->anoveh,2,',','.');
-		
-	}
-	
-	public function getSermot()
-	{
+  
+  public function getCoduso()
+  {
 
-		return $this->sermot; 		
-	}
-	
-	public function getSercar()
-	{
+    return trim($this->coduso);
 
-		return $this->sercar; 		
-	}
-	
-	public function getMarveh()
-	{
+  }
+  
+  public function getAnoveh($val=false)
+  {
 
-		return $this->marveh; 		
-	}
-	
-	public function getColveh()
-	{
+    if($val) return number_format($this->anoveh,2,',','.');
+    else return $this->anoveh;
 
-		return $this->colveh; 		
-	}
-	
-	public function getValori()
-	{
+  }
+  
+  public function getSermot()
+  {
 
-		return number_format($this->valori,2,',','.');
-		
-	}
-	
-	public function getModveh()
-	{
+    return trim($this->sermot);
 
-		return $this->modveh; 		
-	}
-	
-	public function getDueant()
-	{
+  }
+  
+  public function getSercar()
+  {
 
-		return $this->dueant; 		
-	}
-	
-	public function getDirant()
-	{
+    return trim($this->sercar);
 
-		return $this->dirant; 		
-	}
-	
-	public function getPlaant()
-	{
+  }
+  
+  public function getMarveh()
+  {
 
-		return $this->plaant; 		
-	}
-	
-	public function getCodusoant()
-	{
+    return trim($this->marveh);
 
-		return $this->codusoant; 		
-	}
-	
-	public function getAnovehant()
-	{
+  }
+  
+  public function getColveh()
+  {
 
-		return number_format($this->anovehant,2,',','.');
-		
-	}
-	
-	public function getSermotant()
-	{
+    return trim($this->colveh);
 
-		return $this->sermotant; 		
-	}
-	
-	public function getSercarant()
-	{
+  }
+  
+  public function getValori($val=false)
+  {
 
-		return $this->sercarant; 		
-	}
-	
-	public function getMarvehant()
-	{
+    if($val) return number_format($this->valori,2,',','.');
+    else return $this->valori;
 
-		return $this->marvehant; 		
-	}
-	
-	public function getColvehant()
-	{
+  }
+  
+  public function getModveh()
+  {
 
-		return $this->colvehant; 		
-	}
-	
-	public function getValoriant()
-	{
+    return trim($this->modveh);
 
-		return number_format($this->valoriant,2,',','.');
-		
-	}
-	
-	public function getModvehant()
-	{
+  }
+  
+  public function getDueant()
+  {
 
-		return $this->modvehant; 		
-	}
-	
-	public function getDueantant()
-	{
+    return trim($this->dueant);
 
-		return $this->dueantant; 		
-	}
-	
-	public function getDirantant()
-	{
+  }
+  
+  public function getDirant()
+  {
 
-		return $this->dirantant; 		
-	}
-	
-	public function getPlaantant()
-	{
+    return trim($this->dirant);
 
-		return $this->plaantant; 		
-	}
-	
-	public function getFunrec()
-	{
+  }
+  
+  public function getPlaant()
+  {
 
-		return $this->funrec; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->plaant);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodusoant()
+  {
+
+    return trim($this->codusoant);
+
+  }
+  
+  public function getAnovehant($val=false)
+  {
+
+    if($val) return number_format($this->anovehant,2,',','.');
+    else return $this->anovehant;
+
+  }
+  
+  public function getSermotant()
+  {
+
+    return trim($this->sermotant);
+
+  }
+  
+  public function getSercarant()
+  {
+
+    return trim($this->sercarant);
+
+  }
+  
+  public function getMarvehant()
+  {
+
+    return trim($this->marvehant);
+
+  }
+  
+  public function getColvehant()
+  {
+
+    return trim($this->colvehant);
+
+  }
+  
+  public function getValoriant($val=false)
+  {
+
+    if($val) return number_format($this->valoriant,2,',','.');
+    else return $this->valoriant;
+
+  }
+  
+  public function getModvehant()
+  {
+
+    return trim($this->modvehant);
+
+  }
+  
+  public function getDueantant()
+  {
+
+    return trim($this->dueantant);
+
+  }
+  
+  public function getDirantant()
+  {
+
+    return trim($this->dirantant);
+
+  }
+  
+  public function getPlaantant()
+  {
+
+    return trim($this->plaantant);
+
+  }
+  
+  public function getFunrec()
+  {
+
+    return trim($this->funrec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefmod($v)
 	{
 
-		if ($this->refmod !== $v) {
-			$this->refmod = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::REFMOD;
-		}
-
+    if ($this->refmod !== $v) {
+        $this->refmod = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::REFMOD;
+      }
+  
 	} 
 	
 	public function setPlaveh($v)
 	{
 
-		if ($this->plaveh !== $v) {
-			$this->plaveh = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::PLAVEH;
-		}
-
+    if ($this->plaveh !== $v) {
+        $this->plaveh = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::PLAVEH;
+      }
+  
 	} 
 	
 	public function setFecmod($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecmod] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecmod !== $ts) {
-			$this->fecmod = $ts;
-			$this->modifiedColumns[] = FcmodvehPeer::FECMOD;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecmod] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecmod !== $ts) {
+      $this->fecmod = $ts;
+      $this->modifiedColumns[] = FcmodvehPeer::FECMOD;
+    }
 
 	} 
 	
 	public function setCoduso($v)
 	{
 
-		if ($this->coduso !== $v) {
-			$this->coduso = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::CODUSO;
-		}
-
+    if ($this->coduso !== $v) {
+        $this->coduso = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::CODUSO;
+      }
+  
 	} 
 	
 	public function setAnoveh($v)
 	{
 
-		if ($this->anoveh !== $v) {
-			$this->anoveh = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::ANOVEH;
-		}
-
+    if ($this->anoveh !== $v) {
+        $this->anoveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodvehPeer::ANOVEH;
+      }
+  
 	} 
 	
 	public function setSermot($v)
 	{
 
-		if ($this->sermot !== $v) {
-			$this->sermot = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::SERMOT;
-		}
-
+    if ($this->sermot !== $v) {
+        $this->sermot = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::SERMOT;
+      }
+  
 	} 
 	
 	public function setSercar($v)
 	{
 
-		if ($this->sercar !== $v) {
-			$this->sercar = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::SERCAR;
-		}
-
+    if ($this->sercar !== $v) {
+        $this->sercar = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::SERCAR;
+      }
+  
 	} 
 	
 	public function setMarveh($v)
 	{
 
-		if ($this->marveh !== $v) {
-			$this->marveh = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::MARVEH;
-		}
-
+    if ($this->marveh !== $v) {
+        $this->marveh = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::MARVEH;
+      }
+  
 	} 
 	
 	public function setColveh($v)
 	{
 
-		if ($this->colveh !== $v) {
-			$this->colveh = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::COLVEH;
-		}
-
+    if ($this->colveh !== $v) {
+        $this->colveh = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::COLVEH;
+      }
+  
 	} 
 	
 	public function setValori($v)
 	{
 
-		if ($this->valori !== $v) {
-			$this->valori = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::VALORI;
-		}
-
+    if ($this->valori !== $v) {
+        $this->valori = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodvehPeer::VALORI;
+      }
+  
 	} 
 	
 	public function setModveh($v)
 	{
 
-		if ($this->modveh !== $v) {
-			$this->modveh = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::MODVEH;
-		}
-
+    if ($this->modveh !== $v) {
+        $this->modveh = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::MODVEH;
+      }
+  
 	} 
 	
 	public function setDueant($v)
 	{
 
-		if ($this->dueant !== $v) {
-			$this->dueant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::DUEANT;
-		}
-
+    if ($this->dueant !== $v) {
+        $this->dueant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::DUEANT;
+      }
+  
 	} 
 	
 	public function setDirant($v)
 	{
 
-		if ($this->dirant !== $v) {
-			$this->dirant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::DIRANT;
-		}
-
+    if ($this->dirant !== $v) {
+        $this->dirant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::DIRANT;
+      }
+  
 	} 
 	
 	public function setPlaant($v)
 	{
 
-		if ($this->plaant !== $v) {
-			$this->plaant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::PLAANT;
-		}
-
+    if ($this->plaant !== $v) {
+        $this->plaant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::PLAANT;
+      }
+  
 	} 
 	
 	public function setCodusoant($v)
 	{
 
-		if ($this->codusoant !== $v) {
-			$this->codusoant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::CODUSOANT;
-		}
-
+    if ($this->codusoant !== $v) {
+        $this->codusoant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::CODUSOANT;
+      }
+  
 	} 
 	
 	public function setAnovehant($v)
 	{
 
-		if ($this->anovehant !== $v) {
-			$this->anovehant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::ANOVEHANT;
-		}
-
+    if ($this->anovehant !== $v) {
+        $this->anovehant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodvehPeer::ANOVEHANT;
+      }
+  
 	} 
 	
 	public function setSermotant($v)
 	{
 
-		if ($this->sermotant !== $v) {
-			$this->sermotant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::SERMOTANT;
-		}
-
+    if ($this->sermotant !== $v) {
+        $this->sermotant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::SERMOTANT;
+      }
+  
 	} 
 	
 	public function setSercarant($v)
 	{
 
-		if ($this->sercarant !== $v) {
-			$this->sercarant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::SERCARANT;
-		}
-
+    if ($this->sercarant !== $v) {
+        $this->sercarant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::SERCARANT;
+      }
+  
 	} 
 	
 	public function setMarvehant($v)
 	{
 
-		if ($this->marvehant !== $v) {
-			$this->marvehant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::MARVEHANT;
-		}
-
+    if ($this->marvehant !== $v) {
+        $this->marvehant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::MARVEHANT;
+      }
+  
 	} 
 	
 	public function setColvehant($v)
 	{
 
-		if ($this->colvehant !== $v) {
-			$this->colvehant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::COLVEHANT;
-		}
-
+    if ($this->colvehant !== $v) {
+        $this->colvehant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::COLVEHANT;
+      }
+  
 	} 
 	
 	public function setValoriant($v)
 	{
 
-		if ($this->valoriant !== $v) {
-			$this->valoriant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::VALORIANT;
-		}
-
+    if ($this->valoriant !== $v) {
+        $this->valoriant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodvehPeer::VALORIANT;
+      }
+  
 	} 
 	
 	public function setModvehant($v)
 	{
 
-		if ($this->modvehant !== $v) {
-			$this->modvehant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::MODVEHANT;
-		}
-
+    if ($this->modvehant !== $v) {
+        $this->modvehant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::MODVEHANT;
+      }
+  
 	} 
 	
 	public function setDueantant($v)
 	{
 
-		if ($this->dueantant !== $v) {
-			$this->dueantant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::DUEANTANT;
-		}
-
+    if ($this->dueantant !== $v) {
+        $this->dueantant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::DUEANTANT;
+      }
+  
 	} 
 	
 	public function setDirantant($v)
 	{
 
-		if ($this->dirantant !== $v) {
-			$this->dirantant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::DIRANTANT;
-		}
-
+    if ($this->dirantant !== $v) {
+        $this->dirantant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::DIRANTANT;
+      }
+  
 	} 
 	
 	public function setPlaantant($v)
 	{
 
-		if ($this->plaantant !== $v) {
-			$this->plaantant = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::PLAANTANT;
-		}
-
+    if ($this->plaantant !== $v) {
+        $this->plaantant = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::PLAANTANT;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcmodvehPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcmodvehPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refmod = $rs->getString($startcol + 0);
+      $this->refmod = $rs->getString($startcol + 0);
 
-			$this->plaveh = $rs->getString($startcol + 1);
+      $this->plaveh = $rs->getString($startcol + 1);
 
-			$this->fecmod = $rs->getDate($startcol + 2, null);
+      $this->fecmod = $rs->getDate($startcol + 2, null);
 
-			$this->coduso = $rs->getString($startcol + 3);
+      $this->coduso = $rs->getString($startcol + 3);
 
-			$this->anoveh = $rs->getFloat($startcol + 4);
+      $this->anoveh = $rs->getFloat($startcol + 4);
 
-			$this->sermot = $rs->getString($startcol + 5);
+      $this->sermot = $rs->getString($startcol + 5);
 
-			$this->sercar = $rs->getString($startcol + 6);
+      $this->sercar = $rs->getString($startcol + 6);
 
-			$this->marveh = $rs->getString($startcol + 7);
+      $this->marveh = $rs->getString($startcol + 7);
 
-			$this->colveh = $rs->getString($startcol + 8);
+      $this->colveh = $rs->getString($startcol + 8);
 
-			$this->valori = $rs->getFloat($startcol + 9);
+      $this->valori = $rs->getFloat($startcol + 9);
 
-			$this->modveh = $rs->getString($startcol + 10);
+      $this->modveh = $rs->getString($startcol + 10);
 
-			$this->dueant = $rs->getString($startcol + 11);
+      $this->dueant = $rs->getString($startcol + 11);
 
-			$this->dirant = $rs->getString($startcol + 12);
+      $this->dirant = $rs->getString($startcol + 12);
 
-			$this->plaant = $rs->getString($startcol + 13);
+      $this->plaant = $rs->getString($startcol + 13);
 
-			$this->codusoant = $rs->getString($startcol + 14);
+      $this->codusoant = $rs->getString($startcol + 14);
 
-			$this->anovehant = $rs->getFloat($startcol + 15);
+      $this->anovehant = $rs->getFloat($startcol + 15);
 
-			$this->sermotant = $rs->getString($startcol + 16);
+      $this->sermotant = $rs->getString($startcol + 16);
 
-			$this->sercarant = $rs->getString($startcol + 17);
+      $this->sercarant = $rs->getString($startcol + 17);
 
-			$this->marvehant = $rs->getString($startcol + 18);
+      $this->marvehant = $rs->getString($startcol + 18);
 
-			$this->colvehant = $rs->getString($startcol + 19);
+      $this->colvehant = $rs->getString($startcol + 19);
 
-			$this->valoriant = $rs->getFloat($startcol + 20);
+      $this->valoriant = $rs->getFloat($startcol + 20);
 
-			$this->modvehant = $rs->getString($startcol + 21);
+      $this->modvehant = $rs->getString($startcol + 21);
 
-			$this->dueantant = $rs->getString($startcol + 22);
+      $this->dueantant = $rs->getString($startcol + 22);
 
-			$this->dirantant = $rs->getString($startcol + 23);
+      $this->dirantant = $rs->getString($startcol + 23);
 
-			$this->plaantant = $rs->getString($startcol + 24);
+      $this->plaantant = $rs->getString($startcol + 24);
 
-			$this->funrec = $rs->getString($startcol + 25);
+      $this->funrec = $rs->getString($startcol + 25);
 
-			$this->id = $rs->getInt($startcol + 26);
+      $this->id = $rs->getInt($startcol + 26);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 27; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcmodveh object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 27; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcmodveh object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -704,6 +752,7 @@ abstract class BaseFcmodveh extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcmodvehPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcmodvehPeer::doUpdate($this, $con);

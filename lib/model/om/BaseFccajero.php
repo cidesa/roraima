@@ -37,128 +37,156 @@ abstract class BaseFccajero extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcaj()
-	{
+  
+  public function getCodcaj()
+  {
 
-		return $this->codcaj; 		
-	}
-	
-	public function getCedcaj()
-	{
+    return trim($this->codcaj);
 
-		return $this->cedcaj; 		
-	}
-	
-	public function getNomcaj()
-	{
+  }
+  
+  public function getCedcaj()
+  {
 
-		return $this->nomcaj; 		
-	}
-	
-	public function getDircaj()
-	{
+    return trim($this->cedcaj);
 
-		return $this->dircaj; 		
-	}
-	
-	public function getTelcaj()
-	{
+  }
+  
+  public function getNomcaj()
+  {
 
-		return $this->telcaj; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomcaj);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDircaj()
+  {
+
+    return trim($this->dircaj);
+
+  }
+  
+  public function getTelcaj()
+  {
+
+    return trim($this->telcaj);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcaj($v)
 	{
 
-		if ($this->codcaj !== $v) {
-			$this->codcaj = $v;
-			$this->modifiedColumns[] = FccajeroPeer::CODCAJ;
-		}
-
+    if ($this->codcaj !== $v) {
+        $this->codcaj = $v;
+        $this->modifiedColumns[] = FccajeroPeer::CODCAJ;
+      }
+  
 	} 
 	
 	public function setCedcaj($v)
 	{
 
-		if ($this->cedcaj !== $v) {
-			$this->cedcaj = $v;
-			$this->modifiedColumns[] = FccajeroPeer::CEDCAJ;
-		}
-
+    if ($this->cedcaj !== $v) {
+        $this->cedcaj = $v;
+        $this->modifiedColumns[] = FccajeroPeer::CEDCAJ;
+      }
+  
 	} 
 	
 	public function setNomcaj($v)
 	{
 
-		if ($this->nomcaj !== $v) {
-			$this->nomcaj = $v;
-			$this->modifiedColumns[] = FccajeroPeer::NOMCAJ;
-		}
-
+    if ($this->nomcaj !== $v) {
+        $this->nomcaj = $v;
+        $this->modifiedColumns[] = FccajeroPeer::NOMCAJ;
+      }
+  
 	} 
 	
 	public function setDircaj($v)
 	{
 
-		if ($this->dircaj !== $v) {
-			$this->dircaj = $v;
-			$this->modifiedColumns[] = FccajeroPeer::DIRCAJ;
-		}
-
+    if ($this->dircaj !== $v) {
+        $this->dircaj = $v;
+        $this->modifiedColumns[] = FccajeroPeer::DIRCAJ;
+      }
+  
 	} 
 	
 	public function setTelcaj($v)
 	{
 
-		if ($this->telcaj !== $v) {
-			$this->telcaj = $v;
-			$this->modifiedColumns[] = FccajeroPeer::TELCAJ;
-		}
-
+    if ($this->telcaj !== $v) {
+        $this->telcaj = $v;
+        $this->modifiedColumns[] = FccajeroPeer::TELCAJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FccajeroPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FccajeroPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcaj = $rs->getString($startcol + 0);
+      $this->codcaj = $rs->getString($startcol + 0);
 
-			$this->cedcaj = $rs->getString($startcol + 1);
+      $this->cedcaj = $rs->getString($startcol + 1);
 
-			$this->nomcaj = $rs->getString($startcol + 2);
+      $this->nomcaj = $rs->getString($startcol + 2);
 
-			$this->dircaj = $rs->getString($startcol + 3);
+      $this->dircaj = $rs->getString($startcol + 3);
 
-			$this->telcaj = $rs->getString($startcol + 4);
+      $this->telcaj = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fccajero object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fccajero object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseFccajero extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FccajeroPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FccajeroPeer::doUpdate($this, $con);

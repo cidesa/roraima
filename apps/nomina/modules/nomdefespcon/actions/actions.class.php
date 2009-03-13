@@ -10,22 +10,26 @@
  */
 class nomdefespconActions extends autonomdefespconActions
 {
-	public function getnompar()
+
+public function executeAjax()
 	{
-		$c = new Criteria;
-		$this->campo = $this->npdefcpt->getcodpar();
-		$c->add(NppartidasPeer::CODPAR, $this->campo);
-		$this->nompar = NppartidasPeer::doSelect($c);
-		if ($this->nompar)
-		return $this->nompar[0]->getNompar();
-		else
-		return ' ';
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+	  if ($this->getRequestParameter('ajax')=='1')
+	    {
+	  		$dato=NppartidasPeer::getNompar($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+
+  	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
 	}
 
 	public function executeEdit()
 	{
 		$this->npdefcpt = $this->getNpdefcptOrCreate();
-		$this->nompar = $this->getnompar();
+		$this->formato= Herramientas::getMascaraPartida();
+		$this->longitud=strlen($this->formato);
 
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{
@@ -33,7 +37,10 @@ class nomdefespconActions extends autonomdefespconActions
 
 			$this->saveNpdefcpt($this->npdefcpt);
 
+            $this->npdefcpt->setId(Herramientas::getX_vacio('codcon','npdefcpt','id',$this->npdefcpt->getCodcon()));
+
 			$this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
 			if ($this->getRequestParameter('save_and_add'))
 			{
@@ -52,65 +59,86 @@ class nomdefespconActions extends autonomdefespconActions
     {
       $this->labels = $this->getLabels();
     }
-  }	
-	
+  }
+
+ protected function saveNpdefcpt($npdefcpt)
+  {
+    Nomina::salvarNomdefespcon($npdefcpt);
+
+  }
+
+
 	protected function updateNpdefcptFromRequest()
 	{
 		$npdefcpt = $this->getRequestParameter('npdefcpt');
+		$this->formato= Herramientas::getMascaraPartida();
+		$this->longitud=strlen($this->formato);
 
-		if (isset($npdefcpt['codcon']))
-		{
-			$this->npdefcpt->setCodcon(str_pad($npdefcpt['codcon'],3,'0',STR_PAD_LEFT));	
-		}
-		if (isset($npdefcpt['nomcon']))
-		{
-			$this->npdefcpt->setNomcon($npdefcpt['nomcon']);
-		}
-		if (isset($npdefcpt['codpar']))
-		{
-			$this->npdefcpt->setCodpar($npdefcpt['codpar']);
-		}
-		$checkbox=$this->getRequestParameter('checkbox1');
-		if (isset($checkbox))
-		{
-			$this->npdefcpt->setOpecon($this->getRequestParameter('checkbox1'));
-		}
-		$checkbox=$this->getRequestParameter('checkbox4');
-		if (isset($checkbox))
-		{
-			$this->npdefcpt->setAcuhis($this->getRequestParameter('checkbox4'));
-		}
-		$checkbox=$this->getRequestParameter('checkbox7');
-		if (isset($checkbox))
-		{
-			$this->npdefcpt->setInimon($this->getRequestParameter('checkbox7'));
-		}
-		$checkbox=$this->getRequestParameter('checkbox2');
-		if (isset($checkbox))
-	    {
-	    	$this->npdefcpt->setConact($this->getRequestParameter('checkbox2'));
-	    }
-	    $checkbox=$this->getRequestParameter('checkbox3');
-	    if (isset($checkbox))
-	    {			$this->npdefcpt->setImpcpt($this->getRequestParameter('checkbox3'));
-	    }
-	    $checkbox=$this->getRequestParameter('checkbox5');
-	    if (isset($checkbox))
-	    {
-			$this->npdefcpt->setOrdpag($this->getRequestParameter('checkbox5'));
-		}
-		$checkbox=$this->getRequestParameter('checkbox6');
-		if (isset($checkbox))
-	    {
-			$this->npdefcpt->setAfepre($this->getRequestParameter('checkbox6'));
-		}
-		if (isset($npdefcpt['frecon']))
-    	{
-      		$this->npdefcpt->setFrecon($npdefcpt['frecon']);
-    	}
-    /*if (isset($npdefcpt['nrocta']))
+	if (isset($npdefcpt['codcon']))
     {
-      $this->npdefcpt->setNrocta($npdefcpt['nrocta']);
-    }*/
-  }	
+      $this->npdefcpt->setCodcon(str_pad($npdefcpt['codcon'],3,0,STR_PAD_LEFT));
+    }
+    if (isset($npdefcpt['nomcon']))
+    {
+      $this->npdefcpt->setNomcon($npdefcpt['nomcon']);
+    }
+    if (isset($npdefcpt['codpar']))
+    {
+      $this->npdefcpt->setCodpar($npdefcpt['codpar']);
+    }
+    if (isset($npdefcpt['nompar']))
+    {
+      $this->npdefcpt->setNompar($npdefcpt['nompar']);
+    }
+    if (isset($npdefcpt['opecon']))
+    {
+      $this->npdefcpt->setOpecon($npdefcpt['opecon']);
+    }
+    if (isset($npdefcpt['conact']))
+    {
+      $this->npdefcpt->setConact($npdefcpt['conact']);
+    }
+    if (isset($npdefcpt['impcpt']))
+    {
+      $this->npdefcpt->setImpcpt($npdefcpt['impcpt']);
+    }
+    if (isset($npdefcpt['inimon']))
+    {
+      $this->npdefcpt->setInimon($npdefcpt['inimon']);
+    }
+    if (isset($npdefcpt['acuhis']))
+    {
+      $this->npdefcpt->setAcuhis($npdefcpt['acuhis']);
+    }
+    if (isset($npdefcpt['ordpag']))
+    {
+      $this->npdefcpt->setOrdpag($npdefcpt['ordpag']);
+    }
+    if (isset($npdefcpt['afepre']))
+    {
+      $this->npdefcpt->setAfepre($npdefcpt['afepre']);
+    }
+  }
+
+  public function executeDelete()
+  {
+    $this->npdefcpt = NpdefcptPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->npdefcpt);
+
+    $id=$this->getRequestParameter('id');
+    $c= new Criteria();
+    $c->add(NpasiconempPeer::CODCON,$this->npdefcpt->getCodcon());
+    $dato=NpasiconempPeer::doSelect($c);
+    if (!$dato)
+    {
+      $this->deleteNpdefcpt($this->npdefcpt);
+    }
+    else
+    {
+      $this->setFlash('notice','No puede eliminar el concepto, se encuentra asociado a un empleado.');
+      return $this->redirect('nomdefespcon/edit?id='.$id);
+    }
+
+    return $this->redirect('nomdefespcon/list');
+  }
 }

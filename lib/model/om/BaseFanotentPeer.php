@@ -13,7 +13,7 @@ abstract class BaseFanotentPeer {
 	const CLASS_DEFAULT = 'lib.model.Fanotent';
 
 	
-	const NUM_COLUMNS = 19;
+	const NUM_COLUMNS = 18;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -33,9 +33,6 @@ abstract class BaseFanotentPeer {
 
 	
 	const CODREF = 'fanotent.CODREF';
-
-	
-	const CODALM = 'fanotent.CODALM';
 
 	
 	const DESNOT = 'fanotent.DESNOT';
@@ -82,18 +79,18 @@ abstract class BaseFanotentPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nronot', 'Fecnot', 'Codcli', 'Tipref', 'Codref', 'Codalm', 'Desnot', 'Monnot', 'Obsnot', 'Tipnot', 'Reapor', 'Status', 'Rifent', 'Noment', 'Fecanu', 'Autori', 'Fecaut', 'Autpor', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FanotentPeer::NRONOT, FanotentPeer::FECNOT, FanotentPeer::CODCLI, FanotentPeer::TIPREF, FanotentPeer::CODREF, FanotentPeer::CODALM, FanotentPeer::DESNOT, FanotentPeer::MONNOT, FanotentPeer::OBSNOT, FanotentPeer::TIPNOT, FanotentPeer::REAPOR, FanotentPeer::STATUS, FanotentPeer::RIFENT, FanotentPeer::NOMENT, FanotentPeer::FECANU, FanotentPeer::AUTORI, FanotentPeer::FECAUT, FanotentPeer::AUTPOR, FanotentPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nronot', 'fecnot', 'codcli', 'tipref', 'codref', 'codalm', 'desnot', 'monnot', 'obsnot', 'tipnot', 'reapor', 'status', 'rifent', 'noment', 'fecanu', 'autori', 'fecaut', 'autpor', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
+		BasePeer::TYPE_PHPNAME => array ('Nronot', 'Fecnot', 'Codcli', 'Tipref', 'Codref', 'Desnot', 'Monnot', 'Obsnot', 'Tipnot', 'Reapor', 'Status', 'Rifent', 'Noment', 'Fecanu', 'Autori', 'Fecaut', 'Autpor', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FanotentPeer::NRONOT, FanotentPeer::FECNOT, FanotentPeer::CODCLI, FanotentPeer::TIPREF, FanotentPeer::CODREF, FanotentPeer::DESNOT, FanotentPeer::MONNOT, FanotentPeer::OBSNOT, FanotentPeer::TIPNOT, FanotentPeer::REAPOR, FanotentPeer::STATUS, FanotentPeer::RIFENT, FanotentPeer::NOMENT, FanotentPeer::FECANU, FanotentPeer::AUTORI, FanotentPeer::FECAUT, FanotentPeer::AUTPOR, FanotentPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nronot', 'fecnot', 'codcli', 'tipref', 'codref', 'desnot', 'monnot', 'obsnot', 'tipnot', 'reapor', 'status', 'rifent', 'noment', 'fecanu', 'autori', 'fecaut', 'autpor', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nronot' => 0, 'Fecnot' => 1, 'Codcli' => 2, 'Tipref' => 3, 'Codref' => 4, 'Codalm' => 5, 'Desnot' => 6, 'Monnot' => 7, 'Obsnot' => 8, 'Tipnot' => 9, 'Reapor' => 10, 'Status' => 11, 'Rifent' => 12, 'Noment' => 13, 'Fecanu' => 14, 'Autori' => 15, 'Fecaut' => 16, 'Autpor' => 17, 'Id' => 18, ),
-		BasePeer::TYPE_COLNAME => array (FanotentPeer::NRONOT => 0, FanotentPeer::FECNOT => 1, FanotentPeer::CODCLI => 2, FanotentPeer::TIPREF => 3, FanotentPeer::CODREF => 4, FanotentPeer::CODALM => 5, FanotentPeer::DESNOT => 6, FanotentPeer::MONNOT => 7, FanotentPeer::OBSNOT => 8, FanotentPeer::TIPNOT => 9, FanotentPeer::REAPOR => 10, FanotentPeer::STATUS => 11, FanotentPeer::RIFENT => 12, FanotentPeer::NOMENT => 13, FanotentPeer::FECANU => 14, FanotentPeer::AUTORI => 15, FanotentPeer::FECAUT => 16, FanotentPeer::AUTPOR => 17, FanotentPeer::ID => 18, ),
-		BasePeer::TYPE_FIELDNAME => array ('nronot' => 0, 'fecnot' => 1, 'codcli' => 2, 'tipref' => 3, 'codref' => 4, 'codalm' => 5, 'desnot' => 6, 'monnot' => 7, 'obsnot' => 8, 'tipnot' => 9, 'reapor' => 10, 'status' => 11, 'rifent' => 12, 'noment' => 13, 'fecanu' => 14, 'autori' => 15, 'fecaut' => 16, 'autpor' => 17, 'id' => 18, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
+		BasePeer::TYPE_PHPNAME => array ('Nronot' => 0, 'Fecnot' => 1, 'Codcli' => 2, 'Tipref' => 3, 'Codref' => 4, 'Desnot' => 5, 'Monnot' => 6, 'Obsnot' => 7, 'Tipnot' => 8, 'Reapor' => 9, 'Status' => 10, 'Rifent' => 11, 'Noment' => 12, 'Fecanu' => 13, 'Autori' => 14, 'Fecaut' => 15, 'Autpor' => 16, 'Id' => 17, ),
+		BasePeer::TYPE_COLNAME => array (FanotentPeer::NRONOT => 0, FanotentPeer::FECNOT => 1, FanotentPeer::CODCLI => 2, FanotentPeer::TIPREF => 3, FanotentPeer::CODREF => 4, FanotentPeer::DESNOT => 5, FanotentPeer::MONNOT => 6, FanotentPeer::OBSNOT => 7, FanotentPeer::TIPNOT => 8, FanotentPeer::REAPOR => 9, FanotentPeer::STATUS => 10, FanotentPeer::RIFENT => 11, FanotentPeer::NOMENT => 12, FanotentPeer::FECANU => 13, FanotentPeer::AUTORI => 14, FanotentPeer::FECAUT => 15, FanotentPeer::AUTPOR => 16, FanotentPeer::ID => 17, ),
+		BasePeer::TYPE_FIELDNAME => array ('nronot' => 0, 'fecnot' => 1, 'codcli' => 2, 'tipref' => 3, 'codref' => 4, 'desnot' => 5, 'monnot' => 6, 'obsnot' => 7, 'tipnot' => 8, 'reapor' => 9, 'status' => 10, 'rifent' => 11, 'noment' => 12, 'fecanu' => 13, 'autori' => 14, 'fecaut' => 15, 'autpor' => 16, 'id' => 17, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
 	);
 
 	
@@ -156,8 +153,6 @@ abstract class BaseFanotentPeer {
 		$criteria->addSelectColumn(FanotentPeer::TIPREF);
 
 		$criteria->addSelectColumn(FanotentPeer::CODREF);
-
-		$criteria->addSelectColumn(FanotentPeer::CODALM);
 
 		$criteria->addSelectColumn(FanotentPeer::DESNOT);
 
@@ -285,6 +280,7 @@ abstract class BaseFanotentPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FanotentPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

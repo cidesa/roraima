@@ -1,0 +1,6584 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  npaccadm:
+    #_attributes:
+      #idMethod: native
+    codaccadm:
+      type: VARCHAR
+      size: 4
+    desaccadm:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npaccrac:
+    #_attributes:
+      #idMethod: native
+    codaccadm:
+      type: VARCHAR
+      size: 4
+    codemp:
+      type: VARCHAR
+      size: 16
+    codrac:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npacumulacpt:
+    #_attributes:
+      #idMethod: native
+    codacu:
+      type: VARCHAR
+      size: 3
+    nomacu:
+      type: VARCHAR
+      size: 250
+    codcon:
+      type: VARCHAR
+      size: 3
+    tipacu:
+      type: VARCHAR
+      size: 1
+    factor:
+      type: NUMERIC
+      size: 10
+      scale: 5
+      default: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npadeint:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    fecade:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    monade:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npantpre:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    fecant:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    monant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    observacion:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasicaremp:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+      ##primaryKey: true
+    fecasi:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    nomemp:
+      type: VARCHAR
+      size: 510
+    nomcar:
+      type: VARCHAR
+      size: 1000
+    nomnom:
+      type: VARCHAR
+      size: 290
+    nomcat:
+      type: VARCHAR
+      size: 400
+    unieje:
+      type: VARCHAR
+      size: 30
+    sueldo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    status:
+      type: VARCHAR
+      size: 1
+      required: true
+      ##primaryKey: true
+    nronom:
+      type: VARCHAR
+      size: 16
+    montonomina:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codtip:
+      type: VARCHAR
+      size: 32
+    codtipgas:
+      type: VARCHAR
+      size: 4
+    codniv:
+      type: VARCHAR
+      size: 16
+    grado:
+      type: VARCHAR
+      size: 3
+    paso:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npasicaremp:
+        - codnom
+        - status
+        - codemp
+      i02npasicaremp:
+        - codemp
+  npasicarnom:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasicarpre:
+    #_attributes:
+      #idMethod: native
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    canpre:
+      type: NUMERIC
+      size: 6
+      required: true
+    canasi:
+      type: NUMERIC
+      size: 6
+      required: true
+    monpre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    codniv:
+      type: VARCHAR
+      size: 16
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasicarracemp:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcarrac:
+      type: VARCHAR
+      size: 16
+    codsecue:
+      type: VARCHAR
+      size: 6
+    comcar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    pricar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codaccadm:
+      type: VARCHAR
+      size: 4
+    codregpai:
+      type: VARCHAR
+      size: 4
+    codregedo:
+      type: VARCHAR
+      size: 4
+    codregciu:
+      type: VARCHAR
+      size: 4
+    codcatrac:
+      type: VARCHAR
+      size: 32
+    codbanrac:
+      type: VARCHAR
+      size: 2
+    codgrulab:
+      type: VARCHAR
+      size: 4
+    nomsup:
+      type: VARCHAR
+      size: 250
+    carsup:
+      type: VARCHAR
+      size: 16
+    codnivorg:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasicatconemp:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcar:
+      type: VARCHAR
+      size: 16
+    codnom:
+      type: VARCHAR
+      size: 3
+    codcon:
+      type: VARCHAR
+      size: 3
+    codcat:
+      type: VARCHAR
+      size: 59
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasicodpre:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasicon:
+    #_attributes:
+      #idMethod: native
+    codcat:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    nomsus:
+      type: VARCHAR
+      size: 30
+    fecini:
+      type: DATE
+    fecexp:
+      type: DATE
+    salcon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpre:
+      type: NUMERIC
+      size: 17
+      scale: 2
+    canmon:
+      type: VARCHAR
+      size: 1
+    calcon:
+      type: VARCHAR
+      size: 1
+    actcon:
+      type: VARCHAR
+      size: 1
+    frecon:
+      type: VARCHAR
+      size: 1
+    codpre:
+      type: VARCHAR
+      size: 32
+    monmen:
+      type: NUMERIC
+      size: 17
+      scale: 2
+    frecue:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasiconemp:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    nomemp:
+      type: VARCHAR
+      size: 31
+      required: true
+    nomcon:
+      type: VARCHAR
+      size: 100
+      required: true
+    nomcar:
+      type: VARCHAR
+      size: 100
+      required: true
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecini:
+      type: DATE
+    fecexp:
+      type: DATE
+    frecon:
+      type: VARCHAR
+      size: 1
+    asided:
+      type: VARCHAR
+      size: 1
+    acucon:
+      type: VARCHAR
+      size: 1
+    calcon:
+      type: VARCHAR
+      size: 1
+    activo:
+      type: VARCHAR
+      size: 1
+      required: true
+    acumulado:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npasiconemp:
+        - activo
+        - codemp
+        - codcar
+        - codcon
+      i02npasiconemp:
+        - activo
+        - fecini
+        - fecexp
+        - codemp
+        - codcar
+        - calcon
+        - frecon
+  npasiconempbck:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    nomemp:
+      type: VARCHAR
+      size: 31
+      required: true
+    nomcon:
+      type: VARCHAR
+      size: 100
+      required: true
+    nomcar:
+      type: VARCHAR
+      size: 100
+      required: true
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecini:
+      type: DATE
+    fecexp:
+      type: DATE
+    frecon:
+      type: VARCHAR
+      size: 1
+    asided:
+      type: VARCHAR
+      size: 1
+    acucon:
+      type: VARCHAR
+      size: 1
+    calcon:
+      type: VARCHAR
+      size: 1
+    activo:
+      type: VARCHAR
+      size: 1
+      required: true
+    acumulado:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasiconnom:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    frecon:
+      type: VARCHAR
+      size: 1
+      required: true
+    activo:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasiconnom_aux:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    frecon:
+      type: VARCHAR
+      size: 1
+      required: true
+    activo:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasiconsue:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+    codcom:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasiempcont:
+    #_attributes:
+      #idMethod: native
+    codtipcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    nomemp:
+      type: VARCHAR
+      size: 250
+      required: true
+      ##primaryKey: true
+    feccal:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasinomcont:
+    #_attributes:
+      #idMethod: native
+    codtipcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasipre:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codasi:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    desasi:
+      type: VARCHAR
+      size: 50
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasoconcla:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codcla:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasocontra:
+    #_attributes:
+      #idMethod: native
+    codconant:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codconact:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npbancos:
+    #_attributes:
+      #idMethod: native
+    codban:
+      type: VARCHAR
+      size: 2
+      required: true
+      ##primaryKey: true
+    nomban:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npbenemp:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codcon:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    cedben:
+      type: VARCHAR
+      size: 10
+    nomben:
+      type: VARCHAR
+      size: 50
+    codban:
+      type: VARCHAR
+      size: 2
+    numcue:
+      type: VARCHAR
+      size: 31
+    codcar:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npbonocont:
+    #_attributes:
+      #idMethod: native
+    codtipcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    anovig:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    desde:
+      type: NUMERIC
+      size: 2
+      required: true
+      ##primaryKey: true
+    hasta:
+      type: NUMERIC
+      size: 2
+      required: true
+      ##primaryKey: true
+    diauti:
+      type: NUMERIC
+      size: 3
+      required: true
+    diavac:
+      type: NUMERIC
+      size: 3
+      required: true
+    anovighas:
+      type: DATE
+    calinc:
+      type: VARCHAR
+      size: 1
+      default: N
+    antap:
+      type: VARCHAR
+      size: 1
+    antapvac:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcajaho:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codconpat:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcontra:
+      type: VARCHAR
+      size: 3
+      required: true
+    codconpre:
+      type: VARCHAR
+      size: 3
+    codconamo:
+      type: VARCHAR
+      size: 3
+    codconint:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcalcon:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    numcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    campo:
+      type: VARCHAR
+      size: 20
+    operador:
+      type: VARCHAR
+      size: 2
+    valor:
+      type: VARCHAR
+      size: 20
+    confor:
+      type: VARCHAR
+      size: 1000
+      required: true
+    tipcal:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npcalcon:
+        - codcon
+        - codnom
+  npcalconcol:
+    #_attributes:
+      #idMethod: native
+    codctr:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codcla:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    cantra:
+      type: NUMERIC
+      size: 5
+      required: true
+    moncla:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    totcla:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    bascal:
+      type: VARCHAR
+      size: 2500
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcalislr:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    fecini:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    feccie:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    mesper:
+      type: NUMERIC
+      size: 2
+      required: true
+      ##primaryKey: true
+    anoper:
+      type: NUMERIC
+      size: 4
+      required: true
+      ##primaryKey: true
+    remune:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    impret:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcalvac:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    caudes:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    cauhas:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    disdes:
+      type: DATE
+    dishas:
+      type: DATE
+    fecrei:
+      type: DATE
+    fecreg:
+      type: DATE
+    diavac:
+      type: NUMERIC
+      size: 6
+      required: true
+    dianhab:
+      type: NUMERIC
+      size: 6
+    diaant:
+      type: NUMERIC
+      size: 6
+    diapag:
+      type: NUMERIC
+      size: 6
+    diadis:
+      type: NUMERIC
+      size: 6
+    diabon:
+      type: NUMERIC
+      size: 6
+    monvac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    monbon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    status:
+      type: VARCHAR
+      size: 1
+      required: true
+    stapag:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcargos:
+    #_attributes:
+      #idMethod: native
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    nomcar:
+      type: VARCHAR
+      size: 100
+      required: true
+    suecar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    stacar:
+      type: VARCHAR
+      size: 1
+      required: true
+    codocp:
+      type: VARCHAR
+      size: 16
+    punmin:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    graocp:
+      type: VARCHAR
+      size: 3
+    comcar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    pasocp:
+      type: VARCHAR
+      size: 3
+    codtip:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+  npcargosocp:
+    #_attributes:
+      #idMethod: native
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codpas:
+      type: VARCHAR
+      size: 10
+    codgra:
+      type: VARCHAR
+      size: 10
+    sueldo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    descar:
+      type: VARCHAR
+      size: 100
+    comcar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcargosrac:
+    #_attributes:
+      #idMethod: native
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    nomcar:
+      type: VARCHAR
+      size: 100
+      required: true
+    suecar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    stacar:
+      type: VARCHAR
+      size: 1
+      required: true
+    codcat:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codocp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    punmin:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    graocp:
+      type: VARCHAR
+      size: 3
+    comcar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    pasocp:
+      type: VARCHAR
+      size: 3
+    codtip:
+      type: VARCHAR
+      size: 4
+    tipper:
+      type: VARCHAR
+      size: 4
+    feccar:
+      type: VARCHAR
+      size: 4
+    codemp:
+      type: VARCHAR
+      size: 16
+    nomemp:
+      type: VARCHAR
+      size: 250
+    nronom:
+      type: VARCHAR
+      size: 16
+    estorg:
+      type: VARCHAR
+      size: 16
+    anorac:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcarocp:
+    #_attributes:
+      #idMethod: native
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    descar:
+      type: VARCHAR
+      size: 50
+      required: true
+    gracar:
+      type: VARCHAR
+      size: 3
+      required: true
+    suecar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tipcar:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    funcar:
+      type: VARCHAR
+      size: 2500
+    atrcar:
+      type: VARCHAR
+      size: 2500
+    actcar:
+      type: VARCHAR
+      size: 2500
+    rescar:
+      type: VARCHAR
+      size: 2500
+    anocar:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcarpre:
+    #_attributes:
+      #idMethod: native
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    canpre:
+      type: NUMERIC
+      size: 6
+      required: true
+    canasi:
+      type: NUMERIC
+      size: 6
+      required: true
+    monpre:
+      type: NUMERIC
+      size: 17
+      scale: 2
+      required: true
+    monasi:
+      type: NUMERIC
+      size: 17
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcarrac:
+    #_attributes:
+      #idMethod: native
+    codcarrac:
+      type: VARCHAR
+      size: 16
+      required: true
+    codnivorg:
+      type: VARCHAR
+      size: 16
+      required: true
+    sueldo:
+      type: NUMERIC
+      size: 32
+      scale: 2
+    descar:
+      type: VARCHAR
+      size: 250
+    cancar:
+      type: NUMERIC
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcatpre:
+    _attributes:
+      readOnly: true
+      skipSql: true
+    codcat:
+      type: VARCHAR
+      size: 32
+    nomcat:
+      type: VARCHAR
+      size: 100
+  npcatprehis:
+    #_attributes:
+      #idMethod: native
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+      ##primaryKey: true
+    nomcat:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcertificados:
+    #_attributes:
+      #idMethod: native
+    codadi:
+      type: VARCHAR
+      size: 4
+    codcer:
+      type: VARCHAR
+      size: 4
+    descer:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcestatickets:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    monpor:
+      type: VARCHAR
+      size: 1
+    valtic:
+      type: NUMERIC
+      size: 32
+      scale: 2
+    numtic:
+      type: NUMERIC
+      size: 5
+    tippag:
+      type: VARCHAR
+      size: 1
+    numdia:
+      type: NUMERIC
+      size: 5
+    diahab:
+      type: VARCHAR
+      size: 1
+    sabado:
+      type: VARCHAR
+      size: 1
+    doming:
+      type: VARCHAR
+      size: 1
+    diafer:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcienom:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    fecnom:
+      type: DATE
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    asided:
+      type: VARCHAR
+      size: 1
+    codtipgas:
+      type: VARCHAR
+      size: 16
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codban:
+      type: VARCHAR
+      size: 16
+    especial:
+      type: VARCHAR
+      size: 1
+      default: N
+    codnomesp:
+      type: VARCHAR
+      size: 3
+    nomnomesp:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npciudad:
+    #_attributes:
+      #idMethod: native
+    codciu:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codedo:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codpai:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    nomciu:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcodpostal:
+    #_attributes:
+      #idMethod: native
+    codpos:
+      type: VARCHAR
+      size: 4
+    ciupos:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcomocp:
+    #_attributes:
+      #idMethod: native
+    pascar:
+      type: VARCHAR
+      size: 3
+    gracar:
+      type: VARCHAR
+      size: 3
+    suecar:
+      type: NUMERIC
+    codtipcar:
+      type: VARCHAR
+      size: 3
+      required: true
+    fecdes:
+      type: DATE
+      #default: to_date(01/01/1900)
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconaho:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    tipcon:
+      type: VARCHAR
+      size: 1
+    tipnom:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconarc:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+    codnom:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconasi:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+    codasi:
+      type: VARCHAR
+      size: 3
+    codcpt:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconasi_old:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codasi:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codcpt:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconceptosbono:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconceptoscategoria:
+    #_attributes:
+      #idMethod: native
+    codcat:
+      type: VARCHAR
+      size: 16
+    codcon:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconceptosdeducciones:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconceptosprima:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconceptossalario:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconcomp:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codcon:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconfon:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    tipcon:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconian:
+    #_attributes:
+      #idMethod: native
+    conian:
+      type: VARCHAR
+      size: 3
+    concid:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconpri:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codcon:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconret:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    fecini:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    feccie:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconsalint:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codcon:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npconsueldo:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codcon:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcontipaporet:
+    #_attributes:
+      #idMethod: native
+    codtipapo:
+      type: VARCHAR
+      size: 4
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+    tipo:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcontra:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    periodico:
+      type: VARCHAR
+      size: 1
+      default: S
+    identi:
+      type: VARCHAR
+      size: 50
+    tipo:
+      type: VARCHAR
+      size: 1
+      default: N
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcontrato:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    descon:
+      type: VARCHAR
+      size: 250
+      required: true
+    fecini:
+      type: DATE
+    fecfin:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npcuentas:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    numcue:
+      type: VARCHAR
+      size: 20
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefcla:
+    #_attributes:
+      #idMethod: native
+    codcla:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    descla:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefconcasep:
+    #_attributes:
+      #idMethod: native
+    tipo:
+      type: VARCHAR
+      size: 12
+    codnom:
+      type: VARCHAR
+      size: 3
+    codcon:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefcpt:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    nomcon:
+      type: VARCHAR
+      size: 100
+      required: true
+    codpar:
+      type: VARCHAR
+      size: 16
+      required: true
+    opecon:
+      type: VARCHAR
+      size: 1
+      required: true
+    acuhis:
+      type: VARCHAR
+      size: 1
+      required: true
+    inimon:
+      type: VARCHAR
+      size: 1
+      required: true
+    conact:
+      type: VARCHAR
+      size: 1
+      required: true
+    impcpt:
+      type: VARCHAR
+      size: 1
+      required: true
+    ordpag:
+      type: VARCHAR
+      size: 1
+      required: true
+    afepre:
+      type: VARCHAR
+      size: 1
+    frecon:
+      type: VARCHAR
+      size: 1
+    nrocta:
+      type: VARCHAR
+      size: 20
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefctb:
+    #_attributes:
+      #idMethod: native
+    coduni:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codcta:
+      type: VARCHAR
+      size: 18
+      required: true
+    nomcta:
+      type: VARCHAR
+      size: 30
+      required: true
+    debcre:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefgen:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    loncodcar:
+      type: NUMERIC
+      size: 2
+    loncodemp:
+      type: NUMERIC
+      size: 2
+    loncodorg:
+      type: NUMERIC
+      size: 2
+    loncoduni:
+      type: NUMERIC
+      size: 2
+    rupcar:
+      type: NUMERIC
+      size: 2
+    rupemp:
+      type: NUMERIC
+      size: 2
+    ruporg:
+      type: NUMERIC
+      size: 2
+    rupuni:
+      type: NUMERIC
+      size: 2
+    forcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    foremp:
+      type: VARCHAR
+      size: 16
+      required: true
+    fororg:
+      type: VARCHAR
+      size: 16
+      required: true
+    foruni:
+      type: VARCHAR
+      size: 16
+      required: true
+    redmon:
+      type: VARCHAR
+      size: 1
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 3
+    codvac:
+      type: VARCHAR
+      size: 3
+    codvacfra:
+      type: VARCHAR
+      size: 3
+    codvaccol:
+      type: VARCHAR
+      size: 3
+    codislr:
+      type: VARCHAR
+      size: 3
+    codpres:
+      type: VARCHAR
+      size: 3
+    codsso:
+      type: VARCHAR
+      size: 3
+    sueint:
+      type: VARCHAR
+      size: 3
+    asiconnom:
+      type: VARCHAR
+      size: 1
+      default: S
+    cierac:
+      type: VARCHAR
+      size: 1
+      default: N
+    foresc:
+      type: VARCHAR
+      size: 16
+    numrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    forcarrac:
+      type: VARCHAR
+      size: 16
+    forcarocp:
+      type: VARCHAR
+      size: 16
+    correl:
+      type: NUMERIC
+      size: 6
+    porctick:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    unitrib:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    numtick:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diasem:
+      type: NUMERIC
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefjorlab:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    idejor:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    lunes:
+      type: VARCHAR
+      size: 1
+    martes:
+      type: VARCHAR
+      size: 1
+    miercoles:
+      type: VARCHAR
+      size: 1
+    jueves:
+      type: VARCHAR
+      size: 1
+    viernes:
+      type: VARCHAR
+      size: 1
+    sabado:
+      type: VARCHAR
+      size: 1
+    domingo:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefmov:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    status:
+      type: VARCHAR
+      size: 1
+      required: true
+      ##primaryKey: true
+    mensaje:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefpagext:
+    #_attributes:
+      #idMethod: native
+    codgrunom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    fecha1:
+      type: DATE
+      required: true
+    fecha2:
+      type: DATE
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefpar:
+    #_attributes:
+      #idMethod: native
+    codcol:
+      type: VARCHAR
+      size: 100
+    nomcol:
+      type: VARCHAR
+      size: 100
+    tipcol:
+      type: VARCHAR
+      size: 20
+    loncol:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefpreliq:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    perdes:
+      type: VARCHAR
+      size: 4
+      required: true
+    perhas:
+      type: VARCHAR
+      size: 4
+      required: true
+    codpar:
+      type: VARCHAR
+      size: 16
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefrepdin:
+    #_attributes:
+      #idMethod: native
+    codrep:
+      type: VARCHAR
+      size: 100
+    codcol:
+      type: VARCHAR
+      size: 100
+    nomcol:
+      type: VARCHAR
+      size: 100
+    valdes:
+      type: VARCHAR
+      size: 100
+    valhas:
+      type: VARCHAR
+      size: 100
+    orden:
+      type: VARCHAR
+      size: 3
+    tipcol:
+      type: VARCHAR
+      size: 20
+    loncol:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdefvar:
+    #_attributes:
+      #idMethod: native
+    codvar:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    desvar:
+      type: VARCHAR
+      size: 30
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    valor1:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    valor2:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    valor3:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    valor4:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    valor5:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdepban:
+    #_attributes:
+      #idMethod: native
+    numlin:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    desdep:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npdepban:
+        - numlin
+  npdepbanfid:
+    #_attributes:
+      #idMethod: native
+    numlin:
+      type: NUMERIC
+      size: 14
+    desdep:
+      type: VARCHAR
+      size: 255
+    codemp:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdepbanusu:
+    #_attributes:
+      #idMethod: native
+    numlin:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    desdep:
+      type: VARCHAR
+      size: 1000
+    usuario:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npdepbanusu:
+        - numlin
+  npdepcajaho:
+    #_attributes:
+      #idMethod: native
+    numlin:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    desdep:
+      type: VARCHAR
+      size: 1000
+    codemp:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdepfid:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    fecnom:
+      type: DATE
+    fecing:
+      type: DATE
+    devengado:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diasdeposito:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fideicomiso:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcar:
+      type: VARCHAR
+      size: 16
+    codnom:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdepfide:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    fecnom:
+      type: DATE
+    devengado:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdesniv:
+    #_attributes:
+      #idMethod: native
+    codigo:
+      type: VARCHAR
+      size: 6
+      required: true
+      ##primaryKey: true
+    consec:
+      type: NUMERIC
+      size: 2
+      required: true
+      ##primaryKey: true
+    nomabr:
+      type: VARCHAR
+      size: 10
+      required: true
+    nomext:
+      type: VARCHAR
+      size: 50
+      required: true
+    lonniv:
+      type: NUMERIC
+      size: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdiaadicnom:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdiaext:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    fecha:
+      type: DATE
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npdisccesta:
+    #_attributes:
+      #idMethod: native
+    numlin:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    desdep:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npdisccesta:
+        - numlin
+  npempjorlab:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    idejor:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npempleados_banco:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codempant:
+      type: VARCHAR
+      size: 14
+    codban:
+      type: VARCHAR
+      size: 2
+    cuenta_banco:
+      type: VARCHAR
+      size: 20
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codnom:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npempvac:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    caudes:
+      type: DATE
+      required: true
+    cauhas:
+      type: DATE
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    fecfin:
+      type: DATE
+      required: true
+    fecreg:
+      type: DATE
+      required: true
+    bonvac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    vacaci:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npescalas:
+    #_attributes:
+      #idMethod: native
+    grado:
+      type: VARCHAR
+      size: 2
+    paso:
+      type: VARCHAR
+      size: 2
+    salario:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npescsue:
+    #_attributes:
+      #idMethod: native
+    codesc:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    valini:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    valfin:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npescuelas:
+    #_attributes:
+      #idMethod: native
+    codescuela:
+      type: VARCHAR
+      size: 16
+    nombreescuela:
+      type: VARCHAR
+      size: 100
+    codmunicipio:
+      type: VARCHAR
+      size: 14
+    nombremunicipio:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npestado:
+    #_attributes:
+      #idMethod: native
+    codedo:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codpai:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    nomedo:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npestorg:
+    #_attributes:
+      #idMethod: native
+    codniv:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    desniv:
+      type: VARCHAR
+      size: 100
+      required: true
+    telext:
+      type: VARCHAR
+      size: 20
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npexplab:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    nomemp:
+      type: VARCHAR
+      size: 60
+    codcar:
+      type: VARCHAR
+      size: 16
+    descar:
+      type: VARCHAR
+      size: 100
+      required: true
+    fecini:
+      type: DATE
+    fecter:
+      type: DATE
+    sueobt:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacar:
+      type: VARCHAR
+      size: 1
+      required: true
+    compobt:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    durexp:
+      type: VARCHAR
+      size: 50
+    tiporg:
+      type: VARCHAR
+      size: 30
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npfalper:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codmot:
+      type: VARCHAR
+      size: 4
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    nrodia:
+      type: NUMERIC
+      size: 4
+    observ:
+      type: VARCHAR
+      size: 250
+    fecdes:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    fechas:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npfideicomiso:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcar:
+      type: VARCHAR
+      size: 16
+    fecnom:
+      type: DATE
+    fecasi:
+      type: DATE
+    dias:
+      type: NUMERIC
+      size: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npfondoprestaciones:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codconacudia:
+      type: VARCHAR
+      size: 3
+      required: true
+    codconacumonto:
+      type: VARCHAR
+      size: 3
+      required: true
+    codconacuinteres:
+      type: VARCHAR
+      size: 3
+      required: true
+    capitalizarinteres:
+      type: VARCHAR
+      size: 1
+      required: true
+    acumprestamos:
+      type: VARCHAR
+      size: 1
+      required: true
+    codconprestamo:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npforcaremp:
+    #_attributes:
+      #idMethod: native
+    codcat:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    suebas:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    suplen:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    priant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    hediur:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    pordiu:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    henoct:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    pornoc1:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    pornoc2:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    bonvac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    clau74:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    otrcom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    priefi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    pritra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    aguinal:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npgrulab:
+    #_attributes:
+      #idMethod: native
+    codgrulab:
+      type: VARCHAR
+      size: 4
+    desgrulab:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npgrunom:
+    #_attributes:
+      #idMethod: native
+    codgrunom:
+      type: VARCHAR
+      size: 3
+    nomgrunom:
+      type: VARCHAR
+      size: 250
+    codnom:
+      type: VARCHAR
+      size: 3
+    tipo:
+      type: VARCHAR
+      size: 1
+    fecha1:
+      type: DATE
+    fecha2:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npguarde:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    nomgua:
+      type: VARCHAR
+      size: 250
+    nomcon:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nphiineg:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    fecing:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    fecegr:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    observ:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nphisasicaremp:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcat:
+      type: VARCHAR
+      size: 16
+      required: true
+    fecasi:
+      type: DATE
+      required: true
+    nomemp:
+      type: VARCHAR
+      size: 51
+    nomcar:
+      type: VARCHAR
+      size: 30
+    nomnom:
+      type: VARCHAR
+      size: 29
+    nomcat:
+      type: VARCHAR
+      size: 40
+    unieje:
+      type: VARCHAR
+      size: 30
+    sueldo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    status:
+      type: VARCHAR
+      size: 1
+      required: true
+    montonomina:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codtip:
+      type: VARCHAR
+      size: 32
+    codtipgas:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nphiscon:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcar:
+      type: VARCHAR
+      size: 16
+    codcon:
+      type: VARCHAR
+      size: 3
+    fecnom:
+      type: DATE
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcat:
+      type: VARCHAR
+      size: 32
+    codpar:
+      type: VARCHAR
+      size: 16
+    codescuela:
+      type: VARCHAR
+      size: 7
+    codniv:
+      type: VARCHAR
+      size: 16
+    codtipgas:
+      type: VARCHAR
+      size: 4
+    nomcon:
+      type: VARCHAR
+      size: 100
+    numrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cantidad:
+      type: NUMERIC
+      size: 18
+      scale: 3
+    fecnomdes:
+      type: DATE
+    especial:
+      type: VARCHAR
+      size: 1
+    fecnomespdes:
+      type: DATE
+    fecnomesphas:
+      type: DATE
+    codnomesp:
+      type: VARCHAR
+      size: 3
+    nomnomesp:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nphiscon_06022007_sincambio:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcar:
+      type: VARCHAR
+      size: 16
+    codcon:
+      type: VARCHAR
+      size: 3
+    fecnom:
+      type: DATE
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcat:
+      type: VARCHAR
+      size: 32
+    codpar:
+      type: VARCHAR
+      size: 16
+    codescuela:
+      type: VARCHAR
+      size: 7
+    codniv:
+      type: VARCHAR
+      size: 16
+    codtipgas:
+      type: VARCHAR
+      size: 4
+    nomcon:
+      type: VARCHAR
+      size: 100
+    numrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cantidad:
+      type: NUMERIC
+      size: 18
+      scale: 3
+    fecnomdes:
+      type: DATE
+    especial:
+      type: VARCHAR
+      size: 1
+    fecnomespdes:
+      type: DATE
+    fecnomesphas:
+      type: DATE
+    codnomesp:
+      type: VARCHAR
+      size: 3
+    nomnomesp:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nphiscon_borra:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcar:
+      type: VARCHAR
+      size: 16
+    codcon:
+      type: VARCHAR
+      size: 3
+    fecnom:
+      type: DATE
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcat:
+      type: VARCHAR
+      size: 16
+    codpar:
+      type: VARCHAR
+      size: 16
+    codescuela:
+      type: VARCHAR
+      size: 7
+    codniv:
+      type: VARCHAR
+      size: 16
+    codtipgas:
+      type: VARCHAR
+      size: 4
+    nomcon:
+      type: VARCHAR
+      size: 100
+    numrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cantidad:
+      type: NUMERIC
+      size: 18
+      scale: 3
+    fecnomdes:
+      type: DATE
+    especial:
+      type: VARCHAR
+      size: 1
+      default: N
+    fecnomespdes:
+      type: DATE
+    fecnomesphas:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nphiscon_old:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    fecnom:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcat:
+      type: VARCHAR
+      size: 32
+    codpar:
+      type: VARCHAR
+      size: 16
+    codescuela:
+      type: VARCHAR
+      size: 7
+    codniv:
+      type: VARCHAR
+      size: 16
+    codtipgas:
+      type: VARCHAR
+      size: 4
+    nomcon:
+      type: VARCHAR
+      size: 100
+    numrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    cantidad:
+      type: NUMERIC
+      size: 18
+      scale: 3
+    fecnomdes:
+      type: DATE
+    especial:
+      type: VARCHAR
+      size: 1
+      default: N
+    fecnomespdes:
+      type: DATE
+    fecnomesphas:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01nphiscon:
+        - codnom
+        - codemp
+        - codcar
+        - codcon
+        - fecnom
+      i02nphiscon:
+        - codnom
+        - codcon
+        - fecnom
+  nphiscon_r:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    fecnom:
+      type: DATE
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codcat:
+      type: VARCHAR
+      size: 16
+    codpar:
+      type: VARCHAR
+      size: 16
+    codescuela:
+      type: VARCHAR
+      size: 7
+    codniv:
+      type: VARCHAR
+      size: 16
+    codtipgas:
+      type: VARCHAR
+      size: 4
+    nomcon:
+      type: VARCHAR
+      size: 100
+    numrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nphispre:
+    #_attributes:
+      #idMethod: native
+    codtippre:
+      type: VARCHAR
+      size: 4
+      required: true
+    fechispre:
+      type: DATE
+    deshispre:
+      type: VARCHAR
+      size: 250
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    monpre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    saldo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nphojint:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    nomemp:
+      type: VARCHAR
+      size: 100
+      required: true
+    cedemp:
+      type: VARCHAR
+      size: 10
+      required: true
+    numcon:
+      type: VARCHAR
+      size: 20
+    edociv:
+      type: VARCHAR
+      size: 1
+    nacemp:
+      type: VARCHAR
+      size: 1
+    sexemp:
+      type: VARCHAR
+      size: 1
+    fecnac:
+      type: DATE
+    edaemp:
+      type: NUMERIC
+      size: 2
+    lugnac:
+      type: VARCHAR
+      size: 30
+    dirhab:
+      type: VARCHAR
+      size: 1000
+    codciu:
+      type: VARCHAR
+      size: 4
+    telhab:
+      type: VARCHAR
+      size: 20
+    celemp:
+      type: VARCHAR
+      size: 20
+    emaemp:
+      type: VARCHAR
+      size: 40
+    codpos:
+      type: VARCHAR
+      size: 4
+    talpan:
+      type: VARCHAR
+      size: 2
+    talcam:
+      type: VARCHAR
+      size: 4
+    talcal:
+      type: NUMERIC
+      size: 2
+    derzur:
+      type: VARCHAR
+      size: 1
+    fecing:
+      type: DATE
+    fecret:
+      type: DATE
+    fecrei:
+      type: DATE
+    fecadmpub:
+      type: DATE
+    staemp:
+      type: VARCHAR
+      size: 1
+      required: true
+    fotemp:
+      type: VARCHAR
+      size: 100
+    numsso:
+      type: VARCHAR
+      size: 31
+    numpolseg:
+      type: VARCHAR
+      size: 31
+    feccotsso:
+      type: DATE
+    anoadmpub:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codtippag:
+      type: VARCHAR
+      size: 2
+    codban:
+      type: VARCHAR
+      size: 2
+    tipcue:
+      type: VARCHAR
+      size: 20
+    numcue:
+      type: VARCHAR
+      size: 31
+    obsemp:
+      type: VARCHAR
+      size: 100
+    tiefid:
+      type: VARCHAR
+      size: 1
+    grulab:
+      type: VARCHAR
+      size: 4
+    gruotr:
+      type: VARCHAR
+      size: 30
+    traslado:
+      type: VARCHAR
+      size: 1
+    traotr:
+      type: VARCHAR
+      size: 30
+    tipviv:
+      type: VARCHAR
+      size: 1
+    vivotr:
+      type: VARCHAR
+      size: 30
+    forten:
+      type: VARCHAR
+      size: 1
+    tenotr:
+      type: VARCHAR
+      size: 30
+    sercon:
+      type: VARCHAR
+      size: 16
+    dirotr:
+      type: VARCHAR
+      size: 1000
+    telotr:
+      type: VARCHAR
+      size: 100
+    codpai:
+      type: VARCHAR
+      size: 4
+    codpa2:
+      type: VARCHAR
+      size: 4
+    codest:
+      type: VARCHAR
+      size: 4
+    codes2:
+      type: VARCHAR
+      size: 4
+    codci2:
+      type: VARCHAR
+      size: 4
+    codrac:
+      type: VARCHAR
+      size: 10
+    codniv:
+      type: VARCHAR
+      size: 16
+    telha2:
+      type: VARCHAR
+      size: 20
+    telot2:
+      type: VARCHAR
+      size: 100
+    codprofes:
+      type: VARCHAR
+      size: 4
+    hcmexo:
+      type: VARCHAR
+      size: 1
+    codbanfid:
+      type: VARCHAR
+      size: 2
+    codbanlph:
+      type: VARCHAR
+      size: 2
+    numcuefid:
+      type: VARCHAR
+      size: 31
+    numcuelph:
+      type: VARCHAR
+      size: 31
+    codempant:
+      type: VARCHAR
+      size: 14
+    grusan:
+      type: VARCHAR
+      size: 10
+    obsgen:
+      type: VARCHAR
+      size: 1000
+    codregpai:
+      type: VARCHAR
+      size: 4
+    codregest:
+      type: VARCHAR
+      size: 4
+    codregciu:
+      type: VARCHAR
+      size: 4
+    fecgra:
+      type: DATE
+    grusangre:
+      type: VARCHAR
+      size: 5
+    numgaceta:
+      type: VARCHAR
+      size: 15
+    fecgaceta:
+      type: DATE
+    diagra:
+      type: VARCHAR
+      size: 2
+    mesgra:
+      type: VARCHAR
+      size: 2
+    anogra:
+      type: VARCHAR
+      size: 4
+    temporal:
+      type: NUMERIC
+      size: 1
+    detexp:
+      type: VARCHAR
+      size: 15
+    numexp:
+      type: VARCHAR
+      size: 15
+    modpagcestic:
+      type: VARCHAR
+      size: 1
+    codret:
+      type: VARCHAR
+      size: 2
+    situac:
+      type: VARCHAR
+      size: 1
+    profes:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _uniques:
+      un_nphojint:
+        - cedemp
+  nphojintban:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    ctaban:
+      type: VARCHAR
+      size: 31
+    codban:
+      type: VARCHAR
+      size: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nphojintinc:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      foreignTable: nphojint
+      foreignReference: codemp
+    codinc:
+      type: VARCHAR
+      size: 8
+      foreignTable: npincapa
+      foreignReference: codinc
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npimppresoc:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    feccor:
+      type: DATE
+      required: true
+    fecini:
+      type: DATE
+      required: true
+    fecfin:
+      type: DATE
+      required: true
+    salemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    salempdia:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    aliuti:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    alibono:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    saltot:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    diaart108:
+      type: NUMERIC
+      size: 5
+    capemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    antacum:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    valart108:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tasint:
+      type: NUMERIC
+      size: 6
+      scale: 2
+    diadif:
+      type: NUMERIC
+      size: 3
+    intdev:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    intacum:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    adeant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    adepre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    regpre:
+      type: VARCHAR
+      size: 1
+    saladi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    anoser:
+      type: NUMERIC
+      size: 2
+    tipo:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npimppresoc:
+        - codemp
+        - feccor
+  npimppresoc1:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    feccor:
+      type: DATE
+      required: true
+    fecini:
+      type: DATE
+      required: true
+    fecfin:
+      type: DATE
+      required: true
+    tasint:
+      type: NUMERIC
+      size: 6
+      scale: 2
+    diadif:
+      type: NUMERIC
+      size: 3
+    capvie:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    capcap:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    intdev:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    intacum:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    adepre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npimppresoc1:
+        - codemp
+        - feccor
+  npimppresocant:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    feccor:
+      type: DATE
+      required: true
+    fecini:
+      type: DATE
+      required: true
+    fecfin:
+      type: DATE
+      required: true
+    salemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    tasint:
+      type: NUMERIC
+      size: 6
+      scale: 2
+    capemp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    intdev:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    antacum:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    anoser:
+      type: NUMERIC
+      size: 2
+    adeant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    intacum:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    diadif:
+      type: NUMERIC
+      size: 3
+    regpre:
+      type: VARCHAR
+      size: 1
+    diaart108:
+      type: NUMERIC
+      size: 5
+    valart108:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    adepre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diaser:
+      type: NUMERIC
+      size: 5
+    messer:
+      type: NUMERIC
+      size: 5
+    diatra:
+      type: NUMERIC
+      size: 5
+    mestra:
+      type: NUMERIC
+      size: 5
+    anotra:
+      type: NUMERIC
+      size: 5
+    stapre:
+      type: VARCHAR
+      size: 1
+    adeint:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    antacu:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npimppresocant:
+        - codemp
+        - feccor
+  npinfadi:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    nomtit:
+      type: VARCHAR
+      size: 40
+    descur:
+      type: VARCHAR
+      size: 60
+    instit:
+      type: VARCHAR
+      size: 250
+    durcur:
+      type: VARCHAR
+      size: 50
+    fecini:
+      type: DATE
+    fecfin:
+      type: DATE
+    nivest:
+      type: VARCHAR
+      size: 40
+    diaini:
+      type: VARCHAR
+      size: 2
+    mesini:
+      type: VARCHAR
+      size: 2
+    anoini:
+      type: VARCHAR
+      size: 4
+    diafin:
+      type: VARCHAR
+      size: 2
+    mesfin:
+      type: VARCHAR
+      size: 2
+    anofin:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npinfcur:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    nomtit:
+      type: VARCHAR
+      size: 40
+      required: true
+    descur:
+      type: VARCHAR
+      size: 60
+    instit:
+      type: VARCHAR
+      size: 200
+      required: true
+    durcur:
+      type: VARCHAR
+      size: 15
+      required: true
+    anocul:
+      type: VARCHAR
+      size: 4
+    codprofes:
+      type: VARCHAR
+      size: 4
+    activo:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npinfcur_rene:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    nomtit:
+      type: VARCHAR
+      size: 40
+      required: true
+    descur:
+      type: VARCHAR
+      size: 60
+    instit:
+      type: VARCHAR
+      size: 200
+      required: true
+    durcur:
+      type: VARCHAR
+      size: 15
+      required: true
+    feccur:
+      type: DATE
+    fecini:
+      type: DATE
+    fecfin:
+      type: DATE
+    nivest:
+      type: VARCHAR
+      size: 40
+    diaini:
+      type: VARCHAR
+      size: 2
+    mesini:
+      type: VARCHAR
+      size: 2
+    anoini:
+      type: VARCHAR
+      size: 4
+    diafin:
+      type: VARCHAR
+      size: 2
+    mesfin:
+      type: VARCHAR
+      size: 2
+    anofin:
+      type: VARCHAR
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npinffam:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    cedfam:
+      type: VARCHAR
+      size: 10
+    nomfam:
+      type: VARCHAR
+      size: 250
+      required: true
+    sexfam:
+      type: VARCHAR
+      size: 1
+      required: true
+    fecnac:
+      type: DATE
+      required: true
+    edafam:
+      type: NUMERIC
+      size: 2
+      required: true
+    parfam:
+      type: VARCHAR
+      size: 10
+      required: true
+    edociv:
+      type: VARCHAR
+      size: 1
+    grains:
+      type: VARCHAR
+      size: 30
+    traofi:
+      type: VARCHAR
+      size: 30
+    codgua:
+      type: VARCHAR
+      size: 3
+    valgua:
+      type: NUMERIC
+      size: 2
+    seghcm:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npinstitutos:
+    #_attributes:
+      #idMethod: native
+    codins:
+      type: VARCHAR
+      size: 4
+    nomins:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npinteresesprestaciones:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    fecpago:
+      type: DATE
+      required: true
+    feccalculo:
+      type: DATE
+      required: true
+    acufondoantiguedad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    acuinteres:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npintfecref:
+    #_attributes:
+      #idMethod: native
+    feciniref:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    fecfinref:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    tasint:
+      type: NUMERIC
+      size: 5
+      scale: 2
+    tasintpro:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    tasintpas:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    tasintact:
+      type: NUMERIC
+      size: 5
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npintfecrefdaniel:
+    #_attributes:
+      #idMethod: native
+    feciniref:
+      type: DATE
+      required: true
+    fecfinref:
+      type: DATE
+      required: true
+    tasint:
+      type: NUMERIC
+      size: 5
+      scale: 2
+    tasintpro:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    tasintpas:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    tasintact:
+      type: NUMERIC
+      size: 5
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npintfid:
+    #_attributes:
+      #idMethod: native
+    fecdesde:
+      type: DATE
+    fechasta:
+      type: DATE
+    codemp:
+      type: VARCHAR
+      size: 16
+    fechaint:
+      type: DATE
+    depos:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    deposacum:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    capital:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tasa:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    interes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    interesacum:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npintpre:
+    #_attributes:
+      #idMethod: native
+    numdec:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    despre:
+      type: DATE
+      required: true
+    haspre:
+      type: DATE
+      required: true
+    porpre:
+      type: NUMERIC
+      size: 5
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npislr:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codconpor:
+      type: VARCHAR
+      size: 3
+    codconimp:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npjefes:
+    #_attributes:
+      #idMethod: native
+    presupuesto:
+      type: VARCHAR
+      size: 100
+    administracion:
+      type: VARCHAR
+      size: 100
+    personal:
+      type: VARCHAR
+      size: 100
+    rector:
+      type: VARCHAR
+      size: 100
+    vicerector:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npliqemp:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 10
+      required: true
+    numord:
+      type: NUMERIC
+      size: 8
+      required: true
+      ##primaryKey: true
+    tipcau:
+      type: VARCHAR
+      size: 4
+      required: true
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipprc:
+      type: VARCHAR
+      size: 4
+      required: true
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcom:
+      type: VARCHAR
+      size: 4
+      required: true
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 24
+      required: true
+    fecemi:
+      type: DATE
+      required: true
+    numrif:
+      type: VARCHAR
+      size: 12
+      required: true
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    conpag:
+      type: VARCHAR
+      size: 50
+      required: true
+    caupag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    status:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcue:
+      type: VARCHAR
+      size: 16
+      required: true
+    codban:
+      type: VARCHAR
+      size: 2
+      required: true
+    numche:
+      type: VARCHAR
+      size: 10
+      required: true
+    nomdes:
+      type: VARCHAR
+      size: 18
+      required: true
+    codcuedes:
+      type: VARCHAR
+      size: 16
+      required: true
+    despag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npliquidacion_det:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    concepto:
+      type: VARCHAR
+      size: 250
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    asided:
+      type: VARCHAR
+      size: 1
+    numreg:
+      type: NUMERIC
+      size: 4
+    codpre:
+      type: VARCHAR
+      size: 32
+    codcon:
+      type: VARCHAR
+      size: 3
+    numord:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npmemcon:
+    #_attributes:
+      #idMethod: native
+    codmen:
+      type: VARCHAR
+      size: 100
+    codcon:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npmemos:
+    #_attributes:
+      #idMethod: native
+    codmem:
+      type: VARCHAR
+      size: 100
+    codcon:
+      type: VARCHAR
+      size: 3
+    nomcon:
+      type: VARCHAR
+      size: 100
+    nomben:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npmotant:
+    #_attributes:
+      #idMethod: native
+    codmotant:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    desmotant:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npmotfal:
+    #_attributes:
+      #idMethod: native
+    codmotfal:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    desmotfal:
+      type: VARCHAR
+      size: 250
+      required: true
+    causa:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npmotliq:
+    #_attributes:
+      #idMethod: native
+    codmotliq:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    desmotliq:
+      type: VARCHAR
+      size: 250
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npmovian:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcon:
+      type: VARCHAR
+      size: 3
+    moncon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npmovrac:
+    #_attributes:
+      #idMethod: native
+    nronom:
+      type: VARCHAR
+      size: 16
+      required: true
+    perrac:
+      type: VARCHAR
+      size: 1
+      required: true
+    anorac:
+      type: VARCHAR
+      size: 4
+      required: true
+    tipmov:
+      type: VARCHAR
+      size: 1
+      required: true
+    fecmov:
+      type: DATE
+      required: true
+    status:
+      type: VARCHAR
+      size: 1
+      required: true
+    codcarapr:
+      type: VARCHAR
+      size: 16
+    nomcarapr:
+      type: VARCHAR
+      size: 50
+    suecarapr:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    comcarapr:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codocpapr:
+      type: VARCHAR
+      size: 16
+    pasocpapr:
+      type: VARCHAR
+      size: 3
+    codempapr:
+      type: VARCHAR
+      size: 16
+    nomempapr:
+      type: VARCHAR
+      size: 250
+    codcatapr:
+      type: VARCHAR
+      size: 32
+    estorgapr:
+      type: VARCHAR
+      size: 16
+    codcarpro:
+      type: VARCHAR
+      size: 16
+    nomcarpro:
+      type: VARCHAR
+      size: 50
+    suecarpro:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    comcarpro:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    codocppro:
+      type: VARCHAR
+      size: 16
+    pasocppro:
+      type: VARCHAR
+      size: 3
+    codemppro:
+      type: VARCHAR
+      size: 16
+    nomemppro:
+      type: VARCHAR
+      size: 250
+    codcatpro:
+      type: VARCHAR
+      size: 32
+    estorgpro:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npmunicipios:
+    #_attributes:
+      #idMethod: native
+    codmunicipio:
+      type: VARCHAR
+      size: 14
+    nombremunicipio:
+      type: VARCHAR
+      size: 100
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npnivedu:
+    #_attributes:
+      #idMethod: native
+    codniv:
+      type: VARCHAR
+      size: 4
+    desniv:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npnomcal:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    frecon:
+      type: VARCHAR
+      size: 1
+      required: true
+      ##primaryKey: true
+    asided:
+      type: VARCHAR
+      size: 1
+      required: true
+      ##primaryKey: true
+    fecnom:
+      type: DATE
+    nomcon:
+      type: VARCHAR
+      size: 100
+    nomnom:
+      type: VARCHAR
+      size: 100
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    acucon:
+      type: VARCHAR
+      size: 1
+    acumulado:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    saldo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    numrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecnomdes:
+      type: DATE
+    especial:
+      type: VARCHAR
+      size: 1
+      required: true
+      ##primaryKey: true
+      default: N
+    fecnomespdes:
+      type: DATE
+    fecnomesphas:
+      type: DATE
+    codnomesp:
+      type: VARCHAR
+      size: 3
+    nomnomesp:
+      type: VARCHAR
+      size: 1000
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      i01npnomcal:
+        - codnom
+        - codemp
+        - codcar
+        - codcon
+  npnomcal_temp:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    frecon:
+      type: VARCHAR
+      size: 1
+      required: true
+    asided:
+      type: VARCHAR
+      size: 1
+      required: true
+    fecnom:
+      type: DATE
+    nomcon:
+      type: VARCHAR
+      size: 30
+    nomnom:
+      type: VARCHAR
+      size: 30
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    acucon:
+      type: VARCHAR
+      size: 1
+    acumulado:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    saldo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    numrec:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npnomcalhcm:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcon:
+      type: VARCHAR
+      size: 3
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npnomespconnomtip:
+    #_attributes:
+      #idMethod: native
+    codnomesp:
+      type: VARCHAR
+      size: 3
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    especial:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npnomespnomtip:
+    #_attributes:
+      #idMethod: native
+    codnomesp:
+      type: VARCHAR
+      size: 3
+      required: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npnomesptipos:
+    #_attributes:
+      #idMethod: native
+    codnomesp:
+      type: VARCHAR
+      size: 3
+      required: true
+    desnomesp:
+      type: VARCHAR
+      size: 50
+      required: true
+    fecnomdes:
+      type: DATE
+    fecnomhas:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npnomina:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    nomnom:
+      type: VARCHAR
+      size: 100
+      required: true
+    frecal:
+      type: VARCHAR
+      size: 1
+      required: true
+    ultfec:
+      type: DATE
+      required: true
+    profec:
+      type: DATE
+      required: true
+    numsem:
+      type: NUMERIC
+      size: 2
+    ordpag:
+      type: VARCHAR
+      size: 1
+      required: true
+    tipcau:
+      type: VARCHAR
+      size: 4
+    refcau:
+      type: VARCHAR
+      size: 8
+    tipprc:
+      type: VARCHAR
+      size: 4
+    refprc:
+      type: VARCHAR
+      size: 8
+    tipcom:
+      type: VARCHAR
+      size: 4
+    refcom:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npordpag:
+    #_attributes:
+      #idMethod: native
+    numord:
+      type: NUMERIC
+      size: 8
+      required: true
+      ##primaryKey: true
+    tipcau:
+      type: VARCHAR
+      size: 4
+      required: true
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipprc:
+      type: VARCHAR
+      size: 4
+      required: true
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcom:
+      type: VARCHAR
+      size: 4
+      required: true
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 24
+      required: true
+    fecemi:
+      type: DATE
+      required: true
+    numrif:
+      type: VARCHAR
+      size: 12
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 10
+      required: true
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    conpag:
+      type: VARCHAR
+      size: 50
+      required: true
+    caupag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    status:
+      type: VARCHAR
+      size: 3
+      required: true
+    codcue:
+      type: VARCHAR
+      size: 16
+      required: true
+    codban:
+      type: VARCHAR
+      size: 2
+      required: true
+    numche:
+      type: VARCHAR
+      size: 10
+      required: true
+    nomdes:
+      type: VARCHAR
+      size: 18
+      required: true
+    codcuedes:
+      type: VARCHAR
+      size: 16
+      required: true
+    despag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nppagint:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    fecpag:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    salint:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nppais:
+    #_attributes:
+      #idMethod: native
+    codpai:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    nompai:
+      type: VARCHAR
+      size: 20
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nppartidas:
+    _attributes:
+      readOnly: true
+      skipSql: true
+    codpar:
+      type: VARCHAR
+      size: 16
+    nompar:
+      type: VARCHAR
+      size: 500
+  nppercar:
+    #_attributes:
+      #idMethod: native
+    codperfil:
+      type: VARCHAR
+      size: 4
+      required: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    puntos:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npperemp:
+    #_attributes:
+      #idMethod: native
+    codperfil:
+      type: VARCHAR
+      size: 4
+      required: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npperfil:
+    #_attributes:
+      #idMethod: native
+    codperfil:
+      type: VARCHAR
+      size: 4
+      required: true
+    desperfil:
+      type: VARCHAR
+      size: 255
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npperxdis:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    perini:
+      type: NUMERIC
+      size: 4
+    perfin:
+      type: NUMERIC
+      size: 4
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nppreliq:
+    #_attributes:
+      #idMethod: native
+    fecvig:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    mes:
+      type: NUMERIC
+      size: 6
+      required: true
+      ##primaryKey: true
+    diapre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diaant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diavac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diavacfra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diabonvac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nppresoc:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    feccor:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    feccal:
+      type: DATE
+    codcon:
+      type: VARCHAR
+      size: 3
+    diaser:
+      type: NUMERIC
+      size: 5
+    messer:
+      type: NUMERIC
+      size: 5
+    anoser:
+      type: NUMERIC
+      size: 2
+    diatra:
+      type: NUMERIC
+      size: 5
+    mestra:
+      type: NUMERIC
+      size: 5
+    anotra:
+      type: NUMERIC
+      size: 2
+    antacu:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    intacu:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    bontra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    adepre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    adeint:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    pasregant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stapre:
+      type: VARCHAR
+      size: 1
+    regpre:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nppresocant:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    feccor:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    feccal:
+      type: DATE
+    codcon:
+      type: VARCHAR
+      size: 3
+    diaser:
+      type: NUMERIC
+      size: 5
+    messer:
+      type: NUMERIC
+      size: 5
+    anoser:
+      type: NUMERIC
+      size: 2
+    diatra:
+      type: NUMERIC
+      size: 5
+    mestra:
+      type: NUMERIC
+      size: 5
+    anotra:
+      type: NUMERIC
+      size: 2
+    antacu:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    intacu:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    bontra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    adepre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    adeint:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    pasregant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stapre:
+      type: VARCHAR
+      size: 1
+    regpre:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nppresta:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    fecdes:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    fechas:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    monacu:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npprocar:
+    #_attributes:
+      #idMethod: native
+    codprofes:
+      type: VARCHAR
+      size: 4
+      required: true
+      foreignTable: npprofesion
+      foreignReference: codprofes
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      foreignTable: npcargos
+      foreignReference: codcar
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npprofesion:
+    #_attributes:
+      #idMethod: native
+    codprofes:
+      type: VARCHAR
+      size: 4
+      required: true
+    desprofes:
+      type: VARCHAR
+      size: 255
+    nivpro:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nprac:
+    #_attributes:
+      #idMethod: native
+    codigo:
+      type: VARCHAR
+      size: 6
+      required: true
+      ##primaryKey: true
+    forcod:
+      type: VARCHAR
+      size: 50
+      required: true
+    observ:
+      type: VARCHAR
+      size: 100
+      required: true
+    anodes:
+      type: VARCHAR
+      size: 4
+      required: true
+    anohas:
+      type: VARCHAR
+      size: 4
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nprelcajaho:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    conret:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    conapo:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    conpre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    conseg:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nprelconqui:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    codnom:
+      type: VARCHAR
+      size: 3
+    codcon:
+      type: VARCHAR
+      size: 3
+    cantidad:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecini:
+      type: DATE
+    fecexp:
+      type: DATE
+    calcon:
+      type: VARCHAR
+      size: 1
+    actcon:
+      type: VARCHAR
+      size: 1
+    nomsus:
+      type: VARCHAR
+      size: 50
+    codpre:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+    _indexes:
+      nprelconqui01:
+        - codemp
+        - codcon
+      nprelconqui02:
+        - codemp
+      nprelconqui03:
+        - codcon
+  npsalint:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codasi:
+      type: VARCHAR
+      size: 3
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecinicon:
+      type: DATE
+    fecfincon:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npsalint_03022007:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codasi:
+      type: VARCHAR
+      size: 3
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecinicon:
+      type: DATE
+    fecfincon:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npsalint_05022007:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codasi:
+      type: VARCHAR
+      size: 3
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecinicon:
+      type: DATE
+    fecfincon:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npsalint_06022007:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codasi:
+      type: VARCHAR
+      size: 3
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecinicon:
+      type: DATE
+    fecfincon:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npseghcm:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+    tippar:
+      type: VARCHAR
+      size: 3
+    edaddes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    edadhas:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npsitemp:
+    #_attributes:
+      #idMethod: native
+    codsitemp:
+      type: VARCHAR
+      size: 1
+    dessitemp:
+      type: VARCHAR
+      size: 250
+    calnom:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npsso:
+    #_attributes:
+      #idMethod: native
+    numsso:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+    fecinicot:
+      type: DATE
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npsucban:
+    #_attributes:
+      #idMethod: native
+    codban:
+      type: VARCHAR
+      size: 2
+    nomban:
+      type: VARCHAR
+      size: 100
+    codsuc:
+      type: VARCHAR
+      size: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptabpre:
+    #_attributes:
+      #idMethod: native
+    fecpre:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    diames:
+      type: NUMERIC
+      size: 2
+      required: true
+    diaano:
+      type: NUMERIC
+      size: 2
+      required: true
+    interes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptasfid:
+    #_attributes:
+      #idMethod: native
+    fecdesde:
+      type: DATE
+    fechasta:
+      type: DATE
+    tasa:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipact:
+    #_attributes:
+      #idMethod: native
+    codtipact:
+      type: VARCHAR
+      size: 2
+      required: true
+    destipact:
+      type: VARCHAR
+      size: 255
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipadi:
+    #_attributes:
+      #idMethod: native
+    codtit:
+      type: VARCHAR
+      size: 2
+      required: true
+      ##primaryKey: true
+    destit:
+      type: VARCHAR
+      size: 40
+      required: true
+    codadi:
+      type: VARCHAR
+      size: 4
+    desadi:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipaportes:
+    #_attributes:
+      #idMethod: native
+    codtipapo:
+      type: VARCHAR
+      size: 4
+      required: true
+    destipapo:
+      type: VARCHAR
+      size: 250
+    porret:
+      type: NUMERIC
+      size: 6
+      scale: 2
+    porapo:
+      type: NUMERIC
+      size: 6
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipcar:
+    #_attributes:
+      #idMethod: native
+    codtipcar:
+      type: VARCHAR
+      size: 3
+      required: true
+    destipcar:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipcla:
+    #_attributes:
+      #idMethod: native
+    codtipcla:
+      type: VARCHAR
+      size: 2
+      required: true
+    destipcla:
+      type: VARCHAR
+      size: 255
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipcon:
+    #_attributes:
+      #idMethod: native
+    codtipcon:
+      type: VARCHAR
+      size: 3
+    destipcon:
+      type: VARCHAR
+      size: 50
+    frepagcon:
+      type: VARCHAR
+      size: 2
+    alicuocon:
+      type: NUMERIC
+      size: 1
+    diabonfinano:
+      type: NUMERIC
+      size: 3
+    diabonvac:
+      type: NUMERIC
+      size: 3
+    fecinireg:
+      type: DATE
+    art146:
+      type: NUMERIC
+      size: 1
+    diaano:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipcon_old:
+    #_attributes:
+      #idMethod: native
+    codtipcon:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    destipcon:
+      type: VARCHAR
+      size: 50
+      required: true
+    frepagcon:
+      type: VARCHAR
+      size: 2
+    alicuocon:
+      type: NUMERIC
+      size: 1
+    diabonfinano:
+      type: NUMERIC
+      size: 3
+    diabonvac:
+      type: NUMERIC
+      size: 3
+    fecinireg:
+      type: DATE
+    art146:
+      type: NUMERIC
+      size: 1
+    diaano:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipded:
+    #_attributes:
+      #idMethod: native
+    codtip:
+      type: VARCHAR
+      size: 4
+      required: true
+      ##primaryKey: true
+    destip:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipesp:
+    #_attributes:
+      #idMethod: native
+    codtipesp:
+      type: VARCHAR
+      size: 3
+      required: true
+    destipesp:
+      type: VARCHAR
+      size: 255
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipgas:
+    #_attributes:
+      #idMethod: native
+    codtipgas:
+      type: VARCHAR
+      size: 4
+    destipgas:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipniv:
+    #_attributes:
+      #idMethod: native
+    codtipniv:
+      type: VARCHAR
+      size: 2
+      required: true
+    maxsue:
+      type: NUMERIC
+      size: 32
+      scale: 2
+    medsue:
+      type: NUMERIC
+      size: 32
+      scale: 2
+    minsue:
+      type: NUMERIC
+      size: 32
+      scale: 2
+    codtipcla:
+      type: VARCHAR
+      size: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptippag:
+    #_attributes:
+      #idMethod: native
+    codtippag:
+      type: VARCHAR
+      size: 2
+      required: true
+      ##primaryKey: true
+    nomtippag:
+      type: VARCHAR
+      size: 18
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptippar:
+    #_attributes:
+      #idMethod: native
+    tippar:
+      type: VARCHAR
+      size: 3
+    despar:
+      type: VARCHAR
+      size: 30
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipper:
+    #_attributes:
+      #idMethod: native
+    codper:
+      type: VARCHAR
+      size: 4
+      required: true
+    desper:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptippre:
+    #_attributes:
+      #idMethod: native
+    codcon:
+      type: VARCHAR
+      size: 3
+    tippre:
+      type: VARCHAR
+      size: 3
+    codtippre:
+      type: VARCHAR
+      size: 4
+    destippre:
+      type: VARCHAR
+      size: 255
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptipret:
+    #_attributes:
+      #idMethod: native
+    codret:
+      type: VARCHAR
+      size: 2
+    desret:
+      type: VARCHAR
+      size: 50
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  nptitulos:
+    #_attributes:
+      #idMethod: native
+    codniv:
+      type: VARCHAR
+      size: 4
+    codtit:
+      type: VARCHAR
+      size: 4
+    destit:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npunicat:
+    #_attributes:
+      #idMethod: native
+    coduni:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcat:
+      type: VARCHAR
+      size: 32
+      required: true
+      ##primaryKey: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npunieje:
+    #_attributes:
+      #idMethod: native
+    coduni:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codniv:
+      type: VARCHAR
+      size: 16
+      required: true
+    nomuni:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacaciones:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    fechavac:
+      type: DATE
+    disfrutar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    disfrutados:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    bonovac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    bonopagado:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacant:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    caudes:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    cauhas:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    diavac:
+      type: NUMERIC
+      size: 6
+      required: true
+    diaant:
+      type: NUMERIC
+      size: 6
+    diapag:
+      type: NUMERIC
+      size: 6
+    diadis:
+      type: NUMERIC
+      size: 6
+    monvac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvaccol:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    disdes:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    dishas:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    fecreg:
+      type: DATE
+    diavac:
+      type: NUMERIC
+      size: 6
+    dianhab:
+      type: NUMERIC
+      size: 6
+    stareg:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacdefgen:
+    #_attributes:
+      #idMethod: native
+    codnomvac:
+      type: VARCHAR
+      size: 3
+    codconvac:
+      type: VARCHAR
+      size: 3
+    pagoad:
+      type: VARCHAR
+      size: 1
+    codconcom:
+      type: VARCHAR
+      size: 3
+    codconuti:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacdiadis:
+    #_attributes:
+      #idMethod: native
+    rangodesde:
+      type: NUMERIC
+      size: 2
+    rangohasta:
+      type: NUMERIC
+      size: 2
+    diadis:
+      type: NUMERIC
+      size: 2
+    codnom:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacdiafer:
+    #_attributes:
+      #idMethod: native
+    dia:
+      type: NUMERIC
+      size: 2
+    mes:
+      type: NUMERIC
+      size: 2
+    descripcion:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacdiasbonovac:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    perini:
+      type: VARCHAR
+      size: 4
+    perfin:
+      type: VARCHAR
+      size: 4
+    rangodesde:
+      type: NUMERIC
+      size: 2
+    rangohasta:
+      type: NUMERIC
+      size: 2
+    diasbonovac:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacdisfrute:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    perini:
+      type: VARCHAR
+      size: 4
+    perfin:
+      type: VARCHAR
+      size: 4
+    diasdisfutar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diasdisfrutados:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacfra:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+      ##primaryKey: true
+    caudes:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    cauhas:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    diavac:
+      type: NUMERIC
+      size: 6
+      scale: 1
+    diabon:
+      type: NUMERIC
+      size: 6
+      scale: 1
+    monvac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monbon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacjorlab:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    lunes:
+      type: VARCHAR
+      size: 1
+    martes:
+      type: VARCHAR
+      size: 1
+    miercoles:
+      type: VARCHAR
+      size: 1
+    jueves:
+      type: VARCHAR
+      size: 1
+    viernes:
+      type: VARCHAR
+      size: 1
+    sabado:
+      type: VARCHAR
+      size: 1
+    domingo:
+      type: VARCHAR
+      size: 1
+    codcar:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacliquidacion:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    perini:
+      type: VARCHAR
+      size: 4
+    perfin:
+      type: VARCHAR
+      size: 4
+    diadis:
+      type: NUMERIC
+      size: 5
+      scale: 2
+    diasbono:
+      type: NUMERIC
+      size: 5
+      scale: 2
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    ultsue:
+      type: NUMERIC
+      size: 20
+      scale: 2
+    montoinci:
+      type: NUMERIC
+      size: 32
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacregcalnom:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcar:
+      type: VARCHAR
+      size: 16
+    fechasalida:
+      type: DATE
+    fechaentrada:
+      type: DATE
+    periodos:
+      type: NUMERIC
+      size: 3
+    fechanomina:
+      type: DATE
+    diasbono:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacregcondis:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    codnom:
+      type: VARCHAR
+      size: 3
+    fechasalida:
+      type: DATE
+    fechaentrada:
+      type: DATE
+    fechanomina:
+      type: DATE
+    diadis:
+      type: NUMERIC
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacregsal:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+    codemp:
+      type: VARCHAR
+      size: 16
+    codcar:
+      type: VARCHAR
+      size: 16
+    fechasalida:
+      type: DATE
+    fechaentrada:
+      type: DATE
+    diadis:
+      type: NUMERIC
+      size: 3
+    perini:
+      type: VARCHAR
+      size: 4
+    perfin:
+      type: VARCHAR
+      size: 4
+    diasbono:
+      type: NUMERIC
+      size: 3
+    stavac:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacsalidas:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    fecvac:
+      type: DATE
+    diasdisfrutar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    observa:
+      type: VARCHAR
+      size: 250
+    fecdes:
+      type: DATE
+    fechas:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npvacsalidas_det:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 16
+    perini:
+      type: VARCHAR
+      size: 4
+    perfin:
+      type: VARCHAR
+      size: 4
+    diasdisfutar:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diasdisfrutados:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diasvac:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    fecvac:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npasiparcon:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    codcar:
+      type: VARCHAR
+      size: 16
+      required: true
+    codcon:
+      type: VARCHAR
+      size: 3
+      required: true
+    codpar:
+      type: VARCHAR
+      size: 16
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npordfid:
+    #_attributes:
+      #idMethod: native
+    codnom:
+      type: VARCHAR
+      size: 3
+      required: true
+      ##primaryKey: true
+    fecha:
+      type: DATE
+      required: true
+      ##primaryKey: true
+    codemp:
+      type: VARCHAR
+      size: 16
+    cedemp:
+      type: VARCHAR
+      size: 10
+    codpre:
+      type: VARCHAR
+      size: 32
+    numord:
+      type: VARCHAR
+      size: 8
+    monfid:
+      type: NUMERIC
+      size: 32
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npincapa:
+    #_attributes:
+      #idMethod: native
+    codinc:
+      type: VARCHAR
+      size: 8
+      required: true
+    desinc:
+      type: VARCHAR
+      size: 100
+      required: true
+    obsinc:
+      type: VARCHAR
+      size: 1000
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  npincapa:
+    #_attributes:
+      #idMethod: native
+    codinc:
+      type: VARCHAR
+      size: 8
+      required: true
+      ##primaryKey: true
+    desinc:
+      type: VARCHAR
+      size: 100
+      required: true
+    obsinc:
+      type: VARCHAR
+      size: 1000
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

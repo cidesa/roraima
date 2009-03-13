@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class BnregsemMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.BnregsemMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.BnregsemMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('bnregsem');
 		$tMap->setPhpName('Bnregsem');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('bnregsem_SEQ');
 
 		$tMap->addColumn('CODACT', 'Codact', 'string', CreoleTypes::VARCHAR, true, 30);
 
@@ -44,11 +46,11 @@ class BnregsemMapBuilder {
 
 		$tMap->addColumn('ORDCOM', 'Ordcom', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECCOM', 'Feccom', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECCOM', 'Feccom', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECEXP', 'Fecexp', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECEXP', 'Fecexp', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('ORDRCP', 'Ordrcp', 'string', CreoleTypes::VARCHAR, false, 20);
 
@@ -66,25 +68,25 @@ class BnregsemMapBuilder {
 
 		$tMap->addColumn('VIDUTI', 'Viduti', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('MESDEP', 'Mesdep', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MESDEP', 'Mesdep', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('VALINI', 'Valini', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALINI', 'Valini', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('VALRES', 'Valres', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALRES', 'Valres', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('VALLIB', 'Vallib', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALLIB', 'Vallib', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('VALREX', 'Valrex', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALREX', 'Valrex', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('COSREP', 'Cosrep', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COSREP', 'Cosrep', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('DEPMEN', 'Depmen', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DEPMEN', 'Depmen', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('DEPACU', 'Depacu', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DEPACU', 'Depacu', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('STASEM', 'Stasem', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -8,6 +8,9 @@
   'multipart' => true,
 )) ?>
 
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter', 'ajax', 'tools') ?>
+
 <?php echo object_input_hidden_tag($nphojint, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
@@ -19,45 +22,53 @@
     <?php echo form_error('nphojint{codemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($nphojint, 'getCodemp', array (
-  'size' => 20,
-  'control_name' => 'nphojint[codemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
+<?php echo input_tag('nphojint[codemp]', $nphojint->getCodemp(),
+    	array('maxlength' => 12,
+    	      'readonly'  =>  $nphojint->getId()!='' ? true : false ,
+			  'onBlur'=> remote_function(array(
+			  'update'=> 'grid',
+			  'url'      => 'vacliquidacion/ajax',
+			  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus()',
+			  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
+  			  'with' => "'ajax=1&cajnomemp=nphojint_nomemp&cajfecing=nphojint_fecing&cajfecret=nphojint_fecret&cajultsue=nphojint_ultsue&cajsuenor=nphojint_suenor&codigo='+this.value"
+			  )))
+  )
+?>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[nomemp]', __($labels['nphojint{nomemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{nomemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{nomemp}')): ?>
-    <?php echo form_error('nphojint{nomemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Nphojint_Vacsalidas/clase/Nphojint/frame/sf_admin_edit_form/obj1/nphojint_codemp/obj2/nphojint_nomemp/obj3/nphojint_fecing/obj4/nphojint_fecret/campo1/codemp/campo2/nomemp/campo3/fecing/campo4/fecret','','','buttoncat')?> &nbsp;
 
   <?php $value = object_input_tag($nphojint, 'getNomemp', array (
-  'size' => 80,
+  'size' => 60,
+  'readonly' => true,
   'control_name' => 'nphojint[nomemp]',
   'maxlength' => 100,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+<br>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[feccal]', __($labels['nphojint{feccal}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{feccal}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{feccal}')): ?>
-    <?php echo form_error('nphojint{feccal}', array('class' => 'form-error-msg')) ?>
+<table>
+<th>
+  <?php echo label_for('nphojint[fecing]', __($labels['nphojint{fecing}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('nphojint{fecing}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('nphojint{fecing}')): ?>
+    <?php echo form_error('nphojint{fecing}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($nphojint, 'getFeccal', array (
-  'disabled' => true,
-  'control_name' => 'nphojint[feccal]',
+  <?php $value = object_input_date_tag($nphojint, 'getFecing', array (
+  'readonly' => true,
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'size' => 12,
   'date_format' => 'dd/MM/yyyy',
+  'control_name' => 'nphojint[fecing]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('nphojint[fecret]', __($labels['nphojint{fecret}']), '') ?>
+ </th>
+ <th>
+ &nbsp;&nbsp;&nbsp;&nbsp;
+ </th>
+ <th>
+  <?php echo label_for('nphojint[fecret]', __($labels['nphojint{fecret}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('nphojint{fecret}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nphojint{fecret}')): ?>
     <?php echo form_error('nphojint{fecret}', array('class' => 'form-error-msg')) ?>
@@ -70,57 +81,50 @@
   'date_format' => 'dd/MM/yyyy',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+ </th>
+  </table>
 
-<div class="form-row">
-  <?php echo label_for('nphojint[codnom]', __($labels['nphojint{codnom}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('nphojint{codnom}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('nphojint{codnom}')): ?>
-    <?php echo form_error('nphojint{codnom}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+<strong>Ultimo Sueldo:</strong>&nbsp;
+  <?php echo input_tag('nphojint_ultsue',$suenor, array (
+  'size' => 13,
+  'name' => 'nphojint_ultsue',
+  'maxlength' => 15,
+  'onBlur'=> remote_function(array(
+			  'update'=> 'grid',
+			  'url'      => 'vacliquidacion/ajax',
+			  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus()',
+			  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
+  			  'with' => "'ajax=2&cajcodemp='+$(nphojint_codemp).value+'&cajultsue='+this.value+'&cajsuenor='+$(nphojint_suenor).value"
+			  ))
+));  ?>
+&nbsp;&nbsp;&nbsp;
+<strong>Salario Integral:</strong>&nbsp;
+  <?php echo input_tag('nphojint_suenor',$ultsue, array (
+  'size' => 13,
+  'name' => 'nphojint_suenor',
+  'maxlength' => 15,
+  'onBlur'=> remote_function(array(
+			  'update'=> 'grid',
+			  'url'      => 'vacliquidacion/ajax',
+			  'complete' => 'AjaxJSON(request, json);$("nphojint_fecing").focus()',
+			  'condition' => "$('nphojint_codemp').value != '' && $('id').value == ''",
+  			  'with' => "'ajax=2&cajcodemp='+$(nphojint_codemp).value+'&cajultsue='+$(nphojint_ultsue).value+'&cajsuenor='+this.value"
+			  ))
+));  ?>
 
-  <?php $value = object_input_tag($nphojint, 'getCodnom', array (
-  'disabled' => true,
-  'control_name' => 'nphojint[codnom]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
+</fieldset>
 
+<br>
 
-
-<div class="grid01" id="grid01">
-<fieldset><legend>Detalles del Servicio</legend>
-<table border="0" class="sf_admin_list">
-<?
-$titulo=array(0 => 'Codigo del Servicio', 1 => 'Descripcion', 2 => 'Cod.Unidad', 3 => 'Fecha Realizado', 4 => 'Nombre Empleado', 5 => 'Observacion');
-if ( count($rs)>0){
-	$i=0;
-	foreach ($rs as $k=>$fila) {
-		$i++;
-		if($i==1){?>
-	<thead>
-		<tr>
-		<? foreach ($fila as $key => $value){?>
-			<th><?=$titulo[$key]?></th>
-			<? }?>
-		</tr>
-	</thead>
-	<? }?>
-	<tr>
-	<? foreach ($fila as $key => $value){?>
-		<td><?=$value?></td>
-		<? }?>
-	</tr>
-	<? }
-}
+<div id=grid>
+<?php
+ echo grid_tag($objVac);
+ ?>
+ <br>
+<?php
+ echo grid_tag($objHis);
 ?>
-</table>
-</fieldset>
-</div>s
-
-
-
-</fieldset>
+</div>
 
 <?php include_partial('edit_actions', array('nphojint' => $nphojint)) ?>
 
@@ -135,3 +139,19 @@ if ( count($rs)>0){
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+<script type="text/javascript">
+  var id="";
+  var id='<?php echo $nphojint->getId()?>';
+  actualiza(id);
+
+  function actualiza(id)
+  {
+  	$('trigger_nphojint_fecing').hide();
+  	$('trigger_nphojint_fecret').hide();
+    if (id!="")
+    {
+	    $$('.buttoncat')[0].disabled=true;
+   }
+  }
+</script>

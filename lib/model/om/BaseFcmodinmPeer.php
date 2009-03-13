@@ -380,6 +380,7 @@ abstract class BaseFcmodinmPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcmodinmPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

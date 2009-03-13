@@ -61,283 +61,315 @@ abstract class BaseBnsegsem extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodsem()
-	{
+    return trim($this->codact);
 
-		return $this->codsem; 		
-	}
-	
-	public function getNrosegsem()
-	{
+  }
+  
+  public function getCodsem()
+  {
 
-		return $this->nrosegsem; 		
-	}
-	
-	public function getFecsegsem($format = 'Y-m-d')
-	{
+    return trim($this->codsem);
 
-		if ($this->fecsegsem === null || $this->fecsegsem === '') {
-			return null;
-		} elseif (!is_int($this->fecsegsem)) {
-						$ts = strtotime($this->fecsegsem);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecsegsem] as date/time value: " . var_export($this->fecsegsem, true));
-			}
-		} else {
-			$ts = $this->fecsegsem;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getNrosegsem()
+  {
 
-	
-	public function getNomsegsem()
-	{
+    return trim($this->nrosegsem);
 
-		return $this->nomsegsem; 		
-	}
-	
-	public function getCobsegsem()
-	{
+  }
+  
+  public function getFecsegsem($format = 'Y-m-d')
+  {
 
-		return $this->cobsegsem; 		
-	}
-	
-	public function getMonsegsem()
-	{
+    if ($this->fecsegsem === null || $this->fecsegsem === '') {
+      return null;
+    } elseif (!is_int($this->fecsegsem)) {
+            $ts = adodb_strtotime($this->fecsegsem);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsegsem] as date/time value: " . var_export($this->fecsegsem, true));
+      }
+    } else {
+      $ts = $this->fecsegsem;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monsegsem,2,',','.');
-		
-	}
-	
-	public function getFecsegven($format = 'Y-m-d')
-	{
+  
+  public function getNomsegsem()
+  {
 
-		if ($this->fecsegven === null || $this->fecsegven === '') {
-			return null;
-		} elseif (!is_int($this->fecsegven)) {
-						$ts = strtotime($this->fecsegven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecsegven] as date/time value: " . var_export($this->fecsegven, true));
-			}
-		} else {
-			$ts = $this->fecsegven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->nomsegsem);
 
-	
-	public function getProsegsem()
-	{
+  }
+  
+  public function getCobsegsem()
+  {
 
-		return $this->prosegsem; 		
-	}
-	
-	public function getObssegsem()
-	{
+    return trim($this->cobsegsem);
 
-		return $this->obssegsem; 		
-	}
-	
-	public function getStasegsem()
-	{
+  }
+  
+  public function getMonsegsem($val=false)
+  {
 
-		return $this->stasegsem; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monsegsem,2,',','.');
+    else return $this->monsegsem;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFecsegven($format = 'Y-m-d')
+  {
+
+    if ($this->fecsegven === null || $this->fecsegven === '') {
+      return null;
+    } elseif (!is_int($this->fecsegven)) {
+            $ts = adodb_strtotime($this->fecsegven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsegven] as date/time value: " . var_export($this->fecsegven, true));
+      }
+    } else {
+      $ts = $this->fecsegven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getProsegsem()
+  {
+
+    return trim($this->prosegsem);
+
+  }
+  
+  public function getObssegsem()
+  {
+
+    return trim($this->obssegsem);
+
+  }
+  
+  public function getStasegsem()
+  {
+
+    return trim($this->stasegsem);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BnsegsemPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodsem($v)
 	{
 
-		if ($this->codsem !== $v) {
-			$this->codsem = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::CODSEM;
-		}
-
+    if ($this->codsem !== $v) {
+        $this->codsem = $v;
+        $this->modifiedColumns[] = BnsegsemPeer::CODSEM;
+      }
+  
 	} 
 	
 	public function setNrosegsem($v)
 	{
 
-		if ($this->nrosegsem !== $v) {
-			$this->nrosegsem = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::NROSEGSEM;
-		}
-
+    if ($this->nrosegsem !== $v) {
+        $this->nrosegsem = $v;
+        $this->modifiedColumns[] = BnsegsemPeer::NROSEGSEM;
+      }
+  
 	} 
 	
 	public function setFecsegsem($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecsegsem] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecsegsem !== $ts) {
-			$this->fecsegsem = $ts;
-			$this->modifiedColumns[] = BnsegsemPeer::FECSEGSEM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsegsem] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsegsem !== $ts) {
+      $this->fecsegsem = $ts;
+      $this->modifiedColumns[] = BnsegsemPeer::FECSEGSEM;
+    }
 
 	} 
 	
 	public function setNomsegsem($v)
 	{
 
-		if ($this->nomsegsem !== $v) {
-			$this->nomsegsem = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::NOMSEGSEM;
-		}
-
+    if ($this->nomsegsem !== $v) {
+        $this->nomsegsem = $v;
+        $this->modifiedColumns[] = BnsegsemPeer::NOMSEGSEM;
+      }
+  
 	} 
 	
 	public function setCobsegsem($v)
 	{
 
-		if ($this->cobsegsem !== $v) {
-			$this->cobsegsem = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::COBSEGSEM;
-		}
-
+    if ($this->cobsegsem !== $v) {
+        $this->cobsegsem = $v;
+        $this->modifiedColumns[] = BnsegsemPeer::COBSEGSEM;
+      }
+  
 	} 
 	
 	public function setMonsegsem($v)
 	{
 
-		if ($this->monsegsem !== $v) {
-			$this->monsegsem = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::MONSEGSEM;
-		}
-
+    if ($this->monsegsem !== $v) {
+        $this->monsegsem = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnsegsemPeer::MONSEGSEM;
+      }
+  
 	} 
 	
 	public function setFecsegven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecsegven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecsegven !== $ts) {
-			$this->fecsegven = $ts;
-			$this->modifiedColumns[] = BnsegsemPeer::FECSEGVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsegven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsegven !== $ts) {
+      $this->fecsegven = $ts;
+      $this->modifiedColumns[] = BnsegsemPeer::FECSEGVEN;
+    }
 
 	} 
 	
 	public function setProsegsem($v)
 	{
 
-		if ($this->prosegsem !== $v) {
-			$this->prosegsem = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::PROSEGSEM;
-		}
-
+    if ($this->prosegsem !== $v) {
+        $this->prosegsem = $v;
+        $this->modifiedColumns[] = BnsegsemPeer::PROSEGSEM;
+      }
+  
 	} 
 	
 	public function setObssegsem($v)
 	{
 
-		if ($this->obssegsem !== $v) {
-			$this->obssegsem = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::OBSSEGSEM;
-		}
-
+    if ($this->obssegsem !== $v) {
+        $this->obssegsem = $v;
+        $this->modifiedColumns[] = BnsegsemPeer::OBSSEGSEM;
+      }
+  
 	} 
 	
 	public function setStasegsem($v)
 	{
 
-		if ($this->stasegsem !== $v) {
-			$this->stasegsem = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::STASEGSEM;
-		}
-
+    if ($this->stasegsem !== $v) {
+        $this->stasegsem = $v;
+        $this->modifiedColumns[] = BnsegsemPeer::STASEGSEM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnsegsemPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnsegsemPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->codsem = $rs->getString($startcol + 1);
+      $this->codsem = $rs->getString($startcol + 1);
 
-			$this->nrosegsem = $rs->getString($startcol + 2);
+      $this->nrosegsem = $rs->getString($startcol + 2);
 
-			$this->fecsegsem = $rs->getDate($startcol + 3, null);
+      $this->fecsegsem = $rs->getDate($startcol + 3, null);
 
-			$this->nomsegsem = $rs->getString($startcol + 4);
+      $this->nomsegsem = $rs->getString($startcol + 4);
 
-			$this->cobsegsem = $rs->getString($startcol + 5);
+      $this->cobsegsem = $rs->getString($startcol + 5);
 
-			$this->monsegsem = $rs->getFloat($startcol + 6);
+      $this->monsegsem = $rs->getFloat($startcol + 6);
 
-			$this->fecsegven = $rs->getDate($startcol + 7, null);
+      $this->fecsegven = $rs->getDate($startcol + 7, null);
 
-			$this->prosegsem = $rs->getString($startcol + 8);
+      $this->prosegsem = $rs->getString($startcol + 8);
 
-			$this->obssegsem = $rs->getString($startcol + 9);
+      $this->obssegsem = $rs->getString($startcol + 9);
 
-			$this->stasegsem = $rs->getString($startcol + 10);
+      $this->stasegsem = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnsegsem object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnsegsem object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -394,6 +426,7 @@ abstract class BaseBnsegsem extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BnsegsemPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnsegsemPeer::doUpdate($this, $con);

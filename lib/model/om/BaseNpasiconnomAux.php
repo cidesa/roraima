@@ -33,110 +33,137 @@ abstract class BaseNpasiconnomAux extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codnom);
 
-		return $this->codcon; 		
-	}
-	
-	public function getFrecon()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return $this->frecon; 		
-	}
-	
-	public function getActivo()
-	{
+    return trim($this->codcon);
 
-		return $this->activo; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getFrecon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->frecon);
+
+  }
+  
+  public function getActivo()
+  {
+
+    return trim($this->activo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpasiconnomAuxPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpasiconnomAuxPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpasiconnomAuxPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpasiconnomAuxPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setFrecon($v)
 	{
 
-		if ($this->frecon !== $v) {
-			$this->frecon = $v;
-			$this->modifiedColumns[] = NpasiconnomAuxPeer::FRECON;
-		}
-
+    if ($this->frecon !== $v) {
+        $this->frecon = $v;
+        $this->modifiedColumns[] = NpasiconnomAuxPeer::FRECON;
+      }
+  
 	} 
 	
 	public function setActivo($v)
 	{
 
-		if ($this->activo !== $v) {
-			$this->activo = $v;
-			$this->modifiedColumns[] = NpasiconnomAuxPeer::ACTIVO;
-		}
-
+    if ($this->activo !== $v) {
+        $this->activo = $v;
+        $this->modifiedColumns[] = NpasiconnomAuxPeer::ACTIVO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpasiconnomAuxPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpasiconnomAuxPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->frecon = $rs->getString($startcol + 2);
+      $this->frecon = $rs->getString($startcol + 2);
 
-			$this->activo = $rs->getString($startcol + 3);
+      $this->activo = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating NpasiconnomAux object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating NpasiconnomAux object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseNpasiconnomAux extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpasiconnomAuxPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpasiconnomAuxPeer::doUpdate($this, $con);

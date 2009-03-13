@@ -250,6 +250,7 @@ abstract class BaseBndefconiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BndefconiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -45,164 +45,194 @@ abstract class BaseNpfondoprestaciones extends BaseObject  implements Persistent
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodconacudia()
-	{
+    return trim($this->codnom);
 
-		return $this->codconacudia; 		
-	}
-	
-	public function getCodconacumonto()
-	{
+  }
+  
+  public function getCodconacudia()
+  {
 
-		return $this->codconacumonto; 		
-	}
-	
-	public function getCodconacuinteres()
-	{
+    return trim($this->codconacudia);
 
-		return $this->codconacuinteres; 		
-	}
-	
-	public function getCapitalizarinteres()
-	{
+  }
+  
+  public function getCodconacumonto()
+  {
 
-		return $this->capitalizarinteres; 		
-	}
-	
-	public function getAcumprestamos()
-	{
+    return trim($this->codconacumonto);
 
-		return $this->acumprestamos; 		
-	}
-	
-	public function getCodconprestamo()
-	{
+  }
+  
+  public function getCodconacuinteres()
+  {
 
-		return $this->codconprestamo; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codconacuinteres);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCapitalizarinteres()
+  {
+
+    return trim($this->capitalizarinteres);
+
+  }
+  
+  public function getAcumprestamos()
+  {
+
+    return trim($this->acumprestamos);
+
+  }
+  
+  public function getCodconprestamo()
+  {
+
+    return trim($this->codconprestamo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpfondoprestacionesPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpfondoprestacionesPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodconacudia($v)
 	{
 
-		if ($this->codconacudia !== $v) {
-			$this->codconacudia = $v;
-			$this->modifiedColumns[] = NpfondoprestacionesPeer::CODCONACUDIA;
-		}
-
+    if ($this->codconacudia !== $v) {
+        $this->codconacudia = $v;
+        $this->modifiedColumns[] = NpfondoprestacionesPeer::CODCONACUDIA;
+      }
+  
 	} 
 	
 	public function setCodconacumonto($v)
 	{
 
-		if ($this->codconacumonto !== $v) {
-			$this->codconacumonto = $v;
-			$this->modifiedColumns[] = NpfondoprestacionesPeer::CODCONACUMONTO;
-		}
-
+    if ($this->codconacumonto !== $v) {
+        $this->codconacumonto = $v;
+        $this->modifiedColumns[] = NpfondoprestacionesPeer::CODCONACUMONTO;
+      }
+  
 	} 
 	
 	public function setCodconacuinteres($v)
 	{
 
-		if ($this->codconacuinteres !== $v) {
-			$this->codconacuinteres = $v;
-			$this->modifiedColumns[] = NpfondoprestacionesPeer::CODCONACUINTERES;
-		}
-
+    if ($this->codconacuinteres !== $v) {
+        $this->codconacuinteres = $v;
+        $this->modifiedColumns[] = NpfondoprestacionesPeer::CODCONACUINTERES;
+      }
+  
 	} 
 	
 	public function setCapitalizarinteres($v)
 	{
 
-		if ($this->capitalizarinteres !== $v) {
-			$this->capitalizarinteres = $v;
-			$this->modifiedColumns[] = NpfondoprestacionesPeer::CAPITALIZARINTERES;
-		}
-
+    if ($this->capitalizarinteres !== $v) {
+        $this->capitalizarinteres = $v;
+        $this->modifiedColumns[] = NpfondoprestacionesPeer::CAPITALIZARINTERES;
+      }
+  
 	} 
 	
 	public function setAcumprestamos($v)
 	{
 
-		if ($this->acumprestamos !== $v) {
-			$this->acumprestamos = $v;
-			$this->modifiedColumns[] = NpfondoprestacionesPeer::ACUMPRESTAMOS;
-		}
-
+    if ($this->acumprestamos !== $v) {
+        $this->acumprestamos = $v;
+        $this->modifiedColumns[] = NpfondoprestacionesPeer::ACUMPRESTAMOS;
+      }
+  
 	} 
 	
 	public function setCodconprestamo($v)
 	{
 
-		if ($this->codconprestamo !== $v) {
-			$this->codconprestamo = $v;
-			$this->modifiedColumns[] = NpfondoprestacionesPeer::CODCONPRESTAMO;
-		}
-
+    if ($this->codconprestamo !== $v) {
+        $this->codconprestamo = $v;
+        $this->modifiedColumns[] = NpfondoprestacionesPeer::CODCONPRESTAMO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpfondoprestacionesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpfondoprestacionesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codconacudia = $rs->getString($startcol + 1);
+      $this->codconacudia = $rs->getString($startcol + 1);
 
-			$this->codconacumonto = $rs->getString($startcol + 2);
+      $this->codconacumonto = $rs->getString($startcol + 2);
 
-			$this->codconacuinteres = $rs->getString($startcol + 3);
+      $this->codconacuinteres = $rs->getString($startcol + 3);
 
-			$this->capitalizarinteres = $rs->getString($startcol + 4);
+      $this->capitalizarinteres = $rs->getString($startcol + 4);
 
-			$this->acumprestamos = $rs->getString($startcol + 5);
+      $this->acumprestamos = $rs->getString($startcol + 5);
 
-			$this->codconprestamo = $rs->getString($startcol + 6);
+      $this->codconprestamo = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npfondoprestaciones object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npfondoprestaciones object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -259,6 +289,7 @@ abstract class BaseNpfondoprestaciones extends BaseObject  implements Persistent
 				if ($this->isNew()) {
 					$pk = NpfondoprestacionesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpfondoprestacionesPeer::doUpdate($this, $con);

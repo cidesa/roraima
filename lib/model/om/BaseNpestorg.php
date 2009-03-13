@@ -24,97 +24,129 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collViadettipsers;
+
+	
+	protected $lastViadettipserCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodniv()
-	{
+  
+  public function getCodniv()
+  {
 
-		return $this->codniv; 		
-	}
-	
-	public function getDesniv()
-	{
+    return trim($this->codniv);
 
-		return $this->desniv; 		
-	}
-	
-	public function getTelext()
-	{
+  }
+  
+  public function getDesniv()
+  {
 
-		return $this->telext; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desniv);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTelext()
+  {
+
+    return trim($this->telext);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = NpestorgPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = NpestorgPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setDesniv($v)
 	{
 
-		if ($this->desniv !== $v) {
-			$this->desniv = $v;
-			$this->modifiedColumns[] = NpestorgPeer::DESNIV;
-		}
-
+    if ($this->desniv !== $v) {
+        $this->desniv = $v;
+        $this->modifiedColumns[] = NpestorgPeer::DESNIV;
+      }
+  
 	} 
 	
 	public function setTelext($v)
 	{
 
-		if ($this->telext !== $v) {
-			$this->telext = $v;
-			$this->modifiedColumns[] = NpestorgPeer::TELEXT;
-		}
-
+    if ($this->telext !== $v) {
+        $this->telext = $v;
+        $this->modifiedColumns[] = NpestorgPeer::TELEXT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpestorgPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpestorgPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codniv = $rs->getString($startcol + 0);
+      $this->codniv = $rs->getString($startcol + 0);
 
-			$this->desniv = $rs->getString($startcol + 1);
+      $this->desniv = $rs->getString($startcol + 1);
 
-			$this->telext = $rs->getString($startcol + 2);
+      $this->telext = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npestorg object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npestorg object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,11 +203,20 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpestorgPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpestorgPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collViadettipsers !== null) {
+				foreach($this->collViadettipsers as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -217,6 +258,14 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collViadettipsers !== null) {
+					foreach($this->collViadettipsers as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -348,6 +397,15 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 		$copyObj->setTelext($this->telext);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getViadettipsers() as $relObj) {
+				$copyObj->addViadettipser($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -369,6 +427,146 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 			self::$peer = new NpestorgPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initViadettipsers()
+	{
+		if ($this->collViadettipsers === null) {
+			$this->collViadettipsers = array();
+		}
+	}
+
+	
+	public function getViadettipsers($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViadettipserPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViadettipsers === null) {
+			if ($this->isNew()) {
+			   $this->collViadettipsers = array();
+			} else {
+
+				$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
+
+				ViadettipserPeer::addSelectColumns($criteria);
+				$this->collViadettipsers = ViadettipserPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
+
+				ViadettipserPeer::addSelectColumns($criteria);
+				if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
+					$this->collViadettipsers = ViadettipserPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastViadettipserCriteria = $criteria;
+		return $this->collViadettipsers;
+	}
+
+	
+	public function countViadettipsers($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseViadettipserPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
+
+		return ViadettipserPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addViadettipser(Viadettipser $l)
+	{
+		$this->collViadettipsers[] = $l;
+		$l->setNpestorg($this);
+	}
+
+
+	
+	public function getViadettipsersJoinOcciudad($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViadettipserPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViadettipsers === null) {
+			if ($this->isNew()) {
+				$this->collViadettipsers = array();
+			} else {
+
+				$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
+
+				$this->collViadettipsers = ViadettipserPeer::doSelectJoinOcciudad($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
+
+			if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
+				$this->collViadettipsers = ViadettipserPeer::doSelectJoinOcciudad($criteria, $con);
+			}
+		}
+		$this->lastViadettipserCriteria = $criteria;
+
+		return $this->collViadettipsers;
+	}
+
+
+	
+	public function getViadettipsersJoinViaregtipser($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseViadettipserPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collViadettipsers === null) {
+			if ($this->isNew()) {
+				$this->collViadettipsers = array();
+			} else {
+
+				$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
+
+				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtipser($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
+
+			if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
+				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtipser($criteria, $con);
+			}
+		}
+		$this->lastViadettipserCriteria = $criteria;
+
+		return $this->collViadettipsers;
 	}
 
 } 

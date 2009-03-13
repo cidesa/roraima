@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Attipayu
+    theme:            cidesaGenerator
+    fields:
+      codayu:      { name: Código }
+      desayu:      { name: Descripción }
+      codpre:      { name: Código Presupuestario }
+    list:
+      title:          Definición de Tipos de Donaciones
+      display:        [=codayu, desayu]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codayu, desayu]
+      max_per_page:   5
+      sort:  codayu
+    edit:
+      title:          Edición de Tipos de Donaciones
+      display:        [codayu, desayu, _codpre]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

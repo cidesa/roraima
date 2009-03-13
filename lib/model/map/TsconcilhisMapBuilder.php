@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class TsconcilhisMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.TsconcilhisMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.TsconcilhisMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('tsconcilhis');
 		$tMap->setPhpName('Tsconcilhis');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('tsconcilhis_SEQ');
 
 		$tMap->addColumn('NUMCUE', 'Numcue', 'string', CreoleTypes::VARCHAR, true, 20);
 
@@ -44,19 +46,19 @@ class TsconcilhisMapBuilder {
 
 		$tMap->addColumn('MOVBAN', 'Movban', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('FECLIB', 'Feclib', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECLIB', 'Feclib', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECBAN', 'Fecban', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECBAN', 'Fecban', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('DESREF', 'Desref', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('MONLIB', 'Monlib', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONLIB', 'Monlib', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('MONBAN', 'Monban', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONBAN', 'Monban', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('RESULT', 'Result', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -225,6 +225,7 @@ abstract class BaseFarecaudPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FarecaudPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

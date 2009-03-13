@@ -45,166 +45,196 @@ abstract class BaseCadescto extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoddesc()
-	{
+  
+  public function getCoddesc()
+  {
 
-		return $this->coddesc; 		
-	}
-	
-	public function getDesdesc()
-	{
+    return trim($this->coddesc);
 
-		return $this->desdesc; 		
-	}
-	
-	public function getTipdesc()
-	{
+  }
+  
+  public function getDesdesc()
+  {
 
-		return $this->tipdesc; 		
-	}
-	
-	public function getMondesc()
-	{
+    return trim($this->desdesc);
 
-		return number_format($this->mondesc,2,',','.');
-		
-	}
-	
-	public function getDiasapl()
-	{
+  }
+  
+  public function getTipdesc()
+  {
 
-		return number_format($this->diasapl,2,',','.');
-		
-	}
-	
-	public function getCodcta()
-	{
+    return trim($this->tipdesc);
 
-		return $this->codcta; 		
-	}
-	
-	public function getTipret()
-	{
+  }
+  
+  public function getMondesc($val=false)
+  {
 
-		return $this->tipret; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->mondesc,2,',','.');
+    else return $this->mondesc;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDiasapl($val=false)
+  {
+
+    if($val) return number_format($this->diasapl,2,',','.');
+    else return $this->diasapl;
+
+  }
+  
+  public function getCodcta()
+  {
+
+    return trim($this->codcta);
+
+  }
+  
+  public function getTipret()
+  {
+
+    return trim($this->tipret);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoddesc($v)
 	{
 
-		if ($this->coddesc !== $v) {
-			$this->coddesc = $v;
-			$this->modifiedColumns[] = CadesctoPeer::CODDESC;
-		}
-
+    if ($this->coddesc !== $v) {
+        $this->coddesc = $v;
+        $this->modifiedColumns[] = CadesctoPeer::CODDESC;
+      }
+  
 	} 
 	
 	public function setDesdesc($v)
 	{
 
-		if ($this->desdesc !== $v) {
-			$this->desdesc = $v;
-			$this->modifiedColumns[] = CadesctoPeer::DESDESC;
-		}
-
+    if ($this->desdesc !== $v) {
+        $this->desdesc = $v;
+        $this->modifiedColumns[] = CadesctoPeer::DESDESC;
+      }
+  
 	} 
 	
 	public function setTipdesc($v)
 	{
 
-		if ($this->tipdesc !== $v) {
-			$this->tipdesc = $v;
-			$this->modifiedColumns[] = CadesctoPeer::TIPDESC;
-		}
-
+    if ($this->tipdesc !== $v) {
+        $this->tipdesc = $v;
+        $this->modifiedColumns[] = CadesctoPeer::TIPDESC;
+      }
+  
 	} 
 	
 	public function setMondesc($v)
 	{
 
-		if ($this->mondesc !== $v) {
-			$this->mondesc = $v;
-			$this->modifiedColumns[] = CadesctoPeer::MONDESC;
-		}
-
+    if ($this->mondesc !== $v) {
+        $this->mondesc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadesctoPeer::MONDESC;
+      }
+  
 	} 
 	
 	public function setDiasapl($v)
 	{
 
-		if ($this->diasapl !== $v) {
-			$this->diasapl = $v;
-			$this->modifiedColumns[] = CadesctoPeer::DIASAPL;
-		}
-
+    if ($this->diasapl !== $v) {
+        $this->diasapl = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadesctoPeer::DIASAPL;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = CadesctoPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = CadesctoPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setTipret($v)
 	{
 
-		if ($this->tipret !== $v) {
-			$this->tipret = $v;
-			$this->modifiedColumns[] = CadesctoPeer::TIPRET;
-		}
-
+    if ($this->tipret !== $v) {
+        $this->tipret = $v;
+        $this->modifiedColumns[] = CadesctoPeer::TIPRET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadesctoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadesctoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coddesc = $rs->getString($startcol + 0);
+      $this->coddesc = $rs->getString($startcol + 0);
 
-			$this->desdesc = $rs->getString($startcol + 1);
+      $this->desdesc = $rs->getString($startcol + 1);
 
-			$this->tipdesc = $rs->getString($startcol + 2);
+      $this->tipdesc = $rs->getString($startcol + 2);
 
-			$this->mondesc = $rs->getFloat($startcol + 3);
+      $this->mondesc = $rs->getFloat($startcol + 3);
 
-			$this->diasapl = $rs->getFloat($startcol + 4);
+      $this->diasapl = $rs->getFloat($startcol + 4);
 
-			$this->codcta = $rs->getString($startcol + 5);
+      $this->codcta = $rs->getString($startcol + 5);
 
-			$this->tipret = $rs->getString($startcol + 6);
+      $this->tipret = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadescto object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadescto object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -261,6 +291,7 @@ abstract class BaseCadescto extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CadesctoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadesctoPeer::doUpdate($this, $con);

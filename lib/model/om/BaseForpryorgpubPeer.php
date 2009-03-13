@@ -13,7 +13,7 @@ abstract class BaseForpryorgpubPeer {
 	const CLASS_DEFAULT = 'lib.model.Forpryorgpub';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,21 @@ abstract class BaseForpryorgpubPeer {
 	const RESEJE = 'forpryorgpub.RESEJE';
 
 	
+	const TIPCNX = 'forpryorgpub.TIPCNX';
+
+	
+	const DETOBS = 'forpryorgpub.DETOBS';
+
+	
+	const REQACC = 'forpryorgpub.REQACC';
+
+	
+	const CONCOMOTRPRY = 'forpryorgpub.CONCOMOTRPRY';
+
+	
+	const ENTCFLPRY = 'forpryorgpub.ENTCFLPRY';
+
+	
 	const ID = 'forpryorgpub.ID';
 
 	
@@ -40,18 +55,18 @@ abstract class BaseForpryorgpubPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codorg', 'Monapo', 'Reseje', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ForpryorgpubPeer::CODPRO, ForpryorgpubPeer::CODORG, ForpryorgpubPeer::MONAPO, ForpryorgpubPeer::RESEJE, ForpryorgpubPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codorg', 'monapo', 'reseje', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codorg', 'Monapo', 'Reseje', 'Tipcnx', 'Detobs', 'Reqacc', 'Concomotrpry', 'Entcflpry', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ForpryorgpubPeer::CODPRO, ForpryorgpubPeer::CODORG, ForpryorgpubPeer::MONAPO, ForpryorgpubPeer::RESEJE, ForpryorgpubPeer::TIPCNX, ForpryorgpubPeer::DETOBS, ForpryorgpubPeer::REQACC, ForpryorgpubPeer::CONCOMOTRPRY, ForpryorgpubPeer::ENTCFLPRY, ForpryorgpubPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codorg', 'monapo', 'reseje', 'tipcnx', 'detobs', 'reqacc', 'concomotrpry', 'entcflpry', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codorg' => 1, 'Monapo' => 2, 'Reseje' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (ForpryorgpubPeer::CODPRO => 0, ForpryorgpubPeer::CODORG => 1, ForpryorgpubPeer::MONAPO => 2, ForpryorgpubPeer::RESEJE => 3, ForpryorgpubPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codorg' => 1, 'monapo' => 2, 'reseje' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codorg' => 1, 'Monapo' => 2, 'Reseje' => 3, 'Tipcnx' => 4, 'Detobs' => 5, 'Reqacc' => 6, 'Concomotrpry' => 7, 'Entcflpry' => 8, 'Id' => 9, ),
+		BasePeer::TYPE_COLNAME => array (ForpryorgpubPeer::CODPRO => 0, ForpryorgpubPeer::CODORG => 1, ForpryorgpubPeer::MONAPO => 2, ForpryorgpubPeer::RESEJE => 3, ForpryorgpubPeer::TIPCNX => 4, ForpryorgpubPeer::DETOBS => 5, ForpryorgpubPeer::REQACC => 6, ForpryorgpubPeer::CONCOMOTRPRY => 7, ForpryorgpubPeer::ENTCFLPRY => 8, ForpryorgpubPeer::ID => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codorg' => 1, 'monapo' => 2, 'reseje' => 3, 'tipcnx' => 4, 'detobs' => 5, 'reqacc' => 6, 'concomotrpry' => 7, 'entcflpry' => 8, 'id' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
@@ -112,6 +127,16 @@ abstract class BaseForpryorgpubPeer {
 		$criteria->addSelectColumn(ForpryorgpubPeer::MONAPO);
 
 		$criteria->addSelectColumn(ForpryorgpubPeer::RESEJE);
+
+		$criteria->addSelectColumn(ForpryorgpubPeer::TIPCNX);
+
+		$criteria->addSelectColumn(ForpryorgpubPeer::DETOBS);
+
+		$criteria->addSelectColumn(ForpryorgpubPeer::REQACC);
+
+		$criteria->addSelectColumn(ForpryorgpubPeer::CONCOMOTRPRY);
+
+		$criteria->addSelectColumn(ForpryorgpubPeer::ENTCFLPRY);
 
 		$criteria->addSelectColumn(ForpryorgpubPeer::ID);
 
@@ -215,6 +240,7 @@ abstract class BaseForpryorgpubPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForpryorgpubPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

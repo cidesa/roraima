@@ -85,6 +85,10 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 
 
 	
+	protected $codpreiva;
+
+
+	
 	protected $id;
 
 	
@@ -93,430 +97,489 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodobr()
-	{
+  
+  public function getCodobr()
+  {
 
-		return $this->codobr; 		
-	}
-	
-	public function getCodtipobr()
-	{
+    return trim($this->codobr);
 
-		return $this->codtipobr; 		
-	}
-	
-	public function getDesobr()
-	{
+  }
+  
+  public function getCodtipobr()
+  {
 
-		return $this->desobr; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    return trim($this->codtipobr);
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDesobr()
+  {
 
-	
-	public function getFecfin($format = 'Y-m-d')
-	{
+    return trim($this->desobr);
 
-		if ($this->fecfin === null || $this->fecfin === '') {
-			return null;
-		} elseif (!is_int($this->fecfin)) {
-						$ts = strtotime($this->fecfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
-			}
-		} else {
-			$ts = $this->fecfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-	
-	public function getUnocon()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->unocon; 		
-	}
-	
-	public function getCodpre()
-	{
+  
+  public function getFecfin($format = 'Y-m-d')
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getCodpai()
-	{
+    if ($this->fecfin === null || $this->fecfin === '') {
+      return null;
+    } elseif (!is_int($this->fecfin)) {
+            $ts = adodb_strtotime($this->fecfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
+      }
+    } else {
+      $ts = $this->fecfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codpai; 		
-	}
-	
-	public function getCodedo()
-	{
+  
+  public function getUnocon()
+  {
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodmun()
-	{
+    return trim($this->unocon);
 
-		return $this->codmun; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getCodsec()
-	{
+    return trim($this->codpre);
 
-		return $this->codsec; 		
-	}
-	
-	public function getDirobr()
-	{
+  }
+  
+  public function getCodpai()
+  {
 
-		return $this->dirobr; 		
-	}
-	
-	public function getMonobr()
-	{
+    return trim($this->codpai);
 
-		return number_format($this->monobr,2,',','.');
-		
-	}
-	
-	public function getStaobr()
-	{
+  }
+  
+  public function getCodedo()
+  {
 
-		return $this->staobr; 		
-	}
-	
-	public function getDespre()
-	{
+    return trim($this->codedo);
 
-		return $this->despre; 		
-	}
-	
-	public function getSubtot()
-	{
+  }
+  
+  public function getCodmun()
+  {
 
-		return number_format($this->subtot,2,',','.');
-		
-	}
-	
-	public function getMoniva()
-	{
+    return trim($this->codmun);
 
-		return number_format($this->moniva,2,',','.');
-		
-	}
-	
-	public function getIvaobr()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return number_format($this->ivaobr,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codpar);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodsec()
+  {
+
+    return trim($this->codsec);
+
+  }
+  
+  public function getDirobr()
+  {
+
+    return trim($this->dirobr);
+
+  }
+  
+  public function getMonobr($val=false)
+  {
+
+    if($val) return number_format($this->monobr,2,',','.');
+    else return $this->monobr;
+
+  }
+  
+  public function getStaobr()
+  {
+
+    return trim($this->staobr);
+
+  }
+  
+  public function getDespre()
+  {
+
+    return trim($this->despre);
+
+  }
+  
+  public function getSubtot($val=false)
+  {
+
+    if($val) return number_format($this->subtot,2,',','.');
+    else return $this->subtot;
+
+  }
+  
+  public function getMoniva($val=false)
+  {
+
+    if($val) return number_format($this->moniva,2,',','.');
+    else return $this->moniva;
+
+  }
+  
+  public function getIvaobr($val=false)
+  {
+
+    if($val) return number_format($this->ivaobr,2,',','.');
+    else return $this->ivaobr;
+
+  }
+  
+  public function getCodpreiva()
+  {
+
+    return trim($this->codpreiva);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodobr($v)
 	{
 
-		if ($this->codobr !== $v) {
-			$this->codobr = $v;
-			$this->modifiedColumns[] = OcregobrPeer::CODOBR;
-		}
-
+    if ($this->codobr !== $v) {
+        $this->codobr = $v;
+        $this->modifiedColumns[] = OcregobrPeer::CODOBR;
+      }
+  
 	} 
 	
 	public function setCodtipobr($v)
 	{
 
-		if ($this->codtipobr !== $v) {
-			$this->codtipobr = $v;
-			$this->modifiedColumns[] = OcregobrPeer::CODTIPOBR;
-		}
-
+    if ($this->codtipobr !== $v) {
+        $this->codtipobr = $v;
+        $this->modifiedColumns[] = OcregobrPeer::CODTIPOBR;
+      }
+  
 	} 
 	
 	public function setDesobr($v)
 	{
 
-		if ($this->desobr !== $v) {
-			$this->desobr = $v;
-			$this->modifiedColumns[] = OcregobrPeer::DESOBR;
-		}
-
+    if ($this->desobr !== $v) {
+        $this->desobr = $v;
+        $this->modifiedColumns[] = OcregobrPeer::DESOBR;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = OcregobrPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = OcregobrPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfin !== $ts) {
-			$this->fecfin = $ts;
-			$this->modifiedColumns[] = OcregobrPeer::FECFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfin !== $ts) {
+      $this->fecfin = $ts;
+      $this->modifiedColumns[] = OcregobrPeer::FECFIN;
+    }
 
 	} 
 	
 	public function setUnocon($v)
 	{
 
-		if ($this->unocon !== $v) {
-			$this->unocon = $v;
-			$this->modifiedColumns[] = OcregobrPeer::UNOCON;
-		}
-
+    if ($this->unocon !== $v) {
+        $this->unocon = $v;
+        $this->modifiedColumns[] = OcregobrPeer::UNOCON;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = OcregobrPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = OcregobrPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = OcregobrPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = OcregobrPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = OcregobrPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = OcregobrPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = OcregobrPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = OcregobrPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = OcregobrPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = OcregobrPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCodsec($v)
 	{
 
-		if ($this->codsec !== $v) {
-			$this->codsec = $v;
-			$this->modifiedColumns[] = OcregobrPeer::CODSEC;
-		}
-
+    if ($this->codsec !== $v) {
+        $this->codsec = $v;
+        $this->modifiedColumns[] = OcregobrPeer::CODSEC;
+      }
+  
 	} 
 	
 	public function setDirobr($v)
 	{
 
-		if ($this->dirobr !== $v) {
-			$this->dirobr = $v;
-			$this->modifiedColumns[] = OcregobrPeer::DIROBR;
-		}
-
+    if ($this->dirobr !== $v) {
+        $this->dirobr = $v;
+        $this->modifiedColumns[] = OcregobrPeer::DIROBR;
+      }
+  
 	} 
 	
 	public function setMonobr($v)
 	{
 
-		if ($this->monobr !== $v) {
-			$this->monobr = $v;
-			$this->modifiedColumns[] = OcregobrPeer::MONOBR;
-		}
-
+    if ($this->monobr !== $v) {
+        $this->monobr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregobrPeer::MONOBR;
+      }
+  
 	} 
 	
 	public function setStaobr($v)
 	{
 
-		if ($this->staobr !== $v) {
-			$this->staobr = $v;
-			$this->modifiedColumns[] = OcregobrPeer::STAOBR;
-		}
-
+    if ($this->staobr !== $v) {
+        $this->staobr = $v;
+        $this->modifiedColumns[] = OcregobrPeer::STAOBR;
+      }
+  
 	} 
 	
 	public function setDespre($v)
 	{
 
-		if ($this->despre !== $v) {
-			$this->despre = $v;
-			$this->modifiedColumns[] = OcregobrPeer::DESPRE;
-		}
-
+    if ($this->despre !== $v) {
+        $this->despre = $v;
+        $this->modifiedColumns[] = OcregobrPeer::DESPRE;
+      }
+  
 	} 
 	
 	public function setSubtot($v)
 	{
 
-		if ($this->subtot !== $v) {
-			$this->subtot = $v;
-			$this->modifiedColumns[] = OcregobrPeer::SUBTOT;
-		}
-
+    if ($this->subtot !== $v) {
+        $this->subtot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregobrPeer::SUBTOT;
+      }
+  
 	} 
 	
 	public function setMoniva($v)
 	{
 
-		if ($this->moniva !== $v) {
-			$this->moniva = $v;
-			$this->modifiedColumns[] = OcregobrPeer::MONIVA;
-		}
-
+    if ($this->moniva !== $v) {
+        $this->moniva = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregobrPeer::MONIVA;
+      }
+  
 	} 
 	
 	public function setIvaobr($v)
 	{
 
-		if ($this->ivaobr !== $v) {
-			$this->ivaobr = $v;
-			$this->modifiedColumns[] = OcregobrPeer::IVAOBR;
-		}
+    if ($this->ivaobr !== $v) {
+        $this->ivaobr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcregobrPeer::IVAOBR;
+      }
+  
+	} 
+	
+	public function setCodpreiva($v)
+	{
 
+    if ($this->codpreiva !== $v) {
+        $this->codpreiva = $v;
+        $this->modifiedColumns[] = OcregobrPeer::CODPREIVA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcregobrPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcregobrPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codobr = $rs->getString($startcol + 0);
+      $this->codobr = $rs->getString($startcol + 0);
 
-			$this->codtipobr = $rs->getString($startcol + 1);
+      $this->codtipobr = $rs->getString($startcol + 1);
 
-			$this->desobr = $rs->getString($startcol + 2);
+      $this->desobr = $rs->getString($startcol + 2);
 
-			$this->fecini = $rs->getDate($startcol + 3, null);
+      $this->fecini = $rs->getDate($startcol + 3, null);
 
-			$this->fecfin = $rs->getDate($startcol + 4, null);
+      $this->fecfin = $rs->getDate($startcol + 4, null);
 
-			$this->unocon = $rs->getString($startcol + 5);
+      $this->unocon = $rs->getString($startcol + 5);
 
-			$this->codpre = $rs->getString($startcol + 6);
+      $this->codpre = $rs->getString($startcol + 6);
 
-			$this->codpai = $rs->getString($startcol + 7);
+      $this->codpai = $rs->getString($startcol + 7);
 
-			$this->codedo = $rs->getString($startcol + 8);
+      $this->codedo = $rs->getString($startcol + 8);
 
-			$this->codmun = $rs->getString($startcol + 9);
+      $this->codmun = $rs->getString($startcol + 9);
 
-			$this->codpar = $rs->getString($startcol + 10);
+      $this->codpar = $rs->getString($startcol + 10);
 
-			$this->codsec = $rs->getString($startcol + 11);
+      $this->codsec = $rs->getString($startcol + 11);
 
-			$this->dirobr = $rs->getString($startcol + 12);
+      $this->dirobr = $rs->getString($startcol + 12);
 
-			$this->monobr = $rs->getFloat($startcol + 13);
+      $this->monobr = $rs->getFloat($startcol + 13);
 
-			$this->staobr = $rs->getString($startcol + 14);
+      $this->staobr = $rs->getString($startcol + 14);
 
-			$this->despre = $rs->getString($startcol + 15);
+      $this->despre = $rs->getString($startcol + 15);
 
-			$this->subtot = $rs->getFloat($startcol + 16);
+      $this->subtot = $rs->getFloat($startcol + 16);
 
-			$this->moniva = $rs->getFloat($startcol + 17);
+      $this->moniva = $rs->getFloat($startcol + 17);
 
-			$this->ivaobr = $rs->getFloat($startcol + 18);
+      $this->ivaobr = $rs->getFloat($startcol + 18);
 
-			$this->id = $rs->getInt($startcol + 19);
+      $this->codpreiva = $rs->getString($startcol + 19);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 20);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 20; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocregobr object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 21; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocregobr object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -573,6 +636,7 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcregobrPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcregobrPeer::doUpdate($this, $con);
@@ -696,6 +760,9 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 				return $this->getIvaobr();
 				break;
 			case 19:
+				return $this->getCodpreiva();
+				break;
+			case 20:
 				return $this->getId();
 				break;
 			default:
@@ -727,7 +794,8 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 			$keys[16] => $this->getSubtot(),
 			$keys[17] => $this->getMoniva(),
 			$keys[18] => $this->getIvaobr(),
-			$keys[19] => $this->getId(),
+			$keys[19] => $this->getCodpreiva(),
+			$keys[20] => $this->getId(),
 		);
 		return $result;
 	}
@@ -801,6 +869,9 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 				$this->setIvaobr($value);
 				break;
 			case 19:
+				$this->setCodpreiva($value);
+				break;
+			case 20:
 				$this->setId($value);
 				break;
 		} 	}
@@ -829,7 +900,8 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[16], $arr)) $this->setSubtot($arr[$keys[16]]);
 		if (array_key_exists($keys[17], $arr)) $this->setMoniva($arr[$keys[17]]);
 		if (array_key_exists($keys[18], $arr)) $this->setIvaobr($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setId($arr[$keys[19]]);
+		if (array_key_exists($keys[19], $arr)) $this->setCodpreiva($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setId($arr[$keys[20]]);
 	}
 
 	
@@ -856,6 +928,7 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OcregobrPeer::SUBTOT)) $criteria->add(OcregobrPeer::SUBTOT, $this->subtot);
 		if ($this->isColumnModified(OcregobrPeer::MONIVA)) $criteria->add(OcregobrPeer::MONIVA, $this->moniva);
 		if ($this->isColumnModified(OcregobrPeer::IVAOBR)) $criteria->add(OcregobrPeer::IVAOBR, $this->ivaobr);
+		if ($this->isColumnModified(OcregobrPeer::CODPREIVA)) $criteria->add(OcregobrPeer::CODPREIVA, $this->codpreiva);
 		if ($this->isColumnModified(OcregobrPeer::ID)) $criteria->add(OcregobrPeer::ID, $this->id);
 
 		return $criteria;
@@ -924,6 +997,8 @@ abstract class BaseOcregobr extends BaseObject  implements Persistent {
 		$copyObj->setMoniva($this->moniva);
 
 		$copyObj->setIvaobr($this->ivaobr);
+
+		$copyObj->setCodpreiva($this->codpreiva);
 
 
 		$copyObj->setNew(true);

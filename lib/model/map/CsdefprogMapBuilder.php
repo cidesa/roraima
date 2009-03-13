@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CsdefprogMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CsdefprogMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CsdefprogMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('csdefprog');
 		$tMap->setPhpName('Csdefprog');
 
@@ -37,6 +37,6 @@ class CsdefprogMapBuilder {
 		$tMap->addColumn('NOMPROG', 'Nomprog', 'string', CreoleTypes::VARCHAR, true, 250);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -41,148 +41,177 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoduso()
-	{
+  
+  public function getCoduso()
+  {
 
-		return $this->coduso; 		
-	}
-	
-	public function getAnovig()
-	{
+    return trim($this->coduso);
 
-		return $this->anovig; 		
-	}
-	
-	public function getDesuso()
-	{
+  }
+  
+  public function getAnovig()
+  {
 
-		return $this->desuso; 		
-	}
-	
-	public function getMonafo()
-	{
+    return trim($this->anovig);
 
-		return number_format($this->monafo,2,',','.');
-		
-	}
-	
-	public function getPorali()
-	{
+  }
+  
+  public function getDesuso()
+  {
 
-		return number_format($this->porali,2,',','.');
-		
-	}
-	
-	public function getAnolim()
-	{
+    return trim($this->desuso);
 
-		return $this->anolim; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonafo($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monafo,2,',','.');
+    else return $this->monafo;
+
+  }
+  
+  public function getPorali($val=false)
+  {
+
+    if($val) return number_format($this->porali,2,',','.');
+    else return $this->porali;
+
+  }
+  
+  public function getAnolim()
+  {
+
+    return trim($this->anolim);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoduso($v)
 	{
 
-		if ($this->coduso !== $v) {
-			$this->coduso = $v;
-			$this->modifiedColumns[] = FcusovehPeer::CODUSO;
-		}
-
+    if ($this->coduso !== $v) {
+        $this->coduso = $v;
+        $this->modifiedColumns[] = FcusovehPeer::CODUSO;
+      }
+  
 	} 
 	
 	public function setAnovig($v)
 	{
 
-		if ($this->anovig !== $v) {
-			$this->anovig = $v;
-			$this->modifiedColumns[] = FcusovehPeer::ANOVIG;
-		}
-
+    if ($this->anovig !== $v) {
+        $this->anovig = $v;
+        $this->modifiedColumns[] = FcusovehPeer::ANOVIG;
+      }
+  
 	} 
 	
 	public function setDesuso($v)
 	{
 
-		if ($this->desuso !== $v) {
-			$this->desuso = $v;
-			$this->modifiedColumns[] = FcusovehPeer::DESUSO;
-		}
-
+    if ($this->desuso !== $v) {
+        $this->desuso = $v;
+        $this->modifiedColumns[] = FcusovehPeer::DESUSO;
+      }
+  
 	} 
 	
 	public function setMonafo($v)
 	{
 
-		if ($this->monafo !== $v) {
-			$this->monafo = $v;
-			$this->modifiedColumns[] = FcusovehPeer::MONAFO;
-		}
-
+    if ($this->monafo !== $v) {
+        $this->monafo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcusovehPeer::MONAFO;
+      }
+  
 	} 
 	
 	public function setPorali($v)
 	{
 
-		if ($this->porali !== $v) {
-			$this->porali = $v;
-			$this->modifiedColumns[] = FcusovehPeer::PORALI;
-		}
-
+    if ($this->porali !== $v) {
+        $this->porali = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcusovehPeer::PORALI;
+      }
+  
 	} 
 	
 	public function setAnolim($v)
 	{
 
-		if ($this->anolim !== $v) {
-			$this->anolim = $v;
-			$this->modifiedColumns[] = FcusovehPeer::ANOLIM;
-		}
-
+    if ($this->anolim !== $v) {
+        $this->anolim = $v;
+        $this->modifiedColumns[] = FcusovehPeer::ANOLIM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcusovehPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcusovehPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduso = $rs->getString($startcol + 0);
+      $this->coduso = $rs->getString($startcol + 0);
 
-			$this->anovig = $rs->getString($startcol + 1);
+      $this->anovig = $rs->getString($startcol + 1);
 
-			$this->desuso = $rs->getString($startcol + 2);
+      $this->desuso = $rs->getString($startcol + 2);
 
-			$this->monafo = $rs->getFloat($startcol + 3);
+      $this->monafo = $rs->getFloat($startcol + 3);
 
-			$this->porali = $rs->getFloat($startcol + 4);
+      $this->porali = $rs->getFloat($startcol + 4);
 
-			$this->anolim = $rs->getString($startcol + 5);
+      $this->anolim = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcusoveh object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcusoveh object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +268,7 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcusovehPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcusovehPeer::doUpdate($this, $con);
@@ -415,7 +445,7 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcusovehPeer::DATABASE_NAME);
 
-		$criteria->add(FcusovehPeer::ANOVIG, $this->anovig);
+		$criteria->add(FcusovehPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -423,13 +453,13 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 	
 	public function getPrimaryKey()
 	{
-		return $this->getAnovig();
+		return $this->getId();
 	}
 
 	
 	public function setPrimaryKey($key)
 	{
-		$this->setAnovig($key);
+		$this->setId($key);
 	}
 
 	
@@ -437,6 +467,8 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 	{
 
 		$copyObj->setCoduso($this->coduso);
+
+		$copyObj->setAnovig($this->anovig);
 
 		$copyObj->setDesuso($this->desuso);
 
@@ -446,12 +478,10 @@ abstract class BaseFcusoveh extends BaseObject  implements Persistent {
 
 		$copyObj->setAnolim($this->anolim);
 
-		$copyObj->setId($this->id);
-
 
 		$copyObj->setNew(true);
 
-		$copyObj->setAnovig(NULL); 
+		$copyObj->setId(NULL); 
 	}
 
 	

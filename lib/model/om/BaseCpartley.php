@@ -41,146 +41,175 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodart()
-	{
+  
+  public function getCodart()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getDesart()
-	{
+    return trim($this->codart);
 
-		return $this->desart; 		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getDesart()
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getStacon()
-	{
+    return trim($this->desart);
 
-		return $this->stacon; 		
-	}
-	
-	public function getStagob()
-	{
+  }
+  
+  public function getNomabr()
+  {
 
-		return $this->stagob; 		
-	}
-	
-	public function getStapre()
-	{
+    return trim($this->nomabr);
 
-		return $this->stapre; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getStacon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->stacon);
+
+  }
+  
+  public function getStagob()
+  {
+
+    return trim($this->stagob);
+
+  }
+  
+  public function getStapre()
+  {
+
+    return trim($this->stapre);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CpartleyPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CpartleyPeer::CODART;
+      }
+  
 	} 
 	
 	public function setDesart($v)
 	{
 
-		if ($this->desart !== $v) {
-			$this->desart = $v;
-			$this->modifiedColumns[] = CpartleyPeer::DESART;
-		}
-
+    if ($this->desart !== $v) {
+        $this->desart = $v;
+        $this->modifiedColumns[] = CpartleyPeer::DESART;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = CpartleyPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = CpartleyPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setStacon($v)
 	{
 
-		if ($this->stacon !== $v) {
-			$this->stacon = $v;
-			$this->modifiedColumns[] = CpartleyPeer::STACON;
-		}
-
+    if ($this->stacon !== $v) {
+        $this->stacon = $v;
+        $this->modifiedColumns[] = CpartleyPeer::STACON;
+      }
+  
 	} 
 	
 	public function setStagob($v)
 	{
 
-		if ($this->stagob !== $v) {
-			$this->stagob = $v;
-			$this->modifiedColumns[] = CpartleyPeer::STAGOB;
-		}
-
+    if ($this->stagob !== $v) {
+        $this->stagob = $v;
+        $this->modifiedColumns[] = CpartleyPeer::STAGOB;
+      }
+  
 	} 
 	
 	public function setStapre($v)
 	{
 
-		if ($this->stapre !== $v) {
-			$this->stapre = $v;
-			$this->modifiedColumns[] = CpartleyPeer::STAPRE;
-		}
-
+    if ($this->stapre !== $v) {
+        $this->stapre = $v;
+        $this->modifiedColumns[] = CpartleyPeer::STAPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpartleyPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpartleyPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codart = $rs->getString($startcol + 0);
+      $this->codart = $rs->getString($startcol + 0);
 
-			$this->desart = $rs->getString($startcol + 1);
+      $this->desart = $rs->getString($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->stacon = $rs->getString($startcol + 3);
+      $this->stacon = $rs->getString($startcol + 3);
 
-			$this->stagob = $rs->getString($startcol + 4);
+      $this->stagob = $rs->getString($startcol + 4);
 
-			$this->stapre = $rs->getString($startcol + 5);
+      $this->stapre = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpartley object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpartley object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseCpartley extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpartleyPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpartleyPeer::doUpdate($this, $con);

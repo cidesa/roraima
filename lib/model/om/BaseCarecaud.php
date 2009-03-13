@@ -44,234 +44,275 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collFarecpros;
+
+	
+	protected $lastFarecproCriteria = null;
+
+	
+	protected $collCarecpros;
+
+	
+	protected $lastCarecproCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrec()
-	{
+  
+  public function getCodrec()
+  {
 
-		return $this->codrec; 		
-	}
-	
-	public function getDesrec()
-	{
+    return trim($this->codrec);
 
-		return $this->desrec; 		
-	}
-	
-	public function getLimrec()
-	{
+  }
+  
+  public function getDesrec()
+  {
 
-		return $this->limrec; 		
-	}
-	
-	public function getFecemi($format = 'Y-m-d')
-	{
+    return trim($this->desrec);
 
-		if ($this->fecemi === null || $this->fecemi === '') {
-			return null;
-		} elseif (!is_int($this->fecemi)) {
-						$ts = strtotime($this->fecemi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
-			}
-		} else {
-			$ts = $this->fecemi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getLimrec()
+  {
 
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+    return trim($this->limrec);
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecemi($format = 'Y-m-d')
+  {
 
-	
-	public function getCanutr()
-	{
+    if ($this->fecemi === null || $this->fecemi === '') {
+      return null;
+    } elseif (!is_int($this->fecemi)) {
+            $ts = adodb_strtotime($this->fecemi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
+      }
+    } else {
+      $ts = $this->fecemi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->canutr,2,',','.');
-		
-	}
-	
-	public function getCodtiprec()
-	{
+  
+  public function getFecven($format = 'Y-m-d')
+  {
 
-		return $this->codtiprec; 		
-	}
-	
-	public function getObserv()
-	{
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->observ; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getCanutr($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->canutr,2,',','.');
+    else return $this->canutr;
+
+  }
+  
+  public function getCodtiprec()
+  {
+
+    return trim($this->codtiprec);
+
+  }
+  
+  public function getObserv()
+  {
+
+    return trim($this->observ);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = CarecaudPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = CarecaudPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setDesrec($v)
 	{
 
-		if ($this->desrec !== $v) {
-			$this->desrec = $v;
-			$this->modifiedColumns[] = CarecaudPeer::DESREC;
-		}
-
+    if ($this->desrec !== $v) {
+        $this->desrec = $v;
+        $this->modifiedColumns[] = CarecaudPeer::DESREC;
+      }
+  
 	} 
 	
 	public function setLimrec($v)
 	{
 
-		if ($this->limrec !== $v) {
-			$this->limrec = $v;
-			$this->modifiedColumns[] = CarecaudPeer::LIMREC;
-		}
-
+    if ($this->limrec !== $v) {
+        $this->limrec = $v;
+        $this->modifiedColumns[] = CarecaudPeer::LIMREC;
+      }
+  
 	} 
 	
 	public function setFecemi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecemi !== $ts) {
-			$this->fecemi = $ts;
-			$this->modifiedColumns[] = CarecaudPeer::FECEMI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecemi !== $ts) {
+      $this->fecemi = $ts;
+      $this->modifiedColumns[] = CarecaudPeer::FECEMI;
+    }
 
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = CarecaudPeer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = CarecaudPeer::FECVEN;
+    }
 
 	} 
 	
 	public function setCanutr($v)
 	{
 
-		if ($this->canutr !== $v) {
-			$this->canutr = $v;
-			$this->modifiedColumns[] = CarecaudPeer::CANUTR;
-		}
-
+    if ($this->canutr !== $v) {
+        $this->canutr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CarecaudPeer::CANUTR;
+      }
+  
 	} 
 	
 	public function setCodtiprec($v)
 	{
 
-		if ($this->codtiprec !== $v) {
-			$this->codtiprec = $v;
-			$this->modifiedColumns[] = CarecaudPeer::CODTIPREC;
-		}
-
+    if ($this->codtiprec !== $v) {
+        $this->codtiprec = $v;
+        $this->modifiedColumns[] = CarecaudPeer::CODTIPREC;
+      }
+  
 	} 
 	
 	public function setObserv($v)
 	{
 
-		if ($this->observ !== $v) {
-			$this->observ = $v;
-			$this->modifiedColumns[] = CarecaudPeer::OBSERV;
-		}
-
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = CarecaudPeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CarecaudPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CarecaudPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrec = $rs->getString($startcol + 0);
+      $this->codrec = $rs->getString($startcol + 0);
 
-			$this->desrec = $rs->getString($startcol + 1);
+      $this->desrec = $rs->getString($startcol + 1);
 
-			$this->limrec = $rs->getString($startcol + 2);
+      $this->limrec = $rs->getString($startcol + 2);
 
-			$this->fecemi = $rs->getDate($startcol + 3, null);
+      $this->fecemi = $rs->getDate($startcol + 3, null);
 
-			$this->fecven = $rs->getDate($startcol + 4, null);
+      $this->fecven = $rs->getDate($startcol + 4, null);
 
-			$this->canutr = $rs->getFloat($startcol + 5);
+      $this->canutr = $rs->getFloat($startcol + 5);
 
-			$this->codtiprec = $rs->getString($startcol + 6);
+      $this->codtiprec = $rs->getString($startcol + 6);
 
-			$this->observ = $rs->getString($startcol + 7);
+      $this->observ = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Carecaud object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Carecaud object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -328,11 +369,28 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CarecaudPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CarecaudPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collFarecpros !== null) {
+				foreach($this->collFarecpros as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collCarecpros !== null) {
+				foreach($this->collCarecpros as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -374,6 +432,22 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collFarecpros !== null) {
+					foreach($this->collFarecpros as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collCarecpros !== null) {
+					foreach($this->collCarecpros as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -560,6 +634,19 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 		$copyObj->setObserv($this->observ);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getFarecpros() as $relObj) {
+				$copyObj->addFarecpro($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getCarecpros() as $relObj) {
+				$copyObj->addCarecpro($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -581,6 +668,216 @@ abstract class BaseCarecaud extends BaseObject  implements Persistent {
 			self::$peer = new CarecaudPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initFarecpros()
+	{
+		if ($this->collFarecpros === null) {
+			$this->collFarecpros = array();
+		}
+	}
+
+	
+	public function getFarecpros($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseFarecproPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collFarecpros === null) {
+			if ($this->isNew()) {
+			   $this->collFarecpros = array();
+			} else {
+
+				$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
+
+				FarecproPeer::addSelectColumns($criteria);
+				$this->collFarecpros = FarecproPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
+
+				FarecproPeer::addSelectColumns($criteria);
+				if (!isset($this->lastFarecproCriteria) || !$this->lastFarecproCriteria->equals($criteria)) {
+					$this->collFarecpros = FarecproPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastFarecproCriteria = $criteria;
+		return $this->collFarecpros;
+	}
+
+	
+	public function countFarecpros($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseFarecproPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
+
+		return FarecproPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addFarecpro(Farecpro $l)
+	{
+		$this->collFarecpros[] = $l;
+		$l->setCarecaud($this);
+	}
+
+
+	
+	public function getFarecprosJoinFacliente($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseFarecproPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collFarecpros === null) {
+			if ($this->isNew()) {
+				$this->collFarecpros = array();
+			} else {
+
+				$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
+
+				$this->collFarecpros = FarecproPeer::doSelectJoinFacliente($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(FarecproPeer::CODREC, $this->getCodrec());
+
+			if (!isset($this->lastFarecproCriteria) || !$this->lastFarecproCriteria->equals($criteria)) {
+				$this->collFarecpros = FarecproPeer::doSelectJoinFacliente($criteria, $con);
+			}
+		}
+		$this->lastFarecproCriteria = $criteria;
+
+		return $this->collFarecpros;
+	}
+
+	
+	public function initCarecpros()
+	{
+		if ($this->collCarecpros === null) {
+			$this->collCarecpros = array();
+		}
+	}
+
+	
+	public function getCarecpros($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCarecproPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCarecpros === null) {
+			if ($this->isNew()) {
+			   $this->collCarecpros = array();
+			} else {
+
+				$criteria->add(CarecproPeer::CODREC, $this->getCodrec());
+
+				CarecproPeer::addSelectColumns($criteria);
+				$this->collCarecpros = CarecproPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(CarecproPeer::CODREC, $this->getCodrec());
+
+				CarecproPeer::addSelectColumns($criteria);
+				if (!isset($this->lastCarecproCriteria) || !$this->lastCarecproCriteria->equals($criteria)) {
+					$this->collCarecpros = CarecproPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastCarecproCriteria = $criteria;
+		return $this->collCarecpros;
+	}
+
+	
+	public function countCarecpros($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseCarecproPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(CarecproPeer::CODREC, $this->getCodrec());
+
+		return CarecproPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addCarecpro(Carecpro $l)
+	{
+		$this->collCarecpros[] = $l;
+		$l->setCarecaud($this);
+	}
+
+
+	
+	public function getCarecprosJoinCaprovee($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseCarecproPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collCarecpros === null) {
+			if ($this->isNew()) {
+				$this->collCarecpros = array();
+			} else {
+
+				$criteria->add(CarecproPeer::CODREC, $this->getCodrec());
+
+				$this->collCarecpros = CarecproPeer::doSelectJoinCaprovee($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(CarecproPeer::CODREC, $this->getCodrec());
+
+			if (!isset($this->lastCarecproCriteria) || !$this->lastCarecproCriteria->equals($criteria)) {
+				$this->collCarecpros = CarecproPeer::doSelectJoinCaprovee($criteria, $con);
+			}
+		}
+		$this->lastCarecproCriteria = $criteria;
+
+		return $this->collCarecpros;
 	}
 
 } 

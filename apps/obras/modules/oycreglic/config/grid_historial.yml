@@ -1,0 +1,39 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   oclichis
+  ancho:				   700
+  anchogrid:               650
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Historial de Proceso
+  tipo:                    t
+  nombrecampo:             histproc
+  esgrabable:			   true
+  html:                    [size='35']
+2:       # Columna 2
+  titulo:                  Periódico
+  tipo:                    t
+  nombrecampo:             periodico
+  esgrabable:			   true
+  html:                    [size=25]
+3:       # Columna 3
+  titulo:                  Fecha Publicación
+  tipo:                    f
+  nombrecampo:             fecpub
+  esgrabable:			   true
+  html:                    [ ]
+4:       # Columna 4
+  titulo:                  Página
+  tipo:                    t
+  nombrecampo:             pagina
+  esgrabable:			   true
+  html:                    [size=10]
+5:       # Columna 5
+  titulo:                  Cuerpo
+  tipo:                    t
+  nombrecampo:             cuerpo
+  esgrabable:			   true
+  html:                    [size=20]

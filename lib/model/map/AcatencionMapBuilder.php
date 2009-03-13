@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class AcatencionMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.AcatencionMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.AcatencionMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('acatencion');
 		$tMap->setPhpName('Acatencion');
 
@@ -38,13 +38,13 @@ class AcatencionMapBuilder {
 
 		$tMap->addColumn('ESTADO', 'Estado', 'string', CreoleTypes::VARCHAR, true, 20);
 
-		$tMap->addColumn('FECREC', 'Fecrec', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECREC', 'Fecrec', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('HORREC', 'Horrec', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('HORREC', 'Horrec', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('FECATE', 'Fecate', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECATE', 'Fecate', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('HORATE', 'Horate', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('HORATE', 'Horate', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('NUMUNI', 'Numuni', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -55,6 +55,6 @@ class AcatencionMapBuilder {
 		$tMap->addColumn('STAATE', 'Staate', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

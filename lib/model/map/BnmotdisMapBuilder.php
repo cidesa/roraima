@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class BnmotdisMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.BnmotdisMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.BnmotdisMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('bnmotdis');
 		$tMap->setPhpName('Bnmotdis');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('bnmotdis_SEQ');
 
 		$tMap->addColumn('CODMOT', 'Codmot', 'string', CreoleTypes::VARCHAR, true, 4);
 
@@ -45,6 +47,6 @@ class BnmotdisMapBuilder {
 		$tMap->addColumn('ADIMEJ', 'Adimej', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -6,16 +6,23 @@ generator:
     fields:
       codequ:       { name: Código }
       desequ:       { name: Descripción}
-         
-     
+      codtipequ:    { name: Tipo}
+      destipequ:    { name: Descripción}
+
     list:
-      title:          Definición de Equipos
-      filters:        [codequ]
-      display:        [codequ, desequ]
+      title:          Equipos
+      filters:        [codequ, desequ, codtipequ]
+      display:        [=codequ, desequ]
+      sort:  codequ
       object_actions:
         _edit:        ~
         _delete:      ~
-      max_per_page:   5
+      max_per_page:   10
     edit:
-      title:          Definición de Equipos
-      display:        [codequ, desequ]
+      title:          Edición de Equipos
+      display:        [codequ, desequ, codtipequ, destipequ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

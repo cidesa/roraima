@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Farecart
+    theme:            cidesaGenerator
+    fields:
+      codrgo: { name: Código}
+      nomrgo: { name: Nombre}
+      codart: { name: Código}
+      desart: { name: Descripción}
+    list:
+      title:          Recargos por Artículo
+      display:        [=codrgo, nomrgo]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codrgo]
+      max_per_page:   10
+      sort:           codrgo
+    edit:
+      title:          Edición de Recargos por Artículo
+      display:
+        "Datos del Recargo": [codrgo, nomrgo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

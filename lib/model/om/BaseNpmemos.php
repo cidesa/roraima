@@ -33,110 +33,137 @@ abstract class BaseNpmemos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmem()
-	{
+  
+  public function getCodmem()
+  {
 
-		return $this->codmem; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codmem);
 
-		return $this->codcon; 		
-	}
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getNomben()
-	{
+    return trim($this->codcon);
 
-		return $this->nomben; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomcon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomcon);
+
+  }
+  
+  public function getNomben()
+  {
+
+    return trim($this->nomben);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmem($v)
 	{
 
-		if ($this->codmem !== $v) {
-			$this->codmem = $v;
-			$this->modifiedColumns[] = NpmemosPeer::CODMEM;
-		}
-
+    if ($this->codmem !== $v) {
+        $this->codmem = $v;
+        $this->modifiedColumns[] = NpmemosPeer::CODMEM;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpmemosPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpmemosPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = NpmemosPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = NpmemosPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setNomben($v)
 	{
 
-		if ($this->nomben !== $v) {
-			$this->nomben = $v;
-			$this->modifiedColumns[] = NpmemosPeer::NOMBEN;
-		}
-
+    if ($this->nomben !== $v) {
+        $this->nomben = $v;
+        $this->modifiedColumns[] = NpmemosPeer::NOMBEN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpmemosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpmemosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmem = $rs->getString($startcol + 0);
+      $this->codmem = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->nomcon = $rs->getString($startcol + 2);
+      $this->nomcon = $rs->getString($startcol + 2);
 
-			$this->nomben = $rs->getString($startcol + 3);
+      $this->nomben = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npmemos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npmemos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseNpmemos extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpmemosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpmemosPeer::doUpdate($this, $con);

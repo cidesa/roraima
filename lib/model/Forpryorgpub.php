@@ -9,4 +9,8 @@
  */ 
 class Forpryorgpub extends BaseForpryorgpub
 {
+   public function getNomorg()
+   {
+   	  return Herramientas::getX('CODORG','Fordeforgpub','Nomorg',self::getCodorg());
+   }
 }

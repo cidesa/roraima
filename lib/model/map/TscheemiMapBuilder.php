@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class TscheemiMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.TscheemiMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.TscheemiMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('tscheemi');
 		$tMap->setPhpName('Tscheemi');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('tscheemi_SEQ');
 
 		$tMap->addColumn('NUMCHE', 'Numche', 'string', CreoleTypes::VARCHAR, true, 20);
 
@@ -38,21 +40,21 @@ class TscheemiMapBuilder {
 
 		$tMap->addColumn('CEDRIF', 'Cedrif', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('FECEMI', 'Fecemi', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECEMI', 'Fecemi', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('MONCHE', 'Monche', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONCHE', 'Monche', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addColumn('CODEMI', 'Codemi', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('FECENT', 'Fecent', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECENT', 'Fecent', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('CODENT', 'Codent', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addColumn('OBSENT', 'Obsent', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('CEDREC', 'Cedrec', 'string', CreoleTypes::VARCHAR, false, 15);
 
@@ -60,7 +62,7 @@ class TscheemiMapBuilder {
 
 		$tMap->addColumn('TIPDOC', 'Tipdoc', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('FECING', 'Fecing', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECING', 'Fecing', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('TEMPORAL', 'Temporal', 'string', CreoleTypes::VARCHAR, false, 100);
 
@@ -77,6 +79,6 @@ class TscheemiMapBuilder {
 		$tMap->addColumn('PERAUT', 'Peraut', 'string', CreoleTypes::VARCHAR, false, 40);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

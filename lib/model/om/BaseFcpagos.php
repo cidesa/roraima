@@ -61,6 +61,14 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 
 
 	
+	protected $nomcon;
+
+
+	
+	protected $dircon;
+
+
+	
 	protected $id;
 
 	
@@ -75,320 +83,392 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumpag()
-	{
+  
+  public function getNumpag()
+  {
 
-		return $this->numpag; 		
-	}
-	
-	public function getFecpag($format = 'Y-m-d')
-	{
+    return trim($this->numpag);
 
-		if ($this->fecpag === null || $this->fecpag === '') {
-			return null;
-		} elseif (!is_int($this->fecpag)) {
-						$ts = strtotime($this->fecpag);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
-			}
-		} else {
-			$ts = $this->fecpag;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecpag($format = 'Y-m-d')
+  {
 
-	
-	public function getRifcon()
-	{
+    if ($this->fecpag === null || $this->fecpag === '') {
+      return null;
+    } elseif (!is_int($this->fecpag)) {
+            $ts = adodb_strtotime($this->fecpag);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
+      }
+    } else {
+      $ts = $this->fecpag;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->rifcon; 		
-	}
-	
-	public function getDespag()
-	{
+  
+  public function getRifcon()
+  {
 
-		return $this->despag; 		
-	}
-	
-	public function getMonpag()
-	{
+    return trim($this->rifcon);
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMonefe()
-	{
+  }
+  
+  public function getDespag()
+  {
 
-		return number_format($this->monefe,2,',','.');
-		
-	}
-	
-	public function getFunpag()
-	{
+    return trim($this->despag);
 
-		return $this->funpag; 		
-	}
-	
-	public function getCodrec()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return $this->codrec; 		
-	}
-	
-	public function getNumpagold()
-	{
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
 
-		return $this->numpagold; 		
-	}
-	
-	public function getEdopag()
-	{
+  }
+  
+  public function getMonefe($val=false)
+  {
 
-		return $this->edopag; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->monefe,2,',','.');
+    else return $this->monefe;
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFunpag()
+  {
 
-	
-	public function getMotanu()
-	{
+    return trim($this->funpag);
 
-		return $this->motanu; 		
-	}
-	
-	public function getCedanu()
-	{
+  }
+  
+  public function getCodrec()
+  {
 
-		return $this->cedanu; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codrec);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumpagold()
+  {
+
+    return trim($this->numpagold);
+
+  }
+  
+  public function getEdopag()
+  {
+
+    return trim($this->edopag);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getMotanu()
+  {
+
+    return trim($this->motanu);
+
+  }
+  
+  public function getCedanu()
+  {
+
+    return trim($this->cedanu);
+
+  }
+  
+  public function getNomcon()
+  {
+
+    return trim($this->nomcon);
+
+  }
+  
+  public function getDircon()
+  {
+
+    return trim($this->dircon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumpag($v)
 	{
 
-		if ($this->numpag !== $v) {
-			$this->numpag = $v;
-			$this->modifiedColumns[] = FcpagosPeer::NUMPAG;
-		}
-
+    if ($this->numpag !== $v) {
+        $this->numpag = $v;
+        $this->modifiedColumns[] = FcpagosPeer::NUMPAG;
+      }
+  
 	} 
 	
 	public function setFecpag($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecpag !== $ts) {
-			$this->fecpag = $ts;
-			$this->modifiedColumns[] = FcpagosPeer::FECPAG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecpag !== $ts) {
+      $this->fecpag = $ts;
+      $this->modifiedColumns[] = FcpagosPeer::FECPAG;
+    }
 
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FcpagosPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FcpagosPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setDespag($v)
 	{
 
-		if ($this->despag !== $v) {
-			$this->despag = $v;
-			$this->modifiedColumns[] = FcpagosPeer::DESPAG;
-		}
-
+    if ($this->despag !== $v) {
+        $this->despag = $v;
+        $this->modifiedColumns[] = FcpagosPeer::DESPAG;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = FcpagosPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcpagosPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMonefe($v)
 	{
 
-		if ($this->monefe !== $v) {
-			$this->monefe = $v;
-			$this->modifiedColumns[] = FcpagosPeer::MONEFE;
-		}
-
+    if ($this->monefe !== $v) {
+        $this->monefe = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcpagosPeer::MONEFE;
+      }
+  
 	} 
 	
 	public function setFunpag($v)
 	{
 
-		if ($this->funpag !== $v) {
-			$this->funpag = $v;
-			$this->modifiedColumns[] = FcpagosPeer::FUNPAG;
-		}
-
+    if ($this->funpag !== $v) {
+        $this->funpag = $v;
+        $this->modifiedColumns[] = FcpagosPeer::FUNPAG;
+      }
+  
 	} 
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = FcpagosPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = FcpagosPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setNumpagold($v)
 	{
 
-		if ($this->numpagold !== $v) {
-			$this->numpagold = $v;
-			$this->modifiedColumns[] = FcpagosPeer::NUMPAGOLD;
-		}
-
+    if ($this->numpagold !== $v) {
+        $this->numpagold = $v;
+        $this->modifiedColumns[] = FcpagosPeer::NUMPAGOLD;
+      }
+  
 	} 
 	
 	public function setEdopag($v)
 	{
 
-		if ($this->edopag !== $v) {
-			$this->edopag = $v;
-			$this->modifiedColumns[] = FcpagosPeer::EDOPAG;
-		}
-
+    if ($this->edopag !== $v) {
+        $this->edopag = $v;
+        $this->modifiedColumns[] = FcpagosPeer::EDOPAG;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = FcpagosPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = FcpagosPeer::FECANU;
+    }
 
 	} 
 	
 	public function setMotanu($v)
 	{
 
-		if ($this->motanu !== $v) {
-			$this->motanu = $v;
-			$this->modifiedColumns[] = FcpagosPeer::MOTANU;
-		}
-
+    if ($this->motanu !== $v) {
+        $this->motanu = $v;
+        $this->modifiedColumns[] = FcpagosPeer::MOTANU;
+      }
+  
 	} 
 	
 	public function setCedanu($v)
 	{
 
-		if ($this->cedanu !== $v) {
-			$this->cedanu = $v;
-			$this->modifiedColumns[] = FcpagosPeer::CEDANU;
-		}
+    if ($this->cedanu !== $v) {
+        $this->cedanu = $v;
+        $this->modifiedColumns[] = FcpagosPeer::CEDANU;
+      }
+  
+	} 
+	
+	public function setNomcon($v)
+	{
 
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = FcpagosPeer::NOMCON;
+      }
+  
+	} 
+	
+	public function setDircon($v)
+	{
+
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = FcpagosPeer::DIRCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcpagosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcpagosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numpag = $rs->getString($startcol + 0);
+      $this->numpag = $rs->getString($startcol + 0);
 
-			$this->fecpag = $rs->getDate($startcol + 1, null);
+      $this->fecpag = $rs->getDate($startcol + 1, null);
 
-			$this->rifcon = $rs->getString($startcol + 2);
+      $this->rifcon = $rs->getString($startcol + 2);
 
-			$this->despag = $rs->getString($startcol + 3);
+      $this->despag = $rs->getString($startcol + 3);
 
-			$this->monpag = $rs->getFloat($startcol + 4);
+      $this->monpag = $rs->getFloat($startcol + 4);
 
-			$this->monefe = $rs->getFloat($startcol + 5);
+      $this->monefe = $rs->getFloat($startcol + 5);
 
-			$this->funpag = $rs->getString($startcol + 6);
+      $this->funpag = $rs->getString($startcol + 6);
 
-			$this->codrec = $rs->getString($startcol + 7);
+      $this->codrec = $rs->getString($startcol + 7);
 
-			$this->numpagold = $rs->getString($startcol + 8);
+      $this->numpagold = $rs->getString($startcol + 8);
 
-			$this->edopag = $rs->getString($startcol + 9);
+      $this->edopag = $rs->getString($startcol + 9);
 
-			$this->fecanu = $rs->getDate($startcol + 10, null);
+      $this->fecanu = $rs->getDate($startcol + 10, null);
 
-			$this->motanu = $rs->getString($startcol + 11);
+      $this->motanu = $rs->getString($startcol + 11);
 
-			$this->cedanu = $rs->getString($startcol + 12);
+      $this->cedanu = $rs->getString($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->nomcon = $rs->getString($startcol + 13);
 
-			$this->resetModified();
+      $this->dircon = $rs->getString($startcol + 14);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 15);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcpagos object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcpagos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -445,6 +525,7 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcpagosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcpagosPeer::doUpdate($this, $con);
@@ -566,6 +647,12 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 				return $this->getCedanu();
 				break;
 			case 13:
+				return $this->getNomcon();
+				break;
+			case 14:
+				return $this->getDircon();
+				break;
+			case 15:
 				return $this->getId();
 				break;
 			default:
@@ -591,7 +678,9 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 			$keys[10] => $this->getFecanu(),
 			$keys[11] => $this->getMotanu(),
 			$keys[12] => $this->getCedanu(),
-			$keys[13] => $this->getId(),
+			$keys[13] => $this->getNomcon(),
+			$keys[14] => $this->getDircon(),
+			$keys[15] => $this->getId(),
 		);
 		return $result;
 	}
@@ -647,6 +736,12 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 				$this->setCedanu($value);
 				break;
 			case 13:
+				$this->setNomcon($value);
+				break;
+			case 14:
+				$this->setDircon($value);
+				break;
+			case 15:
 				$this->setId($value);
 				break;
 		} 	}
@@ -669,7 +764,9 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[10], $arr)) $this->setFecanu($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setMotanu($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setCedanu($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
+		if (array_key_exists($keys[13], $arr)) $this->setNomcon($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setDircon($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
 	}
 
 	
@@ -690,6 +787,8 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcpagosPeer::FECANU)) $criteria->add(FcpagosPeer::FECANU, $this->fecanu);
 		if ($this->isColumnModified(FcpagosPeer::MOTANU)) $criteria->add(FcpagosPeer::MOTANU, $this->motanu);
 		if ($this->isColumnModified(FcpagosPeer::CEDANU)) $criteria->add(FcpagosPeer::CEDANU, $this->cedanu);
+		if ($this->isColumnModified(FcpagosPeer::NOMCON)) $criteria->add(FcpagosPeer::NOMCON, $this->nomcon);
+		if ($this->isColumnModified(FcpagosPeer::DIRCON)) $criteria->add(FcpagosPeer::DIRCON, $this->dircon);
 		if ($this->isColumnModified(FcpagosPeer::ID)) $criteria->add(FcpagosPeer::ID, $this->id);
 
 		return $criteria;
@@ -746,6 +845,10 @@ abstract class BaseFcpagos extends BaseObject  implements Persistent {
 		$copyObj->setMotanu($this->motanu);
 
 		$copyObj->setCedanu($this->cedanu);
+
+		$copyObj->setNomcon($this->nomcon);
+
+		$copyObj->setDircon($this->dircon);
 
 
 		if ($deepCopy) {

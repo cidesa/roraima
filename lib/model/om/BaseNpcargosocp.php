@@ -41,148 +41,177 @@ abstract class BaseNpcargosocp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcar()
-	{
+  
+  public function getCodcar()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getCodpas()
-	{
+    return trim($this->codcar);
 
-		return $this->codpas; 		
-	}
-	
-	public function getCodgra()
-	{
+  }
+  
+  public function getCodpas()
+  {
 
-		return $this->codgra; 		
-	}
-	
-	public function getSueldo()
-	{
+    return trim($this->codpas);
 
-		return number_format($this->sueldo,2,',','.');
-		
-	}
-	
-	public function getDescar()
-	{
+  }
+  
+  public function getCodgra()
+  {
 
-		return $this->descar; 		
-	}
-	
-	public function getComcar()
-	{
+    return trim($this->codgra);
 
-		return number_format($this->comcar,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getSueldo($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->sueldo,2,',','.');
+    else return $this->sueldo;
+
+  }
+  
+  public function getDescar()
+  {
+
+    return trim($this->descar);
+
+  }
+  
+  public function getComcar($val=false)
+  {
+
+    if($val) return number_format($this->comcar,2,',','.');
+    else return $this->comcar;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpcargosocpPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpcargosocpPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCodpas($v)
 	{
 
-		if ($this->codpas !== $v) {
-			$this->codpas = $v;
-			$this->modifiedColumns[] = NpcargosocpPeer::CODPAS;
-		}
-
+    if ($this->codpas !== $v) {
+        $this->codpas = $v;
+        $this->modifiedColumns[] = NpcargosocpPeer::CODPAS;
+      }
+  
 	} 
 	
 	public function setCodgra($v)
 	{
 
-		if ($this->codgra !== $v) {
-			$this->codgra = $v;
-			$this->modifiedColumns[] = NpcargosocpPeer::CODGRA;
-		}
-
+    if ($this->codgra !== $v) {
+        $this->codgra = $v;
+        $this->modifiedColumns[] = NpcargosocpPeer::CODGRA;
+      }
+  
 	} 
 	
 	public function setSueldo($v)
 	{
 
-		if ($this->sueldo !== $v) {
-			$this->sueldo = $v;
-			$this->modifiedColumns[] = NpcargosocpPeer::SUELDO;
-		}
-
+    if ($this->sueldo !== $v) {
+        $this->sueldo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosocpPeer::SUELDO;
+      }
+  
 	} 
 	
 	public function setDescar($v)
 	{
 
-		if ($this->descar !== $v) {
-			$this->descar = $v;
-			$this->modifiedColumns[] = NpcargosocpPeer::DESCAR;
-		}
-
+    if ($this->descar !== $v) {
+        $this->descar = $v;
+        $this->modifiedColumns[] = NpcargosocpPeer::DESCAR;
+      }
+  
 	} 
 	
 	public function setComcar($v)
 	{
 
-		if ($this->comcar !== $v) {
-			$this->comcar = $v;
-			$this->modifiedColumns[] = NpcargosocpPeer::COMCAR;
-		}
-
+    if ($this->comcar !== $v) {
+        $this->comcar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosocpPeer::COMCAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcargosocpPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcargosocpPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcar = $rs->getString($startcol + 0);
+      $this->codcar = $rs->getString($startcol + 0);
 
-			$this->codpas = $rs->getString($startcol + 1);
+      $this->codpas = $rs->getString($startcol + 1);
 
-			$this->codgra = $rs->getString($startcol + 2);
+      $this->codgra = $rs->getString($startcol + 2);
 
-			$this->sueldo = $rs->getFloat($startcol + 3);
+      $this->sueldo = $rs->getFloat($startcol + 3);
 
-			$this->descar = $rs->getString($startcol + 4);
+      $this->descar = $rs->getString($startcol + 4);
 
-			$this->comcar = $rs->getFloat($startcol + 5);
+      $this->comcar = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcargosocp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcargosocp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +268,7 @@ abstract class BaseNpcargosocp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcargosocpPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcargosocpPeer::doUpdate($this, $con);

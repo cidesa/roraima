@@ -29,92 +29,118 @@ abstract class BaseNpcertificados extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodadi()
-	{
+  
+  public function getCodadi()
+  {
 
-		return $this->codadi; 		
-	}
-	
-	public function getCodcer()
-	{
+    return trim($this->codadi);
 
-		return $this->codcer; 		
-	}
-	
-	public function getDescer()
-	{
+  }
+  
+  public function getCodcer()
+  {
 
-		return $this->descer; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codcer);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDescer()
+  {
+
+    return trim($this->descer);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodadi($v)
 	{
 
-		if ($this->codadi !== $v) {
-			$this->codadi = $v;
-			$this->modifiedColumns[] = NpcertificadosPeer::CODADI;
-		}
-
+    if ($this->codadi !== $v) {
+        $this->codadi = $v;
+        $this->modifiedColumns[] = NpcertificadosPeer::CODADI;
+      }
+  
 	} 
 	
 	public function setCodcer($v)
 	{
 
-		if ($this->codcer !== $v) {
-			$this->codcer = $v;
-			$this->modifiedColumns[] = NpcertificadosPeer::CODCER;
-		}
-
+    if ($this->codcer !== $v) {
+        $this->codcer = $v;
+        $this->modifiedColumns[] = NpcertificadosPeer::CODCER;
+      }
+  
 	} 
 	
 	public function setDescer($v)
 	{
 
-		if ($this->descer !== $v) {
-			$this->descer = $v;
-			$this->modifiedColumns[] = NpcertificadosPeer::DESCER;
-		}
-
+    if ($this->descer !== $v) {
+        $this->descer = $v;
+        $this->modifiedColumns[] = NpcertificadosPeer::DESCER;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcertificadosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcertificadosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codadi = $rs->getString($startcol + 0);
+      $this->codadi = $rs->getString($startcol + 0);
 
-			$this->codcer = $rs->getString($startcol + 1);
+      $this->codcer = $rs->getString($startcol + 1);
 
-			$this->descer = $rs->getString($startcol + 2);
+      $this->descer = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcertificados object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcertificados object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseNpcertificados extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcertificadosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcertificadosPeer::doUpdate($this, $con);

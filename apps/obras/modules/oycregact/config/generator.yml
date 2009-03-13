@@ -3,36 +3,41 @@ generator:
   param:
     model_class:      Ocregact
     theme:            default
-
     fields:
      codcon:      { name: Numero de Contrato}
+     descon:      { name: DescripciÃ³n}
      cedins:      { name: Ing. Inspector}
-     nomins:      { name: Nombre Ing. Inspector}
-     cedtec:      { name: Jefe de División}   
-     nomtec:      { name: Nombre Ing. Tecnico}
-     cedfis:      { name: Dir. Instituto}  
-     nomdir:      { name: Nombre del Dir. Instituto} 
-     cedres:      { name: Ing. Residente}   
-     nomper:      { name: Nombre del Ing. Residente}    
-     cedtop:      { name: Rep. Legal Empresa}    
-     destipact:   { name: Tipo de Acta}  
-     numofi:      { name: Número de Oficio}      
-     fecact:      { name: Fecha, params: date_format='dd/MM/yyyy'}  
-     obsact:      { name: Observaciones} 
-     codobr:      { name: Código de Obra}
-     desobr:      { name: Descripción de Obra}
-     codpro:      { name: Código de Proveedor}
-     nompro:      { name: Descripción de Proveedor}
-     
-          
+     nomins:      { name: Nombre}
+     cedtec:      { name: Jefe de Division}
+     nomtec:      { name: Nombre}
+     cedfis:      { name: Director Instituto}
+     nomdir:      { name: Nombre}
+     cedres:      { name: Ing. Residente}
+     nomper:      { name: Nombre}
+     cedtop:      { name: Rep. Legal Empresa}
+     nomtop:      { name: Nombre}
+     codtipact:    { name: Tipo de Acta}
+     destipact:   { name: DescripciÃ³n}
+     numofi:      { name: NÃºmero de Oficio}
+     fecact:      { name: Fecha, params: date_format='dd/MM/yyyy'}
+     obsact:      { name: Observaciones}
+     codobr:      { name: Obra}
+     desobr:      { name: Descripcion}
+     codpro:      { name: Contratista}
+     nompro:      { name: Descripcion}
     list:
-      title:          Registro de Actas
+      title:          Actas
       filters:        [codcon, cedins]
-      display:        [codcon, cedins]
+      display:        [=codcon, codobr, desobr, codpro, nompro]
+      sort:  codcon
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
+        _edit:        ~
     edit:
-      title:          Registro de Actas
-      display:        [codcon, codobr, desobr, codpro, nompro, destipact, numofi, fecact, obsact, cedins, nomins, cedtec, nomtec, cedfis, nomdir, cedres, nomper, cedtop]                
+      title:          EdiciÃ³n de Actas
+      display:        [codcon, descon, codobr, desobr, codpro, nompro, codtipact, destipact, numofi, fecact, obsact, cedins, nomins, cedtec, nomtec, cedfis, nomdir, cedres, nomper, cedtop, nomtop]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

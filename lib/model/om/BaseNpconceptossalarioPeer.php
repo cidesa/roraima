@@ -205,6 +205,7 @@ abstract class BaseNpconceptossalarioPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpconceptossalarioPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

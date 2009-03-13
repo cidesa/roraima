@@ -210,6 +210,7 @@ abstract class BaseTsconuniPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsconuniPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

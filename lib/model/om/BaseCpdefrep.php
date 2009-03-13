@@ -25,74 +25,99 @@ abstract class BaseCpdefrep extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNomrep()
-	{
+  
+  public function getNomrep()
+  {
 
-		return $this->nomrep; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->nomrep);
 
-		return $this->codpre; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codpre);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNomrep($v)
 	{
 
-		if ($this->nomrep !== $v) {
-			$this->nomrep = $v;
-			$this->modifiedColumns[] = CpdefrepPeer::NOMREP;
-		}
-
+    if ($this->nomrep !== $v) {
+        $this->nomrep = $v;
+        $this->modifiedColumns[] = CpdefrepPeer::NOMREP;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpdefrepPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpdefrepPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpdefrepPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpdefrepPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nomrep = $rs->getString($startcol + 0);
+      $this->nomrep = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpdefrep object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpdefrep object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

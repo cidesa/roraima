@@ -49,185 +49,216 @@ abstract class BaseTabla18 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefcau()
-	{
+  
+  public function getRefcau()
+  {
 
-		return $this->refcau; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->refcau);
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonimp()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getMonpag()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMonaju()
-	{
+  }
+  
+  public function getMonimp($val=false)
+  {
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getStaimp()
-	{
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
 
-		return $this->staimp; 		
-	}
-	
-	public function getRefere()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return $this->refere; 		
-	}
-	
-	public function getRefprc()
-	{
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
 
-		return $this->refprc; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonaju($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getStaimp()
+  {
+
+    return trim($this->staimp);
+
+  }
+  
+  public function getRefere()
+  {
+
+    return trim($this->refere);
+
+  }
+  
+  public function getRefprc()
+  {
+
+    return trim($this->refprc);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefcau($v)
 	{
 
-		if ($this->refcau !== $v) {
-			$this->refcau = $v;
-			$this->modifiedColumns[] = Tabla18Peer::REFCAU;
-		}
-
+    if ($this->refcau !== $v) {
+        $this->refcau = $v;
+        $this->modifiedColumns[] = Tabla18Peer::REFCAU;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = Tabla18Peer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = Tabla18Peer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = Tabla18Peer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Tabla18Peer::MONIMP;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = Tabla18Peer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Tabla18Peer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = Tabla18Peer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Tabla18Peer::MONAJU;
+      }
+  
 	} 
 	
 	public function setStaimp($v)
 	{
 
-		if ($this->staimp !== $v) {
-			$this->staimp = $v;
-			$this->modifiedColumns[] = Tabla18Peer::STAIMP;
-		}
-
+    if ($this->staimp !== $v) {
+        $this->staimp = $v;
+        $this->modifiedColumns[] = Tabla18Peer::STAIMP;
+      }
+  
 	} 
 	
 	public function setRefere($v)
 	{
 
-		if ($this->refere !== $v) {
-			$this->refere = $v;
-			$this->modifiedColumns[] = Tabla18Peer::REFERE;
-		}
-
+    if ($this->refere !== $v) {
+        $this->refere = $v;
+        $this->modifiedColumns[] = Tabla18Peer::REFERE;
+      }
+  
 	} 
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = Tabla18Peer::REFPRC;
-		}
-
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = Tabla18Peer::REFPRC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Tabla18Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Tabla18Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refcau = $rs->getString($startcol + 0);
+      $this->refcau = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->monimp = $rs->getFloat($startcol + 2);
+      $this->monimp = $rs->getFloat($startcol + 2);
 
-			$this->monpag = $rs->getFloat($startcol + 3);
+      $this->monpag = $rs->getFloat($startcol + 3);
 
-			$this->monaju = $rs->getFloat($startcol + 4);
+      $this->monaju = $rs->getFloat($startcol + 4);
 
-			$this->staimp = $rs->getString($startcol + 5);
+      $this->staimp = $rs->getString($startcol + 5);
 
-			$this->refere = $rs->getString($startcol + 6);
+      $this->refere = $rs->getString($startcol + 6);
 
-			$this->refprc = $rs->getString($startcol + 7);
+      $this->refprc = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tabla18 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tabla18 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -284,6 +315,7 @@ abstract class BaseTabla18 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Tabla18Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Tabla18Peer::doUpdate($this, $con);

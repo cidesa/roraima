@@ -33,156 +33,181 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnomesp()
-	{
+  
+  public function getCodnomesp()
+  {
 
-		return $this->codnomesp; 		
-	}
-	
-	public function getDesnomesp()
-	{
+    return trim($this->codnomesp);
 
-		return $this->desnomesp; 		
-	}
-	
-	public function getFecnomdes($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDesnomesp()
+  {
 
-		if ($this->fecnomdes === null || $this->fecnomdes === '') {
-			return null;
-		} elseif (!is_int($this->fecnomdes)) {
-						$ts = strtotime($this->fecnomdes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnomdes] as date/time value: " . var_export($this->fecnomdes, true));
-			}
-		} else {
-			$ts = $this->fecnomdes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->desnomesp);
 
-	
-	public function getFecnomhas($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFecnomdes($format = 'Y-m-d')
+  {
 
-		if ($this->fecnomhas === null || $this->fecnomhas === '') {
-			return null;
-		} elseif (!is_int($this->fecnomhas)) {
-						$ts = strtotime($this->fecnomhas);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnomhas] as date/time value: " . var_export($this->fecnomhas, true));
-			}
-		} else {
-			$ts = $this->fecnomhas;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecnomdes === null || $this->fecnomdes === '') {
+      return null;
+    } elseif (!is_int($this->fecnomdes)) {
+            $ts = adodb_strtotime($this->fecnomdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnomdes] as date/time value: " . var_export($this->fecnomdes, true));
+      }
+    } else {
+      $ts = $this->fecnomdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getId()
-	{
+  
+  public function getFecnomhas($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecnomhas === null || $this->fecnomhas === '') {
+      return null;
+    } elseif (!is_int($this->fecnomhas)) {
+            $ts = adodb_strtotime($this->fecnomhas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnomhas] as date/time value: " . var_export($this->fecnomhas, true));
+      }
+    } else {
+      $ts = $this->fecnomhas;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnomesp($v)
 	{
 
-		if ($this->codnomesp !== $v) {
-			$this->codnomesp = $v;
-			$this->modifiedColumns[] = NpnomesptiposPeer::CODNOMESP;
-		}
-
+    if ($this->codnomesp !== $v) {
+        $this->codnomesp = $v;
+        $this->modifiedColumns[] = NpnomesptiposPeer::CODNOMESP;
+      }
+  
 	} 
 	
 	public function setDesnomesp($v)
 	{
 
-		if ($this->desnomesp !== $v) {
-			$this->desnomesp = $v;
-			$this->modifiedColumns[] = NpnomesptiposPeer::DESNOMESP;
-		}
-
+    if ($this->desnomesp !== $v) {
+        $this->desnomesp = $v;
+        $this->modifiedColumns[] = NpnomesptiposPeer::DESNOMESP;
+      }
+  
 	} 
 	
 	public function setFecnomdes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnomdes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnomdes !== $ts) {
-			$this->fecnomdes = $ts;
-			$this->modifiedColumns[] = NpnomesptiposPeer::FECNOMDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnomdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnomdes !== $ts) {
+      $this->fecnomdes = $ts;
+      $this->modifiedColumns[] = NpnomesptiposPeer::FECNOMDES;
+    }
 
 	} 
 	
 	public function setFecnomhas($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnomhas] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnomhas !== $ts) {
-			$this->fecnomhas = $ts;
-			$this->modifiedColumns[] = NpnomesptiposPeer::FECNOMHAS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnomhas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnomhas !== $ts) {
+      $this->fecnomhas = $ts;
+      $this->modifiedColumns[] = NpnomesptiposPeer::FECNOMHAS;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpnomesptiposPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpnomesptiposPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnomesp = $rs->getString($startcol + 0);
+      $this->codnomesp = $rs->getString($startcol + 0);
 
-			$this->desnomesp = $rs->getString($startcol + 1);
+      $this->desnomesp = $rs->getString($startcol + 1);
 
-			$this->fecnomdes = $rs->getDate($startcol + 2, null);
+      $this->fecnomdes = $rs->getDate($startcol + 2, null);
 
-			$this->fecnomhas = $rs->getDate($startcol + 3, null);
+      $this->fecnomhas = $rs->getDate($startcol + 3, null);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npnomesptipos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npnomesptipos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +264,7 @@ abstract class BaseNpnomesptipos extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpnomesptiposPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpnomesptiposPeer::doUpdate($this, $con);

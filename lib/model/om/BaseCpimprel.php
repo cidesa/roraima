@@ -49,184 +49,215 @@ abstract class BaseCpimprel extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefrel()
-	{
+  
+  public function getRefrel()
+  {
 
-		return $this->refrel; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->refrel);
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonrel()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->monrel,2,',','.');
-		
-	}
-	
-	public function getMonaju()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getStarel()
-	{
+  }
+  
+  public function getMonrel($val=false)
+  {
 
-		return $this->starel; 		
-	}
-	
-	public function getRefere()
-	{
+    if($val) return number_format($this->monrel,2,',','.');
+    else return $this->monrel;
 
-		return $this->refere; 		
-	}
-	
-	public function getRefprc()
-	{
+  }
+  
+  public function getMonaju($val=false)
+  {
 
-		return $this->refprc; 		
-	}
-	
-	public function getRefcom()
-	{
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
 
-		return $this->refcom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getStarel()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->starel);
+
+  }
+  
+  public function getRefere()
+  {
+
+    return trim($this->refere);
+
+  }
+  
+  public function getRefprc()
+  {
+
+    return trim($this->refprc);
+
+  }
+  
+  public function getRefcom()
+  {
+
+    return trim($this->refcom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefrel($v)
 	{
 
-		if ($this->refrel !== $v) {
-			$this->refrel = $v;
-			$this->modifiedColumns[] = CpimprelPeer::REFREL;
-		}
-
+    if ($this->refrel !== $v) {
+        $this->refrel = $v;
+        $this->modifiedColumns[] = CpimprelPeer::REFREL;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpimprelPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpimprelPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonrel($v)
 	{
 
-		if ($this->monrel !== $v) {
-			$this->monrel = $v;
-			$this->modifiedColumns[] = CpimprelPeer::MONREL;
-		}
-
+    if ($this->monrel !== $v) {
+        $this->monrel = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimprelPeer::MONREL;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CpimprelPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimprelPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setStarel($v)
 	{
 
-		if ($this->starel !== $v) {
-			$this->starel = $v;
-			$this->modifiedColumns[] = CpimprelPeer::STAREL;
-		}
-
+    if ($this->starel !== $v) {
+        $this->starel = $v;
+        $this->modifiedColumns[] = CpimprelPeer::STAREL;
+      }
+  
 	} 
 	
 	public function setRefere($v)
 	{
 
-		if ($this->refere !== $v) {
-			$this->refere = $v;
-			$this->modifiedColumns[] = CpimprelPeer::REFERE;
-		}
-
+    if ($this->refere !== $v) {
+        $this->refere = $v;
+        $this->modifiedColumns[] = CpimprelPeer::REFERE;
+      }
+  
 	} 
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = CpimprelPeer::REFPRC;
-		}
-
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = CpimprelPeer::REFPRC;
+      }
+  
 	} 
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = CpimprelPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = CpimprelPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpimprelPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpimprelPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refrel = $rs->getString($startcol + 0);
+      $this->refrel = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->monrel = $rs->getFloat($startcol + 2);
+      $this->monrel = $rs->getFloat($startcol + 2);
 
-			$this->monaju = $rs->getFloat($startcol + 3);
+      $this->monaju = $rs->getFloat($startcol + 3);
 
-			$this->starel = $rs->getString($startcol + 4);
+      $this->starel = $rs->getString($startcol + 4);
 
-			$this->refere = $rs->getString($startcol + 5);
+      $this->refere = $rs->getString($startcol + 5);
 
-			$this->refprc = $rs->getString($startcol + 6);
+      $this->refprc = $rs->getString($startcol + 6);
 
-			$this->refcom = $rs->getString($startcol + 7);
+      $this->refcom = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpimprel object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpimprel object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -283,6 +314,7 @@ abstract class BaseCpimprel extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpimprelPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpimprelPeer::doUpdate($this, $con);

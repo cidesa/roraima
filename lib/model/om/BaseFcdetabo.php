@@ -33,111 +33,138 @@ abstract class BaseFcdetabo extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumpag()
-	{
+  
+  public function getNumpag()
+  {
 
-		return $this->numpag; 		
-	}
-	
-	public function getNrodet()
-	{
+    return trim($this->numpag);
 
-		return $this->nrodet; 		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getNrodet()
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getTippag()
-	{
+    return trim($this->nrodet);
 
-		return $this->tippag; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getTippag()
+  {
+
+    return trim($this->tippag);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumpag($v)
 	{
 
-		if ($this->numpag !== $v) {
-			$this->numpag = $v;
-			$this->modifiedColumns[] = FcdetaboPeer::NUMPAG;
-		}
-
+    if ($this->numpag !== $v) {
+        $this->numpag = $v;
+        $this->modifiedColumns[] = FcdetaboPeer::NUMPAG;
+      }
+  
 	} 
 	
 	public function setNrodet($v)
 	{
 
-		if ($this->nrodet !== $v) {
-			$this->nrodet = $v;
-			$this->modifiedColumns[] = FcdetaboPeer::NRODET;
-		}
-
+    if ($this->nrodet !== $v) {
+        $this->nrodet = $v;
+        $this->modifiedColumns[] = FcdetaboPeer::NRODET;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = FcdetaboPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdetaboPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setTippag($v)
 	{
 
-		if ($this->tippag !== $v) {
-			$this->tippag = $v;
-			$this->modifiedColumns[] = FcdetaboPeer::TIPPAG;
-		}
-
+    if ($this->tippag !== $v) {
+        $this->tippag = $v;
+        $this->modifiedColumns[] = FcdetaboPeer::TIPPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdetaboPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdetaboPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numpag = $rs->getString($startcol + 0);
+      $this->numpag = $rs->getString($startcol + 0);
 
-			$this->nrodet = $rs->getString($startcol + 1);
+      $this->nrodet = $rs->getString($startcol + 1);
 
-			$this->monpag = $rs->getFloat($startcol + 2);
+      $this->monpag = $rs->getFloat($startcol + 2);
 
-			$this->tippag = $rs->getString($startcol + 3);
+      $this->tippag = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdetabo object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdetabo object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +221,7 @@ abstract class BaseFcdetabo extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdetaboPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdetaboPeer::doUpdate($this, $con);

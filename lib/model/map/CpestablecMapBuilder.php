@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CpestablecMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CpestablecMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CpestablecMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cpestablec');
 		$tMap->setPhpName('Cpestablec');
 
@@ -50,11 +50,11 @@ class CpestablecMapBuilder {
 
 		$tMap->addColumn('TIPRUR', 'Tiprur', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('NROCAM', 'Nrocam', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('NROCAM', 'Nrocam', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('ATEFIR', 'Atefir', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

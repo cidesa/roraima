@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Inpais
+    theme:            default
+    fields:
+      codpai:       { name: Código }
+      nompai:       { name: Nombre País}
+
+    list:
+      title:          Países
+      filters:        [codpai]
+      display:        [=codpai, nompai]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de País
+      display:        [codpai, nompai]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

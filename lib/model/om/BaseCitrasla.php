@@ -53,247 +53,277 @@ abstract class BaseCitrasla extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReftra()
-	{
+  
+  public function getReftra()
+  {
 
-		return $this->reftra; 		
-	}
-	
-	public function getFectra($format = 'Y-m-d')
-	{
+    return trim($this->reftra);
 
-		if ($this->fectra === null || $this->fectra === '') {
-			return null;
-		} elseif (!is_int($this->fectra)) {
-						$ts = strtotime($this->fectra);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fectra] as date/time value: " . var_export($this->fectra, true));
-			}
-		} else {
-			$ts = $this->fectra;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFectra($format = 'Y-m-d')
+  {
 
-	
-	public function getAnotra()
-	{
+    if ($this->fectra === null || $this->fectra === '') {
+      return null;
+    } elseif (!is_int($this->fectra)) {
+            $ts = adodb_strtotime($this->fectra);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fectra] as date/time value: " . var_export($this->fectra, true));
+      }
+    } else {
+      $ts = $this->fectra;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->anotra; 		
-	}
-	
-	public function getPertra()
-	{
+  
+  public function getAnotra()
+  {
 
-		return $this->pertra; 		
-	}
-	
-	public function getDestra()
-	{
+    return trim($this->anotra);
 
-		return $this->destra; 		
-	}
-	
-	public function getDesanu()
-	{
+  }
+  
+  public function getPertra()
+  {
 
-		return $this->desanu; 		
-	}
-	
-	public function getTottra()
-	{
+    return trim($this->pertra);
 
-		return number_format($this->tottra,2,',','.');
-		
-	}
-	
-	public function getStatra()
-	{
+  }
+  
+  public function getDestra()
+  {
 
-		return $this->statra; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    return trim($this->destra);
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDesanu()
+  {
 
-	
-	public function getId()
-	{
+    return trim($this->desanu);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTottra($val=false)
+  {
+
+    if($val) return number_format($this->tottra,2,',','.');
+    else return $this->tottra;
+
+  }
+  
+  public function getStatra()
+  {
+
+    return trim($this->statra);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReftra($v)
 	{
 
-		if ($this->reftra !== $v) {
-			$this->reftra = $v;
-			$this->modifiedColumns[] = CitraslaPeer::REFTRA;
-		}
-
+    if ($this->reftra !== $v) {
+        $this->reftra = $v;
+        $this->modifiedColumns[] = CitraslaPeer::REFTRA;
+      }
+  
 	} 
 	
 	public function setFectra($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fectra] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fectra !== $ts) {
-			$this->fectra = $ts;
-			$this->modifiedColumns[] = CitraslaPeer::FECTRA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fectra] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fectra !== $ts) {
+      $this->fectra = $ts;
+      $this->modifiedColumns[] = CitraslaPeer::FECTRA;
+    }
 
 	} 
 	
 	public function setAnotra($v)
 	{
 
-		if ($this->anotra !== $v) {
-			$this->anotra = $v;
-			$this->modifiedColumns[] = CitraslaPeer::ANOTRA;
-		}
-
+    if ($this->anotra !== $v) {
+        $this->anotra = $v;
+        $this->modifiedColumns[] = CitraslaPeer::ANOTRA;
+      }
+  
 	} 
 	
 	public function setPertra($v)
 	{
 
-		if ($this->pertra !== $v) {
-			$this->pertra = $v;
-			$this->modifiedColumns[] = CitraslaPeer::PERTRA;
-		}
-
+    if ($this->pertra !== $v) {
+        $this->pertra = $v;
+        $this->modifiedColumns[] = CitraslaPeer::PERTRA;
+      }
+  
 	} 
 	
 	public function setDestra($v)
 	{
 
-		if ($this->destra !== $v) {
-			$this->destra = $v;
-			$this->modifiedColumns[] = CitraslaPeer::DESTRA;
-		}
-
+    if ($this->destra !== $v) {
+        $this->destra = $v;
+        $this->modifiedColumns[] = CitraslaPeer::DESTRA;
+      }
+  
 	} 
 	
 	public function setDesanu($v)
 	{
 
-		if ($this->desanu !== $v) {
-			$this->desanu = $v;
-			$this->modifiedColumns[] = CitraslaPeer::DESANU;
-		}
-
+    if ($this->desanu !== $v) {
+        $this->desanu = $v;
+        $this->modifiedColumns[] = CitraslaPeer::DESANU;
+      }
+  
 	} 
 	
 	public function setTottra($v)
 	{
 
-		if ($this->tottra !== $v) {
-			$this->tottra = $v;
-			$this->modifiedColumns[] = CitraslaPeer::TOTTRA;
-		}
-
+    if ($this->tottra !== $v) {
+        $this->tottra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CitraslaPeer::TOTTRA;
+      }
+  
 	} 
 	
 	public function setStatra($v)
 	{
 
-		if ($this->statra !== $v) {
-			$this->statra = $v;
-			$this->modifiedColumns[] = CitraslaPeer::STATRA;
-		}
-
+    if ($this->statra !== $v) {
+        $this->statra = $v;
+        $this->modifiedColumns[] = CitraslaPeer::STATRA;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = CitraslaPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = CitraslaPeer::FECANU;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CitraslaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CitraslaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reftra = $rs->getString($startcol + 0);
+      $this->reftra = $rs->getString($startcol + 0);
 
-			$this->fectra = $rs->getDate($startcol + 1, null);
+      $this->fectra = $rs->getDate($startcol + 1, null);
 
-			$this->anotra = $rs->getString($startcol + 2);
+      $this->anotra = $rs->getString($startcol + 2);
 
-			$this->pertra = $rs->getString($startcol + 3);
+      $this->pertra = $rs->getString($startcol + 3);
 
-			$this->destra = $rs->getString($startcol + 4);
+      $this->destra = $rs->getString($startcol + 4);
 
-			$this->desanu = $rs->getString($startcol + 5);
+      $this->desanu = $rs->getString($startcol + 5);
 
-			$this->tottra = $rs->getFloat($startcol + 6);
+      $this->tottra = $rs->getFloat($startcol + 6);
 
-			$this->statra = $rs->getString($startcol + 7);
+      $this->statra = $rs->getString($startcol + 7);
 
-			$this->fecanu = $rs->getDate($startcol + 8, null);
+      $this->fecanu = $rs->getDate($startcol + 8, null);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Citrasla object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Citrasla object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -350,6 +380,7 @@ abstract class BaseCitrasla extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CitraslaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CitraslaPeer::doUpdate($this, $con);

@@ -235,6 +235,7 @@ abstract class BaseCarecaudPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CarecaudPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

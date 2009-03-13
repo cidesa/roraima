@@ -3,110 +3,170 @@ methods:
    - "caregart{codart}"
    - "caregart{desart}"
    - "caregart{ramart}"
+   - "caregart{codcta}"
    - "caregart{unimed}"
    - "caregart{unialt}"
    - "caregart{relart}"
-   - "caregart{exitot}"   
+   - "caregart{exitot}"
    - "caregart{cosult}"
    - "caregart{cospro}"
    - "caregart{invini}"
-
-names: 
+   - "caregart{fecult}"
+   - "caregart{codartsnc}"
+   - "caregart{codpar}"
+names:
   caregart{codart}:
     required:  Yes
     required_msg: El Código del Articulo no puedo estar en Blanco
-    validators: MyStringValidator6        
+    validators: [UniqueValidator]
 
   caregart{desart}:
     required:  Yes
-    required_msg: El Descripción no puedo estar en Blanco        
-    validators: MyStringValidator
-    
+    required_msg: El Descripción no puedo estar en Blanco
+    validators: DescripcionValidator
+
   caregart{ramart}:
     required:  No
-    validators: MyString2Validator
-  
+    validators: RamoValidator
+
+  caregart{codartsnc}:
+    required:  No
+    validators: SncValidator
+
+  caregart{codcta}:
+    required:  No
+    validators: CuentaValidator
+
   caregart{unimed}:
     required:  No
-    validators: MyString3Validator
-    
+    validators: UnidadValidator
+
   caregart{unialt}:
     required:  No
-    validators: MyString4Validator
-    
+    validators: UnidadaltValidator
+
   caregart{relart}:
     required:  No
-    validators: MyString5Validator
-    
+    validators: RelacionValidator
+
   caregart{exitot}:
     required:  No
-    validators: MyNumberValidator
-    
+    validators: MontoValidator, MyNumberValidator
+
   caregart{cosult}:
     required:  No
-    validators: MyNumberValidator
-    
+    validators: MontoValidator, MyNumberValidator
+
   caregart{cospro}:
     required:  No
-    validators: MyNumberValidator
-    
+    validators: MontoValidator, MyNumberValidator
+
   caregart{invini}:
     required:  No
-    validators: MyNumberValidator
-    
-MyStringValidator:
+    validators: MontoValidator, MyNumberValidator
+
+  caregart{fecult}:
+    required:  No
+    validators: FechaValidator
+
+  caregart{codpar}:
+    required:  No
+    validators: PartidaValidator
+
+DescripcionValidator:
     class: sfStringValidator
     param:
         min:       2
         min_error: La Descripción no puede tener menos de 2 caracteres
-        max:       250
+        max:       1000
         max_error: La Descripción no puede pasar mas de 250 caracteres
 
-MyStringValidator6:
-    class: sfStringValidator
-    param:
-        min:       1
-        min_error: La Descripción no puede tener menos de 2 caracteres        
-        
-MyString2Validator:
+UnidadaltValidator:
     class: sfStringValidator
     param:
         min:       2
-        min_error: El Ramo del Articulo no puede tener menos de 2 caracteres
-        max:       
-        max_error: El Estatus no puede pasar mas de 6 caracteres
-        
-MyString3Validator:
-    class: sfStringValidator
-    param:
-        min:       0
-        min_error: La Unidad de Medida no puede tener menos de 2 caracteres
-        max:       
-        max_error: La Unidad de Medida no puede pasar mas de 15 caracteres
-
-MyString4Validator:
-    class: sfStringValidator
-    param:
-        min:       0
         min_error: La Unidad Alternativa no puede tener menos de 2 caracteres
         max:       15
         max_error: La Unidad Alternativa no puede pasar mas de 15 caracteres
 
-MyString5Validator:
+UnidadValidator:
     class: sfStringValidator
     param:
-        min:       0
+        min:       2
+        min_error: La Unidad de Medida no puede tener menos de 2 caracteres
+        max:       15
+        max_error: La Unidad de Medida no puede pasar mas de 15 caracteres
+
+RelacionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
         min_error: La Relación no puede tener menos de 2 caracteres
-        max:       25 
+        max:       25
         max_error: La Relación no puede pasar mas de 25 caracteres
-                
+
+MyCidesaMaskValidator:
+    class: CidesaMaskValidator
+    param:
+        class:        cadefart
+        columnmask:   forart
+        columndiv:    rupart
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Caregart
+        column:   codart
+        unique_error:   El Código del Articulo ya existe. Por Favor, Cambiélo por otro.
+
+RamoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Caramart
+        column:   ramart
+        unique_error:   El Código del Ramo no existe.
+
+PartidaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nppartidas
+        column:   codpar
+        unique_error:   El Código de la Partida no existe.
+
+SncValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Cacatsnc
+        column:   codsnc
+        unique_error:   El Código del Catalogo SNC  no existe.
+
+CuentaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Contabb
+        column:   codcta
+        unique_error:   El Código de la Cuenta Contable no existe.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
 MyNumberValidator:
     class: sfNumberValidator
     param:
-        type:         float
-        type_error:   Por favor, Introduzca Números Decimales               
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
         nan_error:    Por Favor, introduzca un Número Decimal
-        min:          0000000000.00
+        min:          000000000000.00
         min_error:    El valor tiene que ser mayor que cero
-        max:          9999999999.99
-        max_error:    El valor debe contener maximo 9999999999.99
+        max:          999999999999.99
+        max_error:    El valor debe contener maximo 999.999.999.999,99

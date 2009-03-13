@@ -230,6 +230,7 @@ abstract class BaseFaartdevPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FaartdevPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

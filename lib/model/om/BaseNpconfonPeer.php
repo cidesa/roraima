@@ -210,6 +210,7 @@ abstract class BaseNpconfonPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpconfonPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -25,74 +25,99 @@ abstract class BaseOcproesp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodtipesp()
-	{
+    return trim($this->codpro);
 
-		return $this->codtipesp; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodtipesp()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codtipesp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = OcproespPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = OcproespPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodtipesp($v)
 	{
 
-		if ($this->codtipesp !== $v) {
-			$this->codtipesp = $v;
-			$this->modifiedColumns[] = OcproespPeer::CODTIPESP;
-		}
-
+    if ($this->codtipesp !== $v) {
+        $this->codtipesp = $v;
+        $this->modifiedColumns[] = OcproespPeer::CODTIPESP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcproespPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcproespPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codtipesp = $rs->getString($startcol + 1);
+      $this->codtipesp = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocproesp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocproesp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseOcproesp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcproespPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcproespPeer::doUpdate($this, $con);

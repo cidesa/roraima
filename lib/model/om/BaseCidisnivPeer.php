@@ -250,6 +250,7 @@ abstract class BaseCidisnivPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CidisnivPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

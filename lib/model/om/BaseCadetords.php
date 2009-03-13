@@ -57,224 +57,257 @@ abstract class BaseCadetords extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getOrdser()
-	{
+  
+  public function getOrdser()
+  {
 
-		return $this->ordser; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->ordser);
 
-		return $this->codpre; 		
-	}
-	
-	public function getPreser()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->preser,2,',','.');
-		
-	}
-	
-	public function getDtoser()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->dtoser,2,',','.');
-		
-	}
-	
-	public function getRgoser()
-	{
+  }
+  
+  public function getPreser($val=false)
+  {
 
-		return number_format($this->rgoser,2,',','.');
-		
-	}
-	
-	public function getTotser()
-	{
+    if($val) return number_format($this->preser,2,',','.');
+    else return $this->preser;
 
-		return number_format($this->totser,2,',','.');
-		
-	}
-	
-	public function getDesser()
-	{
+  }
+  
+  public function getDtoser($val=false)
+  {
 
-		return $this->desser; 		
-	}
-	
-	public function getMonser()
-	{
+    if($val) return number_format($this->dtoser,2,',','.');
+    else return $this->dtoser;
 
-		return number_format($this->monser,2,',','.');
-		
-	}
-	
-	public function getCanser()
-	{
+  }
+  
+  public function getRgoser($val=false)
+  {
 
-		return number_format($this->canser,2,',','.');
-		
-	}
-	
-	public function getCodrgo()
-	{
+    if($val) return number_format($this->rgoser,2,',','.');
+    else return $this->rgoser;
 
-		return $this->codrgo; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTotser($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->totser,2,',','.');
+    else return $this->totser;
+
+  }
+  
+  public function getDesser()
+  {
+
+    return trim($this->desser);
+
+  }
+  
+  public function getMonser($val=false)
+  {
+
+    if($val) return number_format($this->monser,2,',','.');
+    else return $this->monser;
+
+  }
+  
+  public function getCanser($val=false)
+  {
+
+    if($val) return number_format($this->canser,2,',','.');
+    else return $this->canser;
+
+  }
+  
+  public function getCodrgo()
+  {
+
+    return trim($this->codrgo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setOrdser($v)
 	{
 
-		if ($this->ordser !== $v) {
-			$this->ordser = $v;
-			$this->modifiedColumns[] = CadetordsPeer::ORDSER;
-		}
-
+    if ($this->ordser !== $v) {
+        $this->ordser = $v;
+        $this->modifiedColumns[] = CadetordsPeer::ORDSER;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CadetordsPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CadetordsPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setPreser($v)
 	{
 
-		if ($this->preser !== $v) {
-			$this->preser = $v;
-			$this->modifiedColumns[] = CadetordsPeer::PRESER;
-		}
-
+    if ($this->preser !== $v) {
+        $this->preser = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetordsPeer::PRESER;
+      }
+  
 	} 
 	
 	public function setDtoser($v)
 	{
 
-		if ($this->dtoser !== $v) {
-			$this->dtoser = $v;
-			$this->modifiedColumns[] = CadetordsPeer::DTOSER;
-		}
-
+    if ($this->dtoser !== $v) {
+        $this->dtoser = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetordsPeer::DTOSER;
+      }
+  
 	} 
 	
 	public function setRgoser($v)
 	{
 
-		if ($this->rgoser !== $v) {
-			$this->rgoser = $v;
-			$this->modifiedColumns[] = CadetordsPeer::RGOSER;
-		}
-
+    if ($this->rgoser !== $v) {
+        $this->rgoser = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetordsPeer::RGOSER;
+      }
+  
 	} 
 	
 	public function setTotser($v)
 	{
 
-		if ($this->totser !== $v) {
-			$this->totser = $v;
-			$this->modifiedColumns[] = CadetordsPeer::TOTSER;
-		}
-
+    if ($this->totser !== $v) {
+        $this->totser = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetordsPeer::TOTSER;
+      }
+  
 	} 
 	
 	public function setDesser($v)
 	{
 
-		if ($this->desser !== $v) {
-			$this->desser = $v;
-			$this->modifiedColumns[] = CadetordsPeer::DESSER;
-		}
-
+    if ($this->desser !== $v) {
+        $this->desser = $v;
+        $this->modifiedColumns[] = CadetordsPeer::DESSER;
+      }
+  
 	} 
 	
 	public function setMonser($v)
 	{
 
-		if ($this->monser !== $v) {
-			$this->monser = $v;
-			$this->modifiedColumns[] = CadetordsPeer::MONSER;
-		}
-
+    if ($this->monser !== $v) {
+        $this->monser = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetordsPeer::MONSER;
+      }
+  
 	} 
 	
 	public function setCanser($v)
 	{
 
-		if ($this->canser !== $v) {
-			$this->canser = $v;
-			$this->modifiedColumns[] = CadetordsPeer::CANSER;
-		}
-
+    if ($this->canser !== $v) {
+        $this->canser = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetordsPeer::CANSER;
+      }
+  
 	} 
 	
 	public function setCodrgo($v)
 	{
 
-		if ($this->codrgo !== $v) {
-			$this->codrgo = $v;
-			$this->modifiedColumns[] = CadetordsPeer::CODRGO;
-		}
-
+    if ($this->codrgo !== $v) {
+        $this->codrgo = $v;
+        $this->modifiedColumns[] = CadetordsPeer::CODRGO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadetordsPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadetordsPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->ordser = $rs->getString($startcol + 0);
+      $this->ordser = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->preser = $rs->getFloat($startcol + 2);
+      $this->preser = $rs->getFloat($startcol + 2);
 
-			$this->dtoser = $rs->getFloat($startcol + 3);
+      $this->dtoser = $rs->getFloat($startcol + 3);
 
-			$this->rgoser = $rs->getFloat($startcol + 4);
+      $this->rgoser = $rs->getFloat($startcol + 4);
 
-			$this->totser = $rs->getFloat($startcol + 5);
+      $this->totser = $rs->getFloat($startcol + 5);
 
-			$this->desser = $rs->getString($startcol + 6);
+      $this->desser = $rs->getString($startcol + 6);
 
-			$this->monser = $rs->getFloat($startcol + 7);
+      $this->monser = $rs->getFloat($startcol + 7);
 
-			$this->canser = $rs->getFloat($startcol + 8);
+      $this->canser = $rs->getFloat($startcol + 8);
 
-			$this->codrgo = $rs->getString($startcol + 9);
+      $this->codrgo = $rs->getString($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadetords object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadetords object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

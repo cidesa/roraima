@@ -49,185 +49,216 @@ abstract class BaseFortipfin extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodfin()
-	{
+  
+  public function getCodfin()
+  {
 
-		return $this->codfin; 		
-	}
-	
-	public function getNomext()
-	{
+    return trim($this->codfin);
 
-		return $this->nomext; 		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getNomext()
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getApofis()
-	{
+    return trim($this->nomext);
 
-		return $this->apofis; 		
-	}
-	
-	public function getTipfin()
-	{
+  }
+  
+  public function getNomabr()
+  {
 
-		return $this->tipfin; 		
-	}
-	
-	public function getMontoing()
-	{
+    return trim($this->nomabr);
 
-		return number_format($this->montoing,2,',','.');
-		
-	}
-	
-	public function getMontodis()
-	{
+  }
+  
+  public function getApofis()
+  {
 
-		return number_format($this->montodis,2,',','.');
-		
-	}
-	
-	public function getMontodisaux()
-	{
+    return trim($this->apofis);
 
-		return number_format($this->montodisaux,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTipfin()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipfin);
+
+  }
+  
+  public function getMontoing($val=false)
+  {
+
+    if($val) return number_format($this->montoing,2,',','.');
+    else return $this->montoing;
+
+  }
+  
+  public function getMontodis($val=false)
+  {
+
+    if($val) return number_format($this->montodis,2,',','.');
+    else return $this->montodis;
+
+  }
+  
+  public function getMontodisaux($val=false)
+  {
+
+    if($val) return number_format($this->montodisaux,2,',','.');
+    else return $this->montodisaux;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodfin($v)
 	{
 
-		if ($this->codfin !== $v) {
-			$this->codfin = $v;
-			$this->modifiedColumns[] = FortipfinPeer::CODFIN;
-		}
-
+    if ($this->codfin !== $v) {
+        $this->codfin = $v;
+        $this->modifiedColumns[] = FortipfinPeer::CODFIN;
+      }
+  
 	} 
 	
 	public function setNomext($v)
 	{
 
-		if ($this->nomext !== $v) {
-			$this->nomext = $v;
-			$this->modifiedColumns[] = FortipfinPeer::NOMEXT;
-		}
-
+    if ($this->nomext !== $v) {
+        $this->nomext = $v;
+        $this->modifiedColumns[] = FortipfinPeer::NOMEXT;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = FortipfinPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = FortipfinPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setApofis($v)
 	{
 
-		if ($this->apofis !== $v) {
-			$this->apofis = $v;
-			$this->modifiedColumns[] = FortipfinPeer::APOFIS;
-		}
-
+    if ($this->apofis !== $v) {
+        $this->apofis = $v;
+        $this->modifiedColumns[] = FortipfinPeer::APOFIS;
+      }
+  
 	} 
 	
 	public function setTipfin($v)
 	{
 
-		if ($this->tipfin !== $v) {
-			$this->tipfin = $v;
-			$this->modifiedColumns[] = FortipfinPeer::TIPFIN;
-		}
-
+    if ($this->tipfin !== $v) {
+        $this->tipfin = $v;
+        $this->modifiedColumns[] = FortipfinPeer::TIPFIN;
+      }
+  
 	} 
 	
 	public function setMontoing($v)
 	{
 
-		if ($this->montoing !== $v) {
-			$this->montoing = $v;
-			$this->modifiedColumns[] = FortipfinPeer::MONTOING;
-		}
-
+    if ($this->montoing !== $v) {
+        $this->montoing = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FortipfinPeer::MONTOING;
+      }
+  
 	} 
 	
 	public function setMontodis($v)
 	{
 
-		if ($this->montodis !== $v) {
-			$this->montodis = $v;
-			$this->modifiedColumns[] = FortipfinPeer::MONTODIS;
-		}
-
+    if ($this->montodis !== $v) {
+        $this->montodis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FortipfinPeer::MONTODIS;
+      }
+  
 	} 
 	
 	public function setMontodisaux($v)
 	{
 
-		if ($this->montodisaux !== $v) {
-			$this->montodisaux = $v;
-			$this->modifiedColumns[] = FortipfinPeer::MONTODISAUX;
-		}
-
+    if ($this->montodisaux !== $v) {
+        $this->montodisaux = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FortipfinPeer::MONTODISAUX;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FortipfinPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FortipfinPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codfin = $rs->getString($startcol + 0);
+      $this->codfin = $rs->getString($startcol + 0);
 
-			$this->nomext = $rs->getString($startcol + 1);
+      $this->nomext = $rs->getString($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->apofis = $rs->getString($startcol + 3);
+      $this->apofis = $rs->getString($startcol + 3);
 
-			$this->tipfin = $rs->getString($startcol + 4);
+      $this->tipfin = $rs->getString($startcol + 4);
 
-			$this->montoing = $rs->getFloat($startcol + 5);
+      $this->montoing = $rs->getFloat($startcol + 5);
 
-			$this->montodis = $rs->getFloat($startcol + 6);
+      $this->montodis = $rs->getFloat($startcol + 6);
 
-			$this->montodisaux = $rs->getFloat($startcol + 7);
+      $this->montodisaux = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fortipfin object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fortipfin object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -284,6 +315,7 @@ abstract class BaseFortipfin extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FortipfinPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FortipfinPeer::doUpdate($this, $con);

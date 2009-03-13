@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class ForestdisperMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ForestdisperMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ForestdisperMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('forestdisper');
 		$tMap->setPhpName('Forestdisper');
 
@@ -42,9 +42,9 @@ class ForestdisperMapBuilder {
 
 		$tMap->addColumn('PERPRE', 'Perpre', 'string', CreoleTypes::VARCHAR, true, 2);
 
-		$tMap->addColumn('CANPER', 'Canper', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANPER', 'Canper', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -6,16 +6,22 @@ generator:
 
     fields:
       codtippro:      { name: Código}
-      destippro:      { name: Descripción}      
- 
+      destippro:      { name: Descripción}
+
     list:
-      title:          Definición Tipos de Profesional
+      title:          Tipos de Profesional
       filters:		  [codtippro, destippro]
       display:        [=codtippro, destippro]
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+      sort:           codtippro
+
     edit:
       title:          Edición Tipos de Profesional
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

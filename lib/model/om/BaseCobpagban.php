@@ -45,164 +45,194 @@ abstract class BaseCobpagban extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodban()
-	{
+  
+  public function getCodban()
+  {
 
-		return $this->codban; 		
-	}
-	
-	public function getNomban()
-	{
+    return trim($this->codban);
 
-		return $this->nomban; 		
-	}
-	
-	public function getDirban()
-	{
+  }
+  
+  public function getNomban()
+  {
 
-		return $this->dirban; 		
-	}
-	
-	public function getTelban()
-	{
+    return trim($this->nomban);
 
-		return $this->telban; 		
-	}
-	
-	public function getFaxban()
-	{
+  }
+  
+  public function getDirban()
+  {
 
-		return $this->faxban; 		
-	}
-	
-	public function getEmaban()
-	{
+    return trim($this->dirban);
 
-		return $this->emaban; 		
-	}
-	
-	public function getConban()
-	{
+  }
+  
+  public function getTelban()
+  {
 
-		return $this->conban; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->telban);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFaxban()
+  {
+
+    return trim($this->faxban);
+
+  }
+  
+  public function getEmaban()
+  {
+
+    return trim($this->emaban);
+
+  }
+  
+  public function getConban()
+  {
+
+    return trim($this->conban);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodban($v)
 	{
 
-		if ($this->codban !== $v) {
-			$this->codban = $v;
-			$this->modifiedColumns[] = CobpagbanPeer::CODBAN;
-		}
-
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = CobpagbanPeer::CODBAN;
+      }
+  
 	} 
 	
 	public function setNomban($v)
 	{
 
-		if ($this->nomban !== $v) {
-			$this->nomban = $v;
-			$this->modifiedColumns[] = CobpagbanPeer::NOMBAN;
-		}
-
+    if ($this->nomban !== $v) {
+        $this->nomban = $v;
+        $this->modifiedColumns[] = CobpagbanPeer::NOMBAN;
+      }
+  
 	} 
 	
 	public function setDirban($v)
 	{
 
-		if ($this->dirban !== $v) {
-			$this->dirban = $v;
-			$this->modifiedColumns[] = CobpagbanPeer::DIRBAN;
-		}
-
+    if ($this->dirban !== $v) {
+        $this->dirban = $v;
+        $this->modifiedColumns[] = CobpagbanPeer::DIRBAN;
+      }
+  
 	} 
 	
 	public function setTelban($v)
 	{
 
-		if ($this->telban !== $v) {
-			$this->telban = $v;
-			$this->modifiedColumns[] = CobpagbanPeer::TELBAN;
-		}
-
+    if ($this->telban !== $v) {
+        $this->telban = $v;
+        $this->modifiedColumns[] = CobpagbanPeer::TELBAN;
+      }
+  
 	} 
 	
 	public function setFaxban($v)
 	{
 
-		if ($this->faxban !== $v) {
-			$this->faxban = $v;
-			$this->modifiedColumns[] = CobpagbanPeer::FAXBAN;
-		}
-
+    if ($this->faxban !== $v) {
+        $this->faxban = $v;
+        $this->modifiedColumns[] = CobpagbanPeer::FAXBAN;
+      }
+  
 	} 
 	
 	public function setEmaban($v)
 	{
 
-		if ($this->emaban !== $v) {
-			$this->emaban = $v;
-			$this->modifiedColumns[] = CobpagbanPeer::EMABAN;
-		}
-
+    if ($this->emaban !== $v) {
+        $this->emaban = $v;
+        $this->modifiedColumns[] = CobpagbanPeer::EMABAN;
+      }
+  
 	} 
 	
 	public function setConban($v)
 	{
 
-		if ($this->conban !== $v) {
-			$this->conban = $v;
-			$this->modifiedColumns[] = CobpagbanPeer::CONBAN;
-		}
-
+    if ($this->conban !== $v) {
+        $this->conban = $v;
+        $this->modifiedColumns[] = CobpagbanPeer::CONBAN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CobpagbanPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CobpagbanPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codban = $rs->getString($startcol + 0);
+      $this->codban = $rs->getString($startcol + 0);
 
-			$this->nomban = $rs->getString($startcol + 1);
+      $this->nomban = $rs->getString($startcol + 1);
 
-			$this->dirban = $rs->getString($startcol + 2);
+      $this->dirban = $rs->getString($startcol + 2);
 
-			$this->telban = $rs->getString($startcol + 3);
+      $this->telban = $rs->getString($startcol + 3);
 
-			$this->faxban = $rs->getString($startcol + 4);
+      $this->faxban = $rs->getString($startcol + 4);
 
-			$this->emaban = $rs->getString($startcol + 5);
+      $this->emaban = $rs->getString($startcol + 5);
 
-			$this->conban = $rs->getString($startcol + 6);
+      $this->conban = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cobpagban object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cobpagban object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -259,6 +289,7 @@ abstract class BaseCobpagban extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CobpagbanPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CobpagbanPeer::doUpdate($this, $con);

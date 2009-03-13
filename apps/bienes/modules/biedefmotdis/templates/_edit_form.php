@@ -9,6 +9,8 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($bnmotdis, 'getId') ?>
+<?php use_helper('Javascript') ?>
+<?php echo javascript_include_tag('tools','observe') ?>
 
 <fieldset id="sf_fieldset_none" class="">
 <legend>Motivos</legend>
@@ -18,10 +20,12 @@
   <?php if ($sf_request->hasError('bnmotdis{codmot}')): ?>
     <?php echo form_error('bnmotdis{codmot}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
-  <?php $value = object_input_tag($bnmotdis, 'getCodmot', array (
-  'size' => 20,
-  'control_name' => 'bnmotdis[codmot]',
+    <?php $value = object_input_tag($bnmotdis, 'getCodmot', array (
+  'size' => 4,
+  'maxlength' => 4,
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('bnmotdis_codmot').value=valor;document.getElementById('bnmotdis_codmot').disabled=false;",
+  'readonly' => $bnmotdis->getId()!='' ? true : false ,
+   'control_name' => 'bnmotdis[codmot]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -36,63 +40,9 @@
   <?php $value = object_input_tag($bnmotdis, 'getDesmot', array (
   'size' => 80,
   'control_name' => 'bnmotdis[desmot]',
+  'maxlength' => 250,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-<div class="form-row">
-<table width="75%" border="0">
-  <tr> 
-    <td width="52%"><div align="right"><fieldset id="sf_fieldset_none" class="">
-<legend>Afecta Contabilidad</legend>
-<div class="form-row" align="center">
-<?
-if ($bnmotdis->getAfecon()=='N')	{
-  ?><?php echo radiobutton_tag('bnmotdis[afecon]', 'S', true)        ."Si".'&nbsp;&nbsp;';
-		  echo radiobutton_tag('bnmotdis[afecon]', 'N', false)."   No";?>
-		<?
-}else{
-	echo radiobutton_tag('bnmotdis[afecon]', 'S', false)        ."Si".'&nbsp;&nbsp;';
-	echo radiobutton_tag('bnmotdis[afecon]','N', true)."   No";
-
-} ?>  
-</div>
-</fieldset></div></td>
-    <td width="48%"><div align="left"><fieldset id="sf_fieldset_none" class="">
-<legend>Desincorpora</legend>
-<div class="form-row" align="center"><?
-if ($bnmotdis->getDesinc()=='S')	{
-  ?><?php echo radiobutton_tag('bnmotdis[desinc]', 'S', true)        ."Si".'&nbsp;&nbsp;';
-		  echo radiobutton_tag('bnmotdis[desinc]', 'N', false)."   No";?>
-		<?
-
-}else{
-	echo radiobutton_tag('bnmotdis[desinc]', 'S', false)        ."Si".'&nbsp;&nbsp;';
-	echo radiobutton_tag('bnmotdis[desinc]','N', true)."   No";
-
-} ?>   
-</div>
-</fieldset></div></td>
-  </tr>
-  <tr> 
-    <td height="21" colspan="2">
-<div align="center"><fieldset id="sf_fieldset_none" class="">
-<legend>Mejora el Bien</legend>
-<div class="form-row" align="center">
-<?
-if ($bnmotdis->getAdimej()=='N')	{
-  ?><?php echo radiobutton_tag('bnmotdis[adimej]', 'S', true)        ."Si".'&nbsp;&nbsp;';
-		  echo radiobutton_tag('bnmotdis[adimej]', 'N', false)."   No";?>
-		<?
-
-}else{
-	echo radiobutton_tag('bnmotdis[adimej]', 'S', false)        ."Si".'&nbsp;&nbsp;';
-	echo radiobutton_tag('bnmotdis[adimej]', 'N', true)."   No";
-
-} ?>  
-</div>
-</fieldset></div></td>
-  </tr>
-</table>
 </div>
 </fieldset>
 

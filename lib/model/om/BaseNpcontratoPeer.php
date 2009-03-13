@@ -220,6 +220,7 @@ abstract class BaseNpcontratoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcontratoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

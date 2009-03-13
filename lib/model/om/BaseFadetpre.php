@@ -25,6 +25,10 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 
 
 	
+	protected $mondesc;
+
+
+	
 	protected $monrgo;
 
 
@@ -45,191 +49,240 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefpre()
-	{
+  
+  public function getRefpre()
+  {
 
-		return $this->refpre; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->refpre);
 
-		return $this->codart; 		
-	}
-	
-	public function getCansol()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return number_format($this->cansol,2,',','.');
-		
-	}
-	
-	public function getPrecio()
-	{
+    return trim($this->codart);
 
-		return number_format($this->precio,2,',','.');
-		
-	}
-	
-	public function getMonrgo()
-	{
+  }
+  
+  public function getCansol($val=false)
+  {
 
-		return number_format($this->monrgo,2,',','.');
-		
-	}
-	
-	public function getTotart()
-	{
+    if($val) return number_format($this->cansol,2,',','.');
+    else return $this->cansol;
 
-		return number_format($this->totart,2,',','.');
-		
-	}
-	
-	public function getFecent($format = 'Y-m-d')
-	{
+  }
+  
+  public function getPrecio($val=false)
+  {
 
-		if ($this->fecent === null || $this->fecent === '') {
-			return null;
-		} elseif (!is_int($this->fecent)) {
-						$ts = strtotime($this->fecent);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
-			}
-		} else {
-			$ts = $this->fecent;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->precio,2,',','.');
+    else return $this->precio;
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getMondesc($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->mondesc,2,',','.');
+    else return $this->mondesc;
+
+  }
+  
+  public function getMonrgo($val=false)
+  {
+
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
+
+  }
+  
+  public function getTotart($val=false)
+  {
+
+    if($val) return number_format($this->totart,2,',','.');
+    else return $this->totart;
+
+  }
+  
+  public function getFecent($format = 'Y-m-d')
+  {
+
+    if ($this->fecent === null || $this->fecent === '') {
+      return null;
+    } elseif (!is_int($this->fecent)) {
+            $ts = adodb_strtotime($this->fecent);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
+      }
+    } else {
+      $ts = $this->fecent;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefpre($v)
 	{
 
-		if ($this->refpre !== $v) {
-			$this->refpre = $v;
-			$this->modifiedColumns[] = FadetprePeer::REFPRE;
-		}
-
+    if ($this->refpre !== $v) {
+        $this->refpre = $v;
+        $this->modifiedColumns[] = FadetprePeer::REFPRE;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FadetprePeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FadetprePeer::CODART;
+      }
+  
 	} 
 	
 	public function setCansol($v)
 	{
 
-		if ($this->cansol !== $v) {
-			$this->cansol = $v;
-			$this->modifiedColumns[] = FadetprePeer::CANSOL;
-		}
-
+    if ($this->cansol !== $v) {
+        $this->cansol = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadetprePeer::CANSOL;
+      }
+  
 	} 
 	
 	public function setPrecio($v)
 	{
 
-		if ($this->precio !== $v) {
-			$this->precio = $v;
-			$this->modifiedColumns[] = FadetprePeer::PRECIO;
-		}
+    if ($this->precio !== $v) {
+        $this->precio = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadetprePeer::PRECIO;
+      }
+  
+	} 
+	
+	public function setMondesc($v)
+	{
 
+    if ($this->mondesc !== $v) {
+        $this->mondesc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadetprePeer::MONDESC;
+      }
+  
 	} 
 	
 	public function setMonrgo($v)
 	{
 
-		if ($this->monrgo !== $v) {
-			$this->monrgo = $v;
-			$this->modifiedColumns[] = FadetprePeer::MONRGO;
-		}
-
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadetprePeer::MONRGO;
+      }
+  
 	} 
 	
 	public function setTotart($v)
 	{
 
-		if ($this->totart !== $v) {
-			$this->totart = $v;
-			$this->modifiedColumns[] = FadetprePeer::TOTART;
-		}
-
+    if ($this->totart !== $v) {
+        $this->totart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadetprePeer::TOTART;
+      }
+  
 	} 
 	
 	public function setFecent($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecent !== $ts) {
-			$this->fecent = $ts;
-			$this->modifiedColumns[] = FadetprePeer::FECENT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecent !== $ts) {
+      $this->fecent = $ts;
+      $this->modifiedColumns[] = FadetprePeer::FECENT;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FadetprePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FadetprePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refpre = $rs->getString($startcol + 0);
+      $this->refpre = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->cansol = $rs->getFloat($startcol + 2);
+      $this->cansol = $rs->getFloat($startcol + 2);
 
-			$this->precio = $rs->getFloat($startcol + 3);
+      $this->precio = $rs->getFloat($startcol + 3);
 
-			$this->monrgo = $rs->getFloat($startcol + 4);
+      $this->mondesc = $rs->getFloat($startcol + 4);
 
-			$this->totart = $rs->getFloat($startcol + 5);
+      $this->monrgo = $rs->getFloat($startcol + 5);
 
-			$this->fecent = $rs->getDate($startcol + 6, null);
+      $this->totart = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->fecent = $rs->getDate($startcol + 7, null);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fadetpre object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fadetpre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -286,6 +339,7 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FadetprePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FadetprePeer::doUpdate($this, $con);
@@ -364,15 +418,18 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 				return $this->getPrecio();
 				break;
 			case 4:
-				return $this->getMonrgo();
+				return $this->getMondesc();
 				break;
 			case 5:
-				return $this->getTotart();
+				return $this->getMonrgo();
 				break;
 			case 6:
-				return $this->getFecent();
+				return $this->getTotart();
 				break;
 			case 7:
+				return $this->getFecent();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -389,10 +446,11 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 			$keys[1] => $this->getCodart(),
 			$keys[2] => $this->getCansol(),
 			$keys[3] => $this->getPrecio(),
-			$keys[4] => $this->getMonrgo(),
-			$keys[5] => $this->getTotart(),
-			$keys[6] => $this->getFecent(),
-			$keys[7] => $this->getId(),
+			$keys[4] => $this->getMondesc(),
+			$keys[5] => $this->getMonrgo(),
+			$keys[6] => $this->getTotart(),
+			$keys[7] => $this->getFecent(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -421,15 +479,18 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 				$this->setPrecio($value);
 				break;
 			case 4:
-				$this->setMonrgo($value);
+				$this->setMondesc($value);
 				break;
 			case 5:
-				$this->setTotart($value);
+				$this->setMonrgo($value);
 				break;
 			case 6:
-				$this->setFecent($value);
+				$this->setTotart($value);
 				break;
 			case 7:
+				$this->setFecent($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -443,10 +504,11 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setCodart($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCansol($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setPrecio($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setMonrgo($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setTotart($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setFecent($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[4], $arr)) $this->setMondesc($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setMonrgo($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setTotart($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFecent($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -458,6 +520,7 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FadetprePeer::CODART)) $criteria->add(FadetprePeer::CODART, $this->codart);
 		if ($this->isColumnModified(FadetprePeer::CANSOL)) $criteria->add(FadetprePeer::CANSOL, $this->cansol);
 		if ($this->isColumnModified(FadetprePeer::PRECIO)) $criteria->add(FadetprePeer::PRECIO, $this->precio);
+		if ($this->isColumnModified(FadetprePeer::MONDESC)) $criteria->add(FadetprePeer::MONDESC, $this->mondesc);
 		if ($this->isColumnModified(FadetprePeer::MONRGO)) $criteria->add(FadetprePeer::MONRGO, $this->monrgo);
 		if ($this->isColumnModified(FadetprePeer::TOTART)) $criteria->add(FadetprePeer::TOTART, $this->totart);
 		if ($this->isColumnModified(FadetprePeer::FECENT)) $criteria->add(FadetprePeer::FECENT, $this->fecent);
@@ -499,6 +562,8 @@ abstract class BaseFadetpre extends BaseObject  implements Persistent {
 		$copyObj->setCansol($this->cansol);
 
 		$copyObj->setPrecio($this->precio);
+
+		$copyObj->setMondesc($this->mondesc);
 
 		$copyObj->setMonrgo($this->monrgo);
 

@@ -245,6 +245,7 @@ abstract class BaseNpbonocontPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpbonocontPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

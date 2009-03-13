@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "citiping{codtip}"
+   - "citiping{destip}"
+
+names:
+  citiping{codtip}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codtip
+
+  citiping{destip}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_destip
+
+Validator_codtip:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Citiping
+        column:       codtip
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destip:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La descripción no puede tener mas de 250 caracteres

@@ -5,24 +5,29 @@ generator:
     theme:            default
 
     fields:
-      codrgo: { name: Codigo}
-      nomrgo: { name: Descripcion}
-      codpre: { name: Codigo}
+      codrgo: { name: Código}
+      nomrgo: { name: Descripción}
       tiprgo: { name: Tipo de Recargo}
-      monrgo: { name: Valor}      
+      monrgo: { name: Valor}
+      codpre: { name: Código}
+      nompre: { name: Nombre}
       codcta: { name: Codigo}
+      descta: { name: Nombre}
 
     list:
-      title:          Registro del Recargo
+      title:          Recargos
       display:        [=codrgo, nomrgo]
       filters:		  [codrgo, nomrgo]
       max_per_page:	  10
+      sort:           codrgo
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
     edit:
-      title:          Registro del Recargos      
-      display:        [codrgo, nomrgo, codpre, tiprgo, monrgo, codcta]
-      fields:
-        #codrgo:      { params : maxlength=6 }	       
+      title:          Edición de Recargos
+      display:        [codrgo, nomrgo, tiprgo, monrgo, codpre, nompre, codcta, descta]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

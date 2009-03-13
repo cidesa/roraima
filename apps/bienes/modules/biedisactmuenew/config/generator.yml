@@ -12,31 +12,37 @@ generator:
       codmot: { name: Motivo}
       desmot: { name: Descripción}
       fecdismue: { name: Fecha}
-      fecdevdis: { name: Fecha Devolución}
+      fecdevdis: { name: Fecha DevoluASción}
       mondismue: { name: Monto}
       vidutil: { name: Vida Útil}
-      detdismue: { name: Detalle}   
+      detdismue: { name: Detalle}
       codubiori: { name: Origen}
       desubiori: { name: Descripción}
-      codubides: { name: Ubicación}
+      codubides: { name: Destino}
       desubides: { name: Descripción}
       obsdismue: { name: Observación}
-      stadismue: { name: Estatus}
+      stadismue: { name: Estatus[A/D]}
       motdismue: { name: No se}
     list:
       title:          Disposición de Muebles
-      filters:        [codact]
+      filters:        [codact, desmue, fecdismue, stadismue]
       display:        [=codact, codmue, desmue, stadismue]
       fields:
         fecdismue: { params: date_format='dd/MM/yy' }
-        fecdevdis: { params: date_format='dd/MM/yy' } 
+        fecdevdis: { params: date_format='dd/MM/yy' }
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
+      sort:  codact
     edit:
       title:          Edición de Disposición de Muebles
-      display:        [=codact, codmue, desmue, nrodismue, tipdismue, codmot, desmot, fecdismue, fecdevdis, mondismue, vidutil, detdismue, codubiori, desubiori, codubides, desubides, obsdismue, stadismue]
+      display:       [=codact, codmue, desmue, nrodismue, tipdismue, codmot, desmot, fecdismue, fecdevdis, mondismue, vidutil, detdismue, codubiori, desubiori, codubides, desubides, obsdismue, stadismue]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~
       fields:
         fecdismue: { params: date_format='dd/MM/yy' }
-        fecdevdis: { params: date_format='dd/MM/yy' } 
+        fecdevdis: { params: date_format='dd/MM/yy' }

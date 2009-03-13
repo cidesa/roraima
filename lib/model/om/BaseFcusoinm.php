@@ -9,11 +9,11 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 
 
 	
-	protected $coduso;
+	protected $codusoinm;
 
 
 	
-	protected $nomuso;
+	protected $nomusoinm;
 
 
 	
@@ -29,93 +29,119 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
+  
+  public function getCodusoinm()
+  {
+
+    return trim($this->codusoinm);
+
+  }
+  
+  public function getNomusoinm()
+  {
+
+    return trim($this->nomusoinm);
+
+  }
+  
+  public function getFactor($val=false)
+  {
+
+    if($val) return number_format($this->factor,2,',','.');
+    else return $this->factor;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
-	public function getCoduso()
+	public function setCodusoinm($v)
 	{
 
-		return $this->coduso; 		
-	}
-	
-	public function getNomuso()
-	{
-
-		return $this->nomuso; 		
-	}
-	
-	public function getFactor()
-	{
-
-		return number_format($this->factor,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
-
-		return $this->id; 		
-	}
-	
-	public function setCoduso($v)
-	{
-
-		if ($this->coduso !== $v) {
-			$this->coduso = $v;
-			$this->modifiedColumns[] = FcusoinmPeer::CODUSO;
-		}
-
+    if ($this->codusoinm !== $v) {
+        $this->codusoinm = $v;
+        $this->modifiedColumns[] = FcusoinmPeer::CODUSOINM;
+      }
+  
 	} 
 	
-	public function setNomuso($v)
+	public function setNomusoinm($v)
 	{
 
-		if ($this->nomuso !== $v) {
-			$this->nomuso = $v;
-			$this->modifiedColumns[] = FcusoinmPeer::NOMUSO;
-		}
-
+    if ($this->nomusoinm !== $v) {
+        $this->nomusoinm = $v;
+        $this->modifiedColumns[] = FcusoinmPeer::NOMUSOINM;
+      }
+  
 	} 
 	
 	public function setFactor($v)
 	{
 
-		if ($this->factor !== $v) {
-			$this->factor = $v;
-			$this->modifiedColumns[] = FcusoinmPeer::FACTOR;
-		}
-
+    if ($this->factor !== $v) {
+        $this->factor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcusoinmPeer::FACTOR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcusoinmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcusoinmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduso = $rs->getString($startcol + 0);
+      $this->codusoinm = $rs->getString($startcol + 0);
 
-			$this->nomuso = $rs->getString($startcol + 1);
+      $this->nomusoinm = $rs->getString($startcol + 1);
 
-			$this->factor = $rs->getFloat($startcol + 2);
+      $this->factor = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcusoinm object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcusoinm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcusoinmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcusoinmPeer::doUpdate($this, $con);
@@ -238,10 +265,10 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCoduso();
+				return $this->getCodusoinm();
 				break;
 			case 1:
-				return $this->getNomuso();
+				return $this->getNomusoinm();
 				break;
 			case 2:
 				return $this->getFactor();
@@ -259,8 +286,8 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	{
 		$keys = FcusoinmPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCoduso(),
-			$keys[1] => $this->getNomuso(),
+			$keys[0] => $this->getCodusoinm(),
+			$keys[1] => $this->getNomusoinm(),
 			$keys[2] => $this->getFactor(),
 			$keys[3] => $this->getId(),
 		);
@@ -279,10 +306,10 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCoduso($value);
+				$this->setCodusoinm($value);
 				break;
 			case 1:
-				$this->setNomuso($value);
+				$this->setNomusoinm($value);
 				break;
 			case 2:
 				$this->setFactor($value);
@@ -297,8 +324,8 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	{
 		$keys = FcusoinmPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCoduso($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setNomuso($arr[$keys[1]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodusoinm($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setNomusoinm($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setFactor($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
 	}
@@ -308,8 +335,8 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FcusoinmPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(FcusoinmPeer::CODUSO)) $criteria->add(FcusoinmPeer::CODUSO, $this->coduso);
-		if ($this->isColumnModified(FcusoinmPeer::NOMUSO)) $criteria->add(FcusoinmPeer::NOMUSO, $this->nomuso);
+		if ($this->isColumnModified(FcusoinmPeer::CODUSOINM)) $criteria->add(FcusoinmPeer::CODUSOINM, $this->codusoinm);
+		if ($this->isColumnModified(FcusoinmPeer::NOMUSOINM)) $criteria->add(FcusoinmPeer::NOMUSOINM, $this->nomusoinm);
 		if ($this->isColumnModified(FcusoinmPeer::FACTOR)) $criteria->add(FcusoinmPeer::FACTOR, $this->factor);
 		if ($this->isColumnModified(FcusoinmPeer::ID)) $criteria->add(FcusoinmPeer::ID, $this->id);
 
@@ -342,9 +369,9 @@ abstract class BaseFcusoinm extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCoduso($this->coduso);
+		$copyObj->setCodusoinm($this->codusoinm);
 
-		$copyObj->setNomuso($this->nomuso);
+		$copyObj->setNomusoinm($this->nomusoinm);
 
 		$copyObj->setFactor($this->factor);
 

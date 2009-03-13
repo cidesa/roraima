@@ -29,92 +29,118 @@ abstract class BaseRhtipcur extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipcur()
-	{
+  
+  public function getCodtipcur()
+  {
 
-		return $this->codtipcur; 		
-	}
-	
-	public function getDestipcur()
-	{
+    return trim($this->codtipcur);
 
-		return $this->destipcur; 		
-	}
-	
-	public function getCodarecur()
-	{
+  }
+  
+  public function getDestipcur()
+  {
 
-		return $this->codarecur; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->destipcur);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodarecur()
+  {
+
+    return trim($this->codarecur);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipcur($v)
 	{
 
-		if ($this->codtipcur !== $v) {
-			$this->codtipcur = $v;
-			$this->modifiedColumns[] = RhtipcurPeer::CODTIPCUR;
-		}
-
+    if ($this->codtipcur !== $v) {
+        $this->codtipcur = $v;
+        $this->modifiedColumns[] = RhtipcurPeer::CODTIPCUR;
+      }
+  
 	} 
 	
 	public function setDestipcur($v)
 	{
 
-		if ($this->destipcur !== $v) {
-			$this->destipcur = $v;
-			$this->modifiedColumns[] = RhtipcurPeer::DESTIPCUR;
-		}
-
+    if ($this->destipcur !== $v) {
+        $this->destipcur = $v;
+        $this->modifiedColumns[] = RhtipcurPeer::DESTIPCUR;
+      }
+  
 	} 
 	
 	public function setCodarecur($v)
 	{
 
-		if ($this->codarecur !== $v) {
-			$this->codarecur = $v;
-			$this->modifiedColumns[] = RhtipcurPeer::CODARECUR;
-		}
-
+    if ($this->codarecur !== $v) {
+        $this->codarecur = $v;
+        $this->modifiedColumns[] = RhtipcurPeer::CODARECUR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhtipcurPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhtipcurPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipcur = $rs->getString($startcol + 0);
+      $this->codtipcur = $rs->getString($startcol + 0);
 
-			$this->destipcur = $rs->getString($startcol + 1);
+      $this->destipcur = $rs->getString($startcol + 1);
 
-			$this->codarecur = $rs->getString($startcol + 2);
+      $this->codarecur = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhtipcur object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhtipcur object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseRhtipcur extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhtipcurPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhtipcurPeer::doUpdate($this, $con);

@@ -13,7 +13,7 @@ abstract class BaseFapresupPeer {
 	const CLASS_DEFAULT = 'lib.model.Fapresup';
 
 	
-	const NUM_COLUMNS = 15;
+	const NUM_COLUMNS = 16;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,13 +38,16 @@ abstract class BaseFapresupPeer {
 	const MONDESC = 'fapresup.MONDESC';
 
 	
-	const CONPAG = 'fapresup.CONPAG';
+	const MONRGO = 'fapresup.MONRGO';
 
 	
-	const FORDESP = 'fapresup.FORDESP';
+	const FACONPAG_ID = 'fapresup.FACONPAG_ID';
 
 	
-	const FORSOL = 'fapresup.FORSOL';
+	const FAFORDES_ID = 'fapresup.FAFORDES_ID';
+
+	
+	const FAFORSOL_ID = 'fapresup.FAFORSOL_ID';
 
 	
 	const TIPMON = 'fapresup.TIPMON';
@@ -70,18 +73,18 @@ abstract class BaseFapresupPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refpre', 'Despre', 'Fecpre', 'Codcli', 'Monpre', 'Mondesc', 'Conpag', 'Fordesp', 'Forsol', 'Tipmon', 'Valmon', 'Autpor', 'Observ', 'Codubi', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FapresupPeer::REFPRE, FapresupPeer::DESPRE, FapresupPeer::FECPRE, FapresupPeer::CODCLI, FapresupPeer::MONPRE, FapresupPeer::MONDESC, FapresupPeer::CONPAG, FapresupPeer::FORDESP, FapresupPeer::FORSOL, FapresupPeer::TIPMON, FapresupPeer::VALMON, FapresupPeer::AUTPOR, FapresupPeer::OBSERV, FapresupPeer::CODUBI, FapresupPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refpre', 'despre', 'fecpre', 'codcli', 'monpre', 'mondesc', 'conpag', 'fordesp', 'forsol', 'tipmon', 'valmon', 'autpor', 'observ', 'codubi', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
+		BasePeer::TYPE_PHPNAME => array ('Refpre', 'Despre', 'Fecpre', 'Codcli', 'Monpre', 'Mondesc', 'Monrgo', 'FaconpagId', 'FafordesId', 'FaforsolId', 'Tipmon', 'Valmon', 'Autpor', 'Observ', 'Codubi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FapresupPeer::REFPRE, FapresupPeer::DESPRE, FapresupPeer::FECPRE, FapresupPeer::CODCLI, FapresupPeer::MONPRE, FapresupPeer::MONDESC, FapresupPeer::MONRGO, FapresupPeer::FACONPAG_ID, FapresupPeer::FAFORDES_ID, FapresupPeer::FAFORSOL_ID, FapresupPeer::TIPMON, FapresupPeer::VALMON, FapresupPeer::AUTPOR, FapresupPeer::OBSERV, FapresupPeer::CODUBI, FapresupPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refpre', 'despre', 'fecpre', 'codcli', 'monpre', 'mondesc', 'monrgo', 'faconpag_id', 'fafordes_id', 'faforsol_id', 'tipmon', 'valmon', 'autpor', 'observ', 'codubi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refpre' => 0, 'Despre' => 1, 'Fecpre' => 2, 'Codcli' => 3, 'Monpre' => 4, 'Mondesc' => 5, 'Conpag' => 6, 'Fordesp' => 7, 'Forsol' => 8, 'Tipmon' => 9, 'Valmon' => 10, 'Autpor' => 11, 'Observ' => 12, 'Codubi' => 13, 'Id' => 14, ),
-		BasePeer::TYPE_COLNAME => array (FapresupPeer::REFPRE => 0, FapresupPeer::DESPRE => 1, FapresupPeer::FECPRE => 2, FapresupPeer::CODCLI => 3, FapresupPeer::MONPRE => 4, FapresupPeer::MONDESC => 5, FapresupPeer::CONPAG => 6, FapresupPeer::FORDESP => 7, FapresupPeer::FORSOL => 8, FapresupPeer::TIPMON => 9, FapresupPeer::VALMON => 10, FapresupPeer::AUTPOR => 11, FapresupPeer::OBSERV => 12, FapresupPeer::CODUBI => 13, FapresupPeer::ID => 14, ),
-		BasePeer::TYPE_FIELDNAME => array ('refpre' => 0, 'despre' => 1, 'fecpre' => 2, 'codcli' => 3, 'monpre' => 4, 'mondesc' => 5, 'conpag' => 6, 'fordesp' => 7, 'forsol' => 8, 'tipmon' => 9, 'valmon' => 10, 'autpor' => 11, 'observ' => 12, 'codubi' => 13, 'id' => 14, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
+		BasePeer::TYPE_PHPNAME => array ('Refpre' => 0, 'Despre' => 1, 'Fecpre' => 2, 'Codcli' => 3, 'Monpre' => 4, 'Mondesc' => 5, 'Monrgo' => 6, 'FaconpagId' => 7, 'FafordesId' => 8, 'FaforsolId' => 9, 'Tipmon' => 10, 'Valmon' => 11, 'Autpor' => 12, 'Observ' => 13, 'Codubi' => 14, 'Id' => 15, ),
+		BasePeer::TYPE_COLNAME => array (FapresupPeer::REFPRE => 0, FapresupPeer::DESPRE => 1, FapresupPeer::FECPRE => 2, FapresupPeer::CODCLI => 3, FapresupPeer::MONPRE => 4, FapresupPeer::MONDESC => 5, FapresupPeer::MONRGO => 6, FapresupPeer::FACONPAG_ID => 7, FapresupPeer::FAFORDES_ID => 8, FapresupPeer::FAFORSOL_ID => 9, FapresupPeer::TIPMON => 10, FapresupPeer::VALMON => 11, FapresupPeer::AUTPOR => 12, FapresupPeer::OBSERV => 13, FapresupPeer::CODUBI => 14, FapresupPeer::ID => 15, ),
+		BasePeer::TYPE_FIELDNAME => array ('refpre' => 0, 'despre' => 1, 'fecpre' => 2, 'codcli' => 3, 'monpre' => 4, 'mondesc' => 5, 'monrgo' => 6, 'faconpag_id' => 7, 'fafordes_id' => 8, 'faforsol_id' => 9, 'tipmon' => 10, 'valmon' => 11, 'autpor' => 12, 'observ' => 13, 'codubi' => 14, 'id' => 15, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
 	);
 
 	
@@ -147,11 +150,13 @@ abstract class BaseFapresupPeer {
 
 		$criteria->addSelectColumn(FapresupPeer::MONDESC);
 
-		$criteria->addSelectColumn(FapresupPeer::CONPAG);
+		$criteria->addSelectColumn(FapresupPeer::MONRGO);
 
-		$criteria->addSelectColumn(FapresupPeer::FORDESP);
+		$criteria->addSelectColumn(FapresupPeer::FACONPAG_ID);
 
-		$criteria->addSelectColumn(FapresupPeer::FORSOL);
+		$criteria->addSelectColumn(FapresupPeer::FAFORDES_ID);
+
+		$criteria->addSelectColumn(FapresupPeer::FAFORSOL_ID);
 
 		$criteria->addSelectColumn(FapresupPeer::TIPMON);
 
@@ -242,6 +247,719 @@ abstract class BaseFapresupPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinFaconpag(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FapresupPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FapresupPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FapresupPeer::FACONPAG_ID, FaconpagPeer::ID);
+
+		$rs = FapresupPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinFafordes(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FapresupPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FapresupPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FapresupPeer::FAFORDES_ID, FafordesPeer::ID);
+
+		$rs = FapresupPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinFaforsol(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FapresupPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FapresupPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FapresupPeer::FAFORSOL_ID, FaforsolPeer::ID);
+
+		$rs = FapresupPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinFaconpag(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FapresupPeer::addSelectColumns($c);
+		$startcol = (FapresupPeer::NUM_COLUMNS - FapresupPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		FaconpagPeer::addSelectColumns($c);
+
+		$c->addJoin(FapresupPeer::FACONPAG_ID, FaconpagPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FapresupPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FaconpagPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getFaconpag(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addFapresup($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initFapresups();
+				$obj2->addFapresup($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinFafordes(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FapresupPeer::addSelectColumns($c);
+		$startcol = (FapresupPeer::NUM_COLUMNS - FapresupPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		FafordesPeer::addSelectColumns($c);
+
+		$c->addJoin(FapresupPeer::FAFORDES_ID, FafordesPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FapresupPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FafordesPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getFafordes(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addFapresup($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initFapresups();
+				$obj2->addFapresup($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinFaforsol(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FapresupPeer::addSelectColumns($c);
+		$startcol = (FapresupPeer::NUM_COLUMNS - FapresupPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		FaforsolPeer::addSelectColumns($c);
+
+		$c->addJoin(FapresupPeer::FAFORSOL_ID, FaforsolPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FapresupPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FaforsolPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getFaforsol(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addFapresup($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initFapresups();
+				$obj2->addFapresup($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FapresupPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FapresupPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FapresupPeer::FACONPAG_ID, FaconpagPeer::ID);
+
+		$criteria->addJoin(FapresupPeer::FAFORDES_ID, FafordesPeer::ID);
+
+		$criteria->addJoin(FapresupPeer::FAFORSOL_ID, FaforsolPeer::ID);
+
+		$rs = FapresupPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FapresupPeer::addSelectColumns($c);
+		$startcol2 = (FapresupPeer::NUM_COLUMNS - FapresupPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		FaconpagPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + FaconpagPeer::NUM_COLUMNS;
+
+		FafordesPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + FafordesPeer::NUM_COLUMNS;
+
+		FaforsolPeer::addSelectColumns($c);
+		$startcol5 = $startcol4 + FaforsolPeer::NUM_COLUMNS;
+
+		$c->addJoin(FapresupPeer::FACONPAG_ID, FaconpagPeer::ID);
+
+		$c->addJoin(FapresupPeer::FAFORDES_ID, FafordesPeer::ID);
+
+		$c->addJoin(FapresupPeer::FAFORSOL_ID, FaforsolPeer::ID);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FapresupPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = FaconpagPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getFaconpag(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addFapresup($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initFapresups();
+				$obj2->addFapresup($obj1);
+			}
+
+
+					
+			$omClass = FafordesPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3 = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getFafordes(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addFapresup($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initFapresups();
+				$obj3->addFapresup($obj1);
+			}
+
+
+					
+			$omClass = FaforsolPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj4 = new $cls();
+			$obj4->hydrate($rs, $startcol4);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj4 = $temp_obj1->getFaforsol(); 				if ($temp_obj4->getPrimaryKey() === $obj4->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj4->addFapresup($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj4->initFapresups();
+				$obj4->addFapresup($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAllExceptFaconpag(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FapresupPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FapresupPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FapresupPeer::FAFORDES_ID, FafordesPeer::ID);
+
+		$criteria->addJoin(FapresupPeer::FAFORSOL_ID, FaforsolPeer::ID);
+
+		$rs = FapresupPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptFafordes(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FapresupPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FapresupPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FapresupPeer::FACONPAG_ID, FaconpagPeer::ID);
+
+		$criteria->addJoin(FapresupPeer::FAFORSOL_ID, FaforsolPeer::ID);
+
+		$rs = FapresupPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptFaforsol(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FapresupPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FapresupPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FapresupPeer::FACONPAG_ID, FaconpagPeer::ID);
+
+		$criteria->addJoin(FapresupPeer::FAFORDES_ID, FafordesPeer::ID);
+
+		$rs = FapresupPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAllExceptFaconpag(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FapresupPeer::addSelectColumns($c);
+		$startcol2 = (FapresupPeer::NUM_COLUMNS - FapresupPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		FafordesPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + FafordesPeer::NUM_COLUMNS;
+
+		FaforsolPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + FaforsolPeer::NUM_COLUMNS;
+
+		$c->addJoin(FapresupPeer::FAFORDES_ID, FafordesPeer::ID);
+
+		$c->addJoin(FapresupPeer::FAFORSOL_ID, FaforsolPeer::ID);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FapresupPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FafordesPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getFafordes(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addFapresup($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initFapresups();
+				$obj2->addFapresup($obj1);
+			}
+
+			$omClass = FaforsolPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3  = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getFaforsol(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addFapresup($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initFapresups();
+				$obj3->addFapresup($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptFafordes(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FapresupPeer::addSelectColumns($c);
+		$startcol2 = (FapresupPeer::NUM_COLUMNS - FapresupPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		FaconpagPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + FaconpagPeer::NUM_COLUMNS;
+
+		FaforsolPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + FaforsolPeer::NUM_COLUMNS;
+
+		$c->addJoin(FapresupPeer::FACONPAG_ID, FaconpagPeer::ID);
+
+		$c->addJoin(FapresupPeer::FAFORSOL_ID, FaforsolPeer::ID);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FapresupPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FaconpagPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getFaconpag(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addFapresup($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initFapresups();
+				$obj2->addFapresup($obj1);
+			}
+
+			$omClass = FaforsolPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3  = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getFaforsol(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addFapresup($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initFapresups();
+				$obj3->addFapresup($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptFaforsol(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FapresupPeer::addSelectColumns($c);
+		$startcol2 = (FapresupPeer::NUM_COLUMNS - FapresupPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		FaconpagPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + FaconpagPeer::NUM_COLUMNS;
+
+		FafordesPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + FafordesPeer::NUM_COLUMNS;
+
+		$c->addJoin(FapresupPeer::FACONPAG_ID, FaconpagPeer::ID);
+
+		$c->addJoin(FapresupPeer::FAFORDES_ID, FafordesPeer::ID);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FapresupPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FaconpagPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getFaconpag(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addFapresup($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initFapresups();
+				$obj2->addFapresup($obj1);
+			}
+
+			$omClass = FafordesPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3  = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getFafordes(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addFapresup($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initFapresups();
+				$obj3->addFapresup($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -265,6 +983,7 @@ abstract class BaseFapresupPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FapresupPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

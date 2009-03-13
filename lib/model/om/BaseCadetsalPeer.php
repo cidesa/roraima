@@ -13,7 +13,7 @@ abstract class BaseCadetsalPeer {
 	const CLASS_DEFAULT = 'lib.model.Cadetsal';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,12 @@ abstract class BaseCadetsalPeer {
 	const COSART = 'cadetsal.COSART';
 
 	
+	const CODALM = 'cadetsal.CODALM';
+
+	
+	const CODUBI = 'cadetsal.CODUBI';
+
+	
 	const ID = 'cadetsal.ID';
 
 	
@@ -43,18 +49,18 @@ abstract class BaseCadetsalPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codsal', 'Codart', 'Cantot', 'Totart', 'Cosart', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadetsalPeer::CODSAL, CadetsalPeer::CODART, CadetsalPeer::CANTOT, CadetsalPeer::TOTART, CadetsalPeer::COSART, CadetsalPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codsal', 'codart', 'cantot', 'totart', 'cosart', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codsal', 'Codart', 'Cantot', 'Totart', 'Cosart', 'Codalm', 'Codubi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadetsalPeer::CODSAL, CadetsalPeer::CODART, CadetsalPeer::CANTOT, CadetsalPeer::TOTART, CadetsalPeer::COSART, CadetsalPeer::CODALM, CadetsalPeer::CODUBI, CadetsalPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codsal', 'codart', 'cantot', 'totart', 'cosart', 'codalm', 'codubi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codsal' => 0, 'Codart' => 1, 'Cantot' => 2, 'Totart' => 3, 'Cosart' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (CadetsalPeer::CODSAL => 0, CadetsalPeer::CODART => 1, CadetsalPeer::CANTOT => 2, CadetsalPeer::TOTART => 3, CadetsalPeer::COSART => 4, CadetsalPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codsal' => 0, 'codart' => 1, 'cantot' => 2, 'totart' => 3, 'cosart' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codsal' => 0, 'Codart' => 1, 'Cantot' => 2, 'Totart' => 3, 'Cosart' => 4, 'Codalm' => 5, 'Codubi' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (CadetsalPeer::CODSAL => 0, CadetsalPeer::CODART => 1, CadetsalPeer::CANTOT => 2, CadetsalPeer::TOTART => 3, CadetsalPeer::COSART => 4, CadetsalPeer::CODALM => 5, CadetsalPeer::CODUBI => 6, CadetsalPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codsal' => 0, 'codart' => 1, 'cantot' => 2, 'totart' => 3, 'cosart' => 4, 'codalm' => 5, 'codubi' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -117,6 +123,10 @@ abstract class BaseCadetsalPeer {
 		$criteria->addSelectColumn(CadetsalPeer::TOTART);
 
 		$criteria->addSelectColumn(CadetsalPeer::COSART);
+
+		$criteria->addSelectColumn(CadetsalPeer::CODALM);
+
+		$criteria->addSelectColumn(CadetsalPeer::CODUBI);
 
 		$criteria->addSelectColumn(CadetsalPeer::ID);
 
@@ -220,6 +230,7 @@ abstract class BaseCadetsalPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CadetsalPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

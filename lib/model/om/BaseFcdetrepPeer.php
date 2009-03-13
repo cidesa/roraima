@@ -13,7 +13,7 @@ abstract class BaseFcdetrepPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcdetrep';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,12 @@ abstract class BaseFcdetrepPeer {
 	const MONTO = 'fcdetrep.MONTO';
 
 	
+	const FECHA = 'fcdetrep.FECHA';
+
+	
+	const FUENTE = 'fcdetrep.FUENTE';
+
+	
 	const ID = 'fcdetrep.ID';
 
 	
@@ -40,18 +46,18 @@ abstract class BaseFcdetrepPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numrep', 'Descrip', 'Tipo', 'Monto', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcdetrepPeer::NUMREP, FcdetrepPeer::DESCRIP, FcdetrepPeer::TIPO, FcdetrepPeer::MONTO, FcdetrepPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numrep', 'descrip', 'tipo', 'monto', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Numrep', 'Descrip', 'Tipo', 'Monto', 'Fecha', 'Fuente', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcdetrepPeer::NUMREP, FcdetrepPeer::DESCRIP, FcdetrepPeer::TIPO, FcdetrepPeer::MONTO, FcdetrepPeer::FECHA, FcdetrepPeer::FUENTE, FcdetrepPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrep', 'descrip', 'tipo', 'monto', 'fecha', 'fuente', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numrep' => 0, 'Descrip' => 1, 'Tipo' => 2, 'Monto' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (FcdetrepPeer::NUMREP => 0, FcdetrepPeer::DESCRIP => 1, FcdetrepPeer::TIPO => 2, FcdetrepPeer::MONTO => 3, FcdetrepPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('numrep' => 0, 'descrip' => 1, 'tipo' => 2, 'monto' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Numrep' => 0, 'Descrip' => 1, 'Tipo' => 2, 'Monto' => 3, 'Fecha' => 4, 'Fuente' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (FcdetrepPeer::NUMREP => 0, FcdetrepPeer::DESCRIP => 1, FcdetrepPeer::TIPO => 2, FcdetrepPeer::MONTO => 3, FcdetrepPeer::FECHA => 4, FcdetrepPeer::FUENTE => 5, FcdetrepPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrep' => 0, 'descrip' => 1, 'tipo' => 2, 'monto' => 3, 'fecha' => 4, 'fuente' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -112,6 +118,10 @@ abstract class BaseFcdetrepPeer {
 		$criteria->addSelectColumn(FcdetrepPeer::TIPO);
 
 		$criteria->addSelectColumn(FcdetrepPeer::MONTO);
+
+		$criteria->addSelectColumn(FcdetrepPeer::FECHA);
+
+		$criteria->addSelectColumn(FcdetrepPeer::FUENTE);
 
 		$criteria->addSelectColumn(FcdetrepPeer::ID);
 
@@ -215,6 +225,7 @@ abstract class BaseFcdetrepPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdetrepPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

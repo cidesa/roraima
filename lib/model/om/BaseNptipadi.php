@@ -33,110 +33,137 @@ abstract class BaseNptipadi extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtit()
-	{
+  
+  public function getCodtit()
+  {
 
-		return $this->codtit; 		
-	}
-	
-	public function getDestit()
-	{
+    return trim($this->codtit);
 
-		return $this->destit; 		
-	}
-	
-	public function getCodadi()
-	{
+  }
+  
+  public function getDestit()
+  {
 
-		return $this->codadi; 		
-	}
-	
-	public function getDesadi()
-	{
+    return trim($this->destit);
 
-		return $this->desadi; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodadi()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codadi);
+
+  }
+  
+  public function getDesadi()
+  {
+
+    return trim($this->desadi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtit($v)
 	{
 
-		if ($this->codtit !== $v) {
-			$this->codtit = $v;
-			$this->modifiedColumns[] = NptipadiPeer::CODTIT;
-		}
-
+    if ($this->codtit !== $v) {
+        $this->codtit = $v;
+        $this->modifiedColumns[] = NptipadiPeer::CODTIT;
+      }
+  
 	} 
 	
 	public function setDestit($v)
 	{
 
-		if ($this->destit !== $v) {
-			$this->destit = $v;
-			$this->modifiedColumns[] = NptipadiPeer::DESTIT;
-		}
-
+    if ($this->destit !== $v) {
+        $this->destit = $v;
+        $this->modifiedColumns[] = NptipadiPeer::DESTIT;
+      }
+  
 	} 
 	
 	public function setCodadi($v)
 	{
 
-		if ($this->codadi !== $v) {
-			$this->codadi = $v;
-			$this->modifiedColumns[] = NptipadiPeer::CODADI;
-		}
-
+    if ($this->codadi !== $v) {
+        $this->codadi = $v;
+        $this->modifiedColumns[] = NptipadiPeer::CODADI;
+      }
+  
 	} 
 	
 	public function setDesadi($v)
 	{
 
-		if ($this->desadi !== $v) {
-			$this->desadi = $v;
-			$this->modifiedColumns[] = NptipadiPeer::DESADI;
-		}
-
+    if ($this->desadi !== $v) {
+        $this->desadi = $v;
+        $this->modifiedColumns[] = NptipadiPeer::DESADI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NptipadiPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NptipadiPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtit = $rs->getString($startcol + 0);
+      $this->codtit = $rs->getString($startcol + 0);
 
-			$this->destit = $rs->getString($startcol + 1);
+      $this->destit = $rs->getString($startcol + 1);
 
-			$this->codadi = $rs->getString($startcol + 2);
+      $this->codadi = $rs->getString($startcol + 2);
 
-			$this->desadi = $rs->getString($startcol + 3);
+      $this->desadi = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nptipadi object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nptipadi object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseNptipadi extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NptipadiPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NptipadiPeer::doUpdate($this, $con);

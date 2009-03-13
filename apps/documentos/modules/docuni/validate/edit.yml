@@ -1,0 +1,54 @@
+methods:
+  post:
+   - "acunidad{numuni}"
+   - "acunidad{nomuni}"
+   - "acunidad{desuni}"
+
+names:
+  acunidad{numuni}:
+    required:  Yes
+    required_msg: El Código no puede estar en Blanco.
+    validators: UniqueValidator, MyStringValidator_1_4
+
+  acunidad{nomuni}:
+    required:  Yes
+    required_msg: El nombre de la unidad no puede estar en Blanco
+    validators: MyStringValidator_1_30
+
+  acunidad{desuni}:
+    required:  Yes
+    required_msg: El nombre de la unidad no puede estar en Blanco
+    validators: MyStringValidator_1_200
+
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Acunidad
+        column:       numuni
+        unique_error: El Número de la Cotización ya existe. Por Favor, Cambiélo por otro.
+
+MyStringValidator_1_30:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 1 caracteres
+        max:       30
+        max_error: La Descripción no puede pasar mas de 30 caracteres
+
+MyStringValidator_1_4:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El código no puede tener menos de 1 caracteres
+        max:       4
+        max_error: El código no puede pasar mas de 4 caracteres
+
+
+MyStringValidator_1_200:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 1 caracteres
+        max:       200
+        max_error: La Descripción no puede pasar mas de 200 caracteres

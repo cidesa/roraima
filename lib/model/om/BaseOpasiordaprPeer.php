@@ -205,6 +205,7 @@ abstract class BaseOpasiordaprPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpasiordaprPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

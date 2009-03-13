@@ -220,6 +220,7 @@ abstract class BaseTsdettraPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsdettraPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

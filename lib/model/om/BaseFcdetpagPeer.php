@@ -197,14 +197,14 @@ abstract class BaseFcdetpagPeer {
 	public static function doCountJoinFcpagos(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcdetpagPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcdetpagPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -225,14 +225,14 @@ abstract class BaseFcdetpagPeer {
 	public static function doCountJoinFctippag(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcdetpagPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcdetpagPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -354,7 +354,7 @@ abstract class BaseFcdetpagPeer {
 		} else {
 			$criteria->addSelectColumn(FcdetpagPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -397,25 +397,25 @@ abstract class BaseFcdetpagPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcdetpagPeer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = FcpagosPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -424,21 +424,21 @@ abstract class BaseFcdetpagPeer {
 					$temp_obj2->addFcdetpag($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcdetpags();
 				$obj2->addFcdetpag($obj1);
 			}
 
-				
+
 					
 			$omClass = FctippagPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj3 = new $cls();
 			$obj3->hydrate($rs, $startcol3);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -447,7 +447,7 @@ abstract class BaseFcdetpagPeer {
 					$temp_obj3->addFcdetpag($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj3->initFcdetpags();
 				$obj3->addFcdetpag($obj1);
@@ -463,14 +463,14 @@ abstract class BaseFcdetpagPeer {
 	public static function doCountJoinAllExceptFcpagos(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcdetpagPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcdetpagPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -491,14 +491,14 @@ abstract class BaseFcdetpagPeer {
 	public static function doCountJoinAllExceptFctippag(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcdetpagPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcdetpagPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -535,22 +535,22 @@ abstract class BaseFcdetpagPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcdetpagPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
-			$obj1->hydrate($rs);		
+			$obj1->hydrate($rs);
 
 			$omClass = FctippagPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2  = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -560,7 +560,7 @@ abstract class BaseFcdetpagPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcdetpags();
 				$obj2->addFcdetpag($obj1);
@@ -592,22 +592,22 @@ abstract class BaseFcdetpagPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcdetpagPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
-			$obj1->hydrate($rs);		
+			$obj1->hydrate($rs);
 
 			$omClass = FcpagosPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2  = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -617,7 +617,7 @@ abstract class BaseFcdetpagPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcdetpags();
 				$obj2->addFcdetpag($obj1);
@@ -651,6 +651,7 @@ abstract class BaseFcdetpagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdetpagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

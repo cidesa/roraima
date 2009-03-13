@@ -33,6 +33,14 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 
 
 	
+	protected $codprofes;
+
+
+	
+	protected $activo;
+
+
+	
 	protected $id;
 
 	
@@ -41,146 +49,213 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomtit()
-	{
+    return trim($this->codemp);
 
-		return $this->nomtit; 		
-	}
-	
-	public function getDescur()
-	{
+  }
+  
+  public function getNomtit()
+  {
 
-		return $this->descur; 		
-	}
-	
-	public function getInstit()
-	{
+    return trim($this->nomtit);
 
-		return $this->instit; 		
-	}
-	
-	public function getDurcur()
-	{
+  }
+  
+  public function getDescur()
+  {
 
-		return $this->durcur; 		
-	}
-	
-	public function getAnocul()
-	{
+    return trim($this->descur);
 
-		return $this->anocul; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getInstit()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->instit);
+
+  }
+  
+  public function getDurcur()
+  {
+
+    return trim($this->durcur);
+
+  }
+  
+  public function getAnocul()
+  {
+
+    return trim($this->anocul);
+
+  }
+  
+  public function getCodprofes()
+  {
+
+    return trim($this->codprofes);
+
+  }
+  
+  public function getActivo()
+  {
+
+    return trim($this->activo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpinfcurPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpinfcurPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomtit($v)
 	{
 
-		if ($this->nomtit !== $v) {
-			$this->nomtit = $v;
-			$this->modifiedColumns[] = NpinfcurPeer::NOMTIT;
-		}
-
+    if ($this->nomtit !== $v) {
+        $this->nomtit = $v;
+        $this->modifiedColumns[] = NpinfcurPeer::NOMTIT;
+      }
+  
 	} 
 	
 	public function setDescur($v)
 	{
 
-		if ($this->descur !== $v) {
-			$this->descur = $v;
-			$this->modifiedColumns[] = NpinfcurPeer::DESCUR;
-		}
-
+    if ($this->descur !== $v) {
+        $this->descur = $v;
+        $this->modifiedColumns[] = NpinfcurPeer::DESCUR;
+      }
+  
 	} 
 	
 	public function setInstit($v)
 	{
 
-		if ($this->instit !== $v) {
-			$this->instit = $v;
-			$this->modifiedColumns[] = NpinfcurPeer::INSTIT;
-		}
-
+    if ($this->instit !== $v) {
+        $this->instit = $v;
+        $this->modifiedColumns[] = NpinfcurPeer::INSTIT;
+      }
+  
 	} 
 	
 	public function setDurcur($v)
 	{
 
-		if ($this->durcur !== $v) {
-			$this->durcur = $v;
-			$this->modifiedColumns[] = NpinfcurPeer::DURCUR;
-		}
-
+    if ($this->durcur !== $v) {
+        $this->durcur = $v;
+        $this->modifiedColumns[] = NpinfcurPeer::DURCUR;
+      }
+  
 	} 
 	
 	public function setAnocul($v)
 	{
 
-		if ($this->anocul !== $v) {
-			$this->anocul = $v;
-			$this->modifiedColumns[] = NpinfcurPeer::ANOCUL;
-		}
+    if ($this->anocul !== $v) {
+        $this->anocul = $v;
+        $this->modifiedColumns[] = NpinfcurPeer::ANOCUL;
+      }
+  
+	} 
+	
+	public function setCodprofes($v)
+	{
 
+    if ($this->codprofes !== $v) {
+        $this->codprofes = $v;
+        $this->modifiedColumns[] = NpinfcurPeer::CODPROFES;
+      }
+  
+	} 
+	
+	public function setActivo($v)
+	{
+
+    if ($this->activo !== $v) {
+        $this->activo = $v;
+        $this->modifiedColumns[] = NpinfcurPeer::ACTIVO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpinfcurPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpinfcurPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->nomtit = $rs->getString($startcol + 1);
+      $this->nomtit = $rs->getString($startcol + 1);
 
-			$this->descur = $rs->getString($startcol + 2);
+      $this->descur = $rs->getString($startcol + 2);
 
-			$this->instit = $rs->getString($startcol + 3);
+      $this->instit = $rs->getString($startcol + 3);
 
-			$this->durcur = $rs->getString($startcol + 4);
+      $this->durcur = $rs->getString($startcol + 4);
 
-			$this->anocul = $rs->getString($startcol + 5);
+      $this->anocul = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->codprofes = $rs->getString($startcol + 6);
 
-			$this->resetModified();
+      $this->activo = $rs->getString($startcol + 7);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 8);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npinfcur object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npinfcur object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +312,7 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpinfcurPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpinfcurPeer::doUpdate($this, $con);
@@ -321,6 +397,12 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 				return $this->getAnocul();
 				break;
 			case 6:
+				return $this->getCodprofes();
+				break;
+			case 7:
+				return $this->getActivo();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -339,7 +421,9 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 			$keys[3] => $this->getInstit(),
 			$keys[4] => $this->getDurcur(),
 			$keys[5] => $this->getAnocul(),
-			$keys[6] => $this->getId(),
+			$keys[6] => $this->getCodprofes(),
+			$keys[7] => $this->getActivo(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -374,6 +458,12 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 				$this->setAnocul($value);
 				break;
 			case 6:
+				$this->setCodprofes($value);
+				break;
+			case 7:
+				$this->setActivo($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -389,7 +479,9 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setInstit($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setDurcur($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setAnocul($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCodprofes($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setActivo($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -403,6 +495,8 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpinfcurPeer::INSTIT)) $criteria->add(NpinfcurPeer::INSTIT, $this->instit);
 		if ($this->isColumnModified(NpinfcurPeer::DURCUR)) $criteria->add(NpinfcurPeer::DURCUR, $this->durcur);
 		if ($this->isColumnModified(NpinfcurPeer::ANOCUL)) $criteria->add(NpinfcurPeer::ANOCUL, $this->anocul);
+		if ($this->isColumnModified(NpinfcurPeer::CODPROFES)) $criteria->add(NpinfcurPeer::CODPROFES, $this->codprofes);
+		if ($this->isColumnModified(NpinfcurPeer::ACTIVO)) $criteria->add(NpinfcurPeer::ACTIVO, $this->activo);
 		if ($this->isColumnModified(NpinfcurPeer::ID)) $criteria->add(NpinfcurPeer::ID, $this->id);
 
 		return $criteria;
@@ -445,6 +539,10 @@ abstract class BaseNpinfcur extends BaseObject  implements Persistent {
 		$copyObj->setDurcur($this->durcur);
 
 		$copyObj->setAnocul($this->anocul);
+
+		$copyObj->setCodprofes($this->codprofes);
+
+		$copyObj->setActivo($this->activo);
 
 
 		$copyObj->setNew(true);

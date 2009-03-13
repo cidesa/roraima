@@ -1,0 +1,99 @@
+methods:
+  post:
+   - "carcpart{rcpart}"
+   - "carcpart{fecrcp}"
+   - "carcpart{ordcom}"
+   - "carcpart{numfac}"
+   - "carcpart{monrcp}"
+   - "carcpart{fecord}"
+   - "carcpart{desrcp}"
+names:
+  carcpart{rcpart}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir el Código de la Recepción
+    validators: UniqueValidator
+
+  carcpart{fecrcp}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator1, FechaValidator
+
+  carcpart{ordcom}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir el Código de la Orden Asociada
+    validators: OrdencompraValidator
+
+  carcpart{monrcp}:
+    required:  Yes
+    required_msg: No puede salvar sin el Monto de la Recepción
+
+  carcpart{numfac}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir el Número de la Factura
+
+  carcpart{fecord}:
+    required:  Yes
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator
+
+  carcpart{desrcp}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco.
+    validators: DescripcionValidator
+
+FechaValidator1:
+    class: CidesaDateValidator
+    param:
+        class:        Cpdefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Inicio del Período
+        date_error:   Fecha Inválida
+
+OrdencompraValidator:
+    class: sfStringValidator
+    param:
+        min:       8
+        min_error: El Número de Orden de Compra no puede tener menos de 8 caracteres
+        max:       8
+        max_error: El Número de Orden de Compra no puede tener mas de 8 caracteres
+
+AlmacenValidator:
+    class: sfStringValidator
+    param:
+        min:       6
+        min_error: El Código del Almacén no puede tener menos de 6 caracteres
+        max:       6
+        max_error: El Código del Almacén no puede tener mas de 6 caracteres
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Cadefalm
+        column:       codalm
+        unique_error: Este código de almacen no existe
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Carcpart
+        column:   rcpart
+        unique_error:   El Código de Recepción ya existe. Por Favor, Cambiélo por otro.
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha introducida es invalida
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar de 100 caracteres
+

@@ -4,17 +4,22 @@ generator:
     model_class:      Cadefubi
     theme:            default
     fields:
-      codubi:  {  name: Código}
-      nomubi:  {  name: Descripción}
+      codubi:  {  name: Código, params: maxlength=20}
+      nomubi:  {  name: Descripción, params: maxlength=100}
     list:
       title:          Definición de Ubicaciones
       display:        [=codubi, nomubi]
       object_actions:
         _edit:        ~
-        _delete:      ~      
-      filters:        [codubi, nomubi] 
-      max_per_page:   5
+        _delete:      ~
+      filters:        [codubi, nomubi]
+      max_per_page:   10
+      sort:  codubi
     edit:
       title:          Definición de Ubicaciones
-      display:
-        Editable:     [codubi, nomubi]
+      display:        [codubi, nomubi]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

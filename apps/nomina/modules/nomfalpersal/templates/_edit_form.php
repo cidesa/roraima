@@ -7,7 +7,8 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
 <?php echo object_input_hidden_tag($npfalper, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
@@ -20,15 +21,23 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($npfalper, 'getCodemp', array (
-  'size' => 16,
+  'size' => 20,
   'control_name' => 'npfalper[codemp]',
-  'maxlength' => '16,',
+  'maxlength' => 9,
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomfalpersal/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=npfalper_nomemp&codigo='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npfalper_Nomfalpersal/clase/Nphojint/frame/sf_admin_edit_form/obj1/npfalper_codemp/obj2/npfalper_nomemp/campo1/codemp/campo2/nomemp/param1/')?>
+
     </div>
 </div>
 
 <div class="form-row">
-  <?php echo label_for('npfalper[nomemp]', __($labels['npfalper{nomemp}']), '') ?>
+  <?php echo label_for('npfalper[nomemp]', __($labels['npfalper{nomemp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npfalper{nomemp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npfalper{nomemp}')): ?>
     <?php echo form_error('npfalper{nomemp}', array('class' => 'form-error-msg')) ?>
@@ -43,22 +52,34 @@
 </div>
 
 <div class="form-row">
-  <?php echo label_for('npfalper[codmot]', __($labels['npfalper{codmot}']), '') ?>
+  <?php echo label_for('npfalper[codmot]', __($labels['npfalper{codmot}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npfalper{codmot}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npfalper{codmot}')): ?>
     <?php echo form_error('npfalper{codmot}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php $value = object_input_tag($npfalper, 'getCodmot', array (
-  'size' => 4,
+  'size' => 6,
   'control_name' => 'npfalper[codmot]',
-  'maxlength' => '4,',
+  'maxlength' => 4,
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomfalpersal/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=2&cajtexmos=npfalper_desmotfal&codigo='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
+
+
+
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npmotfal_Nomfalpersal/clase/Npmotfal/frame/sf_admin_edit_form/obj1/npfalper_codmot/obj2/npfalper_desmotfal/campo1/codmotfal/campo2/desmotfal/param1/')?>
+
     </div>
 </div>
 
 <div class="form-row">
-  <?php echo label_for('npfalper[desmotfal]', __($labels['npfalper{desmotfal}']), '') ?>
+  <?php echo label_for('npfalper[desmotfal]', __($labels['npfalper{desmotfal}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npfalper{desmotfal}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npfalper{desmotfal}')): ?>
     <?php echo form_error('npfalper{desmotfal}', array('class' => 'form-error-msg')) ?>
@@ -66,14 +87,14 @@
 
   <?php $value = object_input_tag($npfalper, 'getDesmotfal', array (
   'size' => 50,
-  'disabled' => true,
+  'readonly' => true,
   'control_name' => 'npfalper[desmotfal]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
 <div class="form-row">
-  <?php echo label_for('npfalper[observ]', __($labels['npfalper{observ}']), '') ?>
+  <?php echo label_for('npfalper[observ]', __($labels['npfalper{observ}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npfalper{observ}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npfalper{observ}')): ?>
     <?php echo form_error('npfalper{observ}', array('class' => 'form-error-msg')) ?>
@@ -85,7 +106,21 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<div class="form-row"  style= "display:none">
+  <?php echo label_for('npfalper[fecdes]', __($labels['npfalper{fecdes}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npfalper{fecdes}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npfalper{fecdes}')): ?>
+    <?php echo form_error('npfalper{fecdes}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+  <?php $value = object_input_date_tag($npfalper, 'getFecdes', array (
+  'rich' => true,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'npfalper[fecdes]',
+  'date_format' => 'dd/MM/yyyy',
+),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
 <div class="form-row">
   <?php echo label_for('npfalper[fechas]', __($labels['npfalper{fechas}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npfalper{fechas}')): ?> form-error<?php endif; ?>">

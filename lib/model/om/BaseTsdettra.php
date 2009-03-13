@@ -37,129 +37,157 @@ abstract class BaseTsdettra extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReftra()
-	{
+  
+  public function getReftra()
+  {
 
-		return $this->reftra; 		
-	}
-	
-	public function getCtaori()
-	{
+    return trim($this->reftra);
 
-		return $this->ctaori; 		
-	}
-	
-	public function getCtades()
-	{
+  }
+  
+  public function getCtaori()
+  {
 
-		return $this->ctades; 		
-	}
-	
-	public function getAumdis()
-	{
+    return trim($this->ctaori);
 
-		return $this->aumdis; 		
-	}
-	
-	public function getMontra()
-	{
+  }
+  
+  public function getCtades()
+  {
 
-		return number_format($this->montra,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->ctades);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getAumdis()
+  {
+
+    return trim($this->aumdis);
+
+  }
+  
+  public function getMontra($val=false)
+  {
+
+    if($val) return number_format($this->montra,2,',','.');
+    else return $this->montra;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReftra($v)
 	{
 
-		if ($this->reftra !== $v) {
-			$this->reftra = $v;
-			$this->modifiedColumns[] = TsdettraPeer::REFTRA;
-		}
-
+    if ($this->reftra !== $v) {
+        $this->reftra = $v;
+        $this->modifiedColumns[] = TsdettraPeer::REFTRA;
+      }
+  
 	} 
 	
 	public function setCtaori($v)
 	{
 
-		if ($this->ctaori !== $v) {
-			$this->ctaori = $v;
-			$this->modifiedColumns[] = TsdettraPeer::CTAORI;
-		}
-
+    if ($this->ctaori !== $v) {
+        $this->ctaori = $v;
+        $this->modifiedColumns[] = TsdettraPeer::CTAORI;
+      }
+  
 	} 
 	
 	public function setCtades($v)
 	{
 
-		if ($this->ctades !== $v) {
-			$this->ctades = $v;
-			$this->modifiedColumns[] = TsdettraPeer::CTADES;
-		}
-
+    if ($this->ctades !== $v) {
+        $this->ctades = $v;
+        $this->modifiedColumns[] = TsdettraPeer::CTADES;
+      }
+  
 	} 
 	
 	public function setAumdis($v)
 	{
 
-		if ($this->aumdis !== $v) {
-			$this->aumdis = $v;
-			$this->modifiedColumns[] = TsdettraPeer::AUMDIS;
-		}
-
+    if ($this->aumdis !== $v) {
+        $this->aumdis = $v;
+        $this->modifiedColumns[] = TsdettraPeer::AUMDIS;
+      }
+  
 	} 
 	
 	public function setMontra($v)
 	{
 
-		if ($this->montra !== $v) {
-			$this->montra = $v;
-			$this->modifiedColumns[] = TsdettraPeer::MONTRA;
-		}
-
+    if ($this->montra !== $v) {
+        $this->montra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsdettraPeer::MONTRA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsdettraPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsdettraPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reftra = $rs->getString($startcol + 0);
+      $this->reftra = $rs->getString($startcol + 0);
 
-			$this->ctaori = $rs->getString($startcol + 1);
+      $this->ctaori = $rs->getString($startcol + 1);
 
-			$this->ctades = $rs->getString($startcol + 2);
+      $this->ctades = $rs->getString($startcol + 2);
 
-			$this->aumdis = $rs->getString($startcol + 3);
+      $this->aumdis = $rs->getString($startcol + 3);
 
-			$this->montra = $rs->getFloat($startcol + 4);
+      $this->montra = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsdettra object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsdettra object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +244,7 @@ abstract class BaseTsdettra extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsdettraPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsdettraPeer::doUpdate($this, $con);

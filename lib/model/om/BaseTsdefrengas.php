@@ -41,146 +41,175 @@ abstract class BaseTsdefrengas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getPagrepcaj()
-	{
+  
+  public function getPagrepcaj()
+  {
 
-		return $this->pagrepcaj; 		
-	}
-	
-	public function getCtarepcaj()
-	{
+    return trim($this->pagrepcaj);
 
-		return $this->ctarepcaj; 		
-	}
-	
-	public function getPagcheant()
-	{
+  }
+  
+  public function getCtarepcaj()
+  {
 
-		return $this->pagcheant; 		
-	}
-	
-	public function getCtacheant()
-	{
+    return trim($this->ctarepcaj);
 
-		return $this->ctacheant; 		
-	}
-	
-	public function getMovreicaj()
-	{
+  }
+  
+  public function getPagcheant()
+  {
 
-		return $this->movreicaj; 		
-	}
-	
-	public function getCtareicaj()
-	{
+    return trim($this->pagcheant);
 
-		return $this->ctareicaj; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCtacheant()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->ctacheant);
+
+  }
+  
+  public function getMovreicaj()
+  {
+
+    return trim($this->movreicaj);
+
+  }
+  
+  public function getCtareicaj()
+  {
+
+    return trim($this->ctareicaj);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setPagrepcaj($v)
 	{
 
-		if ($this->pagrepcaj !== $v) {
-			$this->pagrepcaj = $v;
-			$this->modifiedColumns[] = TsdefrengasPeer::PAGREPCAJ;
-		}
-
+    if ($this->pagrepcaj !== $v) {
+        $this->pagrepcaj = $v;
+        $this->modifiedColumns[] = TsdefrengasPeer::PAGREPCAJ;
+      }
+  
 	} 
 	
 	public function setCtarepcaj($v)
 	{
 
-		if ($this->ctarepcaj !== $v) {
-			$this->ctarepcaj = $v;
-			$this->modifiedColumns[] = TsdefrengasPeer::CTAREPCAJ;
-		}
-
+    if ($this->ctarepcaj !== $v) {
+        $this->ctarepcaj = $v;
+        $this->modifiedColumns[] = TsdefrengasPeer::CTAREPCAJ;
+      }
+  
 	} 
 	
 	public function setPagcheant($v)
 	{
 
-		if ($this->pagcheant !== $v) {
-			$this->pagcheant = $v;
-			$this->modifiedColumns[] = TsdefrengasPeer::PAGCHEANT;
-		}
-
+    if ($this->pagcheant !== $v) {
+        $this->pagcheant = $v;
+        $this->modifiedColumns[] = TsdefrengasPeer::PAGCHEANT;
+      }
+  
 	} 
 	
 	public function setCtacheant($v)
 	{
 
-		if ($this->ctacheant !== $v) {
-			$this->ctacheant = $v;
-			$this->modifiedColumns[] = TsdefrengasPeer::CTACHEANT;
-		}
-
+    if ($this->ctacheant !== $v) {
+        $this->ctacheant = $v;
+        $this->modifiedColumns[] = TsdefrengasPeer::CTACHEANT;
+      }
+  
 	} 
 	
 	public function setMovreicaj($v)
 	{
 
-		if ($this->movreicaj !== $v) {
-			$this->movreicaj = $v;
-			$this->modifiedColumns[] = TsdefrengasPeer::MOVREICAJ;
-		}
-
+    if ($this->movreicaj !== $v) {
+        $this->movreicaj = $v;
+        $this->modifiedColumns[] = TsdefrengasPeer::MOVREICAJ;
+      }
+  
 	} 
 	
 	public function setCtareicaj($v)
 	{
 
-		if ($this->ctareicaj !== $v) {
-			$this->ctareicaj = $v;
-			$this->modifiedColumns[] = TsdefrengasPeer::CTAREICAJ;
-		}
-
+    if ($this->ctareicaj !== $v) {
+        $this->ctareicaj = $v;
+        $this->modifiedColumns[] = TsdefrengasPeer::CTAREICAJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsdefrengasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsdefrengasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->pagrepcaj = $rs->getString($startcol + 0);
+      $this->pagrepcaj = $rs->getString($startcol + 0);
 
-			$this->ctarepcaj = $rs->getString($startcol + 1);
+      $this->ctarepcaj = $rs->getString($startcol + 1);
 
-			$this->pagcheant = $rs->getString($startcol + 2);
+      $this->pagcheant = $rs->getString($startcol + 2);
 
-			$this->ctacheant = $rs->getString($startcol + 3);
+      $this->ctacheant = $rs->getString($startcol + 3);
 
-			$this->movreicaj = $rs->getString($startcol + 4);
+      $this->movreicaj = $rs->getString($startcol + 4);
 
-			$this->ctareicaj = $rs->getString($startcol + 5);
+      $this->ctareicaj = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsdefrengas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsdefrengas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseTsdefrengas extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsdefrengasPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsdefrengasPeer::doUpdate($this, $con);

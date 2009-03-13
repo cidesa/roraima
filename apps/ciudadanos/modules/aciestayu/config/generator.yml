@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atestayu
+    theme:            cidesaGenerator
+
+    fields:
+      desest:         { name: Nombre, params: size=40, validate: Vstring_1_50, msj_error: Debe insertar la descripción del estado de la ayuda }
+      comest:         { name: Comportamiento, validate: Vstring_1_50, msj_error: Debe seleccionar el comportamiento del estado de la ayuda }
+      comportamiento: { name: Comportamiento }
+    list:
+      title:          Estados de las Ayudas/Donaciones
+      display:        [=desest, comportamiento]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [desest]
+      max_per_page:   5
+    edit:
+      title:          Edición de Estados de Ayudas/Donaciones
+      display:        [desest, _comest]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

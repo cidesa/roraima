@@ -33,112 +33,139 @@ abstract class BaseRhdefemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getFaxemp()
-	{
+    return trim($this->codemp);
 
-		return $this->faxemp; 		
-	}
-	
-	public function getPorcom()
-	{
+  }
+  
+  public function getFaxemp()
+  {
 
-		return number_format($this->porcom,2,',','.');
-		
-	}
-	
-	public function getPorobj()
-	{
+    return trim($this->faxemp);
 
-		return number_format($this->porobj,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPorcom($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->porcom,2,',','.');
+    else return $this->porcom;
+
+  }
+  
+  public function getPorobj($val=false)
+  {
+
+    if($val) return number_format($this->porobj,2,',','.');
+    else return $this->porobj;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = RhdefempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = RhdefempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFaxemp($v)
 	{
 
-		if ($this->faxemp !== $v) {
-			$this->faxemp = $v;
-			$this->modifiedColumns[] = RhdefempPeer::FAXEMP;
-		}
-
+    if ($this->faxemp !== $v) {
+        $this->faxemp = $v;
+        $this->modifiedColumns[] = RhdefempPeer::FAXEMP;
+      }
+  
 	} 
 	
 	public function setPorcom($v)
 	{
 
-		if ($this->porcom !== $v) {
-			$this->porcom = $v;
-			$this->modifiedColumns[] = RhdefempPeer::PORCOM;
-		}
-
+    if ($this->porcom !== $v) {
+        $this->porcom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhdefempPeer::PORCOM;
+      }
+  
 	} 
 	
 	public function setPorobj($v)
 	{
 
-		if ($this->porobj !== $v) {
-			$this->porobj = $v;
-			$this->modifiedColumns[] = RhdefempPeer::POROBJ;
-		}
-
+    if ($this->porobj !== $v) {
+        $this->porobj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhdefempPeer::POROBJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhdefempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhdefempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->faxemp = $rs->getString($startcol + 1);
+      $this->faxemp = $rs->getString($startcol + 1);
 
-			$this->porcom = $rs->getFloat($startcol + 2);
+      $this->porcom = $rs->getFloat($startcol + 2);
 
-			$this->porobj = $rs->getFloat($startcol + 3);
+      $this->porobj = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhdefemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhdefemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -195,6 +222,7 @@ abstract class BaseRhdefemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhdefempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhdefempPeer::doUpdate($this, $con);

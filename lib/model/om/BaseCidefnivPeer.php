@@ -13,7 +13,7 @@ abstract class BaseCidefnivPeer {
 	const CLASS_DEFAULT = 'lib.model.Cidefniv';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 20;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -65,6 +65,18 @@ abstract class BaseCidefnivPeer {
 	const CORAEP = 'cidefniv.CORAEP';
 
 	
+	const CORTRAS = 'cidefniv.CORTRAS';
+
+	
+	const CORAJU = 'cidefniv.CORAJU';
+
+	
+	const CORADI = 'cidefniv.CORADI';
+
+	
+	const CORING = 'cidefniv.CORING';
+
+	
 	const ID = 'cidefniv.ID';
 
 	
@@ -73,18 +85,18 @@ abstract class BaseCidefnivPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Loncod', 'Rupcat', 'Ruppar', 'Nivdis', 'Forpre', 'Asiper', 'Numper', 'Peract', 'Fecper', 'Fecini', 'Feccie', 'Etadef', 'Staprc', 'Coraep', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CidefnivPeer::CODEMP, CidefnivPeer::LONCOD, CidefnivPeer::RUPCAT, CidefnivPeer::RUPPAR, CidefnivPeer::NIVDIS, CidefnivPeer::FORPRE, CidefnivPeer::ASIPER, CidefnivPeer::NUMPER, CidefnivPeer::PERACT, CidefnivPeer::FECPER, CidefnivPeer::FECINI, CidefnivPeer::FECCIE, CidefnivPeer::ETADEF, CidefnivPeer::STAPRC, CidefnivPeer::CORAEP, CidefnivPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'loncod', 'rupcat', 'ruppar', 'nivdis', 'forpre', 'asiper', 'numper', 'peract', 'fecper', 'fecini', 'feccie', 'etadef', 'staprc', 'coraep', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Loncod', 'Rupcat', 'Ruppar', 'Nivdis', 'Forpre', 'Asiper', 'Numper', 'Peract', 'Fecper', 'Fecini', 'Feccie', 'Etadef', 'Staprc', 'Coraep', 'Cortras', 'Coraju', 'Coradi', 'Coring', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CidefnivPeer::CODEMP, CidefnivPeer::LONCOD, CidefnivPeer::RUPCAT, CidefnivPeer::RUPPAR, CidefnivPeer::NIVDIS, CidefnivPeer::FORPRE, CidefnivPeer::ASIPER, CidefnivPeer::NUMPER, CidefnivPeer::PERACT, CidefnivPeer::FECPER, CidefnivPeer::FECINI, CidefnivPeer::FECCIE, CidefnivPeer::ETADEF, CidefnivPeer::STAPRC, CidefnivPeer::CORAEP, CidefnivPeer::CORTRAS, CidefnivPeer::CORAJU, CidefnivPeer::CORADI, CidefnivPeer::CORING, CidefnivPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'loncod', 'rupcat', 'ruppar', 'nivdis', 'forpre', 'asiper', 'numper', 'peract', 'fecper', 'fecini', 'feccie', 'etadef', 'staprc', 'coraep', 'cortras', 'coraju', 'coradi', 'coring', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Loncod' => 1, 'Rupcat' => 2, 'Ruppar' => 3, 'Nivdis' => 4, 'Forpre' => 5, 'Asiper' => 6, 'Numper' => 7, 'Peract' => 8, 'Fecper' => 9, 'Fecini' => 10, 'Feccie' => 11, 'Etadef' => 12, 'Staprc' => 13, 'Coraep' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (CidefnivPeer::CODEMP => 0, CidefnivPeer::LONCOD => 1, CidefnivPeer::RUPCAT => 2, CidefnivPeer::RUPPAR => 3, CidefnivPeer::NIVDIS => 4, CidefnivPeer::FORPRE => 5, CidefnivPeer::ASIPER => 6, CidefnivPeer::NUMPER => 7, CidefnivPeer::PERACT => 8, CidefnivPeer::FECPER => 9, CidefnivPeer::FECINI => 10, CidefnivPeer::FECCIE => 11, CidefnivPeer::ETADEF => 12, CidefnivPeer::STAPRC => 13, CidefnivPeer::CORAEP => 14, CidefnivPeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'loncod' => 1, 'rupcat' => 2, 'ruppar' => 3, 'nivdis' => 4, 'forpre' => 5, 'asiper' => 6, 'numper' => 7, 'peract' => 8, 'fecper' => 9, 'fecini' => 10, 'feccie' => 11, 'etadef' => 12, 'staprc' => 13, 'coraep' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Loncod' => 1, 'Rupcat' => 2, 'Ruppar' => 3, 'Nivdis' => 4, 'Forpre' => 5, 'Asiper' => 6, 'Numper' => 7, 'Peract' => 8, 'Fecper' => 9, 'Fecini' => 10, 'Feccie' => 11, 'Etadef' => 12, 'Staprc' => 13, 'Coraep' => 14, 'Cortras' => 15, 'Coraju' => 16, 'Coradi' => 17, 'Coring' => 18, 'Id' => 19, ),
+		BasePeer::TYPE_COLNAME => array (CidefnivPeer::CODEMP => 0, CidefnivPeer::LONCOD => 1, CidefnivPeer::RUPCAT => 2, CidefnivPeer::RUPPAR => 3, CidefnivPeer::NIVDIS => 4, CidefnivPeer::FORPRE => 5, CidefnivPeer::ASIPER => 6, CidefnivPeer::NUMPER => 7, CidefnivPeer::PERACT => 8, CidefnivPeer::FECPER => 9, CidefnivPeer::FECINI => 10, CidefnivPeer::FECCIE => 11, CidefnivPeer::ETADEF => 12, CidefnivPeer::STAPRC => 13, CidefnivPeer::CORAEP => 14, CidefnivPeer::CORTRAS => 15, CidefnivPeer::CORAJU => 16, CidefnivPeer::CORADI => 17, CidefnivPeer::CORING => 18, CidefnivPeer::ID => 19, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'loncod' => 1, 'rupcat' => 2, 'ruppar' => 3, 'nivdis' => 4, 'forpre' => 5, 'asiper' => 6, 'numper' => 7, 'peract' => 8, 'fecper' => 9, 'fecini' => 10, 'feccie' => 11, 'etadef' => 12, 'staprc' => 13, 'coraep' => 14, 'cortras' => 15, 'coraju' => 16, 'coradi' => 17, 'coring' => 18, 'id' => 19, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, )
 	);
 
 	
@@ -167,6 +179,14 @@ abstract class BaseCidefnivPeer {
 		$criteria->addSelectColumn(CidefnivPeer::STAPRC);
 
 		$criteria->addSelectColumn(CidefnivPeer::CORAEP);
+
+		$criteria->addSelectColumn(CidefnivPeer::CORTRAS);
+
+		$criteria->addSelectColumn(CidefnivPeer::CORAJU);
+
+		$criteria->addSelectColumn(CidefnivPeer::CORADI);
+
+		$criteria->addSelectColumn(CidefnivPeer::CORING);
 
 		$criteria->addSelectColumn(CidefnivPeer::ID);
 
@@ -270,6 +290,7 @@ abstract class BaseCidefnivPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CidefnivPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

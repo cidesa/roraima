@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpconasiOldMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpconasiOldMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpconasiOldMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npconasi_old');
 		$tMap->setPhpName('NpconasiOld');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npconasi_old_SEQ');
 
 		$tMap->addColumn('CODCON', 'Codcon', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -39,6 +41,6 @@ class NpconasiOldMapBuilder {
 		$tMap->addColumn('CODCPT', 'Codcpt', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

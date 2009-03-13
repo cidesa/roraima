@@ -225,6 +225,7 @@ abstract class BaseBnmotdisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BnmotdisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

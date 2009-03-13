@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "tssalcaj{refsal}"
+   - "tssalcaj{fecsal}"
+
+names:
+  tssalcaj{refsal}:
+    required:  Yes
+    required_msg: El Número de Recibo no puedo estar en Blanco
+    #validators: UniqueValidator
+
+  tssalcaj{fecsal}:
+    required:  Yes
+    required_msg: La Fecha de Emisión no puedo estar en Blanco
+    validators: Fecha2Validator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Tssalcaj
+        column:   refsal
+        unique_error:   El Número de Recibo ya existe. Por Favor, Cambiélo por otro.
+
+Fecha2Validator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

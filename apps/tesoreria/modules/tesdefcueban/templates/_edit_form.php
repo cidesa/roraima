@@ -8,74 +8,100 @@
   'multipart' => true,
 )) ?>
 
+<?php echo javascript_include_tag('tools','observe','ajax','dFilter') ?>
 <?php echo object_input_hidden_tag($tsdefban, 'getId') ?>
 
+<?php echo input_hidden_tag('tsdefban[fecreg]', date('d/m/Y')) ?>
+
 <fieldset id="sf_fieldset_none" class="">
-
-<fieldset>
-<legend>Datos del Banco</legend>
-
+<legend><? echo __('Datos del Banco') ?></legend>
 <div class="form-row">
-  <?php echo label_for('tsdefban[numcue]', __($labels['tsdefban{numcue}']), 'class="required" ') ?>
+  <?php echo label_for('tsdefban[numcue]', __($labels['tsdefban{numcue}']), 'class="required" Style="width:110px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{numcue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{numcue}')): ?>
     <?php echo form_error('tsdefban{numcue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php $value = object_input_tag($tsdefban, 'getNumcue', array (
-  'size' => 20,
+  'size' => 30,
   'control_name' => 'tsdefban[numcue]',
+  'maxlength' => 20,
+  'readonly' => $tsdefban->getId()!='' ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('tsdefban[nomcue]', __($labels['tsdefban{nomcue}']), 'class="required" ') ?>
+<br>
+
+  <?php echo label_for('tsdefban[nomcue]', __($labels['tsdefban{nomcue}']), 'class="required" Style="width:110px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{nomcue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{nomcue}')): ?>
     <?php echo form_error('tsdefban{nomcue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php $value = object_input_tag($tsdefban, 'getNomcue', array (
-  'size' => 40,
+  'size' => 60,
   'control_name' => 'tsdefban[nomcue]',
+  'maxlength' => 40,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('tsdefban[tipcue]', __($labels['tsdefban{tipcue}']), 'class="required" ') ?>
+<br>
+
+  <?php echo label_for('tsdefban[tipcue]', __($labels['tsdefban{tipcue}']), 'class="required" Style="width:110px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{tipcue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{tipcue}')): ?>
     <?php echo form_error('tsdefban{tipcue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getTipcue', array (
-  'size' => 5,
-  'control_name' => 'tsdefban[tipcue]', 'maxlength' => 3 
-)); echo $value ? $value : '&nbsp;' ?>&nbsp;
-<?php echo button_to('...','#')?>&nbsp;
-<?php echo input_tag('nomemp',$tipcue,'size=50,disabled=true'); ?>
-
+<?php echo input_auto_complete_tag('tsdefban[tipcue]', $tsdefban->getTipcue(),
+    'tesdefcueban/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 3,'onBlur'=> remote_function(array(
+       'url'      => 'tesdefcueban/ajax',
+       'complete' => 'AjaxJSON(request, json)',
+       'condition' => "$('tsdefban_tipcue').value != '' && $('id').value == ''",
+       'with' => "'ajax=1&cajtexmos=tsdefban_destip&cajtexcom=tsdefban_tipcue&codigo='+this.value"
+        ))),
+     array('use_style' => 'true')
+  )
+  ?>
+&nbsp;
+ <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Tstipcue_tesdefcueban/clase/Tstipcue/frame/sf_admin_edit_form/obj1/tsdefban_tipcue/obj2/tsdefban_destip/campo1/codtip/campo2/destip')?>
+&nbsp;
+  <?php $value = object_input_tag($tsdefban, 'getDestip', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'tsdefban[destip]',
+)); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('tsdefban[codcta]', __($labels['tsdefban{codcta}']), 'class="required" ') ?>
+<br>
+
+<table>
+<tr>
+<th>
+  <?php echo label_for('tsdefban[codcta]', __($labels['tsdefban{codcta}']), 'class="required" Style="width:110px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{codcta}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{codcta}')): ?>
     <?php echo form_error('tsdefban{codcta}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($tsdefban, 'getCodcta', array (
+ <?php $value = object_input_tag($tsdefban, 'getCodcta', array (
   'size' => 32,
+  'maxlength'=> $loncta,
   'control_name' => 'tsdefban[codcta]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracontabilidad')",
+  'onBlur'=> remote_function(array(
+        'url'      => 'tesdefcueban/ajax',
+        'complete' => 'AjaxJSON(request, json), verificar()',
+        'condition' => "$('tsdefban_codcta').value != '' && $('id').value == ''",
+          'with' => "'ajax=5&codigo='+this.value",
+        )),
+)); echo $value ? $value : '&nbsp;' ?> <?php echo input_hidden_tag('cargable', '') ?>
+&nbsp;
+  <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Contabb_tesdefcueban/clase/Contabb/frame/sf_admin_edit_form/obj1/tsdefban_codcta/obj2/cargable/campo1/codcta/campo2/cargab')?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[valche]', __($labels['tsdefban{valche}']), 'class="required" ') ?>
+</th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>
+  <?php echo label_for('tsdefban[valche]', __($labels['tsdefban{valche}']), 'class="required" Style="width:180px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{valche}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{valche}')): ?>
     <?php echo form_error('tsdefban{valche}', array('class' => 'form-error-msg')) ?>
@@ -83,13 +109,21 @@
 
   <?php $value = object_input_tag($tsdefban, 'getValche', array (
   'size' => 7,
+  'maxlength' => 7,
   'control_name' => 'tsdefban[valche]',
+  'onkeypress' =>"javascript:return num(event)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+</th>
+</tr>
+</table>
 
-<div class="form-row">
-  <?php echo label_for('tsdefban[fecper]', __($labels['tsdefban{fecper}']), 'class="required" ') ?>
+<br>
+
+<table>
+<tr>
+<th>
+  <?php echo label_for('tsdefban[fecper]', __($labels['tsdefban{fecper}']), 'class="required" Style="width:140px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{fecper}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{fecper}')): ?>
     <?php echo form_error('tsdefban{fecper}', array('class' => 'form-error-msg')) ?>
@@ -98,13 +132,18 @@
   <?php $value = object_input_date_tag($tsdefban, 'getFecper', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'date_format' => 'dd/MM/yy',
   'control_name' => 'tsdefban[fecper]',
+  'readonly' => $tsdefban->getId()!='' ? true : false ,
+   'onkeyup' => "javascript: mascara(this,'/',patron,true)"
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[fecven]', __($labels['tsdefban{fecven}']), 'class="required" ') ?>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+  <?php echo label_for('tsdefban[fecven]', __($labels['tsdefban{fecven}']), 'class="required" Style="width:150px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{fecven}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{fecven}')): ?>
     <?php echo form_error('tsdefban{fecven}', array('class' => 'form-error-msg')) ?>
@@ -113,40 +152,51 @@
   <?php $value = object_input_date_tag($tsdefban, 'getFecven', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'date_format' => 'dd/MM/yy',
   'control_name' => 'tsdefban[fecven]',
+ 'onkeyup' => "javascript: mascara(this,'/',patron,true)"
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[concil]', __($labels['tsdefban{concil}']), 'class="required" ') ?>
+ </th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+  <?php echo label_for('tsdefban[concil]', __($labels['tsdefban{concil}']), 'class="required" Style="width:20px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{concil}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{concil}')): ?>
     <?php echo form_error('tsdefban{concil}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-  
-  <?php if($tsdefban->getConcil()=='S') $val = true; else $val=false; ?>
-  <?php echo "Si ".radiobutton_tag('concil', 'S', $val) ?>&nbsp;
-  <?php echo "No ".radiobutton_tag('concil', 'N', !$val) ?>
-  
-    </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('tsdefban[renaut]', __($labels['tsdefban{renaut}']), 'class="required" ') ?>
+  <?php if($tsdefban->getConcil()=='S') $val = true; else $val=false; ?>
+  <?php echo "Si ".radiobutton_tag('tsdefban[concil]', 'S', $val) ?>&nbsp;
+  <?php echo "No ".radiobutton_tag('tsdefban[concil]', 'N', !$val) ?>
+    </div>
+</th>
+</tr>
+</table>
+
+<br>
+
+<table>
+<tr>
+<th>
+  <?php echo label_for('tsdefban[renaut]', __($labels['tsdefban{renaut}']), 'class="required" Style="width:150px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{renaut}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{renaut}')): ?>
     <?php echo form_error('tsdefban{renaut}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php if($tsdefban->getRenaut()=='S') $val = true; else $val=false; ?>
-  <?php echo "Si ".radiobutton_tag('renaut', 'S', $val) ?>&nbsp;
-  <?php echo "No ".radiobutton_tag('renaut', 'N', !$val) ?>
+  <?php echo "Si ".radiobutton_tag('tsdefban[renaut]', 'S', $val) ?>&nbsp;
+  <?php echo "No ".radiobutton_tag('tsdefban[renaut]', 'N', !$val) ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[fecape]', __($labels['tsdefban{fecape}']), 'class="required" ') ?>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+  <?php echo label_for('tsdefban[fecape]', __($labels['tsdefban{fecape}']), 'class="required" Style="width:110px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{fecape}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{fecape}')): ?>
     <?php echo form_error('tsdefban{fecape}', array('class' => 'form-error-msg')) ?>
@@ -155,52 +205,47 @@
   <?php $value = object_input_date_tag($tsdefban, 'getFecape', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'date_format' => 'dd/MM/yy',
   'control_name' => 'tsdefban[fecape]',
-)); echo $value ? $value : '&nbsp;' ?>
+ 'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+ 'onBlur'=> remote_function(array(
+        'url'      => 'tesdefcueban/ajax',
+        'complete' => 'AjaxJSON(request, json), verificar1()',
+        'condition' => "$('tsdefban_fecape').value != '' && $('id').value == ''",
+          'with' => "'ajax=6&cuenta='+$('tsdefban_numcue').value+'&codigo='+this.value",
+        )),
+),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?><?php echo input_hidden_tag('valida', '') ?>
     </div>
+</th>
+</tr>
+</table>
 </div>
-
 </fieldset>
 
-<fieldset>
-<legend>Informacion General</legend>
 
+<br>
+
+<?php tabMainJS("tp1","tabPane1", "tabPage1", 'Información General');?>
+<fieldset>
+<legend><? echo __('Informacion General') ?></legend>
 <div class="form-row">
-  <?php echo label_for('tsdefban[tipint]', __($labels['tsdefban{tipint}']), 'class="required" ') ?>
+<table>
+ <tr>
+  <th>
+  <fieldset>
+  <div class="form-row">
+  <?php echo label_for('tsdefban[tipint]', __($labels['tsdefban{tipint}']), 'class="required" Style="width:100px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{tipint}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{tipint}')): ?>
     <?php echo form_error('tsdefban{tipint}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-  
-  <?php if ($tsdefban->getTipint()=='D')
-  		{
-  			$v1='selected';$v2='';$v3='';$v4='';
-  		}
-  		elseif ($tsdefban->getTipint()=='C')
-  		{
-  			$v1='';$v2='selected';$v3='';$v4='';
-  		}
-		elseif ($tsdefban->getTipint()=='F')
-  		{
-  			$v1='';$v2='';$v3='selected';$v4='';
-  		}
-		elseif ($tsdefban->getTipint()=='O')
-  		{
-  			$v1='';$v2='';$v3='';$v4='selected';
-  		}
-  
-  ?>
-  <?php echo select_tag('tipint',
-  '<option value="D" "'.$v1.'">Disponibilidad Operativa</option>
-   <option value="C" "'.$v2.'">Convenios</option>
-   <option value="F" "'.$v3.'">Fondos Congelados</option>
-   <option value="O" "'.$v4.'">Otros Conceptos</option>')
-  ?>
-    </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('tsdefban[usocue]', __($labels['tsdefban{usocue}']), 'class="required" ') ?>
+    <?php echo select_tag('tsdefban[tipint]', options_for_select($grupo,$tsdefban->getTipint(),'include_custom=Seleccione Uno')) ?>
+    </div>
+
+    <br>
+
+    <?php echo label_for('tsdefban[usocue]', __($labels['tsdefban{usocue}']), 'class="required" Style="width:100px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{usocue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{usocue}')): ?>
     <?php echo form_error('tsdefban{usocue}', array('class' => 'form-error-msg')) ?>
@@ -208,392 +253,242 @@
 
   <?php $value = object_input_tag($tsdefban, 'getUsocue', array (
   'size' => 20,
+   'maxlength' => 20,
   'control_name' => 'tsdefban[usocue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('tsdefban[tipren]', __($labels['tsdefban{tipren}']), 'class="required" ') ?>
+    <br>
+
+    <table>
+     <tr>
+     <th>
+      <?php echo label_for('tsdefban[tipren]', __($labels['tsdefban{tipren}']), 'class="required" Style="width:100px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{tipren}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{tipren}')): ?>
     <?php echo form_error('tsdefban{tipren}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
+<?php echo input_auto_complete_tag('tsdefban[tipren]', $tsdefban->getTipren(),
+    'tesdefcueban/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 3,'onBlur'=> remote_function(array(
+       'url'      => 'tesdefcueban/ajax',
+       'complete' => 'AjaxJSON(request, json)',
+       'condition' => "$('tsdefban_tipren').value != '' && $('id').value == ''",
+       'with' => "'ajax=2&cajtexmos=tsdefban_destipren&cajtexcom=tsdefban_tipren&codigo='+this.value"
+        ))),
+     array('use_style' => 'true')
+  )
+  ?></div>
+     </th>
+     <th>
+     &nbsp;
+ <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Tstipren_tesdefcueban/clase/Tstipren/frame/sf_admin_edit_form/obj1/tsdefban_tipren/obj2/tsdefban_destipren/campo1/codtip/campo2/destip')?>
+     </th>
+     </tr>
+    </table>
 
-  <?php $value = object_input_tag($tsdefban, 'getTipren', array (
-  'size' => 20,
-  'control_name' => 'tsdefban[tipren]',
-)); echo $value ? $value : '&nbsp;' ?>&nbsp;
-<?php echo button_to('...','#')?>&nbsp;
-<?php echo input_tag('tipren',$tipren,'size=50,disabled=true'); ?>
-    </div>
+    <br>
+
+    <?php $value = object_input_tag($tsdefban, 'getDestipren', array (
+  'disabled' => true,
+ 'size' => 60,
+  'control_name' => 'tsdefban[destipren]',
+)); echo $value ? $value : '&nbsp;' ?>
 </div>
-
 </fieldset>
+  </th>
+  <th>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </th>
+  <th>
+  <fieldset>
+<legend><? echo __('Saldo de la Cuenta') ?></legend>
+<div class="form-row">
+<table>
+<tr>
+<th>
+<?php echo label_for('vacio', __(''), 'class="required"') ?>
+</th>
+<th>
+<?php echo label_for('vacio', __(''), 'class="required"') ?>
+<?php echo label_for('Bancos', __('Bancos'), 'class="required"') ?>
+</th>
+<th>
+ <?php echo label_for('vacio', __(''), 'class="required"') ?>
+ <?php echo label_for('Bancos', __('Libros'), 'class="required"') ?>
+</th>
+</tr>
+<tr>
+<th>
+<?php echo label_for('saldoanterior', __('Saldo Anterior'), 'class="required" style="width:95px" ') ?>
+</th>
+<th>
+<div class="content<?php if ($sf_request->hasError('tsdefban{antban}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{antban}')): ?>
+    <?php echo form_error('tsdefban{antban}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+  <?php $value = object_input_tag($tsdefban, array('getAntban',true), array (
+  'size' => 15,
+  'readonly' => $tsdefban->getId()!='' ? true : false ,
+  'control_name' => 'tsdefban[antban]',
+  'onBlur' => "javascript:event.keyCode=13; return mientermonto(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+  </div>
+</th>
+<th>
+  <div class="content<?php if ($sf_request->hasError('tsdefban{antlib}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{antlib}')): ?>
+    <?php echo form_error('tsdefban{antlib}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
-<fieldset>
-<legend>Saldo de la Cuenta</legend>
+  <?php $value = object_input_tag($tsdefban, array('getAntlib',true), array (
+  'size' => 15,
+  'readonly' => $tsdefban->getId()!='' ? true : false ,
+  'control_name' => 'tsdefban[antlib]',
+   'onBlur' => "javascript:event.keyCode=13; return mientermontoLib(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th>
+</tr>
+<tr>
+<th>
+<?php echo label_for('debitos', __('Débitos'), 'class="required" ') ?>
+</th>
+<th>
+<div class="content<?php if ($sf_request->hasError('tsdefban{debban}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{debban}')): ?>
+    <?php echo form_error('tsdefban{debban}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
-<table border="0">
-	<tr>
-	
-			<td>
-			<fieldset><legend>...</legend>
-			<table>
-				<tr>
-					<td>	
-							<div align="center">Saldo Anterior</div>
-					</td>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-					<td>
-						 	 <div align="center">Debitos</div>
-					</td>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-					<td>
-						     <div align="center">Creditos</div>		
-					</td>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-				</tr>
-				<tr>
-					<td>
-							<div align="center">Saldo Anterior</div>
-					</td>
-				</tr>
-			</table>
-			</fieldset>
-		</td>
-	
-	
-		<td>
-			<fieldset><legend>Bancos</legend>
-			<table>
-				<tr>
-					<td>
-						<div class="form-row">
-						  <?php $value = object_input_tag($tsdefban, 'getAntban', array (
-						  'size' => 15,
-						  'control_name' => 'tsdefban[antban]',
-						)); echo $value ? $value : '&nbsp;' ?>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						  <div class="form-row">
-							  <?php $value = object_input_tag($tsdefban, 'getDebban', array (
-							  'size' => 15,
-							  'control_name' => 'tsdefban[debban]',
-							)); echo $value ? $value : '&nbsp;' ?>
-						  </div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-row">
-						  <?php $value = object_input_tag($tsdefban, 'getCreban', array (
-						  'size' => 15,
-						  'control_name' => 'tsdefban[creban]',
-						)); echo $value ? $value : '&nbsp;' ?>
-						</div>					
-					</td>
-				</tr>
-				<tr>
-					<?php $saldobanco=$tsdefban->getAntban()+$tsdefban->getDebban() - $tsdefban->getCreban(); ?>
-					<td>
-						<?php echo input_tag('saldobanco',$saldobanco,'size=15,disabled=true'); ?>
-					</td>
-				</tr>
-			</table>
-			</fieldset>
-		</td>
+  <?php $value = object_input_tag($tsdefban, array('getDebban',true), array (
+  'size' => 15,
+  'readonly' => $tsmovban_credito_debito,
+  'control_name' => 'tsdefban[debban]',
+  'onBlur' => "javascript:event.keyCode=13; return  mientermonto(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+   </div>
+</th>
+<th>
+<div class="content<?php if ($sf_request->hasError('tsdefban{deblib}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{deblib}')): ?>
+    <?php echo form_error('tsdefban{deblib}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
-		<td>
-		    <fieldset><legend>Libros</legend>
-			<table>
-				<tr>
-					<td>
-						<div class="form-row">
-						  <?php $value = object_input_tag($tsdefban, 'getAntlib', array (
-						  'size' => 15,
-						  'control_name' => 'tsdefban[antlib]',
-						)); echo $value ? $value : '&nbsp;' ?>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-row">
-						  <?php $value = object_input_tag($tsdefban, 'getCrelib', array (
-						  'size' => 15,
-						  'control_name' => 'tsdefban[crelib]',
-						)); echo $value ? $value : '&nbsp;' ?>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="form-row">
-						  <?php $value = object_input_tag($tsdefban, 'getDeblib', array (
-						  'size' => 15,
-						  'control_name' => 'tsdefban[deblib]',
-						)); echo $value ? $value : '&nbsp;' ?>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<?php $saldolibro=$tsdefban->getAntlib()+$tsdefban->getDeblib() - $tsdefban->getCrelib(); ?>
-					<td>
-						<?php echo input_tag('saldobanco',$saldobanco,'size=15,disabled=true'); ?>
-					</td>
-				</tr>
-			</table>
-			</fieldset>
-		</td>
-	</tr>
+  <?php $value = object_input_tag($tsdefban, 'getDeblibdis', array (
+  'size' => 15,
+  'readonly' => $tsmovlib_credito_debito,
+  'control_name' => 'tsdefban[deblib]',
+  'onBlur' => "javascript:event.keyCode=13; return mientermontoLib(event, this.id )",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th>
+</tr>
+<tr>
+<th>
+<?php echo label_for('creditos', __('Créditos'), 'class="required" ') ?>
+</th>
+<th>
+<div class="content<?php if ($sf_request->hasError('tsdefban{creban}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{creban}')): ?>
+    <?php echo form_error('tsdefban{creban}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($tsdefban, array('getCreban',true), array (
+  'size' => 15,
+  'readonly' => $tsmovban_credito_debito,
+  'control_name' => 'tsdefban[creban]',
+   'onBlur' => "javascript:event.keyCode=13; return mientermonto(event, this.id)",
+  )); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th>
+<th>
+     <div class="content<?php if ($sf_request->hasError('tsdefban{crelib}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tsdefban{crelib}')): ?>
+    <?php echo form_error('tsdefban{crelib}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($tsdefban, 'getCrelibdis', array (
+  'size' => 15,
+  'readonly' => $tsmovlib_credito_debito,
+  'control_name' => 'tsdefban[crelib]',
+    'onBlur' => "javascript:event.keyCode=13; return mientermontoLib(event, this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</th>
+</tr>
+<tr>
+<th colspan=3 height=2></th>
+</tr>
+<tr>
+<th colspan=3 height=2 style=background-color:#CCCCCC></th>
+</tr>
+<tr>
+<th colspan=3 height=2></th>
+</tr>
+<th>
+<?php echo label_for('saldoactual', __('Saldo Actual'), 'class="required" ') ?>
+</th>
+<th>
+ <?php echo label_for('vacio', __(''), 'class="required"') ?>
+  <?php $value = object_input_tag($tsdefban, 'getSaltotban', array (
+  'size' => 15,
+  'readonly' => $tsdefban->getId()!='' ? true : false ,
+  'control_name' => 'tsdefban[saltotban]',
+  'disabled' => 'true',
+  )); echo $value ? $value : '&nbsp;' ?>
+</th>
+<th>
+ <?php echo label_for('vacio', __(''), 'class="required"') ?>
+  <?php $value = object_input_tag($tsdefban, 'getSaltotlib', array (
+  'size' => 15,
+  'readonly' => $tsdefban->getId()!='' ? true : false ,
+  'control_name' => 'tsdefban[saltotlib]',
+  'disabled' => 'true',
+)); echo $value ? $value : '&nbsp;' ?>
+</th>
+</tr>
 </table>
+</div>
+</fieldset>
+  </th>
+ </tr>
+</table>
+</div>
 </fieldset>
 
 
+<?php tabPageOpenClose("tp1", "tabPage2", 'Manejo de Chequeras');?>
 <fieldset>
-<legend>Manejo de Chequeras</legend>
-<?php echo label_for('eti', 'Cant. de Digitos Significativos del N° Cheque', 'class="required" ') ?>
-<?php echo input_tag('digitos','','size=10, maxlength=8'); ?>
-
-<div class="grid01" id="grid01">
-<table border="0" class="sf_admin_list">
-<? 
-$titulo2=array(0 => 'Chequera N°.', 1 => 'Desde N°.', 2 => 'Hasta N°.', 3 => 'Activa');
-
-if (count($chq)>0){
-$i=0;
-foreach ($chq as $k=>$fila) {
-    $i++;
-    if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$titulo2[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
-}
-else///////////////////////////
-{
-?>
-<thead>
-<tr>
-<th><?=$titulo2[0];?></th>
-<th><?=$titulo2[1];?></th>
-<th><?=$titulo2[2];?></th>
-</tr></thead>
-
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<?	
-}
-?></table>
-</div>
-</fieldset>
-
-
-
-<!--<div class="form-row">
-  <?php echo label_for('tsdefban[porsalmin]', __($labels['tsdefban{porsalmin}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{porsalmin}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{porsalmin}')): ?>
-    <?php echo form_error('tsdefban{porsalmin}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getPorsalmin', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[porsalmin]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
+<legend><? echo __('Manejo de Chequeras') ?></legend>
 <div class="form-row">
-  <?php echo label_for('tsdefban[monsalmin]', __($labels['tsdefban{monsalmin}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{monsalmin}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{monsalmin}')): ?>
-    <?php echo form_error('tsdefban{monsalmin}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getMonsalmin', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[monsalmin]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[codctaprecoo]', __($labels['tsdefban{codctaprecoo}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{codctaprecoo}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{codctaprecoo}')): ?>
-    <?php echo form_error('tsdefban{codctaprecoo}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getCodctaprecoo', array (
-  'size' => 32,
-  'control_name' => 'tsdefban[codctaprecoo]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[codctapreord]', __($labels['tsdefban{codctapreord}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{codctapreord}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{codctapreord}')): ?>
-    <?php echo form_error('tsdefban{codctapreord}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getCodctapreord', array (
-  'size' => 32,
-  'control_name' => 'tsdefban[codctapreord]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[trasitoria]', __($labels['tsdefban{trasitoria}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{trasitoria}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{trasitoria}')): ?>
-    <?php echo form_error('tsdefban{trasitoria}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getTrasitoria', array (
-  'size' => 20,
-  'control_name' => 'tsdefban[trasitoria]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[salact]', __($labels['tsdefban{salact}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{salact}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{salact}')): ?>
-    <?php echo form_error('tsdefban{salact}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getSalact', array (
-  'size' => 7,
-  'control_name' => 'tsdefban[salact]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[fecaper]', __($labels['tsdefban{fecaper}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{fecaper}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{fecaper}')): ?>
-    <?php echo form_error('tsdefban{fecaper}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_date_tag($tsdefban, 'getFecaper', array (
-  'rich' => true,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'tsdefban[fecaper]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[temnumcue]', __($labels['tsdefban{temnumcue}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('tsdefban{temnumcue}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsdefban{temnumcue}')): ?>
-    <?php echo form_error('tsdefban{temnumcue}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsdefban, 'getTemnumcue', array (
-  'size' => 20,
-  'control_name' => 'tsdefban[temnumcue]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsdefban[cantdig]', __($labels['tsdefban{cantdig}']), '') ?>
+  <?php echo label_for('tsdefban[cantdig]', __($labels['tsdefban{cantdig}']), 'class="required" Style="width:250px"') ?>
   <div class="content<?php if ($sf_request->hasError('tsdefban{cantdig}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tsdefban{cantdig}')): ?>
     <?php echo form_error('tsdefban{cantdig}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($tsdefban, 'getCantdig', array (
+  <?php $value = object_input_tag($tsdefban, 'getCantdigact', array (
   'size' => 7,
+  'maxlength' => 2,
+  'readonly' => $tsdefban->getId()!='' ? true : false ,
   'control_name' => 'tsdefban[cantdig]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>-->
 
+<br>
+<?php echo grid_tag($obj);?>
 
-
-
-
-
-
-
-
+</div>
 </fieldset>
+
+<?php tabInit('tp1','0');?>
 
 <?php include_partial('edit_actions', array('tsdefban' => $tsdefban)) ?>
 
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($tsdefban->getId()): ?>
+      <li class="float-rigth"><?php if ($tsdefban->getId()): ?>
 <?php echo button_to(__('delete'), 'tesdefcueban/delete?id='.$tsdefban->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -601,3 +496,215 @@ else///////////////////////////
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+  <script type="text/javascript">
+
+    String.prototype.pad = function(l, s, t){
+        return s || (s = " "), (l -= this.length) > 0 ? (s = new Array(Math.ceil(l / s.length)
+    + 1).join(s)).substr(0, t = !t ? l : t == 1 ? 0 : Math.ceil(l / 2))
+    + this + s.substr(0, l - t) : this;
+         };
+
+function validarEntero(id)
+{
+     valor = $(id).value;
+     valor = parseInt(valor);
+
+      if (isNaN(valor))
+      {
+            $(id).value='';
+            $(id).focus();
+      }
+      else
+      {
+         $(id).value=valor;
+      }
+}
+
+function num(e) {
+    evt = e ? e : event;
+    tcl = (window.Event) ? evt.which : evt.keyCode;
+    if ((tcl < 48 || tcl > 57 ) && tcl != '8')
+    {
+        return false;
+    }
+    return true;
+}
+
+
+  function ConChe(id)  //Consultar Chequera
+  {
+  var aux = id.split("_");
+  var name=aux[0];
+  var fil=aux[1];
+  var col=parseInt(aux[2]);
+
+  var numchedes="ax_"+fil+"_"+'2';
+  var numchehas="ax_"+fil+"_"+'4';
+
+  if (document.getElementById(numchedes).value!='' && document.getElementById(numchehas).value!='' )
+  {
+      obj1= document.getElementById(numchedes).value;
+      obj2= document.getElementById(numchehas).value;
+      obj3= document.getElementById('tsdefban_numcue').value;
+     window.open('/tesoreria_dev.php/tesdefcueban/gridcheques?numchedes='+obj1+'&numchehas='+obj2+'&numcue='+obj3,'...','menubar=no,toolbar=no,scrollbars=no,width=950,height=500,resizable=yes,left=200,top=150')
+  }
+  }
+
+ function mientermonto(e,id)
+   {
+  if (e.keyCode==13)
+   {
+    if (validarnumero(id)==true)
+     {
+       var num=toFloat(id);
+
+       document.getElementById(id).value=format(num.toFixed(2),'.',',','.');
+       //Obtener Saldo Actual para Bancos
+
+       var antban=toFloat('tsdefban_antban');
+       var debban=toFloat('tsdefban_debban');
+       var creban=toFloat('tsdefban_creban');
+
+       var salactban=antban+debban-creban;
+       document.getElementById('tsdefban_saltotban').value=format(salactban.toFixed(2),'.',',','.');
+       }
+      else
+     {
+       //alert("Dato Invalido");
+      document.getElementById(id).value='0,00';
+      document.getElementById(id).focus();
+      document.getElementById(id).select();
+       }
+   }
+   } //end function
+
+  function mientermontoLib(e,id)
+  {
+   if (e.keyCode==13)
+   {
+    if (validarnumero(id)==true)
+     {
+       var num=toFloat(id);
+       document.getElementById(id).value=format(num.toFixed(2),'.',',','.');
+
+       //Obtener Saldo Actual paralibros
+
+       var antban=toFloat('tsdefban_antlib');
+       var debban=toFloat('tsdefban_deblib');
+       var creban=toFloat('tsdefban_crelib');
+
+       var salactlib=antban+debban-creban;
+       document.getElementById('tsdefban_saltotlib').value=format(salactlib.toFixed(2),'.',',','.');
+       }
+      else
+     {
+       //alert("Dato Invalido");
+      document.getElementById(id).value='0,00';
+      document.getElementById(id).focus();
+      document.getElementById(id).select();
+       }
+   }
+   } //end function
+
+
+function verificar()
+{
+  if ($('cargable').value!='C' && $('tsdefban_codcta').value!="")
+  {
+  	alert('La Cuenta Contable no es Cargable, Por favor Cambiela por una Cuenta Cargable');
+  	$('tsdefban_codcta').value="";
+  }
+}
+
+ function verificar1()
+{
+  if ($('valida').value=='S' && $('tsdefban_fecape').value!="")
+  {
+  	alert('La Fecha debe ser menor a la de los Movimientos del Banco');
+  	$('tsdefban_fecape').value="";
+  }
+}
+
+ function activar(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var valor=$(id).value
+
+   if (activa_repetido(id))
+   {
+     alert('Ya existe una Chequera Activa');
+	 $(id).value='NO';
+   }
+ }
+
+ function activa_repetido(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var activa_repetido='SI';
+
+   var activarepetido=false;
+   var am=totalregistros('ax',1,50);
+   var i=0;
+   while (i<am)
+   {
+    var codigo="ax"+"_"+i+"_5";
+
+    var activa_repetido2=$(codigo).value;
+    if (i!=fila)
+    {
+      if (activa_repetido==activa_repetido2)
+      {
+        activarepetido=true;
+        break;
+      }
+    }
+   i++;
+   }
+   return activarepetido;
+ }
+
+ function totalregistros(letra,posicion,filas)
+  {
+    var fil=0;
+    var total=0;
+    while (fil<filas)
+    {
+      var chk=letra+"_"+fil+"_"+posicion;
+      if ($(chk).value!="")
+      { total=total + 1; }
+     fil++;
+    }
+    return total;
+  }
+
+  function generarnrochefin(id)
+  {
+	  var aux = id.split("_");
+	  var name=aux[0];
+	  var fil=aux[1];
+	  var col=parseInt(aux[2]);
+
+	  var numchedes=name+"_"+fil+"_2";
+	  var numchehas=name+"_"+fil+"_4";
+
+    if ($(id).value!="" && $(numchedes).value!="")
+    {
+      var canche=toFloat(id);
+      var valchedes=toFloat(numchedes);
+
+      var valchefin=valchedes+canche-1;
+      var valor= valchefin.toString();
+      valor=valor.pad("8", "0",0);
+      $(numchehas).value=valor;
+     }
+  }
+</script>

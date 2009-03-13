@@ -1,352 +1,183 @@
 <?php
 
 /**
- * facpicsollic actions.
+ * Facpicsollic actions.
  *
  * @package    siga
- * @subpackage facpicsollic
+ * @subpackage Facpicsollic
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
  */
-class facpicsollicActions extends autofacpicsollicActions
+class FacpicsollicActions extends autoFacpicsollicActions
 {
-	public function executeEdit()
-	{
-		$this->fcsollic = $this->getFcsollicOrCreate();
-		$this->nomcon ='';
-		$this->nomcatrasto ='';
-		$this->nomruta ='';
-        $this->configGrid();
 
-		if ($this->getRequest()->getMethod() == sfRequest::POST)
-		{
-			$this->updateFcsollicFromRequest();
-
-			$this->saveFcsollic($this->fcsollic);
-
-			$this->setFlash('notice', 'Your modifications have been saved');
-
-			if ($this->getRequestParameter('save_and_add'))
-			{
-				return $this->redirect('facpicsollic/create');
-			}
-			else if ($this->getRequestParameter('save_and_list'))
-			{
-				return $this->redirect('facpicsollic/list');
-			}
-			else
-			{
-				return $this->redirect('facpicsollic/edit?id='.$this->fcsollic->getId());
-			}
-		}
-		else
-		{
-			$this->labels = $this->getLabels();
-		}
-	}
-	protected function updateFcsollicFromRequest()
-	{
-		$fcsollic = $this->getRequestParameter('fcsollic');
-
-		if (isset($fcsollic['numsol']))
-		{
-			$this->fcsollic->setNumsol($fcsollic['numsol']);
-		}
-		if (isset($fcsollic['fecsol']))
-		{
-			if ($fcsollic['fecsol'])
-			{
-				try
-				{
-					$dateFormat = new sfDateFormat($this->getUser()->getCulture());
-					if (!is_array($fcsollic['fecsol']))
-					{
-						$value = $dateFormat->format($fcsollic['fecsol'], 'i', $dateFormat->getInputPattern('d'));
-					}
-					else
-					{
-						$value_array = $fcsollic['fecsol'];
-						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-					}
-					$this->fcsollic->setFecsol($value);
-				}
-				catch (sfException $e)
-				{
-					// not a date
-				}
-			}
-			else
-			{
-				$this->fcsollic->setFecsol(null);
-			}
-		}
-		if (isset($fcsollic['rifcon']))
-		{
-			$this->fcsollic->setRifcon($fcsollic['rifcon']);
-		}
-		if (isset($fcsollic['nomcon']))
-		{
-			$this->fcsollic->setNomcon($fcsollic['nomcon']);
-		}
-		if (isset($fcsollic['dircon']))
-		{
-			$this->fcsollic->setDircon($fcsollic['dircon']);
-		}
-		/*if (isset($fcsollic['nacconrep']))
-		{
-			$this->fcsollic->setNacconrep($fcsollic['nacconrep']);
-		}*/
-		if (isset($fcsollic['rifrep']))
-		{
-			$this->fcsollic->setRifrep($fcsollic['rifrep']);
-		}
-		/*if (isset($fcsollic['nomconrep']))
-		{
-			$this->fcsollic->setNomconrep($fcsollic['nomconrep']);
-		}
-		if (isset($fcsollic['dirconrep']))
-		{
-			$this->fcsollic->setDirconrep($fcsollic['dirconrep']);
-		}*/
-		if (isset($fcsollic['nomneg']))
-		{
-			$this->fcsollic->setNomneg($fcsollic['nomneg']);
-		}
-		if (isset($fcsollic['dirpri']))
-		{
-			$this->fcsollic->setDirpri($fcsollic['dirpri']);
-		}
-		if (isset($fcsollic['tipinm']))
-		{
-			$this->fcsollic->setTipinm($fcsollic['tipinm']);
-		}
-		if (isset($fcsollic['catcon']))
-		{
-			$this->fcsollic->setCatcon($fcsollic['catcon']);
-		}
-		if (isset($fcsollic['nomcatrasto']))
-		{
-			$this->fcsollic->setNomcatrasto($fcsollic['nomcatrasto']);
-		}
-		if (isset($fcsollic['tipest']))
-		{
-			$this->fcsollic->setTipest($fcsollic['tipest']);
-		}
-		if (isset($fcsollic['codrut']))
-		{
-			$this->fcsollic->setCodrut($fcsollic['codrut']);
-		}
-		if (isset($fcsollic['nomruta']))
-		{
-			$this->fcsollic->setNomruta($fcsollic['nomruta']);
-		}
-		if (isset($fcsollic['disbar']))
-		{
-			$this->fcsollic->setDisbar($fcsollic['disbar']);
-		}
-		if (isset($fcsollic['disins']))
-		{
-			$this->fcsollic->setDisins($fcsollic['disins']);
-		}
-		if (isset($fcsollic['discli']))
-		{
-			$this->fcsollic->setDiscli($fcsollic['discli']);
-		}
-		if (isset($fcsollic['disfun']))
-		{
-			$this->fcsollic->setDisfun($fcsollic['disfun']);
-		}
-		if (isset($fcsollic['disdis']))
-		{
-			$this->fcsollic->setDisdis($fcsollic['disdis']);
-		}
-		if (isset($fcsollic['disest']))
-		{
-			$this->fcsollic->setDisest($fcsollic['disest']);
-		}
-		if (isset($fcsollic['horini']))
-		{
-			if ($fcsollic['horini'])
-			{
-				try
-				{
-					$dateFormat = new sfDateFormat($this->getUser()->getCulture());
-					if (!is_array($fcsollic['horini']))
-					{
-						$value = $dateFormat->format($fcsollic['horini'], 'i', $dateFormat->getInputPattern('d'));
-					}
-					else
-					{
-						$value_array = $fcsollic['horini'];
-						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-					}
-					$this->fcsollic->setHorini($value);
-				}
-				catch (sfException $e)
-				{
-					// not a date
-				}
-			}
-			else
-			{
-				$this->fcsollic->setHorini(null);
-			}
-		}
-		if (isset($fcsollic['horcie']))
-		{
-			if ($fcsollic['horcie'])
-			{
-				try
-				{
-					$dateFormat = new sfDateFormat($this->getUser()->getCulture());
-					if (!is_array($fcsollic['horcie']))
-					{
-						$value = $dateFormat->format($fcsollic['horcie'], 'i', $dateFormat->getInputPattern('d'));
-					}
-					else
-					{
-						$value_array = $fcsollic['horcie'];
-						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-					}
-					$this->fcsollic->setHorcie($value);
-				}
-				catch (sfException $e)
-				{
-					// not a date
-				}
-			}
-			else
-			{
-				$this->fcsollic->setHorcie(null);
-			}
-		}
-		if (isset($fcsollic['fecini']))
-		{
-			if ($fcsollic['fecini'])
-			{
-				try
-				{
-					$dateFormat = new sfDateFormat($this->getUser()->getCulture());
-					if (!is_array($fcsollic['fecini']))
-					{
-						$value = $dateFormat->format($fcsollic['fecini'], 'i', $dateFormat->getInputPattern('d'));
-					}
-					else
-					{
-						$value_array = $fcsollic['fecini'];
-						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-					}
-					$this->fcsollic->setFecini($value);
-				}
-				catch (sfException $e)
-				{
-					// not a date
-				}
-			}
-			else
-			{
-				$this->fcsollic->setFecini(null);
-			}
-		}
-		if (isset($fcsollic['fecfin']))
-		{
-			if ($fcsollic['fecfin'])
-			{
-				try
-				{
-					$dateFormat = new sfDateFormat($this->getUser()->getCulture());
-					if (!is_array($fcsollic['fecfin']))
-					{
-						$value = $dateFormat->format($fcsollic['fecfin'], 'i', $dateFormat->getInputPattern('d'));
-					}
-					else
-					{
-						$value_array = $fcsollic['fecfin'];
-						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-					}
-					$this->fcsollic->setFecfin($value);
-				}
-				catch (sfException $e)
-				{
-					// not a date
-				}
-			}
-			else
-			{
-				$this->fcsollic->setFecfin(null);
-			}
-		}
-		if (isset($fcsollic['capsoc']))
-		{
-			$this->fcsollic->setCapsoc($fcsollic['capsoc']);
-		}
-		if (isset($fcsollic['funres']))
-		{
-			$this->fcsollic->setFunres($fcsollic['funres']);
-		}
-		if (isset($fcsollic['fecres']))
-		{
-			if ($fcsollic['fecres'])
-			{
-				try
-				{
-					$dateFormat = new sfDateFormat($this->getUser()->getCulture());
-					if (!is_array($fcsollic['fecres']))
-					{
-						$value = $dateFormat->format($fcsollic['fecres'], 'i', $dateFormat->getInputPattern('d'));
-					}
-					else
-					{
-						$value_array = $fcsollic['fecres'];
-						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-					}
-					$this->fcsollic->setFecres($value);
-				}
-				catch (sfException $e)
-				{
-					// not a date
-				}
-			}
-			else
-			{
-				$this->fcsollic->setFecres(null);
-			}
-		}
-	}
-	public function configGrid()
-	{
-
-		/*$c = new Criteria();
-		 $c->add(CaartalmPeer::CODART,str_pad($this->caregart->getCodart(),20,' '));
-		 $per = CaartalmPeer::doSelect($c);*/
-		$per = array();
-			
-		$filas=17;
-		$cabeza="Actividades Comerciales";
-		$eliminar=true;
-		$titulos=array("Código","Descripción","Ingresos Brutos","Exonerable","Exonerada","Exoneración");
-		$ancho="900";
-		$alignf=array('center','center','center','center','center','center');
-		$alignt=array('center','center','center','center','center','center');
-		$campos=array('Codcon','Codtipact','Numofi','Fecact','Numofi','Fecact');
-		$catalogos=array('','','','','','');// por todas las columnas, si no tiene, se coloca vacio
-		$ajax=array('2-x2-x1','','3-x4-x3','','3-x4-x3',''); //parametro-cajitamostrar-autocompletar
-		$tipos=array('t','t','t','t','t','t'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
-		$montos=array("5","6","7","8","7","8");
-		$totales=array("", "", "ocregact_exitot", "", "ocregact_exitot", "");
-		$mascaraubicacion=$this->mascaraubicacion;
-		$html=array('type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true','type="text" size="25" disabled=true');
-		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
-		$grabar=array("1","3","5","6","7","8");
-		$filatotal='';
+  // Para incluir funcionalidades al executeEdit()
+  public function editing()
+  {
 
 
-		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos,
-		'ancho'=>$ancho, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos,
-		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales,
-			'html'=>$html, 'js'=>$js, 'datos'=> $per, 'grabar'=>$grabar, 'tabla' => 'Caartalm');
-			//////////////////////
-		
-	}  
-  
+  }
+
+  public function configGrid($reg = array(),$regelim = array())
+  {
+    $this->regelim = $regelim;
+
+    if(!count($reg)>0)
+    {
+      // Aquí va el código para traernos los registros que contendrá el grid
+      $reg = array();
+      // Aquí va el código para generar arreglo de configuración del grid
+    $this->obj = array();
+    }
+
+    // Insertar el criterio de la busqueda de registros del Grid
+    // Por ejemplo:
+
+    // $c = new Criteria();
+    // $c->add(CaartaocPeer::AJUOC ,$this->caajuoc->getAjuoc());
+    // $reg = CaartaocPeer::doSelect($c);
+
+    // De esta forma se carga la configuración del grid de un archivo yml
+    // y se le pasa el parámetro de los registros encontrados ($reg)
+    //                                                                            /nombreformulario/
+    // $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/formulario/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_caartaoc',$reg);
+
+    // Si no se quiere cargar la configuración del grid de un .yml, sedebe hacer a pie.
+    // Por ejemplo:
+
+    /*
+    // Se crea el objeto principal de la clase OpcionesGrid
+    $opciones = new OpcionesGrid();
+    // Se configuran las opciones globales del Grid
+    $opciones->setEliminar(true);
+    $opciones->setTabla('Caartalm');
+    $opciones->setAnchoGrid(1150);
+    $opciones->setTitulo('Existencia por Almacenes');
+    $opciones->setHTMLTotalFilas(' ');
+    // Se generan las columnas
+    $col1 = new Columna('Cod. Almacen');
+    $col1->setTipo(Columna::TEXTO);
+    $col1->setEsGrabable(true);
+    $col1->setAlineacionObjeto(Columna::CENTRO);
+    $col1->setAlineacionContenido(Columna::CENTRO);
+    $col1->setNombreCampo('codalm');
+    $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
+    $col1->setAjax(2,2);
+
+    $col2 = new Columna('Descripción');
+    $col2->setTipo(Columna::TEXTO);
+    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+    $col2->setNombreCampo('codalm');
+    $col2->setHTML('type="text" size="25" disabled=true');
+
+    // Se guardan las columnas en el objetos de opciones
+    $opciones->addColumna($col1);
+    $opciones->addColumna($col2);
+
+    // Se genera el arreglo de opciones necesario para generar el grid
+    $this->obj = $opciones->getConfig($per);
+     */
+
+
+  }
+
+  public function executeAjax()
+  {
+
+    $codigo = $this->getRequestParameter('codigo','');
+    // Esta variable ajax debe ser usada en cada llamado para identificar
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
+    $ajax = $this->getRequestParameter('ajax','');
+
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
+    // los datos de los objetos de la vista como pasa en un submit normal.
+
+    switch ($ajax){
+      case '1':
+        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
+        // objetos en la vista. mas informacion en
+        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+        $output = '[["","",""],["","",""],["","",""]]';
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+    }
+
+    // Instruccion para escribir en la cabecera los datos a enviar a la vista
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+    // mantener habilitar esta instrucción
+    return sfView::HEADER_ONLY;
+
+    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
+  }
+
+
+  public function validateEdit()
+  {
+    $this->coderr =-1;
+
+    // Se deben llamar a las funciones necesarias para cargar los
+    // datos de la vista que serán usados en las funciones de validación.
+    // Por ejemplo:
+
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+
+      // $this->configGrid();
+      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+      // Aqui van los llamados a los métodos de las clases del
+      // negocio para validar los datos.
+      // Los resultados de cada llamado deben ser analizados por ejemplo:
+
+      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
+
+       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
+
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
+
+      if($this->coderr!=-1){
+        return false;
+      } else return true;
+
+    }else return true;
+
+
+
+  }
+
+  /**
+   * Función para actualziar el grid en el post si ocurre un error
+   * Se pueden colocar aqui los grids adicionales
+   *
+   */
+  public function updateError()
+  {
+    //$this->configGrid();
+
+    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+    //$this->configGrid($grid[0],$grid[1]);
+
+  }
+
+  public function saving($clasemodelo)
+  {
+    return parent::saving($clasemodelo);
+  }
+
+  public function deleting($clasemodelo)
+  {
+    return parent::deleting($clasemodelo);
+  }
+
+
 }

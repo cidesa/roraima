@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Intipprof
+    theme:            cidesaGenerator
+    fields:
+      codtipprof:       { name: Código, params: size=4 }
+      destipprof:
+        name:Descripción
+        type: textarea_tag
+        params: size=50x5 maxlength=250
+
+    list:
+      title:          Definición de Tipo de Profesional
+      filters:        [codtipprof]
+      display:        [=codtipprof, destipprof]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codtipprof
+
+    edit:
+      title:          Edición de Tipo de Profesional
+      display:        [_codtipprof, destipprof]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

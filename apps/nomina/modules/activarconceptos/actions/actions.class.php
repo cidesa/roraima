@@ -1,5 +1,5 @@
 <?php
-
+   //
 /**
  * activarconceptos actions.
  *

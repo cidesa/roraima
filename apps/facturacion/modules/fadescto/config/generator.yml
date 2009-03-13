@@ -1,0 +1,35 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fadescto
+    theme:            cidesaGenerator
+    fields:
+      coddesc: { name: Código}
+      desdesc: { name: Descripción}
+      tipdesc: { name: Tipo}
+      mondesc: { name: Valor }
+      diasapl: { name: Días para su Aplicación }
+      codcta:  { name: Código}
+      descta:  { name: Nombre}
+      tipret:  { name: Retención}
+    list:
+      title:          Descuentos
+      display:        [=coddesc, desdesc]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [coddesc, desdesc]
+      max_per_page:   10
+      sort:           coddesc
+    edit:
+      title:          Edición de Descuentos
+      display:
+        "NONE": [coddesc, desdesc, tipdesc, mondesc, diasapl, tipret, codcta, descta ]
+      fields:
+        desdesc:
+          params: size = 30
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,44 +1,46 @@
 <?php
 
 
-	
+
 class Fcdeclar2MapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.Fcdeclar2MapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.Fcdeclar2MapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcdeclar2');
 		$tMap->setPhpName('Fcdeclar2');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcdeclar2_SEQ');
 
 		$tMap->addColumn('NUMDEC', 'Numdec', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('FUEING', 'Fueing', 'string', CreoleTypes::VARCHAR, false, 3);
 
-		$tMap->addColumn('FECDEC', 'Fecdec', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDEC', 'Fecdec', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 20);
 
@@ -48,15 +50,15 @@ class Fcdeclar2MapBuilder {
 
 		$tMap->addColumn('NOMBRE', 'Nombre', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('MONDEC', 'Mondec', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONDEC', 'Mondec', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('EDODEC', 'Edodec', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('MORA', 'Mora', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MORA', 'Mora', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PRONTOPG', 'Prontopg', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PRONTOPG', 'Prontopg', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('AUTLIQ', 'Autliq', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('AUTLIQ', 'Autliq', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('FUNDEC', 'Fundec', 'string', CreoleTypes::VARCHAR, false, 40);
 
@@ -68,13 +70,13 @@ class Fcdeclar2MapBuilder {
 
 		$tMap->addColumn('CONPAG', 'Conpag', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('MONABO', 'Monabo', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONABO', 'Monabo', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('NUMABO', 'Numabo', 'string', CreoleTypes::VARCHAR, false, 10);
 
 		$tMap->addColumn('NOMCON', 'Nomcon', 'string', CreoleTypes::VARCHAR, false, 255);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

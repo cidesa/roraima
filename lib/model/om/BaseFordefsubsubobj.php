@@ -33,110 +33,137 @@ abstract class BaseFordefsubsubobj extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodequ()
-	{
+  
+  public function getCodequ()
+  {
 
-		return $this->codequ; 		
-	}
-	
-	public function getCodsubobj()
-	{
+    return trim($this->codequ);
 
-		return $this->codsubobj; 		
-	}
-	
-	public function getCodsubsubobj()
-	{
+  }
+  
+  public function getCodsubobj()
+  {
 
-		return $this->codsubsubobj; 		
-	}
-	
-	public function getDessubsubobj()
-	{
+    return trim($this->codsubobj);
 
-		return $this->dessubsubobj; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodsubsubobj()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codsubsubobj);
+
+  }
+  
+  public function getDessubsubobj()
+  {
+
+    return trim($this->dessubsubobj);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodequ($v)
 	{
 
-		if ($this->codequ !== $v) {
-			$this->codequ = $v;
-			$this->modifiedColumns[] = FordefsubsubobjPeer::CODEQU;
-		}
-
+    if ($this->codequ !== $v) {
+        $this->codequ = $v;
+        $this->modifiedColumns[] = FordefsubsubobjPeer::CODEQU;
+      }
+  
 	} 
 	
 	public function setCodsubobj($v)
 	{
 
-		if ($this->codsubobj !== $v) {
-			$this->codsubobj = $v;
-			$this->modifiedColumns[] = FordefsubsubobjPeer::CODSUBOBJ;
-		}
-
+    if ($this->codsubobj !== $v) {
+        $this->codsubobj = $v;
+        $this->modifiedColumns[] = FordefsubsubobjPeer::CODSUBOBJ;
+      }
+  
 	} 
 	
 	public function setCodsubsubobj($v)
 	{
 
-		if ($this->codsubsubobj !== $v) {
-			$this->codsubsubobj = $v;
-			$this->modifiedColumns[] = FordefsubsubobjPeer::CODSUBSUBOBJ;
-		}
-
+    if ($this->codsubsubobj !== $v) {
+        $this->codsubsubobj = $v;
+        $this->modifiedColumns[] = FordefsubsubobjPeer::CODSUBSUBOBJ;
+      }
+  
 	} 
 	
 	public function setDessubsubobj($v)
 	{
 
-		if ($this->dessubsubobj !== $v) {
-			$this->dessubsubobj = $v;
-			$this->modifiedColumns[] = FordefsubsubobjPeer::DESSUBSUBOBJ;
-		}
-
+    if ($this->dessubsubobj !== $v) {
+        $this->dessubsubobj = $v;
+        $this->modifiedColumns[] = FordefsubsubobjPeer::DESSUBSUBOBJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefsubsubobjPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefsubsubobjPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codequ = $rs->getString($startcol + 0);
+      $this->codequ = $rs->getString($startcol + 0);
 
-			$this->codsubobj = $rs->getString($startcol + 1);
+      $this->codsubobj = $rs->getString($startcol + 1);
 
-			$this->codsubsubobj = $rs->getString($startcol + 2);
+      $this->codsubsubobj = $rs->getString($startcol + 2);
 
-			$this->dessubsubobj = $rs->getString($startcol + 3);
+      $this->dessubsubobj = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefsubsubobj object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefsubsubobj object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseFordefsubsubobj extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefsubsubobjPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefsubsubobjPeer::doUpdate($this, $con);

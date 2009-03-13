@@ -29,92 +29,118 @@ abstract class BaseBnmunici extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmun()
-	{
+  
+  public function getCodmun()
+  {
 
-		return $this->codmun; 		
-	}
-	
-	public function getCodedo()
-	{
+    return trim($this->codmun);
 
-		return $this->codedo; 		
-	}
-	
-	public function getNommun()
-	{
+  }
+  
+  public function getCodedo()
+  {
 
-		return $this->nommun; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codedo);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNommun()
+  {
+
+    return trim($this->nommun);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = BnmuniciPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = BnmuniciPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = BnmuniciPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = BnmuniciPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setNommun($v)
 	{
 
-		if ($this->nommun !== $v) {
-			$this->nommun = $v;
-			$this->modifiedColumns[] = BnmuniciPeer::NOMMUN;
-		}
-
+    if ($this->nommun !== $v) {
+        $this->nommun = $v;
+        $this->modifiedColumns[] = BnmuniciPeer::NOMMUN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnmuniciPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnmuniciPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmun = $rs->getString($startcol + 0);
+      $this->codmun = $rs->getString($startcol + 0);
 
-			$this->codedo = $rs->getString($startcol + 1);
+      $this->codedo = $rs->getString($startcol + 1);
 
-			$this->nommun = $rs->getString($startcol + 2);
+      $this->nommun = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnmunici object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnmunici object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

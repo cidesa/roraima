@@ -13,7 +13,7 @@ abstract class BaseCareqartPeer {
 	const CLASS_DEFAULT = 'lib.model.Careqart';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,9 @@ abstract class BaseCareqartPeer {
 	const CODCATREQ = 'careqart.CODCATREQ';
 
 	
+	const APRREQ = 'careqart.APRREQ';
+
+	
 	const ID = 'careqart.ID';
 
 	
@@ -49,18 +52,18 @@ abstract class BaseCareqartPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Fecreq', 'Desreq', 'Monreq', 'Stareq', 'Unisol', 'Codcatreq', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CareqartPeer::REQART, CareqartPeer::FECREQ, CareqartPeer::DESREQ, CareqartPeer::MONREQ, CareqartPeer::STAREQ, CareqartPeer::UNISOL, CareqartPeer::CODCATREQ, CareqartPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart', 'fecreq', 'desreq', 'monreq', 'stareq', 'unisol', 'codcatreq', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Fecreq', 'Desreq', 'Monreq', 'Stareq', 'Unisol', 'Codcatreq', 'Aprreq', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CareqartPeer::REQART, CareqartPeer::FECREQ, CareqartPeer::DESREQ, CareqartPeer::MONREQ, CareqartPeer::STAREQ, CareqartPeer::UNISOL, CareqartPeer::CODCATREQ, CareqartPeer::APRREQ, CareqartPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart', 'fecreq', 'desreq', 'monreq', 'stareq', 'unisol', 'codcatreq', 'aprreq', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Fecreq' => 1, 'Desreq' => 2, 'Monreq' => 3, 'Stareq' => 4, 'Unisol' => 5, 'Codcatreq' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (CareqartPeer::REQART => 0, CareqartPeer::FECREQ => 1, CareqartPeer::DESREQ => 2, CareqartPeer::MONREQ => 3, CareqartPeer::STAREQ => 4, CareqartPeer::UNISOL => 5, CareqartPeer::CODCATREQ => 6, CareqartPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'fecreq' => 1, 'desreq' => 2, 'monreq' => 3, 'stareq' => 4, 'unisol' => 5, 'codcatreq' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Fecreq' => 1, 'Desreq' => 2, 'Monreq' => 3, 'Stareq' => 4, 'Unisol' => 5, 'Codcatreq' => 6, 'Aprreq' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (CareqartPeer::REQART => 0, CareqartPeer::FECREQ => 1, CareqartPeer::DESREQ => 2, CareqartPeer::MONREQ => 3, CareqartPeer::STAREQ => 4, CareqartPeer::UNISOL => 5, CareqartPeer::CODCATREQ => 6, CareqartPeer::APRREQ => 7, CareqartPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'fecreq' => 1, 'desreq' => 2, 'monreq' => 3, 'stareq' => 4, 'unisol' => 5, 'codcatreq' => 6, 'aprreq' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -127,6 +130,8 @@ abstract class BaseCareqartPeer {
 		$criteria->addSelectColumn(CareqartPeer::UNISOL);
 
 		$criteria->addSelectColumn(CareqartPeer::CODCATREQ);
+
+		$criteria->addSelectColumn(CareqartPeer::APRREQ);
 
 		$criteria->addSelectColumn(CareqartPeer::ID);
 
@@ -230,6 +235,7 @@ abstract class BaseCareqartPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CareqartPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

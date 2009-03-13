@@ -45,165 +45,195 @@ abstract class BaseFordefmet extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmet()
-	{
+  
+  public function getCodmet()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getDesmet()
-	{
+    return trim($this->codmet);
 
-		return $this->desmet; 		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getDesmet()
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->desmet);
 
-		return $this->codemp; 		
-	}
-	
-	public function getCantidad()
-	{
+  }
+  
+  public function getNomabr()
+  {
 
-		return number_format($this->cantidad,2,',','.');
-		
-	}
-	
-	public function getIndpro()
-	{
+    return trim($this->nomabr);
 
-		return $this->indpro; 		
-	}
-	
-	public function getInvfun()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return $this->invfun; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codemp);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCantidad($val=false)
+  {
+
+    if($val) return number_format($this->cantidad,2,',','.');
+    else return $this->cantidad;
+
+  }
+  
+  public function getIndpro()
+  {
+
+    return trim($this->indpro);
+
+  }
+  
+  public function getInvfun()
+  {
+
+    return trim($this->invfun);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = FordefmetPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = FordefmetPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setDesmet($v)
 	{
 
-		if ($this->desmet !== $v) {
-			$this->desmet = $v;
-			$this->modifiedColumns[] = FordefmetPeer::DESMET;
-		}
-
+    if ($this->desmet !== $v) {
+        $this->desmet = $v;
+        $this->modifiedColumns[] = FordefmetPeer::DESMET;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = FordefmetPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = FordefmetPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = FordefmetPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = FordefmetPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCantidad($v)
 	{
 
-		if ($this->cantidad !== $v) {
-			$this->cantidad = $v;
-			$this->modifiedColumns[] = FordefmetPeer::CANTIDAD;
-		}
-
+    if ($this->cantidad !== $v) {
+        $this->cantidad = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefmetPeer::CANTIDAD;
+      }
+  
 	} 
 	
 	public function setIndpro($v)
 	{
 
-		if ($this->indpro !== $v) {
-			$this->indpro = $v;
-			$this->modifiedColumns[] = FordefmetPeer::INDPRO;
-		}
-
+    if ($this->indpro !== $v) {
+        $this->indpro = $v;
+        $this->modifiedColumns[] = FordefmetPeer::INDPRO;
+      }
+  
 	} 
 	
 	public function setInvfun($v)
 	{
 
-		if ($this->invfun !== $v) {
-			$this->invfun = $v;
-			$this->modifiedColumns[] = FordefmetPeer::INVFUN;
-		}
-
+    if ($this->invfun !== $v) {
+        $this->invfun = $v;
+        $this->modifiedColumns[] = FordefmetPeer::INVFUN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefmetPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefmetPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmet = $rs->getString($startcol + 0);
+      $this->codmet = $rs->getString($startcol + 0);
 
-			$this->desmet = $rs->getString($startcol + 1);
+      $this->desmet = $rs->getString($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->codemp = $rs->getString($startcol + 3);
+      $this->codemp = $rs->getString($startcol + 3);
 
-			$this->cantidad = $rs->getFloat($startcol + 4);
+      $this->cantidad = $rs->getFloat($startcol + 4);
 
-			$this->indpro = $rs->getString($startcol + 5);
+      $this->indpro = $rs->getString($startcol + 5);
 
-			$this->invfun = $rs->getString($startcol + 6);
+      $this->invfun = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefmet object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefmet object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

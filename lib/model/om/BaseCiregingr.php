@@ -77,358 +77,394 @@ abstract class BaseCiregingr extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefing()
-	{
+  
+  public function getRefing()
+  {
 
-		return $this->refing; 		
-	}
-	
-	public function getFecing($format = 'Y-m-d')
-	{
+    return trim($this->refing);
 
-		if ($this->fecing === null || $this->fecing === '') {
-			return null;
-		} elseif (!is_int($this->fecing)) {
-						$ts = strtotime($this->fecing);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
-			}
-		} else {
-			$ts = $this->fecing;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecing($format = 'Y-m-d')
+  {
 
-	
-	public function getDesing()
-	{
+    if ($this->fecing === null || $this->fecing === '') {
+      return null;
+    } elseif (!is_int($this->fecing)) {
+            $ts = adodb_strtotime($this->fecing);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
+      }
+    } else {
+      $ts = $this->fecing;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desing; 		
-	}
-	
-	public function getCodtip()
-	{
+  
+  public function getDesing()
+  {
 
-		return $this->codtip; 		
-	}
-	
-	public function getRifcon()
-	{
+    return trim($this->desing);
 
-		return $this->rifcon; 		
-	}
-	
-	public function getMoning()
-	{
+  }
+  
+  public function getCodtip()
+  {
 
-		return number_format($this->moning,2,',','.');
-		
-	}
-	
-	public function getMonrec()
-	{
+    return trim($this->codtip);
 
-		return number_format($this->monrec,2,',','.');
-		
-	}
-	
-	public function getMondes()
-	{
+  }
+  
+  public function getRifcon()
+  {
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    return trim($this->rifcon);
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getDesanu()
-	{
+  }
+  
+  public function getMoning($val=false)
+  {
 
-		return $this->desanu; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->moning,2,',','.');
+    else return $this->moning;
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMonrec($val=false)
+  {
 
-	
-	public function getStaing()
-	{
+    if($val) return number_format($this->monrec,2,',','.');
+    else return $this->monrec;
 
-		return $this->staing; 		
-	}
-	
-	public function getCtaban()
-	{
+  }
+  
+  public function getMondes($val=false)
+  {
 
-		return $this->ctaban; 		
-	}
-	
-	public function getTipmov()
-	{
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
 
-		return $this->tipmov; 		
-	}
-	
-	public function getPrevis()
-	{
+  }
+  
+  public function getMontot($val=false)
+  {
 
-		return $this->previs; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDesanu()
+  {
+
+    return trim($this->desanu);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getStaing()
+  {
+
+    return trim($this->staing);
+
+  }
+  
+  public function getCtaban()
+  {
+
+    return trim($this->ctaban);
+
+  }
+  
+  public function getTipmov()
+  {
+
+    return trim($this->tipmov);
+
+  }
+  
+  public function getPrevis()
+  {
+
+    return trim($this->previs);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefing($v)
 	{
 
-		if ($this->refing !== $v) {
-			$this->refing = $v;
-			$this->modifiedColumns[] = CiregingrPeer::REFING;
-		}
-
+    if ($this->refing !== $v) {
+        $this->refing = $v;
+        $this->modifiedColumns[] = CiregingrPeer::REFING;
+      }
+  
 	} 
 	
 	public function setFecing($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecing !== $ts) {
-			$this->fecing = $ts;
-			$this->modifiedColumns[] = CiregingrPeer::FECING;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecing !== $ts) {
+      $this->fecing = $ts;
+      $this->modifiedColumns[] = CiregingrPeer::FECING;
+    }
 
 	} 
 	
 	public function setDesing($v)
 	{
 
-		if ($this->desing !== $v) {
-			$this->desing = $v;
-			$this->modifiedColumns[] = CiregingrPeer::DESING;
-		}
-
+    if ($this->desing !== $v) {
+        $this->desing = $v;
+        $this->modifiedColumns[] = CiregingrPeer::DESING;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = CiregingrPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = CiregingrPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = CiregingrPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = CiregingrPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setMoning($v)
 	{
 
-		if ($this->moning !== $v) {
-			$this->moning = $v;
-			$this->modifiedColumns[] = CiregingrPeer::MONING;
-		}
-
+    if ($this->moning !== $v) {
+        $this->moning = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiregingrPeer::MONING;
+      }
+  
 	} 
 	
 	public function setMonrec($v)
 	{
 
-		if ($this->monrec !== $v) {
-			$this->monrec = $v;
-			$this->modifiedColumns[] = CiregingrPeer::MONREC;
-		}
-
+    if ($this->monrec !== $v) {
+        $this->monrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiregingrPeer::MONREC;
+      }
+  
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = CiregingrPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiregingrPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CiregingrPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiregingrPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setDesanu($v)
 	{
 
-		if ($this->desanu !== $v) {
-			$this->desanu = $v;
-			$this->modifiedColumns[] = CiregingrPeer::DESANU;
-		}
-
+    if ($this->desanu !== $v) {
+        $this->desanu = $v;
+        $this->modifiedColumns[] = CiregingrPeer::DESANU;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = CiregingrPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = CiregingrPeer::FECANU;
+    }
 
 	} 
 	
 	public function setStaing($v)
 	{
 
-		if ($this->staing !== $v) {
-			$this->staing = $v;
-			$this->modifiedColumns[] = CiregingrPeer::STAING;
-		}
-
+    if ($this->staing !== $v) {
+        $this->staing = $v;
+        $this->modifiedColumns[] = CiregingrPeer::STAING;
+      }
+  
 	} 
 	
 	public function setCtaban($v)
 	{
 
-		if ($this->ctaban !== $v) {
-			$this->ctaban = $v;
-			$this->modifiedColumns[] = CiregingrPeer::CTABAN;
-		}
-
+    if ($this->ctaban !== $v) {
+        $this->ctaban = $v;
+        $this->modifiedColumns[] = CiregingrPeer::CTABAN;
+      }
+  
 	} 
 	
 	public function setTipmov($v)
 	{
 
-		if ($this->tipmov !== $v) {
-			$this->tipmov = $v;
-			$this->modifiedColumns[] = CiregingrPeer::TIPMOV;
-		}
-
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = CiregingrPeer::TIPMOV;
+      }
+  
 	} 
 	
 	public function setPrevis($v)
 	{
 
-		if ($this->previs !== $v) {
-			$this->previs = $v;
-			$this->modifiedColumns[] = CiregingrPeer::PREVIS;
-		}
-
+    if ($this->previs !== $v) {
+        $this->previs = $v;
+        $this->modifiedColumns[] = CiregingrPeer::PREVIS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CiregingrPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CiregingrPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refing = $rs->getString($startcol + 0);
+      $this->refing = $rs->getString($startcol + 0);
 
-			$this->fecing = $rs->getDate($startcol + 1, null);
+      $this->fecing = $rs->getDate($startcol + 1, null);
 
-			$this->desing = $rs->getString($startcol + 2);
+      $this->desing = $rs->getString($startcol + 2);
 
-			$this->codtip = $rs->getString($startcol + 3);
+      $this->codtip = $rs->getString($startcol + 3);
 
-			$this->rifcon = $rs->getString($startcol + 4);
+      $this->rifcon = $rs->getString($startcol + 4);
 
-			$this->moning = $rs->getFloat($startcol + 5);
+      $this->moning = $rs->getFloat($startcol + 5);
 
-			$this->monrec = $rs->getFloat($startcol + 6);
+      $this->monrec = $rs->getFloat($startcol + 6);
 
-			$this->mondes = $rs->getFloat($startcol + 7);
+      $this->mondes = $rs->getFloat($startcol + 7);
 
-			$this->montot = $rs->getFloat($startcol + 8);
+      $this->montot = $rs->getFloat($startcol + 8);
 
-			$this->desanu = $rs->getString($startcol + 9);
+      $this->desanu = $rs->getString($startcol + 9);
 
-			$this->fecanu = $rs->getDate($startcol + 10, null);
+      $this->fecanu = $rs->getDate($startcol + 10, null);
 
-			$this->staing = $rs->getString($startcol + 11);
+      $this->staing = $rs->getString($startcol + 11);
 
-			$this->ctaban = $rs->getString($startcol + 12);
+      $this->ctaban = $rs->getString($startcol + 12);
 
-			$this->tipmov = $rs->getString($startcol + 13);
+      $this->tipmov = $rs->getString($startcol + 13);
 
-			$this->previs = $rs->getString($startcol + 14);
+      $this->previs = $rs->getString($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ciregingr object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ciregingr object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -485,6 +521,7 @@ abstract class BaseCiregingr extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CiregingrPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CiregingrPeer::doUpdate($this, $con);

@@ -205,6 +205,7 @@ abstract class BaseNpcatprehisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcatprehisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -4,19 +4,25 @@ generator:
     model_class:      Tsretiva
     theme:            default
     fields:
-      codret: { name: Codigo de Retencion}
-      codrec: { name: Codigo de Recargo}
-      codpar: { name: Codigo de Partida}
-      
+      codret: { name: Retención}
+      destip: { name: Descripción}
+      codrec: { name: Recargo}
+      nomrgo: { name: Descripción}
+      codpar: { name: Partida}
+
     list:
-      title:          Definicion del Iva para Agentes de Retencion
+      title:          Definición del Iva para Agentes de Retención
       filters:        [codret, codrec]
-      display:        [=codret, codrec, codpar]
+      display:        [=codret, destip, codrec, nomrgo]
+      sort:           codcon
+      max_per_page:   5
       object_actions:
         _edit:        ~
         _delete:      ~
-      
     edit:
-      title:          Edicion del Iva para Agentes de Retencion
-      display:        [=codret, codrec, codpar]
-    
+      title:          Definición del Iva para Agentes de Retención
+      display:        [=codret, destip, codrec, nomrgo, codpar]
+      actions:
+        _save:        ~
+        _list:        ~
+        _delete:      ~

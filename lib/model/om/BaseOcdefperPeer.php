@@ -13,7 +13,7 @@ abstract class BaseOcdefperPeer {
 	const CLASS_DEFAULT = 'lib.model.Ocdefper';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseOcdefperPeer {
 	const CODTIPPRO = 'ocdefper.CODTIPPRO';
 
 	
+	const CODTIPPER = 'ocdefper.CODTIPPER';
+
+	
 	const ID = 'ocdefper.ID';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseOcdefperPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Cedper', 'Nomper', 'Telper', 'Codtipcar', 'Codtippro', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OcdefperPeer::CEDPER, OcdefperPeer::NOMPER, OcdefperPeer::TELPER, OcdefperPeer::CODTIPCAR, OcdefperPeer::CODTIPPRO, OcdefperPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('cedper', 'nomper', 'telper', 'codtipcar', 'codtippro', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Cedper', 'Nomper', 'Telper', 'Codtipcar', 'Codtippro', 'Codtipper', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OcdefperPeer::CEDPER, OcdefperPeer::NOMPER, OcdefperPeer::TELPER, OcdefperPeer::CODTIPCAR, OcdefperPeer::CODTIPPRO, OcdefperPeer::CODTIPPER, OcdefperPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('cedper', 'nomper', 'telper', 'codtipcar', 'codtippro', 'codtipper', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Cedper' => 0, 'Nomper' => 1, 'Telper' => 2, 'Codtipcar' => 3, 'Codtippro' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (OcdefperPeer::CEDPER => 0, OcdefperPeer::NOMPER => 1, OcdefperPeer::TELPER => 2, OcdefperPeer::CODTIPCAR => 3, OcdefperPeer::CODTIPPRO => 4, OcdefperPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('cedper' => 0, 'nomper' => 1, 'telper' => 2, 'codtipcar' => 3, 'codtippro' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Cedper' => 0, 'Nomper' => 1, 'Telper' => 2, 'Codtipcar' => 3, 'Codtippro' => 4, 'Codtipper' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (OcdefperPeer::CEDPER => 0, OcdefperPeer::NOMPER => 1, OcdefperPeer::TELPER => 2, OcdefperPeer::CODTIPCAR => 3, OcdefperPeer::CODTIPPRO => 4, OcdefperPeer::CODTIPPER => 5, OcdefperPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('cedper' => 0, 'nomper' => 1, 'telper' => 2, 'codtipcar' => 3, 'codtippro' => 4, 'codtipper' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -117,6 +120,8 @@ abstract class BaseOcdefperPeer {
 		$criteria->addSelectColumn(OcdefperPeer::CODTIPCAR);
 
 		$criteria->addSelectColumn(OcdefperPeer::CODTIPPRO);
+
+		$criteria->addSelectColumn(OcdefperPeer::CODTIPPER);
 
 		$criteria->addSelectColumn(OcdefperPeer::ID);
 
@@ -220,6 +225,7 @@ abstract class BaseOcdefperPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcdefperPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

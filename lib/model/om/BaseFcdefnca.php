@@ -169,734 +169,795 @@ abstract class BaseFcdefnca extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpar()
-	{
+  
+  public function getCodpar()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getCodmun()
-	{
+    return trim($this->codpar);
 
-		return $this->codmun; 		
-	}
-	
-	public function getCodedo()
-	{
+  }
+  
+  public function getCodmun()
+  {
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodpai()
-	{
+    return trim($this->codmun);
 
-		return $this->codpai; 		
-	}
-	
-	public function getNumniv()
-	{
+  }
+  
+  public function getCodedo()
+  {
 
-		return number_format($this->numniv,2,',','.');
-		
-	}
-	
-	public function getNomext1()
-	{
+    return trim($this->codedo);
 
-		return $this->nomext1; 		
-	}
-	
-	public function getNomabr1()
-	{
+  }
+  
+  public function getCodpai()
+  {
 
-		return $this->nomabr1; 		
-	}
-	
-	public function getTamano1()
-	{
+    return trim($this->codpai);
 
-		return number_format($this->tamano1,2,',','.');
-		
-	}
-	
-	public function getNomext2()
-	{
+  }
+  
+  public function getNumniv($val=false)
+  {
 
-		return $this->nomext2; 		
-	}
-	
-	public function getNomabr2()
-	{
+    if($val) return number_format($this->numniv,2,',','.');
+    else return $this->numniv;
 
-		return $this->nomabr2; 		
-	}
-	
-	public function getTamano2()
-	{
+  }
+  
+  public function getNomext1()
+  {
 
-		return number_format($this->tamano2,2,',','.');
-		
-	}
-	
-	public function getNomext3()
-	{
+    return trim($this->nomext1);
 
-		return $this->nomext3; 		
-	}
-	
-	public function getNomabr3()
-	{
+  }
+  
+  public function getNomabr1()
+  {
 
-		return $this->nomabr3; 		
-	}
-	
-	public function getTamano3()
-	{
+    return trim($this->nomabr1);
 
-		return number_format($this->tamano3,2,',','.');
-		
-	}
-	
-	public function getNomext4()
-	{
+  }
+  
+  public function getTamano1($val=false)
+  {
 
-		return $this->nomext4; 		
-	}
-	
-	public function getNomabr4()
-	{
+    if($val) return number_format($this->tamano1,2,',','.');
+    else return $this->tamano1;
 
-		return $this->nomabr4; 		
-	}
-	
-	public function getTamano4()
-	{
+  }
+  
+  public function getNomext2()
+  {
 
-		return number_format($this->tamano4,2,',','.');
-		
-	}
-	
-	public function getNomext5()
-	{
+    return trim($this->nomext2);
 
-		return $this->nomext5; 		
-	}
-	
-	public function getNomabr5()
-	{
+  }
+  
+  public function getNomabr2()
+  {
 
-		return $this->nomabr5; 		
-	}
-	
-	public function getTamano5()
-	{
+    return trim($this->nomabr2);
 
-		return number_format($this->tamano5,2,',','.');
-		
-	}
-	
-	public function getNomext6()
-	{
+  }
+  
+  public function getTamano2($val=false)
+  {
 
-		return $this->nomext6; 		
-	}
-	
-	public function getNomabr6()
-	{
+    if($val) return number_format($this->tamano2,2,',','.');
+    else return $this->tamano2;
 
-		return $this->nomabr6; 		
-	}
-	
-	public function getTamano6()
-	{
+  }
+  
+  public function getNomext3()
+  {
 
-		return number_format($this->tamano6,2,',','.');
-		
-	}
-	
-	public function getNomext7()
-	{
+    return trim($this->nomext3);
 
-		return $this->nomext7; 		
-	}
-	
-	public function getNomabr7()
-	{
+  }
+  
+  public function getNomabr3()
+  {
 
-		return $this->nomabr7; 		
-	}
-	
-	public function getTamano7()
-	{
+    return trim($this->nomabr3);
 
-		return number_format($this->tamano7,2,',','.');
-		
-	}
-	
-	public function getNomext8()
-	{
+  }
+  
+  public function getTamano3($val=false)
+  {
 
-		return $this->nomext8; 		
-	}
-	
-	public function getNomabr8()
-	{
+    if($val) return number_format($this->tamano3,2,',','.');
+    else return $this->tamano3;
 
-		return $this->nomabr8; 		
-	}
-	
-	public function getTamano8()
-	{
+  }
+  
+  public function getNomext4()
+  {
 
-		return number_format($this->tamano8,2,',','.');
-		
-	}
-	
-	public function getNomext9()
-	{
+    return trim($this->nomext4);
 
-		return $this->nomext9; 		
-	}
-	
-	public function getNomabr9()
-	{
+  }
+  
+  public function getNomabr4()
+  {
 
-		return $this->nomabr9; 		
-	}
-	
-	public function getTamano9()
-	{
+    return trim($this->nomabr4);
 
-		return number_format($this->tamano9,2,',','.');
-		
-	}
-	
-	public function getNomext10()
-	{
+  }
+  
+  public function getTamano4($val=false)
+  {
 
-		return $this->nomext10; 		
-	}
-	
-	public function getNomabr10()
-	{
+    if($val) return number_format($this->tamano4,2,',','.');
+    else return $this->tamano4;
 
-		return $this->nomabr10; 		
-	}
-	
-	public function getTamano10()
-	{
+  }
+  
+  public function getNomext5()
+  {
 
-		return number_format($this->tamano10,2,',','.');
-		
-	}
-	
-	public function getNivinm()
-	{
+    return trim($this->nomext5);
 
-		return $this->nivinm; 		
-	}
-	
-	public function getNumper()
-	{
+  }
+  
+  public function getNomabr5()
+  {
 
-		return number_format($this->numper,2,',','.');
-		
-	}
-	
-	public function getDenumper()
-	{
+    return trim($this->nomabr5);
 
-		return $this->denumper; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTamano5($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->tamano5,2,',','.');
+    else return $this->tamano5;
+
+  }
+  
+  public function getNomext6()
+  {
+
+    return trim($this->nomext6);
+
+  }
+  
+  public function getNomabr6()
+  {
+
+    return trim($this->nomabr6);
+
+  }
+  
+  public function getTamano6($val=false)
+  {
+
+    if($val) return number_format($this->tamano6,2,',','.');
+    else return $this->tamano6;
+
+  }
+  
+  public function getNomext7()
+  {
+
+    return trim($this->nomext7);
+
+  }
+  
+  public function getNomabr7()
+  {
+
+    return trim($this->nomabr7);
+
+  }
+  
+  public function getTamano7($val=false)
+  {
+
+    if($val) return number_format($this->tamano7,2,',','.');
+    else return $this->tamano7;
+
+  }
+  
+  public function getNomext8()
+  {
+
+    return trim($this->nomext8);
+
+  }
+  
+  public function getNomabr8()
+  {
+
+    return trim($this->nomabr8);
+
+  }
+  
+  public function getTamano8($val=false)
+  {
+
+    if($val) return number_format($this->tamano8,2,',','.');
+    else return $this->tamano8;
+
+  }
+  
+  public function getNomext9()
+  {
+
+    return trim($this->nomext9);
+
+  }
+  
+  public function getNomabr9()
+  {
+
+    return trim($this->nomabr9);
+
+  }
+  
+  public function getTamano9($val=false)
+  {
+
+    if($val) return number_format($this->tamano9,2,',','.');
+    else return $this->tamano9;
+
+  }
+  
+  public function getNomext10()
+  {
+
+    return trim($this->nomext10);
+
+  }
+  
+  public function getNomabr10()
+  {
+
+    return trim($this->nomabr10);
+
+  }
+  
+  public function getTamano10($val=false)
+  {
+
+    if($val) return number_format($this->tamano10,2,',','.');
+    else return $this->tamano10;
+
+  }
+  
+  public function getNivinm()
+  {
+
+    return trim($this->nivinm);
+
+  }
+  
+  public function getNumper($val=false)
+  {
+
+    if($val) return number_format($this->numper,2,',','.');
+    else return $this->numper;
+
+  }
+  
+  public function getDenumper()
+  {
+
+    return trim($this->denumper);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setNumniv($v)
 	{
 
-		if ($this->numniv !== $v) {
-			$this->numniv = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NUMNIV;
-		}
-
+    if ($this->numniv !== $v) {
+        $this->numniv = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::NUMNIV;
+      }
+  
 	} 
 	
 	public function setNomext1($v)
 	{
 
-		if ($this->nomext1 !== $v) {
-			$this->nomext1 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT1;
-		}
-
+    if ($this->nomext1 !== $v) {
+        $this->nomext1 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT1;
+      }
+  
 	} 
 	
 	public function setNomabr1($v)
 	{
 
-		if ($this->nomabr1 !== $v) {
-			$this->nomabr1 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR1;
-		}
-
+    if ($this->nomabr1 !== $v) {
+        $this->nomabr1 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR1;
+      }
+  
 	} 
 	
 	public function setTamano1($v)
 	{
 
-		if ($this->tamano1 !== $v) {
-			$this->tamano1 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO1;
-		}
-
+    if ($this->tamano1 !== $v) {
+        $this->tamano1 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO1;
+      }
+  
 	} 
 	
 	public function setNomext2($v)
 	{
 
-		if ($this->nomext2 !== $v) {
-			$this->nomext2 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT2;
-		}
-
+    if ($this->nomext2 !== $v) {
+        $this->nomext2 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT2;
+      }
+  
 	} 
 	
 	public function setNomabr2($v)
 	{
 
-		if ($this->nomabr2 !== $v) {
-			$this->nomabr2 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR2;
-		}
-
+    if ($this->nomabr2 !== $v) {
+        $this->nomabr2 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR2;
+      }
+  
 	} 
 	
 	public function setTamano2($v)
 	{
 
-		if ($this->tamano2 !== $v) {
-			$this->tamano2 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO2;
-		}
-
+    if ($this->tamano2 !== $v) {
+        $this->tamano2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO2;
+      }
+  
 	} 
 	
 	public function setNomext3($v)
 	{
 
-		if ($this->nomext3 !== $v) {
-			$this->nomext3 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT3;
-		}
-
+    if ($this->nomext3 !== $v) {
+        $this->nomext3 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT3;
+      }
+  
 	} 
 	
 	public function setNomabr3($v)
 	{
 
-		if ($this->nomabr3 !== $v) {
-			$this->nomabr3 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR3;
-		}
-
+    if ($this->nomabr3 !== $v) {
+        $this->nomabr3 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR3;
+      }
+  
 	} 
 	
 	public function setTamano3($v)
 	{
 
-		if ($this->tamano3 !== $v) {
-			$this->tamano3 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO3;
-		}
-
+    if ($this->tamano3 !== $v) {
+        $this->tamano3 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO3;
+      }
+  
 	} 
 	
 	public function setNomext4($v)
 	{
 
-		if ($this->nomext4 !== $v) {
-			$this->nomext4 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT4;
-		}
-
+    if ($this->nomext4 !== $v) {
+        $this->nomext4 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT4;
+      }
+  
 	} 
 	
 	public function setNomabr4($v)
 	{
 
-		if ($this->nomabr4 !== $v) {
-			$this->nomabr4 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR4;
-		}
-
+    if ($this->nomabr4 !== $v) {
+        $this->nomabr4 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR4;
+      }
+  
 	} 
 	
 	public function setTamano4($v)
 	{
 
-		if ($this->tamano4 !== $v) {
-			$this->tamano4 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO4;
-		}
-
+    if ($this->tamano4 !== $v) {
+        $this->tamano4 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO4;
+      }
+  
 	} 
 	
 	public function setNomext5($v)
 	{
 
-		if ($this->nomext5 !== $v) {
-			$this->nomext5 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT5;
-		}
-
+    if ($this->nomext5 !== $v) {
+        $this->nomext5 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT5;
+      }
+  
 	} 
 	
 	public function setNomabr5($v)
 	{
 
-		if ($this->nomabr5 !== $v) {
-			$this->nomabr5 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR5;
-		}
-
+    if ($this->nomabr5 !== $v) {
+        $this->nomabr5 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR5;
+      }
+  
 	} 
 	
 	public function setTamano5($v)
 	{
 
-		if ($this->tamano5 !== $v) {
-			$this->tamano5 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO5;
-		}
-
+    if ($this->tamano5 !== $v) {
+        $this->tamano5 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO5;
+      }
+  
 	} 
 	
 	public function setNomext6($v)
 	{
 
-		if ($this->nomext6 !== $v) {
-			$this->nomext6 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT6;
-		}
-
+    if ($this->nomext6 !== $v) {
+        $this->nomext6 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT6;
+      }
+  
 	} 
 	
 	public function setNomabr6($v)
 	{
 
-		if ($this->nomabr6 !== $v) {
-			$this->nomabr6 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR6;
-		}
-
+    if ($this->nomabr6 !== $v) {
+        $this->nomabr6 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR6;
+      }
+  
 	} 
 	
 	public function setTamano6($v)
 	{
 
-		if ($this->tamano6 !== $v) {
-			$this->tamano6 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO6;
-		}
-
+    if ($this->tamano6 !== $v) {
+        $this->tamano6 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO6;
+      }
+  
 	} 
 	
 	public function setNomext7($v)
 	{
 
-		if ($this->nomext7 !== $v) {
-			$this->nomext7 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT7;
-		}
-
+    if ($this->nomext7 !== $v) {
+        $this->nomext7 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT7;
+      }
+  
 	} 
 	
 	public function setNomabr7($v)
 	{
 
-		if ($this->nomabr7 !== $v) {
-			$this->nomabr7 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR7;
-		}
-
+    if ($this->nomabr7 !== $v) {
+        $this->nomabr7 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR7;
+      }
+  
 	} 
 	
 	public function setTamano7($v)
 	{
 
-		if ($this->tamano7 !== $v) {
-			$this->tamano7 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO7;
-		}
-
+    if ($this->tamano7 !== $v) {
+        $this->tamano7 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO7;
+      }
+  
 	} 
 	
 	public function setNomext8($v)
 	{
 
-		if ($this->nomext8 !== $v) {
-			$this->nomext8 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT8;
-		}
-
+    if ($this->nomext8 !== $v) {
+        $this->nomext8 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT8;
+      }
+  
 	} 
 	
 	public function setNomabr8($v)
 	{
 
-		if ($this->nomabr8 !== $v) {
-			$this->nomabr8 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR8;
-		}
-
+    if ($this->nomabr8 !== $v) {
+        $this->nomabr8 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR8;
+      }
+  
 	} 
 	
 	public function setTamano8($v)
 	{
 
-		if ($this->tamano8 !== $v) {
-			$this->tamano8 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO8;
-		}
-
+    if ($this->tamano8 !== $v) {
+        $this->tamano8 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO8;
+      }
+  
 	} 
 	
 	public function setNomext9($v)
 	{
 
-		if ($this->nomext9 !== $v) {
-			$this->nomext9 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT9;
-		}
-
+    if ($this->nomext9 !== $v) {
+        $this->nomext9 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT9;
+      }
+  
 	} 
 	
 	public function setNomabr9($v)
 	{
 
-		if ($this->nomabr9 !== $v) {
-			$this->nomabr9 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR9;
-		}
-
+    if ($this->nomabr9 !== $v) {
+        $this->nomabr9 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR9;
+      }
+  
 	} 
 	
 	public function setTamano9($v)
 	{
 
-		if ($this->tamano9 !== $v) {
-			$this->tamano9 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO9;
-		}
-
+    if ($this->tamano9 !== $v) {
+        $this->tamano9 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO9;
+      }
+  
 	} 
 	
 	public function setNomext10($v)
 	{
 
-		if ($this->nomext10 !== $v) {
-			$this->nomext10 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMEXT10;
-		}
-
+    if ($this->nomext10 !== $v) {
+        $this->nomext10 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMEXT10;
+      }
+  
 	} 
 	
 	public function setNomabr10($v)
 	{
 
-		if ($this->nomabr10 !== $v) {
-			$this->nomabr10 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NOMABR10;
-		}
-
+    if ($this->nomabr10 !== $v) {
+        $this->nomabr10 = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NOMABR10;
+      }
+  
 	} 
 	
 	public function setTamano10($v)
 	{
 
-		if ($this->tamano10 !== $v) {
-			$this->tamano10 = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::TAMANO10;
-		}
-
+    if ($this->tamano10 !== $v) {
+        $this->tamano10 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::TAMANO10;
+      }
+  
 	} 
 	
 	public function setNivinm($v)
 	{
 
-		if ($this->nivinm !== $v) {
-			$this->nivinm = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NIVINM;
-		}
-
+    if ($this->nivinm !== $v) {
+        $this->nivinm = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::NIVINM;
+      }
+  
 	} 
 	
 	public function setNumper($v)
 	{
 
-		if ($this->numper !== $v) {
-			$this->numper = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::NUMPER;
-		}
-
+    if ($this->numper !== $v) {
+        $this->numper = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefncaPeer::NUMPER;
+      }
+  
 	} 
 	
 	public function setDenumper($v)
 	{
 
-		if ($this->denumper !== $v) {
-			$this->denumper = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::DENUMPER;
-		}
-
+    if ($this->denumper !== $v) {
+        $this->denumper = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::DENUMPER;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdefncaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdefncaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpar = $rs->getString($startcol + 0);
+      $this->codpar = $rs->getString($startcol + 0);
 
-			$this->codmun = $rs->getString($startcol + 1);
+      $this->codmun = $rs->getString($startcol + 1);
 
-			$this->codedo = $rs->getString($startcol + 2);
+      $this->codedo = $rs->getString($startcol + 2);
 
-			$this->codpai = $rs->getString($startcol + 3);
+      $this->codpai = $rs->getString($startcol + 3);
 
-			$this->numniv = $rs->getFloat($startcol + 4);
+      $this->numniv = $rs->getFloat($startcol + 4);
 
-			$this->nomext1 = $rs->getString($startcol + 5);
+      $this->nomext1 = $rs->getString($startcol + 5);
 
-			$this->nomabr1 = $rs->getString($startcol + 6);
+      $this->nomabr1 = $rs->getString($startcol + 6);
 
-			$this->tamano1 = $rs->getFloat($startcol + 7);
+      $this->tamano1 = $rs->getFloat($startcol + 7);
 
-			$this->nomext2 = $rs->getString($startcol + 8);
+      $this->nomext2 = $rs->getString($startcol + 8);
 
-			$this->nomabr2 = $rs->getString($startcol + 9);
+      $this->nomabr2 = $rs->getString($startcol + 9);
 
-			$this->tamano2 = $rs->getFloat($startcol + 10);
+      $this->tamano2 = $rs->getFloat($startcol + 10);
 
-			$this->nomext3 = $rs->getString($startcol + 11);
+      $this->nomext3 = $rs->getString($startcol + 11);
 
-			$this->nomabr3 = $rs->getString($startcol + 12);
+      $this->nomabr3 = $rs->getString($startcol + 12);
 
-			$this->tamano3 = $rs->getFloat($startcol + 13);
+      $this->tamano3 = $rs->getFloat($startcol + 13);
 
-			$this->nomext4 = $rs->getString($startcol + 14);
+      $this->nomext4 = $rs->getString($startcol + 14);
 
-			$this->nomabr4 = $rs->getString($startcol + 15);
+      $this->nomabr4 = $rs->getString($startcol + 15);
 
-			$this->tamano4 = $rs->getFloat($startcol + 16);
+      $this->tamano4 = $rs->getFloat($startcol + 16);
 
-			$this->nomext5 = $rs->getString($startcol + 17);
+      $this->nomext5 = $rs->getString($startcol + 17);
 
-			$this->nomabr5 = $rs->getString($startcol + 18);
+      $this->nomabr5 = $rs->getString($startcol + 18);
 
-			$this->tamano5 = $rs->getFloat($startcol + 19);
+      $this->tamano5 = $rs->getFloat($startcol + 19);
 
-			$this->nomext6 = $rs->getString($startcol + 20);
+      $this->nomext6 = $rs->getString($startcol + 20);
 
-			$this->nomabr6 = $rs->getString($startcol + 21);
+      $this->nomabr6 = $rs->getString($startcol + 21);
 
-			$this->tamano6 = $rs->getFloat($startcol + 22);
+      $this->tamano6 = $rs->getFloat($startcol + 22);
 
-			$this->nomext7 = $rs->getString($startcol + 23);
+      $this->nomext7 = $rs->getString($startcol + 23);
 
-			$this->nomabr7 = $rs->getString($startcol + 24);
+      $this->nomabr7 = $rs->getString($startcol + 24);
 
-			$this->tamano7 = $rs->getFloat($startcol + 25);
+      $this->tamano7 = $rs->getFloat($startcol + 25);
 
-			$this->nomext8 = $rs->getString($startcol + 26);
+      $this->nomext8 = $rs->getString($startcol + 26);
 
-			$this->nomabr8 = $rs->getString($startcol + 27);
+      $this->nomabr8 = $rs->getString($startcol + 27);
 
-			$this->tamano8 = $rs->getFloat($startcol + 28);
+      $this->tamano8 = $rs->getFloat($startcol + 28);
 
-			$this->nomext9 = $rs->getString($startcol + 29);
+      $this->nomext9 = $rs->getString($startcol + 29);
 
-			$this->nomabr9 = $rs->getString($startcol + 30);
+      $this->nomabr9 = $rs->getString($startcol + 30);
 
-			$this->tamano9 = $rs->getFloat($startcol + 31);
+      $this->tamano9 = $rs->getFloat($startcol + 31);
 
-			$this->nomext10 = $rs->getString($startcol + 32);
+      $this->nomext10 = $rs->getString($startcol + 32);
 
-			$this->nomabr10 = $rs->getString($startcol + 33);
+      $this->nomabr10 = $rs->getString($startcol + 33);
 
-			$this->tamano10 = $rs->getFloat($startcol + 34);
+      $this->tamano10 = $rs->getFloat($startcol + 34);
 
-			$this->nivinm = $rs->getString($startcol + 35);
+      $this->nivinm = $rs->getString($startcol + 35);
 
-			$this->numper = $rs->getFloat($startcol + 36);
+      $this->numper = $rs->getFloat($startcol + 36);
 
-			$this->denumper = $rs->getString($startcol + 37);
+      $this->denumper = $rs->getString($startcol + 37);
 
-			$this->id = $rs->getInt($startcol + 38);
+      $this->id = $rs->getInt($startcol + 38);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 39; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdefnca object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 39; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdefnca object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -953,6 +1014,7 @@ abstract class BaseFcdefnca extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdefncaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdefncaPeer::doUpdate($this, $con);

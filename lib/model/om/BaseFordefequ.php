@@ -29,92 +29,118 @@ abstract class BaseFordefequ extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodequ()
-	{
+  
+  public function getCodequ()
+  {
 
-		return $this->codequ; 		
-	}
-	
-	public function getDesequ()
-	{
+    return trim($this->codequ);
 
-		return $this->desequ; 		
-	}
-	
-	public function getDesobj()
-	{
+  }
+  
+  public function getDesequ()
+  {
 
-		return $this->desobj; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desequ);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDesobj()
+  {
+
+    return trim($this->desobj);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodequ($v)
 	{
 
-		if ($this->codequ !== $v) {
-			$this->codequ = $v;
-			$this->modifiedColumns[] = FordefequPeer::CODEQU;
-		}
-
+    if ($this->codequ !== $v) {
+        $this->codequ = $v;
+        $this->modifiedColumns[] = FordefequPeer::CODEQU;
+      }
+  
 	} 
 	
 	public function setDesequ($v)
 	{
 
-		if ($this->desequ !== $v) {
-			$this->desequ = $v;
-			$this->modifiedColumns[] = FordefequPeer::DESEQU;
-		}
-
+    if ($this->desequ !== $v) {
+        $this->desequ = $v;
+        $this->modifiedColumns[] = FordefequPeer::DESEQU;
+      }
+  
 	} 
 	
 	public function setDesobj($v)
 	{
 
-		if ($this->desobj !== $v) {
-			$this->desobj = $v;
-			$this->modifiedColumns[] = FordefequPeer::DESOBJ;
-		}
-
+    if ($this->desobj !== $v) {
+        $this->desobj = $v;
+        $this->modifiedColumns[] = FordefequPeer::DESOBJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefequPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefequPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codequ = $rs->getString($startcol + 0);
+      $this->codequ = $rs->getString($startcol + 0);
 
-			$this->desequ = $rs->getString($startcol + 1);
+      $this->desequ = $rs->getString($startcol + 1);
 
-			$this->desobj = $rs->getString($startcol + 2);
+      $this->desobj = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefequ object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefequ object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseFordefequ extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefequPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefequPeer::doUpdate($this, $con);

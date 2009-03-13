@@ -61,246 +61,280 @@ abstract class BaseCpdisniv extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpre()
-	{
+  
+  public function getCodpre()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonasi()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->monasi,2,',','.');
-		
-	}
-	
-	public function getModificacion()
-	{
+  }
+  
+  public function getMonasi($val=false)
+  {
 
-		return number_format($this->modificacion,2,',','.');
-		
-	}
-	
-	public function getAsigactual()
-	{
+    if($val) return number_format($this->monasi,2,',','.');
+    else return $this->monasi;
 
-		return number_format($this->asigactual,2,',','.');
-		
-	}
-	
-	public function getMonprc()
-	{
+  }
+  
+  public function getModificacion($val=false)
+  {
 
-		return number_format($this->monprc,2,',','.');
-		
-	}
-	
-	public function getMoncom()
-	{
+    if($val) return number_format($this->modificacion,2,',','.');
+    else return $this->modificacion;
 
-		return number_format($this->moncom,2,',','.');
-		
-	}
-	
-	public function getMoncau()
-	{
+  }
+  
+  public function getAsigactual($val=false)
+  {
 
-		return number_format($this->moncau,2,',','.');
-		
-	}
-	
-	public function getMonpag()
-	{
+    if($val) return number_format($this->asigactual,2,',','.');
+    else return $this->asigactual;
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMonaju()
-	{
+  }
+  
+  public function getMonprc($val=false)
+  {
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getMondis()
-	{
+    if($val) return number_format($this->monprc,2,',','.');
+    else return $this->monprc;
 
-		return number_format($this->mondis,2,',','.');
-		
-	}
-	
-	public function getDeuda()
-	{
+  }
+  
+  public function getMoncom($val=false)
+  {
 
-		return number_format($this->deuda,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->moncom,2,',','.');
+    else return $this->moncom;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMoncau($val=false)
+  {
+
+    if($val) return number_format($this->moncau,2,',','.');
+    else return $this->moncau;
+
+  }
+  
+  public function getMonpag($val=false)
+  {
+
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getMonaju($val=false)
+  {
+
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getMondis($val=false)
+  {
+
+    if($val) return number_format($this->mondis,2,',','.');
+    else return $this->mondis;
+
+  }
+  
+  public function getDeuda($val=false)
+  {
+
+    if($val) return number_format($this->deuda,2,',','.');
+    else return $this->deuda;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpdisnivPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonasi($v)
 	{
 
-		if ($this->monasi !== $v) {
-			$this->monasi = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::MONASI;
-		}
-
+    if ($this->monasi !== $v) {
+        $this->monasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::MONASI;
+      }
+  
 	} 
 	
 	public function setModificacion($v)
 	{
 
-		if ($this->modificacion !== $v) {
-			$this->modificacion = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::MODIFICACION;
-		}
-
+    if ($this->modificacion !== $v) {
+        $this->modificacion = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::MODIFICACION;
+      }
+  
 	} 
 	
 	public function setAsigactual($v)
 	{
 
-		if ($this->asigactual !== $v) {
-			$this->asigactual = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::ASIGACTUAL;
-		}
-
+    if ($this->asigactual !== $v) {
+        $this->asigactual = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::ASIGACTUAL;
+      }
+  
 	} 
 	
 	public function setMonprc($v)
 	{
 
-		if ($this->monprc !== $v) {
-			$this->monprc = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::MONPRC;
-		}
-
+    if ($this->monprc !== $v) {
+        $this->monprc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::MONPRC;
+      }
+  
 	} 
 	
 	public function setMoncom($v)
 	{
 
-		if ($this->moncom !== $v) {
-			$this->moncom = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::MONCOM;
-		}
-
+    if ($this->moncom !== $v) {
+        $this->moncom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::MONCOM;
+      }
+  
 	} 
 	
 	public function setMoncau($v)
 	{
 
-		if ($this->moncau !== $v) {
-			$this->moncau = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::MONCAU;
-		}
-
+    if ($this->moncau !== $v) {
+        $this->moncau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::MONCAU;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setMondis($v)
 	{
 
-		if ($this->mondis !== $v) {
-			$this->mondis = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::MONDIS;
-		}
-
+    if ($this->mondis !== $v) {
+        $this->mondis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::MONDIS;
+      }
+  
 	} 
 	
 	public function setDeuda($v)
 	{
 
-		if ($this->deuda !== $v) {
-			$this->deuda = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::DEUDA;
-		}
-
+    if ($this->deuda !== $v) {
+        $this->deuda = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisnivPeer::DEUDA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpdisnivPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpdisnivPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpre = $rs->getString($startcol + 0);
+      $this->codpre = $rs->getString($startcol + 0);
 
-			$this->monasi = $rs->getFloat($startcol + 1);
+      $this->monasi = $rs->getFloat($startcol + 1);
 
-			$this->modificacion = $rs->getFloat($startcol + 2);
+      $this->modificacion = $rs->getFloat($startcol + 2);
 
-			$this->asigactual = $rs->getFloat($startcol + 3);
+      $this->asigactual = $rs->getFloat($startcol + 3);
 
-			$this->monprc = $rs->getFloat($startcol + 4);
+      $this->monprc = $rs->getFloat($startcol + 4);
 
-			$this->moncom = $rs->getFloat($startcol + 5);
+      $this->moncom = $rs->getFloat($startcol + 5);
 
-			$this->moncau = $rs->getFloat($startcol + 6);
+      $this->moncau = $rs->getFloat($startcol + 6);
 
-			$this->monpag = $rs->getFloat($startcol + 7);
+      $this->monpag = $rs->getFloat($startcol + 7);
 
-			$this->monaju = $rs->getFloat($startcol + 8);
+      $this->monaju = $rs->getFloat($startcol + 8);
 
-			$this->mondis = $rs->getFloat($startcol + 9);
+      $this->mondis = $rs->getFloat($startcol + 9);
 
-			$this->deuda = $rs->getFloat($startcol + 10);
+      $this->deuda = $rs->getFloat($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpdisniv object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpdisniv object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -205,6 +205,7 @@ abstract class BaseOctipprlPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OctipprlPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

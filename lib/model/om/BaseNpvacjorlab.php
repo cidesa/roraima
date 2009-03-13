@@ -53,200 +53,232 @@ abstract class BaseNpvacjorlab extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getLunes()
-	{
+    return trim($this->codnom);
 
-		return $this->lunes; 		
-	}
-	
-	public function getMartes()
-	{
+  }
+  
+  public function getLunes()
+  {
 
-		return $this->martes; 		
-	}
-	
-	public function getMiercoles()
-	{
+    return trim($this->lunes);
 
-		return $this->miercoles; 		
-	}
-	
-	public function getJueves()
-	{
+  }
+  
+  public function getMartes()
+  {
 
-		return $this->jueves; 		
-	}
-	
-	public function getViernes()
-	{
+    return trim($this->martes);
 
-		return $this->viernes; 		
-	}
-	
-	public function getSabado()
-	{
+  }
+  
+  public function getMiercoles()
+  {
 
-		return $this->sabado; 		
-	}
-	
-	public function getDomingo()
-	{
+    return trim($this->miercoles);
 
-		return $this->domingo; 		
-	}
-	
-	public function getCodcar()
-	{
+  }
+  
+  public function getJueves()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->jueves);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getViernes()
+  {
+
+    return trim($this->viernes);
+
+  }
+  
+  public function getSabado()
+  {
+
+    return trim($this->sabado);
+
+  }
+  
+  public function getDomingo()
+  {
+
+    return trim($this->domingo);
+
+  }
+  
+  public function getCodcar()
+  {
+
+    return trim($this->codcar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setLunes($v)
 	{
 
-		if ($this->lunes !== $v) {
-			$this->lunes = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::LUNES;
-		}
-
+    if ($this->lunes !== $v) {
+        $this->lunes = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::LUNES;
+      }
+  
 	} 
 	
 	public function setMartes($v)
 	{
 
-		if ($this->martes !== $v) {
-			$this->martes = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::MARTES;
-		}
-
+    if ($this->martes !== $v) {
+        $this->martes = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::MARTES;
+      }
+  
 	} 
 	
 	public function setMiercoles($v)
 	{
 
-		if ($this->miercoles !== $v) {
-			$this->miercoles = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::MIERCOLES;
-		}
-
+    if ($this->miercoles !== $v) {
+        $this->miercoles = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::MIERCOLES;
+      }
+  
 	} 
 	
 	public function setJueves($v)
 	{
 
-		if ($this->jueves !== $v) {
-			$this->jueves = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::JUEVES;
-		}
-
+    if ($this->jueves !== $v) {
+        $this->jueves = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::JUEVES;
+      }
+  
 	} 
 	
 	public function setViernes($v)
 	{
 
-		if ($this->viernes !== $v) {
-			$this->viernes = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::VIERNES;
-		}
-
+    if ($this->viernes !== $v) {
+        $this->viernes = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::VIERNES;
+      }
+  
 	} 
 	
 	public function setSabado($v)
 	{
 
-		if ($this->sabado !== $v) {
-			$this->sabado = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::SABADO;
-		}
-
+    if ($this->sabado !== $v) {
+        $this->sabado = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::SABADO;
+      }
+  
 	} 
 	
 	public function setDomingo($v)
 	{
 
-		if ($this->domingo !== $v) {
-			$this->domingo = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::DOMINGO;
-		}
-
+    if ($this->domingo !== $v) {
+        $this->domingo = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::DOMINGO;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacjorlabPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacjorlabPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->lunes = $rs->getString($startcol + 1);
+      $this->lunes = $rs->getString($startcol + 1);
 
-			$this->martes = $rs->getString($startcol + 2);
+      $this->martes = $rs->getString($startcol + 2);
 
-			$this->miercoles = $rs->getString($startcol + 3);
+      $this->miercoles = $rs->getString($startcol + 3);
 
-			$this->jueves = $rs->getString($startcol + 4);
+      $this->jueves = $rs->getString($startcol + 4);
 
-			$this->viernes = $rs->getString($startcol + 5);
+      $this->viernes = $rs->getString($startcol + 5);
 
-			$this->sabado = $rs->getString($startcol + 6);
+      $this->sabado = $rs->getString($startcol + 6);
 
-			$this->domingo = $rs->getString($startcol + 7);
+      $this->domingo = $rs->getString($startcol + 7);
 
-			$this->codcar = $rs->getString($startcol + 8);
+      $this->codcar = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacjorlab object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacjorlab object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -303,6 +335,7 @@ abstract class BaseNpvacjorlab extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacjorlabPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacjorlabPeer::doUpdate($this, $con);

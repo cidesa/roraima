@@ -210,6 +210,7 @@ abstract class BaseOcproequPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcproequPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

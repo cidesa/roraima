@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('nomjorlablot/edit_messages', array('npdefjorlab' => $npdefjorlab, 'labels' => $labels)) ?>
-<?php include_partial('nomjorlablot/edit_form', array('npdefjorlab' => $npdefjorlab, 'labels' => $labels, 'pagerNphojint' => $pagerNphojint)) ?>
+<?php include_partial('nomjorlablot/edit_form', array('npdefjorlab' => $npdefjorlab, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

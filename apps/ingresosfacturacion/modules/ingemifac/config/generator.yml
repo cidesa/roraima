@@ -1,0 +1,50 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Infactura
+    theme:            cidesaGenerator
+    fields:
+      numfac:      { name: No. Factura, params: size=10 }
+      tipper:      { name: Tipo de Persona, params: size=10 }
+      inempresa_id:      { name: R.I.F/Razón Social }
+      tipemp:      { name: Tipo }
+      telemp:      { name: Teléfono }
+      inprofes_id:     { name: Cédula/Nombre }
+      especi: { name: Especialidad }
+      telhab:      { name: Teléfono }
+      tipconc:     { name: Concepto }
+      inmulta_id:  { name: Multa }
+      iningprof_id:   { name: Ingresos por Profesionales}
+      moncan:      { name: Monto Cancelado, params: size=15 }
+      numdep:      { name: Número de Depósito, params: size=50 }
+      indefban_id:       { name: Banco }
+      fecemi:       { name: Fecha de Emisión }
+      impfac:       { name: Imprimir Factura}
+
+
+
+    list:
+      title:          Emisión de Factura
+      fields:
+        infactura_tipper: { name: Tipo de Persona }
+      display:        [=numfac, tipper, cedrif]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [numfac]
+      max_per_page:   5
+      sort: numfac
+    edit:
+      title:          Edición de Factura
+      display:
+        Selecione el Tipo de Persona: [_tipper]
+        Datos Profesional: [_inprofes_id, especi, telhab]
+        Datos Empresa:     [_inempresa_id, tipemp, telemp]
+        Detalle Factura: [_numfac, _fecemi, _tipconc, _inmulta_id, _iningprof_id, _moncan, _numdep, _indefban_id, _impfac]
+
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

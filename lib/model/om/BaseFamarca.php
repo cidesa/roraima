@@ -9,10 +9,6 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 
 
 	
-	protected $codmar;
-
-
-	
 	protected $nommar;
 
 
@@ -25,74 +21,80 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmar()
-	{
+  
+  public function getNommar()
+  {
 
-		return $this->codmar; 		
-	}
-	
-	public function getNommar()
-	{
+    return trim($this->nommar);
 
-		return $this->nommar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getId()
+  {
 
-		return $this->id; 		
-	}
-	
-	public function setCodmar($v)
-	{
+    return $this->id;
 
-		if ($this->codmar !== $v) {
-			$this->codmar = $v;
-			$this->modifiedColumns[] = FamarcaPeer::CODMAR;
-		}
-
-	} 
+  }
 	
 	public function setNommar($v)
 	{
 
-		if ($this->nommar !== $v) {
-			$this->nommar = $v;
-			$this->modifiedColumns[] = FamarcaPeer::NOMMAR;
-		}
-
+    if ($this->nommar !== $v) {
+        $this->nommar = $v;
+        $this->modifiedColumns[] = FamarcaPeer::NOMMAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FamarcaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FamarcaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmar = $rs->getString($startcol + 0);
+      $this->nommar = $rs->getString($startcol + 0);
 
-			$this->nommar = $rs->getString($startcol + 1);
+      $this->id = $rs->getInt($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->resetModified();
 
-			$this->resetModified();
+      $this->setNew(false);
 
-			$this->setNew(false);
+      $this->afterHydrate();
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Famarca object", $e);
-		}
-	}
+            return $startcol + 2; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Famarca object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +151,7 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FamarcaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FamarcaPeer::doUpdate($this, $con);
@@ -215,12 +218,9 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodmar();
-				break;
-			case 1:
 				return $this->getNommar();
 				break;
-			case 2:
+			case 1:
 				return $this->getId();
 				break;
 			default:
@@ -233,9 +233,8 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 	{
 		$keys = FamarcaPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodmar(),
-			$keys[1] => $this->getNommar(),
-			$keys[2] => $this->getId(),
+			$keys[0] => $this->getNommar(),
+			$keys[1] => $this->getId(),
 		);
 		return $result;
 	}
@@ -252,12 +251,9 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodmar($value);
-				break;
-			case 1:
 				$this->setNommar($value);
 				break;
-			case 2:
+			case 1:
 				$this->setId($value);
 				break;
 		} 	}
@@ -267,9 +263,8 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 	{
 		$keys = FamarcaPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodmar($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setNommar($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNommar($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setId($arr[$keys[1]]);
 	}
 
 	
@@ -277,7 +272,6 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FamarcaPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(FamarcaPeer::CODMAR)) $criteria->add(FamarcaPeer::CODMAR, $this->codmar);
 		if ($this->isColumnModified(FamarcaPeer::NOMMAR)) $criteria->add(FamarcaPeer::NOMMAR, $this->nommar);
 		if ($this->isColumnModified(FamarcaPeer::ID)) $criteria->add(FamarcaPeer::ID, $this->id);
 
@@ -309,8 +303,6 @@ abstract class BaseFamarca extends BaseObject  implements Persistent {
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
-
-		$copyObj->setCodmar($this->codmar);
 
 		$copyObj->setNommar($this->nommar);
 

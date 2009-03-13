@@ -25,74 +25,99 @@ abstract class BaseCsdeffas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodfas()
-	{
+  
+  public function getCodfas()
+  {
 
-		return $this->codfas; 		
-	}
-	
-	public function getNomfas()
-	{
+    return trim($this->codfas);
 
-		return $this->nomfas; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomfas()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomfas);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodfas($v)
 	{
 
-		if ($this->codfas !== $v) {
-			$this->codfas = $v;
-			$this->modifiedColumns[] = CsdeffasPeer::CODFAS;
-		}
-
+    if ($this->codfas !== $v) {
+        $this->codfas = $v;
+        $this->modifiedColumns[] = CsdeffasPeer::CODFAS;
+      }
+  
 	} 
 	
 	public function setNomfas($v)
 	{
 
-		if ($this->nomfas !== $v) {
-			$this->nomfas = $v;
-			$this->modifiedColumns[] = CsdeffasPeer::NOMFAS;
-		}
-
+    if ($this->nomfas !== $v) {
+        $this->nomfas = $v;
+        $this->modifiedColumns[] = CsdeffasPeer::NOMFAS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsdeffasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsdeffasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codfas = $rs->getString($startcol + 0);
+      $this->codfas = $rs->getString($startcol + 0);
 
-			$this->nomfas = $rs->getString($startcol + 1);
+      $this->nomfas = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csdeffas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csdeffas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

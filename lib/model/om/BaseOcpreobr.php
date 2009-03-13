@@ -57,224 +57,257 @@ abstract class BaseOcpreobr extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodobr()
-	{
+  
+  public function getCodobr()
+  {
 
-		return $this->codobr; 		
-	}
-	
-	public function getCodpar()
-	{
+    return trim($this->codobr);
 
-		return $this->codpar; 		
-	}
-	
-	public function getCanobr()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return number_format($this->canobr,2,',','.');
-		
-	}
-	
-	public function getCancon()
-	{
+    return trim($this->codpar);
 
-		return number_format($this->cancon,2,',','.');
-		
-	}
-	
-	public function getCanconfin()
-	{
+  }
+  
+  public function getCanobr($val=false)
+  {
 
-		return number_format($this->canconfin,2,',','.');
-		
-	}
-	
-	public function getAdipar()
-	{
+    if($val) return number_format($this->canobr,2,',','.');
+    else return $this->canobr;
 
-		return $this->adipar; 		
-	}
-	
-	public function getCosuni()
-	{
+  }
+  
+  public function getCancon($val=false)
+  {
 
-		return number_format($this->cosuni,2,',','.');
-		
-	}
-	
-	public function getCosunifin()
-	{
+    if($val) return number_format($this->cancon,2,',','.');
+    else return $this->cancon;
 
-		return number_format($this->cosunifin,2,',','.');
-		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getCanconfin($val=false)
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonpre()
-	{
+    if($val) return number_format($this->canconfin,2,',','.');
+    else return $this->canconfin;
 
-		return number_format($this->monpre,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getAdipar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->adipar);
+
+  }
+  
+  public function getCosuni($val=false)
+  {
+
+    if($val) return number_format($this->cosuni,2,',','.');
+    else return $this->cosuni;
+
+  }
+  
+  public function getCosunifin($val=false)
+  {
+
+    if($val) return number_format($this->cosunifin,2,',','.');
+    else return $this->cosunifin;
+
+  }
+  
+  public function getCodpre()
+  {
+
+    return trim($this->codpre);
+
+  }
+  
+  public function getMonpre($val=false)
+  {
+
+    if($val) return number_format($this->monpre,2,',','.');
+    else return $this->monpre;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodobr($v)
 	{
 
-		if ($this->codobr !== $v) {
-			$this->codobr = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::CODOBR;
-		}
-
+    if ($this->codobr !== $v) {
+        $this->codobr = $v;
+        $this->modifiedColumns[] = OcpreobrPeer::CODOBR;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = OcpreobrPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCanobr($v)
 	{
 
-		if ($this->canobr !== $v) {
-			$this->canobr = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::CANOBR;
-		}
-
+    if ($this->canobr !== $v) {
+        $this->canobr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcpreobrPeer::CANOBR;
+      }
+  
 	} 
 	
 	public function setCancon($v)
 	{
 
-		if ($this->cancon !== $v) {
-			$this->cancon = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::CANCON;
-		}
-
+    if ($this->cancon !== $v) {
+        $this->cancon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcpreobrPeer::CANCON;
+      }
+  
 	} 
 	
 	public function setCanconfin($v)
 	{
 
-		if ($this->canconfin !== $v) {
-			$this->canconfin = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::CANCONFIN;
-		}
-
+    if ($this->canconfin !== $v) {
+        $this->canconfin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcpreobrPeer::CANCONFIN;
+      }
+  
 	} 
 	
 	public function setAdipar($v)
 	{
 
-		if ($this->adipar !== $v) {
-			$this->adipar = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::ADIPAR;
-		}
-
+    if ($this->adipar !== $v) {
+        $this->adipar = $v;
+        $this->modifiedColumns[] = OcpreobrPeer::ADIPAR;
+      }
+  
 	} 
 	
 	public function setCosuni($v)
 	{
 
-		if ($this->cosuni !== $v) {
-			$this->cosuni = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::COSUNI;
-		}
-
+    if ($this->cosuni !== $v) {
+        $this->cosuni = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcpreobrPeer::COSUNI;
+      }
+  
 	} 
 	
 	public function setCosunifin($v)
 	{
 
-		if ($this->cosunifin !== $v) {
-			$this->cosunifin = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::COSUNIFIN;
-		}
-
+    if ($this->cosunifin !== $v) {
+        $this->cosunifin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcpreobrPeer::COSUNIFIN;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = OcpreobrPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonpre($v)
 	{
 
-		if ($this->monpre !== $v) {
-			$this->monpre = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::MONPRE;
-		}
-
+    if ($this->monpre !== $v) {
+        $this->monpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcpreobrPeer::MONPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcpreobrPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcpreobrPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codobr = $rs->getString($startcol + 0);
+      $this->codobr = $rs->getString($startcol + 0);
 
-			$this->codpar = $rs->getString($startcol + 1);
+      $this->codpar = $rs->getString($startcol + 1);
 
-			$this->canobr = $rs->getFloat($startcol + 2);
+      $this->canobr = $rs->getFloat($startcol + 2);
 
-			$this->cancon = $rs->getFloat($startcol + 3);
+      $this->cancon = $rs->getFloat($startcol + 3);
 
-			$this->canconfin = $rs->getFloat($startcol + 4);
+      $this->canconfin = $rs->getFloat($startcol + 4);
 
-			$this->adipar = $rs->getString($startcol + 5);
+      $this->adipar = $rs->getString($startcol + 5);
 
-			$this->cosuni = $rs->getFloat($startcol + 6);
+      $this->cosuni = $rs->getFloat($startcol + 6);
 
-			$this->cosunifin = $rs->getFloat($startcol + 7);
+      $this->cosunifin = $rs->getFloat($startcol + 7);
 
-			$this->codpre = $rs->getString($startcol + 8);
+      $this->codpre = $rs->getString($startcol + 8);
 
-			$this->monpre = $rs->getFloat($startcol + 9);
+      $this->monpre = $rs->getFloat($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocpreobr object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocpreobr object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -331,6 +364,7 @@ abstract class BaseOcpreobr extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcpreobrPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcpreobrPeer::doUpdate($this, $con);

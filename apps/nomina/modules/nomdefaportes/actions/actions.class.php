@@ -10,7 +10,7 @@
  */
 class nomdefaportesActions extends autonomdefaportesActions
 {
-	
+
 public function executeEdit()
   {
     $this->nptipaportes = $this->getNptipaportesOrCreate();
@@ -21,7 +21,10 @@ public function executeEdit()
 
       $this->saveNptipaportes($this->nptipaportes);
 
+      $this->nptipaportes->setId(Herramientas::getX_vacio('codtipapo','nptipaportes','id',$this->nptipaportes->getCodtipapo()));
+
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -41,4 +44,30 @@ public function executeEdit()
       $this->labels = $this->getLabels();
     }
   }
+
+protected function updateNptipaportesFromRequest()
+  {
+    $nptipaportes = $this->getRequestParameter('nptipaportes');
+
+    if (isset($nptipaportes['codtipapo']))
+    {
+
+      $this->nptipaportes->setCodtipapo(str_pad($nptipaportes['codtipapo'], 4, '0', STR_PAD_LEFT));
+    }
+    if (isset($nptipaportes['destipapo']))
+    {
+      $this->nptipaportes->setDestipapo($nptipaportes['destipapo']);
+    }
+    if (isset($nptipaportes['porret']))
+    {
+      $this->nptipaportes->setPorret($nptipaportes['porret']);
+    }
+    if (isset($nptipaportes['porapo']))
+    {
+      $this->nptipaportes->setPorapo($nptipaportes['porapo']);
+    }
+  }
+
+
+
 }

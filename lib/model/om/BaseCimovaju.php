@@ -33,111 +33,138 @@ abstract class BaseCimovaju extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefaju()
-	{
+  
+  public function getRefaju()
+  {
 
-		return $this->refaju; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->refaju);
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonaju()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getStamov()
-	{
+    return trim($this->codpre);
 
-		return $this->stamov; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonaju($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getStamov()
+  {
+
+    return trim($this->stamov);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefaju($v)
 	{
 
-		if ($this->refaju !== $v) {
-			$this->refaju = $v;
-			$this->modifiedColumns[] = CimovajuPeer::REFAJU;
-		}
-
+    if ($this->refaju !== $v) {
+        $this->refaju = $v;
+        $this->modifiedColumns[] = CimovajuPeer::REFAJU;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CimovajuPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CimovajuPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CimovajuPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CimovajuPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setStamov($v)
 	{
 
-		if ($this->stamov !== $v) {
-			$this->stamov = $v;
-			$this->modifiedColumns[] = CimovajuPeer::STAMOV;
-		}
-
+    if ($this->stamov !== $v) {
+        $this->stamov = $v;
+        $this->modifiedColumns[] = CimovajuPeer::STAMOV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CimovajuPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CimovajuPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refaju = $rs->getString($startcol + 0);
+      $this->refaju = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->monaju = $rs->getFloat($startcol + 2);
+      $this->monaju = $rs->getFloat($startcol + 2);
 
-			$this->stamov = $rs->getString($startcol + 3);
+      $this->stamov = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cimovaju object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cimovaju object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +221,7 @@ abstract class BaseCimovaju extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CimovajuPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CimovajuPeer::doUpdate($this, $con);

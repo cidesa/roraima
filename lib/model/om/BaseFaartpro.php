@@ -25,6 +25,14 @@ abstract class BaseFaartpro extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipper;
+
+
+	
+	protected $codcta;
+
+
+	
 	protected $id;
 
 	
@@ -33,111 +41,176 @@ abstract class BaseFaartpro extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodalm()
-	{
+    return trim($this->codpro);
 
-		return $this->codalm; 		
-	}
-	
-	public function getCodart()
-	{
+  }
+  
+  public function getCodalm()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getComisi()
-	{
+    return trim($this->codalm);
 
-		return number_format($this->comisi,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codart);
+
+  }
+  
+  public function getComisi($val=false)
+  {
+
+    if($val) return number_format($this->comisi,2,',','.');
+    else return $this->comisi;
+
+  }
+  
+  public function getTipper()
+  {
+
+    return trim($this->tipper);
+
+  }
+  
+  public function getCodcta()
+  {
+
+    return trim($this->codcta);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FaartproPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FaartproPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = FaartproPeer::CODALM;
-		}
-
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = FaartproPeer::CODALM;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FaartproPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FaartproPeer::CODART;
+      }
+  
 	} 
 	
 	public function setComisi($v)
 	{
 
-		if ($this->comisi !== $v) {
-			$this->comisi = $v;
-			$this->modifiedColumns[] = FaartproPeer::COMISI;
-		}
+    if ($this->comisi !== $v) {
+        $this->comisi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartproPeer::COMISI;
+      }
+  
+	} 
+	
+	public function setTipper($v)
+	{
 
+    if ($this->tipper !== $v) {
+        $this->tipper = $v;
+        $this->modifiedColumns[] = FaartproPeer::TIPPER;
+      }
+  
+	} 
+	
+	public function setCodcta($v)
+	{
+
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = FaartproPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FaartproPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FaartproPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codalm = $rs->getString($startcol + 1);
+      $this->codalm = $rs->getString($startcol + 1);
 
-			$this->codart = $rs->getString($startcol + 2);
+      $this->codart = $rs->getString($startcol + 2);
 
-			$this->comisi = $rs->getFloat($startcol + 3);
+      $this->comisi = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->tipper = $rs->getString($startcol + 4);
 
-			$this->resetModified();
+      $this->codcta = $rs->getString($startcol + 5);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 6);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Faartpro object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Faartpro object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +267,7 @@ abstract class BaseFaartpro extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FaartproPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FaartproPeer::doUpdate($this, $con);
@@ -272,6 +346,12 @@ abstract class BaseFaartpro extends BaseObject  implements Persistent {
 				return $this->getComisi();
 				break;
 			case 4:
+				return $this->getTipper();
+				break;
+			case 5:
+				return $this->getCodcta();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -288,7 +368,9 @@ abstract class BaseFaartpro extends BaseObject  implements Persistent {
 			$keys[1] => $this->getCodalm(),
 			$keys[2] => $this->getCodart(),
 			$keys[3] => $this->getComisi(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getTipper(),
+			$keys[5] => $this->getCodcta(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -317,6 +399,12 @@ abstract class BaseFaartpro extends BaseObject  implements Persistent {
 				$this->setComisi($value);
 				break;
 			case 4:
+				$this->setTipper($value);
+				break;
+			case 5:
+				$this->setCodcta($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -330,7 +418,9 @@ abstract class BaseFaartpro extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setCodalm($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodart($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setComisi($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTipper($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodcta($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -342,6 +432,8 @@ abstract class BaseFaartpro extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FaartproPeer::CODALM)) $criteria->add(FaartproPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(FaartproPeer::CODART)) $criteria->add(FaartproPeer::CODART, $this->codart);
 		if ($this->isColumnModified(FaartproPeer::COMISI)) $criteria->add(FaartproPeer::COMISI, $this->comisi);
+		if ($this->isColumnModified(FaartproPeer::TIPPER)) $criteria->add(FaartproPeer::TIPPER, $this->tipper);
+		if ($this->isColumnModified(FaartproPeer::CODCTA)) $criteria->add(FaartproPeer::CODCTA, $this->codcta);
 		if ($this->isColumnModified(FaartproPeer::ID)) $criteria->add(FaartproPeer::ID, $this->id);
 
 		return $criteria;
@@ -380,6 +472,10 @@ abstract class BaseFaartpro extends BaseObject  implements Persistent {
 		$copyObj->setCodart($this->codart);
 
 		$copyObj->setComisi($this->comisi);
+
+		$copyObj->setTipper($this->tipper);
+
+		$copyObj->setCodcta($this->codcta);
 
 
 		$copyObj->setNew(true);

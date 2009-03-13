@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class Opbenefi2MapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.Opbenefi2MapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.Opbenefi2MapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('opbenefi2');
 		$tMap->setPhpName('Opbenefi2');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('opbenefi2_SEQ');
 
 		$tMap->addColumn('CEDRIF', 'Cedrif', 'string', CreoleTypes::VARCHAR, true, 15);
 
@@ -69,6 +71,6 @@ class Opbenefi2MapBuilder {
 		$tMap->addColumn('TEMCEDRIF', 'Temcedrif', 'string', CreoleTypes::VARCHAR, false, 15);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

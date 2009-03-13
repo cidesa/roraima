@@ -300,6 +300,7 @@ abstract class BaseFcesppubPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcesppubPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

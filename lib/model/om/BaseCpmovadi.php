@@ -37,129 +37,157 @@ abstract class BaseCpmovadi extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefadi()
-	{
+  
+  public function getRefadi()
+  {
 
-		return $this->refadi; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->refadi);
 
-		return $this->codpre; 		
-	}
-	
-	public function getPerpre()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return $this->perpre; 		
-	}
-	
-	public function getMonmov()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->monmov,2,',','.');
-		
-	}
-	
-	public function getStamov()
-	{
+  }
+  
+  public function getPerpre()
+  {
 
-		return $this->stamov; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->perpre);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonmov($val=false)
+  {
+
+    if($val) return number_format($this->monmov,2,',','.');
+    else return $this->monmov;
+
+  }
+  
+  public function getStamov()
+  {
+
+    return trim($this->stamov);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefadi($v)
 	{
 
-		if ($this->refadi !== $v) {
-			$this->refadi = $v;
-			$this->modifiedColumns[] = CpmovadiPeer::REFADI;
-		}
-
+    if ($this->refadi !== $v) {
+        $this->refadi = $v;
+        $this->modifiedColumns[] = CpmovadiPeer::REFADI;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpmovadiPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpmovadiPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setPerpre($v)
 	{
 
-		if ($this->perpre !== $v) {
-			$this->perpre = $v;
-			$this->modifiedColumns[] = CpmovadiPeer::PERPRE;
-		}
-
+    if ($this->perpre !== $v) {
+        $this->perpre = $v;
+        $this->modifiedColumns[] = CpmovadiPeer::PERPRE;
+      }
+  
 	} 
 	
 	public function setMonmov($v)
 	{
 
-		if ($this->monmov !== $v) {
-			$this->monmov = $v;
-			$this->modifiedColumns[] = CpmovadiPeer::MONMOV;
-		}
-
+    if ($this->monmov !== $v) {
+        $this->monmov = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpmovadiPeer::MONMOV;
+      }
+  
 	} 
 	
 	public function setStamov($v)
 	{
 
-		if ($this->stamov !== $v) {
-			$this->stamov = $v;
-			$this->modifiedColumns[] = CpmovadiPeer::STAMOV;
-		}
-
+    if ($this->stamov !== $v) {
+        $this->stamov = $v;
+        $this->modifiedColumns[] = CpmovadiPeer::STAMOV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpmovadiPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpmovadiPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refadi = $rs->getString($startcol + 0);
+      $this->refadi = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->perpre = $rs->getString($startcol + 2);
+      $this->perpre = $rs->getString($startcol + 2);
 
-			$this->monmov = $rs->getFloat($startcol + 3);
+      $this->monmov = $rs->getFloat($startcol + 3);
 
-			$this->stamov = $rs->getString($startcol + 4);
+      $this->stamov = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpmovadi object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpmovadi object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +244,7 @@ abstract class BaseCpmovadi extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpmovadiPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpmovadiPeer::doUpdate($this, $con);

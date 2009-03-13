@@ -250,6 +250,7 @@ abstract class BaseTsmovbanPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsmovbanPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -7,18 +7,21 @@ generator:
       codtipcon: { name: Codigo del Tipo de Contrato, params: maxlength=3}
       destipcon: { name: Descripcion}
       codnom: { name: Codigo, params: maxlength=3}
-      codemp: { name: Codigo del Empleado, params: maxlength=16}  
-      nomemp: { name: Nombre}  
+      codemp: { name: Codigo del Empleado, params: maxlength=16}
+      nomemp: { name: Nombre}
       feccal: { name: Fecha}
-        
+
     list:
       title:          Asignacion de Trabajadores para Prestaciones por Contrato
       filters:        [codtipcon]
-      display:        [=codtipcon, destipcon, codemp, nomemp]
+      display:        [=codtipcon, destipcon]
       object_actions:
         _edit:        ~
-        _delete:      ~
       max_per_page:   5
     edit:
       title:          Asignacion de Trabajadores para Prestaciones por Contrato
-      display:        [=codtipcon, destipcon]    
+      display:        [=codtipcon, destipcon]
+      actions:
+        _list:        ~
+        _save:         ~
+        _create:       ~

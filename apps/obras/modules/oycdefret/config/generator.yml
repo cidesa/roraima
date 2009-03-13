@@ -6,23 +6,30 @@ generator:
     fields:
       codtip:    { name: Código}
       destip:    { name: Descripción}
-      codcon:    { name: Código}
+      codcon:    { name: Código Contable}
+      consustra: { name: Maneja Sustraendo}
       descta:    { name: Descripción}
-      basimp:    { name: Sobre el } 
+      basimp:    { name: Base Imponible}
       porret:    { name: Porcentaje a Retener}
-      unitri:    { name: A Partir de}
-      factor:    { name: Grupo}
-      porsus:    { name: Descripción del Grupo} 
-      stamon:    { name: Monto}      
-              
+      unitri:    { name: Unidades Tributarias}
+      factor:    { name: Factor}
+      porsus:    { name: Porcentaje Sustraendo}
+      stamon:    { name: Monto}
+
     list:
-      title:          Recaudos
+      title:          Retenciones
       filters:        [codtip]
-      display:        [codtip, destip]
+      display:        [=codtip, destip]
       object_actions:
         _edit:        ~
         _delete:      ~
-      max_per_page:   5
+      max_per_page:   10
+      sort: codtip
     edit:
-      title:          Recaudos
-      display:       [codtip, destip, porret, basimp, stamon, codcon, descta]
+      title:          Edición de Retenciones
+      display:        [codtip, destip, porret, basimp, consustra, unitri, stamon, factor, porsus, codcon, descta]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

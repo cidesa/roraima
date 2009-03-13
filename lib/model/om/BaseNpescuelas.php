@@ -33,110 +33,137 @@ abstract class BaseNpescuelas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodescuela()
-	{
+  
+  public function getCodescuela()
+  {
 
-		return $this->codescuela; 		
-	}
-	
-	public function getNombreescuela()
-	{
+    return trim($this->codescuela);
 
-		return $this->nombreescuela; 		
-	}
-	
-	public function getCodmunicipio()
-	{
+  }
+  
+  public function getNombreescuela()
+  {
 
-		return $this->codmunicipio; 		
-	}
-	
-	public function getNombremunicipio()
-	{
+    return trim($this->nombreescuela);
 
-		return $this->nombremunicipio; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodmunicipio()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codmunicipio);
+
+  }
+  
+  public function getNombremunicipio()
+  {
+
+    return trim($this->nombremunicipio);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodescuela($v)
 	{
 
-		if ($this->codescuela !== $v) {
-			$this->codescuela = $v;
-			$this->modifiedColumns[] = NpescuelasPeer::CODESCUELA;
-		}
-
+    if ($this->codescuela !== $v) {
+        $this->codescuela = $v;
+        $this->modifiedColumns[] = NpescuelasPeer::CODESCUELA;
+      }
+  
 	} 
 	
 	public function setNombreescuela($v)
 	{
 
-		if ($this->nombreescuela !== $v) {
-			$this->nombreescuela = $v;
-			$this->modifiedColumns[] = NpescuelasPeer::NOMBREESCUELA;
-		}
-
+    if ($this->nombreescuela !== $v) {
+        $this->nombreescuela = $v;
+        $this->modifiedColumns[] = NpescuelasPeer::NOMBREESCUELA;
+      }
+  
 	} 
 	
 	public function setCodmunicipio($v)
 	{
 
-		if ($this->codmunicipio !== $v) {
-			$this->codmunicipio = $v;
-			$this->modifiedColumns[] = NpescuelasPeer::CODMUNICIPIO;
-		}
-
+    if ($this->codmunicipio !== $v) {
+        $this->codmunicipio = $v;
+        $this->modifiedColumns[] = NpescuelasPeer::CODMUNICIPIO;
+      }
+  
 	} 
 	
 	public function setNombremunicipio($v)
 	{
 
-		if ($this->nombremunicipio !== $v) {
-			$this->nombremunicipio = $v;
-			$this->modifiedColumns[] = NpescuelasPeer::NOMBREMUNICIPIO;
-		}
-
+    if ($this->nombremunicipio !== $v) {
+        $this->nombremunicipio = $v;
+        $this->modifiedColumns[] = NpescuelasPeer::NOMBREMUNICIPIO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpescuelasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpescuelasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codescuela = $rs->getString($startcol + 0);
+      $this->codescuela = $rs->getString($startcol + 0);
 
-			$this->nombreescuela = $rs->getString($startcol + 1);
+      $this->nombreescuela = $rs->getString($startcol + 1);
 
-			$this->codmunicipio = $rs->getString($startcol + 2);
+      $this->codmunicipio = $rs->getString($startcol + 2);
 
-			$this->nombremunicipio = $rs->getString($startcol + 3);
+      $this->nombremunicipio = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npescuelas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npescuelas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseNpescuelas extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpescuelasPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpescuelasPeer::doUpdate($this, $con);

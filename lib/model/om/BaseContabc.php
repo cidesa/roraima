@@ -13,6 +13,10 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 
 
 	
+	protected $reftra;
+
+
+	
 	protected $feccom;
 
 
@@ -41,170 +45,217 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumcom()
-	{
+  
+  public function getNumcom()
+  {
 
-		return $this->numcom; 		
-	}
-	
-	public function getFeccom($format = 'Y-m-d')
-	{
+    return trim($this->numcom);
 
-		if ($this->feccom === null || $this->feccom === '') {
-			return null;
-		} elseif (!is_int($this->feccom)) {
-						$ts = strtotime($this->feccom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
-			}
-		} else {
-			$ts = $this->feccom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getReftra()
+  {
 
-	
-	public function getDescom()
-	{
+    return trim($this->reftra);
 
-		return $this->descom; 		
-	}
-	
-	public function getMoncom()
-	{
+  }
+  
+  public function getFeccom($format = 'Y-m-d')
+  {
 
-		return number_format($this->moncom,2,',','.');
-		
-	}
-	
-	public function getStacom()
-	{
+    if ($this->feccom === null || $this->feccom === '') {
+      return null;
+    } elseif (!is_int($this->feccom)) {
+            $ts = adodb_strtotime($this->feccom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
+      }
+    } else {
+      $ts = $this->feccom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->stacom; 		
-	}
-	
-	public function getTipcom()
-	{
+  
+  public function getDescom()
+  {
 
-		return $this->tipcom; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->descom);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMoncom($val=false)
+  {
+
+    if($val) return number_format($this->moncom,2,',','.');
+    else return $this->moncom;
+
+  }
+  
+  public function getStacom()
+  {
+
+    return trim($this->stacom);
+
+  }
+  
+  public function getTipcom()
+  {
+
+    return trim($this->tipcom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = ContabcPeer::NUMCOM;
-		}
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = ContabcPeer::NUMCOM;
+      }
+  
+	} 
+	
+	public function setReftra($v)
+	{
 
+    if ($this->reftra !== $v) {
+        $this->reftra = $v;
+        $this->modifiedColumns[] = ContabcPeer::REFTRA;
+      }
+  
 	} 
 	
 	public function setFeccom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccom !== $ts) {
-			$this->feccom = $ts;
-			$this->modifiedColumns[] = ContabcPeer::FECCOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccom !== $ts) {
+      $this->feccom = $ts;
+      $this->modifiedColumns[] = ContabcPeer::FECCOM;
+    }
 
 	} 
 	
 	public function setDescom($v)
 	{
 
-		if ($this->descom !== $v) {
-			$this->descom = $v;
-			$this->modifiedColumns[] = ContabcPeer::DESCOM;
-		}
-
+    if ($this->descom !== $v) {
+        $this->descom = $v;
+        $this->modifiedColumns[] = ContabcPeer::DESCOM;
+      }
+  
 	} 
 	
 	public function setMoncom($v)
 	{
 
-		if ($this->moncom !== $v) {
-			$this->moncom = $v;
-			$this->modifiedColumns[] = ContabcPeer::MONCOM;
-		}
-
+    if ($this->moncom !== $v) {
+        $this->moncom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ContabcPeer::MONCOM;
+      }
+  
 	} 
 	
 	public function setStacom($v)
 	{
 
-		if ($this->stacom !== $v) {
-			$this->stacom = $v;
-			$this->modifiedColumns[] = ContabcPeer::STACOM;
-		}
-
+    if ($this->stacom !== $v) {
+        $this->stacom = $v;
+        $this->modifiedColumns[] = ContabcPeer::STACOM;
+      }
+  
 	} 
 	
 	public function setTipcom($v)
 	{
 
-		if ($this->tipcom !== $v) {
-			$this->tipcom = $v;
-			$this->modifiedColumns[] = ContabcPeer::TIPCOM;
-		}
-
+    if ($this->tipcom !== $v) {
+        $this->tipcom = $v;
+        $this->modifiedColumns[] = ContabcPeer::TIPCOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ContabcPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ContabcPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numcom = $rs->getString($startcol + 0);
+      $this->numcom = $rs->getString($startcol + 0);
 
-			$this->feccom = $rs->getDate($startcol + 1, null);
+      $this->reftra = $rs->getString($startcol + 1);
 
-			$this->descom = $rs->getString($startcol + 2);
+      $this->feccom = $rs->getDate($startcol + 2, null);
 
-			$this->moncom = $rs->getFloat($startcol + 3);
+      $this->descom = $rs->getString($startcol + 3);
 
-			$this->stacom = $rs->getString($startcol + 4);
+      $this->moncom = $rs->getFloat($startcol + 4);
 
-			$this->tipcom = $rs->getString($startcol + 5);
+      $this->stacom = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->tipcom = $rs->getString($startcol + 6);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Contabc object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Contabc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -261,6 +312,7 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ContabcPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ContabcPeer::doUpdate($this, $con);
@@ -330,21 +382,24 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 				return $this->getNumcom();
 				break;
 			case 1:
-				return $this->getFeccom();
+				return $this->getReftra();
 				break;
 			case 2:
-				return $this->getDescom();
+				return $this->getFeccom();
 				break;
 			case 3:
-				return $this->getMoncom();
+				return $this->getDescom();
 				break;
 			case 4:
-				return $this->getStacom();
+				return $this->getMoncom();
 				break;
 			case 5:
-				return $this->getTipcom();
+				return $this->getStacom();
 				break;
 			case 6:
+				return $this->getTipcom();
+				break;
+			case 7:
 				return $this->getId();
 				break;
 			default:
@@ -358,12 +413,13 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 		$keys = ContabcPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getNumcom(),
-			$keys[1] => $this->getFeccom(),
-			$keys[2] => $this->getDescom(),
-			$keys[3] => $this->getMoncom(),
-			$keys[4] => $this->getStacom(),
-			$keys[5] => $this->getTipcom(),
-			$keys[6] => $this->getId(),
+			$keys[1] => $this->getReftra(),
+			$keys[2] => $this->getFeccom(),
+			$keys[3] => $this->getDescom(),
+			$keys[4] => $this->getMoncom(),
+			$keys[5] => $this->getStacom(),
+			$keys[6] => $this->getTipcom(),
+			$keys[7] => $this->getId(),
 		);
 		return $result;
 	}
@@ -383,21 +439,24 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 				$this->setNumcom($value);
 				break;
 			case 1:
-				$this->setFeccom($value);
+				$this->setReftra($value);
 				break;
 			case 2:
-				$this->setDescom($value);
+				$this->setFeccom($value);
 				break;
 			case 3:
-				$this->setMoncom($value);
+				$this->setDescom($value);
 				break;
 			case 4:
-				$this->setStacom($value);
+				$this->setMoncom($value);
 				break;
 			case 5:
-				$this->setTipcom($value);
+				$this->setStacom($value);
 				break;
 			case 6:
+				$this->setTipcom($value);
+				break;
+			case 7:
 				$this->setId($value);
 				break;
 		} 	}
@@ -408,12 +467,13 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 		$keys = ContabcPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setNumcom($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setFeccom($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setDescom($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setMoncom($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setStacom($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setTipcom($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
+		if (array_key_exists($keys[1], $arr)) $this->setReftra($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setFeccom($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setDescom($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setMoncom($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setStacom($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setTipcom($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
 	}
 
 	
@@ -422,6 +482,7 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 		$criteria = new Criteria(ContabcPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(ContabcPeer::NUMCOM)) $criteria->add(ContabcPeer::NUMCOM, $this->numcom);
+		if ($this->isColumnModified(ContabcPeer::REFTRA)) $criteria->add(ContabcPeer::REFTRA, $this->reftra);
 		if ($this->isColumnModified(ContabcPeer::FECCOM)) $criteria->add(ContabcPeer::FECCOM, $this->feccom);
 		if ($this->isColumnModified(ContabcPeer::DESCOM)) $criteria->add(ContabcPeer::DESCOM, $this->descom);
 		if ($this->isColumnModified(ContabcPeer::MONCOM)) $criteria->add(ContabcPeer::MONCOM, $this->moncom);
@@ -459,6 +520,8 @@ abstract class BaseContabc extends BaseObject  implements Persistent {
 	{
 
 		$copyObj->setNumcom($this->numcom);
+
+		$copyObj->setReftra($this->reftra);
 
 		$copyObj->setFeccom($this->feccom);
 

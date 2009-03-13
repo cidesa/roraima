@@ -235,6 +235,7 @@ abstract class BaseCpmovajuPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpmovajuPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

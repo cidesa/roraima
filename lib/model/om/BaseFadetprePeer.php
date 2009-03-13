@@ -13,7 +13,7 @@ abstract class BaseFadetprePeer {
 	const CLASS_DEFAULT = 'lib.model.Fadetpre';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -30,6 +30,9 @@ abstract class BaseFadetprePeer {
 
 	
 	const PRECIO = 'fadetpre.PRECIO';
+
+	
+	const MONDESC = 'fadetpre.MONDESC';
 
 	
 	const MONRGO = 'fadetpre.MONRGO';
@@ -49,18 +52,18 @@ abstract class BaseFadetprePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refpre', 'Codart', 'Cansol', 'Precio', 'Monrgo', 'Totart', 'Fecent', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FadetprePeer::REFPRE, FadetprePeer::CODART, FadetprePeer::CANSOL, FadetprePeer::PRECIO, FadetprePeer::MONRGO, FadetprePeer::TOTART, FadetprePeer::FECENT, FadetprePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refpre', 'codart', 'cansol', 'precio', 'monrgo', 'totart', 'fecent', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Refpre', 'Codart', 'Cansol', 'Precio', 'Mondesc', 'Monrgo', 'Totart', 'Fecent', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FadetprePeer::REFPRE, FadetprePeer::CODART, FadetprePeer::CANSOL, FadetprePeer::PRECIO, FadetprePeer::MONDESC, FadetprePeer::MONRGO, FadetprePeer::TOTART, FadetprePeer::FECENT, FadetprePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refpre', 'codart', 'cansol', 'precio', 'mondesc', 'monrgo', 'totart', 'fecent', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refpre' => 0, 'Codart' => 1, 'Cansol' => 2, 'Precio' => 3, 'Monrgo' => 4, 'Totart' => 5, 'Fecent' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (FadetprePeer::REFPRE => 0, FadetprePeer::CODART => 1, FadetprePeer::CANSOL => 2, FadetprePeer::PRECIO => 3, FadetprePeer::MONRGO => 4, FadetprePeer::TOTART => 5, FadetprePeer::FECENT => 6, FadetprePeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('refpre' => 0, 'codart' => 1, 'cansol' => 2, 'precio' => 3, 'monrgo' => 4, 'totart' => 5, 'fecent' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Refpre' => 0, 'Codart' => 1, 'Cansol' => 2, 'Precio' => 3, 'Mondesc' => 4, 'Monrgo' => 5, 'Totart' => 6, 'Fecent' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (FadetprePeer::REFPRE => 0, FadetprePeer::CODART => 1, FadetprePeer::CANSOL => 2, FadetprePeer::PRECIO => 3, FadetprePeer::MONDESC => 4, FadetprePeer::MONRGO => 5, FadetprePeer::TOTART => 6, FadetprePeer::FECENT => 7, FadetprePeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('refpre' => 0, 'codart' => 1, 'cansol' => 2, 'precio' => 3, 'mondesc' => 4, 'monrgo' => 5, 'totart' => 6, 'fecent' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -121,6 +124,8 @@ abstract class BaseFadetprePeer {
 		$criteria->addSelectColumn(FadetprePeer::CANSOL);
 
 		$criteria->addSelectColumn(FadetprePeer::PRECIO);
+
+		$criteria->addSelectColumn(FadetprePeer::MONDESC);
 
 		$criteria->addSelectColumn(FadetprePeer::MONRGO);
 
@@ -230,6 +235,7 @@ abstract class BaseFadetprePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FadetprePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

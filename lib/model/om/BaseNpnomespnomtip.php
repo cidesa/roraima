@@ -25,74 +25,99 @@ abstract class BaseNpnomespnomtip extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnomesp()
-	{
+  
+  public function getCodnomesp()
+  {
 
-		return $this->codnomesp; 		
-	}
-	
-	public function getCodnom()
-	{
+    return trim($this->codnomesp);
 
-		return $this->codnom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codnom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnomesp($v)
 	{
 
-		if ($this->codnomesp !== $v) {
-			$this->codnomesp = $v;
-			$this->modifiedColumns[] = NpnomespnomtipPeer::CODNOMESP;
-		}
-
+    if ($this->codnomesp !== $v) {
+        $this->codnomesp = $v;
+        $this->modifiedColumns[] = NpnomespnomtipPeer::CODNOMESP;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpnomespnomtipPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpnomespnomtipPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpnomespnomtipPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpnomespnomtipPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnomesp = $rs->getString($startcol + 0);
+      $this->codnomesp = $rs->getString($startcol + 0);
 
-			$this->codnom = $rs->getString($startcol + 1);
+      $this->codnom = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npnomespnomtip object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npnomespnomtip object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseNpnomespnomtip extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpnomespnomtipPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpnomespnomtipPeer::doUpdate($this, $con);

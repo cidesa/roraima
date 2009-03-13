@@ -225,6 +225,7 @@ abstract class BaseTemp1Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Temp1Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

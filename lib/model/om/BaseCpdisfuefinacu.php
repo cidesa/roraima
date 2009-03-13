@@ -49,206 +49,236 @@ abstract class BaseCpdisfuefinacu extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCorrel()
-	{
+  
+  public function getCorrel()
+  {
 
-		return $this->correl; 		
-	}
-	
-	public function getOrigen()
-	{
+    return trim($this->correl);
 
-		return $this->origen; 		
-	}
-	
-	public function getFuefin()
-	{
+  }
+  
+  public function getOrigen()
+  {
 
-		return $this->fuefin; 		
-	}
-	
-	public function getFecdis($format = 'Y-m-d')
-	{
+    return trim($this->origen);
 
-		if ($this->fecdis === null || $this->fecdis === '') {
-			return null;
-		} elseif (!is_int($this->fecdis)) {
-						$ts = strtotime($this->fecdis);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdis] as date/time value: " . var_export($this->fecdis, true));
-			}
-		} else {
-			$ts = $this->fecdis;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFuefin()
+  {
 
-	
-	public function getCodpre()
-	{
+    return trim($this->fuefin);
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonasi()
-	{
+  }
+  
+  public function getFecdis($format = 'Y-m-d')
+  {
 
-		return number_format($this->monasi,2,',','.');
-		
-	}
-	
-	public function getRefdis()
-	{
+    if ($this->fecdis === null || $this->fecdis === '') {
+      return null;
+    } elseif (!is_int($this->fecdis)) {
+            $ts = adodb_strtotime($this->fecdis);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdis] as date/time value: " . var_export($this->fecdis, true));
+      }
+    } else {
+      $ts = $this->fecdis;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->refdis; 		
-	}
-	
-	public function getStatus()
-	{
+  
+  public function getCodpre()
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codpre);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonasi($val=false)
+  {
+
+    if($val) return number_format($this->monasi,2,',','.');
+    else return $this->monasi;
+
+  }
+  
+  public function getRefdis()
+  {
+
+    return trim($this->refdis);
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCorrel($v)
 	{
 
-		if ($this->correl !== $v) {
-			$this->correl = $v;
-			$this->modifiedColumns[] = CpdisfuefinacuPeer::CORREL;
-		}
-
+    if ($this->correl !== $v) {
+        $this->correl = $v;
+        $this->modifiedColumns[] = CpdisfuefinacuPeer::CORREL;
+      }
+  
 	} 
 	
 	public function setOrigen($v)
 	{
 
-		if ($this->origen !== $v) {
-			$this->origen = $v;
-			$this->modifiedColumns[] = CpdisfuefinacuPeer::ORIGEN;
-		}
-
+    if ($this->origen !== $v) {
+        $this->origen = $v;
+        $this->modifiedColumns[] = CpdisfuefinacuPeer::ORIGEN;
+      }
+  
 	} 
 	
 	public function setFuefin($v)
 	{
 
-		if ($this->fuefin !== $v) {
-			$this->fuefin = $v;
-			$this->modifiedColumns[] = CpdisfuefinacuPeer::FUEFIN;
-		}
-
+    if ($this->fuefin !== $v) {
+        $this->fuefin = $v;
+        $this->modifiedColumns[] = CpdisfuefinacuPeer::FUEFIN;
+      }
+  
 	} 
 	
 	public function setFecdis($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdis] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdis !== $ts) {
-			$this->fecdis = $ts;
-			$this->modifiedColumns[] = CpdisfuefinacuPeer::FECDIS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdis] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdis !== $ts) {
+      $this->fecdis = $ts;
+      $this->modifiedColumns[] = CpdisfuefinacuPeer::FECDIS;
+    }
 
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpdisfuefinacuPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpdisfuefinacuPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonasi($v)
 	{
 
-		if ($this->monasi !== $v) {
-			$this->monasi = $v;
-			$this->modifiedColumns[] = CpdisfuefinacuPeer::MONASI;
-		}
-
+    if ($this->monasi !== $v) {
+        $this->monasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdisfuefinacuPeer::MONASI;
+      }
+  
 	} 
 	
 	public function setRefdis($v)
 	{
 
-		if ($this->refdis !== $v) {
-			$this->refdis = $v;
-			$this->modifiedColumns[] = CpdisfuefinacuPeer::REFDIS;
-		}
-
+    if ($this->refdis !== $v) {
+        $this->refdis = $v;
+        $this->modifiedColumns[] = CpdisfuefinacuPeer::REFDIS;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = CpdisfuefinacuPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = CpdisfuefinacuPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpdisfuefinacuPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpdisfuefinacuPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->correl = $rs->getString($startcol + 0);
+      $this->correl = $rs->getString($startcol + 0);
 
-			$this->origen = $rs->getString($startcol + 1);
+      $this->origen = $rs->getString($startcol + 1);
 
-			$this->fuefin = $rs->getString($startcol + 2);
+      $this->fuefin = $rs->getString($startcol + 2);
 
-			$this->fecdis = $rs->getDate($startcol + 3, null);
+      $this->fecdis = $rs->getDate($startcol + 3, null);
 
-			$this->codpre = $rs->getString($startcol + 4);
+      $this->codpre = $rs->getString($startcol + 4);
 
-			$this->monasi = $rs->getFloat($startcol + 5);
+      $this->monasi = $rs->getFloat($startcol + 5);
 
-			$this->refdis = $rs->getString($startcol + 6);
+      $this->refdis = $rs->getString($startcol + 6);
 
-			$this->status = $rs->getString($startcol + 7);
+      $this->status = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpdisfuefinacu object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpdisfuefinacu object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

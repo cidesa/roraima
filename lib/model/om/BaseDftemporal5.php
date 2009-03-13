@@ -33,110 +33,137 @@ abstract class BaseDftemporal5 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCedrif()
-	{
+  
+  public function getCedrif()
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getNomben()
-	{
+    return trim($this->cedrif);
 
-		return $this->nomben; 		
-	}
-	
-	public function getTelben()
-	{
+  }
+  
+  public function getNomben()
+  {
 
-		return $this->telben; 		
-	}
-	
-	public function getNitben()
-	{
+    return trim($this->nomben);
 
-		return $this->nitben; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTelben()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->telben);
+
+  }
+  
+  public function getNitben()
+  {
+
+    return trim($this->nitben);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = Dftemporal5Peer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = Dftemporal5Peer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setNomben($v)
 	{
 
-		if ($this->nomben !== $v) {
-			$this->nomben = $v;
-			$this->modifiedColumns[] = Dftemporal5Peer::NOMBEN;
-		}
-
+    if ($this->nomben !== $v) {
+        $this->nomben = $v;
+        $this->modifiedColumns[] = Dftemporal5Peer::NOMBEN;
+      }
+  
 	} 
 	
 	public function setTelben($v)
 	{
 
-		if ($this->telben !== $v) {
-			$this->telben = $v;
-			$this->modifiedColumns[] = Dftemporal5Peer::TELBEN;
-		}
-
+    if ($this->telben !== $v) {
+        $this->telben = $v;
+        $this->modifiedColumns[] = Dftemporal5Peer::TELBEN;
+      }
+  
 	} 
 	
 	public function setNitben($v)
 	{
 
-		if ($this->nitben !== $v) {
-			$this->nitben = $v;
-			$this->modifiedColumns[] = Dftemporal5Peer::NITBEN;
-		}
-
+    if ($this->nitben !== $v) {
+        $this->nitben = $v;
+        $this->modifiedColumns[] = Dftemporal5Peer::NITBEN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Dftemporal5Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Dftemporal5Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->cedrif = $rs->getString($startcol + 0);
+      $this->cedrif = $rs->getString($startcol + 0);
 
-			$this->nomben = $rs->getString($startcol + 1);
+      $this->nomben = $rs->getString($startcol + 1);
 
-			$this->telben = $rs->getString($startcol + 2);
+      $this->telben = $rs->getString($startcol + 2);
 
-			$this->nitben = $rs->getString($startcol + 3);
+      $this->nitben = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Dftemporal5 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Dftemporal5 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -41,92 +41,118 @@ abstract class BaseFcdefentext extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodentext()
-	{
+  
+  public function getCodentext()
+  {
 
-		return $this->codentext; 		
-	}
-	
-	public function getNomentext()
-	{
+    return trim($this->codentext);
 
-		return $this->nomentext; 		
-	}
-	
-	public function getPernatjur()
-	{
+  }
+  
+  public function getNomentext()
+  {
 
-		return $this->pernatjur; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomentext);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPernatjur()
+  {
+
+    return trim($this->pernatjur);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodentext($v)
 	{
 
-		if ($this->codentext !== $v) {
-			$this->codentext = $v;
-			$this->modifiedColumns[] = FcdefentextPeer::CODENTEXT;
-		}
-
+    if ($this->codentext !== $v) {
+        $this->codentext = $v;
+        $this->modifiedColumns[] = FcdefentextPeer::CODENTEXT;
+      }
+  
 	} 
 	
 	public function setNomentext($v)
 	{
 
-		if ($this->nomentext !== $v) {
-			$this->nomentext = $v;
-			$this->modifiedColumns[] = FcdefentextPeer::NOMENTEXT;
-		}
-
+    if ($this->nomentext !== $v) {
+        $this->nomentext = $v;
+        $this->modifiedColumns[] = FcdefentextPeer::NOMENTEXT;
+      }
+  
 	} 
 	
 	public function setPernatjur($v)
 	{
 
-		if ($this->pernatjur !== $v) {
-			$this->pernatjur = $v;
-			$this->modifiedColumns[] = FcdefentextPeer::PERNATJUR;
-		}
-
+    if ($this->pernatjur !== $v) {
+        $this->pernatjur = $v;
+        $this->modifiedColumns[] = FcdefentextPeer::PERNATJUR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdefentextPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdefentextPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codentext = $rs->getString($startcol + 0);
+      $this->codentext = $rs->getString($startcol + 0);
 
-			$this->nomentext = $rs->getString($startcol + 1);
+      $this->nomentext = $rs->getString($startcol + 1);
 
-			$this->pernatjur = $rs->getString($startcol + 2);
+      $this->pernatjur = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdefentext object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdefentext object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -183,6 +209,7 @@ abstract class BaseFcdefentext extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdefentextPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdefentextPeer::doUpdate($this, $con);

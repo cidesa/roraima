@@ -10,24 +10,12 @@
 class Bnparbie extends BaseBnparbie
 {
   public function getNompardes()
-  {
-  	  $c = new Criteria();
-  	  $c->add(NppartidasPeer::CODPAR,self::getPardes());
-  	  $nombredes = NppartidasPeer::doSelectone($c);
-	  if ($nombredes)
-	  	return $nombredes->getNompar();
-	  else 
-	    return ' ';
+   {  	
+  	return Herramientas::getX('codpar','nppartidas','nompar',self::getPardes());  	
    }
    
   public function getNomparhas()
   {
-  	  $c = new Criteria();
-  	  $c->add(NppartidasPeer::CODPAR,self::getParhas());
-  	  $nombrehas = NppartidasPeer::doSelectone($c);
-	  if ($nombrehas)
-	  	return $nombrehas->getNompar();
-	  else 
-	    return ' ';
+  	 return Herramientas::getX('codpar','nppartidas','nompar',self::getParhas());  	
    }
 }

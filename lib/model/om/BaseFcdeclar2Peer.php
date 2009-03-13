@@ -300,6 +300,7 @@ abstract class BaseFcdeclar2Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Fcdeclar2Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

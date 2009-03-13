@@ -4,19 +4,26 @@ generator:
     model_class:      Fordefsubsubobj
     theme:            default
     fields:
-      codequ: { name: Equilibrio}
-      codsubobj: { name: SubObjetivo}
-      codsubsubobj: { name: Codigo}  
-      dessubsubobj: { name: Descripcion}     
+      codequ: { name: Directriz}
+      desequ: { name: Directriz}
+      codsubobj: { name: Estrategia}
+      dessubobj: { name: Estrategia}
+      codsubsubobj: { name: Código}  
+      dessubsubobj: { name: Descripción}     
         
     list:
-      title:          Sub Sub Objetivos
-      filters:        [codsubsubobj]
-      display:        [=codsubsubobj, dessubsubobj]
+      title:          Políticas
+      filters:        [codequ, codsubobj, codsubsubobj]
+      display:        [=codequ, desequ, codsubobj, dessubobj, codsubsubobj, dessubsubobj]
       object_actions:
-        _edit:        ~
-        _delete:      ~
+        _edit:        ~     
       max_per_page:   5
+      sort:    codequ
     edit:
-      title:          Edicion de Sub Sub Objetivos
-      display:       [codequ, codsubobj, codsubsubobj, dessubsubobj] 
+      title:          Edición de Políticas
+      display:      [codequ, codsubobj, codsubsubobj, dessubsubobj] 
+      actions:  
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

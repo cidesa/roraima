@@ -33,110 +33,137 @@ abstract class BaseNpdefmov extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codnom);
 
-		return $this->codcon; 		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getMensaje()
-	{
+    return trim($this->codcon);
 
-		return $this->mensaje; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getStatus()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->status);
+
+  }
+  
+  public function getMensaje()
+  {
+
+    return trim($this->mensaje);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpdefmovPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpdefmovPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpdefmovPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpdefmovPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = NpdefmovPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = NpdefmovPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setMensaje($v)
 	{
 
-		if ($this->mensaje !== $v) {
-			$this->mensaje = $v;
-			$this->modifiedColumns[] = NpdefmovPeer::MENSAJE;
-		}
-
+    if ($this->mensaje !== $v) {
+        $this->mensaje = $v;
+        $this->modifiedColumns[] = NpdefmovPeer::MENSAJE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdefmovPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdefmovPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->status = $rs->getString($startcol + 2);
+      $this->status = $rs->getString($startcol + 2);
 
-			$this->mensaje = $rs->getString($startcol + 3);
+      $this->mensaje = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdefmov object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdefmov object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseNpdefmov extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdefmovPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefmovPeer::doUpdate($this, $con);

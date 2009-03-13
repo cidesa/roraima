@@ -49,207 +49,237 @@ abstract class BaseTabla43 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumcom()
-	{
+  
+  public function getNumcom()
+  {
 
-		return $this->numcom; 		
-	}
-	
-	public function getFeccom($format = 'Y-m-d')
-	{
+    return trim($this->numcom);
 
-		if ($this->feccom === null || $this->feccom === '') {
-			return null;
-		} elseif (!is_int($this->feccom)) {
-						$ts = strtotime($this->feccom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
-			}
-		} else {
-			$ts = $this->feccom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFeccom($format = 'Y-m-d')
+  {
 
-	
-	public function getDebcre()
-	{
+    if ($this->feccom === null || $this->feccom === '') {
+      return null;
+    } elseif (!is_int($this->feccom)) {
+            $ts = adodb_strtotime($this->feccom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
+      }
+    } else {
+      $ts = $this->feccom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->debcre; 		
-	}
-	
-	public function getCodcta()
-	{
+  
+  public function getDebcre()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getNumasi()
-	{
+    return trim($this->debcre);
 
-		return number_format($this->numasi,2,',','.');
-		
-	}
-	
-	public function getRefasi()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->refasi; 		
-	}
-	
-	public function getDesasi()
-	{
+    return trim($this->codcta);
 
-		return $this->desasi; 		
-	}
-	
-	public function getMonasi()
-	{
+  }
+  
+  public function getNumasi($val=false)
+  {
 
-		return number_format($this->monasi,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->numasi,2,',','.');
+    else return $this->numasi;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getRefasi()
+  {
+
+    return trim($this->refasi);
+
+  }
+  
+  public function getDesasi()
+  {
+
+    return trim($this->desasi);
+
+  }
+  
+  public function getMonasi($val=false)
+  {
+
+    if($val) return number_format($this->monasi,2,',','.');
+    else return $this->monasi;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = Tabla43Peer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = Tabla43Peer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setFeccom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccom !== $ts) {
-			$this->feccom = $ts;
-			$this->modifiedColumns[] = Tabla43Peer::FECCOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccom !== $ts) {
+      $this->feccom = $ts;
+      $this->modifiedColumns[] = Tabla43Peer::FECCOM;
+    }
 
 	} 
 	
 	public function setDebcre($v)
 	{
 
-		if ($this->debcre !== $v) {
-			$this->debcre = $v;
-			$this->modifiedColumns[] = Tabla43Peer::DEBCRE;
-		}
-
+    if ($this->debcre !== $v) {
+        $this->debcre = $v;
+        $this->modifiedColumns[] = Tabla43Peer::DEBCRE;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = Tabla43Peer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = Tabla43Peer::CODCTA;
+      }
+  
 	} 
 	
 	public function setNumasi($v)
 	{
 
-		if ($this->numasi !== $v) {
-			$this->numasi = $v;
-			$this->modifiedColumns[] = Tabla43Peer::NUMASI;
-		}
-
+    if ($this->numasi !== $v) {
+        $this->numasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Tabla43Peer::NUMASI;
+      }
+  
 	} 
 	
 	public function setRefasi($v)
 	{
 
-		if ($this->refasi !== $v) {
-			$this->refasi = $v;
-			$this->modifiedColumns[] = Tabla43Peer::REFASI;
-		}
-
+    if ($this->refasi !== $v) {
+        $this->refasi = $v;
+        $this->modifiedColumns[] = Tabla43Peer::REFASI;
+      }
+  
 	} 
 	
 	public function setDesasi($v)
 	{
 
-		if ($this->desasi !== $v) {
-			$this->desasi = $v;
-			$this->modifiedColumns[] = Tabla43Peer::DESASI;
-		}
-
+    if ($this->desasi !== $v) {
+        $this->desasi = $v;
+        $this->modifiedColumns[] = Tabla43Peer::DESASI;
+      }
+  
 	} 
 	
 	public function setMonasi($v)
 	{
 
-		if ($this->monasi !== $v) {
-			$this->monasi = $v;
-			$this->modifiedColumns[] = Tabla43Peer::MONASI;
-		}
-
+    if ($this->monasi !== $v) {
+        $this->monasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Tabla43Peer::MONASI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Tabla43Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Tabla43Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numcom = $rs->getString($startcol + 0);
+      $this->numcom = $rs->getString($startcol + 0);
 
-			$this->feccom = $rs->getDate($startcol + 1, null);
+      $this->feccom = $rs->getDate($startcol + 1, null);
 
-			$this->debcre = $rs->getString($startcol + 2);
+      $this->debcre = $rs->getString($startcol + 2);
 
-			$this->codcta = $rs->getString($startcol + 3);
+      $this->codcta = $rs->getString($startcol + 3);
 
-			$this->numasi = $rs->getFloat($startcol + 4);
+      $this->numasi = $rs->getFloat($startcol + 4);
 
-			$this->refasi = $rs->getString($startcol + 5);
+      $this->refasi = $rs->getString($startcol + 5);
 
-			$this->desasi = $rs->getString($startcol + 6);
+      $this->desasi = $rs->getString($startcol + 6);
 
-			$this->monasi = $rs->getFloat($startcol + 7);
+      $this->monasi = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tabla43 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tabla43 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -306,6 +336,7 @@ abstract class BaseTabla43 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Tabla43Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Tabla43Peer::doUpdate($this, $con);

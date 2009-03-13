@@ -25,74 +25,99 @@ abstract class BaseNpnivedu extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodniv()
-	{
+  
+  public function getCodniv()
+  {
 
-		return $this->codniv; 		
-	}
-	
-	public function getDesniv()
-	{
+    return trim($this->codniv);
 
-		return $this->desniv; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDesniv()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->desniv);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = NpniveduPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = NpniveduPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setDesniv($v)
 	{
 
-		if ($this->desniv !== $v) {
-			$this->desniv = $v;
-			$this->modifiedColumns[] = NpniveduPeer::DESNIV;
-		}
-
+    if ($this->desniv !== $v) {
+        $this->desniv = $v;
+        $this->modifiedColumns[] = NpniveduPeer::DESNIV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpniveduPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpniveduPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codniv = $rs->getString($startcol + 0);
+      $this->codniv = $rs->getString($startcol + 0);
 
-			$this->desniv = $rs->getString($startcol + 1);
+      $this->desniv = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npnivedu object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npnivedu object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseNpnivedu extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpniveduPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpniveduPeer::doUpdate($this, $con);

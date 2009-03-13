@@ -1,0 +1,47 @@
+opciones:                  # Opciones generales
+  eliminar:                true
+  tabla:                   tsdetsal
+  anchogrid:               1100
+  ancho:                   1000
+  filas:                   25
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codart
+  esgrabable:              true
+  html:                    [size="20"]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [size="40", readonly=true]
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monsal
+  esnumerico:              true
+  html:                    [size="10"]
+4:        # Columna 4
+  titulo:                  IVA
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monrec
+  esnumerico:              true
+  html:                    [size="10"]
+5:        # Columna 5
+  titulo:                  Monto Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             totsal
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+6:       # Columna 6
+  titulo:                  Código Partida
+  tipo:                    t
+  nombrecampo:             codpar
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="20" readonly=true]

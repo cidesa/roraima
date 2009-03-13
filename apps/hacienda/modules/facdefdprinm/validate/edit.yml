@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "fcdprinm{anovig}"
+
+names:
+  fcdprinm{anovig}:
+    required:  Yes
+    required_msg: Año es un campo requerido
+    validators: Validator_anovig
+
+Validator_anovig:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcdprinm
+        column:       anovig
+        unique_error: El Año ya Existe intente con otro.

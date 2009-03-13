@@ -9,66 +9,68 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($npconpri, 'getId') ?>
-
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
 <fieldset id="sf_fieldset_none" class="">
-
+<legend><?php echo __('Conceptos para las Primas por Nómina')?></legend>
 <div class="form-row">
-  <?php echo label_for('npconpri[codnom]', __($labels['npconpri{codnom}']), '') ?>
+  <?php echo label_for('npconpri[codnom]', __($labels['npconpri{codnom}']), 'class="required" Style="width:120px"') ?>
   <div class="content<?php if ($sf_request->hasError('npconpri{codnom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npconpri{codnom}')): ?>
     <?php echo form_error('npconpri{codnom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npconpri, 'getCodnom', array (
-  'size' => 10,
-  'control_name' => 'npconpri[codnom]',
-  'maxlength' => '10,',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<?php echo button_to('...','#')?>
-    </div>
-  <br>  
-  <?php echo label_for('npconpri[nomina]', __($labels['npconpri{nomina}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('npconpri{nomina}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npconpri{nomina}')): ?>
-    <?php echo form_error('npconpri{nomina}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+<?php echo input_auto_complete_tag('npconpri[codnom]', $npconpri->getCodnom(),
+    'nomconceptosprimas/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 3, 'size' => 10,
+    'readonly'  =>  $npconpri->getId()!='' ? true : false ,
+    'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npconpri_codnom').value=cadena",
+	'onBlur'=> remote_function(array(
+			  'url'      => 'nomconceptosprimas/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+			  'condition' => "$('npconpri_codnom').value != '' && $('id').value == ''",
+  			  'with' => "'ajax=1&cajtexmos=npconpri_nomina&cajtexcom=npconpri_codnom&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+?>
+ <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npdefcpt_nomconceptossalariointegral/clase/Npnomina/frame/sf_admin_edit_form/obj1/npconpri_codnom/obj2/npconpri_nomina/campo1/codnom/campo2/nomnom/param1/1p','','','botoncat')?>
 
   <?php $value = object_input_tag($npconpri, 'getNomina', array (
   'disabled' => true,
   'control_name' => 'npconpri[nomina]',
-  'size' => 20,
+  'size' => 60,
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>    
-</div>
+    </div>
 
-<div class="form-row">
-  <?php echo label_for('npconpri[codcon]', __($labels['npconpri{codcon}']), '') ?>
+<br>
+
+  <?php echo label_for('npconpri[codcon]', __($labels['npconpri{codcon}']), 'class="required" Style="width:120px"') ?>
   <div class="content<?php if ($sf_request->hasError('npconpri{codcon}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npconpri{codcon}')): ?>
     <?php echo form_error('npconpri{codcon}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npconpri, 'getCodcon', array (
-  'size' => 20,
+   <?php $value = object_input_tag($npconpri, 'getCodcon', array (
+  'size' => 10,
   'control_name' => 'npconpri[codcon]',
+  'readonly'  =>  $npconpri->getId()!='' ? true : false ,
+  'maxlength' => 3,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npconpri_codcon').value=cadena",
+  'onBlur'=> remote_function(array(
+			  'url'      => 'nomconceptosprimas/ajax',
+			  'complete' => 'AjaxJSON(request, json), verificar()',
+			  'condition' => "$('npconpri_codcon').value != '' && $('id').value == ''",
+  			  'with' => "'ajax=2&cajtexmos=npconpri_concepto&nomina='+$('npconpri_codnom').value+'&cajtexcom=npconpri_codcon&codigo='+this.value"
+			  ))
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<?php echo button_to('...','#')?>
-    </div>
-  <br>  
-  <?php echo label_for('npconpri[concepto]', __($labels['npconpri{concepto}']), '') ?>
-  <div class="content<?php if ($sf_request->hasError('npconpri{concepto}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npconpri{concepto}')): ?>
-    <?php echo form_error('npconpri{concepto}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefcpt_nomconceptossalariointegral2/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/npconpri_codcon/obj2/npconpri_concepto/campo1/codcon/campo2/nomcon/param1/'+$('npconpri_codnom').value+'",'','','botoncat')?>
+<?php echo input_hidden_tag('existe', '') ?>
   <?php $value = object_input_tag($npconpri, 'getConcepto', array (
   'disabled' => true,
   'control_name' => 'npconpri[concepto]',
-  'size' => 20,
+  'size' => 60,
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>    
+    </div>
 </div>
 
 </fieldset>
@@ -78,7 +80,7 @@
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($npconpri->getId()): ?>
+      <li class="float-rigth"><?php if ($npconpri->getId()): ?>
 <?php echo button_to(__('delete'), 'nomconceptosprimas/delete?id='.$npconpri->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -86,3 +88,31 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+<script language="JavaScript" type="text/javascript">
+  deshabilitar();
+
+  function deshabilitar()
+  {
+  	var id='<?php echo $npconpri->getId()?>';
+  	if (id!="")
+  	{
+     $$('.botoncat')[0].disabled=true;
+  	 $$('.botoncat')[1].disabled=true;
+  	}
+  }
+
+  function verificar()
+  {
+  	if ($('existe').value=='S')
+  	{
+  	  alert('El Concepto no esta asociado a la Nomina');
+  	  $('npconpri_codcon').value="";
+  	}
+
+  	if ($('existe').value=='SS')
+  	{
+  	  alert('El Concepto no existe');
+  	  $('npconpri_codcon').value="";
+  	}
+  }
+</script>

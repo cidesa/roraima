@@ -235,6 +235,7 @@ abstract class BaseCpimppagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpimppagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpasicarempMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpasicarempMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpasicarempMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npasicaremp');
 		$tMap->setPhpName('Npasicaremp');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npasicaremp_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -40,7 +42,7 @@ class NpasicarempMapBuilder {
 
 		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 32);
 
-		$tMap->addColumn('FECASI', 'Fecasi', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECASI', 'Fecasi', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('NOMEMP', 'Nomemp', 'string', CreoleTypes::VARCHAR, false, 510);
 
@@ -52,13 +54,13 @@ class NpasicarempMapBuilder {
 
 		$tMap->addColumn('UNIEJE', 'Unieje', 'string', CreoleTypes::VARCHAR, false, 30);
 
-		$tMap->addColumn('SUELDO', 'Sueldo', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('SUELDO', 'Sueldo', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('NRONOM', 'Nronom', 'string', CreoleTypes::VARCHAR, false, 16);
 
-		$tMap->addColumn('MONTONOMINA', 'Montonomina', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONTONOMINA', 'Montonomina', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, false, 32);
 
@@ -71,6 +73,6 @@ class NpasicarempMapBuilder {
 		$tMap->addColumn('PASO', 'Paso', 'string', CreoleTypes::VARCHAR, false, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

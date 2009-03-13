@@ -33,111 +33,138 @@ abstract class BaseBndefactResp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getDesact()
-	{
+    return trim($this->codact);
 
-		return $this->desact; 		
-	}
-	
-	public function getCanact()
-	{
+  }
+  
+  public function getDesact()
+  {
 
-		return number_format($this->canact,2,',','.');
-		
-	}
-	
-	public function getStaact()
-	{
+    return trim($this->desact);
 
-		return $this->staact; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCanact($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->canact,2,',','.');
+    else return $this->canact;
+
+  }
+  
+  public function getStaact()
+  {
+
+    return trim($this->staact);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BndefactRespPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BndefactRespPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setDesact($v)
 	{
 
-		if ($this->desact !== $v) {
-			$this->desact = $v;
-			$this->modifiedColumns[] = BndefactRespPeer::DESACT;
-		}
-
+    if ($this->desact !== $v) {
+        $this->desact = $v;
+        $this->modifiedColumns[] = BndefactRespPeer::DESACT;
+      }
+  
 	} 
 	
 	public function setCanact($v)
 	{
 
-		if ($this->canact !== $v) {
-			$this->canact = $v;
-			$this->modifiedColumns[] = BndefactRespPeer::CANACT;
-		}
-
+    if ($this->canact !== $v) {
+        $this->canact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndefactRespPeer::CANACT;
+      }
+  
 	} 
 	
 	public function setStaact($v)
 	{
 
-		if ($this->staact !== $v) {
-			$this->staact = $v;
-			$this->modifiedColumns[] = BndefactRespPeer::STAACT;
-		}
-
+    if ($this->staact !== $v) {
+        $this->staact = $v;
+        $this->modifiedColumns[] = BndefactRespPeer::STAACT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndefactRespPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndefactRespPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->desact = $rs->getString($startcol + 1);
+      $this->desact = $rs->getString($startcol + 1);
 
-			$this->canact = $rs->getFloat($startcol + 2);
+      $this->canact = $rs->getFloat($startcol + 2);
 
-			$this->staact = $rs->getString($startcol + 3);
+      $this->staact = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating BndefactResp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating BndefactResp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

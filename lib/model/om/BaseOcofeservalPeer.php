@@ -230,6 +230,7 @@ abstract class BaseOcofeservalPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcofeservalPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

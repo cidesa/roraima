@@ -260,6 +260,7 @@ abstract class BaseTspararcPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TspararcPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

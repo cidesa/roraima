@@ -7,8 +7,8 @@ generator:
       codtipapo: { name: Codigo}
       destipapo: { name: Descripcion}
       porret: { name: Porcentaje Retencion}
-      porapo: { name: Porcentaje Aporte Pat}    
-        
+      porapo: { name: Porcentaje Aporte Pat}
+
     list:
       title:          Retenciones y Aportes
       filters:        [codtipapo]
@@ -17,6 +17,12 @@ generator:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
+      sort: codtipapo
     edit:
       title:          Edicion de Retenciones y Aportes
       display:       [=codtipapo, destipapo, porret, porapo]
+      actions:
+        _list:                 ~
+        _save:                 ~
+        _delete:               ~
+        _create:               ~

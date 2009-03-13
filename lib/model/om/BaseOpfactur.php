@@ -97,433 +97,475 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumord()
-	{
+  
+  public function getNumord()
+  {
 
-		return $this->numord; 		
-	}
-	
-	public function getFecfac($format = 'Y-m-d')
-	{
+    return trim($this->numord);
 
-		if ($this->fecfac === null || $this->fecfac === '') {
-			return null;
-		} elseif (!is_int($this->fecfac)) {
-						$ts = strtotime($this->fecfac);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfac] as date/time value: " . var_export($this->fecfac, true));
-			}
-		} else {
-			$ts = $this->fecfac;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecfac($format = 'Y-m-d')
+  {
 
-	
-	public function getNumfac()
-	{
+    if ($this->fecfac === null || $this->fecfac === '') {
+      return null;
+    } elseif (!is_int($this->fecfac)) {
+            $ts = adodb_strtotime($this->fecfac);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfac] as date/time value: " . var_export($this->fecfac, true));
+      }
+    } else {
+      $ts = $this->fecfac;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->numfac; 		
-	}
-	
-	public function getNumctr()
-	{
+  
+  public function getNumfac()
+  {
 
-		return $this->numctr; 		
-	}
-	
-	public function getTiptra()
-	{
+    return trim($this->numfac);
 
-		return $this->tiptra; 		
-	}
-	
-	public function getTotfac()
-	{
+  }
+  
+  public function getNumctr()
+  {
 
-		return number_format($this->totfac,2,',','.');
-		
-	}
-	
-	public function getExeiva()
-	{
+    return trim($this->numctr);
 
-		return number_format($this->exeiva,2,',','.');
-		
-	}
-	
-	public function getBasimp()
-	{
+  }
+  
+  public function getTiptra()
+  {
 
-		return number_format($this->basimp,2,',','.');
-		
-	}
-	
-	public function getPoriva()
-	{
+    return trim($this->tiptra);
 
-		return number_format($this->poriva,2,',','.');
-		
-	}
-	
-	public function getMoniva()
-	{
+  }
+  
+  public function getTotfac($val=false)
+  {
 
-		return number_format($this->moniva,2,',','.');
-		
-	}
-	
-	public function getMonret()
-	{
+    if($val) return number_format($this->totfac,2,',','.');
+    else return $this->totfac;
 
-		return number_format($this->monret,2,',','.');
-		
-	}
-	
-	public function getBasltf()
-	{
+  }
+  
+  public function getExeiva($val=false)
+  {
 
-		return number_format($this->basltf,2,',','.');
-		
-	}
-	
-	public function getPorltf()
-	{
+    if($val) return number_format($this->exeiva,2,',','.');
+    else return $this->exeiva;
 
-		return number_format($this->porltf,2,',','.');
-		
-	}
-	
-	public function getMonltf()
-	{
+  }
+  
+  public function getBasimp($val=false)
+  {
 
-		return number_format($this->monltf,2,',','.');
-		
-	}
-	
-	public function getBasislr()
-	{
+    if($val) return number_format($this->basimp,2,',','.');
+    else return $this->basimp;
 
-		return number_format($this->basislr,2,',','.');
-		
-	}
-	
-	public function getPorislr()
-	{
+  }
+  
+  public function getPoriva($val=false)
+  {
 
-		return number_format($this->porislr,2,',','.');
-		
-	}
-	
-	public function getMonislr()
-	{
+    if($val) return number_format($this->poriva,2,',','.');
+    else return $this->poriva;
 
-		return number_format($this->monislr,2,',','.');
-		
-	}
-	
-	public function getCodislr()
-	{
+  }
+  
+  public function getMoniva($val=false)
+  {
 
-		return $this->codislr; 		
-	}
-	
-	public function getRifalt()
-	{
+    if($val) return number_format($this->moniva,2,',','.');
+    else return $this->moniva;
 
-		return $this->rifalt; 		
-	}
-	
-	public function getFacafe()
-	{
+  }
+  
+  public function getMonret($val=false)
+  {
 
-		return $this->facafe; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monret,2,',','.');
+    else return $this->monret;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getBasltf($val=false)
+  {
+
+    if($val) return number_format($this->basltf,2,',','.');
+    else return $this->basltf;
+
+  }
+  
+  public function getPorltf($val=false)
+  {
+
+    if($val) return number_format($this->porltf,2,',','.');
+    else return $this->porltf;
+
+  }
+  
+  public function getMonltf($val=false)
+  {
+
+    if($val) return number_format($this->monltf,2,',','.');
+    else return $this->monltf;
+
+  }
+  
+  public function getBasislr($val=false)
+  {
+
+    if($val) return number_format($this->basislr,2,',','.');
+    else return $this->basislr;
+
+  }
+  
+  public function getPorislr($val=false)
+  {
+
+    if($val) return number_format($this->porislr,2,',','.');
+    else return $this->porislr;
+
+  }
+  
+  public function getMonislr($val=false)
+  {
+
+    if($val) return number_format($this->monislr,2,',','.');
+    else return $this->monislr;
+
+  }
+  
+  public function getCodislr()
+  {
+
+    return trim($this->codislr);
+
+  }
+  
+  public function getRifalt()
+  {
+
+    return trim($this->rifalt);
+
+  }
+  
+  public function getFacafe()
+  {
+
+    return trim($this->facafe);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = OpfacturPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = OpfacturPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setFecfac($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfac] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfac !== $ts) {
-			$this->fecfac = $ts;
-			$this->modifiedColumns[] = OpfacturPeer::FECFAC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfac] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfac !== $ts) {
+      $this->fecfac = $ts;
+      $this->modifiedColumns[] = OpfacturPeer::FECFAC;
+    }
 
 	} 
 	
 	public function setNumfac($v)
 	{
 
-		if ($this->numfac !== $v) {
-			$this->numfac = $v;
-			$this->modifiedColumns[] = OpfacturPeer::NUMFAC;
-		}
-
+    if ($this->numfac !== $v) {
+        $this->numfac = $v;
+        $this->modifiedColumns[] = OpfacturPeer::NUMFAC;
+      }
+  
 	} 
 	
 	public function setNumctr($v)
 	{
 
-		if ($this->numctr !== $v) {
-			$this->numctr = $v;
-			$this->modifiedColumns[] = OpfacturPeer::NUMCTR;
-		}
-
+    if ($this->numctr !== $v) {
+        $this->numctr = $v;
+        $this->modifiedColumns[] = OpfacturPeer::NUMCTR;
+      }
+  
 	} 
 	
 	public function setTiptra($v)
 	{
 
-		if ($this->tiptra !== $v) {
-			$this->tiptra = $v;
-			$this->modifiedColumns[] = OpfacturPeer::TIPTRA;
-		}
-
+    if ($this->tiptra !== $v) {
+        $this->tiptra = $v;
+        $this->modifiedColumns[] = OpfacturPeer::TIPTRA;
+      }
+  
 	} 
 	
 	public function setTotfac($v)
 	{
 
-		if ($this->totfac !== $v) {
-			$this->totfac = $v;
-			$this->modifiedColumns[] = OpfacturPeer::TOTFAC;
-		}
-
+    if ($this->totfac !== $v) {
+        $this->totfac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::TOTFAC;
+      }
+  
 	} 
 	
 	public function setExeiva($v)
 	{
 
-		if ($this->exeiva !== $v) {
-			$this->exeiva = $v;
-			$this->modifiedColumns[] = OpfacturPeer::EXEIVA;
-		}
-
+    if ($this->exeiva !== $v) {
+        $this->exeiva = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::EXEIVA;
+      }
+  
 	} 
 	
 	public function setBasimp($v)
 	{
 
-		if ($this->basimp !== $v) {
-			$this->basimp = $v;
-			$this->modifiedColumns[] = OpfacturPeer::BASIMP;
-		}
-
+    if ($this->basimp !== $v) {
+        $this->basimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::BASIMP;
+      }
+  
 	} 
 	
 	public function setPoriva($v)
 	{
 
-		if ($this->poriva !== $v) {
-			$this->poriva = $v;
-			$this->modifiedColumns[] = OpfacturPeer::PORIVA;
-		}
-
+    if ($this->poriva !== $v) {
+        $this->poriva = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::PORIVA;
+      }
+  
 	} 
 	
 	public function setMoniva($v)
 	{
 
-		if ($this->moniva !== $v) {
-			$this->moniva = $v;
-			$this->modifiedColumns[] = OpfacturPeer::MONIVA;
-		}
-
+    if ($this->moniva !== $v) {
+        $this->moniva = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::MONIVA;
+      }
+  
 	} 
 	
 	public function setMonret($v)
 	{
 
-		if ($this->monret !== $v) {
-			$this->monret = $v;
-			$this->modifiedColumns[] = OpfacturPeer::MONRET;
-		}
-
+    if ($this->monret !== $v) {
+        $this->monret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::MONRET;
+      }
+  
 	} 
 	
 	public function setBasltf($v)
 	{
 
-		if ($this->basltf !== $v) {
-			$this->basltf = $v;
-			$this->modifiedColumns[] = OpfacturPeer::BASLTF;
-		}
-
+    if ($this->basltf !== $v) {
+        $this->basltf = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::BASLTF;
+      }
+  
 	} 
 	
 	public function setPorltf($v)
 	{
 
-		if ($this->porltf !== $v) {
-			$this->porltf = $v;
-			$this->modifiedColumns[] = OpfacturPeer::PORLTF;
-		}
-
+    if ($this->porltf !== $v) {
+        $this->porltf = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::PORLTF;
+      }
+  
 	} 
 	
 	public function setMonltf($v)
 	{
 
-		if ($this->monltf !== $v) {
-			$this->monltf = $v;
-			$this->modifiedColumns[] = OpfacturPeer::MONLTF;
-		}
-
+    if ($this->monltf !== $v) {
+        $this->monltf = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::MONLTF;
+      }
+  
 	} 
 	
 	public function setBasislr($v)
 	{
 
-		if ($this->basislr !== $v) {
-			$this->basislr = $v;
-			$this->modifiedColumns[] = OpfacturPeer::BASISLR;
-		}
-
+    if ($this->basislr !== $v) {
+        $this->basislr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::BASISLR;
+      }
+  
 	} 
 	
 	public function setPorislr($v)
 	{
 
-		if ($this->porislr !== $v) {
-			$this->porislr = $v;
-			$this->modifiedColumns[] = OpfacturPeer::PORISLR;
-		}
-
+    if ($this->porislr !== $v) {
+        $this->porislr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::PORISLR;
+      }
+  
 	} 
 	
 	public function setMonislr($v)
 	{
 
-		if ($this->monislr !== $v) {
-			$this->monislr = $v;
-			$this->modifiedColumns[] = OpfacturPeer::MONISLR;
-		}
-
+    if ($this->monislr !== $v) {
+        $this->monislr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpfacturPeer::MONISLR;
+      }
+  
 	} 
 	
 	public function setCodislr($v)
 	{
 
-		if ($this->codislr !== $v) {
-			$this->codislr = $v;
-			$this->modifiedColumns[] = OpfacturPeer::CODISLR;
-		}
-
+    if ($this->codislr !== $v) {
+        $this->codislr = $v;
+        $this->modifiedColumns[] = OpfacturPeer::CODISLR;
+      }
+  
 	} 
 	
 	public function setRifalt($v)
 	{
 
-		if ($this->rifalt !== $v) {
-			$this->rifalt = $v;
-			$this->modifiedColumns[] = OpfacturPeer::RIFALT;
-		}
-
+    if ($this->rifalt !== $v) {
+        $this->rifalt = $v;
+        $this->modifiedColumns[] = OpfacturPeer::RIFALT;
+      }
+  
 	} 
 	
 	public function setFacafe($v)
 	{
 
-		if ($this->facafe !== $v) {
-			$this->facafe = $v;
-			$this->modifiedColumns[] = OpfacturPeer::FACAFE;
-		}
-
+    if ($this->facafe !== $v) {
+        $this->facafe = $v;
+        $this->modifiedColumns[] = OpfacturPeer::FACAFE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpfacturPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpfacturPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numord = $rs->getString($startcol + 0);
+      $this->numord = $rs->getString($startcol + 0);
 
-			$this->fecfac = $rs->getDate($startcol + 1, null);
+      $this->fecfac = $rs->getDate($startcol + 1, null);
 
-			$this->numfac = $rs->getString($startcol + 2);
+      $this->numfac = $rs->getString($startcol + 2);
 
-			$this->numctr = $rs->getString($startcol + 3);
+      $this->numctr = $rs->getString($startcol + 3);
 
-			$this->tiptra = $rs->getString($startcol + 4);
+      $this->tiptra = $rs->getString($startcol + 4);
 
-			$this->totfac = $rs->getFloat($startcol + 5);
+      $this->totfac = $rs->getFloat($startcol + 5);
 
-			$this->exeiva = $rs->getFloat($startcol + 6);
+      $this->exeiva = $rs->getFloat($startcol + 6);
 
-			$this->basimp = $rs->getFloat($startcol + 7);
+      $this->basimp = $rs->getFloat($startcol + 7);
 
-			$this->poriva = $rs->getFloat($startcol + 8);
+      $this->poriva = $rs->getFloat($startcol + 8);
 
-			$this->moniva = $rs->getFloat($startcol + 9);
+      $this->moniva = $rs->getFloat($startcol + 9);
 
-			$this->monret = $rs->getFloat($startcol + 10);
+      $this->monret = $rs->getFloat($startcol + 10);
 
-			$this->basltf = $rs->getFloat($startcol + 11);
+      $this->basltf = $rs->getFloat($startcol + 11);
 
-			$this->porltf = $rs->getFloat($startcol + 12);
+      $this->porltf = $rs->getFloat($startcol + 12);
 
-			$this->monltf = $rs->getFloat($startcol + 13);
+      $this->monltf = $rs->getFloat($startcol + 13);
 
-			$this->basislr = $rs->getFloat($startcol + 14);
+      $this->basislr = $rs->getFloat($startcol + 14);
 
-			$this->porislr = $rs->getFloat($startcol + 15);
+      $this->porislr = $rs->getFloat($startcol + 15);
 
-			$this->monislr = $rs->getFloat($startcol + 16);
+      $this->monislr = $rs->getFloat($startcol + 16);
 
-			$this->codislr = $rs->getString($startcol + 17);
+      $this->codislr = $rs->getString($startcol + 17);
 
-			$this->rifalt = $rs->getString($startcol + 18);
+      $this->rifalt = $rs->getString($startcol + 18);
 
-			$this->facafe = $rs->getString($startcol + 19);
+      $this->facafe = $rs->getString($startcol + 19);
 
-			$this->id = $rs->getInt($startcol + 20);
+      $this->id = $rs->getInt($startcol + 20);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 21; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opfactur object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 21; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opfactur object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -580,6 +622,7 @@ abstract class BaseOpfactur extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpfacturPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpfacturPeer::doUpdate($this, $con);

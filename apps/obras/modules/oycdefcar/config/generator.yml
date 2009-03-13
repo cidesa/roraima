@@ -6,15 +6,21 @@ generator:
     fields:
       codtipcar:    { name: Código}
       destipcar:    { name: Descripción}
-              
+
     list:
-      title:          Definición de Cargos
+      title:          Cargos
       filters:        [codtipcar]
-      display:        [codtipcar, destipcar]
+      display:        [=codtipcar, destipcar]
+      sort:  codtipcar
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Definición de Cargos
+      title:          Edición de Cargos
       display:        [codtipcar, destipcar]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

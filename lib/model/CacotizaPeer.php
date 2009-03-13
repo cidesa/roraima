@@ -8,5 +8,5 @@
  * @package lib.model
  */ 
 class CacotizaPeer extends BaseCacotizaPeer
-{
+{		
 }

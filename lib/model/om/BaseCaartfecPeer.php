@@ -220,6 +220,7 @@ abstract class BaseCaartfecPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaartfecPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

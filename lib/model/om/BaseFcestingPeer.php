@@ -215,6 +215,7 @@ abstract class BaseFcestingPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcestingPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

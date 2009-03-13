@@ -13,7 +13,7 @@ abstract class BaseCatraalmPeer {
 	const CLASS_DEFAULT = 'lib.model.Catraalm';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,7 +32,13 @@ abstract class BaseCatraalmPeer {
 	const ALMORI = 'catraalm.ALMORI';
 
 	
+	const CODUBIORI = 'catraalm.CODUBIORI';
+
+	
 	const ALMDES = 'catraalm.ALMDES';
+
+	
+	const CODUBIDES = 'catraalm.CODUBIDES';
 
 	
 	const ID = 'catraalm.ID';
@@ -43,18 +49,18 @@ abstract class BaseCatraalmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtra', 'Fectra', 'Destra', 'Almori', 'Almdes', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CatraalmPeer::CODTRA, CatraalmPeer::FECTRA, CatraalmPeer::DESTRA, CatraalmPeer::ALMORI, CatraalmPeer::ALMDES, CatraalmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtra', 'fectra', 'destra', 'almori', 'almdes', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codtra', 'Fectra', 'Destra', 'Almori', 'Codubiori', 'Almdes', 'Codubides', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CatraalmPeer::CODTRA, CatraalmPeer::FECTRA, CatraalmPeer::DESTRA, CatraalmPeer::ALMORI, CatraalmPeer::CODUBIORI, CatraalmPeer::ALMDES, CatraalmPeer::CODUBIDES, CatraalmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtra', 'fectra', 'destra', 'almori', 'codubiori', 'almdes', 'codubides', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtra' => 0, 'Fectra' => 1, 'Destra' => 2, 'Almori' => 3, 'Almdes' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (CatraalmPeer::CODTRA => 0, CatraalmPeer::FECTRA => 1, CatraalmPeer::DESTRA => 2, CatraalmPeer::ALMORI => 3, CatraalmPeer::ALMDES => 4, CatraalmPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtra' => 0, 'fectra' => 1, 'destra' => 2, 'almori' => 3, 'almdes' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codtra' => 0, 'Fectra' => 1, 'Destra' => 2, 'Almori' => 3, 'Codubiori' => 4, 'Almdes' => 5, 'Codubides' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (CatraalmPeer::CODTRA => 0, CatraalmPeer::FECTRA => 1, CatraalmPeer::DESTRA => 2, CatraalmPeer::ALMORI => 3, CatraalmPeer::CODUBIORI => 4, CatraalmPeer::ALMDES => 5, CatraalmPeer::CODUBIDES => 6, CatraalmPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codtra' => 0, 'fectra' => 1, 'destra' => 2, 'almori' => 3, 'codubiori' => 4, 'almdes' => 5, 'codubides' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -116,7 +122,11 @@ abstract class BaseCatraalmPeer {
 
 		$criteria->addSelectColumn(CatraalmPeer::ALMORI);
 
+		$criteria->addSelectColumn(CatraalmPeer::CODUBIORI);
+
 		$criteria->addSelectColumn(CatraalmPeer::ALMDES);
+
+		$criteria->addSelectColumn(CatraalmPeer::CODUBIDES);
 
 		$criteria->addSelectColumn(CatraalmPeer::ID);
 
@@ -220,6 +230,7 @@ abstract class BaseCatraalmPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CatraalmPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

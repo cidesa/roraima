@@ -65,301 +65,334 @@ abstract class BaseDftemporal extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodigo()
-	{
+  
+  public function getCodigo()
+  {
 
-		return $this->codigo; 		
-	}
-	
-	public function getFecha($format = 'Y-m-d')
-	{
+    return trim($this->codigo);
 
-		if ($this->fecha === null || $this->fecha === '') {
-			return null;
-		} elseif (!is_int($this->fecha)) {
-						$ts = strtotime($this->fecha);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
-			}
-		} else {
-			$ts = $this->fecha;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecha($format = 'Y-m-d')
+  {
 
-	
-	public function getMonto()
-	{
+    if ($this->fecha === null || $this->fecha === '') {
+      return null;
+    } elseif (!is_int($this->fecha)) {
+            $ts = adodb_strtotime($this->fecha);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
+      }
+    } else {
+      $ts = $this->fecha;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getAbr()
-	{
+  
+  public function getMonto($val=false)
+  {
 
-		return $this->abr; 		
-	}
-	
-	public function getBen()
-	{
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
 
-		return $this->ben; 		
-	}
-	
-	public function getFecharec($format = 'Y-m-d')
-	{
+  }
+  
+  public function getAbr()
+  {
 
-		if ($this->fecharec === null || $this->fecharec === '') {
-			return null;
-		} elseif (!is_int($this->fecharec)) {
-						$ts = strtotime($this->fecharec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecharec] as date/time value: " . var_export($this->fecharec, true));
-			}
-		} else {
-			$ts = $this->fecharec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->abr);
 
-	
-	public function getEstad()
-	{
+  }
+  
+  public function getBen()
+  {
 
-		return $this->estad; 		
-	}
-	
-	public function getNomtab()
-	{
+    return trim($this->ben);
 
-		return $this->nomtab; 		
-	}
-	
-	public function getUni()
-	{
+  }
+  
+  public function getFecharec($format = 'Y-m-d')
+  {
 
-		return $this->uni; 		
-	}
-	
-	public function getUnidad()
-	{
+    if ($this->fecharec === null || $this->fecharec === '') {
+      return null;
+    } elseif (!is_int($this->fecharec)) {
+            $ts = adodb_strtotime($this->fecharec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecharec] as date/time value: " . var_export($this->fecharec, true));
+      }
+    } else {
+      $ts = $this->fecharec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->unidad; 		
-	}
-	
-	public function getUnidadori()
-	{
+  
+  public function getEstad()
+  {
 
-		return $this->unidadori; 		
-	}
-	
-	public function getVida()
-	{
+    return trim($this->estad);
 
-		return $this->vida; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomtab()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomtab);
+
+  }
+  
+  public function getUni()
+  {
+
+    return trim($this->uni);
+
+  }
+  
+  public function getUnidad()
+  {
+
+    return trim($this->unidad);
+
+  }
+  
+  public function getUnidadori()
+  {
+
+    return trim($this->unidadori);
+
+  }
+  
+  public function getVida()
+  {
+
+    return trim($this->vida);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodigo($v)
 	{
 
-		if ($this->codigo !== $v) {
-			$this->codigo = $v;
-			$this->modifiedColumns[] = DftemporalPeer::CODIGO;
-		}
-
+    if ($this->codigo !== $v) {
+        $this->codigo = $v;
+        $this->modifiedColumns[] = DftemporalPeer::CODIGO;
+      }
+  
 	} 
 	
 	public function setFecha($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecha !== $ts) {
-			$this->fecha = $ts;
-			$this->modifiedColumns[] = DftemporalPeer::FECHA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha !== $ts) {
+      $this->fecha = $ts;
+      $this->modifiedColumns[] = DftemporalPeer::FECHA;
+    }
 
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = DftemporalPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = DftemporalPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setAbr($v)
 	{
 
-		if ($this->abr !== $v) {
-			$this->abr = $v;
-			$this->modifiedColumns[] = DftemporalPeer::ABR;
-		}
-
+    if ($this->abr !== $v) {
+        $this->abr = $v;
+        $this->modifiedColumns[] = DftemporalPeer::ABR;
+      }
+  
 	} 
 	
 	public function setBen($v)
 	{
 
-		if ($this->ben !== $v) {
-			$this->ben = $v;
-			$this->modifiedColumns[] = DftemporalPeer::BEN;
-		}
-
+    if ($this->ben !== $v) {
+        $this->ben = $v;
+        $this->modifiedColumns[] = DftemporalPeer::BEN;
+      }
+  
 	} 
 	
 	public function setFecharec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecharec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecharec !== $ts) {
-			$this->fecharec = $ts;
-			$this->modifiedColumns[] = DftemporalPeer::FECHAREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecharec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecharec !== $ts) {
+      $this->fecharec = $ts;
+      $this->modifiedColumns[] = DftemporalPeer::FECHAREC;
+    }
 
 	} 
 	
 	public function setEstad($v)
 	{
 
-		if ($this->estad !== $v) {
-			$this->estad = $v;
-			$this->modifiedColumns[] = DftemporalPeer::ESTAD;
-		}
-
+    if ($this->estad !== $v) {
+        $this->estad = $v;
+        $this->modifiedColumns[] = DftemporalPeer::ESTAD;
+      }
+  
 	} 
 	
 	public function setNomtab($v)
 	{
 
-		if ($this->nomtab !== $v) {
-			$this->nomtab = $v;
-			$this->modifiedColumns[] = DftemporalPeer::NOMTAB;
-		}
-
+    if ($this->nomtab !== $v) {
+        $this->nomtab = $v;
+        $this->modifiedColumns[] = DftemporalPeer::NOMTAB;
+      }
+  
 	} 
 	
 	public function setUni($v)
 	{
 
-		if ($this->uni !== $v) {
-			$this->uni = $v;
-			$this->modifiedColumns[] = DftemporalPeer::UNI;
-		}
-
+    if ($this->uni !== $v) {
+        $this->uni = $v;
+        $this->modifiedColumns[] = DftemporalPeer::UNI;
+      }
+  
 	} 
 	
 	public function setUnidad($v)
 	{
 
-		if ($this->unidad !== $v) {
-			$this->unidad = $v;
-			$this->modifiedColumns[] = DftemporalPeer::UNIDAD;
-		}
-
+    if ($this->unidad !== $v) {
+        $this->unidad = $v;
+        $this->modifiedColumns[] = DftemporalPeer::UNIDAD;
+      }
+  
 	} 
 	
 	public function setUnidadori($v)
 	{
 
-		if ($this->unidadori !== $v) {
-			$this->unidadori = $v;
-			$this->modifiedColumns[] = DftemporalPeer::UNIDADORI;
-		}
-
+    if ($this->unidadori !== $v) {
+        $this->unidadori = $v;
+        $this->modifiedColumns[] = DftemporalPeer::UNIDADORI;
+      }
+  
 	} 
 	
 	public function setVida($v)
 	{
 
-		if ($this->vida !== $v) {
-			$this->vida = $v;
-			$this->modifiedColumns[] = DftemporalPeer::VIDA;
-		}
-
+    if ($this->vida !== $v) {
+        $this->vida = $v;
+        $this->modifiedColumns[] = DftemporalPeer::VIDA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = DftemporalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = DftemporalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codigo = $rs->getString($startcol + 0);
+      $this->codigo = $rs->getString($startcol + 0);
 
-			$this->fecha = $rs->getDate($startcol + 1, null);
+      $this->fecha = $rs->getDate($startcol + 1, null);
 
-			$this->monto = $rs->getFloat($startcol + 2);
+      $this->monto = $rs->getFloat($startcol + 2);
 
-			$this->abr = $rs->getString($startcol + 3);
+      $this->abr = $rs->getString($startcol + 3);
 
-			$this->ben = $rs->getString($startcol + 4);
+      $this->ben = $rs->getString($startcol + 4);
 
-			$this->fecharec = $rs->getDate($startcol + 5, null);
+      $this->fecharec = $rs->getDate($startcol + 5, null);
 
-			$this->estad = $rs->getString($startcol + 6);
+      $this->estad = $rs->getString($startcol + 6);
 
-			$this->nomtab = $rs->getString($startcol + 7);
+      $this->nomtab = $rs->getString($startcol + 7);
 
-			$this->uni = $rs->getString($startcol + 8);
+      $this->uni = $rs->getString($startcol + 8);
 
-			$this->unidad = $rs->getString($startcol + 9);
+      $this->unidad = $rs->getString($startcol + 9);
 
-			$this->unidadori = $rs->getString($startcol + 10);
+      $this->unidadori = $rs->getString($startcol + 10);
 
-			$this->vida = $rs->getString($startcol + 11);
+      $this->vida = $rs->getString($startcol + 11);
 
-			$this->id = $rs->getInt($startcol + 12);
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 13; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Dftemporal object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Dftemporal object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -416,6 +449,7 @@ abstract class BaseDftemporal extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = DftemporalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += DftemporalPeer::doUpdate($this, $con);

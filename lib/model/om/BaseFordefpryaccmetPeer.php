@@ -13,7 +13,7 @@ abstract class BaseFordefpryaccmetPeer {
 	const CLASS_DEFAULT = 'lib.model.Fordefpryaccmet';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseFordefpryaccmetPeer {
 	const CODUNIMED = 'fordefpryaccmet.CODUNIMED';
 
 	
+	const CANMET = 'fordefpryaccmet.CANMET';
+
+	
 	const ID = 'fordefpryaccmet.ID';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseFordefpryaccmetPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codaccesp', 'Codmet', 'Desmet', 'Codunimed', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FordefpryaccmetPeer::CODPRO, FordefpryaccmetPeer::CODACCESP, FordefpryaccmetPeer::CODMET, FordefpryaccmetPeer::DESMET, FordefpryaccmetPeer::CODUNIMED, FordefpryaccmetPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codaccesp', 'codmet', 'desmet', 'codunimed', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codaccesp', 'Codmet', 'Desmet', 'Codunimed', 'Canmet', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FordefpryaccmetPeer::CODPRO, FordefpryaccmetPeer::CODACCESP, FordefpryaccmetPeer::CODMET, FordefpryaccmetPeer::DESMET, FordefpryaccmetPeer::CODUNIMED, FordefpryaccmetPeer::CANMET, FordefpryaccmetPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codaccesp', 'codmet', 'desmet', 'codunimed', 'canmet', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codaccesp' => 1, 'Codmet' => 2, 'Desmet' => 3, 'Codunimed' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (FordefpryaccmetPeer::CODPRO => 0, FordefpryaccmetPeer::CODACCESP => 1, FordefpryaccmetPeer::CODMET => 2, FordefpryaccmetPeer::DESMET => 3, FordefpryaccmetPeer::CODUNIMED => 4, FordefpryaccmetPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codaccesp' => 1, 'codmet' => 2, 'desmet' => 3, 'codunimed' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codaccesp' => 1, 'Codmet' => 2, 'Desmet' => 3, 'Codunimed' => 4, 'Canmet' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (FordefpryaccmetPeer::CODPRO => 0, FordefpryaccmetPeer::CODACCESP => 1, FordefpryaccmetPeer::CODMET => 2, FordefpryaccmetPeer::DESMET => 3, FordefpryaccmetPeer::CODUNIMED => 4, FordefpryaccmetPeer::CANMET => 5, FordefpryaccmetPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codaccesp' => 1, 'codmet' => 2, 'desmet' => 3, 'codunimed' => 4, 'canmet' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -117,6 +120,8 @@ abstract class BaseFordefpryaccmetPeer {
 		$criteria->addSelectColumn(FordefpryaccmetPeer::DESMET);
 
 		$criteria->addSelectColumn(FordefpryaccmetPeer::CODUNIMED);
+
+		$criteria->addSelectColumn(FordefpryaccmetPeer::CANMET);
 
 		$criteria->addSelectColumn(FordefpryaccmetPeer::ID);
 
@@ -220,6 +225,7 @@ abstract class BaseFordefpryaccmetPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefpryaccmetPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

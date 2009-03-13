@@ -1,0 +1,39 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Carcpart
+    theme:            cidesaGenerator
+    fields:
+      rcpart: { name: Número de la Recepción}
+      fecrcp: { name: Fecha de la Recepción}
+      codalm: { name: Cod Almacén}
+      codpro: { name: Cod Proveedor}
+      desrcp: { name: Descripción}
+      monrcp: { name: Monto Total}
+      codart: { name: Cod Artículo}
+      desart: { name: Descripción}
+      canrec: { name: Cant Recibida}
+      candev: { name: Cant Devuelta}
+      montot: { name: Monto}
+    edit:
+      title: Recepción de Productos Terminados
+      display:
+        "Recepción": [rcpart, fecrcp, codalm, codpro, desrcp, monrcp]
+        "Detalle de la Recepción": [codart, desart, canrec, candev, montot]
+        #"Detalle de la Recepción": [_grid]
+      fields:
+        desrcp: { params:  size=30}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+
+    list:
+      title: Recepción de Productos Terminados
+      display: [=rcpart, codpro]
+      filters: [rcpart, codpro]
+      object_actions:
+       _edit:        ~
+       _delete:        ~
+      max_per_page:	  10
+      sort:    rcpart

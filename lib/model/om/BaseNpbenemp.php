@@ -49,182 +49,213 @@ abstract class BaseNpbenemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codnom);
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCedben()
-	{
+    return trim($this->codcon);
 
-		return $this->cedben; 		
-	}
-	
-	public function getNomben()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return $this->nomben; 		
-	}
-	
-	public function getCodban()
-	{
+    return trim($this->codemp);
 
-		return $this->codban; 		
-	}
-	
-	public function getNumcue()
-	{
+  }
+  
+  public function getCedben()
+  {
 
-		return $this->numcue; 		
-	}
-	
-	public function getCodcar()
-	{
+    return trim($this->cedben);
 
-		return $this->codcar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomben()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomben);
+
+  }
+  
+  public function getCodban()
+  {
+
+    return trim($this->codban);
+
+  }
+  
+  public function getNumcue()
+  {
+
+    return trim($this->numcue);
+
+  }
+  
+  public function getCodcar()
+  {
+
+    return trim($this->codcar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpbenempPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpbenempPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpbenempPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpbenempPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpbenempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpbenempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCedben($v)
 	{
 
-		if ($this->cedben !== $v) {
-			$this->cedben = $v;
-			$this->modifiedColumns[] = NpbenempPeer::CEDBEN;
-		}
-
+    if ($this->cedben !== $v) {
+        $this->cedben = $v;
+        $this->modifiedColumns[] = NpbenempPeer::CEDBEN;
+      }
+  
 	} 
 	
 	public function setNomben($v)
 	{
 
-		if ($this->nomben !== $v) {
-			$this->nomben = $v;
-			$this->modifiedColumns[] = NpbenempPeer::NOMBEN;
-		}
-
+    if ($this->nomben !== $v) {
+        $this->nomben = $v;
+        $this->modifiedColumns[] = NpbenempPeer::NOMBEN;
+      }
+  
 	} 
 	
 	public function setCodban($v)
 	{
 
-		if ($this->codban !== $v) {
-			$this->codban = $v;
-			$this->modifiedColumns[] = NpbenempPeer::CODBAN;
-		}
-
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = NpbenempPeer::CODBAN;
+      }
+  
 	} 
 	
 	public function setNumcue($v)
 	{
 
-		if ($this->numcue !== $v) {
-			$this->numcue = $v;
-			$this->modifiedColumns[] = NpbenempPeer::NUMCUE;
-		}
-
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = NpbenempPeer::NUMCUE;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpbenempPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpbenempPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpbenempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpbenempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->codemp = $rs->getString($startcol + 2);
+      $this->codemp = $rs->getString($startcol + 2);
 
-			$this->cedben = $rs->getString($startcol + 3);
+      $this->cedben = $rs->getString($startcol + 3);
 
-			$this->nomben = $rs->getString($startcol + 4);
+      $this->nomben = $rs->getString($startcol + 4);
 
-			$this->codban = $rs->getString($startcol + 5);
+      $this->codban = $rs->getString($startcol + 5);
 
-			$this->numcue = $rs->getString($startcol + 6);
+      $this->numcue = $rs->getString($startcol + 6);
 
-			$this->codcar = $rs->getString($startcol + 7);
+      $this->codcar = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npbenemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npbenemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -281,6 +312,7 @@ abstract class BaseNpbenemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpbenempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpbenempPeer::doUpdate($this, $con);

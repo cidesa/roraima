@@ -91,6 +91,7 @@ class fordefpryaccsubaccivssActions extends autofordefpryaccsubaccivssActions
       $this->saveForasopryaccespsubacc($this->forasopryaccespsubacc);
 
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {

@@ -17,6 +17,10 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 
 
 	
+	protected $desart;
+
+
+	
 	protected $codcat;
 
 
@@ -69,280 +73,335 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReqart()
-	{
+  
+  public function getReqart()
+  {
 
-		return $this->reqart; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->reqart);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCanreq()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canreq,2,',','.');
-		
-	}
-	
-	public function getCanrec()
-	{
+  }
+  
+  public function getDesart()
+  {
 
-		return number_format($this->canrec,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    return trim($this->desart);
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getCosto()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return number_format($this->costo,2,',','.');
-		
-	}
-	
-	public function getMonrgo()
-	{
+    return trim($this->codcat);
 
-		return number_format($this->monrgo,2,',','.');
-		
-	}
-	
-	public function getCanord()
-	{
+  }
+  
+  public function getCanreq($val=false)
+  {
 
-		return number_format($this->canord,2,',','.');
-		
-	}
-	
-	public function getMondes()
-	{
+    if($val) return number_format($this->canreq,2,',','.');
+    else return $this->canreq;
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getRelart()
-	{
+  }
+  
+  public function getCanrec($val=false)
+  {
 
-		return number_format($this->relart,2,',','.');
-		
-	}
-	
-	public function getUnimed()
-	{
+    if($val) return number_format($this->canrec,2,',','.');
+    else return $this->canrec;
 
-		return $this->unimed; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getMontot($val=false)
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCosto($val=false)
+  {
+
+    if($val) return number_format($this->costo,2,',','.');
+    else return $this->costo;
+
+  }
+  
+  public function getMonrgo($val=false)
+  {
+
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
+
+  }
+  
+  public function getCanord($val=false)
+  {
+
+    if($val) return number_format($this->canord,2,',','.');
+    else return $this->canord;
+
+  }
+  
+  public function getMondes($val=false)
+  {
+
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
+
+  }
+  
+  public function getRelart($val=false)
+  {
+
+    if($val) return number_format($this->relart,2,',','.');
+    else return $this->relart;
+
+  }
+  
+  public function getUnimed()
+  {
+
+    return trim($this->unimed);
+
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReqart($v)
 	{
 
-		if ($this->reqart !== $v) {
-			$this->reqart = $v;
-			$this->modifiedColumns[] = CaartsolPeer::REQART;
-		}
-
+    if ($this->reqart !== $v) {
+        $this->reqart = $v;
+        $this->modifiedColumns[] = CaartsolPeer::REQART;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartsolPeer::CODART;
-		}
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartsolPeer::CODART;
+      }
+  
+	} 
+	
+	public function setDesart($v)
+	{
 
+    if ($this->desart !== $v) {
+        $this->desart = $v;
+        $this->modifiedColumns[] = CaartsolPeer::DESART;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CaartsolPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CaartsolPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCanreq($v)
 	{
 
-		if ($this->canreq !== $v) {
-			$this->canreq = $v;
-			$this->modifiedColumns[] = CaartsolPeer::CANREQ;
-		}
-
+    if ($this->canreq !== $v) {
+        $this->canreq = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartsolPeer::CANREQ;
+      }
+  
 	} 
 	
 	public function setCanrec($v)
 	{
 
-		if ($this->canrec !== $v) {
-			$this->canrec = $v;
-			$this->modifiedColumns[] = CaartsolPeer::CANREC;
-		}
-
+    if ($this->canrec !== $v) {
+        $this->canrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartsolPeer::CANREC;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CaartsolPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartsolPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setCosto($v)
 	{
 
-		if ($this->costo !== $v) {
-			$this->costo = $v;
-			$this->modifiedColumns[] = CaartsolPeer::COSTO;
-		}
-
+    if ($this->costo !== $v) {
+        $this->costo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartsolPeer::COSTO;
+      }
+  
 	} 
 	
 	public function setMonrgo($v)
 	{
 
-		if ($this->monrgo !== $v) {
-			$this->monrgo = $v;
-			$this->modifiedColumns[] = CaartsolPeer::MONRGO;
-		}
-
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartsolPeer::MONRGO;
+      }
+  
 	} 
 	
 	public function setCanord($v)
 	{
 
-		if ($this->canord !== $v) {
-			$this->canord = $v;
-			$this->modifiedColumns[] = CaartsolPeer::CANORD;
-		}
-
+    if ($this->canord !== $v) {
+        $this->canord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartsolPeer::CANORD;
+      }
+  
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = CaartsolPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartsolPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setRelart($v)
 	{
 
-		if ($this->relart !== $v) {
-			$this->relart = $v;
-			$this->modifiedColumns[] = CaartsolPeer::RELART;
-		}
-
+    if ($this->relart !== $v) {
+        $this->relart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartsolPeer::RELART;
+      }
+  
 	} 
 	
 	public function setUnimed($v)
 	{
 
-		if ($this->unimed !== $v) {
-			$this->unimed = $v;
-			$this->modifiedColumns[] = CaartsolPeer::UNIMED;
-		}
-
+    if ($this->unimed !== $v) {
+        $this->unimed = $v;
+        $this->modifiedColumns[] = CaartsolPeer::UNIMED;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = CaartsolPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = CaartsolPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartsolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartsolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reqart = $rs->getString($startcol + 0);
+      $this->reqart = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->codcat = $rs->getString($startcol + 2);
+      $this->desart = $rs->getString($startcol + 2);
 
-			$this->canreq = $rs->getFloat($startcol + 3);
+      $this->codcat = $rs->getString($startcol + 3);
 
-			$this->canrec = $rs->getFloat($startcol + 4);
+      $this->canreq = $rs->getFloat($startcol + 4);
 
-			$this->montot = $rs->getFloat($startcol + 5);
+      $this->canrec = $rs->getFloat($startcol + 5);
 
-			$this->costo = $rs->getFloat($startcol + 6);
+      $this->montot = $rs->getFloat($startcol + 6);
 
-			$this->monrgo = $rs->getFloat($startcol + 7);
+      $this->costo = $rs->getFloat($startcol + 7);
 
-			$this->canord = $rs->getFloat($startcol + 8);
+      $this->monrgo = $rs->getFloat($startcol + 8);
 
-			$this->mondes = $rs->getFloat($startcol + 9);
+      $this->canord = $rs->getFloat($startcol + 9);
 
-			$this->relart = $rs->getFloat($startcol + 10);
+      $this->mondes = $rs->getFloat($startcol + 10);
 
-			$this->unimed = $rs->getString($startcol + 11);
+      $this->relart = $rs->getFloat($startcol + 11);
 
-			$this->codpar = $rs->getString($startcol + 12);
+      $this->unimed = $rs->getString($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->codpar = $rs->getString($startcol + 13);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 14);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartsol object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 15; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartsol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -399,6 +458,7 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaartsolPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaartsolPeer::doUpdate($this, $con);
@@ -471,39 +531,42 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 				return $this->getCodart();
 				break;
 			case 2:
-				return $this->getCodcat();
+				return $this->getDesart();
 				break;
 			case 3:
-				return $this->getCanreq();
+				return $this->getCodcat();
 				break;
 			case 4:
-				return $this->getCanrec();
+				return $this->getCanreq();
 				break;
 			case 5:
-				return $this->getMontot();
+				return $this->getCanrec();
 				break;
 			case 6:
-				return $this->getCosto();
+				return $this->getMontot();
 				break;
 			case 7:
-				return $this->getMonrgo();
+				return $this->getCosto();
 				break;
 			case 8:
-				return $this->getCanord();
+				return $this->getMonrgo();
 				break;
 			case 9:
-				return $this->getMondes();
+				return $this->getCanord();
 				break;
 			case 10:
-				return $this->getRelart();
+				return $this->getMondes();
 				break;
 			case 11:
-				return $this->getUnimed();
+				return $this->getRelart();
 				break;
 			case 12:
-				return $this->getCodpar();
+				return $this->getUnimed();
 				break;
 			case 13:
+				return $this->getCodpar();
+				break;
+			case 14:
 				return $this->getId();
 				break;
 			default:
@@ -518,18 +581,19 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getReqart(),
 			$keys[1] => $this->getCodart(),
-			$keys[2] => $this->getCodcat(),
-			$keys[3] => $this->getCanreq(),
-			$keys[4] => $this->getCanrec(),
-			$keys[5] => $this->getMontot(),
-			$keys[6] => $this->getCosto(),
-			$keys[7] => $this->getMonrgo(),
-			$keys[8] => $this->getCanord(),
-			$keys[9] => $this->getMondes(),
-			$keys[10] => $this->getRelart(),
-			$keys[11] => $this->getUnimed(),
-			$keys[12] => $this->getCodpar(),
-			$keys[13] => $this->getId(),
+			$keys[2] => $this->getDesart(),
+			$keys[3] => $this->getCodcat(),
+			$keys[4] => $this->getCanreq(),
+			$keys[5] => $this->getCanrec(),
+			$keys[6] => $this->getMontot(),
+			$keys[7] => $this->getCosto(),
+			$keys[8] => $this->getMonrgo(),
+			$keys[9] => $this->getCanord(),
+			$keys[10] => $this->getMondes(),
+			$keys[11] => $this->getRelart(),
+			$keys[12] => $this->getUnimed(),
+			$keys[13] => $this->getCodpar(),
+			$keys[14] => $this->getId(),
 		);
 		return $result;
 	}
@@ -552,39 +616,42 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 				$this->setCodart($value);
 				break;
 			case 2:
-				$this->setCodcat($value);
+				$this->setDesart($value);
 				break;
 			case 3:
-				$this->setCanreq($value);
+				$this->setCodcat($value);
 				break;
 			case 4:
-				$this->setCanrec($value);
+				$this->setCanreq($value);
 				break;
 			case 5:
-				$this->setMontot($value);
+				$this->setCanrec($value);
 				break;
 			case 6:
-				$this->setCosto($value);
+				$this->setMontot($value);
 				break;
 			case 7:
-				$this->setMonrgo($value);
+				$this->setCosto($value);
 				break;
 			case 8:
-				$this->setCanord($value);
+				$this->setMonrgo($value);
 				break;
 			case 9:
-				$this->setMondes($value);
+				$this->setCanord($value);
 				break;
 			case 10:
-				$this->setRelart($value);
+				$this->setMondes($value);
 				break;
 			case 11:
-				$this->setUnimed($value);
+				$this->setRelart($value);
 				break;
 			case 12:
-				$this->setCodpar($value);
+				$this->setUnimed($value);
 				break;
 			case 13:
+				$this->setCodpar($value);
+				break;
+			case 14:
 				$this->setId($value);
 				break;
 		} 	}
@@ -596,18 +663,19 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setReqart($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodart($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setCodcat($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCanreq($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCanrec($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setMontot($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCosto($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setMonrgo($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCanord($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setMondes($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setRelart($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setUnimed($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setCodpar($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
+		if (array_key_exists($keys[2], $arr)) $this->setDesart($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setCodcat($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCanreq($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCanrec($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setMontot($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCosto($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setMonrgo($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCanord($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setMondes($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setRelart($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setUnimed($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setCodpar($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
 	}
 
 	
@@ -617,6 +685,7 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(CaartsolPeer::REQART)) $criteria->add(CaartsolPeer::REQART, $this->reqart);
 		if ($this->isColumnModified(CaartsolPeer::CODART)) $criteria->add(CaartsolPeer::CODART, $this->codart);
+		if ($this->isColumnModified(CaartsolPeer::DESART)) $criteria->add(CaartsolPeer::DESART, $this->desart);
 		if ($this->isColumnModified(CaartsolPeer::CODCAT)) $criteria->add(CaartsolPeer::CODCAT, $this->codcat);
 		if ($this->isColumnModified(CaartsolPeer::CANREQ)) $criteria->add(CaartsolPeer::CANREQ, $this->canreq);
 		if ($this->isColumnModified(CaartsolPeer::CANREC)) $criteria->add(CaartsolPeer::CANREC, $this->canrec);
@@ -662,6 +731,8 @@ abstract class BaseCaartsol extends BaseObject  implements Persistent {
 		$copyObj->setReqart($this->reqart);
 
 		$copyObj->setCodart($this->codart);
+
+		$copyObj->setDesart($this->desart);
 
 		$copyObj->setCodcat($this->codcat);
 

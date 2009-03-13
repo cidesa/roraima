@@ -1,0 +1,77 @@
+methods:
+  post:
+   - "npdefcpt{codcon}"
+   - "npdefcpt{nomcon}"  
+   - "npdefcpt{codpar}"  
+   - "npdefcpt{opecon}"
+   - "npdefcpt{conact}"
+   - "npdefcpt{inimon}"
+   - "npdefcpt{ordpag}"
+   - "npdefcpt{impcpt}"
+   - "npdefcpt{acuhis}"
+   - "npdefcpt{afepre}"
+names: 
+  npdefcpt{codcon}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codcon
+    
+  npdefcpt{codpar}:
+    required:  Yes
+    required_msg: El código de la partida no puede estar en Blanco
+    validators: PartidaValidator
+    
+  npdefcpt{nomcon}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_nomcon
+        
+  npdefcpt{opecon}:
+    required:  Yes
+    required_msg: La operación Contable no puede estar en Blanco
+    
+  npdefcpt{conact}:
+    required:  Yes
+    required_msg: El concepto activo no puede estar en Blanco
+  
+  npdefcpt{inimon}:
+    required:  Yes
+    required_msg: Inicializar montos no puede estar en Blanco     
+    
+  npdefcpt{ordpag}:
+    required:  Yes
+    required_msg: Genera orden de Pago no puede estar en Blanco 
+    
+  npdefcpt{impcpt}:
+    required:  Yes
+    required_msg: Concepto Imprimible no puede estar en Blanco
+    
+  npdefcpt{acuhis}:
+    required:  Yes
+    required_msg: Acumula Histórico no puede estar en Blanco  
+  
+  npdefcpt{afepre}:
+    required:  Yes
+    required_msg: Afecta Presupuesto no puede estar en Blanco
+  
+Validator_codcon:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npdefcpt
+        column:       codcon
+        unique_error: El registro ya Existe intente con otro.
+        
+PartidaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nppartidas
+        column:   codpar
+        unique_error:   El Código de la partida no existe. 
+    
+Validator_nomcon:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres

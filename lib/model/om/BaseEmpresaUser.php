@@ -37,128 +37,156 @@ abstract class BaseEmpresaUser extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomemp()
-	{
+    return trim($this->codemp);
 
-		return $this->nomemp; 		
-	}
-	
-	public function getDiremp()
-	{
+  }
+  
+  public function getNomemp()
+  {
 
-		return $this->diremp; 		
-	}
-	
-	public function getTlfemp()
-	{
+    return trim($this->nomemp);
 
-		return $this->tlfemp; 		
-	}
-	
-	public function getPassemp()
-	{
+  }
+  
+  public function getDiremp()
+  {
 
-		return $this->passemp; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->diremp);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTlfemp()
+  {
+
+    return trim($this->tlfemp);
+
+  }
+  
+  public function getPassemp()
+  {
+
+    return trim($this->passemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = EmpresaUserPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = EmpresaUserPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = EmpresaUserPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = EmpresaUserPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setDiremp($v)
 	{
 
-		if ($this->diremp !== $v) {
-			$this->diremp = $v;
-			$this->modifiedColumns[] = EmpresaUserPeer::DIREMP;
-		}
-
+    if ($this->diremp !== $v) {
+        $this->diremp = $v;
+        $this->modifiedColumns[] = EmpresaUserPeer::DIREMP;
+      }
+  
 	} 
 	
 	public function setTlfemp($v)
 	{
 
-		if ($this->tlfemp !== $v) {
-			$this->tlfemp = $v;
-			$this->modifiedColumns[] = EmpresaUserPeer::TLFEMP;
-		}
-
+    if ($this->tlfemp !== $v) {
+        $this->tlfemp = $v;
+        $this->modifiedColumns[] = EmpresaUserPeer::TLFEMP;
+      }
+  
 	} 
 	
 	public function setPassemp($v)
 	{
 
-		if ($this->passemp !== $v) {
-			$this->passemp = $v;
-			$this->modifiedColumns[] = EmpresaUserPeer::PASSEMP;
-		}
-
+    if ($this->passemp !== $v) {
+        $this->passemp = $v;
+        $this->modifiedColumns[] = EmpresaUserPeer::PASSEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = EmpresaUserPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = EmpresaUserPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->nomemp = $rs->getString($startcol + 1);
+      $this->nomemp = $rs->getString($startcol + 1);
 
-			$this->diremp = $rs->getString($startcol + 2);
+      $this->diremp = $rs->getString($startcol + 2);
 
-			$this->tlfemp = $rs->getString($startcol + 3);
+      $this->tlfemp = $rs->getString($startcol + 3);
 
-			$this->passemp = $rs->getString($startcol + 4);
+      $this->passemp = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating EmpresaUser object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating EmpresaUser object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseEmpresaUser extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = EmpresaUserPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += EmpresaUserPeer::doUpdate($this, $con);

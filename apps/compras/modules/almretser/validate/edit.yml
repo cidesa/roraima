@@ -1,0 +1,15 @@
+methods:
+  post:
+   - "caretser{codser}"
+names:
+  caretser{codser}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir el Código del servicio
+    validators: UniqueValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Caretser
+        column:   codser
+        unique_error:   El Código del servicio ya existe. Por Favor, Cambiélo por otro.

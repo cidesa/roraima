@@ -7,11 +7,11 @@ default:
     robots:       index, follow
     description:  Módulo Tesorería
     keywords:     Módulo Tesorería
-    language:     en_US
+    language:     en
 
   stylesheets:    [main]
 
-  javascripts:    []
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype, tools, observe]
 
   has_layout:     on
   layout:         layout

@@ -280,6 +280,7 @@ abstract class BaseOpordperPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpordperPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

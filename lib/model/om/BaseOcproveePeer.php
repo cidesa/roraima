@@ -330,6 +330,7 @@ abstract class BaseOcproveePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcproveePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

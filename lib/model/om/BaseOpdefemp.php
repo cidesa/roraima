@@ -93,6 +93,54 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
 
 	
+	protected $ordfid;
+
+
+	
+	protected $ordval;
+
+
+	
+	protected $genordret;
+
+
+	
+	protected $emichepag;
+
+
+	
+	protected $cuecajchi;
+
+
+	
+	protected $tipcajchi;
+
+
+	
+	protected $monapecajchi;
+
+
+	
+	protected $porrepcajchi;
+
+
+	
+	protected $tiprencajchi;
+
+
+	
+	protected $numinicajchi;
+
+
+	
+	protected $cedrifcajchi;
+
+
+	
+	protected $codcatcajchi;
+
+
+	
 	protected $id;
 
 	
@@ -101,418 +149,692 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCtapag()
-	{
+    return trim($this->codemp);
 
-		return $this->ctapag; 		
-	}
-	
-	public function getCtades()
-	{
+  }
+  
+  public function getCtapag()
+  {
 
-		return $this->ctades; 		
-	}
-	
-	public function getNumini()
-	{
+    return trim($this->ctapag);
 
-		return $this->numini; 		
-	}
-	
-	public function getOrdnom()
-	{
+  }
+  
+  public function getCtades()
+  {
 
-		return $this->ordnom; 		
-	}
-	
-	public function getOrdobr()
-	{
+    return trim($this->ctades);
 
-		return $this->ordobr; 		
-	}
-	
-	public function getUnitri()
-	{
+  }
+  
+  public function getNumini()
+  {
 
-		return number_format($this->unitri,2,',','.');
-		
-	}
-	
-	public function getVercomret()
-	{
+    return trim($this->numini);
 
-		return $this->vercomret; 		
-	}
-	
-	public function getGenctaord()
-	{
+  }
+  
+  public function getOrdnom()
+  {
 
-		return $this->genctaord; 		
-	}
-	
-	public function getForubi()
-	{
+    return trim($this->ordnom);
 
-		return $this->forubi; 		
-	}
-	
-	public function getTipaju()
-	{
+  }
+  
+  public function getOrdobr()
+  {
 
-		return $this->tipaju; 		
-	}
-	
-	public function getTipeje()
-	{
+    return trim($this->ordobr);
 
-		return $this->tipeje; 		
-	}
-	
-	public function getNumaut()
-	{
+  }
+  
+  public function getUnitri($val=false)
+  {
 
-		return $this->numaut; 		
-	}
-	
-	public function getTipmov()
-	{
+    if($val) return number_format($this->unitri,2,',','.');
+    else return $this->unitri;
 
-		return $this->tipmov; 		
-	}
-	
-	public function getCoriva()
-	{
+  }
+  
+  public function getVercomret()
+  {
 
-		return number_format($this->coriva,2,',','.');
-		
-	}
-	
-	public function getCtabono()
-	{
+    return trim($this->vercomret);
 
-		return $this->ctabono; 		
-	}
-	
-	public function getCtavaca()
-	{
+  }
+  
+  public function getGenctaord()
+  {
 
-		return $this->ctavaca; 		
-	}
-	
-	public function getGencaubon()
-	{
+    return trim($this->genctaord);
 
-		return $this->gencaubon; 		
-	}
-	
-	public function getGencomadi()
-	{
+  }
+  
+  public function getForubi()
+  {
 
-		return $this->gencomadi; 		
-	}
-	
-	public function getUnidad()
-	{
+    return trim($this->forubi);
 
-		return $this->unidad; 		
-	}
-	
-	public function getOrdliq()
-	{
+  }
+  
+  public function getTipaju()
+  {
 
-		return $this->ordliq; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->tipaju);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTipeje()
+  {
+
+    return trim($this->tipeje);
+
+  }
+  
+  public function getNumaut()
+  {
+
+    return trim($this->numaut);
+
+  }
+  
+  public function getTipmov()
+  {
+
+    return trim($this->tipmov);
+
+  }
+  
+  public function getCoriva($val=false)
+  {
+
+    if($val) return number_format($this->coriva,2,',','.');
+    else return $this->coriva;
+
+  }
+  
+  public function getCtabono()
+  {
+
+    return trim($this->ctabono);
+
+  }
+  
+  public function getCtavaca()
+  {
+
+    return trim($this->ctavaca);
+
+  }
+  
+  public function getGencaubon()
+  {
+
+    return trim($this->gencaubon);
+
+  }
+  
+  public function getGencomadi()
+  {
+
+    return trim($this->gencomadi);
+
+  }
+  
+  public function getUnidad()
+  {
+
+    return trim($this->unidad);
+
+  }
+  
+  public function getOrdliq()
+  {
+
+    return trim($this->ordliq);
+
+  }
+  
+  public function getOrdfid()
+  {
+
+    return trim($this->ordfid);
+
+  }
+  
+  public function getOrdval()
+  {
+
+    return trim($this->ordval);
+
+  }
+  
+  public function getGenordret()
+  {
+
+    return trim($this->genordret);
+
+  }
+  
+  public function getEmichepag()
+  {
+
+    return trim($this->emichepag);
+
+  }
+  
+  public function getCuecajchi()
+  {
+
+    return trim($this->cuecajchi);
+
+  }
+  
+  public function getTipcajchi()
+  {
+
+    return trim($this->tipcajchi);
+
+  }
+  
+  public function getMonapecajchi($val=false)
+  {
+
+    if($val) return number_format($this->monapecajchi,2,',','.');
+    else return $this->monapecajchi;
+
+  }
+  
+  public function getPorrepcajchi($val=false)
+  {
+
+    if($val) return number_format($this->porrepcajchi,2,',','.');
+    else return $this->porrepcajchi;
+
+  }
+  
+  public function getTiprencajchi()
+  {
+
+    return trim($this->tiprencajchi);
+
+  }
+  
+  public function getNuminicajchi()
+  {
+
+    return trim($this->numinicajchi);
+
+  }
+  
+  public function getCedrifcajchi()
+  {
+
+    return trim($this->cedrifcajchi);
+
+  }
+  
+  public function getCodcatcajchi()
+  {
+
+    return trim($this->codcatcajchi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = OpdefempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = OpdefempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCtapag($v)
 	{
 
-		if ($this->ctapag !== $v) {
-			$this->ctapag = $v;
-			$this->modifiedColumns[] = OpdefempPeer::CTAPAG;
-		}
-
+    if ($this->ctapag !== $v) {
+        $this->ctapag = $v;
+        $this->modifiedColumns[] = OpdefempPeer::CTAPAG;
+      }
+  
 	} 
 	
 	public function setCtades($v)
 	{
 
-		if ($this->ctades !== $v) {
-			$this->ctades = $v;
-			$this->modifiedColumns[] = OpdefempPeer::CTADES;
-		}
-
+    if ($this->ctades !== $v) {
+        $this->ctades = $v;
+        $this->modifiedColumns[] = OpdefempPeer::CTADES;
+      }
+  
 	} 
 	
 	public function setNumini($v)
 	{
 
-		if ($this->numini !== $v) {
-			$this->numini = $v;
-			$this->modifiedColumns[] = OpdefempPeer::NUMINI;
-		}
-
+    if ($this->numini !== $v) {
+        $this->numini = $v;
+        $this->modifiedColumns[] = OpdefempPeer::NUMINI;
+      }
+  
 	} 
 	
 	public function setOrdnom($v)
 	{
 
-		if ($this->ordnom !== $v) {
-			$this->ordnom = $v;
-			$this->modifiedColumns[] = OpdefempPeer::ORDNOM;
-		}
-
+    if ($this->ordnom !== $v) {
+        $this->ordnom = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDNOM;
+      }
+  
 	} 
 	
 	public function setOrdobr($v)
 	{
 
-		if ($this->ordobr !== $v) {
-			$this->ordobr = $v;
-			$this->modifiedColumns[] = OpdefempPeer::ORDOBR;
-		}
-
+    if ($this->ordobr !== $v) {
+        $this->ordobr = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDOBR;
+      }
+  
 	} 
 	
 	public function setUnitri($v)
 	{
 
-		if ($this->unitri !== $v) {
-			$this->unitri = $v;
-			$this->modifiedColumns[] = OpdefempPeer::UNITRI;
-		}
-
+    if ($this->unitri !== $v) {
+        $this->unitri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdefempPeer::UNITRI;
+      }
+  
 	} 
 	
 	public function setVercomret($v)
 	{
 
-		if ($this->vercomret !== $v) {
-			$this->vercomret = $v;
-			$this->modifiedColumns[] = OpdefempPeer::VERCOMRET;
-		}
-
+    if ($this->vercomret !== $v) {
+        $this->vercomret = $v;
+        $this->modifiedColumns[] = OpdefempPeer::VERCOMRET;
+      }
+  
 	} 
 	
 	public function setGenctaord($v)
 	{
 
-		if ($this->genctaord !== $v) {
-			$this->genctaord = $v;
-			$this->modifiedColumns[] = OpdefempPeer::GENCTAORD;
-		}
-
+    if ($this->genctaord !== $v) {
+        $this->genctaord = $v;
+        $this->modifiedColumns[] = OpdefempPeer::GENCTAORD;
+      }
+  
 	} 
 	
 	public function setForubi($v)
 	{
 
-		if ($this->forubi !== $v) {
-			$this->forubi = $v;
-			$this->modifiedColumns[] = OpdefempPeer::FORUBI;
-		}
-
+    if ($this->forubi !== $v) {
+        $this->forubi = $v;
+        $this->modifiedColumns[] = OpdefempPeer::FORUBI;
+      }
+  
 	} 
 	
 	public function setTipaju($v)
 	{
 
-		if ($this->tipaju !== $v) {
-			$this->tipaju = $v;
-			$this->modifiedColumns[] = OpdefempPeer::TIPAJU;
-		}
-
+    if ($this->tipaju !== $v) {
+        $this->tipaju = $v;
+        $this->modifiedColumns[] = OpdefempPeer::TIPAJU;
+      }
+  
 	} 
 	
 	public function setTipeje($v)
 	{
 
-		if ($this->tipeje !== $v) {
-			$this->tipeje = $v;
-			$this->modifiedColumns[] = OpdefempPeer::TIPEJE;
-		}
-
+    if ($this->tipeje !== $v) {
+        $this->tipeje = $v;
+        $this->modifiedColumns[] = OpdefempPeer::TIPEJE;
+      }
+  
 	} 
 	
 	public function setNumaut($v)
 	{
 
-		if ($this->numaut !== $v) {
-			$this->numaut = $v;
-			$this->modifiedColumns[] = OpdefempPeer::NUMAUT;
-		}
-
+    if ($this->numaut !== $v) {
+        $this->numaut = $v;
+        $this->modifiedColumns[] = OpdefempPeer::NUMAUT;
+      }
+  
 	} 
 	
 	public function setTipmov($v)
 	{
 
-		if ($this->tipmov !== $v) {
-			$this->tipmov = $v;
-			$this->modifiedColumns[] = OpdefempPeer::TIPMOV;
-		}
-
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = OpdefempPeer::TIPMOV;
+      }
+  
 	} 
 	
 	public function setCoriva($v)
 	{
 
-		if ($this->coriva !== $v) {
-			$this->coriva = $v;
-			$this->modifiedColumns[] = OpdefempPeer::CORIVA;
-		}
-
+    if ($this->coriva !== $v) {
+        $this->coriva = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdefempPeer::CORIVA;
+      }
+  
 	} 
 	
 	public function setCtabono($v)
 	{
 
-		if ($this->ctabono !== $v) {
-			$this->ctabono = $v;
-			$this->modifiedColumns[] = OpdefempPeer::CTABONO;
-		}
-
+    if ($this->ctabono !== $v) {
+        $this->ctabono = $v;
+        $this->modifiedColumns[] = OpdefempPeer::CTABONO;
+      }
+  
 	} 
 	
 	public function setCtavaca($v)
 	{
 
-		if ($this->ctavaca !== $v) {
-			$this->ctavaca = $v;
-			$this->modifiedColumns[] = OpdefempPeer::CTAVACA;
-		}
-
+    if ($this->ctavaca !== $v) {
+        $this->ctavaca = $v;
+        $this->modifiedColumns[] = OpdefempPeer::CTAVACA;
+      }
+  
 	} 
 	
 	public function setGencaubon($v)
 	{
 
-		if ($this->gencaubon !== $v) {
-			$this->gencaubon = $v;
-			$this->modifiedColumns[] = OpdefempPeer::GENCAUBON;
-		}
-
+    if ($this->gencaubon !== $v) {
+        $this->gencaubon = $v;
+        $this->modifiedColumns[] = OpdefempPeer::GENCAUBON;
+      }
+  
 	} 
 	
 	public function setGencomadi($v)
 	{
 
-		if ($this->gencomadi !== $v) {
-			$this->gencomadi = $v;
-			$this->modifiedColumns[] = OpdefempPeer::GENCOMADI;
-		}
-
+    if ($this->gencomadi !== $v) {
+        $this->gencomadi = $v;
+        $this->modifiedColumns[] = OpdefempPeer::GENCOMADI;
+      }
+  
 	} 
 	
 	public function setUnidad($v)
 	{
 
-		if ($this->unidad !== $v) {
-			$this->unidad = $v;
-			$this->modifiedColumns[] = OpdefempPeer::UNIDAD;
-		}
-
+    if ($this->unidad !== $v) {
+        $this->unidad = $v;
+        $this->modifiedColumns[] = OpdefempPeer::UNIDAD;
+      }
+  
 	} 
 	
 	public function setOrdliq($v)
 	{
 
-		if ($this->ordliq !== $v) {
-			$this->ordliq = $v;
-			$this->modifiedColumns[] = OpdefempPeer::ORDLIQ;
-		}
+    if ($this->ordliq !== $v) {
+        $this->ordliq = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDLIQ;
+      }
+  
+	} 
+	
+	public function setOrdfid($v)
+	{
 
+    if ($this->ordfid !== $v) {
+        $this->ordfid = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDFID;
+      }
+  
+	} 
+	
+	public function setOrdval($v)
+	{
+
+    if ($this->ordval !== $v) {
+        $this->ordval = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDVAL;
+      }
+  
+	} 
+	
+	public function setGenordret($v)
+	{
+
+    if ($this->genordret !== $v) {
+        $this->genordret = $v;
+        $this->modifiedColumns[] = OpdefempPeer::GENORDRET;
+      }
+  
+	} 
+	
+	public function setEmichepag($v)
+	{
+
+    if ($this->emichepag !== $v) {
+        $this->emichepag = $v;
+        $this->modifiedColumns[] = OpdefempPeer::EMICHEPAG;
+      }
+  
+	} 
+	
+	public function setCuecajchi($v)
+	{
+
+    if ($this->cuecajchi !== $v) {
+        $this->cuecajchi = $v;
+        $this->modifiedColumns[] = OpdefempPeer::CUECAJCHI;
+      }
+  
+	} 
+	
+	public function setTipcajchi($v)
+	{
+
+    if ($this->tipcajchi !== $v) {
+        $this->tipcajchi = $v;
+        $this->modifiedColumns[] = OpdefempPeer::TIPCAJCHI;
+      }
+  
+	} 
+	
+	public function setMonapecajchi($v)
+	{
+
+    if ($this->monapecajchi !== $v) {
+        $this->monapecajchi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdefempPeer::MONAPECAJCHI;
+      }
+  
+	} 
+	
+	public function setPorrepcajchi($v)
+	{
+
+    if ($this->porrepcajchi !== $v) {
+        $this->porrepcajchi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdefempPeer::PORREPCAJCHI;
+      }
+  
+	} 
+	
+	public function setTiprencajchi($v)
+	{
+
+    if ($this->tiprencajchi !== $v) {
+        $this->tiprencajchi = $v;
+        $this->modifiedColumns[] = OpdefempPeer::TIPRENCAJCHI;
+      }
+  
+	} 
+	
+	public function setNuminicajchi($v)
+	{
+
+    if ($this->numinicajchi !== $v) {
+        $this->numinicajchi = $v;
+        $this->modifiedColumns[] = OpdefempPeer::NUMINICAJCHI;
+      }
+  
+	} 
+	
+	public function setCedrifcajchi($v)
+	{
+
+    if ($this->cedrifcajchi !== $v) {
+        $this->cedrifcajchi = $v;
+        $this->modifiedColumns[] = OpdefempPeer::CEDRIFCAJCHI;
+      }
+  
+	} 
+	
+	public function setCodcatcajchi($v)
+	{
+
+    if ($this->codcatcajchi !== $v) {
+        $this->codcatcajchi = $v;
+        $this->modifiedColumns[] = OpdefempPeer::CODCATCAJCHI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpdefempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->ctapag = $rs->getString($startcol + 1);
+      $this->ctapag = $rs->getString($startcol + 1);
 
-			$this->ctades = $rs->getString($startcol + 2);
+      $this->ctades = $rs->getString($startcol + 2);
 
-			$this->numini = $rs->getString($startcol + 3);
+      $this->numini = $rs->getString($startcol + 3);
 
-			$this->ordnom = $rs->getString($startcol + 4);
+      $this->ordnom = $rs->getString($startcol + 4);
 
-			$this->ordobr = $rs->getString($startcol + 5);
+      $this->ordobr = $rs->getString($startcol + 5);
 
-			$this->unitri = $rs->getFloat($startcol + 6);
+      $this->unitri = $rs->getFloat($startcol + 6);
 
-			$this->vercomret = $rs->getString($startcol + 7);
+      $this->vercomret = $rs->getString($startcol + 7);
 
-			$this->genctaord = $rs->getString($startcol + 8);
+      $this->genctaord = $rs->getString($startcol + 8);
 
-			$this->forubi = $rs->getString($startcol + 9);
+      $this->forubi = $rs->getString($startcol + 9);
 
-			$this->tipaju = $rs->getString($startcol + 10);
+      $this->tipaju = $rs->getString($startcol + 10);
 
-			$this->tipeje = $rs->getString($startcol + 11);
+      $this->tipeje = $rs->getString($startcol + 11);
 
-			$this->numaut = $rs->getString($startcol + 12);
+      $this->numaut = $rs->getString($startcol + 12);
 
-			$this->tipmov = $rs->getString($startcol + 13);
+      $this->tipmov = $rs->getString($startcol + 13);
 
-			$this->coriva = $rs->getFloat($startcol + 14);
+      $this->coriva = $rs->getFloat($startcol + 14);
 
-			$this->ctabono = $rs->getString($startcol + 15);
+      $this->ctabono = $rs->getString($startcol + 15);
 
-			$this->ctavaca = $rs->getString($startcol + 16);
+      $this->ctavaca = $rs->getString($startcol + 16);
 
-			$this->gencaubon = $rs->getString($startcol + 17);
+      $this->gencaubon = $rs->getString($startcol + 17);
 
-			$this->gencomadi = $rs->getString($startcol + 18);
+      $this->gencomadi = $rs->getString($startcol + 18);
 
-			$this->unidad = $rs->getString($startcol + 19);
+      $this->unidad = $rs->getString($startcol + 19);
 
-			$this->ordliq = $rs->getString($startcol + 20);
+      $this->ordliq = $rs->getString($startcol + 20);
 
-			$this->id = $rs->getInt($startcol + 21);
+      $this->ordfid = $rs->getString($startcol + 21);
 
-			$this->resetModified();
+      $this->ordval = $rs->getString($startcol + 22);
 
-			$this->setNew(false);
+      $this->genordret = $rs->getString($startcol + 23);
 
-						return $startcol + 22; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opdefemp object", $e);
-		}
-	}
+      $this->emichepag = $rs->getString($startcol + 24);
+
+      $this->cuecajchi = $rs->getString($startcol + 25);
+
+      $this->tipcajchi = $rs->getString($startcol + 26);
+
+      $this->monapecajchi = $rs->getFloat($startcol + 27);
+
+      $this->porrepcajchi = $rs->getFloat($startcol + 28);
+
+      $this->tiprencajchi = $rs->getString($startcol + 29);
+
+      $this->numinicajchi = $rs->getString($startcol + 30);
+
+      $this->cedrifcajchi = $rs->getString($startcol + 31);
+
+      $this->codcatcajchi = $rs->getString($startcol + 32);
+
+      $this->id = $rs->getInt($startcol + 33);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 34; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opdefemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -569,6 +891,7 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpdefempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpdefempPeer::doUpdate($this, $con);
@@ -698,6 +1021,42 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 				return $this->getOrdliq();
 				break;
 			case 21:
+				return $this->getOrdfid();
+				break;
+			case 22:
+				return $this->getOrdval();
+				break;
+			case 23:
+				return $this->getGenordret();
+				break;
+			case 24:
+				return $this->getEmichepag();
+				break;
+			case 25:
+				return $this->getCuecajchi();
+				break;
+			case 26:
+				return $this->getTipcajchi();
+				break;
+			case 27:
+				return $this->getMonapecajchi();
+				break;
+			case 28:
+				return $this->getPorrepcajchi();
+				break;
+			case 29:
+				return $this->getTiprencajchi();
+				break;
+			case 30:
+				return $this->getNuminicajchi();
+				break;
+			case 31:
+				return $this->getCedrifcajchi();
+				break;
+			case 32:
+				return $this->getCodcatcajchi();
+				break;
+			case 33:
 				return $this->getId();
 				break;
 			default:
@@ -731,7 +1090,19 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 			$keys[18] => $this->getGencomadi(),
 			$keys[19] => $this->getUnidad(),
 			$keys[20] => $this->getOrdliq(),
-			$keys[21] => $this->getId(),
+			$keys[21] => $this->getOrdfid(),
+			$keys[22] => $this->getOrdval(),
+			$keys[23] => $this->getGenordret(),
+			$keys[24] => $this->getEmichepag(),
+			$keys[25] => $this->getCuecajchi(),
+			$keys[26] => $this->getTipcajchi(),
+			$keys[27] => $this->getMonapecajchi(),
+			$keys[28] => $this->getPorrepcajchi(),
+			$keys[29] => $this->getTiprencajchi(),
+			$keys[30] => $this->getNuminicajchi(),
+			$keys[31] => $this->getCedrifcajchi(),
+			$keys[32] => $this->getCodcatcajchi(),
+			$keys[33] => $this->getId(),
 		);
 		return $result;
 	}
@@ -811,6 +1182,42 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 				$this->setOrdliq($value);
 				break;
 			case 21:
+				$this->setOrdfid($value);
+				break;
+			case 22:
+				$this->setOrdval($value);
+				break;
+			case 23:
+				$this->setGenordret($value);
+				break;
+			case 24:
+				$this->setEmichepag($value);
+				break;
+			case 25:
+				$this->setCuecajchi($value);
+				break;
+			case 26:
+				$this->setTipcajchi($value);
+				break;
+			case 27:
+				$this->setMonapecajchi($value);
+				break;
+			case 28:
+				$this->setPorrepcajchi($value);
+				break;
+			case 29:
+				$this->setTiprencajchi($value);
+				break;
+			case 30:
+				$this->setNuminicajchi($value);
+				break;
+			case 31:
+				$this->setCedrifcajchi($value);
+				break;
+			case 32:
+				$this->setCodcatcajchi($value);
+				break;
+			case 33:
 				$this->setId($value);
 				break;
 		} 	}
@@ -841,7 +1248,19 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[18], $arr)) $this->setGencomadi($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setUnidad($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setOrdliq($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setId($arr[$keys[21]]);
+		if (array_key_exists($keys[21], $arr)) $this->setOrdfid($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setOrdval($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setGenordret($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setEmichepag($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setCuecajchi($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setTipcajchi($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setMonapecajchi($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setPorrepcajchi($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setTiprencajchi($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setNuminicajchi($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setCedrifcajchi($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setCodcatcajchi($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setId($arr[$keys[33]]);
 	}
 
 	
@@ -870,6 +1289,18 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpdefempPeer::GENCOMADI)) $criteria->add(OpdefempPeer::GENCOMADI, $this->gencomadi);
 		if ($this->isColumnModified(OpdefempPeer::UNIDAD)) $criteria->add(OpdefempPeer::UNIDAD, $this->unidad);
 		if ($this->isColumnModified(OpdefempPeer::ORDLIQ)) $criteria->add(OpdefempPeer::ORDLIQ, $this->ordliq);
+		if ($this->isColumnModified(OpdefempPeer::ORDFID)) $criteria->add(OpdefempPeer::ORDFID, $this->ordfid);
+		if ($this->isColumnModified(OpdefempPeer::ORDVAL)) $criteria->add(OpdefempPeer::ORDVAL, $this->ordval);
+		if ($this->isColumnModified(OpdefempPeer::GENORDRET)) $criteria->add(OpdefempPeer::GENORDRET, $this->genordret);
+		if ($this->isColumnModified(OpdefempPeer::EMICHEPAG)) $criteria->add(OpdefempPeer::EMICHEPAG, $this->emichepag);
+		if ($this->isColumnModified(OpdefempPeer::CUECAJCHI)) $criteria->add(OpdefempPeer::CUECAJCHI, $this->cuecajchi);
+		if ($this->isColumnModified(OpdefempPeer::TIPCAJCHI)) $criteria->add(OpdefempPeer::TIPCAJCHI, $this->tipcajchi);
+		if ($this->isColumnModified(OpdefempPeer::MONAPECAJCHI)) $criteria->add(OpdefempPeer::MONAPECAJCHI, $this->monapecajchi);
+		if ($this->isColumnModified(OpdefempPeer::PORREPCAJCHI)) $criteria->add(OpdefempPeer::PORREPCAJCHI, $this->porrepcajchi);
+		if ($this->isColumnModified(OpdefempPeer::TIPRENCAJCHI)) $criteria->add(OpdefempPeer::TIPRENCAJCHI, $this->tiprencajchi);
+		if ($this->isColumnModified(OpdefempPeer::NUMINICAJCHI)) $criteria->add(OpdefempPeer::NUMINICAJCHI, $this->numinicajchi);
+		if ($this->isColumnModified(OpdefempPeer::CEDRIFCAJCHI)) $criteria->add(OpdefempPeer::CEDRIFCAJCHI, $this->cedrifcajchi);
+		if ($this->isColumnModified(OpdefempPeer::CODCATCAJCHI)) $criteria->add(OpdefempPeer::CODCATCAJCHI, $this->codcatcajchi);
 		if ($this->isColumnModified(OpdefempPeer::ID)) $criteria->add(OpdefempPeer::ID, $this->id);
 
 		return $criteria;
@@ -942,6 +1373,30 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		$copyObj->setUnidad($this->unidad);
 
 		$copyObj->setOrdliq($this->ordliq);
+
+		$copyObj->setOrdfid($this->ordfid);
+
+		$copyObj->setOrdval($this->ordval);
+
+		$copyObj->setGenordret($this->genordret);
+
+		$copyObj->setEmichepag($this->emichepag);
+
+		$copyObj->setCuecajchi($this->cuecajchi);
+
+		$copyObj->setTipcajchi($this->tipcajchi);
+
+		$copyObj->setMonapecajchi($this->monapecajchi);
+
+		$copyObj->setPorrepcajchi($this->porrepcajchi);
+
+		$copyObj->setTiprencajchi($this->tiprencajchi);
+
+		$copyObj->setNuminicajchi($this->numinicajchi);
+
+		$copyObj->setCedrifcajchi($this->cedrifcajchi);
+
+		$copyObj->setCodcatcajchi($this->codcatcajchi);
 
 
 		$copyObj->setNew(true);

@@ -29,92 +29,118 @@ abstract class BaseOcactcom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodactcom()
-	{
+  
+  public function getCodactcom()
+  {
 
-		return $this->codactcom; 		
-	}
-	
-	public function getDesactcom()
-	{
+    return trim($this->codactcom);
 
-		return $this->desactcom; 		
-	}
-	
-	public function getStaactcom()
-	{
+  }
+  
+  public function getDesactcom()
+  {
 
-		return $this->staactcom; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desactcom);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStaactcom()
+  {
+
+    return trim($this->staactcom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodactcom($v)
 	{
 
-		if ($this->codactcom !== $v) {
-			$this->codactcom = $v;
-			$this->modifiedColumns[] = OcactcomPeer::CODACTCOM;
-		}
-
+    if ($this->codactcom !== $v) {
+        $this->codactcom = $v;
+        $this->modifiedColumns[] = OcactcomPeer::CODACTCOM;
+      }
+  
 	} 
 	
 	public function setDesactcom($v)
 	{
 
-		if ($this->desactcom !== $v) {
-			$this->desactcom = $v;
-			$this->modifiedColumns[] = OcactcomPeer::DESACTCOM;
-		}
-
+    if ($this->desactcom !== $v) {
+        $this->desactcom = $v;
+        $this->modifiedColumns[] = OcactcomPeer::DESACTCOM;
+      }
+  
 	} 
 	
 	public function setStaactcom($v)
 	{
 
-		if ($this->staactcom !== $v) {
-			$this->staactcom = $v;
-			$this->modifiedColumns[] = OcactcomPeer::STAACTCOM;
-		}
-
+    if ($this->staactcom !== $v) {
+        $this->staactcom = $v;
+        $this->modifiedColumns[] = OcactcomPeer::STAACTCOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcactcomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcactcomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codactcom = $rs->getString($startcol + 0);
+      $this->codactcom = $rs->getString($startcol + 0);
 
-			$this->desactcom = $rs->getString($startcol + 1);
+      $this->desactcom = $rs->getString($startcol + 1);
 
-			$this->staactcom = $rs->getString($startcol + 2);
+      $this->staactcom = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocactcom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocactcom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseOcactcom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcactcomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcactcomPeer::doUpdate($this, $con);

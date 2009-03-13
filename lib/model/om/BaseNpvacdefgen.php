@@ -37,128 +37,156 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnomvac()
-	{
+  
+  public function getCodnomvac()
+  {
 
-		return $this->codnomvac; 		
-	}
-	
-	public function getCodconvac()
-	{
+    return trim($this->codnomvac);
 
-		return $this->codconvac; 		
-	}
-	
-	public function getPagoad()
-	{
+  }
+  
+  public function getCodconvac()
+  {
 
-		return $this->pagoad; 		
-	}
-	
-	public function getCodconcom()
-	{
+    return trim($this->codconvac);
 
-		return $this->codconcom; 		
-	}
-	
-	public function getCodconuti()
-	{
+  }
+  
+  public function getPagoad()
+  {
 
-		return $this->codconuti; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->pagoad);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodconcom()
+  {
+
+    return trim($this->codconcom);
+
+  }
+  
+  public function getCodconuti()
+  {
+
+    return trim($this->codconuti);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnomvac($v)
 	{
 
-		if ($this->codnomvac !== $v) {
-			$this->codnomvac = $v;
-			$this->modifiedColumns[] = NpvacdefgenPeer::CODNOMVAC;
-		}
-
+    if ($this->codnomvac !== $v) {
+        $this->codnomvac = $v;
+        $this->modifiedColumns[] = NpvacdefgenPeer::CODNOMVAC;
+      }
+  
 	} 
 	
 	public function setCodconvac($v)
 	{
 
-		if ($this->codconvac !== $v) {
-			$this->codconvac = $v;
-			$this->modifiedColumns[] = NpvacdefgenPeer::CODCONVAC;
-		}
-
+    if ($this->codconvac !== $v) {
+        $this->codconvac = $v;
+        $this->modifiedColumns[] = NpvacdefgenPeer::CODCONVAC;
+      }
+  
 	} 
 	
 	public function setPagoad($v)
 	{
 
-		if ($this->pagoad !== $v) {
-			$this->pagoad = $v;
-			$this->modifiedColumns[] = NpvacdefgenPeer::PAGOAD;
-		}
-
+    if ($this->pagoad !== $v) {
+        $this->pagoad = $v;
+        $this->modifiedColumns[] = NpvacdefgenPeer::PAGOAD;
+      }
+  
 	} 
 	
 	public function setCodconcom($v)
 	{
 
-		if ($this->codconcom !== $v) {
-			$this->codconcom = $v;
-			$this->modifiedColumns[] = NpvacdefgenPeer::CODCONCOM;
-		}
-
+    if ($this->codconcom !== $v) {
+        $this->codconcom = $v;
+        $this->modifiedColumns[] = NpvacdefgenPeer::CODCONCOM;
+      }
+  
 	} 
 	
 	public function setCodconuti($v)
 	{
 
-		if ($this->codconuti !== $v) {
-			$this->codconuti = $v;
-			$this->modifiedColumns[] = NpvacdefgenPeer::CODCONUTI;
-		}
-
+    if ($this->codconuti !== $v) {
+        $this->codconuti = $v;
+        $this->modifiedColumns[] = NpvacdefgenPeer::CODCONUTI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacdefgenPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacdefgenPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnomvac = $rs->getString($startcol + 0);
+      $this->codnomvac = $rs->getString($startcol + 0);
 
-			$this->codconvac = $rs->getString($startcol + 1);
+      $this->codconvac = $rs->getString($startcol + 1);
 
-			$this->pagoad = $rs->getString($startcol + 2);
+      $this->pagoad = $rs->getString($startcol + 2);
 
-			$this->codconcom = $rs->getString($startcol + 3);
+      $this->codconcom = $rs->getString($startcol + 3);
 
-			$this->codconuti = $rs->getString($startcol + 4);
+      $this->codconuti = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacdefgen object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacdefgen object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseNpvacdefgen extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacdefgenPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacdefgenPeer::doUpdate($this, $con);

@@ -1,0 +1,237 @@
+methods:
+  post:
+   - "bnreginm{codinm}"
+   - "bnreginm{codact}"
+   - "bnreginm{codubi}"
+   - "bnreginm{coddis}"
+   - "bnreginm{ordcom}"
+   - "bnreginm{codpro}"
+   - "bnreginm{desinm}"
+   - "bnreginm{deninm}"
+   - "bnreginm{obsinm}"
+   - "bnreginm{feccom}"
+   - "bnreginm{fecreg}"
+   - "bnreginm{valini}"
+   - "bnreginm{depacu}"
+   - "bnreginm{valrex}"
+   - "bnreginm{valres}"
+   - "bnreginm{vallib}"
+   - "bnreginm{cosrep}"
+   - "bnreginm{depmen}"
+   - "bnreginm{valadis}"
+   - "bnreginm{valactual}"
+   - "bnreginm{avaact}"
+   - "bnreginm{avacom}"
+   - "bnreginm{areter}"
+   - "bnreginm{arecub}"
+   - "bnreginm{arecon}"
+   - "bnreginm{areotr}"
+   - "bnreginm{aretot}"
+
+
+names:
+  bnreginm{obsinm}:
+    required:  no
+    required_msg: La observacion no puedo estar en Blanco
+    validators: Validator_obsinm
+
+  bnreginm{deninm}:
+    required:  no
+    required_msg: La denominacion no puedo estar en Blanco
+    validators: Validator_deninm
+
+  bnreginm{desinm}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_desinm
+
+  bnreginm{codact}:
+    required:  Yes
+    required_msg: El Código del catalogo no puede estar en Blanco.
+    validators:ExistValidator_codact
+
+  bnreginm{codinm}:
+    required:  Yes
+    required_msg: El Código del catalogo no puede estar en Blanco.
+    validators:
+
+  bnreginm{ordcom}:
+    required:  no
+    validators: ExistValidator_ordcom
+
+  bnreginm{codpro}:
+    required:  no
+    validators: ExistValidator_codpro
+
+  bnreginm{codubi}:
+    required:  Yes
+    required_msg: La codigo de ubicacion no puede estar en Blanco
+    validators: ExistValidator_codubi
+
+  bnreginm{coddis}:
+    required:  Yes
+    required_msg: La codigo de la disposicion no puede estar en Blanco.
+    validators: ExistValidator_coddis
+
+  bnreginm{feccom}:
+    required:  No
+    validators: FechaValidator
+
+  bnreginm{fecreg}:
+    required:  No
+    validators: FechaValidator
+
+  bnreginm{valini}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{depacu}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{valrex}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{valres}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{vallib}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{cosrep}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{depmen}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{valadis}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{valactual}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{avaact}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{avacom}:
+    required:  No
+    validators: MyNumberValidator
+
+  bnreginm{areter}:
+    required:  No
+    validators: MyNumberValidator
+    
+  bnreginm{arecub}:
+    required:  No
+    validators: MyNumberValidator
+    
+  bnreginm{arecon}:
+    required:  No
+    validators: MyNumberValidator
+    
+  bnreginm{areotr}:
+    required:  No
+    validators: MyNumberValidator
+    
+  bnreginm{aretot}:
+    required:  No
+    validators: MyNumberValidator
+  
+MyNumberValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Campo solo puede contener valores númericos
+
+Validar2a:
+    class: UniqueValidator2
+    param:
+        class:        Bnreginm
+        column:       codact
+        column2:      codinm
+        value2:       'bnreginm[codinm]'
+        unique_error: El Código del Activo ya existe para este Catalogo.
+
+Validar2b:
+    class: UniqueValidator2
+    param:
+        class:        Bnreginm
+        column:       codinm
+        column2:      codact
+        value2:       'bnreginm[codact]'
+        unique_error:
+
+ExistValidator_codact:
+    class: CidesaExistValidator
+    param:
+        class:        BNDEFACT
+        column:       codact
+        unique_error: El Catalogo debe Existir.
+
+ExistValidator_ordcom:
+    class: CidesaExistValidator
+    param:
+        class:        Caordcom
+        column:       ordcom
+        unique_error: La Orden de Compra debe Existir.
+
+ExistValidator_codpro:
+    class: CidesaExistValidator
+    param:
+        class:        Caprovee
+        column:       codpro
+        unique_error: La Proveedor debe Existir.
+
+ExistValidator_codubi:
+    class: CidesaExistValidator
+    param:
+        class:        Bnubibie
+        column:       codubi
+        unique_error: El codigo de la ubicacion debe Existir.
+
+ExistValidator_coddis:
+    class: CidesaExistValidator
+    param:
+        class:        Bndisbie
+        column:       coddis
+        unique_error: El codigo de la disposicion debe Existir.
+
+Validator_desinm:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres
+
+
+Validator_deninm:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La denominacion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La denominacion no puede pasar mas de 250 caracteres
+
+Validator_obsinm:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La observacion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La observacion no puede pasar mas de 250 caracteres
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

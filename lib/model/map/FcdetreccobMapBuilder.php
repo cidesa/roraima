@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FcdetreccobMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcdetreccobMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcdetreccobMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcdetreccob');
 		$tMap->setPhpName('Fcdetreccob');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcdetreccob_SEQ');
 
 		$tMap->addColumn('NUMENT', 'Nument', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -39,6 +41,6 @@ class FcdetreccobMapBuilder {
 		$tMap->addColumn('CODCOB', 'Codcob', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

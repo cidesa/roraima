@@ -13,7 +13,7 @@ abstract class BaseCaordcomPeer {
 	const CLASS_DEFAULT = 'lib.model.Caordcom';
 
 	
-	const NUM_COLUMNS = 32;
+	const NUM_COLUMNS = 42;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -113,6 +113,36 @@ abstract class BaseCaordcomPeer {
 	const REFPRC = 'caordcom.REFPRC';
 
 	
+	const CODMEDCOM = 'caordcom.CODMEDCOM';
+
+	
+	const CODPROCOM = 'caordcom.CODPROCOM';
+
+	
+	const CODPAI = 'caordcom.CODPAI';
+
+	
+	const CODEDO = 'caordcom.CODEDO';
+
+	
+	const CODMUN = 'caordcom.CODMUN';
+
+	
+	const APLART = 'caordcom.APLART';
+
+	
+	const APLART6 = 'caordcom.APLART6';
+
+	
+	const NUMSIGECOF = 'caordcom.NUMSIGECOF';
+
+	
+	const FECSIGECOF = 'caordcom.FECSIGECOF';
+
+	
+	const EXPSIGECOF = 'caordcom.EXPSIGECOF';
+
+	
 	const ID = 'caordcom.ID';
 
 	
@@ -121,18 +151,18 @@ abstract class BaseCaordcomPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Ordcom', 'Fecord', 'Codpro', 'Desord', 'Crecon', 'Plaent', 'Tiecan', 'Monord', 'Dtoord', 'Refcom', 'Staord', 'Afepre', 'Conpag', 'Forent', 'Fecanu', 'Tipmon', 'Valmon', 'Tipcom', 'Tipord', 'Tipo', 'Coduni', 'Codemp', 'Notord', 'Tipdoc', 'Tippro', 'Afepro', 'Doccom', 'Refsol', 'Tipfin', 'Justif', 'Refprc', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CaordcomPeer::ORDCOM, CaordcomPeer::FECORD, CaordcomPeer::CODPRO, CaordcomPeer::DESORD, CaordcomPeer::CRECON, CaordcomPeer::PLAENT, CaordcomPeer::TIECAN, CaordcomPeer::MONORD, CaordcomPeer::DTOORD, CaordcomPeer::REFCOM, CaordcomPeer::STAORD, CaordcomPeer::AFEPRE, CaordcomPeer::CONPAG, CaordcomPeer::FORENT, CaordcomPeer::FECANU, CaordcomPeer::TIPMON, CaordcomPeer::VALMON, CaordcomPeer::TIPCOM, CaordcomPeer::TIPORD, CaordcomPeer::TIPO, CaordcomPeer::CODUNI, CaordcomPeer::CODEMP, CaordcomPeer::NOTORD, CaordcomPeer::TIPDOC, CaordcomPeer::TIPPRO, CaordcomPeer::AFEPRO, CaordcomPeer::DOCCOM, CaordcomPeer::REFSOL, CaordcomPeer::TIPFIN, CaordcomPeer::JUSTIF, CaordcomPeer::REFPRC, CaordcomPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('ordcom', 'fecord', 'codpro', 'desord', 'crecon', 'plaent', 'tiecan', 'monord', 'dtoord', 'refcom', 'staord', 'afepre', 'conpag', 'forent', 'fecanu', 'tipmon', 'valmon', 'tipcom', 'tipord', 'tipo', 'coduni', 'codemp', 'notord', 'tipdoc', 'tippro', 'afepro', 'doccom', 'refsol', 'tipfin', 'justif', 'refprc', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, )
+		BasePeer::TYPE_PHPNAME => array ('Ordcom', 'Fecord', 'Codpro', 'Desord', 'Crecon', 'Plaent', 'Tiecan', 'Monord', 'Dtoord', 'Refcom', 'Staord', 'Afepre', 'Conpag', 'Forent', 'Fecanu', 'Tipmon', 'Valmon', 'Tipcom', 'Tipord', 'Tipo', 'Coduni', 'Codemp', 'Notord', 'Tipdoc', 'Tippro', 'Afepro', 'Doccom', 'Refsol', 'Tipfin', 'Justif', 'Refprc', 'Codmedcom', 'Codprocom', 'Codpai', 'Codedo', 'Codmun', 'Aplart', 'Aplart6', 'Numsigecof', 'Fecsigecof', 'Expsigecof', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CaordcomPeer::ORDCOM, CaordcomPeer::FECORD, CaordcomPeer::CODPRO, CaordcomPeer::DESORD, CaordcomPeer::CRECON, CaordcomPeer::PLAENT, CaordcomPeer::TIECAN, CaordcomPeer::MONORD, CaordcomPeer::DTOORD, CaordcomPeer::REFCOM, CaordcomPeer::STAORD, CaordcomPeer::AFEPRE, CaordcomPeer::CONPAG, CaordcomPeer::FORENT, CaordcomPeer::FECANU, CaordcomPeer::TIPMON, CaordcomPeer::VALMON, CaordcomPeer::TIPCOM, CaordcomPeer::TIPORD, CaordcomPeer::TIPO, CaordcomPeer::CODUNI, CaordcomPeer::CODEMP, CaordcomPeer::NOTORD, CaordcomPeer::TIPDOC, CaordcomPeer::TIPPRO, CaordcomPeer::AFEPRO, CaordcomPeer::DOCCOM, CaordcomPeer::REFSOL, CaordcomPeer::TIPFIN, CaordcomPeer::JUSTIF, CaordcomPeer::REFPRC, CaordcomPeer::CODMEDCOM, CaordcomPeer::CODPROCOM, CaordcomPeer::CODPAI, CaordcomPeer::CODEDO, CaordcomPeer::CODMUN, CaordcomPeer::APLART, CaordcomPeer::APLART6, CaordcomPeer::NUMSIGECOF, CaordcomPeer::FECSIGECOF, CaordcomPeer::EXPSIGECOF, CaordcomPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('ordcom', 'fecord', 'codpro', 'desord', 'crecon', 'plaent', 'tiecan', 'monord', 'dtoord', 'refcom', 'staord', 'afepre', 'conpag', 'forent', 'fecanu', 'tipmon', 'valmon', 'tipcom', 'tipord', 'tipo', 'coduni', 'codemp', 'notord', 'tipdoc', 'tippro', 'afepro', 'doccom', 'refsol', 'tipfin', 'justif', 'refprc', 'codmedcom', 'codprocom', 'codpai', 'codedo', 'codmun', 'aplart', 'aplart6', 'numsigecof', 'fecsigecof', 'expsigecof', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Ordcom' => 0, 'Fecord' => 1, 'Codpro' => 2, 'Desord' => 3, 'Crecon' => 4, 'Plaent' => 5, 'Tiecan' => 6, 'Monord' => 7, 'Dtoord' => 8, 'Refcom' => 9, 'Staord' => 10, 'Afepre' => 11, 'Conpag' => 12, 'Forent' => 13, 'Fecanu' => 14, 'Tipmon' => 15, 'Valmon' => 16, 'Tipcom' => 17, 'Tipord' => 18, 'Tipo' => 19, 'Coduni' => 20, 'Codemp' => 21, 'Notord' => 22, 'Tipdoc' => 23, 'Tippro' => 24, 'Afepro' => 25, 'Doccom' => 26, 'Refsol' => 27, 'Tipfin' => 28, 'Justif' => 29, 'Refprc' => 30, 'Id' => 31, ),
-		BasePeer::TYPE_COLNAME => array (CaordcomPeer::ORDCOM => 0, CaordcomPeer::FECORD => 1, CaordcomPeer::CODPRO => 2, CaordcomPeer::DESORD => 3, CaordcomPeer::CRECON => 4, CaordcomPeer::PLAENT => 5, CaordcomPeer::TIECAN => 6, CaordcomPeer::MONORD => 7, CaordcomPeer::DTOORD => 8, CaordcomPeer::REFCOM => 9, CaordcomPeer::STAORD => 10, CaordcomPeer::AFEPRE => 11, CaordcomPeer::CONPAG => 12, CaordcomPeer::FORENT => 13, CaordcomPeer::FECANU => 14, CaordcomPeer::TIPMON => 15, CaordcomPeer::VALMON => 16, CaordcomPeer::TIPCOM => 17, CaordcomPeer::TIPORD => 18, CaordcomPeer::TIPO => 19, CaordcomPeer::CODUNI => 20, CaordcomPeer::CODEMP => 21, CaordcomPeer::NOTORD => 22, CaordcomPeer::TIPDOC => 23, CaordcomPeer::TIPPRO => 24, CaordcomPeer::AFEPRO => 25, CaordcomPeer::DOCCOM => 26, CaordcomPeer::REFSOL => 27, CaordcomPeer::TIPFIN => 28, CaordcomPeer::JUSTIF => 29, CaordcomPeer::REFPRC => 30, CaordcomPeer::ID => 31, ),
-		BasePeer::TYPE_FIELDNAME => array ('ordcom' => 0, 'fecord' => 1, 'codpro' => 2, 'desord' => 3, 'crecon' => 4, 'plaent' => 5, 'tiecan' => 6, 'monord' => 7, 'dtoord' => 8, 'refcom' => 9, 'staord' => 10, 'afepre' => 11, 'conpag' => 12, 'forent' => 13, 'fecanu' => 14, 'tipmon' => 15, 'valmon' => 16, 'tipcom' => 17, 'tipord' => 18, 'tipo' => 19, 'coduni' => 20, 'codemp' => 21, 'notord' => 22, 'tipdoc' => 23, 'tippro' => 24, 'afepro' => 25, 'doccom' => 26, 'refsol' => 27, 'tipfin' => 28, 'justif' => 29, 'refprc' => 30, 'id' => 31, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, )
+		BasePeer::TYPE_PHPNAME => array ('Ordcom' => 0, 'Fecord' => 1, 'Codpro' => 2, 'Desord' => 3, 'Crecon' => 4, 'Plaent' => 5, 'Tiecan' => 6, 'Monord' => 7, 'Dtoord' => 8, 'Refcom' => 9, 'Staord' => 10, 'Afepre' => 11, 'Conpag' => 12, 'Forent' => 13, 'Fecanu' => 14, 'Tipmon' => 15, 'Valmon' => 16, 'Tipcom' => 17, 'Tipord' => 18, 'Tipo' => 19, 'Coduni' => 20, 'Codemp' => 21, 'Notord' => 22, 'Tipdoc' => 23, 'Tippro' => 24, 'Afepro' => 25, 'Doccom' => 26, 'Refsol' => 27, 'Tipfin' => 28, 'Justif' => 29, 'Refprc' => 30, 'Codmedcom' => 31, 'Codprocom' => 32, 'Codpai' => 33, 'Codedo' => 34, 'Codmun' => 35, 'Aplart' => 36, 'Aplart6' => 37, 'Numsigecof' => 38, 'Fecsigecof' => 39, 'Expsigecof' => 40, 'Id' => 41, ),
+		BasePeer::TYPE_COLNAME => array (CaordcomPeer::ORDCOM => 0, CaordcomPeer::FECORD => 1, CaordcomPeer::CODPRO => 2, CaordcomPeer::DESORD => 3, CaordcomPeer::CRECON => 4, CaordcomPeer::PLAENT => 5, CaordcomPeer::TIECAN => 6, CaordcomPeer::MONORD => 7, CaordcomPeer::DTOORD => 8, CaordcomPeer::REFCOM => 9, CaordcomPeer::STAORD => 10, CaordcomPeer::AFEPRE => 11, CaordcomPeer::CONPAG => 12, CaordcomPeer::FORENT => 13, CaordcomPeer::FECANU => 14, CaordcomPeer::TIPMON => 15, CaordcomPeer::VALMON => 16, CaordcomPeer::TIPCOM => 17, CaordcomPeer::TIPORD => 18, CaordcomPeer::TIPO => 19, CaordcomPeer::CODUNI => 20, CaordcomPeer::CODEMP => 21, CaordcomPeer::NOTORD => 22, CaordcomPeer::TIPDOC => 23, CaordcomPeer::TIPPRO => 24, CaordcomPeer::AFEPRO => 25, CaordcomPeer::DOCCOM => 26, CaordcomPeer::REFSOL => 27, CaordcomPeer::TIPFIN => 28, CaordcomPeer::JUSTIF => 29, CaordcomPeer::REFPRC => 30, CaordcomPeer::CODMEDCOM => 31, CaordcomPeer::CODPROCOM => 32, CaordcomPeer::CODPAI => 33, CaordcomPeer::CODEDO => 34, CaordcomPeer::CODMUN => 35, CaordcomPeer::APLART => 36, CaordcomPeer::APLART6 => 37, CaordcomPeer::NUMSIGECOF => 38, CaordcomPeer::FECSIGECOF => 39, CaordcomPeer::EXPSIGECOF => 40, CaordcomPeer::ID => 41, ),
+		BasePeer::TYPE_FIELDNAME => array ('ordcom' => 0, 'fecord' => 1, 'codpro' => 2, 'desord' => 3, 'crecon' => 4, 'plaent' => 5, 'tiecan' => 6, 'monord' => 7, 'dtoord' => 8, 'refcom' => 9, 'staord' => 10, 'afepre' => 11, 'conpag' => 12, 'forent' => 13, 'fecanu' => 14, 'tipmon' => 15, 'valmon' => 16, 'tipcom' => 17, 'tipord' => 18, 'tipo' => 19, 'coduni' => 20, 'codemp' => 21, 'notord' => 22, 'tipdoc' => 23, 'tippro' => 24, 'afepro' => 25, 'doccom' => 26, 'refsol' => 27, 'tipfin' => 28, 'justif' => 29, 'refprc' => 30, 'codmedcom' => 31, 'codprocom' => 32, 'codpai' => 33, 'codedo' => 34, 'codmun' => 35, 'aplart' => 36, 'aplart6' => 37, 'numsigecof' => 38, 'fecsigecof' => 39, 'expsigecof' => 40, 'id' => 41, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, )
 	);
 
 	
@@ -248,6 +278,26 @@ abstract class BaseCaordcomPeer {
 
 		$criteria->addSelectColumn(CaordcomPeer::REFPRC);
 
+		$criteria->addSelectColumn(CaordcomPeer::CODMEDCOM);
+
+		$criteria->addSelectColumn(CaordcomPeer::CODPROCOM);
+
+		$criteria->addSelectColumn(CaordcomPeer::CODPAI);
+
+		$criteria->addSelectColumn(CaordcomPeer::CODEDO);
+
+		$criteria->addSelectColumn(CaordcomPeer::CODMUN);
+
+		$criteria->addSelectColumn(CaordcomPeer::APLART);
+
+		$criteria->addSelectColumn(CaordcomPeer::APLART6);
+
+		$criteria->addSelectColumn(CaordcomPeer::NUMSIGECOF);
+
+		$criteria->addSelectColumn(CaordcomPeer::FECSIGECOF);
+
+		$criteria->addSelectColumn(CaordcomPeer::EXPSIGECOF);
+
 		$criteria->addSelectColumn(CaordcomPeer::ID);
 
 	}
@@ -350,6 +400,7 @@ abstract class BaseCaordcomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaordcomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

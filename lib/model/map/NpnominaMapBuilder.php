@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpnominaMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpnominaMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpnominaMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npnomina');
 		$tMap->setPhpName('Npnomina');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npnomina_SEQ');
 
 		$tMap->addColumn('CODNOM', 'Codnom', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -38,11 +40,11 @@ class NpnominaMapBuilder {
 
 		$tMap->addColumn('FRECAL', 'Frecal', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('ULTFEC', 'Ultfec', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('ULTFEC', 'Ultfec', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('PROFEC', 'Profec', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('PROFEC', 'Profec', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('NUMSEM', 'Numsem', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('NUMSEM', 'Numsem', 'double', CreoleTypes::NUMERIC, false, 2);
 
 		$tMap->addColumn('ORDPAG', 'Ordpag', 'string', CreoleTypes::VARCHAR, true, 1);
 
@@ -59,6 +61,6 @@ class NpnominaMapBuilder {
 		$tMap->addColumn('REFCOM', 'Refcom', 'string', CreoleTypes::VARCHAR, false, 8);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

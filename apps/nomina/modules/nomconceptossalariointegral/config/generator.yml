@@ -1,7 +1,7 @@
 generator:
   class:              sfPropelAdminGenerator
   param:
-    model_class:      Npconsalint
+    model_class:      Npnomina
     theme:            default
     fields:
       codnom: { name: Tipo Nomina }
@@ -10,12 +10,13 @@ generator:
       nomcon: { name: Descripción Concepto }
     list:
       title:          Conceptos para el Salario Integral
-      filters:        [codnom, codcon ]
-      display:        [=codnom, nomnom, codcon, nomcon ]
-      object_actions:
-        _edit:        ~
-        _delete:      ~
-      max_per_page:   10
+      filters:        [codnom, nomnom]
+      display:        [=codnom, =nomnom]
+      max_per_page:   20
+      sort:     codnom
     edit:
-      title:         Edicion de Conceptos para el Salario Integral
-      display:       [codnom, codcon]
+      title:         Edición de Conceptos para el Salario Integral
+      display:       [codnom, nomnom]
+      actions:
+        _list:        ~
+        _save:        ~

@@ -7,7 +7,9 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
+<?php use_helper('Javascript') ?>
+<?php echo javascript_include_tag('tools','observe') ?>
+<?php use_helper('SubmitClick') ?>
 <?php echo object_input_hidden_tag($carazcom, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
@@ -20,13 +22,16 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($carazcom, 'getCodrazcom', array (
-  'size' => 20,
+  'size' => 5,
+  'maxlength' => 4,
+  'readonly'  =>  $carazcom->getId()!='' ? true : false ,
   'control_name' => 'carazcom[codrazcom]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('carazcom_codrazcom').value=valor;document.getElementById('carazcom_codrazcom').disabled=false;",
+  )); echo $value ? $value : '&nbsp;' ?>
+  </div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('carazcom[desrazcom]', __($labels['carazcom{desrazcom}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('carazcom{desrazcom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('carazcom{desrazcom}')): ?>
@@ -35,9 +40,10 @@
 
   <?php $value = object_input_tag($carazcom, 'getDesrazcom', array (
   'size' => 80,
+  'maxlength' => 255,
   'control_name' => 'carazcom[desrazcom]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
+  </div>
 </div>
 
 </fieldset>

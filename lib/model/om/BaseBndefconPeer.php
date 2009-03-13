@@ -250,6 +250,7 @@ abstract class BaseBndefconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BndefconPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

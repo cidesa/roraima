@@ -6,19 +6,27 @@ generator:
     fields:
       rcpart:  {  name: Número }
       codalm:  {  name: Código Almacen }
-      codpro:  {  name: CI/RIF Proveedor }
+      codpro:  {  name: CI/RIF Contratistas de Bienes o Servicio y Cooperativas }
+      rifpro:  {  name: CI/RIF Contratistas de Bienes o Servicio y Cooperativas }
+      desrcp:  {  name: Descripción }
       tipmov:  {  name: Tipo Movimiento }
-      fecrcp:  {  name: Fecha }
+      fecrcp:  {  name: Fecha, params: date_format='dd/MM/yyyy' }
       monrcp:  {  name: Monto Total}
+      codubi:      { name: Código de la Ubicación}
     list:
       title:   Entradas en el Almacen
-      display:        [=rcpart, codalm, codpro, monrcp, tipmov, fecrcp]
-      filters: [rcpart, codalm, fecrcp]
+      display:        [=rcpart, desrcp, monrcp, fecrcp]
+      filters: [rcpart, rifpro, fecrcp]
       object_actions:
         _edit:        ~
-        _delete:      ~      
-      max_per_page:   5
+        _delete:      ~
+      max_per_page:   10
+      sort:    rcpart
     edit:
-      title:   Editar Entradas en el Almacen
-      display:        [=rcpart, codalm, codpro, monrcp, tipmov, fecrcp]
-      
+      title:   Entradas en el Almacen
+      display:        [=rcpart, codalm, codpro, desrcp, monrcp, tipmov, fecrcp, codubi]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

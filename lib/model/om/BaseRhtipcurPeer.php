@@ -210,6 +210,7 @@ abstract class BaseRhtipcurPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(RhtipcurPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

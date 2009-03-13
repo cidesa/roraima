@@ -29,93 +29,119 @@ abstract class BaseNpdepcajaho extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumlin()
-	{
+  
+  public function getNumlin($val=false)
+  {
 
-		return number_format($this->numlin,2,',','.');
-		
-	}
-	
-	public function getDesdep()
-	{
+    if($val) return number_format($this->numlin,2,',','.');
+    else return $this->numlin;
 
-		return $this->desdep; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getDesdep()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desdep);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumlin($v)
 	{
 
-		if ($this->numlin !== $v) {
-			$this->numlin = $v;
-			$this->modifiedColumns[] = NpdepcajahoPeer::NUMLIN;
-		}
-
+    if ($this->numlin !== $v) {
+        $this->numlin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdepcajahoPeer::NUMLIN;
+      }
+  
 	} 
 	
 	public function setDesdep($v)
 	{
 
-		if ($this->desdep !== $v) {
-			$this->desdep = $v;
-			$this->modifiedColumns[] = NpdepcajahoPeer::DESDEP;
-		}
-
+    if ($this->desdep !== $v) {
+        $this->desdep = $v;
+        $this->modifiedColumns[] = NpdepcajahoPeer::DESDEP;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpdepcajahoPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpdepcajahoPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdepcajahoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdepcajahoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numlin = $rs->getFloat($startcol + 0);
+      $this->numlin = $rs->getFloat($startcol + 0);
 
-			$this->desdep = $rs->getString($startcol + 1);
+      $this->desdep = $rs->getString($startcol + 1);
 
-			$this->codemp = $rs->getString($startcol + 2);
+      $this->codemp = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdepcajaho object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdepcajaho object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseNpdepcajaho extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdepcajahoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdepcajahoPeer::doUpdate($this, $con);

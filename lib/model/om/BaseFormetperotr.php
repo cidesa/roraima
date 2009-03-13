@@ -41,147 +41,176 @@ abstract class BaseFormetperotr extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmet()
-	{
+  
+  public function getCodmet()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->codmet);
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodact()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodparegr()
-	{
+    return trim($this->codpro);
 
-		return $this->codparegr; 		
-	}
-	
-	public function getPerpre()
-	{
+  }
+  
+  public function getCodact()
+  {
 
-		return $this->perpre; 		
-	}
-	
-	public function getMonper()
-	{
+    return trim($this->codact);
 
-		return number_format($this->monper,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodparegr()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codparegr);
+
+  }
+  
+  public function getPerpre()
+  {
+
+    return trim($this->perpre);
+
+  }
+  
+  public function getMonper($val=false)
+  {
+
+    if($val) return number_format($this->monper,2,',','.');
+    else return $this->monper;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = FormetperotrPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = FormetperotrPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FormetperotrPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FormetperotrPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = FormetperotrPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = FormetperotrPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodparegr($v)
 	{
 
-		if ($this->codparegr !== $v) {
-			$this->codparegr = $v;
-			$this->modifiedColumns[] = FormetperotrPeer::CODPAREGR;
-		}
-
+    if ($this->codparegr !== $v) {
+        $this->codparegr = $v;
+        $this->modifiedColumns[] = FormetperotrPeer::CODPAREGR;
+      }
+  
 	} 
 	
 	public function setPerpre($v)
 	{
 
-		if ($this->perpre !== $v) {
-			$this->perpre = $v;
-			$this->modifiedColumns[] = FormetperotrPeer::PERPRE;
-		}
-
+    if ($this->perpre !== $v) {
+        $this->perpre = $v;
+        $this->modifiedColumns[] = FormetperotrPeer::PERPRE;
+      }
+  
 	} 
 	
 	public function setMonper($v)
 	{
 
-		if ($this->monper !== $v) {
-			$this->monper = $v;
-			$this->modifiedColumns[] = FormetperotrPeer::MONPER;
-		}
-
+    if ($this->monper !== $v) {
+        $this->monper = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FormetperotrPeer::MONPER;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FormetperotrPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FormetperotrPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmet = $rs->getString($startcol + 0);
+      $this->codmet = $rs->getString($startcol + 0);
 
-			$this->codpro = $rs->getString($startcol + 1);
+      $this->codpro = $rs->getString($startcol + 1);
 
-			$this->codact = $rs->getString($startcol + 2);
+      $this->codact = $rs->getString($startcol + 2);
 
-			$this->codparegr = $rs->getString($startcol + 3);
+      $this->codparegr = $rs->getString($startcol + 3);
 
-			$this->perpre = $rs->getString($startcol + 4);
+      $this->perpre = $rs->getString($startcol + 4);
 
-			$this->monper = $rs->getFloat($startcol + 5);
+      $this->monper = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Formetperotr object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Formetperotr object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

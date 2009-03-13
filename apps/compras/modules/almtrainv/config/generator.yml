@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cainvfis
+    theme:            cidesaGenerator
+    fields:
+      fecinv: { name: Fecha Inventario, params: date_format='dd/MM/yyyy' }
+      codalm: { name: Almacen, params : maxlength=8 }
+      boton: { name: "" }
+
+    list:
+      title:          Traspaso de Inventario Fisico a Lógico
+      display:        [=fecinv]
+      filters:		  [fecinv]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+      actions:
+        _new:        none
+      sort:    fecinv
+    edit:
+      title:          Traspaso de Inventario Fisico a Lógico
+      display:
+        "Realiza la Actualización de las Cantidades Lógicas de los Artículos":        [fecinv, _boton]
+      actions:
+        _list:        ~

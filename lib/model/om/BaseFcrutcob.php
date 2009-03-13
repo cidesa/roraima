@@ -31,33 +31,36 @@ abstract class BaseFcrutcob extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcob()
-	{
+  
+  public function getCodcob()
+  {
 
-		return $this->codcob; 		
-	}
-	
-	public function getCodrut()
-	{
+    return trim($this->codcob);
 
-		return $this->codrut; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodrut()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codrut);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcob($v)
 	{
 
-		if ($this->codcob !== $v) {
-			$this->codcob = $v;
-			$this->modifiedColumns[] = FcrutcobPeer::CODCOB;
-		}
-
+    if ($this->codcob !== $v) {
+        $this->codcob = $v;
+        $this->modifiedColumns[] = FcrutcobPeer::CODCOB;
+      }
+  
 		if ($this->aFccobrad !== null && $this->aFccobrad->getCodcob() !== $v) {
 			$this->aFccobrad = null;
 		}
@@ -67,11 +70,11 @@ abstract class BaseFcrutcob extends BaseObject  implements Persistent {
 	public function setCodrut($v)
 	{
 
-		if ($this->codrut !== $v) {
-			$this->codrut = $v;
-			$this->modifiedColumns[] = FcrutcobPeer::CODRUT;
-		}
-
+    if ($this->codrut !== $v) {
+        $this->codrut = $v;
+        $this->modifiedColumns[] = FcrutcobPeer::CODRUT;
+      }
+  
 		if ($this->aFcrutas !== null && $this->aFcrutas->getCodrut() !== $v) {
 			$this->aFcrutas = null;
 		}
@@ -81,32 +84,54 @@ abstract class BaseFcrutcob extends BaseObject  implements Persistent {
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcrutcobPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcrutcobPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcob = $rs->getString($startcol + 0);
+      $this->codcob = $rs->getString($startcol + 0);
 
-			$this->codrut = $rs->getString($startcol + 1);
+      $this->codrut = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcrutcob object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcrutcob object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -179,6 +204,7 @@ abstract class BaseFcrutcob extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcrutcobPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcrutcobPeer::doUpdate($this, $con);
@@ -401,9 +427,8 @@ abstract class BaseFcrutcob extends BaseObject  implements Persistent {
 	
 	public function getFccobrad($con = null)
 	{
-				include_once 'lib/model/om/BaseFccobradPeer.php';
-
 		if ($this->aFccobrad === null && (($this->codcob !== "" && $this->codcob !== null))) {
+						include_once 'lib/model/om/BaseFccobradPeer.php';
 
 			$this->aFccobrad = FccobradPeer::retrieveByPK($this->codcob, $con);
 
@@ -431,9 +456,8 @@ abstract class BaseFcrutcob extends BaseObject  implements Persistent {
 	
 	public function getFcrutas($con = null)
 	{
-				include_once 'lib/model/om/BaseFcrutasPeer.php';
-
 		if ($this->aFcrutas === null && (($this->codrut !== "" && $this->codrut !== null))) {
+						include_once 'lib/model/om/BaseFcrutasPeer.php';
 
 			$this->aFcrutas = FcrutasPeer::retrieveByPK($this->codrut, $con);
 

@@ -10,93 +10,224 @@
  */
 class almregrgoActions extends autoalmregrgoActions
 {
-	public function getnompre()
-	{
-		$c = new Criteria;
-		$this->campo = str_pad($this->carecarg->getCodpre(),32,' ');
-		$c->add(CpdeftitPeer::CODPRE, $this->campo);
-		$this->nompre = CpdeftitPeer::doSelect($c);
-		if ($this->nompre)
-		return $this->nompre[0]->getNompre();
-		else
-		return ' ';
-	}
 
-	public function getdescta()
-	{
-		$c = new Criteria;
-		$this->campo = $this->carecarg->getCodcta();
-		#str_pad($this->carecarg->getCodcta(),32,' ');
-		$c->add(ContabbPeer::CODCTA, $this->campo);
-		$this->descta = ContabbPeer::doSelect($c);
-		if ($this->descta)
-		return $this->descta[0]->getDescta();
-		else
-		return ' ';
-	}
+  private $coderror = -1;
 
-	public function executeEdit()
-	{
-		$this->carecarg = $this->getCarecargOrCreate();
-		$this->nompre = $this->getnompre();
-		$this->descta = $this->getdescta();
+  public function executeEdit()
+  {
 
-	    if ($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->updateCarecargFromRequest();
+    parent::executeEdit();
+	    $this->carecarg = $this->getCarecargOrCreate();
+	    $this->setVars();
 
-      $this->saveCarecarg($this->carecarg);
-
-      $this->setFlash('notice', 'Your modifications have been saved');
-
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('almregrgo/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('almregrgo/list');
-      }
-      else
-      {
-        return $this->redirect('almregrgo/edit?id='.$this->carecarg->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
   }
 
-    protected function updateCarecargFromRequest()
+
+   public function setVars()
+	{
+	   $c = new Criteria();
+      $dato= CadefartPeer::doSelectOne($c);
+      if ($dato)
+          $this->tipoformato=$dato->getAsiparrec();
+      else
+          $this->tipoformato="";
+	  $this->mascarapresupuestaria = Herramientas::Obtener_FormatoPresupuesto();
+	  $this->longpre=strlen($this->mascarapresupuestaria);
+	  $this->mascaracontabilidad = Herramientas::ObtenerFormato('Contaba','Forcta');
+	  $this->longcon=strlen($this->mascaracontabilidad);
+	}
+
+   public function executeAjax()
+	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+	  if ($this->getRequestParameter('ajax')=='1')
+	    {
+	  		$dato=CpdeftitPeer::getDestit($this->getRequestParameter('codigo'));
+            //$output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","","c"]]';
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+	    else  if ($this->getRequestParameter('ajax')=='2')
+	    {
+	  		$dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+
+  	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
+	}
+
+	public function executeAutocomplete()
+	{
+		if ($this->getRequestParameter('ajax')=='1')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODPRE','Cpdeftit','codpre',$this->getRequestParameter('carecarg[codpre]'));
+	    }
+	    else  if ($this->getRequestParameter('ajax')=='2')
+	    {
+	    	$this->tags=Herramientas::autocompleteAjax('CODCTA','Contabb','codcta',$this->getRequestParameter('carecarg[descta]'));
+	    }
+	}
+
+  public function saveCarecarg($Carecarg)
+  {
+    $coderr = -1;
+
+    try {
+
+      parent::saveCarecarg($Carecarg);
+
+      if(is_array($coderr)){
+        foreach ($coderr as $ERR){
+          $err = Herramientas::obtenerMensajeError($ERR);
+          $this->getRequest()->setError('',$err);
+          $this->ActualizarGrid();
+        }
+      }elseif($coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($coderr);
+        $this->getRequest()->setError('',$err);
+        $this->ActualizarGrid();
+      }
+
+    } catch (Exception $ex) {
+
+      $coderror = 0;
+      $err = Herramientas::obtenerMensajeError($coderr);
+      $this->getRequest()->setError('',$err);
+
+    }
+
+
+  }
+
+
+  public function deleteCarecarg($Carecarg)
+  {
+
+    $coderr = -1;
+
+    // habilitar la siguiente línea si se usa grid
+    //$grid=Herramientas::CargarDatosGrid($this,$this->obj);
+
+    try {
+
+      // Modificar la siguiente línea para llamar al método
+      // correcto en la clase del negocio, ej:
+      // $coderr = Compras::EliminarAlmaujoc($caajuoc,$grid);
+
+      // OJO ----> Eliminar esta linea al modificar este método
+      parent::deleteCarecarg($Carecarg);
+
+      if(is_array($coderr)){
+        foreach ($coderror as $ERR){
+          $err = Herramientas::obtenerMensajeError($ERR);
+          $this->getRequest()->setError('',$err);
+          $this->ActualizarGrid();
+        }
+      }elseif($coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($coderror);
+        $this->getRequest()->setError('',$err);
+        $this->ActualizarGrid();
+      }
+
+
+    } catch (Exception $ex) {
+
+      $coderror = 0;
+      $err = Herramientas::obtenerMensajeError($coderror);
+      $this->getRequest()->setError('',$err);
+
+    }
+
+  }
+
+  public function validateEdit()
+  {
+    $resp=-1;
+
+    // Se deben llamar a las funciones necesarias para cargar los
+    // datos de la vista que serán usados en las funciones de validación.
+    // Por ejemplo:
+
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+
+      // Aqui van los llamados a los métodos de las clases del
+      // negocio para validar los datos.
+      // Los resultados de cada llamado deben ser analizados por ejemplo:
+
+       //Para que el codigo no se pueda cambiar al editar el registro:
+       $this->carecarg= $this->getCarecargOrCreate();
+       $carecarg = $this->getRequestParameter('carecarg');
+       $valor = $carecarg['codrgo'];
+       $campo='codrgo';
+
+       $resp=Herramientas::ValidarCodigo($valor,$this->carecarg,$campo);
+
+      if($resp!=-1)
+      {
+        $this->coderror = $resp;
+        return false;
+      }
+      else return true;
+    }else return true;
+  }
+
+  public function handleErrorEdit()
+  {
+    $this->labels = $this->getLabels();
+
+    $this->carecarg= $this->getCarecargOrCreate();
+    $this->updateCarecargFromRequest();
+
+
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderror!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderror);
+        $this->getRequest()->setError('',$err);
+      }
+    }
+    return sfView::SUCCESS;
+
+  }
+
+	protected function updateCarecargFromRequest()
 	  {
 	    $carecarg = $this->getRequestParameter('carecarg');
-	
+	    $this->setVars();
+
 	    if (isset($carecarg['codrgo']))
-        {
-          $this->carecarg->setCodrgo($carecarg['codrgo']);
-        }	    	    
+	    {
+	      $this->carecarg->setCodrgo($carecarg['codrgo']);
+	    }
 	    if (isset($carecarg['nomrgo']))
 	    {
 	      $this->carecarg->setNomrgo($carecarg['nomrgo']);
 	    }
-	    if (isset($carecarg['codpre']))
+	    if (isset($carecarg['tiprgo']))
 	    {
-	      $this->carecarg->setCodpre(str_pad($carecarg['codpre'],32,' '));
+	      $this->carecarg->setTiprgo($carecarg['tiprgo']);
 	    }
-	    //if (isset($carecarg['tiprgo']))
-	    //{
-	      //$this->carecarg->setTiprgo($carecarg['tiprgo']);
-	      $this->carecarg->setTiprgo($this->getRequestParameter('checkbox1'));
-	    //}
 	    if (isset($carecarg['monrgo']))
 	    {
 	      $this->carecarg->setMonrgo($carecarg['monrgo']);
 	    }
+	    if (isset($carecarg['codpre']))
+	    {
+	      $this->carecarg->setCodpre($carecarg['codpre']);
+	    }
+	    if (isset($carecarg['nompre']))
+	    {
+	      $this->carecarg->setNompre($carecarg['nompre']);
+	    }
 	    if (isset($carecarg['codcta']))
 	    {
-	      $this->carecarg->setCodcta(str_pad($carecarg['codcta'],32,' '));  	
+	      $this->carecarg->setCodcta($carecarg['codcta']);
 	    }
-	  }  
+	    if (isset($carecarg['descta']))
+	    {
+	      $this->carecarg->setDescta($carecarg['descta']);
+	    }
+	  }
 
 }

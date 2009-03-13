@@ -1,50 +1,52 @@
 <?php
 
 
-	
+
 class CarcpartMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CarcpartMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CarcpartMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('carcpart');
 		$tMap->setPhpName('Carcpart');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('carcpart_SEQ');
 
 		$tMap->addColumn('RCPART', 'Rcpart', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECRCP', 'Fecrcp', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECRCP', 'Fecrcp', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('ORDCOM', 'Ordcom', 'string', CreoleTypes::VARCHAR, true, 8);
 
 		$tMap->addColumn('DESRCP', 'Desrcp', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, false, 15);
 
 		$tMap->addColumn('NUMFAC', 'Numfac', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('MONRCP', 'Monrcp', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONRCP', 'Monrcp', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('STARCP', 'Starcp', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -60,9 +62,11 @@ class CarcpartMapBuilder {
 
 		$tMap->addColumn('NROENT', 'Nroent', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('FECFAC', 'Fecfac', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECFAC', 'Fecfac', 'int', CreoleTypes::DATE, false, null);
+
+		$tMap->addColumn('CODUBI', 'Codubi', 'string', CreoleTypes::VARCHAR, false, 20);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

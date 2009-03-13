@@ -10,39 +10,43 @@
  */
 class oycdefperActions extends autooycdefperActions
 {
-	protected function updateOcdefperFromRequest()
-	{
-		$ocdefper = $this->getRequestParameter('ocdefper');
+  public function executeAjax()
+  {
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+	 $cajtexcom=$this->getRequestParameter('cajtexcom');
 
-		if (isset($ocdefper['cedper']))
-		{
-			$this->ocdefper->setCedper(str_pad($ocdefper['cedper'], 15 , ' '));
-		}
-		if (isset($ocdefper['nomper']))
-		{
-			$this->ocdefper->setNomper($ocdefper['nomper']);
-		}
-		if (isset($ocdefper['telper']))
-		{
-			$this->ocdefper->setTelper($ocdefper['telper']);
-		}
-		if (isset($ocdefper['codtipcar']))
-		{
-			$this->ocdefper->setCodtipcar($ocdefper['codtipcar']);
-		}
-		if (isset($ocdefper['destipcar']))
-		{
-			$this->ocdefper->setDestipcar($ocdefper['destipcar']);
-		}
-		if (isset($ocdefper['codtippro']))
-		{
-			$this->ocdefper->setCodtippro($ocdefper['codtippro']);
-    }
-    if (isset($ocdefper['destippro']))
-    {
-      $this->ocdefper->setDestippro($ocdefper['destippro']);
-    }
+	 if ($this->getRequestParameter('ajax')=='1')
+	 {
+	 	$dato=OcdefperPeer::getNomper(trim($this->getRequestParameter('codigo')));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 }
+	 else if ($this->getRequestParameter('ajax')=='2')
+	 {
+	 	$dato=OctipcarPeer::getDestipo($this->getRequestParameter('codigo'));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 }
+	 else if ($this->getRequestParameter('ajax')=='3')
+	 {
+	 	$dato=OctipproPeer::getDestipo($this->getRequestParameter('codigo'));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+
+	 }
+	 else if ($this->getRequestParameter('ajax')=='4')
+	 {
+	 	$dato=OctipperPeer::getDestipo($this->getRequestParameter('codigo'));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 }
+	 $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 return sfView::HEADER_ONLY;
   }
-	
-	
+
+  protected function deleteOcdefper($ocdefper)
+  {
+  	if (Herramientas::getX_vacio('CedPer','OCProPer','CedPer',$ocdefper->getCedper())=='')
+  	{
+    	$ocdefper->delete();
+  	}
+
+  }
+
 }

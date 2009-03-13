@@ -3,29 +3,18 @@
 /**
  * Subclass for performing query and update operations on the 'caprovee' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class CaproveePeer extends BaseCaproveePeer
 {
-	public static function getNomprovee($codpro)
-	{
-		$c = new Criteria();
-		$c->add(CaproveePeer::CODPRO,str_pad($codpro, 10 , ' '));
-		$despro = CaproveePeer::doSelectone($c);
-		if ($despro){
-			return $despro->getNompro();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
-	}
 	const COLUMNS = 'columns';
-	
+
 	public static $columsname = array (
-	self::COLUMNS => array (CaproveePeer::CODPRO => 'Código', CaproveePeer::NOMPRO => 'Proveedor', CaproveePeer::RIFPRO => 'Rif', CaproveePeer::NITPRO => 'Nit', CaproveePeer::DIRPRO => 'Proveedor', CaproveePeer::ID =>  'Id', ),);
-	
-	
+	self::COLUMNS => array (CaproveePeer::RIFPRO => 'Rif', CaproveePeer::NOMPRO => 'Descripción', CaproveePeer::CODPRO => 'Codigo'),);
+
+
 	static public function getColumName($colum)
 	{
 		return self::$columsname[self::COLUMNS][$colum];
@@ -35,8 +24,8 @@ class CaproveePeer extends BaseCaproveePeer
 	{
 		return self::$columsname[self::COLUMNS];
 	}
-	
-	
+
+
 	static public function getArrayFieldsNames()
 	{
 		$col = self::$columsname[self::COLUMNS];
@@ -47,8 +36,48 @@ class CaproveePeer extends BaseCaproveePeer
 			$tabla = substr($key,0,$punto);
 			$campo = substr($key,$punto+1);
 			$columnas[] = ucfirst(strtolower($campo));
-			
+
 		}
 		return $columnas;
 	}
+
+  public static function getNompro($codigo)
+	{
+    	return Herramientas::getX('rifpro','Caprovee','Nompro',$codigo);
+	}
+  public static function getNompro_vacio($codigo)
+	{
+    	return Herramientas::getX_vacio('rifpro','Caprovee','Nompro',$codigo);
+	}
+
+  public static function getProvee($codprovee)
+	{
+    	return Herramientas::getX('CODPRO','Caprovee','Nompro',$codprovee);
+	}
+  public static function getCod_provee($codprovee)
+	{
+    	return Herramientas::getX('rifpro','Caprovee','codpro',$codprovee);
+	}
+  public static function getCodpro($codprovee)
+	{
+    	$c = new Criteria();
+    	$c->add(CaproveePeer::CODPRO,$codprovee);
+    	$obj = CaproveePeer::doSelectOne($c);
+		if ($obj)
+    	  return $obj->getCodpro();
+    	else
+    	  return '-1';
+	}
+  public static function getRifpro($rifprovee)
+	{
+    	$c = new Criteria();
+    	$c->add(CaproveePeer::RIFPRO,$rifprovee);
+    	$obj = CaproveePeer::doSelectOne($c);
+		if ($obj)
+    	  return $obj->getRifpro();
+    	else
+    	  return '-1';
+	}
+
 }
+

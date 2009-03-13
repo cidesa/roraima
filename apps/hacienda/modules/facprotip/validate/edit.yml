@@ -1,0 +1,21 @@
+methods:
+  post:
+   - "fctippro{tippro}"
+   - "fctippro{destip}"
+
+names:
+  fctippro{tippro}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_tippro
+
+  fctippro{destip}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+Validator_tippro:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fctippro
+        column:       tippro
+        unique_error: El registro ya Existe intente con otro.

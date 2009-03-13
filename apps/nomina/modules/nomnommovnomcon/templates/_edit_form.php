@@ -7,97 +7,94 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
+
 
 <?php echo object_input_hidden_tag($npasiconemp, 'getId') ?>
 
-<fieldset id="sf_fieldset_none" class="">
-
+<fieldset>
+<legend>Tipo de N&oacute;mina</legend>
 <div class="form-row">
-  <?php echo label_for('npasiconemp[codemp]', __($labels['npasiconemp{codemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasiconemp{codemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasiconemp{codemp}')): ?>
-    <?php echo form_error('npasiconemp{codemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = object_input_tag($npasiconemp, 'getCodemp', array (
+ <strong>C&oacute;digo</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+  <?php $value = object_input_tag($npasiconemp, 'getCodnom', array (
   'size' => 10,
-  'control_name' => 'npasiconemp[codemp]',
-  'maxlength' => '10,',
+  'control_name' => 'codigonomina',
+  'maxlength' => '12,',
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomnommovnomconcar/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=codigonomina&cajtexcom=nombrenomina&codigo='+this.value"
+        ))
+
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefmov_nomnommovnomcon/clase/Npnomina/frame/sf_admin_edit_form/obj1/codigonomina/obj2/nombrenomina/campo1/codnom/campo2/nomnom/param1/")?>
+
+<?php $value = object_input_tag($npasiconemp, 'getNomnom', array (
+  'size' => 50,
+  'control_name' => 'nombrenomina',
+  'maxlength' => '40,',
+  'readonly' => true,
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
 
-<div class="form-row">
-<?php echo label_for('npasiconemp[nomemp]', __($labels['npasiconemp{nomemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasiconemp{nomemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasiconemp{nomemp}')): ?>
-    <?php echo form_error('npasiconemp{nomemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasiconemp, 'getNomemp', array (
-  'size' => 31,
-  'control_name' => 'npasiconemp[nomemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npasiconemp[codcar]', __($labels['npasiconemp{codcar}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasiconemp{codcar}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasiconemp{codcar}')): ?>
-    <?php echo form_error('npasiconemp{codcar}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasiconemp, 'getCodcar', array (
-  'size' => 20,
-  'control_name' => 'npasiconemp[codcar]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npasiconemp[nomcar]', __($labels['npasiconemp{nomcar}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasiconemp{nomcar}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasiconemp{nomcar}')): ?>
-    <?php echo form_error('npasiconemp{nomcar}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasiconemp, 'getNomcar', array (
-  'size' => 80,
-  'control_name' => 'npasiconemp[nomcar]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-<?php echo label_for('npasiconemp[monto]', __($labels['npasiconemp{monto}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasiconemp{monto}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasiconemp{monto}')): ?>
-    <?php echo form_error('npasiconemp{monto}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasiconemp, 'getMonto', array (
-  'size' => 7,
-  'control_name' => 'npasiconemp[monto]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-<?php echo label_for('npasiconemp[cantidad]', __($labels['npasiconemp{cantidad}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasiconemp{cantidad}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasiconemp{cantidad}')): ?>
-    <?php echo form_error('npasiconemp{cantidad}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasiconemp, 'getCantidad', array (
-  'size' => 7,
-  'control_name' => 'npasiconemp[cantidad]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
 </div>
 
 </fieldset>
+
+
+<fieldset>
+<legend>Conceptos</legend>
+<div class="form-row">
+
+
+  <?php echo label_for('npasiconemp[codcon]', __($labels['npasiconemp{codcon}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npasiconemp{codcon}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npasiconemp{codcon}')): ?>
+    <?php echo form_error('npasiconemp{codcon}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npasiconemp, 'getCodcon', array (
+  'size' => 10,
+  'control_name' => 'npasiconemp[codcon]',
+  'maxlength' => '12,',
+  'onBlur'=> remote_function(array(
+        'update'   => 'grid',
+        'url'      => 'nomnommovnomcon/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=2&cajtexcom=nombreconcepto&codigonomina='+$('codigonomina').value+'&codigoconcepto='+this.value"
+  )),
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+
+
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefcpt_nomnommovnomcon/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/npasiconemp_codcon/obj2/nombreconcepto/campo1/codcon/campo2/nomcon/param1/'+$('codigonomina').value+'")?>
+
+<?php $value = object_input_tag($npasiconemp, 'getNomcon', array (
+  'size' => 50,
+  'control_name' => 'nombreconcepto',
+  'maxlength' => '40,',
+  'readonly' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+
+</div>
+
+</div>
+
+<div id="grid" class="form-row">
+<?
+echo grid_tag($obj);
+?>
+</div>
+
+
+
+</fieldset>
+
 
 <?php include_partial('edit_actions', array('npasiconemp' => $npasiconemp)) ?>
 
@@ -112,3 +109,4 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+

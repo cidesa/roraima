@@ -12,11 +12,20 @@ generator:
       title:          Definición de Tipos de Cuentas Bancarias
       display:        [=codtip, destip]
       filters:        [codtip, destip]
-      max_per_page:   5
+      max_per_page:   10
       object_actions:
         _edit:        ~
         _delete:      ~
+      sort:  codtip
     edit:
-      title:          Modificar Tipos de Cuentas Bancarias
+      title:          Edición Tipos de Cuentas Bancarias
       display:
         Editable:       [codtip, destip]
+      fields:
+        codtip: { help: Máximo 3 caracteres}
+        destip: { help: Solo Texto}
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~        
+        _delete:      ~

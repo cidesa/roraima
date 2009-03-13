@@ -1,32 +1,44 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
-    model_class:      Npnomina
-    theme:            default
+    model_class:      Npcestatickets
+    theme:            cidesaGenerator
 
     fields:
-      codnom:    { name: Codigo, params: maxlength=3,size=4}
-      nomnom:    { name: Nombre, params: size=100  }
-      codcon:   { name: Concepto, params: maxlength=3,size=4}
-      nomcon:    { name: Nombre, params: size=100  }
-
-     # frecal:    { name: Descripcion1  }
-     # ultfec:    { name: Descripcion2  }
-     # profec:    { name: Descripcion3  }
-     # numsem:    { name: Descripcion4  }
-     # ordpag:    { name: Descripcion5  }
-     # tipcau:    { name: Descripcion6  }
+      codnom:    { name: Codigo Nomina}
+      nomnom:    { name: Descripcion}
+      codcon:    { name: Codigo Concepto}
+      nomcon:    { name: Descripcion}
+      valtic:    { name: Valor, params: size=10 maxlength=32, help: Valor del Ticket (Puede ser en Monto o en Porcentaje de U.T)}
+      monpor:    { name: Monto Fijo}
+      numtic:    { name: Números de Tickets (días), params: size=5 maxlength=5 }
+      tippag:     { name: Tipo de Pago de Tickets, help: Días (F)ijos del Mes. Días (V)ariables. Días por (J)ornadas Laboral}
+      numdia:    { name: Dias Fijos del Mes, help: Número de Días a tomar en cuenta del Mes (Cuando es Fijo)}
+      diahab:    { name: Dias Habiles, help: (S) si cálcula días hábiles. (N) lo contrario (Cuando es variable)}
+      sabado:    { name: Sabado, help: (S) si cálcula sabados. (N) lo contrario (Cuando es variable)}
+      doming:    { name: Domingo, help: (S) si cálcula  domingos. (N) lo contrario (Cuando es variable)}
+      diafer:    { name: (S) si cálcula días Feriados. (N) lo contrario (Cuando es variable)}
+      opciones:  { name: Dias a Tomar en Cuenta}
 
     list:
-      title:          Definicion de Concepto de Cesta Ticket
-      display:        [codnom, nomnom, codcon, nomcon]
-      filters:		  [codnom]
-      max_per_page:	  10
+      title:          Definicion del Concepto de Cesta Ticket
+      display:        [ =codnom, nomnom, codcon, nomcon ]
+      filters:        [codnom, codcon ]
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+
+      max_per_page:   10
+      sort: codnom
+
     edit:
-      title:          Edicion de Concepto de Cesta Ticket
-     # display:        [codgrulab, desgrulab]
-                    
+      title:          Edicion del Concepto de Cesta Ticket
+      display:
+        "Datos Generales":     [_codnom, _codcon]
+        "Valor del Ticket":    [_monpor, valtic, _numtic]
+        "Datos de Calculo":    [_tippag, _numdia, _opciones]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,37 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fccominm
+    theme:            cidesaGenerator
+
+    fields:
+      anovig:	{ name: Año, params: size=6 maxlength=4}
+      codcom:	{ name: Código, params: size=8 maxlength=6}
+      descom:	{ name: Descripción, params: size=40 maxlength=256}
+      afeinm:	{ name: . , params: size=40 maxlength=1}
+      opecom:	{ name: . , params: size=10 maxlength=1}
+      valcom:	{ name: Valor Bs./Mt2, params: size=40 maxlength=119}
+    list:
+      title:     Definición Complementos de Inmuebles:
+      display:   [ =codcom, descom]
+      sort:      descom
+      filters:   [codcom, descom]
+      fields:
+        descom:
+          params: size=10
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  codcom
+    edit:
+      title:          Edición Complementos de Inmuebles
+      display:
+        "Datos Generales":   [ anovig, _codcom, descom,  valcom ]
+        "Afecta":   [ _afeinm]
+        "Exonerable":   [ _opecom ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

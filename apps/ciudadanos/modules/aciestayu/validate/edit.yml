@@ -1,0 +1,23 @@
+methods:
+  post:
+   - "atestayu{desest}"
+
+
+names:
+
+  atestayu{desest}:
+    required:  Yes
+    required_msg: Debe insertar la descripción del estado de la ayuda
+    validators: Vstring_1_50_0
+
+
+
+Vstring_1_50_0:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       50
+        max_error: La descripción no puede pasar mas de 50 caracteres
+
+

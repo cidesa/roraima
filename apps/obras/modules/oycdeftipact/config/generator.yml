@@ -3,20 +3,23 @@ generator:
   param:
     model_class:      Octipact
     theme:            default
-
     fields:
-      codtipact:      { name: Código}
-      destipact:      { name: Descripción}
+      codtipact:    { name: Código}
+      destipact:    { name: Descripción}
 
     list:
-      title:          Definición de Tipo de Actas
-      filters:		  [codtipact, destipact]
+      title:          Tipo de Actas
+      filters:        [codtipact]
       display:        [=codtipact, destipact]
-      max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
     edit:
-      title:          Edición de Tipo de Actas
-      #display:        [codcon, nomcon, estados]                
+      title:          Edición de Actas
+      display:        [codtipact, destipact]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

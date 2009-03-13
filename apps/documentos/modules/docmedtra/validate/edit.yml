@@ -1,0 +1,9 @@
+methods:
+  post:
+   - "dfmedtra{destra}"
+
+names:
+  dfmedtra{destra}:
+    required:  Yes
+    required_msg: Debe insertar la descripcion del medio de transporte.
+

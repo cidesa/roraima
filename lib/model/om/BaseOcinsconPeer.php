@@ -13,7 +13,7 @@ abstract class BaseOcinsconPeer {
 	const CLASS_DEFAULT = 'lib.model.Ocinscon';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 8;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseOcinsconPeer {
 
 	
 	const NUMINS = 'ocinscon.NUMINS';
+
+	
+	const CODTIPINS = 'ocinscon.CODTIPINS';
 
 	
 	const FECCOM = 'ocinscon.FECCOM';
@@ -46,18 +49,18 @@ abstract class BaseOcinsconPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Numins', 'Feccom', 'Fecter', 'Porobreje', 'Portietra', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OcinsconPeer::CODCON, OcinsconPeer::NUMINS, OcinsconPeer::FECCOM, OcinsconPeer::FECTER, OcinsconPeer::POROBREJE, OcinsconPeer::PORTIETRA, OcinsconPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon', 'numins', 'feccom', 'fecter', 'porobreje', 'portietra', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon', 'Numins', 'Codtipins', 'Feccom', 'Fecter', 'Porobreje', 'Portietra', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OcinsconPeer::CODCON, OcinsconPeer::NUMINS, OcinsconPeer::CODTIPINS, OcinsconPeer::FECCOM, OcinsconPeer::FECTER, OcinsconPeer::POROBREJE, OcinsconPeer::PORTIETRA, OcinsconPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon', 'numins', 'codtipins', 'feccom', 'fecter', 'porobreje', 'portietra', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Numins' => 1, 'Feccom' => 2, 'Fecter' => 3, 'Porobreje' => 4, 'Portietra' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (OcinsconPeer::CODCON => 0, OcinsconPeer::NUMINS => 1, OcinsconPeer::FECCOM => 2, OcinsconPeer::FECTER => 3, OcinsconPeer::POROBREJE => 4, OcinsconPeer::PORTIETRA => 5, OcinsconPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'numins' => 1, 'feccom' => 2, 'fecter' => 3, 'porobreje' => 4, 'portietra' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codcon' => 0, 'Numins' => 1, 'Codtipins' => 2, 'Feccom' => 3, 'Fecter' => 4, 'Porobreje' => 5, 'Portietra' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (OcinsconPeer::CODCON => 0, OcinsconPeer::NUMINS => 1, OcinsconPeer::CODTIPINS => 2, OcinsconPeer::FECCOM => 3, OcinsconPeer::FECTER => 4, OcinsconPeer::POROBREJE => 5, OcinsconPeer::PORTIETRA => 6, OcinsconPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcon' => 0, 'numins' => 1, 'codtipins' => 2, 'feccom' => 3, 'fecter' => 4, 'porobreje' => 5, 'portietra' => 6, 'id' => 7, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
@@ -114,6 +117,8 @@ abstract class BaseOcinsconPeer {
 		$criteria->addSelectColumn(OcinsconPeer::CODCON);
 
 		$criteria->addSelectColumn(OcinsconPeer::NUMINS);
+
+		$criteria->addSelectColumn(OcinsconPeer::CODTIPINS);
 
 		$criteria->addSelectColumn(OcinsconPeer::FECCOM);
 
@@ -225,6 +230,7 @@ abstract class BaseOcinsconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcinsconPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

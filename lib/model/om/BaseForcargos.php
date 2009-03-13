@@ -53,203 +53,235 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcar()
-	{
+  
+  public function getCodcar()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getNomcar()
-	{
+    return trim($this->codcar);
 
-		return $this->nomcar; 		
-	}
-	
-	public function getSuecar()
-	{
+  }
+  
+  public function getNomcar()
+  {
 
-		return number_format($this->suecar,2,',','.');
-		
-	}
-	
-	public function getStacar()
-	{
+    return trim($this->nomcar);
 
-		return $this->stacar; 		
-	}
-	
-	public function getCodocp()
-	{
+  }
+  
+  public function getSuecar($val=false)
+  {
 
-		return $this->codocp; 		
-	}
-	
-	public function getPunmin()
-	{
+    if($val) return number_format($this->suecar,2,',','.');
+    else return $this->suecar;
 
-		return number_format($this->punmin,2,',','.');
-		
-	}
-	
-	public function getGraocp()
-	{
+  }
+  
+  public function getStacar()
+  {
 
-		return $this->graocp; 		
-	}
-	
-	public function getComcar()
-	{
+    return trim($this->stacar);
 
-		return number_format($this->comcar,2,',','.');
-		
-	}
-	
-	public function getPasocp()
-	{
+  }
+  
+  public function getCodocp()
+  {
 
-		return $this->pasocp; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codocp);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPunmin($val=false)
+  {
+
+    if($val) return number_format($this->punmin,2,',','.');
+    else return $this->punmin;
+
+  }
+  
+  public function getGraocp()
+  {
+
+    return trim($this->graocp);
+
+  }
+  
+  public function getComcar($val=false)
+  {
+
+    if($val) return number_format($this->comcar,2,',','.');
+    else return $this->comcar;
+
+  }
+  
+  public function getPasocp()
+  {
+
+    return trim($this->pasocp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = ForcargosPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = ForcargosPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setNomcar($v)
 	{
 
-		if ($this->nomcar !== $v) {
-			$this->nomcar = $v;
-			$this->modifiedColumns[] = ForcargosPeer::NOMCAR;
-		}
-
+    if ($this->nomcar !== $v) {
+        $this->nomcar = $v;
+        $this->modifiedColumns[] = ForcargosPeer::NOMCAR;
+      }
+  
 	} 
 	
 	public function setSuecar($v)
 	{
 
-		if ($this->suecar !== $v) {
-			$this->suecar = $v;
-			$this->modifiedColumns[] = ForcargosPeer::SUECAR;
-		}
-
+    if ($this->suecar !== $v) {
+        $this->suecar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcargosPeer::SUECAR;
+      }
+  
 	} 
 	
 	public function setStacar($v)
 	{
 
-		if ($this->stacar !== $v) {
-			$this->stacar = $v;
-			$this->modifiedColumns[] = ForcargosPeer::STACAR;
-		}
-
+    if ($this->stacar !== $v) {
+        $this->stacar = $v;
+        $this->modifiedColumns[] = ForcargosPeer::STACAR;
+      }
+  
 	} 
 	
 	public function setCodocp($v)
 	{
 
-		if ($this->codocp !== $v) {
-			$this->codocp = $v;
-			$this->modifiedColumns[] = ForcargosPeer::CODOCP;
-		}
-
+    if ($this->codocp !== $v) {
+        $this->codocp = $v;
+        $this->modifiedColumns[] = ForcargosPeer::CODOCP;
+      }
+  
 	} 
 	
 	public function setPunmin($v)
 	{
 
-		if ($this->punmin !== $v) {
-			$this->punmin = $v;
-			$this->modifiedColumns[] = ForcargosPeer::PUNMIN;
-		}
-
+    if ($this->punmin !== $v) {
+        $this->punmin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcargosPeer::PUNMIN;
+      }
+  
 	} 
 	
 	public function setGraocp($v)
 	{
 
-		if ($this->graocp !== $v) {
-			$this->graocp = $v;
-			$this->modifiedColumns[] = ForcargosPeer::GRAOCP;
-		}
-
+    if ($this->graocp !== $v) {
+        $this->graocp = $v;
+        $this->modifiedColumns[] = ForcargosPeer::GRAOCP;
+      }
+  
 	} 
 	
 	public function setComcar($v)
 	{
 
-		if ($this->comcar !== $v) {
-			$this->comcar = $v;
-			$this->modifiedColumns[] = ForcargosPeer::COMCAR;
-		}
-
+    if ($this->comcar !== $v) {
+        $this->comcar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcargosPeer::COMCAR;
+      }
+  
 	} 
 	
 	public function setPasocp($v)
 	{
 
-		if ($this->pasocp !== $v) {
-			$this->pasocp = $v;
-			$this->modifiedColumns[] = ForcargosPeer::PASOCP;
-		}
-
+    if ($this->pasocp !== $v) {
+        $this->pasocp = $v;
+        $this->modifiedColumns[] = ForcargosPeer::PASOCP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForcargosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForcargosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcar = $rs->getString($startcol + 0);
+      $this->codcar = $rs->getString($startcol + 0);
 
-			$this->nomcar = $rs->getString($startcol + 1);
+      $this->nomcar = $rs->getString($startcol + 1);
 
-			$this->suecar = $rs->getFloat($startcol + 2);
+      $this->suecar = $rs->getFloat($startcol + 2);
 
-			$this->stacar = $rs->getString($startcol + 3);
+      $this->stacar = $rs->getString($startcol + 3);
 
-			$this->codocp = $rs->getString($startcol + 4);
+      $this->codocp = $rs->getString($startcol + 4);
 
-			$this->punmin = $rs->getFloat($startcol + 5);
+      $this->punmin = $rs->getFloat($startcol + 5);
 
-			$this->graocp = $rs->getString($startcol + 6);
+      $this->graocp = $rs->getString($startcol + 6);
 
-			$this->comcar = $rs->getFloat($startcol + 7);
+      $this->comcar = $rs->getFloat($startcol + 7);
 
-			$this->pasocp = $rs->getString($startcol + 8);
+      $this->pasocp = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forcargos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forcargos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

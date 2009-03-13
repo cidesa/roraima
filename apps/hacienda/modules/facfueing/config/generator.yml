@@ -1,42 +1,67 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Fcfuepre
-    theme:            default
+    theme:            cidesaGenerator
     fields:
-      codfue: { name: Codigo}
-      nomfue: { name: Nombre}
-      nomabr: { name: Nombre Abreviado}     
-      frecob: { name: Frecuencia}
-      deufra: { name: Pagos Fraccionados}
-      autliq: { name: Autos Liquidacion}
-      simpre: { name: Tipo de Facturacion}      
-      ingrec: { name: Contable de Ingreso a Recaudar}      
-      descta: { name: Descripcion}      
-      fueing: { name: Contable de Ingreso}
-      descta1: { name: Descripcion}      
-      codprei: { name: Presupuestario de Ingreso}     
-      descta2: { name: Descripcion}      
-      monmor: { name: Recargo por Mora}            
-      propag: { name: Descuento por pronto pago}            
-      permor: { name: De Mora}      
-      perppg: { name: Pronto Pago}
-      tipmul: { name: Tipo Recargo}
-      inieje: { name: Inicio del Periodo}            
-      fineje: { name: Fin del Periodo}      
-      fecufa: { name: Ultima Facturacion}
-      feccie: { name: Fecha de Cierre}   
-      diavso: { name: Validez Solvencia}   
-        
+      codfue:  { name: Código, params: size=4 maxlength=2 }
+      nomfue:  { name: Nombre, params: size=40 maxlength=99 }
+      nomabr:  { name: Nombre Abreviado, params: size=4 maxlength=3 }
+      frecob:  { name: . , params: size=10 maxlength=3 }
+      monmor:  { name: Recargo por Mora, params: size=10 }
+      permor:  { name: De Mora, params: size=4 maxlength=3 }
+      propag:  { name: Pronto Pago, params: size=10 }
+      perppg:  { name: Pronto Pago, params: size=4 maxlength=3 }
+      liqact:  { name: Tipo, params: size=10 }
+      deufec:  { name: Modo, params: size=10 }
+      recfec:  { name: Periodo Actual, params: size=10 }
+      fecufa:  { name: Ultima Facturación, params: date_format='dd/mm/yyyy' size=10 maxlength=10 }
+      ingrec:  { name: Contable de Ingreso a Recaudar, params: size=40 maxlength=18 }
+      fueing:  { name: Contable de Ingreso, params: size=10 maxlength=32 }
+      inieje:  { name: Inicio del Periodo, params: date_format='dd/mm/yyyy' size=10 maxlength=10 }
+      fineje:  { name: Fin  del Periodo, params: date_format='dd/mm/yyyy' size=10 maxlength=10 }
+      diavso:  { name: Validez Solvencia, params: size=4 maxlength=3 }
+      codprei:  { name: Presupuestario de Ingreso, params: size=20 maxlength=16 }
+      deufra:  { name: . , params: size=4 maxlength=1 }
+      autliq:  { name: . , params: size=4 maxlength=1 }
+      simpre:  { name: . , params: size=4 maxlength=1 }
+      feccie:  { name: Cierre Definitiva, params: date_format='dd/mm/yyyy' size=10 maxlength=10 }
+      tipmul:  { name: . , params: size=4 maxlength=1 }
+      fecest:  { name: Cierre Estimada, params: date_format='dd/mm/yyyy' size=10 maxlength=10 }
+      diaven:  { name: Día, params: size=10 }
+      tipven:  { name: Descripcion, params: size=4 maxlength=1 }
+      tipfue:  { name: . , params: size=4 maxlength=1 }
     list:
-      title:          Fuentes de Ingresos  
-      filters:        [codfue, nomfue]
-      display:        [=codfue, nomfue]           
+      title:     Definición Fuente de Ingresos
+      display:   [=codfue, nomfue]
+      sort:      nomfue
+      filters:   [codfue, nomfue ]
+      fields:
+        nomfue:
+          params: size=18
+      max_per_page: 10
+      sort:  codfue
       object_actions:
-        _edit:        ~     
-        _delete:      ~ 
-      max_per_page:   5    
-      
+        _edit:        ~
+        _delete:      ~
     edit:
-      title:         Edicion de Fuentes Ingresos
-      display:       [codfue, nomfue, nomabr, frecob, deufra, autliq, simpre, ingrec, descta, fueing, descta1, codprei, descta2, monmor, permor, perppg, tipmul, inieje, fineje, fecufa, feccie, deufec, recfec, propag, diavso]
+      title: Edición Fuente de Ingresos
+      display:
+        "Datos Generales": [ codfue, nomfue, nomabr ]
+        "Pago Fraccionado": [ _deufra ]
+        "Auto Liquidación": [ _autliq ]
+        "Tipo de Facturación": [ _simpre ]
+        "Frecuencia": [ _frecob ]
+        "Códigos": [ _ingrec, _fueing, _codprei ]
+        "Porcentajes": [ monmor, propag ]
+        "Período": [ permor, perppg ]
+        "Tipo de Recargo": [ _tipmul ]
+        "Tipo de Fuente": [ _tipfue ]
+        "Fechas": [ inieje, fineje, fecufa, feccie, fecest ]
+        #"Totales": [ DeuFec, RecFec, fecufa, feccie, fecest ]
+        "Vencimiento": [ diaven, _tipven ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

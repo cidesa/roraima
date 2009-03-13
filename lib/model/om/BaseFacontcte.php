@@ -49,182 +49,213 @@ abstract class BaseFacontcte extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcli()
-	{
+  
+  public function getCodcli()
+  {
 
-		return $this->codcli; 		
-	}
-	
-	public function getCodcont()
-	{
+    return trim($this->codcli);
 
-		return $this->codcont; 		
-	}
-	
-	public function getCorrcon()
-	{
+  }
+  
+  public function getCodcont()
+  {
 
-		return $this->corrcon; 		
-	}
-	
-	public function getNomcont()
-	{
+    return trim($this->codcont);
 
-		return $this->nomcont; 		
-	}
-	
-	public function getCarcont()
-	{
+  }
+  
+  public function getCorrcon()
+  {
 
-		return $this->carcont; 		
-	}
-	
-	public function getCelcont()
-	{
+    return trim($this->corrcon);
 
-		return $this->celcont; 		
-	}
-	
-	public function getTf1cont()
-	{
+  }
+  
+  public function getNomcont()
+  {
 
-		return $this->tf1cont; 		
-	}
-	
-	public function getTf2cont()
-	{
+    return trim($this->nomcont);
 
-		return $this->tf2cont; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCarcont()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->carcont);
+
+  }
+  
+  public function getCelcont()
+  {
+
+    return trim($this->celcont);
+
+  }
+  
+  public function getTf1cont()
+  {
+
+    return trim($this->tf1cont);
+
+  }
+  
+  public function getTf2cont()
+  {
+
+    return trim($this->tf2cont);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = FacontctePeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = FacontctePeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setCodcont($v)
 	{
 
-		if ($this->codcont !== $v) {
-			$this->codcont = $v;
-			$this->modifiedColumns[] = FacontctePeer::CODCONT;
-		}
-
+    if ($this->codcont !== $v) {
+        $this->codcont = $v;
+        $this->modifiedColumns[] = FacontctePeer::CODCONT;
+      }
+  
 	} 
 	
 	public function setCorrcon($v)
 	{
 
-		if ($this->corrcon !== $v) {
-			$this->corrcon = $v;
-			$this->modifiedColumns[] = FacontctePeer::CORRCON;
-		}
-
+    if ($this->corrcon !== $v) {
+        $this->corrcon = $v;
+        $this->modifiedColumns[] = FacontctePeer::CORRCON;
+      }
+  
 	} 
 	
 	public function setNomcont($v)
 	{
 
-		if ($this->nomcont !== $v) {
-			$this->nomcont = $v;
-			$this->modifiedColumns[] = FacontctePeer::NOMCONT;
-		}
-
+    if ($this->nomcont !== $v) {
+        $this->nomcont = $v;
+        $this->modifiedColumns[] = FacontctePeer::NOMCONT;
+      }
+  
 	} 
 	
 	public function setCarcont($v)
 	{
 
-		if ($this->carcont !== $v) {
-			$this->carcont = $v;
-			$this->modifiedColumns[] = FacontctePeer::CARCONT;
-		}
-
+    if ($this->carcont !== $v) {
+        $this->carcont = $v;
+        $this->modifiedColumns[] = FacontctePeer::CARCONT;
+      }
+  
 	} 
 	
 	public function setCelcont($v)
 	{
 
-		if ($this->celcont !== $v) {
-			$this->celcont = $v;
-			$this->modifiedColumns[] = FacontctePeer::CELCONT;
-		}
-
+    if ($this->celcont !== $v) {
+        $this->celcont = $v;
+        $this->modifiedColumns[] = FacontctePeer::CELCONT;
+      }
+  
 	} 
 	
 	public function setTf1cont($v)
 	{
 
-		if ($this->tf1cont !== $v) {
-			$this->tf1cont = $v;
-			$this->modifiedColumns[] = FacontctePeer::TF1CONT;
-		}
-
+    if ($this->tf1cont !== $v) {
+        $this->tf1cont = $v;
+        $this->modifiedColumns[] = FacontctePeer::TF1CONT;
+      }
+  
 	} 
 	
 	public function setTf2cont($v)
 	{
 
-		if ($this->tf2cont !== $v) {
-			$this->tf2cont = $v;
-			$this->modifiedColumns[] = FacontctePeer::TF2CONT;
-		}
-
+    if ($this->tf2cont !== $v) {
+        $this->tf2cont = $v;
+        $this->modifiedColumns[] = FacontctePeer::TF2CONT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FacontctePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FacontctePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcli = $rs->getString($startcol + 0);
+      $this->codcli = $rs->getString($startcol + 0);
 
-			$this->codcont = $rs->getString($startcol + 1);
+      $this->codcont = $rs->getString($startcol + 1);
 
-			$this->corrcon = $rs->getString($startcol + 2);
+      $this->corrcon = $rs->getString($startcol + 2);
 
-			$this->nomcont = $rs->getString($startcol + 3);
+      $this->nomcont = $rs->getString($startcol + 3);
 
-			$this->carcont = $rs->getString($startcol + 4);
+      $this->carcont = $rs->getString($startcol + 4);
 
-			$this->celcont = $rs->getString($startcol + 5);
+      $this->celcont = $rs->getString($startcol + 5);
 
-			$this->tf1cont = $rs->getString($startcol + 6);
+      $this->tf1cont = $rs->getString($startcol + 6);
 
-			$this->tf2cont = $rs->getString($startcol + 7);
+      $this->tf2cont = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Facontcte object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Facontcte object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -281,6 +312,7 @@ abstract class BaseFacontcte extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FacontctePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FacontctePeer::doUpdate($this, $con);

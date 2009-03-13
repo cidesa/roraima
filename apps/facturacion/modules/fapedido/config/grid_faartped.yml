@@ -1,0 +1,68 @@
+opciones:                  # Opciones generales
+  eliminar:                true
+  tabla:                   faartped
+  anchogrid:               900
+  ancho:                   1400
+  filas:                   25
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Cod. Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  esgrabable:              true
+  html:                    [size="20"]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [size="40", readonly=true]
+3:
+  titulo:                  Cant. Solicitada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canord
+  esnumerico:              true
+  html:                    [size="10"]
+4:
+  titulo:                  Cant. Despachada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             candes
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+5:
+  titulo:                  Cant. Ajustada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canaju
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+6:
+  titulo:                  Cant. Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cantot
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+7:
+  titulo:                  Precio Unitario
+  tipo:                    c
+  nombrecampo:             preart
+  html:                    [ ]
+  esgrabable:              true
+8:      # Columna 8
+  titulo:                  Precio Editable
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             precioe
+  esnumerico:              true
+  oculta:                  false
+  html:                    [size="10" readonly=true]
+9:
+  titulo:                  Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             totart
+  esnumerico:              true
+  html:                    [size="10", readonly=true]

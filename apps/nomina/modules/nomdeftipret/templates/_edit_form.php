@@ -11,7 +11,7 @@
 <?php echo object_input_hidden_tag($nptipret, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-
+<legend><?php echo __('Datos de los Tipos de Retiros')?></legend>
 <div class="form-row">
   <?php echo label_for('nptipret[codret]', __($labels['nptipret{codret}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nptipret{codret}')): ?> form-error<?php endif; ?>">
@@ -20,13 +20,15 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($nptipret, 'getCodret', array (
-  'size' => 20,
+  'size' => 5,
+  'maxlength' => '2',
+  'readonly'  =>  $nptipret->getId()!='' ? true : false ,
   'control_name' => 'nptipret[codret]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('nptipret[desret]', __($labels['nptipret{desret}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('nptipret{desret}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('nptipret{desret}')): ?>
@@ -35,6 +37,7 @@
 
   <?php $value = object_input_tag($nptipret, 'getDesret', array (
   'size' => 50,
+  'maxlength' => '50',
   'control_name' => 'nptipret[desret]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -47,7 +50,7 @@
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($nptipret->getId()): ?>
+      <li class="float-rigth"><?php if ($nptipret->getId()): ?>
 <?php echo button_to(__('delete'), 'nomdeftipret/delete?id='.$nptipret->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),

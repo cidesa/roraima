@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "camedcom{codmedcom}"
+   - "camedcom{desmedcom}"
+
+names:
+  camedcom{codmedcom}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  camedcom{desmedcom}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco.
+    validators: DescripcionValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Camedcom
+        column:       codmedcom
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La descripción no puede pasar mas de 254 caracteres

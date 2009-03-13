@@ -240,6 +240,7 @@ abstract class BaseFcsolnegPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcsolnegPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

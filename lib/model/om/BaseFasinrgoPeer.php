@@ -205,6 +205,7 @@ abstract class BaseFasinrgoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FasinrgoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

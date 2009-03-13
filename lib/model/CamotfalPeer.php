@@ -9,9 +9,10 @@
  */ 
 class CamotfalPeer extends BaseCamotfalPeer
 {
-   public static function getMotivo($codfal)
+  	
+	public static function getMotivo($codfal)
 	{
-    	return Herramientas::getX('CODFAL','Camotfal','Desfal',$codfal);		
+    	return Herramientas::getX('CODFAL','Camotfal','Desfal',str_pad($codfal, 3 , '0','STR_PAD_LEFT'));		
 	}
 	
 	const COLUMNS = 'columns';

@@ -1,0 +1,55 @@
+methods:
+  post:
+   - "cadefalm{codalm}"
+   - "cadefalm{nomalm}"
+   - "cadefalm{catipalm_id}"
+   - "cadefalm{codcat}"
+
+names:
+  cadefalm{codalm}:
+    required:  Yes
+    required_msg: El Código de la Ubicación no puedo estar en Blanco
+    validators: UniqueValidator, CorrelValidator
+
+  cadefalm{nomalm}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco
+    validators: MyStringValidator2
+
+  cadefalm{catipalm_id}:
+    required:  Yes
+    required_msg: Debe seleccionar el Tipo de almacén
+
+  cadefalm{codcat}:
+    required:  Yes
+    required_msg: El Código de la Unidad Asociada no puede estar en Blanco
+    validators: OrigenValidator
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La Descripción no puede pasar mas de 250 caracteres
+
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Cadefalm
+        column:   codalm
+        unique_error:   El Código de Almacén ya existe. Por Favor, Cambiélo por otro.
+
+OrigenValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Bnubibie
+        column:   codubi
+        unique_error:   El Código de la Unidad no existe.

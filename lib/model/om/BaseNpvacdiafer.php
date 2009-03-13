@@ -29,94 +29,120 @@ abstract class BaseNpvacdiafer extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getDia()
-	{
+  
+  public function getDia($val=false)
+  {
 
-		return number_format($this->dia,2,',','.');
-		
-	}
-	
-	public function getMes()
-	{
+    if($val) return number_format($this->dia,2,',','.');
+    else return $this->dia;
 
-		return number_format($this->mes,2,',','.');
-		
-	}
-	
-	public function getDescripcion()
-	{
+  }
+  
+  public function getMes($val=false)
+  {
 
-		return $this->descripcion; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->mes,2,',','.');
+    else return $this->mes;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDescripcion()
+  {
+
+    return trim($this->descripcion);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDia($v)
 	{
 
-		if ($this->dia !== $v) {
-			$this->dia = $v;
-			$this->modifiedColumns[] = NpvacdiaferPeer::DIA;
-		}
-
+    if ($this->dia !== $v) {
+        $this->dia = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacdiaferPeer::DIA;
+      }
+  
 	} 
 	
 	public function setMes($v)
 	{
 
-		if ($this->mes !== $v) {
-			$this->mes = $v;
-			$this->modifiedColumns[] = NpvacdiaferPeer::MES;
-		}
-
+    if ($this->mes !== $v) {
+        $this->mes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacdiaferPeer::MES;
+      }
+  
 	} 
 	
 	public function setDescripcion($v)
 	{
 
-		if ($this->descripcion !== $v) {
-			$this->descripcion = $v;
-			$this->modifiedColumns[] = NpvacdiaferPeer::DESCRIPCION;
-		}
-
+    if ($this->descripcion !== $v) {
+        $this->descripcion = $v;
+        $this->modifiedColumns[] = NpvacdiaferPeer::DESCRIPCION;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacdiaferPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacdiaferPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->dia = $rs->getFloat($startcol + 0);
+      $this->dia = $rs->getFloat($startcol + 0);
 
-			$this->mes = $rs->getFloat($startcol + 1);
+      $this->mes = $rs->getFloat($startcol + 1);
 
-			$this->descripcion = $rs->getString($startcol + 2);
+      $this->descripcion = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacdiafer object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacdiafer object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -173,6 +199,7 @@ abstract class BaseNpvacdiafer extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacdiaferPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacdiaferPeer::doUpdate($this, $con);

@@ -41,149 +41,178 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefaju()
-	{
+  
+  public function getRefaju()
+  {
 
-		return $this->refaju; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->refaju);
 
-		return $this->codart; 		
-	}
-	
-	public function getNumlot()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->numlot; 		
-	}
-	
-	public function getCanord()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canord,2,',','.');
-		
-	}
-	
-	public function getCanaju()
-	{
+  }
+  
+  public function getNumlot()
+  {
 
-		return number_format($this->canaju,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    return trim($this->numlot);
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCanord($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->canord,2,',','.');
+    else return $this->canord;
+
+  }
+  
+  public function getCanaju($val=false)
+  {
+
+    if($val) return number_format($this->canaju,2,',','.');
+    else return $this->canaju;
+
+  }
+  
+  public function getMontot($val=false)
+  {
+
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefaju($v)
 	{
 
-		if ($this->refaju !== $v) {
-			$this->refaju = $v;
-			$this->modifiedColumns[] = FamovajuPeer::REFAJU;
-		}
-
+    if ($this->refaju !== $v) {
+        $this->refaju = $v;
+        $this->modifiedColumns[] = FamovajuPeer::REFAJU;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FamovajuPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FamovajuPeer::CODART;
+      }
+  
 	} 
 	
 	public function setNumlot($v)
 	{
 
-		if ($this->numlot !== $v) {
-			$this->numlot = $v;
-			$this->modifiedColumns[] = FamovajuPeer::NUMLOT;
-		}
-
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = FamovajuPeer::NUMLOT;
+      }
+  
 	} 
 	
 	public function setCanord($v)
 	{
 
-		if ($this->canord !== $v) {
-			$this->canord = $v;
-			$this->modifiedColumns[] = FamovajuPeer::CANORD;
-		}
-
+    if ($this->canord !== $v) {
+        $this->canord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FamovajuPeer::CANORD;
+      }
+  
 	} 
 	
 	public function setCanaju($v)
 	{
 
-		if ($this->canaju !== $v) {
-			$this->canaju = $v;
-			$this->modifiedColumns[] = FamovajuPeer::CANAJU;
-		}
-
+    if ($this->canaju !== $v) {
+        $this->canaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FamovajuPeer::CANAJU;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = FamovajuPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FamovajuPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FamovajuPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FamovajuPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refaju = $rs->getString($startcol + 0);
+      $this->refaju = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->numlot = $rs->getString($startcol + 2);
+      $this->numlot = $rs->getString($startcol + 2);
 
-			$this->canord = $rs->getFloat($startcol + 3);
+      $this->canord = $rs->getFloat($startcol + 3);
 
-			$this->canaju = $rs->getFloat($startcol + 4);
+      $this->canaju = $rs->getFloat($startcol + 4);
 
-			$this->montot = $rs->getFloat($startcol + 5);
+      $this->montot = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Famovaju object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Famovaju object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -240,6 +269,7 @@ abstract class BaseFamovaju extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FamovajuPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FamovajuPeer::doUpdate($this, $con);

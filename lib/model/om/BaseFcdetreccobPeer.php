@@ -210,6 +210,7 @@ abstract class BaseFcdetreccobPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdetreccobPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

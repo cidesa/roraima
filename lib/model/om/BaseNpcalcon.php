@@ -49,182 +49,213 @@ abstract class BaseNpcalcon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodnom()
-	{
+    return trim($this->codcon);
 
-		return $this->codnom; 		
-	}
-	
-	public function getNumcon()
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		return $this->numcon; 		
-	}
-	
-	public function getCampo()
-	{
+    return trim($this->codnom);
 
-		return $this->campo; 		
-	}
-	
-	public function getOperador()
-	{
+  }
+  
+  public function getNumcon()
+  {
 
-		return $this->operador; 		
-	}
-	
-	public function getValor()
-	{
+    return trim($this->numcon);
 
-		return $this->valor; 		
-	}
-	
-	public function getConfor()
-	{
+  }
+  
+  public function getCampo()
+  {
 
-		return $this->confor; 		
-	}
-	
-	public function getTipcal()
-	{
+    return trim($this->campo);
 
-		return $this->tipcal; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getOperador()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->operador);
+
+  }
+  
+  public function getValor()
+  {
+
+    return trim($this->valor);
+
+  }
+  
+  public function getConfor()
+  {
+
+    return trim($this->confor);
+
+  }
+  
+  public function getTipcal()
+  {
+
+    return trim($this->tipcal);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpcalconPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpcalconPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpcalconPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpcalconPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setNumcon($v)
 	{
 
-		if ($this->numcon !== $v) {
-			$this->numcon = $v;
-			$this->modifiedColumns[] = NpcalconPeer::NUMCON;
-		}
-
+    if ($this->numcon !== $v) {
+        $this->numcon = $v;
+        $this->modifiedColumns[] = NpcalconPeer::NUMCON;
+      }
+  
 	} 
 	
 	public function setCampo($v)
 	{
 
-		if ($this->campo !== $v) {
-			$this->campo = $v;
-			$this->modifiedColumns[] = NpcalconPeer::CAMPO;
-		}
-
+    if ($this->campo !== $v) {
+        $this->campo = $v;
+        $this->modifiedColumns[] = NpcalconPeer::CAMPO;
+      }
+  
 	} 
 	
 	public function setOperador($v)
 	{
 
-		if ($this->operador !== $v) {
-			$this->operador = $v;
-			$this->modifiedColumns[] = NpcalconPeer::OPERADOR;
-		}
-
+    if ($this->operador !== $v) {
+        $this->operador = $v;
+        $this->modifiedColumns[] = NpcalconPeer::OPERADOR;
+      }
+  
 	} 
 	
 	public function setValor($v)
 	{
 
-		if ($this->valor !== $v) {
-			$this->valor = $v;
-			$this->modifiedColumns[] = NpcalconPeer::VALOR;
-		}
-
+    if ($this->valor !== $v) {
+        $this->valor = $v;
+        $this->modifiedColumns[] = NpcalconPeer::VALOR;
+      }
+  
 	} 
 	
 	public function setConfor($v)
 	{
 
-		if ($this->confor !== $v) {
-			$this->confor = $v;
-			$this->modifiedColumns[] = NpcalconPeer::CONFOR;
-		}
-
+    if ($this->confor !== $v) {
+        $this->confor = $v;
+        $this->modifiedColumns[] = NpcalconPeer::CONFOR;
+      }
+  
 	} 
 	
 	public function setTipcal($v)
 	{
 
-		if ($this->tipcal !== $v) {
-			$this->tipcal = $v;
-			$this->modifiedColumns[] = NpcalconPeer::TIPCAL;
-		}
-
+    if ($this->tipcal !== $v) {
+        $this->tipcal = $v;
+        $this->modifiedColumns[] = NpcalconPeer::TIPCAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcalconPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcalconPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->codnom = $rs->getString($startcol + 1);
+      $this->codnom = $rs->getString($startcol + 1);
 
-			$this->numcon = $rs->getString($startcol + 2);
+      $this->numcon = $rs->getString($startcol + 2);
 
-			$this->campo = $rs->getString($startcol + 3);
+      $this->campo = $rs->getString($startcol + 3);
 
-			$this->operador = $rs->getString($startcol + 4);
+      $this->operador = $rs->getString($startcol + 4);
 
-			$this->valor = $rs->getString($startcol + 5);
+      $this->valor = $rs->getString($startcol + 5);
 
-			$this->confor = $rs->getString($startcol + 6);
+      $this->confor = $rs->getString($startcol + 6);
 
-			$this->tipcal = $rs->getString($startcol + 7);
+      $this->tipcal = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcalcon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcalcon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -281,6 +312,7 @@ abstract class BaseNpcalcon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcalconPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcalconPeer::doUpdate($this, $con);

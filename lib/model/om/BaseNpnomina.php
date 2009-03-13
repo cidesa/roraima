@@ -69,319 +69,353 @@ abstract class BaseNpnomina extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getNomnom()
-	{
+    return trim($this->codnom);
 
-		return $this->nomnom; 		
-	}
-	
-	public function getFrecal()
-	{
+  }
+  
+  public function getNomnom()
+  {
 
-		return $this->frecal; 		
-	}
-	
-	public function getUltfec($format = 'Y-m-d')
-	{
+    return trim($this->nomnom);
 
-		if ($this->ultfec === null || $this->ultfec === '') {
-			return null;
-		} elseif (!is_int($this->ultfec)) {
-						$ts = strtotime($this->ultfec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [ultfec] as date/time value: " . var_export($this->ultfec, true));
-			}
-		} else {
-			$ts = $this->ultfec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFrecal()
+  {
 
-	
-	public function getProfec($format = 'Y-m-d')
-	{
+    return trim($this->frecal);
 
-		if ($this->profec === null || $this->profec === '') {
-			return null;
-		} elseif (!is_int($this->profec)) {
-						$ts = strtotime($this->profec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [profec] as date/time value: " . var_export($this->profec, true));
-			}
-		} else {
-			$ts = $this->profec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getUltfec($format = 'Y-m-d')
+  {
 
-	
-	public function getNumsem()
-	{
+    if ($this->ultfec === null || $this->ultfec === '') {
+      return null;
+    } elseif (!is_int($this->ultfec)) {
+            $ts = adodb_strtotime($this->ultfec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [ultfec] as date/time value: " . var_export($this->ultfec, true));
+      }
+    } else {
+      $ts = $this->ultfec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->numsem,2,',','.');
-		
-	}
-	
-	public function getOrdpag()
-	{
+  
+  public function getProfec($format = 'Y-m-d')
+  {
 
-		return $this->ordpag; 		
-	}
-	
-	public function getTipcau()
-	{
+    if ($this->profec === null || $this->profec === '') {
+      return null;
+    } elseif (!is_int($this->profec)) {
+            $ts = adodb_strtotime($this->profec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [profec] as date/time value: " . var_export($this->profec, true));
+      }
+    } else {
+      $ts = $this->profec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->tipcau; 		
-	}
-	
-	public function getRefcau()
-	{
+  
+  public function getNumsem($val=false)
+  {
 
-		return $this->refcau; 		
-	}
-	
-	public function getTipprc()
-	{
+    if($val) return number_format($this->numsem,2,',','.');
+    else return $this->numsem;
 
-		return $this->tipprc; 		
-	}
-	
-	public function getRefprc()
-	{
+  }
+  
+  public function getOrdpag()
+  {
 
-		return $this->refprc; 		
-	}
-	
-	public function getTipcom()
-	{
+    return trim($this->ordpag);
 
-		return $this->tipcom; 		
-	}
-	
-	public function getRefcom()
-	{
+  }
+  
+  public function getTipcau()
+  {
 
-		return $this->refcom; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->tipcau);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getRefcau()
+  {
+
+    return trim($this->refcau);
+
+  }
+  
+  public function getTipprc()
+  {
+
+    return trim($this->tipprc);
+
+  }
+  
+  public function getRefprc()
+  {
+
+    return trim($this->refprc);
+
+  }
+  
+  public function getTipcom()
+  {
+
+    return trim($this->tipcom);
+
+  }
+  
+  public function getRefcom()
+  {
+
+    return trim($this->refcom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpnominaPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpnominaPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setNomnom($v)
 	{
 
-		if ($this->nomnom !== $v) {
-			$this->nomnom = $v;
-			$this->modifiedColumns[] = NpnominaPeer::NOMNOM;
-		}
-
+    if ($this->nomnom !== $v) {
+        $this->nomnom = $v;
+        $this->modifiedColumns[] = NpnominaPeer::NOMNOM;
+      }
+  
 	} 
 	
 	public function setFrecal($v)
 	{
 
-		if ($this->frecal !== $v) {
-			$this->frecal = $v;
-			$this->modifiedColumns[] = NpnominaPeer::FRECAL;
-		}
-
+    if ($this->frecal !== $v) {
+        $this->frecal = $v;
+        $this->modifiedColumns[] = NpnominaPeer::FRECAL;
+      }
+  
 	} 
 	
 	public function setUltfec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [ultfec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->ultfec !== $ts) {
-			$this->ultfec = $ts;
-			$this->modifiedColumns[] = NpnominaPeer::ULTFEC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [ultfec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->ultfec !== $ts) {
+      $this->ultfec = $ts;
+      $this->modifiedColumns[] = NpnominaPeer::ULTFEC;
+    }
 
 	} 
 	
 	public function setProfec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [profec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->profec !== $ts) {
-			$this->profec = $ts;
-			$this->modifiedColumns[] = NpnominaPeer::PROFEC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [profec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->profec !== $ts) {
+      $this->profec = $ts;
+      $this->modifiedColumns[] = NpnominaPeer::PROFEC;
+    }
 
 	} 
 	
 	public function setNumsem($v)
 	{
 
-		if ($this->numsem !== $v) {
-			$this->numsem = $v;
-			$this->modifiedColumns[] = NpnominaPeer::NUMSEM;
-		}
-
+    if ($this->numsem !== $v) {
+        $this->numsem = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpnominaPeer::NUMSEM;
+      }
+  
 	} 
 	
 	public function setOrdpag($v)
 	{
 
-		if ($this->ordpag !== $v) {
-			$this->ordpag = $v;
-			$this->modifiedColumns[] = NpnominaPeer::ORDPAG;
-		}
-
+    if ($this->ordpag !== $v) {
+        $this->ordpag = $v;
+        $this->modifiedColumns[] = NpnominaPeer::ORDPAG;
+      }
+  
 	} 
 	
 	public function setTipcau($v)
 	{
 
-		if ($this->tipcau !== $v) {
-			$this->tipcau = $v;
-			$this->modifiedColumns[] = NpnominaPeer::TIPCAU;
-		}
-
+    if ($this->tipcau !== $v) {
+        $this->tipcau = $v;
+        $this->modifiedColumns[] = NpnominaPeer::TIPCAU;
+      }
+  
 	} 
 	
 	public function setRefcau($v)
 	{
 
-		if ($this->refcau !== $v) {
-			$this->refcau = $v;
-			$this->modifiedColumns[] = NpnominaPeer::REFCAU;
-		}
-
+    if ($this->refcau !== $v) {
+        $this->refcau = $v;
+        $this->modifiedColumns[] = NpnominaPeer::REFCAU;
+      }
+  
 	} 
 	
 	public function setTipprc($v)
 	{
 
-		if ($this->tipprc !== $v) {
-			$this->tipprc = $v;
-			$this->modifiedColumns[] = NpnominaPeer::TIPPRC;
-		}
-
+    if ($this->tipprc !== $v) {
+        $this->tipprc = $v;
+        $this->modifiedColumns[] = NpnominaPeer::TIPPRC;
+      }
+  
 	} 
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = NpnominaPeer::REFPRC;
-		}
-
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = NpnominaPeer::REFPRC;
+      }
+  
 	} 
 	
 	public function setTipcom($v)
 	{
 
-		if ($this->tipcom !== $v) {
-			$this->tipcom = $v;
-			$this->modifiedColumns[] = NpnominaPeer::TIPCOM;
-		}
-
+    if ($this->tipcom !== $v) {
+        $this->tipcom = $v;
+        $this->modifiedColumns[] = NpnominaPeer::TIPCOM;
+      }
+  
 	} 
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = NpnominaPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = NpnominaPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpnominaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpnominaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->nomnom = $rs->getString($startcol + 1);
+      $this->nomnom = $rs->getString($startcol + 1);
 
-			$this->frecal = $rs->getString($startcol + 2);
+      $this->frecal = $rs->getString($startcol + 2);
 
-			$this->ultfec = $rs->getDate($startcol + 3, null);
+      $this->ultfec = $rs->getDate($startcol + 3, null);
 
-			$this->profec = $rs->getDate($startcol + 4, null);
+      $this->profec = $rs->getDate($startcol + 4, null);
 
-			$this->numsem = $rs->getFloat($startcol + 5);
+      $this->numsem = $rs->getFloat($startcol + 5);
 
-			$this->ordpag = $rs->getString($startcol + 6);
+      $this->ordpag = $rs->getString($startcol + 6);
 
-			$this->tipcau = $rs->getString($startcol + 7);
+      $this->tipcau = $rs->getString($startcol + 7);
 
-			$this->refcau = $rs->getString($startcol + 8);
+      $this->refcau = $rs->getString($startcol + 8);
 
-			$this->tipprc = $rs->getString($startcol + 9);
+      $this->tipprc = $rs->getString($startcol + 9);
 
-			$this->refprc = $rs->getString($startcol + 10);
+      $this->refprc = $rs->getString($startcol + 10);
 
-			$this->tipcom = $rs->getString($startcol + 11);
+      $this->tipcom = $rs->getString($startcol + 11);
 
-			$this->refcom = $rs->getString($startcol + 12);
+      $this->refcom = $rs->getString($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npnomina object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npnomina object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -438,6 +472,7 @@ abstract class BaseNpnomina extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpnominaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpnominaPeer::doUpdate($this, $con);

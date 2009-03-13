@@ -215,6 +215,7 @@ abstract class BaseNpnomcalhcmPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpnomcalhcmPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -37,128 +37,156 @@ abstract class BaseOctipsol extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsol()
-	{
+  
+  public function getCodsol()
+  {
 
-		return $this->codsol; 		
-	}
-	
-	public function getDessol()
-	{
+    return trim($this->codsol);
 
-		return $this->dessol; 		
-	}
-	
-	public function getTipsol()
-	{
+  }
+  
+  public function getDessol()
+  {
 
-		return $this->tipsol; 		
-	}
-	
-	public function getMaxdia()
-	{
+    return trim($this->dessol);
 
-		return $this->maxdia; 		
-	}
-	
-	public function getStasol()
-	{
+  }
+  
+  public function getTipsol()
+  {
 
-		return $this->stasol; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->tipsol);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMaxdia()
+  {
+
+    return trim($this->maxdia);
+
+  }
+  
+  public function getStasol()
+  {
+
+    return trim($this->stasol);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsol($v)
 	{
 
-		if ($this->codsol !== $v) {
-			$this->codsol = $v;
-			$this->modifiedColumns[] = OctipsolPeer::CODSOL;
-		}
-
+    if ($this->codsol !== $v) {
+        $this->codsol = $v;
+        $this->modifiedColumns[] = OctipsolPeer::CODSOL;
+      }
+  
 	} 
 	
 	public function setDessol($v)
 	{
 
-		if ($this->dessol !== $v) {
-			$this->dessol = $v;
-			$this->modifiedColumns[] = OctipsolPeer::DESSOL;
-		}
-
+    if ($this->dessol !== $v) {
+        $this->dessol = $v;
+        $this->modifiedColumns[] = OctipsolPeer::DESSOL;
+      }
+  
 	} 
 	
 	public function setTipsol($v)
 	{
 
-		if ($this->tipsol !== $v) {
-			$this->tipsol = $v;
-			$this->modifiedColumns[] = OctipsolPeer::TIPSOL;
-		}
-
+    if ($this->tipsol !== $v) {
+        $this->tipsol = $v;
+        $this->modifiedColumns[] = OctipsolPeer::TIPSOL;
+      }
+  
 	} 
 	
 	public function setMaxdia($v)
 	{
 
-		if ($this->maxdia !== $v) {
-			$this->maxdia = $v;
-			$this->modifiedColumns[] = OctipsolPeer::MAXDIA;
-		}
-
+    if ($this->maxdia !== $v) {
+        $this->maxdia = $v;
+        $this->modifiedColumns[] = OctipsolPeer::MAXDIA;
+      }
+  
 	} 
 	
 	public function setStasol($v)
 	{
 
-		if ($this->stasol !== $v) {
-			$this->stasol = $v;
-			$this->modifiedColumns[] = OctipsolPeer::STASOL;
-		}
-
+    if ($this->stasol !== $v) {
+        $this->stasol = $v;
+        $this->modifiedColumns[] = OctipsolPeer::STASOL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OctipsolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OctipsolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsol = $rs->getString($startcol + 0);
+      $this->codsol = $rs->getString($startcol + 0);
 
-			$this->dessol = $rs->getString($startcol + 1);
+      $this->dessol = $rs->getString($startcol + 1);
 
-			$this->tipsol = $rs->getString($startcol + 2);
+      $this->tipsol = $rs->getString($startcol + 2);
 
-			$this->maxdia = $rs->getString($startcol + 3);
+      $this->maxdia = $rs->getString($startcol + 3);
 
-			$this->stasol = $rs->getString($startcol + 4);
+      $this->stasol = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Octipsol object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Octipsol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseOctipsol extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OctipsolPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OctipsolPeer::doUpdate($this, $con);

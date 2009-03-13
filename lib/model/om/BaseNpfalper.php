@@ -45,211 +45,239 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodmot()
-	{
+    return trim($this->codemp);
 
-		return $this->codmot; 		
-	}
-	
-	public function getCodnom()
-	{
+  }
+  
+  public function getCodmot()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getNrodia()
-	{
+    return trim($this->codmot);
 
-		return number_format($this->nrodia,2,',','.');
-		
-	}
-	
-	public function getObserv()
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		return $this->observ; 		
-	}
-	
-	public function getFecdes($format = 'Y-m-d')
-	{
+    return trim($this->codnom);
 
-		if ($this->fecdes === null || $this->fecdes === '') {
-			return null;
-		} elseif (!is_int($this->fecdes)) {
-						$ts = strtotime($this->fecdes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
-			}
-		} else {
-			$ts = $this->fecdes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getNrodia($val=false)
+  {
 
-	
-	public function getFechas($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->nrodia,2,',','.');
+    else return $this->nrodia;
 
-		if ($this->fechas === null || $this->fechas === '') {
-			return null;
-		} elseif (!is_int($this->fechas)) {
-						$ts = strtotime($this->fechas);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechas] as date/time value: " . var_export($this->fechas, true));
-			}
-		} else {
-			$ts = $this->fechas;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getObserv()
+  {
 
-	
-	public function getId()
-	{
+    return trim($this->observ);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFecdes($format = 'Y-m-d')
+  {
+
+    if ($this->fecdes === null || $this->fecdes === '') {
+      return null;
+    } elseif (!is_int($this->fecdes)) {
+            $ts = adodb_strtotime($this->fecdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
+      }
+    } else {
+      $ts = $this->fecdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFechas($format = 'Y-m-d')
+  {
+
+    if ($this->fechas === null || $this->fechas === '') {
+      return null;
+    } elseif (!is_int($this->fechas)) {
+            $ts = adodb_strtotime($this->fechas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechas] as date/time value: " . var_export($this->fechas, true));
+      }
+    } else {
+      $ts = $this->fechas;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpfalperPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpfalperPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodmot($v)
 	{
 
-		if ($this->codmot !== $v) {
-			$this->codmot = $v;
-			$this->modifiedColumns[] = NpfalperPeer::CODMOT;
-		}
-
+    if ($this->codmot !== $v) {
+        $this->codmot = $v;
+        $this->modifiedColumns[] = NpfalperPeer::CODMOT;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpfalperPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpfalperPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setNrodia($v)
 	{
 
-		if ($this->nrodia !== $v) {
-			$this->nrodia = $v;
-			$this->modifiedColumns[] = NpfalperPeer::NRODIA;
-		}
-
+    if ($this->nrodia !== $v) {
+        $this->nrodia = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpfalperPeer::NRODIA;
+      }
+  
 	} 
 	
 	public function setObserv($v)
 	{
 
-		if ($this->observ !== $v) {
-			$this->observ = $v;
-			$this->modifiedColumns[] = NpfalperPeer::OBSERV;
-		}
-
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = NpfalperPeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setFecdes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdes !== $ts) {
-			$this->fecdes = $ts;
-			$this->modifiedColumns[] = NpfalperPeer::FECDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdes !== $ts) {
+      $this->fecdes = $ts;
+      $this->modifiedColumns[] = NpfalperPeer::FECDES;
+    }
 
 	} 
 	
 	public function setFechas($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechas] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechas !== $ts) {
-			$this->fechas = $ts;
-			$this->modifiedColumns[] = NpfalperPeer::FECHAS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechas !== $ts) {
+      $this->fechas = $ts;
+      $this->modifiedColumns[] = NpfalperPeer::FECHAS;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpfalperPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpfalperPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codmot = $rs->getString($startcol + 1);
+      $this->codmot = $rs->getString($startcol + 1);
 
-			$this->codnom = $rs->getString($startcol + 2);
+      $this->codnom = $rs->getString($startcol + 2);
 
-			$this->nrodia = $rs->getFloat($startcol + 3);
+      $this->nrodia = $rs->getFloat($startcol + 3);
 
-			$this->observ = $rs->getString($startcol + 4);
+      $this->observ = $rs->getString($startcol + 4);
 
-			$this->fecdes = $rs->getDate($startcol + 5, null);
+      $this->fecdes = $rs->getDate($startcol + 5, null);
 
-			$this->fechas = $rs->getDate($startcol + 6, null);
+      $this->fechas = $rs->getDate($startcol + 6, null);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npfalper object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npfalper object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -306,6 +334,7 @@ abstract class BaseNpfalper extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpfalperPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpfalperPeer::doUpdate($this, $con);

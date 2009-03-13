@@ -265,6 +265,7 @@ abstract class BaseNpinfadiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpinfadiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

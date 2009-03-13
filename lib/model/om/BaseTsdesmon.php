@@ -37,152 +37,179 @@ abstract class BaseTsdesmon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmon()
-	{
+  
+  public function getCodmon()
+  {
 
-		return $this->codmon; 		
-	}
-	
-	public function getNommon()
-	{
+    return trim($this->codmon);
 
-		return $this->nommon; 		
-	}
-	
-	public function getValmon()
-	{
+  }
+  
+  public function getNommon()
+  {
 
-		return number_format($this->valmon,2,',','.');
-		
-	}
-	
-	public function getAumdis()
-	{
+    return trim($this->nommon);
 
-		return $this->aumdis; 		
-	}
-	
-	public function getFecmon($format = 'Y-m-d')
-	{
+  }
+  
+  public function getValmon($val=false)
+  {
 
-		if ($this->fecmon === null || $this->fecmon === '') {
-			return null;
-		} elseif (!is_int($this->fecmon)) {
-						$ts = strtotime($this->fecmon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecmon] as date/time value: " . var_export($this->fecmon, true));
-			}
-		} else {
-			$ts = $this->fecmon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->valmon,2,',','.');
+    else return $this->valmon;
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getAumdis()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->aumdis);
+
+  }
+  
+  public function getFecmon($format = 'Y-m-d')
+  {
+
+    if ($this->fecmon === null || $this->fecmon === '') {
+      return null;
+    } elseif (!is_int($this->fecmon)) {
+            $ts = adodb_strtotime($this->fecmon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecmon] as date/time value: " . var_export($this->fecmon, true));
+      }
+    } else {
+      $ts = $this->fecmon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmon($v)
 	{
 
-		if ($this->codmon !== $v) {
-			$this->codmon = $v;
-			$this->modifiedColumns[] = TsdesmonPeer::CODMON;
-		}
-
+    if ($this->codmon !== $v) {
+        $this->codmon = $v;
+        $this->modifiedColumns[] = TsdesmonPeer::CODMON;
+      }
+  
 	} 
 	
 	public function setNommon($v)
 	{
 
-		if ($this->nommon !== $v) {
-			$this->nommon = $v;
-			$this->modifiedColumns[] = TsdesmonPeer::NOMMON;
-		}
-
+    if ($this->nommon !== $v) {
+        $this->nommon = $v;
+        $this->modifiedColumns[] = TsdesmonPeer::NOMMON;
+      }
+  
 	} 
 	
 	public function setValmon($v)
 	{
 
-		if ($this->valmon !== $v) {
-			$this->valmon = $v;
-			$this->modifiedColumns[] = TsdesmonPeer::VALMON;
-		}
-
+    if ($this->valmon !== $v) {
+        $this->valmon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsdesmonPeer::VALMON;
+      }
+  
 	} 
 	
 	public function setAumdis($v)
 	{
 
-		if ($this->aumdis !== $v) {
-			$this->aumdis = $v;
-			$this->modifiedColumns[] = TsdesmonPeer::AUMDIS;
-		}
-
+    if ($this->aumdis !== $v) {
+        $this->aumdis = $v;
+        $this->modifiedColumns[] = TsdesmonPeer::AUMDIS;
+      }
+  
 	} 
 	
 	public function setFecmon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecmon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecmon !== $ts) {
-			$this->fecmon = $ts;
-			$this->modifiedColumns[] = TsdesmonPeer::FECMON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecmon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecmon !== $ts) {
+      $this->fecmon = $ts;
+      $this->modifiedColumns[] = TsdesmonPeer::FECMON;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsdesmonPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsdesmonPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmon = $rs->getString($startcol + 0);
+      $this->codmon = $rs->getString($startcol + 0);
 
-			$this->nommon = $rs->getString($startcol + 1);
+      $this->nommon = $rs->getString($startcol + 1);
 
-			$this->valmon = $rs->getFloat($startcol + 2);
+      $this->valmon = $rs->getFloat($startcol + 2);
 
-			$this->aumdis = $rs->getString($startcol + 3);
+      $this->aumdis = $rs->getString($startcol + 3);
 
-			$this->fecmon = $rs->getDate($startcol + 4, null);
+      $this->fecmon = $rs->getDate($startcol + 4, null);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsdesmon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsdesmon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +266,7 @@ abstract class BaseTsdesmon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsdesmonPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsdesmonPeer::doUpdate($this, $con);

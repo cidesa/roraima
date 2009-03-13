@@ -210,6 +210,7 @@ abstract class BaseFcrenlicPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcrenlicPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -45,165 +45,195 @@ abstract class BaseCarecarg extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrgo()
-	{
+  
+  public function getCodrgo()
+  {
 
-		return $this->codrgo; 		
-	}
-	
-	public function getNomrgo()
-	{
+    return trim($this->codrgo);
 
-		return $this->nomrgo; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getNomrgo()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getTiprgo()
-	{
+    return trim($this->nomrgo);
 
-		return $this->tiprgo; 		
-	}
-	
-	public function getMonrgo()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->monrgo,2,',','.');
-		
-	}
-	
-	public function getCalcul()
-	{
+    return trim($this->codpre);
 
-		return $this->calcul; 		
-	}
-	
-	public function getCodcta()
-	{
+  }
+  
+  public function getTiprgo()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->tiprgo);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonrgo($val=false)
+  {
+
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
+
+  }
+  
+  public function getCalcul()
+  {
+
+    return trim($this->calcul);
+
+  }
+  
+  public function getCodcta()
+  {
+
+    return trim($this->codcta);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrgo($v)
 	{
 
-		if ($this->codrgo !== $v) {
-			$this->codrgo = $v;
-			$this->modifiedColumns[] = CarecargPeer::CODRGO;
-		}
-
+    if ($this->codrgo !== $v) {
+        $this->codrgo = $v;
+        $this->modifiedColumns[] = CarecargPeer::CODRGO;
+      }
+  
 	} 
 	
 	public function setNomrgo($v)
 	{
 
-		if ($this->nomrgo !== $v) {
-			$this->nomrgo = $v;
-			$this->modifiedColumns[] = CarecargPeer::NOMRGO;
-		}
-
+    if ($this->nomrgo !== $v) {
+        $this->nomrgo = $v;
+        $this->modifiedColumns[] = CarecargPeer::NOMRGO;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CarecargPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CarecargPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setTiprgo($v)
 	{
 
-		if ($this->tiprgo !== $v) {
-			$this->tiprgo = $v;
-			$this->modifiedColumns[] = CarecargPeer::TIPRGO;
-		}
-
+    if ($this->tiprgo !== $v) {
+        $this->tiprgo = $v;
+        $this->modifiedColumns[] = CarecargPeer::TIPRGO;
+      }
+  
 	} 
 	
 	public function setMonrgo($v)
 	{
 
-		if ($this->monrgo !== $v) {
-			$this->monrgo = $v;
-			$this->modifiedColumns[] = CarecargPeer::MONRGO;
-		}
-
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CarecargPeer::MONRGO;
+      }
+  
 	} 
 	
 	public function setCalcul($v)
 	{
 
-		if ($this->calcul !== $v) {
-			$this->calcul = $v;
-			$this->modifiedColumns[] = CarecargPeer::CALCUL;
-		}
-
+    if ($this->calcul !== $v) {
+        $this->calcul = $v;
+        $this->modifiedColumns[] = CarecargPeer::CALCUL;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = CarecargPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = CarecargPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CarecargPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CarecargPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrgo = $rs->getString($startcol + 0);
+      $this->codrgo = $rs->getString($startcol + 0);
 
-			$this->nomrgo = $rs->getString($startcol + 1);
+      $this->nomrgo = $rs->getString($startcol + 1);
 
-			$this->codpre = $rs->getString($startcol + 2);
+      $this->codpre = $rs->getString($startcol + 2);
 
-			$this->tiprgo = $rs->getString($startcol + 3);
+      $this->tiprgo = $rs->getString($startcol + 3);
 
-			$this->monrgo = $rs->getFloat($startcol + 4);
+      $this->monrgo = $rs->getFloat($startcol + 4);
 
-			$this->calcul = $rs->getString($startcol + 5);
+      $this->calcul = $rs->getString($startcol + 5);
 
-			$this->codcta = $rs->getString($startcol + 6);
+      $this->codcta = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Carecarg object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Carecarg object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -260,6 +290,7 @@ abstract class BaseCarecarg extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CarecargPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CarecargPeer::doUpdate($this, $con);

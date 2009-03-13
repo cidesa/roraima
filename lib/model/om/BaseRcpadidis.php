@@ -61,283 +61,315 @@ abstract class BaseRcpadidis extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefadi()
-	{
+  
+  public function getRefadi()
+  {
 
-		return $this->refadi; 		
-	}
-	
-	public function getFecadi($format = 'Y-m-d')
-	{
+    return trim($this->refadi);
 
-		if ($this->fecadi === null || $this->fecadi === '') {
-			return null;
-		} elseif (!is_int($this->fecadi)) {
-						$ts = strtotime($this->fecadi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecadi] as date/time value: " . var_export($this->fecadi, true));
-			}
-		} else {
-			$ts = $this->fecadi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecadi($format = 'Y-m-d')
+  {
 
-	
-	public function getAnoadi()
-	{
+    if ($this->fecadi === null || $this->fecadi === '') {
+      return null;
+    } elseif (!is_int($this->fecadi)) {
+            $ts = adodb_strtotime($this->fecadi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecadi] as date/time value: " . var_export($this->fecadi, true));
+      }
+    } else {
+      $ts = $this->fecadi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->anoadi; 		
-	}
-	
-	public function getDesadi()
-	{
+  
+  public function getAnoadi()
+  {
 
-		return $this->desadi; 		
-	}
-	
-	public function getDesanu()
-	{
+    return trim($this->anoadi);
 
-		return $this->desanu; 		
-	}
-	
-	public function getAdidis()
-	{
+  }
+  
+  public function getDesadi()
+  {
 
-		return $this->adidis; 		
-	}
-	
-	public function getTotadi()
-	{
+    return trim($this->desadi);
 
-		return number_format($this->totadi,2,',','.');
-		
-	}
-	
-	public function getStaadi()
-	{
+  }
+  
+  public function getDesanu()
+  {
 
-		return $this->staadi; 		
-	}
-	
-	public function getNumcom()
-	{
+    return trim($this->desanu);
 
-		return $this->numcom; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+  }
+  
+  public function getAdidis()
+  {
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->adidis);
 
-	
-	public function getPeradi()
-	{
+  }
+  
+  public function getTotadi($val=false)
+  {
 
-		return $this->peradi; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->totadi,2,',','.');
+    else return $this->totadi;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStaadi()
+  {
+
+    return trim($this->staadi);
+
+  }
+  
+  public function getNumcom()
+  {
+
+    return trim($this->numcom);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getPeradi()
+  {
+
+    return trim($this->peradi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefadi($v)
 	{
 
-		if ($this->refadi !== $v) {
-			$this->refadi = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::REFADI;
-		}
-
+    if ($this->refadi !== $v) {
+        $this->refadi = $v;
+        $this->modifiedColumns[] = RcpadidisPeer::REFADI;
+      }
+  
 	} 
 	
 	public function setFecadi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecadi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecadi !== $ts) {
-			$this->fecadi = $ts;
-			$this->modifiedColumns[] = RcpadidisPeer::FECADI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecadi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecadi !== $ts) {
+      $this->fecadi = $ts;
+      $this->modifiedColumns[] = RcpadidisPeer::FECADI;
+    }
 
 	} 
 	
 	public function setAnoadi($v)
 	{
 
-		if ($this->anoadi !== $v) {
-			$this->anoadi = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::ANOADI;
-		}
-
+    if ($this->anoadi !== $v) {
+        $this->anoadi = $v;
+        $this->modifiedColumns[] = RcpadidisPeer::ANOADI;
+      }
+  
 	} 
 	
 	public function setDesadi($v)
 	{
 
-		if ($this->desadi !== $v) {
-			$this->desadi = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::DESADI;
-		}
-
+    if ($this->desadi !== $v) {
+        $this->desadi = $v;
+        $this->modifiedColumns[] = RcpadidisPeer::DESADI;
+      }
+  
 	} 
 	
 	public function setDesanu($v)
 	{
 
-		if ($this->desanu !== $v) {
-			$this->desanu = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::DESANU;
-		}
-
+    if ($this->desanu !== $v) {
+        $this->desanu = $v;
+        $this->modifiedColumns[] = RcpadidisPeer::DESANU;
+      }
+  
 	} 
 	
 	public function setAdidis($v)
 	{
 
-		if ($this->adidis !== $v) {
-			$this->adidis = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::ADIDIS;
-		}
-
+    if ($this->adidis !== $v) {
+        $this->adidis = $v;
+        $this->modifiedColumns[] = RcpadidisPeer::ADIDIS;
+      }
+  
 	} 
 	
 	public function setTotadi($v)
 	{
 
-		if ($this->totadi !== $v) {
-			$this->totadi = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::TOTADI;
-		}
-
+    if ($this->totadi !== $v) {
+        $this->totadi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RcpadidisPeer::TOTADI;
+      }
+  
 	} 
 	
 	public function setStaadi($v)
 	{
 
-		if ($this->staadi !== $v) {
-			$this->staadi = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::STAADI;
-		}
-
+    if ($this->staadi !== $v) {
+        $this->staadi = $v;
+        $this->modifiedColumns[] = RcpadidisPeer::STAADI;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = RcpadidisPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = RcpadidisPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = RcpadidisPeer::FECANU;
+    }
 
 	} 
 	
 	public function setPeradi($v)
 	{
 
-		if ($this->peradi !== $v) {
-			$this->peradi = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::PERADI;
-		}
-
+    if ($this->peradi !== $v) {
+        $this->peradi = $v;
+        $this->modifiedColumns[] = RcpadidisPeer::PERADI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RcpadidisPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RcpadidisPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refadi = $rs->getString($startcol + 0);
+      $this->refadi = $rs->getString($startcol + 0);
 
-			$this->fecadi = $rs->getDate($startcol + 1, null);
+      $this->fecadi = $rs->getDate($startcol + 1, null);
 
-			$this->anoadi = $rs->getString($startcol + 2);
+      $this->anoadi = $rs->getString($startcol + 2);
 
-			$this->desadi = $rs->getString($startcol + 3);
+      $this->desadi = $rs->getString($startcol + 3);
 
-			$this->desanu = $rs->getString($startcol + 4);
+      $this->desanu = $rs->getString($startcol + 4);
 
-			$this->adidis = $rs->getString($startcol + 5);
+      $this->adidis = $rs->getString($startcol + 5);
 
-			$this->totadi = $rs->getFloat($startcol + 6);
+      $this->totadi = $rs->getFloat($startcol + 6);
 
-			$this->staadi = $rs->getString($startcol + 7);
+      $this->staadi = $rs->getString($startcol + 7);
 
-			$this->numcom = $rs->getString($startcol + 8);
+      $this->numcom = $rs->getString($startcol + 8);
 
-			$this->fecanu = $rs->getDate($startcol + 9, null);
+      $this->fecanu = $rs->getDate($startcol + 9, null);
 
-			$this->peradi = $rs->getString($startcol + 10);
+      $this->peradi = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rcpadidis object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rcpadidis object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -394,6 +426,7 @@ abstract class BaseRcpadidis extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RcpadidisPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RcpadidisPeer::doUpdate($this, $con);

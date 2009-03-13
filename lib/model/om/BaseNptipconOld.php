@@ -53,228 +53,259 @@ abstract class BaseNptipconOld extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipcon()
-	{
+  
+  public function getCodtipcon()
+  {
 
-		return $this->codtipcon; 		
-	}
-	
-	public function getDestipcon()
-	{
+    return trim($this->codtipcon);
 
-		return $this->destipcon; 		
-	}
-	
-	public function getFrepagcon()
-	{
+  }
+  
+  public function getDestipcon()
+  {
 
-		return $this->frepagcon; 		
-	}
-	
-	public function getAlicuocon()
-	{
+    return trim($this->destipcon);
 
-		return number_format($this->alicuocon,2,',','.');
-		
-	}
-	
-	public function getDiabonfinano()
-	{
+  }
+  
+  public function getFrepagcon()
+  {
 
-		return number_format($this->diabonfinano,2,',','.');
-		
-	}
-	
-	public function getDiabonvac()
-	{
+    return trim($this->frepagcon);
 
-		return number_format($this->diabonvac,2,',','.');
-		
-	}
-	
-	public function getFecinireg($format = 'Y-m-d')
-	{
+  }
+  
+  public function getAlicuocon($val=false)
+  {
 
-		if ($this->fecinireg === null || $this->fecinireg === '') {
-			return null;
-		} elseif (!is_int($this->fecinireg)) {
-						$ts = strtotime($this->fecinireg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecinireg] as date/time value: " . var_export($this->fecinireg, true));
-			}
-		} else {
-			$ts = $this->fecinireg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->alicuocon,2,',','.');
+    else return $this->alicuocon;
 
-	
-	public function getArt146()
-	{
+  }
+  
+  public function getDiabonfinano($val=false)
+  {
 
-		return number_format($this->art146,2,',','.');
-		
-	}
-	
-	public function getDiaano()
-	{
+    if($val) return number_format($this->diabonfinano,2,',','.');
+    else return $this->diabonfinano;
 
-		return number_format($this->diaano,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDiabonvac($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->diabonvac,2,',','.');
+    else return $this->diabonvac;
+
+  }
+  
+  public function getFecinireg($format = 'Y-m-d')
+  {
+
+    if ($this->fecinireg === null || $this->fecinireg === '') {
+      return null;
+    } elseif (!is_int($this->fecinireg)) {
+            $ts = adodb_strtotime($this->fecinireg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecinireg] as date/time value: " . var_export($this->fecinireg, true));
+      }
+    } else {
+      $ts = $this->fecinireg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getArt146($val=false)
+  {
+
+    if($val) return number_format($this->art146,2,',','.');
+    else return $this->art146;
+
+  }
+  
+  public function getDiaano($val=false)
+  {
+
+    if($val) return number_format($this->diaano,2,',','.');
+    else return $this->diaano;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipcon($v)
 	{
 
-		if ($this->codtipcon !== $v) {
-			$this->codtipcon = $v;
-			$this->modifiedColumns[] = NptipconOldPeer::CODTIPCON;
-		}
-
+    if ($this->codtipcon !== $v) {
+        $this->codtipcon = $v;
+        $this->modifiedColumns[] = NptipconOldPeer::CODTIPCON;
+      }
+  
 	} 
 	
 	public function setDestipcon($v)
 	{
 
-		if ($this->destipcon !== $v) {
-			$this->destipcon = $v;
-			$this->modifiedColumns[] = NptipconOldPeer::DESTIPCON;
-		}
-
+    if ($this->destipcon !== $v) {
+        $this->destipcon = $v;
+        $this->modifiedColumns[] = NptipconOldPeer::DESTIPCON;
+      }
+  
 	} 
 	
 	public function setFrepagcon($v)
 	{
 
-		if ($this->frepagcon !== $v) {
-			$this->frepagcon = $v;
-			$this->modifiedColumns[] = NptipconOldPeer::FREPAGCON;
-		}
-
+    if ($this->frepagcon !== $v) {
+        $this->frepagcon = $v;
+        $this->modifiedColumns[] = NptipconOldPeer::FREPAGCON;
+      }
+  
 	} 
 	
 	public function setAlicuocon($v)
 	{
 
-		if ($this->alicuocon !== $v) {
-			$this->alicuocon = $v;
-			$this->modifiedColumns[] = NptipconOldPeer::ALICUOCON;
-		}
-
+    if ($this->alicuocon !== $v) {
+        $this->alicuocon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipconOldPeer::ALICUOCON;
+      }
+  
 	} 
 	
 	public function setDiabonfinano($v)
 	{
 
-		if ($this->diabonfinano !== $v) {
-			$this->diabonfinano = $v;
-			$this->modifiedColumns[] = NptipconOldPeer::DIABONFINANO;
-		}
-
+    if ($this->diabonfinano !== $v) {
+        $this->diabonfinano = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipconOldPeer::DIABONFINANO;
+      }
+  
 	} 
 	
 	public function setDiabonvac($v)
 	{
 
-		if ($this->diabonvac !== $v) {
-			$this->diabonvac = $v;
-			$this->modifiedColumns[] = NptipconOldPeer::DIABONVAC;
-		}
-
+    if ($this->diabonvac !== $v) {
+        $this->diabonvac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipconOldPeer::DIABONVAC;
+      }
+  
 	} 
 	
 	public function setFecinireg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecinireg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecinireg !== $ts) {
-			$this->fecinireg = $ts;
-			$this->modifiedColumns[] = NptipconOldPeer::FECINIREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecinireg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecinireg !== $ts) {
+      $this->fecinireg = $ts;
+      $this->modifiedColumns[] = NptipconOldPeer::FECINIREG;
+    }
 
 	} 
 	
 	public function setArt146($v)
 	{
 
-		if ($this->art146 !== $v) {
-			$this->art146 = $v;
-			$this->modifiedColumns[] = NptipconOldPeer::ART146;
-		}
-
+    if ($this->art146 !== $v) {
+        $this->art146 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipconOldPeer::ART146;
+      }
+  
 	} 
 	
 	public function setDiaano($v)
 	{
 
-		if ($this->diaano !== $v) {
-			$this->diaano = $v;
-			$this->modifiedColumns[] = NptipconOldPeer::DIAANO;
-		}
-
+    if ($this->diaano !== $v) {
+        $this->diaano = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipconOldPeer::DIAANO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NptipconOldPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NptipconOldPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipcon = $rs->getString($startcol + 0);
+      $this->codtipcon = $rs->getString($startcol + 0);
 
-			$this->destipcon = $rs->getString($startcol + 1);
+      $this->destipcon = $rs->getString($startcol + 1);
 
-			$this->frepagcon = $rs->getString($startcol + 2);
+      $this->frepagcon = $rs->getString($startcol + 2);
 
-			$this->alicuocon = $rs->getFloat($startcol + 3);
+      $this->alicuocon = $rs->getFloat($startcol + 3);
 
-			$this->diabonfinano = $rs->getFloat($startcol + 4);
+      $this->diabonfinano = $rs->getFloat($startcol + 4);
 
-			$this->diabonvac = $rs->getFloat($startcol + 5);
+      $this->diabonvac = $rs->getFloat($startcol + 5);
 
-			$this->fecinireg = $rs->getDate($startcol + 6, null);
+      $this->fecinireg = $rs->getDate($startcol + 6, null);
 
-			$this->art146 = $rs->getFloat($startcol + 7);
+      $this->art146 = $rs->getFloat($startcol + 7);
 
-			$this->diaano = $rs->getFloat($startcol + 8);
+      $this->diaano = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating NptipconOld object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating NptipconOld object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -331,6 +362,7 @@ abstract class BaseNptipconOld extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NptipconOldPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NptipconOldPeer::doUpdate($this, $con);

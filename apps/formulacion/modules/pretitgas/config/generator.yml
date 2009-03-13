@@ -4,17 +4,22 @@ generator:
     model_class:      Fordefparegr
     theme:            default
     fields:
-      codparegr: { name: Codigo}
+      codparegr: { name: Código}
       nomparegr: { name: Nombre}
-                    
+
     list:
-      title:          Unidades de Medidas
+      title:          Clasificador Presupuestario(Gastos)
       filters:        [codparegr]
       display:        [=codparegr, nomparegr]
       object_actions:
         _edit:        ~
-        _delete:      ~
-      max_per_page:   5
+      max_per_page:   10
+      sort:    codparegr
     edit:
-      title:          Edicion de Unidades de Medidas
-      display:       [=codparegr, nomparegr]
+      title:          Edición de Clasificador Presupuestario(Gastos)
+      display:      [=codparegr, nomparegr]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

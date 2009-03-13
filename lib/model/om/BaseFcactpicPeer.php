@@ -13,7 +13,7 @@ abstract class BaseFcactpicPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcactpic';
 
 	
-	const NUM_COLUMNS = 14;
+	const NUM_COLUMNS = 17;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -59,6 +59,15 @@ abstract class BaseFcactpicPeer {
 	const ANODEC = 'fcactpic.ANODEC';
 
 	
+	const MODO = 'fcactpic.MODO';
+
+	
+	const MONREB = 'fcactpic.MONREB';
+
+	
+	const MONEXO = 'fcactpic.MONEXO';
+
+	
 	const ID = 'fcactpic.ID';
 
 	
@@ -67,18 +76,18 @@ abstract class BaseFcactpicPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numdoc', 'Codact', 'Exoner', 'Monact', 'Porexo', 'Estact', 'Exento', 'Rebaja', 'Porreb', 'Monant', 'Impuesto', 'Fecven', 'Anodec', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcactpicPeer::NUMDOC, FcactpicPeer::CODACT, FcactpicPeer::EXONER, FcactpicPeer::MONACT, FcactpicPeer::POREXO, FcactpicPeer::ESTACT, FcactpicPeer::EXENTO, FcactpicPeer::REBAJA, FcactpicPeer::PORREB, FcactpicPeer::MONANT, FcactpicPeer::IMPUESTO, FcactpicPeer::FECVEN, FcactpicPeer::ANODEC, FcactpicPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numdoc', 'codact', 'exoner', 'monact', 'porexo', 'estact', 'exento', 'rebaja', 'porreb', 'monant', 'impuesto', 'fecven', 'anodec', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Numdoc', 'Codact', 'Exoner', 'Monact', 'Porexo', 'Estact', 'Exento', 'Rebaja', 'Porreb', 'Monant', 'Impuesto', 'Fecven', 'Anodec', 'Modo', 'Monreb', 'Monexo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcactpicPeer::NUMDOC, FcactpicPeer::CODACT, FcactpicPeer::EXONER, FcactpicPeer::MONACT, FcactpicPeer::POREXO, FcactpicPeer::ESTACT, FcactpicPeer::EXENTO, FcactpicPeer::REBAJA, FcactpicPeer::PORREB, FcactpicPeer::MONANT, FcactpicPeer::IMPUESTO, FcactpicPeer::FECVEN, FcactpicPeer::ANODEC, FcactpicPeer::MODO, FcactpicPeer::MONREB, FcactpicPeer::MONEXO, FcactpicPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numdoc', 'codact', 'exoner', 'monact', 'porexo', 'estact', 'exento', 'rebaja', 'porreb', 'monant', 'impuesto', 'fecven', 'anodec', 'modo', 'monreb', 'monexo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numdoc' => 0, 'Codact' => 1, 'Exoner' => 2, 'Monact' => 3, 'Porexo' => 4, 'Estact' => 5, 'Exento' => 6, 'Rebaja' => 7, 'Porreb' => 8, 'Monant' => 9, 'Impuesto' => 10, 'Fecven' => 11, 'Anodec' => 12, 'Id' => 13, ),
-		BasePeer::TYPE_COLNAME => array (FcactpicPeer::NUMDOC => 0, FcactpicPeer::CODACT => 1, FcactpicPeer::EXONER => 2, FcactpicPeer::MONACT => 3, FcactpicPeer::POREXO => 4, FcactpicPeer::ESTACT => 5, FcactpicPeer::EXENTO => 6, FcactpicPeer::REBAJA => 7, FcactpicPeer::PORREB => 8, FcactpicPeer::MONANT => 9, FcactpicPeer::IMPUESTO => 10, FcactpicPeer::FECVEN => 11, FcactpicPeer::ANODEC => 12, FcactpicPeer::ID => 13, ),
-		BasePeer::TYPE_FIELDNAME => array ('numdoc' => 0, 'codact' => 1, 'exoner' => 2, 'monact' => 3, 'porexo' => 4, 'estact' => 5, 'exento' => 6, 'rebaja' => 7, 'porreb' => 8, 'monant' => 9, 'impuesto' => 10, 'fecven' => 11, 'anodec' => 12, 'id' => 13, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
+		BasePeer::TYPE_PHPNAME => array ('Numdoc' => 0, 'Codact' => 1, 'Exoner' => 2, 'Monact' => 3, 'Porexo' => 4, 'Estact' => 5, 'Exento' => 6, 'Rebaja' => 7, 'Porreb' => 8, 'Monant' => 9, 'Impuesto' => 10, 'Fecven' => 11, 'Anodec' => 12, 'Modo' => 13, 'Monreb' => 14, 'Monexo' => 15, 'Id' => 16, ),
+		BasePeer::TYPE_COLNAME => array (FcactpicPeer::NUMDOC => 0, FcactpicPeer::CODACT => 1, FcactpicPeer::EXONER => 2, FcactpicPeer::MONACT => 3, FcactpicPeer::POREXO => 4, FcactpicPeer::ESTACT => 5, FcactpicPeer::EXENTO => 6, FcactpicPeer::REBAJA => 7, FcactpicPeer::PORREB => 8, FcactpicPeer::MONANT => 9, FcactpicPeer::IMPUESTO => 10, FcactpicPeer::FECVEN => 11, FcactpicPeer::ANODEC => 12, FcactpicPeer::MODO => 13, FcactpicPeer::MONREB => 14, FcactpicPeer::MONEXO => 15, FcactpicPeer::ID => 16, ),
+		BasePeer::TYPE_FIELDNAME => array ('numdoc' => 0, 'codact' => 1, 'exoner' => 2, 'monact' => 3, 'porexo' => 4, 'estact' => 5, 'exento' => 6, 'rebaja' => 7, 'porreb' => 8, 'monant' => 9, 'impuesto' => 10, 'fecven' => 11, 'anodec' => 12, 'modo' => 13, 'monreb' => 14, 'monexo' => 15, 'id' => 16, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
@@ -157,6 +166,12 @@ abstract class BaseFcactpicPeer {
 		$criteria->addSelectColumn(FcactpicPeer::FECVEN);
 
 		$criteria->addSelectColumn(FcactpicPeer::ANODEC);
+
+		$criteria->addSelectColumn(FcactpicPeer::MODO);
+
+		$criteria->addSelectColumn(FcactpicPeer::MONREB);
+
+		$criteria->addSelectColumn(FcactpicPeer::MONEXO);
 
 		$criteria->addSelectColumn(FcactpicPeer::ID);
 
@@ -260,6 +275,7 @@ abstract class BaseFcactpicPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcactpicPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

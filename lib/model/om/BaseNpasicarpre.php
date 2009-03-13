@@ -45,168 +45,198 @@ abstract class BaseNpasicarpre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcat()
-	{
+  
+  public function getCodcat()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodcar()
-	{
+    return trim($this->codcat);
 
-		return $this->codcar; 		
-	}
-	
-	public function getCanpre()
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		return number_format($this->canpre,2,',','.');
-		
-	}
-	
-	public function getCanasi()
-	{
+    return trim($this->codcar);
 
-		return number_format($this->canasi,2,',','.');
-		
-	}
-	
-	public function getMonpre()
-	{
+  }
+  
+  public function getCanpre($val=false)
+  {
 
-		return number_format($this->monpre,2,',','.');
-		
-	}
-	
-	public function getMonasi()
-	{
+    if($val) return number_format($this->canpre,2,',','.');
+    else return $this->canpre;
 
-		return number_format($this->monasi,2,',','.');
-		
-	}
-	
-	public function getCodniv()
-	{
+  }
+  
+  public function getCanasi($val=false)
+  {
 
-		return $this->codniv; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->canasi,2,',','.');
+    else return $this->canasi;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonpre($val=false)
+  {
+
+    if($val) return number_format($this->monpre,2,',','.');
+    else return $this->monpre;
+
+  }
+  
+  public function getMonasi($val=false)
+  {
+
+    if($val) return number_format($this->monasi,2,',','.');
+    else return $this->monasi;
+
+  }
+  
+  public function getCodniv()
+  {
+
+    return trim($this->codniv);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = NpasicarprePeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = NpasicarprePeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpasicarprePeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpasicarprePeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCanpre($v)
 	{
 
-		if ($this->canpre !== $v) {
-			$this->canpre = $v;
-			$this->modifiedColumns[] = NpasicarprePeer::CANPRE;
-		}
-
+    if ($this->canpre !== $v) {
+        $this->canpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasicarprePeer::CANPRE;
+      }
+  
 	} 
 	
 	public function setCanasi($v)
 	{
 
-		if ($this->canasi !== $v) {
-			$this->canasi = $v;
-			$this->modifiedColumns[] = NpasicarprePeer::CANASI;
-		}
-
+    if ($this->canasi !== $v) {
+        $this->canasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasicarprePeer::CANASI;
+      }
+  
 	} 
 	
 	public function setMonpre($v)
 	{
 
-		if ($this->monpre !== $v) {
-			$this->monpre = $v;
-			$this->modifiedColumns[] = NpasicarprePeer::MONPRE;
-		}
-
+    if ($this->monpre !== $v) {
+        $this->monpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasicarprePeer::MONPRE;
+      }
+  
 	} 
 	
 	public function setMonasi($v)
 	{
 
-		if ($this->monasi !== $v) {
-			$this->monasi = $v;
-			$this->modifiedColumns[] = NpasicarprePeer::MONASI;
-		}
-
+    if ($this->monasi !== $v) {
+        $this->monasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasicarprePeer::MONASI;
+      }
+  
 	} 
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = NpasicarprePeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = NpasicarprePeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpasicarprePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpasicarprePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcat = $rs->getString($startcol + 0);
+      $this->codcat = $rs->getString($startcol + 0);
 
-			$this->codcar = $rs->getString($startcol + 1);
+      $this->codcar = $rs->getString($startcol + 1);
 
-			$this->canpre = $rs->getFloat($startcol + 2);
+      $this->canpre = $rs->getFloat($startcol + 2);
 
-			$this->canasi = $rs->getFloat($startcol + 3);
+      $this->canasi = $rs->getFloat($startcol + 3);
 
-			$this->monpre = $rs->getFloat($startcol + 4);
+      $this->monpre = $rs->getFloat($startcol + 4);
 
-			$this->monasi = $rs->getFloat($startcol + 5);
+      $this->monasi = $rs->getFloat($startcol + 5);
 
-			$this->codniv = $rs->getString($startcol + 6);
+      $this->codniv = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npasicarpre object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npasicarpre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -263,6 +293,7 @@ abstract class BaseNpasicarpre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpasicarprePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpasicarprePeer::doUpdate($this, $con);

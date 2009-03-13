@@ -33,111 +33,138 @@ abstract class BaseTsantord extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumord()
-	{
+  
+  public function getNumord()
+  {
 
-		return $this->numord; 		
-	}
-	
-	public function getNumche()
-	{
+    return trim($this->numord);
 
-		return $this->numche; 		
-	}
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getNumche()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getRefant()
-	{
+    return trim($this->numche);
 
-		return $this->refant; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonto($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getRefant()
+  {
+
+    return trim($this->refant);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = TsantordPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = TsantordPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setNumche($v)
 	{
 
-		if ($this->numche !== $v) {
-			$this->numche = $v;
-			$this->modifiedColumns[] = TsantordPeer::NUMCHE;
-		}
-
+    if ($this->numche !== $v) {
+        $this->numche = $v;
+        $this->modifiedColumns[] = TsantordPeer::NUMCHE;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = TsantordPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsantordPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setRefant($v)
 	{
 
-		if ($this->refant !== $v) {
-			$this->refant = $v;
-			$this->modifiedColumns[] = TsantordPeer::REFANT;
-		}
-
+    if ($this->refant !== $v) {
+        $this->refant = $v;
+        $this->modifiedColumns[] = TsantordPeer::REFANT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsantordPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsantordPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numord = $rs->getString($startcol + 0);
+      $this->numord = $rs->getString($startcol + 0);
 
-			$this->numche = $rs->getString($startcol + 1);
+      $this->numche = $rs->getString($startcol + 1);
 
-			$this->monto = $rs->getFloat($startcol + 2);
+      $this->monto = $rs->getFloat($startcol + 2);
 
-			$this->refant = $rs->getString($startcol + 3);
+      $this->refant = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsantord object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsantord object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +221,7 @@ abstract class BaseTsantord extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsantordPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsantordPeer::doUpdate($this, $con);

@@ -13,7 +13,7 @@ abstract class BaseOcdefparPeer {
 	const CLASS_DEFAULT = 'lib.model.Ocdefpar';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,15 @@ abstract class BaseOcdefparPeer {
 	const DESPAR = 'ocdefpar.DESPAR';
 
 	
+	const CODTIPPAR = 'ocdefpar.CODTIPPAR';
+
+	
+	const COSCOLING = 'ocdefpar.COSCOLING';
+
+	
+	const COSCONSTRUC = 'ocdefpar.COSCONSTRUC';
+
+	
 	const ID = 'ocdefpar.ID';
 
 	
@@ -43,18 +52,18 @@ abstract class BaseOcdefparPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Renpar', 'Cosuni', 'Coduni', 'Codpar', 'Despar', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OcdefparPeer::RENPAR, OcdefparPeer::COSUNI, OcdefparPeer::CODUNI, OcdefparPeer::CODPAR, OcdefparPeer::DESPAR, OcdefparPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('renpar', 'cosuni', 'coduni', 'codpar', 'despar', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Renpar', 'Cosuni', 'Coduni', 'Codpar', 'Despar', 'Codtippar', 'Coscoling', 'Cosconstruc', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OcdefparPeer::RENPAR, OcdefparPeer::COSUNI, OcdefparPeer::CODUNI, OcdefparPeer::CODPAR, OcdefparPeer::DESPAR, OcdefparPeer::CODTIPPAR, OcdefparPeer::COSCOLING, OcdefparPeer::COSCONSTRUC, OcdefparPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('renpar', 'cosuni', 'coduni', 'codpar', 'despar', 'codtippar', 'coscoling', 'cosconstruc', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Renpar' => 0, 'Cosuni' => 1, 'Coduni' => 2, 'Codpar' => 3, 'Despar' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (OcdefparPeer::RENPAR => 0, OcdefparPeer::COSUNI => 1, OcdefparPeer::CODUNI => 2, OcdefparPeer::CODPAR => 3, OcdefparPeer::DESPAR => 4, OcdefparPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('renpar' => 0, 'cosuni' => 1, 'coduni' => 2, 'codpar' => 3, 'despar' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Renpar' => 0, 'Cosuni' => 1, 'Coduni' => 2, 'Codpar' => 3, 'Despar' => 4, 'Codtippar' => 5, 'Coscoling' => 6, 'Cosconstruc' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (OcdefparPeer::RENPAR => 0, OcdefparPeer::COSUNI => 1, OcdefparPeer::CODUNI => 2, OcdefparPeer::CODPAR => 3, OcdefparPeer::DESPAR => 4, OcdefparPeer::CODTIPPAR => 5, OcdefparPeer::COSCOLING => 6, OcdefparPeer::COSCONSTRUC => 7, OcdefparPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('renpar' => 0, 'cosuni' => 1, 'coduni' => 2, 'codpar' => 3, 'despar' => 4, 'codtippar' => 5, 'coscoling' => 6, 'cosconstruc' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -117,6 +126,12 @@ abstract class BaseOcdefparPeer {
 		$criteria->addSelectColumn(OcdefparPeer::CODPAR);
 
 		$criteria->addSelectColumn(OcdefparPeer::DESPAR);
+
+		$criteria->addSelectColumn(OcdefparPeer::CODTIPPAR);
+
+		$criteria->addSelectColumn(OcdefparPeer::COSCOLING);
+
+		$criteria->addSelectColumn(OcdefparPeer::COSCONSTRUC);
 
 		$criteria->addSelectColumn(OcdefparPeer::ID);
 
@@ -220,6 +235,7 @@ abstract class BaseOcdefparPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcdefparPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

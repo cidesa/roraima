@@ -9,25 +9,31 @@ generator:
       codtiporg:    { name: Tipo Organismo}
       destiporg:    { name: Descripción de Organismo}
       entorg:       { name: Ente}
-      dirorg:       { name: Dirección}   
-      codpai:       { name: Pais}   
-      nompai:       { name: Descripción de Pais}  
-      codedo:       { name: Estado} 
-      nomedo:       { name: Descripción de Estado}   
-      codciu:       { name: Ciudad}   
-      nomciu:       { name: Descripción de Ciudad}         
-      telorg:       { name: Teléfono(s)}   
-      faxorg:       { name: Fax}   
-      emaorg:       { name: E-Mail}   
-     
+      dirorg:       { name: Dirección}
+      codpai:       { name: Pais}
+      nompai:       { name: Descripción de Pais}
+      codedo:       { name: Estado}
+      nomedo:       { name: Descripción de Estado}
+      codciu:       { name: Ciudad}
+      nomciu:       { name: Descripción de Ciudad}
+      telorg:       { name: Teléfono(s)}
+      faxorg:       { name: Fax}
+      emaorg:       { name: E-Mail}
+
     list:
-      title:          Definición de Organismos Editando 
+      title:          Organismos
       filters:        [codorg]
-      display:        [codorg, desorg]
+      display:        [=codorg, desorg]
+      sort:  codorg
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Definición de Organismos
+      title:          Edición de Organismos
       display:        [codorg, desorg, codtiporg, destiporg, entorg, dirorg, codpai, nompai, codedo, nomedo, codciu, nomciu, telorg, faxorg, emaorg]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

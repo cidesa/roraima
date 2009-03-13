@@ -33,111 +33,138 @@ abstract class BaseRhnotcur extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcur()
-	{
+  
+  public function getCodcur()
+  {
 
-		return $this->codcur; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->codcur);
 
-		return $this->codemp; 		
-	}
-	
-	public function getNotcur()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return number_format($this->notcur,2,',','.');
-		
-	}
-	
-	public function getAprcur()
-	{
+    return trim($this->codemp);
 
-		return $this->aprcur; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNotcur($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->notcur,2,',','.');
+    else return $this->notcur;
+
+  }
+  
+  public function getAprcur()
+  {
+
+    return trim($this->aprcur);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcur($v)
 	{
 
-		if ($this->codcur !== $v) {
-			$this->codcur = $v;
-			$this->modifiedColumns[] = RhnotcurPeer::CODCUR;
-		}
-
+    if ($this->codcur !== $v) {
+        $this->codcur = $v;
+        $this->modifiedColumns[] = RhnotcurPeer::CODCUR;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = RhnotcurPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = RhnotcurPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNotcur($v)
 	{
 
-		if ($this->notcur !== $v) {
-			$this->notcur = $v;
-			$this->modifiedColumns[] = RhnotcurPeer::NOTCUR;
-		}
-
+    if ($this->notcur !== $v) {
+        $this->notcur = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhnotcurPeer::NOTCUR;
+      }
+  
 	} 
 	
 	public function setAprcur($v)
 	{
 
-		if ($this->aprcur !== $v) {
-			$this->aprcur = $v;
-			$this->modifiedColumns[] = RhnotcurPeer::APRCUR;
-		}
-
+    if ($this->aprcur !== $v) {
+        $this->aprcur = $v;
+        $this->modifiedColumns[] = RhnotcurPeer::APRCUR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhnotcurPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhnotcurPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcur = $rs->getString($startcol + 0);
+      $this->codcur = $rs->getString($startcol + 0);
 
-			$this->codemp = $rs->getString($startcol + 1);
+      $this->codemp = $rs->getString($startcol + 1);
 
-			$this->notcur = $rs->getFloat($startcol + 2);
+      $this->notcur = $rs->getFloat($startcol + 2);
 
-			$this->aprcur = $rs->getString($startcol + 3);
+      $this->aprcur = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhnotcur object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhnotcur object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +221,7 @@ abstract class BaseRhnotcur extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhnotcurPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhnotcurPeer::doUpdate($this, $con);

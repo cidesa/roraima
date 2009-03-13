@@ -8,20 +8,26 @@ generator:
       nomemp:       { name: Nombre empleado }
       codcar:       { name: Codigo Cargo, params: size=20  }
       nomcar:       { name: Nombre del Cargo }
+      codnom:       { name: Codigo Nomina }
       nomnom:       { name: Nomina }
       nomcon:       { name: Concepto: }
       monto:        { name: Monto }
       cantidad:     { name: Cantidad }
-      codcon:		{ name: Cod. Concepto }
+      codcon:		{ name: Código Concepto }
     list:
       title:          Movimientos por Concepto
-      display:        [nomnom, codcon, nomcon, codemp, nomemp, codcar, nomcar]
-      filters:		  [codemp, codcon, codcar]
+      display:        [=codcon, nomcon, codnom, nomnom]
+      filters:		  [codcon, codnom]
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+
     edit:
       title:          Movimientos por Concepto
-      display:        [codemp, nomemp, codcar, nomcar, monto, cantidad]
+      display:        [codcon, codemp, nomemp, codcar, nomcar, monto, cantidad]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

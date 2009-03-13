@@ -5,17 +5,29 @@ generator:
     theme:            default
 
     fields:
-      codforent:      { name : Código }
-      desforent:      { name : Descripción }
+      codforent:      { name : Código, params: maxlength=4}
+      desforent:      { name : Descripción}
 
     list:
       title:          Forma de Entrega
       display:        [=codforent, desforent]
-      filters:		  [codforent, desforent]
-      max_per_page:	  6
-  
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:       [codforent, desforent]
+#        - codforent
+#        - desforent
+      fields:
+        codforent: { params: maxlength=4}
+        desforent:
+
+      max_per_page:	  10
+      sort:    codforent
     edit:
       title:          Edición de Forma de Entrega
-      display:        [codforent, desforent]  
-      fields:
-        codforent:      { params : maxlength=6 }	  
+      display:        [codforent, desforent]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

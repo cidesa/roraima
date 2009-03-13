@@ -10,4 +10,148 @@
  */
 class nomconceptosprimasActions extends autonomconceptosprimasActions
 {
+  public $coderror=-1;
+
+  public function validateEdit()
+  {
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+     $this->npconpri = $this->getNpconpriOrCreate();
+     $this->updateNpconpriFromRequest();
+
+      $c= new Criteria();
+      $c->add(NpconpriPeer::CODNOM,$this->npconpri->getCodnom());
+      $c->add(NpconpriPeer::CODCON,$this->npconpri->getCodcon());
+      $result=NpconpriPeer::doSelectOne($c);
+      if ($result)
+      {
+      	$this->coderror=406;
+      	return false;
+      }
+     return true;
+    }else return true;
+  }
+
+  public function executeEdit()
+  {
+    $this->npconpri = $this->getNpconpriOrCreate();
+
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->updateNpconpriFromRequest();
+
+      $this->saveNpconpri($this->npconpri);
+
+      $this->npconpri->setId(self::obtenerId($this->npconpri->getCodnom(),$this->npconpri->getCodcon()));
+
+      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
+
+      if ($this->getRequestParameter('save_and_add'))
+      {
+        return $this->redirect('nomconceptosprimas/create');
+      }
+      else if ($this->getRequestParameter('save_and_list'))
+      {
+        return $this->redirect('nomconceptosprimas/list');
+      }
+      else
+      {
+        return $this->redirect('nomconceptosprimas/edit?id='.$this->npconpri->getId());
+      }
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
+  }
+
+   public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->npconpri = $this->getNpconpriOrCreate();
+    $this->updateNpconpriFromRequest();
+
+    $this->labels = $this->getLabels();
+
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderror!=-1)
+      {
+       $err = Herramientas::obtenerMensajeError($this->coderror);
+       $this->getRequest()->setError('npconpri{codcon}',$err);
+      }
+    }
+
+    return sfView::SUCCESS;
+  }
+
+  public function executeAjax()
+	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+	  if ($this->getRequestParameter('ajax')=='1')
+	    {
+	  		$dato=NpnominaPeer::getDesnom($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }else
+	  if ($this->getRequestParameter('ajax')=='2')
+	    {
+	  		$d= new Criteria();
+	  		$d->add(NpdefcptPeer::CODCON,$this->getRequestParameter('codigo'));
+	  		$resul=NpdefcptPeer::doSelectOne($d);
+	  		if ($resul)
+	  		{
+	  		  $c= new Criteria();
+	  		  $c->add(NpasiconnomPeer::CODNOM,$this->getRequestParameter('nomina'));
+	  		  $c->add(NpasiconnomPeer::CODCON,$this->getRequestParameter('codigo'));
+	  	      $data=NpasiconnomPeer::doSelectOne($c);
+	  		  if ($data)
+	  		  {
+	  		   $dato=NpdefcptPeer::getDescon($this->getRequestParameter('codigo'));
+	  		   $existe='N';
+	  		  }
+	  		  else
+	  		  {
+	  		   $dato="";
+	  		   $existe='S';
+	  		  }
+	  		}
+	  		else
+	  		{ $existe='SS'; $dato="";}
+
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["existe","'.$existe.'",""]]';
+	    }
+
+
+
+  	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
+	}
+
+	public function executeAutocomplete()
+	{
+		if ($this->getRequestParameter('ajax')=='1')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODNOM','Npnomina','CODNOM',$this->getRequestParameter('npconpri[codnom]'));
+	    }
+	}
+
+	public function obtenerId($dato1,$dato2)
+  {
+  	$c= new Criteria();
+  	$c->add(NpconpriPeer::CODNOM,$dato1);
+  	$c->add(NpconpriPeer::CODCON,$dato2);
+  	$resul= NpconpriPeer::doSelectOne($c);
+  	if ($resul)
+  	{
+  	  return $resul->getId();
+  	}
+  	else
+  	{
+  		return '';
+  	}
+  }
+
 }

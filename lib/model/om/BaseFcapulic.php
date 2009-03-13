@@ -29,6 +29,10 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 
 
 	
+	protected $dirapu;
+
+
+	
 	protected $monapu;
 
 
@@ -65,6 +69,34 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 
 
 	
+	protected $semdia;
+
+
+	
+	protected $exoapu;
+
+
+	
+	protected $texexo;
+
+
+	
+	protected $fecapu;
+
+
+	
+	protected $serapui;
+
+
+	
+	protected $serapuf;
+
+
+	
+	protected $horapu;
+
+
+	
 	protected $id;
 
 	
@@ -73,338 +105,548 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNrocon()
-	{
+  
+  public function getNrocon()
+  {
 
-		return $this->nrocon; 		
-	}
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    return trim($this->nrocon);
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-	
-	public function getRifcon()
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->rifcon; 		
-	}
-	
-	public function getTipapu()
-	{
+  
+  public function getRifcon()
+  {
 
-		return $this->tipapu; 		
-	}
-	
-	public function getDesapu()
-	{
+    return trim($this->rifcon);
 
-		return $this->desapu; 		
-	}
-	
-	public function getMonapu()
-	{
+  }
+  
+  public function getTipapu()
+  {
 
-		return number_format($this->monapu,2,',','.');
-		
-	}
-	
-	public function getMonimp()
-	{
+    return trim($this->tipapu);
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getFunrec()
-	{
+  }
+  
+  public function getDesapu()
+  {
 
-		return $this->funrec; 		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
+    return trim($this->desapu);
 
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDirapu()
+  {
 
-	
-	public function getRifrep()
-	{
+    return trim($this->dirapu);
 
-		return $this->rifrep; 		
-	}
-	
-	public function getStaapu()
-	{
+  }
+  
+  public function getMonapu($val=false)
+  {
 
-		return $this->staapu; 		
-	}
-	
-	public function getStadec()
-	{
+    if($val) return number_format($this->monapu,2,',','.');
+    else return $this->monapu;
 
-		return $this->stadec; 		
-	}
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getMonimp($val=false)
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getDircon()
-	{
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
 
-		return $this->dircon; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getFunrec()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->funrec);
+
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
+
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getRifrep()
+  {
+
+    return trim($this->rifrep);
+
+  }
+  
+  public function getStaapu()
+  {
+
+    return trim($this->staapu);
+
+  }
+  
+  public function getStadec()
+  {
+
+    return trim($this->stadec);
+
+  }
+  
+  public function getNomcon()
+  {
+
+    return trim($this->nomcon);
+
+  }
+  
+  public function getDircon()
+  {
+
+    return trim($this->dircon);
+
+  }
+  
+  public function getSemdia($val=false)
+  {
+
+    if($val) return number_format($this->semdia,2,',','.');
+    else return $this->semdia;
+
+  }
+  
+  public function getExoapu()
+  {
+
+    return trim($this->exoapu);
+
+  }
+  
+  public function getTexexo()
+  {
+
+    return trim($this->texexo);
+
+  }
+  
+  public function getFecapu($format = 'Y-m-d')
+  {
+
+    if ($this->fecapu === null || $this->fecapu === '') {
+      return null;
+    } elseif (!is_int($this->fecapu)) {
+            $ts = adodb_strtotime($this->fecapu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecapu] as date/time value: " . var_export($this->fecapu, true));
+      }
+    } else {
+      $ts = $this->fecapu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getSerapui()
+  {
+
+    return trim($this->serapui);
+
+  }
+  
+  public function getSerapuf()
+  {
+
+    return trim($this->serapuf);
+
+  }
+  
+  public function getHorapu()
+  {
+
+    return trim($this->horapu);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNrocon($v)
 	{
 
-		if ($this->nrocon !== $v) {
-			$this->nrocon = $v;
-			$this->modifiedColumns[] = FcapulicPeer::NROCON;
-		}
-
+    if ($this->nrocon !== $v) {
+        $this->nrocon = $v;
+        $this->modifiedColumns[] = FcapulicPeer::NROCON;
+      }
+  
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = FcapulicPeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = FcapulicPeer::FECREG;
+    }
 
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FcapulicPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FcapulicPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setTipapu($v)
 	{
 
-		if ($this->tipapu !== $v) {
-			$this->tipapu = $v;
-			$this->modifiedColumns[] = FcapulicPeer::TIPAPU;
-		}
-
+    if ($this->tipapu !== $v) {
+        $this->tipapu = $v;
+        $this->modifiedColumns[] = FcapulicPeer::TIPAPU;
+      }
+  
 	} 
 	
 	public function setDesapu($v)
 	{
 
-		if ($this->desapu !== $v) {
-			$this->desapu = $v;
-			$this->modifiedColumns[] = FcapulicPeer::DESAPU;
-		}
+    if ($this->desapu !== $v) {
+        $this->desapu = $v;
+        $this->modifiedColumns[] = FcapulicPeer::DESAPU;
+      }
+  
+	} 
+	
+	public function setDirapu($v)
+	{
 
+    if ($this->dirapu !== $v) {
+        $this->dirapu = $v;
+        $this->modifiedColumns[] = FcapulicPeer::DIRAPU;
+      }
+  
 	} 
 	
 	public function setMonapu($v)
 	{
 
-		if ($this->monapu !== $v) {
-			$this->monapu = $v;
-			$this->modifiedColumns[] = FcapulicPeer::MONAPU;
-		}
-
+    if ($this->monapu !== $v) {
+        $this->monapu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcapulicPeer::MONAPU;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = FcapulicPeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcapulicPeer::MONIMP;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FcapulicPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FcapulicPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setFecrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = FcapulicPeer::FECREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = FcapulicPeer::FECREC;
+    }
 
 	} 
 	
 	public function setRifrep($v)
 	{
 
-		if ($this->rifrep !== $v) {
-			$this->rifrep = $v;
-			$this->modifiedColumns[] = FcapulicPeer::RIFREP;
-		}
-
+    if ($this->rifrep !== $v) {
+        $this->rifrep = $v;
+        $this->modifiedColumns[] = FcapulicPeer::RIFREP;
+      }
+  
 	} 
 	
 	public function setStaapu($v)
 	{
 
-		if ($this->staapu !== $v) {
-			$this->staapu = $v;
-			$this->modifiedColumns[] = FcapulicPeer::STAAPU;
-		}
-
+    if ($this->staapu !== $v) {
+        $this->staapu = $v;
+        $this->modifiedColumns[] = FcapulicPeer::STAAPU;
+      }
+  
 	} 
 	
 	public function setStadec($v)
 	{
 
-		if ($this->stadec !== $v) {
-			$this->stadec = $v;
-			$this->modifiedColumns[] = FcapulicPeer::STADEC;
-		}
-
+    if ($this->stadec !== $v) {
+        $this->stadec = $v;
+        $this->modifiedColumns[] = FcapulicPeer::STADEC;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = FcapulicPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = FcapulicPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setDircon($v)
 	{
 
-		if ($this->dircon !== $v) {
-			$this->dircon = $v;
-			$this->modifiedColumns[] = FcapulicPeer::DIRCON;
-		}
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = FcapulicPeer::DIRCON;
+      }
+  
+	} 
+	
+	public function setSemdia($v)
+	{
 
+    if ($this->semdia !== $v) {
+        $this->semdia = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcapulicPeer::SEMDIA;
+      }
+  
+	} 
+	
+	public function setExoapu($v)
+	{
+
+    if ($this->exoapu !== $v) {
+        $this->exoapu = $v;
+        $this->modifiedColumns[] = FcapulicPeer::EXOAPU;
+      }
+  
+	} 
+	
+	public function setTexexo($v)
+	{
+
+    if ($this->texexo !== $v) {
+        $this->texexo = $v;
+        $this->modifiedColumns[] = FcapulicPeer::TEXEXO;
+      }
+  
+	} 
+	
+	public function setFecapu($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecapu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecapu !== $ts) {
+      $this->fecapu = $ts;
+      $this->modifiedColumns[] = FcapulicPeer::FECAPU;
+    }
+
+	} 
+	
+	public function setSerapui($v)
+	{
+
+    if ($this->serapui !== $v) {
+        $this->serapui = $v;
+        $this->modifiedColumns[] = FcapulicPeer::SERAPUI;
+      }
+  
+	} 
+	
+	public function setSerapuf($v)
+	{
+
+    if ($this->serapuf !== $v) {
+        $this->serapuf = $v;
+        $this->modifiedColumns[] = FcapulicPeer::SERAPUF;
+      }
+  
+	} 
+	
+	public function setHorapu($v)
+	{
+
+    if ($this->horapu !== $v) {
+        $this->horapu = $v;
+        $this->modifiedColumns[] = FcapulicPeer::HORAPU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcapulicPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcapulicPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nrocon = $rs->getString($startcol + 0);
+      $this->nrocon = $rs->getString($startcol + 0);
 
-			$this->fecreg = $rs->getDate($startcol + 1, null);
+      $this->fecreg = $rs->getDate($startcol + 1, null);
 
-			$this->rifcon = $rs->getString($startcol + 2);
+      $this->rifcon = $rs->getString($startcol + 2);
 
-			$this->tipapu = $rs->getString($startcol + 3);
+      $this->tipapu = $rs->getString($startcol + 3);
 
-			$this->desapu = $rs->getString($startcol + 4);
+      $this->desapu = $rs->getString($startcol + 4);
 
-			$this->monapu = $rs->getFloat($startcol + 5);
+      $this->dirapu = $rs->getString($startcol + 5);
 
-			$this->monimp = $rs->getFloat($startcol + 6);
+      $this->monapu = $rs->getFloat($startcol + 6);
 
-			$this->funrec = $rs->getString($startcol + 7);
+      $this->monimp = $rs->getFloat($startcol + 7);
 
-			$this->fecrec = $rs->getDate($startcol + 8, null);
+      $this->funrec = $rs->getString($startcol + 8);
 
-			$this->rifrep = $rs->getString($startcol + 9);
+      $this->fecrec = $rs->getDate($startcol + 9, null);
 
-			$this->staapu = $rs->getString($startcol + 10);
+      $this->rifrep = $rs->getString($startcol + 10);
 
-			$this->stadec = $rs->getString($startcol + 11);
+      $this->staapu = $rs->getString($startcol + 11);
 
-			$this->nomcon = $rs->getString($startcol + 12);
+      $this->stadec = $rs->getString($startcol + 12);
 
-			$this->dircon = $rs->getString($startcol + 13);
+      $this->nomcon = $rs->getString($startcol + 13);
 
-			$this->id = $rs->getInt($startcol + 14);
+      $this->dircon = $rs->getString($startcol + 14);
 
-			$this->resetModified();
+      $this->semdia = $rs->getFloat($startcol + 15);
 
-			$this->setNew(false);
+      $this->exoapu = $rs->getString($startcol + 16);
 
-						return $startcol + 15; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcapulic object", $e);
-		}
-	}
+      $this->texexo = $rs->getString($startcol + 17);
+
+      $this->fecapu = $rs->getDate($startcol + 18, null);
+
+      $this->serapui = $rs->getString($startcol + 19);
+
+      $this->serapuf = $rs->getString($startcol + 20);
+
+      $this->horapu = $rs->getString($startcol + 21);
+
+      $this->id = $rs->getInt($startcol + 22);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 23; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcapulic object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -461,6 +703,7 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcapulicPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcapulicPeer::doUpdate($this, $con);
@@ -542,33 +785,57 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 				return $this->getDesapu();
 				break;
 			case 5:
-				return $this->getMonapu();
+				return $this->getDirapu();
 				break;
 			case 6:
-				return $this->getMonimp();
+				return $this->getMonapu();
 				break;
 			case 7:
-				return $this->getFunrec();
+				return $this->getMonimp();
 				break;
 			case 8:
-				return $this->getFecrec();
+				return $this->getFunrec();
 				break;
 			case 9:
-				return $this->getRifrep();
+				return $this->getFecrec();
 				break;
 			case 10:
-				return $this->getStaapu();
+				return $this->getRifrep();
 				break;
 			case 11:
-				return $this->getStadec();
+				return $this->getStaapu();
 				break;
 			case 12:
-				return $this->getNomcon();
+				return $this->getStadec();
 				break;
 			case 13:
-				return $this->getDircon();
+				return $this->getNomcon();
 				break;
 			case 14:
+				return $this->getDircon();
+				break;
+			case 15:
+				return $this->getSemdia();
+				break;
+			case 16:
+				return $this->getExoapu();
+				break;
+			case 17:
+				return $this->getTexexo();
+				break;
+			case 18:
+				return $this->getFecapu();
+				break;
+			case 19:
+				return $this->getSerapui();
+				break;
+			case 20:
+				return $this->getSerapuf();
+				break;
+			case 21:
+				return $this->getHorapu();
+				break;
+			case 22:
 				return $this->getId();
 				break;
 			default:
@@ -586,16 +853,24 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 			$keys[2] => $this->getRifcon(),
 			$keys[3] => $this->getTipapu(),
 			$keys[4] => $this->getDesapu(),
-			$keys[5] => $this->getMonapu(),
-			$keys[6] => $this->getMonimp(),
-			$keys[7] => $this->getFunrec(),
-			$keys[8] => $this->getFecrec(),
-			$keys[9] => $this->getRifrep(),
-			$keys[10] => $this->getStaapu(),
-			$keys[11] => $this->getStadec(),
-			$keys[12] => $this->getNomcon(),
-			$keys[13] => $this->getDircon(),
-			$keys[14] => $this->getId(),
+			$keys[5] => $this->getDirapu(),
+			$keys[6] => $this->getMonapu(),
+			$keys[7] => $this->getMonimp(),
+			$keys[8] => $this->getFunrec(),
+			$keys[9] => $this->getFecrec(),
+			$keys[10] => $this->getRifrep(),
+			$keys[11] => $this->getStaapu(),
+			$keys[12] => $this->getStadec(),
+			$keys[13] => $this->getNomcon(),
+			$keys[14] => $this->getDircon(),
+			$keys[15] => $this->getSemdia(),
+			$keys[16] => $this->getExoapu(),
+			$keys[17] => $this->getTexexo(),
+			$keys[18] => $this->getFecapu(),
+			$keys[19] => $this->getSerapui(),
+			$keys[20] => $this->getSerapuf(),
+			$keys[21] => $this->getHorapu(),
+			$keys[22] => $this->getId(),
 		);
 		return $result;
 	}
@@ -627,33 +902,57 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 				$this->setDesapu($value);
 				break;
 			case 5:
-				$this->setMonapu($value);
+				$this->setDirapu($value);
 				break;
 			case 6:
-				$this->setMonimp($value);
+				$this->setMonapu($value);
 				break;
 			case 7:
-				$this->setFunrec($value);
+				$this->setMonimp($value);
 				break;
 			case 8:
-				$this->setFecrec($value);
+				$this->setFunrec($value);
 				break;
 			case 9:
-				$this->setRifrep($value);
+				$this->setFecrec($value);
 				break;
 			case 10:
-				$this->setStaapu($value);
+				$this->setRifrep($value);
 				break;
 			case 11:
-				$this->setStadec($value);
+				$this->setStaapu($value);
 				break;
 			case 12:
-				$this->setNomcon($value);
+				$this->setStadec($value);
 				break;
 			case 13:
-				$this->setDircon($value);
+				$this->setNomcon($value);
 				break;
 			case 14:
+				$this->setDircon($value);
+				break;
+			case 15:
+				$this->setSemdia($value);
+				break;
+			case 16:
+				$this->setExoapu($value);
+				break;
+			case 17:
+				$this->setTexexo($value);
+				break;
+			case 18:
+				$this->setFecapu($value);
+				break;
+			case 19:
+				$this->setSerapui($value);
+				break;
+			case 20:
+				$this->setSerapuf($value);
+				break;
+			case 21:
+				$this->setHorapu($value);
+				break;
+			case 22:
 				$this->setId($value);
 				break;
 		} 	}
@@ -668,16 +967,24 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setRifcon($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setTipapu($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setDesapu($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setMonapu($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setMonimp($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setFunrec($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setFecrec($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setRifrep($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setStaapu($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setStadec($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setNomcon($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setDircon($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
+		if (array_key_exists($keys[5], $arr)) $this->setDirapu($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setMonapu($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setMonimp($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFunrec($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setFecrec($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setRifrep($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setStaapu($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setStadec($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setNomcon($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setDircon($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setSemdia($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setExoapu($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setTexexo($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setFecapu($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setSerapui($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setSerapuf($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setHorapu($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setId($arr[$keys[22]]);
 	}
 
 	
@@ -690,6 +997,7 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcapulicPeer::RIFCON)) $criteria->add(FcapulicPeer::RIFCON, $this->rifcon);
 		if ($this->isColumnModified(FcapulicPeer::TIPAPU)) $criteria->add(FcapulicPeer::TIPAPU, $this->tipapu);
 		if ($this->isColumnModified(FcapulicPeer::DESAPU)) $criteria->add(FcapulicPeer::DESAPU, $this->desapu);
+		if ($this->isColumnModified(FcapulicPeer::DIRAPU)) $criteria->add(FcapulicPeer::DIRAPU, $this->dirapu);
 		if ($this->isColumnModified(FcapulicPeer::MONAPU)) $criteria->add(FcapulicPeer::MONAPU, $this->monapu);
 		if ($this->isColumnModified(FcapulicPeer::MONIMP)) $criteria->add(FcapulicPeer::MONIMP, $this->monimp);
 		if ($this->isColumnModified(FcapulicPeer::FUNREC)) $criteria->add(FcapulicPeer::FUNREC, $this->funrec);
@@ -699,6 +1007,13 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcapulicPeer::STADEC)) $criteria->add(FcapulicPeer::STADEC, $this->stadec);
 		if ($this->isColumnModified(FcapulicPeer::NOMCON)) $criteria->add(FcapulicPeer::NOMCON, $this->nomcon);
 		if ($this->isColumnModified(FcapulicPeer::DIRCON)) $criteria->add(FcapulicPeer::DIRCON, $this->dircon);
+		if ($this->isColumnModified(FcapulicPeer::SEMDIA)) $criteria->add(FcapulicPeer::SEMDIA, $this->semdia);
+		if ($this->isColumnModified(FcapulicPeer::EXOAPU)) $criteria->add(FcapulicPeer::EXOAPU, $this->exoapu);
+		if ($this->isColumnModified(FcapulicPeer::TEXEXO)) $criteria->add(FcapulicPeer::TEXEXO, $this->texexo);
+		if ($this->isColumnModified(FcapulicPeer::FECAPU)) $criteria->add(FcapulicPeer::FECAPU, $this->fecapu);
+		if ($this->isColumnModified(FcapulicPeer::SERAPUI)) $criteria->add(FcapulicPeer::SERAPUI, $this->serapui);
+		if ($this->isColumnModified(FcapulicPeer::SERAPUF)) $criteria->add(FcapulicPeer::SERAPUF, $this->serapuf);
+		if ($this->isColumnModified(FcapulicPeer::HORAPU)) $criteria->add(FcapulicPeer::HORAPU, $this->horapu);
 		if ($this->isColumnModified(FcapulicPeer::ID)) $criteria->add(FcapulicPeer::ID, $this->id);
 
 		return $criteria;
@@ -740,6 +1055,8 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 
 		$copyObj->setDesapu($this->desapu);
 
+		$copyObj->setDirapu($this->dirapu);
+
 		$copyObj->setMonapu($this->monapu);
 
 		$copyObj->setMonimp($this->monimp);
@@ -757,6 +1074,20 @@ abstract class BaseFcapulic extends BaseObject  implements Persistent {
 		$copyObj->setNomcon($this->nomcon);
 
 		$copyObj->setDircon($this->dircon);
+
+		$copyObj->setSemdia($this->semdia);
+
+		$copyObj->setExoapu($this->exoapu);
+
+		$copyObj->setTexexo($this->texexo);
+
+		$copyObj->setFecapu($this->fecapu);
+
+		$copyObj->setSerapui($this->serapui);
+
+		$copyObj->setSerapuf($this->serapuf);
+
+		$copyObj->setHorapu($this->horapu);
 
 
 		$copyObj->setNew(true);

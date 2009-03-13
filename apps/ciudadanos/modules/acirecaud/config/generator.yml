@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atrecaud
+    theme:            cidesaGenerator
+
+    fields:
+      codrec:      { name: Código }
+      desrec:      { name: Descripción }
+    list:
+      title:          Definición de Recaudos
+      display:        [=codrec, desrec]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [codrec, desrec]
+      max_per_page:   5
+      sort:  codrec
+    edit:
+      title:          Edición de Recaudos
+      display:        [codrec, desrec, _requerido ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

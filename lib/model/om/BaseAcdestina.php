@@ -37,128 +37,156 @@ abstract class BaseAcdestina extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCedrif()
-	{
+  
+  public function getCedrif()
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getNomdes()
-	{
+    return trim($this->cedrif);
 
-		return $this->nomdes; 		
-	}
-	
-	public function getDirdes()
-	{
+  }
+  
+  public function getNomdes()
+  {
 
-		return $this->dirdes; 		
-	}
-	
-	public function getTeldes()
-	{
+    return trim($this->nomdes);
 
-		return $this->teldes; 		
-	}
-	
-	public function getNitdes()
-	{
+  }
+  
+  public function getDirdes()
+  {
 
-		return $this->nitdes; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->dirdes);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTeldes()
+  {
+
+    return trim($this->teldes);
+
+  }
+  
+  public function getNitdes()
+  {
+
+    return trim($this->nitdes);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = AcdestinaPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = AcdestinaPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setNomdes($v)
 	{
 
-		if ($this->nomdes !== $v) {
-			$this->nomdes = $v;
-			$this->modifiedColumns[] = AcdestinaPeer::NOMDES;
-		}
-
+    if ($this->nomdes !== $v) {
+        $this->nomdes = $v;
+        $this->modifiedColumns[] = AcdestinaPeer::NOMDES;
+      }
+  
 	} 
 	
 	public function setDirdes($v)
 	{
 
-		if ($this->dirdes !== $v) {
-			$this->dirdes = $v;
-			$this->modifiedColumns[] = AcdestinaPeer::DIRDES;
-		}
-
+    if ($this->dirdes !== $v) {
+        $this->dirdes = $v;
+        $this->modifiedColumns[] = AcdestinaPeer::DIRDES;
+      }
+  
 	} 
 	
 	public function setTeldes($v)
 	{
 
-		if ($this->teldes !== $v) {
-			$this->teldes = $v;
-			$this->modifiedColumns[] = AcdestinaPeer::TELDES;
-		}
-
+    if ($this->teldes !== $v) {
+        $this->teldes = $v;
+        $this->modifiedColumns[] = AcdestinaPeer::TELDES;
+      }
+  
 	} 
 	
 	public function setNitdes($v)
 	{
 
-		if ($this->nitdes !== $v) {
-			$this->nitdes = $v;
-			$this->modifiedColumns[] = AcdestinaPeer::NITDES;
-		}
-
+    if ($this->nitdes !== $v) {
+        $this->nitdes = $v;
+        $this->modifiedColumns[] = AcdestinaPeer::NITDES;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = AcdestinaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = AcdestinaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->cedrif = $rs->getString($startcol + 0);
+      $this->cedrif = $rs->getString($startcol + 0);
 
-			$this->nomdes = $rs->getString($startcol + 1);
+      $this->nomdes = $rs->getString($startcol + 1);
 
-			$this->dirdes = $rs->getString($startcol + 2);
+      $this->dirdes = $rs->getString($startcol + 2);
 
-			$this->teldes = $rs->getString($startcol + 3);
+      $this->teldes = $rs->getString($startcol + 3);
 
-			$this->nitdes = $rs->getString($startcol + 4);
+      $this->nitdes = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Acdestina object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Acdestina object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseAcdestina extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = AcdestinaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += AcdestinaPeer::doUpdate($this, $con);

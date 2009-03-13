@@ -33,111 +33,138 @@ abstract class BaseCaartprec extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodart()
-	{
+  
+  public function getCodart()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getCodprec()
-	{
+    return trim($this->codart);
 
-		return $this->codprec; 		
-	}
-	
-	public function getPreuni()
-	{
+  }
+  
+  public function getCodprec()
+  {
 
-		return number_format($this->preuni,2,',','.');
-		
-	}
-	
-	public function getObsprec()
-	{
+    return trim($this->codprec);
 
-		return $this->obsprec; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPreuni($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->preuni,2,',','.');
+    else return $this->preuni;
+
+  }
+  
+  public function getObsprec()
+  {
+
+    return trim($this->obsprec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartprecPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartprecPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodprec($v)
 	{
 
-		if ($this->codprec !== $v) {
-			$this->codprec = $v;
-			$this->modifiedColumns[] = CaartprecPeer::CODPREC;
-		}
-
+    if ($this->codprec !== $v) {
+        $this->codprec = $v;
+        $this->modifiedColumns[] = CaartprecPeer::CODPREC;
+      }
+  
 	} 
 	
 	public function setPreuni($v)
 	{
 
-		if ($this->preuni !== $v) {
-			$this->preuni = $v;
-			$this->modifiedColumns[] = CaartprecPeer::PREUNI;
-		}
-
+    if ($this->preuni !== $v) {
+        $this->preuni = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartprecPeer::PREUNI;
+      }
+  
 	} 
 	
 	public function setObsprec($v)
 	{
 
-		if ($this->obsprec !== $v) {
-			$this->obsprec = $v;
-			$this->modifiedColumns[] = CaartprecPeer::OBSPREC;
-		}
-
+    if ($this->obsprec !== $v) {
+        $this->obsprec = $v;
+        $this->modifiedColumns[] = CaartprecPeer::OBSPREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartprecPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartprecPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codart = $rs->getString($startcol + 0);
+      $this->codart = $rs->getString($startcol + 0);
 
-			$this->codprec = $rs->getString($startcol + 1);
+      $this->codprec = $rs->getString($startcol + 1);
 
-			$this->preuni = $rs->getFloat($startcol + 2);
+      $this->preuni = $rs->getFloat($startcol + 2);
 
-			$this->obsprec = $rs->getString($startcol + 3);
+      $this->obsprec = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartprec object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartprec object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

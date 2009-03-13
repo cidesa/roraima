@@ -61,307 +61,338 @@ abstract class BaseOpdetper extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefopp()
-	{
+  
+  public function getRefopp()
+  {
 
-		return $this->refopp; 		
-	}
-	
-	public function getRefcuo()
-	{
+    return trim($this->refopp);
 
-		return $this->refcuo; 		
-	}
-	
-	public function getFecinicuo($format = 'Y-m-d')
-	{
+  }
+  
+  public function getRefcuo()
+  {
 
-		if ($this->fecinicuo === null || $this->fecinicuo === '') {
-			return null;
-		} elseif (!is_int($this->fecinicuo)) {
-						$ts = strtotime($this->fecinicuo);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecinicuo] as date/time value: " . var_export($this->fecinicuo, true));
-			}
-		} else {
-			$ts = $this->fecinicuo;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->refcuo);
 
-	
-	public function getFecfincuo($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFecinicuo($format = 'Y-m-d')
+  {
 
-		if ($this->fecfincuo === null || $this->fecfincuo === '') {
-			return null;
-		} elseif (!is_int($this->fecfincuo)) {
-						$ts = strtotime($this->fecfincuo);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfincuo] as date/time value: " . var_export($this->fecfincuo, true));
-			}
-		} else {
-			$ts = $this->fecfincuo;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecinicuo === null || $this->fecinicuo === '') {
+      return null;
+    } elseif (!is_int($this->fecinicuo)) {
+            $ts = adodb_strtotime($this->fecinicuo);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecinicuo] as date/time value: " . var_export($this->fecinicuo, true));
+      }
+    } else {
+      $ts = $this->fecinicuo;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getMoncuo()
-	{
+  
+  public function getFecfincuo($format = 'Y-m-d')
+  {
 
-		return number_format($this->moncuo,2,',','.');
-		
-	}
-	
-	public function getFecpag($format = 'Y-m-d')
-	{
+    if ($this->fecfincuo === null || $this->fecfincuo === '') {
+      return null;
+    } elseif (!is_int($this->fecfincuo)) {
+            $ts = adodb_strtotime($this->fecfincuo);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfincuo] as date/time value: " . var_export($this->fecfincuo, true));
+      }
+    } else {
+      $ts = $this->fecfincuo;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecpag === null || $this->fecpag === '') {
-			return null;
-		} elseif (!is_int($this->fecpag)) {
-						$ts = strtotime($this->fecpag);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
-			}
-		} else {
-			$ts = $this->fecpag;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getMoncuo($val=false)
+  {
 
-	
-	public function getNumord()
-	{
+    if($val) return number_format($this->moncuo,2,',','.');
+    else return $this->moncuo;
 
-		return $this->numord; 		
-	}
-	
-	public function getCtaban()
-	{
+  }
+  
+  public function getFecpag($format = 'Y-m-d')
+  {
 
-		return $this->ctaban; 		
-	}
-	
-	public function getNumche()
-	{
+    if ($this->fecpag === null || $this->fecpag === '') {
+      return null;
+    } elseif (!is_int($this->fecpag)) {
+            $ts = adodb_strtotime($this->fecpag);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
+      }
+    } else {
+      $ts = $this->fecpag;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->numche; 		
-	}
-	
-	public function getTipmov()
-	{
+  
+  public function getNumord()
+  {
 
-		return $this->tipmov; 		
-	}
-	
-	public function getMonpag()
-	{
+    return trim($this->numord);
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCtaban()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->ctaban);
+
+  }
+  
+  public function getNumche()
+  {
+
+    return trim($this->numche);
+
+  }
+  
+  public function getTipmov()
+  {
+
+    return trim($this->tipmov);
+
+  }
+  
+  public function getMonpag($val=false)
+  {
+
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefopp($v)
 	{
 
-		if ($this->refopp !== $v) {
-			$this->refopp = $v;
-			$this->modifiedColumns[] = OpdetperPeer::REFOPP;
-		}
-
+    if ($this->refopp !== $v) {
+        $this->refopp = $v;
+        $this->modifiedColumns[] = OpdetperPeer::REFOPP;
+      }
+  
 	} 
 	
 	public function setRefcuo($v)
 	{
 
-		if ($this->refcuo !== $v) {
-			$this->refcuo = $v;
-			$this->modifiedColumns[] = OpdetperPeer::REFCUO;
-		}
-
+    if ($this->refcuo !== $v) {
+        $this->refcuo = $v;
+        $this->modifiedColumns[] = OpdetperPeer::REFCUO;
+      }
+  
 	} 
 	
 	public function setFecinicuo($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecinicuo] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecinicuo !== $ts) {
-			$this->fecinicuo = $ts;
-			$this->modifiedColumns[] = OpdetperPeer::FECINICUO;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecinicuo] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecinicuo !== $ts) {
+      $this->fecinicuo = $ts;
+      $this->modifiedColumns[] = OpdetperPeer::FECINICUO;
+    }
 
 	} 
 	
 	public function setFecfincuo($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfincuo] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfincuo !== $ts) {
-			$this->fecfincuo = $ts;
-			$this->modifiedColumns[] = OpdetperPeer::FECFINCUO;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfincuo] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfincuo !== $ts) {
+      $this->fecfincuo = $ts;
+      $this->modifiedColumns[] = OpdetperPeer::FECFINCUO;
+    }
 
 	} 
 	
 	public function setMoncuo($v)
 	{
 
-		if ($this->moncuo !== $v) {
-			$this->moncuo = $v;
-			$this->modifiedColumns[] = OpdetperPeer::MONCUO;
-		}
-
+    if ($this->moncuo !== $v) {
+        $this->moncuo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdetperPeer::MONCUO;
+      }
+  
 	} 
 	
 	public function setFecpag($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecpag !== $ts) {
-			$this->fecpag = $ts;
-			$this->modifiedColumns[] = OpdetperPeer::FECPAG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecpag !== $ts) {
+      $this->fecpag = $ts;
+      $this->modifiedColumns[] = OpdetperPeer::FECPAG;
+    }
 
 	} 
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = OpdetperPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = OpdetperPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setCtaban($v)
 	{
 
-		if ($this->ctaban !== $v) {
-			$this->ctaban = $v;
-			$this->modifiedColumns[] = OpdetperPeer::CTABAN;
-		}
-
+    if ($this->ctaban !== $v) {
+        $this->ctaban = $v;
+        $this->modifiedColumns[] = OpdetperPeer::CTABAN;
+      }
+  
 	} 
 	
 	public function setNumche($v)
 	{
 
-		if ($this->numche !== $v) {
-			$this->numche = $v;
-			$this->modifiedColumns[] = OpdetperPeer::NUMCHE;
-		}
-
+    if ($this->numche !== $v) {
+        $this->numche = $v;
+        $this->modifiedColumns[] = OpdetperPeer::NUMCHE;
+      }
+  
 	} 
 	
 	public function setTipmov($v)
 	{
 
-		if ($this->tipmov !== $v) {
-			$this->tipmov = $v;
-			$this->modifiedColumns[] = OpdetperPeer::TIPMOV;
-		}
-
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = OpdetperPeer::TIPMOV;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = OpdetperPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdetperPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpdetperPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpdetperPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refopp = $rs->getString($startcol + 0);
+      $this->refopp = $rs->getString($startcol + 0);
 
-			$this->refcuo = $rs->getString($startcol + 1);
+      $this->refcuo = $rs->getString($startcol + 1);
 
-			$this->fecinicuo = $rs->getDate($startcol + 2, null);
+      $this->fecinicuo = $rs->getDate($startcol + 2, null);
 
-			$this->fecfincuo = $rs->getDate($startcol + 3, null);
+      $this->fecfincuo = $rs->getDate($startcol + 3, null);
 
-			$this->moncuo = $rs->getFloat($startcol + 4);
+      $this->moncuo = $rs->getFloat($startcol + 4);
 
-			$this->fecpag = $rs->getDate($startcol + 5, null);
+      $this->fecpag = $rs->getDate($startcol + 5, null);
 
-			$this->numord = $rs->getString($startcol + 6);
+      $this->numord = $rs->getString($startcol + 6);
 
-			$this->ctaban = $rs->getString($startcol + 7);
+      $this->ctaban = $rs->getString($startcol + 7);
 
-			$this->numche = $rs->getString($startcol + 8);
+      $this->numche = $rs->getString($startcol + 8);
 
-			$this->tipmov = $rs->getString($startcol + 9);
+      $this->tipmov = $rs->getString($startcol + 9);
 
-			$this->monpag = $rs->getFloat($startcol + 10);
+      $this->monpag = $rs->getFloat($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opdetper object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opdetper object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -418,6 +449,7 @@ abstract class BaseOpdetper extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpdetperPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpdetperPeer::doUpdate($this, $con);

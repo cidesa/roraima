@@ -3,22 +3,25 @@ generator:
   param:
     model_class:      Octipsol
     theme:            default
-
     fields:
       codsol:      { name: Código}
       dessol:      { name: Descripción}
-      tipsol:      { name: tipo}      
-      #maxdia:      { name: Abreviatura}      
-
+      tipsol:      { name: Tipo}
+      maxdia:      { name: Este Tipo de Solicitud debe ser respondida en un máximo}
     list:
-      title:          Definición de Tipo de Solicitud
+      title:          Tipos de Solicitud
       filters:		  [codsol, dessol]
       display:        [=codsol, dessol]
+      sort:  codsol
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
     edit:
       title:          Edición de Tipo de Solicitud
-      #display:        [codcon, nomcon, estados]               
+      display:        [codsol, dessol, tipsol, maxdia]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

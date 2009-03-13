@@ -305,6 +305,7 @@ abstract class BaseTscheemiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TscheemiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

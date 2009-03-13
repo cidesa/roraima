@@ -73,6 +73,14 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 
 
 	
+	protected $codubi;
+
+
+	
+	protected $tipref;
+
+
+	
 	protected $id;
 
 	
@@ -81,373 +89,448 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getDphart()
-	{
+  
+  public function getDphart()
+  {
 
-		return $this->dphart; 		
-	}
-	
-	public function getFecdph($format = 'Y-m-d')
-	{
+    return trim($this->dphart);
 
-		if ($this->fecdph === null || $this->fecdph === '') {
-			return null;
-		} elseif (!is_int($this->fecdph)) {
-						$ts = strtotime($this->fecdph);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdph] as date/time value: " . var_export($this->fecdph, true));
-			}
-		} else {
-			$ts = $this->fecdph;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecdph($format = 'Y-m-d')
+  {
 
-	
-	public function getReqart()
-	{
+    if ($this->fecdph === null || $this->fecdph === '') {
+      return null;
+    } elseif (!is_int($this->fecdph)) {
+            $ts = adodb_strtotime($this->fecdph);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdph] as date/time value: " . var_export($this->fecdph, true));
+      }
+    } else {
+      $ts = $this->fecdph;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->reqart; 		
-	}
-	
-	public function getDesdph()
-	{
+  
+  public function getReqart()
+  {
 
-		return $this->desdph; 		
-	}
-	
-	public function getCodori()
-	{
+    return trim($this->reqart);
 
-		return $this->codori; 		
-	}
-	
-	public function getStadph()
-	{
+  }
+  
+  public function getDesdph()
+  {
 
-		return $this->stadph; 		
-	}
-	
-	public function getNumcom()
-	{
+    return trim($this->desdph);
 
-		return $this->numcom; 		
-	}
-	
-	public function getRefpag()
-	{
+  }
+  
+  public function getCodori()
+  {
 
-		return $this->refpag; 		
-	}
-	
-	public function getCodalm()
-	{
+    return trim($this->codori);
 
-		return $this->codalm; 		
-	}
-	
-	public function getTipdph()
-	{
+  }
+  
+  public function getStadph()
+  {
 
-		return $this->tipdph; 		
-	}
-	
-	public function getCodcli()
-	{
+    return trim($this->stadph);
 
-		return $this->codcli; 		
-	}
-	
-	public function getMondph()
-	{
+  }
+  
+  public function getNumcom()
+  {
 
-		return number_format($this->mondph,2,',','.');
-		
-	}
-	
-	public function getObsdph()
-	{
+    return trim($this->numcom);
 
-		return $this->obsdph; 		
-	}
-	
-	public function getFordesp()
-	{
+  }
+  
+  public function getRefpag()
+  {
 
-		return $this->fordesp; 		
-	}
-	
-	public function getReapor()
-	{
+    return trim($this->refpag);
 
-		return $this->reapor; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodalm()
+  {
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codalm);
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getTipdph()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipdph);
+
+  }
+  
+  public function getCodcli()
+  {
+
+    return trim($this->codcli);
+
+  }
+  
+  public function getMondph($val=false)
+  {
+
+    if($val) return number_format($this->mondph,2,',','.');
+    else return $this->mondph;
+
+  }
+  
+  public function getObsdph()
+  {
+
+    return trim($this->obsdph);
+
+  }
+  
+  public function getFordesp()
+  {
+
+    return trim($this->fordesp);
+
+  }
+  
+  public function getReapor()
+  {
+
+    return trim($this->reapor);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getTipref()
+  {
+
+    return trim($this->tipref);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDphart($v)
 	{
 
-		if ($this->dphart !== $v) {
-			$this->dphart = $v;
-			$this->modifiedColumns[] = CadphartPeer::DPHART;
-		}
-
+    if ($this->dphart !== $v) {
+        $this->dphart = $v;
+        $this->modifiedColumns[] = CadphartPeer::DPHART;
+      }
+  
 	} 
 	
 	public function setFecdph($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdph] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdph !== $ts) {
-			$this->fecdph = $ts;
-			$this->modifiedColumns[] = CadphartPeer::FECDPH;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdph] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdph !== $ts) {
+      $this->fecdph = $ts;
+      $this->modifiedColumns[] = CadphartPeer::FECDPH;
+    }
 
 	} 
 	
 	public function setReqart($v)
 	{
 
-		if ($this->reqart !== $v) {
-			$this->reqart = $v;
-			$this->modifiedColumns[] = CadphartPeer::REQART;
-		}
-
+    if ($this->reqart !== $v) {
+        $this->reqart = $v;
+        $this->modifiedColumns[] = CadphartPeer::REQART;
+      }
+  
 	} 
 	
 	public function setDesdph($v)
 	{
 
-		if ($this->desdph !== $v) {
-			$this->desdph = $v;
-			$this->modifiedColumns[] = CadphartPeer::DESDPH;
-		}
-
+    if ($this->desdph !== $v) {
+        $this->desdph = $v;
+        $this->modifiedColumns[] = CadphartPeer::DESDPH;
+      }
+  
 	} 
 	
 	public function setCodori($v)
 	{
 
-		if ($this->codori !== $v) {
-			$this->codori = $v;
-			$this->modifiedColumns[] = CadphartPeer::CODORI;
-		}
-
+    if ($this->codori !== $v) {
+        $this->codori = $v;
+        $this->modifiedColumns[] = CadphartPeer::CODORI;
+      }
+  
 	} 
 	
 	public function setStadph($v)
 	{
 
-		if ($this->stadph !== $v) {
-			$this->stadph = $v;
-			$this->modifiedColumns[] = CadphartPeer::STADPH;
-		}
-
+    if ($this->stadph !== $v) {
+        $this->stadph = $v;
+        $this->modifiedColumns[] = CadphartPeer::STADPH;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = CadphartPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = CadphartPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setRefpag($v)
 	{
 
-		if ($this->refpag !== $v) {
-			$this->refpag = $v;
-			$this->modifiedColumns[] = CadphartPeer::REFPAG;
-		}
-
+    if ($this->refpag !== $v) {
+        $this->refpag = $v;
+        $this->modifiedColumns[] = CadphartPeer::REFPAG;
+      }
+  
 	} 
 	
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = CadphartPeer::CODALM;
-		}
-
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CadphartPeer::CODALM;
+      }
+  
 	} 
 	
 	public function setTipdph($v)
 	{
 
-		if ($this->tipdph !== $v) {
-			$this->tipdph = $v;
-			$this->modifiedColumns[] = CadphartPeer::TIPDPH;
-		}
-
+    if ($this->tipdph !== $v) {
+        $this->tipdph = $v;
+        $this->modifiedColumns[] = CadphartPeer::TIPDPH;
+      }
+  
 	} 
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = CadphartPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = CadphartPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setMondph($v)
 	{
 
-		if ($this->mondph !== $v) {
-			$this->mondph = $v;
-			$this->modifiedColumns[] = CadphartPeer::MONDPH;
-		}
-
+    if ($this->mondph !== $v) {
+        $this->mondph = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadphartPeer::MONDPH;
+      }
+  
 	} 
 	
 	public function setObsdph($v)
 	{
 
-		if ($this->obsdph !== $v) {
-			$this->obsdph = $v;
-			$this->modifiedColumns[] = CadphartPeer::OBSDPH;
-		}
-
+    if ($this->obsdph !== $v) {
+        $this->obsdph = $v;
+        $this->modifiedColumns[] = CadphartPeer::OBSDPH;
+      }
+  
 	} 
 	
 	public function setFordesp($v)
 	{
 
-		if ($this->fordesp !== $v) {
-			$this->fordesp = $v;
-			$this->modifiedColumns[] = CadphartPeer::FORDESP;
-		}
-
+    if ($this->fordesp !== $v) {
+        $this->fordesp = $v;
+        $this->modifiedColumns[] = CadphartPeer::FORDESP;
+      }
+  
 	} 
 	
 	public function setReapor($v)
 	{
 
-		if ($this->reapor !== $v) {
-			$this->reapor = $v;
-			$this->modifiedColumns[] = CadphartPeer::REAPOR;
-		}
-
+    if ($this->reapor !== $v) {
+        $this->reapor = $v;
+        $this->modifiedColumns[] = CadphartPeer::REAPOR;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = CadphartPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = CadphartPeer::FECANU;
+    }
 
+	} 
+	
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CadphartPeer::CODUBI;
+      }
+  
+	} 
+	
+	public function setTipref($v)
+	{
+
+    if ($this->tipref !== $v) {
+        $this->tipref = $v;
+        $this->modifiedColumns[] = CadphartPeer::TIPREF;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadphartPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadphartPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->dphart = $rs->getString($startcol + 0);
+      $this->dphart = $rs->getString($startcol + 0);
 
-			$this->fecdph = $rs->getDate($startcol + 1, null);
+      $this->fecdph = $rs->getDate($startcol + 1, null);
 
-			$this->reqart = $rs->getString($startcol + 2);
+      $this->reqart = $rs->getString($startcol + 2);
 
-			$this->desdph = $rs->getString($startcol + 3);
+      $this->desdph = $rs->getString($startcol + 3);
 
-			$this->codori = $rs->getString($startcol + 4);
+      $this->codori = $rs->getString($startcol + 4);
 
-			$this->stadph = $rs->getString($startcol + 5);
+      $this->stadph = $rs->getString($startcol + 5);
 
-			$this->numcom = $rs->getString($startcol + 6);
+      $this->numcom = $rs->getString($startcol + 6);
 
-			$this->refpag = $rs->getString($startcol + 7);
+      $this->refpag = $rs->getString($startcol + 7);
 
-			$this->codalm = $rs->getString($startcol + 8);
+      $this->codalm = $rs->getString($startcol + 8);
 
-			$this->tipdph = $rs->getString($startcol + 9);
+      $this->tipdph = $rs->getString($startcol + 9);
 
-			$this->codcli = $rs->getString($startcol + 10);
+      $this->codcli = $rs->getString($startcol + 10);
 
-			$this->mondph = $rs->getFloat($startcol + 11);
+      $this->mondph = $rs->getFloat($startcol + 11);
 
-			$this->obsdph = $rs->getString($startcol + 12);
+      $this->obsdph = $rs->getString($startcol + 12);
 
-			$this->fordesp = $rs->getString($startcol + 13);
+      $this->fordesp = $rs->getString($startcol + 13);
 
-			$this->reapor = $rs->getString($startcol + 14);
+      $this->reapor = $rs->getString($startcol + 14);
 
-			$this->fecanu = $rs->getDate($startcol + 15, null);
+      $this->fecanu = $rs->getDate($startcol + 15, null);
 
-			$this->id = $rs->getInt($startcol + 16);
+      $this->codubi = $rs->getString($startcol + 16);
 
-			$this->resetModified();
+      $this->tipref = $rs->getString($startcol + 17);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 18);
 
-						return $startcol + 17; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadphart object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 19; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadphart object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -504,6 +587,7 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CadphartPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadphartPeer::doUpdate($this, $con);
@@ -618,6 +702,12 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 				return $this->getFecanu();
 				break;
 			case 16:
+				return $this->getCodubi();
+				break;
+			case 17:
+				return $this->getTipref();
+				break;
+			case 18:
 				return $this->getId();
 				break;
 			default:
@@ -646,7 +736,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 			$keys[13] => $this->getFordesp(),
 			$keys[14] => $this->getReapor(),
 			$keys[15] => $this->getFecanu(),
-			$keys[16] => $this->getId(),
+			$keys[16] => $this->getCodubi(),
+			$keys[17] => $this->getTipref(),
+			$keys[18] => $this->getId(),
 		);
 		return $result;
 	}
@@ -711,6 +803,12 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 				$this->setFecanu($value);
 				break;
 			case 16:
+				$this->setCodubi($value);
+				break;
+			case 17:
+				$this->setTipref($value);
+				break;
+			case 18:
 				$this->setId($value);
 				break;
 		} 	}
@@ -736,7 +834,9 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[13], $arr)) $this->setFordesp($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setReapor($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setFecanu($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
+		if (array_key_exists($keys[16], $arr)) $this->setCodubi($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setTipref($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
 	}
 
 	
@@ -760,6 +860,8 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CadphartPeer::FORDESP)) $criteria->add(CadphartPeer::FORDESP, $this->fordesp);
 		if ($this->isColumnModified(CadphartPeer::REAPOR)) $criteria->add(CadphartPeer::REAPOR, $this->reapor);
 		if ($this->isColumnModified(CadphartPeer::FECANU)) $criteria->add(CadphartPeer::FECANU, $this->fecanu);
+		if ($this->isColumnModified(CadphartPeer::CODUBI)) $criteria->add(CadphartPeer::CODUBI, $this->codubi);
+		if ($this->isColumnModified(CadphartPeer::TIPREF)) $criteria->add(CadphartPeer::TIPREF, $this->tipref);
 		if ($this->isColumnModified(CadphartPeer::ID)) $criteria->add(CadphartPeer::ID, $this->id);
 
 		return $criteria;
@@ -822,6 +924,10 @@ abstract class BaseCadphart extends BaseObject  implements Persistent {
 		$copyObj->setReapor($this->reapor);
 
 		$copyObj->setFecanu($this->fecanu);
+
+		$copyObj->setCodubi($this->codubi);
+
+		$copyObj->setTipref($this->tipref);
 
 
 		$copyObj->setNew(true);

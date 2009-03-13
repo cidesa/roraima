@@ -205,6 +205,7 @@ abstract class BaseNpconceptosdeduccionesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpconceptosdeduccionesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

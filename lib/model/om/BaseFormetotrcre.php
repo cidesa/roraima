@@ -53,202 +53,234 @@ abstract class BaseFormetotrcre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmet()
-	{
+  
+  public function getCodmet()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->codmet);
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodact()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCanact()
-	{
+    return trim($this->codpro);
 
-		return number_format($this->canact,2,',','.');
-		
-	}
-	
-	public function getCodparegr()
-	{
+  }
+  
+  public function getCodact()
+  {
 
-		return $this->codparegr; 		
-	}
-	
-	public function getMonpre()
-	{
+    return trim($this->codact);
 
-		return number_format($this->monpre,2,',','.');
-		
-	}
-	
-	public function getCodorg()
-	{
+  }
+  
+  public function getCanact($val=false)
+  {
 
-		return $this->codorg; 		
-	}
-	
-	public function getCodtip()
-	{
+    if($val) return number_format($this->canact,2,',','.');
+    else return $this->canact;
 
-		return $this->codtip; 		
-	}
-	
-	public function getObserv()
-	{
+  }
+  
+  public function getCodparegr()
+  {
 
-		return $this->observ; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codparegr);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonpre($val=false)
+  {
+
+    if($val) return number_format($this->monpre,2,',','.');
+    else return $this->monpre;
+
+  }
+  
+  public function getCodorg()
+  {
+
+    return trim($this->codorg);
+
+  }
+  
+  public function getCodtip()
+  {
+
+    return trim($this->codtip);
+
+  }
+  
+  public function getObserv()
+  {
+
+    return trim($this->observ);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = FormetotrcrePeer::CODMET;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FormetotrcrePeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = FormetotrcrePeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCanact($v)
 	{
 
-		if ($this->canact !== $v) {
-			$this->canact = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::CANACT;
-		}
-
+    if ($this->canact !== $v) {
+        $this->canact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FormetotrcrePeer::CANACT;
+      }
+  
 	} 
 	
 	public function setCodparegr($v)
 	{
 
-		if ($this->codparegr !== $v) {
-			$this->codparegr = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::CODPAREGR;
-		}
-
+    if ($this->codparegr !== $v) {
+        $this->codparegr = $v;
+        $this->modifiedColumns[] = FormetotrcrePeer::CODPAREGR;
+      }
+  
 	} 
 	
 	public function setMonpre($v)
 	{
 
-		if ($this->monpre !== $v) {
-			$this->monpre = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::MONPRE;
-		}
-
+    if ($this->monpre !== $v) {
+        $this->monpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FormetotrcrePeer::MONPRE;
+      }
+  
 	} 
 	
 	public function setCodorg($v)
 	{
 
-		if ($this->codorg !== $v) {
-			$this->codorg = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::CODORG;
-		}
-
+    if ($this->codorg !== $v) {
+        $this->codorg = $v;
+        $this->modifiedColumns[] = FormetotrcrePeer::CODORG;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = FormetotrcrePeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setObserv($v)
 	{
 
-		if ($this->observ !== $v) {
-			$this->observ = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::OBSERV;
-		}
-
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = FormetotrcrePeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FormetotrcrePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FormetotrcrePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmet = $rs->getString($startcol + 0);
+      $this->codmet = $rs->getString($startcol + 0);
 
-			$this->codpro = $rs->getString($startcol + 1);
+      $this->codpro = $rs->getString($startcol + 1);
 
-			$this->codact = $rs->getString($startcol + 2);
+      $this->codact = $rs->getString($startcol + 2);
 
-			$this->canact = $rs->getFloat($startcol + 3);
+      $this->canact = $rs->getFloat($startcol + 3);
 
-			$this->codparegr = $rs->getString($startcol + 4);
+      $this->codparegr = $rs->getString($startcol + 4);
 
-			$this->monpre = $rs->getFloat($startcol + 5);
+      $this->monpre = $rs->getFloat($startcol + 5);
 
-			$this->codorg = $rs->getString($startcol + 6);
+      $this->codorg = $rs->getString($startcol + 6);
 
-			$this->codtip = $rs->getString($startcol + 7);
+      $this->codtip = $rs->getString($startcol + 7);
 
-			$this->observ = $rs->getString($startcol + 8);
+      $this->observ = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Formetotrcre object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Formetotrcre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

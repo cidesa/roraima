@@ -149,712 +149,765 @@ abstract class BaseFcregveh1 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getPlaveh()
-	{
+  
+  public function getPlaveh()
+  {
 
-		return $this->plaveh; 		
-	}
-	
-	public function getRifcon()
-	{
+    return trim($this->plaveh);
 
-		return $this->rifcon; 		
-	}
-	
-	public function getAnoveh()
-	{
+  }
+  
+  public function getRifcon()
+  {
 
-		return number_format($this->anoveh,2,',','.');
-		
-	}
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    return trim($this->rifcon);
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getAnoveh($val=false)
+  {
 
-	
-	public function getSermot()
-	{
+    if($val) return number_format($this->anoveh,2,',','.');
+    else return $this->anoveh;
 
-		return $this->sermot; 		
-	}
-	
-	public function getSercar()
-	{
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-		return $this->sercar; 		
-	}
-	
-	public function getMarveh()
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->marveh; 		
-	}
-	
-	public function getColveh()
-	{
+  
+  public function getSermot()
+  {
 
-		return $this->colveh; 		
-	}
-	
-	public function getCoduso()
-	{
+    return trim($this->sermot);
 
-		return $this->coduso; 		
-	}
-	
-	public function getImpveh()
-	{
+  }
+  
+  public function getSercar()
+  {
 
-		return number_format($this->impveh,2,',','.');
-		
-	}
-	
-	public function getSalact()
-	{
+    return trim($this->sercar);
 
-		return number_format($this->salact,2,',','.');
-		
-	}
-	
-	public function getSalant()
-	{
+  }
+  
+  public function getMarveh()
+  {
 
-		return number_format($this->salant,2,',','.');
-		
-	}
-	
-	public function getValori()
-	{
+    return trim($this->marveh);
 
-		return number_format($this->valori,2,',','.');
-		
-	}
-	
-	public function getAboveh()
-	{
+  }
+  
+  public function getColveh()
+  {
 
-		return number_format($this->aboveh,2,',','.');
-		
-	}
-	
-	public function getMorveh()
-	{
+    return trim($this->colveh);
 
-		return number_format($this->morveh,2,',','.');
-		
-	}
-	
-	public function getDesveh()
-	{
+  }
+  
+  public function getCoduso()
+  {
 
-		return number_format($this->desveh,2,',','.');
-		
-	}
-	
-	public function getEstveh()
-	{
+    return trim($this->coduso);
 
-		return $this->estveh; 		
-	}
-	
-	public function getFunrec()
-	{
+  }
+  
+  public function getImpveh($val=false)
+  {
 
-		return $this->funrec; 		
-	}
-	
-	public function getObsveh()
-	{
+    if($val) return number_format($this->impveh,2,',','.');
+    else return $this->impveh;
 
-		return $this->obsveh; 		
-	}
-	
-	public function getRifrep()
-	{
+  }
+  
+  public function getSalact($val=false)
+  {
 
-		return $this->rifrep; 		
-	}
-	
-	public function getModveh()
-	{
+    if($val) return number_format($this->salact,2,',','.');
+    else return $this->salact;
 
-		return $this->modveh; 		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
+  }
+  
+  public function getSalant($val=false)
+  {
 
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->salant,2,',','.');
+    else return $this->salant;
 
-	
-	public function getDueant()
-	{
+  }
+  
+  public function getValori($val=false)
+  {
 
-		return $this->dueant; 		
-	}
-	
-	public function getDirant()
-	{
+    if($val) return number_format($this->valori,2,',','.');
+    else return $this->valori;
 
-		return $this->dirant; 		
-	}
-	
-	public function getPlaant()
-	{
+  }
+  
+  public function getAboveh($val=false)
+  {
 
-		return $this->plaant; 		
-	}
-	
-	public function getEstdec()
-	{
+    if($val) return number_format($this->aboveh,2,',','.');
+    else return $this->aboveh;
 
-		return $this->estdec; 		
-	}
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getMorveh($val=false)
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getDircon()
-	{
+    if($val) return number_format($this->morveh,2,',','.');
+    else return $this->morveh;
 
-		return $this->dircon; 		
-	}
-	
-	public function getClacon()
-	{
+  }
+  
+  public function getDesveh($val=false)
+  {
 
-		return $this->clacon; 		
-	}
-	
-	public function getCapveh()
-	{
+    if($val) return number_format($this->desveh,2,',','.');
+    else return $this->desveh;
 
-		return number_format($this->capveh,2,',','.');
-		
-	}
-	
-	public function getPesveh()
-	{
+  }
+  
+  public function getEstveh()
+  {
 
-		return number_format($this->pesveh,2,',','.');
-		
-	}
-	
-	public function getTipveh()
-	{
+    return trim($this->estveh);
 
-		return number_format($this->tipveh,2,',','.');
-		
-	}
-	
-	public function getFecact($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFunrec()
+  {
 
-		if ($this->fecact === null || $this->fecact === '') {
-			return null;
-		} elseif (!is_int($this->fecact)) {
-						$ts = strtotime($this->fecact);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecact] as date/time value: " . var_export($this->fecact, true));
-			}
-		} else {
-			$ts = $this->fecact;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->funrec);
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getObsveh()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->obsveh);
+
+  }
+  
+  public function getRifrep()
+  {
+
+    return trim($this->rifrep);
+
+  }
+  
+  public function getModveh()
+  {
+
+    return trim($this->modveh);
+
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
+
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getDueant()
+  {
+
+    return trim($this->dueant);
+
+  }
+  
+  public function getDirant()
+  {
+
+    return trim($this->dirant);
+
+  }
+  
+  public function getPlaant()
+  {
+
+    return trim($this->plaant);
+
+  }
+  
+  public function getEstdec()
+  {
+
+    return trim($this->estdec);
+
+  }
+  
+  public function getNomcon()
+  {
+
+    return trim($this->nomcon);
+
+  }
+  
+  public function getDircon()
+  {
+
+    return trim($this->dircon);
+
+  }
+  
+  public function getClacon()
+  {
+
+    return trim($this->clacon);
+
+  }
+  
+  public function getCapveh($val=false)
+  {
+
+    if($val) return number_format($this->capveh,2,',','.');
+    else return $this->capveh;
+
+  }
+  
+  public function getPesveh($val=false)
+  {
+
+    if($val) return number_format($this->pesveh,2,',','.');
+    else return $this->pesveh;
+
+  }
+  
+  public function getTipveh($val=false)
+  {
+
+    if($val) return number_format($this->tipveh,2,',','.');
+    else return $this->tipveh;
+
+  }
+  
+  public function getFecact($format = 'Y-m-d')
+  {
+
+    if ($this->fecact === null || $this->fecact === '') {
+      return null;
+    } elseif (!is_int($this->fecact)) {
+            $ts = adodb_strtotime($this->fecact);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecact] as date/time value: " . var_export($this->fecact, true));
+      }
+    } else {
+      $ts = $this->fecact;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setPlaveh($v)
 	{
 
-		if ($this->plaveh !== $v) {
-			$this->plaveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::PLAVEH;
-		}
-
+    if ($this->plaveh !== $v) {
+        $this->plaveh = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::PLAVEH;
+      }
+  
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::RIFCON;
+      }
+  
 	} 
 	
 	public function setAnoveh($v)
 	{
 
-		if ($this->anoveh !== $v) {
-			$this->anoveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::ANOVEH;
-		}
-
+    if ($this->anoveh !== $v) {
+        $this->anoveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::ANOVEH;
+      }
+  
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = Fcregveh1Peer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = Fcregveh1Peer::FECREG;
+    }
 
 	} 
 	
 	public function setSermot($v)
 	{
 
-		if ($this->sermot !== $v) {
-			$this->sermot = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::SERMOT;
-		}
-
+    if ($this->sermot !== $v) {
+        $this->sermot = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::SERMOT;
+      }
+  
 	} 
 	
 	public function setSercar($v)
 	{
 
-		if ($this->sercar !== $v) {
-			$this->sercar = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::SERCAR;
-		}
-
+    if ($this->sercar !== $v) {
+        $this->sercar = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::SERCAR;
+      }
+  
 	} 
 	
 	public function setMarveh($v)
 	{
 
-		if ($this->marveh !== $v) {
-			$this->marveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::MARVEH;
-		}
-
+    if ($this->marveh !== $v) {
+        $this->marveh = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::MARVEH;
+      }
+  
 	} 
 	
 	public function setColveh($v)
 	{
 
-		if ($this->colveh !== $v) {
-			$this->colveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::COLVEH;
-		}
-
+    if ($this->colveh !== $v) {
+        $this->colveh = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::COLVEH;
+      }
+  
 	} 
 	
 	public function setCoduso($v)
 	{
 
-		if ($this->coduso !== $v) {
-			$this->coduso = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::CODUSO;
-		}
-
+    if ($this->coduso !== $v) {
+        $this->coduso = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::CODUSO;
+      }
+  
 	} 
 	
 	public function setImpveh($v)
 	{
 
-		if ($this->impveh !== $v) {
-			$this->impveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::IMPVEH;
-		}
-
+    if ($this->impveh !== $v) {
+        $this->impveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::IMPVEH;
+      }
+  
 	} 
 	
 	public function setSalact($v)
 	{
 
-		if ($this->salact !== $v) {
-			$this->salact = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::SALACT;
-		}
-
+    if ($this->salact !== $v) {
+        $this->salact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::SALACT;
+      }
+  
 	} 
 	
 	public function setSalant($v)
 	{
 
-		if ($this->salant !== $v) {
-			$this->salant = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::SALANT;
-		}
-
+    if ($this->salant !== $v) {
+        $this->salant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::SALANT;
+      }
+  
 	} 
 	
 	public function setValori($v)
 	{
 
-		if ($this->valori !== $v) {
-			$this->valori = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::VALORI;
-		}
-
+    if ($this->valori !== $v) {
+        $this->valori = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::VALORI;
+      }
+  
 	} 
 	
 	public function setAboveh($v)
 	{
 
-		if ($this->aboveh !== $v) {
-			$this->aboveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::ABOVEH;
-		}
-
+    if ($this->aboveh !== $v) {
+        $this->aboveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::ABOVEH;
+      }
+  
 	} 
 	
 	public function setMorveh($v)
 	{
 
-		if ($this->morveh !== $v) {
-			$this->morveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::MORVEH;
-		}
-
+    if ($this->morveh !== $v) {
+        $this->morveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::MORVEH;
+      }
+  
 	} 
 	
 	public function setDesveh($v)
 	{
 
-		if ($this->desveh !== $v) {
-			$this->desveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::DESVEH;
-		}
-
+    if ($this->desveh !== $v) {
+        $this->desveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::DESVEH;
+      }
+  
 	} 
 	
 	public function setEstveh($v)
 	{
 
-		if ($this->estveh !== $v) {
-			$this->estveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::ESTVEH;
-		}
-
+    if ($this->estveh !== $v) {
+        $this->estveh = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::ESTVEH;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::FUNREC;
+      }
+  
 	} 
 	
 	public function setObsveh($v)
 	{
 
-		if ($this->obsveh !== $v) {
-			$this->obsveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::OBSVEH;
-		}
-
+    if ($this->obsveh !== $v) {
+        $this->obsveh = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::OBSVEH;
+      }
+  
 	} 
 	
 	public function setRifrep($v)
 	{
 
-		if ($this->rifrep !== $v) {
-			$this->rifrep = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::RIFREP;
-		}
-
+    if ($this->rifrep !== $v) {
+        $this->rifrep = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::RIFREP;
+      }
+  
 	} 
 	
 	public function setModveh($v)
 	{
 
-		if ($this->modveh !== $v) {
-			$this->modveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::MODVEH;
-		}
-
+    if ($this->modveh !== $v) {
+        $this->modveh = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::MODVEH;
+      }
+  
 	} 
 	
 	public function setFecrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = Fcregveh1Peer::FECREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = Fcregveh1Peer::FECREC;
+    }
 
 	} 
 	
 	public function setDueant($v)
 	{
 
-		if ($this->dueant !== $v) {
-			$this->dueant = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::DUEANT;
-		}
-
+    if ($this->dueant !== $v) {
+        $this->dueant = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::DUEANT;
+      }
+  
 	} 
 	
 	public function setDirant($v)
 	{
 
-		if ($this->dirant !== $v) {
-			$this->dirant = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::DIRANT;
-		}
-
+    if ($this->dirant !== $v) {
+        $this->dirant = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::DIRANT;
+      }
+  
 	} 
 	
 	public function setPlaant($v)
 	{
 
-		if ($this->plaant !== $v) {
-			$this->plaant = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::PLAANT;
-		}
-
+    if ($this->plaant !== $v) {
+        $this->plaant = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::PLAANT;
+      }
+  
 	} 
 	
 	public function setEstdec($v)
 	{
 
-		if ($this->estdec !== $v) {
-			$this->estdec = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::ESTDEC;
-		}
-
+    if ($this->estdec !== $v) {
+        $this->estdec = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::ESTDEC;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::NOMCON;
+      }
+  
 	} 
 	
 	public function setDircon($v)
 	{
 
-		if ($this->dircon !== $v) {
-			$this->dircon = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::DIRCON;
-		}
-
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::DIRCON;
+      }
+  
 	} 
 	
 	public function setClacon($v)
 	{
 
-		if ($this->clacon !== $v) {
-			$this->clacon = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::CLACON;
-		}
-
+    if ($this->clacon !== $v) {
+        $this->clacon = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::CLACON;
+      }
+  
 	} 
 	
 	public function setCapveh($v)
 	{
 
-		if ($this->capveh !== $v) {
-			$this->capveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::CAPVEH;
-		}
-
+    if ($this->capveh !== $v) {
+        $this->capveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::CAPVEH;
+      }
+  
 	} 
 	
 	public function setPesveh($v)
 	{
 
-		if ($this->pesveh !== $v) {
-			$this->pesveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::PESVEH;
-		}
-
+    if ($this->pesveh !== $v) {
+        $this->pesveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::PESVEH;
+      }
+  
 	} 
 	
 	public function setTipveh($v)
 	{
 
-		if ($this->tipveh !== $v) {
-			$this->tipveh = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::TIPVEH;
-		}
-
+    if ($this->tipveh !== $v) {
+        $this->tipveh = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcregveh1Peer::TIPVEH;
+      }
+  
 	} 
 	
 	public function setFecact($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecact] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecact !== $ts) {
-			$this->fecact = $ts;
-			$this->modifiedColumns[] = Fcregveh1Peer::FECACT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecact] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecact !== $ts) {
+      $this->fecact = $ts;
+      $this->modifiedColumns[] = Fcregveh1Peer::FECACT;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Fcregveh1Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Fcregveh1Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->plaveh = $rs->getString($startcol + 0);
+      $this->plaveh = $rs->getString($startcol + 0);
 
-			$this->rifcon = $rs->getString($startcol + 1);
+      $this->rifcon = $rs->getString($startcol + 1);
 
-			$this->anoveh = $rs->getFloat($startcol + 2);
+      $this->anoveh = $rs->getFloat($startcol + 2);
 
-			$this->fecreg = $rs->getDate($startcol + 3, null);
+      $this->fecreg = $rs->getDate($startcol + 3, null);
 
-			$this->sermot = $rs->getString($startcol + 4);
+      $this->sermot = $rs->getString($startcol + 4);
 
-			$this->sercar = $rs->getString($startcol + 5);
+      $this->sercar = $rs->getString($startcol + 5);
 
-			$this->marveh = $rs->getString($startcol + 6);
+      $this->marveh = $rs->getString($startcol + 6);
 
-			$this->colveh = $rs->getString($startcol + 7);
+      $this->colveh = $rs->getString($startcol + 7);
 
-			$this->coduso = $rs->getString($startcol + 8);
+      $this->coduso = $rs->getString($startcol + 8);
 
-			$this->impveh = $rs->getFloat($startcol + 9);
+      $this->impveh = $rs->getFloat($startcol + 9);
 
-			$this->salact = $rs->getFloat($startcol + 10);
+      $this->salact = $rs->getFloat($startcol + 10);
 
-			$this->salant = $rs->getFloat($startcol + 11);
+      $this->salant = $rs->getFloat($startcol + 11);
 
-			$this->valori = $rs->getFloat($startcol + 12);
+      $this->valori = $rs->getFloat($startcol + 12);
 
-			$this->aboveh = $rs->getFloat($startcol + 13);
+      $this->aboveh = $rs->getFloat($startcol + 13);
 
-			$this->morveh = $rs->getFloat($startcol + 14);
+      $this->morveh = $rs->getFloat($startcol + 14);
 
-			$this->desveh = $rs->getFloat($startcol + 15);
+      $this->desveh = $rs->getFloat($startcol + 15);
 
-			$this->estveh = $rs->getString($startcol + 16);
+      $this->estveh = $rs->getString($startcol + 16);
 
-			$this->funrec = $rs->getString($startcol + 17);
+      $this->funrec = $rs->getString($startcol + 17);
 
-			$this->obsveh = $rs->getString($startcol + 18);
+      $this->obsveh = $rs->getString($startcol + 18);
 
-			$this->rifrep = $rs->getString($startcol + 19);
+      $this->rifrep = $rs->getString($startcol + 19);
 
-			$this->modveh = $rs->getString($startcol + 20);
+      $this->modveh = $rs->getString($startcol + 20);
 
-			$this->fecrec = $rs->getDate($startcol + 21, null);
+      $this->fecrec = $rs->getDate($startcol + 21, null);
 
-			$this->dueant = $rs->getString($startcol + 22);
+      $this->dueant = $rs->getString($startcol + 22);
 
-			$this->dirant = $rs->getString($startcol + 23);
+      $this->dirant = $rs->getString($startcol + 23);
 
-			$this->plaant = $rs->getString($startcol + 24);
+      $this->plaant = $rs->getString($startcol + 24);
 
-			$this->estdec = $rs->getString($startcol + 25);
+      $this->estdec = $rs->getString($startcol + 25);
 
-			$this->nomcon = $rs->getString($startcol + 26);
+      $this->nomcon = $rs->getString($startcol + 26);
 
-			$this->dircon = $rs->getString($startcol + 27);
+      $this->dircon = $rs->getString($startcol + 27);
 
-			$this->clacon = $rs->getString($startcol + 28);
+      $this->clacon = $rs->getString($startcol + 28);
 
-			$this->capveh = $rs->getFloat($startcol + 29);
+      $this->capveh = $rs->getFloat($startcol + 29);
 
-			$this->pesveh = $rs->getFloat($startcol + 30);
+      $this->pesveh = $rs->getFloat($startcol + 30);
 
-			$this->tipveh = $rs->getFloat($startcol + 31);
+      $this->tipveh = $rs->getFloat($startcol + 31);
 
-			$this->fecact = $rs->getDate($startcol + 32, null);
+      $this->fecact = $rs->getDate($startcol + 32, null);
 
-			$this->id = $rs->getInt($startcol + 33);
+      $this->id = $rs->getInt($startcol + 33);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 34; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcregveh1 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 34; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcregveh1 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -911,6 +964,7 @@ abstract class BaseFcregveh1 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Fcregveh1Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Fcregveh1Peer::doUpdate($this, $con);

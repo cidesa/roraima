@@ -1,0 +1,21 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   fcreccon
+  ancho:                   500
+  anchogrid:               600
+  filas:                   6
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codrec
+  esgrabable:			   true
+  html:                    [size="10", readonly=true]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desrec
+  esgrabable:			   true
+  html:                    [size="40", readonly=true]

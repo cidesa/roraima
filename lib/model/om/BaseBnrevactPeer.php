@@ -13,26 +13,44 @@ abstract class BaseBnrevactPeer {
 	const CLASS_DEFAULT = 'lib.model.Bnrevact';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const FECREV = 'bnrevact.FECREV';
+	const CODACT = 'bnrevact.CODACT';
 
 	
-	const MONMUEREV = 'bnrevact.MONMUEREV';
+	const CODMUE = 'bnrevact.CODMUE';
 
 	
-	const MONINMREV = 'bnrevact.MONINMREV';
+	const NROSEGINM = 'bnrevact.NROSEGINM';
 
 	
-	const MONSEMREV = 'bnrevact.MONSEMREV';
+	const FECSEGINM = 'bnrevact.FECSEGINM';
 
 	
-	const MONIMNREV = 'bnrevact.MONIMNREV';
+	const NOMSEGINM = 'bnrevact.NOMSEGINM';
+
+	
+	const COBSEGINM = 'bnrevact.COBSEGINM';
+
+	
+	const MONSEGINM = 'bnrevact.MONSEGINM';
+
+	
+	const FECSEGVEN = 'bnrevact.FECSEGVEN';
+
+	
+	const PROSEGINM = 'bnrevact.PROSEGINM';
+
+	
+	const OBSSEGINM = 'bnrevact.OBSSEGINM';
+
+	
+	const STASEGINM = 'bnrevact.STASEGINM';
 
 	
 	const ID = 'bnrevact.ID';
@@ -43,18 +61,18 @@ abstract class BaseBnrevactPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Fecrev', 'Monmuerev', 'Moninmrev', 'Monsemrev', 'Monimnrev', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (BnrevactPeer::FECREV, BnrevactPeer::MONMUEREV, BnrevactPeer::MONINMREV, BnrevactPeer::MONSEMREV, BnrevactPeer::MONIMNREV, BnrevactPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('fecrev', 'monmuerev', 'moninmrev', 'monsemrev', 'monimnrev', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codact', 'Codmue', 'Nroseginm', 'Fecseginm', 'Nomseginm', 'Cobseginm', 'Monseginm', 'Fecsegven', 'Proseginm', 'Obsseginm', 'Staseginm', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (BnrevactPeer::CODACT, BnrevactPeer::CODMUE, BnrevactPeer::NROSEGINM, BnrevactPeer::FECSEGINM, BnrevactPeer::NOMSEGINM, BnrevactPeer::COBSEGINM, BnrevactPeer::MONSEGINM, BnrevactPeer::FECSEGVEN, BnrevactPeer::PROSEGINM, BnrevactPeer::OBSSEGINM, BnrevactPeer::STASEGINM, BnrevactPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codact', 'codmue', 'nroseginm', 'fecseginm', 'nomseginm', 'cobseginm', 'monseginm', 'fecsegven', 'proseginm', 'obsseginm', 'staseginm', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Fecrev' => 0, 'Monmuerev' => 1, 'Moninmrev' => 2, 'Monsemrev' => 3, 'Monimnrev' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (BnrevactPeer::FECREV => 0, BnrevactPeer::MONMUEREV => 1, BnrevactPeer::MONINMREV => 2, BnrevactPeer::MONSEMREV => 3, BnrevactPeer::MONIMNREV => 4, BnrevactPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('fecrev' => 0, 'monmuerev' => 1, 'moninmrev' => 2, 'monsemrev' => 3, 'monimnrev' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codact' => 0, 'Codmue' => 1, 'Nroseginm' => 2, 'Fecseginm' => 3, 'Nomseginm' => 4, 'Cobseginm' => 5, 'Monseginm' => 6, 'Fecsegven' => 7, 'Proseginm' => 8, 'Obsseginm' => 9, 'Staseginm' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (BnrevactPeer::CODACT => 0, BnrevactPeer::CODMUE => 1, BnrevactPeer::NROSEGINM => 2, BnrevactPeer::FECSEGINM => 3, BnrevactPeer::NOMSEGINM => 4, BnrevactPeer::COBSEGINM => 5, BnrevactPeer::MONSEGINM => 6, BnrevactPeer::FECSEGVEN => 7, BnrevactPeer::PROSEGINM => 8, BnrevactPeer::OBSSEGINM => 9, BnrevactPeer::STASEGINM => 10, BnrevactPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('codact' => 0, 'codmue' => 1, 'nroseginm' => 2, 'fecseginm' => 3, 'nomseginm' => 4, 'cobseginm' => 5, 'monseginm' => 6, 'fecsegven' => 7, 'proseginm' => 8, 'obsseginm' => 9, 'staseginm' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -108,15 +126,27 @@ abstract class BaseBnrevactPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(BnrevactPeer::FECREV);
+		$criteria->addSelectColumn(BnrevactPeer::CODACT);
 
-		$criteria->addSelectColumn(BnrevactPeer::MONMUEREV);
+		$criteria->addSelectColumn(BnrevactPeer::CODMUE);
 
-		$criteria->addSelectColumn(BnrevactPeer::MONINMREV);
+		$criteria->addSelectColumn(BnrevactPeer::NROSEGINM);
 
-		$criteria->addSelectColumn(BnrevactPeer::MONSEMREV);
+		$criteria->addSelectColumn(BnrevactPeer::FECSEGINM);
 
-		$criteria->addSelectColumn(BnrevactPeer::MONIMNREV);
+		$criteria->addSelectColumn(BnrevactPeer::NOMSEGINM);
+
+		$criteria->addSelectColumn(BnrevactPeer::COBSEGINM);
+
+		$criteria->addSelectColumn(BnrevactPeer::MONSEGINM);
+
+		$criteria->addSelectColumn(BnrevactPeer::FECSEGVEN);
+
+		$criteria->addSelectColumn(BnrevactPeer::PROSEGINM);
+
+		$criteria->addSelectColumn(BnrevactPeer::OBSSEGINM);
+
+		$criteria->addSelectColumn(BnrevactPeer::STASEGINM);
 
 		$criteria->addSelectColumn(BnrevactPeer::ID);
 
@@ -220,6 +250,7 @@ abstract class BaseBnrevactPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BnrevactPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

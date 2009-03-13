@@ -5,26 +5,30 @@ generator:
     theme:            default
     fields:
       codcon:      { name: Número Contrato}
-      descon:      { name: Descripción}       # Tabla Externa
-      codobr:      { name: Código Obra}       # Tabla Externa
-      desobr:      { name: Nombre}            # Tabla Externa
-      codpro:      { name: Código Proveedor}  # Tabla Externa      
-      nompro:      { name: Nombre }           # Tabla Externa      
+      descon:      { name: Descripción}
+      codobr:      { name: Obra}
+      desobr:      { name: Nombre}
+      codpro:      { name: Contratista}
+      nompro:      { name: Nombre }
       numins:      { name: Num. Inspección}
-      feccom:      { name: Fecha Inicio}      
-      fecter:      { name: Fecha Fin}      
-      porobreje:   { name: % Obra Ejecutada}            
+      feccom:      { name: Fecha Inicio}
+      fecter:      { name: Fecha Fin}
+      porobreje:   { name: % Obra Ejecutada}
       portietra:   { name: % Tiempo Transc.}
     list:
-      title:          Registro de Inspecciones
-      filters:		  [Codcon, Numins]
-      display:        [=codcon, descon, codobr, desobr, numins, portietra, porobreje]
+      title:          Inspecciones
+      filters:		  [Codcon, numins]
+      display:        [=codcon, descon, codobr, desobr, numins]
+      sort:  codcon
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
     edit:
       title:          Edición de Inspecciones
       display:        [codcon, descon, codobr, desobr, codpro, nompro, numins, feccom, fecter, portietra]
-      
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

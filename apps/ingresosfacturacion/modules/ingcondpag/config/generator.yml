@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Incondpag
+    theme:            cidesaGenerator
+    fields:
+      codcond:       { name: Código }
+      descond:       { name: Descripción }
+      tipcond:       { name: Tipo }
+      diascond:      { name: Número de Días }
+      genord:        { name: Genéra Orden de Pago }
+
+    list:
+      title:          Definición de Condiciones de Pago
+      filters:        [codcond]
+      display:        [=codcond, descond]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codcond
+
+    edit:
+      title:          Edición de Condiciones de Pago
+      display:        [codcond, descond, tipcond, diascond, genord]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

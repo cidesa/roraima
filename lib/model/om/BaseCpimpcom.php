@@ -49,186 +49,217 @@ abstract class BaseCpimpcom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefcom()
-	{
+  
+  public function getRefcom()
+  {
 
-		return $this->refcom; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->refcom);
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonimp()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getMoncau()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->moncau,2,',','.');
-		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getMonimp($val=false)
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMonaju()
-	{
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getStaimp()
-	{
+  }
+  
+  public function getMoncau($val=false)
+  {
 
-		return $this->staimp; 		
-	}
-	
-	public function getRefere()
-	{
+    if($val) return number_format($this->moncau,2,',','.');
+    else return $this->moncau;
 
-		return $this->refere; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getMonaju($val=false)
+  {
+
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getStaimp()
+  {
+
+    return trim($this->staimp);
+
+  }
+  
+  public function getRefere()
+  {
+
+    return trim($this->refere);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = CpimpcomPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = CpimpcomPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpimpcomPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpimpcomPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = CpimpcomPeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimpcomPeer::MONIMP;
+      }
+  
 	} 
 	
 	public function setMoncau($v)
 	{
 
-		if ($this->moncau !== $v) {
-			$this->moncau = $v;
-			$this->modifiedColumns[] = CpimpcomPeer::MONCAU;
-		}
-
+    if ($this->moncau !== $v) {
+        $this->moncau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimpcomPeer::MONCAU;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = CpimpcomPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimpcomPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CpimpcomPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimpcomPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setStaimp($v)
 	{
 
-		if ($this->staimp !== $v) {
-			$this->staimp = $v;
-			$this->modifiedColumns[] = CpimpcomPeer::STAIMP;
-		}
-
+    if ($this->staimp !== $v) {
+        $this->staimp = $v;
+        $this->modifiedColumns[] = CpimpcomPeer::STAIMP;
+      }
+  
 	} 
 	
 	public function setRefere($v)
 	{
 
-		if ($this->refere !== $v) {
-			$this->refere = $v;
-			$this->modifiedColumns[] = CpimpcomPeer::REFERE;
-		}
-
+    if ($this->refere !== $v) {
+        $this->refere = $v;
+        $this->modifiedColumns[] = CpimpcomPeer::REFERE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpimpcomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpimpcomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refcom = $rs->getString($startcol + 0);
+      $this->refcom = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->monimp = $rs->getFloat($startcol + 2);
+      $this->monimp = $rs->getFloat($startcol + 2);
 
-			$this->moncau = $rs->getFloat($startcol + 3);
+      $this->moncau = $rs->getFloat($startcol + 3);
 
-			$this->monpag = $rs->getFloat($startcol + 4);
+      $this->monpag = $rs->getFloat($startcol + 4);
 
-			$this->monaju = $rs->getFloat($startcol + 5);
+      $this->monaju = $rs->getFloat($startcol + 5);
 
-			$this->staimp = $rs->getString($startcol + 6);
+      $this->staimp = $rs->getString($startcol + 6);
 
-			$this->refere = $rs->getString($startcol + 7);
+      $this->refere = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpimpcom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpimpcom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -285,6 +316,7 @@ abstract class BaseCpimpcom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpimpcomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpimpcomPeer::doUpdate($this, $con);

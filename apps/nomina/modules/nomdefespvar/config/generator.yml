@@ -8,20 +8,26 @@ generator:
       desvar: { name: Nombre}
       codnom: { name: Codigo de Nomina}
       nomnom: { name: Descripcion}
-      valor1: { name: Valor No. 1}    
-      valor2: { name: Valor No. 2} 
-      valor3: { name: Valor No. 3} 
-      valor4: { name: Valor No. 4} 
-      valor5: { name: Valor No. 5} 
-        
+      valor1: { name: Valor No. 1}
+      valor2: { name: Valor No. 2}
+      valor3: { name: Valor No. 3}
+      valor4: { name: Valor No. 4}
+      valor5: { name: Valor No. 5}
+
     list:
-      title:          Variables
+      title:          Definición de Variables
       filters:        [codvar]
       display:        [=codvar, desvar, codnom, nomnom]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
+      sort: codvar
     edit:
       title:          Edicion de Variables
-      display:       [=codvar, desvar, codnom, valor1, valor2, valor3, valor4, valor5]
+      display:       [=codvar, desvar, codnom, nomnom, valor1, valor2, valor3, valor4, valor5]
+      actions:
+        _list:         ~
+        _save:         ~
+        _create:       ~
+        _delete:       ~

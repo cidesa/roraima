@@ -1,0 +1,30 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Liempofe
+    theme:            cidesaGenerator
+    fields:
+      codlic: { name: Código de la Licitación}
+      deslic: { name: Descripción, size=60 params: size=60}
+      lireglic_id: { name: Código Licitación}
+      destiplic: { name: Tipo, params: readonly=true}
+      fecreglic: { name: Fecha de Registro, params: readonly=true"}
+    list:
+      title: Empresas Oferentes
+      display: [=codlic, deslic]
+      filters: [codlic]
+      max_per_page:   10
+      sort: codlic
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Edición de Empresas Oferentes
+      display:
+        "Datos de la Licitación": [_lireglic_id, destiplic, fecreglic ]
+        "Datos Empresas Oferentes": [_empresas]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

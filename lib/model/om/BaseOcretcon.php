@@ -33,112 +33,139 @@ abstract class BaseOcretcon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodtip()
-	{
+    return trim($this->codcon);
 
-		return $this->codtip; 		
-	}
-	
-	public function getPorret()
-	{
+  }
+  
+  public function getCodtip()
+  {
 
-		return number_format($this->porret,2,',','.');
-		
-	}
-	
-	public function getMonret()
-	{
+    return trim($this->codtip);
 
-		return number_format($this->monret,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPorret($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->porret,2,',','.');
+    else return $this->porret;
+
+  }
+  
+  public function getMonret($val=false)
+  {
+
+    if($val) return number_format($this->monret,2,',','.');
+    else return $this->monret;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcretconPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcretconPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = OcretconPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = OcretconPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setPorret($v)
 	{
 
-		if ($this->porret !== $v) {
-			$this->porret = $v;
-			$this->modifiedColumns[] = OcretconPeer::PORRET;
-		}
-
+    if ($this->porret !== $v) {
+        $this->porret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcretconPeer::PORRET;
+      }
+  
 	} 
 	
 	public function setMonret($v)
 	{
 
-		if ($this->monret !== $v) {
-			$this->monret = $v;
-			$this->modifiedColumns[] = OcretconPeer::MONRET;
-		}
-
+    if ($this->monret !== $v) {
+        $this->monret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcretconPeer::MONRET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcretconPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcretconPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->codtip = $rs->getString($startcol + 1);
+      $this->codtip = $rs->getString($startcol + 1);
 
-			$this->porret = $rs->getFloat($startcol + 2);
+      $this->porret = $rs->getFloat($startcol + 2);
 
-			$this->monret = $rs->getFloat($startcol + 3);
+      $this->monret = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocretcon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocretcon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -195,6 +222,7 @@ abstract class BaseOcretcon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcretconPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcretconPeer::doUpdate($this, $con);

@@ -10,49 +10,25 @@
  */
 class nomdefespvarActions extends autonomdefespvarActions
 {
-public function getMostrar_TIPONOM()
-  {
-  	  $c = new Criteria;
-  	  $this->campo = str_pad($this->npdefvar->getCodnom(),3,' ');
-  	  $c->add(NpnominaPeer::CODNOM, $this->campo);
-  	  $this->nomina = NpnominaPeer::doSelect($c);
-	  if ($this->nomina)
-	  	return $this->nomina[0]->getNomnom();
-	  else 
-	    return ' ';
-  }
-	
-	
-public function executeEdit()
-  {
-    $this->npdefvar = $this->getNpdefvarOrCreate();
-    $this->tipo = $this->getMostrar_TIPONOM();
-
-    if ($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->updateNpdefvarFromRequest();
-
-      $this->saveNpdefvar($this->npdefvar);
-
-      $this->setFlash('notice', 'Your modifications have been saved');
-
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('nomdefespvar/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('nomdefespvar/list');
-      }
-      else
-      {
-        return $this->redirect('nomdefespvar/edit?id='.$this->npdefvar->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
-  }
-	
+  public function executeAjax()
+	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+	  if ($this->getRequestParameter('ajax')=='1')
+	    {
+	  		$dato=NpnominaPeer::getDesnom($this->getRequestParameter('codigo'));	  			 
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';		 			 	    
+	    } 
+	   
+  	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')'); 
+	    return sfView::HEADER_ONLY;
+	}	 
+ 
+	public function executeAutocomplete()
+	{
+		if ($this->getRequestParameter('ajax')=='1')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODNOM','Npnomina','CODNOM',$this->getRequestParameter('npdefvar[codnom]'));
+	    }	  	   
+	}
 }

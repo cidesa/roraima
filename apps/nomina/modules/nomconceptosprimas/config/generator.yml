@@ -5,20 +5,25 @@ generator:
     theme:            default
 
     fields:
-      codnom:    { name: Codigo Nomina, params: maxlength=10,size=10  }
-      codcon:    { name: Codigo Concepto, params: size=20  }
-      nomina:    { name: Nombre Nomina, params: size=20  }
-      concepto:  { name: Nombre Concepto, params: size=20  }            
+      codnom:    { name: CÃ³digo de la Nomina, params: maxlength=10,size=10  }
+      codcon:    { name: CÃ³digo del Concepto, params: size=20  }
+      nomina:    { name: Nombre de la Nomina, params: size=20  }
+      concepto:  { name: Nombre del Concepto, params: size=20  }
 
     list:
-      title:          Definición de Conceptos para las Primas
-      display:        [codnom, nomina, codcon, concepto]
+      title:          Conceptos para las Primas
+      display:        [=codnom, nomina, codcon, concepto]
       filters:		  [codnom, codcon]
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+      sort:    codnom
     edit:
-      title:          Definición de Conceptos para las Primas
+      title:          EdiciÃ³n de Conceptos para las Primas
       display:        [codnom, codcon, nomina, concepto]
+      actions:
+        _list:         ~
+        _save:         ~
+        _create:       ~
+        _delete:       ~

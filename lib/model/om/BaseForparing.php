@@ -37,130 +37,158 @@ abstract class BaseForparing extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodparing()
-	{
+  
+  public function getCodparing()
+  {
 
-		return $this->codparing; 		
-	}
-	
-	public function getMontoing()
-	{
+    return trim($this->codparing);
 
-		return number_format($this->montoing,2,',','.');
-		
-	}
-	
-	public function getCodtipfin()
-	{
+  }
+  
+  public function getMontoing($val=false)
+  {
 
-		return $this->codtipfin; 		
-	}
-	
-	public function getObserv()
-	{
+    if($val) return number_format($this->montoing,2,',','.');
+    else return $this->montoing;
 
-		return $this->observ; 		
-	}
-	
-	public function getMontodis()
-	{
+  }
+  
+  public function getCodtipfin()
+  {
 
-		return number_format($this->montodis,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codtipfin);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getObserv()
+  {
+
+    return trim($this->observ);
+
+  }
+  
+  public function getMontodis($val=false)
+  {
+
+    if($val) return number_format($this->montodis,2,',','.');
+    else return $this->montodis;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodparing($v)
 	{
 
-		if ($this->codparing !== $v) {
-			$this->codparing = $v;
-			$this->modifiedColumns[] = ForparingPeer::CODPARING;
-		}
-
+    if ($this->codparing !== $v) {
+        $this->codparing = $v;
+        $this->modifiedColumns[] = ForparingPeer::CODPARING;
+      }
+  
 	} 
 	
 	public function setMontoing($v)
 	{
 
-		if ($this->montoing !== $v) {
-			$this->montoing = $v;
-			$this->modifiedColumns[] = ForparingPeer::MONTOING;
-		}
-
+    if ($this->montoing !== $v) {
+        $this->montoing = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForparingPeer::MONTOING;
+      }
+  
 	} 
 	
 	public function setCodtipfin($v)
 	{
 
-		if ($this->codtipfin !== $v) {
-			$this->codtipfin = $v;
-			$this->modifiedColumns[] = ForparingPeer::CODTIPFIN;
-		}
-
+    if ($this->codtipfin !== $v) {
+        $this->codtipfin = $v;
+        $this->modifiedColumns[] = ForparingPeer::CODTIPFIN;
+      }
+  
 	} 
 	
 	public function setObserv($v)
 	{
 
-		if ($this->observ !== $v) {
-			$this->observ = $v;
-			$this->modifiedColumns[] = ForparingPeer::OBSERV;
-		}
-
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = ForparingPeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setMontodis($v)
 	{
 
-		if ($this->montodis !== $v) {
-			$this->montodis = $v;
-			$this->modifiedColumns[] = ForparingPeer::MONTODIS;
-		}
-
+    if ($this->montodis !== $v) {
+        $this->montodis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForparingPeer::MONTODIS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForparingPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForparingPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codparing = $rs->getString($startcol + 0);
+      $this->codparing = $rs->getString($startcol + 0);
 
-			$this->montoing = $rs->getFloat($startcol + 1);
+      $this->montoing = $rs->getFloat($startcol + 1);
 
-			$this->codtipfin = $rs->getString($startcol + 2);
+      $this->codtipfin = $rs->getString($startcol + 2);
 
-			$this->observ = $rs->getString($startcol + 3);
+      $this->observ = $rs->getString($startcol + 3);
 
-			$this->montodis = $rs->getFloat($startcol + 4);
+      $this->montodis = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forparing object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forparing object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +245,7 @@ abstract class BaseForparing extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForparingPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForparingPeer::doUpdate($this, $con);

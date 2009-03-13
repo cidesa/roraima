@@ -215,6 +215,7 @@ abstract class BaseNpcontipaporetPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcontipaporetPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Octipcon
+    theme:            cidesaGenerator
+    fields:
+      codtipcon: { name: Código, params: size=10 maxlength=3 onBlur='this.value=this.value.pad(3, "0",0);'}
+      destipcon: { name: Descripción, params: size=60 maxlength=250}
+    list:
+      title:  Tipos de Contratos
+      display: [=codtipcon, destipcon]
+      filters: [codtipcon, destipcon]
+      max_per_page:   10
+      sort: codtipcon
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Edición de Tipos de Contratos
+      display:
+        "NONE": [codtipcon, destipcon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefmun
+    theme:            default
+    fields:
+      codest: { name: Estado}
+      desest: { name: Estado}
+      codmun: { name: Codigo, params: maxlength=4}
+      desmun: { name: Descripcion}
+    list:
+      title:          Municipios
+      filters:        [codest, codmun, desmun]
+      display:        [=desest, codmun, desmun]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+      sort: codmun
+    edit:
+      title:          Edicion de Municipios
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

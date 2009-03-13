@@ -1,0 +1,50 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Inprofes
+    theme:            cidesaGenerator
+    fields:
+      venext:      { name: Nacionalidad }
+      cedprof:      { name: Cédula, params: size=10 }
+      nomprof:      { name: Nombre, params: size=60 }
+      apeprof:      { name: Apellido, params: size=60 }
+      sexo:       { name: Sexo, params: size=20 }
+      inespeci_id: { name: Especialidad }
+      fecnac:      { name: Fecha Nacimiento }
+      pais:        { name: País Nacimiento }
+      lugnac:      { name: Lugar de Nacimiento }
+      nacprof:      { name: Nacionalidad }
+      dirnac:      { name: Dirección de Nacimiento }
+      estciv:      { name: Estado Civil }
+      telhab:      { name: Teléfono Habitación, help: Ej 01234567891 }
+      telcel:   { name: Teléfono Celular, help: Ej 01234567891 }
+      email:    { name: Email, help: Ej usuario@dominio.com }
+      inestado_id:     { name: Estado }
+      inmunicipio_id:  { name: Municipio }
+      inparroquia_id:  { name: Parroquia }
+      dirhab:      { name: Dirección}
+      codpost:     { name: Código Postal }
+
+
+    list:
+      title:          Registro de Profesionales
+      display:        [=cedprof, nomprof, apeprof]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [cedprof, nomprof, apeprof]
+      max_per_page:   5
+      sort: cedprof
+    edit:
+      title:          Edición de Profesionales
+      display:
+        Datos Personales: [_venext, _cedprof, _nomprof, _apeprof, _sexo, _estciv, _inespeci_id]
+        Datos Nacimiento: [_fecnac, _pais, _lugnac, _nacprof, _dirnac ]
+        Dirección Habitacion: [_inestado_id, _inmunicipio_id, _inparroquia_id, dirhab, codpost]
+        Información de Contacto: [telhab, telcel, email]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

@@ -250,6 +250,7 @@ abstract class BaseFapedidoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FapedidoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

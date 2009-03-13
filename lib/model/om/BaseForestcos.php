@@ -65,258 +65,293 @@ abstract class BaseForestcos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmet()
-	{
+  
+  public function getCodmet()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->codmet);
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodact()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->codpro);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getCodact()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getCanuni()
-	{
+    return trim($this->codact);
 
-		return number_format($this->canuni,2,',','.');
-		
-	}
-	
-	public function getCanart()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return number_format($this->canart,2,',','.');
-		
-	}
-	
-	public function getMonart()
-	{
+    return trim($this->codart);
 
-		return number_format($this->monart,2,',','.');
-		
-	}
-	
-	public function getTotpre()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return number_format($this->totpre,2,',','.');
-		
-	}
-	
-	public function getCodfin()
-	{
+    return trim($this->codpar);
 
-		return $this->codfin; 		
-	}
-	
-	public function getCodtip()
-	{
+  }
+  
+  public function getCanuni($val=false)
+  {
 
-		return $this->codtip; 		
-	}
-	
-	public function getObserv()
-	{
+    if($val) return number_format($this->canuni,2,',','.');
+    else return $this->canuni;
 
-		return $this->observ; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCanart($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->canart,2,',','.');
+    else return $this->canart;
+
+  }
+  
+  public function getMonart($val=false)
+  {
+
+    if($val) return number_format($this->monart,2,',','.');
+    else return $this->monart;
+
+  }
+  
+  public function getTotpre($val=false)
+  {
+
+    if($val) return number_format($this->totpre,2,',','.');
+    else return $this->totpre;
+
+  }
+  
+  public function getCodfin()
+  {
+
+    return trim($this->codfin);
+
+  }
+  
+  public function getCodtip()
+  {
+
+    return trim($this->codtip);
+
+  }
+  
+  public function getObserv()
+  {
+
+    return trim($this->observ);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = ForestcosPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = ForestcosPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = ForestcosPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = ForestcosPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = ForestcosPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = ForestcosPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = ForestcosPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = ForestcosPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = ForestcosPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = ForestcosPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCanuni($v)
 	{
 
-		if ($this->canuni !== $v) {
-			$this->canuni = $v;
-			$this->modifiedColumns[] = ForestcosPeer::CANUNI;
-		}
-
+    if ($this->canuni !== $v) {
+        $this->canuni = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForestcosPeer::CANUNI;
+      }
+  
 	} 
 	
 	public function setCanart($v)
 	{
 
-		if ($this->canart !== $v) {
-			$this->canart = $v;
-			$this->modifiedColumns[] = ForestcosPeer::CANART;
-		}
-
+    if ($this->canart !== $v) {
+        $this->canart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForestcosPeer::CANART;
+      }
+  
 	} 
 	
 	public function setMonart($v)
 	{
 
-		if ($this->monart !== $v) {
-			$this->monart = $v;
-			$this->modifiedColumns[] = ForestcosPeer::MONART;
-		}
-
+    if ($this->monart !== $v) {
+        $this->monart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForestcosPeer::MONART;
+      }
+  
 	} 
 	
 	public function setTotpre($v)
 	{
 
-		if ($this->totpre !== $v) {
-			$this->totpre = $v;
-			$this->modifiedColumns[] = ForestcosPeer::TOTPRE;
-		}
-
+    if ($this->totpre !== $v) {
+        $this->totpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForestcosPeer::TOTPRE;
+      }
+  
 	} 
 	
 	public function setCodfin($v)
 	{
 
-		if ($this->codfin !== $v) {
-			$this->codfin = $v;
-			$this->modifiedColumns[] = ForestcosPeer::CODFIN;
-		}
-
+    if ($this->codfin !== $v) {
+        $this->codfin = $v;
+        $this->modifiedColumns[] = ForestcosPeer::CODFIN;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = ForestcosPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = ForestcosPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setObserv($v)
 	{
 
-		if ($this->observ !== $v) {
-			$this->observ = $v;
-			$this->modifiedColumns[] = ForestcosPeer::OBSERV;
-		}
-
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = ForestcosPeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForestcosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForestcosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmet = $rs->getString($startcol + 0);
+      $this->codmet = $rs->getString($startcol + 0);
 
-			$this->codpro = $rs->getString($startcol + 1);
+      $this->codpro = $rs->getString($startcol + 1);
 
-			$this->codact = $rs->getString($startcol + 2);
+      $this->codact = $rs->getString($startcol + 2);
 
-			$this->codart = $rs->getString($startcol + 3);
+      $this->codart = $rs->getString($startcol + 3);
 
-			$this->codpar = $rs->getString($startcol + 4);
+      $this->codpar = $rs->getString($startcol + 4);
 
-			$this->canuni = $rs->getFloat($startcol + 5);
+      $this->canuni = $rs->getFloat($startcol + 5);
 
-			$this->canart = $rs->getFloat($startcol + 6);
+      $this->canart = $rs->getFloat($startcol + 6);
 
-			$this->monart = $rs->getFloat($startcol + 7);
+      $this->monart = $rs->getFloat($startcol + 7);
 
-			$this->totpre = $rs->getFloat($startcol + 8);
+      $this->totpre = $rs->getFloat($startcol + 8);
 
-			$this->codfin = $rs->getString($startcol + 9);
+      $this->codfin = $rs->getString($startcol + 9);
 
-			$this->codtip = $rs->getString($startcol + 10);
+      $this->codtip = $rs->getString($startcol + 10);
 
-			$this->observ = $rs->getString($startcol + 11);
+      $this->observ = $rs->getString($startcol + 11);
 
-			$this->id = $rs->getInt($startcol + 12);
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 13; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forestcos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forestcos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

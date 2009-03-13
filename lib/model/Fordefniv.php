@@ -9,4 +9,16 @@
  */ 
 class Fordefniv extends BaseFordefniv
 {
+  private $nomemp = '';  
+	
+  public function setNomemp($val)
+  {
+	$this->nomemp = $val;		
+  }
+	
+  public function getNomemp()
+  {
+	return $this->nomemp;		
+  }
 }
+ 

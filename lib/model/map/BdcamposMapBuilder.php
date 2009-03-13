@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class BdcamposMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.BdcamposMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.BdcamposMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('bdcampos');
 		$tMap->setPhpName('Bdcampos');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('bdcampos_SEQ');
 
 		$tMap->addColumn('NOMCAMP1', 'Nomcamp1', 'string', CreoleTypes::VARCHAR, false, 50);
 
@@ -51,6 +53,6 @@ class BdcamposMapBuilder {
 		$tMap->addColumn('CRITERIO', 'Criterio', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

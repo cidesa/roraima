@@ -7,7 +7,8 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
 <?php echo object_input_hidden_tag($npdiaext, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
@@ -20,13 +21,38 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($npdiaext, 'getCodnom', array (
-  'size' => 20,
+  'size' => 5,
   'control_name' => 'npdiaext[codnom]',
+  'maxlength' => 4,
+  'onBlur'=> remote_function(array(
+        'update'   => 'ajax',
+        'url'      => 'nomdiaext/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexcom=npdiaext_codnomr&cajtexmos=npdiaext_nomnom&codigo='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
+
+
 &nbsp;
-<?php echo button_to('...','#')?>
-&nbsp;
-<?php echo input_tag('nombre',$nombre,'size=50,disabled=true') ?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npnomina_Nomdiaext/clase/Npnomina/frame/sf_admin_edit_form/obj1/npdiaext_codnom/obj2/npdiaext_nomnom/campo1/codnom/campo2/nomnom/param1/')?>
+
+    </div>
+</div>
+
+<div class="form-row">
+  <?php echo label_for('npdiaext[nomnom]', __($labels['npdiaext{nomnom}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('npdiaext{nomnom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdiaext{nomnom}')): ?>
+    <?php echo form_error('npdiaext{nomnom}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npdiaext, 'getNomnom', array (
+  'size' => 30,
+  'disabled' => true,
+  'control_name' => 'npdiaext[nomnom]',
+)); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
@@ -46,56 +72,21 @@
     </div>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('npdiaext[codemp]', __($labels['npdiaext{codemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npdiaext{codemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npdiaext{codemp}')): ?>
-    <?php echo form_error('npdiaext{codemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
 
-  <?php $value = object_input_tag($npdiaext, 'getCodemp', array (
-  'size' => 20,
-  'control_name' => 'npdiaext[codemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+
+<div id="grid" class="form-row">
+<?
+echo grid_tag($obj);
+?>
 </div>
 </fieldset>
-
-<div class="grid01" id="grid01">
-<fieldset>
-<legend>Datos del Empleado</legend>
-<table border="0" class="sf_admin_list">
-<? 
-$titulo=array(0 => 'Cedula', 1 => 'Nombre', 2 => 'Fecha');
-if ( count($rs)>0){
-$i=0;
-foreach ($rs as $k=>$fila) {
-    $i++;
-    if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$titulo[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
-  }
-?></table>
-</fieldset>
-</div>
-
 <?php include_partial('edit_actions', array('npdiaext' => $npdiaext)) ?>
 
 </form>
 
 <ul class="sf_admin_actions">
       <li class="float-left"><?php if ($npdiaext->getId()): ?>
-<?php echo button_to(__('delete'), 'nomdiaext/delete?id='.$npdiaext->getId(), array (
+<?php echo button_to(__('delete'), 'nomdiaext/delete?id='.$npdiaext->getId().'&codnom='.$npdiaext->getCodnom().'&fecha='.$npdiaext->getFecha(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
   'class' => 'sf_admin_action_delete',

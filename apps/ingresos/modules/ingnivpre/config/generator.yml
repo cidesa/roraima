@@ -1,42 +1,40 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Cidefniv
-    theme:            default
+    theme:            cidesaGenerator
     fields:
-      codemp: { name: Código}
-      nomemp: { name: Nombre Empresa}     
-      rupcat: { name: Clasificador de Categorías}      
-      ruppar: { name: Clasificador de Partidas}  
-      nivdis: { name: Nivel de Disponibilidad}  
-      forpre: { name: Formato de Código Presupuestario} 
-      fecini: { name: Inicio de Ejercicio}  
-      feccie: { name: Fin de Ejercicio}  
-      fecper: { name: Período}  
-      asiper: { name: Estimación Periódica}  
-      numper: { name: Números de Períodos}
-      coraep: { name: Inicio de Correlativo de AEP}  
-      peract: { name: Activo} 
-      etadef: { name: Estatus def}  
-      staprc: { name: Estatus pre}         
-      loncod: {name: Longitud}
-            
+      nomemp:      { name: Nombre de la Empresa, params: size=50 }
+      rupcat:      { name: Clasificador de Categorías }
+      ruppar:      { name: Clasificador de Partidas }
+      nivdis:      { name: Nivel Disponibilidad }
+      forpre:      { name: Formato Código Presupuestario, params: size=40,maxlength=32 }
+      asiper:      { name: Asignación Periódica }
+      numper:      { name: Número de Períodos }
+      fecper:      { name: Período }
+      fecini:      { name: Inicio del Ejercicio }
+      feccie:      { name: Fin del Ejercicio}
+      staprc:      { name: Precompromiso }
+      coraep:      { name: Inicio de Correlativo de AEP, params: maxlength=8,size=10}
+      #periodos:    { name: Períodos }
+      grid:        { name: Detalle Códigos Presupuestarios }
+      gridper:     { name: Períodos }
+
+
     list:
-      title:          Niveles
-      filters:        [codemp]
-      display:        [=codemp, nomemp]
-      fields:
-        fecini: { params: date_format='dd/MM/yy'}
-        feccie: { params: date_format='dd/MM/yy'}
-        fecper: { params: date_format='dd/MM/yy'}
+      title:          Definición de Niveles Presupuestarios
+      display:        []
       object_actions:
         _edit:        ~
         _delete:      ~
+      filters:        []
       max_per_page:   5
     edit:
-      title:          Edicion de Niveles
-      display:       [=codemp, nomemp, rupcat, ruppar, nivdis, forpre, fecini, feccie, fecper, asiper, numper, coraep, peract, etadef, staprc, loncod]
-      fields:
-        fecini: { params: date_format='dd/MM/yy'}
-        feccie: { params: date_format='dd/MM/yy'}
-        fecper: { params: date_format='dd/MM/yy'}
+      title:          Edición de Niveles Presupuestarios
+      display:
+        Datos del Código Presupuestario:        [ nomemp, _rupcat, _ruppar, _nivdis ]
+        Detalles del Código Presupuestario:     [ _grid, _forpre]
+        Configuraciones Generales:              [ _asiper, _fecper, _fecini, _feccie, _numper, _staprc, coraep]
+        Distribución de los Períodos:           [ _gridper ]
+      actions:
+        _save:        ~

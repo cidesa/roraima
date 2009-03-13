@@ -220,6 +220,7 @@ abstract class BaseCpsolmovadiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpsolmovadiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

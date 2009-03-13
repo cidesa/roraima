@@ -13,7 +13,7 @@ abstract class BaseNpinfcurPeer {
 	const CLASS_DEFAULT = 'lib.model.Npinfcur';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,6 +38,12 @@ abstract class BaseNpinfcurPeer {
 	const ANOCUL = 'npinfcur.ANOCUL';
 
 	
+	const CODPROFES = 'npinfcur.CODPROFES';
+
+	
+	const ACTIVO = 'npinfcur.ACTIVO';
+
+	
 	const ID = 'npinfcur.ID';
 
 	
@@ -46,18 +52,18 @@ abstract class BaseNpinfcurPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomtit', 'Descur', 'Instit', 'Durcur', 'Anocul', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpinfcurPeer::CODEMP, NpinfcurPeer::NOMTIT, NpinfcurPeer::DESCUR, NpinfcurPeer::INSTIT, NpinfcurPeer::DURCUR, NpinfcurPeer::ANOCUL, NpinfcurPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomtit', 'descur', 'instit', 'durcur', 'anocul', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Nomtit', 'Descur', 'Instit', 'Durcur', 'Anocul', 'Codprofes', 'Activo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpinfcurPeer::CODEMP, NpinfcurPeer::NOMTIT, NpinfcurPeer::DESCUR, NpinfcurPeer::INSTIT, NpinfcurPeer::DURCUR, NpinfcurPeer::ANOCUL, NpinfcurPeer::CODPROFES, NpinfcurPeer::ACTIVO, NpinfcurPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'nomtit', 'descur', 'instit', 'durcur', 'anocul', 'codprofes', 'activo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomtit' => 1, 'Descur' => 2, 'Instit' => 3, 'Durcur' => 4, 'Anocul' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (NpinfcurPeer::CODEMP => 0, NpinfcurPeer::NOMTIT => 1, NpinfcurPeer::DESCUR => 2, NpinfcurPeer::INSTIT => 3, NpinfcurPeer::DURCUR => 4, NpinfcurPeer::ANOCUL => 5, NpinfcurPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomtit' => 1, 'descur' => 2, 'instit' => 3, 'durcur' => 4, 'anocul' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Nomtit' => 1, 'Descur' => 2, 'Instit' => 3, 'Durcur' => 4, 'Anocul' => 5, 'Codprofes' => 6, 'Activo' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (NpinfcurPeer::CODEMP => 0, NpinfcurPeer::NOMTIT => 1, NpinfcurPeer::DESCUR => 2, NpinfcurPeer::INSTIT => 3, NpinfcurPeer::DURCUR => 4, NpinfcurPeer::ANOCUL => 5, NpinfcurPeer::CODPROFES => 6, NpinfcurPeer::ACTIVO => 7, NpinfcurPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'nomtit' => 1, 'descur' => 2, 'instit' => 3, 'durcur' => 4, 'anocul' => 5, 'codprofes' => 6, 'activo' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -122,6 +128,10 @@ abstract class BaseNpinfcurPeer {
 		$criteria->addSelectColumn(NpinfcurPeer::DURCUR);
 
 		$criteria->addSelectColumn(NpinfcurPeer::ANOCUL);
+
+		$criteria->addSelectColumn(NpinfcurPeer::CODPROFES);
+
+		$criteria->addSelectColumn(NpinfcurPeer::ACTIVO);
 
 		$criteria->addSelectColumn(NpinfcurPeer::ID);
 
@@ -225,6 +235,7 @@ abstract class BaseNpinfcurPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpinfcurPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

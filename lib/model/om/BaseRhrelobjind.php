@@ -41,148 +41,177 @@ abstract class BaseRhrelobjind extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodevdo()
-	{
+  
+  public function getCodevdo()
+  {
 
-		return $this->codevdo; 		
-	}
-	
-	public function getCodniv()
-	{
+    return trim($this->codevdo);
 
-		return $this->codniv; 		
-	}
-	
-	public function getCodobj()
-	{
+  }
+  
+  public function getCodniv()
+  {
 
-		return $this->codobj; 		
-	}
-	
-	public function getCodind()
-	{
+    return trim($this->codniv);
 
-		return $this->codind; 		
-	}
-	
-	public function getPesobj()
-	{
+  }
+  
+  public function getCodobj()
+  {
 
-		return number_format($this->pesobj,2,',','.');
-		
-	}
-	
-	public function getPlaobj()
-	{
+    return trim($this->codobj);
 
-		return number_format($this->plaobj,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodind()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codind);
+
+  }
+  
+  public function getPesobj($val=false)
+  {
+
+    if($val) return number_format($this->pesobj,2,',','.');
+    else return $this->pesobj;
+
+  }
+  
+  public function getPlaobj($val=false)
+  {
+
+    if($val) return number_format($this->plaobj,2,',','.');
+    else return $this->plaobj;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodevdo($v)
 	{
 
-		if ($this->codevdo !== $v) {
-			$this->codevdo = $v;
-			$this->modifiedColumns[] = RhrelobjindPeer::CODEVDO;
-		}
-
+    if ($this->codevdo !== $v) {
+        $this->codevdo = $v;
+        $this->modifiedColumns[] = RhrelobjindPeer::CODEVDO;
+      }
+  
 	} 
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = RhrelobjindPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = RhrelobjindPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setCodobj($v)
 	{
 
-		if ($this->codobj !== $v) {
-			$this->codobj = $v;
-			$this->modifiedColumns[] = RhrelobjindPeer::CODOBJ;
-		}
-
+    if ($this->codobj !== $v) {
+        $this->codobj = $v;
+        $this->modifiedColumns[] = RhrelobjindPeer::CODOBJ;
+      }
+  
 	} 
 	
 	public function setCodind($v)
 	{
 
-		if ($this->codind !== $v) {
-			$this->codind = $v;
-			$this->modifiedColumns[] = RhrelobjindPeer::CODIND;
-		}
-
+    if ($this->codind !== $v) {
+        $this->codind = $v;
+        $this->modifiedColumns[] = RhrelobjindPeer::CODIND;
+      }
+  
 	} 
 	
 	public function setPesobj($v)
 	{
 
-		if ($this->pesobj !== $v) {
-			$this->pesobj = $v;
-			$this->modifiedColumns[] = RhrelobjindPeer::PESOBJ;
-		}
-
+    if ($this->pesobj !== $v) {
+        $this->pesobj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhrelobjindPeer::PESOBJ;
+      }
+  
 	} 
 	
 	public function setPlaobj($v)
 	{
 
-		if ($this->plaobj !== $v) {
-			$this->plaobj = $v;
-			$this->modifiedColumns[] = RhrelobjindPeer::PLAOBJ;
-		}
-
+    if ($this->plaobj !== $v) {
+        $this->plaobj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhrelobjindPeer::PLAOBJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhrelobjindPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhrelobjindPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codevdo = $rs->getString($startcol + 0);
+      $this->codevdo = $rs->getString($startcol + 0);
 
-			$this->codniv = $rs->getString($startcol + 1);
+      $this->codniv = $rs->getString($startcol + 1);
 
-			$this->codobj = $rs->getString($startcol + 2);
+      $this->codobj = $rs->getString($startcol + 2);
 
-			$this->codind = $rs->getString($startcol + 3);
+      $this->codind = $rs->getString($startcol + 3);
 
-			$this->pesobj = $rs->getFloat($startcol + 4);
+      $this->pesobj = $rs->getFloat($startcol + 4);
 
-			$this->plaobj = $rs->getFloat($startcol + 5);
+      $this->plaobj = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhrelobjind object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhrelobjind object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +268,7 @@ abstract class BaseRhrelobjind extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhrelobjindPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhrelobjindPeer::doUpdate($this, $con);

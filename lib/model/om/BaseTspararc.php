@@ -69,284 +69,320 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumcue()
-	{
+  
+  public function getNumcue()
+  {
 
-		return $this->numcue; 		
-	}
-	
-	public function getInicue()
-	{
+    return trim($this->numcue);
 
-		return number_format($this->inicue,2,',','.');
-		
-	}
-	
-	public function getFincue()
-	{
+  }
+  
+  public function getInicue($val=false)
+  {
 
-		return number_format($this->fincue,2,',','.');
-		
-	}
-	
-	public function getIniref()
-	{
+    if($val) return number_format($this->inicue,2,',','.');
+    else return $this->inicue;
 
-		return number_format($this->iniref,2,',','.');
-		
-	}
-	
-	public function getFinref()
-	{
+  }
+  
+  public function getFincue($val=false)
+  {
 
-		return number_format($this->finref,2,',','.');
-		
-	}
-	
-	public function getInifec()
-	{
+    if($val) return number_format($this->fincue,2,',','.');
+    else return $this->fincue;
 
-		return number_format($this->inifec,2,',','.');
-		
-	}
-	
-	public function getFinfec()
-	{
+  }
+  
+  public function getIniref($val=false)
+  {
 
-		return number_format($this->finfec,2,',','.');
-		
-	}
-	
-	public function getInitip()
-	{
+    if($val) return number_format($this->iniref,2,',','.');
+    else return $this->iniref;
 
-		return number_format($this->initip,2,',','.');
-		
-	}
-	
-	public function getFintip()
-	{
+  }
+  
+  public function getFinref($val=false)
+  {
 
-		return number_format($this->fintip,2,',','.');
-		
-	}
-	
-	public function getInides()
-	{
+    if($val) return number_format($this->finref,2,',','.');
+    else return $this->finref;
 
-		return number_format($this->inides,2,',','.');
-		
-	}
-	
-	public function getFindes()
-	{
+  }
+  
+  public function getInifec($val=false)
+  {
 
-		return number_format($this->findes,2,',','.');
-		
-	}
-	
-	public function getInimon()
-	{
+    if($val) return number_format($this->inifec,2,',','.');
+    else return $this->inifec;
 
-		return number_format($this->inimon,2,',','.');
-		
-	}
-	
-	public function getFinmon()
-	{
+  }
+  
+  public function getFinfec($val=false)
+  {
 
-		return number_format($this->finmon,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->finfec,2,',','.');
+    else return $this->finfec;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getInitip($val=false)
+  {
+
+    if($val) return number_format($this->initip,2,',','.');
+    else return $this->initip;
+
+  }
+  
+  public function getFintip($val=false)
+  {
+
+    if($val) return number_format($this->fintip,2,',','.');
+    else return $this->fintip;
+
+  }
+  
+  public function getInides($val=false)
+  {
+
+    if($val) return number_format($this->inides,2,',','.');
+    else return $this->inides;
+
+  }
+  
+  public function getFindes($val=false)
+  {
+
+    if($val) return number_format($this->findes,2,',','.');
+    else return $this->findes;
+
+  }
+  
+  public function getInimon($val=false)
+  {
+
+    if($val) return number_format($this->inimon,2,',','.');
+    else return $this->inimon;
+
+  }
+  
+  public function getFinmon($val=false)
+  {
+
+    if($val) return number_format($this->finmon,2,',','.');
+    else return $this->finmon;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumcue($v)
 	{
 
-		if ($this->numcue !== $v) {
-			$this->numcue = $v;
-			$this->modifiedColumns[] = TspararcPeer::NUMCUE;
-		}
-
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = TspararcPeer::NUMCUE;
+      }
+  
 	} 
 	
 	public function setInicue($v)
 	{
 
-		if ($this->inicue !== $v) {
-			$this->inicue = $v;
-			$this->modifiedColumns[] = TspararcPeer::INICUE;
-		}
-
+    if ($this->inicue !== $v) {
+        $this->inicue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::INICUE;
+      }
+  
 	} 
 	
 	public function setFincue($v)
 	{
 
-		if ($this->fincue !== $v) {
-			$this->fincue = $v;
-			$this->modifiedColumns[] = TspararcPeer::FINCUE;
-		}
-
+    if ($this->fincue !== $v) {
+        $this->fincue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::FINCUE;
+      }
+  
 	} 
 	
 	public function setIniref($v)
 	{
 
-		if ($this->iniref !== $v) {
-			$this->iniref = $v;
-			$this->modifiedColumns[] = TspararcPeer::INIREF;
-		}
-
+    if ($this->iniref !== $v) {
+        $this->iniref = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::INIREF;
+      }
+  
 	} 
 	
 	public function setFinref($v)
 	{
 
-		if ($this->finref !== $v) {
-			$this->finref = $v;
-			$this->modifiedColumns[] = TspararcPeer::FINREF;
-		}
-
+    if ($this->finref !== $v) {
+        $this->finref = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::FINREF;
+      }
+  
 	} 
 	
 	public function setInifec($v)
 	{
 
-		if ($this->inifec !== $v) {
-			$this->inifec = $v;
-			$this->modifiedColumns[] = TspararcPeer::INIFEC;
-		}
-
+    if ($this->inifec !== $v) {
+        $this->inifec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::INIFEC;
+      }
+  
 	} 
 	
 	public function setFinfec($v)
 	{
 
-		if ($this->finfec !== $v) {
-			$this->finfec = $v;
-			$this->modifiedColumns[] = TspararcPeer::FINFEC;
-		}
-
+    if ($this->finfec !== $v) {
+        $this->finfec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::FINFEC;
+      }
+  
 	} 
 	
 	public function setInitip($v)
 	{
 
-		if ($this->initip !== $v) {
-			$this->initip = $v;
-			$this->modifiedColumns[] = TspararcPeer::INITIP;
-		}
-
+    if ($this->initip !== $v) {
+        $this->initip = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::INITIP;
+      }
+  
 	} 
 	
 	public function setFintip($v)
 	{
 
-		if ($this->fintip !== $v) {
-			$this->fintip = $v;
-			$this->modifiedColumns[] = TspararcPeer::FINTIP;
-		}
-
+    if ($this->fintip !== $v) {
+        $this->fintip = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::FINTIP;
+      }
+  
 	} 
 	
 	public function setInides($v)
 	{
 
-		if ($this->inides !== $v) {
-			$this->inides = $v;
-			$this->modifiedColumns[] = TspararcPeer::INIDES;
-		}
-
+    if ($this->inides !== $v) {
+        $this->inides = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::INIDES;
+      }
+  
 	} 
 	
 	public function setFindes($v)
 	{
 
-		if ($this->findes !== $v) {
-			$this->findes = $v;
-			$this->modifiedColumns[] = TspararcPeer::FINDES;
-		}
-
+    if ($this->findes !== $v) {
+        $this->findes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::FINDES;
+      }
+  
 	} 
 	
 	public function setInimon($v)
 	{
 
-		if ($this->inimon !== $v) {
-			$this->inimon = $v;
-			$this->modifiedColumns[] = TspararcPeer::INIMON;
-		}
-
+    if ($this->inimon !== $v) {
+        $this->inimon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::INIMON;
+      }
+  
 	} 
 	
 	public function setFinmon($v)
 	{
 
-		if ($this->finmon !== $v) {
-			$this->finmon = $v;
-			$this->modifiedColumns[] = TspararcPeer::FINMON;
-		}
-
+    if ($this->finmon !== $v) {
+        $this->finmon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TspararcPeer::FINMON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TspararcPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TspararcPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numcue = $rs->getString($startcol + 0);
+      $this->numcue = $rs->getString($startcol + 0);
 
-			$this->inicue = $rs->getFloat($startcol + 1);
+      $this->inicue = $rs->getFloat($startcol + 1);
 
-			$this->fincue = $rs->getFloat($startcol + 2);
+      $this->fincue = $rs->getFloat($startcol + 2);
 
-			$this->iniref = $rs->getFloat($startcol + 3);
+      $this->iniref = $rs->getFloat($startcol + 3);
 
-			$this->finref = $rs->getFloat($startcol + 4);
+      $this->finref = $rs->getFloat($startcol + 4);
 
-			$this->inifec = $rs->getFloat($startcol + 5);
+      $this->inifec = $rs->getFloat($startcol + 5);
 
-			$this->finfec = $rs->getFloat($startcol + 6);
+      $this->finfec = $rs->getFloat($startcol + 6);
 
-			$this->initip = $rs->getFloat($startcol + 7);
+      $this->initip = $rs->getFloat($startcol + 7);
 
-			$this->fintip = $rs->getFloat($startcol + 8);
+      $this->fintip = $rs->getFloat($startcol + 8);
 
-			$this->inides = $rs->getFloat($startcol + 9);
+      $this->inides = $rs->getFloat($startcol + 9);
 
-			$this->findes = $rs->getFloat($startcol + 10);
+      $this->findes = $rs->getFloat($startcol + 10);
 
-			$this->inimon = $rs->getFloat($startcol + 11);
+      $this->inimon = $rs->getFloat($startcol + 11);
 
-			$this->finmon = $rs->getFloat($startcol + 12);
+      $this->finmon = $rs->getFloat($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tspararc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tspararc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -403,6 +439,7 @@ abstract class BaseTspararc extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TspararcPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TspararcPeer::doUpdate($this, $con);

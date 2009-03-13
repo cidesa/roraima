@@ -215,6 +215,7 @@ abstract class BasePlannuevoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(PlannuevoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

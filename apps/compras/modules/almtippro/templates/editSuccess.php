@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Proyectos', 
+<h1><?php echo __('Proyectos',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almtippro/edit_messages', array('catippro' => $catippro, 'labels' => $labels)) ?>
-<?php include_partial('almtippro/edit_form', array('catippro' => $catippro, 'labels' => $labels, 'des_ctaord' => $des_ctaord, 'des_ctaper' => $des_ctaper)) ?>
+<?php include_partial('almtippro/edit_form', array('catippro' => $catippro, 'loncta'=>$loncta, 'mascara'=>$mascara, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

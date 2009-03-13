@@ -45,168 +45,198 @@ abstract class BaseFcaliinm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcatfis()
-	{
+  
+  public function getCodcatfis()
+  {
 
-		return $this->codcatfis; 		
-	}
-	
-	public function getCoduso()
-	{
+    return trim($this->codcatfis);
 
-		return $this->coduso; 		
-	}
-	
-	public function getAnovig()
-	{
+  }
+  
+  public function getCoduso()
+  {
 
-		return $this->anovig; 		
-	}
-	
-	public function getValorm()
-	{
+    return trim($this->coduso);
 
-		return number_format($this->valorm,2,',','.');
-		
-	}
-	
-	public function getPorvf()
-	{
+  }
+  
+  public function getAnovig()
+  {
 
-		return number_format($this->porvf,2,',','.');
-		
-	}
-	
-	public function getAliter()
-	{
+    return trim($this->anovig);
 
-		return number_format($this->aliter,2,',','.');
-		
-	}
-	
-	public function getAlicon()
-	{
+  }
+  
+  public function getValorm($val=false)
+  {
 
-		return number_format($this->alicon,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->valorm,2,',','.');
+    else return $this->valorm;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPorvf($val=false)
+  {
+
+    if($val) return number_format($this->porvf,2,',','.');
+    else return $this->porvf;
+
+  }
+  
+  public function getAliter($val=false)
+  {
+
+    if($val) return number_format($this->aliter,2,',','.');
+    else return $this->aliter;
+
+  }
+  
+  public function getAlicon($val=false)
+  {
+
+    if($val) return number_format($this->alicon,2,',','.');
+    else return $this->alicon;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcatfis($v)
 	{
 
-		if ($this->codcatfis !== $v) {
-			$this->codcatfis = $v;
-			$this->modifiedColumns[] = FcaliinmPeer::CODCATFIS;
-		}
-
+    if ($this->codcatfis !== $v) {
+        $this->codcatfis = $v;
+        $this->modifiedColumns[] = FcaliinmPeer::CODCATFIS;
+      }
+  
 	} 
 	
 	public function setCoduso($v)
 	{
 
-		if ($this->coduso !== $v) {
-			$this->coduso = $v;
-			$this->modifiedColumns[] = FcaliinmPeer::CODUSO;
-		}
-
+    if ($this->coduso !== $v) {
+        $this->coduso = $v;
+        $this->modifiedColumns[] = FcaliinmPeer::CODUSO;
+      }
+  
 	} 
 	
 	public function setAnovig($v)
 	{
 
-		if ($this->anovig !== $v) {
-			$this->anovig = $v;
-			$this->modifiedColumns[] = FcaliinmPeer::ANOVIG;
-		}
-
+    if ($this->anovig !== $v) {
+        $this->anovig = $v;
+        $this->modifiedColumns[] = FcaliinmPeer::ANOVIG;
+      }
+  
 	} 
 	
 	public function setValorm($v)
 	{
 
-		if ($this->valorm !== $v) {
-			$this->valorm = $v;
-			$this->modifiedColumns[] = FcaliinmPeer::VALORM;
-		}
-
+    if ($this->valorm !== $v) {
+        $this->valorm = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcaliinmPeer::VALORM;
+      }
+  
 	} 
 	
 	public function setPorvf($v)
 	{
 
-		if ($this->porvf !== $v) {
-			$this->porvf = $v;
-			$this->modifiedColumns[] = FcaliinmPeer::PORVF;
-		}
-
+    if ($this->porvf !== $v) {
+        $this->porvf = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcaliinmPeer::PORVF;
+      }
+  
 	} 
 	
 	public function setAliter($v)
 	{
 
-		if ($this->aliter !== $v) {
-			$this->aliter = $v;
-			$this->modifiedColumns[] = FcaliinmPeer::ALITER;
-		}
-
+    if ($this->aliter !== $v) {
+        $this->aliter = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcaliinmPeer::ALITER;
+      }
+  
 	} 
 	
 	public function setAlicon($v)
 	{
 
-		if ($this->alicon !== $v) {
-			$this->alicon = $v;
-			$this->modifiedColumns[] = FcaliinmPeer::ALICON;
-		}
-
+    if ($this->alicon !== $v) {
+        $this->alicon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcaliinmPeer::ALICON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcaliinmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcaliinmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcatfis = $rs->getString($startcol + 0);
+      $this->codcatfis = $rs->getString($startcol + 0);
 
-			$this->coduso = $rs->getString($startcol + 1);
+      $this->coduso = $rs->getString($startcol + 1);
 
-			$this->anovig = $rs->getString($startcol + 2);
+      $this->anovig = $rs->getString($startcol + 2);
 
-			$this->valorm = $rs->getFloat($startcol + 3);
+      $this->valorm = $rs->getFloat($startcol + 3);
 
-			$this->porvf = $rs->getFloat($startcol + 4);
+      $this->porvf = $rs->getFloat($startcol + 4);
 
-			$this->aliter = $rs->getFloat($startcol + 5);
+      $this->aliter = $rs->getFloat($startcol + 5);
 
-			$this->alicon = $rs->getFloat($startcol + 6);
+      $this->alicon = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcaliinm object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcaliinm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -263,6 +293,7 @@ abstract class BaseFcaliinm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcaliinmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcaliinmPeer::doUpdate($this, $con);

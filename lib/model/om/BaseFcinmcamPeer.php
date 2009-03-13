@@ -500,6 +500,7 @@ abstract class BaseFcinmcamPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcinmcamPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

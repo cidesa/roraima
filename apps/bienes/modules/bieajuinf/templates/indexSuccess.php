@@ -6,7 +6,7 @@
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
 <table width="75%" border="0">
-  <tr> 
+  <tr>
     <td width="36%" rowspan="3" valign="top">
 <div align="center">
         <p><strong><u>Informaci&oacute;n:</u></strong></p>
@@ -14,16 +14,17 @@
       </div></td>
     <td width="64%" height="39"><fieldset id="sf_fieldset_none" class="">
     <div class="form-row">
-    <p><font size="3" face="MS sans-serif">Revalorizaci&oacute;n 
+    <p><font size="3" face="MS sans-serif">Revalorizaci&oacute;n
         de Activos</font></p>
-      <p><font size="3" face="MS sans-serif">1.- Reexpresa el valor 
-        de los activos a trav&eacute;s del Ajuste por inflaci&oacute;n(API)</font><font face="Arial, Helvetica, sans-serif"> 
+      <p><font size="3" face="MS sans-serif">1.- Reexpresa el valor
+        de los activos a trav&eacute;s del Ajuste por inflaci&oacute;n(API)</font><font face="Arial, Helvetica, sans-serif">
         </font></p>
     </div>
+
     </fieldset>
     </td>
   </tr>
-  <tr> 
+  <tr>
     <td height="32">
     <fieldset id="sf_fieldset_none" class="">
     <div class="form-row">
@@ -32,7 +33,7 @@
     </div>
     </fieldset>
   </tr>
-  <tr> 
+  <tr>
     <td height="32">
     <fieldset id="sf_fieldset_none" class="">
     <div class="form-row">

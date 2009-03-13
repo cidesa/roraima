@@ -265,6 +265,7 @@ abstract class BaseFcotringPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcotringPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

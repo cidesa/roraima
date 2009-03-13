@@ -220,6 +220,7 @@ abstract class BaseOcparvalPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcparvalPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -220,6 +220,7 @@ abstract class BaseFcaccesoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcaccesoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

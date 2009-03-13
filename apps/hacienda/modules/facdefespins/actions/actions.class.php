@@ -1,247 +1,183 @@
 <?php
 
 /**
- * facdefespins actions.
+ * Facdefespins actions.
  *
  * @package    siga
- * @subpackage facdefespins
+ * @subpackage Facdefespins
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
  */
-class facdefespinsActions extends autofacdefespinsActions
+class FacdefespinsActions extends autoFacdefespinsActions
 {
-	public function executeEdit()
-	  {
-	    $this->fcdefins = $this->getFcdefinsOrCreate();
-	    $this->listatasa = Constantes::Listatasa();
-	
-	    if ($this->getRequest()->getMethod() == sfRequest::POST)
-	    {
-	      $this->updateFcdefinsFromRequest();
-	
-	      $this->saveFcdefins($this->fcdefins);
-	
-	      $this->setFlash('notice', 'Your modifications have been saved');
-	
-	      if ($this->getRequestParameter('save_and_add'))
-	      {
-	        return $this->redirect('facdefespins/create');
-	      }
-	      else if ($this->getRequestParameter('save_and_list'))
-	      {
-	        return $this->redirect('facdefespins/list');
-	      }
-	      else
-	      {
-	        return $this->redirect('facdefespins/edit?id='.$this->fcdefins->getId());
-	      }
-	    }
-	    else
-	    {
-	      $this->labels = $this->getLabels();
-	    }
-	  }	
 
-	public function handleErrorEdit()
-	  {
-	    $this->preExecute();
-	    $this->fcdefins = $this->getFcdefinsOrCreate();
-	    $this->updateFcdefinsFromRequest();
-	
-	    $this->labels = $this->getLabels();
-	
-	    return sfView::SUCCESS;
-	  }	  
-	  
-	protected function updateFcdefinsFromRequest()
-	  {
-	    $fcdefins = $this->getRequestParameter('fcdefins');
-	
-	    if (isset($fcdefins['codemp']))
-	    {
-	      $this->fcdefins->setCodemp($fcdefins['codemp']);
-	    }
-	    if (isset($fcdefins['nomemp']))
-	    {
-	      $this->fcdefins->setNomemp($fcdefins['nomemp']);
-	    }
-	    if (isset($fcdefins['loncodubifis']))
-	    {
-	      $this->fcdefins->setLoncodubifis($fcdefins['loncodubifis']);
-	    }
-	    if (isset($fcdefins['rupubifis']))
-	    {
-	      $this->fcdefins->setRupubifis($fcdefins['rupubifis']);
-	    }
-	    if (isset($fcdefins['forubifis']))
-	    {
-	      $this->fcdefins->setForubifis($fcdefins['forubifis']);
-	    }
-	    if (isset($fcdefins['loncodubimag']))
-	    {
-	      $this->fcdefins->setLoncodubimag($fcdefins['loncodubimag']);
-	    }
-	    if (isset($fcdefins['rupubimag']))
-	    {
-	      $this->fcdefins->setRupubimag($fcdefins['rupubimag']);
-	    }
-	    if (isset($fcdefins['forubimag']))
-	    {
-	      $this->fcdefins->setForubimag($fcdefins['forubimag']);
-	    }
-	    if (isset($fcdefins['codpic']))
-	    {
-	      $this->fcdefins->setCodpic($fcdefins['codpic']);
-	    }
-	    if (isset($fcdefins['nomfuep']))
-	    {
-	      $this->fcdefins->setNomfuep($fcdefins['nomfuep']);
-	    }
-	    if (isset($fcdefins['codveh']))
-	    {
-	      $this->fcdefins->setCodveh($fcdefins['codveh']);
-	    }
-	    if (isset($fcdefins['nomfuev']))
-	    {
-	      $this->fcdefins->setNomfuev($fcdefins['nomfuev']);
-	    }
-	    if (isset($fcdefins['codinm']))
-	    {
-	      $this->fcdefins->setCodinm($fcdefins['codinm']);
-	    }
-	    if (isset($fcdefins['nomfuei']))
-	    {
-	      $this->fcdefins->setNomfuei($fcdefins['nomfuei']);
-	    }
-	    if (isset($fcdefins['codpro']))
-	    {
-	      $this->fcdefins->setCodpro($fcdefins['codpro']);
-	    }
-	    if (isset($fcdefins['nomfuepr']))
-	    {
-	      $this->fcdefins->setNomfuepr($fcdefins['nomfuepr']);
-	    }
-	    if (isset($fcdefins['codesp']))
-	    {
-	      $this->fcdefins->setCodesp($fcdefins['codesp']);
-	    }
-	    if (isset($fcdefins['nomfuee']))
-	    {
-	      $this->fcdefins->setNomfuee($fcdefins['nomfuee']);
-	    }
-	    if (isset($fcdefins['codapu']))
-	    {
-	      $this->fcdefins->setCodapu($fcdefins['codapu']);
-	    }
-	    if (isset($fcdefins['nomfuea']))
-	    {
-	      $this->fcdefins->setNomfuea($fcdefins['nomfuea']);
-	    }
-	    if (isset($fcdefins['loncodact']))
-	    {
-	      $this->fcdefins->setLoncodact($fcdefins['loncodact']);
-	    }
-	    if (isset($fcdefins['rupact']))
-	    {
-	      $this->fcdefins->setRupact($fcdefins['rupact']);
-	    }
-	    if (isset($fcdefins['foract']))
-	    {
-	      $this->fcdefins->setForact($fcdefins['foract']);
-	    }
-	    if (isset($fcdefins['codajupic']))
-	    {
-	      $this->fcdefins->setCodajupic($fcdefins['codajupic']);
-	    }
-	    if (isset($fcdefins['porpic']))
-	    {
-	      $this->fcdefins->setPorpic($fcdefins['porpic']);
-	    }
-	    if (isset($fcdefins['unitas']))
-	    {
-	      $this->fcdefins->setUnitas($fcdefins['unitas']);
-	    }
-	    if (isset($fcdefins['unipic']))
-	    {
-	      $this->fcdefins->setUnipic($fcdefins['unipic']);
-	    }
-	    if (isset($fcdefins['valunitri']))
-	    {
-	      $this->fcdefins->setValunitri($fcdefins['valunitri']);
-	    }
-	    if (isset($fcdefins['loncodveh']))
-	    {
-	      $this->fcdefins->setLoncodveh($fcdefins['loncodveh']);
-	    }
-	    if (isset($fcdefins['rupveh']))
-	    {
-	      $this->fcdefins->setRupveh($fcdefins['rupveh']);
-	    }
-	    if (isset($fcdefins['forveh']))
-	    {
-	      $this->fcdefins->setForveh($fcdefins['forveh']);
-	    }
-	    if (isset($fcdefins['porveh']))
-	    {
-	      $this->fcdefins->setPorveh($fcdefins['porveh']);
-	    }
-	    if (isset($fcdefins['loncodcat']))
-	    {
-	      $this->fcdefins->setLoncodcat($fcdefins['loncodcat']);
-	    }
-	    if (isset($fcdefins['rupcat']))
-	    {
-	      $this->fcdefins->setRupcat($fcdefins['rupcat']);
-	    }
-	    if (isset($fcdefins['forcat']))
-	    {
-	      $this->fcdefins->setForcat($fcdefins['forcat']);
-	    }
-	    if (isset($fcdefins['porinm']))
-	    {
-	      $this->fcdefins->setPorinm($fcdefins['porinm']);
-	    }
-	  }	  
-	  
-	protected function getLabels()
-	  {
-	    return array(
-	      'fcdefins{codemp}' => 'Código:',
-	      'fcdefins{nomemp}' => 'Nombre:',
-	      'fcdefins{loncodubifis}' => 'Longitud del Código:',
-	      'fcdefins{rupubifis}' => 'Rupturas de Control:',
-	      'fcdefins{forubifis}' => 'Formato del Código:',
-	      'fcdefins{loncodubimag}' => 'Longitud del Codigo:',
-	      'fcdefins{rupubimag}' => 'Rupturas de Control:',
-	      'fcdefins{forubimag}' => 'Formato del Código:',
-	      'fcdefins{codpic}' => 'Patente Industria y Comercio:',
-	      'fcdefins{nomfuep}' => 'Vehiculos:',
-	      'fcdefins{codveh}' => 'Vehiculos:',
-	      'fcdefins{nomfuev}' => 'Nomfuev:',
-	      'fcdefins{codinm}' => 'Inmuebles Urbanos:',
-	      'fcdefins{nomfuei}' => 'Inmuebles Urbanos:',
-	      'fcdefins{codpro}' => 'Propaganda Comercial:',
-	      'fcdefins{nomfuepr}' => 'Propaganda Comercial:',
-	      'fcdefins{codesp}' => 'Espectáculos Públicos:',
-	      'fcdefins{nomfuee}' => 'Espectáculos Públicos:',
-	      'fcdefins{codapu}' => 'Apuesta Lícita:',
-	      'fcdefins{nomfuea}' => 'Apuesta Lícita:',
-	      'fcdefins{loncodact}' => 'Longitud del Código:',
-	      'fcdefins{rupact}' => 'Rupturas de Control:',
-	      'fcdefins{foract}' => 'Formato del Código:',
-	      'fcdefins{codajupic}' => 'Fuente de Ingreso para el Ajuste:',
-	      'fcdefins{porpic}' => 'Alicuota en Porcentaje para Actividad Comercial:',
-	      'fcdefins{unitas}' => 'Criterio para Calculo de Tasa:',
-	      'fcdefins{unipic}' => 'Unidad:',
-	      'fcdefins{valunitri}' => 'Valor de Unidad Tributaria:',
-	      'fcdefins{loncodveh}' => 'Longitud del Codigo:',
-	      'fcdefins{rupveh}' => 'Rupturas de Control:',
-	      'fcdefins{forveh}' => 'Formato del Codigo:',
-	      'fcdefins{porveh}' => 'Alicuota en Porcentaje para Vehiculos:',
-	      'fcdefins{loncodcat}' => 'Longitud del Codigo:',
-	      'fcdefins{rupcat}' => 'Rupturas de Control:',
-	      'fcdefins{forcat}' => 'Formato del Codigo:',
-	      'fcdefins{porinm}' => 'Alicuota en Porcentaje para Vehiculos:',
-	    );
-	  }	  
+  // Para incluir funcionalidades al executeEdit()
+  public function editing()
+  {
+
+
+  }
+
+  public function configGrid($reg = array(),$regelim = array())
+  {
+    $this->regelim = $regelim;
+
+    if(!count($reg)>0)
+    {
+      // Aquí va el código para traernos los registros que contendrá el grid
+      $reg = array();
+      // Aquí va el código para generar arreglo de configuración del grid
+    $this->obj = array();
+    }
+
+    // Insertar el criterio de la busqueda de registros del Grid
+    // Por ejemplo:
+
+    // $c = new Criteria();
+    // $c->add(CaartaocPeer::AJUOC ,$this->caajuoc->getAjuoc());
+    // $reg = CaartaocPeer::doSelect($c);
+
+    // De esta forma se carga la configuración del grid de un archivo yml
+    // y se le pasa el parámetro de los registros encontrados ($reg)
+    //                                                                            /nombreformulario/
+    // $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/formulario/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_caartaoc',$reg);
+
+    // Si no se quiere cargar la configuración del grid de un .yml, sedebe hacer a pie.
+    // Por ejemplo:
+
+    /*
+    // Se crea el objeto principal de la clase OpcionesGrid
+    $opciones = new OpcionesGrid();
+    // Se configuran las opciones globales del Grid
+    $opciones->setEliminar(true);
+    $opciones->setTabla('Caartalm');
+    $opciones->setAnchoGrid(1150);
+    $opciones->setTitulo('Existencia por Almacenes');
+    $opciones->setHTMLTotalFilas(' ');
+    // Se generan las columnas
+    $col1 = new Columna('Cod. Almacen');
+    $col1->setTipo(Columna::TEXTO);
+    $col1->setEsGrabable(true);
+    $col1->setAlineacionObjeto(Columna::CENTRO);
+    $col1->setAlineacionContenido(Columna::CENTRO);
+    $col1->setNombreCampo('codalm');
+    $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
+    $col1->setAjax(2,2);
+
+    $col2 = new Columna('Descripción');
+    $col2->setTipo(Columna::TEXTO);
+    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+    $col2->setNombreCampo('codalm');
+    $col2->setHTML('type="text" size="25" disabled=true');
+
+    // Se guardan las columnas en el objetos de opciones
+    $opciones->addColumna($col1);
+    $opciones->addColumna($col2);
+
+    // Se genera el arreglo de opciones necesario para generar el grid
+    $this->obj = $opciones->getConfig($per);
+     */
+
+
+  }
+
+  public function executeAjax()
+  {
+
+    $codigo = $this->getRequestParameter('codigo','');
+    // Esta variable ajax debe ser usada en cada llamado para identificar
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
+    $ajax = $this->getRequestParameter('ajax','');
+
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
+    // los datos de los objetos de la vista como pasa en un submit normal.
+
+    switch ($ajax){
+      case '1':
+        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
+        // objetos en la vista. mas informacion en
+        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+        $output = '[["","",""],["","",""],["","",""]]';
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+    }
+
+    // Instruccion para escribir en la cabecera los datos a enviar a la vista
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+    // mantener habilitar esta instrucción
+    return sfView::HEADER_ONLY;
+
+    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
+  }
+
+
+  public function validateEdit()
+  {
+    $this->coderr =-1;
+
+    // Se deben llamar a las funciones necesarias para cargar los
+    // datos de la vista que serán usados en las funciones de validación.
+    // Por ejemplo:
+
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+
+      // $this->configGrid();
+      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+      // Aqui van los llamados a los métodos de las clases del
+      // negocio para validar los datos.
+      // Los resultados de cada llamado deben ser analizados por ejemplo:
+
+      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
+
+       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
+
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
+
+      if($this->coderr!=-1){
+        return false;
+      } else return true;
+
+    }else return true;
+
+
+
+  }
+
+  /**
+   * Función para actualziar el grid en el post si ocurre un error
+   * Se pueden colocar aqui los grids adicionales
+   *
+   */
+  public function updateError()
+  {
+    //$this->configGrid();
+
+    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+    //$this->configGrid($grid[0],$grid[1]);
+
+  }
+
+  public function saving($clasemodelo)
+  {
+    return parent::saving($clasemodelo);
+  }
+
+  public function deleting($clasemodelo)
+  {
+    return parent::deleting($clasemodelo);
+  }
+
+
 }

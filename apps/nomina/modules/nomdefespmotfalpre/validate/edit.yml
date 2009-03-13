@@ -1,0 +1,34 @@
+methods:
+  post:
+   - "npmotfal{codmotfal}"
+   - "npmotfal{desmotfal}"  
+   - "npmotfal{causa}"
+names: 
+  npmotfal{codmotfal}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codmotfal
+    
+  npmotfal{desmotfal}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desmotfal
+    
+  npmotfal{causa}:
+    required:  Yes
+    required_msg: La causa no puede estar en Blanco
+    
+Validator_codmotfal:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npmotfal
+        column:       codmotfal
+        unique_error: El registro ya Existe intente con otro.
+    
+Validator_desmotfal:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripción no puede pasar mas de 250 caracteres

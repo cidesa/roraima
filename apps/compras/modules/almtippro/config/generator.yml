@@ -4,19 +4,26 @@ generator:
     model_class:      Catippro
     theme:            default
     fields:
-      codpro:      { name : Codigo }
-      despro:      { name : Descripci�n }    
+      codpro:      { name : Código }
+      despro:      { name : Descripción }
       ctaord:      { name : Cuenta de Orden }
-      ctaper:      { name : Cuenta PerContra }    
+      ctaper:      { name : Cuenta PerContra }
+      descta:      { name : Cuenta de Orden }
 
     list:
       title:          Proyectos
-      display:        [=codpro, despro, ctaord, ctaper]    
+      display:        [=codpro, despro, ctaord, ctaper]
       object_actions:
         _edit:        ~
-        _delete:      ~              
+        _delete:      ~
       filters:        [codpro, despro, ctaord, ctaper]
-      max_per_page:   5    
+      max_per_page:   10
+      sort:           codpro
     edit:
       title:          Proyectos
       display:
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

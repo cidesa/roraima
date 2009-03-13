@@ -33,111 +33,138 @@ abstract class BaseCaartpro extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->codpro);
 
-		return $this->codart; 		
-	}
-	
-	public function getTieent()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->tieent; 		
-	}
-	
-	public function getPreuni()
-	{
+    return trim($this->codart);
 
-		return number_format($this->preuni,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTieent()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tieent);
+
+  }
+  
+  public function getPreuni($val=false)
+  {
+
+    if($val) return number_format($this->preuni,2,',','.');
+    else return $this->preuni;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CaartproPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CaartproPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartproPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartproPeer::CODART;
+      }
+  
 	} 
 	
 	public function setTieent($v)
 	{
 
-		if ($this->tieent !== $v) {
-			$this->tieent = $v;
-			$this->modifiedColumns[] = CaartproPeer::TIEENT;
-		}
-
+    if ($this->tieent !== $v) {
+        $this->tieent = $v;
+        $this->modifiedColumns[] = CaartproPeer::TIEENT;
+      }
+  
 	} 
 	
 	public function setPreuni($v)
 	{
 
-		if ($this->preuni !== $v) {
-			$this->preuni = $v;
-			$this->modifiedColumns[] = CaartproPeer::PREUNI;
-		}
-
+    if ($this->preuni !== $v) {
+        $this->preuni = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartproPeer::PREUNI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartproPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartproPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->tieent = $rs->getString($startcol + 2);
+      $this->tieent = $rs->getString($startcol + 2);
 
-			$this->preuni = $rs->getFloat($startcol + 3);
+      $this->preuni = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartpro object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartpro object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

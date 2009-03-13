@@ -49,253 +49,281 @@ abstract class BaseNpvacregcalnom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->codnom);
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodcar()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getFechasalida($format = 'Y-m-d')
-	{
+    return trim($this->codemp);
 
-		if ($this->fechasalida === null || $this->fechasalida === '') {
-			return null;
-		} elseif (!is_int($this->fechasalida)) {
-						$ts = strtotime($this->fechasalida);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechasalida] as date/time value: " . var_export($this->fechasalida, true));
-			}
-		} else {
-			$ts = $this->fechasalida;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodcar()
+  {
 
-	
-	public function getFechaentrada($format = 'Y-m-d')
-	{
+    return trim($this->codcar);
 
-		if ($this->fechaentrada === null || $this->fechaentrada === '') {
-			return null;
-		} elseif (!is_int($this->fechaentrada)) {
-						$ts = strtotime($this->fechaentrada);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechaentrada] as date/time value: " . var_export($this->fechaentrada, true));
-			}
-		} else {
-			$ts = $this->fechaentrada;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFechasalida($format = 'Y-m-d')
+  {
 
-	
-	public function getPeriodos()
-	{
+    if ($this->fechasalida === null || $this->fechasalida === '') {
+      return null;
+    } elseif (!is_int($this->fechasalida)) {
+            $ts = adodb_strtotime($this->fechasalida);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechasalida] as date/time value: " . var_export($this->fechasalida, true));
+      }
+    } else {
+      $ts = $this->fechasalida;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->periodos,2,',','.');
-		
-	}
-	
-	public function getFechanomina($format = 'Y-m-d')
-	{
+  
+  public function getFechaentrada($format = 'Y-m-d')
+  {
 
-		if ($this->fechanomina === null || $this->fechanomina === '') {
-			return null;
-		} elseif (!is_int($this->fechanomina)) {
-						$ts = strtotime($this->fechanomina);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechanomina] as date/time value: " . var_export($this->fechanomina, true));
-			}
-		} else {
-			$ts = $this->fechanomina;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fechaentrada === null || $this->fechaentrada === '') {
+      return null;
+    } elseif (!is_int($this->fechaentrada)) {
+            $ts = adodb_strtotime($this->fechaentrada);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechaentrada] as date/time value: " . var_export($this->fechaentrada, true));
+      }
+    } else {
+      $ts = $this->fechaentrada;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getDiasbono()
-	{
+  
+  public function getPeriodos($val=false)
+  {
 
-		return number_format($this->diasbono,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->periodos,2,',','.');
+    else return $this->periodos;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFechanomina($format = 'Y-m-d')
+  {
+
+    if ($this->fechanomina === null || $this->fechanomina === '') {
+      return null;
+    } elseif (!is_int($this->fechanomina)) {
+            $ts = adodb_strtotime($this->fechanomina);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechanomina] as date/time value: " . var_export($this->fechanomina, true));
+      }
+    } else {
+      $ts = $this->fechanomina;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getDiasbono($val=false)
+  {
+
+    if($val) return number_format($this->diasbono,2,',','.');
+    else return $this->diasbono;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpvacregcalnomPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpvacregcalnomPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpvacregcalnomPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpvacregcalnomPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpvacregcalnomPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpvacregcalnomPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setFechasalida($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechasalida] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechasalida !== $ts) {
-			$this->fechasalida = $ts;
-			$this->modifiedColumns[] = NpvacregcalnomPeer::FECHASALIDA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechasalida] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechasalida !== $ts) {
+      $this->fechasalida = $ts;
+      $this->modifiedColumns[] = NpvacregcalnomPeer::FECHASALIDA;
+    }
 
 	} 
 	
 	public function setFechaentrada($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechaentrada] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechaentrada !== $ts) {
-			$this->fechaentrada = $ts;
-			$this->modifiedColumns[] = NpvacregcalnomPeer::FECHAENTRADA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechaentrada] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechaentrada !== $ts) {
+      $this->fechaentrada = $ts;
+      $this->modifiedColumns[] = NpvacregcalnomPeer::FECHAENTRADA;
+    }
 
 	} 
 	
 	public function setPeriodos($v)
 	{
 
-		if ($this->periodos !== $v) {
-			$this->periodos = $v;
-			$this->modifiedColumns[] = NpvacregcalnomPeer::PERIODOS;
-		}
-
+    if ($this->periodos !== $v) {
+        $this->periodos = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacregcalnomPeer::PERIODOS;
+      }
+  
 	} 
 	
 	public function setFechanomina($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechanomina] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechanomina !== $ts) {
-			$this->fechanomina = $ts;
-			$this->modifiedColumns[] = NpvacregcalnomPeer::FECHANOMINA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechanomina] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechanomina !== $ts) {
+      $this->fechanomina = $ts;
+      $this->modifiedColumns[] = NpvacregcalnomPeer::FECHANOMINA;
+    }
 
 	} 
 	
 	public function setDiasbono($v)
 	{
 
-		if ($this->diasbono !== $v) {
-			$this->diasbono = $v;
-			$this->modifiedColumns[] = NpvacregcalnomPeer::DIASBONO;
-		}
-
+    if ($this->diasbono !== $v) {
+        $this->diasbono = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacregcalnomPeer::DIASBONO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacregcalnomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacregcalnomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codemp = $rs->getString($startcol + 1);
+      $this->codemp = $rs->getString($startcol + 1);
 
-			$this->codcar = $rs->getString($startcol + 2);
+      $this->codcar = $rs->getString($startcol + 2);
 
-			$this->fechasalida = $rs->getDate($startcol + 3, null);
+      $this->fechasalida = $rs->getDate($startcol + 3, null);
 
-			$this->fechaentrada = $rs->getDate($startcol + 4, null);
+      $this->fechaentrada = $rs->getDate($startcol + 4, null);
 
-			$this->periodos = $rs->getFloat($startcol + 5);
+      $this->periodos = $rs->getFloat($startcol + 5);
 
-			$this->fechanomina = $rs->getDate($startcol + 6, null);
+      $this->fechanomina = $rs->getDate($startcol + 6, null);
 
-			$this->diasbono = $rs->getFloat($startcol + 7);
+      $this->diasbono = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacregcalnom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacregcalnom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -352,6 +380,7 @@ abstract class BaseNpvacregcalnom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacregcalnomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacregcalnomPeer::doUpdate($this, $con);

@@ -1,0 +1,40 @@
+opciones:                  # Opciones generales
+  name:                    requisicion
+  eliminar:                false
+  tabla:                   careqart
+  anchogrid:               820
+  ancho:                   780
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Actualizar
+  tipo:                    k
+  nombrecampo:             check
+  html:                    [size="3"]
+  esgrabable:              true
+2:       # Columna 2
+  titulo:                  Referencia
+  tipo:                    t
+  nombrecampo:             reqart
+  html:                    [size="10" ]
+  esgrabable:              true
+3:       # Columna 3
+  titulo:                  Descripcion
+  tipo:                    a
+  nombrecampo:             desreq
+  html:                    [size="40x2" ]
+  esgrabable:              false
+4:       # Columna 4
+  titulo:                  Fecha
+  tipo:                    f
+  nombrecampo:             fecreq
+  html:                    [size="10"]
+  esgrabable:              false
+5:       # Columna 5
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monreq
+  html:                    [size="10" ]
+  esgrabable:              false
+

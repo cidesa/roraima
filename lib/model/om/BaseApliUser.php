@@ -37,129 +37,156 @@ abstract class BaseApliUser extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodapl()
-	{
+  
+  public function getCodapl()
+  {
 
-		return $this->codapl; 		
-	}
-	
-	public function getLoguse()
-	{
+    return trim($this->codapl);
 
-		return $this->loguse; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getLoguse()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomopc()
-	{
+    return trim($this->loguse);
 
-		return $this->nomopc; 		
-	}
-	
-	public function getPriuse()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return number_format($this->priuse,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codemp);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomopc()
+  {
+
+    return trim($this->nomopc);
+
+  }
+  
+  public function getPriuse()
+  {
+
+    return trim($this->priuse);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodapl($v)
 	{
 
-		if ($this->codapl !== $v) {
-			$this->codapl = $v;
-			$this->modifiedColumns[] = ApliUserPeer::CODAPL;
-		}
-
+    if ($this->codapl !== $v) {
+        $this->codapl = $v;
+        $this->modifiedColumns[] = ApliUserPeer::CODAPL;
+      }
+  
 	} 
 	
 	public function setLoguse($v)
 	{
 
-		if ($this->loguse !== $v) {
-			$this->loguse = $v;
-			$this->modifiedColumns[] = ApliUserPeer::LOGUSE;
-		}
-
+    if ($this->loguse !== $v) {
+        $this->loguse = $v;
+        $this->modifiedColumns[] = ApliUserPeer::LOGUSE;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = ApliUserPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = ApliUserPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomopc($v)
 	{
 
-		if ($this->nomopc !== $v) {
-			$this->nomopc = $v;
-			$this->modifiedColumns[] = ApliUserPeer::NOMOPC;
-		}
-
+    if ($this->nomopc !== $v) {
+        $this->nomopc = $v;
+        $this->modifiedColumns[] = ApliUserPeer::NOMOPC;
+      }
+  
 	} 
 	
 	public function setPriuse($v)
 	{
 
-		if ($this->priuse !== $v) {
-			$this->priuse = $v;
-			$this->modifiedColumns[] = ApliUserPeer::PRIUSE;
-		}
-
+    if ($this->priuse !== $v) {
+        $this->priuse = $v;
+        $this->modifiedColumns[] = ApliUserPeer::PRIUSE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ApliUserPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ApliUserPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codapl = $rs->getString($startcol + 0);
+      $this->codapl = $rs->getString($startcol + 0);
 
-			$this->loguse = $rs->getString($startcol + 1);
+      $this->loguse = $rs->getString($startcol + 1);
 
-			$this->codemp = $rs->getString($startcol + 2);
+      $this->codemp = $rs->getString($startcol + 2);
 
-			$this->nomopc = $rs->getString($startcol + 3);
+      $this->nomopc = $rs->getString($startcol + 3);
 
-			$this->priuse = $rs->getFloat($startcol + 4);
+      $this->priuse = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating ApliUser object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating ApliUser object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +243,7 @@ abstract class BaseApliUser extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ApliUserPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ApliUserPeer::doUpdate($this, $con);

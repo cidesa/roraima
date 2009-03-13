@@ -4,10 +4,10 @@ generator:
     model_class:      Careqart
     theme:            default
     fields:
-      reqart:      { name : Número, params: maxlenght=8 }
+      reqart:      { name : Número, params: maxlength=8 }
       fecreq:      { name : Fecha, params: date_format='dd/MM/yy' }
       desreq:      { name : Descripción }
-      monreq:      { name : Monto }      
+      monreq:      { name : Monto, params: maxlength=17 }
       stareq:      { name : Estatus }
       codcatreq:   { name : Unidad }
       desubi:      { name : Descripción Unidad }
@@ -16,13 +16,18 @@ generator:
       display:        [=reqart, fecreq, desreq, monreq, stareq, codcatreq, desubi]
       filters:        [reqart, fecreq]
       max_per_page:	  5
+      sort:           reqart
       object_actions:
         _edit:        ~
-        _delete:        ~      
+        _delete:        ~
     edit:
       title:          Edición de Requisiciones
-      display:        [reqart, fecreq, desreq, monreq, codcatreq, desubi]  
+      display:        [reqart, fecreq, desreq, monreq, codcatreq, desubi]
       fields:
         fecreq: { params: date_format='dd/MM/yy' }
-        reqart: { help: Máximo 8 caracteres}        
-             
+        reqart: { help: Máximo 8 caracteres}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -220,6 +220,7 @@ abstract class BaseCiperejePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CiperejePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

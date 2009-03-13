@@ -14,10 +14,14 @@ generator:
       filters:		  [codban, nomban]
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+      sort: codban
     edit:
-      title:          Edicion de Banco
+      title:          Edición de Banco
       display:        [codban, nomban]
-            
+      actions:
+        _list:          ~
+        _save:          ~
+        _create:        ~
+        _delete:        ~

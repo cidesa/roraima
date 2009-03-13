@@ -61,6 +61,18 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 
 
 	
+	protected $modo;
+
+
+	
+	protected $monreb = 0;
+
+
+	
+	protected $monexo = 0;
+
+
+	
 	protected $id;
 
 	
@@ -69,300 +81,394 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumdoc()
-	{
+  
+  public function getNumdoc()
+  {
 
-		return $this->numdoc; 		
-	}
-	
-	public function getCodact()
-	{
+    return trim($this->numdoc);
 
-		return $this->codact; 		
-	}
-	
-	public function getExoner()
-	{
+  }
+  
+  public function getCodact()
+  {
 
-		return $this->exoner; 		
-	}
-	
-	public function getMonact()
-	{
+    return trim($this->codact);
 
-		return number_format($this->monact,2,',','.');
-		
-	}
-	
-	public function getPorexo()
-	{
+  }
+  
+  public function getExoner()
+  {
 
-		return number_format($this->porexo,2,',','.');
-		
-	}
-	
-	public function getEstact()
-	{
+    return trim($this->exoner);
 
-		return $this->estact; 		
-	}
-	
-	public function getExento()
-	{
+  }
+  
+  public function getMonact($val=false)
+  {
 
-		return $this->exento; 		
-	}
-	
-	public function getRebaja()
-	{
+    if($val) return number_format($this->monact,2,',','.');
+    else return $this->monact;
 
-		return $this->rebaja; 		
-	}
-	
-	public function getPorreb()
-	{
+  }
+  
+  public function getPorexo($val=false)
+  {
 
-		return number_format($this->porreb,2,',','.');
-		
-	}
-	
-	public function getMonant()
-	{
+    if($val) return number_format($this->porexo,2,',','.');
+    else return $this->porexo;
 
-		return number_format($this->monant,2,',','.');
-		
-	}
-	
-	public function getImpuesto()
-	{
+  }
+  
+  public function getEstact()
+  {
 
-		return number_format($this->impuesto,2,',','.');
-		
-	}
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+    return trim($this->estact);
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getExento()
+  {
 
-	
-	public function getAnodec()
-	{
+    return trim($this->exento);
 
-		return $this->anodec; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getRebaja()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->rebaja);
+
+  }
+  
+  public function getPorreb($val=false)
+  {
+
+    if($val) return number_format($this->porreb,2,',','.');
+    else return $this->porreb;
+
+  }
+  
+  public function getMonant($val=false)
+  {
+
+    if($val) return number_format($this->monant,2,',','.');
+    else return $this->monant;
+
+  }
+  
+  public function getImpuesto($val=false)
+  {
+
+    if($val) return number_format($this->impuesto,2,',','.');
+    else return $this->impuesto;
+
+  }
+  
+  public function getFecven($format = 'Y-m-d')
+  {
+
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getAnodec()
+  {
+
+    return trim($this->anodec);
+
+  }
+  
+  public function getModo()
+  {
+
+    return trim($this->modo);
+
+  }
+  
+  public function getMonreb($val=false)
+  {
+
+    if($val) return number_format($this->monreb,2,',','.');
+    else return $this->monreb;
+
+  }
+  
+  public function getMonexo($val=false)
+  {
+
+    if($val) return number_format($this->monexo,2,',','.');
+    else return $this->monexo;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumdoc($v)
 	{
 
-		if ($this->numdoc !== $v) {
-			$this->numdoc = $v;
-			$this->modifiedColumns[] = FcactpicPeer::NUMDOC;
-		}
-
+    if ($this->numdoc !== $v) {
+        $this->numdoc = $v;
+        $this->modifiedColumns[] = FcactpicPeer::NUMDOC;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = FcactpicPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = FcactpicPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setExoner($v)
 	{
 
-		if ($this->exoner !== $v) {
-			$this->exoner = $v;
-			$this->modifiedColumns[] = FcactpicPeer::EXONER;
-		}
-
+    if ($this->exoner !== $v) {
+        $this->exoner = $v;
+        $this->modifiedColumns[] = FcactpicPeer::EXONER;
+      }
+  
 	} 
 	
 	public function setMonact($v)
 	{
 
-		if ($this->monact !== $v) {
-			$this->monact = $v;
-			$this->modifiedColumns[] = FcactpicPeer::MONACT;
-		}
-
+    if ($this->monact !== $v) {
+        $this->monact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactpicPeer::MONACT;
+      }
+  
 	} 
 	
 	public function setPorexo($v)
 	{
 
-		if ($this->porexo !== $v) {
-			$this->porexo = $v;
-			$this->modifiedColumns[] = FcactpicPeer::POREXO;
-		}
-
+    if ($this->porexo !== $v) {
+        $this->porexo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactpicPeer::POREXO;
+      }
+  
 	} 
 	
 	public function setEstact($v)
 	{
 
-		if ($this->estact !== $v) {
-			$this->estact = $v;
-			$this->modifiedColumns[] = FcactpicPeer::ESTACT;
-		}
-
+    if ($this->estact !== $v) {
+        $this->estact = $v;
+        $this->modifiedColumns[] = FcactpicPeer::ESTACT;
+      }
+  
 	} 
 	
 	public function setExento($v)
 	{
 
-		if ($this->exento !== $v) {
-			$this->exento = $v;
-			$this->modifiedColumns[] = FcactpicPeer::EXENTO;
-		}
-
+    if ($this->exento !== $v) {
+        $this->exento = $v;
+        $this->modifiedColumns[] = FcactpicPeer::EXENTO;
+      }
+  
 	} 
 	
 	public function setRebaja($v)
 	{
 
-		if ($this->rebaja !== $v) {
-			$this->rebaja = $v;
-			$this->modifiedColumns[] = FcactpicPeer::REBAJA;
-		}
-
+    if ($this->rebaja !== $v) {
+        $this->rebaja = $v;
+        $this->modifiedColumns[] = FcactpicPeer::REBAJA;
+      }
+  
 	} 
 	
 	public function setPorreb($v)
 	{
 
-		if ($this->porreb !== $v) {
-			$this->porreb = $v;
-			$this->modifiedColumns[] = FcactpicPeer::PORREB;
-		}
-
+    if ($this->porreb !== $v) {
+        $this->porreb = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactpicPeer::PORREB;
+      }
+  
 	} 
 	
 	public function setMonant($v)
 	{
 
-		if ($this->monant !== $v) {
-			$this->monant = $v;
-			$this->modifiedColumns[] = FcactpicPeer::MONANT;
-		}
-
+    if ($this->monant !== $v) {
+        $this->monant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactpicPeer::MONANT;
+      }
+  
 	} 
 	
 	public function setImpuesto($v)
 	{
 
-		if ($this->impuesto !== $v) {
-			$this->impuesto = $v;
-			$this->modifiedColumns[] = FcactpicPeer::IMPUESTO;
-		}
-
+    if ($this->impuesto !== $v) {
+        $this->impuesto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactpicPeer::IMPUESTO;
+      }
+  
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = FcactpicPeer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = FcactpicPeer::FECVEN;
+    }
 
 	} 
 	
 	public function setAnodec($v)
 	{
 
-		if ($this->anodec !== $v) {
-			$this->anodec = $v;
-			$this->modifiedColumns[] = FcactpicPeer::ANODEC;
-		}
+    if ($this->anodec !== $v) {
+        $this->anodec = $v;
+        $this->modifiedColumns[] = FcactpicPeer::ANODEC;
+      }
+  
+	} 
+	
+	public function setModo($v)
+	{
 
+    if ($this->modo !== $v) {
+        $this->modo = $v;
+        $this->modifiedColumns[] = FcactpicPeer::MODO;
+      }
+  
+	} 
+	
+	public function setMonreb($v)
+	{
+
+    if ($this->monreb !== $v || $v === 0) {
+        $this->monreb = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactpicPeer::MONREB;
+      }
+  
+	} 
+	
+	public function setMonexo($v)
+	{
+
+    if ($this->monexo !== $v || $v === 0) {
+        $this->monexo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcactpicPeer::MONEXO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcactpicPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcactpicPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numdoc = $rs->getString($startcol + 0);
+      $this->numdoc = $rs->getString($startcol + 0);
 
-			$this->codact = $rs->getString($startcol + 1);
+      $this->codact = $rs->getString($startcol + 1);
 
-			$this->exoner = $rs->getString($startcol + 2);
+      $this->exoner = $rs->getString($startcol + 2);
 
-			$this->monact = $rs->getFloat($startcol + 3);
+      $this->monact = $rs->getFloat($startcol + 3);
 
-			$this->porexo = $rs->getFloat($startcol + 4);
+      $this->porexo = $rs->getFloat($startcol + 4);
 
-			$this->estact = $rs->getString($startcol + 5);
+      $this->estact = $rs->getString($startcol + 5);
 
-			$this->exento = $rs->getString($startcol + 6);
+      $this->exento = $rs->getString($startcol + 6);
 
-			$this->rebaja = $rs->getString($startcol + 7);
+      $this->rebaja = $rs->getString($startcol + 7);
 
-			$this->porreb = $rs->getFloat($startcol + 8);
+      $this->porreb = $rs->getFloat($startcol + 8);
 
-			$this->monant = $rs->getFloat($startcol + 9);
+      $this->monant = $rs->getFloat($startcol + 9);
 
-			$this->impuesto = $rs->getFloat($startcol + 10);
+      $this->impuesto = $rs->getFloat($startcol + 10);
 
-			$this->fecven = $rs->getDate($startcol + 11, null);
+      $this->fecven = $rs->getDate($startcol + 11, null);
 
-			$this->anodec = $rs->getString($startcol + 12);
+      $this->anodec = $rs->getString($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->modo = $rs->getString($startcol + 13);
 
-			$this->resetModified();
+      $this->monreb = $rs->getFloat($startcol + 14);
 
-			$this->setNew(false);
+      $this->monexo = $rs->getFloat($startcol + 15);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcactpic object", $e);
-		}
-	}
+      $this->id = $rs->getInt($startcol + 16);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 17; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcactpic object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -419,6 +525,7 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcactpicPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcactpicPeer::doUpdate($this, $con);
@@ -524,6 +631,15 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 				return $this->getAnodec();
 				break;
 			case 13:
+				return $this->getModo();
+				break;
+			case 14:
+				return $this->getMonreb();
+				break;
+			case 15:
+				return $this->getMonexo();
+				break;
+			case 16:
 				return $this->getId();
 				break;
 			default:
@@ -549,7 +665,10 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 			$keys[10] => $this->getImpuesto(),
 			$keys[11] => $this->getFecven(),
 			$keys[12] => $this->getAnodec(),
-			$keys[13] => $this->getId(),
+			$keys[13] => $this->getModo(),
+			$keys[14] => $this->getMonreb(),
+			$keys[15] => $this->getMonexo(),
+			$keys[16] => $this->getId(),
 		);
 		return $result;
 	}
@@ -605,6 +724,15 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 				$this->setAnodec($value);
 				break;
 			case 13:
+				$this->setModo($value);
+				break;
+			case 14:
+				$this->setMonreb($value);
+				break;
+			case 15:
+				$this->setMonexo($value);
+				break;
+			case 16:
 				$this->setId($value);
 				break;
 		} 	}
@@ -627,7 +755,10 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[10], $arr)) $this->setImpuesto($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setFecven($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setAnodec($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
+		if (array_key_exists($keys[13], $arr)) $this->setModo($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setMonreb($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setMonexo($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
 	}
 
 	
@@ -648,6 +779,9 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcactpicPeer::IMPUESTO)) $criteria->add(FcactpicPeer::IMPUESTO, $this->impuesto);
 		if ($this->isColumnModified(FcactpicPeer::FECVEN)) $criteria->add(FcactpicPeer::FECVEN, $this->fecven);
 		if ($this->isColumnModified(FcactpicPeer::ANODEC)) $criteria->add(FcactpicPeer::ANODEC, $this->anodec);
+		if ($this->isColumnModified(FcactpicPeer::MODO)) $criteria->add(FcactpicPeer::MODO, $this->modo);
+		if ($this->isColumnModified(FcactpicPeer::MONREB)) $criteria->add(FcactpicPeer::MONREB, $this->monreb);
+		if ($this->isColumnModified(FcactpicPeer::MONEXO)) $criteria->add(FcactpicPeer::MONEXO, $this->monexo);
 		if ($this->isColumnModified(FcactpicPeer::ID)) $criteria->add(FcactpicPeer::ID, $this->id);
 
 		return $criteria;
@@ -704,6 +838,12 @@ abstract class BaseFcactpic extends BaseObject  implements Persistent {
 		$copyObj->setFecven($this->fecven);
 
 		$copyObj->setAnodec($this->anodec);
+
+		$copyObj->setModo($this->modo);
+
+		$copyObj->setMonreb($this->monreb);
+
+		$copyObj->setMonexo($this->monexo);
 
 
 		$copyObj->setNew(true);

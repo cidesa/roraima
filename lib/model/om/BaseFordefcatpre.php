@@ -25,7 +25,7 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 
 
 	
-	protected $objesp;
+	protected $objsec;
 
 
 	
@@ -49,182 +49,213 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcat()
-	{
+  
+  public function getCodcat()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getNomcat()
-	{
+    return trim($this->codcat);
 
-		return $this->nomcat; 		
-	}
-	
-	public function getDescat()
-	{
+  }
+  
+  public function getNomcat()
+  {
 
-		return $this->descat; 		
-	}
-	
-	public function getCoduni()
-	{
+    return trim($this->nomcat);
 
-		return $this->coduni; 		
-	}
-	
-	public function getObjesp()
-	{
+  }
+  
+  public function getDescat()
+  {
 
-		return $this->objesp; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->descat);
 
-		return $this->codemp; 		
-	}
-	
-	public function getMision()
-	{
+  }
+  
+  public function getCoduni()
+  {
 
-		return $this->mision; 		
-	}
-	
-	public function getVision()
-	{
+    return trim($this->coduni);
 
-		return $this->vision; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getObjsec()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->objsec);
+
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getMision()
+  {
+
+    return trim($this->mision);
+
+  }
+  
+  public function getVision()
+  {
+
+    return trim($this->vision);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = FordefcatprePeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = FordefcatprePeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setNomcat($v)
 	{
 
-		if ($this->nomcat !== $v) {
-			$this->nomcat = $v;
-			$this->modifiedColumns[] = FordefcatprePeer::NOMCAT;
-		}
-
+    if ($this->nomcat !== $v) {
+        $this->nomcat = $v;
+        $this->modifiedColumns[] = FordefcatprePeer::NOMCAT;
+      }
+  
 	} 
 	
 	public function setDescat($v)
 	{
 
-		if ($this->descat !== $v) {
-			$this->descat = $v;
-			$this->modifiedColumns[] = FordefcatprePeer::DESCAT;
-		}
-
+    if ($this->descat !== $v) {
+        $this->descat = $v;
+        $this->modifiedColumns[] = FordefcatprePeer::DESCAT;
+      }
+  
 	} 
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = FordefcatprePeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = FordefcatprePeer::CODUNI;
+      }
+  
 	} 
 	
-	public function setObjesp($v)
+	public function setObjsec($v)
 	{
 
-		if ($this->objesp !== $v) {
-			$this->objesp = $v;
-			$this->modifiedColumns[] = FordefcatprePeer::OBJESP;
-		}
-
+    if ($this->objsec !== $v) {
+        $this->objsec = $v;
+        $this->modifiedColumns[] = FordefcatprePeer::OBJSEC;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = FordefcatprePeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = FordefcatprePeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setMision($v)
 	{
 
-		if ($this->mision !== $v) {
-			$this->mision = $v;
-			$this->modifiedColumns[] = FordefcatprePeer::MISION;
-		}
-
+    if ($this->mision !== $v) {
+        $this->mision = $v;
+        $this->modifiedColumns[] = FordefcatprePeer::MISION;
+      }
+  
 	} 
 	
 	public function setVision($v)
 	{
 
-		if ($this->vision !== $v) {
-			$this->vision = $v;
-			$this->modifiedColumns[] = FordefcatprePeer::VISION;
-		}
-
+    if ($this->vision !== $v) {
+        $this->vision = $v;
+        $this->modifiedColumns[] = FordefcatprePeer::VISION;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefcatprePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefcatprePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcat = $rs->getString($startcol + 0);
+      $this->codcat = $rs->getString($startcol + 0);
 
-			$this->nomcat = $rs->getString($startcol + 1);
+      $this->nomcat = $rs->getString($startcol + 1);
 
-			$this->descat = $rs->getString($startcol + 2);
+      $this->descat = $rs->getString($startcol + 2);
 
-			$this->coduni = $rs->getString($startcol + 3);
+      $this->coduni = $rs->getString($startcol + 3);
 
-			$this->objesp = $rs->getString($startcol + 4);
+      $this->objsec = $rs->getString($startcol + 4);
 
-			$this->codemp = $rs->getString($startcol + 5);
+      $this->codemp = $rs->getString($startcol + 5);
 
-			$this->mision = $rs->getString($startcol + 6);
+      $this->mision = $rs->getString($startcol + 6);
 
-			$this->vision = $rs->getString($startcol + 7);
+      $this->vision = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefcatpre object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefcatpre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -281,6 +312,7 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefcatprePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefcatprePeer::doUpdate($this, $con);
@@ -359,7 +391,7 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 				return $this->getCoduni();
 				break;
 			case 4:
-				return $this->getObjesp();
+				return $this->getObjsec();
 				break;
 			case 5:
 				return $this->getCodemp();
@@ -387,7 +419,7 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 			$keys[1] => $this->getNomcat(),
 			$keys[2] => $this->getDescat(),
 			$keys[3] => $this->getCoduni(),
-			$keys[4] => $this->getObjesp(),
+			$keys[4] => $this->getObjsec(),
 			$keys[5] => $this->getCodemp(),
 			$keys[6] => $this->getMision(),
 			$keys[7] => $this->getVision(),
@@ -420,7 +452,7 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 				$this->setCoduni($value);
 				break;
 			case 4:
-				$this->setObjesp($value);
+				$this->setObjsec($value);
 				break;
 			case 5:
 				$this->setCodemp($value);
@@ -445,7 +477,7 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setNomcat($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setDescat($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCoduni($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setObjesp($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setObjsec($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setCodemp($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setMision($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setVision($arr[$keys[7]]);
@@ -461,7 +493,7 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FordefcatprePeer::NOMCAT)) $criteria->add(FordefcatprePeer::NOMCAT, $this->nomcat);
 		if ($this->isColumnModified(FordefcatprePeer::DESCAT)) $criteria->add(FordefcatprePeer::DESCAT, $this->descat);
 		if ($this->isColumnModified(FordefcatprePeer::CODUNI)) $criteria->add(FordefcatprePeer::CODUNI, $this->coduni);
-		if ($this->isColumnModified(FordefcatprePeer::OBJESP)) $criteria->add(FordefcatprePeer::OBJESP, $this->objesp);
+		if ($this->isColumnModified(FordefcatprePeer::OBJSEC)) $criteria->add(FordefcatprePeer::OBJSEC, $this->objsec);
 		if ($this->isColumnModified(FordefcatprePeer::CODEMP)) $criteria->add(FordefcatprePeer::CODEMP, $this->codemp);
 		if ($this->isColumnModified(FordefcatprePeer::MISION)) $criteria->add(FordefcatprePeer::MISION, $this->mision);
 		if ($this->isColumnModified(FordefcatprePeer::VISION)) $criteria->add(FordefcatprePeer::VISION, $this->vision);
@@ -504,7 +536,7 @@ abstract class BaseFordefcatpre extends BaseObject  implements Persistent {
 
 		$copyObj->setCoduni($this->coduni);
 
-		$copyObj->setObjesp($this->objesp);
+		$copyObj->setObjsec($this->objsec);
 
 		$copyObj->setCodemp($this->codemp);
 

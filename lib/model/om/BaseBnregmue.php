@@ -225,1146 +225,1214 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodmue()
-	{
+    return trim($this->codact);
 
-		return $this->codmue; 		
-	}
-	
-	public function getDesmue()
-	{
+  }
+  
+  public function getCodmue()
+  {
 
-		return $this->desmue; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->codmue);
 
-		return $this->codpro; 		
-	}
-	
-	public function getOrdcom()
-	{
+  }
+  
+  public function getDesmue()
+  {
 
-		return $this->ordcom; 		
-	}
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    return trim($this->desmue);
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodpro()
+  {
 
-	
-	public function getFeccom($format = 'Y-m-d')
-	{
+    return trim($this->codpro);
 
-		if ($this->feccom === null || $this->feccom === '') {
-			return null;
-		} elseif (!is_int($this->feccom)) {
-						$ts = strtotime($this->feccom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
-			}
-		} else {
-			$ts = $this->feccom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getOrdcom()
+  {
 
-	
-	public function getFecdep($format = 'Y-m-d')
-	{
+    return trim($this->ordcom);
 
-		if ($this->fecdep === null || $this->fecdep === '') {
-			return null;
-		} elseif (!is_int($this->fecdep)) {
-						$ts = strtotime($this->fecdep);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdep] as date/time value: " . var_export($this->fecdep, true));
-			}
-		} else {
-			$ts = $this->fecdep;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-	
-	public function getFecaju($format = 'Y-m-d')
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecaju === null || $this->fecaju === '') {
-			return null;
-		} elseif (!is_int($this->fecaju)) {
-						$ts = strtotime($this->fecaju);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
-			}
-		} else {
-			$ts = $this->fecaju;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFeccom($format = 'Y-m-d')
+  {
 
-	
-	public function getFecact($format = 'Y-m-d')
-	{
+    if ($this->feccom === null || $this->feccom === '') {
+      return null;
+    } elseif (!is_int($this->feccom)) {
+            $ts = adodb_strtotime($this->feccom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
+      }
+    } else {
+      $ts = $this->feccom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecact === null || $this->fecact === '') {
-			return null;
-		} elseif (!is_int($this->fecact)) {
-						$ts = strtotime($this->fecact);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecact] as date/time value: " . var_export($this->fecact, true));
-			}
-		} else {
-			$ts = $this->fecact;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecdep($format = 'Y-m-d')
+  {
 
-	
-	public function getFecexp($format = 'Y-m-d')
-	{
+    if ($this->fecdep === null || $this->fecdep === '') {
+      return null;
+    } elseif (!is_int($this->fecdep)) {
+            $ts = adodb_strtotime($this->fecdep);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdep] as date/time value: " . var_export($this->fecdep, true));
+      }
+    } else {
+      $ts = $this->fecdep;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecexp === null || $this->fecexp === '') {
-			return null;
-		} elseif (!is_int($this->fecexp)) {
-						$ts = strtotime($this->fecexp);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
-			}
-		} else {
-			$ts = $this->fecexp;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecaju($format = 'Y-m-d')
+  {
 
-	
-	public function getOrdrcp()
-	{
+    if ($this->fecaju === null || $this->fecaju === '') {
+      return null;
+    } elseif (!is_int($this->fecaju)) {
+            $ts = adodb_strtotime($this->fecaju);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
+      }
+    } else {
+      $ts = $this->fecaju;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->ordrcp; 		
-	}
-	
-	public function getFotmue()
-	{
+  
+  public function getFecact($format = 'Y-m-d')
+  {
 
-		return $this->fotmue; 		
-	}
-	
-	public function getMarmue()
-	{
+    if ($this->fecact === null || $this->fecact === '') {
+      return null;
+    } elseif (!is_int($this->fecact)) {
+            $ts = adodb_strtotime($this->fecact);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecact] as date/time value: " . var_export($this->fecact, true));
+      }
+    } else {
+      $ts = $this->fecact;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->marmue; 		
-	}
-	
-	public function getModmue()
-	{
+  
+  public function getFecexp($format = 'Y-m-d')
+  {
 
-		return $this->modmue; 		
-	}
-	
-	public function getAnomue()
-	{
+    if ($this->fecexp === null || $this->fecexp === '') {
+      return null;
+    } elseif (!is_int($this->fecexp)) {
+            $ts = adodb_strtotime($this->fecexp);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
+      }
+    } else {
+      $ts = $this->fecexp;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->anomue; 		
-	}
-	
-	public function getColmue()
-	{
+  
+  public function getOrdrcp()
+  {
 
-		return $this->colmue; 		
-	}
-	
-	public function getCodubi()
-	{
+    return trim($this->ordrcp);
 
-		return $this->codubi; 		
-	}
-	
-	public function getPesmue()
-	{
+  }
+  
+  public function getFotmue()
+  {
 
-		return $this->pesmue; 		
-	}
-	
-	public function getCapmue()
-	{
+    return trim($this->fotmue);
 
-		return $this->capmue; 		
-	}
-	
-	public function getTipmue()
-	{
+  }
+  
+  public function getMarmue()
+  {
 
-		return $this->tipmue; 		
-	}
-	
-	public function getViduti()
-	{
+    return trim($this->marmue);
 
-		return $this->viduti; 		
-	}
-	
-	public function getLngmue()
-	{
+  }
+  
+  public function getModmue()
+  {
 
-		return $this->lngmue; 		
-	}
-	
-	public function getNropie()
-	{
+    return trim($this->modmue);
 
-		return $this->nropie; 		
-	}
-	
-	public function getSermue()
-	{
+  }
+  
+  public function getAnomue()
+  {
 
-		return $this->sermue; 		
-	}
-	
-	public function getUsomue()
-	{
+    return trim($this->anomue);
 
-		return $this->usomue; 		
-	}
-	
-	public function getAltmue()
-	{
+  }
+  
+  public function getColmue()
+  {
 
-		return $this->altmue; 		
-	}
-	
-	public function getLarmue()
-	{
+    return trim($this->colmue);
 
-		return $this->larmue; 		
-	}
-	
-	public function getAncmue()
-	{
+  }
+  
+  public function getCodubi()
+  {
 
-		return $this->ancmue; 		
-	}
-	
-	public function getCoddis()
-	{
+    return trim($this->codubi);
 
-		return $this->coddis; 		
-	}
-	
-	public function getDetmue()
-	{
+  }
+  
+  public function getPesmue()
+  {
 
-		return $this->detmue; 		
-	}
-	
-	public function getEdomue()
-	{
+    return trim($this->pesmue);
 
-		return $this->edomue; 		
-	}
-	
-	public function getMunmue()
-	{
+  }
+  
+  public function getCapmue()
+  {
 
-		return $this->munmue; 		
-	}
-	
-	public function getDepmue()
-	{
+    return trim($this->capmue);
 
-		return $this->depmue; 		
-	}
-	
-	public function getDirmue()
-	{
+  }
+  
+  public function getTipmue()
+  {
 
-		return $this->dirmue; 		
-	}
-	
-	public function getUbimue()
-	{
+    return trim($this->tipmue);
 
-		return $this->ubimue; 		
-	}
-	
-	public function getMesdep()
-	{
+  }
+  
+  public function getViduti()
+  {
 
-		return number_format($this->mesdep,2,',','.');
-		
-	}
-	
-	public function getValini()
-	{
+    return trim($this->viduti);
 
-		return number_format($this->valini,2,',','.');
-		
-	}
-	
-	public function getValres()
-	{
+  }
+  
+  public function getLngmue()
+  {
 
-		return number_format($this->valres,2,',','.');
-		
-	}
-	
-	public function getVallib()
-	{
+    return trim($this->lngmue);
 
-		return number_format($this->vallib,2,',','.');
-		
-	}
-	
-	public function getValrex()
-	{
+  }
+  
+  public function getNropie()
+  {
 
-		return number_format($this->valrex,2,',','.');
-		
-	}
-	
-	public function getCosrep()
-	{
+    return trim($this->nropie);
 
-		return number_format($this->cosrep,2,',','.');
-		
-	}
-	
-	public function getDepmen()
-	{
+  }
+  
+  public function getSermue()
+  {
 
-		return number_format($this->depmen,2,',','.');
-		
-	}
-	
-	public function getDepacu()
-	{
+    return trim($this->sermue);
 
-		return number_format($this->depacu,2,',','.');
-		
-	}
-	
-	public function getStamue()
-	{
+  }
+  
+  public function getUsomue()
+  {
 
-		return $this->stamue; 		
-	}
-	
-	public function getCodalt()
-	{
+    return trim($this->usomue);
 
-		return $this->codalt; 		
-	}
-	
-	public function getFecrcp($format = 'Y-m-d')
-	{
+  }
+  
+  public function getAltmue()
+  {
 
-		if ($this->fecrcp === null || $this->fecrcp === '') {
-			return null;
-		} elseif (!is_int($this->fecrcp)) {
-						$ts = strtotime($this->fecrcp);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrcp] as date/time value: " . var_export($this->fecrcp, true));
-			}
-		} else {
-			$ts = $this->fecrcp;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->altmue);
 
-	
-	public function getValadi()
-	{
+  }
+  
+  public function getLarmue()
+  {
 
-		return number_format($this->valadi,2,',','.');
-		
-	}
-	
-	public function getAumviduti()
-	{
+    return trim($this->larmue);
 
-		return number_format($this->aumviduti,2,',','.');
-		
-	}
-	
-	public function getDimviduti()
-	{
+  }
+  
+  public function getAncmue()
+  {
 
-		return number_format($this->dimviduti,2,',','.');
-		
-	}
-	
-	public function getStasem()
-	{
+    return trim($this->ancmue);
 
-		return $this->stasem; 		
-	}
-	
-	public function getStainm()
-	{
+  }
+  
+  public function getCoddis()
+  {
 
-		return $this->stainm; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->coddis);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDetmue()
+  {
+
+    return trim($this->detmue);
+
+  }
+  
+  public function getEdomue()
+  {
+
+    return trim($this->edomue);
+
+  }
+  
+  public function getMunmue()
+  {
+
+    return trim($this->munmue);
+
+  }
+  
+  public function getDepmue()
+  {
+
+    return trim($this->depmue);
+
+  }
+  
+  public function getDirmue()
+  {
+
+    return trim($this->dirmue);
+
+  }
+  
+  public function getUbimue()
+  {
+
+    return trim($this->ubimue);
+
+  }
+  
+  public function getMesdep($val=false)
+  {
+
+    if($val) return number_format($this->mesdep,2,',','.');
+    else return $this->mesdep;
+
+  }
+  
+  public function getValini($val=false)
+  {
+
+    if($val) return number_format($this->valini,2,',','.');
+    else return $this->valini;
+
+  }
+  
+  public function getValres($val=false)
+  {
+
+    if($val) return number_format($this->valres,2,',','.');
+    else return $this->valres;
+
+  }
+  
+  public function getVallib($val=false)
+  {
+
+    if($val) return number_format($this->vallib,2,',','.');
+    else return $this->vallib;
+
+  }
+  
+  public function getValrex($val=false)
+  {
+
+    if($val) return number_format($this->valrex,2,',','.');
+    else return $this->valrex;
+
+  }
+  
+  public function getCosrep($val=false)
+  {
+
+    if($val) return number_format($this->cosrep,2,',','.');
+    else return $this->cosrep;
+
+  }
+  
+  public function getDepmen($val=false)
+  {
+
+    if($val) return number_format($this->depmen,2,',','.');
+    else return $this->depmen;
+
+  }
+  
+  public function getDepacu($val=false)
+  {
+
+    if($val) return number_format($this->depacu,2,',','.');
+    else return $this->depacu;
+
+  }
+  
+  public function getStamue()
+  {
+
+    return trim($this->stamue);
+
+  }
+  
+  public function getCodalt()
+  {
+
+    return trim($this->codalt);
+
+  }
+  
+  public function getFecrcp($format = 'Y-m-d')
+  {
+
+    if ($this->fecrcp === null || $this->fecrcp === '') {
+      return null;
+    } elseif (!is_int($this->fecrcp)) {
+            $ts = adodb_strtotime($this->fecrcp);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrcp] as date/time value: " . var_export($this->fecrcp, true));
+      }
+    } else {
+      $ts = $this->fecrcp;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getValadi($val=false)
+  {
+
+    if($val) return number_format($this->valadi,2,',','.');
+    else return $this->valadi;
+
+  }
+  
+  public function getAumviduti($val=false)
+  {
+
+    if($val) return number_format($this->aumviduti,2,',','.');
+    else return $this->aumviduti;
+
+  }
+  
+  public function getDimviduti($val=false)
+  {
+
+    if($val) return number_format($this->dimviduti,2,',','.');
+    else return $this->dimviduti;
+
+  }
+  
+  public function getStasem()
+  {
+
+    return trim($this->stasem);
+
+  }
+  
+  public function getStainm()
+  {
+
+    return trim($this->stainm);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BnregmuePeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BnregmuePeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodmue($v)
 	{
 
-		if ($this->codmue !== $v) {
-			$this->codmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::CODMUE;
-		}
-
+    if ($this->codmue !== $v) {
+        $this->codmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::CODMUE;
+      }
+  
 	} 
 	
 	public function setDesmue($v)
 	{
 
-		if ($this->desmue !== $v) {
-			$this->desmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::DESMUE;
-		}
-
+    if ($this->desmue !== $v) {
+        $this->desmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::DESMUE;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = BnregmuePeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = BnregmuePeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setOrdcom($v)
 	{
 
-		if ($this->ordcom !== $v) {
-			$this->ordcom = $v;
-			$this->modifiedColumns[] = BnregmuePeer::ORDCOM;
-		}
-
+    if ($this->ordcom !== $v) {
+        $this->ordcom = $v;
+        $this->modifiedColumns[] = BnregmuePeer::ORDCOM;
+      }
+  
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = BnregmuePeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = BnregmuePeer::FECREG;
+    }
 
 	} 
 	
 	public function setFeccom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccom !== $ts) {
-			$this->feccom = $ts;
-			$this->modifiedColumns[] = BnregmuePeer::FECCOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccom !== $ts) {
+      $this->feccom = $ts;
+      $this->modifiedColumns[] = BnregmuePeer::FECCOM;
+    }
 
 	} 
 	
 	public function setFecdep($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdep] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdep !== $ts) {
-			$this->fecdep = $ts;
-			$this->modifiedColumns[] = BnregmuePeer::FECDEP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdep] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdep !== $ts) {
+      $this->fecdep = $ts;
+      $this->modifiedColumns[] = BnregmuePeer::FECDEP;
+    }
 
 	} 
 	
 	public function setFecaju($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecaju !== $ts) {
-			$this->fecaju = $ts;
-			$this->modifiedColumns[] = BnregmuePeer::FECAJU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecaju !== $ts) {
+      $this->fecaju = $ts;
+      $this->modifiedColumns[] = BnregmuePeer::FECAJU;
+    }
 
 	} 
 	
 	public function setFecact($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecact] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecact !== $ts) {
-			$this->fecact = $ts;
-			$this->modifiedColumns[] = BnregmuePeer::FECACT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecact] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecact !== $ts) {
+      $this->fecact = $ts;
+      $this->modifiedColumns[] = BnregmuePeer::FECACT;
+    }
 
 	} 
 	
 	public function setFecexp($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecexp !== $ts) {
-			$this->fecexp = $ts;
-			$this->modifiedColumns[] = BnregmuePeer::FECEXP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecexp !== $ts) {
+      $this->fecexp = $ts;
+      $this->modifiedColumns[] = BnregmuePeer::FECEXP;
+    }
 
 	} 
 	
 	public function setOrdrcp($v)
 	{
 
-		if ($this->ordrcp !== $v) {
-			$this->ordrcp = $v;
-			$this->modifiedColumns[] = BnregmuePeer::ORDRCP;
-		}
-
+    if ($this->ordrcp !== $v) {
+        $this->ordrcp = $v;
+        $this->modifiedColumns[] = BnregmuePeer::ORDRCP;
+      }
+  
 	} 
 	
 	public function setFotmue($v)
 	{
 
-		if ($this->fotmue !== $v) {
-			$this->fotmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::FOTMUE;
-		}
-
+    if ($this->fotmue !== $v) {
+        $this->fotmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::FOTMUE;
+      }
+  
 	} 
 	
 	public function setMarmue($v)
 	{
 
-		if ($this->marmue !== $v) {
-			$this->marmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::MARMUE;
-		}
-
+    if ($this->marmue !== $v) {
+        $this->marmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::MARMUE;
+      }
+  
 	} 
 	
 	public function setModmue($v)
 	{
 
-		if ($this->modmue !== $v) {
-			$this->modmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::MODMUE;
-		}
-
+    if ($this->modmue !== $v) {
+        $this->modmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::MODMUE;
+      }
+  
 	} 
 	
 	public function setAnomue($v)
 	{
 
-		if ($this->anomue !== $v) {
-			$this->anomue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::ANOMUE;
-		}
-
+    if ($this->anomue !== $v) {
+        $this->anomue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::ANOMUE;
+      }
+  
 	} 
 	
 	public function setColmue($v)
 	{
 
-		if ($this->colmue !== $v) {
-			$this->colmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::COLMUE;
-		}
-
+    if ($this->colmue !== $v) {
+        $this->colmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::COLMUE;
+      }
+  
 	} 
 	
 	public function setCodubi($v)
 	{
 
-		if ($this->codubi !== $v) {
-			$this->codubi = $v;
-			$this->modifiedColumns[] = BnregmuePeer::CODUBI;
-		}
-
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = BnregmuePeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setPesmue($v)
 	{
 
-		if ($this->pesmue !== $v) {
-			$this->pesmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::PESMUE;
-		}
-
+    if ($this->pesmue !== $v) {
+        $this->pesmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::PESMUE;
+      }
+  
 	} 
 	
 	public function setCapmue($v)
 	{
 
-		if ($this->capmue !== $v) {
-			$this->capmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::CAPMUE;
-		}
-
+    if ($this->capmue !== $v) {
+        $this->capmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::CAPMUE;
+      }
+  
 	} 
 	
 	public function setTipmue($v)
 	{
 
-		if ($this->tipmue !== $v) {
-			$this->tipmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::TIPMUE;
-		}
-
+    if ($this->tipmue !== $v) {
+        $this->tipmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::TIPMUE;
+      }
+  
 	} 
 	
 	public function setViduti($v)
 	{
 
-		if ($this->viduti !== $v) {
-			$this->viduti = $v;
-			$this->modifiedColumns[] = BnregmuePeer::VIDUTI;
-		}
-
+    if ($this->viduti !== $v) {
+        $this->viduti = $v;
+        $this->modifiedColumns[] = BnregmuePeer::VIDUTI;
+      }
+  
 	} 
 	
 	public function setLngmue($v)
 	{
 
-		if ($this->lngmue !== $v) {
-			$this->lngmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::LNGMUE;
-		}
-
+    if ($this->lngmue !== $v) {
+        $this->lngmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::LNGMUE;
+      }
+  
 	} 
 	
 	public function setNropie($v)
 	{
 
-		if ($this->nropie !== $v) {
-			$this->nropie = $v;
-			$this->modifiedColumns[] = BnregmuePeer::NROPIE;
-		}
-
+    if ($this->nropie !== $v) {
+        $this->nropie = $v;
+        $this->modifiedColumns[] = BnregmuePeer::NROPIE;
+      }
+  
 	} 
 	
 	public function setSermue($v)
 	{
 
-		if ($this->sermue !== $v) {
-			$this->sermue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::SERMUE;
-		}
-
+    if ($this->sermue !== $v) {
+        $this->sermue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::SERMUE;
+      }
+  
 	} 
 	
 	public function setUsomue($v)
 	{
 
-		if ($this->usomue !== $v) {
-			$this->usomue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::USOMUE;
-		}
-
+    if ($this->usomue !== $v) {
+        $this->usomue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::USOMUE;
+      }
+  
 	} 
 	
 	public function setAltmue($v)
 	{
 
-		if ($this->altmue !== $v) {
-			$this->altmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::ALTMUE;
-		}
-
+    if ($this->altmue !== $v) {
+        $this->altmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::ALTMUE;
+      }
+  
 	} 
 	
 	public function setLarmue($v)
 	{
 
-		if ($this->larmue !== $v) {
-			$this->larmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::LARMUE;
-		}
-
+    if ($this->larmue !== $v) {
+        $this->larmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::LARMUE;
+      }
+  
 	} 
 	
 	public function setAncmue($v)
 	{
 
-		if ($this->ancmue !== $v) {
-			$this->ancmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::ANCMUE;
-		}
-
+    if ($this->ancmue !== $v) {
+        $this->ancmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::ANCMUE;
+      }
+  
 	} 
 	
 	public function setCoddis($v)
 	{
 
-		if ($this->coddis !== $v) {
-			$this->coddis = $v;
-			$this->modifiedColumns[] = BnregmuePeer::CODDIS;
-		}
-
+    if ($this->coddis !== $v) {
+        $this->coddis = $v;
+        $this->modifiedColumns[] = BnregmuePeer::CODDIS;
+      }
+  
 	} 
 	
 	public function setDetmue($v)
 	{
 
-		if ($this->detmue !== $v) {
-			$this->detmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::DETMUE;
-		}
-
+    if ($this->detmue !== $v) {
+        $this->detmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::DETMUE;
+      }
+  
 	} 
 	
 	public function setEdomue($v)
 	{
 
-		if ($this->edomue !== $v) {
-			$this->edomue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::EDOMUE;
-		}
-
+    if ($this->edomue !== $v) {
+        $this->edomue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::EDOMUE;
+      }
+  
 	} 
 	
 	public function setMunmue($v)
 	{
 
-		if ($this->munmue !== $v) {
-			$this->munmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::MUNMUE;
-		}
-
+    if ($this->munmue !== $v) {
+        $this->munmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::MUNMUE;
+      }
+  
 	} 
 	
 	public function setDepmue($v)
 	{
 
-		if ($this->depmue !== $v) {
-			$this->depmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::DEPMUE;
-		}
-
+    if ($this->depmue !== $v) {
+        $this->depmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::DEPMUE;
+      }
+  
 	} 
 	
 	public function setDirmue($v)
 	{
 
-		if ($this->dirmue !== $v) {
-			$this->dirmue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::DIRMUE;
-		}
-
+    if ($this->dirmue !== $v) {
+        $this->dirmue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::DIRMUE;
+      }
+  
 	} 
 	
 	public function setUbimue($v)
 	{
 
-		if ($this->ubimue !== $v) {
-			$this->ubimue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::UBIMUE;
-		}
-
+    if ($this->ubimue !== $v) {
+        $this->ubimue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::UBIMUE;
+      }
+  
 	} 
 	
 	public function setMesdep($v)
 	{
 
-		if ($this->mesdep !== $v) {
-			$this->mesdep = $v;
-			$this->modifiedColumns[] = BnregmuePeer::MESDEP;
-		}
-
+    if ($this->mesdep !== $v) {
+        $this->mesdep = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::MESDEP;
+      }
+  
 	} 
 	
 	public function setValini($v)
 	{
 
-		if ($this->valini !== $v) {
-			$this->valini = $v;
-			$this->modifiedColumns[] = BnregmuePeer::VALINI;
-		}
-
+    if ($this->valini !== $v) {
+        $this->valini = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::VALINI;
+      }
+  
 	} 
 	
 	public function setValres($v)
 	{
 
-		if ($this->valres !== $v) {
-			$this->valres = $v;
-			$this->modifiedColumns[] = BnregmuePeer::VALRES;
-		}
-
+    if ($this->valres !== $v) {
+        $this->valres = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::VALRES;
+      }
+  
 	} 
 	
 	public function setVallib($v)
 	{
 
-		if ($this->vallib !== $v) {
-			$this->vallib = $v;
-			$this->modifiedColumns[] = BnregmuePeer::VALLIB;
-		}
-
+    if ($this->vallib !== $v) {
+        $this->vallib = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::VALLIB;
+      }
+  
 	} 
 	
 	public function setValrex($v)
 	{
 
-		if ($this->valrex !== $v) {
-			$this->valrex = $v;
-			$this->modifiedColumns[] = BnregmuePeer::VALREX;
-		}
-
+    if ($this->valrex !== $v) {
+        $this->valrex = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::VALREX;
+      }
+  
 	} 
 	
 	public function setCosrep($v)
 	{
 
-		if ($this->cosrep !== $v) {
-			$this->cosrep = $v;
-			$this->modifiedColumns[] = BnregmuePeer::COSREP;
-		}
-
+    if ($this->cosrep !== $v) {
+        $this->cosrep = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::COSREP;
+      }
+  
 	} 
 	
 	public function setDepmen($v)
 	{
 
-		if ($this->depmen !== $v) {
-			$this->depmen = $v;
-			$this->modifiedColumns[] = BnregmuePeer::DEPMEN;
-		}
-
+    if ($this->depmen !== $v) {
+        $this->depmen = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::DEPMEN;
+      }
+  
 	} 
 	
 	public function setDepacu($v)
 	{
 
-		if ($this->depacu !== $v) {
-			$this->depacu = $v;
-			$this->modifiedColumns[] = BnregmuePeer::DEPACU;
-		}
-
+    if ($this->depacu !== $v) {
+        $this->depacu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::DEPACU;
+      }
+  
 	} 
 	
 	public function setStamue($v)
 	{
 
-		if ($this->stamue !== $v) {
-			$this->stamue = $v;
-			$this->modifiedColumns[] = BnregmuePeer::STAMUE;
-		}
-
+    if ($this->stamue !== $v) {
+        $this->stamue = $v;
+        $this->modifiedColumns[] = BnregmuePeer::STAMUE;
+      }
+  
 	} 
 	
 	public function setCodalt($v)
 	{
 
-		if ($this->codalt !== $v) {
-			$this->codalt = $v;
-			$this->modifiedColumns[] = BnregmuePeer::CODALT;
-		}
-
+    if ($this->codalt !== $v) {
+        $this->codalt = $v;
+        $this->modifiedColumns[] = BnregmuePeer::CODALT;
+      }
+  
 	} 
 	
 	public function setFecrcp($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrcp] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrcp !== $ts) {
-			$this->fecrcp = $ts;
-			$this->modifiedColumns[] = BnregmuePeer::FECRCP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrcp] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrcp !== $ts) {
+      $this->fecrcp = $ts;
+      $this->modifiedColumns[] = BnregmuePeer::FECRCP;
+    }
 
 	} 
 	
 	public function setValadi($v)
 	{
 
-		if ($this->valadi !== $v) {
-			$this->valadi = $v;
-			$this->modifiedColumns[] = BnregmuePeer::VALADI;
-		}
-
+    if ($this->valadi !== $v) {
+        $this->valadi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::VALADI;
+      }
+  
 	} 
 	
 	public function setAumviduti($v)
 	{
 
-		if ($this->aumviduti !== $v) {
-			$this->aumviduti = $v;
-			$this->modifiedColumns[] = BnregmuePeer::AUMVIDUTI;
-		}
-
+    if ($this->aumviduti !== $v) {
+        $this->aumviduti = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::AUMVIDUTI;
+      }
+  
 	} 
 	
 	public function setDimviduti($v)
 	{
 
-		if ($this->dimviduti !== $v) {
-			$this->dimviduti = $v;
-			$this->modifiedColumns[] = BnregmuePeer::DIMVIDUTI;
-		}
-
+    if ($this->dimviduti !== $v) {
+        $this->dimviduti = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnregmuePeer::DIMVIDUTI;
+      }
+  
 	} 
 	
 	public function setStasem($v)
 	{
 
-		if ($this->stasem !== $v) {
-			$this->stasem = $v;
-			$this->modifiedColumns[] = BnregmuePeer::STASEM;
-		}
-
+    if ($this->stasem !== $v) {
+        $this->stasem = $v;
+        $this->modifiedColumns[] = BnregmuePeer::STASEM;
+      }
+  
 	} 
 	
 	public function setStainm($v)
 	{
 
-		if ($this->stainm !== $v) {
-			$this->stainm = $v;
-			$this->modifiedColumns[] = BnregmuePeer::STAINM;
-		}
-
+    if ($this->stainm !== $v) {
+        $this->stainm = $v;
+        $this->modifiedColumns[] = BnregmuePeer::STAINM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnregmuePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnregmuePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->codmue = $rs->getString($startcol + 1);
+      $this->codmue = $rs->getString($startcol + 1);
 
-			$this->desmue = $rs->getString($startcol + 2);
+      $this->desmue = $rs->getString($startcol + 2);
 
-			$this->codpro = $rs->getString($startcol + 3);
+      $this->codpro = $rs->getString($startcol + 3);
 
-			$this->ordcom = $rs->getString($startcol + 4);
+      $this->ordcom = $rs->getString($startcol + 4);
 
-			$this->fecreg = $rs->getDate($startcol + 5, null);
+      $this->fecreg = $rs->getDate($startcol + 5, null);
 
-			$this->feccom = $rs->getDate($startcol + 6, null);
+      $this->feccom = $rs->getDate($startcol + 6, null);
 
-			$this->fecdep = $rs->getDate($startcol + 7, null);
+      $this->fecdep = $rs->getDate($startcol + 7, null);
 
-			$this->fecaju = $rs->getDate($startcol + 8, null);
+      $this->fecaju = $rs->getDate($startcol + 8, null);
 
-			$this->fecact = $rs->getDate($startcol + 9, null);
+      $this->fecact = $rs->getDate($startcol + 9, null);
 
-			$this->fecexp = $rs->getDate($startcol + 10, null);
+      $this->fecexp = $rs->getDate($startcol + 10, null);
 
-			$this->ordrcp = $rs->getString($startcol + 11);
+      $this->ordrcp = $rs->getString($startcol + 11);
 
-			$this->fotmue = $rs->getString($startcol + 12);
+      $this->fotmue = $rs->getString($startcol + 12);
 
-			$this->marmue = $rs->getString($startcol + 13);
+      $this->marmue = $rs->getString($startcol + 13);
 
-			$this->modmue = $rs->getString($startcol + 14);
+      $this->modmue = $rs->getString($startcol + 14);
 
-			$this->anomue = $rs->getString($startcol + 15);
+      $this->anomue = $rs->getString($startcol + 15);
 
-			$this->colmue = $rs->getString($startcol + 16);
+      $this->colmue = $rs->getString($startcol + 16);
 
-			$this->codubi = $rs->getString($startcol + 17);
+      $this->codubi = $rs->getString($startcol + 17);
 
-			$this->pesmue = $rs->getString($startcol + 18);
+      $this->pesmue = $rs->getString($startcol + 18);
 
-			$this->capmue = $rs->getString($startcol + 19);
+      $this->capmue = $rs->getString($startcol + 19);
 
-			$this->tipmue = $rs->getString($startcol + 20);
+      $this->tipmue = $rs->getString($startcol + 20);
 
-			$this->viduti = $rs->getString($startcol + 21);
+      $this->viduti = $rs->getString($startcol + 21);
 
-			$this->lngmue = $rs->getString($startcol + 22);
+      $this->lngmue = $rs->getString($startcol + 22);
 
-			$this->nropie = $rs->getString($startcol + 23);
+      $this->nropie = $rs->getString($startcol + 23);
 
-			$this->sermue = $rs->getString($startcol + 24);
+      $this->sermue = $rs->getString($startcol + 24);
 
-			$this->usomue = $rs->getString($startcol + 25);
+      $this->usomue = $rs->getString($startcol + 25);
 
-			$this->altmue = $rs->getString($startcol + 26);
+      $this->altmue = $rs->getString($startcol + 26);
 
-			$this->larmue = $rs->getString($startcol + 27);
+      $this->larmue = $rs->getString($startcol + 27);
 
-			$this->ancmue = $rs->getString($startcol + 28);
+      $this->ancmue = $rs->getString($startcol + 28);
 
-			$this->coddis = $rs->getString($startcol + 29);
+      $this->coddis = $rs->getString($startcol + 29);
 
-			$this->detmue = $rs->getString($startcol + 30);
+      $this->detmue = $rs->getString($startcol + 30);
 
-			$this->edomue = $rs->getString($startcol + 31);
+      $this->edomue = $rs->getString($startcol + 31);
 
-			$this->munmue = $rs->getString($startcol + 32);
+      $this->munmue = $rs->getString($startcol + 32);
 
-			$this->depmue = $rs->getString($startcol + 33);
+      $this->depmue = $rs->getString($startcol + 33);
 
-			$this->dirmue = $rs->getString($startcol + 34);
+      $this->dirmue = $rs->getString($startcol + 34);
 
-			$this->ubimue = $rs->getString($startcol + 35);
+      $this->ubimue = $rs->getString($startcol + 35);
 
-			$this->mesdep = $rs->getFloat($startcol + 36);
+      $this->mesdep = $rs->getFloat($startcol + 36);
 
-			$this->valini = $rs->getFloat($startcol + 37);
+      $this->valini = $rs->getFloat($startcol + 37);
 
-			$this->valres = $rs->getFloat($startcol + 38);
+      $this->valres = $rs->getFloat($startcol + 38);
 
-			$this->vallib = $rs->getFloat($startcol + 39);
+      $this->vallib = $rs->getFloat($startcol + 39);
 
-			$this->valrex = $rs->getFloat($startcol + 40);
+      $this->valrex = $rs->getFloat($startcol + 40);
 
-			$this->cosrep = $rs->getFloat($startcol + 41);
+      $this->cosrep = $rs->getFloat($startcol + 41);
 
-			$this->depmen = $rs->getFloat($startcol + 42);
+      $this->depmen = $rs->getFloat($startcol + 42);
 
-			$this->depacu = $rs->getFloat($startcol + 43);
+      $this->depacu = $rs->getFloat($startcol + 43);
 
-			$this->stamue = $rs->getString($startcol + 44);
+      $this->stamue = $rs->getString($startcol + 44);
 
-			$this->codalt = $rs->getString($startcol + 45);
+      $this->codalt = $rs->getString($startcol + 45);
 
-			$this->fecrcp = $rs->getDate($startcol + 46, null);
+      $this->fecrcp = $rs->getDate($startcol + 46, null);
 
-			$this->valadi = $rs->getFloat($startcol + 47);
+      $this->valadi = $rs->getFloat($startcol + 47);
 
-			$this->aumviduti = $rs->getFloat($startcol + 48);
+      $this->aumviduti = $rs->getFloat($startcol + 48);
 
-			$this->dimviduti = $rs->getFloat($startcol + 49);
+      $this->dimviduti = $rs->getFloat($startcol + 49);
 
-			$this->stasem = $rs->getString($startcol + 50);
+      $this->stasem = $rs->getString($startcol + 50);
 
-			$this->stainm = $rs->getString($startcol + 51);
+      $this->stainm = $rs->getString($startcol + 51);
 
-			$this->id = $rs->getInt($startcol + 52);
+      $this->id = $rs->getInt($startcol + 52);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 53; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnregmue object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 53; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnregmue object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -1421,6 +1489,7 @@ abstract class BaseBnregmue extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BnregmuePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnregmuePeer::doUpdate($this, $con);

@@ -37,131 +37,159 @@ abstract class BaseNptipniv extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipniv()
-	{
+  
+  public function getCodtipniv()
+  {
 
-		return $this->codtipniv; 		
-	}
-	
-	public function getMaxsue()
-	{
+    return trim($this->codtipniv);
 
-		return number_format($this->maxsue,2,',','.');
-		
-	}
-	
-	public function getMedsue()
-	{
+  }
+  
+  public function getMaxsue($val=false)
+  {
 
-		return number_format($this->medsue,2,',','.');
-		
-	}
-	
-	public function getMinsue()
-	{
+    if($val) return number_format($this->maxsue,2,',','.');
+    else return $this->maxsue;
 
-		return number_format($this->minsue,2,',','.');
-		
-	}
-	
-	public function getCodtipcla()
-	{
+  }
+  
+  public function getMedsue($val=false)
+  {
 
-		return $this->codtipcla; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->medsue,2,',','.');
+    else return $this->medsue;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMinsue($val=false)
+  {
+
+    if($val) return number_format($this->minsue,2,',','.');
+    else return $this->minsue;
+
+  }
+  
+  public function getCodtipcla()
+  {
+
+    return trim($this->codtipcla);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipniv($v)
 	{
 
-		if ($this->codtipniv !== $v) {
-			$this->codtipniv = $v;
-			$this->modifiedColumns[] = NptipnivPeer::CODTIPNIV;
-		}
-
+    if ($this->codtipniv !== $v) {
+        $this->codtipniv = $v;
+        $this->modifiedColumns[] = NptipnivPeer::CODTIPNIV;
+      }
+  
 	} 
 	
 	public function setMaxsue($v)
 	{
 
-		if ($this->maxsue !== $v) {
-			$this->maxsue = $v;
-			$this->modifiedColumns[] = NptipnivPeer::MAXSUE;
-		}
-
+    if ($this->maxsue !== $v) {
+        $this->maxsue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipnivPeer::MAXSUE;
+      }
+  
 	} 
 	
 	public function setMedsue($v)
 	{
 
-		if ($this->medsue !== $v) {
-			$this->medsue = $v;
-			$this->modifiedColumns[] = NptipnivPeer::MEDSUE;
-		}
-
+    if ($this->medsue !== $v) {
+        $this->medsue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipnivPeer::MEDSUE;
+      }
+  
 	} 
 	
 	public function setMinsue($v)
 	{
 
-		if ($this->minsue !== $v) {
-			$this->minsue = $v;
-			$this->modifiedColumns[] = NptipnivPeer::MINSUE;
-		}
-
+    if ($this->minsue !== $v) {
+        $this->minsue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NptipnivPeer::MINSUE;
+      }
+  
 	} 
 	
 	public function setCodtipcla($v)
 	{
 
-		if ($this->codtipcla !== $v) {
-			$this->codtipcla = $v;
-			$this->modifiedColumns[] = NptipnivPeer::CODTIPCLA;
-		}
-
+    if ($this->codtipcla !== $v) {
+        $this->codtipcla = $v;
+        $this->modifiedColumns[] = NptipnivPeer::CODTIPCLA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NptipnivPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NptipnivPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipniv = $rs->getString($startcol + 0);
+      $this->codtipniv = $rs->getString($startcol + 0);
 
-			$this->maxsue = $rs->getFloat($startcol + 1);
+      $this->maxsue = $rs->getFloat($startcol + 1);
 
-			$this->medsue = $rs->getFloat($startcol + 2);
+      $this->medsue = $rs->getFloat($startcol + 2);
 
-			$this->minsue = $rs->getFloat($startcol + 3);
+      $this->minsue = $rs->getFloat($startcol + 3);
 
-			$this->codtipcla = $rs->getString($startcol + 4);
+      $this->codtipcla = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nptipniv object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nptipniv object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -218,6 +246,7 @@ abstract class BaseNptipniv extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NptipnivPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NptipnivPeer::doUpdate($this, $con);

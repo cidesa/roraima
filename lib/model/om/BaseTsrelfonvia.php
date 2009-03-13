@@ -57,242 +57,274 @@ abstract class BaseTsrelfonvia extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumsol()
-	{
+  
+  public function getNumsol()
+  {
 
-		return $this->numsol; 		
-	}
-	
-	public function getNumche()
-	{
+    return trim($this->numsol);
 
-		return $this->numche; 		
-	}
-	
-	public function getNumcue()
-	{
+  }
+  
+  public function getNumche()
+  {
 
-		return $this->numcue; 		
-	}
-	
-	public function getCedrif()
-	{
+    return trim($this->numche);
 
-		return $this->cedrif; 		
-	}
-	
-	public function getNomben()
-	{
+  }
+  
+  public function getNumcue()
+  {
 
-		return $this->nomben; 		
-	}
-	
-	public function getMonche()
-	{
+    return trim($this->numcue);
 
-		return number_format($this->monche,2,',','.');
-		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCedrif()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getFecemi($format = 'Y-m-d')
-	{
+    return trim($this->cedrif);
 
-		if ($this->fecemi === null || $this->fecemi === '') {
-			return null;
-		} elseif (!is_int($this->fecemi)) {
-						$ts = strtotime($this->fecemi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
-			}
-		} else {
-			$ts = $this->fecemi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getNomben()
+  {
 
-	
-	public function getCodpre()
-	{
+    return trim($this->nomben);
 
-		return $this->codpre; 		
-	}
-	
-	public function getNumdep()
-	{
+  }
+  
+  public function getMonche($val=false)
+  {
 
-		return $this->numdep; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monche,2,',','.');
+    else return $this->monche;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodcat()
+  {
+
+    return trim($this->codcat);
+
+  }
+  
+  public function getFecemi($format = 'Y-m-d')
+  {
+
+    if ($this->fecemi === null || $this->fecemi === '') {
+      return null;
+    } elseif (!is_int($this->fecemi)) {
+            $ts = adodb_strtotime($this->fecemi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
+      }
+    } else {
+      $ts = $this->fecemi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCodpre()
+  {
+
+    return trim($this->codpre);
+
+  }
+  
+  public function getNumdep()
+  {
+
+    return trim($this->numdep);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumsol($v)
 	{
 
-		if ($this->numsol !== $v) {
-			$this->numsol = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::NUMSOL;
-		}
-
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = TsrelfonviaPeer::NUMSOL;
+      }
+  
 	} 
 	
 	public function setNumche($v)
 	{
 
-		if ($this->numche !== $v) {
-			$this->numche = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::NUMCHE;
-		}
-
+    if ($this->numche !== $v) {
+        $this->numche = $v;
+        $this->modifiedColumns[] = TsrelfonviaPeer::NUMCHE;
+      }
+  
 	} 
 	
 	public function setNumcue($v)
 	{
 
-		if ($this->numcue !== $v) {
-			$this->numcue = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::NUMCUE;
-		}
-
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = TsrelfonviaPeer::NUMCUE;
+      }
+  
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = TsrelfonviaPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setNomben($v)
 	{
 
-		if ($this->nomben !== $v) {
-			$this->nomben = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::NOMBEN;
-		}
-
+    if ($this->nomben !== $v) {
+        $this->nomben = $v;
+        $this->modifiedColumns[] = TsrelfonviaPeer::NOMBEN;
+      }
+  
 	} 
 	
 	public function setMonche($v)
 	{
 
-		if ($this->monche !== $v) {
-			$this->monche = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::MONCHE;
-		}
-
+    if ($this->monche !== $v) {
+        $this->monche = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsrelfonviaPeer::MONCHE;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = TsrelfonviaPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setFecemi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecemi !== $ts) {
-			$this->fecemi = $ts;
-			$this->modifiedColumns[] = TsrelfonviaPeer::FECEMI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecemi !== $ts) {
+      $this->fecemi = $ts;
+      $this->modifiedColumns[] = TsrelfonviaPeer::FECEMI;
+    }
 
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = TsrelfonviaPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNumdep($v)
 	{
 
-		if ($this->numdep !== $v) {
-			$this->numdep = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::NUMDEP;
-		}
-
+    if ($this->numdep !== $v) {
+        $this->numdep = $v;
+        $this->modifiedColumns[] = TsrelfonviaPeer::NUMDEP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsrelfonviaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsrelfonviaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numsol = $rs->getString($startcol + 0);
+      $this->numsol = $rs->getString($startcol + 0);
 
-			$this->numche = $rs->getString($startcol + 1);
+      $this->numche = $rs->getString($startcol + 1);
 
-			$this->numcue = $rs->getString($startcol + 2);
+      $this->numcue = $rs->getString($startcol + 2);
 
-			$this->cedrif = $rs->getString($startcol + 3);
+      $this->cedrif = $rs->getString($startcol + 3);
 
-			$this->nomben = $rs->getString($startcol + 4);
+      $this->nomben = $rs->getString($startcol + 4);
 
-			$this->monche = $rs->getFloat($startcol + 5);
+      $this->monche = $rs->getFloat($startcol + 5);
 
-			$this->codcat = $rs->getString($startcol + 6);
+      $this->codcat = $rs->getString($startcol + 6);
 
-			$this->fecemi = $rs->getDate($startcol + 7, null);
+      $this->fecemi = $rs->getDate($startcol + 7, null);
 
-			$this->codpre = $rs->getString($startcol + 8);
+      $this->codpre = $rs->getString($startcol + 8);
 
-			$this->numdep = $rs->getString($startcol + 9);
+      $this->numdep = $rs->getString($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsrelfonvia object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsrelfonvia object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -349,6 +381,7 @@ abstract class BaseTsrelfonvia extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsrelfonviaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsrelfonviaPeer::doUpdate($this, $con);

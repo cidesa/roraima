@@ -215,6 +215,7 @@ abstract class BaseNpasiconnomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpasiconnomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

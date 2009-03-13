@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class BdreporteMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.BdreporteMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.BdreporteMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('bdreporte');
 		$tMap->setPhpName('Bdreporte');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('bdreporte_SEQ');
 
 		$tMap->addColumn('CAMPO1', 'Campo1', 'string', CreoleTypes::VARCHAR, false, 1000);
 
@@ -49,6 +51,6 @@ class BdreporteMapBuilder {
 		$tMap->addColumn('CAMPO8', 'Campo8', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

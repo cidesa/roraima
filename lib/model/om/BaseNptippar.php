@@ -25,74 +25,99 @@ abstract class BaseNptippar extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTippar()
-	{
+  
+  public function getTippar()
+  {
 
-		return $this->tippar; 		
-	}
-	
-	public function getDespar()
-	{
+    return trim($this->tippar);
 
-		return $this->despar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDespar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->despar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTippar($v)
 	{
 
-		if ($this->tippar !== $v) {
-			$this->tippar = $v;
-			$this->modifiedColumns[] = NptipparPeer::TIPPAR;
-		}
-
+    if ($this->tippar !== $v) {
+        $this->tippar = $v;
+        $this->modifiedColumns[] = NptipparPeer::TIPPAR;
+      }
+  
 	} 
 	
 	public function setDespar($v)
 	{
 
-		if ($this->despar !== $v) {
-			$this->despar = $v;
-			$this->modifiedColumns[] = NptipparPeer::DESPAR;
-		}
-
+    if ($this->despar !== $v) {
+        $this->despar = $v;
+        $this->modifiedColumns[] = NptipparPeer::DESPAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NptipparPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NptipparPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tippar = $rs->getString($startcol + 0);
+      $this->tippar = $rs->getString($startcol + 0);
 
-			$this->despar = $rs->getString($startcol + 1);
+      $this->despar = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nptippar object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nptippar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseNptippar extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NptipparPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NptipparPeer::doUpdate($this, $con);

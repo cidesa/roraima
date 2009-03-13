@@ -33,110 +33,137 @@ abstract class BaseForpartidas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpar()
-	{
+  
+  public function getCodpar()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getNompar()
-	{
+    return trim($this->codpar);
 
-		return $this->nompar; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getNompar()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getNompre()
-	{
+    return trim($this->nompar);
 
-		return $this->nompre; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codpre);
+
+  }
+  
+  public function getNompre()
+  {
+
+    return trim($this->nompre);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = ForpartidasPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = ForpartidasPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setNompar($v)
 	{
 
-		if ($this->nompar !== $v) {
-			$this->nompar = $v;
-			$this->modifiedColumns[] = ForpartidasPeer::NOMPAR;
-		}
-
+    if ($this->nompar !== $v) {
+        $this->nompar = $v;
+        $this->modifiedColumns[] = ForpartidasPeer::NOMPAR;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = ForpartidasPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = ForpartidasPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNompre($v)
 	{
 
-		if ($this->nompre !== $v) {
-			$this->nompre = $v;
-			$this->modifiedColumns[] = ForpartidasPeer::NOMPRE;
-		}
-
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = ForpartidasPeer::NOMPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForpartidasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForpartidasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpar = $rs->getString($startcol + 0);
+      $this->codpar = $rs->getString($startcol + 0);
 
-			$this->nompar = $rs->getString($startcol + 1);
+      $this->nompar = $rs->getString($startcol + 1);
 
-			$this->codpre = $rs->getString($startcol + 2);
+      $this->codpre = $rs->getString($startcol + 2);
 
-			$this->nompre = $rs->getString($startcol + 3);
+      $this->nompre = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forpartidas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forpartidas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

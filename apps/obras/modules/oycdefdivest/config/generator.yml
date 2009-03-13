@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocestado
+    theme:            default
+    fields:
+      codedo:       { name: Código Estado }
+      codpai:       { name: Código Paìs }
+      nomedo:       { name: Nombre Estado}
+      nompai:       { name: Nombre País}
+
+    list:
+      title:          Estados
+      filters:        [codedo]
+      display:        [=codedo, nomedo, nompai]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+    edit:
+      title:          Edición de Estados
+      display:        [codpai, nompai, codedo, nomedo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -33,110 +33,137 @@ abstract class BaseCsfasprod extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodart()
-	{
+  
+  public function getCodart()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getCodfas()
-	{
+    return trim($this->codart);
 
-		return $this->codfas; 		
-	}
-	
-	public function getDuracion()
-	{
+  }
+  
+  public function getCodfas()
+  {
 
-		return $this->duracion; 		
-	}
-	
-	public function getTipo()
-	{
+    return trim($this->codfas);
 
-		return $this->tipo; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDuracion()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->duracion);
+
+  }
+  
+  public function getTipo()
+  {
+
+    return trim($this->tipo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CsfasprodPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CsfasprodPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodfas($v)
 	{
 
-		if ($this->codfas !== $v) {
-			$this->codfas = $v;
-			$this->modifiedColumns[] = CsfasprodPeer::CODFAS;
-		}
-
+    if ($this->codfas !== $v) {
+        $this->codfas = $v;
+        $this->modifiedColumns[] = CsfasprodPeer::CODFAS;
+      }
+  
 	} 
 	
 	public function setDuracion($v)
 	{
 
-		if ($this->duracion !== $v) {
-			$this->duracion = $v;
-			$this->modifiedColumns[] = CsfasprodPeer::DURACION;
-		}
-
+    if ($this->duracion !== $v) {
+        $this->duracion = $v;
+        $this->modifiedColumns[] = CsfasprodPeer::DURACION;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = CsfasprodPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = CsfasprodPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsfasprodPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsfasprodPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codart = $rs->getString($startcol + 0);
+      $this->codart = $rs->getString($startcol + 0);
 
-			$this->codfas = $rs->getString($startcol + 1);
+      $this->codfas = $rs->getString($startcol + 1);
 
-			$this->duracion = $rs->getString($startcol + 2);
+      $this->duracion = $rs->getString($startcol + 2);
 
-			$this->tipo = $rs->getString($startcol + 3);
+      $this->tipo = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csfasprod object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csfasprod object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

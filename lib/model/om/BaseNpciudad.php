@@ -33,110 +33,137 @@ abstract class BaseNpciudad extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodciu()
-	{
+  
+  public function getCodciu()
+  {
 
-		return $this->codciu; 		
-	}
-	
-	public function getCodedo()
-	{
+    return trim($this->codciu);
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodpai()
-	{
+  }
+  
+  public function getCodedo()
+  {
 
-		return $this->codpai; 		
-	}
-	
-	public function getNomciu()
-	{
+    return trim($this->codedo);
 
-		return $this->nomciu; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodpai()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codpai);
+
+  }
+  
+  public function getNomciu()
+  {
+
+    return trim($this->nomciu);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodciu($v)
 	{
 
-		if ($this->codciu !== $v) {
-			$this->codciu = $v;
-			$this->modifiedColumns[] = NpciudadPeer::CODCIU;
-		}
-
+    if ($this->codciu !== $v) {
+        $this->codciu = $v;
+        $this->modifiedColumns[] = NpciudadPeer::CODCIU;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = NpciudadPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = NpciudadPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = NpciudadPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = NpciudadPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setNomciu($v)
 	{
 
-		if ($this->nomciu !== $v) {
-			$this->nomciu = $v;
-			$this->modifiedColumns[] = NpciudadPeer::NOMCIU;
-		}
-
+    if ($this->nomciu !== $v) {
+        $this->nomciu = $v;
+        $this->modifiedColumns[] = NpciudadPeer::NOMCIU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpciudadPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpciudadPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codciu = $rs->getString($startcol + 0);
+      $this->codciu = $rs->getString($startcol + 0);
 
-			$this->codedo = $rs->getString($startcol + 1);
+      $this->codedo = $rs->getString($startcol + 1);
 
-			$this->codpai = $rs->getString($startcol + 2);
+      $this->codpai = $rs->getString($startcol + 2);
 
-			$this->nomciu = $rs->getString($startcol + 3);
+      $this->nomciu = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npciudad object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npciudad object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseNpciudad extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpciudadPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpciudadPeer::doUpdate($this, $con);

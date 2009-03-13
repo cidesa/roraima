@@ -205,6 +205,7 @@ abstract class BaseCitipingPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CitipingPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

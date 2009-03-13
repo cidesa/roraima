@@ -9,4 +9,8 @@
  */ 
 class Fordefsubsec extends BaseFordefsubsec
 {
+	public function getNomsec()
+	{
+		return Herramientas::getX('codsec','fordefsec','nomsec',self::getCodsec());
+    }
 }

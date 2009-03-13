@@ -29,92 +29,118 @@ abstract class BaseFordefunieje extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoduni()
-	{
+  
+  public function getCoduni()
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getNomuni()
-	{
+    return trim($this->coduni);
 
-		return $this->nomuni; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getNomuni()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomuni);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = FordefuniejePeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = FordefuniejePeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setNomuni($v)
 	{
 
-		if ($this->nomuni !== $v) {
-			$this->nomuni = $v;
-			$this->modifiedColumns[] = FordefuniejePeer::NOMUNI;
-		}
-
+    if ($this->nomuni !== $v) {
+        $this->nomuni = $v;
+        $this->modifiedColumns[] = FordefuniejePeer::NOMUNI;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = FordefuniejePeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = FordefuniejePeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefuniejePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefuniejePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduni = $rs->getString($startcol + 0);
+      $this->coduni = $rs->getString($startcol + 0);
 
-			$this->nomuni = $rs->getString($startcol + 1);
+      $this->nomuni = $rs->getString($startcol + 1);
 
-			$this->codemp = $rs->getString($startcol + 2);
+      $this->codemp = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefunieje object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefunieje object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

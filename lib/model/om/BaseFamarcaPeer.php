@@ -13,14 +13,11 @@ abstract class BaseFamarcaPeer {
 	const CLASS_DEFAULT = 'lib.model.Famarca';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 2;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
-
-	
-	const CODMAR = 'famarca.CODMAR';
 
 	
 	const NOMMAR = 'famarca.NOMMAR';
@@ -34,18 +31,18 @@ abstract class BaseFamarcaPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmar', 'Nommar', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FamarcaPeer::CODMAR, FamarcaPeer::NOMMAR, FamarcaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmar', 'nommar', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nommar', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FamarcaPeer::NOMMAR, FamarcaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nommar', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmar' => 0, 'Nommar' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (FamarcaPeer::CODMAR => 0, FamarcaPeer::NOMMAR => 1, FamarcaPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmar' => 0, 'nommar' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nommar' => 0, 'Id' => 1, ),
+		BasePeer::TYPE_COLNAME => array (FamarcaPeer::NOMMAR => 0, FamarcaPeer::ID => 1, ),
+		BasePeer::TYPE_FIELDNAME => array ('nommar' => 0, 'id' => 1, ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
@@ -98,8 +95,6 @@ abstract class BaseFamarcaPeer {
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
-
-		$criteria->addSelectColumn(FamarcaPeer::CODMAR);
 
 		$criteria->addSelectColumn(FamarcaPeer::NOMMAR);
 
@@ -205,6 +200,7 @@ abstract class BaseFamarcaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FamarcaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

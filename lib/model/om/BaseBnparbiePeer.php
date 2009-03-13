@@ -210,6 +210,7 @@ abstract class BaseBnparbiePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BnparbiePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

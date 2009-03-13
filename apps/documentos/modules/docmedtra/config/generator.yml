@@ -1,0 +1,21 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Dfmedtra
+    theme:            cidesaGenerator
+
+    fields:
+      destra:      { name : Medio de Transporte }
+    list:
+      title:          Definicion de Medios de Transportes
+      display:        [=destra]
+      max_per_page:    10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición Medios de Transportes
+      display:        [destra ]
+      actions:
+        _list:        ~
+        _save:        ~

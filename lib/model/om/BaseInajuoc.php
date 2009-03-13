@@ -45,188 +45,217 @@ abstract class BaseInajuoc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getAjuoc()
-	{
+  
+  public function getAjuoc()
+  {
 
-		return $this->ajuoc; 		
-	}
-	
-	public function getOrdcom()
-	{
+    return trim($this->ajuoc);
 
-		return $this->ordcom; 		
-	}
-	
-	public function getFecaju($format = 'Y-m-d')
-	{
+  }
+  
+  public function getOrdcom()
+  {
 
-		if ($this->fecaju === null || $this->fecaju === '') {
-			return null;
-		} elseif (!is_int($this->fecaju)) {
-						$ts = strtotime($this->fecaju);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
-			}
-		} else {
-			$ts = $this->fecaju;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->ordcom);
 
-	
-	public function getDesaju()
-	{
+  }
+  
+  public function getFecaju($format = 'Y-m-d')
+  {
 
-		return $this->desaju; 		
-	}
-	
-	public function getMonaju()
-	{
+    if ($this->fecaju === null || $this->fecaju === '') {
+      return null;
+    } elseif (!is_int($this->fecaju)) {
+            $ts = adodb_strtotime($this->fecaju);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
+      }
+    } else {
+      $ts = $this->fecaju;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getStaaju()
-	{
+  
+  public function getDesaju()
+  {
 
-		return $this->staaju; 		
-	}
-	
-	public function getRefaju()
-	{
+    return trim($this->desaju);
 
-		return $this->refaju; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonaju($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getStaaju()
+  {
+
+    return trim($this->staaju);
+
+  }
+  
+  public function getRefaju()
+  {
+
+    return trim($this->refaju);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setAjuoc($v)
 	{
 
-		if ($this->ajuoc !== $v) {
-			$this->ajuoc = $v;
-			$this->modifiedColumns[] = InajuocPeer::AJUOC;
-		}
-
+    if ($this->ajuoc !== $v) {
+        $this->ajuoc = $v;
+        $this->modifiedColumns[] = InajuocPeer::AJUOC;
+      }
+  
 	} 
 	
 	public function setOrdcom($v)
 	{
 
-		if ($this->ordcom !== $v) {
-			$this->ordcom = $v;
-			$this->modifiedColumns[] = InajuocPeer::ORDCOM;
-		}
-
+    if ($this->ordcom !== $v) {
+        $this->ordcom = $v;
+        $this->modifiedColumns[] = InajuocPeer::ORDCOM;
+      }
+  
 	} 
 	
 	public function setFecaju($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecaju !== $ts) {
-			$this->fecaju = $ts;
-			$this->modifiedColumns[] = InajuocPeer::FECAJU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecaju !== $ts) {
+      $this->fecaju = $ts;
+      $this->modifiedColumns[] = InajuocPeer::FECAJU;
+    }
 
 	} 
 	
 	public function setDesaju($v)
 	{
 
-		if ($this->desaju !== $v) {
-			$this->desaju = $v;
-			$this->modifiedColumns[] = InajuocPeer::DESAJU;
-		}
-
+    if ($this->desaju !== $v) {
+        $this->desaju = $v;
+        $this->modifiedColumns[] = InajuocPeer::DESAJU;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = InajuocPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = InajuocPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setStaaju($v)
 	{
 
-		if ($this->staaju !== $v) {
-			$this->staaju = $v;
-			$this->modifiedColumns[] = InajuocPeer::STAAJU;
-		}
-
+    if ($this->staaju !== $v) {
+        $this->staaju = $v;
+        $this->modifiedColumns[] = InajuocPeer::STAAJU;
+      }
+  
 	} 
 	
 	public function setRefaju($v)
 	{
 
-		if ($this->refaju !== $v) {
-			$this->refaju = $v;
-			$this->modifiedColumns[] = InajuocPeer::REFAJU;
-		}
-
+    if ($this->refaju !== $v) {
+        $this->refaju = $v;
+        $this->modifiedColumns[] = InajuocPeer::REFAJU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = InajuocPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = InajuocPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->ajuoc = $rs->getString($startcol + 0);
+      $this->ajuoc = $rs->getString($startcol + 0);
 
-			$this->ordcom = $rs->getString($startcol + 1);
+      $this->ordcom = $rs->getString($startcol + 1);
 
-			$this->fecaju = $rs->getDate($startcol + 2, null);
+      $this->fecaju = $rs->getDate($startcol + 2, null);
 
-			$this->desaju = $rs->getString($startcol + 3);
+      $this->desaju = $rs->getString($startcol + 3);
 
-			$this->monaju = $rs->getFloat($startcol + 4);
+      $this->monaju = $rs->getFloat($startcol + 4);
 
-			$this->staaju = $rs->getString($startcol + 5);
+      $this->staaju = $rs->getString($startcol + 5);
 
-			$this->refaju = $rs->getString($startcol + 6);
+      $this->refaju = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Inajuoc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Inajuoc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

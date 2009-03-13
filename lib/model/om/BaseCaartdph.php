@@ -33,6 +33,10 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 
 
 	
+	protected $preart;
+
+
+	
 	protected $montot;
 
 
@@ -49,6 +53,14 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 
 
 	
+	protected $codalm;
+
+
+	
+	protected $codubi;
+
+
+	
 	protected $id;
 
 	
@@ -57,223 +69,314 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getDphart()
-	{
+  
+  public function getDphart()
+  {
 
-		return $this->dphart; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->dphart);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCandph()
-	{
+    return trim($this->codart);
 
-		return number_format($this->candph,2,',','.');
-		
-	}
-	
-	public function getCandev()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return number_format($this->candev,2,',','.');
-		
-	}
-	
-	public function getCantot()
-	{
+    return trim($this->codcat);
 
-		return number_format($this->cantot,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+  }
+  
+  public function getCandph($val=false)
+  {
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getNumlot()
-	{
+    if($val) return number_format($this->candph,2,',','.');
+    else return $this->candph;
 
-		return $this->numlot; 		
-	}
-	
-	public function getCanent()
-	{
+  }
+  
+  public function getCandev($val=false)
+  {
 
-		return number_format($this->canent,2,',','.');
-		
-	}
-	
-	public function getCodfal()
-	{
+    if($val) return number_format($this->candev,2,',','.');
+    else return $this->candev;
 
-		return $this->codfal; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCantot($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->cantot,2,',','.');
+    else return $this->cantot;
+
+  }
+  
+  public function getPreart($val=false)
+  {
+
+    if($val) return number_format($this->preart,2,',','.');
+    else return $this->preart;
+
+  }
+  
+  public function getMontot($val=false)
+  {
+
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
+
+  }
+  
+  public function getNumlot()
+  {
+
+    return trim($this->numlot);
+
+  }
+  
+  public function getCanent($val=false)
+  {
+
+    if($val) return number_format($this->canent,2,',','.');
+    else return $this->canent;
+
+  }
+  
+  public function getCodfal()
+  {
+
+    return trim($this->codfal);
+
+  }
+  
+  public function getCodalm()
+  {
+
+    return trim($this->codalm);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDphart($v)
 	{
 
-		if ($this->dphart !== $v) {
-			$this->dphart = $v;
-			$this->modifiedColumns[] = CaartdphPeer::DPHART;
-		}
-
+    if ($this->dphart !== $v) {
+        $this->dphart = $v;
+        $this->modifiedColumns[] = CaartdphPeer::DPHART;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartdphPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartdphPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CaartdphPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CaartdphPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCandph($v)
 	{
 
-		if ($this->candph !== $v) {
-			$this->candph = $v;
-			$this->modifiedColumns[] = CaartdphPeer::CANDPH;
-		}
-
+    if ($this->candph !== $v) {
+        $this->candph = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartdphPeer::CANDPH;
+      }
+  
 	} 
 	
 	public function setCandev($v)
 	{
 
-		if ($this->candev !== $v) {
-			$this->candev = $v;
-			$this->modifiedColumns[] = CaartdphPeer::CANDEV;
-		}
-
+    if ($this->candev !== $v) {
+        $this->candev = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartdphPeer::CANDEV;
+      }
+  
 	} 
 	
 	public function setCantot($v)
 	{
 
-		if ($this->cantot !== $v) {
-			$this->cantot = $v;
-			$this->modifiedColumns[] = CaartdphPeer::CANTOT;
-		}
+    if ($this->cantot !== $v) {
+        $this->cantot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartdphPeer::CANTOT;
+      }
+  
+	} 
+	
+	public function setPreart($v)
+	{
 
+    if ($this->preart !== $v) {
+        $this->preart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartdphPeer::PREART;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CaartdphPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartdphPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setNumlot($v)
 	{
 
-		if ($this->numlot !== $v) {
-			$this->numlot = $v;
-			$this->modifiedColumns[] = CaartdphPeer::NUMLOT;
-		}
-
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = CaartdphPeer::NUMLOT;
+      }
+  
 	} 
 	
 	public function setCanent($v)
 	{
 
-		if ($this->canent !== $v) {
-			$this->canent = $v;
-			$this->modifiedColumns[] = CaartdphPeer::CANENT;
-		}
-
+    if ($this->canent !== $v) {
+        $this->canent = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartdphPeer::CANENT;
+      }
+  
 	} 
 	
 	public function setCodfal($v)
 	{
 
-		if ($this->codfal !== $v) {
-			$this->codfal = $v;
-			$this->modifiedColumns[] = CaartdphPeer::CODFAL;
-		}
+    if ($this->codfal !== $v) {
+        $this->codfal = $v;
+        $this->modifiedColumns[] = CaartdphPeer::CODFAL;
+      }
+  
+	} 
+	
+	public function setCodalm($v)
+	{
 
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CaartdphPeer::CODALM;
+      }
+  
+	} 
+	
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CaartdphPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartdphPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartdphPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->dphart = $rs->getString($startcol + 0);
+      $this->dphart = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->codcat = $rs->getString($startcol + 2);
+      $this->codcat = $rs->getString($startcol + 2);
 
-			$this->candph = $rs->getFloat($startcol + 3);
+      $this->candph = $rs->getFloat($startcol + 3);
 
-			$this->candev = $rs->getFloat($startcol + 4);
+      $this->candev = $rs->getFloat($startcol + 4);
 
-			$this->cantot = $rs->getFloat($startcol + 5);
+      $this->cantot = $rs->getFloat($startcol + 5);
 
-			$this->montot = $rs->getFloat($startcol + 6);
+      $this->preart = $rs->getFloat($startcol + 6);
 
-			$this->numlot = $rs->getString($startcol + 7);
+      $this->montot = $rs->getFloat($startcol + 7);
 
-			$this->canent = $rs->getFloat($startcol + 8);
+      $this->numlot = $rs->getString($startcol + 8);
 
-			$this->codfal = $rs->getString($startcol + 9);
+      $this->canent = $rs->getFloat($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->codfal = $rs->getString($startcol + 10);
 
-			$this->resetModified();
+      $this->codalm = $rs->getString($startcol + 11);
 
-			$this->setNew(false);
+      $this->codubi = $rs->getString($startcol + 12);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartdph object", $e);
-		}
-	}
+      $this->id = $rs->getInt($startcol + 13);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartdph object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -330,6 +433,7 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaartdphPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaartdphPeer::doUpdate($this, $con);
@@ -414,18 +518,27 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 				return $this->getCantot();
 				break;
 			case 6:
-				return $this->getMontot();
+				return $this->getPreart();
 				break;
 			case 7:
-				return $this->getNumlot();
+				return $this->getMontot();
 				break;
 			case 8:
-				return $this->getCanent();
+				return $this->getNumlot();
 				break;
 			case 9:
-				return $this->getCodfal();
+				return $this->getCanent();
 				break;
 			case 10:
+				return $this->getCodfal();
+				break;
+			case 11:
+				return $this->getCodalm();
+				break;
+			case 12:
+				return $this->getCodubi();
+				break;
+			case 13:
 				return $this->getId();
 				break;
 			default:
@@ -444,11 +557,14 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 			$keys[3] => $this->getCandph(),
 			$keys[4] => $this->getCandev(),
 			$keys[5] => $this->getCantot(),
-			$keys[6] => $this->getMontot(),
-			$keys[7] => $this->getNumlot(),
-			$keys[8] => $this->getCanent(),
-			$keys[9] => $this->getCodfal(),
-			$keys[10] => $this->getId(),
+			$keys[6] => $this->getPreart(),
+			$keys[7] => $this->getMontot(),
+			$keys[8] => $this->getNumlot(),
+			$keys[9] => $this->getCanent(),
+			$keys[10] => $this->getCodfal(),
+			$keys[11] => $this->getCodalm(),
+			$keys[12] => $this->getCodubi(),
+			$keys[13] => $this->getId(),
 		);
 		return $result;
 	}
@@ -483,18 +599,27 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 				$this->setCantot($value);
 				break;
 			case 6:
-				$this->setMontot($value);
+				$this->setPreart($value);
 				break;
 			case 7:
-				$this->setNumlot($value);
+				$this->setMontot($value);
 				break;
 			case 8:
-				$this->setCanent($value);
+				$this->setNumlot($value);
 				break;
 			case 9:
-				$this->setCodfal($value);
+				$this->setCanent($value);
 				break;
 			case 10:
+				$this->setCodfal($value);
+				break;
+			case 11:
+				$this->setCodalm($value);
+				break;
+			case 12:
+				$this->setCodubi($value);
+				break;
+			case 13:
 				$this->setId($value);
 				break;
 		} 	}
@@ -510,11 +635,14 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setCandph($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCandev($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setCantot($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setMontot($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setNumlot($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCanent($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCodfal($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[6], $arr)) $this->setPreart($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setMontot($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setNumlot($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCanent($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setCodfal($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCodalm($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCodubi($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
 	}
 
 	
@@ -528,10 +656,13 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaartdphPeer::CANDPH)) $criteria->add(CaartdphPeer::CANDPH, $this->candph);
 		if ($this->isColumnModified(CaartdphPeer::CANDEV)) $criteria->add(CaartdphPeer::CANDEV, $this->candev);
 		if ($this->isColumnModified(CaartdphPeer::CANTOT)) $criteria->add(CaartdphPeer::CANTOT, $this->cantot);
+		if ($this->isColumnModified(CaartdphPeer::PREART)) $criteria->add(CaartdphPeer::PREART, $this->preart);
 		if ($this->isColumnModified(CaartdphPeer::MONTOT)) $criteria->add(CaartdphPeer::MONTOT, $this->montot);
 		if ($this->isColumnModified(CaartdphPeer::NUMLOT)) $criteria->add(CaartdphPeer::NUMLOT, $this->numlot);
 		if ($this->isColumnModified(CaartdphPeer::CANENT)) $criteria->add(CaartdphPeer::CANENT, $this->canent);
 		if ($this->isColumnModified(CaartdphPeer::CODFAL)) $criteria->add(CaartdphPeer::CODFAL, $this->codfal);
+		if ($this->isColumnModified(CaartdphPeer::CODALM)) $criteria->add(CaartdphPeer::CODALM, $this->codalm);
+		if ($this->isColumnModified(CaartdphPeer::CODUBI)) $criteria->add(CaartdphPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CaartdphPeer::ID)) $criteria->add(CaartdphPeer::ID, $this->id);
 
 		return $criteria;
@@ -575,6 +706,8 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 
 		$copyObj->setCantot($this->cantot);
 
+		$copyObj->setPreart($this->preart);
+
 		$copyObj->setMontot($this->montot);
 
 		$copyObj->setNumlot($this->numlot);
@@ -582,6 +715,10 @@ abstract class BaseCaartdph extends BaseObject  implements Persistent {
 		$copyObj->setCanent($this->canent);
 
 		$copyObj->setCodfal($this->codfal);
+
+		$copyObj->setCodalm($this->codalm);
+
+		$copyObj->setCodubi($this->codubi);
 
 
 		$copyObj->setNew(true);

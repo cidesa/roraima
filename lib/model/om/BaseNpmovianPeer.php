@@ -210,6 +210,7 @@ abstract class BaseNpmovianPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpmovianPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

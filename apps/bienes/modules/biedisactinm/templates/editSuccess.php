@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edición de Disposición de Inmuebles', 
+<h1><?php echo __('Edición de Disposición de Inmuebles',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('biedisactinm/edit_messages', array('bndisinm' => $bndisinm, 'labels' => $labels)) ?>
-<?php include_partial('biedisactinm/edit_form', array('bndisinm' => $bndisinm, 'tipos' => $tipos, 'labels' => $labels)) ?>
+<?php include_partial('biedisactinm/edit_form', array('bndisinm' => $bndisinm, 'tipos' => $tipos, 'labels' => $labels ,'mascaracatalogo' => $mascaracatalogo, 'mascaraformatoubi' => $mascaraformatoubi, 'mascaralonformato' => $mascaralonformato, 'mascaralonubicacion' => $mascaralonubicacion)) ?>
 </div>
 
 <div id="sf_admin_footer">

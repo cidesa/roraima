@@ -41,147 +41,176 @@ abstract class BaseNpempleadosBanco extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodempant()
-	{
+    return trim($this->codemp);
 
-		return $this->codempant; 		
-	}
-	
-	public function getCodban()
-	{
+  }
+  
+  public function getCodempant()
+  {
 
-		return $this->codban; 		
-	}
-	
-	public function getCuentaBanco()
-	{
+    return trim($this->codempant);
 
-		return $this->cuenta_banco; 		
-	}
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getCodban()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getCodnom()
-	{
+    return trim($this->codban);
 
-		return $this->codnom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCuentaBanco()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->cuenta_banco);
+
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getCodnom()
+  {
+
+    return trim($this->codnom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpempleadosBancoPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpempleadosBancoPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodempant($v)
 	{
 
-		if ($this->codempant !== $v) {
-			$this->codempant = $v;
-			$this->modifiedColumns[] = NpempleadosBancoPeer::CODEMPANT;
-		}
-
+    if ($this->codempant !== $v) {
+        $this->codempant = $v;
+        $this->modifiedColumns[] = NpempleadosBancoPeer::CODEMPANT;
+      }
+  
 	} 
 	
 	public function setCodban($v)
 	{
 
-		if ($this->codban !== $v) {
-			$this->codban = $v;
-			$this->modifiedColumns[] = NpempleadosBancoPeer::CODBAN;
-		}
-
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = NpempleadosBancoPeer::CODBAN;
+      }
+  
 	} 
 	
 	public function setCuentaBanco($v)
 	{
 
-		if ($this->cuenta_banco !== $v) {
-			$this->cuenta_banco = $v;
-			$this->modifiedColumns[] = NpempleadosBancoPeer::CUENTA_BANCO;
-		}
-
+    if ($this->cuenta_banco !== $v) {
+        $this->cuenta_banco = $v;
+        $this->modifiedColumns[] = NpempleadosBancoPeer::CUENTA_BANCO;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NpempleadosBancoPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpempleadosBancoPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpempleadosBancoPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpempleadosBancoPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpempleadosBancoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpempleadosBancoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codempant = $rs->getString($startcol + 1);
+      $this->codempant = $rs->getString($startcol + 1);
 
-			$this->codban = $rs->getString($startcol + 2);
+      $this->codban = $rs->getString($startcol + 2);
 
-			$this->cuenta_banco = $rs->getString($startcol + 3);
+      $this->cuenta_banco = $rs->getString($startcol + 3);
 
-			$this->monto = $rs->getFloat($startcol + 4);
+      $this->monto = $rs->getFloat($startcol + 4);
 
-			$this->codnom = $rs->getString($startcol + 5);
+      $this->codnom = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating NpempleadosBanco object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating NpempleadosBanco object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -238,6 +267,7 @@ abstract class BaseNpempleadosBanco extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpempleadosBancoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpempleadosBancoPeer::doUpdate($this, $con);

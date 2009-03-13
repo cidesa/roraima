@@ -13,7 +13,7 @@ abstract class BaseFordefaccespPeer {
 	const CLASS_DEFAULT = 'lib.model.Fordefaccesp';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 15;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,33 @@ abstract class BaseFordefaccespPeer {
 	const CODEMPRES = 'fordefaccesp.CODEMPRES';
 
 	
+	const FECINI = 'fordefaccesp.FECINI';
+
+	
+	const FECCUL = 'fordefaccesp.FECCUL';
+
+	
+	const DESBIESER = 'fordefaccesp.DESBIESER';
+
+	
+	const ORGEJE = 'fordefaccesp.ORGEJE';
+
+	
+	const CODUNIMED = 'fordefaccesp.CODUNIMED';
+
+	
+	const CODEST = 'fordefaccesp.CODEST';
+
+	
+	const CODMUN = 'fordefaccesp.CODMUN';
+
+	
+	const CODPAR = 'fordefaccesp.CODPAR';
+
+	
+	const ESPADIUBIGEO = 'fordefaccesp.ESPADIUBIGEO';
+
+	
 	const ID = 'fordefaccesp.ID';
 
 	
@@ -43,18 +70,18 @@ abstract class BaseFordefaccespPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codaccesp', 'Desaccesp', 'Nomabraccesp', 'Codempres', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FordefaccespPeer::CODPRO, FordefaccespPeer::CODACCESP, FordefaccespPeer::DESACCESP, FordefaccespPeer::NOMABRACCESP, FordefaccespPeer::CODEMPRES, FordefaccespPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codaccesp', 'desaccesp', 'nomabraccesp', 'codempres', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codaccesp', 'Desaccesp', 'Nomabraccesp', 'Codempres', 'Fecini', 'Feccul', 'Desbieser', 'Orgeje', 'Codunimed', 'Codest', 'Codmun', 'Codpar', 'Espadiubigeo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FordefaccespPeer::CODPRO, FordefaccespPeer::CODACCESP, FordefaccespPeer::DESACCESP, FordefaccespPeer::NOMABRACCESP, FordefaccespPeer::CODEMPRES, FordefaccespPeer::FECINI, FordefaccespPeer::FECCUL, FordefaccespPeer::DESBIESER, FordefaccespPeer::ORGEJE, FordefaccespPeer::CODUNIMED, FordefaccespPeer::CODEST, FordefaccespPeer::CODMUN, FordefaccespPeer::CODPAR, FordefaccespPeer::ESPADIUBIGEO, FordefaccespPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codaccesp', 'desaccesp', 'nomabraccesp', 'codempres', 'fecini', 'feccul', 'desbieser', 'orgeje', 'codunimed', 'codest', 'codmun', 'codpar', 'espadiubigeo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codaccesp' => 1, 'Desaccesp' => 2, 'Nomabraccesp' => 3, 'Codempres' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (FordefaccespPeer::CODPRO => 0, FordefaccespPeer::CODACCESP => 1, FordefaccespPeer::DESACCESP => 2, FordefaccespPeer::NOMABRACCESP => 3, FordefaccespPeer::CODEMPRES => 4, FordefaccespPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codaccesp' => 1, 'desaccesp' => 2, 'nomabraccesp' => 3, 'codempres' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codaccesp' => 1, 'Desaccesp' => 2, 'Nomabraccesp' => 3, 'Codempres' => 4, 'Fecini' => 5, 'Feccul' => 6, 'Desbieser' => 7, 'Orgeje' => 8, 'Codunimed' => 9, 'Codest' => 10, 'Codmun' => 11, 'Codpar' => 12, 'Espadiubigeo' => 13, 'Id' => 14, ),
+		BasePeer::TYPE_COLNAME => array (FordefaccespPeer::CODPRO => 0, FordefaccespPeer::CODACCESP => 1, FordefaccespPeer::DESACCESP => 2, FordefaccespPeer::NOMABRACCESP => 3, FordefaccespPeer::CODEMPRES => 4, FordefaccespPeer::FECINI => 5, FordefaccespPeer::FECCUL => 6, FordefaccespPeer::DESBIESER => 7, FordefaccespPeer::ORGEJE => 8, FordefaccespPeer::CODUNIMED => 9, FordefaccespPeer::CODEST => 10, FordefaccespPeer::CODMUN => 11, FordefaccespPeer::CODPAR => 12, FordefaccespPeer::ESPADIUBIGEO => 13, FordefaccespPeer::ID => 14, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codaccesp' => 1, 'desaccesp' => 2, 'nomabraccesp' => 3, 'codempres' => 4, 'fecini' => 5, 'feccul' => 6, 'desbieser' => 7, 'orgeje' => 8, 'codunimed' => 9, 'codest' => 10, 'codmun' => 11, 'codpar' => 12, 'espadiubigeo' => 13, 'id' => 14, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
 	);
 
 	
@@ -117,6 +144,24 @@ abstract class BaseFordefaccespPeer {
 		$criteria->addSelectColumn(FordefaccespPeer::NOMABRACCESP);
 
 		$criteria->addSelectColumn(FordefaccespPeer::CODEMPRES);
+
+		$criteria->addSelectColumn(FordefaccespPeer::FECINI);
+
+		$criteria->addSelectColumn(FordefaccespPeer::FECCUL);
+
+		$criteria->addSelectColumn(FordefaccespPeer::DESBIESER);
+
+		$criteria->addSelectColumn(FordefaccespPeer::ORGEJE);
+
+		$criteria->addSelectColumn(FordefaccespPeer::CODUNIMED);
+
+		$criteria->addSelectColumn(FordefaccespPeer::CODEST);
+
+		$criteria->addSelectColumn(FordefaccespPeer::CODMUN);
+
+		$criteria->addSelectColumn(FordefaccespPeer::CODPAR);
+
+		$criteria->addSelectColumn(FordefaccespPeer::ESPADIUBIGEO);
 
 		$criteria->addSelectColumn(FordefaccespPeer::ID);
 
@@ -220,6 +265,7 @@ abstract class BaseFordefaccespPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefaccespPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

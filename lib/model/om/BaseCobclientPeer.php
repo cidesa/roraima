@@ -360,6 +360,7 @@ abstract class BaseCobclientPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobclientPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

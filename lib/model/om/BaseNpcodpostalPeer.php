@@ -205,6 +205,7 @@ abstract class BaseNpcodpostalPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcodpostalPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

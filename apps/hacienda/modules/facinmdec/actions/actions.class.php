@@ -23,6 +23,7 @@ class facinmdecActions extends autofacinmdecActions
       $this->saveFcdeclar($this->fcdeclar);
 
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {

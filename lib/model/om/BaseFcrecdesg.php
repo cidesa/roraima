@@ -29,94 +29,120 @@ abstract class BaseFcrecdesg extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrede()
-	{
+  
+  public function getCodrede()
+  {
 
-		return $this->codrede; 		
-	}
-	
-	public function getDias()
-	{
+    return trim($this->codrede);
 
-		return number_format($this->dias,2,',','.');
-		
-	}
-	
-	public function getPorcien()
-	{
+  }
+  
+  public function getDias($val=false)
+  {
 
-		return number_format($this->porcien,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->dias,2,',','.');
+    else return $this->dias;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPorcien($val=false)
+  {
+
+    if($val) return number_format($this->porcien,2,',','.');
+    else return $this->porcien;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrede($v)
 	{
 
-		if ($this->codrede !== $v) {
-			$this->codrede = $v;
-			$this->modifiedColumns[] = FcrecdesgPeer::CODREDE;
-		}
-
+    if ($this->codrede !== $v) {
+        $this->codrede = $v;
+        $this->modifiedColumns[] = FcrecdesgPeer::CODREDE;
+      }
+  
 	} 
 	
 	public function setDias($v)
 	{
 
-		if ($this->dias !== $v) {
-			$this->dias = $v;
-			$this->modifiedColumns[] = FcrecdesgPeer::DIAS;
-		}
-
+    if ($this->dias !== $v) {
+        $this->dias = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrecdesgPeer::DIAS;
+      }
+  
 	} 
 	
 	public function setPorcien($v)
 	{
 
-		if ($this->porcien !== $v) {
-			$this->porcien = $v;
-			$this->modifiedColumns[] = FcrecdesgPeer::PORCIEN;
-		}
-
+    if ($this->porcien !== $v) {
+        $this->porcien = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrecdesgPeer::PORCIEN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcrecdesgPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcrecdesgPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrede = $rs->getString($startcol + 0);
+      $this->codrede = $rs->getString($startcol + 0);
 
-			$this->dias = $rs->getFloat($startcol + 1);
+      $this->dias = $rs->getFloat($startcol + 1);
 
-			$this->porcien = $rs->getFloat($startcol + 2);
+      $this->porcien = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcrecdesg object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcrecdesg object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -173,6 +199,7 @@ abstract class BaseFcrecdesg extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcrecdesgPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcrecdesgPeer::doUpdate($this, $con);

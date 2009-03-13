@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefcatpre
+    theme:            default
+    fields:
+      codcat: { name: Código}
+      nomcat: { name: Nombre}
+      descat: { name: Descripción}
+      objsec: { name: Objetivo de la Unidad}
+      codemp: { name: Empleado Responsable}
+      nomemp: { name: Nombre del Responsable }
+
+    list:
+      title:          Unidades Ejecutoras
+      filters:        [codcat]
+      display:        [=codcat, nomcat]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort:    codcat
+    edit:
+      title:         Edición de Unidades Ejecutoras
+      display:      [=codcat, nomcat, descat, objsec, codemp, nomemp]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

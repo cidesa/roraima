@@ -265,6 +265,7 @@ abstract class BaseBnipcactPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BnipcactPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

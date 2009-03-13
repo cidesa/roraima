@@ -1,44 +1,46 @@
 <?php
 
 
-	
+
 class RhvalnivMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.RhvalnivMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.RhvalnivMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('rhvalniv');
 		$tMap->setPhpName('Rhvalniv');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('rhvalniv_SEQ');
 
 		$tMap->addColumn('CODNIV', 'Codniv', 'string', CreoleTypes::VARCHAR, true, 4);
 
 		$tMap->addColumn('CODVALINS', 'Codvalins', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('PORVALINS', 'Porvalins', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORVALINS', 'Porvalins', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

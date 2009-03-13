@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FcreginmMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcreginmMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcreginmMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcreginm');
 		$tMap->setPhpName('Fcreginm');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcreginm_SEQ');
 
 		$tMap->addColumn('NROINM', 'Nroinm', 'string', CreoleTypes::VARCHAR, false, 15);
 
@@ -44,13 +46,13 @@ class FcreginmMapBuilder {
 
 		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 14);
 
-		$tMap->addColumn('FECPAG', 'Fecpag', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECPAG', 'Fecpag', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECCAL', 'Feccal', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECCAL', 'Feccal', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('DIRINM', 'Dirinm', 'string', CreoleTypes::VARCHAR, false, 255);
+		$tMap->addColumn('DIRINM', 'Dirinm', 'string', CreoleTypes::VARCHAR, false, 1000);
 
 		$tMap->addColumn('LINNOR', 'Linnor', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -60,21 +62,19 @@ class FcreginmMapBuilder {
 
 		$tMap->addColumn('LINOES', 'Linoes', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('MTRTER', 'Mtrter', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MTRTER', 'Mtrter', 'double', CreoleTypes::NUMERIC, false, 20);
 
-		$tMap->addColumn('MTRCON', 'Mtrcon', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MTRCON', 'Mtrcon', 'double', CreoleTypes::NUMERIC, false, 20);
 
-		$tMap->addColumn('BSTER', 'Bster', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('BSTER', 'Bster', 'double', CreoleTypes::NUMERIC, false, 20);
 
-		$tMap->addColumn('BSCON', 'Bscon', 'double', CreoleTypes::NUMERIC, false);
-
-		$tMap->addColumn('DOCPRO', 'Docpro', 'string', CreoleTypes::VARCHAR, false, 200);
+		$tMap->addColumn('BSCON', 'Bscon', 'double', CreoleTypes::NUMERIC, false, 20);
 
 		$tMap->addColumn('RIFREP', 'Rifrep', 'string', CreoleTypes::VARCHAR, false, 14);
 
 		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, false, 40);
 
-		$tMap->addColumn('FECREC', 'Fecrec', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREC', 'Fecrec', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('ESTINM', 'Estinm', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -86,77 +86,41 @@ class FcreginmMapBuilder {
 
 		$tMap->addColumn('DIRCON', 'Dircon', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('CLACON', 'Clacon', 'string', CreoleTypes::VARCHAR, false, 12);
-
-		$tMap->addColumn('FECADQ', 'Fecadq', 'int', CreoleTypes::DATE, false);
-
-		$tMap->addColumn('VALINM', 'Valinm', 'double', CreoleTypes::NUMERIC, false);
-
-		$tMap->addColumn('CODMAN', 'Codman', 'string', CreoleTypes::VARCHAR, false, 4);
-
-		$tMap->addColumn('CODSEC', 'Codsec', 'string', CreoleTypes::VARCHAR, false, 4);
-
-		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 4);
-
-		$tMap->addColumn('NROINMANT', 'Nroinmant', 'string', CreoleTypes::VARCHAR, false, 15);
-
-		$tMap->addColumn('TOTTER', 'Totter', 'double', CreoleTypes::NUMERIC, false);
-
-		$tMap->addColumn('TOTCON', 'Totcon', 'double', CreoleTypes::NUMERIC, false);
-
-		$tMap->addColumn('TOTAL', 'Total', 'double', CreoleTypes::NUMERIC, false);
-
-		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, false, 3);
-
-		$tMap->addColumn('CODZON', 'Codzon', 'double', CreoleTypes::NUMERIC, false);
-
-		$tMap->addColumn('DESTIP', 'Destip', 'string', CreoleTypes::VARCHAR, false, 150);
-
-		$tMap->addColumn('DESZON', 'Deszon', 'string', CreoleTypes::VARCHAR, false, 50);
-
-		$tMap->addColumn('ANUAL', 'Anual', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALINM', 'Valinm', 'double', CreoleTypes::NUMERIC, false, 20);
 
 		$tMap->addColumn('FOLIO', 'Folio', 'string', CreoleTypes::VARCHAR, false, 10);
 
 		$tMap->addColumn('TOMO', 'Tomo', 'string', CreoleTypes::VARCHAR, false, 5);
 
-		$tMap->addColumn('NUMDOC', 'Numdoc', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('NUMDOC', 'Numdoc', 'double', CreoleTypes::NUMERIC, false, 20);
 
-		$tMap->addColumn('FECDOC', 'Fecdoc', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDOC', 'Fecdoc', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('USOINM', 'Usoinm', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('DESDE', 'Desde', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('AVEINM', 'Aveinm', 'string', CreoleTypes::VARCHAR, false, 1000);
 
-		$tMap->addColumn('HASTA', 'Hasta', 'string', CreoleTypes::VARCHAR, false, 50);
+		$tMap->addColumn('NROCIV', 'Nrociv', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('ORD', 'Ord', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addColumn('URBINM', 'Urbinm', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('ART', 'Art', 'string', CreoleTypes::VARCHAR, false, 10);
+		$tMap->addColumn('TIPOPE', 'Tipope', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('FECDIR', 'Fecdir', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('PRODOC', 'Prodoc', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('FECAVA', 'Fecava', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('TRIDOC', 'Tridoc', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('DIRINM1', 'Dirinm1', 'string', CreoleTypes::VARCHAR, false, 255);
+		$tMap->addColumn('AREDOC', 'Aredoc', 'double', CreoleTypes::NUMERIC, false, 32);
 
-		$tMap->addColumn('FECELA', 'Fecela', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('LINNORDOC', 'Linnordoc', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('TRI', 'Tri', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addColumn('LINSURDOC', 'Linsurdoc', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('PROT', 'Prot', 'string', CreoleTypes::VARCHAR, false, 20);
+		$tMap->addColumn('LINESTDOC', 'Linestdoc', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('TIPOBOL', 'Tipobol', 'string', CreoleTypes::VARCHAR, false, 150);
-
-		$tMap->addColumn('NOMSITINM', 'Nomsitinm', 'string', CreoleTypes::VARCHAR, false, 255);
-
-		$tMap->addColumn('IMPANU', 'Impanu', 'double', CreoleTypes::NUMERIC, false);
-
-		$tMap->addColumn('IMPTRI', 'Imptri', 'double', CreoleTypes::NUMERIC, false);
-
-		$tMap->addColumn('ANUALT', 'Anualt', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LINOESDOC', 'Linoesdoc', 'string', CreoleTypes::VARCHAR, false, 250);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

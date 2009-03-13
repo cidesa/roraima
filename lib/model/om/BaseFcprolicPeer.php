@@ -13,7 +13,7 @@ abstract class BaseFcprolicPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcprolic';
 
 	
-	const NUM_COLUMNS = 17;
+	const NUM_COLUMNS = 19;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -68,6 +68,12 @@ abstract class BaseFcprolicPeer {
 	const SEMDIA = 'fcprolic.SEMDIA';
 
 	
+	const TEXPUB = 'fcprolic.TEXPUB';
+
+	
+	const PROTIP = 'fcprolic.PROTIP';
+
+	
 	const ID = 'fcprolic.ID';
 
 	
@@ -76,18 +82,18 @@ abstract class BaseFcprolicPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nrocon', 'Fecreg', 'Rifcon', 'Tippro', 'Despro', 'Dirpro', 'Monpro', 'Monimp', 'Funrec', 'Fecrec', 'Rifrep', 'Stapro', 'Stadec', 'Nomcon', 'Dircon', 'Semdia', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcprolicPeer::NROCON, FcprolicPeer::FECREG, FcprolicPeer::RIFCON, FcprolicPeer::TIPPRO, FcprolicPeer::DESPRO, FcprolicPeer::DIRPRO, FcprolicPeer::MONPRO, FcprolicPeer::MONIMP, FcprolicPeer::FUNREC, FcprolicPeer::FECREC, FcprolicPeer::RIFREP, FcprolicPeer::STAPRO, FcprolicPeer::STADEC, FcprolicPeer::NOMCON, FcprolicPeer::DIRCON, FcprolicPeer::SEMDIA, FcprolicPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nrocon', 'fecreg', 'rifcon', 'tippro', 'despro', 'dirpro', 'monpro', 'monimp', 'funrec', 'fecrec', 'rifrep', 'stapro', 'stadec', 'nomcon', 'dircon', 'semdia', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Nrocon', 'Fecreg', 'Rifcon', 'Tippro', 'Despro', 'Dirpro', 'Monpro', 'Monimp', 'Funrec', 'Fecrec', 'Rifrep', 'Stapro', 'Stadec', 'Nomcon', 'Dircon', 'Semdia', 'Texpub', 'Protip', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcprolicPeer::NROCON, FcprolicPeer::FECREG, FcprolicPeer::RIFCON, FcprolicPeer::TIPPRO, FcprolicPeer::DESPRO, FcprolicPeer::DIRPRO, FcprolicPeer::MONPRO, FcprolicPeer::MONIMP, FcprolicPeer::FUNREC, FcprolicPeer::FECREC, FcprolicPeer::RIFREP, FcprolicPeer::STAPRO, FcprolicPeer::STADEC, FcprolicPeer::NOMCON, FcprolicPeer::DIRCON, FcprolicPeer::SEMDIA, FcprolicPeer::TEXPUB, FcprolicPeer::PROTIP, FcprolicPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nrocon', 'fecreg', 'rifcon', 'tippro', 'despro', 'dirpro', 'monpro', 'monimp', 'funrec', 'fecrec', 'rifrep', 'stapro', 'stadec', 'nomcon', 'dircon', 'semdia', 'texpub', 'protip', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nrocon' => 0, 'Fecreg' => 1, 'Rifcon' => 2, 'Tippro' => 3, 'Despro' => 4, 'Dirpro' => 5, 'Monpro' => 6, 'Monimp' => 7, 'Funrec' => 8, 'Fecrec' => 9, 'Rifrep' => 10, 'Stapro' => 11, 'Stadec' => 12, 'Nomcon' => 13, 'Dircon' => 14, 'Semdia' => 15, 'Id' => 16, ),
-		BasePeer::TYPE_COLNAME => array (FcprolicPeer::NROCON => 0, FcprolicPeer::FECREG => 1, FcprolicPeer::RIFCON => 2, FcprolicPeer::TIPPRO => 3, FcprolicPeer::DESPRO => 4, FcprolicPeer::DIRPRO => 5, FcprolicPeer::MONPRO => 6, FcprolicPeer::MONIMP => 7, FcprolicPeer::FUNREC => 8, FcprolicPeer::FECREC => 9, FcprolicPeer::RIFREP => 10, FcprolicPeer::STAPRO => 11, FcprolicPeer::STADEC => 12, FcprolicPeer::NOMCON => 13, FcprolicPeer::DIRCON => 14, FcprolicPeer::SEMDIA => 15, FcprolicPeer::ID => 16, ),
-		BasePeer::TYPE_FIELDNAME => array ('nrocon' => 0, 'fecreg' => 1, 'rifcon' => 2, 'tippro' => 3, 'despro' => 4, 'dirpro' => 5, 'monpro' => 6, 'monimp' => 7, 'funrec' => 8, 'fecrec' => 9, 'rifrep' => 10, 'stapro' => 11, 'stadec' => 12, 'nomcon' => 13, 'dircon' => 14, 'semdia' => 15, 'id' => 16, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Nrocon' => 0, 'Fecreg' => 1, 'Rifcon' => 2, 'Tippro' => 3, 'Despro' => 4, 'Dirpro' => 5, 'Monpro' => 6, 'Monimp' => 7, 'Funrec' => 8, 'Fecrec' => 9, 'Rifrep' => 10, 'Stapro' => 11, 'Stadec' => 12, 'Nomcon' => 13, 'Dircon' => 14, 'Semdia' => 15, 'Texpub' => 16, 'Protip' => 17, 'Id' => 18, ),
+		BasePeer::TYPE_COLNAME => array (FcprolicPeer::NROCON => 0, FcprolicPeer::FECREG => 1, FcprolicPeer::RIFCON => 2, FcprolicPeer::TIPPRO => 3, FcprolicPeer::DESPRO => 4, FcprolicPeer::DIRPRO => 5, FcprolicPeer::MONPRO => 6, FcprolicPeer::MONIMP => 7, FcprolicPeer::FUNREC => 8, FcprolicPeer::FECREC => 9, FcprolicPeer::RIFREP => 10, FcprolicPeer::STAPRO => 11, FcprolicPeer::STADEC => 12, FcprolicPeer::NOMCON => 13, FcprolicPeer::DIRCON => 14, FcprolicPeer::SEMDIA => 15, FcprolicPeer::TEXPUB => 16, FcprolicPeer::PROTIP => 17, FcprolicPeer::ID => 18, ),
+		BasePeer::TYPE_FIELDNAME => array ('nrocon' => 0, 'fecreg' => 1, 'rifcon' => 2, 'tippro' => 3, 'despro' => 4, 'dirpro' => 5, 'monpro' => 6, 'monimp' => 7, 'funrec' => 8, 'fecrec' => 9, 'rifrep' => 10, 'stapro' => 11, 'stadec' => 12, 'nomcon' => 13, 'dircon' => 14, 'semdia' => 15, 'texpub' => 16, 'protip' => 17, 'id' => 18, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	
@@ -172,6 +178,10 @@ abstract class BaseFcprolicPeer {
 		$criteria->addSelectColumn(FcprolicPeer::DIRCON);
 
 		$criteria->addSelectColumn(FcprolicPeer::SEMDIA);
+
+		$criteria->addSelectColumn(FcprolicPeer::TEXPUB);
+
+		$criteria->addSelectColumn(FcprolicPeer::PROTIP);
 
 		$criteria->addSelectColumn(FcprolicPeer::ID);
 
@@ -275,6 +285,7 @@ abstract class BaseFcprolicPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcprolicPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

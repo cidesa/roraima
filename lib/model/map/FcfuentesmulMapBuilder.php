@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FcfuentesmulMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcfuentesmulMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcfuentesmulMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcfuentesmul');
 		$tMap->setPhpName('Fcfuentesmul');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcfuentesmul_SEQ');
 
 		$tMap->addColumn('CODMUL', 'Codmul', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -39,6 +41,6 @@ class FcfuentesmulMapBuilder {
 		$tMap->addColumn('CODFUEGEN', 'Codfuegen', 'string', CreoleTypes::VARCHAR, false, 2);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

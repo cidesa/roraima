@@ -210,6 +210,7 @@ abstract class BaseNpssoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpssoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -10,53 +10,68 @@
  */
 class biedisactmuenewActions extends autobiedisactmuenewActions
 {
+	 private static $coderror=-1;
+
   public function CargarTipos()
-	{
-	$c = new Criteria();
-	$lista_tip = BndisbiePeer::doSelect($c);
-	
-	$tipos = array();
-	
-	foreach($lista_tip as $obj_tip)
-	{
-		$tipos += array($obj_tip->getCoddis()." - ".$obj_tip->getDesdis() => $obj_tip->getCoddis()." - ".$obj_tip->getDesdis());    
-	}
-	return $tipos;
+  {
+  $c = new Criteria();
+  $lista_tip = BndisbiePeer::doSelect($c);
+
+  $tipos = array();
+
+  foreach($lista_tip as $obj_tip)
+  {
+    $tipos += array($obj_tip->getCoddis()." - ".$obj_tip->getDesdis() => $obj_tip->getCoddis()." - ".$obj_tip->getDesdis());
+  }
+  return $tipos;
     }
-	
+
   public function executeEdit()
   {
     $this->bndismue = $this->getBndismueOrCreate();
+
     $this->tipos = $this->CargarTipos();
+    $this->setVars();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateBndismueFromRequest();
 
-      $this->saveBndismue($this->bndismue);
+     if ($this->saveBndismue($this->bndismue)==-1)
+      {
 
-      $this->setFlash('notice', 'Your modifications have been saved');
+	      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('biedisactmuenew/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('biedisactmuenew/list');
-      }
-      else
-      {
-        return $this->redirect('biedisactmuenew/edit?id='.$this->bndismue->getId());
-      }
+	      if ($this->getRequestParameter('save_and_add'))
+	      {
+	        return $this->redirect('biedisactmuenew/create');
+	      }
+	      else if ($this->getRequestParameter('save_and_list'))
+	      {
+	        return $this->redirect('biedisactmuenew/list');
+	      }
+	      else
+	      {
+	        return $this->redirect('biedisactmuenew/edit?id='.$this->bndismue->getId());
+	      }
+     }
+	    else
+	      {
+		          $this->labels = $this->getLabels();
+		          $err = Herramientas::obtenerMensajeError($this->coderror);
+	         	  $this->getRequest()->setError('',$err);
+		          return sfView::SUCCESS;
+	      }
+
     }
     else
     {
       $this->labels = $this->getLabels();
     }
   }
-	
-  
+
+
   protected function updateBndismueFromRequest()
   {
     $bndismue = $this->getRequestParameter('bndismue');
@@ -178,7 +193,84 @@ class biedisactmuenewActions extends autobiedisactmuenewActions
       $this->bndismue->setObsdismue($bndismue['obsdismue']);
     }
     $this->bndismue->setStadismue('A');
-    
+
   }
-  
+
+  public function setVars()
+  {
+      $this->mascaracatalogo = Herramientas::getX_vacio('codins','bndefins','ForAct','001');
+      $this->mascaraformatoubi = Herramientas::getX_vacio('codins','bndefins','ForUbi','001');
+      $this->mascaralonformato = Herramientas::getX_vacio('codins','bndefins','LonAct','001');
+      $this->mascaralonubicacion = Herramientas::getX_vacio('codins','bndefins','LonUbi','001');
+  }
+
+  public function executeAjax()
+  {
+     $cajtexmos    = $this->getRequestParameter('cajtexmos');
+     $cajtexcom    = $this->getRequestParameter('cajtexcom');
+     $cajtexubi    = $this->getRequestParameter('cajtexubi');
+     $cajtexdesubi = $this->getRequestParameter('cajtexdesubi');
+
+     if ($this->getRequestParameter('ajax')=='0')
+      {
+        $codmue=Herramientas::getX('codact','Bnregmue','codmue',$this->getRequestParameter('codigo'));
+        $desmue=Herramientas::getX('codmue','Bnregmue','desmue',$codmue);
+        $output = '[["'.$cajtexmos.'","'.$codmue.'",""],["'.$cajtexcom.'","'.$desmue.'"]]';
+      }
+
+    elseif ($this->getRequestParameter('ajax')=='1')
+      {
+        $codact = Herramientas::getX('codmue','Bnregmue','codact',$this->getRequestParameter('codigo'));
+        $desmue = Herramientas::getX('codmue','Bnregmue','desmue',$this->getRequestParameter('codigo'));
+
+        $codubi=Herramientas::getX('codact','Bnregmue','codubi',$codact);
+        $desubi=Herramientas::getX('codubi','Bnubibie','desubi',$codubi);
+
+        $output = '[["'.$cajtexmos.'","'.$codact.'",""],["'.$cajtexcom.'","'.$desmue.'"],["'.$cajtexubi.'","'.$codubi.'"],["'.$cajtexdesubi.'","'.$desubi.'"]]';
+
+      }
+      elseif ($this->getRequestParameter('ajax')=='2')
+      {
+        $codigo=str_pad($this->getRequestParameter('codigo'),4,"0",STR_PAD_LEFT);
+        $dato=BnmotdisPeer::getDesmot($codigo);
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
+      }
+    elseif ($this->getRequestParameter('ajax')=='3')
+      {
+        $dato=BnubibiePeer::getDesubicacion($this->getRequestParameter('codigo'));
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+      }
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      return sfView::HEADER_ONLY;
+  }
+
+ protected function saveBndismue($bndismue)
+  {
+
+    $this->coderror = Muebles::Validar_biedisactmuenew($bndismue->getFecdismue(),$bndismue->getFecdevdis());
+    if ($this->coderror==-1)
+    {
+    $bndismue->save();
+    return $this->coderror;
+    }
+
+
+    return $this->coderror;
+
+  }
+
+public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->bndismue = $this->getBndismueOrCreate();
+    $this->setVars();
+    $this->tipos = $this->CargarTipos();
+    $this->updateBndismueFromRequest();
+
+    $this->labels = $this->getLabels();
+
+    return sfView::SUCCESS;
+  }
+
 }

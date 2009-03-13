@@ -77,339 +77,376 @@ abstract class BaseCpconeje extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpre()
-	{
+  
+  public function getCodpre()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getNompre()
-	{
+    return trim($this->codpre);
 
-		return $this->nompre; 		
-	}
-	
-	public function getMondis()
-	{
+  }
+  
+  public function getNompre()
+  {
 
-		return number_format($this->mondis,2,',','.');
-		
-	}
-	
-	public function getMontra()
-	{
+    return trim($this->nompre);
 
-		return number_format($this->montra,2,',','.');
-		
-	}
-	
-	public function getMonadi()
-	{
+  }
+  
+  public function getMondis($val=false)
+  {
 
-		return number_format($this->monadi,2,',','.');
-		
-	}
-	
-	public function getMonasi()
-	{
+    if($val) return number_format($this->mondis,2,',','.');
+    else return $this->mondis;
 
-		return number_format($this->monasi,2,',','.');
-		
-	}
-	
-	public function getRef()
-	{
+  }
+  
+  public function getMontra($val=false)
+  {
 
-		return $this->ref; 		
-	}
-	
-	public function getFecha($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->montra,2,',','.');
+    else return $this->montra;
 
-		if ($this->fecha === null || $this->fecha === '') {
-			return null;
-		} elseif (!is_int($this->fecha)) {
-						$ts = strtotime($this->fecha);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
-			}
-		} else {
-			$ts = $this->fecha;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMonadi($val=false)
+  {
 
-	
-	public function getTipo()
-	{
+    if($val) return number_format($this->monadi,2,',','.');
+    else return $this->monadi;
 
-		return $this->tipo; 		
-	}
-	
-	public function getDescrip()
-	{
+  }
+  
+  public function getMonasi($val=false)
+  {
 
-		return $this->descrip; 		
-	}
-	
-	public function getMonimp()
-	{
+    if($val) return number_format($this->monasi,2,',','.');
+    else return $this->monasi;
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getMonaju()
-	{
+  }
+  
+  public function getRef()
+  {
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getStatus()
-	{
+    return trim($this->ref);
 
-		return $this->status; 		
-	}
-	
-	public function getMondim()
-	{
+  }
+  
+  public function getFecha($format = 'Y-m-d')
+  {
 
-		return number_format($this->mondim,2,',','.');
-		
-	}
-	
-	public function getMontrn()
-	{
+    if ($this->fecha === null || $this->fecha === '') {
+      return null;
+    } elseif (!is_int($this->fecha)) {
+            $ts = adodb_strtotime($this->fecha);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
+      }
+    } else {
+      $ts = $this->fecha;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->montrn,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  
+  public function getTipo()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipo);
+
+  }
+  
+  public function getDescrip()
+  {
+
+    return trim($this->descrip);
+
+  }
+  
+  public function getMonimp($val=false)
+  {
+
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
+
+  }
+  
+  public function getMonaju($val=false)
+  {
+
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getMondim($val=false)
+  {
+
+    if($val) return number_format($this->mondim,2,',','.');
+    else return $this->mondim;
+
+  }
+  
+  public function getMontrn($val=false)
+  {
+
+    if($val) return number_format($this->montrn,2,',','.');
+    else return $this->montrn;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpconejePeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpconejePeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNompre($v)
 	{
 
-		if ($this->nompre !== $v) {
-			$this->nompre = $v;
-			$this->modifiedColumns[] = CpconejePeer::NOMPRE;
-		}
-
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = CpconejePeer::NOMPRE;
+      }
+  
 	} 
 	
 	public function setMondis($v)
 	{
 
-		if ($this->mondis !== $v) {
-			$this->mondis = $v;
-			$this->modifiedColumns[] = CpconejePeer::MONDIS;
-		}
-
+    if ($this->mondis !== $v) {
+        $this->mondis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpconejePeer::MONDIS;
+      }
+  
 	} 
 	
 	public function setMontra($v)
 	{
 
-		if ($this->montra !== $v) {
-			$this->montra = $v;
-			$this->modifiedColumns[] = CpconejePeer::MONTRA;
-		}
-
+    if ($this->montra !== $v) {
+        $this->montra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpconejePeer::MONTRA;
+      }
+  
 	} 
 	
 	public function setMonadi($v)
 	{
 
-		if ($this->monadi !== $v) {
-			$this->monadi = $v;
-			$this->modifiedColumns[] = CpconejePeer::MONADI;
-		}
-
+    if ($this->monadi !== $v) {
+        $this->monadi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpconejePeer::MONADI;
+      }
+  
 	} 
 	
 	public function setMonasi($v)
 	{
 
-		if ($this->monasi !== $v) {
-			$this->monasi = $v;
-			$this->modifiedColumns[] = CpconejePeer::MONASI;
-		}
-
+    if ($this->monasi !== $v) {
+        $this->monasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpconejePeer::MONASI;
+      }
+  
 	} 
 	
 	public function setRef($v)
 	{
 
-		if ($this->ref !== $v) {
-			$this->ref = $v;
-			$this->modifiedColumns[] = CpconejePeer::REF;
-		}
-
+    if ($this->ref !== $v) {
+        $this->ref = $v;
+        $this->modifiedColumns[] = CpconejePeer::REF;
+      }
+  
 	} 
 	
 	public function setFecha($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecha !== $ts) {
-			$this->fecha = $ts;
-			$this->modifiedColumns[] = CpconejePeer::FECHA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha !== $ts) {
+      $this->fecha = $ts;
+      $this->modifiedColumns[] = CpconejePeer::FECHA;
+    }
 
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = CpconejePeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = CpconejePeer::TIPO;
+      }
+  
 	} 
 	
 	public function setDescrip($v)
 	{
 
-		if ($this->descrip !== $v) {
-			$this->descrip = $v;
-			$this->modifiedColumns[] = CpconejePeer::DESCRIP;
-		}
-
+    if ($this->descrip !== $v) {
+        $this->descrip = $v;
+        $this->modifiedColumns[] = CpconejePeer::DESCRIP;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = CpconejePeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpconejePeer::MONIMP;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CpconejePeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpconejePeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = CpconejePeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = CpconejePeer::STATUS;
+      }
+  
 	} 
 	
 	public function setMondim($v)
 	{
 
-		if ($this->mondim !== $v) {
-			$this->mondim = $v;
-			$this->modifiedColumns[] = CpconejePeer::MONDIM;
-		}
-
+    if ($this->mondim !== $v) {
+        $this->mondim = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpconejePeer::MONDIM;
+      }
+  
 	} 
 	
 	public function setMontrn($v)
 	{
 
-		if ($this->montrn !== $v) {
-			$this->montrn = $v;
-			$this->modifiedColumns[] = CpconejePeer::MONTRN;
-		}
-
+    if ($this->montrn !== $v) {
+        $this->montrn = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpconejePeer::MONTRN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpconejePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpconejePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpre = $rs->getString($startcol + 0);
+      $this->codpre = $rs->getString($startcol + 0);
 
-			$this->nompre = $rs->getString($startcol + 1);
+      $this->nompre = $rs->getString($startcol + 1);
 
-			$this->mondis = $rs->getFloat($startcol + 2);
+      $this->mondis = $rs->getFloat($startcol + 2);
 
-			$this->montra = $rs->getFloat($startcol + 3);
+      $this->montra = $rs->getFloat($startcol + 3);
 
-			$this->monadi = $rs->getFloat($startcol + 4);
+      $this->monadi = $rs->getFloat($startcol + 4);
 
-			$this->monasi = $rs->getFloat($startcol + 5);
+      $this->monasi = $rs->getFloat($startcol + 5);
 
-			$this->ref = $rs->getString($startcol + 6);
+      $this->ref = $rs->getString($startcol + 6);
 
-			$this->fecha = $rs->getDate($startcol + 7, null);
+      $this->fecha = $rs->getDate($startcol + 7, null);
 
-			$this->tipo = $rs->getString($startcol + 8);
+      $this->tipo = $rs->getString($startcol + 8);
 
-			$this->descrip = $rs->getString($startcol + 9);
+      $this->descrip = $rs->getString($startcol + 9);
 
-			$this->monimp = $rs->getFloat($startcol + 10);
+      $this->monimp = $rs->getFloat($startcol + 10);
 
-			$this->monaju = $rs->getFloat($startcol + 11);
+      $this->monaju = $rs->getFloat($startcol + 11);
 
-			$this->status = $rs->getString($startcol + 12);
+      $this->status = $rs->getString($startcol + 12);
 
-			$this->mondim = $rs->getFloat($startcol + 13);
+      $this->mondim = $rs->getFloat($startcol + 13);
 
-			$this->montrn = $rs->getFloat($startcol + 14);
+      $this->montrn = $rs->getFloat($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpconeje object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpconeje object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

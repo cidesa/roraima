@@ -33,111 +33,138 @@ abstract class BaseForfinotrcre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcat()
-	{
+  
+  public function getCodcat()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodparegr()
-	{
+    return trim($this->codcat);
 
-		return $this->codparegr; 		
-	}
-	
-	public function getCodparing()
-	{
+  }
+  
+  public function getCodparegr()
+  {
 
-		return $this->codparing; 		
-	}
-	
-	public function getMonfin()
-	{
+    return trim($this->codparegr);
 
-		return number_format($this->monfin,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodparing()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codparing);
+
+  }
+  
+  public function getMonfin($val=false)
+  {
+
+    if($val) return number_format($this->monfin,2,',','.');
+    else return $this->monfin;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = ForfinotrcrePeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = ForfinotrcrePeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodparegr($v)
 	{
 
-		if ($this->codparegr !== $v) {
-			$this->codparegr = $v;
-			$this->modifiedColumns[] = ForfinotrcrePeer::CODPAREGR;
-		}
-
+    if ($this->codparegr !== $v) {
+        $this->codparegr = $v;
+        $this->modifiedColumns[] = ForfinotrcrePeer::CODPAREGR;
+      }
+  
 	} 
 	
 	public function setCodparing($v)
 	{
 
-		if ($this->codparing !== $v) {
-			$this->codparing = $v;
-			$this->modifiedColumns[] = ForfinotrcrePeer::CODPARING;
-		}
-
+    if ($this->codparing !== $v) {
+        $this->codparing = $v;
+        $this->modifiedColumns[] = ForfinotrcrePeer::CODPARING;
+      }
+  
 	} 
 	
 	public function setMonfin($v)
 	{
 
-		if ($this->monfin !== $v) {
-			$this->monfin = $v;
-			$this->modifiedColumns[] = ForfinotrcrePeer::MONFIN;
-		}
-
+    if ($this->monfin !== $v) {
+        $this->monfin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForfinotrcrePeer::MONFIN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForfinotrcrePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForfinotrcrePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcat = $rs->getString($startcol + 0);
+      $this->codcat = $rs->getString($startcol + 0);
 
-			$this->codparegr = $rs->getString($startcol + 1);
+      $this->codparegr = $rs->getString($startcol + 1);
 
-			$this->codparing = $rs->getString($startcol + 2);
+      $this->codparing = $rs->getString($startcol + 2);
 
-			$this->monfin = $rs->getFloat($startcol + 3);
+      $this->monfin = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forfinotrcre object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forfinotrcre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -1,42 +1,44 @@
 <?php
 
 
-	
+
 class CaretserMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CaretserMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CaretserMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('caretser');
 		$tMap->setPhpName('Caretser');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('caretser_SEQ');
 
 		$tMap->addColumn('CODSER', 'Codser', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addColumn('CODRET', 'Codret', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

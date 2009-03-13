@@ -310,6 +310,7 @@ abstract class BaseTabla41Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Tabla41Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

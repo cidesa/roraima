@@ -1,0 +1,10 @@
+methods:
+  post:
+   - "lisicact{dessicact}"
+
+names:
+  lisicact{dessicact}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+

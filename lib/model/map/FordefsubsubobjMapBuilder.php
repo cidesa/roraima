@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FordefsubsubobjMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FordefsubsubobjMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FordefsubsubobjMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fordefsubsubobj');
 		$tMap->setPhpName('Fordefsubsubobj');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fordefsubsubobj_SEQ');
 
 		$tMap->addColumn('CODEQU', 'Codequ', 'string', CreoleTypes::VARCHAR, true, 2);
 
@@ -41,6 +43,6 @@ class FordefsubsubobjMapBuilder {
 		$tMap->addColumn('DESSUBSUBOBJ', 'Dessubsubobj', 'string', CreoleTypes::VARCHAR, true, 1000);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

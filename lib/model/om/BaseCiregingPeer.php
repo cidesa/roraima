@@ -13,7 +13,7 @@ abstract class BaseCiregingPeer {
 	const CLASS_DEFAULT = 'lib.model.Cireging';
 
 	
-	const NUM_COLUMNS = 17;
+	const NUM_COLUMNS = 25;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -68,6 +68,30 @@ abstract class BaseCiregingPeer {
 	const ANOING = 'cireging.ANOING';
 
 	
+	const NUMDEP = 'cireging.NUMDEP';
+
+	
+	const NUMOFI = 'cireging.NUMOFI';
+
+	
+	const NUMCOM = 'cireging.NUMCOM';
+
+	
+	const REFLIB = 'cireging.REFLIB';
+
+	
+	const STALIQ = 'cireging.STALIQ';
+
+	
+	const FECLIQ = 'cireging.FECLIQ';
+
+	
+	const REFLIQ = 'cireging.REFLIQ';
+
+	
+	const DESLIQ = 'cireging.DESLIQ';
+
+	
 	const ID = 'cireging.ID';
 
 	
@@ -76,18 +100,18 @@ abstract class BaseCiregingPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refing', 'Fecing', 'Desing', 'Codtip', 'Rifcon', 'Moning', 'Monrec', 'Mondes', 'Montot', 'Desanu', 'Fecanu', 'Staing', 'Ctaban', 'Tipmov', 'Previs', 'Anoing', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CiregingPeer::REFING, CiregingPeer::FECING, CiregingPeer::DESING, CiregingPeer::CODTIP, CiregingPeer::RIFCON, CiregingPeer::MONING, CiregingPeer::MONREC, CiregingPeer::MONDES, CiregingPeer::MONTOT, CiregingPeer::DESANU, CiregingPeer::FECANU, CiregingPeer::STAING, CiregingPeer::CTABAN, CiregingPeer::TIPMOV, CiregingPeer::PREVIS, CiregingPeer::ANOING, CiregingPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refing', 'fecing', 'desing', 'codtip', 'rifcon', 'moning', 'monrec', 'mondes', 'montot', 'desanu', 'fecanu', 'staing', 'ctaban', 'tipmov', 'previs', 'anoing', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Refing', 'Fecing', 'Desing', 'Codtip', 'Rifcon', 'Moning', 'Monrec', 'Mondes', 'Montot', 'Desanu', 'Fecanu', 'Staing', 'Ctaban', 'Tipmov', 'Previs', 'Anoing', 'Numdep', 'Numofi', 'Numcom', 'Reflib', 'Staliq', 'Fecliq', 'Refliq', 'Desliq', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CiregingPeer::REFING, CiregingPeer::FECING, CiregingPeer::DESING, CiregingPeer::CODTIP, CiregingPeer::RIFCON, CiregingPeer::MONING, CiregingPeer::MONREC, CiregingPeer::MONDES, CiregingPeer::MONTOT, CiregingPeer::DESANU, CiregingPeer::FECANU, CiregingPeer::STAING, CiregingPeer::CTABAN, CiregingPeer::TIPMOV, CiregingPeer::PREVIS, CiregingPeer::ANOING, CiregingPeer::NUMDEP, CiregingPeer::NUMOFI, CiregingPeer::NUMCOM, CiregingPeer::REFLIB, CiregingPeer::STALIQ, CiregingPeer::FECLIQ, CiregingPeer::REFLIQ, CiregingPeer::DESLIQ, CiregingPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refing', 'fecing', 'desing', 'codtip', 'rifcon', 'moning', 'monrec', 'mondes', 'montot', 'desanu', 'fecanu', 'staing', 'ctaban', 'tipmov', 'previs', 'anoing', 'numdep', 'numofi', 'numcom', 'reflib', 'staliq', 'fecliq', 'refliq', 'desliq', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refing' => 0, 'Fecing' => 1, 'Desing' => 2, 'Codtip' => 3, 'Rifcon' => 4, 'Moning' => 5, 'Monrec' => 6, 'Mondes' => 7, 'Montot' => 8, 'Desanu' => 9, 'Fecanu' => 10, 'Staing' => 11, 'Ctaban' => 12, 'Tipmov' => 13, 'Previs' => 14, 'Anoing' => 15, 'Id' => 16, ),
-		BasePeer::TYPE_COLNAME => array (CiregingPeer::REFING => 0, CiregingPeer::FECING => 1, CiregingPeer::DESING => 2, CiregingPeer::CODTIP => 3, CiregingPeer::RIFCON => 4, CiregingPeer::MONING => 5, CiregingPeer::MONREC => 6, CiregingPeer::MONDES => 7, CiregingPeer::MONTOT => 8, CiregingPeer::DESANU => 9, CiregingPeer::FECANU => 10, CiregingPeer::STAING => 11, CiregingPeer::CTABAN => 12, CiregingPeer::TIPMOV => 13, CiregingPeer::PREVIS => 14, CiregingPeer::ANOING => 15, CiregingPeer::ID => 16, ),
-		BasePeer::TYPE_FIELDNAME => array ('refing' => 0, 'fecing' => 1, 'desing' => 2, 'codtip' => 3, 'rifcon' => 4, 'moning' => 5, 'monrec' => 6, 'mondes' => 7, 'montot' => 8, 'desanu' => 9, 'fecanu' => 10, 'staing' => 11, 'ctaban' => 12, 'tipmov' => 13, 'previs' => 14, 'anoing' => 15, 'id' => 16, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Refing' => 0, 'Fecing' => 1, 'Desing' => 2, 'Codtip' => 3, 'Rifcon' => 4, 'Moning' => 5, 'Monrec' => 6, 'Mondes' => 7, 'Montot' => 8, 'Desanu' => 9, 'Fecanu' => 10, 'Staing' => 11, 'Ctaban' => 12, 'Tipmov' => 13, 'Previs' => 14, 'Anoing' => 15, 'Numdep' => 16, 'Numofi' => 17, 'Numcom' => 18, 'Reflib' => 19, 'Staliq' => 20, 'Fecliq' => 21, 'Refliq' => 22, 'Desliq' => 23, 'Id' => 24, ),
+		BasePeer::TYPE_COLNAME => array (CiregingPeer::REFING => 0, CiregingPeer::FECING => 1, CiregingPeer::DESING => 2, CiregingPeer::CODTIP => 3, CiregingPeer::RIFCON => 4, CiregingPeer::MONING => 5, CiregingPeer::MONREC => 6, CiregingPeer::MONDES => 7, CiregingPeer::MONTOT => 8, CiregingPeer::DESANU => 9, CiregingPeer::FECANU => 10, CiregingPeer::STAING => 11, CiregingPeer::CTABAN => 12, CiregingPeer::TIPMOV => 13, CiregingPeer::PREVIS => 14, CiregingPeer::ANOING => 15, CiregingPeer::NUMDEP => 16, CiregingPeer::NUMOFI => 17, CiregingPeer::NUMCOM => 18, CiregingPeer::REFLIB => 19, CiregingPeer::STALIQ => 20, CiregingPeer::FECLIQ => 21, CiregingPeer::REFLIQ => 22, CiregingPeer::DESLIQ => 23, CiregingPeer::ID => 24, ),
+		BasePeer::TYPE_FIELDNAME => array ('refing' => 0, 'fecing' => 1, 'desing' => 2, 'codtip' => 3, 'rifcon' => 4, 'moning' => 5, 'monrec' => 6, 'mondes' => 7, 'montot' => 8, 'desanu' => 9, 'fecanu' => 10, 'staing' => 11, 'ctaban' => 12, 'tipmov' => 13, 'previs' => 14, 'anoing' => 15, 'numdep' => 16, 'numofi' => 17, 'numcom' => 18, 'reflib' => 19, 'staliq' => 20, 'fecliq' => 21, 'refliq' => 22, 'desliq' => 23, 'id' => 24, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, )
 	);
 
 	
@@ -172,6 +196,22 @@ abstract class BaseCiregingPeer {
 		$criteria->addSelectColumn(CiregingPeer::PREVIS);
 
 		$criteria->addSelectColumn(CiregingPeer::ANOING);
+
+		$criteria->addSelectColumn(CiregingPeer::NUMDEP);
+
+		$criteria->addSelectColumn(CiregingPeer::NUMOFI);
+
+		$criteria->addSelectColumn(CiregingPeer::NUMCOM);
+
+		$criteria->addSelectColumn(CiregingPeer::REFLIB);
+
+		$criteria->addSelectColumn(CiregingPeer::STALIQ);
+
+		$criteria->addSelectColumn(CiregingPeer::FECLIQ);
+
+		$criteria->addSelectColumn(CiregingPeer::REFLIQ);
+
+		$criteria->addSelectColumn(CiregingPeer::DESLIQ);
 
 		$criteria->addSelectColumn(CiregingPeer::ID);
 
@@ -275,6 +315,7 @@ abstract class BaseCiregingPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CiregingPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

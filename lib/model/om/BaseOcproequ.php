@@ -29,93 +29,119 @@ abstract class BaseOcproequ extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodequ()
-	{
+    return trim($this->codpro);
 
-		return $this->codequ; 		
-	}
-	
-	public function getCanequ()
-	{
+  }
+  
+  public function getCodequ()
+  {
 
-		return number_format($this->canequ,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codequ);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCanequ($val=false)
+  {
+
+    if($val) return number_format($this->canequ,2,',','.');
+    else return $this->canequ;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = OcproequPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = OcproequPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodequ($v)
 	{
 
-		if ($this->codequ !== $v) {
-			$this->codequ = $v;
-			$this->modifiedColumns[] = OcproequPeer::CODEQU;
-		}
-
+    if ($this->codequ !== $v) {
+        $this->codequ = $v;
+        $this->modifiedColumns[] = OcproequPeer::CODEQU;
+      }
+  
 	} 
 	
 	public function setCanequ($v)
 	{
 
-		if ($this->canequ !== $v) {
-			$this->canequ = $v;
-			$this->modifiedColumns[] = OcproequPeer::CANEQU;
-		}
-
+    if ($this->canequ !== $v) {
+        $this->canequ = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcproequPeer::CANEQU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcproequPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcproequPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codequ = $rs->getString($startcol + 1);
+      $this->codequ = $rs->getString($startcol + 1);
 
-			$this->canequ = $rs->getFloat($startcol + 2);
+      $this->canequ = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocproequ object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocproequ object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseOcproequ extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcproequPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcproequPeer::doUpdate($this, $con);

@@ -1,3 +1,4 @@
+
 generator:
   class:              sfPropelAdminGenerator
   param:
@@ -5,38 +6,44 @@ generator:
     theme:            default
 
     fields:
-      codact:      { name : C骴igo Nivel }
-      codmue:      { name : C骴igo Activo }      
-      desmue:      { name : Descripci髇 }
-      
+      codact:      { name : C贸digo Nivel }
+      codmue:      { name : C贸digo Mueble }
+      desmue:      { name : Descripci贸n }
+
       ctadepcar:   { name : Cuenta a Cargar }
-      descta:      { name : Descripci髇 Cuenta a Cargar }  
-      ctadepabo:   { name : Cuenta a Abonar }  
-      desctaabo:   { name : Descripci髇 Cuenta a Abonar } 
-      
+      descta:      { name : Descripci贸n Cuenta a Cargar }
+      ctadepabo:   { name : Cuenta a Abonar }
+      desctaabo:   { name : Descripci贸n Cue贸 a Abonar }
+
       ctaajucar:   { name : Cuenta a Cargar }
-      desctaajucar:{ name : Descripci髇 Cuenta a Cargar }
-      ctaajuabo:   { name : Cuenta a Abonar }  
-      desctaajuabo:{ name : Descripci髇 Cuenta a Abonar } 
-      
+      desctaajucar:{ name : Descripci贸n Cuenta a Cargar }
+      ctaajuabo:   { name : Cuenta a Abonar }
+      desctaajuabo:{ name : Descripci贸n Cuenta a Abonar }
+
       ctarevcar:   { name : Cuenta a Cargar }
-      desctarevcar:{ name : Descripci髇 Cuenta a Cargar }
-      ctarevabo:   { name : Cuenta a Abonar }  
-      desctarevabo:{ name : Descripci髇 Cuenta a Abonar }
-      
-      ctapercar:   { name : Cuenta a Cargar } 
-      desctapercar:{ name : Descripci髇 Cuenta a Cargar }
-      ctaperabo:   { name : Cuenta a Abonar }        
-      desctaperabo:{ name : Descripci髇 Cuenta a Abonar } 
+      desctarevcar:{ name : Descripci贸n Cuenta a Cargar }
+      ctarevabo:   { name : Cuenta a Abonar }
+      desctarevabo:{ name : Descripci贸n Cuenta a Abonar }
+
+      ctapercar:   { name : Cuenta a Cargar }
+      desctapercar:{ name : Descripci贸n Cuenta a Cargar }
+      ctaperabo:   { name : Cuenta a Abonar }
+      desctaperabo:{ name : Descripci贸n Cuenta a Abonar }
 
     list:
-      title:          Definici髇 Contable de Muebles
-      display:        [codact, codmue, desmue]
+      title:          Definici贸n Contable de Muebles
+      display:        [=codact, codmue, desmue]
       filters:        [codact, codmue]
       object_actions:
         _edit:        ~
-        _delete:      ~              
-      max_per_page:   5    
+        _delete:      ~
+      max_per_page:   10
+      sort: codact
     edit:
-      title:          Definici髇 Contable de Muebles 
+      title:          Definici贸n Contable de Muebles
       display:        [codact, codmue, desmue, ctadepcar, descta, ctadepabo, desctaabo, ctaajucar, desctaajucar, ctaajuabo, desctaajuabo, ctarevcar, desctarevcar, ctarevabo, desctarevabo, ctapercar, desctapercar, ctaperabo, desctaperabo]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

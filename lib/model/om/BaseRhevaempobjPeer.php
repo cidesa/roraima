@@ -220,6 +220,7 @@ abstract class BaseRhevaempobjPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(RhevaempobjPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

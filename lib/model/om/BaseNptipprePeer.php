@@ -215,6 +215,7 @@ abstract class BaseNptipprePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NptipprePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

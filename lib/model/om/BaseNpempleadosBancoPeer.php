@@ -225,6 +225,7 @@ abstract class BaseNpempleadosBancoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpempleadosBancoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

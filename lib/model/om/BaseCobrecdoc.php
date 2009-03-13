@@ -37,152 +37,179 @@ abstract class BaseCobrecdoc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefdoc()
-	{
+  
+  public function getRefdoc()
+  {
 
-		return $this->refdoc; 		
-	}
-	
-	public function getCodcli()
-	{
+    return trim($this->refdoc);
 
-		return $this->codcli; 		
-	}
-	
-	public function getCodrec()
-	{
+  }
+  
+  public function getCodcli()
+  {
 
-		return $this->codrec; 		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
+    return trim($this->codcli);
 
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodrec()
+  {
 
-	
-	public function getMonrec()
-	{
+    return trim($this->codrec);
 
-		return number_format($this->monrec,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getMonrec($val=false)
+  {
+
+    if($val) return number_format($this->monrec,2,',','.');
+    else return $this->monrec;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefdoc($v)
 	{
 
-		if ($this->refdoc !== $v) {
-			$this->refdoc = $v;
-			$this->modifiedColumns[] = CobrecdocPeer::REFDOC;
-		}
-
+    if ($this->refdoc !== $v) {
+        $this->refdoc = $v;
+        $this->modifiedColumns[] = CobrecdocPeer::REFDOC;
+      }
+  
 	} 
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = CobrecdocPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = CobrecdocPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = CobrecdocPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = CobrecdocPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setFecrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = CobrecdocPeer::FECREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = CobrecdocPeer::FECREC;
+    }
 
 	} 
 	
 	public function setMonrec($v)
 	{
 
-		if ($this->monrec !== $v) {
-			$this->monrec = $v;
-			$this->modifiedColumns[] = CobrecdocPeer::MONREC;
-		}
-
+    if ($this->monrec !== $v) {
+        $this->monrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobrecdocPeer::MONREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CobrecdocPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CobrecdocPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refdoc = $rs->getString($startcol + 0);
+      $this->refdoc = $rs->getString($startcol + 0);
 
-			$this->codcli = $rs->getString($startcol + 1);
+      $this->codcli = $rs->getString($startcol + 1);
 
-			$this->codrec = $rs->getString($startcol + 2);
+      $this->codrec = $rs->getString($startcol + 2);
 
-			$this->fecrec = $rs->getDate($startcol + 3, null);
+      $this->fecrec = $rs->getDate($startcol + 3, null);
 
-			$this->monrec = $rs->getFloat($startcol + 4);
+      $this->monrec = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cobrecdoc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cobrecdoc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +266,7 @@ abstract class BaseCobrecdoc extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CobrecdocPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CobrecdocPeer::doUpdate($this, $con);

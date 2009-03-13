@@ -6,26 +6,31 @@ generator:
     fields:
       codtipcon:    { name: Codigo Contrato }
       destipcon:    { name: Descripcion Contrato }
-      nomnom:       { name: Tipo de Nomina }
-      frepagcon:    { name: Frecuencia de Pago }      
-      alicuocon:    { name: Monto del Anticipo, params: date_format='dd/MM/yyyy' }
-      diabonfinano: { name: Dia Bonificacion de Ano }  
+      frepagcon:    { name: Frecuencia de Pago }
+      alicuocon:    { name: Aplicar Alícuota }
+      diabonfinano: { name: Dia Bonificacion de Ano }
       diabonvac:    { name: Dia Bono Vacacional }
       fecinireg:    { name: Fecha de Inicio Para el Calculo, params: date_format='dd/MM/yyyy' }
-      art146:       { name: Aplicar Articulo 146 }      
+      art146:       { name: Aplicar Articulo 146 }
       diaano:       { name: Ano }
       anovig:       { name: fecha de Vigencia Desde, params: date_format='dd/MM/yyyy'  }
       anovighas:    { name: fecha de Vigencia Hasta, params: date_format='dd/MM/yyyy'  }
 
-        
+
     list:
       title:          Tipos de Contratos Colectivos
       filters:        [codtipcon]
-      display:        [codtipcon, destipcon, nomnom, frepagcon, anovig, anovighas]
+      display:        [=codtipcon, destipcon, frepagcon, anovig, anovighas]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
+      sort:    codtipcon
     edit:
       title:          Tipos de Contratos Colectivos
-      display:        [codtipcon, destipcon, nomnom, frepagcon, fecinireg, art146]
+      display:        [codtipcon, destipcon, frepagcon, fecinireg, art146, alicuocon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

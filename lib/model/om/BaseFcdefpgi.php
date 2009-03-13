@@ -41,149 +41,178 @@ abstract class BaseFcdefpgi extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getMondes()
-	{
+  
+  public function getMondes($val=false)
+  {
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getMonhas()
-	{
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
 
-		return number_format($this->monhas,2,',','.');
-		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getMonhas($val=false)
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getNumpor()
-	{
+    if($val) return number_format($this->monhas,2,',','.');
+    else return $this->monhas;
 
-		return $this->numpor; 		
-	}
-	
-	public function getDespgi()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return $this->despgi; 		
-	}
-	
-	public function getDesabr()
-	{
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
 
-		return $this->desabr; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNumpor()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->numpor);
+
+  }
+  
+  public function getDespgi()
+  {
+
+    return trim($this->despgi);
+
+  }
+  
+  public function getDesabr()
+  {
+
+    return trim($this->desabr);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = FcdefpgiPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefpgiPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setMonhas($v)
 	{
 
-		if ($this->monhas !== $v) {
-			$this->monhas = $v;
-			$this->modifiedColumns[] = FcdefpgiPeer::MONHAS;
-		}
-
+    if ($this->monhas !== $v) {
+        $this->monhas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefpgiPeer::MONHAS;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = FcdefpgiPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdefpgiPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setNumpor($v)
 	{
 
-		if ($this->numpor !== $v) {
-			$this->numpor = $v;
-			$this->modifiedColumns[] = FcdefpgiPeer::NUMPOR;
-		}
-
+    if ($this->numpor !== $v) {
+        $this->numpor = $v;
+        $this->modifiedColumns[] = FcdefpgiPeer::NUMPOR;
+      }
+  
 	} 
 	
 	public function setDespgi($v)
 	{
 
-		if ($this->despgi !== $v) {
-			$this->despgi = $v;
-			$this->modifiedColumns[] = FcdefpgiPeer::DESPGI;
-		}
-
+    if ($this->despgi !== $v) {
+        $this->despgi = $v;
+        $this->modifiedColumns[] = FcdefpgiPeer::DESPGI;
+      }
+  
 	} 
 	
 	public function setDesabr($v)
 	{
 
-		if ($this->desabr !== $v) {
-			$this->desabr = $v;
-			$this->modifiedColumns[] = FcdefpgiPeer::DESABR;
-		}
-
+    if ($this->desabr !== $v) {
+        $this->desabr = $v;
+        $this->modifiedColumns[] = FcdefpgiPeer::DESABR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdefpgiPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdefpgiPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->mondes = $rs->getFloat($startcol + 0);
+      $this->mondes = $rs->getFloat($startcol + 0);
 
-			$this->monhas = $rs->getFloat($startcol + 1);
+      $this->monhas = $rs->getFloat($startcol + 1);
 
-			$this->monpag = $rs->getFloat($startcol + 2);
+      $this->monpag = $rs->getFloat($startcol + 2);
 
-			$this->numpor = $rs->getString($startcol + 3);
+      $this->numpor = $rs->getString($startcol + 3);
 
-			$this->despgi = $rs->getString($startcol + 4);
+      $this->despgi = $rs->getString($startcol + 4);
 
-			$this->desabr = $rs->getString($startcol + 5);
+      $this->desabr = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdefpgi object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdefpgi object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -240,6 +269,7 @@ abstract class BaseFcdefpgi extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdefpgiPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdefpgiPeer::doUpdate($this, $con);

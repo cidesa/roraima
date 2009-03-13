@@ -37,128 +37,156 @@ abstract class BaseBdcriterio extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCriterio()
-	{
+  
+  public function getCriterio()
+  {
 
-		return $this->criterio; 		
-	}
-	
-	public function getSql()
-	{
+    return trim($this->criterio);
 
-		return $this->sql; 		
-	}
-	
-	public function getTemporal()
-	{
+  }
+  
+  public function getSql()
+  {
 
-		return $this->temporal; 		
-	}
-	
-	public function getObservacion()
-	{
+    return trim($this->sql);
 
-		return $this->observacion; 		
-	}
-	
-	public function getNumero()
-	{
+  }
+  
+  public function getTemporal()
+  {
 
-		return $this->numero; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->temporal);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getObservacion()
+  {
+
+    return trim($this->observacion);
+
+  }
+  
+  public function getNumero()
+  {
+
+    return trim($this->numero);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCriterio($v)
 	{
 
-		if ($this->criterio !== $v) {
-			$this->criterio = $v;
-			$this->modifiedColumns[] = BdcriterioPeer::CRITERIO;
-		}
-
+    if ($this->criterio !== $v) {
+        $this->criterio = $v;
+        $this->modifiedColumns[] = BdcriterioPeer::CRITERIO;
+      }
+  
 	} 
 	
 	public function setSql($v)
 	{
 
-		if ($this->sql !== $v) {
-			$this->sql = $v;
-			$this->modifiedColumns[] = BdcriterioPeer::SQL;
-		}
-
+    if ($this->sql !== $v) {
+        $this->sql = $v;
+        $this->modifiedColumns[] = BdcriterioPeer::SQL;
+      }
+  
 	} 
 	
 	public function setTemporal($v)
 	{
 
-		if ($this->temporal !== $v) {
-			$this->temporal = $v;
-			$this->modifiedColumns[] = BdcriterioPeer::TEMPORAL;
-		}
-
+    if ($this->temporal !== $v) {
+        $this->temporal = $v;
+        $this->modifiedColumns[] = BdcriterioPeer::TEMPORAL;
+      }
+  
 	} 
 	
 	public function setObservacion($v)
 	{
 
-		if ($this->observacion !== $v) {
-			$this->observacion = $v;
-			$this->modifiedColumns[] = BdcriterioPeer::OBSERVACION;
-		}
-
+    if ($this->observacion !== $v) {
+        $this->observacion = $v;
+        $this->modifiedColumns[] = BdcriterioPeer::OBSERVACION;
+      }
+  
 	} 
 	
 	public function setNumero($v)
 	{
 
-		if ($this->numero !== $v) {
-			$this->numero = $v;
-			$this->modifiedColumns[] = BdcriterioPeer::NUMERO;
-		}
-
+    if ($this->numero !== $v) {
+        $this->numero = $v;
+        $this->modifiedColumns[] = BdcriterioPeer::NUMERO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BdcriterioPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BdcriterioPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->criterio = $rs->getString($startcol + 0);
+      $this->criterio = $rs->getString($startcol + 0);
 
-			$this->sql = $rs->getString($startcol + 1);
+      $this->sql = $rs->getString($startcol + 1);
 
-			$this->temporal = $rs->getString($startcol + 2);
+      $this->temporal = $rs->getString($startcol + 2);
 
-			$this->observacion = $rs->getString($startcol + 3);
+      $this->observacion = $rs->getString($startcol + 3);
 
-			$this->numero = $rs->getString($startcol + 4);
+      $this->numero = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bdcriterio object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bdcriterio object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

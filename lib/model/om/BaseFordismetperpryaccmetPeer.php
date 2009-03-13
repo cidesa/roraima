@@ -225,6 +225,7 @@ abstract class BaseFordismetperpryaccmetPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordismetperpryaccmetPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

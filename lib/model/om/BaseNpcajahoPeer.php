@@ -225,6 +225,7 @@ abstract class BaseNpcajahoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcajahoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

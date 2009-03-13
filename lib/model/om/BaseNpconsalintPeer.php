@@ -205,6 +205,7 @@ abstract class BaseNpconsalintPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpconsalintPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

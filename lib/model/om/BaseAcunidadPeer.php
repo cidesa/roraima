@@ -210,6 +210,7 @@ abstract class BaseAcunidadPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(AcunidadPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

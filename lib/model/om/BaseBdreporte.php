@@ -49,182 +49,213 @@ abstract class BaseBdreporte extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCampo1()
-	{
+  
+  public function getCampo1()
+  {
 
-		return $this->campo1; 		
-	}
-	
-	public function getCampo2()
-	{
+    return trim($this->campo1);
 
-		return $this->campo2; 		
-	}
-	
-	public function getCampo3()
-	{
+  }
+  
+  public function getCampo2()
+  {
 
-		return $this->campo3; 		
-	}
-	
-	public function getCampo4()
-	{
+    return trim($this->campo2);
 
-		return $this->campo4; 		
-	}
-	
-	public function getCampo5()
-	{
+  }
+  
+  public function getCampo3()
+  {
 
-		return $this->campo5; 		
-	}
-	
-	public function getCampo6()
-	{
+    return trim($this->campo3);
 
-		return $this->campo6; 		
-	}
-	
-	public function getCampo7()
-	{
+  }
+  
+  public function getCampo4()
+  {
 
-		return $this->campo7; 		
-	}
-	
-	public function getCampo8()
-	{
+    return trim($this->campo4);
 
-		return $this->campo8; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCampo5()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->campo5);
+
+  }
+  
+  public function getCampo6()
+  {
+
+    return trim($this->campo6);
+
+  }
+  
+  public function getCampo7()
+  {
+
+    return trim($this->campo7);
+
+  }
+  
+  public function getCampo8()
+  {
+
+    return trim($this->campo8);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCampo1($v)
 	{
 
-		if ($this->campo1 !== $v) {
-			$this->campo1 = $v;
-			$this->modifiedColumns[] = BdreportePeer::CAMPO1;
-		}
-
+    if ($this->campo1 !== $v) {
+        $this->campo1 = $v;
+        $this->modifiedColumns[] = BdreportePeer::CAMPO1;
+      }
+  
 	} 
 	
 	public function setCampo2($v)
 	{
 
-		if ($this->campo2 !== $v) {
-			$this->campo2 = $v;
-			$this->modifiedColumns[] = BdreportePeer::CAMPO2;
-		}
-
+    if ($this->campo2 !== $v) {
+        $this->campo2 = $v;
+        $this->modifiedColumns[] = BdreportePeer::CAMPO2;
+      }
+  
 	} 
 	
 	public function setCampo3($v)
 	{
 
-		if ($this->campo3 !== $v) {
-			$this->campo3 = $v;
-			$this->modifiedColumns[] = BdreportePeer::CAMPO3;
-		}
-
+    if ($this->campo3 !== $v) {
+        $this->campo3 = $v;
+        $this->modifiedColumns[] = BdreportePeer::CAMPO3;
+      }
+  
 	} 
 	
 	public function setCampo4($v)
 	{
 
-		if ($this->campo4 !== $v) {
-			$this->campo4 = $v;
-			$this->modifiedColumns[] = BdreportePeer::CAMPO4;
-		}
-
+    if ($this->campo4 !== $v) {
+        $this->campo4 = $v;
+        $this->modifiedColumns[] = BdreportePeer::CAMPO4;
+      }
+  
 	} 
 	
 	public function setCampo5($v)
 	{
 
-		if ($this->campo5 !== $v) {
-			$this->campo5 = $v;
-			$this->modifiedColumns[] = BdreportePeer::CAMPO5;
-		}
-
+    if ($this->campo5 !== $v) {
+        $this->campo5 = $v;
+        $this->modifiedColumns[] = BdreportePeer::CAMPO5;
+      }
+  
 	} 
 	
 	public function setCampo6($v)
 	{
 
-		if ($this->campo6 !== $v) {
-			$this->campo6 = $v;
-			$this->modifiedColumns[] = BdreportePeer::CAMPO6;
-		}
-
+    if ($this->campo6 !== $v) {
+        $this->campo6 = $v;
+        $this->modifiedColumns[] = BdreportePeer::CAMPO6;
+      }
+  
 	} 
 	
 	public function setCampo7($v)
 	{
 
-		if ($this->campo7 !== $v) {
-			$this->campo7 = $v;
-			$this->modifiedColumns[] = BdreportePeer::CAMPO7;
-		}
-
+    if ($this->campo7 !== $v) {
+        $this->campo7 = $v;
+        $this->modifiedColumns[] = BdreportePeer::CAMPO7;
+      }
+  
 	} 
 	
 	public function setCampo8($v)
 	{
 
-		if ($this->campo8 !== $v) {
-			$this->campo8 = $v;
-			$this->modifiedColumns[] = BdreportePeer::CAMPO8;
-		}
-
+    if ($this->campo8 !== $v) {
+        $this->campo8 = $v;
+        $this->modifiedColumns[] = BdreportePeer::CAMPO8;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BdreportePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BdreportePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->campo1 = $rs->getString($startcol + 0);
+      $this->campo1 = $rs->getString($startcol + 0);
 
-			$this->campo2 = $rs->getString($startcol + 1);
+      $this->campo2 = $rs->getString($startcol + 1);
 
-			$this->campo3 = $rs->getString($startcol + 2);
+      $this->campo3 = $rs->getString($startcol + 2);
 
-			$this->campo4 = $rs->getString($startcol + 3);
+      $this->campo4 = $rs->getString($startcol + 3);
 
-			$this->campo5 = $rs->getString($startcol + 4);
+      $this->campo5 = $rs->getString($startcol + 4);
 
-			$this->campo6 = $rs->getString($startcol + 5);
+      $this->campo6 = $rs->getString($startcol + 5);
 
-			$this->campo7 = $rs->getString($startcol + 6);
+      $this->campo7 = $rs->getString($startcol + 6);
 
-			$this->campo8 = $rs->getString($startcol + 7);
+      $this->campo8 = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bdreporte object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bdreporte object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -225,6 +225,7 @@ abstract class BaseBndepactdetPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BndepactdetPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

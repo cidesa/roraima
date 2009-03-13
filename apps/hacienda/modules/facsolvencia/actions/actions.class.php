@@ -31,6 +31,7 @@ class facsolvenciaActions extends autofacsolvenciaActions
       $this->saveFcsolvencia($this->fcsolvencia);
 
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {

@@ -4,15 +4,22 @@ generator:
     model_class:      Nptipded
     theme:            default
     fields:
-      codtip: { name: Código }
-      destip: { name: Descripcion }
+      codtip: { name: Código, params: maxlength=4,size=6}
+      destip: { name: Descripción }
     list:
-      title:          Definción de Tipo de Dedicación
+      title:          Tipo de Dedicación
       filters:        [codtip, destip ]
       display:        [=codtip, destip ]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
+      sort:   codtip
     edit:
       title:          Edición de Tipo de Dedicación
+      display:        [codtip, destip ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

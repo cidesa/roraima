@@ -20,36 +20,49 @@ abstract class BaseNpprocar extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aNpprofesion;
+
+	
+	protected $aNpcargos;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodprofes()
-	{
+  
+  public function getCodprofes()
+  {
 
-		return $this->codprofes; 		
-	}
-	
-	public function getCodcar()
-	{
+    return trim($this->codprofes);
 
-		return $this->codcar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codcar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodprofes($v)
 	{
 
-		if ($this->codprofes !== $v) {
-			$this->codprofes = $v;
-			$this->modifiedColumns[] = NpprocarPeer::CODPROFES;
+    if ($this->codprofes !== $v) {
+        $this->codprofes = $v;
+        $this->modifiedColumns[] = NpprocarPeer::CODPROFES;
+      }
+  
+		if ($this->aNpprofesion !== null && $this->aNpprofesion->getCodprofes() !== $v) {
+			$this->aNpprofesion = null;
 		}
 
 	} 
@@ -57,9 +70,13 @@ abstract class BaseNpprocar extends BaseObject  implements Persistent {
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpprocarPeer::CODCAR;
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpprocarPeer::CODCAR;
+      }
+  
+		if ($this->aNpcargos !== null && $this->aNpcargos->getCodcar() !== $v) {
+			$this->aNpcargos = null;
 		}
 
 	} 
@@ -67,32 +84,54 @@ abstract class BaseNpprocar extends BaseObject  implements Persistent {
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpprocarPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpprocarPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codprofes = $rs->getString($startcol + 0);
+      $this->codprofes = $rs->getString($startcol + 0);
 
-			$this->codcar = $rs->getString($startcol + 1);
+      $this->codcar = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npprocar object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npprocar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -145,10 +184,27 @@ abstract class BaseNpprocar extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aNpprofesion !== null) {
+				if ($this->aNpprofesion->isModified()) {
+					$affectedRows += $this->aNpprofesion->save($con);
+				}
+				$this->setNpprofesion($this->aNpprofesion);
+			}
+
+			if ($this->aNpcargos !== null) {
+				if ($this->aNpcargos->isModified()) {
+					$affectedRows += $this->aNpcargos->save($con);
+				}
+				$this->setNpcargos($this->aNpcargos);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = NpprocarPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpprocarPeer::doUpdate($this, $con);
@@ -189,6 +245,20 @@ abstract class BaseNpprocar extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aNpprofesion !== null) {
+				if (!$this->aNpprofesion->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aNpprofesion->getValidationFailures());
+				}
+			}
+
+			if ($this->aNpcargos !== null) {
+				if (!$this->aNpcargos->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aNpcargos->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = NpprocarPeer::doValidate($this, $columns)) !== true) {
@@ -336,6 +406,64 @@ abstract class BaseNpprocar extends BaseObject  implements Persistent {
 			self::$peer = new NpprocarPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setNpprofesion($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodprofes(NULL);
+		} else {
+			$this->setCodprofes($v->getCodprofes());
+		}
+
+
+		$this->aNpprofesion = $v;
+	}
+
+
+	
+	public function getNpprofesion($con = null)
+	{
+		if ($this->aNpprofesion === null && (($this->codprofes !== "" && $this->codprofes !== null))) {
+						include_once 'lib/model/om/BaseNpprofesionPeer.php';
+
+			$this->aNpprofesion = NpprofesionPeer::retrieveByPK($this->codprofes, $con);
+
+			
+		}
+		return $this->aNpprofesion;
+	}
+
+	
+	public function setNpcargos($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodcar(NULL);
+		} else {
+			$this->setCodcar($v->getCodcar());
+		}
+
+
+		$this->aNpcargos = $v;
+	}
+
+
+	
+	public function getNpcargos($con = null)
+	{
+		if ($this->aNpcargos === null && (($this->codcar !== "" && $this->codcar !== null))) {
+						include_once 'lib/model/om/BaseNpcargosPeer.php';
+
+			$this->aNpcargos = NpcargosPeer::retrieveByPK($this->codcar, $con);
+
+			
+		}
+		return $this->aNpcargos;
 	}
 
 } 

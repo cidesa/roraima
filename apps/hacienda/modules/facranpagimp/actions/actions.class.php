@@ -1,114 +1,128 @@
 <?php
 
 /**
- * facranpagimp actions.
+ * FacRanPagImp actions.
  *
  * @package    siga
- * @subpackage facranpagimp
+ * @subpackage FacRanPagImp
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
  */
-class facranpagimpActions extends autofacranpagimpActions
+class FacRanPagImpActions extends autoFacRanPagImpActions
 {
-	
-  public function executeIndex()
+
+  // Para incluir funcionalidades al executeEdit()
+  public function editing()
   {
-    return $this->forward('facranpagimp', 'edit');
+		$this->configGrid();
   }
-	
-  public function executeEdit()
+
+ public function configGrid($reg = array(),$regelim = array())
   {
-  	
-    $this->fcdefpgi = $this->getFcdefpgiOrCreate();
+    $c = new Criteria();
+    $per = FcdefpgiPeer::doSelect($c);
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/facranpagimp/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
+    $this->grid = $this->columnas[0]->getConfig($per);
+    $this->fcdefpgi->setGrid($this->grid);
+  }
+
+
+  public function executeAjax()
+  {
+
+    $codigo = $this->getRequestParameter('codigo','');
+    // Esta variable ajax debe ser usada en cada llamado para identificar
+    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
+    $ajax = $this->getRequestParameter('ajax','');
+
+    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
+    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
+    // los datos de los objetos de la vista como pasa en un submit normal.
+
+    switch ($ajax){
+      case '1':
+        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
+        // objetos en la vista. mas informacion en
+        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
+        $output = '[["","",""],["","",""],["","",""]]';
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+    }
+
+    // Instruccion para escribir en la cabecera los datos a enviar a la vista
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+    // mantener habilitar esta instrucción
+    return sfView::HEADER_ONLY;
+
+    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
+  }
+
+
+  public function validateEdit()
+  {
+    $this->coderr =-1;
+
+    // Se deben llamar a las funciones necesarias para cargar los
+    // datos de la vista que serán usados en las funciones de validación.
+    // Por ejemplo:
+
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+
+      // $this->configGrid();
+      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+
+      // Aqui van los llamados a los métodos de las clases del
+      // negocio para validar los datos.
+      // Los resultados de cada llamado deben ser analizados por ejemplo:
+
+      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
+
+       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
+
+      // al final $resp es analizada en base al código que retorna
+      // Todas las funciones de validación y procesos del negocio
+      // deben retornar códigos >= -1. Estos código serám buscados en
+      // el archivo errors.yml en la función handleErrorEdit()
+
+      if($this->coderr!=-1){
+        return false;
+      } else return true;
+
+    }else return true;
+
+
+
+  }
+
+  /**
+   * Función para actualziar el grid en el post si ocurre un error
+   * Se pueden colocar aqui los grids adicionales
+   *
+   */
+  public function updateError()
+  {
     $this->configGrid();
-
-    if ($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->updateFcdefpgiFromRequest();
-
-      $this->saveFcdefpgi($this->fcdefpgi);
-
-      $this->setFlash('notice', 'Your modifications have been saved');
-
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('facranpagimp/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('facranpagimp/list');
-      }
-      else
-      {
-        return $this->redirect('facranpagimp/edit?id='.$this->fcdefpgi->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
+    $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+    $this->configGrid($grid[0],$grid[1]);
   }
-  
-  	
-	public function configGrid()
-	{
 
-		$c = new Criteria();
-        $per = FcdefpgiPeer::doSelect($c);
-		//$per = array();
-	  
-	    
-	    // Se crea el objeto principal de la clase OpcionesGrid
-	    $opciones = new OpcionesGrid();
-	    // Se configuran las opciones globales del Grid
-		$opciones->setFilas(6); 
-        $opciones->setEliminar(true);
-        $opciones->setTabla('Fcdefpgi');
-        $opciones->setAnchoGrid(800);
-        $opciones->setTitulo('Distribucion del Pago de la Tasa (en Unidades Tributarias)');
-        $opciones->setHTMLTotalFilas(' ');
-        
-        // Se generan las columnas
-        $col1 = new Columna('Desde');
-        $col1->setTipo(Columna::MONTO);
-        $col1->setEsGrabable(true);
-        $col1->setAlineacionObjeto(Columna::DERECHA);
-        $col1->setAlineacionContenido(Columna::DERECHA);
-        $col1->setEsNumerico(true);
-        $col1->setHTML('type="text" size="15"');
-        $col1->setNombreCampo('mondes');
-         
-        $col2 = clone $col1;
-        $col2->setTitulo('Hasta');
-		$col2->setNombreCampo('mondes');
-        
-        $col3 = clone $col1;
-        $col3->setTitulo('Monto a Pagar (U.T.)');
-        $col3->setNombreCampo('monpag');
-        
-        $col4 = new Columna('Nro. de Porciones');
-        $col4->setTipo(Columna::TEXTO);
-        $col4->setEsGrabable(true);
-        $col4->setAlineacionObjeto(Columna::CENTRO);
-        $col4->setAlineacionContenido(Columna::CENTRO);
-        $col4->setEsNumerico(false);
-        $col4->setHTML('type="text" size="20"');
-        $col4->setNombreCampo('numpor');
-        
-        // Se guardan las columnas en el objetos de opciones        
-        $opciones->addColumna($col1);
-        $opciones->addColumna($col2);
-        $opciones->addColumna($col3);
-        $opciones->addColumna($col4);
-	    // Ee genera el arreglo de opciones necesario para generar el grid
-        $this->obj = $opciones->getConfig($per); 
-	  
-	}
-	
-	
-	
-	
-	
-	
-	
+  public function saving($fcdefpgi)
+  {
+    $fcdefpgi->save();
+    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+    Hacienda::salvar_grid_Fcdefpgi($fcdefpgi, $grid);
+    return -1;
+  }
+
+  public function deleting($clasemodelo)
+  {
+    return parent::deleting($clasemodelo);
+  }
+
+
 }

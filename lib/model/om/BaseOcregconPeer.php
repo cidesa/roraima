@@ -360,6 +360,7 @@ abstract class BaseOcregconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcregconPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

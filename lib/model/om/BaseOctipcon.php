@@ -25,74 +25,99 @@ abstract class BaseOctipcon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipcon()
-	{
+  
+  public function getCodtipcon()
+  {
 
-		return $this->codtipcon; 		
-	}
-	
-	public function getDestipcon()
-	{
+    return trim($this->codtipcon);
 
-		return $this->destipcon; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDestipcon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->destipcon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipcon($v)
 	{
 
-		if ($this->codtipcon !== $v) {
-			$this->codtipcon = $v;
-			$this->modifiedColumns[] = OctipconPeer::CODTIPCON;
-		}
-
+    if ($this->codtipcon !== $v) {
+        $this->codtipcon = $v;
+        $this->modifiedColumns[] = OctipconPeer::CODTIPCON;
+      }
+  
 	} 
 	
 	public function setDestipcon($v)
 	{
 
-		if ($this->destipcon !== $v) {
-			$this->destipcon = $v;
-			$this->modifiedColumns[] = OctipconPeer::DESTIPCON;
-		}
-
+    if ($this->destipcon !== $v) {
+        $this->destipcon = $v;
+        $this->modifiedColumns[] = OctipconPeer::DESTIPCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OctipconPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OctipconPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipcon = $rs->getString($startcol + 0);
+      $this->codtipcon = $rs->getString($startcol + 0);
 
-			$this->destipcon = $rs->getString($startcol + 1);
+      $this->destipcon = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Octipcon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Octipcon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseOctipcon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OctipconPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OctipconPeer::doUpdate($this, $con);

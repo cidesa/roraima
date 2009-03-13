@@ -210,6 +210,7 @@ abstract class BaseOcactcomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcactcomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

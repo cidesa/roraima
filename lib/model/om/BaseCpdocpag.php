@@ -53,200 +53,232 @@ abstract class BaseCpdocpag extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTippag()
-	{
+  
+  public function getTippag()
+  {
 
-		return $this->tippag; 		
-	}
-	
-	public function getNomext()
-	{
+    return trim($this->tippag);
 
-		return $this->nomext; 		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getNomext()
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getRefier()
-	{
+    return trim($this->nomext);
 
-		return $this->refier; 		
-	}
-	
-	public function getAfeprc()
-	{
+  }
+  
+  public function getNomabr()
+  {
 
-		return $this->afeprc; 		
-	}
-	
-	public function getAfecom()
-	{
+    return trim($this->nomabr);
 
-		return $this->afecom; 		
-	}
-	
-	public function getAfecau()
-	{
+  }
+  
+  public function getRefier()
+  {
 
-		return $this->afecau; 		
-	}
-	
-	public function getAfepag()
-	{
+    return trim($this->refier);
 
-		return $this->afepag; 		
-	}
-	
-	public function getAfedis()
-	{
+  }
+  
+  public function getAfeprc()
+  {
 
-		return $this->afedis; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->afeprc);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getAfecom()
+  {
+
+    return trim($this->afecom);
+
+  }
+  
+  public function getAfecau()
+  {
+
+    return trim($this->afecau);
+
+  }
+  
+  public function getAfepag()
+  {
+
+    return trim($this->afepag);
+
+  }
+  
+  public function getAfedis()
+  {
+
+    return trim($this->afedis);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTippag($v)
 	{
 
-		if ($this->tippag !== $v) {
-			$this->tippag = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::TIPPAG;
-		}
-
+    if ($this->tippag !== $v) {
+        $this->tippag = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::TIPPAG;
+      }
+  
 	} 
 	
 	public function setNomext($v)
 	{
 
-		if ($this->nomext !== $v) {
-			$this->nomext = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::NOMEXT;
-		}
-
+    if ($this->nomext !== $v) {
+        $this->nomext = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::NOMEXT;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setRefier($v)
 	{
 
-		if ($this->refier !== $v) {
-			$this->refier = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::REFIER;
-		}
-
+    if ($this->refier !== $v) {
+        $this->refier = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::REFIER;
+      }
+  
 	} 
 	
 	public function setAfeprc($v)
 	{
 
-		if ($this->afeprc !== $v) {
-			$this->afeprc = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::AFEPRC;
-		}
-
+    if ($this->afeprc !== $v) {
+        $this->afeprc = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::AFEPRC;
+      }
+  
 	} 
 	
 	public function setAfecom($v)
 	{
 
-		if ($this->afecom !== $v) {
-			$this->afecom = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::AFECOM;
-		}
-
+    if ($this->afecom !== $v) {
+        $this->afecom = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::AFECOM;
+      }
+  
 	} 
 	
 	public function setAfecau($v)
 	{
 
-		if ($this->afecau !== $v) {
-			$this->afecau = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::AFECAU;
-		}
-
+    if ($this->afecau !== $v) {
+        $this->afecau = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::AFECAU;
+      }
+  
 	} 
 	
 	public function setAfepag($v)
 	{
 
-		if ($this->afepag !== $v) {
-			$this->afepag = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::AFEPAG;
-		}
-
+    if ($this->afepag !== $v) {
+        $this->afepag = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::AFEPAG;
+      }
+  
 	} 
 	
 	public function setAfedis($v)
 	{
 
-		if ($this->afedis !== $v) {
-			$this->afedis = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::AFEDIS;
-		}
-
+    if ($this->afedis !== $v) {
+        $this->afedis = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::AFEDIS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpdocpagPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpdocpagPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tippag = $rs->getString($startcol + 0);
+      $this->tippag = $rs->getString($startcol + 0);
 
-			$this->nomext = $rs->getString($startcol + 1);
+      $this->nomext = $rs->getString($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->refier = $rs->getString($startcol + 3);
+      $this->refier = $rs->getString($startcol + 3);
 
-			$this->afeprc = $rs->getString($startcol + 4);
+      $this->afeprc = $rs->getString($startcol + 4);
 
-			$this->afecom = $rs->getString($startcol + 5);
+      $this->afecom = $rs->getString($startcol + 5);
 
-			$this->afecau = $rs->getString($startcol + 6);
+      $this->afecau = $rs->getString($startcol + 6);
 
-			$this->afepag = $rs->getString($startcol + 7);
+      $this->afepag = $rs->getString($startcol + 7);
 
-			$this->afedis = $rs->getString($startcol + 8);
+      $this->afedis = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpdocpag object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpdocpag object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -303,6 +335,7 @@ abstract class BaseCpdocpag extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpdocpagPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpdocpagPeer::doUpdate($this, $con);

@@ -45,188 +45,217 @@ abstract class BaseCadevrcp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getDevrcp()
-	{
+  
+  public function getDevrcp()
+  {
 
-		return $this->devrcp; 		
-	}
-	
-	public function getFecdev($format = 'Y-m-d')
-	{
+    return trim($this->devrcp);
 
-		if ($this->fecdev === null || $this->fecdev === '') {
-			return null;
-		} elseif (!is_int($this->fecdev)) {
-						$ts = strtotime($this->fecdev);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdev] as date/time value: " . var_export($this->fecdev, true));
-			}
-		} else {
-			$ts = $this->fecdev;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecdev($format = 'Y-m-d')
+  {
 
-	
-	public function getRcpart()
-	{
+    if ($this->fecdev === null || $this->fecdev === '') {
+      return null;
+    } elseif (!is_int($this->fecdev)) {
+            $ts = adodb_strtotime($this->fecdev);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdev] as date/time value: " . var_export($this->fecdev, true));
+      }
+    } else {
+      $ts = $this->fecdev;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->rcpart; 		
-	}
-	
-	public function getDesdev()
-	{
+  
+  public function getRcpart()
+  {
 
-		return $this->desdev; 		
-	}
-	
-	public function getMondev()
-	{
+    return trim($this->rcpart);
 
-		return number_format($this->mondev,2,',','.');
-		
-	}
-	
-	public function getStadev()
-	{
+  }
+  
+  public function getDesdev()
+  {
 
-		return $this->stadev; 		
-	}
-	
-	public function getNumcom()
-	{
+    return trim($this->desdev);
 
-		return $this->numcom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMondev($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->mondev,2,',','.');
+    else return $this->mondev;
+
+  }
+  
+  public function getStadev()
+  {
+
+    return trim($this->stadev);
+
+  }
+  
+  public function getNumcom()
+  {
+
+    return trim($this->numcom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDevrcp($v)
 	{
 
-		if ($this->devrcp !== $v) {
-			$this->devrcp = $v;
-			$this->modifiedColumns[] = CadevrcpPeer::DEVRCP;
-		}
-
+    if ($this->devrcp !== $v) {
+        $this->devrcp = $v;
+        $this->modifiedColumns[] = CadevrcpPeer::DEVRCP;
+      }
+  
 	} 
 	
 	public function setFecdev($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdev] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdev !== $ts) {
-			$this->fecdev = $ts;
-			$this->modifiedColumns[] = CadevrcpPeer::FECDEV;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdev] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdev !== $ts) {
+      $this->fecdev = $ts;
+      $this->modifiedColumns[] = CadevrcpPeer::FECDEV;
+    }
 
 	} 
 	
 	public function setRcpart($v)
 	{
 
-		if ($this->rcpart !== $v) {
-			$this->rcpart = $v;
-			$this->modifiedColumns[] = CadevrcpPeer::RCPART;
-		}
-
+    if ($this->rcpart !== $v) {
+        $this->rcpart = $v;
+        $this->modifiedColumns[] = CadevrcpPeer::RCPART;
+      }
+  
 	} 
 	
 	public function setDesdev($v)
 	{
 
-		if ($this->desdev !== $v) {
-			$this->desdev = $v;
-			$this->modifiedColumns[] = CadevrcpPeer::DESDEV;
-		}
-
+    if ($this->desdev !== $v) {
+        $this->desdev = $v;
+        $this->modifiedColumns[] = CadevrcpPeer::DESDEV;
+      }
+  
 	} 
 	
 	public function setMondev($v)
 	{
 
-		if ($this->mondev !== $v) {
-			$this->mondev = $v;
-			$this->modifiedColumns[] = CadevrcpPeer::MONDEV;
-		}
-
+    if ($this->mondev !== $v) {
+        $this->mondev = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadevrcpPeer::MONDEV;
+      }
+  
 	} 
 	
 	public function setStadev($v)
 	{
 
-		if ($this->stadev !== $v) {
-			$this->stadev = $v;
-			$this->modifiedColumns[] = CadevrcpPeer::STADEV;
-		}
-
+    if ($this->stadev !== $v) {
+        $this->stadev = $v;
+        $this->modifiedColumns[] = CadevrcpPeer::STADEV;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = CadevrcpPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = CadevrcpPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadevrcpPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadevrcpPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->devrcp = $rs->getString($startcol + 0);
+      $this->devrcp = $rs->getString($startcol + 0);
 
-			$this->fecdev = $rs->getDate($startcol + 1, null);
+      $this->fecdev = $rs->getDate($startcol + 1, null);
 
-			$this->rcpart = $rs->getString($startcol + 2);
+      $this->rcpart = $rs->getString($startcol + 2);
 
-			$this->desdev = $rs->getString($startcol + 3);
+      $this->desdev = $rs->getString($startcol + 3);
 
-			$this->mondev = $rs->getFloat($startcol + 4);
+      $this->mondev = $rs->getFloat($startcol + 4);
 
-			$this->stadev = $rs->getString($startcol + 5);
+      $this->stadev = $rs->getString($startcol + 5);
 
-			$this->numcom = $rs->getString($startcol + 6);
+      $this->numcom = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadevrcp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadevrcp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

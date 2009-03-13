@@ -22,11 +22,10 @@ class Npislr extends BaseNpislr
 		}
 	}
 
-	public function getNomcon()
+   public function getNomconpor()
 	{
 		$c = new Criteria();
-		$c->add(NpdefcptPeer::CODCON,self::getCodnom());
-		//$c->addJoin(NpdefcptPeer::CODCON,NpcestaticketsPeer::CODCON);
+		$c->add(NpdefcptPeer::CODCON,self::getCodconpor());
 		$codigo = NpdefcptPeer::doSelectone($c);
 		if ($codigo){
 			return $codigo->getNomcon();
@@ -39,7 +38,6 @@ class Npislr extends BaseNpislr
 	{
 		$c = new Criteria();
 		$c->add(NpdefcptPeer::CODCON,self::getCodconimp());
-		//$c->addJoin(NpdefcptPeer::CODCON,NpcestaticketsPeer::CODCON);
 		$codigo = NpdefcptPeer::doSelectone($c);
 		if ($codigo){
 			return $codigo->getNomcon();

@@ -425,6 +425,7 @@ abstract class BaseContabaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ContabaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

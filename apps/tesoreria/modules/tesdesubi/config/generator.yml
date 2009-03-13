@@ -4,18 +4,25 @@ generator:
     model_class:      Bnubica
     theme:            default
     fields:
-      codubi: { name: Codigo de Ubicacion}
-      desubi: { name: Descripcion de la Ubicacion}
-        
+      codubi: { name: Código}
+      desubi: { name: Descripción}
+      stacod: { name: Estatus}
+
     list:
-      title:          Lista de Ubicacion
+      title:          Lista de Ubicación
       filters:        [codubi, desubi]
       display:        [=codubi, desubi]
       object_actions:
         _edit:        ~
         _delete:      ~
-      
+      max_per_page:   5
+      sort: codubi
     edit:
-      title:          Edicion de Ubicacion
-      display:       
-        Editable:     [codubi, desubi]
+      title:          Edición de Ubicación
+      display:
+        Editable:     [codubi, desubi, stacod]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

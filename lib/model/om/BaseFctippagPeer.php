@@ -205,6 +205,7 @@ abstract class BaseFctippagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FctippagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

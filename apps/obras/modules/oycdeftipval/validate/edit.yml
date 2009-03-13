@@ -1,0 +1,44 @@
+methods:
+  post:
+   - "octipval{codtipval}"
+   - "octipval{destipval}"
+   - "octipval{nomabr}"
+
+names:
+  octipval{codtipval}:
+    required:  Yes
+    required_msg: El Codigo  no puedo estar en Blanco
+    validators: Validator_codtipval
+
+  octipval{destipval}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_destipval
+
+  octipval{nomabr}:
+    required:  Yes
+    required_msg: El Nombre Abreviado no puedo estar en Blanco
+    validators: Validator_abr
+
+Validator_codtipval:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Octipval
+        column:   codtipval
+        unique_error:   El Código ya existe. Por Favor, Intente con otro.
+
+Validator_destipval:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: Las Descripción  no puede tener menos de 5 caracteres
+        max:       250
+        max_error: Las Descripción  no puede tener mas de 250 caracteres
+
+Validator_abr:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre Abreviado  no puede tener menos de 2 caracteres
+        max:       10
+        max_error: El Nombre Abreviado  no puede tener mas de 10 caracteres

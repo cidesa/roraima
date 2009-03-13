@@ -205,6 +205,7 @@ abstract class BaseOptipbenPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OptipbenPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -210,6 +210,7 @@ abstract class BaseForuniactmetPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForuniactmetPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

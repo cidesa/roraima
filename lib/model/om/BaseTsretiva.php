@@ -29,92 +29,118 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodret()
-	{
+  
+  public function getCodret()
+  {
 
-		return $this->codret; 		
-	}
-	
-	public function getCodrec()
-	{
+    return trim($this->codret);
 
-		return $this->codrec; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getCodrec()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codrec);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodret($v)
 	{
 
-		if ($this->codret !== $v) {
-			$this->codret = $v;
-			$this->modifiedColumns[] = TsretivaPeer::CODRET;
-		}
-
+    if ($this->codret !== $v) {
+        $this->codret = $v;
+        $this->modifiedColumns[] = TsretivaPeer::CODRET;
+      }
+  
 	} 
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = TsretivaPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = TsretivaPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = TsretivaPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = TsretivaPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsretivaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsretivaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codret = $rs->getString($startcol + 0);
+      $this->codret = $rs->getString($startcol + 0);
 
-			$this->codrec = $rs->getString($startcol + 1);
+      $this->codrec = $rs->getString($startcol + 1);
 
-			$this->codpar = $rs->getString($startcol + 2);
+      $this->codpar = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsretiva object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsretiva object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseTsretiva extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsretivaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsretivaPeer::doUpdate($this, $con);

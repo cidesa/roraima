@@ -1,0 +1,96 @@
+methods:
+  post:
+   - "atfacturas{atayudas_id}"
+   - "atfacturas{numfac}"
+   - "atfacturas{basimp}"
+   - "atfacturas{iva}"
+   - "atfacturas{exentos}"
+   - "atfacturas{total}"
+
+names:
+  atfacturas{atayudas_id}:
+    required:  Yes
+    required_msg: Debe seleccionar el expediente al cual le va a asignar la factura
+
+  atfacturas{numfac}:
+    required:  Yes
+    required_msg: Este campo debe contener datos
+    validators: MyStringValidator5
+
+  atfacturas{basimp}:
+    required:  Yes
+    required_msg: Este campo debe contener datos numericos
+    validators: MyNumberValidator
+
+  atfacturas{iva}:
+    required:  Yes
+    required_msg: Este campo debe contener datos numericos
+    validators: MyNumberValidator
+
+  atfacturas{exentos}:
+    required:  Yes
+    required_msg: Este campo debe contener datos numericos
+    validators: MyNumberValidator
+
+  atfacturas{total}:
+    required:  Yes
+    required_msg: Este campo debe contener datos numericos
+    validators: MyNumberValidator
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       12
+        max_error: El campo debe tener menos de 12 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       50
+        max_error: El campo debe tener menos de 50 caracteres
+
+MyStringValidator3:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       1
+        max_error: El campo debe tener menos de 1 caracter
+
+MyStringValidator4:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       100
+        max_error: El campo debe tener menos de 100 caracteres
+
+MyStringValidator5:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El campo debe tener al menos 1 caracter
+        max:       50
+        max_error: El campo debe tener menos de 50 caracteres
+
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type_error:   Por favor, Seleccione una opción
+        nan_error:    Por favor, Seleccione una opción
+        min:          0.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          9999999999.99
+        max_error:    El valor debe contener maximo 9999999999.99
+
+Vfecha_1:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Recepción de Articulos por Orden de Compra', 
+<h1><?php echo __('Recepción de Articulos por Orden de Compra',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('almordrec/edit_messages', array('carcpart' => $carcpart, 'labels' => $labels)) ?>
-<?php include_partial('almordrec/edit_form', array('carcpart' => $carcpart, 'labels' => $labels, 'grid' => $grid)) ?>
+<?php include_partial('almordrec/edit_form', array('carcpart' => $carcpart, 'labels' => $labels, 'grid' => $grid, 'mascaraubi' => $mascaraubi, 'lonubi' => $lonubi )) ?>
 </div>
 
 <div id="sf_admin_footer">

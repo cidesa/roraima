@@ -220,6 +220,7 @@ abstract class BaseNpvacdisfrutePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpvacdisfrutePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

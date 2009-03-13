@@ -1,0 +1,41 @@
+methods:
+  post:
+   - "carazcom{codrazcom}"
+   - "carazcom{desrazcom}"
+
+
+names:
+  carazcom{codrazcom}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_codrazcom, CorrelValidator
+
+  carazcom{desrazcom}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_desrazcom
+
+Validator_codrazcom:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Carazcom
+        column:       codrazcom
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desrazcom:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La descripción no puede pasar mas de 254 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+
+
+

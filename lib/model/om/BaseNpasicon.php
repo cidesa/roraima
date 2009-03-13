@@ -77,358 +77,394 @@ abstract class BaseNpasicon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcat()
-	{
+  
+  public function getCodcat()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodcar()
-	{
+    return trim($this->codcat);
 
-		return $this->codcar; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getNomsus()
-	{
+    return trim($this->codcar);
 
-		return $this->nomsus; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codcon);
 
-	
-	public function getFecexp($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNomsus()
+  {
 
-		if ($this->fecexp === null || $this->fecexp === '') {
-			return null;
-		} elseif (!is_int($this->fecexp)) {
-						$ts = strtotime($this->fecexp);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
-			}
-		} else {
-			$ts = $this->fecexp;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->nomsus);
 
-	
-	public function getSalcon()
-	{
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		return number_format($this->salcon,2,',','.');
-		
-	}
-	
-	public function getMonpre()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monpre,2,',','.');
-		
-	}
-	
-	public function getCanmon()
-	{
+  
+  public function getFecexp($format = 'Y-m-d')
+  {
 
-		return $this->canmon; 		
-	}
-	
-	public function getCalcon()
-	{
+    if ($this->fecexp === null || $this->fecexp === '') {
+      return null;
+    } elseif (!is_int($this->fecexp)) {
+            $ts = adodb_strtotime($this->fecexp);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecexp] as date/time value: " . var_export($this->fecexp, true));
+      }
+    } else {
+      $ts = $this->fecexp;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->calcon; 		
-	}
-	
-	public function getActcon()
-	{
+  
+  public function getSalcon($val=false)
+  {
 
-		return $this->actcon; 		
-	}
-	
-	public function getFrecon()
-	{
+    if($val) return number_format($this->salcon,2,',','.');
+    else return $this->salcon;
 
-		return $this->frecon; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getMonpre($val=false)
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonmen()
-	{
+    if($val) return number_format($this->monpre,2,',','.');
+    else return $this->monpre;
 
-		return number_format($this->monmen,2,',','.');
-		
-	}
-	
-	public function getFrecue()
-	{
+  }
+  
+  public function getCanmon()
+  {
 
-		return number_format($this->frecue,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->canmon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCalcon()
+  {
+
+    return trim($this->calcon);
+
+  }
+  
+  public function getActcon()
+  {
+
+    return trim($this->actcon);
+
+  }
+  
+  public function getFrecon()
+  {
+
+    return trim($this->frecon);
+
+  }
+  
+  public function getCodpre()
+  {
+
+    return trim($this->codpre);
+
+  }
+  
+  public function getMonmen($val=false)
+  {
+
+    if($val) return number_format($this->monmen,2,',','.');
+    else return $this->monmen;
+
+  }
+  
+  public function getFrecue($val=false)
+  {
+
+    if($val) return number_format($this->frecue,2,',','.');
+    else return $this->frecue;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = NpasiconPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = NpasiconPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpasiconPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpasiconPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpasiconPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpasiconPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNomsus($v)
 	{
 
-		if ($this->nomsus !== $v) {
-			$this->nomsus = $v;
-			$this->modifiedColumns[] = NpasiconPeer::NOMSUS;
-		}
-
+    if ($this->nomsus !== $v) {
+        $this->nomsus = $v;
+        $this->modifiedColumns[] = NpasiconPeer::NOMSUS;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = NpasiconPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = NpasiconPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecexp($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecexp !== $ts) {
-			$this->fecexp = $ts;
-			$this->modifiedColumns[] = NpasiconPeer::FECEXP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecexp] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecexp !== $ts) {
+      $this->fecexp = $ts;
+      $this->modifiedColumns[] = NpasiconPeer::FECEXP;
+    }
 
 	} 
 	
 	public function setSalcon($v)
 	{
 
-		if ($this->salcon !== $v) {
-			$this->salcon = $v;
-			$this->modifiedColumns[] = NpasiconPeer::SALCON;
-		}
-
+    if ($this->salcon !== $v) {
+        $this->salcon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasiconPeer::SALCON;
+      }
+  
 	} 
 	
 	public function setMonpre($v)
 	{
 
-		if ($this->monpre !== $v) {
-			$this->monpre = $v;
-			$this->modifiedColumns[] = NpasiconPeer::MONPRE;
-		}
-
+    if ($this->monpre !== $v) {
+        $this->monpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasiconPeer::MONPRE;
+      }
+  
 	} 
 	
 	public function setCanmon($v)
 	{
 
-		if ($this->canmon !== $v) {
-			$this->canmon = $v;
-			$this->modifiedColumns[] = NpasiconPeer::CANMON;
-		}
-
+    if ($this->canmon !== $v) {
+        $this->canmon = $v;
+        $this->modifiedColumns[] = NpasiconPeer::CANMON;
+      }
+  
 	} 
 	
 	public function setCalcon($v)
 	{
 
-		if ($this->calcon !== $v) {
-			$this->calcon = $v;
-			$this->modifiedColumns[] = NpasiconPeer::CALCON;
-		}
-
+    if ($this->calcon !== $v) {
+        $this->calcon = $v;
+        $this->modifiedColumns[] = NpasiconPeer::CALCON;
+      }
+  
 	} 
 	
 	public function setActcon($v)
 	{
 
-		if ($this->actcon !== $v) {
-			$this->actcon = $v;
-			$this->modifiedColumns[] = NpasiconPeer::ACTCON;
-		}
-
+    if ($this->actcon !== $v) {
+        $this->actcon = $v;
+        $this->modifiedColumns[] = NpasiconPeer::ACTCON;
+      }
+  
 	} 
 	
 	public function setFrecon($v)
 	{
 
-		if ($this->frecon !== $v) {
-			$this->frecon = $v;
-			$this->modifiedColumns[] = NpasiconPeer::FRECON;
-		}
-
+    if ($this->frecon !== $v) {
+        $this->frecon = $v;
+        $this->modifiedColumns[] = NpasiconPeer::FRECON;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = NpasiconPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = NpasiconPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonmen($v)
 	{
 
-		if ($this->monmen !== $v) {
-			$this->monmen = $v;
-			$this->modifiedColumns[] = NpasiconPeer::MONMEN;
-		}
-
+    if ($this->monmen !== $v) {
+        $this->monmen = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasiconPeer::MONMEN;
+      }
+  
 	} 
 	
 	public function setFrecue($v)
 	{
 
-		if ($this->frecue !== $v) {
-			$this->frecue = $v;
-			$this->modifiedColumns[] = NpasiconPeer::FRECUE;
-		}
-
+    if ($this->frecue !== $v) {
+        $this->frecue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpasiconPeer::FRECUE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpasiconPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpasiconPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcat = $rs->getString($startcol + 0);
+      $this->codcat = $rs->getString($startcol + 0);
 
-			$this->codcar = $rs->getString($startcol + 1);
+      $this->codcar = $rs->getString($startcol + 1);
 
-			$this->codcon = $rs->getString($startcol + 2);
+      $this->codcon = $rs->getString($startcol + 2);
 
-			$this->nomsus = $rs->getString($startcol + 3);
+      $this->nomsus = $rs->getString($startcol + 3);
 
-			$this->fecini = $rs->getDate($startcol + 4, null);
+      $this->fecini = $rs->getDate($startcol + 4, null);
 
-			$this->fecexp = $rs->getDate($startcol + 5, null);
+      $this->fecexp = $rs->getDate($startcol + 5, null);
 
-			$this->salcon = $rs->getFloat($startcol + 6);
+      $this->salcon = $rs->getFloat($startcol + 6);
 
-			$this->monpre = $rs->getFloat($startcol + 7);
+      $this->monpre = $rs->getFloat($startcol + 7);
 
-			$this->canmon = $rs->getString($startcol + 8);
+      $this->canmon = $rs->getString($startcol + 8);
 
-			$this->calcon = $rs->getString($startcol + 9);
+      $this->calcon = $rs->getString($startcol + 9);
 
-			$this->actcon = $rs->getString($startcol + 10);
+      $this->actcon = $rs->getString($startcol + 10);
 
-			$this->frecon = $rs->getString($startcol + 11);
+      $this->frecon = $rs->getString($startcol + 11);
 
-			$this->codpre = $rs->getString($startcol + 12);
+      $this->codpre = $rs->getString($startcol + 12);
 
-			$this->monmen = $rs->getFloat($startcol + 13);
+      $this->monmen = $rs->getFloat($startcol + 13);
 
-			$this->frecue = $rs->getFloat($startcol + 14);
+      $this->frecue = $rs->getFloat($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npasicon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npasicon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -485,6 +521,7 @@ abstract class BaseNpasicon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpasiconPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpasiconPeer::doUpdate($this, $con);

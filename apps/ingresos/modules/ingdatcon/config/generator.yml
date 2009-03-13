@@ -1,37 +1,39 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Ciconrep
-    theme:            default
-
+    theme:            cidesaGenerator
     fields:
       rifcon:      { name : C.I./R.I.F/Código }
-      nomcon:      { name : Nombre / Razón Social }      
+      nomcon:      { name : Nombre / Razón Social }
       nitcon:      { name : N.I.T }
-      naccon:      { name : Nacionalidad } 
-      dircon:      { name : Dirección } 
-      #repcon:      { name : Tipo } 
-      ciucon:      { name : Ciudad } 
-      cpocon:      { name : Código Postal } 
-      apocon:      { name : Cod. Apartado Postal } 
-      telcon:      { name : Teléfono } 
-      faxcon:      { name : Fax } 
-      emacon:      { name : E-Mail } 
-      urlcon:      { name : URL } 
-      tipcon:      { name : Tipo } 
-     
-    
+      naccon:      { name : Nacionalidad }
+      dircon:      { name : Dirección }
+      #repcon:      { name : Tipo }
+      ciucon:      { name : Ciudad }
+      cpocon:      { name : Código Postal }
+      apocon:      { name : Cod. Apartado Postal }
+      telcon:      { name : Teléfono }
+      faxcon:      { name : Fax }
+      emacon:      { name : E-Mail }
+      urlcon:      { name : URL }
+      tipcon:      { name : Tipo }
+
+
     list:
       title:          Contribuyentes
-      display:        [rifcon, nomcon]
+      display:        [=rifcon, nomcon]
       filters:        [rifcon, nomcon]
       object_actions:
         _edit:        ~
-        _delete:      ~              
-      max_per_page:   5    
+        _delete:      ~
+      max_per_page:   5
+      sort: rifcon
     edit:
       title:          Contribuyentes
-      display:       [rifcon, nomcon, nitcon, naccon, dircon, ciucon, cpocon, apocon, telcon, faxcon, emacon, urlcon, tipcon ]
-      
-      
-      
+      display:       [rifcon, nomcon, nitcon, _naccon, _tipcon, dircon, ciucon, cpocon, apocon, telcon, faxcon, emacon, urlcon ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

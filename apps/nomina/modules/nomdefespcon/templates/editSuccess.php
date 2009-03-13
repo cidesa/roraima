@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edicion de Conceptos', 
+<h1><?php echo __('Edición de Conceptos', 
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('nomdefespcon/edit_messages', array('npdefcpt' => $npdefcpt, 'labels' => $labels)) ?>
-<?php include_partial('nomdefespcon/edit_form', array('npdefcpt' => $npdefcpt, 'labels' => $labels, 'nompar' => $nompar)) ?>
+<?php include_partial('nomdefespcon/edit_form', array('npdefcpt' => $npdefcpt, 'formato' => $formato, 'longitud' => $longitud, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

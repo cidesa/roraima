@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class BdcriterioMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.BdcriterioMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.BdcriterioMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('bdcriterio');
 		$tMap->setPhpName('Bdcriterio');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('bdcriterio_SEQ');
 
 		$tMap->addColumn('CRITERIO', 'Criterio', 'string', CreoleTypes::VARCHAR, false, 1000);
 
@@ -43,6 +45,6 @@ class BdcriterioMapBuilder {
 		$tMap->addColumn('NUMERO', 'Numero', 'string', CreoleTypes::VARCHAR, false, 2);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

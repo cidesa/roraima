@@ -1,0 +1,48 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fadevolu
+    theme:            cidesaGenerator
+    fields:
+      nrodev: { name: Número}
+      fecdev: { name: Fecha}
+      refdes: { name: Nro Despacho}
+      fatipdev_id: { name: Tipo de Devolución}
+      nomtidev: { name: Nombre del Tipo de Devolución}
+      codalm: { name: Cod. Almacén}
+      desdev: { name: Descripción}
+      mondev: { name: Monto Total}
+      obsdev: { name: Observación}
+      codpro: { name: CI/RIF Cliente}
+      rifpro: { name: RIF}
+      nompro: { name: Nombre}
+      dirpro: { name: Dirección}
+      telpro: { name: Teléfono}
+      codart: { name: Código del Artículo}
+      desart: { name: Descripción del Artículo}
+      unimed: { name: Unidad de Medida}
+      candes: { name: Cantidad Despachada}
+      candev: { name: Cantidad Devuelta}
+      preart: { name: Costo}
+      totart: { name: Total}
+
+    list:
+      title:          Devoluciones
+      display:        [=nrodev, fecdev, refdes]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nrodev, fecdev, refdes]
+      max_per_page:   10
+      sort:           nrodev
+
+    edit:
+      title:          Devoluciones
+      display:
+        "Datos de la Devolución": [nrodev, refdes, fecdev, codpro, rifpro, dirpro, telpro, desdev, codalm, fatipdev_id, mondev]
+        "Observación": [obsdev]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

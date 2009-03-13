@@ -33,111 +33,138 @@ abstract class BaseCsotrgasind extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodgas()
-	{
+  
+  public function getCodgas()
+  {
 
-		return $this->codgas; 		
-	}
-	
-	public function getDesgas()
-	{
+    return trim($this->codgas);
 
-		return $this->desgas; 		
-	}
-	
-	public function getCosgas()
-	{
+  }
+  
+  public function getDesgas()
+  {
 
-		return number_format($this->cosgas,2,',','.');
-		
-	}
-	
-	public function getTipmon()
-	{
+    return trim($this->desgas);
 
-		return $this->tipmon; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCosgas($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->cosgas,2,',','.');
+    else return $this->cosgas;
+
+  }
+  
+  public function getTipmon()
+  {
+
+    return trim($this->tipmon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodgas($v)
 	{
 
-		if ($this->codgas !== $v) {
-			$this->codgas = $v;
-			$this->modifiedColumns[] = CsotrgasindPeer::CODGAS;
-		}
-
+    if ($this->codgas !== $v) {
+        $this->codgas = $v;
+        $this->modifiedColumns[] = CsotrgasindPeer::CODGAS;
+      }
+  
 	} 
 	
 	public function setDesgas($v)
 	{
 
-		if ($this->desgas !== $v) {
-			$this->desgas = $v;
-			$this->modifiedColumns[] = CsotrgasindPeer::DESGAS;
-		}
-
+    if ($this->desgas !== $v) {
+        $this->desgas = $v;
+        $this->modifiedColumns[] = CsotrgasindPeer::DESGAS;
+      }
+  
 	} 
 	
 	public function setCosgas($v)
 	{
 
-		if ($this->cosgas !== $v) {
-			$this->cosgas = $v;
-			$this->modifiedColumns[] = CsotrgasindPeer::COSGAS;
-		}
-
+    if ($this->cosgas !== $v) {
+        $this->cosgas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsotrgasindPeer::COSGAS;
+      }
+  
 	} 
 	
 	public function setTipmon($v)
 	{
 
-		if ($this->tipmon !== $v) {
-			$this->tipmon = $v;
-			$this->modifiedColumns[] = CsotrgasindPeer::TIPMON;
-		}
-
+    if ($this->tipmon !== $v) {
+        $this->tipmon = $v;
+        $this->modifiedColumns[] = CsotrgasindPeer::TIPMON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsotrgasindPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsotrgasindPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codgas = $rs->getString($startcol + 0);
+      $this->codgas = $rs->getString($startcol + 0);
 
-			$this->desgas = $rs->getString($startcol + 1);
+      $this->desgas = $rs->getString($startcol + 1);
 
-			$this->cosgas = $rs->getFloat($startcol + 2);
+      $this->cosgas = $rs->getFloat($startcol + 2);
 
-			$this->tipmon = $rs->getString($startcol + 3);
+      $this->tipmon = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csotrgasind object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csotrgasind object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

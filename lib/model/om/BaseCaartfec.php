@@ -37,152 +37,179 @@ abstract class BaseCaartfec extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getOrdcom()
-	{
+  
+  public function getOrdcom()
+  {
 
-		return $this->ordcom; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->ordcom);
 
-		return $this->codart; 		
-	}
-	
-	public function getDesart()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->desart; 		
-	}
-	
-	public function getCanart()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canart,2,',','.');
-		
-	}
-	
-	public function getFecent($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDesart()
+  {
 
-		if ($this->fecent === null || $this->fecent === '') {
-			return null;
-		} elseif (!is_int($this->fecent)) {
-						$ts = strtotime($this->fecent);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
-			}
-		} else {
-			$ts = $this->fecent;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->desart);
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getCanart($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->canart,2,',','.');
+    else return $this->canart;
+
+  }
+  
+  public function getFecent($format = 'Y-m-d')
+  {
+
+    if ($this->fecent === null || $this->fecent === '') {
+      return null;
+    } elseif (!is_int($this->fecent)) {
+            $ts = adodb_strtotime($this->fecent);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
+      }
+    } else {
+      $ts = $this->fecent;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setOrdcom($v)
 	{
 
-		if ($this->ordcom !== $v) {
-			$this->ordcom = $v;
-			$this->modifiedColumns[] = CaartfecPeer::ORDCOM;
-		}
-
+    if ($this->ordcom !== $v) {
+        $this->ordcom = $v;
+        $this->modifiedColumns[] = CaartfecPeer::ORDCOM;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartfecPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartfecPeer::CODART;
+      }
+  
 	} 
 	
 	public function setDesart($v)
 	{
 
-		if ($this->desart !== $v) {
-			$this->desart = $v;
-			$this->modifiedColumns[] = CaartfecPeer::DESART;
-		}
-
+    if ($this->desart !== $v) {
+        $this->desart = $v;
+        $this->modifiedColumns[] = CaartfecPeer::DESART;
+      }
+  
 	} 
 	
 	public function setCanart($v)
 	{
 
-		if ($this->canart !== $v) {
-			$this->canart = $v;
-			$this->modifiedColumns[] = CaartfecPeer::CANART;
-		}
-
+    if ($this->canart !== $v) {
+        $this->canart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartfecPeer::CANART;
+      }
+  
 	} 
 	
 	public function setFecent($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecent !== $ts) {
-			$this->fecent = $ts;
-			$this->modifiedColumns[] = CaartfecPeer::FECENT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecent !== $ts) {
+      $this->fecent = $ts;
+      $this->modifiedColumns[] = CaartfecPeer::FECENT;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartfecPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartfecPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->ordcom = $rs->getString($startcol + 0);
+      $this->ordcom = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->desart = $rs->getString($startcol + 2);
+      $this->desart = $rs->getString($startcol + 2);
 
-			$this->canart = $rs->getFloat($startcol + 3);
+      $this->canart = $rs->getFloat($startcol + 3);
 
-			$this->fecent = $rs->getDate($startcol + 4, null);
+      $this->fecent = $rs->getDate($startcol + 4, null);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartfec object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartfec object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +266,7 @@ abstract class BaseCaartfec extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaartfecPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaartfecPeer::doUpdate($this, $con);

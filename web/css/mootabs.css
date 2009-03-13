@@ -1,0 +1,48 @@
+
+.mootabs_title {
+  list-style-image: none;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  height: 24px;
+
+}
+
+.mootabs_title li {
+  float: left;
+  background-color: #3975BD;
+  padding: 2px 8px 2px 8px;
+  margin-right: 2px;
+  cursor: pointer;
+  color: #fff;
+  font-family: "Trebuchet MS";
+  font-size: 12px;
+  height: 24px;
+  line-height: 24px;
+}
+
+.mootabs_title li.active {
+  background-color: #49A8EC;
+}
+
+.mootabs_panel {
+  display: none;
+  position: relative;
+  width: 100%;
+  top: -5px;
+  font-family: "Trebuchet MS";
+  clear: both;
+  color: #fff;
+  overflow: auto;
+  padding: 5px;
+}
+
+.mootabs_panel.active {
+  background-color: #49A8EC;
+  display: block;
+
+}
+
+.mootabs_title li.over {
+  font-weight: bold;
+}

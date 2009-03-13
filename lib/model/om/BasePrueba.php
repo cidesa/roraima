@@ -25,74 +25,99 @@ abstract class BasePrueba extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getPasuse()
-	{
+  
+  public function getPasuse()
+  {
 
-		return $this->pasuse; 		
-	}
-	
-	public function getEncpas()
-	{
+    return trim($this->pasuse);
 
-		return $this->encpas; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getEncpas()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->encpas);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setPasuse($v)
 	{
 
-		if ($this->pasuse !== $v) {
-			$this->pasuse = $v;
-			$this->modifiedColumns[] = PruebaPeer::PASUSE;
-		}
-
+    if ($this->pasuse !== $v) {
+        $this->pasuse = $v;
+        $this->modifiedColumns[] = PruebaPeer::PASUSE;
+      }
+  
 	} 
 	
 	public function setEncpas($v)
 	{
 
-		if ($this->encpas !== $v) {
-			$this->encpas = $v;
-			$this->modifiedColumns[] = PruebaPeer::ENCPAS;
-		}
-
+    if ($this->encpas !== $v) {
+        $this->encpas = $v;
+        $this->modifiedColumns[] = PruebaPeer::ENCPAS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = PruebaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = PruebaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->pasuse = $rs->getString($startcol + 0);
+      $this->pasuse = $rs->getString($startcol + 0);
 
-			$this->encpas = $rs->getString($startcol + 1);
+      $this->encpas = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Prueba object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Prueba object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

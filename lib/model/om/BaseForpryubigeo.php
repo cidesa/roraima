@@ -25,6 +25,10 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 
 
 	
+	protected $espadiubigeo;
+
+
+	
 	protected $id;
 
 	
@@ -33,110 +37,156 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodest()
-	{
+    return trim($this->codpro);
 
-		return $this->codest; 		
-	}
-	
-	public function getCodmun()
-	{
+  }
+  
+  public function getCodest()
+  {
 
-		return $this->codmun; 		
-	}
-	
-	public function getCodpar()
-	{
+    return trim($this->codest);
 
-		return $this->codpar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodmun()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codmun);
+
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getEspadiubigeo()
+  {
+
+    return trim($this->espadiubigeo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = ForpryubigeoPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = ForpryubigeoPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodest($v)
 	{
 
-		if ($this->codest !== $v) {
-			$this->codest = $v;
-			$this->modifiedColumns[] = ForpryubigeoPeer::CODEST;
-		}
-
+    if ($this->codest !== $v) {
+        $this->codest = $v;
+        $this->modifiedColumns[] = ForpryubigeoPeer::CODEST;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = ForpryubigeoPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = ForpryubigeoPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = ForpryubigeoPeer::CODPAR;
-		}
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = ForpryubigeoPeer::CODPAR;
+      }
+  
+	} 
+	
+	public function setEspadiubigeo($v)
+	{
 
+    if ($this->espadiubigeo !== $v) {
+        $this->espadiubigeo = $v;
+        $this->modifiedColumns[] = ForpryubigeoPeer::ESPADIUBIGEO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForpryubigeoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForpryubigeoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codest = $rs->getString($startcol + 1);
+      $this->codest = $rs->getString($startcol + 1);
 
-			$this->codmun = $rs->getString($startcol + 2);
+      $this->codmun = $rs->getString($startcol + 2);
 
-			$this->codpar = $rs->getString($startcol + 3);
+      $this->codpar = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->espadiubigeo = $rs->getString($startcol + 4);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forpryubigeo object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forpryubigeo object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +243,7 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForpryubigeoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForpryubigeoPeer::doUpdate($this, $con);
@@ -271,6 +322,9 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 				return $this->getCodpar();
 				break;
 			case 4:
+				return $this->getEspadiubigeo();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -287,7 +341,8 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 			$keys[1] => $this->getCodest(),
 			$keys[2] => $this->getCodmun(),
 			$keys[3] => $this->getCodpar(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getEspadiubigeo(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -316,6 +371,9 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 				$this->setCodpar($value);
 				break;
 			case 4:
+				$this->setEspadiubigeo($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -329,7 +387,8 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setCodest($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodmun($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCodpar($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setEspadiubigeo($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -341,6 +400,7 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ForpryubigeoPeer::CODEST)) $criteria->add(ForpryubigeoPeer::CODEST, $this->codest);
 		if ($this->isColumnModified(ForpryubigeoPeer::CODMUN)) $criteria->add(ForpryubigeoPeer::CODMUN, $this->codmun);
 		if ($this->isColumnModified(ForpryubigeoPeer::CODPAR)) $criteria->add(ForpryubigeoPeer::CODPAR, $this->codpar);
+		if ($this->isColumnModified(ForpryubigeoPeer::ESPADIUBIGEO)) $criteria->add(ForpryubigeoPeer::ESPADIUBIGEO, $this->espadiubigeo);
 		if ($this->isColumnModified(ForpryubigeoPeer::ID)) $criteria->add(ForpryubigeoPeer::ID, $this->id);
 
 		return $criteria;
@@ -379,6 +439,8 @@ abstract class BaseForpryubigeo extends BaseObject  implements Persistent {
 		$copyObj->setCodmun($this->codmun);
 
 		$copyObj->setCodpar($this->codpar);
+
+		$copyObj->setEspadiubigeo($this->espadiubigeo);
 
 
 		$copyObj->setNew(true);

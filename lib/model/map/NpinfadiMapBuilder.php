@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpinfadiMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpinfadiMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpinfadiMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npinfadi');
 		$tMap->setPhpName('Npinfadi');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npinfadi_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, false, 16);
 
@@ -42,9 +44,9 @@ class NpinfadiMapBuilder {
 
 		$tMap->addColumn('DURCUR', 'Durcur', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('NIVEST', 'Nivest', 'string', CreoleTypes::VARCHAR, false, 40);
 
@@ -61,6 +63,6 @@ class NpinfadiMapBuilder {
 		$tMap->addColumn('ANOFIN', 'Anofin', 'string', CreoleTypes::VARCHAR, false, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

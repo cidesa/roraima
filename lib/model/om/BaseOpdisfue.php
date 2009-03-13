@@ -41,147 +41,176 @@ abstract class BaseOpdisfue extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumord()
-	{
+  
+  public function getNumord()
+  {
 
-		return $this->numord; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->numord);
 
-		return $this->codpre; 		
-	}
-	
-	public function getFuefin()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return $this->fuefin; 		
-	}
-	
-	public function getMonfue()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->monfue,2,',','.');
-		
-	}
-	
-	public function getCorrel()
-	{
+  }
+  
+  public function getFuefin()
+  {
 
-		return $this->correl; 		
-	}
-	
-	public function getOrigen()
-	{
+    return trim($this->fuefin);
 
-		return $this->origen; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonfue($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monfue,2,',','.');
+    else return $this->monfue;
+
+  }
+  
+  public function getCorrel()
+  {
+
+    return trim($this->correl);
+
+  }
+  
+  public function getOrigen()
+  {
+
+    return trim($this->origen);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = OpdisfuePeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = OpdisfuePeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = OpdisfuePeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = OpdisfuePeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setFuefin($v)
 	{
 
-		if ($this->fuefin !== $v) {
-			$this->fuefin = $v;
-			$this->modifiedColumns[] = OpdisfuePeer::FUEFIN;
-		}
-
+    if ($this->fuefin !== $v) {
+        $this->fuefin = $v;
+        $this->modifiedColumns[] = OpdisfuePeer::FUEFIN;
+      }
+  
 	} 
 	
 	public function setMonfue($v)
 	{
 
-		if ($this->monfue !== $v) {
-			$this->monfue = $v;
-			$this->modifiedColumns[] = OpdisfuePeer::MONFUE;
-		}
-
+    if ($this->monfue !== $v) {
+        $this->monfue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdisfuePeer::MONFUE;
+      }
+  
 	} 
 	
 	public function setCorrel($v)
 	{
 
-		if ($this->correl !== $v) {
-			$this->correl = $v;
-			$this->modifiedColumns[] = OpdisfuePeer::CORREL;
-		}
-
+    if ($this->correl !== $v) {
+        $this->correl = $v;
+        $this->modifiedColumns[] = OpdisfuePeer::CORREL;
+      }
+  
 	} 
 	
 	public function setOrigen($v)
 	{
 
-		if ($this->origen !== $v) {
-			$this->origen = $v;
-			$this->modifiedColumns[] = OpdisfuePeer::ORIGEN;
-		}
-
+    if ($this->origen !== $v) {
+        $this->origen = $v;
+        $this->modifiedColumns[] = OpdisfuePeer::ORIGEN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpdisfuePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpdisfuePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numord = $rs->getString($startcol + 0);
+      $this->numord = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->fuefin = $rs->getString($startcol + 2);
+      $this->fuefin = $rs->getString($startcol + 2);
 
-			$this->monfue = $rs->getFloat($startcol + 3);
+      $this->monfue = $rs->getFloat($startcol + 3);
 
-			$this->correl = $rs->getString($startcol + 4);
+      $this->correl = $rs->getString($startcol + 4);
 
-			$this->origen = $rs->getString($startcol + 5);
+      $this->origen = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opdisfue object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opdisfue object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -238,6 +267,7 @@ abstract class BaseOpdisfue extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpdisfuePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpdisfuePeer::doUpdate($this, $con);

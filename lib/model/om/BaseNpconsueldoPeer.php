@@ -205,6 +205,7 @@ abstract class BaseNpconsueldoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpconsueldoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

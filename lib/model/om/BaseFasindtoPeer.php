@@ -205,6 +205,7 @@ abstract class BaseFasindtoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FasindtoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

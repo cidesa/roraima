@@ -9,10 +9,6 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 
 
 	
-	protected $forsol;
-
-
-	
 	protected $nomsol;
 
 
@@ -20,79 +16,91 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collFapresups;
+
+	
+	protected $lastFapresupCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getForsol()
-	{
+  
+  public function getNomsol()
+  {
 
-		return $this->forsol; 		
-	}
-	
-	public function getNomsol()
-	{
+    return trim($this->nomsol);
 
-		return $this->nomsol; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getId()
+  {
 
-		return $this->id; 		
-	}
-	
-	public function setForsol($v)
-	{
+    return $this->id;
 
-		if ($this->forsol !== $v) {
-			$this->forsol = $v;
-			$this->modifiedColumns[] = FaforsolPeer::FORSOL;
-		}
-
-	} 
+  }
 	
 	public function setNomsol($v)
 	{
 
-		if ($this->nomsol !== $v) {
-			$this->nomsol = $v;
-			$this->modifiedColumns[] = FaforsolPeer::NOMSOL;
-		}
-
+    if ($this->nomsol !== $v) {
+        $this->nomsol = $v;
+        $this->modifiedColumns[] = FaforsolPeer::NOMSOL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FaforsolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FaforsolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->forsol = $rs->getString($startcol + 0);
+      $this->nomsol = $rs->getString($startcol + 0);
 
-			$this->nomsol = $rs->getString($startcol + 1);
+      $this->id = $rs->getInt($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->resetModified();
 
-			$this->resetModified();
+      $this->setNew(false);
 
-			$this->setNew(false);
+      $this->afterHydrate();
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Faforsol object", $e);
-		}
-	}
+            return $startcol + 2; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Faforsol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,11 +157,20 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FaforsolPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FaforsolPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collFapresups !== null) {
+				foreach($this->collFapresups as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -196,6 +213,14 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 			}
 
 
+				if ($this->collFapresups !== null) {
+					foreach($this->collFapresups as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -215,12 +240,9 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getForsol();
-				break;
-			case 1:
 				return $this->getNomsol();
 				break;
-			case 2:
+			case 1:
 				return $this->getId();
 				break;
 			default:
@@ -233,9 +255,8 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 	{
 		$keys = FaforsolPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getForsol(),
-			$keys[1] => $this->getNomsol(),
-			$keys[2] => $this->getId(),
+			$keys[0] => $this->getNomsol(),
+			$keys[1] => $this->getId(),
 		);
 		return $result;
 	}
@@ -252,12 +273,9 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setForsol($value);
-				break;
-			case 1:
 				$this->setNomsol($value);
 				break;
-			case 2:
+			case 1:
 				$this->setId($value);
 				break;
 		} 	}
@@ -267,9 +285,8 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 	{
 		$keys = FaforsolPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setForsol($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setNomsol($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNomsol($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setId($arr[$keys[1]]);
 	}
 
 	
@@ -277,7 +294,6 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FaforsolPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(FaforsolPeer::FORSOL)) $criteria->add(FaforsolPeer::FORSOL, $this->forsol);
 		if ($this->isColumnModified(FaforsolPeer::NOMSOL)) $criteria->add(FaforsolPeer::NOMSOL, $this->nomsol);
 		if ($this->isColumnModified(FaforsolPeer::ID)) $criteria->add(FaforsolPeer::ID, $this->id);
 
@@ -310,10 +326,17 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setForsol($this->forsol);
-
 		$copyObj->setNomsol($this->nomsol);
 
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getFapresups() as $relObj) {
+				$copyObj->addFapresup($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -336,6 +359,146 @@ abstract class BaseFaforsol extends BaseObject  implements Persistent {
 			self::$peer = new FaforsolPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initFapresups()
+	{
+		if ($this->collFapresups === null) {
+			$this->collFapresups = array();
+		}
+	}
+
+	
+	public function getFapresups($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseFapresupPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collFapresups === null) {
+			if ($this->isNew()) {
+			   $this->collFapresups = array();
+			} else {
+
+				$criteria->add(FapresupPeer::FAFORSOL_ID, $this->getId());
+
+				FapresupPeer::addSelectColumns($criteria);
+				$this->collFapresups = FapresupPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(FapresupPeer::FAFORSOL_ID, $this->getId());
+
+				FapresupPeer::addSelectColumns($criteria);
+				if (!isset($this->lastFapresupCriteria) || !$this->lastFapresupCriteria->equals($criteria)) {
+					$this->collFapresups = FapresupPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastFapresupCriteria = $criteria;
+		return $this->collFapresups;
+	}
+
+	
+	public function countFapresups($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseFapresupPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(FapresupPeer::FAFORSOL_ID, $this->getId());
+
+		return FapresupPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addFapresup(Fapresup $l)
+	{
+		$this->collFapresups[] = $l;
+		$l->setFaforsol($this);
+	}
+
+
+	
+	public function getFapresupsJoinFaconpag($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseFapresupPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collFapresups === null) {
+			if ($this->isNew()) {
+				$this->collFapresups = array();
+			} else {
+
+				$criteria->add(FapresupPeer::FAFORSOL_ID, $this->getId());
+
+				$this->collFapresups = FapresupPeer::doSelectJoinFaconpag($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(FapresupPeer::FAFORSOL_ID, $this->getId());
+
+			if (!isset($this->lastFapresupCriteria) || !$this->lastFapresupCriteria->equals($criteria)) {
+				$this->collFapresups = FapresupPeer::doSelectJoinFaconpag($criteria, $con);
+			}
+		}
+		$this->lastFapresupCriteria = $criteria;
+
+		return $this->collFapresups;
+	}
+
+
+	
+	public function getFapresupsJoinFafordes($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseFapresupPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collFapresups === null) {
+			if ($this->isNew()) {
+				$this->collFapresups = array();
+			} else {
+
+				$criteria->add(FapresupPeer::FAFORSOL_ID, $this->getId());
+
+				$this->collFapresups = FapresupPeer::doSelectJoinFafordes($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(FapresupPeer::FAFORSOL_ID, $this->getId());
+
+			if (!isset($this->lastFapresupCriteria) || !$this->lastFapresupCriteria->equals($criteria)) {
+				$this->collFapresups = FapresupPeer::doSelectJoinFafordes($criteria, $con);
+			}
+		}
+		$this->lastFapresupCriteria = $criteria;
+
+		return $this->collFapresups;
 	}
 
 } 

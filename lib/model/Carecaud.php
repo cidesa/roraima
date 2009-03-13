@@ -9,16 +9,14 @@
  */
 class Carecaud extends BaseCarecaud
 {
-	public function getDestiprec()
-	//JJSG******
+
+   public function __toString()
+    {
+		return $this->getDesrec();
+    }
+
+  public function getDestiprec()
 	{
-		$c = new Criteria();
-		$c->add(CatiprecPeer::CODTIPREC,self::getCodtiprec());
-		$destiprec = CatiprecPeer::doSelectone($c);
-		if ($destiprec){
-			return $destiprec->getDestiprec();
-		}else{
-			return '<!No Encontrado o Vacio> ';
-		}
+		return Herramientas::getX('CODTIPREC','Catiprec','destiprec',self::getCodtiprec());
 	}
 }

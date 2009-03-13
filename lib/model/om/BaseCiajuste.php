@@ -53,247 +53,277 @@ abstract class BaseCiajuste extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefaju()
-	{
+  
+  public function getRefaju()
+  {
 
-		return $this->refaju; 		
-	}
-	
-	public function getFecaju($format = 'Y-m-d')
-	{
+    return trim($this->refaju);
 
-		if ($this->fecaju === null || $this->fecaju === '') {
-			return null;
-		} elseif (!is_int($this->fecaju)) {
-						$ts = strtotime($this->fecaju);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
-			}
-		} else {
-			$ts = $this->fecaju;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecaju($format = 'Y-m-d')
+  {
 
-	
-	public function getAnoaju()
-	{
+    if ($this->fecaju === null || $this->fecaju === '') {
+      return null;
+    } elseif (!is_int($this->fecaju)) {
+            $ts = adodb_strtotime($this->fecaju);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecaju] as date/time value: " . var_export($this->fecaju, true));
+      }
+    } else {
+      $ts = $this->fecaju;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->anoaju; 		
-	}
-	
-	public function getRefere()
-	{
+  
+  public function getAnoaju()
+  {
 
-		return $this->refere; 		
-	}
-	
-	public function getDesaju()
-	{
+    return trim($this->anoaju);
 
-		return $this->desaju; 		
-	}
-	
-	public function getDesanu()
-	{
+  }
+  
+  public function getRefere()
+  {
 
-		return $this->desanu; 		
-	}
-	
-	public function getTotaju()
-	{
+    return trim($this->refere);
 
-		return number_format($this->totaju,2,',','.');
-		
-	}
-	
-	public function getStaaju()
-	{
+  }
+  
+  public function getDesaju()
+  {
 
-		return $this->staaju; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    return trim($this->desaju);
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDesanu()
+  {
 
-	
-	public function getId()
-	{
+    return trim($this->desanu);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTotaju($val=false)
+  {
+
+    if($val) return number_format($this->totaju,2,',','.');
+    else return $this->totaju;
+
+  }
+  
+  public function getStaaju()
+  {
+
+    return trim($this->staaju);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefaju($v)
 	{
 
-		if ($this->refaju !== $v) {
-			$this->refaju = $v;
-			$this->modifiedColumns[] = CiajustePeer::REFAJU;
-		}
-
+    if ($this->refaju !== $v) {
+        $this->refaju = $v;
+        $this->modifiedColumns[] = CiajustePeer::REFAJU;
+      }
+  
 	} 
 	
 	public function setFecaju($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecaju !== $ts) {
-			$this->fecaju = $ts;
-			$this->modifiedColumns[] = CiajustePeer::FECAJU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecaju] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecaju !== $ts) {
+      $this->fecaju = $ts;
+      $this->modifiedColumns[] = CiajustePeer::FECAJU;
+    }
 
 	} 
 	
 	public function setAnoaju($v)
 	{
 
-		if ($this->anoaju !== $v) {
-			$this->anoaju = $v;
-			$this->modifiedColumns[] = CiajustePeer::ANOAJU;
-		}
-
+    if ($this->anoaju !== $v) {
+        $this->anoaju = $v;
+        $this->modifiedColumns[] = CiajustePeer::ANOAJU;
+      }
+  
 	} 
 	
 	public function setRefere($v)
 	{
 
-		if ($this->refere !== $v) {
-			$this->refere = $v;
-			$this->modifiedColumns[] = CiajustePeer::REFERE;
-		}
-
+    if ($this->refere !== $v) {
+        $this->refere = $v;
+        $this->modifiedColumns[] = CiajustePeer::REFERE;
+      }
+  
 	} 
 	
 	public function setDesaju($v)
 	{
 
-		if ($this->desaju !== $v) {
-			$this->desaju = $v;
-			$this->modifiedColumns[] = CiajustePeer::DESAJU;
-		}
-
+    if ($this->desaju !== $v) {
+        $this->desaju = $v;
+        $this->modifiedColumns[] = CiajustePeer::DESAJU;
+      }
+  
 	} 
 	
 	public function setDesanu($v)
 	{
 
-		if ($this->desanu !== $v) {
-			$this->desanu = $v;
-			$this->modifiedColumns[] = CiajustePeer::DESANU;
-		}
-
+    if ($this->desanu !== $v) {
+        $this->desanu = $v;
+        $this->modifiedColumns[] = CiajustePeer::DESANU;
+      }
+  
 	} 
 	
 	public function setTotaju($v)
 	{
 
-		if ($this->totaju !== $v) {
-			$this->totaju = $v;
-			$this->modifiedColumns[] = CiajustePeer::TOTAJU;
-		}
-
+    if ($this->totaju !== $v) {
+        $this->totaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiajustePeer::TOTAJU;
+      }
+  
 	} 
 	
 	public function setStaaju($v)
 	{
 
-		if ($this->staaju !== $v) {
-			$this->staaju = $v;
-			$this->modifiedColumns[] = CiajustePeer::STAAJU;
-		}
-
+    if ($this->staaju !== $v) {
+        $this->staaju = $v;
+        $this->modifiedColumns[] = CiajustePeer::STAAJU;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = CiajustePeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = CiajustePeer::FECANU;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CiajustePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CiajustePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refaju = $rs->getString($startcol + 0);
+      $this->refaju = $rs->getString($startcol + 0);
 
-			$this->fecaju = $rs->getDate($startcol + 1, null);
+      $this->fecaju = $rs->getDate($startcol + 1, null);
 
-			$this->anoaju = $rs->getString($startcol + 2);
+      $this->anoaju = $rs->getString($startcol + 2);
 
-			$this->refere = $rs->getString($startcol + 3);
+      $this->refere = $rs->getString($startcol + 3);
 
-			$this->desaju = $rs->getString($startcol + 4);
+      $this->desaju = $rs->getString($startcol + 4);
 
-			$this->desanu = $rs->getString($startcol + 5);
+      $this->desanu = $rs->getString($startcol + 5);
 
-			$this->totaju = $rs->getFloat($startcol + 6);
+      $this->totaju = $rs->getFloat($startcol + 6);
 
-			$this->staaju = $rs->getString($startcol + 7);
+      $this->staaju = $rs->getString($startcol + 7);
 
-			$this->fecanu = $rs->getDate($startcol + 8, null);
+      $this->fecanu = $rs->getDate($startcol + 8, null);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ciajuste object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ciajuste object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -350,6 +380,7 @@ abstract class BaseCiajuste extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CiajustePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CiajustePeer::doUpdate($this, $con);

@@ -220,6 +220,7 @@ abstract class BaseCobreggesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobreggesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -230,6 +230,7 @@ abstract class BaseNpasicarprePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpasicarprePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

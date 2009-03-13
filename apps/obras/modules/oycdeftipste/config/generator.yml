@@ -7,18 +7,23 @@ generator:
     fields:
       codste:      { name: Código}
       desste:      { name: Descripción}
-      tipste:      { name: tipo}      
-      #maxdia:      { name: Abreviatura}      
+      tipste:      { name: Tipo}
 
     list:
-      title:          Definición de Tipo de Solicitante
+      title:          Tipo de Solicitante
       filters:		  [codste, desste]
       display:        [=codste, desste]
       max_per_page:	  10
+      sort:  codste
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+
     edit:
       title:          Edición de Tipo de Solicitante
-      #display:        [codcon, nomcon, estados]                 
+      display:        [codste, desste, tipste]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

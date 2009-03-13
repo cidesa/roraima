@@ -205,6 +205,7 @@ abstract class BaseCobreccliPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobreccliPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

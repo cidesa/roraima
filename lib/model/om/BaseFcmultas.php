@@ -29,6 +29,10 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipdec;
+
+
+	
 	protected $id;
 
 	
@@ -37,128 +41,175 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmul()
-	{
+  
+  public function getCodmul()
+  {
 
-		return $this->codmul; 		
-	}
-	
-	public function getNommul()
-	{
+    return trim($this->codmul);
 
-		return $this->nommul; 		
-	}
-	
-	public function getTipo()
-	{
+  }
+  
+  public function getNommul()
+  {
 
-		return $this->tipo; 		
-	}
-	
-	public function getModo()
-	{
+    return trim($this->nommul);
 
-		return $this->modo; 		
-	}
-	
-	public function getMonpro()
-	{
+  }
+  
+  public function getTipo()
+  {
 
-		return $this->monpro; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->tipo);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getModo()
+  {
+
+    return trim($this->modo);
+
+  }
+  
+  public function getMonpro()
+  {
+
+    return trim($this->monpro);
+
+  }
+  
+  public function getTipdec()
+  {
+
+    return trim($this->tipdec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmul($v)
 	{
 
-		if ($this->codmul !== $v) {
-			$this->codmul = $v;
-			$this->modifiedColumns[] = FcmultasPeer::CODMUL;
-		}
-
+    if ($this->codmul !== $v) {
+        $this->codmul = $v;
+        $this->modifiedColumns[] = FcmultasPeer::CODMUL;
+      }
+  
 	} 
 	
 	public function setNommul($v)
 	{
 
-		if ($this->nommul !== $v) {
-			$this->nommul = $v;
-			$this->modifiedColumns[] = FcmultasPeer::NOMMUL;
-		}
-
+    if ($this->nommul !== $v) {
+        $this->nommul = $v;
+        $this->modifiedColumns[] = FcmultasPeer::NOMMUL;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = FcmultasPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = FcmultasPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setModo($v)
 	{
 
-		if ($this->modo !== $v) {
-			$this->modo = $v;
-			$this->modifiedColumns[] = FcmultasPeer::MODO;
-		}
-
+    if ($this->modo !== $v) {
+        $this->modo = $v;
+        $this->modifiedColumns[] = FcmultasPeer::MODO;
+      }
+  
 	} 
 	
 	public function setMonpro($v)
 	{
 
-		if ($this->monpro !== $v) {
-			$this->monpro = $v;
-			$this->modifiedColumns[] = FcmultasPeer::MONPRO;
-		}
+    if ($this->monpro !== $v) {
+        $this->monpro = $v;
+        $this->modifiedColumns[] = FcmultasPeer::MONPRO;
+      }
+  
+	} 
+	
+	public function setTipdec($v)
+	{
 
+    if ($this->tipdec !== $v) {
+        $this->tipdec = $v;
+        $this->modifiedColumns[] = FcmultasPeer::TIPDEC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcmultasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcmultasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmul = $rs->getString($startcol + 0);
+      $this->codmul = $rs->getString($startcol + 0);
 
-			$this->nommul = $rs->getString($startcol + 1);
+      $this->nommul = $rs->getString($startcol + 1);
 
-			$this->tipo = $rs->getString($startcol + 2);
+      $this->tipo = $rs->getString($startcol + 2);
 
-			$this->modo = $rs->getString($startcol + 3);
+      $this->modo = $rs->getString($startcol + 3);
 
-			$this->monpro = $rs->getString($startcol + 4);
+      $this->monpro = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->tipdec = $rs->getString($startcol + 5);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcmultas object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcmultas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +266,7 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcmultasPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcmultasPeer::doUpdate($this, $con);
@@ -296,6 +348,9 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 				return $this->getMonpro();
 				break;
 			case 5:
+				return $this->getTipdec();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -313,7 +368,8 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 			$keys[2] => $this->getTipo(),
 			$keys[3] => $this->getModo(),
 			$keys[4] => $this->getMonpro(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getTipdec(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -345,6 +401,9 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 				$this->setMonpro($value);
 				break;
 			case 5:
+				$this->setTipdec($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -359,7 +418,8 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setTipo($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setModo($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setMonpro($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setTipdec($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -372,6 +432,7 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcmultasPeer::TIPO)) $criteria->add(FcmultasPeer::TIPO, $this->tipo);
 		if ($this->isColumnModified(FcmultasPeer::MODO)) $criteria->add(FcmultasPeer::MODO, $this->modo);
 		if ($this->isColumnModified(FcmultasPeer::MONPRO)) $criteria->add(FcmultasPeer::MONPRO, $this->monpro);
+		if ($this->isColumnModified(FcmultasPeer::TIPDEC)) $criteria->add(FcmultasPeer::TIPDEC, $this->tipdec);
 		if ($this->isColumnModified(FcmultasPeer::ID)) $criteria->add(FcmultasPeer::ID, $this->id);
 
 		return $criteria;
@@ -412,6 +473,8 @@ abstract class BaseFcmultas extends BaseObject  implements Persistent {
 		$copyObj->setModo($this->modo);
 
 		$copyObj->setMonpro($this->monpro);
+
+		$copyObj->setTipdec($this->tipdec);
 
 
 		$copyObj->setNew(true);

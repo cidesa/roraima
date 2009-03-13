@@ -197,14 +197,14 @@ abstract class BaseFcmuniciPeer {
 	public static function doCountJoinFcestado(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcmuniciPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcmuniciPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -279,7 +279,7 @@ abstract class BaseFcmuniciPeer {
 		} else {
 			$criteria->addSelectColumn(FcmuniciPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -315,25 +315,25 @@ abstract class BaseFcmuniciPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcmuniciPeer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = FcestadoPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -342,7 +342,7 @@ abstract class BaseFcmuniciPeer {
 					$temp_obj2->addFcmunici($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcmunicis();
 				$obj2->addFcmunici($obj1);
@@ -376,6 +376,7 @@ abstract class BaseFcmuniciPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcmuniciPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

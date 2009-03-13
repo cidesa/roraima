@@ -25,74 +25,99 @@ abstract class BaseCaunides extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoduni()
-	{
+  
+  public function getCoduni()
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getDesuni()
-	{
+    return trim($this->coduni);
 
-		return $this->desuni; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDesuni()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->desuni);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = CaunidesPeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = CaunidesPeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setDesuni($v)
 	{
 
-		if ($this->desuni !== $v) {
-			$this->desuni = $v;
-			$this->modifiedColumns[] = CaunidesPeer::DESUNI;
-		}
-
+    if ($this->desuni !== $v) {
+        $this->desuni = $v;
+        $this->modifiedColumns[] = CaunidesPeer::DESUNI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaunidesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaunidesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduni = $rs->getString($startcol + 0);
+      $this->coduni = $rs->getString($startcol + 0);
 
-			$this->desuni = $rs->getString($startcol + 1);
+      $this->desuni = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caunides object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caunides object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -1,44 +1,46 @@
 <?php
 
 
-	
+
 class FcsolvenciaMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcsolvenciaMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcsolvenciaMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcsolvencia');
 		$tMap->setPhpName('Fcsolvencia');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcsolvencia_SEQ');
 
 		$tMap->addColumn('CODSOL', 'Codsol', 'string', CreoleTypes::VARCHAR, true, 10);
 
 		$tMap->addForeignKey('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, 'fctipsol', 'CODTIP', true, 2);
 
-		$tMap->addColumn('FECEXP', 'Fecexp', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECEXP', 'Fecexp', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, false, 10);
 
@@ -57,6 +59,6 @@ class FcsolvenciaMapBuilder {
 		$tMap->addColumn('MOTIVO', 'Motivo', 'string', CreoleTypes::VARCHAR, false, 254);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

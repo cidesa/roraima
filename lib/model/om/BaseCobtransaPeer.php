@@ -29,9 +29,6 @@ abstract class BaseCobtransaPeer {
 	const CODCLI = 'cobtransa.CODCLI';
 
 	
-	const CODMOV = 'cobtransa.CODMOV';
-
-	
 	const DESTRA = 'cobtransa.DESTRA';
 
 	
@@ -56,6 +53,9 @@ abstract class BaseCobtransaPeer {
 	const FECCOM = 'cobtransa.FECCOM';
 
 	
+	const FATIPMOV_ID = 'cobtransa.FATIPMOV_ID';
+
+	
 	const ID = 'cobtransa.ID';
 
 	
@@ -64,17 +64,17 @@ abstract class BaseCobtransaPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numtra', 'Fectra', 'Codcli', 'Codmov', 'Destra', 'Montra', 'Totdsc', 'Totrec', 'Tottra', 'Status', 'Numcom', 'Feccom', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CobtransaPeer::NUMTRA, CobtransaPeer::FECTRA, CobtransaPeer::CODCLI, CobtransaPeer::CODMOV, CobtransaPeer::DESTRA, CobtransaPeer::MONTRA, CobtransaPeer::TOTDSC, CobtransaPeer::TOTREC, CobtransaPeer::TOTTRA, CobtransaPeer::STATUS, CobtransaPeer::NUMCOM, CobtransaPeer::FECCOM, CobtransaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numtra', 'fectra', 'codcli', 'codmov', 'destra', 'montra', 'totdsc', 'totrec', 'tottra', 'status', 'numcom', 'feccom', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Numtra', 'Fectra', 'Codcli', 'Destra', 'Montra', 'Totdsc', 'Totrec', 'Tottra', 'Status', 'Numcom', 'Feccom', 'FatipmovId', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CobtransaPeer::NUMTRA, CobtransaPeer::FECTRA, CobtransaPeer::CODCLI, CobtransaPeer::DESTRA, CobtransaPeer::MONTRA, CobtransaPeer::TOTDSC, CobtransaPeer::TOTREC, CobtransaPeer::TOTTRA, CobtransaPeer::STATUS, CobtransaPeer::NUMCOM, CobtransaPeer::FECCOM, CobtransaPeer::FATIPMOV_ID, CobtransaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numtra', 'fectra', 'codcli', 'destra', 'montra', 'totdsc', 'totrec', 'tottra', 'status', 'numcom', 'feccom', 'fatipmov_id', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numtra' => 0, 'Fectra' => 1, 'Codcli' => 2, 'Codmov' => 3, 'Destra' => 4, 'Montra' => 5, 'Totdsc' => 6, 'Totrec' => 7, 'Tottra' => 8, 'Status' => 9, 'Numcom' => 10, 'Feccom' => 11, 'Id' => 12, ),
-		BasePeer::TYPE_COLNAME => array (CobtransaPeer::NUMTRA => 0, CobtransaPeer::FECTRA => 1, CobtransaPeer::CODCLI => 2, CobtransaPeer::CODMOV => 3, CobtransaPeer::DESTRA => 4, CobtransaPeer::MONTRA => 5, CobtransaPeer::TOTDSC => 6, CobtransaPeer::TOTREC => 7, CobtransaPeer::TOTTRA => 8, CobtransaPeer::STATUS => 9, CobtransaPeer::NUMCOM => 10, CobtransaPeer::FECCOM => 11, CobtransaPeer::ID => 12, ),
-		BasePeer::TYPE_FIELDNAME => array ('numtra' => 0, 'fectra' => 1, 'codcli' => 2, 'codmov' => 3, 'destra' => 4, 'montra' => 5, 'totdsc' => 6, 'totrec' => 7, 'tottra' => 8, 'status' => 9, 'numcom' => 10, 'feccom' => 11, 'id' => 12, ),
+		BasePeer::TYPE_PHPNAME => array ('Numtra' => 0, 'Fectra' => 1, 'Codcli' => 2, 'Destra' => 3, 'Montra' => 4, 'Totdsc' => 5, 'Totrec' => 6, 'Tottra' => 7, 'Status' => 8, 'Numcom' => 9, 'Feccom' => 10, 'FatipmovId' => 11, 'Id' => 12, ),
+		BasePeer::TYPE_COLNAME => array (CobtransaPeer::NUMTRA => 0, CobtransaPeer::FECTRA => 1, CobtransaPeer::CODCLI => 2, CobtransaPeer::DESTRA => 3, CobtransaPeer::MONTRA => 4, CobtransaPeer::TOTDSC => 5, CobtransaPeer::TOTREC => 6, CobtransaPeer::TOTTRA => 7, CobtransaPeer::STATUS => 8, CobtransaPeer::NUMCOM => 9, CobtransaPeer::FECCOM => 10, CobtransaPeer::FATIPMOV_ID => 11, CobtransaPeer::ID => 12, ),
+		BasePeer::TYPE_FIELDNAME => array ('numtra' => 0, 'fectra' => 1, 'codcli' => 2, 'destra' => 3, 'montra' => 4, 'totdsc' => 5, 'totrec' => 6, 'tottra' => 7, 'status' => 8, 'numcom' => 9, 'feccom' => 10, 'fatipmov_id' => 11, 'id' => 12, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
@@ -135,8 +135,6 @@ abstract class BaseCobtransaPeer {
 
 		$criteria->addSelectColumn(CobtransaPeer::CODCLI);
 
-		$criteria->addSelectColumn(CobtransaPeer::CODMOV);
-
 		$criteria->addSelectColumn(CobtransaPeer::DESTRA);
 
 		$criteria->addSelectColumn(CobtransaPeer::MONTRA);
@@ -152,6 +150,8 @@ abstract class BaseCobtransaPeer {
 		$criteria->addSelectColumn(CobtransaPeer::NUMCOM);
 
 		$criteria->addSelectColumn(CobtransaPeer::FECCOM);
+
+		$criteria->addSelectColumn(CobtransaPeer::FATIPMOV_ID);
 
 		$criteria->addSelectColumn(CobtransaPeer::ID);
 
@@ -232,6 +232,167 @@ abstract class BaseCobtransaPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinFatipmov(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CobtransaPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CobtransaPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CobtransaPeer::FATIPMOV_ID, FatipmovPeer::ID);
+
+		$rs = CobtransaPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinFatipmov(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CobtransaPeer::addSelectColumns($c);
+		$startcol = (CobtransaPeer::NUM_COLUMNS - CobtransaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		FatipmovPeer::addSelectColumns($c);
+
+		$c->addJoin(CobtransaPeer::FATIPMOV_ID, FatipmovPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CobtransaPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FatipmovPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getFatipmov(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCobtransa($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCobtransas();
+				$obj2->addCobtransa($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CobtransaPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CobtransaPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CobtransaPeer::FATIPMOV_ID, FatipmovPeer::ID);
+
+		$rs = CobtransaPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CobtransaPeer::addSelectColumns($c);
+		$startcol2 = (CobtransaPeer::NUM_COLUMNS - CobtransaPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		FatipmovPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + FatipmovPeer::NUM_COLUMNS;
+
+		$c->addJoin(CobtransaPeer::FATIPMOV_ID, FatipmovPeer::ID);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CobtransaPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = FatipmovPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getFatipmov(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCobtransa($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCobtransas();
+				$obj2->addCobtransa($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -255,6 +416,7 @@ abstract class BaseCobtransaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobtransaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -44,59 +44,63 @@ abstract class BaseFcdeffun extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodfun()
-	{
+  
+  public function getCodfun()
+  {
 
-		return $this->codfun; 		
-	}
-	
-	public function getNomfun()
-	{
+    return trim($this->codfun);
 
-		return $this->nomfun; 		
-	}
-	
-	public function getCoduniadm()
-	{
+  }
+  
+  public function getNomfun()
+  {
 
-		return $this->coduniadm; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomfun);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCoduniadm()
+  {
+
+    return trim($this->coduniadm);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodfun($v)
 	{
 
-		if ($this->codfun !== $v) {
-			$this->codfun = $v;
-			$this->modifiedColumns[] = FcdeffunPeer::CODFUN;
-		}
-
+    if ($this->codfun !== $v) {
+        $this->codfun = $v;
+        $this->modifiedColumns[] = FcdeffunPeer::CODFUN;
+      }
+  
 	} 
 	
 	public function setNomfun($v)
 	{
 
-		if ($this->nomfun !== $v) {
-			$this->nomfun = $v;
-			$this->modifiedColumns[] = FcdeffunPeer::NOMFUN;
-		}
-
+    if ($this->nomfun !== $v) {
+        $this->nomfun = $v;
+        $this->modifiedColumns[] = FcdeffunPeer::NOMFUN;
+      }
+  
 	} 
 	
 	public function setCoduniadm($v)
 	{
 
-		if ($this->coduniadm !== $v) {
-			$this->coduniadm = $v;
-			$this->modifiedColumns[] = FcdeffunPeer::CODUNIADM;
-		}
-
+    if ($this->coduniadm !== $v) {
+        $this->coduniadm = $v;
+        $this->modifiedColumns[] = FcdeffunPeer::CODUNIADM;
+      }
+  
 		if ($this->aFcdefuniadm !== null && $this->aFcdefuniadm->getCoduniadm() !== $v) {
 			$this->aFcdefuniadm = null;
 		}
@@ -106,34 +110,56 @@ abstract class BaseFcdeffun extends BaseObject  implements Persistent {
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdeffunPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdeffunPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codfun = $rs->getString($startcol + 0);
+      $this->codfun = $rs->getString($startcol + 0);
 
-			$this->nomfun = $rs->getString($startcol + 1);
+      $this->nomfun = $rs->getString($startcol + 1);
 
-			$this->coduniadm = $rs->getString($startcol + 2);
+      $this->coduniadm = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdeffun object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdeffun object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -199,6 +225,7 @@ abstract class BaseFcdeffun extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdeffunPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdeffunPeer::doUpdate($this, $con);
@@ -471,9 +498,8 @@ abstract class BaseFcdeffun extends BaseObject  implements Persistent {
 	
 	public function getFcdefuniadm($con = null)
 	{
-				include_once 'lib/model/om/BaseFcdefuniadmPeer.php';
-
 		if ($this->aFcdefuniadm === null && (($this->coduniadm !== "" && $this->coduniadm !== null))) {
+						include_once 'lib/model/om/BaseFcdefuniadmPeer.php';
 
 			$this->aFcdefuniadm = FcdefuniadmPeer::retrieveByPK($this->coduniadm, $con);
 

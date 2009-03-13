@@ -5,17 +5,23 @@ generator:
     theme:            default
     fields:
       codnom: { name: Tipo Nomina }
-      nomnom: { name: Descripción Nómina }
-      codcon: { name: Código Concepto }
-      nomcon: { name: Descripción Concepto }
+      nomnom: { name: Descripción }
+      codcon: { name: Concepto }
+      nomcon: { name: Descripción}
     list:
-      title:          Conceptos para Sueldo para Reportes
+      title:          Conceptos para Sueldo
       filters:        [codnom, codcon ]
       display:        [=codnom, nomnom, codcon, nomcon ]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   10
+      sort:     codnom
     edit:
-      title:         Edicion de Conceptos para Sueldo para Reportes
+      title:         Edición de Conceptos para Sueldo
       display:       [codnom, nomnom, codcon, nomcon]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

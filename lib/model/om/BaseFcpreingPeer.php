@@ -220,6 +220,7 @@ abstract class BaseFcpreingPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcpreingPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

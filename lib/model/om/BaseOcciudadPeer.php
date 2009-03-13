@@ -215,6 +215,7 @@ abstract class BaseOcciudadPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcciudadPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

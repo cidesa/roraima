@@ -53,206 +53,238 @@ abstract class BaseCaartaoc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getAjuoc()
-	{
+  
+  public function getAjuoc()
+  {
 
-		return $this->ajuoc; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->ajuoc);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCanord()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canord,2,',','.');
-		
-	}
-	
-	public function getCanaju()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return number_format($this->canaju,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    return trim($this->codcat);
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getMonrgo()
-	{
+  }
+  
+  public function getCanord($val=false)
+  {
 
-		return number_format($this->monrgo,2,',','.');
-		
-	}
-	
-	public function getMonaju()
-	{
+    if($val) return number_format($this->canord,2,',','.');
+    else return $this->canord;
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getMonrec()
-	{
+  }
+  
+  public function getCanaju($val=false)
+  {
 
-		return number_format($this->monrec,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->canaju,2,',','.');
+    else return $this->canaju;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMontot($val=false)
+  {
+
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
+
+  }
+  
+  public function getMonrgo($val=false)
+  {
+
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
+
+  }
+  
+  public function getMonaju($val=false)
+  {
+
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getMonrec($val=false)
+  {
+
+    if($val) return number_format($this->monrec,2,',','.');
+    else return $this->monrec;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setAjuoc($v)
 	{
 
-		if ($this->ajuoc !== $v) {
-			$this->ajuoc = $v;
-			$this->modifiedColumns[] = CaartaocPeer::AJUOC;
-		}
-
+    if ($this->ajuoc !== $v) {
+        $this->ajuoc = $v;
+        $this->modifiedColumns[] = CaartaocPeer::AJUOC;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartaocPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartaocPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CaartaocPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CaartaocPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCanord($v)
 	{
 
-		if ($this->canord !== $v) {
-			$this->canord = $v;
-			$this->modifiedColumns[] = CaartaocPeer::CANORD;
-		}
-
+    if ($this->canord !== $v) {
+        $this->canord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartaocPeer::CANORD;
+      }
+  
 	} 
 	
 	public function setCanaju($v)
 	{
 
-		if ($this->canaju !== $v) {
-			$this->canaju = $v;
-			$this->modifiedColumns[] = CaartaocPeer::CANAJU;
-		}
-
+    if ($this->canaju !== $v) {
+        $this->canaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartaocPeer::CANAJU;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CaartaocPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartaocPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setMonrgo($v)
 	{
 
-		if ($this->monrgo !== $v) {
-			$this->monrgo = $v;
-			$this->modifiedColumns[] = CaartaocPeer::MONRGO;
-		}
-
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartaocPeer::MONRGO;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CaartaocPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartaocPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setMonrec($v)
 	{
 
-		if ($this->monrec !== $v) {
-			$this->monrec = $v;
-			$this->modifiedColumns[] = CaartaocPeer::MONREC;
-		}
-
+    if ($this->monrec !== $v) {
+        $this->monrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartaocPeer::MONREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartaocPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartaocPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->ajuoc = $rs->getString($startcol + 0);
+      $this->ajuoc = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->codcat = $rs->getString($startcol + 2);
+      $this->codcat = $rs->getString($startcol + 2);
 
-			$this->canord = $rs->getFloat($startcol + 3);
+      $this->canord = $rs->getFloat($startcol + 3);
 
-			$this->canaju = $rs->getFloat($startcol + 4);
+      $this->canaju = $rs->getFloat($startcol + 4);
 
-			$this->montot = $rs->getFloat($startcol + 5);
+      $this->montot = $rs->getFloat($startcol + 5);
 
-			$this->monrgo = $rs->getFloat($startcol + 6);
+      $this->monrgo = $rs->getFloat($startcol + 6);
 
-			$this->monaju = $rs->getFloat($startcol + 7);
+      $this->monaju = $rs->getFloat($startcol + 7);
 
-			$this->monrec = $rs->getFloat($startcol + 8);
+      $this->monrec = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartaoc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartaoc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -309,6 +341,7 @@ abstract class BaseCaartaoc extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaartaocPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaartaocPeer::doUpdate($this, $con);

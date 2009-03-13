@@ -41,147 +41,176 @@ abstract class BaseFordefvar extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodvar()
-	{
+  
+  public function getCodvar()
+  {
 
-		return $this->codvar; 		
-	}
-	
-	public function getNomext()
-	{
+    return trim($this->codvar);
 
-		return $this->nomext; 		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getNomext()
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getValdef()
-	{
+    return trim($this->nomext);
 
-		return number_format($this->valdef,2,',','.');
-		
-	}
-	
-	public function getTipvar()
-	{
+  }
+  
+  public function getNomabr()
+  {
 
-		return $this->tipvar; 		
-	}
-	
-	public function getStavar()
-	{
+    return trim($this->nomabr);
 
-		return $this->stavar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getValdef($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->valdef,2,',','.');
+    else return $this->valdef;
+
+  }
+  
+  public function getTipvar()
+  {
+
+    return trim($this->tipvar);
+
+  }
+  
+  public function getStavar()
+  {
+
+    return trim($this->stavar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodvar($v)
 	{
 
-		if ($this->codvar !== $v) {
-			$this->codvar = $v;
-			$this->modifiedColumns[] = FordefvarPeer::CODVAR;
-		}
-
+    if ($this->codvar !== $v) {
+        $this->codvar = $v;
+        $this->modifiedColumns[] = FordefvarPeer::CODVAR;
+      }
+  
 	} 
 	
 	public function setNomext($v)
 	{
 
-		if ($this->nomext !== $v) {
-			$this->nomext = $v;
-			$this->modifiedColumns[] = FordefvarPeer::NOMEXT;
-		}
-
+    if ($this->nomext !== $v) {
+        $this->nomext = $v;
+        $this->modifiedColumns[] = FordefvarPeer::NOMEXT;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = FordefvarPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = FordefvarPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setValdef($v)
 	{
 
-		if ($this->valdef !== $v) {
-			$this->valdef = $v;
-			$this->modifiedColumns[] = FordefvarPeer::VALDEF;
-		}
-
+    if ($this->valdef !== $v) {
+        $this->valdef = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefvarPeer::VALDEF;
+      }
+  
 	} 
 	
 	public function setTipvar($v)
 	{
 
-		if ($this->tipvar !== $v) {
-			$this->tipvar = $v;
-			$this->modifiedColumns[] = FordefvarPeer::TIPVAR;
-		}
-
+    if ($this->tipvar !== $v) {
+        $this->tipvar = $v;
+        $this->modifiedColumns[] = FordefvarPeer::TIPVAR;
+      }
+  
 	} 
 	
 	public function setStavar($v)
 	{
 
-		if ($this->stavar !== $v) {
-			$this->stavar = $v;
-			$this->modifiedColumns[] = FordefvarPeer::STAVAR;
-		}
-
+    if ($this->stavar !== $v) {
+        $this->stavar = $v;
+        $this->modifiedColumns[] = FordefvarPeer::STAVAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefvarPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefvarPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codvar = $rs->getString($startcol + 0);
+      $this->codvar = $rs->getString($startcol + 0);
 
-			$this->nomext = $rs->getString($startcol + 1);
+      $this->nomext = $rs->getString($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->valdef = $rs->getFloat($startcol + 3);
+      $this->valdef = $rs->getFloat($startcol + 3);
 
-			$this->tipvar = $rs->getString($startcol + 4);
+      $this->tipvar = $rs->getString($startcol + 4);
 
-			$this->stavar = $rs->getString($startcol + 5);
+      $this->stavar = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefvar object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefvar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

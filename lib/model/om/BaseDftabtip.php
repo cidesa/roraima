@@ -45,7 +45,35 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
 
 	
+	protected $infdoc1;
+
+
+	
+	protected $infdoc2;
+
+
+	
+	protected $infdoc3;
+
+
+	
+	protected $infdoc4;
+
+
+	
 	protected $id;
+
+	
+	protected $collDfatendocs;
+
+	
+	protected $lastDfatendocCriteria = null;
+
+	
+	protected $collDfrutadocs;
+
+	
+	protected $lastDfrutadocCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -53,200 +81,308 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTipdoc()
-	{
+  
+  public function getTipdoc()
+  {
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getNomtab()
-	{
+    return trim($this->tipdoc);
 
-		return $this->nomtab; 		
-	}
-	
-	public function getVidutil()
-	{
+  }
+  
+  public function getNomtab()
+  {
 
-		return $this->vidutil; 		
-	}
-	
-	public function getClvprm()
-	{
+    return trim($this->nomtab);
 
-		return $this->clvprm; 		
-	}
-	
-	public function getClvfrn()
-	{
+  }
+  
+  public function getVidutil()
+  {
 
-		return $this->clvfrn; 		
-	}
-	
-	public function getMondoc()
-	{
+    return $this->vidutil;
 
-		return $this->mondoc; 		
-	}
-	
-	public function getFecdoc()
-	{
+  }
+  
+  public function getClvprm()
+  {
 
-		return $this->fecdoc; 		
-	}
-	
-	public function getDesdoc()
-	{
+    return trim($this->clvprm);
 
-		return $this->desdoc; 		
-	}
-	
-	public function getStadoc()
-	{
+  }
+  
+  public function getClvfrn()
+  {
 
-		return $this->stadoc; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->clvfrn);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMondoc()
+  {
+
+    return trim($this->mondoc);
+
+  }
+  
+  public function getFecdoc()
+  {
+
+    return trim($this->fecdoc);
+
+  }
+  
+  public function getDesdoc()
+  {
+
+    return trim($this->desdoc);
+
+  }
+  
+  public function getStadoc()
+  {
+
+    return trim($this->stadoc);
+
+  }
+  
+  public function getInfdoc1()
+  {
+
+    return trim($this->infdoc1);
+
+  }
+  
+  public function getInfdoc2()
+  {
+
+    return trim($this->infdoc2);
+
+  }
+  
+  public function getInfdoc3()
+  {
+
+    return trim($this->infdoc3);
+
+  }
+  
+  public function getInfdoc4()
+  {
+
+    return trim($this->infdoc4);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = DftabtipPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = DftabtipPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setNomtab($v)
 	{
 
-		if ($this->nomtab !== $v) {
-			$this->nomtab = $v;
-			$this->modifiedColumns[] = DftabtipPeer::NOMTAB;
-		}
-
+    if ($this->nomtab !== $v) {
+        $this->nomtab = $v;
+        $this->modifiedColumns[] = DftabtipPeer::NOMTAB;
+      }
+  
 	} 
 	
 	public function setVidutil($v)
 	{
 
-		if ($this->vidutil !== $v) {
-			$this->vidutil = $v;
-			$this->modifiedColumns[] = DftabtipPeer::VIDUTIL;
-		}
-
+    if ($this->vidutil !== $v) {
+        $this->vidutil = $v;
+        $this->modifiedColumns[] = DftabtipPeer::VIDUTIL;
+      }
+  
 	} 
 	
 	public function setClvprm($v)
 	{
 
-		if ($this->clvprm !== $v) {
-			$this->clvprm = $v;
-			$this->modifiedColumns[] = DftabtipPeer::CLVPRM;
-		}
-
+    if ($this->clvprm !== $v) {
+        $this->clvprm = $v;
+        $this->modifiedColumns[] = DftabtipPeer::CLVPRM;
+      }
+  
 	} 
 	
 	public function setClvfrn($v)
 	{
 
-		if ($this->clvfrn !== $v) {
-			$this->clvfrn = $v;
-			$this->modifiedColumns[] = DftabtipPeer::CLVFRN;
-		}
-
+    if ($this->clvfrn !== $v) {
+        $this->clvfrn = $v;
+        $this->modifiedColumns[] = DftabtipPeer::CLVFRN;
+      }
+  
 	} 
 	
 	public function setMondoc($v)
 	{
 
-		if ($this->mondoc !== $v) {
-			$this->mondoc = $v;
-			$this->modifiedColumns[] = DftabtipPeer::MONDOC;
-		}
-
+    if ($this->mondoc !== $v) {
+        $this->mondoc = $v;
+        $this->modifiedColumns[] = DftabtipPeer::MONDOC;
+      }
+  
 	} 
 	
 	public function setFecdoc($v)
 	{
 
-		if ($this->fecdoc !== $v) {
-			$this->fecdoc = $v;
-			$this->modifiedColumns[] = DftabtipPeer::FECDOC;
-		}
-
+    if ($this->fecdoc !== $v) {
+        $this->fecdoc = $v;
+        $this->modifiedColumns[] = DftabtipPeer::FECDOC;
+      }
+  
 	} 
 	
 	public function setDesdoc($v)
 	{
 
-		if ($this->desdoc !== $v) {
-			$this->desdoc = $v;
-			$this->modifiedColumns[] = DftabtipPeer::DESDOC;
-		}
-
+    if ($this->desdoc !== $v) {
+        $this->desdoc = $v;
+        $this->modifiedColumns[] = DftabtipPeer::DESDOC;
+      }
+  
 	} 
 	
 	public function setStadoc($v)
 	{
 
-		if ($this->stadoc !== $v) {
-			$this->stadoc = $v;
-			$this->modifiedColumns[] = DftabtipPeer::STADOC;
-		}
+    if ($this->stadoc !== $v) {
+        $this->stadoc = $v;
+        $this->modifiedColumns[] = DftabtipPeer::STADOC;
+      }
+  
+	} 
+	
+	public function setInfdoc1($v)
+	{
 
+    if ($this->infdoc1 !== $v) {
+        $this->infdoc1 = $v;
+        $this->modifiedColumns[] = DftabtipPeer::INFDOC1;
+      }
+  
+	} 
+	
+	public function setInfdoc2($v)
+	{
+
+    if ($this->infdoc2 !== $v) {
+        $this->infdoc2 = $v;
+        $this->modifiedColumns[] = DftabtipPeer::INFDOC2;
+      }
+  
+	} 
+	
+	public function setInfdoc3($v)
+	{
+
+    if ($this->infdoc3 !== $v) {
+        $this->infdoc3 = $v;
+        $this->modifiedColumns[] = DftabtipPeer::INFDOC3;
+      }
+  
+	} 
+	
+	public function setInfdoc4($v)
+	{
+
+    if ($this->infdoc4 !== $v) {
+        $this->infdoc4 = $v;
+        $this->modifiedColumns[] = DftabtipPeer::INFDOC4;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = DftabtipPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = DftabtipPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tipdoc = $rs->getString($startcol + 0);
+      $this->tipdoc = $rs->getString($startcol + 0);
 
-			$this->nomtab = $rs->getString($startcol + 1);
+      $this->nomtab = $rs->getString($startcol + 1);
 
-			$this->vidutil = $rs->getString($startcol + 2);
+      $this->vidutil = $rs->getInt($startcol + 2);
 
-			$this->clvprm = $rs->getString($startcol + 3);
+      $this->clvprm = $rs->getString($startcol + 3);
 
-			$this->clvfrn = $rs->getString($startcol + 4);
+      $this->clvfrn = $rs->getString($startcol + 4);
 
-			$this->mondoc = $rs->getString($startcol + 5);
+      $this->mondoc = $rs->getString($startcol + 5);
 
-			$this->fecdoc = $rs->getString($startcol + 6);
+      $this->fecdoc = $rs->getString($startcol + 6);
 
-			$this->desdoc = $rs->getString($startcol + 7);
+      $this->desdoc = $rs->getString($startcol + 7);
 
-			$this->stadoc = $rs->getString($startcol + 8);
+      $this->stadoc = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->infdoc1 = $rs->getString($startcol + 9);
 
-			$this->resetModified();
+      $this->infdoc2 = $rs->getString($startcol + 10);
 
-			$this->setNew(false);
+      $this->infdoc3 = $rs->getString($startcol + 11);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Dftabtip object", $e);
-		}
-	}
+      $this->infdoc4 = $rs->getString($startcol + 12);
+
+      $this->id = $rs->getInt($startcol + 13);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Dftabtip object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -303,11 +439,28 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = DftabtipPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += DftabtipPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collDfatendocs !== null) {
+				foreach($this->collDfatendocs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
+			if ($this->collDfrutadocs !== null) {
+				foreach($this->collDfrutadocs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -349,6 +502,22 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collDfatendocs !== null) {
+					foreach($this->collDfatendocs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collDfrutadocs !== null) {
+					foreach($this->collDfrutadocs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -396,6 +565,18 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				return $this->getStadoc();
 				break;
 			case 9:
+				return $this->getInfdoc1();
+				break;
+			case 10:
+				return $this->getInfdoc2();
+				break;
+			case 11:
+				return $this->getInfdoc3();
+				break;
+			case 12:
+				return $this->getInfdoc4();
+				break;
+			case 13:
 				return $this->getId();
 				break;
 			default:
@@ -417,7 +598,11 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 			$keys[6] => $this->getFecdoc(),
 			$keys[7] => $this->getDesdoc(),
 			$keys[8] => $this->getStadoc(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getInfdoc1(),
+			$keys[10] => $this->getInfdoc2(),
+			$keys[11] => $this->getInfdoc3(),
+			$keys[12] => $this->getInfdoc4(),
+			$keys[13] => $this->getId(),
 		);
 		return $result;
 	}
@@ -461,6 +646,18 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 				$this->setStadoc($value);
 				break;
 			case 9:
+				$this->setInfdoc1($value);
+				break;
+			case 10:
+				$this->setInfdoc2($value);
+				break;
+			case 11:
+				$this->setInfdoc3($value);
+				break;
+			case 12:
+				$this->setInfdoc4($value);
+				break;
+			case 13:
 				$this->setId($value);
 				break;
 		} 	}
@@ -479,7 +676,11 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setFecdoc($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setDesdoc($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setStadoc($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setInfdoc1($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setInfdoc2($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setInfdoc3($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setInfdoc4($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
 	}
 
 	
@@ -496,6 +697,10 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(DftabtipPeer::FECDOC)) $criteria->add(DftabtipPeer::FECDOC, $this->fecdoc);
 		if ($this->isColumnModified(DftabtipPeer::DESDOC)) $criteria->add(DftabtipPeer::DESDOC, $this->desdoc);
 		if ($this->isColumnModified(DftabtipPeer::STADOC)) $criteria->add(DftabtipPeer::STADOC, $this->stadoc);
+		if ($this->isColumnModified(DftabtipPeer::INFDOC1)) $criteria->add(DftabtipPeer::INFDOC1, $this->infdoc1);
+		if ($this->isColumnModified(DftabtipPeer::INFDOC2)) $criteria->add(DftabtipPeer::INFDOC2, $this->infdoc2);
+		if ($this->isColumnModified(DftabtipPeer::INFDOC3)) $criteria->add(DftabtipPeer::INFDOC3, $this->infdoc3);
+		if ($this->isColumnModified(DftabtipPeer::INFDOC4)) $criteria->add(DftabtipPeer::INFDOC4, $this->infdoc4);
 		if ($this->isColumnModified(DftabtipPeer::ID)) $criteria->add(DftabtipPeer::ID, $this->id);
 
 		return $criteria;
@@ -545,6 +750,27 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 
 		$copyObj->setStadoc($this->stadoc);
 
+		$copyObj->setInfdoc1($this->infdoc1);
+
+		$copyObj->setInfdoc2($this->infdoc2);
+
+		$copyObj->setInfdoc3($this->infdoc3);
+
+		$copyObj->setInfdoc4($this->infdoc4);
+
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getDfatendocs() as $relObj) {
+				$copyObj->addDfatendoc($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getDfrutadocs() as $relObj) {
+				$copyObj->addDfrutadoc($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -567,6 +793,181 @@ abstract class BaseDftabtip extends BaseObject  implements Persistent {
 			self::$peer = new DftabtipPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initDfatendocs()
+	{
+		if ($this->collDfatendocs === null) {
+			$this->collDfatendocs = array();
+		}
+	}
+
+	
+	public function getDfatendocs($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfatendocs === null) {
+			if ($this->isNew()) {
+			   $this->collDfatendocs = array();
+			} else {
+
+				$criteria->add(DfatendocPeer::ID_DFTABTIP, $this->getId());
+
+				DfatendocPeer::addSelectColumns($criteria);
+				$this->collDfatendocs = DfatendocPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(DfatendocPeer::ID_DFTABTIP, $this->getId());
+
+				DfatendocPeer::addSelectColumns($criteria);
+				if (!isset($this->lastDfatendocCriteria) || !$this->lastDfatendocCriteria->equals($criteria)) {
+					$this->collDfatendocs = DfatendocPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastDfatendocCriteria = $criteria;
+		return $this->collDfatendocs;
+	}
+
+	
+	public function countDfatendocs($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfatendocPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(DfatendocPeer::ID_DFTABTIP, $this->getId());
+
+		return DfatendocPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addDfatendoc(Dfatendoc $l)
+	{
+		$this->collDfatendocs[] = $l;
+		$l->setDftabtip($this);
+	}
+
+	
+	public function initDfrutadocs()
+	{
+		if ($this->collDfrutadocs === null) {
+			$this->collDfrutadocs = array();
+		}
+	}
+
+	
+	public function getDfrutadocs($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfrutadocPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfrutadocs === null) {
+			if ($this->isNew()) {
+			   $this->collDfrutadocs = array();
+			} else {
+
+				$criteria->add(DfrutadocPeer::ID_DFTABTIP, $this->getId());
+
+				DfrutadocPeer::addSelectColumns($criteria);
+				$this->collDfrutadocs = DfrutadocPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(DfrutadocPeer::ID_DFTABTIP, $this->getId());
+
+				DfrutadocPeer::addSelectColumns($criteria);
+				if (!isset($this->lastDfrutadocCriteria) || !$this->lastDfrutadocCriteria->equals($criteria)) {
+					$this->collDfrutadocs = DfrutadocPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastDfrutadocCriteria = $criteria;
+		return $this->collDfrutadocs;
+	}
+
+	
+	public function countDfrutadocs($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfrutadocPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(DfrutadocPeer::ID_DFTABTIP, $this->getId());
+
+		return DfrutadocPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addDfrutadoc(Dfrutadoc $l)
+	{
+		$this->collDfrutadocs[] = $l;
+		$l->setDftabtip($this);
+	}
+
+
+	
+	public function getDfrutadocsJoinAcunidad($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseDfrutadocPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collDfrutadocs === null) {
+			if ($this->isNew()) {
+				$this->collDfrutadocs = array();
+			} else {
+
+				$criteria->add(DfrutadocPeer::ID_DFTABTIP, $this->getId());
+
+				$this->collDfrutadocs = DfrutadocPeer::doSelectJoinAcunidad($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(DfrutadocPeer::ID_DFTABTIP, $this->getId());
+
+			if (!isset($this->lastDfrutadocCriteria) || !$this->lastDfrutadocCriteria->equals($criteria)) {
+				$this->collDfrutadocs = DfrutadocPeer::doSelectJoinAcunidad($criteria, $con);
+			}
+		}
+		$this->lastDfrutadocCriteria = $criteria;
+
+		return $this->collDfrutadocs;
 	}
 
 } 

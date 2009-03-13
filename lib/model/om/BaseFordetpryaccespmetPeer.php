@@ -13,7 +13,7 @@ abstract class BaseFordetpryaccespmetPeer {
 	const CLASS_DEFAULT = 'lib.model.Fordetpryaccespmet';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 21;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -65,6 +65,21 @@ abstract class BaseFordetpryaccespmetPeer {
 	const CODACT = 'fordetpryaccespmet.CODACT';
 
 	
+	const JUSINS = 'fordetpryaccespmet.JUSINS';
+
+	
+	const CANINS = 'fordetpryaccespmet.CANINS';
+
+	
+	const CANINSREP = 'fordetpryaccespmet.CANINSREP';
+
+	
+	const MONPREREP = 'fordetpryaccespmet.MONPREREP';
+
+	
+	const CODTIP = 'fordetpryaccespmet.CODTIP';
+
+	
 	const ID = 'fordetpryaccespmet.ID';
 
 	
@@ -73,18 +88,18 @@ abstract class BaseFordetpryaccespmetPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codaccesp', 'Codmet', 'Codunieje', 'Codpar', 'Codpre', 'Disper', 'Monpre', 'Codfin', 'Fecini', 'Feccul', 'Ubigeo', 'Pobapx', 'Observ', 'Codact', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FordetpryaccespmetPeer::CODPRO, FordetpryaccespmetPeer::CODACCESP, FordetpryaccespmetPeer::CODMET, FordetpryaccespmetPeer::CODUNIEJE, FordetpryaccespmetPeer::CODPAR, FordetpryaccespmetPeer::CODPRE, FordetpryaccespmetPeer::DISPER, FordetpryaccespmetPeer::MONPRE, FordetpryaccespmetPeer::CODFIN, FordetpryaccespmetPeer::FECINI, FordetpryaccespmetPeer::FECCUL, FordetpryaccespmetPeer::UBIGEO, FordetpryaccespmetPeer::POBAPX, FordetpryaccespmetPeer::OBSERV, FordetpryaccespmetPeer::CODACT, FordetpryaccespmetPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codaccesp', 'codmet', 'codunieje', 'codpar', 'codpre', 'disper', 'monpre', 'codfin', 'fecini', 'feccul', 'ubigeo', 'pobapx', 'observ', 'codact', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Codaccesp', 'Codmet', 'Codunieje', 'Codpar', 'Codpre', 'Disper', 'Monpre', 'Codfin', 'Fecini', 'Feccul', 'Ubigeo', 'Pobapx', 'Observ', 'Codact', 'Jusins', 'Canins', 'Caninsrep', 'Monprerep', 'Codtip', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FordetpryaccespmetPeer::CODPRO, FordetpryaccespmetPeer::CODACCESP, FordetpryaccespmetPeer::CODMET, FordetpryaccespmetPeer::CODUNIEJE, FordetpryaccespmetPeer::CODPAR, FordetpryaccespmetPeer::CODPRE, FordetpryaccespmetPeer::DISPER, FordetpryaccespmetPeer::MONPRE, FordetpryaccespmetPeer::CODFIN, FordetpryaccespmetPeer::FECINI, FordetpryaccespmetPeer::FECCUL, FordetpryaccespmetPeer::UBIGEO, FordetpryaccespmetPeer::POBAPX, FordetpryaccespmetPeer::OBSERV, FordetpryaccespmetPeer::CODACT, FordetpryaccespmetPeer::JUSINS, FordetpryaccespmetPeer::CANINS, FordetpryaccespmetPeer::CANINSREP, FordetpryaccespmetPeer::MONPREREP, FordetpryaccespmetPeer::CODTIP, FordetpryaccespmetPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro', 'codaccesp', 'codmet', 'codunieje', 'codpar', 'codpre', 'disper', 'monpre', 'codfin', 'fecini', 'feccul', 'ubigeo', 'pobapx', 'observ', 'codact', 'jusins', 'canins', 'caninsrep', 'monprerep', 'codtip', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codaccesp' => 1, 'Codmet' => 2, 'Codunieje' => 3, 'Codpar' => 4, 'Codpre' => 5, 'Disper' => 6, 'Monpre' => 7, 'Codfin' => 8, 'Fecini' => 9, 'Feccul' => 10, 'Ubigeo' => 11, 'Pobapx' => 12, 'Observ' => 13, 'Codact' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (FordetpryaccespmetPeer::CODPRO => 0, FordetpryaccespmetPeer::CODACCESP => 1, FordetpryaccespmetPeer::CODMET => 2, FordetpryaccespmetPeer::CODUNIEJE => 3, FordetpryaccespmetPeer::CODPAR => 4, FordetpryaccespmetPeer::CODPRE => 5, FordetpryaccespmetPeer::DISPER => 6, FordetpryaccespmetPeer::MONPRE => 7, FordetpryaccespmetPeer::CODFIN => 8, FordetpryaccespmetPeer::FECINI => 9, FordetpryaccespmetPeer::FECCUL => 10, FordetpryaccespmetPeer::UBIGEO => 11, FordetpryaccespmetPeer::POBAPX => 12, FordetpryaccespmetPeer::OBSERV => 13, FordetpryaccespmetPeer::CODACT => 14, FordetpryaccespmetPeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codaccesp' => 1, 'codmet' => 2, 'codunieje' => 3, 'codpar' => 4, 'codpre' => 5, 'disper' => 6, 'monpre' => 7, 'codfin' => 8, 'fecini' => 9, 'feccul' => 10, 'ubigeo' => 11, 'pobapx' => 12, 'observ' => 13, 'codact' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Codaccesp' => 1, 'Codmet' => 2, 'Codunieje' => 3, 'Codpar' => 4, 'Codpre' => 5, 'Disper' => 6, 'Monpre' => 7, 'Codfin' => 8, 'Fecini' => 9, 'Feccul' => 10, 'Ubigeo' => 11, 'Pobapx' => 12, 'Observ' => 13, 'Codact' => 14, 'Jusins' => 15, 'Canins' => 16, 'Caninsrep' => 17, 'Monprerep' => 18, 'Codtip' => 19, 'Id' => 20, ),
+		BasePeer::TYPE_COLNAME => array (FordetpryaccespmetPeer::CODPRO => 0, FordetpryaccespmetPeer::CODACCESP => 1, FordetpryaccespmetPeer::CODMET => 2, FordetpryaccespmetPeer::CODUNIEJE => 3, FordetpryaccespmetPeer::CODPAR => 4, FordetpryaccespmetPeer::CODPRE => 5, FordetpryaccespmetPeer::DISPER => 6, FordetpryaccespmetPeer::MONPRE => 7, FordetpryaccespmetPeer::CODFIN => 8, FordetpryaccespmetPeer::FECINI => 9, FordetpryaccespmetPeer::FECCUL => 10, FordetpryaccespmetPeer::UBIGEO => 11, FordetpryaccespmetPeer::POBAPX => 12, FordetpryaccespmetPeer::OBSERV => 13, FordetpryaccespmetPeer::CODACT => 14, FordetpryaccespmetPeer::JUSINS => 15, FordetpryaccespmetPeer::CANINS => 16, FordetpryaccespmetPeer::CANINSREP => 17, FordetpryaccespmetPeer::MONPREREP => 18, FordetpryaccespmetPeer::CODTIP => 19, FordetpryaccespmetPeer::ID => 20, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'codaccesp' => 1, 'codmet' => 2, 'codunieje' => 3, 'codpar' => 4, 'codpre' => 5, 'disper' => 6, 'monpre' => 7, 'codfin' => 8, 'fecini' => 9, 'feccul' => 10, 'ubigeo' => 11, 'pobapx' => 12, 'observ' => 13, 'codact' => 14, 'jusins' => 15, 'canins' => 16, 'caninsrep' => 17, 'monprerep' => 18, 'codtip' => 19, 'id' => 20, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, )
 	);
 
 	
@@ -167,6 +182,16 @@ abstract class BaseFordetpryaccespmetPeer {
 		$criteria->addSelectColumn(FordetpryaccespmetPeer::OBSERV);
 
 		$criteria->addSelectColumn(FordetpryaccespmetPeer::CODACT);
+
+		$criteria->addSelectColumn(FordetpryaccespmetPeer::JUSINS);
+
+		$criteria->addSelectColumn(FordetpryaccespmetPeer::CANINS);
+
+		$criteria->addSelectColumn(FordetpryaccespmetPeer::CANINSREP);
+
+		$criteria->addSelectColumn(FordetpryaccespmetPeer::MONPREREP);
+
+		$criteria->addSelectColumn(FordetpryaccespmetPeer::CODTIP);
 
 		$criteria->addSelectColumn(FordetpryaccespmetPeer::ID);
 
@@ -270,6 +295,7 @@ abstract class BaseFordetpryaccespmetPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordetpryaccespmetPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

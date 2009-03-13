@@ -7,7 +7,7 @@ abstract class BaseCpnivelesPeer {
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'cpniveles_';
+	const TABLE_NAME = 'cpniveles';
 
 	
 	const CLASS_DEFAULT = 'lib.model.Cpniveles';
@@ -20,25 +20,25 @@ abstract class BaseCpnivelesPeer {
 
 
 	
-	const CATPAR = 'cpniveles_.CATPAR';
+	const CATPAR = 'cpniveles.CATPAR';
 
 	
-	const CONSEC = 'cpniveles_.CONSEC';
+	const CONSEC = 'cpniveles.CONSEC';
 
 	
-	const NOMABR = 'cpniveles_.NOMABR';
+	const NOMABR = 'cpniveles.NOMABR';
 
 	
-	const NOMEXT = 'cpniveles_.NOMEXT';
+	const NOMEXT = 'cpniveles.NOMEXT';
 
 	
-	const LONNIV = 'cpniveles_.LONNIV';
+	const LONNIV = 'cpniveles.LONNIV';
 
 	
-	const STANIV = 'cpniveles_.STANIV';
+	const STANIV = 'cpniveles.STANIV';
 
 	
-	const ID = 'cpniveles_.ID';
+	const ID = 'cpniveles.ID';
 
 	
 	private static $phpNameMap = null;
@@ -127,8 +127,8 @@ abstract class BaseCpnivelesPeer {
 
 	}
 
-	const COUNT = 'COUNT(cpniveles_.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT cpniveles_.ID)';
+	const COUNT = 'COUNT(cpniveles.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT cpniveles.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -225,6 +225,7 @@ abstract class BaseCpnivelesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpnivelesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

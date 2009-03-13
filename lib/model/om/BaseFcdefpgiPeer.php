@@ -225,6 +225,7 @@ abstract class BaseFcdefpgiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdefpgiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

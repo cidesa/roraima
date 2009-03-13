@@ -205,6 +205,7 @@ abstract class BaseNpdefclaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpdefclaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

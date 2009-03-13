@@ -295,6 +295,7 @@ abstract class BaseNphiscon06022007SincambioPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Nphiscon06022007SincambioPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

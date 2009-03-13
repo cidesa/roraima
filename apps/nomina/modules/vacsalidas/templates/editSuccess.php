@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Registro de Solicitudes de Vacaciones', 
+<h1><?php echo __('Registro de Solicitudes de Vacaciones',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('vacsalidas/edit_messages', array('npvacsalidas' => $npvacsalidas, 'labels' => $labels)) ?>
-<?php include_partial('vacsalidas/edit_form', array('npvacsalidas' => $npvacsalidas, 'nombres' => $nombres, 'rs' => $rs, 'labels' => $labels)) ?>
+<?php include_partial('vacsalidas/edit_form', array('npvacsalidas' => $npvacsalidas, 'obj' => $obj, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

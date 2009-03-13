@@ -230,6 +230,7 @@ abstract class BaseCobpagbanPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobpagbanPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

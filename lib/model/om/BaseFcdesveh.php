@@ -37,151 +37,178 @@ abstract class BaseFcdesveh extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumdes()
-	{
+  
+  public function getNumdes()
+  {
 
-		return $this->numdes; 		
-	}
-	
-	public function getPlaveh()
-	{
+    return trim($this->numdes);
 
-		return $this->plaveh; 		
-	}
-	
-	public function getFecdes($format = 'Y-m-d')
-	{
+  }
+  
+  public function getPlaveh()
+  {
 
-		if ($this->fecdes === null || $this->fecdes === '') {
-			return null;
-		} elseif (!is_int($this->fecdes)) {
-						$ts = strtotime($this->fecdes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
-			}
-		} else {
-			$ts = $this->fecdes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->plaveh);
 
-	
-	public function getMotdes()
-	{
+  }
+  
+  public function getFecdes($format = 'Y-m-d')
+  {
 
-		return $this->motdes; 		
-	}
-	
-	public function getFunrec()
-	{
+    if ($this->fecdes === null || $this->fecdes === '') {
+      return null;
+    } elseif (!is_int($this->fecdes)) {
+            $ts = adodb_strtotime($this->fecdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
+      }
+    } else {
+      $ts = $this->fecdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->funrec; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getMotdes()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->motdes);
+
+  }
+  
+  public function getFunrec()
+  {
+
+    return trim($this->funrec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumdes($v)
 	{
 
-		if ($this->numdes !== $v) {
-			$this->numdes = $v;
-			$this->modifiedColumns[] = FcdesvehPeer::NUMDES;
-		}
-
+    if ($this->numdes !== $v) {
+        $this->numdes = $v;
+        $this->modifiedColumns[] = FcdesvehPeer::NUMDES;
+      }
+  
 	} 
 	
 	public function setPlaveh($v)
 	{
 
-		if ($this->plaveh !== $v) {
-			$this->plaveh = $v;
-			$this->modifiedColumns[] = FcdesvehPeer::PLAVEH;
-		}
-
+    if ($this->plaveh !== $v) {
+        $this->plaveh = $v;
+        $this->modifiedColumns[] = FcdesvehPeer::PLAVEH;
+      }
+  
 	} 
 	
 	public function setFecdes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdes !== $ts) {
-			$this->fecdes = $ts;
-			$this->modifiedColumns[] = FcdesvehPeer::FECDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdes !== $ts) {
+      $this->fecdes = $ts;
+      $this->modifiedColumns[] = FcdesvehPeer::FECDES;
+    }
 
 	} 
 	
 	public function setMotdes($v)
 	{
 
-		if ($this->motdes !== $v) {
-			$this->motdes = $v;
-			$this->modifiedColumns[] = FcdesvehPeer::MOTDES;
-		}
-
+    if ($this->motdes !== $v) {
+        $this->motdes = $v;
+        $this->modifiedColumns[] = FcdesvehPeer::MOTDES;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FcdesvehPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FcdesvehPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdesvehPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdesvehPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numdes = $rs->getString($startcol + 0);
+      $this->numdes = $rs->getString($startcol + 0);
 
-			$this->plaveh = $rs->getString($startcol + 1);
+      $this->plaveh = $rs->getString($startcol + 1);
 
-			$this->fecdes = $rs->getDate($startcol + 2, null);
+      $this->fecdes = $rs->getDate($startcol + 2, null);
 
-			$this->motdes = $rs->getString($startcol + 3);
+      $this->motdes = $rs->getString($startcol + 3);
 
-			$this->funrec = $rs->getString($startcol + 4);
+      $this->funrec = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdesveh object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdesveh object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -238,6 +265,7 @@ abstract class BaseFcdesveh extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdesvehPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdesvehPeer::doUpdate($this, $con);

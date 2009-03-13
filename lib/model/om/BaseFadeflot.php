@@ -45,189 +45,218 @@ abstract class BaseFadeflot extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodart()
-	{
+  
+  public function getCodart()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getNumlot()
-	{
+    return trim($this->codart);
 
-		return $this->numlot; 		
-	}
-	
-	public function getDeslot()
-	{
+  }
+  
+  public function getNumlot()
+  {
 
-		return $this->deslot; 		
-	}
-	
-	public function getCodalm()
-	{
+    return trim($this->numlot);
 
-		return $this->codalm; 		
-	}
-	
-	public function getCanlot()
-	{
+  }
+  
+  public function getDeslot()
+  {
 
-		return number_format($this->canlot,2,',','.');
-		
-	}
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+    return trim($this->deslot);
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodalm()
+  {
 
-	
-	public function getCoslot()
-	{
+    return trim($this->codalm);
 
-		return number_format($this->coslot,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCanlot($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->canlot,2,',','.');
+    else return $this->canlot;
+
+  }
+  
+  public function getFecven($format = 'Y-m-d')
+  {
+
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCoslot($val=false)
+  {
+
+    if($val) return number_format($this->coslot,2,',','.');
+    else return $this->coslot;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FadeflotPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FadeflotPeer::CODART;
+      }
+  
 	} 
 	
 	public function setNumlot($v)
 	{
 
-		if ($this->numlot !== $v) {
-			$this->numlot = $v;
-			$this->modifiedColumns[] = FadeflotPeer::NUMLOT;
-		}
-
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = FadeflotPeer::NUMLOT;
+      }
+  
 	} 
 	
 	public function setDeslot($v)
 	{
 
-		if ($this->deslot !== $v) {
-			$this->deslot = $v;
-			$this->modifiedColumns[] = FadeflotPeer::DESLOT;
-		}
-
+    if ($this->deslot !== $v) {
+        $this->deslot = $v;
+        $this->modifiedColumns[] = FadeflotPeer::DESLOT;
+      }
+  
 	} 
 	
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = FadeflotPeer::CODALM;
-		}
-
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = FadeflotPeer::CODALM;
+      }
+  
 	} 
 	
 	public function setCanlot($v)
 	{
 
-		if ($this->canlot !== $v) {
-			$this->canlot = $v;
-			$this->modifiedColumns[] = FadeflotPeer::CANLOT;
-		}
-
+    if ($this->canlot !== $v) {
+        $this->canlot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadeflotPeer::CANLOT;
+      }
+  
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = FadeflotPeer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = FadeflotPeer::FECVEN;
+    }
 
 	} 
 	
 	public function setCoslot($v)
 	{
 
-		if ($this->coslot !== $v) {
-			$this->coslot = $v;
-			$this->modifiedColumns[] = FadeflotPeer::COSLOT;
-		}
-
+    if ($this->coslot !== $v) {
+        $this->coslot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadeflotPeer::COSLOT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FadeflotPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FadeflotPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codart = $rs->getString($startcol + 0);
+      $this->codart = $rs->getString($startcol + 0);
 
-			$this->numlot = $rs->getString($startcol + 1);
+      $this->numlot = $rs->getString($startcol + 1);
 
-			$this->deslot = $rs->getString($startcol + 2);
+      $this->deslot = $rs->getString($startcol + 2);
 
-			$this->codalm = $rs->getString($startcol + 3);
+      $this->codalm = $rs->getString($startcol + 3);
 
-			$this->canlot = $rs->getFloat($startcol + 4);
+      $this->canlot = $rs->getFloat($startcol + 4);
 
-			$this->fecven = $rs->getDate($startcol + 5, null);
+      $this->fecven = $rs->getDate($startcol + 5, null);
 
-			$this->coslot = $rs->getFloat($startcol + 6);
+      $this->coslot = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fadeflot object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fadeflot object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -284,6 +313,7 @@ abstract class BaseFadeflot extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FadeflotPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FadeflotPeer::doUpdate($this, $con);

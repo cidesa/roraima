@@ -29,92 +29,118 @@ abstract class BaseFcdetreccob extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNument()
-	{
+  
+  public function getNument()
+  {
 
-		return $this->nument; 		
-	}
-	
-	public function getCodrec()
-	{
+    return trim($this->nument);
 
-		return $this->codrec; 		
-	}
-	
-	public function getCodcob()
-	{
+  }
+  
+  public function getCodrec()
+  {
 
-		return $this->codcob; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codrec);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodcob()
+  {
+
+    return trim($this->codcob);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNument($v)
 	{
 
-		if ($this->nument !== $v) {
-			$this->nument = $v;
-			$this->modifiedColumns[] = FcdetreccobPeer::NUMENT;
-		}
-
+    if ($this->nument !== $v) {
+        $this->nument = $v;
+        $this->modifiedColumns[] = FcdetreccobPeer::NUMENT;
+      }
+  
 	} 
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = FcdetreccobPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = FcdetreccobPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setCodcob($v)
 	{
 
-		if ($this->codcob !== $v) {
-			$this->codcob = $v;
-			$this->modifiedColumns[] = FcdetreccobPeer::CODCOB;
-		}
-
+    if ($this->codcob !== $v) {
+        $this->codcob = $v;
+        $this->modifiedColumns[] = FcdetreccobPeer::CODCOB;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdetreccobPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdetreccobPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nument = $rs->getString($startcol + 0);
+      $this->nument = $rs->getString($startcol + 0);
 
-			$this->codrec = $rs->getString($startcol + 1);
+      $this->codrec = $rs->getString($startcol + 1);
 
-			$this->codcob = $rs->getString($startcol + 2);
+      $this->codcob = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdetreccob object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdetreccob object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseFcdetreccob extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdetreccobPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdetreccobPeer::doUpdate($this, $con);

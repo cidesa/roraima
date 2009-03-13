@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class ForestcosMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ForestcosMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ForestcosMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('forestcos');
 		$tMap->setPhpName('Forestcos');
 
@@ -42,13 +42,13 @@ class ForestcosMapBuilder {
 
 		$tMap->addColumn('CODPAR', 'Codpar', 'string', CreoleTypes::VARCHAR, false, 16);
 
-		$tMap->addColumn('CANUNI', 'Canuni', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANUNI', 'Canuni', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CANART', 'Canart', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANART', 'Canart', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('MONART', 'Monart', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONART', 'Monart', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('TOTPRE', 'Totpre', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TOTPRE', 'Totpre', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODFIN', 'Codfin', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -57,6 +57,6 @@ class ForestcosMapBuilder {
 		$tMap->addColumn('OBSERV', 'Observ', 'string', CreoleTypes::VARCHAR, false, 250);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

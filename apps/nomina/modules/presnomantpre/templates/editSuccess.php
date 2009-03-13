@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edicion Dias Extras', 
+<h1><?php echo __('Edición Anticipo Sobre Prestaciones',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('presnomantpre/edit_messages', array('npantpre' => $npantpre, 'labels' => $labels)) ?>
-<?php include_partial('presnomantpre/edit_form', array('npantpre' => $npantpre, 'codigo' => $codigo, 'labels' => $labels)) ?>
+<?php include_partial('presnomantpre/edit_form', array('npantpre' => $npantpre, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

@@ -329,7 +329,21 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
 
 	
+	protected $situac;
+
+
+	
+	protected $profes;
+
+
+	
 	protected $id;
+
+	
+	protected $collNphojintincs;
+
+	
+	protected $lastNphojintincCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -337,1666 +351,1799 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
-
-		return $this->codemp; 		
-	}
-	
-	public function getNomemp()
-	{
-
-		return $this->nomemp; 		
-	}
-	
-	public function getCedemp()
-	{
-
-		return $this->cedemp; 		
-	}
-	
-	public function getNumcon()
-	{
-
-		return $this->numcon; 		
-	}
-	
-	public function getEdociv()
-	{
-
-		return $this->edociv; 		
-	}
-	
-	public function getNacemp()
-	{
-
-		return $this->nacemp; 		
-	}
-	
-	public function getSexemp()
-	{
-
-		return $this->sexemp; 		
-	}
-	
-	public function getFecnac($format = 'Y-m-d')
-	{
-
-		if ($this->fecnac === null || $this->fecnac === '') {
-			return null;
-		} elseif (!is_int($this->fecnac)) {
-						$ts = strtotime($this->fecnac);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnac] as date/time value: " . var_export($this->fecnac, true));
-			}
-		} else {
-			$ts = $this->fecnac;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getEdaemp()
-	{
-
-		return number_format($this->edaemp,2,',','.');
-		
-	}
-	
-	public function getLugnac()
-	{
-
-		return $this->lugnac; 		
-	}
-	
-	public function getDirhab()
-	{
-
-		return $this->dirhab; 		
-	}
-	
-	public function getCodciu()
-	{
-
-		return $this->codciu; 		
-	}
-	
-	public function getTelhab()
-	{
-
-		return $this->telhab; 		
-	}
-	
-	public function getCelemp()
-	{
-
-		return $this->celemp; 		
-	}
-	
-	public function getEmaemp()
-	{
-
-		return $this->emaemp; 		
-	}
-	
-	public function getCodpos()
-	{
-
-		return $this->codpos; 		
-	}
-	
-	public function getTalpan()
-	{
-
-		return $this->talpan; 		
-	}
-	
-	public function getTalcam()
-	{
-
-		return $this->talcam; 		
-	}
-	
-	public function getTalcal()
-	{
-
-		return number_format($this->talcal,2,',','.');
-		
-	}
-	
-	public function getDerzur()
-	{
-
-		return $this->derzur; 		
-	}
-	
-	public function getFecing($format = 'Y-m-d')
-	{
-
-		if ($this->fecing === null || $this->fecing === '') {
-			return null;
-		} elseif (!is_int($this->fecing)) {
-						$ts = strtotime($this->fecing);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
-			}
-		} else {
-			$ts = $this->fecing;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getFecret($format = 'Y-m-d')
-	{
-
-		if ($this->fecret === null || $this->fecret === '') {
-			return null;
-		} elseif (!is_int($this->fecret)) {
-						$ts = strtotime($this->fecret);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecret] as date/time value: " . var_export($this->fecret, true));
-			}
-		} else {
-			$ts = $this->fecret;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getFecrei($format = 'Y-m-d')
-	{
-
-		if ($this->fecrei === null || $this->fecrei === '') {
-			return null;
-		} elseif (!is_int($this->fecrei)) {
-						$ts = strtotime($this->fecrei);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrei] as date/time value: " . var_export($this->fecrei, true));
-			}
-		} else {
-			$ts = $this->fecrei;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getFecadmpub($format = 'Y-m-d')
-	{
-
-		if ($this->fecadmpub === null || $this->fecadmpub === '') {
-			return null;
-		} elseif (!is_int($this->fecadmpub)) {
-						$ts = strtotime($this->fecadmpub);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecadmpub] as date/time value: " . var_export($this->fecadmpub, true));
-			}
-		} else {
-			$ts = $this->fecadmpub;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getStaemp()
-	{
-
-		return $this->staemp; 		
-	}
-	
-	public function getFotemp()
-	{
-
-		return $this->fotemp; 		
-	}
-	
-	public function getNumsso()
-	{
-
-		return $this->numsso; 		
-	}
-	
-	public function getNumpolseg()
-	{
-
-		return $this->numpolseg; 		
-	}
-	
-	public function getFeccotsso($format = 'Y-m-d')
-	{
-
-		if ($this->feccotsso === null || $this->feccotsso === '') {
-			return null;
-		} elseif (!is_int($this->feccotsso)) {
-						$ts = strtotime($this->feccotsso);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccotsso] as date/time value: " . var_export($this->feccotsso, true));
-			}
-		} else {
-			$ts = $this->feccotsso;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getAnoadmpub()
-	{
-
-		return number_format($this->anoadmpub,2,',','.');
-		
-	}
-	
-	public function getCodtippag()
-	{
-
-		return $this->codtippag; 		
-	}
-	
-	public function getCodban()
-	{
-
-		return $this->codban; 		
-	}
-	
-	public function getTipcue()
-	{
-
-		return $this->tipcue; 		
-	}
-	
-	public function getNumcue()
-	{
-
-		return $this->numcue; 		
-	}
-	
-	public function getObsemp()
-	{
-
-		return $this->obsemp; 		
-	}
-	
-	public function getTiefid()
-	{
-
-		return $this->tiefid; 		
-	}
-	
-	public function getGrulab()
-	{
-
-		return $this->grulab; 		
-	}
-	
-	public function getGruotr()
-	{
-
-		return $this->gruotr; 		
-	}
-	
-	public function getTraslado()
-	{
-
-		return $this->traslado; 		
-	}
-	
-	public function getTraotr()
-	{
-
-		return $this->traotr; 		
-	}
-	
-	public function getTipviv()
-	{
-
-		return $this->tipviv; 		
-	}
-	
-	public function getVivotr()
-	{
-
-		return $this->vivotr; 		
-	}
-	
-	public function getForten()
-	{
-
-		return $this->forten; 		
-	}
-	
-	public function getTenotr()
-	{
-
-		return $this->tenotr; 		
-	}
-	
-	public function getSercon()
-	{
-
-		return $this->sercon; 		
-	}
-	
-	public function getDirotr()
-	{
-
-		return $this->dirotr; 		
-	}
-	
-	public function getTelotr()
-	{
-
-		return $this->telotr; 		
-	}
-	
-	public function getCodpai()
-	{
-
-		return $this->codpai; 		
-	}
-	
-	public function getCodpa2()
-	{
-
-		return $this->codpa2; 		
-	}
-	
-	public function getCodest()
-	{
-
-		return $this->codest; 		
-	}
-	
-	public function getCodes2()
-	{
-
-		return $this->codes2; 		
-	}
-	
-	public function getCodci2()
-	{
-
-		return $this->codci2; 		
-	}
-	
-	public function getCodrac()
-	{
-
-		return $this->codrac; 		
-	}
-	
-	public function getCodniv()
-	{
-
-		return $this->codniv; 		
-	}
-	
-	public function getTelha2()
-	{
-
-		return $this->telha2; 		
-	}
-	
-	public function getTelot2()
-	{
-
-		return $this->telot2; 		
-	}
-	
-	public function getCodprofes()
-	{
-
-		return $this->codprofes; 		
-	}
-	
-	public function getHcmexo()
-	{
-
-		return $this->hcmexo; 		
-	}
-	
-	public function getCodbanfid()
-	{
-
-		return $this->codbanfid; 		
-	}
-	
-	public function getCodbanlph()
-	{
-
-		return $this->codbanlph; 		
-	}
-	
-	public function getNumcuefid()
-	{
-
-		return $this->numcuefid; 		
-	}
-	
-	public function getNumcuelph()
-	{
-
-		return $this->numcuelph; 		
-	}
-	
-	public function getCodempant()
-	{
-
-		return $this->codempant; 		
-	}
-	
-	public function getGrusan()
-	{
-
-		return $this->grusan; 		
-	}
-	
-	public function getObsgen()
-	{
-
-		return $this->obsgen; 		
-	}
-	
-	public function getCodregpai()
-	{
-
-		return $this->codregpai; 		
-	}
-	
-	public function getCodregest()
-	{
-
-		return $this->codregest; 		
-	}
-	
-	public function getCodregciu()
-	{
-
-		return $this->codregciu; 		
-	}
-	
-	public function getFecgra($format = 'Y-m-d')
-	{
-
-		if ($this->fecgra === null || $this->fecgra === '') {
-			return null;
-		} elseif (!is_int($this->fecgra)) {
-						$ts = strtotime($this->fecgra);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecgra] as date/time value: " . var_export($this->fecgra, true));
-			}
-		} else {
-			$ts = $this->fecgra;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getGrusangre()
-	{
-
-		return $this->grusangre; 		
-	}
-	
-	public function getNumgaceta()
-	{
-
-		return $this->numgaceta; 		
-	}
-	
-	public function getFecgaceta($format = 'Y-m-d')
-	{
-
-		if ($this->fecgaceta === null || $this->fecgaceta === '') {
-			return null;
-		} elseif (!is_int($this->fecgaceta)) {
-						$ts = strtotime($this->fecgaceta);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecgaceta] as date/time value: " . var_export($this->fecgaceta, true));
-			}
-		} else {
-			$ts = $this->fecgaceta;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getDiagra()
-	{
-
-		return $this->diagra; 		
-	}
-	
-	public function getMesgra()
-	{
-
-		return $this->mesgra; 		
-	}
-	
-	public function getAnogra()
-	{
-
-		return $this->anogra; 		
-	}
-	
-	public function getTemporal()
-	{
-
-		return number_format($this->temporal,2,',','.');
-		
-	}
-	
-	public function getDetexp()
-	{
-
-		return $this->detexp; 		
-	}
-	
-	public function getNumexp()
-	{
-
-		return $this->numexp; 		
-	}
-	
-	public function getModpagcestic()
-	{
-
-		return $this->modpagcestic; 		
-	}
-	
-	public function getCodret()
-	{
-
-		return $this->codret; 		
-	}
-	
-	public function getId()
-	{
-
-		return $this->id; 		
-	}
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getNomemp()
+  {
+
+    return trim($this->nomemp);
+
+  }
+  
+  public function getCedemp()
+  {
+
+    return trim($this->cedemp);
+
+  }
+  
+  public function getNumcon()
+  {
+
+    return trim($this->numcon);
+
+  }
+  
+  public function getEdociv()
+  {
+
+    return trim($this->edociv);
+
+  }
+  
+  public function getNacemp()
+  {
+
+    return trim($this->nacemp);
+
+  }
+  
+  public function getSexemp()
+  {
+
+    return trim($this->sexemp);
+
+  }
+  
+  public function getFecnac($format = 'Y-m-d')
+  {
+
+    if ($this->fecnac === null || $this->fecnac === '') {
+      return null;
+    } elseif (!is_int($this->fecnac)) {
+            $ts = adodb_strtotime($this->fecnac);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnac] as date/time value: " . var_export($this->fecnac, true));
+      }
+    } else {
+      $ts = $this->fecnac;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getEdaemp($val=false)
+  {
+
+    if($val) return number_format($this->edaemp,2,',','.');
+    else return $this->edaemp;
+
+  }
+  
+  public function getLugnac()
+  {
+
+    return trim($this->lugnac);
+
+  }
+  
+  public function getDirhab()
+  {
+
+    return trim($this->dirhab);
+
+  }
+  
+  public function getCodciu()
+  {
+
+    return trim($this->codciu);
+
+  }
+  
+  public function getTelhab()
+  {
+
+    return trim($this->telhab);
+
+  }
+  
+  public function getCelemp()
+  {
+
+    return trim($this->celemp);
+
+  }
+  
+  public function getEmaemp()
+  {
+
+    return trim($this->emaemp);
+
+  }
+  
+  public function getCodpos()
+  {
+
+    return trim($this->codpos);
+
+  }
+  
+  public function getTalpan()
+  {
+
+    return trim($this->talpan);
+
+  }
+  
+  public function getTalcam()
+  {
+
+    return trim($this->talcam);
+
+  }
+  
+  public function getTalcal($val=false)
+  {
+
+    if($val) return number_format($this->talcal,2,',','.');
+    else return $this->talcal;
+
+  }
+  
+  public function getDerzur()
+  {
+
+    return trim($this->derzur);
+
+  }
+  
+  public function getFecing($format = 'Y-m-d')
+  {
+
+    if ($this->fecing === null || $this->fecing === '') {
+      return null;
+    } elseif (!is_int($this->fecing)) {
+            $ts = adodb_strtotime($this->fecing);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
+      }
+    } else {
+      $ts = $this->fecing;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecret($format = 'Y-m-d')
+  {
+
+    if ($this->fecret === null || $this->fecret === '') {
+      return null;
+    } elseif (!is_int($this->fecret)) {
+            $ts = adodb_strtotime($this->fecret);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecret] as date/time value: " . var_export($this->fecret, true));
+      }
+    } else {
+      $ts = $this->fecret;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecrei($format = 'Y-m-d')
+  {
+
+    if ($this->fecrei === null || $this->fecrei === '') {
+      return null;
+    } elseif (!is_int($this->fecrei)) {
+            $ts = adodb_strtotime($this->fecrei);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrei] as date/time value: " . var_export($this->fecrei, true));
+      }
+    } else {
+      $ts = $this->fecrei;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecadmpub($format = 'Y-m-d')
+  {
+
+    if ($this->fecadmpub === null || $this->fecadmpub === '') {
+      return null;
+    } elseif (!is_int($this->fecadmpub)) {
+            $ts = adodb_strtotime($this->fecadmpub);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecadmpub] as date/time value: " . var_export($this->fecadmpub, true));
+      }
+    } else {
+      $ts = $this->fecadmpub;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getStaemp()
+  {
+
+    return trim($this->staemp);
+
+  }
+  
+  public function getFotemp()
+  {
+
+    return trim($this->fotemp);
+
+  }
+  
+  public function getNumsso()
+  {
+
+    return trim($this->numsso);
+
+  }
+  
+  public function getNumpolseg()
+  {
+
+    return trim($this->numpolseg);
+
+  }
+  
+  public function getFeccotsso($format = 'Y-m-d')
+  {
+
+    if ($this->feccotsso === null || $this->feccotsso === '') {
+      return null;
+    } elseif (!is_int($this->feccotsso)) {
+            $ts = adodb_strtotime($this->feccotsso);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccotsso] as date/time value: " . var_export($this->feccotsso, true));
+      }
+    } else {
+      $ts = $this->feccotsso;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getAnoadmpub($val=false)
+  {
+
+    if($val) return number_format($this->anoadmpub,2,',','.');
+    else return $this->anoadmpub;
+
+  }
+  
+  public function getCodtippag()
+  {
+
+    return trim($this->codtippag);
+
+  }
+  
+  public function getCodban()
+  {
+
+    return trim($this->codban);
+
+  }
+  
+  public function getTipcue()
+  {
+
+    return trim($this->tipcue);
+
+  }
+  
+  public function getNumcue()
+  {
+
+    return trim($this->numcue);
+
+  }
+  
+  public function getObsemp()
+  {
+
+    return trim($this->obsemp);
+
+  }
+  
+  public function getTiefid()
+  {
+
+    return trim($this->tiefid);
+
+  }
+  
+  public function getGrulab()
+  {
+
+    return trim($this->grulab);
+
+  }
+  
+  public function getGruotr()
+  {
+
+    return trim($this->gruotr);
+
+  }
+  
+  public function getTraslado()
+  {
+
+    return trim($this->traslado);
+
+  }
+  
+  public function getTraotr()
+  {
+
+    return trim($this->traotr);
+
+  }
+  
+  public function getTipviv()
+  {
+
+    return trim($this->tipviv);
+
+  }
+  
+  public function getVivotr()
+  {
+
+    return trim($this->vivotr);
+
+  }
+  
+  public function getForten()
+  {
+
+    return trim($this->forten);
+
+  }
+  
+  public function getTenotr()
+  {
+
+    return trim($this->tenotr);
+
+  }
+  
+  public function getSercon()
+  {
+
+    return trim($this->sercon);
+
+  }
+  
+  public function getDirotr()
+  {
+
+    return trim($this->dirotr);
+
+  }
+  
+  public function getTelotr()
+  {
+
+    return trim($this->telotr);
+
+  }
+  
+  public function getCodpai()
+  {
+
+    return trim($this->codpai);
+
+  }
+  
+  public function getCodpa2()
+  {
+
+    return trim($this->codpa2);
+
+  }
+  
+  public function getCodest()
+  {
+
+    return trim($this->codest);
+
+  }
+  
+  public function getCodes2()
+  {
+
+    return trim($this->codes2);
+
+  }
+  
+  public function getCodci2()
+  {
+
+    return trim($this->codci2);
+
+  }
+  
+  public function getCodrac()
+  {
+
+    return trim($this->codrac);
+
+  }
+  
+  public function getCodniv()
+  {
+
+    return trim($this->codniv);
+
+  }
+  
+  public function getTelha2()
+  {
+
+    return trim($this->telha2);
+
+  }
+  
+  public function getTelot2()
+  {
+
+    return trim($this->telot2);
+
+  }
+  
+  public function getCodprofes()
+  {
+
+    return trim($this->codprofes);
+
+  }
+  
+  public function getHcmexo()
+  {
+
+    return trim($this->hcmexo);
+
+  }
+  
+  public function getCodbanfid()
+  {
+
+    return trim($this->codbanfid);
+
+  }
+  
+  public function getCodbanlph()
+  {
+
+    return trim($this->codbanlph);
+
+  }
+  
+  public function getNumcuefid()
+  {
+
+    return trim($this->numcuefid);
+
+  }
+  
+  public function getNumcuelph()
+  {
+
+    return trim($this->numcuelph);
+
+  }
+  
+  public function getCodempant()
+  {
+
+    return trim($this->codempant);
+
+  }
+  
+  public function getGrusan()
+  {
+
+    return trim($this->grusan);
+
+  }
+  
+  public function getObsgen()
+  {
+
+    return trim($this->obsgen);
+
+  }
+  
+  public function getCodregpai()
+  {
+
+    return trim($this->codregpai);
+
+  }
+  
+  public function getCodregest()
+  {
+
+    return trim($this->codregest);
+
+  }
+  
+  public function getCodregciu()
+  {
+
+    return trim($this->codregciu);
+
+  }
+  
+  public function getFecgra($format = 'Y-m-d')
+  {
+
+    if ($this->fecgra === null || $this->fecgra === '') {
+      return null;
+    } elseif (!is_int($this->fecgra)) {
+            $ts = adodb_strtotime($this->fecgra);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecgra] as date/time value: " . var_export($this->fecgra, true));
+      }
+    } else {
+      $ts = $this->fecgra;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getGrusangre()
+  {
+
+    return trim($this->grusangre);
+
+  }
+  
+  public function getNumgaceta()
+  {
+
+    return trim($this->numgaceta);
+
+  }
+  
+  public function getFecgaceta($format = 'Y-m-d')
+  {
+
+    if ($this->fecgaceta === null || $this->fecgaceta === '') {
+      return null;
+    } elseif (!is_int($this->fecgaceta)) {
+            $ts = adodb_strtotime($this->fecgaceta);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecgaceta] as date/time value: " . var_export($this->fecgaceta, true));
+      }
+    } else {
+      $ts = $this->fecgaceta;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getDiagra()
+  {
+
+    return trim($this->diagra);
+
+  }
+  
+  public function getMesgra()
+  {
+
+    return trim($this->mesgra);
+
+  }
+  
+  public function getAnogra()
+  {
+
+    return trim($this->anogra);
+
+  }
+  
+  public function getTemporal($val=false)
+  {
+
+    if($val) return number_format($this->temporal,2,',','.');
+    else return $this->temporal;
+
+  }
+  
+  public function getDetexp()
+  {
+
+    return trim($this->detexp);
+
+  }
+  
+  public function getNumexp()
+  {
+
+    return trim($this->numexp);
+
+  }
+  
+  public function getModpagcestic()
+  {
+
+    return trim($this->modpagcestic);
+
+  }
+  
+  public function getCodret()
+  {
+
+    return trim($this->codret);
+
+  }
+  
+  public function getSituac()
+  {
+
+    return trim($this->situac);
+
+  }
+  
+  public function getProfes()
+  {
+
+    return trim($this->profes);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setCedemp($v)
 	{
 
-		if ($this->cedemp !== $v) {
-			$this->cedemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::CEDEMP;
-		}
-
+    if ($this->cedemp !== $v) {
+        $this->cedemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::CEDEMP;
+      }
+  
 	} 
 	
 	public function setNumcon($v)
 	{
 
-		if ($this->numcon !== $v) {
-			$this->numcon = $v;
-			$this->modifiedColumns[] = NphojintPeer::NUMCON;
-		}
-
+    if ($this->numcon !== $v) {
+        $this->numcon = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMCON;
+      }
+  
 	} 
 	
 	public function setEdociv($v)
 	{
 
-		if ($this->edociv !== $v) {
-			$this->edociv = $v;
-			$this->modifiedColumns[] = NphojintPeer::EDOCIV;
-		}
-
+    if ($this->edociv !== $v) {
+        $this->edociv = $v;
+        $this->modifiedColumns[] = NphojintPeer::EDOCIV;
+      }
+  
 	} 
 	
 	public function setNacemp($v)
 	{
 
-		if ($this->nacemp !== $v) {
-			$this->nacemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::NACEMP;
-		}
-
+    if ($this->nacemp !== $v) {
+        $this->nacemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::NACEMP;
+      }
+  
 	} 
 	
 	public function setSexemp($v)
 	{
 
-		if ($this->sexemp !== $v) {
-			$this->sexemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::SEXEMP;
-		}
-
+    if ($this->sexemp !== $v) {
+        $this->sexemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::SEXEMP;
+      }
+  
 	} 
 	
 	public function setFecnac($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnac] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnac !== $ts) {
-			$this->fecnac = $ts;
-			$this->modifiedColumns[] = NphojintPeer::FECNAC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnac] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnac !== $ts) {
+      $this->fecnac = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECNAC;
+    }
 
 	} 
 	
 	public function setEdaemp($v)
 	{
 
-		if ($this->edaemp !== $v) {
-			$this->edaemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::EDAEMP;
-		}
-
+    if ($this->edaemp !== $v) {
+        $this->edaemp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphojintPeer::EDAEMP;
+      }
+  
 	} 
 	
 	public function setLugnac($v)
 	{
 
-		if ($this->lugnac !== $v) {
-			$this->lugnac = $v;
-			$this->modifiedColumns[] = NphojintPeer::LUGNAC;
-		}
-
+    if ($this->lugnac !== $v) {
+        $this->lugnac = $v;
+        $this->modifiedColumns[] = NphojintPeer::LUGNAC;
+      }
+  
 	} 
 	
 	public function setDirhab($v)
 	{
 
-		if ($this->dirhab !== $v) {
-			$this->dirhab = $v;
-			$this->modifiedColumns[] = NphojintPeer::DIRHAB;
-		}
-
+    if ($this->dirhab !== $v) {
+        $this->dirhab = $v;
+        $this->modifiedColumns[] = NphojintPeer::DIRHAB;
+      }
+  
 	} 
 	
 	public function setCodciu($v)
 	{
 
-		if ($this->codciu !== $v) {
-			$this->codciu = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODCIU;
-		}
-
+    if ($this->codciu !== $v) {
+        $this->codciu = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODCIU;
+      }
+  
 	} 
 	
 	public function setTelhab($v)
 	{
 
-		if ($this->telhab !== $v) {
-			$this->telhab = $v;
-			$this->modifiedColumns[] = NphojintPeer::TELHAB;
-		}
-
+    if ($this->telhab !== $v) {
+        $this->telhab = $v;
+        $this->modifiedColumns[] = NphojintPeer::TELHAB;
+      }
+  
 	} 
 	
 	public function setCelemp($v)
 	{
 
-		if ($this->celemp !== $v) {
-			$this->celemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::CELEMP;
-		}
-
+    if ($this->celemp !== $v) {
+        $this->celemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::CELEMP;
+      }
+  
 	} 
 	
 	public function setEmaemp($v)
 	{
 
-		if ($this->emaemp !== $v) {
-			$this->emaemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::EMAEMP;
-		}
-
+    if ($this->emaemp !== $v) {
+        $this->emaemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::EMAEMP;
+      }
+  
 	} 
 	
 	public function setCodpos($v)
 	{
 
-		if ($this->codpos !== $v) {
-			$this->codpos = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODPOS;
-		}
-
+    if ($this->codpos !== $v) {
+        $this->codpos = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODPOS;
+      }
+  
 	} 
 	
 	public function setTalpan($v)
 	{
 
-		if ($this->talpan !== $v) {
-			$this->talpan = $v;
-			$this->modifiedColumns[] = NphojintPeer::TALPAN;
-		}
-
+    if ($this->talpan !== $v) {
+        $this->talpan = $v;
+        $this->modifiedColumns[] = NphojintPeer::TALPAN;
+      }
+  
 	} 
 	
 	public function setTalcam($v)
 	{
 
-		if ($this->talcam !== $v) {
-			$this->talcam = $v;
-			$this->modifiedColumns[] = NphojintPeer::TALCAM;
-		}
-
+    if ($this->talcam !== $v) {
+        $this->talcam = $v;
+        $this->modifiedColumns[] = NphojintPeer::TALCAM;
+      }
+  
 	} 
 	
 	public function setTalcal($v)
 	{
 
-		if ($this->talcal !== $v) {
-			$this->talcal = $v;
-			$this->modifiedColumns[] = NphojintPeer::TALCAL;
-		}
-
+    if ($this->talcal !== $v) {
+        $this->talcal = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphojintPeer::TALCAL;
+      }
+  
 	} 
 	
 	public function setDerzur($v)
 	{
 
-		if ($this->derzur !== $v) {
-			$this->derzur = $v;
-			$this->modifiedColumns[] = NphojintPeer::DERZUR;
-		}
-
+    if ($this->derzur !== $v) {
+        $this->derzur = $v;
+        $this->modifiedColumns[] = NphojintPeer::DERZUR;
+      }
+  
 	} 
 	
 	public function setFecing($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecing !== $ts) {
-			$this->fecing = $ts;
-			$this->modifiedColumns[] = NphojintPeer::FECING;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecing !== $ts) {
+      $this->fecing = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECING;
+    }
 
 	} 
 	
 	public function setFecret($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecret] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecret !== $ts) {
-			$this->fecret = $ts;
-			$this->modifiedColumns[] = NphojintPeer::FECRET;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecret] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecret !== $ts) {
+      $this->fecret = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECRET;
+    }
 
 	} 
 	
 	public function setFecrei($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrei] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrei !== $ts) {
-			$this->fecrei = $ts;
-			$this->modifiedColumns[] = NphojintPeer::FECREI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrei] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrei !== $ts) {
+      $this->fecrei = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECREI;
+    }
 
 	} 
 	
 	public function setFecadmpub($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecadmpub] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecadmpub !== $ts) {
-			$this->fecadmpub = $ts;
-			$this->modifiedColumns[] = NphojintPeer::FECADMPUB;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecadmpub] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecadmpub !== $ts) {
+      $this->fecadmpub = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECADMPUB;
+    }
 
 	} 
 	
 	public function setStaemp($v)
 	{
 
-		if ($this->staemp !== $v) {
-			$this->staemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::STAEMP;
-		}
-
+    if ($this->staemp !== $v) {
+        $this->staemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::STAEMP;
+      }
+  
 	} 
 	
 	public function setFotemp($v)
 	{
 
-		if ($this->fotemp !== $v) {
-			$this->fotemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::FOTEMP;
-		}
-
+    if ($this->fotemp !== $v) {
+        $this->fotemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::FOTEMP;
+      }
+  
 	} 
 	
 	public function setNumsso($v)
 	{
 
-		if ($this->numsso !== $v) {
-			$this->numsso = $v;
-			$this->modifiedColumns[] = NphojintPeer::NUMSSO;
-		}
-
+    if ($this->numsso !== $v) {
+        $this->numsso = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMSSO;
+      }
+  
 	} 
 	
 	public function setNumpolseg($v)
 	{
 
-		if ($this->numpolseg !== $v) {
-			$this->numpolseg = $v;
-			$this->modifiedColumns[] = NphojintPeer::NUMPOLSEG;
-		}
-
+    if ($this->numpolseg !== $v) {
+        $this->numpolseg = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMPOLSEG;
+      }
+  
 	} 
 	
 	public function setFeccotsso($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccotsso] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccotsso !== $ts) {
-			$this->feccotsso = $ts;
-			$this->modifiedColumns[] = NphojintPeer::FECCOTSSO;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccotsso] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccotsso !== $ts) {
+      $this->feccotsso = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECCOTSSO;
+    }
 
 	} 
 	
 	public function setAnoadmpub($v)
 	{
 
-		if ($this->anoadmpub !== $v) {
-			$this->anoadmpub = $v;
-			$this->modifiedColumns[] = NphojintPeer::ANOADMPUB;
-		}
-
+    if ($this->anoadmpub !== $v) {
+        $this->anoadmpub = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphojintPeer::ANOADMPUB;
+      }
+  
 	} 
 	
 	public function setCodtippag($v)
 	{
 
-		if ($this->codtippag !== $v) {
-			$this->codtippag = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODTIPPAG;
-		}
-
+    if ($this->codtippag !== $v) {
+        $this->codtippag = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODTIPPAG;
+      }
+  
 	} 
 	
 	public function setCodban($v)
 	{
 
-		if ($this->codban !== $v) {
-			$this->codban = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODBAN;
-		}
-
+    if ($this->codban !== $v) {
+        $this->codban = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODBAN;
+      }
+  
 	} 
 	
 	public function setTipcue($v)
 	{
 
-		if ($this->tipcue !== $v) {
-			$this->tipcue = $v;
-			$this->modifiedColumns[] = NphojintPeer::TIPCUE;
-		}
-
+    if ($this->tipcue !== $v) {
+        $this->tipcue = $v;
+        $this->modifiedColumns[] = NphojintPeer::TIPCUE;
+      }
+  
 	} 
 	
 	public function setNumcue($v)
 	{
 
-		if ($this->numcue !== $v) {
-			$this->numcue = $v;
-			$this->modifiedColumns[] = NphojintPeer::NUMCUE;
-		}
-
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMCUE;
+      }
+  
 	} 
 	
 	public function setObsemp($v)
 	{
 
-		if ($this->obsemp !== $v) {
-			$this->obsemp = $v;
-			$this->modifiedColumns[] = NphojintPeer::OBSEMP;
-		}
-
+    if ($this->obsemp !== $v) {
+        $this->obsemp = $v;
+        $this->modifiedColumns[] = NphojintPeer::OBSEMP;
+      }
+  
 	} 
 	
 	public function setTiefid($v)
 	{
 
-		if ($this->tiefid !== $v) {
-			$this->tiefid = $v;
-			$this->modifiedColumns[] = NphojintPeer::TIEFID;
-		}
-
+    if ($this->tiefid !== $v) {
+        $this->tiefid = $v;
+        $this->modifiedColumns[] = NphojintPeer::TIEFID;
+      }
+  
 	} 
 	
 	public function setGrulab($v)
 	{
 
-		if ($this->grulab !== $v) {
-			$this->grulab = $v;
-			$this->modifiedColumns[] = NphojintPeer::GRULAB;
-		}
-
+    if ($this->grulab !== $v) {
+        $this->grulab = $v;
+        $this->modifiedColumns[] = NphojintPeer::GRULAB;
+      }
+  
 	} 
 	
 	public function setGruotr($v)
 	{
 
-		if ($this->gruotr !== $v) {
-			$this->gruotr = $v;
-			$this->modifiedColumns[] = NphojintPeer::GRUOTR;
-		}
-
+    if ($this->gruotr !== $v) {
+        $this->gruotr = $v;
+        $this->modifiedColumns[] = NphojintPeer::GRUOTR;
+      }
+  
 	} 
 	
 	public function setTraslado($v)
 	{
 
-		if ($this->traslado !== $v) {
-			$this->traslado = $v;
-			$this->modifiedColumns[] = NphojintPeer::TRASLADO;
-		}
-
+    if ($this->traslado !== $v) {
+        $this->traslado = $v;
+        $this->modifiedColumns[] = NphojintPeer::TRASLADO;
+      }
+  
 	} 
 	
 	public function setTraotr($v)
 	{
 
-		if ($this->traotr !== $v) {
-			$this->traotr = $v;
-			$this->modifiedColumns[] = NphojintPeer::TRAOTR;
-		}
-
+    if ($this->traotr !== $v) {
+        $this->traotr = $v;
+        $this->modifiedColumns[] = NphojintPeer::TRAOTR;
+      }
+  
 	} 
 	
 	public function setTipviv($v)
 	{
 
-		if ($this->tipviv !== $v) {
-			$this->tipviv = $v;
-			$this->modifiedColumns[] = NphojintPeer::TIPVIV;
-		}
-
+    if ($this->tipviv !== $v) {
+        $this->tipviv = $v;
+        $this->modifiedColumns[] = NphojintPeer::TIPVIV;
+      }
+  
 	} 
 	
 	public function setVivotr($v)
 	{
 
-		if ($this->vivotr !== $v) {
-			$this->vivotr = $v;
-			$this->modifiedColumns[] = NphojintPeer::VIVOTR;
-		}
-
+    if ($this->vivotr !== $v) {
+        $this->vivotr = $v;
+        $this->modifiedColumns[] = NphojintPeer::VIVOTR;
+      }
+  
 	} 
 	
 	public function setForten($v)
 	{
 
-		if ($this->forten !== $v) {
-			$this->forten = $v;
-			$this->modifiedColumns[] = NphojintPeer::FORTEN;
-		}
-
+    if ($this->forten !== $v) {
+        $this->forten = $v;
+        $this->modifiedColumns[] = NphojintPeer::FORTEN;
+      }
+  
 	} 
 	
 	public function setTenotr($v)
 	{
 
-		if ($this->tenotr !== $v) {
-			$this->tenotr = $v;
-			$this->modifiedColumns[] = NphojintPeer::TENOTR;
-		}
-
+    if ($this->tenotr !== $v) {
+        $this->tenotr = $v;
+        $this->modifiedColumns[] = NphojintPeer::TENOTR;
+      }
+  
 	} 
 	
 	public function setSercon($v)
 	{
 
-		if ($this->sercon !== $v) {
-			$this->sercon = $v;
-			$this->modifiedColumns[] = NphojintPeer::SERCON;
-		}
-
+    if ($this->sercon !== $v) {
+        $this->sercon = $v;
+        $this->modifiedColumns[] = NphojintPeer::SERCON;
+      }
+  
 	} 
 	
 	public function setDirotr($v)
 	{
 
-		if ($this->dirotr !== $v) {
-			$this->dirotr = $v;
-			$this->modifiedColumns[] = NphojintPeer::DIROTR;
-		}
-
+    if ($this->dirotr !== $v) {
+        $this->dirotr = $v;
+        $this->modifiedColumns[] = NphojintPeer::DIROTR;
+      }
+  
 	} 
 	
 	public function setTelotr($v)
 	{
 
-		if ($this->telotr !== $v) {
-			$this->telotr = $v;
-			$this->modifiedColumns[] = NphojintPeer::TELOTR;
-		}
-
+    if ($this->telotr !== $v) {
+        $this->telotr = $v;
+        $this->modifiedColumns[] = NphojintPeer::TELOTR;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setCodpa2($v)
 	{
 
-		if ($this->codpa2 !== $v) {
-			$this->codpa2 = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODPA2;
-		}
-
+    if ($this->codpa2 !== $v) {
+        $this->codpa2 = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODPA2;
+      }
+  
 	} 
 	
 	public function setCodest($v)
 	{
 
-		if ($this->codest !== $v) {
-			$this->codest = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODEST;
-		}
-
+    if ($this->codest !== $v) {
+        $this->codest = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODEST;
+      }
+  
 	} 
 	
 	public function setCodes2($v)
 	{
 
-		if ($this->codes2 !== $v) {
-			$this->codes2 = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODES2;
-		}
-
+    if ($this->codes2 !== $v) {
+        $this->codes2 = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODES2;
+      }
+  
 	} 
 	
 	public function setCodci2($v)
 	{
 
-		if ($this->codci2 !== $v) {
-			$this->codci2 = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODCI2;
-		}
-
+    if ($this->codci2 !== $v) {
+        $this->codci2 = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODCI2;
+      }
+  
 	} 
 	
 	public function setCodrac($v)
 	{
 
-		if ($this->codrac !== $v) {
-			$this->codrac = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODRAC;
-		}
-
+    if ($this->codrac !== $v) {
+        $this->codrac = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODRAC;
+      }
+  
 	} 
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setTelha2($v)
 	{
 
-		if ($this->telha2 !== $v) {
-			$this->telha2 = $v;
-			$this->modifiedColumns[] = NphojintPeer::TELHA2;
-		}
-
+    if ($this->telha2 !== $v) {
+        $this->telha2 = $v;
+        $this->modifiedColumns[] = NphojintPeer::TELHA2;
+      }
+  
 	} 
 	
 	public function setTelot2($v)
 	{
 
-		if ($this->telot2 !== $v) {
-			$this->telot2 = $v;
-			$this->modifiedColumns[] = NphojintPeer::TELOT2;
-		}
-
+    if ($this->telot2 !== $v) {
+        $this->telot2 = $v;
+        $this->modifiedColumns[] = NphojintPeer::TELOT2;
+      }
+  
 	} 
 	
 	public function setCodprofes($v)
 	{
 
-		if ($this->codprofes !== $v) {
-			$this->codprofes = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODPROFES;
-		}
-
+    if ($this->codprofes !== $v) {
+        $this->codprofes = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODPROFES;
+      }
+  
 	} 
 	
 	public function setHcmexo($v)
 	{
 
-		if ($this->hcmexo !== $v) {
-			$this->hcmexo = $v;
-			$this->modifiedColumns[] = NphojintPeer::HCMEXO;
-		}
-
+    if ($this->hcmexo !== $v) {
+        $this->hcmexo = $v;
+        $this->modifiedColumns[] = NphojintPeer::HCMEXO;
+      }
+  
 	} 
 	
 	public function setCodbanfid($v)
 	{
 
-		if ($this->codbanfid !== $v) {
-			$this->codbanfid = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODBANFID;
-		}
-
+    if ($this->codbanfid !== $v) {
+        $this->codbanfid = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODBANFID;
+      }
+  
 	} 
 	
 	public function setCodbanlph($v)
 	{
 
-		if ($this->codbanlph !== $v) {
-			$this->codbanlph = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODBANLPH;
-		}
-
+    if ($this->codbanlph !== $v) {
+        $this->codbanlph = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODBANLPH;
+      }
+  
 	} 
 	
 	public function setNumcuefid($v)
 	{
 
-		if ($this->numcuefid !== $v) {
-			$this->numcuefid = $v;
-			$this->modifiedColumns[] = NphojintPeer::NUMCUEFID;
-		}
-
+    if ($this->numcuefid !== $v) {
+        $this->numcuefid = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMCUEFID;
+      }
+  
 	} 
 	
 	public function setNumcuelph($v)
 	{
 
-		if ($this->numcuelph !== $v) {
-			$this->numcuelph = $v;
-			$this->modifiedColumns[] = NphojintPeer::NUMCUELPH;
-		}
-
+    if ($this->numcuelph !== $v) {
+        $this->numcuelph = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMCUELPH;
+      }
+  
 	} 
 	
 	public function setCodempant($v)
 	{
 
-		if ($this->codempant !== $v) {
-			$this->codempant = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODEMPANT;
-		}
-
+    if ($this->codempant !== $v) {
+        $this->codempant = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODEMPANT;
+      }
+  
 	} 
 	
 	public function setGrusan($v)
 	{
 
-		if ($this->grusan !== $v) {
-			$this->grusan = $v;
-			$this->modifiedColumns[] = NphojintPeer::GRUSAN;
-		}
-
+    if ($this->grusan !== $v) {
+        $this->grusan = $v;
+        $this->modifiedColumns[] = NphojintPeer::GRUSAN;
+      }
+  
 	} 
 	
 	public function setObsgen($v)
 	{
 
-		if ($this->obsgen !== $v) {
-			$this->obsgen = $v;
-			$this->modifiedColumns[] = NphojintPeer::OBSGEN;
-		}
-
+    if ($this->obsgen !== $v) {
+        $this->obsgen = $v;
+        $this->modifiedColumns[] = NphojintPeer::OBSGEN;
+      }
+  
 	} 
 	
 	public function setCodregpai($v)
 	{
 
-		if ($this->codregpai !== $v) {
-			$this->codregpai = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODREGPAI;
-		}
-
+    if ($this->codregpai !== $v) {
+        $this->codregpai = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODREGPAI;
+      }
+  
 	} 
 	
 	public function setCodregest($v)
 	{
 
-		if ($this->codregest !== $v) {
-			$this->codregest = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODREGEST;
-		}
-
+    if ($this->codregest !== $v) {
+        $this->codregest = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODREGEST;
+      }
+  
 	} 
 	
 	public function setCodregciu($v)
 	{
 
-		if ($this->codregciu !== $v) {
-			$this->codregciu = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODREGCIU;
-		}
-
+    if ($this->codregciu !== $v) {
+        $this->codregciu = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODREGCIU;
+      }
+  
 	} 
 	
 	public function setFecgra($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecgra] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecgra !== $ts) {
-			$this->fecgra = $ts;
-			$this->modifiedColumns[] = NphojintPeer::FECGRA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecgra] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecgra !== $ts) {
+      $this->fecgra = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECGRA;
+    }
 
 	} 
 	
 	public function setGrusangre($v)
 	{
 
-		if ($this->grusangre !== $v) {
-			$this->grusangre = $v;
-			$this->modifiedColumns[] = NphojintPeer::GRUSANGRE;
-		}
-
+    if ($this->grusangre !== $v) {
+        $this->grusangre = $v;
+        $this->modifiedColumns[] = NphojintPeer::GRUSANGRE;
+      }
+  
 	} 
 	
 	public function setNumgaceta($v)
 	{
 
-		if ($this->numgaceta !== $v) {
-			$this->numgaceta = $v;
-			$this->modifiedColumns[] = NphojintPeer::NUMGACETA;
-		}
-
+    if ($this->numgaceta !== $v) {
+        $this->numgaceta = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMGACETA;
+      }
+  
 	} 
 	
 	public function setFecgaceta($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecgaceta] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecgaceta !== $ts) {
-			$this->fecgaceta = $ts;
-			$this->modifiedColumns[] = NphojintPeer::FECGACETA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecgaceta] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecgaceta !== $ts) {
+      $this->fecgaceta = $ts;
+      $this->modifiedColumns[] = NphojintPeer::FECGACETA;
+    }
 
 	} 
 	
 	public function setDiagra($v)
 	{
 
-		if ($this->diagra !== $v) {
-			$this->diagra = $v;
-			$this->modifiedColumns[] = NphojintPeer::DIAGRA;
-		}
-
+    if ($this->diagra !== $v) {
+        $this->diagra = $v;
+        $this->modifiedColumns[] = NphojintPeer::DIAGRA;
+      }
+  
 	} 
 	
 	public function setMesgra($v)
 	{
 
-		if ($this->mesgra !== $v) {
-			$this->mesgra = $v;
-			$this->modifiedColumns[] = NphojintPeer::MESGRA;
-		}
-
+    if ($this->mesgra !== $v) {
+        $this->mesgra = $v;
+        $this->modifiedColumns[] = NphojintPeer::MESGRA;
+      }
+  
 	} 
 	
 	public function setAnogra($v)
 	{
 
-		if ($this->anogra !== $v) {
-			$this->anogra = $v;
-			$this->modifiedColumns[] = NphojintPeer::ANOGRA;
-		}
-
+    if ($this->anogra !== $v) {
+        $this->anogra = $v;
+        $this->modifiedColumns[] = NphojintPeer::ANOGRA;
+      }
+  
 	} 
 	
 	public function setTemporal($v)
 	{
 
-		if ($this->temporal !== $v) {
-			$this->temporal = $v;
-			$this->modifiedColumns[] = NphojintPeer::TEMPORAL;
-		}
-
+    if ($this->temporal !== $v) {
+        $this->temporal = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphojintPeer::TEMPORAL;
+      }
+  
 	} 
 	
 	public function setDetexp($v)
 	{
 
-		if ($this->detexp !== $v) {
-			$this->detexp = $v;
-			$this->modifiedColumns[] = NphojintPeer::DETEXP;
-		}
-
+    if ($this->detexp !== $v) {
+        $this->detexp = $v;
+        $this->modifiedColumns[] = NphojintPeer::DETEXP;
+      }
+  
 	} 
 	
 	public function setNumexp($v)
 	{
 
-		if ($this->numexp !== $v) {
-			$this->numexp = $v;
-			$this->modifiedColumns[] = NphojintPeer::NUMEXP;
-		}
-
+    if ($this->numexp !== $v) {
+        $this->numexp = $v;
+        $this->modifiedColumns[] = NphojintPeer::NUMEXP;
+      }
+  
 	} 
 	
 	public function setModpagcestic($v)
 	{
 
-		if ($this->modpagcestic !== $v) {
-			$this->modpagcestic = $v;
-			$this->modifiedColumns[] = NphojintPeer::MODPAGCESTIC;
-		}
-
+    if ($this->modpagcestic !== $v) {
+        $this->modpagcestic = $v;
+        $this->modifiedColumns[] = NphojintPeer::MODPAGCESTIC;
+      }
+  
 	} 
 	
 	public function setCodret($v)
 	{
 
-		if ($this->codret !== $v) {
-			$this->codret = $v;
-			$this->modifiedColumns[] = NphojintPeer::CODRET;
-		}
+    if ($this->codret !== $v) {
+        $this->codret = $v;
+        $this->modifiedColumns[] = NphojintPeer::CODRET;
+      }
+  
+	} 
+	
+	public function setSituac($v)
+	{
 
+    if ($this->situac !== $v) {
+        $this->situac = $v;
+        $this->modifiedColumns[] = NphojintPeer::SITUAC;
+      }
+  
+	} 
+	
+	public function setProfes($v)
+	{
+
+    if ($this->profes !== $v) {
+        $this->profes = $v;
+        $this->modifiedColumns[] = NphojintPeer::PROFES;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NphojintPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NphojintPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->nomemp = $rs->getString($startcol + 1);
+      $this->nomemp = $rs->getString($startcol + 1);
 
-			$this->cedemp = $rs->getString($startcol + 2);
+      $this->cedemp = $rs->getString($startcol + 2);
 
-			$this->numcon = $rs->getString($startcol + 3);
+      $this->numcon = $rs->getString($startcol + 3);
 
-			$this->edociv = $rs->getString($startcol + 4);
+      $this->edociv = $rs->getString($startcol + 4);
 
-			$this->nacemp = $rs->getString($startcol + 5);
+      $this->nacemp = $rs->getString($startcol + 5);
 
-			$this->sexemp = $rs->getString($startcol + 6);
+      $this->sexemp = $rs->getString($startcol + 6);
 
-			$this->fecnac = $rs->getDate($startcol + 7, null);
+      $this->fecnac = $rs->getDate($startcol + 7, null);
 
-			$this->edaemp = $rs->getFloat($startcol + 8);
+      $this->edaemp = $rs->getFloat($startcol + 8);
 
-			$this->lugnac = $rs->getString($startcol + 9);
+      $this->lugnac = $rs->getString($startcol + 9);
 
-			$this->dirhab = $rs->getString($startcol + 10);
+      $this->dirhab = $rs->getString($startcol + 10);
 
-			$this->codciu = $rs->getString($startcol + 11);
+      $this->codciu = $rs->getString($startcol + 11);
 
-			$this->telhab = $rs->getString($startcol + 12);
+      $this->telhab = $rs->getString($startcol + 12);
 
-			$this->celemp = $rs->getString($startcol + 13);
+      $this->celemp = $rs->getString($startcol + 13);
 
-			$this->emaemp = $rs->getString($startcol + 14);
+      $this->emaemp = $rs->getString($startcol + 14);
 
-			$this->codpos = $rs->getString($startcol + 15);
+      $this->codpos = $rs->getString($startcol + 15);
 
-			$this->talpan = $rs->getString($startcol + 16);
+      $this->talpan = $rs->getString($startcol + 16);
 
-			$this->talcam = $rs->getString($startcol + 17);
+      $this->talcam = $rs->getString($startcol + 17);
 
-			$this->talcal = $rs->getFloat($startcol + 18);
+      $this->talcal = $rs->getFloat($startcol + 18);
 
-			$this->derzur = $rs->getString($startcol + 19);
+      $this->derzur = $rs->getString($startcol + 19);
 
-			$this->fecing = $rs->getDate($startcol + 20, null);
+      $this->fecing = $rs->getDate($startcol + 20, null);
 
-			$this->fecret = $rs->getDate($startcol + 21, null);
+      $this->fecret = $rs->getDate($startcol + 21, null);
 
-			$this->fecrei = $rs->getDate($startcol + 22, null);
+      $this->fecrei = $rs->getDate($startcol + 22, null);
 
-			$this->fecadmpub = $rs->getDate($startcol + 23, null);
+      $this->fecadmpub = $rs->getDate($startcol + 23, null);
 
-			$this->staemp = $rs->getString($startcol + 24);
+      $this->staemp = $rs->getString($startcol + 24);
 
-			$this->fotemp = $rs->getString($startcol + 25);
+      $this->fotemp = $rs->getString($startcol + 25);
 
-			$this->numsso = $rs->getString($startcol + 26);
+      $this->numsso = $rs->getString($startcol + 26);
 
-			$this->numpolseg = $rs->getString($startcol + 27);
+      $this->numpolseg = $rs->getString($startcol + 27);
 
-			$this->feccotsso = $rs->getDate($startcol + 28, null);
+      $this->feccotsso = $rs->getDate($startcol + 28, null);
 
-			$this->anoadmpub = $rs->getFloat($startcol + 29);
+      $this->anoadmpub = $rs->getFloat($startcol + 29);
 
-			$this->codtippag = $rs->getString($startcol + 30);
+      $this->codtippag = $rs->getString($startcol + 30);
 
-			$this->codban = $rs->getString($startcol + 31);
+      $this->codban = $rs->getString($startcol + 31);
 
-			$this->tipcue = $rs->getString($startcol + 32);
+      $this->tipcue = $rs->getString($startcol + 32);
 
-			$this->numcue = $rs->getString($startcol + 33);
+      $this->numcue = $rs->getString($startcol + 33);
 
-			$this->obsemp = $rs->getString($startcol + 34);
+      $this->obsemp = $rs->getString($startcol + 34);
 
-			$this->tiefid = $rs->getString($startcol + 35);
+      $this->tiefid = $rs->getString($startcol + 35);
 
-			$this->grulab = $rs->getString($startcol + 36);
+      $this->grulab = $rs->getString($startcol + 36);
 
-			$this->gruotr = $rs->getString($startcol + 37);
+      $this->gruotr = $rs->getString($startcol + 37);
 
-			$this->traslado = $rs->getString($startcol + 38);
+      $this->traslado = $rs->getString($startcol + 38);
 
-			$this->traotr = $rs->getString($startcol + 39);
+      $this->traotr = $rs->getString($startcol + 39);
 
-			$this->tipviv = $rs->getString($startcol + 40);
+      $this->tipviv = $rs->getString($startcol + 40);
 
-			$this->vivotr = $rs->getString($startcol + 41);
+      $this->vivotr = $rs->getString($startcol + 41);
 
-			$this->forten = $rs->getString($startcol + 42);
+      $this->forten = $rs->getString($startcol + 42);
 
-			$this->tenotr = $rs->getString($startcol + 43);
+      $this->tenotr = $rs->getString($startcol + 43);
 
-			$this->sercon = $rs->getString($startcol + 44);
+      $this->sercon = $rs->getString($startcol + 44);
 
-			$this->dirotr = $rs->getString($startcol + 45);
+      $this->dirotr = $rs->getString($startcol + 45);
 
-			$this->telotr = $rs->getString($startcol + 46);
+      $this->telotr = $rs->getString($startcol + 46);
 
-			$this->codpai = $rs->getString($startcol + 47);
+      $this->codpai = $rs->getString($startcol + 47);
 
-			$this->codpa2 = $rs->getString($startcol + 48);
+      $this->codpa2 = $rs->getString($startcol + 48);
 
-			$this->codest = $rs->getString($startcol + 49);
+      $this->codest = $rs->getString($startcol + 49);
 
-			$this->codes2 = $rs->getString($startcol + 50);
+      $this->codes2 = $rs->getString($startcol + 50);
 
-			$this->codci2 = $rs->getString($startcol + 51);
+      $this->codci2 = $rs->getString($startcol + 51);
 
-			$this->codrac = $rs->getString($startcol + 52);
+      $this->codrac = $rs->getString($startcol + 52);
 
-			$this->codniv = $rs->getString($startcol + 53);
+      $this->codniv = $rs->getString($startcol + 53);
 
-			$this->telha2 = $rs->getString($startcol + 54);
+      $this->telha2 = $rs->getString($startcol + 54);
 
-			$this->telot2 = $rs->getString($startcol + 55);
+      $this->telot2 = $rs->getString($startcol + 55);
 
-			$this->codprofes = $rs->getString($startcol + 56);
+      $this->codprofes = $rs->getString($startcol + 56);
 
-			$this->hcmexo = $rs->getString($startcol + 57);
+      $this->hcmexo = $rs->getString($startcol + 57);
 
-			$this->codbanfid = $rs->getString($startcol + 58);
+      $this->codbanfid = $rs->getString($startcol + 58);
 
-			$this->codbanlph = $rs->getString($startcol + 59);
+      $this->codbanlph = $rs->getString($startcol + 59);
 
-			$this->numcuefid = $rs->getString($startcol + 60);
+      $this->numcuefid = $rs->getString($startcol + 60);
 
-			$this->numcuelph = $rs->getString($startcol + 61);
+      $this->numcuelph = $rs->getString($startcol + 61);
 
-			$this->codempant = $rs->getString($startcol + 62);
+      $this->codempant = $rs->getString($startcol + 62);
 
-			$this->grusan = $rs->getString($startcol + 63);
+      $this->grusan = $rs->getString($startcol + 63);
 
-			$this->obsgen = $rs->getString($startcol + 64);
+      $this->obsgen = $rs->getString($startcol + 64);
 
-			$this->codregpai = $rs->getString($startcol + 65);
+      $this->codregpai = $rs->getString($startcol + 65);
 
-			$this->codregest = $rs->getString($startcol + 66);
+      $this->codregest = $rs->getString($startcol + 66);
 
-			$this->codregciu = $rs->getString($startcol + 67);
+      $this->codregciu = $rs->getString($startcol + 67);
 
-			$this->fecgra = $rs->getDate($startcol + 68, null);
+      $this->fecgra = $rs->getDate($startcol + 68, null);
 
-			$this->grusangre = $rs->getString($startcol + 69);
+      $this->grusangre = $rs->getString($startcol + 69);
 
-			$this->numgaceta = $rs->getString($startcol + 70);
+      $this->numgaceta = $rs->getString($startcol + 70);
 
-			$this->fecgaceta = $rs->getDate($startcol + 71, null);
+      $this->fecgaceta = $rs->getDate($startcol + 71, null);
 
-			$this->diagra = $rs->getString($startcol + 72);
+      $this->diagra = $rs->getString($startcol + 72);
 
-			$this->mesgra = $rs->getString($startcol + 73);
+      $this->mesgra = $rs->getString($startcol + 73);
 
-			$this->anogra = $rs->getString($startcol + 74);
+      $this->anogra = $rs->getString($startcol + 74);
 
-			$this->temporal = $rs->getFloat($startcol + 75);
+      $this->temporal = $rs->getFloat($startcol + 75);
 
-			$this->detexp = $rs->getString($startcol + 76);
+      $this->detexp = $rs->getString($startcol + 76);
 
-			$this->numexp = $rs->getString($startcol + 77);
+      $this->numexp = $rs->getString($startcol + 77);
 
-			$this->modpagcestic = $rs->getString($startcol + 78);
+      $this->modpagcestic = $rs->getString($startcol + 78);
 
-			$this->codret = $rs->getString($startcol + 79);
+      $this->codret = $rs->getString($startcol + 79);
 
-			$this->id = $rs->getInt($startcol + 80);
+      $this->situac = $rs->getString($startcol + 80);
 
-			$this->resetModified();
+      $this->profes = $rs->getString($startcol + 81);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 82);
 
-						return $startcol + 81; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nphojint object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 83; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nphojint object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -2053,11 +2200,20 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NphojintPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NphojintPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collNphojintincs !== null) {
+				foreach($this->collNphojintincs as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -2099,6 +2255,14 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collNphojintincs !== null) {
+					foreach($this->collNphojintincs as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -2359,6 +2523,12 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				return $this->getCodret();
 				break;
 			case 80:
+				return $this->getSituac();
+				break;
+			case 81:
+				return $this->getProfes();
+				break;
+			case 82:
 				return $this->getId();
 				break;
 			default:
@@ -2451,7 +2621,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 			$keys[77] => $this->getNumexp(),
 			$keys[78] => $this->getModpagcestic(),
 			$keys[79] => $this->getCodret(),
-			$keys[80] => $this->getId(),
+			$keys[80] => $this->getSituac(),
+			$keys[81] => $this->getProfes(),
+			$keys[82] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2708,6 +2880,12 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 				$this->setCodret($value);
 				break;
 			case 80:
+				$this->setSituac($value);
+				break;
+			case 81:
+				$this->setProfes($value);
+				break;
+			case 82:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2797,7 +2975,9 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[77], $arr)) $this->setNumexp($arr[$keys[77]]);
 		if (array_key_exists($keys[78], $arr)) $this->setModpagcestic($arr[$keys[78]]);
 		if (array_key_exists($keys[79], $arr)) $this->setCodret($arr[$keys[79]]);
-		if (array_key_exists($keys[80], $arr)) $this->setId($arr[$keys[80]]);
+		if (array_key_exists($keys[80], $arr)) $this->setSituac($arr[$keys[80]]);
+		if (array_key_exists($keys[81], $arr)) $this->setProfes($arr[$keys[81]]);
+		if (array_key_exists($keys[82], $arr)) $this->setId($arr[$keys[82]]);
 	}
 
 	
@@ -2885,6 +3065,8 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NphojintPeer::NUMEXP)) $criteria->add(NphojintPeer::NUMEXP, $this->numexp);
 		if ($this->isColumnModified(NphojintPeer::MODPAGCESTIC)) $criteria->add(NphojintPeer::MODPAGCESTIC, $this->modpagcestic);
 		if ($this->isColumnModified(NphojintPeer::CODRET)) $criteria->add(NphojintPeer::CODRET, $this->codret);
+		if ($this->isColumnModified(NphojintPeer::SITUAC)) $criteria->add(NphojintPeer::SITUAC, $this->situac);
+		if ($this->isColumnModified(NphojintPeer::PROFES)) $criteria->add(NphojintPeer::PROFES, $this->profes);
 		if ($this->isColumnModified(NphojintPeer::ID)) $criteria->add(NphojintPeer::ID, $this->id);
 
 		return $criteria;
@@ -3076,6 +3258,19 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 
 		$copyObj->setCodret($this->codret);
 
+		$copyObj->setSituac($this->situac);
+
+		$copyObj->setProfes($this->profes);
+
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getNphojintincs() as $relObj) {
+				$copyObj->addNphojintinc($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -3098,6 +3293,111 @@ abstract class BaseNphojint extends BaseObject  implements Persistent {
 			self::$peer = new NphojintPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initNphojintincs()
+	{
+		if ($this->collNphojintincs === null) {
+			$this->collNphojintincs = array();
+		}
+	}
+
+	
+	public function getNphojintincs($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseNphojintincPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collNphojintincs === null) {
+			if ($this->isNew()) {
+			   $this->collNphojintincs = array();
+			} else {
+
+				$criteria->add(NphojintincPeer::CODEMP, $this->getCodemp());
+
+				NphojintincPeer::addSelectColumns($criteria);
+				$this->collNphojintincs = NphojintincPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(NphojintincPeer::CODEMP, $this->getCodemp());
+
+				NphojintincPeer::addSelectColumns($criteria);
+				if (!isset($this->lastNphojintincCriteria) || !$this->lastNphojintincCriteria->equals($criteria)) {
+					$this->collNphojintincs = NphojintincPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastNphojintincCriteria = $criteria;
+		return $this->collNphojintincs;
+	}
+
+	
+	public function countNphojintincs($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseNphojintincPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(NphojintincPeer::CODEMP, $this->getCodemp());
+
+		return NphojintincPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addNphojintinc(Nphojintinc $l)
+	{
+		$this->collNphojintincs[] = $l;
+		$l->setNphojint($this);
+	}
+
+
+	
+	public function getNphojintincsJoinNpincapa($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseNphojintincPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collNphojintincs === null) {
+			if ($this->isNew()) {
+				$this->collNphojintincs = array();
+			} else {
+
+				$criteria->add(NphojintincPeer::CODEMP, $this->getCodemp());
+
+				$this->collNphojintincs = NphojintincPeer::doSelectJoinNpincapa($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(NphojintincPeer::CODEMP, $this->getCodemp());
+
+			if (!isset($this->lastNphojintincCriteria) || !$this->lastNphojintincCriteria->equals($criteria)) {
+				$this->collNphojintincs = NphojintincPeer::doSelectJoinNpincapa($criteria, $con);
+			}
+		}
+		$this->lastNphojintincCriteria = $criteria;
+
+		return $this->collNphojintincs;
 	}
 
 } 

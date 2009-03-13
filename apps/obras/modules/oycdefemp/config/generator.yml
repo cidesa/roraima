@@ -1,0 +1,59 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Ocdefemp
+    theme:            default
+    fields:
+      codemp:    { name: Código, params: size=5 maxlength=3}
+      nomemp:    { name: Nombre, params: size=60 maxlength=100}
+      diremp:    { name: Dirección, params: size=80 maxlength=100}
+      telemp:    { name: Telefono, params: size=20 maxlength=30}
+      faxemp:    { name: Fax, params: size=20 maxlength=30}
+      emaemp:    { name: Email, params: size=40 maxlength=30}
+      porant:    { name: Anticipo de Obras}
+      plaini:    { name: Plazo de Inicio}
+      poraumobr:    { name: Aumento de Obras}
+      pormul:    { name: Multas de Obras}
+      unitri:    { name: Unidad Tributaria}
+      codactproini:    { name: Prórroga de Inicio}
+      codactini:    { name: Inicio}
+      codactpar:    { name: Paralización}
+      codactrei:    { name: Reinicio}
+      codactproter:    { name: Prórroga de Terminación}
+      codactter:    { name: Terminación}
+      codactrecpro:    { name: Recepción Provisional}
+      codactrecdef:    { name: Recepción Definitiva}
+      codingres:    { name: Cód. Ing. Residente}
+      codconobr:    { name: Obras}
+      codconins:    { name: Inspección}
+      codconsup:    { name: Supervición}
+      codconpro:    { name: Proyectos}
+      codvalant:    { name: Anticipo}
+      codvalpar:    { name: Parcial}
+      codvalfin:    { name: Final}
+      codvalret:    { name: Retención}
+      codvalrec:    { name: Recons.Precios}
+      codparrec:    { name: Código de la Partida}
+      ivaant:    { name: Calcular IVA a Valuaciones de Anticipo}
+      retant:    { name: Calcular Retención  a Valuaciones de Anticipo}
+
+    list:
+      title:          Registro Información del Sistema
+      display:        [=codemp, nomemp, diremp]
+      filters:        [codemp]
+      sort            codemp
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:    codemp
+    edit:
+      title:          Institución
+      display:        [codemp, nomemp, diremp, telemp, faxemp, emaemp, codactini, codactpar, codactrei, codactter, codactproini, codactproter, codactrecdef, codactrecpro, codconobr, codconpro, codconins, codconsup, codvalant, codvalret, codvalpar, codvalrec, codvalfin, porant, poraumobr, pormul, unitri, plaini, codingres, codparrec, ivaant, retant]
+      fields:
+        ivaant: { type: checkbox_tag}
+        retant: { type: checkbox_tag}
+      actions:
+        _save:        ~
+
+

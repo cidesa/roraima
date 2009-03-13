@@ -37,129 +37,157 @@ abstract class BaseRemovtra extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReftra()
-	{
+  
+  public function getReftra()
+  {
 
-		return $this->reftra; 		
-	}
-	
-	public function getCodori()
-	{
+    return trim($this->reftra);
 
-		return $this->codori; 		
-	}
-	
-	public function getCoddes()
-	{
+  }
+  
+  public function getCodori()
+  {
 
-		return $this->coddes; 		
-	}
-	
-	public function getMonmov()
-	{
+    return trim($this->codori);
 
-		return number_format($this->monmov,2,',','.');
-		
-	}
-	
-	public function getStamov()
-	{
+  }
+  
+  public function getCoddes()
+  {
 
-		return $this->stamov; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->coddes);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonmov($val=false)
+  {
+
+    if($val) return number_format($this->monmov,2,',','.');
+    else return $this->monmov;
+
+  }
+  
+  public function getStamov()
+  {
+
+    return trim($this->stamov);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReftra($v)
 	{
 
-		if ($this->reftra !== $v) {
-			$this->reftra = $v;
-			$this->modifiedColumns[] = RemovtraPeer::REFTRA;
-		}
-
+    if ($this->reftra !== $v) {
+        $this->reftra = $v;
+        $this->modifiedColumns[] = RemovtraPeer::REFTRA;
+      }
+  
 	} 
 	
 	public function setCodori($v)
 	{
 
-		if ($this->codori !== $v) {
-			$this->codori = $v;
-			$this->modifiedColumns[] = RemovtraPeer::CODORI;
-		}
-
+    if ($this->codori !== $v) {
+        $this->codori = $v;
+        $this->modifiedColumns[] = RemovtraPeer::CODORI;
+      }
+  
 	} 
 	
 	public function setCoddes($v)
 	{
 
-		if ($this->coddes !== $v) {
-			$this->coddes = $v;
-			$this->modifiedColumns[] = RemovtraPeer::CODDES;
-		}
-
+    if ($this->coddes !== $v) {
+        $this->coddes = $v;
+        $this->modifiedColumns[] = RemovtraPeer::CODDES;
+      }
+  
 	} 
 	
 	public function setMonmov($v)
 	{
 
-		if ($this->monmov !== $v) {
-			$this->monmov = $v;
-			$this->modifiedColumns[] = RemovtraPeer::MONMOV;
-		}
-
+    if ($this->monmov !== $v) {
+        $this->monmov = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RemovtraPeer::MONMOV;
+      }
+  
 	} 
 	
 	public function setStamov($v)
 	{
 
-		if ($this->stamov !== $v) {
-			$this->stamov = $v;
-			$this->modifiedColumns[] = RemovtraPeer::STAMOV;
-		}
-
+    if ($this->stamov !== $v) {
+        $this->stamov = $v;
+        $this->modifiedColumns[] = RemovtraPeer::STAMOV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RemovtraPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RemovtraPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reftra = $rs->getString($startcol + 0);
+      $this->reftra = $rs->getString($startcol + 0);
 
-			$this->codori = $rs->getString($startcol + 1);
+      $this->codori = $rs->getString($startcol + 1);
 
-			$this->coddes = $rs->getString($startcol + 2);
+      $this->coddes = $rs->getString($startcol + 2);
 
-			$this->monmov = $rs->getFloat($startcol + 3);
+      $this->monmov = $rs->getFloat($startcol + 3);
 
-			$this->stamov = $rs->getString($startcol + 4);
+      $this->stamov = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Removtra object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Removtra object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +244,7 @@ abstract class BaseRemovtra extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RemovtraPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RemovtraPeer::doUpdate($this, $con);

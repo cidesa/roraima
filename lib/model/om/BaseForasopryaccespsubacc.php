@@ -29,92 +29,118 @@ abstract class BaseForasopryaccespsubacc extends BaseObject  implements Persiste
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodaccesp()
-	{
+    return trim($this->codpro);
 
-		return $this->codaccesp; 		
-	}
-	
-	public function getCodsubacc()
-	{
+  }
+  
+  public function getCodaccesp()
+  {
 
-		return $this->codsubacc; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codaccesp);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodsubacc()
+  {
+
+    return trim($this->codsubacc);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = ForasopryaccespsubaccPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = ForasopryaccespsubaccPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodaccesp($v)
 	{
 
-		if ($this->codaccesp !== $v) {
-			$this->codaccesp = $v;
-			$this->modifiedColumns[] = ForasopryaccespsubaccPeer::CODACCESP;
-		}
-
+    if ($this->codaccesp !== $v) {
+        $this->codaccesp = $v;
+        $this->modifiedColumns[] = ForasopryaccespsubaccPeer::CODACCESP;
+      }
+  
 	} 
 	
 	public function setCodsubacc($v)
 	{
 
-		if ($this->codsubacc !== $v) {
-			$this->codsubacc = $v;
-			$this->modifiedColumns[] = ForasopryaccespsubaccPeer::CODSUBACC;
-		}
-
+    if ($this->codsubacc !== $v) {
+        $this->codsubacc = $v;
+        $this->modifiedColumns[] = ForasopryaccespsubaccPeer::CODSUBACC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForasopryaccespsubaccPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForasopryaccespsubaccPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codaccesp = $rs->getString($startcol + 1);
+      $this->codaccesp = $rs->getString($startcol + 1);
 
-			$this->codsubacc = $rs->getString($startcol + 2);
+      $this->codsubacc = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forasopryaccespsubacc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forasopryaccespsubacc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseForasopryaccespsubacc extends BaseObject  implements Persiste
 				if ($this->isNew()) {
 					$pk = ForasopryaccespsubaccPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForasopryaccespsubaccPeer::doUpdate($this, $con);

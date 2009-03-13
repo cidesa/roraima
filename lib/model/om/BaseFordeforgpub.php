@@ -53,203 +53,235 @@ abstract class BaseFordeforgpub extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodorg()
-	{
+  
+  public function getCodorg()
+  {
 
-		return $this->codorg; 		
-	}
-	
-	public function getNomorg()
-	{
+    return trim($this->codorg);
 
-		return $this->nomorg; 		
-	}
-	
-	public function getNumgac()
-	{
+  }
+  
+  public function getNomorg()
+  {
 
-		return $this->numgac; 		
-	}
-	
-	public function getUbiorg()
-	{
+    return trim($this->nomorg);
 
-		return $this->ubiorg; 		
-	}
-	
-	public function getActorg()
-	{
+  }
+  
+  public function getNumgac()
+  {
 
-		return $this->actorg; 		
-	}
-	
-	public function getTiporg()
-	{
+    return trim($this->numgac);
 
-		return $this->tiporg; 		
-	}
-	
-	public function getMonest()
-	{
+  }
+  
+  public function getUbiorg()
+  {
 
-		return number_format($this->monest,2,',','.');
-		
-	}
-	
-	public function getPreanu()
-	{
+    return trim($this->ubiorg);
 
-		return number_format($this->preanu,2,',','.');
-		
-	}
-	
-	public function getCapsoc()
-	{
+  }
+  
+  public function getActorg()
+  {
 
-		return number_format($this->capsoc,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->actorg);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTiporg()
+  {
+
+    return trim($this->tiporg);
+
+  }
+  
+  public function getMonest($val=false)
+  {
+
+    if($val) return number_format($this->monest,2,',','.');
+    else return $this->monest;
+
+  }
+  
+  public function getPreanu($val=false)
+  {
+
+    if($val) return number_format($this->preanu,2,',','.');
+    else return $this->preanu;
+
+  }
+  
+  public function getCapsoc($val=false)
+  {
+
+    if($val) return number_format($this->capsoc,2,',','.');
+    else return $this->capsoc;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodorg($v)
 	{
 
-		if ($this->codorg !== $v) {
-			$this->codorg = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::CODORG;
-		}
-
+    if ($this->codorg !== $v) {
+        $this->codorg = $v;
+        $this->modifiedColumns[] = FordeforgpubPeer::CODORG;
+      }
+  
 	} 
 	
 	public function setNomorg($v)
 	{
 
-		if ($this->nomorg !== $v) {
-			$this->nomorg = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::NOMORG;
-		}
-
+    if ($this->nomorg !== $v) {
+        $this->nomorg = $v;
+        $this->modifiedColumns[] = FordeforgpubPeer::NOMORG;
+      }
+  
 	} 
 	
 	public function setNumgac($v)
 	{
 
-		if ($this->numgac !== $v) {
-			$this->numgac = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::NUMGAC;
-		}
-
+    if ($this->numgac !== $v) {
+        $this->numgac = $v;
+        $this->modifiedColumns[] = FordeforgpubPeer::NUMGAC;
+      }
+  
 	} 
 	
 	public function setUbiorg($v)
 	{
 
-		if ($this->ubiorg !== $v) {
-			$this->ubiorg = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::UBIORG;
-		}
-
+    if ($this->ubiorg !== $v) {
+        $this->ubiorg = $v;
+        $this->modifiedColumns[] = FordeforgpubPeer::UBIORG;
+      }
+  
 	} 
 	
 	public function setActorg($v)
 	{
 
-		if ($this->actorg !== $v) {
-			$this->actorg = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::ACTORG;
-		}
-
+    if ($this->actorg !== $v) {
+        $this->actorg = $v;
+        $this->modifiedColumns[] = FordeforgpubPeer::ACTORG;
+      }
+  
 	} 
 	
 	public function setTiporg($v)
 	{
 
-		if ($this->tiporg !== $v) {
-			$this->tiporg = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::TIPORG;
-		}
-
+    if ($this->tiporg !== $v) {
+        $this->tiporg = $v;
+        $this->modifiedColumns[] = FordeforgpubPeer::TIPORG;
+      }
+  
 	} 
 	
 	public function setMonest($v)
 	{
 
-		if ($this->monest !== $v) {
-			$this->monest = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::MONEST;
-		}
-
+    if ($this->monest !== $v) {
+        $this->monest = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordeforgpubPeer::MONEST;
+      }
+  
 	} 
 	
 	public function setPreanu($v)
 	{
 
-		if ($this->preanu !== $v) {
-			$this->preanu = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::PREANU;
-		}
-
+    if ($this->preanu !== $v) {
+        $this->preanu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordeforgpubPeer::PREANU;
+      }
+  
 	} 
 	
 	public function setCapsoc($v)
 	{
 
-		if ($this->capsoc !== $v) {
-			$this->capsoc = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::CAPSOC;
-		}
-
+    if ($this->capsoc !== $v) {
+        $this->capsoc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordeforgpubPeer::CAPSOC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordeforgpubPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordeforgpubPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codorg = $rs->getString($startcol + 0);
+      $this->codorg = $rs->getString($startcol + 0);
 
-			$this->nomorg = $rs->getString($startcol + 1);
+      $this->nomorg = $rs->getString($startcol + 1);
 
-			$this->numgac = $rs->getString($startcol + 2);
+      $this->numgac = $rs->getString($startcol + 2);
 
-			$this->ubiorg = $rs->getString($startcol + 3);
+      $this->ubiorg = $rs->getString($startcol + 3);
 
-			$this->actorg = $rs->getString($startcol + 4);
+      $this->actorg = $rs->getString($startcol + 4);
 
-			$this->tiporg = $rs->getString($startcol + 5);
+      $this->tiporg = $rs->getString($startcol + 5);
 
-			$this->monest = $rs->getFloat($startcol + 6);
+      $this->monest = $rs->getFloat($startcol + 6);
 
-			$this->preanu = $rs->getFloat($startcol + 7);
+      $this->preanu = $rs->getFloat($startcol + 7);
 
-			$this->capsoc = $rs->getFloat($startcol + 8);
+      $this->capsoc = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordeforgpub object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordeforgpub object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -306,6 +338,7 @@ abstract class BaseFordeforgpub extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordeforgpubPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordeforgpubPeer::doUpdate($this, $con);

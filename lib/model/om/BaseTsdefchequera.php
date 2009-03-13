@@ -41,146 +41,175 @@ abstract class BaseTsdefchequera extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodchq()
-	{
+  
+  public function getCodchq()
+  {
 
-		return $this->codchq; 		
-	}
-	
-	public function getNumche()
-	{
+    return trim($this->codchq);
 
-		return $this->numche; 		
-	}
-	
-	public function getNumcue()
-	{
+  }
+  
+  public function getNumche()
+  {
 
-		return $this->numcue; 		
-	}
-	
-	public function getNumchedes()
-	{
+    return trim($this->numche);
 
-		return $this->numchedes; 		
-	}
-	
-	public function getNumchehas()
-	{
+  }
+  
+  public function getNumcue()
+  {
 
-		return $this->numchehas; 		
-	}
-	
-	public function getActiva()
-	{
+    return trim($this->numcue);
 
-		return $this->activa; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNumchedes()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->numchedes);
+
+  }
+  
+  public function getNumchehas()
+  {
+
+    return trim($this->numchehas);
+
+  }
+  
+  public function getActiva()
+  {
+
+    return trim($this->activa);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodchq($v)
 	{
 
-		if ($this->codchq !== $v) {
-			$this->codchq = $v;
-			$this->modifiedColumns[] = TsdefchequeraPeer::CODCHQ;
-		}
-
+    if ($this->codchq !== $v) {
+        $this->codchq = $v;
+        $this->modifiedColumns[] = TsdefchequeraPeer::CODCHQ;
+      }
+  
 	} 
 	
 	public function setNumche($v)
 	{
 
-		if ($this->numche !== $v) {
-			$this->numche = $v;
-			$this->modifiedColumns[] = TsdefchequeraPeer::NUMCHE;
-		}
-
+    if ($this->numche !== $v) {
+        $this->numche = $v;
+        $this->modifiedColumns[] = TsdefchequeraPeer::NUMCHE;
+      }
+  
 	} 
 	
 	public function setNumcue($v)
 	{
 
-		if ($this->numcue !== $v) {
-			$this->numcue = $v;
-			$this->modifiedColumns[] = TsdefchequeraPeer::NUMCUE;
-		}
-
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = TsdefchequeraPeer::NUMCUE;
+      }
+  
 	} 
 	
 	public function setNumchedes($v)
 	{
 
-		if ($this->numchedes !== $v) {
-			$this->numchedes = $v;
-			$this->modifiedColumns[] = TsdefchequeraPeer::NUMCHEDES;
-		}
-
+    if ($this->numchedes !== $v) {
+        $this->numchedes = $v;
+        $this->modifiedColumns[] = TsdefchequeraPeer::NUMCHEDES;
+      }
+  
 	} 
 	
 	public function setNumchehas($v)
 	{
 
-		if ($this->numchehas !== $v) {
-			$this->numchehas = $v;
-			$this->modifiedColumns[] = TsdefchequeraPeer::NUMCHEHAS;
-		}
-
+    if ($this->numchehas !== $v) {
+        $this->numchehas = $v;
+        $this->modifiedColumns[] = TsdefchequeraPeer::NUMCHEHAS;
+      }
+  
 	} 
 	
 	public function setActiva($v)
 	{
 
-		if ($this->activa !== $v) {
-			$this->activa = $v;
-			$this->modifiedColumns[] = TsdefchequeraPeer::ACTIVA;
-		}
-
+    if ($this->activa !== $v) {
+        $this->activa = $v;
+        $this->modifiedColumns[] = TsdefchequeraPeer::ACTIVA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsdefchequeraPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsdefchequeraPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codchq = $rs->getString($startcol + 0);
+      $this->codchq = $rs->getString($startcol + 0);
 
-			$this->numche = $rs->getString($startcol + 1);
+      $this->numche = $rs->getString($startcol + 1);
 
-			$this->numcue = $rs->getString($startcol + 2);
+      $this->numcue = $rs->getString($startcol + 2);
 
-			$this->numchedes = $rs->getString($startcol + 3);
+      $this->numchedes = $rs->getString($startcol + 3);
 
-			$this->numchehas = $rs->getString($startcol + 4);
+      $this->numchehas = $rs->getString($startcol + 4);
 
-			$this->activa = $rs->getString($startcol + 5);
+      $this->activa = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsdefchequera object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsdefchequera object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseTsdefchequera extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsdefchequeraPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsdefchequeraPeer::doUpdate($this, $con);

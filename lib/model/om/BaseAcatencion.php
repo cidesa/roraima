@@ -61,328 +61,358 @@ abstract class BaseAcatencion extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getDocate()
-	{
+  
+  public function getDocate()
+  {
 
-		return $this->docate; 		
-	}
-	
-	public function getLoguse()
-	{
+    return trim($this->docate);
 
-		return $this->loguse; 		
-	}
-	
-	public function getEstado()
-	{
+  }
+  
+  public function getLoguse()
+  {
 
-		return $this->estado; 		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
+    return trim($this->loguse);
 
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getEstado()
+  {
 
-	
-	public function getHorrec($format = 'Y-m-d')
-	{
+    return trim($this->estado);
 
-		if ($this->horrec === null || $this->horrec === '') {
-			return null;
-		} elseif (!is_int($this->horrec)) {
-						$ts = strtotime($this->horrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [horrec] as date/time value: " . var_export($this->horrec, true));
-			}
-		} else {
-			$ts = $this->horrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
 
-	
-	public function getFecate($format = 'Y-m-d')
-	{
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecate === null || $this->fecate === '') {
-			return null;
-		} elseif (!is_int($this->fecate)) {
-						$ts = strtotime($this->fecate);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecate] as date/time value: " . var_export($this->fecate, true));
-			}
-		} else {
-			$ts = $this->fecate;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getHorrec($format = 'Y-m-d')
+  {
 
-	
-	public function getHorate($format = 'Y-m-d')
-	{
+    if ($this->horrec === null || $this->horrec === '') {
+      return null;
+    } elseif (!is_int($this->horrec)) {
+            $ts = adodb_strtotime($this->horrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [horrec] as date/time value: " . var_export($this->horrec, true));
+      }
+    } else {
+      $ts = $this->horrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->horate === null || $this->horate === '') {
-			return null;
-		} elseif (!is_int($this->horate)) {
-						$ts = strtotime($this->horate);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [horate] as date/time value: " . var_export($this->horate, true));
-			}
-		} else {
-			$ts = $this->horate;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecate($format = 'Y-m-d')
+  {
 
-	
-	public function getNumuni()
-	{
+    if ($this->fecate === null || $this->fecate === '') {
+      return null;
+    } elseif (!is_int($this->fecate)) {
+            $ts = adodb_strtotime($this->fecate);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecate] as date/time value: " . var_export($this->fecate, true));
+      }
+    } else {
+      $ts = $this->fecate;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->numuni; 		
-	}
-	
-	public function getNumuniori()
-	{
+  
+  public function getHorate($format = 'Y-m-d')
+  {
 
-		return $this->numuniori; 		
-	}
-	
-	public function getObsdoc()
-	{
+    if ($this->horate === null || $this->horate === '') {
+      return null;
+    } elseif (!is_int($this->horate)) {
+            $ts = adodb_strtotime($this->horate);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [horate] as date/time value: " . var_export($this->horate, true));
+      }
+    } else {
+      $ts = $this->horate;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->obsdoc; 		
-	}
-	
-	public function getStaate()
-	{
+  
+  public function getNumuni()
+  {
 
-		return $this->staate; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->numuni);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumuniori()
+  {
+
+    return trim($this->numuniori);
+
+  }
+  
+  public function getObsdoc()
+  {
+
+    return trim($this->obsdoc);
+
+  }
+  
+  public function getStaate()
+  {
+
+    return trim($this->staate);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDocate($v)
 	{
 
-		if ($this->docate !== $v) {
-			$this->docate = $v;
-			$this->modifiedColumns[] = AcatencionPeer::DOCATE;
-		}
-
+    if ($this->docate !== $v) {
+        $this->docate = $v;
+        $this->modifiedColumns[] = AcatencionPeer::DOCATE;
+      }
+  
 	} 
 	
 	public function setLoguse($v)
 	{
 
-		if ($this->loguse !== $v) {
-			$this->loguse = $v;
-			$this->modifiedColumns[] = AcatencionPeer::LOGUSE;
-		}
-
+    if ($this->loguse !== $v) {
+        $this->loguse = $v;
+        $this->modifiedColumns[] = AcatencionPeer::LOGUSE;
+      }
+  
 	} 
 	
 	public function setEstado($v)
 	{
 
-		if ($this->estado !== $v) {
-			$this->estado = $v;
-			$this->modifiedColumns[] = AcatencionPeer::ESTADO;
-		}
-
+    if ($this->estado !== $v) {
+        $this->estado = $v;
+        $this->modifiedColumns[] = AcatencionPeer::ESTADO;
+      }
+  
 	} 
 	
 	public function setFecrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = AcatencionPeer::FECREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = AcatencionPeer::FECREC;
+    }
 
 	} 
 	
 	public function setHorrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [horrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->horrec !== $ts) {
-			$this->horrec = $ts;
-			$this->modifiedColumns[] = AcatencionPeer::HORREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [horrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->horrec !== $ts) {
+      $this->horrec = $ts;
+      $this->modifiedColumns[] = AcatencionPeer::HORREC;
+    }
 
 	} 
 	
 	public function setFecate($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecate] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecate !== $ts) {
-			$this->fecate = $ts;
-			$this->modifiedColumns[] = AcatencionPeer::FECATE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecate] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecate !== $ts) {
+      $this->fecate = $ts;
+      $this->modifiedColumns[] = AcatencionPeer::FECATE;
+    }
 
 	} 
 	
 	public function setHorate($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [horate] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->horate !== $ts) {
-			$this->horate = $ts;
-			$this->modifiedColumns[] = AcatencionPeer::HORATE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [horate] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->horate !== $ts) {
+      $this->horate = $ts;
+      $this->modifiedColumns[] = AcatencionPeer::HORATE;
+    }
 
 	} 
 	
 	public function setNumuni($v)
 	{
 
-		if ($this->numuni !== $v) {
-			$this->numuni = $v;
-			$this->modifiedColumns[] = AcatencionPeer::NUMUNI;
-		}
-
+    if ($this->numuni !== $v) {
+        $this->numuni = $v;
+        $this->modifiedColumns[] = AcatencionPeer::NUMUNI;
+      }
+  
 	} 
 	
 	public function setNumuniori($v)
 	{
 
-		if ($this->numuniori !== $v) {
-			$this->numuniori = $v;
-			$this->modifiedColumns[] = AcatencionPeer::NUMUNIORI;
-		}
-
+    if ($this->numuniori !== $v) {
+        $this->numuniori = $v;
+        $this->modifiedColumns[] = AcatencionPeer::NUMUNIORI;
+      }
+  
 	} 
 	
 	public function setObsdoc($v)
 	{
 
-		if ($this->obsdoc !== $v) {
-			$this->obsdoc = $v;
-			$this->modifiedColumns[] = AcatencionPeer::OBSDOC;
-		}
-
+    if ($this->obsdoc !== $v) {
+        $this->obsdoc = $v;
+        $this->modifiedColumns[] = AcatencionPeer::OBSDOC;
+      }
+  
 	} 
 	
 	public function setStaate($v)
 	{
 
-		if ($this->staate !== $v) {
-			$this->staate = $v;
-			$this->modifiedColumns[] = AcatencionPeer::STAATE;
-		}
-
+    if ($this->staate !== $v) {
+        $this->staate = $v;
+        $this->modifiedColumns[] = AcatencionPeer::STAATE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = AcatencionPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = AcatencionPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->docate = $rs->getString($startcol + 0);
+      $this->docate = $rs->getString($startcol + 0);
 
-			$this->loguse = $rs->getString($startcol + 1);
+      $this->loguse = $rs->getString($startcol + 1);
 
-			$this->estado = $rs->getString($startcol + 2);
+      $this->estado = $rs->getString($startcol + 2);
 
-			$this->fecrec = $rs->getDate($startcol + 3, null);
+      $this->fecrec = $rs->getDate($startcol + 3, null);
 
-			$this->horrec = $rs->getDate($startcol + 4, null);
+      $this->horrec = $rs->getDate($startcol + 4, null);
 
-			$this->fecate = $rs->getDate($startcol + 5, null);
+      $this->fecate = $rs->getDate($startcol + 5, null);
 
-			$this->horate = $rs->getDate($startcol + 6, null);
+      $this->horate = $rs->getDate($startcol + 6, null);
 
-			$this->numuni = $rs->getString($startcol + 7);
+      $this->numuni = $rs->getString($startcol + 7);
 
-			$this->numuniori = $rs->getString($startcol + 8);
+      $this->numuniori = $rs->getString($startcol + 8);
 
-			$this->obsdoc = $rs->getString($startcol + 9);
+      $this->obsdoc = $rs->getString($startcol + 9);
 
-			$this->staate = $rs->getString($startcol + 10);
+      $this->staate = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Acatencion object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Acatencion object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

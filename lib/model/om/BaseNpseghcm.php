@@ -37,131 +37,159 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getTippar()
-	{
+    return trim($this->codcon);
 
-		return $this->tippar; 		
-	}
-	
-	public function getEdaddes()
-	{
+  }
+  
+  public function getTippar()
+  {
 
-		return number_format($this->edaddes,2,',','.');
-		
-	}
-	
-	public function getEdadhas()
-	{
+    return trim($this->tippar);
 
-		return number_format($this->edadhas,2,',','.');
-		
-	}
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getEdaddes($val=false)
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->edaddes,2,',','.');
+    else return $this->edaddes;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getEdadhas($val=false)
+  {
+
+    if($val) return number_format($this->edadhas,2,',','.');
+    else return $this->edadhas;
+
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpseghcmPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpseghcmPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setTippar($v)
 	{
 
-		if ($this->tippar !== $v) {
-			$this->tippar = $v;
-			$this->modifiedColumns[] = NpseghcmPeer::TIPPAR;
-		}
-
+    if ($this->tippar !== $v) {
+        $this->tippar = $v;
+        $this->modifiedColumns[] = NpseghcmPeer::TIPPAR;
+      }
+  
 	} 
 	
 	public function setEdaddes($v)
 	{
 
-		if ($this->edaddes !== $v) {
-			$this->edaddes = $v;
-			$this->modifiedColumns[] = NpseghcmPeer::EDADDES;
-		}
-
+    if ($this->edaddes !== $v) {
+        $this->edaddes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpseghcmPeer::EDADDES;
+      }
+  
 	} 
 	
 	public function setEdadhas($v)
 	{
 
-		if ($this->edadhas !== $v) {
-			$this->edadhas = $v;
-			$this->modifiedColumns[] = NpseghcmPeer::EDADHAS;
-		}
-
+    if ($this->edadhas !== $v) {
+        $this->edadhas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpseghcmPeer::EDADHAS;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NpseghcmPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpseghcmPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpseghcmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpseghcmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->tippar = $rs->getString($startcol + 1);
+      $this->tippar = $rs->getString($startcol + 1);
 
-			$this->edaddes = $rs->getFloat($startcol + 2);
+      $this->edaddes = $rs->getFloat($startcol + 2);
 
-			$this->edadhas = $rs->getFloat($startcol + 3);
+      $this->edadhas = $rs->getFloat($startcol + 3);
 
-			$this->monto = $rs->getFloat($startcol + 4);
+      $this->monto = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npseghcm object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npseghcm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -218,6 +246,7 @@ abstract class BaseNpseghcm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpseghcmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpseghcmPeer::doUpdate($this, $con);

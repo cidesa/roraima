@@ -280,6 +280,7 @@ abstract class BaseFordefnivPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefnivPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -25,75 +25,100 @@ abstract class BaseTslibcom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumlin()
-	{
+  
+  public function getNumlin($val=false)
+  {
 
-		return number_format($this->numlin,2,',','.');
-		
-	}
-	
-	public function getDeslin()
-	{
+    if($val) return number_format($this->numlin,2,',','.');
+    else return $this->numlin;
 
-		return $this->deslin; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDeslin()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->deslin);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumlin($v)
 	{
 
-		if ($this->numlin !== $v) {
-			$this->numlin = $v;
-			$this->modifiedColumns[] = TslibcomPeer::NUMLIN;
-		}
-
+    if ($this->numlin !== $v) {
+        $this->numlin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TslibcomPeer::NUMLIN;
+      }
+  
 	} 
 	
 	public function setDeslin($v)
 	{
 
-		if ($this->deslin !== $v) {
-			$this->deslin = $v;
-			$this->modifiedColumns[] = TslibcomPeer::DESLIN;
-		}
-
+    if ($this->deslin !== $v) {
+        $this->deslin = $v;
+        $this->modifiedColumns[] = TslibcomPeer::DESLIN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TslibcomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TslibcomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numlin = $rs->getFloat($startcol + 0);
+      $this->numlin = $rs->getFloat($startcol + 0);
 
-			$this->deslin = $rs->getString($startcol + 1);
+      $this->deslin = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tslibcom object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tslibcom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -150,6 +175,7 @@ abstract class BaseTslibcom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TslibcomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TslibcomPeer::doUpdate($this, $con);

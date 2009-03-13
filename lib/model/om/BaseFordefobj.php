@@ -61,236 +61,270 @@ abstract class BaseFordefobj extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodobj()
-	{
+  
+  public function getCodobj()
+  {
 
-		return $this->codobj; 		
-	}
-	
-	public function getDesobj()
-	{
+    return trim($this->codobj);
 
-		return $this->desobj; 		
-	}
-	
-	public function getAreest()
-	{
+  }
+  
+  public function getDesobj()
+  {
 
-		return $this->areest; 		
-	}
-	
-	public function getDirest()
-	{
+    return trim($this->desobj);
 
-		return $this->direst; 		
-	}
-	
-	public function getObjein()
-	{
+  }
+  
+  public function getAreest()
+  {
 
-		return $this->objein; 		
-	}
-	
-	public function getObjepr()
-	{
+    return trim($this->areest);
 
-		return $this->objepr; 		
-	}
-	
-	public function getEnupro()
-	{
+  }
+  
+  public function getDirest()
+  {
 
-		return $this->enupro; 		
-	}
-	
-	public function getIndact()
-	{
+    return trim($this->direst);
 
-		return $this->indact; 		
-	}
-	
-	public function getIndobj()
-	{
+  }
+  
+  public function getObjein()
+  {
 
-		return $this->indobj; 		
-	}
-	
-	public function getMetpro()
-	{
+    return trim($this->objein);
 
-		return $this->metpro; 		
-	}
-	
-	public function getObjnet()
-	{
+  }
+  
+  public function getObjepr()
+  {
 
-		return $this->objnet; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->objepr);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getEnupro()
+  {
+
+    return trim($this->enupro);
+
+  }
+  
+  public function getIndact()
+  {
+
+    return trim($this->indact);
+
+  }
+  
+  public function getIndobj()
+  {
+
+    return trim($this->indobj);
+
+  }
+  
+  public function getMetpro()
+  {
+
+    return trim($this->metpro);
+
+  }
+  
+  public function getObjnet()
+  {
+
+    return trim($this->objnet);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodobj($v)
 	{
 
-		if ($this->codobj !== $v) {
-			$this->codobj = $v;
-			$this->modifiedColumns[] = FordefobjPeer::CODOBJ;
-		}
-
+    if ($this->codobj !== $v) {
+        $this->codobj = $v;
+        $this->modifiedColumns[] = FordefobjPeer::CODOBJ;
+      }
+  
 	} 
 	
 	public function setDesobj($v)
 	{
 
-		if ($this->desobj !== $v) {
-			$this->desobj = $v;
-			$this->modifiedColumns[] = FordefobjPeer::DESOBJ;
-		}
-
+    if ($this->desobj !== $v) {
+        $this->desobj = $v;
+        $this->modifiedColumns[] = FordefobjPeer::DESOBJ;
+      }
+  
 	} 
 	
 	public function setAreest($v)
 	{
 
-		if ($this->areest !== $v) {
-			$this->areest = $v;
-			$this->modifiedColumns[] = FordefobjPeer::AREEST;
-		}
-
+    if ($this->areest !== $v) {
+        $this->areest = $v;
+        $this->modifiedColumns[] = FordefobjPeer::AREEST;
+      }
+  
 	} 
 	
 	public function setDirest($v)
 	{
 
-		if ($this->direst !== $v) {
-			$this->direst = $v;
-			$this->modifiedColumns[] = FordefobjPeer::DIREST;
-		}
-
+    if ($this->direst !== $v) {
+        $this->direst = $v;
+        $this->modifiedColumns[] = FordefobjPeer::DIREST;
+      }
+  
 	} 
 	
 	public function setObjein($v)
 	{
 
-		if ($this->objein !== $v) {
-			$this->objein = $v;
-			$this->modifiedColumns[] = FordefobjPeer::OBJEIN;
-		}
-
+    if ($this->objein !== $v) {
+        $this->objein = $v;
+        $this->modifiedColumns[] = FordefobjPeer::OBJEIN;
+      }
+  
 	} 
 	
 	public function setObjepr($v)
 	{
 
-		if ($this->objepr !== $v) {
-			$this->objepr = $v;
-			$this->modifiedColumns[] = FordefobjPeer::OBJEPR;
-		}
-
+    if ($this->objepr !== $v) {
+        $this->objepr = $v;
+        $this->modifiedColumns[] = FordefobjPeer::OBJEPR;
+      }
+  
 	} 
 	
 	public function setEnupro($v)
 	{
 
-		if ($this->enupro !== $v) {
-			$this->enupro = $v;
-			$this->modifiedColumns[] = FordefobjPeer::ENUPRO;
-		}
-
+    if ($this->enupro !== $v) {
+        $this->enupro = $v;
+        $this->modifiedColumns[] = FordefobjPeer::ENUPRO;
+      }
+  
 	} 
 	
 	public function setIndact($v)
 	{
 
-		if ($this->indact !== $v) {
-			$this->indact = $v;
-			$this->modifiedColumns[] = FordefobjPeer::INDACT;
-		}
-
+    if ($this->indact !== $v) {
+        $this->indact = $v;
+        $this->modifiedColumns[] = FordefobjPeer::INDACT;
+      }
+  
 	} 
 	
 	public function setIndobj($v)
 	{
 
-		if ($this->indobj !== $v) {
-			$this->indobj = $v;
-			$this->modifiedColumns[] = FordefobjPeer::INDOBJ;
-		}
-
+    if ($this->indobj !== $v) {
+        $this->indobj = $v;
+        $this->modifiedColumns[] = FordefobjPeer::INDOBJ;
+      }
+  
 	} 
 	
 	public function setMetpro($v)
 	{
 
-		if ($this->metpro !== $v) {
-			$this->metpro = $v;
-			$this->modifiedColumns[] = FordefobjPeer::METPRO;
-		}
-
+    if ($this->metpro !== $v) {
+        $this->metpro = $v;
+        $this->modifiedColumns[] = FordefobjPeer::METPRO;
+      }
+  
 	} 
 	
 	public function setObjnet($v)
 	{
 
-		if ($this->objnet !== $v) {
-			$this->objnet = $v;
-			$this->modifiedColumns[] = FordefobjPeer::OBJNET;
-		}
-
+    if ($this->objnet !== $v) {
+        $this->objnet = $v;
+        $this->modifiedColumns[] = FordefobjPeer::OBJNET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefobjPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefobjPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codobj = $rs->getString($startcol + 0);
+      $this->codobj = $rs->getString($startcol + 0);
 
-			$this->desobj = $rs->getString($startcol + 1);
+      $this->desobj = $rs->getString($startcol + 1);
 
-			$this->areest = $rs->getString($startcol + 2);
+      $this->areest = $rs->getString($startcol + 2);
 
-			$this->direst = $rs->getString($startcol + 3);
+      $this->direst = $rs->getString($startcol + 3);
 
-			$this->objein = $rs->getString($startcol + 4);
+      $this->objein = $rs->getString($startcol + 4);
 
-			$this->objepr = $rs->getString($startcol + 5);
+      $this->objepr = $rs->getString($startcol + 5);
 
-			$this->enupro = $rs->getString($startcol + 6);
+      $this->enupro = $rs->getString($startcol + 6);
 
-			$this->indact = $rs->getString($startcol + 7);
+      $this->indact = $rs->getString($startcol + 7);
 
-			$this->indobj = $rs->getString($startcol + 8);
+      $this->indobj = $rs->getString($startcol + 8);
 
-			$this->metpro = $rs->getString($startcol + 9);
+      $this->metpro = $rs->getString($startcol + 9);
 
-			$this->objnet = $rs->getString($startcol + 10);
+      $this->objnet = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefobj object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefobj object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -347,6 +381,7 @@ abstract class BaseFordefobj extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefobjPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefobjPeer::doUpdate($this, $con);

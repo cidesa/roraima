@@ -29,92 +29,118 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmotfal()
-	{
+  
+  public function getCodmotfal()
+  {
 
-		return $this->codmotfal; 		
-	}
-	
-	public function getDesmotfal()
-	{
+    return trim($this->codmotfal);
 
-		return $this->desmotfal; 		
-	}
-	
-	public function getCausa()
-	{
+  }
+  
+  public function getDesmotfal()
+  {
 
-		return $this->causa; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desmotfal);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCausa()
+  {
+
+    return trim($this->causa);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmotfal($v)
 	{
 
-		if ($this->codmotfal !== $v) {
-			$this->codmotfal = $v;
-			$this->modifiedColumns[] = NpmotfalPeer::CODMOTFAL;
-		}
-
+    if ($this->codmotfal !== $v) {
+        $this->codmotfal = $v;
+        $this->modifiedColumns[] = NpmotfalPeer::CODMOTFAL;
+      }
+  
 	} 
 	
 	public function setDesmotfal($v)
 	{
 
-		if ($this->desmotfal !== $v) {
-			$this->desmotfal = $v;
-			$this->modifiedColumns[] = NpmotfalPeer::DESMOTFAL;
-		}
-
+    if ($this->desmotfal !== $v) {
+        $this->desmotfal = $v;
+        $this->modifiedColumns[] = NpmotfalPeer::DESMOTFAL;
+      }
+  
 	} 
 	
 	public function setCausa($v)
 	{
 
-		if ($this->causa !== $v) {
-			$this->causa = $v;
-			$this->modifiedColumns[] = NpmotfalPeer::CAUSA;
-		}
-
+    if ($this->causa !== $v) {
+        $this->causa = $v;
+        $this->modifiedColumns[] = NpmotfalPeer::CAUSA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpmotfalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpmotfalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmotfal = $rs->getString($startcol + 0);
+      $this->codmotfal = $rs->getString($startcol + 0);
 
-			$this->desmotfal = $rs->getString($startcol + 1);
+      $this->desmotfal = $rs->getString($startcol + 1);
 
-			$this->causa = $rs->getString($startcol + 2);
+      $this->causa = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npmotfal object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npmotfal object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseNpmotfal extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpmotfalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpmotfalPeer::doUpdate($this, $con);

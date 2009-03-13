@@ -7,12 +7,12 @@ generator:
       codemp: { name: C&oacute;digo del Trabajador}
       nomemp: { name: Nombre}
       fecing: { name: Fecha de Ingreso, params: date_format='dd/MM/yyyy'}
-      fecvac: { name: Fecha de la Solicitud, params: date_format='dd/MM/yyyy'} 
-      fecdes: { name: Fecha de Salida, params: date_format='dd/MM/yyyy'} 
-      fechas: { name: Fecha de Incorporaci&oacute;n, params: date_format='dd/MM/yyyy'}   
-      diasdisfrutar: { name: D&iacute;as  de Vacaciones} 
-      observa: { name: Observaciones}       
-        
+      fecvac: { name: Fecha de la Solicitud, params: date_format='dd/MM/yyyy'}
+      fecdes: { name: Fecha de Salida, params: date_format='dd/MM/yyyy'}
+      fechas: { name: Fecha de Incorporaci&oacute;n, params: date_format='dd/MM/yyyy'}
+      diasdisfrutar: { name: D&iacute;as  de Vacaciones}
+      observa: { name: Observaciones}
+
     list:
       title:          Solicitudes de Vacaciones
       filters:        [codemp, fecvac]
@@ -24,3 +24,8 @@ generator:
     edit:
       title:          Registro de Solicitudes de Vacaciones
       display:        [=codemp, nomemp, fecing, fecvac, fecdes, fechas, diasdisfrutar, observa]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

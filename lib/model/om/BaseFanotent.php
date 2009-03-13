@@ -29,10 +29,6 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 
 
 	
-	protected $codalm;
-
-
-	
 	protected $desnot;
 
 
@@ -89,432 +85,451 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNronot()
-	{
+  
+  public function getNronot()
+  {
 
-		return $this->nronot; 		
-	}
-	
-	public function getFecnot($format = 'Y-m-d')
-	{
+    return trim($this->nronot);
 
-		if ($this->fecnot === null || $this->fecnot === '') {
-			return null;
-		} elseif (!is_int($this->fecnot)) {
-						$ts = strtotime($this->fecnot);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnot] as date/time value: " . var_export($this->fecnot, true));
-			}
-		} else {
-			$ts = $this->fecnot;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecnot($format = 'Y-m-d')
+  {
 
-	
-	public function getCodcli()
-	{
+    if ($this->fecnot === null || $this->fecnot === '') {
+      return null;
+    } elseif (!is_int($this->fecnot)) {
+            $ts = adodb_strtotime($this->fecnot);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnot] as date/time value: " . var_export($this->fecnot, true));
+      }
+    } else {
+      $ts = $this->fecnot;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codcli; 		
-	}
-	
-	public function getTipref()
-	{
+  
+  public function getCodcli()
+  {
 
-		return $this->tipref; 		
-	}
-	
-	public function getCodref()
-	{
+    return trim($this->codcli);
 
-		return $this->codref; 		
-	}
-	
-	public function getCodalm()
-	{
+  }
+  
+  public function getTipref()
+  {
 
-		return $this->codalm; 		
-	}
-	
-	public function getDesnot()
-	{
+    return trim($this->tipref);
 
-		return $this->desnot; 		
-	}
-	
-	public function getMonnot()
-	{
+  }
+  
+  public function getCodref()
+  {
 
-		return number_format($this->monnot,2,',','.');
-		
-	}
-	
-	public function getObsnot()
-	{
+    return trim($this->codref);
 
-		return $this->obsnot; 		
-	}
-	
-	public function getTipnot()
-	{
+  }
+  
+  public function getDesnot()
+  {
 
-		return $this->tipnot; 		
-	}
-	
-	public function getReapor()
-	{
+    return trim($this->desnot);
 
-		return $this->reapor; 		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getMonnot($val=false)
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getRifent()
-	{
+    if($val) return number_format($this->monnot,2,',','.');
+    else return $this->monnot;
 
-		return $this->rifent; 		
-	}
-	
-	public function getNoment()
-	{
+  }
+  
+  public function getObsnot()
+  {
 
-		return $this->noment; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    return trim($this->obsnot);
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getTipnot()
+  {
 
-	
-	public function getAutori()
-	{
+    return trim($this->tipnot);
 
-		return $this->autori; 		
-	}
-	
-	public function getFecaut($format = 'Y-m-d')
-	{
+  }
+  
+  public function getReapor()
+  {
 
-		if ($this->fecaut === null || $this->fecaut === '') {
-			return null;
-		} elseif (!is_int($this->fecaut)) {
-						$ts = strtotime($this->fecaut);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecaut] as date/time value: " . var_export($this->fecaut, true));
-			}
-		} else {
-			$ts = $this->fecaut;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->reapor);
 
-	
-	public function getAutpor()
-	{
+  }
+  
+  public function getStatus()
+  {
 
-		return $this->autpor; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->status);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getRifent()
+  {
+
+    return trim($this->rifent);
+
+  }
+  
+  public function getNoment()
+  {
+
+    return trim($this->noment);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getAutori()
+  {
+
+    return trim($this->autori);
+
+  }
+  
+  public function getFecaut($format = 'Y-m-d')
+  {
+
+    if ($this->fecaut === null || $this->fecaut === '') {
+      return null;
+    } elseif (!is_int($this->fecaut)) {
+            $ts = adodb_strtotime($this->fecaut);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecaut] as date/time value: " . var_export($this->fecaut, true));
+      }
+    } else {
+      $ts = $this->fecaut;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getAutpor()
+  {
+
+    return trim($this->autpor);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNronot($v)
 	{
 
-		if ($this->nronot !== $v) {
-			$this->nronot = $v;
-			$this->modifiedColumns[] = FanotentPeer::NRONOT;
-		}
-
+    if ($this->nronot !== $v) {
+        $this->nronot = $v;
+        $this->modifiedColumns[] = FanotentPeer::NRONOT;
+      }
+  
 	} 
 	
 	public function setFecnot($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnot] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnot !== $ts) {
-			$this->fecnot = $ts;
-			$this->modifiedColumns[] = FanotentPeer::FECNOT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnot] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnot !== $ts) {
+      $this->fecnot = $ts;
+      $this->modifiedColumns[] = FanotentPeer::FECNOT;
+    }
 
 	} 
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = FanotentPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = FanotentPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setTipref($v)
 	{
 
-		if ($this->tipref !== $v) {
-			$this->tipref = $v;
-			$this->modifiedColumns[] = FanotentPeer::TIPREF;
-		}
-
+    if ($this->tipref !== $v) {
+        $this->tipref = $v;
+        $this->modifiedColumns[] = FanotentPeer::TIPREF;
+      }
+  
 	} 
 	
 	public function setCodref($v)
 	{
 
-		if ($this->codref !== $v) {
-			$this->codref = $v;
-			$this->modifiedColumns[] = FanotentPeer::CODREF;
-		}
-
-	} 
-	
-	public function setCodalm($v)
-	{
-
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = FanotentPeer::CODALM;
-		}
-
+    if ($this->codref !== $v) {
+        $this->codref = $v;
+        $this->modifiedColumns[] = FanotentPeer::CODREF;
+      }
+  
 	} 
 	
 	public function setDesnot($v)
 	{
 
-		if ($this->desnot !== $v) {
-			$this->desnot = $v;
-			$this->modifiedColumns[] = FanotentPeer::DESNOT;
-		}
-
+    if ($this->desnot !== $v) {
+        $this->desnot = $v;
+        $this->modifiedColumns[] = FanotentPeer::DESNOT;
+      }
+  
 	} 
 	
 	public function setMonnot($v)
 	{
 
-		if ($this->monnot !== $v) {
-			$this->monnot = $v;
-			$this->modifiedColumns[] = FanotentPeer::MONNOT;
-		}
-
+    if ($this->monnot !== $v) {
+        $this->monnot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FanotentPeer::MONNOT;
+      }
+  
 	} 
 	
 	public function setObsnot($v)
 	{
 
-		if ($this->obsnot !== $v) {
-			$this->obsnot = $v;
-			$this->modifiedColumns[] = FanotentPeer::OBSNOT;
-		}
-
+    if ($this->obsnot !== $v) {
+        $this->obsnot = $v;
+        $this->modifiedColumns[] = FanotentPeer::OBSNOT;
+      }
+  
 	} 
 	
 	public function setTipnot($v)
 	{
 
-		if ($this->tipnot !== $v) {
-			$this->tipnot = $v;
-			$this->modifiedColumns[] = FanotentPeer::TIPNOT;
-		}
-
+    if ($this->tipnot !== $v) {
+        $this->tipnot = $v;
+        $this->modifiedColumns[] = FanotentPeer::TIPNOT;
+      }
+  
 	} 
 	
 	public function setReapor($v)
 	{
 
-		if ($this->reapor !== $v) {
-			$this->reapor = $v;
-			$this->modifiedColumns[] = FanotentPeer::REAPOR;
-		}
-
+    if ($this->reapor !== $v) {
+        $this->reapor = $v;
+        $this->modifiedColumns[] = FanotentPeer::REAPOR;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = FanotentPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = FanotentPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setRifent($v)
 	{
 
-		if ($this->rifent !== $v) {
-			$this->rifent = $v;
-			$this->modifiedColumns[] = FanotentPeer::RIFENT;
-		}
-
+    if ($this->rifent !== $v) {
+        $this->rifent = $v;
+        $this->modifiedColumns[] = FanotentPeer::RIFENT;
+      }
+  
 	} 
 	
 	public function setNoment($v)
 	{
 
-		if ($this->noment !== $v) {
-			$this->noment = $v;
-			$this->modifiedColumns[] = FanotentPeer::NOMENT;
-		}
-
+    if ($this->noment !== $v) {
+        $this->noment = $v;
+        $this->modifiedColumns[] = FanotentPeer::NOMENT;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = FanotentPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = FanotentPeer::FECANU;
+    }
 
 	} 
 	
 	public function setAutori($v)
 	{
 
-		if ($this->autori !== $v) {
-			$this->autori = $v;
-			$this->modifiedColumns[] = FanotentPeer::AUTORI;
-		}
-
+    if ($this->autori !== $v) {
+        $this->autori = $v;
+        $this->modifiedColumns[] = FanotentPeer::AUTORI;
+      }
+  
 	} 
 	
 	public function setFecaut($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecaut] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecaut !== $ts) {
-			$this->fecaut = $ts;
-			$this->modifiedColumns[] = FanotentPeer::FECAUT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecaut] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecaut !== $ts) {
+      $this->fecaut = $ts;
+      $this->modifiedColumns[] = FanotentPeer::FECAUT;
+    }
 
 	} 
 	
 	public function setAutpor($v)
 	{
 
-		if ($this->autpor !== $v) {
-			$this->autpor = $v;
-			$this->modifiedColumns[] = FanotentPeer::AUTPOR;
-		}
-
+    if ($this->autpor !== $v) {
+        $this->autpor = $v;
+        $this->modifiedColumns[] = FanotentPeer::AUTPOR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FanotentPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FanotentPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nronot = $rs->getString($startcol + 0);
+      $this->nronot = $rs->getString($startcol + 0);
 
-			$this->fecnot = $rs->getDate($startcol + 1, null);
+      $this->fecnot = $rs->getDate($startcol + 1, null);
 
-			$this->codcli = $rs->getString($startcol + 2);
+      $this->codcli = $rs->getString($startcol + 2);
 
-			$this->tipref = $rs->getString($startcol + 3);
+      $this->tipref = $rs->getString($startcol + 3);
 
-			$this->codref = $rs->getString($startcol + 4);
+      $this->codref = $rs->getString($startcol + 4);
 
-			$this->codalm = $rs->getString($startcol + 5);
+      $this->desnot = $rs->getString($startcol + 5);
 
-			$this->desnot = $rs->getString($startcol + 6);
+      $this->monnot = $rs->getFloat($startcol + 6);
 
-			$this->monnot = $rs->getFloat($startcol + 7);
+      $this->obsnot = $rs->getString($startcol + 7);
 
-			$this->obsnot = $rs->getString($startcol + 8);
+      $this->tipnot = $rs->getString($startcol + 8);
 
-			$this->tipnot = $rs->getString($startcol + 9);
+      $this->reapor = $rs->getString($startcol + 9);
 
-			$this->reapor = $rs->getString($startcol + 10);
+      $this->status = $rs->getString($startcol + 10);
 
-			$this->status = $rs->getString($startcol + 11);
+      $this->rifent = $rs->getString($startcol + 11);
 
-			$this->rifent = $rs->getString($startcol + 12);
+      $this->noment = $rs->getString($startcol + 12);
 
-			$this->noment = $rs->getString($startcol + 13);
+      $this->fecanu = $rs->getDate($startcol + 13, null);
 
-			$this->fecanu = $rs->getDate($startcol + 14, null);
+      $this->autori = $rs->getString($startcol + 14);
 
-			$this->autori = $rs->getString($startcol + 15);
+      $this->fecaut = $rs->getDate($startcol + 15, null);
 
-			$this->fecaut = $rs->getDate($startcol + 16, null);
+      $this->autpor = $rs->getString($startcol + 16);
 
-			$this->autpor = $rs->getString($startcol + 17);
+      $this->id = $rs->getInt($startcol + 17);
 
-			$this->id = $rs->getInt($startcol + 18);
+      $this->resetModified();
 
-			$this->resetModified();
+      $this->setNew(false);
 
-			$this->setNew(false);
+      $this->afterHydrate();
 
-						return $startcol + 19; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fanotent object", $e);
-		}
-	}
+            return $startcol + 18; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fanotent object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -571,6 +586,7 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FanotentPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FanotentPeer::doUpdate($this, $con);
@@ -652,45 +668,42 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 				return $this->getCodref();
 				break;
 			case 5:
-				return $this->getCodalm();
-				break;
-			case 6:
 				return $this->getDesnot();
 				break;
-			case 7:
+			case 6:
 				return $this->getMonnot();
 				break;
-			case 8:
+			case 7:
 				return $this->getObsnot();
 				break;
-			case 9:
+			case 8:
 				return $this->getTipnot();
 				break;
-			case 10:
+			case 9:
 				return $this->getReapor();
 				break;
-			case 11:
+			case 10:
 				return $this->getStatus();
 				break;
-			case 12:
+			case 11:
 				return $this->getRifent();
 				break;
-			case 13:
+			case 12:
 				return $this->getNoment();
 				break;
-			case 14:
+			case 13:
 				return $this->getFecanu();
 				break;
-			case 15:
+			case 14:
 				return $this->getAutori();
 				break;
-			case 16:
+			case 15:
 				return $this->getFecaut();
 				break;
-			case 17:
+			case 16:
 				return $this->getAutpor();
 				break;
-			case 18:
+			case 17:
 				return $this->getId();
 				break;
 			default:
@@ -708,20 +721,19 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 			$keys[2] => $this->getCodcli(),
 			$keys[3] => $this->getTipref(),
 			$keys[4] => $this->getCodref(),
-			$keys[5] => $this->getCodalm(),
-			$keys[6] => $this->getDesnot(),
-			$keys[7] => $this->getMonnot(),
-			$keys[8] => $this->getObsnot(),
-			$keys[9] => $this->getTipnot(),
-			$keys[10] => $this->getReapor(),
-			$keys[11] => $this->getStatus(),
-			$keys[12] => $this->getRifent(),
-			$keys[13] => $this->getNoment(),
-			$keys[14] => $this->getFecanu(),
-			$keys[15] => $this->getAutori(),
-			$keys[16] => $this->getFecaut(),
-			$keys[17] => $this->getAutpor(),
-			$keys[18] => $this->getId(),
+			$keys[5] => $this->getDesnot(),
+			$keys[6] => $this->getMonnot(),
+			$keys[7] => $this->getObsnot(),
+			$keys[8] => $this->getTipnot(),
+			$keys[9] => $this->getReapor(),
+			$keys[10] => $this->getStatus(),
+			$keys[11] => $this->getRifent(),
+			$keys[12] => $this->getNoment(),
+			$keys[13] => $this->getFecanu(),
+			$keys[14] => $this->getAutori(),
+			$keys[15] => $this->getFecaut(),
+			$keys[16] => $this->getAutpor(),
+			$keys[17] => $this->getId(),
 		);
 		return $result;
 	}
@@ -753,45 +765,42 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 				$this->setCodref($value);
 				break;
 			case 5:
-				$this->setCodalm($value);
-				break;
-			case 6:
 				$this->setDesnot($value);
 				break;
-			case 7:
+			case 6:
 				$this->setMonnot($value);
 				break;
-			case 8:
+			case 7:
 				$this->setObsnot($value);
 				break;
-			case 9:
+			case 8:
 				$this->setTipnot($value);
 				break;
-			case 10:
+			case 9:
 				$this->setReapor($value);
 				break;
-			case 11:
+			case 10:
 				$this->setStatus($value);
 				break;
-			case 12:
+			case 11:
 				$this->setRifent($value);
 				break;
-			case 13:
+			case 12:
 				$this->setNoment($value);
 				break;
-			case 14:
+			case 13:
 				$this->setFecanu($value);
 				break;
-			case 15:
+			case 14:
 				$this->setAutori($value);
 				break;
-			case 16:
+			case 15:
 				$this->setFecaut($value);
 				break;
-			case 17:
+			case 16:
 				$this->setAutpor($value);
 				break;
-			case 18:
+			case 17:
 				$this->setId($value);
 				break;
 		} 	}
@@ -806,20 +815,19 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setCodcli($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setTipref($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCodref($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setCodalm($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setDesnot($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setMonnot($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setObsnot($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setTipnot($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setReapor($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setStatus($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setRifent($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setNoment($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setFecanu($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setAutori($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setFecaut($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setAutpor($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
+		if (array_key_exists($keys[5], $arr)) $this->setDesnot($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setMonnot($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setObsnot($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setTipnot($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setReapor($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setStatus($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setRifent($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setNoment($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setFecanu($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setAutori($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setFecaut($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setAutpor($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setId($arr[$keys[17]]);
 	}
 
 	
@@ -832,7 +840,6 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FanotentPeer::CODCLI)) $criteria->add(FanotentPeer::CODCLI, $this->codcli);
 		if ($this->isColumnModified(FanotentPeer::TIPREF)) $criteria->add(FanotentPeer::TIPREF, $this->tipref);
 		if ($this->isColumnModified(FanotentPeer::CODREF)) $criteria->add(FanotentPeer::CODREF, $this->codref);
-		if ($this->isColumnModified(FanotentPeer::CODALM)) $criteria->add(FanotentPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(FanotentPeer::DESNOT)) $criteria->add(FanotentPeer::DESNOT, $this->desnot);
 		if ($this->isColumnModified(FanotentPeer::MONNOT)) $criteria->add(FanotentPeer::MONNOT, $this->monnot);
 		if ($this->isColumnModified(FanotentPeer::OBSNOT)) $criteria->add(FanotentPeer::OBSNOT, $this->obsnot);
@@ -885,8 +892,6 @@ abstract class BaseFanotent extends BaseObject  implements Persistent {
 		$copyObj->setTipref($this->tipref);
 
 		$copyObj->setCodref($this->codref);
-
-		$copyObj->setCodalm($this->codalm);
 
 		$copyObj->setDesnot($this->desnot);
 

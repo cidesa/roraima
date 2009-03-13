@@ -1,10 +1,7 @@
 all:
    .apps:
      autenticacion:    autenticacion
-     compras:          compras
-     tesoreria:        tesoreria
-     bienes:           bienes
-     ingresos:         ingresos
-     nomina:           nomina
-     formulacion:      formulacion
-     this:             autenticacion      #cambiar en cada app
+     max_per_page:     15
+     contabilidadpresupuesto: /home/ovidio/www/siga_cp/
+     reportes:         /home/ovidio/www/suvinca_reportes/
+     this: autenticacion

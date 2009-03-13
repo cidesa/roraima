@@ -10,54 +10,52 @@
  */
 class tesdeftipmonActions extends autotesdeftipmonActions
 {
-	 protected function updateTsdesmonFromRequest()
+   public function executeEdit()
   {
-    $tsdesmon = $this->getRequestParameter('tsdesmon');
+    $this->tsdesmon = $this->getTsdesmonOrCreate();
 
-    if (isset($tsdesmon['codmon']))
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
-      $this->tsdesmon->setCodmon($tsdesmon['codmon']);
-    }
-    if (isset($tsdesmon['nommon']))
-    {
-      $this->tsdesmon->setNommon($tsdesmon['nommon']);
-    }
-    if (isset($tsdesmon['valmon']))
-    {
-      $this->tsdesmon->setValmon($tsdesmon['valmon']);
-    }
- //   if (isset($tsdesmon['aumdis']))
- //   {
-      $this->tsdesmon->setAumdis($this->getRequestParameter('radio1'));
- //   }
-    if (isset($tsdesmon['fecmon']))
-    {
-      if ($tsdesmon['fecmon'])
+      $this->updateTsdesmonFromRequest();
+
+      $this->saveTsdesmon($this->tsdesmon);
+      
+      $this->tsdesmon->setId(Herramientas::getX_vacio('codmon','tsdesmon','id',$this->tsdesmon->getCodmon()));
+
+      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
+
+      if ($this->getRequestParameter('save_and_add'))
       {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($tsdesmon['fecmon']))
-          {
-            $value = $dateFormat->format($tsdesmon['fecmon'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $tsdesmon['fecmon'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->tsdesmon->setFecmon($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
+        return $this->redirect('tesdeftipmon/create');
+      }
+      else if ($this->getRequestParameter('save_and_list'))
+      {
+        return $this->redirect('tesdeftipmon/list');
       }
       else
       {
-        $this->tsdesmon->setFecmon(null);
+        return $this->redirect('tesdeftipmon/edit?id='.$this->tsdesmon->getId());
       }
     }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
   }
-	
+  
+  public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->tsdesmon = $this->getTsdesmonOrCreate();
+    try{
+    $this->updateTsdesmonFromRequest();
+    }catch(Exception $ex){}
+
+    $this->labels = $this->getLabels();
+
+    return sfView::SUCCESS;
+  }
+  
+  
 }

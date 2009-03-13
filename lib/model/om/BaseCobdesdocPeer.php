@@ -220,6 +220,7 @@ abstract class BaseCobdesdocPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobdesdocPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

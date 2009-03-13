@@ -13,7 +13,7 @@ abstract class BaseFcapulicPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcapulic';
 
 	
-	const NUM_COLUMNS = 15;
+	const NUM_COLUMNS = 23;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -33,6 +33,9 @@ abstract class BaseFcapulicPeer {
 
 	
 	const DESAPU = 'fcapulic.DESAPU';
+
+	
+	const DIRAPU = 'fcapulic.DIRAPU';
 
 	
 	const MONAPU = 'fcapulic.MONAPU';
@@ -62,6 +65,27 @@ abstract class BaseFcapulicPeer {
 	const DIRCON = 'fcapulic.DIRCON';
 
 	
+	const SEMDIA = 'fcapulic.SEMDIA';
+
+	
+	const EXOAPU = 'fcapulic.EXOAPU';
+
+	
+	const TEXEXO = 'fcapulic.TEXEXO';
+
+	
+	const FECAPU = 'fcapulic.FECAPU';
+
+	
+	const SERAPUI = 'fcapulic.SERAPUI';
+
+	
+	const SERAPUF = 'fcapulic.SERAPUF';
+
+	
+	const HORAPU = 'fcapulic.HORAPU';
+
+	
 	const ID = 'fcapulic.ID';
 
 	
@@ -70,18 +94,18 @@ abstract class BaseFcapulicPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nrocon', 'Fecreg', 'Rifcon', 'Tipapu', 'Desapu', 'Monapu', 'Monimp', 'Funrec', 'Fecrec', 'Rifrep', 'Staapu', 'Stadec', 'Nomcon', 'Dircon', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcapulicPeer::NROCON, FcapulicPeer::FECREG, FcapulicPeer::RIFCON, FcapulicPeer::TIPAPU, FcapulicPeer::DESAPU, FcapulicPeer::MONAPU, FcapulicPeer::MONIMP, FcapulicPeer::FUNREC, FcapulicPeer::FECREC, FcapulicPeer::RIFREP, FcapulicPeer::STAAPU, FcapulicPeer::STADEC, FcapulicPeer::NOMCON, FcapulicPeer::DIRCON, FcapulicPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nrocon', 'fecreg', 'rifcon', 'tipapu', 'desapu', 'monapu', 'monimp', 'funrec', 'fecrec', 'rifrep', 'staapu', 'stadec', 'nomcon', 'dircon', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
+		BasePeer::TYPE_PHPNAME => array ('Nrocon', 'Fecreg', 'Rifcon', 'Tipapu', 'Desapu', 'Dirapu', 'Monapu', 'Monimp', 'Funrec', 'Fecrec', 'Rifrep', 'Staapu', 'Stadec', 'Nomcon', 'Dircon', 'Semdia', 'Exoapu', 'Texexo', 'Fecapu', 'Serapui', 'Serapuf', 'Horapu', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcapulicPeer::NROCON, FcapulicPeer::FECREG, FcapulicPeer::RIFCON, FcapulicPeer::TIPAPU, FcapulicPeer::DESAPU, FcapulicPeer::DIRAPU, FcapulicPeer::MONAPU, FcapulicPeer::MONIMP, FcapulicPeer::FUNREC, FcapulicPeer::FECREC, FcapulicPeer::RIFREP, FcapulicPeer::STAAPU, FcapulicPeer::STADEC, FcapulicPeer::NOMCON, FcapulicPeer::DIRCON, FcapulicPeer::SEMDIA, FcapulicPeer::EXOAPU, FcapulicPeer::TEXEXO, FcapulicPeer::FECAPU, FcapulicPeer::SERAPUI, FcapulicPeer::SERAPUF, FcapulicPeer::HORAPU, FcapulicPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nrocon', 'fecreg', 'rifcon', 'tipapu', 'desapu', 'dirapu', 'monapu', 'monimp', 'funrec', 'fecrec', 'rifrep', 'staapu', 'stadec', 'nomcon', 'dircon', 'semdia', 'exoapu', 'texexo', 'fecapu', 'serapui', 'serapuf', 'horapu', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nrocon' => 0, 'Fecreg' => 1, 'Rifcon' => 2, 'Tipapu' => 3, 'Desapu' => 4, 'Monapu' => 5, 'Monimp' => 6, 'Funrec' => 7, 'Fecrec' => 8, 'Rifrep' => 9, 'Staapu' => 10, 'Stadec' => 11, 'Nomcon' => 12, 'Dircon' => 13, 'Id' => 14, ),
-		BasePeer::TYPE_COLNAME => array (FcapulicPeer::NROCON => 0, FcapulicPeer::FECREG => 1, FcapulicPeer::RIFCON => 2, FcapulicPeer::TIPAPU => 3, FcapulicPeer::DESAPU => 4, FcapulicPeer::MONAPU => 5, FcapulicPeer::MONIMP => 6, FcapulicPeer::FUNREC => 7, FcapulicPeer::FECREC => 8, FcapulicPeer::RIFREP => 9, FcapulicPeer::STAAPU => 10, FcapulicPeer::STADEC => 11, FcapulicPeer::NOMCON => 12, FcapulicPeer::DIRCON => 13, FcapulicPeer::ID => 14, ),
-		BasePeer::TYPE_FIELDNAME => array ('nrocon' => 0, 'fecreg' => 1, 'rifcon' => 2, 'tipapu' => 3, 'desapu' => 4, 'monapu' => 5, 'monimp' => 6, 'funrec' => 7, 'fecrec' => 8, 'rifrep' => 9, 'staapu' => 10, 'stadec' => 11, 'nomcon' => 12, 'dircon' => 13, 'id' => 14, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, )
+		BasePeer::TYPE_PHPNAME => array ('Nrocon' => 0, 'Fecreg' => 1, 'Rifcon' => 2, 'Tipapu' => 3, 'Desapu' => 4, 'Dirapu' => 5, 'Monapu' => 6, 'Monimp' => 7, 'Funrec' => 8, 'Fecrec' => 9, 'Rifrep' => 10, 'Staapu' => 11, 'Stadec' => 12, 'Nomcon' => 13, 'Dircon' => 14, 'Semdia' => 15, 'Exoapu' => 16, 'Texexo' => 17, 'Fecapu' => 18, 'Serapui' => 19, 'Serapuf' => 20, 'Horapu' => 21, 'Id' => 22, ),
+		BasePeer::TYPE_COLNAME => array (FcapulicPeer::NROCON => 0, FcapulicPeer::FECREG => 1, FcapulicPeer::RIFCON => 2, FcapulicPeer::TIPAPU => 3, FcapulicPeer::DESAPU => 4, FcapulicPeer::DIRAPU => 5, FcapulicPeer::MONAPU => 6, FcapulicPeer::MONIMP => 7, FcapulicPeer::FUNREC => 8, FcapulicPeer::FECREC => 9, FcapulicPeer::RIFREP => 10, FcapulicPeer::STAAPU => 11, FcapulicPeer::STADEC => 12, FcapulicPeer::NOMCON => 13, FcapulicPeer::DIRCON => 14, FcapulicPeer::SEMDIA => 15, FcapulicPeer::EXOAPU => 16, FcapulicPeer::TEXEXO => 17, FcapulicPeer::FECAPU => 18, FcapulicPeer::SERAPUI => 19, FcapulicPeer::SERAPUF => 20, FcapulicPeer::HORAPU => 21, FcapulicPeer::ID => 22, ),
+		BasePeer::TYPE_FIELDNAME => array ('nrocon' => 0, 'fecreg' => 1, 'rifcon' => 2, 'tipapu' => 3, 'desapu' => 4, 'dirapu' => 5, 'monapu' => 6, 'monimp' => 7, 'funrec' => 8, 'fecrec' => 9, 'rifrep' => 10, 'staapu' => 11, 'stadec' => 12, 'nomcon' => 13, 'dircon' => 14, 'semdia' => 15, 'exoapu' => 16, 'texexo' => 17, 'fecapu' => 18, 'serapui' => 19, 'serapuf' => 20, 'horapu' => 21, 'id' => 22, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, )
 	);
 
 	
@@ -145,6 +169,8 @@ abstract class BaseFcapulicPeer {
 
 		$criteria->addSelectColumn(FcapulicPeer::DESAPU);
 
+		$criteria->addSelectColumn(FcapulicPeer::DIRAPU);
+
 		$criteria->addSelectColumn(FcapulicPeer::MONAPU);
 
 		$criteria->addSelectColumn(FcapulicPeer::MONIMP);
@@ -162,6 +188,20 @@ abstract class BaseFcapulicPeer {
 		$criteria->addSelectColumn(FcapulicPeer::NOMCON);
 
 		$criteria->addSelectColumn(FcapulicPeer::DIRCON);
+
+		$criteria->addSelectColumn(FcapulicPeer::SEMDIA);
+
+		$criteria->addSelectColumn(FcapulicPeer::EXOAPU);
+
+		$criteria->addSelectColumn(FcapulicPeer::TEXEXO);
+
+		$criteria->addSelectColumn(FcapulicPeer::FECAPU);
+
+		$criteria->addSelectColumn(FcapulicPeer::SERAPUI);
+
+		$criteria->addSelectColumn(FcapulicPeer::SERAPUF);
+
+		$criteria->addSelectColumn(FcapulicPeer::HORAPU);
 
 		$criteria->addSelectColumn(FcapulicPeer::ID);
 
@@ -265,6 +305,7 @@ abstract class BaseFcapulicPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcapulicPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

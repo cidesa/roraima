@@ -29,93 +29,119 @@ abstract class BaseFordetorggob extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodorg()
-	{
+  
+  public function getCodorg()
+  {
 
-		return $this->codorg; 		
-	}
-	
-	public function getFecpre()
-	{
+    return trim($this->codorg);
 
-		return $this->fecpre; 		
-	}
-	
-	public function getMonaco()
-	{
+  }
+  
+  public function getFecpre()
+  {
 
-		return number_format($this->monaco,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->fecpre);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonaco($val=false)
+  {
+
+    if($val) return number_format($this->monaco,2,',','.');
+    else return $this->monaco;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodorg($v)
 	{
 
-		if ($this->codorg !== $v) {
-			$this->codorg = $v;
-			$this->modifiedColumns[] = FordetorggobPeer::CODORG;
-		}
-
+    if ($this->codorg !== $v) {
+        $this->codorg = $v;
+        $this->modifiedColumns[] = FordetorggobPeer::CODORG;
+      }
+  
 	} 
 	
 	public function setFecpre($v)
 	{
 
-		if ($this->fecpre !== $v) {
-			$this->fecpre = $v;
-			$this->modifiedColumns[] = FordetorggobPeer::FECPRE;
-		}
-
+    if ($this->fecpre !== $v) {
+        $this->fecpre = $v;
+        $this->modifiedColumns[] = FordetorggobPeer::FECPRE;
+      }
+  
 	} 
 	
 	public function setMonaco($v)
 	{
 
-		if ($this->monaco !== $v) {
-			$this->monaco = $v;
-			$this->modifiedColumns[] = FordetorggobPeer::MONACO;
-		}
-
+    if ($this->monaco !== $v) {
+        $this->monaco = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordetorggobPeer::MONACO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordetorggobPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordetorggobPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codorg = $rs->getString($startcol + 0);
+      $this->codorg = $rs->getString($startcol + 0);
 
-			$this->fecpre = $rs->getString($startcol + 1);
+      $this->fecpre = $rs->getString($startcol + 1);
 
-			$this->monaco = $rs->getFloat($startcol + 2);
+      $this->monaco = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordetorggob object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordetorggob object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

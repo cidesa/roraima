@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Asignacion de Conceptos a Empleados', 
+<h1><?php echo __('Asignación de Conceptos a Empleados',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('nomnomasiconnom/edit_messages', array('npasiconemp' => $npasiconemp, 'labels' => $labels)) ?>
-<?php include_partial('nomnomasiconnom/edit_form', array('npasiconemp' => $npasiconemp, 'labels' => $labels, 'pagerNpasiconemp' => $pagerNpasiconemp)) ?>
+<?php include_partial('nomnomasiconnom/edit_form', array('npasiconemp' => $npasiconemp, 'labels' => $labels, 'obj' => $obj, 'numreg' => $numreg)) ?>
 </div>
 
 <div id="sf_admin_footer">

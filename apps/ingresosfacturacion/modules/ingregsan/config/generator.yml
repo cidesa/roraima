@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Insancion
+    theme:            cidesaGenerator
+    fields:
+      codsan:       { name: Código, parameters: size=4 }
+
+      dessan:
+        name:Descripción
+        type: textarea_tag
+        params: size=50x5 maxlength=250
+
+    list:
+      title:          Definición de Sanciones
+      filters:        [codsan]
+      display:        [=codsan, dessan]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort: codsan
+
+    edit:
+      title:          Edición de Sanciones
+      display:        [_codsan, dessan]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

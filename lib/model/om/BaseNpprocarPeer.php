@@ -182,6 +182,442 @@ abstract class BaseNpprocarPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinNpprofesion(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(NpprocarPeer::CODPROFES, NpprofesionPeer::CODPROFES);
+
+		$rs = NpprocarPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinNpcargos(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(NpprocarPeer::CODCAR, NpcargosPeer::CODCAR);
+
+		$rs = NpprocarPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinNpprofesion(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		NpprocarPeer::addSelectColumns($c);
+		$startcol = (NpprocarPeer::NUM_COLUMNS - NpprocarPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		NpprofesionPeer::addSelectColumns($c);
+
+		$c->addJoin(NpprocarPeer::CODPROFES, NpprofesionPeer::CODPROFES);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = NpprocarPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = NpprofesionPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getNpprofesion(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addNpprocar($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initNpprocars();
+				$obj2->addNpprocar($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinNpcargos(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		NpprocarPeer::addSelectColumns($c);
+		$startcol = (NpprocarPeer::NUM_COLUMNS - NpprocarPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		NpcargosPeer::addSelectColumns($c);
+
+		$c->addJoin(NpprocarPeer::CODCAR, NpcargosPeer::CODCAR);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = NpprocarPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = NpcargosPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getNpcargos(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addNpprocar($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initNpprocars();
+				$obj2->addNpprocar($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(NpprocarPeer::CODPROFES, NpprofesionPeer::CODPROFES);
+
+		$criteria->addJoin(NpprocarPeer::CODCAR, NpcargosPeer::CODCAR);
+
+		$rs = NpprocarPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		NpprocarPeer::addSelectColumns($c);
+		$startcol2 = (NpprocarPeer::NUM_COLUMNS - NpprocarPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		NpprofesionPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + NpprofesionPeer::NUM_COLUMNS;
+
+		NpcargosPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + NpcargosPeer::NUM_COLUMNS;
+
+		$c->addJoin(NpprocarPeer::CODPROFES, NpprofesionPeer::CODPROFES);
+
+		$c->addJoin(NpprocarPeer::CODCAR, NpcargosPeer::CODCAR);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = NpprocarPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = NpprofesionPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getNpprofesion(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addNpprocar($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initNpprocars();
+				$obj2->addNpprocar($obj1);
+			}
+
+
+					
+			$omClass = NpcargosPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3 = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getNpcargos(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addNpprocar($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initNpprocars();
+				$obj3->addNpprocar($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAllExceptNpprofesion(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(NpprocarPeer::CODCAR, NpcargosPeer::CODCAR);
+
+		$rs = NpprocarPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptNpcargos(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(NpprocarPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(NpprocarPeer::CODPROFES, NpprofesionPeer::CODPROFES);
+
+		$rs = NpprocarPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAllExceptNpprofesion(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		NpprocarPeer::addSelectColumns($c);
+		$startcol2 = (NpprocarPeer::NUM_COLUMNS - NpprocarPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		NpcargosPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + NpcargosPeer::NUM_COLUMNS;
+
+		$c->addJoin(NpprocarPeer::CODCAR, NpcargosPeer::CODCAR);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = NpprocarPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = NpcargosPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getNpcargos(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addNpprocar($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initNpprocars();
+				$obj2->addNpprocar($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptNpcargos(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		NpprocarPeer::addSelectColumns($c);
+		$startcol2 = (NpprocarPeer::NUM_COLUMNS - NpprocarPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		NpprofesionPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + NpprofesionPeer::NUM_COLUMNS;
+
+		$c->addJoin(NpprocarPeer::CODPROFES, NpprofesionPeer::CODPROFES);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = NpprocarPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = NpprofesionPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getNpprofesion(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addNpprocar($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initNpprocars();
+				$obj2->addNpprocar($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -205,6 +641,7 @@ abstract class BaseNpprocarPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpprocarPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

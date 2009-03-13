@@ -34,5 +34,6 @@ else if ($tipo=='S')
 	'url'      => 'oycdatsol/combo?par=5',
 	'with' => "'pais='+document.getElementById('ocdatste_codpai').value+'&estado='+document.getElementById('ocdatste_codedo').value+'&municipio='+document.getElementById('ocdatste_codmun').value+'&parroquia='+document.getElementById('ocdatste_codpar').value+'&sector='+this.value"
   ))));
+     //echo input_tag('prueba','Campo de prueba','size=50, onBlur=alert("Prueba")');
 }
 ?>

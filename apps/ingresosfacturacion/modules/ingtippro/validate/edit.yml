@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "intipprof{codtipprof}"
+   - "intipprof{destipprof}"
+names:
+  intipprof{codtipprof}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codtipprof
+
+  intipprof{destipprof}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_destipprof
+
+Validator_codtipprof:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Intipprof
+        column:       codtipprof
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destipprof:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres

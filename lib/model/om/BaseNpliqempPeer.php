@@ -305,6 +305,7 @@ abstract class BaseNpliqempPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpliqempPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

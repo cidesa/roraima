@@ -235,6 +235,7 @@ abstract class BaseCpimpprcPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpimpprcPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

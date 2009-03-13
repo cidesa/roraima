@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class ConoriaplfonMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ConoriaplfonMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ConoriaplfonMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('conoriaplfon');
 		$tMap->setPhpName('Conoriaplfon');
 
@@ -38,13 +38,13 @@ class ConoriaplfonMapBuilder {
 
 		$tMap->addColumn('OYAFON', 'Oyafon', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ORDENOYA', 'Ordenoya', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ORDENOYA', 'Ordenoya', 'double', CreoleTypes::NUMERIC, false, 2);
 
 		$tMap->addColumn('FLUCAJ', 'Flucaj', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('ORDENFLU', 'Ordenflu', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ORDENFLU', 'Ordenflu', 'double', CreoleTypes::NUMERIC, false, 2);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

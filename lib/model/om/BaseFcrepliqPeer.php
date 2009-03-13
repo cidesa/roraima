@@ -13,7 +13,7 @@ abstract class BaseFcrepliqPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcrepliq';
 
 	
-	const NUM_COLUMNS = 7;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,7 +35,13 @@ abstract class BaseFcrepliqPeer {
 	const MONIMP = 'fcrepliq.MONIMP';
 
 	
-	const MONBOM = 'fcrepliq.MONBOM';
+	const MONFIS = 'fcrepliq.MONFIS';
+
+	
+	const PORALI = 'fcrepliq.PORALI';
+
+	
+	const MONLIQ = 'fcrepliq.MONLIQ';
 
 	
 	const ID = 'fcrepliq.ID';
@@ -46,18 +52,18 @@ abstract class BaseFcrepliqPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numrep', 'Ano', 'Codact', 'Moning', 'Monimp', 'Monbom', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcrepliqPeer::NUMREP, FcrepliqPeer::ANO, FcrepliqPeer::CODACT, FcrepliqPeer::MONING, FcrepliqPeer::MONIMP, FcrepliqPeer::MONBOM, FcrepliqPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numrep', 'ano', 'codact', 'moning', 'monimp', 'monbom', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Numrep', 'Ano', 'Codact', 'Moning', 'Monimp', 'Monfis', 'Porali', 'Monliq', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcrepliqPeer::NUMREP, FcrepliqPeer::ANO, FcrepliqPeer::CODACT, FcrepliqPeer::MONING, FcrepliqPeer::MONIMP, FcrepliqPeer::MONFIS, FcrepliqPeer::PORALI, FcrepliqPeer::MONLIQ, FcrepliqPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrep', 'ano', 'codact', 'moning', 'monimp', 'monfis', 'porali', 'monliq', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numrep' => 0, 'Ano' => 1, 'Codact' => 2, 'Moning' => 3, 'Monimp' => 4, 'Monbom' => 5, 'Id' => 6, ),
-		BasePeer::TYPE_COLNAME => array (FcrepliqPeer::NUMREP => 0, FcrepliqPeer::ANO => 1, FcrepliqPeer::CODACT => 2, FcrepliqPeer::MONING => 3, FcrepliqPeer::MONIMP => 4, FcrepliqPeer::MONBOM => 5, FcrepliqPeer::ID => 6, ),
-		BasePeer::TYPE_FIELDNAME => array ('numrep' => 0, 'ano' => 1, 'codact' => 2, 'moning' => 3, 'monimp' => 4, 'monbom' => 5, 'id' => 6, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
+		BasePeer::TYPE_PHPNAME => array ('Numrep' => 0, 'Ano' => 1, 'Codact' => 2, 'Moning' => 3, 'Monimp' => 4, 'Monfis' => 5, 'Porali' => 6, 'Monliq' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (FcrepliqPeer::NUMREP => 0, FcrepliqPeer::ANO => 1, FcrepliqPeer::CODACT => 2, FcrepliqPeer::MONING => 3, FcrepliqPeer::MONIMP => 4, FcrepliqPeer::MONFIS => 5, FcrepliqPeer::PORALI => 6, FcrepliqPeer::MONLIQ => 7, FcrepliqPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('numrep' => 0, 'ano' => 1, 'codact' => 2, 'moning' => 3, 'monimp' => 4, 'monfis' => 5, 'porali' => 6, 'monliq' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -121,7 +127,11 @@ abstract class BaseFcrepliqPeer {
 
 		$criteria->addSelectColumn(FcrepliqPeer::MONIMP);
 
-		$criteria->addSelectColumn(FcrepliqPeer::MONBOM);
+		$criteria->addSelectColumn(FcrepliqPeer::MONFIS);
+
+		$criteria->addSelectColumn(FcrepliqPeer::PORALI);
+
+		$criteria->addSelectColumn(FcrepliqPeer::MONLIQ);
 
 		$criteria->addSelectColumn(FcrepliqPeer::ID);
 
@@ -225,6 +235,7 @@ abstract class BaseFcrepliqPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcrepliqPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -215,6 +215,7 @@ abstract class BaseTsdefempPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsdefempPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

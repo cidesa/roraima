@@ -13,7 +13,7 @@ abstract class BaseCacotizaPeer {
 	const CLASS_DEFAULT = 'lib.model.Cacotiza';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 19;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -62,7 +62,16 @@ abstract class BaseCacotizaPeer {
 	const REFPRO = 'cacotiza.REFPRO';
 
 	
+	const TIPO = 'cacotiza.TIPO';
+
+	
 	const CORREL = 'cacotiza.CORREL';
+
+	
+	const PORVAN = 'cacotiza.PORVAN';
+
+	
+	const PORANT = 'cacotiza.PORANT';
 
 	
 	const ID = 'cacotiza.ID';
@@ -73,18 +82,18 @@ abstract class BaseCacotizaPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcot', 'Feccot', 'Codpro', 'Descot', 'Refsol', 'Moncot', 'Conpag', 'Forent', 'Priori', 'Mondes', 'Monrec', 'Tipmon', 'Valmon', 'Refpro', 'Correl', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CacotizaPeer::REFCOT, CacotizaPeer::FECCOT, CacotizaPeer::CODPRO, CacotizaPeer::DESCOT, CacotizaPeer::REFSOL, CacotizaPeer::MONCOT, CacotizaPeer::CONPAG, CacotizaPeer::FORENT, CacotizaPeer::PRIORI, CacotizaPeer::MONDES, CacotizaPeer::MONREC, CacotizaPeer::TIPMON, CacotizaPeer::VALMON, CacotizaPeer::REFPRO, CacotizaPeer::CORREL, CacotizaPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcot', 'feccot', 'codpro', 'descot', 'refsol', 'moncot', 'conpag', 'forent', 'priori', 'mondes', 'monrec', 'tipmon', 'valmon', 'refpro', 'correl', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Refcot', 'Feccot', 'Codpro', 'Descot', 'Refsol', 'Moncot', 'Conpag', 'Forent', 'Priori', 'Mondes', 'Monrec', 'Tipmon', 'Valmon', 'Refpro', 'Tipo', 'Correl', 'Porvan', 'Porant', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CacotizaPeer::REFCOT, CacotizaPeer::FECCOT, CacotizaPeer::CODPRO, CacotizaPeer::DESCOT, CacotizaPeer::REFSOL, CacotizaPeer::MONCOT, CacotizaPeer::CONPAG, CacotizaPeer::FORENT, CacotizaPeer::PRIORI, CacotizaPeer::MONDES, CacotizaPeer::MONREC, CacotizaPeer::TIPMON, CacotizaPeer::VALMON, CacotizaPeer::REFPRO, CacotizaPeer::TIPO, CacotizaPeer::CORREL, CacotizaPeer::PORVAN, CacotizaPeer::PORANT, CacotizaPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcot', 'feccot', 'codpro', 'descot', 'refsol', 'moncot', 'conpag', 'forent', 'priori', 'mondes', 'monrec', 'tipmon', 'valmon', 'refpro', 'tipo', 'correl', 'porvan', 'porant', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcot' => 0, 'Feccot' => 1, 'Codpro' => 2, 'Descot' => 3, 'Refsol' => 4, 'Moncot' => 5, 'Conpag' => 6, 'Forent' => 7, 'Priori' => 8, 'Mondes' => 9, 'Monrec' => 10, 'Tipmon' => 11, 'Valmon' => 12, 'Refpro' => 13, 'Correl' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (CacotizaPeer::REFCOT => 0, CacotizaPeer::FECCOT => 1, CacotizaPeer::CODPRO => 2, CacotizaPeer::DESCOT => 3, CacotizaPeer::REFSOL => 4, CacotizaPeer::MONCOT => 5, CacotizaPeer::CONPAG => 6, CacotizaPeer::FORENT => 7, CacotizaPeer::PRIORI => 8, CacotizaPeer::MONDES => 9, CacotizaPeer::MONREC => 10, CacotizaPeer::TIPMON => 11, CacotizaPeer::VALMON => 12, CacotizaPeer::REFPRO => 13, CacotizaPeer::CORREL => 14, CacotizaPeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcot' => 0, 'feccot' => 1, 'codpro' => 2, 'descot' => 3, 'refsol' => 4, 'moncot' => 5, 'conpag' => 6, 'forent' => 7, 'priori' => 8, 'mondes' => 9, 'monrec' => 10, 'tipmon' => 11, 'valmon' => 12, 'refpro' => 13, 'correl' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Refcot' => 0, 'Feccot' => 1, 'Codpro' => 2, 'Descot' => 3, 'Refsol' => 4, 'Moncot' => 5, 'Conpag' => 6, 'Forent' => 7, 'Priori' => 8, 'Mondes' => 9, 'Monrec' => 10, 'Tipmon' => 11, 'Valmon' => 12, 'Refpro' => 13, 'Tipo' => 14, 'Correl' => 15, 'Porvan' => 16, 'Porant' => 17, 'Id' => 18, ),
+		BasePeer::TYPE_COLNAME => array (CacotizaPeer::REFCOT => 0, CacotizaPeer::FECCOT => 1, CacotizaPeer::CODPRO => 2, CacotizaPeer::DESCOT => 3, CacotizaPeer::REFSOL => 4, CacotizaPeer::MONCOT => 5, CacotizaPeer::CONPAG => 6, CacotizaPeer::FORENT => 7, CacotizaPeer::PRIORI => 8, CacotizaPeer::MONDES => 9, CacotizaPeer::MONREC => 10, CacotizaPeer::TIPMON => 11, CacotizaPeer::VALMON => 12, CacotizaPeer::REFPRO => 13, CacotizaPeer::TIPO => 14, CacotizaPeer::CORREL => 15, CacotizaPeer::PORVAN => 16, CacotizaPeer::PORANT => 17, CacotizaPeer::ID => 18, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcot' => 0, 'feccot' => 1, 'codpro' => 2, 'descot' => 3, 'refsol' => 4, 'moncot' => 5, 'conpag' => 6, 'forent' => 7, 'priori' => 8, 'mondes' => 9, 'monrec' => 10, 'tipmon' => 11, 'valmon' => 12, 'refpro' => 13, 'tipo' => 14, 'correl' => 15, 'porvan' => 16, 'porant' => 17, 'id' => 18, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	
@@ -166,7 +175,13 @@ abstract class BaseCacotizaPeer {
 
 		$criteria->addSelectColumn(CacotizaPeer::REFPRO);
 
+		$criteria->addSelectColumn(CacotizaPeer::TIPO);
+
 		$criteria->addSelectColumn(CacotizaPeer::CORREL);
+
+		$criteria->addSelectColumn(CacotizaPeer::PORVAN);
+
+		$criteria->addSelectColumn(CacotizaPeer::PORANT);
 
 		$criteria->addSelectColumn(CacotizaPeer::ID);
 
@@ -270,6 +285,7 @@ abstract class BaseCacotizaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CacotizaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

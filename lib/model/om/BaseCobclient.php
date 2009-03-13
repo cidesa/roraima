@@ -149,681 +149,735 @@ abstract class BaseCobclient extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcli()
-	{
+  
+  public function getCodcli()
+  {
 
-		return $this->codcli; 		
-	}
-	
-	public function getNomcli()
-	{
+    return trim($this->codcli);
 
-		return $this->nomcli; 		
-	}
-	
-	public function getRifcli()
-	{
+  }
+  
+  public function getNomcli()
+  {
 
-		return $this->rifcli; 		
-	}
-	
-	public function getNitcli()
-	{
+    return trim($this->nomcli);
 
-		return $this->nitcli; 		
-	}
-	
-	public function getDircli()
-	{
+  }
+  
+  public function getRifcli()
+  {
 
-		return $this->dircli; 		
-	}
-	
-	public function getTelcli()
-	{
+    return trim($this->rifcli);
 
-		return $this->telcli; 		
-	}
-	
-	public function getFaxcli()
-	{
+  }
+  
+  public function getNitcli()
+  {
 
-		return $this->faxcli; 		
-	}
-	
-	public function getEmail()
-	{
+    return trim($this->nitcli);
 
-		return $this->email; 		
-	}
-	
-	public function getTipper()
-	{
+  }
+  
+  public function getDircli()
+  {
 
-		return $this->tipper; 		
-	}
-	
-	public function getNaccli()
-	{
+    return trim($this->dircli);
 
-		return $this->naccli; 		
-	}
-	
-	public function getLimcre()
-	{
+  }
+  
+  public function getTelcli()
+  {
 
-		return number_format($this->limcre,2,',','.');
-		
-	}
-	
-	public function getCodcta()
-	{
+    return trim($this->telcli);
 
-		return $this->codcta; 		
-	}
-	
-	public function getRegmer()
-	{
+  }
+  
+  public function getFaxcli()
+  {
 
-		return $this->regmer; 		
-	}
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    return trim($this->faxcli);
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getEmail()
+  {
 
-	
-	public function getTomreg()
-	{
+    return trim($this->email);
 
-		return $this->tomreg; 		
-	}
-	
-	public function getFolreg()
-	{
+  }
+  
+  public function getTipper()
+  {
 
-		return $this->folreg; 		
-	}
-	
-	public function getCapsus()
-	{
+    return trim($this->tipper);
 
-		return number_format($this->capsus,2,',','.');
-		
-	}
-	
-	public function getCappag()
-	{
+  }
+  
+  public function getNaccli()
+  {
 
-		return number_format($this->cappag,2,',','.');
-		
-	}
-	
-	public function getCirepleg()
-	{
+    return trim($this->naccli);
 
-		return $this->cirepleg; 		
-	}
-	
-	public function getNomrepleg()
-	{
+  }
+  
+  public function getLimcre($val=false)
+  {
 
-		return $this->nomrepleg; 		
-	}
-	
-	public function getDirrepleg()
-	{
+    if($val) return number_format($this->limcre,2,',','.');
+    else return $this->limcre;
 
-		return $this->dirrepleg; 		
-	}
-	
-	public function getRiffia()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->riffia; 		
-	}
-	
-	public function getNomfia()
-	{
+    return trim($this->codcta);
 
-		return $this->nomfia; 		
-	}
-	
-	public function getDirfia()
-	{
+  }
+  
+  public function getRegmer()
+  {
 
-		return $this->dirfia; 		
-	}
-	
-	public function getTelfia()
-	{
+    return trim($this->regmer);
 
-		return $this->telfia; 		
-	}
-	
-	public function getCodciu()
-	{
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-		return $this->codciu; 		
-	}
-	
-	public function getCodedo()
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodpai()
-	{
+  
+  public function getTomreg()
+  {
 
-		return $this->codpai; 		
-	}
-	
-	public function getFecnac($format = 'Y-m-d')
-	{
+    return trim($this->tomreg);
 
-		if ($this->fecnac === null || $this->fecnac === '') {
-			return null;
-		} elseif (!is_int($this->fecnac)) {
-						$ts = strtotime($this->fecnac);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnac] as date/time value: " . var_export($this->fecnac, true));
-			}
-		} else {
-			$ts = $this->fecnac;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFolreg()
+  {
 
-	
-	public function getTipcli()
-	{
+    return trim($this->folreg);
 
-		return $this->tipcli; 		
-	}
-	
-	public function getCodtiprec()
-	{
+  }
+  
+  public function getCapsus($val=false)
+  {
 
-		return $this->codtiprec; 		
-	}
-	
-	public function getCodordmercon()
-	{
+    if($val) return number_format($this->capsus,2,',','.');
+    else return $this->capsus;
 
-		return $this->codordmercon; 		
-	}
-	
-	public function getCodpermercon()
-	{
+  }
+  
+  public function getCappag($val=false)
+  {
 
-		return $this->codpermercon; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->cappag,2,',','.');
+    else return $this->cappag;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCirepleg()
+  {
+
+    return trim($this->cirepleg);
+
+  }
+  
+  public function getNomrepleg()
+  {
+
+    return trim($this->nomrepleg);
+
+  }
+  
+  public function getDirrepleg()
+  {
+
+    return trim($this->dirrepleg);
+
+  }
+  
+  public function getRiffia()
+  {
+
+    return trim($this->riffia);
+
+  }
+  
+  public function getNomfia()
+  {
+
+    return trim($this->nomfia);
+
+  }
+  
+  public function getDirfia()
+  {
+
+    return trim($this->dirfia);
+
+  }
+  
+  public function getTelfia()
+  {
+
+    return trim($this->telfia);
+
+  }
+  
+  public function getCodciu()
+  {
+
+    return trim($this->codciu);
+
+  }
+  
+  public function getCodedo()
+  {
+
+    return trim($this->codedo);
+
+  }
+  
+  public function getCodpai()
+  {
+
+    return trim($this->codpai);
+
+  }
+  
+  public function getFecnac($format = 'Y-m-d')
+  {
+
+    if ($this->fecnac === null || $this->fecnac === '') {
+      return null;
+    } elseif (!is_int($this->fecnac)) {
+            $ts = adodb_strtotime($this->fecnac);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnac] as date/time value: " . var_export($this->fecnac, true));
+      }
+    } else {
+      $ts = $this->fecnac;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getTipcli()
+  {
+
+    return trim($this->tipcli);
+
+  }
+  
+  public function getCodtiprec()
+  {
+
+    return trim($this->codtiprec);
+
+  }
+  
+  public function getCodordmercon()
+  {
+
+    return trim($this->codordmercon);
+
+  }
+  
+  public function getCodpermercon()
+  {
+
+    return trim($this->codpermercon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = CobclientPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = CobclientPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setNomcli($v)
 	{
 
-		if ($this->nomcli !== $v) {
-			$this->nomcli = $v;
-			$this->modifiedColumns[] = CobclientPeer::NOMCLI;
-		}
-
+    if ($this->nomcli !== $v) {
+        $this->nomcli = $v;
+        $this->modifiedColumns[] = CobclientPeer::NOMCLI;
+      }
+  
 	} 
 	
 	public function setRifcli($v)
 	{
 
-		if ($this->rifcli !== $v) {
-			$this->rifcli = $v;
-			$this->modifiedColumns[] = CobclientPeer::RIFCLI;
-		}
-
+    if ($this->rifcli !== $v) {
+        $this->rifcli = $v;
+        $this->modifiedColumns[] = CobclientPeer::RIFCLI;
+      }
+  
 	} 
 	
 	public function setNitcli($v)
 	{
 
-		if ($this->nitcli !== $v) {
-			$this->nitcli = $v;
-			$this->modifiedColumns[] = CobclientPeer::NITCLI;
-		}
-
+    if ($this->nitcli !== $v) {
+        $this->nitcli = $v;
+        $this->modifiedColumns[] = CobclientPeer::NITCLI;
+      }
+  
 	} 
 	
 	public function setDircli($v)
 	{
 
-		if ($this->dircli !== $v) {
-			$this->dircli = $v;
-			$this->modifiedColumns[] = CobclientPeer::DIRCLI;
-		}
-
+    if ($this->dircli !== $v) {
+        $this->dircli = $v;
+        $this->modifiedColumns[] = CobclientPeer::DIRCLI;
+      }
+  
 	} 
 	
 	public function setTelcli($v)
 	{
 
-		if ($this->telcli !== $v) {
-			$this->telcli = $v;
-			$this->modifiedColumns[] = CobclientPeer::TELCLI;
-		}
-
+    if ($this->telcli !== $v) {
+        $this->telcli = $v;
+        $this->modifiedColumns[] = CobclientPeer::TELCLI;
+      }
+  
 	} 
 	
 	public function setFaxcli($v)
 	{
 
-		if ($this->faxcli !== $v) {
-			$this->faxcli = $v;
-			$this->modifiedColumns[] = CobclientPeer::FAXCLI;
-		}
-
+    if ($this->faxcli !== $v) {
+        $this->faxcli = $v;
+        $this->modifiedColumns[] = CobclientPeer::FAXCLI;
+      }
+  
 	} 
 	
 	public function setEmail($v)
 	{
 
-		if ($this->email !== $v) {
-			$this->email = $v;
-			$this->modifiedColumns[] = CobclientPeer::EMAIL;
-		}
-
+    if ($this->email !== $v) {
+        $this->email = $v;
+        $this->modifiedColumns[] = CobclientPeer::EMAIL;
+      }
+  
 	} 
 	
 	public function setTipper($v)
 	{
 
-		if ($this->tipper !== $v) {
-			$this->tipper = $v;
-			$this->modifiedColumns[] = CobclientPeer::TIPPER;
-		}
-
+    if ($this->tipper !== $v) {
+        $this->tipper = $v;
+        $this->modifiedColumns[] = CobclientPeer::TIPPER;
+      }
+  
 	} 
 	
 	public function setNaccli($v)
 	{
 
-		if ($this->naccli !== $v) {
-			$this->naccli = $v;
-			$this->modifiedColumns[] = CobclientPeer::NACCLI;
-		}
-
+    if ($this->naccli !== $v) {
+        $this->naccli = $v;
+        $this->modifiedColumns[] = CobclientPeer::NACCLI;
+      }
+  
 	} 
 	
 	public function setLimcre($v)
 	{
 
-		if ($this->limcre !== $v) {
-			$this->limcre = $v;
-			$this->modifiedColumns[] = CobclientPeer::LIMCRE;
-		}
-
+    if ($this->limcre !== $v) {
+        $this->limcre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobclientPeer::LIMCRE;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = CobclientPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = CobclientPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setRegmer($v)
 	{
 
-		if ($this->regmer !== $v) {
-			$this->regmer = $v;
-			$this->modifiedColumns[] = CobclientPeer::REGMER;
-		}
-
+    if ($this->regmer !== $v) {
+        $this->regmer = $v;
+        $this->modifiedColumns[] = CobclientPeer::REGMER;
+      }
+  
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = CobclientPeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = CobclientPeer::FECREG;
+    }
 
 	} 
 	
 	public function setTomreg($v)
 	{
 
-		if ($this->tomreg !== $v) {
-			$this->tomreg = $v;
-			$this->modifiedColumns[] = CobclientPeer::TOMREG;
-		}
-
+    if ($this->tomreg !== $v) {
+        $this->tomreg = $v;
+        $this->modifiedColumns[] = CobclientPeer::TOMREG;
+      }
+  
 	} 
 	
 	public function setFolreg($v)
 	{
 
-		if ($this->folreg !== $v) {
-			$this->folreg = $v;
-			$this->modifiedColumns[] = CobclientPeer::FOLREG;
-		}
-
+    if ($this->folreg !== $v) {
+        $this->folreg = $v;
+        $this->modifiedColumns[] = CobclientPeer::FOLREG;
+      }
+  
 	} 
 	
 	public function setCapsus($v)
 	{
 
-		if ($this->capsus !== $v) {
-			$this->capsus = $v;
-			$this->modifiedColumns[] = CobclientPeer::CAPSUS;
-		}
-
+    if ($this->capsus !== $v) {
+        $this->capsus = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobclientPeer::CAPSUS;
+      }
+  
 	} 
 	
 	public function setCappag($v)
 	{
 
-		if ($this->cappag !== $v) {
-			$this->cappag = $v;
-			$this->modifiedColumns[] = CobclientPeer::CAPPAG;
-		}
-
+    if ($this->cappag !== $v) {
+        $this->cappag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobclientPeer::CAPPAG;
+      }
+  
 	} 
 	
 	public function setCirepleg($v)
 	{
 
-		if ($this->cirepleg !== $v) {
-			$this->cirepleg = $v;
-			$this->modifiedColumns[] = CobclientPeer::CIREPLEG;
-		}
-
+    if ($this->cirepleg !== $v) {
+        $this->cirepleg = $v;
+        $this->modifiedColumns[] = CobclientPeer::CIREPLEG;
+      }
+  
 	} 
 	
 	public function setNomrepleg($v)
 	{
 
-		if ($this->nomrepleg !== $v) {
-			$this->nomrepleg = $v;
-			$this->modifiedColumns[] = CobclientPeer::NOMREPLEG;
-		}
-
+    if ($this->nomrepleg !== $v) {
+        $this->nomrepleg = $v;
+        $this->modifiedColumns[] = CobclientPeer::NOMREPLEG;
+      }
+  
 	} 
 	
 	public function setDirrepleg($v)
 	{
 
-		if ($this->dirrepleg !== $v) {
-			$this->dirrepleg = $v;
-			$this->modifiedColumns[] = CobclientPeer::DIRREPLEG;
-		}
-
+    if ($this->dirrepleg !== $v) {
+        $this->dirrepleg = $v;
+        $this->modifiedColumns[] = CobclientPeer::DIRREPLEG;
+      }
+  
 	} 
 	
 	public function setRiffia($v)
 	{
 
-		if ($this->riffia !== $v) {
-			$this->riffia = $v;
-			$this->modifiedColumns[] = CobclientPeer::RIFFIA;
-		}
-
+    if ($this->riffia !== $v) {
+        $this->riffia = $v;
+        $this->modifiedColumns[] = CobclientPeer::RIFFIA;
+      }
+  
 	} 
 	
 	public function setNomfia($v)
 	{
 
-		if ($this->nomfia !== $v) {
-			$this->nomfia = $v;
-			$this->modifiedColumns[] = CobclientPeer::NOMFIA;
-		}
-
+    if ($this->nomfia !== $v) {
+        $this->nomfia = $v;
+        $this->modifiedColumns[] = CobclientPeer::NOMFIA;
+      }
+  
 	} 
 	
 	public function setDirfia($v)
 	{
 
-		if ($this->dirfia !== $v) {
-			$this->dirfia = $v;
-			$this->modifiedColumns[] = CobclientPeer::DIRFIA;
-		}
-
+    if ($this->dirfia !== $v) {
+        $this->dirfia = $v;
+        $this->modifiedColumns[] = CobclientPeer::DIRFIA;
+      }
+  
 	} 
 	
 	public function setTelfia($v)
 	{
 
-		if ($this->telfia !== $v) {
-			$this->telfia = $v;
-			$this->modifiedColumns[] = CobclientPeer::TELFIA;
-		}
-
+    if ($this->telfia !== $v) {
+        $this->telfia = $v;
+        $this->modifiedColumns[] = CobclientPeer::TELFIA;
+      }
+  
 	} 
 	
 	public function setCodciu($v)
 	{
 
-		if ($this->codciu !== $v) {
-			$this->codciu = $v;
-			$this->modifiedColumns[] = CobclientPeer::CODCIU;
-		}
-
+    if ($this->codciu !== $v) {
+        $this->codciu = $v;
+        $this->modifiedColumns[] = CobclientPeer::CODCIU;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = CobclientPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = CobclientPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = CobclientPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = CobclientPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setFecnac($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnac] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnac !== $ts) {
-			$this->fecnac = $ts;
-			$this->modifiedColumns[] = CobclientPeer::FECNAC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnac] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnac !== $ts) {
+      $this->fecnac = $ts;
+      $this->modifiedColumns[] = CobclientPeer::FECNAC;
+    }
 
 	} 
 	
 	public function setTipcli($v)
 	{
 
-		if ($this->tipcli !== $v) {
-			$this->tipcli = $v;
-			$this->modifiedColumns[] = CobclientPeer::TIPCLI;
-		}
-
+    if ($this->tipcli !== $v) {
+        $this->tipcli = $v;
+        $this->modifiedColumns[] = CobclientPeer::TIPCLI;
+      }
+  
 	} 
 	
 	public function setCodtiprec($v)
 	{
 
-		if ($this->codtiprec !== $v) {
-			$this->codtiprec = $v;
-			$this->modifiedColumns[] = CobclientPeer::CODTIPREC;
-		}
-
+    if ($this->codtiprec !== $v) {
+        $this->codtiprec = $v;
+        $this->modifiedColumns[] = CobclientPeer::CODTIPREC;
+      }
+  
 	} 
 	
 	public function setCodordmercon($v)
 	{
 
-		if ($this->codordmercon !== $v) {
-			$this->codordmercon = $v;
-			$this->modifiedColumns[] = CobclientPeer::CODORDMERCON;
-		}
-
+    if ($this->codordmercon !== $v) {
+        $this->codordmercon = $v;
+        $this->modifiedColumns[] = CobclientPeer::CODORDMERCON;
+      }
+  
 	} 
 	
 	public function setCodpermercon($v)
 	{
 
-		if ($this->codpermercon !== $v) {
-			$this->codpermercon = $v;
-			$this->modifiedColumns[] = CobclientPeer::CODPERMERCON;
-		}
-
+    if ($this->codpermercon !== $v) {
+        $this->codpermercon = $v;
+        $this->modifiedColumns[] = CobclientPeer::CODPERMERCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CobclientPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CobclientPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcli = $rs->getString($startcol + 0);
+      $this->codcli = $rs->getString($startcol + 0);
 
-			$this->nomcli = $rs->getString($startcol + 1);
+      $this->nomcli = $rs->getString($startcol + 1);
 
-			$this->rifcli = $rs->getString($startcol + 2);
+      $this->rifcli = $rs->getString($startcol + 2);
 
-			$this->nitcli = $rs->getString($startcol + 3);
+      $this->nitcli = $rs->getString($startcol + 3);
 
-			$this->dircli = $rs->getString($startcol + 4);
+      $this->dircli = $rs->getString($startcol + 4);
 
-			$this->telcli = $rs->getString($startcol + 5);
+      $this->telcli = $rs->getString($startcol + 5);
 
-			$this->faxcli = $rs->getString($startcol + 6);
+      $this->faxcli = $rs->getString($startcol + 6);
 
-			$this->email = $rs->getString($startcol + 7);
+      $this->email = $rs->getString($startcol + 7);
 
-			$this->tipper = $rs->getString($startcol + 8);
+      $this->tipper = $rs->getString($startcol + 8);
 
-			$this->naccli = $rs->getString($startcol + 9);
+      $this->naccli = $rs->getString($startcol + 9);
 
-			$this->limcre = $rs->getFloat($startcol + 10);
+      $this->limcre = $rs->getFloat($startcol + 10);
 
-			$this->codcta = $rs->getString($startcol + 11);
+      $this->codcta = $rs->getString($startcol + 11);
 
-			$this->regmer = $rs->getString($startcol + 12);
+      $this->regmer = $rs->getString($startcol + 12);
 
-			$this->fecreg = $rs->getDate($startcol + 13, null);
+      $this->fecreg = $rs->getDate($startcol + 13, null);
 
-			$this->tomreg = $rs->getString($startcol + 14);
+      $this->tomreg = $rs->getString($startcol + 14);
 
-			$this->folreg = $rs->getString($startcol + 15);
+      $this->folreg = $rs->getString($startcol + 15);
 
-			$this->capsus = $rs->getFloat($startcol + 16);
+      $this->capsus = $rs->getFloat($startcol + 16);
 
-			$this->cappag = $rs->getFloat($startcol + 17);
+      $this->cappag = $rs->getFloat($startcol + 17);
 
-			$this->cirepleg = $rs->getString($startcol + 18);
+      $this->cirepleg = $rs->getString($startcol + 18);
 
-			$this->nomrepleg = $rs->getString($startcol + 19);
+      $this->nomrepleg = $rs->getString($startcol + 19);
 
-			$this->dirrepleg = $rs->getString($startcol + 20);
+      $this->dirrepleg = $rs->getString($startcol + 20);
 
-			$this->riffia = $rs->getString($startcol + 21);
+      $this->riffia = $rs->getString($startcol + 21);
 
-			$this->nomfia = $rs->getString($startcol + 22);
+      $this->nomfia = $rs->getString($startcol + 22);
 
-			$this->dirfia = $rs->getString($startcol + 23);
+      $this->dirfia = $rs->getString($startcol + 23);
 
-			$this->telfia = $rs->getString($startcol + 24);
+      $this->telfia = $rs->getString($startcol + 24);
 
-			$this->codciu = $rs->getString($startcol + 25);
+      $this->codciu = $rs->getString($startcol + 25);
 
-			$this->codedo = $rs->getString($startcol + 26);
+      $this->codedo = $rs->getString($startcol + 26);
 
-			$this->codpai = $rs->getString($startcol + 27);
+      $this->codpai = $rs->getString($startcol + 27);
 
-			$this->fecnac = $rs->getDate($startcol + 28, null);
+      $this->fecnac = $rs->getDate($startcol + 28, null);
 
-			$this->tipcli = $rs->getString($startcol + 29);
+      $this->tipcli = $rs->getString($startcol + 29);
 
-			$this->codtiprec = $rs->getString($startcol + 30);
+      $this->codtiprec = $rs->getString($startcol + 30);
 
-			$this->codordmercon = $rs->getString($startcol + 31);
+      $this->codordmercon = $rs->getString($startcol + 31);
 
-			$this->codpermercon = $rs->getString($startcol + 32);
+      $this->codpermercon = $rs->getString($startcol + 32);
 
-			$this->id = $rs->getInt($startcol + 33);
+      $this->id = $rs->getInt($startcol + 33);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 34; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cobclient object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 34; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cobclient object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -880,6 +934,7 @@ abstract class BaseCobclient extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CobclientPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CobclientPeer::doUpdate($this, $con);

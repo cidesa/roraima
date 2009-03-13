@@ -1,0 +1,22 @@
+methods:
+  post:
+   - "fctiplic{codtiplic}"
+   - "fctiplic{destiplic}"
+names:
+  fctiplic{codtiplic}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_codtiplic
+
+  fctiplic{destiplic}:
+    required:  Yes
+    required_msg: Descripcion es un campo requerido
+
+Validator_codtiplic:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fctiplic
+        column:       codtiplic
+        unique_error: El registro ya Existe intente con otro.
+
+

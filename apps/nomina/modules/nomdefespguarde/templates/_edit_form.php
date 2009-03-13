@@ -9,24 +9,48 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($npguarde, 'getId') ?>
+<?php echo javascript_include_tag('ajax','tools','observe') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-
+<legend><?php echo __('Guarderias') ?></legend>
 <div class="form-row">
-  <?php echo label_for('npguarde[codcon]', __($labels['npguarde{codcon}']), 'class="required" ') ?>
+<table>
+<tr>
+<th>
+<?php echo label_for('npguarde[codcon]', __($labels['npguarde{codcon}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npguarde{codcon}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npguarde{codcon}')): ?>
     <?php echo form_error('npguarde{codcon}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($npguarde, 'getCodcon', array (
-  'size' => 10,
-  'control_name' => 'npguarde[codcon]',
-  )); echo $value ? $value : '&nbsp;' ?> <?php echo button_to('...','#') ?>
-    </div>
-</div>
+  <?php echo input_auto_complete_tag('npguarde[codcon]', $npguarde->getCodcon(),
+    'nomdefespguarde/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 3,
+	'onBlur'=> remote_function(array(
+              'size'	=> 5,
+			  'url'      => 'nomdefespguarde/ajax',
+			  'complete' => 'AjaxJSON(request, json)',
+  			  'with' => "'ajax=1&cajtexmos=npguarde_nomcon&cajtexcom=npguarde_codcon&codigo='+this.value"
+			  ))),
+     array('use_style' => 'true')
+  )
+?>
+ </div>
+</th>
+<th>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npdefcpt_nomdefespguarde/clase/Npdefcpt/frame/sf_admin_edit_form/obj1/npguarde_codcon/obj2/npguarde_nomcon')?>
+  </th>
+<th>
+<?php $value = object_input_tag($npguarde, 'getNomcon', array (
+  'readonly' => true,
+  'size'=> 30,
+  'control_name' => 'npguarde[nomcon]',
+)); echo $value ? $value : '&nbsp;' ?>
+</th>
+</tr>
+</table>
 
-<div class="form-row">
+<br>
+
 <?php echo label_for('npguarde[nomgua]', __($labels['npguarde{nomgua}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('npguarde{nomgua}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npguarde{nomgua}')): ?>
@@ -35,25 +59,11 @@
 
   <?php $value = object_input_tag($npguarde, 'getNomgua', array (
   'size' => 80,
+  'maxlength' => 250,
   'control_name' => 'npguarde[nomgua]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
-
-<div class="form-row">
-<?php echo label_for('npguarde[nomcon]', __($labels['npguarde{nomcon}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('npguarde{nomcon}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npguarde{nomcon}')): ?>
-    <?php echo form_error('npguarde{nomcon}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npguarde, 'getNomcon', array (
-  'size' => 80,
-  'control_name' => 'npguarde[nomcon]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
 </fieldset>
 
 <?php include_partial('edit_actions', array('npguarde' => $npguarde)) ?>
@@ -61,7 +71,7 @@
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($npguarde->getId()): ?>
+      <li class="float-rigth"><?php if ($npguarde->getId()): ?>
 <?php echo button_to(__('delete'), 'nomdefespguarde/delete?id='.$npguarde->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),

@@ -49,187 +49,218 @@ abstract class BaseCpimpprc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefprc()
-	{
+  
+  public function getRefprc()
+  {
 
-		return $this->refprc; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->refprc);
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonimp()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getMoncom()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->moncom,2,',','.');
-		
-	}
-	
-	public function getMoncau()
-	{
+  }
+  
+  public function getMonimp($val=false)
+  {
 
-		return number_format($this->moncau,2,',','.');
-		
-	}
-	
-	public function getMonpag()
-	{
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMonaju()
-	{
+  }
+  
+  public function getMoncom($val=false)
+  {
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getStaimp()
-	{
+    if($val) return number_format($this->moncom,2,',','.');
+    else return $this->moncom;
 
-		return $this->staimp; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMoncau($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->moncau,2,',','.');
+    else return $this->moncau;
+
+  }
+  
+  public function getMonpag($val=false)
+  {
+
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getMonaju($val=false)
+  {
+
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getStaimp()
+  {
+
+    return trim($this->staimp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = CpimpprcPeer::REFPRC;
-		}
-
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = CpimpprcPeer::REFPRC;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpimpprcPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpimpprcPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = CpimpprcPeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimpprcPeer::MONIMP;
+      }
+  
 	} 
 	
 	public function setMoncom($v)
 	{
 
-		if ($this->moncom !== $v) {
-			$this->moncom = $v;
-			$this->modifiedColumns[] = CpimpprcPeer::MONCOM;
-		}
-
+    if ($this->moncom !== $v) {
+        $this->moncom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimpprcPeer::MONCOM;
+      }
+  
 	} 
 	
 	public function setMoncau($v)
 	{
 
-		if ($this->moncau !== $v) {
-			$this->moncau = $v;
-			$this->modifiedColumns[] = CpimpprcPeer::MONCAU;
-		}
-
+    if ($this->moncau !== $v) {
+        $this->moncau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimpprcPeer::MONCAU;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = CpimpprcPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimpprcPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CpimpprcPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpimpprcPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setStaimp($v)
 	{
 
-		if ($this->staimp !== $v) {
-			$this->staimp = $v;
-			$this->modifiedColumns[] = CpimpprcPeer::STAIMP;
-		}
-
+    if ($this->staimp !== $v) {
+        $this->staimp = $v;
+        $this->modifiedColumns[] = CpimpprcPeer::STAIMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpimpprcPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpimpprcPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refprc = $rs->getString($startcol + 0);
+      $this->refprc = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->monimp = $rs->getFloat($startcol + 2);
+      $this->monimp = $rs->getFloat($startcol + 2);
 
-			$this->moncom = $rs->getFloat($startcol + 3);
+      $this->moncom = $rs->getFloat($startcol + 3);
 
-			$this->moncau = $rs->getFloat($startcol + 4);
+      $this->moncau = $rs->getFloat($startcol + 4);
 
-			$this->monpag = $rs->getFloat($startcol + 5);
+      $this->monpag = $rs->getFloat($startcol + 5);
 
-			$this->monaju = $rs->getFloat($startcol + 6);
+      $this->monaju = $rs->getFloat($startcol + 6);
 
-			$this->staimp = $rs->getString($startcol + 7);
+      $this->staimp = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpimpprc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpimpprc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -286,6 +317,7 @@ abstract class BaseCpimpprc extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpimpprcPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpimpprcPeer::doUpdate($this, $con);

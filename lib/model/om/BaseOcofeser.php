@@ -45,168 +45,198 @@ abstract class BaseOcofeser extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodtippro()
-	{
+    return trim($this->codcon);
 
-		return $this->codtippro; 		
-	}
-	
-	public function getNivpro()
-	{
+  }
+  
+  public function getCodtippro()
+  {
 
-		return $this->nivpro; 		
-	}
-	
-	public function getExppro()
-	{
+    return trim($this->codtippro);
 
-		return number_format($this->exppro,2,',','.');
-		
-	}
-	
-	public function getNumper()
-	{
+  }
+  
+  public function getNivpro()
+  {
 
-		return number_format($this->numper,2,',','.');
-		
-	}
-	
-	public function getCanhor()
-	{
+    return trim($this->nivpro);
 
-		return number_format($this->canhor,2,',','.');
-		
-	}
-	
-	public function getCanval()
-	{
+  }
+  
+  public function getExppro($val=false)
+  {
 
-		return number_format($this->canval,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->exppro,2,',','.');
+    else return $this->exppro;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumper($val=false)
+  {
+
+    if($val) return number_format($this->numper,2,',','.');
+    else return $this->numper;
+
+  }
+  
+  public function getCanhor($val=false)
+  {
+
+    if($val) return number_format($this->canhor,2,',','.');
+    else return $this->canhor;
+
+  }
+  
+  public function getCanval($val=false)
+  {
+
+    if($val) return number_format($this->canval,2,',','.');
+    else return $this->canval;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcofeserPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcofeserPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodtippro($v)
 	{
 
-		if ($this->codtippro !== $v) {
-			$this->codtippro = $v;
-			$this->modifiedColumns[] = OcofeserPeer::CODTIPPRO;
-		}
-
+    if ($this->codtippro !== $v) {
+        $this->codtippro = $v;
+        $this->modifiedColumns[] = OcofeserPeer::CODTIPPRO;
+      }
+  
 	} 
 	
 	public function setNivpro($v)
 	{
 
-		if ($this->nivpro !== $v) {
-			$this->nivpro = $v;
-			$this->modifiedColumns[] = OcofeserPeer::NIVPRO;
-		}
-
+    if ($this->nivpro !== $v) {
+        $this->nivpro = $v;
+        $this->modifiedColumns[] = OcofeserPeer::NIVPRO;
+      }
+  
 	} 
 	
 	public function setExppro($v)
 	{
 
-		if ($this->exppro !== $v) {
-			$this->exppro = $v;
-			$this->modifiedColumns[] = OcofeserPeer::EXPPRO;
-		}
-
+    if ($this->exppro !== $v) {
+        $this->exppro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcofeserPeer::EXPPRO;
+      }
+  
 	} 
 	
 	public function setNumper($v)
 	{
 
-		if ($this->numper !== $v) {
-			$this->numper = $v;
-			$this->modifiedColumns[] = OcofeserPeer::NUMPER;
-		}
-
+    if ($this->numper !== $v) {
+        $this->numper = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcofeserPeer::NUMPER;
+      }
+  
 	} 
 	
 	public function setCanhor($v)
 	{
 
-		if ($this->canhor !== $v) {
-			$this->canhor = $v;
-			$this->modifiedColumns[] = OcofeserPeer::CANHOR;
-		}
-
+    if ($this->canhor !== $v) {
+        $this->canhor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcofeserPeer::CANHOR;
+      }
+  
 	} 
 	
 	public function setCanval($v)
 	{
 
-		if ($this->canval !== $v) {
-			$this->canval = $v;
-			$this->modifiedColumns[] = OcofeserPeer::CANVAL;
-		}
-
+    if ($this->canval !== $v) {
+        $this->canval = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcofeserPeer::CANVAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcofeserPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcofeserPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->codtippro = $rs->getString($startcol + 1);
+      $this->codtippro = $rs->getString($startcol + 1);
 
-			$this->nivpro = $rs->getString($startcol + 2);
+      $this->nivpro = $rs->getString($startcol + 2);
 
-			$this->exppro = $rs->getFloat($startcol + 3);
+      $this->exppro = $rs->getFloat($startcol + 3);
 
-			$this->numper = $rs->getFloat($startcol + 4);
+      $this->numper = $rs->getFloat($startcol + 4);
 
-			$this->canhor = $rs->getFloat($startcol + 5);
+      $this->canhor = $rs->getFloat($startcol + 5);
 
-			$this->canval = $rs->getFloat($startcol + 6);
+      $this->canval = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocofeser object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocofeser object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -263,6 +293,7 @@ abstract class BaseOcofeser extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcofeserPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcofeserPeer::doUpdate($this, $con);

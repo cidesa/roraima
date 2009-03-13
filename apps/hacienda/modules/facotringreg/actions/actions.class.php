@@ -38,6 +38,7 @@ class facotringregActions extends autofacotringregActions
 	      $this->saveFcotring($this->fcotring);
 	
 	      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 	
 	      if ($this->getRequestParameter('save_and_add'))
 	      {
@@ -72,6 +73,7 @@ class facotringregActions extends autofacotringregActions
 	protected function updateFcotringFromRequest()
 	  {
 	    $fcotring = $this->getRequestParameter('fcotring');
+	    $this->fuentes = $this->CargarFuentes();
 	    $this->configGrid();
 	
 	    if (isset($fcotring['nrocon']))

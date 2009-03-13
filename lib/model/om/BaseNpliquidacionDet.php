@@ -49,184 +49,215 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getConcepto()
-	{
+    return trim($this->codemp);
 
-		return $this->concepto; 		
-	}
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getConcepto()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getAsided()
-	{
+    return trim($this->concepto);
 
-		return $this->asided; 		
-	}
-	
-	public function getNumreg()
-	{
+  }
+  
+  public function getMonto($val=false)
+  {
 
-		return number_format($this->numreg,2,',','.');
-		
-	}
-	
-	public function getCodpre()
-	{
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
 
-		return $this->codpre; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getAsided()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getNumord()
-	{
+    return trim($this->asided);
 
-		return $this->numord; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNumreg($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->numreg,2,',','.');
+    else return $this->numreg;
+
+  }
+  
+  public function getCodpre()
+  {
+
+    return trim($this->codpre);
+
+  }
+  
+  public function getCodcon()
+  {
+
+    return trim($this->codcon);
+
+  }
+  
+  public function getNumord()
+  {
+
+    return trim($this->numord);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpliquidacionDetPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpliquidacionDetPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setConcepto($v)
 	{
 
-		if ($this->concepto !== $v) {
-			$this->concepto = $v;
-			$this->modifiedColumns[] = NpliquidacionDetPeer::CONCEPTO;
-		}
-
+    if ($this->concepto !== $v) {
+        $this->concepto = $v;
+        $this->modifiedColumns[] = NpliquidacionDetPeer::CONCEPTO;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NpliquidacionDetPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpliquidacionDetPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setAsided($v)
 	{
 
-		if ($this->asided !== $v) {
-			$this->asided = $v;
-			$this->modifiedColumns[] = NpliquidacionDetPeer::ASIDED;
-		}
-
+    if ($this->asided !== $v) {
+        $this->asided = $v;
+        $this->modifiedColumns[] = NpliquidacionDetPeer::ASIDED;
+      }
+  
 	} 
 	
 	public function setNumreg($v)
 	{
 
-		if ($this->numreg !== $v) {
-			$this->numreg = $v;
-			$this->modifiedColumns[] = NpliquidacionDetPeer::NUMREG;
-		}
-
+    if ($this->numreg !== $v) {
+        $this->numreg = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpliquidacionDetPeer::NUMREG;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = NpliquidacionDetPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = NpliquidacionDetPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpliquidacionDetPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpliquidacionDetPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = NpliquidacionDetPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = NpliquidacionDetPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpliquidacionDetPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpliquidacionDetPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->concepto = $rs->getString($startcol + 1);
+      $this->concepto = $rs->getString($startcol + 1);
 
-			$this->monto = $rs->getFloat($startcol + 2);
+      $this->monto = $rs->getFloat($startcol + 2);
 
-			$this->asided = $rs->getString($startcol + 3);
+      $this->asided = $rs->getString($startcol + 3);
 
-			$this->numreg = $rs->getFloat($startcol + 4);
+      $this->numreg = $rs->getFloat($startcol + 4);
 
-			$this->codpre = $rs->getString($startcol + 5);
+      $this->codpre = $rs->getString($startcol + 5);
 
-			$this->codcon = $rs->getString($startcol + 6);
+      $this->codcon = $rs->getString($startcol + 6);
 
-			$this->numord = $rs->getString($startcol + 7);
+      $this->numord = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating NpliquidacionDet object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating NpliquidacionDet object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -283,6 +314,7 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpliquidacionDetPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpliquidacionDetPeer::doUpdate($this, $con);

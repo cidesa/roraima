@@ -290,6 +290,7 @@ abstract class BaseBndefinsRespPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BndefinsRespPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

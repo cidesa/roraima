@@ -1,40 +1,42 @@
 <?php
 
 
-	
+
 class CitraslaMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CitraslaMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CitraslaMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('citrasla');
 		$tMap->setPhpName('Citrasla');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('citrasla_SEQ');
 
 		$tMap->addColumn('REFTRA', 'Reftra', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECTRA', 'Fectra', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECTRA', 'Fectra', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('ANOTRA', 'Anotra', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -44,13 +46,13 @@ class CitraslaMapBuilder {
 
 		$tMap->addColumn('DESANU', 'Desanu', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('TOTTRA', 'Tottra', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TOTTRA', 'Tottra', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('STATRA', 'Statra', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

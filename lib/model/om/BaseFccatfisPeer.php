@@ -225,6 +225,7 @@ abstract class BaseFccatfisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FccatfisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

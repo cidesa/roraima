@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class EjecucionmodMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.EjecucionmodMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.EjecucionmodMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('ejecucionmod');
 		$tMap->setPhpName('Ejecucionmod');
 
@@ -34,9 +34,9 @@ class EjecucionmodMapBuilder {
 
 		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, false, 32);
 
-		$tMap->addColumn('MONMOD', 'Monmod', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONMOD', 'Monmod', 'double', CreoleTypes::NUMERIC, false, 32);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

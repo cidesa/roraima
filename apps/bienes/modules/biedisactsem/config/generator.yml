@@ -31,9 +31,14 @@ generator:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
+      sort:  codact
     edit:
       title:          Edición de Disposición de Semoviente
-      display:        [=codact, codsem, dessem, nrodissem, tipdissem, motdissem, fecdissem, fecdevdis, mondissem, detdissem, codubiori, desubiori, codubides, desubides, obsdissem, stadissem]
+      display:       [=codact, codsem, dessem, nrodissem, tipdissem, motdissem, fecdissem, fecdevdis, mondissem, detdissem, codubiori, desubiori, codubides, desubides, obsdissem, stadissem]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
       fields:
         fecdissem: { params: date_format='dd/MM/yy' }
         fecdevdis: { params: date_format='dd/MM/yy' } 

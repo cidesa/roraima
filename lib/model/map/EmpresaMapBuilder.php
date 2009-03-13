@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class EmpresaMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.EmpresaMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.EmpresaMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('empresa');
 		$tMap->setPhpName('Empresa');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('empresa_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -53,6 +55,8 @@ class EmpresaMapBuilder {
 		$tMap->addColumn('CONEDO', 'Conedo', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('CLEEDO', 'Cleedo', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('COOPLA', 'Coopla', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('DIRPRE', 'Dirpre', 'string', CreoleTypes::VARCHAR, false, 100);
 
@@ -104,7 +108,17 @@ class EmpresaMapBuilder {
 
 		$tMap->addColumn('ENCABEZADO', 'Encabezado', 'string', CreoleTypes::VARCHAR, false, 250);
 
+		$tMap->addColumn('COOEJE', 'Cooeje', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('PARTIDAIVA', 'Partidaiva', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('CODEMPFONAVA', 'Codempfonava', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('NUMLOT', 'Numlot', 'string', CreoleTypes::VARCHAR, true, 25);
+
+		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 50);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -235,6 +235,7 @@ abstract class BaseReimpcauPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ReimpcauPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

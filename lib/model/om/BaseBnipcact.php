@@ -73,302 +73,339 @@ abstract class BaseBnipcact extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getAnoipc()
-	{
+  
+  public function getAnoipc()
+  {
 
-		return $this->anoipc; 		
-	}
-	
-	public function getIpcene()
-	{
+    return trim($this->anoipc);
 
-		return number_format($this->ipcene,2,',','.');
-		
-	}
-	
-	public function getIpcfeb()
-	{
+  }
+  
+  public function getIpcene($val=false)
+  {
 
-		return number_format($this->ipcfeb,2,',','.');
-		
-	}
-	
-	public function getIpcmar()
-	{
+    if($val) return number_format($this->ipcene,2,',','.');
+    else return $this->ipcene;
 
-		return number_format($this->ipcmar,2,',','.');
-		
-	}
-	
-	public function getIpcabr()
-	{
+  }
+  
+  public function getIpcfeb($val=false)
+  {
 
-		return number_format($this->ipcabr,2,',','.');
-		
-	}
-	
-	public function getIpcmay()
-	{
+    if($val) return number_format($this->ipcfeb,2,',','.');
+    else return $this->ipcfeb;
 
-		return number_format($this->ipcmay,2,',','.');
-		
-	}
-	
-	public function getIpcjun()
-	{
+  }
+  
+  public function getIpcmar($val=false)
+  {
 
-		return number_format($this->ipcjun,2,',','.');
-		
-	}
-	
-	public function getIpcjul()
-	{
+    if($val) return number_format($this->ipcmar,2,',','.');
+    else return $this->ipcmar;
 
-		return number_format($this->ipcjul,2,',','.');
-		
-	}
-	
-	public function getIpcago()
-	{
+  }
+  
+  public function getIpcabr($val=false)
+  {
 
-		return number_format($this->ipcago,2,',','.');
-		
-	}
-	
-	public function getIpcsep()
-	{
+    if($val) return number_format($this->ipcabr,2,',','.');
+    else return $this->ipcabr;
 
-		return number_format($this->ipcsep,2,',','.');
-		
-	}
-	
-	public function getIpcoct()
-	{
+  }
+  
+  public function getIpcmay($val=false)
+  {
 
-		return number_format($this->ipcoct,2,',','.');
-		
-	}
-	
-	public function getIpcnov()
-	{
+    if($val) return number_format($this->ipcmay,2,',','.');
+    else return $this->ipcmay;
 
-		return number_format($this->ipcnov,2,',','.');
-		
-	}
-	
-	public function getIpcdic()
-	{
+  }
+  
+  public function getIpcjun($val=false)
+  {
 
-		return number_format($this->ipcdic,2,',','.');
-		
-	}
-	
-	public function getStaipc()
-	{
+    if($val) return number_format($this->ipcjun,2,',','.');
+    else return $this->ipcjun;
 
-		return $this->staipc; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getIpcjul($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->ipcjul,2,',','.');
+    else return $this->ipcjul;
+
+  }
+  
+  public function getIpcago($val=false)
+  {
+
+    if($val) return number_format($this->ipcago,2,',','.');
+    else return $this->ipcago;
+
+  }
+  
+  public function getIpcsep($val=false)
+  {
+
+    if($val) return number_format($this->ipcsep,2,',','.');
+    else return $this->ipcsep;
+
+  }
+  
+  public function getIpcoct($val=false)
+  {
+
+    if($val) return number_format($this->ipcoct,2,',','.');
+    else return $this->ipcoct;
+
+  }
+  
+  public function getIpcnov($val=false)
+  {
+
+    if($val) return number_format($this->ipcnov,2,',','.');
+    else return $this->ipcnov;
+
+  }
+  
+  public function getIpcdic($val=false)
+  {
+
+    if($val) return number_format($this->ipcdic,2,',','.');
+    else return $this->ipcdic;
+
+  }
+  
+  public function getStaipc()
+  {
+
+    return trim($this->staipc);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setAnoipc($v)
 	{
 
-		if ($this->anoipc !== $v) {
-			$this->anoipc = $v;
-			$this->modifiedColumns[] = BnipcactPeer::ANOIPC;
-		}
-
+    if ($this->anoipc !== $v) {
+        $this->anoipc = $v;
+        $this->modifiedColumns[] = BnipcactPeer::ANOIPC;
+      }
+  
 	} 
 	
 	public function setIpcene($v)
 	{
 
-		if ($this->ipcene !== $v) {
-			$this->ipcene = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCENE;
-		}
-
+    if ($this->ipcene !== $v) {
+        $this->ipcene = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCENE;
+      }
+  
 	} 
 	
 	public function setIpcfeb($v)
 	{
 
-		if ($this->ipcfeb !== $v) {
-			$this->ipcfeb = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCFEB;
-		}
-
+    if ($this->ipcfeb !== $v) {
+        $this->ipcfeb = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCFEB;
+      }
+  
 	} 
 	
 	public function setIpcmar($v)
 	{
 
-		if ($this->ipcmar !== $v) {
-			$this->ipcmar = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCMAR;
-		}
-
+    if ($this->ipcmar !== $v) {
+        $this->ipcmar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCMAR;
+      }
+  
 	} 
 	
 	public function setIpcabr($v)
 	{
 
-		if ($this->ipcabr !== $v) {
-			$this->ipcabr = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCABR;
-		}
-
+    if ($this->ipcabr !== $v) {
+        $this->ipcabr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCABR;
+      }
+  
 	} 
 	
 	public function setIpcmay($v)
 	{
 
-		if ($this->ipcmay !== $v) {
-			$this->ipcmay = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCMAY;
-		}
-
+    if ($this->ipcmay !== $v) {
+        $this->ipcmay = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCMAY;
+      }
+  
 	} 
 	
 	public function setIpcjun($v)
 	{
 
-		if ($this->ipcjun !== $v) {
-			$this->ipcjun = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCJUN;
-		}
-
+    if ($this->ipcjun !== $v) {
+        $this->ipcjun = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCJUN;
+      }
+  
 	} 
 	
 	public function setIpcjul($v)
 	{
 
-		if ($this->ipcjul !== $v) {
-			$this->ipcjul = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCJUL;
-		}
-
+    if ($this->ipcjul !== $v) {
+        $this->ipcjul = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCJUL;
+      }
+  
 	} 
 	
 	public function setIpcago($v)
 	{
 
-		if ($this->ipcago !== $v) {
-			$this->ipcago = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCAGO;
-		}
-
+    if ($this->ipcago !== $v) {
+        $this->ipcago = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCAGO;
+      }
+  
 	} 
 	
 	public function setIpcsep($v)
 	{
 
-		if ($this->ipcsep !== $v) {
-			$this->ipcsep = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCSEP;
-		}
-
+    if ($this->ipcsep !== $v) {
+        $this->ipcsep = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCSEP;
+      }
+  
 	} 
 	
 	public function setIpcoct($v)
 	{
 
-		if ($this->ipcoct !== $v) {
-			$this->ipcoct = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCOCT;
-		}
-
+    if ($this->ipcoct !== $v) {
+        $this->ipcoct = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCOCT;
+      }
+  
 	} 
 	
 	public function setIpcnov($v)
 	{
 
-		if ($this->ipcnov !== $v) {
-			$this->ipcnov = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCNOV;
-		}
-
+    if ($this->ipcnov !== $v) {
+        $this->ipcnov = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCNOV;
+      }
+  
 	} 
 	
 	public function setIpcdic($v)
 	{
 
-		if ($this->ipcdic !== $v) {
-			$this->ipcdic = $v;
-			$this->modifiedColumns[] = BnipcactPeer::IPCDIC;
-		}
-
+    if ($this->ipcdic !== $v) {
+        $this->ipcdic = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnipcactPeer::IPCDIC;
+      }
+  
 	} 
 	
 	public function setStaipc($v)
 	{
 
-		if ($this->staipc !== $v) {
-			$this->staipc = $v;
-			$this->modifiedColumns[] = BnipcactPeer::STAIPC;
-		}
-
+    if ($this->staipc !== $v) {
+        $this->staipc = $v;
+        $this->modifiedColumns[] = BnipcactPeer::STAIPC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnipcactPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnipcactPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->anoipc = $rs->getString($startcol + 0);
+      $this->anoipc = $rs->getString($startcol + 0);
 
-			$this->ipcene = $rs->getFloat($startcol + 1);
+      $this->ipcene = $rs->getFloat($startcol + 1);
 
-			$this->ipcfeb = $rs->getFloat($startcol + 2);
+      $this->ipcfeb = $rs->getFloat($startcol + 2);
 
-			$this->ipcmar = $rs->getFloat($startcol + 3);
+      $this->ipcmar = $rs->getFloat($startcol + 3);
 
-			$this->ipcabr = $rs->getFloat($startcol + 4);
+      $this->ipcabr = $rs->getFloat($startcol + 4);
 
-			$this->ipcmay = $rs->getFloat($startcol + 5);
+      $this->ipcmay = $rs->getFloat($startcol + 5);
 
-			$this->ipcjun = $rs->getFloat($startcol + 6);
+      $this->ipcjun = $rs->getFloat($startcol + 6);
 
-			$this->ipcjul = $rs->getFloat($startcol + 7);
+      $this->ipcjul = $rs->getFloat($startcol + 7);
 
-			$this->ipcago = $rs->getFloat($startcol + 8);
+      $this->ipcago = $rs->getFloat($startcol + 8);
 
-			$this->ipcsep = $rs->getFloat($startcol + 9);
+      $this->ipcsep = $rs->getFloat($startcol + 9);
 
-			$this->ipcoct = $rs->getFloat($startcol + 10);
+      $this->ipcoct = $rs->getFloat($startcol + 10);
 
-			$this->ipcnov = $rs->getFloat($startcol + 11);
+      $this->ipcnov = $rs->getFloat($startcol + 11);
 
-			$this->ipcdic = $rs->getFloat($startcol + 12);
+      $this->ipcdic = $rs->getFloat($startcol + 12);
 
-			$this->staipc = $rs->getString($startcol + 13);
+      $this->staipc = $rs->getString($startcol + 13);
 
-			$this->id = $rs->getInt($startcol + 14);
+      $this->id = $rs->getInt($startcol + 14);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 15; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnipcact object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 15; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnipcact object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -425,6 +462,7 @@ abstract class BaseBnipcact extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BnipcactPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnipcactPeer::doUpdate($this, $con);

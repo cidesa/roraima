@@ -1,0 +1,8 @@
+methods:
+  post:
+   - "attipviv{tipviv}"
+
+names:
+  attipviv{tipviv}:
+    required:  Yes
+    required_msg: Este Campo es requerido

@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CasolartmMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CasolartmMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CasolartmMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('casolartm');
 		$tMap->setPhpName('Casolartm');
 
@@ -34,11 +34,11 @@ class CasolartmMapBuilder {
 
 		$tMap->addColumn('REQART', 'Reqart', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECREQ', 'Fecreq', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECREQ', 'Fecreq', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('DESREQ', 'Desreq', 'string', CreoleTypes::VARCHAR, false, 1000);
 
-		$tMap->addColumn('MONREQ', 'Monreq', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONREQ', 'Monreq', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('STAREQ', 'Stareq', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -46,7 +46,7 @@ class CasolartmMapBuilder {
 
 		$tMap->addColumn('BENREQ', 'Benreq', 'string', CreoleTypes::VARCHAR, false, 1000);
 
-		$tMap->addColumn('MONDES', 'Mondes', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONDES', 'Mondes', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('OBSREQ', 'Obsreq', 'string', CreoleTypes::VARCHAR, false, 1000);
 
@@ -54,11 +54,11 @@ class CasolartmMapBuilder {
 
 		$tMap->addColumn('TIPMON', 'Tipmon', 'string', CreoleTypes::VARCHAR, false, 3);
 
-		$tMap->addColumn('VALMON', 'Valmon', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALMON', 'Valmon', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

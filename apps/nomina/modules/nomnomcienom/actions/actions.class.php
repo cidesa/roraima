@@ -6,35 +6,73 @@
  * @package    siga
  * @subpackage nomnomcienom
  * @author     Your name here
- * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
+ * @version    SVN: $Id: actions.class.php 2692 2006-11-15 21:03:55Z fabien $
  */
-class nomnomcienomActions extends autonomnomcienomActions
+class nomnomcienomActions extends sfActions
 {
-	 public function executeEdit()
+  public function executeIndex()
   {
-    $this->npnomina = $this->getNpnominaOrCreate();
-
-    if ($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->setFlash('notice', 'El cierre de la Nomina se ha realizado correctamente');
-
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('nomnomcienom/create');
-      }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('nomnomcienom/list');
-      }
-      else
-      {
-        return $this->redirect('nomnomcienom/edit?id='.$this->npnomina->getId());
-      }
-    }
-    else
-    {
-      $this->labels = $this->getLabels();
-    }
+    //return $this->redirect('nomnomcienom/index');
   }
-	
+
+  public function executeAjax()
+  {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $codigo   = $this->getRequestParameter('codigo');
+
+	if ($this->getRequestParameter('ajax')=='1')
+	{ $dato="";
+	  $dato2="";
+	  $dato3="";
+	  $dato4="";
+	  $datos="";
+	  $fre="";
+	  $validafechacierre="";
+	  $this->visible="";
+	  $dato=NpnominaPeer::getDesnom($this->getRequestParameter('codigo'));
+	  if ($dato!='<!Registro no Encontrado o Vacio!>')
+	  {
+	  	/*$dato2=NpnominaPeer::getDato($this->getRequestParameter('codigo'),'Ultfec');
+	  	$datos=date('d/m/Y',strtotime(NpnominaPeer::getDato($this->getRequestParameter('codigo'),'Ultfec')));
+	    $dato3=NpnominaPeer::getDato($this->getRequestParameter('codigo'),'Profec');
+	    $dato4=NpnominaPeer::getDato($this->getRequestParameter('codigo'),'Frecal');
+		*/
+
+	  	$dato2=Herramientas::getX('CODNOM','Npnomina','Ultfec',$codigo);
+	  	$datos=date('d/m/Y',strtotime($dato2));
+	  	$dato3=Herramientas::getX('CODNOM','Npnomina','Profec',$codigo);
+	  	$dato4=Herramientas::getX('CODNOM','Npnomina','Frecal',$codigo);
+
+
+        if ($dato4=='S')
+        { $fre='Nomina Semanal';}
+        else if ($dato4=='Q')
+        { $fre='Nomina Quincenal';}
+        else if ($dato4=='M')
+        { $fre='Nomina Mensual';}
+
+	    CierredeNomina::Consulta($this->getRequestParameter('codigo'),$dato2,$dato3,&$visible);
+	    if (CierredeNomina::Consulta2($this->getRequestParameter('codigo'),$dato3))
+	    {
+	     $validafechacierre='S';
+	    }else {$validafechacierre='N';}
+	    $this->visible=$visible;
+	  }
+
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["fecha","'.$datos.'",""],["proxcalculo","'.$dato3.'",""],["frecuencia","'.$dato4.'",""],["pago","'.$fre.'",""],["valida","'.$validafechacierre.'",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+	}
+  }
+
+  public function executeRealizarcierre()
+  {
+	$codigo=$this->getRequestParameter('codigo');
+	$fecha=$this->getRequestParameter('fecha');
+	CierredeNomina::procesoCierre($codigo,$fecha,&$msj);
+	if ($msj=='1')
+	{ $this->setFlash('notice', 'La Nómina no puede ser cerrada');}
+	else { $this->setFlash('notice', 'La Nómina fue Cerrada Satisfactoriamente');}
+	return $this->redirect('nomnomcienom/index');
+  }
 }

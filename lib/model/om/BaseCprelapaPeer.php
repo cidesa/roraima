@@ -255,6 +255,7 @@ abstract class BaseCprelapaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CprelapaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

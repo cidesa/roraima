@@ -1,0 +1,25 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefparing
+    theme:            default
+    fields:
+      codparing:      { name : Codigo, params: maxlength=32 }
+      nomparing:      { name : Nombre }
+    list:
+      title:          Clasificador Presupuestario (Recursos)
+      display:        [=codparing, nomparing]
+      filters:        [codparing, nomparing]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+      sort:  codparing
+    edit:
+      title:          Clasificador Presupuestario (Recursos)
+      display:        [codparing, nomparing]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

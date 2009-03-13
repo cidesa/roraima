@@ -210,6 +210,7 @@ abstract class BaseNpislrPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpislrPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -41,196 +41,223 @@ abstract class BaseNpintfecrefdaniel extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getFeciniref($format = 'Y-m-d')
-	{
+  
+  public function getFeciniref($format = 'Y-m-d')
+  {
 
-		if ($this->feciniref === null || $this->feciniref === '') {
-			return null;
-		} elseif (!is_int($this->feciniref)) {
-						$ts = strtotime($this->feciniref);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feciniref] as date/time value: " . var_export($this->feciniref, true));
-			}
-		} else {
-			$ts = $this->feciniref;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->feciniref === null || $this->feciniref === '') {
+      return null;
+    } elseif (!is_int($this->feciniref)) {
+            $ts = adodb_strtotime($this->feciniref);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feciniref] as date/time value: " . var_export($this->feciniref, true));
+      }
+    } else {
+      $ts = $this->feciniref;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getFecfinref($format = 'Y-m-d')
-	{
+  
+  public function getFecfinref($format = 'Y-m-d')
+  {
 
-		if ($this->fecfinref === null || $this->fecfinref === '') {
-			return null;
-		} elseif (!is_int($this->fecfinref)) {
-						$ts = strtotime($this->fecfinref);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfinref] as date/time value: " . var_export($this->fecfinref, true));
-			}
-		} else {
-			$ts = $this->fecfinref;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecfinref === null || $this->fecfinref === '') {
+      return null;
+    } elseif (!is_int($this->fecfinref)) {
+            $ts = adodb_strtotime($this->fecfinref);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfinref] as date/time value: " . var_export($this->fecfinref, true));
+      }
+    } else {
+      $ts = $this->fecfinref;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getTasint()
-	{
+  
+  public function getTasint($val=false)
+  {
 
-		return number_format($this->tasint,2,',','.');
-		
-	}
-	
-	public function getTasintpro()
-	{
+    if($val) return number_format($this->tasint,2,',','.');
+    else return $this->tasint;
 
-		return number_format($this->tasintpro,2,',','.');
-		
-	}
-	
-	public function getTasintpas()
-	{
+  }
+  
+  public function getTasintpro($val=false)
+  {
 
-		return number_format($this->tasintpas,2,',','.');
-		
-	}
-	
-	public function getTasintact()
-	{
+    if($val) return number_format($this->tasintpro,2,',','.');
+    else return $this->tasintpro;
 
-		return number_format($this->tasintact,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTasintpas($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->tasintpas,2,',','.');
+    else return $this->tasintpas;
+
+  }
+  
+  public function getTasintact($val=false)
+  {
+
+    if($val) return number_format($this->tasintact,2,',','.');
+    else return $this->tasintact;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setFeciniref($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feciniref] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feciniref !== $ts) {
-			$this->feciniref = $ts;
-			$this->modifiedColumns[] = NpintfecrefdanielPeer::FECINIREF;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feciniref] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feciniref !== $ts) {
+      $this->feciniref = $ts;
+      $this->modifiedColumns[] = NpintfecrefdanielPeer::FECINIREF;
+    }
 
 	} 
 	
 	public function setFecfinref($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfinref] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfinref !== $ts) {
-			$this->fecfinref = $ts;
-			$this->modifiedColumns[] = NpintfecrefdanielPeer::FECFINREF;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfinref] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfinref !== $ts) {
+      $this->fecfinref = $ts;
+      $this->modifiedColumns[] = NpintfecrefdanielPeer::FECFINREF;
+    }
 
 	} 
 	
 	public function setTasint($v)
 	{
 
-		if ($this->tasint !== $v) {
-			$this->tasint = $v;
-			$this->modifiedColumns[] = NpintfecrefdanielPeer::TASINT;
-		}
-
+    if ($this->tasint !== $v) {
+        $this->tasint = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfecrefdanielPeer::TASINT;
+      }
+  
 	} 
 	
 	public function setTasintpro($v)
 	{
 
-		if ($this->tasintpro !== $v) {
-			$this->tasintpro = $v;
-			$this->modifiedColumns[] = NpintfecrefdanielPeer::TASINTPRO;
-		}
-
+    if ($this->tasintpro !== $v) {
+        $this->tasintpro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfecrefdanielPeer::TASINTPRO;
+      }
+  
 	} 
 	
 	public function setTasintpas($v)
 	{
 
-		if ($this->tasintpas !== $v) {
-			$this->tasintpas = $v;
-			$this->modifiedColumns[] = NpintfecrefdanielPeer::TASINTPAS;
-		}
-
+    if ($this->tasintpas !== $v) {
+        $this->tasintpas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfecrefdanielPeer::TASINTPAS;
+      }
+  
 	} 
 	
 	public function setTasintact($v)
 	{
 
-		if ($this->tasintact !== $v) {
-			$this->tasintact = $v;
-			$this->modifiedColumns[] = NpintfecrefdanielPeer::TASINTACT;
-		}
-
+    if ($this->tasintact !== $v) {
+        $this->tasintact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfecrefdanielPeer::TASINTACT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpintfecrefdanielPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpintfecrefdanielPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->feciniref = $rs->getDate($startcol + 0, null);
+      $this->feciniref = $rs->getDate($startcol + 0, null);
 
-			$this->fecfinref = $rs->getDate($startcol + 1, null);
+      $this->fecfinref = $rs->getDate($startcol + 1, null);
 
-			$this->tasint = $rs->getFloat($startcol + 2);
+      $this->tasint = $rs->getFloat($startcol + 2);
 
-			$this->tasintpro = $rs->getFloat($startcol + 3);
+      $this->tasintpro = $rs->getFloat($startcol + 3);
 
-			$this->tasintpas = $rs->getFloat($startcol + 4);
+      $this->tasintpas = $rs->getFloat($startcol + 4);
 
-			$this->tasintact = $rs->getFloat($startcol + 5);
+      $this->tasintact = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npintfecrefdaniel object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npintfecrefdaniel object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -287,6 +314,7 @@ abstract class BaseNpintfecrefdaniel extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpintfecrefdanielPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpintfecrefdanielPeer::doUpdate($this, $con);

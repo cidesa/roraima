@@ -15,21 +15,27 @@ generator:
       fecini: { name: Fecha de Inicio}
       fecexp: { name: Fecha de Expiracion}
       frecon: { name: Frecuencia de Pago}
-      asided: { name: Tipo de Expiracion}
+      asided: { name: Tipo de Operacion}
       acucon: { name: Concepto Acumulativo}
       calcon: { name: Concepto Calculable}
       activo: { name: Concepto Activo}
       acumulado: { name: Acumulado}
+      codnom2: { name: Tipo de Nómina}
+      desnom: { name: Nombre Nómina}
     list:
       title:          Empleados con Conceptos Asignados
       filters:        [codcon]
-      display:        [=codcon, nomcon, codemp, nomemp, fecini]
+      display:        [=codcon, nomcon]
       fields:
         fecini: { params: date_format='dd/MM/yy' }
       object_actions:
         _edit:        ~
-        _delete:      ~
       max_per_page:   5
     edit:
       title:          Asignacion de Conceptos a Empleados
-     display:       [codcon, nomcon]
+      display:       [codcon, nomcon, nomcar, codemp, codcar, nomemp, monto, fecini, fecexp, frecon, asided, acucon, calcon, activo, acumulado, codnom2, desnom]
+      actions:
+        _list:         ~
+        _save:         ~
+        _create:       ~
+        _delete:       ~

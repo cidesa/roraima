@@ -1,0 +1,38 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   fcdefpgi
+  ancho:                   700
+  anchogrid:               750
+  filas:                   6
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Desde
+  tipo:                    m
+  nombrecampo:             mondes
+  esgrabable:			   true
+  html:                    []
+
+2:       # Columna 2
+  titulo:                  Hasta
+  tipo:                    m
+  nombrecampo:             monhas
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Monto a Pagar
+  tipo:                    m
+  nombrecampo:             monpag
+  esgrabable:			   true
+  html:                    []
+
+4:       # Columna 4
+  titulo:                  Nro. de Porciones
+  tipo:                    t
+  nombrecampo:             numpor
+  esgrabable:			   true
+  html:                    []
+
+

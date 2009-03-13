@@ -5,37 +5,41 @@ generator:
     theme:            default
     fields:
       codact:      { name : Código Nivel }
-      codsem:      { name : Código Activo }      
+      codsem:      { name : Código Activo }
       desmue:      { name : Descripción }
-      
+
       ctadepcar:   { name : Cuenta a Cargar }
-      descta:      { name : Descripción Cuenta a Cargar }  
-      ctadepabo:   { name : Cuenta a Abonar }  
-      desctaabo:   { name : Descripción Cuenta a Abonar } 
-      
+      descta:      { name : Descripción Cuenta a Cargar }
+      ctadepabo:   { name : Cuenta a Abonar }
+      desctaabo:   { name : Descripción Cuenta a Abonar }
+
       ctaajucar:   { name : Cuenta a Cargar }
       desctaajucar:{ name : Descripción Cuenta a Cargar }
-      ctaajuabo:   { name : Cuenta a Abonar }  
-      desctaajuabo:{ name : Descripción Cuenta a Abonar } 
-      
+      ctaajuabo:   { name : Cuenta a Abonar }
+      desctaajuabo:{ name : Descripción Cuenta a Abonar }
+
       ctarevcar:   { name : Cuenta a Cargar }
       desctarevcar:{ name : Descripción Cuenta a Cargar }
-      ctarevabo:   { name : Cuenta a Abonar }  
+      ctarevabo:   { name : Cuenta a Abonar }
       desctarevabo:{ name : Descripción Cuenta a Abonar }
-      
-      ctapercar:   { name : Cuenta a Cargar } 
+
+      ctapercar:   { name : Cuenta a Cargar }
       desctapercar:{ name : Descripción Cuenta a Cargar }
-      ctaperabo:   { name : Cuenta a Abonar }        
-      desctaperabo:{ name : Descripción Cuenta a Abonar } 
-      
+      ctaperabo:   { name : Cuenta a Abonar }
+      desctaperabo:{ name : Descripción Cuenta a Abonar }
+
     list:
       title:          Definición Contable de Semovientes
-      display:        [codact, codsem, desmue]
+      display:        [=codact, codsem, desmue]
       filters:        [codact, codsem]
       object_actions:
         _edit:        ~
-        _delete:      ~              
-      max_per_page:   5    
+        _delete:      ~
+      max_per_page:   10
     edit:
-      title:          Definición Contable de Semovientes
-      display:        [codact, codsem, desmue, ctadepcar, descta, ctadepabo, desctaabo, ctaajucar, desctaajucar, ctaajuabo, desctaajuabo, ctarevcar, desctarevcar, ctarevabo, desctarevabo, ctapercar, desctapercar, ctaperabo, desctaperabo] 
+      title:          Edición Contable de Semovientes
+      display:        [codact, codsem, desmue, ctadepcar, descta, ctadepabo, desctaabo, ctaajucar, desctaajucar, ctaajuabo, desctaajuabo, ctarevcar, desctarevcar, ctarevabo, desctarevabo, ctapercar, desctapercar, ctaperabo, desctaperabo]
+      actions:
+        _list:     ~
+        _save:     ~
+        _delete:   ~

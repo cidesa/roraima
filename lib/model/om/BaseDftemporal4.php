@@ -29,92 +29,118 @@ abstract class BaseDftemporal4 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTipo()
-	{
+  
+  public function getTipo()
+  {
 
-		return $this->tipo; 		
-	}
-	
-	public function getAbr()
-	{
+    return trim($this->tipo);
 
-		return $this->abr; 		
-	}
-	
-	public function getExt()
-	{
+  }
+  
+  public function getAbr()
+  {
 
-		return $this->ext; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->abr);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getExt()
+  {
+
+    return trim($this->ext);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = Dftemporal4Peer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = Dftemporal4Peer::TIPO;
+      }
+  
 	} 
 	
 	public function setAbr($v)
 	{
 
-		if ($this->abr !== $v) {
-			$this->abr = $v;
-			$this->modifiedColumns[] = Dftemporal4Peer::ABR;
-		}
-
+    if ($this->abr !== $v) {
+        $this->abr = $v;
+        $this->modifiedColumns[] = Dftemporal4Peer::ABR;
+      }
+  
 	} 
 	
 	public function setExt($v)
 	{
 
-		if ($this->ext !== $v) {
-			$this->ext = $v;
-			$this->modifiedColumns[] = Dftemporal4Peer::EXT;
-		}
-
+    if ($this->ext !== $v) {
+        $this->ext = $v;
+        $this->modifiedColumns[] = Dftemporal4Peer::EXT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Dftemporal4Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Dftemporal4Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tipo = $rs->getString($startcol + 0);
+      $this->tipo = $rs->getString($startcol + 0);
 
-			$this->abr = $rs->getString($startcol + 1);
+      $this->abr = $rs->getString($startcol + 1);
 
-			$this->ext = $rs->getString($startcol + 2);
+      $this->ext = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Dftemporal4 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Dftemporal4 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

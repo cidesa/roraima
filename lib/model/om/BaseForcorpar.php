@@ -29,93 +29,119 @@ abstract class BaseForcorpar extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodest()
-	{
+  
+  public function getCodest()
+  {
 
-		return $this->codest; 		
-	}
-	
-	public function getCodmun()
-	{
+    return trim($this->codest);
 
-		return $this->codmun; 		
-	}
-	
-	public function getCorpar()
-	{
+  }
+  
+  public function getCodmun()
+  {
 
-		return number_format($this->corpar,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codmun);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCorpar($val=false)
+  {
+
+    if($val) return number_format($this->corpar,2,',','.');
+    else return $this->corpar;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodest($v)
 	{
 
-		if ($this->codest !== $v) {
-			$this->codest = $v;
-			$this->modifiedColumns[] = ForcorparPeer::CODEST;
-		}
-
+    if ($this->codest !== $v) {
+        $this->codest = $v;
+        $this->modifiedColumns[] = ForcorparPeer::CODEST;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = ForcorparPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = ForcorparPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCorpar($v)
 	{
 
-		if ($this->corpar !== $v) {
-			$this->corpar = $v;
-			$this->modifiedColumns[] = ForcorparPeer::CORPAR;
-		}
-
+    if ($this->corpar !== $v) {
+        $this->corpar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcorparPeer::CORPAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForcorparPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForcorparPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codest = $rs->getString($startcol + 0);
+      $this->codest = $rs->getString($startcol + 0);
 
-			$this->codmun = $rs->getString($startcol + 1);
+      $this->codmun = $rs->getString($startcol + 1);
 
-			$this->corpar = $rs->getFloat($startcol + 2);
+      $this->corpar = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forcorpar object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forcorpar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

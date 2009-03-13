@@ -205,6 +205,7 @@ abstract class BaseCaordforentPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaordforentPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

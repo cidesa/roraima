@@ -41,146 +41,175 @@ abstract class BaseFcdefrecint extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrec()
-	{
+  
+  public function getCodrec()
+  {
 
-		return $this->codrec; 		
-	}
-	
-	public function getNomrec()
-	{
+    return trim($this->codrec);
 
-		return $this->nomrec; 		
-	}
-	
-	public function getTipo()
-	{
+  }
+  
+  public function getNomrec()
+  {
 
-		return $this->tipo; 		
-	}
-	
-	public function getModo()
-	{
+    return trim($this->nomrec);
 
-		return $this->modo; 		
-	}
-	
-	public function getPeriodo()
-	{
+  }
+  
+  public function getTipo()
+  {
 
-		return $this->periodo; 		
-	}
-	
-	public function getPromedio()
-	{
+    return trim($this->tipo);
 
-		return $this->promedio; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getModo()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->modo);
+
+  }
+  
+  public function getPeriodo()
+  {
+
+    return trim($this->periodo);
+
+  }
+  
+  public function getPromedio()
+  {
+
+    return trim($this->promedio);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = FcdefrecintPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = FcdefrecintPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setNomrec($v)
 	{
 
-		if ($this->nomrec !== $v) {
-			$this->nomrec = $v;
-			$this->modifiedColumns[] = FcdefrecintPeer::NOMREC;
-		}
-
+    if ($this->nomrec !== $v) {
+        $this->nomrec = $v;
+        $this->modifiedColumns[] = FcdefrecintPeer::NOMREC;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = FcdefrecintPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = FcdefrecintPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setModo($v)
 	{
 
-		if ($this->modo !== $v) {
-			$this->modo = $v;
-			$this->modifiedColumns[] = FcdefrecintPeer::MODO;
-		}
-
+    if ($this->modo !== $v) {
+        $this->modo = $v;
+        $this->modifiedColumns[] = FcdefrecintPeer::MODO;
+      }
+  
 	} 
 	
 	public function setPeriodo($v)
 	{
 
-		if ($this->periodo !== $v || $v === '') {
-			$this->periodo = $v;
-			$this->modifiedColumns[] = FcdefrecintPeer::PERIODO;
-		}
-
+    if ($this->periodo !== $v || $v === '') {
+        $this->periodo = $v;
+        $this->modifiedColumns[] = FcdefrecintPeer::PERIODO;
+      }
+  
 	} 
 	
 	public function setPromedio($v)
 	{
 
-		if ($this->promedio !== $v || $v === '') {
-			$this->promedio = $v;
-			$this->modifiedColumns[] = FcdefrecintPeer::PROMEDIO;
-		}
-
+    if ($this->promedio !== $v || $v === '') {
+        $this->promedio = $v;
+        $this->modifiedColumns[] = FcdefrecintPeer::PROMEDIO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdefrecintPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdefrecintPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrec = $rs->getString($startcol + 0);
+      $this->codrec = $rs->getString($startcol + 0);
 
-			$this->nomrec = $rs->getString($startcol + 1);
+      $this->nomrec = $rs->getString($startcol + 1);
 
-			$this->tipo = $rs->getString($startcol + 2);
+      $this->tipo = $rs->getString($startcol + 2);
 
-			$this->modo = $rs->getString($startcol + 3);
+      $this->modo = $rs->getString($startcol + 3);
 
-			$this->periodo = $rs->getString($startcol + 4);
+      $this->periodo = $rs->getString($startcol + 4);
 
-			$this->promedio = $rs->getString($startcol + 5);
+      $this->promedio = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdefrecint object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdefrecint object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseFcdefrecint extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdefrecintPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdefrecintPeer::doUpdate($this, $con);

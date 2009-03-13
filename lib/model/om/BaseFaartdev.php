@@ -45,168 +45,198 @@ abstract class BaseFaartdev extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNrodev()
-	{
+  
+  public function getNrodev()
+  {
 
-		return $this->nrodev; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->nrodev);
 
-		return $this->codart; 		
-	}
-	
-	public function getNumlot()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->numlot; 		
-	}
-	
-	public function getCandes()
-	{
+    return trim($this->codart);
 
-		return number_format($this->candes,2,',','.');
-		
-	}
-	
-	public function getCandev()
-	{
+  }
+  
+  public function getNumlot()
+  {
 
-		return number_format($this->candev,2,',','.');
-		
-	}
-	
-	public function getPreart()
-	{
+    return trim($this->numlot);
 
-		return number_format($this->preart,2,',','.');
-		
-	}
-	
-	public function getTotart()
-	{
+  }
+  
+  public function getCandes($val=false)
+  {
 
-		return number_format($this->totart,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->candes,2,',','.');
+    else return $this->candes;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCandev($val=false)
+  {
+
+    if($val) return number_format($this->candev,2,',','.');
+    else return $this->candev;
+
+  }
+  
+  public function getPreart($val=false)
+  {
+
+    if($val) return number_format($this->preart,2,',','.');
+    else return $this->preart;
+
+  }
+  
+  public function getTotart($val=false)
+  {
+
+    if($val) return number_format($this->totart,2,',','.');
+    else return $this->totart;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNrodev($v)
 	{
 
-		if ($this->nrodev !== $v) {
-			$this->nrodev = $v;
-			$this->modifiedColumns[] = FaartdevPeer::NRODEV;
-		}
-
+    if ($this->nrodev !== $v) {
+        $this->nrodev = $v;
+        $this->modifiedColumns[] = FaartdevPeer::NRODEV;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FaartdevPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FaartdevPeer::CODART;
+      }
+  
 	} 
 	
 	public function setNumlot($v)
 	{
 
-		if ($this->numlot !== $v) {
-			$this->numlot = $v;
-			$this->modifiedColumns[] = FaartdevPeer::NUMLOT;
-		}
-
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = FaartdevPeer::NUMLOT;
+      }
+  
 	} 
 	
 	public function setCandes($v)
 	{
 
-		if ($this->candes !== $v) {
-			$this->candes = $v;
-			$this->modifiedColumns[] = FaartdevPeer::CANDES;
-		}
-
+    if ($this->candes !== $v) {
+        $this->candes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartdevPeer::CANDES;
+      }
+  
 	} 
 	
 	public function setCandev($v)
 	{
 
-		if ($this->candev !== $v) {
-			$this->candev = $v;
-			$this->modifiedColumns[] = FaartdevPeer::CANDEV;
-		}
-
+    if ($this->candev !== $v) {
+        $this->candev = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartdevPeer::CANDEV;
+      }
+  
 	} 
 	
 	public function setPreart($v)
 	{
 
-		if ($this->preart !== $v) {
-			$this->preart = $v;
-			$this->modifiedColumns[] = FaartdevPeer::PREART;
-		}
-
+    if ($this->preart !== $v) {
+        $this->preart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartdevPeer::PREART;
+      }
+  
 	} 
 	
 	public function setTotart($v)
 	{
 
-		if ($this->totart !== $v) {
-			$this->totart = $v;
-			$this->modifiedColumns[] = FaartdevPeer::TOTART;
-		}
-
+    if ($this->totart !== $v) {
+        $this->totart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartdevPeer::TOTART;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FaartdevPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FaartdevPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nrodev = $rs->getString($startcol + 0);
+      $this->nrodev = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->numlot = $rs->getString($startcol + 2);
+      $this->numlot = $rs->getString($startcol + 2);
 
-			$this->candes = $rs->getFloat($startcol + 3);
+      $this->candes = $rs->getFloat($startcol + 3);
 
-			$this->candev = $rs->getFloat($startcol + 4);
+      $this->candev = $rs->getFloat($startcol + 4);
 
-			$this->preart = $rs->getFloat($startcol + 5);
+      $this->preart = $rs->getFloat($startcol + 5);
 
-			$this->totart = $rs->getFloat($startcol + 6);
+      $this->totart = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Faartdev object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Faartdev object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -263,6 +293,7 @@ abstract class BaseFaartdev extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FaartdevPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FaartdevPeer::doUpdate($this, $con);

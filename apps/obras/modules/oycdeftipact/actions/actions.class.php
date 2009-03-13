@@ -22,5 +22,26 @@ class oycdeftipactActions extends autooycdeftipactActions
     {
       $this->octipact->setDestipact($octipact['destipact']);
     }
-  }	
+  }
+
+
+  public function executeAjax()
+  {
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+	 $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+	 if ($this->getRequestParameter('ajax')=='1')
+	 {
+	 	$dato=OctipactPeer::getDestipact(trim($this->getRequestParameter('codigo')));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 	return sfView::HEADER_ONLY;
+	 }
+  }
+
+  protected function deleteOctipact($octipact)
+  {
+   	Obras::Borrar_Octipact($octipact);
+  }
+
 }

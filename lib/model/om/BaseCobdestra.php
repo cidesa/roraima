@@ -41,170 +41,198 @@ abstract class BaseCobdestra extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumtra()
-	{
+  
+  public function getNumtra()
+  {
 
-		return $this->numtra; 		
-	}
-	
-	public function getRefdoc()
-	{
+    return trim($this->numtra);
 
-		return $this->refdoc; 		
-	}
-	
-	public function getCodcli()
-	{
+  }
+  
+  public function getRefdoc()
+  {
 
-		return $this->codcli; 		
-	}
-	
-	public function getCoddes()
-	{
+    return trim($this->refdoc);
 
-		return $this->coddes; 		
-	}
-	
-	public function getFecdes($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodcli()
+  {
 
-		if ($this->fecdes === null || $this->fecdes === '') {
-			return null;
-		} elseif (!is_int($this->fecdes)) {
-						$ts = strtotime($this->fecdes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
-			}
-		} else {
-			$ts = $this->fecdes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codcli);
 
-	
-	public function getMondes()
-	{
+  }
+  
+  public function getCoddes()
+  {
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->coddes);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFecdes($format = 'Y-m-d')
+  {
+
+    if ($this->fecdes === null || $this->fecdes === '') {
+      return null;
+    } elseif (!is_int($this->fecdes)) {
+            $ts = adodb_strtotime($this->fecdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
+      }
+    } else {
+      $ts = $this->fecdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getMondes($val=false)
+  {
+
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumtra($v)
 	{
 
-		if ($this->numtra !== $v) {
-			$this->numtra = $v;
-			$this->modifiedColumns[] = CobdestraPeer::NUMTRA;
-		}
-
+    if ($this->numtra !== $v) {
+        $this->numtra = $v;
+        $this->modifiedColumns[] = CobdestraPeer::NUMTRA;
+      }
+  
 	} 
 	
 	public function setRefdoc($v)
 	{
 
-		if ($this->refdoc !== $v) {
-			$this->refdoc = $v;
-			$this->modifiedColumns[] = CobdestraPeer::REFDOC;
-		}
-
+    if ($this->refdoc !== $v) {
+        $this->refdoc = $v;
+        $this->modifiedColumns[] = CobdestraPeer::REFDOC;
+      }
+  
 	} 
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = CobdestraPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = CobdestraPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setCoddes($v)
 	{
 
-		if ($this->coddes !== $v) {
-			$this->coddes = $v;
-			$this->modifiedColumns[] = CobdestraPeer::CODDES;
-		}
-
+    if ($this->coddes !== $v) {
+        $this->coddes = $v;
+        $this->modifiedColumns[] = CobdestraPeer::CODDES;
+      }
+  
 	} 
 	
 	public function setFecdes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdes !== $ts) {
-			$this->fecdes = $ts;
-			$this->modifiedColumns[] = CobdestraPeer::FECDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdes !== $ts) {
+      $this->fecdes = $ts;
+      $this->modifiedColumns[] = CobdestraPeer::FECDES;
+    }
 
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = CobdestraPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobdestraPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CobdestraPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CobdestraPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numtra = $rs->getString($startcol + 0);
+      $this->numtra = $rs->getString($startcol + 0);
 
-			$this->refdoc = $rs->getString($startcol + 1);
+      $this->refdoc = $rs->getString($startcol + 1);
 
-			$this->codcli = $rs->getString($startcol + 2);
+      $this->codcli = $rs->getString($startcol + 2);
 
-			$this->coddes = $rs->getString($startcol + 3);
+      $this->coddes = $rs->getString($startcol + 3);
 
-			$this->fecdes = $rs->getDate($startcol + 4, null);
+      $this->fecdes = $rs->getDate($startcol + 4, null);
 
-			$this->mondes = $rs->getFloat($startcol + 5);
+      $this->mondes = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cobdestra object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cobdestra object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -261,6 +289,7 @@ abstract class BaseCobdestra extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CobdestraPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CobdestraPeer::doUpdate($this, $con);

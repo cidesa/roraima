@@ -1,54 +1,56 @@
 <?php
 
 
-	
+
 class NpdefgenMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpdefgenMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpdefgenMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npdefgen');
 		$tMap->setPhpName('Npdefgen');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npdefgen_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('LONCODCAR', 'Loncodcar', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCODCAR', 'Loncodcar', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('LONCODEMP', 'Loncodemp', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCODEMP', 'Loncodemp', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('LONCODORG', 'Loncodorg', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCODORG', 'Loncodorg', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('LONCODUNI', 'Loncoduni', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LONCODUNI', 'Loncoduni', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('RUPCAR', 'Rupcar', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RUPCAR', 'Rupcar', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('RUPEMP', 'Rupemp', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RUPEMP', 'Rupemp', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('RUPORG', 'Ruporg', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RUPORG', 'Ruporg', 'double', CreoleTypes::NUMERIC, false, 2);
 
-		$tMap->addColumn('RUPUNI', 'Rupuni', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RUPUNI', 'Rupuni', 'double', CreoleTypes::NUMERIC, false, 2);
 
 		$tMap->addColumn('FORCAR', 'Forcar', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -82,23 +84,23 @@ class NpdefgenMapBuilder {
 
 		$tMap->addColumn('FORESC', 'Foresc', 'string', CreoleTypes::VARCHAR, false, 16);
 
-		$tMap->addColumn('NUMREC', 'Numrec', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('NUMREC', 'Numrec', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('FORCARRAC', 'Forcarrac', 'string', CreoleTypes::VARCHAR, false, 16);
 
 		$tMap->addColumn('FORCAROCP', 'Forcarocp', 'string', CreoleTypes::VARCHAR, false, 16);
 
-		$tMap->addColumn('CORREL', 'Correl', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CORREL', 'Correl', 'double', CreoleTypes::NUMERIC, false, 6);
 
-		$tMap->addColumn('PORCTICK', 'Porctick', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORCTICK', 'Porctick', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('UNITRIB', 'Unitrib', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('UNITRIB', 'Unitrib', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('NUMTICK', 'Numtick', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('NUMTICK', 'Numtick', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('DIASEM', 'Diasem', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DIASEM', 'Diasem', 'double', CreoleTypes::NUMERIC, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -65,7 +65,19 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipo;
+
+
+	
 	protected $correl;
+
+
+	
+	protected $porvan;
+
+
+	
+	protected $porant;
 
 
 	
@@ -77,337 +89,433 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefcot()
-	{
+  
+  public function getRefcot()
+  {
 
-		return $this->refcot; 		
-	}
-	
-	public function getFeccot($format = 'Y-m-d')
-	{
+    return trim($this->refcot);
 
-		if ($this->feccot === null || $this->feccot === '') {
-			return null;
-		} elseif (!is_int($this->feccot)) {
-						$ts = strtotime($this->feccot);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccot] as date/time value: " . var_export($this->feccot, true));
-			}
-		} else {
-			$ts = $this->feccot;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFeccot($format = 'Y-m-d')
+  {
 
-	
-	public function getCodpro()
-	{
+    if ($this->feccot === null || $this->feccot === '') {
+      return null;
+    } elseif (!is_int($this->feccot)) {
+            $ts = adodb_strtotime($this->feccot);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccot] as date/time value: " . var_export($this->feccot, true));
+      }
+    } else {
+      $ts = $this->feccot;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codpro; 		
-	}
-	
-	public function getDescot()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->descot; 		
-	}
-	
-	public function getRefsol()
-	{
+    return trim($this->codpro);
 
-		return $this->refsol; 		
-	}
-	
-	public function getMoncot()
-	{
+  }
+  
+  public function getDescot()
+  {
 
-		return number_format($this->moncot,2,',','.');
-		
-	}
-	
-	public function getConpag()
-	{
+    return trim($this->descot);
 
-		return $this->conpag; 		
-	}
-	
-	public function getForent()
-	{
+  }
+  
+  public function getRefsol()
+  {
 
-		return $this->forent; 		
-	}
-	
-	public function getPriori()
-	{
+    return trim($this->refsol);
 
-		return number_format($this->priori,2,',','.');
-		
-	}
-	
-	public function getMondes()
-	{
+  }
+  
+  public function getMoncot($val=false)
+  {
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getMonrec()
-	{
+    if($val) return number_format($this->moncot,2,',','.');
+    else return $this->moncot;
 
-		return number_format($this->monrec,2,',','.');
-		
-	}
-	
-	public function getTipmon()
-	{
+  }
+  
+  public function getConpag()
+  {
 
-		return $this->tipmon; 		
-	}
-	
-	public function getValmon()
-	{
+    return trim($this->conpag);
 
-		return number_format($this->valmon,2,',','.');
-		
-	}
-	
-	public function getRefpro()
-	{
+  }
+  
+  public function getForent()
+  {
 
-		return $this->refpro; 		
-	}
-	
-	public function getCorrel()
-	{
+    return trim($this->forent);
 
-		return number_format($this->correl,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPriori($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->priori,2,',','.');
+    else return $this->priori;
+
+  }
+  
+  public function getMondes($val=false)
+  {
+
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
+
+  }
+  
+  public function getMonrec($val=false)
+  {
+
+    if($val) return number_format($this->monrec,2,',','.');
+    else return $this->monrec;
+
+  }
+  
+  public function getTipmon()
+  {
+
+    return trim($this->tipmon);
+
+  }
+  
+  public function getValmon($val=false)
+  {
+
+    if($val) return number_format($this->valmon,2,',','.');
+    else return $this->valmon;
+
+  }
+  
+  public function getRefpro()
+  {
+
+    return trim($this->refpro);
+
+  }
+  
+  public function getTipo()
+  {
+
+    return trim($this->tipo);
+
+  }
+  
+  public function getCorrel($val=false)
+  {
+
+    if($val) return number_format($this->correl,2,',','.');
+    else return $this->correl;
+
+  }
+  
+  public function getPorvan($val=false)
+  {
+
+    if($val) return number_format($this->porvan,2,',','.');
+    else return $this->porvan;
+
+  }
+  
+  public function getPorant($val=false)
+  {
+
+    if($val) return number_format($this->porant,2,',','.');
+    else return $this->porant;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefcot($v)
 	{
 
-		if ($this->refcot !== $v) {
-			$this->refcot = $v;
-			$this->modifiedColumns[] = CacotizaPeer::REFCOT;
-		}
-
+    if ($this->refcot !== $v) {
+        $this->refcot = $v;
+        $this->modifiedColumns[] = CacotizaPeer::REFCOT;
+      }
+  
 	} 
 	
 	public function setFeccot($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccot] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccot !== $ts) {
-			$this->feccot = $ts;
-			$this->modifiedColumns[] = CacotizaPeer::FECCOT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccot] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccot !== $ts) {
+      $this->feccot = $ts;
+      $this->modifiedColumns[] = CacotizaPeer::FECCOT;
+    }
 
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CacotizaPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CacotizaPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setDescot($v)
 	{
 
-		if ($this->descot !== $v) {
-			$this->descot = $v;
-			$this->modifiedColumns[] = CacotizaPeer::DESCOT;
-		}
-
+    if ($this->descot !== $v) {
+        $this->descot = $v;
+        $this->modifiedColumns[] = CacotizaPeer::DESCOT;
+      }
+  
 	} 
 	
 	public function setRefsol($v)
 	{
 
-		if ($this->refsol !== $v) {
-			$this->refsol = $v;
-			$this->modifiedColumns[] = CacotizaPeer::REFSOL;
-		}
-
+    if ($this->refsol !== $v) {
+        $this->refsol = $v;
+        $this->modifiedColumns[] = CacotizaPeer::REFSOL;
+      }
+  
 	} 
 	
 	public function setMoncot($v)
 	{
 
-		if ($this->moncot !== $v) {
-			$this->moncot = $v;
-			$this->modifiedColumns[] = CacotizaPeer::MONCOT;
-		}
-
+    if ($this->moncot !== $v) {
+        $this->moncot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CacotizaPeer::MONCOT;
+      }
+  
 	} 
 	
 	public function setConpag($v)
 	{
 
-		if ($this->conpag !== $v) {
-			$this->conpag = $v;
-			$this->modifiedColumns[] = CacotizaPeer::CONPAG;
-		}
-
+    if ($this->conpag !== $v) {
+        $this->conpag = $v;
+        $this->modifiedColumns[] = CacotizaPeer::CONPAG;
+      }
+  
 	} 
 	
 	public function setForent($v)
 	{
 
-		if ($this->forent !== $v) {
-			$this->forent = $v;
-			$this->modifiedColumns[] = CacotizaPeer::FORENT;
-		}
-
+    if ($this->forent !== $v) {
+        $this->forent = $v;
+        $this->modifiedColumns[] = CacotizaPeer::FORENT;
+      }
+  
 	} 
 	
 	public function setPriori($v)
 	{
 
-		if ($this->priori !== $v) {
-			$this->priori = $v;
-			$this->modifiedColumns[] = CacotizaPeer::PRIORI;
-		}
-
+    if ($this->priori !== $v) {
+        $this->priori = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CacotizaPeer::PRIORI;
+      }
+  
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = CacotizaPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CacotizaPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setMonrec($v)
 	{
 
-		if ($this->monrec !== $v) {
-			$this->monrec = $v;
-			$this->modifiedColumns[] = CacotizaPeer::MONREC;
-		}
-
+    if ($this->monrec !== $v) {
+        $this->monrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CacotizaPeer::MONREC;
+      }
+  
 	} 
 	
 	public function setTipmon($v)
 	{
 
-		if ($this->tipmon !== $v) {
-			$this->tipmon = $v;
-			$this->modifiedColumns[] = CacotizaPeer::TIPMON;
-		}
-
+    if ($this->tipmon !== $v) {
+        $this->tipmon = $v;
+        $this->modifiedColumns[] = CacotizaPeer::TIPMON;
+      }
+  
 	} 
 	
 	public function setValmon($v)
 	{
 
-		if ($this->valmon !== $v) {
-			$this->valmon = $v;
-			$this->modifiedColumns[] = CacotizaPeer::VALMON;
-		}
-
+    if ($this->valmon !== $v) {
+        $this->valmon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CacotizaPeer::VALMON;
+      }
+  
 	} 
 	
 	public function setRefpro($v)
 	{
 
-		if ($this->refpro !== $v) {
-			$this->refpro = $v;
-			$this->modifiedColumns[] = CacotizaPeer::REFPRO;
-		}
+    if ($this->refpro !== $v) {
+        $this->refpro = $v;
+        $this->modifiedColumns[] = CacotizaPeer::REFPRO;
+      }
+  
+	} 
+	
+	public function setTipo($v)
+	{
 
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = CacotizaPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setCorrel($v)
 	{
 
-		if ($this->correl !== $v) {
-			$this->correl = $v;
-			$this->modifiedColumns[] = CacotizaPeer::CORREL;
-		}
+    if ($this->correl !== $v) {
+        $this->correl = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CacotizaPeer::CORREL;
+      }
+  
+	} 
+	
+	public function setPorvan($v)
+	{
 
+    if ($this->porvan !== $v) {
+        $this->porvan = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CacotizaPeer::PORVAN;
+      }
+  
+	} 
+	
+	public function setPorant($v)
+	{
+
+    if ($this->porant !== $v) {
+        $this->porant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CacotizaPeer::PORANT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CacotizaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CacotizaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refcot = $rs->getString($startcol + 0);
+      $this->refcot = $rs->getString($startcol + 0);
 
-			$this->feccot = $rs->getDate($startcol + 1, null);
+      $this->feccot = $rs->getDate($startcol + 1, null);
 
-			$this->codpro = $rs->getString($startcol + 2);
+      $this->codpro = $rs->getString($startcol + 2);
 
-			$this->descot = $rs->getString($startcol + 3);
+      $this->descot = $rs->getString($startcol + 3);
 
-			$this->refsol = $rs->getString($startcol + 4);
+      $this->refsol = $rs->getString($startcol + 4);
 
-			$this->moncot = $rs->getFloat($startcol + 5);
+      $this->moncot = $rs->getFloat($startcol + 5);
 
-			$this->conpag = $rs->getString($startcol + 6);
+      $this->conpag = $rs->getString($startcol + 6);
 
-			$this->forent = $rs->getString($startcol + 7);
+      $this->forent = $rs->getString($startcol + 7);
 
-			$this->priori = $rs->getFloat($startcol + 8);
+      $this->priori = $rs->getFloat($startcol + 8);
 
-			$this->mondes = $rs->getFloat($startcol + 9);
+      $this->mondes = $rs->getFloat($startcol + 9);
 
-			$this->monrec = $rs->getFloat($startcol + 10);
+      $this->monrec = $rs->getFloat($startcol + 10);
 
-			$this->tipmon = $rs->getString($startcol + 11);
+      $this->tipmon = $rs->getString($startcol + 11);
 
-			$this->valmon = $rs->getFloat($startcol + 12);
+      $this->valmon = $rs->getFloat($startcol + 12);
 
-			$this->refpro = $rs->getString($startcol + 13);
+      $this->refpro = $rs->getString($startcol + 13);
 
-			$this->correl = $rs->getFloat($startcol + 14);
+      $this->tipo = $rs->getString($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->correl = $rs->getFloat($startcol + 15);
 
-			$this->resetModified();
+      $this->porvan = $rs->getFloat($startcol + 16);
 
-			$this->setNew(false);
+      $this->porant = $rs->getFloat($startcol + 17);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cacotiza object", $e);
-		}
-	}
+      $this->id = $rs->getInt($startcol + 18);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 19; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cacotiza object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -464,6 +572,7 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CacotizaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CacotizaPeer::doUpdate($this, $con);
@@ -572,9 +681,18 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 				return $this->getRefpro();
 				break;
 			case 14:
-				return $this->getCorrel();
+				return $this->getTipo();
 				break;
 			case 15:
+				return $this->getCorrel();
+				break;
+			case 16:
+				return $this->getPorvan();
+				break;
+			case 17:
+				return $this->getPorant();
+				break;
+			case 18:
 				return $this->getId();
 				break;
 			default:
@@ -601,8 +719,11 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 			$keys[11] => $this->getTipmon(),
 			$keys[12] => $this->getValmon(),
 			$keys[13] => $this->getRefpro(),
-			$keys[14] => $this->getCorrel(),
-			$keys[15] => $this->getId(),
+			$keys[14] => $this->getTipo(),
+			$keys[15] => $this->getCorrel(),
+			$keys[16] => $this->getPorvan(),
+			$keys[17] => $this->getPorant(),
+			$keys[18] => $this->getId(),
 		);
 		return $result;
 	}
@@ -661,9 +782,18 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 				$this->setRefpro($value);
 				break;
 			case 14:
-				$this->setCorrel($value);
+				$this->setTipo($value);
 				break;
 			case 15:
+				$this->setCorrel($value);
+				break;
+			case 16:
+				$this->setPorvan($value);
+				break;
+			case 17:
+				$this->setPorant($value);
+				break;
+			case 18:
 				$this->setId($value);
 				break;
 		} 	}
@@ -687,8 +817,11 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[11], $arr)) $this->setTipmon($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setValmon($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setRefpro($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setCorrel($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
+		if (array_key_exists($keys[14], $arr)) $this->setTipo($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setCorrel($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setPorvan($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setPorant($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
 	}
 
 	
@@ -710,7 +843,10 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CacotizaPeer::TIPMON)) $criteria->add(CacotizaPeer::TIPMON, $this->tipmon);
 		if ($this->isColumnModified(CacotizaPeer::VALMON)) $criteria->add(CacotizaPeer::VALMON, $this->valmon);
 		if ($this->isColumnModified(CacotizaPeer::REFPRO)) $criteria->add(CacotizaPeer::REFPRO, $this->refpro);
+		if ($this->isColumnModified(CacotizaPeer::TIPO)) $criteria->add(CacotizaPeer::TIPO, $this->tipo);
 		if ($this->isColumnModified(CacotizaPeer::CORREL)) $criteria->add(CacotizaPeer::CORREL, $this->correl);
+		if ($this->isColumnModified(CacotizaPeer::PORVAN)) $criteria->add(CacotizaPeer::PORVAN, $this->porvan);
+		if ($this->isColumnModified(CacotizaPeer::PORANT)) $criteria->add(CacotizaPeer::PORANT, $this->porant);
 		if ($this->isColumnModified(CacotizaPeer::ID)) $criteria->add(CacotizaPeer::ID, $this->id);
 
 		return $criteria;
@@ -770,7 +906,13 @@ abstract class BaseCacotiza extends BaseObject  implements Persistent {
 
 		$copyObj->setRefpro($this->refpro);
 
+		$copyObj->setTipo($this->tipo);
+
 		$copyObj->setCorrel($this->correl);
+
+		$copyObj->setPorvan($this->porvan);
+
+		$copyObj->setPorant($this->porant);
 
 
 		$copyObj->setNew(true);

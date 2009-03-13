@@ -21,6 +21,10 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 
 
 	
+	protected $especial;
+
+
+	
 	protected $id;
 
 	
@@ -29,92 +33,137 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnomesp()
-	{
+  
+  public function getCodnomesp()
+  {
 
-		return $this->codnomesp; 		
-	}
-	
-	public function getCodnom()
-	{
+    return trim($this->codnomesp);
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codnom);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodcon()
+  {
+
+    return trim($this->codcon);
+
+  }
+  
+  public function getEspecial()
+  {
+
+    return trim($this->especial);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnomesp($v)
 	{
 
-		if ($this->codnomesp !== $v) {
-			$this->codnomesp = $v;
-			$this->modifiedColumns[] = NpnomespconnomtipPeer::CODNOMESP;
-		}
-
+    if ($this->codnomesp !== $v) {
+        $this->codnomesp = $v;
+        $this->modifiedColumns[] = NpnomespconnomtipPeer::CODNOMESP;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpnomespconnomtipPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpnomespconnomtipPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpnomespconnomtipPeer::CODCON;
-		}
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpnomespconnomtipPeer::CODCON;
+      }
+  
+	} 
+	
+	public function setEspecial($v)
+	{
 
+    if ($this->especial !== $v) {
+        $this->especial = $v;
+        $this->modifiedColumns[] = NpnomespconnomtipPeer::ESPECIAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpnomespconnomtipPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpnomespconnomtipPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnomesp = $rs->getString($startcol + 0);
+      $this->codnomesp = $rs->getString($startcol + 0);
 
-			$this->codnom = $rs->getString($startcol + 1);
+      $this->codnom = $rs->getString($startcol + 1);
 
-			$this->codcon = $rs->getString($startcol + 2);
+      $this->codcon = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->especial = $rs->getString($startcol + 3);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npnomespconnomtip object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npnomespconnomtip object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +220,7 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpnomespconnomtipPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpnomespconnomtipPeer::doUpdate($this, $con);
@@ -246,6 +296,9 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 				return $this->getCodcon();
 				break;
 			case 3:
+				return $this->getEspecial();
+				break;
+			case 4:
 				return $this->getId();
 				break;
 			default:
@@ -261,7 +314,8 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 			$keys[0] => $this->getCodnomesp(),
 			$keys[1] => $this->getCodnom(),
 			$keys[2] => $this->getCodcon(),
-			$keys[3] => $this->getId(),
+			$keys[3] => $this->getEspecial(),
+			$keys[4] => $this->getId(),
 		);
 		return $result;
 	}
@@ -287,6 +341,9 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 				$this->setCodcon($value);
 				break;
 			case 3:
+				$this->setEspecial($value);
+				break;
+			case 4:
 				$this->setId($value);
 				break;
 		} 	}
@@ -299,7 +356,8 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setCodnomesp($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodnom($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodcon($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setEspecial($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
 	}
 
 	
@@ -310,6 +368,7 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpnomespconnomtipPeer::CODNOMESP)) $criteria->add(NpnomespconnomtipPeer::CODNOMESP, $this->codnomesp);
 		if ($this->isColumnModified(NpnomespconnomtipPeer::CODNOM)) $criteria->add(NpnomespconnomtipPeer::CODNOM, $this->codnom);
 		if ($this->isColumnModified(NpnomespconnomtipPeer::CODCON)) $criteria->add(NpnomespconnomtipPeer::CODCON, $this->codcon);
+		if ($this->isColumnModified(NpnomespconnomtipPeer::ESPECIAL)) $criteria->add(NpnomespconnomtipPeer::ESPECIAL, $this->especial);
 		if ($this->isColumnModified(NpnomespconnomtipPeer::ID)) $criteria->add(NpnomespconnomtipPeer::ID, $this->id);
 
 		return $criteria;
@@ -346,6 +405,8 @@ abstract class BaseNpnomespconnomtip extends BaseObject  implements Persistent {
 		$copyObj->setCodnom($this->codnom);
 
 		$copyObj->setCodcon($this->codcon);
+
+		$copyObj->setEspecial($this->especial);
 
 
 		$copyObj->setNew(true);

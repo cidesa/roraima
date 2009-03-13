@@ -1,0 +1,28 @@
+methods:
+  post:
+   - "dfatendocdet{desate}"
+   - "dfatendocdet{diaent}"
+   - "dfatendocdet{id_dfmedtra}"
+
+names:
+  dfatendocdet{desate}:
+    required:  Yes
+    required_msg: La descripción no puede estar en blanco
+    validators: MyStringValidator
+
+  dfatendocdet{diaent}:
+    required:  Yes
+    required_msg: Debe seleccionar una cantidad de dias
+
+  dfatendocdet{id_dfmedtra}:
+    required:  Yes
+    required_msg: Debe seleccionar un medio de transporte
+
+
+MyStringValidator:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 1 caracteres
+        max:       250
+        max_error: La Descripción no puede pasar mas de 250 caracteres

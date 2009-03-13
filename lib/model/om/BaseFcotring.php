@@ -73,338 +73,373 @@ abstract class BaseFcotring extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNrocon()
-	{
+  
+  public function getNrocon()
+  {
 
-		return $this->nrocon; 		
-	}
-	
-	public function getCodfue()
-	{
+    return trim($this->nrocon);
 
-		return $this->codfue; 		
-	}
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodfue()
+  {
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codfue);
 
-	
-	public function getRifcon()
-	{
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-		return $this->rifcon; 		
-	}
-	
-	public function getDesing()
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desing; 		
-	}
-	
-	public function getMonimp()
-	{
+  
+  public function getRifcon()
+  {
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getFunrec()
-	{
+    return trim($this->rifcon);
 
-		return $this->funrec; 		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDesing()
+  {
 
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->desing);
 
-	
-	public function getRifrep()
-	{
+  }
+  
+  public function getMonimp($val=false)
+  {
 
-		return $this->rifrep; 		
-	}
-	
-	public function getStaapu()
-	{
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
 
-		return $this->staapu; 		
-	}
-	
-	public function getStadec()
-	{
+  }
+  
+  public function getFunrec()
+  {
 
-		return $this->stadec; 		
-	}
-	
-	public function getNomcon()
-	{
+    return trim($this->funrec);
 
-		return $this->nomcon; 		
-	}
-	
-	public function getDircon()
-	{
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
 
-		return $this->dircon; 		
-	}
-	
-	public function getMonsal()
-	{
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monsal,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  
+  public function getRifrep()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->rifrep);
+
+  }
+  
+  public function getStaapu()
+  {
+
+    return trim($this->staapu);
+
+  }
+  
+  public function getStadec()
+  {
+
+    return trim($this->stadec);
+
+  }
+  
+  public function getNomcon()
+  {
+
+    return trim($this->nomcon);
+
+  }
+  
+  public function getDircon()
+  {
+
+    return trim($this->dircon);
+
+  }
+  
+  public function getMonsal($val=false)
+  {
+
+    if($val) return number_format($this->monsal,2,',','.');
+    else return $this->monsal;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNrocon($v)
 	{
 
-		if ($this->nrocon !== $v) {
-			$this->nrocon = $v;
-			$this->modifiedColumns[] = FcotringPeer::NROCON;
-		}
-
+    if ($this->nrocon !== $v) {
+        $this->nrocon = $v;
+        $this->modifiedColumns[] = FcotringPeer::NROCON;
+      }
+  
 	} 
 	
 	public function setCodfue($v)
 	{
 
-		if ($this->codfue !== $v) {
-			$this->codfue = $v;
-			$this->modifiedColumns[] = FcotringPeer::CODFUE;
-		}
-
+    if ($this->codfue !== $v) {
+        $this->codfue = $v;
+        $this->modifiedColumns[] = FcotringPeer::CODFUE;
+      }
+  
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = FcotringPeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = FcotringPeer::FECREG;
+    }
 
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FcotringPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FcotringPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setDesing($v)
 	{
 
-		if ($this->desing !== $v) {
-			$this->desing = $v;
-			$this->modifiedColumns[] = FcotringPeer::DESING;
-		}
-
+    if ($this->desing !== $v) {
+        $this->desing = $v;
+        $this->modifiedColumns[] = FcotringPeer::DESING;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = FcotringPeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcotringPeer::MONIMP;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FcotringPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FcotringPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setFecrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = FcotringPeer::FECREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = FcotringPeer::FECREC;
+    }
 
 	} 
 	
 	public function setRifrep($v)
 	{
 
-		if ($this->rifrep !== $v) {
-			$this->rifrep = $v;
-			$this->modifiedColumns[] = FcotringPeer::RIFREP;
-		}
-
+    if ($this->rifrep !== $v) {
+        $this->rifrep = $v;
+        $this->modifiedColumns[] = FcotringPeer::RIFREP;
+      }
+  
 	} 
 	
 	public function setStaapu($v)
 	{
 
-		if ($this->staapu !== $v) {
-			$this->staapu = $v;
-			$this->modifiedColumns[] = FcotringPeer::STAAPU;
-		}
-
+    if ($this->staapu !== $v) {
+        $this->staapu = $v;
+        $this->modifiedColumns[] = FcotringPeer::STAAPU;
+      }
+  
 	} 
 	
 	public function setStadec($v)
 	{
 
-		if ($this->stadec !== $v) {
-			$this->stadec = $v;
-			$this->modifiedColumns[] = FcotringPeer::STADEC;
-		}
-
+    if ($this->stadec !== $v) {
+        $this->stadec = $v;
+        $this->modifiedColumns[] = FcotringPeer::STADEC;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = FcotringPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = FcotringPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setDircon($v)
 	{
 
-		if ($this->dircon !== $v) {
-			$this->dircon = $v;
-			$this->modifiedColumns[] = FcotringPeer::DIRCON;
-		}
-
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = FcotringPeer::DIRCON;
+      }
+  
 	} 
 	
 	public function setMonsal($v)
 	{
 
-		if ($this->monsal !== $v) {
-			$this->monsal = $v;
-			$this->modifiedColumns[] = FcotringPeer::MONSAL;
-		}
-
+    if ($this->monsal !== $v) {
+        $this->monsal = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcotringPeer::MONSAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcotringPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcotringPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nrocon = $rs->getString($startcol + 0);
+      $this->nrocon = $rs->getString($startcol + 0);
 
-			$this->codfue = $rs->getString($startcol + 1);
+      $this->codfue = $rs->getString($startcol + 1);
 
-			$this->fecreg = $rs->getDate($startcol + 2, null);
+      $this->fecreg = $rs->getDate($startcol + 2, null);
 
-			$this->rifcon = $rs->getString($startcol + 3);
+      $this->rifcon = $rs->getString($startcol + 3);
 
-			$this->desing = $rs->getString($startcol + 4);
+      $this->desing = $rs->getString($startcol + 4);
 
-			$this->monimp = $rs->getFloat($startcol + 5);
+      $this->monimp = $rs->getFloat($startcol + 5);
 
-			$this->funrec = $rs->getString($startcol + 6);
+      $this->funrec = $rs->getString($startcol + 6);
 
-			$this->fecrec = $rs->getDate($startcol + 7, null);
+      $this->fecrec = $rs->getDate($startcol + 7, null);
 
-			$this->rifrep = $rs->getString($startcol + 8);
+      $this->rifrep = $rs->getString($startcol + 8);
 
-			$this->staapu = $rs->getString($startcol + 9);
+      $this->staapu = $rs->getString($startcol + 9);
 
-			$this->stadec = $rs->getString($startcol + 10);
+      $this->stadec = $rs->getString($startcol + 10);
 
-			$this->nomcon = $rs->getString($startcol + 11);
+      $this->nomcon = $rs->getString($startcol + 11);
 
-			$this->dircon = $rs->getString($startcol + 12);
+      $this->dircon = $rs->getString($startcol + 12);
 
-			$this->monsal = $rs->getFloat($startcol + 13);
+      $this->monsal = $rs->getFloat($startcol + 13);
 
-			$this->id = $rs->getInt($startcol + 14);
+      $this->id = $rs->getInt($startcol + 14);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 15; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcotring object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 15; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcotring object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -461,6 +496,7 @@ abstract class BaseFcotring extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcotringPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcotringPeer::doUpdate($this, $con);

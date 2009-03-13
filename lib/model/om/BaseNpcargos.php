@@ -52,226 +52,265 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collNpprocars;
+
+	
+	protected $lastNpprocarCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcar()
-	{
+  
+  public function getCodcar()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getNomcar()
-	{
+    return trim($this->codcar);
 
-		return $this->nomcar; 		
-	}
-	
-	public function getSuecar()
-	{
+  }
+  
+  public function getNomcar()
+  {
 
-		return number_format($this->suecar,2,',','.');
-		
-	}
-	
-	public function getStacar()
-	{
+    return trim($this->nomcar);
 
-		return $this->stacar; 		
-	}
-	
-	public function getCodocp()
-	{
+  }
+  
+  public function getSuecar($val=false)
+  {
 
-		return $this->codocp; 		
-	}
-	
-	public function getPunmin()
-	{
+    if($val) return number_format($this->suecar,2,',','.');
+    else return $this->suecar;
 
-		return number_format($this->punmin,2,',','.');
-		
-	}
-	
-	public function getGraocp()
-	{
+  }
+  
+  public function getStacar()
+  {
 
-		return $this->graocp; 		
-	}
-	
-	public function getComcar()
-	{
+    return trim($this->stacar);
 
-		return number_format($this->comcar,2,',','.');
-		
-	}
-	
-	public function getPasocp()
-	{
+  }
+  
+  public function getCodocp()
+  {
 
-		return $this->pasocp; 		
-	}
-	
-	public function getCodtip()
-	{
+    return trim($this->codocp);
 
-		return $this->codtip; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPunmin($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->punmin,2,',','.');
+    else return $this->punmin;
+
+  }
+  
+  public function getGraocp()
+  {
+
+    return trim($this->graocp);
+
+  }
+  
+  public function getComcar($val=false)
+  {
+
+    if($val) return number_format($this->comcar,2,',','.');
+    else return $this->comcar;
+
+  }
+  
+  public function getPasocp()
+  {
+
+    return trim($this->pasocp);
+
+  }
+  
+  public function getCodtip()
+  {
+
+    return trim($this->codtip);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpcargosPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpcargosPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setNomcar($v)
 	{
 
-		if ($this->nomcar !== $v) {
-			$this->nomcar = $v;
-			$this->modifiedColumns[] = NpcargosPeer::NOMCAR;
-		}
-
+    if ($this->nomcar !== $v) {
+        $this->nomcar = $v;
+        $this->modifiedColumns[] = NpcargosPeer::NOMCAR;
+      }
+  
 	} 
 	
 	public function setSuecar($v)
 	{
 
-		if ($this->suecar !== $v) {
-			$this->suecar = $v;
-			$this->modifiedColumns[] = NpcargosPeer::SUECAR;
-		}
-
+    if ($this->suecar !== $v) {
+        $this->suecar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosPeer::SUECAR;
+      }
+  
 	} 
 	
 	public function setStacar($v)
 	{
 
-		if ($this->stacar !== $v) {
-			$this->stacar = $v;
-			$this->modifiedColumns[] = NpcargosPeer::STACAR;
-		}
-
+    if ($this->stacar !== $v) {
+        $this->stacar = $v;
+        $this->modifiedColumns[] = NpcargosPeer::STACAR;
+      }
+  
 	} 
 	
 	public function setCodocp($v)
 	{
 
-		if ($this->codocp !== $v) {
-			$this->codocp = $v;
-			$this->modifiedColumns[] = NpcargosPeer::CODOCP;
-		}
-
+    if ($this->codocp !== $v) {
+        $this->codocp = $v;
+        $this->modifiedColumns[] = NpcargosPeer::CODOCP;
+      }
+  
 	} 
 	
 	public function setPunmin($v)
 	{
 
-		if ($this->punmin !== $v) {
-			$this->punmin = $v;
-			$this->modifiedColumns[] = NpcargosPeer::PUNMIN;
-		}
-
+    if ($this->punmin !== $v) {
+        $this->punmin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosPeer::PUNMIN;
+      }
+  
 	} 
 	
 	public function setGraocp($v)
 	{
 
-		if ($this->graocp !== $v) {
-			$this->graocp = $v;
-			$this->modifiedColumns[] = NpcargosPeer::GRAOCP;
-		}
-
+    if ($this->graocp !== $v) {
+        $this->graocp = $v;
+        $this->modifiedColumns[] = NpcargosPeer::GRAOCP;
+      }
+  
 	} 
 	
 	public function setComcar($v)
 	{
 
-		if ($this->comcar !== $v) {
-			$this->comcar = $v;
-			$this->modifiedColumns[] = NpcargosPeer::COMCAR;
-		}
-
+    if ($this->comcar !== $v) {
+        $this->comcar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosPeer::COMCAR;
+      }
+  
 	} 
 	
 	public function setPasocp($v)
 	{
 
-		if ($this->pasocp !== $v) {
-			$this->pasocp = $v;
-			$this->modifiedColumns[] = NpcargosPeer::PASOCP;
-		}
-
+    if ($this->pasocp !== $v) {
+        $this->pasocp = $v;
+        $this->modifiedColumns[] = NpcargosPeer::PASOCP;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = NpcargosPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = NpcargosPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcargosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcargosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcar = $rs->getString($startcol + 0);
+      $this->codcar = $rs->getString($startcol + 0);
 
-			$this->nomcar = $rs->getString($startcol + 1);
+      $this->nomcar = $rs->getString($startcol + 1);
 
-			$this->suecar = $rs->getFloat($startcol + 2);
+      $this->suecar = $rs->getFloat($startcol + 2);
 
-			$this->stacar = $rs->getString($startcol + 3);
+      $this->stacar = $rs->getString($startcol + 3);
 
-			$this->codocp = $rs->getString($startcol + 4);
+      $this->codocp = $rs->getString($startcol + 4);
 
-			$this->punmin = $rs->getFloat($startcol + 5);
+      $this->punmin = $rs->getFloat($startcol + 5);
 
-			$this->graocp = $rs->getString($startcol + 6);
+      $this->graocp = $rs->getString($startcol + 6);
 
-			$this->comcar = $rs->getFloat($startcol + 7);
+      $this->comcar = $rs->getFloat($startcol + 7);
 
-			$this->pasocp = $rs->getString($startcol + 8);
+      $this->pasocp = $rs->getString($startcol + 8);
 
-			$this->codtip = $rs->getString($startcol + 9);
+      $this->codtip = $rs->getString($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcargos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcargos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -328,11 +367,20 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcargosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcargosPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collNpprocars !== null) {
+				foreach($this->collNpprocars as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -374,6 +422,14 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collNpprocars !== null) {
+					foreach($this->collNpprocars as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -582,6 +638,15 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 		$copyObj->setCodtip($this->codtip);
 
 
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getNpprocars() as $relObj) {
+				$copyObj->addNpprocar($relObj->copy($deepCopy));
+			}
+
+		} 
+
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -603,6 +668,111 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 			self::$peer = new NpcargosPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initNpprocars()
+	{
+		if ($this->collNpprocars === null) {
+			$this->collNpprocars = array();
+		}
+	}
+
+	
+	public function getNpprocars($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseNpprocarPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collNpprocars === null) {
+			if ($this->isNew()) {
+			   $this->collNpprocars = array();
+			} else {
+
+				$criteria->add(NpprocarPeer::CODCAR, $this->getCodcar());
+
+				NpprocarPeer::addSelectColumns($criteria);
+				$this->collNpprocars = NpprocarPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(NpprocarPeer::CODCAR, $this->getCodcar());
+
+				NpprocarPeer::addSelectColumns($criteria);
+				if (!isset($this->lastNpprocarCriteria) || !$this->lastNpprocarCriteria->equals($criteria)) {
+					$this->collNpprocars = NpprocarPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastNpprocarCriteria = $criteria;
+		return $this->collNpprocars;
+	}
+
+	
+	public function countNpprocars($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseNpprocarPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(NpprocarPeer::CODCAR, $this->getCodcar());
+
+		return NpprocarPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addNpprocar(Npprocar $l)
+	{
+		$this->collNpprocars[] = $l;
+		$l->setNpcargos($this);
+	}
+
+
+	
+	public function getNpprocarsJoinNpprofesion($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseNpprocarPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collNpprocars === null) {
+			if ($this->isNew()) {
+				$this->collNpprocars = array();
+			} else {
+
+				$criteria->add(NpprocarPeer::CODCAR, $this->getCodcar());
+
+				$this->collNpprocars = NpprocarPeer::doSelectJoinNpprofesion($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(NpprocarPeer::CODCAR, $this->getCodcar());
+
+			if (!isset($this->lastNpprocarCriteria) || !$this->lastNpprocarCriteria->equals($criteria)) {
+				$this->collNpprocars = NpprocarPeer::doSelectJoinNpprofesion($criteria, $con);
+			}
+		}
+		$this->lastNpprocarCriteria = $criteria;
+
+		return $this->collNpprocars;
 	}
 
 } 

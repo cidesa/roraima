@@ -24,6 +24,7 @@ class facconvenioActions extends autofacconvenioActions
 	      $this->saveFcconpag($this->fcconpag);
 	
 	      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 	
 	      if ($this->getRequestParameter('save_and_add'))
 	      {

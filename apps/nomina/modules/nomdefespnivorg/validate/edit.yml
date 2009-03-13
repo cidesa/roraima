@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "npestorg{codniv}"
+   - "npestorg{desniv}"
+   
+names: 
+  npestorg{codniv}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    validators: Validator_codniv
+    
+  npestorg{desniv}:
+    required:  Yes
+    required_msg: El Nombre no puede estar en Blanco
+    validators: Validator_MyString     
+
+Validator_codniv:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Npestorg
+        column:       codniv
+        unique_error: El registro ya Existe intente con otro.
+        
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La Descripcióon no puede pasar mas de 250 caracteres

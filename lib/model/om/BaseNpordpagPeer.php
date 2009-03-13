@@ -305,6 +305,7 @@ abstract class BaseNpordpagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpordpagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

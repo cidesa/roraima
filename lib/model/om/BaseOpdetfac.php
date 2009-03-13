@@ -29,93 +29,119 @@ abstract class BaseOpdetfac extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumord()
-	{
+  
+  public function getNumord()
+  {
 
-		return $this->numord; 		
-	}
-	
-	public function getDesdet()
-	{
+    return trim($this->numord);
 
-		return $this->desdet; 		
-	}
-	
-	public function getMondet()
-	{
+  }
+  
+  public function getDesdet()
+  {
 
-		return number_format($this->mondet,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desdet);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMondet($val=false)
+  {
+
+    if($val) return number_format($this->mondet,2,',','.');
+    else return $this->mondet;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = OpdetfacPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = OpdetfacPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setDesdet($v)
 	{
 
-		if ($this->desdet !== $v) {
-			$this->desdet = $v;
-			$this->modifiedColumns[] = OpdetfacPeer::DESDET;
-		}
-
+    if ($this->desdet !== $v) {
+        $this->desdet = $v;
+        $this->modifiedColumns[] = OpdetfacPeer::DESDET;
+      }
+  
 	} 
 	
 	public function setMondet($v)
 	{
 
-		if ($this->mondet !== $v) {
-			$this->mondet = $v;
-			$this->modifiedColumns[] = OpdetfacPeer::MONDET;
-		}
-
+    if ($this->mondet !== $v) {
+        $this->mondet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpdetfacPeer::MONDET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpdetfacPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpdetfacPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numord = $rs->getString($startcol + 0);
+      $this->numord = $rs->getString($startcol + 0);
 
-			$this->desdet = $rs->getString($startcol + 1);
+      $this->desdet = $rs->getString($startcol + 1);
 
-			$this->mondet = $rs->getFloat($startcol + 2);
+      $this->mondet = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opdetfac object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opdetfac object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseOpdetfac extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpdetfacPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpdetfacPeer::doUpdate($this, $con);

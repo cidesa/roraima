@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class TsdettraMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.TsdettraMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.TsdettraMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('tsdettra');
 		$tMap->setPhpName('Tsdettra');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('tsdettra_SEQ');
 
 		$tMap->addColumn('REFTRA', 'Reftra', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -40,9 +42,9 @@ class TsdettraMapBuilder {
 
 		$tMap->addColumn('AUMDIS', 'Aumdis', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('MONTRA', 'Montra', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONTRA', 'Montra', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

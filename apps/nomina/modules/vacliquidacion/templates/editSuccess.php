@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Definici�n de Liquidaci�n de Vacaciones  por Egreso', 
+<h1><?php echo __('Liquidación de Vacaciones  por Egreso',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('vacliquidacion/edit_messages', array('nphojint' => $nphojint, 'labels' => $labels)) ?>
-<?php include_partial('vacliquidacion/edit_form', array('nphojint' => $nphojint, 'labels' => $labels, 'rs' => $rs)) ?>
+<?php include_partial('vacliquidacion/edit_form', array('nphojint' => $nphojint, 'labels' => $labels, 'objVac' => $objVac, 'objHis' => $objHis, 'ultsue' => $ultsue, 'suenor' => $suenor)) ?>
 </div>
 
 <div id="sf_admin_footer">

@@ -220,6 +220,7 @@ abstract class BaseNpcarracPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcarracPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -25,6 +25,10 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 
 
 	
+	protected $mondetdesc;
+
+
+	
 	protected $tipdoc;
 
 
@@ -37,129 +41,177 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoddesc()
-	{
+  
+  public function getCoddesc()
+  {
 
-		return $this->coddesc; 		
-	}
-	
-	public function getRefdoc()
-	{
+    return trim($this->coddesc);
 
-		return $this->refdoc; 		
-	}
-	
-	public function getCodart()
-	{
+  }
+  
+  public function getRefdoc()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getMondesc()
-	{
+    return trim($this->refdoc);
 
-		return number_format($this->mondesc,2,',','.');
-		
-	}
-	
-	public function getTipdoc()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codart);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMondesc($val=false)
+  {
+
+    if($val) return number_format($this->mondesc,2,',','.');
+    else return $this->mondesc;
+
+  }
+  
+  public function getMondetdesc($val=false)
+  {
+
+    if($val) return number_format($this->mondetdesc,2,',','.');
+    else return $this->mondetdesc;
+
+  }
+  
+  public function getTipdoc()
+  {
+
+    return trim($this->tipdoc);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoddesc($v)
 	{
 
-		if ($this->coddesc !== $v) {
-			$this->coddesc = $v;
-			$this->modifiedColumns[] = FadescartPeer::CODDESC;
-		}
-
+    if ($this->coddesc !== $v) {
+        $this->coddesc = $v;
+        $this->modifiedColumns[] = FadescartPeer::CODDESC;
+      }
+  
 	} 
 	
 	public function setRefdoc($v)
 	{
 
-		if ($this->refdoc !== $v) {
-			$this->refdoc = $v;
-			$this->modifiedColumns[] = FadescartPeer::REFDOC;
-		}
-
+    if ($this->refdoc !== $v) {
+        $this->refdoc = $v;
+        $this->modifiedColumns[] = FadescartPeer::REFDOC;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FadescartPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FadescartPeer::CODART;
+      }
+  
 	} 
 	
 	public function setMondesc($v)
 	{
 
-		if ($this->mondesc !== $v) {
-			$this->mondesc = $v;
-			$this->modifiedColumns[] = FadescartPeer::MONDESC;
-		}
+    if ($this->mondesc !== $v) {
+        $this->mondesc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadescartPeer::MONDESC;
+      }
+  
+	} 
+	
+	public function setMondetdesc($v)
+	{
 
+    if ($this->mondetdesc !== $v) {
+        $this->mondetdesc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadescartPeer::MONDETDESC;
+      }
+  
 	} 
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = FadescartPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = FadescartPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FadescartPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FadescartPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coddesc = $rs->getString($startcol + 0);
+      $this->coddesc = $rs->getString($startcol + 0);
 
-			$this->refdoc = $rs->getString($startcol + 1);
+      $this->refdoc = $rs->getString($startcol + 1);
 
-			$this->codart = $rs->getString($startcol + 2);
+      $this->codart = $rs->getString($startcol + 2);
 
-			$this->mondesc = $rs->getFloat($startcol + 3);
+      $this->mondesc = $rs->getFloat($startcol + 3);
 
-			$this->tipdoc = $rs->getString($startcol + 4);
+      $this->mondetdesc = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->tipdoc = $rs->getString($startcol + 5);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fadescart object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fadescart object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +268,7 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FadescartPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FadescartPeer::doUpdate($this, $con);
@@ -294,9 +347,12 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 				return $this->getMondesc();
 				break;
 			case 4:
-				return $this->getTipdoc();
+				return $this->getMondetdesc();
 				break;
 			case 5:
+				return $this->getTipdoc();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -313,8 +369,9 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 			$keys[1] => $this->getRefdoc(),
 			$keys[2] => $this->getCodart(),
 			$keys[3] => $this->getMondesc(),
-			$keys[4] => $this->getTipdoc(),
-			$keys[5] => $this->getId(),
+			$keys[4] => $this->getMondetdesc(),
+			$keys[5] => $this->getTipdoc(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -343,9 +400,12 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 				$this->setMondesc($value);
 				break;
 			case 4:
-				$this->setTipdoc($value);
+				$this->setMondetdesc($value);
 				break;
 			case 5:
+				$this->setTipdoc($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -359,8 +419,9 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setRefdoc($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodart($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMondesc($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setTipdoc($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[4], $arr)) $this->setMondetdesc($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setTipdoc($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -372,6 +433,7 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FadescartPeer::REFDOC)) $criteria->add(FadescartPeer::REFDOC, $this->refdoc);
 		if ($this->isColumnModified(FadescartPeer::CODART)) $criteria->add(FadescartPeer::CODART, $this->codart);
 		if ($this->isColumnModified(FadescartPeer::MONDESC)) $criteria->add(FadescartPeer::MONDESC, $this->mondesc);
+		if ($this->isColumnModified(FadescartPeer::MONDETDESC)) $criteria->add(FadescartPeer::MONDETDESC, $this->mondetdesc);
 		if ($this->isColumnModified(FadescartPeer::TIPDOC)) $criteria->add(FadescartPeer::TIPDOC, $this->tipdoc);
 		if ($this->isColumnModified(FadescartPeer::ID)) $criteria->add(FadescartPeer::ID, $this->id);
 
@@ -411,6 +473,8 @@ abstract class BaseFadescart extends BaseObject  implements Persistent {
 		$copyObj->setCodart($this->codart);
 
 		$copyObj->setMondesc($this->mondesc);
+
+		$copyObj->setMondetdesc($this->mondetdesc);
 
 		$copyObj->setTipdoc($this->tipdoc);
 

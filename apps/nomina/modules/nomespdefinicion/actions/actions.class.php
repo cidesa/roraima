@@ -10,36 +10,11 @@
  */
 class nomespdefinicionActions extends autonomespdefinicionActions
 {
-	public function Nomina()
-	{
-		if ($this->npnomesptipos->getCodnomesp()!='')
-		{
-			$con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
-			$sql = "select DISTINCT npnomespnomtip.codnom, npnomina.nomnom from npnomespnomtip, npnomesptipos, npnomina where ((npnomespnomtip.codnomesp='".($this->npnomesptipos->getCodnomesp())."') AND (npnomespnomtip.codnom=npnomina.codnom))";
-			$stmt = $con->createStatement();
-			$stmt->setLimit(5000);
-			$rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
-			$resultado=array();
-			//aqui lleno el array con los resultados:
-			while ($rs->next())
-			{
-				$resultado[]=$rs->getRow();
-             }
-        //y la envio al template:
-        $this->rs=$resultado;
-        return $this->rs;
-		}
-		else
-		{
-			return '';
-    }    
-    
-}	
-	
+
   public function executeEdit()
 	{
 		$this->npnomesptipos = $this->getNpnomesptiposOrCreate();
-		$this->rs = $this->Nomina();
+
 
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{
@@ -48,6 +23,7 @@ class nomespdefinicionActions extends autonomespdefinicionActions
 			$this->saveNpnomesptipos($this->npnomesptipos);
 
 			$this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
 			if ($this->getRequestParameter('save_and_add'))
 			{
@@ -68,6 +44,201 @@ class nomespdefinicionActions extends autonomespdefinicionActions
 		}
 	}
 
+  public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->npnomesptipos = $this->getNpnomesptiposOrCreate();
+
+    try{
+    $this->updateNpnomesptiposFromRequest();
+    }
+    catch(Exception $ex){}
+
+    $this->labels = $this->getLabels();
+
+    return sfView::SUCCESS;
+  }
+
+
+  public function configGrid($codigonomesp='')
+	 {
+		$c = new Criteria();
+		$c->addJoin(NpnomespnomtipPeer::CODNOM, NpnominaPeer::CODNOM);
+		$c->add(NpnomespnomtipPeer::CODNOMESP,$codigonomesp);
+        $per = NpnomespnomtipPeer::doSelect($c);
+
+		$filas_arreglo=50;
+
+		// Se crea el objeto principal de la clase OpcionesGrid
+		$opciones = new OpcionesGrid();
+		// Se configuran las opciones globales del Grid
+		$opciones->setEliminar(true);
+		$opciones->setFilas($filas_arreglo);
+		$opciones->setTabla('Npnomespnomtip');
+		$opciones->setName('a');
+		$opciones->setAnchoGrid(500);
+		$opciones->setAncho(500);
+		$opciones->setTitulo('Nominas Asociadas');
+		$opciones->setHTMLTotalFilas(' ');
+
+		// Se generan las columnas
+		$col1 = new Columna('Código de Nomina');
+		$col1->setTipo(Columna::TEXTO);
+		$col1->setEsGrabable(true);
+		$col1->setAlineacionObjeto(Columna::CENTRO);
+		$col1->setAlineacionContenido(Columna::CENTRO);
+		$col1->setNombreCampo('codnom');
+		$col1->setHTML('type="text" size="8"');
+		$col1->setJScript('onBlur="javascript:event.keyCode=13; verificar_codnom(event,this.id);"');
+		$col1->setCatalogo('Npnomina','sf_admin_edit_form', array('codnom' => 1,'nomnom' => 2),'Npnomina_Nomespdefinicion');
+		$col1->setAjax('nomespdefinicion',2,2);
+
+		$col2 = new Columna('Tipo de Nomina');
+		$col2->setTipo(Columna::TEXTO);
+		$col2->setEsGrabable(false);
+		$col2->setAlineacionObjeto(Columna::CENTRO);
+		$col2->setAlineacionContenido(Columna::CENTRO);
+		$col2->setNombreCampo('nomnom');
+		$col2->setHTML('type="text" size="50" readonly=true');
+		// Se guardan las columnas en el objetos de opciones
+
+		$opciones->addColumna($col1);
+		$opciones->addColumna($col2);
+
+
+		// Se genera el arreglo de opciones necesario para generar el grid
+		$this->obj = $opciones->getConfig($per);
+ 	 }
+
+
+  public function configGrid_viejo($codigonomesp='')
+	 {
+
+	 $SQL = "select DISTINCT npnomespnomtip.codnom as codnom, npnomina.nomnom as nomnom, 9 as id " .
+	 	  "from npnomespnomtip, npnomesptipos, npnomina " .
+	 	  "where ((npnomespnomtip.codnomesp='".($codigonomesp)."') " .
+	 	  "AND (npnomespnomtip.codnom=npnomina.codnom))";
+
+	      $resp = Herramientas::BuscarDatos($SQL,&$per);
+		$filas_arreglo=20;
+
+		// Se crea el objeto principal de la clase OpcionesGrid
+		$opciones = new OpcionesGrid();
+		// Se configuran las opciones globales del Grid
+		$opciones->setEliminar(false);
+		$opciones->setFilas($filas_arreglo);
+		$opciones->setTabla('Npnomina');
+		$opciones->setName('a');
+		$opciones->setAnchoGrid(600);
+		$opciones->setTitulo('Nomina');
+		$opciones->setHTMLTotalFilas(' ');
+
+		// Se generan las columnas
+		$col1 = new Columna('Código de Nomina');
+		$col1->setTipo(Columna::TEXTO);
+		$col1->setEsGrabable(true);
+		$col1->setAlineacionObjeto(Columna::CENTRO);
+		$col1->setAlineacionContenido(Columna::CENTRO);
+		$col1->setNombreCampo('codnom');
+		$col1->setHTML('type="text" size="10"');
+		$col1->setJScript('onBlur="javascript:event.keyCode=13; verificar_codnom(event,this.id);"');
+		$col1->setCatalogo('Npnomina','sf_admin_edit_form', array('codnom' => 1,'nomnom' => 2));
+
+		$col2 = new Columna('Tipo de Nomina');
+		$col2->setTipo(Columna::TEXTO);
+		$col2->setEsGrabable(true);
+		$col2->setAlineacionObjeto(Columna::CENTRO);
+		$col2->setAlineacionContenido(Columna::CENTRO);
+		$col2->setNombreCampo('nomnom');
+		$col2->setHTML('type="text" size="30" readonly=true');
+		// Se guardan las columnas en el objetos de opciones
+		$opciones->addColumna($col1);
+		$opciones->addColumna($col2);
+
+		// Se genera el arreglo de opciones necesario para generar el grid
+		$this->obj = $opciones->getConfig($per);
+ 	 }
+
+  protected function getNpnomesptiposOrCreate($id = 'id')
+  {
+    if (!$this->getRequestParameter($id))
+    {
+      $npnomesptipos = new Npnomesptipos();
+      $this->configGrid($this->getRequestParameter('npnomesptipos[codnomesp]'));
+    }
+    else
+    {
+      $npnomesptipos = NpnomesptiposPeer::retrieveByPk($this->getRequestParameter($id));
+
+      $this->configGrid($npnomesptipos->getCodnomesp());
+
+      $this->forward404Unless($npnomesptipos);
+    }
+
+    return $npnomesptipos;
+  }
+
+  public function formatoFecha($fechaoriginal)
+   {
+    if (!$fechaoriginal)
+    {
+     return '';
+    }
+    else
+    {
+   	$ano = substr($fechaoriginal,0,4);
+	$mes = substr($fechaoriginal,5,2);
+	$dia = substr($fechaoriginal,8,2);
+
+     $fecha = $dia.'/'.$mes.'/'.$ano;
+
+     return $fecha;
+    }
+   }
+
+  public function executeAjax()
+	{
+	 $cajtexmos = $this->getRequestParameter('cajtexmos');
+	 $codigo    = $this->getRequestParameter('codigo');
+
+	 $this->mensaje="";
+	 $output = '[["","",""]]';
+	 if ($this->getRequestParameter('ajax')=='1')
+       {
+	    	if ($this->getRequestParameter('codigo')<>'')
+	    	{
+             $x=Herramientas::getX_vacio('codnomesp','Npnomesptipos','codnomesp',$this->getRequestParameter('codigo'));
+             if (trim($x)=="")
+	        {
+	           //$this->mensaje="";
+		  }
+		 else
+	        {
+	          //$this->mensaje="Ya existe información asociada a esta nomina especial";
+	          $javascript="alert('Ya existe información asociada a esta nomina especial');";
+              $output = '[["javascript","'.$javascript.'",""]]';
+
+	        }
+
+	     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	     $this->configGrid('');
+	     //return sfView::HEADER_ONLY;
+
+	 }
+    } else  if ($this->getRequestParameter('ajax')=='2')
+    	{
+      	  $dato=Herramientas::getX('codnom','npnomina','nomnom',$codigo);
+	      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+
+      	  $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      	  return sfView::HEADER_ONLY;
+    	}
+
+
+
+     }
+
+
   protected function updateNpnomesptiposFromRequest()
 	{
 		$npnomesptipos = $this->getRequestParameter('npnomesptipos');
@@ -80,6 +251,7 @@ class nomespdefinicionActions extends autonomespdefinicionActions
 		{
 			$this->npnomesptipos->setDesnomesp($npnomesptipos['desnomesp']);
 		}
+
 		if (isset($npnomesptipos['fecnomdes']))
 		{
 			if ($npnomesptipos['fecnomdes'])
@@ -96,6 +268,7 @@ class nomespdefinicionActions extends autonomespdefinicionActions
 						$value_array = $npnomesptipos['fecnomdes'];
 						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
 					}
+
 					$this->npnomesptipos->setFecnomdes($value);
 				}
 				catch (sfException $e)
@@ -136,5 +309,11 @@ class nomespdefinicionActions extends autonomespdefinicionActions
         $this->npnomesptipos->setFecnomhas(null);
       }
     }
+  }
+
+  protected function saveNpnomesptipos($npnomesptipos)
+  {
+	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
+	Nomina::salvarNpnomesptipos($npnomesptipos,$grid);
   }
 }

@@ -3,24 +3,24 @@
 /**
  * Subclass for performing query and update operations on the 'caordcom' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class CaordcomPeer extends BaseCaordcomPeer
 {
    public static function getDato($ordcom, $nomdat)
    {
-   	return Herramientas::getX('ORDCOM','Caordcom',$nomdat,$ordcom); 	
+   	return Herramientas::getX_vacio('ORDCOM','Caordcom',$nomdat,$ordcom);
    }
- 
+
 	const COLUMNS = 'columns';
-	
+
 	public static $columsname = array (
 	//self::COLUMNS => array (CaordcomPeer::ORDCOM => 'Código', CaordcomPeer::FECORD => 'Fecha', CaordcomPeer::CODPRO => 'Cod. Prov.', CaproveePeer::NOMPRO => 'Nombre Prov.', CaconpagPeer::DESCONPAG => 'Con. Pago', CaforentPeer::DESFORENT => 'Forma Entrega'),);
 	self::COLUMNS => array (CaordcomPeer::ORDCOM => 'Código', CaordcomPeer::FECORD => 'Fecha', CaordcomPeer::DESORD => 'Descripción'),);
-	
-	
+
+
 	static public function getColumName($colum)
 	{
 		return self::$columsname[self::COLUMNS][$colum];
@@ -30,8 +30,8 @@ class CaordcomPeer extends BaseCaordcomPeer
 	{
 		return self::$columsname[self::COLUMNS];
 	}
-	
-	
+
+
 	static public function getArrayFieldsNames()
 	{
 		$col = self::$columsname[self::COLUMNS];
@@ -45,5 +45,14 @@ class CaordcomPeer extends BaseCaordcomPeer
 		}
 		return $columnas;
 	}
-	
+
+   public static function getCodpro($cod)
+    {
+  	  return Herramientas::getX('ORDCOM','Caordcom','codpro',str_pad($cod,8,'0',STR_PAD_LEFT));
+    }
+
+   public static function getFecord($cod)
+    {
+  	  return Herramientas::getX('ORDCOM','Caordcom','fecord',str_pad($cod,8,'0',STR_PAD_LEFT));
+    }
 }

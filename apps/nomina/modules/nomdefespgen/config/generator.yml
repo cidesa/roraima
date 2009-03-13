@@ -5,21 +5,22 @@ generator:
     theme:            default
 
     fields:
-      codemp:     { name: Codigo Empresa }
+      codemp:     { name: Código Empresa }
       nomemp:     { name: Nombre Empresa }
       forcar:     { name: Cargo }
       foremp:     { name: Empleado }
       fororg:     { name: Nivel Organizacional }
       foruni:     { name: Unidad Ejecutora }
+      foresc:     { name: Escuelas }
+      numrec:     { name: Num. Recibo }
       unitrib:    { name: Valor Unidad Tributaria }
       redmon:     { name: Redondeo para los Calculos }
       codpre:     { name: Presupuestar Cargos }
-      asiconnom:  { name: Asignar Conceptos a la Nomina }
+      asiconnom:  { name: Asignar Conceptos a la Nómina }
 
     list:
-      title:          Institucion
-      display:        [=codemp, nomemp, forcar, foremp, fororg, foruni, unitrib, redmon, codpre, asiconnom]
-
+      title:          Institución
+      display:        [=codemp, nomemp, forcar, foremp, fororg, foruni ]
       filters:        [codemp]
       max_per_page:   5
       object_actions:
@@ -27,5 +28,7 @@ generator:
         _delete:      ~
 
     edit:
-      title:          Modificar Institucion
-      display:        [codemp, nomemp, forcar, foremp, fororg, foruni, unitrib, redmon, codpre, asiconnom]
+      title:          Definición de Institución
+      display:        [codemp, nomemp, forcar, foremp, fororg, foruni, foresc, numrec, unitrib, redmon, codpre, asiconnom]
+      actions:
+        _save:        ~

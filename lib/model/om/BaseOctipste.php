@@ -33,110 +33,137 @@ abstract class BaseOctipste extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodste()
-	{
+  
+  public function getCodste()
+  {
 
-		return $this->codste; 		
-	}
-	
-	public function getDesste()
-	{
+    return trim($this->codste);
 
-		return $this->desste; 		
-	}
-	
-	public function getTipste()
-	{
+  }
+  
+  public function getDesste()
+  {
 
-		return $this->tipste; 		
-	}
-	
-	public function getStaste()
-	{
+    return trim($this->desste);
 
-		return $this->staste; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTipste()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipste);
+
+  }
+  
+  public function getStaste()
+  {
+
+    return trim($this->staste);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodste($v)
 	{
 
-		if ($this->codste !== $v) {
-			$this->codste = $v;
-			$this->modifiedColumns[] = OctipstePeer::CODSTE;
-		}
-
+    if ($this->codste !== $v) {
+        $this->codste = $v;
+        $this->modifiedColumns[] = OctipstePeer::CODSTE;
+      }
+  
 	} 
 	
 	public function setDesste($v)
 	{
 
-		if ($this->desste !== $v) {
-			$this->desste = $v;
-			$this->modifiedColumns[] = OctipstePeer::DESSTE;
-		}
-
+    if ($this->desste !== $v) {
+        $this->desste = $v;
+        $this->modifiedColumns[] = OctipstePeer::DESSTE;
+      }
+  
 	} 
 	
 	public function setTipste($v)
 	{
 
-		if ($this->tipste !== $v) {
-			$this->tipste = $v;
-			$this->modifiedColumns[] = OctipstePeer::TIPSTE;
-		}
-
+    if ($this->tipste !== $v) {
+        $this->tipste = $v;
+        $this->modifiedColumns[] = OctipstePeer::TIPSTE;
+      }
+  
 	} 
 	
 	public function setStaste($v)
 	{
 
-		if ($this->staste !== $v) {
-			$this->staste = $v;
-			$this->modifiedColumns[] = OctipstePeer::STASTE;
-		}
-
+    if ($this->staste !== $v) {
+        $this->staste = $v;
+        $this->modifiedColumns[] = OctipstePeer::STASTE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OctipstePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OctipstePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codste = $rs->getString($startcol + 0);
+      $this->codste = $rs->getString($startcol + 0);
 
-			$this->desste = $rs->getString($startcol + 1);
+      $this->desste = $rs->getString($startcol + 1);
 
-			$this->tipste = $rs->getString($startcol + 2);
+      $this->tipste = $rs->getString($startcol + 2);
 
-			$this->staste = $rs->getString($startcol + 3);
+      $this->staste = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Octipste object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Octipste object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseOctipste extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OctipstePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OctipstePeer::doUpdate($this, $con);

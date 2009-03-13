@@ -41,169 +41,197 @@ abstract class BaseCadphartser extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getDphart()
-	{
+  
+  public function getDphart()
+  {
 
-		return $this->dphart; 		
-	}
-	
-	public function getFecdph($format = 'Y-m-d')
-	{
+    return trim($this->dphart);
 
-		if ($this->fecdph === null || $this->fecdph === '') {
-			return null;
-		} elseif (!is_int($this->fecdph)) {
-						$ts = strtotime($this->fecdph);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdph] as date/time value: " . var_export($this->fecdph, true));
-			}
-		} else {
-			$ts = $this->fecdph;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecdph($format = 'Y-m-d')
+  {
 
-	
-	public function getReqart()
-	{
+    if ($this->fecdph === null || $this->fecdph === '') {
+      return null;
+    } elseif (!is_int($this->fecdph)) {
+            $ts = adodb_strtotime($this->fecdph);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdph] as date/time value: " . var_export($this->fecdph, true));
+      }
+    } else {
+      $ts = $this->fecdph;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->reqart; 		
-	}
-	
-	public function getDesdph()
-	{
+  
+  public function getReqart()
+  {
 
-		return $this->desdph; 		
-	}
-	
-	public function getCodori()
-	{
+    return trim($this->reqart);
 
-		return $this->codori; 		
-	}
-	
-	public function getStadph()
-	{
+  }
+  
+  public function getDesdph()
+  {
 
-		return $this->stadph; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desdph);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodori()
+  {
+
+    return trim($this->codori);
+
+  }
+  
+  public function getStadph()
+  {
+
+    return trim($this->stadph);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDphart($v)
 	{
 
-		if ($this->dphart !== $v) {
-			$this->dphart = $v;
-			$this->modifiedColumns[] = CadphartserPeer::DPHART;
-		}
-
+    if ($this->dphart !== $v) {
+        $this->dphart = $v;
+        $this->modifiedColumns[] = CadphartserPeer::DPHART;
+      }
+  
 	} 
 	
 	public function setFecdph($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdph] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdph !== $ts) {
-			$this->fecdph = $ts;
-			$this->modifiedColumns[] = CadphartserPeer::FECDPH;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdph] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdph !== $ts) {
+      $this->fecdph = $ts;
+      $this->modifiedColumns[] = CadphartserPeer::FECDPH;
+    }
 
 	} 
 	
 	public function setReqart($v)
 	{
 
-		if ($this->reqart !== $v) {
-			$this->reqart = $v;
-			$this->modifiedColumns[] = CadphartserPeer::REQART;
-		}
-
+    if ($this->reqart !== $v) {
+        $this->reqart = $v;
+        $this->modifiedColumns[] = CadphartserPeer::REQART;
+      }
+  
 	} 
 	
 	public function setDesdph($v)
 	{
 
-		if ($this->desdph !== $v) {
-			$this->desdph = $v;
-			$this->modifiedColumns[] = CadphartserPeer::DESDPH;
-		}
-
+    if ($this->desdph !== $v) {
+        $this->desdph = $v;
+        $this->modifiedColumns[] = CadphartserPeer::DESDPH;
+      }
+  
 	} 
 	
 	public function setCodori($v)
 	{
 
-		if ($this->codori !== $v) {
-			$this->codori = $v;
-			$this->modifiedColumns[] = CadphartserPeer::CODORI;
-		}
-
+    if ($this->codori !== $v) {
+        $this->codori = $v;
+        $this->modifiedColumns[] = CadphartserPeer::CODORI;
+      }
+  
 	} 
 	
 	public function setStadph($v)
 	{
 
-		if ($this->stadph !== $v) {
-			$this->stadph = $v;
-			$this->modifiedColumns[] = CadphartserPeer::STADPH;
-		}
-
+    if ($this->stadph !== $v) {
+        $this->stadph = $v;
+        $this->modifiedColumns[] = CadphartserPeer::STADPH;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadphartserPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadphartserPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->dphart = $rs->getString($startcol + 0);
+      $this->dphart = $rs->getString($startcol + 0);
 
-			$this->fecdph = $rs->getDate($startcol + 1, null);
+      $this->fecdph = $rs->getDate($startcol + 1, null);
 
-			$this->reqart = $rs->getString($startcol + 2);
+      $this->reqart = $rs->getString($startcol + 2);
 
-			$this->desdph = $rs->getString($startcol + 3);
+      $this->desdph = $rs->getString($startcol + 3);
 
-			$this->codori = $rs->getString($startcol + 4);
+      $this->codori = $rs->getString($startcol + 4);
 
-			$this->stadph = $rs->getString($startcol + 5);
+      $this->stadph = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadphartser object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadphartser object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -260,6 +288,7 @@ abstract class BaseCadphartser extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CadphartserPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadphartserPeer::doUpdate($this, $con);

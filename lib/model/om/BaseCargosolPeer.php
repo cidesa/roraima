@@ -13,7 +13,7 @@ abstract class BaseCargosolPeer {
 	const CLASS_DEFAULT = 'lib.model.Cargosol';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseCargosolPeer {
 	const TIPDOC = 'cargosol.TIPDOC';
 
 	
+	const TIPO = 'cargosol.TIPO';
+
+	
 	const ID = 'cargosol.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseCargosolPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Codrgo', 'Monrgo', 'Tipdoc', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CargosolPeer::REQART, CargosolPeer::CODRGO, CargosolPeer::MONRGO, CargosolPeer::TIPDOC, CargosolPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart', 'codrgo', 'monrgo', 'tipdoc', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Codrgo', 'Monrgo', 'Tipdoc', 'Tipo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CargosolPeer::REQART, CargosolPeer::CODRGO, CargosolPeer::MONRGO, CargosolPeer::TIPDOC, CargosolPeer::TIPO, CargosolPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart', 'codrgo', 'monrgo', 'tipdoc', 'tipo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Codrgo' => 1, 'Monrgo' => 2, 'Tipdoc' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (CargosolPeer::REQART => 0, CargosolPeer::CODRGO => 1, CargosolPeer::MONRGO => 2, CargosolPeer::TIPDOC => 3, CargosolPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'codrgo' => 1, 'monrgo' => 2, 'tipdoc' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Codrgo' => 1, 'Monrgo' => 2, 'Tipdoc' => 3, 'Tipo' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (CargosolPeer::REQART => 0, CargosolPeer::CODRGO => 1, CargosolPeer::MONRGO => 2, CargosolPeer::TIPDOC => 3, CargosolPeer::TIPO => 4, CargosolPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'codrgo' => 1, 'monrgo' => 2, 'tipdoc' => 3, 'tipo' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseCargosolPeer {
 		$criteria->addSelectColumn(CargosolPeer::MONRGO);
 
 		$criteria->addSelectColumn(CargosolPeer::TIPDOC);
+
+		$criteria->addSelectColumn(CargosolPeer::TIPO);
 
 		$criteria->addSelectColumn(CargosolPeer::ID);
 
@@ -215,6 +220,7 @@ abstract class BaseCargosolPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CargosolPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

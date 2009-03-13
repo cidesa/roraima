@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class CobdestraMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CobdestraMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CobdestraMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cobdestra');
 		$tMap->setPhpName('Cobdestra');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('cobdestra_SEQ');
 
 		$tMap->addColumn('NUMTRA', 'Numtra', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -40,11 +42,11 @@ class CobdestraMapBuilder {
 
 		$tMap->addColumn('CODDES', 'Coddes', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('FECDES', 'Fecdes', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDES', 'Fecdes', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('MONDES', 'Mondes', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONDES', 'Mondes', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -7,11 +7,13 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
+<?php echo javascript_include_tag('dFilter', 'ajax', 'tools', 'observe') ?>
 <?php echo object_input_hidden_tag($npnomina, 'getId') ?>
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
 
 <fieldset id="sf_fieldset_none" class="">
-<legend>Tipo de Nomina</legend>
+<legend><?php echo __('Tipo de Nomina')?></legend>
 <div class="form-row">
   <?php echo label_for('npnomina[codnom]','Codigo', 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npnomina{codnom}')): ?> form-error<?php endif; ?>">
@@ -23,74 +25,35 @@
   'size' => 20,
   'control_name' => 'npnomina[codnom]',
   'maxlength' => 3,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('npnomina_codnom').value=cadena",
+  'onBlur'=> remote_function(array(
+     'update'   => 'divGrid',
+     'url'      => 'nomasicaremplot/ajax',
+	 'complete' => 'AjaxJSON(request, json)',
+	 'script' => true,
+  	 'with' => "'ajax=1&cajtexmos=npnomina_nomnom&cajtexcom=npnomina_codnom&codigo='+this.value"
+			  )),
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
-<?php echo button_to('...','#') ?>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Npdefcpt_nomdefconaho/clase/Npnomina/frame/sf_admin_edit_form/obj1/npnomina_codnom/obj2/npnomina_nomnom/campo1/codnom/campo2/nomnom/param1/1/param2/y')?>
 &nbsp;&nbsp;
-<strong><? echo $npnomina->getNomnom() ?></strong>
+  <?php $value = object_input_tag($npnomina, 'getNomnom', array (
+  'size' => 80,
+  'control_name' => 'npnomina[nomnom]',
+)); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 </fieldset>
-&nbsp;&nbsp;
-<div>
-<fieldset>
-<legend>Datos del Empleado</legend>
-<div id="grid02" class="grid01">
-<table border="0" class="sf_admin_list">
-<? 
-$titulo=array(0 => '', 1 => 'Codigo', 2 => 'Nombre', 3 => 'Codigo del Cargo', 4 => 'Descripcion del Cargo', 5 => 'Codigo de Categoria', 6 => 'Descripcion de Categoria', 7 => 'Tipo de Gasto',8 => 'Descipcion Tipo de Gasto');
-if ($nuevo=='S')
-{
-  	?>
-  	 <thead><tr>
-  	<?
-	$i=0;
-	while ($i<=8)
-	{
-	?>	  
-	  <th><?php if ($i==0) echo image_tag('/images/magnifier.png'); else echo $titulo[$i] ?></th>
-    <?
-	 $i=$i+1;	
-	}//end while
+
+<br>
+
+<div class="form-row" id="divGrid">
+<?
+echo grid_tag($obj);
 ?>
-   	</tr> </thead>   	  
-	<tr>
-	<? $i=0;
-	  while ($i<=8)
-	  {
-	  ?>
-	    <td><?php if ($i==0) echo' '; else echo input_tag($i,'','style=border:none') ?></td>
-	<? $i=$i+1;
-	  } //end while?>
-	</tr>	
-<?		
-}
-else
-{
-	if ( count($detalles)>0){
-	$i=0;
-	foreach ($detalles as $k=>$fila) {
-	    $i++;
-	    if($i==1){?>
-	      <thead><tr>
-	    <? foreach ($fila as $key => $value){?>
-	        <th><?=$titulo[$key]?></th>
-	    <? }?>
-	      </tr> </thead>
-	    <? }?>
-	<tr>
-	<? foreach ($fila as $key => $value){?>
-	    <td><?=$value?></td>
-	<? }?>
-	</tr>
-	<? }
-	  } //if ( count($detalles)>0){
-   }  //else if ($nuevo=='S')
-?></table>
+</div>
 </div>
 </fieldset>
-</div>
-
 <?php include_partial('edit_actions', array('npnomina' => $npnomina)) ?>
 
 </form>

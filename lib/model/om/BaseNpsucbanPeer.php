@@ -210,6 +210,7 @@ abstract class BaseNpsucbanPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpsucbanPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

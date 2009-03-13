@@ -210,6 +210,7 @@ abstract class BaseFordefsubsecPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefsubsecPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

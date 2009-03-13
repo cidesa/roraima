@@ -7,12 +7,18 @@ generator:
       codtiprec:  {  name: Código }
       destiprec:  {  name: Descripción }
     list:
-      title:   Lista de Recaudos 
-      display:        [=codtiprec, destiprec]      
+      title:   Lista de Grupos de Recaudos
+      display:        [=codtiprec, destiprec]
       filters: [codtiprec]
       object_actions:
         _edit:        ~
-        _delete:      ~      
-      max_per_page:   5
+        _delete:      ~
+      max_per_page:   10
+      sort: codtiprec
     edit:
-      title:          Edición de Recaudos
+      title:          Edición de Grupos de Recaudos
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

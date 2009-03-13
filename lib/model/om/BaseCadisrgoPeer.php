@@ -13,7 +13,7 @@ abstract class BaseCadisrgoPeer {
 	const CLASS_DEFAULT = 'lib.model.Cadisrgo';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,9 @@ abstract class BaseCadisrgoPeer {
 	const CODPRE = 'cadisrgo.CODPRE';
 
 	
+	const TIPO = 'cadisrgo.TIPO';
+
+	
 	const ID = 'cadisrgo.ID';
 
 	
@@ -49,18 +52,18 @@ abstract class BaseCadisrgoPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Codcat', 'Codart', 'Codrgo', 'Monrgo', 'Tipdoc', 'Codpre', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadisrgoPeer::REQART, CadisrgoPeer::CODCAT, CadisrgoPeer::CODART, CadisrgoPeer::CODRGO, CadisrgoPeer::MONRGO, CadisrgoPeer::TIPDOC, CadisrgoPeer::CODPRE, CadisrgoPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart', 'codcat', 'codart', 'codrgo', 'monrgo', 'tipdoc', 'codpre', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart', 'Codcat', 'Codart', 'Codrgo', 'Monrgo', 'Tipdoc', 'Codpre', 'Tipo', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadisrgoPeer::REQART, CadisrgoPeer::CODCAT, CadisrgoPeer::CODART, CadisrgoPeer::CODRGO, CadisrgoPeer::MONRGO, CadisrgoPeer::TIPDOC, CadisrgoPeer::CODPRE, CadisrgoPeer::TIPO, CadisrgoPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart', 'codcat', 'codart', 'codrgo', 'monrgo', 'tipdoc', 'codpre', 'tipo', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Codcat' => 1, 'Codart' => 2, 'Codrgo' => 3, 'Monrgo' => 4, 'Tipdoc' => 5, 'Codpre' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (CadisrgoPeer::REQART => 0, CadisrgoPeer::CODCAT => 1, CadisrgoPeer::CODART => 2, CadisrgoPeer::CODRGO => 3, CadisrgoPeer::MONRGO => 4, CadisrgoPeer::TIPDOC => 5, CadisrgoPeer::CODPRE => 6, CadisrgoPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'codcat' => 1, 'codart' => 2, 'codrgo' => 3, 'monrgo' => 4, 'tipdoc' => 5, 'codpre' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Reqart' => 0, 'Codcat' => 1, 'Codart' => 2, 'Codrgo' => 3, 'Monrgo' => 4, 'Tipdoc' => 5, 'Codpre' => 6, 'Tipo' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (CadisrgoPeer::REQART => 0, CadisrgoPeer::CODCAT => 1, CadisrgoPeer::CODART => 2, CadisrgoPeer::CODRGO => 3, CadisrgoPeer::MONRGO => 4, CadisrgoPeer::TIPDOC => 5, CadisrgoPeer::CODPRE => 6, CadisrgoPeer::TIPO => 7, CadisrgoPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('reqart' => 0, 'codcat' => 1, 'codart' => 2, 'codrgo' => 3, 'monrgo' => 4, 'tipdoc' => 5, 'codpre' => 6, 'tipo' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -127,6 +130,8 @@ abstract class BaseCadisrgoPeer {
 		$criteria->addSelectColumn(CadisrgoPeer::TIPDOC);
 
 		$criteria->addSelectColumn(CadisrgoPeer::CODPRE);
+
+		$criteria->addSelectColumn(CadisrgoPeer::TIPO);
 
 		$criteria->addSelectColumn(CadisrgoPeer::ID);
 
@@ -230,6 +235,7 @@ abstract class BaseCadisrgoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CadisrgoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

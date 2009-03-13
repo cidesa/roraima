@@ -53,206 +53,238 @@ abstract class BaseCaartalm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodalm()
-	{
+  
+  public function getCodalm()
+  {
 
-		return $this->codalm; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->codalm);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodubi()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->codubi; 		
-	}
-	
-	public function getEximin()
-	{
+    return trim($this->codart);
 
-		return number_format($this->eximin,2,',','.');
-		
-	}
-	
-	public function getEximax()
-	{
+  }
+  
+  public function getCodubi()
+  {
 
-		return number_format($this->eximax,2,',','.');
-		
-	}
-	
-	public function getExiact()
-	{
+    return trim($this->codubi);
 
-		return number_format($this->exiact,2,',','.');
-		
-	}
-	
-	public function getPtoreo()
-	{
+  }
+  
+  public function getEximin($val=false)
+  {
 
-		return number_format($this->ptoreo,2,',','.');
-		
-	}
-	
-	public function getPedmin()
-	{
+    if($val) return number_format($this->eximin,2,',','.');
+    else return $this->eximin;
 
-		return number_format($this->pedmin,2,',','.');
-		
-	}
-	
-	public function getPedmax()
-	{
+  }
+  
+  public function getEximax($val=false)
+  {
 
-		return number_format($this->pedmax,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->eximax,2,',','.');
+    else return $this->eximax;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getExiact($val=false)
+  {
+
+    if($val) return number_format($this->exiact,2,',','.');
+    else return $this->exiact;
+
+  }
+  
+  public function getPtoreo($val=false)
+  {
+
+    if($val) return number_format($this->ptoreo,2,',','.');
+    else return $this->ptoreo;
+
+  }
+  
+  public function getPedmin($val=false)
+  {
+
+    if($val) return number_format($this->pedmin,2,',','.');
+    else return $this->pedmin;
+
+  }
+  
+  public function getPedmax($val=false)
+  {
+
+    if($val) return number_format($this->pedmax,2,',','.');
+    else return $this->pedmax;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = CaartalmPeer::CODALM;
-		}
-
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CaartalmPeer::CODALM;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartalmPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartalmPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodubi($v)
 	{
 
-		if ($this->codubi !== $v) {
-			$this->codubi = $v;
-			$this->modifiedColumns[] = CaartalmPeer::CODUBI;
-		}
-
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CaartalmPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setEximin($v)
 	{
 
-		if ($this->eximin !== $v) {
-			$this->eximin = $v;
-			$this->modifiedColumns[] = CaartalmPeer::EXIMIN;
-		}
-
+    if ($this->eximin !== $v) {
+        $this->eximin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartalmPeer::EXIMIN;
+      }
+  
 	} 
 	
 	public function setEximax($v)
 	{
 
-		if ($this->eximax !== $v) {
-			$this->eximax = $v;
-			$this->modifiedColumns[] = CaartalmPeer::EXIMAX;
-		}
-
+    if ($this->eximax !== $v) {
+        $this->eximax = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartalmPeer::EXIMAX;
+      }
+  
 	} 
 	
 	public function setExiact($v)
 	{
 
-		if ($this->exiact !== $v) {
-			$this->exiact = $v;
-			$this->modifiedColumns[] = CaartalmPeer::EXIACT;
-		}
-
+    if ($this->exiact !== $v) {
+        $this->exiact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartalmPeer::EXIACT;
+      }
+  
 	} 
 	
 	public function setPtoreo($v)
 	{
 
-		if ($this->ptoreo !== $v) {
-			$this->ptoreo = $v;
-			$this->modifiedColumns[] = CaartalmPeer::PTOREO;
-		}
-
+    if ($this->ptoreo !== $v) {
+        $this->ptoreo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartalmPeer::PTOREO;
+      }
+  
 	} 
 	
 	public function setPedmin($v)
 	{
 
-		if ($this->pedmin !== $v) {
-			$this->pedmin = $v;
-			$this->modifiedColumns[] = CaartalmPeer::PEDMIN;
-		}
-
+    if ($this->pedmin !== $v) {
+        $this->pedmin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartalmPeer::PEDMIN;
+      }
+  
 	} 
 	
 	public function setPedmax($v)
 	{
 
-		if ($this->pedmax !== $v) {
-			$this->pedmax = $v;
-			$this->modifiedColumns[] = CaartalmPeer::PEDMAX;
-		}
-
+    if ($this->pedmax !== $v) {
+        $this->pedmax = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartalmPeer::PEDMAX;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartalmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartalmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codalm = $rs->getString($startcol + 0);
+      $this->codalm = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->codubi = $rs->getString($startcol + 2);
+      $this->codubi = $rs->getString($startcol + 2);
 
-			$this->eximin = $rs->getFloat($startcol + 3);
+      $this->eximin = $rs->getFloat($startcol + 3);
 
-			$this->eximax = $rs->getFloat($startcol + 4);
+      $this->eximax = $rs->getFloat($startcol + 4);
 
-			$this->exiact = $rs->getFloat($startcol + 5);
+      $this->exiact = $rs->getFloat($startcol + 5);
 
-			$this->ptoreo = $rs->getFloat($startcol + 6);
+      $this->ptoreo = $rs->getFloat($startcol + 6);
 
-			$this->pedmin = $rs->getFloat($startcol + 7);
+      $this->pedmin = $rs->getFloat($startcol + 7);
 
-			$this->pedmax = $rs->getFloat($startcol + 8);
+      $this->pedmax = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartalm object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartalm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -309,6 +341,7 @@ abstract class BaseCaartalm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaartalmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaartalmPeer::doUpdate($this, $con);

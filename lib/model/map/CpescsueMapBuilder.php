@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CpescsueMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CpescsueMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CpescsueMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cpescsue');
 		$tMap->setPhpName('Cpescsue');
 
@@ -34,11 +34,11 @@ class CpescsueMapBuilder {
 
 		$tMap->addColumn('CODESC', 'Codesc', 'string', CreoleTypes::VARCHAR, true, 4);
 
-		$tMap->addColumn('VALINI', 'Valini', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('VALINI', 'Valini', 'double', CreoleTypes::NUMERIC, true, 14);
 
-		$tMap->addColumn('VALFIN', 'Valfin', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('VALFIN', 'Valfin', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

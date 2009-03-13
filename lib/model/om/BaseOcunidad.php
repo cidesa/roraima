@@ -33,110 +33,137 @@ abstract class BaseOcunidad extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoduni()
-	{
+  
+  public function getCoduni()
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getDesuni()
-	{
+    return trim($this->coduni);
 
-		return $this->desuni; 		
-	}
-	
-	public function getAbruni()
-	{
+  }
+  
+  public function getDesuni()
+  {
 
-		return $this->abruni; 		
-	}
-	
-	public function getStauni()
-	{
+    return trim($this->desuni);
 
-		return $this->stauni; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getAbruni()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->abruni);
+
+  }
+  
+  public function getStauni()
+  {
+
+    return trim($this->stauni);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = OcunidadPeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = OcunidadPeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setDesuni($v)
 	{
 
-		if ($this->desuni !== $v) {
-			$this->desuni = $v;
-			$this->modifiedColumns[] = OcunidadPeer::DESUNI;
-		}
-
+    if ($this->desuni !== $v) {
+        $this->desuni = $v;
+        $this->modifiedColumns[] = OcunidadPeer::DESUNI;
+      }
+  
 	} 
 	
 	public function setAbruni($v)
 	{
 
-		if ($this->abruni !== $v) {
-			$this->abruni = $v;
-			$this->modifiedColumns[] = OcunidadPeer::ABRUNI;
-		}
-
+    if ($this->abruni !== $v) {
+        $this->abruni = $v;
+        $this->modifiedColumns[] = OcunidadPeer::ABRUNI;
+      }
+  
 	} 
 	
 	public function setStauni($v)
 	{
 
-		if ($this->stauni !== $v) {
-			$this->stauni = $v;
-			$this->modifiedColumns[] = OcunidadPeer::STAUNI;
-		}
-
+    if ($this->stauni !== $v) {
+        $this->stauni = $v;
+        $this->modifiedColumns[] = OcunidadPeer::STAUNI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcunidadPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcunidadPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduni = $rs->getString($startcol + 0);
+      $this->coduni = $rs->getString($startcol + 0);
 
-			$this->desuni = $rs->getString($startcol + 1);
+      $this->desuni = $rs->getString($startcol + 1);
 
-			$this->abruni = $rs->getString($startcol + 2);
+      $this->abruni = $rs->getString($startcol + 2);
 
-			$this->stauni = $rs->getString($startcol + 3);
+      $this->stauni = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocunidad object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocunidad object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseOcunidad extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcunidadPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcunidadPeer::doUpdate($this, $con);

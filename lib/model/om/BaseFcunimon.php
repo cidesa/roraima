@@ -29,93 +29,119 @@ abstract class BaseFcunimon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodunimon()
-	{
+  
+  public function getCodunimon()
+  {
 
-		return $this->codunimon; 		
-	}
-	
-	public function getNomunimon()
-	{
+    return trim($this->codunimon);
 
-		return $this->nomunimon; 		
-	}
-	
-	public function getValunimon()
-	{
+  }
+  
+  public function getNomunimon()
+  {
 
-		return number_format($this->valunimon,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomunimon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getValunimon($val=false)
+  {
+
+    if($val) return number_format($this->valunimon,2,',','.');
+    else return $this->valunimon;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodunimon($v)
 	{
 
-		if ($this->codunimon !== $v) {
-			$this->codunimon = $v;
-			$this->modifiedColumns[] = FcunimonPeer::CODUNIMON;
-		}
-
+    if ($this->codunimon !== $v) {
+        $this->codunimon = $v;
+        $this->modifiedColumns[] = FcunimonPeer::CODUNIMON;
+      }
+  
 	} 
 	
 	public function setNomunimon($v)
 	{
 
-		if ($this->nomunimon !== $v) {
-			$this->nomunimon = $v;
-			$this->modifiedColumns[] = FcunimonPeer::NOMUNIMON;
-		}
-
+    if ($this->nomunimon !== $v) {
+        $this->nomunimon = $v;
+        $this->modifiedColumns[] = FcunimonPeer::NOMUNIMON;
+      }
+  
 	} 
 	
 	public function setValunimon($v)
 	{
 
-		if ($this->valunimon !== $v) {
-			$this->valunimon = $v;
-			$this->modifiedColumns[] = FcunimonPeer::VALUNIMON;
-		}
-
+    if ($this->valunimon !== $v) {
+        $this->valunimon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcunimonPeer::VALUNIMON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcunimonPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcunimonPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codunimon = $rs->getString($startcol + 0);
+      $this->codunimon = $rs->getString($startcol + 0);
 
-			$this->nomunimon = $rs->getString($startcol + 1);
+      $this->nomunimon = $rs->getString($startcol + 1);
 
-			$this->valunimon = $rs->getFloat($startcol + 2);
+      $this->valunimon = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcunimon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcunimon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseFcunimon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcunimonPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcunimonPeer::doUpdate($this, $con);

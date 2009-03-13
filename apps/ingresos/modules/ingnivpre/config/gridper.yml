@@ -1,0 +1,28 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   cipereje
+  ancho:                   500
+  anchogrid:               550
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Período
+  tipo:                    t
+  nombrecampo:             pereje
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Fecha Desde
+  tipo:                    f
+  nombrecampo:             fecdes
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Fecha Hasta
+  tipo:                    f
+  nombrecampo:             fechas
+  esgrabable:			   true
+  html:                    []

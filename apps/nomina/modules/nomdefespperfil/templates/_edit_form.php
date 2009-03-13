@@ -9,9 +9,10 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($npperfil, 'getId') ?>
+<?php echo javascript_include_tag('tools','observe') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend>Perfiles</legend>
+<legend><?php echo __('Perfil') ?></legend>
 <div class="form-row">
   <?php echo label_for('npperfil[codperfil]', __($labels['npperfil{codperfil}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npperfil{codperfil}')): ?> form-error<?php endif; ?>">
@@ -23,11 +24,13 @@
   'size' => 20,
   'control_name' => 'npperfil[codperfil]',
   'maxlength' => 4,
-)); echo $value ? $value : '&nbsp;' ?>
+  'readonly'  =>  $npperfil->getId()!='' ? true : false ,
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(4, '0',0);$('npperfil_codperfil').value=valor",
+ )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('npperfil[desperfil]', __($labels['npperfil{desperfil}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npperfil{desperfil}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npperfil{desperfil}')): ?>
@@ -37,6 +40,7 @@
   <?php $value = object_input_tag($npperfil, 'getDesperfil', array (
   'size' => 80,
   'control_name' => 'npperfil[desperfil]',
+  'maxlength' => 255,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -48,7 +52,7 @@
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($npperfil->getId()): ?>
+      <li class="float-rigth"><?php if ($npperfil->getId()): ?>
 <?php echo button_to(__('delete'), 'nomdefespperfil/delete?id='.$npperfil->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),

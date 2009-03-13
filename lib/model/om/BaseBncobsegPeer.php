@@ -205,6 +205,7 @@ abstract class BaseBncobsegPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BncobsegPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

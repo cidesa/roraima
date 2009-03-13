@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class Fcconrep1MapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.Fcconrep1MapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.Fcconrep1MapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcconrep1');
 		$tMap->setPhpName('Fcconrep1');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcconrep1_SEQ');
 
 		$tMap->addColumn('CEDCON', 'Cedcon', 'string', CreoleTypes::VARCHAR, false, 11);
 
@@ -74,9 +76,9 @@ class Fcconrep1MapBuilder {
 
 		$tMap->addColumn('CLACON', 'Clacon', 'string', CreoleTypes::VARCHAR, false, 12);
 
-		$tMap->addColumn('FECDESCON', 'Fecdescon', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDESCON', 'Fecdescon', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECACTCON', 'Fecactcon', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECACTCON', 'Fecactcon', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('STACON', 'Stacon', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -87,6 +89,6 @@ class Fcconrep1MapBuilder {
 		$tMap->addColumn('RECCON', 'Reccon', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

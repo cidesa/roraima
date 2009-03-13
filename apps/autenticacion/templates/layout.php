@@ -7,12 +7,12 @@
 
 <?php include_title() ?>
 
-
 <link rel="shortcut icon" href="/favicon.ico" />
 
 </head>
 <body>
-			<?php echo $sf_data->getRaw('sf_content') ?>
-</body>
 
+<?php echo $sf_data->getRaw('sf_content') ?>
+
+</body>
 </html>

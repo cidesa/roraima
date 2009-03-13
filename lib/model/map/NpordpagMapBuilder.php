@@ -1,38 +1,40 @@
 <?php
 
 
-	
+
 class NpordpagMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpordpagMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpordpagMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npordpag');
 		$tMap->setPhpName('Npordpag');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
 
-		$tMap->addColumn('NUMORD', 'Numord', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->setPrimaryKeyMethodInfo('npordpag_SEQ');
+
+		$tMap->addColumn('NUMORD', 'Numord', 'double', CreoleTypes::NUMERIC, true, 8);
 
 		$tMap->addColumn('TIPCAU', 'Tipcau', 'string', CreoleTypes::VARCHAR, true, 4);
 
@@ -48,19 +50,19 @@ class NpordpagMapBuilder {
 
 		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 24);
 
-		$tMap->addColumn('FECEMI', 'Fecemi', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECEMI', 'Fecemi', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('NUMRIF', 'Numrif', 'string', CreoleTypes::VARCHAR, true, 12);
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('MONPAG', 'Monpag', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONPAG', 'Monpag', 'double', CreoleTypes::NUMERIC, true, 14);
 
-		$tMap->addColumn('MONAJU', 'Monaju', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONAJU', 'Monaju', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addColumn('CONPAG', 'Conpag', 'string', CreoleTypes::VARCHAR, true, 50);
 
-		$tMap->addColumn('CAUPAG', 'Caupag', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('CAUPAG', 'Caupag', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addColumn('STATUS', 'Status', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -74,9 +76,9 @@ class NpordpagMapBuilder {
 
 		$tMap->addColumn('CODCUEDES', 'Codcuedes', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('DESPAG', 'Despag', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('DESPAG', 'Despag', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

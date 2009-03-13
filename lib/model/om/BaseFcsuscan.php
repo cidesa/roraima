@@ -61,259 +61,292 @@ abstract class BaseFcsuscan extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumsus()
-	{
+  
+  public function getNumsus()
+  {
 
-		return $this->numsus; 		
-	}
-	
-	public function getNumsol()
-	{
+    return trim($this->numsus);
 
-		return $this->numsol; 		
-	}
-	
-	public function getNumlic()
-	{
+  }
+  
+  public function getNumsol()
+  {
 
-		return $this->numlic; 		
-	}
-	
-	public function getEstlic()
-	{
+    return trim($this->numsol);
 
-		return $this->estlic; 		
-	}
-	
-	public function getMotsus()
-	{
+  }
+  
+  public function getNumlic()
+  {
 
-		return $this->motsus; 		
-	}
-	
-	public function getFecsus($format = 'Y-m-d')
-	{
+    return trim($this->numlic);
 
-		if ($this->fecsus === null || $this->fecsus === '') {
-			return null;
-		} elseif (!is_int($this->fecsus)) {
-						$ts = strtotime($this->fecsus);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecsus] as date/time value: " . var_export($this->fecsus, true));
-			}
-		} else {
-			$ts = $this->fecsus;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getEstlic()
+  {
 
-	
-	public function getResolu()
-	{
+    return trim($this->estlic);
 
-		return $this->resolu; 		
-	}
-	
-	public function getTomo()
-	{
+  }
+  
+  public function getMotsus()
+  {
 
-		return $this->tomo; 		
-	}
-	
-	public function getFolio()
-	{
+    return trim($this->motsus);
 
-		return $this->folio; 		
-	}
-	
-	public function getNumero()
-	{
+  }
+  
+  public function getFecsus($format = 'Y-m-d')
+  {
 
-		return $this->numero; 		
-	}
-	
-	public function getFunsus()
-	{
+    if ($this->fecsus === null || $this->fecsus === '') {
+      return null;
+    } elseif (!is_int($this->fecsus)) {
+            $ts = adodb_strtotime($this->fecsus);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsus] as date/time value: " . var_export($this->fecsus, true));
+      }
+    } else {
+      $ts = $this->fecsus;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->funsus; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getResolu()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->resolu);
+
+  }
+  
+  public function getTomo()
+  {
+
+    return trim($this->tomo);
+
+  }
+  
+  public function getFolio()
+  {
+
+    return trim($this->folio);
+
+  }
+  
+  public function getNumero()
+  {
+
+    return trim($this->numero);
+
+  }
+  
+  public function getFunsus()
+  {
+
+    return trim($this->funsus);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumsus($v)
 	{
 
-		if ($this->numsus !== $v) {
-			$this->numsus = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::NUMSUS;
-		}
-
+    if ($this->numsus !== $v) {
+        $this->numsus = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::NUMSUS;
+      }
+  
 	} 
 	
 	public function setNumsol($v)
 	{
 
-		if ($this->numsol !== $v) {
-			$this->numsol = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::NUMSOL;
-		}
-
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::NUMSOL;
+      }
+  
 	} 
 	
 	public function setNumlic($v)
 	{
 
-		if ($this->numlic !== $v) {
-			$this->numlic = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::NUMLIC;
-		}
-
+    if ($this->numlic !== $v) {
+        $this->numlic = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::NUMLIC;
+      }
+  
 	} 
 	
 	public function setEstlic($v)
 	{
 
-		if ($this->estlic !== $v) {
-			$this->estlic = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::ESTLIC;
-		}
-
+    if ($this->estlic !== $v) {
+        $this->estlic = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::ESTLIC;
+      }
+  
 	} 
 	
 	public function setMotsus($v)
 	{
 
-		if ($this->motsus !== $v) {
-			$this->motsus = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::MOTSUS;
-		}
-
+    if ($this->motsus !== $v) {
+        $this->motsus = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::MOTSUS;
+      }
+  
 	} 
 	
 	public function setFecsus($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecsus] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecsus !== $ts) {
-			$this->fecsus = $ts;
-			$this->modifiedColumns[] = FcsuscanPeer::FECSUS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsus] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsus !== $ts) {
+      $this->fecsus = $ts;
+      $this->modifiedColumns[] = FcsuscanPeer::FECSUS;
+    }
 
 	} 
 	
 	public function setResolu($v)
 	{
 
-		if ($this->resolu !== $v) {
-			$this->resolu = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::RESOLU;
-		}
-
+    if ($this->resolu !== $v) {
+        $this->resolu = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::RESOLU;
+      }
+  
 	} 
 	
 	public function setTomo($v)
 	{
 
-		if ($this->tomo !== $v) {
-			$this->tomo = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::TOMO;
-		}
-
+    if ($this->tomo !== $v) {
+        $this->tomo = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::TOMO;
+      }
+  
 	} 
 	
 	public function setFolio($v)
 	{
 
-		if ($this->folio !== $v) {
-			$this->folio = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::FOLIO;
-		}
-
+    if ($this->folio !== $v) {
+        $this->folio = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::FOLIO;
+      }
+  
 	} 
 	
 	public function setNumero($v)
 	{
 
-		if ($this->numero !== $v) {
-			$this->numero = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::NUMERO;
-		}
-
+    if ($this->numero !== $v) {
+        $this->numero = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::NUMERO;
+      }
+  
 	} 
 	
 	public function setFunsus($v)
 	{
 
-		if ($this->funsus !== $v) {
-			$this->funsus = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::FUNSUS;
-		}
-
+    if ($this->funsus !== $v) {
+        $this->funsus = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::FUNSUS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcsuscanPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcsuscanPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numsus = $rs->getString($startcol + 0);
+      $this->numsus = $rs->getString($startcol + 0);
 
-			$this->numsol = $rs->getString($startcol + 1);
+      $this->numsol = $rs->getString($startcol + 1);
 
-			$this->numlic = $rs->getString($startcol + 2);
+      $this->numlic = $rs->getString($startcol + 2);
 
-			$this->estlic = $rs->getString($startcol + 3);
+      $this->estlic = $rs->getString($startcol + 3);
 
-			$this->motsus = $rs->getString($startcol + 4);
+      $this->motsus = $rs->getString($startcol + 4);
 
-			$this->fecsus = $rs->getDate($startcol + 5, null);
+      $this->fecsus = $rs->getDate($startcol + 5, null);
 
-			$this->resolu = $rs->getString($startcol + 6);
+      $this->resolu = $rs->getString($startcol + 6);
 
-			$this->tomo = $rs->getString($startcol + 7);
+      $this->tomo = $rs->getString($startcol + 7);
 
-			$this->folio = $rs->getString($startcol + 8);
+      $this->folio = $rs->getString($startcol + 8);
 
-			$this->numero = $rs->getString($startcol + 9);
+      $this->numero = $rs->getString($startcol + 9);
 
-			$this->funsus = $rs->getString($startcol + 10);
+      $this->funsus = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcsuscan object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcsuscan object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -370,6 +403,7 @@ abstract class BaseFcsuscan extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcsuscanPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcsuscanPeer::doUpdate($this, $con);

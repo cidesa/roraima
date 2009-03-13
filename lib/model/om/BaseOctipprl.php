@@ -25,74 +25,99 @@ abstract class BaseOctipprl extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtippro()
-	{
+  
+  public function getCodtippro()
+  {
 
-		return $this->codtippro; 		
-	}
-	
-	public function getDestippro()
-	{
+    return trim($this->codtippro);
 
-		return $this->destippro; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDestippro()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->destippro);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtippro($v)
 	{
 
-		if ($this->codtippro !== $v) {
-			$this->codtippro = $v;
-			$this->modifiedColumns[] = OctipprlPeer::CODTIPPRO;
-		}
-
+    if ($this->codtippro !== $v) {
+        $this->codtippro = $v;
+        $this->modifiedColumns[] = OctipprlPeer::CODTIPPRO;
+      }
+  
 	} 
 	
 	public function setDestippro($v)
 	{
 
-		if ($this->destippro !== $v) {
-			$this->destippro = $v;
-			$this->modifiedColumns[] = OctipprlPeer::DESTIPPRO;
-		}
-
+    if ($this->destippro !== $v) {
+        $this->destippro = $v;
+        $this->modifiedColumns[] = OctipprlPeer::DESTIPPRO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OctipprlPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OctipprlPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtippro = $rs->getString($startcol + 0);
+      $this->codtippro = $rs->getString($startcol + 0);
 
-			$this->destippro = $rs->getString($startcol + 1);
+      $this->destippro = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Octipprl object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Octipprl object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseOctipprl extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OctipprlPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OctipprlPeer::doUpdate($this, $con);

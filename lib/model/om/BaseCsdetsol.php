@@ -45,166 +45,196 @@ abstract class BaseCsdetsol extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumsol()
-	{
+  
+  public function getNumsol()
+  {
 
-		return $this->numsol; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->numsol);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodtip()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->codtip; 		
-	}
-	
-	public function getCantidad()
-	{
+    return trim($this->codart);
 
-		return number_format($this->cantidad,2,',','.');
-		
-	}
-	
-	public function getFormato()
-	{
+  }
+  
+  public function getCodtip()
+  {
 
-		return $this->formato; 		
-	}
-	
-	public function getPrograma()
-	{
+    return trim($this->codtip);
 
-		return $this->programa; 		
-	}
-	
-	public function getCanpre()
-	{
+  }
+  
+  public function getCantidad($val=false)
+  {
 
-		return number_format($this->canpre,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->cantidad,2,',','.');
+    else return $this->cantidad;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFormato()
+  {
+
+    return trim($this->formato);
+
+  }
+  
+  public function getPrograma()
+  {
+
+    return trim($this->programa);
+
+  }
+  
+  public function getCanpre($val=false)
+  {
+
+    if($val) return number_format($this->canpre,2,',','.');
+    else return $this->canpre;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumsol($v)
 	{
 
-		if ($this->numsol !== $v) {
-			$this->numsol = $v;
-			$this->modifiedColumns[] = CsdetsolPeer::NUMSOL;
-		}
-
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = CsdetsolPeer::NUMSOL;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CsdetsolPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CsdetsolPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = CsdetsolPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = CsdetsolPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setCantidad($v)
 	{
 
-		if ($this->cantidad !== $v) {
-			$this->cantidad = $v;
-			$this->modifiedColumns[] = CsdetsolPeer::CANTIDAD;
-		}
-
+    if ($this->cantidad !== $v) {
+        $this->cantidad = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsdetsolPeer::CANTIDAD;
+      }
+  
 	} 
 	
 	public function setFormato($v)
 	{
 
-		if ($this->formato !== $v) {
-			$this->formato = $v;
-			$this->modifiedColumns[] = CsdetsolPeer::FORMATO;
-		}
-
+    if ($this->formato !== $v) {
+        $this->formato = $v;
+        $this->modifiedColumns[] = CsdetsolPeer::FORMATO;
+      }
+  
 	} 
 	
 	public function setPrograma($v)
 	{
 
-		if ($this->programa !== $v) {
-			$this->programa = $v;
-			$this->modifiedColumns[] = CsdetsolPeer::PROGRAMA;
-		}
-
+    if ($this->programa !== $v) {
+        $this->programa = $v;
+        $this->modifiedColumns[] = CsdetsolPeer::PROGRAMA;
+      }
+  
 	} 
 	
 	public function setCanpre($v)
 	{
 
-		if ($this->canpre !== $v) {
-			$this->canpre = $v;
-			$this->modifiedColumns[] = CsdetsolPeer::CANPRE;
-		}
-
+    if ($this->canpre !== $v) {
+        $this->canpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsdetsolPeer::CANPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsdetsolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsdetsolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numsol = $rs->getString($startcol + 0);
+      $this->numsol = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->codtip = $rs->getString($startcol + 2);
+      $this->codtip = $rs->getString($startcol + 2);
 
-			$this->cantidad = $rs->getFloat($startcol + 3);
+      $this->cantidad = $rs->getFloat($startcol + 3);
 
-			$this->formato = $rs->getString($startcol + 4);
+      $this->formato = $rs->getString($startcol + 4);
 
-			$this->programa = $rs->getString($startcol + 5);
+      $this->programa = $rs->getString($startcol + 5);
 
-			$this->canpre = $rs->getFloat($startcol + 6);
+      $this->canpre = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csdetsol object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csdetsol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

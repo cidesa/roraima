@@ -10,6 +10,54 @@
  */
 class oycdatsolActions extends autooycdatsolActions
 {
+
+  private $coderr = -1;
+
+  public function executeAutocomplete()
+  {
+    if ($this->getRequestParameter('ajax')=='1')
+      {
+       $this->tags=Herramientas::autocompleteAjax('cedste','ocdatste','cedste',$this->getRequestParameter('ocdatste[cedste]'));
+      }
+    else if ($this->getRequestParameter('ajax')=='2')
+      {
+       $this->tags=Herramientas::autocompleteAjax('codste','octipste','desste',str_pad($this->getRequestParameter('ocdatste[codste]'),4,0,STR_PAD_LEFT));
+      }
+  }
+
+
+public function executeAjax()
+  {
+
+    $codigo = $this->getRequestParameter('codigo','');
+    $ajax = $this->getRequestParameter('ajax','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
+    $cajtexcom = $this->getRequestParameter('cajtexcom','');
+
+    switch ($ajax){
+      case '2':
+        $dato=Herramientas::getX('codste','octipste','desste',str_pad($codigo,4,0,STR_PAD_LEFT));
+		$output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
+
+        break;
+
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+    }
+
+    // Instruccion para escribir en la cabecera los datos a enviar a la vista
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
+    // mantener habilitar esta instrucción
+    return sfView::HEADER_ONLY;
+
+    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
+    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
+
+  }
+
+
 	public function executeCombo()
 	{
 		if ($this->getRequestParameter('par')=='1')
@@ -60,7 +108,7 @@ class oycdatsolActions extends autooycdatsolActions
 		$filtros_variales=array($codpais,$codestado);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('codmun','nommun');// arreglos donde me traigo el nombre y el codigo
 		return $municipio= Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
-		
+
 	}
 
 	public function Cargarparroquia($codpais,$codestado,$codmunicipio)
@@ -70,7 +118,7 @@ class oycdatsolActions extends autooycdatsolActions
 		$filtros_variales=array($codpais,$codestado,$codmunicipio);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('codpar','nompar');// arreglos donde me traigo el nombre y el codigo
 		return $parroquia= Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
-		
+
 	}
 	public function Cargarsector($codpais,$codestado,$codmunicipio,$codparroquia)
 	{
@@ -79,13 +127,13 @@ class oycdatsolActions extends autooycdatsolActions
 		$filtros_variales=array($codpais,$codestado,$codmunicipio,$codparroquia);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('codsec','nomsec');// arreglos donde me traigo el nombre y el codigo
 		return $sector= Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
-		
-	}		
-	
+
+	}
+
 	public function executeEdit()
 	{
 		$this->ocdatste = $this->getOcdatsteOrCreate();
-		$this->funciones_combos(); 
+		$this->funciones_combos();
 		if ($this->getRequest()->getMethod() == sfRequest::POST)
 		{
 			$this->updateOcdatsteFromRequest();
@@ -93,6 +141,7 @@ class oycdatsolActions extends autooycdatsolActions
 			$this->saveOcdatste($this->ocdatste);
 
 			$this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
 			if ($this->getRequestParameter('save_and_add'))
 			{
@@ -125,7 +174,7 @@ class oycdatsolActions extends autooycdatsolActions
  protected function updateOcdatsteFromRequest()
  {
  	$ocdatste = $this->getRequestParameter('ocdatste');
-	$this->funciones_combos(); 
+	$this->funciones_combos();
 
  	if (isset($ocdatste['cedste']))
  	{
@@ -137,7 +186,7 @@ class oycdatsolActions extends autooycdatsolActions
  	}
  	if (isset($ocdatste['codste']))
  	{
- 		$this->ocdatste->setCodste($ocdatste['codste']);
+ 		$this->ocdatste->setCodste(str_pad($ocdatste['codste'],4,0,STR_PAD_LEFT));
  	}
  	if (isset($ocdatste['desste']))
  	{
@@ -275,28 +324,47 @@ class oycdatsolActions extends autooycdatsolActions
  	}
  }
 
- protected function getLabels()
- {
- 	return array(
- 	'ocdatste{cedste}' => 'C.I./RIF:',
- 	'ocdatste{nomste}' => 'Nombre:',
- 	'ocdatste{codste}' => 'Tipo:',
- 	'ocdatste{desste}' => 'Descripci�n Tipo:',
- 	'ocdatste{dirste}' => 'Dirección:',
- 	'ocdatste{telste}' => 'Teléfono(s):',
- 	'ocdatste{faxste}' => 'Fax:',
- 	'ocdatste{emaste}' => 'E-Mail:',
- 	'ocdatste{cedrep}' => 'C. I./RIFp:',
- 	'ocdatste{nomrep}' => 'Nombre:',
- 	'ocdatste{dirrep}' => 'Dirección:',
-      'ocdatste{telrep}' => 'Teléfono(s):',
-      'ocdatste{faxrep}' => 'Fax:',
-      'ocdatste{emarep}' => 'E-Mail:',
-      'ocdatste{codpai}' => 'País:',
-      'ocdatste{codedo}' => 'Estado:',
-      'ocdatste{codmun}' => 'Municipio:',
-      'ocdatste{codpar}' => 'Parroquia:',
-      'ocdatste{codsec}' => 'Sector:',
-    );
-  }	
+
+  protected function deleteOcdatste($ocdatste)
+  {
+    $coderr = -1;
+
+    // habilitar la siguiente línea si se usa grid
+    //$grid=Herramientas::CargarDatosGrid($this,$this->obj);
+
+    try {
+
+      // Modificar la siguiente línea para llamar al método
+      // correcto en la clase del negocio, ej:
+       $coderr = Obras::EliminarOycdatsol($ocdatste);
+
+      // OJO ----> Eliminar esta linea al modificar este método
+     // parent::deleteOcdatste($ocregsol);
+    //$ocregsol->delete();
+
+      if(is_array($coderr)){
+        foreach ($coderr as $ERR){
+          $err = Herramientas::obtenerMensajeError($ERR);
+          $this->getRequest()->setError('',$err);
+
+        }
+      }elseif($coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($coderr);
+        $this->getRequest()->setError('',$err);
+
+      }
+
+
+    } catch (Exception $ex) {
+
+      $coderr = 0;
+      $err = Herramientas::obtenerMensajeError($coderr);
+      $this->getRequest()->setError('',$err);
+
+    }
+
+
+  }
+
+
 }

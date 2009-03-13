@@ -230,6 +230,7 @@ abstract class BaseCaajuocPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaajuocPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

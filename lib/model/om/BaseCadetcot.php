@@ -53,228 +53,259 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefcot()
-	{
+  
+  public function getRefcot()
+  {
 
-		return $this->refcot; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->refcot);
 
-		return $this->codart; 		
-	}
-	
-	public function getCanord()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return number_format($this->canord,2,',','.');
-		
-	}
-	
-	public function getCosto()
-	{
+    return trim($this->codart);
 
-		return number_format($this->costo,2,',','.');
-		
-	}
-	
-	public function getTotdet()
-	{
+  }
+  
+  public function getCanord($val=false)
+  {
 
-		return number_format($this->totdet,2,',','.');
-		
-	}
-	
-	public function getFecent($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->canord,2,',','.');
+    else return $this->canord;
 
-		if ($this->fecent === null || $this->fecent === '') {
-			return null;
-		} elseif (!is_int($this->fecent)) {
-						$ts = strtotime($this->fecent);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
-			}
-		} else {
-			$ts = $this->fecent;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCosto($val=false)
+  {
 
-	
-	public function getPriori()
-	{
+    if($val) return number_format($this->costo,2,',','.');
+    else return $this->costo;
 
-		return number_format($this->priori,2,',','.');
-		
-	}
-	
-	public function getJustifica()
-	{
+  }
+  
+  public function getTotdet($val=false)
+  {
 
-		return $this->justifica; 		
-	}
-	
-	public function getMondes()
-	{
+    if($val) return number_format($this->totdet,2,',','.');
+    else return $this->totdet;
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getFecent($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecent === null || $this->fecent === '') {
+      return null;
+    } elseif (!is_int($this->fecent)) {
+            $ts = adodb_strtotime($this->fecent);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
+      }
+    } else {
+      $ts = $this->fecent;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getPriori($val=false)
+  {
+
+    if($val) return number_format($this->priori,2,',','.');
+    else return $this->priori;
+
+  }
+  
+  public function getJustifica()
+  {
+
+    return trim($this->justifica);
+
+  }
+  
+  public function getMondes($val=false)
+  {
+
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefcot($v)
 	{
 
-		if ($this->refcot !== $v) {
-			$this->refcot = $v;
-			$this->modifiedColumns[] = CadetcotPeer::REFCOT;
-		}
-
+    if ($this->refcot !== $v) {
+        $this->refcot = $v;
+        $this->modifiedColumns[] = CadetcotPeer::REFCOT;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CadetcotPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CadetcotPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCanord($v)
 	{
 
-		if ($this->canord !== $v) {
-			$this->canord = $v;
-			$this->modifiedColumns[] = CadetcotPeer::CANORD;
-		}
-
+    if ($this->canord !== $v) {
+        $this->canord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetcotPeer::CANORD;
+      }
+  
 	} 
 	
 	public function setCosto($v)
 	{
 
-		if ($this->costo !== $v) {
-			$this->costo = $v;
-			$this->modifiedColumns[] = CadetcotPeer::COSTO;
-		}
-
+    if ($this->costo !== $v) {
+        $this->costo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetcotPeer::COSTO;
+      }
+  
 	} 
 	
 	public function setTotdet($v)
 	{
 
-		if ($this->totdet !== $v) {
-			$this->totdet = $v;
-			$this->modifiedColumns[] = CadetcotPeer::TOTDET;
-		}
-
+    if ($this->totdet !== $v) {
+        $this->totdet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetcotPeer::TOTDET;
+      }
+  
 	} 
 	
 	public function setFecent($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecent !== $ts) {
-			$this->fecent = $ts;
-			$this->modifiedColumns[] = CadetcotPeer::FECENT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecent !== $ts) {
+      $this->fecent = $ts;
+      $this->modifiedColumns[] = CadetcotPeer::FECENT;
+    }
 
 	} 
 	
 	public function setPriori($v)
 	{
 
-		if ($this->priori !== $v) {
-			$this->priori = $v;
-			$this->modifiedColumns[] = CadetcotPeer::PRIORI;
-		}
-
+    if ($this->priori !== $v) {
+        $this->priori = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetcotPeer::PRIORI;
+      }
+  
 	} 
 	
 	public function setJustifica($v)
 	{
 
-		if ($this->justifica !== $v) {
-			$this->justifica = $v;
-			$this->modifiedColumns[] = CadetcotPeer::JUSTIFICA;
-		}
-
+    if ($this->justifica !== $v) {
+        $this->justifica = $v;
+        $this->modifiedColumns[] = CadetcotPeer::JUSTIFICA;
+      }
+  
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = CadetcotPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetcotPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadetcotPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadetcotPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refcot = $rs->getString($startcol + 0);
+      $this->refcot = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->canord = $rs->getFloat($startcol + 2);
+      $this->canord = $rs->getFloat($startcol + 2);
 
-			$this->costo = $rs->getFloat($startcol + 3);
+      $this->costo = $rs->getFloat($startcol + 3);
 
-			$this->totdet = $rs->getFloat($startcol + 4);
+      $this->totdet = $rs->getFloat($startcol + 4);
 
-			$this->fecent = $rs->getDate($startcol + 5, null);
+      $this->fecent = $rs->getDate($startcol + 5, null);
 
-			$this->priori = $rs->getFloat($startcol + 6);
+      $this->priori = $rs->getFloat($startcol + 6);
 
-			$this->justifica = $rs->getString($startcol + 7);
+      $this->justifica = $rs->getString($startcol + 7);
 
-			$this->mondes = $rs->getFloat($startcol + 8);
+      $this->mondes = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadetcot object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadetcot object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -331,6 +362,7 @@ abstract class BaseCadetcot extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CadetcotPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadetcotPeer::doUpdate($this, $con);

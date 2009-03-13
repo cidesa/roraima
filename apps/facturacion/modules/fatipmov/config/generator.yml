@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fatipmov
+    theme:            cidesaGenerator
+
+    fields:
+      desmov: { name: Descripción, validate: Vstring_1_50, msj_error: Debe insertar la descripción del tipo de movimiento }
+      nomabr: { name: Nombre Abreviado, validate: Vstring_1_4 }
+      debcre: { name: Tipo}
+      codcta: { name: Cta. Contable Asociada}
+
+    list:
+      title: Tipos de Movimiento
+      display: [=desmov, nomabr, debcre]
+      filters: [desmov]
+      object_actions:
+       _edit:        ~
+       _delete:        ~
+      max_per_page:	  10
+      sort:    desmov
+
+    edit:
+      title: Definición de Tipo de Movimiento
+      display:
+        "NONE": [desmov, nomabr, debcre, _codcta]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

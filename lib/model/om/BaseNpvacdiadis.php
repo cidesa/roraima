@@ -33,113 +33,140 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRangodesde()
-	{
+  
+  public function getRangodesde($val=false)
+  {
 
-		return number_format($this->rangodesde,2,',','.');
-		
-	}
-	
-	public function getRangohasta()
-	{
+    if($val) return number_format($this->rangodesde,2,',','.');
+    else return $this->rangodesde;
 
-		return number_format($this->rangohasta,2,',','.');
-		
-	}
-	
-	public function getDiadis()
-	{
+  }
+  
+  public function getRangohasta($val=false)
+  {
 
-		return number_format($this->diadis,2,',','.');
-		
-	}
-	
-	public function getCodnom()
-	{
+    if($val) return number_format($this->rangohasta,2,',','.');
+    else return $this->rangohasta;
 
-		return $this->codnom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDiadis($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->diadis,2,',','.');
+    else return $this->diadis;
+
+  }
+  
+  public function getCodnom()
+  {
+
+    return trim($this->codnom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRangodesde($v)
 	{
 
-		if ($this->rangodesde !== $v) {
-			$this->rangodesde = $v;
-			$this->modifiedColumns[] = NpvacdiadisPeer::RANGODESDE;
-		}
-
+    if ($this->rangodesde !== $v) {
+        $this->rangodesde = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacdiadisPeer::RANGODESDE;
+      }
+  
 	} 
 	
 	public function setRangohasta($v)
 	{
 
-		if ($this->rangohasta !== $v) {
-			$this->rangohasta = $v;
-			$this->modifiedColumns[] = NpvacdiadisPeer::RANGOHASTA;
-		}
-
+    if ($this->rangohasta !== $v) {
+        $this->rangohasta = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacdiadisPeer::RANGOHASTA;
+      }
+  
 	} 
 	
 	public function setDiadis($v)
 	{
 
-		if ($this->diadis !== $v) {
-			$this->diadis = $v;
-			$this->modifiedColumns[] = NpvacdiadisPeer::DIADIS;
-		}
-
+    if ($this->diadis !== $v) {
+        $this->diadis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacdiadisPeer::DIADIS;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpvacdiadisPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpvacdiadisPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacdiadisPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacdiadisPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->rangodesde = $rs->getFloat($startcol + 0);
+      $this->rangodesde = $rs->getFloat($startcol + 0);
 
-			$this->rangohasta = $rs->getFloat($startcol + 1);
+      $this->rangohasta = $rs->getFloat($startcol + 1);
 
-			$this->diadis = $rs->getFloat($startcol + 2);
+      $this->diadis = $rs->getFloat($startcol + 2);
 
-			$this->codnom = $rs->getString($startcol + 3);
+      $this->codnom = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacdiadis object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacdiadis object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -196,6 +223,7 @@ abstract class BaseNpvacdiadis extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacdiadisPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacdiadisPeer::doUpdate($this, $con);

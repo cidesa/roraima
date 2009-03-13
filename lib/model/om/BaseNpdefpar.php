@@ -33,111 +33,138 @@ abstract class BaseNpdefpar extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcol()
-	{
+  
+  public function getCodcol()
+  {
 
-		return $this->codcol; 		
-	}
-	
-	public function getNomcol()
-	{
+    return trim($this->codcol);
 
-		return $this->nomcol; 		
-	}
-	
-	public function getTipcol()
-	{
+  }
+  
+  public function getNomcol()
+  {
 
-		return $this->tipcol; 		
-	}
-	
-	public function getLoncol()
-	{
+    return trim($this->nomcol);
 
-		return number_format($this->loncol,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTipcol()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipcol);
+
+  }
+  
+  public function getLoncol($val=false)
+  {
+
+    if($val) return number_format($this->loncol,2,',','.');
+    else return $this->loncol;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcol($v)
 	{
 
-		if ($this->codcol !== $v) {
-			$this->codcol = $v;
-			$this->modifiedColumns[] = NpdefparPeer::CODCOL;
-		}
-
+    if ($this->codcol !== $v) {
+        $this->codcol = $v;
+        $this->modifiedColumns[] = NpdefparPeer::CODCOL;
+      }
+  
 	} 
 	
 	public function setNomcol($v)
 	{
 
-		if ($this->nomcol !== $v) {
-			$this->nomcol = $v;
-			$this->modifiedColumns[] = NpdefparPeer::NOMCOL;
-		}
-
+    if ($this->nomcol !== $v) {
+        $this->nomcol = $v;
+        $this->modifiedColumns[] = NpdefparPeer::NOMCOL;
+      }
+  
 	} 
 	
 	public function setTipcol($v)
 	{
 
-		if ($this->tipcol !== $v) {
-			$this->tipcol = $v;
-			$this->modifiedColumns[] = NpdefparPeer::TIPCOL;
-		}
-
+    if ($this->tipcol !== $v) {
+        $this->tipcol = $v;
+        $this->modifiedColumns[] = NpdefparPeer::TIPCOL;
+      }
+  
 	} 
 	
 	public function setLoncol($v)
 	{
 
-		if ($this->loncol !== $v) {
-			$this->loncol = $v;
-			$this->modifiedColumns[] = NpdefparPeer::LONCOL;
-		}
-
+    if ($this->loncol !== $v) {
+        $this->loncol = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdefparPeer::LONCOL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdefparPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdefparPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcol = $rs->getString($startcol + 0);
+      $this->codcol = $rs->getString($startcol + 0);
 
-			$this->nomcol = $rs->getString($startcol + 1);
+      $this->nomcol = $rs->getString($startcol + 1);
 
-			$this->tipcol = $rs->getString($startcol + 2);
+      $this->tipcol = $rs->getString($startcol + 2);
 
-			$this->loncol = $rs->getFloat($startcol + 3);
+      $this->loncol = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdefpar object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdefpar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +221,7 @@ abstract class BaseNpdefpar extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdefparPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefparPeer::doUpdate($this, $con);

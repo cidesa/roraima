@@ -225,6 +225,7 @@ abstract class BaseCideftitPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CideftitPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

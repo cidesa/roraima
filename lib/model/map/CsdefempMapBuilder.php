@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CsdefempMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CsdefempMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CsdefempMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('csdefemp');
 		$tMap->setPhpName('Csdefemp');
 
@@ -40,11 +40,11 @@ class CsdefempMapBuilder {
 
 		$tMap->addColumn('FAXEMP', 'Faxemp', 'string', CreoleTypes::VARCHAR, false, 20);
 
-		$tMap->addColumn('PORGASADM', 'Porgasadm', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORGASADM', 'Porgasadm', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PORMARUTIL', 'Pormarutil', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORMARUTIL', 'Pormarutil', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PORPERMAT', 'Porpermat', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORPERMAT', 'Porpermat', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODTIPDIG', 'Codtipdig', 'string', CreoleTypes::VARCHAR, false, 3);
 
@@ -52,9 +52,9 @@ class CsdefempMapBuilder {
 
 		$tMap->addColumn('CODTIPFAB', 'Codtipfab', 'string', CreoleTypes::VARCHAR, false, 3);
 
-		$tMap->addColumn('VALUT', 'Valut', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALUT', 'Valut', 'double', CreoleTypes::NUMERIC, false, 20);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

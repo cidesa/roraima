@@ -65,262 +65,297 @@ abstract class BaseCpestform extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpre()
-	{
+  
+  public function getCodpre()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getNompre()
-	{
+    return trim($this->codpre);
 
-		return $this->nompre; 		
-	}
-	
-	public function getAnomes()
-	{
+  }
+  
+  public function getNompre()
+  {
 
-		return $this->anomes; 		
-	}
-	
-	public function getEstimado()
-	{
+    return trim($this->nompre);
 
-		return number_format($this->estimado,2,',','.');
-		
-	}
-	
-	public function getReal()
-	{
+  }
+  
+  public function getAnomes()
+  {
 
-		return number_format($this->real,2,',','.');
-		
-	}
-	
-	public function getDiferencia()
-	{
+    return trim($this->anomes);
 
-		return number_format($this->diferencia,2,',','.');
-		
-	}
-	
-	public function getPorc()
-	{
+  }
+  
+  public function getEstimado($val=false)
+  {
 
-		return number_format($this->porc,2,',','.');
-		
-	}
-	
-	public function getEstimado2()
-	{
+    if($val) return number_format($this->estimado,2,',','.');
+    else return $this->estimado;
 
-		return number_format($this->estimado2,2,',','.');
-		
-	}
-	
-	public function getReal2()
-	{
+  }
+  
+  public function getReal($val=false)
+  {
 
-		return number_format($this->real2,2,',','.');
-		
-	}
-	
-	public function getDiferencia2()
-	{
+    if($val) return number_format($this->real,2,',','.');
+    else return $this->real;
 
-		return number_format($this->diferencia2,2,',','.');
-		
-	}
-	
-	public function getPorc2()
-	{
+  }
+  
+  public function getDiferencia($val=false)
+  {
 
-		return number_format($this->porc2,2,',','.');
-		
-	}
-	
-	public function getPerpre()
-	{
+    if($val) return number_format($this->diferencia,2,',','.');
+    else return $this->diferencia;
 
-		return $this->perpre; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPorc($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->porc,2,',','.');
+    else return $this->porc;
+
+  }
+  
+  public function getEstimado2($val=false)
+  {
+
+    if($val) return number_format($this->estimado2,2,',','.');
+    else return $this->estimado2;
+
+  }
+  
+  public function getReal2($val=false)
+  {
+
+    if($val) return number_format($this->real2,2,',','.');
+    else return $this->real2;
+
+  }
+  
+  public function getDiferencia2($val=false)
+  {
+
+    if($val) return number_format($this->diferencia2,2,',','.');
+    else return $this->diferencia2;
+
+  }
+  
+  public function getPorc2($val=false)
+  {
+
+    if($val) return number_format($this->porc2,2,',','.');
+    else return $this->porc2;
+
+  }
+  
+  public function getPerpre()
+  {
+
+    return trim($this->perpre);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpestformPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpestformPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNompre($v)
 	{
 
-		if ($this->nompre !== $v) {
-			$this->nompre = $v;
-			$this->modifiedColumns[] = CpestformPeer::NOMPRE;
-		}
-
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = CpestformPeer::NOMPRE;
+      }
+  
 	} 
 	
 	public function setAnomes($v)
 	{
 
-		if ($this->anomes !== $v) {
-			$this->anomes = $v;
-			$this->modifiedColumns[] = CpestformPeer::ANOMES;
-		}
-
+    if ($this->anomes !== $v) {
+        $this->anomes = $v;
+        $this->modifiedColumns[] = CpestformPeer::ANOMES;
+      }
+  
 	} 
 	
 	public function setEstimado($v)
 	{
 
-		if ($this->estimado !== $v) {
-			$this->estimado = $v;
-			$this->modifiedColumns[] = CpestformPeer::ESTIMADO;
-		}
-
+    if ($this->estimado !== $v) {
+        $this->estimado = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpestformPeer::ESTIMADO;
+      }
+  
 	} 
 	
 	public function setReal($v)
 	{
 
-		if ($this->real !== $v) {
-			$this->real = $v;
-			$this->modifiedColumns[] = CpestformPeer::REAL;
-		}
-
+    if ($this->real !== $v) {
+        $this->real = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpestformPeer::REAL;
+      }
+  
 	} 
 	
 	public function setDiferencia($v)
 	{
 
-		if ($this->diferencia !== $v) {
-			$this->diferencia = $v;
-			$this->modifiedColumns[] = CpestformPeer::DIFERENCIA;
-		}
-
+    if ($this->diferencia !== $v) {
+        $this->diferencia = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpestformPeer::DIFERENCIA;
+      }
+  
 	} 
 	
 	public function setPorc($v)
 	{
 
-		if ($this->porc !== $v) {
-			$this->porc = $v;
-			$this->modifiedColumns[] = CpestformPeer::PORC;
-		}
-
+    if ($this->porc !== $v) {
+        $this->porc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpestformPeer::PORC;
+      }
+  
 	} 
 	
 	public function setEstimado2($v)
 	{
 
-		if ($this->estimado2 !== $v) {
-			$this->estimado2 = $v;
-			$this->modifiedColumns[] = CpestformPeer::ESTIMADO2;
-		}
-
+    if ($this->estimado2 !== $v) {
+        $this->estimado2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpestformPeer::ESTIMADO2;
+      }
+  
 	} 
 	
 	public function setReal2($v)
 	{
 
-		if ($this->real2 !== $v) {
-			$this->real2 = $v;
-			$this->modifiedColumns[] = CpestformPeer::REAL2;
-		}
-
+    if ($this->real2 !== $v) {
+        $this->real2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpestformPeer::REAL2;
+      }
+  
 	} 
 	
 	public function setDiferencia2($v)
 	{
 
-		if ($this->diferencia2 !== $v) {
-			$this->diferencia2 = $v;
-			$this->modifiedColumns[] = CpestformPeer::DIFERENCIA2;
-		}
-
+    if ($this->diferencia2 !== $v) {
+        $this->diferencia2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpestformPeer::DIFERENCIA2;
+      }
+  
 	} 
 	
 	public function setPorc2($v)
 	{
 
-		if ($this->porc2 !== $v) {
-			$this->porc2 = $v;
-			$this->modifiedColumns[] = CpestformPeer::PORC2;
-		}
-
+    if ($this->porc2 !== $v) {
+        $this->porc2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpestformPeer::PORC2;
+      }
+  
 	} 
 	
 	public function setPerpre($v)
 	{
 
-		if ($this->perpre !== $v) {
-			$this->perpre = $v;
-			$this->modifiedColumns[] = CpestformPeer::PERPRE;
-		}
-
+    if ($this->perpre !== $v) {
+        $this->perpre = $v;
+        $this->modifiedColumns[] = CpestformPeer::PERPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpestformPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpestformPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpre = $rs->getString($startcol + 0);
+      $this->codpre = $rs->getString($startcol + 0);
 
-			$this->nompre = $rs->getString($startcol + 1);
+      $this->nompre = $rs->getString($startcol + 1);
 
-			$this->anomes = $rs->getString($startcol + 2);
+      $this->anomes = $rs->getString($startcol + 2);
 
-			$this->estimado = $rs->getFloat($startcol + 3);
+      $this->estimado = $rs->getFloat($startcol + 3);
 
-			$this->real = $rs->getFloat($startcol + 4);
+      $this->real = $rs->getFloat($startcol + 4);
 
-			$this->diferencia = $rs->getFloat($startcol + 5);
+      $this->diferencia = $rs->getFloat($startcol + 5);
 
-			$this->porc = $rs->getFloat($startcol + 6);
+      $this->porc = $rs->getFloat($startcol + 6);
 
-			$this->estimado2 = $rs->getFloat($startcol + 7);
+      $this->estimado2 = $rs->getFloat($startcol + 7);
 
-			$this->real2 = $rs->getFloat($startcol + 8);
+      $this->real2 = $rs->getFloat($startcol + 8);
 
-			$this->diferencia2 = $rs->getFloat($startcol + 9);
+      $this->diferencia2 = $rs->getFloat($startcol + 9);
 
-			$this->porc2 = $rs->getFloat($startcol + 10);
+      $this->porc2 = $rs->getFloat($startcol + 10);
 
-			$this->perpre = $rs->getString($startcol + 11);
+      $this->perpre = $rs->getString($startcol + 11);
 
-			$this->id = $rs->getInt($startcol + 12);
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 13; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpestform object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpestform object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

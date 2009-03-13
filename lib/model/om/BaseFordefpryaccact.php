@@ -37,128 +37,156 @@ abstract class BaseFordefpryaccact extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodaccesp()
-	{
+    return trim($this->codpro);
 
-		return $this->codaccesp; 		
-	}
-	
-	public function getCodact()
-	{
+  }
+  
+  public function getCodaccesp()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getDesact()
-	{
+    return trim($this->codaccesp);
 
-		return $this->desact; 		
-	}
-	
-	public function getCodunimed()
-	{
+  }
+  
+  public function getCodact()
+  {
 
-		return $this->codunimed; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codact);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDesact()
+  {
+
+    return trim($this->desact);
+
+  }
+  
+  public function getCodunimed()
+  {
+
+    return trim($this->codunimed);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FordefpryaccactPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FordefpryaccactPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodaccesp($v)
 	{
 
-		if ($this->codaccesp !== $v) {
-			$this->codaccesp = $v;
-			$this->modifiedColumns[] = FordefpryaccactPeer::CODACCESP;
-		}
-
+    if ($this->codaccesp !== $v) {
+        $this->codaccesp = $v;
+        $this->modifiedColumns[] = FordefpryaccactPeer::CODACCESP;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = FordefpryaccactPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = FordefpryaccactPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setDesact($v)
 	{
 
-		if ($this->desact !== $v) {
-			$this->desact = $v;
-			$this->modifiedColumns[] = FordefpryaccactPeer::DESACT;
-		}
-
+    if ($this->desact !== $v) {
+        $this->desact = $v;
+        $this->modifiedColumns[] = FordefpryaccactPeer::DESACT;
+      }
+  
 	} 
 	
 	public function setCodunimed($v)
 	{
 
-		if ($this->codunimed !== $v) {
-			$this->codunimed = $v;
-			$this->modifiedColumns[] = FordefpryaccactPeer::CODUNIMED;
-		}
-
+    if ($this->codunimed !== $v) {
+        $this->codunimed = $v;
+        $this->modifiedColumns[] = FordefpryaccactPeer::CODUNIMED;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefpryaccactPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefpryaccactPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codaccesp = $rs->getString($startcol + 1);
+      $this->codaccesp = $rs->getString($startcol + 1);
 
-			$this->codact = $rs->getString($startcol + 2);
+      $this->codact = $rs->getString($startcol + 2);
 
-			$this->desact = $rs->getString($startcol + 3);
+      $this->desact = $rs->getString($startcol + 3);
 
-			$this->codunimed = $rs->getString($startcol + 4);
+      $this->codunimed = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefpryaccact object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefpryaccact object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseFordefpryaccact extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefpryaccactPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefpryaccactPeer::doUpdate($this, $con);

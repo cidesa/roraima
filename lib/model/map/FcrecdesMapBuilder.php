@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FcrecdesMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcrecdesMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcrecdesMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcrecdes');
 		$tMap->setPhpName('Fcrecdes');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcrecdes_SEQ');
 
 		$tMap->addColumn('CODREDE', 'Codrede', 'string', CreoleTypes::VARCHAR, true, 2);
 
@@ -44,11 +46,11 @@ class FcrecdesMapBuilder {
 
 		$tMap->addColumn('CODFUE', 'Codfue', 'string', CreoleTypes::VARCHAR, false, 2);
 
-		$tMap->addColumn('DIAS', 'Dias', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DIAS', 'Dias', 'double', CreoleTypes::NUMERIC, false, 3);
 
-		$tMap->addColumn('PORCIEN', 'Porcien', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PORCIEN', 'Porcien', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

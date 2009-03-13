@@ -25,74 +25,99 @@ abstract class BaseNpdefcla extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcla()
-	{
+  
+  public function getCodcla()
+  {
 
-		return $this->codcla; 		
-	}
-	
-	public function getDescla()
-	{
+    return trim($this->codcla);
 
-		return $this->descla; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDescla()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->descla);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcla($v)
 	{
 
-		if ($this->codcla !== $v) {
-			$this->codcla = $v;
-			$this->modifiedColumns[] = NpdefclaPeer::CODCLA;
-		}
-
+    if ($this->codcla !== $v) {
+        $this->codcla = $v;
+        $this->modifiedColumns[] = NpdefclaPeer::CODCLA;
+      }
+  
 	} 
 	
 	public function setDescla($v)
 	{
 
-		if ($this->descla !== $v) {
-			$this->descla = $v;
-			$this->modifiedColumns[] = NpdefclaPeer::DESCLA;
-		}
-
+    if ($this->descla !== $v) {
+        $this->descla = $v;
+        $this->modifiedColumns[] = NpdefclaPeer::DESCLA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdefclaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdefclaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcla = $rs->getString($startcol + 0);
+      $this->codcla = $rs->getString($startcol + 0);
 
-			$this->descla = $rs->getString($startcol + 1);
+      $this->descla = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdefcla object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdefcla object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseNpdefcla extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdefclaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefclaPeer::doUpdate($this, $con);

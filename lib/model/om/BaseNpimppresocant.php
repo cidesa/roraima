@@ -77,6 +77,38 @@ abstract class BaseNpimppresocant extends BaseObject  implements Persistent {
 
 
 	
+	protected $diaser;
+
+
+	
+	protected $messer;
+
+
+	
+	protected $diatra;
+
+
+	
+	protected $mestra;
+
+
+	
+	protected $anotra;
+
+
+	
+	protected $stapre;
+
+
+	
+	protected $adeint;
+
+
+	
+	protected $antacu;
+
+
+	
 	protected $id;
 
 	
@@ -85,425 +117,621 @@ abstract class BaseNpimppresocant extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getFeccor($format = 'Y-m-d')
-	{
+    return trim($this->codemp);
 
-		if ($this->feccor === null || $this->feccor === '') {
-			return null;
-		} elseif (!is_int($this->feccor)) {
-						$ts = strtotime($this->feccor);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccor] as date/time value: " . var_export($this->feccor, true));
-			}
-		} else {
-			$ts = $this->feccor;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFeccor($format = 'Y-m-d')
+  {
 
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    if ($this->feccor === null || $this->feccor === '') {
+      return null;
+    } elseif (!is_int($this->feccor)) {
+            $ts = adodb_strtotime($this->feccor);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccor] as date/time value: " . var_export($this->feccor, true));
+      }
+    } else {
+      $ts = $this->feccor;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-	
-	public function getFecfin($format = 'Y-m-d')
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecfin === null || $this->fecfin === '') {
-			return null;
-		} elseif (!is_int($this->fecfin)) {
-						$ts = strtotime($this->fecfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
-			}
-		} else {
-			$ts = $this->fecfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecfin($format = 'Y-m-d')
+  {
 
-	
-	public function getSalemp()
-	{
+    if ($this->fecfin === null || $this->fecfin === '') {
+      return null;
+    } elseif (!is_int($this->fecfin)) {
+            $ts = adodb_strtotime($this->fecfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
+      }
+    } else {
+      $ts = $this->fecfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->salemp,2,',','.');
-		
-	}
-	
-	public function getTasint()
-	{
+  
+  public function getSalemp($val=false)
+  {
 
-		return number_format($this->tasint,2,',','.');
-		
-	}
-	
-	public function getCapemp()
-	{
+    if($val) return number_format($this->salemp,2,',','.');
+    else return $this->salemp;
 
-		return number_format($this->capemp,2,',','.');
-		
-	}
-	
-	public function getIntdev()
-	{
+  }
+  
+  public function getTasint($val=false)
+  {
 
-		return number_format($this->intdev,2,',','.');
-		
-	}
-	
-	public function getAntacum()
-	{
+    if($val) return number_format($this->tasint,2,',','.');
+    else return $this->tasint;
 
-		return number_format($this->antacum,2,',','.');
-		
-	}
-	
-	public function getAnoser()
-	{
+  }
+  
+  public function getCapemp($val=false)
+  {
 
-		return number_format($this->anoser,2,',','.');
-		
-	}
-	
-	public function getAdeant()
-	{
+    if($val) return number_format($this->capemp,2,',','.');
+    else return $this->capemp;
 
-		return number_format($this->adeant,2,',','.');
-		
-	}
-	
-	public function getIntacum()
-	{
+  }
+  
+  public function getIntdev($val=false)
+  {
 
-		return number_format($this->intacum,2,',','.');
-		
-	}
-	
-	public function getDiadif()
-	{
+    if($val) return number_format($this->intdev,2,',','.');
+    else return $this->intdev;
 
-		return number_format($this->diadif,2,',','.');
-		
-	}
-	
-	public function getRegpre()
-	{
+  }
+  
+  public function getAntacum($val=false)
+  {
 
-		return $this->regpre; 		
-	}
-	
-	public function getDiaart108()
-	{
+    if($val) return number_format($this->antacum,2,',','.');
+    else return $this->antacum;
 
-		return number_format($this->diaart108,2,',','.');
-		
-	}
-	
-	public function getValart108()
-	{
+  }
+  
+  public function getAnoser($val=false)
+  {
 
-		return number_format($this->valart108,2,',','.');
-		
-	}
-	
-	public function getAdepre()
-	{
+    if($val) return number_format($this->anoser,2,',','.');
+    else return $this->anoser;
 
-		return number_format($this->adepre,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getAdeant($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->adeant,2,',','.');
+    else return $this->adeant;
+
+  }
+  
+  public function getIntacum($val=false)
+  {
+
+    if($val) return number_format($this->intacum,2,',','.');
+    else return $this->intacum;
+
+  }
+  
+  public function getDiadif($val=false)
+  {
+
+    if($val) return number_format($this->diadif,2,',','.');
+    else return $this->diadif;
+
+  }
+  
+  public function getRegpre()
+  {
+
+    return trim($this->regpre);
+
+  }
+  
+  public function getDiaart108($val=false)
+  {
+
+    if($val) return number_format($this->diaart108,2,',','.');
+    else return $this->diaart108;
+
+  }
+  
+  public function getValart108($val=false)
+  {
+
+    if($val) return number_format($this->valart108,2,',','.');
+    else return $this->valart108;
+
+  }
+  
+  public function getAdepre($val=false)
+  {
+
+    if($val) return number_format($this->adepre,2,',','.');
+    else return $this->adepre;
+
+  }
+  
+  public function getDiaser($val=false)
+  {
+
+    if($val) return number_format($this->diaser,2,',','.');
+    else return $this->diaser;
+
+  }
+  
+  public function getMesser($val=false)
+  {
+
+    if($val) return number_format($this->messer,2,',','.');
+    else return $this->messer;
+
+  }
+  
+  public function getDiatra($val=false)
+  {
+
+    if($val) return number_format($this->diatra,2,',','.');
+    else return $this->diatra;
+
+  }
+  
+  public function getMestra($val=false)
+  {
+
+    if($val) return number_format($this->mestra,2,',','.');
+    else return $this->mestra;
+
+  }
+  
+  public function getAnotra($val=false)
+  {
+
+    if($val) return number_format($this->anotra,2,',','.');
+    else return $this->anotra;
+
+  }
+  
+  public function getStapre()
+  {
+
+    return trim($this->stapre);
+
+  }
+  
+  public function getAdeint($val=false)
+  {
+
+    if($val) return number_format($this->adeint,2,',','.');
+    else return $this->adeint;
+
+  }
+  
+  public function getAntacu($val=false)
+  {
+
+    if($val) return number_format($this->antacu,2,',','.');
+    else return $this->antacu;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpimppresocantPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFeccor($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccor] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccor !== $ts) {
-			$this->feccor = $ts;
-			$this->modifiedColumns[] = NpimppresocantPeer::FECCOR;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccor] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccor !== $ts) {
+      $this->feccor = $ts;
+      $this->modifiedColumns[] = NpimppresocantPeer::FECCOR;
+    }
 
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = NpimppresocantPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = NpimppresocantPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfin !== $ts) {
-			$this->fecfin = $ts;
-			$this->modifiedColumns[] = NpimppresocantPeer::FECFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfin !== $ts) {
+      $this->fecfin = $ts;
+      $this->modifiedColumns[] = NpimppresocantPeer::FECFIN;
+    }
 
 	} 
 	
 	public function setSalemp($v)
 	{
 
-		if ($this->salemp !== $v) {
-			$this->salemp = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::SALEMP;
-		}
-
+    if ($this->salemp !== $v) {
+        $this->salemp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::SALEMP;
+      }
+  
 	} 
 	
 	public function setTasint($v)
 	{
 
-		if ($this->tasint !== $v) {
-			$this->tasint = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::TASINT;
-		}
-
+    if ($this->tasint !== $v) {
+        $this->tasint = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::TASINT;
+      }
+  
 	} 
 	
 	public function setCapemp($v)
 	{
 
-		if ($this->capemp !== $v) {
-			$this->capemp = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::CAPEMP;
-		}
-
+    if ($this->capemp !== $v) {
+        $this->capemp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::CAPEMP;
+      }
+  
 	} 
 	
 	public function setIntdev($v)
 	{
 
-		if ($this->intdev !== $v) {
-			$this->intdev = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::INTDEV;
-		}
-
+    if ($this->intdev !== $v) {
+        $this->intdev = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::INTDEV;
+      }
+  
 	} 
 	
 	public function setAntacum($v)
 	{
 
-		if ($this->antacum !== $v) {
-			$this->antacum = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::ANTACUM;
-		}
-
+    if ($this->antacum !== $v) {
+        $this->antacum = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::ANTACUM;
+      }
+  
 	} 
 	
 	public function setAnoser($v)
 	{
 
-		if ($this->anoser !== $v) {
-			$this->anoser = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::ANOSER;
-		}
-
+    if ($this->anoser !== $v) {
+        $this->anoser = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::ANOSER;
+      }
+  
 	} 
 	
 	public function setAdeant($v)
 	{
 
-		if ($this->adeant !== $v) {
-			$this->adeant = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::ADEANT;
-		}
-
+    if ($this->adeant !== $v) {
+        $this->adeant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::ADEANT;
+      }
+  
 	} 
 	
 	public function setIntacum($v)
 	{
 
-		if ($this->intacum !== $v) {
-			$this->intacum = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::INTACUM;
-		}
-
+    if ($this->intacum !== $v) {
+        $this->intacum = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::INTACUM;
+      }
+  
 	} 
 	
 	public function setDiadif($v)
 	{
 
-		if ($this->diadif !== $v) {
-			$this->diadif = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::DIADIF;
-		}
-
+    if ($this->diadif !== $v) {
+        $this->diadif = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::DIADIF;
+      }
+  
 	} 
 	
 	public function setRegpre($v)
 	{
 
-		if ($this->regpre !== $v) {
-			$this->regpre = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::REGPRE;
-		}
-
+    if ($this->regpre !== $v) {
+        $this->regpre = $v;
+        $this->modifiedColumns[] = NpimppresocantPeer::REGPRE;
+      }
+  
 	} 
 	
 	public function setDiaart108($v)
 	{
 
-		if ($this->diaart108 !== $v) {
-			$this->diaart108 = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::DIAART108;
-		}
-
+    if ($this->diaart108 !== $v) {
+        $this->diaart108 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::DIAART108;
+      }
+  
 	} 
 	
 	public function setValart108($v)
 	{
 
-		if ($this->valart108 !== $v) {
-			$this->valart108 = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::VALART108;
-		}
-
+    if ($this->valart108 !== $v) {
+        $this->valart108 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::VALART108;
+      }
+  
 	} 
 	
 	public function setAdepre($v)
 	{
 
-		if ($this->adepre !== $v) {
-			$this->adepre = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::ADEPRE;
-		}
+    if ($this->adepre !== $v) {
+        $this->adepre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::ADEPRE;
+      }
+  
+	} 
+	
+	public function setDiaser($v)
+	{
 
+    if ($this->diaser !== $v) {
+        $this->diaser = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::DIASER;
+      }
+  
+	} 
+	
+	public function setMesser($v)
+	{
+
+    if ($this->messer !== $v) {
+        $this->messer = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::MESSER;
+      }
+  
+	} 
+	
+	public function setDiatra($v)
+	{
+
+    if ($this->diatra !== $v) {
+        $this->diatra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::DIATRA;
+      }
+  
+	} 
+	
+	public function setMestra($v)
+	{
+
+    if ($this->mestra !== $v) {
+        $this->mestra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::MESTRA;
+      }
+  
+	} 
+	
+	public function setAnotra($v)
+	{
+
+    if ($this->anotra !== $v) {
+        $this->anotra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::ANOTRA;
+      }
+  
+	} 
+	
+	public function setStapre($v)
+	{
+
+    if ($this->stapre !== $v) {
+        $this->stapre = $v;
+        $this->modifiedColumns[] = NpimppresocantPeer::STAPRE;
+      }
+  
+	} 
+	
+	public function setAdeint($v)
+	{
+
+    if ($this->adeint !== $v) {
+        $this->adeint = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::ADEINT;
+      }
+  
+	} 
+	
+	public function setAntacu($v)
+	{
+
+    if ($this->antacu !== $v) {
+        $this->antacu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpimppresocantPeer::ANTACU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpimppresocantPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpimppresocantPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->feccor = $rs->getDate($startcol + 1, null);
+      $this->feccor = $rs->getDate($startcol + 1, null);
 
-			$this->fecini = $rs->getDate($startcol + 2, null);
+      $this->fecini = $rs->getDate($startcol + 2, null);
 
-			$this->fecfin = $rs->getDate($startcol + 3, null);
+      $this->fecfin = $rs->getDate($startcol + 3, null);
 
-			$this->salemp = $rs->getFloat($startcol + 4);
+      $this->salemp = $rs->getFloat($startcol + 4);
 
-			$this->tasint = $rs->getFloat($startcol + 5);
+      $this->tasint = $rs->getFloat($startcol + 5);
 
-			$this->capemp = $rs->getFloat($startcol + 6);
+      $this->capemp = $rs->getFloat($startcol + 6);
 
-			$this->intdev = $rs->getFloat($startcol + 7);
+      $this->intdev = $rs->getFloat($startcol + 7);
 
-			$this->antacum = $rs->getFloat($startcol + 8);
+      $this->antacum = $rs->getFloat($startcol + 8);
 
-			$this->anoser = $rs->getFloat($startcol + 9);
+      $this->anoser = $rs->getFloat($startcol + 9);
 
-			$this->adeant = $rs->getFloat($startcol + 10);
+      $this->adeant = $rs->getFloat($startcol + 10);
 
-			$this->intacum = $rs->getFloat($startcol + 11);
+      $this->intacum = $rs->getFloat($startcol + 11);
 
-			$this->diadif = $rs->getFloat($startcol + 12);
+      $this->diadif = $rs->getFloat($startcol + 12);
 
-			$this->regpre = $rs->getString($startcol + 13);
+      $this->regpre = $rs->getString($startcol + 13);
 
-			$this->diaart108 = $rs->getFloat($startcol + 14);
+      $this->diaart108 = $rs->getFloat($startcol + 14);
 
-			$this->valart108 = $rs->getFloat($startcol + 15);
+      $this->valart108 = $rs->getFloat($startcol + 15);
 
-			$this->adepre = $rs->getFloat($startcol + 16);
+      $this->adepre = $rs->getFloat($startcol + 16);
 
-			$this->id = $rs->getInt($startcol + 17);
+      $this->diaser = $rs->getFloat($startcol + 17);
 
-			$this->resetModified();
+      $this->messer = $rs->getFloat($startcol + 18);
 
-			$this->setNew(false);
+      $this->diatra = $rs->getFloat($startcol + 19);
 
-						return $startcol + 18; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npimppresocant object", $e);
-		}
-	}
+      $this->mestra = $rs->getFloat($startcol + 20);
+
+      $this->anotra = $rs->getFloat($startcol + 21);
+
+      $this->stapre = $rs->getString($startcol + 22);
+
+      $this->adeint = $rs->getFloat($startcol + 23);
+
+      $this->antacu = $rs->getFloat($startcol + 24);
+
+      $this->id = $rs->getInt($startcol + 25);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 26; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npimppresocant object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -560,6 +788,7 @@ abstract class BaseNpimppresocant extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpimppresocantPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpimppresocantPeer::doUpdate($this, $con);
@@ -677,6 +906,30 @@ abstract class BaseNpimppresocant extends BaseObject  implements Persistent {
 				return $this->getAdepre();
 				break;
 			case 17:
+				return $this->getDiaser();
+				break;
+			case 18:
+				return $this->getMesser();
+				break;
+			case 19:
+				return $this->getDiatra();
+				break;
+			case 20:
+				return $this->getMestra();
+				break;
+			case 21:
+				return $this->getAnotra();
+				break;
+			case 22:
+				return $this->getStapre();
+				break;
+			case 23:
+				return $this->getAdeint();
+				break;
+			case 24:
+				return $this->getAntacu();
+				break;
+			case 25:
 				return $this->getId();
 				break;
 			default:
@@ -706,7 +959,15 @@ abstract class BaseNpimppresocant extends BaseObject  implements Persistent {
 			$keys[14] => $this->getDiaart108(),
 			$keys[15] => $this->getValart108(),
 			$keys[16] => $this->getAdepre(),
-			$keys[17] => $this->getId(),
+			$keys[17] => $this->getDiaser(),
+			$keys[18] => $this->getMesser(),
+			$keys[19] => $this->getDiatra(),
+			$keys[20] => $this->getMestra(),
+			$keys[21] => $this->getAnotra(),
+			$keys[22] => $this->getStapre(),
+			$keys[23] => $this->getAdeint(),
+			$keys[24] => $this->getAntacu(),
+			$keys[25] => $this->getId(),
 		);
 		return $result;
 	}
@@ -774,6 +1035,30 @@ abstract class BaseNpimppresocant extends BaseObject  implements Persistent {
 				$this->setAdepre($value);
 				break;
 			case 17:
+				$this->setDiaser($value);
+				break;
+			case 18:
+				$this->setMesser($value);
+				break;
+			case 19:
+				$this->setDiatra($value);
+				break;
+			case 20:
+				$this->setMestra($value);
+				break;
+			case 21:
+				$this->setAnotra($value);
+				break;
+			case 22:
+				$this->setStapre($value);
+				break;
+			case 23:
+				$this->setAdeint($value);
+				break;
+			case 24:
+				$this->setAntacu($value);
+				break;
+			case 25:
 				$this->setId($value);
 				break;
 		} 	}
@@ -800,7 +1085,15 @@ abstract class BaseNpimppresocant extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[14], $arr)) $this->setDiaart108($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setValart108($arr[$keys[15]]);
 		if (array_key_exists($keys[16], $arr)) $this->setAdepre($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setId($arr[$keys[17]]);
+		if (array_key_exists($keys[17], $arr)) $this->setDiaser($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setMesser($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setDiatra($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setMestra($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setAnotra($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setStapre($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setAdeint($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setAntacu($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setId($arr[$keys[25]]);
 	}
 
 	
@@ -825,6 +1118,14 @@ abstract class BaseNpimppresocant extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpimppresocantPeer::DIAART108)) $criteria->add(NpimppresocantPeer::DIAART108, $this->diaart108);
 		if ($this->isColumnModified(NpimppresocantPeer::VALART108)) $criteria->add(NpimppresocantPeer::VALART108, $this->valart108);
 		if ($this->isColumnModified(NpimppresocantPeer::ADEPRE)) $criteria->add(NpimppresocantPeer::ADEPRE, $this->adepre);
+		if ($this->isColumnModified(NpimppresocantPeer::DIASER)) $criteria->add(NpimppresocantPeer::DIASER, $this->diaser);
+		if ($this->isColumnModified(NpimppresocantPeer::MESSER)) $criteria->add(NpimppresocantPeer::MESSER, $this->messer);
+		if ($this->isColumnModified(NpimppresocantPeer::DIATRA)) $criteria->add(NpimppresocantPeer::DIATRA, $this->diatra);
+		if ($this->isColumnModified(NpimppresocantPeer::MESTRA)) $criteria->add(NpimppresocantPeer::MESTRA, $this->mestra);
+		if ($this->isColumnModified(NpimppresocantPeer::ANOTRA)) $criteria->add(NpimppresocantPeer::ANOTRA, $this->anotra);
+		if ($this->isColumnModified(NpimppresocantPeer::STAPRE)) $criteria->add(NpimppresocantPeer::STAPRE, $this->stapre);
+		if ($this->isColumnModified(NpimppresocantPeer::ADEINT)) $criteria->add(NpimppresocantPeer::ADEINT, $this->adeint);
+		if ($this->isColumnModified(NpimppresocantPeer::ANTACU)) $criteria->add(NpimppresocantPeer::ANTACU, $this->antacu);
 		if ($this->isColumnModified(NpimppresocantPeer::ID)) $criteria->add(NpimppresocantPeer::ID, $this->id);
 
 		return $criteria;
@@ -889,6 +1190,22 @@ abstract class BaseNpimppresocant extends BaseObject  implements Persistent {
 		$copyObj->setValart108($this->valart108);
 
 		$copyObj->setAdepre($this->adepre);
+
+		$copyObj->setDiaser($this->diaser);
+
+		$copyObj->setMesser($this->messer);
+
+		$copyObj->setDiatra($this->diatra);
+
+		$copyObj->setMestra($this->mestra);
+
+		$copyObj->setAnotra($this->anotra);
+
+		$copyObj->setStapre($this->stapre);
+
+		$copyObj->setAdeint($this->adeint);
+
+		$copyObj->setAntacu($this->antacu);
 
 
 		$copyObj->setNew(true);

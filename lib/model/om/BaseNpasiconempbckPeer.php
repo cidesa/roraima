@@ -275,6 +275,7 @@ abstract class BaseNpasiconempbckPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpasiconempbckPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

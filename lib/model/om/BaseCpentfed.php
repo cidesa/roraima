@@ -33,112 +33,139 @@ abstract class BaseCpentfed extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodent()
-	{
+  
+  public function getCodent()
+  {
 
-		return $this->codent; 		
-	}
-	
-	public function getDesent()
-	{
+    return trim($this->codent);
 
-		return $this->desent; 		
-	}
-	
-	public function getAsient()
-	{
+  }
+  
+  public function getDesent()
+  {
 
-		return number_format($this->asient,2,',','.');
-		
-	}
-	
-	public function getDisent()
-	{
+    return trim($this->desent);
 
-		return number_format($this->disent,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getAsient($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->asient,2,',','.');
+    else return $this->asient;
+
+  }
+  
+  public function getDisent($val=false)
+  {
+
+    if($val) return number_format($this->disent,2,',','.');
+    else return $this->disent;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodent($v)
 	{
 
-		if ($this->codent !== $v) {
-			$this->codent = $v;
-			$this->modifiedColumns[] = CpentfedPeer::CODENT;
-		}
-
+    if ($this->codent !== $v) {
+        $this->codent = $v;
+        $this->modifiedColumns[] = CpentfedPeer::CODENT;
+      }
+  
 	} 
 	
 	public function setDesent($v)
 	{
 
-		if ($this->desent !== $v) {
-			$this->desent = $v;
-			$this->modifiedColumns[] = CpentfedPeer::DESENT;
-		}
-
+    if ($this->desent !== $v) {
+        $this->desent = $v;
+        $this->modifiedColumns[] = CpentfedPeer::DESENT;
+      }
+  
 	} 
 	
 	public function setAsient($v)
 	{
 
-		if ($this->asient !== $v) {
-			$this->asient = $v;
-			$this->modifiedColumns[] = CpentfedPeer::ASIENT;
-		}
-
+    if ($this->asient !== $v) {
+        $this->asient = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpentfedPeer::ASIENT;
+      }
+  
 	} 
 	
 	public function setDisent($v)
 	{
 
-		if ($this->disent !== $v) {
-			$this->disent = $v;
-			$this->modifiedColumns[] = CpentfedPeer::DISENT;
-		}
-
+    if ($this->disent !== $v) {
+        $this->disent = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpentfedPeer::DISENT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpentfedPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpentfedPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codent = $rs->getString($startcol + 0);
+      $this->codent = $rs->getString($startcol + 0);
 
-			$this->desent = $rs->getString($startcol + 1);
+      $this->desent = $rs->getString($startcol + 1);
 
-			$this->asient = $rs->getFloat($startcol + 2);
+      $this->asient = $rs->getFloat($startcol + 2);
 
-			$this->disent = $rs->getFloat($startcol + 3);
+      $this->disent = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpentfed object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpentfed object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

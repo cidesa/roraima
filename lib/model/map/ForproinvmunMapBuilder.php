@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class ForproinvmunMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ForproinvmunMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ForproinvmunMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('forproinvmun');
 		$tMap->setPhpName('Forproinvmun');
 
@@ -40,9 +40,9 @@ class ForproinvmunMapBuilder {
 
 		$tMap->addColumn('DESPREMUN', 'Despremun', 'string', CreoleTypes::VARCHAR, true, 100);
 
-		$tMap->addColumn('MONAPOMUN', 'Monapomun', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONAPOMUN', 'Monapomun', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

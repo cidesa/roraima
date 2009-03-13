@@ -210,6 +210,7 @@ abstract class BaseNumerosnewPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NumerosnewPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

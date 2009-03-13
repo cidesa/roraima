@@ -1,78 +1,64 @@
 <?php
 
 
-	
+
 class DfatendocMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.DfatendocMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.DfatendocMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('dfatendoc');
 		$tMap->setPhpName('Dfatendoc');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
 
-		$tMap->addColumn('CODIGO', 'Codigo', 'string', CreoleTypes::VARCHAR, true, 8);
+		$tMap->setPrimaryKeyMethodInfo('dfatendoc_SEQ');
 
-		$tMap->addColumn('LOGUSE', 'Loguse', 'string', CreoleTypes::VARCHAR, true, 15);
+		$tMap->addColumn('CODDOC', 'Coddoc', 'string', CreoleTypes::VARCHAR, false, 30);
 
-		$tMap->addColumn('ESTADO', 'Estado', 'string', CreoleTypes::VARCHAR, true, 20);
+		$tMap->addColumn('DESDOC', 'Desdoc', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('FECREC', 'Fecrec', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('MONDOC', 'Mondoc', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('HORREC', 'Horrec', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECDOC', 'Fecdoc', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('FECATE', 'Fecate', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('STAATE', 'Staate', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('HORATE', 'Horate', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('ANUATE', 'Anuate', 'int', CreoleTypes::INTEGER, true, null);
 
-		$tMap->addColumn('NUMUNI', 'Numuni', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addColumn('ESTADO', 'Estado', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('NUMUNIORI', 'Numuniori', 'string', CreoleTypes::VARCHAR, false, 4);
+		$tMap->addForeignKey('ID_DFTABTIP', 'IdDftabtip', 'int', CreoleTypes::INTEGER, 'dftabtip', 'ID', true, null);
 
-		$tMap->addColumn('OBSDOC', 'Obsdoc', 'string', CreoleTypes::VARCHAR, false, 250);
+		$tMap->addColumn('INFDOC1', 'Infdoc1', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('STAATE', 'Staate', 'string', CreoleTypes::VARCHAR, true, 1);
+		$tMap->addColumn('INFDOC2', 'Infdoc2', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('TABLA', 'Tabla', 'string', CreoleTypes::VARCHAR, true, 20);
+		$tMap->addColumn('INFDOC3', 'Infdoc3', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('ANUATE', 'Anuate', 'string', CreoleTypes::VARCHAR, false, 1);
-
-		$tMap->addColumn('CHKUNI1', 'Chkuni1', 'string', CreoleTypes::VARCHAR, false, 1);
-
-		$tMap->addColumn('CHKUNI2', 'Chkuni2', 'string', CreoleTypes::VARCHAR, false, 1);
-
-		$tMap->addColumn('CHKUNI3', 'Chkuni3', 'string', CreoleTypes::VARCHAR, false, 1);
-
-		$tMap->addColumn('CHKUNI4', 'Chkuni4', 'string', CreoleTypes::VARCHAR, false, 1);
-
-		$tMap->addColumn('CHKUNI5', 'Chkuni5', 'string', CreoleTypes::VARCHAR, false, 1);
-
-		$tMap->addColumn('CHKUNI6', 'Chkuni6', 'string', CreoleTypes::VARCHAR, false, 1);
-
-		$tMap->addColumn('CHKUNI7', 'Chkuni7', 'string', CreoleTypes::VARCHAR, false, 1);
+		$tMap->addColumn('INFDOC4', 'Infdoc4', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

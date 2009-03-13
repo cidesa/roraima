@@ -210,6 +210,7 @@ abstract class BaseTsfonprePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsfonprePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

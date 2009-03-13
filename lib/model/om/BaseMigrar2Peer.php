@@ -205,6 +205,7 @@ abstract class BaseMigrar2Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Migrar2Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

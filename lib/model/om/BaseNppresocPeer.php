@@ -290,6 +290,7 @@ abstract class BaseNppresocPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NppresocPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

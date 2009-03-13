@@ -205,6 +205,7 @@ abstract class BaseNpmotliqPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpmotliqPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

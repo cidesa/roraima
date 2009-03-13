@@ -225,6 +225,7 @@ abstract class BaseOpdisfuePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpdisfuePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

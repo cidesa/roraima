@@ -1,0 +1,33 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   fcfuentesmul
+  ancho:                   900
+  anchogrid:               900
+  filas:                   6
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codfue
+  esgrabable:			   true
+  html:                    [size="5", readonly=true]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomfue
+  esgrabable:			   true
+  html:                    [size="20", readonly=true]
+3:       # Columna 3
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             codfuegen
+  esgrabable:			   true
+  html:                    [size="5", readonly=true]
+4:       # Columna 4
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomfuegen
+  esgrabable:			   true
+  html:                    [size="20", readonly=true]

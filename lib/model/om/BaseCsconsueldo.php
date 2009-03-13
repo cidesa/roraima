@@ -33,112 +33,139 @@ abstract class BaseCsconsueldo extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcar()
-	{
+  
+  public function getCodcar()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codcar);
 
-		return $this->codcon; 		
-	}
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getUnitri()
-	{
+    return trim($this->codcon);
 
-		return number_format($this->unitri,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonto($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getUnitri($val=false)
+  {
+
+    if($val) return number_format($this->unitri,2,',','.');
+    else return $this->unitri;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = CsconsueldoPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = CsconsueldoPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = CsconsueldoPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = CsconsueldoPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = CsconsueldoPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsconsueldoPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setUnitri($v)
 	{
 
-		if ($this->unitri !== $v) {
-			$this->unitri = $v;
-			$this->modifiedColumns[] = CsconsueldoPeer::UNITRI;
-		}
-
+    if ($this->unitri !== $v) {
+        $this->unitri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsconsueldoPeer::UNITRI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsconsueldoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsconsueldoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcar = $rs->getString($startcol + 0);
+      $this->codcar = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->monto = $rs->getFloat($startcol + 2);
+      $this->monto = $rs->getFloat($startcol + 2);
 
-			$this->unitri = $rs->getFloat($startcol + 3);
+      $this->unitri = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csconsueldo object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csconsueldo object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

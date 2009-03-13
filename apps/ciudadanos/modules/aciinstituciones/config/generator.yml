@@ -1,0 +1,26 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atinsrefier
+    theme:            cidesaGenerator
+    fields:
+      desinsref:         { name: Nombre de la Institución, params: size=60 maxlength=50 }
+    list:
+      title:          Instituciones que Refieren
+      display:        [=desinsref]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [desinsref]
+      fields:
+        desinsref:
+          params: size=16
+      max_per_page:   5
+    edit:
+      title:          Edición de Instituciones que Refieren
+      display:        [desinsref]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -1,46 +1,63 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Fcconrep
-    theme:            default
+    theme:            cidesaGenerator
     fields:
-      rifcon: { name: C.I/RIF}
-      nitcon: { name: N.I.T}
-      nomcon: { name: Nombre/Razón Social}
-      naccon: { name: Nacionalidad}
-      tipcon: { name: Tipo}      
-      dircon: { name: Dirección}
-      codpar: { name: Partida}
-      ciucon: { name: Cuidad}
-      cpocon: { name: Código Postal}
-      apocon: { name: Cod. Apartado Postal}
-      telcon: { name: Teléfono}
-      emacon: { name: Email}
-      faxcon: { name: Fax}      
-      urlcon: { name: URL}      
-      codmun: { name: Municipio}
-      codedo: { name: Estado}
-      codpai: { name: Pais}
-      repcon: { name: Tipo de Contribuyente} 
-      cedcon: { name: cedula}
-      codsec: { name: Sector}    
-      clacon: { name: clase}
-      fecdescon: { name: Fechacon}
-      fecactcon: { name: Fechacatcon}
-      stacon: { name: Estatus}      
-      origen: { name: Origen}
-      nomneg: { name: Nombre}
-      reccon: { name: recibo}
-      tem: { name: tempo}     
-        
+      cedcon:  { name: C.I./R.I.F, params: size=13 maxlength=11}
+      rifcon:  { name: N.I.T, params: size=22 maxlength=20}
+      nomcon:  { name: Nombre / Razón Social, params: size=40 maxlength=255}
+      #repcon:  { name: . , params: size=40 maxlength=1}
+      dircon:  { name: Dirección , params: size=40 maxlength=255}
+      telcon:  { name: Teléfono, params: size=32 maxlength=30}
+      emacon:  { name: Email , params: size=52 maxlength=50}
+      codsec:  { name: Código, params: size=8 maxlength=4}
+      codpar:  { name: Parroquia , params: size=6 maxlength=4}
+      nitcon:  { name: . , params: size=16 maxlength=14}
+      codmun:  { name: Municipio , params: size=6 maxlength=4}
+      codedo:  { name: Estado , params: size=6 maxlength=4}
+      codpai:  { name: Pais , params: size=6 maxlength=4}
+      ciucon:  { name: C.I./R.I.F, params: size=13 maxlength=30}
+      cpocon:  { name: Código Postal, params: size=22 maxlength=6}
+      apocon:  { name: Cod. Apartado Postal , params: size=40 maxlength=20}
+      urlcon:  { name: URL , params: size=40 maxlength=50}
+      naccon:  { name: . , params: size=40 maxlength=1}
+      tipcon:  { name: . , params: size=32 maxlength=1}
+      faxcon:  { name: Porcentaje , params: size=52 maxlength=15}
+      clacon:  { name: Código, params: size=8 maxlength=12}
+      fecdescon:  { name: . , params: date_format='dd/MM/yyyy' }
+      fecactcon:  { name: . , params: date_format='dd/MM/yyyy' }
+      stacon:  { name: . , params: size=6 maxlength=1}
+      origen:  { name: Alicuota [X/1000], params: size=6 maxlength=1}
+      nomneg:  { name: Año, params: size=6 maxlength=255}
+      reccon:  { name: Año, params: size=6 maxlength=100}
+      tem:  { name: Año, params: size=10 maxlength=8}
+      grid: { name: . , params: size=10 maxlength=8}
     list:
-      title:          Contribuyentes  
-      filters:        [rifcon, nitcon]
-      display:        [=rifcon, nitcon, nomcon]           
+      title:     Datos del Contribuyente
+      display:   [ =cedcon, =rifcon, nomcon]
+      sort:      nomcon
+      filters:   [cedcon, rifcon, nomcon]
+      fields:
+        nomcon:
+          params: size=10
+        rifcon:
+          params: size=10
+      max_per_page: 5
       object_actions:
-        _edit:        ~     
-        _delete:      ~ 
-      max_per_page:   5    
+        _edit:        ~
+        _delete:      ~
+      sort:  cedcon
     edit:
-      title:          Registro de Contribuyentes
-      display:       [=rifcon, nitcon, nomcon, naccon, tipcon, dircon, codpar, ciucon, cpocon, apocon, telcon, emacon, faxcon, urlcon, codmun, codedo, codpai, repcon, cedcon, codsec, clacon, fecdescon, fecactcon, stacon, origen, nomneg, reccon, tem]
+      title:          Edición Datos del Contribuyente
+      display:
+        "Datos Generales":   [ cedcon, rifcon, nomcon ]
+        "Nacionalidad":   [ _naccon ]
+        "Tipo":   [ _tipcon ]
+        "Datos Personales":   [ dircon, _codpar, ciucon, cpocon, apocon, telcon, emacon, faxcon, urlcon ]
+        "Recaudos Consignados":   [ _grid ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

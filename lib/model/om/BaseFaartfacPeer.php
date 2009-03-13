@@ -13,7 +13,7 @@ abstract class BaseFaartfacPeer {
 	const CLASS_DEFAULT = 'lib.model.Faartfac';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -38,7 +38,13 @@ abstract class BaseFaartfacPeer {
 	const MONRGO = 'faartfac.MONRGO';
 
 	
+	const MONDES = 'faartfac.MONDES';
+
+	
 	const TOTART = 'faartfac.TOTART';
+
+	
+	const CANAJU = 'faartfac.CANAJU';
 
 	
 	const ID = 'faartfac.ID';
@@ -49,18 +55,18 @@ abstract class BaseFaartfacPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Codart', 'Codref', 'Cantot', 'Precio', 'Monrgo', 'Totart', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC, FaartfacPeer::CODART, FaartfacPeer::CODREF, FaartfacPeer::CANTOT, FaartfacPeer::PRECIO, FaartfacPeer::MONRGO, FaartfacPeer::TOTART, FaartfacPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac', 'codart', 'codref', 'cantot', 'precio', 'monrgo', 'totart', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Codart', 'Codref', 'Cantot', 'Precio', 'Monrgo', 'Mondes', 'Totart', 'Canaju', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC, FaartfacPeer::CODART, FaartfacPeer::CODREF, FaartfacPeer::CANTOT, FaartfacPeer::PRECIO, FaartfacPeer::MONRGO, FaartfacPeer::MONDES, FaartfacPeer::TOTART, FaartfacPeer::CANAJU, FaartfacPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac', 'codart', 'codref', 'cantot', 'precio', 'monrgo', 'mondes', 'totart', 'canaju', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Codart' => 1, 'Codref' => 2, 'Cantot' => 3, 'Precio' => 4, 'Monrgo' => 5, 'Totart' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC => 0, FaartfacPeer::CODART => 1, FaartfacPeer::CODREF => 2, FaartfacPeer::CANTOT => 3, FaartfacPeer::PRECIO => 4, FaartfacPeer::MONRGO => 5, FaartfacPeer::TOTART => 6, FaartfacPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'codart' => 1, 'codref' => 2, 'cantot' => 3, 'precio' => 4, 'monrgo' => 5, 'totart' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Codart' => 1, 'Codref' => 2, 'Cantot' => 3, 'Precio' => 4, 'Monrgo' => 5, 'Mondes' => 6, 'Totart' => 7, 'Canaju' => 8, 'Id' => 9, ),
+		BasePeer::TYPE_COLNAME => array (FaartfacPeer::REFFAC => 0, FaartfacPeer::CODART => 1, FaartfacPeer::CODREF => 2, FaartfacPeer::CANTOT => 3, FaartfacPeer::PRECIO => 4, FaartfacPeer::MONRGO => 5, FaartfacPeer::MONDES => 6, FaartfacPeer::TOTART => 7, FaartfacPeer::CANAJU => 8, FaartfacPeer::ID => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'codart' => 1, 'codref' => 2, 'cantot' => 3, 'precio' => 4, 'monrgo' => 5, 'mondes' => 6, 'totart' => 7, 'canaju' => 8, 'id' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
@@ -126,7 +132,11 @@ abstract class BaseFaartfacPeer {
 
 		$criteria->addSelectColumn(FaartfacPeer::MONRGO);
 
+		$criteria->addSelectColumn(FaartfacPeer::MONDES);
+
 		$criteria->addSelectColumn(FaartfacPeer::TOTART);
+
+		$criteria->addSelectColumn(FaartfacPeer::CANAJU);
 
 		$criteria->addSelectColumn(FaartfacPeer::ID);
 
@@ -230,6 +240,7 @@ abstract class BaseFaartfacPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FaartfacPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

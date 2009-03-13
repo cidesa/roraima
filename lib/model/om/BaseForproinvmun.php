@@ -37,129 +37,157 @@ abstract class BaseForproinvmun extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmun()
-	{
+  
+  public function getCodmun()
+  {
 
-		return $this->codmun; 		
-	}
-	
-	public function getCodpremun()
-	{
+    return trim($this->codmun);
 
-		return $this->codpremun; 		
-	}
-	
-	public function getCodpregob()
-	{
+  }
+  
+  public function getCodpremun()
+  {
 
-		return $this->codpregob; 		
-	}
-	
-	public function getDespremun()
-	{
+    return trim($this->codpremun);
 
-		return $this->despremun; 		
-	}
-	
-	public function getMonapomun()
-	{
+  }
+  
+  public function getCodpregob()
+  {
 
-		return number_format($this->monapomun,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codpregob);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDespremun()
+  {
+
+    return trim($this->despremun);
+
+  }
+  
+  public function getMonapomun($val=false)
+  {
+
+    if($val) return number_format($this->monapomun,2,',','.');
+    else return $this->monapomun;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = ForproinvmunPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = ForproinvmunPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCodpremun($v)
 	{
 
-		if ($this->codpremun !== $v) {
-			$this->codpremun = $v;
-			$this->modifiedColumns[] = ForproinvmunPeer::CODPREMUN;
-		}
-
+    if ($this->codpremun !== $v) {
+        $this->codpremun = $v;
+        $this->modifiedColumns[] = ForproinvmunPeer::CODPREMUN;
+      }
+  
 	} 
 	
 	public function setCodpregob($v)
 	{
 
-		if ($this->codpregob !== $v) {
-			$this->codpregob = $v;
-			$this->modifiedColumns[] = ForproinvmunPeer::CODPREGOB;
-		}
-
+    if ($this->codpregob !== $v) {
+        $this->codpregob = $v;
+        $this->modifiedColumns[] = ForproinvmunPeer::CODPREGOB;
+      }
+  
 	} 
 	
 	public function setDespremun($v)
 	{
 
-		if ($this->despremun !== $v) {
-			$this->despremun = $v;
-			$this->modifiedColumns[] = ForproinvmunPeer::DESPREMUN;
-		}
-
+    if ($this->despremun !== $v) {
+        $this->despremun = $v;
+        $this->modifiedColumns[] = ForproinvmunPeer::DESPREMUN;
+      }
+  
 	} 
 	
 	public function setMonapomun($v)
 	{
 
-		if ($this->monapomun !== $v) {
-			$this->monapomun = $v;
-			$this->modifiedColumns[] = ForproinvmunPeer::MONAPOMUN;
-		}
-
+    if ($this->monapomun !== $v) {
+        $this->monapomun = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForproinvmunPeer::MONAPOMUN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForproinvmunPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForproinvmunPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmun = $rs->getString($startcol + 0);
+      $this->codmun = $rs->getString($startcol + 0);
 
-			$this->codpremun = $rs->getString($startcol + 1);
+      $this->codpremun = $rs->getString($startcol + 1);
 
-			$this->codpregob = $rs->getString($startcol + 2);
+      $this->codpregob = $rs->getString($startcol + 2);
 
-			$this->despremun = $rs->getString($startcol + 3);
+      $this->despremun = $rs->getString($startcol + 3);
 
-			$this->monapomun = $rs->getFloat($startcol + 4);
+      $this->monapomun = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forproinvmun object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forproinvmun object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

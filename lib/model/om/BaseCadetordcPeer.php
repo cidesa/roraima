@@ -220,6 +220,7 @@ abstract class BaseCadetordcPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CadetordcPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

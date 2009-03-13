@@ -205,6 +205,7 @@ abstract class BaseFatiprecPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FatiprecPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

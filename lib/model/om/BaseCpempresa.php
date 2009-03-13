@@ -45,164 +45,194 @@ abstract class BaseCpempresa extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getRifemp()
-	{
+    return trim($this->codemp);
 
-		return $this->rifemp; 		
-	}
-	
-	public function getNitemp()
-	{
+  }
+  
+  public function getRifemp()
+  {
 
-		return $this->nitemp; 		
-	}
-	
-	public function getNomemp()
-	{
+    return trim($this->rifemp);
 
-		return $this->nomemp; 		
-	}
-	
-	public function getDesemp()
-	{
+  }
+  
+  public function getNitemp()
+  {
 
-		return $this->desemp; 		
-	}
-	
-	public function getDiremp()
-	{
+    return trim($this->nitemp);
 
-		return $this->diremp; 		
-	}
-	
-	public function getTelemp()
-	{
+  }
+  
+  public function getNomemp()
+  {
 
-		return $this->telemp; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomemp);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDesemp()
+  {
+
+    return trim($this->desemp);
+
+  }
+  
+  public function getDiremp()
+  {
+
+    return trim($this->diremp);
+
+  }
+  
+  public function getTelemp()
+  {
+
+    return trim($this->telemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = CpempresaPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = CpempresaPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setRifemp($v)
 	{
 
-		if ($this->rifemp !== $v) {
-			$this->rifemp = $v;
-			$this->modifiedColumns[] = CpempresaPeer::RIFEMP;
-		}
-
+    if ($this->rifemp !== $v) {
+        $this->rifemp = $v;
+        $this->modifiedColumns[] = CpempresaPeer::RIFEMP;
+      }
+  
 	} 
 	
 	public function setNitemp($v)
 	{
 
-		if ($this->nitemp !== $v) {
-			$this->nitemp = $v;
-			$this->modifiedColumns[] = CpempresaPeer::NITEMP;
-		}
-
+    if ($this->nitemp !== $v) {
+        $this->nitemp = $v;
+        $this->modifiedColumns[] = CpempresaPeer::NITEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = CpempresaPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = CpempresaPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setDesemp($v)
 	{
 
-		if ($this->desemp !== $v) {
-			$this->desemp = $v;
-			$this->modifiedColumns[] = CpempresaPeer::DESEMP;
-		}
-
+    if ($this->desemp !== $v) {
+        $this->desemp = $v;
+        $this->modifiedColumns[] = CpempresaPeer::DESEMP;
+      }
+  
 	} 
 	
 	public function setDiremp($v)
 	{
 
-		if ($this->diremp !== $v) {
-			$this->diremp = $v;
-			$this->modifiedColumns[] = CpempresaPeer::DIREMP;
-		}
-
+    if ($this->diremp !== $v) {
+        $this->diremp = $v;
+        $this->modifiedColumns[] = CpempresaPeer::DIREMP;
+      }
+  
 	} 
 	
 	public function setTelemp($v)
 	{
 
-		if ($this->telemp !== $v) {
-			$this->telemp = $v;
-			$this->modifiedColumns[] = CpempresaPeer::TELEMP;
-		}
-
+    if ($this->telemp !== $v) {
+        $this->telemp = $v;
+        $this->modifiedColumns[] = CpempresaPeer::TELEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpempresaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpempresaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->rifemp = $rs->getString($startcol + 1);
+      $this->rifemp = $rs->getString($startcol + 1);
 
-			$this->nitemp = $rs->getString($startcol + 2);
+      $this->nitemp = $rs->getString($startcol + 2);
 
-			$this->nomemp = $rs->getString($startcol + 3);
+      $this->nomemp = $rs->getString($startcol + 3);
 
-			$this->desemp = $rs->getString($startcol + 4);
+      $this->desemp = $rs->getString($startcol + 4);
 
-			$this->diremp = $rs->getString($startcol + 5);
+      $this->diremp = $rs->getString($startcol + 5);
 
-			$this->telemp = $rs->getString($startcol + 6);
+      $this->telemp = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpempresa object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpempresa object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

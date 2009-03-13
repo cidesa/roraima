@@ -17,12 +17,12 @@ all:
 #  request:
 #    class: sfWebRequest
 #
-#  response:
-#    class: sfWebResponse
+  response:
+    class: cidesaWebResponse
 #
   user:
     class: myUser
-#
+
   storage:
     class: sfSessionStorage
     param:

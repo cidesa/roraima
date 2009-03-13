@@ -29,94 +29,120 @@ abstract class BaseCpescsue extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodesc()
-	{
+  
+  public function getCodesc()
+  {
 
-		return $this->codesc; 		
-	}
-	
-	public function getValini()
-	{
+    return trim($this->codesc);
 
-		return number_format($this->valini,2,',','.');
-		
-	}
-	
-	public function getValfin()
-	{
+  }
+  
+  public function getValini($val=false)
+  {
 
-		return number_format($this->valfin,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->valini,2,',','.');
+    else return $this->valini;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getValfin($val=false)
+  {
+
+    if($val) return number_format($this->valfin,2,',','.');
+    else return $this->valfin;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodesc($v)
 	{
 
-		if ($this->codesc !== $v) {
-			$this->codesc = $v;
-			$this->modifiedColumns[] = CpescsuePeer::CODESC;
-		}
-
+    if ($this->codesc !== $v) {
+        $this->codesc = $v;
+        $this->modifiedColumns[] = CpescsuePeer::CODESC;
+      }
+  
 	} 
 	
 	public function setValini($v)
 	{
 
-		if ($this->valini !== $v) {
-			$this->valini = $v;
-			$this->modifiedColumns[] = CpescsuePeer::VALINI;
-		}
-
+    if ($this->valini !== $v) {
+        $this->valini = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpescsuePeer::VALINI;
+      }
+  
 	} 
 	
 	public function setValfin($v)
 	{
 
-		if ($this->valfin !== $v) {
-			$this->valfin = $v;
-			$this->modifiedColumns[] = CpescsuePeer::VALFIN;
-		}
-
+    if ($this->valfin !== $v) {
+        $this->valfin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpescsuePeer::VALFIN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpescsuePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpescsuePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codesc = $rs->getString($startcol + 0);
+      $this->codesc = $rs->getString($startcol + 0);
 
-			$this->valini = $rs->getFloat($startcol + 1);
+      $this->valini = $rs->getFloat($startcol + 1);
 
-			$this->valfin = $rs->getFloat($startcol + 2);
+      $this->valfin = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpescsue object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpescsue object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

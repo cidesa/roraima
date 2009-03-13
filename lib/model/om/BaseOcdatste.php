@@ -89,362 +89,403 @@ abstract class BaseOcdatste extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCedste()
-	{
+  
+  public function getCedste()
+  {
 
-		return $this->cedste; 		
-	}
-	
-	public function getNomste()
-	{
+    return trim($this->cedste);
 
-		return $this->nomste; 		
-	}
-	
-	public function getCodste()
-	{
+  }
+  
+  public function getNomste()
+  {
 
-		return $this->codste; 		
-	}
-	
-	public function getDirste()
-	{
+    return trim($this->nomste);
 
-		return $this->dirste; 		
-	}
-	
-	public function getTelste()
-	{
+  }
+  
+  public function getCodste()
+  {
 
-		return $this->telste; 		
-	}
-	
-	public function getFaxste()
-	{
+    return trim($this->codste);
 
-		return $this->faxste; 		
-	}
-	
-	public function getEmaste()
-	{
+  }
+  
+  public function getDirste()
+  {
 
-		return $this->emaste; 		
-	}
-	
-	public function getCedrep()
-	{
+    return trim($this->dirste);
 
-		return $this->cedrep; 		
-	}
-	
-	public function getNomrep()
-	{
+  }
+  
+  public function getTelste()
+  {
 
-		return $this->nomrep; 		
-	}
-	
-	public function getDirrep()
-	{
+    return trim($this->telste);
 
-		return $this->dirrep; 		
-	}
-	
-	public function getTelrep()
-	{
+  }
+  
+  public function getFaxste()
+  {
 
-		return $this->telrep; 		
-	}
-	
-	public function getFaxrep()
-	{
+    return trim($this->faxste);
 
-		return $this->faxrep; 		
-	}
-	
-	public function getEmarep()
-	{
+  }
+  
+  public function getEmaste()
+  {
 
-		return $this->emarep; 		
-	}
-	
-	public function getCodpai()
-	{
+    return trim($this->emaste);
 
-		return $this->codpai; 		
-	}
-	
-	public function getCodedo()
-	{
+  }
+  
+  public function getCedrep()
+  {
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodmun()
-	{
+    return trim($this->cedrep);
 
-		return $this->codmun; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getNomrep()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getCodsec()
-	{
+    return trim($this->nomrep);
 
-		return $this->codsec; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDirrep()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->dirrep);
+
+  }
+  
+  public function getTelrep()
+  {
+
+    return trim($this->telrep);
+
+  }
+  
+  public function getFaxrep()
+  {
+
+    return trim($this->faxrep);
+
+  }
+  
+  public function getEmarep()
+  {
+
+    return trim($this->emarep);
+
+  }
+  
+  public function getCodpai()
+  {
+
+    return trim($this->codpai);
+
+  }
+  
+  public function getCodedo()
+  {
+
+    return trim($this->codedo);
+
+  }
+  
+  public function getCodmun()
+  {
+
+    return trim($this->codmun);
+
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getCodsec()
+  {
+
+    return trim($this->codsec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCedste($v)
 	{
 
-		if ($this->cedste !== $v) {
-			$this->cedste = $v;
-			$this->modifiedColumns[] = OcdatstePeer::CEDSTE;
-		}
-
+    if ($this->cedste !== $v) {
+        $this->cedste = $v;
+        $this->modifiedColumns[] = OcdatstePeer::CEDSTE;
+      }
+  
 	} 
 	
 	public function setNomste($v)
 	{
 
-		if ($this->nomste !== $v) {
-			$this->nomste = $v;
-			$this->modifiedColumns[] = OcdatstePeer::NOMSTE;
-		}
-
+    if ($this->nomste !== $v) {
+        $this->nomste = $v;
+        $this->modifiedColumns[] = OcdatstePeer::NOMSTE;
+      }
+  
 	} 
 	
 	public function setCodste($v)
 	{
 
-		if ($this->codste !== $v) {
-			$this->codste = $v;
-			$this->modifiedColumns[] = OcdatstePeer::CODSTE;
-		}
-
+    if ($this->codste !== $v) {
+        $this->codste = $v;
+        $this->modifiedColumns[] = OcdatstePeer::CODSTE;
+      }
+  
 	} 
 	
 	public function setDirste($v)
 	{
 
-		if ($this->dirste !== $v) {
-			$this->dirste = $v;
-			$this->modifiedColumns[] = OcdatstePeer::DIRSTE;
-		}
-
+    if ($this->dirste !== $v) {
+        $this->dirste = $v;
+        $this->modifiedColumns[] = OcdatstePeer::DIRSTE;
+      }
+  
 	} 
 	
 	public function setTelste($v)
 	{
 
-		if ($this->telste !== $v) {
-			$this->telste = $v;
-			$this->modifiedColumns[] = OcdatstePeer::TELSTE;
-		}
-
+    if ($this->telste !== $v) {
+        $this->telste = $v;
+        $this->modifiedColumns[] = OcdatstePeer::TELSTE;
+      }
+  
 	} 
 	
 	public function setFaxste($v)
 	{
 
-		if ($this->faxste !== $v) {
-			$this->faxste = $v;
-			$this->modifiedColumns[] = OcdatstePeer::FAXSTE;
-		}
-
+    if ($this->faxste !== $v) {
+        $this->faxste = $v;
+        $this->modifiedColumns[] = OcdatstePeer::FAXSTE;
+      }
+  
 	} 
 	
 	public function setEmaste($v)
 	{
 
-		if ($this->emaste !== $v) {
-			$this->emaste = $v;
-			$this->modifiedColumns[] = OcdatstePeer::EMASTE;
-		}
-
+    if ($this->emaste !== $v) {
+        $this->emaste = $v;
+        $this->modifiedColumns[] = OcdatstePeer::EMASTE;
+      }
+  
 	} 
 	
 	public function setCedrep($v)
 	{
 
-		if ($this->cedrep !== $v) {
-			$this->cedrep = $v;
-			$this->modifiedColumns[] = OcdatstePeer::CEDREP;
-		}
-
+    if ($this->cedrep !== $v) {
+        $this->cedrep = $v;
+        $this->modifiedColumns[] = OcdatstePeer::CEDREP;
+      }
+  
 	} 
 	
 	public function setNomrep($v)
 	{
 
-		if ($this->nomrep !== $v) {
-			$this->nomrep = $v;
-			$this->modifiedColumns[] = OcdatstePeer::NOMREP;
-		}
-
+    if ($this->nomrep !== $v) {
+        $this->nomrep = $v;
+        $this->modifiedColumns[] = OcdatstePeer::NOMREP;
+      }
+  
 	} 
 	
 	public function setDirrep($v)
 	{
 
-		if ($this->dirrep !== $v) {
-			$this->dirrep = $v;
-			$this->modifiedColumns[] = OcdatstePeer::DIRREP;
-		}
-
+    if ($this->dirrep !== $v) {
+        $this->dirrep = $v;
+        $this->modifiedColumns[] = OcdatstePeer::DIRREP;
+      }
+  
 	} 
 	
 	public function setTelrep($v)
 	{
 
-		if ($this->telrep !== $v) {
-			$this->telrep = $v;
-			$this->modifiedColumns[] = OcdatstePeer::TELREP;
-		}
-
+    if ($this->telrep !== $v) {
+        $this->telrep = $v;
+        $this->modifiedColumns[] = OcdatstePeer::TELREP;
+      }
+  
 	} 
 	
 	public function setFaxrep($v)
 	{
 
-		if ($this->faxrep !== $v) {
-			$this->faxrep = $v;
-			$this->modifiedColumns[] = OcdatstePeer::FAXREP;
-		}
-
+    if ($this->faxrep !== $v) {
+        $this->faxrep = $v;
+        $this->modifiedColumns[] = OcdatstePeer::FAXREP;
+      }
+  
 	} 
 	
 	public function setEmarep($v)
 	{
 
-		if ($this->emarep !== $v) {
-			$this->emarep = $v;
-			$this->modifiedColumns[] = OcdatstePeer::EMAREP;
-		}
-
+    if ($this->emarep !== $v) {
+        $this->emarep = $v;
+        $this->modifiedColumns[] = OcdatstePeer::EMAREP;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = OcdatstePeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = OcdatstePeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = OcdatstePeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = OcdatstePeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = OcdatstePeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = OcdatstePeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = OcdatstePeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = OcdatstePeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCodsec($v)
 	{
 
-		if ($this->codsec !== $v) {
-			$this->codsec = $v;
-			$this->modifiedColumns[] = OcdatstePeer::CODSEC;
-		}
-
+    if ($this->codsec !== $v) {
+        $this->codsec = $v;
+        $this->modifiedColumns[] = OcdatstePeer::CODSEC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcdatstePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcdatstePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->cedste = $rs->getString($startcol + 0);
+      $this->cedste = $rs->getString($startcol + 0);
 
-			$this->nomste = $rs->getString($startcol + 1);
+      $this->nomste = $rs->getString($startcol + 1);
 
-			$this->codste = $rs->getString($startcol + 2);
+      $this->codste = $rs->getString($startcol + 2);
 
-			$this->dirste = $rs->getString($startcol + 3);
+      $this->dirste = $rs->getString($startcol + 3);
 
-			$this->telste = $rs->getString($startcol + 4);
+      $this->telste = $rs->getString($startcol + 4);
 
-			$this->faxste = $rs->getString($startcol + 5);
+      $this->faxste = $rs->getString($startcol + 5);
 
-			$this->emaste = $rs->getString($startcol + 6);
+      $this->emaste = $rs->getString($startcol + 6);
 
-			$this->cedrep = $rs->getString($startcol + 7);
+      $this->cedrep = $rs->getString($startcol + 7);
 
-			$this->nomrep = $rs->getString($startcol + 8);
+      $this->nomrep = $rs->getString($startcol + 8);
 
-			$this->dirrep = $rs->getString($startcol + 9);
+      $this->dirrep = $rs->getString($startcol + 9);
 
-			$this->telrep = $rs->getString($startcol + 10);
+      $this->telrep = $rs->getString($startcol + 10);
 
-			$this->faxrep = $rs->getString($startcol + 11);
+      $this->faxrep = $rs->getString($startcol + 11);
 
-			$this->emarep = $rs->getString($startcol + 12);
+      $this->emarep = $rs->getString($startcol + 12);
 
-			$this->codpai = $rs->getString($startcol + 13);
+      $this->codpai = $rs->getString($startcol + 13);
 
-			$this->codedo = $rs->getString($startcol + 14);
+      $this->codedo = $rs->getString($startcol + 14);
 
-			$this->codmun = $rs->getString($startcol + 15);
+      $this->codmun = $rs->getString($startcol + 15);
 
-			$this->codpar = $rs->getString($startcol + 16);
+      $this->codpar = $rs->getString($startcol + 16);
 
-			$this->codsec = $rs->getString($startcol + 17);
+      $this->codsec = $rs->getString($startcol + 17);
 
-			$this->id = $rs->getInt($startcol + 18);
+      $this->id = $rs->getInt($startcol + 18);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 19; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocdatste object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 19; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocdatste object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -501,6 +542,7 @@ abstract class BaseOcdatste extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcdatstePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcdatstePeer::doUpdate($this, $con);

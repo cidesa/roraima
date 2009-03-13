@@ -6,7 +6,7 @@
 	$cod='';
 	while ($sf_request->hasParameter('obj'.$i))
 	{
-		$cod=$cod."f.".$sf_request->getParameter('frame','formid').".".$sf_request->getParameter('obj'.$i,'obj'.$i).".value=val[".($i-1)."];
+		$cod .= "if(f.".$sf_request->getParameter('frame','formid').".".$sf_request->getParameter('obj'.$i,'obj'.$i).") {f.".$sf_request->getParameter('frame','formid').".".$sf_request->getParameter('obj'.$i,'obj'.$i).".value=val[".($i-1)."]};
 ";	
 		$i++;
 	}
@@ -15,8 +15,7 @@
 <?php $js = "  
    function aceptar(val)
    {     
-     f=opener.document;".
-	 "".$cod."
+     f=opener.document; ".$cod."
      self.close();
    }
 "; ?>

@@ -210,6 +210,7 @@ abstract class BaseNpcertificadosPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcertificadosPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

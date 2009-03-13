@@ -205,6 +205,7 @@ abstract class BaseFortiptitPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FortiptitPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

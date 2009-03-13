@@ -280,6 +280,7 @@ abstract class BaseTabla16Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Tabla16Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

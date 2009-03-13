@@ -205,6 +205,7 @@ abstract class BaseFaartcomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FaartcomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

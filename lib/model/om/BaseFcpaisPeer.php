@@ -205,6 +205,7 @@ abstract class BaseFcpaisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcpaisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

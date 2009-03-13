@@ -25,74 +25,99 @@ abstract class BaseCamarart extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmar()
-	{
+  
+  public function getCodmar()
+  {
 
-		return $this->codmar; 		
-	}
-	
-	public function getNommar()
-	{
+    return trim($this->codmar);
 
-		return $this->nommar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNommar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nommar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmar($v)
 	{
 
-		if ($this->codmar !== $v) {
-			$this->codmar = $v;
-			$this->modifiedColumns[] = CamarartPeer::CODMAR;
-		}
-
+    if ($this->codmar !== $v) {
+        $this->codmar = $v;
+        $this->modifiedColumns[] = CamarartPeer::CODMAR;
+      }
+  
 	} 
 	
 	public function setNommar($v)
 	{
 
-		if ($this->nommar !== $v) {
-			$this->nommar = $v;
-			$this->modifiedColumns[] = CamarartPeer::NOMMAR;
-		}
-
+    if ($this->nommar !== $v) {
+        $this->nommar = $v;
+        $this->modifiedColumns[] = CamarartPeer::NOMMAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CamarartPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CamarartPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmar = $rs->getString($startcol + 0);
+      $this->codmar = $rs->getString($startcol + 0);
 
-			$this->nommar = $rs->getString($startcol + 1);
+      $this->nommar = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Camarart object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Camarart object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

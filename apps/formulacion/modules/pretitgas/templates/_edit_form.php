@@ -8,12 +8,27 @@
   'multipart' => true,
 )) ?>
 
+
+<?php if ($sf_flash->has('notice1')): ?>
+<div class="form-errors">
+<h2><?php echo __($sf_flash->get('notice1')) ?></h2>
+</div>
+<?php endif; ?>
+
 <?php echo object_input_hidden_tag($fordefparegr, 'getId') ?>
 
+<?php echo javascript_include_tag('dFilter') ?>
+<?php echo javascript_include_tag('tools') ?>
+
 <fieldset id="sf_fieldset_none" class="">
-<legend>Datos de la Partida</legend>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>PAR-GE-ES-SE</strong>
+<legend><?php echo __('Datos de la Partida')?></legend>
 <div class="form-row">
+
+ <?php echo label_for('etiqueta',' ') ?>
+ <?php echo $etiqueta ?>
+
+ <br>
+
   <?php echo label_for('fordefparegr[codparegr]', __($labels['fordefparegr{codparegr}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('fordefparegr{codparegr}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('fordefparegr{codparegr}')): ?>
@@ -21,13 +36,17 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($fordefparegr, 'getCodparegr', array (
-  'size' => 32,
+  'size' => $lonmaspar,
   'control_name' => 'fordefparegr[codparegr]',
+  'readonly'  =>  $fordefparegr->getId()!='' ? true : false ,
+  'maxlength' => $lonmaspar,
+  'onBlur' => "javascript:cadena=rayitas(this.value);document.getElementById('fordefparegr_codparegr').value=cadena;",
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascarapartida')",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('fordefparegr[nomparegr]', __($labels['fordefparegr{nomparegr}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('fordefparegr{nomparegr}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('fordefparegr{nomparegr}')): ?>
@@ -47,12 +66,20 @@
 
 </form>
 
+
 <ul class="sf_admin_actions">
       <li class="float-left"><?php if ($fordefparegr->getId()): ?>
-<?php echo button_to(__('delete'), 'pretitgas/delete?id='.$fordefparegr->getId(), array (
-  'post' => true,
-  'confirm' => __('Are you sure?'),
-  'class' => 'sf_admin_action_delete',
-)) ?><?php endif; ?>
+  <input id="eliminarboton" type="button" name="Submit2" value="Eliminar" class="sf_admin_action_delete" onclick="javascript:eliminar();"/>
+<?php endif; ?>
 </li>
   </ul>
+
+<script type="text/javascript">
+  function eliminar()
+  {
+    var cod=$('fordefparegr_codparegr').value;
+    var id=$('id').value;
+
+    location.href='/formulacion_dev.php/pretitgas/eliminar?cod='+cod+'&id='+id;
+  }
+ </script>

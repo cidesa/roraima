@@ -205,6 +205,7 @@ abstract class BaseTslibcomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TslibcomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

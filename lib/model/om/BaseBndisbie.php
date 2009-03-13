@@ -45,164 +45,194 @@ abstract class BaseBndisbie extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoddis()
-	{
+  
+  public function getCoddis()
+  {
 
-		return $this->coddis; 		
-	}
-	
-	public function getDesdis()
-	{
+    return trim($this->coddis);
 
-		return $this->desdis; 		
-	}
-	
-	public function getAfecon()
-	{
+  }
+  
+  public function getDesdis()
+  {
 
-		return $this->afecon; 		
-	}
-	
-	public function getStadis()
-	{
+    return trim($this->desdis);
 
-		return $this->stadis; 		
-	}
-	
-	public function getDesinc()
-	{
+  }
+  
+  public function getAfecon()
+  {
 
-		return $this->desinc; 		
-	}
-	
-	public function getAdimej()
-	{
+    return trim($this->afecon);
 
-		return $this->adimej; 		
-	}
-	
-	public function getViduti()
-	{
+  }
+  
+  public function getStadis()
+  {
 
-		return $this->viduti; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->stadis);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDesinc()
+  {
+
+    return trim($this->desinc);
+
+  }
+  
+  public function getAdimej()
+  {
+
+    return trim($this->adimej);
+
+  }
+  
+  public function getViduti()
+  {
+
+    return trim($this->viduti);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoddis($v)
 	{
 
-		if ($this->coddis !== $v) {
-			$this->coddis = $v;
-			$this->modifiedColumns[] = BndisbiePeer::CODDIS;
-		}
-
+    if ($this->coddis !== $v) {
+        $this->coddis = $v;
+        $this->modifiedColumns[] = BndisbiePeer::CODDIS;
+      }
+  
 	} 
 	
 	public function setDesdis($v)
 	{
 
-		if ($this->desdis !== $v) {
-			$this->desdis = $v;
-			$this->modifiedColumns[] = BndisbiePeer::DESDIS;
-		}
-
+    if ($this->desdis !== $v) {
+        $this->desdis = $v;
+        $this->modifiedColumns[] = BndisbiePeer::DESDIS;
+      }
+  
 	} 
 	
 	public function setAfecon($v)
 	{
 
-		if ($this->afecon !== $v) {
-			$this->afecon = $v;
-			$this->modifiedColumns[] = BndisbiePeer::AFECON;
-		}
-
+    if ($this->afecon !== $v) {
+        $this->afecon = $v;
+        $this->modifiedColumns[] = BndisbiePeer::AFECON;
+      }
+  
 	} 
 	
 	public function setStadis($v)
 	{
 
-		if ($this->stadis !== $v) {
-			$this->stadis = $v;
-			$this->modifiedColumns[] = BndisbiePeer::STADIS;
-		}
-
+    if ($this->stadis !== $v) {
+        $this->stadis = $v;
+        $this->modifiedColumns[] = BndisbiePeer::STADIS;
+      }
+  
 	} 
 	
 	public function setDesinc($v)
 	{
 
-		if ($this->desinc !== $v) {
-			$this->desinc = $v;
-			$this->modifiedColumns[] = BndisbiePeer::DESINC;
-		}
-
+    if ($this->desinc !== $v) {
+        $this->desinc = $v;
+        $this->modifiedColumns[] = BndisbiePeer::DESINC;
+      }
+  
 	} 
 	
 	public function setAdimej($v)
 	{
 
-		if ($this->adimej !== $v) {
-			$this->adimej = $v;
-			$this->modifiedColumns[] = BndisbiePeer::ADIMEJ;
-		}
-
+    if ($this->adimej !== $v) {
+        $this->adimej = $v;
+        $this->modifiedColumns[] = BndisbiePeer::ADIMEJ;
+      }
+  
 	} 
 	
 	public function setViduti($v)
 	{
 
-		if ($this->viduti !== $v) {
-			$this->viduti = $v;
-			$this->modifiedColumns[] = BndisbiePeer::VIDUTI;
-		}
-
+    if ($this->viduti !== $v) {
+        $this->viduti = $v;
+        $this->modifiedColumns[] = BndisbiePeer::VIDUTI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndisbiePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndisbiePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coddis = $rs->getString($startcol + 0);
+      $this->coddis = $rs->getString($startcol + 0);
 
-			$this->desdis = $rs->getString($startcol + 1);
+      $this->desdis = $rs->getString($startcol + 1);
 
-			$this->afecon = $rs->getString($startcol + 2);
+      $this->afecon = $rs->getString($startcol + 2);
 
-			$this->stadis = $rs->getString($startcol + 3);
+      $this->stadis = $rs->getString($startcol + 3);
 
-			$this->desinc = $rs->getString($startcol + 4);
+      $this->desinc = $rs->getString($startcol + 4);
 
-			$this->adimej = $rs->getString($startcol + 5);
+      $this->adimej = $rs->getString($startcol + 5);
 
-			$this->viduti = $rs->getString($startcol + 6);
+      $this->viduti = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bndisbie object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bndisbie object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -259,6 +289,7 @@ abstract class BaseBndisbie extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BndisbiePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BndisbiePeer::doUpdate($this, $con);

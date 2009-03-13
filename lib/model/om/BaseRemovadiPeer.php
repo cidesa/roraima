@@ -220,6 +220,7 @@ abstract class BaseRemovadiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(RemovadiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

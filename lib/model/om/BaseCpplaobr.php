@@ -89,370 +89,411 @@ abstract class BaseCpplaobr extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefcom()
-	{
+  
+  public function getRefcom()
+  {
 
-		return $this->refcom; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->refcom);
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodest()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->codest; 		
-	}
-	
-	public function getCodobr()
-	{
+    return trim($this->codpro);
 
-		return $this->codobr; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getCodest()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNrocon()
-	{
+    return trim($this->codest);
 
-		return $this->nrocon; 		
-	}
-	
-	public function getMoncon()
-	{
+  }
+  
+  public function getCodobr()
+  {
 
-		return number_format($this->moncon,2,',','.');
-		
-	}
-	
-	public function getMonrea()
-	{
+    return trim($this->codobr);
 
-		return number_format($this->monrea,2,',','.');
-		
-	}
-	
-	public function getMonvar()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return number_format($this->monvar,2,',','.');
-		
-	}
-	
-	public function getPorfis()
-	{
+    return trim($this->codemp);
 
-		return number_format($this->porfis,2,',','.');
-		
-	}
-	
-	public function getPorpre()
-	{
+  }
+  
+  public function getNrocon()
+  {
 
-		return number_format($this->porpre,2,',','.');
-		
-	}
-	
-	public function getCanequ()
-	{
+    return trim($this->nrocon);
 
-		return number_format($this->canequ,2,',','.');
-		
-	}
-	
-	public function getDesequ()
-	{
+  }
+  
+  public function getMoncon($val=false)
+  {
 
-		return $this->desequ; 		
-	}
-	
-	public function getCanobr()
-	{
+    if($val) return number_format($this->moncon,2,',','.');
+    else return $this->moncon;
 
-		return number_format($this->canobr,2,',','.');
-		
-	}
-	
-	public function getDesobr()
-	{
+  }
+  
+  public function getMonrea($val=false)
+  {
 
-		return $this->desobr; 		
-	}
-	
-	public function getCanrep()
-	{
+    if($val) return number_format($this->monrea,2,',','.');
+    else return $this->monrea;
 
-		return number_format($this->canrep,2,',','.');
-		
-	}
-	
-	public function getDesrep()
-	{
+  }
+  
+  public function getMonvar($val=false)
+  {
 
-		return $this->desrep; 		
-	}
-	
-	public function getStapla()
-	{
+    if($val) return number_format($this->monvar,2,',','.');
+    else return $this->monvar;
 
-		return $this->stapla; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPorfis($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->porfis,2,',','.');
+    else return $this->porfis;
+
+  }
+  
+  public function getPorpre($val=false)
+  {
+
+    if($val) return number_format($this->porpre,2,',','.');
+    else return $this->porpre;
+
+  }
+  
+  public function getCanequ($val=false)
+  {
+
+    if($val) return number_format($this->canequ,2,',','.');
+    else return $this->canequ;
+
+  }
+  
+  public function getDesequ()
+  {
+
+    return trim($this->desequ);
+
+  }
+  
+  public function getCanobr($val=false)
+  {
+
+    if($val) return number_format($this->canobr,2,',','.');
+    else return $this->canobr;
+
+  }
+  
+  public function getDesobr()
+  {
+
+    return trim($this->desobr);
+
+  }
+  
+  public function getCanrep($val=false)
+  {
+
+    if($val) return number_format($this->canrep,2,',','.');
+    else return $this->canrep;
+
+  }
+  
+  public function getDesrep()
+  {
+
+    return trim($this->desrep);
+
+  }
+  
+  public function getStapla()
+  {
+
+    return trim($this->stapla);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodest($v)
 	{
 
-		if ($this->codest !== $v) {
-			$this->codest = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::CODEST;
-		}
-
+    if ($this->codest !== $v) {
+        $this->codest = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::CODEST;
+      }
+  
 	} 
 	
 	public function setCodobr($v)
 	{
 
-		if ($this->codobr !== $v) {
-			$this->codobr = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::CODOBR;
-		}
-
+    if ($this->codobr !== $v) {
+        $this->codobr = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::CODOBR;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNrocon($v)
 	{
 
-		if ($this->nrocon !== $v) {
-			$this->nrocon = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::NROCON;
-		}
-
+    if ($this->nrocon !== $v) {
+        $this->nrocon = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::NROCON;
+      }
+  
 	} 
 	
 	public function setMoncon($v)
 	{
 
-		if ($this->moncon !== $v) {
-			$this->moncon = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::MONCON;
-		}
-
+    if ($this->moncon !== $v) {
+        $this->moncon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpplaobrPeer::MONCON;
+      }
+  
 	} 
 	
 	public function setMonrea($v)
 	{
 
-		if ($this->monrea !== $v) {
-			$this->monrea = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::MONREA;
-		}
-
+    if ($this->monrea !== $v) {
+        $this->monrea = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpplaobrPeer::MONREA;
+      }
+  
 	} 
 	
 	public function setMonvar($v)
 	{
 
-		if ($this->monvar !== $v) {
-			$this->monvar = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::MONVAR;
-		}
-
+    if ($this->monvar !== $v) {
+        $this->monvar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpplaobrPeer::MONVAR;
+      }
+  
 	} 
 	
 	public function setPorfis($v)
 	{
 
-		if ($this->porfis !== $v) {
-			$this->porfis = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::PORFIS;
-		}
-
+    if ($this->porfis !== $v) {
+        $this->porfis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpplaobrPeer::PORFIS;
+      }
+  
 	} 
 	
 	public function setPorpre($v)
 	{
 
-		if ($this->porpre !== $v) {
-			$this->porpre = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::PORPRE;
-		}
-
+    if ($this->porpre !== $v) {
+        $this->porpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpplaobrPeer::PORPRE;
+      }
+  
 	} 
 	
 	public function setCanequ($v)
 	{
 
-		if ($this->canequ !== $v) {
-			$this->canequ = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::CANEQU;
-		}
-
+    if ($this->canequ !== $v) {
+        $this->canequ = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpplaobrPeer::CANEQU;
+      }
+  
 	} 
 	
 	public function setDesequ($v)
 	{
 
-		if ($this->desequ !== $v) {
-			$this->desequ = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::DESEQU;
-		}
-
+    if ($this->desequ !== $v) {
+        $this->desequ = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::DESEQU;
+      }
+  
 	} 
 	
 	public function setCanobr($v)
 	{
 
-		if ($this->canobr !== $v) {
-			$this->canobr = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::CANOBR;
-		}
-
+    if ($this->canobr !== $v) {
+        $this->canobr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpplaobrPeer::CANOBR;
+      }
+  
 	} 
 	
 	public function setDesobr($v)
 	{
 
-		if ($this->desobr !== $v) {
-			$this->desobr = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::DESOBR;
-		}
-
+    if ($this->desobr !== $v) {
+        $this->desobr = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::DESOBR;
+      }
+  
 	} 
 	
 	public function setCanrep($v)
 	{
 
-		if ($this->canrep !== $v) {
-			$this->canrep = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::CANREP;
-		}
-
+    if ($this->canrep !== $v) {
+        $this->canrep = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpplaobrPeer::CANREP;
+      }
+  
 	} 
 	
 	public function setDesrep($v)
 	{
 
-		if ($this->desrep !== $v) {
-			$this->desrep = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::DESREP;
-		}
-
+    if ($this->desrep !== $v) {
+        $this->desrep = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::DESREP;
+      }
+  
 	} 
 	
 	public function setStapla($v)
 	{
 
-		if ($this->stapla !== $v) {
-			$this->stapla = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::STAPLA;
-		}
-
+    if ($this->stapla !== $v) {
+        $this->stapla = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::STAPLA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpplaobrPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpplaobrPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refcom = $rs->getString($startcol + 0);
+      $this->refcom = $rs->getString($startcol + 0);
 
-			$this->codpro = $rs->getString($startcol + 1);
+      $this->codpro = $rs->getString($startcol + 1);
 
-			$this->codest = $rs->getString($startcol + 2);
+      $this->codest = $rs->getString($startcol + 2);
 
-			$this->codobr = $rs->getString($startcol + 3);
+      $this->codobr = $rs->getString($startcol + 3);
 
-			$this->codemp = $rs->getString($startcol + 4);
+      $this->codemp = $rs->getString($startcol + 4);
 
-			$this->nrocon = $rs->getString($startcol + 5);
+      $this->nrocon = $rs->getString($startcol + 5);
 
-			$this->moncon = $rs->getFloat($startcol + 6);
+      $this->moncon = $rs->getFloat($startcol + 6);
 
-			$this->monrea = $rs->getFloat($startcol + 7);
+      $this->monrea = $rs->getFloat($startcol + 7);
 
-			$this->monvar = $rs->getFloat($startcol + 8);
+      $this->monvar = $rs->getFloat($startcol + 8);
 
-			$this->porfis = $rs->getFloat($startcol + 9);
+      $this->porfis = $rs->getFloat($startcol + 9);
 
-			$this->porpre = $rs->getFloat($startcol + 10);
+      $this->porpre = $rs->getFloat($startcol + 10);
 
-			$this->canequ = $rs->getFloat($startcol + 11);
+      $this->canequ = $rs->getFloat($startcol + 11);
 
-			$this->desequ = $rs->getString($startcol + 12);
+      $this->desequ = $rs->getString($startcol + 12);
 
-			$this->canobr = $rs->getFloat($startcol + 13);
+      $this->canobr = $rs->getFloat($startcol + 13);
 
-			$this->desobr = $rs->getString($startcol + 14);
+      $this->desobr = $rs->getString($startcol + 14);
 
-			$this->canrep = $rs->getFloat($startcol + 15);
+      $this->canrep = $rs->getFloat($startcol + 15);
 
-			$this->desrep = $rs->getString($startcol + 16);
+      $this->desrep = $rs->getString($startcol + 16);
 
-			$this->stapla = $rs->getString($startcol + 17);
+      $this->stapla = $rs->getString($startcol + 17);
 
-			$this->id = $rs->getInt($startcol + 18);
+      $this->id = $rs->getInt($startcol + 18);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 19; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpplaobr object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 19; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpplaobr object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

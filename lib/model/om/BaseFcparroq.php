@@ -40,81 +40,87 @@ abstract class BaseFcparroq extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpar()
-	{
+  
+  public function getCodpar()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getCodmun()
-	{
+    return trim($this->codpar);
 
-		return $this->codmun; 		
-	}
-	
-	public function getCodedo()
-	{
+  }
+  
+  public function getCodmun()
+  {
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodpai()
-	{
+    return trim($this->codmun);
 
-		return $this->codpai; 		
-	}
-	
-	public function getNompar()
-	{
+  }
+  
+  public function getCodedo()
+  {
 
-		return $this->nompar; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codedo);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodpai()
+  {
+
+    return trim($this->codpai);
+
+  }
+  
+  public function getNompar()
+  {
+
+    return trim($this->nompar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = FcparroqPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = FcparroqPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = FcparroqPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = FcparroqPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = FcparroqPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = FcparroqPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = FcparroqPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = FcparroqPeer::CODPAI;
+      }
+  
 		if ($this->aFcmunici !== null && $this->aFcmunici->getCodpai() !== $v) {
 			$this->aFcmunici = null;
 		}
@@ -124,48 +130,70 @@ abstract class BaseFcparroq extends BaseObject  implements Persistent {
 	public function setNompar($v)
 	{
 
-		if ($this->nompar !== $v) {
-			$this->nompar = $v;
-			$this->modifiedColumns[] = FcparroqPeer::NOMPAR;
-		}
-
+    if ($this->nompar !== $v) {
+        $this->nompar = $v;
+        $this->modifiedColumns[] = FcparroqPeer::NOMPAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcparroqPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcparroqPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpar = $rs->getString($startcol + 0);
+      $this->codpar = $rs->getString($startcol + 0);
 
-			$this->codmun = $rs->getString($startcol + 1);
+      $this->codmun = $rs->getString($startcol + 1);
 
-			$this->codedo = $rs->getString($startcol + 2);
+      $this->codedo = $rs->getString($startcol + 2);
 
-			$this->codpai = $rs->getString($startcol + 3);
+      $this->codpai = $rs->getString($startcol + 3);
 
-			$this->nompar = $rs->getString($startcol + 4);
+      $this->nompar = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcparroq object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcparroq object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -231,6 +259,7 @@ abstract class BaseFcparroq extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcparroqPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcparroqPeer::doUpdate($this, $con);
@@ -480,9 +509,8 @@ abstract class BaseFcparroq extends BaseObject  implements Persistent {
 	
 	public function getFcmunici($con = null)
 	{
-				include_once 'lib/model/om/BaseFcmuniciPeer.php';
-
 		if ($this->aFcmunici === null && (($this->codpai !== "" && $this->codpai !== null))) {
+						include_once 'lib/model/om/BaseFcmuniciPeer.php';
 
 			$this->aFcmunici = FcmuniciPeer::retrieveByPK($this->codpai, $con);
 

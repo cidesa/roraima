@@ -320,6 +320,7 @@ abstract class BaseFcconrepcoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcconrepcoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

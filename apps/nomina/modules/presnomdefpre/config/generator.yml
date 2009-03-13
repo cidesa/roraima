@@ -1,0 +1,32 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npdefpreliq
+    theme:            default
+    fields:
+      codnom:      { name: Codigo Nomina}
+      nomnom:      { name: Nomina, params: maxlength=100}
+      codcon:      { name: Concepto, params: maxlength=100}
+      perdes:      { name: Periodo Inicio }
+      perhas:      { name: Periodo Fin }
+      codpar:      { name: Codigo De Partida }
+      rangohasta:  { name: Rango Hasta }
+      diasbonovac: { name: Dias Bono }
+
+    list:
+      title:          Definición Presupuestaria de liquidación
+      filters:        [codnom]
+      display:        [=codnom, nomnom, codcon]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   5
+
+    edit:
+      title:          Definición Presupuestaria de liquidación
+      display:        [codnom, nomnom, codcon]
+      actions:
+        _save:         ~
+        _create:       ~
+        _list:         ~
+        _delete:       ~

@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Registro de Tipo de Asignaciones', 
+<h1><?php echo __('Registro de Tipo de Asignaciones',
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('presnomasiconpre/edit_messages', array('npasipre' => $npasipre, 'labels' => $labels)) ?>
-<?php include_partial('presnomasiconpre/edit_form', array('npasipre' => $npasipre, 'detalles' => $detalles, 'labels' => $labels)) ?>
+<?php include_partial('presnomasiconpre/edit_form', array('npasipre' => $npasipre, 'labels' => $labels, 'obj' => $obj)) ?>
 </div>
 
 <div id="sf_admin_footer">

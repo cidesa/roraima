@@ -3,3 +3,24 @@ generator:
   param:
     model_class:      Nphojint
     theme:            default
+    fields:
+      codemp: { name: Empleado }
+      nomemp: { name: Nombre }
+      fecing: { name: Fecha Ingreso }
+
+    list:
+      title:          Vacaciones Disfrutadas
+      filters:        [codemp, nomemp, fecing]
+      display:        [=codemp, nomemp, fecing ]
+      object_actions:
+        _edit:        ~
+      max_per_page:   10
+      sort: codemp
+    edit:
+      title:          Edición de Vacaciones Disfrutadas
+      display:        [=codemp, nomemp, fecing]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

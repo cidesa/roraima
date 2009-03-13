@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class OcinsvalMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.OcinsvalMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.OcinsvalMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('ocinsval');
 		$tMap->setPhpName('Ocinsval');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('ocinsval_SEQ');
 
 		$tMap->addColumn('CEDINS', 'Cedins', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -45,6 +47,6 @@ class OcinsvalMapBuilder {
 		$tMap->addColumn('NUMCIV', 'Numciv', 'string', CreoleTypes::VARCHAR, false, 15);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

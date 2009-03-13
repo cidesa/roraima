@@ -53,200 +53,232 @@ abstract class BaseBdcampos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNomcamp1()
-	{
+  
+  public function getNomcamp1()
+  {
 
-		return $this->nomcamp1; 		
-	}
-	
-	public function getNomcamp2()
-	{
+    return trim($this->nomcamp1);
 
-		return $this->nomcamp2; 		
-	}
-	
-	public function getNomcamp3()
-	{
+  }
+  
+  public function getNomcamp2()
+  {
 
-		return $this->nomcamp3; 		
-	}
-	
-	public function getNomcamp4()
-	{
+    return trim($this->nomcamp2);
 
-		return $this->nomcamp4; 		
-	}
-	
-	public function getNomcamp5()
-	{
+  }
+  
+  public function getNomcamp3()
+  {
 
-		return $this->nomcamp5; 		
-	}
-	
-	public function getNomcamp6()
-	{
+    return trim($this->nomcamp3);
 
-		return $this->nomcamp6; 		
-	}
-	
-	public function getNomcamp7()
-	{
+  }
+  
+  public function getNomcamp4()
+  {
 
-		return $this->nomcamp7; 		
-	}
-	
-	public function getNomcamp8()
-	{
+    return trim($this->nomcamp4);
 
-		return $this->nomcamp8; 		
-	}
-	
-	public function getCriterio()
-	{
+  }
+  
+  public function getNomcamp5()
+  {
 
-		return $this->criterio; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomcamp5);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomcamp6()
+  {
+
+    return trim($this->nomcamp6);
+
+  }
+  
+  public function getNomcamp7()
+  {
+
+    return trim($this->nomcamp7);
+
+  }
+  
+  public function getNomcamp8()
+  {
+
+    return trim($this->nomcamp8);
+
+  }
+  
+  public function getCriterio()
+  {
+
+    return trim($this->criterio);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNomcamp1($v)
 	{
 
-		if ($this->nomcamp1 !== $v) {
-			$this->nomcamp1 = $v;
-			$this->modifiedColumns[] = BdcamposPeer::NOMCAMP1;
-		}
-
+    if ($this->nomcamp1 !== $v) {
+        $this->nomcamp1 = $v;
+        $this->modifiedColumns[] = BdcamposPeer::NOMCAMP1;
+      }
+  
 	} 
 	
 	public function setNomcamp2($v)
 	{
 
-		if ($this->nomcamp2 !== $v) {
-			$this->nomcamp2 = $v;
-			$this->modifiedColumns[] = BdcamposPeer::NOMCAMP2;
-		}
-
+    if ($this->nomcamp2 !== $v) {
+        $this->nomcamp2 = $v;
+        $this->modifiedColumns[] = BdcamposPeer::NOMCAMP2;
+      }
+  
 	} 
 	
 	public function setNomcamp3($v)
 	{
 
-		if ($this->nomcamp3 !== $v) {
-			$this->nomcamp3 = $v;
-			$this->modifiedColumns[] = BdcamposPeer::NOMCAMP3;
-		}
-
+    if ($this->nomcamp3 !== $v) {
+        $this->nomcamp3 = $v;
+        $this->modifiedColumns[] = BdcamposPeer::NOMCAMP3;
+      }
+  
 	} 
 	
 	public function setNomcamp4($v)
 	{
 
-		if ($this->nomcamp4 !== $v) {
-			$this->nomcamp4 = $v;
-			$this->modifiedColumns[] = BdcamposPeer::NOMCAMP4;
-		}
-
+    if ($this->nomcamp4 !== $v) {
+        $this->nomcamp4 = $v;
+        $this->modifiedColumns[] = BdcamposPeer::NOMCAMP4;
+      }
+  
 	} 
 	
 	public function setNomcamp5($v)
 	{
 
-		if ($this->nomcamp5 !== $v) {
-			$this->nomcamp5 = $v;
-			$this->modifiedColumns[] = BdcamposPeer::NOMCAMP5;
-		}
-
+    if ($this->nomcamp5 !== $v) {
+        $this->nomcamp5 = $v;
+        $this->modifiedColumns[] = BdcamposPeer::NOMCAMP5;
+      }
+  
 	} 
 	
 	public function setNomcamp6($v)
 	{
 
-		if ($this->nomcamp6 !== $v) {
-			$this->nomcamp6 = $v;
-			$this->modifiedColumns[] = BdcamposPeer::NOMCAMP6;
-		}
-
+    if ($this->nomcamp6 !== $v) {
+        $this->nomcamp6 = $v;
+        $this->modifiedColumns[] = BdcamposPeer::NOMCAMP6;
+      }
+  
 	} 
 	
 	public function setNomcamp7($v)
 	{
 
-		if ($this->nomcamp7 !== $v) {
-			$this->nomcamp7 = $v;
-			$this->modifiedColumns[] = BdcamposPeer::NOMCAMP7;
-		}
-
+    if ($this->nomcamp7 !== $v) {
+        $this->nomcamp7 = $v;
+        $this->modifiedColumns[] = BdcamposPeer::NOMCAMP7;
+      }
+  
 	} 
 	
 	public function setNomcamp8($v)
 	{
 
-		if ($this->nomcamp8 !== $v) {
-			$this->nomcamp8 = $v;
-			$this->modifiedColumns[] = BdcamposPeer::NOMCAMP8;
-		}
-
+    if ($this->nomcamp8 !== $v) {
+        $this->nomcamp8 = $v;
+        $this->modifiedColumns[] = BdcamposPeer::NOMCAMP8;
+      }
+  
 	} 
 	
 	public function setCriterio($v)
 	{
 
-		if ($this->criterio !== $v) {
-			$this->criterio = $v;
-			$this->modifiedColumns[] = BdcamposPeer::CRITERIO;
-		}
-
+    if ($this->criterio !== $v) {
+        $this->criterio = $v;
+        $this->modifiedColumns[] = BdcamposPeer::CRITERIO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BdcamposPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BdcamposPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nomcamp1 = $rs->getString($startcol + 0);
+      $this->nomcamp1 = $rs->getString($startcol + 0);
 
-			$this->nomcamp2 = $rs->getString($startcol + 1);
+      $this->nomcamp2 = $rs->getString($startcol + 1);
 
-			$this->nomcamp3 = $rs->getString($startcol + 2);
+      $this->nomcamp3 = $rs->getString($startcol + 2);
 
-			$this->nomcamp4 = $rs->getString($startcol + 3);
+      $this->nomcamp4 = $rs->getString($startcol + 3);
 
-			$this->nomcamp5 = $rs->getString($startcol + 4);
+      $this->nomcamp5 = $rs->getString($startcol + 4);
 
-			$this->nomcamp6 = $rs->getString($startcol + 5);
+      $this->nomcamp6 = $rs->getString($startcol + 5);
 
-			$this->nomcamp7 = $rs->getString($startcol + 6);
+      $this->nomcamp7 = $rs->getString($startcol + 6);
 
-			$this->nomcamp8 = $rs->getString($startcol + 7);
+      $this->nomcamp8 = $rs->getString($startcol + 7);
 
-			$this->criterio = $rs->getString($startcol + 8);
+      $this->criterio = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bdcampos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bdcampos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

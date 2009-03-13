@@ -215,6 +215,7 @@ abstract class BaseOcmuniciPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcmuniciPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

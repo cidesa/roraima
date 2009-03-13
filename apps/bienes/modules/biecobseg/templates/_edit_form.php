@@ -11,7 +11,10 @@
 <?php echo object_input_hidden_tag($bncobseg, 'getId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend>Definición de Cobertura</legend>
+
+<?php echo javascript_include_tag('tools','observe') ?>
+
+
 <div class="form-row">
   <?php echo label_for('bncobseg[codcob]', __($labels['bncobseg{codcob}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bncobseg{codcob}')): ?> form-error<?php endif; ?>">
@@ -19,8 +22,10 @@
     <?php echo form_error('bncobseg{codcob}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bncobseg, 'getCodcob', array (
-  'size' => 20,
+ <?php $value = object_input_tag($bncobseg, 'getCodcob', array (
+  'size' => 4,
+  'maxlength' => 4,
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('bncobseg_codcob').value=valor;document.getElementById('bncobseg_codcob').disabled=false;",
   'control_name' => 'bncobseg[codcob]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>

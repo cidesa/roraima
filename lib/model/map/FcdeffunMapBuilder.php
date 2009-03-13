@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FcdeffunMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcdeffunMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcdeffunMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcdeffun');
 		$tMap->setPhpName('Fcdeffun');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcdeffun_SEQ');
 
 		$tMap->addColumn('CODFUN', 'Codfun', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -39,6 +41,6 @@ class FcdeffunMapBuilder {
 		$tMap->addForeignKey('CODUNIADM', 'Coduniadm', 'string', CreoleTypes::VARCHAR, 'fcdefuniadm', 'CODUNIADM', true, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

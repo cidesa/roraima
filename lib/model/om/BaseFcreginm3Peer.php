@@ -200,6 +200,7 @@ abstract class BaseFcreginm3Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Fcreginm3Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

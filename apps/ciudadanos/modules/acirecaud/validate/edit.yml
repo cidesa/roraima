@@ -1,0 +1,31 @@
+methods:
+  post:
+   - "atrecaud{codrec}"
+   - "atrecaud{desrec}"
+
+names:
+  atrecaud{codrec}:
+    required:  Yes
+    required_msg: Debe existir el Código del Recaudo
+    validators: MyStringValidator1
+
+  atrecaud{desrec}:
+    required:  Yes
+    required_msg: Debe existir la descripción del recaudo
+    validators: MyStringValidator2
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Debe existir el código del Recaudo
+        max:       8
+        max_error: El código del Recaudo debe tener menos de 9 caracteres
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Debe existir la descripción del Recaudo
+        max:       50
+        max_error: La descripción del Recaudo debe tener menos de 51 Caracteres

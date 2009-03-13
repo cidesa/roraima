@@ -49,205 +49,235 @@ abstract class BaseFctralic extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumtra()
-	{
+  
+  public function getNumtra()
+  {
 
-		return $this->numtra; 		
-	}
-	
-	public function getFectra($format = 'Y-m-d')
-	{
+    return trim($this->numtra);
 
-		if ($this->fectra === null || $this->fectra === '') {
-			return null;
-		} elseif (!is_int($this->fectra)) {
-						$ts = strtotime($this->fectra);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fectra] as date/time value: " . var_export($this->fectra, true));
-			}
-		} else {
-			$ts = $this->fectra;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFectra($format = 'Y-m-d')
+  {
 
-	
-	public function getRifcon()
-	{
+    if ($this->fectra === null || $this->fectra === '') {
+      return null;
+    } elseif (!is_int($this->fectra)) {
+            $ts = adodb_strtotime($this->fectra);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fectra] as date/time value: " . var_export($this->fectra, true));
+      }
+    } else {
+      $ts = $this->fectra;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->rifcon; 		
-	}
-	
-	public function getRifrep()
-	{
+  
+  public function getRifcon()
+  {
 
-		return $this->rifrep; 		
-	}
-	
-	public function getRifconant()
-	{
+    return trim($this->rifcon);
 
-		return $this->rifconant; 		
-	}
-	
-	public function getRifrepant()
-	{
+  }
+  
+  public function getRifrep()
+  {
 
-		return $this->rifrepant; 		
-	}
-	
-	public function getFunrec()
-	{
+    return trim($this->rifrep);
 
-		return $this->funrec; 		
-	}
-	
-	public function getNumlic()
-	{
+  }
+  
+  public function getRifconant()
+  {
 
-		return $this->numlic; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->rifconant);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getRifrepant()
+  {
+
+    return trim($this->rifrepant);
+
+  }
+  
+  public function getFunrec()
+  {
+
+    return trim($this->funrec);
+
+  }
+  
+  public function getNumlic()
+  {
+
+    return trim($this->numlic);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumtra($v)
 	{
 
-		if ($this->numtra !== $v) {
-			$this->numtra = $v;
-			$this->modifiedColumns[] = FctralicPeer::NUMTRA;
-		}
-
+    if ($this->numtra !== $v) {
+        $this->numtra = $v;
+        $this->modifiedColumns[] = FctralicPeer::NUMTRA;
+      }
+  
 	} 
 	
 	public function setFectra($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fectra] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fectra !== $ts) {
-			$this->fectra = $ts;
-			$this->modifiedColumns[] = FctralicPeer::FECTRA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fectra] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fectra !== $ts) {
+      $this->fectra = $ts;
+      $this->modifiedColumns[] = FctralicPeer::FECTRA;
+    }
 
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FctralicPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FctralicPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setRifrep($v)
 	{
 
-		if ($this->rifrep !== $v) {
-			$this->rifrep = $v;
-			$this->modifiedColumns[] = FctralicPeer::RIFREP;
-		}
-
+    if ($this->rifrep !== $v) {
+        $this->rifrep = $v;
+        $this->modifiedColumns[] = FctralicPeer::RIFREP;
+      }
+  
 	} 
 	
 	public function setRifconant($v)
 	{
 
-		if ($this->rifconant !== $v) {
-			$this->rifconant = $v;
-			$this->modifiedColumns[] = FctralicPeer::RIFCONANT;
-		}
-
+    if ($this->rifconant !== $v) {
+        $this->rifconant = $v;
+        $this->modifiedColumns[] = FctralicPeer::RIFCONANT;
+      }
+  
 	} 
 	
 	public function setRifrepant($v)
 	{
 
-		if ($this->rifrepant !== $v) {
-			$this->rifrepant = $v;
-			$this->modifiedColumns[] = FctralicPeer::RIFREPANT;
-		}
-
+    if ($this->rifrepant !== $v) {
+        $this->rifrepant = $v;
+        $this->modifiedColumns[] = FctralicPeer::RIFREPANT;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FctralicPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FctralicPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setNumlic($v)
 	{
 
-		if ($this->numlic !== $v) {
-			$this->numlic = $v;
-			$this->modifiedColumns[] = FctralicPeer::NUMLIC;
-		}
-
+    if ($this->numlic !== $v) {
+        $this->numlic = $v;
+        $this->modifiedColumns[] = FctralicPeer::NUMLIC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FctralicPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FctralicPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numtra = $rs->getString($startcol + 0);
+      $this->numtra = $rs->getString($startcol + 0);
 
-			$this->fectra = $rs->getDate($startcol + 1, null);
+      $this->fectra = $rs->getDate($startcol + 1, null);
 
-			$this->rifcon = $rs->getString($startcol + 2);
+      $this->rifcon = $rs->getString($startcol + 2);
 
-			$this->rifrep = $rs->getString($startcol + 3);
+      $this->rifrep = $rs->getString($startcol + 3);
 
-			$this->rifconant = $rs->getString($startcol + 4);
+      $this->rifconant = $rs->getString($startcol + 4);
 
-			$this->rifrepant = $rs->getString($startcol + 5);
+      $this->rifrepant = $rs->getString($startcol + 5);
 
-			$this->funrec = $rs->getString($startcol + 6);
+      $this->funrec = $rs->getString($startcol + 6);
 
-			$this->numlic = $rs->getString($startcol + 7);
+      $this->numlic = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fctralic object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fctralic object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -304,6 +334,7 @@ abstract class BaseFctralic extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FctralicPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FctralicPeer::doUpdate($this, $con);

@@ -230,6 +230,7 @@ abstract class BaseCpperejePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpperejePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

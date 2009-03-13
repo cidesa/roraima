@@ -9,96 +9,92 @@
  */
 class Ocregact extends BaseOcregact
 {
+  protected $codtipact='';
+  protected $destipact='';
+  protected $numofi='';
+  protected $fecact='';
+  protected $obsact='';
+
 	public function getDescon()
 	{
-		return Herramientas::getX('codcon','ocregcon','descon',str_pad(self::getCodcon(), 32 , ' '));
+		return Herramientas::getX('codcon','ocregcon','descon',self::getCodcon());
 	}
+
 	public function getCodobr()
 	{
-		return Herramientas::getX('codcon','ocregcon','codobr',str_pad(self::getCodcon(), 32 , ' '));
+		return Herramientas::getX('codcon','ocregcon','codobr',self::getCodcon());
 	}
 
 	public function getDesobr()
 	{
-		return Herramientas::getX('codobr','ocregobr','desobr',str_pad(self::getCodobr(), 32 , ' '));
+		return Herramientas::getX('codobr','ocregobr','desobr',self::getCodobr());
 	}
 
 	public function getCodpro()
 	{
-		return Herramientas::getX('codcon','ocregcon','codpro',str_pad(self::getCodcon(), 10 , ' '));
+		return Herramientas::getX('codcon','ocregcon','codpro',self::getCodcon());
 	}
 
 	public function getNompro()
 	{
-		return Herramientas::getX('codpro','caprovee','nompro',str_pad(self::getCodpro(), 10 , ' '));
+		return Herramientas::getX('codpro','caprovee','nompro',self::getCodpro());
 	}
 
 	public function getNomins()
 	{
-		$filtros=array('codobr','cedins');//arreglo donde mando los filtros de las clases
-		$variables=array(str_pad(self::getCodobr(), 32 , ' '),self::getCedins());//arreglo donde mando los parametros de la funcion
-		return $destipact= Herramientas::getXx('ocinginsobr',$filtros,$variables,'Nomins');
+	  $c= new Criteria();
+	  $c->add(OcinginsobrPeer::CODOBR,self::getCodobr());
+	  $c->add(OcinginsobrPeer::CEDINS,self::getCedins());
+	  $reg= OcinginsobrPeer::doSelectOne($c);
+      if ($reg)
+      {
+      	$nomins=$reg->getNomins();
+      }
+      else
+      {
+      	$nomins='';
+      }
+		return $nomins;
 	}
 
 	public function getNomtec()
 	{
-		$filtros=array('codobr','cedins');//arreglo donde mando los filtros de las clases
-		$variables=array(str_pad(self::getCodobr(), 32 , ' '),self::getCedtec());//arreglo donde mando los parametros de la funcion
-		return $destipact= Herramientas::getXx('ocinginsobr',$filtros,$variables,'Nomins');
+		return Herramientas::getX('codemp','Nphojint','nomemp',self::getCedtec());
 	}
 
 	public function getNomdir()
 	{
-		$filtros=array('codobr','cedins');//arreglo donde mando los filtros de las clases
-		$variables=array(str_pad(self::getCodobr(), 32 , ' '),self::getCedfis());//arreglo donde mando los parametros de la funcion
-		return $destipact= Herramientas::getXx('ocinginsobr',$filtros,$variables,'Nomins');
-	}	
-	
-	public function getDestipact()
-	{
-		return Herramientas::getX('codtipact','octipact','destipact',str_pad(self::getCodcon(), 32 , ' '));
+		return Herramientas::getX('codemp','Nphojint','nomemp',self::getCedfis());
 	}
 
+	public function getNomtop()
+	{
+       $c= new Criteria();
+       $c->add(OcproperPeer::CODPRO,self::getCodpro());
+       $c->addJoin(OcdefperPeer::CEDPER,OcproperPeer::CEDPER);
+       $c->addJoin(OctipcarPeer::CODTIPCAR,OcdefempPeer::CODINGRES);
+       $c->addJoin(OcdefempPeer::CODINGRES,OcdefperPeer::CODTIPCAR);
+       $c->addJoin(OctipcarPeer::CODTIPCAR,OcdefperPeer::CODTIPCAR);
+	   $registro = OcdefperPeer::doSelectOne($c);
+	   if($registro)
+	   {
+	   	$val=$registro->getNomper();
+	   }else { $val="";}
 
-	public function getNumofi()
-	{
-		$filtros=array('CODCON','CODTIPACT');//arreglo donde mando los filtros de las clases
-		$variables=array(self::getCodcon(),self::getCedins());//arreglo donde mando los parametros de la funcion
-		return $destipact= Herramientas::getXx('Ocasiact',$filtros,$variables,'Destipact');
+		return $val;
 	}
 
-	public function getFecact()
-	{
-		return Herramientas::getX('codcon','Ocasiact','fecact',str_pad(self::getCodcon(), 32 , ' '));
-	}
-	public function getObsact()
-	{
-		return Herramientas::getX('codcon','Ocasiact','obsact',str_pad(self::getCodcon(), 32 , ' '));
-	}
-
-	public function getCedper()
-	{
-		$c = new Criteria();
-		$c->addJoin(OctipcarPeer::CODTIPCAR,OcdefempPeer::CODINGRES);
-		$c->addJoin(OcdefempPeer::CODINGRES,OcdefperPeer::CODTIPCAR);
-		$c->addJoin(OctipcarPeer::CODTIPCAR,OcdefperPeer::CODTIPCAR);
-		$c->addJoin(OcdefperPeer::CEDPER,OcproperPeer::CEDPER);
-		$c->add(OcproperPeer::CODPRO,self::getCodpro());
-		$registro = OcproperPeer::doSelectOne($c);
-		if($registro) return $registro->getCedper();
-		else return null;
-	}
 	public function getNomper()
 	{
-		$c = new Criteria();
-		$c->addJoin(OctipcarPeer::CODTIPCAR,OcdefempPeer::CODINGRES);
-		$c->addJoin(OcdefempPeer::CODINGRES,OcdefperPeer::CODTIPCAR);
-		$c->addJoin(OctipcarPeer::CODTIPCAR,OcdefperPeer::CODTIPCAR);
-		$c->addJoin(OcdefperPeer::CEDPER,OcproperPeer::CEDPER);
-		$c->add(OcproperPeer::CODPRO,self::getCodpro());
-		$registro = OcproperPeer::doSelectOne($c);
-		if($registro) return $registro->getNomper();
-		else return null; 
-		
-	}			
+		$codpro=Herramientas::getX('codcon','Ocregcon','codpro',self::getCodcon());
+		$c= new Criteria();
+		$c->add(CaproveePeer::CODPRO,$codpro);
+		$resul= CaproveePeer::doSelectOne($c);
+		if ($resul)
+		{
+			$valor=$resul->getNompro();
+		}else {$valor="";}
+
+		return $valor;
+	}
 }

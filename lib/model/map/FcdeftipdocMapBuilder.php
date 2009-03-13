@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FcdeftipdocMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcdeftipdocMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcdeftipdocMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcdeftipdoc');
 		$tMap->setPhpName('Fcdeftipdoc');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcdeftipdoc_SEQ');
 
 		$tMap->addColumn('CODTIPDOC', 'Codtipdoc', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -39,6 +41,6 @@ class FcdeftipdocMapBuilder {
 		$tMap->addColumn('TEMTIPDOC', 'Temtipdoc', 'string', CreoleTypes::VARCHAR, false, 8);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

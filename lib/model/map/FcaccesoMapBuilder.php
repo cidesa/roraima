@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FcaccesoMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcaccesoMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcaccesoMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcacceso');
 		$tMap->setPhpName('Fcacceso');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcacceso_SEQ');
 
 		$tMap->addColumn('CEDULA', 'Cedula', 'string', CreoleTypes::VARCHAR, false, 14);
 
@@ -43,6 +45,6 @@ class FcaccesoMapBuilder {
 		$tMap->addColumn('ANUPAG', 'Anupag', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

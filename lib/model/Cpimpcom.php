@@ -3,10 +3,102 @@
 /**
  * Subclass for representing a row from the 'cpimpcom' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class Cpimpcom extends BaseCpimpcom
 {
+  private $comprometido = '';
+  private $acausar = '';
+  private $check = '';
+  private $retiva = '';
+  private $monporpag = 0.00;
+
+  public function setComprometido($val)
+  {
+	$this->comprometido = $val;
+  }
+
+  public function getComprometido()
+  {
+  	$comprometido= self::getMonimp() - self::getMonaju();
+	return $comprometido;
+  }
+
+  public function setAcausar($val)
+  {
+	$this->acausar = $val;
+  }
+
+  public function getAcausar()
+  {
+  	$acausar= self::getMonimp() - self::getMoncau() - self::getMonaju();
+	return $acausar;
+  }
+
+  public function setCheck($val)
+  {
+	$this->check = $val;
+  }
+
+  public function getCheck()
+  {
+	return $this->check;
+  }
+
+  public function getMonporpag()
+  {
+	$montot= (self::getMonimp()-self::getMonpag()-self::getMonaju());
+	return $montot;
+  }
+
+
+   public function setMonporpag($val)
+  {
+	$this->monporpag = $val;
+  }
+
+    public function getMonporpagGrid()
+  {
+	return $this->monporpag;
+  }
+
+  public function getRetiva()
+  {
+  	$c= new Criteria();
+  	$reg= CadefartPeer::doSelectOne($c);
+  	if ($reg)
+  	{ $afectarecargo=$reg->getAsiparrec();
+  	}else {$afectarecargo='C';}
+
+  	if ($afectarecargo=='R' || $afectarecargo=='S')
+  	{
+  	  Herramientas::obtenerFormatoCategoria(&$formatopar,&$iniciopartida);
+  	  $par=substr(self::getCodpre(),$iniciopartida,strlen($formatopar));
+  	  $c= new Criteria();
+  	  $c->add(TsretivaPeer::CODPAR,$par);
+  	  $datos= TsretivaPeer::doSelectOne($c);
+  	  if ($datos)
+  	  {
+  		return 'S';
+  	  }else return 'N';
+   }else if ($afectarecargo=='P')
+   {
+   	  $c= new Criteria();
+  	  $c->add(TsretivaPeer::CODPAR,self::getCodpre());
+  	  $datos= TsretivaPeer::doSelectOne($c);
+  	  if ($datos)
+  	  {
+  		return 'S';
+  	  }else return 'N';
+
+   }
+  }
+
+  public function setRetiva($val)
+  {
+	$this->retiva = $val;
+  }
+
 }

@@ -37,7 +37,15 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 
 
 	
+	protected $codubi;
+
+
+	
 	protected $tipmov;
+
+
+	
+	protected $observ;
 
 
 	
@@ -49,206 +57,274 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsal()
-	{
+  
+  public function getCodsal()
+  {
 
-		return $this->codsal; 		
-	}
-	
-	public function getFecsal($format = 'Y-m-d')
-	{
+    return trim($this->codsal);
 
-		if ($this->fecsal === null || $this->fecsal === '') {
-			return null;
-		} elseif (!is_int($this->fecsal)) {
-						$ts = strtotime($this->fecsal);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecsal] as date/time value: " . var_export($this->fecsal, true));
-			}
-		} else {
-			$ts = $this->fecsal;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecsal($format = 'Y-m-d')
+  {
 
-	
-	public function getDessal()
-	{
+    if ($this->fecsal === null || $this->fecsal === '') {
+      return null;
+    } elseif (!is_int($this->fecsal)) {
+            $ts = adodb_strtotime($this->fecsal);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsal] as date/time value: " . var_export($this->fecsal, true));
+      }
+    } else {
+      $ts = $this->fecsal;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->dessal; 		
-	}
-	
-	public function getCodpro()
-	{
+  
+  public function getDessal()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getMonsal()
-	{
+    return trim($this->dessal);
 
-		return number_format($this->monsal,2,',','.');
-		
-	}
-	
-	public function getStasal()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->stasal; 		
-	}
-	
-	public function getCodalm()
-	{
+    return trim($this->codpro);
 
-		return $this->codalm; 		
-	}
-	
-	public function getTipmov()
-	{
+  }
+  
+  public function getMonsal($val=false)
+  {
 
-		return $this->tipmov; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monsal,2,',','.');
+    else return $this->monsal;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStasal()
+  {
+
+    return trim($this->stasal);
+
+  }
+  
+  public function getCodalm()
+  {
+
+    return trim($this->codalm);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getTipmov()
+  {
+
+    return trim($this->tipmov);
+
+  }
+  
+  public function getObserv()
+  {
+
+    return trim($this->observ);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsal($v)
 	{
 
-		if ($this->codsal !== $v) {
-			$this->codsal = $v;
-			$this->modifiedColumns[] = CasalalmPeer::CODSAL;
-		}
-
+    if ($this->codsal !== $v) {
+        $this->codsal = $v;
+        $this->modifiedColumns[] = CasalalmPeer::CODSAL;
+      }
+  
 	} 
 	
 	public function setFecsal($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecsal] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecsal !== $ts) {
-			$this->fecsal = $ts;
-			$this->modifiedColumns[] = CasalalmPeer::FECSAL;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsal] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsal !== $ts) {
+      $this->fecsal = $ts;
+      $this->modifiedColumns[] = CasalalmPeer::FECSAL;
+    }
 
 	} 
 	
 	public function setDessal($v)
 	{
 
-		if ($this->dessal !== $v) {
-			$this->dessal = $v;
-			$this->modifiedColumns[] = CasalalmPeer::DESSAL;
-		}
-
+    if ($this->dessal !== $v) {
+        $this->dessal = $v;
+        $this->modifiedColumns[] = CasalalmPeer::DESSAL;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CasalalmPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CasalalmPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setMonsal($v)
 	{
 
-		if ($this->monsal !== $v) {
-			$this->monsal = $v;
-			$this->modifiedColumns[] = CasalalmPeer::MONSAL;
-		}
-
+    if ($this->monsal !== $v) {
+        $this->monsal = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CasalalmPeer::MONSAL;
+      }
+  
 	} 
 	
 	public function setStasal($v)
 	{
 
-		if ($this->stasal !== $v) {
-			$this->stasal = $v;
-			$this->modifiedColumns[] = CasalalmPeer::STASAL;
-		}
-
+    if ($this->stasal !== $v) {
+        $this->stasal = $v;
+        $this->modifiedColumns[] = CasalalmPeer::STASAL;
+      }
+  
 	} 
 	
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = CasalalmPeer::CODALM;
-		}
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CasalalmPeer::CODALM;
+      }
+  
+	} 
+	
+	public function setCodubi($v)
+	{
 
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CasalalmPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setTipmov($v)
 	{
 
-		if ($this->tipmov !== $v) {
-			$this->tipmov = $v;
-			$this->modifiedColumns[] = CasalalmPeer::TIPMOV;
-		}
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = CasalalmPeer::TIPMOV;
+      }
+  
+	} 
+	
+	public function setObserv($v)
+	{
 
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = CasalalmPeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CasalalmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CasalalmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsal = $rs->getString($startcol + 0);
+      $this->codsal = $rs->getString($startcol + 0);
 
-			$this->fecsal = $rs->getDate($startcol + 1, null);
+      $this->fecsal = $rs->getDate($startcol + 1, null);
 
-			$this->dessal = $rs->getString($startcol + 2);
+      $this->dessal = $rs->getString($startcol + 2);
 
-			$this->codpro = $rs->getString($startcol + 3);
+      $this->codpro = $rs->getString($startcol + 3);
 
-			$this->monsal = $rs->getFloat($startcol + 4);
+      $this->monsal = $rs->getFloat($startcol + 4);
 
-			$this->stasal = $rs->getString($startcol + 5);
+      $this->stasal = $rs->getString($startcol + 5);
 
-			$this->codalm = $rs->getString($startcol + 6);
+      $this->codalm = $rs->getString($startcol + 6);
 
-			$this->tipmov = $rs->getString($startcol + 7);
+      $this->codubi = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->tipmov = $rs->getString($startcol + 8);
 
-			$this->resetModified();
+      $this->observ = $rs->getString($startcol + 9);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 10);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Casalalm object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Casalalm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -305,6 +381,7 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CasalalmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CasalalmPeer::doUpdate($this, $con);
@@ -392,9 +469,15 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 				return $this->getCodalm();
 				break;
 			case 7:
-				return $this->getTipmov();
+				return $this->getCodubi();
 				break;
 			case 8:
+				return $this->getTipmov();
+				break;
+			case 9:
+				return $this->getObserv();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -414,8 +497,10 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 			$keys[4] => $this->getMonsal(),
 			$keys[5] => $this->getStasal(),
 			$keys[6] => $this->getCodalm(),
-			$keys[7] => $this->getTipmov(),
-			$keys[8] => $this->getId(),
+			$keys[7] => $this->getCodubi(),
+			$keys[8] => $this->getTipmov(),
+			$keys[9] => $this->getObserv(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -453,9 +538,15 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 				$this->setCodalm($value);
 				break;
 			case 7:
-				$this->setTipmov($value);
+				$this->setCodubi($value);
 				break;
 			case 8:
+				$this->setTipmov($value);
+				break;
+			case 9:
+				$this->setObserv($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -472,8 +563,10 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setMonsal($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setStasal($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodalm($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setTipmov($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCodubi($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setTipmov($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setObserv($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -488,7 +581,9 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CasalalmPeer::MONSAL)) $criteria->add(CasalalmPeer::MONSAL, $this->monsal);
 		if ($this->isColumnModified(CasalalmPeer::STASAL)) $criteria->add(CasalalmPeer::STASAL, $this->stasal);
 		if ($this->isColumnModified(CasalalmPeer::CODALM)) $criteria->add(CasalalmPeer::CODALM, $this->codalm);
+		if ($this->isColumnModified(CasalalmPeer::CODUBI)) $criteria->add(CasalalmPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CasalalmPeer::TIPMOV)) $criteria->add(CasalalmPeer::TIPMOV, $this->tipmov);
+		if ($this->isColumnModified(CasalalmPeer::OBSERV)) $criteria->add(CasalalmPeer::OBSERV, $this->observ);
 		if ($this->isColumnModified(CasalalmPeer::ID)) $criteria->add(CasalalmPeer::ID, $this->id);
 
 		return $criteria;
@@ -534,7 +629,11 @@ abstract class BaseCasalalm extends BaseObject  implements Persistent {
 
 		$copyObj->setCodalm($this->codalm);
 
+		$copyObj->setCodubi($this->codubi);
+
 		$copyObj->setTipmov($this->tipmov);
+
+		$copyObj->setObserv($this->observ);
 
 
 		$copyObj->setNew(true);

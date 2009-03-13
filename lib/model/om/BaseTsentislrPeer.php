@@ -215,6 +215,7 @@ abstract class BaseTsentislrPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsentislrPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

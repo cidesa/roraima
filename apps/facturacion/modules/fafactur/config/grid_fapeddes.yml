@@ -1,0 +1,33 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  name:                    e
+  tabla:                   Fapedido
+  anchogrid:               800
+  ancho:                   600
+  filas:                   20
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Marque
+  tipo:                    k
+  nombrecampo:             check
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Número
+  tipo:                    t
+  nombrecampo:             nroped
+  esgrabable:              true
+  html:                    [size="15", readonly=true ]
+3:       # Columna 3
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desped
+  html:                    [size="20", readonly=true ]
+4:       # Columna 4
+  titulo:                  Fecha
+  tipo:                    f
+  esgrabable:              true
+  nombrecampo:             fecped
+  vacia:                   true
+  html:                    [size="10", readonly=true ]

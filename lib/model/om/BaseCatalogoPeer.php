@@ -230,6 +230,7 @@ abstract class BaseCatalogoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CatalogoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

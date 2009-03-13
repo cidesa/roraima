@@ -45,167 +45,197 @@ abstract class BaseNpcalconcol extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodctr()
-	{
+  
+  public function getCodctr()
+  {
 
-		return $this->codctr; 		
-	}
-	
-	public function getCodcla()
-	{
+    return trim($this->codctr);
 
-		return $this->codcla; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getCodcla()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCantra()
-	{
+    return trim($this->codcla);
 
-		return number_format($this->cantra,2,',','.');
-		
-	}
-	
-	public function getMoncla()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return number_format($this->moncla,2,',','.');
-		
-	}
-	
-	public function getTotcla()
-	{
+    return trim($this->codcon);
 
-		return number_format($this->totcla,2,',','.');
-		
-	}
-	
-	public function getBascal()
-	{
+  }
+  
+  public function getCantra($val=false)
+  {
 
-		return $this->bascal; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->cantra,2,',','.');
+    else return $this->cantra;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMoncla($val=false)
+  {
+
+    if($val) return number_format($this->moncla,2,',','.');
+    else return $this->moncla;
+
+  }
+  
+  public function getTotcla($val=false)
+  {
+
+    if($val) return number_format($this->totcla,2,',','.');
+    else return $this->totcla;
+
+  }
+  
+  public function getBascal()
+  {
+
+    return trim($this->bascal);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodctr($v)
 	{
 
-		if ($this->codctr !== $v) {
-			$this->codctr = $v;
-			$this->modifiedColumns[] = NpcalconcolPeer::CODCTR;
-		}
-
+    if ($this->codctr !== $v) {
+        $this->codctr = $v;
+        $this->modifiedColumns[] = NpcalconcolPeer::CODCTR;
+      }
+  
 	} 
 	
 	public function setCodcla($v)
 	{
 
-		if ($this->codcla !== $v) {
-			$this->codcla = $v;
-			$this->modifiedColumns[] = NpcalconcolPeer::CODCLA;
-		}
-
+    if ($this->codcla !== $v) {
+        $this->codcla = $v;
+        $this->modifiedColumns[] = NpcalconcolPeer::CODCLA;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpcalconcolPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpcalconcolPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCantra($v)
 	{
 
-		if ($this->cantra !== $v) {
-			$this->cantra = $v;
-			$this->modifiedColumns[] = NpcalconcolPeer::CANTRA;
-		}
-
+    if ($this->cantra !== $v) {
+        $this->cantra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalconcolPeer::CANTRA;
+      }
+  
 	} 
 	
 	public function setMoncla($v)
 	{
 
-		if ($this->moncla !== $v) {
-			$this->moncla = $v;
-			$this->modifiedColumns[] = NpcalconcolPeer::MONCLA;
-		}
-
+    if ($this->moncla !== $v) {
+        $this->moncla = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalconcolPeer::MONCLA;
+      }
+  
 	} 
 	
 	public function setTotcla($v)
 	{
 
-		if ($this->totcla !== $v) {
-			$this->totcla = $v;
-			$this->modifiedColumns[] = NpcalconcolPeer::TOTCLA;
-		}
-
+    if ($this->totcla !== $v) {
+        $this->totcla = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalconcolPeer::TOTCLA;
+      }
+  
 	} 
 	
 	public function setBascal($v)
 	{
 
-		if ($this->bascal !== $v) {
-			$this->bascal = $v;
-			$this->modifiedColumns[] = NpcalconcolPeer::BASCAL;
-		}
-
+    if ($this->bascal !== $v) {
+        $this->bascal = $v;
+        $this->modifiedColumns[] = NpcalconcolPeer::BASCAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcalconcolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcalconcolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codctr = $rs->getString($startcol + 0);
+      $this->codctr = $rs->getString($startcol + 0);
 
-			$this->codcla = $rs->getString($startcol + 1);
+      $this->codcla = $rs->getString($startcol + 1);
 
-			$this->codcon = $rs->getString($startcol + 2);
+      $this->codcon = $rs->getString($startcol + 2);
 
-			$this->cantra = $rs->getFloat($startcol + 3);
+      $this->cantra = $rs->getFloat($startcol + 3);
 
-			$this->moncla = $rs->getFloat($startcol + 4);
+      $this->moncla = $rs->getFloat($startcol + 4);
 
-			$this->totcla = $rs->getFloat($startcol + 5);
+      $this->totcla = $rs->getFloat($startcol + 5);
 
-			$this->bascal = $rs->getString($startcol + 6);
+      $this->bascal = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcalconcol object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcalconcol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -262,6 +292,7 @@ abstract class BaseNpcalconcol extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcalconcolPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcalconcolPeer::doUpdate($this, $con);

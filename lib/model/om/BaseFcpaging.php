@@ -37,129 +37,157 @@ abstract class BaseFcpaging extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefere()
-	{
+  
+  public function getRefere()
+  {
 
-		return $this->refere; 		
-	}
-	
-	public function getTippag()
-	{
+    return trim($this->refere);
 
-		return $this->tippag; 		
-	}
-	
-	public function getMoning()
-	{
+  }
+  
+  public function getTippag()
+  {
 
-		return number_format($this->moning,2,',','.');
-		
-	}
-	
-	public function getNumref()
-	{
+    return trim($this->tippag);
 
-		return $this->numref; 		
-	}
-	
-	public function getNomref()
-	{
+  }
+  
+  public function getMoning($val=false)
+  {
 
-		return $this->nomref; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->moning,2,',','.');
+    else return $this->moning;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumref()
+  {
+
+    return trim($this->numref);
+
+  }
+  
+  public function getNomref()
+  {
+
+    return trim($this->nomref);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefere($v)
 	{
 
-		if ($this->refere !== $v) {
-			$this->refere = $v;
-			$this->modifiedColumns[] = FcpagingPeer::REFERE;
-		}
-
+    if ($this->refere !== $v) {
+        $this->refere = $v;
+        $this->modifiedColumns[] = FcpagingPeer::REFERE;
+      }
+  
 	} 
 	
 	public function setTippag($v)
 	{
 
-		if ($this->tippag !== $v) {
-			$this->tippag = $v;
-			$this->modifiedColumns[] = FcpagingPeer::TIPPAG;
-		}
-
+    if ($this->tippag !== $v) {
+        $this->tippag = $v;
+        $this->modifiedColumns[] = FcpagingPeer::TIPPAG;
+      }
+  
 	} 
 	
 	public function setMoning($v)
 	{
 
-		if ($this->moning !== $v) {
-			$this->moning = $v;
-			$this->modifiedColumns[] = FcpagingPeer::MONING;
-		}
-
+    if ($this->moning !== $v) {
+        $this->moning = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcpagingPeer::MONING;
+      }
+  
 	} 
 	
 	public function setNumref($v)
 	{
 
-		if ($this->numref !== $v) {
-			$this->numref = $v;
-			$this->modifiedColumns[] = FcpagingPeer::NUMREF;
-		}
-
+    if ($this->numref !== $v) {
+        $this->numref = $v;
+        $this->modifiedColumns[] = FcpagingPeer::NUMREF;
+      }
+  
 	} 
 	
 	public function setNomref($v)
 	{
 
-		if ($this->nomref !== $v) {
-			$this->nomref = $v;
-			$this->modifiedColumns[] = FcpagingPeer::NOMREF;
-		}
-
+    if ($this->nomref !== $v) {
+        $this->nomref = $v;
+        $this->modifiedColumns[] = FcpagingPeer::NOMREF;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcpagingPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcpagingPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refere = $rs->getString($startcol + 0);
+      $this->refere = $rs->getString($startcol + 0);
 
-			$this->tippag = $rs->getString($startcol + 1);
+      $this->tippag = $rs->getString($startcol + 1);
 
-			$this->moning = $rs->getFloat($startcol + 2);
+      $this->moning = $rs->getFloat($startcol + 2);
 
-			$this->numref = $rs->getString($startcol + 3);
+      $this->numref = $rs->getString($startcol + 3);
 
-			$this->nomref = $rs->getString($startcol + 4);
+      $this->nomref = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcpaging object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcpaging object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +244,7 @@ abstract class BaseFcpaging extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcpagingPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcpagingPeer::doUpdate($this, $con);

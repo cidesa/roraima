@@ -37,129 +37,157 @@ abstract class BaseFcaliuso extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoduso()
-	{
+  
+  public function getCoduso()
+  {
 
-		return $this->coduso; 		
-	}
-	
-	public function getAnovig()
-	{
+    return trim($this->coduso);
 
-		return $this->anovig; 		
-	}
-	
-	public function getNomuso()
-	{
+  }
+  
+  public function getAnovig()
+  {
 
-		return $this->nomuso; 		
-	}
-	
-	public function getAlimon()
-	{
+    return trim($this->anovig);
 
-		return number_format($this->alimon,2,',','.');
-		
-	}
-	
-	public function getPormon()
-	{
+  }
+  
+  public function getNomuso()
+  {
 
-		return $this->pormon; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomuso);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getAlimon($val=false)
+  {
+
+    if($val) return number_format($this->alimon,2,',','.');
+    else return $this->alimon;
+
+  }
+  
+  public function getPormon()
+  {
+
+    return trim($this->pormon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoduso($v)
 	{
 
-		if ($this->coduso !== $v) {
-			$this->coduso = $v;
-			$this->modifiedColumns[] = FcaliusoPeer::CODUSO;
-		}
-
+    if ($this->coduso !== $v) {
+        $this->coduso = $v;
+        $this->modifiedColumns[] = FcaliusoPeer::CODUSO;
+      }
+  
 	} 
 	
 	public function setAnovig($v)
 	{
 
-		if ($this->anovig !== $v) {
-			$this->anovig = $v;
-			$this->modifiedColumns[] = FcaliusoPeer::ANOVIG;
-		}
-
+    if ($this->anovig !== $v) {
+        $this->anovig = $v;
+        $this->modifiedColumns[] = FcaliusoPeer::ANOVIG;
+      }
+  
 	} 
 	
 	public function setNomuso($v)
 	{
 
-		if ($this->nomuso !== $v) {
-			$this->nomuso = $v;
-			$this->modifiedColumns[] = FcaliusoPeer::NOMUSO;
-		}
-
+    if ($this->nomuso !== $v) {
+        $this->nomuso = $v;
+        $this->modifiedColumns[] = FcaliusoPeer::NOMUSO;
+      }
+  
 	} 
 	
 	public function setAlimon($v)
 	{
 
-		if ($this->alimon !== $v) {
-			$this->alimon = $v;
-			$this->modifiedColumns[] = FcaliusoPeer::ALIMON;
-		}
-
+    if ($this->alimon !== $v) {
+        $this->alimon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcaliusoPeer::ALIMON;
+      }
+  
 	} 
 	
 	public function setPormon($v)
 	{
 
-		if ($this->pormon !== $v) {
-			$this->pormon = $v;
-			$this->modifiedColumns[] = FcaliusoPeer::PORMON;
-		}
-
+    if ($this->pormon !== $v) {
+        $this->pormon = $v;
+        $this->modifiedColumns[] = FcaliusoPeer::PORMON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcaliusoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcaliusoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduso = $rs->getString($startcol + 0);
+      $this->coduso = $rs->getString($startcol + 0);
 
-			$this->anovig = $rs->getString($startcol + 1);
+      $this->anovig = $rs->getString($startcol + 1);
 
-			$this->nomuso = $rs->getString($startcol + 2);
+      $this->nomuso = $rs->getString($startcol + 2);
 
-			$this->alimon = $rs->getFloat($startcol + 3);
+      $this->alimon = $rs->getFloat($startcol + 3);
 
-			$this->pormon = $rs->getString($startcol + 4);
+      $this->pormon = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcaliuso object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcaliuso object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +244,7 @@ abstract class BaseFcaliuso extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcaliusoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcaliusoPeer::doUpdate($this, $con);

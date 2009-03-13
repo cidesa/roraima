@@ -61,283 +61,315 @@ abstract class BaseFapedido extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNroped()
-	{
+  
+  public function getNroped()
+  {
 
-		return $this->nroped; 		
-	}
-	
-	public function getFecped($format = 'Y-m-d')
-	{
+    return trim($this->nroped);
 
-		if ($this->fecped === null || $this->fecped === '') {
-			return null;
-		} elseif (!is_int($this->fecped)) {
-						$ts = strtotime($this->fecped);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecped] as date/time value: " . var_export($this->fecped, true));
-			}
-		} else {
-			$ts = $this->fecped;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecped($format = 'Y-m-d')
+  {
 
-	
-	public function getRefped()
-	{
+    if ($this->fecped === null || $this->fecped === '') {
+      return null;
+    } elseif (!is_int($this->fecped)) {
+            $ts = adodb_strtotime($this->fecped);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecped] as date/time value: " . var_export($this->fecped, true));
+      }
+    } else {
+      $ts = $this->fecped;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->refped; 		
-	}
-	
-	public function getTipref()
-	{
+  
+  public function getRefped()
+  {
 
-		return $this->tipref; 		
-	}
-	
-	public function getCodcli()
-	{
+    return trim($this->refped);
 
-		return $this->codcli; 		
-	}
-	
-	public function getDesped()
-	{
+  }
+  
+  public function getTipref()
+  {
 
-		return $this->desped; 		
-	}
-	
-	public function getMonped()
-	{
+    return trim($this->tipref);
 
-		return number_format($this->monped,2,',','.');
-		
-	}
-	
-	public function getObsped()
-	{
+  }
+  
+  public function getCodcli()
+  {
 
-		return $this->obsped; 		
-	}
-	
-	public function getReapor()
-	{
+    return trim($this->codcli);
 
-		return $this->reapor; 		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getDesped()
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    return trim($this->desped);
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMonped($val=false)
+  {
 
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monped,2,',','.');
+    else return $this->monped;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getObsped()
+  {
+
+    return trim($this->obsped);
+
+  }
+  
+  public function getReapor()
+  {
+
+    return trim($this->reapor);
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNroped($v)
 	{
 
-		if ($this->nroped !== $v) {
-			$this->nroped = $v;
-			$this->modifiedColumns[] = FapedidoPeer::NROPED;
-		}
-
+    if ($this->nroped !== $v) {
+        $this->nroped = $v;
+        $this->modifiedColumns[] = FapedidoPeer::NROPED;
+      }
+  
 	} 
 	
 	public function setFecped($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecped] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecped !== $ts) {
-			$this->fecped = $ts;
-			$this->modifiedColumns[] = FapedidoPeer::FECPED;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecped] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecped !== $ts) {
+      $this->fecped = $ts;
+      $this->modifiedColumns[] = FapedidoPeer::FECPED;
+    }
 
 	} 
 	
 	public function setRefped($v)
 	{
 
-		if ($this->refped !== $v) {
-			$this->refped = $v;
-			$this->modifiedColumns[] = FapedidoPeer::REFPED;
-		}
-
+    if ($this->refped !== $v) {
+        $this->refped = $v;
+        $this->modifiedColumns[] = FapedidoPeer::REFPED;
+      }
+  
 	} 
 	
 	public function setTipref($v)
 	{
 
-		if ($this->tipref !== $v) {
-			$this->tipref = $v;
-			$this->modifiedColumns[] = FapedidoPeer::TIPREF;
-		}
-
+    if ($this->tipref !== $v) {
+        $this->tipref = $v;
+        $this->modifiedColumns[] = FapedidoPeer::TIPREF;
+      }
+  
 	} 
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = FapedidoPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = FapedidoPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setDesped($v)
 	{
 
-		if ($this->desped !== $v) {
-			$this->desped = $v;
-			$this->modifiedColumns[] = FapedidoPeer::DESPED;
-		}
-
+    if ($this->desped !== $v) {
+        $this->desped = $v;
+        $this->modifiedColumns[] = FapedidoPeer::DESPED;
+      }
+  
 	} 
 	
 	public function setMonped($v)
 	{
 
-		if ($this->monped !== $v) {
-			$this->monped = $v;
-			$this->modifiedColumns[] = FapedidoPeer::MONPED;
-		}
-
+    if ($this->monped !== $v) {
+        $this->monped = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FapedidoPeer::MONPED;
+      }
+  
 	} 
 	
 	public function setObsped($v)
 	{
 
-		if ($this->obsped !== $v) {
-			$this->obsped = $v;
-			$this->modifiedColumns[] = FapedidoPeer::OBSPED;
-		}
-
+    if ($this->obsped !== $v) {
+        $this->obsped = $v;
+        $this->modifiedColumns[] = FapedidoPeer::OBSPED;
+      }
+  
 	} 
 	
 	public function setReapor($v)
 	{
 
-		if ($this->reapor !== $v) {
-			$this->reapor = $v;
-			$this->modifiedColumns[] = FapedidoPeer::REAPOR;
-		}
-
+    if ($this->reapor !== $v) {
+        $this->reapor = $v;
+        $this->modifiedColumns[] = FapedidoPeer::REAPOR;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = FapedidoPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = FapedidoPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = FapedidoPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = FapedidoPeer::FECANU;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FapedidoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FapedidoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nroped = $rs->getString($startcol + 0);
+      $this->nroped = $rs->getString($startcol + 0);
 
-			$this->fecped = $rs->getDate($startcol + 1, null);
+      $this->fecped = $rs->getDate($startcol + 1, null);
 
-			$this->refped = $rs->getString($startcol + 2);
+      $this->refped = $rs->getString($startcol + 2);
 
-			$this->tipref = $rs->getString($startcol + 3);
+      $this->tipref = $rs->getString($startcol + 3);
 
-			$this->codcli = $rs->getString($startcol + 4);
+      $this->codcli = $rs->getString($startcol + 4);
 
-			$this->desped = $rs->getString($startcol + 5);
+      $this->desped = $rs->getString($startcol + 5);
 
-			$this->monped = $rs->getFloat($startcol + 6);
+      $this->monped = $rs->getFloat($startcol + 6);
 
-			$this->obsped = $rs->getString($startcol + 7);
+      $this->obsped = $rs->getString($startcol + 7);
 
-			$this->reapor = $rs->getString($startcol + 8);
+      $this->reapor = $rs->getString($startcol + 8);
 
-			$this->status = $rs->getString($startcol + 9);
+      $this->status = $rs->getString($startcol + 9);
 
-			$this->fecanu = $rs->getDate($startcol + 10, null);
+      $this->fecanu = $rs->getDate($startcol + 10, null);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fapedido object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fapedido object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -394,6 +426,7 @@ abstract class BaseFapedido extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FapedidoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FapedidoPeer::doUpdate($this, $con);

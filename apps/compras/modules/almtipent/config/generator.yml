@@ -4,17 +4,22 @@ generator:
     model_class:      Catipent
     theme:            default
     fields:
-      codtipent:  {  name: Código}
-      destipent:  {  name: Descripción}
+      codtipent:  {  name: Código, params: maxlength=3}
+      destipent:  {  name: Descripción, params: maxlength=50}
     list:
-      title:          Lista de Artículos
-      display:        [=codtipent, destipent]    
+      title:          Definición de Tipos de Entrada
+      display:        [=codtipent, destipent]
+      filters:        [codtipent, destipent]
       object_actions:
         _edit:        ~
-        _delete:      ~              
-      filters:        [codtipent]
+        _delete:      ~
       max_per_page:   5
+      sort:           codtipent
     edit:
-      title:          Editar Artículos
-      display:
-        Editable:     [codtipent, destipent]
+      title:          Definición de Tipos de Entrada
+      display:		  [codtipent, destipent]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

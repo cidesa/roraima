@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class BndisinmMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.BndisinmMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.BndisinmMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('bndisinm');
 		$tMap->setPhpName('Bndisinm');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('bndisinm_SEQ');
 
 		$tMap->addColumn('CODACT', 'Codact', 'string', CreoleTypes::VARCHAR, true, 30);
 
@@ -42,11 +44,11 @@ class BndisinmMapBuilder {
 
 		$tMap->addColumn('TIPDISINM', 'Tipdisinm', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('FECDISINM', 'Fecdisinm', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDISINM', 'Fecdisinm', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECDEVDIS', 'Fecdevdis', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDEVDIS', 'Fecdevdis', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('MONDISINM', 'Mondisinm', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONDISINM', 'Mondisinm', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('DETDISINM', 'Detdisinm', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -59,6 +61,6 @@ class BndisinmMapBuilder {
 		$tMap->addColumn('STADISINM', 'Stadisinm', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

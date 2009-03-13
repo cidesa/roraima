@@ -240,6 +240,7 @@ abstract class BaseNpvacantPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpvacantPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

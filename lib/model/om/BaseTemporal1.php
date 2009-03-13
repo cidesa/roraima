@@ -33,133 +33,159 @@ abstract class BaseTemporal1 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomemp()
-	{
+    return trim($this->codemp);
 
-		return $this->nomemp; 		
-	}
-	
-	public function getCodcar()
-	{
+  }
+  
+  public function getNomemp()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getFecasi($format = 'Y-m-d')
-	{
+    return trim($this->nomemp);
 
-		if ($this->fecasi === null || $this->fecasi === '') {
-			return null;
-		} elseif (!is_int($this->fecasi)) {
-						$ts = strtotime($this->fecasi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecasi] as date/time value: " . var_export($this->fecasi, true));
-			}
-		} else {
-			$ts = $this->fecasi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodcar()
+  {
 
-	
-	public function getId()
-	{
+    return trim($this->codcar);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFecasi($format = 'Y-m-d')
+  {
+
+    if ($this->fecasi === null || $this->fecasi === '') {
+      return null;
+    } elseif (!is_int($this->fecasi)) {
+            $ts = adodb_strtotime($this->fecasi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecasi] as date/time value: " . var_export($this->fecasi, true));
+      }
+    } else {
+      $ts = $this->fecasi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = Temporal1Peer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = Temporal1Peer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = Temporal1Peer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = Temporal1Peer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = Temporal1Peer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = Temporal1Peer::CODCAR;
+      }
+  
 	} 
 	
 	public function setFecasi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecasi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecasi !== $ts) {
-			$this->fecasi = $ts;
-			$this->modifiedColumns[] = Temporal1Peer::FECASI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecasi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecasi !== $ts) {
+      $this->fecasi = $ts;
+      $this->modifiedColumns[] = Temporal1Peer::FECASI;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Temporal1Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Temporal1Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->nomemp = $rs->getString($startcol + 1);
+      $this->nomemp = $rs->getString($startcol + 1);
 
-			$this->codcar = $rs->getString($startcol + 2);
+      $this->codcar = $rs->getString($startcol + 2);
 
-			$this->fecasi = $rs->getDate($startcol + 3, null);
+      $this->fecasi = $rs->getDate($startcol + 3, null);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Temporal1 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Temporal1 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +242,7 @@ abstract class BaseTemporal1 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Temporal1Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Temporal1Peer::doUpdate($this, $con);

@@ -7,71 +7,79 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','bienes/bieregactmued','ajax','tools','observe') ?>
 <?php echo object_input_hidden_tag($bnregmue, 'getId') ?>
-<a name="back"></a>
-&nbsp;
-&nbsp;
-&nbsp;
-<div class="form-row"><span lang=ES-VE>
-<img src=" /images/vineta.gif" >&nbsp;<a href="#regitro"> <span lang=ES-VE>Registro&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-<img src=" /images/vineta.gif" >&nbsp;<a href="#caracteristicas"> <span lang=ES-VE>Características Mueble&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-<img src=" /images/vineta.gif" >&nbsp;<a href="#costo"> <span lang=ES-VE>Costo&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-<img src=" /images/vineta.gif">&nbsp;<a href="#guardar"> <span lang=ES-VE>Ir a  Guardar&nbsp;&nbsp;&nbsp;&nbsp;</span></a>
-</div>
-&nbsp;
+<?php echo object_input_hidden_tag($bnregmue, 'getStamue') ?>
+<?php tabMainJS("tp1","tabPane1", "tabPage1", 'Registro ');?>
 <a name="registro"></a>
 <fieldset>
-<legend>Registro</legend>
+<legend><? echo __('Registro') ?></legend>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend>Datos Principales</legend>
+<legend><? echo __('Datos Principales') ?></legend>
 <div class="form-row">
   <?php echo label_for('bnregmue[codact]', __($labels['bnregmue{codact}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{codact}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{codact}')): ?>
     <?php echo form_error('bnregmue{codact}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
+&nbsp;&nbsp;
   <?php $value = object_input_tag($bnregmue, 'getCodact', array (
-  'size' => 20,
-  'maxlength' => 30,
+  'size' => 16,
   'control_name' => 'bnregmue[codact]',
+  'maxlength' => $lonact,
+  'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$foract')",
+  'onBlur'=> remote_function(array(
+        'url'      => 'bieregactmued/ajax',
+         'condition' => "$('bnregmue_codact').value != '' && $('id').value == ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=bnregmue_codact&cajtexcom=bnregmue_desmue&codigo='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Código Activo:  ' ?></strong>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bndefact_Bieregactmued/clase/Bndefact/frame/sf_admin_edit_form/obj1/bnregmue_codact/obj2/bnregmue_desmue/campo1/codact/campo2/desact')?>
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong><? echo __('Código Activo:') ?></strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <?php $value = object_input_tag($bnregmue, 'getCodmue', array (
-  'size' => 20,
+  'size' => 12,
   'control_name' => 'bnregmue[codmue]',
   'maxlength' => 20,
+  'onBlur'=> "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bnregmue_codmue').value=valor;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-<br>    
+<br>
   <?php echo label_for('bnregmue[desmue]', __($labels['bnregmue{desmue}']),'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{desmue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{desmue}')): ?>
     <?php echo form_error('bnregmue{desmue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
+&nbsp;&nbsp;
   <?php $value = object_input_tag($bnregmue, 'getDesmue', array (
-  'size' => 80,
+  'size' => 66,
+  'maxlength' => 250,
   'control_name' => 'bnregmue[desmue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-  <br>     
+  <br>
  <?php echo label_for('bnregmue[codalt]', __($labels['bnregmue{codalt}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{codalt}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{codalt}')): ?>
     <?php echo form_error('bnregmue{codalt}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
+&nbsp;&nbsp;
   <?php $value = object_input_tag($bnregmue, 'getCodalt', array (
-  'size' => 30,
+  'size' => 20,
+  'maxlength' => 30,
   'control_name' => 'bnregmue[codalt]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>    
+    </div>
 </div>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
@@ -81,17 +89,33 @@
   <?php if ($sf_request->hasError('bnregmue{ordcom}')): ?>
     <?php echo form_error('bnregmue{ordcom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-    <?php $value = object_input_tag($bnregmue, 'getOrdcom', array (
-  'size' => 20,
+
+  <?php $value = object_input_tag($bnregmue, 'getOrdcom', array (
+  'size' => 15,
+  'maxlength' => 8,
   'control_name' => 'bnregmue[ordcom]',
+  'onBlur'=> remote_function(array(
+        'url' => 'bieregactmued/ajax',
+        'condition' => "$('bnregmue_ordcom').value != '' && $('id').value == ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'with' => "'ajax=2&cajtexmos=bnregmue_ordcom&cajtexmos_uno=bnregmue_codpro&cajtexmos_dos=nomprovee&cajtexmos_tres=bnregmue_feccom&codigo='+this.value",
+        )),
 )); echo $value ? $value : '&nbsp;' ?>
+
 &nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Factura:  ' ?></strong>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caordcom_Bieregactmued/clase/Caordcom/frame/sf_admin_edit_form/obj1/bnregmue_ordcom/obj2/bnregmue_codpro/obj3/bnregmue_feccom/obj4/nomprovee/campo1/ordcom/campo2/codpro/campo3/fecord/campo4/nompro')?>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong><? echo __('Factura:  ') ?></strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php $value = object_input_tag($bnregmue, 'getOrdrcp', array (
-  'size' => 20,
+  'size' => 13,
+  'maxlength' => 8,
   'control_name' => 'bnregmue[ordrcp]',
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('bnregmue_ordrcp').value=valor;document.getElementById('bnregmue_ordrcp').disabled=false;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
@@ -102,13 +126,14 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnregmue, 'getCodpro', array (
-  'size' => 20,
+  'size' => 15,
+  'maxlength' => 20,
   'control_name' => 'bnregmue[codpro]',
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;&nbsp;
-  <? echo input_tag('nomprovee',$bnregmue->getNomprovee(),'disabled=true,size=60')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caprovee_Bieregactmued/clase/Caprovee/frame/sf_admin_edit_form/obj1/bnregmue_codpro/obj2/nomprovee/campo1/codpro/campo2/nompro')?>
+&nbsp;
+  <? echo input_tag('nomprovee',$bnregmue->getNomprovee(),'disabled=true,size=41')?>
     </div>
 </div>
 </fieldset>
@@ -120,20 +145,28 @@
   <?php if ($sf_request->hasError('bnregmue{feccom}')): ?>
     <?php echo form_error('bnregmue{feccom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
+&nbsp;&nbsp;
   <?php $value = object_input_date_tag($bnregmue, 'getFeccom', array (
   'rich' => true,
+  'maxlength' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'bnregmue[feccom]',
   'date_format' => 'dd/MM/yyyy',
+   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Fecha Cálculo:  ' ?></strong>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong><? echo __('Fecha Cálculo:  ') ?></strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <?php $value = object_input_date_tag($bnregmue, 'getFecreg', array (
   'rich' => true,
+  'maxlength' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'bnregmue[fecreg]',
   'date_format' => 'dd/MM/yyyy',
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -141,7 +174,7 @@
 
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend>Ubicación</legend>
+<legend><? echo __('Ubicación') ?></legend>
 <div class="form-row">
   <?php echo label_for('bnregmue[codubi]', __($labels['bnregmue{codubi}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{codubi}')): ?> form-error<?php endif; ?>">
@@ -150,40 +183,55 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnregmue, 'getCodubi', array (
-  'size' => 30,
-  'maxlength' => 25,
+  'size' => 14,
   'control_name' => 'bnregmue[codubi]',
+  'maxlength' => $lonubi,
+  'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$forubi')",
+  'onBlur'=> remote_function(array(
+        'url'      => 'bieregactmued/ajax',
+        'condition' => "$('bnregmue_codubi').value != ''",
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=3&cajtexmos=bnregmue_codubi&cajtexcom=desubi&codigo='+this.value"
+        ))
 )); echo $value ? $value : '&nbsp;' ?>
+
 &nbsp;
-<?php echo button_to('...','#') ?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubibie_Bieregactmued/clase/Bnubibie/frame/sf_admin_edit_form/obj1/bnregmue_codubi/obj2/desubi/campo1/codubi/campo2/desubi')?>
 &nbsp;&nbsp;
-  <? echo input_tag('desubi',$bnregmue->getNomubicac(),'disabled=true,size=50')?>
+  <? echo input_tag('desubi',$bnregmue->getNomubicac(),'size=41')?>
     </div>
- </div>   
-</fieldset>    
+ </div>
+</fieldset>
 </div>
 
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend>Vida Util (Meses)</legend>
+<legend><? echo __('Vida Util (Meses)')?> </legend>
 <div class="form-row">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Original'?></strong>
+&nbsp;
+<strong><? echo __('Original')?></strong>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo '(+)'?></strong>
+<strong><? echo '(+)' ?></strong>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <strong><? echo '(-)'?></strong>
 <br>
   <?php $value = object_input_tag($bnregmue, 'getViduti', array (
   'size' => 20,
+  'maxlength' => 20,
+   'onkeypress' =>"javascript:return num(event)",
   'control_name' => 'bnregmue[viduti]',
-)); echo $value ? $value : '&nbsp;' ?>
+ )); echo $value ? $value : '&nbsp;' ?>
  <?php $value = object_input_tag($bnregmue, 'getAumviduti', array (
-  'size' => 7,
+  'size' => 5,
+  'maxlength' => 4,
+   'onkeypress' =>"javascript:return num(event)",
   'control_name' => 'bnregmue[aumviduti]',
 )); echo $value ? $value : '&nbsp;' ?>
   <?php $value = object_input_tag($bnregmue, 'getDimviduti', array (
-  'size' => 7,
+  'size' => 5,
+  'maxlength' => 4,
+   'onkeypress' =>"javascript:return num(event)",
   'control_name' => 'bnregmue[dimviduti]',
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -194,40 +242,41 @@
 </fielset>
 </div>
 </fieldset>
-<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
-	href="#back"> <span lang=ES-VE>Arriba</span></a></div>
-</div>
 </fieldset>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php tabPageOpenClose("tp1", "tabPage2", 'Caracteristicas del Mueble');?>
+<fieldset><legend><strong><? echo __('Condición de Pago')?></strong></legend>
+
 <a name="caracteristicas"></a>
 <fieldset>
-<legend>Características Mueble</legend>
+<legend><? echo __('Características Mueble') ?></legend>
 <div class="form-row">
 <fieldset id="sf_fieldset_none" class="">
-<legend>Datos Generales</legend>
+<legend><? echo __('Datos Generales') ?></legend>
 <div class="form-row">
-  <?php echo label_for('bnregmue[marmue]', __($labels['bnregmue{marmue}']), 'class="required" ') ?>
+
+<?php echo label_for('bnregmue[marmue]', __($labels['bnregmue{marmue}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{marmue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{marmue}')): ?>
     <?php echo form_error('bnregmue{marmue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnregmue, 'getMarmue', array (
-  'size' => 50,
+  'size' => 20,
+  'maxlength' => 50,
   'control_name' => 'bnregmue[marmue]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Modelo:  ' ?></strong>    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+<strong><? echo __('Modelo:') ?></strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <?php $value = object_input_tag($bnregmue, 'getModmue', array (
   'size' => 20,
+  'maxlength' => 20,
   'control_name' => 'bnregmue[modmue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
+
   <?php echo label_for('bnregmue[anomue]', __($labels['bnregmue{anomue}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{anomue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{anomue}')): ?>
@@ -236,17 +285,22 @@
 
   <?php $value = object_input_tag($bnregmue, 'getAnomue', array (
   'size' => 20,
+  'maxlength' =>10,
+  'onkeypress' =>"javascript:return num(event)",
   'control_name' => 'bnregmue[anomue]',
 )); echo $value ? $value : '&nbsp;' ?>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Color:  ' ?></strong>    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+<strong><? echo 'Color:  ' ?></strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <?php $value = object_input_tag($bnregmue, 'getColmue', array (
-  'size' => 25,
+  'size' => 20,
+  'maxlength' =>25,
   'control_name' => 'bnregmue[colmue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-<br>
+    <br>
+
 <?php echo label_for('bnregmue[capmue]', __($labels['bnregmue{capmue}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{capmue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{capmue}')): ?>
@@ -255,13 +309,18 @@
 
   <?php $value = object_input_tag($bnregmue, 'getCapmue', array (
   'size' => 20,
+  'maxlength' =>20,
   'control_name' => 'bnregmue[capmue]',
 )); echo $value ? $value : '&nbsp;' ?>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Tipo:  ' ?></strong> &nbsp;   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<strong><? echo __('Tipo:  ') ?></strong>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
   <?php $value = object_input_tag($bnregmue, 'getTipmue', array (
   'size' => 20,
+  'maxlength' =>20,
   'control_name' => 'bnregmue[tipmue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -274,12 +333,15 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($bnregmue, 'getSermue', array (
-  'size' => 80,
+  'size' => 65,
+  'maxlength' =>80,
   'control_name' => 'bnregmue[sermue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
-
+<table>
+<tr>
+<th>
   <?php echo label_for('bnregmue[nropie]', __($labels['bnregmue{nropie}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{nropie}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{nropie}')): ?>
@@ -288,34 +350,69 @@
 
   <?php $value = object_input_tag($bnregmue, 'getNropie', array (
   'size' => 20,
+  'maxlength' =>10,
+  'onkeypress' =>"javascript:return num(event)",
   'control_name' => 'bnregmue[nropie]',
-)); echo $value ? $value : '&nbsp;' ?>
+)); echo $value ? $value : '&nbsp;' ?>  </div>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Placa:  ' ?></strong>&nbsp;    
-  <?php $value = object_input_tag($bnregmue, 'getPesmue', array (
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<?php echo label_for('bnregmue[pesmue]', __($labels['bnregmue{pesmue}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{pesmue}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{pesmue}')): ?>
+    <?php echo form_error('bnregmue{pesmue}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+  <?php $value = object_input_tag($bnregmue,'getPesmue', array (
   'size' => 20,
+  'maxlength' =>20,
+  //'onkeypress' =>"javascript:return num(event)",
   'control_name' => 'bnregmue[pesmue]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+)); echo $value ? $value : '&nbsp;' ?></div>
+
+</th>
+</tr>
+<tr>
+<th>
 <br>
-  <?php echo label_for('bnregmue[usomue]', __($labels['bnregmue{usomue}']), 'class="required" ') ?>
+  <?php echo label_for('bnregmue[altmue]', __($labels['bnregmue{altmue}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{altmue}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{altmue}')): ?>
+    <?php echo form_error('bnregmue{altmue}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnregmue, array('getUsomue',true), array (
+  'size' => 20,
+  'maxlength' =>25,
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+  'control_name' => 'bnregmue[usomue]',
+)); echo $value ? $value : '&nbsp;' ?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<br>
+<?php echo label_for('bnregmue[usomue]', __($labels['bnregmue{usomue}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{usomue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{usomue}')): ?>
     <?php echo form_error('bnregmue{usomue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnregmue, 'getUsomue', array (
-  'size' => 20,
-  'control_name' => 'bnregmue[usomue]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Alto:  ' ?></strong> &nbsp;&nbsp;&nbsp;&nbsp;   
   <?php $value = object_input_tag($bnregmue, 'getAltmue', array (
-  'size' => 45,
+  'size' => 20,
+   'maxlength' =>45,
+     'onkeypress' =>"javascript:return num(event)",
   'control_name' => 'bnregmue[altmue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+</th>
+</tr>
+<tr>
+<th>
 <br>
   <?php echo label_for('bnregmue[larmue]', __($labels['bnregmue{larmue}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{larmue}')): ?> form-error<?php endif; ?>">
@@ -323,39 +420,63 @@
     <?php echo form_error('bnregmue{larmue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnregmue, 'getLarmue', array (
+  <?php $value = object_input_tag($bnregmue, array('getLarmue',true), array (
   'size' => 20,
+  'maxlength' =>45,
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
   'control_name' => 'bnregmue[larmue]',
 )); echo $value ? $value : '&nbsp;' ?>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<br>
+ <?php echo label_for('bnregmue[ancmue]', __($labels['bnregmue{ancmue}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{ancmue}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{ancmue}')): ?>
+    <?php echo form_error('bnregmue{ancmue}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Ancho:  ' ?></strong>   
-  <?php $value = object_input_tag($bnregmue, 'getAncmue', array (
+ <?php $value = object_input_tag($bnregmue, array('getAncmue',true), array (
   'size' => 20,
+  'maxlength' =>45,
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
   'control_name' => 'bnregmue[ancmue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+</th></tr></table>
 <div class="form-row">
-<fieldset>
-<div class="form-row">
-  <?php echo label_for('bnregmue[coddis]', __($labels['bnregmue{coddis}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('bnregmue{coddis}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('bnregmue{coddis}')): ?>
-    <?php echo form_error('bnregmue{coddis}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+    <fieldset>
+        <div class="form-row">
+          <?php echo label_for('bnregmue[coddis]', __($labels['bnregmue{coddis}']), 'class="required" ') ?>
+          <div class="content<?php if ($sf_request->hasError('bnregmue{coddis}')): ?> form-error<?php endif; ?>">
+          <?php if ($sf_request->hasError('bnregmue{coddis}')): ?>
+            <?php echo form_error('bnregmue{coddis}', array('class' => 'form-error-msg')) ?>
+          <?php endif; ?>
 
-  <?php $value = object_input_tag($bnregmue, 'getCoddis', array (
-  'size' => 25,
-  'control_name' => 'bnregmue[coddis]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<?php echo button_to('...','#') ?>
-&nbsp;&nbsp;
-  <? echo input_tag('desdis',$bnregmue->getNomdispos(),'disabled=true,size=58')?>
- </div>
-</div>
-</fieldset>
+
+      <?php $value = object_input_tag($bnregmue, 'getCoddis', array (
+      'size' => 10,
+      'control_name' => 'bnregmue[coddis]',
+      'maxlength' => 25,
+      'onBlur'=> remote_function(array(
+            'url'      => 'bieregactmued/ajax',
+            'condition' => "$('bnregmue_coddis').value != ''",
+            'complete' => 'AjaxJSON(request, json)',
+            'script' => true,
+            'with' => "'ajax=4&cajtexmos=bnregmue_coddis&cajtexcom=desdis&codigo='+this.value"
+            ))
+    )); echo $value ? $value : '&nbsp;' ?>
+
+        &nbsp;
+        <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bndisbie_Bieregactmued/clase/Bndisbie/frame/sf_admin_edit_form/obj1/bnregmue_coddis/obj2/desdis/campo1/coddis/campo2/desdis')?>
+        &nbsp;&nbsp;
+          <? echo input_tag('desdis',$bnregmue->getNomdispos(),'disabled=true,size=42')?>
+         </div>
+        </div>
+    </fieldset>
 </div>
 <div class="form-row">
   <?php echo label_for('bnregmue[detmue]','Observaciones', 'class="required" ') ?>
@@ -364,48 +485,69 @@
     <?php echo form_error('bnregmue{detmue}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 <?php $value = object_textarea_tag($bnregmue, 'getdetmue', array (
-  'size' => '80x5',
+  'size' => '83x5',
   'control_name' => 'bnregmue[detmue]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
 </fieldset>
-<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
-	href="#back"> <span lang=ES-VE>Arriba</span></a></div>
-</div>
 </fieldset>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php tabPageOpenClose("tp1", "tabPage2", 'Costo');?>
+<fieldset><legend><strong><? echo __('Condición de Pago')?></strong></legend>
 <a name="costo"></a>
 <fieldset>
-<legend>Costo</legend>
+<legend><? echo __('Costo') ?></legend>
 <div class="form-row">
 <fieldset>
-<legend>Costo Historico</legend>
+<legend><? echo __('Costo Historico') ?></legend>
+
 <div class="form-row">
+<table>
+<tr>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
   <?php echo label_for('bnregmue[valini]', __($labels['bnregmue{valini}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{valini}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnregmue{valini}')): ?>
     <?php echo form_error('bnregmue{valini}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnregmue, 'getValini', array (
-  'size' => 7,
+  <?php $value = object_input_tag($bnregmue, array('getValini',true), array (
+  'size' => 17,
+  'maxlength' =>17,
+'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
   'control_name' => 'bnregmue[valini]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Valor de Rescate:  ' ?></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
-  <?php $value = object_input_tag($bnregmue, 'getValres', array (
-  'size' => 7,
+ </div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+
+<?php echo label_for('bnregmue[valres]', __($labels['bnregmue{valres}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{valres}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{valres}')): ?>
+    <?php echo form_error('bnregmue{valres}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnregmue, array('getValres',true), array (
+  'size' => 17,
+  'maxlength' =>17,
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
   'control_name' => 'bnregmue[valres]',
 )); echo $value ? $value : '&nbsp;' ?>
  </div>
+</th>
+</tr>
+<tr>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
 <br>
   <?php echo label_for('bnregmue[depmen]', __($labels['bnregmue{depmen}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnregmue{depmen}')): ?> form-error<?php endif; ?>">
@@ -413,18 +555,38 @@
     <?php echo form_error('bnregmue{depmen}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnregmue, 'getDepmen', array (
-  'size' => 7,
+  <?php $value = object_input_tag($bnregmue, array('getDepmen',true), array (
+   'size' => 17,
+  'maxlength' =>17,
+ 'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
   'control_name' => 'bnregmue[depmen]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Depreciación Acumulada:  ' ?></strong>
-  <?php $value = object_input_tag($bnregmue, 'getDepacu', array (
-  'size' => 7,
+  </div>
+ </th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+ <?php echo label_for('bnregmue[depacu]', __($labels['bnregmue{depacu}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{depacu}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{depacu}')): ?>
+    <?php echo form_error('bnregmue{depacu}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnregmue, array('getDepacu',true), array (
+ 'size' => 17,
+  'maxlength' =>17,
+'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
   'control_name' => 'bnregmue[depacu]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+</th>
+</tr>
+<tr>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
 <br>
 
 <?php echo label_for('bnregmue[vallib]', __($labels['bnregmue{vallib}']), 'class="required" ') ?>
@@ -433,18 +595,40 @@
     <?php echo form_error('bnregmue{vallib}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnregmue, 'getVallib', array (
-  'size' => 7,
+  <?php $value = object_input_tag($bnregmue, array('getVallib',true), array (
+  'size' => 17,
+  'maxlength' =>17,
+'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
   'control_name' => 'bnregmue[vallib]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Valor Adición:  ' ?></strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <?php $value = object_input_tag($bnregmue, 'getValadi', array (
-  'size' => 7,
+ </div>
+  </div>
+ </th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<?php echo label_for('bnregmue[valadi]', __($labels['bnregmue{valadi}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{valadi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{valadi}')): ?>
+    <?php echo form_error('bnregmue{valadi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnregmue, array('getValadi',true), array (
+ 'size' => 17,
+  'maxlength' =>17,
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
   'control_name' => 'bnregmue[valadi]',
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
+</th>
+</tr>
+<tr>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<br>
 
 <br>
   <?php echo label_for('bnregmue[valrex]', __($labels['bnregmue{valrex}']), 'class="required" ') ?>
@@ -452,31 +636,64 @@
   <?php if ($sf_request->hasError('bnregmue{valrex}')): ?>
     <?php echo form_error('bnregmue{valrex}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-  <?php $value = object_input_tag($bnregmue, 'getValrex', array (
-  'size' => 7,
+  <?php $value = object_input_tag($bnregmue, array('getValrex',true), array (
+   'size' => 17,
+  'maxlength' =>17,
+'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
   'control_name' => 'bnregmue[valrex]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong><? echo 'Costo Reposición:  ' ?></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
-  <?php $value = object_input_tag($bnregmue, 'getCosrep', array (
-  'size' => 7,
+ </div>
+  </th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+ <?php echo label_for('bnregmue[cosrep]', __($labels['bnregmue{cosrep}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{cosrep}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{cosrep}')): ?>
+    <?php echo form_error('bnregmue{cosrep}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($bnregmue, array('getCosrep',true), array (
+  'size' => 17,
+  'maxlength' =>17,
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
   'control_name' => 'bnregmue[cosrep]',
 )); echo $value ? $value : '&nbsp;' ?>
    </div>
-<br>      
-<strong><? echo 'Valor Actual:  ' ?></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
-  <?php echo input_tag('valactmue', $bnregmue->getValactual(), 'disabled=true, size=10')?>   
+</th>
+</tr>
+<tr>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
 <br>
+<?php echo label_for('bnregmue[valactual]', __($labels['bnregmue{valactual}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('bnregmue{valactual}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('bnregmue{valactual}')): ?>
+    <?php echo form_error('bnregmue{valactual}', array('class' => 'form-error-msg')) ?>
+
+  <?php endif; ?>
+    <?php $value = object_input_tag($bnregmue, array('getValactual',true), array (
+  'size' => 17,
+  'disabled' =>true,
+  'control_name' => 'bnregmue[valactmue]',
+)); echo $value ? $value : '&nbsp;' ?>
+ </div>
+</th>
+</tr></table>
+
+
 </fieldset>
-<div align="right"><img src=" /images/vineta.gif">&nbsp; &nbsp;<a
-	href="#back"> <span lang=ES-VE>Arriba</span></a></div>
-</div>
 </fieldset>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <a name="guardar"></a>
+
+</fieldset>
+<?php tabInit('tp1','0');?>
 <?php include_partial('edit_actions', array('bnregmue' => $bnregmue)) ?>
 
 </form>
@@ -490,3 +707,30 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+  <script type="text/javascript">
+
+function num(e) {
+    evt = e ? e : event;
+    tcl = (window.Event) ? evt.which : evt.keyCode;
+    if ((tcl < 48 || tcl > 57 ) && tcl != '8')
+    {
+        return false;
+    }
+    return true;
+}
+
+function enter(e,valor)
+ {
+
+   if (e.keyCode==13 || e.keyCode==9)
+   {
+     if (valor!='')
+     { valor=valor.pad(10, '0',0);}
+     else
+     {valor=valor.pad(10, '#',0);}
+
+     $('bnregmue_codmue').value=valor;
+   }
+ }
+
+  </script>

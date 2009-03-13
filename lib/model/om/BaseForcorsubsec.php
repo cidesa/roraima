@@ -25,75 +25,100 @@ abstract class BaseForcorsubsec extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsec()
-	{
+  
+  public function getCodsec()
+  {
 
-		return $this->codsec; 		
-	}
-	
-	public function getCorsubsec()
-	{
+    return trim($this->codsec);
 
-		return number_format($this->corsubsec,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCorsubsec($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->corsubsec,2,',','.');
+    else return $this->corsubsec;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsec($v)
 	{
 
-		if ($this->codsec !== $v) {
-			$this->codsec = $v;
-			$this->modifiedColumns[] = ForcorsubsecPeer::CODSEC;
-		}
-
+    if ($this->codsec !== $v) {
+        $this->codsec = $v;
+        $this->modifiedColumns[] = ForcorsubsecPeer::CODSEC;
+      }
+  
 	} 
 	
 	public function setCorsubsec($v)
 	{
 
-		if ($this->corsubsec !== $v) {
-			$this->corsubsec = $v;
-			$this->modifiedColumns[] = ForcorsubsecPeer::CORSUBSEC;
-		}
-
+    if ($this->corsubsec !== $v) {
+        $this->corsubsec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcorsubsecPeer::CORSUBSEC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForcorsubsecPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForcorsubsecPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsec = $rs->getString($startcol + 0);
+      $this->codsec = $rs->getString($startcol + 0);
 
-			$this->corsubsec = $rs->getFloat($startcol + 1);
+      $this->corsubsec = $rs->getFloat($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forcorsubsec object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forcorsubsec object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

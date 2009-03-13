@@ -1,0 +1,35 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordismetperpryaccmet
+    theme:            default
+    fields:
+      codpro: { name: Código}
+      proacc: { name: Tipo}
+      nompro: { name: Descripción}
+      codaccesp: { name: Código}
+      desaccesp: { name: Descripción}      
+      codmet: { name: Meta}
+      desmet: { name: Descripción}
+      canmet2: { name: Cantidad Programada Anual}
+      cananual: { name: Cantidad Ejecutada Anual}
+      perpre: { name: Mes}
+      canmet: { name: Programado del Mes}
+      progacum: { name: Programado Acumulado}
+      canmeteje: { name: Ejecutado}
+      acum: { name: Variación}        
+        
+    list:
+      title:          Seguimiento de Metas Formuladas en el POA
+      filters:        [codpro, codaccesp, codmet]
+      display:        [=codpro, nompro, codaccesp, desaccesp, codmet, desmet]
+      object_actions:
+        _edit:        ~
+      max_per_page:   5
+      sort:  codpro
+    edit:
+      title:          Seguimiento de Metas Formuladas en el POA
+      display:       [=codpro, proacc, nompro, codaccesp, desaccesp, codmet, desmet, canmet2, cananual, perpre, canmet, progacum, canmeteje, acum]
+      actions:
+        _list:        ~
+        _save:        ~

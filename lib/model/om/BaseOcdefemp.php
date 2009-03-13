@@ -153,655 +153,712 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomemp()
-	{
+    return trim($this->codemp);
 
-		return $this->nomemp; 		
-	}
-	
-	public function getDiremp()
-	{
+  }
+  
+  public function getNomemp()
+  {
 
-		return $this->diremp; 		
-	}
-	
-	public function getTelemp()
-	{
+    return trim($this->nomemp);
 
-		return $this->telemp; 		
-	}
-	
-	public function getFaxemp()
-	{
+  }
+  
+  public function getDiremp()
+  {
 
-		return $this->faxemp; 		
-	}
-	
-	public function getEmaemp()
-	{
+    return trim($this->diremp);
 
-		return $this->emaemp; 		
-	}
-	
-	public function getPorant()
-	{
+  }
+  
+  public function getTelemp()
+  {
 
-		return number_format($this->porant,2,',','.');
-		
-	}
-	
-	public function getPlaini()
-	{
+    return trim($this->telemp);
 
-		return number_format($this->plaini,2,',','.');
-		
-	}
-	
-	public function getPoraumobr()
-	{
+  }
+  
+  public function getFaxemp()
+  {
 
-		return number_format($this->poraumobr,2,',','.');
-		
-	}
-	
-	public function getPormul()
-	{
+    return trim($this->faxemp);
 
-		return number_format($this->pormul,2,',','.');
-		
-	}
-	
-	public function getUnitri()
-	{
+  }
+  
+  public function getEmaemp()
+  {
 
-		return number_format($this->unitri,2,',','.');
-		
-	}
-	
-	public function getCodactproini()
-	{
+    return trim($this->emaemp);
 
-		return $this->codactproini; 		
-	}
-	
-	public function getCodactini()
-	{
+  }
+  
+  public function getPorant($val=false)
+  {
 
-		return $this->codactini; 		
-	}
-	
-	public function getCodactpar()
-	{
+    if($val) return number_format($this->porant,2,',','.');
+    else return $this->porant;
 
-		return $this->codactpar; 		
-	}
-	
-	public function getCodactrei()
-	{
+  }
+  
+  public function getPlaini($val=false)
+  {
 
-		return $this->codactrei; 		
-	}
-	
-	public function getCodactproter()
-	{
+    if($val) return number_format($this->plaini,2,',','.');
+    else return $this->plaini;
 
-		return $this->codactproter; 		
-	}
-	
-	public function getCodactter()
-	{
+  }
+  
+  public function getPoraumobr($val=false)
+  {
 
-		return $this->codactter; 		
-	}
-	
-	public function getCodactrecpro()
-	{
+    if($val) return number_format($this->poraumobr,2,',','.');
+    else return $this->poraumobr;
 
-		return $this->codactrecpro; 		
-	}
-	
-	public function getCodactrecdef()
-	{
+  }
+  
+  public function getPormul($val=false)
+  {
 
-		return $this->codactrecdef; 		
-	}
-	
-	public function getCodingres()
-	{
+    if($val) return number_format($this->pormul,2,',','.');
+    else return $this->pormul;
 
-		return $this->codingres; 		
-	}
-	
-	public function getCodconobr()
-	{
+  }
+  
+  public function getUnitri($val=false)
+  {
 
-		return $this->codconobr; 		
-	}
-	
-	public function getCodconins()
-	{
+    if($val) return number_format($this->unitri,2,',','.');
+    else return $this->unitri;
 
-		return $this->codconins; 		
-	}
-	
-	public function getCodconsup()
-	{
+  }
+  
+  public function getCodactproini()
+  {
 
-		return $this->codconsup; 		
-	}
-	
-	public function getCodconpro()
-	{
+    return trim($this->codactproini);
 
-		return $this->codconpro; 		
-	}
-	
-	public function getCodvalant()
-	{
+  }
+  
+  public function getCodactini()
+  {
 
-		return $this->codvalant; 		
-	}
-	
-	public function getCodvalpar()
-	{
+    return trim($this->codactini);
 
-		return $this->codvalpar; 		
-	}
-	
-	public function getCodvalfin()
-	{
+  }
+  
+  public function getCodactpar()
+  {
 
-		return $this->codvalfin; 		
-	}
-	
-	public function getCodvalret()
-	{
+    return trim($this->codactpar);
 
-		return $this->codvalret; 		
-	}
-	
-	public function getCodvalrec()
-	{
+  }
+  
+  public function getCodactrei()
+  {
 
-		return $this->codvalrec; 		
-	}
-	
-	public function getCodparrec()
-	{
+    return trim($this->codactrei);
 
-		return $this->codparrec; 		
-	}
-	
-	public function getIvaant()
-	{
+  }
+  
+  public function getCodactproter()
+  {
 
-		return $this->ivaant; 		
-	}
-	
-	public function getRetant()
-	{
+    return trim($this->codactproter);
 
-		return $this->retant; 		
-	}
-	
-	public function getGencom()
-	{
+  }
+  
+  public function getCodactter()
+  {
 
-		return $this->gencom; 		
-	}
-	
-	public function getTipcom()
-	{
+    return trim($this->codactter);
 
-		return $this->tipcom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodactrecpro()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codactrecpro);
+
+  }
+  
+  public function getCodactrecdef()
+  {
+
+    return trim($this->codactrecdef);
+
+  }
+  
+  public function getCodingres()
+  {
+
+    return trim($this->codingres);
+
+  }
+  
+  public function getCodconobr()
+  {
+
+    return trim($this->codconobr);
+
+  }
+  
+  public function getCodconins()
+  {
+
+    return trim($this->codconins);
+
+  }
+  
+  public function getCodconsup()
+  {
+
+    return trim($this->codconsup);
+
+  }
+  
+  public function getCodconpro()
+  {
+
+    return trim($this->codconpro);
+
+  }
+  
+  public function getCodvalant()
+  {
+
+    return trim($this->codvalant);
+
+  }
+  
+  public function getCodvalpar()
+  {
+
+    return trim($this->codvalpar);
+
+  }
+  
+  public function getCodvalfin()
+  {
+
+    return trim($this->codvalfin);
+
+  }
+  
+  public function getCodvalret()
+  {
+
+    return trim($this->codvalret);
+
+  }
+  
+  public function getCodvalrec()
+  {
+
+    return trim($this->codvalrec);
+
+  }
+  
+  public function getCodparrec()
+  {
+
+    return trim($this->codparrec);
+
+  }
+  
+  public function getIvaant()
+  {
+
+    return trim($this->ivaant);
+
+  }
+  
+  public function getRetant()
+  {
+
+    return trim($this->retant);
+
+  }
+  
+  public function getGencom()
+  {
+
+    return trim($this->gencom);
+
+  }
+  
+  public function getTipcom()
+  {
+
+    return trim($this->tipcom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = OcdefempPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = OcdefempPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setDiremp($v)
 	{
 
-		if ($this->diremp !== $v) {
-			$this->diremp = $v;
-			$this->modifiedColumns[] = OcdefempPeer::DIREMP;
-		}
-
+    if ($this->diremp !== $v) {
+        $this->diremp = $v;
+        $this->modifiedColumns[] = OcdefempPeer::DIREMP;
+      }
+  
 	} 
 	
 	public function setTelemp($v)
 	{
 
-		if ($this->telemp !== $v) {
-			$this->telemp = $v;
-			$this->modifiedColumns[] = OcdefempPeer::TELEMP;
-		}
-
+    if ($this->telemp !== $v) {
+        $this->telemp = $v;
+        $this->modifiedColumns[] = OcdefempPeer::TELEMP;
+      }
+  
 	} 
 	
 	public function setFaxemp($v)
 	{
 
-		if ($this->faxemp !== $v) {
-			$this->faxemp = $v;
-			$this->modifiedColumns[] = OcdefempPeer::FAXEMP;
-		}
-
+    if ($this->faxemp !== $v) {
+        $this->faxemp = $v;
+        $this->modifiedColumns[] = OcdefempPeer::FAXEMP;
+      }
+  
 	} 
 	
 	public function setEmaemp($v)
 	{
 
-		if ($this->emaemp !== $v) {
-			$this->emaemp = $v;
-			$this->modifiedColumns[] = OcdefempPeer::EMAEMP;
-		}
-
+    if ($this->emaemp !== $v) {
+        $this->emaemp = $v;
+        $this->modifiedColumns[] = OcdefempPeer::EMAEMP;
+      }
+  
 	} 
 	
 	public function setPorant($v)
 	{
 
-		if ($this->porant !== $v) {
-			$this->porant = $v;
-			$this->modifiedColumns[] = OcdefempPeer::PORANT;
-		}
-
+    if ($this->porant !== $v) {
+        $this->porant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcdefempPeer::PORANT;
+      }
+  
 	} 
 	
 	public function setPlaini($v)
 	{
 
-		if ($this->plaini !== $v) {
-			$this->plaini = $v;
-			$this->modifiedColumns[] = OcdefempPeer::PLAINI;
-		}
-
+    if ($this->plaini !== $v) {
+        $this->plaini = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcdefempPeer::PLAINI;
+      }
+  
 	} 
 	
 	public function setPoraumobr($v)
 	{
 
-		if ($this->poraumobr !== $v) {
-			$this->poraumobr = $v;
-			$this->modifiedColumns[] = OcdefempPeer::PORAUMOBR;
-		}
-
+    if ($this->poraumobr !== $v) {
+        $this->poraumobr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcdefempPeer::PORAUMOBR;
+      }
+  
 	} 
 	
 	public function setPormul($v)
 	{
 
-		if ($this->pormul !== $v) {
-			$this->pormul = $v;
-			$this->modifiedColumns[] = OcdefempPeer::PORMUL;
-		}
-
+    if ($this->pormul !== $v) {
+        $this->pormul = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcdefempPeer::PORMUL;
+      }
+  
 	} 
 	
 	public function setUnitri($v)
 	{
 
-		if ($this->unitri !== $v) {
-			$this->unitri = $v;
-			$this->modifiedColumns[] = OcdefempPeer::UNITRI;
-		}
-
+    if ($this->unitri !== $v) {
+        $this->unitri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcdefempPeer::UNITRI;
+      }
+  
 	} 
 	
 	public function setCodactproini($v)
 	{
 
-		if ($this->codactproini !== $v) {
-			$this->codactproini = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODACTPROINI;
-		}
-
+    if ($this->codactproini !== $v) {
+        $this->codactproini = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODACTPROINI;
+      }
+  
 	} 
 	
 	public function setCodactini($v)
 	{
 
-		if ($this->codactini !== $v) {
-			$this->codactini = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODACTINI;
-		}
-
+    if ($this->codactini !== $v) {
+        $this->codactini = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODACTINI;
+      }
+  
 	} 
 	
 	public function setCodactpar($v)
 	{
 
-		if ($this->codactpar !== $v) {
-			$this->codactpar = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODACTPAR;
-		}
-
+    if ($this->codactpar !== $v) {
+        $this->codactpar = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODACTPAR;
+      }
+  
 	} 
 	
 	public function setCodactrei($v)
 	{
 
-		if ($this->codactrei !== $v) {
-			$this->codactrei = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODACTREI;
-		}
-
+    if ($this->codactrei !== $v) {
+        $this->codactrei = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODACTREI;
+      }
+  
 	} 
 	
 	public function setCodactproter($v)
 	{
 
-		if ($this->codactproter !== $v) {
-			$this->codactproter = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODACTPROTER;
-		}
-
+    if ($this->codactproter !== $v) {
+        $this->codactproter = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODACTPROTER;
+      }
+  
 	} 
 	
 	public function setCodactter($v)
 	{
 
-		if ($this->codactter !== $v) {
-			$this->codactter = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODACTTER;
-		}
-
+    if ($this->codactter !== $v) {
+        $this->codactter = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODACTTER;
+      }
+  
 	} 
 	
 	public function setCodactrecpro($v)
 	{
 
-		if ($this->codactrecpro !== $v) {
-			$this->codactrecpro = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODACTRECPRO;
-		}
-
+    if ($this->codactrecpro !== $v) {
+        $this->codactrecpro = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODACTRECPRO;
+      }
+  
 	} 
 	
 	public function setCodactrecdef($v)
 	{
 
-		if ($this->codactrecdef !== $v) {
-			$this->codactrecdef = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODACTRECDEF;
-		}
-
+    if ($this->codactrecdef !== $v) {
+        $this->codactrecdef = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODACTRECDEF;
+      }
+  
 	} 
 	
 	public function setCodingres($v)
 	{
 
-		if ($this->codingres !== $v) {
-			$this->codingres = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODINGRES;
-		}
-
+    if ($this->codingres !== $v) {
+        $this->codingres = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODINGRES;
+      }
+  
 	} 
 	
 	public function setCodconobr($v)
 	{
 
-		if ($this->codconobr !== $v) {
-			$this->codconobr = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODCONOBR;
-		}
-
+    if ($this->codconobr !== $v) {
+        $this->codconobr = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODCONOBR;
+      }
+  
 	} 
 	
 	public function setCodconins($v)
 	{
 
-		if ($this->codconins !== $v) {
-			$this->codconins = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODCONINS;
-		}
-
+    if ($this->codconins !== $v) {
+        $this->codconins = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODCONINS;
+      }
+  
 	} 
 	
 	public function setCodconsup($v)
 	{
 
-		if ($this->codconsup !== $v) {
-			$this->codconsup = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODCONSUP;
-		}
-
+    if ($this->codconsup !== $v) {
+        $this->codconsup = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODCONSUP;
+      }
+  
 	} 
 	
 	public function setCodconpro($v)
 	{
 
-		if ($this->codconpro !== $v) {
-			$this->codconpro = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODCONPRO;
-		}
-
+    if ($this->codconpro !== $v) {
+        $this->codconpro = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODCONPRO;
+      }
+  
 	} 
 	
 	public function setCodvalant($v)
 	{
 
-		if ($this->codvalant !== $v) {
-			$this->codvalant = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODVALANT;
-		}
-
+    if ($this->codvalant !== $v) {
+        $this->codvalant = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODVALANT;
+      }
+  
 	} 
 	
 	public function setCodvalpar($v)
 	{
 
-		if ($this->codvalpar !== $v) {
-			$this->codvalpar = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODVALPAR;
-		}
-
+    if ($this->codvalpar !== $v) {
+        $this->codvalpar = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODVALPAR;
+      }
+  
 	} 
 	
 	public function setCodvalfin($v)
 	{
 
-		if ($this->codvalfin !== $v) {
-			$this->codvalfin = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODVALFIN;
-		}
-
+    if ($this->codvalfin !== $v) {
+        $this->codvalfin = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODVALFIN;
+      }
+  
 	} 
 	
 	public function setCodvalret($v)
 	{
 
-		if ($this->codvalret !== $v) {
-			$this->codvalret = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODVALRET;
-		}
-
+    if ($this->codvalret !== $v) {
+        $this->codvalret = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODVALRET;
+      }
+  
 	} 
 	
 	public function setCodvalrec($v)
 	{
 
-		if ($this->codvalrec !== $v) {
-			$this->codvalrec = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODVALREC;
-		}
-
+    if ($this->codvalrec !== $v) {
+        $this->codvalrec = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODVALREC;
+      }
+  
 	} 
 	
 	public function setCodparrec($v)
 	{
 
-		if ($this->codparrec !== $v) {
-			$this->codparrec = $v;
-			$this->modifiedColumns[] = OcdefempPeer::CODPARREC;
-		}
-
+    if ($this->codparrec !== $v) {
+        $this->codparrec = $v;
+        $this->modifiedColumns[] = OcdefempPeer::CODPARREC;
+      }
+  
 	} 
 	
 	public function setIvaant($v)
 	{
 
-		if ($this->ivaant !== $v) {
-			$this->ivaant = $v;
-			$this->modifiedColumns[] = OcdefempPeer::IVAANT;
-		}
-
+    if ($this->ivaant !== $v) {
+        $this->ivaant = $v;
+        $this->modifiedColumns[] = OcdefempPeer::IVAANT;
+      }
+  
 	} 
 	
 	public function setRetant($v)
 	{
 
-		if ($this->retant !== $v) {
-			$this->retant = $v;
-			$this->modifiedColumns[] = OcdefempPeer::RETANT;
-		}
-
+    if ($this->retant !== $v) {
+        $this->retant = $v;
+        $this->modifiedColumns[] = OcdefempPeer::RETANT;
+      }
+  
 	} 
 	
 	public function setGencom($v)
 	{
 
-		if ($this->gencom !== $v) {
-			$this->gencom = $v;
-			$this->modifiedColumns[] = OcdefempPeer::GENCOM;
-		}
-
+    if ($this->gencom !== $v) {
+        $this->gencom = $v;
+        $this->modifiedColumns[] = OcdefempPeer::GENCOM;
+      }
+  
 	} 
 	
 	public function setTipcom($v)
 	{
 
-		if ($this->tipcom !== $v) {
-			$this->tipcom = $v;
-			$this->modifiedColumns[] = OcdefempPeer::TIPCOM;
-		}
-
+    if ($this->tipcom !== $v) {
+        $this->tipcom = $v;
+        $this->modifiedColumns[] = OcdefempPeer::TIPCOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcdefempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcdefempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->nomemp = $rs->getString($startcol + 1);
+      $this->nomemp = $rs->getString($startcol + 1);
 
-			$this->diremp = $rs->getString($startcol + 2);
+      $this->diremp = $rs->getString($startcol + 2);
 
-			$this->telemp = $rs->getString($startcol + 3);
+      $this->telemp = $rs->getString($startcol + 3);
 
-			$this->faxemp = $rs->getString($startcol + 4);
+      $this->faxemp = $rs->getString($startcol + 4);
 
-			$this->emaemp = $rs->getString($startcol + 5);
+      $this->emaemp = $rs->getString($startcol + 5);
 
-			$this->porant = $rs->getFloat($startcol + 6);
+      $this->porant = $rs->getFloat($startcol + 6);
 
-			$this->plaini = $rs->getFloat($startcol + 7);
+      $this->plaini = $rs->getFloat($startcol + 7);
 
-			$this->poraumobr = $rs->getFloat($startcol + 8);
+      $this->poraumobr = $rs->getFloat($startcol + 8);
 
-			$this->pormul = $rs->getFloat($startcol + 9);
+      $this->pormul = $rs->getFloat($startcol + 9);
 
-			$this->unitri = $rs->getFloat($startcol + 10);
+      $this->unitri = $rs->getFloat($startcol + 10);
 
-			$this->codactproini = $rs->getString($startcol + 11);
+      $this->codactproini = $rs->getString($startcol + 11);
 
-			$this->codactini = $rs->getString($startcol + 12);
+      $this->codactini = $rs->getString($startcol + 12);
 
-			$this->codactpar = $rs->getString($startcol + 13);
+      $this->codactpar = $rs->getString($startcol + 13);
 
-			$this->codactrei = $rs->getString($startcol + 14);
+      $this->codactrei = $rs->getString($startcol + 14);
 
-			$this->codactproter = $rs->getString($startcol + 15);
+      $this->codactproter = $rs->getString($startcol + 15);
 
-			$this->codactter = $rs->getString($startcol + 16);
+      $this->codactter = $rs->getString($startcol + 16);
 
-			$this->codactrecpro = $rs->getString($startcol + 17);
+      $this->codactrecpro = $rs->getString($startcol + 17);
 
-			$this->codactrecdef = $rs->getString($startcol + 18);
+      $this->codactrecdef = $rs->getString($startcol + 18);
 
-			$this->codingres = $rs->getString($startcol + 19);
+      $this->codingres = $rs->getString($startcol + 19);
 
-			$this->codconobr = $rs->getString($startcol + 20);
+      $this->codconobr = $rs->getString($startcol + 20);
 
-			$this->codconins = $rs->getString($startcol + 21);
+      $this->codconins = $rs->getString($startcol + 21);
 
-			$this->codconsup = $rs->getString($startcol + 22);
+      $this->codconsup = $rs->getString($startcol + 22);
 
-			$this->codconpro = $rs->getString($startcol + 23);
+      $this->codconpro = $rs->getString($startcol + 23);
 
-			$this->codvalant = $rs->getString($startcol + 24);
+      $this->codvalant = $rs->getString($startcol + 24);
 
-			$this->codvalpar = $rs->getString($startcol + 25);
+      $this->codvalpar = $rs->getString($startcol + 25);
 
-			$this->codvalfin = $rs->getString($startcol + 26);
+      $this->codvalfin = $rs->getString($startcol + 26);
 
-			$this->codvalret = $rs->getString($startcol + 27);
+      $this->codvalret = $rs->getString($startcol + 27);
 
-			$this->codvalrec = $rs->getString($startcol + 28);
+      $this->codvalrec = $rs->getString($startcol + 28);
 
-			$this->codparrec = $rs->getString($startcol + 29);
+      $this->codparrec = $rs->getString($startcol + 29);
 
-			$this->ivaant = $rs->getString($startcol + 30);
+      $this->ivaant = $rs->getString($startcol + 30);
 
-			$this->retant = $rs->getString($startcol + 31);
+      $this->retant = $rs->getString($startcol + 31);
 
-			$this->gencom = $rs->getString($startcol + 32);
+      $this->gencom = $rs->getString($startcol + 32);
 
-			$this->tipcom = $rs->getString($startcol + 33);
+      $this->tipcom = $rs->getString($startcol + 33);
 
-			$this->id = $rs->getInt($startcol + 34);
+      $this->id = $rs->getInt($startcol + 34);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 35; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocdefemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 35; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocdefemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -858,6 +915,7 @@ abstract class BaseOcdefemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcdefempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcdefempPeer::doUpdate($this, $con);

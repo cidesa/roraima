@@ -1,5 +1,5 @@
 body {
-	background-image: url(../images/main_bg.jpg); 
+	background-image: url(/images/main_bg.jpg); 
 }
 
 
@@ -19,7 +19,7 @@ SELECT, INPUT, TEXTAREA, .uneditable, {
 }
 SELECT{padding:0px;}
 TEXTAREA:Focus,SELECT:Focus,INPUT:Focus{background-color:white;}
-INPUT[disabled],SELECT[disabled]{background-color:#FFFFFF;color:black;}
+INPUT[disabled],TEXTAREA[disabled],SELECT[disabled]{background-color:#FFFFFF;color:black;}
 /*INPUT[disabled],SELECT[disabled]{background-color:#AAAAAA;color:#EEEEEE; background-image:none;}
 INPUT[disabled]:Active{border:1px outset black;}*/
 FORM{margin:0px;padding:0px;}
@@ -115,7 +115,7 @@ FIELDSET,.bodyline,.tabselected,.tabs,.tabbottoms,.box,#modalBox{
 }
 .bodyline,.tabselected,#modalBox{
 /*	background-color: #ffffff; */
-	background-image:url(../../images/back12.jpg);
+	background-image:url(/images/back12.jpg);
 	background-repeat:repeat-x;
 	background-position:bottom left
 }
@@ -770,3 +770,15 @@ input.cajadetextosimple {
 	font-weight: bold;
 	
 	}
+element.style {
+visibility:visible;
+}
+.calendar, .calendar table {
+background:transparent url(normal-bg.gif) repeat scroll 0%;
+border:1px solid #BDB2BF;
+border-collapse:separate;
+color:#000000;
+cursor:default;
+font-family:"trebuchet ms",verdana,tahoma,sans-serif;
+font-size:11px;
+}	

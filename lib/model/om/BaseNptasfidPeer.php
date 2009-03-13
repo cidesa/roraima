@@ -210,6 +210,7 @@ abstract class BaseNptasfidPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NptasfidPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

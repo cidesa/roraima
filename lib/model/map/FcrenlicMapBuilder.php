@@ -1,44 +1,46 @@
 <?php
 
 
-	
+
 class FcrenlicMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcrenlicMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcrenlicMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcrenlic');
 		$tMap->setPhpName('Fcrenlic');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcrenlic_SEQ');
 
 		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, true, 10);
 
-		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('FECREN', 'Fecren', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECREN', 'Fecren', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

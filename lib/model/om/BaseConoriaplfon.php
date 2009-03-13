@@ -41,148 +41,177 @@ abstract class BaseConoriaplfon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcta()
-	{
+  
+  public function getCodcta()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getDescta()
-	{
+    return trim($this->codcta);
 
-		return $this->descta; 		
-	}
-	
-	public function getOyafon()
-	{
+  }
+  
+  public function getDescta()
+  {
 
-		return $this->oyafon; 		
-	}
-	
-	public function getOrdenoya()
-	{
+    return trim($this->descta);
 
-		return number_format($this->ordenoya,2,',','.');
-		
-	}
-	
-	public function getFlucaj()
-	{
+  }
+  
+  public function getOyafon()
+  {
 
-		return $this->flucaj; 		
-	}
-	
-	public function getOrdenflu()
-	{
+    return trim($this->oyafon);
 
-		return number_format($this->ordenflu,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getOrdenoya($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->ordenoya,2,',','.');
+    else return $this->ordenoya;
+
+  }
+  
+  public function getFlucaj()
+  {
+
+    return trim($this->flucaj);
+
+  }
+  
+  public function getOrdenflu($val=false)
+  {
+
+    if($val) return number_format($this->ordenflu,2,',','.');
+    else return $this->ordenflu;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = ConoriaplfonPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = ConoriaplfonPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setDescta($v)
 	{
 
-		if ($this->descta !== $v) {
-			$this->descta = $v;
-			$this->modifiedColumns[] = ConoriaplfonPeer::DESCTA;
-		}
-
+    if ($this->descta !== $v) {
+        $this->descta = $v;
+        $this->modifiedColumns[] = ConoriaplfonPeer::DESCTA;
+      }
+  
 	} 
 	
 	public function setOyafon($v)
 	{
 
-		if ($this->oyafon !== $v) {
-			$this->oyafon = $v;
-			$this->modifiedColumns[] = ConoriaplfonPeer::OYAFON;
-		}
-
+    if ($this->oyafon !== $v) {
+        $this->oyafon = $v;
+        $this->modifiedColumns[] = ConoriaplfonPeer::OYAFON;
+      }
+  
 	} 
 	
 	public function setOrdenoya($v)
 	{
 
-		if ($this->ordenoya !== $v) {
-			$this->ordenoya = $v;
-			$this->modifiedColumns[] = ConoriaplfonPeer::ORDENOYA;
-		}
-
+    if ($this->ordenoya !== $v) {
+        $this->ordenoya = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ConoriaplfonPeer::ORDENOYA;
+      }
+  
 	} 
 	
 	public function setFlucaj($v)
 	{
 
-		if ($this->flucaj !== $v) {
-			$this->flucaj = $v;
-			$this->modifiedColumns[] = ConoriaplfonPeer::FLUCAJ;
-		}
-
+    if ($this->flucaj !== $v) {
+        $this->flucaj = $v;
+        $this->modifiedColumns[] = ConoriaplfonPeer::FLUCAJ;
+      }
+  
 	} 
 	
 	public function setOrdenflu($v)
 	{
 
-		if ($this->ordenflu !== $v) {
-			$this->ordenflu = $v;
-			$this->modifiedColumns[] = ConoriaplfonPeer::ORDENFLU;
-		}
-
+    if ($this->ordenflu !== $v) {
+        $this->ordenflu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ConoriaplfonPeer::ORDENFLU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ConoriaplfonPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ConoriaplfonPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcta = $rs->getString($startcol + 0);
+      $this->codcta = $rs->getString($startcol + 0);
 
-			$this->descta = $rs->getString($startcol + 1);
+      $this->descta = $rs->getString($startcol + 1);
 
-			$this->oyafon = $rs->getString($startcol + 2);
+      $this->oyafon = $rs->getString($startcol + 2);
 
-			$this->ordenoya = $rs->getFloat($startcol + 3);
+      $this->ordenoya = $rs->getFloat($startcol + 3);
 
-			$this->flucaj = $rs->getString($startcol + 4);
+      $this->flucaj = $rs->getString($startcol + 4);
 
-			$this->ordenflu = $rs->getFloat($startcol + 5);
+      $this->ordenflu = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Conoriaplfon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Conoriaplfon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

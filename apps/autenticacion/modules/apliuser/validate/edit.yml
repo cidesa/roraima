@@ -1,0 +1,20 @@
+methods:
+  post:
+   - "apli_user{loguse}"
+   - "apli_user{codapl}"
+
+names:
+  apli_user{loguse}:
+    required:  Yes
+    required_msg: El Login del Usuario no puedo estar en Blanco
+
+  apli_user{codapl}:
+    required:  Yes
+    required_msg: El Nombre del Módulo no puede estar en Blanco
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Usuarios
+        column:   loguse
+        unique_error:   El Login o Usuario ya existe. Por Favor, Cambiélo por otro.

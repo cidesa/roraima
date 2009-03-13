@@ -41,149 +41,178 @@ abstract class BaseCaartddph extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getDevdph()
-	{
+  
+  public function getDevdph()
+  {
 
-		return $this->devdph; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->devdph);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCandph()
-	{
+    return trim($this->codart);
 
-		return number_format($this->candph,2,',','.');
-		
-	}
-	
-	public function getCandev()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return number_format($this->candev,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    return trim($this->codcat);
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCandph($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->candph,2,',','.');
+    else return $this->candph;
+
+  }
+  
+  public function getCandev($val=false)
+  {
+
+    if($val) return number_format($this->candev,2,',','.');
+    else return $this->candev;
+
+  }
+  
+  public function getMontot($val=false)
+  {
+
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDevdph($v)
 	{
 
-		if ($this->devdph !== $v) {
-			$this->devdph = $v;
-			$this->modifiedColumns[] = CaartddphPeer::DEVDPH;
-		}
-
+    if ($this->devdph !== $v) {
+        $this->devdph = $v;
+        $this->modifiedColumns[] = CaartddphPeer::DEVDPH;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartddphPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartddphPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CaartddphPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CaartddphPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCandph($v)
 	{
 
-		if ($this->candph !== $v) {
-			$this->candph = $v;
-			$this->modifiedColumns[] = CaartddphPeer::CANDPH;
-		}
-
+    if ($this->candph !== $v) {
+        $this->candph = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartddphPeer::CANDPH;
+      }
+  
 	} 
 	
 	public function setCandev($v)
 	{
 
-		if ($this->candev !== $v) {
-			$this->candev = $v;
-			$this->modifiedColumns[] = CaartddphPeer::CANDEV;
-		}
-
+    if ($this->candev !== $v) {
+        $this->candev = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartddphPeer::CANDEV;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CaartddphPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartddphPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartddphPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartddphPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->devdph = $rs->getString($startcol + 0);
+      $this->devdph = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->codcat = $rs->getString($startcol + 2);
+      $this->codcat = $rs->getString($startcol + 2);
 
-			$this->candph = $rs->getFloat($startcol + 3);
+      $this->candph = $rs->getFloat($startcol + 3);
 
-			$this->candev = $rs->getFloat($startcol + 4);
+      $this->candev = $rs->getFloat($startcol + 4);
 
-			$this->montot = $rs->getFloat($startcol + 5);
+      $this->montot = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartddph object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartddph object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

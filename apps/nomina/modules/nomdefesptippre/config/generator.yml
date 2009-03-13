@@ -4,14 +4,14 @@ generator:
     model_class:      Nptippre
     theme:            default
     fields:
-      codtippre: { name: Codigo, params: maxlength=4}
-      destippre: { name: Descripcion}            
-      codcon:    { name: Cod. Concepto para cobro de cuotas}    
+      codtippre: { name: Código, params: maxlength=4}
+      destippre: { name: Descripción, params: maxlength=255}
+      codcon:    { name: Cod. Concepto para cobro de cuotas, params: maxlength=3}
     list:
       title:          Tipo de Prestamo
       filters:        [codtippre, destippre]
       display:        [=codtippre, destippre]
-      max_per_page:	  6            
+      max_per_page:	  6
       object_actions:
         _edit:        ~
         _delete:      ~

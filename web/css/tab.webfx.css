@@ -6,9 +6,6 @@ dark:	rgb(0,66,174);
 
 */
 
-
-
-
 .dynamic-tab-pane-control.tab-pane {
 	position:	relative;
 	width:		100%;
@@ -83,4 +80,16 @@ dark:	rgb(0,66,174);
 	background:		white;
 	height:			1.95em;
 	width:			100%;
+}
+element.style {
+visibility:visible;
+}
+.calendar, .calendar table {
+background:transparent url(normal-bg.gif) repeat scroll 0%;
+border:1px solid #BDB2BF;
+border-collapse:separate;
+color:#000000;
+cursor:default;
+font-family:"trebuchet ms",verdana,tahoma,sans-serif;
+font-size:11px;
 }

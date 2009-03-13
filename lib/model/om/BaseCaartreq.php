@@ -49,186 +49,217 @@ abstract class BaseCaartreq extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReqart()
-	{
+  
+  public function getReqart()
+  {
 
-		return $this->reqart; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->reqart);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCanreq()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canreq,2,',','.');
-		
-	}
-	
-	public function getCanrec()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return number_format($this->canrec,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    return trim($this->codcat);
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getUnimed()
-	{
+  }
+  
+  public function getCanreq($val=false)
+  {
 
-		return $this->unimed; 		
-	}
-	
-	public function getRelart()
-	{
+    if($val) return number_format($this->canreq,2,',','.');
+    else return $this->canreq;
 
-		return number_format($this->relart,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCanrec($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->canrec,2,',','.');
+    else return $this->canrec;
+
+  }
+  
+  public function getMontot($val=false)
+  {
+
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
+
+  }
+  
+  public function getUnimed()
+  {
+
+    return trim($this->unimed);
+
+  }
+  
+  public function getRelart($val=false)
+  {
+
+    if($val) return number_format($this->relart,2,',','.');
+    else return $this->relart;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReqart($v)
 	{
 
-		if ($this->reqart !== $v) {
-			$this->reqart = $v;
-			$this->modifiedColumns[] = CaartreqPeer::REQART;
-		}
-
+    if ($this->reqart !== $v) {
+        $this->reqart = $v;
+        $this->modifiedColumns[] = CaartreqPeer::REQART;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartreqPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartreqPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CaartreqPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CaartreqPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCanreq($v)
 	{
 
-		if ($this->canreq !== $v) {
-			$this->canreq = $v;
-			$this->modifiedColumns[] = CaartreqPeer::CANREQ;
-		}
-
+    if ($this->canreq !== $v) {
+        $this->canreq = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartreqPeer::CANREQ;
+      }
+  
 	} 
 	
 	public function setCanrec($v)
 	{
 
-		if ($this->canrec !== $v) {
-			$this->canrec = $v;
-			$this->modifiedColumns[] = CaartreqPeer::CANREC;
-		}
-
+    if ($this->canrec !== $v) {
+        $this->canrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartreqPeer::CANREC;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CaartreqPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartreqPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setUnimed($v)
 	{
 
-		if ($this->unimed !== $v) {
-			$this->unimed = $v;
-			$this->modifiedColumns[] = CaartreqPeer::UNIMED;
-		}
-
+    if ($this->unimed !== $v) {
+        $this->unimed = $v;
+        $this->modifiedColumns[] = CaartreqPeer::UNIMED;
+      }
+  
 	} 
 	
 	public function setRelart($v)
 	{
 
-		if ($this->relart !== $v) {
-			$this->relart = $v;
-			$this->modifiedColumns[] = CaartreqPeer::RELART;
-		}
-
+    if ($this->relart !== $v) {
+        $this->relart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartreqPeer::RELART;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartreqPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartreqPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reqart = $rs->getString($startcol + 0);
+      $this->reqart = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->codcat = $rs->getString($startcol + 2);
+      $this->codcat = $rs->getString($startcol + 2);
 
-			$this->canreq = $rs->getFloat($startcol + 3);
+      $this->canreq = $rs->getFloat($startcol + 3);
 
-			$this->canrec = $rs->getFloat($startcol + 4);
+      $this->canrec = $rs->getFloat($startcol + 4);
 
-			$this->montot = $rs->getFloat($startcol + 5);
+      $this->montot = $rs->getFloat($startcol + 5);
 
-			$this->unimed = $rs->getString($startcol + 6);
+      $this->unimed = $rs->getString($startcol + 6);
 
-			$this->relart = $rs->getFloat($startcol + 7);
+      $this->relart = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartreq object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartreq object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -285,6 +316,7 @@ abstract class BaseCaartreq extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaartreqPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaartreqPeer::doUpdate($this, $con);

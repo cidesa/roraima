@@ -1,0 +1,32 @@
+methods:
+  post:
+   - "npfalper{fechas}"
+   - "npfalper{fecdes}"
+
+names:
+
+  npfalper{fechas}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: lastDay
+
+  npfalper{fecdes}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: firstDay
+
+firstDay:
+    class: CidesaDateCompareValidator
+    param:
+      date_error:    El campo debe ser una fecha
+      compare:       npfalper[fechas]
+      operator:      <
+      compare_error: La fecha inicio debe ser anterior a la fecha fin
+
+lastDay:
+    class: CidesaDateCompareValidator
+    param:
+        date_error:    EL campo debe ser una fecha
+        compare:       npfalper[fecdes]
+        operator:      >
+        compare_error: La fecha fin debe ser posterior a la fecha inicio

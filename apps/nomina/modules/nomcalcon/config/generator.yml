@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Npcalcon
+    theme:            default
+    fields:
+      codcon:         {name: Código de Concepto}
+      codnom:         {name: Código de Nómina}
+      nomcon:         {name: Nombre del Concepto}
+      nomnom:         {name: Nombre de la Nómina}
+      confor:         {name: Fórmula}
+
+    list:
+      title:          Lista de Conceptos Formulados
+      display:        [=codcon, nomcon, codnom, nomnom ]
+      max_pager:      15
+      filters:         [codcon, codnom]
+      actions:
+        _create:      ~
+
+    edit:
+      title:          Formulacion para el Calculo de Conceptos
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:        ~
+        _delete:      ~

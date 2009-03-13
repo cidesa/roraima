@@ -9,4 +9,8 @@
  */ 
 class Tsrepret extends BaseTsrepret
 {
+	public function getDesret()
+	{
+		return Herramientas::getX('codtip','optipret','destip',self::getCodret());
+	}
 }

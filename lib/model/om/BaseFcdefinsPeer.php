@@ -340,6 +340,7 @@ abstract class BaseFcdefinsPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdefinsPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

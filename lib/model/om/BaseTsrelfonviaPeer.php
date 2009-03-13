@@ -245,6 +245,7 @@ abstract class BaseTsrelfonviaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TsrelfonviaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

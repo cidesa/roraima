@@ -1,0 +1,55 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ocadjobr
+    theme:            cidesaGenerator
+    fields:
+      codadj: { name: Código, params: size=15 maxlength=8 onBlur="this.value=this.value.pad(8, '0',0);"}
+      tipadj: { name: Tipo}
+      fecadj: { name: Fecha, params: onkeyup= "mascara(this,'/',patron,true)"}
+      status: { name: Aprobada}
+      codobr: { name: Código de la Obra, params: size=20 maxlength=32}
+      desobr: { name: Descripción, params: size=60}
+      codtipobr: { name: Tipo de Obra}
+      destipobr: { name: Descripción}
+      fecini: { name: Fecha Inicio}
+      fecfin: { name: Fecha Fin}
+      monobr: { name: Monto}
+      fecinipub: { name: Inicio, params: onkeyup= "mascara(this,'/',patron,true)"}
+      fecfinpub: { name: Fin, params: onkeyup= "mascara(this,'/',patron,true)"}
+      fecbaseini: { name: Inicio, params: onkeyup= "mascara(this,'/',patron,true)"}
+      fecbasefin: { name: Fin, params: onkeyup= "mascara(this,'/',patron,true)"}
+      fecpreofini: { name: Inicio, params: onkeyup= "mascara(this,'/',patron,true)"}
+      fecpreoffin: { name: Fin, params: onkeyup= "mascara(this,'/',patron,true)"}
+      fecanaofini: { name: Inicio, params: onkeyup= "mascara(this,'/',patron,true)"}
+      fecanaoffin: { name: Fin, params: onkeyup= "mascara(this,'/',patron,true)"}
+      codprogan: { name: Código, params: size=15 maxlength=15}
+      despro: { name: Descripción}
+      fecgan: { name: Fecha, params: onkeyup= "mascara(this,'/',patron,true)"}
+    list:
+      title: Obras Adjudicadas
+      display: [=codadj, tipadj, fecadj, codobr]
+      filters: [codadj, codobr, fecadj]
+      max_per_page:   10
+      sort: codobr
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Edición de Adjudicación de Obras
+      display:
+        "NONE": [_codadj, _tipadj, _fecadj, _status]
+        "Datos de la Obra": [_codobr, codtipobr, destipobr, fecini, fecfin, monobr]
+        "Fechas Previstas para el Proceso de Adjudicación": []
+        "Publicación": [fecinipub, fecfinpub]
+        "Retiro de Base": [fecbaseini, fecbasefin]
+        "Presentación de Ofertas": [fecpreofini, fecpreoffin]
+        "Análisis de Ofertas": [fecanaofini, fecanaoffin]
+        "Empresa Ganadora del Proceso": [_codprogan, _fecgan]
+      fields:
+        status: { type: checkbox_tag}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

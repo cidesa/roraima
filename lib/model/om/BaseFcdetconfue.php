@@ -49,207 +49,237 @@ abstract class BaseFcdetconfue extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefcon()
-	{
+  
+  public function getRefcon()
+  {
 
-		return $this->refcon; 		
-	}
-	
-	public function getNumdec()
-	{
+    return trim($this->refcon);
 
-		return $this->numdec; 		
-	}
-	
-	public function getMoncuo()
-	{
+  }
+  
+  public function getNumdec()
+  {
 
-		return number_format($this->moncuo,2,',','.');
-		
-	}
-	
-	public function getNumcuo()
-	{
+    return trim($this->numdec);
 
-		return $this->numcuo; 		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getMoncuo($val=false)
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getObscuo()
-	{
+    if($val) return number_format($this->moncuo,2,',','.');
+    else return $this->moncuo;
 
-		return $this->obscuo; 		
-	}
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNumcuo()
+  {
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->numcuo);
 
-	
-	public function getFuente()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return $this->fuente; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getObscuo()
+  {
+
+    return trim($this->obscuo);
+
+  }
+  
+  public function getFecven($format = 'Y-m-d')
+  {
+
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFuente()
+  {
+
+    return trim($this->fuente);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefcon($v)
 	{
 
-		if ($this->refcon !== $v) {
-			$this->refcon = $v;
-			$this->modifiedColumns[] = FcdetconfuePeer::REFCON;
-		}
-
+    if ($this->refcon !== $v) {
+        $this->refcon = $v;
+        $this->modifiedColumns[] = FcdetconfuePeer::REFCON;
+      }
+  
 	} 
 	
 	public function setNumdec($v)
 	{
 
-		if ($this->numdec !== $v) {
-			$this->numdec = $v;
-			$this->modifiedColumns[] = FcdetconfuePeer::NUMDEC;
-		}
-
+    if ($this->numdec !== $v) {
+        $this->numdec = $v;
+        $this->modifiedColumns[] = FcdetconfuePeer::NUMDEC;
+      }
+  
 	} 
 	
 	public function setMoncuo($v)
 	{
 
-		if ($this->moncuo !== $v) {
-			$this->moncuo = $v;
-			$this->modifiedColumns[] = FcdetconfuePeer::MONCUO;
-		}
-
+    if ($this->moncuo !== $v) {
+        $this->moncuo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdetconfuePeer::MONCUO;
+      }
+  
 	} 
 	
 	public function setNumcuo($v)
 	{
 
-		if ($this->numcuo !== $v) {
-			$this->numcuo = $v;
-			$this->modifiedColumns[] = FcdetconfuePeer::NUMCUO;
-		}
-
+    if ($this->numcuo !== $v) {
+        $this->numcuo = $v;
+        $this->modifiedColumns[] = FcdetconfuePeer::NUMCUO;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = FcdetconfuePeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdetconfuePeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setObscuo($v)
 	{
 
-		if ($this->obscuo !== $v) {
-			$this->obscuo = $v;
-			$this->modifiedColumns[] = FcdetconfuePeer::OBSCUO;
-		}
-
+    if ($this->obscuo !== $v) {
+        $this->obscuo = $v;
+        $this->modifiedColumns[] = FcdetconfuePeer::OBSCUO;
+      }
+  
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = FcdetconfuePeer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = FcdetconfuePeer::FECVEN;
+    }
 
 	} 
 	
 	public function setFuente($v)
 	{
 
-		if ($this->fuente !== $v) {
-			$this->fuente = $v;
-			$this->modifiedColumns[] = FcdetconfuePeer::FUENTE;
-		}
-
+    if ($this->fuente !== $v) {
+        $this->fuente = $v;
+        $this->modifiedColumns[] = FcdetconfuePeer::FUENTE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdetconfuePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdetconfuePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refcon = $rs->getString($startcol + 0);
+      $this->refcon = $rs->getString($startcol + 0);
 
-			$this->numdec = $rs->getString($startcol + 1);
+      $this->numdec = $rs->getString($startcol + 1);
 
-			$this->moncuo = $rs->getFloat($startcol + 2);
+      $this->moncuo = $rs->getFloat($startcol + 2);
 
-			$this->numcuo = $rs->getString($startcol + 3);
+      $this->numcuo = $rs->getString($startcol + 3);
 
-			$this->monpag = $rs->getFloat($startcol + 4);
+      $this->monpag = $rs->getFloat($startcol + 4);
 
-			$this->obscuo = $rs->getString($startcol + 5);
+      $this->obscuo = $rs->getString($startcol + 5);
 
-			$this->fecven = $rs->getDate($startcol + 6, null);
+      $this->fecven = $rs->getDate($startcol + 6, null);
 
-			$this->fuente = $rs->getString($startcol + 7);
+      $this->fuente = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdetconfue object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdetconfue object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -306,6 +336,7 @@ abstract class BaseFcdetconfue extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdetconfuePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdetconfuePeer::doUpdate($this, $con);

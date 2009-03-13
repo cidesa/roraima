@@ -29,93 +29,119 @@ abstract class BaseFormetdisper extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmet()
-	{
+  
+  public function getCodmet()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getPermet()
-	{
+    return trim($this->codmet);
 
-		return $this->permet; 		
-	}
-	
-	public function getCanmet()
-	{
+  }
+  
+  public function getPermet()
+  {
 
-		return number_format($this->canmet,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->permet);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCanmet($val=false)
+  {
+
+    if($val) return number_format($this->canmet,2,',','.');
+    else return $this->canmet;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = FormetdisperPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = FormetdisperPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setPermet($v)
 	{
 
-		if ($this->permet !== $v) {
-			$this->permet = $v;
-			$this->modifiedColumns[] = FormetdisperPeer::PERMET;
-		}
-
+    if ($this->permet !== $v) {
+        $this->permet = $v;
+        $this->modifiedColumns[] = FormetdisperPeer::PERMET;
+      }
+  
 	} 
 	
 	public function setCanmet($v)
 	{
 
-		if ($this->canmet !== $v) {
-			$this->canmet = $v;
-			$this->modifiedColumns[] = FormetdisperPeer::CANMET;
-		}
-
+    if ($this->canmet !== $v) {
+        $this->canmet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FormetdisperPeer::CANMET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FormetdisperPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FormetdisperPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmet = $rs->getString($startcol + 0);
+      $this->codmet = $rs->getString($startcol + 0);
 
-			$this->permet = $rs->getString($startcol + 1);
+      $this->permet = $rs->getString($startcol + 1);
 
-			$this->canmet = $rs->getFloat($startcol + 2);
+      $this->canmet = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Formetdisper object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Formetdisper object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

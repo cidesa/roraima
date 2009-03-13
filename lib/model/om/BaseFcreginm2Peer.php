@@ -380,6 +380,7 @@ abstract class BaseFcreginm2Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Fcreginm2Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

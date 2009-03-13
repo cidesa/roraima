@@ -29,92 +29,118 @@ abstract class BaseBnclafun extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcla()
-	{
+  
+  public function getCodcla()
+  {
 
-		return $this->codcla; 		
-	}
-	
-	public function getDescla()
-	{
+    return trim($this->codcla);
 
-		return $this->descla; 		
-	}
-	
-	public function getStacla()
-	{
+  }
+  
+  public function getDescla()
+  {
 
-		return $this->stacla; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->descla);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStacla()
+  {
+
+    return trim($this->stacla);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcla($v)
 	{
 
-		if ($this->codcla !== $v) {
-			$this->codcla = $v;
-			$this->modifiedColumns[] = BnclafunPeer::CODCLA;
-		}
-
+    if ($this->codcla !== $v) {
+        $this->codcla = $v;
+        $this->modifiedColumns[] = BnclafunPeer::CODCLA;
+      }
+  
 	} 
 	
 	public function setDescla($v)
 	{
 
-		if ($this->descla !== $v) {
-			$this->descla = $v;
-			$this->modifiedColumns[] = BnclafunPeer::DESCLA;
-		}
-
+    if ($this->descla !== $v) {
+        $this->descla = $v;
+        $this->modifiedColumns[] = BnclafunPeer::DESCLA;
+      }
+  
 	} 
 	
 	public function setStacla($v)
 	{
 
-		if ($this->stacla !== $v) {
-			$this->stacla = $v;
-			$this->modifiedColumns[] = BnclafunPeer::STACLA;
-		}
-
+    if ($this->stacla !== $v) {
+        $this->stacla = $v;
+        $this->modifiedColumns[] = BnclafunPeer::STACLA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnclafunPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnclafunPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcla = $rs->getString($startcol + 0);
+      $this->codcla = $rs->getString($startcol + 0);
 
-			$this->descla = $rs->getString($startcol + 1);
+      $this->descla = $rs->getString($startcol + 1);
 
-			$this->stacla = $rs->getString($startcol + 2);
+      $this->stacla = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnclafun object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnclafun object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseBnclafun extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BnclafunPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnclafunPeer::doUpdate($this, $con);

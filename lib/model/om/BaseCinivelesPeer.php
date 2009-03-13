@@ -225,6 +225,7 @@ abstract class BaseCinivelesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CinivelesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

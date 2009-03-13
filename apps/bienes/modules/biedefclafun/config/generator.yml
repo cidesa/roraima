@@ -6,8 +6,8 @@ generator:
 
     fields:
       codcla:      { name : Código }
-      descla:      { name : Nombre }      
-      stacla:      { name : p }
+      descla:      { name : Nombre }
+      #stacla:      { name : p }
 
 
     list:
@@ -16,8 +16,14 @@ generator:
       filters:        [codcla, descla]
       object_actions:
         _edit:        ~
-        _delete:      ~              
-      max_per_page:   10    
+        _delete:      ~
+      max_per_page:   10
+      sort: codcla
     edit:
       title:          Edición Clasificación Funcional
-      display:        [codcla, descla]    
+      display:       [codcla, descla]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -29,92 +29,118 @@ abstract class BaseNpunieje extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoduni()
-	{
+  
+  public function getCoduni()
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getCodniv()
-	{
+    return trim($this->coduni);
 
-		return $this->codniv; 		
-	}
-	
-	public function getNomuni()
-	{
+  }
+  
+  public function getCodniv()
+  {
 
-		return $this->nomuni; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codniv);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomuni()
+  {
+
+    return trim($this->nomuni);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = NpuniejePeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = NpuniejePeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = NpuniejePeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = NpuniejePeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setNomuni($v)
 	{
 
-		if ($this->nomuni !== $v) {
-			$this->nomuni = $v;
-			$this->modifiedColumns[] = NpuniejePeer::NOMUNI;
-		}
-
+    if ($this->nomuni !== $v) {
+        $this->nomuni = $v;
+        $this->modifiedColumns[] = NpuniejePeer::NOMUNI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpuniejePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpuniejePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduni = $rs->getString($startcol + 0);
+      $this->coduni = $rs->getString($startcol + 0);
 
-			$this->codniv = $rs->getString($startcol + 1);
+      $this->codniv = $rs->getString($startcol + 1);
 
-			$this->nomuni = $rs->getString($startcol + 2);
+      $this->nomuni = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npunieje object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npunieje object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseNpunieje extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpuniejePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpuniejePeer::doUpdate($this, $con);

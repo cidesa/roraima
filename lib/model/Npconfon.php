@@ -3,32 +3,40 @@
 /**
  * Subclass for representing a row from the 'npconfon' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class Npconfon extends BaseNpconfon
 {
+
+ private $check = '';
+
+
+ public function setCheck($val)
+  {
+	$this->check = $val;
+  }
+
+  public function getCheck()
+  {
+	return $this->check;
+  }
+
+
   public function getNomnom()
   {
-  	  $c = new Criteria();
-  	  $c->add(NpnominaPeer::CODNOM,self::getCodnom());
-  	  $nombre = NpnominaPeer::doSelectone($c);
-	  if ($nombre)
-	  	return $nombre->getNomnom();
-	  else 
-	    return ' ';
+	return Herramientas::getX('CODNOM','Npnomina','Nomnom',self::getCodnom());
   }
-  
+
   public function getNomcon()
   {
-  	  $c = new Criteria();
-  	  $c->add(NpdefcptPeer::CODCON,self::getCodCon());
-  	  $nombre1 = NpdefcptPeer::doSelectone($c);
-	  if ($nombre1)
-	  	return $nombre1->getNomcon();
-	  else 
-	    return ' ';
+	return Herramientas::getX('CODCON','Npdefcpt','Nomcon',self::getCodcon());
   }
-	
+
+
+
+
+
+
 }

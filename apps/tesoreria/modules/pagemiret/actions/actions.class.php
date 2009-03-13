@@ -10,32 +10,31 @@
  */
 class pagemiretActions extends autopagemiretActions
 {
-    public function retSQL()    
-    {
-        $con2 = sfContext::getInstance()->getDatabaseConnection($connection='propel');
-        $sql2 = "SELECT a.numord, b.codtip, c.destip, b.monret 
-		FROM opordpag a, opretord b, optipret c  
-		where a.numord ='".($this->opordpag->getNumord())."'
-		and a.numord=b.numord
-		and b.codtip=c.codtip";
-        $stmt2 = $con2->createStatement();
-        $stmt2->setLimit(5000);
-        $rs2 = $stmt2->executeQuery($sql2, ResultSet::FETCHMODE_NUM);
-        $resultado2=array();
-        //aqui lleno el array con los resultados:
-           while ($rs2->next())
-             {
-                $resultado2[]=$rs2->getRow();
-             }
-        //y la envio al template:
-        $this->rs2=$resultado2;
-        return $this->rs2;
-    }
-    
-   public function executeEdit()
-   {
+  public function executeIndex()
+  {
+     return $this->redirect('pagemiret/edit');
+  }
+
+  public function executeEdit()
+  {
     $this->opordpag = $this->getOpordpagOrCreate();
-    $this->ret = $this->retSQL();
+    $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
+    $this->lonmas=strlen($this->mascara);
+    if ($this->getRequestParameter('formulario')!="")
+    {
+     $this->getUser()->setAttribute('formulario',$this->getRequestParameter('formulario'));
+     $this->formulario=$this->getRequestParameter('formulario');
+     $this->tipo=$this->getUser()->getAttribute('tipo',null,$this->getUser()->getAttribute('formulario'));
+     $this->concepto = $this->getUser()->getAttribute('concepto',null,$this->getUser()->getAttribute('formulario'));
+     $this->tiporet = $this->getUser()->getAttribute('tiporet',null,$this->getUser()->getAttribute('formulario'));
+    }
+    else
+    {
+     $this->formulario='';
+     $this->tipo='';
+     $this->concepto='';
+     $this->tiporet='';
+    }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -44,6 +43,7 @@ class pagemiretActions extends autopagemiretActions
       $this->saveOpordpag($this->opordpag);
 
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -55,7 +55,7 @@ class pagemiretActions extends autopagemiretActions
       }
       else
       {
-        return $this->redirect('pagemiret/edit?id='.$this->opordpag->getId());
+        return $this->redirect('pagemiret/edit');
       }
     }
     else
@@ -63,38 +63,46 @@ class pagemiretActions extends autopagemiretActions
       $this->labels = $this->getLabels();
     }
   }
-    
-  public function executeList()
+
+  protected function saveOpordpag($opordpag)
   {
-    $this->processSort();
-
-    $this->processFilters();
-
-    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/opordpag/filters');
-
-    // pager
-    $this->pager = new sfPropelPager('Opordpag', 10);
-    $c = new Criteria();
-    $c->addJoin(OpordpagPeer::NUMORD, OpretordPeer::NUMORD);
-    $c->setDistinct();
-    $this->addSortCriteria($c);
-    $this->addFiltersCriteria($c);
-    $this->pager->setCriteria($c);
-    $this->pager->setPage($this->getRequestParameter('page', 1));
-    $this->pager->init();
+    $grid=Herramientas::CargarDatosGrid($this, $this->obj,true);
+    OrdendePago::salvarPagemiret($opordpag, $grid);
+    if ($this->getRequestParameter('formulario')!="")
+    {
+      $this->redirect('pagemiret/cerraropret?id='.$this->opordpag->getId());
+    }
   }
-  
-protected function updateOpordpagFromRequest()
+
+  public function executeCerraropret()
+  {
+    sfView::SUCCESS;
+  }
+
+  protected function updateOpordpagFromRequest()
   {
     $opordpag = $this->getRequestParameter('opordpag');
+    $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
+    $this->lonmas=strlen($this->mascara);
+    if ($this->getRequestParameter('formulario')!="")
+    {
+     $this->getUser()->setAttribute('formulario',$this->getRequestParameter('formulario'));
+     $this->formulario=$this->getRequestParameter('formulario');
+     $this->tipo=$this->getUser()->getAttribute('tipo',null,$this->getUser()->getAttribute('formulario'));
+     $this->concepto = $this->getUser()->getAttribute('concepto',null,$this->getUser()->getAttribute('formulario'));
+     $this->tiporet = $this->getUser()->getAttribute('tiporet',null,$this->getUser()->getAttribute('formulario'));
+    }
+    else
+    {
+     $this->formulario='';
+     $this->tipo='';
+     $this->concepto='';
+     $this->tiporet='';
+    }
 
     if (isset($opordpag['numord']))
     {
       $this->opordpag->setNumord($opordpag['numord']);
-    }
-    if (isset($opordpag['tipcau']))
-    {
-      $this->opordpag->setTipcau($opordpag['tipcau']);
     }
     if (isset($opordpag['fecemi']))
     {
@@ -124,6 +132,18 @@ protected function updateOpordpagFromRequest()
         $this->opordpag->setFecemi(null);
       }
     }
+    if (isset($opordpag['tipcau']))
+    {
+      $this->opordpag->setTipcau($opordpag['tipcau']);
+    }
+    if (isset($opordpag['nomext']))
+    {
+      $this->opordpag->setNomext($opordpag['nomext']);
+    }
+    if (isset($opordpag['desord']))
+    {
+      $this->opordpag->setDesord($opordpag['desord']);
+    }
     if (isset($opordpag['cedrif']))
     {
       $this->opordpag->setCedrif($opordpag['cedrif']);
@@ -132,120 +152,46 @@ protected function updateOpordpagFromRequest()
     {
       $this->opordpag->setNomben($opordpag['nomben']);
     }
-    if (isset($opordpag['monord']))
-    {
-      $this->opordpag->setMonord($opordpag['monord']);
-    }
-    if (isset($opordpag['desord']))
-    {
-      $this->opordpag->setDesord($opordpag['desord']);
-    }
     if (isset($opordpag['ctapag']))
     {
       $this->opordpag->setCtapag($opordpag['ctapag']);
     }
-    if (isset($opordpag['obsord']))
+    if (isset($opordpag['descta']))
     {
-      $this->opordpag->setObsord($opordpag['obsord']);
+      $this->opordpag->setDescta($opordpag['descta']);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    /*if (isset($opordpag['mondes']))
+    if (isset($opordpag['tipfin']))
     {
-      $this->opordpag->setMondes($opordpag['mondes']);
+      $this->opordpag->setTipfin($opordpag['tipfin']);
     }
-    if (isset($opordpag['monret']))
+    if (isset($opordpag['nomext2']))
     {
-      $this->opordpag->setMonret($opordpag['monret']);
+      $this->opordpag->setNomext2($opordpag['nomext2']);
     }
-    if (isset($opordpag['numche']))
+    if (isset($opordpag['codtip']))
     {
-      $this->opordpag->setNumche($opordpag['numche']);
+      $this->opordpag->setCodtip($opordpag['codtip']);
     }
-    if (isset($opordpag['ctaban']))
+    if (isset($opordpag['destip']))
     {
-      $this->opordpag->setCtaban($opordpag['ctaban']);
-    }
-    
-    if (isset($opordpag['numcom']))
-    {
-      $this->opordpag->setNumcom($opordpag['numcom']);
-    }
-    if (isset($opordpag['status']))
-    {
-      $this->opordpag->setStatus($opordpag['status']);
+      $this->opordpag->setDestip($opordpag['destip']);
     }
     if (isset($opordpag['coduni']))
     {
       $this->opordpag->setCoduni($opordpag['coduni']);
     }
-    if (isset($opordpag['fecenvcon']))
+    if (isset($opordpag['monord']))
     {
-      if ($opordpag['fecenvcon'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['fecenvcon']))
-          {
-            $value = $dateFormat->format($opordpag['fecenvcon'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['fecenvcon'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFecenvcon($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFecenvcon(null);
-      }
+      $this->opordpag->setMonord($opordpag['monord']);
     }
-    if (isset($opordpag['fecenvfin']))
+    if (isset($opordpag['status']))
     {
-      if ($opordpag['fecenvfin'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['fecenvfin']))
-          {
-            $value = $dateFormat->format($opordpag['fecenvfin'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['fecenvfin'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFecenvfin($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFecenvfin(null);
-      }
+      $this->opordpag->setStatus($opordpag['status']);
     }
-    if (isset($opordpag['ctapagfin']))
+    if (isset($opordpag['aproba']))
     {
-      $this->opordpag->setCtapagfin($opordpag['ctapagfin']);
+      $this->opordpag->setAproba($opordpag['aproba']);
     }
-    
     if (isset($opordpag['fecven']))
     {
       if ($opordpag['fecven'])
@@ -274,23 +220,28 @@ protected function updateOpordpagFromRequest()
         $this->opordpag->setFecven(null);
       }
     }
-    if (isset($opordpag['fecanu']))
+
+    if (isset($opordpag['numsigecof']))
     {
-      if ($opordpag['fecanu'])
+      $this->opordpag->setNumsigecof($opordpag['numsigecof']);
+    }
+    if (isset($opordpag['fecsigecof']))
+    {
+      if ($opordpag['fecsigecof'])
       {
         try
         {
           $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['fecanu']))
+                              if (!is_array($opordpag['fecsigecof']))
           {
-            $value = $dateFormat->format($opordpag['fecanu'], 'i', $dateFormat->getInputPattern('d'));
+            $value = $dateFormat->format($opordpag['fecsigecof'], 'i', $dateFormat->getInputPattern('d'));
           }
           else
           {
-            $value_array = $opordpag['fecanu'];
+            $value_array = $opordpag['fecsigecof'];
             $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
           }
-          $this->opordpag->setFecanu($value);
+          $this->opordpag->setFecsigecof($value);
         }
         catch (sfException $e)
         {
@@ -299,309 +250,249 @@ protected function updateOpordpagFromRequest()
       }
       else
       {
-        $this->opordpag->setFecanu(null);
+        $this->opordpag->setFecsigecof(null);
       }
     }
-    if (isset($opordpag['desanu']))
+    if (isset($opordpag['expsigecof']))
     {
-      $this->opordpag->setDesanu($opordpag['desanu']);
+      $this->opordpag->setExpsigecof($opordpag['expsigecof']);
     }
-    if (isset($opordpag['monpag']))
-    {
-      $this->opordpag->setMonpag($opordpag['monpag']);
-    }
-    if (isset($opordpag['aproba']))
-    {
-      $this->opordpag->setAproba($opordpag['aproba']);
-    }
-    if (isset($opordpag['nombensus']))
-    {
-      $this->opordpag->setNombensus($opordpag['nombensus']);
-    }
-    if (isset($opordpag['fecrecfin']))
-    {
-      if ($opordpag['fecrecfin'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['fecrecfin']))
-          {
-            $value = $dateFormat->format($opordpag['fecrecfin'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['fecrecfin'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFecrecfin($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFecrecfin(null);
-      }
-    }
-    if (isset($opordpag['anopre']))
-    {
-      $this->opordpag->setAnopre($opordpag['anopre']);
-    }
-    if (isset($opordpag['fecpag']))
-    {
-      if ($opordpag['fecpag'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['fecpag']))
-          {
-            $value = $dateFormat->format($opordpag['fecpag'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['fecpag'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFecpag($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFecpag(null);
-      }
-    }
-    if (isset($opordpag['numtiq']))
-    {
-      $this->opordpag->setNumtiq($opordpag['numtiq']);
-    }
-    if (isset($opordpag['peraut']))
-    {
-      $this->opordpag->setPeraut($opordpag['peraut']);
-    }
-    if (isset($opordpag['cedaut']))
-    {
-      $this->opordpag->setCedaut($opordpag['cedaut']);
-    }
-    if (isset($opordpag['nomper2']))
-    {
-      $this->opordpag->setNomper2($opordpag['nomper2']);
-    }
-    if (isset($opordpag['nomper1']))
-    {
-      $this->opordpag->setNomper1($opordpag['nomper1']);
-    }
-    if (isset($opordpag['horcon']))
-    {
-      $this->opordpag->setHorcon($opordpag['horcon']);
-    }
-    if (isset($opordpag['feccon']))
-    {
-      if ($opordpag['feccon'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['feccon']))
-          {
-            $value = $dateFormat->format($opordpag['feccon'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['feccon'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFeccon($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFeccon(null);
-      }
-    }
-    if (isset($opordpag['nomcat']))
-    {
-      $this->opordpag->setNomcat($opordpag['nomcat']);
-    }
-    if (isset($opordpag['numfac']))
-    {
-      $this->opordpag->setNumfac($opordpag['numfac']);
-    }
-    if (isset($opordpag['numconfac']))
-    {
-      $this->opordpag->setNumconfac($opordpag['numconfac']);
-    }
-    if (isset($opordpag['numcorfac']))
-    {
-      $this->opordpag->setNumcorfac($opordpag['numcorfac']);
-    }
-    if (isset($opordpag['fechafac']))
-    {
-      if ($opordpag['fechafac'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['fechafac']))
-          {
-            $value = $dateFormat->format($opordpag['fechafac'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['fechafac'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFechafac($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFechafac(null);
-      }
-    }
-    if (isset($opordpag['fecfac']))
-    {
-      if ($opordpag['fecfac'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['fecfac']))
-          {
-            $value = $dateFormat->format($opordpag['fecfac'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['fecfac'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFecfac($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFecfac(null);
-      }
-    }
-    if (isset($opordpag['tipfin']))
-    {
-      $this->opordpag->setTipfin($opordpag['tipfin']);
-    }
-    if (isset($opordpag['comret']))
-    {
-      $this->opordpag->setComret($opordpag['comret']);
-    }
-    if (isset($opordpag['feccomret']))
-    {
-      if ($opordpag['feccomret'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['feccomret']))
-          {
-            $value = $dateFormat->format($opordpag['feccomret'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['feccomret'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFeccomret($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFeccomret(null);
-      }
-    }
-    if (isset($opordpag['comretislr']))
-    {
-      $this->opordpag->setComretislr($opordpag['comretislr']);
-    }
-    if (isset($opordpag['feccomretislr']))
-    {
-      if ($opordpag['feccomretislr'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['feccomretislr']))
-          {
-            $value = $dateFormat->format($opordpag['feccomretislr'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['feccomretislr'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFeccomretislr($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFeccomretislr(null);
-      }
-    }
-    if (isset($opordpag['comretltf']))
-    {
-      $this->opordpag->setComretltf($opordpag['comretltf']);
-    }
-    if (isset($opordpag['feccomretltf']))
-    {
-      if ($opordpag['feccomretltf'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($opordpag['feccomretltf']))
-          {
-            $value = $dateFormat->format($opordpag['feccomretltf'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $opordpag['feccomretltf'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->opordpag->setFeccomretltf($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->opordpag->setFeccomretltf(null);
-      }
-    }*/
+
   }
-  
+
+  public function configGrid($codigo=' ',$codigo2=' ', $fecdes='', $fechas='')
+  {
+    /*$c = new Criteria();
+    $c->addJoin(OpretordPeer::NUMORD, OpordpagPeer::NUMORD);
+    $c->add(OpordpagPeer::TIPCAU, $codigo2);
+    $c->add(OpretordPeer::CODTIP, $codigo);
+    $c->add(OpretordPeer::NUMRET, 'NOASIGNA');
+    $c->addAsColumn('NUMORD1',OpordpagPeer::NUMORD);
+    $c->addAsColumn('FECEMI',OpordpagPeer::FECEMI);
+    $c->addAsColumn('CODPRE',OpretordPeer::CODPRE);
+    $c->addAsColumn('MONRET',OpretordPeer::MONRET);
+    $all = OpretordPeer::doSelect($c);*/
+
+
+    if(trim($fecdes)!=""){
+    	$date = explode("/",$fecdes);
+    	if(!isset($date[0])) $date[0] = 0;
+    	if(!isset($date[1])) $date[1] = 0;
+    	if(!isset($date[2])) $date[2] = 0;
+    	$fecha = date("Y-m-d",mktime(0,0,0,$date[0],$date[1],$date[2]));
+    	$sqlfecdes = " AND A.FECEMI >= '$fecha'";
+    }else{
+    	$sqlfecdes = "";
+    }
+
+    if(trim($fechas)!=""){
+    	$date = explode("/",$fechas);
+    	if(!isset($date[0])) $date[0] = 0;
+    	if(!isset($date[1])) $date[1] = 0;
+    	if(!isset($date[2])) $date[2] = 0;
+    	$fecha = date("Y-m-d",mktime(0,0,0,$date[0],$date[1],$date[2]));
+    	$sqlfechas = " AND A.FECEMI <= '$fecha' ";
+    }else{
+    	$sqlfechas = "";
+    }
+
+    $c =  new Criteria();
+    $datos = OpdefempPeer::doSelectOne($c);
+    if($datos){
+    	$emichepag = $datos->getEmichepag();
+    	if($emichepag == "S"){
+    		$sqltabla = ", TSCHEEMI C";
+    		$sqlche = " AND A.NUMCHE = C.NUMCHE AND A.CTABAN = C.NUMCUE AND C.STATUS = 'E'";
+    	}else {
+    		$sqlche = "";
+    		$sqltabla = "";
+    	}
+    }else{
+    	$emichepag = "";
+    }
+
+    $SQL="SELECT 1 as check, A.NUMORD as numord,A.FECEMI as fecemi,B.CODPRE as codpre,B.MONRET as monret, 9 as id FROM OPORDPAG A,OPRETORD B".$sqltabla." WHERE A.NUMORD = B.NUMORD AND B.CODTIP = '".$codigo."' AND B.NUMRET = 'NOASIGNA' ".$sqlche.$sqlfecdes.$sqlfechas;
+
+    $resp = Herramientas::BuscarDatos($SQL,&$all);
+    $opciones = new OpcionesGrid();
+    $opciones->setEliminar(false);
+    $opciones->setTabla('Opretord');
+    $opciones->setAnchoGrid(800);
+    $opciones->setTitulo('');
+    $opciones->setFilas(0);
+    $opciones->setHTMLTotalFilas(' ');
+
+    $col1 = new Columna('Marque');
+    $col1->setTipo(Columna::CHECK);
+    $col1->setNombreCampo('check');
+    $col1->setEsGrabable(true);
+    $col1->setCheckbox(true);
+    $col1->setHTML(' ');
+    $col1->setJScript('onClick="totalmarcadas(this.id)"');
+
+    $col2 = new Columna('Nro. Orden');
+    $col2->setTipo(Columna::TEXTO);
+    $col2->setEsGrabable(true);
+    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col2->setAlineacionContenido(Columna::IZQUIERDA);
+    $col2->setNombreCampo('numord');
+    $col2->setHTML('type="text" size="20" readonly=true');
+
+    $col3 = new Columna('Fecha');
+  	$col3->setTipo(Columna::FECHA);
+	$col3->setEsGrabable(true);
+	$col3->setNombreCampo('fecemi');
+	$col3->setAlineacionObjeto(Columna::CENTRO);
+	$col3->setAlineacionContenido(Columna::CENTRO);
+	$col3->setHTML('type="text" size="10" readonly=true');
+
+    $col4 = new Columna('Código Presupuestario');
+    $col4->setTipo(Columna::TEXTO);
+    $col4->setEsGrabable(true);
+    $col4->setAlineacionObjeto(Columna::CENTRO);
+    $col4->setAlineacionContenido(Columna::CENTRO);
+    $col4->setNombreCampo('codpre');
+    $col4->setHTML('type="text" size="25" readonly=true');
+
+    $col5 = new Columna('Monto Retención');
+    $col5->setTipo(Columna::MONTO);
+    $col5->setEsGrabable(true);
+    $col5->setAlineacionContenido(Columna::IZQUIERDA);
+    $col5->setAlineacionObjeto(Columna::IZQUIERDA);
+    $col5->setNombreCampo('monret');
+    $col5->setEsNumerico(true);
+    $col5->setHTML('type="text" size="10" readonly=true');
+    $col5->setEsTotal(true,'opordpag_monord');
+
+    $opciones->addColumna($col1);
+    $opciones->addColumna($col2);
+    $opciones->addColumna($col3);
+    $opciones->addColumna($col4);
+    $opciones->addColumna($col5);
+
+    $this->obj = $opciones->getConfig($all);
+   }
+
+  public function executeAjax()
+  {
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
+    $cajtexcom=$this->getRequestParameter('cajtexcom');
+    $cuenta=$this->getRequestParameter('cuenta');
+    $descta=$this->getRequestParameter('descuenta');
+  if ($this->getRequestParameter('ajax')=='1')
+  {
+    $dato=CpdoccauPeer::getNombre($this->getRequestParameter('codigo'));
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+  }
+  else  if ($this->getRequestParameter('ajax')=='2')
+  {
+    $dato=OpbenefiPeer::getDato($this->getRequestParameter('codigo'),'Nomben');
+    $dato1=OpbenefiPeer::getDato($this->getRequestParameter('codigo'),'Codcta');
+    $dato2=OpbenefiPeer::getDato2($dato1,'Descta');
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cuenta.'","'.$dato1.'",""],["'.$descta.'","'.$dato2.'",""]]';
+  }
+  else  if ($this->getRequestParameter('ajax')=='3')
+  {
+    $dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+  }
+  else  if ($this->getRequestParameter('ajax')=='4')
+  {
+    $dato=FortipfinPeer::getDesfin($this->getRequestParameter('codigo'));
+      $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
+  }
+
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+  return sfView::HEADER_ONLY;
+  }
+
+  public function executeAutocomplete()
+  {
+  if ($this->getRequestParameter('ajax')=='2')
+  {
+    $this->tags=Herramientas::autocompleteAjax('CEDRIF','Opbenefi','Cedrif',$this->getRequestParameter('opordpag[cedrif]'));
+  }
+  else  if ($this->getRequestParameter('ajax')=='4')
+  {
+    $this->tags=Herramientas::autocompleteAjax('CODFIN','Fortipfin','Codfin',$this->getRequestParameter('opordpag[tipfin]'));
+    }
+    else  if ($this->getRequestParameter('ajax')=='5')
+  {
+    $this->tags=Herramientas::autocompleteAjax('CODTIP','Optipret','Codtip',$this->getRequestParameter('opordpag[codtip]'));
+    }
+  }
+
+  public function executeGrid()
+  {
+  $cajtexmos=$this->getRequestParameter('cajtexmos');
+  $cajtexcom=$this->getRequestParameter('cajtexcom');
+  $cuenta=$this->getRequestParameter('cuenta');
+  $descta=$this->getRequestParameter('descuenta');
+  if ($this->getRequestParameter('ajax')=='5')
+  {
+    $dato=OptipretPeer::getRetencion($this->getRequestParameter('codigo'));
+    $fecdes = $this->getRequestParameter('fecdes');
+    $fechas = $this->getRequestParameter('fechas');
+
+    $this->configGrid($this->getRequestParameter('codigo'),$this->getRequestParameter('codigo2'),$fecdes,$fechas);
+
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""],["fila","'.$this->numfila.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+  }
+   else  if ($this->getRequestParameter('ajax')=='2')
+   {
+    $dato=OpbenefiPeer::getDato($this->getRequestParameter('codigo'),'Nomben');
+    $dato1=OpbenefiPeer::getDato($this->getRequestParameter('codigo'),'Codcta');
+    $dato2=OpbenefiPeer::getDato2($dato1,'Descta');
+    $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cuenta.'","'.$dato1.'",""],["'.$descta.'","'.$dato2.'",""]]';
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
+   }
+  }
+
+
+ protected function getOpordpagOrCreate($id = 'id')
+  {
+    if (!$this->getRequestParameter($id))
+    {
+      $opordpag = new Opordpag();
+      $this->configGrid($this->getRequestParameter('opordpag[codtip]'),$this->getRequestParameter('opordpag[tipcau]'));
+    }
+    else
+    {
+      $opordpag = OpordpagPeer::retrieveByPk($this->getRequestParameter($id));
+
+      $this->forward404Unless($opordpag);
+    }
+
+    return $opordpag;
+  }
+
+   public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->opordpag = $this->getOpordpagOrCreate();
+    $this->updateOpordpagFromRequest();
+
+    $this->mascara = Herramientas::ObtenerFormato('Contaba','Forcta');
+    $this->lonmas=strlen($this->mascara);
+    if ($this->getRequestParameter('formulario')!="")
+    {
+     $this->getUser()->setAttribute('formulario',$this->getRequestParameter('formulario'));
+     $this->formulario=$this->getRequestParameter('formulario');
+     $this->tipo=$this->getUser()->getAttribute('tipo',null,$this->getUser()->getAttribute('formulario'));
+     $this->concepto = $this->getUser()->getAttribute('concepto',null,$this->getUser()->getAttribute('formulario'));
+     $this->tiporet = $this->getUser()->getAttribute('tiporet',null,$this->getUser()->getAttribute('formulario'));
+    }
+    else
+    {
+     $this->formulario='';
+     $this->tipo='';
+     $this->concepto='';
+     $this->tiporet='';
+    }
+    $this->labels = $this->getLabels();
+
+    return sfView::SUCCESS;
+  }
 }

@@ -37,152 +37,179 @@ abstract class BaseNpcomocp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getPascar()
-	{
+  
+  public function getPascar()
+  {
 
-		return $this->pascar; 		
-	}
-	
-	public function getGracar()
-	{
+    return trim($this->pascar);
 
-		return $this->gracar; 		
-	}
-	
-	public function getSuecar()
-	{
+  }
+  
+  public function getGracar()
+  {
 
-		return number_format($this->suecar,2,',','.');
-		
-	}
-	
-	public function getCodtipcar()
-	{
+    return trim($this->gracar);
 
-		return $this->codtipcar; 		
-	}
-	
-	public function getFecdes($format = 'Y-m-d')
-	{
+  }
+  
+  public function getSuecar($val=false)
+  {
 
-		if ($this->fecdes === null || $this->fecdes === '') {
-			return null;
-		} elseif (!is_int($this->fecdes)) {
-						$ts = strtotime($this->fecdes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
-			}
-		} else {
-			$ts = $this->fecdes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->suecar,2,',','.');
+    else return $this->suecar;
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodtipcar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codtipcar);
+
+  }
+  
+  public function getFecdes($format = 'Y-m-d')
+  {
+
+    if ($this->fecdes === null || $this->fecdes === '') {
+      return null;
+    } elseif (!is_int($this->fecdes)) {
+            $ts = adodb_strtotime($this->fecdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdes] as date/time value: " . var_export($this->fecdes, true));
+      }
+    } else {
+      $ts = $this->fecdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setPascar($v)
 	{
 
-		if ($this->pascar !== $v) {
-			$this->pascar = $v;
-			$this->modifiedColumns[] = NpcomocpPeer::PASCAR;
-		}
-
+    if ($this->pascar !== $v) {
+        $this->pascar = $v;
+        $this->modifiedColumns[] = NpcomocpPeer::PASCAR;
+      }
+  
 	} 
 	
 	public function setGracar($v)
 	{
 
-		if ($this->gracar !== $v) {
-			$this->gracar = $v;
-			$this->modifiedColumns[] = NpcomocpPeer::GRACAR;
-		}
-
+    if ($this->gracar !== $v) {
+        $this->gracar = $v;
+        $this->modifiedColumns[] = NpcomocpPeer::GRACAR;
+      }
+  
 	} 
 	
 	public function setSuecar($v)
 	{
 
-		if ($this->suecar !== $v) {
-			$this->suecar = $v;
-			$this->modifiedColumns[] = NpcomocpPeer::SUECAR;
-		}
-
+    if ($this->suecar !== $v) {
+        $this->suecar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcomocpPeer::SUECAR;
+      }
+  
 	} 
 	
 	public function setCodtipcar($v)
 	{
 
-		if ($this->codtipcar !== $v) {
-			$this->codtipcar = $v;
-			$this->modifiedColumns[] = NpcomocpPeer::CODTIPCAR;
-		}
-
+    if ($this->codtipcar !== $v) {
+        $this->codtipcar = $v;
+        $this->modifiedColumns[] = NpcomocpPeer::CODTIPCAR;
+      }
+  
 	} 
 	
 	public function setFecdes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdes !== $ts) {
-			$this->fecdes = $ts;
-			$this->modifiedColumns[] = NpcomocpPeer::FECDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdes !== $ts) {
+      $this->fecdes = $ts;
+      $this->modifiedColumns[] = NpcomocpPeer::FECDES;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcomocpPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcomocpPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->pascar = $rs->getString($startcol + 0);
+      $this->pascar = $rs->getString($startcol + 0);
 
-			$this->gracar = $rs->getString($startcol + 1);
+      $this->gracar = $rs->getString($startcol + 1);
 
-			$this->suecar = $rs->getFloat($startcol + 2);
+      $this->suecar = $rs->getFloat($startcol + 2);
 
-			$this->codtipcar = $rs->getString($startcol + 3);
+      $this->codtipcar = $rs->getString($startcol + 3);
 
-			$this->fecdes = $rs->getDate($startcol + 4, null);
+      $this->fecdes = $rs->getDate($startcol + 4, null);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcomocp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcomocp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +266,7 @@ abstract class BaseNpcomocp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcomocpPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcomocpPeer::doUpdate($this, $con);

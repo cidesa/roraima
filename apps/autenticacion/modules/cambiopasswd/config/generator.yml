@@ -1,0 +1,19 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Usuarios
+    theme:            cidesaGenerator
+
+    fields:
+      loguse: {name: Usuario, params: size=7 readonly=true }
+      nomuse: {name: Nombre Usuario, params: size=20 readonly=true }
+      pasuse: {name: Contraseña Actual, params: size=15 type=password }
+      password: {name: Nueva Contraseña, params: size=15 }
+      repassword: {name: Validar Contraseña, params: size=15 }
+
+
+    edit:
+      title:          Cambiar Contraseña
+      display:        [loguse, nomuse, pasuse, _password, _repassword]
+      actions:
+        _save:        ~

@@ -210,6 +210,7 @@ abstract class BaseNpescsuePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpescsuePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

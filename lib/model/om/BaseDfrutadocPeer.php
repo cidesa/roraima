@@ -13,7 +13,7 @@ abstract class BaseDfrutadocPeer {
 	const CLASS_DEFAULT = 'lib.model.Dfrutadoc';
 
 	
-	const NUM_COLUMNS = 17;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -23,49 +23,19 @@ abstract class BaseDfrutadocPeer {
 	const RUTDOC = 'dfrutadoc.RUTDOC';
 
 	
-	const TIPDOC = 'dfrutadoc.TIPDOC';
+	const DESUNI = 'dfrutadoc.DESUNI';
 
 	
-	const NUMUNI1 = 'dfrutadoc.NUMUNI1';
+	const DESRUT = 'dfrutadoc.DESRUT';
 
 	
-	const DIAPER1 = 'dfrutadoc.DIAPER1';
+	const DIADOC = 'dfrutadoc.DIADOC';
 
 	
-	const NUMUNI2 = 'dfrutadoc.NUMUNI2';
+	const ID_ACUNIDAD = 'dfrutadoc.ID_ACUNIDAD';
 
 	
-	const DIAPER2 = 'dfrutadoc.DIAPER2';
-
-	
-	const NUMUNI3 = 'dfrutadoc.NUMUNI3';
-
-	
-	const DIAPER3 = 'dfrutadoc.DIAPER3';
-
-	
-	const NUMUNI4 = 'dfrutadoc.NUMUNI4';
-
-	
-	const DIAPER4 = 'dfrutadoc.DIAPER4';
-
-	
-	const NUMUNI5 = 'dfrutadoc.NUMUNI5';
-
-	
-	const DIAPER5 = 'dfrutadoc.DIAPER5';
-
-	
-	const NUMUNI6 = 'dfrutadoc.NUMUNI6';
-
-	
-	const DIAPER6 = 'dfrutadoc.DIAPER6';
-
-	
-	const NUMUNI7 = 'dfrutadoc.NUMUNI7';
-
-	
-	const DIAPER7 = 'dfrutadoc.DIAPER7';
+	const ID_DFTABTIP = 'dfrutadoc.ID_DFTABTIP';
 
 	
 	const ID = 'dfrutadoc.ID';
@@ -76,18 +46,18 @@ abstract class BaseDfrutadocPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Rutdoc', 'Tipdoc', 'Numuni1', 'Diaper1', 'Numuni2', 'Diaper2', 'Numuni3', 'Diaper3', 'Numuni4', 'Diaper4', 'Numuni5', 'Diaper5', 'Numuni6', 'Diaper6', 'Numuni7', 'Diaper7', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (DfrutadocPeer::RUTDOC, DfrutadocPeer::TIPDOC, DfrutadocPeer::NUMUNI1, DfrutadocPeer::DIAPER1, DfrutadocPeer::NUMUNI2, DfrutadocPeer::DIAPER2, DfrutadocPeer::NUMUNI3, DfrutadocPeer::DIAPER3, DfrutadocPeer::NUMUNI4, DfrutadocPeer::DIAPER4, DfrutadocPeer::NUMUNI5, DfrutadocPeer::DIAPER5, DfrutadocPeer::NUMUNI6, DfrutadocPeer::DIAPER6, DfrutadocPeer::NUMUNI7, DfrutadocPeer::DIAPER7, DfrutadocPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('rutdoc', 'tipdoc', 'numuni1', 'diaper1', 'numuni2', 'diaper2', 'numuni3', 'diaper3', 'numuni4', 'diaper4', 'numuni5', 'diaper5', 'numuni6', 'diaper6', 'numuni7', 'diaper7', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Rutdoc', 'Desuni', 'Desrut', 'Diadoc', 'IdAcunidad', 'IdDftabtip', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (DfrutadocPeer::RUTDOC, DfrutadocPeer::DESUNI, DfrutadocPeer::DESRUT, DfrutadocPeer::DIADOC, DfrutadocPeer::ID_ACUNIDAD, DfrutadocPeer::ID_DFTABTIP, DfrutadocPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('rutdoc', 'desuni', 'desrut', 'diadoc', 'id_acunidad', 'id_dftabtip', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Rutdoc' => 0, 'Tipdoc' => 1, 'Numuni1' => 2, 'Diaper1' => 3, 'Numuni2' => 4, 'Diaper2' => 5, 'Numuni3' => 6, 'Diaper3' => 7, 'Numuni4' => 8, 'Diaper4' => 9, 'Numuni5' => 10, 'Diaper5' => 11, 'Numuni6' => 12, 'Diaper6' => 13, 'Numuni7' => 14, 'Diaper7' => 15, 'Id' => 16, ),
-		BasePeer::TYPE_COLNAME => array (DfrutadocPeer::RUTDOC => 0, DfrutadocPeer::TIPDOC => 1, DfrutadocPeer::NUMUNI1 => 2, DfrutadocPeer::DIAPER1 => 3, DfrutadocPeer::NUMUNI2 => 4, DfrutadocPeer::DIAPER2 => 5, DfrutadocPeer::NUMUNI3 => 6, DfrutadocPeer::DIAPER3 => 7, DfrutadocPeer::NUMUNI4 => 8, DfrutadocPeer::DIAPER4 => 9, DfrutadocPeer::NUMUNI5 => 10, DfrutadocPeer::DIAPER5 => 11, DfrutadocPeer::NUMUNI6 => 12, DfrutadocPeer::DIAPER6 => 13, DfrutadocPeer::NUMUNI7 => 14, DfrutadocPeer::DIAPER7 => 15, DfrutadocPeer::ID => 16, ),
-		BasePeer::TYPE_FIELDNAME => array ('rutdoc' => 0, 'tipdoc' => 1, 'numuni1' => 2, 'diaper1' => 3, 'numuni2' => 4, 'diaper2' => 5, 'numuni3' => 6, 'diaper3' => 7, 'numuni4' => 8, 'diaper4' => 9, 'numuni5' => 10, 'diaper5' => 11, 'numuni6' => 12, 'diaper6' => 13, 'numuni7' => 14, 'diaper7' => 15, 'id' => 16, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Rutdoc' => 0, 'Desuni' => 1, 'Desrut' => 2, 'Diadoc' => 3, 'IdAcunidad' => 4, 'IdDftabtip' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (DfrutadocPeer::RUTDOC => 0, DfrutadocPeer::DESUNI => 1, DfrutadocPeer::DESRUT => 2, DfrutadocPeer::DIADOC => 3, DfrutadocPeer::ID_ACUNIDAD => 4, DfrutadocPeer::ID_DFTABTIP => 5, DfrutadocPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('rutdoc' => 0, 'desuni' => 1, 'desrut' => 2, 'diadoc' => 3, 'id_acunidad' => 4, 'id_dftabtip' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -143,35 +113,15 @@ abstract class BaseDfrutadocPeer {
 
 		$criteria->addSelectColumn(DfrutadocPeer::RUTDOC);
 
-		$criteria->addSelectColumn(DfrutadocPeer::TIPDOC);
+		$criteria->addSelectColumn(DfrutadocPeer::DESUNI);
 
-		$criteria->addSelectColumn(DfrutadocPeer::NUMUNI1);
+		$criteria->addSelectColumn(DfrutadocPeer::DESRUT);
 
-		$criteria->addSelectColumn(DfrutadocPeer::DIAPER1);
+		$criteria->addSelectColumn(DfrutadocPeer::DIADOC);
 
-		$criteria->addSelectColumn(DfrutadocPeer::NUMUNI2);
+		$criteria->addSelectColumn(DfrutadocPeer::ID_ACUNIDAD);
 
-		$criteria->addSelectColumn(DfrutadocPeer::DIAPER2);
-
-		$criteria->addSelectColumn(DfrutadocPeer::NUMUNI3);
-
-		$criteria->addSelectColumn(DfrutadocPeer::DIAPER3);
-
-		$criteria->addSelectColumn(DfrutadocPeer::NUMUNI4);
-
-		$criteria->addSelectColumn(DfrutadocPeer::DIAPER4);
-
-		$criteria->addSelectColumn(DfrutadocPeer::NUMUNI5);
-
-		$criteria->addSelectColumn(DfrutadocPeer::DIAPER5);
-
-		$criteria->addSelectColumn(DfrutadocPeer::NUMUNI6);
-
-		$criteria->addSelectColumn(DfrutadocPeer::DIAPER6);
-
-		$criteria->addSelectColumn(DfrutadocPeer::NUMUNI7);
-
-		$criteria->addSelectColumn(DfrutadocPeer::DIAPER7);
+		$criteria->addSelectColumn(DfrutadocPeer::ID_DFTABTIP);
 
 		$criteria->addSelectColumn(DfrutadocPeer::ID);
 
@@ -252,6 +202,442 @@ abstract class BaseDfrutadocPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinAcunidad(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(DfrutadocPeer::ID_ACUNIDAD, AcunidadPeer::ID);
+
+		$rs = DfrutadocPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinDftabtip(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(DfrutadocPeer::ID_DFTABTIP, DftabtipPeer::ID);
+
+		$rs = DfrutadocPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAcunidad(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		DfrutadocPeer::addSelectColumns($c);
+		$startcol = (DfrutadocPeer::NUM_COLUMNS - DfrutadocPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		AcunidadPeer::addSelectColumns($c);
+
+		$c->addJoin(DfrutadocPeer::ID_ACUNIDAD, AcunidadPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = DfrutadocPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = AcunidadPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getAcunidad(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addDfrutadoc($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initDfrutadocs();
+				$obj2->addDfrutadoc($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinDftabtip(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		DfrutadocPeer::addSelectColumns($c);
+		$startcol = (DfrutadocPeer::NUM_COLUMNS - DfrutadocPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		DftabtipPeer::addSelectColumns($c);
+
+		$c->addJoin(DfrutadocPeer::ID_DFTABTIP, DftabtipPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = DfrutadocPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = DftabtipPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getDftabtip(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addDfrutadoc($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initDfrutadocs();
+				$obj2->addDfrutadoc($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(DfrutadocPeer::ID_ACUNIDAD, AcunidadPeer::ID);
+
+		$criteria->addJoin(DfrutadocPeer::ID_DFTABTIP, DftabtipPeer::ID);
+
+		$rs = DfrutadocPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		DfrutadocPeer::addSelectColumns($c);
+		$startcol2 = (DfrutadocPeer::NUM_COLUMNS - DfrutadocPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		AcunidadPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + AcunidadPeer::NUM_COLUMNS;
+
+		DftabtipPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + DftabtipPeer::NUM_COLUMNS;
+
+		$c->addJoin(DfrutadocPeer::ID_ACUNIDAD, AcunidadPeer::ID);
+
+		$c->addJoin(DfrutadocPeer::ID_DFTABTIP, DftabtipPeer::ID);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = DfrutadocPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = AcunidadPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getAcunidad(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addDfrutadoc($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initDfrutadocs();
+				$obj2->addDfrutadoc($obj1);
+			}
+
+
+					
+			$omClass = DftabtipPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3 = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getDftabtip(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addDfrutadoc($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initDfrutadocs();
+				$obj3->addDfrutadoc($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAllExceptAcunidad(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(DfrutadocPeer::ID_DFTABTIP, DftabtipPeer::ID);
+
+		$rs = DfrutadocPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptDftabtip(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(DfrutadocPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(DfrutadocPeer::ID_ACUNIDAD, AcunidadPeer::ID);
+
+		$rs = DfrutadocPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAllExceptAcunidad(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		DfrutadocPeer::addSelectColumns($c);
+		$startcol2 = (DfrutadocPeer::NUM_COLUMNS - DfrutadocPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		DftabtipPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + DftabtipPeer::NUM_COLUMNS;
+
+		$c->addJoin(DfrutadocPeer::ID_DFTABTIP, DftabtipPeer::ID);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = DfrutadocPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = DftabtipPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getDftabtip(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addDfrutadoc($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initDfrutadocs();
+				$obj2->addDfrutadoc($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptDftabtip(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		DfrutadocPeer::addSelectColumns($c);
+		$startcol2 = (DfrutadocPeer::NUM_COLUMNS - DfrutadocPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		AcunidadPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + AcunidadPeer::NUM_COLUMNS;
+
+		$c->addJoin(DfrutadocPeer::ID_ACUNIDAD, AcunidadPeer::ID);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = DfrutadocPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = AcunidadPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getAcunidad(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addDfrutadoc($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initDfrutadocs();
+				$obj2->addDfrutadoc($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -275,6 +661,7 @@ abstract class BaseDfrutadocPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(DfrutadocPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

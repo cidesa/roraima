@@ -6,19 +6,23 @@ generator:
     fields:
       perini: { name: Periodo Desde}
       perfin: { name: Periodo hasta}
-      codemp: { name: Codigo del Trabajador} 
-      nomemp: { name: Nombre(s) y Apellido(s)}     
+      codemp: { name: Codigo del Trabajador}
+      nomemp: { name: Nombre(s) y Apellido(s)}
       diasdisfutar: { name: Dias a Disfrutar}
-      diasdisfrutados: { name: Dias Disfrutados}  
-            
+      diasdisfrutados: { name: Dias Disfrutados}
+
     list:
       title:          Vacaciones Disfrutadas en Lote
       filters:        [perini]
-      display:        [=perfin, perfin, codemp, nomemp]
+      display:        [=perini, perfin]
       object_actions:
         _edit:        ~
-        _delete:      ~
       max_per_page:   5
+      actions:       none
+
     edit:
       title:          Registro de Vacaciones Disfrutadas en Lote
       display:       [=perini, perfin, codemp, diasdisfutar, diasdisfrutados]
+      actions:
+        _list:        ~
+        _save:        ~

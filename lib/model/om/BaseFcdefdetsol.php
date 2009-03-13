@@ -37,128 +37,156 @@ abstract class BaseFcdefdetsol extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsol()
-	{
+  
+  public function getCodsol()
+  {
 
-		return $this->codsol; 		
-	}
-	
-	public function getTipo()
-	{
+    return trim($this->codsol);
 
-		return $this->tipo; 		
-	}
-	
-	public function getCuantos()
-	{
+  }
+  
+  public function getTipo()
+  {
 
-		return $this->cuantos; 		
-	}
-	
-	public function getPropie()
-	{
+    return trim($this->tipo);
 
-		return $this->propie; 		
-	}
-	
-	public function getImprim()
-	{
+  }
+  
+  public function getCuantos()
+  {
 
-		return $this->imprim; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->cuantos);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPropie()
+  {
+
+    return trim($this->propie);
+
+  }
+  
+  public function getImprim()
+  {
+
+    return trim($this->imprim);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsol($v)
 	{
 
-		if ($this->codsol !== $v) {
-			$this->codsol = $v;
-			$this->modifiedColumns[] = FcdefdetsolPeer::CODSOL;
-		}
-
+    if ($this->codsol !== $v) {
+        $this->codsol = $v;
+        $this->modifiedColumns[] = FcdefdetsolPeer::CODSOL;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = FcdefdetsolPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = FcdefdetsolPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setCuantos($v)
 	{
 
-		if ($this->cuantos !== $v) {
-			$this->cuantos = $v;
-			$this->modifiedColumns[] = FcdefdetsolPeer::CUANTOS;
-		}
-
+    if ($this->cuantos !== $v) {
+        $this->cuantos = $v;
+        $this->modifiedColumns[] = FcdefdetsolPeer::CUANTOS;
+      }
+  
 	} 
 	
 	public function setPropie($v)
 	{
 
-		if ($this->propie !== $v) {
-			$this->propie = $v;
-			$this->modifiedColumns[] = FcdefdetsolPeer::PROPIE;
-		}
-
+    if ($this->propie !== $v) {
+        $this->propie = $v;
+        $this->modifiedColumns[] = FcdefdetsolPeer::PROPIE;
+      }
+  
 	} 
 	
 	public function setImprim($v)
 	{
 
-		if ($this->imprim !== $v) {
-			$this->imprim = $v;
-			$this->modifiedColumns[] = FcdefdetsolPeer::IMPRIM;
-		}
-
+    if ($this->imprim !== $v) {
+        $this->imprim = $v;
+        $this->modifiedColumns[] = FcdefdetsolPeer::IMPRIM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdefdetsolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdefdetsolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsol = $rs->getString($startcol + 0);
+      $this->codsol = $rs->getString($startcol + 0);
 
-			$this->tipo = $rs->getString($startcol + 1);
+      $this->tipo = $rs->getString($startcol + 1);
 
-			$this->cuantos = $rs->getString($startcol + 2);
+      $this->cuantos = $rs->getString($startcol + 2);
 
-			$this->propie = $rs->getString($startcol + 3);
+      $this->propie = $rs->getString($startcol + 3);
 
-			$this->imprim = $rs->getString($startcol + 4);
+      $this->imprim = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdefdetsol object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdefdetsol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +243,7 @@ abstract class BaseFcdefdetsol extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdefdetsolPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdefdetsolPeer::doUpdate($this, $con);

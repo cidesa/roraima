@@ -220,6 +220,7 @@ abstract class BaseCobrecdocPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobrecdocPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -205,6 +205,7 @@ abstract class BaseFordefestPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefestPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

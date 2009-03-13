@@ -20,7 +20,7 @@
  * @author     Sean Kerr <skerr@mojavi.org>
  * @version    SVN: $Id: sfDateValidator.class.php 3233 2007-01-11 21:01:08Z fabien $
  */
-class sfDateValidator extends sfValidator
+class CidesaDateValidator extends sfValidator
 {
   /**
    * Execute this validator.
@@ -32,78 +32,68 @@ class sfDateValidator extends sfValidator
    */
   public function execute(&$value, &$error)
   {
-    $className  = $this->getParameter('class').'Peer';
-    $columnNamemin = call_user_func(array($className, 'translateFieldName'), $this->getParameter('columnmin'), BasePeer::TYPE_FIELDNAME, BasePeer::TYPE_COLNAME);
-    $columnNamemax = call_user_func(array($className, 'translateFieldName'), $this->getParameter('columnmax'), BasePeer::TYPE_FIELDNAME, BasePeer::TYPE_COLNAME);
+  	$culture = $this->getContext()->getUser()->getCulture();  	
+  	
+  	  	
+  	$className  = ucfirst(strtolower($this->getParameter('class'))).'Peer';  	
+    $columnNamemin = ucfirst(strtolower($this->getParameter('columnmin')));    
+    $columnNamemax = ucfirst(strtolower($this->getParameter('columnmax')));    
 
-    $c = new Criteria();    
+    
+    $c = new Criteria();
     $object = call_user_func(array($className, 'doSelectOne'), $c);
-     
-    // Validate the given date
-    $value1 = $this->getValidDate($value);
+    
+     // Validate the given date
+    $value1 = $this->getValidDate($value, $culture); 
     if (!$value1)
     {
       $error = $this->getParameterHolder()->get('date_error');
 
       return false;
     }
+  
      if ($object) 
      {
-     		$method = 'get'.$columnNamemin.'()';
-    		// Is a min date specified?
-    		$min = $object->$method();
-    		if ($min)
+     	$method = 'get'.$columnNamemin;
+	    $col1 = $object->$method();	 
+	    $min= date("d/m/Y",strtotime($col1));  
+	   	if ($min)
     		{
-      		$minTime = $this->getValidDate($min);
+    		$minTime = $this->getValidDate($min,$culture);    		
       		if ($value1 < $minTime)
       		{
-        		$error = $this->getParameterHolder()->get('min_error');
+      			$error = $this->getParameterHolder()->get('min_error');
 
         		return false;
-      	}
-    	}
+      	    }
+    	   }
     }
     if ($object) 
     {
-	    // Is a max date specified?
-	   $method = 'get'.$columnNamemax.'()';
-    	$max = $object->$method();
+    	$method = 'get'.$columnNamemax;
+	    $col2 = $object->$method();
+	    $max= date("d/m/Y",strtotime($col2));		 
     	if ($max)
-    	{
-      	$maxTime = $this->getValidDate($max);
+    	{    		
+      	$maxTime = $this->getValidDate($max,$culture);      	
       	if ($value1 > $maxTime)
       	{
-        	$error = $this->getParameterHolder()->get('max_error');
+      		$error = $this->getParameterHolder()->get('max_error');
 
         	return false;
       	}
     	}
     }
 
-    // Is there a compare to do?
-    $compareDate = $this->getParameterHolder()->get('compare');
+     // Is there a compare to do?
+    $compareDateParam = $this->getParameter('compare');
+    $compareDate = $this->getContext()->getRequest()->getParameter($compareDateParam);
+
+    // If the compare date is given
     if ($compareDate)
     {
-      // Is the value in compare a date?
-      $timevalue = $this->getValidDate($compareDate);
-      if ($timevalue)
-      {
-        $value2 = $timevalue;
-      }
-      else
-      {
-        // Assume that it is another form field
-        $compareValue = $this->getContext()->getRequest()->getParameter($compareDate);
-        $value2 = $this->getValidDate($compareValue);
-        if (!$value2)
-        {
-          $error = $this->getParameterHolder()->get('compare_error');
-
-          return false;
-        }
-      }
-
-      $operator = $this->getParameterHolder()->get('operator');
+      $operator = trim($this->getParameter('operator', '=='), '\'" ');
+      $value2 = $this->getValidDate($compareDate, $culture);
 
       // If the check date is valid, compare it. Otherwise ignore the comparison
       if ($value2)
@@ -151,16 +141,18 @@ class sfDateValidator extends sfValidator
    * @param $value    Date to convert
    * @param $culture  Language culture to use
    */
-  protected function getValidDate($value)
+ protected function getValidDate($value, $culture)
   {
-    $result = strtotime($value);
+    $result = sfI18N::getDateForCulture($value, $culture);      
+    list($d, $m, $y) = $result;    
 
-    if ($result == -1 || $result === null)
+    // Make sure the date is a valid gregorian calendar date also
+    if ($result === null || !checkdate($m, $d, $y))
     {
       return null;
     }
 
-    return $result;
+    return strtotime("$y-$m-$d 00:00");
   }
 
   /**

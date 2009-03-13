@@ -41,9 +41,10 @@ class NpcatprePeer extends BaseNpcatprePeer
 		return $columnas;
 	}
 	
-   public static function getCategoria($codori)
+	public static function getCategoria($codigo)
 	{
-    	return Herramientas::getX('CODCAT','Npcatpre','Nomcat',$codori);		
+		return Herramientas::getX('CODCAT','Npcatpre','Nomcat',$codigo);
 	}
+	
 	
 }

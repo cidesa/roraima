@@ -220,6 +220,7 @@ abstract class BaseNpjefesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpjefesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

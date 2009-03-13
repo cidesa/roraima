@@ -25,74 +25,99 @@ abstract class BaseTsasifte extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumche()
-	{
+  
+  public function getNumche()
+  {
 
-		return $this->numche; 		
-	}
-	
-	public function getCodtipfte()
-	{
+    return trim($this->numche);
 
-		return $this->codtipfte; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodtipfte()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codtipfte);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumche($v)
 	{
 
-		if ($this->numche !== $v) {
-			$this->numche = $v;
-			$this->modifiedColumns[] = TsasiftePeer::NUMCHE;
-		}
-
+    if ($this->numche !== $v) {
+        $this->numche = $v;
+        $this->modifiedColumns[] = TsasiftePeer::NUMCHE;
+      }
+  
 	} 
 	
 	public function setCodtipfte($v)
 	{
 
-		if ($this->codtipfte !== $v) {
-			$this->codtipfte = $v;
-			$this->modifiedColumns[] = TsasiftePeer::CODTIPFTE;
-		}
-
+    if ($this->codtipfte !== $v) {
+        $this->codtipfte = $v;
+        $this->modifiedColumns[] = TsasiftePeer::CODTIPFTE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsasiftePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsasiftePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numche = $rs->getString($startcol + 0);
+      $this->numche = $rs->getString($startcol + 0);
 
-			$this->codtipfte = $rs->getString($startcol + 1);
+      $this->codtipfte = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsasifte object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsasifte object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseTsasifte extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsasiftePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsasiftePeer::doUpdate($this, $con);

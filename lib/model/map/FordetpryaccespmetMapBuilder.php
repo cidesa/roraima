@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FordetpryaccespmetMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FordetpryaccespmetMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FordetpryaccespmetMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fordetpryaccespmet');
 		$tMap->setPhpName('Fordetpryaccespmet');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fordetpryaccespmet_SEQ');
 
 		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 20);
 
@@ -46,13 +48,13 @@ class FordetpryaccespmetMapBuilder {
 
 		$tMap->addColumn('DISPER', 'Disper', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODFIN', 'Codfin', 'string', CreoleTypes::VARCHAR, false, 32);
 
-		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECCUL', 'Feccul', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECCUL', 'Feccul', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('UBIGEO', 'Ubigeo', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -62,7 +64,17 @@ class FordetpryaccespmetMapBuilder {
 
 		$tMap->addColumn('CODACT', 'Codact', 'string', CreoleTypes::VARCHAR, false, 5);
 
+		$tMap->addColumn('JUSINS', 'Jusins', 'string', CreoleTypes::VARCHAR, false, 250);
+
+		$tMap->addColumn('CANINS', 'Canins', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('CANINSREP', 'Caninsrep', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('MONPREREP', 'Monprerep', 'double', CreoleTypes::NUMERIC, false, 18);
+
+		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, false, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -10,6 +10,28 @@
  */
 class biedefclafunActions extends autobiedefclafunActions
 {
+
+  public function executeAjax()
+  {
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+	 $cajtexcom=$this->getRequestParameter('cajtexcom');
+	 if ($this->getRequestParameter('ajax')=='1')
+	 {
+	 	$dato=BnclafunPeer::getDescla_ajax(trim($this->getRequestParameter('codigo')));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 	return sfView::HEADER_ONLY;
+	 }
+  }
+
+	public function executeAutocomplete()
+	{
+		if ($this->getRequestParameter('ajax')=='1')
+	    {
+		 	$this->tags="";
+	    }
+	}
+
 	protected function updateBnclafunFromRequest()
 	{
 		$bnclafun = $this->getRequestParameter('bnclafun');
@@ -23,5 +45,5 @@ class biedefclafunActions extends autobiedefclafunActions
       $this->bnclafun->setDescla($bnclafun['descla']);
     }
   }
-	
+
 }

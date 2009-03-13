@@ -9,6 +9,15 @@
  */
 class Npasicaremp extends BaseNpasicaremp
 {
+	private $codcon = '';
+	protected $codnomnew="";
+	protected $codcarnew="";
+	protected $codcatnew="";
+    protected $nomnomnew="";
+	protected $nomcarnew="";
+	protected $nomcatnew="";
+
+
 	public function getCodcon()
 	{
 		$c = new Criteria();
@@ -21,6 +30,20 @@ class Npasicaremp extends BaseNpasicaremp
 			return ' ';
 		}
 	}
+
+	public function getNomcon()
+	{
+		$c = new Criteria();
+		$c->add(NpasiconempPeer::CODEMP,self::getCodemp());
+		$c->addJoin(NpasiconempPeer::CODCAR,NpasicarempPeer::CODCAR);
+		$codigo = NpasiconempPeer::doSelectone($c);
+		if ($codigo){
+			return $codigo->getNomcon();
+		}else{
+			return ' ';
+		}
+	}
+
 	public function getNomnom()
 	{
 		$c = new Criteria();
@@ -55,5 +78,62 @@ class Npasicaremp extends BaseNpasicaremp
 		}else{
 			return ' ';
 		}
-	}	
+	}
+
+  public function getCedemp()
+    {
+       $c = new Criteria();
+       $c->add(NphojintPeer::CODEMP,self::getCodemp());;
+       $cedu = NphojintPeer::doSelectone($c);
+    	if ($cedu)
+    	      	  return $cedu->getCodemp();
+     }
+
+ public function getModces()
+    {
+       $c = new Criteria();
+       $c->add(NphojintPeer::CODEMP,self::getCodemp());;
+       $coden = NphojintPeer::doSelectone($c);
+         	if ($coden)
+    	  	   {
+                  return $coden->getModpagcestic();
+    	       }
+
+    }
+
+  public function getNomnomnew()
+ {
+        $c = new Criteria();
+		$c->add(NpnominaPeer::CODNOM,$this->getCodnomnew());
+		$nomnom = NpnominaPeer::doSelectone($c);
+		if ($nomnom){
+			return $nomnom->getNomnom();
+		}else{
+			return ' ';
+		}
+ }
+
+  public function getNomcarnew()
+  {
+        $c = new Criteria();
+		$c->add(NpcargosPeer::CODCAR,$this->getCodcarnew());
+		$nomnom = NpcargosPeer::doSelectone($c);
+		if ($nomnom){
+			return $nomnom->getNomcar();
+		}else{
+			return ' ';
+		}
+  }
+
+  public function getNomcatnew()
+  {
+        $c = new Criteria();
+		$c->add(NpcatprePeer::CODCAT,$this->getCodcatnew());
+		$nomnom = NpcatprePeer::doSelectone($c);
+		if ($nomnom){
+			return $nomnom->getNomcat();
+		}else{
+			return ' ';
+		}
+  }
 }

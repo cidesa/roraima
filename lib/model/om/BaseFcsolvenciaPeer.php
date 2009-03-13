@@ -237,14 +237,14 @@ abstract class BaseFcsolvenciaPeer {
 	public static function doCountJoinFctipsol(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcsolvenciaPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcsolvenciaPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -319,7 +319,7 @@ abstract class BaseFcsolvenciaPeer {
 		} else {
 			$criteria->addSelectColumn(FcsolvenciaPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -355,25 +355,25 @@ abstract class BaseFcsolvenciaPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcsolvenciaPeer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = FctipsolPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -382,7 +382,7 @@ abstract class BaseFcsolvenciaPeer {
 					$temp_obj2->addFcsolvencia($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcsolvencias();
 				$obj2->addFcsolvencia($obj1);
@@ -416,6 +416,7 @@ abstract class BaseFcsolvenciaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcsolvenciaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

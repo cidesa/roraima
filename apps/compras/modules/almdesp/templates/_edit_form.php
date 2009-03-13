@@ -7,13 +7,13 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
-<?php echo javascript_include_tag('dFilter') ?>
-<?php echo javascript_include_tag('ajax') ?>
-<?php echo javascript_include_tag('tools') ?>
+<?php use_helper('Object', 'Validation', 'Javascript', 'Grid') ?>
+<?php echo javascript_include_tag('dFilter', 'ajax', 'compras/almdesp', 'tools','observe') ?>
 
 <?php echo object_input_hidden_tag($cadphart, 'getId') ?>
-
+<?php echo input_hidden_tag('verificaexisydisp', '') ?>
+<?php echo input_hidden_tag('mensaje', '') ?>
+<?php echo input_hidden_tag('existeubicacion', '') ?>
 <fieldset id="sf_fieldset_none" class="">
 
 <div class="form-row">
@@ -22,101 +22,60 @@
 <div class="form-row">
 <table>
 <tr>
-<th> 
-<?php
-if ($cadphart->getId()=='') 
-	{
-?>
+<th>
 <?php echo label_for('cadphart[dphart]', __($labels['cadphart{dphart}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{dphart}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{dphart}')): ?>
     <?php echo form_error('cadphart{dphart}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
   <?php $value = object_input_tag($cadphart, 'getDphart', array (
   'size' => 15,
   'maxlegth' => 8,
-  'control_name' => 'cadphart[dphart]', 
-  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('cadphart_dphart').value=valor;",  
-)); echo $value ? $value : '&nbsp;' ?> 
-    </div><?php }else{?>
-    <?php echo label_for('cadphart[dphart]', __($labels['cadphart{dphart}']), 'class="required" style="width: 150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('cadphart{dphart}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cadphart{dphart}')): ?>
-    <?php echo form_error('cadphart{dphart}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($cadphart, 'getDphart', array (
-  'size' => 20,
-  'maxlegth' => 8,
-  'control_name' => 'cadphart[dphart]',    
-)); echo $value ? $value : '&nbsp;' ?> 
-    </div>
-    	
-   <?php } ?> </th>
+  'control_name' => 'cadphart[dphart]',
+  'readonly'  =>  $cadphart->getId()!='' ? true : false,
+  'onBlur'  => "javascript:enter(this.value);",
+)); echo $value ? $value : '&nbsp;' ?>
+    </div></th>
 <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
 <th> <?php echo label_for('cadphart[fecdph]', __($labels['cadphart{fecdph}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{fecdph}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{fecdph}')): ?>
     <?php echo form_error('cadphart{fecdph}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
-  <?php $value = object_input_date_tag($cadphart, 'getFecdph', array (
-  'rich' => true,
-  'maxlegth' => 10,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'cadphart[fecdph]',
-  'date_format' => 'dd/MM/yy',
-  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'##/##/####')",
-)); echo $value ? $value : '&nbsp;' ?>
+   <?php
+	$value = object_input_date_tag($cadphart, 'getFecdph', array (
+	  'rich' => true,
+	  'maxlegth' => 10,
+	  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+	  'control_name' => 'cadphart[fecdph]',
+	  'date_format' => 'dd/MM/yy',
+	  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+	  'readonly'  =>  $cadphart->getId()!='' ? true : false,
+		),date('Y-m-d')); echo $value ? $value : '&nbsp;'; ?>
     </div></th>
 </tr>
-</table> 
-<br>
-  <?php echo label_for('cadphart[codalm]', __($labels['cadphart{codalm}']), 'class="required" style="width: 150px"') ?>
-  <div class="content<?php if ($sf_request->hasError('cadphart{codalm}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('cadphart{codalm}')): ?>
-    <?php echo form_error('cadphart{codalm}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
- <?php echo input_auto_complete_tag('cadphart[codalm]', $cadphart->getCodalm(), 
-    'almdesp/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 6, 'onBlur'=> remote_function(array(
-			  'url'      => 'almdesp/ajax',  			   
-			  'complete' => 'AjaxJSON(request, json)',
-  			  'with' => "'ajax=1&cajtexmos=cadphart_nomalm&cajtexcom=cadphart_codalm&codigo='+this.value"
-			  ))),
-     array('use_style' => 'true')
-  ) 
-?>
-&nbsp;
-<?php echo button_to_popup('...','generales/catalogo?clase=Cadefalm&frame=sf_admin_edit_form&obj1=cadphart_codalm&obj2=cadphart_nomalm')?>
-&nbsp;&nbsp;
- <?php $value = object_input_tag($cadphart, 'getNomalm', array (
-  'size' => 60,
-  'disabled' => true,
-  'control_name' => 'cadphart[nomalm]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+</table>
 <br>
   <?php echo label_for('cadphart[reqart]', __($labels['cadphart{reqart}']), 'class="required" style="width: 150px"') ?>
   <div class="content<?php if ($sf_request->hasError('cadphart{reqart}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('cadphart{reqart}')): ?>
     <?php echo form_error('cadphart{reqart}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
-<?php echo input_auto_complete_tag('cadphart[reqart]', $cadphart->getReqart(), 
-    'almdesp/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 8, 'onBlur'=> remote_function(array(
-			  'update'   => 'divGrid',
-              'url'      => 'almdesp/grid',  			   
-			  'complete' => 'AjaxJSON(request, json)',
-  			  'with' => "'ajax=2&cajtexmos=cadphart_desreq&cajtexcom=cadphart_reqart&codigo='+this.value"
-			  ))),
-     array('use_style' => 'true')
-  ) 
-?> 
+<?php echo input_auto_complete_tag('cadphart[reqart]', $cadphart->getReqart(),
+    'almdesp/autocomplete?ajax=2',  array('autocomplete' => 'off','maxlength' => 8,
+       'readonly'  =>  $cadphart->getId()!='' ? true : false, 'onBlur'=> remote_function(array(
+        'update'   => 'divGrid',
+         'url'      => 'almdesp/grid',
+        'complete' => 'AjaxJSON(request, json), actualizarsaldos() ',
+         'condition' => "$('cadphart_reqart').value != '' && $('id').value == ''",
+         'script' => true,
+          'with' => "'ajax=2&cajtexmos=cadphart_desreq&cajtexcom=cadphart_reqart&codigo='+this.value"
+        ))),
+     array('use_style' => 'true') )?>
 &nbsp;
-<?php echo button_to_popup('...','generales/catalogo?clase=Careqart&frame=sf_admin_edit_form&obj1=cadphart_reqart&obj2=cadphart_desreq')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Careqart_Almdes/clase/Careqart/frame/sf_admin_edit_form/obj1/cadphart_reqart/obj2/cadphart_desreq','','','botoncat')?></th>
 &nbsp;&nbsp;
+
  <?php $value = object_input_tag($cadphart, 'getDesreq', array (
   'size' => 60,
   'disabled' => true,
@@ -141,18 +100,23 @@ if ($cadphart->getId()=='')
   <?php if ($sf_request->hasError('cadphart{codori}')): ?>
     <?php echo form_error('cadphart{codori}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
+<?php $value = object_input_tag($cadphart, 'getCodori', array (
+  'size' => 20,
+  'control_name' => 'cadphart[codori]',
+  'maxlength' => $lonubi,
+  'readonly'  =>  $cadphart->getId()!='' ? true : false,
+  'onKeyPress' => "javascript:return dFilter (event.keyCode, this,'$forubi')",
+  'onBlur'=> remote_function(array(
+       'url'      => 'almdesp/ajax',
+       'script'   => true,
+       'condition' => "$('cadphart_codori').value != '' && $('id').value == ''",
+       'complete' => 'AjaxJSON(request, json)',
+       'with' => "'ajax=3&cajtexmos=cadphart_nomcat&codigo='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>
 
-<?php echo input_auto_complete_tag('cadphart[codori]', $cadphart->getCodori(), 
-    'almdesp/autocomplete?ajax=3',  array('autocomplete' => 'off','maxlength' => 32,'onBlur'=> remote_function(array(
-			  'url'      => 'almdesp/ajax',  			   
-			  'complete' => 'AjaxJSON(request, json)',
-  			  'with' => "'ajax=3&cajtexmos=cadphart_nomcat&cajtexcom=cadphart_codori&codigo='+this.value"
-			  ))),
-     array('use_style' => 'true')
-  ) 
-?>
 &nbsp;
-<?php echo button_to_popup('...','generales/catalogo?clase=Npcatpre&frame=sf_admin_edit_form&obj1=cadphart_codori&obj2=cadphart_nomcat')?>
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnubibie_Almdes/clase/Bnubibie/frame/sf_admin_edit_form/obj1/cadphart_codori/obj2/cadphart_nomcat/campo1/codubi/campo2/desubi','','','botoncat')?></th>
 &nbsp;&nbsp;
  <?php $value = object_input_tag($cadphart, 'getNomcat', array (
   'size' => 60,
@@ -168,18 +132,17 @@ if ($cadphart->getId()=='')
   <?php endif; ?>
 
   <?php $value = object_input_tag($cadphart, 'getMondph', array (
-  'size' => 7,
-  'disabled' => true,
+  'size' => 20,
+  'readonly' => true,
   'control_name' => 'cadphart[mondph]',
-),$default_value = number_format($value,2,'.',',')); echo $value ? $value : '&nbsp;' ?>
+),$default_value = number_format($value,2,',','.')); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
 </fieldset>
 </div>
 
-<div class="form-row">
-<fieldset id="sf_fieldset_none" class="">
+
 <div class="form-row" id="divGrid">
 <form name="form1" id="form1">
 <?
@@ -187,6 +150,7 @@ echo grid_tag($obj);
 ?>
 </form>
 <br>
+<!--
 <table>
  <tr>
  <th>&nbsp;&nbsp;&nbsp;<?php echo __('Totales') ?></th>
@@ -195,23 +159,14 @@ echo grid_tag($obj);
   <th>&nbsp;&nbsp;&nbsp;</th>
   <th><input class="grid_txtright" type="text" id="totalcantnd" name="totalcantnd" size="10" disabled=true></th>
   <th>&nbsp;&nbsp;&nbsp;</th>
-  <th><input class="grid_txtright" type="text" id="totalcosto" name="totalcosto" size="10" disabled=true></th>  
+  <th><input class="grid_txtright" type="text" id="totalcosto" name="totalcosto" size="10" disabled=true></th>
  </tr>
-</table>
-</div>
-</fieldset>
+</table> -->
 </div>
 
 </fieldset>
 
-<?php
-if ($cadphart->getId()!='') 
-		{
-			echo javascript_tag("
-                    javascript: document.getElementById('cadphart_dphart').disabled=true;
-				"); 
-		}
-?>
+
 <?php include_partial('edit_actions', array('cadphart' => $cadphart)) ?>
 
 </form>
@@ -225,3 +180,9 @@ if ($cadphart->getId()!='')
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+<script type="text/javascript">
+  var id="";
+  var id='<?php echo $cadphart->getId()?>';
+  actualiza(id);
+</script>

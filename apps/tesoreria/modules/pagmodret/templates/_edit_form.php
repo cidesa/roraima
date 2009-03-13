@@ -9,11 +9,15 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($opordpag, 'getId') ?>
+<?php echo javascript_include_tag('dFilter', 'ajax', 'tools', 'observe') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-<legend>Rentenciones por Orden</legend>
+<legend><?php echo __('Rentenciones por Orden')?></legend>
 <div class="form-row">
-  <?php echo label_for('opordpag[numord]', __($labels['opordpag{numord}']), 'class="required" ') ?>
+<table>
+ <tr>
+  <th>
+    <?php echo label_for('opordpag[numord]', __($labels['opordpag{numord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{numord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{numord}')): ?>
     <?php echo form_error('opordpag{numord}', array('class' => 'form-error-msg')) ?>
@@ -21,20 +25,35 @@
 
   <?php $value = object_input_tag($opordpag, 'getNumord', array (
   'size' => 20,
+  'readonly'  =>  $opordpag->getId()!='' ? true : false ,
   'control_name' => 'opordpag[numord]',
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
-<strong>Fecha</strong>
-<?php $value = object_input_date_tag($opordpag, 'getFecemi', array (
+   </div>
+  </th>
+  <th>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </th>
+  <th>
+  <?php echo label_for('opordpag[fecemi]', __($labels['opordpag{fecemi}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('opordpag{fecemi}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opordpag{fecemi}')): ?>
+    <?php echo form_error('opordpag{fecemi}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_date_tag($opordpag, 'getFecemi', array (
   'rich' => true,
+  'readonly'  =>  $opordpag->getId()!='' ? true : false ,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'opordpag[fecemi]',
   'date_format' => 'dd/MM/yy',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+  </th>
+ </tr>
+</table>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('opordpag[desord]', __($labels['opordpag{desord}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{desord}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{desord}')): ?>
@@ -43,12 +62,13 @@
 
   <?php $value = object_input_tag($opordpag, 'getDesord', array (
   'size' => 80,
+  'readonly'  =>  $opordpag->getId()!='' ? true : false ,
   'control_name' => 'opordpag[desord]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('opordpag[tipcau]', __($labels['opordpag{tipcau}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{tipcau}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{tipcau}')): ?>
@@ -57,14 +77,19 @@
 
   <?php $value = object_input_tag($opordpag, 'getTipcau', array (
   'size' => 20,
+  'readonly'  =>  $opordpag->getId()!='' ? true : false ,
   'control_name' => 'opordpag[tipcau]',
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
-<?php echo input_tag('reten',$reten,'size=50,disabled=true') ?>
+<?php $value = object_input_tag($opordpag, 'getNomext', array (
+  'disabled' => true,
+  'size' => 60,
+  'control_name' => 'opordpag[nomext]',
+)); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('opordpag[cedrif]', __($labels['opordpag{cedrif}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{cedrif}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('opordpag{cedrif}')): ?>
@@ -73,56 +98,62 @@
 
   <?php $value = object_input_tag($opordpag, 'getCedrif', array (
   'size' => 20,
+  'readonly'  =>  $opordpag->getId()!='' ? true : false ,
   'control_name' => 'opordpag[cedrif]',
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;
 <?php $value = object_input_tag($opordpag, 'getNomben', array (
-  'size' => 80,
+  'size' => 60,
+  'readonly'  =>  $opordpag->getId()!='' ? true : false ,
   'control_name' => 'opordpag[nomben]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+
+<div id="otro" style="display:none">
+  <?php echo label_for('opordpag[numcom]', __($labels['opordpag{numcom}']), '') ?>
+  <div class="content<?php if ($sf_request->hasError('opordpag{numcom}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opordpag{numcom}')): ?>
+    <?php echo form_error('opordpag{numcom}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($opordpag, 'getNumcom', array (
+  'size' => 20,
+  'control_name' => 'opordpag[numcom]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<br>
+
+<?php echo grid_tag($obj);?>
+
+<br>
+
+<table>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th><?php echo label_for('',__('Total') , 'class="required" Style="width:100px"') ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<?php echo input_tag('total', '', array(
+'size'=> 20,
+'class'=> 'grid_txtright',
+'readonly'=> true,
+)) ?></th>
+</tr>
+</table>
 </div>
 </fieldset>
-<div class="grid01" id="grid01">
-<fieldset>
-<legend>Imputaciones Presupuestarias</legend>
-<table border="0" class="sf_admin_list">
-<? 
-$titulo=array(0 => 'Codigo Presupuestario', 1 => 'Titulo', 2 => 'Tipo', 3 => 'Retencion', 4 => 'Monto', 5 => 'Referencia');
-
-if ( count($rs)>0){
-$i=0;
-foreach ($rs as $k=>$fila) {
-    $i++;
-    if($i==1){?>
-      <thead><tr>
-    <? foreach ($fila as $key => $value){?>
-        <th><?=$titulo[$key]?></th>
-    <? }?>
-      </tr> </thead>
-    <? }?>
-<tr>
-<? foreach ($fila as $key => $value){?>
-    <td><?=$value?></td>
-<? }?>
-</tr>
-<? }
-  }
-?></table>
-</fieldset>
-</div> 
 
 
 <?php include_partial('edit_actions', array('opordpag' => $opordpag)) ?>
 
 </form>
 
-<ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($opordpag->getId()): ?>
-<?php echo button_to(__('delete'), 'pagmodret/delete?id='.$opordpag->getId(), array (
-  'post' => true,
-  'confirm' => __('Are you sure?'),
-  'class' => 'sf_admin_action_delete',
-)) ?><?php endif; ?>
-</li>
-  </ul>
+
+<script language="JavaScript" type="text/javascript">
+actualizarsaldos();
+ var ids='<?php echo $opordpag->getId()?>';
+ if (ids!="")
+ {
+   $('trigger_opordpag_fecemi').hide();
+ }
+</script>

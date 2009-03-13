@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CondefbalgenMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CondefbalgenMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CondefbalgenMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('condefbalgen');
 		$tMap->setPhpName('Condefbalgen');
 
@@ -40,11 +40,11 @@ class CondefbalgenMapBuilder {
 
 		$tMap->addColumn('TIPO', 'Tipo', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('NIVEL', 'Nivel', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('NIVEL', 'Nivel', 'double', CreoleTypes::NUMERIC, false, null);
 
-		$tMap->addColumn('ORDEN', 'Orden', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ORDEN', 'Orden', 'double', CreoleTypes::NUMERIC, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

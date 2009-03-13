@@ -210,6 +210,7 @@ abstract class BaseCpdiscrePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpdiscrePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

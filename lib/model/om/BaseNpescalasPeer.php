@@ -210,6 +210,7 @@ abstract class BaseNpescalasPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpescalasPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

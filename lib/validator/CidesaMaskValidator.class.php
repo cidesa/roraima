@@ -1,33 +1,14 @@
 <?php
 
-/*
- * This file is part of the symfony package.
- * (c) 2004-2006 Fabien Potencier <fabien.potencier@symfony-project.com>
- * 
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /**
  * sfPropelUniqueValidator validates that the uniqueness of a column.
  * This validator only works for single column primary key.
  *
- * <b>Required parameters:</b>
- *
- * # <b>class</b>        - [none]               - Propel class name.
- * # <b>column</b>       - [none]               - Propel column name.
- *
- * <b>Optional parameters:</b>
- *
- * # <b>unique_error</b> - [Uniqueness error]   - An error message to use when
- *                                                the value for this column already
- *                                                exists in the database.
  *
  * @package    symfony
  * @subpackage validator
- * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @author     Fédéric Coelho <frederic.coelho@symfony-project.com>
- * @version    SVN: $Id: sfPropelUniqueValidator.class.php 2995 2006-12-09 18:01:32Z fabien $
+ * @author     Luis Hernández <luelher@gmail.com>
+ * @version    SVN: $Id: CidesaMaskValidator.class.php 2995 2006-12-09 18:01:32Z Desarrollo $
  */
 class CidesaMaskValidator extends sfValidator
 {
@@ -36,6 +17,7 @@ class CidesaMaskValidator extends sfValidator
     $className  = ucfirst(strtolower($this->getParameter('class'))).'Peer';
     $columnMask = ucfirst(strtolower($this->getParameter('columnmask')));
     $columnDiv = ucfirst(strtolower($this->getParameter('columndiv')));
+    $valDiv = ucfirst(strtolower($this->getParameter('div','null')));
 
     $c = new Criteria();
     $object = call_user_func(array($className, 'doSelectOne'), $c);
@@ -45,7 +27,12 @@ class CidesaMaskValidator extends sfValidator
 	$method = 'get'.$columnMask;
 	$mask = $object->$method();
 	$method = 'get'.$columnDiv;
-	$div = $object->$method();
+	
+	if ($valDiv=='null'){
+	    $div = $object->$method();
+	}else{
+    	$div = $valDiv;
+	}
 	if($mask)
 	{
 	  
@@ -68,19 +55,20 @@ class CidesaMaskValidator extends sfValidator
 
 		foreach ($tags as $index => $t)
 		{
+			//print $regexp."<br>"; 
 			$regexp .= '(';
 
 			$regexp .= str_replace('#','[0-9]',$t);
+			$regexp = str_replace('A','[A-Z]',$regexp);
 
-
-			if(($index+1)==$div && !(($index+1)==count($tags))) $regexp .= '(-)*)*';
+			if((($index+1)==$div && (($index+1)==count($tags))) || (($index+1)<count($tags)) && (($index+1)==$div)) $regexp .= '(-)*)*';
 			elseif (($index+1)==count($tags)) $regexp .= ')*';
 			else $regexp .= '(-))*';
 
 		}
 		
 		$regexp .= '$/';
-		
+
 		$error = 'El formato introducido no es válido ('.$mask.')';
 		
 		return (preg_match ($regexp,trim($value)) == 1);

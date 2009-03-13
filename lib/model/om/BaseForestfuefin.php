@@ -41,147 +41,176 @@ abstract class BaseForestfuefin extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmet()
-	{
+  
+  public function getCodmet()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->codmet);
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodact()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->codpro);
 
-		return $this->codart; 		
-	}
-	
-	public function getCodparing()
-	{
+  }
+  
+  public function getCodact()
+  {
 
-		return $this->codparing; 		
-	}
-	
-	public function getMonfin()
-	{
+    return trim($this->codact);
 
-		return number_format($this->monfin,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codart);
+
+  }
+  
+  public function getCodparing()
+  {
+
+    return trim($this->codparing);
+
+  }
+  
+  public function getMonfin($val=false)
+  {
+
+    if($val) return number_format($this->monfin,2,',','.');
+    else return $this->monfin;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = ForestfuefinPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = ForestfuefinPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = ForestfuefinPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = ForestfuefinPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = ForestfuefinPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = ForestfuefinPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = ForestfuefinPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = ForestfuefinPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCodparing($v)
 	{
 
-		if ($this->codparing !== $v) {
-			$this->codparing = $v;
-			$this->modifiedColumns[] = ForestfuefinPeer::CODPARING;
-		}
-
+    if ($this->codparing !== $v) {
+        $this->codparing = $v;
+        $this->modifiedColumns[] = ForestfuefinPeer::CODPARING;
+      }
+  
 	} 
 	
 	public function setMonfin($v)
 	{
 
-		if ($this->monfin !== $v) {
-			$this->monfin = $v;
-			$this->modifiedColumns[] = ForestfuefinPeer::MONFIN;
-		}
-
+    if ($this->monfin !== $v) {
+        $this->monfin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForestfuefinPeer::MONFIN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForestfuefinPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForestfuefinPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmet = $rs->getString($startcol + 0);
+      $this->codmet = $rs->getString($startcol + 0);
 
-			$this->codpro = $rs->getString($startcol + 1);
+      $this->codpro = $rs->getString($startcol + 1);
 
-			$this->codact = $rs->getString($startcol + 2);
+      $this->codact = $rs->getString($startcol + 2);
 
-			$this->codart = $rs->getString($startcol + 3);
+      $this->codart = $rs->getString($startcol + 3);
 
-			$this->codparing = $rs->getString($startcol + 4);
+      $this->codparing = $rs->getString($startcol + 4);
 
-			$this->monfin = $rs->getFloat($startcol + 5);
+      $this->monfin = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forestfuefin object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forestfuefin object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

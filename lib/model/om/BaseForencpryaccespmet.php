@@ -45,167 +45,197 @@ abstract class BaseForencpryaccespmet extends BaseObject  implements Persistent 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodaccesp()
-	{
+    return trim($this->codpro);
 
-		return $this->codaccesp; 		
-	}
-	
-	public function getCodmet()
-	{
+  }
+  
+  public function getCodaccesp()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getCanmet()
-	{
+    return trim($this->codaccesp);
 
-		return number_format($this->canmet,2,',','.');
-		
-	}
-	
-	public function getCanact()
-	{
+  }
+  
+  public function getCodmet()
+  {
 
-		return number_format($this->canact,2,',','.');
-		
-	}
-	
-	public function getTotpre()
-	{
+    return trim($this->codmet);
 
-		return number_format($this->totpre,2,',','.');
-		
-	}
-	
-	public function getCodact()
-	{
+  }
+  
+  public function getCanmet($val=false)
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->canmet,2,',','.');
+    else return $this->canmet;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCanact($val=false)
+  {
+
+    if($val) return number_format($this->canact,2,',','.');
+    else return $this->canact;
+
+  }
+  
+  public function getTotpre($val=false)
+  {
+
+    if($val) return number_format($this->totpre,2,',','.');
+    else return $this->totpre;
+
+  }
+  
+  public function getCodact()
+  {
+
+    return trim($this->codact);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = ForencpryaccespmetPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = ForencpryaccespmetPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodaccesp($v)
 	{
 
-		if ($this->codaccesp !== $v) {
-			$this->codaccesp = $v;
-			$this->modifiedColumns[] = ForencpryaccespmetPeer::CODACCESP;
-		}
-
+    if ($this->codaccesp !== $v) {
+        $this->codaccesp = $v;
+        $this->modifiedColumns[] = ForencpryaccespmetPeer::CODACCESP;
+      }
+  
 	} 
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = ForencpryaccespmetPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = ForencpryaccespmetPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setCanmet($v)
 	{
 
-		if ($this->canmet !== $v) {
-			$this->canmet = $v;
-			$this->modifiedColumns[] = ForencpryaccespmetPeer::CANMET;
-		}
-
+    if ($this->canmet !== $v) {
+        $this->canmet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForencpryaccespmetPeer::CANMET;
+      }
+  
 	} 
 	
 	public function setCanact($v)
 	{
 
-		if ($this->canact !== $v) {
-			$this->canact = $v;
-			$this->modifiedColumns[] = ForencpryaccespmetPeer::CANACT;
-		}
-
+    if ($this->canact !== $v) {
+        $this->canact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForencpryaccespmetPeer::CANACT;
+      }
+  
 	} 
 	
 	public function setTotpre($v)
 	{
 
-		if ($this->totpre !== $v) {
-			$this->totpre = $v;
-			$this->modifiedColumns[] = ForencpryaccespmetPeer::TOTPRE;
-		}
-
+    if ($this->totpre !== $v) {
+        $this->totpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForencpryaccespmetPeer::TOTPRE;
+      }
+  
 	} 
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = ForencpryaccespmetPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = ForencpryaccespmetPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForencpryaccespmetPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForencpryaccespmetPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codaccesp = $rs->getString($startcol + 1);
+      $this->codaccesp = $rs->getString($startcol + 1);
 
-			$this->codmet = $rs->getString($startcol + 2);
+      $this->codmet = $rs->getString($startcol + 2);
 
-			$this->canmet = $rs->getFloat($startcol + 3);
+      $this->canmet = $rs->getFloat($startcol + 3);
 
-			$this->canact = $rs->getFloat($startcol + 4);
+      $this->canact = $rs->getFloat($startcol + 4);
 
-			$this->totpre = $rs->getFloat($startcol + 5);
+      $this->totpre = $rs->getFloat($startcol + 5);
 
-			$this->codact = $rs->getString($startcol + 6);
+      $this->codact = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forencpryaccespmet object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forencpryaccespmet object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -262,6 +292,7 @@ abstract class BaseForencpryaccespmet extends BaseObject  implements Persistent 
 				if ($this->isNew()) {
 					$pk = ForencpryaccespmetPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForencpryaccespmetPeer::doUpdate($this, $con);

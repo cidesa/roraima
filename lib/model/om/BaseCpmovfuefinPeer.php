@@ -230,6 +230,7 @@ abstract class BaseCpmovfuefinPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpmovfuefinPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

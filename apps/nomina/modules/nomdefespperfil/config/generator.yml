@@ -5,14 +5,20 @@ generator:
     theme:            default
     fields:
       codperfil: { name: Codigo, params: maxlength=4}
-      desperfil: { name: Descripcion}            
+      desperfil: { name: Descripcion}
     list:
-      title:          Definicion de Perfiles
+      title:          Definición de Perfiles
       filters:        [codperfil, desperfil]
       display:        [=codperfil, desperfil]
-      max_per_page:	  6      
+      max_per_page:	  6
       object_actions:
         _edit:        ~
         _delete:      ~
+      sort: codperfil
     edit:
-      title:          Edicion de Perfiles
+      title:          Edición de Perfiles
+      actions:
+        _list:         ~
+        _save:         ~
+        _create:       ~
+        _delete:       ~

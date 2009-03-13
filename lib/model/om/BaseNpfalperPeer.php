@@ -230,6 +230,7 @@ abstract class BaseNpfalperPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpfalperPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

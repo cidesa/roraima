@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class AcunidadMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.AcunidadMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.AcunidadMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('acunidad');
 		$tMap->setPhpName('Acunidad');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('acunidad_SEQ');
 
 		$tMap->addColumn('NUMUNI', 'Numuni', 'string', CreoleTypes::VARCHAR, true, 4);
 
@@ -39,6 +41,6 @@ class AcunidadMapBuilder {
 		$tMap->addColumn('DESUNI', 'Desuni', 'string', CreoleTypes::VARCHAR, false, 200);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

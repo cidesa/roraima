@@ -121,533 +121,581 @@ abstract class BaseNpmovrac extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNronom()
-	{
+  
+  public function getNronom()
+  {
 
-		return $this->nronom; 		
-	}
-	
-	public function getPerrac()
-	{
+    return trim($this->nronom);
 
-		return $this->perrac; 		
-	}
-	
-	public function getAnorac()
-	{
+  }
+  
+  public function getPerrac()
+  {
 
-		return $this->anorac; 		
-	}
-	
-	public function getTipmov()
-	{
+    return trim($this->perrac);
 
-		return $this->tipmov; 		
-	}
-	
-	public function getFecmov($format = 'Y-m-d')
-	{
+  }
+  
+  public function getAnorac()
+  {
 
-		if ($this->fecmov === null || $this->fecmov === '') {
-			return null;
-		} elseif (!is_int($this->fecmov)) {
-						$ts = strtotime($this->fecmov);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecmov] as date/time value: " . var_export($this->fecmov, true));
-			}
-		} else {
-			$ts = $this->fecmov;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->anorac);
 
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getTipmov()
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getCodcarapr()
-	{
+    return trim($this->tipmov);
 
-		return $this->codcarapr; 		
-	}
-	
-	public function getNomcarapr()
-	{
+  }
+  
+  public function getFecmov($format = 'Y-m-d')
+  {
 
-		return $this->nomcarapr; 		
-	}
-	
-	public function getSuecarapr()
-	{
+    if ($this->fecmov === null || $this->fecmov === '') {
+      return null;
+    } elseif (!is_int($this->fecmov)) {
+            $ts = adodb_strtotime($this->fecmov);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecmov] as date/time value: " . var_export($this->fecmov, true));
+      }
+    } else {
+      $ts = $this->fecmov;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->suecarapr,2,',','.');
-		
-	}
-	
-	public function getComcarapr()
-	{
+  
+  public function getStatus()
+  {
 
-		return number_format($this->comcarapr,2,',','.');
-		
-	}
-	
-	public function getCodocpapr()
-	{
+    return trim($this->status);
 
-		return $this->codocpapr; 		
-	}
-	
-	public function getPasocpapr()
-	{
+  }
+  
+  public function getCodcarapr()
+  {
 
-		return $this->pasocpapr; 		
-	}
-	
-	public function getCodempapr()
-	{
+    return trim($this->codcarapr);
 
-		return $this->codempapr; 		
-	}
-	
-	public function getNomempapr()
-	{
+  }
+  
+  public function getNomcarapr()
+  {
 
-		return $this->nomempapr; 		
-	}
-	
-	public function getCodcatapr()
-	{
+    return trim($this->nomcarapr);
 
-		return $this->codcatapr; 		
-	}
-	
-	public function getEstorgapr()
-	{
+  }
+  
+  public function getSuecarapr($val=false)
+  {
 
-		return $this->estorgapr; 		
-	}
-	
-	public function getCodcarpro()
-	{
+    if($val) return number_format($this->suecarapr,2,',','.');
+    else return $this->suecarapr;
 
-		return $this->codcarpro; 		
-	}
-	
-	public function getNomcarpro()
-	{
+  }
+  
+  public function getComcarapr($val=false)
+  {
 
-		return $this->nomcarpro; 		
-	}
-	
-	public function getSuecarpro()
-	{
+    if($val) return number_format($this->comcarapr,2,',','.');
+    else return $this->comcarapr;
 
-		return number_format($this->suecarpro,2,',','.');
-		
-	}
-	
-	public function getComcarpro()
-	{
+  }
+  
+  public function getCodocpapr()
+  {
 
-		return number_format($this->comcarpro,2,',','.');
-		
-	}
-	
-	public function getCodocppro()
-	{
+    return trim($this->codocpapr);
 
-		return $this->codocppro; 		
-	}
-	
-	public function getPasocppro()
-	{
+  }
+  
+  public function getPasocpapr()
+  {
 
-		return $this->pasocppro; 		
-	}
-	
-	public function getCodemppro()
-	{
+    return trim($this->pasocpapr);
 
-		return $this->codemppro; 		
-	}
-	
-	public function getNomemppro()
-	{
+  }
+  
+  public function getCodempapr()
+  {
 
-		return $this->nomemppro; 		
-	}
-	
-	public function getCodcatpro()
-	{
+    return trim($this->codempapr);
 
-		return $this->codcatpro; 		
-	}
-	
-	public function getEstorgpro()
-	{
+  }
+  
+  public function getNomempapr()
+  {
 
-		return $this->estorgpro; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomempapr);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodcatapr()
+  {
+
+    return trim($this->codcatapr);
+
+  }
+  
+  public function getEstorgapr()
+  {
+
+    return trim($this->estorgapr);
+
+  }
+  
+  public function getCodcarpro()
+  {
+
+    return trim($this->codcarpro);
+
+  }
+  
+  public function getNomcarpro()
+  {
+
+    return trim($this->nomcarpro);
+
+  }
+  
+  public function getSuecarpro($val=false)
+  {
+
+    if($val) return number_format($this->suecarpro,2,',','.');
+    else return $this->suecarpro;
+
+  }
+  
+  public function getComcarpro($val=false)
+  {
+
+    if($val) return number_format($this->comcarpro,2,',','.');
+    else return $this->comcarpro;
+
+  }
+  
+  public function getCodocppro()
+  {
+
+    return trim($this->codocppro);
+
+  }
+  
+  public function getPasocppro()
+  {
+
+    return trim($this->pasocppro);
+
+  }
+  
+  public function getCodemppro()
+  {
+
+    return trim($this->codemppro);
+
+  }
+  
+  public function getNomemppro()
+  {
+
+    return trim($this->nomemppro);
+
+  }
+  
+  public function getCodcatpro()
+  {
+
+    return trim($this->codcatpro);
+
+  }
+  
+  public function getEstorgpro()
+  {
+
+    return trim($this->estorgpro);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNronom($v)
 	{
 
-		if ($this->nronom !== $v) {
-			$this->nronom = $v;
-			$this->modifiedColumns[] = NpmovracPeer::NRONOM;
-		}
-
+    if ($this->nronom !== $v) {
+        $this->nronom = $v;
+        $this->modifiedColumns[] = NpmovracPeer::NRONOM;
+      }
+  
 	} 
 	
 	public function setPerrac($v)
 	{
 
-		if ($this->perrac !== $v) {
-			$this->perrac = $v;
-			$this->modifiedColumns[] = NpmovracPeer::PERRAC;
-		}
-
+    if ($this->perrac !== $v) {
+        $this->perrac = $v;
+        $this->modifiedColumns[] = NpmovracPeer::PERRAC;
+      }
+  
 	} 
 	
 	public function setAnorac($v)
 	{
 
-		if ($this->anorac !== $v) {
-			$this->anorac = $v;
-			$this->modifiedColumns[] = NpmovracPeer::ANORAC;
-		}
-
+    if ($this->anorac !== $v) {
+        $this->anorac = $v;
+        $this->modifiedColumns[] = NpmovracPeer::ANORAC;
+      }
+  
 	} 
 	
 	public function setTipmov($v)
 	{
 
-		if ($this->tipmov !== $v) {
-			$this->tipmov = $v;
-			$this->modifiedColumns[] = NpmovracPeer::TIPMOV;
-		}
-
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = NpmovracPeer::TIPMOV;
+      }
+  
 	} 
 	
 	public function setFecmov($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecmov] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecmov !== $ts) {
-			$this->fecmov = $ts;
-			$this->modifiedColumns[] = NpmovracPeer::FECMOV;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecmov] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecmov !== $ts) {
+      $this->fecmov = $ts;
+      $this->modifiedColumns[] = NpmovracPeer::FECMOV;
+    }
 
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = NpmovracPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = NpmovracPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setCodcarapr($v)
 	{
 
-		if ($this->codcarapr !== $v) {
-			$this->codcarapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::CODCARAPR;
-		}
-
+    if ($this->codcarapr !== $v) {
+        $this->codcarapr = $v;
+        $this->modifiedColumns[] = NpmovracPeer::CODCARAPR;
+      }
+  
 	} 
 	
 	public function setNomcarapr($v)
 	{
 
-		if ($this->nomcarapr !== $v) {
-			$this->nomcarapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::NOMCARAPR;
-		}
-
+    if ($this->nomcarapr !== $v) {
+        $this->nomcarapr = $v;
+        $this->modifiedColumns[] = NpmovracPeer::NOMCARAPR;
+      }
+  
 	} 
 	
 	public function setSuecarapr($v)
 	{
 
-		if ($this->suecarapr !== $v) {
-			$this->suecarapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::SUECARAPR;
-		}
-
+    if ($this->suecarapr !== $v) {
+        $this->suecarapr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpmovracPeer::SUECARAPR;
+      }
+  
 	} 
 	
 	public function setComcarapr($v)
 	{
 
-		if ($this->comcarapr !== $v) {
-			$this->comcarapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::COMCARAPR;
-		}
-
+    if ($this->comcarapr !== $v) {
+        $this->comcarapr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpmovracPeer::COMCARAPR;
+      }
+  
 	} 
 	
 	public function setCodocpapr($v)
 	{
 
-		if ($this->codocpapr !== $v) {
-			$this->codocpapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::CODOCPAPR;
-		}
-
+    if ($this->codocpapr !== $v) {
+        $this->codocpapr = $v;
+        $this->modifiedColumns[] = NpmovracPeer::CODOCPAPR;
+      }
+  
 	} 
 	
 	public function setPasocpapr($v)
 	{
 
-		if ($this->pasocpapr !== $v) {
-			$this->pasocpapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::PASOCPAPR;
-		}
-
+    if ($this->pasocpapr !== $v) {
+        $this->pasocpapr = $v;
+        $this->modifiedColumns[] = NpmovracPeer::PASOCPAPR;
+      }
+  
 	} 
 	
 	public function setCodempapr($v)
 	{
 
-		if ($this->codempapr !== $v) {
-			$this->codempapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::CODEMPAPR;
-		}
-
+    if ($this->codempapr !== $v) {
+        $this->codempapr = $v;
+        $this->modifiedColumns[] = NpmovracPeer::CODEMPAPR;
+      }
+  
 	} 
 	
 	public function setNomempapr($v)
 	{
 
-		if ($this->nomempapr !== $v) {
-			$this->nomempapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::NOMEMPAPR;
-		}
-
+    if ($this->nomempapr !== $v) {
+        $this->nomempapr = $v;
+        $this->modifiedColumns[] = NpmovracPeer::NOMEMPAPR;
+      }
+  
 	} 
 	
 	public function setCodcatapr($v)
 	{
 
-		if ($this->codcatapr !== $v) {
-			$this->codcatapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::CODCATAPR;
-		}
-
+    if ($this->codcatapr !== $v) {
+        $this->codcatapr = $v;
+        $this->modifiedColumns[] = NpmovracPeer::CODCATAPR;
+      }
+  
 	} 
 	
 	public function setEstorgapr($v)
 	{
 
-		if ($this->estorgapr !== $v) {
-			$this->estorgapr = $v;
-			$this->modifiedColumns[] = NpmovracPeer::ESTORGAPR;
-		}
-
+    if ($this->estorgapr !== $v) {
+        $this->estorgapr = $v;
+        $this->modifiedColumns[] = NpmovracPeer::ESTORGAPR;
+      }
+  
 	} 
 	
 	public function setCodcarpro($v)
 	{
 
-		if ($this->codcarpro !== $v) {
-			$this->codcarpro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::CODCARPRO;
-		}
-
+    if ($this->codcarpro !== $v) {
+        $this->codcarpro = $v;
+        $this->modifiedColumns[] = NpmovracPeer::CODCARPRO;
+      }
+  
 	} 
 	
 	public function setNomcarpro($v)
 	{
 
-		if ($this->nomcarpro !== $v) {
-			$this->nomcarpro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::NOMCARPRO;
-		}
-
+    if ($this->nomcarpro !== $v) {
+        $this->nomcarpro = $v;
+        $this->modifiedColumns[] = NpmovracPeer::NOMCARPRO;
+      }
+  
 	} 
 	
 	public function setSuecarpro($v)
 	{
 
-		if ($this->suecarpro !== $v) {
-			$this->suecarpro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::SUECARPRO;
-		}
-
+    if ($this->suecarpro !== $v) {
+        $this->suecarpro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpmovracPeer::SUECARPRO;
+      }
+  
 	} 
 	
 	public function setComcarpro($v)
 	{
 
-		if ($this->comcarpro !== $v) {
-			$this->comcarpro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::COMCARPRO;
-		}
-
+    if ($this->comcarpro !== $v) {
+        $this->comcarpro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpmovracPeer::COMCARPRO;
+      }
+  
 	} 
 	
 	public function setCodocppro($v)
 	{
 
-		if ($this->codocppro !== $v) {
-			$this->codocppro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::CODOCPPRO;
-		}
-
+    if ($this->codocppro !== $v) {
+        $this->codocppro = $v;
+        $this->modifiedColumns[] = NpmovracPeer::CODOCPPRO;
+      }
+  
 	} 
 	
 	public function setPasocppro($v)
 	{
 
-		if ($this->pasocppro !== $v) {
-			$this->pasocppro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::PASOCPPRO;
-		}
-
+    if ($this->pasocppro !== $v) {
+        $this->pasocppro = $v;
+        $this->modifiedColumns[] = NpmovracPeer::PASOCPPRO;
+      }
+  
 	} 
 	
 	public function setCodemppro($v)
 	{
 
-		if ($this->codemppro !== $v) {
-			$this->codemppro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::CODEMPPRO;
-		}
-
+    if ($this->codemppro !== $v) {
+        $this->codemppro = $v;
+        $this->modifiedColumns[] = NpmovracPeer::CODEMPPRO;
+      }
+  
 	} 
 	
 	public function setNomemppro($v)
 	{
 
-		if ($this->nomemppro !== $v) {
-			$this->nomemppro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::NOMEMPPRO;
-		}
-
+    if ($this->nomemppro !== $v) {
+        $this->nomemppro = $v;
+        $this->modifiedColumns[] = NpmovracPeer::NOMEMPPRO;
+      }
+  
 	} 
 	
 	public function setCodcatpro($v)
 	{
 
-		if ($this->codcatpro !== $v) {
-			$this->codcatpro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::CODCATPRO;
-		}
-
+    if ($this->codcatpro !== $v) {
+        $this->codcatpro = $v;
+        $this->modifiedColumns[] = NpmovracPeer::CODCATPRO;
+      }
+  
 	} 
 	
 	public function setEstorgpro($v)
 	{
 
-		if ($this->estorgpro !== $v) {
-			$this->estorgpro = $v;
-			$this->modifiedColumns[] = NpmovracPeer::ESTORGPRO;
-		}
-
+    if ($this->estorgpro !== $v) {
+        $this->estorgpro = $v;
+        $this->modifiedColumns[] = NpmovracPeer::ESTORGPRO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpmovracPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpmovracPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nronom = $rs->getString($startcol + 0);
+      $this->nronom = $rs->getString($startcol + 0);
 
-			$this->perrac = $rs->getString($startcol + 1);
+      $this->perrac = $rs->getString($startcol + 1);
 
-			$this->anorac = $rs->getString($startcol + 2);
+      $this->anorac = $rs->getString($startcol + 2);
 
-			$this->tipmov = $rs->getString($startcol + 3);
+      $this->tipmov = $rs->getString($startcol + 3);
 
-			$this->fecmov = $rs->getDate($startcol + 4, null);
+      $this->fecmov = $rs->getDate($startcol + 4, null);
 
-			$this->status = $rs->getString($startcol + 5);
+      $this->status = $rs->getString($startcol + 5);
 
-			$this->codcarapr = $rs->getString($startcol + 6);
+      $this->codcarapr = $rs->getString($startcol + 6);
 
-			$this->nomcarapr = $rs->getString($startcol + 7);
+      $this->nomcarapr = $rs->getString($startcol + 7);
 
-			$this->suecarapr = $rs->getFloat($startcol + 8);
+      $this->suecarapr = $rs->getFloat($startcol + 8);
 
-			$this->comcarapr = $rs->getFloat($startcol + 9);
+      $this->comcarapr = $rs->getFloat($startcol + 9);
 
-			$this->codocpapr = $rs->getString($startcol + 10);
+      $this->codocpapr = $rs->getString($startcol + 10);
 
-			$this->pasocpapr = $rs->getString($startcol + 11);
+      $this->pasocpapr = $rs->getString($startcol + 11);
 
-			$this->codempapr = $rs->getString($startcol + 12);
+      $this->codempapr = $rs->getString($startcol + 12);
 
-			$this->nomempapr = $rs->getString($startcol + 13);
+      $this->nomempapr = $rs->getString($startcol + 13);
 
-			$this->codcatapr = $rs->getString($startcol + 14);
+      $this->codcatapr = $rs->getString($startcol + 14);
 
-			$this->estorgapr = $rs->getString($startcol + 15);
+      $this->estorgapr = $rs->getString($startcol + 15);
 
-			$this->codcarpro = $rs->getString($startcol + 16);
+      $this->codcarpro = $rs->getString($startcol + 16);
 
-			$this->nomcarpro = $rs->getString($startcol + 17);
+      $this->nomcarpro = $rs->getString($startcol + 17);
 
-			$this->suecarpro = $rs->getFloat($startcol + 18);
+      $this->suecarpro = $rs->getFloat($startcol + 18);
 
-			$this->comcarpro = $rs->getFloat($startcol + 19);
+      $this->comcarpro = $rs->getFloat($startcol + 19);
 
-			$this->codocppro = $rs->getString($startcol + 20);
+      $this->codocppro = $rs->getString($startcol + 20);
 
-			$this->pasocppro = $rs->getString($startcol + 21);
+      $this->pasocppro = $rs->getString($startcol + 21);
 
-			$this->codemppro = $rs->getString($startcol + 22);
+      $this->codemppro = $rs->getString($startcol + 22);
 
-			$this->nomemppro = $rs->getString($startcol + 23);
+      $this->nomemppro = $rs->getString($startcol + 23);
 
-			$this->codcatpro = $rs->getString($startcol + 24);
+      $this->codcatpro = $rs->getString($startcol + 24);
 
-			$this->estorgpro = $rs->getString($startcol + 25);
+      $this->estorgpro = $rs->getString($startcol + 25);
 
-			$this->id = $rs->getInt($startcol + 26);
+      $this->id = $rs->getInt($startcol + 26);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 27; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npmovrac object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 27; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npmovrac object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -704,6 +752,7 @@ abstract class BaseNpmovrac extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpmovracPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpmovracPeer::doUpdate($this, $con);

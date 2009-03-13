@@ -6,33 +6,38 @@ generator:
 
     fields:
       cedrif:        { name: C.I o R.I.F }
-      nomben:        { name: Nombre }
+      nomben:        { name: Nombre o Razon Social }
       nitben:        { name: N.I.T }
       tipper:        { name: Tipo de Persona }
       nacionalidad:  { name: Nacionalidad }
-      residente:     { name: Residente }  
+      residente:     { name: Residente }
       constituida:   { name: Constituida }
-      codcta:        { name: Cuenta Contable }
       dirben:        { name: Direccion }
       telben:        { name: Telefono }
       codcta:        { name: Codigo Contable }
       codord:        { name: Cuenta de Orden }
       codpercon:     { name: Cuenta Percontra }
       codtipben:     { name: Tipo de Beneficiario }
+      tipobene:      { name: Tipo de Beneficiario }
       codctasec:     { name: Cuenta Contable }
       codordadi:     { name: Cuenta de Orden }
       codperconadi:  { name: Cuenta Percontra }
       codctacajchi:  { name: Cta. Caja Chica }
-      
+
     list:
       title:          Beneficiarios
-      display:        [cedrif, nomben, tipper, telben, nacionalidad, codcta]
+      display:        [=cedrif, nomben, dirben, telben, tipobene, tipper, nacionalidad]
       filters:        [cedrif, nomben]
+      sort:           cedrif
       max_per_page:   10
       object_actions:
         _edit:        ~
         _delete:      ~
 
     edit:
-      title:          Modificar Beneficiarios
-    
+      title:          Edición de Beneficiarios
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

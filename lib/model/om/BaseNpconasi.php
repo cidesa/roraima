@@ -29,92 +29,118 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodasi()
-	{
+    return trim($this->codcon);
 
-		return $this->codasi; 		
-	}
-	
-	public function getCodcpt()
-	{
+  }
+  
+  public function getCodasi()
+  {
 
-		return $this->codcpt; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codasi);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodcpt()
+  {
+
+    return trim($this->codcpt);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpconasiPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpconasiPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodasi($v)
 	{
 
-		if ($this->codasi !== $v) {
-			$this->codasi = $v;
-			$this->modifiedColumns[] = NpconasiPeer::CODASI;
-		}
-
+    if ($this->codasi !== $v) {
+        $this->codasi = $v;
+        $this->modifiedColumns[] = NpconasiPeer::CODASI;
+      }
+  
 	} 
 	
 	public function setCodcpt($v)
 	{
 
-		if ($this->codcpt !== $v) {
-			$this->codcpt = $v;
-			$this->modifiedColumns[] = NpconasiPeer::CODCPT;
-		}
-
+    if ($this->codcpt !== $v) {
+        $this->codcpt = $v;
+        $this->modifiedColumns[] = NpconasiPeer::CODCPT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpconasiPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpconasiPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->codasi = $rs->getString($startcol + 1);
+      $this->codasi = $rs->getString($startcol + 1);
 
-			$this->codcpt = $rs->getString($startcol + 2);
+      $this->codcpt = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npconasi object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npconasi object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseNpconasi extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpconasiPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpconasiPeer::doUpdate($this, $con);

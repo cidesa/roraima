@@ -240,6 +240,7 @@ abstract class BaseCiimpingPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CiimpingPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

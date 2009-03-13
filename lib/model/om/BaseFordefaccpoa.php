@@ -69,277 +69,313 @@ abstract class BaseFordefaccpoa extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsubacc()
-	{
+  
+  public function getCodsubacc()
+  {
 
-		return $this->codsubacc; 		
-	}
-	
-	public function getDessubacc()
-	{
+    return trim($this->codsubacc);
 
-		return $this->dessubacc; 		
-	}
-	
-	public function getMetsubacc()
-	{
+  }
+  
+  public function getDessubacc()
+  {
 
-		return $this->metsubacc; 		
-	}
-	
-	public function getLocsubacc()
-	{
+    return trim($this->dessubacc);
 
-		return $this->locsubacc; 		
-	}
-	
-	public function getIndgessubacc()
-	{
+  }
+  
+  public function getMetsubacc()
+  {
 
-		return $this->indgessubacc; 		
-	}
-	
-	public function getCodunimed()
-	{
+    return trim($this->metsubacc);
 
-		return $this->codunimed; 		
-	}
-	
-	public function getMedversubacc()
-	{
+  }
+  
+  public function getLocsubacc()
+  {
 
-		return $this->medversubacc; 		
-	}
-	
-	public function getSupsubacc()
-	{
+    return trim($this->locsubacc);
 
-		return $this->supsubacc; 		
-	}
-	
-	public function getMetpritri()
-	{
+  }
+  
+  public function getIndgessubacc()
+  {
 
-		return number_format($this->metpritri,2,',','.');
-		
-	}
-	
-	public function getMetsegtri()
-	{
+    return trim($this->indgessubacc);
 
-		return number_format($this->metsegtri,2,',','.');
-		
-	}
-	
-	public function getMettertri()
-	{
+  }
+  
+  public function getCodunimed()
+  {
 
-		return number_format($this->mettertri,2,',','.');
-		
-	}
-	
-	public function getMetcuatri()
-	{
+    return trim($this->codunimed);
 
-		return number_format($this->metcuatri,2,',','.');
-		
-	}
-	
-	public function getMettot()
-	{
+  }
+  
+  public function getMedversubacc()
+  {
 
-		return number_format($this->mettot,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->medversubacc);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getSupsubacc()
+  {
+
+    return trim($this->supsubacc);
+
+  }
+  
+  public function getMetpritri($val=false)
+  {
+
+    if($val) return number_format($this->metpritri,2,',','.');
+    else return $this->metpritri;
+
+  }
+  
+  public function getMetsegtri($val=false)
+  {
+
+    if($val) return number_format($this->metsegtri,2,',','.');
+    else return $this->metsegtri;
+
+  }
+  
+  public function getMettertri($val=false)
+  {
+
+    if($val) return number_format($this->mettertri,2,',','.');
+    else return $this->mettertri;
+
+  }
+  
+  public function getMetcuatri($val=false)
+  {
+
+    if($val) return number_format($this->metcuatri,2,',','.');
+    else return $this->metcuatri;
+
+  }
+  
+  public function getMettot($val=false)
+  {
+
+    if($val) return number_format($this->mettot,2,',','.');
+    else return $this->mettot;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsubacc($v)
 	{
 
-		if ($this->codsubacc !== $v) {
-			$this->codsubacc = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::CODSUBACC;
-		}
-
+    if ($this->codsubacc !== $v) {
+        $this->codsubacc = $v;
+        $this->modifiedColumns[] = FordefaccpoaPeer::CODSUBACC;
+      }
+  
 	} 
 	
 	public function setDessubacc($v)
 	{
 
-		if ($this->dessubacc !== $v) {
-			$this->dessubacc = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::DESSUBACC;
-		}
-
+    if ($this->dessubacc !== $v) {
+        $this->dessubacc = $v;
+        $this->modifiedColumns[] = FordefaccpoaPeer::DESSUBACC;
+      }
+  
 	} 
 	
 	public function setMetsubacc($v)
 	{
 
-		if ($this->metsubacc !== $v) {
-			$this->metsubacc = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::METSUBACC;
-		}
-
+    if ($this->metsubacc !== $v) {
+        $this->metsubacc = $v;
+        $this->modifiedColumns[] = FordefaccpoaPeer::METSUBACC;
+      }
+  
 	} 
 	
 	public function setLocsubacc($v)
 	{
 
-		if ($this->locsubacc !== $v) {
-			$this->locsubacc = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::LOCSUBACC;
-		}
-
+    if ($this->locsubacc !== $v) {
+        $this->locsubacc = $v;
+        $this->modifiedColumns[] = FordefaccpoaPeer::LOCSUBACC;
+      }
+  
 	} 
 	
 	public function setIndgessubacc($v)
 	{
 
-		if ($this->indgessubacc !== $v) {
-			$this->indgessubacc = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::INDGESSUBACC;
-		}
-
+    if ($this->indgessubacc !== $v) {
+        $this->indgessubacc = $v;
+        $this->modifiedColumns[] = FordefaccpoaPeer::INDGESSUBACC;
+      }
+  
 	} 
 	
 	public function setCodunimed($v)
 	{
 
-		if ($this->codunimed !== $v) {
-			$this->codunimed = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::CODUNIMED;
-		}
-
+    if ($this->codunimed !== $v) {
+        $this->codunimed = $v;
+        $this->modifiedColumns[] = FordefaccpoaPeer::CODUNIMED;
+      }
+  
 	} 
 	
 	public function setMedversubacc($v)
 	{
 
-		if ($this->medversubacc !== $v) {
-			$this->medversubacc = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::MEDVERSUBACC;
-		}
-
+    if ($this->medversubacc !== $v) {
+        $this->medversubacc = $v;
+        $this->modifiedColumns[] = FordefaccpoaPeer::MEDVERSUBACC;
+      }
+  
 	} 
 	
 	public function setSupsubacc($v)
 	{
 
-		if ($this->supsubacc !== $v) {
-			$this->supsubacc = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::SUPSUBACC;
-		}
-
+    if ($this->supsubacc !== $v) {
+        $this->supsubacc = $v;
+        $this->modifiedColumns[] = FordefaccpoaPeer::SUPSUBACC;
+      }
+  
 	} 
 	
 	public function setMetpritri($v)
 	{
 
-		if ($this->metpritri !== $v) {
-			$this->metpritri = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::METPRITRI;
-		}
-
+    if ($this->metpritri !== $v) {
+        $this->metpritri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefaccpoaPeer::METPRITRI;
+      }
+  
 	} 
 	
 	public function setMetsegtri($v)
 	{
 
-		if ($this->metsegtri !== $v) {
-			$this->metsegtri = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::METSEGTRI;
-		}
-
+    if ($this->metsegtri !== $v) {
+        $this->metsegtri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefaccpoaPeer::METSEGTRI;
+      }
+  
 	} 
 	
 	public function setMettertri($v)
 	{
 
-		if ($this->mettertri !== $v) {
-			$this->mettertri = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::METTERTRI;
-		}
-
+    if ($this->mettertri !== $v) {
+        $this->mettertri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefaccpoaPeer::METTERTRI;
+      }
+  
 	} 
 	
 	public function setMetcuatri($v)
 	{
 
-		if ($this->metcuatri !== $v) {
-			$this->metcuatri = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::METCUATRI;
-		}
-
+    if ($this->metcuatri !== $v) {
+        $this->metcuatri = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefaccpoaPeer::METCUATRI;
+      }
+  
 	} 
 	
 	public function setMettot($v)
 	{
 
-		if ($this->mettot !== $v) {
-			$this->mettot = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::METTOT;
-		}
-
+    if ($this->mettot !== $v) {
+        $this->mettot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefaccpoaPeer::METTOT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefaccpoaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefaccpoaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsubacc = $rs->getString($startcol + 0);
+      $this->codsubacc = $rs->getString($startcol + 0);
 
-			$this->dessubacc = $rs->getString($startcol + 1);
+      $this->dessubacc = $rs->getString($startcol + 1);
 
-			$this->metsubacc = $rs->getString($startcol + 2);
+      $this->metsubacc = $rs->getString($startcol + 2);
 
-			$this->locsubacc = $rs->getString($startcol + 3);
+      $this->locsubacc = $rs->getString($startcol + 3);
 
-			$this->indgessubacc = $rs->getString($startcol + 4);
+      $this->indgessubacc = $rs->getString($startcol + 4);
 
-			$this->codunimed = $rs->getString($startcol + 5);
+      $this->codunimed = $rs->getString($startcol + 5);
 
-			$this->medversubacc = $rs->getString($startcol + 6);
+      $this->medversubacc = $rs->getString($startcol + 6);
 
-			$this->supsubacc = $rs->getString($startcol + 7);
+      $this->supsubacc = $rs->getString($startcol + 7);
 
-			$this->metpritri = $rs->getFloat($startcol + 8);
+      $this->metpritri = $rs->getFloat($startcol + 8);
 
-			$this->metsegtri = $rs->getFloat($startcol + 9);
+      $this->metsegtri = $rs->getFloat($startcol + 9);
 
-			$this->mettertri = $rs->getFloat($startcol + 10);
+      $this->mettertri = $rs->getFloat($startcol + 10);
 
-			$this->metcuatri = $rs->getFloat($startcol + 11);
+      $this->metcuatri = $rs->getFloat($startcol + 11);
 
-			$this->mettot = $rs->getFloat($startcol + 12);
+      $this->mettot = $rs->getFloat($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefaccpoa object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefaccpoa object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -396,6 +432,7 @@ abstract class BaseFordefaccpoa extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefaccpoaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefaccpoaPeer::doUpdate($this, $con);

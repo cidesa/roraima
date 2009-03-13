@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class Dftemporal3MapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.Dftemporal3MapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.Dftemporal3MapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('dftemporal3');
 		$tMap->setPhpName('Dftemporal3');
 
@@ -34,7 +34,7 @@ class Dftemporal3MapBuilder {
 
 		$tMap->addColumn('CODIGO', 'Codigo', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('FECHA', 'Fecha', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECHA', 'Fecha', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('ABR', 'Abr', 'string', CreoleTypes::VARCHAR, true, 4);
 
@@ -42,11 +42,11 @@ class Dftemporal3MapBuilder {
 
 		$tMap->addColumn('BEN', 'Ben', 'string', CreoleTypes::VARCHAR, true, 250);
 
-		$tMap->addColumn('USU', 'Usu', 'string', CreoleTypes::CHAR, true);
+		$tMap->addColumn('USU', 'Usu', 'string', CreoleTypes::CHAR, true, 50);
 
-		$tMap->addColumn('FECHAREC', 'Fecharec', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECHAREC', 'Fecharec', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('FECHAATE', 'Fechaate', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECHAATE', 'Fechaate', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('ESTAD', 'Estad', 'string', CreoleTypes::VARCHAR, true, 20);
 
@@ -75,6 +75,6 @@ class Dftemporal3MapBuilder {
 		$tMap->addColumn('CHKUNI7', 'Chkuni7', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

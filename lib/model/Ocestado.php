@@ -9,4 +9,8 @@
  */ 
 class Ocestado extends BaseOcestado
 {
+	public function getNompai()
+	{
+		return Herramientas::getX('codpai','ocpais','nompai',self::getCodpai());
+	}
 }

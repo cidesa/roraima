@@ -1,0 +1,79 @@
+methods:
+  post:
+   - "tsmovlib{numcue}"
+   - "tsmovlib{reflib}"
+   - "tsmovlib{tipmov}"
+   - "tsmovlib{feclib}"
+   - "tsmovlib{deslib}"
+   - "tsmovlib{monmov}"
+   - "tsmovlib{fecing}"
+names:
+  tsmovlib{numcue}:
+    required: Yes
+    required_msg: El número de cuenta del banco no puede estar en Blanco
+    validators: Validar3a
+
+  tsmovlib{reflib}:
+    required: Yes
+    required_msg: El número de la referencia no puede estar en Blanco
+    validators: Validar3b
+
+  tsmovlib{tipmov}:
+    required: Yes
+    required_msg: El número del tipo de movimiento no puede estar en Blanco
+    validators: Validar3c
+
+  tsmovlib{feclib}:
+    required: Yes
+    required_msg: La fecha del Movimiento no puede estar en Blanco
+#    validators: ValidarFechaMenor
+
+  tsmovlib{deslib}:
+    required: Yes
+    required_msg: La descripcion del Movimiento no puede estar en Blanco
+
+  tsmovlib{fecing}:
+    required: Yes
+    required_msg: La fecha de Ingreso no puede estar en Blanco
+
+  tsmovlib{monmov}:
+    required: Yes
+    required_msg: El monto no puede estar en Blanco
+
+Validar3a:
+    class: UniqueValidator3
+    param:
+        class:        Tsmovlib
+        column:       numcue
+        column2:      reflib
+        column3:      tipmov
+        value2:       'tsmovlib[reflib]'
+        value3:       'tsmovlib[tipmov]'
+        unique_error: Cta Banco + Referencia + Tipo de Movimiento, ya Existen.
+
+Validar3b:
+    class: UniqueValidator3
+    param:
+        class:        Tsmovlib
+        column:       reflib
+        column2:      numcue
+        column3:      tipmov
+        value2:       'tsmovlib[numcue]'
+        value3:       'tsmovlib[tipmov]'
+        unique_error: Cta Banco + Referencia + Tipo de Movimiento, ya Existen.
+
+Validar3c:
+    class: UniqueValidator3
+    param:
+        class:        Tsmovlib
+        column:       tipmov
+        column2:      numcue
+        column3:      reflib
+        value2:       'tsmovlib[numcue]'
+        value3:       'tsmovlib[reflib]'
+        unique_error: Cta Banco + Referencia + Tipo de Movimiento, ya Existen.
+
+ValidarFechaMenor:
+    class: DateMenorEjercicio
+    param:
+        unique_error: La fecha debe ser menor a la del inicio del ejercicio actual.

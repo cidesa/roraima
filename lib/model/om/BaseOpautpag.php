@@ -153,815 +153,865 @@ abstract class BaseOpautpag extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumord()
-	{
+  
+  public function getNumord()
+  {
 
-		return $this->numord; 		
-	}
-	
-	public function getTipcau()
-	{
+    return trim($this->numord);
 
-		return $this->tipcau; 		
-	}
-	
-	public function getFecemi($format = 'Y-m-d')
-	{
+  }
+  
+  public function getTipcau()
+  {
 
-		if ($this->fecemi === null || $this->fecemi === '') {
-			return null;
-		} elseif (!is_int($this->fecemi)) {
-						$ts = strtotime($this->fecemi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
-			}
-		} else {
-			$ts = $this->fecemi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->tipcau);
 
-	
-	public function getCedrif()
-	{
+  }
+  
+  public function getFecemi($format = 'Y-m-d')
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getNomben()
-	{
+    if ($this->fecemi === null || $this->fecemi === '') {
+      return null;
+    } elseif (!is_int($this->fecemi)) {
+            $ts = adodb_strtotime($this->fecemi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
+      }
+    } else {
+      $ts = $this->fecemi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->nomben; 		
-	}
-	
-	public function getMonord()
-	{
+  
+  public function getCedrif()
+  {
 
-		return number_format($this->monord,2,',','.');
-		
-	}
-	
-	public function getDesord()
-	{
+    return trim($this->cedrif);
 
-		return $this->desord; 		
-	}
-	
-	public function getMondes()
-	{
+  }
+  
+  public function getNomben()
+  {
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getMonret()
-	{
+    return trim($this->nomben);
 
-		return number_format($this->monret,2,',','.');
-		
-	}
-	
-	public function getNumche()
-	{
+  }
+  
+  public function getMonord($val=false)
+  {
 
-		return $this->numche; 		
-	}
-	
-	public function getCtaban()
-	{
+    if($val) return number_format($this->monord,2,',','.');
+    else return $this->monord;
 
-		return $this->ctaban; 		
-	}
-	
-	public function getCtapag()
-	{
+  }
+  
+  public function getDesord()
+  {
 
-		return $this->ctapag; 		
-	}
-	
-	public function getNumcom()
-	{
+    return trim($this->desord);
 
-		return $this->numcom; 		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getMondes($val=false)
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getCoduni()
-	{
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
 
-		return $this->coduni; 		
-	}
-	
-	public function getFecenvcon($format = 'Y-m-d')
-	{
+  }
+  
+  public function getMonret($val=false)
+  {
 
-		if ($this->fecenvcon === null || $this->fecenvcon === '') {
-			return null;
-		} elseif (!is_int($this->fecenvcon)) {
-						$ts = strtotime($this->fecenvcon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecenvcon] as date/time value: " . var_export($this->fecenvcon, true));
-			}
-		} else {
-			$ts = $this->fecenvcon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->monret,2,',','.');
+    else return $this->monret;
 
-	
-	public function getFecenvfin($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNumche()
+  {
 
-		if ($this->fecenvfin === null || $this->fecenvfin === '') {
-			return null;
-		} elseif (!is_int($this->fecenvfin)) {
-						$ts = strtotime($this->fecenvfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecenvfin] as date/time value: " . var_export($this->fecenvfin, true));
-			}
-		} else {
-			$ts = $this->fecenvfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->numche);
 
-	
-	public function getCtapagfin()
-	{
+  }
+  
+  public function getCtaban()
+  {
 
-		return $this->ctapagfin; 		
-	}
-	
-	public function getNombensus()
-	{
+    return trim($this->ctaban);
 
-		return $this->nombensus; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCtapag()
+  {
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->ctapag);
 
-	
-	public function getFecrecfin($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNumcom()
+  {
 
-		if ($this->fecrecfin === null || $this->fecrecfin === '') {
-			return null;
-		} elseif (!is_int($this->fecrecfin)) {
-						$ts = strtotime($this->fecrecfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrecfin] as date/time value: " . var_export($this->fecrecfin, true));
-			}
-		} else {
-			$ts = $this->fecrecfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->numcom);
 
-	
-	public function getAnopre()
-	{
+  }
+  
+  public function getStatus()
+  {
 
-		return $this->anopre; 		
-	}
-	
-	public function getFecpag($format = 'Y-m-d')
-	{
+    return trim($this->status);
 
-		if ($this->fecpag === null || $this->fecpag === '') {
-			return null;
-		} elseif (!is_int($this->fecpag)) {
-						$ts = strtotime($this->fecpag);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
-			}
-		} else {
-			$ts = $this->fecpag;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCoduni()
+  {
 
-	
-	public function getMonpag()
-	{
+    return trim($this->coduni);
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getObsord()
-	{
+  }
+  
+  public function getFecenvcon($format = 'Y-m-d')
+  {
 
-		return $this->obsord; 		
-	}
-	
-	public function getNumtiq()
-	{
+    if ($this->fecenvcon === null || $this->fecenvcon === '') {
+      return null;
+    } elseif (!is_int($this->fecenvcon)) {
+            $ts = adodb_strtotime($this->fecenvcon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecenvcon] as date/time value: " . var_export($this->fecenvcon, true));
+      }
+    } else {
+      $ts = $this->fecenvcon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->numtiq; 		
-	}
-	
-	public function getPeraut()
-	{
+  
+  public function getFecenvfin($format = 'Y-m-d')
+  {
 
-		return $this->peraut; 		
-	}
-	
-	public function getDesanu()
-	{
+    if ($this->fecenvfin === null || $this->fecenvfin === '') {
+      return null;
+    } elseif (!is_int($this->fecenvfin)) {
+            $ts = adodb_strtotime($this->fecenvfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecenvfin] as date/time value: " . var_export($this->fecenvfin, true));
+      }
+    } else {
+      $ts = $this->fecenvfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desanu; 		
-	}
-	
-	public function getCedaut()
-	{
+  
+  public function getCtapagfin()
+  {
 
-		return $this->cedaut; 		
-	}
-	
-	public function getNomper1()
-	{
+    return trim($this->ctapagfin);
 
-		return $this->nomper1; 		
-	}
-	
-	public function getNomper2()
-	{
+  }
+  
+  public function getNombensus()
+  {
 
-		return $this->nomper2; 		
-	}
-	
-	public function getHorcon()
-	{
+    return trim($this->nombensus);
 
-		return $this->horcon; 		
-	}
-	
-	public function getFeccon($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
 
-		if ($this->feccon === null || $this->feccon === '') {
-			return null;
-		} elseif (!is_int($this->feccon)) {
-						$ts = strtotime($this->feccon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
-			}
-		} else {
-			$ts = $this->feccon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getNomcat()
-	{
+  
+  public function getFecrecfin($format = 'Y-m-d')
+  {
 
-		return $this->nomcat; 		
-	}
-	
-	public function getId()
-	{
+    if ($this->fecrecfin === null || $this->fecrecfin === '') {
+      return null;
+    } elseif (!is_int($this->fecrecfin)) {
+            $ts = adodb_strtotime($this->fecrecfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrecfin] as date/time value: " . var_export($this->fecrecfin, true));
+      }
+    } else {
+      $ts = $this->fecrecfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getAnopre()
+  {
+
+    return trim($this->anopre);
+
+  }
+  
+  public function getFecpag($format = 'Y-m-d')
+  {
+
+    if ($this->fecpag === null || $this->fecpag === '') {
+      return null;
+    } elseif (!is_int($this->fecpag)) {
+            $ts = adodb_strtotime($this->fecpag);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
+      }
+    } else {
+      $ts = $this->fecpag;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getMonpag($val=false)
+  {
+
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getObsord()
+  {
+
+    return trim($this->obsord);
+
+  }
+  
+  public function getNumtiq()
+  {
+
+    return trim($this->numtiq);
+
+  }
+  
+  public function getPeraut()
+  {
+
+    return trim($this->peraut);
+
+  }
+  
+  public function getDesanu()
+  {
+
+    return trim($this->desanu);
+
+  }
+  
+  public function getCedaut()
+  {
+
+    return trim($this->cedaut);
+
+  }
+  
+  public function getNomper1()
+  {
+
+    return trim($this->nomper1);
+
+  }
+  
+  public function getNomper2()
+  {
+
+    return trim($this->nomper2);
+
+  }
+  
+  public function getHorcon()
+  {
+
+    return trim($this->horcon);
+
+  }
+  
+  public function getFeccon($format = 'Y-m-d')
+  {
+
+    if ($this->feccon === null || $this->feccon === '') {
+      return null;
+    } elseif (!is_int($this->feccon)) {
+            $ts = adodb_strtotime($this->feccon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
+      }
+    } else {
+      $ts = $this->feccon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getNomcat()
+  {
+
+    return trim($this->nomcat);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = OpautpagPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = OpautpagPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setTipcau($v)
 	{
 
-		if ($this->tipcau !== $v) {
-			$this->tipcau = $v;
-			$this->modifiedColumns[] = OpautpagPeer::TIPCAU;
-		}
-
+    if ($this->tipcau !== $v) {
+        $this->tipcau = $v;
+        $this->modifiedColumns[] = OpautpagPeer::TIPCAU;
+      }
+  
 	} 
 	
 	public function setFecemi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecemi !== $ts) {
-			$this->fecemi = $ts;
-			$this->modifiedColumns[] = OpautpagPeer::FECEMI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecemi !== $ts) {
+      $this->fecemi = $ts;
+      $this->modifiedColumns[] = OpautpagPeer::FECEMI;
+    }
 
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = OpautpagPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = OpautpagPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setNomben($v)
 	{
 
-		if ($this->nomben !== $v) {
-			$this->nomben = $v;
-			$this->modifiedColumns[] = OpautpagPeer::NOMBEN;
-		}
-
+    if ($this->nomben !== $v) {
+        $this->nomben = $v;
+        $this->modifiedColumns[] = OpautpagPeer::NOMBEN;
+      }
+  
 	} 
 	
 	public function setMonord($v)
 	{
 
-		if ($this->monord !== $v) {
-			$this->monord = $v;
-			$this->modifiedColumns[] = OpautpagPeer::MONORD;
-		}
-
+    if ($this->monord !== $v) {
+        $this->monord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpautpagPeer::MONORD;
+      }
+  
 	} 
 	
 	public function setDesord($v)
 	{
 
-		if ($this->desord !== $v) {
-			$this->desord = $v;
-			$this->modifiedColumns[] = OpautpagPeer::DESORD;
-		}
-
+    if ($this->desord !== $v) {
+        $this->desord = $v;
+        $this->modifiedColumns[] = OpautpagPeer::DESORD;
+      }
+  
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = OpautpagPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpautpagPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setMonret($v)
 	{
 
-		if ($this->monret !== $v) {
-			$this->monret = $v;
-			$this->modifiedColumns[] = OpautpagPeer::MONRET;
-		}
-
+    if ($this->monret !== $v) {
+        $this->monret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpautpagPeer::MONRET;
+      }
+  
 	} 
 	
 	public function setNumche($v)
 	{
 
-		if ($this->numche !== $v) {
-			$this->numche = $v;
-			$this->modifiedColumns[] = OpautpagPeer::NUMCHE;
-		}
-
+    if ($this->numche !== $v) {
+        $this->numche = $v;
+        $this->modifiedColumns[] = OpautpagPeer::NUMCHE;
+      }
+  
 	} 
 	
 	public function setCtaban($v)
 	{
 
-		if ($this->ctaban !== $v) {
-			$this->ctaban = $v;
-			$this->modifiedColumns[] = OpautpagPeer::CTABAN;
-		}
-
+    if ($this->ctaban !== $v) {
+        $this->ctaban = $v;
+        $this->modifiedColumns[] = OpautpagPeer::CTABAN;
+      }
+  
 	} 
 	
 	public function setCtapag($v)
 	{
 
-		if ($this->ctapag !== $v) {
-			$this->ctapag = $v;
-			$this->modifiedColumns[] = OpautpagPeer::CTAPAG;
-		}
-
+    if ($this->ctapag !== $v) {
+        $this->ctapag = $v;
+        $this->modifiedColumns[] = OpautpagPeer::CTAPAG;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = OpautpagPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = OpautpagPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = OpautpagPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = OpautpagPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = OpautpagPeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = OpautpagPeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setFecenvcon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecenvcon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecenvcon !== $ts) {
-			$this->fecenvcon = $ts;
-			$this->modifiedColumns[] = OpautpagPeer::FECENVCON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecenvcon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecenvcon !== $ts) {
+      $this->fecenvcon = $ts;
+      $this->modifiedColumns[] = OpautpagPeer::FECENVCON;
+    }
 
 	} 
 	
 	public function setFecenvfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecenvfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecenvfin !== $ts) {
-			$this->fecenvfin = $ts;
-			$this->modifiedColumns[] = OpautpagPeer::FECENVFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecenvfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecenvfin !== $ts) {
+      $this->fecenvfin = $ts;
+      $this->modifiedColumns[] = OpautpagPeer::FECENVFIN;
+    }
 
 	} 
 	
 	public function setCtapagfin($v)
 	{
 
-		if ($this->ctapagfin !== $v) {
-			$this->ctapagfin = $v;
-			$this->modifiedColumns[] = OpautpagPeer::CTAPAGFIN;
-		}
-
+    if ($this->ctapagfin !== $v) {
+        $this->ctapagfin = $v;
+        $this->modifiedColumns[] = OpautpagPeer::CTAPAGFIN;
+      }
+  
 	} 
 	
 	public function setNombensus($v)
 	{
 
-		if ($this->nombensus !== $v) {
-			$this->nombensus = $v;
-			$this->modifiedColumns[] = OpautpagPeer::NOMBENSUS;
-		}
-
+    if ($this->nombensus !== $v) {
+        $this->nombensus = $v;
+        $this->modifiedColumns[] = OpautpagPeer::NOMBENSUS;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = OpautpagPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = OpautpagPeer::FECANU;
+    }
 
 	} 
 	
 	public function setFecrecfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrecfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrecfin !== $ts) {
-			$this->fecrecfin = $ts;
-			$this->modifiedColumns[] = OpautpagPeer::FECRECFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrecfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrecfin !== $ts) {
+      $this->fecrecfin = $ts;
+      $this->modifiedColumns[] = OpautpagPeer::FECRECFIN;
+    }
 
 	} 
 	
 	public function setAnopre($v)
 	{
 
-		if ($this->anopre !== $v) {
-			$this->anopre = $v;
-			$this->modifiedColumns[] = OpautpagPeer::ANOPRE;
-		}
-
+    if ($this->anopre !== $v) {
+        $this->anopre = $v;
+        $this->modifiedColumns[] = OpautpagPeer::ANOPRE;
+      }
+  
 	} 
 	
 	public function setFecpag($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecpag !== $ts) {
-			$this->fecpag = $ts;
-			$this->modifiedColumns[] = OpautpagPeer::FECPAG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecpag !== $ts) {
+      $this->fecpag = $ts;
+      $this->modifiedColumns[] = OpautpagPeer::FECPAG;
+    }
 
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = OpautpagPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpautpagPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setObsord($v)
 	{
 
-		if ($this->obsord !== $v) {
-			$this->obsord = $v;
-			$this->modifiedColumns[] = OpautpagPeer::OBSORD;
-		}
-
+    if ($this->obsord !== $v) {
+        $this->obsord = $v;
+        $this->modifiedColumns[] = OpautpagPeer::OBSORD;
+      }
+  
 	} 
 	
 	public function setNumtiq($v)
 	{
 
-		if ($this->numtiq !== $v) {
-			$this->numtiq = $v;
-			$this->modifiedColumns[] = OpautpagPeer::NUMTIQ;
-		}
-
+    if ($this->numtiq !== $v) {
+        $this->numtiq = $v;
+        $this->modifiedColumns[] = OpautpagPeer::NUMTIQ;
+      }
+  
 	} 
 	
 	public function setPeraut($v)
 	{
 
-		if ($this->peraut !== $v) {
-			$this->peraut = $v;
-			$this->modifiedColumns[] = OpautpagPeer::PERAUT;
-		}
-
+    if ($this->peraut !== $v) {
+        $this->peraut = $v;
+        $this->modifiedColumns[] = OpautpagPeer::PERAUT;
+      }
+  
 	} 
 	
 	public function setDesanu($v)
 	{
 
-		if ($this->desanu !== $v) {
-			$this->desanu = $v;
-			$this->modifiedColumns[] = OpautpagPeer::DESANU;
-		}
-
+    if ($this->desanu !== $v) {
+        $this->desanu = $v;
+        $this->modifiedColumns[] = OpautpagPeer::DESANU;
+      }
+  
 	} 
 	
 	public function setCedaut($v)
 	{
 
-		if ($this->cedaut !== $v) {
-			$this->cedaut = $v;
-			$this->modifiedColumns[] = OpautpagPeer::CEDAUT;
-		}
-
+    if ($this->cedaut !== $v) {
+        $this->cedaut = $v;
+        $this->modifiedColumns[] = OpautpagPeer::CEDAUT;
+      }
+  
 	} 
 	
 	public function setNomper1($v)
 	{
 
-		if ($this->nomper1 !== $v) {
-			$this->nomper1 = $v;
-			$this->modifiedColumns[] = OpautpagPeer::NOMPER1;
-		}
-
+    if ($this->nomper1 !== $v) {
+        $this->nomper1 = $v;
+        $this->modifiedColumns[] = OpautpagPeer::NOMPER1;
+      }
+  
 	} 
 	
 	public function setNomper2($v)
 	{
 
-		if ($this->nomper2 !== $v) {
-			$this->nomper2 = $v;
-			$this->modifiedColumns[] = OpautpagPeer::NOMPER2;
-		}
-
+    if ($this->nomper2 !== $v) {
+        $this->nomper2 = $v;
+        $this->modifiedColumns[] = OpautpagPeer::NOMPER2;
+      }
+  
 	} 
 	
 	public function setHorcon($v)
 	{
 
-		if ($this->horcon !== $v) {
-			$this->horcon = $v;
-			$this->modifiedColumns[] = OpautpagPeer::HORCON;
-		}
-
+    if ($this->horcon !== $v) {
+        $this->horcon = $v;
+        $this->modifiedColumns[] = OpautpagPeer::HORCON;
+      }
+  
 	} 
 	
 	public function setFeccon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccon !== $ts) {
-			$this->feccon = $ts;
-			$this->modifiedColumns[] = OpautpagPeer::FECCON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccon !== $ts) {
+      $this->feccon = $ts;
+      $this->modifiedColumns[] = OpautpagPeer::FECCON;
+    }
 
 	} 
 	
 	public function setNomcat($v)
 	{
 
-		if ($this->nomcat !== $v) {
-			$this->nomcat = $v;
-			$this->modifiedColumns[] = OpautpagPeer::NOMCAT;
-		}
-
+    if ($this->nomcat !== $v) {
+        $this->nomcat = $v;
+        $this->modifiedColumns[] = OpautpagPeer::NOMCAT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpautpagPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpautpagPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numord = $rs->getString($startcol + 0);
+      $this->numord = $rs->getString($startcol + 0);
 
-			$this->tipcau = $rs->getString($startcol + 1);
+      $this->tipcau = $rs->getString($startcol + 1);
 
-			$this->fecemi = $rs->getDate($startcol + 2, null);
+      $this->fecemi = $rs->getDate($startcol + 2, null);
 
-			$this->cedrif = $rs->getString($startcol + 3);
+      $this->cedrif = $rs->getString($startcol + 3);
 
-			$this->nomben = $rs->getString($startcol + 4);
+      $this->nomben = $rs->getString($startcol + 4);
 
-			$this->monord = $rs->getFloat($startcol + 5);
+      $this->monord = $rs->getFloat($startcol + 5);
 
-			$this->desord = $rs->getString($startcol + 6);
+      $this->desord = $rs->getString($startcol + 6);
 
-			$this->mondes = $rs->getFloat($startcol + 7);
+      $this->mondes = $rs->getFloat($startcol + 7);
 
-			$this->monret = $rs->getFloat($startcol + 8);
+      $this->monret = $rs->getFloat($startcol + 8);
 
-			$this->numche = $rs->getString($startcol + 9);
+      $this->numche = $rs->getString($startcol + 9);
 
-			$this->ctaban = $rs->getString($startcol + 10);
+      $this->ctaban = $rs->getString($startcol + 10);
 
-			$this->ctapag = $rs->getString($startcol + 11);
+      $this->ctapag = $rs->getString($startcol + 11);
 
-			$this->numcom = $rs->getString($startcol + 12);
+      $this->numcom = $rs->getString($startcol + 12);
 
-			$this->status = $rs->getString($startcol + 13);
+      $this->status = $rs->getString($startcol + 13);
 
-			$this->coduni = $rs->getString($startcol + 14);
+      $this->coduni = $rs->getString($startcol + 14);
 
-			$this->fecenvcon = $rs->getDate($startcol + 15, null);
+      $this->fecenvcon = $rs->getDate($startcol + 15, null);
 
-			$this->fecenvfin = $rs->getDate($startcol + 16, null);
+      $this->fecenvfin = $rs->getDate($startcol + 16, null);
 
-			$this->ctapagfin = $rs->getString($startcol + 17);
+      $this->ctapagfin = $rs->getString($startcol + 17);
 
-			$this->nombensus = $rs->getString($startcol + 18);
+      $this->nombensus = $rs->getString($startcol + 18);
 
-			$this->fecanu = $rs->getDate($startcol + 19, null);
+      $this->fecanu = $rs->getDate($startcol + 19, null);
 
-			$this->fecrecfin = $rs->getDate($startcol + 20, null);
+      $this->fecrecfin = $rs->getDate($startcol + 20, null);
 
-			$this->anopre = $rs->getString($startcol + 21);
+      $this->anopre = $rs->getString($startcol + 21);
 
-			$this->fecpag = $rs->getDate($startcol + 22, null);
+      $this->fecpag = $rs->getDate($startcol + 22, null);
 
-			$this->monpag = $rs->getFloat($startcol + 23);
+      $this->monpag = $rs->getFloat($startcol + 23);
 
-			$this->obsord = $rs->getString($startcol + 24);
+      $this->obsord = $rs->getString($startcol + 24);
 
-			$this->numtiq = $rs->getString($startcol + 25);
+      $this->numtiq = $rs->getString($startcol + 25);
 
-			$this->peraut = $rs->getString($startcol + 26);
+      $this->peraut = $rs->getString($startcol + 26);
 
-			$this->desanu = $rs->getString($startcol + 27);
+      $this->desanu = $rs->getString($startcol + 27);
 
-			$this->cedaut = $rs->getString($startcol + 28);
+      $this->cedaut = $rs->getString($startcol + 28);
 
-			$this->nomper1 = $rs->getString($startcol + 29);
+      $this->nomper1 = $rs->getString($startcol + 29);
 
-			$this->nomper2 = $rs->getString($startcol + 30);
+      $this->nomper2 = $rs->getString($startcol + 30);
 
-			$this->horcon = $rs->getString($startcol + 31);
+      $this->horcon = $rs->getString($startcol + 31);
 
-			$this->feccon = $rs->getDate($startcol + 32, null);
+      $this->feccon = $rs->getDate($startcol + 32, null);
 
-			$this->nomcat = $rs->getString($startcol + 33);
+      $this->nomcat = $rs->getString($startcol + 33);
 
-			$this->id = $rs->getInt($startcol + 34);
+      $this->id = $rs->getInt($startcol + 34);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 35; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opautpag object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 35; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opautpag object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -1018,6 +1068,7 @@ abstract class BaseOpautpag extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpautpagPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpautpagPeer::doUpdate($this, $con);

@@ -5,21 +5,28 @@ generator:
     theme:            default
 
     fields:
-      codalm:      { name : Codigo }
-      nomalm:      { name : Descripcion }
-      codcat:      { name : Unidad Asociada } 
+      codalm:      { name : Código }
+      nomalm:      { name : Descripción }
+      codcat:      { name : Cod. Unidad Asociada }
+      nomcat:      { name : Unidad Asociada }
 
     list:
-      title:          Almacen
-      display:        [=codalm, nomalm, codcat]
+      title:          Almacenes
+      display:        [=codalm, nomalm, codcat, nomcat]
       filters:		  [codalm, nomalm, codcat]
       max_per_page:	  10
+      sort:           codalm
       object_actions:
         _edit:        ~
         _delete:      ~
-      
+
     edit:
-      title:          Edicion de Almacen
-      display:        [codalm, nomalm, codcat]  
+      title:          Edición de Almacen
+      display:        [codalm, nomalm, codcat]
       fields:
         codalm:       { params : maxlength=6}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -73,339 +73,374 @@ abstract class BaseFcabonos extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumpag()
-	{
+  
+  public function getNumpag()
+  {
 
-		return $this->numpag; 		
-	}
-	
-	public function getFecpag($format = 'Y-m-d')
-	{
+    return trim($this->numpag);
 
-		if ($this->fecpag === null || $this->fecpag === '') {
-			return null;
-		} elseif (!is_int($this->fecpag)) {
-						$ts = strtotime($this->fecpag);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
-			}
-		} else {
-			$ts = $this->fecpag;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecpag($format = 'Y-m-d')
+  {
 
-	
-	public function getRifcon()
-	{
+    if ($this->fecpag === null || $this->fecpag === '') {
+      return null;
+    } elseif (!is_int($this->fecpag)) {
+            $ts = adodb_strtotime($this->fecpag);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecpag] as date/time value: " . var_export($this->fecpag, true));
+      }
+    } else {
+      $ts = $this->fecpag;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->rifcon; 		
-	}
-	
-	public function getFueing()
-	{
+  
+  public function getRifcon()
+  {
 
-		return $this->fueing; 		
-	}
-	
-	public function getDespag()
-	{
+    return trim($this->rifcon);
 
-		return $this->despag; 		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getFueing()
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMonefe()
-	{
+    return trim($this->fueing);
 
-		return number_format($this->monefe,2,',','.');
-		
-	}
-	
-	public function getFunpag()
-	{
+  }
+  
+  public function getDespag()
+  {
 
-		return $this->funpag; 		
-	}
-	
-	public function getCodrec()
-	{
+    return trim($this->despag);
 
-		return $this->codrec; 		
-	}
-	
-	public function getSalpag()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return number_format($this->salpag,2,',','.');
-		
-	}
-	
-	public function getStapag()
-	{
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
 
-		return $this->stapag; 		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
+  }
+  
+  public function getMonefe($val=false)
+  {
 
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->monefe,2,',','.');
+    else return $this->monefe;
 
-	
-	public function getNumpag2()
-	{
+  }
+  
+  public function getFunpag()
+  {
 
-		return $this->numpag2; 		
-	}
-	
-	public function getNumref()
-	{
+    return trim($this->funpag);
 
-		return $this->numref; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodrec()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codrec);
+
+  }
+  
+  public function getSalpag($val=false)
+  {
+
+    if($val) return number_format($this->salpag,2,',','.');
+    else return $this->salpag;
+
+  }
+  
+  public function getStapag()
+  {
+
+    return trim($this->stapag);
+
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
+
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getNumpag2()
+  {
+
+    return trim($this->numpag2);
+
+  }
+  
+  public function getNumref()
+  {
+
+    return trim($this->numref);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumpag($v)
 	{
 
-		if ($this->numpag !== $v) {
-			$this->numpag = $v;
-			$this->modifiedColumns[] = FcabonosPeer::NUMPAG;
-		}
-
+    if ($this->numpag !== $v) {
+        $this->numpag = $v;
+        $this->modifiedColumns[] = FcabonosPeer::NUMPAG;
+      }
+  
 	} 
 	
 	public function setFecpag($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecpag !== $ts) {
-			$this->fecpag = $ts;
-			$this->modifiedColumns[] = FcabonosPeer::FECPAG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpag] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecpag !== $ts) {
+      $this->fecpag = $ts;
+      $this->modifiedColumns[] = FcabonosPeer::FECPAG;
+    }
 
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FcabonosPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FcabonosPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setFueing($v)
 	{
 
-		if ($this->fueing !== $v) {
-			$this->fueing = $v;
-			$this->modifiedColumns[] = FcabonosPeer::FUEING;
-		}
-
+    if ($this->fueing !== $v) {
+        $this->fueing = $v;
+        $this->modifiedColumns[] = FcabonosPeer::FUEING;
+      }
+  
 	} 
 	
 	public function setDespag($v)
 	{
 
-		if ($this->despag !== $v) {
-			$this->despag = $v;
-			$this->modifiedColumns[] = FcabonosPeer::DESPAG;
-		}
-
+    if ($this->despag !== $v) {
+        $this->despag = $v;
+        $this->modifiedColumns[] = FcabonosPeer::DESPAG;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = FcabonosPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcabonosPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMonefe($v)
 	{
 
-		if ($this->monefe !== $v) {
-			$this->monefe = $v;
-			$this->modifiedColumns[] = FcabonosPeer::MONEFE;
-		}
-
+    if ($this->monefe !== $v) {
+        $this->monefe = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcabonosPeer::MONEFE;
+      }
+  
 	} 
 	
 	public function setFunpag($v)
 	{
 
-		if ($this->funpag !== $v) {
-			$this->funpag = $v;
-			$this->modifiedColumns[] = FcabonosPeer::FUNPAG;
-		}
-
+    if ($this->funpag !== $v) {
+        $this->funpag = $v;
+        $this->modifiedColumns[] = FcabonosPeer::FUNPAG;
+      }
+  
 	} 
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = FcabonosPeer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = FcabonosPeer::CODREC;
+      }
+  
 	} 
 	
 	public function setSalpag($v)
 	{
 
-		if ($this->salpag !== $v) {
-			$this->salpag = $v;
-			$this->modifiedColumns[] = FcabonosPeer::SALPAG;
-		}
-
+    if ($this->salpag !== $v) {
+        $this->salpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcabonosPeer::SALPAG;
+      }
+  
 	} 
 	
 	public function setStapag($v)
 	{
 
-		if ($this->stapag !== $v) {
-			$this->stapag = $v;
-			$this->modifiedColumns[] = FcabonosPeer::STAPAG;
-		}
-
+    if ($this->stapag !== $v) {
+        $this->stapag = $v;
+        $this->modifiedColumns[] = FcabonosPeer::STAPAG;
+      }
+  
 	} 
 	
 	public function setFecrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = FcabonosPeer::FECREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = FcabonosPeer::FECREC;
+    }
 
 	} 
 	
 	public function setNumpag2($v)
 	{
 
-		if ($this->numpag2 !== $v) {
-			$this->numpag2 = $v;
-			$this->modifiedColumns[] = FcabonosPeer::NUMPAG2;
-		}
-
+    if ($this->numpag2 !== $v) {
+        $this->numpag2 = $v;
+        $this->modifiedColumns[] = FcabonosPeer::NUMPAG2;
+      }
+  
 	} 
 	
 	public function setNumref($v)
 	{
 
-		if ($this->numref !== $v) {
-			$this->numref = $v;
-			$this->modifiedColumns[] = FcabonosPeer::NUMREF;
-		}
-
+    if ($this->numref !== $v) {
+        $this->numref = $v;
+        $this->modifiedColumns[] = FcabonosPeer::NUMREF;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcabonosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcabonosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numpag = $rs->getString($startcol + 0);
+      $this->numpag = $rs->getString($startcol + 0);
 
-			$this->fecpag = $rs->getDate($startcol + 1, null);
+      $this->fecpag = $rs->getDate($startcol + 1, null);
 
-			$this->rifcon = $rs->getString($startcol + 2);
+      $this->rifcon = $rs->getString($startcol + 2);
 
-			$this->fueing = $rs->getString($startcol + 3);
+      $this->fueing = $rs->getString($startcol + 3);
 
-			$this->despag = $rs->getString($startcol + 4);
+      $this->despag = $rs->getString($startcol + 4);
 
-			$this->monpag = $rs->getFloat($startcol + 5);
+      $this->monpag = $rs->getFloat($startcol + 5);
 
-			$this->monefe = $rs->getFloat($startcol + 6);
+      $this->monefe = $rs->getFloat($startcol + 6);
 
-			$this->funpag = $rs->getString($startcol + 7);
+      $this->funpag = $rs->getString($startcol + 7);
 
-			$this->codrec = $rs->getString($startcol + 8);
+      $this->codrec = $rs->getString($startcol + 8);
 
-			$this->salpag = $rs->getFloat($startcol + 9);
+      $this->salpag = $rs->getFloat($startcol + 9);
 
-			$this->stapag = $rs->getString($startcol + 10);
+      $this->stapag = $rs->getString($startcol + 10);
 
-			$this->fecrec = $rs->getDate($startcol + 11, null);
+      $this->fecrec = $rs->getDate($startcol + 11, null);
 
-			$this->numpag2 = $rs->getString($startcol + 12);
+      $this->numpag2 = $rs->getString($startcol + 12);
 
-			$this->numref = $rs->getString($startcol + 13);
+      $this->numref = $rs->getString($startcol + 13);
 
-			$this->id = $rs->getInt($startcol + 14);
+      $this->id = $rs->getInt($startcol + 14);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 15; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcabonos object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 15; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcabonos object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -462,6 +497,7 @@ abstract class BaseFcabonos extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcabonosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcabonosPeer::doUpdate($this, $con);

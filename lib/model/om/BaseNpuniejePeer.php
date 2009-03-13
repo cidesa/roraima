@@ -210,6 +210,7 @@ abstract class BaseNpuniejePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpuniejePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

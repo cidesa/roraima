@@ -93,428 +93,467 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodins()
-	{
+  
+  public function getCodins()
+  {
 
-		return $this->codins; 		
-	}
-	
-	public function getNomins()
-	{
+    return trim($this->codins);
 
-		return $this->nomins; 		
-	}
-	
-	public function getDirins()
-	{
+  }
+  
+  public function getNomins()
+  {
 
-		return $this->dirins; 		
-	}
-	
-	public function getTelins()
-	{
+    return trim($this->nomins);
 
-		return $this->telins; 		
-	}
-	
-	public function getFaxins()
-	{
+  }
+  
+  public function getDirins()
+  {
 
-		return $this->faxins; 		
-	}
-	
-	public function getEmail()
-	{
+    return trim($this->dirins);
 
-		return $this->email; 		
-	}
-	
-	public function getEdoins()
-	{
+  }
+  
+  public function getTelins()
+  {
 
-		return $this->edoins; 		
-	}
-	
-	public function getMunins()
-	{
+    return trim($this->telins);
 
-		return $this->munins; 		
-	}
-	
-	public function getPaqins()
-	{
+  }
+  
+  public function getFaxins()
+  {
 
-		return $this->paqins; 		
-	}
-	
-	public function getForact()
-	{
+    return trim($this->faxins);
 
-		return $this->foract; 		
-	}
-	
-	public function getDesact()
-	{
+  }
+  
+  public function getEmail()
+  {
 
-		return $this->desact; 		
-	}
-	
-	public function getLonact()
-	{
+    return trim($this->email);
 
-		return number_format($this->lonact,2,',','.');
-		
-	}
-	
-	public function getForubi()
-	{
+  }
+  
+  public function getEdoins()
+  {
 
-		return $this->forubi; 		
-	}
-	
-	public function getDesubi()
-	{
+    return trim($this->edoins);
 
-		return $this->desubi; 		
-	}
-	
-	public function getLonubi()
-	{
+  }
+  
+  public function getMunins()
+  {
 
-		return number_format($this->lonubi,2,',','.');
-		
-	}
-	
-	public function getFecper($format = 'Y-m-d')
-	{
+    return trim($this->munins);
 
-		if ($this->fecper === null || $this->fecper === '') {
-			return null;
-		} elseif (!is_int($this->fecper)) {
-						$ts = strtotime($this->fecper);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecper] as date/time value: " . var_export($this->fecper, true));
-			}
-		} else {
-			$ts = $this->fecper;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getPaqins()
+  {
 
-	
-	public function getFeceje($format = 'Y-m-d')
-	{
+    return trim($this->paqins);
 
-		if ($this->feceje === null || $this->feceje === '') {
-			return null;
-		} elseif (!is_int($this->feceje)) {
-						$ts = strtotime($this->feceje);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feceje] as date/time value: " . var_export($this->feceje, true));
-			}
-		} else {
-			$ts = $this->feceje;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getForact()
+  {
 
-	
-	public function getCoddes()
-	{
+    return trim($this->foract);
 
-		return $this->coddes; 		
-	}
-	
-	public function getPorrev()
-	{
+  }
+  
+  public function getDesact()
+  {
 
-		return $this->porrev; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desact);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getLonact()
+  {
+
+    return $this->lonact;
+
+  }
+  
+  public function getForubi()
+  {
+
+    return trim($this->forubi);
+
+  }
+  
+  public function getDesubi()
+  {
+
+    return trim($this->desubi);
+
+  }
+  
+  public function getLonubi($val=false)
+  {
+
+    if($val) return number_format($this->lonubi,2,',','.');
+    else return $this->lonubi;
+
+  }
+  
+  public function getFecper($format = 'Y-m-d')
+  {
+
+    if ($this->fecper === null || $this->fecper === '') {
+      return null;
+    } elseif (!is_int($this->fecper)) {
+            $ts = adodb_strtotime($this->fecper);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecper] as date/time value: " . var_export($this->fecper, true));
+      }
+    } else {
+      $ts = $this->fecper;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFeceje($format = 'Y-m-d')
+  {
+
+    if ($this->feceje === null || $this->feceje === '') {
+      return null;
+    } elseif (!is_int($this->feceje)) {
+            $ts = adodb_strtotime($this->feceje);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feceje] as date/time value: " . var_export($this->feceje, true));
+      }
+    } else {
+      $ts = $this->feceje;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCoddes()
+  {
+
+    return trim($this->coddes);
+
+  }
+  
+  public function getPorrev()
+  {
+
+    return trim($this->porrev);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodins($v)
 	{
 
-		if ($this->codins !== $v) {
-			$this->codins = $v;
-			$this->modifiedColumns[] = BndefinsPeer::CODINS;
-		}
-
+    if ($this->codins !== $v) {
+        $this->codins = $v;
+        $this->modifiedColumns[] = BndefinsPeer::CODINS;
+      }
+  
 	} 
 	
 	public function setNomins($v)
 	{
 
-		if ($this->nomins !== $v) {
-			$this->nomins = $v;
-			$this->modifiedColumns[] = BndefinsPeer::NOMINS;
-		}
-
+    if ($this->nomins !== $v) {
+        $this->nomins = $v;
+        $this->modifiedColumns[] = BndefinsPeer::NOMINS;
+      }
+  
 	} 
 	
 	public function setDirins($v)
 	{
 
-		if ($this->dirins !== $v) {
-			$this->dirins = $v;
-			$this->modifiedColumns[] = BndefinsPeer::DIRINS;
-		}
-
+    if ($this->dirins !== $v) {
+        $this->dirins = $v;
+        $this->modifiedColumns[] = BndefinsPeer::DIRINS;
+      }
+  
 	} 
 	
 	public function setTelins($v)
 	{
 
-		if ($this->telins !== $v) {
-			$this->telins = $v;
-			$this->modifiedColumns[] = BndefinsPeer::TELINS;
-		}
-
+    if ($this->telins !== $v) {
+        $this->telins = $v;
+        $this->modifiedColumns[] = BndefinsPeer::TELINS;
+      }
+  
 	} 
 	
 	public function setFaxins($v)
 	{
 
-		if ($this->faxins !== $v) {
-			$this->faxins = $v;
-			$this->modifiedColumns[] = BndefinsPeer::FAXINS;
-		}
-
+    if ($this->faxins !== $v) {
+        $this->faxins = $v;
+        $this->modifiedColumns[] = BndefinsPeer::FAXINS;
+      }
+  
 	} 
 	
 	public function setEmail($v)
 	{
 
-		if ($this->email !== $v) {
-			$this->email = $v;
-			$this->modifiedColumns[] = BndefinsPeer::EMAIL;
-		}
-
+    if ($this->email !== $v) {
+        $this->email = $v;
+        $this->modifiedColumns[] = BndefinsPeer::EMAIL;
+      }
+  
 	} 
 	
 	public function setEdoins($v)
 	{
 
-		if ($this->edoins !== $v) {
-			$this->edoins = $v;
-			$this->modifiedColumns[] = BndefinsPeer::EDOINS;
-		}
-
+    if ($this->edoins !== $v) {
+        $this->edoins = $v;
+        $this->modifiedColumns[] = BndefinsPeer::EDOINS;
+      }
+  
 	} 
 	
 	public function setMunins($v)
 	{
 
-		if ($this->munins !== $v) {
-			$this->munins = $v;
-			$this->modifiedColumns[] = BndefinsPeer::MUNINS;
-		}
-
+    if ($this->munins !== $v) {
+        $this->munins = $v;
+        $this->modifiedColumns[] = BndefinsPeer::MUNINS;
+      }
+  
 	} 
 	
 	public function setPaqins($v)
 	{
 
-		if ($this->paqins !== $v) {
-			$this->paqins = $v;
-			$this->modifiedColumns[] = BndefinsPeer::PAQINS;
-		}
-
+    if ($this->paqins !== $v) {
+        $this->paqins = $v;
+        $this->modifiedColumns[] = BndefinsPeer::PAQINS;
+      }
+  
 	} 
 	
 	public function setForact($v)
 	{
 
-		if ($this->foract !== $v) {
-			$this->foract = $v;
-			$this->modifiedColumns[] = BndefinsPeer::FORACT;
-		}
-
+    if ($this->foract !== $v) {
+        $this->foract = $v;
+        $this->modifiedColumns[] = BndefinsPeer::FORACT;
+      }
+  
 	} 
 	
 	public function setDesact($v)
 	{
 
-		if ($this->desact !== $v) {
-			$this->desact = $v;
-			$this->modifiedColumns[] = BndefinsPeer::DESACT;
-		}
-
+    if ($this->desact !== $v) {
+        $this->desact = $v;
+        $this->modifiedColumns[] = BndefinsPeer::DESACT;
+      }
+  
 	} 
 	
 	public function setLonact($v)
 	{
 
-		if ($this->lonact !== $v) {
-			$this->lonact = $v;
-			$this->modifiedColumns[] = BndefinsPeer::LONACT;
-		}
-
+    if ($this->lonact !== $v) {
+        $this->lonact = $v;
+        $this->modifiedColumns[] = BndefinsPeer::LONACT;
+      }
+  
 	} 
 	
 	public function setForubi($v)
 	{
 
-		if ($this->forubi !== $v) {
-			$this->forubi = $v;
-			$this->modifiedColumns[] = BndefinsPeer::FORUBI;
-		}
-
+    if ($this->forubi !== $v) {
+        $this->forubi = $v;
+        $this->modifiedColumns[] = BndefinsPeer::FORUBI;
+      }
+  
 	} 
 	
 	public function setDesubi($v)
 	{
 
-		if ($this->desubi !== $v) {
-			$this->desubi = $v;
-			$this->modifiedColumns[] = BndefinsPeer::DESUBI;
-		}
-
+    if ($this->desubi !== $v) {
+        $this->desubi = $v;
+        $this->modifiedColumns[] = BndefinsPeer::DESUBI;
+      }
+  
 	} 
 	
 	public function setLonubi($v)
 	{
 
-		if ($this->lonubi !== $v) {
-			$this->lonubi = $v;
-			$this->modifiedColumns[] = BndefinsPeer::LONUBI;
-		}
-
+    if ($this->lonubi !== $v) {
+        $this->lonubi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndefinsPeer::LONUBI;
+      }
+  
 	} 
 	
 	public function setFecper($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecper] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecper !== $ts) {
-			$this->fecper = $ts;
-			$this->modifiedColumns[] = BndefinsPeer::FECPER;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecper] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecper !== $ts) {
+      $this->fecper = $ts;
+      $this->modifiedColumns[] = BndefinsPeer::FECPER;
+    }
 
 	} 
 	
 	public function setFeceje($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feceje] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feceje !== $ts) {
-			$this->feceje = $ts;
-			$this->modifiedColumns[] = BndefinsPeer::FECEJE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feceje] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feceje !== $ts) {
+      $this->feceje = $ts;
+      $this->modifiedColumns[] = BndefinsPeer::FECEJE;
+    }
 
 	} 
 	
 	public function setCoddes($v)
 	{
 
-		if ($this->coddes !== $v) {
-			$this->coddes = $v;
-			$this->modifiedColumns[] = BndefinsPeer::CODDES;
-		}
-
+    if ($this->coddes !== $v) {
+        $this->coddes = $v;
+        $this->modifiedColumns[] = BndefinsPeer::CODDES;
+      }
+  
 	} 
 	
 	public function setPorrev($v)
 	{
 
-		if ($this->porrev !== $v) {
-			$this->porrev = $v;
-			$this->modifiedColumns[] = BndefinsPeer::PORREV;
-		}
-
+    if ($this->porrev !== $v) {
+        $this->porrev = $v;
+        $this->modifiedColumns[] = BndefinsPeer::PORREV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndefinsPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndefinsPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codins = $rs->getString($startcol + 0);
+      $this->codins = $rs->getString($startcol + 0);
 
-			$this->nomins = $rs->getString($startcol + 1);
+      $this->nomins = $rs->getString($startcol + 1);
 
-			$this->dirins = $rs->getString($startcol + 2);
+      $this->dirins = $rs->getString($startcol + 2);
 
-			$this->telins = $rs->getString($startcol + 3);
+      $this->telins = $rs->getString($startcol + 3);
 
-			$this->faxins = $rs->getString($startcol + 4);
+      $this->faxins = $rs->getString($startcol + 4);
 
-			$this->email = $rs->getString($startcol + 5);
+      $this->email = $rs->getString($startcol + 5);
 
-			$this->edoins = $rs->getString($startcol + 6);
+      $this->edoins = $rs->getString($startcol + 6);
 
-			$this->munins = $rs->getString($startcol + 7);
+      $this->munins = $rs->getString($startcol + 7);
 
-			$this->paqins = $rs->getString($startcol + 8);
+      $this->paqins = $rs->getString($startcol + 8);
 
-			$this->foract = $rs->getString($startcol + 9);
+      $this->foract = $rs->getString($startcol + 9);
 
-			$this->desact = $rs->getString($startcol + 10);
+      $this->desact = $rs->getString($startcol + 10);
 
-			$this->lonact = $rs->getFloat($startcol + 11);
+      $this->lonact = $rs->getInt($startcol + 11);
 
-			$this->forubi = $rs->getString($startcol + 12);
+      $this->forubi = $rs->getString($startcol + 12);
 
-			$this->desubi = $rs->getString($startcol + 13);
+      $this->desubi = $rs->getString($startcol + 13);
 
-			$this->lonubi = $rs->getFloat($startcol + 14);
+      $this->lonubi = $rs->getFloat($startcol + 14);
 
-			$this->fecper = $rs->getDate($startcol + 15, null);
+      $this->fecper = $rs->getDate($startcol + 15, null);
 
-			$this->feceje = $rs->getDate($startcol + 16, null);
+      $this->feceje = $rs->getDate($startcol + 16, null);
 
-			$this->coddes = $rs->getString($startcol + 17);
+      $this->coddes = $rs->getString($startcol + 17);
 
-			$this->porrev = $rs->getString($startcol + 18);
+      $this->porrev = $rs->getString($startcol + 18);
 
-			$this->id = $rs->getInt($startcol + 19);
+      $this->id = $rs->getInt($startcol + 19);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 20; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bndefins object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 20; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bndefins object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -571,6 +610,7 @@ abstract class BaseBndefins extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BndefinsPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BndefinsPeer::doUpdate($this, $con);

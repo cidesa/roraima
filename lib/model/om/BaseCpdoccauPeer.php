@@ -235,6 +235,7 @@ abstract class BaseCpdoccauPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpdoccauPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

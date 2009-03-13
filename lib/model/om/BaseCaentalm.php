@@ -37,6 +37,10 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 
 
 	
+	protected $codubi;
+
+
+	
 	protected $tipmov;
 
 
@@ -49,206 +53,255 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRcpart()
-	{
+  
+  public function getRcpart()
+  {
 
-		return $this->rcpart; 		
-	}
-	
-	public function getFecrcp($format = 'Y-m-d')
-	{
+    return trim($this->rcpart);
 
-		if ($this->fecrcp === null || $this->fecrcp === '') {
-			return null;
-		} elseif (!is_int($this->fecrcp)) {
-						$ts = strtotime($this->fecrcp);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrcp] as date/time value: " . var_export($this->fecrcp, true));
-			}
-		} else {
-			$ts = $this->fecrcp;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecrcp($format = 'Y-m-d')
+  {
 
-	
-	public function getDesrcp()
-	{
+    if ($this->fecrcp === null || $this->fecrcp === '') {
+      return null;
+    } elseif (!is_int($this->fecrcp)) {
+            $ts = adodb_strtotime($this->fecrcp);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrcp] as date/time value: " . var_export($this->fecrcp, true));
+      }
+    } else {
+      $ts = $this->fecrcp;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desrcp; 		
-	}
-	
-	public function getCodpro()
-	{
+  
+  public function getDesrcp()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getMonrcp()
-	{
+    return trim($this->desrcp);
 
-		return number_format($this->monrcp,2,',','.');
-		
-	}
-	
-	public function getStarcp()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->starcp; 		
-	}
-	
-	public function getCodalm()
-	{
+    return trim($this->codpro);
 
-		return $this->codalm; 		
-	}
-	
-	public function getTipmov()
-	{
+  }
+  
+  public function getMonrcp($val=false)
+  {
 
-		return $this->tipmov; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monrcp,2,',','.');
+    else return $this->monrcp;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStarcp()
+  {
+
+    return trim($this->starcp);
+
+  }
+  
+  public function getCodalm()
+  {
+
+    return trim($this->codalm);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getTipmov()
+  {
+
+    return trim($this->tipmov);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRcpart($v)
 	{
 
-		if ($this->rcpart !== $v) {
-			$this->rcpart = $v;
-			$this->modifiedColumns[] = CaentalmPeer::RCPART;
-		}
-
+    if ($this->rcpart !== $v) {
+        $this->rcpart = $v;
+        $this->modifiedColumns[] = CaentalmPeer::RCPART;
+      }
+  
 	} 
 	
 	public function setFecrcp($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrcp] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrcp !== $ts) {
-			$this->fecrcp = $ts;
-			$this->modifiedColumns[] = CaentalmPeer::FECRCP;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrcp] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrcp !== $ts) {
+      $this->fecrcp = $ts;
+      $this->modifiedColumns[] = CaentalmPeer::FECRCP;
+    }
 
 	} 
 	
 	public function setDesrcp($v)
 	{
 
-		if ($this->desrcp !== $v) {
-			$this->desrcp = $v;
-			$this->modifiedColumns[] = CaentalmPeer::DESRCP;
-		}
-
+    if ($this->desrcp !== $v) {
+        $this->desrcp = $v;
+        $this->modifiedColumns[] = CaentalmPeer::DESRCP;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CaentalmPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CaentalmPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setMonrcp($v)
 	{
 
-		if ($this->monrcp !== $v) {
-			$this->monrcp = $v;
-			$this->modifiedColumns[] = CaentalmPeer::MONRCP;
-		}
-
+    if ($this->monrcp !== $v) {
+        $this->monrcp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaentalmPeer::MONRCP;
+      }
+  
 	} 
 	
 	public function setStarcp($v)
 	{
 
-		if ($this->starcp !== $v) {
-			$this->starcp = $v;
-			$this->modifiedColumns[] = CaentalmPeer::STARCP;
-		}
-
+    if ($this->starcp !== $v) {
+        $this->starcp = $v;
+        $this->modifiedColumns[] = CaentalmPeer::STARCP;
+      }
+  
 	} 
 	
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = CaentalmPeer::CODALM;
-		}
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CaentalmPeer::CODALM;
+      }
+  
+	} 
+	
+	public function setCodubi($v)
+	{
 
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CaentalmPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setTipmov($v)
 	{
 
-		if ($this->tipmov !== $v) {
-			$this->tipmov = $v;
-			$this->modifiedColumns[] = CaentalmPeer::TIPMOV;
-		}
-
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = CaentalmPeer::TIPMOV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaentalmPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaentalmPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->rcpart = $rs->getString($startcol + 0);
+      $this->rcpart = $rs->getString($startcol + 0);
 
-			$this->fecrcp = $rs->getDate($startcol + 1, null);
+      $this->fecrcp = $rs->getDate($startcol + 1, null);
 
-			$this->desrcp = $rs->getString($startcol + 2);
+      $this->desrcp = $rs->getString($startcol + 2);
 
-			$this->codpro = $rs->getString($startcol + 3);
+      $this->codpro = $rs->getString($startcol + 3);
 
-			$this->monrcp = $rs->getFloat($startcol + 4);
+      $this->monrcp = $rs->getFloat($startcol + 4);
 
-			$this->starcp = $rs->getString($startcol + 5);
+      $this->starcp = $rs->getString($startcol + 5);
 
-			$this->codalm = $rs->getString($startcol + 6);
+      $this->codalm = $rs->getString($startcol + 6);
 
-			$this->tipmov = $rs->getString($startcol + 7);
+      $this->codubi = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->tipmov = $rs->getString($startcol + 8);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caentalm object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caentalm object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -305,6 +358,7 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaentalmPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaentalmPeer::doUpdate($this, $con);
@@ -392,9 +446,12 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 				return $this->getCodalm();
 				break;
 			case 7:
-				return $this->getTipmov();
+				return $this->getCodubi();
 				break;
 			case 8:
+				return $this->getTipmov();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -414,8 +471,9 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 			$keys[4] => $this->getMonrcp(),
 			$keys[5] => $this->getStarcp(),
 			$keys[6] => $this->getCodalm(),
-			$keys[7] => $this->getTipmov(),
-			$keys[8] => $this->getId(),
+			$keys[7] => $this->getCodubi(),
+			$keys[8] => $this->getTipmov(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -453,9 +511,12 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 				$this->setCodalm($value);
 				break;
 			case 7:
-				$this->setTipmov($value);
+				$this->setCodubi($value);
 				break;
 			case 8:
+				$this->setTipmov($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -472,8 +533,9 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setMonrcp($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setStarcp($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodalm($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setTipmov($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCodubi($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setTipmov($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -488,6 +550,7 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaentalmPeer::MONRCP)) $criteria->add(CaentalmPeer::MONRCP, $this->monrcp);
 		if ($this->isColumnModified(CaentalmPeer::STARCP)) $criteria->add(CaentalmPeer::STARCP, $this->starcp);
 		if ($this->isColumnModified(CaentalmPeer::CODALM)) $criteria->add(CaentalmPeer::CODALM, $this->codalm);
+		if ($this->isColumnModified(CaentalmPeer::CODUBI)) $criteria->add(CaentalmPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CaentalmPeer::TIPMOV)) $criteria->add(CaentalmPeer::TIPMOV, $this->tipmov);
 		if ($this->isColumnModified(CaentalmPeer::ID)) $criteria->add(CaentalmPeer::ID, $this->id);
 
@@ -533,6 +596,8 @@ abstract class BaseCaentalm extends BaseObject  implements Persistent {
 		$copyObj->setStarcp($this->starcp);
 
 		$copyObj->setCodalm($this->codalm);
+
+		$copyObj->setCodubi($this->codubi);
 
 		$copyObj->setTipmov($this->tipmov);
 

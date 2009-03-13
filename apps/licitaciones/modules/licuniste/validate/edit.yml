@@ -1,0 +1,38 @@
+methods:
+  post:
+   - "lidatste{coduniste}"
+   - "lidatste{desuniste}"
+   - "lidatste{litipste_id}"
+
+
+names:
+  lidatste{coduniste}:
+    required:  Yes
+    required_msg: El Código no puedo estar en Blanco
+    validators: Validator_coduniste
+
+  lidatste{desuniste}:
+    required:  Yes
+    required_msg: La descripción no puedo estar en Blanco
+    validators: Validator_desuniste
+
+  lidatste{litipste_id}:
+    required:  Yes
+    required_msg: Debe seleccionar un Tipo de Unidad Solicitante
+
+
+Validator_coduniste:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Lidatste
+        column:       coduniste
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desuniste:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres
+

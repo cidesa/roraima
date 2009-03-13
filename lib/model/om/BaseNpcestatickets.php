@@ -61,239 +61,273 @@ abstract class BaseNpcestatickets extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codnom);
 
-		return $this->codcon; 		
-	}
-	
-	public function getMonpor()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return $this->monpor; 		
-	}
-	
-	public function getValtic()
-	{
+    return trim($this->codcon);
 
-		return number_format($this->valtic,2,',','.');
-		
-	}
-	
-	public function getNumtic()
-	{
+  }
+  
+  public function getMonpor()
+  {
 
-		return number_format($this->numtic,2,',','.');
-		
-	}
-	
-	public function getTippag()
-	{
+    return trim($this->monpor);
 
-		return $this->tippag; 		
-	}
-	
-	public function getNumdia()
-	{
+  }
+  
+  public function getValtic($val=false)
+  {
 
-		return number_format($this->numdia,2,',','.');
-		
-	}
-	
-	public function getDiahab()
-	{
+    if($val) return number_format($this->valtic,2,',','.');
+    else return $this->valtic;
 
-		return $this->diahab; 		
-	}
-	
-	public function getSabado()
-	{
+  }
+  
+  public function getNumtic($val=false)
+  {
 
-		return $this->sabado; 		
-	}
-	
-	public function getDoming()
-	{
+    if($val) return number_format($this->numtic,2,',','.');
+    else return $this->numtic;
 
-		return $this->doming; 		
-	}
-	
-	public function getDiafer()
-	{
+  }
+  
+  public function getTippag()
+  {
 
-		return $this->diafer; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->tippag);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumdia($val=false)
+  {
+
+    if($val) return number_format($this->numdia,2,',','.');
+    else return $this->numdia;
+
+  }
+  
+  public function getDiahab()
+  {
+
+    return trim($this->diahab);
+
+  }
+  
+  public function getSabado()
+  {
+
+    return trim($this->sabado);
+
+  }
+  
+  public function getDoming()
+  {
+
+    return trim($this->doming);
+
+  }
+  
+  public function getDiafer()
+  {
+
+    return trim($this->diafer);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpcestaticketsPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpcestaticketsPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setMonpor($v)
 	{
 
-		if ($this->monpor !== $v) {
-			$this->monpor = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::MONPOR;
-		}
-
+    if ($this->monpor !== $v) {
+        $this->monpor = $v;
+        $this->modifiedColumns[] = NpcestaticketsPeer::MONPOR;
+      }
+  
 	} 
 	
 	public function setValtic($v)
 	{
 
-		if ($this->valtic !== $v) {
-			$this->valtic = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::VALTIC;
-		}
-
+    if ($this->valtic !== $v) {
+        $this->valtic = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcestaticketsPeer::VALTIC;
+      }
+  
 	} 
 	
 	public function setNumtic($v)
 	{
 
-		if ($this->numtic !== $v) {
-			$this->numtic = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::NUMTIC;
-		}
-
+    if ($this->numtic !== $v) {
+        $this->numtic = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcestaticketsPeer::NUMTIC;
+      }
+  
 	} 
 	
 	public function setTippag($v)
 	{
 
-		if ($this->tippag !== $v) {
-			$this->tippag = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::TIPPAG;
-		}
-
+    if ($this->tippag !== $v) {
+        $this->tippag = $v;
+        $this->modifiedColumns[] = NpcestaticketsPeer::TIPPAG;
+      }
+  
 	} 
 	
 	public function setNumdia($v)
 	{
 
-		if ($this->numdia !== $v) {
-			$this->numdia = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::NUMDIA;
-		}
-
+    if ($this->numdia !== $v) {
+        $this->numdia = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcestaticketsPeer::NUMDIA;
+      }
+  
 	} 
 	
 	public function setDiahab($v)
 	{
 
-		if ($this->diahab !== $v) {
-			$this->diahab = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::DIAHAB;
-		}
-
+    if ($this->diahab !== $v) {
+        $this->diahab = $v;
+        $this->modifiedColumns[] = NpcestaticketsPeer::DIAHAB;
+      }
+  
 	} 
 	
 	public function setSabado($v)
 	{
 
-		if ($this->sabado !== $v) {
-			$this->sabado = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::SABADO;
-		}
-
+    if ($this->sabado !== $v) {
+        $this->sabado = $v;
+        $this->modifiedColumns[] = NpcestaticketsPeer::SABADO;
+      }
+  
 	} 
 	
 	public function setDoming($v)
 	{
 
-		if ($this->doming !== $v) {
-			$this->doming = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::DOMING;
-		}
-
+    if ($this->doming !== $v) {
+        $this->doming = $v;
+        $this->modifiedColumns[] = NpcestaticketsPeer::DOMING;
+      }
+  
 	} 
 	
 	public function setDiafer($v)
 	{
 
-		if ($this->diafer !== $v) {
-			$this->diafer = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::DIAFER;
-		}
-
+    if ($this->diafer !== $v) {
+        $this->diafer = $v;
+        $this->modifiedColumns[] = NpcestaticketsPeer::DIAFER;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcestaticketsPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcestaticketsPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->monpor = $rs->getString($startcol + 2);
+      $this->monpor = $rs->getString($startcol + 2);
 
-			$this->valtic = $rs->getFloat($startcol + 3);
+      $this->valtic = $rs->getFloat($startcol + 3);
 
-			$this->numtic = $rs->getFloat($startcol + 4);
+      $this->numtic = $rs->getFloat($startcol + 4);
 
-			$this->tippag = $rs->getString($startcol + 5);
+      $this->tippag = $rs->getString($startcol + 5);
 
-			$this->numdia = $rs->getFloat($startcol + 6);
+      $this->numdia = $rs->getFloat($startcol + 6);
 
-			$this->diahab = $rs->getString($startcol + 7);
+      $this->diahab = $rs->getString($startcol + 7);
 
-			$this->sabado = $rs->getString($startcol + 8);
+      $this->sabado = $rs->getString($startcol + 8);
 
-			$this->doming = $rs->getString($startcol + 9);
+      $this->doming = $rs->getString($startcol + 9);
 
-			$this->diafer = $rs->getString($startcol + 10);
+      $this->diafer = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcestatickets object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcestatickets object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -350,6 +384,7 @@ abstract class BaseNpcestatickets extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcestaticketsPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcestaticketsPeer::doUpdate($this, $con);

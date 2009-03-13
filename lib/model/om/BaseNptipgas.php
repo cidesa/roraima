@@ -25,74 +25,99 @@ abstract class BaseNptipgas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipgas()
-	{
+  
+  public function getCodtipgas()
+  {
 
-		return $this->codtipgas; 		
-	}
-	
-	public function getDestipgas()
-	{
+    return trim($this->codtipgas);
 
-		return $this->destipgas; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDestipgas()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->destipgas);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipgas($v)
 	{
 
-		if ($this->codtipgas !== $v) {
-			$this->codtipgas = $v;
-			$this->modifiedColumns[] = NptipgasPeer::CODTIPGAS;
-		}
-
+    if ($this->codtipgas !== $v) {
+        $this->codtipgas = $v;
+        $this->modifiedColumns[] = NptipgasPeer::CODTIPGAS;
+      }
+  
 	} 
 	
 	public function setDestipgas($v)
 	{
 
-		if ($this->destipgas !== $v) {
-			$this->destipgas = $v;
-			$this->modifiedColumns[] = NptipgasPeer::DESTIPGAS;
-		}
-
+    if ($this->destipgas !== $v) {
+        $this->destipgas = $v;
+        $this->modifiedColumns[] = NptipgasPeer::DESTIPGAS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NptipgasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NptipgasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipgas = $rs->getString($startcol + 0);
+      $this->codtipgas = $rs->getString($startcol + 0);
 
-			$this->destipgas = $rs->getString($startcol + 1);
+      $this->destipgas = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nptipgas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nptipgas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseNptipgas extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NptipgasPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NptipgasPeer::doUpdate($this, $con);

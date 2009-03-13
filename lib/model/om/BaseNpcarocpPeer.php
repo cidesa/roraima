@@ -245,6 +245,7 @@ abstract class BaseNpcarocpPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcarocpPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

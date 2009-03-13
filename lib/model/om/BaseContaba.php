@@ -201,914 +201,981 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getLoncta()
-	{
+    return trim($this->codemp);
 
-		return number_format($this->loncta,2,',','.');
-		
-	}
-	
-	public function getNumrup()
-	{
+  }
+  
+  public function getLoncta($val=false)
+  {
 
-		return number_format($this->numrup,2,',','.');
-		
-	}
-	
-	public function getForcta()
-	{
+    if($val) return number_format($this->loncta,2,',','.');
+    else return $this->loncta;
 
-		return $this->forcta; 		
-	}
-	
-	public function getSitfin()
-	{
+  }
+  
+  public function getNumrup($val=false)
+  {
 
-		return $this->sitfin; 		
-	}
-	
-	public function getSitfis()
-	{
+    if($val) return number_format($this->numrup,2,',','.');
+    else return $this->numrup;
 
-		return $this->sitfis; 		
-	}
-	
-	public function getGanper()
-	{
+  }
+  
+  public function getForcta()
+  {
 
-		return $this->ganper; 		
-	}
-	
-	public function getEjepre()
-	{
+    return trim($this->forcta);
 
-		return $this->ejepre; 		
-	}
-	
-	public function getHacmun()
-	{
+  }
+  
+  public function getSitfin()
+  {
 
-		return $this->hacmun; 		
-	}
-	
-	public function getCtlgas()
-	{
+    return trim($this->sitfin);
 
-		return $this->ctlgas; 		
-	}
-	
-	public function getCtling()
-	{
+  }
+  
+  public function getSitfis()
+  {
 
-		return $this->ctling; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    return trim($this->sitfis);
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getGanper()
+  {
 
-	
-	public function getFeccie($format = 'Y-m-d')
-	{
+    return trim($this->ganper);
 
-		if ($this->feccie === null || $this->feccie === '') {
-			return null;
-		} elseif (!is_int($this->feccie)) {
-						$ts = strtotime($this->feccie);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
-			}
-		} else {
-			$ts = $this->feccie;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getEjepre()
+  {
 
-	
-	public function getCodtes()
-	{
+    return trim($this->ejepre);
 
-		return $this->codtes; 		
-	}
-	
-	public function getCodhac()
-	{
+  }
+  
+  public function getHacmun()
+  {
 
-		return $this->codhac; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->hacmun);
 
-		return $this->codpre; 		
-	}
-	
-	public function getCodord()
-	{
+  }
+  
+  public function getCtlgas()
+  {
 
-		return $this->codord; 		
-	}
-	
-	public function getCodtesact()
-	{
+    return trim($this->ctlgas);
 
-		return $this->codtesact; 		
-	}
-	
-	public function getCodhacact()
-	{
+  }
+  
+  public function getCtling()
+  {
 
-		return $this->codhacact; 		
-	}
-	
-	public function getCodhacpat()
-	{
+    return trim($this->ctling);
 
-		return $this->codhacpat; 		
-	}
-	
-	public function getCodtespas()
-	{
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		return $this->codtespas; 		
-	}
-	
-	public function getCodhacpas()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codhacpas; 		
-	}
-	
-	public function getCodind()
-	{
+  
+  public function getFeccie($format = 'Y-m-d')
+  {
 
-		return $this->codind; 		
-	}
-	
-	public function getCodinh()
-	{
+    if ($this->feccie === null || $this->feccie === '') {
+      return null;
+    } elseif (!is_int($this->feccie)) {
+            $ts = adodb_strtotime($this->feccie);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
+      }
+    } else {
+      $ts = $this->feccie;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codinh; 		
-	}
-	
-	public function getCodegd()
-	{
+  
+  public function getCodtes()
+  {
 
-		return $this->codegd; 		
-	}
-	
-	public function getCodegh()
-	{
+    return trim($this->codtes);
 
-		return $this->codegh; 		
-	}
-	
-	public function getCodres()
-	{
+  }
+  
+  public function getCodhac()
+  {
 
-		return $this->codres; 		
-	}
-	
-	public function getCodejepre()
-	{
+    return trim($this->codhac);
 
-		return $this->codejepre; 		
-	}
-	
-	public function getCodctd()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return $this->codctd; 		
-	}
-	
-	public function getCodcta()
-	{
+    return trim($this->codpre);
 
-		return $this->codcta; 		
-	}
-	
-	public function getCodresant()
-	{
+  }
+  
+  public function getCodord()
+  {
 
-		return $this->codresant; 		
-	}
-	
-	public function getEtadef()
-	{
+    return trim($this->codord);
 
-		return $this->etadef; 		
-	}
-	
-	public function getCodctagas()
-	{
+  }
+  
+  public function getCodtesact()
+  {
 
-		return $this->codctagas; 		
-	}
-	
-	public function getCodctaban()
-	{
+    return trim($this->codtesact);
 
-		return $this->codctaban; 		
-	}
-	
-	public function getCodctaret()
-	{
+  }
+  
+  public function getCodhacact()
+  {
 
-		return $this->codctaret; 		
-	}
-	
-	public function getCodctaben()
-	{
+    return trim($this->codhacact);
 
-		return $this->codctaben; 		
-	}
-	
-	public function getCodctaart()
-	{
+  }
+  
+  public function getCodhacpat()
+  {
 
-		return $this->codctaart; 		
-	}
-	
-	public function getCodctagashas()
-	{
+    return trim($this->codhacpat);
 
-		return $this->codctagashas; 		
-	}
-	
-	public function getCodctabanhas()
-	{
+  }
+  
+  public function getCodtespas()
+  {
 
-		return $this->codctabanhas; 		
-	}
-	
-	public function getCodctarethas()
-	{
+    return trim($this->codtespas);
 
-		return $this->codctarethas; 		
-	}
-	
-	public function getCodctabenhas()
-	{
+  }
+  
+  public function getCodhacpas()
+  {
 
-		return $this->codctabenhas; 		
-	}
-	
-	public function getCodctaarthas()
-	{
+    return trim($this->codhacpas);
 
-		return $this->codctaarthas; 		
-	}
-	
-	public function getCodctapageje()
-	{
+  }
+  
+  public function getCodind()
+  {
 
-		return $this->codctapageje; 		
-	}
-	
-	public function getCodctaingdevn()
-	{
+    return trim($this->codind);
 
-		return $this->codctaingdevn; 		
-	}
-	
-	public function getCodctaingdev()
-	{
+  }
+  
+  public function getCodinh()
+  {
 
-		return $this->codctaingdev; 		
-	}
-	
-	public function getUnidad()
-	{
+    return trim($this->codinh);
 
-		return $this->unidad; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodegd()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codegd);
+
+  }
+  
+  public function getCodegh()
+  {
+
+    return trim($this->codegh);
+
+  }
+  
+  public function getCodres()
+  {
+
+    return trim($this->codres);
+
+  }
+  
+  public function getCodejepre()
+  {
+
+    return trim($this->codejepre);
+
+  }
+  
+  public function getCodctd()
+  {
+
+    return trim($this->codctd);
+
+  }
+  
+  public function getCodcta()
+  {
+
+    return trim($this->codcta);
+
+  }
+  
+  public function getCodresant()
+  {
+
+    return trim($this->codresant);
+
+  }
+  
+  public function getEtadef()
+  {
+
+    return trim($this->etadef);
+
+  }
+  
+  public function getCodctagas()
+  {
+
+    return trim($this->codctagas);
+
+  }
+  
+  public function getCodctaban()
+  {
+
+    return trim($this->codctaban);
+
+  }
+  
+  public function getCodctaret()
+  {
+
+    return trim($this->codctaret);
+
+  }
+  
+  public function getCodctaben()
+  {
+
+    return trim($this->codctaben);
+
+  }
+  
+  public function getCodctaart()
+  {
+
+    return trim($this->codctaart);
+
+  }
+  
+  public function getCodctagashas()
+  {
+
+    return trim($this->codctagashas);
+
+  }
+  
+  public function getCodctabanhas()
+  {
+
+    return trim($this->codctabanhas);
+
+  }
+  
+  public function getCodctarethas()
+  {
+
+    return trim($this->codctarethas);
+
+  }
+  
+  public function getCodctabenhas()
+  {
+
+    return trim($this->codctabenhas);
+
+  }
+  
+  public function getCodctaarthas()
+  {
+
+    return trim($this->codctaarthas);
+
+  }
+  
+  public function getCodctapageje()
+  {
+
+    return trim($this->codctapageje);
+
+  }
+  
+  public function getCodctaingdevn()
+  {
+
+    return trim($this->codctaingdevn);
+
+  }
+  
+  public function getCodctaingdev()
+  {
+
+    return trim($this->codctaingdev);
+
+  }
+  
+  public function getUnidad()
+  {
+
+    return trim($this->unidad);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setLoncta($v)
 	{
 
-		if ($this->loncta !== $v) {
-			$this->loncta = $v;
-			$this->modifiedColumns[] = ContabaPeer::LONCTA;
-		}
-
+    if ($this->loncta !== $v) {
+        $this->loncta = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ContabaPeer::LONCTA;
+      }
+  
 	} 
 	
 	public function setNumrup($v)
 	{
 
-		if ($this->numrup !== $v) {
-			$this->numrup = $v;
-			$this->modifiedColumns[] = ContabaPeer::NUMRUP;
-		}
-
+    if ($this->numrup !== $v) {
+        $this->numrup = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ContabaPeer::NUMRUP;
+      }
+  
 	} 
 	
 	public function setForcta($v)
 	{
 
-		if ($this->forcta !== $v) {
-			$this->forcta = $v;
-			$this->modifiedColumns[] = ContabaPeer::FORCTA;
-		}
-
+    if ($this->forcta !== $v) {
+        $this->forcta = $v;
+        $this->modifiedColumns[] = ContabaPeer::FORCTA;
+      }
+  
 	} 
 	
 	public function setSitfin($v)
 	{
 
-		if ($this->sitfin !== $v) {
-			$this->sitfin = $v;
-			$this->modifiedColumns[] = ContabaPeer::SITFIN;
-		}
-
+    if ($this->sitfin !== $v) {
+        $this->sitfin = $v;
+        $this->modifiedColumns[] = ContabaPeer::SITFIN;
+      }
+  
 	} 
 	
 	public function setSitfis($v)
 	{
 
-		if ($this->sitfis !== $v) {
-			$this->sitfis = $v;
-			$this->modifiedColumns[] = ContabaPeer::SITFIS;
-		}
-
+    if ($this->sitfis !== $v) {
+        $this->sitfis = $v;
+        $this->modifiedColumns[] = ContabaPeer::SITFIS;
+      }
+  
 	} 
 	
 	public function setGanper($v)
 	{
 
-		if ($this->ganper !== $v) {
-			$this->ganper = $v;
-			$this->modifiedColumns[] = ContabaPeer::GANPER;
-		}
-
+    if ($this->ganper !== $v) {
+        $this->ganper = $v;
+        $this->modifiedColumns[] = ContabaPeer::GANPER;
+      }
+  
 	} 
 	
 	public function setEjepre($v)
 	{
 
-		if ($this->ejepre !== $v) {
-			$this->ejepre = $v;
-			$this->modifiedColumns[] = ContabaPeer::EJEPRE;
-		}
-
+    if ($this->ejepre !== $v) {
+        $this->ejepre = $v;
+        $this->modifiedColumns[] = ContabaPeer::EJEPRE;
+      }
+  
 	} 
 	
 	public function setHacmun($v)
 	{
 
-		if ($this->hacmun !== $v) {
-			$this->hacmun = $v;
-			$this->modifiedColumns[] = ContabaPeer::HACMUN;
-		}
-
+    if ($this->hacmun !== $v) {
+        $this->hacmun = $v;
+        $this->modifiedColumns[] = ContabaPeer::HACMUN;
+      }
+  
 	} 
 	
 	public function setCtlgas($v)
 	{
 
-		if ($this->ctlgas !== $v) {
-			$this->ctlgas = $v;
-			$this->modifiedColumns[] = ContabaPeer::CTLGAS;
-		}
-
+    if ($this->ctlgas !== $v) {
+        $this->ctlgas = $v;
+        $this->modifiedColumns[] = ContabaPeer::CTLGAS;
+      }
+  
 	} 
 	
 	public function setCtling($v)
 	{
 
-		if ($this->ctling !== $v) {
-			$this->ctling = $v;
-			$this->modifiedColumns[] = ContabaPeer::CTLING;
-		}
-
+    if ($this->ctling !== $v) {
+        $this->ctling = $v;
+        $this->modifiedColumns[] = ContabaPeer::CTLING;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = ContabaPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = ContabaPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFeccie($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccie !== $ts) {
-			$this->feccie = $ts;
-			$this->modifiedColumns[] = ContabaPeer::FECCIE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccie !== $ts) {
+      $this->feccie = $ts;
+      $this->modifiedColumns[] = ContabaPeer::FECCIE;
+    }
 
 	} 
 	
 	public function setCodtes($v)
 	{
 
-		if ($this->codtes !== $v) {
-			$this->codtes = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODTES;
-		}
-
+    if ($this->codtes !== $v) {
+        $this->codtes = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODTES;
+      }
+  
 	} 
 	
 	public function setCodhac($v)
 	{
 
-		if ($this->codhac !== $v) {
-			$this->codhac = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODHAC;
-		}
-
+    if ($this->codhac !== $v) {
+        $this->codhac = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODHAC;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setCodord($v)
 	{
 
-		if ($this->codord !== $v) {
-			$this->codord = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODORD;
-		}
-
+    if ($this->codord !== $v) {
+        $this->codord = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODORD;
+      }
+  
 	} 
 	
 	public function setCodtesact($v)
 	{
 
-		if ($this->codtesact !== $v) {
-			$this->codtesact = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODTESACT;
-		}
-
+    if ($this->codtesact !== $v) {
+        $this->codtesact = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODTESACT;
+      }
+  
 	} 
 	
 	public function setCodhacact($v)
 	{
 
-		if ($this->codhacact !== $v) {
-			$this->codhacact = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODHACACT;
-		}
-
+    if ($this->codhacact !== $v) {
+        $this->codhacact = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODHACACT;
+      }
+  
 	} 
 	
 	public function setCodhacpat($v)
 	{
 
-		if ($this->codhacpat !== $v) {
-			$this->codhacpat = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODHACPAT;
-		}
-
+    if ($this->codhacpat !== $v) {
+        $this->codhacpat = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODHACPAT;
+      }
+  
 	} 
 	
 	public function setCodtespas($v)
 	{
 
-		if ($this->codtespas !== $v) {
-			$this->codtespas = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODTESPAS;
-		}
-
+    if ($this->codtespas !== $v) {
+        $this->codtespas = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODTESPAS;
+      }
+  
 	} 
 	
 	public function setCodhacpas($v)
 	{
 
-		if ($this->codhacpas !== $v) {
-			$this->codhacpas = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODHACPAS;
-		}
-
+    if ($this->codhacpas !== $v) {
+        $this->codhacpas = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODHACPAS;
+      }
+  
 	} 
 	
 	public function setCodind($v)
 	{
 
-		if ($this->codind !== $v) {
-			$this->codind = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODIND;
-		}
-
+    if ($this->codind !== $v) {
+        $this->codind = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODIND;
+      }
+  
 	} 
 	
 	public function setCodinh($v)
 	{
 
-		if ($this->codinh !== $v) {
-			$this->codinh = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODINH;
-		}
-
+    if ($this->codinh !== $v) {
+        $this->codinh = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODINH;
+      }
+  
 	} 
 	
 	public function setCodegd($v)
 	{
 
-		if ($this->codegd !== $v) {
-			$this->codegd = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODEGD;
-		}
-
+    if ($this->codegd !== $v) {
+        $this->codegd = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODEGD;
+      }
+  
 	} 
 	
 	public function setCodegh($v)
 	{
 
-		if ($this->codegh !== $v) {
-			$this->codegh = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODEGH;
-		}
-
+    if ($this->codegh !== $v) {
+        $this->codegh = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODEGH;
+      }
+  
 	} 
 	
 	public function setCodres($v)
 	{
 
-		if ($this->codres !== $v) {
-			$this->codres = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODRES;
-		}
-
+    if ($this->codres !== $v) {
+        $this->codres = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODRES;
+      }
+  
 	} 
 	
 	public function setCodejepre($v)
 	{
 
-		if ($this->codejepre !== $v) {
-			$this->codejepre = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODEJEPRE;
-		}
-
+    if ($this->codejepre !== $v) {
+        $this->codejepre = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODEJEPRE;
+      }
+  
 	} 
 	
 	public function setCodctd($v)
 	{
 
-		if ($this->codctd !== $v) {
-			$this->codctd = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTD;
-		}
-
+    if ($this->codctd !== $v) {
+        $this->codctd = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTD;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setCodresant($v)
 	{
 
-		if ($this->codresant !== $v) {
-			$this->codresant = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODRESANT;
-		}
-
+    if ($this->codresant !== $v) {
+        $this->codresant = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODRESANT;
+      }
+  
 	} 
 	
 	public function setEtadef($v)
 	{
 
-		if ($this->etadef !== $v) {
-			$this->etadef = $v;
-			$this->modifiedColumns[] = ContabaPeer::ETADEF;
-		}
-
+    if ($this->etadef !== $v) {
+        $this->etadef = $v;
+        $this->modifiedColumns[] = ContabaPeer::ETADEF;
+      }
+  
 	} 
 	
 	public function setCodctagas($v)
 	{
 
-		if ($this->codctagas !== $v) {
-			$this->codctagas = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTAGAS;
-		}
-
+    if ($this->codctagas !== $v) {
+        $this->codctagas = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTAGAS;
+      }
+  
 	} 
 	
 	public function setCodctaban($v)
 	{
 
-		if ($this->codctaban !== $v) {
-			$this->codctaban = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTABAN;
-		}
-
+    if ($this->codctaban !== $v) {
+        $this->codctaban = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTABAN;
+      }
+  
 	} 
 	
 	public function setCodctaret($v)
 	{
 
-		if ($this->codctaret !== $v) {
-			$this->codctaret = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTARET;
-		}
-
+    if ($this->codctaret !== $v) {
+        $this->codctaret = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTARET;
+      }
+  
 	} 
 	
 	public function setCodctaben($v)
 	{
 
-		if ($this->codctaben !== $v) {
-			$this->codctaben = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTABEN;
-		}
-
+    if ($this->codctaben !== $v) {
+        $this->codctaben = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTABEN;
+      }
+  
 	} 
 	
 	public function setCodctaart($v)
 	{
 
-		if ($this->codctaart !== $v) {
-			$this->codctaart = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTAART;
-		}
-
+    if ($this->codctaart !== $v) {
+        $this->codctaart = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTAART;
+      }
+  
 	} 
 	
 	public function setCodctagashas($v)
 	{
 
-		if ($this->codctagashas !== $v) {
-			$this->codctagashas = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTAGASHAS;
-		}
-
+    if ($this->codctagashas !== $v) {
+        $this->codctagashas = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTAGASHAS;
+      }
+  
 	} 
 	
 	public function setCodctabanhas($v)
 	{
 
-		if ($this->codctabanhas !== $v) {
-			$this->codctabanhas = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTABANHAS;
-		}
-
+    if ($this->codctabanhas !== $v) {
+        $this->codctabanhas = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTABANHAS;
+      }
+  
 	} 
 	
 	public function setCodctarethas($v)
 	{
 
-		if ($this->codctarethas !== $v) {
-			$this->codctarethas = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTARETHAS;
-		}
-
+    if ($this->codctarethas !== $v) {
+        $this->codctarethas = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTARETHAS;
+      }
+  
 	} 
 	
 	public function setCodctabenhas($v)
 	{
 
-		if ($this->codctabenhas !== $v) {
-			$this->codctabenhas = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTABENHAS;
-		}
-
+    if ($this->codctabenhas !== $v) {
+        $this->codctabenhas = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTABENHAS;
+      }
+  
 	} 
 	
 	public function setCodctaarthas($v)
 	{
 
-		if ($this->codctaarthas !== $v) {
-			$this->codctaarthas = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTAARTHAS;
-		}
-
+    if ($this->codctaarthas !== $v) {
+        $this->codctaarthas = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTAARTHAS;
+      }
+  
 	} 
 	
 	public function setCodctapageje($v)
 	{
 
-		if ($this->codctapageje !== $v) {
-			$this->codctapageje = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTAPAGEJE;
-		}
-
+    if ($this->codctapageje !== $v) {
+        $this->codctapageje = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTAPAGEJE;
+      }
+  
 	} 
 	
 	public function setCodctaingdevn($v)
 	{
 
-		if ($this->codctaingdevn !== $v) {
-			$this->codctaingdevn = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTAINGDEVN;
-		}
-
+    if ($this->codctaingdevn !== $v) {
+        $this->codctaingdevn = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTAINGDEVN;
+      }
+  
 	} 
 	
 	public function setCodctaingdev($v)
 	{
 
-		if ($this->codctaingdev !== $v) {
-			$this->codctaingdev = $v;
-			$this->modifiedColumns[] = ContabaPeer::CODCTAINGDEV;
-		}
-
+    if ($this->codctaingdev !== $v) {
+        $this->codctaingdev = $v;
+        $this->modifiedColumns[] = ContabaPeer::CODCTAINGDEV;
+      }
+  
 	} 
 	
 	public function setUnidad($v)
 	{
 
-		if ($this->unidad !== $v) {
-			$this->unidad = $v;
-			$this->modifiedColumns[] = ContabaPeer::UNIDAD;
-		}
-
+    if ($this->unidad !== $v) {
+        $this->unidad = $v;
+        $this->modifiedColumns[] = ContabaPeer::UNIDAD;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ContabaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ContabaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->loncta = $rs->getFloat($startcol + 1);
+      $this->loncta = $rs->getFloat($startcol + 1);
 
-			$this->numrup = $rs->getFloat($startcol + 2);
+      $this->numrup = $rs->getFloat($startcol + 2);
 
-			$this->forcta = $rs->getString($startcol + 3);
+      $this->forcta = $rs->getString($startcol + 3);
 
-			$this->sitfin = $rs->getString($startcol + 4);
+      $this->sitfin = $rs->getString($startcol + 4);
 
-			$this->sitfis = $rs->getString($startcol + 5);
+      $this->sitfis = $rs->getString($startcol + 5);
 
-			$this->ganper = $rs->getString($startcol + 6);
+      $this->ganper = $rs->getString($startcol + 6);
 
-			$this->ejepre = $rs->getString($startcol + 7);
+      $this->ejepre = $rs->getString($startcol + 7);
 
-			$this->hacmun = $rs->getString($startcol + 8);
+      $this->hacmun = $rs->getString($startcol + 8);
 
-			$this->ctlgas = $rs->getString($startcol + 9);
+      $this->ctlgas = $rs->getString($startcol + 9);
 
-			$this->ctling = $rs->getString($startcol + 10);
+      $this->ctling = $rs->getString($startcol + 10);
 
-			$this->fecini = $rs->getDate($startcol + 11, null);
+      $this->fecini = $rs->getDate($startcol + 11, null);
 
-			$this->feccie = $rs->getDate($startcol + 12, null);
+      $this->feccie = $rs->getDate($startcol + 12, null);
 
-			$this->codtes = $rs->getString($startcol + 13);
+      $this->codtes = $rs->getString($startcol + 13);
 
-			$this->codhac = $rs->getString($startcol + 14);
+      $this->codhac = $rs->getString($startcol + 14);
 
-			$this->codpre = $rs->getString($startcol + 15);
+      $this->codpre = $rs->getString($startcol + 15);
 
-			$this->codord = $rs->getString($startcol + 16);
+      $this->codord = $rs->getString($startcol + 16);
 
-			$this->codtesact = $rs->getString($startcol + 17);
+      $this->codtesact = $rs->getString($startcol + 17);
 
-			$this->codhacact = $rs->getString($startcol + 18);
+      $this->codhacact = $rs->getString($startcol + 18);
 
-			$this->codhacpat = $rs->getString($startcol + 19);
+      $this->codhacpat = $rs->getString($startcol + 19);
 
-			$this->codtespas = $rs->getString($startcol + 20);
+      $this->codtespas = $rs->getString($startcol + 20);
 
-			$this->codhacpas = $rs->getString($startcol + 21);
+      $this->codhacpas = $rs->getString($startcol + 21);
 
-			$this->codind = $rs->getString($startcol + 22);
+      $this->codind = $rs->getString($startcol + 22);
 
-			$this->codinh = $rs->getString($startcol + 23);
+      $this->codinh = $rs->getString($startcol + 23);
 
-			$this->codegd = $rs->getString($startcol + 24);
+      $this->codegd = $rs->getString($startcol + 24);
 
-			$this->codegh = $rs->getString($startcol + 25);
+      $this->codegh = $rs->getString($startcol + 25);
 
-			$this->codres = $rs->getString($startcol + 26);
+      $this->codres = $rs->getString($startcol + 26);
 
-			$this->codejepre = $rs->getString($startcol + 27);
+      $this->codejepre = $rs->getString($startcol + 27);
 
-			$this->codctd = $rs->getString($startcol + 28);
+      $this->codctd = $rs->getString($startcol + 28);
 
-			$this->codcta = $rs->getString($startcol + 29);
+      $this->codcta = $rs->getString($startcol + 29);
 
-			$this->codresant = $rs->getString($startcol + 30);
+      $this->codresant = $rs->getString($startcol + 30);
 
-			$this->etadef = $rs->getString($startcol + 31);
+      $this->etadef = $rs->getString($startcol + 31);
 
-			$this->codctagas = $rs->getString($startcol + 32);
+      $this->codctagas = $rs->getString($startcol + 32);
 
-			$this->codctaban = $rs->getString($startcol + 33);
+      $this->codctaban = $rs->getString($startcol + 33);
 
-			$this->codctaret = $rs->getString($startcol + 34);
+      $this->codctaret = $rs->getString($startcol + 34);
 
-			$this->codctaben = $rs->getString($startcol + 35);
+      $this->codctaben = $rs->getString($startcol + 35);
 
-			$this->codctaart = $rs->getString($startcol + 36);
+      $this->codctaart = $rs->getString($startcol + 36);
 
-			$this->codctagashas = $rs->getString($startcol + 37);
+      $this->codctagashas = $rs->getString($startcol + 37);
 
-			$this->codctabanhas = $rs->getString($startcol + 38);
+      $this->codctabanhas = $rs->getString($startcol + 38);
 
-			$this->codctarethas = $rs->getString($startcol + 39);
+      $this->codctarethas = $rs->getString($startcol + 39);
 
-			$this->codctabenhas = $rs->getString($startcol + 40);
+      $this->codctabenhas = $rs->getString($startcol + 40);
 
-			$this->codctaarthas = $rs->getString($startcol + 41);
+      $this->codctaarthas = $rs->getString($startcol + 41);
 
-			$this->codctapageje = $rs->getString($startcol + 42);
+      $this->codctapageje = $rs->getString($startcol + 42);
 
-			$this->codctaingdevn = $rs->getString($startcol + 43);
+      $this->codctaingdevn = $rs->getString($startcol + 43);
 
-			$this->codctaingdev = $rs->getString($startcol + 44);
+      $this->codctaingdev = $rs->getString($startcol + 44);
 
-			$this->unidad = $rs->getString($startcol + 45);
+      $this->unidad = $rs->getString($startcol + 45);
 
-			$this->id = $rs->getInt($startcol + 46);
+      $this->id = $rs->getInt($startcol + 46);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 47; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Contaba object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 47; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Contaba object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -1165,6 +1232,7 @@ abstract class BaseContaba extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ContabaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ContabaPeer::doUpdate($this, $con);

@@ -57,218 +57,251 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getLoguse()
-	{
+  
+  public function getLoguse()
+  {
 
-		return $this->loguse; 		
-	}
-	
-	public function getNomuse()
-	{
+    return trim($this->loguse);
 
-		return $this->nomuse; 		
-	}
-	
-	public function getApluse()
-	{
+  }
+  
+  public function getNomuse()
+  {
 
-		return $this->apluse; 		
-	}
-	
-	public function getNumemp()
-	{
+    return trim($this->nomuse);
 
-		return $this->numemp; 		
-	}
-	
-	public function getPasuse()
-	{
+  }
+  
+  public function getApluse()
+  {
 
-		return $this->pasuse; 		
-	}
-	
-	public function getDiremp()
-	{
+    return trim($this->apluse);
 
-		return $this->diremp; 		
-	}
-	
-	public function getTelemp()
-	{
+  }
+  
+  public function getNumemp()
+  {
 
-		return $this->telemp; 		
-	}
-	
-	public function getCedemp()
-	{
+    return trim($this->numemp);
 
-		return $this->cedemp; 		
-	}
-	
-	public function getNumuni()
-	{
+  }
+  
+  public function getPasuse()
+  {
 
-		return $this->numuni; 		
-	}
-	
-	public function getCodcat()
-	{
+    return trim($this->pasuse);
 
-		return $this->codcat; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDiremp()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->diremp);
+
+  }
+  
+  public function getTelemp()
+  {
+
+    return trim($this->telemp);
+
+  }
+  
+  public function getCedemp()
+  {
+
+    return trim($this->cedemp);
+
+  }
+  
+  public function getNumuni()
+  {
+
+    return trim($this->numuni);
+
+  }
+  
+  public function getCodcat()
+  {
+
+    return trim($this->codcat);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setLoguse($v)
 	{
 
-		if ($this->loguse !== $v) {
-			$this->loguse = $v;
-			$this->modifiedColumns[] = UsuariosPeer::LOGUSE;
-		}
-
+    if ($this->loguse !== $v) {
+        $this->loguse = $v;
+        $this->modifiedColumns[] = UsuariosPeer::LOGUSE;
+      }
+  
 	} 
 	
 	public function setNomuse($v)
 	{
 
-		if ($this->nomuse !== $v) {
-			$this->nomuse = $v;
-			$this->modifiedColumns[] = UsuariosPeer::NOMUSE;
-		}
-
+    if ($this->nomuse !== $v) {
+        $this->nomuse = $v;
+        $this->modifiedColumns[] = UsuariosPeer::NOMUSE;
+      }
+  
 	} 
 	
 	public function setApluse($v)
 	{
 
-		if ($this->apluse !== $v) {
-			$this->apluse = $v;
-			$this->modifiedColumns[] = UsuariosPeer::APLUSE;
-		}
-
+    if ($this->apluse !== $v) {
+        $this->apluse = $v;
+        $this->modifiedColumns[] = UsuariosPeer::APLUSE;
+      }
+  
 	} 
 	
 	public function setNumemp($v)
 	{
 
-		if ($this->numemp !== $v) {
-			$this->numemp = $v;
-			$this->modifiedColumns[] = UsuariosPeer::NUMEMP;
-		}
-
+    if ($this->numemp !== $v) {
+        $this->numemp = $v;
+        $this->modifiedColumns[] = UsuariosPeer::NUMEMP;
+      }
+  
 	} 
 	
 	public function setPasuse($v)
 	{
 
-		if ($this->pasuse !== $v) {
-			$this->pasuse = $v;
-			$this->modifiedColumns[] = UsuariosPeer::PASUSE;
-		}
-
+    if ($this->pasuse !== $v) {
+        $this->pasuse = $v;
+        $this->modifiedColumns[] = UsuariosPeer::PASUSE;
+      }
+  
 	} 
 	
 	public function setDiremp($v)
 	{
 
-		if ($this->diremp !== $v) {
-			$this->diremp = $v;
-			$this->modifiedColumns[] = UsuariosPeer::DIREMP;
-		}
-
+    if ($this->diremp !== $v) {
+        $this->diremp = $v;
+        $this->modifiedColumns[] = UsuariosPeer::DIREMP;
+      }
+  
 	} 
 	
 	public function setTelemp($v)
 	{
 
-		if ($this->telemp !== $v) {
-			$this->telemp = $v;
-			$this->modifiedColumns[] = UsuariosPeer::TELEMP;
-		}
-
+    if ($this->telemp !== $v) {
+        $this->telemp = $v;
+        $this->modifiedColumns[] = UsuariosPeer::TELEMP;
+      }
+  
 	} 
 	
 	public function setCedemp($v)
 	{
 
-		if ($this->cedemp !== $v) {
-			$this->cedemp = $v;
-			$this->modifiedColumns[] = UsuariosPeer::CEDEMP;
-		}
-
+    if ($this->cedemp !== $v) {
+        $this->cedemp = $v;
+        $this->modifiedColumns[] = UsuariosPeer::CEDEMP;
+      }
+  
 	} 
 	
 	public function setNumuni($v)
 	{
 
-		if ($this->numuni !== $v) {
-			$this->numuni = $v;
-			$this->modifiedColumns[] = UsuariosPeer::NUMUNI;
-		}
-
+    if ($this->numuni !== $v) {
+        $this->numuni = $v;
+        $this->modifiedColumns[] = UsuariosPeer::NUMUNI;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = UsuariosPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = UsuariosPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = UsuariosPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = UsuariosPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->loguse = $rs->getString($startcol + 0);
+      $this->loguse = $rs->getString($startcol + 0);
 
-			$this->nomuse = $rs->getString($startcol + 1);
+      $this->nomuse = $rs->getString($startcol + 1);
 
-			$this->apluse = $rs->getString($startcol + 2);
+      $this->apluse = $rs->getString($startcol + 2);
 
-			$this->numemp = $rs->getString($startcol + 3);
+      $this->numemp = $rs->getString($startcol + 3);
 
-			$this->pasuse = $rs->getString($startcol + 4);
+      $this->pasuse = $rs->getString($startcol + 4);
 
-			$this->diremp = $rs->getString($startcol + 5);
+      $this->diremp = $rs->getString($startcol + 5);
 
-			$this->telemp = $rs->getString($startcol + 6);
+      $this->telemp = $rs->getString($startcol + 6);
 
-			$this->cedemp = $rs->getString($startcol + 7);
+      $this->cedemp = $rs->getString($startcol + 7);
 
-			$this->numuni = $rs->getString($startcol + 8);
+      $this->numuni = $rs->getString($startcol + 8);
 
-			$this->codcat = $rs->getString($startcol + 9);
+      $this->codcat = $rs->getString($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Usuarios object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Usuarios object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -325,6 +358,7 @@ abstract class BaseUsuarios extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = UsuariosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += UsuariosPeer::doUpdate($this, $con);

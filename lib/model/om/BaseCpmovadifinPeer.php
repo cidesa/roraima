@@ -210,6 +210,7 @@ abstract class BaseCpmovadifinPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpmovadifinPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

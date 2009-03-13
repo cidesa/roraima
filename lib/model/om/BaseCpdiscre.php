@@ -29,93 +29,119 @@ abstract class BaseCpdiscre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getSector()
-	{
+  
+  public function getSector()
+  {
 
-		return $this->sector; 		
-	}
-	
-	public function getPartida()
-	{
+    return trim($this->sector);
 
-		return $this->partida; 		
-	}
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getPartida()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->partida);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setSector($v)
 	{
 
-		if ($this->sector !== $v) {
-			$this->sector = $v;
-			$this->modifiedColumns[] = CpdiscrePeer::SECTOR;
-		}
-
+    if ($this->sector !== $v) {
+        $this->sector = $v;
+        $this->modifiedColumns[] = CpdiscrePeer::SECTOR;
+      }
+  
 	} 
 	
 	public function setPartida($v)
 	{
 
-		if ($this->partida !== $v) {
-			$this->partida = $v;
-			$this->modifiedColumns[] = CpdiscrePeer::PARTIDA;
-		}
-
+    if ($this->partida !== $v) {
+        $this->partida = $v;
+        $this->modifiedColumns[] = CpdiscrePeer::PARTIDA;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = CpdiscrePeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpdiscrePeer::MONTO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpdiscrePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpdiscrePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->sector = $rs->getString($startcol + 0);
+      $this->sector = $rs->getString($startcol + 0);
 
-			$this->partida = $rs->getString($startcol + 1);
+      $this->partida = $rs->getString($startcol + 1);
 
-			$this->monto = $rs->getFloat($startcol + 2);
+      $this->monto = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpdiscre object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpdiscre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseCpdiscre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CpdiscrePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CpdiscrePeer::doUpdate($this, $con);

@@ -57,293 +57,323 @@ abstract class BaseNpintfid extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getFecdesde($format = 'Y-m-d')
-	{
+  
+  public function getFecdesde($format = 'Y-m-d')
+  {
 
-		if ($this->fecdesde === null || $this->fecdesde === '') {
-			return null;
-		} elseif (!is_int($this->fecdesde)) {
-						$ts = strtotime($this->fecdesde);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdesde] as date/time value: " . var_export($this->fecdesde, true));
-			}
-		} else {
-			$ts = $this->fecdesde;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecdesde === null || $this->fecdesde === '') {
+      return null;
+    } elseif (!is_int($this->fecdesde)) {
+            $ts = adodb_strtotime($this->fecdesde);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdesde] as date/time value: " . var_export($this->fecdesde, true));
+      }
+    } else {
+      $ts = $this->fecdesde;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getFechasta($format = 'Y-m-d')
-	{
+  
+  public function getFechasta($format = 'Y-m-d')
+  {
 
-		if ($this->fechasta === null || $this->fechasta === '') {
-			return null;
-		} elseif (!is_int($this->fechasta)) {
-						$ts = strtotime($this->fechasta);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechasta] as date/time value: " . var_export($this->fechasta, true));
-			}
-		} else {
-			$ts = $this->fechasta;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fechasta === null || $this->fechasta === '') {
+      return null;
+    } elseif (!is_int($this->fechasta)) {
+            $ts = adodb_strtotime($this->fechasta);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechasta] as date/time value: " . var_export($this->fechasta, true));
+      }
+    } else {
+      $ts = $this->fechasta;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getFechaint($format = 'Y-m-d')
-	{
+    return trim($this->codemp);
 
-		if ($this->fechaint === null || $this->fechaint === '') {
-			return null;
-		} elseif (!is_int($this->fechaint)) {
-						$ts = strtotime($this->fechaint);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechaint] as date/time value: " . var_export($this->fechaint, true));
-			}
-		} else {
-			$ts = $this->fechaint;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFechaint($format = 'Y-m-d')
+  {
 
-	
-	public function getDepos()
-	{
+    if ($this->fechaint === null || $this->fechaint === '') {
+      return null;
+    } elseif (!is_int($this->fechaint)) {
+            $ts = adodb_strtotime($this->fechaint);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechaint] as date/time value: " . var_export($this->fechaint, true));
+      }
+    } else {
+      $ts = $this->fechaint;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->depos,2,',','.');
-		
-	}
-	
-	public function getDeposacum()
-	{
+  
+  public function getDepos($val=false)
+  {
 
-		return number_format($this->deposacum,2,',','.');
-		
-	}
-	
-	public function getCapital()
-	{
+    if($val) return number_format($this->depos,2,',','.');
+    else return $this->depos;
 
-		return number_format($this->capital,2,',','.');
-		
-	}
-	
-	public function getTasa()
-	{
+  }
+  
+  public function getDeposacum($val=false)
+  {
 
-		return number_format($this->tasa,2,',','.');
-		
-	}
-	
-	public function getInteres()
-	{
+    if($val) return number_format($this->deposacum,2,',','.');
+    else return $this->deposacum;
 
-		return number_format($this->interes,2,',','.');
-		
-	}
-	
-	public function getInteresacum()
-	{
+  }
+  
+  public function getCapital($val=false)
+  {
 
-		return number_format($this->interesacum,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->capital,2,',','.');
+    else return $this->capital;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTasa($val=false)
+  {
+
+    if($val) return number_format($this->tasa,2,',','.');
+    else return $this->tasa;
+
+  }
+  
+  public function getInteres($val=false)
+  {
+
+    if($val) return number_format($this->interes,2,',','.');
+    else return $this->interes;
+
+  }
+  
+  public function getInteresacum($val=false)
+  {
+
+    if($val) return number_format($this->interesacum,2,',','.');
+    else return $this->interesacum;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setFecdesde($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdesde] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdesde !== $ts) {
-			$this->fecdesde = $ts;
-			$this->modifiedColumns[] = NpintfidPeer::FECDESDE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdesde] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdesde !== $ts) {
+      $this->fecdesde = $ts;
+      $this->modifiedColumns[] = NpintfidPeer::FECDESDE;
+    }
 
 	} 
 	
 	public function setFechasta($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechasta] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechasta !== $ts) {
-			$this->fechasta = $ts;
-			$this->modifiedColumns[] = NpintfidPeer::FECHASTA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechasta] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechasta !== $ts) {
+      $this->fechasta = $ts;
+      $this->modifiedColumns[] = NpintfidPeer::FECHASTA;
+    }
 
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpintfidPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpintfidPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFechaint($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechaint] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechaint !== $ts) {
-			$this->fechaint = $ts;
-			$this->modifiedColumns[] = NpintfidPeer::FECHAINT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechaint] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechaint !== $ts) {
+      $this->fechaint = $ts;
+      $this->modifiedColumns[] = NpintfidPeer::FECHAINT;
+    }
 
 	} 
 	
 	public function setDepos($v)
 	{
 
-		if ($this->depos !== $v) {
-			$this->depos = $v;
-			$this->modifiedColumns[] = NpintfidPeer::DEPOS;
-		}
-
+    if ($this->depos !== $v) {
+        $this->depos = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfidPeer::DEPOS;
+      }
+  
 	} 
 	
 	public function setDeposacum($v)
 	{
 
-		if ($this->deposacum !== $v) {
-			$this->deposacum = $v;
-			$this->modifiedColumns[] = NpintfidPeer::DEPOSACUM;
-		}
-
+    if ($this->deposacum !== $v) {
+        $this->deposacum = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfidPeer::DEPOSACUM;
+      }
+  
 	} 
 	
 	public function setCapital($v)
 	{
 
-		if ($this->capital !== $v) {
-			$this->capital = $v;
-			$this->modifiedColumns[] = NpintfidPeer::CAPITAL;
-		}
-
+    if ($this->capital !== $v) {
+        $this->capital = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfidPeer::CAPITAL;
+      }
+  
 	} 
 	
 	public function setTasa($v)
 	{
 
-		if ($this->tasa !== $v) {
-			$this->tasa = $v;
-			$this->modifiedColumns[] = NpintfidPeer::TASA;
-		}
-
+    if ($this->tasa !== $v) {
+        $this->tasa = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfidPeer::TASA;
+      }
+  
 	} 
 	
 	public function setInteres($v)
 	{
 
-		if ($this->interes !== $v) {
-			$this->interes = $v;
-			$this->modifiedColumns[] = NpintfidPeer::INTERES;
-		}
-
+    if ($this->interes !== $v) {
+        $this->interes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfidPeer::INTERES;
+      }
+  
 	} 
 	
 	public function setInteresacum($v)
 	{
 
-		if ($this->interesacum !== $v) {
-			$this->interesacum = $v;
-			$this->modifiedColumns[] = NpintfidPeer::INTERESACUM;
-		}
-
+    if ($this->interesacum !== $v) {
+        $this->interesacum = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpintfidPeer::INTERESACUM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpintfidPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpintfidPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->fecdesde = $rs->getDate($startcol + 0, null);
+      $this->fecdesde = $rs->getDate($startcol + 0, null);
 
-			$this->fechasta = $rs->getDate($startcol + 1, null);
+      $this->fechasta = $rs->getDate($startcol + 1, null);
 
-			$this->codemp = $rs->getString($startcol + 2);
+      $this->codemp = $rs->getString($startcol + 2);
 
-			$this->fechaint = $rs->getDate($startcol + 3, null);
+      $this->fechaint = $rs->getDate($startcol + 3, null);
 
-			$this->depos = $rs->getFloat($startcol + 4);
+      $this->depos = $rs->getFloat($startcol + 4);
 
-			$this->deposacum = $rs->getFloat($startcol + 5);
+      $this->deposacum = $rs->getFloat($startcol + 5);
 
-			$this->capital = $rs->getFloat($startcol + 6);
+      $this->capital = $rs->getFloat($startcol + 6);
 
-			$this->tasa = $rs->getFloat($startcol + 7);
+      $this->tasa = $rs->getFloat($startcol + 7);
 
-			$this->interes = $rs->getFloat($startcol + 8);
+      $this->interes = $rs->getFloat($startcol + 8);
 
-			$this->interesacum = $rs->getFloat($startcol + 9);
+      $this->interesacum = $rs->getFloat($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npintfid object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npintfid object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -400,6 +430,7 @@ abstract class BaseNpintfid extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpintfidPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpintfidPeer::doUpdate($this, $con);

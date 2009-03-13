@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CaordserMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CaordserMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CaordserMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('caordser');
 		$tMap->setPhpName('Caordser');
 
@@ -34,7 +34,7 @@ class CaordserMapBuilder {
 
 		$tMap->addColumn('ORDSER', 'Ordser', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECSER', 'Fecser', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECSER', 'Fecser', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('CODPRO', 'Codpro', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -48,7 +48,7 @@ class CaordserMapBuilder {
 
 		$tMap->addColumn('TIECAN', 'Tiecan', 'string', CreoleTypes::VARCHAR, false, 25);
 
-		$tMap->addColumn('MONORD', 'Monord', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONORD', 'Monord', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('STAORD', 'Staord', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -58,9 +58,9 @@ class CaordserMapBuilder {
 
 		$tMap->addColumn('REFCOM', 'Refcom', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

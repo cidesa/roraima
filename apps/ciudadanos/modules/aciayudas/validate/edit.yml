@@ -1,0 +1,61 @@
+methods:
+  post:
+   - "atayudas{atsolici}"
+   - "atayudas{attipayu_id}"
+   - "atayudas{desayu}"
+   - "atayudas{motayu}"
+
+names:
+
+  atayudas{atsolici}:
+    required:  Yes
+    required_msg: Debe Seleccionar un Solicitante
+    validators: MyStringValidator1
+
+  atayudas{attipayu_id}:
+    required:  Yes
+    required_msg:
+    validators: MyStringValidator2
+
+  atayudas{desayu}:
+    required:  Yes
+    required_msg: La descripción de la ayuda no puede estar vacío
+    validators: MyStringValidator3
+
+  atayudas{motayu}:
+    required:  Yes
+    required_msg: El motivo de la ayuda no puede estar vacío
+    validators: MyStringValidator4
+
+MyStringValidator1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Debe Seleccionar un Solicitante
+        max:       200
+        max_error: Debe Seleccionar un Solicitante
+
+MyStringValidator2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: Debe seleccionar un Tipo de Ayuda
+        max:       200
+        max_error: Debe seleccionar un Tipo de Ayuda
+
+MyStringValidator3:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La Descripción no puede tener menos de 2 caracteres
+        max:       200
+        max_error: La Descripción no puede pasar mas de 8 caracteres
+
+MyStringValidator4:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: El motivo no puede tener menos de 2 caracteres
+        max:       200
+        max_error: El motivo no puede pasar mas de 8 caracteres
+

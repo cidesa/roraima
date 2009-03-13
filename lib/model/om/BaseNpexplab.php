@@ -61,284 +61,316 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomemp()
-	{
+    return trim($this->codemp);
 
-		return $this->nomemp; 		
-	}
-	
-	public function getCodcar()
-	{
+  }
+  
+  public function getNomemp()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getDescar()
-	{
+    return trim($this->nomemp);
 
-		return $this->descar; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codcar);
 
-	
-	public function getFecter($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDescar()
+  {
 
-		if ($this->fecter === null || $this->fecter === '') {
-			return null;
-		} elseif (!is_int($this->fecter)) {
-						$ts = strtotime($this->fecter);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecter] as date/time value: " . var_export($this->fecter, true));
-			}
-		} else {
-			$ts = $this->fecter;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->descar);
 
-	
-	public function getSueobt()
-	{
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-		return number_format($this->sueobt,2,',','.');
-		
-	}
-	
-	public function getStacar()
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->stacar; 		
-	}
-	
-	public function getCompobt()
-	{
+  
+  public function getFecter($format = 'Y-m-d')
+  {
 
-		return number_format($this->compobt,2,',','.');
-		
-	}
-	
-	public function getDurexp()
-	{
+    if ($this->fecter === null || $this->fecter === '') {
+      return null;
+    } elseif (!is_int($this->fecter)) {
+            $ts = adodb_strtotime($this->fecter);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecter] as date/time value: " . var_export($this->fecter, true));
+      }
+    } else {
+      $ts = $this->fecter;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->durexp; 		
-	}
-	
-	public function getTiporg()
-	{
+  
+  public function getSueobt($val=false)
+  {
 
-		return $this->tiporg; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->sueobt,2,',','.');
+    else return $this->sueobt;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStacar()
+  {
+
+    return trim($this->stacar);
+
+  }
+  
+  public function getCompobt($val=false)
+  {
+
+    if($val) return number_format($this->compobt,2,',','.');
+    else return $this->compobt;
+
+  }
+  
+  public function getDurexp()
+  {
+
+    return trim($this->durexp);
+
+  }
+  
+  public function getTiporg()
+  {
+
+    return trim($this->tiporg);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpexplabPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpexplabPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = NpexplabPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = NpexplabPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpexplabPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpexplabPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setDescar($v)
 	{
 
-		if ($this->descar !== $v) {
-			$this->descar = $v;
-			$this->modifiedColumns[] = NpexplabPeer::DESCAR;
-		}
-
+    if ($this->descar !== $v) {
+        $this->descar = $v;
+        $this->modifiedColumns[] = NpexplabPeer::DESCAR;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = NpexplabPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = NpexplabPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFecter($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecter] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecter !== $ts) {
-			$this->fecter = $ts;
-			$this->modifiedColumns[] = NpexplabPeer::FECTER;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecter] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecter !== $ts) {
+      $this->fecter = $ts;
+      $this->modifiedColumns[] = NpexplabPeer::FECTER;
+    }
 
 	} 
 	
 	public function setSueobt($v)
 	{
 
-		if ($this->sueobt !== $v) {
-			$this->sueobt = $v;
-			$this->modifiedColumns[] = NpexplabPeer::SUEOBT;
-		}
-
+    if ($this->sueobt !== $v) {
+        $this->sueobt = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpexplabPeer::SUEOBT;
+      }
+  
 	} 
 	
 	public function setStacar($v)
 	{
 
-		if ($this->stacar !== $v) {
-			$this->stacar = $v;
-			$this->modifiedColumns[] = NpexplabPeer::STACAR;
-		}
-
+    if ($this->stacar !== $v) {
+        $this->stacar = $v;
+        $this->modifiedColumns[] = NpexplabPeer::STACAR;
+      }
+  
 	} 
 	
 	public function setCompobt($v)
 	{
 
-		if ($this->compobt !== $v) {
-			$this->compobt = $v;
-			$this->modifiedColumns[] = NpexplabPeer::COMPOBT;
-		}
-
+    if ($this->compobt !== $v) {
+        $this->compobt = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpexplabPeer::COMPOBT;
+      }
+  
 	} 
 	
 	public function setDurexp($v)
 	{
 
-		if ($this->durexp !== $v) {
-			$this->durexp = $v;
-			$this->modifiedColumns[] = NpexplabPeer::DUREXP;
-		}
-
+    if ($this->durexp !== $v) {
+        $this->durexp = $v;
+        $this->modifiedColumns[] = NpexplabPeer::DUREXP;
+      }
+  
 	} 
 	
 	public function setTiporg($v)
 	{
 
-		if ($this->tiporg !== $v) {
-			$this->tiporg = $v;
-			$this->modifiedColumns[] = NpexplabPeer::TIPORG;
-		}
-
+    if ($this->tiporg !== $v) {
+        $this->tiporg = $v;
+        $this->modifiedColumns[] = NpexplabPeer::TIPORG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpexplabPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpexplabPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->nomemp = $rs->getString($startcol + 1);
+      $this->nomemp = $rs->getString($startcol + 1);
 
-			$this->codcar = $rs->getString($startcol + 2);
+      $this->codcar = $rs->getString($startcol + 2);
 
-			$this->descar = $rs->getString($startcol + 3);
+      $this->descar = $rs->getString($startcol + 3);
 
-			$this->fecini = $rs->getDate($startcol + 4, null);
+      $this->fecini = $rs->getDate($startcol + 4, null);
 
-			$this->fecter = $rs->getDate($startcol + 5, null);
+      $this->fecter = $rs->getDate($startcol + 5, null);
 
-			$this->sueobt = $rs->getFloat($startcol + 6);
+      $this->sueobt = $rs->getFloat($startcol + 6);
 
-			$this->stacar = $rs->getString($startcol + 7);
+      $this->stacar = $rs->getString($startcol + 7);
 
-			$this->compobt = $rs->getFloat($startcol + 8);
+      $this->compobt = $rs->getFloat($startcol + 8);
 
-			$this->durexp = $rs->getString($startcol + 9);
+      $this->durexp = $rs->getString($startcol + 9);
 
-			$this->tiporg = $rs->getString($startcol + 10);
+      $this->tiporg = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npexplab object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npexplab object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -395,6 +427,7 @@ abstract class BaseNpexplab extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpexplabPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpexplabPeer::doUpdate($this, $con);

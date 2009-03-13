@@ -222,14 +222,14 @@ abstract class BaseContabb1Peer {
 	public static function doCountJoinContabb(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(Contabb1Peer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(Contabb1Peer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -304,7 +304,7 @@ abstract class BaseContabb1Peer {
 		} else {
 			$criteria->addSelectColumn(Contabb1Peer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -340,25 +340,25 @@ abstract class BaseContabb1Peer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = Contabb1Peer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = ContabbPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -367,7 +367,7 @@ abstract class BaseContabb1Peer {
 					$temp_obj2->addContabb1($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initContabb1s();
 				$obj2->addContabb1($obj1);
@@ -401,6 +401,7 @@ abstract class BaseContabb1Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Contabb1Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

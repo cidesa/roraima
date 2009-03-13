@@ -210,6 +210,7 @@ abstract class BaseNpdefconcasepPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpdefconcasepPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

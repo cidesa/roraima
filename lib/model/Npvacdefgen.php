@@ -10,27 +10,23 @@
 class Npvacdefgen extends BaseNpvacdefgen
 {
 	public function getNomnom()
-	{
-		$c = new Criteria();
-		$c->add(NpnominaPeer::CODNOM,self::getCodnomvac());
-		$codigo = NpnominaPeer::doSelectone($c);
-		if ($codigo){
-			return $codigo->getNomnom();
-		}else{
-			return ' ';
-		}
-	}
+	{	 
+    	return Herramientas::getX('codnom','npnomina','nomnom',self::getCodnomvac());
+    }
 
-	public function getNomcon()
-	{
-		$c = new Criteria();
-		$c->add(NpasiconnomPeer::CODNOM,self::getCodconvac());
-		$c->addJoin(NpdefcptPeer::CODCON,NpasiconnomPeer::CODCON);
-		$codigo = NPDefCptPeer::doSelectone($c);
-		if ($codigo){
-			return $codigo->getNomcon();
-  		}else{
-	      return ' ';
-  		}
-    }	  
+	public function getNomcon1()
+	
+	{ 
+		return Herramientas::getX('codcon','npdefcpt','nomcon',self::getCodconvac());
+	}	  
+    
+    public function getNomcon2()
+	
+	{ 
+		return Herramientas::getX('codcon','npdefcpt','nomcon',self::getCodconuti());
+	}	  
+    	  
+
+
+
 }

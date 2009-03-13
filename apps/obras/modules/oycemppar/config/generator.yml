@@ -1,0 +1,31 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Ocemppar
+    theme:            cidesaGenerator
+    fields:
+      codobr: { name: Código de la Obra, params: size=20 maxlength=32 onBlur="toAjaxUpdater(divPar,2,getUrlModulo()+"ajax",this.id,'',)"}
+      desobr: { name: Descripción, params: size=60}
+      codtipobr: { name: Tipo de Obra}
+      destipobr: { name: Descripción}
+      fecini: { name: Fecha Inicio}
+      fecfin: { name: Fecha Fin}
+      monobr: { name: Monto}
+    list:
+      title: Empresas Participantes
+      display: [=codobr, desobr]
+      filters: [codobr]
+      max_per_page:   10
+      sort: codobr
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Edición de Empresas Participantes
+      display:
+        "NONE": [_codobr, codtipobr, destipobr, fecini, fecfin, monobr, _empresas]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

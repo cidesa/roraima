@@ -240,6 +240,7 @@ abstract class BaseFaajustePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FaajustePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

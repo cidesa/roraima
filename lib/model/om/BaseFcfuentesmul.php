@@ -29,92 +29,118 @@ abstract class BaseFcfuentesmul extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmul()
-	{
+  
+  public function getCodmul()
+  {
 
-		return $this->codmul; 		
-	}
-	
-	public function getCodfue()
-	{
+    return trim($this->codmul);
 
-		return $this->codfue; 		
-	}
-	
-	public function getCodfuegen()
-	{
+  }
+  
+  public function getCodfue()
+  {
 
-		return $this->codfuegen; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codfue);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodfuegen()
+  {
+
+    return trim($this->codfuegen);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmul($v)
 	{
 
-		if ($this->codmul !== $v) {
-			$this->codmul = $v;
-			$this->modifiedColumns[] = FcfuentesmulPeer::CODMUL;
-		}
-
+    if ($this->codmul !== $v) {
+        $this->codmul = $v;
+        $this->modifiedColumns[] = FcfuentesmulPeer::CODMUL;
+      }
+  
 	} 
 	
 	public function setCodfue($v)
 	{
 
-		if ($this->codfue !== $v) {
-			$this->codfue = $v;
-			$this->modifiedColumns[] = FcfuentesmulPeer::CODFUE;
-		}
-
+    if ($this->codfue !== $v) {
+        $this->codfue = $v;
+        $this->modifiedColumns[] = FcfuentesmulPeer::CODFUE;
+      }
+  
 	} 
 	
 	public function setCodfuegen($v)
 	{
 
-		if ($this->codfuegen !== $v) {
-			$this->codfuegen = $v;
-			$this->modifiedColumns[] = FcfuentesmulPeer::CODFUEGEN;
-		}
-
+    if ($this->codfuegen !== $v) {
+        $this->codfuegen = $v;
+        $this->modifiedColumns[] = FcfuentesmulPeer::CODFUEGEN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcfuentesmulPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcfuentesmulPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmul = $rs->getString($startcol + 0);
+      $this->codmul = $rs->getString($startcol + 0);
 
-			$this->codfue = $rs->getString($startcol + 1);
+      $this->codfue = $rs->getString($startcol + 1);
 
-			$this->codfuegen = $rs->getString($startcol + 2);
+      $this->codfuegen = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcfuentesmul object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcfuentesmul object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseFcfuentesmul extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcfuentesmulPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcfuentesmulPeer::doUpdate($this, $con);

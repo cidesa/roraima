@@ -37,130 +37,158 @@ abstract class BaseForasicosmet extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcat()
-	{
+  
+  public function getCodcat()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodmet()
-	{
+    return trim($this->codcat);
 
-		return $this->codmet; 		
-	}
-	
-	public function getUnimed()
-	{
+  }
+  
+  public function getCodmet()
+  {
 
-		return $this->unimed; 		
-	}
-	
-	public function getCanmet()
-	{
+    return trim($this->codmet);
 
-		return number_format($this->canmet,2,',','.');
-		
-	}
-	
-	public function getCosmet()
-	{
+  }
+  
+  public function getUnimed()
+  {
 
-		return number_format($this->cosmet,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->unimed);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCanmet($val=false)
+  {
+
+    if($val) return number_format($this->canmet,2,',','.');
+    else return $this->canmet;
+
+  }
+  
+  public function getCosmet($val=false)
+  {
+
+    if($val) return number_format($this->cosmet,2,',','.');
+    else return $this->cosmet;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = ForasicosmetPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = ForasicosmetPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = ForasicosmetPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = ForasicosmetPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setUnimed($v)
 	{
 
-		if ($this->unimed !== $v) {
-			$this->unimed = $v;
-			$this->modifiedColumns[] = ForasicosmetPeer::UNIMED;
-		}
-
+    if ($this->unimed !== $v) {
+        $this->unimed = $v;
+        $this->modifiedColumns[] = ForasicosmetPeer::UNIMED;
+      }
+  
 	} 
 	
 	public function setCanmet($v)
 	{
 
-		if ($this->canmet !== $v) {
-			$this->canmet = $v;
-			$this->modifiedColumns[] = ForasicosmetPeer::CANMET;
-		}
-
+    if ($this->canmet !== $v) {
+        $this->canmet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForasicosmetPeer::CANMET;
+      }
+  
 	} 
 	
 	public function setCosmet($v)
 	{
 
-		if ($this->cosmet !== $v) {
-			$this->cosmet = $v;
-			$this->modifiedColumns[] = ForasicosmetPeer::COSMET;
-		}
-
+    if ($this->cosmet !== $v) {
+        $this->cosmet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForasicosmetPeer::COSMET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForasicosmetPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForasicosmetPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcat = $rs->getString($startcol + 0);
+      $this->codcat = $rs->getString($startcol + 0);
 
-			$this->codmet = $rs->getString($startcol + 1);
+      $this->codmet = $rs->getString($startcol + 1);
 
-			$this->unimed = $rs->getString($startcol + 2);
+      $this->unimed = $rs->getString($startcol + 2);
 
-			$this->canmet = $rs->getFloat($startcol + 3);
+      $this->canmet = $rs->getFloat($startcol + 3);
 
-			$this->cosmet = $rs->getFloat($startcol + 4);
+      $this->cosmet = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forasicosmet object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forasicosmet object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -210,6 +210,7 @@ abstract class BaseFcunimonPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcunimonPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

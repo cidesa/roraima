@@ -53,203 +53,235 @@ abstract class BaseCsrecmat extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodprod()
-	{
+  
+  public function getCodprod()
+  {
 
-		return $this->codprod; 		
-	}
-	
-	public function getCodfas()
-	{
+    return trim($this->codprod);
 
-		return $this->codfas; 		
-	}
-	
-	public function getCodart()
-	{
+  }
+  
+  public function getCodfas()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getTipo()
-	{
+    return trim($this->codfas);
 
-		return $this->tipo; 		
-	}
-	
-	public function getTipmat()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->tipmat; 		
-	}
-	
-	public function getCanmat()
-	{
+    return trim($this->codart);
 
-		return number_format($this->canmat,2,',','.');
-		
-	}
-	
-	public function getCostot()
-	{
+  }
+  
+  public function getTipo()
+  {
 
-		return number_format($this->costot,2,',','.');
-		
-	}
-	
-	public function getNroord()
-	{
+    return trim($this->tipo);
 
-		return $this->nroord; 		
-	}
-	
-	public function getCosuni()
-	{
+  }
+  
+  public function getTipmat()
+  {
 
-		return number_format($this->cosuni,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->tipmat);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCanmat($val=false)
+  {
+
+    if($val) return number_format($this->canmat,2,',','.');
+    else return $this->canmat;
+
+  }
+  
+  public function getCostot($val=false)
+  {
+
+    if($val) return number_format($this->costot,2,',','.');
+    else return $this->costot;
+
+  }
+  
+  public function getNroord()
+  {
+
+    return trim($this->nroord);
+
+  }
+  
+  public function getCosuni($val=false)
+  {
+
+    if($val) return number_format($this->cosuni,2,',','.');
+    else return $this->cosuni;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodprod($v)
 	{
 
-		if ($this->codprod !== $v) {
-			$this->codprod = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::CODPROD;
-		}
-
+    if ($this->codprod !== $v) {
+        $this->codprod = $v;
+        $this->modifiedColumns[] = CsrecmatPeer::CODPROD;
+      }
+  
 	} 
 	
 	public function setCodfas($v)
 	{
 
-		if ($this->codfas !== $v) {
-			$this->codfas = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::CODFAS;
-		}
-
+    if ($this->codfas !== $v) {
+        $this->codfas = $v;
+        $this->modifiedColumns[] = CsrecmatPeer::CODFAS;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CsrecmatPeer::CODART;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = CsrecmatPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setTipmat($v)
 	{
 
-		if ($this->tipmat !== $v) {
-			$this->tipmat = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::TIPMAT;
-		}
-
+    if ($this->tipmat !== $v) {
+        $this->tipmat = $v;
+        $this->modifiedColumns[] = CsrecmatPeer::TIPMAT;
+      }
+  
 	} 
 	
 	public function setCanmat($v)
 	{
 
-		if ($this->canmat !== $v) {
-			$this->canmat = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::CANMAT;
-		}
-
+    if ($this->canmat !== $v) {
+        $this->canmat = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecmatPeer::CANMAT;
+      }
+  
 	} 
 	
 	public function setCostot($v)
 	{
 
-		if ($this->costot !== $v) {
-			$this->costot = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::COSTOT;
-		}
-
+    if ($this->costot !== $v) {
+        $this->costot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecmatPeer::COSTOT;
+      }
+  
 	} 
 	
 	public function setNroord($v)
 	{
 
-		if ($this->nroord !== $v) {
-			$this->nroord = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::NROORD;
-		}
-
+    if ($this->nroord !== $v) {
+        $this->nroord = $v;
+        $this->modifiedColumns[] = CsrecmatPeer::NROORD;
+      }
+  
 	} 
 	
 	public function setCosuni($v)
 	{
 
-		if ($this->cosuni !== $v) {
-			$this->cosuni = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::COSUNI;
-		}
-
+    if ($this->cosuni !== $v) {
+        $this->cosuni = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecmatPeer::COSUNI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsrecmatPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsrecmatPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codprod = $rs->getString($startcol + 0);
+      $this->codprod = $rs->getString($startcol + 0);
 
-			$this->codfas = $rs->getString($startcol + 1);
+      $this->codfas = $rs->getString($startcol + 1);
 
-			$this->codart = $rs->getString($startcol + 2);
+      $this->codart = $rs->getString($startcol + 2);
 
-			$this->tipo = $rs->getString($startcol + 3);
+      $this->tipo = $rs->getString($startcol + 3);
 
-			$this->tipmat = $rs->getString($startcol + 4);
+      $this->tipmat = $rs->getString($startcol + 4);
 
-			$this->canmat = $rs->getFloat($startcol + 5);
+      $this->canmat = $rs->getFloat($startcol + 5);
 
-			$this->costot = $rs->getFloat($startcol + 6);
+      $this->costot = $rs->getFloat($startcol + 6);
 
-			$this->nroord = $rs->getString($startcol + 7);
+      $this->nroord = $rs->getString($startcol + 7);
 
-			$this->cosuni = $rs->getFloat($startcol + 8);
+      $this->cosuni = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csrecmat object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csrecmat object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

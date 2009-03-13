@@ -20,9 +20,6 @@ abstract class BaseFatippagPeer {
 
 
 	
-	const CODTIPPAG = 'fatippag.CODTIPPAG';
-
-	
 	const DESTIPPAG = 'fatippag.DESTIPPAG';
 
 	
@@ -30,6 +27,9 @@ abstract class BaseFatippagPeer {
 
 	
 	const GENMOV = 'fatippag.GENMOV';
+
+	
+	const GENING = 'fatippag.GENING';
 
 	
 	const ID = 'fatippag.ID';
@@ -40,17 +40,17 @@ abstract class BaseFatippagPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtippag', 'Destippag', 'Tipcan', 'Genmov', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FatippagPeer::CODTIPPAG, FatippagPeer::DESTIPPAG, FatippagPeer::TIPCAN, FatippagPeer::GENMOV, FatippagPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtippag', 'destippag', 'tipcan', 'genmov', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Destippag', 'Tipcan', 'Genmov', 'Gening', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FatippagPeer::DESTIPPAG, FatippagPeer::TIPCAN, FatippagPeer::GENMOV, FatippagPeer::GENING, FatippagPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('destippag', 'tipcan', 'genmov', 'gening', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtippag' => 0, 'Destippag' => 1, 'Tipcan' => 2, 'Genmov' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (FatippagPeer::CODTIPPAG => 0, FatippagPeer::DESTIPPAG => 1, FatippagPeer::TIPCAN => 2, FatippagPeer::GENMOV => 3, FatippagPeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtippag' => 0, 'destippag' => 1, 'tipcan' => 2, 'genmov' => 3, 'id' => 4, ),
+		BasePeer::TYPE_PHPNAME => array ('Destippag' => 0, 'Tipcan' => 1, 'Genmov' => 2, 'Gening' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (FatippagPeer::DESTIPPAG => 0, FatippagPeer::TIPCAN => 1, FatippagPeer::GENMOV => 2, FatippagPeer::GENING => 3, FatippagPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('destippag' => 0, 'tipcan' => 1, 'genmov' => 2, 'gening' => 3, 'id' => 4, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
@@ -105,13 +105,13 @@ abstract class BaseFatippagPeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(FatippagPeer::CODTIPPAG);
-
 		$criteria->addSelectColumn(FatippagPeer::DESTIPPAG);
 
 		$criteria->addSelectColumn(FatippagPeer::TIPCAN);
 
 		$criteria->addSelectColumn(FatippagPeer::GENMOV);
+
+		$criteria->addSelectColumn(FatippagPeer::GENING);
 
 		$criteria->addSelectColumn(FatippagPeer::ID);
 
@@ -215,6 +215,7 @@ abstract class BaseFatippagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FatippagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -1,0 +1,219 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  usuarios:
+    loguse:
+      type: VARCHAR
+      size: 50
+      required: true
+    nomuse:
+      type: VARCHAR
+      size: 250
+      required: true
+    apluse:
+      type: CHAR
+      size: 3
+      required: true
+    numemp:
+      type: CHAR
+      size: 12
+    pasuse:
+      type: VARCHAR
+      size: 10ld
+      required: true
+    diremp:
+      type: VARCHAR
+      size: 250
+    telemp:
+      type: VARCHAR
+      size: 50
+    cedemp:
+      type: VARCHAR
+      size: 10
+    numuni:
+      type: VARCHAR
+      size: 4
+    codcat:
+      type: VARCHAR
+      size: 16
+    id:
+  dfmedtra:
+    destra:
+      type: VARCHAR
+      size: 100
+    id:
+  dfatendoc:
+    coddoc:
+      type: VARCHAR
+      size: 30
+    desdoc:
+      type: VARCHAR
+      size: 250
+    mondoc:
+      type: VARCHAR
+      size: 50
+    fecdoc:
+      type: VARCHAR
+      size: 50
+    staate:
+      type: VARCHAR
+      size: 50
+    anuate:
+      type: INTEGER
+      required: true
+    estado:
+      type: VARCHAR
+      size: 1
+    id_dftabtip:
+      type: INTEGER
+      required: true
+      foreignTable: dftabtip
+      foreignReference: id
+    infdoc1:
+      type: VARCHAR
+      size: 100
+    infdoc2:
+      type: VARCHAR
+      size: 100
+    infdoc3:
+      type: VARCHAR
+      size: 100
+    infdoc4:
+      type: VARCHAR
+      size: 100
+    id:
+  dfatendocdet:
+    id_dfatendoc:
+      type: INTEGER
+      required: true
+      foreignTable: dfatendoc
+      foreignReference: id
+    id_usuario:
+      type: INTEGER
+      required: true
+      foreignTable: usuarios
+      foreignReference: id
+    desate:
+      type: VARCHAR
+      size: 100
+    fecrec:
+      type: TIMESTAMP
+      required: true
+    fecate:
+      type: TIMESTAMP
+      required: true
+    id_acunidad_ori:
+      type: INTEGER
+      required: true
+      foreignTable: acunidad
+      foreignReference: id
+    id_acunidad_des:
+      type: INTEGER
+      required: true
+      foreignTable: acunidad
+      foreignReference: id
+    id_dfrutadoc:
+      type: INTEGER
+      required: true
+      foreignTable: dfrutadoc
+      foreignReference: id
+    id_dfmedtra:     # Medio de Transporte
+      foreignTable: dfmedtra
+      foreignReference: id
+    diaent:          # Dias de entrega
+      type: INTEGER
+      required: true
+    totdia:          # Total de dias para la atencion.
+      type: INTEGER
+      required: true
+    id:
+  dfatendocobs:
+    desobs:
+      type: VARCHAR
+      size: 100
+    id_dfatendocdet:
+      type: INTEGER
+      required: true
+      foreignTable: dfatendocdet
+      foreignReference: id
+    id_usuario:
+      type: INTEGER
+      required: true
+      foreignTable: usuarios
+      foreignReference: id
+    fecobs:
+      type: TIMESTAMP
+      required: true
+  dfrutadoc:
+    #_attributes:
+      #idMethod: native
+    rutdoc:
+      type: INTEGER
+      required: true
+    desuni:
+      type: VARCHAR
+      size: 100
+    desrut:
+      type: VARCHAR
+      size: 100
+    diadoc:
+      type: INTEGER
+      required: true
+    id_acunidad:
+      type: INTEGER
+      required: true
+      foreignTable: acunidad
+      foreignReference: id
+    id_dftabtip:
+      type: INTEGER
+      required: true
+      foreignTable: dftabtip
+      foreignReference: id
+    id:
+  dftabtip:
+    tipdoc:
+      type: VARCHAR
+      size: 4
+      required: true
+    nomtab:
+      type: VARCHAR
+      size: 30
+      required: true
+    vidutil:
+      type: INTEGER
+      required: true
+    clvprm:
+      type: VARCHAR
+      size: 30
+    clvfrn:
+      type: VARCHAR
+      size: 30
+    mondoc:
+      type: VARCHAR
+      size: 20
+    fecdoc:
+      type: VARCHAR
+      size: 20
+    desdoc:
+      type: VARCHAR
+      size: 20
+    stadoc:
+      type: VARCHAR
+      size: 20
+    infdoc1:
+      type: VARCHAR
+      size: 100
+    infdoc2:
+      type: VARCHAR
+      size: 100
+    infdoc3:
+      type: VARCHAR
+      size: 100
+    infdoc4:
+      type: VARCHAR
+      size: 100
+    id:
+  dfdiafer:
+    diafer:
+      type: DATE
+    id:
+  

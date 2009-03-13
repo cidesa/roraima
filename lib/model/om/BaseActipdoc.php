@@ -29,93 +29,119 @@ abstract class BaseActipdoc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTipdoc()
-	{
+  
+  public function getTipdoc()
+  {
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getNomdoc()
-	{
+    return trim($this->tipdoc);
 
-		return $this->nomdoc; 		
-	}
-	
-	public function getVidutil()
-	{
+  }
+  
+  public function getNomdoc()
+  {
 
-		return number_format($this->vidutil,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomdoc);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getVidutil($val=false)
+  {
+
+    if($val) return number_format($this->vidutil,2,',','.');
+    else return $this->vidutil;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = ActipdocPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = ActipdocPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setNomdoc($v)
 	{
 
-		if ($this->nomdoc !== $v) {
-			$this->nomdoc = $v;
-			$this->modifiedColumns[] = ActipdocPeer::NOMDOC;
-		}
-
+    if ($this->nomdoc !== $v) {
+        $this->nomdoc = $v;
+        $this->modifiedColumns[] = ActipdocPeer::NOMDOC;
+      }
+  
 	} 
 	
 	public function setVidutil($v)
 	{
 
-		if ($this->vidutil !== $v) {
-			$this->vidutil = $v;
-			$this->modifiedColumns[] = ActipdocPeer::VIDUTIL;
-		}
-
+    if ($this->vidutil !== $v) {
+        $this->vidutil = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ActipdocPeer::VIDUTIL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ActipdocPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ActipdocPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tipdoc = $rs->getString($startcol + 0);
+      $this->tipdoc = $rs->getString($startcol + 0);
 
-			$this->nomdoc = $rs->getString($startcol + 1);
+      $this->nomdoc = $rs->getString($startcol + 1);
 
-			$this->vidutil = $rs->getFloat($startcol + 2);
+      $this->vidutil = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Actipdoc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Actipdoc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

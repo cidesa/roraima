@@ -1,0 +1,28 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Caprocomart
+    theme:            default
+
+    fields:
+      fecprocom:    { name : Fecha Programación, params: date_format='dd/MM/yyyy'}
+      codcat:      { name:  Código de Unidad }
+      nomcat:      { name:  Nombre Unidad }
+    list:
+      title:          Programar Compra de Artículos
+      filters:        [codcat, fecprocom]
+      display:        [=fecprocom, codcat, nomcat]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:   fecprocom
+    edit:
+      title:         Programar Compra de Artículos
+      display:       [fecprocom, codcat, nomcat]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

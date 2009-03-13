@@ -240,6 +240,7 @@ abstract class BaseNpempvacPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpempvacPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

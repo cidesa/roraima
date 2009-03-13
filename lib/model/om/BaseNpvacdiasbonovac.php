@@ -41,149 +41,178 @@ abstract class BaseNpvacdiasbonovac extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getPerini()
-	{
+    return trim($this->codnom);
 
-		return $this->perini; 		
-	}
-	
-	public function getPerfin()
-	{
+  }
+  
+  public function getPerini()
+  {
 
-		return $this->perfin; 		
-	}
-	
-	public function getRangodesde()
-	{
+    return trim($this->perini);
 
-		return number_format($this->rangodesde,2,',','.');
-		
-	}
-	
-	public function getRangohasta()
-	{
+  }
+  
+  public function getPerfin()
+  {
 
-		return number_format($this->rangohasta,2,',','.');
-		
-	}
-	
-	public function getDiasbonovac()
-	{
+    return trim($this->perfin);
 
-		return number_format($this->diasbonovac,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getRangodesde($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->rangodesde,2,',','.');
+    else return $this->rangodesde;
+
+  }
+  
+  public function getRangohasta($val=false)
+  {
+
+    if($val) return number_format($this->rangohasta,2,',','.');
+    else return $this->rangohasta;
+
+  }
+  
+  public function getDiasbonovac($val=false)
+  {
+
+    if($val) return number_format($this->diasbonovac,2,',','.');
+    else return $this->diasbonovac;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpvacdiasbonovacPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpvacdiasbonovacPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setPerini($v)
 	{
 
-		if ($this->perini !== $v) {
-			$this->perini = $v;
-			$this->modifiedColumns[] = NpvacdiasbonovacPeer::PERINI;
-		}
-
+    if ($this->perini !== $v) {
+        $this->perini = $v;
+        $this->modifiedColumns[] = NpvacdiasbonovacPeer::PERINI;
+      }
+  
 	} 
 	
 	public function setPerfin($v)
 	{
 
-		if ($this->perfin !== $v) {
-			$this->perfin = $v;
-			$this->modifiedColumns[] = NpvacdiasbonovacPeer::PERFIN;
-		}
-
+    if ($this->perfin !== $v) {
+        $this->perfin = $v;
+        $this->modifiedColumns[] = NpvacdiasbonovacPeer::PERFIN;
+      }
+  
 	} 
 	
 	public function setRangodesde($v)
 	{
 
-		if ($this->rangodesde !== $v) {
-			$this->rangodesde = $v;
-			$this->modifiedColumns[] = NpvacdiasbonovacPeer::RANGODESDE;
-		}
-
+    if ($this->rangodesde !== $v) {
+        $this->rangodesde = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacdiasbonovacPeer::RANGODESDE;
+      }
+  
 	} 
 	
 	public function setRangohasta($v)
 	{
 
-		if ($this->rangohasta !== $v) {
-			$this->rangohasta = $v;
-			$this->modifiedColumns[] = NpvacdiasbonovacPeer::RANGOHASTA;
-		}
-
+    if ($this->rangohasta !== $v) {
+        $this->rangohasta = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacdiasbonovacPeer::RANGOHASTA;
+      }
+  
 	} 
 	
 	public function setDiasbonovac($v)
 	{
 
-		if ($this->diasbonovac !== $v) {
-			$this->diasbonovac = $v;
-			$this->modifiedColumns[] = NpvacdiasbonovacPeer::DIASBONOVAC;
-		}
-
+    if ($this->diasbonovac !== $v) {
+        $this->diasbonovac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacdiasbonovacPeer::DIASBONOVAC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacdiasbonovacPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacdiasbonovacPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->perini = $rs->getString($startcol + 1);
+      $this->perini = $rs->getString($startcol + 1);
 
-			$this->perfin = $rs->getString($startcol + 2);
+      $this->perfin = $rs->getString($startcol + 2);
 
-			$this->rangodesde = $rs->getFloat($startcol + 3);
+      $this->rangodesde = $rs->getFloat($startcol + 3);
 
-			$this->rangohasta = $rs->getFloat($startcol + 4);
+      $this->rangohasta = $rs->getFloat($startcol + 4);
 
-			$this->diasbonovac = $rs->getFloat($startcol + 5);
+      $this->diasbonovac = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacdiasbonovac object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacdiasbonovac object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -240,6 +269,7 @@ abstract class BaseNpvacdiasbonovac extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacdiasbonovacPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacdiasbonovacPeer::doUpdate($this, $con);

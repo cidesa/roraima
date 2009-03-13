@@ -53,224 +53,255 @@ abstract class BaseCaconmer extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getConmer()
-	{
+  
+  public function getConmer()
+  {
 
-		return $this->conmer; 		
-	}
-	
-	public function getFeccon($format = 'Y-m-d')
-	{
+    return trim($this->conmer);
 
-		if ($this->feccon === null || $this->feccon === '') {
-			return null;
-		} elseif (!is_int($this->feccon)) {
-						$ts = strtotime($this->feccon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
-			}
-		} else {
-			$ts = $this->feccon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFeccon($format = 'Y-m-d')
+  {
 
-	
-	public function getDescon()
-	{
+    if ($this->feccon === null || $this->feccon === '') {
+      return null;
+    } elseif (!is_int($this->feccon)) {
+            $ts = adodb_strtotime($this->feccon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
+      }
+    } else {
+      $ts = $this->feccon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->descon; 		
-	}
-	
-	public function getCodpro()
-	{
+  
+  public function getDescon()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getNumdoc()
-	{
+    return trim($this->descon);
 
-		return $this->numdoc; 		
-	}
-	
-	public function getMoncon()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return number_format($this->moncon,2,',','.');
-		
-	}
-	
-	public function getStacon()
-	{
+    return trim($this->codpro);
 
-		return $this->stacon; 		
-	}
-	
-	public function getCodalm()
-	{
+  }
+  
+  public function getNumdoc()
+  {
 
-		return $this->codalm; 		
-	}
-	
-	public function getNumcom()
-	{
+    return trim($this->numdoc);
 
-		return $this->numcom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMoncon($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->moncon,2,',','.');
+    else return $this->moncon;
+
+  }
+  
+  public function getStacon()
+  {
+
+    return trim($this->stacon);
+
+  }
+  
+  public function getCodalm()
+  {
+
+    return trim($this->codalm);
+
+  }
+  
+  public function getNumcom()
+  {
+
+    return trim($this->numcom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setConmer($v)
 	{
 
-		if ($this->conmer !== $v) {
-			$this->conmer = $v;
-			$this->modifiedColumns[] = CaconmerPeer::CONMER;
-		}
-
+    if ($this->conmer !== $v) {
+        $this->conmer = $v;
+        $this->modifiedColumns[] = CaconmerPeer::CONMER;
+      }
+  
 	} 
 	
 	public function setFeccon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccon !== $ts) {
-			$this->feccon = $ts;
-			$this->modifiedColumns[] = CaconmerPeer::FECCON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccon !== $ts) {
+      $this->feccon = $ts;
+      $this->modifiedColumns[] = CaconmerPeer::FECCON;
+    }
 
 	} 
 	
 	public function setDescon($v)
 	{
 
-		if ($this->descon !== $v) {
-			$this->descon = $v;
-			$this->modifiedColumns[] = CaconmerPeer::DESCON;
-		}
-
+    if ($this->descon !== $v) {
+        $this->descon = $v;
+        $this->modifiedColumns[] = CaconmerPeer::DESCON;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CaconmerPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CaconmerPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setNumdoc($v)
 	{
 
-		if ($this->numdoc !== $v) {
-			$this->numdoc = $v;
-			$this->modifiedColumns[] = CaconmerPeer::NUMDOC;
-		}
-
+    if ($this->numdoc !== $v) {
+        $this->numdoc = $v;
+        $this->modifiedColumns[] = CaconmerPeer::NUMDOC;
+      }
+  
 	} 
 	
 	public function setMoncon($v)
 	{
 
-		if ($this->moncon !== $v) {
-			$this->moncon = $v;
-			$this->modifiedColumns[] = CaconmerPeer::MONCON;
-		}
-
+    if ($this->moncon !== $v) {
+        $this->moncon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaconmerPeer::MONCON;
+      }
+  
 	} 
 	
 	public function setStacon($v)
 	{
 
-		if ($this->stacon !== $v) {
-			$this->stacon = $v;
-			$this->modifiedColumns[] = CaconmerPeer::STACON;
-		}
-
+    if ($this->stacon !== $v) {
+        $this->stacon = $v;
+        $this->modifiedColumns[] = CaconmerPeer::STACON;
+      }
+  
 	} 
 	
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = CaconmerPeer::CODALM;
-		}
-
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CaconmerPeer::CODALM;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = CaconmerPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = CaconmerPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaconmerPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaconmerPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->conmer = $rs->getString($startcol + 0);
+      $this->conmer = $rs->getString($startcol + 0);
 
-			$this->feccon = $rs->getDate($startcol + 1, null);
+      $this->feccon = $rs->getDate($startcol + 1, null);
 
-			$this->descon = $rs->getString($startcol + 2);
+      $this->descon = $rs->getString($startcol + 2);
 
-			$this->codpro = $rs->getString($startcol + 3);
+      $this->codpro = $rs->getString($startcol + 3);
 
-			$this->numdoc = $rs->getString($startcol + 4);
+      $this->numdoc = $rs->getString($startcol + 4);
 
-			$this->moncon = $rs->getFloat($startcol + 5);
+      $this->moncon = $rs->getFloat($startcol + 5);
 
-			$this->stacon = $rs->getString($startcol + 6);
+      $this->stacon = $rs->getString($startcol + 6);
 
-			$this->codalm = $rs->getString($startcol + 7);
+      $this->codalm = $rs->getString($startcol + 7);
 
-			$this->numcom = $rs->getString($startcol + 8);
+      $this->numcom = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caconmer object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caconmer object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -327,6 +358,7 @@ abstract class BaseCaconmer extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaconmerPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaconmerPeer::doUpdate($this, $con);

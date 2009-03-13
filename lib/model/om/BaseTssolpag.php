@@ -57,242 +57,274 @@ abstract class BaseTssolpag extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumsol()
-	{
+  
+  public function getNumsol()
+  {
 
-		return $this->numsol; 		
-	}
-	
-	public function getFecsol($format = 'Y-m-d')
-	{
+    return trim($this->numsol);
 
-		if ($this->fecsol === null || $this->fecsol === '') {
-			return null;
-		} elseif (!is_int($this->fecsol)) {
-						$ts = strtotime($this->fecsol);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecsol] as date/time value: " . var_export($this->fecsol, true));
-			}
-		} else {
-			$ts = $this->fecsol;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecsol($format = 'Y-m-d')
+  {
 
-	
-	public function getNumaep()
-	{
+    if ($this->fecsol === null || $this->fecsol === '') {
+      return null;
+    } elseif (!is_int($this->fecsol)) {
+            $ts = adodb_strtotime($this->fecsol);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsol] as date/time value: " . var_export($this->fecsol, true));
+      }
+    } else {
+      $ts = $this->fecsol;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->numaep; 		
-	}
-	
-	public function getNumopp()
-	{
+  
+  public function getNumaep()
+  {
 
-		return $this->numopp; 		
-	}
-	
-	public function getMonsol()
-	{
+    return trim($this->numaep);
 
-		return number_format($this->monsol,2,',','.');
-		
-	}
-	
-	public function getDessol()
-	{
+  }
+  
+  public function getNumopp()
+  {
 
-		return $this->dessol; 		
-	}
-	
-	public function getNumfac()
-	{
+    return trim($this->numopp);
 
-		return $this->numfac; 		
-	}
-	
-	public function getCedrif()
-	{
+  }
+  
+  public function getMonsol($val=false)
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getCedsol()
-	{
+    if($val) return number_format($this->monsol,2,',','.');
+    else return $this->monsol;
 
-		return $this->cedsol; 		
-	}
-	
-	public function getNomsol()
-	{
+  }
+  
+  public function getDessol()
+  {
 
-		return $this->nomsol; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->dessol);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNumfac()
+  {
+
+    return trim($this->numfac);
+
+  }
+  
+  public function getCedrif()
+  {
+
+    return trim($this->cedrif);
+
+  }
+  
+  public function getCedsol()
+  {
+
+    return trim($this->cedsol);
+
+  }
+  
+  public function getNomsol()
+  {
+
+    return trim($this->nomsol);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumsol($v)
 	{
 
-		if ($this->numsol !== $v) {
-			$this->numsol = $v;
-			$this->modifiedColumns[] = TssolpagPeer::NUMSOL;
-		}
-
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = TssolpagPeer::NUMSOL;
+      }
+  
 	} 
 	
 	public function setFecsol($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecsol] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecsol !== $ts) {
-			$this->fecsol = $ts;
-			$this->modifiedColumns[] = TssolpagPeer::FECSOL;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsol] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsol !== $ts) {
+      $this->fecsol = $ts;
+      $this->modifiedColumns[] = TssolpagPeer::FECSOL;
+    }
 
 	} 
 	
 	public function setNumaep($v)
 	{
 
-		if ($this->numaep !== $v) {
-			$this->numaep = $v;
-			$this->modifiedColumns[] = TssolpagPeer::NUMAEP;
-		}
-
+    if ($this->numaep !== $v) {
+        $this->numaep = $v;
+        $this->modifiedColumns[] = TssolpagPeer::NUMAEP;
+      }
+  
 	} 
 	
 	public function setNumopp($v)
 	{
 
-		if ($this->numopp !== $v) {
-			$this->numopp = $v;
-			$this->modifiedColumns[] = TssolpagPeer::NUMOPP;
-		}
-
+    if ($this->numopp !== $v) {
+        $this->numopp = $v;
+        $this->modifiedColumns[] = TssolpagPeer::NUMOPP;
+      }
+  
 	} 
 	
 	public function setMonsol($v)
 	{
 
-		if ($this->monsol !== $v) {
-			$this->monsol = $v;
-			$this->modifiedColumns[] = TssolpagPeer::MONSOL;
-		}
-
+    if ($this->monsol !== $v) {
+        $this->monsol = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TssolpagPeer::MONSOL;
+      }
+  
 	} 
 	
 	public function setDessol($v)
 	{
 
-		if ($this->dessol !== $v) {
-			$this->dessol = $v;
-			$this->modifiedColumns[] = TssolpagPeer::DESSOL;
-		}
-
+    if ($this->dessol !== $v) {
+        $this->dessol = $v;
+        $this->modifiedColumns[] = TssolpagPeer::DESSOL;
+      }
+  
 	} 
 	
 	public function setNumfac($v)
 	{
 
-		if ($this->numfac !== $v) {
-			$this->numfac = $v;
-			$this->modifiedColumns[] = TssolpagPeer::NUMFAC;
-		}
-
+    if ($this->numfac !== $v) {
+        $this->numfac = $v;
+        $this->modifiedColumns[] = TssolpagPeer::NUMFAC;
+      }
+  
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = TssolpagPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = TssolpagPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setCedsol($v)
 	{
 
-		if ($this->cedsol !== $v) {
-			$this->cedsol = $v;
-			$this->modifiedColumns[] = TssolpagPeer::CEDSOL;
-		}
-
+    if ($this->cedsol !== $v) {
+        $this->cedsol = $v;
+        $this->modifiedColumns[] = TssolpagPeer::CEDSOL;
+      }
+  
 	} 
 	
 	public function setNomsol($v)
 	{
 
-		if ($this->nomsol !== $v) {
-			$this->nomsol = $v;
-			$this->modifiedColumns[] = TssolpagPeer::NOMSOL;
-		}
-
+    if ($this->nomsol !== $v) {
+        $this->nomsol = $v;
+        $this->modifiedColumns[] = TssolpagPeer::NOMSOL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TssolpagPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TssolpagPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numsol = $rs->getString($startcol + 0);
+      $this->numsol = $rs->getString($startcol + 0);
 
-			$this->fecsol = $rs->getDate($startcol + 1, null);
+      $this->fecsol = $rs->getDate($startcol + 1, null);
 
-			$this->numaep = $rs->getString($startcol + 2);
+      $this->numaep = $rs->getString($startcol + 2);
 
-			$this->numopp = $rs->getString($startcol + 3);
+      $this->numopp = $rs->getString($startcol + 3);
 
-			$this->monsol = $rs->getFloat($startcol + 4);
+      $this->monsol = $rs->getFloat($startcol + 4);
 
-			$this->dessol = $rs->getString($startcol + 5);
+      $this->dessol = $rs->getString($startcol + 5);
 
-			$this->numfac = $rs->getString($startcol + 6);
+      $this->numfac = $rs->getString($startcol + 6);
 
-			$this->cedrif = $rs->getString($startcol + 7);
+      $this->cedrif = $rs->getString($startcol + 7);
 
-			$this->cedsol = $rs->getString($startcol + 8);
+      $this->cedsol = $rs->getString($startcol + 8);
 
-			$this->nomsol = $rs->getString($startcol + 9);
+      $this->nomsol = $rs->getString($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tssolpag object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tssolpag object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -349,6 +381,7 @@ abstract class BaseTssolpag extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TssolpagPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TssolpagPeer::doUpdate($this, $con);

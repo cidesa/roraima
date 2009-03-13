@@ -133,6 +133,46 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 
 
 	
+	protected $codmedcom;
+
+
+	
+	protected $codprocom;
+
+
+	
+	protected $codpai;
+
+
+	
+	protected $codedo;
+
+
+	
+	protected $codmun;
+
+
+	
+	protected $aplart;
+
+
+	
+	protected $aplart6;
+
+
+	
+	protected $numsigecof;
+
+
+	
+	protected $fecsigecof;
+
+
+	
+	protected $expsigecof;
+
+
+	
 	protected $id;
 
 	
@@ -141,645 +181,909 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getOrdcom()
-	{
+  
+  public function getOrdcom()
+  {
 
-		return $this->ordcom; 		
-	}
-	
-	public function getFecord($format = 'Y-m-d')
-	{
+    return trim($this->ordcom);
 
-		if ($this->fecord === null || $this->fecord === '') {
-			return null;
-		} elseif (!is_int($this->fecord)) {
-						$ts = strtotime($this->fecord);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecord] as date/time value: " . var_export($this->fecord, true));
-			}
-		} else {
-			$ts = $this->fecord;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecord($format = 'Y-m-d')
+  {
 
-	
-	public function getCodpro()
-	{
+    if ($this->fecord === null || $this->fecord === '') {
+      return null;
+    } elseif (!is_int($this->fecord)) {
+            $ts = adodb_strtotime($this->fecord);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecord] as date/time value: " . var_export($this->fecord, true));
+      }
+    } else {
+      $ts = $this->fecord;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codpro; 		
-	}
-	
-	public function getDesord()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->desord; 		
-	}
-	
-	public function getCrecon()
-	{
+    return trim($this->codpro);
 
-		return $this->crecon; 		
-	}
-	
-	public function getPlaent()
-	{
+  }
+  
+  public function getDesord()
+  {
 
-		return $this->plaent; 		
-	}
-	
-	public function getTiecan()
-	{
+    return trim($this->desord);
 
-		return $this->tiecan; 		
-	}
-	
-	public function getMonord()
-	{
+  }
+  
+  public function getCrecon()
+  {
 
-		return number_format($this->monord,2,',','.');
-		
-	}
-	
-	public function getDtoord()
-	{
+    return trim($this->crecon);
 
-		return number_format($this->dtoord,2,',','.');
-		
-	}
-	
-	public function getRefcom()
-	{
+  }
+  
+  public function getPlaent()
+  {
 
-		return $this->refcom; 		
-	}
-	
-	public function getStaord()
-	{
+    return trim($this->plaent);
 
-		return $this->staord; 		
-	}
-	
-	public function getAfepre()
-	{
+  }
+  
+  public function getTiecan()
+  {
 
-		return $this->afepre; 		
-	}
-	
-	public function getConpag()
-	{
+    return trim($this->tiecan);
 
-		return $this->conpag; 		
-	}
-	
-	public function getForent()
-	{
+  }
+  
+  public function getMonord($val=false)
+  {
 
-		return $this->forent; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->monord,2,',','.');
+    else return $this->monord;
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDtoord($val=false)
+  {
 
-	
-	public function getTipmon()
-	{
+    if($val) return number_format($this->dtoord,2,',','.');
+    else return $this->dtoord;
 
-		return $this->tipmon; 		
-	}
-	
-	public function getValmon()
-	{
+  }
+  
+  public function getRefcom()
+  {
 
-		return number_format($this->valmon,2,',','.');
-		
-	}
-	
-	public function getTipcom()
-	{
+    return trim($this->refcom);
 
-		return $this->tipcom; 		
-	}
-	
-	public function getTipord()
-	{
+  }
+  
+  public function getStaord()
+  {
 
-		return $this->tipord; 		
-	}
-	
-	public function getTipo()
-	{
+    return trim($this->staord);
 
-		return $this->tipo; 		
-	}
-	
-	public function getCoduni()
-	{
+  }
+  
+  public function getAfepre()
+  {
 
-		return $this->coduni; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->afepre);
 
-		return $this->codemp; 		
-	}
-	
-	public function getNotord()
-	{
+  }
+  
+  public function getConpag()
+  {
 
-		return $this->notord; 		
-	}
-	
-	public function getTipdoc()
-	{
+    return trim($this->conpag);
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getTippro()
-	{
+  }
+  
+  public function getForent()
+  {
 
-		return $this->tippro; 		
-	}
-	
-	public function getAfepro()
-	{
+    return trim($this->forent);
 
-		return $this->afepro; 		
-	}
-	
-	public function getDoccom()
-	{
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
 
-		return $this->doccom; 		
-	}
-	
-	public function getRefsol()
-	{
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->refsol; 		
-	}
-	
-	public function getTipfin()
-	{
+  
+  public function getTipmon()
+  {
 
-		return $this->tipfin; 		
-	}
-	
-	public function getJustif()
-	{
+    return trim($this->tipmon);
 
-		return $this->justif; 		
-	}
-	
-	public function getRefprc()
-	{
+  }
+  
+  public function getValmon($val=false)
+  {
 
-		return $this->refprc; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->valmon,2,',','.');
+    else return $this->valmon;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTipcom()
+  {
+
+    return trim($this->tipcom);
+
+  }
+  
+  public function getTipord()
+  {
+
+    return trim($this->tipord);
+
+  }
+  
+  public function getTipo()
+  {
+
+    return trim($this->tipo);
+
+  }
+  
+  public function getCoduni()
+  {
+
+    return trim($this->coduni);
+
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getNotord()
+  {
+
+    return trim($this->notord);
+
+  }
+  
+  public function getTipdoc()
+  {
+
+    return trim($this->tipdoc);
+
+  }
+  
+  public function getTippro()
+  {
+
+    return trim($this->tippro);
+
+  }
+  
+  public function getAfepro()
+  {
+
+    return trim($this->afepro);
+
+  }
+  
+  public function getDoccom()
+  {
+
+    return trim($this->doccom);
+
+  }
+  
+  public function getRefsol()
+  {
+
+    return trim($this->refsol);
+
+  }
+  
+  public function getTipfin()
+  {
+
+    return trim($this->tipfin);
+
+  }
+  
+  public function getJustif()
+  {
+
+    return trim($this->justif);
+
+  }
+  
+  public function getRefprc()
+  {
+
+    return trim($this->refprc);
+
+  }
+  
+  public function getCodmedcom()
+  {
+
+    return trim($this->codmedcom);
+
+  }
+  
+  public function getCodprocom()
+  {
+
+    return trim($this->codprocom);
+
+  }
+  
+  public function getCodpai()
+  {
+
+    return trim($this->codpai);
+
+  }
+  
+  public function getCodedo()
+  {
+
+    return trim($this->codedo);
+
+  }
+  
+  public function getCodmun()
+  {
+
+    return trim($this->codmun);
+
+  }
+  
+  public function getAplart()
+  {
+
+    return trim($this->aplart);
+
+  }
+  
+  public function getAplart6()
+  {
+
+    return trim($this->aplart6);
+
+  }
+  
+  public function getNumsigecof()
+  {
+
+    return trim($this->numsigecof);
+
+  }
+  
+  public function getFecsigecof($format = 'Y-m-d')
+  {
+
+    if ($this->fecsigecof === null || $this->fecsigecof === '') {
+      return null;
+    } elseif (!is_int($this->fecsigecof)) {
+            $ts = adodb_strtotime($this->fecsigecof);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsigecof] as date/time value: " . var_export($this->fecsigecof, true));
+      }
+    } else {
+      $ts = $this->fecsigecof;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getExpsigecof()
+  {
+
+    return trim($this->expsigecof);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setOrdcom($v)
 	{
 
-		if ($this->ordcom !== $v) {
-			$this->ordcom = $v;
-			$this->modifiedColumns[] = CaordcomPeer::ORDCOM;
-		}
-
+    if ($this->ordcom !== $v) {
+        $this->ordcom = $v;
+        $this->modifiedColumns[] = CaordcomPeer::ORDCOM;
+      }
+  
 	} 
 	
 	public function setFecord($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecord] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecord !== $ts) {
-			$this->fecord = $ts;
-			$this->modifiedColumns[] = CaordcomPeer::FECORD;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecord] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecord !== $ts) {
+      $this->fecord = $ts;
+      $this->modifiedColumns[] = CaordcomPeer::FECORD;
+    }
 
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CaordcomPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setDesord($v)
 	{
 
-		if ($this->desord !== $v) {
-			$this->desord = $v;
-			$this->modifiedColumns[] = CaordcomPeer::DESORD;
-		}
-
+    if ($this->desord !== $v) {
+        $this->desord = $v;
+        $this->modifiedColumns[] = CaordcomPeer::DESORD;
+      }
+  
 	} 
 	
 	public function setCrecon($v)
 	{
 
-		if ($this->crecon !== $v) {
-			$this->crecon = $v;
-			$this->modifiedColumns[] = CaordcomPeer::CRECON;
-		}
-
+    if ($this->crecon !== $v) {
+        $this->crecon = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CRECON;
+      }
+  
 	} 
 	
 	public function setPlaent($v)
 	{
 
-		if ($this->plaent !== $v) {
-			$this->plaent = $v;
-			$this->modifiedColumns[] = CaordcomPeer::PLAENT;
-		}
-
+    if ($this->plaent !== $v) {
+        $this->plaent = $v;
+        $this->modifiedColumns[] = CaordcomPeer::PLAENT;
+      }
+  
 	} 
 	
 	public function setTiecan($v)
 	{
 
-		if ($this->tiecan !== $v) {
-			$this->tiecan = $v;
-			$this->modifiedColumns[] = CaordcomPeer::TIECAN;
-		}
-
+    if ($this->tiecan !== $v) {
+        $this->tiecan = $v;
+        $this->modifiedColumns[] = CaordcomPeer::TIECAN;
+      }
+  
 	} 
 	
 	public function setMonord($v)
 	{
 
-		if ($this->monord !== $v) {
-			$this->monord = $v;
-			$this->modifiedColumns[] = CaordcomPeer::MONORD;
-		}
-
+    if ($this->monord !== $v) {
+        $this->monord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordcomPeer::MONORD;
+      }
+  
 	} 
 	
 	public function setDtoord($v)
 	{
 
-		if ($this->dtoord !== $v) {
-			$this->dtoord = $v;
-			$this->modifiedColumns[] = CaordcomPeer::DTOORD;
-		}
-
+    if ($this->dtoord !== $v) {
+        $this->dtoord = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordcomPeer::DTOORD;
+      }
+  
 	} 
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = CaordcomPeer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = CaordcomPeer::REFCOM;
+      }
+  
 	} 
 	
 	public function setStaord($v)
 	{
 
-		if ($this->staord !== $v) {
-			$this->staord = $v;
-			$this->modifiedColumns[] = CaordcomPeer::STAORD;
-		}
-
+    if ($this->staord !== $v) {
+        $this->staord = $v;
+        $this->modifiedColumns[] = CaordcomPeer::STAORD;
+      }
+  
 	} 
 	
 	public function setAfepre($v)
 	{
 
-		if ($this->afepre !== $v) {
-			$this->afepre = $v;
-			$this->modifiedColumns[] = CaordcomPeer::AFEPRE;
-		}
-
+    if ($this->afepre !== $v) {
+        $this->afepre = $v;
+        $this->modifiedColumns[] = CaordcomPeer::AFEPRE;
+      }
+  
 	} 
 	
 	public function setConpag($v)
 	{
 
-		if ($this->conpag !== $v) {
-			$this->conpag = $v;
-			$this->modifiedColumns[] = CaordcomPeer::CONPAG;
-		}
-
+    if ($this->conpag !== $v) {
+        $this->conpag = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CONPAG;
+      }
+  
 	} 
 	
 	public function setForent($v)
 	{
 
-		if ($this->forent !== $v) {
-			$this->forent = $v;
-			$this->modifiedColumns[] = CaordcomPeer::FORENT;
-		}
-
+    if ($this->forent !== $v) {
+        $this->forent = $v;
+        $this->modifiedColumns[] = CaordcomPeer::FORENT;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = CaordcomPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = CaordcomPeer::FECANU;
+    }
 
 	} 
 	
 	public function setTipmon($v)
 	{
 
-		if ($this->tipmon !== $v) {
-			$this->tipmon = $v;
-			$this->modifiedColumns[] = CaordcomPeer::TIPMON;
-		}
-
+    if ($this->tipmon !== $v) {
+        $this->tipmon = $v;
+        $this->modifiedColumns[] = CaordcomPeer::TIPMON;
+      }
+  
 	} 
 	
 	public function setValmon($v)
 	{
 
-		if ($this->valmon !== $v) {
-			$this->valmon = $v;
-			$this->modifiedColumns[] = CaordcomPeer::VALMON;
-		}
-
+    if ($this->valmon !== $v) {
+        $this->valmon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaordcomPeer::VALMON;
+      }
+  
 	} 
 	
 	public function setTipcom($v)
 	{
 
-		if ($this->tipcom !== $v) {
-			$this->tipcom = $v;
-			$this->modifiedColumns[] = CaordcomPeer::TIPCOM;
-		}
-
+    if ($this->tipcom !== $v) {
+        $this->tipcom = $v;
+        $this->modifiedColumns[] = CaordcomPeer::TIPCOM;
+      }
+  
 	} 
 	
 	public function setTipord($v)
 	{
 
-		if ($this->tipord !== $v) {
-			$this->tipord = $v;
-			$this->modifiedColumns[] = CaordcomPeer::TIPORD;
-		}
-
+    if ($this->tipord !== $v) {
+        $this->tipord = $v;
+        $this->modifiedColumns[] = CaordcomPeer::TIPORD;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = CaordcomPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = CaordcomPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = CaordcomPeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = CaordcomPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNotord($v)
 	{
 
-		if ($this->notord !== $v) {
-			$this->notord = $v;
-			$this->modifiedColumns[] = CaordcomPeer::NOTORD;
-		}
-
+    if ($this->notord !== $v) {
+        $this->notord = $v;
+        $this->modifiedColumns[] = CaordcomPeer::NOTORD;
+      }
+  
 	} 
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = CaordcomPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = CaordcomPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setTippro($v)
 	{
 
-		if ($this->tippro !== $v) {
-			$this->tippro = $v;
-			$this->modifiedColumns[] = CaordcomPeer::TIPPRO;
-		}
-
+    if ($this->tippro !== $v) {
+        $this->tippro = $v;
+        $this->modifiedColumns[] = CaordcomPeer::TIPPRO;
+      }
+  
 	} 
 	
 	public function setAfepro($v)
 	{
 
-		if ($this->afepro !== $v) {
-			$this->afepro = $v;
-			$this->modifiedColumns[] = CaordcomPeer::AFEPRO;
-		}
-
+    if ($this->afepro !== $v) {
+        $this->afepro = $v;
+        $this->modifiedColumns[] = CaordcomPeer::AFEPRO;
+      }
+  
 	} 
 	
 	public function setDoccom($v)
 	{
 
-		if ($this->doccom !== $v) {
-			$this->doccom = $v;
-			$this->modifiedColumns[] = CaordcomPeer::DOCCOM;
-		}
-
+    if ($this->doccom !== $v) {
+        $this->doccom = $v;
+        $this->modifiedColumns[] = CaordcomPeer::DOCCOM;
+      }
+  
 	} 
 	
 	public function setRefsol($v)
 	{
 
-		if ($this->refsol !== $v) {
-			$this->refsol = $v;
-			$this->modifiedColumns[] = CaordcomPeer::REFSOL;
-		}
-
+    if ($this->refsol !== $v) {
+        $this->refsol = $v;
+        $this->modifiedColumns[] = CaordcomPeer::REFSOL;
+      }
+  
 	} 
 	
 	public function setTipfin($v)
 	{
 
-		if ($this->tipfin !== $v) {
-			$this->tipfin = $v;
-			$this->modifiedColumns[] = CaordcomPeer::TIPFIN;
-		}
-
+    if ($this->tipfin !== $v) {
+        $this->tipfin = $v;
+        $this->modifiedColumns[] = CaordcomPeer::TIPFIN;
+      }
+  
 	} 
 	
 	public function setJustif($v)
 	{
 
-		if ($this->justif !== $v) {
-			$this->justif = $v;
-			$this->modifiedColumns[] = CaordcomPeer::JUSTIF;
-		}
-
+    if ($this->justif !== $v) {
+        $this->justif = $v;
+        $this->modifiedColumns[] = CaordcomPeer::JUSTIF;
+      }
+  
 	} 
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = CaordcomPeer::REFPRC;
-		}
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = CaordcomPeer::REFPRC;
+      }
+  
+	} 
+	
+	public function setCodmedcom($v)
+	{
 
+    if ($this->codmedcom !== $v) {
+        $this->codmedcom = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CODMEDCOM;
+      }
+  
+	} 
+	
+	public function setCodprocom($v)
+	{
+
+    if ($this->codprocom !== $v) {
+        $this->codprocom = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CODPROCOM;
+      }
+  
+	} 
+	
+	public function setCodpai($v)
+	{
+
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CODPAI;
+      }
+  
+	} 
+	
+	public function setCodedo($v)
+	{
+
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CODEDO;
+      }
+  
+	} 
+	
+	public function setCodmun($v)
+	{
+
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = CaordcomPeer::CODMUN;
+      }
+  
+	} 
+	
+	public function setAplart($v)
+	{
+
+    if ($this->aplart !== $v) {
+        $this->aplart = $v;
+        $this->modifiedColumns[] = CaordcomPeer::APLART;
+      }
+  
+	} 
+	
+	public function setAplart6($v)
+	{
+
+    if ($this->aplart6 !== $v) {
+        $this->aplart6 = $v;
+        $this->modifiedColumns[] = CaordcomPeer::APLART6;
+      }
+  
+	} 
+	
+	public function setNumsigecof($v)
+	{
+
+    if ($this->numsigecof !== $v) {
+        $this->numsigecof = $v;
+        $this->modifiedColumns[] = CaordcomPeer::NUMSIGECOF;
+      }
+  
+	} 
+	
+	public function setFecsigecof($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsigecof] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsigecof !== $ts) {
+      $this->fecsigecof = $ts;
+      $this->modifiedColumns[] = CaordcomPeer::FECSIGECOF;
+    }
+
+	} 
+	
+	public function setExpsigecof($v)
+	{
+
+    if ($this->expsigecof !== $v) {
+        $this->expsigecof = $v;
+        $this->modifiedColumns[] = CaordcomPeer::EXPSIGECOF;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaordcomPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaordcomPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->ordcom = $rs->getString($startcol + 0);
+      $this->ordcom = $rs->getString($startcol + 0);
 
-			$this->fecord = $rs->getDate($startcol + 1, null);
+      $this->fecord = $rs->getDate($startcol + 1, null);
 
-			$this->codpro = $rs->getString($startcol + 2);
+      $this->codpro = $rs->getString($startcol + 2);
 
-			$this->desord = $rs->getString($startcol + 3);
+      $this->desord = $rs->getString($startcol + 3);
 
-			$this->crecon = $rs->getString($startcol + 4);
+      $this->crecon = $rs->getString($startcol + 4);
 
-			$this->plaent = $rs->getString($startcol + 5);
+      $this->plaent = $rs->getString($startcol + 5);
 
-			$this->tiecan = $rs->getString($startcol + 6);
+      $this->tiecan = $rs->getString($startcol + 6);
 
-			$this->monord = $rs->getFloat($startcol + 7);
+      $this->monord = $rs->getFloat($startcol + 7);
 
-			$this->dtoord = $rs->getFloat($startcol + 8);
+      $this->dtoord = $rs->getFloat($startcol + 8);
 
-			$this->refcom = $rs->getString($startcol + 9);
+      $this->refcom = $rs->getString($startcol + 9);
 
-			$this->staord = $rs->getString($startcol + 10);
+      $this->staord = $rs->getString($startcol + 10);
 
-			$this->afepre = $rs->getString($startcol + 11);
+      $this->afepre = $rs->getString($startcol + 11);
 
-			$this->conpag = $rs->getString($startcol + 12);
+      $this->conpag = $rs->getString($startcol + 12);
 
-			$this->forent = $rs->getString($startcol + 13);
+      $this->forent = $rs->getString($startcol + 13);
 
-			$this->fecanu = $rs->getDate($startcol + 14, null);
+      $this->fecanu = $rs->getDate($startcol + 14, null);
 
-			$this->tipmon = $rs->getString($startcol + 15);
+      $this->tipmon = $rs->getString($startcol + 15);
 
-			$this->valmon = $rs->getFloat($startcol + 16);
+      $this->valmon = $rs->getFloat($startcol + 16);
 
-			$this->tipcom = $rs->getString($startcol + 17);
+      $this->tipcom = $rs->getString($startcol + 17);
 
-			$this->tipord = $rs->getString($startcol + 18);
+      $this->tipord = $rs->getString($startcol + 18);
 
-			$this->tipo = $rs->getString($startcol + 19);
+      $this->tipo = $rs->getString($startcol + 19);
 
-			$this->coduni = $rs->getString($startcol + 20);
+      $this->coduni = $rs->getString($startcol + 20);
 
-			$this->codemp = $rs->getString($startcol + 21);
+      $this->codemp = $rs->getString($startcol + 21);
 
-			$this->notord = $rs->getString($startcol + 22);
+      $this->notord = $rs->getString($startcol + 22);
 
-			$this->tipdoc = $rs->getString($startcol + 23);
+      $this->tipdoc = $rs->getString($startcol + 23);
 
-			$this->tippro = $rs->getString($startcol + 24);
+      $this->tippro = $rs->getString($startcol + 24);
 
-			$this->afepro = $rs->getString($startcol + 25);
+      $this->afepro = $rs->getString($startcol + 25);
 
-			$this->doccom = $rs->getString($startcol + 26);
+      $this->doccom = $rs->getString($startcol + 26);
 
-			$this->refsol = $rs->getString($startcol + 27);
+      $this->refsol = $rs->getString($startcol + 27);
 
-			$this->tipfin = $rs->getString($startcol + 28);
+      $this->tipfin = $rs->getString($startcol + 28);
 
-			$this->justif = $rs->getString($startcol + 29);
+      $this->justif = $rs->getString($startcol + 29);
 
-			$this->refprc = $rs->getString($startcol + 30);
+      $this->refprc = $rs->getString($startcol + 30);
 
-			$this->id = $rs->getInt($startcol + 31);
+      $this->codmedcom = $rs->getString($startcol + 31);
 
-			$this->resetModified();
+      $this->codprocom = $rs->getString($startcol + 32);
 
-			$this->setNew(false);
+      $this->codpai = $rs->getString($startcol + 33);
 
-						return $startcol + 32; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caordcom object", $e);
-		}
-	}
+      $this->codedo = $rs->getString($startcol + 34);
+
+      $this->codmun = $rs->getString($startcol + 35);
+
+      $this->aplart = $rs->getString($startcol + 36);
+
+      $this->aplart6 = $rs->getString($startcol + 37);
+
+      $this->numsigecof = $rs->getString($startcol + 38);
+
+      $this->fecsigecof = $rs->getDate($startcol + 39, null);
+
+      $this->expsigecof = $rs->getString($startcol + 40);
+
+      $this->id = $rs->getInt($startcol + 41);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 42; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caordcom object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -836,6 +1140,7 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaordcomPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaordcomPeer::doUpdate($this, $con);
@@ -995,6 +1300,36 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				return $this->getRefprc();
 				break;
 			case 31:
+				return $this->getCodmedcom();
+				break;
+			case 32:
+				return $this->getCodprocom();
+				break;
+			case 33:
+				return $this->getCodpai();
+				break;
+			case 34:
+				return $this->getCodedo();
+				break;
+			case 35:
+				return $this->getCodmun();
+				break;
+			case 36:
+				return $this->getAplart();
+				break;
+			case 37:
+				return $this->getAplart6();
+				break;
+			case 38:
+				return $this->getNumsigecof();
+				break;
+			case 39:
+				return $this->getFecsigecof();
+				break;
+			case 40:
+				return $this->getExpsigecof();
+				break;
+			case 41:
 				return $this->getId();
 				break;
 			default:
@@ -1038,7 +1373,17 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 			$keys[28] => $this->getTipfin(),
 			$keys[29] => $this->getJustif(),
 			$keys[30] => $this->getRefprc(),
-			$keys[31] => $this->getId(),
+			$keys[31] => $this->getCodmedcom(),
+			$keys[32] => $this->getCodprocom(),
+			$keys[33] => $this->getCodpai(),
+			$keys[34] => $this->getCodedo(),
+			$keys[35] => $this->getCodmun(),
+			$keys[36] => $this->getAplart(),
+			$keys[37] => $this->getAplart6(),
+			$keys[38] => $this->getNumsigecof(),
+			$keys[39] => $this->getFecsigecof(),
+			$keys[40] => $this->getExpsigecof(),
+			$keys[41] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1148,6 +1493,36 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 				$this->setRefprc($value);
 				break;
 			case 31:
+				$this->setCodmedcom($value);
+				break;
+			case 32:
+				$this->setCodprocom($value);
+				break;
+			case 33:
+				$this->setCodpai($value);
+				break;
+			case 34:
+				$this->setCodedo($value);
+				break;
+			case 35:
+				$this->setCodmun($value);
+				break;
+			case 36:
+				$this->setAplart($value);
+				break;
+			case 37:
+				$this->setAplart6($value);
+				break;
+			case 38:
+				$this->setNumsigecof($value);
+				break;
+			case 39:
+				$this->setFecsigecof($value);
+				break;
+			case 40:
+				$this->setExpsigecof($value);
+				break;
+			case 41:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1188,7 +1563,17 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[28], $arr)) $this->setTipfin($arr[$keys[28]]);
 		if (array_key_exists($keys[29], $arr)) $this->setJustif($arr[$keys[29]]);
 		if (array_key_exists($keys[30], $arr)) $this->setRefprc($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setId($arr[$keys[31]]);
+		if (array_key_exists($keys[31], $arr)) $this->setCodmedcom($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setCodprocom($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setCodpai($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setCodedo($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setCodmun($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setAplart($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setAplart6($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setNumsigecof($arr[$keys[38]]);
+		if (array_key_exists($keys[39], $arr)) $this->setFecsigecof($arr[$keys[39]]);
+		if (array_key_exists($keys[40], $arr)) $this->setExpsigecof($arr[$keys[40]]);
+		if (array_key_exists($keys[41], $arr)) $this->setId($arr[$keys[41]]);
 	}
 
 	
@@ -1227,6 +1612,16 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaordcomPeer::TIPFIN)) $criteria->add(CaordcomPeer::TIPFIN, $this->tipfin);
 		if ($this->isColumnModified(CaordcomPeer::JUSTIF)) $criteria->add(CaordcomPeer::JUSTIF, $this->justif);
 		if ($this->isColumnModified(CaordcomPeer::REFPRC)) $criteria->add(CaordcomPeer::REFPRC, $this->refprc);
+		if ($this->isColumnModified(CaordcomPeer::CODMEDCOM)) $criteria->add(CaordcomPeer::CODMEDCOM, $this->codmedcom);
+		if ($this->isColumnModified(CaordcomPeer::CODPROCOM)) $criteria->add(CaordcomPeer::CODPROCOM, $this->codprocom);
+		if ($this->isColumnModified(CaordcomPeer::CODPAI)) $criteria->add(CaordcomPeer::CODPAI, $this->codpai);
+		if ($this->isColumnModified(CaordcomPeer::CODEDO)) $criteria->add(CaordcomPeer::CODEDO, $this->codedo);
+		if ($this->isColumnModified(CaordcomPeer::CODMUN)) $criteria->add(CaordcomPeer::CODMUN, $this->codmun);
+		if ($this->isColumnModified(CaordcomPeer::APLART)) $criteria->add(CaordcomPeer::APLART, $this->aplart);
+		if ($this->isColumnModified(CaordcomPeer::APLART6)) $criteria->add(CaordcomPeer::APLART6, $this->aplart6);
+		if ($this->isColumnModified(CaordcomPeer::NUMSIGECOF)) $criteria->add(CaordcomPeer::NUMSIGECOF, $this->numsigecof);
+		if ($this->isColumnModified(CaordcomPeer::FECSIGECOF)) $criteria->add(CaordcomPeer::FECSIGECOF, $this->fecsigecof);
+		if ($this->isColumnModified(CaordcomPeer::EXPSIGECOF)) $criteria->add(CaordcomPeer::EXPSIGECOF, $this->expsigecof);
 		if ($this->isColumnModified(CaordcomPeer::ID)) $criteria->add(CaordcomPeer::ID, $this->id);
 
 		return $criteria;
@@ -1319,6 +1714,26 @@ abstract class BaseCaordcom extends BaseObject  implements Persistent {
 		$copyObj->setJustif($this->justif);
 
 		$copyObj->setRefprc($this->refprc);
+
+		$copyObj->setCodmedcom($this->codmedcom);
+
+		$copyObj->setCodprocom($this->codprocom);
+
+		$copyObj->setCodpai($this->codpai);
+
+		$copyObj->setCodedo($this->codedo);
+
+		$copyObj->setCodmun($this->codmun);
+
+		$copyObj->setAplart($this->aplart);
+
+		$copyObj->setAplart6($this->aplart6);
+
+		$copyObj->setNumsigecof($this->numsigecof);
+
+		$copyObj->setFecsigecof($this->fecsigecof);
+
+		$copyObj->setExpsigecof($this->expsigecof);
 
 
 		$copyObj->setNew(true);

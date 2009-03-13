@@ -1,44 +1,46 @@
 <?php
 
 
-	
+
 class NpperxdisMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpperxdisMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpperxdisMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npperxdis');
 		$tMap->setPhpName('Npperxdis');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npperxdis_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, false, 16);
 
-		$tMap->addColumn('PERINI', 'Perini', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PERINI', 'Perini', 'double', CreoleTypes::NUMERIC, false, 4);
 
-		$tMap->addColumn('PERFIN', 'Perfin', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PERFIN', 'Perfin', 'double', CreoleTypes::NUMERIC, false, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

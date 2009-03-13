@@ -29,94 +29,120 @@ abstract class BaseFctasban extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTasano()
-	{
+  
+  public function getTasano()
+  {
 
-		return $this->tasano; 		
-	}
-	
-	public function getTaspor()
-	{
+    return trim($this->tasano);
 
-		return number_format($this->taspor,2,',','.');
-		
-	}
-	
-	public function getTasmes()
-	{
+  }
+  
+  public function getTaspor($val=false)
+  {
 
-		return number_format($this->tasmes,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->taspor,2,',','.');
+    else return $this->taspor;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTasmes($val=false)
+  {
+
+    if($val) return number_format($this->tasmes,2,',','.');
+    else return $this->tasmes;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTasano($v)
 	{
 
-		if ($this->tasano !== $v) {
-			$this->tasano = $v;
-			$this->modifiedColumns[] = FctasbanPeer::TASANO;
-		}
-
+    if ($this->tasano !== $v) {
+        $this->tasano = $v;
+        $this->modifiedColumns[] = FctasbanPeer::TASANO;
+      }
+  
 	} 
 	
 	public function setTaspor($v)
 	{
 
-		if ($this->taspor !== $v) {
-			$this->taspor = $v;
-			$this->modifiedColumns[] = FctasbanPeer::TASPOR;
-		}
-
+    if ($this->taspor !== $v) {
+        $this->taspor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FctasbanPeer::TASPOR;
+      }
+  
 	} 
 	
 	public function setTasmes($v)
 	{
 
-		if ($this->tasmes !== $v) {
-			$this->tasmes = $v;
-			$this->modifiedColumns[] = FctasbanPeer::TASMES;
-		}
-
+    if ($this->tasmes !== $v) {
+        $this->tasmes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FctasbanPeer::TASMES;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FctasbanPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FctasbanPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tasano = $rs->getString($startcol + 0);
+      $this->tasano = $rs->getString($startcol + 0);
 
-			$this->taspor = $rs->getFloat($startcol + 1);
+      $this->taspor = $rs->getFloat($startcol + 1);
 
-			$this->tasmes = $rs->getFloat($startcol + 2);
+      $this->tasmes = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fctasban object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fctasban object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -173,6 +199,7 @@ abstract class BaseFctasban extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FctasbanPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FctasbanPeer::doUpdate($this, $con);

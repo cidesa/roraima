@@ -3,97 +3,87 @@
 /**
  * Subclass for representing a row from the 'ocregval' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class Ocregval extends BaseOcregval
 {
-	private $codobr;
-	private $codpro;
-	private $tipcon;
-	private $gasree2;
-	private $moncon;
-	
-	public function getDesobr()
-	  {  
-	  	if ($this->datosContrato())  
-	  	{
-	  	  $obra=$this->codobr;
-	  	  $c = new Criteria();
-	  	  $c->add(OcregobrPeer::CODOBR,$obra);
-	  	  $descripcion = OcregobrPeer::doSelectone($c);
-		  if ($descripcion)
-		  	return $descripcion->getDesobr();
-		  else 
-		    return 'No encontrado';  
-	  	}	  	
-	  }
-	  
-	public function getNompro()
-	  {  
-	  	if ($this->datosContrato())  
-	  	{
-	  	  $proveedor=$this->codpro;
-	  	  $c = new Criteria();
-	  	  $c->add(CaproveePeer::CODPRO,$proveedor);
-	  	  $nompro = CaproveePeer::doSelectone($c);
-		  if ($nompro)
-		  	return $nompro->getNompro();
-		  else 
-		    return 'No encontrado';  
-	  	}	  	 
-	  }	 
+  protected $totiva='0,00';
+  protected $totsiniva='0,00';
+  protected $amortant='0,00';
+  protected $valpag='0,00';
+  protected $montotcon='0,00';
+  protected $monantic='0,00';
+  protected $salantic='0,00';
+  protected $tieneant='';
+  protected $codtipcon="";
 
-	public function getTipcon()
-	  {  
-	    if ($this->datosContrato())  
-		  {
-		    return $this->tipcon;
-		  }		   	
-	   }	
 
-	public function getGasree2()
-	  {  
-		if ($this->datosContrato())  
-		  {
-			return $this->gasree2;
-		  }		  
-	  }	
+  public function getCodobr(){
 
-	public function getMoncon()
-	  {  
-		if ($this->datosContrato())  
-		  {
-			return $this->moncon;
-		  }		  		  	
-	   }		   
-  
-  public function datosContrato()
+    return Herramientas::getX('Codcon','Ocregcon','Codobr',self::getCodcon());
+
+  }
+
+  public function getCodtipcon(){
+
+    return Herramientas::getX('Codcon','Ocregcon','Tipcon',self::getCodcon());
+
+  }
+
+  public function getCodpro(){
+
+    return Herramientas::getX('Codcon','Ocregcon','Codpro',self::getCodcon());
+
+  }
+
+  public function getDesobr(){
+
+    return Herramientas::getX('Codobr','Ocregobr','Desobr',self::getCodobr());
+
+  }
+
+  public function getNompro(){
+
+    return Herramientas::getX('Codpro','Caprovee','Nompro',self::getCodpro());
+
+  }
+
+  public function getMoncon(){
+    if (self::getCodobr())
+    {
+      $var=Herramientas::getX('Codobr','Ocregobr','Monobr',self::getCodobr());
+    }else { $var='0,00';}
+
+    return $var;
+
+  }
+
+  public function getDestipval(){
+
+    return Herramientas::getX('Codtipval','Octipval','Destipval',self::getCodtipval());
+
+  }
+
+  public function getTotsiniva()
   {
-  	  $c = new Criteria; 
-  	  $c->addJoin(OcregconPeer::CODCON,OcregvalPeer::CODCON); 	 
-  	  $c->add(OcregconPeer::CODCON,self::getCodcon());
-  	  $this->nombre = OcregconPeer::doSelect($c);
-  	  if ($this->nombre)
-	  	{
-	  		$this->codobr = $this->nombre[0]->getCodobr();
-	  	    $this->codpro = $this->nombre[0]->getCodpro();
-	  	    $this->tipcon = $this->nombre[0]->getTipcon();
-	  	    $this->gasree2 = $this->nombre[0]->getGasree();
-	  	    $this->moncon = $this->nombre[0]->getMoncon();
-	  	    return true;
-	  	}
-	  	else
-	  	{
-	  		$this->codobr = 'No encontrado';
-	  	    $this->codpro = 'No encontrado';
-	  	    $this->tipcon = 'No encontrado';
-	  	    $this->gasree = 'No encontrado';
-	  	    $this->moncon = 'No encontrado';
-	  	    return false;
-	  	}
-	  	
-  }	
+    if (self::getSubtot()!=0)
+    {
+    	$siniva=number_format(self::getSubtot(),2,',','.');
+    }else $siniva='0,00';
+
+    return $siniva;
+  }
+
+  public function getMontotcon()
+  {
+    if (self::getMoncon()!=0)
+    {
+    	$stotcon=number_format(self::getMoncon(),2,',','.');
+    }else $totcon='0,00';
+
+    return $totcon;
+  }
 }
 

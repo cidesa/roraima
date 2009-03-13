@@ -9,23 +9,47 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 
 
 	
-	protected $fecrev;
+	protected $codact;
 
 
 	
-	protected $monmuerev;
+	protected $codmue;
 
 
 	
-	protected $moninmrev;
+	protected $nroseginm;
 
 
 	
-	protected $monsemrev;
+	protected $fecseginm;
 
 
 	
-	protected $monimnrev;
+	protected $nomseginm;
+
+
+	
+	protected $cobseginm;
+
+
+	
+	protected $monseginm;
+
+
+	
+	protected $fecsegven;
+
+
+	
+	protected $proseginm;
+
+
+	
+	protected $obsseginm;
+
+
+	
+	protected $staseginm;
 
 
 	
@@ -37,155 +61,315 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
+  
+  public function getCodact()
+  {
+
+    return trim($this->codact);
+
+  }
+  
+  public function getCodmue()
+  {
+
+    return trim($this->codmue);
+
+  }
+  
+  public function getNroseginm()
+  {
+
+    return trim($this->nroseginm);
+
+  }
+  
+  public function getFecseginm($format = 'Y-m-d')
+  {
+
+    if ($this->fecseginm === null || $this->fecseginm === '') {
+      return null;
+    } elseif (!is_int($this->fecseginm)) {
+            $ts = adodb_strtotime($this->fecseginm);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecseginm] as date/time value: " . var_export($this->fecseginm, true));
+      }
+    } else {
+      $ts = $this->fecseginm;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getNomseginm()
+  {
+
+    return trim($this->nomseginm);
+
+  }
+  
+  public function getCobseginm()
+  {
+
+    return trim($this->cobseginm);
+
+  }
+  
+  public function getMonseginm($val=false)
+  {
+
+    if($val) return number_format($this->monseginm,2,',','.');
+    else return $this->monseginm;
+
+  }
+  
+  public function getFecsegven($format = 'Y-m-d')
+  {
+
+    if ($this->fecsegven === null || $this->fecsegven === '') {
+      return null;
+    } elseif (!is_int($this->fecsegven)) {
+            $ts = adodb_strtotime($this->fecsegven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsegven] as date/time value: " . var_export($this->fecsegven, true));
+      }
+    } else {
+      $ts = $this->fecsegven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getProseginm()
+  {
+
+    return trim($this->proseginm);
+
+  }
+  
+  public function getObsseginm()
+  {
+
+    return trim($this->obsseginm);
+
+  }
+  
+  public function getStaseginm()
+  {
+
+    return trim($this->staseginm);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
-	public function getFecrev($format = 'Y-m-d')
+	public function setCodact($v)
 	{
 
-		if ($this->fecrev === null || $this->fecrev === '') {
-			return null;
-		} elseif (!is_int($this->fecrev)) {
-						$ts = strtotime($this->fecrev);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrev] as date/time value: " . var_export($this->fecrev, true));
-			}
-		} else {
-			$ts = $this->fecrev;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BnrevactPeer::CODACT;
+      }
+  
+	} 
 	
-	public function getMonmuerev()
+	public function setCodmue($v)
 	{
 
-		return number_format($this->monmuerev,2,',','.');
-		
-	}
+    if ($this->codmue !== $v) {
+        $this->codmue = $v;
+        $this->modifiedColumns[] = BnrevactPeer::CODMUE;
+      }
+  
+	} 
 	
-	public function getMoninmrev()
+	public function setNroseginm($v)
 	{
 
-		return number_format($this->moninmrev,2,',','.');
-		
-	}
+    if ($this->nroseginm !== $v) {
+        $this->nroseginm = $v;
+        $this->modifiedColumns[] = BnrevactPeer::NROSEGINM;
+      }
+  
+	} 
 	
-	public function getMonsemrev()
+	public function setFecseginm($v)
 	{
 
-		return number_format($this->monsemrev,2,',','.');
-		
-	}
-	
-	public function getMonimnrev()
-	{
-
-		return number_format($this->monimnrev,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
-
-		return $this->id; 		
-	}
-	
-	public function setFecrev($v)
-	{
-
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrev] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrev !== $ts) {
-			$this->fecrev = $ts;
-			$this->modifiedColumns[] = BnrevactPeer::FECREV;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecseginm] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecseginm !== $ts) {
+      $this->fecseginm = $ts;
+      $this->modifiedColumns[] = BnrevactPeer::FECSEGINM;
+    }
 
 	} 
 	
-	public function setMonmuerev($v)
+	public function setNomseginm($v)
 	{
 
-		if ($this->monmuerev !== $v) {
-			$this->monmuerev = $v;
-			$this->modifiedColumns[] = BnrevactPeer::MONMUEREV;
-		}
+    if ($this->nomseginm !== $v) {
+        $this->nomseginm = $v;
+        $this->modifiedColumns[] = BnrevactPeer::NOMSEGINM;
+      }
+  
+	} 
+	
+	public function setCobseginm($v)
+	{
+
+    if ($this->cobseginm !== $v) {
+        $this->cobseginm = $v;
+        $this->modifiedColumns[] = BnrevactPeer::COBSEGINM;
+      }
+  
+	} 
+	
+	public function setMonseginm($v)
+	{
+
+    if ($this->monseginm !== $v) {
+        $this->monseginm = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BnrevactPeer::MONSEGINM;
+      }
+  
+	} 
+	
+	public function setFecsegven($v)
+	{
+
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsegven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsegven !== $ts) {
+      $this->fecsegven = $ts;
+      $this->modifiedColumns[] = BnrevactPeer::FECSEGVEN;
+    }
 
 	} 
 	
-	public function setMoninmrev($v)
+	public function setProseginm($v)
 	{
 
-		if ($this->moninmrev !== $v) {
-			$this->moninmrev = $v;
-			$this->modifiedColumns[] = BnrevactPeer::MONINMREV;
-		}
-
+    if ($this->proseginm !== $v) {
+        $this->proseginm = $v;
+        $this->modifiedColumns[] = BnrevactPeer::PROSEGINM;
+      }
+  
 	} 
 	
-	public function setMonsemrev($v)
+	public function setObsseginm($v)
 	{
 
-		if ($this->monsemrev !== $v) {
-			$this->monsemrev = $v;
-			$this->modifiedColumns[] = BnrevactPeer::MONSEMREV;
-		}
-
+    if ($this->obsseginm !== $v) {
+        $this->obsseginm = $v;
+        $this->modifiedColumns[] = BnrevactPeer::OBSSEGINM;
+      }
+  
 	} 
 	
-	public function setMonimnrev($v)
+	public function setStaseginm($v)
 	{
 
-		if ($this->monimnrev !== $v) {
-			$this->monimnrev = $v;
-			$this->modifiedColumns[] = BnrevactPeer::MONIMNREV;
-		}
-
+    if ($this->staseginm !== $v) {
+        $this->staseginm = $v;
+        $this->modifiedColumns[] = BnrevactPeer::STASEGINM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnrevactPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnrevactPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->fecrev = $rs->getDate($startcol + 0, null);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->monmuerev = $rs->getFloat($startcol + 1);
+      $this->codmue = $rs->getString($startcol + 1);
 
-			$this->moninmrev = $rs->getFloat($startcol + 2);
+      $this->nroseginm = $rs->getString($startcol + 2);
 
-			$this->monsemrev = $rs->getFloat($startcol + 3);
+      $this->fecseginm = $rs->getDate($startcol + 3, null);
 
-			$this->monimnrev = $rs->getFloat($startcol + 4);
+      $this->nomseginm = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->cobseginm = $rs->getString($startcol + 5);
 
-			$this->resetModified();
+      $this->monseginm = $rs->getFloat($startcol + 6);
 
-			$this->setNew(false);
+      $this->fecsegven = $rs->getDate($startcol + 7, null);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnrevact object", $e);
-		}
-	}
+      $this->proseginm = $rs->getString($startcol + 8);
+
+      $this->obsseginm = $rs->getString($startcol + 9);
+
+      $this->staseginm = $rs->getString($startcol + 10);
+
+      $this->id = $rs->getInt($startcol + 11);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnrevact object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -242,6 +426,7 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BnrevactPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnrevactPeer::doUpdate($this, $con);
@@ -308,21 +493,39 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getFecrev();
+				return $this->getCodact();
 				break;
 			case 1:
-				return $this->getMonmuerev();
+				return $this->getCodmue();
 				break;
 			case 2:
-				return $this->getMoninmrev();
+				return $this->getNroseginm();
 				break;
 			case 3:
-				return $this->getMonsemrev();
+				return $this->getFecseginm();
 				break;
 			case 4:
-				return $this->getMonimnrev();
+				return $this->getNomseginm();
 				break;
 			case 5:
+				return $this->getCobseginm();
+				break;
+			case 6:
+				return $this->getMonseginm();
+				break;
+			case 7:
+				return $this->getFecsegven();
+				break;
+			case 8:
+				return $this->getProseginm();
+				break;
+			case 9:
+				return $this->getObsseginm();
+				break;
+			case 10:
+				return $this->getStaseginm();
+				break;
+			case 11:
 				return $this->getId();
 				break;
 			default:
@@ -335,12 +538,18 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 	{
 		$keys = BnrevactPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getFecrev(),
-			$keys[1] => $this->getMonmuerev(),
-			$keys[2] => $this->getMoninmrev(),
-			$keys[3] => $this->getMonsemrev(),
-			$keys[4] => $this->getMonimnrev(),
-			$keys[5] => $this->getId(),
+			$keys[0] => $this->getCodact(),
+			$keys[1] => $this->getCodmue(),
+			$keys[2] => $this->getNroseginm(),
+			$keys[3] => $this->getFecseginm(),
+			$keys[4] => $this->getNomseginm(),
+			$keys[5] => $this->getCobseginm(),
+			$keys[6] => $this->getMonseginm(),
+			$keys[7] => $this->getFecsegven(),
+			$keys[8] => $this->getProseginm(),
+			$keys[9] => $this->getObsseginm(),
+			$keys[10] => $this->getStaseginm(),
+			$keys[11] => $this->getId(),
 		);
 		return $result;
 	}
@@ -357,21 +566,39 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setFecrev($value);
+				$this->setCodact($value);
 				break;
 			case 1:
-				$this->setMonmuerev($value);
+				$this->setCodmue($value);
 				break;
 			case 2:
-				$this->setMoninmrev($value);
+				$this->setNroseginm($value);
 				break;
 			case 3:
-				$this->setMonsemrev($value);
+				$this->setFecseginm($value);
 				break;
 			case 4:
-				$this->setMonimnrev($value);
+				$this->setNomseginm($value);
 				break;
 			case 5:
+				$this->setCobseginm($value);
+				break;
+			case 6:
+				$this->setMonseginm($value);
+				break;
+			case 7:
+				$this->setFecsegven($value);
+				break;
+			case 8:
+				$this->setProseginm($value);
+				break;
+			case 9:
+				$this->setObsseginm($value);
+				break;
+			case 10:
+				$this->setStaseginm($value);
+				break;
+			case 11:
 				$this->setId($value);
 				break;
 		} 	}
@@ -381,12 +608,18 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 	{
 		$keys = BnrevactPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setFecrev($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setMonmuerev($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setMoninmrev($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setMonsemrev($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setMonimnrev($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodact($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCodmue($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setNroseginm($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setFecseginm($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setNomseginm($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCobseginm($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setMonseginm($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFecsegven($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setProseginm($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setObsseginm($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setStaseginm($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
 	}
 
 	
@@ -394,11 +627,17 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(BnrevactPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(BnrevactPeer::FECREV)) $criteria->add(BnrevactPeer::FECREV, $this->fecrev);
-		if ($this->isColumnModified(BnrevactPeer::MONMUEREV)) $criteria->add(BnrevactPeer::MONMUEREV, $this->monmuerev);
-		if ($this->isColumnModified(BnrevactPeer::MONINMREV)) $criteria->add(BnrevactPeer::MONINMREV, $this->moninmrev);
-		if ($this->isColumnModified(BnrevactPeer::MONSEMREV)) $criteria->add(BnrevactPeer::MONSEMREV, $this->monsemrev);
-		if ($this->isColumnModified(BnrevactPeer::MONIMNREV)) $criteria->add(BnrevactPeer::MONIMNREV, $this->monimnrev);
+		if ($this->isColumnModified(BnrevactPeer::CODACT)) $criteria->add(BnrevactPeer::CODACT, $this->codact);
+		if ($this->isColumnModified(BnrevactPeer::CODMUE)) $criteria->add(BnrevactPeer::CODMUE, $this->codmue);
+		if ($this->isColumnModified(BnrevactPeer::NROSEGINM)) $criteria->add(BnrevactPeer::NROSEGINM, $this->nroseginm);
+		if ($this->isColumnModified(BnrevactPeer::FECSEGINM)) $criteria->add(BnrevactPeer::FECSEGINM, $this->fecseginm);
+		if ($this->isColumnModified(BnrevactPeer::NOMSEGINM)) $criteria->add(BnrevactPeer::NOMSEGINM, $this->nomseginm);
+		if ($this->isColumnModified(BnrevactPeer::COBSEGINM)) $criteria->add(BnrevactPeer::COBSEGINM, $this->cobseginm);
+		if ($this->isColumnModified(BnrevactPeer::MONSEGINM)) $criteria->add(BnrevactPeer::MONSEGINM, $this->monseginm);
+		if ($this->isColumnModified(BnrevactPeer::FECSEGVEN)) $criteria->add(BnrevactPeer::FECSEGVEN, $this->fecsegven);
+		if ($this->isColumnModified(BnrevactPeer::PROSEGINM)) $criteria->add(BnrevactPeer::PROSEGINM, $this->proseginm);
+		if ($this->isColumnModified(BnrevactPeer::OBSSEGINM)) $criteria->add(BnrevactPeer::OBSSEGINM, $this->obsseginm);
+		if ($this->isColumnModified(BnrevactPeer::STASEGINM)) $criteria->add(BnrevactPeer::STASEGINM, $this->staseginm);
 		if ($this->isColumnModified(BnrevactPeer::ID)) $criteria->add(BnrevactPeer::ID, $this->id);
 
 		return $criteria;
@@ -430,15 +669,27 @@ abstract class BaseBnrevact extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setFecrev($this->fecrev);
+		$copyObj->setCodact($this->codact);
 
-		$copyObj->setMonmuerev($this->monmuerev);
+		$copyObj->setCodmue($this->codmue);
 
-		$copyObj->setMoninmrev($this->moninmrev);
+		$copyObj->setNroseginm($this->nroseginm);
 
-		$copyObj->setMonsemrev($this->monsemrev);
+		$copyObj->setFecseginm($this->fecseginm);
 
-		$copyObj->setMonimnrev($this->monimnrev);
+		$copyObj->setNomseginm($this->nomseginm);
+
+		$copyObj->setCobseginm($this->cobseginm);
+
+		$copyObj->setMonseginm($this->monseginm);
+
+		$copyObj->setFecsegven($this->fecsegven);
+
+		$copyObj->setProseginm($this->proseginm);
+
+		$copyObj->setObsseginm($this->obsseginm);
+
+		$copyObj->setStaseginm($this->staseginm);
 
 
 		$copyObj->setNew(true);

@@ -1,0 +1,2386 @@
+propel:
+  _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
+  tabla1:
+    #_attributes:
+      #idMethod: native
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    nompre:
+      type: VARCHAR
+      size: 250
+    perpre:
+      type: VARCHAR
+      size: 2
+      required: true
+    anopre:
+      type: VARCHAR
+      size: 4
+      required: true
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monprc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montrn:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monadi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondim:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondis:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    difere:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    status:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla10:
+    #_attributes:
+      #idMethod: native
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcom:
+      type: VARCHAR
+      size: 4
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    anocom:
+      type: VARCHAR
+      size: 4
+    refprc:
+      type: VARCHAR
+      size: 8
+    tipprc:
+      type: VARCHAR
+      size: 4
+    descom:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salcau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacom:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    tipo:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla11:
+    #_attributes:
+      #idMethod: native
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla12:
+    #_attributes:
+      #idMethod: native
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcau:
+      type: VARCHAR
+      size: 4
+      required: true
+    feccau:
+      type: DATE
+      required: true
+    anocau:
+      type: VARCHAR
+      size: 4
+    refcom:
+      type: VARCHAR
+      size: 8
+    tipcom:
+      type: VARCHAR
+      size: 4
+    descau:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacau:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla13:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    refcom:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla14:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    tippag:
+      type: VARCHAR
+      size: 4
+      required: true
+    fecpag:
+      type: DATE
+      required: true
+    anopag:
+      type: VARCHAR
+      size: 4
+    refcau:
+      type: VARCHAR
+      size: 8
+    tipcau:
+      type: VARCHAR
+      size: 4
+    despag:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stapag:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla15:
+    #_attributes:
+      #idMethod: native
+    refaju:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stamov:
+      type: VARCHAR
+      size: 1
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    refpag:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla16:
+    #_attributes:
+      #idMethod: native
+    refaju:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipaju:
+      type: VARCHAR
+      size: 4
+      required: true
+    fecaju:
+      type: DATE
+      required: true
+    anoaju:
+      type: VARCHAR
+      size: 4
+      required: true
+    refere:
+      type: VARCHAR
+      size: 8
+      required: true
+    desaju:
+      type: VARCHAR
+      size: 500
+    desanu:
+      type: VARCHAR
+      size: 250
+    totaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staaju:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    numcom:
+      type: VARCHAR
+      size: 8
+    cuoanu:
+      type: NUMERIC
+      size: 6
+    fecanudes:
+      type: DATE
+    fecanuhas:
+      type: DATE
+    ordpag:
+      type: VARCHAR
+      size: 1
+    fecenvcon:
+      type: DATE
+    fecenvfin:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla17:
+    #_attributes:
+      #idMethod: native
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla18:
+    #_attributes:
+      #idMethod: native
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla19:
+    #_attributes:
+      #idMethod: native
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla2:
+    #_attributes:
+      #idMethod: native
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla20:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    refcom:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla21:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    refcom:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla22:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    refcom:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla23:
+    #_attributes:
+      #idMethod: native
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    nompre:
+      type: VARCHAR
+      size: 250
+      required: true
+    codcta:
+      type: VARCHAR
+      size: 32
+    stacod:
+      type: VARCHAR
+      size: 1
+    coduni:
+      type: VARCHAR
+      size: 4
+    estatus:
+      type: VARCHAR
+      size: 1
+    codtip:
+      type: VARCHAR
+      size: 32
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla24:
+    #_attributes:
+      #idMethod: native
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    periodos:
+      type: NUMERIC
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla25:
+    #_attributes:
+      #idMethod: native
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    nompre:
+      type: VARCHAR
+      size: 250
+    perpre:
+      type: VARCHAR
+      size: 2
+      required: true
+    anopre:
+      type: VARCHAR
+      size: 4
+      required: true
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monprc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    montrn:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monadi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondim:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    mondis:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    difere:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    status:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla26:
+    #_attributes:
+      #idMethod: native
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla27:
+    #_attributes:
+      #idMethod: native
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla28:
+    #_attributes:
+      #idMethod: native
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla29:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    refcom:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla3:
+    #_attributes:
+      #idMethod: native
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla30:
+    #_attributes:
+      #idMethod: native
+    refaju:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stamov:
+      type: VARCHAR
+      size: 1
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    refpag:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla31:
+    #_attributes:
+      #idMethod: native
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcau:
+      type: VARCHAR
+      size: 4
+      required: true
+    feccau:
+      type: DATE
+      required: true
+    anocau:
+      type: VARCHAR
+      size: 4
+    refcom:
+      type: VARCHAR
+      size: 8
+    tipcom:
+      type: VARCHAR
+      size: 4
+    descau:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacau:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla32:
+    #_attributes:
+      #idMethod: native
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcom:
+      type: VARCHAR
+      size: 4
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    anocom:
+      type: VARCHAR
+      size: 4
+    refprc:
+      type: VARCHAR
+      size: 8
+    tipprc:
+      type: VARCHAR
+      size: 4
+    descom:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salcau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacom:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    tipo:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla33:
+    #_attributes:
+      #idMethod: native
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcom:
+      type: VARCHAR
+      size: 4
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    anocom:
+      type: VARCHAR
+      size: 4
+    refprc:
+      type: VARCHAR
+      size: 8
+    tipprc:
+      type: VARCHAR
+      size: 4
+    descom:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salcau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacom:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    tipo:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla34:
+    #_attributes:
+      #idMethod: native
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcom:
+      type: VARCHAR
+      size: 4
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    anocom:
+      type: VARCHAR
+      size: 4
+    refprc:
+      type: VARCHAR
+      size: 8
+    tipprc:
+      type: VARCHAR
+      size: 4
+    descom:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salcau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacom:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    tipo:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla35:
+    #_attributes:
+      #idMethod: native
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipprc:
+      type: VARCHAR
+      size: 4
+      required: true
+    fecprc:
+      type: DATE
+      required: true
+    anoprc:
+      type: VARCHAR
+      size: 4
+    desprc:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    monprc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salcom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salcau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staprc:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    refsol:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla36:
+    #_attributes:
+      #idMethod: native
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcom:
+      type: VARCHAR
+      size: 4
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    anocom:
+      type: VARCHAR
+      size: 4
+    refprc:
+      type: VARCHAR
+      size: 8
+    tipprc:
+      type: VARCHAR
+      size: 4
+    descom:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salcau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacom:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    tipo:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla37:
+    #_attributes:
+      #idMethod: native
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcau:
+      type: VARCHAR
+      size: 4
+      required: true
+    feccau:
+      type: DATE
+      required: true
+    anocau:
+      type: VARCHAR
+      size: 4
+    refcom:
+      type: VARCHAR
+      size: 8
+    tipcom:
+      type: VARCHAR
+      size: 4
+    descau:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacau:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla38:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    tippag:
+      type: VARCHAR
+      size: 4
+      required: true
+    fecpag:
+      type: DATE
+      required: true
+    anopag:
+      type: VARCHAR
+      size: 4
+    refcau:
+      type: VARCHAR
+      size: 8
+    tipcau:
+      type: VARCHAR
+      size: 4
+    despag:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stapag:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla39:
+    #_attributes:
+      #idMethod: native
+    refaju:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipaju:
+      type: VARCHAR
+      size: 4
+      required: true
+    fecaju:
+      type: DATE
+      required: true
+    anoaju:
+      type: VARCHAR
+      size: 4
+      required: true
+    refere:
+      type: VARCHAR
+      size: 8
+      required: true
+    desaju:
+      type: VARCHAR
+      size: 500
+    desanu:
+      type: VARCHAR
+      size: 250
+    totaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staaju:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    numcom:
+      type: VARCHAR
+      size: 8
+    cuoanu:
+      type: NUMERIC
+      size: 6
+    fecanudes:
+      type: DATE
+    fecanuhas:
+      type: DATE
+    ordpag:
+      type: VARCHAR
+      size: 1
+    fecenvcon:
+      type: DATE
+    fecenvfin:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla4:
+    #_attributes:
+      #idMethod: native
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla40:
+    #_attributes:
+      #idMethod: native
+    numord:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipcau:
+      type: VARCHAR
+      size: 4
+      required: true
+    fecemi:
+      type: DATE
+      required: true
+    cedrif:
+      type: VARCHAR
+      size: 15
+      required: true
+    nomben:
+      type: VARCHAR
+      size: 250
+      required: true
+    monord:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    desord:
+      type: VARCHAR
+      size: 1000
+      required: true
+    mondes:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monret:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    numche:
+      type: VARCHAR
+      size: 20
+    ctaban:
+      type: VARCHAR
+      size: 20
+    ctapag:
+      type: VARCHAR
+      size: 32
+    numcom:
+      type: VARCHAR
+      size: 8
+    status:
+      type: VARCHAR
+      size: 1
+      required: true
+    coduni:
+      type: VARCHAR
+      size: 30
+    fecenvcon:
+      type: DATE
+    fecenvfin:
+      type: DATE
+    ctapagfin:
+      type: VARCHAR
+      size: 32
+    obsord:
+      type: VARCHAR
+      size: 250
+    fecven:
+      type: DATE
+    fecanu:
+      type: DATE
+    desanu:
+      type: VARCHAR
+      size: 250
+    monpag:
+      type: NUMERIC
+      size: 16
+      scale: 2
+    aproba:
+      type: VARCHAR
+      size: 1
+    nombensus:
+      type: VARCHAR
+      size: 250
+    fecrecfin:
+      type: DATE
+    anopre:
+      type: VARCHAR
+      size: 4
+    fecpag:
+      type: DATE
+    numtiq:
+      type: VARCHAR
+      size: 8
+    peraut:
+      type: VARCHAR
+      size: 500
+    cedaut:
+      type: VARCHAR
+      size: 100
+    nomper2:
+      type: VARCHAR
+      size: 50
+    nomper1:
+      type: VARCHAR
+      size: 50
+    horcon:
+      type: VARCHAR
+      size: 10
+    feccon:
+      type: DATE
+    nomcat:
+      type: VARCHAR
+      size: 250
+    numfac:
+      type: VARCHAR
+      size: 20
+    numconfac:
+      type: VARCHAR
+      size: 20
+    numcorfac:
+      type: VARCHAR
+      size: 20
+    fechafac:
+      type: DATE
+    fecfac:
+      type: DATE
+    tipfin:
+      type: VARCHAR
+      size: 4
+    comret:
+      type: VARCHAR
+      size: 20
+    feccomret:
+      type: DATE
+    comretislr:
+      type: VARCHAR
+      size: 20
+    feccomretislr:
+      type: DATE
+    comretltf:
+      type: VARCHAR
+      size: 20
+    feccomretltf:
+      type: DATE
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla41:
+    #_attributes:
+      #idMethod: native
+    numcue:
+      type: VARCHAR
+      size: 20
+      required: true
+    reflib:
+      type: VARCHAR
+      size: 20
+      required: true
+    feclib:
+      type: DATE
+      required: true
+    tipmov:
+      type: VARCHAR
+      size: 4
+      required: true
+    deslib:
+      type: VARCHAR
+      size: 4000
+      required: true
+    monmov:
+      type: NUMERIC
+      size: 14
+      scale: 2
+      required: true
+    codcta:
+      type: VARCHAR
+      size: 32
+    numcom:
+      type: VARCHAR
+      size: 8
+    feccom:
+      type: DATE
+    status:
+      type: VARCHAR
+      size: 1
+      required: true
+    stacon:
+      type: VARCHAR
+      size: 1
+      required: true
+    fecing:
+      type: DATE
+    fecanu:
+      type: DATE
+    tipmovpad:
+      type: VARCHAR
+      size: 4
+    reflibpad:
+      type: VARCHAR
+      size: 20
+    transito:
+      type: VARCHAR
+      size: 1
+    numcomadi:
+      type: VARCHAR
+      size: 8
+    feccomadi:
+      type: DATE
+    nombensus:
+      type: VARCHAR
+      size: 250
+    orden:
+      type: NUMERIC
+      size: 14
+    horing:
+      type: VARCHAR
+      size: 12
+    stacon1:
+      type: VARCHAR
+      size: 1
+    motanu:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla42:
+    #_attributes:
+      #idMethod: native
+    numcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    descom:
+      type: VARCHAR
+      size: 250
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stacom:
+      type: VARCHAR
+      size: 1
+      required: true
+    tipcom:
+      type: VARCHAR
+      size: 3
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla43:
+    #_attributes:
+      #idMethod: native
+    numcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    debcre:
+      type: VARCHAR
+      size: 1
+      required: true
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    numasi:
+      type: NUMERIC
+      size: 3
+    refasi:
+      type: VARCHAR
+      size: 8
+    desasi:
+      type: VARCHAR
+      size: 250
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla44:
+    #_attributes:
+      #idMethod: native
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    descta:
+      type: VARCHAR
+      size: 250
+      required: true
+    fecini:
+      type: DATE
+      required: true
+    feccie:
+      type: DATE
+      required: true
+    salant:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    debcre:
+      type: VARCHAR
+      size: 1
+      required: true
+    cargab:
+      type: VARCHAR
+      size: 1
+      required: true
+    salprgper:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salacuper:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salprgperfor:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla45:
+    #_attributes:
+      #idMethod: native
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    fecini:
+      type: DATE
+      required: true
+    feccie:
+      type: DATE
+      required: true
+    pereje:
+      type: VARCHAR
+      size: 2
+      required: true
+    totdeb:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totcre:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salact:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salprgper:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salprgperfor:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla46:
+    #_attributes:
+      #idMethod: native
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    periodos:
+      type: NUMERIC
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla47:
+    #_attributes:
+      #idMethod: native
+    numcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    debcre:
+      type: VARCHAR
+      size: 1
+      required: true
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    numasi:
+      type: NUMERIC
+      size: 3
+    refasi:
+      type: VARCHAR
+      size: 8
+    desasi:
+      type: VARCHAR
+      size: 250
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla48:
+    #_attributes:
+      #idMethod: native
+    numcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    debcre:
+      type: VARCHAR
+      size: 1
+      required: true
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    numasi:
+      type: NUMERIC
+      size: 3
+    refasi:
+      type: VARCHAR
+      size: 8
+    desasi:
+      type: VARCHAR
+      size: 250
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla49:
+    #_attributes:
+      #idMethod: native
+    numcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    debcre:
+      type: VARCHAR
+      size: 1
+      required: true
+    codcta:
+      type: VARCHAR
+      size: 32
+      required: true
+    numasi:
+      type: NUMERIC
+      size: 3
+    refasi:
+      type: VARCHAR
+      size: 8
+    desasi:
+      type: VARCHAR
+      size: 250
+    monasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla5:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    refprc:
+      type: VARCHAR
+      size: 8
+    refcom:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla50:
+    #_attributes:
+      #idMethod: native
+    reftra:
+      type: VARCHAR
+      size: 8
+      required: true
+    fectra:
+      type: DATE
+      required: true
+    anotra:
+      type: VARCHAR
+      size: 4
+    pertra:
+      type: VARCHAR
+      size: 2
+      required: true
+    destra:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 250
+    tottra:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    statra:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    nrodec:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla51:
+    #_attributes:
+      #idMethod: native
+    refadi:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecadi:
+      type: DATE
+      required: true
+    anoadi:
+      type: VARCHAR
+      size: 4
+    desadi:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 250
+    adidis:
+      type: VARCHAR
+      size: 1
+    totadi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staadi:
+      type: VARCHAR
+      size: 1
+    numcom:
+      type: VARCHAR
+      size: 8
+    fecanu:
+      type: DATE
+    peradi:
+      type: VARCHAR
+      size: 2
+    tipgas:
+      type: VARCHAR
+      size: 250
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla52:
+    #_attributes:
+      #idMethod: native
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccau:
+      type: DATE
+      required: true
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla53:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecpag:
+      type: DATE
+      required: true
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccom:
+      type: DATE
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla54:
+    #_attributes:
+      #idMethod: native
+    refpag:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecpag:
+      type: DATE
+      required: true
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    feccau:
+      type: DATE
+      required: true
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla6:
+    #_attributes:
+      #idMethod: native
+    refaju:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    stamov:
+      type: VARCHAR
+      size: 1
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    refcau:
+      type: VARCHAR
+      size: 8
+      required: true
+    refpag:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla7:
+    #_attributes:
+      #idMethod: native
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla8:
+    #_attributes:
+      #idMethod: native
+    refprc:
+      type: VARCHAR
+      size: 8
+      required: true
+    tipprc:
+      type: VARCHAR
+      size: 4
+      required: true
+    fecprc:
+      type: DATE
+      required: true
+    anoprc:
+      type: VARCHAR
+      size: 4
+    desprc:
+      type: VARCHAR
+      size: 250
+    desanu:
+      type: VARCHAR
+      size: 100
+    monprc:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salcom:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salcau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    salaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staprc:
+      type: VARCHAR
+      size: 1
+    fecanu:
+      type: DATE
+    cedrif:
+      type: VARCHAR
+      size: 15
+    refsol:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  tabla9:
+    #_attributes:
+      #idMethod: native
+    refcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    codpre:
+      type: VARCHAR
+      size: 32
+      required: true
+    monimp:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    moncau:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monpag:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monaju:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    staimp:
+      type: VARCHAR
+      size: 1
+    refere:
+      type: VARCHAR
+      size: 8
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

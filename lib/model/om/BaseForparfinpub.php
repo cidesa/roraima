@@ -37,129 +37,157 @@ abstract class BaseForparfinpub extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodorg()
-	{
+  
+  public function getCodorg()
+  {
 
-		return $this->codorg; 		
-	}
-	
-	public function getCuopar()
-	{
+    return trim($this->codorg);
 
-		return number_format($this->cuopar,2,',','.');
-		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getCuopar($val=false)
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodpar()
-	{
+    if($val) return number_format($this->cuopar,2,',','.');
+    else return $this->cuopar;
 
-		return $this->codpar; 		
-	}
-	
-	public function getObserv()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return $this->observ; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codcat);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getObserv()
+  {
+
+    return trim($this->observ);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodorg($v)
 	{
 
-		if ($this->codorg !== $v) {
-			$this->codorg = $v;
-			$this->modifiedColumns[] = ForparfinpubPeer::CODORG;
-		}
-
+    if ($this->codorg !== $v) {
+        $this->codorg = $v;
+        $this->modifiedColumns[] = ForparfinpubPeer::CODORG;
+      }
+  
 	} 
 	
 	public function setCuopar($v)
 	{
 
-		if ($this->cuopar !== $v) {
-			$this->cuopar = $v;
-			$this->modifiedColumns[] = ForparfinpubPeer::CUOPAR;
-		}
-
+    if ($this->cuopar !== $v) {
+        $this->cuopar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForparfinpubPeer::CUOPAR;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = ForparfinpubPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = ForparfinpubPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = ForparfinpubPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = ForparfinpubPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setObserv($v)
 	{
 
-		if ($this->observ !== $v) {
-			$this->observ = $v;
-			$this->modifiedColumns[] = ForparfinpubPeer::OBSERV;
-		}
-
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = ForparfinpubPeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForparfinpubPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForparfinpubPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codorg = $rs->getString($startcol + 0);
+      $this->codorg = $rs->getString($startcol + 0);
 
-			$this->cuopar = $rs->getFloat($startcol + 1);
+      $this->cuopar = $rs->getFloat($startcol + 1);
 
-			$this->codcat = $rs->getString($startcol + 2);
+      $this->codcat = $rs->getString($startcol + 2);
 
-			$this->codpar = $rs->getString($startcol + 3);
+      $this->codpar = $rs->getString($startcol + 3);
 
-			$this->observ = $rs->getString($startcol + 4);
+      $this->observ = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forparfinpub object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forparfinpub object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

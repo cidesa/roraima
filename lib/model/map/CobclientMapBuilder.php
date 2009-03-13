@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class CobclientMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CobclientMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CobclientMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cobclient');
 		$tMap->setPhpName('Cobclient');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('cobclient_SEQ');
 
 		$tMap->addColumn('CODCLI', 'Codcli', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -52,21 +54,21 @@ class CobclientMapBuilder {
 
 		$tMap->addColumn('NACCLI', 'Naccli', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('LIMCRE', 'Limcre', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('LIMCRE', 'Limcre', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, false, 18);
 
 		$tMap->addColumn('REGMER', 'Regmer', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECREG', 'Fecreg', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('TOMREG', 'Tomreg', 'string', CreoleTypes::VARCHAR, false, 15);
 
 		$tMap->addColumn('FOLREG', 'Folreg', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('CAPSUS', 'Capsus', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CAPSUS', 'Capsus', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CAPPAG', 'Cappag', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CAPPAG', 'Cappag', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CIREPLEG', 'Cirepleg', 'string', CreoleTypes::VARCHAR, false, 15);
 
@@ -88,7 +90,7 @@ class CobclientMapBuilder {
 
 		$tMap->addColumn('CODPAI', 'Codpai', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('FECNAC', 'Fecnac', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECNAC', 'Fecnac', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('TIPCLI', 'Tipcli', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -99,6 +101,6 @@ class CobclientMapBuilder {
 		$tMap->addColumn('CODPERMERCON', 'Codpermercon', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

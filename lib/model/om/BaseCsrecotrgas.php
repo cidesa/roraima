@@ -45,167 +45,197 @@ abstract class BaseCsrecotrgas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodprod()
-	{
+  
+  public function getCodprod()
+  {
 
-		return $this->codprod; 		
-	}
-	
-	public function getCodfas()
-	{
+    return trim($this->codprod);
 
-		return $this->codfas; 		
-	}
-	
-	public function getCodgas()
-	{
+  }
+  
+  public function getCodfas()
+  {
 
-		return $this->codgas; 		
-	}
-	
-	public function getCangas()
-	{
+    return trim($this->codfas);
 
-		return number_format($this->cangas,2,',','.');
-		
-	}
-	
-	public function getCostot()
-	{
+  }
+  
+  public function getCodgas()
+  {
 
-		return number_format($this->costot,2,',','.');
-		
-	}
-	
-	public function getNroord()
-	{
+    return trim($this->codgas);
 
-		return $this->nroord; 		
-	}
-	
-	public function getCosgas()
-	{
+  }
+  
+  public function getCangas($val=false)
+  {
 
-		return number_format($this->cosgas,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->cangas,2,',','.');
+    else return $this->cangas;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCostot($val=false)
+  {
+
+    if($val) return number_format($this->costot,2,',','.');
+    else return $this->costot;
+
+  }
+  
+  public function getNroord()
+  {
+
+    return trim($this->nroord);
+
+  }
+  
+  public function getCosgas($val=false)
+  {
+
+    if($val) return number_format($this->cosgas,2,',','.');
+    else return $this->cosgas;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodprod($v)
 	{
 
-		if ($this->codprod !== $v) {
-			$this->codprod = $v;
-			$this->modifiedColumns[] = CsrecotrgasPeer::CODPROD;
-		}
-
+    if ($this->codprod !== $v) {
+        $this->codprod = $v;
+        $this->modifiedColumns[] = CsrecotrgasPeer::CODPROD;
+      }
+  
 	} 
 	
 	public function setCodfas($v)
 	{
 
-		if ($this->codfas !== $v) {
-			$this->codfas = $v;
-			$this->modifiedColumns[] = CsrecotrgasPeer::CODFAS;
-		}
-
+    if ($this->codfas !== $v) {
+        $this->codfas = $v;
+        $this->modifiedColumns[] = CsrecotrgasPeer::CODFAS;
+      }
+  
 	} 
 	
 	public function setCodgas($v)
 	{
 
-		if ($this->codgas !== $v) {
-			$this->codgas = $v;
-			$this->modifiedColumns[] = CsrecotrgasPeer::CODGAS;
-		}
-
+    if ($this->codgas !== $v) {
+        $this->codgas = $v;
+        $this->modifiedColumns[] = CsrecotrgasPeer::CODGAS;
+      }
+  
 	} 
 	
 	public function setCangas($v)
 	{
 
-		if ($this->cangas !== $v) {
-			$this->cangas = $v;
-			$this->modifiedColumns[] = CsrecotrgasPeer::CANGAS;
-		}
-
+    if ($this->cangas !== $v) {
+        $this->cangas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecotrgasPeer::CANGAS;
+      }
+  
 	} 
 	
 	public function setCostot($v)
 	{
 
-		if ($this->costot !== $v) {
-			$this->costot = $v;
-			$this->modifiedColumns[] = CsrecotrgasPeer::COSTOT;
-		}
-
+    if ($this->costot !== $v) {
+        $this->costot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecotrgasPeer::COSTOT;
+      }
+  
 	} 
 	
 	public function setNroord($v)
 	{
 
-		if ($this->nroord !== $v) {
-			$this->nroord = $v;
-			$this->modifiedColumns[] = CsrecotrgasPeer::NROORD;
-		}
-
+    if ($this->nroord !== $v) {
+        $this->nroord = $v;
+        $this->modifiedColumns[] = CsrecotrgasPeer::NROORD;
+      }
+  
 	} 
 	
 	public function setCosgas($v)
 	{
 
-		if ($this->cosgas !== $v) {
-			$this->cosgas = $v;
-			$this->modifiedColumns[] = CsrecotrgasPeer::COSGAS;
-		}
-
+    if ($this->cosgas !== $v) {
+        $this->cosgas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CsrecotrgasPeer::COSGAS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CsrecotrgasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CsrecotrgasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codprod = $rs->getString($startcol + 0);
+      $this->codprod = $rs->getString($startcol + 0);
 
-			$this->codfas = $rs->getString($startcol + 1);
+      $this->codfas = $rs->getString($startcol + 1);
 
-			$this->codgas = $rs->getString($startcol + 2);
+      $this->codgas = $rs->getString($startcol + 2);
 
-			$this->cangas = $rs->getFloat($startcol + 3);
+      $this->cangas = $rs->getFloat($startcol + 3);
 
-			$this->costot = $rs->getFloat($startcol + 4);
+      $this->costot = $rs->getFloat($startcol + 4);
 
-			$this->nroord = $rs->getString($startcol + 5);
+      $this->nroord = $rs->getString($startcol + 5);
 
-			$this->cosgas = $rs->getFloat($startcol + 6);
+      $this->cosgas = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Csrecotrgas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Csrecotrgas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -1,0 +1,27 @@
+methods:
+  post:
+   - "fordefmun{codest}"
+   - "fordefmun{codmun}"
+   - "fordefmun{desmun}"
+
+names:
+  fordefmun{codest}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+
+  fordefmun{codmun}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+
+  fordefmun{desmun}:
+    required:  Yes
+    required_msg: El nombre no puede estar en Blanco
+    validators: Validator_MyString
+
+Validator_MyString:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       80
+        max_error: La descripcion no puede pasar mas de 80 caracteres

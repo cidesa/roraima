@@ -9,4 +9,21 @@
  */ 
 class Forparing extends BaseForparing
 {
+	public function getMontoing($val=false)
+	{
+		return parent::getMontoing(true);
+	}
+	
+	public function getDespar()
+	{
+      return Herramientas::getX('CODPARING','Fordefparing','Nomparing',self::getCodparing());
+	}
+		
+	public function getDesfin()
+	{
+      return Herramientas::getX('CODFIN','Fortipfin','Nomext',self::getCodtipfin());
+	}
+	
+		
+	
 }

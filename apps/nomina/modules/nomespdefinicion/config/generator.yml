@@ -5,12 +5,12 @@ generator:
     theme:            default
     fields:
       codnomesp: { name: Codigo}
-      desnomesp: { name: Descripcion} 
-      fecnomdes: { name: Desde}     
-      fecnomhas: { name: Hasta}     
+      desnomesp: { name: Descripcion}
+      fecnomdes: { name: Desde}
+      fecnomhas: { name: Hasta}
     list:
       title:          Definicion
-      filters:        [codnomesp]
+      filters:        [codnomesp, desnomesp]
       display:        [=codnomesp, desnomesp]
       fields:
         fecnomdes: { params: date_format='dd/MM/yy' }
@@ -25,3 +25,8 @@ generator:
       fields:
         fecnomdes: { params: date_format='dd/MM/yy' }
         fecnomhas: { params: date_format='dd/MM/yy' }
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

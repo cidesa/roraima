@@ -4,12 +4,13 @@ generator:
     model_class:      Bndisinm
     theme:            default
     fields:
-      codact: { name: Código Nivel}
+      codact: { name: Código Catalogo}
       codmue: { name: Código Activo}
       desinm: { name: Descripción}
       nrodisinm: { name: Número de Orden}
       tipdisinm: { name: Tipo}
-      motdisinm: { name: Motivo}      
+      motdisinm: { name: Motivo}
+      desmot:    { name: Descripcion}
       fecdisinm: { name: Fecha}
       fecdevdis: { name: Fecha Devolución}
       mondisinm: { name: Monto}
@@ -18,22 +19,29 @@ generator:
       desubiori: { name: Descripción}
       codubides: { name: Ubicación}
       desubides: { name: Descripción}
-      obsdisinm: { name: Observación}   
-      stadisinm: { name: Estatus}      
+      obsdisinm: { name: Observación}
+      stadisinm: { name: Estatus}
+      vidutil:   { name: Vida Util}
     list:
       title:          Disposición de Inmuebles
-      filters:        [codact]
+      filters:        [codact, codmue, desinm]
       display:        [=codact, codmue, desinm, stadisinm]
       fields:
         fecdisinm: { params: date_format='dd/MM/yy' }
-        fecdevdis: { params: date_format='dd/MM/yy' } 
+        fecdevdis: { params: date_format='dd/MM/yy' }
       object_actions:
         _edit:        ~
         _delete:      ~
-      max_per_page:   5
+      max_per_page:   10
+      sort:  codact
     edit:
       title:          Edición de Disposición de Inmuebles
-      display:        [=codact, codmue, desinm, nrodisinm, tipdisinm, motdisinm, fecdisinm, fecdevdis, mondisinm, detdisinm, codubiori, desubiori, codubides, desubides, obsdisinm, stadisinm]
+      display:       [=codact, codmue, desinm, nrodisinm, tipdisinm, motdisinm, desmot, fecdisinm, fecdevdis, mondisinm, detdisinm, codubiori, desubiori, codubides, desubides, obsdisinm, stadisinm]
+      actions:
+        _list:       ~
+        _save:       ~
+        _create:      ~
+        _delete:     ~
       fields:
         fecdisinm: { params: date_format='dd/MM/yy' }
-        fecdevdis: { params: date_format='dd/MM/yy' } 
+        fecdevdis: { params: date_format='dd/MM/yy' }

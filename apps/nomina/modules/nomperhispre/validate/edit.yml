@@ -1,0 +1,68 @@
+methods:
+  post:
+   - "nphispre{fechispre}"
+   - "nphispre{deshispre}"
+   - "nphispre{monpre}"
+   - "nphispre{saldo}"
+
+
+names:
+
+  nphispre{fechispre}:
+    required:  Yes
+    required_msg: Debe introducir una fecha válida
+    validators: Vfecha_2
+
+
+  nphispre{deshispre}:
+    required:  Yes
+    required_msg: Debe insertar la descripción
+    validators: Vstring_1_255
+
+
+  nphispre{monpre}:
+    required:  Yes
+    required_msg: Debe insertar el monto del prestamo
+    validators: Vdecimal_6
+
+  nphispre{saldo}:
+    required:  No
+    required_msg: Debe ingresar el saldo
+
+
+Vfecha_2:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+
+
+Vstring_1_255:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       255
+        max_error: La descripción no puede pasar mas de 255 caracteres
+
+
+
+Vdecimal_6:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+
+
+
+
+
+
+
+
+
+
+

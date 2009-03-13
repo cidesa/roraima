@@ -8,122 +8,116 @@
   'multipart' => true,
 )) ?>
 
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
+
 <?php echo object_input_hidden_tag($npasicaremp, 'getId') ?>
 
-<fieldset id="sf_fieldset_none" class="">
 
+<fieldset>
+<legend>Tipo de N&oacute;mina</legend>
 <div class="form-row">
-  <?php echo label_for('npasicaremp[codnom]', __($labels['npasicaremp{codnom}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{codnom}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{codnom}')): ?>
-    <?php echo form_error('npasicaremp{codnom}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+
+ <strong>C&oacute;digo</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
   <?php $value = object_input_tag($npasicaremp, 'getCodnom', array (
-  'size' => 20,
-  'control_name' => 'npasicaremp[codnom]',
+  'size' => 10,
+  'control_name' => 'codigonomina',
+  'maxlength' => '12,',
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomnommovnomemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=codigonomina&cajtexcom=nombrenomina&codigo='+this.value"
+        ))
+
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npdefmov_nomnommovnomcon/clase/Npnomina/frame/sf_admin_edit_form/obj1/codigonomina/obj2/nombrenomina/campo1/codnom/campo2/nomnom/param1/")?>
+
+<?php $value = object_input_tag($npasicaremp, 'getNomnom', array (
+  'size' => 50,
+  'control_name' => 'nombrenomina',
+  'maxlength' => '40,',
+  'readonly' => true,
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
+
 </div>
 
-<div class="form-row">
-<?php echo label_for('npasicaremp[nomnom]', __($labels['npasicaremp{nomnom}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{nomnom}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{nomnom}')): ?>
-    <?php echo form_error('npasicaremp{nomnom}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasicaremp, 'getNomnom', array (
-  'size' => 80,
-  'control_name' => 'npasicaremp[nomnom]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npasicaremp[codemp]', __($labels['npasicaremp{codemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{codemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{codemp}')): ?>
-    <?php echo form_error('npasicaremp{codemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasicaremp, 'getCodemp', array (
-  'size' => 20,
-  'control_name' => 'npasicaremp[codemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-<?php echo label_for('npasicaremp[nomemp]', __($labels['npasicaremp{nomemp}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{nomemp}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{nomemp}')): ?>
-    <?php echo form_error('npasicaremp{nomemp}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasicaremp, 'getNomemp', array (
-  'size' => 80,
-  'control_name' => 'npasicaremp[nomemp]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('npasicaremp[codcar]', __($labels['npasicaremp{codcar}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{codcar}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{codcar}')): ?>
-    <?php echo form_error('npasicaremp{codcar}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasicaremp, 'getCodcar', array (
-  'size' => 20,
-  'control_name' => 'npasicaremp[codcar]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-<?php echo label_for('npasicaremp[nomcar]', __($labels['npasicaremp{nomcar}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npasicaremp{nomcar}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npasicaremp{nomcar}')): ?>
-    <?php echo form_error('npasicaremp{nomcar}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npasicaremp, 'getNomcar', array (
-  'size' => 80,
-  'control_name' => 'npasicaremp[nomcar]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-<div class="form-row">
-<div id="grid01" class="grid01">
-<table border="0" class="sf_admin_list" whith="100%">
-<?php $nombre=array(0 => 'Codigo Concepto', 1 => 'Descripcion Concepto',2 => 'Status', 3 => 'Valor'); ?>
-<? if ( count($rs)>0){
-	$i=0;
-	foreach ($rs as $k=>$fila) {
-		$i++;
-		if($i==1){?>
-	<thead>
-		<tr>
-		<? foreach ($fila as $key => $value){?>
-			<th><?=$nombre[$key]?></th>
-			<? }?>
-		</tr>
-	</thead>
-	<? }?>
-	<tr>
-	<? foreach ($fila as $key => $value){?>
-		<td><?=$value?></td>
-		<? }?>
-	</tr>
-	<? }
-}
-?>
-</table>
-</div>
-</div>
 </fieldset>
+
+
+<fieldset>
+<legend>Empleados</legend>
+<div class="form-row">
+
+ <strong>C&oacute;digo</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<?php $value = object_input_tag($npasicaremp, 'getCodemp', array (
+  'size' => 10,
+  'control_name' => 'codigoempleado',
+  'maxlength' => '12,',
+  'onBlur'=> remote_function(array(
+        'url'      => 'nomnommovnomemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=3&cajtexmos=codigoempleado&cajtexcom=nombreempleado&codigonom='+$('codigonomina').value+'&codigoemp='+this.value"
+        ))
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npasicaremp_nomnommovnomemp/clase/Npasicaremp/frame/sf_admin_edit_form/obj1/codigoempleado/obj2/nombreempleado/campo1/codemp/campo2/nomemp/param1/'+$('codigonomina').value+'")?>
+
+<?php $value = object_input_tag($npasicaremp, 'getNomemp', array (
+  'size' => 50,
+  'control_name' => 'nombreempleado',
+  'maxlength' => '40,',
+  'readonly' => true,
+)); echo $value ? $value : '&nbsp;' ?>
+
+</div>
+
+</fieldset>
+
+
+<fieldset>
+<legend>Cargos</legend>
+<div class="form-row">
+
+ <strong>C&oacute;digo</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<?php $value = object_input_tag($npasicaremp, 'getCodcar', array (
+  'size' => 10,
+  'control_name' => 'codigocargo',
+  'maxlength' => '12,',
+  'onBlur'=> remote_function(array(
+        'update'   => 'grid',
+        'url'      => 'nomnommovnomemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=2&cajtexmos=codigocargo&cajtexcom=nombrecargo&codigonomina='+$('codigonomina').value+'&codigoempleado='+$('codigoempleado').value+'&codigocargo='+this.value"
+  )),
+
+)); echo $value ? $value : '&nbsp;' ?>&nbsp;
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npasiconemp_nomnommovnomemp/clase/Npasiconemp/frame/sf_admin_edit_form/obj1/codigocargo/obj2/nombrecargo/campo1/codcar/campo2/nomcar/param1/'+$('codigoempleado').value+'")?>
+
+<?php $value = object_input_tag($npasicaremp, 'getNomcar', array (
+  'size' => 50,
+  'control_name' => 'nombrecargo',
+  'maxlength' => '50,',
+  'readonly' => true,
+  )); echo $value ? $value : '&nbsp;' ?>
+
+</div>
+
+</fieldset>
+
+<div id="grid" class="form-row">
+<?
+echo grid_tag($obj);
+?>
+</div>
+
 
 <?php include_partial('edit_actions', array('npasicaremp' => $npasicaremp)) ?>
 
@@ -138,3 +132,32 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+
+   <script type="text/javascript">
+
+    function validar_monto_numero(e,id)
+    {
+    	 var aux = id.split("_");
+   	 var name=aux[0];
+   	 var fila=aux[1];
+   	 var col=parseInt(aux[2]);
+
+   	 var status = col - 1;
+
+   	 var idnuevo = name+"_"+fila+"_"+status;
+
+   	 var valor = $(idnuevo).value;
+
+	 if (valor=="M")
+	 {
+	  entermontootro(e,id);
+	 }
+	 else
+	 {
+        enternumero(e,id);
+	 }
+
+    }
+
+   </script>

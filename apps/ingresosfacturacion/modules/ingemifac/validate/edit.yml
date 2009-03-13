@@ -1,0 +1,48 @@
+methods:
+  post:
+   - "infactura{numfac}"
+   - "infactura{tipper}"
+   - "infactura{fecemi}"
+   - "infactura{tipconc}"
+   - "infactura{numdep}"
+   - "infactura{indefban_id}"
+
+
+names:
+
+  infactura{numfac}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_numfac
+
+  infactura{tipper}:
+    required:  Yes
+    required_msg: Debe seleccionar un tipo de persona
+
+
+  infactura{fecemi}:
+    required:  Yes
+    required_msg: La fecha no puede estar en Blanco
+
+
+  infactura{tipconc}:
+    required:  Yes
+    required_msg: Debe seleccionar el tipo de concepto. Ingresos Profesionales o Multas.
+
+
+  infactura{numdep}:
+    required:  Yes
+    required_msg: Debe introducir el numero de depósito
+
+
+  infactura{indefban_id}:
+    required:  Yes
+    required_msg: Debe seleccionar el banco
+
+
+Validator_numfac:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Infactura
+        column:       numfac
+        unique_error: El registro ya Existe intente con otro.

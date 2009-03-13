@@ -41,148 +41,177 @@ abstract class BaseForniveles extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCatpar()
-	{
+  
+  public function getCatpar()
+  {
 
-		return $this->catpar; 		
-	}
-	
-	public function getConsec()
-	{
+    return trim($this->catpar);
 
-		return number_format($this->consec,2,',','.');
-		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getConsec($val=false)
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getNomext()
-	{
+    if($val) return number_format($this->consec,2,',','.');
+    else return $this->consec;
 
-		return $this->nomext; 		
-	}
-	
-	public function getLonniv()
-	{
+  }
+  
+  public function getNomabr()
+  {
 
-		return number_format($this->lonniv,2,',','.');
-		
-	}
-	
-	public function getStaniv()
-	{
+    return trim($this->nomabr);
 
-		return $this->staniv; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomext()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomext);
+
+  }
+  
+  public function getLonniv($val=false)
+  {
+
+    if($val) return number_format($this->lonniv,2,',','.');
+    else return $this->lonniv;
+
+  }
+  
+  public function getStaniv()
+  {
+
+    return trim($this->staniv);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCatpar($v)
 	{
 
-		if ($this->catpar !== $v) {
-			$this->catpar = $v;
-			$this->modifiedColumns[] = FornivelesPeer::CATPAR;
-		}
-
+    if ($this->catpar !== $v) {
+        $this->catpar = $v;
+        $this->modifiedColumns[] = FornivelesPeer::CATPAR;
+      }
+  
 	} 
 	
 	public function setConsec($v)
 	{
 
-		if ($this->consec !== $v) {
-			$this->consec = $v;
-			$this->modifiedColumns[] = FornivelesPeer::CONSEC;
-		}
-
+    if ($this->consec !== $v) {
+        $this->consec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FornivelesPeer::CONSEC;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = FornivelesPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = FornivelesPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setNomext($v)
 	{
 
-		if ($this->nomext !== $v) {
-			$this->nomext = $v;
-			$this->modifiedColumns[] = FornivelesPeer::NOMEXT;
-		}
-
+    if ($this->nomext !== $v) {
+        $this->nomext = $v;
+        $this->modifiedColumns[] = FornivelesPeer::NOMEXT;
+      }
+  
 	} 
 	
 	public function setLonniv($v)
 	{
 
-		if ($this->lonniv !== $v) {
-			$this->lonniv = $v;
-			$this->modifiedColumns[] = FornivelesPeer::LONNIV;
-		}
-
+    if ($this->lonniv !== $v) {
+        $this->lonniv = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FornivelesPeer::LONNIV;
+      }
+  
 	} 
 	
 	public function setStaniv($v)
 	{
 
-		if ($this->staniv !== $v) {
-			$this->staniv = $v;
-			$this->modifiedColumns[] = FornivelesPeer::STANIV;
-		}
-
+    if ($this->staniv !== $v) {
+        $this->staniv = $v;
+        $this->modifiedColumns[] = FornivelesPeer::STANIV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FornivelesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FornivelesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->catpar = $rs->getString($startcol + 0);
+      $this->catpar = $rs->getString($startcol + 0);
 
-			$this->consec = $rs->getFloat($startcol + 1);
+      $this->consec = $rs->getFloat($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->nomext = $rs->getString($startcol + 3);
+      $this->nomext = $rs->getString($startcol + 3);
 
-			$this->lonniv = $rs->getFloat($startcol + 4);
+      $this->lonniv = $rs->getFloat($startcol + 4);
 
-			$this->staniv = $rs->getString($startcol + 5);
+      $this->staniv = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forniveles object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forniveles object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +268,7 @@ abstract class BaseForniveles extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FornivelesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FornivelesPeer::doUpdate($this, $con);

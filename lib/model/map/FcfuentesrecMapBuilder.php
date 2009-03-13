@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FcfuentesrecMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FcfuentesrecMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FcfuentesrecMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcfuentesrec');
 		$tMap->setPhpName('Fcfuentesrec');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcfuentesrec_SEQ');
 
 		$tMap->addColumn('CODREC', 'Codrec', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -39,6 +41,6 @@ class FcfuentesrecMapBuilder {
 		$tMap->addColumn('CODFUEGEN', 'Codfuegen', 'string', CreoleTypes::VARCHAR, false, 2);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

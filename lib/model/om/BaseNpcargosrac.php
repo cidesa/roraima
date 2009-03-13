@@ -89,365 +89,406 @@ abstract class BaseNpcargosrac extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcar()
-	{
+  
+  public function getCodcar()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getNomcar()
-	{
+    return trim($this->codcar);
 
-		return $this->nomcar; 		
-	}
-	
-	public function getSuecar()
-	{
+  }
+  
+  public function getNomcar()
+  {
 
-		return number_format($this->suecar,2,',','.');
-		
-	}
-	
-	public function getStacar()
-	{
+    return trim($this->nomcar);
 
-		return $this->stacar; 		
-	}
-	
-	public function getCodcat()
-	{
+  }
+  
+  public function getSuecar($val=false)
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodocp()
-	{
+    if($val) return number_format($this->suecar,2,',','.');
+    else return $this->suecar;
 
-		return $this->codocp; 		
-	}
-	
-	public function getPunmin()
-	{
+  }
+  
+  public function getStacar()
+  {
 
-		return number_format($this->punmin,2,',','.');
-		
-	}
-	
-	public function getGraocp()
-	{
+    return trim($this->stacar);
 
-		return $this->graocp; 		
-	}
-	
-	public function getComcar()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return number_format($this->comcar,2,',','.');
-		
-	}
-	
-	public function getPasocp()
-	{
+    return trim($this->codcat);
 
-		return $this->pasocp; 		
-	}
-	
-	public function getCodtip()
-	{
+  }
+  
+  public function getCodocp()
+  {
 
-		return $this->codtip; 		
-	}
-	
-	public function getTipper()
-	{
+    return trim($this->codocp);
 
-		return $this->tipper; 		
-	}
-	
-	public function getFeccar()
-	{
+  }
+  
+  public function getPunmin($val=false)
+  {
 
-		return $this->feccar; 		
-	}
-	
-	public function getCodemp()
-	{
+    if($val) return number_format($this->punmin,2,',','.');
+    else return $this->punmin;
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomemp()
-	{
+  }
+  
+  public function getGraocp()
+  {
 
-		return $this->nomemp; 		
-	}
-	
-	public function getNronom()
-	{
+    return trim($this->graocp);
 
-		return $this->nronom; 		
-	}
-	
-	public function getEstorg()
-	{
+  }
+  
+  public function getComcar($val=false)
+  {
 
-		return $this->estorg; 		
-	}
-	
-	public function getAnorac()
-	{
+    if($val) return number_format($this->comcar,2,',','.');
+    else return $this->comcar;
 
-		return $this->anorac; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPasocp()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->pasocp);
+
+  }
+  
+  public function getCodtip()
+  {
+
+    return trim($this->codtip);
+
+  }
+  
+  public function getTipper()
+  {
+
+    return trim($this->tipper);
+
+  }
+  
+  public function getFeccar()
+  {
+
+    return trim($this->feccar);
+
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getNomemp()
+  {
+
+    return trim($this->nomemp);
+
+  }
+  
+  public function getNronom()
+  {
+
+    return trim($this->nronom);
+
+  }
+  
+  public function getEstorg()
+  {
+
+    return trim($this->estorg);
+
+  }
+  
+  public function getAnorac()
+  {
+
+    return trim($this->anorac);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setNomcar($v)
 	{
 
-		if ($this->nomcar !== $v) {
-			$this->nomcar = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::NOMCAR;
-		}
-
+    if ($this->nomcar !== $v) {
+        $this->nomcar = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::NOMCAR;
+      }
+  
 	} 
 	
 	public function setSuecar($v)
 	{
 
-		if ($this->suecar !== $v) {
-			$this->suecar = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::SUECAR;
-		}
-
+    if ($this->suecar !== $v) {
+        $this->suecar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosracPeer::SUECAR;
+      }
+  
 	} 
 	
 	public function setStacar($v)
 	{
 
-		if ($this->stacar !== $v) {
-			$this->stacar = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::STACAR;
-		}
-
+    if ($this->stacar !== $v) {
+        $this->stacar = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::STACAR;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodocp($v)
 	{
 
-		if ($this->codocp !== $v) {
-			$this->codocp = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::CODOCP;
-		}
-
+    if ($this->codocp !== $v) {
+        $this->codocp = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::CODOCP;
+      }
+  
 	} 
 	
 	public function setPunmin($v)
 	{
 
-		if ($this->punmin !== $v) {
-			$this->punmin = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::PUNMIN;
-		}
-
+    if ($this->punmin !== $v) {
+        $this->punmin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosracPeer::PUNMIN;
+      }
+  
 	} 
 	
 	public function setGraocp($v)
 	{
 
-		if ($this->graocp !== $v) {
-			$this->graocp = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::GRAOCP;
-		}
-
+    if ($this->graocp !== $v) {
+        $this->graocp = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::GRAOCP;
+      }
+  
 	} 
 	
 	public function setComcar($v)
 	{
 
-		if ($this->comcar !== $v) {
-			$this->comcar = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::COMCAR;
-		}
-
+    if ($this->comcar !== $v) {
+        $this->comcar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosracPeer::COMCAR;
+      }
+  
 	} 
 	
 	public function setPasocp($v)
 	{
 
-		if ($this->pasocp !== $v) {
-			$this->pasocp = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::PASOCP;
-		}
-
+    if ($this->pasocp !== $v) {
+        $this->pasocp = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::PASOCP;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setTipper($v)
 	{
 
-		if ($this->tipper !== $v) {
-			$this->tipper = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::TIPPER;
-		}
-
+    if ($this->tipper !== $v) {
+        $this->tipper = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::TIPPER;
+      }
+  
 	} 
 	
 	public function setFeccar($v)
 	{
 
-		if ($this->feccar !== $v) {
-			$this->feccar = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::FECCAR;
-		}
-
+    if ($this->feccar !== $v) {
+        $this->feccar = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::FECCAR;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setNronom($v)
 	{
 
-		if ($this->nronom !== $v) {
-			$this->nronom = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::NRONOM;
-		}
-
+    if ($this->nronom !== $v) {
+        $this->nronom = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::NRONOM;
+      }
+  
 	} 
 	
 	public function setEstorg($v)
 	{
 
-		if ($this->estorg !== $v) {
-			$this->estorg = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::ESTORG;
-		}
-
+    if ($this->estorg !== $v) {
+        $this->estorg = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::ESTORG;
+      }
+  
 	} 
 	
 	public function setAnorac($v)
 	{
 
-		if ($this->anorac !== $v) {
-			$this->anorac = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::ANORAC;
-		}
-
+    if ($this->anorac !== $v) {
+        $this->anorac = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::ANORAC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcargosracPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcargosracPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcar = $rs->getString($startcol + 0);
+      $this->codcar = $rs->getString($startcol + 0);
 
-			$this->nomcar = $rs->getString($startcol + 1);
+      $this->nomcar = $rs->getString($startcol + 1);
 
-			$this->suecar = $rs->getFloat($startcol + 2);
+      $this->suecar = $rs->getFloat($startcol + 2);
 
-			$this->stacar = $rs->getString($startcol + 3);
+      $this->stacar = $rs->getString($startcol + 3);
 
-			$this->codcat = $rs->getString($startcol + 4);
+      $this->codcat = $rs->getString($startcol + 4);
 
-			$this->codocp = $rs->getString($startcol + 5);
+      $this->codocp = $rs->getString($startcol + 5);
 
-			$this->punmin = $rs->getFloat($startcol + 6);
+      $this->punmin = $rs->getFloat($startcol + 6);
 
-			$this->graocp = $rs->getString($startcol + 7);
+      $this->graocp = $rs->getString($startcol + 7);
 
-			$this->comcar = $rs->getFloat($startcol + 8);
+      $this->comcar = $rs->getFloat($startcol + 8);
 
-			$this->pasocp = $rs->getString($startcol + 9);
+      $this->pasocp = $rs->getString($startcol + 9);
 
-			$this->codtip = $rs->getString($startcol + 10);
+      $this->codtip = $rs->getString($startcol + 10);
 
-			$this->tipper = $rs->getString($startcol + 11);
+      $this->tipper = $rs->getString($startcol + 11);
 
-			$this->feccar = $rs->getString($startcol + 12);
+      $this->feccar = $rs->getString($startcol + 12);
 
-			$this->codemp = $rs->getString($startcol + 13);
+      $this->codemp = $rs->getString($startcol + 13);
 
-			$this->nomemp = $rs->getString($startcol + 14);
+      $this->nomemp = $rs->getString($startcol + 14);
 
-			$this->nronom = $rs->getString($startcol + 15);
+      $this->nronom = $rs->getString($startcol + 15);
 
-			$this->estorg = $rs->getString($startcol + 16);
+      $this->estorg = $rs->getString($startcol + 16);
 
-			$this->anorac = $rs->getString($startcol + 17);
+      $this->anorac = $rs->getString($startcol + 17);
 
-			$this->id = $rs->getInt($startcol + 18);
+      $this->id = $rs->getInt($startcol + 18);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 19; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcargosrac object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 19; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcargosrac object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -504,6 +545,7 @@ abstract class BaseNpcargosrac extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcargosracPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcargosracPeer::doUpdate($this, $con);

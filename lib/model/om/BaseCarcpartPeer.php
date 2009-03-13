@@ -13,7 +13,7 @@ abstract class BaseCarcpartPeer {
 	const CLASS_DEFAULT = 'lib.model.Carcpart';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 17;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -65,6 +65,9 @@ abstract class BaseCarcpartPeer {
 	const FECFAC = 'carcpart.FECFAC';
 
 	
+	const CODUBI = 'carcpart.CODUBI';
+
+	
 	const ID = 'carcpart.ID';
 
 	
@@ -73,18 +76,18 @@ abstract class BaseCarcpartPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Fecrcp', 'Ordcom', 'Desrcp', 'Codpro', 'Numfac', 'Monrcp', 'Starcp', 'Numcom', 'Numord', 'Codalm', 'Ctrper', 'Genord', 'Nroent', 'Fecfac', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CarcpartPeer::RCPART, CarcpartPeer::FECRCP, CarcpartPeer::ORDCOM, CarcpartPeer::DESRCP, CarcpartPeer::CODPRO, CarcpartPeer::NUMFAC, CarcpartPeer::MONRCP, CarcpartPeer::STARCP, CarcpartPeer::NUMCOM, CarcpartPeer::NUMORD, CarcpartPeer::CODALM, CarcpartPeer::CTRPER, CarcpartPeer::GENORD, CarcpartPeer::NROENT, CarcpartPeer::FECFAC, CarcpartPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'fecrcp', 'ordcom', 'desrcp', 'codpro', 'numfac', 'monrcp', 'starcp', 'numcom', 'numord', 'codalm', 'ctrper', 'genord', 'nroent', 'fecfac', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart', 'Fecrcp', 'Ordcom', 'Desrcp', 'Codpro', 'Numfac', 'Monrcp', 'Starcp', 'Numcom', 'Numord', 'Codalm', 'Ctrper', 'Genord', 'Nroent', 'Fecfac', 'Codubi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CarcpartPeer::RCPART, CarcpartPeer::FECRCP, CarcpartPeer::ORDCOM, CarcpartPeer::DESRCP, CarcpartPeer::CODPRO, CarcpartPeer::NUMFAC, CarcpartPeer::MONRCP, CarcpartPeer::STARCP, CarcpartPeer::NUMCOM, CarcpartPeer::NUMORD, CarcpartPeer::CODALM, CarcpartPeer::CTRPER, CarcpartPeer::GENORD, CarcpartPeer::NROENT, CarcpartPeer::FECFAC, CarcpartPeer::CODUBI, CarcpartPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart', 'fecrcp', 'ordcom', 'desrcp', 'codpro', 'numfac', 'monrcp', 'starcp', 'numcom', 'numord', 'codalm', 'ctrper', 'genord', 'nroent', 'fecfac', 'codubi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Fecrcp' => 1, 'Ordcom' => 2, 'Desrcp' => 3, 'Codpro' => 4, 'Numfac' => 5, 'Monrcp' => 6, 'Starcp' => 7, 'Numcom' => 8, 'Numord' => 9, 'Codalm' => 10, 'Ctrper' => 11, 'Genord' => 12, 'Nroent' => 13, 'Fecfac' => 14, 'Id' => 15, ),
-		BasePeer::TYPE_COLNAME => array (CarcpartPeer::RCPART => 0, CarcpartPeer::FECRCP => 1, CarcpartPeer::ORDCOM => 2, CarcpartPeer::DESRCP => 3, CarcpartPeer::CODPRO => 4, CarcpartPeer::NUMFAC => 5, CarcpartPeer::MONRCP => 6, CarcpartPeer::STARCP => 7, CarcpartPeer::NUMCOM => 8, CarcpartPeer::NUMORD => 9, CarcpartPeer::CODALM => 10, CarcpartPeer::CTRPER => 11, CarcpartPeer::GENORD => 12, CarcpartPeer::NROENT => 13, CarcpartPeer::FECFAC => 14, CarcpartPeer::ID => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'fecrcp' => 1, 'ordcom' => 2, 'desrcp' => 3, 'codpro' => 4, 'numfac' => 5, 'monrcp' => 6, 'starcp' => 7, 'numcom' => 8, 'numord' => 9, 'codalm' => 10, 'ctrper' => 11, 'genord' => 12, 'nroent' => 13, 'fecfac' => 14, 'id' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Rcpart' => 0, 'Fecrcp' => 1, 'Ordcom' => 2, 'Desrcp' => 3, 'Codpro' => 4, 'Numfac' => 5, 'Monrcp' => 6, 'Starcp' => 7, 'Numcom' => 8, 'Numord' => 9, 'Codalm' => 10, 'Ctrper' => 11, 'Genord' => 12, 'Nroent' => 13, 'Fecfac' => 14, 'Codubi' => 15, 'Id' => 16, ),
+		BasePeer::TYPE_COLNAME => array (CarcpartPeer::RCPART => 0, CarcpartPeer::FECRCP => 1, CarcpartPeer::ORDCOM => 2, CarcpartPeer::DESRCP => 3, CarcpartPeer::CODPRO => 4, CarcpartPeer::NUMFAC => 5, CarcpartPeer::MONRCP => 6, CarcpartPeer::STARCP => 7, CarcpartPeer::NUMCOM => 8, CarcpartPeer::NUMORD => 9, CarcpartPeer::CODALM => 10, CarcpartPeer::CTRPER => 11, CarcpartPeer::GENORD => 12, CarcpartPeer::NROENT => 13, CarcpartPeer::FECFAC => 14, CarcpartPeer::CODUBI => 15, CarcpartPeer::ID => 16, ),
+		BasePeer::TYPE_FIELDNAME => array ('rcpart' => 0, 'fecrcp' => 1, 'ordcom' => 2, 'desrcp' => 3, 'codpro' => 4, 'numfac' => 5, 'monrcp' => 6, 'starcp' => 7, 'numcom' => 8, 'numord' => 9, 'codalm' => 10, 'ctrper' => 11, 'genord' => 12, 'nroent' => 13, 'fecfac' => 14, 'codubi' => 15, 'id' => 16, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
 	);
 
 	
@@ -167,6 +170,8 @@ abstract class BaseCarcpartPeer {
 		$criteria->addSelectColumn(CarcpartPeer::NROENT);
 
 		$criteria->addSelectColumn(CarcpartPeer::FECFAC);
+
+		$criteria->addSelectColumn(CarcpartPeer::CODUBI);
 
 		$criteria->addSelectColumn(CarcpartPeer::ID);
 
@@ -270,6 +275,7 @@ abstract class BaseCarcpartPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CarcpartPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

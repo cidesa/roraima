@@ -37,7 +37,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
 
 	
-	protected $conpag;
+	protected $codconpag;
 
 
 	
@@ -73,6 +73,26 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
 
 	
+	protected $numcominv;
+
+
+	
+	protected $sucursal;
+
+
+	
+	protected $motanu;
+
+
+	
+	protected $vuelto;
+
+
+	
+	protected $codcaj;
+
+
+	
 	protected $id;
 
 	
@@ -81,375 +101,508 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReffac()
-	{
+  
+  public function getReffac()
+  {
 
-		return $this->reffac; 		
-	}
-	
-	public function getFecfac($format = 'Y-m-d')
-	{
+    return trim($this->reffac);
 
-		if ($this->fecfac === null || $this->fecfac === '') {
-			return null;
-		} elseif (!is_int($this->fecfac)) {
-						$ts = strtotime($this->fecfac);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfac] as date/time value: " . var_export($this->fecfac, true));
-			}
-		} else {
-			$ts = $this->fecfac;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecfac($format = 'Y-m-d')
+  {
 
-	
-	public function getCodcli()
-	{
+    if ($this->fecfac === null || $this->fecfac === '') {
+      return null;
+    } elseif (!is_int($this->fecfac)) {
+            $ts = adodb_strtotime($this->fecfac);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfac] as date/time value: " . var_export($this->fecfac, true));
+      }
+    } else {
+      $ts = $this->fecfac;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codcli; 		
-	}
-	
-	public function getDesfac()
-	{
+  
+  public function getCodcli()
+  {
 
-		return $this->desfac; 		
-	}
-	
-	public function getTipref()
-	{
+    return trim($this->codcli);
 
-		return $this->tipref; 		
-	}
-	
-	public function getMonfac()
-	{
+  }
+  
+  public function getDesfac()
+  {
 
-		return number_format($this->monfac,2,',','.');
-		
-	}
-	
-	public function getMondesc()
-	{
+    return trim($this->desfac);
 
-		return number_format($this->mondesc,2,',','.');
-		
-	}
-	
-	public function getConpag()
-	{
+  }
+  
+  public function getTipref()
+  {
 
-		return $this->conpag; 		
-	}
-	
-	public function getNumcom()
-	{
+    return trim($this->tipref);
 
-		return $this->numcom; 		
-	}
-	
-	public function getReapor()
-	{
+  }
+  
+  public function getMonfac($val=false)
+  {
 
-		return $this->reapor; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->monfac,2,',','.');
+    else return $this->monfac;
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMondesc($val=false)
+  {
 
-	
-	public function getStatus()
-	{
+    if($val) return number_format($this->mondesc,2,',','.');
+    else return $this->mondesc;
 
-		return $this->status; 		
-	}
-	
-	public function getObserv()
-	{
+  }
+  
+  public function getCodconpag()
+  {
 
-		return $this->observ; 		
-	}
-	
-	public function getTipmon()
-	{
+    return $this->codconpag;
 
-		return $this->tipmon; 		
-	}
-	
-	public function getValmon()
-	{
+  }
+  
+  public function getNumcom()
+  {
 
-		return number_format($this->valmon,2,',','.');
-		
-	}
-	
-	public function getNumcomord()
-	{
+    return trim($this->numcom);
 
-		return $this->numcomord; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getReapor()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->reapor);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getObserv()
+  {
+
+    return trim($this->observ);
+
+  }
+  
+  public function getTipmon()
+  {
+
+    return trim($this->tipmon);
+
+  }
+  
+  public function getValmon($val=false)
+  {
+
+    if($val) return number_format($this->valmon,2,',','.');
+    else return $this->valmon;
+
+  }
+  
+  public function getNumcomord()
+  {
+
+    return trim($this->numcomord);
+
+  }
+  
+  public function getNumcominv()
+  {
+
+    return trim($this->numcominv);
+
+  }
+  
+  public function getSucursal()
+  {
+
+    return trim($this->sucursal);
+
+  }
+  
+  public function getMotanu()
+  {
+
+    return trim($this->motanu);
+
+  }
+  
+  public function getVuelto($val=false)
+  {
+
+    if($val) return number_format($this->vuelto,2,',','.');
+    else return $this->vuelto;
+
+  }
+  
+  public function getCodcaj()
+  {
+
+    return $this->codcaj;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReffac($v)
 	{
 
-		if ($this->reffac !== $v) {
-			$this->reffac = $v;
-			$this->modifiedColumns[] = FafacturPeer::REFFAC;
-		}
-
+    if ($this->reffac !== $v) {
+        $this->reffac = $v;
+        $this->modifiedColumns[] = FafacturPeer::REFFAC;
+      }
+  
 	} 
 	
 	public function setFecfac($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfac] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfac !== $ts) {
-			$this->fecfac = $ts;
-			$this->modifiedColumns[] = FafacturPeer::FECFAC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfac] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfac !== $ts) {
+      $this->fecfac = $ts;
+      $this->modifiedColumns[] = FafacturPeer::FECFAC;
+    }
 
 	} 
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = FafacturPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = FafacturPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setDesfac($v)
 	{
 
-		if ($this->desfac !== $v) {
-			$this->desfac = $v;
-			$this->modifiedColumns[] = FafacturPeer::DESFAC;
-		}
-
+    if ($this->desfac !== $v) {
+        $this->desfac = $v;
+        $this->modifiedColumns[] = FafacturPeer::DESFAC;
+      }
+  
 	} 
 	
 	public function setTipref($v)
 	{
 
-		if ($this->tipref !== $v) {
-			$this->tipref = $v;
-			$this->modifiedColumns[] = FafacturPeer::TIPREF;
-		}
-
+    if ($this->tipref !== $v) {
+        $this->tipref = $v;
+        $this->modifiedColumns[] = FafacturPeer::TIPREF;
+      }
+  
 	} 
 	
 	public function setMonfac($v)
 	{
 
-		if ($this->monfac !== $v) {
-			$this->monfac = $v;
-			$this->modifiedColumns[] = FafacturPeer::MONFAC;
-		}
-
+    if ($this->monfac !== $v) {
+        $this->monfac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FafacturPeer::MONFAC;
+      }
+  
 	} 
 	
 	public function setMondesc($v)
 	{
 
-		if ($this->mondesc !== $v) {
-			$this->mondesc = $v;
-			$this->modifiedColumns[] = FafacturPeer::MONDESC;
-		}
-
+    if ($this->mondesc !== $v) {
+        $this->mondesc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FafacturPeer::MONDESC;
+      }
+  
 	} 
 	
-	public function setConpag($v)
+	public function setCodconpag($v)
 	{
 
-		if ($this->conpag !== $v) {
-			$this->conpag = $v;
-			$this->modifiedColumns[] = FafacturPeer::CONPAG;
-		}
-
+    if ($this->codconpag !== $v) {
+        $this->codconpag = $v;
+        $this->modifiedColumns[] = FafacturPeer::CODCONPAG;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = FafacturPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = FafacturPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setReapor($v)
 	{
 
-		if ($this->reapor !== $v) {
-			$this->reapor = $v;
-			$this->modifiedColumns[] = FafacturPeer::REAPOR;
-		}
-
+    if ($this->reapor !== $v) {
+        $this->reapor = $v;
+        $this->modifiedColumns[] = FafacturPeer::REAPOR;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = FafacturPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = FafacturPeer::FECANU;
+    }
 
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = FafacturPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = FafacturPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setObserv($v)
 	{
 
-		if ($this->observ !== $v) {
-			$this->observ = $v;
-			$this->modifiedColumns[] = FafacturPeer::OBSERV;
-		}
-
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = FafacturPeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setTipmon($v)
 	{
 
-		if ($this->tipmon !== $v) {
-			$this->tipmon = $v;
-			$this->modifiedColumns[] = FafacturPeer::TIPMON;
-		}
-
+    if ($this->tipmon !== $v) {
+        $this->tipmon = $v;
+        $this->modifiedColumns[] = FafacturPeer::TIPMON;
+      }
+  
 	} 
 	
 	public function setValmon($v)
 	{
 
-		if ($this->valmon !== $v) {
-			$this->valmon = $v;
-			$this->modifiedColumns[] = FafacturPeer::VALMON;
-		}
-
+    if ($this->valmon !== $v) {
+        $this->valmon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FafacturPeer::VALMON;
+      }
+  
 	} 
 	
 	public function setNumcomord($v)
 	{
 
-		if ($this->numcomord !== $v) {
-			$this->numcomord = $v;
-			$this->modifiedColumns[] = FafacturPeer::NUMCOMORD;
-		}
+    if ($this->numcomord !== $v) {
+        $this->numcomord = $v;
+        $this->modifiedColumns[] = FafacturPeer::NUMCOMORD;
+      }
+  
+	} 
+	
+	public function setNumcominv($v)
+	{
 
+    if ($this->numcominv !== $v) {
+        $this->numcominv = $v;
+        $this->modifiedColumns[] = FafacturPeer::NUMCOMINV;
+      }
+  
+	} 
+	
+	public function setSucursal($v)
+	{
+
+    if ($this->sucursal !== $v) {
+        $this->sucursal = $v;
+        $this->modifiedColumns[] = FafacturPeer::SUCURSAL;
+      }
+  
+	} 
+	
+	public function setMotanu($v)
+	{
+
+    if ($this->motanu !== $v) {
+        $this->motanu = $v;
+        $this->modifiedColumns[] = FafacturPeer::MOTANU;
+      }
+  
+	} 
+	
+	public function setVuelto($v)
+	{
+
+    if ($this->vuelto !== $v) {
+        $this->vuelto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FafacturPeer::VUELTO;
+      }
+  
+	} 
+	
+	public function setCodcaj($v)
+	{
+
+    if ($this->codcaj !== $v) {
+        $this->codcaj = $v;
+        $this->modifiedColumns[] = FafacturPeer::CODCAJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FafacturPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FafacturPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reffac = $rs->getString($startcol + 0);
+      $this->reffac = $rs->getString($startcol + 0);
 
-			$this->fecfac = $rs->getDate($startcol + 1, null);
+      $this->fecfac = $rs->getDate($startcol + 1, null);
 
-			$this->codcli = $rs->getString($startcol + 2);
+      $this->codcli = $rs->getString($startcol + 2);
 
-			$this->desfac = $rs->getString($startcol + 3);
+      $this->desfac = $rs->getString($startcol + 3);
 
-			$this->tipref = $rs->getString($startcol + 4);
+      $this->tipref = $rs->getString($startcol + 4);
 
-			$this->monfac = $rs->getFloat($startcol + 5);
+      $this->monfac = $rs->getFloat($startcol + 5);
 
-			$this->mondesc = $rs->getFloat($startcol + 6);
+      $this->mondesc = $rs->getFloat($startcol + 6);
 
-			$this->conpag = $rs->getString($startcol + 7);
+      $this->codconpag = $rs->getInt($startcol + 7);
 
-			$this->numcom = $rs->getString($startcol + 8);
+      $this->numcom = $rs->getString($startcol + 8);
 
-			$this->reapor = $rs->getString($startcol + 9);
+      $this->reapor = $rs->getString($startcol + 9);
 
-			$this->fecanu = $rs->getDate($startcol + 10, null);
+      $this->fecanu = $rs->getDate($startcol + 10, null);
 
-			$this->status = $rs->getString($startcol + 11);
+      $this->status = $rs->getString($startcol + 11);
 
-			$this->observ = $rs->getString($startcol + 12);
+      $this->observ = $rs->getString($startcol + 12);
 
-			$this->tipmon = $rs->getString($startcol + 13);
+      $this->tipmon = $rs->getString($startcol + 13);
 
-			$this->valmon = $rs->getFloat($startcol + 14);
+      $this->valmon = $rs->getFloat($startcol + 14);
 
-			$this->numcomord = $rs->getString($startcol + 15);
+      $this->numcomord = $rs->getString($startcol + 15);
 
-			$this->id = $rs->getInt($startcol + 16);
+      $this->numcominv = $rs->getString($startcol + 16);
 
-			$this->resetModified();
+      $this->sucursal = $rs->getString($startcol + 17);
 
-			$this->setNew(false);
+      $this->motanu = $rs->getString($startcol + 18);
 
-						return $startcol + 17; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fafactur object", $e);
-		}
-	}
+      $this->vuelto = $rs->getFloat($startcol + 19);
+
+      $this->codcaj = $rs->getInt($startcol + 20);
+
+      $this->id = $rs->getInt($startcol + 21);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 22; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fafactur object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -506,6 +659,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FafacturPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FafacturPeer::doUpdate($this, $con);
@@ -593,7 +747,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				return $this->getMondesc();
 				break;
 			case 7:
-				return $this->getConpag();
+				return $this->getCodconpag();
 				break;
 			case 8:
 				return $this->getNumcom();
@@ -620,6 +774,21 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				return $this->getNumcomord();
 				break;
 			case 16:
+				return $this->getNumcominv();
+				break;
+			case 17:
+				return $this->getSucursal();
+				break;
+			case 18:
+				return $this->getMotanu();
+				break;
+			case 19:
+				return $this->getVuelto();
+				break;
+			case 20:
+				return $this->getCodcaj();
+				break;
+			case 21:
 				return $this->getId();
 				break;
 			default:
@@ -639,7 +808,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 			$keys[4] => $this->getTipref(),
 			$keys[5] => $this->getMonfac(),
 			$keys[6] => $this->getMondesc(),
-			$keys[7] => $this->getConpag(),
+			$keys[7] => $this->getCodconpag(),
 			$keys[8] => $this->getNumcom(),
 			$keys[9] => $this->getReapor(),
 			$keys[10] => $this->getFecanu(),
@@ -648,7 +817,12 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 			$keys[13] => $this->getTipmon(),
 			$keys[14] => $this->getValmon(),
 			$keys[15] => $this->getNumcomord(),
-			$keys[16] => $this->getId(),
+			$keys[16] => $this->getNumcominv(),
+			$keys[17] => $this->getSucursal(),
+			$keys[18] => $this->getMotanu(),
+			$keys[19] => $this->getVuelto(),
+			$keys[20] => $this->getCodcaj(),
+			$keys[21] => $this->getId(),
 		);
 		return $result;
 	}
@@ -686,7 +860,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				$this->setMondesc($value);
 				break;
 			case 7:
-				$this->setConpag($value);
+				$this->setCodconpag($value);
 				break;
 			case 8:
 				$this->setNumcom($value);
@@ -713,6 +887,21 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 				$this->setNumcomord($value);
 				break;
 			case 16:
+				$this->setNumcominv($value);
+				break;
+			case 17:
+				$this->setSucursal($value);
+				break;
+			case 18:
+				$this->setMotanu($value);
+				break;
+			case 19:
+				$this->setVuelto($value);
+				break;
+			case 20:
+				$this->setCodcaj($value);
+				break;
+			case 21:
 				$this->setId($value);
 				break;
 		} 	}
@@ -729,7 +918,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setTipref($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setMonfac($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setMondesc($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setConpag($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCodconpag($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setNumcom($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setReapor($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setFecanu($arr[$keys[10]]);
@@ -738,7 +927,12 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[13], $arr)) $this->setTipmon($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setValmon($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setNumcomord($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
+		if (array_key_exists($keys[16], $arr)) $this->setNumcominv($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setSucursal($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setMotanu($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setVuelto($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setCodcaj($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setId($arr[$keys[21]]);
 	}
 
 	
@@ -753,7 +947,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FafacturPeer::TIPREF)) $criteria->add(FafacturPeer::TIPREF, $this->tipref);
 		if ($this->isColumnModified(FafacturPeer::MONFAC)) $criteria->add(FafacturPeer::MONFAC, $this->monfac);
 		if ($this->isColumnModified(FafacturPeer::MONDESC)) $criteria->add(FafacturPeer::MONDESC, $this->mondesc);
-		if ($this->isColumnModified(FafacturPeer::CONPAG)) $criteria->add(FafacturPeer::CONPAG, $this->conpag);
+		if ($this->isColumnModified(FafacturPeer::CODCONPAG)) $criteria->add(FafacturPeer::CODCONPAG, $this->codconpag);
 		if ($this->isColumnModified(FafacturPeer::NUMCOM)) $criteria->add(FafacturPeer::NUMCOM, $this->numcom);
 		if ($this->isColumnModified(FafacturPeer::REAPOR)) $criteria->add(FafacturPeer::REAPOR, $this->reapor);
 		if ($this->isColumnModified(FafacturPeer::FECANU)) $criteria->add(FafacturPeer::FECANU, $this->fecanu);
@@ -762,6 +956,11 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FafacturPeer::TIPMON)) $criteria->add(FafacturPeer::TIPMON, $this->tipmon);
 		if ($this->isColumnModified(FafacturPeer::VALMON)) $criteria->add(FafacturPeer::VALMON, $this->valmon);
 		if ($this->isColumnModified(FafacturPeer::NUMCOMORD)) $criteria->add(FafacturPeer::NUMCOMORD, $this->numcomord);
+		if ($this->isColumnModified(FafacturPeer::NUMCOMINV)) $criteria->add(FafacturPeer::NUMCOMINV, $this->numcominv);
+		if ($this->isColumnModified(FafacturPeer::SUCURSAL)) $criteria->add(FafacturPeer::SUCURSAL, $this->sucursal);
+		if ($this->isColumnModified(FafacturPeer::MOTANU)) $criteria->add(FafacturPeer::MOTANU, $this->motanu);
+		if ($this->isColumnModified(FafacturPeer::VUELTO)) $criteria->add(FafacturPeer::VUELTO, $this->vuelto);
+		if ($this->isColumnModified(FafacturPeer::CODCAJ)) $criteria->add(FafacturPeer::CODCAJ, $this->codcaj);
 		if ($this->isColumnModified(FafacturPeer::ID)) $criteria->add(FafacturPeer::ID, $this->id);
 
 		return $criteria;
@@ -807,7 +1006,7 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 
 		$copyObj->setMondesc($this->mondesc);
 
-		$copyObj->setConpag($this->conpag);
+		$copyObj->setCodconpag($this->codconpag);
 
 		$copyObj->setNumcom($this->numcom);
 
@@ -824,6 +1023,16 @@ abstract class BaseFafactur extends BaseObject  implements Persistent {
 		$copyObj->setValmon($this->valmon);
 
 		$copyObj->setNumcomord($this->numcomord);
+
+		$copyObj->setNumcominv($this->numcominv);
+
+		$copyObj->setSucursal($this->sucursal);
+
+		$copyObj->setMotanu($this->motanu);
+
+		$copyObj->setVuelto($this->vuelto);
+
+		$copyObj->setCodcaj($this->codcaj);
 
 
 		$copyObj->setNew(true);

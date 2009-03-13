@@ -1,0 +1,39 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   lilichis
+  ancho:				   850
+  anchogrid:               900
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Prensa
+  tipo:                    t
+  nombrecampo:             periodico
+  esgrabable:			   true
+  html:                    [size=50]
+2:       # Columna 2
+  titulo:                  Fecha Publicación
+  tipo:                    f
+  nombrecampo:             fecpub
+  esgrabable:			   true
+  html:                    [ ]
+3:       # Columna 3
+  titulo:                  Página
+  tipo:                    t
+  nombrecampo:             pagina
+  esgrabable:			   true
+  html:                    [size=10]
+4:       # Columna 4
+  titulo:                  Cuerpo
+  tipo:                    t
+  nombrecampo:             cuerpo
+  esgrabable:			   true
+  html:                    [size=20]
+5:       # Columna 5
+  titulo:                  Mes
+  tipo:                    c
+  nombrecampo:             mes
+  html:                    [ ]
+  esgrabable:              true

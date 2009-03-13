@@ -1,60 +1,62 @@
 <?php
 
 
-	
+
 class CpdefnivMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CpdefnivMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CpdefnivMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cpdefniv');
 		$tMap->setPhpName('Cpdefniv');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('cpdefniv_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('LONCOD', 'Loncod', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('LONCOD', 'Loncod', 'double', CreoleTypes::NUMERIC, true, 2);
 
-		$tMap->addColumn('RUPCAT', 'Rupcat', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('RUPCAT', 'Rupcat', 'double', CreoleTypes::NUMERIC, true, 2);
 
-		$tMap->addColumn('RUPPAR', 'Ruppar', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('RUPPAR', 'Ruppar', 'double', CreoleTypes::NUMERIC, true, 2);
 
-		$tMap->addColumn('NIVDIS', 'Nivdis', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('NIVDIS', 'Nivdis', 'double', CreoleTypes::NUMERIC, true, 2);
 
 		$tMap->addColumn('FORPRE', 'Forpre', 'string', CreoleTypes::VARCHAR, true, 32);
 
 		$tMap->addColumn('ASIPER', 'Asiper', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('NUMPER', 'Numper', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('NUMPER', 'Numper', 'double', CreoleTypes::NUMERIC, true, 2);
 
 		$tMap->addColumn('PERACT', 'Peract', 'string', CreoleTypes::VARCHAR, true, 2);
 
-		$tMap->addColumn('FECPER', 'Fecper', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECPER', 'Fecper', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECCIE', 'Feccie', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECCIE', 'Feccie', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('ETADEF', 'Etadef', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -82,7 +84,23 @@ class CpdefnivMapBuilder {
 
 		$tMap->addColumn('UNIDAD', 'Unidad', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('CORPRC', 'Corprc', 'double', CreoleTypes::NUMERIC, false, 8);
+
+		$tMap->addColumn('CORCOM', 'Corcom', 'double', CreoleTypes::NUMERIC, false, 8);
+
+		$tMap->addColumn('CORCAU', 'Corcau', 'double', CreoleTypes::NUMERIC, false, 8);
+
+		$tMap->addColumn('CORPAG', 'Corpag', 'double', CreoleTypes::NUMERIC, false, 8);
+
+		$tMap->addColumn('CORSOLADIDIS', 'Corsoladidis', 'double', CreoleTypes::NUMERIC, false, 8);
+
+		$tMap->addColumn('CORSOLTRA', 'Corsoltra', 'double', CreoleTypes::NUMERIC, false, 8);
+
+		$tMap->addColumn('CORAJU', 'Coraju', 'double', CreoleTypes::NUMERIC, false, 8);
+
+		$tMap->addColumn('CORFUE', 'Corfue', 'double', CreoleTypes::NUMERIC, false, 8);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

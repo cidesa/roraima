@@ -1,55 +1,63 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Fcdefins
-    theme:            default
+    theme:            cidesaGenerator
+
     fields:
-      codemp: { name: Código}
-      nomemp: { name: Nombre}            
-      loncodubifis: { name: Longitud del Código}
-      rupubifis: { name: Rupturas de Control}
-      forubifis: { name: Formato del Código}
-      loncodubimag: { name: Longitud del Codigo}      
-      rupubimag: { name: Rupturas de Control} 
-      forubimag: { name: Formato del Código}
-      codpic: { name: Patente Industria y Comercio}
-      nomfuep: { name: Patente Industria y Comercio}
-      codveh: { name: Vehiculos}
-      nomfuep: { name: Vehiculos}
-      codinm: { name: Inmuebles Urbanos}
-      nomfuei: { name: Inmuebles Urbanos}
-      codpro: { name: Propaganda Comercial}
-      nomfuepr: { name: Propaganda Comercial} 
-      codesp: { name: Espectáculos Públicos}
-      nomfuee: { name: Espectáculos Públicos}
-      codapu: { name: Apuesta Lícita}
-      nomfuea: { name: Apuesta Lícita}     
-      loncodact: { name: Longitud del Código}
-      rupact: { name: Rupturas de Control}
-      foract: { name: Formato del Código}
-      codajupic: { name: Fuente de Ingreso para el Ajuste}
-      porpic: { name: Alicuota en Porcentaje para Actividad Comercial}
-      unitas: { name: Criterio para Calculo de Tasa}
-      unipic: { name: Unidad}
-      valunitri: { name: Valor de Unidad Tributaria}                  
-      loncodveh: { name: Longitud del Codigo}
-      rupveh: { name: Rupturas de Control}
-      forveh: { name: Formato del Codigo}
-      porveh: { name: Alicuota en Porcentaje para Vehiculos}            
-      loncodcat: { name: Longitud del Codigo}      
-      rupcat: { name: Rupturas de Control}      
-      forcat: { name: Formato del Codigo}       
-      porinm: { name: Alicuota en Porcentaje para Vehiculos}
-                     
+      codemp:  { name: Patente Insdustria y Comercio, params: size=10 maxlength=4}
+      loncodact:  { name: Longitud Código, params: size=3 maxlength=2 }
+      loncodveh:  { name: Longitud Código, params: size=3 maxlength=2 }
+      loncodcat:  { name: Longitud Código, params: size=3 maxlength=2 }
+      loncodubifis:  { name: Longitud Código, params: size=3 maxlength=2 }
+      loncodubimag:  { name: Longitud Código, params: size=3 maxlength=2 }
+      rupact:  { name: Rupturas de Control, params: size=3 maxlength=2 }
+      rupveh:  { name: Rupturas de Control, params: size=3 maxlength=2 }
+      rupcat:  { name: Rupturas de Control, params: size=3 maxlength=2 }
+      rupubifis:  { name: Rupturas de Control, params: size=3 maxlength=2 }
+      rupubimag:  { name: Rupturas de Control, params: size=3 maxlength=2 }
+      foract:  { name: Formato del Código, params: size=30 maxlength=16 }
+      forveh:  { name: Formato del Código, params: size=30 maxlength=16 }
+      forcat:  { name: Formato del Código, params: size=32 maxlength=20 }
+      forubifis:  { name: Formato del Código, params: size=30 maxlength=16 }
+      forubimag:  { name: Formato del Código, params: size=30 maxlength=16 }
+      porpic:  { name: Alícuota en Porcentaje para Actividad Comercial, params: size=2 maxlength=1 }
+      porveh:  { name: Alícuota en Porcentaje para Vehiculo, params: size=2 maxlength=1 }
+      porinm:  { name: Alícuota en Porcentaje para Número Catastral, params: size=2 maxlength=1 }
+      unipic:  { name: Unidad, params: size=2 maxlength=1 }
+      valunitri:  { name: Valor Unidad Tributaria, params: size=10 }
+      unitas:  { name: Criterio para el Calculo de la Tasa, params: size=2 maxlength=1 }
+      codpic:  { name: Patente Insdustria y Comercio, params: size=3 maxlength=2 }
+      codveh:  { name: Vehículos, params: size=3 maxlength=2 }
+      codinm:  { name: Inmuebles Urbanos, params: size=2 maxlength=1 }
+      codpro:  { name: Propaganda Comercial, params: size=3 maxlength=2 }
+      codesp:  { name: Espectáculos Públicos, params: size=3 maxlength=2 }
+      codapu:  { name: Apuestas Lícitas, params: size=3 maxlength=2 }
+      codajupic:  { name: Fuentes de Ingresos para el Ajuste, params: size=3 maxlength=2 }
     list:
-      title:          Institucion
-      filters:        [codemp]
-      display:        [=codemp, nomemp]                    
+      title:     Definición de Institución
+      display:   [=codemp]
+      sort:      nomdes
+      filters:   [codemp]
+      fields:
+        nomdes:
+          params: size=10
+      max_per_page: 10
       object_actions:
         _edit:        ~
         _delete:      ~
-      max_per_page:   5      
+      sort:  codemp
     edit:
-      title:          Edicion de Institucion
-      display:        [=codemp, nomemp, loncodubifis, rupubifis, forubifis, loncodubimag, rupubimag, forubimag, codpic, nomfuep, codveh, nomfuev, codinm, nomfuei, codpro, nomfuepr, codesp, nomfuee, codapu, nomfuea, loncodact, rupact, foract, codajupic, porpic, unitas, unipic, valunitri, loncodveh, rupveh, forveh, porveh, loncodcat, rupcat, forcat, porinm]
-      
+      title:          Edición de Institución
+      display:
+        "Actividad Comercial":   [ loncodact, rupact, foract, codajupic, _porpic, _unitas, _unipic, valunitri ]
+        "Vehículos":   [ loncodveh, rupveh, forveh, _porveh ]
+        "Número Catastral":   [ loncodcat, rupcat, forcat, _porinm ]
+        "Ubicación Fisica":   [ loncodubifis, rupubifis, forubifis ]
+        "Ubicación Magnetica":   [ loncodubimag, rupubimag, forubimag ]
+        "Fuentes de Ingresos":   [ _codpic, _codveh, _codinm, _codpro, _codesp, _codapu ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

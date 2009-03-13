@@ -210,6 +210,7 @@ abstract class BaseRhdefvalinsPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(RhdefvalinsPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

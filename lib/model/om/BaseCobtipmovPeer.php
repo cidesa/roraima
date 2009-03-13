@@ -220,6 +220,7 @@ abstract class BaseCobtipmovPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobtipmovPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

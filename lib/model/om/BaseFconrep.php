@@ -57,241 +57,273 @@ abstract class BaseFconrep extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCedcon()
-	{
+  
+  public function getCedcon()
+  {
 
-		return $this->cedcon; 		
-	}
-	
-	public function getRifcon()
-	{
+    return trim($this->cedcon);
 
-		return $this->rifcon; 		
-	}
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getRifcon()
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getRepcon()
-	{
+    return trim($this->rifcon);
 
-		return $this->repcon; 		
-	}
-	
-	public function getDircon()
-	{
+  }
+  
+  public function getNomcon()
+  {
 
-		return $this->dircon; 		
-	}
-	
-	public function getFeccon($format = 'Y-m-d')
-	{
+    return trim($this->nomcon);
 
-		if ($this->feccon === null || $this->feccon === '') {
-			return null;
-		} elseif (!is_int($this->feccon)) {
-						$ts = strtotime($this->feccon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
-			}
-		} else {
-			$ts = $this->feccon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getRepcon()
+  {
 
-	
-	public function getTelcon()
-	{
+    return trim($this->repcon);
 
-		return $this->telcon; 		
-	}
-	
-	public function getEmacon()
-	{
+  }
+  
+  public function getDircon()
+  {
 
-		return $this->emacon; 		
-	}
-	
-	public function getCodsec()
-	{
+    return trim($this->dircon);
 
-		return $this->codsec; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getFeccon($format = 'Y-m-d')
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getId()
-	{
+    if ($this->feccon === null || $this->feccon === '') {
+      return null;
+    } elseif (!is_int($this->feccon)) {
+            $ts = adodb_strtotime($this->feccon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
+      }
+    } else {
+      $ts = $this->feccon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getTelcon()
+  {
+
+    return trim($this->telcon);
+
+  }
+  
+  public function getEmacon()
+  {
+
+    return trim($this->emacon);
+
+  }
+  
+  public function getCodsec()
+  {
+
+    return trim($this->codsec);
+
+  }
+  
+  public function getCodpar()
+  {
+
+    return trim($this->codpar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCedcon($v)
 	{
 
-		if ($this->cedcon !== $v) {
-			$this->cedcon = $v;
-			$this->modifiedColumns[] = FconrepPeer::CEDCON;
-		}
-
+    if ($this->cedcon !== $v) {
+        $this->cedcon = $v;
+        $this->modifiedColumns[] = FconrepPeer::CEDCON;
+      }
+  
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FconrepPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FconrepPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = FconrepPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = FconrepPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setRepcon($v)
 	{
 
-		if ($this->repcon !== $v) {
-			$this->repcon = $v;
-			$this->modifiedColumns[] = FconrepPeer::REPCON;
-		}
-
+    if ($this->repcon !== $v) {
+        $this->repcon = $v;
+        $this->modifiedColumns[] = FconrepPeer::REPCON;
+      }
+  
 	} 
 	
 	public function setDircon($v)
 	{
 
-		if ($this->dircon !== $v) {
-			$this->dircon = $v;
-			$this->modifiedColumns[] = FconrepPeer::DIRCON;
-		}
-
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = FconrepPeer::DIRCON;
+      }
+  
 	} 
 	
 	public function setFeccon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccon !== $ts) {
-			$this->feccon = $ts;
-			$this->modifiedColumns[] = FconrepPeer::FECCON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccon !== $ts) {
+      $this->feccon = $ts;
+      $this->modifiedColumns[] = FconrepPeer::FECCON;
+    }
 
 	} 
 	
 	public function setTelcon($v)
 	{
 
-		if ($this->telcon !== $v) {
-			$this->telcon = $v;
-			$this->modifiedColumns[] = FconrepPeer::TELCON;
-		}
-
+    if ($this->telcon !== $v) {
+        $this->telcon = $v;
+        $this->modifiedColumns[] = FconrepPeer::TELCON;
+      }
+  
 	} 
 	
 	public function setEmacon($v)
 	{
 
-		if ($this->emacon !== $v) {
-			$this->emacon = $v;
-			$this->modifiedColumns[] = FconrepPeer::EMACON;
-		}
-
+    if ($this->emacon !== $v) {
+        $this->emacon = $v;
+        $this->modifiedColumns[] = FconrepPeer::EMACON;
+      }
+  
 	} 
 	
 	public function setCodsec($v)
 	{
 
-		if ($this->codsec !== $v) {
-			$this->codsec = $v;
-			$this->modifiedColumns[] = FconrepPeer::CODSEC;
-		}
-
+    if ($this->codsec !== $v) {
+        $this->codsec = $v;
+        $this->modifiedColumns[] = FconrepPeer::CODSEC;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = FconrepPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = FconrepPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FconrepPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FconrepPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->cedcon = $rs->getString($startcol + 0);
+      $this->cedcon = $rs->getString($startcol + 0);
 
-			$this->rifcon = $rs->getString($startcol + 1);
+      $this->rifcon = $rs->getString($startcol + 1);
 
-			$this->nomcon = $rs->getString($startcol + 2);
+      $this->nomcon = $rs->getString($startcol + 2);
 
-			$this->repcon = $rs->getString($startcol + 3);
+      $this->repcon = $rs->getString($startcol + 3);
 
-			$this->dircon = $rs->getString($startcol + 4);
+      $this->dircon = $rs->getString($startcol + 4);
 
-			$this->feccon = $rs->getDate($startcol + 5, null);
+      $this->feccon = $rs->getDate($startcol + 5, null);
 
-			$this->telcon = $rs->getString($startcol + 6);
+      $this->telcon = $rs->getString($startcol + 6);
 
-			$this->emacon = $rs->getString($startcol + 7);
+      $this->emacon = $rs->getString($startcol + 7);
 
-			$this->codsec = $rs->getString($startcol + 8);
+      $this->codsec = $rs->getString($startcol + 8);
 
-			$this->codpar = $rs->getString($startcol + 9);
+      $this->codpar = $rs->getString($startcol + 9);
 
-			$this->id = $rs->getInt($startcol + 10);
+      $this->id = $rs->getInt($startcol + 10);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 11; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fconrep object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 11; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fconrep object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -348,6 +380,7 @@ abstract class BaseFconrep extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FconrepPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FconrepPeer::doUpdate($this, $con);

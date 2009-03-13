@@ -13,7 +13,7 @@ abstract class BaseOcdefequPeer {
 	const CLASS_DEFAULT = 'lib.model.Ocdefequ';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -26,6 +26,9 @@ abstract class BaseOcdefequPeer {
 	const DESEQU = 'ocdefequ.DESEQU';
 
 	
+	const CODTIPEQU = 'ocdefequ.CODTIPEQU';
+
+	
 	const ID = 'ocdefequ.ID';
 
 	
@@ -34,18 +37,18 @@ abstract class BaseOcdefequPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codequ', 'Desequ', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OcdefequPeer::CODEQU, OcdefequPeer::DESEQU, OcdefequPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codequ', 'desequ', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Codequ', 'Desequ', 'Codtipequ', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OcdefequPeer::CODEQU, OcdefequPeer::DESEQU, OcdefequPeer::CODTIPEQU, OcdefequPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codequ', 'desequ', 'codtipequ', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codequ' => 0, 'Desequ' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (OcdefequPeer::CODEQU => 0, OcdefequPeer::DESEQU => 1, OcdefequPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('codequ' => 0, 'desequ' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Codequ' => 0, 'Desequ' => 1, 'Codtipequ' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (OcdefequPeer::CODEQU => 0, OcdefequPeer::DESEQU => 1, OcdefequPeer::CODTIPEQU => 2, OcdefequPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('codequ' => 0, 'desequ' => 1, 'codtipequ' => 2, 'id' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
@@ -102,6 +105,8 @@ abstract class BaseOcdefequPeer {
 		$criteria->addSelectColumn(OcdefequPeer::CODEQU);
 
 		$criteria->addSelectColumn(OcdefequPeer::DESEQU);
+
+		$criteria->addSelectColumn(OcdefequPeer::CODTIPEQU);
 
 		$criteria->addSelectColumn(OcdefequPeer::ID);
 
@@ -205,6 +210,7 @@ abstract class BaseOcdefequPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcdefequPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

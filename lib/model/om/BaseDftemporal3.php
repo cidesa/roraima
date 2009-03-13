@@ -101,485 +101,526 @@ abstract class BaseDftemporal3 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodigo()
-	{
+  
+  public function getCodigo()
+  {
 
-		return $this->codigo; 		
-	}
-	
-	public function getFecha($format = 'Y-m-d')
-	{
+    return trim($this->codigo);
 
-		if ($this->fecha === null || $this->fecha === '') {
-			return null;
-		} elseif (!is_int($this->fecha)) {
-						$ts = strtotime($this->fecha);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
-			}
-		} else {
-			$ts = $this->fecha;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecha($format = 'Y-m-d')
+  {
 
-	
-	public function getAbr()
-	{
+    if ($this->fecha === null || $this->fecha === '') {
+      return null;
+    } elseif (!is_int($this->fecha)) {
+            $ts = adodb_strtotime($this->fecha);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
+      }
+    } else {
+      $ts = $this->fecha;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->abr; 		
-	}
-	
-	public function getVida()
-	{
+  
+  public function getAbr()
+  {
 
-		return $this->vida; 		
-	}
-	
-	public function getBen()
-	{
+    return trim($this->abr);
 
-		return $this->ben; 		
-	}
-	
-	public function getUsu()
-	{
+  }
+  
+  public function getVida()
+  {
 
-		return $this->usu; 		
-	}
-	
-	public function getFecharec($format = 'Y-m-d')
-	{
+    return trim($this->vida);
 
-		if ($this->fecharec === null || $this->fecharec === '') {
-			return null;
-		} elseif (!is_int($this->fecharec)) {
-						$ts = strtotime($this->fecharec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecharec] as date/time value: " . var_export($this->fecharec, true));
-			}
-		} else {
-			$ts = $this->fecharec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getBen()
+  {
 
-	
-	public function getFechaate($format = 'Y-m-d')
-	{
+    return trim($this->ben);
 
-		if ($this->fechaate === null || $this->fechaate === '') {
-			return null;
-		} elseif (!is_int($this->fechaate)) {
-						$ts = strtotime($this->fechaate);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechaate] as date/time value: " . var_export($this->fechaate, true));
-			}
-		} else {
-			$ts = $this->fechaate;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getUsu()
+  {
 
-	
-	public function getEstad()
-	{
+    return $this->usu;
 
-		return $this->estad; 		
-	}
-	
-	public function getRuta()
-	{
+  }
+  
+  public function getFecharec($format = 'Y-m-d')
+  {
 
-		return $this->ruta; 		
-	}
-	
-	public function getNomtab()
-	{
+    if ($this->fecharec === null || $this->fecharec === '') {
+      return null;
+    } elseif (!is_int($this->fecharec)) {
+            $ts = adodb_strtotime($this->fecharec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecharec] as date/time value: " . var_export($this->fecharec, true));
+      }
+    } else {
+      $ts = $this->fecharec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->nomtab; 		
-	}
-	
-	public function getUnidadori()
-	{
+  
+  public function getFechaate($format = 'Y-m-d')
+  {
 
-		return $this->unidadori; 		
-	}
-	
-	public function getUnidad()
-	{
+    if ($this->fechaate === null || $this->fechaate === '') {
+      return null;
+    } elseif (!is_int($this->fechaate)) {
+            $ts = adodb_strtotime($this->fechaate);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechaate] as date/time value: " . var_export($this->fechaate, true));
+      }
+    } else {
+      $ts = $this->fechaate;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->unidad; 		
-	}
-	
-	public function getAnuate()
-	{
+  
+  public function getEstad()
+  {
 
-		return $this->anuate; 		
-	}
-	
-	public function getChkuni1()
-	{
+    return trim($this->estad);
 
-		return $this->chkuni1; 		
-	}
-	
-	public function getChkuni2()
-	{
+  }
+  
+  public function getRuta()
+  {
 
-		return $this->chkuni2; 		
-	}
-	
-	public function getChkuni3()
-	{
+    return trim($this->ruta);
 
-		return $this->chkuni3; 		
-	}
-	
-	public function getChkuni4()
-	{
+  }
+  
+  public function getNomtab()
+  {
 
-		return $this->chkuni4; 		
-	}
-	
-	public function getChkuni5()
-	{
+    return trim($this->nomtab);
 
-		return $this->chkuni5; 		
-	}
-	
-	public function getChkuni6()
-	{
+  }
+  
+  public function getUnidadori()
+  {
 
-		return $this->chkuni6; 		
-	}
-	
-	public function getChkuni7()
-	{
+    return trim($this->unidadori);
 
-		return $this->chkuni7; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getUnidad()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->unidad);
+
+  }
+  
+  public function getAnuate()
+  {
+
+    return trim($this->anuate);
+
+  }
+  
+  public function getChkuni1()
+  {
+
+    return trim($this->chkuni1);
+
+  }
+  
+  public function getChkuni2()
+  {
+
+    return trim($this->chkuni2);
+
+  }
+  
+  public function getChkuni3()
+  {
+
+    return trim($this->chkuni3);
+
+  }
+  
+  public function getChkuni4()
+  {
+
+    return trim($this->chkuni4);
+
+  }
+  
+  public function getChkuni5()
+  {
+
+    return trim($this->chkuni5);
+
+  }
+  
+  public function getChkuni6()
+  {
+
+    return trim($this->chkuni6);
+
+  }
+  
+  public function getChkuni7()
+  {
+
+    return trim($this->chkuni7);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodigo($v)
 	{
 
-		if ($this->codigo !== $v) {
-			$this->codigo = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::CODIGO;
-		}
-
+    if ($this->codigo !== $v) {
+        $this->codigo = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::CODIGO;
+      }
+  
 	} 
 	
 	public function setFecha($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecha !== $ts) {
-			$this->fecha = $ts;
-			$this->modifiedColumns[] = Dftemporal3Peer::FECHA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha !== $ts) {
+      $this->fecha = $ts;
+      $this->modifiedColumns[] = Dftemporal3Peer::FECHA;
+    }
 
 	} 
 	
 	public function setAbr($v)
 	{
 
-		if ($this->abr !== $v) {
-			$this->abr = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::ABR;
-		}
-
+    if ($this->abr !== $v) {
+        $this->abr = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::ABR;
+      }
+  
 	} 
 	
 	public function setVida($v)
 	{
 
-		if ($this->vida !== $v) {
-			$this->vida = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::VIDA;
-		}
-
+    if ($this->vida !== $v) {
+        $this->vida = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::VIDA;
+      }
+  
 	} 
 	
 	public function setBen($v)
 	{
 
-		if ($this->ben !== $v) {
-			$this->ben = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::BEN;
-		}
-
+    if ($this->ben !== $v) {
+        $this->ben = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::BEN;
+      }
+  
 	} 
 	
 	public function setUsu($v)
 	{
 
-		if ($this->usu !== $v) {
-			$this->usu = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::USU;
-		}
-
+    if ($this->usu !== $v) {
+        $this->usu = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::USU;
+      }
+  
 	} 
 	
 	public function setFecharec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecharec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecharec !== $ts) {
-			$this->fecharec = $ts;
-			$this->modifiedColumns[] = Dftemporal3Peer::FECHAREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecharec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecharec !== $ts) {
+      $this->fecharec = $ts;
+      $this->modifiedColumns[] = Dftemporal3Peer::FECHAREC;
+    }
 
 	} 
 	
 	public function setFechaate($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechaate] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechaate !== $ts) {
-			$this->fechaate = $ts;
-			$this->modifiedColumns[] = Dftemporal3Peer::FECHAATE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechaate] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechaate !== $ts) {
+      $this->fechaate = $ts;
+      $this->modifiedColumns[] = Dftemporal3Peer::FECHAATE;
+    }
 
 	} 
 	
 	public function setEstad($v)
 	{
 
-		if ($this->estad !== $v) {
-			$this->estad = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::ESTAD;
-		}
-
+    if ($this->estad !== $v) {
+        $this->estad = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::ESTAD;
+      }
+  
 	} 
 	
 	public function setRuta($v)
 	{
 
-		if ($this->ruta !== $v) {
-			$this->ruta = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::RUTA;
-		}
-
+    if ($this->ruta !== $v) {
+        $this->ruta = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::RUTA;
+      }
+  
 	} 
 	
 	public function setNomtab($v)
 	{
 
-		if ($this->nomtab !== $v) {
-			$this->nomtab = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::NOMTAB;
-		}
-
+    if ($this->nomtab !== $v) {
+        $this->nomtab = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::NOMTAB;
+      }
+  
 	} 
 	
 	public function setUnidadori($v)
 	{
 
-		if ($this->unidadori !== $v) {
-			$this->unidadori = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::UNIDADORI;
-		}
-
+    if ($this->unidadori !== $v) {
+        $this->unidadori = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::UNIDADORI;
+      }
+  
 	} 
 	
 	public function setUnidad($v)
 	{
 
-		if ($this->unidad !== $v) {
-			$this->unidad = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::UNIDAD;
-		}
-
+    if ($this->unidad !== $v) {
+        $this->unidad = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::UNIDAD;
+      }
+  
 	} 
 	
 	public function setAnuate($v)
 	{
 
-		if ($this->anuate !== $v) {
-			$this->anuate = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::ANUATE;
-		}
-
+    if ($this->anuate !== $v) {
+        $this->anuate = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::ANUATE;
+      }
+  
 	} 
 	
 	public function setChkuni1($v)
 	{
 
-		if ($this->chkuni1 !== $v || $v === '0') {
-			$this->chkuni1 = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::CHKUNI1;
-		}
-
+    if ($this->chkuni1 !== $v || $v === '0') {
+        $this->chkuni1 = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::CHKUNI1;
+      }
+  
 	} 
 	
 	public function setChkuni2($v)
 	{
 
-		if ($this->chkuni2 !== $v || $v === '0') {
-			$this->chkuni2 = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::CHKUNI2;
-		}
-
+    if ($this->chkuni2 !== $v || $v === '0') {
+        $this->chkuni2 = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::CHKUNI2;
+      }
+  
 	} 
 	
 	public function setChkuni3($v)
 	{
 
-		if ($this->chkuni3 !== $v || $v === '0') {
-			$this->chkuni3 = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::CHKUNI3;
-		}
-
+    if ($this->chkuni3 !== $v || $v === '0') {
+        $this->chkuni3 = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::CHKUNI3;
+      }
+  
 	} 
 	
 	public function setChkuni4($v)
 	{
 
-		if ($this->chkuni4 !== $v || $v === '0') {
-			$this->chkuni4 = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::CHKUNI4;
-		}
-
+    if ($this->chkuni4 !== $v || $v === '0') {
+        $this->chkuni4 = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::CHKUNI4;
+      }
+  
 	} 
 	
 	public function setChkuni5($v)
 	{
 
-		if ($this->chkuni5 !== $v || $v === '0') {
-			$this->chkuni5 = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::CHKUNI5;
-		}
-
+    if ($this->chkuni5 !== $v || $v === '0') {
+        $this->chkuni5 = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::CHKUNI5;
+      }
+  
 	} 
 	
 	public function setChkuni6($v)
 	{
 
-		if ($this->chkuni6 !== $v || $v === '0') {
-			$this->chkuni6 = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::CHKUNI6;
-		}
-
+    if ($this->chkuni6 !== $v || $v === '0') {
+        $this->chkuni6 = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::CHKUNI6;
+      }
+  
 	} 
 	
 	public function setChkuni7($v)
 	{
 
-		if ($this->chkuni7 !== $v || $v === '0') {
-			$this->chkuni7 = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::CHKUNI7;
-		}
-
+    if ($this->chkuni7 !== $v || $v === '0') {
+        $this->chkuni7 = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::CHKUNI7;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Dftemporal3Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Dftemporal3Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codigo = $rs->getString($startcol + 0);
+      $this->codigo = $rs->getString($startcol + 0);
 
-			$this->fecha = $rs->getDate($startcol + 1, null);
+      $this->fecha = $rs->getDate($startcol + 1, null);
 
-			$this->abr = $rs->getString($startcol + 2);
+      $this->abr = $rs->getString($startcol + 2);
 
-			$this->vida = $rs->getString($startcol + 3);
+      $this->vida = $rs->getString($startcol + 3);
 
-			$this->ben = $rs->getString($startcol + 4);
+      $this->ben = $rs->getString($startcol + 4);
 
-			$this->usu = $rs->getString($startcol + 5);
+      $this->usu = $rs->getString($startcol + 5);
 
-			$this->fecharec = $rs->getDate($startcol + 6, null);
+      $this->fecharec = $rs->getDate($startcol + 6, null);
 
-			$this->fechaate = $rs->getDate($startcol + 7, null);
+      $this->fechaate = $rs->getDate($startcol + 7, null);
 
-			$this->estad = $rs->getString($startcol + 8);
+      $this->estad = $rs->getString($startcol + 8);
 
-			$this->ruta = $rs->getString($startcol + 9);
+      $this->ruta = $rs->getString($startcol + 9);
 
-			$this->nomtab = $rs->getString($startcol + 10);
+      $this->nomtab = $rs->getString($startcol + 10);
 
-			$this->unidadori = $rs->getString($startcol + 11);
+      $this->unidadori = $rs->getString($startcol + 11);
 
-			$this->unidad = $rs->getString($startcol + 12);
+      $this->unidad = $rs->getString($startcol + 12);
 
-			$this->anuate = $rs->getString($startcol + 13);
+      $this->anuate = $rs->getString($startcol + 13);
 
-			$this->chkuni1 = $rs->getString($startcol + 14);
+      $this->chkuni1 = $rs->getString($startcol + 14);
 
-			$this->chkuni2 = $rs->getString($startcol + 15);
+      $this->chkuni2 = $rs->getString($startcol + 15);
 
-			$this->chkuni3 = $rs->getString($startcol + 16);
+      $this->chkuni3 = $rs->getString($startcol + 16);
 
-			$this->chkuni4 = $rs->getString($startcol + 17);
+      $this->chkuni4 = $rs->getString($startcol + 17);
 
-			$this->chkuni5 = $rs->getString($startcol + 18);
+      $this->chkuni5 = $rs->getString($startcol + 18);
 
-			$this->chkuni6 = $rs->getString($startcol + 19);
+      $this->chkuni6 = $rs->getString($startcol + 19);
 
-			$this->chkuni7 = $rs->getString($startcol + 20);
+      $this->chkuni7 = $rs->getString($startcol + 20);
 
-			$this->id = $rs->getInt($startcol + 21);
+      $this->id = $rs->getInt($startcol + 21);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 22; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Dftemporal3 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 22; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Dftemporal3 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

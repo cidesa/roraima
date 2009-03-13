@@ -1,0 +1,57 @@
+methods:
+  post:
+   - "atdonaciones{coddon}"
+   - "atdonaciones{desdon}"
+   - "atdonaciones{unidon}"
+
+
+names:
+
+  atdonaciones{coddon}:
+    required:  Yes
+    required_msg: Debe tipear un código
+    validators: Vstring_1_50_0
+
+
+  atdonaciones{desdon}:
+    required:  Yes
+    required_msg: Debe insertar la descripción de la Donación/Ayuda
+    validators: Vstring_1_50_1
+
+
+  atdonaciones{unidon}:
+    required:  Yes
+    required_msg: Debe insertar la Unidad de Medida
+    validators: Vstring_1_50_2
+
+
+
+Vstring_1_50_0:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       50
+        max_error: La descripción no puede pasar mas de 50 caracteres
+
+
+
+Vstring_1_50_1:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       50
+        max_error: La descripción no puede pasar mas de 50 caracteres
+
+
+
+Vstring_1_50_2:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       50
+        max_error: La descripción no puede pasar mas de 50 caracteres
+
+

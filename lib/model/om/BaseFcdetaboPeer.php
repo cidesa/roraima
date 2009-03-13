@@ -215,6 +215,7 @@ abstract class BaseFcdetaboPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdetaboPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

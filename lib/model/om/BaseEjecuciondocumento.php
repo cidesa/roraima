@@ -85,398 +85,436 @@ abstract class BaseEjecuciondocumento extends BaseObject  implements Persistent 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTipo()
-	{
+  
+  public function getTipo()
+  {
 
-		return $this->tipo; 		
-	}
-	
-	public function getRefdoc()
-	{
+    return trim($this->tipo);
 
-		return $this->refdoc; 		
-	}
-	
-	public function getFecdoc($format = 'Y-m-d')
-	{
+  }
+  
+  public function getRefdoc()
+  {
 
-		if ($this->fecdoc === null || $this->fecdoc === '') {
-			return null;
-		} elseif (!is_int($this->fecdoc)) {
-						$ts = strtotime($this->fecdoc);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdoc] as date/time value: " . var_export($this->fecdoc, true));
-			}
-		} else {
-			$ts = $this->fecdoc;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->refdoc);
 
-	
-	public function getStaimp()
-	{
+  }
+  
+  public function getFecdoc($format = 'Y-m-d')
+  {
 
-		return $this->staimp; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    if ($this->fecdoc === null || $this->fecdoc === '') {
+      return null;
+    } elseif (!is_int($this->fecdoc)) {
+            $ts = adodb_strtotime($this->fecdoc);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdoc] as date/time value: " . var_export($this->fecdoc, true));
+      }
+    } else {
+      $ts = $this->fecdoc;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getStaimp()
+  {
 
-	
-	public function getRefere()
-	{
+    return trim($this->staimp);
 
-		return $this->refere; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getMonprc()
-	{
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monprc,2,',','.');
-		
-	}
-	
-	public function getMonajuprc()
-	{
+  
+  public function getRefere()
+  {
 
-		return number_format($this->monajuprc,2,',','.');
-		
-	}
-	
-	public function getMoncom()
-	{
+    return trim($this->refere);
 
-		return number_format($this->moncom,2,',','.');
-		
-	}
-	
-	public function getMonajucom()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->monajucom,2,',','.');
-		
-	}
-	
-	public function getMoncau()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->moncau,2,',','.');
-		
-	}
-	
-	public function getMonajucau()
-	{
+  }
+  
+  public function getMonprc($val=false)
+  {
 
-		return number_format($this->monajucau,2,',','.');
-		
-	}
-	
-	public function getMonpag()
-	{
+    if($val) return number_format($this->monprc,2,',','.');
+    else return $this->monprc;
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMonajupag()
-	{
+  }
+  
+  public function getMonajuprc($val=false)
+  {
 
-		return number_format($this->monajupag,2,',','.');
-		
-	}
-	
-	public function getTipdoc()
-	{
+    if($val) return number_format($this->monajuprc,2,',','.');
+    else return $this->monajuprc;
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getDesdoc()
-	{
+  }
+  
+  public function getMoncom($val=false)
+  {
 
-		return $this->desdoc; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->moncom,2,',','.');
+    else return $this->moncom;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonajucom($val=false)
+  {
+
+    if($val) return number_format($this->monajucom,2,',','.');
+    else return $this->monajucom;
+
+  }
+  
+  public function getMoncau($val=false)
+  {
+
+    if($val) return number_format($this->moncau,2,',','.');
+    else return $this->moncau;
+
+  }
+  
+  public function getMonajucau($val=false)
+  {
+
+    if($val) return number_format($this->monajucau,2,',','.');
+    else return $this->monajucau;
+
+  }
+  
+  public function getMonpag($val=false)
+  {
+
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getMonajupag($val=false)
+  {
+
+    if($val) return number_format($this->monajupag,2,',','.');
+    else return $this->monajupag;
+
+  }
+  
+  public function getTipdoc()
+  {
+
+    return trim($this->tipdoc);
+
+  }
+  
+  public function getDesdoc()
+  {
+
+    return trim($this->desdoc);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setRefdoc($v)
 	{
 
-		if ($this->refdoc !== $v) {
-			$this->refdoc = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::REFDOC;
-		}
-
+    if ($this->refdoc !== $v) {
+        $this->refdoc = $v;
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::REFDOC;
+      }
+  
 	} 
 	
 	public function setFecdoc($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdoc] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdoc !== $ts) {
-			$this->fecdoc = $ts;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::FECDOC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdoc] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdoc !== $ts) {
+      $this->fecdoc = $ts;
+      $this->modifiedColumns[] = EjecuciondocumentoPeer::FECDOC;
+    }
 
 	} 
 	
 	public function setStaimp($v)
 	{
 
-		if ($this->staimp !== $v) {
-			$this->staimp = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::STAIMP;
-		}
-
+    if ($this->staimp !== $v) {
+        $this->staimp = $v;
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::STAIMP;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = EjecuciondocumentoPeer::FECANU;
+    }
 
 	} 
 	
 	public function setRefere($v)
 	{
 
-		if ($this->refere !== $v) {
-			$this->refere = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::REFERE;
-		}
-
+    if ($this->refere !== $v) {
+        $this->refere = $v;
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::REFERE;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMonprc($v)
 	{
 
-		if ($this->monprc !== $v || $v === 0) {
-			$this->monprc = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::MONPRC;
-		}
-
+    if ($this->monprc !== $v || $v === 0) {
+        $this->monprc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::MONPRC;
+      }
+  
 	} 
 	
 	public function setMonajuprc($v)
 	{
 
-		if ($this->monajuprc !== $v || $v === 0) {
-			$this->monajuprc = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::MONAJUPRC;
-		}
-
+    if ($this->monajuprc !== $v || $v === 0) {
+        $this->monajuprc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::MONAJUPRC;
+      }
+  
 	} 
 	
 	public function setMoncom($v)
 	{
 
-		if ($this->moncom !== $v || $v === 0) {
-			$this->moncom = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::MONCOM;
-		}
-
+    if ($this->moncom !== $v || $v === 0) {
+        $this->moncom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::MONCOM;
+      }
+  
 	} 
 	
 	public function setMonajucom($v)
 	{
 
-		if ($this->monajucom !== $v || $v === 0) {
-			$this->monajucom = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::MONAJUCOM;
-		}
-
+    if ($this->monajucom !== $v || $v === 0) {
+        $this->monajucom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::MONAJUCOM;
+      }
+  
 	} 
 	
 	public function setMoncau($v)
 	{
 
-		if ($this->moncau !== $v || $v === 0) {
-			$this->moncau = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::MONCAU;
-		}
-
+    if ($this->moncau !== $v || $v === 0) {
+        $this->moncau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::MONCAU;
+      }
+  
 	} 
 	
 	public function setMonajucau($v)
 	{
 
-		if ($this->monajucau !== $v || $v === 0) {
-			$this->monajucau = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::MONAJUCAU;
-		}
-
+    if ($this->monajucau !== $v || $v === 0) {
+        $this->monajucau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::MONAJUCAU;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v || $v === 0) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v || $v === 0) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMonajupag($v)
 	{
 
-		if ($this->monajupag !== $v || $v === 0) {
-			$this->monajupag = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::MONAJUPAG;
-		}
-
+    if ($this->monajupag !== $v || $v === 0) {
+        $this->monajupag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::MONAJUPAG;
+      }
+  
 	} 
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setDesdoc($v)
 	{
 
-		if ($this->desdoc !== $v) {
-			$this->desdoc = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::DESDOC;
-		}
-
+    if ($this->desdoc !== $v) {
+        $this->desdoc = $v;
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::DESDOC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = EjecuciondocumentoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = EjecuciondocumentoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tipo = $rs->getString($startcol + 0);
+      $this->tipo = $rs->getString($startcol + 0);
 
-			$this->refdoc = $rs->getString($startcol + 1);
+      $this->refdoc = $rs->getString($startcol + 1);
 
-			$this->fecdoc = $rs->getDate($startcol + 2, null);
+      $this->fecdoc = $rs->getDate($startcol + 2, null);
 
-			$this->staimp = $rs->getString($startcol + 3);
+      $this->staimp = $rs->getString($startcol + 3);
 
-			$this->fecanu = $rs->getDate($startcol + 4, null);
+      $this->fecanu = $rs->getDate($startcol + 4, null);
 
-			$this->refere = $rs->getString($startcol + 5);
+      $this->refere = $rs->getString($startcol + 5);
 
-			$this->codpre = $rs->getString($startcol + 6);
+      $this->codpre = $rs->getString($startcol + 6);
 
-			$this->monprc = $rs->getFloat($startcol + 7);
+      $this->monprc = $rs->getFloat($startcol + 7);
 
-			$this->monajuprc = $rs->getFloat($startcol + 8);
+      $this->monajuprc = $rs->getFloat($startcol + 8);
 
-			$this->moncom = $rs->getFloat($startcol + 9);
+      $this->moncom = $rs->getFloat($startcol + 9);
 
-			$this->monajucom = $rs->getFloat($startcol + 10);
+      $this->monajucom = $rs->getFloat($startcol + 10);
 
-			$this->moncau = $rs->getFloat($startcol + 11);
+      $this->moncau = $rs->getFloat($startcol + 11);
 
-			$this->monajucau = $rs->getFloat($startcol + 12);
+      $this->monajucau = $rs->getFloat($startcol + 12);
 
-			$this->monpag = $rs->getFloat($startcol + 13);
+      $this->monpag = $rs->getFloat($startcol + 13);
 
-			$this->monajupag = $rs->getFloat($startcol + 14);
+      $this->monajupag = $rs->getFloat($startcol + 14);
 
-			$this->tipdoc = $rs->getString($startcol + 15);
+      $this->tipdoc = $rs->getString($startcol + 15);
 
-			$this->desdoc = $rs->getString($startcol + 16);
+      $this->desdoc = $rs->getString($startcol + 16);
 
-			$this->id = $rs->getInt($startcol + 17);
+      $this->id = $rs->getInt($startcol + 17);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 18; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ejecuciondocumento object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 18; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ejecuciondocumento object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

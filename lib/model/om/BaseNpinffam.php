@@ -53,6 +53,10 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 
 
 	
+	protected $valgua;
+
+
+	
 	protected $seghcm;
 
 
@@ -65,278 +69,332 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCedfam()
-	{
+    return trim($this->codemp);
 
-		return $this->cedfam; 		
-	}
-	
-	public function getNomfam()
-	{
+  }
+  
+  public function getCedfam()
+  {
 
-		return $this->nomfam; 		
-	}
-	
-	public function getSexfam()
-	{
+    return trim($this->cedfam);
 
-		return $this->sexfam; 		
-	}
-	
-	public function getFecnac($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNomfam()
+  {
 
-		if ($this->fecnac === null || $this->fecnac === '') {
-			return null;
-		} elseif (!is_int($this->fecnac)) {
-						$ts = strtotime($this->fecnac);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnac] as date/time value: " . var_export($this->fecnac, true));
-			}
-		} else {
-			$ts = $this->fecnac;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->nomfam);
 
-	
-	public function getEdafam()
-	{
+  }
+  
+  public function getSexfam()
+  {
 
-		return number_format($this->edafam,2,',','.');
-		
-	}
-	
-	public function getParfam()
-	{
+    return trim($this->sexfam);
 
-		return $this->parfam; 		
-	}
-	
-	public function getEdociv()
-	{
+  }
+  
+  public function getFecnac($format = 'Y-m-d')
+  {
 
-		return $this->edociv; 		
-	}
-	
-	public function getGrains()
-	{
+    if ($this->fecnac === null || $this->fecnac === '') {
+      return null;
+    } elseif (!is_int($this->fecnac)) {
+            $ts = adodb_strtotime($this->fecnac);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnac] as date/time value: " . var_export($this->fecnac, true));
+      }
+    } else {
+      $ts = $this->fecnac;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->grains; 		
-	}
-	
-	public function getTraofi()
-	{
+  
+  public function getEdafam($val=false)
+  {
 
-		return $this->traofi; 		
-	}
-	
-	public function getCodgua()
-	{
+    if($val) return number_format($this->edafam,2,',','.');
+    else return $this->edafam;
 
-		return $this->codgua; 		
-	}
-	
-	public function getSeghcm()
-	{
+  }
+  
+  public function getParfam()
+  {
 
-		return $this->seghcm; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->parfam);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getEdociv()
+  {
+
+    return trim($this->edociv);
+
+  }
+  
+  public function getGrains()
+  {
+
+    return trim($this->grains);
+
+  }
+  
+  public function getTraofi()
+  {
+
+    return trim($this->traofi);
+
+  }
+  
+  public function getCodgua()
+  {
+
+    return trim($this->codgua);
+
+  }
+  
+  public function getValgua($val=false)
+  {
+
+    if($val) return number_format($this->valgua,2,',','.');
+    else return $this->valgua;
+
+  }
+  
+  public function getSeghcm()
+  {
+
+    return trim($this->seghcm);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpinffamPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpinffamPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCedfam($v)
 	{
 
-		if ($this->cedfam !== $v) {
-			$this->cedfam = $v;
-			$this->modifiedColumns[] = NpinffamPeer::CEDFAM;
-		}
-
+    if ($this->cedfam !== $v) {
+        $this->cedfam = $v;
+        $this->modifiedColumns[] = NpinffamPeer::CEDFAM;
+      }
+  
 	} 
 	
 	public function setNomfam($v)
 	{
 
-		if ($this->nomfam !== $v) {
-			$this->nomfam = $v;
-			$this->modifiedColumns[] = NpinffamPeer::NOMFAM;
-		}
-
+    if ($this->nomfam !== $v) {
+        $this->nomfam = $v;
+        $this->modifiedColumns[] = NpinffamPeer::NOMFAM;
+      }
+  
 	} 
 	
 	public function setSexfam($v)
 	{
 
-		if ($this->sexfam !== $v) {
-			$this->sexfam = $v;
-			$this->modifiedColumns[] = NpinffamPeer::SEXFAM;
-		}
-
+    if ($this->sexfam !== $v) {
+        $this->sexfam = $v;
+        $this->modifiedColumns[] = NpinffamPeer::SEXFAM;
+      }
+  
 	} 
 	
 	public function setFecnac($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnac] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnac !== $ts) {
-			$this->fecnac = $ts;
-			$this->modifiedColumns[] = NpinffamPeer::FECNAC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnac] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnac !== $ts) {
+      $this->fecnac = $ts;
+      $this->modifiedColumns[] = NpinffamPeer::FECNAC;
+    }
 
 	} 
 	
 	public function setEdafam($v)
 	{
 
-		if ($this->edafam !== $v) {
-			$this->edafam = $v;
-			$this->modifiedColumns[] = NpinffamPeer::EDAFAM;
-		}
-
+    if ($this->edafam !== $v) {
+        $this->edafam = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpinffamPeer::EDAFAM;
+      }
+  
 	} 
 	
 	public function setParfam($v)
 	{
 
-		if ($this->parfam !== $v) {
-			$this->parfam = $v;
-			$this->modifiedColumns[] = NpinffamPeer::PARFAM;
-		}
-
+    if ($this->parfam !== $v) {
+        $this->parfam = $v;
+        $this->modifiedColumns[] = NpinffamPeer::PARFAM;
+      }
+  
 	} 
 	
 	public function setEdociv($v)
 	{
 
-		if ($this->edociv !== $v) {
-			$this->edociv = $v;
-			$this->modifiedColumns[] = NpinffamPeer::EDOCIV;
-		}
-
+    if ($this->edociv !== $v) {
+        $this->edociv = $v;
+        $this->modifiedColumns[] = NpinffamPeer::EDOCIV;
+      }
+  
 	} 
 	
 	public function setGrains($v)
 	{
 
-		if ($this->grains !== $v) {
-			$this->grains = $v;
-			$this->modifiedColumns[] = NpinffamPeer::GRAINS;
-		}
-
+    if ($this->grains !== $v) {
+        $this->grains = $v;
+        $this->modifiedColumns[] = NpinffamPeer::GRAINS;
+      }
+  
 	} 
 	
 	public function setTraofi($v)
 	{
 
-		if ($this->traofi !== $v) {
-			$this->traofi = $v;
-			$this->modifiedColumns[] = NpinffamPeer::TRAOFI;
-		}
-
+    if ($this->traofi !== $v) {
+        $this->traofi = $v;
+        $this->modifiedColumns[] = NpinffamPeer::TRAOFI;
+      }
+  
 	} 
 	
 	public function setCodgua($v)
 	{
 
-		if ($this->codgua !== $v) {
-			$this->codgua = $v;
-			$this->modifiedColumns[] = NpinffamPeer::CODGUA;
-		}
+    if ($this->codgua !== $v) {
+        $this->codgua = $v;
+        $this->modifiedColumns[] = NpinffamPeer::CODGUA;
+      }
+  
+	} 
+	
+	public function setValgua($v)
+	{
 
+    if ($this->valgua !== $v) {
+        $this->valgua = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpinffamPeer::VALGUA;
+      }
+  
 	} 
 	
 	public function setSeghcm($v)
 	{
 
-		if ($this->seghcm !== $v) {
-			$this->seghcm = $v;
-			$this->modifiedColumns[] = NpinffamPeer::SEGHCM;
-		}
-
+    if ($this->seghcm !== $v) {
+        $this->seghcm = $v;
+        $this->modifiedColumns[] = NpinffamPeer::SEGHCM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpinffamPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpinffamPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->cedfam = $rs->getString($startcol + 1);
+      $this->cedfam = $rs->getString($startcol + 1);
 
-			$this->nomfam = $rs->getString($startcol + 2);
+      $this->nomfam = $rs->getString($startcol + 2);
 
-			$this->sexfam = $rs->getString($startcol + 3);
+      $this->sexfam = $rs->getString($startcol + 3);
 
-			$this->fecnac = $rs->getDate($startcol + 4, null);
+      $this->fecnac = $rs->getDate($startcol + 4, null);
 
-			$this->edafam = $rs->getFloat($startcol + 5);
+      $this->edafam = $rs->getFloat($startcol + 5);
 
-			$this->parfam = $rs->getString($startcol + 6);
+      $this->parfam = $rs->getString($startcol + 6);
 
-			$this->edociv = $rs->getString($startcol + 7);
+      $this->edociv = $rs->getString($startcol + 7);
 
-			$this->grains = $rs->getString($startcol + 8);
+      $this->grains = $rs->getString($startcol + 8);
 
-			$this->traofi = $rs->getString($startcol + 9);
+      $this->traofi = $rs->getString($startcol + 9);
 
-			$this->codgua = $rs->getString($startcol + 10);
+      $this->codgua = $rs->getString($startcol + 10);
 
-			$this->seghcm = $rs->getString($startcol + 11);
+      $this->valgua = $rs->getFloat($startcol + 11);
 
-			$this->id = $rs->getInt($startcol + 12);
+      $this->seghcm = $rs->getString($startcol + 12);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 13; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npinffam object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npinffam object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -393,6 +451,7 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpinffamPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpinffamPeer::doUpdate($this, $con);
@@ -492,9 +551,12 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 				return $this->getCodgua();
 				break;
 			case 11:
-				return $this->getSeghcm();
+				return $this->getValgua();
 				break;
 			case 12:
+				return $this->getSeghcm();
+				break;
+			case 13:
 				return $this->getId();
 				break;
 			default:
@@ -518,8 +580,9 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 			$keys[8] => $this->getGrains(),
 			$keys[9] => $this->getTraofi(),
 			$keys[10] => $this->getCodgua(),
-			$keys[11] => $this->getSeghcm(),
-			$keys[12] => $this->getId(),
+			$keys[11] => $this->getValgua(),
+			$keys[12] => $this->getSeghcm(),
+			$keys[13] => $this->getId(),
 		);
 		return $result;
 	}
@@ -569,9 +632,12 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 				$this->setCodgua($value);
 				break;
 			case 11:
-				$this->setSeghcm($value);
+				$this->setValgua($value);
 				break;
 			case 12:
+				$this->setSeghcm($value);
+				break;
+			case 13:
 				$this->setId($value);
 				break;
 		} 	}
@@ -592,8 +658,9 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setGrains($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setTraofi($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setCodgua($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setSeghcm($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
+		if (array_key_exists($keys[11], $arr)) $this->setValgua($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setSeghcm($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
 	}
 
 	
@@ -612,6 +679,7 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpinffamPeer::GRAINS)) $criteria->add(NpinffamPeer::GRAINS, $this->grains);
 		if ($this->isColumnModified(NpinffamPeer::TRAOFI)) $criteria->add(NpinffamPeer::TRAOFI, $this->traofi);
 		if ($this->isColumnModified(NpinffamPeer::CODGUA)) $criteria->add(NpinffamPeer::CODGUA, $this->codgua);
+		if ($this->isColumnModified(NpinffamPeer::VALGUA)) $criteria->add(NpinffamPeer::VALGUA, $this->valgua);
 		if ($this->isColumnModified(NpinffamPeer::SEGHCM)) $criteria->add(NpinffamPeer::SEGHCM, $this->seghcm);
 		if ($this->isColumnModified(NpinffamPeer::ID)) $criteria->add(NpinffamPeer::ID, $this->id);
 
@@ -665,6 +733,8 @@ abstract class BaseNpinffam extends BaseObject  implements Persistent {
 		$copyObj->setTraofi($this->traofi);
 
 		$copyObj->setCodgua($this->codgua);
+
+		$copyObj->setValgua($this->valgua);
 
 		$copyObj->setSeghcm($this->seghcm);
 

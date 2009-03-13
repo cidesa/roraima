@@ -13,7 +13,7 @@ abstract class BaseFcrepfisPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcrepfis';
 
 	
-	const NUM_COLUMNS = 9;
+	const NUM_COLUMNS = 12;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -44,6 +44,15 @@ abstract class BaseFcrepfisPeer {
 	const MONADI = 'fcrepfis.MONADI';
 
 	
+	const FUEREP = 'fcrepfis.FUEREP';
+
+	
+	const FUESAN = 'fcrepfis.FUESAN';
+
+	
+	const FECREC = 'fcrepfis.FECREC';
+
+	
 	const ID = 'fcrepfis.ID';
 
 	
@@ -52,18 +61,18 @@ abstract class BaseFcrepfisPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numlic', 'Funrec', 'Fecrep', 'Numrep', 'Monrep', 'Conrep', 'Modo', 'Monadi', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcrepfisPeer::NUMLIC, FcrepfisPeer::FUNREC, FcrepfisPeer::FECREP, FcrepfisPeer::NUMREP, FcrepfisPeer::MONREP, FcrepfisPeer::CONREP, FcrepfisPeer::MODO, FcrepfisPeer::MONADI, FcrepfisPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numlic', 'funrec', 'fecrep', 'numrep', 'monrep', 'conrep', 'modo', 'monadi', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Numlic', 'Funrec', 'Fecrep', 'Numrep', 'Monrep', 'Conrep', 'Modo', 'Monadi', 'Fuerep', 'Fuesan', 'Fecrec', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcrepfisPeer::NUMLIC, FcrepfisPeer::FUNREC, FcrepfisPeer::FECREP, FcrepfisPeer::NUMREP, FcrepfisPeer::MONREP, FcrepfisPeer::CONREP, FcrepfisPeer::MODO, FcrepfisPeer::MONADI, FcrepfisPeer::FUEREP, FcrepfisPeer::FUESAN, FcrepfisPeer::FECREC, FcrepfisPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numlic', 'funrec', 'fecrep', 'numrep', 'monrep', 'conrep', 'modo', 'monadi', 'fuerep', 'fuesan', 'fecrec', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numlic' => 0, 'Funrec' => 1, 'Fecrep' => 2, 'Numrep' => 3, 'Monrep' => 4, 'Conrep' => 5, 'Modo' => 6, 'Monadi' => 7, 'Id' => 8, ),
-		BasePeer::TYPE_COLNAME => array (FcrepfisPeer::NUMLIC => 0, FcrepfisPeer::FUNREC => 1, FcrepfisPeer::FECREP => 2, FcrepfisPeer::NUMREP => 3, FcrepfisPeer::MONREP => 4, FcrepfisPeer::CONREP => 5, FcrepfisPeer::MODO => 6, FcrepfisPeer::MONADI => 7, FcrepfisPeer::ID => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('numlic' => 0, 'funrec' => 1, 'fecrep' => 2, 'numrep' => 3, 'monrep' => 4, 'conrep' => 5, 'modo' => 6, 'monadi' => 7, 'id' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Numlic' => 0, 'Funrec' => 1, 'Fecrep' => 2, 'Numrep' => 3, 'Monrep' => 4, 'Conrep' => 5, 'Modo' => 6, 'Monadi' => 7, 'Fuerep' => 8, 'Fuesan' => 9, 'Fecrec' => 10, 'Id' => 11, ),
+		BasePeer::TYPE_COLNAME => array (FcrepfisPeer::NUMLIC => 0, FcrepfisPeer::FUNREC => 1, FcrepfisPeer::FECREP => 2, FcrepfisPeer::NUMREP => 3, FcrepfisPeer::MONREP => 4, FcrepfisPeer::CONREP => 5, FcrepfisPeer::MODO => 6, FcrepfisPeer::MONADI => 7, FcrepfisPeer::FUEREP => 8, FcrepfisPeer::FUESAN => 9, FcrepfisPeer::FECREC => 10, FcrepfisPeer::ID => 11, ),
+		BasePeer::TYPE_FIELDNAME => array ('numlic' => 0, 'funrec' => 1, 'fecrep' => 2, 'numrep' => 3, 'monrep' => 4, 'conrep' => 5, 'modo' => 6, 'monadi' => 7, 'fuerep' => 8, 'fuesan' => 9, 'fecrec' => 10, 'id' => 11, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
 	);
 
 	
@@ -132,6 +141,12 @@ abstract class BaseFcrepfisPeer {
 		$criteria->addSelectColumn(FcrepfisPeer::MODO);
 
 		$criteria->addSelectColumn(FcrepfisPeer::MONADI);
+
+		$criteria->addSelectColumn(FcrepfisPeer::FUEREP);
+
+		$criteria->addSelectColumn(FcrepfisPeer::FUESAN);
+
+		$criteria->addSelectColumn(FcrepfisPeer::FECREC);
 
 		$criteria->addSelectColumn(FcrepfisPeer::ID);
 
@@ -235,6 +250,7 @@ abstract class BaseFcrepfisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcrepfisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -61,237 +61,271 @@ abstract class BaseCpestablec extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodest()
-	{
+  
+  public function getCodest()
+  {
 
-		return $this->codest; 		
-	}
-	
-	public function getCodent()
-	{
+    return trim($this->codest);
 
-		return $this->codent; 		
-	}
-	
-	public function getHosamb()
-	{
+  }
+  
+  public function getCodent()
+  {
 
-		return $this->hosamb; 		
-	}
-	
-	public function getCodcen()
-	{
+    return trim($this->codent);
 
-		return $this->codcen; 		
-	}
-	
-	public function getTipest()
-	{
+  }
+  
+  public function getHosamb()
+  {
 
-		return $this->tipest; 		
-	}
-	
-	public function getDirest()
-	{
+    return trim($this->hosamb);
 
-		return $this->direst; 		
-	}
-	
-	public function getDesest()
-	{
+  }
+  
+  public function getCodcen()
+  {
 
-		return $this->desest; 		
-	}
-	
-	public function getUrbrur()
-	{
+    return trim($this->codcen);
 
-		return $this->urbrur; 		
-	}
-	
-	public function getTiprur()
-	{
+  }
+  
+  public function getTipest()
+  {
 
-		return $this->tiprur; 		
-	}
-	
-	public function getNrocam()
-	{
+    return trim($this->tipest);
 
-		return number_format($this->nrocam,2,',','.');
-		
-	}
-	
-	public function getAtefir()
-	{
+  }
+  
+  public function getDirest()
+  {
 
-		return $this->atefir; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->direst);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDesest()
+  {
+
+    return trim($this->desest);
+
+  }
+  
+  public function getUrbrur()
+  {
+
+    return trim($this->urbrur);
+
+  }
+  
+  public function getTiprur()
+  {
+
+    return trim($this->tiprur);
+
+  }
+  
+  public function getNrocam($val=false)
+  {
+
+    if($val) return number_format($this->nrocam,2,',','.');
+    else return $this->nrocam;
+
+  }
+  
+  public function getAtefir()
+  {
+
+    return trim($this->atefir);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodest($v)
 	{
 
-		if ($this->codest !== $v) {
-			$this->codest = $v;
-			$this->modifiedColumns[] = CpestablecPeer::CODEST;
-		}
-
+    if ($this->codest !== $v) {
+        $this->codest = $v;
+        $this->modifiedColumns[] = CpestablecPeer::CODEST;
+      }
+  
 	} 
 	
 	public function setCodent($v)
 	{
 
-		if ($this->codent !== $v) {
-			$this->codent = $v;
-			$this->modifiedColumns[] = CpestablecPeer::CODENT;
-		}
-
+    if ($this->codent !== $v) {
+        $this->codent = $v;
+        $this->modifiedColumns[] = CpestablecPeer::CODENT;
+      }
+  
 	} 
 	
 	public function setHosamb($v)
 	{
 
-		if ($this->hosamb !== $v) {
-			$this->hosamb = $v;
-			$this->modifiedColumns[] = CpestablecPeer::HOSAMB;
-		}
-
+    if ($this->hosamb !== $v) {
+        $this->hosamb = $v;
+        $this->modifiedColumns[] = CpestablecPeer::HOSAMB;
+      }
+  
 	} 
 	
 	public function setCodcen($v)
 	{
 
-		if ($this->codcen !== $v) {
-			$this->codcen = $v;
-			$this->modifiedColumns[] = CpestablecPeer::CODCEN;
-		}
-
+    if ($this->codcen !== $v) {
+        $this->codcen = $v;
+        $this->modifiedColumns[] = CpestablecPeer::CODCEN;
+      }
+  
 	} 
 	
 	public function setTipest($v)
 	{
 
-		if ($this->tipest !== $v) {
-			$this->tipest = $v;
-			$this->modifiedColumns[] = CpestablecPeer::TIPEST;
-		}
-
+    if ($this->tipest !== $v) {
+        $this->tipest = $v;
+        $this->modifiedColumns[] = CpestablecPeer::TIPEST;
+      }
+  
 	} 
 	
 	public function setDirest($v)
 	{
 
-		if ($this->direst !== $v) {
-			$this->direst = $v;
-			$this->modifiedColumns[] = CpestablecPeer::DIREST;
-		}
-
+    if ($this->direst !== $v) {
+        $this->direst = $v;
+        $this->modifiedColumns[] = CpestablecPeer::DIREST;
+      }
+  
 	} 
 	
 	public function setDesest($v)
 	{
 
-		if ($this->desest !== $v) {
-			$this->desest = $v;
-			$this->modifiedColumns[] = CpestablecPeer::DESEST;
-		}
-
+    if ($this->desest !== $v) {
+        $this->desest = $v;
+        $this->modifiedColumns[] = CpestablecPeer::DESEST;
+      }
+  
 	} 
 	
 	public function setUrbrur($v)
 	{
 
-		if ($this->urbrur !== $v) {
-			$this->urbrur = $v;
-			$this->modifiedColumns[] = CpestablecPeer::URBRUR;
-		}
-
+    if ($this->urbrur !== $v) {
+        $this->urbrur = $v;
+        $this->modifiedColumns[] = CpestablecPeer::URBRUR;
+      }
+  
 	} 
 	
 	public function setTiprur($v)
 	{
 
-		if ($this->tiprur !== $v) {
-			$this->tiprur = $v;
-			$this->modifiedColumns[] = CpestablecPeer::TIPRUR;
-		}
-
+    if ($this->tiprur !== $v) {
+        $this->tiprur = $v;
+        $this->modifiedColumns[] = CpestablecPeer::TIPRUR;
+      }
+  
 	} 
 	
 	public function setNrocam($v)
 	{
 
-		if ($this->nrocam !== $v) {
-			$this->nrocam = $v;
-			$this->modifiedColumns[] = CpestablecPeer::NROCAM;
-		}
-
+    if ($this->nrocam !== $v) {
+        $this->nrocam = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpestablecPeer::NROCAM;
+      }
+  
 	} 
 	
 	public function setAtefir($v)
 	{
 
-		if ($this->atefir !== $v) {
-			$this->atefir = $v;
-			$this->modifiedColumns[] = CpestablecPeer::ATEFIR;
-		}
-
+    if ($this->atefir !== $v) {
+        $this->atefir = $v;
+        $this->modifiedColumns[] = CpestablecPeer::ATEFIR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpestablecPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpestablecPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codest = $rs->getString($startcol + 0);
+      $this->codest = $rs->getString($startcol + 0);
 
-			$this->codent = $rs->getString($startcol + 1);
+      $this->codent = $rs->getString($startcol + 1);
 
-			$this->hosamb = $rs->getString($startcol + 2);
+      $this->hosamb = $rs->getString($startcol + 2);
 
-			$this->codcen = $rs->getString($startcol + 3);
+      $this->codcen = $rs->getString($startcol + 3);
 
-			$this->tipest = $rs->getString($startcol + 4);
+      $this->tipest = $rs->getString($startcol + 4);
 
-			$this->direst = $rs->getString($startcol + 5);
+      $this->direst = $rs->getString($startcol + 5);
 
-			$this->desest = $rs->getString($startcol + 6);
+      $this->desest = $rs->getString($startcol + 6);
 
-			$this->urbrur = $rs->getString($startcol + 7);
+      $this->urbrur = $rs->getString($startcol + 7);
 
-			$this->tiprur = $rs->getString($startcol + 8);
+      $this->tiprur = $rs->getString($startcol + 8);
 
-			$this->nrocam = $rs->getFloat($startcol + 9);
+      $this->nrocam = $rs->getFloat($startcol + 9);
 
-			$this->atefir = $rs->getString($startcol + 10);
+      $this->atefir = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpestablec object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpestablec object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

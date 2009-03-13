@@ -105,527 +105,568 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumche()
-	{
+  
+  public function getNumche()
+  {
 
-		return $this->numche; 		
-	}
-	
-	public function getNumcue()
-	{
+    return trim($this->numche);
 
-		return $this->numcue; 		
-	}
-	
-	public function getCedrif()
-	{
+  }
+  
+  public function getNumcue()
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getFecemi($format = 'Y-m-d')
-	{
+    return trim($this->numcue);
 
-		if ($this->fecemi === null || $this->fecemi === '') {
-			return null;
-		} elseif (!is_int($this->fecemi)) {
-						$ts = strtotime($this->fecemi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
-			}
-		} else {
-			$ts = $this->fecemi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCedrif()
+  {
 
-	
-	public function getMonche()
-	{
+    return trim($this->cedrif);
 
-		return number_format($this->monche,2,',','.');
-		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getFecemi($format = 'Y-m-d')
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getCodemi()
-	{
+    if ($this->fecemi === null || $this->fecemi === '') {
+      return null;
+    } elseif (!is_int($this->fecemi)) {
+            $ts = adodb_strtotime($this->fecemi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
+      }
+    } else {
+      $ts = $this->fecemi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codemi; 		
-	}
-	
-	public function getFecent($format = 'Y-m-d')
-	{
+  
+  public function getMonche($val=false)
+  {
 
-		if ($this->fecent === null || $this->fecent === '') {
-			return null;
-		} elseif (!is_int($this->fecent)) {
-						$ts = strtotime($this->fecent);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
-			}
-		} else {
-			$ts = $this->fecent;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->monche,2,',','.');
+    else return $this->monche;
 
-	
-	public function getCodent()
-	{
+  }
+  
+  public function getStatus()
+  {
 
-		return $this->codent; 		
-	}
-	
-	public function getObsent()
-	{
+    return trim($this->status);
 
-		return $this->obsent; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodemi()
+  {
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codemi);
 
-	
-	public function getCedrec()
-	{
+  }
+  
+  public function getFecent($format = 'Y-m-d')
+  {
 
-		return $this->cedrec; 		
-	}
-	
-	public function getNomrec()
-	{
+    if ($this->fecent === null || $this->fecent === '') {
+      return null;
+    } elseif (!is_int($this->fecent)) {
+            $ts = adodb_strtotime($this->fecent);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
+      }
+    } else {
+      $ts = $this->fecent;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->nomrec; 		
-	}
-	
-	public function getTipdoc()
-	{
+  
+  public function getCodent()
+  {
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getFecing($format = 'Y-m-d')
-	{
+    return trim($this->codent);
 
-		if ($this->fecing === null || $this->fecing === '') {
-			return null;
-		} elseif (!is_int($this->fecing)) {
-						$ts = strtotime($this->fecing);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
-			}
-		} else {
-			$ts = $this->fecing;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getObsent()
+  {
 
-	
-	public function getTemporal()
-	{
+    return trim($this->obsent);
 
-		return $this->temporal; 		
-	}
-	
-	public function getTemporal2()
-	{
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
 
-		return $this->temporal2; 		
-	}
-	
-	public function getNombensus()
-	{
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->nombensus; 		
-	}
-	
-	public function getAnopre()
-	{
+  
+  public function getCedrec()
+  {
 
-		return $this->anopre; 		
-	}
-	
-	public function getNumtiq()
-	{
+    return trim($this->cedrec);
 
-		return $this->numtiq; 		
-	}
-	
-	public function getCedaut()
-	{
+  }
+  
+  public function getNomrec()
+  {
 
-		return $this->cedaut; 		
-	}
-	
-	public function getPeraut()
-	{
+    return trim($this->nomrec);
 
-		return $this->peraut; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTipdoc()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipdoc);
+
+  }
+  
+  public function getFecing($format = 'Y-m-d')
+  {
+
+    if ($this->fecing === null || $this->fecing === '') {
+      return null;
+    } elseif (!is_int($this->fecing)) {
+            $ts = adodb_strtotime($this->fecing);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
+      }
+    } else {
+      $ts = $this->fecing;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getTemporal()
+  {
+
+    return trim($this->temporal);
+
+  }
+  
+  public function getTemporal2()
+  {
+
+    return trim($this->temporal2);
+
+  }
+  
+  public function getNombensus()
+  {
+
+    return trim($this->nombensus);
+
+  }
+  
+  public function getAnopre()
+  {
+
+    return trim($this->anopre);
+
+  }
+  
+  public function getNumtiq()
+  {
+
+    return trim($this->numtiq);
+
+  }
+  
+  public function getCedaut()
+  {
+
+    return trim($this->cedaut);
+
+  }
+  
+  public function getPeraut()
+  {
+
+    return trim($this->peraut);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumche($v)
 	{
 
-		if ($this->numche !== $v) {
-			$this->numche = $v;
-			$this->modifiedColumns[] = TscheemiPeer::NUMCHE;
-		}
-
+    if ($this->numche !== $v) {
+        $this->numche = $v;
+        $this->modifiedColumns[] = TscheemiPeer::NUMCHE;
+      }
+  
 	} 
 	
 	public function setNumcue($v)
 	{
 
-		if ($this->numcue !== $v) {
-			$this->numcue = $v;
-			$this->modifiedColumns[] = TscheemiPeer::NUMCUE;
-		}
-
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = TscheemiPeer::NUMCUE;
+      }
+  
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = TscheemiPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = TscheemiPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setFecemi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecemi !== $ts) {
-			$this->fecemi = $ts;
-			$this->modifiedColumns[] = TscheemiPeer::FECEMI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecemi !== $ts) {
+      $this->fecemi = $ts;
+      $this->modifiedColumns[] = TscheemiPeer::FECEMI;
+    }
 
 	} 
 	
 	public function setMonche($v)
 	{
 
-		if ($this->monche !== $v) {
-			$this->monche = $v;
-			$this->modifiedColumns[] = TscheemiPeer::MONCHE;
-		}
-
+    if ($this->monche !== $v) {
+        $this->monche = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TscheemiPeer::MONCHE;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = TscheemiPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = TscheemiPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setCodemi($v)
 	{
 
-		if ($this->codemi !== $v) {
-			$this->codemi = $v;
-			$this->modifiedColumns[] = TscheemiPeer::CODEMI;
-		}
-
+    if ($this->codemi !== $v) {
+        $this->codemi = $v;
+        $this->modifiedColumns[] = TscheemiPeer::CODEMI;
+      }
+  
 	} 
 	
 	public function setFecent($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecent !== $ts) {
-			$this->fecent = $ts;
-			$this->modifiedColumns[] = TscheemiPeer::FECENT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecent !== $ts) {
+      $this->fecent = $ts;
+      $this->modifiedColumns[] = TscheemiPeer::FECENT;
+    }
 
 	} 
 	
 	public function setCodent($v)
 	{
 
-		if ($this->codent !== $v) {
-			$this->codent = $v;
-			$this->modifiedColumns[] = TscheemiPeer::CODENT;
-		}
-
+    if ($this->codent !== $v) {
+        $this->codent = $v;
+        $this->modifiedColumns[] = TscheemiPeer::CODENT;
+      }
+  
 	} 
 	
 	public function setObsent($v)
 	{
 
-		if ($this->obsent !== $v) {
-			$this->obsent = $v;
-			$this->modifiedColumns[] = TscheemiPeer::OBSENT;
-		}
-
+    if ($this->obsent !== $v) {
+        $this->obsent = $v;
+        $this->modifiedColumns[] = TscheemiPeer::OBSENT;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = TscheemiPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = TscheemiPeer::FECANU;
+    }
 
 	} 
 	
 	public function setCedrec($v)
 	{
 
-		if ($this->cedrec !== $v) {
-			$this->cedrec = $v;
-			$this->modifiedColumns[] = TscheemiPeer::CEDREC;
-		}
-
+    if ($this->cedrec !== $v) {
+        $this->cedrec = $v;
+        $this->modifiedColumns[] = TscheemiPeer::CEDREC;
+      }
+  
 	} 
 	
 	public function setNomrec($v)
 	{
 
-		if ($this->nomrec !== $v) {
-			$this->nomrec = $v;
-			$this->modifiedColumns[] = TscheemiPeer::NOMREC;
-		}
-
+    if ($this->nomrec !== $v) {
+        $this->nomrec = $v;
+        $this->modifiedColumns[] = TscheemiPeer::NOMREC;
+      }
+  
 	} 
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = TscheemiPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = TscheemiPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setFecing($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecing !== $ts) {
-			$this->fecing = $ts;
-			$this->modifiedColumns[] = TscheemiPeer::FECING;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecing !== $ts) {
+      $this->fecing = $ts;
+      $this->modifiedColumns[] = TscheemiPeer::FECING;
+    }
 
 	} 
 	
 	public function setTemporal($v)
 	{
 
-		if ($this->temporal !== $v) {
-			$this->temporal = $v;
-			$this->modifiedColumns[] = TscheemiPeer::TEMPORAL;
-		}
-
+    if ($this->temporal !== $v) {
+        $this->temporal = $v;
+        $this->modifiedColumns[] = TscheemiPeer::TEMPORAL;
+      }
+  
 	} 
 	
 	public function setTemporal2($v)
 	{
 
-		if ($this->temporal2 !== $v) {
-			$this->temporal2 = $v;
-			$this->modifiedColumns[] = TscheemiPeer::TEMPORAL2;
-		}
-
+    if ($this->temporal2 !== $v) {
+        $this->temporal2 = $v;
+        $this->modifiedColumns[] = TscheemiPeer::TEMPORAL2;
+      }
+  
 	} 
 	
 	public function setNombensus($v)
 	{
 
-		if ($this->nombensus !== $v) {
-			$this->nombensus = $v;
-			$this->modifiedColumns[] = TscheemiPeer::NOMBENSUS;
-		}
-
+    if ($this->nombensus !== $v) {
+        $this->nombensus = $v;
+        $this->modifiedColumns[] = TscheemiPeer::NOMBENSUS;
+      }
+  
 	} 
 	
 	public function setAnopre($v)
 	{
 
-		if ($this->anopre !== $v) {
-			$this->anopre = $v;
-			$this->modifiedColumns[] = TscheemiPeer::ANOPRE;
-		}
-
+    if ($this->anopre !== $v) {
+        $this->anopre = $v;
+        $this->modifiedColumns[] = TscheemiPeer::ANOPRE;
+      }
+  
 	} 
 	
 	public function setNumtiq($v)
 	{
 
-		if ($this->numtiq !== $v) {
-			$this->numtiq = $v;
-			$this->modifiedColumns[] = TscheemiPeer::NUMTIQ;
-		}
-
+    if ($this->numtiq !== $v) {
+        $this->numtiq = $v;
+        $this->modifiedColumns[] = TscheemiPeer::NUMTIQ;
+      }
+  
 	} 
 	
 	public function setCedaut($v)
 	{
 
-		if ($this->cedaut !== $v) {
-			$this->cedaut = $v;
-			$this->modifiedColumns[] = TscheemiPeer::CEDAUT;
-		}
-
+    if ($this->cedaut !== $v) {
+        $this->cedaut = $v;
+        $this->modifiedColumns[] = TscheemiPeer::CEDAUT;
+      }
+  
 	} 
 	
 	public function setPeraut($v)
 	{
 
-		if ($this->peraut !== $v) {
-			$this->peraut = $v;
-			$this->modifiedColumns[] = TscheemiPeer::PERAUT;
-		}
-
+    if ($this->peraut !== $v) {
+        $this->peraut = $v;
+        $this->modifiedColumns[] = TscheemiPeer::PERAUT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TscheemiPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TscheemiPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numche = $rs->getString($startcol + 0);
+      $this->numche = $rs->getString($startcol + 0);
 
-			$this->numcue = $rs->getString($startcol + 1);
+      $this->numcue = $rs->getString($startcol + 1);
 
-			$this->cedrif = $rs->getString($startcol + 2);
+      $this->cedrif = $rs->getString($startcol + 2);
 
-			$this->fecemi = $rs->getDate($startcol + 3, null);
+      $this->fecemi = $rs->getDate($startcol + 3, null);
 
-			$this->monche = $rs->getFloat($startcol + 4);
+      $this->monche = $rs->getFloat($startcol + 4);
 
-			$this->status = $rs->getString($startcol + 5);
+      $this->status = $rs->getString($startcol + 5);
 
-			$this->codemi = $rs->getString($startcol + 6);
+      $this->codemi = $rs->getString($startcol + 6);
 
-			$this->fecent = $rs->getDate($startcol + 7, null);
+      $this->fecent = $rs->getDate($startcol + 7, null);
 
-			$this->codent = $rs->getString($startcol + 8);
+      $this->codent = $rs->getString($startcol + 8);
 
-			$this->obsent = $rs->getString($startcol + 9);
+      $this->obsent = $rs->getString($startcol + 9);
 
-			$this->fecanu = $rs->getDate($startcol + 10, null);
+      $this->fecanu = $rs->getDate($startcol + 10, null);
 
-			$this->cedrec = $rs->getString($startcol + 11);
+      $this->cedrec = $rs->getString($startcol + 11);
 
-			$this->nomrec = $rs->getString($startcol + 12);
+      $this->nomrec = $rs->getString($startcol + 12);
 
-			$this->tipdoc = $rs->getString($startcol + 13);
+      $this->tipdoc = $rs->getString($startcol + 13);
 
-			$this->fecing = $rs->getDate($startcol + 14, null);
+      $this->fecing = $rs->getDate($startcol + 14, null);
 
-			$this->temporal = $rs->getString($startcol + 15);
+      $this->temporal = $rs->getString($startcol + 15);
 
-			$this->temporal2 = $rs->getString($startcol + 16);
+      $this->temporal2 = $rs->getString($startcol + 16);
 
-			$this->nombensus = $rs->getString($startcol + 17);
+      $this->nombensus = $rs->getString($startcol + 17);
 
-			$this->anopre = $rs->getString($startcol + 18);
+      $this->anopre = $rs->getString($startcol + 18);
 
-			$this->numtiq = $rs->getString($startcol + 19);
+      $this->numtiq = $rs->getString($startcol + 19);
 
-			$this->cedaut = $rs->getString($startcol + 20);
+      $this->cedaut = $rs->getString($startcol + 20);
 
-			$this->peraut = $rs->getString($startcol + 21);
+      $this->peraut = $rs->getString($startcol + 21);
 
-			$this->id = $rs->getInt($startcol + 22);
+      $this->id = $rs->getInt($startcol + 22);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 23; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tscheemi object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 23; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tscheemi object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -682,6 +723,7 @@ abstract class BaseTscheemi extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TscheemiPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TscheemiPeer::doUpdate($this, $con);

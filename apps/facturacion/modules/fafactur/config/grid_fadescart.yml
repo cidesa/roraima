@@ -1,0 +1,64 @@
+opciones:                  # Opciones generales
+  name:                    b
+  eliminar:                true
+  tabla:                   fadescart
+  anchogrid:               900
+  ancho:                   900
+  filas:                   10
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código
+  tipo:                    t
+  nombrecampo:             coddesc
+  esgrabable:              true
+  html:                    [size="20"]
+  catalogo:                [fadescto, sf_admin_edit_form, { Coddesc: 1, Desdesc: 2, Mondesc: 3, Tipdesc: 7, Tipret: 8}, Cadescto_Fafactur ]
+2:       # Columna 2
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desdesc
+  html:                    [size="50", readonly=true ]
+3:       # Columna 3
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             mondesc
+  esnumerico:              true
+  html:                    [size="10"]
+4:       #columana 4
+  titulo:                  Codcta
+  tipo:                    t
+  nombrecampo:             codcta
+  html:                    [size="10"]
+  oculta:                  true
+  esgrabable:              true
+5:       # Columna 5
+  titulo:                  Cantidad
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cantidad
+  esnumerico:              true
+  html:                    [size="10"]
+6:       # Columna 6
+  titulo:                  Descuento
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             montdesc
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10"]
+7:       #columana 7
+  titulo:                  Tipo
+  tipo:                    t
+  nombrecampo:             tipdesc
+  html:                    [size="10"]
+  oculta:                  true
+  esgrabable:              true
+8:       #columana 8
+  titulo:                  Tiporet
+  tipo:                    t
+  nombrecampo:             tipret
+  html:                    [size="10"]
+  oculta:                  true
+  esgrabable:              true

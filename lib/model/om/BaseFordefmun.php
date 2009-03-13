@@ -29,92 +29,118 @@ abstract class BaseFordefmun extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodest()
-	{
+  
+  public function getCodest()
+  {
 
-		return $this->codest; 		
-	}
-	
-	public function getCodmun()
-	{
+    return trim($this->codest);
 
-		return $this->codmun; 		
-	}
-	
-	public function getDesmun()
-	{
+  }
+  
+  public function getCodmun()
+  {
 
-		return $this->desmun; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codmun);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDesmun()
+  {
+
+    return trim($this->desmun);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodest($v)
 	{
 
-		if ($this->codest !== $v) {
-			$this->codest = $v;
-			$this->modifiedColumns[] = FordefmunPeer::CODEST;
-		}
-
+    if ($this->codest !== $v) {
+        $this->codest = $v;
+        $this->modifiedColumns[] = FordefmunPeer::CODEST;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = FordefmunPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = FordefmunPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setDesmun($v)
 	{
 
-		if ($this->desmun !== $v) {
-			$this->desmun = $v;
-			$this->modifiedColumns[] = FordefmunPeer::DESMUN;
-		}
-
+    if ($this->desmun !== $v) {
+        $this->desmun = $v;
+        $this->modifiedColumns[] = FordefmunPeer::DESMUN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefmunPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefmunPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codest = $rs->getString($startcol + 0);
+      $this->codest = $rs->getString($startcol + 0);
 
-			$this->codmun = $rs->getString($startcol + 1);
+      $this->codmun = $rs->getString($startcol + 1);
 
-			$this->desmun = $rs->getString($startcol + 2);
+      $this->desmun = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefmun object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefmun object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseFordefmun extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefmunPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefmunPeer::doUpdate($this, $con);

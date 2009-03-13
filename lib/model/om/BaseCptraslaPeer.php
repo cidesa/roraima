@@ -245,6 +245,7 @@ abstract class BaseCptraslaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CptraslaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

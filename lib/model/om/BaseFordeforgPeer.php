@@ -205,6 +205,7 @@ abstract class BaseFordeforgPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordeforgPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

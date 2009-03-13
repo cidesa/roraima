@@ -13,7 +13,7 @@ abstract class BaseCadefalmPeer {
 	const CLASS_DEFAULT = 'lib.model.Cadefalm';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,9 @@ abstract class BaseCadefalmPeer {
 	const CODCAT = 'cadefalm.CODCAT';
 
 	
+	const CATIPALM_ID = 'cadefalm.CATIPALM_ID';
+
+	
 	const ID = 'cadefalm.ID';
 
 	
@@ -37,18 +40,18 @@ abstract class BaseCadefalmPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codalm', 'Nomalm', 'Codcat', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM, CadefalmPeer::NOMALM, CadefalmPeer::CODCAT, CadefalmPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codalm', 'nomalm', 'codcat', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codalm', 'Nomalm', 'Codcat', 'CatipalmId', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM, CadefalmPeer::NOMALM, CadefalmPeer::CODCAT, CadefalmPeer::CATIPALM_ID, CadefalmPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codalm', 'nomalm', 'codcat', 'catipalm_id', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codalm' => 0, 'Nomalm' => 1, 'Codcat' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM => 0, CadefalmPeer::NOMALM => 1, CadefalmPeer::CODCAT => 2, CadefalmPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codalm' => 0, 'nomalm' => 1, 'codcat' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codalm' => 0, 'Nomalm' => 1, 'Codcat' => 2, 'CatipalmId' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (CadefalmPeer::CODALM => 0, CadefalmPeer::NOMALM => 1, CadefalmPeer::CODCAT => 2, CadefalmPeer::CATIPALM_ID => 3, CadefalmPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codalm' => 0, 'nomalm' => 1, 'codcat' => 2, 'catipalm_id' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
@@ -107,6 +110,8 @@ abstract class BaseCadefalmPeer {
 		$criteria->addSelectColumn(CadefalmPeer::NOMALM);
 
 		$criteria->addSelectColumn(CadefalmPeer::CODCAT);
+
+		$criteria->addSelectColumn(CadefalmPeer::CATIPALM_ID);
 
 		$criteria->addSelectColumn(CadefalmPeer::ID);
 
@@ -187,6 +192,167 @@ abstract class BaseCadefalmPeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinCatipalm(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CadefalmPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CadefalmPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CadefalmPeer::CATIPALM_ID, CatipalmPeer::ID);
+
+		$rs = CadefalmPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinCatipalm(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CadefalmPeer::addSelectColumns($c);
+		$startcol = (CadefalmPeer::NUM_COLUMNS - CadefalmPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		CatipalmPeer::addSelectColumns($c);
+
+		$c->addJoin(CadefalmPeer::CATIPALM_ID, CatipalmPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CadefalmPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = CatipalmPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getCatipalm(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCadefalm($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCadefalms();
+				$obj2->addCadefalm($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CadefalmPeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CadefalmPeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CadefalmPeer::CATIPALM_ID, CatipalmPeer::ID);
+
+		$rs = CadefalmPeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CadefalmPeer::addSelectColumns($c);
+		$startcol2 = (CadefalmPeer::NUM_COLUMNS - CadefalmPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		CatipalmPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + CatipalmPeer::NUM_COLUMNS;
+
+		$c->addJoin(CadefalmPeer::CATIPALM_ID, CatipalmPeer::ID);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CadefalmPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = CatipalmPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getCatipalm(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCadefalm($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCadefalms();
+				$obj2->addCadefalm($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -210,6 +376,7 @@ abstract class BaseCadefalmPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CadefalmPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

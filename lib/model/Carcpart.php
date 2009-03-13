@@ -3,20 +3,21 @@
 /**
  * Subclass for representing a row from the 'carcpart' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class Carcpart extends BaseCarcpart
 {
   public function getNompro()
   {
-  	return Herramientas::getX('CODPRO','Caprovee','Nompro',self::getCodpro());  	
+  	return Herramientas::getX('CODPRO','Caprovee','Nompro',self::getCodpro());
   }
   public function getNomalm()
   {
-  	return Herramientas::getX('CODALM','Cadefalm','Nomalm',self::getCodalm());  	
+  	return Herramientas::getX('CODALM','Cadefalm','Nomalm',self::getCodalm());
   }
+
   public function getFecord()
   {
   //	return Herramientas::getX('ORDCOM','CaOrdCom','Fecord',self::getOrdcom());
@@ -27,7 +28,7 @@ class Carcpart extends BaseCarcpart
 			return $fec->getFecord();
 		}else{
 			return '';
-		}  	
+		}
   }
   public function getDesconpag()//Condición de pago
   {
@@ -38,8 +39,8 @@ class Carcpart extends BaseCarcpart
 	if ($des){
 		return $des->getDesconpag();
 	}else{
-		return '<!Descripción no Encontrada o Vacia> ';
-	}  	
+		return '';
+	}
   }
   public function getDesforent()//Forma de Entrega
   {
@@ -50,7 +51,11 @@ class Carcpart extends BaseCarcpart
 	if ($des){
 		return $des->getDesforent();
 	}else{
-		return '<!Descripción no Encontrada o Vacia> ';
-	}  	
+		return '';
+	}
   }
+	public function getNomubi()
+	{
+		return Herramientas::getX('CODUBI','Cadefubi','Nomubi',self::getCodubi());
+	}
 }

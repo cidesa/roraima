@@ -53,246 +53,276 @@ abstract class BaseOcregsol extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumsol()
-	{
+  
+  public function getNumsol()
+  {
 
-		return $this->numsol; 		
-	}
-	
-	public function getDessol()
-	{
+    return trim($this->numsol);
 
-		return $this->dessol; 		
-	}
-	
-	public function getCedste()
-	{
+  }
+  
+  public function getDessol()
+  {
 
-		return $this->cedste; 		
-	}
-	
-	public function getCodsol()
-	{
+    return trim($this->dessol);
 
-		return $this->codsol; 		
-	}
-	
-	public function getCodorg()
-	{
+  }
+  
+  public function getCedste()
+  {
 
-		return $this->codorg; 		
-	}
-	
-	public function getFecsol($format = 'Y-m-d')
-	{
+    return trim($this->cedste);
 
-		if ($this->fecsol === null || $this->fecsol === '') {
-			return null;
-		} elseif (!is_int($this->fecsol)) {
-						$ts = strtotime($this->fecsol);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecsol] as date/time value: " . var_export($this->fecsol, true));
-			}
-		} else {
-			$ts = $this->fecsol;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodsol()
+  {
 
-	
-	public function getFecres($format = 'Y-m-d')
-	{
+    return trim($this->codsol);
 
-		if ($this->fecres === null || $this->fecres === '') {
-			return null;
-		} elseif (!is_int($this->fecres)) {
-						$ts = strtotime($this->fecres);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecres] as date/time value: " . var_export($this->fecres, true));
-			}
-		} else {
-			$ts = $this->fecres;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodorg()
+  {
 
-	
-	public function getObssol()
-	{
+    return trim($this->codorg);
 
-		return $this->obssol; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getFecsol($format = 'Y-m-d')
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getId()
-	{
+    if ($this->fecsol === null || $this->fecsol === '') {
+      return null;
+    } elseif (!is_int($this->fecsol)) {
+            $ts = adodb_strtotime($this->fecsol);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsol] as date/time value: " . var_export($this->fecsol, true));
+      }
+    } else {
+      $ts = $this->fecsol;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->id; 		
-	}
+  
+  public function getFecres($format = 'Y-m-d')
+  {
+
+    if ($this->fecres === null || $this->fecres === '') {
+      return null;
+    } elseif (!is_int($this->fecres)) {
+            $ts = adodb_strtotime($this->fecres);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecres] as date/time value: " . var_export($this->fecres, true));
+      }
+    } else {
+      $ts = $this->fecres;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getObssol()
+  {
+
+    return trim($this->obssol);
+
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumsol($v)
 	{
 
-		if ($this->numsol !== $v) {
-			$this->numsol = $v;
-			$this->modifiedColumns[] = OcregsolPeer::NUMSOL;
-		}
-
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = OcregsolPeer::NUMSOL;
+      }
+  
 	} 
 	
 	public function setDessol($v)
 	{
 
-		if ($this->dessol !== $v) {
-			$this->dessol = $v;
-			$this->modifiedColumns[] = OcregsolPeer::DESSOL;
-		}
-
+    if ($this->dessol !== $v) {
+        $this->dessol = $v;
+        $this->modifiedColumns[] = OcregsolPeer::DESSOL;
+      }
+  
 	} 
 	
 	public function setCedste($v)
 	{
 
-		if ($this->cedste !== $v) {
-			$this->cedste = $v;
-			$this->modifiedColumns[] = OcregsolPeer::CEDSTE;
-		}
-
+    if ($this->cedste !== $v) {
+        $this->cedste = $v;
+        $this->modifiedColumns[] = OcregsolPeer::CEDSTE;
+      }
+  
 	} 
 	
 	public function setCodsol($v)
 	{
 
-		if ($this->codsol !== $v) {
-			$this->codsol = $v;
-			$this->modifiedColumns[] = OcregsolPeer::CODSOL;
-		}
-
+    if ($this->codsol !== $v) {
+        $this->codsol = $v;
+        $this->modifiedColumns[] = OcregsolPeer::CODSOL;
+      }
+  
 	} 
 	
 	public function setCodorg($v)
 	{
 
-		if ($this->codorg !== $v) {
-			$this->codorg = $v;
-			$this->modifiedColumns[] = OcregsolPeer::CODORG;
-		}
-
+    if ($this->codorg !== $v) {
+        $this->codorg = $v;
+        $this->modifiedColumns[] = OcregsolPeer::CODORG;
+      }
+  
 	} 
 	
 	public function setFecsol($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecsol] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecsol !== $ts) {
-			$this->fecsol = $ts;
-			$this->modifiedColumns[] = OcregsolPeer::FECSOL;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsol] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsol !== $ts) {
+      $this->fecsol = $ts;
+      $this->modifiedColumns[] = OcregsolPeer::FECSOL;
+    }
 
 	} 
 	
 	public function setFecres($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecres] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecres !== $ts) {
-			$this->fecres = $ts;
-			$this->modifiedColumns[] = OcregsolPeer::FECRES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecres] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecres !== $ts) {
+      $this->fecres = $ts;
+      $this->modifiedColumns[] = OcregsolPeer::FECRES;
+    }
 
 	} 
 	
 	public function setObssol($v)
 	{
 
-		if ($this->obssol !== $v) {
-			$this->obssol = $v;
-			$this->modifiedColumns[] = OcregsolPeer::OBSSOL;
-		}
-
+    if ($this->obssol !== $v) {
+        $this->obssol = $v;
+        $this->modifiedColumns[] = OcregsolPeer::OBSSOL;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = OcregsolPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = OcregsolPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcregsolPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcregsolPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numsol = $rs->getString($startcol + 0);
+      $this->numsol = $rs->getString($startcol + 0);
 
-			$this->dessol = $rs->getString($startcol + 1);
+      $this->dessol = $rs->getString($startcol + 1);
 
-			$this->cedste = $rs->getString($startcol + 2);
+      $this->cedste = $rs->getString($startcol + 2);
 
-			$this->codsol = $rs->getString($startcol + 3);
+      $this->codsol = $rs->getString($startcol + 3);
 
-			$this->codorg = $rs->getString($startcol + 4);
+      $this->codorg = $rs->getString($startcol + 4);
 
-			$this->fecsol = $rs->getDate($startcol + 5, null);
+      $this->fecsol = $rs->getDate($startcol + 5, null);
 
-			$this->fecres = $rs->getDate($startcol + 6, null);
+      $this->fecres = $rs->getDate($startcol + 6, null);
 
-			$this->obssol = $rs->getString($startcol + 7);
+      $this->obssol = $rs->getString($startcol + 7);
 
-			$this->codemp = $rs->getString($startcol + 8);
+      $this->codemp = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocregsol object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocregsol object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -349,6 +379,7 @@ abstract class BaseOcregsol extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcregsolPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcregsolPeer::doUpdate($this, $con);

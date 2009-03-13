@@ -20,10 +20,10 @@ abstract class BaseFadtoctePeer {
 
 
 	
-	const CODTIPCTE = 'fadtocte.CODTIPCTE';
+	const FATIPCTE_ID = 'fadtocte.FATIPCTE_ID';
 
 	
-	const CODDTO = 'fadtocte.CODDTO';
+	const CODDESC = 'fadtocte.CODDESC';
 
 	
 	const ID = 'fadtocte.ID';
@@ -34,17 +34,17 @@ abstract class BaseFadtoctePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcte', 'Coddto', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FadtoctePeer::CODTIPCTE, FadtoctePeer::CODDTO, FadtoctePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcte', 'coddto', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('FatipcteId', 'Coddesc', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FadtoctePeer::FATIPCTE_ID, FadtoctePeer::CODDESC, FadtoctePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('fatipcte_id', 'coddesc', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcte' => 0, 'Coddto' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (FadtoctePeer::CODTIPCTE => 0, FadtoctePeer::CODDTO => 1, FadtoctePeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcte' => 0, 'coddto' => 1, 'id' => 2, ),
+		BasePeer::TYPE_PHPNAME => array ('FatipcteId' => 0, 'Coddesc' => 1, 'Id' => 2, ),
+		BasePeer::TYPE_COLNAME => array (FadtoctePeer::FATIPCTE_ID => 0, FadtoctePeer::CODDESC => 1, FadtoctePeer::ID => 2, ),
+		BasePeer::TYPE_FIELDNAME => array ('fatipcte_id' => 0, 'coddesc' => 1, 'id' => 2, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, )
 	);
 
@@ -99,9 +99,9 @@ abstract class BaseFadtoctePeer {
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(FadtoctePeer::CODTIPCTE);
+		$criteria->addSelectColumn(FadtoctePeer::FATIPCTE_ID);
 
-		$criteria->addSelectColumn(FadtoctePeer::CODDTO);
+		$criteria->addSelectColumn(FadtoctePeer::CODDESC);
 
 		$criteria->addSelectColumn(FadtoctePeer::ID);
 
@@ -182,6 +182,167 @@ abstract class BaseFadtoctePeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinFatipcte(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FadtoctePeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FadtoctePeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FadtoctePeer::FATIPCTE_ID, FatipctePeer::ID);
+
+		$rs = FadtoctePeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinFatipcte(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FadtoctePeer::addSelectColumns($c);
+		$startcol = (FadtoctePeer::NUM_COLUMNS - FadtoctePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		FatipctePeer::addSelectColumns($c);
+
+		$c->addJoin(FadtoctePeer::FATIPCTE_ID, FatipctePeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FadtoctePeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FatipctePeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getFatipcte(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addFadtocte($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initFadtoctes();
+				$obj2->addFadtocte($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(FadtoctePeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(FadtoctePeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(FadtoctePeer::FATIPCTE_ID, FatipctePeer::ID);
+
+		$rs = FadtoctePeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		FadtoctePeer::addSelectColumns($c);
+		$startcol2 = (FadtoctePeer::NUM_COLUMNS - FadtoctePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		FatipctePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + FatipctePeer::NUM_COLUMNS;
+
+		$c->addJoin(FadtoctePeer::FATIPCTE_ID, FatipctePeer::ID);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = FadtoctePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = FatipctePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getFatipcte(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addFadtocte($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initFadtoctes();
+				$obj2->addFadtocte($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -205,6 +366,7 @@ abstract class BaseFadtoctePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FadtoctePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

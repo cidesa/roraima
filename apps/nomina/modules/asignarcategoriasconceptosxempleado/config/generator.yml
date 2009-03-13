@@ -1,21 +1,26 @@
 generator:
   class:              sfPropelAdminGenerator
   param:
-    model_class:      Npdefcpt
+    model_class:      Npasicatconemp
     theme:            default
     fields:
-      codcon: { name: Código Concepto }
-      nomcon: { name: Descripcion }
-      codpar: { name: Código Partida }
+      codcon:       { name: Codigo Del Concepto, params: maxlength=10,size=10  }
+      nomcon:       { name: Descripcion Del Concepto, params: size=20  }         
+      
     list:
-      title:          Asignación de Categorías por Empleados
-      filters:        [codcon, nomcon, codpar ]
-      display:        [=codcon, nomcon, codpar ]
+      title:          Asignación de Categorias por Empleados
+      display:        [=codcon, nomcon]
+      filters:		  [codcon]
+      max_per_page:	  10
       object_actions:
         _edit:        ~
-        _delete:      ~
-      max_per_page:   5
+        _delete:      ~           
+      sort:  codcat        
+        
     edit:
-      title:          Edición de Asignación de Categorías por Empleados
-      display:        [codcon, nomcon, codpar ]
-      
+      title:          Asignación de Categorias por Empleados
+      display:        [codcon, nomcon]
+      actions:  
+        _list:        ~      
+        _save:        ~
+        _create:      ~

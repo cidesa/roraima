@@ -17,6 +17,10 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 
 
 	
+	protected $codalm;
+
+
+	
 	protected $numlot;
 
 
@@ -61,244 +65,297 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNronot()
-	{
+  
+  public function getNronot()
+  {
 
-		return $this->nronot; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->nronot);
 
-		return $this->codart; 		
-	}
-	
-	public function getNumlot()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->numlot; 		
-	}
-	
-	public function getCansol()
-	{
+    return trim($this->codart);
 
-		return number_format($this->cansol,2,',','.');
-		
-	}
-	
-	public function getCanent()
-	{
+  }
+  
+  public function getCodalm()
+  {
 
-		return number_format($this->canent,2,',','.');
-		
-	}
-	
-	public function getCandes()
-	{
+    return trim($this->codalm);
 
-		return number_format($this->candes,2,',','.');
-		
-	}
-	
-	public function getCanaju()
-	{
+  }
+  
+  public function getNumlot()
+  {
 
-		return number_format($this->canaju,2,',','.');
-		
-	}
-	
-	public function getCandev()
-	{
+    return trim($this->numlot);
 
-		return number_format($this->candev,2,',','.');
-		
-	}
-	
-	public function getCantot()
-	{
+  }
+  
+  public function getCansol($val=false)
+  {
 
-		return number_format($this->cantot,2,',','.');
-		
-	}
-	
-	public function getPreart()
-	{
+    if($val) return number_format($this->cansol,2,',','.');
+    else return $this->cansol;
 
-		return number_format($this->preart,2,',','.');
-		
-	}
-	
-	public function getTotart()
-	{
+  }
+  
+  public function getCanent($val=false)
+  {
 
-		return number_format($this->totart,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->canent,2,',','.');
+    else return $this->canent;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCandes($val=false)
+  {
+
+    if($val) return number_format($this->candes,2,',','.');
+    else return $this->candes;
+
+  }
+  
+  public function getCanaju($val=false)
+  {
+
+    if($val) return number_format($this->canaju,2,',','.');
+    else return $this->canaju;
+
+  }
+  
+  public function getCandev($val=false)
+  {
+
+    if($val) return number_format($this->candev,2,',','.');
+    else return $this->candev;
+
+  }
+  
+  public function getCantot($val=false)
+  {
+
+    if($val) return number_format($this->cantot,2,',','.');
+    else return $this->cantot;
+
+  }
+  
+  public function getPreart($val=false)
+  {
+
+    if($val) return number_format($this->preart,2,',','.');
+    else return $this->preart;
+
+  }
+  
+  public function getTotart($val=false)
+  {
+
+    if($val) return number_format($this->totart,2,',','.');
+    else return $this->totart;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNronot($v)
 	{
 
-		if ($this->nronot !== $v) {
-			$this->nronot = $v;
-			$this->modifiedColumns[] = FaartnotPeer::NRONOT;
-		}
-
+    if ($this->nronot !== $v) {
+        $this->nronot = $v;
+        $this->modifiedColumns[] = FaartnotPeer::NRONOT;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = FaartnotPeer::CODART;
-		}
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = FaartnotPeer::CODART;
+      }
+  
+	} 
+	
+	public function setCodalm($v)
+	{
 
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = FaartnotPeer::CODALM;
+      }
+  
 	} 
 	
 	public function setNumlot($v)
 	{
 
-		if ($this->numlot !== $v) {
-			$this->numlot = $v;
-			$this->modifiedColumns[] = FaartnotPeer::NUMLOT;
-		}
-
+    if ($this->numlot !== $v) {
+        $this->numlot = $v;
+        $this->modifiedColumns[] = FaartnotPeer::NUMLOT;
+      }
+  
 	} 
 	
 	public function setCansol($v)
 	{
 
-		if ($this->cansol !== $v) {
-			$this->cansol = $v;
-			$this->modifiedColumns[] = FaartnotPeer::CANSOL;
-		}
-
+    if ($this->cansol !== $v) {
+        $this->cansol = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::CANSOL;
+      }
+  
 	} 
 	
 	public function setCanent($v)
 	{
 
-		if ($this->canent !== $v) {
-			$this->canent = $v;
-			$this->modifiedColumns[] = FaartnotPeer::CANENT;
-		}
-
+    if ($this->canent !== $v) {
+        $this->canent = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::CANENT;
+      }
+  
 	} 
 	
 	public function setCandes($v)
 	{
 
-		if ($this->candes !== $v) {
-			$this->candes = $v;
-			$this->modifiedColumns[] = FaartnotPeer::CANDES;
-		}
-
+    if ($this->candes !== $v) {
+        $this->candes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::CANDES;
+      }
+  
 	} 
 	
 	public function setCanaju($v)
 	{
 
-		if ($this->canaju !== $v) {
-			$this->canaju = $v;
-			$this->modifiedColumns[] = FaartnotPeer::CANAJU;
-		}
-
+    if ($this->canaju !== $v) {
+        $this->canaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::CANAJU;
+      }
+  
 	} 
 	
 	public function setCandev($v)
 	{
 
-		if ($this->candev !== $v) {
-			$this->candev = $v;
-			$this->modifiedColumns[] = FaartnotPeer::CANDEV;
-		}
-
+    if ($this->candev !== $v) {
+        $this->candev = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::CANDEV;
+      }
+  
 	} 
 	
 	public function setCantot($v)
 	{
 
-		if ($this->cantot !== $v) {
-			$this->cantot = $v;
-			$this->modifiedColumns[] = FaartnotPeer::CANTOT;
-		}
-
+    if ($this->cantot !== $v) {
+        $this->cantot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::CANTOT;
+      }
+  
 	} 
 	
 	public function setPreart($v)
 	{
 
-		if ($this->preart !== $v) {
-			$this->preart = $v;
-			$this->modifiedColumns[] = FaartnotPeer::PREART;
-		}
-
+    if ($this->preart !== $v) {
+        $this->preart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::PREART;
+      }
+  
 	} 
 	
 	public function setTotart($v)
 	{
 
-		if ($this->totart !== $v) {
-			$this->totart = $v;
-			$this->modifiedColumns[] = FaartnotPeer::TOTART;
-		}
-
+    if ($this->totart !== $v) {
+        $this->totart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FaartnotPeer::TOTART;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FaartnotPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FaartnotPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nronot = $rs->getString($startcol + 0);
+      $this->nronot = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->numlot = $rs->getString($startcol + 2);
+      $this->codalm = $rs->getString($startcol + 2);
 
-			$this->cansol = $rs->getFloat($startcol + 3);
+      $this->numlot = $rs->getString($startcol + 3);
 
-			$this->canent = $rs->getFloat($startcol + 4);
+      $this->cansol = $rs->getFloat($startcol + 4);
 
-			$this->candes = $rs->getFloat($startcol + 5);
+      $this->canent = $rs->getFloat($startcol + 5);
 
-			$this->canaju = $rs->getFloat($startcol + 6);
+      $this->candes = $rs->getFloat($startcol + 6);
 
-			$this->candev = $rs->getFloat($startcol + 7);
+      $this->canaju = $rs->getFloat($startcol + 7);
 
-			$this->cantot = $rs->getFloat($startcol + 8);
+      $this->candev = $rs->getFloat($startcol + 8);
 
-			$this->preart = $rs->getFloat($startcol + 9);
+      $this->cantot = $rs->getFloat($startcol + 9);
 
-			$this->totart = $rs->getFloat($startcol + 10);
+      $this->preart = $rs->getFloat($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->totart = $rs->getFloat($startcol + 11);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Faartnot object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Faartnot object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -355,6 +412,7 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FaartnotPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FaartnotPeer::doUpdate($this, $con);
@@ -427,33 +485,36 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 				return $this->getCodart();
 				break;
 			case 2:
-				return $this->getNumlot();
+				return $this->getCodalm();
 				break;
 			case 3:
-				return $this->getCansol();
+				return $this->getNumlot();
 				break;
 			case 4:
-				return $this->getCanent();
+				return $this->getCansol();
 				break;
 			case 5:
-				return $this->getCandes();
+				return $this->getCanent();
 				break;
 			case 6:
-				return $this->getCanaju();
+				return $this->getCandes();
 				break;
 			case 7:
-				return $this->getCandev();
+				return $this->getCanaju();
 				break;
 			case 8:
-				return $this->getCantot();
+				return $this->getCandev();
 				break;
 			case 9:
-				return $this->getPreart();
+				return $this->getCantot();
 				break;
 			case 10:
-				return $this->getTotart();
+				return $this->getPreart();
 				break;
 			case 11:
+				return $this->getTotart();
+				break;
+			case 12:
 				return $this->getId();
 				break;
 			default:
@@ -468,16 +529,17 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getNronot(),
 			$keys[1] => $this->getCodart(),
-			$keys[2] => $this->getNumlot(),
-			$keys[3] => $this->getCansol(),
-			$keys[4] => $this->getCanent(),
-			$keys[5] => $this->getCandes(),
-			$keys[6] => $this->getCanaju(),
-			$keys[7] => $this->getCandev(),
-			$keys[8] => $this->getCantot(),
-			$keys[9] => $this->getPreart(),
-			$keys[10] => $this->getTotart(),
-			$keys[11] => $this->getId(),
+			$keys[2] => $this->getCodalm(),
+			$keys[3] => $this->getNumlot(),
+			$keys[4] => $this->getCansol(),
+			$keys[5] => $this->getCanent(),
+			$keys[6] => $this->getCandes(),
+			$keys[7] => $this->getCanaju(),
+			$keys[8] => $this->getCandev(),
+			$keys[9] => $this->getCantot(),
+			$keys[10] => $this->getPreart(),
+			$keys[11] => $this->getTotart(),
+			$keys[12] => $this->getId(),
 		);
 		return $result;
 	}
@@ -500,33 +562,36 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 				$this->setCodart($value);
 				break;
 			case 2:
-				$this->setNumlot($value);
+				$this->setCodalm($value);
 				break;
 			case 3:
-				$this->setCansol($value);
+				$this->setNumlot($value);
 				break;
 			case 4:
-				$this->setCanent($value);
+				$this->setCansol($value);
 				break;
 			case 5:
-				$this->setCandes($value);
+				$this->setCanent($value);
 				break;
 			case 6:
-				$this->setCanaju($value);
+				$this->setCandes($value);
 				break;
 			case 7:
-				$this->setCandev($value);
+				$this->setCanaju($value);
 				break;
 			case 8:
-				$this->setCantot($value);
+				$this->setCandev($value);
 				break;
 			case 9:
-				$this->setPreart($value);
+				$this->setCantot($value);
 				break;
 			case 10:
-				$this->setTotart($value);
+				$this->setPreart($value);
 				break;
 			case 11:
+				$this->setTotart($value);
+				break;
+			case 12:
 				$this->setId($value);
 				break;
 		} 	}
@@ -538,16 +603,17 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setNronot($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodart($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setNumlot($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCansol($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCanent($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setCandes($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setCanaju($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setCandev($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setCantot($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setPreart($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setTotart($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setId($arr[$keys[11]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodalm($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setNumlot($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCansol($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCanent($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setCandes($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setCanaju($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setCandev($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCantot($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setPreart($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setTotart($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setId($arr[$keys[12]]);
 	}
 
 	
@@ -557,6 +623,7 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(FaartnotPeer::NRONOT)) $criteria->add(FaartnotPeer::NRONOT, $this->nronot);
 		if ($this->isColumnModified(FaartnotPeer::CODART)) $criteria->add(FaartnotPeer::CODART, $this->codart);
+		if ($this->isColumnModified(FaartnotPeer::CODALM)) $criteria->add(FaartnotPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(FaartnotPeer::NUMLOT)) $criteria->add(FaartnotPeer::NUMLOT, $this->numlot);
 		if ($this->isColumnModified(FaartnotPeer::CANSOL)) $criteria->add(FaartnotPeer::CANSOL, $this->cansol);
 		if ($this->isColumnModified(FaartnotPeer::CANENT)) $criteria->add(FaartnotPeer::CANENT, $this->canent);
@@ -600,6 +667,8 @@ abstract class BaseFaartnot extends BaseObject  implements Persistent {
 		$copyObj->setNronot($this->nronot);
 
 		$copyObj->setCodart($this->codart);
+
+		$copyObj->setCodalm($this->codalm);
 
 		$copyObj->setNumlot($this->numlot);
 

@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class FormetdisperMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FormetdisperMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FormetdisperMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('formetdisper');
 		$tMap->setPhpName('Formetdisper');
 
@@ -36,9 +36,9 @@ class FormetdisperMapBuilder {
 
 		$tMap->addColumn('PERMET', 'Permet', 'string', CreoleTypes::VARCHAR, true, 2);
 
-		$tMap->addColumn('CANMET', 'Canmet', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('CANMET', 'Canmet', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

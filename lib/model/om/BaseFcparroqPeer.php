@@ -202,14 +202,14 @@ abstract class BaseFcparroqPeer {
 	public static function doCountJoinFcmunici(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcparroqPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcparroqPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -284,7 +284,7 @@ abstract class BaseFcparroqPeer {
 		} else {
 			$criteria->addSelectColumn(FcparroqPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -320,25 +320,25 @@ abstract class BaseFcparroqPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcparroqPeer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = FcmuniciPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -347,7 +347,7 @@ abstract class BaseFcparroqPeer {
 					$temp_obj2->addFcparroq($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcparroqs();
 				$obj2->addFcparroq($obj1);
@@ -381,6 +381,7 @@ abstract class BaseFcparroqPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcparroqPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

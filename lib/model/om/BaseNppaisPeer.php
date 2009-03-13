@@ -205,6 +205,7 @@ abstract class BaseNppaisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NppaisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

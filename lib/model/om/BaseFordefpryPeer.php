@@ -13,7 +13,7 @@ abstract class BaseFordefpryPeer {
 	const CLASS_DEFAULT = 'lib.model.Fordefpry';
 
 	
-	const NUM_COLUMNS = 65;
+	const NUM_COLUMNS = 76;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -212,6 +212,39 @@ abstract class BaseFordefpryPeer {
 	const CODPRG = 'fordefpry.CODPRG';
 
 	
+	const CODPRYONAPRE = 'fordefpry.CODPRYONAPRE';
+
+	
+	const TIEEJEANOPRY = 'fordefpry.TIEEJEANOPRY';
+
+	
+	const TIEEJEMESPRY = 'fordefpry.TIEEJEMESPRY';
+
+	
+	const CODOBJNVAETA = 'fordefpry.CODOBJNVAETA';
+
+	
+	const SITOBJDES = 'fordefpry.SITOBJDES';
+
+	
+	const TIEIMPMES = 'fordefpry.TIEIMPMES';
+
+	
+	const TIEIMPANO = 'fordefpry.TIEIMPANO';
+
+	
+	const NUCDESEND = 'fordefpry.NUCDESEND';
+
+	
+	const ZONECODES = 'fordefpry.ZONECODES';
+
+	
+	const ACCINM = 'fordefpry.ACCINM';
+
+	
+	const ACCDIF = 'fordefpry.ACCDIF';
+
+	
 	const ID = 'fordefpry.ID';
 
 	
@@ -220,18 +253,18 @@ abstract class BaseFordefpryPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Nompro', 'Proacc', 'Codsta', 'Codsitpre', 'Conpoa', 'Fecini', 'Feccul', 'Ubinac', 'Codequ', 'Codsubobj', 'Codsubsubobj', 'Objestnueeta', 'Objestins', 'Objeesppro', 'Indpro', 'Enupro', 'Indsitact', 'Fecultdat', 'Forind', 'Fueind', 'Indsitobj', 'Tieimp', 'Respro', 'Desmet', 'Codunimedmet', 'Cantmet', 'Benpro', 'Codejedes', 'Codnucdes', 'Codzoneco', 'Comindust', 'Codsec', 'Codsubsec', 'Montotpry', 'Codemp', 'Nomemp', 'Caremp', 'Uniadsemp', 'Telemp', 'Faxemp', 'Emaemp', 'Accotrins', 'Obsaccotrins', 'Conpryotr', 'Obsconpryotr', 'Conotrpry', 'Obsconotrpry', 'Tipaccage', 'Placontin', 'Obsplacontin', 'Nroempdir', 'Nroempind', 'Desbrepry', 'Poravafis', 'Poravafin', 'Uniejepri', 'Ubigeo', 'Plactg', 'Coddir', 'Facrzg', 'Objpndes', 'Unimedres', 'Codprg', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FordefpryPeer::CODPRO, FordefpryPeer::NOMPRO, FordefpryPeer::PROACC, FordefpryPeer::CODSTA, FordefpryPeer::CODSITPRE, FordefpryPeer::CONPOA, FordefpryPeer::FECINI, FordefpryPeer::FECCUL, FordefpryPeer::UBINAC, FordefpryPeer::CODEQU, FordefpryPeer::CODSUBOBJ, FordefpryPeer::CODSUBSUBOBJ, FordefpryPeer::OBJESTNUEETA, FordefpryPeer::OBJESTINS, FordefpryPeer::OBJEESPPRO, FordefpryPeer::INDPRO, FordefpryPeer::ENUPRO, FordefpryPeer::INDSITACT, FordefpryPeer::FECULTDAT, FordefpryPeer::FORIND, FordefpryPeer::FUEIND, FordefpryPeer::INDSITOBJ, FordefpryPeer::TIEIMP, FordefpryPeer::RESPRO, FordefpryPeer::DESMET, FordefpryPeer::CODUNIMEDMET, FordefpryPeer::CANTMET, FordefpryPeer::BENPRO, FordefpryPeer::CODEJEDES, FordefpryPeer::CODNUCDES, FordefpryPeer::CODZONECO, FordefpryPeer::COMINDUST, FordefpryPeer::CODSEC, FordefpryPeer::CODSUBSEC, FordefpryPeer::MONTOTPRY, FordefpryPeer::CODEMP, FordefpryPeer::NOMEMP, FordefpryPeer::CAREMP, FordefpryPeer::UNIADSEMP, FordefpryPeer::TELEMP, FordefpryPeer::FAXEMP, FordefpryPeer::EMAEMP, FordefpryPeer::ACCOTRINS, FordefpryPeer::OBSACCOTRINS, FordefpryPeer::CONPRYOTR, FordefpryPeer::OBSCONPRYOTR, FordefpryPeer::CONOTRPRY, FordefpryPeer::OBSCONOTRPRY, FordefpryPeer::TIPACCAGE, FordefpryPeer::PLACONTIN, FordefpryPeer::OBSPLACONTIN, FordefpryPeer::NROEMPDIR, FordefpryPeer::NROEMPIND, FordefpryPeer::DESBREPRY, FordefpryPeer::PORAVAFIS, FordefpryPeer::PORAVAFIN, FordefpryPeer::UNIEJEPRI, FordefpryPeer::UBIGEO, FordefpryPeer::PLACTG, FordefpryPeer::CODDIR, FordefpryPeer::FACRZG, FordefpryPeer::OBJPNDES, FordefpryPeer::UNIMEDRES, FordefpryPeer::CODPRG, FordefpryPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro', 'nompro', 'proacc', 'codsta', 'codsitpre', 'conpoa', 'fecini', 'feccul', 'ubinac', 'codequ', 'codsubobj', 'codsubsubobj', 'objestnueeta', 'objestins', 'objeesppro', 'indpro', 'enupro', 'indsitact', 'fecultdat', 'forind', 'fueind', 'indsitobj', 'tieimp', 'respro', 'desmet', 'codunimedmet', 'cantmet', 'benpro', 'codejedes', 'codnucdes', 'codzoneco', 'comindust', 'codsec', 'codsubsec', 'montotpry', 'codemp', 'nomemp', 'caremp', 'uniadsemp', 'telemp', 'faxemp', 'emaemp', 'accotrins', 'obsaccotrins', 'conpryotr', 'obsconpryotr', 'conotrpry', 'obsconotrpry', 'tipaccage', 'placontin', 'obsplacontin', 'nroempdir', 'nroempind', 'desbrepry', 'poravafis', 'poravafin', 'uniejepri', 'ubigeo', 'plactg', 'coddir', 'facrzg', 'objpndes', 'unimedres', 'codprg', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro', 'Nompro', 'Proacc', 'Codsta', 'Codsitpre', 'Conpoa', 'Fecini', 'Feccul', 'Ubinac', 'Codequ', 'Codsubobj', 'Codsubsubobj', 'Objestnueeta', 'Objestins', 'Objeesppro', 'Indpro', 'Enupro', 'Indsitact', 'Fecultdat', 'Forind', 'Fueind', 'Indsitobj', 'Tieimp', 'Respro', 'Desmet', 'Codunimedmet', 'Cantmet', 'Benpro', 'Codejedes', 'Codnucdes', 'Codzoneco', 'Comindust', 'Codsec', 'Codsubsec', 'Montotpry', 'Codemp', 'Nomemp', 'Caremp', 'Uniadsemp', 'Telemp', 'Faxemp', 'Emaemp', 'Accotrins', 'Obsaccotrins', 'Conpryotr', 'Obsconpryotr', 'Conotrpry', 'Obsconotrpry', 'Tipaccage', 'Placontin', 'Obsplacontin', 'Nroempdir', 'Nroempind', 'Desbrepry', 'Poravafis', 'Poravafin', 'Uniejepri', 'Ubigeo', 'Plactg', 'Coddir', 'Facrzg', 'Objpndes', 'Unimedres', 'Codprg', 'Codpryonapre', 'Tieejeanopry', 'Tieejemespry', 'Codobjnvaeta', 'Sitobjdes', 'Tieimpmes', 'Tieimpano', 'Nucdesend', 'Zonecodes', 'Accinm', 'Accdif', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FordefpryPeer::CODPRO, FordefpryPeer::NOMPRO, FordefpryPeer::PROACC, FordefpryPeer::CODSTA, FordefpryPeer::CODSITPRE, FordefpryPeer::CONPOA, FordefpryPeer::FECINI, FordefpryPeer::FECCUL, FordefpryPeer::UBINAC, FordefpryPeer::CODEQU, FordefpryPeer::CODSUBOBJ, FordefpryPeer::CODSUBSUBOBJ, FordefpryPeer::OBJESTNUEETA, FordefpryPeer::OBJESTINS, FordefpryPeer::OBJEESPPRO, FordefpryPeer::INDPRO, FordefpryPeer::ENUPRO, FordefpryPeer::INDSITACT, FordefpryPeer::FECULTDAT, FordefpryPeer::FORIND, FordefpryPeer::FUEIND, FordefpryPeer::INDSITOBJ, FordefpryPeer::TIEIMP, FordefpryPeer::RESPRO, FordefpryPeer::DESMET, FordefpryPeer::CODUNIMEDMET, FordefpryPeer::CANTMET, FordefpryPeer::BENPRO, FordefpryPeer::CODEJEDES, FordefpryPeer::CODNUCDES, FordefpryPeer::CODZONECO, FordefpryPeer::COMINDUST, FordefpryPeer::CODSEC, FordefpryPeer::CODSUBSEC, FordefpryPeer::MONTOTPRY, FordefpryPeer::CODEMP, FordefpryPeer::NOMEMP, FordefpryPeer::CAREMP, FordefpryPeer::UNIADSEMP, FordefpryPeer::TELEMP, FordefpryPeer::FAXEMP, FordefpryPeer::EMAEMP, FordefpryPeer::ACCOTRINS, FordefpryPeer::OBSACCOTRINS, FordefpryPeer::CONPRYOTR, FordefpryPeer::OBSCONPRYOTR, FordefpryPeer::CONOTRPRY, FordefpryPeer::OBSCONOTRPRY, FordefpryPeer::TIPACCAGE, FordefpryPeer::PLACONTIN, FordefpryPeer::OBSPLACONTIN, FordefpryPeer::NROEMPDIR, FordefpryPeer::NROEMPIND, FordefpryPeer::DESBREPRY, FordefpryPeer::PORAVAFIS, FordefpryPeer::PORAVAFIN, FordefpryPeer::UNIEJEPRI, FordefpryPeer::UBIGEO, FordefpryPeer::PLACTG, FordefpryPeer::CODDIR, FordefpryPeer::FACRZG, FordefpryPeer::OBJPNDES, FordefpryPeer::UNIMEDRES, FordefpryPeer::CODPRG, FordefpryPeer::CODPRYONAPRE, FordefpryPeer::TIEEJEANOPRY, FordefpryPeer::TIEEJEMESPRY, FordefpryPeer::CODOBJNVAETA, FordefpryPeer::SITOBJDES, FordefpryPeer::TIEIMPMES, FordefpryPeer::TIEIMPANO, FordefpryPeer::NUCDESEND, FordefpryPeer::ZONECODES, FordefpryPeer::ACCINM, FordefpryPeer::ACCDIF, FordefpryPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro', 'nompro', 'proacc', 'codsta', 'codsitpre', 'conpoa', 'fecini', 'feccul', 'ubinac', 'codequ', 'codsubobj', 'codsubsubobj', 'objestnueeta', 'objestins', 'objeesppro', 'indpro', 'enupro', 'indsitact', 'fecultdat', 'forind', 'fueind', 'indsitobj', 'tieimp', 'respro', 'desmet', 'codunimedmet', 'cantmet', 'benpro', 'codejedes', 'codnucdes', 'codzoneco', 'comindust', 'codsec', 'codsubsec', 'montotpry', 'codemp', 'nomemp', 'caremp', 'uniadsemp', 'telemp', 'faxemp', 'emaemp', 'accotrins', 'obsaccotrins', 'conpryotr', 'obsconpryotr', 'conotrpry', 'obsconotrpry', 'tipaccage', 'placontin', 'obsplacontin', 'nroempdir', 'nroempind', 'desbrepry', 'poravafis', 'poravafin', 'uniejepri', 'ubigeo', 'plactg', 'coddir', 'facrzg', 'objpndes', 'unimedres', 'codprg', 'codpryonapre', 'tieejeanopry', 'tieejemespry', 'codobjnvaeta', 'sitobjdes', 'tieimpmes', 'tieimpano', 'nucdesend', 'zonecodes', 'accinm', 'accdif', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Nompro' => 1, 'Proacc' => 2, 'Codsta' => 3, 'Codsitpre' => 4, 'Conpoa' => 5, 'Fecini' => 6, 'Feccul' => 7, 'Ubinac' => 8, 'Codequ' => 9, 'Codsubobj' => 10, 'Codsubsubobj' => 11, 'Objestnueeta' => 12, 'Objestins' => 13, 'Objeesppro' => 14, 'Indpro' => 15, 'Enupro' => 16, 'Indsitact' => 17, 'Fecultdat' => 18, 'Forind' => 19, 'Fueind' => 20, 'Indsitobj' => 21, 'Tieimp' => 22, 'Respro' => 23, 'Desmet' => 24, 'Codunimedmet' => 25, 'Cantmet' => 26, 'Benpro' => 27, 'Codejedes' => 28, 'Codnucdes' => 29, 'Codzoneco' => 30, 'Comindust' => 31, 'Codsec' => 32, 'Codsubsec' => 33, 'Montotpry' => 34, 'Codemp' => 35, 'Nomemp' => 36, 'Caremp' => 37, 'Uniadsemp' => 38, 'Telemp' => 39, 'Faxemp' => 40, 'Emaemp' => 41, 'Accotrins' => 42, 'Obsaccotrins' => 43, 'Conpryotr' => 44, 'Obsconpryotr' => 45, 'Conotrpry' => 46, 'Obsconotrpry' => 47, 'Tipaccage' => 48, 'Placontin' => 49, 'Obsplacontin' => 50, 'Nroempdir' => 51, 'Nroempind' => 52, 'Desbrepry' => 53, 'Poravafis' => 54, 'Poravafin' => 55, 'Uniejepri' => 56, 'Ubigeo' => 57, 'Plactg' => 58, 'Coddir' => 59, 'Facrzg' => 60, 'Objpndes' => 61, 'Unimedres' => 62, 'Codprg' => 63, 'Id' => 64, ),
-		BasePeer::TYPE_COLNAME => array (FordefpryPeer::CODPRO => 0, FordefpryPeer::NOMPRO => 1, FordefpryPeer::PROACC => 2, FordefpryPeer::CODSTA => 3, FordefpryPeer::CODSITPRE => 4, FordefpryPeer::CONPOA => 5, FordefpryPeer::FECINI => 6, FordefpryPeer::FECCUL => 7, FordefpryPeer::UBINAC => 8, FordefpryPeer::CODEQU => 9, FordefpryPeer::CODSUBOBJ => 10, FordefpryPeer::CODSUBSUBOBJ => 11, FordefpryPeer::OBJESTNUEETA => 12, FordefpryPeer::OBJESTINS => 13, FordefpryPeer::OBJEESPPRO => 14, FordefpryPeer::INDPRO => 15, FordefpryPeer::ENUPRO => 16, FordefpryPeer::INDSITACT => 17, FordefpryPeer::FECULTDAT => 18, FordefpryPeer::FORIND => 19, FordefpryPeer::FUEIND => 20, FordefpryPeer::INDSITOBJ => 21, FordefpryPeer::TIEIMP => 22, FordefpryPeer::RESPRO => 23, FordefpryPeer::DESMET => 24, FordefpryPeer::CODUNIMEDMET => 25, FordefpryPeer::CANTMET => 26, FordefpryPeer::BENPRO => 27, FordefpryPeer::CODEJEDES => 28, FordefpryPeer::CODNUCDES => 29, FordefpryPeer::CODZONECO => 30, FordefpryPeer::COMINDUST => 31, FordefpryPeer::CODSEC => 32, FordefpryPeer::CODSUBSEC => 33, FordefpryPeer::MONTOTPRY => 34, FordefpryPeer::CODEMP => 35, FordefpryPeer::NOMEMP => 36, FordefpryPeer::CAREMP => 37, FordefpryPeer::UNIADSEMP => 38, FordefpryPeer::TELEMP => 39, FordefpryPeer::FAXEMP => 40, FordefpryPeer::EMAEMP => 41, FordefpryPeer::ACCOTRINS => 42, FordefpryPeer::OBSACCOTRINS => 43, FordefpryPeer::CONPRYOTR => 44, FordefpryPeer::OBSCONPRYOTR => 45, FordefpryPeer::CONOTRPRY => 46, FordefpryPeer::OBSCONOTRPRY => 47, FordefpryPeer::TIPACCAGE => 48, FordefpryPeer::PLACONTIN => 49, FordefpryPeer::OBSPLACONTIN => 50, FordefpryPeer::NROEMPDIR => 51, FordefpryPeer::NROEMPIND => 52, FordefpryPeer::DESBREPRY => 53, FordefpryPeer::PORAVAFIS => 54, FordefpryPeer::PORAVAFIN => 55, FordefpryPeer::UNIEJEPRI => 56, FordefpryPeer::UBIGEO => 57, FordefpryPeer::PLACTG => 58, FordefpryPeer::CODDIR => 59, FordefpryPeer::FACRZG => 60, FordefpryPeer::OBJPNDES => 61, FordefpryPeer::UNIMEDRES => 62, FordefpryPeer::CODPRG => 63, FordefpryPeer::ID => 64, ),
-		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'nompro' => 1, 'proacc' => 2, 'codsta' => 3, 'codsitpre' => 4, 'conpoa' => 5, 'fecini' => 6, 'feccul' => 7, 'ubinac' => 8, 'codequ' => 9, 'codsubobj' => 10, 'codsubsubobj' => 11, 'objestnueeta' => 12, 'objestins' => 13, 'objeesppro' => 14, 'indpro' => 15, 'enupro' => 16, 'indsitact' => 17, 'fecultdat' => 18, 'forind' => 19, 'fueind' => 20, 'indsitobj' => 21, 'tieimp' => 22, 'respro' => 23, 'desmet' => 24, 'codunimedmet' => 25, 'cantmet' => 26, 'benpro' => 27, 'codejedes' => 28, 'codnucdes' => 29, 'codzoneco' => 30, 'comindust' => 31, 'codsec' => 32, 'codsubsec' => 33, 'montotpry' => 34, 'codemp' => 35, 'nomemp' => 36, 'caremp' => 37, 'uniadsemp' => 38, 'telemp' => 39, 'faxemp' => 40, 'emaemp' => 41, 'accotrins' => 42, 'obsaccotrins' => 43, 'conpryotr' => 44, 'obsconpryotr' => 45, 'conotrpry' => 46, 'obsconotrpry' => 47, 'tipaccage' => 48, 'placontin' => 49, 'obsplacontin' => 50, 'nroempdir' => 51, 'nroempind' => 52, 'desbrepry' => 53, 'poravafis' => 54, 'poravafin' => 55, 'uniejepri' => 56, 'ubigeo' => 57, 'plactg' => 58, 'coddir' => 59, 'facrzg' => 60, 'objpndes' => 61, 'unimedres' => 62, 'codprg' => 63, 'id' => 64, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, )
+		BasePeer::TYPE_PHPNAME => array ('Codpro' => 0, 'Nompro' => 1, 'Proacc' => 2, 'Codsta' => 3, 'Codsitpre' => 4, 'Conpoa' => 5, 'Fecini' => 6, 'Feccul' => 7, 'Ubinac' => 8, 'Codequ' => 9, 'Codsubobj' => 10, 'Codsubsubobj' => 11, 'Objestnueeta' => 12, 'Objestins' => 13, 'Objeesppro' => 14, 'Indpro' => 15, 'Enupro' => 16, 'Indsitact' => 17, 'Fecultdat' => 18, 'Forind' => 19, 'Fueind' => 20, 'Indsitobj' => 21, 'Tieimp' => 22, 'Respro' => 23, 'Desmet' => 24, 'Codunimedmet' => 25, 'Cantmet' => 26, 'Benpro' => 27, 'Codejedes' => 28, 'Codnucdes' => 29, 'Codzoneco' => 30, 'Comindust' => 31, 'Codsec' => 32, 'Codsubsec' => 33, 'Montotpry' => 34, 'Codemp' => 35, 'Nomemp' => 36, 'Caremp' => 37, 'Uniadsemp' => 38, 'Telemp' => 39, 'Faxemp' => 40, 'Emaemp' => 41, 'Accotrins' => 42, 'Obsaccotrins' => 43, 'Conpryotr' => 44, 'Obsconpryotr' => 45, 'Conotrpry' => 46, 'Obsconotrpry' => 47, 'Tipaccage' => 48, 'Placontin' => 49, 'Obsplacontin' => 50, 'Nroempdir' => 51, 'Nroempind' => 52, 'Desbrepry' => 53, 'Poravafis' => 54, 'Poravafin' => 55, 'Uniejepri' => 56, 'Ubigeo' => 57, 'Plactg' => 58, 'Coddir' => 59, 'Facrzg' => 60, 'Objpndes' => 61, 'Unimedres' => 62, 'Codprg' => 63, 'Codpryonapre' => 64, 'Tieejeanopry' => 65, 'Tieejemespry' => 66, 'Codobjnvaeta' => 67, 'Sitobjdes' => 68, 'Tieimpmes' => 69, 'Tieimpano' => 70, 'Nucdesend' => 71, 'Zonecodes' => 72, 'Accinm' => 73, 'Accdif' => 74, 'Id' => 75, ),
+		BasePeer::TYPE_COLNAME => array (FordefpryPeer::CODPRO => 0, FordefpryPeer::NOMPRO => 1, FordefpryPeer::PROACC => 2, FordefpryPeer::CODSTA => 3, FordefpryPeer::CODSITPRE => 4, FordefpryPeer::CONPOA => 5, FordefpryPeer::FECINI => 6, FordefpryPeer::FECCUL => 7, FordefpryPeer::UBINAC => 8, FordefpryPeer::CODEQU => 9, FordefpryPeer::CODSUBOBJ => 10, FordefpryPeer::CODSUBSUBOBJ => 11, FordefpryPeer::OBJESTNUEETA => 12, FordefpryPeer::OBJESTINS => 13, FordefpryPeer::OBJEESPPRO => 14, FordefpryPeer::INDPRO => 15, FordefpryPeer::ENUPRO => 16, FordefpryPeer::INDSITACT => 17, FordefpryPeer::FECULTDAT => 18, FordefpryPeer::FORIND => 19, FordefpryPeer::FUEIND => 20, FordefpryPeer::INDSITOBJ => 21, FordefpryPeer::TIEIMP => 22, FordefpryPeer::RESPRO => 23, FordefpryPeer::DESMET => 24, FordefpryPeer::CODUNIMEDMET => 25, FordefpryPeer::CANTMET => 26, FordefpryPeer::BENPRO => 27, FordefpryPeer::CODEJEDES => 28, FordefpryPeer::CODNUCDES => 29, FordefpryPeer::CODZONECO => 30, FordefpryPeer::COMINDUST => 31, FordefpryPeer::CODSEC => 32, FordefpryPeer::CODSUBSEC => 33, FordefpryPeer::MONTOTPRY => 34, FordefpryPeer::CODEMP => 35, FordefpryPeer::NOMEMP => 36, FordefpryPeer::CAREMP => 37, FordefpryPeer::UNIADSEMP => 38, FordefpryPeer::TELEMP => 39, FordefpryPeer::FAXEMP => 40, FordefpryPeer::EMAEMP => 41, FordefpryPeer::ACCOTRINS => 42, FordefpryPeer::OBSACCOTRINS => 43, FordefpryPeer::CONPRYOTR => 44, FordefpryPeer::OBSCONPRYOTR => 45, FordefpryPeer::CONOTRPRY => 46, FordefpryPeer::OBSCONOTRPRY => 47, FordefpryPeer::TIPACCAGE => 48, FordefpryPeer::PLACONTIN => 49, FordefpryPeer::OBSPLACONTIN => 50, FordefpryPeer::NROEMPDIR => 51, FordefpryPeer::NROEMPIND => 52, FordefpryPeer::DESBREPRY => 53, FordefpryPeer::PORAVAFIS => 54, FordefpryPeer::PORAVAFIN => 55, FordefpryPeer::UNIEJEPRI => 56, FordefpryPeer::UBIGEO => 57, FordefpryPeer::PLACTG => 58, FordefpryPeer::CODDIR => 59, FordefpryPeer::FACRZG => 60, FordefpryPeer::OBJPNDES => 61, FordefpryPeer::UNIMEDRES => 62, FordefpryPeer::CODPRG => 63, FordefpryPeer::CODPRYONAPRE => 64, FordefpryPeer::TIEEJEANOPRY => 65, FordefpryPeer::TIEEJEMESPRY => 66, FordefpryPeer::CODOBJNVAETA => 67, FordefpryPeer::SITOBJDES => 68, FordefpryPeer::TIEIMPMES => 69, FordefpryPeer::TIEIMPANO => 70, FordefpryPeer::NUCDESEND => 71, FordefpryPeer::ZONECODES => 72, FordefpryPeer::ACCINM => 73, FordefpryPeer::ACCDIF => 74, FordefpryPeer::ID => 75, ),
+		BasePeer::TYPE_FIELDNAME => array ('codpro' => 0, 'nompro' => 1, 'proacc' => 2, 'codsta' => 3, 'codsitpre' => 4, 'conpoa' => 5, 'fecini' => 6, 'feccul' => 7, 'ubinac' => 8, 'codequ' => 9, 'codsubobj' => 10, 'codsubsubobj' => 11, 'objestnueeta' => 12, 'objestins' => 13, 'objeesppro' => 14, 'indpro' => 15, 'enupro' => 16, 'indsitact' => 17, 'fecultdat' => 18, 'forind' => 19, 'fueind' => 20, 'indsitobj' => 21, 'tieimp' => 22, 'respro' => 23, 'desmet' => 24, 'codunimedmet' => 25, 'cantmet' => 26, 'benpro' => 27, 'codejedes' => 28, 'codnucdes' => 29, 'codzoneco' => 30, 'comindust' => 31, 'codsec' => 32, 'codsubsec' => 33, 'montotpry' => 34, 'codemp' => 35, 'nomemp' => 36, 'caremp' => 37, 'uniadsemp' => 38, 'telemp' => 39, 'faxemp' => 40, 'emaemp' => 41, 'accotrins' => 42, 'obsaccotrins' => 43, 'conpryotr' => 44, 'obsconpryotr' => 45, 'conotrpry' => 46, 'obsconotrpry' => 47, 'tipaccage' => 48, 'placontin' => 49, 'obsplacontin' => 50, 'nroempdir' => 51, 'nroempind' => 52, 'desbrepry' => 53, 'poravafis' => 54, 'poravafin' => 55, 'uniejepri' => 56, 'ubigeo' => 57, 'plactg' => 58, 'coddir' => 59, 'facrzg' => 60, 'objpndes' => 61, 'unimedres' => 62, 'codprg' => 63, 'codpryonapre' => 64, 'tieejeanopry' => 65, 'tieejemespry' => 66, 'codobjnvaeta' => 67, 'sitobjdes' => 68, 'tieimpmes' => 69, 'tieimpano' => 70, 'nucdesend' => 71, 'zonecodes' => 72, 'accinm' => 73, 'accdif' => 74, 'id' => 75, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, )
 	);
 
 	
@@ -413,6 +446,28 @@ abstract class BaseFordefpryPeer {
 
 		$criteria->addSelectColumn(FordefpryPeer::CODPRG);
 
+		$criteria->addSelectColumn(FordefpryPeer::CODPRYONAPRE);
+
+		$criteria->addSelectColumn(FordefpryPeer::TIEEJEANOPRY);
+
+		$criteria->addSelectColumn(FordefpryPeer::TIEEJEMESPRY);
+
+		$criteria->addSelectColumn(FordefpryPeer::CODOBJNVAETA);
+
+		$criteria->addSelectColumn(FordefpryPeer::SITOBJDES);
+
+		$criteria->addSelectColumn(FordefpryPeer::TIEIMPMES);
+
+		$criteria->addSelectColumn(FordefpryPeer::TIEIMPANO);
+
+		$criteria->addSelectColumn(FordefpryPeer::NUCDESEND);
+
+		$criteria->addSelectColumn(FordefpryPeer::ZONECODES);
+
+		$criteria->addSelectColumn(FordefpryPeer::ACCINM);
+
+		$criteria->addSelectColumn(FordefpryPeer::ACCDIF);
+
 		$criteria->addSelectColumn(FordefpryPeer::ID);
 
 	}
@@ -515,6 +570,7 @@ abstract class BaseFordefpryPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefpryPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

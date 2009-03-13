@@ -210,6 +210,7 @@ abstract class BaseNpguardePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpguardePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

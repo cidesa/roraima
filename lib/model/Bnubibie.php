@@ -8,6 +8,5 @@
  * @package lib.model
  */
 class Bnubibie extends BaseBnubibie
-{
-	
+{ 	
 }

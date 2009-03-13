@@ -81,376 +81,413 @@ abstract class BaseTabla10 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefcom()
-	{
+  
+  public function getRefcom()
+  {
 
-		return $this->refcom; 		
-	}
-	
-	public function getTipcom()
-	{
+    return trim($this->refcom);
 
-		return $this->tipcom; 		
-	}
-	
-	public function getFeccom($format = 'Y-m-d')
-	{
+  }
+  
+  public function getTipcom()
+  {
 
-		if ($this->feccom === null || $this->feccom === '') {
-			return null;
-		} elseif (!is_int($this->feccom)) {
-						$ts = strtotime($this->feccom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
-			}
-		} else {
-			$ts = $this->feccom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->tipcom);
 
-	
-	public function getAnocom()
-	{
+  }
+  
+  public function getFeccom($format = 'Y-m-d')
+  {
 
-		return $this->anocom; 		
-	}
-	
-	public function getRefprc()
-	{
+    if ($this->feccom === null || $this->feccom === '') {
+      return null;
+    } elseif (!is_int($this->feccom)) {
+            $ts = adodb_strtotime($this->feccom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
+      }
+    } else {
+      $ts = $this->feccom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->refprc; 		
-	}
-	
-	public function getTipprc()
-	{
+  
+  public function getAnocom()
+  {
 
-		return $this->tipprc; 		
-	}
-	
-	public function getDescom()
-	{
+    return trim($this->anocom);
 
-		return $this->descom; 		
-	}
-	
-	public function getDesanu()
-	{
+  }
+  
+  public function getRefprc()
+  {
 
-		return $this->desanu; 		
-	}
-	
-	public function getMoncom()
-	{
+    return trim($this->refprc);
 
-		return number_format($this->moncom,2,',','.');
-		
-	}
-	
-	public function getSalcau()
-	{
+  }
+  
+  public function getTipprc()
+  {
 
-		return number_format($this->salcau,2,',','.');
-		
-	}
-	
-	public function getSalpag()
-	{
+    return trim($this->tipprc);
 
-		return number_format($this->salpag,2,',','.');
-		
-	}
-	
-	public function getSalaju()
-	{
+  }
+  
+  public function getDescom()
+  {
 
-		return number_format($this->salaju,2,',','.');
-		
-	}
-	
-	public function getStacom()
-	{
+    return trim($this->descom);
 
-		return $this->stacom; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDesanu()
+  {
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->desanu);
 
-	
-	public function getCedrif()
-	{
+  }
+  
+  public function getMoncom($val=false)
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getTipo()
-	{
+    if($val) return number_format($this->moncom,2,',','.');
+    else return $this->moncom;
 
-		return $this->tipo; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getSalcau($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->salcau,2,',','.');
+    else return $this->salcau;
+
+  }
+  
+  public function getSalpag($val=false)
+  {
+
+    if($val) return number_format($this->salpag,2,',','.');
+    else return $this->salpag;
+
+  }
+  
+  public function getSalaju($val=false)
+  {
+
+    if($val) return number_format($this->salaju,2,',','.');
+    else return $this->salaju;
+
+  }
+  
+  public function getStacom()
+  {
+
+    return trim($this->stacom);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCedrif()
+  {
+
+    return trim($this->cedrif);
+
+  }
+  
+  public function getTipo()
+  {
+
+    return trim($this->tipo);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefcom($v)
 	{
 
-		if ($this->refcom !== $v) {
-			$this->refcom = $v;
-			$this->modifiedColumns[] = Tabla10Peer::REFCOM;
-		}
-
+    if ($this->refcom !== $v) {
+        $this->refcom = $v;
+        $this->modifiedColumns[] = Tabla10Peer::REFCOM;
+      }
+  
 	} 
 	
 	public function setTipcom($v)
 	{
 
-		if ($this->tipcom !== $v) {
-			$this->tipcom = $v;
-			$this->modifiedColumns[] = Tabla10Peer::TIPCOM;
-		}
-
+    if ($this->tipcom !== $v) {
+        $this->tipcom = $v;
+        $this->modifiedColumns[] = Tabla10Peer::TIPCOM;
+      }
+  
 	} 
 	
 	public function setFeccom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccom !== $ts) {
-			$this->feccom = $ts;
-			$this->modifiedColumns[] = Tabla10Peer::FECCOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccom !== $ts) {
+      $this->feccom = $ts;
+      $this->modifiedColumns[] = Tabla10Peer::FECCOM;
+    }
 
 	} 
 	
 	public function setAnocom($v)
 	{
 
-		if ($this->anocom !== $v) {
-			$this->anocom = $v;
-			$this->modifiedColumns[] = Tabla10Peer::ANOCOM;
-		}
-
+    if ($this->anocom !== $v) {
+        $this->anocom = $v;
+        $this->modifiedColumns[] = Tabla10Peer::ANOCOM;
+      }
+  
 	} 
 	
 	public function setRefprc($v)
 	{
 
-		if ($this->refprc !== $v) {
-			$this->refprc = $v;
-			$this->modifiedColumns[] = Tabla10Peer::REFPRC;
-		}
-
+    if ($this->refprc !== $v) {
+        $this->refprc = $v;
+        $this->modifiedColumns[] = Tabla10Peer::REFPRC;
+      }
+  
 	} 
 	
 	public function setTipprc($v)
 	{
 
-		if ($this->tipprc !== $v) {
-			$this->tipprc = $v;
-			$this->modifiedColumns[] = Tabla10Peer::TIPPRC;
-		}
-
+    if ($this->tipprc !== $v) {
+        $this->tipprc = $v;
+        $this->modifiedColumns[] = Tabla10Peer::TIPPRC;
+      }
+  
 	} 
 	
 	public function setDescom($v)
 	{
 
-		if ($this->descom !== $v) {
-			$this->descom = $v;
-			$this->modifiedColumns[] = Tabla10Peer::DESCOM;
-		}
-
+    if ($this->descom !== $v) {
+        $this->descom = $v;
+        $this->modifiedColumns[] = Tabla10Peer::DESCOM;
+      }
+  
 	} 
 	
 	public function setDesanu($v)
 	{
 
-		if ($this->desanu !== $v) {
-			$this->desanu = $v;
-			$this->modifiedColumns[] = Tabla10Peer::DESANU;
-		}
-
+    if ($this->desanu !== $v) {
+        $this->desanu = $v;
+        $this->modifiedColumns[] = Tabla10Peer::DESANU;
+      }
+  
 	} 
 	
 	public function setMoncom($v)
 	{
 
-		if ($this->moncom !== $v) {
-			$this->moncom = $v;
-			$this->modifiedColumns[] = Tabla10Peer::MONCOM;
-		}
-
+    if ($this->moncom !== $v) {
+        $this->moncom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Tabla10Peer::MONCOM;
+      }
+  
 	} 
 	
 	public function setSalcau($v)
 	{
 
-		if ($this->salcau !== $v) {
-			$this->salcau = $v;
-			$this->modifiedColumns[] = Tabla10Peer::SALCAU;
-		}
-
+    if ($this->salcau !== $v) {
+        $this->salcau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Tabla10Peer::SALCAU;
+      }
+  
 	} 
 	
 	public function setSalpag($v)
 	{
 
-		if ($this->salpag !== $v) {
-			$this->salpag = $v;
-			$this->modifiedColumns[] = Tabla10Peer::SALPAG;
-		}
-
+    if ($this->salpag !== $v) {
+        $this->salpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Tabla10Peer::SALPAG;
+      }
+  
 	} 
 	
 	public function setSalaju($v)
 	{
 
-		if ($this->salaju !== $v) {
-			$this->salaju = $v;
-			$this->modifiedColumns[] = Tabla10Peer::SALAJU;
-		}
-
+    if ($this->salaju !== $v) {
+        $this->salaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Tabla10Peer::SALAJU;
+      }
+  
 	} 
 	
 	public function setStacom($v)
 	{
 
-		if ($this->stacom !== $v) {
-			$this->stacom = $v;
-			$this->modifiedColumns[] = Tabla10Peer::STACOM;
-		}
-
+    if ($this->stacom !== $v) {
+        $this->stacom = $v;
+        $this->modifiedColumns[] = Tabla10Peer::STACOM;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = Tabla10Peer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = Tabla10Peer::FECANU;
+    }
 
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = Tabla10Peer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = Tabla10Peer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = Tabla10Peer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = Tabla10Peer::TIPO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Tabla10Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Tabla10Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refcom = $rs->getString($startcol + 0);
+      $this->refcom = $rs->getString($startcol + 0);
 
-			$this->tipcom = $rs->getString($startcol + 1);
+      $this->tipcom = $rs->getString($startcol + 1);
 
-			$this->feccom = $rs->getDate($startcol + 2, null);
+      $this->feccom = $rs->getDate($startcol + 2, null);
 
-			$this->anocom = $rs->getString($startcol + 3);
+      $this->anocom = $rs->getString($startcol + 3);
 
-			$this->refprc = $rs->getString($startcol + 4);
+      $this->refprc = $rs->getString($startcol + 4);
 
-			$this->tipprc = $rs->getString($startcol + 5);
+      $this->tipprc = $rs->getString($startcol + 5);
 
-			$this->descom = $rs->getString($startcol + 6);
+      $this->descom = $rs->getString($startcol + 6);
 
-			$this->desanu = $rs->getString($startcol + 7);
+      $this->desanu = $rs->getString($startcol + 7);
 
-			$this->moncom = $rs->getFloat($startcol + 8);
+      $this->moncom = $rs->getFloat($startcol + 8);
 
-			$this->salcau = $rs->getFloat($startcol + 9);
+      $this->salcau = $rs->getFloat($startcol + 9);
 
-			$this->salpag = $rs->getFloat($startcol + 10);
+      $this->salpag = $rs->getFloat($startcol + 10);
 
-			$this->salaju = $rs->getFloat($startcol + 11);
+      $this->salaju = $rs->getFloat($startcol + 11);
 
-			$this->stacom = $rs->getString($startcol + 12);
+      $this->stacom = $rs->getString($startcol + 12);
 
-			$this->fecanu = $rs->getDate($startcol + 13, null);
+      $this->fecanu = $rs->getDate($startcol + 13, null);
 
-			$this->cedrif = $rs->getString($startcol + 14);
+      $this->cedrif = $rs->getString($startcol + 14);
 
-			$this->tipo = $rs->getString($startcol + 15);
+      $this->tipo = $rs->getString($startcol + 15);
 
-			$this->id = $rs->getInt($startcol + 16);
+      $this->id = $rs->getInt($startcol + 16);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 17; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tabla10 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 17; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tabla10 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -507,6 +544,7 @@ abstract class BaseTabla10 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Tabla10Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Tabla10Peer::doUpdate($this, $con);

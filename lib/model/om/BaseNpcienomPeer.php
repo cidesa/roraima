@@ -260,6 +260,7 @@ abstract class BaseNpcienomPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcienomPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -41,169 +41,197 @@ abstract class BaseCssolsermat extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumsol()
-	{
+  
+  public function getNumsol()
+  {
 
-		return $this->numsol; 		
-	}
-	
-	public function getDessol()
-	{
+    return trim($this->numsol);
 
-		return $this->dessol; 		
-	}
-	
-	public function getFecsol($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDessol()
+  {
 
-		if ($this->fecsol === null || $this->fecsol === '') {
-			return null;
-		} elseif (!is_int($this->fecsol)) {
-						$ts = strtotime($this->fecsol);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecsol] as date/time value: " . var_export($this->fecsol, true));
-			}
-		} else {
-			$ts = $this->fecsol;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->dessol);
 
-	
-	public function getCedrif()
-	{
+  }
+  
+  public function getFecsol($format = 'Y-m-d')
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getCoord()
-	{
+    if ($this->fecsol === null || $this->fecsol === '') {
+      return null;
+    } elseif (!is_int($this->fecsol)) {
+            $ts = adodb_strtotime($this->fecsol);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsol] as date/time value: " . var_export($this->fecsol, true));
+      }
+    } else {
+      $ts = $this->fecsol;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->coord; 		
-	}
-	
-	public function getCodubi()
-	{
+  
+  public function getCedrif()
+  {
 
-		return $this->codubi; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->cedrif);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCoord()
+  {
+
+    return trim($this->coord);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumsol($v)
 	{
 
-		if ($this->numsol !== $v) {
-			$this->numsol = $v;
-			$this->modifiedColumns[] = CssolsermatPeer::NUMSOL;
-		}
-
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = CssolsermatPeer::NUMSOL;
+      }
+  
 	} 
 	
 	public function setDessol($v)
 	{
 
-		if ($this->dessol !== $v) {
-			$this->dessol = $v;
-			$this->modifiedColumns[] = CssolsermatPeer::DESSOL;
-		}
-
+    if ($this->dessol !== $v) {
+        $this->dessol = $v;
+        $this->modifiedColumns[] = CssolsermatPeer::DESSOL;
+      }
+  
 	} 
 	
 	public function setFecsol($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecsol] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecsol !== $ts) {
-			$this->fecsol = $ts;
-			$this->modifiedColumns[] = CssolsermatPeer::FECSOL;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsol] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsol !== $ts) {
+      $this->fecsol = $ts;
+      $this->modifiedColumns[] = CssolsermatPeer::FECSOL;
+    }
 
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = CssolsermatPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = CssolsermatPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setCoord($v)
 	{
 
-		if ($this->coord !== $v) {
-			$this->coord = $v;
-			$this->modifiedColumns[] = CssolsermatPeer::COORD;
-		}
-
+    if ($this->coord !== $v) {
+        $this->coord = $v;
+        $this->modifiedColumns[] = CssolsermatPeer::COORD;
+      }
+  
 	} 
 	
 	public function setCodubi($v)
 	{
 
-		if ($this->codubi !== $v) {
-			$this->codubi = $v;
-			$this->modifiedColumns[] = CssolsermatPeer::CODUBI;
-		}
-
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CssolsermatPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CssolsermatPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CssolsermatPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numsol = $rs->getString($startcol + 0);
+      $this->numsol = $rs->getString($startcol + 0);
 
-			$this->dessol = $rs->getString($startcol + 1);
+      $this->dessol = $rs->getString($startcol + 1);
 
-			$this->fecsol = $rs->getDate($startcol + 2, null);
+      $this->fecsol = $rs->getDate($startcol + 2, null);
 
-			$this->cedrif = $rs->getString($startcol + 3);
+      $this->cedrif = $rs->getString($startcol + 3);
 
-			$this->coord = $rs->getString($startcol + 4);
+      $this->coord = $rs->getString($startcol + 4);
 
-			$this->codubi = $rs->getString($startcol + 5);
+      $this->codubi = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cssolsermat object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cssolsermat object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

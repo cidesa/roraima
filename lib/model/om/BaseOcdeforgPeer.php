@@ -250,6 +250,7 @@ abstract class BaseOcdeforgPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcdeforgPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

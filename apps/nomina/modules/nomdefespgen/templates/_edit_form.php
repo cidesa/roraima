@@ -9,52 +9,47 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($npdefgen, 'getId') ?>
+<?php echo javascript_include_tag('tools','observe','ajax','dFilter') ?>
 
 <fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
 
-
-<fieldset>
-<legend>Empresa</legend>
-
-
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Empresa') ?></legend>
+<div class="form-row">
 <table>
 <tr>
-
-<td>
+<th>
   <?php echo label_for('npdefgen[codemp]', __($labels['npdefgen{codemp}']), 'class="required" ') ?>
   <?php if ($sf_request->hasError('npdefgen{codemp}')): ?>
     <?php echo form_error('npdefgen{codemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
   <?php $value = object_input_tag($npdefgen, 'getCodemp', array (
+  'readonly' => true,
   'size' => 5,
   'control_name' => 'npdefgen[codemp]',
 )); echo $value ? $value : '&nbsp;' ?>
-</td>
-
-<td>
+</th>
+<th>
   <?php echo label_for('npdefgen[nomemp]', __($labels['npdefgen{nomemp}']), 'class="required" ') ?>
   <?php if ($sf_request->hasError('npdefgen{nomemp}')): ?>
     <?php echo form_error('npdefgen{nomemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
   <?php $value = object_input_tag($npdefgen, 'getNomemp', array (
-  'disabled' => true,
+  'readonly' => true,
   'control_name' => 'npdefgen[nomemp]', 'size' => 50,
 )); echo $value ? $value : '&nbsp;' ?>
-</td>
-
+</th>
 </tr>
-    
-</table>    
-
-
-
+</table>
+</div>
 </fieldset>
 
+<br>
 
-
-<fieldset>
-<legend>Formato para los Codigos</legend>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Formato para los Codigos') ?></legend>
 <div class="form-row">
   <?php echo label_for('npdefgen[forcar]', __($labels['npdefgen{forcar}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npdefgen{forcar}')): ?> form-error<?php endif; ?>">
@@ -64,12 +59,14 @@
 
   <?php $value = object_input_tag($npdefgen, 'getForcar', array (
   'size' => 20,
+  'maxlength' => 16,
+  'readonly'  =>  $esta=='1' ? true : false ,
   'control_name' => 'npdefgen[forcar]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('npdefgen[foremp]', __($labels['npdefgen{foremp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npdefgen{foremp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npdefgen{foremp}')): ?>
@@ -78,12 +75,14 @@
 
   <?php $value = object_input_tag($npdefgen, 'getForemp', array (
   'size' => 20,
+  'maxlength' => 16,
+  'readonly'  =>  $esta1=='1' ? true : false ,
   'control_name' => 'npdefgen[foremp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('npdefgen[fororg]', __($labels['npdefgen{fororg}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npdefgen{fororg}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npdefgen{fororg}')): ?>
@@ -91,13 +90,15 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($npdefgen, 'getFororg', array (
+  'maxlength' => 16,
   'size' => 20,
+  'readonly'  =>  $esta2=='1' ? true : false ,
   'control_name' => 'npdefgen[fororg]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('npdefgen[foruni]', __($labels['npdefgen{foruni}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npdefgen{foruni}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npdefgen{foruni}')): ?>
@@ -106,87 +107,112 @@
 
   <?php $value = object_input_tag($npdefgen, 'getForuni', array (
   'size' => 20,
+  'maxlength' => 16,
+  'readonly'  =>  $esta3=='1' ? true : false ,
   'control_name' => 'npdefgen[foruni]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-</fieldset>
 
-<fieldset>
-<legend><strong>Valor de la Unidad Tributaria</strong></legend>
-<div class="form-row">
-  <?php //echo label_for('npdefgen[unitrib]', __($labels['npdefgen{unitrib}']), 'class="required" ') ?>
+<br>
 
-  <?php $value = object_input_tag($npdefgen, 'getUnitrib', array (
-  'size' => 10,
-  'control_name' => 'npdefgen[unitrib]',
+  <?php echo label_for('npdefgen[foresc]', __($labels['npdefgen{foresc}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npdefgen{foresc}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdefgen{foresc}')): ?>
+    <?php echo form_error('npdefgen{foresc}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($npdefgen, 'getForesc', array (
+  'size' => 20,
+  'maxlength' => 16,
+  'control_name' => 'npdefgen[foresc]',
 )); echo $value ? $value : '&nbsp;' ?>
+    </div>
 
-</div>
-</fieldset>
+<br>
 
-<div>
-<table>
-<tr>
-<td align="center">
-<fieldset>
-<legend><strong>Redondeo para los Calculos</strong></legend>
-<div class="form-row">
-  <?php if($npdefgen->getRedmon()=='S') $val = true; else $val=false; ?>
-  <?php echo "Si ".radiobutton_tag('redmon', 'S', $val) ?>
-  <?php echo "  No ".radiobutton_tag('redmon', 'N', !$val) ?>
-</div>
-</fieldset>
-</td>
+  <?php echo label_for('npdefgen[numrec]', __($labels['npdefgen{numrec}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npdefgen{numrec}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdefgen{numrec}')): ?>
+    <?php echo form_error('npdefgen{numrec}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
-<td align="center">
-<fieldset>
-<legend><strong>Presupuestar Cargos</strong></legend>
-<div class="form-row">
-  <?php if($npdefgen->getCodpre()=='S') $val = true; else $val=false; ?>
-  <?php echo "Si ".radiobutton_tag('codpre', 'S', $val) ?>
-  <?php echo "  No ".radiobutton_tag('codpre', 'N', !$val) ?>
-</div>
-</fieldset>
-</td>
-
-<td align="center">
-<fieldset>
-<legend><strong>Asignar Conceptos a la Nomina</strong></legend>
-<div class="form-row">
-  <?php if($npdefgen->getAsiconnom()=='S') $val = true; else $val=false; ?>
-  <?php echo "Si ".radiobutton_tag('asiconnom', 'S', $val) ?>
-  <?php echo "  No ".radiobutton_tag('asiconnom', 'N', !$val) ?>
+  <?php $value = object_input_tag($npdefgen, 'getNumrec', array (
+  'size' => 7,
+  'maxlength' => 21,
+  'control_name' => 'npdefgen[numrec]',
+)); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 </fieldset>
-</td>
 
+<br>
 
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Valor de la Unidad Tributaria') ?></legend>
+<div class="form-row">
+    <?php echo label_for('npdefgen[unitrib]', __($labels['npdefgen{unitrib}']), 'class="required"') ?>
+  <div class="content<?php if ($sf_request->hasError('npdefgen{unitrib}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('npdefgen{unitrib}')): ?>
+    <?php echo form_error('npdefgen{unitrib}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
 
+  <?php $value = object_input_tag($npdefgen, array('getUnitrib',true), array (
+  'size' => 7,
+  'maxlength' => 21,
+  'control_name' => 'npdefgen[unitrib]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+</fieldset>
 
+<br>
+
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+<table>
+<tr>
+<th align="center">
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Redondeo para los Calculos')?></legend>
+<div class="form-row">
+  <?php if($npdefgen->getRedmon()=='S') $val = true; else $val=false; ?>
+  <?php echo "Si ".radiobutton_tag('npdefgen[redmon]', 'S', $val) ?>
+  <?php echo "  No ".radiobutton_tag('npdefgen[redmon]', 'N', !$val) ?>
+</div>
+</fieldset>
+</th>
+<th> &nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th align="center">
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Presupuestar Cargos')?></legend>
+<div class="form-row">
+  <?php if($npdefgen->getCodpre()=='S') $val = true; else $val=false; ?>
+  <?php echo "Si ".radiobutton_tag('npdefgen[codpre]', 'S', $val) ?>
+  <?php echo "  No ".radiobutton_tag('npdefgen[codpre]', 'N', !$val) ?>
+</div>
+</fieldset>
+</th>
+<th> &nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th align="center">
+<fieldset>
+<legend><?php echo __('Asignar Conceptos a la Nomina')?></legend>
+<div class="form-row">
+  <?php if($npdefgen->getAsiconnom()=='S') $val = true; else $val=false; ?>
+  <?php echo "Si ".radiobutton_tag('npdefgen[asiconnom]', 'S', $val) ?>
+  <?php echo "  No ".radiobutton_tag('npdefgen[asiconnom]', 'N', !$val) ?>
+    </div>
+</div>
+</fieldset>
+</th>
 </tr>
 </table>
 </div>
+</fieldset>
 
-
-
-
-
-
-
+</div>
 </fieldset>
 
 <?php include_partial('edit_actions', array('npdefgen' => $npdefgen)) ?>
 
 </form>
 
-<ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($npdefgen->getId()): ?>
-<?php echo button_to(__('delete'), 'nomdefespgen/delete?id='.$npdefgen->getId(), array (
-  'post' => true,
-  'confirm' => __('Are you sure?'),
-  'class' => 'sf_admin_action_delete',
-)) ?><?php endif; ?>
-</li>
-  </ul>

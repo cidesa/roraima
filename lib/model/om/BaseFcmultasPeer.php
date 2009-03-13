@@ -13,7 +13,7 @@ abstract class BaseFcmultasPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcmultas';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseFcmultasPeer {
 	const MONPRO = 'fcmultas.MONPRO';
 
 	
+	const TIPDEC = 'fcmultas.TIPDEC';
+
+	
 	const ID = 'fcmultas.ID';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseFcmultasPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmul', 'Nommul', 'Tipo', 'Modo', 'Monpro', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcmultasPeer::CODMUL, FcmultasPeer::NOMMUL, FcmultasPeer::TIPO, FcmultasPeer::MODO, FcmultasPeer::MONPRO, FcmultasPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmul', 'nommul', 'tipo', 'modo', 'monpro', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codmul', 'Nommul', 'Tipo', 'Modo', 'Monpro', 'Tipdec', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcmultasPeer::CODMUL, FcmultasPeer::NOMMUL, FcmultasPeer::TIPO, FcmultasPeer::MODO, FcmultasPeer::MONPRO, FcmultasPeer::TIPDEC, FcmultasPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmul', 'nommul', 'tipo', 'modo', 'monpro', 'tipdec', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codmul' => 0, 'Nommul' => 1, 'Tipo' => 2, 'Modo' => 3, 'Monpro' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (FcmultasPeer::CODMUL => 0, FcmultasPeer::NOMMUL => 1, FcmultasPeer::TIPO => 2, FcmultasPeer::MODO => 3, FcmultasPeer::MONPRO => 4, FcmultasPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('codmul' => 0, 'nommul' => 1, 'tipo' => 2, 'modo' => 3, 'monpro' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Codmul' => 0, 'Nommul' => 1, 'Tipo' => 2, 'Modo' => 3, 'Monpro' => 4, 'Tipdec' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (FcmultasPeer::CODMUL => 0, FcmultasPeer::NOMMUL => 1, FcmultasPeer::TIPO => 2, FcmultasPeer::MODO => 3, FcmultasPeer::MONPRO => 4, FcmultasPeer::TIPDEC => 5, FcmultasPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('codmul' => 0, 'nommul' => 1, 'tipo' => 2, 'modo' => 3, 'monpro' => 4, 'tipdec' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -117,6 +120,8 @@ abstract class BaseFcmultasPeer {
 		$criteria->addSelectColumn(FcmultasPeer::MODO);
 
 		$criteria->addSelectColumn(FcmultasPeer::MONPRO);
+
+		$criteria->addSelectColumn(FcmultasPeer::TIPDEC);
 
 		$criteria->addSelectColumn(FcmultasPeer::ID);
 
@@ -220,6 +225,7 @@ abstract class BaseFcmultasPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcmultasPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -41,171 +41,199 @@ abstract class BaseNphispre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtippre()
-	{
+  
+  public function getCodtippre()
+  {
 
-		return $this->codtippre; 		
-	}
-	
-	public function getFechispre($format = 'Y-m-d')
-	{
+    return trim($this->codtippre);
 
-		if ($this->fechispre === null || $this->fechispre === '') {
-			return null;
-		} elseif (!is_int($this->fechispre)) {
-						$ts = strtotime($this->fechispre);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fechispre] as date/time value: " . var_export($this->fechispre, true));
-			}
-		} else {
-			$ts = $this->fechispre;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFechispre($format = 'Y-m-d')
+  {
 
-	
-	public function getDeshispre()
-	{
+    if ($this->fechispre === null || $this->fechispre === '') {
+      return null;
+    } elseif (!is_int($this->fechispre)) {
+            $ts = adodb_strtotime($this->fechispre);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fechispre] as date/time value: " . var_export($this->fechispre, true));
+      }
+    } else {
+      $ts = $this->fechispre;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->deshispre; 		
-	}
-	
-	public function getCodemp()
-	{
+  
+  public function getDeshispre()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getMonpre()
-	{
+    return trim($this->deshispre);
 
-		return number_format($this->monpre,2,',','.');
-		
-	}
-	
-	public function getSaldo()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return number_format($this->saldo,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codemp);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonpre($val=false)
+  {
+
+    if($val) return number_format($this->monpre,2,',','.');
+    else return $this->monpre;
+
+  }
+  
+  public function getSaldo($val=false)
+  {
+
+    if($val) return number_format($this->saldo,2,',','.');
+    else return $this->saldo;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtippre($v)
 	{
 
-		if ($this->codtippre !== $v) {
-			$this->codtippre = $v;
-			$this->modifiedColumns[] = NphisprePeer::CODTIPPRE;
-		}
-
+    if ($this->codtippre !== $v) {
+        $this->codtippre = $v;
+        $this->modifiedColumns[] = NphisprePeer::CODTIPPRE;
+      }
+  
 	} 
 	
 	public function setFechispre($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fechispre] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fechispre !== $ts) {
-			$this->fechispre = $ts;
-			$this->modifiedColumns[] = NphisprePeer::FECHISPRE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fechispre] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fechispre !== $ts) {
+      $this->fechispre = $ts;
+      $this->modifiedColumns[] = NphisprePeer::FECHISPRE;
+    }
 
 	} 
 	
 	public function setDeshispre($v)
 	{
 
-		if ($this->deshispre !== $v) {
-			$this->deshispre = $v;
-			$this->modifiedColumns[] = NphisprePeer::DESHISPRE;
-		}
-
+    if ($this->deshispre !== $v) {
+        $this->deshispre = $v;
+        $this->modifiedColumns[] = NphisprePeer::DESHISPRE;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NphisprePeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NphisprePeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setMonpre($v)
 	{
 
-		if ($this->monpre !== $v) {
-			$this->monpre = $v;
-			$this->modifiedColumns[] = NphisprePeer::MONPRE;
-		}
-
+    if ($this->monpre !== $v) {
+        $this->monpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphisprePeer::MONPRE;
+      }
+  
 	} 
 	
 	public function setSaldo($v)
 	{
 
-		if ($this->saldo !== $v) {
-			$this->saldo = $v;
-			$this->modifiedColumns[] = NphisprePeer::SALDO;
-		}
-
+    if ($this->saldo !== $v) {
+        $this->saldo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphisprePeer::SALDO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NphisprePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NphisprePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtippre = $rs->getString($startcol + 0);
+      $this->codtippre = $rs->getString($startcol + 0);
 
-			$this->fechispre = $rs->getDate($startcol + 1, null);
+      $this->fechispre = $rs->getDate($startcol + 1, null);
 
-			$this->deshispre = $rs->getString($startcol + 2);
+      $this->deshispre = $rs->getString($startcol + 2);
 
-			$this->codemp = $rs->getString($startcol + 3);
+      $this->codemp = $rs->getString($startcol + 3);
 
-			$this->monpre = $rs->getFloat($startcol + 4);
+      $this->monpre = $rs->getFloat($startcol + 4);
 
-			$this->saldo = $rs->getFloat($startcol + 5);
+      $this->saldo = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nphispre object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nphispre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -262,6 +290,7 @@ abstract class BaseNphispre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NphisprePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NphisprePeer::doUpdate($this, $con);

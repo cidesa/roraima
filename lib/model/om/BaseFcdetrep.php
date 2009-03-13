@@ -25,6 +25,14 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecha;
+
+
+	
+	protected $fuente;
+
+
+	
 	protected $id;
 
 	
@@ -33,111 +41,198 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumrep()
-	{
+  
+  public function getNumrep()
+  {
 
-		return $this->numrep; 		
-	}
-	
-	public function getDescrip()
-	{
+    return trim($this->numrep);
 
-		return $this->descrip; 		
-	}
-	
-	public function getTipo()
-	{
+  }
+  
+  public function getDescrip()
+  {
 
-		return $this->tipo; 		
-	}
-	
-	public function getMonto()
-	{
+    return trim($this->descrip);
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getTipo()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipo);
+
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getFecha($format = 'Y-m-d')
+  {
+
+    if ($this->fecha === null || $this->fecha === '') {
+      return null;
+    } elseif (!is_int($this->fecha)) {
+            $ts = adodb_strtotime($this->fecha);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecha] as date/time value: " . var_export($this->fecha, true));
+      }
+    } else {
+      $ts = $this->fecha;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFuente()
+  {
+
+    return trim($this->fuente);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumrep($v)
 	{
 
-		if ($this->numrep !== $v) {
-			$this->numrep = $v;
-			$this->modifiedColumns[] = FcdetrepPeer::NUMREP;
-		}
-
+    if ($this->numrep !== $v) {
+        $this->numrep = $v;
+        $this->modifiedColumns[] = FcdetrepPeer::NUMREP;
+      }
+  
 	} 
 	
 	public function setDescrip($v)
 	{
 
-		if ($this->descrip !== $v) {
-			$this->descrip = $v;
-			$this->modifiedColumns[] = FcdetrepPeer::DESCRIP;
-		}
-
+    if ($this->descrip !== $v) {
+        $this->descrip = $v;
+        $this->modifiedColumns[] = FcdetrepPeer::DESCRIP;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = FcdetrepPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = FcdetrepPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = FcdetrepPeer::MONTO;
-		}
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdetrepPeer::MONTO;
+      }
+  
+	} 
+	
+	public function setFecha($v)
+	{
 
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecha] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecha !== $ts) {
+      $this->fecha = $ts;
+      $this->modifiedColumns[] = FcdetrepPeer::FECHA;
+    }
+
+	} 
+	
+	public function setFuente($v)
+	{
+
+    if ($this->fuente !== $v) {
+        $this->fuente = $v;
+        $this->modifiedColumns[] = FcdetrepPeer::FUENTE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdetrepPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdetrepPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numrep = $rs->getString($startcol + 0);
+      $this->numrep = $rs->getString($startcol + 0);
 
-			$this->descrip = $rs->getString($startcol + 1);
+      $this->descrip = $rs->getString($startcol + 1);
 
-			$this->tipo = $rs->getString($startcol + 2);
+      $this->tipo = $rs->getString($startcol + 2);
 
-			$this->monto = $rs->getFloat($startcol + 3);
+      $this->monto = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->fecha = $rs->getDate($startcol + 4, null);
 
-			$this->resetModified();
+      $this->fuente = $rs->getString($startcol + 5);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 6);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdetrep object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdetrep object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +289,7 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdetrepPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdetrepPeer::doUpdate($this, $con);
@@ -272,6 +368,12 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 				return $this->getMonto();
 				break;
 			case 4:
+				return $this->getFecha();
+				break;
+			case 5:
+				return $this->getFuente();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -288,7 +390,9 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 			$keys[1] => $this->getDescrip(),
 			$keys[2] => $this->getTipo(),
 			$keys[3] => $this->getMonto(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getFecha(),
+			$keys[5] => $this->getFuente(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -317,6 +421,12 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 				$this->setMonto($value);
 				break;
 			case 4:
+				$this->setFecha($value);
+				break;
+			case 5:
+				$this->setFuente($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -330,7 +440,9 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setDescrip($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setTipo($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMonto($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setFecha($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setFuente($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -342,6 +454,8 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcdetrepPeer::DESCRIP)) $criteria->add(FcdetrepPeer::DESCRIP, $this->descrip);
 		if ($this->isColumnModified(FcdetrepPeer::TIPO)) $criteria->add(FcdetrepPeer::TIPO, $this->tipo);
 		if ($this->isColumnModified(FcdetrepPeer::MONTO)) $criteria->add(FcdetrepPeer::MONTO, $this->monto);
+		if ($this->isColumnModified(FcdetrepPeer::FECHA)) $criteria->add(FcdetrepPeer::FECHA, $this->fecha);
+		if ($this->isColumnModified(FcdetrepPeer::FUENTE)) $criteria->add(FcdetrepPeer::FUENTE, $this->fuente);
 		if ($this->isColumnModified(FcdetrepPeer::ID)) $criteria->add(FcdetrepPeer::ID, $this->id);
 
 		return $criteria;
@@ -380,6 +494,10 @@ abstract class BaseFcdetrep extends BaseObject  implements Persistent {
 		$copyObj->setTipo($this->tipo);
 
 		$copyObj->setMonto($this->monto);
+
+		$copyObj->setFecha($this->fecha);
+
+		$copyObj->setFuente($this->fuente);
 
 
 		$copyObj->setNew(true);

@@ -81,332 +81,371 @@ abstract class BaseFcvalinm1 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoduso()
-	{
+  
+  public function getCoduso()
+  {
 
-		return $this->coduso; 		
-	}
-	
-	public function getValini()
-	{
+    return trim($this->coduso);
 
-		return number_format($this->valini,2,',','.');
-		
-	}
-	
-	public function getValfin()
-	{
+  }
+  
+  public function getValini($val=false)
+  {
 
-		return number_format($this->valfin,2,',','.');
-		
-	}
-	
-	public function getAliinm()
-	{
+    if($val) return number_format($this->valini,2,',','.');
+    else return $this->valini;
 
-		return number_format($this->aliinm,2,',','.');
-		
-	}
-	
-	public function getAnovig()
-	{
+  }
+  
+  public function getValfin($val=false)
+  {
 
-		return $this->anovig; 		
-	}
-	
-	public function getDeduc()
-	{
+    if($val) return number_format($this->valfin,2,',','.');
+    else return $this->valfin;
 
-		return number_format($this->deduc,2,',','.');
-		
-	}
-	
-	public function getCodref()
-	{
+  }
+  
+  public function getAliinm($val=false)
+  {
 
-		return $this->codref; 		
-	}
-	
-	public function getZoni()
-	{
+    if($val) return number_format($this->aliinm,2,',','.');
+    else return $this->aliinm;
 
-		return $this->zoni; 		
-	}
-	
-	public function getManz()
-	{
+  }
+  
+  public function getAnovig()
+  {
 
-		return $this->manz; 		
-	}
-	
-	public function getParmts()
-	{
+    return trim($this->anovig);
 
-		return $this->parmts; 		
-	}
-	
-	public function getValor()
-	{
+  }
+  
+  public function getDeduc($val=false)
+  {
 
-		return number_format($this->valor,2,',','.');
-		
-	}
-	
-	public function getTipedi()
-	{
+    if($val) return number_format($this->deduc,2,',','.');
+    else return $this->deduc;
 
-		return $this->tipedi; 		
-	}
-	
-	public function getDesedi()
-	{
+  }
+  
+  public function getCodref()
+  {
 
-		return $this->desedi; 		
-	}
-	
-	public function getNivel()
-	{
+    return trim($this->codref);
 
-		return $this->nivel; 		
-	}
-	
-	public function getTipo()
-	{
+  }
+  
+  public function getZoni()
+  {
 
-		return $this->tipo; 		
-	}
-	
-	public function getMonto()
-	{
+    return trim($this->zoni);
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getManz()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->manz);
+
+  }
+  
+  public function getParmts()
+  {
+
+    return trim($this->parmts);
+
+  }
+  
+  public function getValor($val=false)
+  {
+
+    if($val) return number_format($this->valor,2,',','.');
+    else return $this->valor;
+
+  }
+  
+  public function getTipedi()
+  {
+
+    return trim($this->tipedi);
+
+  }
+  
+  public function getDesedi()
+  {
+
+    return trim($this->desedi);
+
+  }
+  
+  public function getNivel()
+  {
+
+    return trim($this->nivel);
+
+  }
+  
+  public function getTipo()
+  {
+
+    return trim($this->tipo);
+
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoduso($v)
 	{
 
-		if ($this->coduso !== $v) {
-			$this->coduso = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::CODUSO;
-		}
-
+    if ($this->coduso !== $v) {
+        $this->coduso = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::CODUSO;
+      }
+  
 	} 
 	
 	public function setValini($v)
 	{
 
-		if ($this->valini !== $v) {
-			$this->valini = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::VALINI;
-		}
-
+    if ($this->valini !== $v) {
+        $this->valini = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcvalinm1Peer::VALINI;
+      }
+  
 	} 
 	
 	public function setValfin($v)
 	{
 
-		if ($this->valfin !== $v) {
-			$this->valfin = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::VALFIN;
-		}
-
+    if ($this->valfin !== $v) {
+        $this->valfin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcvalinm1Peer::VALFIN;
+      }
+  
 	} 
 	
 	public function setAliinm($v)
 	{
 
-		if ($this->aliinm !== $v) {
-			$this->aliinm = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::ALIINM;
-		}
-
+    if ($this->aliinm !== $v) {
+        $this->aliinm = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcvalinm1Peer::ALIINM;
+      }
+  
 	} 
 	
 	public function setAnovig($v)
 	{
 
-		if ($this->anovig !== $v) {
-			$this->anovig = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::ANOVIG;
-		}
-
+    if ($this->anovig !== $v) {
+        $this->anovig = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::ANOVIG;
+      }
+  
 	} 
 	
 	public function setDeduc($v)
 	{
 
-		if ($this->deduc !== $v) {
-			$this->deduc = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::DEDUC;
-		}
-
+    if ($this->deduc !== $v) {
+        $this->deduc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcvalinm1Peer::DEDUC;
+      }
+  
 	} 
 	
 	public function setCodref($v)
 	{
 
-		if ($this->codref !== $v) {
-			$this->codref = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::CODREF;
-		}
-
+    if ($this->codref !== $v) {
+        $this->codref = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::CODREF;
+      }
+  
 	} 
 	
 	public function setZoni($v)
 	{
 
-		if ($this->zoni !== $v) {
-			$this->zoni = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::ZONI;
-		}
-
+    if ($this->zoni !== $v) {
+        $this->zoni = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::ZONI;
+      }
+  
 	} 
 	
 	public function setManz($v)
 	{
 
-		if ($this->manz !== $v) {
-			$this->manz = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::MANZ;
-		}
-
+    if ($this->manz !== $v) {
+        $this->manz = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::MANZ;
+      }
+  
 	} 
 	
 	public function setParmts($v)
 	{
 
-		if ($this->parmts !== $v) {
-			$this->parmts = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::PARMTS;
-		}
-
+    if ($this->parmts !== $v) {
+        $this->parmts = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::PARMTS;
+      }
+  
 	} 
 	
 	public function setValor($v)
 	{
 
-		if ($this->valor !== $v) {
-			$this->valor = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::VALOR;
-		}
-
+    if ($this->valor !== $v) {
+        $this->valor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcvalinm1Peer::VALOR;
+      }
+  
 	} 
 	
 	public function setTipedi($v)
 	{
 
-		if ($this->tipedi !== $v) {
-			$this->tipedi = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::TIPEDI;
-		}
-
+    if ($this->tipedi !== $v) {
+        $this->tipedi = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::TIPEDI;
+      }
+  
 	} 
 	
 	public function setDesedi($v)
 	{
 
-		if ($this->desedi !== $v) {
-			$this->desedi = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::DESEDI;
-		}
-
+    if ($this->desedi !== $v) {
+        $this->desedi = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::DESEDI;
+      }
+  
 	} 
 	
 	public function setNivel($v)
 	{
 
-		if ($this->nivel !== $v) {
-			$this->nivel = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::NIVEL;
-		}
-
+    if ($this->nivel !== $v) {
+        $this->nivel = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::NIVEL;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::TIPO;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcvalinm1Peer::MONTO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Fcvalinm1Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Fcvalinm1Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coduso = $rs->getString($startcol + 0);
+      $this->coduso = $rs->getString($startcol + 0);
 
-			$this->valini = $rs->getFloat($startcol + 1);
+      $this->valini = $rs->getFloat($startcol + 1);
 
-			$this->valfin = $rs->getFloat($startcol + 2);
+      $this->valfin = $rs->getFloat($startcol + 2);
 
-			$this->aliinm = $rs->getFloat($startcol + 3);
+      $this->aliinm = $rs->getFloat($startcol + 3);
 
-			$this->anovig = $rs->getString($startcol + 4);
+      $this->anovig = $rs->getString($startcol + 4);
 
-			$this->deduc = $rs->getFloat($startcol + 5);
+      $this->deduc = $rs->getFloat($startcol + 5);
 
-			$this->codref = $rs->getString($startcol + 6);
+      $this->codref = $rs->getString($startcol + 6);
 
-			$this->zoni = $rs->getString($startcol + 7);
+      $this->zoni = $rs->getString($startcol + 7);
 
-			$this->manz = $rs->getString($startcol + 8);
+      $this->manz = $rs->getString($startcol + 8);
 
-			$this->parmts = $rs->getString($startcol + 9);
+      $this->parmts = $rs->getString($startcol + 9);
 
-			$this->valor = $rs->getFloat($startcol + 10);
+      $this->valor = $rs->getFloat($startcol + 10);
 
-			$this->tipedi = $rs->getString($startcol + 11);
+      $this->tipedi = $rs->getString($startcol + 11);
 
-			$this->desedi = $rs->getString($startcol + 12);
+      $this->desedi = $rs->getString($startcol + 12);
 
-			$this->nivel = $rs->getString($startcol + 13);
+      $this->nivel = $rs->getString($startcol + 13);
 
-			$this->tipo = $rs->getString($startcol + 14);
+      $this->tipo = $rs->getString($startcol + 14);
 
-			$this->monto = $rs->getFloat($startcol + 15);
+      $this->monto = $rs->getFloat($startcol + 15);
 
-			$this->id = $rs->getInt($startcol + 16);
+      $this->id = $rs->getInt($startcol + 16);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 17; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcvalinm1 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 17; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcvalinm1 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -463,6 +502,7 @@ abstract class BaseFcvalinm1 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Fcvalinm1Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Fcvalinm1Peer::doUpdate($this, $con);

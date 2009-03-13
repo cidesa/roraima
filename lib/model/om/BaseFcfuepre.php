@@ -101,6 +101,22 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 
 
 	
+	protected $fecest;
+
+
+	
+	protected $diaven = 0;
+
+
+	
+	protected $tipven = 'I';
+
+
+	
+	protected $tipfue;
+
+
+	
 	protected $id;
 
 	
@@ -109,553 +125,694 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodfue()
-	{
+  
+  public function getCodfue()
+  {
 
-		return $this->codfue; 		
-	}
-	
-	public function getNomfue()
-	{
+    return trim($this->codfue);
 
-		return $this->nomfue; 		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getNomfue()
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getFrecob()
-	{
+    return trim($this->nomfue);
 
-		return number_format($this->frecob,2,',','.');
-		
-	}
-	
-	public function getMonmor()
-	{
+  }
+  
+  public function getNomabr()
+  {
 
-		return number_format($this->monmor,2,',','.');
-		
-	}
-	
-	public function getPermor()
-	{
+    return trim($this->nomabr);
 
-		return number_format($this->permor,2,',','.');
-		
-	}
-	
-	public function getPropag()
-	{
+  }
+  
+  public function getFrecob($val=false)
+  {
 
-		return number_format($this->propag,2,',','.');
-		
-	}
-	
-	public function getPerppg()
-	{
+    if($val) return number_format($this->frecob,2,',','.');
+    else return $this->frecob;
 
-		return number_format($this->perppg,2,',','.');
-		
-	}
-	
-	public function getLiqact()
-	{
+  }
+  
+  public function getMonmor($val=false)
+  {
 
-		return number_format($this->liqact,2,',','.');
-		
-	}
-	
-	public function getDeufec()
-	{
+    if($val) return number_format($this->monmor,2,',','.');
+    else return $this->monmor;
 
-		return number_format($this->deufec,2,',','.');
-		
-	}
-	
-	public function getRecfec()
-	{
+  }
+  
+  public function getPermor($val=false)
+  {
 
-		return number_format($this->recfec,2,',','.');
-		
-	}
-	
-	public function getFecufa($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->permor,2,',','.');
+    else return $this->permor;
 
-		if ($this->fecufa === null || $this->fecufa === '') {
-			return null;
-		} elseif (!is_int($this->fecufa)) {
-						$ts = strtotime($this->fecufa);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecufa] as date/time value: " . var_export($this->fecufa, true));
-			}
-		} else {
-			$ts = $this->fecufa;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getPropag($val=false)
+  {
 
-	
-	public function getIngrec()
-	{
+    if($val) return number_format($this->propag,2,',','.');
+    else return $this->propag;
 
-		return $this->ingrec; 		
-	}
-	
-	public function getFueing()
-	{
+  }
+  
+  public function getPerppg($val=false)
+  {
 
-		return $this->fueing; 		
-	}
-	
-	public function getInieje($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->perppg,2,',','.');
+    else return $this->perppg;
 
-		if ($this->inieje === null || $this->inieje === '') {
-			return null;
-		} elseif (!is_int($this->inieje)) {
-						$ts = strtotime($this->inieje);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [inieje] as date/time value: " . var_export($this->inieje, true));
-			}
-		} else {
-			$ts = $this->inieje;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getLiqact($val=false)
+  {
 
-	
-	public function getFineje($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->liqact,2,',','.');
+    else return $this->liqact;
 
-		if ($this->fineje === null || $this->fineje === '') {
-			return null;
-		} elseif (!is_int($this->fineje)) {
-						$ts = strtotime($this->fineje);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fineje] as date/time value: " . var_export($this->fineje, true));
-			}
-		} else {
-			$ts = $this->fineje;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getDeufec($val=false)
+  {
 
-	
-	public function getDiavso()
-	{
+    if($val) return number_format($this->deufec,2,',','.');
+    else return $this->deufec;
 
-		return number_format($this->diavso,2,',','.');
-		
-	}
-	
-	public function getCodprei()
-	{
+  }
+  
+  public function getRecfec($val=false)
+  {
 
-		return $this->codprei; 		
-	}
-	
-	public function getDeufra()
-	{
+    if($val) return number_format($this->recfec,2,',','.');
+    else return $this->recfec;
 
-		return $this->deufra; 		
-	}
-	
-	public function getAutliq()
-	{
+  }
+  
+  public function getFecufa($format = 'Y-m-d')
+  {
 
-		return $this->autliq; 		
-	}
-	
-	public function getSimpre()
-	{
+    if ($this->fecufa === null || $this->fecufa === '') {
+      return null;
+    } elseif (!is_int($this->fecufa)) {
+            $ts = adodb_strtotime($this->fecufa);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecufa] as date/time value: " . var_export($this->fecufa, true));
+      }
+    } else {
+      $ts = $this->fecufa;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->simpre; 		
-	}
-	
-	public function getFeccie($format = 'Y-m-d')
-	{
+  
+  public function getIngrec()
+  {
 
-		if ($this->feccie === null || $this->feccie === '') {
-			return null;
-		} elseif (!is_int($this->feccie)) {
-						$ts = strtotime($this->feccie);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
-			}
-		} else {
-			$ts = $this->feccie;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->ingrec);
 
-	
-	public function getTipmul()
-	{
+  }
+  
+  public function getFueing()
+  {
 
-		return $this->tipmul; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->fueing);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getInieje($format = 'Y-m-d')
+  {
+
+    if ($this->inieje === null || $this->inieje === '') {
+      return null;
+    } elseif (!is_int($this->inieje)) {
+            $ts = adodb_strtotime($this->inieje);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [inieje] as date/time value: " . var_export($this->inieje, true));
+      }
+    } else {
+      $ts = $this->inieje;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFineje($format = 'Y-m-d')
+  {
+
+    if ($this->fineje === null || $this->fineje === '') {
+      return null;
+    } elseif (!is_int($this->fineje)) {
+            $ts = adodb_strtotime($this->fineje);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fineje] as date/time value: " . var_export($this->fineje, true));
+      }
+    } else {
+      $ts = $this->fineje;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getDiavso($val=false)
+  {
+
+    if($val) return number_format($this->diavso,2,',','.');
+    else return $this->diavso;
+
+  }
+  
+  public function getCodprei()
+  {
+
+    return trim($this->codprei);
+
+  }
+  
+  public function getDeufra()
+  {
+
+    return trim($this->deufra);
+
+  }
+  
+  public function getAutliq()
+  {
+
+    return trim($this->autliq);
+
+  }
+  
+  public function getSimpre()
+  {
+
+    return trim($this->simpre);
+
+  }
+  
+  public function getFeccie($format = 'Y-m-d')
+  {
+
+    if ($this->feccie === null || $this->feccie === '') {
+      return null;
+    } elseif (!is_int($this->feccie)) {
+            $ts = adodb_strtotime($this->feccie);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
+      }
+    } else {
+      $ts = $this->feccie;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getTipmul()
+  {
+
+    return trim($this->tipmul);
+
+  }
+  
+  public function getFecest($format = 'Y-m-d')
+  {
+
+    if ($this->fecest === null || $this->fecest === '') {
+      return null;
+    } elseif (!is_int($this->fecest)) {
+            $ts = adodb_strtotime($this->fecest);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecest] as date/time value: " . var_export($this->fecest, true));
+      }
+    } else {
+      $ts = $this->fecest;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getDiaven($val=false)
+  {
+
+    if($val) return number_format($this->diaven,2,',','.');
+    else return $this->diaven;
+
+  }
+  
+  public function getTipven()
+  {
+
+    return trim($this->tipven);
+
+  }
+  
+  public function getTipfue()
+  {
+
+    return $this->tipfue;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodfue($v)
 	{
 
-		if ($this->codfue !== $v) {
-			$this->codfue = $v;
-			$this->modifiedColumns[] = FcfueprePeer::CODFUE;
-		}
-
+    if ($this->codfue !== $v) {
+        $this->codfue = $v;
+        $this->modifiedColumns[] = FcfueprePeer::CODFUE;
+      }
+  
 	} 
 	
 	public function setNomfue($v)
 	{
 
-		if ($this->nomfue !== $v) {
-			$this->nomfue = $v;
-			$this->modifiedColumns[] = FcfueprePeer::NOMFUE;
-		}
-
+    if ($this->nomfue !== $v) {
+        $this->nomfue = $v;
+        $this->modifiedColumns[] = FcfueprePeer::NOMFUE;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = FcfueprePeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = FcfueprePeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setFrecob($v)
 	{
 
-		if ($this->frecob !== $v) {
-			$this->frecob = $v;
-			$this->modifiedColumns[] = FcfueprePeer::FRECOB;
-		}
-
+    if ($this->frecob !== $v) {
+        $this->frecob = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::FRECOB;
+      }
+  
 	} 
 	
 	public function setMonmor($v)
 	{
 
-		if ($this->monmor !== $v) {
-			$this->monmor = $v;
-			$this->modifiedColumns[] = FcfueprePeer::MONMOR;
-		}
-
+    if ($this->monmor !== $v) {
+        $this->monmor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::MONMOR;
+      }
+  
 	} 
 	
 	public function setPermor($v)
 	{
 
-		if ($this->permor !== $v) {
-			$this->permor = $v;
-			$this->modifiedColumns[] = FcfueprePeer::PERMOR;
-		}
-
+    if ($this->permor !== $v) {
+        $this->permor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::PERMOR;
+      }
+  
 	} 
 	
 	public function setPropag($v)
 	{
 
-		if ($this->propag !== $v) {
-			$this->propag = $v;
-			$this->modifiedColumns[] = FcfueprePeer::PROPAG;
-		}
-
+    if ($this->propag !== $v) {
+        $this->propag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::PROPAG;
+      }
+  
 	} 
 	
 	public function setPerppg($v)
 	{
 
-		if ($this->perppg !== $v) {
-			$this->perppg = $v;
-			$this->modifiedColumns[] = FcfueprePeer::PERPPG;
-		}
-
+    if ($this->perppg !== $v) {
+        $this->perppg = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::PERPPG;
+      }
+  
 	} 
 	
 	public function setLiqact($v)
 	{
 
-		if ($this->liqact !== $v) {
-			$this->liqact = $v;
-			$this->modifiedColumns[] = FcfueprePeer::LIQACT;
-		}
-
+    if ($this->liqact !== $v) {
+        $this->liqact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::LIQACT;
+      }
+  
 	} 
 	
 	public function setDeufec($v)
 	{
 
-		if ($this->deufec !== $v) {
-			$this->deufec = $v;
-			$this->modifiedColumns[] = FcfueprePeer::DEUFEC;
-		}
-
+    if ($this->deufec !== $v) {
+        $this->deufec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::DEUFEC;
+      }
+  
 	} 
 	
 	public function setRecfec($v)
 	{
 
-		if ($this->recfec !== $v) {
-			$this->recfec = $v;
-			$this->modifiedColumns[] = FcfueprePeer::RECFEC;
-		}
-
+    if ($this->recfec !== $v) {
+        $this->recfec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::RECFEC;
+      }
+  
 	} 
 	
 	public function setFecufa($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecufa] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecufa !== $ts) {
-			$this->fecufa = $ts;
-			$this->modifiedColumns[] = FcfueprePeer::FECUFA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecufa] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecufa !== $ts) {
+      $this->fecufa = $ts;
+      $this->modifiedColumns[] = FcfueprePeer::FECUFA;
+    }
 
 	} 
 	
 	public function setIngrec($v)
 	{
 
-		if ($this->ingrec !== $v) {
-			$this->ingrec = $v;
-			$this->modifiedColumns[] = FcfueprePeer::INGREC;
-		}
-
+    if ($this->ingrec !== $v) {
+        $this->ingrec = $v;
+        $this->modifiedColumns[] = FcfueprePeer::INGREC;
+      }
+  
 	} 
 	
 	public function setFueing($v)
 	{
 
-		if ($this->fueing !== $v) {
-			$this->fueing = $v;
-			$this->modifiedColumns[] = FcfueprePeer::FUEING;
-		}
-
+    if ($this->fueing !== $v) {
+        $this->fueing = $v;
+        $this->modifiedColumns[] = FcfueprePeer::FUEING;
+      }
+  
 	} 
 	
 	public function setInieje($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [inieje] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->inieje !== $ts) {
-			$this->inieje = $ts;
-			$this->modifiedColumns[] = FcfueprePeer::INIEJE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [inieje] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->inieje !== $ts) {
+      $this->inieje = $ts;
+      $this->modifiedColumns[] = FcfueprePeer::INIEJE;
+    }
 
 	} 
 	
 	public function setFineje($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fineje] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fineje !== $ts) {
-			$this->fineje = $ts;
-			$this->modifiedColumns[] = FcfueprePeer::FINEJE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fineje] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fineje !== $ts) {
+      $this->fineje = $ts;
+      $this->modifiedColumns[] = FcfueprePeer::FINEJE;
+    }
 
 	} 
 	
 	public function setDiavso($v)
 	{
 
-		if ($this->diavso !== $v) {
-			$this->diavso = $v;
-			$this->modifiedColumns[] = FcfueprePeer::DIAVSO;
-		}
-
+    if ($this->diavso !== $v) {
+        $this->diavso = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::DIAVSO;
+      }
+  
 	} 
 	
 	public function setCodprei($v)
 	{
 
-		if ($this->codprei !== $v) {
-			$this->codprei = $v;
-			$this->modifiedColumns[] = FcfueprePeer::CODPREI;
-		}
-
+    if ($this->codprei !== $v) {
+        $this->codprei = $v;
+        $this->modifiedColumns[] = FcfueprePeer::CODPREI;
+      }
+  
 	} 
 	
 	public function setDeufra($v)
 	{
 
-		if ($this->deufra !== $v) {
-			$this->deufra = $v;
-			$this->modifiedColumns[] = FcfueprePeer::DEUFRA;
-		}
-
+    if ($this->deufra !== $v) {
+        $this->deufra = $v;
+        $this->modifiedColumns[] = FcfueprePeer::DEUFRA;
+      }
+  
 	} 
 	
 	public function setAutliq($v)
 	{
 
-		if ($this->autliq !== $v) {
-			$this->autliq = $v;
-			$this->modifiedColumns[] = FcfueprePeer::AUTLIQ;
-		}
-
+    if ($this->autliq !== $v) {
+        $this->autliq = $v;
+        $this->modifiedColumns[] = FcfueprePeer::AUTLIQ;
+      }
+  
 	} 
 	
 	public function setSimpre($v)
 	{
 
-		if ($this->simpre !== $v) {
-			$this->simpre = $v;
-			$this->modifiedColumns[] = FcfueprePeer::SIMPRE;
-		}
-
+    if ($this->simpre !== $v) {
+        $this->simpre = $v;
+        $this->modifiedColumns[] = FcfueprePeer::SIMPRE;
+      }
+  
 	} 
 	
 	public function setFeccie($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccie !== $ts) {
-			$this->feccie = $ts;
-			$this->modifiedColumns[] = FcfueprePeer::FECCIE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccie !== $ts) {
+      $this->feccie = $ts;
+      $this->modifiedColumns[] = FcfueprePeer::FECCIE;
+    }
 
 	} 
 	
 	public function setTipmul($v)
 	{
 
-		if ($this->tipmul !== $v) {
-			$this->tipmul = $v;
-			$this->modifiedColumns[] = FcfueprePeer::TIPMUL;
-		}
+    if ($this->tipmul !== $v) {
+        $this->tipmul = $v;
+        $this->modifiedColumns[] = FcfueprePeer::TIPMUL;
+      }
+  
+	} 
+	
+	public function setFecest($v)
+	{
 
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecest] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecest !== $ts) {
+      $this->fecest = $ts;
+      $this->modifiedColumns[] = FcfueprePeer::FECEST;
+    }
+
+	} 
+	
+	public function setDiaven($v)
+	{
+
+    if ($this->diaven !== $v || $v === 0) {
+        $this->diaven = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcfueprePeer::DIAVEN;
+      }
+  
+	} 
+	
+	public function setTipven($v)
+	{
+
+    if ($this->tipven !== $v || $v === 'I') {
+        $this->tipven = $v;
+        $this->modifiedColumns[] = FcfueprePeer::TIPVEN;
+      }
+  
+	} 
+	
+	public function setTipfue($v)
+	{
+
+    if ($this->tipfue !== $v) {
+        $this->tipfue = $v;
+        $this->modifiedColumns[] = FcfueprePeer::TIPFUE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcfueprePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcfueprePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codfue = $rs->getString($startcol + 0);
+      $this->codfue = $rs->getString($startcol + 0);
 
-			$this->nomfue = $rs->getString($startcol + 1);
+      $this->nomfue = $rs->getString($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->frecob = $rs->getFloat($startcol + 3);
+      $this->frecob = $rs->getFloat($startcol + 3);
 
-			$this->monmor = $rs->getFloat($startcol + 4);
+      $this->monmor = $rs->getFloat($startcol + 4);
 
-			$this->permor = $rs->getFloat($startcol + 5);
+      $this->permor = $rs->getFloat($startcol + 5);
 
-			$this->propag = $rs->getFloat($startcol + 6);
+      $this->propag = $rs->getFloat($startcol + 6);
 
-			$this->perppg = $rs->getFloat($startcol + 7);
+      $this->perppg = $rs->getFloat($startcol + 7);
 
-			$this->liqact = $rs->getFloat($startcol + 8);
+      $this->liqact = $rs->getFloat($startcol + 8);
 
-			$this->deufec = $rs->getFloat($startcol + 9);
+      $this->deufec = $rs->getFloat($startcol + 9);
 
-			$this->recfec = $rs->getFloat($startcol + 10);
+      $this->recfec = $rs->getFloat($startcol + 10);
 
-			$this->fecufa = $rs->getDate($startcol + 11, null);
+      $this->fecufa = $rs->getDate($startcol + 11, null);
 
-			$this->ingrec = $rs->getString($startcol + 12);
+      $this->ingrec = $rs->getString($startcol + 12);
 
-			$this->fueing = $rs->getString($startcol + 13);
+      $this->fueing = $rs->getString($startcol + 13);
 
-			$this->inieje = $rs->getDate($startcol + 14, null);
+      $this->inieje = $rs->getDate($startcol + 14, null);
 
-			$this->fineje = $rs->getDate($startcol + 15, null);
+      $this->fineje = $rs->getDate($startcol + 15, null);
 
-			$this->diavso = $rs->getFloat($startcol + 16);
+      $this->diavso = $rs->getFloat($startcol + 16);
 
-			$this->codprei = $rs->getString($startcol + 17);
+      $this->codprei = $rs->getString($startcol + 17);
 
-			$this->deufra = $rs->getString($startcol + 18);
+      $this->deufra = $rs->getString($startcol + 18);
 
-			$this->autliq = $rs->getString($startcol + 19);
+      $this->autliq = $rs->getString($startcol + 19);
 
-			$this->simpre = $rs->getString($startcol + 20);
+      $this->simpre = $rs->getString($startcol + 20);
 
-			$this->feccie = $rs->getDate($startcol + 21, null);
+      $this->feccie = $rs->getDate($startcol + 21, null);
 
-			$this->tipmul = $rs->getString($startcol + 22);
+      $this->tipmul = $rs->getString($startcol + 22);
 
-			$this->id = $rs->getInt($startcol + 23);
+      $this->fecest = $rs->getDate($startcol + 23, null);
 
-			$this->resetModified();
+      $this->diaven = $rs->getFloat($startcol + 24);
 
-			$this->setNew(false);
+      $this->tipven = $rs->getString($startcol + 25);
 
-						return $startcol + 24; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcfuepre object", $e);
-		}
-	}
+      $this->tipfue = $rs->getString($startcol + 26);
+
+      $this->id = $rs->getInt($startcol + 27);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 28; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcfuepre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -712,6 +869,7 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcfueprePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcfueprePeer::doUpdate($this, $con);
@@ -847,6 +1005,18 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 				return $this->getTipmul();
 				break;
 			case 23:
+				return $this->getFecest();
+				break;
+			case 24:
+				return $this->getDiaven();
+				break;
+			case 25:
+				return $this->getTipven();
+				break;
+			case 26:
+				return $this->getTipfue();
+				break;
+			case 27:
 				return $this->getId();
 				break;
 			default:
@@ -882,7 +1052,11 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 			$keys[20] => $this->getSimpre(),
 			$keys[21] => $this->getFeccie(),
 			$keys[22] => $this->getTipmul(),
-			$keys[23] => $this->getId(),
+			$keys[23] => $this->getFecest(),
+			$keys[24] => $this->getDiaven(),
+			$keys[25] => $this->getTipven(),
+			$keys[26] => $this->getTipfue(),
+			$keys[27] => $this->getId(),
 		);
 		return $result;
 	}
@@ -968,6 +1142,18 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 				$this->setTipmul($value);
 				break;
 			case 23:
+				$this->setFecest($value);
+				break;
+			case 24:
+				$this->setDiaven($value);
+				break;
+			case 25:
+				$this->setTipven($value);
+				break;
+			case 26:
+				$this->setTipfue($value);
+				break;
+			case 27:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1000,7 +1186,11 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[20], $arr)) $this->setSimpre($arr[$keys[20]]);
 		if (array_key_exists($keys[21], $arr)) $this->setFeccie($arr[$keys[21]]);
 		if (array_key_exists($keys[22], $arr)) $this->setTipmul($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setId($arr[$keys[23]]);
+		if (array_key_exists($keys[23], $arr)) $this->setFecest($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setDiaven($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setTipven($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setTipfue($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setId($arr[$keys[27]]);
 	}
 
 	
@@ -1031,6 +1221,10 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcfueprePeer::SIMPRE)) $criteria->add(FcfueprePeer::SIMPRE, $this->simpre);
 		if ($this->isColumnModified(FcfueprePeer::FECCIE)) $criteria->add(FcfueprePeer::FECCIE, $this->feccie);
 		if ($this->isColumnModified(FcfueprePeer::TIPMUL)) $criteria->add(FcfueprePeer::TIPMUL, $this->tipmul);
+		if ($this->isColumnModified(FcfueprePeer::FECEST)) $criteria->add(FcfueprePeer::FECEST, $this->fecest);
+		if ($this->isColumnModified(FcfueprePeer::DIAVEN)) $criteria->add(FcfueprePeer::DIAVEN, $this->diaven);
+		if ($this->isColumnModified(FcfueprePeer::TIPVEN)) $criteria->add(FcfueprePeer::TIPVEN, $this->tipven);
+		if ($this->isColumnModified(FcfueprePeer::TIPFUE)) $criteria->add(FcfueprePeer::TIPFUE, $this->tipfue);
 		if ($this->isColumnModified(FcfueprePeer::ID)) $criteria->add(FcfueprePeer::ID, $this->id);
 
 		return $criteria;
@@ -1107,6 +1301,14 @@ abstract class BaseFcfuepre extends BaseObject  implements Persistent {
 		$copyObj->setFeccie($this->feccie);
 
 		$copyObj->setTipmul($this->tipmul);
+
+		$copyObj->setFecest($this->fecest);
+
+		$copyObj->setDiaven($this->diaven);
+
+		$copyObj->setTipven($this->tipven);
+
+		$copyObj->setTipfue($this->tipfue);
 
 
 		$copyObj->setNew(true);

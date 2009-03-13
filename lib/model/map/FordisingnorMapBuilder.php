@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class FordisingnorMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FordisingnorMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FordisingnorMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fordisingnor');
 		$tMap->setPhpName('Fordisingnor');
 
@@ -34,9 +34,9 @@ class FordisingnorMapBuilder {
 
 		$tMap->addColumn('CODPARING', 'Codparing', 'string', CreoleTypes::VARCHAR, true, 32);
 
-		$tMap->addColumn('INGTOT', 'Ingtot', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('INGTOT', 'Ingtot', 'double', CreoleTypes::NUMERIC, false, 20);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

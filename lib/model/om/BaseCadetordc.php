@@ -37,130 +37,158 @@ abstract class BaseCadetordc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getOrdcon()
-	{
+  
+  public function getOrdcon()
+  {
 
-		return $this->ordcon; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->ordcon);
 
-		return $this->codpre; 		
-	}
-	
-	public function getDescon()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return $this->descon; 		
-	}
-	
-	public function getMoncon()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->moncon,2,',','.');
-		
-	}
-	
-	public function getCancon()
-	{
+  }
+  
+  public function getDescon()
+  {
 
-		return number_format($this->cancon,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->descon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMoncon($val=false)
+  {
+
+    if($val) return number_format($this->moncon,2,',','.');
+    else return $this->moncon;
+
+  }
+  
+  public function getCancon($val=false)
+  {
+
+    if($val) return number_format($this->cancon,2,',','.');
+    else return $this->cancon;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setOrdcon($v)
 	{
 
-		if ($this->ordcon !== $v) {
-			$this->ordcon = $v;
-			$this->modifiedColumns[] = CadetordcPeer::ORDCON;
-		}
-
+    if ($this->ordcon !== $v) {
+        $this->ordcon = $v;
+        $this->modifiedColumns[] = CadetordcPeer::ORDCON;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CadetordcPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CadetordcPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setDescon($v)
 	{
 
-		if ($this->descon !== $v) {
-			$this->descon = $v;
-			$this->modifiedColumns[] = CadetordcPeer::DESCON;
-		}
-
+    if ($this->descon !== $v) {
+        $this->descon = $v;
+        $this->modifiedColumns[] = CadetordcPeer::DESCON;
+      }
+  
 	} 
 	
 	public function setMoncon($v)
 	{
 
-		if ($this->moncon !== $v) {
-			$this->moncon = $v;
-			$this->modifiedColumns[] = CadetordcPeer::MONCON;
-		}
-
+    if ($this->moncon !== $v) {
+        $this->moncon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetordcPeer::MONCON;
+      }
+  
 	} 
 	
 	public function setCancon($v)
 	{
 
-		if ($this->cancon !== $v) {
-			$this->cancon = $v;
-			$this->modifiedColumns[] = CadetordcPeer::CANCON;
-		}
-
+    if ($this->cancon !== $v) {
+        $this->cancon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CadetordcPeer::CANCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CadetordcPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CadetordcPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->ordcon = $rs->getString($startcol + 0);
+      $this->ordcon = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->descon = $rs->getString($startcol + 2);
+      $this->descon = $rs->getString($startcol + 2);
 
-			$this->moncon = $rs->getFloat($startcol + 3);
+      $this->moncon = $rs->getFloat($startcol + 3);
 
-			$this->cancon = $rs->getFloat($startcol + 4);
+      $this->cancon = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cadetordc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cadetordc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +245,7 @@ abstract class BaseCadetordc extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CadetordcPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CadetordcPeer::doUpdate($this, $con);

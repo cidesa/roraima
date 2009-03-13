@@ -10,11 +10,45 @@
  */
 class nomdefespbanActions extends autonomdefespbanActions
 {
-	protected function updateNpbancosFromRequest()
-	{
-		$npbancos = $this->getRequestParameter('npbancos');
+  public function executeEdit()
+  {
+    $this->npbancos = $this->getNpbancosOrCreate();
 
-	if (isset($npbancos['codban']))
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->updateNpbancosFromRequest();
+
+      $this->saveNpbancos($this->npbancos);
+
+      $this->npbancos->setId(Herramientas::getX_vacio('codban','npbancos','id',$this->npbancos->getCodban()));
+
+      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
+
+      if ($this->getRequestParameter('save_and_add'))
+      {
+        return $this->redirect('nomdefespban/create');
+      }
+      else if ($this->getRequestParameter('save_and_list'))
+      {
+        return $this->redirect('nomdefespban/list');
+      }
+      else
+      {
+        return $this->redirect('nomdefespban/edit?id='.$this->npbancos->getId());
+      }
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
+  }
+
+  protected function updateNpbancosFromRequest()
+  {
+    $npbancos = $this->getRequestParameter('npbancos');
+
+  if (isset($npbancos['codban']))
     {
       $this->npbancos->setCodban(str_pad($npbancos['codban'],2,'0',STR_PAD_LEFT));
     }
@@ -23,5 +57,16 @@ class nomdefespbanActions extends autonomdefespbanActions
       $this->npbancos->setNomban($npbancos['nomban']);
     }
   }
-	
+
+   public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->npbancos = $this->getNpbancosOrCreate();
+    $this->updateNpbancosFromRequest();
+
+    $this->labels = $this->getLabels();
+
+    return sfView::SUCCESS;
+  }
+
 }

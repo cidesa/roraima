@@ -1,44 +1,46 @@
 <?php
 
 
-	
+
 class Fcsollic1MapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.Fcsollic1MapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.Fcsollic1MapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fcsollic1');
 		$tMap->setPhpName('Fcsollic1');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fcsollic1_SEQ');
 
 		$tMap->addColumn('NUMSOL', 'Numsol', 'string', CreoleTypes::VARCHAR, false, 12);
 
 		$tMap->addColumn('NUMLIC', 'Numlic', 'string', CreoleTypes::VARCHAR, false, 10);
 
-		$tMap->addColumn('FECSOL', 'Fecsol', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECSOL', 'Fecsol', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECLIC', 'Feclic', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECLIC', 'Feclic', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 14);
 
@@ -56,37 +58,37 @@ class Fcsollic1MapBuilder {
 
 		$tMap->addColumn('CODRUT', 'Codrut', 'string', CreoleTypes::VARCHAR, false, 6);
 
-		$tMap->addColumn('CAPSOC', 'Capsoc', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CAPSOC', 'Capsoc', 'double', CreoleTypes::NUMERIC, false, 15);
 
-		$tMap->addColumn('HORINI', 'Horini', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('HORINI', 'Horini', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('HORCIE', 'Horcie', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('HORCIE', 'Horcie', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('DISCLI', 'Discli', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DISCLI', 'Discli', 'double', CreoleTypes::NUMERIC, false, 10);
 
-		$tMap->addColumn('DISBAR', 'Disbar', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DISBAR', 'Disbar', 'double', CreoleTypes::NUMERIC, false, 10);
 
-		$tMap->addColumn('DISDIS', 'Disdis', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DISDIS', 'Disdis', 'double', CreoleTypes::NUMERIC, false, 10);
 
-		$tMap->addColumn('DISINS', 'Disins', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DISINS', 'Disins', 'double', CreoleTypes::NUMERIC, false, 10);
 
-		$tMap->addColumn('DISFUN', 'Disfun', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DISFUN', 'Disfun', 'double', CreoleTypes::NUMERIC, false, 10);
 
-		$tMap->addColumn('DISEST', 'Disest', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DISEST', 'Disest', 'double', CreoleTypes::NUMERIC, false, 10);
 
 		$tMap->addColumn('FUNRES', 'Funres', 'string', CreoleTypes::VARCHAR, false, 60);
 
 		$tMap->addColumn('FUNREL', 'Funrel', 'string', CreoleTypes::VARCHAR, false, 40);
 
-		$tMap->addColumn('FECRES', 'Fecres', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECRES', 'Fecres', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECAPR', 'Fecapr', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECAPR', 'Fecapr', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECVEN', 'Fecven', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('TOMO', 'Tomo', 'string', CreoleTypes::VARCHAR, false, 8);
 
@@ -94,17 +96,17 @@ class Fcsollic1MapBuilder {
 
 		$tMap->addColumn('NUMERO', 'Numero', 'string', CreoleTypes::VARCHAR, false, 8);
 
-		$tMap->addColumn('TASLIC', 'Taslic', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TASLIC', 'Taslic', 'double', CreoleTypes::NUMERIC, false, 15);
 
-		$tMap->addColumn('DEUANL', 'Deuanl', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DEUANL', 'Deuanl', 'double', CreoleTypes::NUMERIC, false, 15);
 
-		$tMap->addColumn('DEUACL', 'Deuacl', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DEUACL', 'Deuacl', 'double', CreoleTypes::NUMERIC, false, 15);
 
-		$tMap->addColumn('IMPLIC', 'Implic', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('IMPLIC', 'Implic', 'double', CreoleTypes::NUMERIC, false, 15);
 
-		$tMap->addColumn('DEUANP', 'Deuanp', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DEUANP', 'Deuanp', 'double', CreoleTypes::NUMERIC, false, 15);
 
-		$tMap->addColumn('DEUACP', 'Deuacp', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DEUACP', 'Deuacp', 'double', CreoleTypes::NUMERIC, false, 15);
 
 		$tMap->addColumn('STASOL', 'Stasol', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -126,9 +128,9 @@ class Fcsollic1MapBuilder {
 
 		$tMap->addColumn('CLACON', 'Clacon', 'string', CreoleTypes::VARCHAR, false, 12);
 
-		$tMap->addColumn('CAPACT', 'Capact', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CAPACT', 'Capact', 'double', CreoleTypes::NUMERIC, false, 15);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

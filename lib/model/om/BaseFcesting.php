@@ -33,111 +33,138 @@ abstract class BaseFcesting extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpar()
-	{
+  
+  public function getCodpar()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getAno()
-	{
+    return trim($this->codpar);
 
-		return $this->ano; 		
-	}
-	
-	public function getPerest()
-	{
+  }
+  
+  public function getAno()
+  {
 
-		return $this->perest; 		
-	}
-	
-	public function getMonto()
-	{
+    return trim($this->ano);
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPerest()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->perest);
+
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = FcestingPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = FcestingPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setAno($v)
 	{
 
-		if ($this->ano !== $v) {
-			$this->ano = $v;
-			$this->modifiedColumns[] = FcestingPeer::ANO;
-		}
-
+    if ($this->ano !== $v) {
+        $this->ano = $v;
+        $this->modifiedColumns[] = FcestingPeer::ANO;
+      }
+  
 	} 
 	
 	public function setPerest($v)
 	{
 
-		if ($this->perest !== $v) {
-			$this->perest = $v;
-			$this->modifiedColumns[] = FcestingPeer::PEREST;
-		}
-
+    if ($this->perest !== $v) {
+        $this->perest = $v;
+        $this->modifiedColumns[] = FcestingPeer::PEREST;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = FcestingPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcestingPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcestingPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcestingPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpar = $rs->getString($startcol + 0);
+      $this->codpar = $rs->getString($startcol + 0);
 
-			$this->ano = $rs->getString($startcol + 1);
+      $this->ano = $rs->getString($startcol + 1);
 
-			$this->perest = $rs->getString($startcol + 2);
+      $this->perest = $rs->getString($startcol + 2);
 
-			$this->monto = $rs->getFloat($startcol + 3);
+      $this->monto = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcesting object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcesting object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +221,7 @@ abstract class BaseFcesting extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcestingPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcestingPeer::doUpdate($this, $con);

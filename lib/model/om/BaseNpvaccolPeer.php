@@ -230,6 +230,7 @@ abstract class BaseNpvaccolPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpvaccolPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -205,6 +205,7 @@ abstract class BaseFcrutasPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcrutasPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

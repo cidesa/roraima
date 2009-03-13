@@ -255,6 +255,7 @@ abstract class BaseFcmodapuPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcmodapuPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

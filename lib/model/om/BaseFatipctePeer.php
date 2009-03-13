@@ -13,14 +13,11 @@ abstract class BaseFatipctePeer {
 	const CLASS_DEFAULT = 'lib.model.Fatipcte';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 2;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
-
-	
-	const CODTIPCLI = 'fatipcte.CODTIPCLI';
 
 	
 	const NOMTIPCTE = 'fatipcte.NOMTIPCTE';
@@ -34,18 +31,18 @@ abstract class BaseFatipctePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcli', 'Nomtipcte', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FatipctePeer::CODTIPCLI, FatipctePeer::NOMTIPCTE, FatipctePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcli', 'nomtipcte', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nomtipcte', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FatipctePeer::NOMTIPCTE, FatipctePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nomtipcte', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codtipcli' => 0, 'Nomtipcte' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (FatipctePeer::CODTIPCLI => 0, FatipctePeer::NOMTIPCTE => 1, FatipctePeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('codtipcli' => 0, 'nomtipcte' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nomtipcte' => 0, 'Id' => 1, ),
+		BasePeer::TYPE_COLNAME => array (FatipctePeer::NOMTIPCTE => 0, FatipctePeer::ID => 1, ),
+		BasePeer::TYPE_FIELDNAME => array ('nomtipcte' => 0, 'id' => 1, ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
@@ -98,8 +95,6 @@ abstract class BaseFatipctePeer {
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
-
-		$criteria->addSelectColumn(FatipctePeer::CODTIPCLI);
 
 		$criteria->addSelectColumn(FatipctePeer::NOMTIPCTE);
 
@@ -205,6 +200,7 @@ abstract class BaseFatipctePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FatipctePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

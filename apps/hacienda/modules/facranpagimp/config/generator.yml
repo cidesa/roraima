@@ -1,10 +1,32 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Fcdefpgi
-    theme:            default
+    theme:            cidesaGenerator
     fields:
-      mondes: { name: Monto desde}
+      mondes:    { name: Desde, params: size=10 maxlength=4}
+      monhas:    { name: Hasta, params: size=40 maxlength=249 }
+      grid:      { name: . }
+    list:
+      title:     Definición de Rango en Bs. para el pago de Impuestos
+      display:   [=mondes, monhas]
+      sort:      monhas
+      filters:   [mondes, monhas]
+      fields:
+        monhas:
+          params: size=10
+      max_per_page: 10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  mondes
     edit:
-      title:          Rango para el Pago de la Tasa para la Tramitacion de la Licencia
-      display:        [mondes]
+      title:          Edición de Rango en Bs. para el pago de Impuestos
+      display:
+        "Asociación de Recaudos":   [ _grid ]
+        _
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

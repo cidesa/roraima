@@ -1,0 +1,42 @@
+methods:
+  post:
+   - "camotfal{codfal}"
+   - "camotfal{desfal}"
+   - "camotfal{tipfal}"
+
+names:
+  camotfal{codfal}:
+    required:  Yes
+    required_msg: El Código del Motivo no puedo estar en Blanco
+    validators: Validator_codfal, CorrelValidator
+
+  camotfal{desfal}:
+    required:  Yes
+    required_msg: La Descripción del Motivo no puedo estar en Blanco
+    validators: Validator_desfal
+
+  camotfal{tipfal}:
+    required:  Yes
+    required_msg: El Tipo de Faltante no puedo estar en Blanco
+
+
+Validator_codfal:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Camotfal
+        column:       codfal
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desfal:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       249
+        max_error: La descripción no puede pasar mas de 250 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos

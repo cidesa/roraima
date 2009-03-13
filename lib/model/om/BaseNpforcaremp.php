@@ -81,340 +81,379 @@ abstract class BaseNpforcaremp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcat()
-	{
+  
+  public function getCodcat()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodcar()
-	{
+    return trim($this->codcat);
 
-		return $this->codcar; 		
-	}
-	
-	public function getSuebas()
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		return number_format($this->suebas,2,',','.');
-		
-	}
-	
-	public function getSuplen()
-	{
+    return trim($this->codcar);
 
-		return number_format($this->suplen,2,',','.');
-		
-	}
-	
-	public function getPriant()
-	{
+  }
+  
+  public function getSuebas($val=false)
+  {
 
-		return number_format($this->priant,2,',','.');
-		
-	}
-	
-	public function getHediur()
-	{
+    if($val) return number_format($this->suebas,2,',','.');
+    else return $this->suebas;
 
-		return number_format($this->hediur,2,',','.');
-		
-	}
-	
-	public function getPordiu()
-	{
+  }
+  
+  public function getSuplen($val=false)
+  {
 
-		return number_format($this->pordiu,2,',','.');
-		
-	}
-	
-	public function getHenoct()
-	{
+    if($val) return number_format($this->suplen,2,',','.');
+    else return $this->suplen;
 
-		return number_format($this->henoct,2,',','.');
-		
-	}
-	
-	public function getPornoc1()
-	{
+  }
+  
+  public function getPriant($val=false)
+  {
 
-		return number_format($this->pornoc1,2,',','.');
-		
-	}
-	
-	public function getPornoc2()
-	{
+    if($val) return number_format($this->priant,2,',','.');
+    else return $this->priant;
 
-		return number_format($this->pornoc2,2,',','.');
-		
-	}
-	
-	public function getBonvac()
-	{
+  }
+  
+  public function getHediur($val=false)
+  {
 
-		return number_format($this->bonvac,2,',','.');
-		
-	}
-	
-	public function getClau74()
-	{
+    if($val) return number_format($this->hediur,2,',','.');
+    else return $this->hediur;
 
-		return number_format($this->clau74,2,',','.');
-		
-	}
-	
-	public function getOtrcom()
-	{
+  }
+  
+  public function getPordiu($val=false)
+  {
 
-		return number_format($this->otrcom,2,',','.');
-		
-	}
-	
-	public function getPriefi()
-	{
+    if($val) return number_format($this->pordiu,2,',','.');
+    else return $this->pordiu;
 
-		return number_format($this->priefi,2,',','.');
-		
-	}
-	
-	public function getPritra()
-	{
+  }
+  
+  public function getHenoct($val=false)
+  {
 
-		return number_format($this->pritra,2,',','.');
-		
-	}
-	
-	public function getAguinal()
-	{
+    if($val) return number_format($this->henoct,2,',','.');
+    else return $this->henoct;
 
-		return number_format($this->aguinal,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPornoc1($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->pornoc1,2,',','.');
+    else return $this->pornoc1;
+
+  }
+  
+  public function getPornoc2($val=false)
+  {
+
+    if($val) return number_format($this->pornoc2,2,',','.');
+    else return $this->pornoc2;
+
+  }
+  
+  public function getBonvac($val=false)
+  {
+
+    if($val) return number_format($this->bonvac,2,',','.');
+    else return $this->bonvac;
+
+  }
+  
+  public function getClau74($val=false)
+  {
+
+    if($val) return number_format($this->clau74,2,',','.');
+    else return $this->clau74;
+
+  }
+  
+  public function getOtrcom($val=false)
+  {
+
+    if($val) return number_format($this->otrcom,2,',','.');
+    else return $this->otrcom;
+
+  }
+  
+  public function getPriefi($val=false)
+  {
+
+    if($val) return number_format($this->priefi,2,',','.');
+    else return $this->priefi;
+
+  }
+  
+  public function getPritra($val=false)
+  {
+
+    if($val) return number_format($this->pritra,2,',','.');
+    else return $this->pritra;
+
+  }
+  
+  public function getAguinal($val=false)
+  {
+
+    if($val) return number_format($this->aguinal,2,',','.');
+    else return $this->aguinal;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = NpforcarempPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpforcarempPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setSuebas($v)
 	{
 
-		if ($this->suebas !== $v) {
-			$this->suebas = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::SUEBAS;
-		}
-
+    if ($this->suebas !== $v) {
+        $this->suebas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::SUEBAS;
+      }
+  
 	} 
 	
 	public function setSuplen($v)
 	{
 
-		if ($this->suplen !== $v) {
-			$this->suplen = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::SUPLEN;
-		}
-
+    if ($this->suplen !== $v) {
+        $this->suplen = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::SUPLEN;
+      }
+  
 	} 
 	
 	public function setPriant($v)
 	{
 
-		if ($this->priant !== $v) {
-			$this->priant = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::PRIANT;
-		}
-
+    if ($this->priant !== $v) {
+        $this->priant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::PRIANT;
+      }
+  
 	} 
 	
 	public function setHediur($v)
 	{
 
-		if ($this->hediur !== $v) {
-			$this->hediur = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::HEDIUR;
-		}
-
+    if ($this->hediur !== $v) {
+        $this->hediur = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::HEDIUR;
+      }
+  
 	} 
 	
 	public function setPordiu($v)
 	{
 
-		if ($this->pordiu !== $v) {
-			$this->pordiu = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::PORDIU;
-		}
-
+    if ($this->pordiu !== $v) {
+        $this->pordiu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::PORDIU;
+      }
+  
 	} 
 	
 	public function setHenoct($v)
 	{
 
-		if ($this->henoct !== $v) {
-			$this->henoct = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::HENOCT;
-		}
-
+    if ($this->henoct !== $v) {
+        $this->henoct = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::HENOCT;
+      }
+  
 	} 
 	
 	public function setPornoc1($v)
 	{
 
-		if ($this->pornoc1 !== $v) {
-			$this->pornoc1 = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::PORNOC1;
-		}
-
+    if ($this->pornoc1 !== $v) {
+        $this->pornoc1 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::PORNOC1;
+      }
+  
 	} 
 	
 	public function setPornoc2($v)
 	{
 
-		if ($this->pornoc2 !== $v) {
-			$this->pornoc2 = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::PORNOC2;
-		}
-
+    if ($this->pornoc2 !== $v) {
+        $this->pornoc2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::PORNOC2;
+      }
+  
 	} 
 	
 	public function setBonvac($v)
 	{
 
-		if ($this->bonvac !== $v) {
-			$this->bonvac = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::BONVAC;
-		}
-
+    if ($this->bonvac !== $v) {
+        $this->bonvac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::BONVAC;
+      }
+  
 	} 
 	
 	public function setClau74($v)
 	{
 
-		if ($this->clau74 !== $v) {
-			$this->clau74 = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::CLAU74;
-		}
-
+    if ($this->clau74 !== $v) {
+        $this->clau74 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::CLAU74;
+      }
+  
 	} 
 	
 	public function setOtrcom($v)
 	{
 
-		if ($this->otrcom !== $v) {
-			$this->otrcom = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::OTRCOM;
-		}
-
+    if ($this->otrcom !== $v) {
+        $this->otrcom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::OTRCOM;
+      }
+  
 	} 
 	
 	public function setPriefi($v)
 	{
 
-		if ($this->priefi !== $v) {
-			$this->priefi = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::PRIEFI;
-		}
-
+    if ($this->priefi !== $v) {
+        $this->priefi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::PRIEFI;
+      }
+  
 	} 
 	
 	public function setPritra($v)
 	{
 
-		if ($this->pritra !== $v) {
-			$this->pritra = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::PRITRA;
-		}
-
+    if ($this->pritra !== $v) {
+        $this->pritra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::PRITRA;
+      }
+  
 	} 
 	
 	public function setAguinal($v)
 	{
 
-		if ($this->aguinal !== $v) {
-			$this->aguinal = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::AGUINAL;
-		}
-
+    if ($this->aguinal !== $v) {
+        $this->aguinal = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpforcarempPeer::AGUINAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpforcarempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpforcarempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcat = $rs->getString($startcol + 0);
+      $this->codcat = $rs->getString($startcol + 0);
 
-			$this->codcar = $rs->getString($startcol + 1);
+      $this->codcar = $rs->getString($startcol + 1);
 
-			$this->suebas = $rs->getFloat($startcol + 2);
+      $this->suebas = $rs->getFloat($startcol + 2);
 
-			$this->suplen = $rs->getFloat($startcol + 3);
+      $this->suplen = $rs->getFloat($startcol + 3);
 
-			$this->priant = $rs->getFloat($startcol + 4);
+      $this->priant = $rs->getFloat($startcol + 4);
 
-			$this->hediur = $rs->getFloat($startcol + 5);
+      $this->hediur = $rs->getFloat($startcol + 5);
 
-			$this->pordiu = $rs->getFloat($startcol + 6);
+      $this->pordiu = $rs->getFloat($startcol + 6);
 
-			$this->henoct = $rs->getFloat($startcol + 7);
+      $this->henoct = $rs->getFloat($startcol + 7);
 
-			$this->pornoc1 = $rs->getFloat($startcol + 8);
+      $this->pornoc1 = $rs->getFloat($startcol + 8);
 
-			$this->pornoc2 = $rs->getFloat($startcol + 9);
+      $this->pornoc2 = $rs->getFloat($startcol + 9);
 
-			$this->bonvac = $rs->getFloat($startcol + 10);
+      $this->bonvac = $rs->getFloat($startcol + 10);
 
-			$this->clau74 = $rs->getFloat($startcol + 11);
+      $this->clau74 = $rs->getFloat($startcol + 11);
 
-			$this->otrcom = $rs->getFloat($startcol + 12);
+      $this->otrcom = $rs->getFloat($startcol + 12);
 
-			$this->priefi = $rs->getFloat($startcol + 13);
+      $this->priefi = $rs->getFloat($startcol + 13);
 
-			$this->pritra = $rs->getFloat($startcol + 14);
+      $this->pritra = $rs->getFloat($startcol + 14);
 
-			$this->aguinal = $rs->getFloat($startcol + 15);
+      $this->aguinal = $rs->getFloat($startcol + 15);
 
-			$this->id = $rs->getInt($startcol + 16);
+      $this->id = $rs->getInt($startcol + 16);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 17; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npforcaremp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 17; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npforcaremp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -471,6 +510,7 @@ abstract class BaseNpforcaremp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpforcarempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpforcarempPeer::doUpdate($this, $con);

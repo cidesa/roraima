@@ -37,130 +37,158 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodevdo()
-	{
+  
+  public function getCodevdo()
+  {
 
-		return $this->codevdo; 		
-	}
-	
-	public function getCodniv()
-	{
+    return trim($this->codevdo);
 
-		return $this->codniv; 		
-	}
-	
-	public function getCodobj()
-	{
+  }
+  
+  public function getCodniv()
+  {
 
-		return $this->codobj; 		
-	}
-	
-	public function getPlaobj()
-	{
+    return trim($this->codniv);
 
-		return number_format($this->plaobj,2,',','.');
-		
-	}
-	
-	public function getAlcobj()
-	{
+  }
+  
+  public function getCodobj()
+  {
 
-		return number_format($this->alcobj,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codobj);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPlaobj($val=false)
+  {
+
+    if($val) return number_format($this->plaobj,2,',','.');
+    else return $this->plaobj;
+
+  }
+  
+  public function getAlcobj($val=false)
+  {
+
+    if($val) return number_format($this->alcobj,2,',','.');
+    else return $this->alcobj;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodevdo($v)
 	{
 
-		if ($this->codevdo !== $v) {
-			$this->codevdo = $v;
-			$this->modifiedColumns[] = RhevaempobjPeer::CODEVDO;
-		}
-
+    if ($this->codevdo !== $v) {
+        $this->codevdo = $v;
+        $this->modifiedColumns[] = RhevaempobjPeer::CODEVDO;
+      }
+  
 	} 
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = RhevaempobjPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = RhevaempobjPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setCodobj($v)
 	{
 
-		if ($this->codobj !== $v) {
-			$this->codobj = $v;
-			$this->modifiedColumns[] = RhevaempobjPeer::CODOBJ;
-		}
-
+    if ($this->codobj !== $v) {
+        $this->codobj = $v;
+        $this->modifiedColumns[] = RhevaempobjPeer::CODOBJ;
+      }
+  
 	} 
 	
 	public function setPlaobj($v)
 	{
 
-		if ($this->plaobj !== $v) {
-			$this->plaobj = $v;
-			$this->modifiedColumns[] = RhevaempobjPeer::PLAOBJ;
-		}
-
+    if ($this->plaobj !== $v) {
+        $this->plaobj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhevaempobjPeer::PLAOBJ;
+      }
+  
 	} 
 	
 	public function setAlcobj($v)
 	{
 
-		if ($this->alcobj !== $v) {
-			$this->alcobj = $v;
-			$this->modifiedColumns[] = RhevaempobjPeer::ALCOBJ;
-		}
-
+    if ($this->alcobj !== $v) {
+        $this->alcobj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = RhevaempobjPeer::ALCOBJ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = RhevaempobjPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = RhevaempobjPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codevdo = $rs->getString($startcol + 0);
+      $this->codevdo = $rs->getString($startcol + 0);
 
-			$this->codniv = $rs->getString($startcol + 1);
+      $this->codniv = $rs->getString($startcol + 1);
 
-			$this->codobj = $rs->getString($startcol + 2);
+      $this->codobj = $rs->getString($startcol + 2);
 
-			$this->plaobj = $rs->getFloat($startcol + 3);
+      $this->plaobj = $rs->getFloat($startcol + 3);
 
-			$this->alcobj = $rs->getFloat($startcol + 4);
+      $this->alcobj = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Rhevaempobj object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Rhevaempobj object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +245,7 @@ abstract class BaseRhevaempobj extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = RhevaempobjPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += RhevaempobjPeer::doUpdate($this, $con);

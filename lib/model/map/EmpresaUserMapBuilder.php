@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class EmpresaUserMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.EmpresaUserMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.EmpresaUserMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('sima_user');
-		
+
 		$tMap = $this->dbMap->addTable('empresa');
 		$tMap->setPhpName('EmpresaUser');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('empresa_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -43,6 +45,6 @@ class EmpresaUserMapBuilder {
 		$tMap->addColumn('PASSEMP', 'Passemp', 'string', CreoleTypes::VARCHAR, false, 10);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

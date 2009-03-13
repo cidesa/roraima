@@ -210,6 +210,7 @@ abstract class BaseFacladtoPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FacladtoPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

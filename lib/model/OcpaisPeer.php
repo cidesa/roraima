@@ -36,8 +36,20 @@ class OcpaisPeer extends BaseOcpaisPeer
 			$tabla = substr($key,0,$punto);
 			$campo = substr($key,$punto+1);
 			$columnas[] = ucfirst(strtolower($campo));
-			
+
 		}
 		return $columnas;
 	}
+
+  public static function getEstados()
+  {
+    $e = OcpaisPeer::doSelect(new Criteria());
+    if($e){
+      $resp = array();
+      foreach($e as $esta){
+        $resp[$esta->getCodpai()] = $esta->getNompai();
+      }
+      return $resp;
+    }else return array();
+  }
 }

@@ -1,0 +1,71 @@
+methods:
+  post:
+   - "atdenuncias{atsolici}"
+   - "atdenuncias{atunidades_id}"
+   - "atdenuncias{persona}"
+   - "atdenuncias{desden}"
+   - "atdenuncias{respuesta}"
+   - "atdenuncias{fechar}"
+   - "atdenuncias{fechaa}"
+
+
+names:
+
+  atdenuncias{atsolici}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+  atdenuncias{atunidades_id}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+  atdenuncias{persona}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+  atdenuncias{desden}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+  atdenuncias{respuesta}:
+    required:  Yes
+    required_msg: Debe insertar la respuesta a la denuncia
+    validators: Vstring_1_100_4
+
+
+  atdenuncias{fechar}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+  atdenuncias{fechaa}:
+    required:  No
+    required_msg: Modificar Mensaje de Error!!!!!!!
+
+
+
+
+
+
+
+
+
+
+
+Vstring_1_100_4:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       100
+        max_error: La descripción no puede pasar mas de 100 caracteres
+
+
+
+
+
+

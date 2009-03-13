@@ -205,6 +205,7 @@ abstract class BaseFordefdirecPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefdirecPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

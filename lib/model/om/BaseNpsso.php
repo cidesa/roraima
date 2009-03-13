@@ -29,115 +29,140 @@ abstract class BaseNpsso extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumsso()
-	{
+  
+  public function getNumsso()
+  {
 
-		return $this->numsso; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->numsso);
 
-		return $this->codemp; 		
-	}
-	
-	public function getFecinicot($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		if ($this->fecinicot === null || $this->fecinicot === '') {
-			return null;
-		} elseif (!is_int($this->fecinicot)) {
-						$ts = strtotime($this->fecinicot);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecinicot] as date/time value: " . var_export($this->fecinicot, true));
-			}
-		} else {
-			$ts = $this->fecinicot;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codemp);
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getFecinicot($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecinicot === null || $this->fecinicot === '') {
+      return null;
+    } elseif (!is_int($this->fecinicot)) {
+            $ts = adodb_strtotime($this->fecinicot);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecinicot] as date/time value: " . var_export($this->fecinicot, true));
+      }
+    } else {
+      $ts = $this->fecinicot;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumsso($v)
 	{
 
-		if ($this->numsso !== $v) {
-			$this->numsso = $v;
-			$this->modifiedColumns[] = NpssoPeer::NUMSSO;
-		}
-
+    if ($this->numsso !== $v) {
+        $this->numsso = $v;
+        $this->modifiedColumns[] = NpssoPeer::NUMSSO;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpssoPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpssoPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFecinicot($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecinicot] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecinicot !== $ts) {
-			$this->fecinicot = $ts;
-			$this->modifiedColumns[] = NpssoPeer::FECINICOT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecinicot] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecinicot !== $ts) {
+      $this->fecinicot = $ts;
+      $this->modifiedColumns[] = NpssoPeer::FECINICOT;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpssoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpssoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numsso = $rs->getString($startcol + 0);
+      $this->numsso = $rs->getString($startcol + 0);
 
-			$this->codemp = $rs->getString($startcol + 1);
+      $this->codemp = $rs->getString($startcol + 1);
 
-			$this->fecinicot = $rs->getDate($startcol + 2, null);
+      $this->fecinicot = $rs->getDate($startcol + 2, null);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npsso object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npsso object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -194,6 +219,7 @@ abstract class BaseNpsso extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpssoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpssoPeer::doUpdate($this, $con);

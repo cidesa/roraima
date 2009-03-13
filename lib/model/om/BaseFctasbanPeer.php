@@ -210,6 +210,7 @@ abstract class BaseFctasbanPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FctasbanPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -240,6 +240,7 @@ abstract class BaseNptipconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NptipconPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -250,6 +250,7 @@ abstract class BaseFcsuscanPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcsuscanPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

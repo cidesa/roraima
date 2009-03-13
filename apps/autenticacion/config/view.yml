@@ -5,13 +5,13 @@ default:
   metas:
     title:        Cidesa - Login
     robots:       index, follow
-    description:  Modulo de Autenticacion de Cidesa
-    keywords:     cidesa, autenticacion, login
-    language:     es_VE
+    description:  symfony project
+    keywords:     symfony, project
+    language:     en_US
 
   stylesheets:    [siga]
 
-  javascripts:    [ ]
+  javascripts:    []
 
   has_layout:     on
   layout:         layout_cidesa

@@ -41,146 +41,175 @@ abstract class BaseOcregact extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCedins()
-	{
+    return trim($this->codcon);
 
-		return $this->cedins; 		
-	}
-	
-	public function getCedtec()
-	{
+  }
+  
+  public function getCedins()
+  {
 
-		return $this->cedtec; 		
-	}
-	
-	public function getCedfis()
-	{
+    return trim($this->cedins);
 
-		return $this->cedfis; 		
-	}
-	
-	public function getCedres()
-	{
+  }
+  
+  public function getCedtec()
+  {
 
-		return $this->cedres; 		
-	}
-	
-	public function getCedtop()
-	{
+    return trim($this->cedtec);
 
-		return $this->cedtop; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCedfis()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->cedfis);
+
+  }
+  
+  public function getCedres()
+  {
+
+    return trim($this->cedres);
+
+  }
+  
+  public function getCedtop()
+  {
+
+    return trim($this->cedtop);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcregactPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcregactPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCedins($v)
 	{
 
-		if ($this->cedins !== $v) {
-			$this->cedins = $v;
-			$this->modifiedColumns[] = OcregactPeer::CEDINS;
-		}
-
+    if ($this->cedins !== $v) {
+        $this->cedins = $v;
+        $this->modifiedColumns[] = OcregactPeer::CEDINS;
+      }
+  
 	} 
 	
 	public function setCedtec($v)
 	{
 
-		if ($this->cedtec !== $v) {
-			$this->cedtec = $v;
-			$this->modifiedColumns[] = OcregactPeer::CEDTEC;
-		}
-
+    if ($this->cedtec !== $v) {
+        $this->cedtec = $v;
+        $this->modifiedColumns[] = OcregactPeer::CEDTEC;
+      }
+  
 	} 
 	
 	public function setCedfis($v)
 	{
 
-		if ($this->cedfis !== $v) {
-			$this->cedfis = $v;
-			$this->modifiedColumns[] = OcregactPeer::CEDFIS;
-		}
-
+    if ($this->cedfis !== $v) {
+        $this->cedfis = $v;
+        $this->modifiedColumns[] = OcregactPeer::CEDFIS;
+      }
+  
 	} 
 	
 	public function setCedres($v)
 	{
 
-		if ($this->cedres !== $v) {
-			$this->cedres = $v;
-			$this->modifiedColumns[] = OcregactPeer::CEDRES;
-		}
-
+    if ($this->cedres !== $v) {
+        $this->cedres = $v;
+        $this->modifiedColumns[] = OcregactPeer::CEDRES;
+      }
+  
 	} 
 	
 	public function setCedtop($v)
 	{
 
-		if ($this->cedtop !== $v) {
-			$this->cedtop = $v;
-			$this->modifiedColumns[] = OcregactPeer::CEDTOP;
-		}
-
+    if ($this->cedtop !== $v) {
+        $this->cedtop = $v;
+        $this->modifiedColumns[] = OcregactPeer::CEDTOP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcregactPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcregactPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->cedins = $rs->getString($startcol + 1);
+      $this->cedins = $rs->getString($startcol + 1);
 
-			$this->cedtec = $rs->getString($startcol + 2);
+      $this->cedtec = $rs->getString($startcol + 2);
 
-			$this->cedfis = $rs->getString($startcol + 3);
+      $this->cedfis = $rs->getString($startcol + 3);
 
-			$this->cedres = $rs->getString($startcol + 4);
+      $this->cedres = $rs->getString($startcol + 4);
 
-			$this->cedtop = $rs->getString($startcol + 5);
+      $this->cedtop = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocregact object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocregact object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseOcregact extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcregactPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcregactPeer::doUpdate($this, $con);

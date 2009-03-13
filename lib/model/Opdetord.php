@@ -9,4 +9,26 @@
  */ 
 class Opdetord extends BaseOpdetord
 {
+  private $check = ''; 
+  private $retiva = '';
+	
+  public function setCheck($val)
+  {
+	$this->check = $val;		
+  }
+	
+  public function getCheck()
+  {
+	return $this->check;		
+  }
+
+  public function setRetiva($val)
+  {
+	$this->retiva = $val;		
+  }
+	
+  public function getRetiva()
+  {
+	return $this->retiva;		
+  }
 }

@@ -3,56 +3,30 @@
 /**
  * Subclass for representing a row from the 'ocregsol' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class Ocregsol extends BaseOcregsol
 {
 	public function getNomste()
 	{
-		$c = new Criteria();
-		$c->add(OcdatstePeer::CEDSTE,self::getCedste());
-		$registro = OcdatstePeer::doSelectOne($c);
-		if($registro) 
-                         return $registro->getNomste();
-		else 
-                         return null; 
-		
+		return Herramientas::getX('CEDSTE','Ocdatste','Nomste',self::getCedste());
 	}
-	public function getDessol()
+
+	public function getDessol1()
 	{
-		$c = new Criteria();
-		$c->add(OctipsolPeer::CODSOL,self::getCodsol());
-		$registro = OctipsolPeer::doSelectOne($c);
-		if($registro) 
-                         return $registro->getDessol();
-		else 
-                         return null; 
-		
+		return Herramientas::getX('CODSOL','Octipsol','Dessol',self::getCodsol());
 	}
+
 	public function getDesorg()
 	{
-		$c = new Criteria();
-		$c->add(OcdeforgPeer::CODORG,self::getCodorg());
-		$registro = OcdeforgPeer::doSelectOne($c);
-		if($registro) 
-                         return $registro->getDesorg();
-		else 
-                         return null; 
-		
-	}	
-		
+		return Herramientas::getX('CODORG','Ocdeforg','Desorg',self::getCodorg());
+	}
+
 	public function getNomemp()
 	{
-		$c = new Criteria();
-		$c->add(NphojintPeer::CODEMP,self::getCodemp());
-		$registro = NphojintPeer::doSelectOne($c);
-		if($registro) 
-                         return $registro->getNomemp();
-		else 
-                         return null; 
-		
-	}		
-				
+		return Herramientas::getX('CODEMP','Nphojint','Nomemp',self::getCodemp());
+	}
+
 }

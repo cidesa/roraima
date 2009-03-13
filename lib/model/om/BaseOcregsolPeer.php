@@ -240,6 +240,7 @@ abstract class BaseOcregsolPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcregsolPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

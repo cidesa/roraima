@@ -37,151 +37,178 @@ abstract class BaseCobregges extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcli()
-	{
+  
+  public function getCodcli()
+  {
 
-		return $this->codcli; 		
-	}
-	
-	public function getNumges()
-	{
+    return trim($this->codcli);
 
-		return $this->numges; 		
-	}
-	
-	public function getFecges($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNumges()
+  {
 
-		if ($this->fecges === null || $this->fecges === '') {
-			return null;
-		} elseif (!is_int($this->fecges)) {
-						$ts = strtotime($this->fecges);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecges] as date/time value: " . var_export($this->fecges, true));
-			}
-		} else {
-			$ts = $this->fecges;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->numges);
 
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getFecges($format = 'Y-m-d')
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getObsges()
-	{
+    if ($this->fecges === null || $this->fecges === '') {
+      return null;
+    } elseif (!is_int($this->fecges)) {
+            $ts = adodb_strtotime($this->fecges);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecges] as date/time value: " . var_export($this->fecges, true));
+      }
+    } else {
+      $ts = $this->fecges;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->obsges; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getNomcon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomcon);
+
+  }
+  
+  public function getObsges()
+  {
+
+    return trim($this->obsges);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = CobreggesPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = CobreggesPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setNumges($v)
 	{
 
-		if ($this->numges !== $v) {
-			$this->numges = $v;
-			$this->modifiedColumns[] = CobreggesPeer::NUMGES;
-		}
-
+    if ($this->numges !== $v) {
+        $this->numges = $v;
+        $this->modifiedColumns[] = CobreggesPeer::NUMGES;
+      }
+  
 	} 
 	
 	public function setFecges($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecges] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecges !== $ts) {
-			$this->fecges = $ts;
-			$this->modifiedColumns[] = CobreggesPeer::FECGES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecges] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecges !== $ts) {
+      $this->fecges = $ts;
+      $this->modifiedColumns[] = CobreggesPeer::FECGES;
+    }
 
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = CobreggesPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = CobreggesPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setObsges($v)
 	{
 
-		if ($this->obsges !== $v) {
-			$this->obsges = $v;
-			$this->modifiedColumns[] = CobreggesPeer::OBSGES;
-		}
-
+    if ($this->obsges !== $v) {
+        $this->obsges = $v;
+        $this->modifiedColumns[] = CobreggesPeer::OBSGES;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CobreggesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CobreggesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcli = $rs->getString($startcol + 0);
+      $this->codcli = $rs->getString($startcol + 0);
 
-			$this->numges = $rs->getString($startcol + 1);
+      $this->numges = $rs->getString($startcol + 1);
 
-			$this->fecges = $rs->getDate($startcol + 2, null);
+      $this->fecges = $rs->getDate($startcol + 2, null);
 
-			$this->nomcon = $rs->getString($startcol + 3);
+      $this->nomcon = $rs->getString($startcol + 3);
 
-			$this->obsges = $rs->getString($startcol + 4);
+      $this->obsges = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cobregges object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cobregges object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -238,6 +265,7 @@ abstract class BaseCobregges extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CobreggesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CobreggesPeer::doUpdate($this, $con);

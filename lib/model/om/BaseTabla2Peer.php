@@ -235,6 +235,7 @@ abstract class BaseTabla2Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Tabla2Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

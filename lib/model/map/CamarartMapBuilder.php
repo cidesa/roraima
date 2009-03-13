@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CamarartMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CamarartMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CamarartMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('camarart');
 		$tMap->setPhpName('Camarart');
 
@@ -37,6 +37,6 @@ class CamarartMapBuilder {
 		$tMap->addColumn('NOMMAR', 'Nommar', 'string', CreoleTypes::VARCHAR, true, 100);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

@@ -33,110 +33,137 @@ abstract class BasePlannuevo extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodold()
-	{
+  
+  public function getCodold()
+  {
 
-		return $this->codold; 		
-	}
-	
-	public function getNomold()
-	{
+    return trim($this->codold);
 
-		return $this->nomold; 		
-	}
-	
-	public function getCodnew()
-	{
+  }
+  
+  public function getNomold()
+  {
 
-		return $this->codnew; 		
-	}
-	
-	public function getNomnew()
-	{
+    return trim($this->nomold);
 
-		return $this->nomnew; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodnew()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codnew);
+
+  }
+  
+  public function getNomnew()
+  {
+
+    return trim($this->nomnew);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodold($v)
 	{
 
-		if ($this->codold !== $v) {
-			$this->codold = $v;
-			$this->modifiedColumns[] = PlannuevoPeer::CODOLD;
-		}
-
+    if ($this->codold !== $v) {
+        $this->codold = $v;
+        $this->modifiedColumns[] = PlannuevoPeer::CODOLD;
+      }
+  
 	} 
 	
 	public function setNomold($v)
 	{
 
-		if ($this->nomold !== $v) {
-			$this->nomold = $v;
-			$this->modifiedColumns[] = PlannuevoPeer::NOMOLD;
-		}
-
+    if ($this->nomold !== $v) {
+        $this->nomold = $v;
+        $this->modifiedColumns[] = PlannuevoPeer::NOMOLD;
+      }
+  
 	} 
 	
 	public function setCodnew($v)
 	{
 
-		if ($this->codnew !== $v) {
-			$this->codnew = $v;
-			$this->modifiedColumns[] = PlannuevoPeer::CODNEW;
-		}
-
+    if ($this->codnew !== $v) {
+        $this->codnew = $v;
+        $this->modifiedColumns[] = PlannuevoPeer::CODNEW;
+      }
+  
 	} 
 	
 	public function setNomnew($v)
 	{
 
-		if ($this->nomnew !== $v) {
-			$this->nomnew = $v;
-			$this->modifiedColumns[] = PlannuevoPeer::NOMNEW;
-		}
-
+    if ($this->nomnew !== $v) {
+        $this->nomnew = $v;
+        $this->modifiedColumns[] = PlannuevoPeer::NOMNEW;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = PlannuevoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = PlannuevoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codold = $rs->getString($startcol + 0);
+      $this->codold = $rs->getString($startcol + 0);
 
-			$this->nomold = $rs->getString($startcol + 1);
+      $this->nomold = $rs->getString($startcol + 1);
 
-			$this->codnew = $rs->getString($startcol + 2);
+      $this->codnew = $rs->getString($startcol + 2);
 
-			$this->nomnew = $rs->getString($startcol + 3);
+      $this->nomnew = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Plannuevo object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Plannuevo object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BasePlannuevo extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = PlannuevoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += PlannuevoPeer::doUpdate($this, $con);

@@ -1,0 +1,33 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Forencpryaccespmet
+    theme:            default
+    fields:
+      codpro:       { name: Código}
+      nompro:       { name: Descripción-Proyecto}
+      desproacc:    { name: Descripción}
+      codaccesp:    { name: Código}
+      desaccesp:    { name: Descripción-Acción Especifica}
+      codmet:       { name: Meta, params: maxlength=5}
+      desmet:       { name: Descripción (desmet)}
+      canmet:       { name: Cantidad Prog.Anual}
+      desunimed:    { name: Descripción (desunimed)}
+
+    list:
+      title:          Formulación del Plan Operativo
+      display:        [=codpro, nompro, codaccesp, desaccesp]
+      filters:		  [codpro, nompro, codaccesp, desaccesp]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:   codpro
+    edit:
+      title:          Edición Formulación del Plan Operativo
+      display:      [codpro, nompro, desproacc, codaccesp, desaccesp, codmet, desmet, canmet, desunimed]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

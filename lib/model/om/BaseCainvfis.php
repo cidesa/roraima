@@ -29,6 +29,10 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 
 
 	
+	protected $codubi;
+
+
+	
 	protected $id;
 
 	
@@ -37,153 +41,199 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getFecinv($format = 'Y-m-d')
-	{
+  
+  public function getFecinv($format = 'Y-m-d')
+  {
 
-		if ($this->fecinv === null || $this->fecinv === '') {
-			return null;
-		} elseif (!is_int($this->fecinv)) {
-						$ts = strtotime($this->fecinv);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecinv] as date/time value: " . var_export($this->fecinv, true));
-			}
-		} else {
-			$ts = $this->fecinv;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecinv === null || $this->fecinv === '') {
+      return null;
+    } elseif (!is_int($this->fecinv)) {
+            $ts = adodb_strtotime($this->fecinv);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecinv] as date/time value: " . var_export($this->fecinv, true));
+      }
+    } else {
+      $ts = $this->fecinv;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getCodalm()
-	{
+  
+  public function getCodalm()
+  {
 
-		return $this->codalm; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->codalm);
 
-		return $this->codart; 		
-	}
-	
-	public function getExiact()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return number_format($this->exiact,2,',','.');
-		
-	}
-	
-	public function getExiact2()
-	{
+    return trim($this->codart);
 
-		return number_format($this->exiact2,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getExiact($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->exiact,2,',','.');
+    else return $this->exiact;
+
+  }
+  
+  public function getExiact2($val=false)
+  {
+
+    if($val) return number_format($this->exiact2,2,',','.');
+    else return $this->exiact2;
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setFecinv($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecinv] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecinv !== $ts) {
-			$this->fecinv = $ts;
-			$this->modifiedColumns[] = CainvfisPeer::FECINV;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecinv] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecinv !== $ts) {
+      $this->fecinv = $ts;
+      $this->modifiedColumns[] = CainvfisPeer::FECINV;
+    }
 
 	} 
 	
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = CainvfisPeer::CODALM;
-		}
-
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CainvfisPeer::CODALM;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CainvfisPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CainvfisPeer::CODART;
+      }
+  
 	} 
 	
 	public function setExiact($v)
 	{
 
-		if ($this->exiact !== $v) {
-			$this->exiact = $v;
-			$this->modifiedColumns[] = CainvfisPeer::EXIACT;
-		}
-
+    if ($this->exiact !== $v) {
+        $this->exiact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CainvfisPeer::EXIACT;
+      }
+  
 	} 
 	
 	public function setExiact2($v)
 	{
 
-		if ($this->exiact2 !== $v) {
-			$this->exiact2 = $v;
-			$this->modifiedColumns[] = CainvfisPeer::EXIACT2;
-		}
+    if ($this->exiact2 !== $v) {
+        $this->exiact2 = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CainvfisPeer::EXIACT2;
+      }
+  
+	} 
+	
+	public function setCodubi($v)
+	{
 
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CainvfisPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CainvfisPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CainvfisPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->fecinv = $rs->getDate($startcol + 0, null);
+      $this->fecinv = $rs->getDate($startcol + 0, null);
 
-			$this->codalm = $rs->getString($startcol + 1);
+      $this->codalm = $rs->getString($startcol + 1);
 
-			$this->codart = $rs->getString($startcol + 2);
+      $this->codart = $rs->getString($startcol + 2);
 
-			$this->exiact = $rs->getFloat($startcol + 3);
+      $this->exiact = $rs->getFloat($startcol + 3);
 
-			$this->exiact2 = $rs->getFloat($startcol + 4);
+      $this->exiact2 = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->codubi = $rs->getString($startcol + 5);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cainvfis object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cainvfis object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -240,6 +290,7 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CainvfisPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CainvfisPeer::doUpdate($this, $con);
@@ -321,6 +372,9 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 				return $this->getExiact2();
 				break;
 			case 5:
+				return $this->getCodubi();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -338,7 +392,8 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 			$keys[2] => $this->getCodart(),
 			$keys[3] => $this->getExiact(),
 			$keys[4] => $this->getExiact2(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getCodubi(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -370,6 +425,9 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 				$this->setExiact2($value);
 				break;
 			case 5:
+				$this->setCodubi($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -384,7 +442,8 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setCodart($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setExiact($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setExiact2($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodubi($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -397,6 +456,7 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CainvfisPeer::CODART)) $criteria->add(CainvfisPeer::CODART, $this->codart);
 		if ($this->isColumnModified(CainvfisPeer::EXIACT)) $criteria->add(CainvfisPeer::EXIACT, $this->exiact);
 		if ($this->isColumnModified(CainvfisPeer::EXIACT2)) $criteria->add(CainvfisPeer::EXIACT2, $this->exiact2);
+		if ($this->isColumnModified(CainvfisPeer::CODUBI)) $criteria->add(CainvfisPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CainvfisPeer::ID)) $criteria->add(CainvfisPeer::ID, $this->id);
 
 		return $criteria;
@@ -437,6 +497,8 @@ abstract class BaseCainvfis extends BaseObject  implements Persistent {
 		$copyObj->setExiact($this->exiact);
 
 		$copyObj->setExiact2($this->exiact2);
+
+		$copyObj->setCodubi($this->codubi);
 
 
 		$copyObj->setNew(true);

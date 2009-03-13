@@ -9,4 +9,14 @@
  */ 
 class Npdefpreliq extends BaseNpdefpreliq
 {
+	public function getNomnom()
+  {   
+  	return Herramientas::getX('codnom','npnomina','nomnom',self::getCodnom());
+  }
+
+public function getNompar()
+  {   
+  	return Herramientas::getX('codpar','nppartidas','nompar',self::getCodpar());
+  }
+
 }

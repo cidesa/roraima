@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class OcregobrMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.OcregobrMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.OcregobrMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('ocregobr');
 		$tMap->setPhpName('Ocregobr');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('ocregobr_SEQ');
 
 		$tMap->addColumn('CODOBR', 'Codobr', 'string', CreoleTypes::VARCHAR, true, 32);
 
@@ -38,9 +40,9 @@ class OcregobrMapBuilder {
 
 		$tMap->addColumn('DESOBR', 'Desobr', 'string', CreoleTypes::VARCHAR, true, 250);
 
-		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('UNOCON', 'Unocon', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -58,19 +60,21 @@ class OcregobrMapBuilder {
 
 		$tMap->addColumn('DIROBR', 'Dirobr', 'string', CreoleTypes::VARCHAR, true, 250);
 
-		$tMap->addColumn('MONOBR', 'Monobr', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONOBR', 'Monobr', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addColumn('STAOBR', 'Staobr', 'string', CreoleTypes::VARCHAR, true, 1);
 
 		$tMap->addColumn('DESPRE', 'Despre', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('SUBTOT', 'Subtot', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('SUBTOT', 'Subtot', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('MONIVA', 'Moniva', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONIVA', 'Moniva', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('IVAOBR', 'Ivaobr', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('IVAOBR', 'Ivaobr', 'double', CreoleTypes::NUMERIC, false, 14);
+
+		$tMap->addColumn('CODPREIVA', 'Codpreiva', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

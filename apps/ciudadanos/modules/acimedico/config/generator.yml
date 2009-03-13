@@ -1,0 +1,38 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atmedico
+    theme:            cidesaGenerator
+
+    fields:
+      cedrifmed:      { name: Rif/Cédula, params: size=15 }
+      nombremed:      { name: Nombre, params: size=60 }
+      apellimed:      { name: Apellido, params: size=60 }
+      dirhabmed:      { name: Dirección Habitación }
+      dirtramed:      { name: Dirección Trabajo }
+      telunomed:      { name: Telefono Uno}
+      teldosmed:      { name: Telefono Dos}
+    list:
+      title:          Registro de Médico Tratante
+      display:        [=cedrifmed, nombremed, apellimed]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [cedrifmed, nombremed, apellimed]
+      fields:
+        nombremed:
+          params: size=18
+        apellimed:
+          params: size=18
+      max_per_page:   5
+    edit:
+      title:          Edición de Médico Tratante
+      display:
+        Datos Personales: [cedrifmed, nombremed, apellimed]
+        Información de Contacto: [dirhabmed, dirtramed, telunomed, teldosmed ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+

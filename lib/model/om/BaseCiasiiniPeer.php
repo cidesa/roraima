@@ -280,6 +280,7 @@ abstract class BaseCiasiiniPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CiasiiniPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

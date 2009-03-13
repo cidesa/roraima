@@ -10,4 +10,17 @@
  */
 class fordefstatusActions extends autofordefstatusActions
 {
+	protected function updateFordefstaFromRequest()
+	{
+		$fordefsta = $this->getRequestParameter('fordefsta');
+
+		if (isset($fordefsta['codsta']))
+    {
+      $this->fordefsta->setCodsta(str_pad($fordefsta['codsta'], 2, '0', STR_PAD_LEFT));
+    }
+    if (isset($fordefsta['dessta']))
+    {
+      $this->fordefsta->setDessta($fordefsta['dessta']);
+    }
+  }	
 }

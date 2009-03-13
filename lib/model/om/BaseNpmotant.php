@@ -25,74 +25,99 @@ abstract class BaseNpmotant extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmotant()
-	{
+  
+  public function getCodmotant()
+  {
 
-		return $this->codmotant; 		
-	}
-	
-	public function getDesmotant()
-	{
+    return trim($this->codmotant);
 
-		return $this->desmotant; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDesmotant()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->desmotant);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmotant($v)
 	{
 
-		if ($this->codmotant !== $v) {
-			$this->codmotant = $v;
-			$this->modifiedColumns[] = NpmotantPeer::CODMOTANT;
-		}
-
+    if ($this->codmotant !== $v) {
+        $this->codmotant = $v;
+        $this->modifiedColumns[] = NpmotantPeer::CODMOTANT;
+      }
+  
 	} 
 	
 	public function setDesmotant($v)
 	{
 
-		if ($this->desmotant !== $v) {
-			$this->desmotant = $v;
-			$this->modifiedColumns[] = NpmotantPeer::DESMOTANT;
-		}
-
+    if ($this->desmotant !== $v) {
+        $this->desmotant = $v;
+        $this->modifiedColumns[] = NpmotantPeer::DESMOTANT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpmotantPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpmotantPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmotant = $rs->getString($startcol + 0);
+      $this->codmotant = $rs->getString($startcol + 0);
 
-			$this->desmotant = $rs->getString($startcol + 1);
+      $this->desmotant = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npmotant object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npmotant object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseNpmotant extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpmotantPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpmotantPeer::doUpdate($this, $con);

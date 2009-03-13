@@ -17,6 +17,10 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 
 
 	
+	protected $codtipequ;
+
+
+	
 	protected $id;
 
 	
@@ -25,74 +29,118 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodequ()
-	{
+  
+  public function getCodequ()
+  {
 
-		return $this->codequ; 		
-	}
-	
-	public function getDesequ()
-	{
+    return trim($this->codequ);
 
-		return $this->desequ; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDesequ()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->desequ);
+
+  }
+  
+  public function getCodtipequ()
+  {
+
+    return trim($this->codtipequ);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodequ($v)
 	{
 
-		if ($this->codequ !== $v) {
-			$this->codequ = $v;
-			$this->modifiedColumns[] = OcdefequPeer::CODEQU;
-		}
-
+    if ($this->codequ !== $v) {
+        $this->codequ = $v;
+        $this->modifiedColumns[] = OcdefequPeer::CODEQU;
+      }
+  
 	} 
 	
 	public function setDesequ($v)
 	{
 
-		if ($this->desequ !== $v) {
-			$this->desequ = $v;
-			$this->modifiedColumns[] = OcdefequPeer::DESEQU;
-		}
+    if ($this->desequ !== $v) {
+        $this->desequ = $v;
+        $this->modifiedColumns[] = OcdefequPeer::DESEQU;
+      }
+  
+	} 
+	
+	public function setCodtipequ($v)
+	{
 
+    if ($this->codtipequ !== $v) {
+        $this->codtipequ = $v;
+        $this->modifiedColumns[] = OcdefequPeer::CODTIPEQU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcdefequPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcdefequPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codequ = $rs->getString($startcol + 0);
+      $this->codequ = $rs->getString($startcol + 0);
 
-			$this->desequ = $rs->getString($startcol + 1);
+      $this->desequ = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->codtipequ = $rs->getString($startcol + 2);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocdefequ object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocdefequ object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +197,7 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcdefequPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcdefequPeer::doUpdate($this, $con);
@@ -221,6 +270,9 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 				return $this->getDesequ();
 				break;
 			case 2:
+				return $this->getCodtipequ();
+				break;
+			case 3:
 				return $this->getId();
 				break;
 			default:
@@ -235,7 +287,8 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getCodequ(),
 			$keys[1] => $this->getDesequ(),
-			$keys[2] => $this->getId(),
+			$keys[2] => $this->getCodtipequ(),
+			$keys[3] => $this->getId(),
 		);
 		return $result;
 	}
@@ -258,6 +311,9 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 				$this->setDesequ($value);
 				break;
 			case 2:
+				$this->setCodtipequ($value);
+				break;
+			case 3:
 				$this->setId($value);
 				break;
 		} 	}
@@ -269,7 +325,8 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setCodequ($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setDesequ($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodtipequ($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
 	}
 
 	
@@ -279,6 +336,7 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(OcdefequPeer::CODEQU)) $criteria->add(OcdefequPeer::CODEQU, $this->codequ);
 		if ($this->isColumnModified(OcdefequPeer::DESEQU)) $criteria->add(OcdefequPeer::DESEQU, $this->desequ);
+		if ($this->isColumnModified(OcdefequPeer::CODTIPEQU)) $criteria->add(OcdefequPeer::CODTIPEQU, $this->codtipequ);
 		if ($this->isColumnModified(OcdefequPeer::ID)) $criteria->add(OcdefequPeer::ID, $this->id);
 
 		return $criteria;
@@ -313,6 +371,8 @@ abstract class BaseOcdefequ extends BaseObject  implements Persistent {
 		$copyObj->setCodequ($this->codequ);
 
 		$copyObj->setDesequ($this->desequ);
+
+		$copyObj->setCodtipequ($this->codtipequ);
 
 
 		$copyObj->setNew(true);

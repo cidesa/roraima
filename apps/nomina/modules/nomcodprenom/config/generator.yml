@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Npdefcpt
+    theme:            cidesaGenerator
+    fields:
+      codcon: { name: Código del Concepto}
+      nomcon: { name: Descripción, size=60 params: size=60}
+      nominas: { name: . }
+    list:
+      title: Asignar  Partidas a un Concepto por Nomina
+      display: [=codcon, nomcon]
+      filters: [codcon]
+      max_per_page:   10
+      sort: codcon
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Asignar  Partidas a un Concepto por Nomina
+      display:
+        "Concepto": [_codcon ]
+        "Nominas":  [_nominas]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      NONE
+        _create:      ~

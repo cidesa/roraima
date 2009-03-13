@@ -33,156 +33,181 @@ abstract class BaseTsdefemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getFeccon($format = 'Y-m-d')
-	{
+    return trim($this->codemp);
 
-		if ($this->feccon === null || $this->feccon === '') {
-			return null;
-		} elseif (!is_int($this->feccon)) {
-						$ts = strtotime($this->feccon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
-			}
-		} else {
-			$ts = $this->feccon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFeccon($format = 'Y-m-d')
+  {
 
-	
-	public function getFecban($format = 'Y-m-d')
-	{
+    if ($this->feccon === null || $this->feccon === '') {
+      return null;
+    } elseif (!is_int($this->feccon)) {
+            $ts = adodb_strtotime($this->feccon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccon] as date/time value: " . var_export($this->feccon, true));
+      }
+    } else {
+      $ts = $this->feccon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecban === null || $this->fecban === '') {
-			return null;
-		} elseif (!is_int($this->fecban)) {
-						$ts = strtotime($this->fecban);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecban] as date/time value: " . var_export($this->fecban, true));
-			}
-		} else {
-			$ts = $this->fecban;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecban($format = 'Y-m-d')
+  {
 
-	
-	public function getTipmon()
-	{
+    if ($this->fecban === null || $this->fecban === '') {
+      return null;
+    } elseif (!is_int($this->fecban)) {
+            $ts = adodb_strtotime($this->fecban);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecban] as date/time value: " . var_export($this->fecban, true));
+      }
+    } else {
+      $ts = $this->fecban;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->tipmon; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getTipmon()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->tipmon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = TsdefempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = TsdefempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFeccon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccon !== $ts) {
-			$this->feccon = $ts;
-			$this->modifiedColumns[] = TsdefempPeer::FECCON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccon !== $ts) {
+      $this->feccon = $ts;
+      $this->modifiedColumns[] = TsdefempPeer::FECCON;
+    }
 
 	} 
 	
 	public function setFecban($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecban] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecban !== $ts) {
-			$this->fecban = $ts;
-			$this->modifiedColumns[] = TsdefempPeer::FECBAN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecban] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecban !== $ts) {
+      $this->fecban = $ts;
+      $this->modifiedColumns[] = TsdefempPeer::FECBAN;
+    }
 
 	} 
 	
 	public function setTipmon($v)
 	{
 
-		if ($this->tipmon !== $v) {
-			$this->tipmon = $v;
-			$this->modifiedColumns[] = TsdefempPeer::TIPMON;
-		}
-
+    if ($this->tipmon !== $v) {
+        $this->tipmon = $v;
+        $this->modifiedColumns[] = TsdefempPeer::TIPMON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsdefempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsdefempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->feccon = $rs->getDate($startcol + 1, null);
+      $this->feccon = $rs->getDate($startcol + 1, null);
 
-			$this->fecban = $rs->getDate($startcol + 2, null);
+      $this->fecban = $rs->getDate($startcol + 2, null);
 
-			$this->tipmon = $rs->getString($startcol + 3);
+      $this->tipmon = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsdefemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsdefemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +264,7 @@ abstract class BaseTsdefemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsdefempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsdefempPeer::doUpdate($this, $con);

@@ -1,21 +1,24 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Octipobr
-    theme:            default
-
+    theme:            cidesaGenerator
     fields:
-      codtipobr:      { name: Código}
-      destipobr:      { name: Descripción}      
- 
+      codtipobr:      { name: Código, params: size=10 maxlength=4 onBlur='this.value=this.value.pad(4, "0",0);'}
+      destipobr:      { name: Descripción, params: size=60 maxlength=50}
     list:
-      title:          Definición de Tipos de Obras
+      title:          Tipos de Obras
       filters:		  [codtipobr, destipobr]
       display:        [=codtipobr, destipobr]
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
     edit:
-      title:          Edición de Tipos de Obras
+      title: Edición de Tipos de Obras
+      display: [codtipobr, destipobr]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

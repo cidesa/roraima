@@ -225,6 +225,7 @@ abstract class BaseNpsalint05022007Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Npsalint05022007Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

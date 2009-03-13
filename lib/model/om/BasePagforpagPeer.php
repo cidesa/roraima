@@ -205,6 +205,7 @@ abstract class BasePagforpagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(PagforpagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

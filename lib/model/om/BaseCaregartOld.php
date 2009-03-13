@@ -129,572 +129,622 @@ abstract class BaseCaregartOld extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodart()
-	{
+  
+  public function getCodart()
+  {
 
-		return $this->codart; 		
-	}
-	
-	public function getDesart()
-	{
+    return trim($this->codart);
 
-		return $this->desart; 		
-	}
-	
-	public function getCodcta()
-	{
+  }
+  
+  public function getDesart()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getCodpar()
-	{
+    return trim($this->desart);
 
-		return $this->codpar; 		
-	}
-	
-	public function getRamart()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->ramart; 		
-	}
-	
-	public function getCosult()
-	{
+    return trim($this->codcta);
 
-		return number_format($this->cosult,2,',','.');
-		
-	}
-	
-	public function getCospro()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return number_format($this->cospro,2,',','.');
-		
-	}
-	
-	public function getExitot()
-	{
+    return trim($this->codpar);
 
-		return number_format($this->exitot,2,',','.');
-		
-	}
-	
-	public function getUnimed()
-	{
+  }
+  
+  public function getRamart()
+  {
 
-		return $this->unimed; 		
-	}
-	
-	public function getUnialt()
-	{
+    return trim($this->ramart);
 
-		return $this->unialt; 		
-	}
-	
-	public function getRelart()
-	{
+  }
+  
+  public function getCosult($val=false)
+  {
 
-		return $this->relart; 		
-	}
-	
-	public function getFecult($format = 'Y-m-d')
-	{
+    if($val) return number_format($this->cosult,2,',','.');
+    else return $this->cosult;
 
-		if ($this->fecult === null || $this->fecult === '') {
-			return null;
-		} elseif (!is_int($this->fecult)) {
-						$ts = strtotime($this->fecult);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecult] as date/time value: " . var_export($this->fecult, true));
-			}
-		} else {
-			$ts = $this->fecult;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCospro($val=false)
+  {
 
-	
-	public function getInvini()
-	{
+    if($val) return number_format($this->cospro,2,',','.');
+    else return $this->cospro;
 
-		return number_format($this->invini,2,',','.');
-		
-	}
-	
-	public function getCodmar()
-	{
+  }
+  
+  public function getExitot($val=false)
+  {
 
-		return $this->codmar; 		
-	}
-	
-	public function getCodref()
-	{
+    if($val) return number_format($this->exitot,2,',','.');
+    else return $this->exitot;
 
-		return $this->codref; 		
-	}
-	
-	public function getCostot()
-	{
+  }
+  
+  public function getUnimed()
+  {
 
-		return number_format($this->costot,2,',','.');
-		
-	}
-	
-	public function getSigecof()
-	{
+    return trim($this->unimed);
 
-		return $this->sigecof; 		
-	}
-	
-	public function getCodclaart()
-	{
+  }
+  
+  public function getUnialt()
+  {
 
-		return number_format($this->codclaart,2,',','.');
-		
-	}
-	
-	public function getLotuni()
-	{
+    return trim($this->unialt);
 
-		return $this->lotuni; 		
-	}
-	
-	public function getCtavta()
-	{
+  }
+  
+  public function getRelart()
+  {
 
-		return $this->ctavta; 		
-	}
-	
-	public function getCtacos()
-	{
+    return trim($this->relart);
 
-		return $this->ctacos; 		
-	}
-	
-	public function getCtapro()
-	{
+  }
+  
+  public function getFecult($format = 'Y-m-d')
+  {
 
-		return $this->ctapro; 		
-	}
-	
-	public function getPreart()
-	{
+    if ($this->fecult === null || $this->fecult === '') {
+      return null;
+    } elseif (!is_int($this->fecult)) {
+            $ts = adodb_strtotime($this->fecult);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecult] as date/time value: " . var_export($this->fecult, true));
+      }
+    } else {
+      $ts = $this->fecult;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->preart; 		
-	}
-	
-	public function getDistot()
-	{
+  
+  public function getInvini($val=false)
+  {
 
-		return number_format($this->distot,2,',','.');
-		
-	}
-	
-	public function getTipo()
-	{
+    if($val) return number_format($this->invini,2,',','.');
+    else return $this->invini;
 
-		return $this->tipo; 		
-	}
-	
-	public function getTip0()
-	{
+  }
+  
+  public function getCodmar()
+  {
 
-		return $this->tip0; 		
-	}
-	
-	public function getCoding()
-	{
+    return trim($this->codmar);
 
-		return $this->coding; 		
-	}
-	
-	public function getMercon()
-	{
+  }
+  
+  public function getCodref()
+  {
 
-		return $this->mercon; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codref);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCostot($val=false)
+  {
+
+    if($val) return number_format($this->costot,2,',','.');
+    else return $this->costot;
+
+  }
+  
+  public function getSigecof()
+  {
+
+    return trim($this->sigecof);
+
+  }
+  
+  public function getCodclaart($val=false)
+  {
+
+    if($val) return number_format($this->codclaart,2,',','.');
+    else return $this->codclaart;
+
+  }
+  
+  public function getLotuni()
+  {
+
+    return trim($this->lotuni);
+
+  }
+  
+  public function getCtavta()
+  {
+
+    return trim($this->ctavta);
+
+  }
+  
+  public function getCtacos()
+  {
+
+    return trim($this->ctacos);
+
+  }
+  
+  public function getCtapro()
+  {
+
+    return trim($this->ctapro);
+
+  }
+  
+  public function getPreart()
+  {
+
+    return trim($this->preart);
+
+  }
+  
+  public function getDistot($val=false)
+  {
+
+    if($val) return number_format($this->distot,2,',','.');
+    else return $this->distot;
+
+  }
+  
+  public function getTipo()
+  {
+
+    return trim($this->tipo);
+
+  }
+  
+  public function getTip0()
+  {
+
+    return trim($this->tip0);
+
+  }
+  
+  public function getCoding()
+  {
+
+    return trim($this->coding);
+
+  }
+  
+  public function getMercon()
+  {
+
+    return trim($this->mercon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::CODART;
+      }
+  
 	} 
 	
 	public function setDesart($v)
 	{
 
-		if ($this->desart !== $v) {
-			$this->desart = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::DESART;
-		}
-
+    if ($this->desart !== $v) {
+        $this->desart = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::DESART;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setRamart($v)
 	{
 
-		if ($this->ramart !== $v) {
-			$this->ramart = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::RAMART;
-		}
-
+    if ($this->ramart !== $v) {
+        $this->ramart = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::RAMART;
+      }
+  
 	} 
 	
 	public function setCosult($v)
 	{
 
-		if ($this->cosult !== $v) {
-			$this->cosult = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::COSULT;
-		}
-
+    if ($this->cosult !== $v) {
+        $this->cosult = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaregartOldPeer::COSULT;
+      }
+  
 	} 
 	
 	public function setCospro($v)
 	{
 
-		if ($this->cospro !== $v) {
-			$this->cospro = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::COSPRO;
-		}
-
+    if ($this->cospro !== $v) {
+        $this->cospro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaregartOldPeer::COSPRO;
+      }
+  
 	} 
 	
 	public function setExitot($v)
 	{
 
-		if ($this->exitot !== $v) {
-			$this->exitot = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::EXITOT;
-		}
-
+    if ($this->exitot !== $v) {
+        $this->exitot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaregartOldPeer::EXITOT;
+      }
+  
 	} 
 	
 	public function setUnimed($v)
 	{
 
-		if ($this->unimed !== $v) {
-			$this->unimed = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::UNIMED;
-		}
-
+    if ($this->unimed !== $v) {
+        $this->unimed = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::UNIMED;
+      }
+  
 	} 
 	
 	public function setUnialt($v)
 	{
 
-		if ($this->unialt !== $v) {
-			$this->unialt = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::UNIALT;
-		}
-
+    if ($this->unialt !== $v) {
+        $this->unialt = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::UNIALT;
+      }
+  
 	} 
 	
 	public function setRelart($v)
 	{
 
-		if ($this->relart !== $v) {
-			$this->relart = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::RELART;
-		}
-
+    if ($this->relart !== $v) {
+        $this->relart = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::RELART;
+      }
+  
 	} 
 	
 	public function setFecult($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecult] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecult !== $ts) {
-			$this->fecult = $ts;
-			$this->modifiedColumns[] = CaregartOldPeer::FECULT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecult] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecult !== $ts) {
+      $this->fecult = $ts;
+      $this->modifiedColumns[] = CaregartOldPeer::FECULT;
+    }
 
 	} 
 	
 	public function setInvini($v)
 	{
 
-		if ($this->invini !== $v) {
-			$this->invini = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::INVINI;
-		}
-
+    if ($this->invini !== $v) {
+        $this->invini = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaregartOldPeer::INVINI;
+      }
+  
 	} 
 	
 	public function setCodmar($v)
 	{
 
-		if ($this->codmar !== $v) {
-			$this->codmar = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CODMAR;
-		}
-
+    if ($this->codmar !== $v) {
+        $this->codmar = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::CODMAR;
+      }
+  
 	} 
 	
 	public function setCodref($v)
 	{
 
-		if ($this->codref !== $v) {
-			$this->codref = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CODREF;
-		}
-
+    if ($this->codref !== $v) {
+        $this->codref = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::CODREF;
+      }
+  
 	} 
 	
 	public function setCostot($v)
 	{
 
-		if ($this->costot !== $v) {
-			$this->costot = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::COSTOT;
-		}
-
+    if ($this->costot !== $v) {
+        $this->costot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaregartOldPeer::COSTOT;
+      }
+  
 	} 
 	
 	public function setSigecof($v)
 	{
 
-		if ($this->sigecof !== $v) {
-			$this->sigecof = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::SIGECOF;
-		}
-
+    if ($this->sigecof !== $v) {
+        $this->sigecof = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::SIGECOF;
+      }
+  
 	} 
 	
 	public function setCodclaart($v)
 	{
 
-		if ($this->codclaart !== $v) {
-			$this->codclaart = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CODCLAART;
-		}
-
+    if ($this->codclaart !== $v) {
+        $this->codclaart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaregartOldPeer::CODCLAART;
+      }
+  
 	} 
 	
 	public function setLotuni($v)
 	{
 
-		if ($this->lotuni !== $v) {
-			$this->lotuni = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::LOTUNI;
-		}
-
+    if ($this->lotuni !== $v) {
+        $this->lotuni = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::LOTUNI;
+      }
+  
 	} 
 	
 	public function setCtavta($v)
 	{
 
-		if ($this->ctavta !== $v) {
-			$this->ctavta = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CTAVTA;
-		}
-
+    if ($this->ctavta !== $v) {
+        $this->ctavta = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::CTAVTA;
+      }
+  
 	} 
 	
 	public function setCtacos($v)
 	{
 
-		if ($this->ctacos !== $v) {
-			$this->ctacos = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CTACOS;
-		}
-
+    if ($this->ctacos !== $v) {
+        $this->ctacos = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::CTACOS;
+      }
+  
 	} 
 	
 	public function setCtapro($v)
 	{
 
-		if ($this->ctapro !== $v) {
-			$this->ctapro = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CTAPRO;
-		}
-
+    if ($this->ctapro !== $v) {
+        $this->ctapro = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::CTAPRO;
+      }
+  
 	} 
 	
 	public function setPreart($v)
 	{
 
-		if ($this->preart !== $v) {
-			$this->preart = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::PREART;
-		}
-
+    if ($this->preart !== $v) {
+        $this->preart = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::PREART;
+      }
+  
 	} 
 	
 	public function setDistot($v)
 	{
 
-		if ($this->distot !== $v) {
-			$this->distot = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::DISTOT;
-		}
-
+    if ($this->distot !== $v) {
+        $this->distot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaregartOldPeer::DISTOT;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setTip0($v)
 	{
 
-		if ($this->tip0 !== $v) {
-			$this->tip0 = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::TIP0;
-		}
-
+    if ($this->tip0 !== $v) {
+        $this->tip0 = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::TIP0;
+      }
+  
 	} 
 	
 	public function setCoding($v)
 	{
 
-		if ($this->coding !== $v) {
-			$this->coding = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::CODING;
-		}
-
+    if ($this->coding !== $v) {
+        $this->coding = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::CODING;
+      }
+  
 	} 
 	
 	public function setMercon($v)
 	{
 
-		if ($this->mercon !== $v) {
-			$this->mercon = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::MERCON;
-		}
-
+    if ($this->mercon !== $v) {
+        $this->mercon = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::MERCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaregartOldPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaregartOldPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codart = $rs->getString($startcol + 0);
+      $this->codart = $rs->getString($startcol + 0);
 
-			$this->desart = $rs->getString($startcol + 1);
+      $this->desart = $rs->getString($startcol + 1);
 
-			$this->codcta = $rs->getString($startcol + 2);
+      $this->codcta = $rs->getString($startcol + 2);
 
-			$this->codpar = $rs->getString($startcol + 3);
+      $this->codpar = $rs->getString($startcol + 3);
 
-			$this->ramart = $rs->getString($startcol + 4);
+      $this->ramart = $rs->getString($startcol + 4);
 
-			$this->cosult = $rs->getFloat($startcol + 5);
+      $this->cosult = $rs->getFloat($startcol + 5);
 
-			$this->cospro = $rs->getFloat($startcol + 6);
+      $this->cospro = $rs->getFloat($startcol + 6);
 
-			$this->exitot = $rs->getFloat($startcol + 7);
+      $this->exitot = $rs->getFloat($startcol + 7);
 
-			$this->unimed = $rs->getString($startcol + 8);
+      $this->unimed = $rs->getString($startcol + 8);
 
-			$this->unialt = $rs->getString($startcol + 9);
+      $this->unialt = $rs->getString($startcol + 9);
 
-			$this->relart = $rs->getString($startcol + 10);
+      $this->relart = $rs->getString($startcol + 10);
 
-			$this->fecult = $rs->getDate($startcol + 11, null);
+      $this->fecult = $rs->getDate($startcol + 11, null);
 
-			$this->invini = $rs->getFloat($startcol + 12);
+      $this->invini = $rs->getFloat($startcol + 12);
 
-			$this->codmar = $rs->getString($startcol + 13);
+      $this->codmar = $rs->getString($startcol + 13);
 
-			$this->codref = $rs->getString($startcol + 14);
+      $this->codref = $rs->getString($startcol + 14);
 
-			$this->costot = $rs->getFloat($startcol + 15);
+      $this->costot = $rs->getFloat($startcol + 15);
 
-			$this->sigecof = $rs->getString($startcol + 16);
+      $this->sigecof = $rs->getString($startcol + 16);
 
-			$this->codclaart = $rs->getFloat($startcol + 17);
+      $this->codclaart = $rs->getFloat($startcol + 17);
 
-			$this->lotuni = $rs->getString($startcol + 18);
+      $this->lotuni = $rs->getString($startcol + 18);
 
-			$this->ctavta = $rs->getString($startcol + 19);
+      $this->ctavta = $rs->getString($startcol + 19);
 
-			$this->ctacos = $rs->getString($startcol + 20);
+      $this->ctacos = $rs->getString($startcol + 20);
 
-			$this->ctapro = $rs->getString($startcol + 21);
+      $this->ctapro = $rs->getString($startcol + 21);
 
-			$this->preart = $rs->getString($startcol + 22);
+      $this->preart = $rs->getString($startcol + 22);
 
-			$this->distot = $rs->getFloat($startcol + 23);
+      $this->distot = $rs->getFloat($startcol + 23);
 
-			$this->tipo = $rs->getString($startcol + 24);
+      $this->tipo = $rs->getString($startcol + 24);
 
-			$this->tip0 = $rs->getString($startcol + 25);
+      $this->tip0 = $rs->getString($startcol + 25);
 
-			$this->coding = $rs->getString($startcol + 26);
+      $this->coding = $rs->getString($startcol + 26);
 
-			$this->mercon = $rs->getString($startcol + 27);
+      $this->mercon = $rs->getString($startcol + 27);
 
-			$this->id = $rs->getInt($startcol + 28);
+      $this->id = $rs->getInt($startcol + 28);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 29; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating CaregartOld object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 29; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating CaregartOld object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

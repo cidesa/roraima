@@ -37,130 +37,158 @@ abstract class BaseFordefparing extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodparing()
-	{
+  
+  public function getCodparing()
+  {
 
-		return $this->codparing; 		
-	}
-	
-	public function getNomparing()
-	{
+    return trim($this->codparing);
 
-		return $this->nomparing; 		
-	}
-	
-	public function getEstant()
-	{
+  }
+  
+  public function getNomparing()
+  {
 
-		return number_format($this->estant,2,',','.');
-		
-	}
-	
-	public function getEstantaju()
-	{
+    return trim($this->nomparing);
 
-		return number_format($this->estantaju,2,',','.');
-		
-	}
-	
-	public function getBascal()
-	{
+  }
+  
+  public function getEstant($val=false)
+  {
 
-		return $this->bascal; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->estant,2,',','.');
+    else return $this->estant;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getEstantaju($val=false)
+  {
+
+    if($val) return number_format($this->estantaju,2,',','.');
+    else return $this->estantaju;
+
+  }
+  
+  public function getBascal()
+  {
+
+    return trim($this->bascal);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodparing($v)
 	{
 
-		if ($this->codparing !== $v) {
-			$this->codparing = $v;
-			$this->modifiedColumns[] = FordefparingPeer::CODPARING;
-		}
-
+    if ($this->codparing !== $v) {
+        $this->codparing = $v;
+        $this->modifiedColumns[] = FordefparingPeer::CODPARING;
+      }
+  
 	} 
 	
 	public function setNomparing($v)
 	{
 
-		if ($this->nomparing !== $v) {
-			$this->nomparing = $v;
-			$this->modifiedColumns[] = FordefparingPeer::NOMPARING;
-		}
-
+    if ($this->nomparing !== $v) {
+        $this->nomparing = $v;
+        $this->modifiedColumns[] = FordefparingPeer::NOMPARING;
+      }
+  
 	} 
 	
 	public function setEstant($v)
 	{
 
-		if ($this->estant !== $v) {
-			$this->estant = $v;
-			$this->modifiedColumns[] = FordefparingPeer::ESTANT;
-		}
-
+    if ($this->estant !== $v) {
+        $this->estant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefparingPeer::ESTANT;
+      }
+  
 	} 
 	
 	public function setEstantaju($v)
 	{
 
-		if ($this->estantaju !== $v) {
-			$this->estantaju = $v;
-			$this->modifiedColumns[] = FordefparingPeer::ESTANTAJU;
-		}
-
+    if ($this->estantaju !== $v) {
+        $this->estantaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefparingPeer::ESTANTAJU;
+      }
+  
 	} 
 	
 	public function setBascal($v)
 	{
 
-		if ($this->bascal !== $v) {
-			$this->bascal = $v;
-			$this->modifiedColumns[] = FordefparingPeer::BASCAL;
-		}
-
+    if ($this->bascal !== $v) {
+        $this->bascal = $v;
+        $this->modifiedColumns[] = FordefparingPeer::BASCAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefparingPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefparingPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codparing = $rs->getString($startcol + 0);
+      $this->codparing = $rs->getString($startcol + 0);
 
-			$this->nomparing = $rs->getString($startcol + 1);
+      $this->nomparing = $rs->getString($startcol + 1);
 
-			$this->estant = $rs->getFloat($startcol + 2);
+      $this->estant = $rs->getFloat($startcol + 2);
 
-			$this->estantaju = $rs->getFloat($startcol + 3);
+      $this->estantaju = $rs->getFloat($startcol + 3);
 
-			$this->bascal = $rs->getString($startcol + 4);
+      $this->bascal = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefparing object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefparing object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +245,7 @@ abstract class BaseFordefparing extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefparingPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefparingPeer::doUpdate($this, $con);

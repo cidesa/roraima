@@ -41,150 +41,179 @@ abstract class BaseCamercon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getConmer()
-	{
+  
+  public function getConmer()
+  {
 
-		return $this->conmer; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->conmer);
 
-		return $this->codart; 		
-	}
-	
-	public function getCanrec()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return number_format($this->canrec,2,',','.');
-		
-	}
-	
-	public function getCandev()
-	{
+    return trim($this->codart);
 
-		return number_format($this->candev,2,',','.');
-		
-	}
-	
-	public function getCantot()
-	{
+  }
+  
+  public function getCanrec($val=false)
+  {
 
-		return number_format($this->cantot,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    if($val) return number_format($this->canrec,2,',','.');
+    else return $this->canrec;
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCandev($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->candev,2,',','.');
+    else return $this->candev;
+
+  }
+  
+  public function getCantot($val=false)
+  {
+
+    if($val) return number_format($this->cantot,2,',','.');
+    else return $this->cantot;
+
+  }
+  
+  public function getMontot($val=false)
+  {
+
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setConmer($v)
 	{
 
-		if ($this->conmer !== $v) {
-			$this->conmer = $v;
-			$this->modifiedColumns[] = CamerconPeer::CONMER;
-		}
-
+    if ($this->conmer !== $v) {
+        $this->conmer = $v;
+        $this->modifiedColumns[] = CamerconPeer::CONMER;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CamerconPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CamerconPeer::CODART;
+      }
+  
 	} 
 	
 	public function setCanrec($v)
 	{
 
-		if ($this->canrec !== $v) {
-			$this->canrec = $v;
-			$this->modifiedColumns[] = CamerconPeer::CANREC;
-		}
-
+    if ($this->canrec !== $v) {
+        $this->canrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CamerconPeer::CANREC;
+      }
+  
 	} 
 	
 	public function setCandev($v)
 	{
 
-		if ($this->candev !== $v) {
-			$this->candev = $v;
-			$this->modifiedColumns[] = CamerconPeer::CANDEV;
-		}
-
+    if ($this->candev !== $v) {
+        $this->candev = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CamerconPeer::CANDEV;
+      }
+  
 	} 
 	
 	public function setCantot($v)
 	{
 
-		if ($this->cantot !== $v) {
-			$this->cantot = $v;
-			$this->modifiedColumns[] = CamerconPeer::CANTOT;
-		}
-
+    if ($this->cantot !== $v) {
+        $this->cantot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CamerconPeer::CANTOT;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CamerconPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CamerconPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CamerconPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CamerconPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->conmer = $rs->getString($startcol + 0);
+      $this->conmer = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->canrec = $rs->getFloat($startcol + 2);
+      $this->canrec = $rs->getFloat($startcol + 2);
 
-			$this->candev = $rs->getFloat($startcol + 3);
+      $this->candev = $rs->getFloat($startcol + 3);
 
-			$this->cantot = $rs->getFloat($startcol + 4);
+      $this->cantot = $rs->getFloat($startcol + 4);
 
-			$this->montot = $rs->getFloat($startcol + 5);
+      $this->montot = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Camercon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Camercon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

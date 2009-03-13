@@ -192,14 +192,14 @@ abstract class BaseFcrecdespagPeer {
 	public static function doCountJoinFcdefdesc(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcrecdespagPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcrecdespagPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -274,7 +274,7 @@ abstract class BaseFcrecdespagPeer {
 		} else {
 			$criteria->addSelectColumn(FcrecdespagPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -310,25 +310,25 @@ abstract class BaseFcrecdespagPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcrecdespagPeer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = FcdefdescPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -337,7 +337,7 @@ abstract class BaseFcrecdespagPeer {
 					$temp_obj2->addFcrecdespag($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcrecdespags();
 				$obj2->addFcrecdespag($obj1);
@@ -371,6 +371,7 @@ abstract class BaseFcrecdespagPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcrecdespagPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -1,0 +1,22 @@
+methods:
+  post:
+   - "fcusoinm{codusoinm}"
+   - "fcusoinm{nomusoinm}"
+
+names:
+  fcusoinm{codusoinm}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+    validators: Validator_codusoinm
+
+  fcusoinm{nomusoinm}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido
+
+
+Validator_codusoinm:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Fcusoinm
+        column:       codusoinm
+        unique_error: El registro ya Existe intente con otro.

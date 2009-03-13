@@ -33,134 +33,160 @@ abstract class BaseTsmaetra extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReftra()
-	{
+  
+  public function getReftra()
+  {
 
-		return $this->reftra; 		
-	}
-	
-	public function getFectra($format = 'Y-m-d')
-	{
+    return trim($this->reftra);
 
-		if ($this->fectra === null || $this->fectra === '') {
-			return null;
-		} elseif (!is_int($this->fectra)) {
-						$ts = strtotime($this->fectra);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fectra] as date/time value: " . var_export($this->fectra, true));
-			}
-		} else {
-			$ts = $this->fectra;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFectra($format = 'Y-m-d')
+  {
 
-	
-	public function getDestra()
-	{
+    if ($this->fectra === null || $this->fectra === '') {
+      return null;
+    } elseif (!is_int($this->fectra)) {
+            $ts = adodb_strtotime($this->fectra);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fectra] as date/time value: " . var_export($this->fectra, true));
+      }
+    } else {
+      $ts = $this->fectra;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->destra; 		
-	}
-	
-	public function getTottra()
-	{
+  
+  public function getDestra()
+  {
 
-		return number_format($this->tottra,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->destra);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTottra($val=false)
+  {
+
+    if($val) return number_format($this->tottra,2,',','.');
+    else return $this->tottra;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReftra($v)
 	{
 
-		if ($this->reftra !== $v) {
-			$this->reftra = $v;
-			$this->modifiedColumns[] = TsmaetraPeer::REFTRA;
-		}
-
+    if ($this->reftra !== $v) {
+        $this->reftra = $v;
+        $this->modifiedColumns[] = TsmaetraPeer::REFTRA;
+      }
+  
 	} 
 	
 	public function setFectra($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fectra] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fectra !== $ts) {
-			$this->fectra = $ts;
-			$this->modifiedColumns[] = TsmaetraPeer::FECTRA;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fectra] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fectra !== $ts) {
+      $this->fectra = $ts;
+      $this->modifiedColumns[] = TsmaetraPeer::FECTRA;
+    }
 
 	} 
 	
 	public function setDestra($v)
 	{
 
-		if ($this->destra !== $v) {
-			$this->destra = $v;
-			$this->modifiedColumns[] = TsmaetraPeer::DESTRA;
-		}
-
+    if ($this->destra !== $v) {
+        $this->destra = $v;
+        $this->modifiedColumns[] = TsmaetraPeer::DESTRA;
+      }
+  
 	} 
 	
 	public function setTottra($v)
 	{
 
-		if ($this->tottra !== $v) {
-			$this->tottra = $v;
-			$this->modifiedColumns[] = TsmaetraPeer::TOTTRA;
-		}
-
+    if ($this->tottra !== $v) {
+        $this->tottra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsmaetraPeer::TOTTRA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsmaetraPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsmaetraPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reftra = $rs->getString($startcol + 0);
+      $this->reftra = $rs->getString($startcol + 0);
 
-			$this->fectra = $rs->getDate($startcol + 1, null);
+      $this->fectra = $rs->getDate($startcol + 1, null);
 
-			$this->destra = $rs->getString($startcol + 2);
+      $this->destra = $rs->getString($startcol + 2);
 
-			$this->tottra = $rs->getFloat($startcol + 3);
+      $this->tottra = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsmaetra object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsmaetra object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +243,7 @@ abstract class BaseTsmaetra extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsmaetraPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsmaetraPeer::doUpdate($this, $con);

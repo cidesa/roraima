@@ -49,231 +49,260 @@ abstract class BaseNpdepfid extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getFecnom($format = 'Y-m-d')
-	{
+    return trim($this->codemp);
 
-		if ($this->fecnom === null || $this->fecnom === '') {
-			return null;
-		} elseif (!is_int($this->fecnom)) {
-						$ts = strtotime($this->fecnom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnom] as date/time value: " . var_export($this->fecnom, true));
-			}
-		} else {
-			$ts = $this->fecnom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecnom($format = 'Y-m-d')
+  {
 
-	
-	public function getFecing($format = 'Y-m-d')
-	{
+    if ($this->fecnom === null || $this->fecnom === '') {
+      return null;
+    } elseif (!is_int($this->fecnom)) {
+            $ts = adodb_strtotime($this->fecnom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnom] as date/time value: " . var_export($this->fecnom, true));
+      }
+    } else {
+      $ts = $this->fecnom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecing === null || $this->fecing === '') {
-			return null;
-		} elseif (!is_int($this->fecing)) {
-						$ts = strtotime($this->fecing);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
-			}
-		} else {
-			$ts = $this->fecing;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecing($format = 'Y-m-d')
+  {
 
-	
-	public function getDevengado()
-	{
+    if ($this->fecing === null || $this->fecing === '') {
+      return null;
+    } elseif (!is_int($this->fecing)) {
+            $ts = adodb_strtotime($this->fecing);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
+      }
+    } else {
+      $ts = $this->fecing;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->devengado,2,',','.');
-		
-	}
-	
-	public function getDiasdeposito()
-	{
+  
+  public function getDevengado($val=false)
+  {
 
-		return number_format($this->diasdeposito,2,',','.');
-		
-	}
-	
-	public function getFideicomiso()
-	{
+    if($val) return number_format($this->devengado,2,',','.');
+    else return $this->devengado;
 
-		return number_format($this->fideicomiso,2,',','.');
-		
-	}
-	
-	public function getCodcar()
-	{
+  }
+  
+  public function getDiasdeposito($val=false)
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getCodnom()
-	{
+    if($val) return number_format($this->diasdeposito,2,',','.');
+    else return $this->diasdeposito;
 
-		return $this->codnom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getFideicomiso($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->fideicomiso,2,',','.');
+    else return $this->fideicomiso;
+
+  }
+  
+  public function getCodcar()
+  {
+
+    return trim($this->codcar);
+
+  }
+  
+  public function getCodnom()
+  {
+
+    return trim($this->codnom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpdepfidPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpdepfidPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFecnom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnom !== $ts) {
-			$this->fecnom = $ts;
-			$this->modifiedColumns[] = NpdepfidPeer::FECNOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnom !== $ts) {
+      $this->fecnom = $ts;
+      $this->modifiedColumns[] = NpdepfidPeer::FECNOM;
+    }
 
 	} 
 	
 	public function setFecing($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecing !== $ts) {
-			$this->fecing = $ts;
-			$this->modifiedColumns[] = NpdepfidPeer::FECING;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecing !== $ts) {
+      $this->fecing = $ts;
+      $this->modifiedColumns[] = NpdepfidPeer::FECING;
+    }
 
 	} 
 	
 	public function setDevengado($v)
 	{
 
-		if ($this->devengado !== $v) {
-			$this->devengado = $v;
-			$this->modifiedColumns[] = NpdepfidPeer::DEVENGADO;
-		}
-
+    if ($this->devengado !== $v) {
+        $this->devengado = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdepfidPeer::DEVENGADO;
+      }
+  
 	} 
 	
 	public function setDiasdeposito($v)
 	{
 
-		if ($this->diasdeposito !== $v) {
-			$this->diasdeposito = $v;
-			$this->modifiedColumns[] = NpdepfidPeer::DIASDEPOSITO;
-		}
-
+    if ($this->diasdeposito !== $v) {
+        $this->diasdeposito = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdepfidPeer::DIASDEPOSITO;
+      }
+  
 	} 
 	
 	public function setFideicomiso($v)
 	{
 
-		if ($this->fideicomiso !== $v) {
-			$this->fideicomiso = $v;
-			$this->modifiedColumns[] = NpdepfidPeer::FIDEICOMISO;
-		}
-
+    if ($this->fideicomiso !== $v) {
+        $this->fideicomiso = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdepfidPeer::FIDEICOMISO;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpdepfidPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpdepfidPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpdepfidPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpdepfidPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdepfidPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdepfidPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->fecnom = $rs->getDate($startcol + 1, null);
+      $this->fecnom = $rs->getDate($startcol + 1, null);
 
-			$this->fecing = $rs->getDate($startcol + 2, null);
+      $this->fecing = $rs->getDate($startcol + 2, null);
 
-			$this->devengado = $rs->getFloat($startcol + 3);
+      $this->devengado = $rs->getFloat($startcol + 3);
 
-			$this->diasdeposito = $rs->getFloat($startcol + 4);
+      $this->diasdeposito = $rs->getFloat($startcol + 4);
 
-			$this->fideicomiso = $rs->getFloat($startcol + 5);
+      $this->fideicomiso = $rs->getFloat($startcol + 5);
 
-			$this->codcar = $rs->getString($startcol + 6);
+      $this->codcar = $rs->getString($startcol + 6);
 
-			$this->codnom = $rs->getString($startcol + 7);
+      $this->codnom = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdepfid object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdepfid object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -330,6 +359,7 @@ abstract class BaseNpdepfid extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdepfidPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdepfidPeer::doUpdate($this, $con);

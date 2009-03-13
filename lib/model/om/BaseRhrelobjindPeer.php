@@ -225,6 +225,7 @@ abstract class BaseRhrelobjindPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(RhrelobjindPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

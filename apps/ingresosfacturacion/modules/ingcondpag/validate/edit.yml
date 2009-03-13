@@ -1,0 +1,44 @@
+methods:
+  post:
+   - "incondpag{codcond}"
+   - "incondpag{descond}"
+   - "incondpag{tipcond}"
+   - "incondpag{diascond}"
+   - "incondpag{genord}"
+names:
+  incondpag{codcond}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codcond
+
+  incondpag{descond}:
+    required:  Yes
+    required_msg: La descripcion no puede estar en Blanco
+    validators: Validator_descond
+
+  incondpag{tipcond}:
+    required:  Yes
+    required_msg: El tipo no puede estar en Blanco
+
+  incondpag{diascond}:
+    required:  Yes
+    required_msg: Los días no pueden estar en Blanco
+
+  incondpag{genord}:
+    required:  Yes
+    required_msg: Genera Orden de Pago no puede estar en Blanco
+
+Validator_codcond:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Incondpag
+        column:       codcond
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_descond:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripcion no puede tener menos de 2 caracteres
+        max:       250
+        max_error: La descripcion no puede pasar mas de 250 caracteres

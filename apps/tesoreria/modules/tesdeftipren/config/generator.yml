@@ -4,18 +4,23 @@ generator:
     model_class:      Tstipren
     theme:            default
     fields:
-      codtip: { name: Codigo Tipo Rendimiento, params: maxlength=3}
-      destip: { name: Descripcion Tipo Rendimiento}            
+      codtip: { name: Código, params: maxlength=3}
+      destip: { name: Descripción, params: maxlength=50}
     list:
-      title:          Tipos de Rendimiento
+      title:          Definición de Tipos de Rendimiento
       filters:        [codtip, destip]
       display:        [=codtip, destip]
+      sort:           codtip
+      max_per_page:   10
       object_actions:
         _edit:        ~
         _delete:      ~
-      fields:      
-        codtip:    { params: maxlength=3 } 
+      sort:  codtip
     edit:
-      title:          Edicion de Tipos de Rendimiento    
-        
-    
+      title:          Edición de Tipos de Rendimiento
+      filters:        [codtip, destip]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

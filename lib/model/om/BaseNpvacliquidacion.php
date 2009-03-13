@@ -49,187 +49,218 @@ abstract class BaseNpvacliquidacion extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getPerini()
-	{
+    return trim($this->codemp);
 
-		return $this->perini; 		
-	}
-	
-	public function getPerfin()
-	{
+  }
+  
+  public function getPerini()
+  {
 
-		return $this->perfin; 		
-	}
-	
-	public function getDiadis()
-	{
+    return trim($this->perini);
 
-		return number_format($this->diadis,2,',','.');
-		
-	}
-	
-	public function getDiasbono()
-	{
+  }
+  
+  public function getPerfin()
+  {
 
-		return number_format($this->diasbono,2,',','.');
-		
-	}
-	
-	public function getMonto()
-	{
+    return trim($this->perfin);
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getUltsue()
-	{
+  }
+  
+  public function getDiadis($val=false)
+  {
 
-		return number_format($this->ultsue,2,',','.');
-		
-	}
-	
-	public function getMontoinci()
-	{
+    if($val) return number_format($this->diadis,2,',','.');
+    else return $this->diadis;
 
-		return number_format($this->montoinci,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDiasbono($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->diasbono,2,',','.');
+    else return $this->diasbono;
+
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getUltsue($val=false)
+  {
+
+    if($val) return number_format($this->ultsue,2,',','.');
+    else return $this->ultsue;
+
+  }
+  
+  public function getMontoinci($val=false)
+  {
+
+    if($val) return number_format($this->montoinci,2,',','.');
+    else return $this->montoinci;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpvacliquidacionPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpvacliquidacionPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setPerini($v)
 	{
 
-		if ($this->perini !== $v) {
-			$this->perini = $v;
-			$this->modifiedColumns[] = NpvacliquidacionPeer::PERINI;
-		}
-
+    if ($this->perini !== $v) {
+        $this->perini = $v;
+        $this->modifiedColumns[] = NpvacliquidacionPeer::PERINI;
+      }
+  
 	} 
 	
 	public function setPerfin($v)
 	{
 
-		if ($this->perfin !== $v) {
-			$this->perfin = $v;
-			$this->modifiedColumns[] = NpvacliquidacionPeer::PERFIN;
-		}
-
+    if ($this->perfin !== $v) {
+        $this->perfin = $v;
+        $this->modifiedColumns[] = NpvacliquidacionPeer::PERFIN;
+      }
+  
 	} 
 	
 	public function setDiadis($v)
 	{
 
-		if ($this->diadis !== $v) {
-			$this->diadis = $v;
-			$this->modifiedColumns[] = NpvacliquidacionPeer::DIADIS;
-		}
-
+    if ($this->diadis !== $v) {
+        $this->diadis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacliquidacionPeer::DIADIS;
+      }
+  
 	} 
 	
 	public function setDiasbono($v)
 	{
 
-		if ($this->diasbono !== $v) {
-			$this->diasbono = $v;
-			$this->modifiedColumns[] = NpvacliquidacionPeer::DIASBONO;
-		}
-
+    if ($this->diasbono !== $v) {
+        $this->diasbono = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacliquidacionPeer::DIASBONO;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NpvacliquidacionPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacliquidacionPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setUltsue($v)
 	{
 
-		if ($this->ultsue !== $v) {
-			$this->ultsue = $v;
-			$this->modifiedColumns[] = NpvacliquidacionPeer::ULTSUE;
-		}
-
+    if ($this->ultsue !== $v) {
+        $this->ultsue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacliquidacionPeer::ULTSUE;
+      }
+  
 	} 
 	
 	public function setMontoinci($v)
 	{
 
-		if ($this->montoinci !== $v) {
-			$this->montoinci = $v;
-			$this->modifiedColumns[] = NpvacliquidacionPeer::MONTOINCI;
-		}
-
+    if ($this->montoinci !== $v) {
+        $this->montoinci = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpvacliquidacionPeer::MONTOINCI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpvacliquidacionPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpvacliquidacionPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->perini = $rs->getString($startcol + 1);
+      $this->perini = $rs->getString($startcol + 1);
 
-			$this->perfin = $rs->getString($startcol + 2);
+      $this->perfin = $rs->getString($startcol + 2);
 
-			$this->diadis = $rs->getFloat($startcol + 3);
+      $this->diadis = $rs->getFloat($startcol + 3);
 
-			$this->diasbono = $rs->getFloat($startcol + 4);
+      $this->diasbono = $rs->getFloat($startcol + 4);
 
-			$this->monto = $rs->getFloat($startcol + 5);
+      $this->monto = $rs->getFloat($startcol + 5);
 
-			$this->ultsue = $rs->getFloat($startcol + 6);
+      $this->ultsue = $rs->getFloat($startcol + 6);
 
-			$this->montoinci = $rs->getFloat($startcol + 7);
+      $this->montoinci = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npvacliquidacion object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npvacliquidacion object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -286,6 +317,7 @@ abstract class BaseNpvacliquidacion extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpvacliquidacionPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpvacliquidacionPeer::doUpdate($this, $con);

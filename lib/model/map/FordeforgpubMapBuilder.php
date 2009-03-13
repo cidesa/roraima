@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FordeforgpubMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FordeforgpubMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FordeforgpubMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fordeforgpub');
 		$tMap->setPhpName('Fordeforgpub');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fordeforgpub_SEQ');
 
 		$tMap->addColumn('CODORG', 'Codorg', 'string', CreoleTypes::VARCHAR, true, 5);
 
@@ -44,13 +46,13 @@ class FordeforgpubMapBuilder {
 
 		$tMap->addColumn('TIPORG', 'Tiporg', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('MONEST', 'Monest', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONEST', 'Monest', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PREANU', 'Preanu', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PREANU', 'Preanu', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CAPSOC', 'Capsoc', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CAPSOC', 'Capsoc', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

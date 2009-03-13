@@ -1,40 +1,42 @@
 <?php
 
 
-	
+
 class FanotentMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FanotentMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FanotentMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fanotent');
 		$tMap->setPhpName('Fanotent');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fanotent_SEQ');
 
 		$tMap->addColumn('NRONOT', 'Nronot', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECNOT', 'Fecnot', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECNOT', 'Fecnot', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('CODCLI', 'Codcli', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -42,11 +44,9 @@ class FanotentMapBuilder {
 
 		$tMap->addColumn('CODREF', 'Codref', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('CODALM', 'Codalm', 'string', CreoleTypes::VARCHAR, true, 6);
-
 		$tMap->addColumn('DESNOT', 'Desnot', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('MONNOT', 'Monnot', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONNOT', 'Monnot', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addColumn('OBSNOT', 'Obsnot', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -60,15 +60,15 @@ class FanotentMapBuilder {
 
 		$tMap->addColumn('NOMENT', 'Noment', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECANU', 'Fecanu', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('AUTORI', 'Autori', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('FECAUT', 'Fecaut', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECAUT', 'Fecaut', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('AUTPOR', 'Autpor', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

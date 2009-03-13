@@ -1,0 +1,38 @@
+methods:
+  post:
+   - "octipsol{codsol}"
+   - "octipsol{dessol}"
+   - "octipsol{maxdia}"
+
+names:
+  octipsol{codsol}:
+    required:  Yes
+    required_msg: El Codigo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  octipsol{dessol}:
+    required:  Yes
+    required_msg: La Descripcion no puede estar en Blanco.
+    validators: DescripcionValidator
+
+  octipsol{maxdia}:
+    required:  Yes
+    required_msg: Los dias de la solicitud no puede estar en Blanco.
+    #validators: MyNumberValidator
+
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Octipsol
+        column:       codsol
+        unique_error: El Codigo ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripcion no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La Descripcion no puede pasar mas de 254 caracteres

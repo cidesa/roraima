@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('biedisactmuenew/edit_messages', array('bndismue' => $bndismue, 'labels' => $labels)) ?>
-<?php include_partial('biedisactmuenew/edit_form', array('bndismue' => $bndismue, 'tipos' => $tipos, 'labels' => $labels)) ?>
+<?php include_partial('biedisactmuenew/edit_form', array('bndismue' => $bndismue, 'tipos' => $tipos, 'labels' => $labels, 'mascaracatalogo' => $mascaracatalogo, 'mascaraformatoubi' => $mascaraformatoubi, 'mascaralonformato' => $mascaralonformato, 'mascaralonubicacion' => $mascaralonubicacion)) ?>	
 </div>
 
 <div id="sf_admin_footer">

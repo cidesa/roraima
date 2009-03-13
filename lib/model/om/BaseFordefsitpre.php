@@ -25,74 +25,99 @@ abstract class BaseFordefsitpre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsitpre()
-	{
+  
+  public function getCodsitpre()
+  {
 
-		return $this->codsitpre; 		
-	}
-	
-	public function getDessitpre()
-	{
+    return trim($this->codsitpre);
 
-		return $this->dessitpre; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDessitpre()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->dessitpre);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsitpre($v)
 	{
 
-		if ($this->codsitpre !== $v) {
-			$this->codsitpre = $v;
-			$this->modifiedColumns[] = FordefsitprePeer::CODSITPRE;
-		}
-
+    if ($this->codsitpre !== $v) {
+        $this->codsitpre = $v;
+        $this->modifiedColumns[] = FordefsitprePeer::CODSITPRE;
+      }
+  
 	} 
 	
 	public function setDessitpre($v)
 	{
 
-		if ($this->dessitpre !== $v) {
-			$this->dessitpre = $v;
-			$this->modifiedColumns[] = FordefsitprePeer::DESSITPRE;
-		}
-
+    if ($this->dessitpre !== $v) {
+        $this->dessitpre = $v;
+        $this->modifiedColumns[] = FordefsitprePeer::DESSITPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefsitprePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefsitprePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsitpre = $rs->getString($startcol + 0);
+      $this->codsitpre = $rs->getString($startcol + 0);
 
-			$this->dessitpre = $rs->getString($startcol + 1);
+      $this->dessitpre = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefsitpre object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefsitpre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseFordefsitpre extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefsitprePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefsitprePeer::doUpdate($this, $con);

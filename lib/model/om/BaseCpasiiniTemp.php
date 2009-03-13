@@ -85,356 +85,396 @@ abstract class BaseCpasiiniTemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpre()
-	{
+  
+  public function getCodpre()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getNompre()
-	{
+    return trim($this->codpre);
 
-		return $this->nompre; 		
-	}
-	
-	public function getPerpre()
-	{
+  }
+  
+  public function getNompre()
+  {
 
-		return $this->perpre; 		
-	}
-	
-	public function getAnopre()
-	{
+    return trim($this->nompre);
 
-		return $this->anopre; 		
-	}
-	
-	public function getMonasi()
-	{
+  }
+  
+  public function getPerpre()
+  {
 
-		return number_format($this->monasi,2,',','.');
-		
-	}
-	
-	public function getMonprc()
-	{
+    return trim($this->perpre);
 
-		return number_format($this->monprc,2,',','.');
-		
-	}
-	
-	public function getMoncom()
-	{
+  }
+  
+  public function getAnopre()
+  {
 
-		return number_format($this->moncom,2,',','.');
-		
-	}
-	
-	public function getMoncau()
-	{
+    return trim($this->anopre);
 
-		return number_format($this->moncau,2,',','.');
-		
-	}
-	
-	public function getMonpag()
-	{
+  }
+  
+  public function getMonasi($val=false)
+  {
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getMontra()
-	{
+    if($val) return number_format($this->monasi,2,',','.');
+    else return $this->monasi;
 
-		return number_format($this->montra,2,',','.');
-		
-	}
-	
-	public function getMontrn()
-	{
+  }
+  
+  public function getMonprc($val=false)
+  {
 
-		return number_format($this->montrn,2,',','.');
-		
-	}
-	
-	public function getMonadi()
-	{
+    if($val) return number_format($this->monprc,2,',','.');
+    else return $this->monprc;
 
-		return number_format($this->monadi,2,',','.');
-		
-	}
-	
-	public function getMondim()
-	{
+  }
+  
+  public function getMoncom($val=false)
+  {
 
-		return number_format($this->mondim,2,',','.');
-		
-	}
-	
-	public function getMonaju()
-	{
+    if($val) return number_format($this->moncom,2,',','.');
+    else return $this->moncom;
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getMondis()
-	{
+  }
+  
+  public function getMoncau($val=false)
+  {
 
-		return number_format($this->mondis,2,',','.');
-		
-	}
-	
-	public function getDifere()
-	{
+    if($val) return number_format($this->moncau,2,',','.');
+    else return $this->moncau;
 
-		return number_format($this->difere,2,',','.');
-		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getMonpag($val=false)
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMontra($val=false)
+  {
+
+    if($val) return number_format($this->montra,2,',','.');
+    else return $this->montra;
+
+  }
+  
+  public function getMontrn($val=false)
+  {
+
+    if($val) return number_format($this->montrn,2,',','.');
+    else return $this->montrn;
+
+  }
+  
+  public function getMonadi($val=false)
+  {
+
+    if($val) return number_format($this->monadi,2,',','.');
+    else return $this->monadi;
+
+  }
+  
+  public function getMondim($val=false)
+  {
+
+    if($val) return number_format($this->mondim,2,',','.');
+    else return $this->mondim;
+
+  }
+  
+  public function getMonaju($val=false)
+  {
+
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getMondis($val=false)
+  {
+
+    if($val) return number_format($this->mondis,2,',','.');
+    else return $this->mondis;
+
+  }
+  
+  public function getDifere($val=false)
+  {
+
+    if($val) return number_format($this->difere,2,',','.');
+    else return $this->difere;
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CpasiiniTempPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setNompre($v)
 	{
 
-		if ($this->nompre !== $v) {
-			$this->nompre = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::NOMPRE;
-		}
-
+    if ($this->nompre !== $v) {
+        $this->nompre = $v;
+        $this->modifiedColumns[] = CpasiiniTempPeer::NOMPRE;
+      }
+  
 	} 
 	
 	public function setPerpre($v)
 	{
 
-		if ($this->perpre !== $v) {
-			$this->perpre = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::PERPRE;
-		}
-
+    if ($this->perpre !== $v) {
+        $this->perpre = $v;
+        $this->modifiedColumns[] = CpasiiniTempPeer::PERPRE;
+      }
+  
 	} 
 	
 	public function setAnopre($v)
 	{
 
-		if ($this->anopre !== $v) {
-			$this->anopre = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::ANOPRE;
-		}
-
+    if ($this->anopre !== $v) {
+        $this->anopre = $v;
+        $this->modifiedColumns[] = CpasiiniTempPeer::ANOPRE;
+      }
+  
 	} 
 	
 	public function setMonasi($v)
 	{
 
-		if ($this->monasi !== $v) {
-			$this->monasi = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONASI;
-		}
-
+    if ($this->monasi !== $v) {
+        $this->monasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONASI;
+      }
+  
 	} 
 	
 	public function setMonprc($v)
 	{
 
-		if ($this->monprc !== $v) {
-			$this->monprc = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONPRC;
-		}
-
+    if ($this->monprc !== $v) {
+        $this->monprc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONPRC;
+      }
+  
 	} 
 	
 	public function setMoncom($v)
 	{
 
-		if ($this->moncom !== $v) {
-			$this->moncom = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONCOM;
-		}
-
+    if ($this->moncom !== $v) {
+        $this->moncom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONCOM;
+      }
+  
 	} 
 	
 	public function setMoncau($v)
 	{
 
-		if ($this->moncau !== $v) {
-			$this->moncau = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONCAU;
-		}
-
+    if ($this->moncau !== $v) {
+        $this->moncau = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONCAU;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setMontra($v)
 	{
 
-		if ($this->montra !== $v) {
-			$this->montra = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONTRA;
-		}
-
+    if ($this->montra !== $v) {
+        $this->montra = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONTRA;
+      }
+  
 	} 
 	
 	public function setMontrn($v)
 	{
 
-		if ($this->montrn !== $v) {
-			$this->montrn = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONTRN;
-		}
-
+    if ($this->montrn !== $v) {
+        $this->montrn = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONTRN;
+      }
+  
 	} 
 	
 	public function setMonadi($v)
 	{
 
-		if ($this->monadi !== $v) {
-			$this->monadi = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONADI;
-		}
-
+    if ($this->monadi !== $v) {
+        $this->monadi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONADI;
+      }
+  
 	} 
 	
 	public function setMondim($v)
 	{
 
-		if ($this->mondim !== $v) {
-			$this->mondim = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONDIM;
-		}
-
+    if ($this->mondim !== $v) {
+        $this->mondim = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONDIM;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setMondis($v)
 	{
 
-		if ($this->mondis !== $v) {
-			$this->mondis = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::MONDIS;
-		}
-
+    if ($this->mondis !== $v) {
+        $this->mondis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::MONDIS;
+      }
+  
 	} 
 	
 	public function setDifere($v)
 	{
 
-		if ($this->difere !== $v) {
-			$this->difere = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::DIFERE;
-		}
-
+    if ($this->difere !== $v) {
+        $this->difere = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CpasiiniTempPeer::DIFERE;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = CpasiiniTempPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpasiiniTempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpasiiniTempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpre = $rs->getString($startcol + 0);
+      $this->codpre = $rs->getString($startcol + 0);
 
-			$this->nompre = $rs->getString($startcol + 1);
+      $this->nompre = $rs->getString($startcol + 1);
 
-			$this->perpre = $rs->getString($startcol + 2);
+      $this->perpre = $rs->getString($startcol + 2);
 
-			$this->anopre = $rs->getString($startcol + 3);
+      $this->anopre = $rs->getString($startcol + 3);
 
-			$this->monasi = $rs->getFloat($startcol + 4);
+      $this->monasi = $rs->getFloat($startcol + 4);
 
-			$this->monprc = $rs->getFloat($startcol + 5);
+      $this->monprc = $rs->getFloat($startcol + 5);
 
-			$this->moncom = $rs->getFloat($startcol + 6);
+      $this->moncom = $rs->getFloat($startcol + 6);
 
-			$this->moncau = $rs->getFloat($startcol + 7);
+      $this->moncau = $rs->getFloat($startcol + 7);
 
-			$this->monpag = $rs->getFloat($startcol + 8);
+      $this->monpag = $rs->getFloat($startcol + 8);
 
-			$this->montra = $rs->getFloat($startcol + 9);
+      $this->montra = $rs->getFloat($startcol + 9);
 
-			$this->montrn = $rs->getFloat($startcol + 10);
+      $this->montrn = $rs->getFloat($startcol + 10);
 
-			$this->monadi = $rs->getFloat($startcol + 11);
+      $this->monadi = $rs->getFloat($startcol + 11);
 
-			$this->mondim = $rs->getFloat($startcol + 12);
+      $this->mondim = $rs->getFloat($startcol + 12);
 
-			$this->monaju = $rs->getFloat($startcol + 13);
+      $this->monaju = $rs->getFloat($startcol + 13);
 
-			$this->mondis = $rs->getFloat($startcol + 14);
+      $this->mondis = $rs->getFloat($startcol + 14);
 
-			$this->difere = $rs->getFloat($startcol + 15);
+      $this->difere = $rs->getFloat($startcol + 15);
 
-			$this->status = $rs->getString($startcol + 16);
+      $this->status = $rs->getString($startcol + 16);
 
-			$this->id = $rs->getInt($startcol + 17);
+      $this->id = $rs->getInt($startcol + 17);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 18; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating CpasiiniTemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 18; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating CpasiiniTemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

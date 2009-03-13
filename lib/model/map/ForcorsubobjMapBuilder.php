@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class ForcorsubobjMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.ForcorsubobjMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.ForcorsubobjMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('forcorsubobj');
 		$tMap->setPhpName('Forcorsubobj');
 
@@ -34,9 +34,9 @@ class ForcorsubobjMapBuilder {
 
 		$tMap->addColumn('CODEQU', 'Codequ', 'string', CreoleTypes::VARCHAR, true, 2);
 
-		$tMap->addColumn('CORSUBOBJ', 'Corsubobj', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CORSUBOBJ', 'Corsubobj', 'double', CreoleTypes::NUMERIC, false, 3);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

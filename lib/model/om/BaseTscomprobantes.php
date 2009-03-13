@@ -41,146 +41,175 @@ abstract class BaseTscomprobantes extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getTipo()
-	{
+  
+  public function getTipo()
+  {
 
-		return $this->tipo; 		
-	}
-	
-	public function getCedrif()
-	{
+    return trim($this->tipo);
 
-		return $this->cedrif; 		
-	}
-	
-	public function getAno()
-	{
+  }
+  
+  public function getCedrif()
+  {
 
-		return $this->ano; 		
-	}
-	
-	public function getMes()
-	{
+    return trim($this->cedrif);
 
-		return $this->mes; 		
-	}
-	
-	public function getComprobante()
-	{
+  }
+  
+  public function getAno()
+  {
 
-		return $this->comprobante; 		
-	}
-	
-	public function getNumord()
-	{
+    return trim($this->ano);
 
-		return $this->numord; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMes()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->mes);
+
+  }
+  
+  public function getComprobante()
+  {
+
+    return trim($this->comprobante);
+
+  }
+  
+  public function getNumord()
+  {
+
+    return trim($this->numord);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = TscomprobantesPeer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = TscomprobantesPeer::TIPO;
+      }
+  
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = TscomprobantesPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = TscomprobantesPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setAno($v)
 	{
 
-		if ($this->ano !== $v) {
-			$this->ano = $v;
-			$this->modifiedColumns[] = TscomprobantesPeer::ANO;
-		}
-
+    if ($this->ano !== $v) {
+        $this->ano = $v;
+        $this->modifiedColumns[] = TscomprobantesPeer::ANO;
+      }
+  
 	} 
 	
 	public function setMes($v)
 	{
 
-		if ($this->mes !== $v) {
-			$this->mes = $v;
-			$this->modifiedColumns[] = TscomprobantesPeer::MES;
-		}
-
+    if ($this->mes !== $v) {
+        $this->mes = $v;
+        $this->modifiedColumns[] = TscomprobantesPeer::MES;
+      }
+  
 	} 
 	
 	public function setComprobante($v)
 	{
 
-		if ($this->comprobante !== $v) {
-			$this->comprobante = $v;
-			$this->modifiedColumns[] = TscomprobantesPeer::COMPROBANTE;
-		}
-
+    if ($this->comprobante !== $v) {
+        $this->comprobante = $v;
+        $this->modifiedColumns[] = TscomprobantesPeer::COMPROBANTE;
+      }
+  
 	} 
 	
 	public function setNumord($v)
 	{
 
-		if ($this->numord !== $v) {
-			$this->numord = $v;
-			$this->modifiedColumns[] = TscomprobantesPeer::NUMORD;
-		}
-
+    if ($this->numord !== $v) {
+        $this->numord = $v;
+        $this->modifiedColumns[] = TscomprobantesPeer::NUMORD;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TscomprobantesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TscomprobantesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->tipo = $rs->getString($startcol + 0);
+      $this->tipo = $rs->getString($startcol + 0);
 
-			$this->cedrif = $rs->getString($startcol + 1);
+      $this->cedrif = $rs->getString($startcol + 1);
 
-			$this->ano = $rs->getString($startcol + 2);
+      $this->ano = $rs->getString($startcol + 2);
 
-			$this->mes = $rs->getString($startcol + 3);
+      $this->mes = $rs->getString($startcol + 3);
 
-			$this->comprobante = $rs->getString($startcol + 4);
+      $this->comprobante = $rs->getString($startcol + 4);
 
-			$this->numord = $rs->getString($startcol + 5);
+      $this->numord = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tscomprobantes object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tscomprobantes object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseTscomprobantes extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TscomprobantesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TscomprobantesPeer::doUpdate($this, $con);

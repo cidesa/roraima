@@ -29,92 +29,118 @@ abstract class BaseCbarras extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodigv()
-	{
+  
+  public function getCodigv()
+  {
 
-		return $this->codigv; 		
-	}
-	
-	public function getCodbar()
-	{
+    return trim($this->codigv);
 
-		return $this->codbar; 		
-	}
-	
-	public function getDescri()
-	{
+  }
+  
+  public function getCodbar()
+  {
 
-		return $this->descri; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codbar);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDescri()
+  {
+
+    return trim($this->descri);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodigv($v)
 	{
 
-		if ($this->codigv !== $v) {
-			$this->codigv = $v;
-			$this->modifiedColumns[] = CbarrasPeer::CODIGV;
-		}
-
+    if ($this->codigv !== $v) {
+        $this->codigv = $v;
+        $this->modifiedColumns[] = CbarrasPeer::CODIGV;
+      }
+  
 	} 
 	
 	public function setCodbar($v)
 	{
 
-		if ($this->codbar !== $v) {
-			$this->codbar = $v;
-			$this->modifiedColumns[] = CbarrasPeer::CODBAR;
-		}
-
+    if ($this->codbar !== $v) {
+        $this->codbar = $v;
+        $this->modifiedColumns[] = CbarrasPeer::CODBAR;
+      }
+  
 	} 
 	
 	public function setDescri($v)
 	{
 
-		if ($this->descri !== $v) {
-			$this->descri = $v;
-			$this->modifiedColumns[] = CbarrasPeer::DESCRI;
-		}
-
+    if ($this->descri !== $v) {
+        $this->descri = $v;
+        $this->modifiedColumns[] = CbarrasPeer::DESCRI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CbarrasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CbarrasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codigv = $rs->getString($startcol + 0);
+      $this->codigv = $rs->getString($startcol + 0);
 
-			$this->codbar = $rs->getString($startcol + 1);
+      $this->codbar = $rs->getString($startcol + 1);
 
-			$this->descri = $rs->getString($startcol + 2);
+      $this->descri = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cbarras object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cbarras object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

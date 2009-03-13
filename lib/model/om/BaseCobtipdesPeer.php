@@ -230,6 +230,7 @@ abstract class BaseCobtipdesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobtipdesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

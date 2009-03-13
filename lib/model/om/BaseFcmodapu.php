@@ -65,281 +65,315 @@ abstract class BaseFcmodapu extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefmod()
-	{
+  
+  public function getRefmod()
+  {
 
-		return $this->refmod; 		
-	}
-	
-	public function getNrocon()
-	{
+    return trim($this->refmod);
 
-		return $this->nrocon; 		
-	}
-	
-	public function getFecmod($format = 'Y-m-d')
-	{
+  }
+  
+  public function getNrocon()
+  {
 
-		if ($this->fecmod === null || $this->fecmod === '') {
-			return null;
-		} elseif (!is_int($this->fecmod)) {
-						$ts = strtotime($this->fecmod);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecmod] as date/time value: " . var_export($this->fecmod, true));
-			}
-		} else {
-			$ts = $this->fecmod;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->nrocon);
 
-	
-	public function getTipapu()
-	{
+  }
+  
+  public function getFecmod($format = 'Y-m-d')
+  {
 
-		return $this->tipapu; 		
-	}
-	
-	public function getDesapu()
-	{
+    if ($this->fecmod === null || $this->fecmod === '') {
+      return null;
+    } elseif (!is_int($this->fecmod)) {
+            $ts = adodb_strtotime($this->fecmod);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecmod] as date/time value: " . var_export($this->fecmod, true));
+      }
+    } else {
+      $ts = $this->fecmod;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desapu; 		
-	}
-	
-	public function getMonapu()
-	{
+  
+  public function getTipapu()
+  {
 
-		return number_format($this->monapu,2,',','.');
-		
-	}
-	
-	public function getMonimp()
-	{
+    return trim($this->tipapu);
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getTipapuant()
-	{
+  }
+  
+  public function getDesapu()
+  {
 
-		return $this->tipapuant; 		
-	}
-	
-	public function getDesapuant()
-	{
+    return trim($this->desapu);
 
-		return $this->desapuant; 		
-	}
-	
-	public function getMonapuant()
-	{
+  }
+  
+  public function getMonapu($val=false)
+  {
 
-		return number_format($this->monapuant,2,',','.');
-		
-	}
-	
-	public function getMonimpant()
-	{
+    if($val) return number_format($this->monapu,2,',','.');
+    else return $this->monapu;
 
-		return number_format($this->monimpant,2,',','.');
-		
-	}
-	
-	public function getFunrec()
-	{
+  }
+  
+  public function getMonimp($val=false)
+  {
 
-		return $this->funrec; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTipapuant()
+  {
+
+    return trim($this->tipapuant);
+
+  }
+  
+  public function getDesapuant()
+  {
+
+    return trim($this->desapuant);
+
+  }
+  
+  public function getMonapuant($val=false)
+  {
+
+    if($val) return number_format($this->monapuant,2,',','.');
+    else return $this->monapuant;
+
+  }
+  
+  public function getMonimpant($val=false)
+  {
+
+    if($val) return number_format($this->monimpant,2,',','.');
+    else return $this->monimpant;
+
+  }
+  
+  public function getFunrec()
+  {
+
+    return trim($this->funrec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefmod($v)
 	{
 
-		if ($this->refmod !== $v) {
-			$this->refmod = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::REFMOD;
-		}
-
+    if ($this->refmod !== $v) {
+        $this->refmod = $v;
+        $this->modifiedColumns[] = FcmodapuPeer::REFMOD;
+      }
+  
 	} 
 	
 	public function setNrocon($v)
 	{
 
-		if ($this->nrocon !== $v) {
-			$this->nrocon = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::NROCON;
-		}
-
+    if ($this->nrocon !== $v) {
+        $this->nrocon = $v;
+        $this->modifiedColumns[] = FcmodapuPeer::NROCON;
+      }
+  
 	} 
 	
 	public function setFecmod($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecmod] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecmod !== $ts) {
-			$this->fecmod = $ts;
-			$this->modifiedColumns[] = FcmodapuPeer::FECMOD;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecmod] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecmod !== $ts) {
+      $this->fecmod = $ts;
+      $this->modifiedColumns[] = FcmodapuPeer::FECMOD;
+    }
 
 	} 
 	
 	public function setTipapu($v)
 	{
 
-		if ($this->tipapu !== $v) {
-			$this->tipapu = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::TIPAPU;
-		}
-
+    if ($this->tipapu !== $v) {
+        $this->tipapu = $v;
+        $this->modifiedColumns[] = FcmodapuPeer::TIPAPU;
+      }
+  
 	} 
 	
 	public function setDesapu($v)
 	{
 
-		if ($this->desapu !== $v) {
-			$this->desapu = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::DESAPU;
-		}
-
+    if ($this->desapu !== $v) {
+        $this->desapu = $v;
+        $this->modifiedColumns[] = FcmodapuPeer::DESAPU;
+      }
+  
 	} 
 	
 	public function setMonapu($v)
 	{
 
-		if ($this->monapu !== $v) {
-			$this->monapu = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::MONAPU;
-		}
-
+    if ($this->monapu !== $v) {
+        $this->monapu = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodapuPeer::MONAPU;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodapuPeer::MONIMP;
+      }
+  
 	} 
 	
 	public function setTipapuant($v)
 	{
 
-		if ($this->tipapuant !== $v) {
-			$this->tipapuant = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::TIPAPUANT;
-		}
-
+    if ($this->tipapuant !== $v) {
+        $this->tipapuant = $v;
+        $this->modifiedColumns[] = FcmodapuPeer::TIPAPUANT;
+      }
+  
 	} 
 	
 	public function setDesapuant($v)
 	{
 
-		if ($this->desapuant !== $v) {
-			$this->desapuant = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::DESAPUANT;
-		}
-
+    if ($this->desapuant !== $v) {
+        $this->desapuant = $v;
+        $this->modifiedColumns[] = FcmodapuPeer::DESAPUANT;
+      }
+  
 	} 
 	
 	public function setMonapuant($v)
 	{
 
-		if ($this->monapuant !== $v) {
-			$this->monapuant = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::MONAPUANT;
-		}
-
+    if ($this->monapuant !== $v) {
+        $this->monapuant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodapuPeer::MONAPUANT;
+      }
+  
 	} 
 	
 	public function setMonimpant($v)
 	{
 
-		if ($this->monimpant !== $v) {
-			$this->monimpant = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::MONIMPANT;
-		}
-
+    if ($this->monimpant !== $v) {
+        $this->monimpant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcmodapuPeer::MONIMPANT;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FcmodapuPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcmodapuPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcmodapuPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refmod = $rs->getString($startcol + 0);
+      $this->refmod = $rs->getString($startcol + 0);
 
-			$this->nrocon = $rs->getString($startcol + 1);
+      $this->nrocon = $rs->getString($startcol + 1);
 
-			$this->fecmod = $rs->getDate($startcol + 2, null);
+      $this->fecmod = $rs->getDate($startcol + 2, null);
 
-			$this->tipapu = $rs->getString($startcol + 3);
+      $this->tipapu = $rs->getString($startcol + 3);
 
-			$this->desapu = $rs->getString($startcol + 4);
+      $this->desapu = $rs->getString($startcol + 4);
 
-			$this->monapu = $rs->getFloat($startcol + 5);
+      $this->monapu = $rs->getFloat($startcol + 5);
 
-			$this->monimp = $rs->getFloat($startcol + 6);
+      $this->monimp = $rs->getFloat($startcol + 6);
 
-			$this->tipapuant = $rs->getString($startcol + 7);
+      $this->tipapuant = $rs->getString($startcol + 7);
 
-			$this->desapuant = $rs->getString($startcol + 8);
+      $this->desapuant = $rs->getString($startcol + 8);
 
-			$this->monapuant = $rs->getFloat($startcol + 9);
+      $this->monapuant = $rs->getFloat($startcol + 9);
 
-			$this->monimpant = $rs->getFloat($startcol + 10);
+      $this->monimpant = $rs->getFloat($startcol + 10);
 
-			$this->funrec = $rs->getString($startcol + 11);
+      $this->funrec = $rs->getString($startcol + 11);
 
-			$this->id = $rs->getInt($startcol + 12);
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 13; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcmodapu object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcmodapu object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -396,6 +430,7 @@ abstract class BaseFcmodapu extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcmodapuPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcmodapuPeer::doUpdate($this, $con);

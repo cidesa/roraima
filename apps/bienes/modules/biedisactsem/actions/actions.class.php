@@ -36,6 +36,7 @@ class biedisactsemActions extends autobiedisactsemActions
       $this->saveBndissem($this->bndissem);
 
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {

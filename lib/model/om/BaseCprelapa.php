@@ -65,302 +65,335 @@ abstract class BaseCprelapa extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefrel()
-	{
+  
+  public function getRefrel()
+  {
 
-		return $this->refrel; 		
-	}
-	
-	public function getTiprel()
-	{
+    return trim($this->refrel);
 
-		return $this->tiprel; 		
-	}
-	
-	public function getFecrel($format = 'Y-m-d')
-	{
+  }
+  
+  public function getTiprel()
+  {
 
-		if ($this->fecrel === null || $this->fecrel === '') {
-			return null;
-		} elseif (!is_int($this->fecrel)) {
-						$ts = strtotime($this->fecrel);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrel] as date/time value: " . var_export($this->fecrel, true));
-			}
-		} else {
-			$ts = $this->fecrel;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->tiprel);
 
-	
-	public function getRefapa()
-	{
+  }
+  
+  public function getFecrel($format = 'Y-m-d')
+  {
 
-		return $this->refapa; 		
-	}
-	
-	public function getDesrel()
-	{
+    if ($this->fecrel === null || $this->fecrel === '') {
+      return null;
+    } elseif (!is_int($this->fecrel)) {
+            $ts = adodb_strtotime($this->fecrel);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrel] as date/time value: " . var_export($this->fecrel, true));
+      }
+    } else {
+      $ts = $this->fecrel;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desrel; 		
-	}
-	
-	public function getDesanu()
-	{
+  
+  public function getRefapa()
+  {
 
-		return $this->desanu; 		
-	}
-	
-	public function getMonrel()
-	{
+    return trim($this->refapa);
 
-		return number_format($this->monrel,2,',','.');
-		
-	}
-	
-	public function getSalaju()
-	{
+  }
+  
+  public function getDesrel()
+  {
 
-		return number_format($this->salaju,2,',','.');
-		
-	}
-	
-	public function getStarel()
-	{
+    return trim($this->desrel);
 
-		return $this->starel; 		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDesanu()
+  {
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->desanu);
 
-	
-	public function getCedrif()
-	{
+  }
+  
+  public function getMonrel($val=false)
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getNumcom()
-	{
+    if($val) return number_format($this->monrel,2,',','.');
+    else return $this->monrel;
 
-		return $this->numcom; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getSalaju($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->salaju,2,',','.');
+    else return $this->salaju;
+
+  }
+  
+  public function getStarel()
+  {
+
+    return trim($this->starel);
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCedrif()
+  {
+
+    return trim($this->cedrif);
+
+  }
+  
+  public function getNumcom()
+  {
+
+    return trim($this->numcom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefrel($v)
 	{
 
-		if ($this->refrel !== $v) {
-			$this->refrel = $v;
-			$this->modifiedColumns[] = CprelapaPeer::REFREL;
-		}
-
+    if ($this->refrel !== $v) {
+        $this->refrel = $v;
+        $this->modifiedColumns[] = CprelapaPeer::REFREL;
+      }
+  
 	} 
 	
 	public function setTiprel($v)
 	{
 
-		if ($this->tiprel !== $v) {
-			$this->tiprel = $v;
-			$this->modifiedColumns[] = CprelapaPeer::TIPREL;
-		}
-
+    if ($this->tiprel !== $v) {
+        $this->tiprel = $v;
+        $this->modifiedColumns[] = CprelapaPeer::TIPREL;
+      }
+  
 	} 
 	
 	public function setFecrel($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrel] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrel !== $ts) {
-			$this->fecrel = $ts;
-			$this->modifiedColumns[] = CprelapaPeer::FECREL;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrel] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrel !== $ts) {
+      $this->fecrel = $ts;
+      $this->modifiedColumns[] = CprelapaPeer::FECREL;
+    }
 
 	} 
 	
 	public function setRefapa($v)
 	{
 
-		if ($this->refapa !== $v) {
-			$this->refapa = $v;
-			$this->modifiedColumns[] = CprelapaPeer::REFAPA;
-		}
-
+    if ($this->refapa !== $v) {
+        $this->refapa = $v;
+        $this->modifiedColumns[] = CprelapaPeer::REFAPA;
+      }
+  
 	} 
 	
 	public function setDesrel($v)
 	{
 
-		if ($this->desrel !== $v) {
-			$this->desrel = $v;
-			$this->modifiedColumns[] = CprelapaPeer::DESREL;
-		}
-
+    if ($this->desrel !== $v) {
+        $this->desrel = $v;
+        $this->modifiedColumns[] = CprelapaPeer::DESREL;
+      }
+  
 	} 
 	
 	public function setDesanu($v)
 	{
 
-		if ($this->desanu !== $v) {
-			$this->desanu = $v;
-			$this->modifiedColumns[] = CprelapaPeer::DESANU;
-		}
-
+    if ($this->desanu !== $v) {
+        $this->desanu = $v;
+        $this->modifiedColumns[] = CprelapaPeer::DESANU;
+      }
+  
 	} 
 	
 	public function setMonrel($v)
 	{
 
-		if ($this->monrel !== $v) {
-			$this->monrel = $v;
-			$this->modifiedColumns[] = CprelapaPeer::MONREL;
-		}
-
+    if ($this->monrel !== $v) {
+        $this->monrel = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CprelapaPeer::MONREL;
+      }
+  
 	} 
 	
 	public function setSalaju($v)
 	{
 
-		if ($this->salaju !== $v) {
-			$this->salaju = $v;
-			$this->modifiedColumns[] = CprelapaPeer::SALAJU;
-		}
-
+    if ($this->salaju !== $v) {
+        $this->salaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CprelapaPeer::SALAJU;
+      }
+  
 	} 
 	
 	public function setStarel($v)
 	{
 
-		if ($this->starel !== $v) {
-			$this->starel = $v;
-			$this->modifiedColumns[] = CprelapaPeer::STAREL;
-		}
-
+    if ($this->starel !== $v) {
+        $this->starel = $v;
+        $this->modifiedColumns[] = CprelapaPeer::STAREL;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = CprelapaPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = CprelapaPeer::FECANU;
+    }
 
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = CprelapaPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = CprelapaPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setNumcom($v)
 	{
 
-		if ($this->numcom !== $v) {
-			$this->numcom = $v;
-			$this->modifiedColumns[] = CprelapaPeer::NUMCOM;
-		}
-
+    if ($this->numcom !== $v) {
+        $this->numcom = $v;
+        $this->modifiedColumns[] = CprelapaPeer::NUMCOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CprelapaPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CprelapaPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refrel = $rs->getString($startcol + 0);
+      $this->refrel = $rs->getString($startcol + 0);
 
-			$this->tiprel = $rs->getString($startcol + 1);
+      $this->tiprel = $rs->getString($startcol + 1);
 
-			$this->fecrel = $rs->getDate($startcol + 2, null);
+      $this->fecrel = $rs->getDate($startcol + 2, null);
 
-			$this->refapa = $rs->getString($startcol + 3);
+      $this->refapa = $rs->getString($startcol + 3);
 
-			$this->desrel = $rs->getString($startcol + 4);
+      $this->desrel = $rs->getString($startcol + 4);
 
-			$this->desanu = $rs->getString($startcol + 5);
+      $this->desanu = $rs->getString($startcol + 5);
 
-			$this->monrel = $rs->getFloat($startcol + 6);
+      $this->monrel = $rs->getFloat($startcol + 6);
 
-			$this->salaju = $rs->getFloat($startcol + 7);
+      $this->salaju = $rs->getFloat($startcol + 7);
 
-			$this->starel = $rs->getString($startcol + 8);
+      $this->starel = $rs->getString($startcol + 8);
 
-			$this->fecanu = $rs->getDate($startcol + 9, null);
+      $this->fecanu = $rs->getDate($startcol + 9, null);
 
-			$this->cedrif = $rs->getString($startcol + 10);
+      $this->cedrif = $rs->getString($startcol + 10);
 
-			$this->numcom = $rs->getString($startcol + 11);
+      $this->numcom = $rs->getString($startcol + 11);
 
-			$this->id = $rs->getInt($startcol + 12);
+      $this->id = $rs->getInt($startcol + 12);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 13; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cprelapa object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 13; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cprelapa object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -417,6 +450,7 @@ abstract class BaseCprelapa extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CprelapaPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CprelapaPeer::doUpdate($this, $con);

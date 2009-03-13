@@ -25,6 +25,10 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 
 
 	
+	protected $escheque;
+
+
+	
 	protected $id;
 
 	
@@ -33,110 +37,156 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtip()
-	{
+  
+  public function getCodtip()
+  {
 
-		return $this->codtip; 		
-	}
-	
-	public function getDestip()
-	{
+    return trim($this->codtip);
 
-		return $this->destip; 		
-	}
-	
-	public function getDebcre()
-	{
+  }
+  
+  public function getDestip()
+  {
 
-		return $this->debcre; 		
-	}
-	
-	public function getOrden()
-	{
+    return trim($this->destip);
 
-		return $this->orden; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDebcre()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->debcre);
+
+  }
+  
+  public function getOrden()
+  {
+
+    return trim($this->orden);
+
+  }
+  
+  public function getEscheque()
+  {
+
+    return $this->escheque;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = TstipmovPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = TstipmovPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setDestip($v)
 	{
 
-		if ($this->destip !== $v) {
-			$this->destip = $v;
-			$this->modifiedColumns[] = TstipmovPeer::DESTIP;
-		}
-
+    if ($this->destip !== $v) {
+        $this->destip = $v;
+        $this->modifiedColumns[] = TstipmovPeer::DESTIP;
+      }
+  
 	} 
 	
 	public function setDebcre($v)
 	{
 
-		if ($this->debcre !== $v) {
-			$this->debcre = $v;
-			$this->modifiedColumns[] = TstipmovPeer::DEBCRE;
-		}
-
+    if ($this->debcre !== $v) {
+        $this->debcre = $v;
+        $this->modifiedColumns[] = TstipmovPeer::DEBCRE;
+      }
+  
 	} 
 	
 	public function setOrden($v)
 	{
 
-		if ($this->orden !== $v) {
-			$this->orden = $v;
-			$this->modifiedColumns[] = TstipmovPeer::ORDEN;
-		}
+    if ($this->orden !== $v) {
+        $this->orden = $v;
+        $this->modifiedColumns[] = TstipmovPeer::ORDEN;
+      }
+  
+	} 
+	
+	public function setEscheque($v)
+	{
 
+    if ($this->escheque !== $v) {
+        $this->escheque = $v;
+        $this->modifiedColumns[] = TstipmovPeer::ESCHEQUE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TstipmovPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TstipmovPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtip = $rs->getString($startcol + 0);
+      $this->codtip = $rs->getString($startcol + 0);
 
-			$this->destip = $rs->getString($startcol + 1);
+      $this->destip = $rs->getString($startcol + 1);
 
-			$this->debcre = $rs->getString($startcol + 2);
+      $this->debcre = $rs->getString($startcol + 2);
 
-			$this->orden = $rs->getString($startcol + 3);
+      $this->orden = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->escheque = $rs->getBoolean($startcol + 4);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tstipmov object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tstipmov object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +243,7 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TstipmovPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TstipmovPeer::doUpdate($this, $con);
@@ -271,6 +322,9 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 				return $this->getOrden();
 				break;
 			case 4:
+				return $this->getEscheque();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -287,7 +341,8 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 			$keys[1] => $this->getDestip(),
 			$keys[2] => $this->getDebcre(),
 			$keys[3] => $this->getOrden(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getEscheque(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -316,6 +371,9 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 				$this->setOrden($value);
 				break;
 			case 4:
+				$this->setEscheque($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -329,7 +387,8 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setDestip($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setDebcre($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setOrden($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setEscheque($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -341,6 +400,7 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(TstipmovPeer::DESTIP)) $criteria->add(TstipmovPeer::DESTIP, $this->destip);
 		if ($this->isColumnModified(TstipmovPeer::DEBCRE)) $criteria->add(TstipmovPeer::DEBCRE, $this->debcre);
 		if ($this->isColumnModified(TstipmovPeer::ORDEN)) $criteria->add(TstipmovPeer::ORDEN, $this->orden);
+		if ($this->isColumnModified(TstipmovPeer::ESCHEQUE)) $criteria->add(TstipmovPeer::ESCHEQUE, $this->escheque);
 		if ($this->isColumnModified(TstipmovPeer::ID)) $criteria->add(TstipmovPeer::ID, $this->id);
 
 		return $criteria;
@@ -379,6 +439,8 @@ abstract class BaseTstipmov extends BaseObject  implements Persistent {
 		$copyObj->setDebcre($this->debcre);
 
 		$copyObj->setOrden($this->orden);
+
+		$copyObj->setEscheque($this->escheque);
 
 
 		$copyObj->setNew(true);

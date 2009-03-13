@@ -9,4 +9,8 @@
  */ 
 class FordefequPeer extends BaseFordefequPeer
 {
+  public static function getObjetivo($codigo)
+  {
+  	return Herramientas::getX('CODEQU','Fordefequ','Desobj',$codigo);
+  }
 }

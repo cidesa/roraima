@@ -205,6 +205,7 @@ abstract class BaseCasolrazPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CasolrazPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

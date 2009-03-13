@@ -270,6 +270,7 @@ abstract class BaseCaordconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaordconPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

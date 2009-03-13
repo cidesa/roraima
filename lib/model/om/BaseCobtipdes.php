@@ -45,166 +45,196 @@ abstract class BaseCobtipdes extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCoddes()
-	{
+  
+  public function getCoddes()
+  {
 
-		return $this->coddes; 		
-	}
-	
-	public function getDesdes()
-	{
+    return trim($this->coddes);
 
-		return $this->desdes; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getDesdes()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getTipdes()
-	{
+    return trim($this->desdes);
 
-		return $this->tipdes; 		
-	}
-	
-	public function getValdes()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return number_format($this->valdes,2,',','.');
-		
-	}
-	
-	public function getDiades()
-	{
+    return trim($this->codcon);
 
-		return number_format($this->diades,2,',','.');
-		
-	}
-	
-	public function getEstret()
-	{
+  }
+  
+  public function getTipdes()
+  {
 
-		return $this->estret; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->tipdes);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getValdes($val=false)
+  {
+
+    if($val) return number_format($this->valdes,2,',','.');
+    else return $this->valdes;
+
+  }
+  
+  public function getDiades($val=false)
+  {
+
+    if($val) return number_format($this->diades,2,',','.');
+    else return $this->diades;
+
+  }
+  
+  public function getEstret()
+  {
+
+    return trim($this->estret);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCoddes($v)
 	{
 
-		if ($this->coddes !== $v) {
-			$this->coddes = $v;
-			$this->modifiedColumns[] = CobtipdesPeer::CODDES;
-		}
-
+    if ($this->coddes !== $v) {
+        $this->coddes = $v;
+        $this->modifiedColumns[] = CobtipdesPeer::CODDES;
+      }
+  
 	} 
 	
 	public function setDesdes($v)
 	{
 
-		if ($this->desdes !== $v) {
-			$this->desdes = $v;
-			$this->modifiedColumns[] = CobtipdesPeer::DESDES;
-		}
-
+    if ($this->desdes !== $v) {
+        $this->desdes = $v;
+        $this->modifiedColumns[] = CobtipdesPeer::DESDES;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = CobtipdesPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = CobtipdesPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setTipdes($v)
 	{
 
-		if ($this->tipdes !== $v) {
-			$this->tipdes = $v;
-			$this->modifiedColumns[] = CobtipdesPeer::TIPDES;
-		}
-
+    if ($this->tipdes !== $v) {
+        $this->tipdes = $v;
+        $this->modifiedColumns[] = CobtipdesPeer::TIPDES;
+      }
+  
 	} 
 	
 	public function setValdes($v)
 	{
 
-		if ($this->valdes !== $v) {
-			$this->valdes = $v;
-			$this->modifiedColumns[] = CobtipdesPeer::VALDES;
-		}
-
+    if ($this->valdes !== $v) {
+        $this->valdes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobtipdesPeer::VALDES;
+      }
+  
 	} 
 	
 	public function setDiades($v)
 	{
 
-		if ($this->diades !== $v) {
-			$this->diades = $v;
-			$this->modifiedColumns[] = CobtipdesPeer::DIADES;
-		}
-
+    if ($this->diades !== $v) {
+        $this->diades = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CobtipdesPeer::DIADES;
+      }
+  
 	} 
 	
 	public function setEstret($v)
 	{
 
-		if ($this->estret !== $v) {
-			$this->estret = $v;
-			$this->modifiedColumns[] = CobtipdesPeer::ESTRET;
-		}
-
+    if ($this->estret !== $v) {
+        $this->estret = $v;
+        $this->modifiedColumns[] = CobtipdesPeer::ESTRET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CobtipdesPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CobtipdesPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->coddes = $rs->getString($startcol + 0);
+      $this->coddes = $rs->getString($startcol + 0);
 
-			$this->desdes = $rs->getString($startcol + 1);
+      $this->desdes = $rs->getString($startcol + 1);
 
-			$this->codcon = $rs->getString($startcol + 2);
+      $this->codcon = $rs->getString($startcol + 2);
 
-			$this->tipdes = $rs->getString($startcol + 3);
+      $this->tipdes = $rs->getString($startcol + 3);
 
-			$this->valdes = $rs->getFloat($startcol + 4);
+      $this->valdes = $rs->getFloat($startcol + 4);
 
-			$this->diades = $rs->getFloat($startcol + 5);
+      $this->diades = $rs->getFloat($startcol + 5);
 
-			$this->estret = $rs->getString($startcol + 6);
+      $this->estret = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cobtipdes object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cobtipdes object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -261,6 +291,7 @@ abstract class BaseCobtipdes extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CobtipdesPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CobtipdesPeer::doUpdate($this, $con);

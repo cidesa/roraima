@@ -13,7 +13,7 @@ abstract class BaseNpnomespconnomtipPeer {
 	const CLASS_DEFAULT = 'lib.model.Npnomespconnomtip';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 5;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,9 @@ abstract class BaseNpnomespconnomtipPeer {
 	const CODCON = 'npnomespconnomtip.CODCON';
 
 	
+	const ESPECIAL = 'npnomespconnomtip.ESPECIAL';
+
+	
 	const ID = 'npnomespconnomtip.ID';
 
 	
@@ -37,18 +40,18 @@ abstract class BaseNpnomespconnomtipPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnomesp', 'Codnom', 'Codcon', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpnomespconnomtipPeer::CODNOMESP, NpnomespconnomtipPeer::CODNOM, NpnomespconnomtipPeer::CODCON, NpnomespconnomtipPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnomesp', 'codnom', 'codcon', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codnomesp', 'Codnom', 'Codcon', 'Especial', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpnomespconnomtipPeer::CODNOMESP, NpnomespconnomtipPeer::CODNOM, NpnomespconnomtipPeer::CODCON, NpnomespconnomtipPeer::ESPECIAL, NpnomespconnomtipPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnomesp', 'codnom', 'codcon', 'especial', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codnomesp' => 0, 'Codnom' => 1, 'Codcon' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (NpnomespconnomtipPeer::CODNOMESP => 0, NpnomespconnomtipPeer::CODNOM => 1, NpnomespconnomtipPeer::CODCON => 2, NpnomespconnomtipPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('codnomesp' => 0, 'codnom' => 1, 'codcon' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Codnomesp' => 0, 'Codnom' => 1, 'Codcon' => 2, 'Especial' => 3, 'Id' => 4, ),
+		BasePeer::TYPE_COLNAME => array (NpnomespconnomtipPeer::CODNOMESP => 0, NpnomespconnomtipPeer::CODNOM => 1, NpnomespconnomtipPeer::CODCON => 2, NpnomespconnomtipPeer::ESPECIAL => 3, NpnomespconnomtipPeer::ID => 4, ),
+		BasePeer::TYPE_FIELDNAME => array ('codnomesp' => 0, 'codnom' => 1, 'codcon' => 2, 'especial' => 3, 'id' => 4, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
 	);
 
 	
@@ -107,6 +110,8 @@ abstract class BaseNpnomespconnomtipPeer {
 		$criteria->addSelectColumn(NpnomespconnomtipPeer::CODNOM);
 
 		$criteria->addSelectColumn(NpnomespconnomtipPeer::CODCON);
+
+		$criteria->addSelectColumn(NpnomespconnomtipPeer::ESPECIAL);
 
 		$criteria->addSelectColumn(NpnomespconnomtipPeer::ID);
 
@@ -210,6 +215,7 @@ abstract class BaseNpnomespconnomtipPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpnomespconnomtipPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

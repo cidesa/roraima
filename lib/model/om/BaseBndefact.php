@@ -37,130 +37,158 @@ abstract class BaseBndefact extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getDesact()
-	{
+    return trim($this->codact);
 
-		return $this->desact; 		
-	}
-	
-	public function getCanact()
-	{
+  }
+  
+  public function getDesact()
+  {
 
-		return number_format($this->canact,2,',','.');
-		
-	}
-	
-	public function getStaact()
-	{
+    return trim($this->desact);
 
-		return $this->staact; 		
-	}
-	
-	public function getViduti()
-	{
+  }
+  
+  public function getCanact($val=false)
+  {
 
-		return number_format($this->viduti,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->canact,2,',','.');
+    else return $this->canact;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStaact()
+  {
+
+    return trim($this->staact);
+
+  }
+  
+  public function getViduti($val=false)
+  {
+
+    if($val) return number_format($this->viduti,2,',','.');
+    else return $this->viduti;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BndefactPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BndefactPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setDesact($v)
 	{
 
-		if ($this->desact !== $v) {
-			$this->desact = $v;
-			$this->modifiedColumns[] = BndefactPeer::DESACT;
-		}
-
+    if ($this->desact !== $v) {
+        $this->desact = $v;
+        $this->modifiedColumns[] = BndefactPeer::DESACT;
+      }
+  
 	} 
 	
 	public function setCanact($v)
 	{
 
-		if ($this->canact !== $v) {
-			$this->canact = $v;
-			$this->modifiedColumns[] = BndefactPeer::CANACT;
-		}
-
+    if ($this->canact !== $v) {
+        $this->canact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndefactPeer::CANACT;
+      }
+  
 	} 
 	
 	public function setStaact($v)
 	{
 
-		if ($this->staact !== $v) {
-			$this->staact = $v;
-			$this->modifiedColumns[] = BndefactPeer::STAACT;
-		}
-
+    if ($this->staact !== $v) {
+        $this->staact = $v;
+        $this->modifiedColumns[] = BndefactPeer::STAACT;
+      }
+  
 	} 
 	
 	public function setViduti($v)
 	{
 
-		if ($this->viduti !== $v) {
-			$this->viduti = $v;
-			$this->modifiedColumns[] = BndefactPeer::VIDUTI;
-		}
-
+    if ($this->viduti !== $v) {
+        $this->viduti = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndefactPeer::VIDUTI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndefactPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndefactPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->desact = $rs->getString($startcol + 1);
+      $this->desact = $rs->getString($startcol + 1);
 
-			$this->canact = $rs->getFloat($startcol + 2);
+      $this->canact = $rs->getFloat($startcol + 2);
 
-			$this->staact = $rs->getString($startcol + 3);
+      $this->staact = $rs->getString($startcol + 3);
 
-			$this->viduti = $rs->getFloat($startcol + 4);
+      $this->viduti = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bndefact object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bndefact object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +245,7 @@ abstract class BaseBndefact extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BndefactPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BndefactPeer::doUpdate($this, $con);

@@ -10,6 +10,44 @@
  */
 class oycdesobrActions extends autooycdesobrActions
 {
+  public  $coderror=-1;
+  public  $fechamay=-1;
+  public  $partid=-1;
+  public  $inspec=-1;
+
+  public function validateEdit()
+  {
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->ocregobr = $this->getOcregobrOrCreate();
+      try{ $this->updateOcregobrFromRequest();}
+      catch (Exception $ex){}
+      $this->configGrid($this->ocregobr->getCodobr());
+      $this->configGridIns($this->ocregobr->getCodobr());
+      $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+      $grid2 = Herramientas::CargarDatosGrid($this,$this->obj2);
+
+      if (Tesoreria::validarFechaMayorMenor($this->getRequestParameter('ocregobr[fecini]'),$this->getRequestParameter('ocregobr[fecfin]'),'>'))
+      {
+       $this->fechamay=431;
+       return false;
+      }
+
+      if (count($grid[0])==0)
+      {
+      	$this->partid=1005;
+      	return false;
+      }
+
+      if (count($grid2[0])==0)
+      {
+      	$this->inspec=1006;
+      	return false;
+      }
+      return true;
+    }else return true;
+   }
+
 	public function Cargarpais()
 	{
 		$tablas=array('ocpais');//areglo de los joins de las tablas
@@ -36,7 +74,7 @@ class oycdesobrActions extends autooycdesobrActions
 		$filtros_variales=array($codpais,$codestado);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('codmun','nommun');// arreglos donde me traigo el nombre y el codigo
 		return $municipio= Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
-		
+
 	}
 
 	public function Cargarparroquia($codpais,$codestado,$codmunicipio)
@@ -46,7 +84,7 @@ class oycdesobrActions extends autooycdesobrActions
 		$filtros_variales=array($codpais,$codestado,$codmunicipio);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('codpar','nompar');// arreglos donde me traigo el nombre y el codigo
 		return $parroquia= Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
-		
+
 	}
 	public function Cargarsector($codpais,$codestado,$codmunicipio,$codparroquia)
 	{
@@ -55,9 +93,9 @@ class oycdesobrActions extends autooycdesobrActions
 		$filtros_variales=array($codpais,$codestado,$codmunicipio,$codparroquia);//arreglo donde mando los parametros de la funcion
 		$campos_retornados=array('codsec','nomsec');// arreglos donde me traigo el nombre y el codigo
 		return $sector= Herramientas::Cargarcombo($tablas,$filtros_tablas,$filtros_variales,$campos_retornados);
-		
-	}		
-    
+
+	}
+
 	public function executeCombo()
 	{
 		if ($this->getRequestParameter('par')=='1')
@@ -81,221 +119,171 @@ class oycdesobrActions extends autooycdesobrActions
 			$this->tipo='S';
 		}
 	}
-       
-    public function configGrid()
-	{
-      $c = new Criteria();
-      $c->add(OcregobrPeer::CODOBR,$this->ocregobr->getCodobr());
-      $per = OcregobrPeer::doSelect($c);
-	  	 
-	  if(false){
-		//////////////////////
-		//GRID
-		
-		$filas=17;
-		$cabeza="";
-		$eliminar=true;
-		$titulos=array("Cod Partida","Descripción","Unidad","Cant","Cant.Contratada","Costo","Monto Presupuestario","Adicional");
-		$ancho="1100";
-		$alignf=array('center','left','center','left','right','right','right','right');
-		$alignt=array('center','left','center','left','right','right','right','right');
-		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
-		$catalogos=array('Cadefalm-sf_admin_edit_form-x1-x2','','Cadefubi-sf_admin_edit_form-x3-x4','','','','','');// por todas las columnas, si no tiene, se coloca vacio
-		$ajax=array('2-x2-x1','','3-x4-x3','','','','',''); //parametro-cajitamostrar-autocompletar
-		$tipos=array('t','t','m','m','m','m'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
-		$montos=array("5","6","7","8");
-		$totales=array("", "", "caregart_exitot", "");
-		$mascaraubicacion=$this->mascaraubicacion;
-		$html=array('type="text" size="5"','type="text" size="25" disabled=true','type="text" size="5"','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
-		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
-		$grabar=array("1","3","5","6","7","8");
-		$filatotal='';
-		 
-		
-		$this->obj=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
-		'ancho'=>$ancho, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
-		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 
-		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar, 'tabla' => 'Caartalm');
-		////////////////////// 
 
-	  }else {
-	    
-	    //$mascaraubicacion=$this->mascaraubicacion;
-	    // $i18n = $this->getContext()->getI18N();
-	    // Se crea el objeto principal de la clase OpcionesGrid
-	    $opciones = new OpcionesGrid();
-	    // Se configuran las opciones globales del Grid 
-        $opciones->setEliminar(true);
-        $opciones->setTabla('Ocregobr');
-        $opciones->setAnchoGrid(1150);
-        $opciones->setTitulo('');
-        $opciones->setHTMLTotalFilas(' ');
-        
-        // Se generan las columnas
-        $col1 = new Columna('Cod. Partida');
-        $col1->setTipo(Columna::TEXTO);
-        $col1->setEsGrabable(true);
-        $col1->setAlineacionObjeto(Columna::CENTRO);
-        $col1->setAlineacionContenido(Columna::CENTRO);
-        $col1->setNombreCampo('codobr');
-        $col1->setCatalogo('','','');
-        $col1->setAjax(2,2);
-        
-        $col2 = new Columna('Descripción');
-        $col2->setTipo(Columna::TEXTO);
-        $col2->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col2->setAlineacionContenido(Columna::IZQUIERDA);
-        $col2->setNombreCampo('Despre');
-        $col2->setHTML('type="text" size="25" disabled=true');
-        
-        $col3 = clone $col1;
-        $col3->setTitulo('Unidad');        
-        $col3->setNombreCampo('Despre');
-        //$col3->setCatalogo('','','');
-        $col3->setEsNumerico(true);
-        //$col3->setJScript('');
-        //$col3->setAjax(3,4);
-        
-        $col4 = clone $col3;        
-        $col4->setTitulo('Cantidad');
-        $col4->setNombreCampo('Despre');
-        $col4->setTipo(Columna::MONTO);
-        
-        $col5 = new Columna('Cant.Contratada');
-        $col5->setTipo(Columna::MONTO);
-        $col5->setEsGrabable(true);
-        $col5->setAlineacionContenido(Columna::IZQUIERDA);
-        $col5->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col5->setNombreCampo('Despre');
-        $col5->setEsNumerico(true);
-        //$col5->setHTML('type="text" size="10"');
-        $col5->setJScript('');
+   public function configGrid($codigo='')
+   {
+       $c = new Criteria();
+       $c->add(OcpreobrPeer::CODOBR,$codigo);
+       $reg = OcpreobrPeer::doSelect($c);
 
-        $col6 = clone $col5;
-        $col6->setTitulo('Costo');
-        $col6->setNombreCampo('Despre');
-        
-        $col7 = clone $col5;
-        $col7->setTitulo('Monto Presupuestado');
-        $col7->setNombreCampo('Despre');
-        //$col7->setEsTotal(true,'');
-        
-        $col8 = clone $col5;
-        $col8->setTitulo('Adicional');
-        $col8->setNombreCampo('Despre');
-        
-        // Se guardan las columnas en el objetos de opciones        
-        $opciones->addColumna($col1);
-        $opciones->addColumna($col2);
-        $opciones->addColumna($col3);
-        $opciones->addColumna($col4);
-        $opciones->addColumna($col5);
-        $opciones->addColumna($col6);
-        $opciones->addColumna($col7);
-        $opciones->addColumna($col8);
-	    // Ee genera el arreglo de opciones necesario para generar el grid
-        $this->obj = $opciones->getConfig($per); 
-	    
-	  }
-	  
-	}
+       $opciones = new OpcionesGrid();
+       $opciones->setEliminar(true);
+       $opciones->setTabla('Ocpreobr');
+       $opciones->setAncho(1200);
+       $opciones->setAnchoGrid(1000);
+       $opciones->setFilas(50);
+       $opciones->setTitulo('');
+       $opciones->setHTMLTotalFilas(' ');
 
-    public function configGrid2()
-	{
-      $c = new Criteria();
-      $c->add(OcregobrPeer::CODOBR,$this->ocregobr->getCodobr());
-      $per = OcregobrPeer::doSelect($c);
-	  	 
-	  if(false){
-		//////////////////////
-		//GRID
-		
-		$filas=5;
-		$cabeza="";
-		$eliminar=true;
-		$titulos=array("Cod Partida","Descripción","Unidad","Cant","Cant.Contratada","Costo","Monto Presupuestario","Adicional");
-		$ancho="1100";
-		$alignf=array('center','left','center','left','right','right','right','right');
-		$alignt=array('center','left','center','left','right','right','right','right');
-		$campos=array('Codalm','Nomalm','Codubi','Nomubi','Eximin','Eximax','Exiact','Ptoreo');
-		$catalogos=array('Cadefalm-sf_admin_edit_form-x1-x2','','Cadefubi-sf_admin_edit_form-x3-x4','','','','','');// por todas las columnas, si no tiene, se coloca vacio
-		$ajax=array('2-x2-x1','','3-x4-x3','','','','',''); //parametro-cajitamostrar-autocompletar
-		$tipos=array('t','t','m','m','m','m'); //texto, monto, fecha --solo de los campos a grabar, no de todo el grid
-		$montos=array("5","6","7","8");
-		$totales=array("", "", "caregart_exitot", "");
-		$mascaraubicacion=$this->mascaraubicacion;
-		$html=array('type="text" size="5"','type="text" size="25" disabled=true','type="text" size="5"','type="text" size="25" disabled=true','type="text" size="10"','type="text" size="10"','type="text" size="10"','type="text" size="10"');
-		$js=array('','','onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascaraubicacion.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"','','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"','onKeypress="entermonto(event,this.id)"');
-		$grabar=array("1","3","5","6","7","8");
-		$filatotal='';
-		 
-		
-		$this->obj2=array('cabeza'=>$cabeza, 'filas'=>$filas, 'eliminar'=>$eliminar, 'titulos'=>$titulos, 
-		'ancho'=>$ancho, 'alignf'=>$alignf, 'alignt'=>$alignt, 'campos'=>$campos, 'catalogos' => $catalogos, 
-		'ajax' => $ajax, 'tipos' => $tipos, 'montos'=>$montos, 'filatotal' => $filatotal, 'totales'=>$totales, 
-		'html'=>$html, 'js'=>$js, 'datos'=>$per, 'grabar'=>$grabar, 'tabla' => 'Caartalm');
-		////////////////////// 
+       $obj= array('codpar' => 1, 'despar' => 2, 'coduni' => 3, 'cosuni' => 6);
 
-	  }else {
-	    
-	    //$mascaraubicacion=$this->mascaraubicacion;
-	    // $i18n = $this->getContext()->getI18N();
-	    // Se crea el objeto principal de la clase OpcionesGrid
-	    $opciones = new OpcionesGrid();
-	    // Se configuran las opciones globales del Grid 
-        $opciones->setEliminar(true);
-        $opciones->setTabla('Ocregobr');
-        $opciones->setAnchoGrid(1150);
-        $opciones->setTitulo('');
-        $opciones->setHTMLTotalFilas(' ');
-        
-        // Se generan las columnas
-        $col1 = new Columna('Cédula');
-        $col1->setTipo(Columna::TEXTO);
-        $col1->setEsGrabable(true);
-        $col1->setAlineacionObjeto(Columna::CENTRO);
-        $col1->setAlineacionContenido(Columna::CENTRO);
-        $col1->setNombreCampo('codobr');
+       $col1 = new Columna('Cód. Partida');
+       $col1->setTipo(Columna::TEXTO);
+       $col1->setEsGrabable(true);
+       $col1->setAlineacionObjeto(Columna::CENTRO);
+       $col1->setAlineacionContenido(Columna::CENTRO);
+       $col1->setNombreCampo('codpar');
+       $col1->setJScript('onBlur="javascript:event.keyCode=13; ajaxpartida(event,this.id);"');
+       if ($codigo=='')
+       {
+       	$col1->setCatalogo('ocdefpar','sf_admin_edit_form',$obj,'Ocdefpar_Oycdefemp');
+        $col1->setHTML('type="text" size="17" maxlength="32"');
+       }
+       else
+       {
+       	$col1->setHTML('type="text" size="17" maxlength="32" readonly=true');
+       }
 
-        
-        $col2 = new Columna('Nombre');
-        $col2->setTipo(Columna::TEXTO);
-        $col2->setAlineacionObjeto(Columna::IZQUIERDA);
-        $col2->setAlineacionContenido(Columna::IZQUIERDA);
-        $col2->setNombreCampo('codobr');        
-        
-        $col3 = clone $col1;
-        $col3->setTitulo('Nro.C.I.V');                
-        $col3->setTipo(Columna::TEXTO);        
-        $col3->setNombreCampo('codobr');     
-        
-        
-        // Se guardan las columnas en el objetos de opciones        
-        $opciones->addColumna($col1);
-        $opciones->addColumna($col2);
-        $opciones->addColumna($col3);
-	    // Se genera el arreglo de opciones necesario para generar el grid
-        $this->obj2 = $opciones->getConfig($per); 
-	    
-	  }
-	  
-	}
-		
-	
+       $col2 = new Columna('Descripción');
+       $col2->setTipo(Columna::TEXTO);
+       $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+       $col2->setAlineacionContenido(Columna::IZQUIERDA);
+       $col2->setNombreCampo('despar');
+       $col2->setHTML('type="text" size="30" readonly=true');
+
+       $col3 = clone $col2;
+       $col3->setTitulo('Unidad de Medida');
+       $col3->setNombreCampo('coduni');
+       $col3->setEsGrabable(true);
+       $col3->setHTML('type="text" size="5" readonly=true');
+
+       $col4 = new Columna('Cantidad');
+       $col4->setEsGrabable(true);
+       $col4->setTipo(Columna::MONTO);
+       $col4->setAlineacionContenido(Columna::DERECHA);
+       $col4->setAlineacionObjeto(Columna::DERECHA);
+       $col4->setNombreCampo('canobr');
+       $col4->setEsNumerico(true);
+       if ($codigo=='')
+       {
+       $col4->setHTML('type="text" size="10"');
+       $col4->setJScript('onKeypress="entermonto(event,this.id); Cantidad(event,this.id);"');
+       }
+       else $col4->setHTML('type="text" size="10" readonly=true');
+
+       $col5 = clone $col4;
+       $col5->setTitulo('Cant. Contratada');
+       $col5->setNombreCampo('cancon');
+       $col5->setHTML('type="text" size="10" readonly=true');
+
+       $col6 = clone $col4;
+       $col6->setTitulo('Costo');
+       $col6->setNombreCampo('cosuni');
+       if ($codigo=='')
+       {
+        $col6->setHTML('type="text" size="10"');
+        $col6->setJScript('onKeypress="entermonto(event,this.id); Total(event,this.id);"');
+       }
+       else $col6->setHTML('type="text" size="10" readonly=true;');
+
+       $col7 = clone $col4;
+       $col7->setTitulo('Monto Presupuestado');
+       $col7->setNombreCampo('montot1');
+       $col7->setHTML('type="text" size="10" readonly="true"');
+
+       $opciones->addColumna($col1);
+       $opciones->addColumna($col2);
+       $opciones->addColumna($col3);
+       $opciones->addColumna($col4);
+       $opciones->addColumna($col5);
+       $opciones->addColumna($col6);
+       $opciones->addColumna($col7);
+
+       $this->obj = $opciones->getConfig($reg);
+
+  }
+
+   public function configGridIns($codobr='')
+   {
+       $c = new Criteria();
+       $c->add(OcinginsobrPeer::CODOBR,$codobr);
+       $reg = OcinginsobrPeer::doSelect($c);
+
+       $opciones = new OpcionesGrid();
+       $opciones->setEliminar(true);
+       $opciones->setTabla('Ocinginsobr');
+       $opciones->setAncho(700);
+       $opciones->setAnchoGrid(700);
+       $opciones->setTitulo('');
+       $opciones->setName('b');
+       $opciones->setFilas(10);
+       $opciones->setHTMLTotalFilas(' ');
+
+       $col1 = new Columna('Cédula');
+       $col1->setTipo(Columna::TEXTO);
+       $col1->setEsGrabable(true);
+       $col1->setAlineacionObjeto(Columna::CENTRO);
+       $col1->setAlineacionContenido(Columna::CENTRO);
+       $col1->setNombreCampo('cedins');
+       $col1->setHTML('type="text" size="10" maxlength="10"');
+       $col1->setJScript('onBlur="javascript:event.keyCode=13; ajaxinsobr(event,this.id)"');
+       $col1->setCatalogo('nphojint','sf_admin_edit_form',array('cedemp' => 1, 'nomemp' => 2));
+
+       $col2 = new Columna('Nombre');
+       $col2->setTipo(Columna::TEXTO);
+       $col2->setEsGrabable(true);
+       $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+       $col2->setAlineacionContenido(Columna::IZQUIERDA);
+       $col2->setNombreCampo('nomins');
+       $col2->setHTML('type="text" size="25" readonly=true');
+
+       $col3 = new Columna('Nro. C.I.V');
+       $col3->setTipo(Columna::TEXTO);
+       $col3->setEsGrabable(true);
+       $col3->setAlineacionObjeto(Columna::IZQUIERDA);
+       $col3->setAlineacionContenido(Columna::IZQUIERDA);
+       $col3->setNombreCampo('numciv');
+       $col3->setHTML('type="text" size="15" maxlength="15"');
+
+       $opciones->addColumna($col1);
+       $opciones->addColumna($col2);
+       $opciones->addColumna($col3);
+
+       $this->obj2 = $opciones->getConfig($reg);
+  }
+
+
+
   public function executeEdit()
   {
     $this->ocregobr = $this->getOcregobrOrCreate();
-    $this->funciones_combos(); 
-    $this->configGrid();
-    $this->configGrid2();
+    $this->mascarapresupuesto = Herramientas::formatoPresupuesto();
+    $this->lonpre=strlen($this->mascarapresupuesto);
+    $this->funciones_combos();
+    $this->configGrid($this->ocregobr->getCodobr());
+    $this->configGridIns($this->ocregobr->getCodobr());
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateOcregobrFromRequest();
-
       $this->saveOcregobr($this->ocregobr);
 
+      if ($this->saveOcregobr($this->ocregobr)==-1)
+      {
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
+
+      $this->ocregobr->setId(Herramientas::getX_vacio('codobr','ocregobr','id',$this->ocregobr->getCodobr()));
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -309,17 +297,29 @@ class oycdesobrActions extends autooycdesobrActions
       {
         return $this->redirect('oycdesobr/edit?id='.$this->ocregobr->getId());
       }
+      }
+      else
+      {
+          $this->labels = $this->getLabels();
+          $err = Herramientas::obtenerMensajeError($this->coderror);
+       	  $this->getRequest()->setError('',$err);
+          return sfView::SUCCESS;
+      }
     }
     else
     {
       $this->labels = $this->getLabels();
     }
-  }	
-  
+  }
+
   protected function updateOcregobrFromRequest()
   {
     $ocregobr = $this->getRequestParameter('ocregobr');
-    $this->funciones_combos(); 
+    $this->mascarapresupuesto = Herramientas::formatoPresupuesto();
+    $this->lonpre=strlen($this->mascarapresupuesto);
+    $this->configGrid($ocregobr['codobr']);
+    $this->configGridIns($ocregobr['codobr']);
+    $this->funciones_combos();
 
     if (isset($ocregobr['codobr']))
     {
@@ -401,10 +401,6 @@ class oycdesobrActions extends autooycdesobrActions
     {
       $this->ocregobr->setCodmun($ocregobr['codmun']);
     }
-    if (isset($ocregobr['nommun']))
-    {
-      $this->ocregobr->setNommun($ocregobr['nommun']);
-    }
     if (isset($ocregobr['codpar']))
     {
       $this->ocregobr->setCodpar($ocregobr['codpar']);
@@ -417,16 +413,48 @@ class oycdesobrActions extends autooycdesobrActions
     {
       $this->ocregobr->setDirobr($ocregobr['dirobr']);
     }
+    if (isset($ocregobr['monobr']))
+    {
+      $this->ocregobr->setMonobr($ocregobr['monobr']);
+    }
+    if (isset($ocregobr['subtot']))
+    {
+      $this->ocregobr->setSubtot($ocregobr['subtot']);
+    }
+    if (isset($ocregobr['moniva']))
+    {
+      $this->ocregobr->setMoniva($ocregobr['moniva']);
+    }
+    if (isset($ocregobr['ivaobr']))
+    {
+      $this->ocregobr->setIvaobr($ocregobr['ivaobr']);
+    }
     if (isset($ocregobr['codpre']))
     {
       $this->ocregobr->setCodpre($ocregobr['codpre']);
     }
-    if (isset($ocregobr['despre']))
+    if (isset($ocregobr['nompre']))
     {
-      $this->ocregobr->setDespre($ocregobr['despre']);
+      $this->ocregobr->setNompre($ocregobr['nompre']);
+    }
+    if (isset($ocregobr['codpreiva']))
+    {
+      $this->ocregobr->setCodpreiva($ocregobr['codpreiva']);
+    }
+    if (isset($ocregobr['nompreiva']))
+    {
+      $this->ocregobr->setNompreiva($ocregobr['nompreiva']);
+    }
+    if (isset($ocregobr['staobr']))
+    {
+      $this->ocregobr->setStaobr($ocregobr['staobr']);
+    }
+    if (isset($ocregobr['unocon']))
+    {
+      $this->ocregobr->setUnocon($ocregobr['unocon']);
     }
   }
-    
+
 	public function funciones_combos()
 	{
 		$this->pais = $this->Cargarpais();
@@ -434,5 +462,176 @@ class oycdesobrActions extends autooycdesobrActions
 		$this->municipio = $this->Cargarmunicipio($this->ocregobr->getCodpai(),$this->ocregobr->getCodedo());//colocar lo q viene de bd
 		$this->parroquia = $this->Cargarparroquia($this->ocregobr->getCodpai(),$this->ocregobr->getCodedo(),$this->ocregobr->getCodmun());//colocar lo q viene de bd
 		$this->sector = $this->Cargarsector($this->ocregobr->getCodpai(),$this->ocregobr->getCodedo(),$this->ocregobr->getCodmun(),$this->ocregobr->getCodpar());
-	}  
+	}
+
+   public function executeAjax()
+   {
+     $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+     $dato="";
+     $javascript="";
+     if ($this->getRequestParameter('ajax')=='1')
+     {
+       $c= new Criteria();
+	   $c->add(CpdeftitPeer::CODPRE,$this->getRequestParameter('codigo'));
+       $reg=CpdeftitPeer::doSelectOne($c);
+       if ($reg)
+       {
+       	$num=$this->getRequestParameter('num');
+       	$monto=Herramientas::toFloat($this->getRequestParameter('monto'));
+       	$fecha=explode('/',$this->getRequestParameter('fecha'));
+       	$anno=$fecha[2];
+       	$this->configGrid();
+       	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
+       	if (Obras::chequearDisponibilidadPresupuesto($this->getRequestParameter('codigo'),$anno,$grid,$num,$monto,&$mondis))
+       	{
+       	  $dato=$reg->getNompre();
+       	}
+       	else
+       	{
+          $javascript="alert('No Existe Disponibilidad Presupuestaria . El monto Disponible es: ".$mondis."');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";
+       	}
+       }else {
+       $javascript="alert('El Código Presupuestario no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";
+       }
+       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+     }
+     else  if ($this->getRequestParameter('ajax')=='2')
+     {
+        $c= new Criteria();
+		$c->add(OcdefparPeer::CODPAR,$this->getRequestParameter('codigo'));
+      	$reg=OcdefparPeer::doSelectOne($c);
+  		if ($reg)
+  		{
+  		  $dato=$reg->getDespar();
+  		  $abr=Herramientas::getX('CODUNI','Ocunidad','Abruni',$reg->getCoduni());
+  		  $dato1=$abr;
+  		  $dato2=number_format($reg->getCosuni(),2,',','.');
+  		  $javascript="";
+  		}
+  		else
+  		{
+          $abr="";
+          $dato1="";
+          $dato2="";
+          $javascript="alert('El Partida no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";
+  		}
+  		$output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$this->getRequestParameter('unidad').'","'.$dato1.'",""],["'.$this->getRequestParameter('costo').'","'.$dato2.'",""],["javascript","'.$javascript.'",""]]';
+
+      }
+      else  if ($this->getRequestParameter('ajax')=='3')
+     {
+       $c= new Criteria();
+	   $c->add(NphojintPeer::CEDEMP,$this->getRequestParameter('codigo'));
+       $reg=NphojintPeer::doSelectOne($c);
+       if ($reg)
+       {
+       	$dato=$reg->getNomemp();
+       }else {
+       $javascript="alert('El Empleado no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";
+       }
+       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+     }
+     else  if ($this->getRequestParameter('ajax')=='4')
+     {
+       $c= new  Criteria();
+       $c->add(OctipobrPeer::CODTIPOBR,$this->getRequestParameter('codigo'));
+       $reg= OctipobrPeer::doSelectOne($c);
+       if ($reg)
+       {
+       	$dato=$reg->getDestipobr();
+       }else{
+       	$javascript="alert('El Tipo de Obra no existe');$('". $cajtexmos ."').value='';$('". $cajtexcom ."').value='';";
+       }
+       $output = '[["'.$cajtexmos.'","'.$dato.'",""],["javascript","'.$javascript.'",""]]';
+     }
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      return sfView::HEADER_ONLY;
+    }
+
+  protected function saveOcregobr($ocregobr)
+  {
+  	if ($ocregobr->getId())
+  	{
+  		$ocregobr->save();
+  		$grid2=Herramientas::CargarDatosGrid($this,$this->obj2);
+  		Obras::grabarInspectores($ocregobr,$grid2);
+  		$this->coderror=-1;
+       	return $this->coderror;
+  	}
+  	else
+  	{
+	  	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
+	    $grid2=Herramientas::CargarDatosGrid($this,$this->obj2);
+	    if (Obras::salvarOycdesobr($ocregobr,$grid,$grid2,&$error))
+	    {
+	    	$this->coderror=$error;
+	       	return $this->coderror;
+	    }
+	    else
+	    {
+	      $this->coderror=$error;
+	      return $this->coderror;
+	    }
+  	}
+  }
+
+  protected function deleteOcregobr($ocregobr)
+  {
+    if (!Obras::eliminarOycdesobr($ocregobr))
+    {
+     return false;
+    }
+    else
+    {
+    	return true;
+    }
+  }
+
+  public function executeDelete()
+  {
+    $this->ocregobr = OcregobrPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->ocregobr);
+    $id=$this->getRequestParameter('id');
+
+    if (!$this->deleteOcregobr($this->ocregobr))
+    {
+    	$this->setFlash('notice','La Obra no puede ser eliminada, ya que tienen registros Asociados');
+        return $this->redirect('oycdesobr/edit?id='.$id);
+    }
+
+
+    return $this->redirect('oycdesobr/list');
+  }
+
+    public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->ocregobr = $this->getOcregobrOrCreate();
+    try{ $this->updateOcregobrFromRequest();}
+    catch (Exception $ex){}
+
+    $this->labels = $this->getLabels();
+
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+        if($this->fechamay!=-1)
+        {
+         $err = Herramientas::obtenerMensajeError($this->fechamay);
+         $this->getRequest()->setError('ocregobr{fecini}',$err);
+        }
+        if($this->partid!=-1)
+        {
+         $err1 = Herramientas::obtenerMensajeError($this->partid);
+         $this->getRequest()->setError('',$err1);
+        }
+        if($this->inspec!=-1)
+        {
+         $err1 = Herramientas::obtenerMensajeError($this->inspec);
+         $this->getRequest()->setError('',$err1);
+        }
+      }
+
+    return sfView::SUCCESS;
+  }
 }

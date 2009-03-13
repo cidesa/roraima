@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpasicarracempMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpasicarracempMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpasicarracempMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npasicarracemp');
 		$tMap->setPhpName('Npasicarracemp');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npasicarracemp_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, false, 16);
 
@@ -38,9 +40,9 @@ class NpasicarracempMapBuilder {
 
 		$tMap->addColumn('CODSECUE', 'Codsecue', 'string', CreoleTypes::VARCHAR, false, 6);
 
-		$tMap->addColumn('COMCAR', 'Comcar', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('COMCAR', 'Comcar', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('PRICAR', 'Pricar', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PRICAR', 'Pricar', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODACCADM', 'Codaccadm', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -63,6 +65,6 @@ class NpasicarracempMapBuilder {
 		$tMap->addColumn('CODNIVORG', 'Codnivorg', 'string', CreoleTypes::VARCHAR, false, 16);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

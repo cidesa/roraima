@@ -215,6 +215,7 @@ abstract class BaseNphiinegPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NphiinegPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

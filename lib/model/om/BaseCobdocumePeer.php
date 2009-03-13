@@ -26,9 +26,6 @@ abstract class BaseCobdocumePeer {
 	const CODCLI = 'cobdocume.CODCLI';
 
 	
-	const CODMOV = 'cobdocume.CODMOV';
-
-	
 	const FECEMI = 'cobdocume.FECEMI';
 
 	
@@ -74,6 +71,9 @@ abstract class BaseCobdocumePeer {
 	const REFFAC = 'cobdocume.REFFAC';
 
 	
+	const FATIPMOV_ID = 'cobdocume.FATIPMOV_ID';
+
+	
 	const ID = 'cobdocume.ID';
 
 	
@@ -82,17 +82,17 @@ abstract class BaseCobdocumePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refdoc', 'Codcli', 'Codmov', 'Fecemi', 'Fecven', 'Oridoc', 'Desdoc', 'Mondoc', 'Recdoc', 'Dscdoc', 'Abodoc', 'Saldoc', 'Desanu', 'Fecanu', 'Stadoc', 'Numcom', 'Feccom', 'Reffac', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CobdocumePeer::REFDOC, CobdocumePeer::CODCLI, CobdocumePeer::CODMOV, CobdocumePeer::FECEMI, CobdocumePeer::FECVEN, CobdocumePeer::ORIDOC, CobdocumePeer::DESDOC, CobdocumePeer::MONDOC, CobdocumePeer::RECDOC, CobdocumePeer::DSCDOC, CobdocumePeer::ABODOC, CobdocumePeer::SALDOC, CobdocumePeer::DESANU, CobdocumePeer::FECANU, CobdocumePeer::STADOC, CobdocumePeer::NUMCOM, CobdocumePeer::FECCOM, CobdocumePeer::REFFAC, CobdocumePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refdoc', 'codcli', 'codmov', 'fecemi', 'fecven', 'oridoc', 'desdoc', 'mondoc', 'recdoc', 'dscdoc', 'abodoc', 'saldoc', 'desanu', 'fecanu', 'stadoc', 'numcom', 'feccom', 'reffac', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Refdoc', 'Codcli', 'Fecemi', 'Fecven', 'Oridoc', 'Desdoc', 'Mondoc', 'Recdoc', 'Dscdoc', 'Abodoc', 'Saldoc', 'Desanu', 'Fecanu', 'Stadoc', 'Numcom', 'Feccom', 'Reffac', 'FatipmovId', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CobdocumePeer::REFDOC, CobdocumePeer::CODCLI, CobdocumePeer::FECEMI, CobdocumePeer::FECVEN, CobdocumePeer::ORIDOC, CobdocumePeer::DESDOC, CobdocumePeer::MONDOC, CobdocumePeer::RECDOC, CobdocumePeer::DSCDOC, CobdocumePeer::ABODOC, CobdocumePeer::SALDOC, CobdocumePeer::DESANU, CobdocumePeer::FECANU, CobdocumePeer::STADOC, CobdocumePeer::NUMCOM, CobdocumePeer::FECCOM, CobdocumePeer::REFFAC, CobdocumePeer::FATIPMOV_ID, CobdocumePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refdoc', 'codcli', 'fecemi', 'fecven', 'oridoc', 'desdoc', 'mondoc', 'recdoc', 'dscdoc', 'abodoc', 'saldoc', 'desanu', 'fecanu', 'stadoc', 'numcom', 'feccom', 'reffac', 'fatipmov_id', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refdoc' => 0, 'Codcli' => 1, 'Codmov' => 2, 'Fecemi' => 3, 'Fecven' => 4, 'Oridoc' => 5, 'Desdoc' => 6, 'Mondoc' => 7, 'Recdoc' => 8, 'Dscdoc' => 9, 'Abodoc' => 10, 'Saldoc' => 11, 'Desanu' => 12, 'Fecanu' => 13, 'Stadoc' => 14, 'Numcom' => 15, 'Feccom' => 16, 'Reffac' => 17, 'Id' => 18, ),
-		BasePeer::TYPE_COLNAME => array (CobdocumePeer::REFDOC => 0, CobdocumePeer::CODCLI => 1, CobdocumePeer::CODMOV => 2, CobdocumePeer::FECEMI => 3, CobdocumePeer::FECVEN => 4, CobdocumePeer::ORIDOC => 5, CobdocumePeer::DESDOC => 6, CobdocumePeer::MONDOC => 7, CobdocumePeer::RECDOC => 8, CobdocumePeer::DSCDOC => 9, CobdocumePeer::ABODOC => 10, CobdocumePeer::SALDOC => 11, CobdocumePeer::DESANU => 12, CobdocumePeer::FECANU => 13, CobdocumePeer::STADOC => 14, CobdocumePeer::NUMCOM => 15, CobdocumePeer::FECCOM => 16, CobdocumePeer::REFFAC => 17, CobdocumePeer::ID => 18, ),
-		BasePeer::TYPE_FIELDNAME => array ('refdoc' => 0, 'codcli' => 1, 'codmov' => 2, 'fecemi' => 3, 'fecven' => 4, 'oridoc' => 5, 'desdoc' => 6, 'mondoc' => 7, 'recdoc' => 8, 'dscdoc' => 9, 'abodoc' => 10, 'saldoc' => 11, 'desanu' => 12, 'fecanu' => 13, 'stadoc' => 14, 'numcom' => 15, 'feccom' => 16, 'reffac' => 17, 'id' => 18, ),
+		BasePeer::TYPE_PHPNAME => array ('Refdoc' => 0, 'Codcli' => 1, 'Fecemi' => 2, 'Fecven' => 3, 'Oridoc' => 4, 'Desdoc' => 5, 'Mondoc' => 6, 'Recdoc' => 7, 'Dscdoc' => 8, 'Abodoc' => 9, 'Saldoc' => 10, 'Desanu' => 11, 'Fecanu' => 12, 'Stadoc' => 13, 'Numcom' => 14, 'Feccom' => 15, 'Reffac' => 16, 'FatipmovId' => 17, 'Id' => 18, ),
+		BasePeer::TYPE_COLNAME => array (CobdocumePeer::REFDOC => 0, CobdocumePeer::CODCLI => 1, CobdocumePeer::FECEMI => 2, CobdocumePeer::FECVEN => 3, CobdocumePeer::ORIDOC => 4, CobdocumePeer::DESDOC => 5, CobdocumePeer::MONDOC => 6, CobdocumePeer::RECDOC => 7, CobdocumePeer::DSCDOC => 8, CobdocumePeer::ABODOC => 9, CobdocumePeer::SALDOC => 10, CobdocumePeer::DESANU => 11, CobdocumePeer::FECANU => 12, CobdocumePeer::STADOC => 13, CobdocumePeer::NUMCOM => 14, CobdocumePeer::FECCOM => 15, CobdocumePeer::REFFAC => 16, CobdocumePeer::FATIPMOV_ID => 17, CobdocumePeer::ID => 18, ),
+		BasePeer::TYPE_FIELDNAME => array ('refdoc' => 0, 'codcli' => 1, 'fecemi' => 2, 'fecven' => 3, 'oridoc' => 4, 'desdoc' => 5, 'mondoc' => 6, 'recdoc' => 7, 'dscdoc' => 8, 'abodoc' => 9, 'saldoc' => 10, 'desanu' => 11, 'fecanu' => 12, 'stadoc' => 13, 'numcom' => 14, 'feccom' => 15, 'reffac' => 16, 'fatipmov_id' => 17, 'id' => 18, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, )
 	);
 
@@ -151,8 +151,6 @@ abstract class BaseCobdocumePeer {
 
 		$criteria->addSelectColumn(CobdocumePeer::CODCLI);
 
-		$criteria->addSelectColumn(CobdocumePeer::CODMOV);
-
 		$criteria->addSelectColumn(CobdocumePeer::FECEMI);
 
 		$criteria->addSelectColumn(CobdocumePeer::FECVEN);
@@ -182,6 +180,8 @@ abstract class BaseCobdocumePeer {
 		$criteria->addSelectColumn(CobdocumePeer::FECCOM);
 
 		$criteria->addSelectColumn(CobdocumePeer::REFFAC);
+
+		$criteria->addSelectColumn(CobdocumePeer::FATIPMOV_ID);
 
 		$criteria->addSelectColumn(CobdocumePeer::ID);
 
@@ -262,6 +262,167 @@ abstract class BaseCobdocumePeer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinFatipmov(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CobdocumePeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CobdocumePeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CobdocumePeer::FATIPMOV_ID, FatipmovPeer::ID);
+
+		$rs = CobdocumePeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinFatipmov(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CobdocumePeer::addSelectColumns($c);
+		$startcol = (CobdocumePeer::NUM_COLUMNS - CobdocumePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		FatipmovPeer::addSelectColumns($c);
+
+		$c->addJoin(CobdocumePeer::FATIPMOV_ID, FatipmovPeer::ID);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CobdocumePeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = FatipmovPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getFatipmov(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addCobdocume($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initCobdocumes();
+				$obj2->addCobdocume($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(CobdocumePeer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(CobdocumePeer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(CobdocumePeer::FATIPMOV_ID, FatipmovPeer::ID);
+
+		$rs = CobdocumePeer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		CobdocumePeer::addSelectColumns($c);
+		$startcol2 = (CobdocumePeer::NUM_COLUMNS - CobdocumePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		FatipmovPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + FatipmovPeer::NUM_COLUMNS;
+
+		$c->addJoin(CobdocumePeer::FATIPMOV_ID, FatipmovPeer::ID);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = CobdocumePeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = FatipmovPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getFatipmov(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addCobdocume($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initCobdocumes();
+				$obj2->addCobdocume($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{
@@ -285,6 +446,7 @@ abstract class BaseCobdocumePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CobdocumePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

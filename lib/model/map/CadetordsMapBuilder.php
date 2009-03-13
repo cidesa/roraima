@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class CadetordsMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CadetordsMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CadetordsMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cadetords');
 		$tMap->setPhpName('Cadetords');
 
@@ -36,23 +36,23 @@ class CadetordsMapBuilder {
 
 		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 32);
 
-		$tMap->addColumn('PRESER', 'Preser', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('PRESER', 'Preser', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('DTOSER', 'Dtoser', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DTOSER', 'Dtoser', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('RGOSER', 'Rgoser', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RGOSER', 'Rgoser', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('TOTSER', 'Totser', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('TOTSER', 'Totser', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('DESSER', 'Desser', 'string', CreoleTypes::VARCHAR, false, 250);
 
-		$tMap->addColumn('MONSER', 'Monser', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONSER', 'Monser', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('CANSER', 'Canser', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('CANSER', 'Canser', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('CODRGO', 'Codrgo', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

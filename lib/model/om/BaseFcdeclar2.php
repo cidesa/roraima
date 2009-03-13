@@ -101,467 +101,509 @@ abstract class BaseFcdeclar2 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumdec()
-	{
+  
+  public function getNumdec()
+  {
 
-		return $this->numdec; 		
-	}
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+    return trim($this->numdec);
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecven($format = 'Y-m-d')
+  {
 
-	
-	public function getFueing()
-	{
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->fueing; 		
-	}
-	
-	public function getFecdec($format = 'Y-m-d')
-	{
+  
+  public function getFueing()
+  {
 
-		if ($this->fecdec === null || $this->fecdec === '') {
-			return null;
-		} elseif (!is_int($this->fecdec)) {
-						$ts = strtotime($this->fecdec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdec] as date/time value: " . var_export($this->fecdec, true));
-			}
-		} else {
-			$ts = $this->fecdec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->fueing);
 
-	
-	public function getRifcon()
-	{
+  }
+  
+  public function getFecdec($format = 'Y-m-d')
+  {
 
-		return $this->rifcon; 		
-	}
-	
-	public function getTipo()
-	{
+    if ($this->fecdec === null || $this->fecdec === '') {
+      return null;
+    } elseif (!is_int($this->fecdec)) {
+            $ts = adodb_strtotime($this->fecdec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdec] as date/time value: " . var_export($this->fecdec, true));
+      }
+    } else {
+      $ts = $this->fecdec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->tipo; 		
-	}
-	
-	public function getNumref()
-	{
+  
+  public function getRifcon()
+  {
 
-		return $this->numref; 		
-	}
-	
-	public function getNombre()
-	{
+    return trim($this->rifcon);
 
-		return $this->nombre; 		
-	}
-	
-	public function getMondec()
-	{
+  }
+  
+  public function getTipo()
+  {
 
-		return number_format($this->mondec,2,',','.');
-		
-	}
-	
-	public function getEdodec()
-	{
+    return trim($this->tipo);
 
-		return $this->edodec; 		
-	}
-	
-	public function getMora()
-	{
+  }
+  
+  public function getNumref()
+  {
 
-		return number_format($this->mora,2,',','.');
-		
-	}
-	
-	public function getProntopg()
-	{
+    return trim($this->numref);
 
-		return number_format($this->prontopg,2,',','.');
-		
-	}
-	
-	public function getAutliq()
-	{
+  }
+  
+  public function getNombre()
+  {
 
-		return number_format($this->autliq,2,',','.');
-		
-	}
-	
-	public function getFundec()
-	{
+    return trim($this->nombre);
 
-		return $this->fundec; 		
-	}
-	
-	public function getCodrec()
-	{
+  }
+  
+  public function getMondec($val=false)
+  {
 
-		return $this->codrec; 		
-	}
-	
-	public function getModo()
-	{
+    if($val) return number_format($this->mondec,2,',','.');
+    else return $this->mondec;
 
-		return $this->modo; 		
-	}
-	
-	public function getNumero()
-	{
+  }
+  
+  public function getEdodec()
+  {
 
-		return $this->numero; 		
-	}
-	
-	public function getConpag()
-	{
+    return trim($this->edodec);
 
-		return $this->conpag; 		
-	}
-	
-	public function getMonabo()
-	{
+  }
+  
+  public function getMora($val=false)
+  {
 
-		return number_format($this->monabo,2,',','.');
-		
-	}
-	
-	public function getNumabo()
-	{
+    if($val) return number_format($this->mora,2,',','.');
+    else return $this->mora;
 
-		return $this->numabo; 		
-	}
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getProntopg($val=false)
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->prontopg,2,',','.');
+    else return $this->prontopg;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getAutliq($val=false)
+  {
+
+    if($val) return number_format($this->autliq,2,',','.');
+    else return $this->autliq;
+
+  }
+  
+  public function getFundec()
+  {
+
+    return trim($this->fundec);
+
+  }
+  
+  public function getCodrec()
+  {
+
+    return trim($this->codrec);
+
+  }
+  
+  public function getModo()
+  {
+
+    return trim($this->modo);
+
+  }
+  
+  public function getNumero()
+  {
+
+    return trim($this->numero);
+
+  }
+  
+  public function getConpag()
+  {
+
+    return trim($this->conpag);
+
+  }
+  
+  public function getMonabo($val=false)
+  {
+
+    if($val) return number_format($this->monabo,2,',','.');
+    else return $this->monabo;
+
+  }
+  
+  public function getNumabo()
+  {
+
+    return trim($this->numabo);
+
+  }
+  
+  public function getNomcon()
+  {
+
+    return trim($this->nomcon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumdec($v)
 	{
 
-		if ($this->numdec !== $v) {
-			$this->numdec = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::NUMDEC;
-		}
-
+    if ($this->numdec !== $v) {
+        $this->numdec = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::NUMDEC;
+      }
+  
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = Fcdeclar2Peer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = Fcdeclar2Peer::FECVEN;
+    }
 
 	} 
 	
 	public function setFueing($v)
 	{
 
-		if ($this->fueing !== $v) {
-			$this->fueing = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::FUEING;
-		}
-
+    if ($this->fueing !== $v) {
+        $this->fueing = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::FUEING;
+      }
+  
 	} 
 	
 	public function setFecdec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdec !== $ts) {
-			$this->fecdec = $ts;
-			$this->modifiedColumns[] = Fcdeclar2Peer::FECDEC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdec !== $ts) {
+      $this->fecdec = $ts;
+      $this->modifiedColumns[] = Fcdeclar2Peer::FECDEC;
+    }
 
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::RIFCON;
+      }
+  
 	} 
 	
 	public function setTipo($v)
 	{
 
-		if ($this->tipo !== $v) {
-			$this->tipo = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::TIPO;
-		}
-
+    if ($this->tipo !== $v) {
+        $this->tipo = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::TIPO;
+      }
+  
 	} 
 	
 	public function setNumref($v)
 	{
 
-		if ($this->numref !== $v) {
-			$this->numref = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::NUMREF;
-		}
-
+    if ($this->numref !== $v) {
+        $this->numref = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::NUMREF;
+      }
+  
 	} 
 	
 	public function setNombre($v)
 	{
 
-		if ($this->nombre !== $v) {
-			$this->nombre = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::NOMBRE;
-		}
-
+    if ($this->nombre !== $v) {
+        $this->nombre = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::NOMBRE;
+      }
+  
 	} 
 	
 	public function setMondec($v)
 	{
 
-		if ($this->mondec !== $v) {
-			$this->mondec = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::MONDEC;
-		}
-
+    if ($this->mondec !== $v) {
+        $this->mondec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcdeclar2Peer::MONDEC;
+      }
+  
 	} 
 	
 	public function setEdodec($v)
 	{
 
-		if ($this->edodec !== $v) {
-			$this->edodec = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::EDODEC;
-		}
-
+    if ($this->edodec !== $v) {
+        $this->edodec = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::EDODEC;
+      }
+  
 	} 
 	
 	public function setMora($v)
 	{
 
-		if ($this->mora !== $v) {
-			$this->mora = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::MORA;
-		}
-
+    if ($this->mora !== $v) {
+        $this->mora = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcdeclar2Peer::MORA;
+      }
+  
 	} 
 	
 	public function setProntopg($v)
 	{
 
-		if ($this->prontopg !== $v) {
-			$this->prontopg = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::PRONTOPG;
-		}
-
+    if ($this->prontopg !== $v) {
+        $this->prontopg = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcdeclar2Peer::PRONTOPG;
+      }
+  
 	} 
 	
 	public function setAutliq($v)
 	{
 
-		if ($this->autliq !== $v) {
-			$this->autliq = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::AUTLIQ;
-		}
-
+    if ($this->autliq !== $v) {
+        $this->autliq = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcdeclar2Peer::AUTLIQ;
+      }
+  
 	} 
 	
 	public function setFundec($v)
 	{
 
-		if ($this->fundec !== $v) {
-			$this->fundec = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::FUNDEC;
-		}
-
+    if ($this->fundec !== $v) {
+        $this->fundec = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::FUNDEC;
+      }
+  
 	} 
 	
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::CODREC;
-		}
-
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::CODREC;
+      }
+  
 	} 
 	
 	public function setModo($v)
 	{
 
-		if ($this->modo !== $v) {
-			$this->modo = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::MODO;
-		}
-
+    if ($this->modo !== $v) {
+        $this->modo = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::MODO;
+      }
+  
 	} 
 	
 	public function setNumero($v)
 	{
 
-		if ($this->numero !== $v) {
-			$this->numero = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::NUMERO;
-		}
-
+    if ($this->numero !== $v) {
+        $this->numero = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::NUMERO;
+      }
+  
 	} 
 	
 	public function setConpag($v)
 	{
 
-		if ($this->conpag !== $v) {
-			$this->conpag = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::CONPAG;
-		}
-
+    if ($this->conpag !== $v) {
+        $this->conpag = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::CONPAG;
+      }
+  
 	} 
 	
 	public function setMonabo($v)
 	{
 
-		if ($this->monabo !== $v) {
-			$this->monabo = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::MONABO;
-		}
-
+    if ($this->monabo !== $v) {
+        $this->monabo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Fcdeclar2Peer::MONABO;
+      }
+  
 	} 
 	
 	public function setNumabo($v)
 	{
 
-		if ($this->numabo !== $v) {
-			$this->numabo = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::NUMABO;
-		}
-
+    if ($this->numabo !== $v) {
+        $this->numabo = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::NUMABO;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::NOMCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Fcdeclar2Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Fcdeclar2Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numdec = $rs->getString($startcol + 0);
+      $this->numdec = $rs->getString($startcol + 0);
 
-			$this->fecven = $rs->getDate($startcol + 1, null);
+      $this->fecven = $rs->getDate($startcol + 1, null);
 
-			$this->fueing = $rs->getString($startcol + 2);
+      $this->fueing = $rs->getString($startcol + 2);
 
-			$this->fecdec = $rs->getDate($startcol + 3, null);
+      $this->fecdec = $rs->getDate($startcol + 3, null);
 
-			$this->rifcon = $rs->getString($startcol + 4);
+      $this->rifcon = $rs->getString($startcol + 4);
 
-			$this->tipo = $rs->getString($startcol + 5);
+      $this->tipo = $rs->getString($startcol + 5);
 
-			$this->numref = $rs->getString($startcol + 6);
+      $this->numref = $rs->getString($startcol + 6);
 
-			$this->nombre = $rs->getString($startcol + 7);
+      $this->nombre = $rs->getString($startcol + 7);
 
-			$this->mondec = $rs->getFloat($startcol + 8);
+      $this->mondec = $rs->getFloat($startcol + 8);
 
-			$this->edodec = $rs->getString($startcol + 9);
+      $this->edodec = $rs->getString($startcol + 9);
 
-			$this->mora = $rs->getFloat($startcol + 10);
+      $this->mora = $rs->getFloat($startcol + 10);
 
-			$this->prontopg = $rs->getFloat($startcol + 11);
+      $this->prontopg = $rs->getFloat($startcol + 11);
 
-			$this->autliq = $rs->getFloat($startcol + 12);
+      $this->autliq = $rs->getFloat($startcol + 12);
 
-			$this->fundec = $rs->getString($startcol + 13);
+      $this->fundec = $rs->getString($startcol + 13);
 
-			$this->codrec = $rs->getString($startcol + 14);
+      $this->codrec = $rs->getString($startcol + 14);
 
-			$this->modo = $rs->getString($startcol + 15);
+      $this->modo = $rs->getString($startcol + 15);
 
-			$this->numero = $rs->getString($startcol + 16);
+      $this->numero = $rs->getString($startcol + 16);
 
-			$this->conpag = $rs->getString($startcol + 17);
+      $this->conpag = $rs->getString($startcol + 17);
 
-			$this->monabo = $rs->getFloat($startcol + 18);
+      $this->monabo = $rs->getFloat($startcol + 18);
 
-			$this->numabo = $rs->getString($startcol + 19);
+      $this->numabo = $rs->getString($startcol + 19);
 
-			$this->nomcon = $rs->getString($startcol + 20);
+      $this->nomcon = $rs->getString($startcol + 20);
 
-			$this->id = $rs->getInt($startcol + 21);
+      $this->id = $rs->getInt($startcol + 21);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 22; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdeclar2 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 22; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdeclar2 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -618,6 +660,7 @@ abstract class BaseFcdeclar2 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Fcdeclar2Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Fcdeclar2Peer::doUpdate($this, $con);

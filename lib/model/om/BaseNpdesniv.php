@@ -37,130 +37,158 @@ abstract class BaseNpdesniv extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodigo()
-	{
+  
+  public function getCodigo()
+  {
 
-		return $this->codigo; 		
-	}
-	
-	public function getConsec()
-	{
+    return trim($this->codigo);
 
-		return number_format($this->consec,2,',','.');
-		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getConsec($val=false)
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getNomext()
-	{
+    if($val) return number_format($this->consec,2,',','.');
+    else return $this->consec;
 
-		return $this->nomext; 		
-	}
-	
-	public function getLonniv()
-	{
+  }
+  
+  public function getNomabr()
+  {
 
-		return number_format($this->lonniv,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomabr);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomext()
+  {
+
+    return trim($this->nomext);
+
+  }
+  
+  public function getLonniv($val=false)
+  {
+
+    if($val) return number_format($this->lonniv,2,',','.');
+    else return $this->lonniv;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodigo($v)
 	{
 
-		if ($this->codigo !== $v) {
-			$this->codigo = $v;
-			$this->modifiedColumns[] = NpdesnivPeer::CODIGO;
-		}
-
+    if ($this->codigo !== $v) {
+        $this->codigo = $v;
+        $this->modifiedColumns[] = NpdesnivPeer::CODIGO;
+      }
+  
 	} 
 	
 	public function setConsec($v)
 	{
 
-		if ($this->consec !== $v) {
-			$this->consec = $v;
-			$this->modifiedColumns[] = NpdesnivPeer::CONSEC;
-		}
-
+    if ($this->consec !== $v) {
+        $this->consec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdesnivPeer::CONSEC;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = NpdesnivPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = NpdesnivPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setNomext($v)
 	{
 
-		if ($this->nomext !== $v) {
-			$this->nomext = $v;
-			$this->modifiedColumns[] = NpdesnivPeer::NOMEXT;
-		}
-
+    if ($this->nomext !== $v) {
+        $this->nomext = $v;
+        $this->modifiedColumns[] = NpdesnivPeer::NOMEXT;
+      }
+  
 	} 
 	
 	public function setLonniv($v)
 	{
 
-		if ($this->lonniv !== $v) {
-			$this->lonniv = $v;
-			$this->modifiedColumns[] = NpdesnivPeer::LONNIV;
-		}
-
+    if ($this->lonniv !== $v) {
+        $this->lonniv = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdesnivPeer::LONNIV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdesnivPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdesnivPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codigo = $rs->getString($startcol + 0);
+      $this->codigo = $rs->getString($startcol + 0);
 
-			$this->consec = $rs->getFloat($startcol + 1);
+      $this->consec = $rs->getFloat($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->nomext = $rs->getString($startcol + 3);
+      $this->nomext = $rs->getString($startcol + 3);
 
-			$this->lonniv = $rs->getFloat($startcol + 4);
+      $this->lonniv = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdesniv object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdesniv object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -217,6 +245,7 @@ abstract class BaseNpdesniv extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdesnivPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdesnivPeer::doUpdate($this, $con);

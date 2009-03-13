@@ -10,67 +10,9 @@
  */
 class nomdefconretencionActions extends autonomdefconretencionActions
 {
-public function getMostrarTipo()
-  {
-  	  $c = new Criteria;
-  	  $this->campo = str_pad($this->npcontipaporet->getCodtipapo(),4,' ');
-  	  $c->add(NptipaportesPeer::CODTIPAPO, $this->campo);
-  	  $this->aporte = NptipaportesPeer::doSelect($c);
-	  if ($this->aporte)
-	  	return $this->aporte[0]->getDestipapo();
-	  else 
-	    return ' ';
-  }
-	
-public function getMostrar_NOM()
-  {
-  	  $c = new Criteria;
-  	  $this->campo = str_pad($this->npcontipaporet->getCodnom(),3,' ');
-  	  $c->add(NpnominaPeer::CODNOM, $this->campo);
-  	  $this->nomina = NpnominaPeer::doSelect($c);
-	  if ($this->nomina)
-	  	return $this->nomina[0]->getNomnom();
-	  else 
-	    return ' ';
-  }
-	
-public function getMostrar_CONCEP()
-  {
-  	  $c = new Criteria;
-  	  $this->campo = str_pad($this->npcontipaporet->getCodcon(),3,' ');
-  	  $c->add(NpdefcptPeer::CODCON, $this->campo);
-  	  $this->concep = NpdefcptPeer::doSelect($c);
-	  if ($this->concep)
-	  	return $this->concep[0]->getNomcon();
-	  else 
-	    return ' ';
-  }	
-  
-public function detalle()    
-    {
-        $con = sfContext::getInstance()->getDatabaseConnection($connection='propel');
-        $sql = "SELECT DISTINCT npcontipaporet.codnom, npnomina.nomnom, npcontipaporet.codcon, npdefcpt.nomcon FROM npcontipaporet, npnomina, npdefcpt WHERE ((npcontipaporet.codtipapo='".($this->npcontipaporet->getCodtipapo())."')AND(npcontipaporet.codnom=npnomina.codnom) AND (npcontipaporet.codcon=npdefcpt.codcon) AND (npcontipaporet.tipo='R'))";
-        $stmt = $con->createStatement();
-        $stmt->setLimit(5000);
-        $rs = $stmt->executeQuery($sql, ResultSet::FETCHMODE_NUM);
-        $resultado=array();
-        //aqui lleno el array con los resultados:
-           while ($rs->next())
-             {
-                $resultado[]=$rs->getRow();
-             }
-        //y la envio al template:
-        $this->rs=$resultado;
-        return $this->rs;
-    }
-	
-public function executeEdit()
+  public function executeEdit()
   {
     $this->npcontipaporet = $this->getNpcontipaporetOrCreate();
-    $this->tipo = $this->getMostrarTipo();
-    $this->nomina = $this->getMostrar_NOM();
-    $this->concepto = $this->getMostrar_CONCEP();
-    $this->rs = $this->detalle();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -79,6 +21,7 @@ public function executeEdit()
       $this->saveNpcontipaporet($this->npcontipaporet);
 
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -98,25 +41,213 @@ public function executeEdit()
       $this->labels = $this->getLabels();
     }
   }
-	
-protected function updateNpcontipaporetFromRequest()
-  {
-    $npcontipaporet = $this->getRequestParameter('npcontipaporet');
 
-    if (isset($npcontipaporet['codtipapo']))
+  protected function getNpcontipaporetOrCreate($id = 'id', $codigo = 'codigo')
+  {
+    if (!$this->getRequestParameter($codigo))
     {
-      $this->npcontipaporet->setCodtipapo($npcontipaporet['codtipapo']);
+      $npcontipaporet = new Npcontipaporet();
+      $this->configGrid();
     }
-    if (isset($npcontipaporet['codnom']))
+    else
     {
-      $this->npcontipaporet->setCodnom($npcontipaporet['codnom']);
+      $c = new Criteria();
+  	  $c->add(NpcontipaporetPeer::CODTIPAPO,$this->getRequestParameter($codigo));
+  	  $npcontipaporet = NpcontipaporetPeer::doSelectOne($c);
+
+      $this->configGrid($npcontipaporet->getCodtipapo());
+      $this->forward404Unless($npcontipaporet);
     }
-    if (isset($npcontipaporet['codcon']))
+
+    return $npcontipaporet;
+  }
+
+   public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->npcontipaporet = $this->getNpcontipaporetOrCreate();
+    $this->updateNpcontipaporetFromRequest();
+
+    $this->labels = $this->getLabels();
+
+    Herramientas::CargarDatosGrid($this,$this->grid);
+
+    return sfView::SUCCESS;
+  }
+
+  public function executeAjax()
+	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+	   if ($this->getRequestParameter('ajax')=='1')
+	    {
+			$dato=NpnominaPeer::getDesnom($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+	    else if ($this->getRequestParameter('ajax')=='2')
+	    {
+			$dato="";
+		  $c= new Criteria();
+          $c->add(NpdefcptPeer::CODCON,$this->getRequestParameter('codigo'));
+          $datos= NpdefcptPeer::doSelectOne($c);
+          if ($datos)
+          {
+          	$c = new Criteria();
+            $c->add(NpasiconnomPeer::CODNOM,$this->getRequestParameter('nomina'));
+            $c->add(NpasiconnomPeer::CODCON,$this->getRequestParameter('codigo'));
+            $resul= NpasiconnomPeer::doSelectOne($c);
+            if ($resul)
+            {
+              $dato=NpdefcptPeer::getDescon($this->getRequestParameter('codigo'));
+              $existe='S';
+            }
+            else
+            {
+          	  $existe='N';
+            }
+          }
+          else
+          {
+            $existe='NN';
+          }
+          $output = '[["existecon","'.$existe.'",""],["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+		else if ($this->getRequestParameter('ajax')=='3')
+	    {
+			$dato=NptipaportesPeer::getDestip($this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
+	    }
+
+
+  	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
+	}
+
+  public function configGrid($codigo='')
+  {
+	$c = new Criteria();
+	$c->add(NpcontipaporetPeer::CODTIPAPO,$codigo);
+	$c->add(NpcontipaporetPeer::TIPO,'R');
+	$per = NpcontipaporetPeer::doSelect($c);
+
+	$opciones = new OpcionesGrid();
+    $opciones->setEliminar(true);
+    $opciones->setTabla('Npcontipaporet');
+	$opciones->setAnchoGrid(850);
+	$opciones->setFilas(50);
+	$opciones->setTitulo('Conceptos para Retenciones');
+	$opciones->setHTMLTotalFilas(' ');
+
+	$col1 = new Columna('Codigo de Nomina');
+	$col1->setTipo(Columna::TEXTO);
+	$col1->setEsGrabable(true);
+	$col1->setNombreCampo('codnom');
+	$col1->setAlineacionObjeto(Columna::CENTRO);
+	$col1->setAlineacionContenido(Columna::CENTRO);
+	$col1->setHTML('type="text" size="15"');
+	$col1->setCatalogo('Npnomina','sf_admin_edit_form',array('codnom' => 1, 'nomnom' => 2),'Npnomina_Nomdefespasicartipnomlot');
+	$col1->setAjax('nomdefconaportes',1,2);
+
+	$col2 = new Columna('Descripción');
+	$col2->setTipo(Columna::TEXTO);
+	$col2->setNombreCampo('nomina');
+	$col2->setAlineacionObjeto(Columna::CENTRO);
+	$col2->setAlineacionContenido(Columna::CENTRO);
+	$col2->setHTML('type="text" size="40" readonly=true');
+
+    $params = array("'+$(this.id).up().previous(1).descendants()[0].value+'",'val2');
+	$col3 = new Columna('Codigo Concepto');
+    $col3->setTipo(Columna::TEXTO);
+    $col3->setEsGrabable(true);
+    $col3->setNombreCampo('codcon');
+    $col3->setAlineacionObjeto(Columna::CENTRO);
+	$col3->setAlineacionContenido(Columna::CENTRO);
+	$col3->setHTML('type="text" size="10"');
+    $col3->setCatalogo('Npdefcpt','sf_admin_edit_form',array('codcon' => 3, 'nomcon' => 4),'Npdefcpt_Nomdefconaportes',$params);
+	$col3->setJScript('onBlur="javascript:event.keyCode=13; ajax(event,this.id);"');
+
+	$col4 = new Columna('Concepto');
+	$col4->setTipo(Columna::TEXTO);
+	$col4->setNombreCampo('concepto');
+	$col4->setAlineacionObjeto(Columna::CENTRO);
+	$col4->setAlineacionContenido(Columna::CENTRO);
+	$col4->setHTML('type="text" size="20" readonly=true');
+
+   	$opciones->addColumna($col1);
+	$opciones->addColumna($col2);
+	$opciones->addColumna($col3);
+	$opciones->addColumna($col4);
+
+	$this->grid = $opciones->getConfig($per);
+  }
+
+protected function saveNpcontipaporet($npcontipaporet)
+  {
+	$grid2=Herramientas::CargarDatosGrid($this,$this->grid);
+	Nomina::salvarContipaporet2($npcontipaporet,$grid2);
+
+  }
+
+ public function executeAutocomplete()
+	{
+		if ($this->getRequestParameter('ajax')=='1')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODNOM','Npnomina','CODNOM',$this->getRequestParameter('npconsalint[codnom]'));
+	    }
+	    else if ($this->getRequestParameter('ajax')=='2')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODCON','Npdefcpt','CODCON',$this->getRequestParameter('npconsalint[codcon]'));
+	    }
+	    else if ($this->getRequestParameter('ajax')=='3')
+	    {
+		 	$this->tags=Herramientas::autocompleteAjax('CODTIPAPO','Nptipaportes','CODTIPAPO',$this->getRequestParameter('npcontipaporet[codtipapo]'));
+	    }
+	}
+
+	 public function executeList()
+  {
+    $this->processSort();
+
+    $this->processFilters();
+
+    $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/npcontipaporet/filters');
+
+    // pager
+    $this->pager = new sfPropelPager('Nptipaportes', 5);
+    $c = new Criteria();
+    $c->addJoin(NpcontipaporetPeer::CODTIPAPO,NptipaportesPeer::CODTIPAPO);
+	$c->Setdistinct();
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->pager->setCriteria($c);
+    $this->pager->setPage($this->getRequestParameter('page', 1));
+    $this->pager->init();
+  }
+
+  public function executeDelete()
+  {
+    $c = new Criteria();
+  	$c->add(NpcontipaporetPeer::CODTIPAPO,$this->getRequestParameter('codigo'));
+    $this->npcontipaporet = NpcontipaporetPeer::doSelectOne($c);
+    $this->forward404Unless($this->npcontipaporet);
+
+    try
     {
-      $this->npcontipaporet->setCodcon($npcontipaporet['codcon']);
+      $this->deleteNpcontipaporet($this->npcontipaporet);
     }
-    
-     $this->npcontipaporet->setTipo('R');
-   
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'Could not delete the selected Npcontipaporet. Make sure it does not have any associated items.');
+      return $this->forward('nomdefconretencion', 'list');
+    }
+
+    return $this->redirect('nomdefconretencion/list');
+  }
+
+   protected function deleteNpcontipaporet($npcontipaporet)
+  {
+     $c = new Criteria();
+  	$c->add(NpcontipaporetPeer::CODTIPAPO,$npcontipaporet->getCodtipapo());
+  	NpcontipaporetPeer::doDelete($c);
   }
 }

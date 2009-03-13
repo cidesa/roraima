@@ -1,0 +1,215 @@
+methods:
+  post:
+   - "opdefemp{ctapag}"
+   - "opdefemp{ctades}"
+   - "opdefemp{ordnom}"
+   - "opdefemp{ordobr}"
+   - "opdefemp{tipeje}"
+   - "opdefemp{ordliq}"
+   - "opdefemp{numini}"
+   - "opdefemp{unitri}"
+   - "opdefemp{cuecajchi}"
+   - "opdefemp{tipcajchi}"
+   - "opdefemp{tiprencajchi}"
+   - "opdefemp{cedrifcajchi}"
+   - "opdefemp{numinicajchi}"
+   - "opdefemp{porrepcajchi}"
+   - "opdefemp{codcatcajchi}"
+
+names:
+  opdefemp{ctapag}:
+    required:  Yes
+    required_msg: Cuenta por Pagar no puedo estar en Blanco
+    validators: ExistValidator_ctapag
+
+  opdefemp{ctades}:
+    required:  Yes
+    required_msg: Cuenta de Descuento no puedo estar en Blanco
+    validators: ExistValidator_ctades
+
+  opdefemp{ordnom}:
+    required:  Yes
+    required_msg: Nómina no puedo estar en Blanco
+    validators: ExistValidator_ordnom
+
+  opdefemp{ordobr}:
+    required:  Yes
+    required_msg: Aportes no puedo estar en Blanco
+    validators: ExistValidator_ordobr
+
+  opdefemp{tipeje}:
+    required:  No
+    validators: ExistValidator_tipeje
+
+  opdefemp{ordliq}:
+    required:  No
+    validators: ExistValidator_ordliq
+
+  opdefemp{cuecajchi}:
+    required:  No
+    validators: ExistValidator_cuecajchi
+
+  opdefemp{tipcajchi}:
+    required:  No
+    validators: ExistValidator_tipcajchi
+
+  opdefemp{tiprencajchi}:
+    required:  No
+    validators: ExistValidator_tiprencajchi
+
+  opdefemp{cedrifcajchi}:
+    required:  No
+    validators: ExistValidator_cedrifcajchi
+
+  opdefemp{codcatcajchi}:
+    required:  No
+    validators: ExistValidator_codcatcajchi
+
+  opdefemp{numini}:
+    required:  Yes
+    required_msg: El Número Inicial de la Orden de Pago no puedo estar en Blanco
+    validators: InicialValidator
+
+  opdefemp{numinicajchi}:
+    required:  No
+    validators: InicialCajChiValidator
+
+  opdefemp{unitri}:
+    required:  No
+    validators: MontoValidator, MyNumberValidator
+
+  opdefemp{porrepcajchi}:
+    required:  No
+    validators: Num3Validator, Porcen1Validator
+
+Validator_codemp:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Opdefemp
+        column:       codemp
+        unique_error: El registro ya Existe intente con otro.
+
+ExistValidator_ctapag:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: La Cuenta por Pagar no Existe.
+
+ExistValidator_ctades:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: La Cuenta de Descuento no EXiste.
+
+ExistValidator_ordnom:
+    class: CidesaExistValidator
+    param:
+        class:        Cpdoccau
+        column:       tipcau
+        unique_error: El Tipo de Orden Nómina no Existe.
+
+ExistValidator_ordobr:
+    class: CidesaExistValidator
+    param:
+        class:        Cpdoccau
+        column:       tipcau
+        unique_error: El Tipo de Orden Aportes no Existe.
+
+ExistValidator_tipeje:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipmov
+        column:       codtip
+        unique_error: El Tipo de Orden Ejecutivo no Existe.
+
+ExistValidator_ordliq:
+    class: CidesaExistValidator
+    param:
+        class:        Cpdoccau
+        column:       tipcau
+        unique_error: El Tipo de Orden Liquidación no Existe.
+
+ExistValidator_ordfid:
+    class: CidesaExistValidator
+    param:
+        class:        Cpdoccau
+        column:       tipcau
+        unique_error: El Tipo de Orden Fideicomiso no Existe.
+
+ExistValidator_cuecajchi:
+    class: CidesaExistValidator
+    param:
+        class:        Tsdefban
+        column:       numcue
+        unique_error: La cuenta Bancaria de Caja Chica no Existe.
+
+ExistValidator_tipcajchi:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipmov
+        column:       codtip
+        unique_error: El Tipo de Movimiento de Salida de Caja Chica no Existe.
+
+ExistValidator_tiprencajchi:
+    class: CidesaExistValidator
+    param:
+        class:        Tstipmov
+        column:       codtip
+        unique_error: El Tipo de Movimiento de Rendición de Caja Chica no Existe.
+
+ExistValidator_cedrifcajchi:
+    class: CidesaExistValidator
+    param:
+        class:        Opbenefi
+        column:       cedrif
+        unique_error: El Beneficiario de Caja Chica no Existe.
+
+ExistValidator_codcatcajchi:
+    class: CidesaExistValidator
+    param:
+        class:        Npcatpre
+        column:       codcat
+        unique_error: El Código Categoría de Caja Chica no Existe.
+
+InicialValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El Número Inicial para la Orden de Pago solo puede contener valores númericos
+
+InicialCajChiValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El Número Inicial de Caja Chica solo puede contener valores númericos
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          000000000000.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          999999999999.99
+        max_error:    El valor debe contener maximo 999.999.999.999,99
+
+Num3Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Porcentaje de Reposición de Caja Chica solo puede contener valores númericos
+
+Porcen1Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje de Reposición de Caja Chica debe estar entre 0-100

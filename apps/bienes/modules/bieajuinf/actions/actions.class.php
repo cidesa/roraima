@@ -18,4 +18,16 @@ class bieajuinfActions extends sfActions
   {
     //$this->forward('default', 'module');
   }
+  public function executeList()
+  {
+    $this->forward('bieajuinf', 'index');
+  }
+  public function executeEdit()
+  {
+    $this->forward('bieajuinf', 'index');
+  }
+  public function executeCreate()
+  {
+    $this->forward('bieajuinf', 'index');
+  }
 }

@@ -9,4 +9,13 @@
  */ 
 class Fordeforgpub extends BaseFordeforgpub
 {
+   public function getPreanu($val=false)
+	{
+		return parent::getPreanu(true);
+	}
+	
+	public function getCapsoc($val=false)
+	{
+		return parent::getCapsoc(true);
+	}
 }

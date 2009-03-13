@@ -8,10 +8,13 @@
   'multipart' => true,
 )) ?>
 
+<?php use_helper('Javascript','PopUp','Grid','Date','SubmitClick','tabs') ?>
+<?php echo javascript_include_tag('dFilter','ajax','tools') ?>
+
 <?php echo object_input_hidden_tag($npnomesptipos, 'getId') ?>
 
+<h2 class="h2" ><?php echo __('Definiciones Generales') ?></h2>
 <fieldset id="sf_fieldset_none" class="">
-<legend>Definiciones Generales</legend>
 <div class="form-row">
   <?php echo label_for('npnomesptipos[codnomesp]', __($labels['npnomesptipos{codnomesp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npnomesptipos{codnomesp}')): ?> form-error<?php endif; ?>">
@@ -20,13 +23,27 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($npnomesptipos, 'getCodnomesp', array (
-  'size' => 20,
+  'size' => 3,
+  'maxlength' => 3,
+  'readonly' => $npnomesptipos->getId()!='' ? true : false ,
   'control_name' => 'npnomesptipos[codnomesp]',
-  )); echo $value ? $value : '&nbsp;' ?> &nbsp; <?php echo button_to('...','#')?>
-    </div>
-</div>
+  'onBlur'=> remote_function(array(
+        'update'   => 'grid',
+        'condition' =>  "$('id').value == ''",
+        'url'      => 'nomespdefinicion/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'script' => true,
+        'with' => "'ajax=1&cajtexdesc=npnomesptipos_desnomesp&cajtexdesde=npnomesptipos_fecnomdes&cajtexhasta=npnomesptipos_fecnomhas&codigo='+this.value"
+        ))
 
-<div class="form-row">
+  )); echo $value ? $value : '&nbsp;' ?> &nbsp;
+
+<?php /*echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Npnomesptipos_nomespdefinicion/clase/Npnomesptipos/frame/sf_admin_edit_form/obj1/npnomesptipos_codnomesp/obj2/npnomesptipos_desnomesp/obj3/npnomesptipos_fecnomdes/obj4/npnomesptipos_fecnomhas/campo1/codnomesp/campo2/desnomesp/campo3/fecnomdes/campo4/fecnomhas/param1/")*/?>
+
+    </div>
+
+<br>
+
   <?php echo label_for('npnomesptipos[desnomesp]', __($labels['npnomesptipos{desnomesp}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npnomesptipos{desnomesp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npnomesptipos{desnomesp}')): ?>
@@ -34,66 +51,55 @@
   <?php endif; ?>
 
   <?php $value = object_input_tag($npnomesptipos, 'getDesnomesp', array (
-  'size' => 50,
+  'size' => 60,
+  'readonly' => $npnomesptipos->getId()!='' ? true : false ,
   'control_name' => 'npnomesptipos[desnomesp]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<fieldset id="sf_fieldset_none" class="">
-<legend>Periodo de la Nomina</legend>
-<div class="form-row"><?php echo label_for('npnomesptipos[fecnomdes]', __($labels['npnomesptipos{fecnomdes}']), 'class="required" ') ?>
-<div
-	class="content<?php if ($sf_request->hasError('npnomesptipos{fecnomdes}')): ?> form-error<?php endif; ?>">
-<?php if ($sf_request->hasError('npnomesptipos{fecnomdes}')): ?> <?php echo form_error('npnomesptipos{fecnomdes}', array('class' => 'form-error-msg')) ?>
-<?php endif; ?> <?php $value = object_input_date_tag($npnomesptipos, 'getFecnomdes', array (
-  'rich' => true,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'npnomesptipos[fecnomdes]',
-  'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; &nbsp; &nbsp;<strong>Hasta</strong>
-&nbsp; <?php $value = object_input_date_tag($npnomesptipos, 'getFecnomhas', array (
-'rich' => true,
-'calendar_button_img' => '/sf/sf_admin/images/date.png',
-'control_name' => 'npnomesptipos[fecnomhas]',
-'date_format' => 'dd/MM/yy',
-)); echo $value ? $value : '&nbsp;' ?></div>
+<br>
 </div>
 </fieldset>
 
-<div class="grid01" id="grid01">
-<fieldset><? if ($rs!='')
-{ ?>
-<table border="0" class="sf_admin_list">
-	<?
-$titulo=array(0 => 'Codigo de Nomina', 1 => 'Tipo de Nomina');
+<br>
 
-if ( count($rs)>0){
-	$i=0;
-	foreach ($rs as $k=>$fila) {
-		$i++;
-		if($i==1){?>
-	<thead>
-		<tr>
-			<? foreach ($fila as $key => $value){?>
-			<th><?=$titulo[$key]?></th>
-			<? }?>
-		</tr>
-	</thead>
-	<? }?>
-	<tr>
-		<? foreach ($fila as $key => $value){?>
-		<td><?=$value?></td>
-		<? }?>
-	</tr>
-	<? }
-}
-?>
-</table>
-<?
-}
-?></fieldset>
+<h2 class="h2" ><?php echo __('Periodo de la Nomina') ?></h2>
+
+<fieldset id="sf_fieldset_none" class="">
+<div class="form-row">
+<?php echo label_for('npnomesptipos[fecnomdes]', __($labels['npnomesptipos{fecnomdes}']), 'class="required" ') ?>
+<div class="content<?php if ($sf_request->hasError('npnomesptipos{fecnomdes}')): ?> form-error<?php endif; ?>">
+<?php if ($sf_request->hasError('npnomesptipos{fecnomdes}')): ?> <?php echo form_error('npnomesptipos{fecnomdes}', array('class' => 'form-error-msg')) ?>
+<?php endif; ?> <?php $value = object_input_date_tag($npnomesptipos, 'getFecnomdes', array (
+  'rich' => true,
+  'readonly' => $npnomesptipos->getId()!='' ? true : false ,
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'npnomesptipos[fecnomdes]',
+  'date_format' => 'dd/MM/yy',
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+)); echo $value ? $value : '&nbsp;' ?> &nbsp; &nbsp; &nbsp; &nbsp;
+<strong>Hasta</strong>
+&nbsp; <?php $value = object_input_date_tag($npnomesptipos, 'getFecnomhas', array (
+'rich' => true,
+'readonly' => $npnomesptipos->getId()!='' ? true : false ,
+'calendar_button_img' => '/sf/sf_admin/images/date.png',
+'control_name' => 'npnomesptipos[fecnomhas]',
+'date_format' => 'dd/MM/yy',
+'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+)); echo $value ? $value : '&nbsp;' ?>
 </div>
+</div>
+
+</fieldset>
+
+<br>
+
+<fieldset id="sf_fieldset_none" class="">
+<br>
+	<div id="grid" class="form-row">
+	<?
+		echo grid_tag($obj);
+	?>
+	</div>
 
 </fieldset>
 
@@ -110,3 +116,82 @@ if ( count($rs)>0){
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+
+ <script type="text/javascript">
+
+    var id="";
+    var id='<?php echo $npnomesptipos->getId()?>';
+    if (id!="")
+    {
+      $('trigger_npnomesptipos_fecnomdes').hide();
+      $('trigger_npnomesptipos_fecnomhas').hide();
+    }
+
+ function totalregistros(letra,posicion,filas)
+  {
+    var fil=0;
+    var total=0;
+    while (fil<filas)
+    {
+      var chk=letra+"_"+fil+"_"+posicion;
+      if ($(chk).value!="")
+      { total=total + 1; }
+     fil++;
+    }
+    return total;
+  }
+
+ function codnom_repetido(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var codret=$(id).value;
+
+   var codretrepetido=false;
+   var am=totalregistros('ax',1,20);
+   var i=0;
+   while (i<am)
+   {
+    var codigo="ax"+"_"+i+"_1";
+
+    var codret2=$(codigo).value;
+
+    if (i!=fila)
+    {
+      if (codret==codret2)
+      {
+        codretrepetido=true;
+        break;
+      }
+    }
+   i++;
+   }
+   return codretrepetido;
+}
+
+function verificar_codnom(e,id)
+{
+  if (codnom_repetido(id))
+    {
+	 alert('El Codigo de la Nomina se encuentra repetido');
+	 $(id).value="";
+	 var aux = id.split("_");
+
+   	var name=aux[0];
+   	var fila=aux[1];
+   	var col=parseInt(aux[2]);
+
+      var coldes=col+1;
+      var nombre=name+"_"+fila+"_"+coldes;
+
+	$(nombre).value="";
+
+    }
+}
+
+
+  </script>

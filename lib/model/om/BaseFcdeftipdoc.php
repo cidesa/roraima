@@ -41,92 +41,118 @@ abstract class BaseFcdeftipdoc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipdoc()
-	{
+  
+  public function getCodtipdoc()
+  {
 
-		return $this->codtipdoc; 		
-	}
-	
-	public function getNomtipdoc()
-	{
+    return trim($this->codtipdoc);
 
-		return $this->nomtipdoc; 		
-	}
-	
-	public function getTemtipdoc()
-	{
+  }
+  
+  public function getNomtipdoc()
+  {
 
-		return $this->temtipdoc; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomtipdoc);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTemtipdoc()
+  {
+
+    return trim($this->temtipdoc);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipdoc($v)
 	{
 
-		if ($this->codtipdoc !== $v) {
-			$this->codtipdoc = $v;
-			$this->modifiedColumns[] = FcdeftipdocPeer::CODTIPDOC;
-		}
-
+    if ($this->codtipdoc !== $v) {
+        $this->codtipdoc = $v;
+        $this->modifiedColumns[] = FcdeftipdocPeer::CODTIPDOC;
+      }
+  
 	} 
 	
 	public function setNomtipdoc($v)
 	{
 
-		if ($this->nomtipdoc !== $v) {
-			$this->nomtipdoc = $v;
-			$this->modifiedColumns[] = FcdeftipdocPeer::NOMTIPDOC;
-		}
-
+    if ($this->nomtipdoc !== $v) {
+        $this->nomtipdoc = $v;
+        $this->modifiedColumns[] = FcdeftipdocPeer::NOMTIPDOC;
+      }
+  
 	} 
 	
 	public function setTemtipdoc($v)
 	{
 
-		if ($this->temtipdoc !== $v) {
-			$this->temtipdoc = $v;
-			$this->modifiedColumns[] = FcdeftipdocPeer::TEMTIPDOC;
-		}
-
+    if ($this->temtipdoc !== $v) {
+        $this->temtipdoc = $v;
+        $this->modifiedColumns[] = FcdeftipdocPeer::TEMTIPDOC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdeftipdocPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdeftipdocPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipdoc = $rs->getString($startcol + 0);
+      $this->codtipdoc = $rs->getString($startcol + 0);
 
-			$this->nomtipdoc = $rs->getString($startcol + 1);
+      $this->nomtipdoc = $rs->getString($startcol + 1);
 
-			$this->temtipdoc = $rs->getString($startcol + 2);
+      $this->temtipdoc = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdeftipdoc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdeftipdoc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -183,6 +209,7 @@ abstract class BaseFcdeftipdoc extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdeftipdocPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdeftipdocPeer::doUpdate($this, $con);

@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class BndismueMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.BndismueMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.BndismueMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('bndismue');
 		$tMap->setPhpName('Bndismue');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('bndismue_SEQ');
 
 		$tMap->addColumn('CODACT', 'Codact', 'string', CreoleTypes::VARCHAR, true, 30);
 
@@ -42,11 +44,11 @@ class BndismueMapBuilder {
 
 		$tMap->addColumn('TIPDISMUE', 'Tipdismue', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('FECDISMUE', 'Fecdismue', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDISMUE', 'Fecdismue', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECDEVDIS', 'Fecdevdis', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECDEVDIS', 'Fecdevdis', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('MONDISMUE', 'Mondismue', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONDISMUE', 'Mondismue', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('DETDISMUE', 'Detdismue', 'string', CreoleTypes::VARCHAR, false, 250);
 
@@ -60,9 +62,9 @@ class BndismueMapBuilder {
 
 		$tMap->addColumn('CODMOT', 'Codmot', 'string', CreoleTypes::VARCHAR, false, 4);
 
-		$tMap->addColumn('VIDUTIL', 'Vidutil', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VIDUTIL', 'Vidutil', 'double', CreoleTypes::NUMERIC, false, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

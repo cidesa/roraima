@@ -33,110 +33,137 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpai()
-	{
+  
+  public function getCodpai()
+  {
 
-		return $this->codpai; 		
-	}
-	
-	public function getCodedo()
-	{
+    return trim($this->codpai);
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodmun()
-	{
+  }
+  
+  public function getCodedo()
+  {
 
-		return $this->codmun; 		
-	}
-	
-	public function getNommun()
-	{
+    return trim($this->codedo);
 
-		return $this->nommun; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodmun()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codmun);
+
+  }
+  
+  public function getNommun()
+  {
+
+    return trim($this->nommun);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = OcmuniciPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = OcmuniciPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = OcmuniciPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = OcmuniciPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = OcmuniciPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = OcmuniciPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setNommun($v)
 	{
 
-		if ($this->nommun !== $v) {
-			$this->nommun = $v;
-			$this->modifiedColumns[] = OcmuniciPeer::NOMMUN;
-		}
-
+    if ($this->nommun !== $v) {
+        $this->nommun = $v;
+        $this->modifiedColumns[] = OcmuniciPeer::NOMMUN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcmuniciPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcmuniciPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpai = $rs->getString($startcol + 0);
+      $this->codpai = $rs->getString($startcol + 0);
 
-			$this->codedo = $rs->getString($startcol + 1);
+      $this->codedo = $rs->getString($startcol + 1);
 
-			$this->codmun = $rs->getString($startcol + 2);
+      $this->codmun = $rs->getString($startcol + 2);
 
-			$this->nommun = $rs->getString($startcol + 3);
+      $this->nommun = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocmunici object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocmunici object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseOcmunici extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcmuniciPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcmuniciPeer::doUpdate($this, $con);

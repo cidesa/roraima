@@ -29,93 +29,119 @@ abstract class BaseFacladto extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getLoguse()
-	{
+  
+  public function getLoguse()
+  {
 
-		return $this->loguse; 		
-	}
-	
-	public function getDescto()
-	{
+    return trim($this->loguse);
 
-		return number_format($this->descto,2,',','.');
-		
-	}
-	
-	public function getClave()
-	{
+  }
+  
+  public function getDescto($val=false)
+  {
 
-		return $this->clave; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->descto,2,',','.');
+    else return $this->descto;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getClave()
+  {
+
+    return trim($this->clave);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setLoguse($v)
 	{
 
-		if ($this->loguse !== $v) {
-			$this->loguse = $v;
-			$this->modifiedColumns[] = FacladtoPeer::LOGUSE;
-		}
-
+    if ($this->loguse !== $v) {
+        $this->loguse = $v;
+        $this->modifiedColumns[] = FacladtoPeer::LOGUSE;
+      }
+  
 	} 
 	
 	public function setDescto($v)
 	{
 
-		if ($this->descto !== $v) {
-			$this->descto = $v;
-			$this->modifiedColumns[] = FacladtoPeer::DESCTO;
-		}
-
+    if ($this->descto !== $v) {
+        $this->descto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FacladtoPeer::DESCTO;
+      }
+  
 	} 
 	
 	public function setClave($v)
 	{
 
-		if ($this->clave !== $v) {
-			$this->clave = $v;
-			$this->modifiedColumns[] = FacladtoPeer::CLAVE;
-		}
-
+    if ($this->clave !== $v) {
+        $this->clave = $v;
+        $this->modifiedColumns[] = FacladtoPeer::CLAVE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FacladtoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FacladtoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->loguse = $rs->getString($startcol + 0);
+      $this->loguse = $rs->getString($startcol + 0);
 
-			$this->descto = $rs->getFloat($startcol + 1);
+      $this->descto = $rs->getFloat($startcol + 1);
 
-			$this->clave = $rs->getString($startcol + 2);
+      $this->clave = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Facladto object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Facladto object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -172,6 +198,7 @@ abstract class BaseFacladto extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FacladtoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FacladtoPeer::doUpdate($this, $con);

@@ -210,6 +210,7 @@ abstract class BaseNpempjorlabPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpempjorlabPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

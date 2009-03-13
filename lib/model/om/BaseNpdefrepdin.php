@@ -49,183 +49,214 @@ abstract class BaseNpdefrepdin extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrep()
-	{
+  
+  public function getCodrep()
+  {
 
-		return $this->codrep; 		
-	}
-	
-	public function getCodcol()
-	{
+    return trim($this->codrep);
 
-		return $this->codcol; 		
-	}
-	
-	public function getNomcol()
-	{
+  }
+  
+  public function getCodcol()
+  {
 
-		return $this->nomcol; 		
-	}
-	
-	public function getValdes()
-	{
+    return trim($this->codcol);
 
-		return $this->valdes; 		
-	}
-	
-	public function getValhas()
-	{
+  }
+  
+  public function getNomcol()
+  {
 
-		return $this->valhas; 		
-	}
-	
-	public function getOrden()
-	{
+    return trim($this->nomcol);
 
-		return $this->orden; 		
-	}
-	
-	public function getTipcol()
-	{
+  }
+  
+  public function getValdes()
+  {
 
-		return $this->tipcol; 		
-	}
-	
-	public function getLoncol()
-	{
+    return trim($this->valdes);
 
-		return number_format($this->loncol,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getValhas()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->valhas);
+
+  }
+  
+  public function getOrden()
+  {
+
+    return trim($this->orden);
+
+  }
+  
+  public function getTipcol()
+  {
+
+    return trim($this->tipcol);
+
+  }
+  
+  public function getLoncol($val=false)
+  {
+
+    if($val) return number_format($this->loncol,2,',','.');
+    else return $this->loncol;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrep($v)
 	{
 
-		if ($this->codrep !== $v) {
-			$this->codrep = $v;
-			$this->modifiedColumns[] = NpdefrepdinPeer::CODREP;
-		}
-
+    if ($this->codrep !== $v) {
+        $this->codrep = $v;
+        $this->modifiedColumns[] = NpdefrepdinPeer::CODREP;
+      }
+  
 	} 
 	
 	public function setCodcol($v)
 	{
 
-		if ($this->codcol !== $v) {
-			$this->codcol = $v;
-			$this->modifiedColumns[] = NpdefrepdinPeer::CODCOL;
-		}
-
+    if ($this->codcol !== $v) {
+        $this->codcol = $v;
+        $this->modifiedColumns[] = NpdefrepdinPeer::CODCOL;
+      }
+  
 	} 
 	
 	public function setNomcol($v)
 	{
 
-		if ($this->nomcol !== $v) {
-			$this->nomcol = $v;
-			$this->modifiedColumns[] = NpdefrepdinPeer::NOMCOL;
-		}
-
+    if ($this->nomcol !== $v) {
+        $this->nomcol = $v;
+        $this->modifiedColumns[] = NpdefrepdinPeer::NOMCOL;
+      }
+  
 	} 
 	
 	public function setValdes($v)
 	{
 
-		if ($this->valdes !== $v) {
-			$this->valdes = $v;
-			$this->modifiedColumns[] = NpdefrepdinPeer::VALDES;
-		}
-
+    if ($this->valdes !== $v) {
+        $this->valdes = $v;
+        $this->modifiedColumns[] = NpdefrepdinPeer::VALDES;
+      }
+  
 	} 
 	
 	public function setValhas($v)
 	{
 
-		if ($this->valhas !== $v) {
-			$this->valhas = $v;
-			$this->modifiedColumns[] = NpdefrepdinPeer::VALHAS;
-		}
-
+    if ($this->valhas !== $v) {
+        $this->valhas = $v;
+        $this->modifiedColumns[] = NpdefrepdinPeer::VALHAS;
+      }
+  
 	} 
 	
 	public function setOrden($v)
 	{
 
-		if ($this->orden !== $v) {
-			$this->orden = $v;
-			$this->modifiedColumns[] = NpdefrepdinPeer::ORDEN;
-		}
-
+    if ($this->orden !== $v) {
+        $this->orden = $v;
+        $this->modifiedColumns[] = NpdefrepdinPeer::ORDEN;
+      }
+  
 	} 
 	
 	public function setTipcol($v)
 	{
 
-		if ($this->tipcol !== $v) {
-			$this->tipcol = $v;
-			$this->modifiedColumns[] = NpdefrepdinPeer::TIPCOL;
-		}
-
+    if ($this->tipcol !== $v) {
+        $this->tipcol = $v;
+        $this->modifiedColumns[] = NpdefrepdinPeer::TIPCOL;
+      }
+  
 	} 
 	
 	public function setLoncol($v)
 	{
 
-		if ($this->loncol !== $v) {
-			$this->loncol = $v;
-			$this->modifiedColumns[] = NpdefrepdinPeer::LONCOL;
-		}
-
+    if ($this->loncol !== $v) {
+        $this->loncol = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpdefrepdinPeer::LONCOL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpdefrepdinPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpdefrepdinPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrep = $rs->getString($startcol + 0);
+      $this->codrep = $rs->getString($startcol + 0);
 
-			$this->codcol = $rs->getString($startcol + 1);
+      $this->codcol = $rs->getString($startcol + 1);
 
-			$this->nomcol = $rs->getString($startcol + 2);
+      $this->nomcol = $rs->getString($startcol + 2);
 
-			$this->valdes = $rs->getString($startcol + 3);
+      $this->valdes = $rs->getString($startcol + 3);
 
-			$this->valhas = $rs->getString($startcol + 4);
+      $this->valhas = $rs->getString($startcol + 4);
 
-			$this->orden = $rs->getString($startcol + 5);
+      $this->orden = $rs->getString($startcol + 5);
 
-			$this->tipcol = $rs->getString($startcol + 6);
+      $this->tipcol = $rs->getString($startcol + 6);
 
-			$this->loncol = $rs->getFloat($startcol + 7);
+      $this->loncol = $rs->getFloat($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npdefrepdin object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npdefrepdin object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -282,6 +313,7 @@ abstract class BaseNpdefrepdin extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpdefrepdinPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpdefrepdinPeer::doUpdate($this, $con);

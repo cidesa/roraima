@@ -1,0 +1,36 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Liregsol
+    theme:            cidesaGenerator
+    fields:
+      numsol:         { name: Número, params: size=10 maxlength=8 }
+      dessol: 	      { name: Descripción, type: textarea_tag, params: size=70x3 maxlength=500  }
+      litipsol_id:     { name: Tipo de Solicitud}
+      fecsol:         { name: Fecha de Solicitud }
+      fecres:         { name: Fecha de Respuesta }
+      obssol:         { name: Observación, type: textarea_tag, params: size=70x3 maxlength=1000 }
+      codemp:         { name: Atendido por }
+      lidatste_id:    { name: Unidad Solicitante }
+      licomlic_id:    { name: Comisión de Licitación }
+    list:
+      title:          Registro de Solicitudes de Servicios/Obra/Bien
+      filters:		  [numsol, dessol]
+      fields:
+        dessol:
+          params: size=18
+      display:        [=numsol, dessol]
+      max_per_page:	  10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title:          Edición de Registro de Solicitudes de Servicios/Obra/Bien
+      display:
+        Datos Principales:  [_numsol, dessol, litipsol_id, _lidatste_id, fecsol, fecres, obssol]
+        Atendido Por:       [_licomlic_id, _codemp]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

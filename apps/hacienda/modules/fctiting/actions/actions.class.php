@@ -22,6 +22,7 @@ class fctitingActions extends autofctitingActions
       $this->saveFcpreing($this->fcpreing);
 
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {

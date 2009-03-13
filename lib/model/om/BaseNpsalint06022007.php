@@ -41,193 +41,220 @@ abstract class BaseNpsalint06022007 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->codcon);
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodasi()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return $this->codasi; 		
-	}
-	
-	public function getMonasi()
-	{
+    return trim($this->codemp);
 
-		return number_format($this->monasi,2,',','.');
-		
-	}
-	
-	public function getFecinicon($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodasi()
+  {
 
-		if ($this->fecinicon === null || $this->fecinicon === '') {
-			return null;
-		} elseif (!is_int($this->fecinicon)) {
-						$ts = strtotime($this->fecinicon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecinicon] as date/time value: " . var_export($this->fecinicon, true));
-			}
-		} else {
-			$ts = $this->fecinicon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codasi);
 
-	
-	public function getFecfincon($format = 'Y-m-d')
-	{
+  }
+  
+  public function getMonasi($val=false)
+  {
 
-		if ($this->fecfincon === null || $this->fecfincon === '') {
-			return null;
-		} elseif (!is_int($this->fecfincon)) {
-						$ts = strtotime($this->fecfincon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfincon] as date/time value: " . var_export($this->fecfincon, true));
-			}
-		} else {
-			$ts = $this->fecfincon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->monasi,2,',','.');
+    else return $this->monasi;
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getFecinicon($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecinicon === null || $this->fecinicon === '') {
+      return null;
+    } elseif (!is_int($this->fecinicon)) {
+            $ts = adodb_strtotime($this->fecinicon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecinicon] as date/time value: " . var_export($this->fecinicon, true));
+      }
+    } else {
+      $ts = $this->fecinicon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecfincon($format = 'Y-m-d')
+  {
+
+    if ($this->fecfincon === null || $this->fecfincon === '') {
+      return null;
+    } elseif (!is_int($this->fecfincon)) {
+            $ts = adodb_strtotime($this->fecfincon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfincon] as date/time value: " . var_export($this->fecfincon, true));
+      }
+    } else {
+      $ts = $this->fecfincon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = Npsalint06022007Peer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = Npsalint06022007Peer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = Npsalint06022007Peer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = Npsalint06022007Peer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodasi($v)
 	{
 
-		if ($this->codasi !== $v) {
-			$this->codasi = $v;
-			$this->modifiedColumns[] = Npsalint06022007Peer::CODASI;
-		}
-
+    if ($this->codasi !== $v) {
+        $this->codasi = $v;
+        $this->modifiedColumns[] = Npsalint06022007Peer::CODASI;
+      }
+  
 	} 
 	
 	public function setMonasi($v)
 	{
 
-		if ($this->monasi !== $v) {
-			$this->monasi = $v;
-			$this->modifiedColumns[] = Npsalint06022007Peer::MONASI;
-		}
-
+    if ($this->monasi !== $v) {
+        $this->monasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Npsalint06022007Peer::MONASI;
+      }
+  
 	} 
 	
 	public function setFecinicon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecinicon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecinicon !== $ts) {
-			$this->fecinicon = $ts;
-			$this->modifiedColumns[] = Npsalint06022007Peer::FECINICON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecinicon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecinicon !== $ts) {
+      $this->fecinicon = $ts;
+      $this->modifiedColumns[] = Npsalint06022007Peer::FECINICON;
+    }
 
 	} 
 	
 	public function setFecfincon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfincon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfincon !== $ts) {
-			$this->fecfincon = $ts;
-			$this->modifiedColumns[] = Npsalint06022007Peer::FECFINCON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfincon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfincon !== $ts) {
+      $this->fecfincon = $ts;
+      $this->modifiedColumns[] = Npsalint06022007Peer::FECFINCON;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Npsalint06022007Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Npsalint06022007Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->codemp = $rs->getString($startcol + 1);
+      $this->codemp = $rs->getString($startcol + 1);
 
-			$this->codasi = $rs->getString($startcol + 2);
+      $this->codasi = $rs->getString($startcol + 2);
 
-			$this->monasi = $rs->getFloat($startcol + 3);
+      $this->monasi = $rs->getFloat($startcol + 3);
 
-			$this->fecinicon = $rs->getDate($startcol + 4, null);
+      $this->fecinicon = $rs->getDate($startcol + 4, null);
 
-			$this->fecfincon = $rs->getDate($startcol + 5, null);
+      $this->fecfincon = $rs->getDate($startcol + 5, null);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npsalint06022007 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npsalint06022007 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -284,6 +311,7 @@ abstract class BaseNpsalint06022007 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Npsalint06022007Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Npsalint06022007Peer::doUpdate($this, $con);

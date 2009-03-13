@@ -7,8 +7,13 @@
   'name'      => 'sf_admin_edit_form',
   'multipart' => true,
 )) ?>
-
 <?php echo object_input_hidden_tag($caajuoc, 'getId') ?>
+<?php use_helper('PopUp', 'wait', 'Linktoapp') ?>
+<?php echo javascript_include_tag('dFilter') ?>
+<?php echo javascript_include_tag('ajax') ?>
+<?php echo javascript_include_tag('tools','observe') ?>
+<?php echo javascript_include_tag('compras/almajuoc') ?>
+<?php echo javascript_include_tag('grid') ?>
 
 <fieldset id="sf_fieldset_none" class="">
 
@@ -21,27 +26,35 @@
 
   <?php $value = object_input_tag($caajuoc, 'getAjuoc', array (
   'size' => 20,
+  'maxlength' => 8,
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('caajuoc_ajuoc').value=valor;",
   'control_name' => 'caajuoc[ajuoc]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
+<br>
   <?php echo label_for('caajuoc[ordcom]', __($labels['caajuoc{ordcom}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caajuoc{ordcom}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caajuoc{ordcom}')): ?>
     <?php echo form_error('caajuoc{ordcom}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($caajuoc, 'getOrdcom', array (
+  <?php $value = input_auto_complete_tag('caajuoc[ordcom]', $caajuoc->getOrdcom(), cross_app_link_to('herramientas','autocomplete').'/fieldwhere/ordcom/table/caordcom/fieldget/ordcom/val/caajuoc[ordcom]', array (
   'size' => 20,
-  'control_name' => 'caajuoc[ordcom]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
+  'maxlegth'=> 8,
+  'onBlur'=> remote_function(array(
+   'update'   => 'divGrid',
+              'url'      => 'almajuoc/ajax',
+              'complete' => 'AjaxJSON(request, json); actualizarsaldos();',
+              'with' => "'ajax=1&codigo='+this.value+'&id='+document.getElementById('id').value",
+              'script' => 'true',
+        ))
 
-<div class="form-row">
-  <?php echo label_for('caajuoc[fecaju]', __($labels['caajuoc{fecaju}']), '') ?>
+),array('use_style' => 'true')); echo $value ? $value : '&nbsp;' ?>
+  <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Caordcom_Almajuoc/clase/Caordcom/frame/sf_admin_edit_form/obj1/caajuoc_ordcom/obj2/caajuoc_desord/')  ?>
+  <?php echo input_tag('caajuoc[desord]',$caajuoc->getDesord(),'disabled=false; size=80'); ?>
+    </div>
+<br>
+  <?php echo label_for('caajuoc[fecaju]', __($labels['caajuoc{fecaju}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caajuoc{fecaju}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caajuoc{fecaju}')): ?>
     <?php echo form_error('caajuoc{fecaju}', array('class' => 'form-error-msg')) ?>
@@ -51,12 +64,11 @@
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'caajuoc[fecaju]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('caajuoc[desaju]', __($labels['caajuoc{desaju}']), '') ?>
+<br>
+  <?php echo label_for('caajuoc[desaju]', __($labels['caajuoc{desaju}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caajuoc{desaju}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caajuoc{desaju}')): ?>
     <?php echo form_error('caajuoc{desaju}', array('class' => 'form-error-msg')) ?>
@@ -67,57 +79,63 @@
   'control_name' => 'caajuoc[desaju]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+<br>
+<table border=0 >
+<tr>
+  <th>
+    <?php echo label_for('caajuoc[codpro]', __($labels['caajuoc{codpro}']), 'class="required" ') ?>
+    <div class="content<?php if ($sf_request->hasError('caajuoc{codpro}')): ?> form-error<?php endif; ?>">
+    <?php if ($sf_request->hasError('caajuoc{codpro}')): ?>
+      <?php echo form_error('caajuoc{codpro}', array('class' => 'form-error-msg')) ?>
+    <?php endif; ?>
 
-<div class="form-row">
-  <?php echo label_for('caajuoc[monaju]', __($labels['caajuoc{monaju}']), '') ?>
+    <?php $value = object_input_tag($caajuoc, 'getCodpro', array (
+    'disabled' => true,
+    'control_name' => 'caajuoc[codpro]',
+  )); echo $value ? $value : '&nbsp;' ?>
+      </div>
+
+  </th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+  <th>
+    <?php echo label_for('caajuoc[nompro]', __($labels['caajuoc{nompro}']), 'style="width:150px" class="required" ') ?>
+    <div class="content<?php if ($sf_request->hasError('caajuoc{nompro}')): ?> form-error<?php endif; ?>">
+    <?php if ($sf_request->hasError('caajuoc{nompro}')): ?>
+      <?php echo form_error('caajuoc{nompro}', array('class' => 'form-error-msg')) ?>
+    <?php endif; ?>
+
+    <?php $value = object_input_tag($caajuoc, 'getNompro', array (
+    'disabled' => true,
+    'size' => 40,
+    'control_name' => 'caajuoc[nompro]',
+  )); echo $value ? $value : '&nbsp;' ?>
+      </div>
+
+  </th>
+</tr>
+</table>
+<br>
+  <?php echo label_for('caajuoc[monaju]', __($labels['caajuoc{monaju}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('caajuoc{monaju}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('caajuoc{monaju}')): ?>
     <?php echo form_error('caajuoc{monaju}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($caajuoc, 'getMonaju', array (
-  'size' => 7,
+  <?php $value = object_input_tag($caajuoc, array('getMonaju',true), array (
+  'size' => 15,
   'control_name' => 'caajuoc[monaju]',
+  'readonly'=> true,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
 
 </fieldset>
 
-<div class="grid01" id="grid01">
-<fieldset>
-<legend>Detalle del Ajuste</legend>
-<table border="0" class="sf_admin_list">
-<thead>
-	<tr>
-	    <th><?php echo CaartaocPeer::getColumName(CaartaocPeer::AJUOC) ?></th>
-	    <th><?php echo CaartaocPeer::getColumName(CaartaocPeer::CODART )  ?></th>
-	    <th><?php echo CaartaocPeer::getColumName(CaartaocPeer::CANAJU) ?></th>
-	    <th><?php echo CaartaocPeer::getColumName(CaartaocPeer::CANORD) ?></th>
-	    <th><?php echo CaartaocPeer::getColumName(CaartaocPeer::MONTOT) ?></th>
-	</tr>
-</thead>
-<tbody>
-	<?php $i = 1; foreach ($pagercaartaoc->getResults() as $caartaoc): $odd = fmod(++$i, 2) ?>
-	<tr class="sf_admin_row_<?php echo $odd ?>">
-	    <td><?php echo $caartaoc->getAjuoc() ?></td>
-	    <td><?php echo $caartaoc->getCodart()  ?></td>
-	    <td><?php echo $caartaoc->getCanaju() ?></td>
-	    <td><?php echo $caartaoc->getCanord() ?></td>
-	    <td><?php echo $caartaoc->getMontot() ?></td>
-	</tr>
-	<?php endforeach; ?>
-</tbody>	
-  </table>
-</fieldset>
-</div>
-
+<?php include_partial('grid', array('obj' => $obj)) ?>
 
 <?php include_partial('edit_actions', array('caajuoc' => $caajuoc)) ?>
 
 </form>
-
 <ul class="sf_admin_actions">
       <li class="float-left"><?php if ($caajuoc->getId()): ?>
 <?php echo button_to(__('delete'), 'almajuoc/delete?id='.$caajuoc->getId(), array (

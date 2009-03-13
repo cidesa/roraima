@@ -10,4 +10,25 @@
  */
 class oycdeftiporgActions extends autooycdeftiporgActions
 {
+  public function executeAjax()
+  {
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+	 $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+	 if ($this->getRequestParameter('ajax')=='1')
+	 {
+	 	$dato=OctiporgPeer::getDestiporg(trim($this->getRequestParameter('codigo')));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 	return sfView::HEADER_ONLY;
+	 }
+  }
+
+  protected function deleteOctiporg($octiporg)
+  {
+  	if (Herramientas::getX_vacio('codtiporg','ocdeforg','codtiporg',$octiporg->getCodtiporg())=='')
+    {
+    	$octiporg->delete();
+    }
+  }
 }

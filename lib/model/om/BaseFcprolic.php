@@ -73,6 +73,14 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 
 
 	
+	protected $texpub;
+
+
+	
+	protected $protip;
+
+
+	
 	protected $id;
 
 	
@@ -87,375 +95,450 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNrocon()
-	{
+  
+  public function getNrocon()
+  {
 
-		return $this->nrocon; 		
-	}
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    return trim($this->nrocon);
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-	
-	public function getRifcon()
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->rifcon; 		
-	}
-	
-	public function getTippro()
-	{
+  
+  public function getRifcon()
+  {
 
-		return $this->tippro; 		
-	}
-	
-	public function getDespro()
-	{
+    return trim($this->rifcon);
 
-		return $this->despro; 		
-	}
-	
-	public function getDirpro()
-	{
+  }
+  
+  public function getTippro()
+  {
 
-		return $this->dirpro; 		
-	}
-	
-	public function getMonpro()
-	{
+    return trim($this->tippro);
 
-		return number_format($this->monpro,2,',','.');
-		
-	}
-	
-	public function getMonimp()
-	{
+  }
+  
+  public function getDespro()
+  {
 
-		return number_format($this->monimp,2,',','.');
-		
-	}
-	
-	public function getFunrec()
-	{
+    return trim($this->despro);
 
-		return $this->funrec; 		
-	}
-	
-	public function getFecrec($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDirpro()
+  {
 
-		if ($this->fecrec === null || $this->fecrec === '') {
-			return null;
-		} elseif (!is_int($this->fecrec)) {
-						$ts = strtotime($this->fecrec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
-			}
-		} else {
-			$ts = $this->fecrec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->dirpro);
 
-	
-	public function getRifrep()
-	{
+  }
+  
+  public function getMonpro($val=false)
+  {
 
-		return $this->rifrep; 		
-	}
-	
-	public function getStapro()
-	{
+    if($val) return number_format($this->monpro,2,',','.');
+    else return $this->monpro;
 
-		return $this->stapro; 		
-	}
-	
-	public function getStadec()
-	{
+  }
+  
+  public function getMonimp($val=false)
+  {
 
-		return $this->stadec; 		
-	}
-	
-	public function getNomcon()
-	{
+    if($val) return number_format($this->monimp,2,',','.');
+    else return $this->monimp;
 
-		return $this->nomcon; 		
-	}
-	
-	public function getDircon()
-	{
+  }
+  
+  public function getFunrec()
+  {
 
-		return $this->dircon; 		
-	}
-	
-	public function getSemdia()
-	{
+    return trim($this->funrec);
 
-		return number_format($this->semdia,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getFecrec($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecrec === null || $this->fecrec === '') {
+      return null;
+    } elseif (!is_int($this->fecrec)) {
+            $ts = adodb_strtotime($this->fecrec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrec] as date/time value: " . var_export($this->fecrec, true));
+      }
+    } else {
+      $ts = $this->fecrec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getRifrep()
+  {
+
+    return trim($this->rifrep);
+
+  }
+  
+  public function getStapro()
+  {
+
+    return trim($this->stapro);
+
+  }
+  
+  public function getStadec()
+  {
+
+    return trim($this->stadec);
+
+  }
+  
+  public function getNomcon()
+  {
+
+    return trim($this->nomcon);
+
+  }
+  
+  public function getDircon()
+  {
+
+    return trim($this->dircon);
+
+  }
+  
+  public function getSemdia($val=false)
+  {
+
+    if($val) return number_format($this->semdia,2,',','.');
+    else return $this->semdia;
+
+  }
+  
+  public function getTexpub()
+  {
+
+    return trim($this->texpub);
+
+  }
+  
+  public function getProtip()
+  {
+
+    return trim($this->protip);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNrocon($v)
 	{
 
-		if ($this->nrocon !== $v) {
-			$this->nrocon = $v;
-			$this->modifiedColumns[] = FcprolicPeer::NROCON;
-		}
-
+    if ($this->nrocon !== $v) {
+        $this->nrocon = $v;
+        $this->modifiedColumns[] = FcprolicPeer::NROCON;
+      }
+  
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = FcprolicPeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = FcprolicPeer::FECREG;
+    }
 
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FcprolicPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FcprolicPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setTippro($v)
 	{
 
-		if ($this->tippro !== $v) {
-			$this->tippro = $v;
-			$this->modifiedColumns[] = FcprolicPeer::TIPPRO;
-		}
-
+    if ($this->tippro !== $v) {
+        $this->tippro = $v;
+        $this->modifiedColumns[] = FcprolicPeer::TIPPRO;
+      }
+  
 	} 
 	
 	public function setDespro($v)
 	{
 
-		if ($this->despro !== $v) {
-			$this->despro = $v;
-			$this->modifiedColumns[] = FcprolicPeer::DESPRO;
-		}
-
+    if ($this->despro !== $v) {
+        $this->despro = $v;
+        $this->modifiedColumns[] = FcprolicPeer::DESPRO;
+      }
+  
 	} 
 	
 	public function setDirpro($v)
 	{
 
-		if ($this->dirpro !== $v) {
-			$this->dirpro = $v;
-			$this->modifiedColumns[] = FcprolicPeer::DIRPRO;
-		}
-
+    if ($this->dirpro !== $v) {
+        $this->dirpro = $v;
+        $this->modifiedColumns[] = FcprolicPeer::DIRPRO;
+      }
+  
 	} 
 	
 	public function setMonpro($v)
 	{
 
-		if ($this->monpro !== $v) {
-			$this->monpro = $v;
-			$this->modifiedColumns[] = FcprolicPeer::MONPRO;
-		}
-
+    if ($this->monpro !== $v) {
+        $this->monpro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcprolicPeer::MONPRO;
+      }
+  
 	} 
 	
 	public function setMonimp($v)
 	{
 
-		if ($this->monimp !== $v) {
-			$this->monimp = $v;
-			$this->modifiedColumns[] = FcprolicPeer::MONIMP;
-		}
-
+    if ($this->monimp !== $v) {
+        $this->monimp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcprolicPeer::MONIMP;
+      }
+  
 	} 
 	
 	public function setFunrec($v)
 	{
 
-		if ($this->funrec !== $v) {
-			$this->funrec = $v;
-			$this->modifiedColumns[] = FcprolicPeer::FUNREC;
-		}
-
+    if ($this->funrec !== $v) {
+        $this->funrec = $v;
+        $this->modifiedColumns[] = FcprolicPeer::FUNREC;
+      }
+  
 	} 
 	
 	public function setFecrec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrec !== $ts) {
-			$this->fecrec = $ts;
-			$this->modifiedColumns[] = FcprolicPeer::FECREC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrec !== $ts) {
+      $this->fecrec = $ts;
+      $this->modifiedColumns[] = FcprolicPeer::FECREC;
+    }
 
 	} 
 	
 	public function setRifrep($v)
 	{
 
-		if ($this->rifrep !== $v) {
-			$this->rifrep = $v;
-			$this->modifiedColumns[] = FcprolicPeer::RIFREP;
-		}
-
+    if ($this->rifrep !== $v) {
+        $this->rifrep = $v;
+        $this->modifiedColumns[] = FcprolicPeer::RIFREP;
+      }
+  
 	} 
 	
 	public function setStapro($v)
 	{
 
-		if ($this->stapro !== $v) {
-			$this->stapro = $v;
-			$this->modifiedColumns[] = FcprolicPeer::STAPRO;
-		}
-
+    if ($this->stapro !== $v) {
+        $this->stapro = $v;
+        $this->modifiedColumns[] = FcprolicPeer::STAPRO;
+      }
+  
 	} 
 	
 	public function setStadec($v)
 	{
 
-		if ($this->stadec !== $v) {
-			$this->stadec = $v;
-			$this->modifiedColumns[] = FcprolicPeer::STADEC;
-		}
-
+    if ($this->stadec !== $v) {
+        $this->stadec = $v;
+        $this->modifiedColumns[] = FcprolicPeer::STADEC;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = FcprolicPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = FcprolicPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setDircon($v)
 	{
 
-		if ($this->dircon !== $v) {
-			$this->dircon = $v;
-			$this->modifiedColumns[] = FcprolicPeer::DIRCON;
-		}
-
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = FcprolicPeer::DIRCON;
+      }
+  
 	} 
 	
 	public function setSemdia($v)
 	{
 
-		if ($this->semdia !== $v) {
-			$this->semdia = $v;
-			$this->modifiedColumns[] = FcprolicPeer::SEMDIA;
-		}
+    if ($this->semdia !== $v) {
+        $this->semdia = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcprolicPeer::SEMDIA;
+      }
+  
+	} 
+	
+	public function setTexpub($v)
+	{
 
+    if ($this->texpub !== $v) {
+        $this->texpub = $v;
+        $this->modifiedColumns[] = FcprolicPeer::TEXPUB;
+      }
+  
+	} 
+	
+	public function setProtip($v)
+	{
+
+    if ($this->protip !== $v) {
+        $this->protip = $v;
+        $this->modifiedColumns[] = FcprolicPeer::PROTIP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcprolicPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcprolicPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nrocon = $rs->getString($startcol + 0);
+      $this->nrocon = $rs->getString($startcol + 0);
 
-			$this->fecreg = $rs->getDate($startcol + 1, null);
+      $this->fecreg = $rs->getDate($startcol + 1, null);
 
-			$this->rifcon = $rs->getString($startcol + 2);
+      $this->rifcon = $rs->getString($startcol + 2);
 
-			$this->tippro = $rs->getString($startcol + 3);
+      $this->tippro = $rs->getString($startcol + 3);
 
-			$this->despro = $rs->getString($startcol + 4);
+      $this->despro = $rs->getString($startcol + 4);
 
-			$this->dirpro = $rs->getString($startcol + 5);
+      $this->dirpro = $rs->getString($startcol + 5);
 
-			$this->monpro = $rs->getFloat($startcol + 6);
+      $this->monpro = $rs->getFloat($startcol + 6);
 
-			$this->monimp = $rs->getFloat($startcol + 7);
+      $this->monimp = $rs->getFloat($startcol + 7);
 
-			$this->funrec = $rs->getString($startcol + 8);
+      $this->funrec = $rs->getString($startcol + 8);
 
-			$this->fecrec = $rs->getDate($startcol + 9, null);
+      $this->fecrec = $rs->getDate($startcol + 9, null);
 
-			$this->rifrep = $rs->getString($startcol + 10);
+      $this->rifrep = $rs->getString($startcol + 10);
 
-			$this->stapro = $rs->getString($startcol + 11);
+      $this->stapro = $rs->getString($startcol + 11);
 
-			$this->stadec = $rs->getString($startcol + 12);
+      $this->stadec = $rs->getString($startcol + 12);
 
-			$this->nomcon = $rs->getString($startcol + 13);
+      $this->nomcon = $rs->getString($startcol + 13);
 
-			$this->dircon = $rs->getString($startcol + 14);
+      $this->dircon = $rs->getString($startcol + 14);
 
-			$this->semdia = $rs->getFloat($startcol + 15);
+      $this->semdia = $rs->getFloat($startcol + 15);
 
-			$this->id = $rs->getInt($startcol + 16);
+      $this->texpub = $rs->getString($startcol + 16);
 
-			$this->resetModified();
+      $this->protip = $rs->getString($startcol + 17);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 18);
 
-						return $startcol + 17; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcprolic object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 19; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcprolic object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -512,6 +595,7 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcprolicPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcprolicPeer::doUpdate($this, $con);
@@ -642,6 +726,12 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 				return $this->getSemdia();
 				break;
 			case 16:
+				return $this->getTexpub();
+				break;
+			case 17:
+				return $this->getProtip();
+				break;
+			case 18:
 				return $this->getId();
 				break;
 			default:
@@ -670,7 +760,9 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 			$keys[13] => $this->getNomcon(),
 			$keys[14] => $this->getDircon(),
 			$keys[15] => $this->getSemdia(),
-			$keys[16] => $this->getId(),
+			$keys[16] => $this->getTexpub(),
+			$keys[17] => $this->getProtip(),
+			$keys[18] => $this->getId(),
 		);
 		return $result;
 	}
@@ -735,6 +827,12 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 				$this->setSemdia($value);
 				break;
 			case 16:
+				$this->setTexpub($value);
+				break;
+			case 17:
+				$this->setProtip($value);
+				break;
+			case 18:
 				$this->setId($value);
 				break;
 		} 	}
@@ -760,7 +858,9 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[13], $arr)) $this->setNomcon($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setDircon($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setSemdia($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
+		if (array_key_exists($keys[16], $arr)) $this->setTexpub($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setProtip($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
 	}
 
 	
@@ -784,6 +884,8 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FcprolicPeer::NOMCON)) $criteria->add(FcprolicPeer::NOMCON, $this->nomcon);
 		if ($this->isColumnModified(FcprolicPeer::DIRCON)) $criteria->add(FcprolicPeer::DIRCON, $this->dircon);
 		if ($this->isColumnModified(FcprolicPeer::SEMDIA)) $criteria->add(FcprolicPeer::SEMDIA, $this->semdia);
+		if ($this->isColumnModified(FcprolicPeer::TEXPUB)) $criteria->add(FcprolicPeer::TEXPUB, $this->texpub);
+		if ($this->isColumnModified(FcprolicPeer::PROTIP)) $criteria->add(FcprolicPeer::PROTIP, $this->protip);
 		if ($this->isColumnModified(FcprolicPeer::ID)) $criteria->add(FcprolicPeer::ID, $this->id);
 
 		return $criteria;
@@ -846,6 +948,10 @@ abstract class BaseFcprolic extends BaseObject  implements Persistent {
 		$copyObj->setDircon($this->dircon);
 
 		$copyObj->setSemdia($this->semdia);
+
+		$copyObj->setTexpub($this->texpub);
+
+		$copyObj->setProtip($this->protip);
 
 
 		if ($deepCopy) {

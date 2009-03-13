@@ -1,21 +1,35 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Fccarinm
-    theme:            default
+    theme:            cidesaGenerator
+
     fields:
-      codcarinm: { name: Código}
-      nomcarinm: { name: Descripción}
-      stacarinm: { name: Usa M2}      
-        
+      codcarinm:  { name: Código, params: size=4 maxlength=3 }
+      nomcarinm:  { name: Descripcion, params: size=40 maxlength=240 }
+      stacarinm:  { name: Usa M2, params: size=10 maxlength=1 }
+
     list:
-      title:          Características de Inmuebles  
-      filters:        [codcarinm]
-      display:        [=codcarinm, nomcarinm]           
+      title:     Definición de Uso de Inmuebles
+      display:   [=codcarinm, nomcarinm]
+      sort:      nomcarinm
+      filters:   [codcarinm, nomcarinm]
+      fields:
+        nomcarinm:
+          params: size=18
+      max_per_page: 10
+      sort:  codcarinm
       object_actions:
-        _edit:        ~     
-        _delete:      ~ 
-      max_per_page:   5    
+        _edit:        ~
+        _delete:      ~
+
+
     edit:
-      title:          Características de Inmuebles
-      display:       [=codcarinm, nomcarinm, stacarinm]
+      title: Edición de Uso de Inmuebles
+      display:
+        "Datos Generales": [ _codcarinm, nomcarinm, _stacarinm]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

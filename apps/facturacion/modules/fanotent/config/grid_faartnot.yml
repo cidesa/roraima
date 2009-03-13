@@ -1,0 +1,89 @@
+opciones:                  # Opciones generales
+  eliminar:                false
+  tabla:                   faartnot
+  anchogrid:               900
+  ancho:                   1500
+  filas:                   30
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Cod. Almacén
+  tipo:                    t
+  nombrecampo:             codalm
+  html:                    [size="20"]
+  esgrabable:              true
+2:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             nomalm
+  html:                    [size="20"]
+  esgrabable:              true
+3:
+  titulo:                  Cod. Artículo
+  tipo:                    t
+  nombrecampo:             codart
+  html:                    [size="20", readonly=true ]
+  esgrabable:              true
+4:
+  titulo:                  Descripción
+  tipo:                    t
+  nombrecampo:             desart
+  html:                    [size="40", readonly=true ]
+  esgrabable:              t50rue
+5:
+  titulo:                  Cant. Solicitada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cansol
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+6:
+  titulo:                  Cant. a Entregar
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canent
+  esnumerico:              true
+  html:                    [size="10", readonly=false  ]
+  #jscript:                 'javascript:Cantidad(this.id);'
+7:
+  titulo:                  Cant. Despachada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             candes
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+8:
+  titulo:                  Cant. Ajustada
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             canaju
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+9:
+  titulo:                  Cant. Devuelta
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             candev
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+10:
+  titulo:                  Cant. Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             cantot
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+11:
+  titulo:                  Precio Unitario
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             preart
+  esnumerico:              true
+  html:                    [size="10", readonly=true]
+12:
+  titulo:                  Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             totart
+  esnumerico:              true
+  html:                    [size="10", readonly=true]

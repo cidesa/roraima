@@ -5,18 +5,25 @@ generator:
     theme:            default
 
     fields:
-      codequ : { name: Codigo}
-      desequ : { name: Descripcion}
-      desobj : { name: Objetivo}         
-        
+      codequ : { name: Código}
+      desequ : { name: Descripción}
+      desobj : { name: Objetivo}
+
     list:
-      title:          Area Estrategica - Definicion de Equilibrios
+      title:          Definición de Directriz
       filters:        [codequ, desequ]
-      display:        [=codequ, desequ, desobj]
+      display:        [=codequ, desequ]
       object_actions:
         _edit:        ~
-        _delete:      ~
       max_per_page:   10
+      sort:  codequ
     edit:
-      title:          Edicion de Area Estrategica - Definicion de Equilibrios
-      display:       [=codequ, desequ, desobj]    
+      title:        Definición de Directriz
+      display:      [=codequ, desequ, desobj]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+      fields:
+        codequ : { help: Haz Click Aqui para Obtener un Correlativo}

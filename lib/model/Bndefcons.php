@@ -9,105 +9,65 @@
  */
 class Bndefcons extends BaseBndefcons
 {
+	private $codact1= ' ';
+	
 	public function getDesmue()
 	{
-		$c = new Criteria();
-		$c->add(BnregmuePeer::CODACT,str_pad(self::getCodact(), 30 , ' '));
-		$c->add(BnregmuePeer::CODMUE,str_pad(self::getCodsem(), 20 , ' '));
-		$desmue = BnregmuePeer::doSelectone($c);
-		if ($desmue){
-			return $desmue->getDesmue();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+		return Herramientas::getXx('Bnregmue',array('CODACT','CODMUE'),array(self::getCodact(),self::getCodsem()),'Desmue');
 	}
+	
 	public function getDescta()
 	{
-		$c = new Criteria();
-		$c->add(ContabbPeer::CODCTA,str_pad(self::getCtadepcar(), 32 , ' '));
-		$descta = ContabbPeer::doSelectone($c);
-		if ($descta){
-			return $descta->getDescta();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+		return Herramientas::getX('CODCTA','Contabb','descta',self::getCtadepcar());			
 	}
+	
 	public function getDesctaabo()
 	{
-		$c = new Criteria();
-		$c->add(ContabbPeer::CODCTA,str_pad(self::getCtadepabo(), 32 , ' '));
-		$desctaabo = ContabbPeer::doSelectone($c);
-		if ($desctaabo){
-			return $desctaabo->getDescta();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+		return Herramientas::getX('CODCTA','Contabb','descta',self::getCtadepabo());
 	}
+	
 	public function getDesctaajucar()
 	{
-		$c = new Criteria();
-		$c->add(ContabbPeer::CODCTA,str_pad(self::getCtaajucar(), 32 , ' '));
-		$desctaajucar = ContabbPeer::doSelectone($c);
-		if ($desctaajucar){
-			return $desctaajucar->getDescta();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+		return Herramientas::getX('CODCTA','Contabb','descta',self::getCtaajucar());
 	}
+	
 	public function getDesctaajuabo()
 	{
-		$c = new Criteria();
-		$c->add(ContabbPeer::CODCTA,str_pad(self::getCtaajuabo(), 32 , ' '));
-		$desctaajuabo = ContabbPeer::doSelectone($c);
-		if ($desctaajuabo){
-			return $desctaajuabo->getDescta();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+		return Herramientas::getX('CODCTA','Contabb','descta',self::getCtaajuabo());
 	}
+	
 	public function getDesctarevcar()
 	{
-		$c = new Criteria();
-		$c->add(ContabbPeer::CODCTA,str_pad(self::getCtaajuabo(), 32 , ' '));
-		$desctarevcar = ContabbPeer::doSelectone($c);
-		if ($desctarevcar){
-			return $desctarevcar->getDescta();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+		return Herramientas::getX('CODCTA','Contabb','descta',self::getCtaajuabo());		
 	}
 	public function getDesctarevabo()
 	{
-		$c = new Criteria();
-		$c->add(ContabbPeer::CODCTA,str_pad(self::getCtarevabo(), 32 , ' '));
-		$desctarevabo = ContabbPeer::doSelectone($c);
-		if ($desctarevabo){
-			return $desctarevabo->getDescta();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+		return Herramientas::getX('CODCTA','Contabb','descta',self::getCtarevabo());		
 	}
+	
 	public function getDesctapercar()
 	{
-		$c = new Criteria();
-		$c->add(ContabbPeer::CODCTA,str_pad(self::getCtapercar(), 32 , ' '));
-		$desctapercar = ContabbPeer::doSelectone($c);
-		if ($desctapercar){
-			return $desctapercar->getDescta();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+		return Herramientas::getX('CODCTA','Contabb','descta',self::getCtapercar());	
 	}
+	
 	public function getDesctaperabo()
 	{
-		$c = new Criteria();
-		$c->add(ContabbPeer::CODCTA,str_pad(self::getCtaperabo(), 32 , ' '));
-		$desctaperabo = ContabbPeer::doSelectone($c);
-		if ($desctaperabo){
-			return $desctaperabo->getDescta();
-		}else{
-			return '<!Nombre no encontrado!>';
-		}
+		return Herramientas::getX('CODCTA','Contabb','descta',self::getCtaperabo());	
 	}	
 	
+   public function setCodact1($val)
+    {
+	   $this->codact1= $val;		
+	}
+	
+	public function getCodact1()
+    {  		
+		return $this->codact1;
+    }	
+	
+	public function getDesmue1()
+	{
+		return "";//Herramientas::getXx('Bnregmue',array('CODACT','CODMUE'),array(self::getCodact(),self::getCodsem()),'Desmue');
+	}
+    
 }

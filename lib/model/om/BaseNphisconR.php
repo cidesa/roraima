@@ -69,297 +69,332 @@ abstract class BaseNphisconR extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->codnom);
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodcar()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codemp);
 
-		return $this->codcon; 		
-	}
-	
-	public function getFecnom($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		if ($this->fecnom === null || $this->fecnom === '') {
-			return null;
-		} elseif (!is_int($this->fecnom)) {
-						$ts = strtotime($this->fecnom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnom] as date/time value: " . var_export($this->fecnom, true));
-			}
-		} else {
-			$ts = $this->fecnom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codcar);
 
-	
-	public function getMonto()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getCodcat()
-	{
+    return trim($this->codcon);
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getFecnom($format = 'Y-m-d')
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getCodescuela()
-	{
+    if ($this->fecnom === null || $this->fecnom === '') {
+      return null;
+    } elseif (!is_int($this->fecnom)) {
+            $ts = adodb_strtotime($this->fecnom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnom] as date/time value: " . var_export($this->fecnom, true));
+      }
+    } else {
+      $ts = $this->fecnom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codescuela; 		
-	}
-	
-	public function getCodniv()
-	{
+  
+  public function getMonto($val=false)
+  {
 
-		return $this->codniv; 		
-	}
-	
-	public function getCodtipgas()
-	{
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
 
-		return $this->codtipgas; 		
-	}
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getNumrec()
-	{
+    return trim($this->codcat);
 
-		return number_format($this->numrec,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codpar);
+
+  }
+  
+  public function getCodescuela()
+  {
+
+    return trim($this->codescuela);
+
+  }
+  
+  public function getCodniv()
+  {
+
+    return trim($this->codniv);
+
+  }
+  
+  public function getCodtipgas()
+  {
+
+    return trim($this->codtipgas);
+
+  }
+  
+  public function getNomcon()
+  {
+
+    return trim($this->nomcon);
+
+  }
+  
+  public function getNumrec($val=false)
+  {
+
+    if($val) return number_format($this->numrec,2,',','.');
+    else return $this->numrec;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NphisconRPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NphisconRPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NphisconRPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NphisconRPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NphisconRPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NphisconRPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NphisconRPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NphisconRPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setFecnom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnom !== $ts) {
-			$this->fecnom = $ts;
-			$this->modifiedColumns[] = NphisconRPeer::FECNOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnom !== $ts) {
+      $this->fecnom = $ts;
+      $this->modifiedColumns[] = NphisconRPeer::FECNOM;
+    }
 
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NphisconRPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphisconRPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = NphisconRPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = NphisconRPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = NphisconRPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = NphisconRPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCodescuela($v)
 	{
 
-		if ($this->codescuela !== $v) {
-			$this->codescuela = $v;
-			$this->modifiedColumns[] = NphisconRPeer::CODESCUELA;
-		}
-
+    if ($this->codescuela !== $v) {
+        $this->codescuela = $v;
+        $this->modifiedColumns[] = NphisconRPeer::CODESCUELA;
+      }
+  
 	} 
 	
 	public function setCodniv($v)
 	{
 
-		if ($this->codniv !== $v) {
-			$this->codniv = $v;
-			$this->modifiedColumns[] = NphisconRPeer::CODNIV;
-		}
-
+    if ($this->codniv !== $v) {
+        $this->codniv = $v;
+        $this->modifiedColumns[] = NphisconRPeer::CODNIV;
+      }
+  
 	} 
 	
 	public function setCodtipgas($v)
 	{
 
-		if ($this->codtipgas !== $v) {
-			$this->codtipgas = $v;
-			$this->modifiedColumns[] = NphisconRPeer::CODTIPGAS;
-		}
-
+    if ($this->codtipgas !== $v) {
+        $this->codtipgas = $v;
+        $this->modifiedColumns[] = NphisconRPeer::CODTIPGAS;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = NphisconRPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = NphisconRPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setNumrec($v)
 	{
 
-		if ($this->numrec !== $v) {
-			$this->numrec = $v;
-			$this->modifiedColumns[] = NphisconRPeer::NUMREC;
-		}
-
+    if ($this->numrec !== $v) {
+        $this->numrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NphisconRPeer::NUMREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NphisconRPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NphisconRPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codemp = $rs->getString($startcol + 1);
+      $this->codemp = $rs->getString($startcol + 1);
 
-			$this->codcar = $rs->getString($startcol + 2);
+      $this->codcar = $rs->getString($startcol + 2);
 
-			$this->codcon = $rs->getString($startcol + 3);
+      $this->codcon = $rs->getString($startcol + 3);
 
-			$this->fecnom = $rs->getDate($startcol + 4, null);
+      $this->fecnom = $rs->getDate($startcol + 4, null);
 
-			$this->monto = $rs->getFloat($startcol + 5);
+      $this->monto = $rs->getFloat($startcol + 5);
 
-			$this->codcat = $rs->getString($startcol + 6);
+      $this->codcat = $rs->getString($startcol + 6);
 
-			$this->codpar = $rs->getString($startcol + 7);
+      $this->codpar = $rs->getString($startcol + 7);
 
-			$this->codescuela = $rs->getString($startcol + 8);
+      $this->codescuela = $rs->getString($startcol + 8);
 
-			$this->codniv = $rs->getString($startcol + 9);
+      $this->codniv = $rs->getString($startcol + 9);
 
-			$this->codtipgas = $rs->getString($startcol + 10);
+      $this->codtipgas = $rs->getString($startcol + 10);
 
-			$this->nomcon = $rs->getString($startcol + 11);
+      $this->nomcon = $rs->getString($startcol + 11);
 
-			$this->numrec = $rs->getFloat($startcol + 12);
+      $this->numrec = $rs->getFloat($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating NphisconR object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating NphisconR object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -416,6 +451,7 @@ abstract class BaseNphisconR extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NphisconRPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NphisconRPeer::doUpdate($this, $con);

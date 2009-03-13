@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "intipemp{codtipemp}"
+   - "intipemp{destipemp}"
+names:
+  intipemp{codtipemp}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codtipemp
+
+  intipemp{destipemp}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_destipemp
+
+Validator_codtipemp:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Intipemp
+        column:       codtipemp
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destipemp:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres

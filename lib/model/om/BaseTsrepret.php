@@ -25,74 +25,99 @@ abstract class BaseTsrepret extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodrep()
-	{
+  
+  public function getCodrep()
+  {
 
-		return $this->codrep; 		
-	}
-	
-	public function getCodret()
-	{
+    return trim($this->codrep);
 
-		return $this->codret; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodret()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codret);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodrep($v)
 	{
 
-		if ($this->codrep !== $v) {
-			$this->codrep = $v;
-			$this->modifiedColumns[] = TsrepretPeer::CODREP;
-		}
-
+    if ($this->codrep !== $v) {
+        $this->codrep = $v;
+        $this->modifiedColumns[] = TsrepretPeer::CODREP;
+      }
+  
 	} 
 	
 	public function setCodret($v)
 	{
 
-		if ($this->codret !== $v) {
-			$this->codret = $v;
-			$this->modifiedColumns[] = TsrepretPeer::CODRET;
-		}
-
+    if ($this->codret !== $v) {
+        $this->codret = $v;
+        $this->modifiedColumns[] = TsrepretPeer::CODRET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsrepretPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsrepretPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codrep = $rs->getString($startcol + 0);
+      $this->codrep = $rs->getString($startcol + 0);
 
-			$this->codret = $rs->getString($startcol + 1);
+      $this->codret = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsrepret object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsrepret object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseTsrepret extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsrepretPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsrepretPeer::doUpdate($this, $con);

@@ -1,0 +1,32 @@
+methods:
+  post:
+   - "fabancos{codban}"
+   - "fabancos{nomban}"
+
+names:
+
+  fabancos{nomban}:
+    required:  Yes
+    required_msg: Debe insertar el nombre del banco
+    validators: Vstring_1_100_0
+
+  fabancos{codban}:
+    required:  Yes
+    required_msg: Debe insertar el número de cuenta
+    validators: Vstring_1_20_0
+
+Vstring_1_100_0:
+    class: sfStringValidator
+    param:
+        min:       1
+        min_error: La descripción no puede tener menos de 1 caracteres
+        max:       100
+        max_error: La descripción no puede tener más de 100 caracteres
+
+Vstring_1_20_0:
+    class: sfStringValidator
+    param:
+        min:       20
+        min_error: El número de Cuenta debe tener 20 dígitos
+        max:       20
+        max_error: El número de Cuenta debe tener 20 dígitos

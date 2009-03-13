@@ -33,133 +33,159 @@ abstract class BaseCpsitgen extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getMessit()
-	{
+  
+  public function getMessit()
+  {
 
-		return $this->messit; 		
-	}
-	
-	public function getFecsit($format = 'Y-m-d')
-	{
+    return trim($this->messit);
 
-		if ($this->fecsit === null || $this->fecsit === '') {
-			return null;
-		} elseif (!is_int($this->fecsit)) {
-						$ts = strtotime($this->fecsit);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecsit] as date/time value: " . var_export($this->fecsit, true));
-			}
-		} else {
-			$ts = $this->fecsit;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecsit($format = 'Y-m-d')
+  {
 
-	
-	public function getExpsit()
-	{
+    if ($this->fecsit === null || $this->fecsit === '') {
+      return null;
+    } elseif (!is_int($this->fecsit)) {
+            $ts = adodb_strtotime($this->fecsit);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecsit] as date/time value: " . var_export($this->fecsit, true));
+      }
+    } else {
+      $ts = $this->fecsit;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->expsit; 		
-	}
-	
-	public function getProsit()
-	{
+  
+  public function getExpsit()
+  {
 
-		return $this->prosit; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->expsit);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getProsit()
+  {
+
+    return trim($this->prosit);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setMessit($v)
 	{
 
-		if ($this->messit !== $v) {
-			$this->messit = $v;
-			$this->modifiedColumns[] = CpsitgenPeer::MESSIT;
-		}
-
+    if ($this->messit !== $v) {
+        $this->messit = $v;
+        $this->modifiedColumns[] = CpsitgenPeer::MESSIT;
+      }
+  
 	} 
 	
 	public function setFecsit($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecsit] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecsit !== $ts) {
-			$this->fecsit = $ts;
-			$this->modifiedColumns[] = CpsitgenPeer::FECSIT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecsit] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecsit !== $ts) {
+      $this->fecsit = $ts;
+      $this->modifiedColumns[] = CpsitgenPeer::FECSIT;
+    }
 
 	} 
 	
 	public function setExpsit($v)
 	{
 
-		if ($this->expsit !== $v) {
-			$this->expsit = $v;
-			$this->modifiedColumns[] = CpsitgenPeer::EXPSIT;
-		}
-
+    if ($this->expsit !== $v) {
+        $this->expsit = $v;
+        $this->modifiedColumns[] = CpsitgenPeer::EXPSIT;
+      }
+  
 	} 
 	
 	public function setProsit($v)
 	{
 
-		if ($this->prosit !== $v) {
-			$this->prosit = $v;
-			$this->modifiedColumns[] = CpsitgenPeer::PROSIT;
-		}
-
+    if ($this->prosit !== $v) {
+        $this->prosit = $v;
+        $this->modifiedColumns[] = CpsitgenPeer::PROSIT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CpsitgenPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CpsitgenPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->messit = $rs->getString($startcol + 0);
+      $this->messit = $rs->getString($startcol + 0);
 
-			$this->fecsit = $rs->getDate($startcol + 1, null);
+      $this->fecsit = $rs->getDate($startcol + 1, null);
 
-			$this->expsit = $rs->getString($startcol + 2);
+      $this->expsit = $rs->getString($startcol + 2);
 
-			$this->prosit = $rs->getString($startcol + 3);
+      $this->prosit = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cpsitgen object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cpsitgen object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpasiconMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpasiconMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpasiconMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npasicon');
 		$tMap->setPhpName('Npasicon');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npasicon_SEQ');
 
 		$tMap->addColumn('CODCAT', 'Codcat', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -40,13 +42,13 @@ class NpasiconMapBuilder {
 
 		$tMap->addColumn('NOMSUS', 'Nomsus', 'string', CreoleTypes::VARCHAR, false, 30);
 
-		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECEXP', 'Fecexp', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECEXP', 'Fecexp', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('SALCON', 'Salcon', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('SALCON', 'Salcon', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, false, 17);
 
 		$tMap->addColumn('CANMON', 'Canmon', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -58,11 +60,11 @@ class NpasiconMapBuilder {
 
 		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, false, 32);
 
-		$tMap->addColumn('MONMEN', 'Monmen', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONMEN', 'Monmen', 'double', CreoleTypes::NUMERIC, false, 17);
 
-		$tMap->addColumn('FRECUE', 'Frecue', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('FRECUE', 'Frecue', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

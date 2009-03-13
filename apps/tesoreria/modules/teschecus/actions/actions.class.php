@@ -10,55 +10,36 @@
  */
 class teschecusActions extends autoteschecusActions
 {
-   
-  
- public function getMostrar_Beneficiario()
+
+  public function executeAjax()
   {
-  	  $c = new Criteria;
-  	  $this->campo = str_pad($this->tscheemi->getCedrif(),15,' ');
-  	  $c->add(OpbenefiPeer::CEDRIF, $this->campo);
-  	  $this->mibenefi = OpbenefiPeer::doSelect($c);
-	  if ($this->mibenefi)
-	  	return $this->mibenefi[0]->getNomben();
-	  else 
-	    return ' ';
+
+    $codigo = $this->getRequestParameter('codigo','');
+    $ajax = $this->getRequestParameter('ajax','');
+
+
+    switch ($ajax){
+      case '1':
+        $output = '[["","",""],["","",""],["","",""]]';
+        break;
+      default:
+        $output = '[["","",""],["","",""],["","",""]]';
+        break;
+    }
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+    return sfView::HEADER_ONLY;
   }
 
-public function getMostrar_Banco()
-  {
-  	  $c = new Criteria;
-  	  $c->add(TsdefbanPeer::NUMCUE,$this->tscheemi->getNumcue());
-  	  $this->mibanco = TsdefbanPeer::doSelect($c);
-  	  if ($this->mibanco)
-	  	return $this->mibanco[0]->getNomcue();
-	  else 
-	    return '';
-  }
-  
-  public function getMostrar_Comprobante()
-  {
-  	  $c = new Criteria;
-  	  $c->addJoin(OpordpagPeer::NUMCHE,TscheemiPeer::NUMCHE);
-  	  $c->add(OpordpagPeer::NUMCHE,$this->tscheemi->getNumche());
-  	  $this->comprob = OpordpagPeer::doSelect($c);
-  	  if ($this->comprob)
-	  	{
-	  		$this->numord = $this->comprob[0]->getNumord();
-	  	    $this->numcomp = $this->comprob[0]->getNumcom();
-	  	}
-	  	else
-	  	{
-	  		$this->numord = '';
-	  	    $this->numcomp = '';
-	  	}
-  }	
-	public function executeEdit()
+  public function executeEdit()
   {
     $this->tscheemi = $this->getTscheemiOrCreate();
-    $this->bene = $this->getMostrar_Beneficiario();
-    $this->banco = $this->getMostrar_Banco();
-    $this->getMostrar_Comprobante();
 
+    //Verificar si el cheque esta cadudaco
+    if ($this->tscheemi->getId())
+    {
+       if (Tesoreria::VerificarChequeCaducado($this->tscheemi->getNumcue(),$this->tscheemi->getFecemi()))
+          $this->tscheemi->setCaducado('S');
+    }
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateTscheemiFromRequest();
@@ -66,6 +47,7 @@ public function getMostrar_Banco()
       $this->saveTscheemi($this->tscheemi);
 
       $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -85,97 +67,66 @@ public function getMostrar_Banco()
       $this->labels = $this->getLabels();
     }
   }
-protected function updateTscheemiFromRequest()
+
+
+  public function handleErrorEdit()
   {
-    $tscheemi = $this->getRequestParameter('tscheemi');
+    $this->preExecute();
+    $this->tscheemi = $this->getTscheemiOrCreate();
+    $this->tscheemi->setFaldat('S');
+    try{ $this->updateTscheemiFromRequest();}catch(Exception $ex){}
 
-    if (isset($tscheemi['numche']))
+
+    $this->labels = $this->getLabels();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
     {
-      $this->tscheemi->setNumche($tscheemi['numche']);
-    }
-    if (isset($tscheemi['fecemi']))
-    {
-      if ($tscheemi['fecemi'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($tscheemi['fecemi']))
-          {
-            $value = $dateFormat->format($tscheemi['fecemi'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $tscheemi['fecemi'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->tscheemi->setFecemi($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->tscheemi->setFecemi(null);
+      if($this->coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderr);
+        $this->getRequest()->setError('',$err);
+
       }
     }
-    if (isset($tscheemi['monche']))
-    {
-      $this->tscheemi->setMonche($tscheemi['monche']);
-    }
-    if (isset($tscheemi['cedrif']))
-    {
-      $this->tscheemi->setCedrif($tscheemi['cedrif']);
-    }
-    if (isset($tscheemi['numcue']))
-    {
-      $this->tscheemi->setNumcue($tscheemi['numcue']);
-    }
-    //if (isset($tscheemi['status']))
-    //{
-       $this->tscheemi->setStatus($this->getRequestParameter('radio'));
-   // }
-    if (isset($tscheemi['fecent']))
-    {
-      if ($tscheemi['fecent'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($tscheemi['fecent']))
-          {
-            $value = $dateFormat->format($tscheemi['fecent'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $tscheemi['fecent'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->tscheemi->setFecent($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->tscheemi->setFecent(null);
-      }
-    }
-    if (isset($tscheemi['obsent']))
-    {
-      $this->tscheemi->setObsent($tscheemi['obsent']);
-    }
-    if (isset($tscheemi['nomrec']))
-    {
-      $this->tscheemi->setNomrec($tscheemi['nomrec']);
-    }
+    return sfView::SUCCESS;
   }
+
+    public function validateEdit()
+    {
+      $this->coderr=-1;
+      if($this->getRequest()->getMethod() == sfRequest::POST)
+      {
+       $this->tscheemi = $this->getTscheemiOrCreate();
+       try{ $this->updateTscheemiFromRequest();}catch(Exception $ex){}
+       $tscheemi = $this->getRequestParameter('tscheemi');
+
+       /**********VALIDACION DE FECHA****************/
+       $fecemi=$tscheemi['fecemi'];
+       $fecent=$tscheemi['fecent'];
+
+       if ($fecemi!='' && $fecent!='')
+       {
+      	$rfecemi = adodb_strtotime($fecemi);
+      	$rfecent = adodb_strtotime($fecent);
+
+	      if (!(($rfecemi === -1 || $rfecemi===false) || ($rfecent === -1 || $rfecent===false)))
+	      {
+	          if ($rfecemi > $rfecent)
+	          {
+	            $this->coderr = 193; return false;
+	          }
+	      }else
+	      {
+	          $this->coderr = 192; return false;
+	      }
+        }// if ($fecemi!='' && $fecent!='')
+
+       /**************************/
+
+
+      if($this->coderr!=-1)
+        return false;
+      else
+         return true;
+    }//if($this->getRequest()->getMethod() == sfRequest::POST)
+    else return true;
+   }
 }
-
-
-
-

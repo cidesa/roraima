@@ -205,6 +205,7 @@ abstract class BaseForunicatPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForunicatPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

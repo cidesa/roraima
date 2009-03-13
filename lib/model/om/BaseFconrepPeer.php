@@ -245,6 +245,7 @@ abstract class BaseFconrepPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FconrepPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

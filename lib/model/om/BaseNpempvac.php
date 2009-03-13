@@ -53,318 +53,345 @@ abstract class BaseNpempvac extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCaudes($format = 'Y-m-d')
-	{
+    return trim($this->codemp);
 
-		if ($this->caudes === null || $this->caudes === '') {
-			return null;
-		} elseif (!is_int($this->caudes)) {
-						$ts = strtotime($this->caudes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [caudes] as date/time value: " . var_export($this->caudes, true));
-			}
-		} else {
-			$ts = $this->caudes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCaudes($format = 'Y-m-d')
+  {
 
-	
-	public function getCauhas($format = 'Y-m-d')
-	{
+    if ($this->caudes === null || $this->caudes === '') {
+      return null;
+    } elseif (!is_int($this->caudes)) {
+            $ts = adodb_strtotime($this->caudes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [caudes] as date/time value: " . var_export($this->caudes, true));
+      }
+    } else {
+      $ts = $this->caudes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->cauhas === null || $this->cauhas === '') {
-			return null;
-		} elseif (!is_int($this->cauhas)) {
-						$ts = strtotime($this->cauhas);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [cauhas] as date/time value: " . var_export($this->cauhas, true));
-			}
-		} else {
-			$ts = $this->cauhas;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getCauhas($format = 'Y-m-d')
+  {
 
-	
-	public function getFeccom($format = 'Y-m-d')
-	{
+    if ($this->cauhas === null || $this->cauhas === '') {
+      return null;
+    } elseif (!is_int($this->cauhas)) {
+            $ts = adodb_strtotime($this->cauhas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [cauhas] as date/time value: " . var_export($this->cauhas, true));
+      }
+    } else {
+      $ts = $this->cauhas;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->feccom === null || $this->feccom === '') {
-			return null;
-		} elseif (!is_int($this->feccom)) {
-						$ts = strtotime($this->feccom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
-			}
-		} else {
-			$ts = $this->feccom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFeccom($format = 'Y-m-d')
+  {
 
-	
-	public function getFecfin($format = 'Y-m-d')
-	{
+    if ($this->feccom === null || $this->feccom === '') {
+      return null;
+    } elseif (!is_int($this->feccom)) {
+            $ts = adodb_strtotime($this->feccom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccom] as date/time value: " . var_export($this->feccom, true));
+      }
+    } else {
+      $ts = $this->feccom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecfin === null || $this->fecfin === '') {
-			return null;
-		} elseif (!is_int($this->fecfin)) {
-						$ts = strtotime($this->fecfin);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
-			}
-		} else {
-			$ts = $this->fecfin;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecfin($format = 'Y-m-d')
+  {
 
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+    if ($this->fecfin === null || $this->fecfin === '') {
+      return null;
+    } elseif (!is_int($this->fecfin)) {
+            $ts = adodb_strtotime($this->fecfin);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfin] as date/time value: " . var_export($this->fecfin, true));
+      }
+    } else {
+      $ts = $this->fecfin;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-	
-	public function getBonvac()
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->bonvac,2,',','.');
-		
-	}
-	
-	public function getVacaci()
-	{
+  
+  public function getBonvac($val=false)
+  {
 
-		return number_format($this->vacaci,2,',','.');
-		
-	}
-	
-	public function getMonpag()
-	{
+    if($val) return number_format($this->bonvac,2,',','.');
+    else return $this->bonvac;
 
-		return number_format($this->monpag,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getVacaci($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->vacaci,2,',','.');
+    else return $this->vacaci;
+
+  }
+  
+  public function getMonpag($val=false)
+  {
+
+    if($val) return number_format($this->monpag,2,',','.');
+    else return $this->monpag;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpempvacPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpempvacPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCaudes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [caudes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->caudes !== $ts) {
-			$this->caudes = $ts;
-			$this->modifiedColumns[] = NpempvacPeer::CAUDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [caudes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->caudes !== $ts) {
+      $this->caudes = $ts;
+      $this->modifiedColumns[] = NpempvacPeer::CAUDES;
+    }
 
 	} 
 	
 	public function setCauhas($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [cauhas] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->cauhas !== $ts) {
-			$this->cauhas = $ts;
-			$this->modifiedColumns[] = NpempvacPeer::CAUHAS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [cauhas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->cauhas !== $ts) {
+      $this->cauhas = $ts;
+      $this->modifiedColumns[] = NpempvacPeer::CAUHAS;
+    }
 
 	} 
 	
 	public function setFeccom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccom !== $ts) {
-			$this->feccom = $ts;
-			$this->modifiedColumns[] = NpempvacPeer::FECCOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccom !== $ts) {
+      $this->feccom = $ts;
+      $this->modifiedColumns[] = NpempvacPeer::FECCOM;
+    }
 
 	} 
 	
 	public function setFecfin($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfin !== $ts) {
-			$this->fecfin = $ts;
-			$this->modifiedColumns[] = NpempvacPeer::FECFIN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfin] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfin !== $ts) {
+      $this->fecfin = $ts;
+      $this->modifiedColumns[] = NpempvacPeer::FECFIN;
+    }
 
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = NpempvacPeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = NpempvacPeer::FECREG;
+    }
 
 	} 
 	
 	public function setBonvac($v)
 	{
 
-		if ($this->bonvac !== $v) {
-			$this->bonvac = $v;
-			$this->modifiedColumns[] = NpempvacPeer::BONVAC;
-		}
-
+    if ($this->bonvac !== $v) {
+        $this->bonvac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpempvacPeer::BONVAC;
+      }
+  
 	} 
 	
 	public function setVacaci($v)
 	{
 
-		if ($this->vacaci !== $v) {
-			$this->vacaci = $v;
-			$this->modifiedColumns[] = NpempvacPeer::VACACI;
-		}
-
+    if ($this->vacaci !== $v) {
+        $this->vacaci = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpempvacPeer::VACACI;
+      }
+  
 	} 
 	
 	public function setMonpag($v)
 	{
 
-		if ($this->monpag !== $v) {
-			$this->monpag = $v;
-			$this->modifiedColumns[] = NpempvacPeer::MONPAG;
-		}
-
+    if ($this->monpag !== $v) {
+        $this->monpag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpempvacPeer::MONPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpempvacPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpempvacPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->caudes = $rs->getDate($startcol + 1, null);
+      $this->caudes = $rs->getDate($startcol + 1, null);
 
-			$this->cauhas = $rs->getDate($startcol + 2, null);
+      $this->cauhas = $rs->getDate($startcol + 2, null);
 
-			$this->feccom = $rs->getDate($startcol + 3, null);
+      $this->feccom = $rs->getDate($startcol + 3, null);
 
-			$this->fecfin = $rs->getDate($startcol + 4, null);
+      $this->fecfin = $rs->getDate($startcol + 4, null);
 
-			$this->fecreg = $rs->getDate($startcol + 5, null);
+      $this->fecreg = $rs->getDate($startcol + 5, null);
 
-			$this->bonvac = $rs->getFloat($startcol + 6);
+      $this->bonvac = $rs->getFloat($startcol + 6);
 
-			$this->vacaci = $rs->getFloat($startcol + 7);
+      $this->vacaci = $rs->getFloat($startcol + 7);
 
-			$this->monpag = $rs->getFloat($startcol + 8);
+      $this->monpag = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npempvac object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npempvac object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -421,6 +448,7 @@ abstract class BaseNpempvac extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpempvacPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpempvacPeer::doUpdate($this, $con);

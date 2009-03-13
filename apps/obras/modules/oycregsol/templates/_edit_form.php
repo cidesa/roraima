@@ -9,9 +9,11 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($ocregsol, 'getId') ?>
+<?php use_helper('Javascript','tabs','PopUp','Grid','Linktoapp') ?>
+<?php echo javascript_include_tag('tools','observe','dFilter','ajax') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-
+<legend><?php echo __('Datos de la Solicitud')?></legend>
 <div class="form-row">
   <?php echo label_for('ocregsol[numsol]', __($labels['ocregsol{numsol}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('ocregsol{numsol}')): ?> form-error<?php endif; ?>">
@@ -21,25 +23,32 @@
 
   <?php $value = object_input_tag($ocregsol, 'getNumsol', array (
   'size' => 8,
-  'maxlength' => 8,  
+  'maxlength' => 8,
+  'readonly'  =>  $ocregsol->getId()!='' ? true : false ,
+  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('ocregsol_numsol').value=valor",
   'control_name' => 'ocregsol[numsol]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-
-<div class="form-row">
+<br>
   <?php echo label_for('ocregsol[cedste]', __($labels['ocregsol{cedste}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('ocregsol{cedste}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregsol{cedste}')): ?>
     <?php echo form_error('ocregsol{cedste}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregsol, 'getCedste', array (
-  'size' => 15,
-  'maxlength' => 15,  
-  'control_name' => 'ocregsol[cedste]',
-)); echo $value ? $value : '&nbsp;&nbsp;' ?> &nbsp; <?php echo button_to('...','#') ?>
+<?php echo input_auto_complete_tag('ocregsol[cedste]', $ocregsol->getCedste(),
+    'oycregsol/autocomplete?ajax=1', array('autocomplete' => 'off',
+	'maxlength' => 15,'size' => 15,'onBlur'=> remote_function(array(
+      'url'      => 'oycregsol/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'with' => "'ajax=1&cajtexmos=ocregsol_nomste&cajtexcom=ocregsol_cedste&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Oycregsol_ocdatste/clase/Ocdatste/frame/sf_admin_edit_form/obj1/ocregsol_cedste/obj2/ocregsol_nomste/campo1/cedste/campo2/nomste')?>
+
 
   <?php $value = object_input_tag($ocregsol, 'getNomste', array (
   'size' => 50,
@@ -48,9 +57,7 @@
 )); echo $value ? $value : '&nbsp;&nbsp;' ?>
 
     </div>
-</div>
-
-<div class="form-row">
+<br>
   <?php echo label_for('ocregsol[dessol]', __($labels['ocregsol{dessol}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('ocregsol{dessol}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregsol{dessol}')): ?>
@@ -59,45 +66,55 @@
 
   <?php $value = object_input_tag($ocregsol, 'getDessol', array (
   'size' => 80,
+  'maxlength' => 250,
   'control_name' => 'ocregsol[dessol]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-
-<div class="form-row">
+<br>
   <?php echo label_for('ocregsol[codsol]', __($labels['ocregsol{codsol}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('ocregsol{codsol}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregsol{codsol}')): ?>
     <?php echo form_error('ocregsol{codsol}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregsol, 'getCodsol', array (
-  'size' => 4,
-  'maxlength' => 4,  
-  'control_name' => 'ocregsol[codsol]',
-)); echo $value ? $value : '&nbsp;' ?>&nbsp; <?php echo button_to('...','#') ?>
+<?php echo input_auto_complete_tag('ocregsol[codsol]', $ocregsol->getCodsol(),
+    'oycregsol/autocomplete?ajax=2', array('autocomplete' => 'off',
+	'maxlength' => 4,'size' => 4,'onBlur'=> remote_function(array(
+      'url'      => 'oycregsol/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'with' => "'ajax=2&cajtexmos=ocregsol_dessol1&cajtexcom=ocregsol_codsol&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+?>
 
-  <?php $value = object_input_tag($ocregsol, 'getDessol', array (
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Oycregsol_octipsol/clase/Octipsol/frame/sf_admin_edit_form/obj1/ocregsol_codsol/obj2/ocregsol_dessol1/campo1/codsol/campo2/dessol')?>
+
+  <?php $value = object_input_tag($ocregsol, 'getDessol1', array (
   'size' => 50,
   'disabled' => true,
-  'control_name' => 'ocregsol[dessol]',
+  'control_name' => 'ocregsol[dessol1]',
 )); echo $value ? $value : '&nbsp;&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
+<br>
   <?php echo label_for('ocregsol[codorg]', __($labels['ocregsol{codorg}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('ocregsol{codorg}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregsol{codorg}')): ?>
     <?php echo form_error('ocregsol{codorg}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregsol, 'getCodorg', array (
-  'size' => 4,
-  'maxlength' => 4,  
-  'control_name' => 'ocregsol[codorg]',
-)); echo $value ? $value : '&nbsp;' ?>&nbsp; <?php echo button_to('...','#') ?>
+<?php echo input_auto_complete_tag('ocregsol[codorg]', $ocregsol->getCodorg(),
+    'oycregsol/autocomplete?ajax=3', array('autocomplete' => 'off',
+	'maxlength' => 4,'size' => 4,'onBlur'=> remote_function(array(
+      'url'      => 'oycregsol/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'with' => "'ajax=3&cajtexmos=ocregsol_desorg&cajtexcom=ocregsol_codorg&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+?>
+
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Oycregsol_ocdeforg/clase/Ocdeforg/frame/sf_admin_edit_form/obj1/ocregsol_codorg/obj2/ocregsol_desorg/campo1/codorg/campo2/desorg')?>
 
 <?php $value = object_input_tag($ocregsol, 'getDesorg', array (
   'size' => 50,
@@ -106,9 +123,7 @@
 )); echo $value ? $value : '&nbsp;&nbsp;' ?>
 
     </div>
-</div>
-
-<div class="form-row">
+<br>
   <?php echo label_for('ocregsol[fecsol]', __($labels['ocregsol{fecsol}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('ocregsol{fecsol}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregsol{fecsol}')): ?>
@@ -119,11 +134,13 @@
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'ocregsol[fecsol]',
+  'date_format' => 'dd/MM/yyyy',
+  'size' => 10,
+  'maxlength' => 10,
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
+<br>
   <?php echo label_for('ocregsol[fecres]', __($labels['ocregsol{fecres}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('ocregsol{fecres}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregsol{fecres}')): ?>
@@ -134,11 +151,14 @@
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'ocregsol[fecres]',
+  'date_format' => 'dd/MM/yyyy',
+  'size' => 10,
+  'maxlength' => 10,
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
+<br>
   <?php echo label_for('ocregsol[obssol]', __($labels['ocregsol{obssol}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('ocregsol{obssol}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregsol{obssol}')): ?>
@@ -150,29 +170,35 @@
   'control_name' => 'ocregsol[obssol]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
+<br>
   <?php echo label_for('ocregsol[codemp]', __($labels['ocregsol{codemp}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('ocregsol{codemp}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('ocregsol{codemp}')): ?>
     <?php echo form_error('ocregsol{codemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($ocregsol, 'getCodemp', array (
-  'size' => 20,
-  'control_name' => 'ocregsol[codemp]',
-)); echo $value ? $value : '&nbsp;' ?>&nbsp; <?php echo button_to('...','#') ?>
+<?php echo input_auto_complete_tag('ocregsol[codemp]', $ocregsol->getCodemp(),
+    'oycregsol/autocomplete?ajax=4', array('autocomplete' => 'off',
+	'size' => 15,'onBlur'=> remote_function(array(
+      'url'      => 'oycregsol/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+      'with' => "'ajax=4&cajtexmos=ocregsol_nomemp&cajtexcom=ocregsol_codemp&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+?>
 
-<?php $value = object_input_tag($ocregsol, 'getDesorg', array (
+<?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Oycregsol_nphojint/clase/Nphojint/frame/sf_admin_edit_form/obj1/ocregsol_codemp/obj2/ocregsol_nomemp/campo1/codemp/campo2/nomemp')?>
+
+
+<?php $value = object_input_tag($ocregsol, 'getNomemp', array (
   'size' => 50,
   'disabled' => true,
-  'control_name' => 'ocregsol[desorg]',
+  'control_name' => 'ocregsol[nomemp]',
 )); echo $value ? $value : '&nbsp;&nbsp;' ?>
 
     </div>
 </div>
-
 </fieldset>
 
 <?php include_partial('edit_actions', array('ocregsol' => $ocregsol)) ?>

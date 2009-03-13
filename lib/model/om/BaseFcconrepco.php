@@ -117,534 +117,580 @@ abstract class BaseFcconrepco extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCedcon()
-	{
+  
+  public function getCedcon()
+  {
 
-		return $this->cedcon; 		
-	}
-	
-	public function getRifcon()
-	{
+    return trim($this->cedcon);
 
-		return $this->rifcon; 		
-	}
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getRifcon()
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getRepcon()
-	{
+    return trim($this->rifcon);
 
-		return $this->repcon; 		
-	}
-	
-	public function getDircon()
-	{
+  }
+  
+  public function getNomcon()
+  {
 
-		return $this->dircon; 		
-	}
-	
-	public function getTelcon()
-	{
+    return trim($this->nomcon);
 
-		return $this->telcon; 		
-	}
-	
-	public function getEmacon()
-	{
+  }
+  
+  public function getRepcon()
+  {
 
-		return $this->emacon; 		
-	}
-	
-	public function getCodsec()
-	{
+    return trim($this->repcon);
 
-		return $this->codsec; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getDircon()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getNitcon()
-	{
+    return trim($this->dircon);
 
-		return $this->nitcon; 		
-	}
-	
-	public function getCodmun()
-	{
+  }
+  
+  public function getTelcon()
+  {
 
-		return $this->codmun; 		
-	}
-	
-	public function getCodedo()
-	{
+    return trim($this->telcon);
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodpai()
-	{
+  }
+  
+  public function getEmacon()
+  {
 
-		return $this->codpai; 		
-	}
-	
-	public function getCiucon()
-	{
+    return trim($this->emacon);
 
-		return $this->ciucon; 		
-	}
-	
-	public function getCpocon()
-	{
+  }
+  
+  public function getCodsec()
+  {
 
-		return $this->cpocon; 		
-	}
-	
-	public function getApocon()
-	{
+    return trim($this->codsec);
 
-		return $this->apocon; 		
-	}
-	
-	public function getUrlcon()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return $this->urlcon; 		
-	}
-	
-	public function getNaccon()
-	{
+    return trim($this->codpar);
 
-		return $this->naccon; 		
-	}
-	
-	public function getTipcon()
-	{
+  }
+  
+  public function getNitcon()
+  {
 
-		return $this->tipcon; 		
-	}
-	
-	public function getFaxcon()
-	{
+    return trim($this->nitcon);
 
-		return $this->faxcon; 		
-	}
-	
-	public function getClacon()
-	{
+  }
+  
+  public function getCodmun()
+  {
 
-		return $this->clacon; 		
-	}
-	
-	public function getFecdescon($format = 'Y-m-d')
-	{
+    return trim($this->codmun);
 
-		if ($this->fecdescon === null || $this->fecdescon === '') {
-			return null;
-		} elseif (!is_int($this->fecdescon)) {
-						$ts = strtotime($this->fecdescon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdescon] as date/time value: " . var_export($this->fecdescon, true));
-			}
-		} else {
-			$ts = $this->fecdescon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodedo()
+  {
 
-	
-	public function getFecactcon($format = 'Y-m-d')
-	{
+    return trim($this->codedo);
 
-		if ($this->fecactcon === null || $this->fecactcon === '') {
-			return null;
-		} elseif (!is_int($this->fecactcon)) {
-						$ts = strtotime($this->fecactcon);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecactcon] as date/time value: " . var_export($this->fecactcon, true));
-			}
-		} else {
-			$ts = $this->fecactcon;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getCodpai()
+  {
 
-	
-	public function getStacon()
-	{
+    return trim($this->codpai);
 
-		return $this->stacon; 		
-	}
-	
-	public function getOrigen()
-	{
+  }
+  
+  public function getCiucon()
+  {
 
-		return $this->origen; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->ciucon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCpocon()
+  {
+
+    return trim($this->cpocon);
+
+  }
+  
+  public function getApocon()
+  {
+
+    return trim($this->apocon);
+
+  }
+  
+  public function getUrlcon()
+  {
+
+    return trim($this->urlcon);
+
+  }
+  
+  public function getNaccon()
+  {
+
+    return trim($this->naccon);
+
+  }
+  
+  public function getTipcon()
+  {
+
+    return trim($this->tipcon);
+
+  }
+  
+  public function getFaxcon()
+  {
+
+    return trim($this->faxcon);
+
+  }
+  
+  public function getClacon()
+  {
+
+    return trim($this->clacon);
+
+  }
+  
+  public function getFecdescon($format = 'Y-m-d')
+  {
+
+    if ($this->fecdescon === null || $this->fecdescon === '') {
+      return null;
+    } elseif (!is_int($this->fecdescon)) {
+            $ts = adodb_strtotime($this->fecdescon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdescon] as date/time value: " . var_export($this->fecdescon, true));
+      }
+    } else {
+      $ts = $this->fecdescon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFecactcon($format = 'Y-m-d')
+  {
+
+    if ($this->fecactcon === null || $this->fecactcon === '') {
+      return null;
+    } elseif (!is_int($this->fecactcon)) {
+            $ts = adodb_strtotime($this->fecactcon);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecactcon] as date/time value: " . var_export($this->fecactcon, true));
+      }
+    } else {
+      $ts = $this->fecactcon;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getStacon()
+  {
+
+    return trim($this->stacon);
+
+  }
+  
+  public function getOrigen()
+  {
+
+    return trim($this->origen);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCedcon($v)
 	{
 
-		if ($this->cedcon !== $v) {
-			$this->cedcon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::CEDCON;
-		}
-
+    if ($this->cedcon !== $v) {
+        $this->cedcon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::CEDCON;
+      }
+  
 	} 
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setRepcon($v)
 	{
 
-		if ($this->repcon !== $v) {
-			$this->repcon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::REPCON;
-		}
-
+    if ($this->repcon !== $v) {
+        $this->repcon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::REPCON;
+      }
+  
 	} 
 	
 	public function setDircon($v)
 	{
 
-		if ($this->dircon !== $v) {
-			$this->dircon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::DIRCON;
-		}
-
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::DIRCON;
+      }
+  
 	} 
 	
 	public function setTelcon($v)
 	{
 
-		if ($this->telcon !== $v) {
-			$this->telcon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::TELCON;
-		}
-
+    if ($this->telcon !== $v) {
+        $this->telcon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::TELCON;
+      }
+  
 	} 
 	
 	public function setEmacon($v)
 	{
 
-		if ($this->emacon !== $v) {
-			$this->emacon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::EMACON;
-		}
-
+    if ($this->emacon !== $v) {
+        $this->emacon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::EMACON;
+      }
+  
 	} 
 	
 	public function setCodsec($v)
 	{
 
-		if ($this->codsec !== $v) {
-			$this->codsec = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::CODSEC;
-		}
-
+    if ($this->codsec !== $v) {
+        $this->codsec = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::CODSEC;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setNitcon($v)
 	{
 
-		if ($this->nitcon !== $v) {
-			$this->nitcon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::NITCON;
-		}
-
+    if ($this->nitcon !== $v) {
+        $this->nitcon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::NITCON;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setCiucon($v)
 	{
 
-		if ($this->ciucon !== $v) {
-			$this->ciucon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::CIUCON;
-		}
-
+    if ($this->ciucon !== $v) {
+        $this->ciucon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::CIUCON;
+      }
+  
 	} 
 	
 	public function setCpocon($v)
 	{
 
-		if ($this->cpocon !== $v) {
-			$this->cpocon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::CPOCON;
-		}
-
+    if ($this->cpocon !== $v) {
+        $this->cpocon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::CPOCON;
+      }
+  
 	} 
 	
 	public function setApocon($v)
 	{
 
-		if ($this->apocon !== $v) {
-			$this->apocon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::APOCON;
-		}
-
+    if ($this->apocon !== $v) {
+        $this->apocon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::APOCON;
+      }
+  
 	} 
 	
 	public function setUrlcon($v)
 	{
 
-		if ($this->urlcon !== $v) {
-			$this->urlcon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::URLCON;
-		}
-
+    if ($this->urlcon !== $v) {
+        $this->urlcon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::URLCON;
+      }
+  
 	} 
 	
 	public function setNaccon($v)
 	{
 
-		if ($this->naccon !== $v) {
-			$this->naccon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::NACCON;
-		}
-
+    if ($this->naccon !== $v) {
+        $this->naccon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::NACCON;
+      }
+  
 	} 
 	
 	public function setTipcon($v)
 	{
 
-		if ($this->tipcon !== $v) {
-			$this->tipcon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::TIPCON;
-		}
-
+    if ($this->tipcon !== $v) {
+        $this->tipcon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::TIPCON;
+      }
+  
 	} 
 	
 	public function setFaxcon($v)
 	{
 
-		if ($this->faxcon !== $v) {
-			$this->faxcon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::FAXCON;
-		}
-
+    if ($this->faxcon !== $v) {
+        $this->faxcon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::FAXCON;
+      }
+  
 	} 
 	
 	public function setClacon($v)
 	{
 
-		if ($this->clacon !== $v) {
-			$this->clacon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::CLACON;
-		}
-
+    if ($this->clacon !== $v) {
+        $this->clacon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::CLACON;
+      }
+  
 	} 
 	
 	public function setFecdescon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdescon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdescon !== $ts) {
-			$this->fecdescon = $ts;
-			$this->modifiedColumns[] = FcconrepcoPeer::FECDESCON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdescon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdescon !== $ts) {
+      $this->fecdescon = $ts;
+      $this->modifiedColumns[] = FcconrepcoPeer::FECDESCON;
+    }
 
 	} 
 	
 	public function setFecactcon($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecactcon] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecactcon !== $ts) {
-			$this->fecactcon = $ts;
-			$this->modifiedColumns[] = FcconrepcoPeer::FECACTCON;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecactcon] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecactcon !== $ts) {
+      $this->fecactcon = $ts;
+      $this->modifiedColumns[] = FcconrepcoPeer::FECACTCON;
+    }
 
 	} 
 	
 	public function setStacon($v)
 	{
 
-		if ($this->stacon !== $v) {
-			$this->stacon = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::STACON;
-		}
-
+    if ($this->stacon !== $v) {
+        $this->stacon = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::STACON;
+      }
+  
 	} 
 	
 	public function setOrigen($v)
 	{
 
-		if ($this->origen !== $v) {
-			$this->origen = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::ORIGEN;
-		}
-
+    if ($this->origen !== $v) {
+        $this->origen = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::ORIGEN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcconrepcoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcconrepcoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->cedcon = $rs->getString($startcol + 0);
+      $this->cedcon = $rs->getString($startcol + 0);
 
-			$this->rifcon = $rs->getString($startcol + 1);
+      $this->rifcon = $rs->getString($startcol + 1);
 
-			$this->nomcon = $rs->getString($startcol + 2);
+      $this->nomcon = $rs->getString($startcol + 2);
 
-			$this->repcon = $rs->getString($startcol + 3);
+      $this->repcon = $rs->getString($startcol + 3);
 
-			$this->dircon = $rs->getString($startcol + 4);
+      $this->dircon = $rs->getString($startcol + 4);
 
-			$this->telcon = $rs->getString($startcol + 5);
+      $this->telcon = $rs->getString($startcol + 5);
 
-			$this->emacon = $rs->getString($startcol + 6);
+      $this->emacon = $rs->getString($startcol + 6);
 
-			$this->codsec = $rs->getString($startcol + 7);
+      $this->codsec = $rs->getString($startcol + 7);
 
-			$this->codpar = $rs->getString($startcol + 8);
+      $this->codpar = $rs->getString($startcol + 8);
 
-			$this->nitcon = $rs->getString($startcol + 9);
+      $this->nitcon = $rs->getString($startcol + 9);
 
-			$this->codmun = $rs->getString($startcol + 10);
+      $this->codmun = $rs->getString($startcol + 10);
 
-			$this->codedo = $rs->getString($startcol + 11);
+      $this->codedo = $rs->getString($startcol + 11);
 
-			$this->codpai = $rs->getString($startcol + 12);
+      $this->codpai = $rs->getString($startcol + 12);
 
-			$this->ciucon = $rs->getString($startcol + 13);
+      $this->ciucon = $rs->getString($startcol + 13);
 
-			$this->cpocon = $rs->getString($startcol + 14);
+      $this->cpocon = $rs->getString($startcol + 14);
 
-			$this->apocon = $rs->getString($startcol + 15);
+      $this->apocon = $rs->getString($startcol + 15);
 
-			$this->urlcon = $rs->getString($startcol + 16);
+      $this->urlcon = $rs->getString($startcol + 16);
 
-			$this->naccon = $rs->getString($startcol + 17);
+      $this->naccon = $rs->getString($startcol + 17);
 
-			$this->tipcon = $rs->getString($startcol + 18);
+      $this->tipcon = $rs->getString($startcol + 18);
 
-			$this->faxcon = $rs->getString($startcol + 19);
+      $this->faxcon = $rs->getString($startcol + 19);
 
-			$this->clacon = $rs->getString($startcol + 20);
+      $this->clacon = $rs->getString($startcol + 20);
 
-			$this->fecdescon = $rs->getDate($startcol + 21, null);
+      $this->fecdescon = $rs->getDate($startcol + 21, null);
 
-			$this->fecactcon = $rs->getDate($startcol + 22, null);
+      $this->fecactcon = $rs->getDate($startcol + 22, null);
 
-			$this->stacon = $rs->getString($startcol + 23);
+      $this->stacon = $rs->getString($startcol + 23);
 
-			$this->origen = $rs->getString($startcol + 24);
+      $this->origen = $rs->getString($startcol + 24);
 
-			$this->id = $rs->getInt($startcol + 25);
+      $this->id = $rs->getInt($startcol + 25);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 26; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcconrepco object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 26; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcconrepco object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -701,6 +747,7 @@ abstract class BaseFcconrepco extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcconrepcoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcconrepcoPeer::doUpdate($this, $con);

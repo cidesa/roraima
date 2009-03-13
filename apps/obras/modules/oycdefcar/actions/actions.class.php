@@ -10,4 +10,25 @@
  */
 class oycdefcarActions extends autooycdefcarActions
 {
+  public function executeAjax()
+  {
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+	 $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+	 if ($this->getRequestParameter('ajax')=='1')
+	 {
+	 	$dato=OctipcarPeer::getDestipcar(trim($this->getRequestParameter('codigo')));
+	 	$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	 	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	 	return sfView::HEADER_ONLY;
+	 }
+  }
+
+  protected function deleteOctipcar($octipcar)
+  {
+  	if (Herramientas::getX_vacio('CodTipCar','OCDefPer','CodTipCar',$octipcar->getCodtipcar())=='')
+    {
+    	$octipcar->delete();
+    }
+  }
 }

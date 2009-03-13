@@ -270,6 +270,7 @@ abstract class BaseNpinfcurRenePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpinfcurRenePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

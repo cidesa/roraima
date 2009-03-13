@@ -25,75 +25,100 @@ abstract class BaseCaclaart extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodclaart()
-	{
+  
+  public function getCodclaart($val=false)
+  {
 
-		return number_format($this->codclaart,2,',','.');
-		
-	}
-	
-	public function getClasificacion()
-	{
+    if($val) return number_format($this->codclaart,2,',','.');
+    else return $this->codclaart;
 
-		return $this->clasificacion; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getClasificacion()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->clasificacion);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodclaart($v)
 	{
 
-		if ($this->codclaart !== $v) {
-			$this->codclaart = $v;
-			$this->modifiedColumns[] = CaclaartPeer::CODCLAART;
-		}
-
+    if ($this->codclaart !== $v) {
+        $this->codclaart = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaclaartPeer::CODCLAART;
+      }
+  
 	} 
 	
 	public function setClasificacion($v)
 	{
 
-		if ($this->clasificacion !== $v) {
-			$this->clasificacion = $v;
-			$this->modifiedColumns[] = CaclaartPeer::CLASIFICACION;
-		}
-
+    if ($this->clasificacion !== $v) {
+        $this->clasificacion = $v;
+        $this->modifiedColumns[] = CaclaartPeer::CLASIFICACION;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaclaartPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaclaartPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codclaart = $rs->getFloat($startcol + 0);
+      $this->codclaart = $rs->getFloat($startcol + 0);
 
-			$this->clasificacion = $rs->getString($startcol + 1);
+      $this->clasificacion = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caclaart object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caclaart object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

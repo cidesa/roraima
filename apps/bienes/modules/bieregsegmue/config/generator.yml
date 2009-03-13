@@ -9,28 +9,28 @@ generator:
       codmue:        { name : Código Activo}
       nrosegmue:     { name : Número}
       fecsegmue:     { name : Fecha}
-      nomsegmue:     { name : Compañia Aseguradora}   
-      cobsegmue:     { name : Cobertura}   
+      nomsegmue:     { name : Compañia Aseguradora}
+      cobsegmue:     { name : Cobertura}
       monsegmue:     { name : Monto}
       fecsegven:     { name : Fecha Vencimiento}
       prosegmue:     { name : Promotor}
       obssegmue:     { name : Observaciones}
       desmue:        { name : Descripción}
 
-              
     list:
       title:         Registro de Seguro [Muebles]
       filters:       [codact, codmue]
-      display:       [=codact, codmue, desmue]      
+      display:       [=codact, codmue, desmue]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   10
+      sort:   codact
     edit:
       title:          Edición de Seguro [Muebles]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~
 
-    
-
-
-
-       

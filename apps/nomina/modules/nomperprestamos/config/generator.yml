@@ -4,18 +4,26 @@ generator:
     model_class:      Nptippre
     theme:            default
     fields:
-      codtippre: { name: Codigo del Tipo de Prestamo}
-      destippre: {name: Descripcion del Tipo de Prestamo}
+      codtippre: { name: Codigo Tipo de Prestamo, params: readonly=true }
+      destippre: {name: Descripcion, params: readonly=true }
       codcon: { name: Codigo del Concepto}
-      nomcon: { name: Descripcion del Concepto}      
-      tippre: { name: Tipo}  
-            
+      nomcon: { name: Descripcion del Concepto}
+      grid:   {name: ''}
     list:
-      title:          Prestamos
-      display:        [=codcon, nomcon, codtippre, destippre]
+      title:          Movimientos de Prestamos
+      display:        [=codtippre, destippre, codcon, nomcon]
+      filters:        [codtippre, codcon]
       object_actions:
         _edit:        ~
-     max_per_page:   5
+      actions:
+        _create:        none
+      max_per_page:   10
     edit:
-      title:          Edicion de Prestamos
-      display:       [codtippre, destippre]
+      title:          Edición de Movimientos de Prestamos
+      display:
+        "Tipo de Prestamos":  [_codtippre, _codcon]
+        "Empleados":  [_grid]
+      actions:
+        _list:          ~
+        _save:          ~
+        _delete:        none

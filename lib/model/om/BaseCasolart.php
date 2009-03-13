@@ -73,6 +73,14 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipreq;
+
+
+	
+	protected $aprreq;
+
+
+	
 	protected $id;
 
 	
@@ -81,375 +89,450 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getReqart()
-	{
+  
+  public function getReqart()
+  {
 
-		return $this->reqart; 		
-	}
-	
-	public function getFecreq($format = 'Y-m-d')
-	{
+    return trim($this->reqart);
 
-		if ($this->fecreq === null || $this->fecreq === '') {
-			return null;
-		} elseif (!is_int($this->fecreq)) {
-						$ts = strtotime($this->fecreq);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreq] as date/time value: " . var_export($this->fecreq, true));
-			}
-		} else {
-			$ts = $this->fecreq;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecreq($format = 'Y-m-d')
+  {
 
-	
-	public function getDesreq()
-	{
+    if ($this->fecreq === null || $this->fecreq === '') {
+      return null;
+    } elseif (!is_int($this->fecreq)) {
+            $ts = adodb_strtotime($this->fecreq);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreq] as date/time value: " . var_export($this->fecreq, true));
+      }
+    } else {
+      $ts = $this->fecreq;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->desreq; 		
-	}
-	
-	public function getMonreq()
-	{
+  
+  public function getDesreq()
+  {
 
-		return number_format($this->monreq,2,',','.');
-		
-	}
-	
-	public function getStareq()
-	{
+    return trim($this->desreq);
 
-		return $this->stareq; 		
-	}
-	
-	public function getMotreq()
-	{
+  }
+  
+  public function getMonreq($val=false)
+  {
 
-		return $this->motreq; 		
-	}
-	
-	public function getBenreq()
-	{
+    if($val) return number_format($this->monreq,2,',','.');
+    else return $this->monreq;
 
-		return $this->benreq; 		
-	}
-	
-	public function getMondes()
-	{
+  }
+  
+  public function getStareq()
+  {
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getObsreq()
-	{
+    return trim($this->stareq);
 
-		return $this->obsreq; 		
-	}
-	
-	public function getUnires()
-	{
+  }
+  
+  public function getMotreq()
+  {
 
-		return $this->unires; 		
-	}
-	
-	public function getTipmon()
-	{
+    return trim($this->motreq);
 
-		return $this->tipmon; 		
-	}
-	
-	public function getValmon()
-	{
+  }
+  
+  public function getBenreq()
+  {
 
-		return number_format($this->valmon,2,',','.');
-		
-	}
-	
-	public function getFecanu($format = 'Y-m-d')
-	{
+    return trim($this->benreq);
 
-		if ($this->fecanu === null || $this->fecanu === '') {
-			return null;
-		} elseif (!is_int($this->fecanu)) {
-						$ts = strtotime($this->fecanu);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
-			}
-		} else {
-			$ts = $this->fecanu;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMondes($val=false)
+  {
 
-	
-	public function getCodpro()
-	{
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
 
-		return $this->codpro; 		
-	}
-	
-	public function getReqcom()
-	{
+  }
+  
+  public function getObsreq()
+  {
 
-		return $this->reqcom; 		
-	}
-	
-	public function getTipfin()
-	{
+    return trim($this->obsreq);
 
-		return $this->tipfin; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getUnires()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->unires);
+
+  }
+  
+  public function getTipmon()
+  {
+
+    return trim($this->tipmon);
+
+  }
+  
+  public function getValmon($val=false)
+  {
+
+    if($val) return number_format($this->valmon,2,',','.');
+    else return $this->valmon;
+
+  }
+  
+  public function getFecanu($format = 'Y-m-d')
+  {
+
+    if ($this->fecanu === null || $this->fecanu === '') {
+      return null;
+    } elseif (!is_int($this->fecanu)) {
+            $ts = adodb_strtotime($this->fecanu);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecanu] as date/time value: " . var_export($this->fecanu, true));
+      }
+    } else {
+      $ts = $this->fecanu;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getCodpro()
+  {
+
+    return trim($this->codpro);
+
+  }
+  
+  public function getReqcom()
+  {
+
+    return trim($this->reqcom);
+
+  }
+  
+  public function getTipfin()
+  {
+
+    return trim($this->tipfin);
+
+  }
+  
+  public function getTipreq()
+  {
+
+    return $this->tipreq;
+
+  }
+  
+  public function getAprreq()
+  {
+
+    return $this->aprreq;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setReqart($v)
 	{
 
-		if ($this->reqart !== $v) {
-			$this->reqart = $v;
-			$this->modifiedColumns[] = CasolartPeer::REQART;
-		}
-
+    if ($this->reqart !== $v) {
+        $this->reqart = $v;
+        $this->modifiedColumns[] = CasolartPeer::REQART;
+      }
+  
 	} 
 	
 	public function setFecreq($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreq] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreq !== $ts) {
-			$this->fecreq = $ts;
-			$this->modifiedColumns[] = CasolartPeer::FECREQ;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreq] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreq !== $ts) {
+      $this->fecreq = $ts;
+      $this->modifiedColumns[] = CasolartPeer::FECREQ;
+    }
 
 	} 
 	
 	public function setDesreq($v)
 	{
 
-		if ($this->desreq !== $v) {
-			$this->desreq = $v;
-			$this->modifiedColumns[] = CasolartPeer::DESREQ;
-		}
-
+    if ($this->desreq !== $v) {
+        $this->desreq = $v;
+        $this->modifiedColumns[] = CasolartPeer::DESREQ;
+      }
+  
 	} 
 	
 	public function setMonreq($v)
 	{
 
-		if ($this->monreq !== $v) {
-			$this->monreq = $v;
-			$this->modifiedColumns[] = CasolartPeer::MONREQ;
-		}
-
+    if ($this->monreq !== $v) {
+        $this->monreq = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CasolartPeer::MONREQ;
+      }
+  
 	} 
 	
 	public function setStareq($v)
 	{
 
-		if ($this->stareq !== $v) {
-			$this->stareq = $v;
-			$this->modifiedColumns[] = CasolartPeer::STAREQ;
-		}
-
+    if ($this->stareq !== $v) {
+        $this->stareq = $v;
+        $this->modifiedColumns[] = CasolartPeer::STAREQ;
+      }
+  
 	} 
 	
 	public function setMotreq($v)
 	{
 
-		if ($this->motreq !== $v) {
-			$this->motreq = $v;
-			$this->modifiedColumns[] = CasolartPeer::MOTREQ;
-		}
-
+    if ($this->motreq !== $v) {
+        $this->motreq = $v;
+        $this->modifiedColumns[] = CasolartPeer::MOTREQ;
+      }
+  
 	} 
 	
 	public function setBenreq($v)
 	{
 
-		if ($this->benreq !== $v) {
-			$this->benreq = $v;
-			$this->modifiedColumns[] = CasolartPeer::BENREQ;
-		}
-
+    if ($this->benreq !== $v) {
+        $this->benreq = $v;
+        $this->modifiedColumns[] = CasolartPeer::BENREQ;
+      }
+  
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = CasolartPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CasolartPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setObsreq($v)
 	{
 
-		if ($this->obsreq !== $v) {
-			$this->obsreq = $v;
-			$this->modifiedColumns[] = CasolartPeer::OBSREQ;
-		}
-
+    if ($this->obsreq !== $v) {
+        $this->obsreq = $v;
+        $this->modifiedColumns[] = CasolartPeer::OBSREQ;
+      }
+  
 	} 
 	
 	public function setUnires($v)
 	{
 
-		if ($this->unires !== $v) {
-			$this->unires = $v;
-			$this->modifiedColumns[] = CasolartPeer::UNIRES;
-		}
-
+    if ($this->unires !== $v) {
+        $this->unires = $v;
+        $this->modifiedColumns[] = CasolartPeer::UNIRES;
+      }
+  
 	} 
 	
 	public function setTipmon($v)
 	{
 
-		if ($this->tipmon !== $v) {
-			$this->tipmon = $v;
-			$this->modifiedColumns[] = CasolartPeer::TIPMON;
-		}
-
+    if ($this->tipmon !== $v) {
+        $this->tipmon = $v;
+        $this->modifiedColumns[] = CasolartPeer::TIPMON;
+      }
+  
 	} 
 	
 	public function setValmon($v)
 	{
 
-		if ($this->valmon !== $v) {
-			$this->valmon = $v;
-			$this->modifiedColumns[] = CasolartPeer::VALMON;
-		}
-
+    if ($this->valmon !== $v) {
+        $this->valmon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CasolartPeer::VALMON;
+      }
+  
 	} 
 	
 	public function setFecanu($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecanu !== $ts) {
-			$this->fecanu = $ts;
-			$this->modifiedColumns[] = CasolartPeer::FECANU;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecanu] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecanu !== $ts) {
+      $this->fecanu = $ts;
+      $this->modifiedColumns[] = CasolartPeer::FECANU;
+    }
 
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CasolartPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CasolartPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setReqcom($v)
 	{
 
-		if ($this->reqcom !== $v) {
-			$this->reqcom = $v;
-			$this->modifiedColumns[] = CasolartPeer::REQCOM;
-		}
-
+    if ($this->reqcom !== $v) {
+        $this->reqcom = $v;
+        $this->modifiedColumns[] = CasolartPeer::REQCOM;
+      }
+  
 	} 
 	
 	public function setTipfin($v)
 	{
 
-		if ($this->tipfin !== $v) {
-			$this->tipfin = $v;
-			$this->modifiedColumns[] = CasolartPeer::TIPFIN;
-		}
+    if ($this->tipfin !== $v) {
+        $this->tipfin = $v;
+        $this->modifiedColumns[] = CasolartPeer::TIPFIN;
+      }
+  
+	} 
+	
+	public function setTipreq($v)
+	{
 
+    if ($this->tipreq !== $v) {
+        $this->tipreq = $v;
+        $this->modifiedColumns[] = CasolartPeer::TIPREQ;
+      }
+  
+	} 
+	
+	public function setAprreq($v)
+	{
+
+    if ($this->aprreq !== $v) {
+        $this->aprreq = $v;
+        $this->modifiedColumns[] = CasolartPeer::APRREQ;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CasolartPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CasolartPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->reqart = $rs->getString($startcol + 0);
+      $this->reqart = $rs->getString($startcol + 0);
 
-			$this->fecreq = $rs->getDate($startcol + 1, null);
+      $this->fecreq = $rs->getDate($startcol + 1, null);
 
-			$this->desreq = $rs->getString($startcol + 2);
+      $this->desreq = $rs->getString($startcol + 2);
 
-			$this->monreq = $rs->getFloat($startcol + 3);
+      $this->monreq = $rs->getFloat($startcol + 3);
 
-			$this->stareq = $rs->getString($startcol + 4);
+      $this->stareq = $rs->getString($startcol + 4);
 
-			$this->motreq = $rs->getString($startcol + 5);
+      $this->motreq = $rs->getString($startcol + 5);
 
-			$this->benreq = $rs->getString($startcol + 6);
+      $this->benreq = $rs->getString($startcol + 6);
 
-			$this->mondes = $rs->getFloat($startcol + 7);
+      $this->mondes = $rs->getFloat($startcol + 7);
 
-			$this->obsreq = $rs->getString($startcol + 8);
+      $this->obsreq = $rs->getString($startcol + 8);
 
-			$this->unires = $rs->getString($startcol + 9);
+      $this->unires = $rs->getString($startcol + 9);
 
-			$this->tipmon = $rs->getString($startcol + 10);
+      $this->tipmon = $rs->getString($startcol + 10);
 
-			$this->valmon = $rs->getFloat($startcol + 11);
+      $this->valmon = $rs->getFloat($startcol + 11);
 
-			$this->fecanu = $rs->getDate($startcol + 12, null);
+      $this->fecanu = $rs->getDate($startcol + 12, null);
 
-			$this->codpro = $rs->getString($startcol + 13);
+      $this->codpro = $rs->getString($startcol + 13);
 
-			$this->reqcom = $rs->getString($startcol + 14);
+      $this->reqcom = $rs->getString($startcol + 14);
 
-			$this->tipfin = $rs->getString($startcol + 15);
+      $this->tipfin = $rs->getString($startcol + 15);
 
-			$this->id = $rs->getInt($startcol + 16);
+      $this->tipreq = $rs->getString($startcol + 16);
 
-			$this->resetModified();
+      $this->aprreq = $rs->getString($startcol + 17);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 18);
 
-						return $startcol + 17; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Casolart object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 19; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Casolart object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -506,6 +589,7 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CasolartPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CasolartPeer::doUpdate($this, $con);
@@ -620,6 +704,12 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 				return $this->getTipfin();
 				break;
 			case 16:
+				return $this->getTipreq();
+				break;
+			case 17:
+				return $this->getAprreq();
+				break;
+			case 18:
 				return $this->getId();
 				break;
 			default:
@@ -648,7 +738,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 			$keys[13] => $this->getCodpro(),
 			$keys[14] => $this->getReqcom(),
 			$keys[15] => $this->getTipfin(),
-			$keys[16] => $this->getId(),
+			$keys[16] => $this->getTipreq(),
+			$keys[17] => $this->getAprreq(),
+			$keys[18] => $this->getId(),
 		);
 		return $result;
 	}
@@ -713,6 +805,12 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 				$this->setTipfin($value);
 				break;
 			case 16:
+				$this->setTipreq($value);
+				break;
+			case 17:
+				$this->setAprreq($value);
+				break;
+			case 18:
 				$this->setId($value);
 				break;
 		} 	}
@@ -738,7 +836,9 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[13], $arr)) $this->setCodpro($arr[$keys[13]]);
 		if (array_key_exists($keys[14], $arr)) $this->setReqcom($arr[$keys[14]]);
 		if (array_key_exists($keys[15], $arr)) $this->setTipfin($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
+		if (array_key_exists($keys[16], $arr)) $this->setTipreq($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setAprreq($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setId($arr[$keys[18]]);
 	}
 
 	
@@ -762,6 +862,8 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CasolartPeer::CODPRO)) $criteria->add(CasolartPeer::CODPRO, $this->codpro);
 		if ($this->isColumnModified(CasolartPeer::REQCOM)) $criteria->add(CasolartPeer::REQCOM, $this->reqcom);
 		if ($this->isColumnModified(CasolartPeer::TIPFIN)) $criteria->add(CasolartPeer::TIPFIN, $this->tipfin);
+		if ($this->isColumnModified(CasolartPeer::TIPREQ)) $criteria->add(CasolartPeer::TIPREQ, $this->tipreq);
+		if ($this->isColumnModified(CasolartPeer::APRREQ)) $criteria->add(CasolartPeer::APRREQ, $this->aprreq);
 		if ($this->isColumnModified(CasolartPeer::ID)) $criteria->add(CasolartPeer::ID, $this->id);
 
 		return $criteria;
@@ -824,6 +926,10 @@ abstract class BaseCasolart extends BaseObject  implements Persistent {
 		$copyObj->setReqcom($this->reqcom);
 
 		$copyObj->setTipfin($this->tipfin);
+
+		$copyObj->setTipreq($this->tipreq);
+
+		$copyObj->setAprreq($this->aprreq);
 
 
 		$copyObj->setNew(true);

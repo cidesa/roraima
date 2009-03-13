@@ -37,129 +37,157 @@ abstract class BaseForcarocp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcar()
-	{
+  
+  public function getCodcar()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getDescar()
-	{
+    return trim($this->codcar);
 
-		return $this->descar; 		
-	}
-	
-	public function getGracar()
-	{
+  }
+  
+  public function getDescar()
+  {
 
-		return $this->gracar; 		
-	}
-	
-	public function getSuecar()
-	{
+    return trim($this->descar);
 
-		return number_format($this->suecar,2,',','.');
-		
-	}
-	
-	public function getTipcar()
-	{
+  }
+  
+  public function getGracar()
+  {
 
-		return $this->tipcar; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->gracar);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getSuecar($val=false)
+  {
+
+    if($val) return number_format($this->suecar,2,',','.');
+    else return $this->suecar;
+
+  }
+  
+  public function getTipcar()
+  {
+
+    return trim($this->tipcar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = ForcarocpPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = ForcarocpPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setDescar($v)
 	{
 
-		if ($this->descar !== $v) {
-			$this->descar = $v;
-			$this->modifiedColumns[] = ForcarocpPeer::DESCAR;
-		}
-
+    if ($this->descar !== $v) {
+        $this->descar = $v;
+        $this->modifiedColumns[] = ForcarocpPeer::DESCAR;
+      }
+  
 	} 
 	
 	public function setGracar($v)
 	{
 
-		if ($this->gracar !== $v) {
-			$this->gracar = $v;
-			$this->modifiedColumns[] = ForcarocpPeer::GRACAR;
-		}
-
+    if ($this->gracar !== $v) {
+        $this->gracar = $v;
+        $this->modifiedColumns[] = ForcarocpPeer::GRACAR;
+      }
+  
 	} 
 	
 	public function setSuecar($v)
 	{
 
-		if ($this->suecar !== $v) {
-			$this->suecar = $v;
-			$this->modifiedColumns[] = ForcarocpPeer::SUECAR;
-		}
-
+    if ($this->suecar !== $v) {
+        $this->suecar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcarocpPeer::SUECAR;
+      }
+  
 	} 
 	
 	public function setTipcar($v)
 	{
 
-		if ($this->tipcar !== $v) {
-			$this->tipcar = $v;
-			$this->modifiedColumns[] = ForcarocpPeer::TIPCAR;
-		}
-
+    if ($this->tipcar !== $v) {
+        $this->tipcar = $v;
+        $this->modifiedColumns[] = ForcarocpPeer::TIPCAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForcarocpPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForcarocpPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcar = $rs->getString($startcol + 0);
+      $this->codcar = $rs->getString($startcol + 0);
 
-			$this->descar = $rs->getString($startcol + 1);
+      $this->descar = $rs->getString($startcol + 1);
 
-			$this->gracar = $rs->getString($startcol + 2);
+      $this->gracar = $rs->getString($startcol + 2);
 
-			$this->suecar = $rs->getFloat($startcol + 3);
+      $this->suecar = $rs->getFloat($startcol + 3);
 
-			$this->tipcar = $rs->getString($startcol + 4);
+      $this->tipcar = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forcarocp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forcarocp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

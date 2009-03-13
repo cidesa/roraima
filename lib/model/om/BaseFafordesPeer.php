@@ -13,14 +13,11 @@ abstract class BaseFafordesPeer {
 	const CLASS_DEFAULT = 'lib.model.Fafordes';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 2;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
-
-	
-	const FORDES = 'fafordes.FORDES';
 
 	
 	const NOMDES = 'fafordes.NOMDES';
@@ -34,18 +31,18 @@ abstract class BaseFafordesPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Fordes', 'Nomdes', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FafordesPeer::FORDES, FafordesPeer::NOMDES, FafordesPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('fordes', 'nomdes', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nomdes', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FafordesPeer::NOMDES, FafordesPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nomdes', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Fordes' => 0, 'Nomdes' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (FafordesPeer::FORDES => 0, FafordesPeer::NOMDES => 1, FafordesPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('fordes' => 0, 'nomdes' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Nomdes' => 0, 'Id' => 1, ),
+		BasePeer::TYPE_COLNAME => array (FafordesPeer::NOMDES => 0, FafordesPeer::ID => 1, ),
+		BasePeer::TYPE_FIELDNAME => array ('nomdes' => 0, 'id' => 1, ),
+		BasePeer::TYPE_NUM => array (0, 1, )
 	);
 
 	
@@ -98,8 +95,6 @@ abstract class BaseFafordesPeer {
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
-
-		$criteria->addSelectColumn(FafordesPeer::FORDES);
 
 		$criteria->addSelectColumn(FafordesPeer::NOMDES);
 
@@ -205,6 +200,7 @@ abstract class BaseFafordesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FafordesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

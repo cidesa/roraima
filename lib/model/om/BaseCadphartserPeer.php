@@ -225,6 +225,7 @@ abstract class BaseCadphartserPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CadphartserPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -1,0 +1,26 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Fordefobjestnvaeta
+    theme:            default
+    fields:
+      codobjnvaeta:      { name : Codigo, params: maxlength=3}
+      desobjnvaeta:      { name : Descripción, params: maxlength=250 }
+
+    list:
+      title:          Definición de Objetivos Estrategicos Nueva Etapa
+      display:        [=codobjnvaeta, desobjnvaeta]
+      filters:        [codobjnvaeta, desobjnvaeta]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:       codobjnvaeta
+    edit:
+      title:          Edición de Objetivos Estrategicos Nueva Etapa
+      display:       [codobjnvaeta, desobjnvaeta]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

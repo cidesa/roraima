@@ -77,336 +77,373 @@ abstract class BaseNpnomcalTemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodnom()
-	{
+  
+  public function getCodnom()
+  {
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->codnom);
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodcar()
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		return $this->codcar; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codemp);
 
-		return $this->codcon; 		
-	}
-	
-	public function getFrecon()
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		return $this->frecon; 		
-	}
-	
-	public function getAsided()
-	{
+    return trim($this->codcar);
 
-		return $this->asided; 		
-	}
-	
-	public function getFecnom($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		if ($this->fecnom === null || $this->fecnom === '') {
-			return null;
-		} elseif (!is_int($this->fecnom)) {
-						$ts = strtotime($this->fecnom);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecnom] as date/time value: " . var_export($this->fecnom, true));
-			}
-		} else {
-			$ts = $this->fecnom;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codcon);
 
-	
-	public function getNomcon()
-	{
+  }
+  
+  public function getFrecon()
+  {
 
-		return $this->nomcon; 		
-	}
-	
-	public function getNomnom()
-	{
+    return trim($this->frecon);
 
-		return $this->nomnom; 		
-	}
-	
-	public function getCantidad()
-	{
+  }
+  
+  public function getAsided()
+  {
 
-		return number_format($this->cantidad,2,',','.');
-		
-	}
-	
-	public function getMonto()
-	{
+    return trim($this->asided);
 
-		return number_format($this->monto,2,',','.');
-		
-	}
-	
-	public function getAcucon()
-	{
+  }
+  
+  public function getFecnom($format = 'Y-m-d')
+  {
 
-		return $this->acucon; 		
-	}
-	
-	public function getAcumulado()
-	{
+    if ($this->fecnom === null || $this->fecnom === '') {
+      return null;
+    } elseif (!is_int($this->fecnom)) {
+            $ts = adodb_strtotime($this->fecnom);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecnom] as date/time value: " . var_export($this->fecnom, true));
+      }
+    } else {
+      $ts = $this->fecnom;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->acumulado,2,',','.');
-		
-	}
-	
-	public function getSaldo()
-	{
+  
+  public function getNomcon()
+  {
 
-		return number_format($this->saldo,2,',','.');
-		
-	}
-	
-	public function getNumrec()
-	{
+    return trim($this->nomcon);
 
-		return number_format($this->numrec,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomnom()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomnom);
+
+  }
+  
+  public function getCantidad($val=false)
+  {
+
+    if($val) return number_format($this->cantidad,2,',','.');
+    else return $this->cantidad;
+
+  }
+  
+  public function getMonto($val=false)
+  {
+
+    if($val) return number_format($this->monto,2,',','.');
+    else return $this->monto;
+
+  }
+  
+  public function getAcucon()
+  {
+
+    return trim($this->acucon);
+
+  }
+  
+  public function getAcumulado($val=false)
+  {
+
+    if($val) return number_format($this->acumulado,2,',','.');
+    else return $this->acumulado;
+
+  }
+  
+  public function getSaldo($val=false)
+  {
+
+    if($val) return number_format($this->saldo,2,',','.');
+    else return $this->saldo;
+
+  }
+  
+  public function getNumrec($val=false)
+  {
+
+    if($val) return number_format($this->numrec,2,',','.');
+    else return $this->numrec;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setFrecon($v)
 	{
 
-		if ($this->frecon !== $v) {
-			$this->frecon = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::FRECON;
-		}
-
+    if ($this->frecon !== $v) {
+        $this->frecon = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::FRECON;
+      }
+  
 	} 
 	
 	public function setAsided($v)
 	{
 
-		if ($this->asided !== $v) {
-			$this->asided = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::ASIDED;
-		}
-
+    if ($this->asided !== $v) {
+        $this->asided = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::ASIDED;
+      }
+  
 	} 
 	
 	public function setFecnom($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecnom] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecnom !== $ts) {
-			$this->fecnom = $ts;
-			$this->modifiedColumns[] = NpnomcalTempPeer::FECNOM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecnom] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecnom !== $ts) {
+      $this->fecnom = $ts;
+      $this->modifiedColumns[] = NpnomcalTempPeer::FECNOM;
+    }
 
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setNomnom($v)
 	{
 
-		if ($this->nomnom !== $v) {
-			$this->nomnom = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::NOMNOM;
-		}
-
+    if ($this->nomnom !== $v) {
+        $this->nomnom = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::NOMNOM;
+      }
+  
 	} 
 	
 	public function setCantidad($v)
 	{
 
-		if ($this->cantidad !== $v) {
-			$this->cantidad = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::CANTIDAD;
-		}
-
+    if ($this->cantidad !== $v) {
+        $this->cantidad = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpnomcalTempPeer::CANTIDAD;
+      }
+  
 	} 
 	
 	public function setMonto($v)
 	{
 
-		if ($this->monto !== $v) {
-			$this->monto = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::MONTO;
-		}
-
+    if ($this->monto !== $v) {
+        $this->monto = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpnomcalTempPeer::MONTO;
+      }
+  
 	} 
 	
 	public function setAcucon($v)
 	{
 
-		if ($this->acucon !== $v) {
-			$this->acucon = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::ACUCON;
-		}
-
+    if ($this->acucon !== $v) {
+        $this->acucon = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::ACUCON;
+      }
+  
 	} 
 	
 	public function setAcumulado($v)
 	{
 
-		if ($this->acumulado !== $v) {
-			$this->acumulado = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::ACUMULADO;
-		}
-
+    if ($this->acumulado !== $v) {
+        $this->acumulado = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpnomcalTempPeer::ACUMULADO;
+      }
+  
 	} 
 	
 	public function setSaldo($v)
 	{
 
-		if ($this->saldo !== $v) {
-			$this->saldo = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::SALDO;
-		}
-
+    if ($this->saldo !== $v) {
+        $this->saldo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpnomcalTempPeer::SALDO;
+      }
+  
 	} 
 	
 	public function setNumrec($v)
 	{
 
-		if ($this->numrec !== $v) {
-			$this->numrec = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::NUMREC;
-		}
-
+    if ($this->numrec !== $v) {
+        $this->numrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpnomcalTempPeer::NUMREC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpnomcalTempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpnomcalTempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codnom = $rs->getString($startcol + 0);
+      $this->codnom = $rs->getString($startcol + 0);
 
-			$this->codemp = $rs->getString($startcol + 1);
+      $this->codemp = $rs->getString($startcol + 1);
 
-			$this->codcar = $rs->getString($startcol + 2);
+      $this->codcar = $rs->getString($startcol + 2);
 
-			$this->codcon = $rs->getString($startcol + 3);
+      $this->codcon = $rs->getString($startcol + 3);
 
-			$this->frecon = $rs->getString($startcol + 4);
+      $this->frecon = $rs->getString($startcol + 4);
 
-			$this->asided = $rs->getString($startcol + 5);
+      $this->asided = $rs->getString($startcol + 5);
 
-			$this->fecnom = $rs->getDate($startcol + 6, null);
+      $this->fecnom = $rs->getDate($startcol + 6, null);
 
-			$this->nomcon = $rs->getString($startcol + 7);
+      $this->nomcon = $rs->getString($startcol + 7);
 
-			$this->nomnom = $rs->getString($startcol + 8);
+      $this->nomnom = $rs->getString($startcol + 8);
 
-			$this->cantidad = $rs->getFloat($startcol + 9);
+      $this->cantidad = $rs->getFloat($startcol + 9);
 
-			$this->monto = $rs->getFloat($startcol + 10);
+      $this->monto = $rs->getFloat($startcol + 10);
 
-			$this->acucon = $rs->getString($startcol + 11);
+      $this->acucon = $rs->getString($startcol + 11);
 
-			$this->acumulado = $rs->getFloat($startcol + 12);
+      $this->acumulado = $rs->getFloat($startcol + 12);
 
-			$this->saldo = $rs->getFloat($startcol + 13);
+      $this->saldo = $rs->getFloat($startcol + 13);
 
-			$this->numrec = $rs->getFloat($startcol + 14);
+      $this->numrec = $rs->getFloat($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating NpnomcalTemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating NpnomcalTemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -463,6 +500,7 @@ abstract class BaseNpnomcalTemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpnomcalTempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpnomcalTempPeer::doUpdate($this, $con);

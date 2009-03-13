@@ -235,6 +235,7 @@ abstract class BaseNpliquidacionDetPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpliquidacionDetPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

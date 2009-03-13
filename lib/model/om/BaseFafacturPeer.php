@@ -13,7 +13,7 @@ abstract class BaseFafacturPeer {
 	const CLASS_DEFAULT = 'lib.model.Fafactur';
 
 	
-	const NUM_COLUMNS = 17;
+	const NUM_COLUMNS = 22;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,7 +41,7 @@ abstract class BaseFafacturPeer {
 	const MONDESC = 'fafactur.MONDESC';
 
 	
-	const CONPAG = 'fafactur.CONPAG';
+	const CODCONPAG = 'fafactur.CODCONPAG';
 
 	
 	const NUMCOM = 'fafactur.NUMCOM';
@@ -68,6 +68,21 @@ abstract class BaseFafacturPeer {
 	const NUMCOMORD = 'fafactur.NUMCOMORD';
 
 	
+	const NUMCOMINV = 'fafactur.NUMCOMINV';
+
+	
+	const SUCURSAL = 'fafactur.SUCURSAL';
+
+	
+	const MOTANU = 'fafactur.MOTANU';
+
+	
+	const VUELTO = 'fafactur.VUELTO';
+
+	
+	const CODCAJ = 'fafactur.CODCAJ';
+
+	
 	const ID = 'fafactur.ID';
 
 	
@@ -76,18 +91,18 @@ abstract class BaseFafacturPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Fecfac', 'Codcli', 'Desfac', 'Tipref', 'Monfac', 'Mondesc', 'Conpag', 'Numcom', 'Reapor', 'Fecanu', 'Status', 'Observ', 'Tipmon', 'Valmon', 'Numcomord', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FafacturPeer::REFFAC, FafacturPeer::FECFAC, FafacturPeer::CODCLI, FafacturPeer::DESFAC, FafacturPeer::TIPREF, FafacturPeer::MONFAC, FafacturPeer::MONDESC, FafacturPeer::CONPAG, FafacturPeer::NUMCOM, FafacturPeer::REAPOR, FafacturPeer::FECANU, FafacturPeer::STATUS, FafacturPeer::OBSERV, FafacturPeer::TIPMON, FafacturPeer::VALMON, FafacturPeer::NUMCOMORD, FafacturPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac', 'fecfac', 'codcli', 'desfac', 'tipref', 'monfac', 'mondesc', 'conpag', 'numcom', 'reapor', 'fecanu', 'status', 'observ', 'tipmon', 'valmon', 'numcomord', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac', 'Fecfac', 'Codcli', 'Desfac', 'Tipref', 'Monfac', 'Mondesc', 'Codconpag', 'Numcom', 'Reapor', 'Fecanu', 'Status', 'Observ', 'Tipmon', 'Valmon', 'Numcomord', 'Numcominv', 'Sucursal', 'Motanu', 'Vuelto', 'Codcaj', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FafacturPeer::REFFAC, FafacturPeer::FECFAC, FafacturPeer::CODCLI, FafacturPeer::DESFAC, FafacturPeer::TIPREF, FafacturPeer::MONFAC, FafacturPeer::MONDESC, FafacturPeer::CODCONPAG, FafacturPeer::NUMCOM, FafacturPeer::REAPOR, FafacturPeer::FECANU, FafacturPeer::STATUS, FafacturPeer::OBSERV, FafacturPeer::TIPMON, FafacturPeer::VALMON, FafacturPeer::NUMCOMORD, FafacturPeer::NUMCOMINV, FafacturPeer::SUCURSAL, FafacturPeer::MOTANU, FafacturPeer::VUELTO, FafacturPeer::CODCAJ, FafacturPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac', 'fecfac', 'codcli', 'desfac', 'tipref', 'monfac', 'mondesc', 'codconpag', 'numcom', 'reapor', 'fecanu', 'status', 'observ', 'tipmon', 'valmon', 'numcomord', 'numcominv', 'sucursal', 'motanu', 'vuelto', 'codcaj', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Fecfac' => 1, 'Codcli' => 2, 'Desfac' => 3, 'Tipref' => 4, 'Monfac' => 5, 'Mondesc' => 6, 'Conpag' => 7, 'Numcom' => 8, 'Reapor' => 9, 'Fecanu' => 10, 'Status' => 11, 'Observ' => 12, 'Tipmon' => 13, 'Valmon' => 14, 'Numcomord' => 15, 'Id' => 16, ),
-		BasePeer::TYPE_COLNAME => array (FafacturPeer::REFFAC => 0, FafacturPeer::FECFAC => 1, FafacturPeer::CODCLI => 2, FafacturPeer::DESFAC => 3, FafacturPeer::TIPREF => 4, FafacturPeer::MONFAC => 5, FafacturPeer::MONDESC => 6, FafacturPeer::CONPAG => 7, FafacturPeer::NUMCOM => 8, FafacturPeer::REAPOR => 9, FafacturPeer::FECANU => 10, FafacturPeer::STATUS => 11, FafacturPeer::OBSERV => 12, FafacturPeer::TIPMON => 13, FafacturPeer::VALMON => 14, FafacturPeer::NUMCOMORD => 15, FafacturPeer::ID => 16, ),
-		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'fecfac' => 1, 'codcli' => 2, 'desfac' => 3, 'tipref' => 4, 'monfac' => 5, 'mondesc' => 6, 'conpag' => 7, 'numcom' => 8, 'reapor' => 9, 'fecanu' => 10, 'status' => 11, 'observ' => 12, 'tipmon' => 13, 'valmon' => 14, 'numcomord' => 15, 'id' => 16, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, )
+		BasePeer::TYPE_PHPNAME => array ('Reffac' => 0, 'Fecfac' => 1, 'Codcli' => 2, 'Desfac' => 3, 'Tipref' => 4, 'Monfac' => 5, 'Mondesc' => 6, 'Codconpag' => 7, 'Numcom' => 8, 'Reapor' => 9, 'Fecanu' => 10, 'Status' => 11, 'Observ' => 12, 'Tipmon' => 13, 'Valmon' => 14, 'Numcomord' => 15, 'Numcominv' => 16, 'Sucursal' => 17, 'Motanu' => 18, 'Vuelto' => 19, 'Codcaj' => 20, 'Id' => 21, ),
+		BasePeer::TYPE_COLNAME => array (FafacturPeer::REFFAC => 0, FafacturPeer::FECFAC => 1, FafacturPeer::CODCLI => 2, FafacturPeer::DESFAC => 3, FafacturPeer::TIPREF => 4, FafacturPeer::MONFAC => 5, FafacturPeer::MONDESC => 6, FafacturPeer::CODCONPAG => 7, FafacturPeer::NUMCOM => 8, FafacturPeer::REAPOR => 9, FafacturPeer::FECANU => 10, FafacturPeer::STATUS => 11, FafacturPeer::OBSERV => 12, FafacturPeer::TIPMON => 13, FafacturPeer::VALMON => 14, FafacturPeer::NUMCOMORD => 15, FafacturPeer::NUMCOMINV => 16, FafacturPeer::SUCURSAL => 17, FafacturPeer::MOTANU => 18, FafacturPeer::VUELTO => 19, FafacturPeer::CODCAJ => 20, FafacturPeer::ID => 21, ),
+		BasePeer::TYPE_FIELDNAME => array ('reffac' => 0, 'fecfac' => 1, 'codcli' => 2, 'desfac' => 3, 'tipref' => 4, 'monfac' => 5, 'mondesc' => 6, 'codconpag' => 7, 'numcom' => 8, 'reapor' => 9, 'fecanu' => 10, 'status' => 11, 'observ' => 12, 'tipmon' => 13, 'valmon' => 14, 'numcomord' => 15, 'numcominv' => 16, 'sucursal' => 17, 'motanu' => 18, 'vuelto' => 19, 'codcaj' => 20, 'id' => 21, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, )
 	);
 
 	
@@ -155,7 +170,7 @@ abstract class BaseFafacturPeer {
 
 		$criteria->addSelectColumn(FafacturPeer::MONDESC);
 
-		$criteria->addSelectColumn(FafacturPeer::CONPAG);
+		$criteria->addSelectColumn(FafacturPeer::CODCONPAG);
 
 		$criteria->addSelectColumn(FafacturPeer::NUMCOM);
 
@@ -172,6 +187,16 @@ abstract class BaseFafacturPeer {
 		$criteria->addSelectColumn(FafacturPeer::VALMON);
 
 		$criteria->addSelectColumn(FafacturPeer::NUMCOMORD);
+
+		$criteria->addSelectColumn(FafacturPeer::NUMCOMINV);
+
+		$criteria->addSelectColumn(FafacturPeer::SUCURSAL);
+
+		$criteria->addSelectColumn(FafacturPeer::MOTANU);
+
+		$criteria->addSelectColumn(FafacturPeer::VUELTO);
+
+		$criteria->addSelectColumn(FafacturPeer::CODCAJ);
 
 		$criteria->addSelectColumn(FafacturPeer::ID);
 
@@ -275,6 +300,7 @@ abstract class BaseFafacturPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FafacturPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

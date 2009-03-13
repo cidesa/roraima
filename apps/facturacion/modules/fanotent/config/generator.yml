@@ -1,0 +1,54 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fanotent
+    theme:            cidesaGenerator
+    fields:
+      nronot: { name: Número}
+      fecnot: { name: Fecha, params: date_format='dd/MM/yyyy'}
+      codcli: { name: CI/RIF Cliente}
+      rifpro: { name: RIF}
+      telpro: { name: Teléfono}
+      dirpro: { name: Dirección}
+      tipref: { name: Refiere a}
+      codref: { name: Referencia}
+      codalm: { name: Cod. Almacén}
+      nomalm: { name: Nombre}
+      desnot: { name: Descripción}
+      monnot: { name: Monto Total}
+      obsnot: { name: Observación}
+      tipnot: { name: Tipo}
+      rifent: { name: CI/RIF Receptor}
+      noment: { name: Nombre Receptor}
+      codart: { name: Cod. Artículo}
+      desart: { name: Descripción}
+      cansol: { name: Cantidad Solicitada}
+      canent: { name: Cantidad a Entregar}
+      candes: { name: Cantidad Despachada}
+      canaju: { name: Cantidad Ajustada}
+      candev: { name: Cantidad Devuelta}
+      cantot: { name: Cantidad Total}
+      preart: { name: Precio}
+      totart: { name: Total}
+      grid: { name: Detalle Nota de Entrega}
+
+    list:
+      title:          Nota de Entrega
+      display:        [=nronot, fecnot, desnot]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [nronot, fecnot, desnot]
+      max_per_page:   10
+      sort:           nronot
+    edit:
+      title:          Nota de Entrega
+      display:
+        "Datos Nota de Entrega": [nronot, fecnot, tipref, codref, codcli, rifpro, dirpro, telpro, desnot, rifent, noment, tipnot, monnot]
+        "Detalle Nota de Entrega": [_grid]
+        "Observación": [obsnot]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

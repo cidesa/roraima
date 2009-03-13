@@ -37,129 +37,157 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodacu()
-	{
+  
+  public function getCodacu()
+  {
 
-		return $this->codacu; 		
-	}
-	
-	public function getNomacu()
-	{
+    return trim($this->codacu);
 
-		return $this->nomacu; 		
-	}
-	
-	public function getCodcon()
-	{
+  }
+  
+  public function getNomacu()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getTipacu()
-	{
+    return trim($this->nomacu);
 
-		return $this->tipacu; 		
-	}
-	
-	public function getFactor()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return number_format($this->factor,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codcon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTipacu()
+  {
+
+    return trim($this->tipacu);
+
+  }
+  
+  public function getFactor($val=false)
+  {
+
+    if($val) return number_format($this->factor,2,',','.');
+    else return $this->factor;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodacu($v)
 	{
 
-		if ($this->codacu !== $v) {
-			$this->codacu = $v;
-			$this->modifiedColumns[] = NpacumulacptPeer::CODACU;
-		}
-
+    if ($this->codacu !== $v) {
+        $this->codacu = $v;
+        $this->modifiedColumns[] = NpacumulacptPeer::CODACU;
+      }
+  
 	} 
 	
 	public function setNomacu($v)
 	{
 
-		if ($this->nomacu !== $v) {
-			$this->nomacu = $v;
-			$this->modifiedColumns[] = NpacumulacptPeer::NOMACU;
-		}
-
+    if ($this->nomacu !== $v) {
+        $this->nomacu = $v;
+        $this->modifiedColumns[] = NpacumulacptPeer::NOMACU;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = NpacumulacptPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = NpacumulacptPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setTipacu($v)
 	{
 
-		if ($this->tipacu !== $v) {
-			$this->tipacu = $v;
-			$this->modifiedColumns[] = NpacumulacptPeer::TIPACU;
-		}
-
+    if ($this->tipacu !== $v) {
+        $this->tipacu = $v;
+        $this->modifiedColumns[] = NpacumulacptPeer::TIPACU;
+      }
+  
 	} 
 	
 	public function setFactor($v)
 	{
 
-		if ($this->factor !== $v || $v === 1) {
-			$this->factor = $v;
-			$this->modifiedColumns[] = NpacumulacptPeer::FACTOR;
-		}
-
+    if ($this->factor !== $v || $v === 1) {
+        $this->factor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpacumulacptPeer::FACTOR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpacumulacptPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpacumulacptPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codacu = $rs->getString($startcol + 0);
+      $this->codacu = $rs->getString($startcol + 0);
 
-			$this->nomacu = $rs->getString($startcol + 1);
+      $this->nomacu = $rs->getString($startcol + 1);
 
-			$this->codcon = $rs->getString($startcol + 2);
+      $this->codcon = $rs->getString($startcol + 2);
 
-			$this->tipacu = $rs->getString($startcol + 3);
+      $this->tipacu = $rs->getString($startcol + 3);
 
-			$this->factor = $rs->getFloat($startcol + 4);
+      $this->factor = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npacumulacpt object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npacumulacpt object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -216,6 +244,7 @@ abstract class BaseNpacumulacpt extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpacumulacptPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpacumulacptPeer::doUpdate($this, $con);

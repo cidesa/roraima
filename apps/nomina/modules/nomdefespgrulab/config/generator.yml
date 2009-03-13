@@ -5,19 +5,24 @@ generator:
     theme:            default
 
     fields:
-      codgrulab:    { name: Codigo, params: maxlength=10,size=10  }
-      desgrulab:    { name: Descripcion, params: size=20  }
+      codgrulab:    { name: Código, params: maxlength=4,size=4  }
+      desgrulab:    { name: Descripción, params: size=20  }
 
     list:
-      title:          Datos de la Condicion Contractual
+      title:          Condición Contractual
       display:        [=codgrulab, desgrulab]
       filters:		  [codgrulab, desgrulab]
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+      sort:   codgrulab
+
     edit:
-      title:          Edicion de la Condicion Contractual
+      title:          Edición de la Condición Contractual
       display:        [codgrulab, desgrulab]
-                
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

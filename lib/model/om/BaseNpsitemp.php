@@ -29,92 +29,118 @@ abstract class BaseNpsitemp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodsitemp()
-	{
+  
+  public function getCodsitemp()
+  {
 
-		return $this->codsitemp; 		
-	}
-	
-	public function getDessitemp()
-	{
+    return trim($this->codsitemp);
 
-		return $this->dessitemp; 		
-	}
-	
-	public function getCalnom()
-	{
+  }
+  
+  public function getDessitemp()
+  {
 
-		return $this->calnom; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->dessitemp);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCalnom()
+  {
+
+    return trim($this->calnom);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodsitemp($v)
 	{
 
-		if ($this->codsitemp !== $v) {
-			$this->codsitemp = $v;
-			$this->modifiedColumns[] = NpsitempPeer::CODSITEMP;
-		}
-
+    if ($this->codsitemp !== $v) {
+        $this->codsitemp = $v;
+        $this->modifiedColumns[] = NpsitempPeer::CODSITEMP;
+      }
+  
 	} 
 	
 	public function setDessitemp($v)
 	{
 
-		if ($this->dessitemp !== $v) {
-			$this->dessitemp = $v;
-			$this->modifiedColumns[] = NpsitempPeer::DESSITEMP;
-		}
-
+    if ($this->dessitemp !== $v) {
+        $this->dessitemp = $v;
+        $this->modifiedColumns[] = NpsitempPeer::DESSITEMP;
+      }
+  
 	} 
 	
 	public function setCalnom($v)
 	{
 
-		if ($this->calnom !== $v) {
-			$this->calnom = $v;
-			$this->modifiedColumns[] = NpsitempPeer::CALNOM;
-		}
-
+    if ($this->calnom !== $v) {
+        $this->calnom = $v;
+        $this->modifiedColumns[] = NpsitempPeer::CALNOM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpsitempPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpsitempPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codsitemp = $rs->getString($startcol + 0);
+      $this->codsitemp = $rs->getString($startcol + 0);
 
-			$this->dessitemp = $rs->getString($startcol + 1);
+      $this->dessitemp = $rs->getString($startcol + 1);
 
-			$this->calnom = $rs->getString($startcol + 2);
+      $this->calnom = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npsitemp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npsitemp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseNpsitemp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpsitempPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpsitempPeer::doUpdate($this, $con);

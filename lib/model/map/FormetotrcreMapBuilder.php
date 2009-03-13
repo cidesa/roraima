@@ -1,32 +1,32 @@
 <?php
 
 
-	
+
 class FormetotrcreMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FormetotrcreMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FormetotrcreMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('formetotrcre');
 		$tMap->setPhpName('Formetotrcre');
 
@@ -38,11 +38,11 @@ class FormetotrcreMapBuilder {
 
 		$tMap->addColumn('CODACT', 'Codact', 'string', CreoleTypes::VARCHAR, true, 5);
 
-		$tMap->addColumn('CANACT', 'Canact', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('CANACT', 'Canact', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addColumn('CODPAREGR', 'Codparegr', 'string', CreoleTypes::VARCHAR, true, 16);
 
-		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('MONPRE', 'Monpre', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addColumn('CODORG', 'Codorg', 'string', CreoleTypes::VARCHAR, false, 4);
 
@@ -51,6 +51,6 @@ class FormetotrcreMapBuilder {
 		$tMap->addColumn('OBSERV', 'Observ', 'string', CreoleTypes::VARCHAR, false, 250);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

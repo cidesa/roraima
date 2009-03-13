@@ -205,6 +205,7 @@ abstract class BaseCaretserPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CaretserPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

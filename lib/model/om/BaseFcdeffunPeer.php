@@ -192,14 +192,14 @@ abstract class BaseFcdeffunPeer {
 	public static function doCountJoinFcdefuniadm(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcdeffunPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcdeffunPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -274,7 +274,7 @@ abstract class BaseFcdeffunPeer {
 		} else {
 			$criteria->addSelectColumn(FcdeffunPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -310,25 +310,25 @@ abstract class BaseFcdeffunPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcdeffunPeer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = FcdefuniadmPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -337,7 +337,7 @@ abstract class BaseFcdeffunPeer {
 					$temp_obj2->addFcdeffun($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcdeffuns();
 				$obj2->addFcdeffun($obj1);
@@ -371,6 +371,7 @@ abstract class BaseFcdeffunPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdeffunPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

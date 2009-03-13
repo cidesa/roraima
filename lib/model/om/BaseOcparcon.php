@@ -41,149 +41,178 @@ abstract class BaseOcparcon extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcon()
-	{
+  
+  public function getCodcon()
+  {
 
-		return $this->codcon; 		
-	}
-	
-	public function getCodpar()
-	{
+    return trim($this->codcon);
 
-		return $this->codpar; 		
-	}
-	
-	public function getCancon()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return number_format($this->cancon,2,',','.');
-		
-	}
-	
-	public function getCanval()
-	{
+    return trim($this->codpar);
 
-		return number_format($this->canval,2,',','.');
-		
-	}
-	
-	public function getPorcon()
-	{
+  }
+  
+  public function getCancon($val=false)
+  {
 
-		return number_format($this->porcon,2,',','.');
-		
-	}
-	
-	public function getCodtipfte()
-	{
+    if($val) return number_format($this->cancon,2,',','.');
+    else return $this->cancon;
 
-		return $this->codtipfte; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCanval($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->canval,2,',','.');
+    else return $this->canval;
+
+  }
+  
+  public function getPorcon($val=false)
+  {
+
+    if($val) return number_format($this->porcon,2,',','.');
+    else return $this->porcon;
+
+  }
+  
+  public function getCodtipfte()
+  {
+
+    return trim($this->codtipfte);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcparconPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcparconPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = OcparconPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = OcparconPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCancon($v)
 	{
 
-		if ($this->cancon !== $v) {
-			$this->cancon = $v;
-			$this->modifiedColumns[] = OcparconPeer::CANCON;
-		}
-
+    if ($this->cancon !== $v) {
+        $this->cancon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcparconPeer::CANCON;
+      }
+  
 	} 
 	
 	public function setCanval($v)
 	{
 
-		if ($this->canval !== $v) {
-			$this->canval = $v;
-			$this->modifiedColumns[] = OcparconPeer::CANVAL;
-		}
-
+    if ($this->canval !== $v) {
+        $this->canval = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcparconPeer::CANVAL;
+      }
+  
 	} 
 	
 	public function setPorcon($v)
 	{
 
-		if ($this->porcon !== $v) {
-			$this->porcon = $v;
-			$this->modifiedColumns[] = OcparconPeer::PORCON;
-		}
-
+    if ($this->porcon !== $v) {
+        $this->porcon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcparconPeer::PORCON;
+      }
+  
 	} 
 	
 	public function setCodtipfte($v)
 	{
 
-		if ($this->codtipfte !== $v) {
-			$this->codtipfte = $v;
-			$this->modifiedColumns[] = OcparconPeer::CODTIPFTE;
-		}
-
+    if ($this->codtipfte !== $v) {
+        $this->codtipfte = $v;
+        $this->modifiedColumns[] = OcparconPeer::CODTIPFTE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcparconPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcparconPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcon = $rs->getString($startcol + 0);
+      $this->codcon = $rs->getString($startcol + 0);
 
-			$this->codpar = $rs->getString($startcol + 1);
+      $this->codpar = $rs->getString($startcol + 1);
 
-			$this->cancon = $rs->getFloat($startcol + 2);
+      $this->cancon = $rs->getFloat($startcol + 2);
 
-			$this->canval = $rs->getFloat($startcol + 3);
+      $this->canval = $rs->getFloat($startcol + 3);
 
-			$this->porcon = $rs->getFloat($startcol + 4);
+      $this->porcon = $rs->getFloat($startcol + 4);
 
-			$this->codtipfte = $rs->getString($startcol + 5);
+      $this->codtipfte = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocparcon object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocparcon object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -240,6 +269,7 @@ abstract class BaseOcparcon extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcparconPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcparconPeer::doUpdate($this, $con);

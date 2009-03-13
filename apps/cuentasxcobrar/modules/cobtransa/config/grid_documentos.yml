@@ -1,0 +1,57 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   cobdocume
+  anchogrid:               800
+  ancho:                   900
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Ref. Documento
+  tipo:                    t
+  nombrecampo:             refdoc
+  esgrabable:              true
+  html:                    [size="10"]
+2:
+  titulo:                  Fecha Emisión
+  tipo:                    f
+  esgrabable:              true
+  nombrecampo:             fecemi
+  vacia:                   true
+  html:                    [size="10"]
+3:
+  titulo:                  Fecha Vencimiento
+  tipo:                    f
+  esgrabable:              true
+  nombrecampo:             fecven
+  vacia:                   true
+  html:                    [size="10"]
+4:
+  titulo:                  Monto Total
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             montotalformato
+  esnumerico:              true
+  html:                    [size="10"]
+5:
+  titulo:                  Saldo Documento
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             saldoc
+  esnumerico:              true
+  html:                    [size="10"]
+6:
+  titulo:                  Monto a Pagar
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             abodoc
+  esnumerico:              true
+  html:                    [size="10"]
+7:
+  titulo:                  Monto Pagado
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monpagado
+  esnumerico:              true
+  html:                    [size="10"]

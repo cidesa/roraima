@@ -61,236 +61,270 @@ abstract class BaseOcdeforg extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodorg()
-	{
+  
+  public function getCodorg()
+  {
 
-		return $this->codorg; 		
-	}
-	
-	public function getDesorg()
-	{
+    return trim($this->codorg);
 
-		return $this->desorg; 		
-	}
-	
-	public function getCodtiporg()
-	{
+  }
+  
+  public function getDesorg()
+  {
 
-		return $this->codtiporg; 		
-	}
-	
-	public function getEntorg()
-	{
+    return trim($this->desorg);
 
-		return $this->entorg; 		
-	}
-	
-	public function getDirorg()
-	{
+  }
+  
+  public function getCodtiporg()
+  {
 
-		return $this->dirorg; 		
-	}
-	
-	public function getCodpai()
-	{
+    return trim($this->codtiporg);
 
-		return $this->codpai; 		
-	}
-	
-	public function getCodedo()
-	{
+  }
+  
+  public function getEntorg()
+  {
 
-		return $this->codedo; 		
-	}
-	
-	public function getCodciu()
-	{
+    return trim($this->entorg);
 
-		return $this->codciu; 		
-	}
-	
-	public function getTelorg()
-	{
+  }
+  
+  public function getDirorg()
+  {
 
-		return $this->telorg; 		
-	}
-	
-	public function getFaxorg()
-	{
+    return trim($this->dirorg);
 
-		return $this->faxorg; 		
-	}
-	
-	public function getEmaorg()
-	{
+  }
+  
+  public function getCodpai()
+  {
 
-		return $this->emaorg; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codpai);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodedo()
+  {
+
+    return trim($this->codedo);
+
+  }
+  
+  public function getCodciu()
+  {
+
+    return trim($this->codciu);
+
+  }
+  
+  public function getTelorg()
+  {
+
+    return trim($this->telorg);
+
+  }
+  
+  public function getFaxorg()
+  {
+
+    return trim($this->faxorg);
+
+  }
+  
+  public function getEmaorg()
+  {
+
+    return trim($this->emaorg);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodorg($v)
 	{
 
-		if ($this->codorg !== $v) {
-			$this->codorg = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::CODORG;
-		}
-
+    if ($this->codorg !== $v) {
+        $this->codorg = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::CODORG;
+      }
+  
 	} 
 	
 	public function setDesorg($v)
 	{
 
-		if ($this->desorg !== $v) {
-			$this->desorg = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::DESORG;
-		}
-
+    if ($this->desorg !== $v) {
+        $this->desorg = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::DESORG;
+      }
+  
 	} 
 	
 	public function setCodtiporg($v)
 	{
 
-		if ($this->codtiporg !== $v) {
-			$this->codtiporg = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::CODTIPORG;
-		}
-
+    if ($this->codtiporg !== $v) {
+        $this->codtiporg = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::CODTIPORG;
+      }
+  
 	} 
 	
 	public function setEntorg($v)
 	{
 
-		if ($this->entorg !== $v) {
-			$this->entorg = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::ENTORG;
-		}
-
+    if ($this->entorg !== $v) {
+        $this->entorg = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::ENTORG;
+      }
+  
 	} 
 	
 	public function setDirorg($v)
 	{
 
-		if ($this->dirorg !== $v) {
-			$this->dirorg = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::DIRORG;
-		}
-
+    if ($this->dirorg !== $v) {
+        $this->dirorg = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::DIRORG;
+      }
+  
 	} 
 	
 	public function setCodpai($v)
 	{
 
-		if ($this->codpai !== $v) {
-			$this->codpai = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::CODPAI;
-		}
-
+    if ($this->codpai !== $v) {
+        $this->codpai = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::CODPAI;
+      }
+  
 	} 
 	
 	public function setCodedo($v)
 	{
 
-		if ($this->codedo !== $v) {
-			$this->codedo = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::CODEDO;
-		}
-
+    if ($this->codedo !== $v) {
+        $this->codedo = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::CODEDO;
+      }
+  
 	} 
 	
 	public function setCodciu($v)
 	{
 
-		if ($this->codciu !== $v) {
-			$this->codciu = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::CODCIU;
-		}
-
+    if ($this->codciu !== $v) {
+        $this->codciu = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::CODCIU;
+      }
+  
 	} 
 	
 	public function setTelorg($v)
 	{
 
-		if ($this->telorg !== $v) {
-			$this->telorg = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::TELORG;
-		}
-
+    if ($this->telorg !== $v) {
+        $this->telorg = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::TELORG;
+      }
+  
 	} 
 	
 	public function setFaxorg($v)
 	{
 
-		if ($this->faxorg !== $v) {
-			$this->faxorg = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::FAXORG;
-		}
-
+    if ($this->faxorg !== $v) {
+        $this->faxorg = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::FAXORG;
+      }
+  
 	} 
 	
 	public function setEmaorg($v)
 	{
 
-		if ($this->emaorg !== $v) {
-			$this->emaorg = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::EMAORG;
-		}
-
+    if ($this->emaorg !== $v) {
+        $this->emaorg = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::EMAORG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcdeforgPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcdeforgPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codorg = $rs->getString($startcol + 0);
+      $this->codorg = $rs->getString($startcol + 0);
 
-			$this->desorg = $rs->getString($startcol + 1);
+      $this->desorg = $rs->getString($startcol + 1);
 
-			$this->codtiporg = $rs->getString($startcol + 2);
+      $this->codtiporg = $rs->getString($startcol + 2);
 
-			$this->entorg = $rs->getString($startcol + 3);
+      $this->entorg = $rs->getString($startcol + 3);
 
-			$this->dirorg = $rs->getString($startcol + 4);
+      $this->dirorg = $rs->getString($startcol + 4);
 
-			$this->codpai = $rs->getString($startcol + 5);
+      $this->codpai = $rs->getString($startcol + 5);
 
-			$this->codedo = $rs->getString($startcol + 6);
+      $this->codedo = $rs->getString($startcol + 6);
 
-			$this->codciu = $rs->getString($startcol + 7);
+      $this->codciu = $rs->getString($startcol + 7);
 
-			$this->telorg = $rs->getString($startcol + 8);
+      $this->telorg = $rs->getString($startcol + 8);
 
-			$this->faxorg = $rs->getString($startcol + 9);
+      $this->faxorg = $rs->getString($startcol + 9);
 
-			$this->emaorg = $rs->getString($startcol + 10);
+      $this->emaorg = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocdeforg object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocdeforg object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -347,6 +381,7 @@ abstract class BaseOcdeforg extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcdeforgPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcdeforgPeer::doUpdate($this, $con);

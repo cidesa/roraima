@@ -9,4 +9,9 @@
  */ 
 class Caartdphser extends BaseCaartdphser
 {
+	public function getNomart()
+	{
+		return Herramientas::getX('CODART','Caregart','Desart',self::getCodart());
+	}
+	
 }

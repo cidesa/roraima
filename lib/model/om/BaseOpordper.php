@@ -85,369 +85,408 @@ abstract class BaseOpordper extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefopp()
-	{
+  
+  public function getRefopp()
+  {
 
-		return $this->refopp; 		
-	}
-	
-	public function getDesopp()
-	{
+    return trim($this->refopp);
 
-		return $this->desopp; 		
-	}
-	
-	public function getFecemi($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDesopp()
+  {
 
-		if ($this->fecemi === null || $this->fecemi === '') {
-			return null;
-		} elseif (!is_int($this->fecemi)) {
-						$ts = strtotime($this->fecemi);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
-			}
-		} else {
-			$ts = $this->fecemi;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->desopp);
 
-	
-	public function getNumcuo()
-	{
+  }
+  
+  public function getFecemi($format = 'Y-m-d')
+  {
 
-		return number_format($this->numcuo,2,',','.');
-		
-	}
-	
-	public function getFreopp()
-	{
+    if ($this->fecemi === null || $this->fecemi === '') {
+      return null;
+    } elseif (!is_int($this->fecemi)) {
+            $ts = adodb_strtotime($this->fecemi);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecemi] as date/time value: " . var_export($this->fecemi, true));
+      }
+    } else {
+      $ts = $this->fecemi;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->freopp; 		
-	}
-	
-	public function getCedrif()
-	{
+  
+  public function getNumcuo($val=false)
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getMonopp()
-	{
+    if($val) return number_format($this->numcuo,2,',','.');
+    else return $this->numcuo;
 
-		return number_format($this->monopp,2,',','.');
-		
-	}
-	
-	public function getStaord()
-	{
+  }
+  
+  public function getFreopp()
+  {
 
-		return $this->staord; 		
-	}
-	
-	public function getNumcue()
-	{
+    return trim($this->freopp);
 
-		return $this->numcue; 		
-	}
-	
-	public function getCtaban()
-	{
+  }
+  
+  public function getCedrif()
+  {
 
-		return $this->ctaban; 		
-	}
-	
-	public function getTipdoc()
-	{
+    return trim($this->cedrif);
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getRefere()
-	{
+  }
+  
+  public function getMonopp($val=false)
+  {
 
-		return $this->refere; 		
-	}
-	
-	public function getCoduni()
-	{
+    if($val) return number_format($this->monopp,2,',','.');
+    else return $this->monopp;
 
-		return $this->coduni; 		
-	}
-	
-	public function getTippag()
-	{
+  }
+  
+  public function getStaord()
+  {
 
-		return $this->tippag; 		
-	}
-	
-	public function getNumtiq()
-	{
+    return trim($this->staord);
 
-		return $this->numtiq; 		
-	}
-	
-	public function getPeraut()
-	{
+  }
+  
+  public function getNumcue()
+  {
 
-		return $this->peraut; 		
-	}
-	
-	public function getCedaut()
-	{
+    return trim($this->numcue);
 
-		return $this->cedaut; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCtaban()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->ctaban);
+
+  }
+  
+  public function getTipdoc()
+  {
+
+    return trim($this->tipdoc);
+
+  }
+  
+  public function getRefere()
+  {
+
+    return trim($this->refere);
+
+  }
+  
+  public function getCoduni()
+  {
+
+    return trim($this->coduni);
+
+  }
+  
+  public function getTippag()
+  {
+
+    return trim($this->tippag);
+
+  }
+  
+  public function getNumtiq()
+  {
+
+    return trim($this->numtiq);
+
+  }
+  
+  public function getPeraut()
+  {
+
+    return trim($this->peraut);
+
+  }
+  
+  public function getCedaut()
+  {
+
+    return trim($this->cedaut);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefopp($v)
 	{
 
-		if ($this->refopp !== $v) {
-			$this->refopp = $v;
-			$this->modifiedColumns[] = OpordperPeer::REFOPP;
-		}
-
+    if ($this->refopp !== $v) {
+        $this->refopp = $v;
+        $this->modifiedColumns[] = OpordperPeer::REFOPP;
+      }
+  
 	} 
 	
 	public function setDesopp($v)
 	{
 
-		if ($this->desopp !== $v) {
-			$this->desopp = $v;
-			$this->modifiedColumns[] = OpordperPeer::DESOPP;
-		}
-
+    if ($this->desopp !== $v) {
+        $this->desopp = $v;
+        $this->modifiedColumns[] = OpordperPeer::DESOPP;
+      }
+  
 	} 
 	
 	public function setFecemi($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecemi !== $ts) {
-			$this->fecemi = $ts;
-			$this->modifiedColumns[] = OpordperPeer::FECEMI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecemi] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecemi !== $ts) {
+      $this->fecemi = $ts;
+      $this->modifiedColumns[] = OpordperPeer::FECEMI;
+    }
 
 	} 
 	
 	public function setNumcuo($v)
 	{
 
-		if ($this->numcuo !== $v) {
-			$this->numcuo = $v;
-			$this->modifiedColumns[] = OpordperPeer::NUMCUO;
-		}
-
+    if ($this->numcuo !== $v) {
+        $this->numcuo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpordperPeer::NUMCUO;
+      }
+  
 	} 
 	
 	public function setFreopp($v)
 	{
 
-		if ($this->freopp !== $v) {
-			$this->freopp = $v;
-			$this->modifiedColumns[] = OpordperPeer::FREOPP;
-		}
-
+    if ($this->freopp !== $v) {
+        $this->freopp = $v;
+        $this->modifiedColumns[] = OpordperPeer::FREOPP;
+      }
+  
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = OpordperPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = OpordperPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setMonopp($v)
 	{
 
-		if ($this->monopp !== $v) {
-			$this->monopp = $v;
-			$this->modifiedColumns[] = OpordperPeer::MONOPP;
-		}
-
+    if ($this->monopp !== $v) {
+        $this->monopp = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OpordperPeer::MONOPP;
+      }
+  
 	} 
 	
 	public function setStaord($v)
 	{
 
-		if ($this->staord !== $v) {
-			$this->staord = $v;
-			$this->modifiedColumns[] = OpordperPeer::STAORD;
-		}
-
+    if ($this->staord !== $v) {
+        $this->staord = $v;
+        $this->modifiedColumns[] = OpordperPeer::STAORD;
+      }
+  
 	} 
 	
 	public function setNumcue($v)
 	{
 
-		if ($this->numcue !== $v) {
-			$this->numcue = $v;
-			$this->modifiedColumns[] = OpordperPeer::NUMCUE;
-		}
-
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = OpordperPeer::NUMCUE;
+      }
+  
 	} 
 	
 	public function setCtaban($v)
 	{
 
-		if ($this->ctaban !== $v) {
-			$this->ctaban = $v;
-			$this->modifiedColumns[] = OpordperPeer::CTABAN;
-		}
-
+    if ($this->ctaban !== $v) {
+        $this->ctaban = $v;
+        $this->modifiedColumns[] = OpordperPeer::CTABAN;
+      }
+  
 	} 
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = OpordperPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = OpordperPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setRefere($v)
 	{
 
-		if ($this->refere !== $v) {
-			$this->refere = $v;
-			$this->modifiedColumns[] = OpordperPeer::REFERE;
-		}
-
+    if ($this->refere !== $v) {
+        $this->refere = $v;
+        $this->modifiedColumns[] = OpordperPeer::REFERE;
+      }
+  
 	} 
 	
 	public function setCoduni($v)
 	{
 
-		if ($this->coduni !== $v) {
-			$this->coduni = $v;
-			$this->modifiedColumns[] = OpordperPeer::CODUNI;
-		}
-
+    if ($this->coduni !== $v) {
+        $this->coduni = $v;
+        $this->modifiedColumns[] = OpordperPeer::CODUNI;
+      }
+  
 	} 
 	
 	public function setTippag($v)
 	{
 
-		if ($this->tippag !== $v) {
-			$this->tippag = $v;
-			$this->modifiedColumns[] = OpordperPeer::TIPPAG;
-		}
-
+    if ($this->tippag !== $v) {
+        $this->tippag = $v;
+        $this->modifiedColumns[] = OpordperPeer::TIPPAG;
+      }
+  
 	} 
 	
 	public function setNumtiq($v)
 	{
 
-		if ($this->numtiq !== $v) {
-			$this->numtiq = $v;
-			$this->modifiedColumns[] = OpordperPeer::NUMTIQ;
-		}
-
+    if ($this->numtiq !== $v) {
+        $this->numtiq = $v;
+        $this->modifiedColumns[] = OpordperPeer::NUMTIQ;
+      }
+  
 	} 
 	
 	public function setPeraut($v)
 	{
 
-		if ($this->peraut !== $v) {
-			$this->peraut = $v;
-			$this->modifiedColumns[] = OpordperPeer::PERAUT;
-		}
-
+    if ($this->peraut !== $v) {
+        $this->peraut = $v;
+        $this->modifiedColumns[] = OpordperPeer::PERAUT;
+      }
+  
 	} 
 	
 	public function setCedaut($v)
 	{
 
-		if ($this->cedaut !== $v) {
-			$this->cedaut = $v;
-			$this->modifiedColumns[] = OpordperPeer::CEDAUT;
-		}
-
+    if ($this->cedaut !== $v) {
+        $this->cedaut = $v;
+        $this->modifiedColumns[] = OpordperPeer::CEDAUT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpordperPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpordperPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refopp = $rs->getString($startcol + 0);
+      $this->refopp = $rs->getString($startcol + 0);
 
-			$this->desopp = $rs->getString($startcol + 1);
+      $this->desopp = $rs->getString($startcol + 1);
 
-			$this->fecemi = $rs->getDate($startcol + 2, null);
+      $this->fecemi = $rs->getDate($startcol + 2, null);
 
-			$this->numcuo = $rs->getFloat($startcol + 3);
+      $this->numcuo = $rs->getFloat($startcol + 3);
 
-			$this->freopp = $rs->getString($startcol + 4);
+      $this->freopp = $rs->getString($startcol + 4);
 
-			$this->cedrif = $rs->getString($startcol + 5);
+      $this->cedrif = $rs->getString($startcol + 5);
 
-			$this->monopp = $rs->getFloat($startcol + 6);
+      $this->monopp = $rs->getFloat($startcol + 6);
 
-			$this->staord = $rs->getString($startcol + 7);
+      $this->staord = $rs->getString($startcol + 7);
 
-			$this->numcue = $rs->getString($startcol + 8);
+      $this->numcue = $rs->getString($startcol + 8);
 
-			$this->ctaban = $rs->getString($startcol + 9);
+      $this->ctaban = $rs->getString($startcol + 9);
 
-			$this->tipdoc = $rs->getString($startcol + 10);
+      $this->tipdoc = $rs->getString($startcol + 10);
 
-			$this->refere = $rs->getString($startcol + 11);
+      $this->refere = $rs->getString($startcol + 11);
 
-			$this->coduni = $rs->getString($startcol + 12);
+      $this->coduni = $rs->getString($startcol + 12);
 
-			$this->tippag = $rs->getString($startcol + 13);
+      $this->tippag = $rs->getString($startcol + 13);
 
-			$this->numtiq = $rs->getString($startcol + 14);
+      $this->numtiq = $rs->getString($startcol + 14);
 
-			$this->peraut = $rs->getString($startcol + 15);
+      $this->peraut = $rs->getString($startcol + 15);
 
-			$this->cedaut = $rs->getString($startcol + 16);
+      $this->cedaut = $rs->getString($startcol + 16);
 
-			$this->id = $rs->getInt($startcol + 17);
+      $this->id = $rs->getInt($startcol + 17);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 18; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opordper object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 18; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opordper object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -504,6 +543,7 @@ abstract class BaseOpordper extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpordperPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpordperPeer::doUpdate($this, $con);

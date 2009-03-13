@@ -25,75 +25,100 @@ abstract class BaseFordissitmun extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmun()
-	{
+  
+  public function getCodmun()
+  {
 
-		return $this->codmun; 		
-	}
-	
-	public function getUltcen()
-	{
+    return trim($this->codmun);
 
-		return number_format($this->ultcen,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getUltcen($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->ultcen,2,',','.');
+    else return $this->ultcen;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = FordissitmunPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = FordissitmunPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setUltcen($v)
 	{
 
-		if ($this->ultcen !== $v) {
-			$this->ultcen = $v;
-			$this->modifiedColumns[] = FordissitmunPeer::ULTCEN;
-		}
-
+    if ($this->ultcen !== $v) {
+        $this->ultcen = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordissitmunPeer::ULTCEN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordissitmunPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordissitmunPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmun = $rs->getString($startcol + 0);
+      $this->codmun = $rs->getString($startcol + 0);
 
-			$this->ultcen = $rs->getFloat($startcol + 1);
+      $this->ultcen = $rs->getFloat($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordissitmun object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordissitmun object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

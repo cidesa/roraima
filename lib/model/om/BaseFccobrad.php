@@ -43,128 +43,156 @@ abstract class BaseFccobrad extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcob()
-	{
+  
+  public function getCodcob()
+  {
 
-		return $this->codcob; 		
-	}
-	
-	public function getCedcob()
-	{
+    return trim($this->codcob);
 
-		return $this->cedcob; 		
-	}
-	
-	public function getNomcob()
-	{
+  }
+  
+  public function getCedcob()
+  {
 
-		return $this->nomcob; 		
-	}
-	
-	public function getDircob()
-	{
+    return trim($this->cedcob);
 
-		return $this->dircob; 		
-	}
-	
-	public function getTelcob()
-	{
+  }
+  
+  public function getNomcob()
+  {
 
-		return $this->telcob; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->nomcob);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDircob()
+  {
+
+    return trim($this->dircob);
+
+  }
+  
+  public function getTelcob()
+  {
+
+    return trim($this->telcob);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcob($v)
 	{
 
-		if ($this->codcob !== $v) {
-			$this->codcob = $v;
-			$this->modifiedColumns[] = FccobradPeer::CODCOB;
-		}
-
+    if ($this->codcob !== $v) {
+        $this->codcob = $v;
+        $this->modifiedColumns[] = FccobradPeer::CODCOB;
+      }
+  
 	} 
 	
 	public function setCedcob($v)
 	{
 
-		if ($this->cedcob !== $v) {
-			$this->cedcob = $v;
-			$this->modifiedColumns[] = FccobradPeer::CEDCOB;
-		}
-
+    if ($this->cedcob !== $v) {
+        $this->cedcob = $v;
+        $this->modifiedColumns[] = FccobradPeer::CEDCOB;
+      }
+  
 	} 
 	
 	public function setNomcob($v)
 	{
 
-		if ($this->nomcob !== $v) {
-			$this->nomcob = $v;
-			$this->modifiedColumns[] = FccobradPeer::NOMCOB;
-		}
-
+    if ($this->nomcob !== $v) {
+        $this->nomcob = $v;
+        $this->modifiedColumns[] = FccobradPeer::NOMCOB;
+      }
+  
 	} 
 	
 	public function setDircob($v)
 	{
 
-		if ($this->dircob !== $v) {
-			$this->dircob = $v;
-			$this->modifiedColumns[] = FccobradPeer::DIRCOB;
-		}
-
+    if ($this->dircob !== $v) {
+        $this->dircob = $v;
+        $this->modifiedColumns[] = FccobradPeer::DIRCOB;
+      }
+  
 	} 
 	
 	public function setTelcob($v)
 	{
 
-		if ($this->telcob !== $v) {
-			$this->telcob = $v;
-			$this->modifiedColumns[] = FccobradPeer::TELCOB;
-		}
-
+    if ($this->telcob !== $v) {
+        $this->telcob = $v;
+        $this->modifiedColumns[] = FccobradPeer::TELCOB;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FccobradPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FccobradPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcob = $rs->getString($startcol + 0);
+      $this->codcob = $rs->getString($startcol + 0);
 
-			$this->cedcob = $rs->getString($startcol + 1);
+      $this->cedcob = $rs->getString($startcol + 1);
 
-			$this->nomcob = $rs->getString($startcol + 2);
+      $this->nomcob = $rs->getString($startcol + 2);
 
-			$this->dircob = $rs->getString($startcol + 3);
+      $this->dircob = $rs->getString($startcol + 3);
 
-			$this->telcob = $rs->getString($startcol + 4);
+      $this->telcob = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fccobrad object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fccobrad object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -221,6 +249,7 @@ abstract class BaseFccobrad extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FccobradPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FccobradPeer::doUpdate($this, $con);

@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class OcactcomMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.OcactcomMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.OcactcomMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('ocactcom');
 		$tMap->setPhpName('Ocactcom');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('ocactcom_SEQ');
 
 		$tMap->addColumn('CODACTCOM', 'Codactcom', 'string', CreoleTypes::VARCHAR, true, 10);
 
@@ -39,6 +41,6 @@ class OcactcomMapBuilder {
 		$tMap->addColumn('STAACTCOM', 'Staactcom', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

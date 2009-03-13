@@ -205,6 +205,7 @@ abstract class BaseFatipvtaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FatipvtaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -205,6 +205,7 @@ abstract class BaseOpbenfonavaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpbenfonavaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

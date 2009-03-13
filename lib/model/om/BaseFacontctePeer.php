@@ -235,6 +235,7 @@ abstract class BaseFacontctePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FacontctePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

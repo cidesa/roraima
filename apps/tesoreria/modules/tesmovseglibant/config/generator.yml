@@ -1,0 +1,35 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Tsmovlib
+    theme:            default
+    fields:
+      numcue: { name: Cuenta del Banco}
+      nomcue: { name: d}
+      reflib: { name: Referencia}
+      feclib: { name: Fecha del Movimiento, params: date_format='dd/MM/yyyy'}
+      tipmov: { name: Tipo}
+      destip: { name: d}
+      deslib: { name: Descripcion}
+      fecing: { name: Fecha del Registro, params: date_format='dd/MM/yyyy'}
+      monmov: { name: Monto}
+      numcom: { name: Numero de Comprobante}
+      feccom: { name: Fecha, params: date_format='dd/MM/yyyy'}
+      status: { name: Estatus}
+      stacon: { name: Estatus Contable}
+    list:
+      title:          Movimientos Segun Libros (Años Anteriores)
+      filters:        [numcue, feclib]
+      display:        [=numcue, reflib, tipmov, deslib, feclib]
+      sort:           numcue
+      object_actions:
+        _edit:        ~
+      max_per_page:   5
+    edit:
+      title:          Movimientos Segun Libros (Años Anteriores)
+      display:       [numcue, nomcue, reflib, feclib, tipmov, destip, deslib, monmov, fecing, numcom, feccom]
+      actions:
+        _save:        ~
+        _list:        ~
+        _create:      ~
+        _delete:      ~

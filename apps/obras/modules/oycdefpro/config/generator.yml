@@ -6,15 +6,21 @@ generator:
     fields:
       codtippro:    { name: Código}
       destippro:    { name: Descripción}
-              
+
     list:
-      title:          Definición de Profesiones
+      title:          Profesiones
       filters:        [codtippro]
-      display:        [codtippro, destippro]
+      display:        [=codtippro, destippro]
+      sort:  codtippro
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Definición de Profesiones
+      title:          Edición de Profesiones
       display:        [codtippro, destippro]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

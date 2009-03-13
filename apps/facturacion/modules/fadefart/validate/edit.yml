@@ -1,0 +1,57 @@
+methods:
+  post:
+   - "facorrelat{corpre}"
+   - "facorrelat{corped}"
+   - "facorrelat{corfac}"
+   - "facorrelat{cornot}"
+   - "facorrelat{cordph}"
+   - "facorrelat{cordev}"
+   - "facorrelat{coraju}"
+   - "facorrelat{numlot}"
+
+names:
+
+  facorrelat{corpre}:
+    required:  Yes
+    required_msg: Debe insertar el correlativo de presupuesto
+    validators: CorrelValidator
+
+  facorrelat{corped}:
+    required:  Yes
+    required_msg: Debe insertar el correlativo de pedido
+    validators: CorrelValidator
+
+  facorrelat{corfac}:
+    required:  Yes
+    required_msg: Debe insertar el correlativo de factura
+    validators: CorrelValidator
+
+  facorrelat{cornot}:
+    required:  Yes
+    required_msg: Debe insertar el correlativo de nota de entrega
+    validators: CorrelValidator
+
+  facorrelat{cordph}:
+    required:  Yes
+    required_msg: Debe insertar el correlativo de despacho
+    validators: CorrelValidator
+
+  facorrelat{cordev}:
+    required:  Yes
+    required_msg: Debe insertar el correlativo de devolución
+    validators: CorrelValidator
+
+  facorrelat{coraju}:
+    required:  Yes
+    required_msg: Debe insertar el correlativo de ajuste
+    validators: CorrelValidator
+
+  facorrelat{numlot}:
+    required:  Yes
+    required_msg: Debe ingresar el Número de Lote
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos

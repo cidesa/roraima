@@ -28,80 +28,93 @@ abstract class BaseCarecpro extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aCaprovee;
+
+	
+	protected $aCarecaud;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodrec()
-	{
+    return trim($this->codpro);
 
-		return $this->codrec; 		
-	}
-	
-	public function getFecent($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodrec()
+  {
 
-		if ($this->fecent === null || $this->fecent === '') {
-			return null;
-		} elseif (!is_int($this->fecent)) {
-						$ts = strtotime($this->fecent);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
-			}
-		} else {
-			$ts = $this->fecent;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codrec);
 
-	
-	public function getFecven($format = 'Y-m-d')
-	{
+  }
+  
+  public function getFecent($format = 'Y-m-d')
+  {
 
-		if ($this->fecven === null || $this->fecven === '') {
-			return null;
-		} elseif (!is_int($this->fecven)) {
-						$ts = strtotime($this->fecven);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
-			}
-		} else {
-			$ts = $this->fecven;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecent === null || $this->fecent === '') {
+      return null;
+    } elseif (!is_int($this->fecent)) {
+            $ts = adodb_strtotime($this->fecent);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecent] as date/time value: " . var_export($this->fecent, true));
+      }
+    } else {
+      $ts = $this->fecent;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getId()
-	{
+  
+  public function getFecven($format = 'Y-m-d')
+  {
 
-		return $this->id; 		
-	}
+    if ($this->fecven === null || $this->fecven === '') {
+      return null;
+    } elseif (!is_int($this->fecven)) {
+            $ts = adodb_strtotime($this->fecven);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecven] as date/time value: " . var_export($this->fecven, true));
+      }
+    } else {
+      $ts = $this->fecven;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = CarecproPeer::CODPRO;
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = CarecproPeer::CODPRO;
+      }
+  
+		if ($this->aCaprovee !== null && $this->aCaprovee->getCodpro() !== $v) {
+			$this->aCaprovee = null;
 		}
 
 	} 
@@ -109,9 +122,13 @@ abstract class BaseCarecpro extends BaseObject  implements Persistent {
 	public function setCodrec($v)
 	{
 
-		if ($this->codrec !== $v) {
-			$this->codrec = $v;
-			$this->modifiedColumns[] = CarecproPeer::CODREC;
+    if ($this->codrec !== $v) {
+        $this->codrec = $v;
+        $this->modifiedColumns[] = CarecproPeer::CODREC;
+      }
+  
+		if ($this->aCarecaud !== null && $this->aCarecaud->getCodrec() !== $v) {
+			$this->aCarecaud = null;
 		}
 
 	} 
@@ -119,70 +136,92 @@ abstract class BaseCarecpro extends BaseObject  implements Persistent {
 	public function setFecent($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecent !== $ts) {
-			$this->fecent = $ts;
-			$this->modifiedColumns[] = CarecproPeer::FECENT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecent] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecent !== $ts) {
+      $this->fecent = $ts;
+      $this->modifiedColumns[] = CarecproPeer::FECENT;
+    }
 
 	} 
 	
 	public function setFecven($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecven !== $ts) {
-			$this->fecven = $ts;
-			$this->modifiedColumns[] = CarecproPeer::FECVEN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecven] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecven !== $ts) {
+      $this->fecven = $ts;
+      $this->modifiedColumns[] = CarecproPeer::FECVEN;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CarecproPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CarecproPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codrec = $rs->getString($startcol + 1);
+      $this->codrec = $rs->getString($startcol + 1);
 
-			$this->fecent = $rs->getDate($startcol + 2, null);
+      $this->fecent = $rs->getDate($startcol + 2, null);
 
-			$this->fecven = $rs->getDate($startcol + 3, null);
+      $this->fecven = $rs->getDate($startcol + 3, null);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Carecpro object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Carecpro object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -235,10 +274,27 @@ abstract class BaseCarecpro extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aCaprovee !== null) {
+				if ($this->aCaprovee->isModified()) {
+					$affectedRows += $this->aCaprovee->save($con);
+				}
+				$this->setCaprovee($this->aCaprovee);
+			}
+
+			if ($this->aCarecaud !== null) {
+				if ($this->aCarecaud->isModified()) {
+					$affectedRows += $this->aCarecaud->save($con);
+				}
+				$this->setCarecaud($this->aCarecaud);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = CarecproPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CarecproPeer::doUpdate($this, $con);
@@ -279,6 +335,20 @@ abstract class BaseCarecpro extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aCaprovee !== null) {
+				if (!$this->aCaprovee->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCaprovee->getValidationFailures());
+				}
+			}
+
+			if ($this->aCarecaud !== null) {
+				if (!$this->aCarecaud->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCarecaud->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = CarecproPeer::doValidate($this, $columns)) !== true) {
@@ -448,6 +518,64 @@ abstract class BaseCarecpro extends BaseObject  implements Persistent {
 			self::$peer = new CarecproPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setCaprovee($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodpro(NULL);
+		} else {
+			$this->setCodpro($v->getCodpro());
+		}
+
+
+		$this->aCaprovee = $v;
+	}
+
+
+	
+	public function getCaprovee($con = null)
+	{
+		if ($this->aCaprovee === null && (($this->codpro !== "" && $this->codpro !== null))) {
+						include_once 'lib/model/om/BaseCaproveePeer.php';
+
+			$this->aCaprovee = CaproveePeer::retrieveByPK($this->codpro, $con);
+
+			
+		}
+		return $this->aCaprovee;
+	}
+
+	
+	public function setCarecaud($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodrec(NULL);
+		} else {
+			$this->setCodrec($v->getCodrec());
+		}
+
+
+		$this->aCarecaud = $v;
+	}
+
+
+	
+	public function getCarecaud($con = null)
+	{
+		if ($this->aCarecaud === null && (($this->codrec !== "" && $this->codrec !== null))) {
+						include_once 'lib/model/om/BaseCarecaudPeer.php';
+
+			$this->aCarecaud = CarecaudPeer::retrieveByPK($this->codrec, $con);
+
+			
+		}
+		return $this->aCarecaud;
 	}
 
 } 

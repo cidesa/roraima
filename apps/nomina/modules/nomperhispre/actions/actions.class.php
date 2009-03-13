@@ -10,99 +10,151 @@
  */
 class nomperhispreActions extends autonomperhispreActions
 {
-  public function getSaldoanterior()
-  {  	
-  	if ($this->nphispre->getMonpre()!=''  and $this->nphispre->getSaldo()!='')
-      {	  	
-      	 $saldoanterior=$this->nphispre->getSaldo()-$this->nphispre->getMonpre();
-	  	 return $saldoanterior;
-  	  }  	 	
-	  	else return ' ';	
-  }	
-	 
+  public $coderr =-1;
+
+
   public function executeEdit()
   {
     $this->nphispre = $this->getNphispreOrCreate();
-    $this->salant = $this->getSaldoanterior();
+
+
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateNphispreFromRequest();
 
-      $this->saveNphispre($this->nphispre);
+      if($this->saveNphispre($this->nphispre)==-1){
+	      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
 
-      $this->setFlash('notice', 'Your modifications have been saved');
+	      if ($this->getRequestParameter('save_and_add'))
+	      {
+	        return $this->redirect('nomperhispre/create');
+	      }
+	      else if ($this->getRequestParameter('save_and_list'))
+	      {
+	        return $this->redirect('nomperhispre/list');
+	      }
+   	      else
+	      {
+	        return $this->redirect('nomperhispre/edit?id='.$this->nphispre->getId());
+	      }
 
-      if ($this->getRequestParameter('save_and_add'))
-      {
-        return $this->redirect('NomPerHisPre/create');
+      }else{
+      	$this->labels = $this->getLabels();
       }
-      else if ($this->getRequestParameter('save_and_list'))
-      {
-        return $this->redirect('NomPerHisPre/list');
-      }
-      else
-      {
-        return $this->redirect('NomPerHisPre/edit?id='.$this->nphispre->getId());
-      }
+
     }
     else
     {
       $this->labels = $this->getLabels();
     }
   }
-   protected function updateNphispreFromRequest()
-  {
-    $nphispre = $this->getRequestParameter('nphispre');
 
-    if (isset($nphispre['codtippre']))
-    {
-      $this->nphispre->setCodtippre(str_pad($nphispre['codtippre'],4,'0',STR_PAD_LEFT));
+  public function executeAjax()
+	{
+	 $cajtexmos=$this->getRequestParameter('cajtexmos');
+     $cajtexcom=$this->getRequestParameter('cajtexcom');
+
+	  if ($this->getRequestParameter('ajax')=='1')
+	    {
+
+	  		$dato=Herramientas::getX('codemp','Nphojint','nomemp',$this->getRequestParameter('codigo'));
+            $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+	    }
+
+	  if ($this->getRequestParameter('ajax')=='2')
+	    {
+
+	  		$dato=Herramientas::getX('codtippre','Nptippre','destippre',$this->getRequestParameter('codigo'));
+
+            $codemp=$this->getRequestParameter('codemp');
+	  		$objNpasiconemp=NominaConceptos::obtenerObjNpasiconemp($this->getRequestParameter('codigo'),$codemp);
+
+
+
+
+	  		if ($objNpasiconemp)
+	  		{
+	  			$anterior=$objNpasiconemp->getAcumulado();
+	  			$cuota=$objNpasiconemp->getCantidad();
+
+	   		}
+	  		else{
+                $anterior=0.00;
+	  			$cuota=0.00;
+
+
+	  		}
+
+             $cajanterior='nphispre_salant';
+             $cajamoncuota='nphispre_moncuota';
+
+	         $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajanterior.'","'.$anterior.'",""],["'.$cajamoncuota.'","'.$cuota.'",""]]';
+	    }
+
+	    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+	    return sfView::HEADER_ONLY;
+	  }
+
+
+  protected function saveNphispre($nphispre)
+  {
+  	$resp=NominaConceptos::salvarNomperhispre($nphispre);
+    if($resp!=-1){
+      $this->coderror = $resp;
+      $err = Herramientas::obtenerMensajeError($this->coderror);
+      $this->getRequest()->setError('',$err);
     }
-    if (isset($nphispre['fechispre']))
-    {
-      if ($nphispre['fechispre'])
-      {
-        try
-        {
-          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
-                              if (!is_array($nphispre['fechispre']))
-          {
-            $value = $dateFormat->format($nphispre['fechispre'], 'i', $dateFormat->getInputPattern('d'));
-          }
-          else
-          {
-            $value_array = $nphispre['fechispre'];
-            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-          }
-          $this->nphispre->setFechispre($value);
-        }
-        catch (sfException $e)
-        {
-          // not a date
-        }
-      }
-      else
-      {
-        $this->nphispre->setFechispre(null);
-      }
-    }
-    if (isset($nphispre['deshispre']))
-    {
-      $this->nphispre->setDeshispre($nphispre['deshispre']);
-    }
-    if (isset($nphispre['codemp']))
-    {
-      $this->nphispre->setCodemp(str_pad($nphispre['codemp'],16,' '));
-    }
-    if (isset($nphispre['monpre']))
-    {
-      $this->nphispre->setMonpre($nphispre['monpre']);
-    }
-    if (isset($nphispre['saldo']))
-    {
-      $this->nphispre->setSaldo($nphispre['saldo']);
-    }
+    return $resp;
   }
-  
+
+  protected function deleteNphispre($nphispre)
+  {
+    $resp=NominaConceptos::borrarNomperhispre($nphispre);
+    if($resp!=-1){
+      $this->coderror = $resp;
+      $err = Herramientas::obtenerMensajeError($this->coderror);
+      $this->getRequest()->setError('',$err);
+    }
+    return $resp;
+  }
+
+
+ public function validateEdit()
+  {
+  			 $this->nphispre = $this->getNphispreOrCreate();
+		  $this->updateNphispreFromRequest();
+      if($this->getRequest()->getMethod() == sfRequest::POST)
+      {
+
+		  $resp=NominaConceptos::validarNomperhispre($this->nphispre->getCodtippre(),$this->nphispre->getCodemp());
+		  if ($resp!=-1)  {
+		  	$this->coderr=$resp;
+		  	return false;
+		  }
+		  else return true;
+
+  	}else return true;
+
+  }
+
+  public function handleErrorEdit()
+  {
+    $this->preExecute();
+
+
+
+    $this->labels = $this->getLabels();
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+     {
+	 	if($this->coderr!=-1)
+	      {
+	       $err = Herramientas::obtenerMensajeError($this->coderr);
+	       $this->getRequest()->setError('',$err);
+	      }
+      }
+    return sfView::SUCCESS;
+  }
+
 }

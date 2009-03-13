@@ -5,54 +5,66 @@ generator:
     theme:            default
     fields:
       codcon: { name: Contrato No.}
-      codtipval: { name: Tipo}      
-      numval: { name: Nro}
-      desobr: { name: Obra}
-      nompro: { name: Contratista}
-      tipcon: { name: Tipo de Contrato}
-      gasree2: { name: Gastos de reembolso}
-      moncon: { name: Monto Original del Contrato(+)}
+      codtipval: { name: Tipo Valuación}
+      numval: { name: Nro de Valuación}
+      codobr: { name: Obra}
+      desobr: { name: Nombre}
+      codpro: { name: Contratista}
+      nompro: { name: Nombre}
       fecini: { name: Del}
-      fecfin: { name: Al}      
+      fecfin: { name: Al}
       fecreg: { name: Fecha}
+      poriva: { name: IVA}
+      porant: { name: Anticipo}
+      moncon: { name: Monto Original del Contrato(+)}
       aumobr: { name: Aumentos de Obra}
       disobr: { name: Disminución de Obras}
       obrext: { name: Obras Extras}
       monful: { name: Monto total del Contrato}
-      monper: { name: Sub Total (1)-(2)-(3)}
-      monperiva: { name: Monto IVA}
-      totded: { name: Total Retenciones(Sin Fianza)}            
-      monpag: { name: Saldo Neto a Pagar}
-      monfia: { name: Fianza(3)}
-      moniva: { name: IVA}
+      gasree: { name: Gastos de reembolso}
       subtot: { name: SubTotal sin IVA}
-      gasree: { name: Gastos Reembolsables}
-      poriva: { name: IVA}      
-      porant: { name: Anticipo}
+      moniva: { name: IVA}
+      totiva: { name: Total con Iva}
+      totsiniva: { name: Total sin Iva (1)}
+      amortant: { name: Amortización del Anticipo (2)}
+      monfia: { name: Fianza(3)}
+      monper: { name: Sub Total (1)-(2)-(3)}
+      monperiva: { name: Otro}
+      totded: { name: Total Retenciones(Sin Fianza)}
+      valpag: { name: Valuaciones Pagadas}
+      monpag: { name: Saldo Neto a Pagar}
+      montotcon: { name: Monto Total del Contrato}
       monval: { name: Monto Total Valuaciones Presentadas}
       salliq: { name: Saldo por Liquidar}
-      retacu: { name: Retenciones Acumuladas} 
-      monant: { name: Monto del Anticipo}
-      amoant: { name: Amortización del Anticipo}
-      staval: { name: Estatus}           
-      salant: { name: Saldo Anterior}      
-               
+      retacu: { name: Retenciones Acumuladas}
+      monantic: { name: Monto del Anticipo}
+      monant: { name: Amortización del Anticipo}
+      salantic: { name: Saldo del Anticipo}
+      staval: { name: Estatus}
     list:
-      title:          Registro de Valuaciones
-      filters:        [codcon]
-      display:        [=codcon, codtipval, fecreg]
+      title:          Valuaciones
+      filters:        [codcon, numval, codtipval]
+      display:        [=codcon, numval, codtipval, fecreg]
       fields:
-        fecini: { params: date_format='dd/MM/yy' }
-        fecfin: { params: date_format='dd/MM/yy' }
-        fecreg: { params: date_format='dd/MM/yy' }              
+        fecreg: { params: date_format='dd/MM/yy' }
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
     edit:
-      title:          Edicion de Valuaciones
-      display:       [=codcon, codtipval, numval, desobr, nompro, tipcon, gasree, moncon, fecini, fecfin, fecreg, aumobr, disobr, obrext, monful, monper, monperiva, totded, monpag, monfia, moniva, subtot, gasree, poriva, porant, monval, salliq, retacu, monant, amoant, staval, salant]
+      title:          Edición de Valuaciones
+      display:       [=codcon, codtipval, numval, codobr, desobr, codpro, nompro, fecini, fecfin, fecreg, poriva, porant, moncon, aumobr, disobr, obrext, monful, gasree, subtot, moniva, totiva, totsiniva, amortant, monfia, monper, monperiva, totded, valpag, monpag, montotcon, monval, salliq, retacu, monantic, monant, salantic, staval, tieneant, montotoferacum, montotparacum]
       fields:
         fecini: { params: date_format='dd/MM/yy' }
         fecfin: { params: date_format='dd/MM/yy' }
-        fecreg: { params: date_format='dd/MM/yy' } 
+        fecreg: { params: date_format='dd/MM/yy' }
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~
+        anular:
+          name:  Anular
+          action:  anular
+          only_for:  edit
+          params:  class=sf_admin_action_delete post=true confirm=Realmente desea Anular la Valuación?

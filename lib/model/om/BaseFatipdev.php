@@ -9,10 +9,6 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 
 
 	
-	protected $codtidev;
-
-
-	
 	protected $nomtidev;
 
 
@@ -20,79 +16,91 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collFadevolus;
+
+	
+	protected $lastFadevoluCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtidev()
-	{
+  
+  public function getNomtidev()
+  {
 
-		return $this->codtidev; 		
-	}
-	
-	public function getNomtidev()
-	{
+    return trim($this->nomtidev);
 
-		return $this->nomtidev; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getId()
+  {
 
-		return $this->id; 		
-	}
-	
-	public function setCodtidev($v)
-	{
+    return $this->id;
 
-		if ($this->codtidev !== $v) {
-			$this->codtidev = $v;
-			$this->modifiedColumns[] = FatipdevPeer::CODTIDEV;
-		}
-
-	} 
+  }
 	
 	public function setNomtidev($v)
 	{
 
-		if ($this->nomtidev !== $v) {
-			$this->nomtidev = $v;
-			$this->modifiedColumns[] = FatipdevPeer::NOMTIDEV;
-		}
-
+    if ($this->nomtidev !== $v) {
+        $this->nomtidev = $v;
+        $this->modifiedColumns[] = FatipdevPeer::NOMTIDEV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FatipdevPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FatipdevPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtidev = $rs->getString($startcol + 0);
+      $this->nomtidev = $rs->getString($startcol + 0);
 
-			$this->nomtidev = $rs->getString($startcol + 1);
+      $this->id = $rs->getInt($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->resetModified();
 
-			$this->resetModified();
+      $this->setNew(false);
 
-			$this->setNew(false);
+      $this->afterHydrate();
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fatipdev object", $e);
-		}
-	}
+            return $startcol + 2; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fatipdev object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,11 +157,20 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FatipdevPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FatipdevPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collFadevolus !== null) {
+				foreach($this->collFadevolus as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -196,6 +213,14 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 			}
 
 
+				if ($this->collFadevolus !== null) {
+					foreach($this->collFadevolus as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -215,12 +240,9 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodtidev();
-				break;
-			case 1:
 				return $this->getNomtidev();
 				break;
-			case 2:
+			case 1:
 				return $this->getId();
 				break;
 			default:
@@ -233,9 +255,8 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 	{
 		$keys = FatipdevPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodtidev(),
-			$keys[1] => $this->getNomtidev(),
-			$keys[2] => $this->getId(),
+			$keys[0] => $this->getNomtidev(),
+			$keys[1] => $this->getId(),
 		);
 		return $result;
 	}
@@ -252,12 +273,9 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodtidev($value);
-				break;
-			case 1:
 				$this->setNomtidev($value);
 				break;
-			case 2:
+			case 1:
 				$this->setId($value);
 				break;
 		} 	}
@@ -267,9 +285,8 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 	{
 		$keys = FatipdevPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodtidev($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setNomtidev($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
+		if (array_key_exists($keys[0], $arr)) $this->setNomtidev($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setId($arr[$keys[1]]);
 	}
 
 	
@@ -277,7 +294,6 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(FatipdevPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(FatipdevPeer::CODTIDEV)) $criteria->add(FatipdevPeer::CODTIDEV, $this->codtidev);
 		if ($this->isColumnModified(FatipdevPeer::NOMTIDEV)) $criteria->add(FatipdevPeer::NOMTIDEV, $this->nomtidev);
 		if ($this->isColumnModified(FatipdevPeer::ID)) $criteria->add(FatipdevPeer::ID, $this->id);
 
@@ -310,10 +326,17 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodtidev($this->codtidev);
-
 		$copyObj->setNomtidev($this->nomtidev);
 
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getFadevolus() as $relObj) {
+				$copyObj->addFadevolu($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -336,6 +359,76 @@ abstract class BaseFatipdev extends BaseObject  implements Persistent {
 			self::$peer = new FatipdevPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initFadevolus()
+	{
+		if ($this->collFadevolus === null) {
+			$this->collFadevolus = array();
+		}
+	}
+
+	
+	public function getFadevolus($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseFadevoluPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collFadevolus === null) {
+			if ($this->isNew()) {
+			   $this->collFadevolus = array();
+			} else {
+
+				$criteria->add(FadevoluPeer::FATIPDEV_ID, $this->getId());
+
+				FadevoluPeer::addSelectColumns($criteria);
+				$this->collFadevolus = FadevoluPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(FadevoluPeer::FATIPDEV_ID, $this->getId());
+
+				FadevoluPeer::addSelectColumns($criteria);
+				if (!isset($this->lastFadevoluCriteria) || !$this->lastFadevoluCriteria->equals($criteria)) {
+					$this->collFadevolus = FadevoluPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastFadevoluCriteria = $criteria;
+		return $this->collFadevolus;
+	}
+
+	
+	public function countFadevolus($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseFadevoluPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(FadevoluPeer::FATIPDEV_ID, $this->getId());
+
+		return FadevoluPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addFadevolu(Fadevolu $l)
+	{
+		$this->collFadevolus[] = $l;
+		$l->setFatipdev($this);
 	}
 
 } 

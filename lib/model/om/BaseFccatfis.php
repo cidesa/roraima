@@ -41,146 +41,175 @@ abstract class BaseFccatfis extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcatfis()
-	{
+  
+  public function getCodcatfis()
+  {
 
-		return $this->codcatfis; 		
-	}
-	
-	public function getNomcatfis()
-	{
+    return trim($this->codcatfis);
 
-		return $this->nomcatfis; 		
-	}
-	
-	public function getLinnor()
-	{
+  }
+  
+  public function getNomcatfis()
+  {
 
-		return $this->linnor; 		
-	}
-	
-	public function getLinsur()
-	{
+    return trim($this->nomcatfis);
 
-		return $this->linsur; 		
-	}
-	
-	public function getLinest()
-	{
+  }
+  
+  public function getLinnor()
+  {
 
-		return $this->linest; 		
-	}
-	
-	public function getLinoes()
-	{
+    return trim($this->linnor);
 
-		return $this->linoes; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getLinsur()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->linsur);
+
+  }
+  
+  public function getLinest()
+  {
+
+    return trim($this->linest);
+
+  }
+  
+  public function getLinoes()
+  {
+
+    return trim($this->linoes);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcatfis($v)
 	{
 
-		if ($this->codcatfis !== $v) {
-			$this->codcatfis = $v;
-			$this->modifiedColumns[] = FccatfisPeer::CODCATFIS;
-		}
-
+    if ($this->codcatfis !== $v) {
+        $this->codcatfis = $v;
+        $this->modifiedColumns[] = FccatfisPeer::CODCATFIS;
+      }
+  
 	} 
 	
 	public function setNomcatfis($v)
 	{
 
-		if ($this->nomcatfis !== $v) {
-			$this->nomcatfis = $v;
-			$this->modifiedColumns[] = FccatfisPeer::NOMCATFIS;
-		}
-
+    if ($this->nomcatfis !== $v) {
+        $this->nomcatfis = $v;
+        $this->modifiedColumns[] = FccatfisPeer::NOMCATFIS;
+      }
+  
 	} 
 	
 	public function setLinnor($v)
 	{
 
-		if ($this->linnor !== $v) {
-			$this->linnor = $v;
-			$this->modifiedColumns[] = FccatfisPeer::LINNOR;
-		}
-
+    if ($this->linnor !== $v) {
+        $this->linnor = $v;
+        $this->modifiedColumns[] = FccatfisPeer::LINNOR;
+      }
+  
 	} 
 	
 	public function setLinsur($v)
 	{
 
-		if ($this->linsur !== $v) {
-			$this->linsur = $v;
-			$this->modifiedColumns[] = FccatfisPeer::LINSUR;
-		}
-
+    if ($this->linsur !== $v) {
+        $this->linsur = $v;
+        $this->modifiedColumns[] = FccatfisPeer::LINSUR;
+      }
+  
 	} 
 	
 	public function setLinest($v)
 	{
 
-		if ($this->linest !== $v) {
-			$this->linest = $v;
-			$this->modifiedColumns[] = FccatfisPeer::LINEST;
-		}
-
+    if ($this->linest !== $v) {
+        $this->linest = $v;
+        $this->modifiedColumns[] = FccatfisPeer::LINEST;
+      }
+  
 	} 
 	
 	public function setLinoes($v)
 	{
 
-		if ($this->linoes !== $v) {
-			$this->linoes = $v;
-			$this->modifiedColumns[] = FccatfisPeer::LINOES;
-		}
-
+    if ($this->linoes !== $v) {
+        $this->linoes = $v;
+        $this->modifiedColumns[] = FccatfisPeer::LINOES;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FccatfisPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FccatfisPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcatfis = $rs->getString($startcol + 0);
+      $this->codcatfis = $rs->getString($startcol + 0);
 
-			$this->nomcatfis = $rs->getString($startcol + 1);
+      $this->nomcatfis = $rs->getString($startcol + 1);
 
-			$this->linnor = $rs->getString($startcol + 2);
+      $this->linnor = $rs->getString($startcol + 2);
 
-			$this->linsur = $rs->getString($startcol + 3);
+      $this->linsur = $rs->getString($startcol + 3);
 
-			$this->linest = $rs->getString($startcol + 4);
+      $this->linest = $rs->getString($startcol + 4);
 
-			$this->linoes = $rs->getString($startcol + 5);
+      $this->linoes = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fccatfis object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fccatfis object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -237,6 +266,7 @@ abstract class BaseFccatfis extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FccatfisPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FccatfisPeer::doUpdate($this, $con);

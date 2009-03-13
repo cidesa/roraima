@@ -205,6 +205,7 @@ abstract class BaseTstipcuePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(TstipcuePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

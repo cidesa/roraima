@@ -49,183 +49,214 @@ abstract class BaseForasopromet extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmet()
-	{
+  
+  public function getCodmet()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->codmet);
 
-		return $this->codpro; 		
-	}
-	
-	public function getUbigeo()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->ubigeo; 		
-	}
-	
-	public function getIndges()
-	{
+    return trim($this->codpro);
 
-		return $this->indges; 		
-	}
-	
-	public function getCalind()
-	{
+  }
+  
+  public function getUbigeo()
+  {
 
-		return $this->calind; 		
-	}
-	
-	public function getFrelec()
-	{
+    return trim($this->ubigeo);
 
-		return $this->frelec; 		
-	}
-	
-	public function getCanpro()
-	{
+  }
+  
+  public function getIndges()
+  {
 
-		return number_format($this->canpro,2,',','.');
-		
-	}
-	
-	public function getCodemp()
-	{
+    return trim($this->indges);
 
-		return $this->codemp; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCalind()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->calind);
+
+  }
+  
+  public function getFrelec()
+  {
+
+    return trim($this->frelec);
+
+  }
+  
+  public function getCanpro($val=false)
+  {
+
+    if($val) return number_format($this->canpro,2,',','.');
+    else return $this->canpro;
+
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = ForasoprometPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = ForasoprometPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = ForasoprometPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = ForasoprometPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setUbigeo($v)
 	{
 
-		if ($this->ubigeo !== $v) {
-			$this->ubigeo = $v;
-			$this->modifiedColumns[] = ForasoprometPeer::UBIGEO;
-		}
-
+    if ($this->ubigeo !== $v) {
+        $this->ubigeo = $v;
+        $this->modifiedColumns[] = ForasoprometPeer::UBIGEO;
+      }
+  
 	} 
 	
 	public function setIndges($v)
 	{
 
-		if ($this->indges !== $v) {
-			$this->indges = $v;
-			$this->modifiedColumns[] = ForasoprometPeer::INDGES;
-		}
-
+    if ($this->indges !== $v) {
+        $this->indges = $v;
+        $this->modifiedColumns[] = ForasoprometPeer::INDGES;
+      }
+  
 	} 
 	
 	public function setCalind($v)
 	{
 
-		if ($this->calind !== $v) {
-			$this->calind = $v;
-			$this->modifiedColumns[] = ForasoprometPeer::CALIND;
-		}
-
+    if ($this->calind !== $v) {
+        $this->calind = $v;
+        $this->modifiedColumns[] = ForasoprometPeer::CALIND;
+      }
+  
 	} 
 	
 	public function setFrelec($v)
 	{
 
-		if ($this->frelec !== $v) {
-			$this->frelec = $v;
-			$this->modifiedColumns[] = ForasoprometPeer::FRELEC;
-		}
-
+    if ($this->frelec !== $v) {
+        $this->frelec = $v;
+        $this->modifiedColumns[] = ForasoprometPeer::FRELEC;
+      }
+  
 	} 
 	
 	public function setCanpro($v)
 	{
 
-		if ($this->canpro !== $v) {
-			$this->canpro = $v;
-			$this->modifiedColumns[] = ForasoprometPeer::CANPRO;
-		}
-
+    if ($this->canpro !== $v) {
+        $this->canpro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForasoprometPeer::CANPRO;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = ForasoprometPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = ForasoprometPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForasoprometPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForasoprometPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmet = $rs->getString($startcol + 0);
+      $this->codmet = $rs->getString($startcol + 0);
 
-			$this->codpro = $rs->getString($startcol + 1);
+      $this->codpro = $rs->getString($startcol + 1);
 
-			$this->ubigeo = $rs->getString($startcol + 2);
+      $this->ubigeo = $rs->getString($startcol + 2);
 
-			$this->indges = $rs->getString($startcol + 3);
+      $this->indges = $rs->getString($startcol + 3);
 
-			$this->calind = $rs->getString($startcol + 4);
+      $this->calind = $rs->getString($startcol + 4);
 
-			$this->frelec = $rs->getString($startcol + 5);
+      $this->frelec = $rs->getString($startcol + 5);
 
-			$this->canpro = $rs->getFloat($startcol + 6);
+      $this->canpro = $rs->getFloat($startcol + 6);
 
-			$this->codemp = $rs->getString($startcol + 7);
+      $this->codemp = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forasopromet object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forasopromet object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

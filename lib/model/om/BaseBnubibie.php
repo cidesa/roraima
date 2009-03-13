@@ -33,110 +33,137 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodubi()
-	{
+  
+  public function getCodubi()
+  {
 
-		return $this->codubi; 		
-	}
-	
-	public function getDesubi()
-	{
+    return trim($this->codubi);
 
-		return $this->desubi; 		
-	}
-	
-	public function getStacod()
-	{
+  }
+  
+  public function getDesubi()
+  {
 
-		return $this->stacod; 		
-	}
-	
-	public function getDirubi()
-	{
+    return trim($this->desubi);
 
-		return $this->dirubi; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getStacod()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->stacod);
+
+  }
+  
+  public function getDirubi()
+  {
+
+    return trim($this->dirubi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodubi($v)
 	{
 
-		if ($this->codubi !== $v) {
-			$this->codubi = $v;
-			$this->modifiedColumns[] = BnubibiePeer::CODUBI;
-		}
-
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = BnubibiePeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setDesubi($v)
 	{
 
-		if ($this->desubi !== $v) {
-			$this->desubi = $v;
-			$this->modifiedColumns[] = BnubibiePeer::DESUBI;
-		}
-
+    if ($this->desubi !== $v) {
+        $this->desubi = $v;
+        $this->modifiedColumns[] = BnubibiePeer::DESUBI;
+      }
+  
 	} 
 	
 	public function setStacod($v)
 	{
 
-		if ($this->stacod !== $v) {
-			$this->stacod = $v;
-			$this->modifiedColumns[] = BnubibiePeer::STACOD;
-		}
-
+    if ($this->stacod !== $v) {
+        $this->stacod = $v;
+        $this->modifiedColumns[] = BnubibiePeer::STACOD;
+      }
+  
 	} 
 	
 	public function setDirubi($v)
 	{
 
-		if ($this->dirubi !== $v) {
-			$this->dirubi = $v;
-			$this->modifiedColumns[] = BnubibiePeer::DIRUBI;
-		}
-
+    if ($this->dirubi !== $v) {
+        $this->dirubi = $v;
+        $this->modifiedColumns[] = BnubibiePeer::DIRUBI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BnubibiePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BnubibiePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codubi = $rs->getString($startcol + 0);
+      $this->codubi = $rs->getString($startcol + 0);
 
-			$this->desubi = $rs->getString($startcol + 1);
+      $this->desubi = $rs->getString($startcol + 1);
 
-			$this->stacod = $rs->getString($startcol + 2);
+      $this->stacod = $rs->getString($startcol + 2);
 
-			$this->dirubi = $rs->getString($startcol + 3);
+      $this->dirubi = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bnubibie object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bnubibie object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseBnubibie extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BnubibiePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BnubibiePeer::doUpdate($this, $con);

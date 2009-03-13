@@ -220,6 +220,7 @@ abstract class BaseCpmovtraPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CpmovtraPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

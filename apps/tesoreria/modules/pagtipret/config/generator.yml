@@ -5,20 +5,29 @@ generator:
     theme:            default
     fields:
       codtip: { name: Codigo , params: maxlength=3}
-      destip: { name: Descripcion}            
-      codcon: { name: Codigo Contable} 
-      basimp: { name: Base Imponible} 
-      porret: { name: Porcentaje Retencion}   
-      unitri: { name: Unidad Tributaria}   
-      porsus: { name: Porcentaje Sustraendo}   
-      factor: { name: Factor}  
+      destip: { name: Descripcion, params: maxlength=250}
+      codcon: { name: Codigo Contable, params: maxlength=32}
+      basimp: { name: Base Imponible}
+      porret: { name: Porcentaje a Retener}
+      unitri: { name: Unidades Tributarias}
+      porsus: { name: Porc. Sustraendo}
+      factor: { name: Factor}
+      descta: { name: Descripción}
+      consustra: { name: Maneja Sustraendo}
     list:
       title:          Tipos de Retenciones
       filters:        [codtip, destip]
       display:        [=codtip, destip, codcon]
-      max_per_page:	  8
+      max_per_page:	  5
+      sort: codtip
       object_actions:
         _edit:        ~
         _delete:      ~
     edit:
-      title:          Edicion del Tipo de Retencion       
+      title:          Tipos de Retenciones
+      display:        [codtip, destip, codcon, basimp, porret, unitri, porsus, factor, descta, consustra]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

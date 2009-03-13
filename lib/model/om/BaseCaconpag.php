@@ -61,237 +61,271 @@ abstract class BaseCaconpag extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodconpag()
-	{
+  
+  public function getCodconpag()
+  {
 
-		return $this->codconpag; 		
-	}
-	
-	public function getDesconpag()
-	{
+    return trim($this->codconpag);
 
-		return $this->desconpag; 		
-	}
-	
-	public function getTipconpag()
-	{
+  }
+  
+  public function getDesconpag()
+  {
 
-		return $this->tipconpag; 		
-	}
-	
-	public function getNumdia()
-	{
+    return trim($this->desconpag);
 
-		return number_format($this->numdia,2,',','.');
-		
-	}
-	
-	public function getGeneraop()
-	{
+  }
+  
+  public function getTipconpag()
+  {
 
-		return $this->generaop; 		
-	}
-	
-	public function getAsiparrec()
-	{
+    return trim($this->tipconpag);
 
-		return $this->asiparrec; 		
-	}
-	
-	public function getGeneracom()
-	{
+  }
+  
+  public function getNumdia($val=false)
+  {
 
-		return $this->generacom; 		
-	}
-	
-	public function getMercon()
-	{
+    if($val) return number_format($this->numdia,2,',','.');
+    else return $this->numdia;
 
-		return $this->mercon; 		
-	}
-	
-	public function getCtadev()
-	{
+  }
+  
+  public function getGeneraop()
+  {
 
-		return $this->ctadev; 		
-	}
-	
-	public function getCtavco()
-	{
+    return trim($this->generaop);
 
-		return $this->ctavco; 		
-	}
-	
-	public function getUnivta()
-	{
+  }
+  
+  public function getAsiparrec()
+  {
 
-		return $this->univta; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->asiparrec);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getGeneracom()
+  {
+
+    return trim($this->generacom);
+
+  }
+  
+  public function getMercon()
+  {
+
+    return trim($this->mercon);
+
+  }
+  
+  public function getCtadev()
+  {
+
+    return trim($this->ctadev);
+
+  }
+  
+  public function getCtavco()
+  {
+
+    return trim($this->ctavco);
+
+  }
+  
+  public function getUnivta()
+  {
+
+    return trim($this->univta);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodconpag($v)
 	{
 
-		if ($this->codconpag !== $v) {
-			$this->codconpag = $v;
-			$this->modifiedColumns[] = CaconpagPeer::CODCONPAG;
-		}
-
+    if ($this->codconpag !== $v) {
+        $this->codconpag = $v;
+        $this->modifiedColumns[] = CaconpagPeer::CODCONPAG;
+      }
+  
 	} 
 	
 	public function setDesconpag($v)
 	{
 
-		if ($this->desconpag !== $v) {
-			$this->desconpag = $v;
-			$this->modifiedColumns[] = CaconpagPeer::DESCONPAG;
-		}
-
+    if ($this->desconpag !== $v) {
+        $this->desconpag = $v;
+        $this->modifiedColumns[] = CaconpagPeer::DESCONPAG;
+      }
+  
 	} 
 	
 	public function setTipconpag($v)
 	{
 
-		if ($this->tipconpag !== $v) {
-			$this->tipconpag = $v;
-			$this->modifiedColumns[] = CaconpagPeer::TIPCONPAG;
-		}
-
+    if ($this->tipconpag !== $v) {
+        $this->tipconpag = $v;
+        $this->modifiedColumns[] = CaconpagPeer::TIPCONPAG;
+      }
+  
 	} 
 	
 	public function setNumdia($v)
 	{
 
-		if ($this->numdia !== $v) {
-			$this->numdia = $v;
-			$this->modifiedColumns[] = CaconpagPeer::NUMDIA;
-		}
-
+    if ($this->numdia !== $v) {
+        $this->numdia = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaconpagPeer::NUMDIA;
+      }
+  
 	} 
 	
 	public function setGeneraop($v)
 	{
 
-		if ($this->generaop !== $v) {
-			$this->generaop = $v;
-			$this->modifiedColumns[] = CaconpagPeer::GENERAOP;
-		}
-
+    if ($this->generaop !== $v) {
+        $this->generaop = $v;
+        $this->modifiedColumns[] = CaconpagPeer::GENERAOP;
+      }
+  
 	} 
 	
 	public function setAsiparrec($v)
 	{
 
-		if ($this->asiparrec !== $v) {
-			$this->asiparrec = $v;
-			$this->modifiedColumns[] = CaconpagPeer::ASIPARREC;
-		}
-
+    if ($this->asiparrec !== $v) {
+        $this->asiparrec = $v;
+        $this->modifiedColumns[] = CaconpagPeer::ASIPARREC;
+      }
+  
 	} 
 	
 	public function setGeneracom($v)
 	{
 
-		if ($this->generacom !== $v) {
-			$this->generacom = $v;
-			$this->modifiedColumns[] = CaconpagPeer::GENERACOM;
-		}
-
+    if ($this->generacom !== $v) {
+        $this->generacom = $v;
+        $this->modifiedColumns[] = CaconpagPeer::GENERACOM;
+      }
+  
 	} 
 	
 	public function setMercon($v)
 	{
 
-		if ($this->mercon !== $v) {
-			$this->mercon = $v;
-			$this->modifiedColumns[] = CaconpagPeer::MERCON;
-		}
-
+    if ($this->mercon !== $v) {
+        $this->mercon = $v;
+        $this->modifiedColumns[] = CaconpagPeer::MERCON;
+      }
+  
 	} 
 	
 	public function setCtadev($v)
 	{
 
-		if ($this->ctadev !== $v) {
-			$this->ctadev = $v;
-			$this->modifiedColumns[] = CaconpagPeer::CTADEV;
-		}
-
+    if ($this->ctadev !== $v) {
+        $this->ctadev = $v;
+        $this->modifiedColumns[] = CaconpagPeer::CTADEV;
+      }
+  
 	} 
 	
 	public function setCtavco($v)
 	{
 
-		if ($this->ctavco !== $v) {
-			$this->ctavco = $v;
-			$this->modifiedColumns[] = CaconpagPeer::CTAVCO;
-		}
-
+    if ($this->ctavco !== $v) {
+        $this->ctavco = $v;
+        $this->modifiedColumns[] = CaconpagPeer::CTAVCO;
+      }
+  
 	} 
 	
 	public function setUnivta($v)
 	{
 
-		if ($this->univta !== $v) {
-			$this->univta = $v;
-			$this->modifiedColumns[] = CaconpagPeer::UNIVTA;
-		}
-
+    if ($this->univta !== $v) {
+        $this->univta = $v;
+        $this->modifiedColumns[] = CaconpagPeer::UNIVTA;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaconpagPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaconpagPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codconpag = $rs->getString($startcol + 0);
+      $this->codconpag = $rs->getString($startcol + 0);
 
-			$this->desconpag = $rs->getString($startcol + 1);
+      $this->desconpag = $rs->getString($startcol + 1);
 
-			$this->tipconpag = $rs->getString($startcol + 2);
+      $this->tipconpag = $rs->getString($startcol + 2);
 
-			$this->numdia = $rs->getFloat($startcol + 3);
+      $this->numdia = $rs->getFloat($startcol + 3);
 
-			$this->generaop = $rs->getString($startcol + 4);
+      $this->generaop = $rs->getString($startcol + 4);
 
-			$this->asiparrec = $rs->getString($startcol + 5);
+      $this->asiparrec = $rs->getString($startcol + 5);
 
-			$this->generacom = $rs->getString($startcol + 6);
+      $this->generacom = $rs->getString($startcol + 6);
 
-			$this->mercon = $rs->getString($startcol + 7);
+      $this->mercon = $rs->getString($startcol + 7);
 
-			$this->ctadev = $rs->getString($startcol + 8);
+      $this->ctadev = $rs->getString($startcol + 8);
 
-			$this->ctavco = $rs->getString($startcol + 9);
+      $this->ctavco = $rs->getString($startcol + 9);
 
-			$this->univta = $rs->getString($startcol + 10);
+      $this->univta = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caconpag object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caconpag object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -348,6 +382,7 @@ abstract class BaseCaconpag extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaconpagPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaconpagPeer::doUpdate($this, $con);

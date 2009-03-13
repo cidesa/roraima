@@ -37,129 +37,157 @@ abstract class BaseCstotartfas extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodprod()
-	{
+  
+  public function getCodprod()
+  {
 
-		return $this->codprod; 		
-	}
-	
-	public function getCodfas()
-	{
+    return trim($this->codprod);
 
-		return $this->codfas; 		
-	}
-	
-	public function getMonfas()
-	{
+  }
+  
+  public function getCodfas()
+  {
 
-		return number_format($this->monfas,2,',','.');
-		
-	}
-	
-	public function getTipcal()
-	{
+    return trim($this->codfas);
 
-		return $this->tipcal; 		
-	}
-	
-	public function getNroord()
-	{
+  }
+  
+  public function getMonfas($val=false)
+  {
 
-		return $this->nroord; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->monfas,2,',','.');
+    else return $this->monfas;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTipcal()
+  {
+
+    return trim($this->tipcal);
+
+  }
+  
+  public function getNroord()
+  {
+
+    return trim($this->nroord);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodprod($v)
 	{
 
-		if ($this->codprod !== $v) {
-			$this->codprod = $v;
-			$this->modifiedColumns[] = CstotartfasPeer::CODPROD;
-		}
-
+    if ($this->codprod !== $v) {
+        $this->codprod = $v;
+        $this->modifiedColumns[] = CstotartfasPeer::CODPROD;
+      }
+  
 	} 
 	
 	public function setCodfas($v)
 	{
 
-		if ($this->codfas !== $v) {
-			$this->codfas = $v;
-			$this->modifiedColumns[] = CstotartfasPeer::CODFAS;
-		}
-
+    if ($this->codfas !== $v) {
+        $this->codfas = $v;
+        $this->modifiedColumns[] = CstotartfasPeer::CODFAS;
+      }
+  
 	} 
 	
 	public function setMonfas($v)
 	{
 
-		if ($this->monfas !== $v) {
-			$this->monfas = $v;
-			$this->modifiedColumns[] = CstotartfasPeer::MONFAS;
-		}
-
+    if ($this->monfas !== $v) {
+        $this->monfas = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CstotartfasPeer::MONFAS;
+      }
+  
 	} 
 	
 	public function setTipcal($v)
 	{
 
-		if ($this->tipcal !== $v) {
-			$this->tipcal = $v;
-			$this->modifiedColumns[] = CstotartfasPeer::TIPCAL;
-		}
-
+    if ($this->tipcal !== $v) {
+        $this->tipcal = $v;
+        $this->modifiedColumns[] = CstotartfasPeer::TIPCAL;
+      }
+  
 	} 
 	
 	public function setNroord($v)
 	{
 
-		if ($this->nroord !== $v) {
-			$this->nroord = $v;
-			$this->modifiedColumns[] = CstotartfasPeer::NROORD;
-		}
-
+    if ($this->nroord !== $v) {
+        $this->nroord = $v;
+        $this->modifiedColumns[] = CstotartfasPeer::NROORD;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CstotartfasPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CstotartfasPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codprod = $rs->getString($startcol + 0);
+      $this->codprod = $rs->getString($startcol + 0);
 
-			$this->codfas = $rs->getString($startcol + 1);
+      $this->codfas = $rs->getString($startcol + 1);
 
-			$this->monfas = $rs->getFloat($startcol + 2);
+      $this->monfas = $rs->getFloat($startcol + 2);
 
-			$this->tipcal = $rs->getString($startcol + 3);
+      $this->tipcal = $rs->getString($startcol + 3);
 
-			$this->nroord = $rs->getString($startcol + 4);
+      $this->nroord = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Cstotartfas object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Cstotartfas object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -1,42 +1,44 @@
 <?php
 
 
-	
+
 class CadefartMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CadefartMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CadefartMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cadefart');
 		$tMap->setPhpName('Cadefart');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('cadefart_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 3);
 
-		$tMap->addColumn('LONART', 'Lonart', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('LONART', 'Lonart', 'double', CreoleTypes::NUMERIC, true, 2);
 
-		$tMap->addColumn('RUPART', 'Rupart', 'double', CreoleTypes::NUMERIC, true);
+		$tMap->addColumn('RUPART', 'Rupart', 'double', CreoleTypes::NUMERIC, true, 2);
 
 		$tMap->addColumn('FORART', 'Forart', 'string', CreoleTypes::VARCHAR, true, 30);
 
@@ -76,15 +78,15 @@ class CadefartMapBuilder {
 
 		$tMap->addColumn('CODALMVEN', 'Codalmven', 'string', CreoleTypes::VARCHAR, false, 6);
 
-		$tMap->addColumn('RECART', 'Recart', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('RECART', 'Recart', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('ORDCOM', 'Ordcom', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ORDCOM', 'Ordcom', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('REQART', 'Reqart', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('REQART', 'Reqart', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('DPHART', 'Dphart', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('DPHART', 'Dphart', 'double', CreoleTypes::NUMERIC, false, 8);
 
-		$tMap->addColumn('ORDSER', 'Ordser', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('ORDSER', 'Ordser', 'double', CreoleTypes::NUMERIC, false, 8);
 
 		$tMap->addColumn('TIPIMPREC', 'Tipimprec', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -96,11 +98,29 @@ class CadefartMapBuilder {
 
 		$tMap->addColumn('APLICLADES', 'Apliclades', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('SOLCOM', 'Solcom', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('SOLCOM', 'Solcom', 'double', CreoleTypes::NUMERIC, false, 8);
 
 		$tMap->addColumn('UNIDAD', 'Unidad', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('PRCASOPRE', 'Prcasopre', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('PRCREQAPR', 'Prcreqapr', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('COMASOPRE', 'Comasopre', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('COMREQAPR', 'Comreqapr', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('ALMCORRE', 'Almcorre', 'string', CreoleTypes::VARCHAR, true, 8);
+
+		$tMap->addColumn('FORSNC', 'Forsnc', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('DESSNC', 'Dessnc', 'string', CreoleTypes::VARCHAR, false, 20);
+
+		$tMap->addColumn('REQREQAPR', 'Reqreqapr', 'string', CreoleTypes::VARCHAR, false, 1);
+
+		$tMap->addColumn('SOLREQAPR', 'Solreqapr', 'string', CreoleTypes::VARCHAR, false, 1);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

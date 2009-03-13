@@ -1,0 +1,77 @@
+methods:
+  post:
+   - "cireging{refing}"
+   - "cireging{fecing}"
+   - "cireging{desing}"
+   - "cireging{codtip}"
+   - "cireging{rifcon}"
+   #- "cireging{ctaban}"
+   - "cireging{tipmov}"
+   - "cireging{numdep}"
+   - "cireging{numofi}"
+
+names:
+  cireging{refing}:
+    required:  Yes
+    required_msg: La referencia no puede estar en Blanco
+    validators: Validator_refing
+
+  cireging{fecing}:
+    required:  Yes
+    required_msg: La fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  cireging{desing}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desing
+
+  cireging{codtip}:
+    required:  Yes
+    required_msg: Debe seleccionar el tipo de ingreso
+
+  cireging{rifcon}:
+    required:  Yes
+    required_msg: Debe seleccionar el Contribuyente
+
+  #cireging{ctaban}:
+   # required:  Yes
+    #required_msg: Debe seleccionar una cuenta bancaria
+
+  cireging{tipmov}:
+    required:  Yes
+    required_msg: Debe seleccionar el tipo de movimiento
+
+  cireging{numdep}:
+    required:  Yes
+    required_msg: El número de deposito no puede estar en blanco
+
+  cireging{numofi}:
+    required:  Yes
+    required_msg: El número de oficio no puede estar en blanco
+
+
+Validator_refing:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cireging
+        column:       refing
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desing:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La descripción no puede tener mas de 250 caracteres
+
+FechaValidator:
+    class: CidesaDateValidator
+    param:
+        class:        Cidefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida

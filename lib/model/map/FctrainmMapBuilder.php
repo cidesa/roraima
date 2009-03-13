@@ -1,42 +1,44 @@
 <?php
 
 
-	
+
 class FctrainmMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FctrainmMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FctrainmMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fctrainm');
 		$tMap->setPhpName('Fctrainm');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fctrainm_SEQ');
 
 		$tMap->addColumn('NUMTRA', 'Numtra', 'string', CreoleTypes::VARCHAR, true, 10);
 
 		$tMap->addColumn('NROINM', 'Nroinm', 'string', CreoleTypes::VARCHAR, true, 8);
 
-		$tMap->addColumn('FECTRA', 'Fectra', 'int', CreoleTypes::DATE, true);
+		$tMap->addColumn('FECTRA', 'Fectra', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, true, 14);
 
@@ -49,6 +51,6 @@ class FctrainmMapBuilder {
 		$tMap->addColumn('FUNREC', 'Funrec', 'string', CreoleTypes::VARCHAR, true, 40);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

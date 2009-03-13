@@ -89,508 +89,543 @@ abstract class BaseNpcalvac extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getCodcar()
-	{
+    return trim($this->codemp);
 
-		return $this->codcar; 		
-	}
-	
-	public function getCaudes($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodcar()
+  {
 
-		if ($this->caudes === null || $this->caudes === '') {
-			return null;
-		} elseif (!is_int($this->caudes)) {
-						$ts = strtotime($this->caudes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [caudes] as date/time value: " . var_export($this->caudes, true));
-			}
-		} else {
-			$ts = $this->caudes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codcar);
 
-	
-	public function getCauhas($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCaudes($format = 'Y-m-d')
+  {
 
-		if ($this->cauhas === null || $this->cauhas === '') {
-			return null;
-		} elseif (!is_int($this->cauhas)) {
-						$ts = strtotime($this->cauhas);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [cauhas] as date/time value: " . var_export($this->cauhas, true));
-			}
-		} else {
-			$ts = $this->cauhas;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->caudes === null || $this->caudes === '') {
+      return null;
+    } elseif (!is_int($this->caudes)) {
+            $ts = adodb_strtotime($this->caudes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [caudes] as date/time value: " . var_export($this->caudes, true));
+      }
+    } else {
+      $ts = $this->caudes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getDisdes($format = 'Y-m-d')
-	{
+  
+  public function getCauhas($format = 'Y-m-d')
+  {
 
-		if ($this->disdes === null || $this->disdes === '') {
-			return null;
-		} elseif (!is_int($this->disdes)) {
-						$ts = strtotime($this->disdes);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [disdes] as date/time value: " . var_export($this->disdes, true));
-			}
-		} else {
-			$ts = $this->disdes;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->cauhas === null || $this->cauhas === '') {
+      return null;
+    } elseif (!is_int($this->cauhas)) {
+            $ts = adodb_strtotime($this->cauhas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [cauhas] as date/time value: " . var_export($this->cauhas, true));
+      }
+    } else {
+      $ts = $this->cauhas;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getDishas($format = 'Y-m-d')
-	{
+  
+  public function getDisdes($format = 'Y-m-d')
+  {
 
-		if ($this->dishas === null || $this->dishas === '') {
-			return null;
-		} elseif (!is_int($this->dishas)) {
-						$ts = strtotime($this->dishas);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [dishas] as date/time value: " . var_export($this->dishas, true));
-			}
-		} else {
-			$ts = $this->dishas;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->disdes === null || $this->disdes === '') {
+      return null;
+    } elseif (!is_int($this->disdes)) {
+            $ts = adodb_strtotime($this->disdes);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [disdes] as date/time value: " . var_export($this->disdes, true));
+      }
+    } else {
+      $ts = $this->disdes;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getFecrei($format = 'Y-m-d')
-	{
+  
+  public function getDishas($format = 'Y-m-d')
+  {
 
-		if ($this->fecrei === null || $this->fecrei === '') {
-			return null;
-		} elseif (!is_int($this->fecrei)) {
-						$ts = strtotime($this->fecrei);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecrei] as date/time value: " . var_export($this->fecrei, true));
-			}
-		} else {
-			$ts = $this->fecrei;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->dishas === null || $this->dishas === '') {
+      return null;
+    } elseif (!is_int($this->dishas)) {
+            $ts = adodb_strtotime($this->dishas);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [dishas] as date/time value: " . var_export($this->dishas, true));
+      }
+    } else {
+      $ts = $this->dishas;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getFecreg($format = 'Y-m-d')
-	{
+  
+  public function getFecrei($format = 'Y-m-d')
+  {
 
-		if ($this->fecreg === null || $this->fecreg === '') {
-			return null;
-		} elseif (!is_int($this->fecreg)) {
-						$ts = strtotime($this->fecreg);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
-			}
-		} else {
-			$ts = $this->fecreg;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if ($this->fecrei === null || $this->fecrei === '') {
+      return null;
+    } elseif (!is_int($this->fecrei)) {
+            $ts = adodb_strtotime($this->fecrei);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecrei] as date/time value: " . var_export($this->fecrei, true));
+      }
+    } else {
+      $ts = $this->fecrei;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-	
-	public function getDiavac()
-	{
+  
+  public function getFecreg($format = 'Y-m-d')
+  {
 
-		return number_format($this->diavac,2,',','.');
-		
-	}
-	
-	public function getDianhab()
-	{
+    if ($this->fecreg === null || $this->fecreg === '') {
+      return null;
+    } elseif (!is_int($this->fecreg)) {
+            $ts = adodb_strtotime($this->fecreg);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecreg] as date/time value: " . var_export($this->fecreg, true));
+      }
+    } else {
+      $ts = $this->fecreg;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->dianhab,2,',','.');
-		
-	}
-	
-	public function getDiaant()
-	{
+  
+  public function getDiavac($val=false)
+  {
 
-		return number_format($this->diaant,2,',','.');
-		
-	}
-	
-	public function getDiapag()
-	{
+    if($val) return number_format($this->diavac,2,',','.');
+    else return $this->diavac;
 
-		return number_format($this->diapag,2,',','.');
-		
-	}
-	
-	public function getDiadis()
-	{
+  }
+  
+  public function getDianhab($val=false)
+  {
 
-		return number_format($this->diadis,2,',','.');
-		
-	}
-	
-	public function getDiabon()
-	{
+    if($val) return number_format($this->dianhab,2,',','.');
+    else return $this->dianhab;
 
-		return number_format($this->diabon,2,',','.');
-		
-	}
-	
-	public function getMonvac()
-	{
+  }
+  
+  public function getDiaant($val=false)
+  {
 
-		return number_format($this->monvac,2,',','.');
-		
-	}
-	
-	public function getMonbon()
-	{
+    if($val) return number_format($this->diaant,2,',','.');
+    else return $this->diaant;
 
-		return number_format($this->monbon,2,',','.');
-		
-	}
-	
-	public function getStatus()
-	{
+  }
+  
+  public function getDiapag($val=false)
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getStapag()
-	{
+    if($val) return number_format($this->diapag,2,',','.');
+    else return $this->diapag;
 
-		return $this->stapag; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDiadis($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->diadis,2,',','.');
+    else return $this->diadis;
+
+  }
+  
+  public function getDiabon($val=false)
+  {
+
+    if($val) return number_format($this->diabon,2,',','.');
+    else return $this->diabon;
+
+  }
+  
+  public function getMonvac($val=false)
+  {
+
+    if($val) return number_format($this->monvac,2,',','.');
+    else return $this->monvac;
+
+  }
+  
+  public function getMonbon($val=false)
+  {
+
+    if($val) return number_format($this->monbon,2,',','.');
+    else return $this->monbon;
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getStapag()
+  {
+
+    return trim($this->stapag);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpcalvacPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setCodcar($v)
 	{
 
-		if ($this->codcar !== $v) {
-			$this->codcar = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::CODCAR;
-		}
-
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = NpcalvacPeer::CODCAR;
+      }
+  
 	} 
 	
 	public function setCaudes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [caudes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->caudes !== $ts) {
-			$this->caudes = $ts;
-			$this->modifiedColumns[] = NpcalvacPeer::CAUDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [caudes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->caudes !== $ts) {
+      $this->caudes = $ts;
+      $this->modifiedColumns[] = NpcalvacPeer::CAUDES;
+    }
 
 	} 
 	
 	public function setCauhas($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [cauhas] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->cauhas !== $ts) {
-			$this->cauhas = $ts;
-			$this->modifiedColumns[] = NpcalvacPeer::CAUHAS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [cauhas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->cauhas !== $ts) {
+      $this->cauhas = $ts;
+      $this->modifiedColumns[] = NpcalvacPeer::CAUHAS;
+    }
 
 	} 
 	
 	public function setDisdes($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [disdes] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->disdes !== $ts) {
-			$this->disdes = $ts;
-			$this->modifiedColumns[] = NpcalvacPeer::DISDES;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [disdes] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->disdes !== $ts) {
+      $this->disdes = $ts;
+      $this->modifiedColumns[] = NpcalvacPeer::DISDES;
+    }
 
 	} 
 	
 	public function setDishas($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [dishas] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->dishas !== $ts) {
-			$this->dishas = $ts;
-			$this->modifiedColumns[] = NpcalvacPeer::DISHAS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [dishas] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->dishas !== $ts) {
+      $this->dishas = $ts;
+      $this->modifiedColumns[] = NpcalvacPeer::DISHAS;
+    }
 
 	} 
 	
 	public function setFecrei($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecrei] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecrei !== $ts) {
-			$this->fecrei = $ts;
-			$this->modifiedColumns[] = NpcalvacPeer::FECREI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecrei] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecrei !== $ts) {
+      $this->fecrei = $ts;
+      $this->modifiedColumns[] = NpcalvacPeer::FECREI;
+    }
 
 	} 
 	
 	public function setFecreg($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecreg !== $ts) {
-			$this->fecreg = $ts;
-			$this->modifiedColumns[] = NpcalvacPeer::FECREG;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecreg] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecreg !== $ts) {
+      $this->fecreg = $ts;
+      $this->modifiedColumns[] = NpcalvacPeer::FECREG;
+    }
 
 	} 
 	
 	public function setDiavac($v)
 	{
 
-		if ($this->diavac !== $v) {
-			$this->diavac = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::DIAVAC;
-		}
-
+    if ($this->diavac !== $v) {
+        $this->diavac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalvacPeer::DIAVAC;
+      }
+  
 	} 
 	
 	public function setDianhab($v)
 	{
 
-		if ($this->dianhab !== $v) {
-			$this->dianhab = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::DIANHAB;
-		}
-
+    if ($this->dianhab !== $v) {
+        $this->dianhab = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalvacPeer::DIANHAB;
+      }
+  
 	} 
 	
 	public function setDiaant($v)
 	{
 
-		if ($this->diaant !== $v) {
-			$this->diaant = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::DIAANT;
-		}
-
+    if ($this->diaant !== $v) {
+        $this->diaant = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalvacPeer::DIAANT;
+      }
+  
 	} 
 	
 	public function setDiapag($v)
 	{
 
-		if ($this->diapag !== $v) {
-			$this->diapag = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::DIAPAG;
-		}
-
+    if ($this->diapag !== $v) {
+        $this->diapag = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalvacPeer::DIAPAG;
+      }
+  
 	} 
 	
 	public function setDiadis($v)
 	{
 
-		if ($this->diadis !== $v) {
-			$this->diadis = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::DIADIS;
-		}
-
+    if ($this->diadis !== $v) {
+        $this->diadis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalvacPeer::DIADIS;
+      }
+  
 	} 
 	
 	public function setDiabon($v)
 	{
 
-		if ($this->diabon !== $v) {
-			$this->diabon = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::DIABON;
-		}
-
+    if ($this->diabon !== $v) {
+        $this->diabon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalvacPeer::DIABON;
+      }
+  
 	} 
 	
 	public function setMonvac($v)
 	{
 
-		if ($this->monvac !== $v) {
-			$this->monvac = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::MONVAC;
-		}
-
+    if ($this->monvac !== $v) {
+        $this->monvac = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalvacPeer::MONVAC;
+      }
+  
 	} 
 	
 	public function setMonbon($v)
 	{
 
-		if ($this->monbon !== $v) {
-			$this->monbon = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::MONBON;
-		}
-
+    if ($this->monbon !== $v) {
+        $this->monbon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalvacPeer::MONBON;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = NpcalvacPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setStapag($v)
 	{
 
-		if ($this->stapag !== $v) {
-			$this->stapag = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::STAPAG;
-		}
-
+    if ($this->stapag !== $v) {
+        $this->stapag = $v;
+        $this->modifiedColumns[] = NpcalvacPeer::STAPAG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcalvacPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcalvacPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->codcar = $rs->getString($startcol + 1);
+      $this->codcar = $rs->getString($startcol + 1);
 
-			$this->caudes = $rs->getDate($startcol + 2, null);
+      $this->caudes = $rs->getDate($startcol + 2, null);
 
-			$this->cauhas = $rs->getDate($startcol + 3, null);
+      $this->cauhas = $rs->getDate($startcol + 3, null);
 
-			$this->disdes = $rs->getDate($startcol + 4, null);
+      $this->disdes = $rs->getDate($startcol + 4, null);
 
-			$this->dishas = $rs->getDate($startcol + 5, null);
+      $this->dishas = $rs->getDate($startcol + 5, null);
 
-			$this->fecrei = $rs->getDate($startcol + 6, null);
+      $this->fecrei = $rs->getDate($startcol + 6, null);
 
-			$this->fecreg = $rs->getDate($startcol + 7, null);
+      $this->fecreg = $rs->getDate($startcol + 7, null);
 
-			$this->diavac = $rs->getFloat($startcol + 8);
+      $this->diavac = $rs->getFloat($startcol + 8);
 
-			$this->dianhab = $rs->getFloat($startcol + 9);
+      $this->dianhab = $rs->getFloat($startcol + 9);
 
-			$this->diaant = $rs->getFloat($startcol + 10);
+      $this->diaant = $rs->getFloat($startcol + 10);
 
-			$this->diapag = $rs->getFloat($startcol + 11);
+      $this->diapag = $rs->getFloat($startcol + 11);
 
-			$this->diadis = $rs->getFloat($startcol + 12);
+      $this->diadis = $rs->getFloat($startcol + 12);
 
-			$this->diabon = $rs->getFloat($startcol + 13);
+      $this->diabon = $rs->getFloat($startcol + 13);
 
-			$this->monvac = $rs->getFloat($startcol + 14);
+      $this->monvac = $rs->getFloat($startcol + 14);
 
-			$this->monbon = $rs->getFloat($startcol + 15);
+      $this->monbon = $rs->getFloat($startcol + 15);
 
-			$this->status = $rs->getString($startcol + 16);
+      $this->status = $rs->getString($startcol + 16);
 
-			$this->stapag = $rs->getString($startcol + 17);
+      $this->stapag = $rs->getString($startcol + 17);
 
-			$this->id = $rs->getInt($startcol + 18);
+      $this->id = $rs->getInt($startcol + 18);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 19; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcalvac object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 19; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcalvac object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -647,6 +682,7 @@ abstract class BaseNpcalvac extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcalvacPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcalvacPeer::doUpdate($this, $con);

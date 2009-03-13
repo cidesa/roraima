@@ -270,6 +270,7 @@ abstract class BaseCiregingrPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CiregingrPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

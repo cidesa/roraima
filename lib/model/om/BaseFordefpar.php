@@ -33,110 +33,137 @@ abstract class BaseFordefpar extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodest()
-	{
+  
+  public function getCodest()
+  {
 
-		return $this->codest; 		
-	}
-	
-	public function getCodmun()
-	{
+    return trim($this->codest);
 
-		return $this->codmun; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getCodmun()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getDespar()
-	{
+    return trim($this->codmun);
 
-		return $this->despar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codpar);
+
+  }
+  
+  public function getDespar()
+  {
+
+    return trim($this->despar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodest($v)
 	{
 
-		if ($this->codest !== $v) {
-			$this->codest = $v;
-			$this->modifiedColumns[] = FordefparPeer::CODEST;
-		}
-
+    if ($this->codest !== $v) {
+        $this->codest = $v;
+        $this->modifiedColumns[] = FordefparPeer::CODEST;
+      }
+  
 	} 
 	
 	public function setCodmun($v)
 	{
 
-		if ($this->codmun !== $v) {
-			$this->codmun = $v;
-			$this->modifiedColumns[] = FordefparPeer::CODMUN;
-		}
-
+    if ($this->codmun !== $v) {
+        $this->codmun = $v;
+        $this->modifiedColumns[] = FordefparPeer::CODMUN;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = FordefparPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = FordefparPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setDespar($v)
 	{
 
-		if ($this->despar !== $v) {
-			$this->despar = $v;
-			$this->modifiedColumns[] = FordefparPeer::DESPAR;
-		}
-
+    if ($this->despar !== $v) {
+        $this->despar = $v;
+        $this->modifiedColumns[] = FordefparPeer::DESPAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefparPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefparPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codest = $rs->getString($startcol + 0);
+      $this->codest = $rs->getString($startcol + 0);
 
-			$this->codmun = $rs->getString($startcol + 1);
+      $this->codmun = $rs->getString($startcol + 1);
 
-			$this->codpar = $rs->getString($startcol + 2);
+      $this->codpar = $rs->getString($startcol + 2);
 
-			$this->despar = $rs->getString($startcol + 3);
+      $this->despar = $rs->getString($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefpar object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefpar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -193,6 +220,7 @@ abstract class BaseFordefpar extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefparPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefparPeer::doUpdate($this, $con);

@@ -5,17 +5,30 @@ generator:
     theme:            default
     fields:
       codcon:      { name: Código Contrato}
-      descon:      { name: Descripción}    
-      codobr:      { name: Código Obra}   
-      desobr:      { name: Descripción Obra}    
-      nompro:      { name: Contratista}    
+      descon:      { name: Descripción}
+      desobr:      { name: Obra}
+      nompro:      { name: Contratista}
+      totalc:      { name: Contratado}
+      totalv:      { name: Variación}
+      totalcv:     { name: Contratado Variado}
+      monper:      { name: Anticipo}
+      aumobr:      { name: Aumento de Obra}
+      monded:      { name: Retenciones}
+      disobr:      { name: Disminución de Obra}
+      moneje:      { name: Ejecutado}
+      obrext:      { name: Obras Extras}
+      poreje:      { name: Por Ejecutar}
+      totobreje:   { name: Total Obra Ejecutada}
+      totobrejefis: { name: Obra Ejecutada Fisícamente}
     list:
       title:          Situación del Contrato
       filters:		  [codcon, descon]
       display:        [=codcon, descon, codobr, desobr]
       max_per_page:	  10
       object_actions:
-        _edit:        ~                                
+        _edit:        ~
     edit:
       title:          Situación del Contrato
-      display:        [codcon, descon, codobr, desobr, nompro]
+      display:        [codcon, descon, desobr, nompro, totalc, totalv, totalcv, monper, aumobr, monded, disobr, moneje, obrext, poreje, totobreje, totobrejefis]
+      actions:
+        _list:        ~

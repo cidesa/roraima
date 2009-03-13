@@ -8,7 +8,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo __('Edicion Sub Sub Objetivos', 
+<h1><?php echo __('Edición de Políticas', 
 array()) ?></h1>
 
 <div id="sf_admin_header">
@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('fordefsubsubobj/edit_messages', array('fordefsubsubobj' => $fordefsubsubobj, 'labels' => $labels)) ?>
-<?php include_partial('fordefsubsubobj/edit_form', array('fordefsubsubobj' => $fordefsubsubobj, 'equilibrio' => $equilibrio, 'Subobjetivo' => $Subobjetivo, 'labels' => $labels)) ?>
+<?php include_partial('fordefsubsubobj/edit_form', array('fordefsubsubobj' => $fordefsubsubobj, 'equilibrio' => $equilibrio, 'subobjetivo' => $subobjetivo, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

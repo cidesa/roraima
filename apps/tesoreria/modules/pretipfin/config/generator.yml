@@ -4,18 +4,24 @@ generator:
     model_class:      Fortipfin
     theme:            default
     fields:
-      codfin: { name: Codigo del Financiamiento}
+      codfin: { name: Código}
       nomext: { name: Nombre Extendido}
       nomabr: { name: Nombre Abreviado}
-      
+
     list:
       title:          Tipos de Financiamiento
       filters:        [codfin]
       display:        [=codfin, nomext, nomabr]
+      sort:           codfin
       object_actions:
         _edit:        ~
         _delete:      ~
-      
+      max_per_page:   5
     edit:
-      title:          Edicion de Tipos de Financiamiento
+      title:          Edición de Tipos de Financiamiento
       display:        [=codfin, nomext, nomabr]
+      actions:
+        _list:        ~
+        _save:        ~
+        _create:      ~
+        _delete:      ~

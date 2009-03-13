@@ -307,14 +307,14 @@ abstract class BaseFcmodespPeer {
 	public static function doCountJoinFcesppub(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcmodespPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcmodespPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -389,7 +389,7 @@ abstract class BaseFcmodespPeer {
 		} else {
 			$criteria->addSelectColumn(FcmodespPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -425,25 +425,25 @@ abstract class BaseFcmodespPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcmodespPeer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = FcesppubPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -452,7 +452,7 @@ abstract class BaseFcmodespPeer {
 					$temp_obj2->addFcmodesp($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcmodesps();
 				$obj2->addFcmodesp($obj1);
@@ -486,6 +486,7 @@ abstract class BaseFcmodespPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcmodespPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

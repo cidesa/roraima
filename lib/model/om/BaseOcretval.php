@@ -41,148 +41,177 @@ abstract class BaseOcretval extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtip()
-	{
+  
+  public function getCodtip()
+  {
 
-		return $this->codtip; 		
-	}
-	
-	public function getCodcon()
-	{
+    return trim($this->codtip);
 
-		return $this->codcon; 		
-	}
-	
-	public function getNumval()
-	{
+  }
+  
+  public function getCodcon()
+  {
 
-		return $this->numval; 		
-	}
-	
-	public function getCodtipval()
-	{
+    return trim($this->codcon);
 
-		return $this->codtipval; 		
-	}
-	
-	public function getPorret()
-	{
+  }
+  
+  public function getNumval()
+  {
 
-		return number_format($this->porret,2,',','.');
-		
-	}
-	
-	public function getMonret()
-	{
+    return trim($this->numval);
 
-		return number_format($this->monret,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodtipval()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codtipval);
+
+  }
+  
+  public function getPorret($val=false)
+  {
+
+    if($val) return number_format($this->porret,2,',','.');
+    else return $this->porret;
+
+  }
+  
+  public function getMonret($val=false)
+  {
+
+    if($val) return number_format($this->monret,2,',','.');
+    else return $this->monret;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = OcretvalPeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = OcretvalPeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setCodcon($v)
 	{
 
-		if ($this->codcon !== $v) {
-			$this->codcon = $v;
-			$this->modifiedColumns[] = OcretvalPeer::CODCON;
-		}
-
+    if ($this->codcon !== $v) {
+        $this->codcon = $v;
+        $this->modifiedColumns[] = OcretvalPeer::CODCON;
+      }
+  
 	} 
 	
 	public function setNumval($v)
 	{
 
-		if ($this->numval !== $v) {
-			$this->numval = $v;
-			$this->modifiedColumns[] = OcretvalPeer::NUMVAL;
-		}
-
+    if ($this->numval !== $v) {
+        $this->numval = $v;
+        $this->modifiedColumns[] = OcretvalPeer::NUMVAL;
+      }
+  
 	} 
 	
 	public function setCodtipval($v)
 	{
 
-		if ($this->codtipval !== $v) {
-			$this->codtipval = $v;
-			$this->modifiedColumns[] = OcretvalPeer::CODTIPVAL;
-		}
-
+    if ($this->codtipval !== $v) {
+        $this->codtipval = $v;
+        $this->modifiedColumns[] = OcretvalPeer::CODTIPVAL;
+      }
+  
 	} 
 	
 	public function setPorret($v)
 	{
 
-		if ($this->porret !== $v) {
-			$this->porret = $v;
-			$this->modifiedColumns[] = OcretvalPeer::PORRET;
-		}
-
+    if ($this->porret !== $v) {
+        $this->porret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcretvalPeer::PORRET;
+      }
+  
 	} 
 	
 	public function setMonret($v)
 	{
 
-		if ($this->monret !== $v) {
-			$this->monret = $v;
-			$this->modifiedColumns[] = OcretvalPeer::MONRET;
-		}
-
+    if ($this->monret !== $v) {
+        $this->monret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OcretvalPeer::MONRET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcretvalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcretvalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtip = $rs->getString($startcol + 0);
+      $this->codtip = $rs->getString($startcol + 0);
 
-			$this->codcon = $rs->getString($startcol + 1);
+      $this->codcon = $rs->getString($startcol + 1);
 
-			$this->numval = $rs->getString($startcol + 2);
+      $this->numval = $rs->getString($startcol + 2);
 
-			$this->codtipval = $rs->getString($startcol + 3);
+      $this->codtipval = $rs->getString($startcol + 3);
 
-			$this->porret = $rs->getFloat($startcol + 4);
+      $this->porret = $rs->getFloat($startcol + 4);
 
-			$this->monret = $rs->getFloat($startcol + 5);
+      $this->monret = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocretval object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocretval object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +268,7 @@ abstract class BaseOcretval extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcretvalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcretvalPeer::doUpdate($this, $con);

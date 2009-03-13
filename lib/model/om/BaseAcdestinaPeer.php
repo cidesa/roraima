@@ -220,6 +220,7 @@ abstract class BaseAcdestinaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(AcdestinaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -13,7 +13,7 @@ abstract class BaseNpimppresocantPeer {
 	const CLASS_DEFAULT = 'lib.model.Npimppresocant';
 
 	
-	const NUM_COLUMNS = 18;
+	const NUM_COLUMNS = 26;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -71,6 +71,30 @@ abstract class BaseNpimppresocantPeer {
 	const ADEPRE = 'npimppresocant.ADEPRE';
 
 	
+	const DIASER = 'npimppresocant.DIASER';
+
+	
+	const MESSER = 'npimppresocant.MESSER';
+
+	
+	const DIATRA = 'npimppresocant.DIATRA';
+
+	
+	const MESTRA = 'npimppresocant.MESTRA';
+
+	
+	const ANOTRA = 'npimppresocant.ANOTRA';
+
+	
+	const STAPRE = 'npimppresocant.STAPRE';
+
+	
+	const ADEINT = 'npimppresocant.ADEINT';
+
+	
+	const ANTACU = 'npimppresocant.ANTACU';
+
+	
 	const ID = 'npimppresocant.ID';
 
 	
@@ -79,18 +103,18 @@ abstract class BaseNpimppresocantPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Feccor', 'Fecini', 'Fecfin', 'Salemp', 'Tasint', 'Capemp', 'Intdev', 'Antacum', 'Anoser', 'Adeant', 'Intacum', 'Diadif', 'Regpre', 'Diaart108', 'Valart108', 'Adepre', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpimppresocantPeer::CODEMP, NpimppresocantPeer::FECCOR, NpimppresocantPeer::FECINI, NpimppresocantPeer::FECFIN, NpimppresocantPeer::SALEMP, NpimppresocantPeer::TASINT, NpimppresocantPeer::CAPEMP, NpimppresocantPeer::INTDEV, NpimppresocantPeer::ANTACUM, NpimppresocantPeer::ANOSER, NpimppresocantPeer::ADEANT, NpimppresocantPeer::INTACUM, NpimppresocantPeer::DIADIF, NpimppresocantPeer::REGPRE, NpimppresocantPeer::DIAART108, NpimppresocantPeer::VALART108, NpimppresocantPeer::ADEPRE, NpimppresocantPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'feccor', 'fecini', 'fecfin', 'salemp', 'tasint', 'capemp', 'intdev', 'antacum', 'anoser', 'adeant', 'intacum', 'diadif', 'regpre', 'diaart108', 'valart108', 'adepre', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Feccor', 'Fecini', 'Fecfin', 'Salemp', 'Tasint', 'Capemp', 'Intdev', 'Antacum', 'Anoser', 'Adeant', 'Intacum', 'Diadif', 'Regpre', 'Diaart108', 'Valart108', 'Adepre', 'Diaser', 'Messer', 'Diatra', 'Mestra', 'Anotra', 'Stapre', 'Adeint', 'Antacu', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpimppresocantPeer::CODEMP, NpimppresocantPeer::FECCOR, NpimppresocantPeer::FECINI, NpimppresocantPeer::FECFIN, NpimppresocantPeer::SALEMP, NpimppresocantPeer::TASINT, NpimppresocantPeer::CAPEMP, NpimppresocantPeer::INTDEV, NpimppresocantPeer::ANTACUM, NpimppresocantPeer::ANOSER, NpimppresocantPeer::ADEANT, NpimppresocantPeer::INTACUM, NpimppresocantPeer::DIADIF, NpimppresocantPeer::REGPRE, NpimppresocantPeer::DIAART108, NpimppresocantPeer::VALART108, NpimppresocantPeer::ADEPRE, NpimppresocantPeer::DIASER, NpimppresocantPeer::MESSER, NpimppresocantPeer::DIATRA, NpimppresocantPeer::MESTRA, NpimppresocantPeer::ANOTRA, NpimppresocantPeer::STAPRE, NpimppresocantPeer::ADEINT, NpimppresocantPeer::ANTACU, NpimppresocantPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'feccor', 'fecini', 'fecfin', 'salemp', 'tasint', 'capemp', 'intdev', 'antacum', 'anoser', 'adeant', 'intacum', 'diadif', 'regpre', 'diaart108', 'valart108', 'adepre', 'diaser', 'messer', 'diatra', 'mestra', 'anotra', 'stapre', 'adeint', 'antacu', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Feccor' => 1, 'Fecini' => 2, 'Fecfin' => 3, 'Salemp' => 4, 'Tasint' => 5, 'Capemp' => 6, 'Intdev' => 7, 'Antacum' => 8, 'Anoser' => 9, 'Adeant' => 10, 'Intacum' => 11, 'Diadif' => 12, 'Regpre' => 13, 'Diaart108' => 14, 'Valart108' => 15, 'Adepre' => 16, 'Id' => 17, ),
-		BasePeer::TYPE_COLNAME => array (NpimppresocantPeer::CODEMP => 0, NpimppresocantPeer::FECCOR => 1, NpimppresocantPeer::FECINI => 2, NpimppresocantPeer::FECFIN => 3, NpimppresocantPeer::SALEMP => 4, NpimppresocantPeer::TASINT => 5, NpimppresocantPeer::CAPEMP => 6, NpimppresocantPeer::INTDEV => 7, NpimppresocantPeer::ANTACUM => 8, NpimppresocantPeer::ANOSER => 9, NpimppresocantPeer::ADEANT => 10, NpimppresocantPeer::INTACUM => 11, NpimppresocantPeer::DIADIF => 12, NpimppresocantPeer::REGPRE => 13, NpimppresocantPeer::DIAART108 => 14, NpimppresocantPeer::VALART108 => 15, NpimppresocantPeer::ADEPRE => 16, NpimppresocantPeer::ID => 17, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'feccor' => 1, 'fecini' => 2, 'fecfin' => 3, 'salemp' => 4, 'tasint' => 5, 'capemp' => 6, 'intdev' => 7, 'antacum' => 8, 'anoser' => 9, 'adeant' => 10, 'intacum' => 11, 'diadif' => 12, 'regpre' => 13, 'diaart108' => 14, 'valart108' => 15, 'adepre' => 16, 'id' => 17, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Feccor' => 1, 'Fecini' => 2, 'Fecfin' => 3, 'Salemp' => 4, 'Tasint' => 5, 'Capemp' => 6, 'Intdev' => 7, 'Antacum' => 8, 'Anoser' => 9, 'Adeant' => 10, 'Intacum' => 11, 'Diadif' => 12, 'Regpre' => 13, 'Diaart108' => 14, 'Valart108' => 15, 'Adepre' => 16, 'Diaser' => 17, 'Messer' => 18, 'Diatra' => 19, 'Mestra' => 20, 'Anotra' => 21, 'Stapre' => 22, 'Adeint' => 23, 'Antacu' => 24, 'Id' => 25, ),
+		BasePeer::TYPE_COLNAME => array (NpimppresocantPeer::CODEMP => 0, NpimppresocantPeer::FECCOR => 1, NpimppresocantPeer::FECINI => 2, NpimppresocantPeer::FECFIN => 3, NpimppresocantPeer::SALEMP => 4, NpimppresocantPeer::TASINT => 5, NpimppresocantPeer::CAPEMP => 6, NpimppresocantPeer::INTDEV => 7, NpimppresocantPeer::ANTACUM => 8, NpimppresocantPeer::ANOSER => 9, NpimppresocantPeer::ADEANT => 10, NpimppresocantPeer::INTACUM => 11, NpimppresocantPeer::DIADIF => 12, NpimppresocantPeer::REGPRE => 13, NpimppresocantPeer::DIAART108 => 14, NpimppresocantPeer::VALART108 => 15, NpimppresocantPeer::ADEPRE => 16, NpimppresocantPeer::DIASER => 17, NpimppresocantPeer::MESSER => 18, NpimppresocantPeer::DIATRA => 19, NpimppresocantPeer::MESTRA => 20, NpimppresocantPeer::ANOTRA => 21, NpimppresocantPeer::STAPRE => 22, NpimppresocantPeer::ADEINT => 23, NpimppresocantPeer::ANTACU => 24, NpimppresocantPeer::ID => 25, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'feccor' => 1, 'fecini' => 2, 'fecfin' => 3, 'salemp' => 4, 'tasint' => 5, 'capemp' => 6, 'intdev' => 7, 'antacum' => 8, 'anoser' => 9, 'adeant' => 10, 'intacum' => 11, 'diadif' => 12, 'regpre' => 13, 'diaart108' => 14, 'valart108' => 15, 'adepre' => 16, 'diaser' => 17, 'messer' => 18, 'diatra' => 19, 'mestra' => 20, 'anotra' => 21, 'stapre' => 22, 'adeint' => 23, 'antacu' => 24, 'id' => 25, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, )
 	);
 
 	
@@ -177,6 +201,22 @@ abstract class BaseNpimppresocantPeer {
 		$criteria->addSelectColumn(NpimppresocantPeer::VALART108);
 
 		$criteria->addSelectColumn(NpimppresocantPeer::ADEPRE);
+
+		$criteria->addSelectColumn(NpimppresocantPeer::DIASER);
+
+		$criteria->addSelectColumn(NpimppresocantPeer::MESSER);
+
+		$criteria->addSelectColumn(NpimppresocantPeer::DIATRA);
+
+		$criteria->addSelectColumn(NpimppresocantPeer::MESTRA);
+
+		$criteria->addSelectColumn(NpimppresocantPeer::ANOTRA);
+
+		$criteria->addSelectColumn(NpimppresocantPeer::STAPRE);
+
+		$criteria->addSelectColumn(NpimppresocantPeer::ADEINT);
+
+		$criteria->addSelectColumn(NpimppresocantPeer::ANTACU);
 
 		$criteria->addSelectColumn(NpimppresocantPeer::ID);
 
@@ -280,6 +320,7 @@ abstract class BaseNpimppresocantPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpimppresocantPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

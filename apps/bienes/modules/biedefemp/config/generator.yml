@@ -4,37 +4,42 @@ generator:
     model_class:      Bndefins
     theme:            default
     fields:
-      codins: { name: C&oacute;digo}
+      codins: { name: Código}
       nomins: { name: Nombre}
-      dirins: { name: Direcci&oacute;n}
-      telins: { name: Tel&eacute;fono}
+      dirins: { name: Dirección}
+      telins: { name: Telefono}
       faxins: { name: Fax}
       email: { name: Email}
       edoins: { name: Estado}
       munins: { name: Municipio}
       paqins: { name: Parroquia}
-      foract: { name: C&oacute;digo}
-      desact: { name: Descripci&oacute;n}  
+      foract: { name: Formato}
+      desact: { name: Descripción}
       lonact: { name: Longitud de Activo}
-      forubi: { name: C&oacute;digo}
-      desubi: { name: Descripci&oacute;n}
-      lonubi: { name: Longitud de Ubicaci&oacute;n}
-      fecper: { name: Per&iacute;odo}
+      forubi: { name: Formato}
+      desubi: { name: Descripción}
+      lonubi: { name: Longitud de Ubicación}
+      fecper: { name: Período}
       feceje: { name: Ejercicio}
-      coddes: { name: C&oacute;digo}
-      porrev: { name: Valor}   
-        
+      coddes: { name: Código}
+      porrev: { name: Valor}
+      corrmue: { name: Muebles}
+      corrinm: { name: Inmuebles}
+      corrsem: { name: Semovientes}
+
     list:
-      title:          Definici&oacute;n de Empresa     
-      display:        [codins, nomins]
+      title:          Definición de Empresa
+      display:        [=codins, nomins]
       fields:
         fecper: { params: date_format='dd/MM/yy' }
-        feceje: { params: date_format='dd/MM/yy' }        
+        feceje: { params: date_format='dd/MM/yy' }
       object_actions:
-        _edit:        ~     
+        _edit:        ~
     edit:
-      title:          Edici&oacute;n de Empresa
-      display:       [=codins, nomins, dirins, telins, faxins, email, edoins, munins, paqins, foract, desact, forubi, desubi, fecper, feceje, coddes, porrev]
+      title:          Edición de Empresa
+      display:       [codins, nomins, dirins, telins, faxins, email, edoins, munins, paqins, foract, desact, forubi, desubi, fecper, feceje, coddes, porrev, corrmue, corrinm, corrsem]
+      actions:
+        _save:        ~
       fields:
         fecper: { params: date_format='dd/MM/yy' }
-        feceje: { params: date_format='dd/MM/yy' } 
+        feceje: { params: date_format='dd/MM/yy' }

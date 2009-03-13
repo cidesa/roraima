@@ -235,6 +235,7 @@ abstract class BaseNpcalconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NpcalconPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

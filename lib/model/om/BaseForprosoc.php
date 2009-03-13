@@ -33,111 +33,138 @@ abstract class BaseForprosoc extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcat()
-	{
+  
+  public function getCodcat()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodpro()
-	{
+    return trim($this->codcat);
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodorg()
-	{
+  }
+  
+  public function getCodpro()
+  {
 
-		return $this->codorg; 		
-	}
-	
-	public function getTotasi()
-	{
+    return trim($this->codpro);
 
-		return number_format($this->totasi,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getCodorg()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->codorg);
+
+  }
+  
+  public function getTotasi($val=false)
+  {
+
+    if($val) return number_format($this->totasi,2,',','.');
+    else return $this->totasi;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = ForprosocPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = ForprosocPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = ForprosocPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = ForprosocPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodorg($v)
 	{
 
-		if ($this->codorg !== $v) {
-			$this->codorg = $v;
-			$this->modifiedColumns[] = ForprosocPeer::CODORG;
-		}
-
+    if ($this->codorg !== $v) {
+        $this->codorg = $v;
+        $this->modifiedColumns[] = ForprosocPeer::CODORG;
+      }
+  
 	} 
 	
 	public function setTotasi($v)
 	{
 
-		if ($this->totasi !== $v) {
-			$this->totasi = $v;
-			$this->modifiedColumns[] = ForprosocPeer::TOTASI;
-		}
-
+    if ($this->totasi !== $v) {
+        $this->totasi = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForprosocPeer::TOTASI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForprosocPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForprosocPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcat = $rs->getString($startcol + 0);
+      $this->codcat = $rs->getString($startcol + 0);
 
-			$this->codpro = $rs->getString($startcol + 1);
+      $this->codpro = $rs->getString($startcol + 1);
 
-			$this->codorg = $rs->getString($startcol + 2);
+      $this->codorg = $rs->getString($startcol + 2);
 
-			$this->totasi = $rs->getFloat($startcol + 3);
+      $this->totasi = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forprosoc object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forprosoc object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

@@ -1,0 +1,490 @@
+methods:
+  post:
+   - "fordefpry{codpro}"
+   - "fordefpry{codpryonapre}"
+   - "fordefpry{nompro}"
+   - "fordefpry{codprg}"
+   - "fordefpry{ubigeo}"
+   - "fordefpry{codemp}"
+   - "fordefpry{uniejepri}"
+   - "fordefpry{enupro}"
+   - "fordefpry{objestnueeta}"
+   - "fordefpry{objestins}"
+   - "fordefpry{objeesppro}"
+   - "fordefpry{objpndes}"
+   - "fordefpry{respro}"
+   - "fordefpry{unimedres}"
+   - "fordefpry{benpro}"
+   - "fordefpry{codsta}"
+   - "fordefpry{codsitpre}"
+   - "fordefpry{tieejeanopry}"
+   - "fordefpry{tieejemespry}"
+   - "fordefpry{codobjnvaeta}"
+   - "fordefpry{indsitact}"
+   - "fordefpry{sitobjdes}"
+   - "fordefpry{forind}"
+   - "fordefpry{fueind}"
+   - "fordefpry{indsitobj}"
+   - "fordefpry{cantmet}"
+   - "fordefpry{tieimpano}"
+   - "fordefpry{tieimpmes}"
+   - "fordefpry{nucdesend}"
+   - "fordefpry{zonecodes}"
+   - "fordefpry{comindust}"
+   - "fordefpry{uniadsemp}"
+   - "fordefpry{caremp}"
+   - "fordefpry{telemp}"
+   - "fordefpry{faxemp}"
+   - "fordefpry{emaemp}"
+   - "fordefpry{accinm}"
+   - "fordefpry{accdif}"
+   - "fordefpry{placontin}"
+   - "fordefpry{nroempdir}"
+   - "fordefpry{nroempind}"
+   - "fordefpry{desbrepry}"
+   - "fordefpry{poravafis}"
+   - "fordefpry{poravafin}"
+   - "fordefpry{montotpry}"
+   - "fordefpry{fecini}"
+   - "fordefpry{feccul}"
+   - "fordefpry{fecultdat}"
+
+names:
+  fordefpry{codpro}:
+    required:  Yes
+    required_msg: El Código del Proyecto o Acción Centralizada no puedo estar en Blanco.
+    validators: UniqueValidator
+
+  fordefpry{codpryonapre}:
+    required:  Yes
+    required_msg: El Código del Proyecto ONAPRE no puedo estar en Blanco.
+    validators: UniqueValidator
+
+  fordefpry{nompro}:
+    required:  No
+    validators: DescripcionValidator
+
+  fordefpry{codprg}:
+    required:  No
+    validators: ProgramaValidator
+
+  fordefpry{ubigeo}:
+    required:  No
+    validators: UbicacionValidator
+
+  fordefpry{codemp}:
+    required:  No
+    validators: ResponsableValidator
+
+  fordefpry{uniejepri}:
+    required:  No
+    validators: EjecutoraValidator
+
+  fordefpry{enupro}:
+    required:  No
+    validators: EnunciadoValidator
+
+  fordefpry{objestnueeta}:
+    required:  No
+    validators: NuevaEtapaValidator
+
+  fordefpry{objestins}:
+    required:  No
+    validators: InstitucionalValidator
+
+  fordefpry{objeesppro}:
+    required:  No
+    validators: ObjproyectoValidator
+
+  fordefpry{objpndes}:
+    required:  No
+    validators: PndesValidator
+
+  fordefpry{respro}:
+    required:  No
+    validators: ResultadoValidator
+
+  fordefpry{unimedres}:
+    required:  No
+    validators: MedidaValidator
+
+  fordefpry{benpro}:
+    required:  No
+    validators: BeneficiarioValidator
+
+  fordefpry{codsta}:
+    required:  No
+    validators: EstatusValidator
+
+  fordefpry{codsitpre}:
+    required:  No
+    validators: SituacionValidator
+
+  fordefpry{tieejeanopry}:
+    required:  No
+    validators: CorrelValidator
+
+  fordefpry{tieejemespry}:
+    required:  No
+    validators: CorrelValidator
+
+  fordefpry{codobjnvaeta}:
+    required:  No
+    required_msg: El Código Introducido no puedo estar en Blanco.
+    validators: ObjnuevoValidator
+
+  fordefpry{indsitact}:
+    required:  No
+    validators: IndicadorValidator
+
+  fordefpry{sitobjdes}:
+    required:  No
+    validators: SitObjValidator
+
+  fordefpry{forind}:
+    required:  No
+    validators: FormulaValidator
+
+  fordefpry{fueind}:
+    required:  No
+    validators: FuenteValidator
+
+  fordefpry{indsitobj}:
+    required:  No
+    validators: Indicador2Validator
+
+  fordefpry{cantmet}:
+    required:  No
+    validators: CorrelValidator
+
+  fordefpry{tieimpano}:
+    required:  No
+    validators: CorrelValidator
+
+  fordefpry{tieimpmes}:
+    required:  No
+    validators: CorrelValidator
+
+  fordefpry{nucdesend}:
+    required:  No
+    validators: GeneralValidator
+
+  fordefpry{zonecodes}:
+    required:  No
+    validators: GeneralValidator
+
+  fordefpry{comindust}:
+    required:  No
+    validators: General2Validator
+
+  fordefpry{uniadsemp}:
+    required:  No
+    validators: General2Validator
+
+  fordefpry{caremp}:
+    required:  No
+    validators: General2Validator
+
+  fordefpry{telemp}:
+    required:  No
+    validators: General3Validator
+
+  fordefpry{faxemp}:
+    required:  No
+    validators: General3Validator
+
+  fordefpry{emaemp}:
+    required:  No
+    validators: EmailValidator
+
+  fordefpry{accinm}:
+    required:  No
+    validators: General1Validator
+
+  fordefpry{accdif}:
+    required:  No
+    validators: General1Validator
+
+  fordefpry{placontin}:
+    required:  No
+    validators: General1Validator
+
+  fordefpry{nroempdir}:
+    required:  No
+    validators: CorrelValidator
+
+  fordefpry{nroempind}:
+    required:  No
+    validators: CorrelValidator
+
+  fordefpry{desbrepry}:
+    required:  No
+    validators: GeneralValidator
+
+  fordefpry{poravafis}:
+    required:  No
+    validators: CorrelValidator
+
+  fordefpry{poravafin}:
+    required:  No
+    validators: CorrelValidator
+
+  fordefpry{montotpry}:
+    required:  No
+    validators: MontoValidator, MyNumberValidator
+
+  fordefpry{fecini}:
+    required:  No
+    validators: FechaValidator
+
+  fordefpry{feccul}:
+    required:  No
+    validators: FechaValidator
+
+  fordefpry{fecultdat}:
+    required:  No
+    validators: FechaValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fordefpry
+        column:   codpro
+        unique_error:   El Código del Proyecto o Acción Centralizada ya existe. Por Favor, Cambiélo por otro.
+
+OnapreValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Codigo del Proyecto ONAPRE no puede tener menos de 2 carácteres
+        max:       10
+        max_error: El Codigo del Proyecto ONAPRE no puede tener más de 10 carácteres
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre del Proyecto no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: El Nombre del Proyecto no puede tener más de 1000 carácteres
+
+ProgramaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefprg
+        column:   codprg
+        unique_error:   El Código del Programa no existe.
+
+UbicacionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Ubicación Geográfica no puede tener menos de 2 carácteres
+        max:       250
+        max_error: La Ubicación Geográfica no puede tener más de 250 carácteres
+
+ResponsableValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Nphojint
+        column:   codemp
+        unique_error:   El Código del Responsable no existe.
+
+EjecutoraValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefcatpre
+        column:   codcat
+        unique_error:   El Código de la Unidad Ejecutora no existe.
+
+EnunciadoValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Enunciado del Problema no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: El Enunciado del Problema no puede tener más de 1000 carácteres
+
+NuevaEtapaValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Objetivo Estratégico Nueva Etapa no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: El Objetivo Estratégico Nueva Etapa no puede tener más de 1000 carácteres
+
+InstitucionalValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Objetivo Estratégico Institucional no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: El Objetivo Estratégico Institucional no puede tener más de 1000 carácteres
+
+ObjproyectoValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Objetivo Específico del Proyecto no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: El Objetivo Específico del Proyecto no puede tener más de 1000 carácteres
+
+PndesValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Objetivo PNDES no puede tener menos de 2 carácteres
+        max:       250
+        max_error: El Objetivo PNDES no puede tener más de 250 carácteres
+
+ResultadoValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Resultado del Proyecto no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: El Resultado del Proyecto no puede tener más de 1000 carácteres
+
+MedidaValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefunimed
+        column:   codunimed
+        unique_error:   El Código de la Unidad de Medida no existe.
+
+BeneficiarioValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Beneficiario no puede tener menos de 2 carácteres
+        max:       250
+        max_error: El Beneficiario no puede tener más de 250 carácteres
+
+EstatusValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefsta
+        column:   codsta
+        unique_error:   El Código del Estatus no existe.
+
+SituacionValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefsitpre
+        column:   codsitpre
+        unique_error:   El Código del Estatus no existe.
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: El valor introducido debe contener valores numericos y enteros
+
+ObjnuevoValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Fordefobjestnvaeta
+        column:   codobjnvaeta
+        unique_error:   El Código no existe.
+
+IndicadorValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Indicador de la Gestion no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: El Indicador de la Gestion no puede tener más de 1000 carácteres
+
+SitObjValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Campo no puede tener menos de 2 carácteres
+        max:       250
+        max_error: El Campo no puede tener más de 250 carácteres
+
+FormulaValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La formula no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: La formula no puede tener más de 1000 carácteres
+
+FuenteValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La fuente no puede tener menos de 2 carácteres
+        max:       100
+        max_error: La fuente no puede tener más de 100 carácteres
+
+Indicador2Validator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Indicador de la Gestion no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: El Indicador de la Gestion no puede tener más de 1000 carácteres
+
+GeneralValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El campo no puede tener menos de 2 carácteres
+        max:       1000
+        max_error: El campo  no puede tener más de 1000 carácteres
+
+General1Validator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El campo no puede tener menos de 2 carácteres
+        max:       250
+        max_error: El campo  no puede tener más de 250 carácteres
+
+General2Validator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El campo no puede tener menos de 2 carácteres
+        max:       100
+        max_error: El campo  no puede tener más de 100 carácteres
+
+General3Validator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El campo no puede tener menos de 2 carácteres
+        max:       30
+        max_error: El campo  no puede tener más de 30 carácteres
+
+EmailValidator:
+    class: sfEmailValidator
+    param:
+        strict:       true
+        email_error:  La Dirección del Email es Inválida.
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          000000000000000000.00
+        min_error:    El valor tiene que ser mayor que cero
+        max:          999999999999999999.99
+        max_error:    El valor debe contener maximo 999999999999999999.99

@@ -45,165 +45,195 @@ abstract class BaseForotrcrepre extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcat()
-	{
+  
+  public function getCodcat()
+  {
 
-		return $this->codcat; 		
-	}
-	
-	public function getCodparegr()
-	{
+    return trim($this->codcat);
 
-		return $this->codparegr; 		
-	}
-	
-	public function getMonpre()
-	{
+  }
+  
+  public function getCodparegr()
+  {
 
-		return number_format($this->monpre,2,',','.');
-		
-	}
-	
-	public function getCodtip()
-	{
+    return trim($this->codparegr);
 
-		return $this->codtip; 		
-	}
-	
-	public function getObserv()
-	{
+  }
+  
+  public function getMonpre($val=false)
+  {
 
-		return $this->observ; 		
-	}
-	
-	public function getNomparegr()
-	{
+    if($val) return number_format($this->monpre,2,',','.');
+    else return $this->monpre;
 
-		return $this->nomparegr; 		
-	}
-	
-	public function getCodpre()
-	{
+  }
+  
+  public function getCodtip()
+  {
 
-		return $this->codpre; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codtip);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getObserv()
+  {
+
+    return trim($this->observ);
+
+  }
+  
+  public function getNomparegr()
+  {
+
+    return trim($this->nomparegr);
+
+  }
+  
+  public function getCodpre()
+  {
+
+    return trim($this->codpre);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = ForotrcreprePeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = ForotrcreprePeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCodparegr($v)
 	{
 
-		if ($this->codparegr !== $v) {
-			$this->codparegr = $v;
-			$this->modifiedColumns[] = ForotrcreprePeer::CODPAREGR;
-		}
-
+    if ($this->codparegr !== $v) {
+        $this->codparegr = $v;
+        $this->modifiedColumns[] = ForotrcreprePeer::CODPAREGR;
+      }
+  
 	} 
 	
 	public function setMonpre($v)
 	{
 
-		if ($this->monpre !== $v) {
-			$this->monpre = $v;
-			$this->modifiedColumns[] = ForotrcreprePeer::MONPRE;
-		}
-
+    if ($this->monpre !== $v) {
+        $this->monpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForotrcreprePeer::MONPRE;
+      }
+  
 	} 
 	
 	public function setCodtip($v)
 	{
 
-		if ($this->codtip !== $v) {
-			$this->codtip = $v;
-			$this->modifiedColumns[] = ForotrcreprePeer::CODTIP;
-		}
-
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = ForotrcreprePeer::CODTIP;
+      }
+  
 	} 
 	
 	public function setObserv($v)
 	{
 
-		if ($this->observ !== $v) {
-			$this->observ = $v;
-			$this->modifiedColumns[] = ForotrcreprePeer::OBSERV;
-		}
-
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = ForotrcreprePeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setNomparegr($v)
 	{
 
-		if ($this->nomparegr !== $v) {
-			$this->nomparegr = $v;
-			$this->modifiedColumns[] = ForotrcreprePeer::NOMPAREGR;
-		}
-
+    if ($this->nomparegr !== $v) {
+        $this->nomparegr = $v;
+        $this->modifiedColumns[] = ForotrcreprePeer::NOMPAREGR;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = ForotrcreprePeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = ForotrcreprePeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForotrcreprePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForotrcreprePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcat = $rs->getString($startcol + 0);
+      $this->codcat = $rs->getString($startcol + 0);
 
-			$this->codparegr = $rs->getString($startcol + 1);
+      $this->codparegr = $rs->getString($startcol + 1);
 
-			$this->monpre = $rs->getFloat($startcol + 2);
+      $this->monpre = $rs->getFloat($startcol + 2);
 
-			$this->codtip = $rs->getString($startcol + 3);
+      $this->codtip = $rs->getString($startcol + 3);
 
-			$this->observ = $rs->getString($startcol + 4);
+      $this->observ = $rs->getString($startcol + 4);
 
-			$this->nomparegr = $rs->getString($startcol + 5);
+      $this->nomparegr = $rs->getString($startcol + 5);
 
-			$this->codpre = $rs->getString($startcol + 6);
+      $this->codpre = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Forotrcrepre object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Forotrcrepre object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

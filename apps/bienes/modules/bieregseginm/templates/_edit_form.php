@@ -9,25 +9,41 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($bnseginm, 'getId') ?>
+<?php use_helper('Javascript') ?>
+<?php use_helper('tabs') ?>
+<?php echo javascript_include_tag('dFilter') ?>
+<?php echo javascript_include_tag('tools','observe') ?>
+<?php echo javascript_include_tag('ajax') ?>
+<?php use_helper('Grid'); ?>
+<?php use_helper('PopUp') ?>
 
 <fieldset id="sf_fieldset_none" class="">
 
 <div class="form-row">
-  <?php echo label_for('bnseginm[codact]', __($labels['bnseginm{codact}']), 'class="required" ') ?>
+<table>
+<tr>
+<th>
+
+<?php echo label_for('bnseginm[codact]', __($labels['bnseginm{codact}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{codact}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{codact}')): ?>
     <?php echo form_error('bnseginm{codact}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnseginm, 'getCodact', array (
-  'size' => 30,
+ <?php $value = object_input_tag($bnseginm, 'getCodact', array (
+  'size' => 15,
   'control_name' => 'bnseginm[codact]',
-  )); echo $value ? $value : '&nbsp;' ?>&nbsp;&nbsp;<?php echo button_to('...','#') ?>
-    </div>
-</div>
+  'onKeypress' => "javascript:cadena=rayitas(this.value);document.getElementById('bnseginm_codact').value=cadena;",
+  'onKeyDown' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
 
-<div class="form-row">
-  <?php echo label_for('bnseginm[codmue]', __($labels['bnseginm{codmue}']), 'class="required" ') ?>
+)); echo $value ? $value : '&nbsp;' ?>
+
+  <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnreginm_Bieregseginm/clase/Bnreginm/frame/sf_admin_edit_form/obj1/bnseginm_codact/obj2/bnseginm_codmue/obj3/bnseginm_desinm/campo1/codact/campo2/codinm/campo3/desinm/param1/'); ?>
+</th>
+</div>
+<th></th>
+<th>
+<?php echo label_for('bnseginm[codmue]', __($labels['bnseginm{codmue}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{codmue}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{codmue}')): ?>
     <?php echo form_error('bnseginm{codmue}', array('class' => 'form-error-msg')) ?>
@@ -36,25 +52,54 @@
   <?php $value = object_input_tag($bnseginm, 'getCodmue', array (
   'size' => 20,
   'control_name' => 'bnseginm[codmue]',
-  )); echo $value ? $value : '&nbsp;' ?>&nbsp;&nbsp;<?php echo button_to('...','#') ?>
+  'onBlur'=> "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bnseginm_codmue').value=valor;document.getElementById('bnseginm_codmue').disabled=false; ".remote_function(array(
+  			'url'      => 'bieregseginm/ajax',
+  			'complete' => 'AjaxJSON(request, json)',
+  			'with' => "'ajax=4&cajtexmos=bnseginm_codact&cajtexcom=bnseginm_desinm&codigo='+this.value",
+       		)),
+  )); echo $value ? $value : '&nbsp;' ?>
+  <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnreginm_Bieregseginm1/clase/Bnreginm/frame/sf_admin_edit_form/obj1/bnseginm_codmue/obj2/bnseginm_codact/obj3/bnseginm_desinm/campo1/codinm/campo2/codact/campo3/desinm/param1/'); ?>
     </div>
-</div>
+</th>
+</tr>
+</table>
 
+<?php echo label_for('bnseginm[desinm]', __('Descripción'), 'class="required" ') ?>
+ <?php $value = object_input_tag($bnseginm, 'getDesinm', array (
+  'size' => 65,
+  'disabled' => true,
+  'control_name' => 'bnseginm[desinm]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+</fieldset>
+<br>
+<fieldset id="sf_fieldset_none" class="">
+<legend><?php echo __('Póliza de Seguro')?></legend>
 <div class="form-row">
-  <?php echo label_for('bnseginm[nroseginm]', __($labels['bnseginm{nroseginm}']), 'class="required" ') ?>
+<table>
+<tr>
+<th>
+<?php echo label_for('bnseginm[nroseginm]', __($labels['bnseginm{nroseginm}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{nroseginm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{nroseginm}')): ?>
     <?php echo form_error('bnseginm{nroseginm}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnseginm, 'getNroseginm', array (
-  'size' => 20,
-  'control_name' => 'bnseginm[nroseginm]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
 
-<div class="form-row">
+ <?php echo input_auto_complete_tag('bnseginm[nroseginm]', $bnseginm->getNroseginm(),
+    'bieregseginm/autocomplete?ajax=3', array('size' => 6, 'autocomplete' => 'off', 'onBlur'=> remote_function(array(
+      'url'      => 'bieregseginm/ajax',
+      'complete' => 'AjaxJSON(request, json)',
+          'script'   => true,
+       'with' => "'ajax=2&cajtexcom=bnseginm_nroseginm&codigo='+this.value"
+      ))),
+     array('use_style' => 'true')
+  )
+  ?>
+    </div>
+</th>
+<th></th>
+<th>
 <?php echo label_for('bnseginm[fecseginm]', __($labels['bnseginm{fecseginm}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{fecseginm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{fecseginm}')): ?>
@@ -65,11 +110,14 @@
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'bnseginm[fecseginm]',
-)); echo $value ? $value : '&nbsp;' ?>
+  'date_format' => 'dd/MM/yyyy',
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
+</th>
+</tr>
+</table>
+<br>
 <?php echo label_for('bnseginm[nomseginm]', __($labels['bnseginm{nomseginm}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{nomseginm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{nomseginm}')): ?>
@@ -81,37 +129,52 @@
   'control_name' => 'bnseginm[nomseginm]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
+    <br>
 
-<div class="form-row">
 <?php echo label_for('bnseginm[cobseginm]', __($labels['bnseginm{cobseginm}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{cobseginm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{cobseginm}')): ?>
     <?php echo form_error('bnseginm{cobseginm}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnseginm, 'getCobseginm', array (
-  'size' => 20,
-  'control_name' => 'bnseginm[cobseginm]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
 
-<div class="form-row">
+  <?php $value = object_input_tag($bnseginm,'getCobseginm', array (
+  'size' => 15,
+  'control_name' => 'bnseginm[cobseginm]',
+   'onBlur'=> "javascript: valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('bnseginm_cobseginm').value=valor;document.getElementById('bnseginm_cobseginm').disabled=false; ".remote_function(array(
+  			'url'      => 'bieregseginm/ajax',
+  			'complete' => 'AjaxJSON(request, json)',
+  			'with' => "'ajax=3&cajtexmos=bnseginm_descob&codigo='+this.value",
+       		)),
+)); echo $value ? $value : '&nbsp;' ?>
+
+
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bncobseg_Bieregseginm/clase/Bncobseg/frame/sf_admin_edit_form/obj1/bnseginm_cobseginm/obj2/bnseginm_descob/campo1/codcob/campo2/descob'); ?>
+    <?php $value = object_input_tag($bnseginm, 'getDescob', array (
+  'size' => 20,
+  'disabled' => true,
+  'control_name' => 'bnseginm[descob]',
+)); echo $value ? $value : '&nbsp;' ?>
+</div>
+<br><br>
+<table>
+<tr>
+<th>
 <?php echo label_for('bnseginm[monseginm]', __($labels['bnseginm{monseginm}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{monseginm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{monseginm}')): ?>
     <?php echo form_error('bnseginm{monseginm}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bnseginm, 'getMonseginm', array (
+  <?php $value = object_input_tag($bnseginm, array('getMonseginm',true), array (
   'size' => 7,
   'control_name' => 'bnseginm[monseginm]',
+  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
+  </div>
+</th>
+<th></th>
+<th>
 <?php echo label_for('bnseginm[fecsegven]', __($labels['bnseginm{fecsegven}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{fecsegven}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{fecsegven}')): ?>
@@ -122,11 +185,14 @@
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'bnseginm[fecsegven]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
+  'date_format' => 'dd/MM/yyyy',
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+),date ('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
 </div>
-
-<div class="form-row">
+</th>
+</tr>
+</table>
+<br>
 <?php echo label_for('bnseginm[proseginm]', __($labels['bnseginm{proseginm}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{proseginm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{proseginm}')): ?>
@@ -138,9 +204,7 @@
   'control_name' => 'bnseginm[proseginm]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
-
-<div class="form-row">
+    <br>
 <?php echo label_for('bnseginm[obsseginm]', __($labels['bnseginm{obsseginm}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{obsseginm}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bnseginm{obsseginm}')): ?>

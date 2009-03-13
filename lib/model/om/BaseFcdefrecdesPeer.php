@@ -205,6 +205,7 @@ abstract class BaseFcdefrecdesPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdefrecdesPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

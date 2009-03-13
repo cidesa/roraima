@@ -205,6 +205,7 @@ abstract class BaseFordefstaPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefstaPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class FortipfinMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FortipfinMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FortipfinMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fortipfin');
 		$tMap->setPhpName('Fortipfin');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fortipfin_SEQ');
 
 		$tMap->addColumn('CODFIN', 'Codfin', 'string', CreoleTypes::VARCHAR, true, 4);
 
@@ -42,13 +44,13 @@ class FortipfinMapBuilder {
 
 		$tMap->addColumn('TIPFIN', 'Tipfin', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('MONTOING', 'Montoing', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONTOING', 'Montoing', 'double', CreoleTypes::NUMERIC, false, 20);
 
-		$tMap->addColumn('MONTODIS', 'Montodis', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONTODIS', 'Montodis', 'double', CreoleTypes::NUMERIC, false, 20);
 
-		$tMap->addColumn('MONTODISAUX', 'Montodisaux', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONTODISAUX', 'Montodisaux', 'double', CreoleTypes::NUMERIC, false, 20);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

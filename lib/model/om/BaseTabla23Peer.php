@@ -230,6 +230,7 @@ abstract class BaseTabla23Peer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(Tabla23Peer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

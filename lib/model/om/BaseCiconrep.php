@@ -77,308 +77,346 @@ abstract class BaseCiconrep extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRifcon()
-	{
+  
+  public function getRifcon()
+  {
 
-		return $this->rifcon; 		
-	}
-	
-	public function getRepcon()
-	{
+    return trim($this->rifcon);
 
-		return $this->repcon; 		
-	}
-	
-	public function getNitcon()
-	{
+  }
+  
+  public function getRepcon()
+  {
 
-		return $this->nitcon; 		
-	}
-	
-	public function getNomcon()
-	{
+    return trim($this->repcon);
 
-		return $this->nomcon; 		
-	}
-	
-	public function getNaccon()
-	{
+  }
+  
+  public function getNitcon()
+  {
 
-		return $this->naccon; 		
-	}
-	
-	public function getDircon()
-	{
+    return trim($this->nitcon);
 
-		return $this->dircon; 		
-	}
-	
-	public function getCodpar()
-	{
+  }
+  
+  public function getNomcon()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getCiucon()
-	{
+    return trim($this->nomcon);
 
-		return $this->ciucon; 		
-	}
-	
-	public function getCpocon()
-	{
+  }
+  
+  public function getNaccon()
+  {
 
-		return $this->cpocon; 		
-	}
-	
-	public function getApocon()
-	{
+    return trim($this->naccon);
 
-		return $this->apocon; 		
-	}
-	
-	public function getTipcon()
-	{
+  }
+  
+  public function getDircon()
+  {
 
-		return $this->tipcon; 		
-	}
-	
-	public function getTelcon()
-	{
+    return trim($this->dircon);
 
-		return $this->telcon; 		
-	}
-	
-	public function getFaxcon()
-	{
+  }
+  
+  public function getCodpar()
+  {
 
-		return $this->faxcon; 		
-	}
-	
-	public function getEmacon()
-	{
+    return trim($this->codpar);
 
-		return $this->emacon; 		
-	}
-	
-	public function getUrlcon()
-	{
+  }
+  
+  public function getCiucon()
+  {
 
-		return $this->urlcon; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->ciucon);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCpocon()
+  {
+
+    return trim($this->cpocon);
+
+  }
+  
+  public function getApocon()
+  {
+
+    return trim($this->apocon);
+
+  }
+  
+  public function getTipcon()
+  {
+
+    return trim($this->tipcon);
+
+  }
+  
+  public function getTelcon()
+  {
+
+    return trim($this->telcon);
+
+  }
+  
+  public function getFaxcon()
+  {
+
+    return trim($this->faxcon);
+
+  }
+  
+  public function getEmacon()
+  {
+
+    return trim($this->emacon);
+
+  }
+  
+  public function getUrlcon()
+  {
+
+    return trim($this->urlcon);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRifcon($v)
 	{
 
-		if ($this->rifcon !== $v) {
-			$this->rifcon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::RIFCON;
-		}
-
+    if ($this->rifcon !== $v) {
+        $this->rifcon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::RIFCON;
+      }
+  
 	} 
 	
 	public function setRepcon($v)
 	{
 
-		if ($this->repcon !== $v) {
-			$this->repcon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::REPCON;
-		}
-
+    if ($this->repcon !== $v) {
+        $this->repcon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::REPCON;
+      }
+  
 	} 
 	
 	public function setNitcon($v)
 	{
 
-		if ($this->nitcon !== $v) {
-			$this->nitcon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::NITCON;
-		}
-
+    if ($this->nitcon !== $v) {
+        $this->nitcon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::NITCON;
+      }
+  
 	} 
 	
 	public function setNomcon($v)
 	{
 
-		if ($this->nomcon !== $v) {
-			$this->nomcon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::NOMCON;
-		}
-
+    if ($this->nomcon !== $v) {
+        $this->nomcon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::NOMCON;
+      }
+  
 	} 
 	
 	public function setNaccon($v)
 	{
 
-		if ($this->naccon !== $v) {
-			$this->naccon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::NACCON;
-		}
-
+    if ($this->naccon !== $v) {
+        $this->naccon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::NACCON;
+      }
+  
 	} 
 	
 	public function setDircon($v)
 	{
 
-		if ($this->dircon !== $v) {
-			$this->dircon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::DIRCON;
-		}
-
+    if ($this->dircon !== $v) {
+        $this->dircon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::DIRCON;
+      }
+  
 	} 
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = CiconrepPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = CiconrepPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setCiucon($v)
 	{
 
-		if ($this->ciucon !== $v) {
-			$this->ciucon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::CIUCON;
-		}
-
+    if ($this->ciucon !== $v) {
+        $this->ciucon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::CIUCON;
+      }
+  
 	} 
 	
 	public function setCpocon($v)
 	{
 
-		if ($this->cpocon !== $v) {
-			$this->cpocon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::CPOCON;
-		}
-
+    if ($this->cpocon !== $v) {
+        $this->cpocon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::CPOCON;
+      }
+  
 	} 
 	
 	public function setApocon($v)
 	{
 
-		if ($this->apocon !== $v) {
-			$this->apocon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::APOCON;
-		}
-
+    if ($this->apocon !== $v) {
+        $this->apocon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::APOCON;
+      }
+  
 	} 
 	
 	public function setTipcon($v)
 	{
 
-		if ($this->tipcon !== $v) {
-			$this->tipcon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::TIPCON;
-		}
-
+    if ($this->tipcon !== $v) {
+        $this->tipcon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::TIPCON;
+      }
+  
 	} 
 	
 	public function setTelcon($v)
 	{
 
-		if ($this->telcon !== $v) {
-			$this->telcon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::TELCON;
-		}
-
+    if ($this->telcon !== $v) {
+        $this->telcon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::TELCON;
+      }
+  
 	} 
 	
 	public function setFaxcon($v)
 	{
 
-		if ($this->faxcon !== $v) {
-			$this->faxcon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::FAXCON;
-		}
-
+    if ($this->faxcon !== $v) {
+        $this->faxcon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::FAXCON;
+      }
+  
 	} 
 	
 	public function setEmacon($v)
 	{
 
-		if ($this->emacon !== $v) {
-			$this->emacon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::EMACON;
-		}
-
+    if ($this->emacon !== $v) {
+        $this->emacon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::EMACON;
+      }
+  
 	} 
 	
 	public function setUrlcon($v)
 	{
 
-		if ($this->urlcon !== $v) {
-			$this->urlcon = $v;
-			$this->modifiedColumns[] = CiconrepPeer::URLCON;
-		}
-
+    if ($this->urlcon !== $v) {
+        $this->urlcon = $v;
+        $this->modifiedColumns[] = CiconrepPeer::URLCON;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CiconrepPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CiconrepPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->rifcon = $rs->getString($startcol + 0);
+      $this->rifcon = $rs->getString($startcol + 0);
 
-			$this->repcon = $rs->getString($startcol + 1);
+      $this->repcon = $rs->getString($startcol + 1);
 
-			$this->nitcon = $rs->getString($startcol + 2);
+      $this->nitcon = $rs->getString($startcol + 2);
 
-			$this->nomcon = $rs->getString($startcol + 3);
+      $this->nomcon = $rs->getString($startcol + 3);
 
-			$this->naccon = $rs->getString($startcol + 4);
+      $this->naccon = $rs->getString($startcol + 4);
 
-			$this->dircon = $rs->getString($startcol + 5);
+      $this->dircon = $rs->getString($startcol + 5);
 
-			$this->codpar = $rs->getString($startcol + 6);
+      $this->codpar = $rs->getString($startcol + 6);
 
-			$this->ciucon = $rs->getString($startcol + 7);
+      $this->ciucon = $rs->getString($startcol + 7);
 
-			$this->cpocon = $rs->getString($startcol + 8);
+      $this->cpocon = $rs->getString($startcol + 8);
 
-			$this->apocon = $rs->getString($startcol + 9);
+      $this->apocon = $rs->getString($startcol + 9);
 
-			$this->tipcon = $rs->getString($startcol + 10);
+      $this->tipcon = $rs->getString($startcol + 10);
 
-			$this->telcon = $rs->getString($startcol + 11);
+      $this->telcon = $rs->getString($startcol + 11);
 
-			$this->faxcon = $rs->getString($startcol + 12);
+      $this->faxcon = $rs->getString($startcol + 12);
 
-			$this->emacon = $rs->getString($startcol + 13);
+      $this->emacon = $rs->getString($startcol + 13);
 
-			$this->urlcon = $rs->getString($startcol + 14);
+      $this->urlcon = $rs->getString($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ciconrep object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ciconrep object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -435,6 +473,7 @@ abstract class BaseCiconrep extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CiconrepPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CiconrepPeer::doUpdate($this, $con);

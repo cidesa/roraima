@@ -1,0 +1,76 @@
+methods:
+  post:
+   - "ocdefper{cedper}"
+   - "ocdefper{telper}"
+   - "ocdefper{nomper}"
+   - "ocdefper{codtipper}"
+   - "ocdefper{codtipcar}"
+   - "ocdefper{codtippro}"
+
+names:
+  ocdefper{cedper}:
+    required:  Yes
+    required_msg: La Cedula no puede estar en Blanco.
+    validators: UniqueValidator
+
+  ocdefper{nomper}:
+    required:  Yes
+    required_msg: El Nombre no puede estar en Blanco
+    validators: DescripcionValidator
+
+  ocdefper{telper}:
+    required:  Yes
+    required_msg: El Telefono no puede estar en Blanco.
+
+  ocdefper{codtipcar}:
+    required:  Yes
+    required_msg: El Codigo del Cargo no puede estar en Blanco.
+    validators: ExistValidator
+
+  ocdefper{codtippro}:
+    required:  Yes
+    required_msg: El Codigo de la Profesion no puede estar en Blanco.
+    validators: ExistValidator2
+
+  ocdefper{codtipper}:
+    required:  Yes
+    required_msg: El Codigo de la Tipo de Personal no puede estar en Blanco.
+    validators: ExistValidator3
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ocdefper
+        column:       cedper
+        unique_error: La cedula ya existe. Por Favor, Cambiélo por otro.
+
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       254
+        max_error: El nombre no puede pasar mas de 254 caracteres
+
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Octipcar
+        column:       codtipcar
+        unique_error: El Código del Tipo de Cargo debe Existir.
+
+ExistValidator2:
+    class: CidesaExistValidator
+    param:
+        class:        Octippro
+        column:       codtippro
+        unique_error: El Código de la Profesion debe Existir.
+
+ExistValidator3:
+    class: CidesaExistValidator
+    param:
+        class:        Octipper
+        column:       codtipper
+        unique_error: El Código del Tipo de Profesión debe Existir.

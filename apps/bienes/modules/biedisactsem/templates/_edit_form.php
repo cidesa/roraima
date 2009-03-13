@@ -67,8 +67,9 @@
     <?php echo form_error('bndissem{motdissem}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($bndissem, 'getMotdissem', array (
+  <?php $value = object_input_tag($bndissem, array('getMotdissem',true), array (
   'size' => 50,
+    'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
   'control_name' => 'bndissem[motdissem]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>

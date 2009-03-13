@@ -29,92 +29,118 @@ abstract class BaseOctipval extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipval()
-	{
+  
+  public function getCodtipval()
+  {
 
-		return $this->codtipval; 		
-	}
-	
-	public function getDestipval()
-	{
+    return trim($this->codtipval);
 
-		return $this->destipval; 		
-	}
-	
-	public function getNomabr()
-	{
+  }
+  
+  public function getDestipval()
+  {
 
-		return $this->nomabr; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->destipval);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getNomabr()
+  {
+
+    return trim($this->nomabr);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipval($v)
 	{
 
-		if ($this->codtipval !== $v) {
-			$this->codtipval = $v;
-			$this->modifiedColumns[] = OctipvalPeer::CODTIPVAL;
-		}
-
+    if ($this->codtipval !== $v) {
+        $this->codtipval = $v;
+        $this->modifiedColumns[] = OctipvalPeer::CODTIPVAL;
+      }
+  
 	} 
 	
 	public function setDestipval($v)
 	{
 
-		if ($this->destipval !== $v) {
-			$this->destipval = $v;
-			$this->modifiedColumns[] = OctipvalPeer::DESTIPVAL;
-		}
-
+    if ($this->destipval !== $v) {
+        $this->destipval = $v;
+        $this->modifiedColumns[] = OctipvalPeer::DESTIPVAL;
+      }
+  
 	} 
 	
 	public function setNomabr($v)
 	{
 
-		if ($this->nomabr !== $v) {
-			$this->nomabr = $v;
-			$this->modifiedColumns[] = OctipvalPeer::NOMABR;
-		}
-
+    if ($this->nomabr !== $v) {
+        $this->nomabr = $v;
+        $this->modifiedColumns[] = OctipvalPeer::NOMABR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OctipvalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OctipvalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipval = $rs->getString($startcol + 0);
+      $this->codtipval = $rs->getString($startcol + 0);
 
-			$this->destipval = $rs->getString($startcol + 1);
+      $this->destipval = $rs->getString($startcol + 1);
 
-			$this->nomabr = $rs->getString($startcol + 2);
+      $this->nomabr = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Octipval object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Octipval object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseOctipval extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OctipvalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OctipvalPeer::doUpdate($this, $con);

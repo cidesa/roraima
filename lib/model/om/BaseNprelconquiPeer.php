@@ -250,6 +250,7 @@ abstract class BaseNprelconquiPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NprelconquiPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

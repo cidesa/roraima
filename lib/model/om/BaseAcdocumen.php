@@ -49,205 +49,235 @@ abstract class BaseAcdocumen extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getDocate()
-	{
+  
+  public function getDocate()
+  {
 
-		return $this->docate; 		
-	}
-	
-	public function getTipdoc()
-	{
+    return trim($this->docate);
 
-		return $this->tipdoc; 		
-	}
-	
-	public function getAsudoc()
-	{
+  }
+  
+  public function getTipdoc()
+  {
 
-		return $this->asudoc; 		
-	}
-	
-	public function getFecdoc($format = 'Y-m-d')
-	{
+    return trim($this->tipdoc);
 
-		if ($this->fecdoc === null || $this->fecdoc === '') {
-			return null;
-		} elseif (!is_int($this->fecdoc)) {
-						$ts = strtotime($this->fecdoc);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdoc] as date/time value: " . var_export($this->fecdoc, true));
-			}
-		} else {
-			$ts = $this->fecdoc;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getAsudoc()
+  {
 
-	
-	public function getCedrif()
-	{
+    return trim($this->asudoc);
 
-		return $this->cedrif; 		
-	}
-	
-	public function getStadoc()
-	{
+  }
+  
+  public function getFecdoc($format = 'Y-m-d')
+  {
 
-		return $this->stadoc; 		
-	}
-	
-	public function getNomarc()
-	{
+    if ($this->fecdoc === null || $this->fecdoc === '') {
+      return null;
+    } elseif (!is_int($this->fecdoc)) {
+            $ts = adodb_strtotime($this->fecdoc);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdoc] as date/time value: " . var_export($this->fecdoc, true));
+      }
+    } else {
+      $ts = $this->fecdoc;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->nomarc; 		
-	}
-	
-	public function getContent()
-	{
+  
+  public function getCedrif()
+  {
 
-		return $this->content; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->cedrif);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getStadoc()
+  {
+
+    return trim($this->stadoc);
+
+  }
+  
+  public function getNomarc()
+  {
+
+    return trim($this->nomarc);
+
+  }
+  
+  public function getContent()
+  {
+
+    return trim($this->content);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setDocate($v)
 	{
 
-		if ($this->docate !== $v) {
-			$this->docate = $v;
-			$this->modifiedColumns[] = AcdocumenPeer::DOCATE;
-		}
-
+    if ($this->docate !== $v) {
+        $this->docate = $v;
+        $this->modifiedColumns[] = AcdocumenPeer::DOCATE;
+      }
+  
 	} 
 	
 	public function setTipdoc($v)
 	{
 
-		if ($this->tipdoc !== $v) {
-			$this->tipdoc = $v;
-			$this->modifiedColumns[] = AcdocumenPeer::TIPDOC;
-		}
-
+    if ($this->tipdoc !== $v) {
+        $this->tipdoc = $v;
+        $this->modifiedColumns[] = AcdocumenPeer::TIPDOC;
+      }
+  
 	} 
 	
 	public function setAsudoc($v)
 	{
 
-		if ($this->asudoc !== $v) {
-			$this->asudoc = $v;
-			$this->modifiedColumns[] = AcdocumenPeer::ASUDOC;
-		}
-
+    if ($this->asudoc !== $v) {
+        $this->asudoc = $v;
+        $this->modifiedColumns[] = AcdocumenPeer::ASUDOC;
+      }
+  
 	} 
 	
 	public function setFecdoc($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdoc] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdoc !== $ts) {
-			$this->fecdoc = $ts;
-			$this->modifiedColumns[] = AcdocumenPeer::FECDOC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdoc] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdoc !== $ts) {
+      $this->fecdoc = $ts;
+      $this->modifiedColumns[] = AcdocumenPeer::FECDOC;
+    }
 
 	} 
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = AcdocumenPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = AcdocumenPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setStadoc($v)
 	{
 
-		if ($this->stadoc !== $v) {
-			$this->stadoc = $v;
-			$this->modifiedColumns[] = AcdocumenPeer::STADOC;
-		}
-
+    if ($this->stadoc !== $v) {
+        $this->stadoc = $v;
+        $this->modifiedColumns[] = AcdocumenPeer::STADOC;
+      }
+  
 	} 
 	
 	public function setNomarc($v)
 	{
 
-		if ($this->nomarc !== $v) {
-			$this->nomarc = $v;
-			$this->modifiedColumns[] = AcdocumenPeer::NOMARC;
-		}
-
+    if ($this->nomarc !== $v) {
+        $this->nomarc = $v;
+        $this->modifiedColumns[] = AcdocumenPeer::NOMARC;
+      }
+  
 	} 
 	
 	public function setContent($v)
 	{
 
-		if ($this->content !== $v) {
-			$this->content = $v;
-			$this->modifiedColumns[] = AcdocumenPeer::CONTENT;
-		}
-
+    if ($this->content !== $v) {
+        $this->content = $v;
+        $this->modifiedColumns[] = AcdocumenPeer::CONTENT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = AcdocumenPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = AcdocumenPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->docate = $rs->getString($startcol + 0);
+      $this->docate = $rs->getString($startcol + 0);
 
-			$this->tipdoc = $rs->getString($startcol + 1);
+      $this->tipdoc = $rs->getString($startcol + 1);
 
-			$this->asudoc = $rs->getString($startcol + 2);
+      $this->asudoc = $rs->getString($startcol + 2);
 
-			$this->fecdoc = $rs->getDate($startcol + 3, null);
+      $this->fecdoc = $rs->getDate($startcol + 3, null);
 
-			$this->cedrif = $rs->getString($startcol + 4);
+      $this->cedrif = $rs->getString($startcol + 4);
 
-			$this->stadoc = $rs->getString($startcol + 5);
+      $this->stadoc = $rs->getString($startcol + 5);
 
-			$this->nomarc = $rs->getString($startcol + 6);
+      $this->nomarc = $rs->getString($startcol + 6);
 
-			$this->content = $rs->getString($startcol + 7);
+      $this->content = $rs->getString($startcol + 7);
 
-			$this->id = $rs->getInt($startcol + 8);
+      $this->id = $rs->getInt($startcol + 8);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 9; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Acdocumen object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 9; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Acdocumen object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)

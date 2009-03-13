@@ -225,6 +225,7 @@ abstract class BaseOpdetautPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpdetautPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

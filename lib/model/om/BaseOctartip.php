@@ -37,131 +37,159 @@ abstract class BaseOctartip extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getExppro()
-	{
+  
+  public function getExppro($val=false)
+  {
 
-		return number_format($this->exppro,2,',','.');
-		
-	}
-	
-	public function getValhor()
-	{
+    if($val) return number_format($this->exppro,2,',','.');
+    else return $this->exppro;
 
-		return number_format($this->valhor,2,',','.');
-		
-	}
-	
-	public function getNumniv()
-	{
+  }
+  
+  public function getValhor($val=false)
+  {
 
-		return number_format($this->numniv,2,',','.');
-		
-	}
-	
-	public function getCodtippro()
-	{
+    if($val) return number_format($this->valhor,2,',','.');
+    else return $this->valhor;
 
-		return $this->codtippro; 		
-	}
-	
-	public function getNivpro()
-	{
+  }
+  
+  public function getNumniv($val=false)
+  {
 
-		return $this->nivpro; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->numniv,2,',','.');
+    else return $this->numniv;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodtippro()
+  {
+
+    return trim($this->codtippro);
+
+  }
+  
+  public function getNivpro()
+  {
+
+    return trim($this->nivpro);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setExppro($v)
 	{
 
-		if ($this->exppro !== $v) {
-			$this->exppro = $v;
-			$this->modifiedColumns[] = OctartipPeer::EXPPRO;
-		}
-
+    if ($this->exppro !== $v) {
+        $this->exppro = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OctartipPeer::EXPPRO;
+      }
+  
 	} 
 	
 	public function setValhor($v)
 	{
 
-		if ($this->valhor !== $v) {
-			$this->valhor = $v;
-			$this->modifiedColumns[] = OctartipPeer::VALHOR;
-		}
-
+    if ($this->valhor !== $v) {
+        $this->valhor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OctartipPeer::VALHOR;
+      }
+  
 	} 
 	
 	public function setNumniv($v)
 	{
 
-		if ($this->numniv !== $v) {
-			$this->numniv = $v;
-			$this->modifiedColumns[] = OctartipPeer::NUMNIV;
-		}
-
+    if ($this->numniv !== $v) {
+        $this->numniv = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = OctartipPeer::NUMNIV;
+      }
+  
 	} 
 	
 	public function setCodtippro($v)
 	{
 
-		if ($this->codtippro !== $v) {
-			$this->codtippro = $v;
-			$this->modifiedColumns[] = OctartipPeer::CODTIPPRO;
-		}
-
+    if ($this->codtippro !== $v) {
+        $this->codtippro = $v;
+        $this->modifiedColumns[] = OctartipPeer::CODTIPPRO;
+      }
+  
 	} 
 	
 	public function setNivpro($v)
 	{
 
-		if ($this->nivpro !== $v) {
-			$this->nivpro = $v;
-			$this->modifiedColumns[] = OctartipPeer::NIVPRO;
-		}
-
+    if ($this->nivpro !== $v) {
+        $this->nivpro = $v;
+        $this->modifiedColumns[] = OctartipPeer::NIVPRO;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OctartipPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OctartipPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->exppro = $rs->getFloat($startcol + 0);
+      $this->exppro = $rs->getFloat($startcol + 0);
 
-			$this->valhor = $rs->getFloat($startcol + 1);
+      $this->valhor = $rs->getFloat($startcol + 1);
 
-			$this->numniv = $rs->getFloat($startcol + 2);
+      $this->numniv = $rs->getFloat($startcol + 2);
 
-			$this->codtippro = $rs->getString($startcol + 3);
+      $this->codtippro = $rs->getString($startcol + 3);
 
-			$this->nivpro = $rs->getString($startcol + 4);
+      $this->nivpro = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Octartip object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Octartip object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -218,6 +246,7 @@ abstract class BaseOctartip extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OctartipPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OctartipPeer::doUpdate($this, $con);

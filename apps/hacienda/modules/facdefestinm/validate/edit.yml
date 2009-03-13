@@ -1,0 +1,12 @@
+methods:
+  post:
+   - "fcestinm{codestinm}"
+   - "fcestinm{desestinm}"
+names:
+  fcestinm{codestinm}:
+    required:  Yes
+    required_msg: Código es un campo requerido
+
+  fcestinm{desestinm}:
+    required:  Yes
+    required_msg: La Descripción es un campo requerido

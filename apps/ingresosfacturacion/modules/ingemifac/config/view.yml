@@ -1,0 +1,14 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Ingresos
+    robots:       index, follow
+    description:  Módulo Ingresos
+    keywords:     Módulo Ingresos
+    language:     en
+
+  stylesheets:    [main, general]
+
+  javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype, tools, observe, ajax, ingresosfacturacion/ingresosfacturacion]

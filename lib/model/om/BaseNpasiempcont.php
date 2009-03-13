@@ -37,151 +37,178 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipcon()
-	{
+  
+  public function getCodtipcon()
+  {
 
-		return $this->codtipcon; 		
-	}
-	
-	public function getCodnom()
-	{
+    return trim($this->codtipcon);
 
-		return $this->codnom; 		
-	}
-	
-	public function getCodemp()
-	{
+  }
+  
+  public function getCodnom()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getNomemp()
-	{
+    return trim($this->codnom);
 
-		return $this->nomemp; 		
-	}
-	
-	public function getFeccal($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCodemp()
+  {
 
-		if ($this->feccal === null || $this->feccal === '') {
-			return null;
-		} elseif (!is_int($this->feccal)) {
-						$ts = strtotime($this->feccal);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccal] as date/time value: " . var_export($this->feccal, true));
-			}
-		} else {
-			$ts = $this->feccal;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->codemp);
 
-	
-	public function getId()
-	{
+  }
+  
+  public function getNomemp()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->nomemp);
+
+  }
+  
+  public function getFeccal($format = 'Y-m-d')
+  {
+
+    if ($this->feccal === null || $this->feccal === '') {
+      return null;
+    } elseif (!is_int($this->feccal)) {
+            $ts = adodb_strtotime($this->feccal);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccal] as date/time value: " . var_export($this->feccal, true));
+      }
+    } else {
+      $ts = $this->feccal;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipcon($v)
 	{
 
-		if ($this->codtipcon !== $v) {
-			$this->codtipcon = $v;
-			$this->modifiedColumns[] = NpasiempcontPeer::CODTIPCON;
-		}
-
+    if ($this->codtipcon !== $v) {
+        $this->codtipcon = $v;
+        $this->modifiedColumns[] = NpasiempcontPeer::CODTIPCON;
+      }
+  
 	} 
 	
 	public function setCodnom($v)
 	{
 
-		if ($this->codnom !== $v) {
-			$this->codnom = $v;
-			$this->modifiedColumns[] = NpasiempcontPeer::CODNOM;
-		}
-
+    if ($this->codnom !== $v) {
+        $this->codnom = $v;
+        $this->modifiedColumns[] = NpasiempcontPeer::CODNOM;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpasiempcontPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpasiempcontPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = NpasiempcontPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = NpasiempcontPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setFeccal($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccal] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccal !== $ts) {
-			$this->feccal = $ts;
-			$this->modifiedColumns[] = NpasiempcontPeer::FECCAL;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccal] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccal !== $ts) {
+      $this->feccal = $ts;
+      $this->modifiedColumns[] = NpasiempcontPeer::FECCAL;
+    }
 
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpasiempcontPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpasiempcontPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipcon = $rs->getString($startcol + 0);
+      $this->codtipcon = $rs->getString($startcol + 0);
 
-			$this->codnom = $rs->getString($startcol + 1);
+      $this->codnom = $rs->getString($startcol + 1);
 
-			$this->codemp = $rs->getString($startcol + 2);
+      $this->codemp = $rs->getString($startcol + 2);
 
-			$this->nomemp = $rs->getString($startcol + 3);
+      $this->nomemp = $rs->getString($startcol + 3);
 
-			$this->feccal = $rs->getDate($startcol + 4, null);
+      $this->feccal = $rs->getDate($startcol + 4, null);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npasiempcont object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npasiempcont object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -238,6 +265,7 @@ abstract class BaseNpasiempcont extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpasiempcontPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpasiempcontPeer::doUpdate($this, $con);

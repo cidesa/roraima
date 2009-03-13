@@ -7,19 +7,27 @@ generator:
       cedper:       { name: Cédula}
       nomper:       { name: Nombres y Apellidos}
       telper:       { name: Teléfono(s)}
+      codtipper:    { name: Tipo }
+      destipper:    { name: Descripción}
       codtipcar:    { name: Cargo }
-      destipcar:    { name: Descripción}       
+      destipcar:    { name: Descripción}
       codtippro:    { name: Profesión}
-      destippro:    { name: Descripción}            
-     
+      destippro:    { name: Descripción}
+
     list:
-      title:          Definición de Empleados
-      filters:        [cedper]
-      display:        [cedper, nomper]
+      title:          Personal
+      filters:        [cedper, nomper, codtipper, codtipcar, codtippro]
+      display:        [=cedper, nomper]
+      sort: cedper
       object_actions:
         _edit:        ~
         _delete:      ~
-      max_per_page:   5
+      max_per_page:   10
     edit:
-      title:          Definición de Empleados
-      display:        [cedper, nomper, telper, codtipcar, destipcar, codtippro, destippro]
+      title:          Edición de Personal
+      display:        [cedper, nomper, telper, codtipper, destipper, codtipcar, destipcar, codtippro, destippro]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

@@ -41,169 +41,197 @@ abstract class BaseOcobrfot extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodobr()
-	{
+  
+  public function getCodobr()
+  {
 
-		return $this->codobr; 		
-	}
-	
-	public function getNumfot()
-	{
+    return trim($this->codobr);
 
-		return $this->numfot; 		
-	}
-	
-	public function getAngfot()
-	{
+  }
+  
+  public function getNumfot()
+  {
 
-		return $this->angfot; 		
-	}
-	
-	public function getDesfot()
-	{
+    return trim($this->numfot);
 
-		return $this->desfot; 		
-	}
-	
-	public function getFecfot($format = 'Y-m-d')
-	{
+  }
+  
+  public function getAngfot()
+  {
 
-		if ($this->fecfot === null || $this->fecfot === '') {
-			return null;
-		} elseif (!is_int($this->fecfot)) {
-						$ts = strtotime($this->fecfot);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecfot] as date/time value: " . var_export($this->fecfot, true));
-			}
-		} else {
-			$ts = $this->fecfot;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->angfot);
 
-	
-	public function getRutfot()
-	{
+  }
+  
+  public function getDesfot()
+  {
 
-		return $this->rutfot; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desfot);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFecfot($format = 'Y-m-d')
+  {
+
+    if ($this->fecfot === null || $this->fecfot === '') {
+      return null;
+    } elseif (!is_int($this->fecfot)) {
+            $ts = adodb_strtotime($this->fecfot);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecfot] as date/time value: " . var_export($this->fecfot, true));
+      }
+    } else {
+      $ts = $this->fecfot;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getRutfot()
+  {
+
+    return trim($this->rutfot);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodobr($v)
 	{
 
-		if ($this->codobr !== $v) {
-			$this->codobr = $v;
-			$this->modifiedColumns[] = OcobrfotPeer::CODOBR;
-		}
-
+    if ($this->codobr !== $v) {
+        $this->codobr = $v;
+        $this->modifiedColumns[] = OcobrfotPeer::CODOBR;
+      }
+  
 	} 
 	
 	public function setNumfot($v)
 	{
 
-		if ($this->numfot !== $v) {
-			$this->numfot = $v;
-			$this->modifiedColumns[] = OcobrfotPeer::NUMFOT;
-		}
-
+    if ($this->numfot !== $v) {
+        $this->numfot = $v;
+        $this->modifiedColumns[] = OcobrfotPeer::NUMFOT;
+      }
+  
 	} 
 	
 	public function setAngfot($v)
 	{
 
-		if ($this->angfot !== $v) {
-			$this->angfot = $v;
-			$this->modifiedColumns[] = OcobrfotPeer::ANGFOT;
-		}
-
+    if ($this->angfot !== $v) {
+        $this->angfot = $v;
+        $this->modifiedColumns[] = OcobrfotPeer::ANGFOT;
+      }
+  
 	} 
 	
 	public function setDesfot($v)
 	{
 
-		if ($this->desfot !== $v) {
-			$this->desfot = $v;
-			$this->modifiedColumns[] = OcobrfotPeer::DESFOT;
-		}
-
+    if ($this->desfot !== $v) {
+        $this->desfot = $v;
+        $this->modifiedColumns[] = OcobrfotPeer::DESFOT;
+      }
+  
 	} 
 	
 	public function setFecfot($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecfot] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecfot !== $ts) {
-			$this->fecfot = $ts;
-			$this->modifiedColumns[] = OcobrfotPeer::FECFOT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecfot] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecfot !== $ts) {
+      $this->fecfot = $ts;
+      $this->modifiedColumns[] = OcobrfotPeer::FECFOT;
+    }
 
 	} 
 	
 	public function setRutfot($v)
 	{
 
-		if ($this->rutfot !== $v) {
-			$this->rutfot = $v;
-			$this->modifiedColumns[] = OcobrfotPeer::RUTFOT;
-		}
-
+    if ($this->rutfot !== $v) {
+        $this->rutfot = $v;
+        $this->modifiedColumns[] = OcobrfotPeer::RUTFOT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcobrfotPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcobrfotPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codobr = $rs->getString($startcol + 0);
+      $this->codobr = $rs->getString($startcol + 0);
 
-			$this->numfot = $rs->getString($startcol + 1);
+      $this->numfot = $rs->getString($startcol + 1);
 
-			$this->angfot = $rs->getString($startcol + 2);
+      $this->angfot = $rs->getString($startcol + 2);
 
-			$this->desfot = $rs->getString($startcol + 3);
+      $this->desfot = $rs->getString($startcol + 3);
 
-			$this->fecfot = $rs->getDate($startcol + 4, null);
+      $this->fecfot = $rs->getDate($startcol + 4, null);
 
-			$this->rutfot = $rs->getString($startcol + 5);
+      $this->rutfot = $rs->getString($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocobrfot object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocobrfot object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -260,6 +288,7 @@ abstract class BaseOcobrfot extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcobrfotPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcobrfotPeer::doUpdate($this, $con);

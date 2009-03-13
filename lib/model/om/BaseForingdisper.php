@@ -33,112 +33,139 @@ abstract class BaseForingdisper extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpar()
-	{
+  
+  public function getCodpar()
+  {
 
-		return $this->codpar; 		
-	}
-	
-	public function getPerpar()
-	{
+    return trim($this->codpar);
 
-		return $this->perpar; 		
-	}
-	
-	public function getMonpar()
-	{
+  }
+  
+  public function getPerpar()
+  {
 
-		return number_format($this->monpar,2,',','.');
-		
-	}
-	
-	public function getPorper()
-	{
+    return trim($this->perpar);
 
-		return number_format($this->porper,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonpar($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monpar,2,',','.');
+    else return $this->monpar;
+
+  }
+  
+  public function getPorper($val=false)
+  {
+
+    if($val) return number_format($this->porper,2,',','.');
+    else return $this->porper;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpar($v)
 	{
 
-		if ($this->codpar !== $v) {
-			$this->codpar = $v;
-			$this->modifiedColumns[] = ForingdisperPeer::CODPAR;
-		}
-
+    if ($this->codpar !== $v) {
+        $this->codpar = $v;
+        $this->modifiedColumns[] = ForingdisperPeer::CODPAR;
+      }
+  
 	} 
 	
 	public function setPerpar($v)
 	{
 
-		if ($this->perpar !== $v) {
-			$this->perpar = $v;
-			$this->modifiedColumns[] = ForingdisperPeer::PERPAR;
-		}
-
+    if ($this->perpar !== $v) {
+        $this->perpar = $v;
+        $this->modifiedColumns[] = ForingdisperPeer::PERPAR;
+      }
+  
 	} 
 	
 	public function setMonpar($v)
 	{
 
-		if ($this->monpar !== $v) {
-			$this->monpar = $v;
-			$this->modifiedColumns[] = ForingdisperPeer::MONPAR;
-		}
-
+    if ($this->monpar !== $v) {
+        $this->monpar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForingdisperPeer::MONPAR;
+      }
+  
 	} 
 	
 	public function setPorper($v)
 	{
 
-		if ($this->porper !== $v) {
-			$this->porper = $v;
-			$this->modifiedColumns[] = ForingdisperPeer::PORPER;
-		}
-
+    if ($this->porper !== $v) {
+        $this->porper = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForingdisperPeer::PORPER;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = ForingdisperPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = ForingdisperPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpar = $rs->getString($startcol + 0);
+      $this->codpar = $rs->getString($startcol + 0);
 
-			$this->perpar = $rs->getString($startcol + 1);
+      $this->perpar = $rs->getString($startcol + 1);
 
-			$this->monpar = $rs->getFloat($startcol + 2);
+      $this->monpar = $rs->getFloat($startcol + 2);
 
-			$this->porper = $rs->getFloat($startcol + 3);
+      $this->porper = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Foringdisper object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Foringdisper object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -195,6 +222,7 @@ abstract class BaseForingdisper extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForingdisperPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForingdisperPeer::doUpdate($this, $con);

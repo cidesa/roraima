@@ -29,94 +29,120 @@ abstract class BaseNpperxdis extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getPerini()
-	{
+    return trim($this->codemp);
 
-		return number_format($this->perini,2,',','.');
-		
-	}
-	
-	public function getPerfin()
-	{
+  }
+  
+  public function getPerini($val=false)
+  {
 
-		return number_format($this->perfin,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->perini,2,',','.');
+    else return $this->perini;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getPerfin($val=false)
+  {
+
+    if($val) return number_format($this->perfin,2,',','.');
+    else return $this->perfin;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpperxdisPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpperxdisPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setPerini($v)
 	{
 
-		if ($this->perini !== $v) {
-			$this->perini = $v;
-			$this->modifiedColumns[] = NpperxdisPeer::PERINI;
-		}
-
+    if ($this->perini !== $v) {
+        $this->perini = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpperxdisPeer::PERINI;
+      }
+  
 	} 
 	
 	public function setPerfin($v)
 	{
 
-		if ($this->perfin !== $v) {
-			$this->perfin = $v;
-			$this->modifiedColumns[] = NpperxdisPeer::PERFIN;
-		}
-
+    if ($this->perfin !== $v) {
+        $this->perfin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpperxdisPeer::PERFIN;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpperxdisPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpperxdisPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->perini = $rs->getFloat($startcol + 1);
+      $this->perini = $rs->getFloat($startcol + 1);
 
-			$this->perfin = $rs->getFloat($startcol + 2);
+      $this->perfin = $rs->getFloat($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npperxdis object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npperxdis object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -173,6 +199,7 @@ abstract class BaseNpperxdis extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpperxdisPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpperxdisPeer::doUpdate($this, $con);

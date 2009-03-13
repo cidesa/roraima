@@ -9,7 +9,7 @@ default:
     keywords:     cidesa, compras, definición, condiciones, recaudos
     language:     es_VE
 
-  stylesheets:    [siga]
+  stylesheets:    [main]
 
   javascripts:    [ ]
   

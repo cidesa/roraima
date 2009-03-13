@@ -1,0 +1,150 @@
+methods:
+  post:
+   - "cacotiza{refcot}"
+   - "cacotiza{feccot}"
+   - "cacotiza{rifpro}"
+   - "cacotiza{descot}"
+   - "cacotiza{conpag}"
+   - "cacotiza{forent}"
+   - "cacotiza{tipmon}"
+   - "cacotiza{monrec}"
+   - "cacotiza{porvan}"
+   - "cacotiza{porant}"
+
+
+names:
+  cacotiza{refcot}:
+    required:  Yes
+    required_msg: El Número no puede estar en Blanco.
+    validators: UniqueValidator
+
+  cacotiza{feccot}:
+    required:  Yes
+    required_msg: La Fecha no puede estar en Blanco
+    validators: FechaValidator
+
+  cacotiza{rifpro}:
+    required:  Yes
+    required_msg: El Rif de la Contratistas de Bienes o Servicio y Cooperativas no puede estar en Blanco.
+    validators: ExistValidator
+
+  cacotiza{descot}:
+    required:  Yes
+    required_msg: La Descripción no puede estar en Blanco.
+    validators: DescripcionValidator
+
+  cacotiza{conpag}:
+    required:  Yes
+    required_msg: El Código de la Condición de Pago no puede estar en Blanco.
+    validators: ConpagExistValidator
+
+  cacotiza{forent}:
+    required:  Yes
+    required_msg: El Código de la Forma de Entrega no puede estar en Blanco.
+    validators: ForentExistValidator
+
+  cacotiza{tipmon}:
+    required:  Yes
+    required_msg: Debe seleccionar el tipo de Moneda.
+    #validators: ForentExistValidator
+
+  cacotiza{monrec}:
+    required:  No
+    validators: MontoValidator
+
+  cacotiza{porvan}:
+    required:  No
+    validators: Num1Validator, Porcen1Validator
+
+  cacotiza{porant}:
+    required:  No
+    validators: Num2Validator, Porcen2Validator
+
+ConpagExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Caconpag
+        column:       codconpag
+        unique_error: El Código de la Forma de Pago debe Existir.
+
+
+ForentExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Caforent
+        column:       codforent
+        unique_error: El Código de la Forma de Entrega debe Existir.
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Caprovee
+        column:       rifpro
+        unique_error: El Código de la Contratistas de Bienes o Servicio y Cooperativas debe Existir.
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cacotiza
+        column:       refcot
+        unique_error: El Número de la Cotización ya existe. Por Favor, Cambiélo por otro.
+
+
+#FechaValidator:
+#    class:         CidesaDateNow
+#    param:
+#        compare: 'now'
+#        compare_error: La Fecha no puede ser menor a la Fecha Actual
+#        operator: '>='
+#        date_error:  Fecha Inválida
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       254
+        max_error: La descripción no puede pasar mas de 254 caracteres
+
+CorrelValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^[0-9]*$/' ]
+        values_error: Los Correlativos solo puede contener valores númericos
+
+MontoValidator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El valor introducido no cumple con el formato para montos
+
+Num1Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Porcentaje del Van de las Ofertas solo puede contener valores númericos
+
+Porcen1Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje del Van de las Ofertas debe estar entre 0-100
+
+Num2Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^([0-9]*(\.*([0-9]{2,}))*\,?[0-9]+|[0-9]+\,?[0-9]*)?$/' ]
+        values_error: El Porcentaje del Anticipo solo puede contener valores númericos
+
+Porcen2Validator:
+    class: CidesaStringValidator
+    param:
+        values:    [ '/^(0*100{1,1}\,?((?<=\,)0*)?%?$)|(^0*\d{0,2}\,?((?<=\,)\d*)?%?)$/' ]
+        values_error: El Porcentaje del Anticipo debe estar entre 0-100

@@ -1,25 +1,34 @@
 generator:
-  class:              sfPropelAdminGenerator
+  class:              cidesaPropelAdminGenerator
   param:
     model_class:      Cideftit
-    theme:            default
+    theme:            cidesaGenerator
     fields:
       codpre: { name: Código}
-      nompre: { name: Nombre}     
-      codcta: { name: Código} 
-      descta: { name: Nombre}     
-      stacod: { name: Estatus}
-      coduni: { name: Código de Unidad}  
-      estatus: { name: Estatus2}     
-            
+      nompre: { name: Nombre}
+      codcta: { name: Código}
+      descta: { name: Nombre}
+      #stacod: { name: Estatus}
+      #coduni: { name: Código de Unidad}
+      #estatus: { name: Estatus2}
+
     list:
       title:          Titulos Presupuestarios
-      filters:        [codpre]
-      display:        [=codpre, nompre]             
+      filters:        [codpre, nompre ]
+      display:        [=codpre, nompre]
       object_actions:
         _edit:        ~
         _delete:      ~
       max_per_page:   5
+      sort:  codpre
     edit:
       title:          Edicion de Titulos Presupuestarios
-      display:       [=codpre, nompre, codcta, descta, stacod, coduni, estatus]
+      display:
+        Datos del Título Presupuestario: [ _codpre, nompre ]
+        Datos Contables: [ _codcta ]
+      hide:  [ mascara ]
+      actions:
+        _list:        ~
+        _create:      ~
+        _save:        ~
+        _delete:      ~

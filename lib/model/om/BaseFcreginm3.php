@@ -21,56 +21,80 @@ abstract class BaseFcreginm3 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcatfis()
-	{
+  
+  public function getCodcatfis()
+  {
 
-		return $this->codcatfis; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->codcatfis);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcatfis($v)
 	{
 
-		if ($this->codcatfis !== $v) {
-			$this->codcatfis = $v;
-			$this->modifiedColumns[] = Fcreginm3Peer::CODCATFIS;
-		}
-
+    if ($this->codcatfis !== $v) {
+        $this->codcatfis = $v;
+        $this->modifiedColumns[] = Fcreginm3Peer::CODCATFIS;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Fcreginm3Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Fcreginm3Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcatfis = $rs->getString($startcol + 0);
+      $this->codcatfis = $rs->getString($startcol + 0);
 
-			$this->id = $rs->getInt($startcol + 1);
+      $this->id = $rs->getInt($startcol + 1);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 2; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcreginm3 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 2; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcreginm3 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -127,6 +151,7 @@ abstract class BaseFcreginm3 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Fcreginm3Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Fcreginm3Peer::doUpdate($this, $con);

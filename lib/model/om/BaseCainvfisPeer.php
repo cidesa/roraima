@@ -13,7 +13,7 @@ abstract class BaseCainvfisPeer {
 	const CLASS_DEFAULT = 'lib.model.Cainvfis';
 
 	
-	const NUM_COLUMNS = 6;
+	const NUM_COLUMNS = 7;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -35,6 +35,9 @@ abstract class BaseCainvfisPeer {
 	const EXIACT2 = 'cainvfis.EXIACT2';
 
 	
+	const CODUBI = 'cainvfis.CODUBI';
+
+	
 	const ID = 'cainvfis.ID';
 
 	
@@ -43,18 +46,18 @@ abstract class BaseCainvfisPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Fecinv', 'Codalm', 'Codart', 'Exiact', 'Exiact2', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CainvfisPeer::FECINV, CainvfisPeer::CODALM, CainvfisPeer::CODART, CainvfisPeer::EXIACT, CainvfisPeer::EXIACT2, CainvfisPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('fecinv', 'codalm', 'codart', 'exiact', 'exiact2', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Fecinv', 'Codalm', 'Codart', 'Exiact', 'Exiact2', 'Codubi', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CainvfisPeer::FECINV, CainvfisPeer::CODALM, CainvfisPeer::CODART, CainvfisPeer::EXIACT, CainvfisPeer::EXIACT2, CainvfisPeer::CODUBI, CainvfisPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('fecinv', 'codalm', 'codart', 'exiact', 'exiact2', 'codubi', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Fecinv' => 0, 'Codalm' => 1, 'Codart' => 2, 'Exiact' => 3, 'Exiact2' => 4, 'Id' => 5, ),
-		BasePeer::TYPE_COLNAME => array (CainvfisPeer::FECINV => 0, CainvfisPeer::CODALM => 1, CainvfisPeer::CODART => 2, CainvfisPeer::EXIACT => 3, CainvfisPeer::EXIACT2 => 4, CainvfisPeer::ID => 5, ),
-		BasePeer::TYPE_FIELDNAME => array ('fecinv' => 0, 'codalm' => 1, 'codart' => 2, 'exiact' => 3, 'exiact2' => 4, 'id' => 5, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
+		BasePeer::TYPE_PHPNAME => array ('Fecinv' => 0, 'Codalm' => 1, 'Codart' => 2, 'Exiact' => 3, 'Exiact2' => 4, 'Codubi' => 5, 'Id' => 6, ),
+		BasePeer::TYPE_COLNAME => array (CainvfisPeer::FECINV => 0, CainvfisPeer::CODALM => 1, CainvfisPeer::CODART => 2, CainvfisPeer::EXIACT => 3, CainvfisPeer::EXIACT2 => 4, CainvfisPeer::CODUBI => 5, CainvfisPeer::ID => 6, ),
+		BasePeer::TYPE_FIELDNAME => array ('fecinv' => 0, 'codalm' => 1, 'codart' => 2, 'exiact' => 3, 'exiact2' => 4, 'codubi' => 5, 'id' => 6, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, )
 	);
 
 	
@@ -117,6 +120,8 @@ abstract class BaseCainvfisPeer {
 		$criteria->addSelectColumn(CainvfisPeer::EXIACT);
 
 		$criteria->addSelectColumn(CainvfisPeer::EXIACT2);
+
+		$criteria->addSelectColumn(CainvfisPeer::CODUBI);
 
 		$criteria->addSelectColumn(CainvfisPeer::ID);
 
@@ -220,6 +225,7 @@ abstract class BaseCainvfisPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CainvfisPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

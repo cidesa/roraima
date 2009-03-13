@@ -29,6 +29,10 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 
 
 	
+	protected $codtipper;
+
+
+	
 	protected $id;
 
 	
@@ -37,128 +41,175 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCedper()
-	{
+  
+  public function getCedper()
+  {
 
-		return $this->cedper; 		
-	}
-	
-	public function getNomper()
-	{
+    return trim($this->cedper);
 
-		return $this->nomper; 		
-	}
-	
-	public function getTelper()
-	{
+  }
+  
+  public function getNomper()
+  {
 
-		return $this->telper; 		
-	}
-	
-	public function getCodtipcar()
-	{
+    return trim($this->nomper);
 
-		return $this->codtipcar; 		
-	}
-	
-	public function getCodtippro()
-	{
+  }
+  
+  public function getTelper()
+  {
 
-		return $this->codtippro; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->telper);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodtipcar()
+  {
+
+    return trim($this->codtipcar);
+
+  }
+  
+  public function getCodtippro()
+  {
+
+    return trim($this->codtippro);
+
+  }
+  
+  public function getCodtipper()
+  {
+
+    return trim($this->codtipper);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCedper($v)
 	{
 
-		if ($this->cedper !== $v) {
-			$this->cedper = $v;
-			$this->modifiedColumns[] = OcdefperPeer::CEDPER;
-		}
-
+    if ($this->cedper !== $v) {
+        $this->cedper = $v;
+        $this->modifiedColumns[] = OcdefperPeer::CEDPER;
+      }
+  
 	} 
 	
 	public function setNomper($v)
 	{
 
-		if ($this->nomper !== $v) {
-			$this->nomper = $v;
-			$this->modifiedColumns[] = OcdefperPeer::NOMPER;
-		}
-
+    if ($this->nomper !== $v) {
+        $this->nomper = $v;
+        $this->modifiedColumns[] = OcdefperPeer::NOMPER;
+      }
+  
 	} 
 	
 	public function setTelper($v)
 	{
 
-		if ($this->telper !== $v) {
-			$this->telper = $v;
-			$this->modifiedColumns[] = OcdefperPeer::TELPER;
-		}
-
+    if ($this->telper !== $v) {
+        $this->telper = $v;
+        $this->modifiedColumns[] = OcdefperPeer::TELPER;
+      }
+  
 	} 
 	
 	public function setCodtipcar($v)
 	{
 
-		if ($this->codtipcar !== $v) {
-			$this->codtipcar = $v;
-			$this->modifiedColumns[] = OcdefperPeer::CODTIPCAR;
-		}
-
+    if ($this->codtipcar !== $v) {
+        $this->codtipcar = $v;
+        $this->modifiedColumns[] = OcdefperPeer::CODTIPCAR;
+      }
+  
 	} 
 	
 	public function setCodtippro($v)
 	{
 
-		if ($this->codtippro !== $v) {
-			$this->codtippro = $v;
-			$this->modifiedColumns[] = OcdefperPeer::CODTIPPRO;
-		}
+    if ($this->codtippro !== $v) {
+        $this->codtippro = $v;
+        $this->modifiedColumns[] = OcdefperPeer::CODTIPPRO;
+      }
+  
+	} 
+	
+	public function setCodtipper($v)
+	{
 
+    if ($this->codtipper !== $v) {
+        $this->codtipper = $v;
+        $this->modifiedColumns[] = OcdefperPeer::CODTIPPER;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OcdefperPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OcdefperPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->cedper = $rs->getString($startcol + 0);
+      $this->cedper = $rs->getString($startcol + 0);
 
-			$this->nomper = $rs->getString($startcol + 1);
+      $this->nomper = $rs->getString($startcol + 1);
 
-			$this->telper = $rs->getString($startcol + 2);
+      $this->telper = $rs->getString($startcol + 2);
 
-			$this->codtipcar = $rs->getString($startcol + 3);
+      $this->codtipcar = $rs->getString($startcol + 3);
 
-			$this->codtippro = $rs->getString($startcol + 4);
+      $this->codtippro = $rs->getString($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->codtipper = $rs->getString($startcol + 5);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ocdefper object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ocdefper object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -215,6 +266,7 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OcdefperPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OcdefperPeer::doUpdate($this, $con);
@@ -296,6 +348,9 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 				return $this->getCodtippro();
 				break;
 			case 5:
+				return $this->getCodtipper();
+				break;
+			case 6:
 				return $this->getId();
 				break;
 			default:
@@ -313,7 +368,8 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 			$keys[2] => $this->getTelper(),
 			$keys[3] => $this->getCodtipcar(),
 			$keys[4] => $this->getCodtippro(),
-			$keys[5] => $this->getId(),
+			$keys[5] => $this->getCodtipper(),
+			$keys[6] => $this->getId(),
 		);
 		return $result;
 	}
@@ -345,6 +401,9 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 				$this->setCodtippro($value);
 				break;
 			case 5:
+				$this->setCodtipper($value);
+				break;
+			case 6:
 				$this->setId($value);
 				break;
 		} 	}
@@ -359,7 +418,8 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[2], $arr)) $this->setTelper($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setCodtipcar($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCodtippro($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCodtipper($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setId($arr[$keys[6]]);
 	}
 
 	
@@ -372,6 +432,7 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OcdefperPeer::TELPER)) $criteria->add(OcdefperPeer::TELPER, $this->telper);
 		if ($this->isColumnModified(OcdefperPeer::CODTIPCAR)) $criteria->add(OcdefperPeer::CODTIPCAR, $this->codtipcar);
 		if ($this->isColumnModified(OcdefperPeer::CODTIPPRO)) $criteria->add(OcdefperPeer::CODTIPPRO, $this->codtippro);
+		if ($this->isColumnModified(OcdefperPeer::CODTIPPER)) $criteria->add(OcdefperPeer::CODTIPPER, $this->codtipper);
 		if ($this->isColumnModified(OcdefperPeer::ID)) $criteria->add(OcdefperPeer::ID, $this->id);
 
 		return $criteria;
@@ -412,6 +473,8 @@ abstract class BaseOcdefper extends BaseObject  implements Persistent {
 		$copyObj->setCodtipcar($this->codtipcar);
 
 		$copyObj->setCodtippro($this->codtippro);
+
+		$copyObj->setCodtipper($this->codtipper);
 
 
 		$copyObj->setNew(true);

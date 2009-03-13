@@ -69,319 +69,353 @@ abstract class BaseBndissem extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodsem()
-	{
+    return trim($this->codact);
 
-		return $this->codsem; 		
-	}
-	
-	public function getNrodissem()
-	{
+  }
+  
+  public function getCodsem()
+  {
 
-		return $this->nrodissem; 		
-	}
-	
-	public function getMotdissem()
-	{
+    return trim($this->codsem);
 
-		return $this->motdissem; 		
-	}
-	
-	public function getTipdissem()
-	{
+  }
+  
+  public function getNrodissem()
+  {
 
-		return $this->tipdissem; 		
-	}
-	
-	public function getFecdissem($format = 'Y-m-d')
-	{
+    return trim($this->nrodissem);
 
-		if ($this->fecdissem === null || $this->fecdissem === '') {
-			return null;
-		} elseif (!is_int($this->fecdissem)) {
-						$ts = strtotime($this->fecdissem);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdissem] as date/time value: " . var_export($this->fecdissem, true));
-			}
-		} else {
-			$ts = $this->fecdissem;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMotdissem()
+  {
 
-	
-	public function getFecdevdis($format = 'Y-m-d')
-	{
+    return trim($this->motdissem);
 
-		if ($this->fecdevdis === null || $this->fecdevdis === '') {
-			return null;
-		} elseif (!is_int($this->fecdevdis)) {
-						$ts = strtotime($this->fecdevdis);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdevdis] as date/time value: " . var_export($this->fecdevdis, true));
-			}
-		} else {
-			$ts = $this->fecdevdis;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getTipdissem()
+  {
 
-	
-	public function getMondissem()
-	{
+    return trim($this->tipdissem);
 
-		return number_format($this->mondissem,2,',','.');
-		
-	}
-	
-	public function getDetdissem()
-	{
+  }
+  
+  public function getFecdissem($format = 'Y-m-d')
+  {
 
-		return $this->detdissem; 		
-	}
-	
-	public function getCodubiori()
-	{
+    if ($this->fecdissem === null || $this->fecdissem === '') {
+      return null;
+    } elseif (!is_int($this->fecdissem)) {
+            $ts = adodb_strtotime($this->fecdissem);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdissem] as date/time value: " . var_export($this->fecdissem, true));
+      }
+    } else {
+      $ts = $this->fecdissem;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codubiori; 		
-	}
-	
-	public function getCodubides()
-	{
+  
+  public function getFecdevdis($format = 'Y-m-d')
+  {
 
-		return $this->codubides; 		
-	}
-	
-	public function getObsdissem()
-	{
+    if ($this->fecdevdis === null || $this->fecdevdis === '') {
+      return null;
+    } elseif (!is_int($this->fecdevdis)) {
+            $ts = adodb_strtotime($this->fecdevdis);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdevdis] as date/time value: " . var_export($this->fecdevdis, true));
+      }
+    } else {
+      $ts = $this->fecdevdis;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->obsdissem; 		
-	}
-	
-	public function getStadissem()
-	{
+  
+  public function getMondissem($val=false)
+  {
 
-		return $this->stadissem; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->mondissem,2,',','.');
+    else return $this->mondissem;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getDetdissem()
+  {
+
+    return trim($this->detdissem);
+
+  }
+  
+  public function getCodubiori()
+  {
+
+    return trim($this->codubiori);
+
+  }
+  
+  public function getCodubides()
+  {
+
+    return trim($this->codubides);
+
+  }
+  
+  public function getObsdissem()
+  {
+
+    return trim($this->obsdissem);
+
+  }
+  
+  public function getStadissem()
+  {
+
+    return trim($this->stadissem);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BndissemPeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BndissemPeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodsem($v)
 	{
 
-		if ($this->codsem !== $v) {
-			$this->codsem = $v;
-			$this->modifiedColumns[] = BndissemPeer::CODSEM;
-		}
-
+    if ($this->codsem !== $v) {
+        $this->codsem = $v;
+        $this->modifiedColumns[] = BndissemPeer::CODSEM;
+      }
+  
 	} 
 	
 	public function setNrodissem($v)
 	{
 
-		if ($this->nrodissem !== $v) {
-			$this->nrodissem = $v;
-			$this->modifiedColumns[] = BndissemPeer::NRODISSEM;
-		}
-
+    if ($this->nrodissem !== $v) {
+        $this->nrodissem = $v;
+        $this->modifiedColumns[] = BndissemPeer::NRODISSEM;
+      }
+  
 	} 
 	
 	public function setMotdissem($v)
 	{
 
-		if ($this->motdissem !== $v) {
-			$this->motdissem = $v;
-			$this->modifiedColumns[] = BndissemPeer::MOTDISSEM;
-		}
-
+    if ($this->motdissem !== $v) {
+        $this->motdissem = $v;
+        $this->modifiedColumns[] = BndissemPeer::MOTDISSEM;
+      }
+  
 	} 
 	
 	public function setTipdissem($v)
 	{
 
-		if ($this->tipdissem !== $v) {
-			$this->tipdissem = $v;
-			$this->modifiedColumns[] = BndissemPeer::TIPDISSEM;
-		}
-
+    if ($this->tipdissem !== $v) {
+        $this->tipdissem = $v;
+        $this->modifiedColumns[] = BndissemPeer::TIPDISSEM;
+      }
+  
 	} 
 	
 	public function setFecdissem($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdissem] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdissem !== $ts) {
-			$this->fecdissem = $ts;
-			$this->modifiedColumns[] = BndissemPeer::FECDISSEM;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdissem] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdissem !== $ts) {
+      $this->fecdissem = $ts;
+      $this->modifiedColumns[] = BndissemPeer::FECDISSEM;
+    }
 
 	} 
 	
 	public function setFecdevdis($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdevdis] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdevdis !== $ts) {
-			$this->fecdevdis = $ts;
-			$this->modifiedColumns[] = BndissemPeer::FECDEVDIS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdevdis] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdevdis !== $ts) {
+      $this->fecdevdis = $ts;
+      $this->modifiedColumns[] = BndissemPeer::FECDEVDIS;
+    }
 
 	} 
 	
 	public function setMondissem($v)
 	{
 
-		if ($this->mondissem !== $v) {
-			$this->mondissem = $v;
-			$this->modifiedColumns[] = BndissemPeer::MONDISSEM;
-		}
-
+    if ($this->mondissem !== $v) {
+        $this->mondissem = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndissemPeer::MONDISSEM;
+      }
+  
 	} 
 	
 	public function setDetdissem($v)
 	{
 
-		if ($this->detdissem !== $v) {
-			$this->detdissem = $v;
-			$this->modifiedColumns[] = BndissemPeer::DETDISSEM;
-		}
-
+    if ($this->detdissem !== $v) {
+        $this->detdissem = $v;
+        $this->modifiedColumns[] = BndissemPeer::DETDISSEM;
+      }
+  
 	} 
 	
 	public function setCodubiori($v)
 	{
 
-		if ($this->codubiori !== $v) {
-			$this->codubiori = $v;
-			$this->modifiedColumns[] = BndissemPeer::CODUBIORI;
-		}
-
+    if ($this->codubiori !== $v) {
+        $this->codubiori = $v;
+        $this->modifiedColumns[] = BndissemPeer::CODUBIORI;
+      }
+  
 	} 
 	
 	public function setCodubides($v)
 	{
 
-		if ($this->codubides !== $v) {
-			$this->codubides = $v;
-			$this->modifiedColumns[] = BndissemPeer::CODUBIDES;
-		}
-
+    if ($this->codubides !== $v) {
+        $this->codubides = $v;
+        $this->modifiedColumns[] = BndissemPeer::CODUBIDES;
+      }
+  
 	} 
 	
 	public function setObsdissem($v)
 	{
 
-		if ($this->obsdissem !== $v) {
-			$this->obsdissem = $v;
-			$this->modifiedColumns[] = BndissemPeer::OBSDISSEM;
-		}
-
+    if ($this->obsdissem !== $v) {
+        $this->obsdissem = $v;
+        $this->modifiedColumns[] = BndissemPeer::OBSDISSEM;
+      }
+  
 	} 
 	
 	public function setStadissem($v)
 	{
 
-		if ($this->stadissem !== $v) {
-			$this->stadissem = $v;
-			$this->modifiedColumns[] = BndissemPeer::STADISSEM;
-		}
-
+    if ($this->stadissem !== $v) {
+        $this->stadissem = $v;
+        $this->modifiedColumns[] = BndissemPeer::STADISSEM;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndissemPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndissemPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->codsem = $rs->getString($startcol + 1);
+      $this->codsem = $rs->getString($startcol + 1);
 
-			$this->nrodissem = $rs->getString($startcol + 2);
+      $this->nrodissem = $rs->getString($startcol + 2);
 
-			$this->motdissem = $rs->getString($startcol + 3);
+      $this->motdissem = $rs->getString($startcol + 3);
 
-			$this->tipdissem = $rs->getString($startcol + 4);
+      $this->tipdissem = $rs->getString($startcol + 4);
 
-			$this->fecdissem = $rs->getDate($startcol + 5, null);
+      $this->fecdissem = $rs->getDate($startcol + 5, null);
 
-			$this->fecdevdis = $rs->getDate($startcol + 6, null);
+      $this->fecdevdis = $rs->getDate($startcol + 6, null);
 
-			$this->mondissem = $rs->getFloat($startcol + 7);
+      $this->mondissem = $rs->getFloat($startcol + 7);
 
-			$this->detdissem = $rs->getString($startcol + 8);
+      $this->detdissem = $rs->getString($startcol + 8);
 
-			$this->codubiori = $rs->getString($startcol + 9);
+      $this->codubiori = $rs->getString($startcol + 9);
 
-			$this->codubides = $rs->getString($startcol + 10);
+      $this->codubides = $rs->getString($startcol + 10);
 
-			$this->obsdissem = $rs->getString($startcol + 11);
+      $this->obsdissem = $rs->getString($startcol + 11);
 
-			$this->stadissem = $rs->getString($startcol + 12);
+      $this->stadissem = $rs->getString($startcol + 12);
 
-			$this->id = $rs->getInt($startcol + 13);
+      $this->id = $rs->getInt($startcol + 13);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 14; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bndissem object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 14; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bndissem object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -438,6 +472,7 @@ abstract class BaseBndissem extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BndissemPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BndissemPeer::doUpdate($this, $con);

@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class RhdefindMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.RhdefindMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.RhdefindMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('rhdefind');
 		$tMap->setPhpName('Rhdefind');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('rhdefind_SEQ');
 
 		$tMap->addColumn('CODIND', 'Codind', 'string', CreoleTypes::VARCHAR, true, 4);
 
@@ -39,6 +41,6 @@ class RhdefindMapBuilder {
 		$tMap->addColumn('TIPIND', 'Tipind', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

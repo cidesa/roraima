@@ -33,15 +33,19 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 
 
 	
-	protected $conpag;
+	protected $monrgo;
 
 
 	
-	protected $fordesp;
+	protected $faconpag_id;
 
 
 	
-	protected $forsol;
+	protected $fafordes_id;
+
+
+	
+	protected $faforsol_id;
 
 
 	
@@ -68,214 +72,267 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aFaconpag;
+
+	
+	protected $aFafordes;
+
+	
+	protected $aFaforsol;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefpre()
-	{
+  
+  public function getRefpre()
+  {
 
-		return $this->refpre; 		
-	}
-	
-	public function getDespre()
-	{
+    return trim($this->refpre);
 
-		return $this->despre; 		
-	}
-	
-	public function getFecpre($format = 'Y-m-d')
-	{
+  }
+  
+  public function getDespre()
+  {
 
-		if ($this->fecpre === null || $this->fecpre === '') {
-			return null;
-		} elseif (!is_int($this->fecpre)) {
-						$ts = strtotime($this->fecpre);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecpre] as date/time value: " . var_export($this->fecpre, true));
-			}
-		} else {
-			$ts = $this->fecpre;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    return trim($this->despre);
 
-	
-	public function getCodcli()
-	{
+  }
+  
+  public function getFecpre($format = 'Y-m-d')
+  {
 
-		return $this->codcli; 		
-	}
-	
-	public function getMonpre()
-	{
+    if ($this->fecpre === null || $this->fecpre === '') {
+      return null;
+    } elseif (!is_int($this->fecpre)) {
+            $ts = adodb_strtotime($this->fecpre);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecpre] as date/time value: " . var_export($this->fecpre, true));
+      }
+    } else {
+      $ts = $this->fecpre;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monpre,2,',','.');
-		
-	}
-	
-	public function getMondesc()
-	{
+  
+  public function getCodcli()
+  {
 
-		return number_format($this->mondesc,2,',','.');
-		
-	}
-	
-	public function getConpag()
-	{
+    return trim($this->codcli);
 
-		return $this->conpag; 		
-	}
-	
-	public function getFordesp()
-	{
+  }
+  
+  public function getMonpre($val=false)
+  {
 
-		return $this->fordesp; 		
-	}
-	
-	public function getForsol()
-	{
+    if($val) return number_format($this->monpre,2,',','.');
+    else return $this->monpre;
 
-		return $this->forsol; 		
-	}
-	
-	public function getTipmon()
-	{
+  }
+  
+  public function getMondesc($val=false)
+  {
 
-		return $this->tipmon; 		
-	}
-	
-	public function getValmon()
-	{
+    if($val) return number_format($this->mondesc,2,',','.');
+    else return $this->mondesc;
 
-		return number_format($this->valmon,2,',','.');
-		
-	}
-	
-	public function getAutpor()
-	{
+  }
+  
+  public function getMonrgo($val=false)
+  {
 
-		return $this->autpor; 		
-	}
-	
-	public function getObserv()
-	{
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
 
-		return $this->observ; 		
-	}
-	
-	public function getCodubi()
-	{
+  }
+  
+  public function getFaconpagId()
+  {
 
-		return $this->codubi; 		
-	}
-	
-	public function getId()
-	{
+    return $this->faconpag_id;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getFafordesId()
+  {
+
+    return $this->fafordes_id;
+
+  }
+  
+  public function getFaforsolId()
+  {
+
+    return $this->faforsol_id;
+
+  }
+  
+  public function getTipmon()
+  {
+
+    return trim($this->tipmon);
+
+  }
+  
+  public function getValmon($val=false)
+  {
+
+    if($val) return number_format($this->valmon,2,',','.');
+    else return $this->valmon;
+
+  }
+  
+  public function getAutpor()
+  {
+
+    return trim($this->autpor);
+
+  }
+  
+  public function getObserv()
+  {
+
+    return trim($this->observ);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefpre($v)
 	{
 
-		if ($this->refpre !== $v) {
-			$this->refpre = $v;
-			$this->modifiedColumns[] = FapresupPeer::REFPRE;
-		}
-
+    if ($this->refpre !== $v) {
+        $this->refpre = $v;
+        $this->modifiedColumns[] = FapresupPeer::REFPRE;
+      }
+  
 	} 
 	
 	public function setDespre($v)
 	{
 
-		if ($this->despre !== $v) {
-			$this->despre = $v;
-			$this->modifiedColumns[] = FapresupPeer::DESPRE;
-		}
-
+    if ($this->despre !== $v) {
+        $this->despre = $v;
+        $this->modifiedColumns[] = FapresupPeer::DESPRE;
+      }
+  
 	} 
 	
 	public function setFecpre($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecpre] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecpre !== $ts) {
-			$this->fecpre = $ts;
-			$this->modifiedColumns[] = FapresupPeer::FECPRE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecpre] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecpre !== $ts) {
+      $this->fecpre = $ts;
+      $this->modifiedColumns[] = FapresupPeer::FECPRE;
+    }
 
 	} 
 	
 	public function setCodcli($v)
 	{
 
-		if ($this->codcli !== $v) {
-			$this->codcli = $v;
-			$this->modifiedColumns[] = FapresupPeer::CODCLI;
-		}
-
+    if ($this->codcli !== $v) {
+        $this->codcli = $v;
+        $this->modifiedColumns[] = FapresupPeer::CODCLI;
+      }
+  
 	} 
 	
 	public function setMonpre($v)
 	{
 
-		if ($this->monpre !== $v) {
-			$this->monpre = $v;
-			$this->modifiedColumns[] = FapresupPeer::MONPRE;
-		}
-
+    if ($this->monpre !== $v) {
+        $this->monpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FapresupPeer::MONPRE;
+      }
+  
 	} 
 	
 	public function setMondesc($v)
 	{
 
-		if ($this->mondesc !== $v) {
-			$this->mondesc = $v;
-			$this->modifiedColumns[] = FapresupPeer::MONDESC;
+    if ($this->mondesc !== $v) {
+        $this->mondesc = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FapresupPeer::MONDESC;
+      }
+  
+	} 
+	
+	public function setMonrgo($v)
+	{
+
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FapresupPeer::MONRGO;
+      }
+  
+	} 
+	
+	public function setFaconpagId($v)
+	{
+
+    if ($this->faconpag_id !== $v) {
+        $this->faconpag_id = $v;
+        $this->modifiedColumns[] = FapresupPeer::FACONPAG_ID;
+      }
+  
+		if ($this->aFaconpag !== null && $this->aFaconpag->getId() !== $v) {
+			$this->aFaconpag = null;
 		}
 
 	} 
 	
-	public function setConpag($v)
+	public function setFafordesId($v)
 	{
 
-		if ($this->conpag !== $v) {
-			$this->conpag = $v;
-			$this->modifiedColumns[] = FapresupPeer::CONPAG;
+    if ($this->fafordes_id !== $v) {
+        $this->fafordes_id = $v;
+        $this->modifiedColumns[] = FapresupPeer::FAFORDES_ID;
+      }
+  
+		if ($this->aFafordes !== null && $this->aFafordes->getId() !== $v) {
+			$this->aFafordes = null;
 		}
 
 	} 
 	
-	public function setFordesp($v)
+	public function setFaforsolId($v)
 	{
 
-		if ($this->fordesp !== $v) {
-			$this->fordesp = $v;
-			$this->modifiedColumns[] = FapresupPeer::FORDESP;
-		}
-
-	} 
-	
-	public function setForsol($v)
-	{
-
-		if ($this->forsol !== $v) {
-			$this->forsol = $v;
-			$this->modifiedColumns[] = FapresupPeer::FORSOL;
+    if ($this->faforsol_id !== $v) {
+        $this->faforsol_id = $v;
+        $this->modifiedColumns[] = FapresupPeer::FAFORSOL_ID;
+      }
+  
+		if ($this->aFaforsol !== null && $this->aFaforsol->getId() !== $v) {
+			$this->aFaforsol = null;
 		}
 
 	} 
@@ -283,106 +340,130 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 	public function setTipmon($v)
 	{
 
-		if ($this->tipmon !== $v) {
-			$this->tipmon = $v;
-			$this->modifiedColumns[] = FapresupPeer::TIPMON;
-		}
-
+    if ($this->tipmon !== $v) {
+        $this->tipmon = $v;
+        $this->modifiedColumns[] = FapresupPeer::TIPMON;
+      }
+  
 	} 
 	
 	public function setValmon($v)
 	{
 
-		if ($this->valmon !== $v) {
-			$this->valmon = $v;
-			$this->modifiedColumns[] = FapresupPeer::VALMON;
-		}
-
+    if ($this->valmon !== $v) {
+        $this->valmon = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FapresupPeer::VALMON;
+      }
+  
 	} 
 	
 	public function setAutpor($v)
 	{
 
-		if ($this->autpor !== $v) {
-			$this->autpor = $v;
-			$this->modifiedColumns[] = FapresupPeer::AUTPOR;
-		}
-
+    if ($this->autpor !== $v) {
+        $this->autpor = $v;
+        $this->modifiedColumns[] = FapresupPeer::AUTPOR;
+      }
+  
 	} 
 	
 	public function setObserv($v)
 	{
 
-		if ($this->observ !== $v) {
-			$this->observ = $v;
-			$this->modifiedColumns[] = FapresupPeer::OBSERV;
-		}
-
+    if ($this->observ !== $v) {
+        $this->observ = $v;
+        $this->modifiedColumns[] = FapresupPeer::OBSERV;
+      }
+  
 	} 
 	
 	public function setCodubi($v)
 	{
 
-		if ($this->codubi !== $v) {
-			$this->codubi = $v;
-			$this->modifiedColumns[] = FapresupPeer::CODUBI;
-		}
-
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = FapresupPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FapresupPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FapresupPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refpre = $rs->getString($startcol + 0);
+      $this->refpre = $rs->getString($startcol + 0);
 
-			$this->despre = $rs->getString($startcol + 1);
+      $this->despre = $rs->getString($startcol + 1);
 
-			$this->fecpre = $rs->getDate($startcol + 2, null);
+      $this->fecpre = $rs->getDate($startcol + 2, null);
 
-			$this->codcli = $rs->getString($startcol + 3);
+      $this->codcli = $rs->getString($startcol + 3);
 
-			$this->monpre = $rs->getFloat($startcol + 4);
+      $this->monpre = $rs->getFloat($startcol + 4);
 
-			$this->mondesc = $rs->getFloat($startcol + 5);
+      $this->mondesc = $rs->getFloat($startcol + 5);
 
-			$this->conpag = $rs->getString($startcol + 6);
+      $this->monrgo = $rs->getFloat($startcol + 6);
 
-			$this->fordesp = $rs->getString($startcol + 7);
+      $this->faconpag_id = $rs->getInt($startcol + 7);
 
-			$this->forsol = $rs->getString($startcol + 8);
+      $this->fafordes_id = $rs->getInt($startcol + 8);
 
-			$this->tipmon = $rs->getString($startcol + 9);
+      $this->faforsol_id = $rs->getInt($startcol + 9);
 
-			$this->valmon = $rs->getFloat($startcol + 10);
+      $this->tipmon = $rs->getString($startcol + 10);
 
-			$this->autpor = $rs->getString($startcol + 11);
+      $this->valmon = $rs->getFloat($startcol + 11);
 
-			$this->observ = $rs->getString($startcol + 12);
+      $this->autpor = $rs->getString($startcol + 12);
 
-			$this->codubi = $rs->getString($startcol + 13);
+      $this->observ = $rs->getString($startcol + 13);
 
-			$this->id = $rs->getInt($startcol + 14);
+      $this->codubi = $rs->getString($startcol + 14);
 
-			$this->resetModified();
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->setNew(false);
+      $this->resetModified();
 
-						return $startcol + 15; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fapresup object", $e);
-		}
-	}
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fapresup object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -435,10 +516,34 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aFaconpag !== null) {
+				if ($this->aFaconpag->isModified()) {
+					$affectedRows += $this->aFaconpag->save($con);
+				}
+				$this->setFaconpag($this->aFaconpag);
+			}
+
+			if ($this->aFafordes !== null) {
+				if ($this->aFafordes->isModified()) {
+					$affectedRows += $this->aFafordes->save($con);
+				}
+				$this->setFafordes($this->aFafordes);
+			}
+
+			if ($this->aFaforsol !== null) {
+				if ($this->aFaforsol->isModified()) {
+					$affectedRows += $this->aFaforsol->save($con);
+				}
+				$this->setFaforsol($this->aFaforsol);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = FapresupPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FapresupPeer::doUpdate($this, $con);
@@ -479,6 +584,26 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aFaconpag !== null) {
+				if (!$this->aFaconpag->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFaconpag->getValidationFailures());
+				}
+			}
+
+			if ($this->aFafordes !== null) {
+				if (!$this->aFafordes->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFafordes->getValidationFailures());
+				}
+			}
+
+			if ($this->aFaforsol !== null) {
+				if (!$this->aFaforsol->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFaforsol->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = FapresupPeer::doValidate($this, $columns)) !== true) {
@@ -523,30 +648,33 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 				return $this->getMondesc();
 				break;
 			case 6:
-				return $this->getConpag();
+				return $this->getMonrgo();
 				break;
 			case 7:
-				return $this->getFordesp();
+				return $this->getFaconpagId();
 				break;
 			case 8:
-				return $this->getForsol();
+				return $this->getFafordesId();
 				break;
 			case 9:
-				return $this->getTipmon();
+				return $this->getFaforsolId();
 				break;
 			case 10:
-				return $this->getValmon();
+				return $this->getTipmon();
 				break;
 			case 11:
-				return $this->getAutpor();
+				return $this->getValmon();
 				break;
 			case 12:
-				return $this->getObserv();
+				return $this->getAutpor();
 				break;
 			case 13:
-				return $this->getCodubi();
+				return $this->getObserv();
 				break;
 			case 14:
+				return $this->getCodubi();
+				break;
+			case 15:
 				return $this->getId();
 				break;
 			default:
@@ -565,15 +693,16 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 			$keys[3] => $this->getCodcli(),
 			$keys[4] => $this->getMonpre(),
 			$keys[5] => $this->getMondesc(),
-			$keys[6] => $this->getConpag(),
-			$keys[7] => $this->getFordesp(),
-			$keys[8] => $this->getForsol(),
-			$keys[9] => $this->getTipmon(),
-			$keys[10] => $this->getValmon(),
-			$keys[11] => $this->getAutpor(),
-			$keys[12] => $this->getObserv(),
-			$keys[13] => $this->getCodubi(),
-			$keys[14] => $this->getId(),
+			$keys[6] => $this->getMonrgo(),
+			$keys[7] => $this->getFaconpagId(),
+			$keys[8] => $this->getFafordesId(),
+			$keys[9] => $this->getFaforsolId(),
+			$keys[10] => $this->getTipmon(),
+			$keys[11] => $this->getValmon(),
+			$keys[12] => $this->getAutpor(),
+			$keys[13] => $this->getObserv(),
+			$keys[14] => $this->getCodubi(),
+			$keys[15] => $this->getId(),
 		);
 		return $result;
 	}
@@ -608,30 +737,33 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 				$this->setMondesc($value);
 				break;
 			case 6:
-				$this->setConpag($value);
+				$this->setMonrgo($value);
 				break;
 			case 7:
-				$this->setFordesp($value);
+				$this->setFaconpagId($value);
 				break;
 			case 8:
-				$this->setForsol($value);
+				$this->setFafordesId($value);
 				break;
 			case 9:
-				$this->setTipmon($value);
+				$this->setFaforsolId($value);
 				break;
 			case 10:
-				$this->setValmon($value);
+				$this->setTipmon($value);
 				break;
 			case 11:
-				$this->setAutpor($value);
+				$this->setValmon($value);
 				break;
 			case 12:
-				$this->setObserv($value);
+				$this->setAutpor($value);
 				break;
 			case 13:
-				$this->setCodubi($value);
+				$this->setObserv($value);
 				break;
 			case 14:
+				$this->setCodubi($value);
+				break;
+			case 15:
 				$this->setId($value);
 				break;
 		} 	}
@@ -647,15 +779,16 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[3], $arr)) $this->setCodcli($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setMonpre($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setMondesc($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setConpag($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setFordesp($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setForsol($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setTipmon($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setValmon($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setAutpor($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setObserv($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setCodubi($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
+		if (array_key_exists($keys[6], $arr)) $this->setMonrgo($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFaconpagId($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFafordesId($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setFaforsolId($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setTipmon($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setValmon($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setAutpor($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setObserv($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setCodubi($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setId($arr[$keys[15]]);
 	}
 
 	
@@ -669,9 +802,10 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FapresupPeer::CODCLI)) $criteria->add(FapresupPeer::CODCLI, $this->codcli);
 		if ($this->isColumnModified(FapresupPeer::MONPRE)) $criteria->add(FapresupPeer::MONPRE, $this->monpre);
 		if ($this->isColumnModified(FapresupPeer::MONDESC)) $criteria->add(FapresupPeer::MONDESC, $this->mondesc);
-		if ($this->isColumnModified(FapresupPeer::CONPAG)) $criteria->add(FapresupPeer::CONPAG, $this->conpag);
-		if ($this->isColumnModified(FapresupPeer::FORDESP)) $criteria->add(FapresupPeer::FORDESP, $this->fordesp);
-		if ($this->isColumnModified(FapresupPeer::FORSOL)) $criteria->add(FapresupPeer::FORSOL, $this->forsol);
+		if ($this->isColumnModified(FapresupPeer::MONRGO)) $criteria->add(FapresupPeer::MONRGO, $this->monrgo);
+		if ($this->isColumnModified(FapresupPeer::FACONPAG_ID)) $criteria->add(FapresupPeer::FACONPAG_ID, $this->faconpag_id);
+		if ($this->isColumnModified(FapresupPeer::FAFORDES_ID)) $criteria->add(FapresupPeer::FAFORDES_ID, $this->fafordes_id);
+		if ($this->isColumnModified(FapresupPeer::FAFORSOL_ID)) $criteria->add(FapresupPeer::FAFORSOL_ID, $this->faforsol_id);
 		if ($this->isColumnModified(FapresupPeer::TIPMON)) $criteria->add(FapresupPeer::TIPMON, $this->tipmon);
 		if ($this->isColumnModified(FapresupPeer::VALMON)) $criteria->add(FapresupPeer::VALMON, $this->valmon);
 		if ($this->isColumnModified(FapresupPeer::AUTPOR)) $criteria->add(FapresupPeer::AUTPOR, $this->autpor);
@@ -720,11 +854,13 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 
 		$copyObj->setMondesc($this->mondesc);
 
-		$copyObj->setConpag($this->conpag);
+		$copyObj->setMonrgo($this->monrgo);
 
-		$copyObj->setFordesp($this->fordesp);
+		$copyObj->setFaconpagId($this->faconpag_id);
 
-		$copyObj->setForsol($this->forsol);
+		$copyObj->setFafordesId($this->fafordes_id);
+
+		$copyObj->setFaforsolId($this->faforsol_id);
 
 		$copyObj->setTipmon($this->tipmon);
 
@@ -758,6 +894,93 @@ abstract class BaseFapresup extends BaseObject  implements Persistent {
 			self::$peer = new FapresupPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setFaconpag($v)
+	{
+
+
+		if ($v === null) {
+			$this->setFaconpagId(NULL);
+		} else {
+			$this->setFaconpagId($v->getId());
+		}
+
+
+		$this->aFaconpag = $v;
+	}
+
+
+	
+	public function getFaconpag($con = null)
+	{
+		if ($this->aFaconpag === null && ($this->faconpag_id !== null)) {
+						include_once 'lib/model/om/BaseFaconpagPeer.php';
+
+			$this->aFaconpag = FaconpagPeer::retrieveByPK($this->faconpag_id, $con);
+
+			
+		}
+		return $this->aFaconpag;
+	}
+
+	
+	public function setFafordes($v)
+	{
+
+
+		if ($v === null) {
+			$this->setFafordesId(NULL);
+		} else {
+			$this->setFafordesId($v->getId());
+		}
+
+
+		$this->aFafordes = $v;
+	}
+
+
+	
+	public function getFafordes($con = null)
+	{
+		if ($this->aFafordes === null && ($this->fafordes_id !== null)) {
+						include_once 'lib/model/om/BaseFafordesPeer.php';
+
+			$this->aFafordes = FafordesPeer::retrieveByPK($this->fafordes_id, $con);
+
+			
+		}
+		return $this->aFafordes;
+	}
+
+	
+	public function setFaforsol($v)
+	{
+
+
+		if ($v === null) {
+			$this->setFaforsolId(NULL);
+		} else {
+			$this->setFaforsolId($v->getId());
+		}
+
+
+		$this->aFaforsol = $v;
+	}
+
+
+	
+	public function getFaforsol($con = null)
+	{
+		if ($this->aFaforsol === null && ($this->faforsol_id !== null)) {
+						include_once 'lib/model/om/BaseFaforsolPeer.php';
+
+			$this->aFaforsol = FaforsolPeer::retrieveByPK($this->faforsol_id, $con);
+
+			
+		}
+		return $this->aFaforsol;
 	}
 
 } 

@@ -205,6 +205,7 @@ abstract class BaseCatipsalPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(CatipsalPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

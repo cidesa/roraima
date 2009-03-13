@@ -29,92 +29,118 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodfal()
-	{
+  
+  public function getCodfal()
+  {
 
-		return $this->codfal; 		
-	}
-	
-	public function getDesfal()
-	{
+    return trim($this->codfal);
 
-		return $this->desfal; 		
-	}
-	
-	public function getTipfal()
-	{
+  }
+  
+  public function getDesfal()
+  {
 
-		return $this->tipfal; 		
-	}
-	
-	public function getId()
-	{
+    return trim($this->desfal);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTipfal()
+  {
+
+    return trim($this->tipfal);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodfal($v)
 	{
 
-		if ($this->codfal !== $v) {
-			$this->codfal = $v;
-			$this->modifiedColumns[] = CamotfalPeer::CODFAL;
-		}
-
+    if ($this->codfal !== $v) {
+        $this->codfal = $v;
+        $this->modifiedColumns[] = CamotfalPeer::CODFAL;
+      }
+  
 	} 
 	
 	public function setDesfal($v)
 	{
 
-		if ($this->desfal !== $v) {
-			$this->desfal = $v;
-			$this->modifiedColumns[] = CamotfalPeer::DESFAL;
-		}
-
+    if ($this->desfal !== $v) {
+        $this->desfal = $v;
+        $this->modifiedColumns[] = CamotfalPeer::DESFAL;
+      }
+  
 	} 
 	
 	public function setTipfal($v)
 	{
 
-		if ($this->tipfal !== $v) {
-			$this->tipfal = $v;
-			$this->modifiedColumns[] = CamotfalPeer::TIPFAL;
-		}
-
+    if ($this->tipfal !== $v) {
+        $this->tipfal = $v;
+        $this->modifiedColumns[] = CamotfalPeer::TIPFAL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CamotfalPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CamotfalPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codfal = $rs->getString($startcol + 0);
+      $this->codfal = $rs->getString($startcol + 0);
 
-			$this->desfal = $rs->getString($startcol + 1);
+      $this->desfal = $rs->getString($startcol + 1);
 
-			$this->tipfal = $rs->getString($startcol + 2);
+      $this->tipfal = $rs->getString($startcol + 2);
 
-			$this->id = $rs->getInt($startcol + 3);
+      $this->id = $rs->getInt($startcol + 3);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 4; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Camotfal object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 4; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Camotfal object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -171,6 +197,7 @@ abstract class BaseCamotfal extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CamotfalPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CamotfalPeer::doUpdate($this, $con);

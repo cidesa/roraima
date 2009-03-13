@@ -97,398 +97,441 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCedrif()
-	{
+  
+  public function getCedrif()
+  {
 
-		return $this->cedrif; 		
-	}
-	
-	public function getNomben()
-	{
+    return trim($this->cedrif);
 
-		return $this->nomben; 		
-	}
-	
-	public function getDirben()
-	{
+  }
+  
+  public function getNomben()
+  {
 
-		return $this->dirben; 		
-	}
-	
-	public function getTelben()
-	{
+    return trim($this->nomben);
 
-		return $this->telben; 		
-	}
-	
-	public function getCodcta()
-	{
+  }
+  
+  public function getDirben()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getNitben()
-	{
+    return trim($this->dirben);
 
-		return $this->nitben; 		
-	}
-	
-	public function getCodtipben()
-	{
+  }
+  
+  public function getTelben()
+  {
 
-		return $this->codtipben; 		
-	}
-	
-	public function getTipper()
-	{
+    return trim($this->telben);
 
-		return $this->tipper; 		
-	}
-	
-	public function getNacionalidad()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->nacionalidad; 		
-	}
-	
-	public function getResidente()
-	{
+    return trim($this->codcta);
 
-		return $this->residente; 		
-	}
-	
-	public function getConstituida()
-	{
+  }
+  
+  public function getNitben()
+  {
 
-		return $this->constituida; 		
-	}
-	
-	public function getCodord()
-	{
+    return trim($this->nitben);
 
-		return $this->codord; 		
-	}
-	
-	public function getCodpercon()
-	{
+  }
+  
+  public function getCodtipben()
+  {
 
-		return $this->codpercon; 		
-	}
-	
-	public function getCodordadi()
-	{
+    return trim($this->codtipben);
 
-		return $this->codordadi; 		
-	}
-	
-	public function getCodperconadi()
-	{
+  }
+  
+  public function getTipper()
+  {
 
-		return $this->codperconadi; 		
-	}
-	
-	public function getCodordcontra()
-	{
+    return trim($this->tipper);
 
-		return $this->codordcontra; 		
-	}
-	
-	public function getCodpercontra()
-	{
+  }
+  
+  public function getNacionalidad()
+  {
 
-		return $this->codpercontra; 		
-	}
-	
-	public function getTemcedrif()
-	{
+    return trim($this->nacionalidad);
 
-		return $this->temcedrif; 		
-	}
-	
-	public function getCodctasec()
-	{
+  }
+  
+  public function getResidente()
+  {
 
-		return $this->codctasec; 		
-	}
-	
-	public function getCodctacajchi()
-	{
+    return trim($this->residente);
 
-		return $this->codctacajchi; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getConstituida()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->constituida);
+
+  }
+  
+  public function getCodord()
+  {
+
+    return trim($this->codord);
+
+  }
+  
+  public function getCodpercon()
+  {
+
+    return trim($this->codpercon);
+
+  }
+  
+  public function getCodordadi()
+  {
+
+    return trim($this->codordadi);
+
+  }
+  
+  public function getCodperconadi()
+  {
+
+    return trim($this->codperconadi);
+
+  }
+  
+  public function getCodordcontra()
+  {
+
+    return trim($this->codordcontra);
+
+  }
+  
+  public function getCodpercontra()
+  {
+
+    return trim($this->codpercontra);
+
+  }
+  
+  public function getTemcedrif()
+  {
+
+    return trim($this->temcedrif);
+
+  }
+  
+  public function getCodctasec()
+  {
+
+    return trim($this->codctasec);
+
+  }
+  
+  public function getCodctacajchi()
+  {
+
+    return trim($this->codctacajchi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCedrif($v)
 	{
 
-		if ($this->cedrif !== $v) {
-			$this->cedrif = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CEDRIF;
-		}
-
+    if ($this->cedrif !== $v) {
+        $this->cedrif = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CEDRIF;
+      }
+  
 	} 
 	
 	public function setNomben($v)
 	{
 
-		if ($this->nomben !== $v) {
-			$this->nomben = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::NOMBEN;
-		}
-
+    if ($this->nomben !== $v) {
+        $this->nomben = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::NOMBEN;
+      }
+  
 	} 
 	
 	public function setDirben($v)
 	{
 
-		if ($this->dirben !== $v) {
-			$this->dirben = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::DIRBEN;
-		}
-
+    if ($this->dirben !== $v) {
+        $this->dirben = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::DIRBEN;
+      }
+  
 	} 
 	
 	public function setTelben($v)
 	{
 
-		if ($this->telben !== $v) {
-			$this->telben = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::TELBEN;
-		}
-
+    if ($this->telben !== $v) {
+        $this->telben = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::TELBEN;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setNitben($v)
 	{
 
-		if ($this->nitben !== $v) {
-			$this->nitben = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::NITBEN;
-		}
-
+    if ($this->nitben !== $v) {
+        $this->nitben = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::NITBEN;
+      }
+  
 	} 
 	
 	public function setCodtipben($v)
 	{
 
-		if ($this->codtipben !== $v) {
-			$this->codtipben = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODTIPBEN;
-		}
-
+    if ($this->codtipben !== $v) {
+        $this->codtipben = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODTIPBEN;
+      }
+  
 	} 
 	
 	public function setTipper($v)
 	{
 
-		if ($this->tipper !== $v) {
-			$this->tipper = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::TIPPER;
-		}
-
+    if ($this->tipper !== $v) {
+        $this->tipper = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::TIPPER;
+      }
+  
 	} 
 	
 	public function setNacionalidad($v)
 	{
 
-		if ($this->nacionalidad !== $v) {
-			$this->nacionalidad = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::NACIONALIDAD;
-		}
-
+    if ($this->nacionalidad !== $v) {
+        $this->nacionalidad = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::NACIONALIDAD;
+      }
+  
 	} 
 	
 	public function setResidente($v)
 	{
 
-		if ($this->residente !== $v) {
-			$this->residente = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::RESIDENTE;
-		}
-
+    if ($this->residente !== $v) {
+        $this->residente = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::RESIDENTE;
+      }
+  
 	} 
 	
 	public function setConstituida($v)
 	{
 
-		if ($this->constituida !== $v) {
-			$this->constituida = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CONSTITUIDA;
-		}
-
+    if ($this->constituida !== $v) {
+        $this->constituida = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CONSTITUIDA;
+      }
+  
 	} 
 	
 	public function setCodord($v)
 	{
 
-		if ($this->codord !== $v) {
-			$this->codord = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODORD;
-		}
-
+    if ($this->codord !== $v) {
+        $this->codord = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODORD;
+      }
+  
 	} 
 	
 	public function setCodpercon($v)
 	{
 
-		if ($this->codpercon !== $v) {
-			$this->codpercon = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODPERCON;
-		}
-
+    if ($this->codpercon !== $v) {
+        $this->codpercon = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODPERCON;
+      }
+  
 	} 
 	
 	public function setCodordadi($v)
 	{
 
-		if ($this->codordadi !== $v) {
-			$this->codordadi = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODORDADI;
-		}
-
+    if ($this->codordadi !== $v) {
+        $this->codordadi = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODORDADI;
+      }
+  
 	} 
 	
 	public function setCodperconadi($v)
 	{
 
-		if ($this->codperconadi !== $v) {
-			$this->codperconadi = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODPERCONADI;
-		}
-
+    if ($this->codperconadi !== $v) {
+        $this->codperconadi = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODPERCONADI;
+      }
+  
 	} 
 	
 	public function setCodordcontra($v)
 	{
 
-		if ($this->codordcontra !== $v) {
-			$this->codordcontra = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODORDCONTRA;
-		}
-
+    if ($this->codordcontra !== $v) {
+        $this->codordcontra = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODORDCONTRA;
+      }
+  
 	} 
 	
 	public function setCodpercontra($v)
 	{
 
-		if ($this->codpercontra !== $v) {
-			$this->codpercontra = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODPERCONTRA;
-		}
-
+    if ($this->codpercontra !== $v) {
+        $this->codpercontra = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODPERCONTRA;
+      }
+  
 	} 
 	
 	public function setTemcedrif($v)
 	{
 
-		if ($this->temcedrif !== $v) {
-			$this->temcedrif = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::TEMCEDRIF;
-		}
-
+    if ($this->temcedrif !== $v) {
+        $this->temcedrif = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::TEMCEDRIF;
+      }
+  
 	} 
 	
 	public function setCodctasec($v)
 	{
 
-		if ($this->codctasec !== $v) {
-			$this->codctasec = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODCTASEC;
-		}
-
+    if ($this->codctasec !== $v) {
+        $this->codctasec = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODCTASEC;
+      }
+  
 	} 
 	
 	public function setCodctacajchi($v)
 	{
 
-		if ($this->codctacajchi !== $v) {
-			$this->codctacajchi = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::CODCTACAJCHI;
-		}
-
+    if ($this->codctacajchi !== $v) {
+        $this->codctacajchi = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::CODCTACAJCHI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OpbenefiPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OpbenefiPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->cedrif = $rs->getString($startcol + 0);
+      $this->cedrif = $rs->getString($startcol + 0);
 
-			$this->nomben = $rs->getString($startcol + 1);
+      $this->nomben = $rs->getString($startcol + 1);
 
-			$this->dirben = $rs->getString($startcol + 2);
+      $this->dirben = $rs->getString($startcol + 2);
 
-			$this->telben = $rs->getString($startcol + 3);
+      $this->telben = $rs->getString($startcol + 3);
 
-			$this->codcta = $rs->getString($startcol + 4);
+      $this->codcta = $rs->getString($startcol + 4);
 
-			$this->nitben = $rs->getString($startcol + 5);
+      $this->nitben = $rs->getString($startcol + 5);
 
-			$this->codtipben = $rs->getString($startcol + 6);
+      $this->codtipben = $rs->getString($startcol + 6);
 
-			$this->tipper = $rs->getString($startcol + 7);
+      $this->tipper = $rs->getString($startcol + 7);
 
-			$this->nacionalidad = $rs->getString($startcol + 8);
+      $this->nacionalidad = $rs->getString($startcol + 8);
 
-			$this->residente = $rs->getString($startcol + 9);
+      $this->residente = $rs->getString($startcol + 9);
 
-			$this->constituida = $rs->getString($startcol + 10);
+      $this->constituida = $rs->getString($startcol + 10);
 
-			$this->codord = $rs->getString($startcol + 11);
+      $this->codord = $rs->getString($startcol + 11);
 
-			$this->codpercon = $rs->getString($startcol + 12);
+      $this->codpercon = $rs->getString($startcol + 12);
 
-			$this->codordadi = $rs->getString($startcol + 13);
+      $this->codordadi = $rs->getString($startcol + 13);
 
-			$this->codperconadi = $rs->getString($startcol + 14);
+      $this->codperconadi = $rs->getString($startcol + 14);
 
-			$this->codordcontra = $rs->getString($startcol + 15);
+      $this->codordcontra = $rs->getString($startcol + 15);
 
-			$this->codpercontra = $rs->getString($startcol + 16);
+      $this->codpercontra = $rs->getString($startcol + 16);
 
-			$this->temcedrif = $rs->getString($startcol + 17);
+      $this->temcedrif = $rs->getString($startcol + 17);
 
-			$this->codctasec = $rs->getString($startcol + 18);
+      $this->codctasec = $rs->getString($startcol + 18);
 
-			$this->codctacajchi = $rs->getString($startcol + 19);
+      $this->codctacajchi = $rs->getString($startcol + 19);
 
-			$this->id = $rs->getInt($startcol + 20);
+      $this->id = $rs->getInt($startcol + 20);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 21; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Opbenefi object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 21; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Opbenefi object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -545,6 +588,7 @@ abstract class BaseOpbenefi extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OpbenefiPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OpbenefiPeer::doUpdate($this, $con);

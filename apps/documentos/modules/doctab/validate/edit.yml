@@ -1,0 +1,68 @@
+methods:
+  post:
+   - "dftabtip{tipdoc}"
+   - "dftabtip{nomtab}"
+   - "dftabtip{vidutil}"
+   - "dftabtip{clvprm}"
+   - "dftabtip{clvfrn}"
+   - "dftabtip{mondoc}"
+   - "dftabtip{fecdoc}"
+   - "dftabtip{desdoc}"
+   - "dftabtip{stadoc}"
+   - "dftabtip{infdoc1}"
+   - "dftabtip{infdoc2}"
+   - "dftabtip{infdoc3}"
+   - "dftabtip{infdoc4}"
+
+names:
+  dftabtip{tipdoc}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{nomtab}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{vidutil}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{clvprm}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{clvfrn}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{mondoc}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{fecdoc}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{desdoc}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{stadoc}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{infdoc1}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{infdoc2}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{infdoc3}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.
+
+  dftabtip{infdoc4}:
+    required:  Yes
+    required_msg: Debe seleccionar un elemento.

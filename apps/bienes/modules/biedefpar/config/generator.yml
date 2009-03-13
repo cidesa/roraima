@@ -3,12 +3,13 @@ generator:
   param:
     model_class:      Bnparbie
     theme:            default
+
     fields:
-      pardes: {name: Partida Desde}
-      nompardes: { name: Descripción}
-      parhas: {name: Partida Hasta}
-      nomparhas: { name: Descripción}
-      valrcp: {name: Valida Recepción}              
+      pardes:      {name: Partida Desde}
+      nompardes:   {name: Descripción}
+      parhas:      {name: Partida Hasta}
+      nomparhas:   {name: Descripción}
+      valrcp:      {name: Valida Recepción}
     list:
       title:          Definición de Partidas
       filters:        [pardes]
@@ -17,6 +18,12 @@ generator:
         _edit:        ~
         _delete:      ~
       max_per_page:   10
+      sort:   pardes
     edit:
       title:          Edición de Partidas
       display:        [=pardes, nompardes, parhas, nomparhas, valrcp]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

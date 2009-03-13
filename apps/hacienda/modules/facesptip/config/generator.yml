@@ -1,0 +1,42 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Fctipesp
+    theme:            cidesaGenerator
+
+    fields:
+      tipesp:  { name: Código de Uso, params: size=6 maxlength=4 }
+      anovig:  { name: Año de Vigencia del Uso, params: size=5 maxlength=4 }
+      destip:  { name: Descripcion , params: size=80 maxlength=250 }
+      pormon:  { name: Monto del Aforo, params: size=3 maxlength=1 }
+      alimon:  { name: Alícuota (X/1000), params: size=10  }
+      statip:  { name: Edad Límite, params: size=3 maxlength=1 }
+      unipar:  { name: Fracción U.T, params: size=40 maxlength=50 }
+      frepar:  { name: Frecuencia, params: size=10  }
+      paresp:  { name: Formula, params: size=40 maxlength=300 }
+      exoesp:  { name: Exonerado, params: size=3 maxlength=1 }
+      grid:  { name: . }
+    list:
+      title:     Clasificador de Espectaculos Públicos
+      display:   [=tipesp, anovig, destip]
+      sort:      destip
+      filters:   [tipesp, anovig, destip]
+      fields:
+        tipesp:
+          params: size=18
+        destip:
+          params: size=18
+      max_per_page: 10
+      sort:  anovig
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+    edit:
+      title: Clasificador de Espectaculos Públicos
+      display:
+        "Datos Generales": [ _tipesp, _anovig, destip, unipar, _frepar, parpro, _grid ]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

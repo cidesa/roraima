@@ -7,19 +7,24 @@ generator:
     fields:
       codnom:      { name : Código Nomina }
       nomnom:      { name : Nombre Nomina }
-      codemp:      { name : Código Empleado } 
-      nomemp:      { name : Nombre Empleado }      
+      codemp:      { name : Código Empleado }
+      nomemp:      { name : Nombre Empleado }
       codcar:      { name : Código Cargo }
-      nomcar:      { name : Nombre Cargo }      
+      nomcar:      { name : Nombre Cargo }
 
     list:
-      title:          Movimientos por Empleados 
-      display:        [codnom, nomnom, codemp, nomemp, codcar, nomcar]
+      title:          Movimientos por Empleados
+      display:        [=codnom, nomnom, codemp, nomemp, codcar, nomcar]
       filters:        [codnom, codemp]
       object_actions:
         _edit:        ~
-        _delete:      ~              
-      max_per_page:   10    
+        _delete:      ~
+      max_per_page:   10
     edit:
-      title:          Movimientos por Empleados 
-      display:        [codnom, nomnom, codemp, nomemp, codcar, nomcar]  
+      title:          Movimientos por Empleados
+      display:        [codnom, nomnom, codemp, nomemp, codcar, nomcar]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

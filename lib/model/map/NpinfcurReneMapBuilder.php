@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpinfcurReneMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpinfcurReneMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpinfcurReneMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npinfcur_rene');
 		$tMap->setPhpName('NpinfcurRene');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npinfcur_rene_SEQ');
 
 		$tMap->addColumn('CODEMP', 'Codemp', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -42,11 +44,11 @@ class NpinfcurReneMapBuilder {
 
 		$tMap->addColumn('DURCUR', 'Durcur', 'string', CreoleTypes::VARCHAR, true, 15);
 
-		$tMap->addColumn('FECCUR', 'Feccur', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECCUR', 'Feccur', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECINI', 'Fecini', 'int', CreoleTypes::DATE, false, null);
 
-		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false);
+		$tMap->addColumn('FECFIN', 'Fecfin', 'int', CreoleTypes::DATE, false, null);
 
 		$tMap->addColumn('NIVEST', 'Nivest', 'string', CreoleTypes::VARCHAR, false, 40);
 
@@ -63,6 +65,6 @@ class NpinfcurReneMapBuilder {
 		$tMap->addColumn('ANOFIN', 'Anofin', 'string', CreoleTypes::VARCHAR, false, 4);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

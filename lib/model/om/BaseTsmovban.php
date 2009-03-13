@@ -61,260 +61,293 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumcue()
-	{
+  
+  public function getNumcue()
+  {
 
-		return $this->numcue; 		
-	}
-	
-	public function getCodcta()
-	{
+    return trim($this->numcue);
 
-		return $this->codcta; 		
-	}
-	
-	public function getRefban()
-	{
+  }
+  
+  public function getCodcta()
+  {
 
-		return $this->refban; 		
-	}
-	
-	public function getFecban($format = 'Y-m-d')
-	{
+    return trim($this->codcta);
 
-		if ($this->fecban === null || $this->fecban === '') {
-			return null;
-		} elseif (!is_int($this->fecban)) {
-						$ts = strtotime($this->fecban);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecban] as date/time value: " . var_export($this->fecban, true));
-			}
-		} else {
-			$ts = $this->fecban;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getRefban()
+  {
 
-	
-	public function getTipmov()
-	{
+    return trim($this->refban);
 
-		return $this->tipmov; 		
-	}
-	
-	public function getDesban()
-	{
+  }
+  
+  public function getFecban($format = 'Y-m-d')
+  {
 
-		return $this->desban; 		
-	}
-	
-	public function getMonmov()
-	{
+    if ($this->fecban === null || $this->fecban === '') {
+      return null;
+    } elseif (!is_int($this->fecban)) {
+            $ts = adodb_strtotime($this->fecban);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecban] as date/time value: " . var_export($this->fecban, true));
+      }
+    } else {
+      $ts = $this->fecban;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->monmov,2,',','.');
-		
-	}
-	
-	public function getStatus()
-	{
+  
+  public function getTipmov()
+  {
 
-		return $this->status; 		
-	}
-	
-	public function getStacon()
-	{
+    return trim($this->tipmov);
 
-		return $this->stacon; 		
-	}
-	
-	public function getTransito()
-	{
+  }
+  
+  public function getDesban()
+  {
 
-		return $this->transito; 		
-	}
-	
-	public function getStacon1()
-	{
+    return trim($this->desban);
 
-		return $this->stacon1; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMonmov($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->monmov,2,',','.');
+    else return $this->monmov;
+
+  }
+  
+  public function getStatus()
+  {
+
+    return trim($this->status);
+
+  }
+  
+  public function getStacon()
+  {
+
+    return trim($this->stacon);
+
+  }
+  
+  public function getTransito()
+  {
+
+    return trim($this->transito);
+
+  }
+  
+  public function getStacon1()
+  {
+
+    return trim($this->stacon1);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumcue($v)
 	{
 
-		if ($this->numcue !== $v) {
-			$this->numcue = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::NUMCUE;
-		}
-
+    if ($this->numcue !== $v) {
+        $this->numcue = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::NUMCUE;
+      }
+  
 	} 
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::CODCTA;
+      }
+  
 	} 
 	
 	public function setRefban($v)
 	{
 
-		if ($this->refban !== $v) {
-			$this->refban = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::REFBAN;
-		}
-
+    if ($this->refban !== $v) {
+        $this->refban = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::REFBAN;
+      }
+  
 	} 
 	
 	public function setFecban($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecban] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecban !== $ts) {
-			$this->fecban = $ts;
-			$this->modifiedColumns[] = TsmovbanPeer::FECBAN;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecban] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecban !== $ts) {
+      $this->fecban = $ts;
+      $this->modifiedColumns[] = TsmovbanPeer::FECBAN;
+    }
 
 	} 
 	
 	public function setTipmov($v)
 	{
 
-		if ($this->tipmov !== $v) {
-			$this->tipmov = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::TIPMOV;
-		}
-
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::TIPMOV;
+      }
+  
 	} 
 	
 	public function setDesban($v)
 	{
 
-		if ($this->desban !== $v) {
-			$this->desban = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::DESBAN;
-		}
-
+    if ($this->desban !== $v) {
+        $this->desban = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::DESBAN;
+      }
+  
 	} 
 	
 	public function setMonmov($v)
 	{
 
-		if ($this->monmov !== $v) {
-			$this->monmov = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::MONMOV;
-		}
-
+    if ($this->monmov !== $v) {
+        $this->monmov = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = TsmovbanPeer::MONMOV;
+      }
+  
 	} 
 	
 	public function setStatus($v)
 	{
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::STATUS;
-		}
-
+    if ($this->status !== $v) {
+        $this->status = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::STATUS;
+      }
+  
 	} 
 	
 	public function setStacon($v)
 	{
 
-		if ($this->stacon !== $v) {
-			$this->stacon = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::STACON;
-		}
-
+    if ($this->stacon !== $v) {
+        $this->stacon = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::STACON;
+      }
+  
 	} 
 	
 	public function setTransito($v)
 	{
 
-		if ($this->transito !== $v) {
-			$this->transito = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::TRANSITO;
-		}
-
+    if ($this->transito !== $v) {
+        $this->transito = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::TRANSITO;
+      }
+  
 	} 
 	
 	public function setStacon1($v)
 	{
 
-		if ($this->stacon1 !== $v) {
-			$this->stacon1 = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::STACON1;
-		}
-
+    if ($this->stacon1 !== $v) {
+        $this->stacon1 = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::STACON1;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = TsmovbanPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = TsmovbanPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numcue = $rs->getString($startcol + 0);
+      $this->numcue = $rs->getString($startcol + 0);
 
-			$this->codcta = $rs->getString($startcol + 1);
+      $this->codcta = $rs->getString($startcol + 1);
 
-			$this->refban = $rs->getString($startcol + 2);
+      $this->refban = $rs->getString($startcol + 2);
 
-			$this->fecban = $rs->getDate($startcol + 3, null);
+      $this->fecban = $rs->getDate($startcol + 3, null);
 
-			$this->tipmov = $rs->getString($startcol + 4);
+      $this->tipmov = $rs->getString($startcol + 4);
 
-			$this->desban = $rs->getString($startcol + 5);
+      $this->desban = $rs->getString($startcol + 5);
 
-			$this->monmov = $rs->getFloat($startcol + 6);
+      $this->monmov = $rs->getFloat($startcol + 6);
 
-			$this->status = $rs->getString($startcol + 7);
+      $this->status = $rs->getString($startcol + 7);
 
-			$this->stacon = $rs->getString($startcol + 8);
+      $this->stacon = $rs->getString($startcol + 8);
 
-			$this->transito = $rs->getString($startcol + 9);
+      $this->transito = $rs->getString($startcol + 9);
 
-			$this->stacon1 = $rs->getString($startcol + 10);
+      $this->stacon1 = $rs->getString($startcol + 10);
 
-			$this->id = $rs->getInt($startcol + 11);
+      $this->id = $rs->getInt($startcol + 11);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 12; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Tsmovban object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 12; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Tsmovban object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -371,6 +404,7 @@ abstract class BaseTsmovban extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = TsmovbanPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += TsmovbanPeer::doUpdate($this, $con);

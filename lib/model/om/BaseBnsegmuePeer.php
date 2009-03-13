@@ -250,6 +250,7 @@ abstract class BaseBnsegmuePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(BnsegmuePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

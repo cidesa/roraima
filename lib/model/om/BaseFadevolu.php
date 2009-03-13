@@ -21,7 +21,7 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 
 
 	
-	protected $codtidev;
+	protected $fatipdev_id;
 
 
 	
@@ -48,132 +48,148 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aFatipdev;
+
+	
 	protected $alreadyInSave = false;
 
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNrodev()
-	{
+  
+  public function getNrodev()
+  {
 
-		return $this->nrodev; 		
-	}
-	
-	public function getFecdev($format = 'Y-m-d')
-	{
+    return trim($this->nrodev);
 
-		if ($this->fecdev === null || $this->fecdev === '') {
-			return null;
-		} elseif (!is_int($this->fecdev)) {
-						$ts = strtotime($this->fecdev);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdev] as date/time value: " . var_export($this->fecdev, true));
-			}
-		} else {
-			$ts = $this->fecdev;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecdev($format = 'Y-m-d')
+  {
 
-	
-	public function getRefdes()
-	{
+    if ($this->fecdev === null || $this->fecdev === '') {
+      return null;
+    } elseif (!is_int($this->fecdev)) {
+            $ts = adodb_strtotime($this->fecdev);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdev] as date/time value: " . var_export($this->fecdev, true));
+      }
+    } else {
+      $ts = $this->fecdev;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->refdes; 		
-	}
-	
-	public function getCodtidev()
-	{
+  
+  public function getRefdes()
+  {
 
-		return $this->codtidev; 		
-	}
-	
-	public function getCodalm()
-	{
+    return trim($this->refdes);
 
-		return $this->codalm; 		
-	}
-	
-	public function getDesdev()
-	{
+  }
+  
+  public function getFatipdevId()
+  {
 
-		return $this->desdev; 		
-	}
-	
-	public function getStadph()
-	{
+    return $this->fatipdev_id;
 
-		return $this->stadph; 		
-	}
-	
-	public function getMondev()
-	{
+  }
+  
+  public function getCodalm()
+  {
 
-		return number_format($this->mondev,2,',','.');
-		
-	}
-	
-	public function getObsdev()
-	{
+    return trim($this->codalm);
 
-		return $this->obsdev; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDesdev()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->desdev);
+
+  }
+  
+  public function getStadph()
+  {
+
+    return trim($this->stadph);
+
+  }
+  
+  public function getMondev($val=false)
+  {
+
+    if($val) return number_format($this->mondev,2,',','.');
+    else return $this->mondev;
+
+  }
+  
+  public function getObsdev()
+  {
+
+    return trim($this->obsdev);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNrodev($v)
 	{
 
-		if ($this->nrodev !== $v) {
-			$this->nrodev = $v;
-			$this->modifiedColumns[] = FadevoluPeer::NRODEV;
-		}
-
+    if ($this->nrodev !== $v) {
+        $this->nrodev = $v;
+        $this->modifiedColumns[] = FadevoluPeer::NRODEV;
+      }
+  
 	} 
 	
 	public function setFecdev($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdev] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdev !== $ts) {
-			$this->fecdev = $ts;
-			$this->modifiedColumns[] = FadevoluPeer::FECDEV;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdev] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdev !== $ts) {
+      $this->fecdev = $ts;
+      $this->modifiedColumns[] = FadevoluPeer::FECDEV;
+    }
 
 	} 
 	
 	public function setRefdes($v)
 	{
 
-		if ($this->refdes !== $v) {
-			$this->refdes = $v;
-			$this->modifiedColumns[] = FadevoluPeer::REFDES;
-		}
-
+    if ($this->refdes !== $v) {
+        $this->refdes = $v;
+        $this->modifiedColumns[] = FadevoluPeer::REFDES;
+      }
+  
 	} 
 	
-	public function setCodtidev($v)
+	public function setFatipdevId($v)
 	{
 
-		if ($this->codtidev !== $v) {
-			$this->codtidev = $v;
-			$this->modifiedColumns[] = FadevoluPeer::CODTIDEV;
+    if ($this->fatipdev_id !== $v) {
+        $this->fatipdev_id = $v;
+        $this->modifiedColumns[] = FadevoluPeer::FATIPDEV_ID;
+      }
+  
+		if ($this->aFatipdev !== null && $this->aFatipdev->getId() !== $v) {
+			$this->aFatipdev = null;
 		}
 
 	} 
@@ -181,96 +197,118 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 	public function setCodalm($v)
 	{
 
-		if ($this->codalm !== $v) {
-			$this->codalm = $v;
-			$this->modifiedColumns[] = FadevoluPeer::CODALM;
-		}
-
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = FadevoluPeer::CODALM;
+      }
+  
 	} 
 	
 	public function setDesdev($v)
 	{
 
-		if ($this->desdev !== $v) {
-			$this->desdev = $v;
-			$this->modifiedColumns[] = FadevoluPeer::DESDEV;
-		}
-
+    if ($this->desdev !== $v) {
+        $this->desdev = $v;
+        $this->modifiedColumns[] = FadevoluPeer::DESDEV;
+      }
+  
 	} 
 	
 	public function setStadph($v)
 	{
 
-		if ($this->stadph !== $v) {
-			$this->stadph = $v;
-			$this->modifiedColumns[] = FadevoluPeer::STADPH;
-		}
-
+    if ($this->stadph !== $v) {
+        $this->stadph = $v;
+        $this->modifiedColumns[] = FadevoluPeer::STADPH;
+      }
+  
 	} 
 	
 	public function setMondev($v)
 	{
 
-		if ($this->mondev !== $v) {
-			$this->mondev = $v;
-			$this->modifiedColumns[] = FadevoluPeer::MONDEV;
-		}
-
+    if ($this->mondev !== $v) {
+        $this->mondev = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FadevoluPeer::MONDEV;
+      }
+  
 	} 
 	
 	public function setObsdev($v)
 	{
 
-		if ($this->obsdev !== $v) {
-			$this->obsdev = $v;
-			$this->modifiedColumns[] = FadevoluPeer::OBSDEV;
-		}
-
+    if ($this->obsdev !== $v) {
+        $this->obsdev = $v;
+        $this->modifiedColumns[] = FadevoluPeer::OBSDEV;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FadevoluPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FadevoluPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->nrodev = $rs->getString($startcol + 0);
+      $this->nrodev = $rs->getString($startcol + 0);
 
-			$this->fecdev = $rs->getDate($startcol + 1, null);
+      $this->fecdev = $rs->getDate($startcol + 1, null);
 
-			$this->refdes = $rs->getString($startcol + 2);
+      $this->refdes = $rs->getString($startcol + 2);
 
-			$this->codtidev = $rs->getString($startcol + 3);
+      $this->fatipdev_id = $rs->getInt($startcol + 3);
 
-			$this->codalm = $rs->getString($startcol + 4);
+      $this->codalm = $rs->getString($startcol + 4);
 
-			$this->desdev = $rs->getString($startcol + 5);
+      $this->desdev = $rs->getString($startcol + 5);
 
-			$this->stadph = $rs->getString($startcol + 6);
+      $this->stadph = $rs->getString($startcol + 6);
 
-			$this->mondev = $rs->getFloat($startcol + 7);
+      $this->mondev = $rs->getFloat($startcol + 7);
 
-			$this->obsdev = $rs->getString($startcol + 8);
+      $this->obsdev = $rs->getString($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fadevolu object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fadevolu object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -323,10 +361,20 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aFatipdev !== null) {
+				if ($this->aFatipdev->isModified()) {
+					$affectedRows += $this->aFatipdev->save($con);
+				}
+				$this->setFatipdev($this->aFatipdev);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = FadevoluPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FadevoluPeer::doUpdate($this, $con);
@@ -369,6 +417,14 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aFatipdev !== null) {
+				if (!$this->aFatipdev->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aFatipdev->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = FadevoluPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -402,7 +458,7 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 				return $this->getRefdes();
 				break;
 			case 3:
-				return $this->getCodtidev();
+				return $this->getFatipdevId();
 				break;
 			case 4:
 				return $this->getCodalm();
@@ -435,7 +491,7 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 			$keys[0] => $this->getNrodev(),
 			$keys[1] => $this->getFecdev(),
 			$keys[2] => $this->getRefdes(),
-			$keys[3] => $this->getCodtidev(),
+			$keys[3] => $this->getFatipdevId(),
 			$keys[4] => $this->getCodalm(),
 			$keys[5] => $this->getDesdev(),
 			$keys[6] => $this->getStadph(),
@@ -467,7 +523,7 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 				$this->setRefdes($value);
 				break;
 			case 3:
-				$this->setCodtidev($value);
+				$this->setFatipdevId($value);
 				break;
 			case 4:
 				$this->setCodalm($value);
@@ -497,7 +553,7 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[0], $arr)) $this->setNrodev($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setFecdev($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setRefdes($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setCodtidev($arr[$keys[3]]);
+		if (array_key_exists($keys[3], $arr)) $this->setFatipdevId($arr[$keys[3]]);
 		if (array_key_exists($keys[4], $arr)) $this->setCodalm($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setDesdev($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setStadph($arr[$keys[6]]);
@@ -514,7 +570,7 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FadevoluPeer::NRODEV)) $criteria->add(FadevoluPeer::NRODEV, $this->nrodev);
 		if ($this->isColumnModified(FadevoluPeer::FECDEV)) $criteria->add(FadevoluPeer::FECDEV, $this->fecdev);
 		if ($this->isColumnModified(FadevoluPeer::REFDES)) $criteria->add(FadevoluPeer::REFDES, $this->refdes);
-		if ($this->isColumnModified(FadevoluPeer::CODTIDEV)) $criteria->add(FadevoluPeer::CODTIDEV, $this->codtidev);
+		if ($this->isColumnModified(FadevoluPeer::FATIPDEV_ID)) $criteria->add(FadevoluPeer::FATIPDEV_ID, $this->fatipdev_id);
 		if ($this->isColumnModified(FadevoluPeer::CODALM)) $criteria->add(FadevoluPeer::CODALM, $this->codalm);
 		if ($this->isColumnModified(FadevoluPeer::DESDEV)) $criteria->add(FadevoluPeer::DESDEV, $this->desdev);
 		if ($this->isColumnModified(FadevoluPeer::STADPH)) $criteria->add(FadevoluPeer::STADPH, $this->stadph);
@@ -557,7 +613,7 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 
 		$copyObj->setRefdes($this->refdes);
 
-		$copyObj->setCodtidev($this->codtidev);
+		$copyObj->setFatipdevId($this->fatipdev_id);
 
 		$copyObj->setCodalm($this->codalm);
 
@@ -591,6 +647,35 @@ abstract class BaseFadevolu extends BaseObject  implements Persistent {
 			self::$peer = new FadevoluPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setFatipdev($v)
+	{
+
+
+		if ($v === null) {
+			$this->setFatipdevId(NULL);
+		} else {
+			$this->setFatipdevId($v->getId());
+		}
+
+
+		$this->aFatipdev = $v;
+	}
+
+
+	
+	public function getFatipdev($con = null)
+	{
+		if ($this->aFatipdev === null && ($this->fatipdev_id !== null)) {
+						include_once 'lib/model/om/BaseFatipdevPeer.php';
+
+			$this->aFatipdev = FatipdevPeer::retrieveByPK($this->fatipdev_id, $con);
+
+			
+		}
+		return $this->aFatipdev;
 	}
 
 } 

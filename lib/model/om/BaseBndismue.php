@@ -77,356 +77,392 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodact()
-	{
+  
+  public function getCodact()
+  {
 
-		return $this->codact; 		
-	}
-	
-	public function getCodmue()
-	{
+    return trim($this->codact);
 
-		return $this->codmue; 		
-	}
-	
-	public function getNrodismue()
-	{
+  }
+  
+  public function getCodmue()
+  {
 
-		return $this->nrodismue; 		
-	}
-	
-	public function getMotdismue()
-	{
+    return trim($this->codmue);
 
-		return $this->motdismue; 		
-	}
-	
-	public function getTipdismue()
-	{
+  }
+  
+  public function getNrodismue()
+  {
 
-		return $this->tipdismue; 		
-	}
-	
-	public function getFecdismue($format = 'Y-m-d')
-	{
+    return trim($this->nrodismue);
 
-		if ($this->fecdismue === null || $this->fecdismue === '') {
-			return null;
-		} elseif (!is_int($this->fecdismue)) {
-						$ts = strtotime($this->fecdismue);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdismue] as date/time value: " . var_export($this->fecdismue, true));
-			}
-		} else {
-			$ts = $this->fecdismue;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getMotdismue()
+  {
 
-	
-	public function getFecdevdis($format = 'Y-m-d')
-	{
+    return trim($this->motdismue);
 
-		if ($this->fecdevdis === null || $this->fecdevdis === '') {
-			return null;
-		} elseif (!is_int($this->fecdevdis)) {
-						$ts = strtotime($this->fecdevdis);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdevdis] as date/time value: " . var_export($this->fecdevdis, true));
-			}
-		} else {
-			$ts = $this->fecdevdis;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getTipdismue()
+  {
 
-	
-	public function getMondismue()
-	{
+    return trim($this->tipdismue);
 
-		return number_format($this->mondismue,2,',','.');
-		
-	}
-	
-	public function getDetdismue()
-	{
+  }
+  
+  public function getFecdismue($format = 'Y-m-d')
+  {
 
-		return $this->detdismue; 		
-	}
-	
-	public function getCodubiori()
-	{
+    if ($this->fecdismue === null || $this->fecdismue === '') {
+      return null;
+    } elseif (!is_int($this->fecdismue)) {
+            $ts = adodb_strtotime($this->fecdismue);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdismue] as date/time value: " . var_export($this->fecdismue, true));
+      }
+    } else {
+      $ts = $this->fecdismue;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->codubiori; 		
-	}
-	
-	public function getCodubides()
-	{
+  
+  public function getFecdevdis($format = 'Y-m-d')
+  {
 
-		return $this->codubides; 		
-	}
-	
-	public function getObsdismue()
-	{
+    if ($this->fecdevdis === null || $this->fecdevdis === '') {
+      return null;
+    } elseif (!is_int($this->fecdevdis)) {
+            $ts = adodb_strtotime($this->fecdevdis);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdevdis] as date/time value: " . var_export($this->fecdevdis, true));
+      }
+    } else {
+      $ts = $this->fecdevdis;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->obsdismue; 		
-	}
-	
-	public function getStadismue()
-	{
+  
+  public function getMondismue($val=false)
+  {
 
-		return $this->stadismue; 		
-	}
-	
-	public function getCodmot()
-	{
+    if($val) return number_format($this->mondismue,2,',','.');
+    else return $this->mondismue;
 
-		return $this->codmot; 		
-	}
-	
-	public function getVidutil()
-	{
+  }
+  
+  public function getDetdismue()
+  {
 
-		return number_format($this->vidutil,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    return trim($this->detdismue);
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getCodubiori()
+  {
+
+    return trim($this->codubiori);
+
+  }
+  
+  public function getCodubides()
+  {
+
+    return trim($this->codubides);
+
+  }
+  
+  public function getObsdismue()
+  {
+
+    return trim($this->obsdismue);
+
+  }
+  
+  public function getStadismue()
+  {
+
+    return trim($this->stadismue);
+
+  }
+  
+  public function getCodmot()
+  {
+
+    return trim($this->codmot);
+
+  }
+  
+  public function getVidutil($val=false)
+  {
+
+    if($val) return number_format($this->vidutil,2,',','.');
+    else return $this->vidutil;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodact($v)
 	{
 
-		if ($this->codact !== $v) {
-			$this->codact = $v;
-			$this->modifiedColumns[] = BndismuePeer::CODACT;
-		}
-
+    if ($this->codact !== $v) {
+        $this->codact = $v;
+        $this->modifiedColumns[] = BndismuePeer::CODACT;
+      }
+  
 	} 
 	
 	public function setCodmue($v)
 	{
 
-		if ($this->codmue !== $v) {
-			$this->codmue = $v;
-			$this->modifiedColumns[] = BndismuePeer::CODMUE;
-		}
-
+    if ($this->codmue !== $v) {
+        $this->codmue = $v;
+        $this->modifiedColumns[] = BndismuePeer::CODMUE;
+      }
+  
 	} 
 	
 	public function setNrodismue($v)
 	{
 
-		if ($this->nrodismue !== $v) {
-			$this->nrodismue = $v;
-			$this->modifiedColumns[] = BndismuePeer::NRODISMUE;
-		}
-
+    if ($this->nrodismue !== $v) {
+        $this->nrodismue = $v;
+        $this->modifiedColumns[] = BndismuePeer::NRODISMUE;
+      }
+  
 	} 
 	
 	public function setMotdismue($v)
 	{
 
-		if ($this->motdismue !== $v) {
-			$this->motdismue = $v;
-			$this->modifiedColumns[] = BndismuePeer::MOTDISMUE;
-		}
-
+    if ($this->motdismue !== $v) {
+        $this->motdismue = $v;
+        $this->modifiedColumns[] = BndismuePeer::MOTDISMUE;
+      }
+  
 	} 
 	
 	public function setTipdismue($v)
 	{
 
-		if ($this->tipdismue !== $v) {
-			$this->tipdismue = $v;
-			$this->modifiedColumns[] = BndismuePeer::TIPDISMUE;
-		}
-
+    if ($this->tipdismue !== $v) {
+        $this->tipdismue = $v;
+        $this->modifiedColumns[] = BndismuePeer::TIPDISMUE;
+      }
+  
 	} 
 	
 	public function setFecdismue($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdismue] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdismue !== $ts) {
-			$this->fecdismue = $ts;
-			$this->modifiedColumns[] = BndismuePeer::FECDISMUE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdismue] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdismue !== $ts) {
+      $this->fecdismue = $ts;
+      $this->modifiedColumns[] = BndismuePeer::FECDISMUE;
+    }
 
 	} 
 	
 	public function setFecdevdis($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdevdis] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdevdis !== $ts) {
-			$this->fecdevdis = $ts;
-			$this->modifiedColumns[] = BndismuePeer::FECDEVDIS;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdevdis] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdevdis !== $ts) {
+      $this->fecdevdis = $ts;
+      $this->modifiedColumns[] = BndismuePeer::FECDEVDIS;
+    }
 
 	} 
 	
 	public function setMondismue($v)
 	{
 
-		if ($this->mondismue !== $v) {
-			$this->mondismue = $v;
-			$this->modifiedColumns[] = BndismuePeer::MONDISMUE;
-		}
-
+    if ($this->mondismue !== $v) {
+        $this->mondismue = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndismuePeer::MONDISMUE;
+      }
+  
 	} 
 	
 	public function setDetdismue($v)
 	{
 
-		if ($this->detdismue !== $v) {
-			$this->detdismue = $v;
-			$this->modifiedColumns[] = BndismuePeer::DETDISMUE;
-		}
-
+    if ($this->detdismue !== $v) {
+        $this->detdismue = $v;
+        $this->modifiedColumns[] = BndismuePeer::DETDISMUE;
+      }
+  
 	} 
 	
 	public function setCodubiori($v)
 	{
 
-		if ($this->codubiori !== $v) {
-			$this->codubiori = $v;
-			$this->modifiedColumns[] = BndismuePeer::CODUBIORI;
-		}
-
+    if ($this->codubiori !== $v) {
+        $this->codubiori = $v;
+        $this->modifiedColumns[] = BndismuePeer::CODUBIORI;
+      }
+  
 	} 
 	
 	public function setCodubides($v)
 	{
 
-		if ($this->codubides !== $v) {
-			$this->codubides = $v;
-			$this->modifiedColumns[] = BndismuePeer::CODUBIDES;
-		}
-
+    if ($this->codubides !== $v) {
+        $this->codubides = $v;
+        $this->modifiedColumns[] = BndismuePeer::CODUBIDES;
+      }
+  
 	} 
 	
 	public function setObsdismue($v)
 	{
 
-		if ($this->obsdismue !== $v) {
-			$this->obsdismue = $v;
-			$this->modifiedColumns[] = BndismuePeer::OBSDISMUE;
-		}
-
+    if ($this->obsdismue !== $v) {
+        $this->obsdismue = $v;
+        $this->modifiedColumns[] = BndismuePeer::OBSDISMUE;
+      }
+  
 	} 
 	
 	public function setStadismue($v)
 	{
 
-		if ($this->stadismue !== $v) {
-			$this->stadismue = $v;
-			$this->modifiedColumns[] = BndismuePeer::STADISMUE;
-		}
-
+    if ($this->stadismue !== $v) {
+        $this->stadismue = $v;
+        $this->modifiedColumns[] = BndismuePeer::STADISMUE;
+      }
+  
 	} 
 	
 	public function setCodmot($v)
 	{
 
-		if ($this->codmot !== $v) {
-			$this->codmot = $v;
-			$this->modifiedColumns[] = BndismuePeer::CODMOT;
-		}
-
+    if ($this->codmot !== $v) {
+        $this->codmot = $v;
+        $this->modifiedColumns[] = BndismuePeer::CODMOT;
+      }
+  
 	} 
 	
 	public function setVidutil($v)
 	{
 
-		if ($this->vidutil !== $v) {
-			$this->vidutil = $v;
-			$this->modifiedColumns[] = BndismuePeer::VIDUTIL;
-		}
-
+    if ($this->vidutil !== $v) {
+        $this->vidutil = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = BndismuePeer::VIDUTIL;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = BndismuePeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = BndismuePeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codact = $rs->getString($startcol + 0);
+      $this->codact = $rs->getString($startcol + 0);
 
-			$this->codmue = $rs->getString($startcol + 1);
+      $this->codmue = $rs->getString($startcol + 1);
 
-			$this->nrodismue = $rs->getString($startcol + 2);
+      $this->nrodismue = $rs->getString($startcol + 2);
 
-			$this->motdismue = $rs->getString($startcol + 3);
+      $this->motdismue = $rs->getString($startcol + 3);
 
-			$this->tipdismue = $rs->getString($startcol + 4);
+      $this->tipdismue = $rs->getString($startcol + 4);
 
-			$this->fecdismue = $rs->getDate($startcol + 5, null);
+      $this->fecdismue = $rs->getDate($startcol + 5, null);
 
-			$this->fecdevdis = $rs->getDate($startcol + 6, null);
+      $this->fecdevdis = $rs->getDate($startcol + 6, null);
 
-			$this->mondismue = $rs->getFloat($startcol + 7);
+      $this->mondismue = $rs->getFloat($startcol + 7);
 
-			$this->detdismue = $rs->getString($startcol + 8);
+      $this->detdismue = $rs->getString($startcol + 8);
 
-			$this->codubiori = $rs->getString($startcol + 9);
+      $this->codubiori = $rs->getString($startcol + 9);
 
-			$this->codubides = $rs->getString($startcol + 10);
+      $this->codubides = $rs->getString($startcol + 10);
 
-			$this->obsdismue = $rs->getString($startcol + 11);
+      $this->obsdismue = $rs->getString($startcol + 11);
 
-			$this->stadismue = $rs->getString($startcol + 12);
+      $this->stadismue = $rs->getString($startcol + 12);
 
-			$this->codmot = $rs->getString($startcol + 13);
+      $this->codmot = $rs->getString($startcol + 13);
 
-			$this->vidutil = $rs->getFloat($startcol + 14);
+      $this->vidutil = $rs->getFloat($startcol + 14);
 
-			$this->id = $rs->getInt($startcol + 15);
+      $this->id = $rs->getInt($startcol + 15);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 16; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Bndismue object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 16; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Bndismue object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -483,6 +519,7 @@ abstract class BaseBndismue extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = BndismuePeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += BndismuePeer::doUpdate($this, $con);

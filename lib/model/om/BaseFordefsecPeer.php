@@ -205,6 +205,7 @@ abstract class BaseFordefsecPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FordefsecPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

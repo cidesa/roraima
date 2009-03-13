@@ -8,29 +8,41 @@ generator:
       tipo: { name: (A)rtículo ó (S)ervicio}
       codcta: { name: Código Contable}
       desart: { name: Descripción}
-      ramart: { name: Ramo}
+      ramart: { name: Cod. Ramo}
+      nomram: { name: Nom. Ramo}
       codpar: { name: Partida}
       unimed: { name: Unidad Medida}
-      unialt: { name: Unidad Alterna} 
+      unialt: { name: Unidad Alterna}
       relart: { name: Relación}
-      exitot: { name: Existencia Total}          
+      exitot: { name: Existencia Total}
       fecult: { name: Fecha Últ. Compra}
       cosult: { name: Último}
       cospro: { name: Promedio}
-      invini: { name: Inicial}      
+      invini: { name: Inicial}
+      codartsnc: { name: Código SNC}
+      dessnc: { name: Descripción SNC}
+      ctavta: { name: Cuenta Venta Contado}
+      ctacos: { name: Cuenta Costo}
+      ctapro: { name: Cuenta Costo Producción}      
     list:
       title:          Artículos y Servicios
-      filters:        [codart, tipo]
-      display:        [=codart, desart, tipo]
-      fields:        
-        fecult: { params: date_format='dd/MM/yy' }             
-      object_actions:
-        _edit:        ~
-        _delete:        ~
-      max_per_page:   5
-    edit:
-      title:         Registro de Artículos ó Servicios
-      display:        [=codart, tipo, codcta, desart, ramart, codpar, unimed, unialt, relart, exitot, fecult, cosult, cospro, invini]
+      filters:        [codart, desart, tipo, ramart]
+      display:        [=codart, desart, tipo, ramart, nomram]
       fields:
         fecult: { params: date_format='dd/MM/yy' }
-        ramart: { help: Máximo 6 caracteres}        
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      max_per_page:   10
+      sort:  codart
+    edit:
+      title:         Registro de Artículos ó Servicios
+      display:        [=codart, tipo, codcta, desart, ramart, nomram, codpar, unimed, unialt, relart, exitot, fecult, cosult, cospro, invini, codartsnc, dessnc, ctavta, ctacos, ctapro]
+      fields:
+        fecult: { params: date_format='dd/MM/yy' }
+        ramart: { help: Máximo 6 caracteres}
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

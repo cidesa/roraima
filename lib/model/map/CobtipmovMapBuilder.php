@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class CobtipmovMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CobtipmovMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CobtipmovMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cobtipmov');
 		$tMap->setPhpName('Cobtipmov');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('cobtipmov_SEQ');
 
 		$tMap->addColumn('CODMOV', 'Codmov', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -43,6 +45,6 @@ class CobtipmovMapBuilder {
 		$tMap->addColumn('CTACON', 'Ctacon', 'string', CreoleTypes::VARCHAR, false, 32);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

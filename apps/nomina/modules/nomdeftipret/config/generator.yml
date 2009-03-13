@@ -5,18 +5,23 @@ generator:
     theme:            default
 
     fields:
-      codret:    { name: Codigo, params: maxlength=10,size=10  }
-      desret:    { name: Descripción, params: size=20  }
+      codret:    { name: CÃ³digo, params: maxlength=10,size=10  }
+      desret:    { name: DescripciÃ³n, params: size=20  }
 
     list:
-      title:          Lista de Retiros
-      display:        [codret, desret]
+      title:          Tipos de Retiros
+      display:        [=codret, desret]
       filters:		  [codret, desret]
       max_per_page:	  10
       object_actions:
-        _edit:        ~      
-        _delete:      ~      
-                        
+        _edit:        ~
+        _delete:      ~
+      sort: codret
     edit:
-      title:          Edición de Retiros
+      title:          EdiciÃ³n de Retiros
       display:        [codret, desret]
+      actions:
+        _list:       ~
+        _save:       ~
+        _create:     ~
+        _delete:     ~

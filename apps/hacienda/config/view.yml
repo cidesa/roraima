@@ -3,15 +3,16 @@ default:
     content-type: text/html
 
   metas:
-    title:        Módulo Hacienda
+    title:        Módulo de Hacienda
     robots:       index, follow
     description:  Módulo de Hacienda
-    keywords:     módulo hacienda
-    language:     en_US
+    keywords:     Módulo de Hacienda
+    language:     en
 
   stylesheets:    [main]
 
-  javascripts:    []
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, ajax ]
+
 
   has_layout:     on
   layout:         layout

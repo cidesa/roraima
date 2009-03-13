@@ -25,74 +25,99 @@ abstract class BaseOctipcar extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodtipcar()
-	{
+  
+  public function getCodtipcar()
+  {
 
-		return $this->codtipcar; 		
-	}
-	
-	public function getDestipcar()
-	{
+    return trim($this->codtipcar);
 
-		return $this->destipcar; 		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDestipcar()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->destipcar);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodtipcar($v)
 	{
 
-		if ($this->codtipcar !== $v) {
-			$this->codtipcar = $v;
-			$this->modifiedColumns[] = OctipcarPeer::CODTIPCAR;
-		}
-
+    if ($this->codtipcar !== $v) {
+        $this->codtipcar = $v;
+        $this->modifiedColumns[] = OctipcarPeer::CODTIPCAR;
+      }
+  
 	} 
 	
 	public function setDestipcar($v)
 	{
 
-		if ($this->destipcar !== $v) {
-			$this->destipcar = $v;
-			$this->modifiedColumns[] = OctipcarPeer::DESTIPCAR;
-		}
-
+    if ($this->destipcar !== $v) {
+        $this->destipcar = $v;
+        $this->modifiedColumns[] = OctipcarPeer::DESTIPCAR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = OctipcarPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = OctipcarPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codtipcar = $rs->getString($startcol + 0);
+      $this->codtipcar = $rs->getString($startcol + 0);
 
-			$this->destipcar = $rs->getString($startcol + 1);
+      $this->destipcar = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+      $this->id = $rs->getInt($startcol + 2);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 3; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Octipcar object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 3; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Octipcar object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -149,6 +174,7 @@ abstract class BaseOctipcar extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = OctipcarPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += OctipcarPeer::doUpdate($this, $con);

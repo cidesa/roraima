@@ -1,36 +1,38 @@
 <?php
 
 
-	
+
 class NpcestaticketsMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.NpcestaticketsMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.NpcestaticketsMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('npcestatickets');
 		$tMap->setPhpName('Npcestatickets');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('npcestatickets_SEQ');
 
 		$tMap->addColumn('CODNOM', 'Codnom', 'string', CreoleTypes::VARCHAR, true, 3);
 
@@ -38,13 +40,13 @@ class NpcestaticketsMapBuilder {
 
 		$tMap->addColumn('MONPOR', 'Monpor', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('VALTIC', 'Valtic', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('VALTIC', 'Valtic', 'double', CreoleTypes::NUMERIC, false, 32);
 
-		$tMap->addColumn('NUMTIC', 'Numtic', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('NUMTIC', 'Numtic', 'double', CreoleTypes::NUMERIC, false, 5);
 
 		$tMap->addColumn('TIPPAG', 'Tippag', 'string', CreoleTypes::VARCHAR, false, 1);
 
-		$tMap->addColumn('NUMDIA', 'Numdia', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('NUMDIA', 'Numdia', 'double', CreoleTypes::NUMERIC, false, 5);
 
 		$tMap->addColumn('DIAHAB', 'Diahab', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -55,6 +57,6 @@ class NpcestaticketsMapBuilder {
 		$tMap->addColumn('DIAFER', 'Diafer', 'string', CreoleTypes::VARCHAR, false, 1);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

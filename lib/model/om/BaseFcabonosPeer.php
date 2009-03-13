@@ -265,6 +265,7 @@ abstract class BaseFcabonosPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcabonosPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

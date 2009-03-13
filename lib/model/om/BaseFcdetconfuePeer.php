@@ -235,6 +235,7 @@ abstract class BaseFcdetconfuePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdetconfuePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

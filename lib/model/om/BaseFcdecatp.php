@@ -45,188 +45,217 @@ abstract class BaseFcdecatp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getNumdec()
-	{
+  
+  public function getNumdec()
+  {
 
-		return $this->numdec; 		
-	}
-	
-	public function getNumsol()
-	{
+    return trim($this->numdec);
 
-		return $this->numsol; 		
-	}
-	
-	public function getNumlic()
-	{
+  }
+  
+  public function getNumsol()
+  {
 
-		return $this->numlic; 		
-	}
-	
-	public function getFecdec($format = 'Y-m-d')
-	{
+    return trim($this->numsol);
 
-		if ($this->fecdec === null || $this->fecdec === '') {
-			return null;
-		} elseif (!is_int($this->fecdec)) {
-						$ts = strtotime($this->fecdec);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecdec] as date/time value: " . var_export($this->fecdec, true));
-			}
-		} else {
-			$ts = $this->fecdec;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getNumlic()
+  {
 
-	
-	public function getMondec()
-	{
+    return trim($this->numlic);
 
-		return number_format($this->mondec,2,',','.');
-		
-	}
-	
-	public function getFundec()
-	{
+  }
+  
+  public function getFecdec($format = 'Y-m-d')
+  {
 
-		return $this->fundec; 		
-	}
-	
-	public function getEdodec()
-	{
+    if ($this->fecdec === null || $this->fecdec === '') {
+      return null;
+    } elseif (!is_int($this->fecdec)) {
+            $ts = adodb_strtotime($this->fecdec);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecdec] as date/time value: " . var_export($this->fecdec, true));
+      }
+    } else {
+      $ts = $this->fecdec;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->edodec; 		
-	}
-	
-	public function getId()
-	{
+  
+  public function getMondec($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->mondec,2,',','.');
+    else return $this->mondec;
+
+  }
+  
+  public function getFundec()
+  {
+
+    return trim($this->fundec);
+
+  }
+  
+  public function getEdodec()
+  {
+
+    return trim($this->edodec);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setNumdec($v)
 	{
 
-		if ($this->numdec !== $v) {
-			$this->numdec = $v;
-			$this->modifiedColumns[] = FcdecatpPeer::NUMDEC;
-		}
-
+    if ($this->numdec !== $v) {
+        $this->numdec = $v;
+        $this->modifiedColumns[] = FcdecatpPeer::NUMDEC;
+      }
+  
 	} 
 	
 	public function setNumsol($v)
 	{
 
-		if ($this->numsol !== $v) {
-			$this->numsol = $v;
-			$this->modifiedColumns[] = FcdecatpPeer::NUMSOL;
-		}
-
+    if ($this->numsol !== $v) {
+        $this->numsol = $v;
+        $this->modifiedColumns[] = FcdecatpPeer::NUMSOL;
+      }
+  
 	} 
 	
 	public function setNumlic($v)
 	{
 
-		if ($this->numlic !== $v) {
-			$this->numlic = $v;
-			$this->modifiedColumns[] = FcdecatpPeer::NUMLIC;
-		}
-
+    if ($this->numlic !== $v) {
+        $this->numlic = $v;
+        $this->modifiedColumns[] = FcdecatpPeer::NUMLIC;
+      }
+  
 	} 
 	
 	public function setFecdec($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecdec] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecdec !== $ts) {
-			$this->fecdec = $ts;
-			$this->modifiedColumns[] = FcdecatpPeer::FECDEC;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecdec] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecdec !== $ts) {
+      $this->fecdec = $ts;
+      $this->modifiedColumns[] = FcdecatpPeer::FECDEC;
+    }
 
 	} 
 	
 	public function setMondec($v)
 	{
 
-		if ($this->mondec !== $v) {
-			$this->mondec = $v;
-			$this->modifiedColumns[] = FcdecatpPeer::MONDEC;
-		}
-
+    if ($this->mondec !== $v) {
+        $this->mondec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcdecatpPeer::MONDEC;
+      }
+  
 	} 
 	
 	public function setFundec($v)
 	{
 
-		if ($this->fundec !== $v) {
-			$this->fundec = $v;
-			$this->modifiedColumns[] = FcdecatpPeer::FUNDEC;
-		}
-
+    if ($this->fundec !== $v) {
+        $this->fundec = $v;
+        $this->modifiedColumns[] = FcdecatpPeer::FUNDEC;
+      }
+  
 	} 
 	
 	public function setEdodec($v)
 	{
 
-		if ($this->edodec !== $v) {
-			$this->edodec = $v;
-			$this->modifiedColumns[] = FcdecatpPeer::EDODEC;
-		}
-
+    if ($this->edodec !== $v) {
+        $this->edodec = $v;
+        $this->modifiedColumns[] = FcdecatpPeer::EDODEC;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcdecatpPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcdecatpPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->numdec = $rs->getString($startcol + 0);
+      $this->numdec = $rs->getString($startcol + 0);
 
-			$this->numsol = $rs->getString($startcol + 1);
+      $this->numsol = $rs->getString($startcol + 1);
 
-			$this->numlic = $rs->getString($startcol + 2);
+      $this->numlic = $rs->getString($startcol + 2);
 
-			$this->fecdec = $rs->getDate($startcol + 3, null);
+      $this->fecdec = $rs->getDate($startcol + 3, null);
 
-			$this->mondec = $rs->getFloat($startcol + 4);
+      $this->mondec = $rs->getFloat($startcol + 4);
 
-			$this->fundec = $rs->getString($startcol + 5);
+      $this->fundec = $rs->getString($startcol + 5);
 
-			$this->edodec = $rs->getString($startcol + 6);
+      $this->edodec = $rs->getString($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcdecatp object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcdecatp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -283,6 +312,7 @@ abstract class BaseFcdecatp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcdecatpPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcdecatpPeer::doUpdate($this, $con);

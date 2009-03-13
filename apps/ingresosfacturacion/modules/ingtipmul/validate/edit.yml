@@ -1,0 +1,29 @@
+methods:
+  post:
+   - "intipmul{codtipmul}"
+   - "intipmul{destipmul}"
+names:
+  intipmul{codtipmul}:
+    required:  Yes
+    required_msg: El codigo no puedo estar en Blanco
+    validators: Validator_codtipmul
+
+  intipmul{destipmul}:
+    required:  Yes
+    required_msg: La descipción no puede estar en Blanco
+    validators: Validator_destipmul
+
+Validator_codtipmul:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Intipmul
+        column:       codtipmul
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_destipmul:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El nombre no puede tener menos de 2 caracteres
+        max:       30
+        max_error: El nombre no puede pasar mas de 30 caracteres

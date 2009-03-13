@@ -3,10 +3,10 @@
 /**
  * Subclass for representing a row from the 'npvacsalidas' table.
  *
- * 
+ *
  *
  * @package lib.model
- */ 
+ */
 class Npvacsalidas extends BaseNpvacsalidas
 {
   public function getNomemp()
@@ -16,19 +16,22 @@ class Npvacsalidas extends BaseNpvacsalidas
   	  $nombre = NphojintPeer::doSelectone($c);
 	  if ($nombre)
 	  	return $nombre->getNomemp();
-	  else 
+	  else
 	    return ' ';
    }
-	
-  public function getFecing()
+
+  public function getFecing($formato=false)
   {
   	  $c = new Criteria();
   	  $c->add(NphojintPeer::CODEMP,self::getCodemp());
   	  $fecha = NphojintPeer::doSelectone($c);
 	  if ($fecha)
-	  	return $fecha->getFecing();
-	  else 
+	   if ($formato)
+	     return date("d/m/Y",strtotime($fecha->getFecing()));
+	   else
+	  	 return $fecha->getFecing();
+	  else
 	    return ' ';
    }
-	
+
 }

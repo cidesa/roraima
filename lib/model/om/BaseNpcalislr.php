@@ -45,214 +45,242 @@ abstract class BaseNpcalislr extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    return trim($this->codemp);
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-	
-	public function getFeccie($format = 'Y-m-d')
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->feccie === null || $this->feccie === '') {
-			return null;
-		} elseif (!is_int($this->feccie)) {
-						$ts = strtotime($this->feccie);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
-			}
-		} else {
-			$ts = $this->feccie;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFeccie($format = 'Y-m-d')
+  {
 
-	
-	public function getMesper()
-	{
+    if ($this->feccie === null || $this->feccie === '') {
+      return null;
+    } elseif (!is_int($this->feccie)) {
+            $ts = adodb_strtotime($this->feccie);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
+      }
+    } else {
+      $ts = $this->feccie;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return number_format($this->mesper,2,',','.');
-		
-	}
-	
-	public function getAnoper()
-	{
+  
+  public function getMesper($val=false)
+  {
 
-		return number_format($this->anoper,2,',','.');
-		
-	}
-	
-	public function getRemune()
-	{
+    if($val) return number_format($this->mesper,2,',','.');
+    else return $this->mesper;
 
-		return number_format($this->remune,2,',','.');
-		
-	}
-	
-	public function getImpret()
-	{
+  }
+  
+  public function getAnoper($val=false)
+  {
 
-		return number_format($this->impret,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->anoper,2,',','.');
+    else return $this->anoper;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getRemune($val=false)
+  {
+
+    if($val) return number_format($this->remune,2,',','.');
+    else return $this->remune;
+
+  }
+  
+  public function getImpret($val=false)
+  {
+
+    if($val) return number_format($this->impret,2,',','.');
+    else return $this->impret;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NpcalislrPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NpcalislrPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = NpcalislrPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = NpcalislrPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFeccie($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccie !== $ts) {
-			$this->feccie = $ts;
-			$this->modifiedColumns[] = NpcalislrPeer::FECCIE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccie !== $ts) {
+      $this->feccie = $ts;
+      $this->modifiedColumns[] = NpcalislrPeer::FECCIE;
+    }
 
 	} 
 	
 	public function setMesper($v)
 	{
 
-		if ($this->mesper !== $v) {
-			$this->mesper = $v;
-			$this->modifiedColumns[] = NpcalislrPeer::MESPER;
-		}
-
+    if ($this->mesper !== $v) {
+        $this->mesper = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalislrPeer::MESPER;
+      }
+  
 	} 
 	
 	public function setAnoper($v)
 	{
 
-		if ($this->anoper !== $v) {
-			$this->anoper = $v;
-			$this->modifiedColumns[] = NpcalislrPeer::ANOPER;
-		}
-
+    if ($this->anoper !== $v) {
+        $this->anoper = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalislrPeer::ANOPER;
+      }
+  
 	} 
 	
 	public function setRemune($v)
 	{
 
-		if ($this->remune !== $v) {
-			$this->remune = $v;
-			$this->modifiedColumns[] = NpcalislrPeer::REMUNE;
-		}
-
+    if ($this->remune !== $v) {
+        $this->remune = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalislrPeer::REMUNE;
+      }
+  
 	} 
 	
 	public function setImpret($v)
 	{
 
-		if ($this->impret !== $v) {
-			$this->impret = $v;
-			$this->modifiedColumns[] = NpcalislrPeer::IMPRET;
-		}
-
+    if ($this->impret !== $v) {
+        $this->impret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcalislrPeer::IMPRET;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NpcalislrPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NpcalislrPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->fecini = $rs->getDate($startcol + 1, null);
+      $this->fecini = $rs->getDate($startcol + 1, null);
 
-			$this->feccie = $rs->getDate($startcol + 2, null);
+      $this->feccie = $rs->getDate($startcol + 2, null);
 
-			$this->mesper = $rs->getFloat($startcol + 3);
+      $this->mesper = $rs->getFloat($startcol + 3);
 
-			$this->anoper = $rs->getFloat($startcol + 4);
+      $this->anoper = $rs->getFloat($startcol + 4);
 
-			$this->remune = $rs->getFloat($startcol + 5);
+      $this->remune = $rs->getFloat($startcol + 5);
 
-			$this->impret = $rs->getFloat($startcol + 6);
+      $this->impret = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Npcalislr object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Npcalislr object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -309,6 +337,7 @@ abstract class BaseNpcalislr extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NpcalislrPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NpcalislrPeer::doUpdate($this, $con);

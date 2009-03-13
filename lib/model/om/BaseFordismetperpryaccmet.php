@@ -41,148 +41,177 @@ abstract class BaseFordismetperpryaccmet extends BaseObject  implements Persiste
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
+  
+  public function getCodpro()
+  {
 
-		return $this->codpro; 		
-	}
-	
-	public function getCodaccesp()
-	{
+    return trim($this->codpro);
 
-		return $this->codaccesp; 		
-	}
-	
-	public function getCodmet()
-	{
+  }
+  
+  public function getCodaccesp()
+  {
 
-		return $this->codmet; 		
-	}
-	
-	public function getPerpre()
-	{
+    return trim($this->codaccesp);
 
-		return $this->perpre; 		
-	}
-	
-	public function getCanmet()
-	{
+  }
+  
+  public function getCodmet()
+  {
 
-		return number_format($this->canmet,2,',','.');
-		
-	}
-	
-	public function getCanmeteje()
-	{
+    return trim($this->codmet);
 
-		return number_format($this->canmeteje,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getPerpre()
+  {
 
-		return $this->id; 		
-	}
+    return trim($this->perpre);
+
+  }
+  
+  public function getCanmet($val=false)
+  {
+
+    if($val) return number_format($this->canmet,2,',','.');
+    else return $this->canmet;
+
+  }
+  
+  public function getCanmeteje($val=false)
+  {
+
+    if($val) return number_format($this->canmeteje,2,',','.');
+    else return $this->canmeteje;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FordismetperpryaccmetPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FordismetperpryaccmetPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setCodaccesp($v)
 	{
 
-		if ($this->codaccesp !== $v) {
-			$this->codaccesp = $v;
-			$this->modifiedColumns[] = FordismetperpryaccmetPeer::CODACCESP;
-		}
-
+    if ($this->codaccesp !== $v) {
+        $this->codaccesp = $v;
+        $this->modifiedColumns[] = FordismetperpryaccmetPeer::CODACCESP;
+      }
+  
 	} 
 	
 	public function setCodmet($v)
 	{
 
-		if ($this->codmet !== $v) {
-			$this->codmet = $v;
-			$this->modifiedColumns[] = FordismetperpryaccmetPeer::CODMET;
-		}
-
+    if ($this->codmet !== $v) {
+        $this->codmet = $v;
+        $this->modifiedColumns[] = FordismetperpryaccmetPeer::CODMET;
+      }
+  
 	} 
 	
 	public function setPerpre($v)
 	{
 
-		if ($this->perpre !== $v) {
-			$this->perpre = $v;
-			$this->modifiedColumns[] = FordismetperpryaccmetPeer::PERPRE;
-		}
-
+    if ($this->perpre !== $v) {
+        $this->perpre = $v;
+        $this->modifiedColumns[] = FordismetperpryaccmetPeer::PERPRE;
+      }
+  
 	} 
 	
 	public function setCanmet($v)
 	{
 
-		if ($this->canmet !== $v) {
-			$this->canmet = $v;
-			$this->modifiedColumns[] = FordismetperpryaccmetPeer::CANMET;
-		}
-
+    if ($this->canmet !== $v) {
+        $this->canmet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordismetperpryaccmetPeer::CANMET;
+      }
+  
 	} 
 	
 	public function setCanmeteje($v)
 	{
 
-		if ($this->canmeteje !== $v) {
-			$this->canmeteje = $v;
-			$this->modifiedColumns[] = FordismetperpryaccmetPeer::CANMETEJE;
-		}
-
+    if ($this->canmeteje !== $v) {
+        $this->canmeteje = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordismetperpryaccmetPeer::CANMETEJE;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordismetperpryaccmetPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordismetperpryaccmetPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->codaccesp = $rs->getString($startcol + 1);
+      $this->codaccesp = $rs->getString($startcol + 1);
 
-			$this->codmet = $rs->getString($startcol + 2);
+      $this->codmet = $rs->getString($startcol + 2);
 
-			$this->perpre = $rs->getString($startcol + 3);
+      $this->perpre = $rs->getString($startcol + 3);
 
-			$this->canmet = $rs->getFloat($startcol + 4);
+      $this->canmet = $rs->getFloat($startcol + 4);
 
-			$this->canmeteje = $rs->getFloat($startcol + 5);
+      $this->canmeteje = $rs->getFloat($startcol + 5);
 
-			$this->id = $rs->getInt($startcol + 6);
+      $this->id = $rs->getInt($startcol + 6);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 7; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordismetperpryaccmet object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 7; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordismetperpryaccmet object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -239,6 +268,7 @@ abstract class BaseFordismetperpryaccmet extends BaseObject  implements Persiste
 				if ($this->isNew()) {
 					$pk = FordismetperpryaccmetPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordismetperpryaccmetPeer::doUpdate($this, $con);

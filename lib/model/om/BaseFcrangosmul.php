@@ -33,113 +33,140 @@ abstract class BaseFcrangosmul extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodmul()
-	{
+  
+  public function getCodmul()
+  {
 
-		return $this->codmul; 		
-	}
-	
-	public function getDiasdesde()
-	{
+    return trim($this->codmul);
 
-		return number_format($this->diasdesde,2,',','.');
-		
-	}
-	
-	public function getDiashasta()
-	{
+  }
+  
+  public function getDiasdesde($val=false)
+  {
 
-		return number_format($this->diashasta,2,',','.');
-		
-	}
-	
-	public function getValor()
-	{
+    if($val) return number_format($this->diasdesde,2,',','.');
+    else return $this->diasdesde;
 
-		return number_format($this->valor,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getDiashasta($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->diashasta,2,',','.');
+    else return $this->diashasta;
+
+  }
+  
+  public function getValor($val=false)
+  {
+
+    if($val) return number_format($this->valor,2,',','.');
+    else return $this->valor;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodmul($v)
 	{
 
-		if ($this->codmul !== $v) {
-			$this->codmul = $v;
-			$this->modifiedColumns[] = FcrangosmulPeer::CODMUL;
-		}
-
+    if ($this->codmul !== $v) {
+        $this->codmul = $v;
+        $this->modifiedColumns[] = FcrangosmulPeer::CODMUL;
+      }
+  
 	} 
 	
 	public function setDiasdesde($v)
 	{
 
-		if ($this->diasdesde !== $v || $v === 0) {
-			$this->diasdesde = $v;
-			$this->modifiedColumns[] = FcrangosmulPeer::DIASDESDE;
-		}
-
+    if ($this->diasdesde !== $v || $v === 0) {
+        $this->diasdesde = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrangosmulPeer::DIASDESDE;
+      }
+  
 	} 
 	
 	public function setDiashasta($v)
 	{
 
-		if ($this->diashasta !== $v || $v === 0) {
-			$this->diashasta = $v;
-			$this->modifiedColumns[] = FcrangosmulPeer::DIASHASTA;
-		}
-
+    if ($this->diashasta !== $v || $v === 0) {
+        $this->diashasta = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrangosmulPeer::DIASHASTA;
+      }
+  
 	} 
 	
 	public function setValor($v)
 	{
 
-		if ($this->valor !== $v || $v === 0) {
-			$this->valor = $v;
-			$this->modifiedColumns[] = FcrangosmulPeer::VALOR;
-		}
-
+    if ($this->valor !== $v || $v === 0) {
+        $this->valor = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FcrangosmulPeer::VALOR;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FcrangosmulPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FcrangosmulPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codmul = $rs->getString($startcol + 0);
+      $this->codmul = $rs->getString($startcol + 0);
 
-			$this->diasdesde = $rs->getFloat($startcol + 1);
+      $this->diasdesde = $rs->getFloat($startcol + 1);
 
-			$this->diashasta = $rs->getFloat($startcol + 2);
+      $this->diashasta = $rs->getFloat($startcol + 2);
 
-			$this->valor = $rs->getFloat($startcol + 3);
+      $this->valor = $rs->getFloat($startcol + 3);
 
-			$this->id = $rs->getInt($startcol + 4);
+      $this->id = $rs->getInt($startcol + 4);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 5; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fcrangosmul object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 5; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fcrangosmul object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -196,6 +223,7 @@ abstract class BaseFcrangosmul extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FcrangosmulPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FcrangosmulPeer::doUpdate($this, $con);

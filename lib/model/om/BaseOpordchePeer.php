@@ -215,6 +215,7 @@ abstract class BaseOpordchePeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OpordchePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

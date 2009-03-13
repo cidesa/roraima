@@ -1,0 +1,88 @@
+methods:
+  post:
+   - "bndefconi{codact}"
+   - "bndefconi{codinm}"
+   - "bndefconi{ctadepcar}"
+   - "bndefconi{ctadepabo}"
+   - "bndefconi{ctaajucar}"
+   - "bndefconi{ctaajuabo}"
+   - "bndefconi{ctarevcar}"
+   - "bndefconi{ctarevabo}"
+   - "bndefconi{ctapercar}"
+   - "bndefconi{ctaperabo}"
+
+names:
+  bndefconi{codact}:
+    required:  Yes
+    required_msg: El Código del Nivel no puede estar en Blanco.
+    validators: ExistValidator
+
+  bndefconi{codinm}:
+    required:  Yes
+    required_msg: El Código del Activo no puede estar en Blanco.
+    validators: ExistValidator1
+
+  bndefconi{ctadepcar}:
+    required:  Yes
+    required_msg: La Cuenta a Cargar no puede estar en Blanco.
+    validators: ExistValidator2
+
+  bndefconi{ctadepabo}:
+    required:  Yes
+    required_msg: La Cuenta a Abonar no puede estar en Blanco.
+    validators: ExistValidator2
+
+  bndefconi{ctaajucar}:
+    required:  Yes
+    required_msg: La Cuenta a Cargar no puede estar en Blanco.
+    validators: ExistValidator2
+
+  bndefconi{ctaajuabo}:
+    required:  Yes
+    required_msg: La Cuenta a Abonar no puede estar en Blanco.
+    validators: ExistValidator2
+
+  bndefconi{ctarevcar}:
+    required:  Yes
+    required_msg: La Cuenta a Cargar no puede estar en Blanco.
+    validators: ExistValidator2
+
+  bndefconi{ctarevabo}:
+    required:  Yes
+    required_msg: La Cuenta a Abonar no puede estar en Blanco.
+    validators: ExistValidator2
+
+  bndefconi{ctapercar}:
+    required:  Yes
+    required_msg: La Cuenta a Cargar no puede estar en Blanco.
+    validators: ExistValidator2
+
+  bndefconi{ctaperabo}:
+    required:  Yes
+    required_msg: La Cuenta a Abonar no puede estar en Blanco.
+    validators: ExistValidator2
+
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        Bnreginm
+        column:       codact
+        unique_error: El Código del Nivel debe Existir.
+
+
+ExistValidator1:
+    class: CidesaExistValidator
+    param:
+        class:        Bnreginm
+        column:       codinm
+        unique_error: El Código del Activo debe Existir.
+
+
+ExistValidator2:
+    class: CidesaExistValidator
+    param:
+        class:        Contabb
+        column:       codcta
+        unique_error: La Cuenta debe Existir.
+

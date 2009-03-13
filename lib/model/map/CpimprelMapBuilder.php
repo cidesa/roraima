@@ -1,44 +1,46 @@
 <?php
 
 
-	
+
 class CpimprelMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.CpimprelMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.CpimprelMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('cpimprel');
 		$tMap->setPhpName('Cpimprel');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('cpimprel_SEQ');
 
 		$tMap->addColumn('REFREL', 'Refrel', 'string', CreoleTypes::VARCHAR, true, 8);
 
 		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 32);
 
-		$tMap->addColumn('MONREL', 'Monrel', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONREL', 'Monrel', 'double', CreoleTypes::NUMERIC, false, 14);
 
-		$tMap->addColumn('MONAJU', 'Monaju', 'double', CreoleTypes::NUMERIC, false);
+		$tMap->addColumn('MONAJU', 'Monaju', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('STAREL', 'Starel', 'string', CreoleTypes::VARCHAR, false, 1);
 
@@ -49,6 +51,6 @@ class CpimprelMapBuilder {
 		$tMap->addColumn('REFCOM', 'Refcom', 'string', CreoleTypes::VARCHAR, false, 8);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

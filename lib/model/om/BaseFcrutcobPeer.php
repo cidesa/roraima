@@ -187,14 +187,14 @@ abstract class BaseFcrutcobPeer {
 	public static function doCountJoinFccobrad(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcrutcobPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcrutcobPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -215,14 +215,14 @@ abstract class BaseFcrutcobPeer {
 	public static function doCountJoinFcrutas(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcrutcobPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcrutcobPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -344,7 +344,7 @@ abstract class BaseFcrutcobPeer {
 		} else {
 			$criteria->addSelectColumn(FcrutcobPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -387,25 +387,25 @@ abstract class BaseFcrutcobPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcrutcobPeer::getOMClass();
 
-			
+
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-				
+
 					
 			$omClass = FccobradPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -414,21 +414,21 @@ abstract class BaseFcrutcobPeer {
 					$temp_obj2->addFcrutcob($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcrutcobs();
 				$obj2->addFcrutcob($obj1);
 			}
 
-				
+
 					
 			$omClass = FcrutasPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj3 = new $cls();
 			$obj3->hydrate($rs, $startcol3);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -437,7 +437,7 @@ abstract class BaseFcrutcobPeer {
 					$temp_obj3->addFcrutcob($obj1); 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj3->initFcrutcobs();
 				$obj3->addFcrutcob($obj1);
@@ -453,14 +453,14 @@ abstract class BaseFcrutcobPeer {
 	public static function doCountJoinAllExceptFccobrad(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcrutcobPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcrutcobPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -481,14 +481,14 @@ abstract class BaseFcrutcobPeer {
 	public static function doCountJoinAllExceptFcrutas(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
-		
+
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
 			$criteria->addSelectColumn(FcrutcobPeer::COUNT_DISTINCT);
 		} else {
 			$criteria->addSelectColumn(FcrutcobPeer::COUNT);
 		}
-		
+
 				foreach($criteria->getGroupByColumns() as $column)
 		{
 			$criteria->addSelectColumn($column);
@@ -525,22 +525,22 @@ abstract class BaseFcrutcobPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcrutcobPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
-			$obj1->hydrate($rs);		
+			$obj1->hydrate($rs);
 
 			$omClass = FcrutasPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2  = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -550,7 +550,7 @@ abstract class BaseFcrutcobPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcrutcobs();
 				$obj2->addFcrutcob($obj1);
@@ -582,22 +582,22 @@ abstract class BaseFcrutcobPeer {
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
-		
+
 		while($rs->next()) {
 
 			$omClass = FcrutcobPeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
-			$obj1->hydrate($rs);		
+			$obj1->hydrate($rs);
 
 			$omClass = FccobradPeer::getOMClass();
 
-	
+
 			$cls = Propel::import($omClass);
 			$obj2  = new $cls();
 			$obj2->hydrate($rs, $startcol2);
-			
+
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
@@ -607,7 +607,7 @@ abstract class BaseFcrutcobPeer {
 					break;
 				}
 			}
-			
+
 			if ($newObject) {
 				$obj2->initFcrutcobs();
 				$obj2->addFcrutcob($obj1);
@@ -641,6 +641,7 @@ abstract class BaseFcrutcobPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcrutcobPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

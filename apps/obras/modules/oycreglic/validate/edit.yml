@@ -1,0 +1,75 @@
+methods:
+  post:
+   - "ocreglic{codlic}"
+   - "ocreglic{deslic}"
+   - "ocreglic{codfin}"
+   - "ocreglic{codclacomp}"
+   - "ocreglic{codobr}"
+
+names:
+  ocreglic{codlic}:
+    required:  Yes
+    required_msg: El Codigo no puedo estar en Blanco
+    validators: Validator_codlic
+
+  ocreglic{deslic}:
+    required:  Yes
+    required_msg: La Descripción no puedo estar en Blanco
+    validators: Validator_deslic
+
+  ocreglic{codfin}:
+    required:  No
+    required_msg: La Fuente de Financiamiento no puedo estar en 0
+    validators: Fuente_Validator
+
+  ocreglic{codclacomp}:
+    required:  No
+    validators: Clacomp_Validator
+
+  ocreglic{codobr}:
+    required:  Yes
+    required_msg: El Codigo de la Obra no puedo estar en Blanco
+    validators: Validator_Obra, Obra_Validator
+
+Validator_codlic:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Ocreglic
+        column:   codlic
+        unique_error:   El Código ya existe. Por Favor, Intente con otro.
+
+Validator_deslic:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: Las Descripción no puede tener menos de 5 caracteres
+        max:       1000
+        max_error: Las Descripción no puede tener mas de 1000 caracteres
+
+Clacomp_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Occlacomp
+        column:   codclacomp
+        unique_error: El Código de la Clasificación de Compras no existe.
+
+Fuente_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Fortipfin
+        column:   codfin
+        unique_error: El Código de la Fuente de Financiamiento no existe.
+
+Obra_Validator:
+    class: CidesaExistValidator
+    param:
+        class:    Ocregobr
+        column:   codobr
+        unique_error: El Código de la Obra no existe.
+
+Validator_Obra:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Ocreglic
+        column:   codobr
+        unique_error:   El Código ya existe. Por Favor, Intente con otro.

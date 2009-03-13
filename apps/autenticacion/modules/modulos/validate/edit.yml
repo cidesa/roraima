@@ -1,0 +1,30 @@
+methods:
+  post:
+   - "aplicacion{codapl}"
+   - "aplicacion{nomapl}"
+
+names:
+  aplicacion{codapl}:
+    required:  Yes
+    required_msg: El Código del Módulo no puede estar en Blanco.
+    validators: UniqueValidator
+
+  aplicacion{nomapl}:
+    required:  Yes
+    required_msg: El Nombre del Módulo no puede estar en Blanco.
+    validators: NombreValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Aplicacion
+        column:   codapl
+        unique_error:   El Código del Módulo ya existe. Por Favor, Cambiélo por otro.
+
+NombreValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: El Nombre del Módulo no puede tener menos de 5 carácteres
+        max:       50
+        max_error: El Nombre del Módulo no puede tener más de 50 carácteres

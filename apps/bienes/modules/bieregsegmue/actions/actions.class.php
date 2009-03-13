@@ -10,110 +10,320 @@
  */
 class bieregsegmueActions extends autobieregsegmueActions
 {
-	protected function updateBnsegmueFromRequest()
-	{
-		$bnsegmue = $this->getRequestParameter('bnsegmue');
 
-		if (isset($bnsegmue['codact']))
-		{
-			$this->bnsegmue->setCodact(str_pad($bnsegmue['codact'],30,' '));
-		}
-		if (isset($bnsegmue['codmue']))
-		{
-			$this->bnsegmue->setCodmue(str_pad($bnsegmue['codmue'],10,'0',STR_PAD_LEFT));
-		}
-		if (isset($bnsegmue['nrosegmue']))
-		{
-			$this->bnsegmue->setNrosegmue(str_pad($bnsegmue['nrosegmue'],6,'0',STR_PAD_LEFT));
-		}
-		if (isset($bnsegmue['fecsegmue']))
-		{
-			if ($bnsegmue['fecsegmue'])
-			{
-				try
-				{
-					$dateFormat = new sfDateFormat($this->getUser()->getCulture());
-					if (!is_array($bnsegmue['fecsegmue']))
-					{
-						$value = $dateFormat->format($bnsegmue['fecsegmue'], 'i', $dateFormat->getInputPattern('d'));
-					}
-					else
-					{
-						$value_array = $bnsegmue['fecsegmue'];
-						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-					}
-					$this->bnsegmue->setFecsegmue($value);
-				}
-				catch (sfException $e)
-				{
-					// not a date
-				}
-			}
-			else
-			{
-				$this->bnsegmue->setFecsegmue(null);
-			}
-		}
-		if (isset($bnsegmue['nomsegmue']))
-		{
-			$this->bnsegmue->setNomsegmue($bnsegmue['nomsegmue']);
-		}
-		if (isset($bnsegmue['cobsegmue']))
-		{
-			$this->bnsegmue->setCobsegmue($bnsegmue['cobsegmue']);
-		}
-		if (isset($bnsegmue['monsegmue']))
-		{
-			$this->bnsegmue->setMonsegmue($bnsegmue['monsegmue']);
-		}
-		if (isset($bnsegmue['fecsegven']))
-		{
-			if ($bnsegmue['fecsegven'])
-			{
-				try
-				{
-					$dateFormat = new sfDateFormat($this->getUser()->getCulture());
-					if (!is_array($bnsegmue['fecsegven']))
-					{
-						$value = $dateFormat->format($bnsegmue['fecsegven'], 'i', $dateFormat->getInputPattern('d'));
-					}
-					else
-					{
-						$value_array = $bnsegmue['fecsegven'];
-						$value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
-					}
-					$this->bnsegmue->setFecsegven($value);
-				}
-				catch (sfException $e)
-				{
-					// not a date
-				}
-			}
-			else
-			{
-				$this->bnsegmue->setFecsegven(null);
-			}
-		}
-		if (isset($bnsegmue['prosegmue']))
-		{
-			$this->bnsegmue->setProsegmue($bnsegmue['prosegmue']);
-		}
-		if (isset($bnsegmue['obssegmue']))
-		{
-			$this->bnsegmue->setObssegmue($bnsegmue['obssegmue']);
-		}
-		//if (isset($bnsegmue['stasegmue']))
-		//{
-		//$this->bnsegmue->setStasegmue($bnsegmue['stasegmue']);
-		#$dateFormat->format($this->getRequestParameter('fecha_actual'), 'i', $dateFormat->getInputPattern('d'));
-	    if ( $dateFormat->format($this->getRequestParameter('fecha_actual'), 'i', $dateFormat->getInputPattern('d')) > $value)
-	  	{
-	  		$this->bnsegmue->setStasegmue('V');		
-	  	}else{
-	  		$this->bnsegmue->setStasegmue('A');
-	  	}
-	  
-      
-    //}
-  }	
+  private $coderror = -1;
+
+  public function executeEdit()
+  {
+    $this->bnsegmue = $this->getBnsegmueOrCreate();
+    $this->setVars();
+
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->updateBnsegmueFromRequest();
+
+      $this->saveBnsegmue($this->bnsegmue);
+
+      $this->setFlash('notice', 'Your modifications have been saved');
+$this->Bitacora('Guardo');
+
+      if ($this->getRequestParameter('save_and_add'))
+      {
+        return $this->redirect('bieregsegmue/create');
+      }
+      else if ($this->getRequestParameter('save_and_list'))
+      {
+        return $this->redirect('bieregsegmue/list');
+      }
+      else
+      {
+        return $this->redirect('bieregsegmue/edit?id='.$this->bnsegmue->getId());
+      }
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
+  }
+
+protected function updateBnsegmueFromRequest()
+  {
+    $bnsegmue = $this->getRequestParameter('bnsegmue');
+
+    if (isset($bnsegmue['codact']))
+    {
+      $this->bnsegmue->setCodact($bnsegmue['codact']);
+    }
+    if (isset($bnsegmue['codmue']))
+    {
+      $this->bnsegmue->setCodmue($bnsegmue['codmue']);
+    }
+    if (isset($bnsegmue['nrosegmue']))
+    {
+      $this->bnsegmue->setNrosegmue($bnsegmue['nrosegmue']);
+    }
+    if (isset($bnsegmue['fecsegmue']))
+    {
+      if ($bnsegmue['fecsegmue'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($bnsegmue['fecsegmue']))
+          {
+            $value = $dateFormat->format($bnsegmue['fecsegmue'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $bnsegmue['fecsegmue'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->bnsegmue->setFecsegmue($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->bnsegmue->setFecsegmue(null);
+      }
+    }
+    if (isset($bnsegmue['nomsegmue']))
+    {
+      $this->bnsegmue->setNomsegmue($bnsegmue['nomsegmue']);
+    }
+    if (isset($bnsegmue['cobsegmue']))
+    {
+      $this->bnsegmue->setCobsegmue($bnsegmue['cobsegmue']);
+    }
+    if (isset($bnsegmue['monsegmue']))
+    {
+      $this->bnsegmue->setMonsegmue($bnsegmue['monsegmue']);
+    }
+    if (isset($bnsegmue['fecsegven']))
+    {
+      if ($bnsegmue['fecsegven'])
+      {
+        try
+        {
+          $dateFormat = new sfDateFormat($this->getUser()->getCulture());
+                              if (!is_array($bnsegmue['fecsegven']))
+          {
+            $value = $dateFormat->format($bnsegmue['fecsegven'], 'i', $dateFormat->getInputPattern('d'));
+          }
+          else
+          {
+            $value_array = $bnsegmue['fecsegven'];
+            $value = $value_array['year'].'-'.$value_array['month'].'-'.$value_array['day'].(isset($value_array['hour']) ? ' '.$value_array['hour'].':'.$value_array['minute'].(isset($value_array['second']) ? ':'.$value_array['second'] : '') : '');
+          }
+          $this->bnsegmue->setFecsegven($value);
+        }
+        catch (sfException $e)
+        {
+          // not a date
+        }
+      }
+      else
+      {
+        $this->bnsegmue->setFecsegven(null);
+      }
+    }
+    if (isset($bnsegmue['prosegmue']))
+    {
+      $this->bnsegmue->setProsegmue($bnsegmue['prosegmue']);
+    }
+    if (isset($bnsegmue['obssegmue']))
+    {
+      $this->bnsegmue->setObssegmue($bnsegmue['obssegmue']);
+    }
+    if (isset($bnsegmue['stasegmue']))
+    {
+      $this->bnsegmue->setStasegmue($bnsegmue['stasegmue']);
+    }
+  }
+
+
+  public function setVars()
+  {
+      $this->mascaracatalogo = Herramientas::getX_vacio('codins','bndefins','ForAct','001');
+      $this->mascaraformatoubi = Herramientas::getX_vacio('codins','bndefins','ForUbi','001');
+      $this->mascaralonformato = Herramientas::getX_vacio('codins','bndefins','LonAct','001');
+      $this->mascaralonubicacion = Herramientas::getX_vacio('codins','bndefins','LonUbi','001');
+  }
+   public function executeAjax()
+  {
+
+    $codigo = $this->getRequestParameter('codigo','');
+    $ajax = $this->getRequestParameter('ajax','');
+    $cajtexmos=$this->getRequestParameter('cajtexmos','');
+    $cajtexcom=$this->getRequestParameter('cajtexcom','');
+
+
+    switch ($ajax){
+	 case '0':
+
+      $descob=BncobsegPeer::getDesubi($codigo);
+      $output = '[["'.$cajtexmos.'","'.$descob.'",""]]';
+
+     break;
+      case '1':
+
+      	$codact=BnregmuePeer::getCodact($codigo);
+      	$desmue=BnregmuePeer::getDesmue1($codigo);
+
+      	$output = '[["'.$cajtexmos.'","'.$codact.'",""], ["'.$cajtexcom.'","'.$desmue.'",""]]';
+
+      break;
+
+      case '2':
+
+        $output = '[["'.$cajtexcom.'","'.$codigo.'",""],["'.$cajtexcom.'","6","c"]]';
+
+        break;
+
+      case '3':
+
+      $dato=BncobsegPeer::getDesubi($codigo);
+
+        $output = '[["'.$cajtexcom.'","'.$dato.'",""],["'.$cajtexmos.'","4","c"]]';
+
+        break;
+
+        default:
+        $output = '[["","",""],["","",""],["","",""]]';
+    }
+
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    return sfView::HEADER_ONLY;
+
+  }
+
+  public function saveBnsegmue($Bnsegmue)
+  {
+    $coderr = -1;
+
+    try {
+
+      $coderr = Muebles::salvarbieregsegmue($Bnsegmue);
+
+      if(is_array($coderr)){
+        foreach ($coderror as $ERR){
+          $err = Herramientas::obtenerMensajeError($ERR);
+          $this->getRequest()->setError('',$err);
+          $this->ActualizarGrid();
+        }
+      }elseif($coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($coderr);
+        $this->getRequest()->setError('',$err);
+        $this->ActualizarGrid();
+      }
+
+    } catch (Exception $ex) {
+
+      $coderror = 0;
+      $err = Herramientas::obtenerMensajeError($coderr);
+      $this->getRequest()->setError('',$err);
+
+    }
+
+
+  }
+
+
+  public function deleteBnsegmue($Bnsegmue)
+  {
+
+    $coderr = -1;
+
+    try {
+
+      parent::deleteBnsegmue($Bnsegmue);
+
+      if(is_array($coderr)){
+        foreach ($coderror as $ERR){
+          $err = Herramientas::obtenerMensajeError($ERR);
+          $this->getRequest()->setError('',$err);
+          $this->ActualizarGrid();
+        }
+      }elseif($coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($coderror);
+        $this->getRequest()->setError('',$err);
+        $this->ActualizarGrid();
+      }
+
+
+    } catch (Exception $ex) {
+
+      $coderror = 0;
+      $err = Herramientas::obtenerMensajeError($coderror);
+      $this->getRequest()->setError('',$err);
+
+    }
+
+  }
+
+public function validateEdit()
+  {
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+       $this->bnsegmue = $this->getBnsegmueOrCreate();
+       $this->updateBnsegmueFromRequest();
+
+    if (!$this->bnsegmue->getId())
+     { Muebles::validarBieregsegmue($this->bnsegmue,&$msj);
+      $this->coderror=$msj;
+     }
+      if ($this->coderror<>-1)
+      {
+        return false;
+      }else return true;
+    }else return true;
+  }
+
+
+  public function executeAutocomplete()
+  {
+  	if ($this->getRequestParameter('ajax')=='0')
+      {
+       $this->tags=Herramientas::autocompleteAjax('CODMUE','Bnregmue','codmue',trim($this->getRequestParameter('bnsegmue[codmue]')));
+       //$this->tags=$this->tags+Herramientas::autocompleteAjax('CODACT','Bnregmue','desmue',trim($this->getRequestParameter('bnsegmue[codact]')));
+       //dato1=BnregmuePeer::getDesmue($codigo,$dato);
+      }else
+    if ($this->getRequestParameter('ajax')=='1')
+      {
+       $this->tags=Herramientas::autocompleteAjax('CODACT','Bnregmue','codact',trim($this->getRequestParameter('bnsegmue[codact]')));
+       //$this->tags=$this->tags+Herramientas::autocompleteAjax('CODACT','Bnregmue','desmue',trim($this->getRequestParameter('bnsegmue[codact]')));
+       //dato1=BnregmuePeer::getDesmue($codigo,$dato);
+      }else
+    if ($this->getRequestParameter('ajax')=='2')
+      {
+       $this->tags=Herramientas::autocompleteAjax('CODCOB','Bncobseg','codcob',trim($this->getRequestParameter('bnsegmue[cobsegmue]')));
+      }else
+    if ($this->getRequestParameter('ajax')=='3')
+      {
+       //$this->tags=Herramientas::autocompleteAjax('CODCOB','Bncobseg','codcob',trim($this->getRequestParameter('bnsegmue[cobsegmue]')));
+      }
+  }
+
+public function handleErrorEdit()
+  {
+    $this->preExecute();
+    $this->bnsegmue = $this->getBnsegmueOrCreate();
+    $this->updateBnsegmueFromRequest();
+	$this->setVars();
+    $this->labels = $this->getLabels();
+
+	 if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderror!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderror);
+        $this->getRequest()->setError('bnsegmue{nrosegmue}',$err);
+      }
+    }
+    return sfView::SUCCESS;
+  }
+
 }

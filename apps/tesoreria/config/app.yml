@@ -1,10 +1,5 @@
 all:
    .apps:
      autenticacion:    autenticacion
-     compras:          compras
-     tesoreria:        tesoreria
-     bienes:           bienes
-     ingresos:         ingresos
-     nomina:           nomina
-     formulacion:      formulacion
+     max_per_page:     15
      this:             tesoreria      #cambiar en cada app

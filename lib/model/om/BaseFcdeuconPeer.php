@@ -13,7 +13,7 @@ abstract class BaseFcdeuconPeer {
 	const CLASS_DEFAULT = 'lib.model.Fcdeucon';
 
 	
-	const NUM_COLUMNS = 4;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -29,6 +29,12 @@ abstract class BaseFcdeuconPeer {
 	const NUMERO = 'fcdeucon.NUMERO';
 
 	
+	const FECVEN = 'fcdeucon.FECVEN';
+
+	
+	const FUEING = 'fcdeucon.FUEING';
+
+	
 	const ID = 'fcdeucon.ID';
 
 	
@@ -37,18 +43,18 @@ abstract class BaseFcdeuconPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcon', 'Numdec', 'Numero', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (FcdeuconPeer::REFCON, FcdeuconPeer::NUMDEC, FcdeuconPeer::NUMERO, FcdeuconPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcon', 'numdec', 'numero', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Refcon', 'Numdec', 'Numero', 'Fecven', 'Fueing', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (FcdeuconPeer::REFCON, FcdeuconPeer::NUMDEC, FcdeuconPeer::NUMERO, FcdeuconPeer::FECVEN, FcdeuconPeer::FUEING, FcdeuconPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcon', 'numdec', 'numero', 'fecven', 'fueing', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refcon' => 0, 'Numdec' => 1, 'Numero' => 2, 'Id' => 3, ),
-		BasePeer::TYPE_COLNAME => array (FcdeuconPeer::REFCON => 0, FcdeuconPeer::NUMDEC => 1, FcdeuconPeer::NUMERO => 2, FcdeuconPeer::ID => 3, ),
-		BasePeer::TYPE_FIELDNAME => array ('refcon' => 0, 'numdec' => 1, 'numero' => 2, 'id' => 3, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
+		BasePeer::TYPE_PHPNAME => array ('Refcon' => 0, 'Numdec' => 1, 'Numero' => 2, 'Fecven' => 3, 'Fueing' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (FcdeuconPeer::REFCON => 0, FcdeuconPeer::NUMDEC => 1, FcdeuconPeer::NUMERO => 2, FcdeuconPeer::FECVEN => 3, FcdeuconPeer::FUEING => 4, FcdeuconPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('refcon' => 0, 'numdec' => 1, 'numero' => 2, 'fecven' => 3, 'fueing' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -107,6 +113,10 @@ abstract class BaseFcdeuconPeer {
 		$criteria->addSelectColumn(FcdeuconPeer::NUMDEC);
 
 		$criteria->addSelectColumn(FcdeuconPeer::NUMERO);
+
+		$criteria->addSelectColumn(FcdeuconPeer::FECVEN);
+
+		$criteria->addSelectColumn(FcdeuconPeer::FUEING);
 
 		$criteria->addSelectColumn(FcdeuconPeer::ID);
 
@@ -210,6 +220,7 @@ abstract class BaseFcdeuconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdeuconPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

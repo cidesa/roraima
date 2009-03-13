@@ -210,6 +210,7 @@ abstract class BaseFcdefentextPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcdefentextPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

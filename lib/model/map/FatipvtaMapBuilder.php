@@ -1,42 +1,44 @@
 <?php
 
 
-	
+
 class FatipvtaMapBuilder {
 
 	
-	const CLASS_NAME = 'lib.model.map.FatipvtaMapBuilder';	
-
-    
-    private $dbMap;
+	const CLASS_NAME = 'lib.model.map.FatipvtaMapBuilder';
 
 	
-    public function isBuilt()
-    {
-        return ($this->dbMap !== null);
-    }
+	private $dbMap;
 
 	
-    public function getDatabaseMap()
-    {
-        return $this->dbMap;
-    }
+	public function isBuilt()
+	{
+		return ($this->dbMap !== null);
+	}
 
-    
-    public function doBuild()
-    {
+	
+	public function getDatabaseMap()
+	{
+		return $this->dbMap;
+	}
+
+	
+	public function doBuild()
+	{
 		$this->dbMap = Propel::getDatabaseMap('propel');
-		
+
 		$tMap = $this->dbMap->addTable('fatipvta');
 		$tMap->setPhpName('Fatipvta');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('fatipvta_SEQ');
 
 		$tMap->addColumn('CODTIVTA', 'Codtivta', 'string', CreoleTypes::VARCHAR, true, 4);
 
 		$tMap->addColumn('NOMTIVTA', 'Nomtivta', 'string', CreoleTypes::VARCHAR, true, 20);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
-				
-    } 
+
+	} 
 } 

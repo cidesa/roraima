@@ -230,6 +230,7 @@ abstract class BaseOcressolPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OcressolPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

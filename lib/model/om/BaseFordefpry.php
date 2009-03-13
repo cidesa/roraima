@@ -265,6 +265,50 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 
 
 	
+	protected $codpryonapre;
+
+
+	
+	protected $tieejeanopry;
+
+
+	
+	protected $tieejemespry;
+
+
+	
+	protected $codobjnvaeta;
+
+
+	
+	protected $sitobjdes;
+
+
+	
+	protected $tieimpmes;
+
+
+	
+	protected $tieimpano;
+
+
+	
+	protected $nucdesend;
+
+
+	
+	protected $zonecodes;
+
+
+	
+	protected $accinm;
+
+
+	
+	protected $accdif;
+
+
+	
 	protected $id;
 
 	
@@ -273,1265 +317,1562 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodpro()
-	{
-
-		return $this->codpro; 		
-	}
-	
-	public function getNompro()
-	{
-
-		return $this->nompro; 		
-	}
-	
-	public function getProacc()
-	{
-
-		return $this->proacc; 		
-	}
-	
-	public function getCodsta()
-	{
-
-		return $this->codsta; 		
-	}
-	
-	public function getCodsitpre()
-	{
-
-		return $this->codsitpre; 		
-	}
-	
-	public function getConpoa()
-	{
-
-		return $this->conpoa; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
-
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getFeccul($format = 'Y-m-d')
-	{
-
-		if ($this->feccul === null || $this->feccul === '') {
-			return null;
-		} elseif (!is_int($this->feccul)) {
-						$ts = strtotime($this->feccul);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccul] as date/time value: " . var_export($this->feccul, true));
-			}
-		} else {
-			$ts = $this->feccul;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getUbinac()
-	{
-
-		return $this->ubinac; 		
-	}
-	
-	public function getCodequ()
-	{
-
-		return $this->codequ; 		
-	}
-	
-	public function getCodsubobj()
-	{
-
-		return $this->codsubobj; 		
-	}
-	
-	public function getCodsubsubobj()
-	{
-
-		return $this->codsubsubobj; 		
-	}
-	
-	public function getObjestnueeta()
-	{
-
-		return $this->objestnueeta; 		
-	}
-	
-	public function getObjestins()
-	{
-
-		return $this->objestins; 		
-	}
-	
-	public function getObjeesppro()
-	{
-
-		return $this->objeesppro; 		
-	}
-	
-	public function getIndpro()
-	{
-
-		return $this->indpro; 		
-	}
-	
-	public function getEnupro()
-	{
-
-		return $this->enupro; 		
-	}
-	
-	public function getIndsitact()
-	{
-
-		return $this->indsitact; 		
-	}
-	
-	public function getFecultdat($format = 'Y-m-d')
-	{
-
-		if ($this->fecultdat === null || $this->fecultdat === '') {
-			return null;
-		} elseif (!is_int($this->fecultdat)) {
-						$ts = strtotime($this->fecultdat);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecultdat] as date/time value: " . var_export($this->fecultdat, true));
-			}
-		} else {
-			$ts = $this->fecultdat;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
-
-	
-	public function getForind()
-	{
-
-		return $this->forind; 		
-	}
-	
-	public function getFueind()
-	{
-
-		return $this->fueind; 		
-	}
-	
-	public function getIndsitobj()
-	{
-
-		return $this->indsitobj; 		
-	}
-	
-	public function getTieimp()
-	{
-
-		return $this->tieimp; 		
-	}
-	
-	public function getRespro()
-	{
-
-		return $this->respro; 		
-	}
-	
-	public function getDesmet()
-	{
-
-		return $this->desmet; 		
-	}
-	
-	public function getCodunimedmet()
-	{
-
-		return $this->codunimedmet; 		
-	}
-	
-	public function getCantmet()
-	{
-
-		return number_format($this->cantmet,2,',','.');
-		
-	}
-	
-	public function getBenpro()
-	{
-
-		return $this->benpro; 		
-	}
-	
-	public function getCodejedes()
-	{
-
-		return $this->codejedes; 		
-	}
-	
-	public function getCodnucdes()
-	{
-
-		return $this->codnucdes; 		
-	}
-	
-	public function getCodzoneco()
-	{
-
-		return $this->codzoneco; 		
-	}
-	
-	public function getComindust()
-	{
-
-		return $this->comindust; 		
-	}
-	
-	public function getCodsec()
-	{
-
-		return $this->codsec; 		
-	}
-	
-	public function getCodsubsec()
-	{
-
-		return $this->codsubsec; 		
-	}
-	
-	public function getMontotpry()
-	{
-
-		return number_format($this->montotpry,2,',','.');
-		
-	}
-	
-	public function getCodemp()
-	{
-
-		return $this->codemp; 		
-	}
-	
-	public function getNomemp()
-	{
-
-		return $this->nomemp; 		
-	}
-	
-	public function getCaremp()
-	{
-
-		return $this->caremp; 		
-	}
-	
-	public function getUniadsemp()
-	{
-
-		return $this->uniadsemp; 		
-	}
-	
-	public function getTelemp()
-	{
-
-		return $this->telemp; 		
-	}
-	
-	public function getFaxemp()
-	{
-
-		return $this->faxemp; 		
-	}
-	
-	public function getEmaemp()
-	{
-
-		return $this->emaemp; 		
-	}
-	
-	public function getAccotrins()
-	{
-
-		return $this->accotrins; 		
-	}
-	
-	public function getObsaccotrins()
-	{
-
-		return $this->obsaccotrins; 		
-	}
-	
-	public function getConpryotr()
-	{
-
-		return $this->conpryotr; 		
-	}
-	
-	public function getObsconpryotr()
-	{
-
-		return $this->obsconpryotr; 		
-	}
-	
-	public function getConotrpry()
-	{
-
-		return $this->conotrpry; 		
-	}
-	
-	public function getObsconotrpry()
-	{
-
-		return $this->obsconotrpry; 		
-	}
-	
-	public function getTipaccage()
-	{
-
-		return $this->tipaccage; 		
-	}
-	
-	public function getPlacontin()
-	{
-
-		return $this->placontin; 		
-	}
-	
-	public function getObsplacontin()
-	{
-
-		return $this->obsplacontin; 		
-	}
-	
-	public function getNroempdir()
-	{
-
-		return number_format($this->nroempdir,2,',','.');
-		
-	}
-	
-	public function getNroempind()
-	{
-
-		return number_format($this->nroempind,2,',','.');
-		
-	}
-	
-	public function getDesbrepry()
-	{
-
-		return $this->desbrepry; 		
-	}
-	
-	public function getPoravafis()
-	{
-
-		return number_format($this->poravafis,2,',','.');
-		
-	}
-	
-	public function getPoravafin()
-	{
-
-		return number_format($this->poravafin,2,',','.');
-		
-	}
-	
-	public function getUniejepri()
-	{
-
-		return $this->uniejepri; 		
-	}
-	
-	public function getUbigeo()
-	{
-
-		return $this->ubigeo; 		
-	}
-	
-	public function getPlactg()
-	{
-
-		return $this->plactg; 		
-	}
-	
-	public function getCoddir()
-	{
-
-		return $this->coddir; 		
-	}
-	
-	public function getFacrzg()
-	{
-
-		return $this->facrzg; 		
-	}
-	
-	public function getObjpndes()
-	{
-
-		return $this->objpndes; 		
-	}
-	
-	public function getUnimedres()
-	{
-
-		return $this->unimedres; 		
-	}
-	
-	public function getCodprg()
-	{
-
-		return $this->codprg; 		
-	}
-	
-	public function getId()
-	{
-
-		return $this->id; 		
-	}
+  
+  public function getCodpro()
+  {
+
+    return trim($this->codpro);
+
+  }
+  
+  public function getNompro()
+  {
+
+    return trim($this->nompro);
+
+  }
+  
+  public function getProacc()
+  {
+
+    return trim($this->proacc);
+
+  }
+  
+  public function getCodsta()
+  {
+
+    return trim($this->codsta);
+
+  }
+  
+  public function getCodsitpre()
+  {
+
+    return trim($this->codsitpre);
+
+  }
+  
+  public function getConpoa()
+  {
+
+    return trim($this->conpoa);
+
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
+
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getFeccul($format = 'Y-m-d')
+  {
+
+    if ($this->feccul === null || $this->feccul === '') {
+      return null;
+    } elseif (!is_int($this->feccul)) {
+            $ts = adodb_strtotime($this->feccul);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccul] as date/time value: " . var_export($this->feccul, true));
+      }
+    } else {
+      $ts = $this->feccul;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getUbinac()
+  {
+
+    return trim($this->ubinac);
+
+  }
+  
+  public function getCodequ()
+  {
+
+    return trim($this->codequ);
+
+  }
+  
+  public function getCodsubobj()
+  {
+
+    return trim($this->codsubobj);
+
+  }
+  
+  public function getCodsubsubobj()
+  {
+
+    return trim($this->codsubsubobj);
+
+  }
+  
+  public function getObjestnueeta()
+  {
+
+    return trim($this->objestnueeta);
+
+  }
+  
+  public function getObjestins()
+  {
+
+    return trim($this->objestins);
+
+  }
+  
+  public function getObjeesppro()
+  {
+
+    return trim($this->objeesppro);
+
+  }
+  
+  public function getIndpro()
+  {
+
+    return trim($this->indpro);
+
+  }
+  
+  public function getEnupro()
+  {
+
+    return trim($this->enupro);
+
+  }
+  
+  public function getIndsitact()
+  {
+
+    return trim($this->indsitact);
+
+  }
+  
+  public function getFecultdat($format = 'Y-m-d')
+  {
+
+    if ($this->fecultdat === null || $this->fecultdat === '') {
+      return null;
+    } elseif (!is_int($this->fecultdat)) {
+            $ts = adodb_strtotime($this->fecultdat);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecultdat] as date/time value: " . var_export($this->fecultdat, true));
+      }
+    } else {
+      $ts = $this->fecultdat;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getForind()
+  {
+
+    return trim($this->forind);
+
+  }
+  
+  public function getFueind()
+  {
+
+    return trim($this->fueind);
+
+  }
+  
+  public function getIndsitobj()
+  {
+
+    return trim($this->indsitobj);
+
+  }
+  
+  public function getTieimp()
+  {
+
+    return trim($this->tieimp);
+
+  }
+  
+  public function getRespro()
+  {
+
+    return trim($this->respro);
+
+  }
+  
+  public function getDesmet()
+  {
+
+    return trim($this->desmet);
+
+  }
+  
+  public function getCodunimedmet()
+  {
+
+    return trim($this->codunimedmet);
+
+  }
+  
+  public function getCantmet($val=false)
+  {
+
+    if($val) return number_format($this->cantmet,2,',','.');
+    else return $this->cantmet;
+
+  }
+  
+  public function getBenpro()
+  {
+
+    return trim($this->benpro);
+
+  }
+  
+  public function getCodejedes()
+  {
+
+    return trim($this->codejedes);
+
+  }
+  
+  public function getCodnucdes()
+  {
+
+    return trim($this->codnucdes);
+
+  }
+  
+  public function getCodzoneco()
+  {
+
+    return trim($this->codzoneco);
+
+  }
+  
+  public function getComindust()
+  {
+
+    return trim($this->comindust);
+
+  }
+  
+  public function getCodsec()
+  {
+
+    return trim($this->codsec);
+
+  }
+  
+  public function getCodsubsec()
+  {
+
+    return trim($this->codsubsec);
+
+  }
+  
+  public function getMontotpry($val=false)
+  {
+
+    if($val) return number_format($this->montotpry,2,',','.');
+    else return $this->montotpry;
+
+  }
+  
+  public function getCodemp()
+  {
+
+    return trim($this->codemp);
+
+  }
+  
+  public function getNomemp()
+  {
+
+    return trim($this->nomemp);
+
+  }
+  
+  public function getCaremp()
+  {
+
+    return trim($this->caremp);
+
+  }
+  
+  public function getUniadsemp()
+  {
+
+    return trim($this->uniadsemp);
+
+  }
+  
+  public function getTelemp()
+  {
+
+    return trim($this->telemp);
+
+  }
+  
+  public function getFaxemp()
+  {
+
+    return trim($this->faxemp);
+
+  }
+  
+  public function getEmaemp()
+  {
+
+    return trim($this->emaemp);
+
+  }
+  
+  public function getAccotrins()
+  {
+
+    return trim($this->accotrins);
+
+  }
+  
+  public function getObsaccotrins()
+  {
+
+    return trim($this->obsaccotrins);
+
+  }
+  
+  public function getConpryotr()
+  {
+
+    return trim($this->conpryotr);
+
+  }
+  
+  public function getObsconpryotr()
+  {
+
+    return trim($this->obsconpryotr);
+
+  }
+  
+  public function getConotrpry()
+  {
+
+    return trim($this->conotrpry);
+
+  }
+  
+  public function getObsconotrpry()
+  {
+
+    return trim($this->obsconotrpry);
+
+  }
+  
+  public function getTipaccage()
+  {
+
+    return trim($this->tipaccage);
+
+  }
+  
+  public function getPlacontin()
+  {
+
+    return trim($this->placontin);
+
+  }
+  
+  public function getObsplacontin()
+  {
+
+    return trim($this->obsplacontin);
+
+  }
+  
+  public function getNroempdir($val=false)
+  {
+
+    if($val) return number_format($this->nroempdir,2,',','.');
+    else return $this->nroempdir;
+
+  }
+  
+  public function getNroempind($val=false)
+  {
+
+    if($val) return number_format($this->nroempind,2,',','.');
+    else return $this->nroempind;
+
+  }
+  
+  public function getDesbrepry()
+  {
+
+    return trim($this->desbrepry);
+
+  }
+  
+  public function getPoravafis($val=false)
+  {
+
+    if($val) return number_format($this->poravafis,2,',','.');
+    else return $this->poravafis;
+
+  }
+  
+  public function getPoravafin($val=false)
+  {
+
+    if($val) return number_format($this->poravafin,2,',','.');
+    else return $this->poravafin;
+
+  }
+  
+  public function getUniejepri()
+  {
+
+    return trim($this->uniejepri);
+
+  }
+  
+  public function getUbigeo()
+  {
+
+    return trim($this->ubigeo);
+
+  }
+  
+  public function getPlactg()
+  {
+
+    return trim($this->plactg);
+
+  }
+  
+  public function getCoddir()
+  {
+
+    return trim($this->coddir);
+
+  }
+  
+  public function getFacrzg()
+  {
+
+    return trim($this->facrzg);
+
+  }
+  
+  public function getObjpndes()
+  {
+
+    return trim($this->objpndes);
+
+  }
+  
+  public function getUnimedres()
+  {
+
+    return trim($this->unimedres);
+
+  }
+  
+  public function getCodprg()
+  {
+
+    return trim($this->codprg);
+
+  }
+  
+  public function getCodpryonapre()
+  {
+
+    return trim($this->codpryonapre);
+
+  }
+  
+  public function getTieejeanopry($val=false)
+  {
+
+    if($val) return number_format($this->tieejeanopry,2,',','.');
+    else return $this->tieejeanopry;
+
+  }
+  
+  public function getTieejemespry($val=false)
+  {
+
+    if($val) return number_format($this->tieejemespry,2,',','.');
+    else return $this->tieejemespry;
+
+  }
+  
+  public function getCodobjnvaeta()
+  {
+
+    return trim($this->codobjnvaeta);
+
+  }
+  
+  public function getSitobjdes()
+  {
+
+    return trim($this->sitobjdes);
+
+  }
+  
+  public function getTieimpmes($val=false)
+  {
+
+    if($val) return number_format($this->tieimpmes,2,',','.');
+    else return $this->tieimpmes;
+
+  }
+  
+  public function getTieimpano($val=false)
+  {
+
+    if($val) return number_format($this->tieimpano,2,',','.');
+    else return $this->tieimpano;
+
+  }
+  
+  public function getNucdesend()
+  {
+
+    return trim($this->nucdesend);
+
+  }
+  
+  public function getZonecodes()
+  {
+
+    return trim($this->zonecodes);
+
+  }
+  
+  public function getAccinm()
+  {
+
+    return trim($this->accinm);
+
+  }
+  
+  public function getAccdif()
+  {
+
+    return trim($this->accdif);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodpro($v)
 	{
 
-		if ($this->codpro !== $v) {
-			$this->codpro = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODPRO;
-		}
-
+    if ($this->codpro !== $v) {
+        $this->codpro = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODPRO;
+      }
+  
 	} 
 	
 	public function setNompro($v)
 	{
 
-		if ($this->nompro !== $v) {
-			$this->nompro = $v;
-			$this->modifiedColumns[] = FordefpryPeer::NOMPRO;
-		}
-
+    if ($this->nompro !== $v) {
+        $this->nompro = $v;
+        $this->modifiedColumns[] = FordefpryPeer::NOMPRO;
+      }
+  
 	} 
 	
 	public function setProacc($v)
 	{
 
-		if ($this->proacc !== $v) {
-			$this->proacc = $v;
-			$this->modifiedColumns[] = FordefpryPeer::PROACC;
-		}
-
+    if ($this->proacc !== $v) {
+        $this->proacc = $v;
+        $this->modifiedColumns[] = FordefpryPeer::PROACC;
+      }
+  
 	} 
 	
 	public function setCodsta($v)
 	{
 
-		if ($this->codsta !== $v) {
-			$this->codsta = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODSTA;
-		}
-
+    if ($this->codsta !== $v) {
+        $this->codsta = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODSTA;
+      }
+  
 	} 
 	
 	public function setCodsitpre($v)
 	{
 
-		if ($this->codsitpre !== $v) {
-			$this->codsitpre = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODSITPRE;
-		}
-
+    if ($this->codsitpre !== $v) {
+        $this->codsitpre = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODSITPRE;
+      }
+  
 	} 
 	
 	public function setConpoa($v)
 	{
 
-		if ($this->conpoa !== $v) {
-			$this->conpoa = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CONPOA;
-		}
-
+    if ($this->conpoa !== $v) {
+        $this->conpoa = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CONPOA;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = FordefpryPeer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = FordefpryPeer::FECINI;
+    }
 
 	} 
 	
 	public function setFeccul($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccul] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccul !== $ts) {
-			$this->feccul = $ts;
-			$this->modifiedColumns[] = FordefpryPeer::FECCUL;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccul] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccul !== $ts) {
+      $this->feccul = $ts;
+      $this->modifiedColumns[] = FordefpryPeer::FECCUL;
+    }
 
 	} 
 	
 	public function setUbinac($v)
 	{
 
-		if ($this->ubinac !== $v) {
-			$this->ubinac = $v;
-			$this->modifiedColumns[] = FordefpryPeer::UBINAC;
-		}
-
+    if ($this->ubinac !== $v) {
+        $this->ubinac = $v;
+        $this->modifiedColumns[] = FordefpryPeer::UBINAC;
+      }
+  
 	} 
 	
 	public function setCodequ($v)
 	{
 
-		if ($this->codequ !== $v) {
-			$this->codequ = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODEQU;
-		}
-
+    if ($this->codequ !== $v) {
+        $this->codequ = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODEQU;
+      }
+  
 	} 
 	
 	public function setCodsubobj($v)
 	{
 
-		if ($this->codsubobj !== $v) {
-			$this->codsubobj = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODSUBOBJ;
-		}
-
+    if ($this->codsubobj !== $v) {
+        $this->codsubobj = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODSUBOBJ;
+      }
+  
 	} 
 	
 	public function setCodsubsubobj($v)
 	{
 
-		if ($this->codsubsubobj !== $v) {
-			$this->codsubsubobj = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODSUBSUBOBJ;
-		}
-
+    if ($this->codsubsubobj !== $v) {
+        $this->codsubsubobj = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODSUBSUBOBJ;
+      }
+  
 	} 
 	
 	public function setObjestnueeta($v)
 	{
 
-		if ($this->objestnueeta !== $v) {
-			$this->objestnueeta = $v;
-			$this->modifiedColumns[] = FordefpryPeer::OBJESTNUEETA;
-		}
-
+    if ($this->objestnueeta !== $v) {
+        $this->objestnueeta = $v;
+        $this->modifiedColumns[] = FordefpryPeer::OBJESTNUEETA;
+      }
+  
 	} 
 	
 	public function setObjestins($v)
 	{
 
-		if ($this->objestins !== $v) {
-			$this->objestins = $v;
-			$this->modifiedColumns[] = FordefpryPeer::OBJESTINS;
-		}
-
+    if ($this->objestins !== $v) {
+        $this->objestins = $v;
+        $this->modifiedColumns[] = FordefpryPeer::OBJESTINS;
+      }
+  
 	} 
 	
 	public function setObjeesppro($v)
 	{
 
-		if ($this->objeesppro !== $v) {
-			$this->objeesppro = $v;
-			$this->modifiedColumns[] = FordefpryPeer::OBJEESPPRO;
-		}
-
+    if ($this->objeesppro !== $v) {
+        $this->objeesppro = $v;
+        $this->modifiedColumns[] = FordefpryPeer::OBJEESPPRO;
+      }
+  
 	} 
 	
 	public function setIndpro($v)
 	{
 
-		if ($this->indpro !== $v) {
-			$this->indpro = $v;
-			$this->modifiedColumns[] = FordefpryPeer::INDPRO;
-		}
-
+    if ($this->indpro !== $v) {
+        $this->indpro = $v;
+        $this->modifiedColumns[] = FordefpryPeer::INDPRO;
+      }
+  
 	} 
 	
 	public function setEnupro($v)
 	{
 
-		if ($this->enupro !== $v) {
-			$this->enupro = $v;
-			$this->modifiedColumns[] = FordefpryPeer::ENUPRO;
-		}
-
+    if ($this->enupro !== $v) {
+        $this->enupro = $v;
+        $this->modifiedColumns[] = FordefpryPeer::ENUPRO;
+      }
+  
 	} 
 	
 	public function setIndsitact($v)
 	{
 
-		if ($this->indsitact !== $v) {
-			$this->indsitact = $v;
-			$this->modifiedColumns[] = FordefpryPeer::INDSITACT;
-		}
-
+    if ($this->indsitact !== $v) {
+        $this->indsitact = $v;
+        $this->modifiedColumns[] = FordefpryPeer::INDSITACT;
+      }
+  
 	} 
 	
 	public function setFecultdat($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecultdat] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecultdat !== $ts) {
-			$this->fecultdat = $ts;
-			$this->modifiedColumns[] = FordefpryPeer::FECULTDAT;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecultdat] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecultdat !== $ts) {
+      $this->fecultdat = $ts;
+      $this->modifiedColumns[] = FordefpryPeer::FECULTDAT;
+    }
 
 	} 
 	
 	public function setForind($v)
 	{
 
-		if ($this->forind !== $v) {
-			$this->forind = $v;
-			$this->modifiedColumns[] = FordefpryPeer::FORIND;
-		}
-
+    if ($this->forind !== $v) {
+        $this->forind = $v;
+        $this->modifiedColumns[] = FordefpryPeer::FORIND;
+      }
+  
 	} 
 	
 	public function setFueind($v)
 	{
 
-		if ($this->fueind !== $v) {
-			$this->fueind = $v;
-			$this->modifiedColumns[] = FordefpryPeer::FUEIND;
-		}
-
+    if ($this->fueind !== $v) {
+        $this->fueind = $v;
+        $this->modifiedColumns[] = FordefpryPeer::FUEIND;
+      }
+  
 	} 
 	
 	public function setIndsitobj($v)
 	{
 
-		if ($this->indsitobj !== $v) {
-			$this->indsitobj = $v;
-			$this->modifiedColumns[] = FordefpryPeer::INDSITOBJ;
-		}
-
+    if ($this->indsitobj !== $v) {
+        $this->indsitobj = $v;
+        $this->modifiedColumns[] = FordefpryPeer::INDSITOBJ;
+      }
+  
 	} 
 	
 	public function setTieimp($v)
 	{
 
-		if ($this->tieimp !== $v) {
-			$this->tieimp = $v;
-			$this->modifiedColumns[] = FordefpryPeer::TIEIMP;
-		}
-
+    if ($this->tieimp !== $v) {
+        $this->tieimp = $v;
+        $this->modifiedColumns[] = FordefpryPeer::TIEIMP;
+      }
+  
 	} 
 	
 	public function setRespro($v)
 	{
 
-		if ($this->respro !== $v) {
-			$this->respro = $v;
-			$this->modifiedColumns[] = FordefpryPeer::RESPRO;
-		}
-
+    if ($this->respro !== $v) {
+        $this->respro = $v;
+        $this->modifiedColumns[] = FordefpryPeer::RESPRO;
+      }
+  
 	} 
 	
 	public function setDesmet($v)
 	{
 
-		if ($this->desmet !== $v) {
-			$this->desmet = $v;
-			$this->modifiedColumns[] = FordefpryPeer::DESMET;
-		}
-
+    if ($this->desmet !== $v) {
+        $this->desmet = $v;
+        $this->modifiedColumns[] = FordefpryPeer::DESMET;
+      }
+  
 	} 
 	
 	public function setCodunimedmet($v)
 	{
 
-		if ($this->codunimedmet !== $v) {
-			$this->codunimedmet = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODUNIMEDMET;
-		}
-
+    if ($this->codunimedmet !== $v) {
+        $this->codunimedmet = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODUNIMEDMET;
+      }
+  
 	} 
 	
 	public function setCantmet($v)
 	{
 
-		if ($this->cantmet !== $v) {
-			$this->cantmet = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CANTMET;
-		}
-
+    if ($this->cantmet !== $v) {
+        $this->cantmet = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::CANTMET;
+      }
+  
 	} 
 	
 	public function setBenpro($v)
 	{
 
-		if ($this->benpro !== $v) {
-			$this->benpro = $v;
-			$this->modifiedColumns[] = FordefpryPeer::BENPRO;
-		}
-
+    if ($this->benpro !== $v) {
+        $this->benpro = $v;
+        $this->modifiedColumns[] = FordefpryPeer::BENPRO;
+      }
+  
 	} 
 	
 	public function setCodejedes($v)
 	{
 
-		if ($this->codejedes !== $v) {
-			$this->codejedes = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODEJEDES;
-		}
-
+    if ($this->codejedes !== $v) {
+        $this->codejedes = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODEJEDES;
+      }
+  
 	} 
 	
 	public function setCodnucdes($v)
 	{
 
-		if ($this->codnucdes !== $v) {
-			$this->codnucdes = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODNUCDES;
-		}
-
+    if ($this->codnucdes !== $v) {
+        $this->codnucdes = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODNUCDES;
+      }
+  
 	} 
 	
 	public function setCodzoneco($v)
 	{
 
-		if ($this->codzoneco !== $v) {
-			$this->codzoneco = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODZONECO;
-		}
-
+    if ($this->codzoneco !== $v) {
+        $this->codzoneco = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODZONECO;
+      }
+  
 	} 
 	
 	public function setComindust($v)
 	{
 
-		if ($this->comindust !== $v) {
-			$this->comindust = $v;
-			$this->modifiedColumns[] = FordefpryPeer::COMINDUST;
-		}
-
+    if ($this->comindust !== $v) {
+        $this->comindust = $v;
+        $this->modifiedColumns[] = FordefpryPeer::COMINDUST;
+      }
+  
 	} 
 	
 	public function setCodsec($v)
 	{
 
-		if ($this->codsec !== $v) {
-			$this->codsec = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODSEC;
-		}
-
+    if ($this->codsec !== $v) {
+        $this->codsec = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODSEC;
+      }
+  
 	} 
 	
 	public function setCodsubsec($v)
 	{
 
-		if ($this->codsubsec !== $v) {
-			$this->codsubsec = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODSUBSEC;
-		}
-
+    if ($this->codsubsec !== $v) {
+        $this->codsubsec = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODSUBSEC;
+      }
+  
 	} 
 	
 	public function setMontotpry($v)
 	{
 
-		if ($this->montotpry !== $v) {
-			$this->montotpry = $v;
-			$this->modifiedColumns[] = FordefpryPeer::MONTOTPRY;
-		}
-
+    if ($this->montotpry !== $v) {
+        $this->montotpry = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::MONTOTPRY;
+      }
+  
 	} 
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setNomemp($v)
 	{
 
-		if ($this->nomemp !== $v) {
-			$this->nomemp = $v;
-			$this->modifiedColumns[] = FordefpryPeer::NOMEMP;
-		}
-
+    if ($this->nomemp !== $v) {
+        $this->nomemp = $v;
+        $this->modifiedColumns[] = FordefpryPeer::NOMEMP;
+      }
+  
 	} 
 	
 	public function setCaremp($v)
 	{
 
-		if ($this->caremp !== $v) {
-			$this->caremp = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CAREMP;
-		}
-
+    if ($this->caremp !== $v) {
+        $this->caremp = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CAREMP;
+      }
+  
 	} 
 	
 	public function setUniadsemp($v)
 	{
 
-		if ($this->uniadsemp !== $v) {
-			$this->uniadsemp = $v;
-			$this->modifiedColumns[] = FordefpryPeer::UNIADSEMP;
-		}
-
+    if ($this->uniadsemp !== $v) {
+        $this->uniadsemp = $v;
+        $this->modifiedColumns[] = FordefpryPeer::UNIADSEMP;
+      }
+  
 	} 
 	
 	public function setTelemp($v)
 	{
 
-		if ($this->telemp !== $v) {
-			$this->telemp = $v;
-			$this->modifiedColumns[] = FordefpryPeer::TELEMP;
-		}
-
+    if ($this->telemp !== $v) {
+        $this->telemp = $v;
+        $this->modifiedColumns[] = FordefpryPeer::TELEMP;
+      }
+  
 	} 
 	
 	public function setFaxemp($v)
 	{
 
-		if ($this->faxemp !== $v) {
-			$this->faxemp = $v;
-			$this->modifiedColumns[] = FordefpryPeer::FAXEMP;
-		}
-
+    if ($this->faxemp !== $v) {
+        $this->faxemp = $v;
+        $this->modifiedColumns[] = FordefpryPeer::FAXEMP;
+      }
+  
 	} 
 	
 	public function setEmaemp($v)
 	{
 
-		if ($this->emaemp !== $v) {
-			$this->emaemp = $v;
-			$this->modifiedColumns[] = FordefpryPeer::EMAEMP;
-		}
-
+    if ($this->emaemp !== $v) {
+        $this->emaemp = $v;
+        $this->modifiedColumns[] = FordefpryPeer::EMAEMP;
+      }
+  
 	} 
 	
 	public function setAccotrins($v)
 	{
 
-		if ($this->accotrins !== $v) {
-			$this->accotrins = $v;
-			$this->modifiedColumns[] = FordefpryPeer::ACCOTRINS;
-		}
-
+    if ($this->accotrins !== $v) {
+        $this->accotrins = $v;
+        $this->modifiedColumns[] = FordefpryPeer::ACCOTRINS;
+      }
+  
 	} 
 	
 	public function setObsaccotrins($v)
 	{
 
-		if ($this->obsaccotrins !== $v) {
-			$this->obsaccotrins = $v;
-			$this->modifiedColumns[] = FordefpryPeer::OBSACCOTRINS;
-		}
-
+    if ($this->obsaccotrins !== $v) {
+        $this->obsaccotrins = $v;
+        $this->modifiedColumns[] = FordefpryPeer::OBSACCOTRINS;
+      }
+  
 	} 
 	
 	public function setConpryotr($v)
 	{
 
-		if ($this->conpryotr !== $v) {
-			$this->conpryotr = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CONPRYOTR;
-		}
-
+    if ($this->conpryotr !== $v) {
+        $this->conpryotr = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CONPRYOTR;
+      }
+  
 	} 
 	
 	public function setObsconpryotr($v)
 	{
 
-		if ($this->obsconpryotr !== $v) {
-			$this->obsconpryotr = $v;
-			$this->modifiedColumns[] = FordefpryPeer::OBSCONPRYOTR;
-		}
-
+    if ($this->obsconpryotr !== $v) {
+        $this->obsconpryotr = $v;
+        $this->modifiedColumns[] = FordefpryPeer::OBSCONPRYOTR;
+      }
+  
 	} 
 	
 	public function setConotrpry($v)
 	{
 
-		if ($this->conotrpry !== $v) {
-			$this->conotrpry = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CONOTRPRY;
-		}
-
+    if ($this->conotrpry !== $v) {
+        $this->conotrpry = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CONOTRPRY;
+      }
+  
 	} 
 	
 	public function setObsconotrpry($v)
 	{
 
-		if ($this->obsconotrpry !== $v) {
-			$this->obsconotrpry = $v;
-			$this->modifiedColumns[] = FordefpryPeer::OBSCONOTRPRY;
-		}
-
+    if ($this->obsconotrpry !== $v) {
+        $this->obsconotrpry = $v;
+        $this->modifiedColumns[] = FordefpryPeer::OBSCONOTRPRY;
+      }
+  
 	} 
 	
 	public function setTipaccage($v)
 	{
 
-		if ($this->tipaccage !== $v) {
-			$this->tipaccage = $v;
-			$this->modifiedColumns[] = FordefpryPeer::TIPACCAGE;
-		}
-
+    if ($this->tipaccage !== $v) {
+        $this->tipaccage = $v;
+        $this->modifiedColumns[] = FordefpryPeer::TIPACCAGE;
+      }
+  
 	} 
 	
 	public function setPlacontin($v)
 	{
 
-		if ($this->placontin !== $v) {
-			$this->placontin = $v;
-			$this->modifiedColumns[] = FordefpryPeer::PLACONTIN;
-		}
-
+    if ($this->placontin !== $v) {
+        $this->placontin = $v;
+        $this->modifiedColumns[] = FordefpryPeer::PLACONTIN;
+      }
+  
 	} 
 	
 	public function setObsplacontin($v)
 	{
 
-		if ($this->obsplacontin !== $v) {
-			$this->obsplacontin = $v;
-			$this->modifiedColumns[] = FordefpryPeer::OBSPLACONTIN;
-		}
-
+    if ($this->obsplacontin !== $v) {
+        $this->obsplacontin = $v;
+        $this->modifiedColumns[] = FordefpryPeer::OBSPLACONTIN;
+      }
+  
 	} 
 	
 	public function setNroempdir($v)
 	{
 
-		if ($this->nroempdir !== $v) {
-			$this->nroempdir = $v;
-			$this->modifiedColumns[] = FordefpryPeer::NROEMPDIR;
-		}
-
+    if ($this->nroempdir !== $v) {
+        $this->nroempdir = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::NROEMPDIR;
+      }
+  
 	} 
 	
 	public function setNroempind($v)
 	{
 
-		if ($this->nroempind !== $v) {
-			$this->nroempind = $v;
-			$this->modifiedColumns[] = FordefpryPeer::NROEMPIND;
-		}
-
+    if ($this->nroempind !== $v) {
+        $this->nroempind = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::NROEMPIND;
+      }
+  
 	} 
 	
 	public function setDesbrepry($v)
 	{
 
-		if ($this->desbrepry !== $v) {
-			$this->desbrepry = $v;
-			$this->modifiedColumns[] = FordefpryPeer::DESBREPRY;
-		}
-
+    if ($this->desbrepry !== $v) {
+        $this->desbrepry = $v;
+        $this->modifiedColumns[] = FordefpryPeer::DESBREPRY;
+      }
+  
 	} 
 	
 	public function setPoravafis($v)
 	{
 
-		if ($this->poravafis !== $v) {
-			$this->poravafis = $v;
-			$this->modifiedColumns[] = FordefpryPeer::PORAVAFIS;
-		}
-
+    if ($this->poravafis !== $v) {
+        $this->poravafis = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::PORAVAFIS;
+      }
+  
 	} 
 	
 	public function setPoravafin($v)
 	{
 
-		if ($this->poravafin !== $v) {
-			$this->poravafin = $v;
-			$this->modifiedColumns[] = FordefpryPeer::PORAVAFIN;
-		}
-
+    if ($this->poravafin !== $v) {
+        $this->poravafin = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::PORAVAFIN;
+      }
+  
 	} 
 	
 	public function setUniejepri($v)
 	{
 
-		if ($this->uniejepri !== $v) {
-			$this->uniejepri = $v;
-			$this->modifiedColumns[] = FordefpryPeer::UNIEJEPRI;
-		}
-
+    if ($this->uniejepri !== $v) {
+        $this->uniejepri = $v;
+        $this->modifiedColumns[] = FordefpryPeer::UNIEJEPRI;
+      }
+  
 	} 
 	
 	public function setUbigeo($v)
 	{
 
-		if ($this->ubigeo !== $v) {
-			$this->ubigeo = $v;
-			$this->modifiedColumns[] = FordefpryPeer::UBIGEO;
-		}
-
+    if ($this->ubigeo !== $v) {
+        $this->ubigeo = $v;
+        $this->modifiedColumns[] = FordefpryPeer::UBIGEO;
+      }
+  
 	} 
 	
 	public function setPlactg($v)
 	{
 
-		if ($this->plactg !== $v) {
-			$this->plactg = $v;
-			$this->modifiedColumns[] = FordefpryPeer::PLACTG;
-		}
-
+    if ($this->plactg !== $v) {
+        $this->plactg = $v;
+        $this->modifiedColumns[] = FordefpryPeer::PLACTG;
+      }
+  
 	} 
 	
 	public function setCoddir($v)
 	{
 
-		if ($this->coddir !== $v) {
-			$this->coddir = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODDIR;
-		}
-
+    if ($this->coddir !== $v) {
+        $this->coddir = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODDIR;
+      }
+  
 	} 
 	
 	public function setFacrzg($v)
 	{
 
-		if ($this->facrzg !== $v) {
-			$this->facrzg = $v;
-			$this->modifiedColumns[] = FordefpryPeer::FACRZG;
-		}
-
+    if ($this->facrzg !== $v) {
+        $this->facrzg = $v;
+        $this->modifiedColumns[] = FordefpryPeer::FACRZG;
+      }
+  
 	} 
 	
 	public function setObjpndes($v)
 	{
 
-		if ($this->objpndes !== $v) {
-			$this->objpndes = $v;
-			$this->modifiedColumns[] = FordefpryPeer::OBJPNDES;
-		}
-
+    if ($this->objpndes !== $v) {
+        $this->objpndes = $v;
+        $this->modifiedColumns[] = FordefpryPeer::OBJPNDES;
+      }
+  
 	} 
 	
 	public function setUnimedres($v)
 	{
 
-		if ($this->unimedres !== $v) {
-			$this->unimedres = $v;
-			$this->modifiedColumns[] = FordefpryPeer::UNIMEDRES;
-		}
-
+    if ($this->unimedres !== $v) {
+        $this->unimedres = $v;
+        $this->modifiedColumns[] = FordefpryPeer::UNIMEDRES;
+      }
+  
 	} 
 	
 	public function setCodprg($v)
 	{
 
-		if ($this->codprg !== $v) {
-			$this->codprg = $v;
-			$this->modifiedColumns[] = FordefpryPeer::CODPRG;
-		}
+    if ($this->codprg !== $v) {
+        $this->codprg = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODPRG;
+      }
+  
+	} 
+	
+	public function setCodpryonapre($v)
+	{
 
+    if ($this->codpryonapre !== $v) {
+        $this->codpryonapre = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODPRYONAPRE;
+      }
+  
+	} 
+	
+	public function setTieejeanopry($v)
+	{
+
+    if ($this->tieejeanopry !== $v) {
+        $this->tieejeanopry = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::TIEEJEANOPRY;
+      }
+  
+	} 
+	
+	public function setTieejemespry($v)
+	{
+
+    if ($this->tieejemespry !== $v) {
+        $this->tieejemespry = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::TIEEJEMESPRY;
+      }
+  
+	} 
+	
+	public function setCodobjnvaeta($v)
+	{
+
+    if ($this->codobjnvaeta !== $v) {
+        $this->codobjnvaeta = $v;
+        $this->modifiedColumns[] = FordefpryPeer::CODOBJNVAETA;
+      }
+  
+	} 
+	
+	public function setSitobjdes($v)
+	{
+
+    if ($this->sitobjdes !== $v) {
+        $this->sitobjdes = $v;
+        $this->modifiedColumns[] = FordefpryPeer::SITOBJDES;
+      }
+  
+	} 
+	
+	public function setTieimpmes($v)
+	{
+
+    if ($this->tieimpmes !== $v) {
+        $this->tieimpmes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::TIEIMPMES;
+      }
+  
+	} 
+	
+	public function setTieimpano($v)
+	{
+
+    if ($this->tieimpano !== $v) {
+        $this->tieimpano = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = FordefpryPeer::TIEIMPANO;
+      }
+  
+	} 
+	
+	public function setNucdesend($v)
+	{
+
+    if ($this->nucdesend !== $v) {
+        $this->nucdesend = $v;
+        $this->modifiedColumns[] = FordefpryPeer::NUCDESEND;
+      }
+  
+	} 
+	
+	public function setZonecodes($v)
+	{
+
+    if ($this->zonecodes !== $v) {
+        $this->zonecodes = $v;
+        $this->modifiedColumns[] = FordefpryPeer::ZONECODES;
+      }
+  
+	} 
+	
+	public function setAccinm($v)
+	{
+
+    if ($this->accinm !== $v) {
+        $this->accinm = $v;
+        $this->modifiedColumns[] = FordefpryPeer::ACCINM;
+      }
+  
+	} 
+	
+	public function setAccdif($v)
+	{
+
+    if ($this->accdif !== $v) {
+        $this->accdif = $v;
+        $this->modifiedColumns[] = FordefpryPeer::ACCDIF;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = FordefpryPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = FordefpryPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codpro = $rs->getString($startcol + 0);
+      $this->codpro = $rs->getString($startcol + 0);
 
-			$this->nompro = $rs->getString($startcol + 1);
+      $this->nompro = $rs->getString($startcol + 1);
 
-			$this->proacc = $rs->getString($startcol + 2);
+      $this->proacc = $rs->getString($startcol + 2);
 
-			$this->codsta = $rs->getString($startcol + 3);
+      $this->codsta = $rs->getString($startcol + 3);
 
-			$this->codsitpre = $rs->getString($startcol + 4);
+      $this->codsitpre = $rs->getString($startcol + 4);
 
-			$this->conpoa = $rs->getString($startcol + 5);
+      $this->conpoa = $rs->getString($startcol + 5);
 
-			$this->fecini = $rs->getDate($startcol + 6, null);
+      $this->fecini = $rs->getDate($startcol + 6, null);
 
-			$this->feccul = $rs->getDate($startcol + 7, null);
+      $this->feccul = $rs->getDate($startcol + 7, null);
 
-			$this->ubinac = $rs->getString($startcol + 8);
+      $this->ubinac = $rs->getString($startcol + 8);
 
-			$this->codequ = $rs->getString($startcol + 9);
+      $this->codequ = $rs->getString($startcol + 9);
 
-			$this->codsubobj = $rs->getString($startcol + 10);
+      $this->codsubobj = $rs->getString($startcol + 10);
 
-			$this->codsubsubobj = $rs->getString($startcol + 11);
+      $this->codsubsubobj = $rs->getString($startcol + 11);
 
-			$this->objestnueeta = $rs->getString($startcol + 12);
+      $this->objestnueeta = $rs->getString($startcol + 12);
 
-			$this->objestins = $rs->getString($startcol + 13);
+      $this->objestins = $rs->getString($startcol + 13);
 
-			$this->objeesppro = $rs->getString($startcol + 14);
+      $this->objeesppro = $rs->getString($startcol + 14);
 
-			$this->indpro = $rs->getString($startcol + 15);
+      $this->indpro = $rs->getString($startcol + 15);
 
-			$this->enupro = $rs->getString($startcol + 16);
+      $this->enupro = $rs->getString($startcol + 16);
 
-			$this->indsitact = $rs->getString($startcol + 17);
+      $this->indsitact = $rs->getString($startcol + 17);
 
-			$this->fecultdat = $rs->getDate($startcol + 18, null);
+      $this->fecultdat = $rs->getDate($startcol + 18, null);
 
-			$this->forind = $rs->getString($startcol + 19);
+      $this->forind = $rs->getString($startcol + 19);
 
-			$this->fueind = $rs->getString($startcol + 20);
+      $this->fueind = $rs->getString($startcol + 20);
 
-			$this->indsitobj = $rs->getString($startcol + 21);
+      $this->indsitobj = $rs->getString($startcol + 21);
 
-			$this->tieimp = $rs->getString($startcol + 22);
+      $this->tieimp = $rs->getString($startcol + 22);
 
-			$this->respro = $rs->getString($startcol + 23);
+      $this->respro = $rs->getString($startcol + 23);
 
-			$this->desmet = $rs->getString($startcol + 24);
+      $this->desmet = $rs->getString($startcol + 24);
 
-			$this->codunimedmet = $rs->getString($startcol + 25);
+      $this->codunimedmet = $rs->getString($startcol + 25);
 
-			$this->cantmet = $rs->getFloat($startcol + 26);
+      $this->cantmet = $rs->getFloat($startcol + 26);
 
-			$this->benpro = $rs->getString($startcol + 27);
+      $this->benpro = $rs->getString($startcol + 27);
 
-			$this->codejedes = $rs->getString($startcol + 28);
+      $this->codejedes = $rs->getString($startcol + 28);
 
-			$this->codnucdes = $rs->getString($startcol + 29);
+      $this->codnucdes = $rs->getString($startcol + 29);
 
-			$this->codzoneco = $rs->getString($startcol + 30);
+      $this->codzoneco = $rs->getString($startcol + 30);
 
-			$this->comindust = $rs->getString($startcol + 31);
+      $this->comindust = $rs->getString($startcol + 31);
 
-			$this->codsec = $rs->getString($startcol + 32);
+      $this->codsec = $rs->getString($startcol + 32);
 
-			$this->codsubsec = $rs->getString($startcol + 33);
+      $this->codsubsec = $rs->getString($startcol + 33);
 
-			$this->montotpry = $rs->getFloat($startcol + 34);
+      $this->montotpry = $rs->getFloat($startcol + 34);
 
-			$this->codemp = $rs->getString($startcol + 35);
+      $this->codemp = $rs->getString($startcol + 35);
 
-			$this->nomemp = $rs->getString($startcol + 36);
+      $this->nomemp = $rs->getString($startcol + 36);
 
-			$this->caremp = $rs->getString($startcol + 37);
+      $this->caremp = $rs->getString($startcol + 37);
 
-			$this->uniadsemp = $rs->getString($startcol + 38);
+      $this->uniadsemp = $rs->getString($startcol + 38);
 
-			$this->telemp = $rs->getString($startcol + 39);
+      $this->telemp = $rs->getString($startcol + 39);
 
-			$this->faxemp = $rs->getString($startcol + 40);
+      $this->faxemp = $rs->getString($startcol + 40);
 
-			$this->emaemp = $rs->getString($startcol + 41);
+      $this->emaemp = $rs->getString($startcol + 41);
 
-			$this->accotrins = $rs->getString($startcol + 42);
+      $this->accotrins = $rs->getString($startcol + 42);
 
-			$this->obsaccotrins = $rs->getString($startcol + 43);
+      $this->obsaccotrins = $rs->getString($startcol + 43);
 
-			$this->conpryotr = $rs->getString($startcol + 44);
+      $this->conpryotr = $rs->getString($startcol + 44);
 
-			$this->obsconpryotr = $rs->getString($startcol + 45);
+      $this->obsconpryotr = $rs->getString($startcol + 45);
 
-			$this->conotrpry = $rs->getString($startcol + 46);
+      $this->conotrpry = $rs->getString($startcol + 46);
 
-			$this->obsconotrpry = $rs->getString($startcol + 47);
+      $this->obsconotrpry = $rs->getString($startcol + 47);
 
-			$this->tipaccage = $rs->getString($startcol + 48);
+      $this->tipaccage = $rs->getString($startcol + 48);
 
-			$this->placontin = $rs->getString($startcol + 49);
+      $this->placontin = $rs->getString($startcol + 49);
 
-			$this->obsplacontin = $rs->getString($startcol + 50);
+      $this->obsplacontin = $rs->getString($startcol + 50);
 
-			$this->nroempdir = $rs->getFloat($startcol + 51);
+      $this->nroempdir = $rs->getFloat($startcol + 51);
 
-			$this->nroempind = $rs->getFloat($startcol + 52);
+      $this->nroempind = $rs->getFloat($startcol + 52);
 
-			$this->desbrepry = $rs->getString($startcol + 53);
+      $this->desbrepry = $rs->getString($startcol + 53);
 
-			$this->poravafis = $rs->getFloat($startcol + 54);
+      $this->poravafis = $rs->getFloat($startcol + 54);
 
-			$this->poravafin = $rs->getFloat($startcol + 55);
+      $this->poravafin = $rs->getFloat($startcol + 55);
 
-			$this->uniejepri = $rs->getString($startcol + 56);
+      $this->uniejepri = $rs->getString($startcol + 56);
 
-			$this->ubigeo = $rs->getString($startcol + 57);
+      $this->ubigeo = $rs->getString($startcol + 57);
 
-			$this->plactg = $rs->getString($startcol + 58);
+      $this->plactg = $rs->getString($startcol + 58);
 
-			$this->coddir = $rs->getString($startcol + 59);
+      $this->coddir = $rs->getString($startcol + 59);
 
-			$this->facrzg = $rs->getString($startcol + 60);
+      $this->facrzg = $rs->getString($startcol + 60);
 
-			$this->objpndes = $rs->getString($startcol + 61);
+      $this->objpndes = $rs->getString($startcol + 61);
 
-			$this->unimedres = $rs->getString($startcol + 62);
+      $this->unimedres = $rs->getString($startcol + 62);
 
-			$this->codprg = $rs->getString($startcol + 63);
+      $this->codprg = $rs->getString($startcol + 63);
 
-			$this->id = $rs->getInt($startcol + 64);
+      $this->codpryonapre = $rs->getString($startcol + 64);
 
-			$this->resetModified();
+      $this->tieejeanopry = $rs->getFloat($startcol + 65);
 
-			$this->setNew(false);
+      $this->tieejemespry = $rs->getFloat($startcol + 66);
 
-						return $startcol + 65; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Fordefpry object", $e);
-		}
-	}
+      $this->codobjnvaeta = $rs->getString($startcol + 67);
+
+      $this->sitobjdes = $rs->getString($startcol + 68);
+
+      $this->tieimpmes = $rs->getFloat($startcol + 69);
+
+      $this->tieimpano = $rs->getFloat($startcol + 70);
+
+      $this->nucdesend = $rs->getString($startcol + 71);
+
+      $this->zonecodes = $rs->getString($startcol + 72);
+
+      $this->accinm = $rs->getString($startcol + 73);
+
+      $this->accdif = $rs->getString($startcol + 74);
+
+      $this->id = $rs->getInt($startcol + 75);
+
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 76; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Fordefpry object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -1588,6 +1929,7 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = FordefpryPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += FordefpryPeer::doUpdate($this, $con);
@@ -1846,6 +2188,39 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 				return $this->getCodprg();
 				break;
 			case 64:
+				return $this->getCodpryonapre();
+				break;
+			case 65:
+				return $this->getTieejeanopry();
+				break;
+			case 66:
+				return $this->getTieejemespry();
+				break;
+			case 67:
+				return $this->getCodobjnvaeta();
+				break;
+			case 68:
+				return $this->getSitobjdes();
+				break;
+			case 69:
+				return $this->getTieimpmes();
+				break;
+			case 70:
+				return $this->getTieimpano();
+				break;
+			case 71:
+				return $this->getNucdesend();
+				break;
+			case 72:
+				return $this->getZonecodes();
+				break;
+			case 73:
+				return $this->getAccinm();
+				break;
+			case 74:
+				return $this->getAccdif();
+				break;
+			case 75:
 				return $this->getId();
 				break;
 			default:
@@ -1922,7 +2297,18 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 			$keys[61] => $this->getObjpndes(),
 			$keys[62] => $this->getUnimedres(),
 			$keys[63] => $this->getCodprg(),
-			$keys[64] => $this->getId(),
+			$keys[64] => $this->getCodpryonapre(),
+			$keys[65] => $this->getTieejeanopry(),
+			$keys[66] => $this->getTieejemespry(),
+			$keys[67] => $this->getCodobjnvaeta(),
+			$keys[68] => $this->getSitobjdes(),
+			$keys[69] => $this->getTieimpmes(),
+			$keys[70] => $this->getTieimpano(),
+			$keys[71] => $this->getNucdesend(),
+			$keys[72] => $this->getZonecodes(),
+			$keys[73] => $this->getAccinm(),
+			$keys[74] => $this->getAccdif(),
+			$keys[75] => $this->getId(),
 		);
 		return $result;
 	}
@@ -2131,6 +2517,39 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 				$this->setCodprg($value);
 				break;
 			case 64:
+				$this->setCodpryonapre($value);
+				break;
+			case 65:
+				$this->setTieejeanopry($value);
+				break;
+			case 66:
+				$this->setTieejemespry($value);
+				break;
+			case 67:
+				$this->setCodobjnvaeta($value);
+				break;
+			case 68:
+				$this->setSitobjdes($value);
+				break;
+			case 69:
+				$this->setTieimpmes($value);
+				break;
+			case 70:
+				$this->setTieimpano($value);
+				break;
+			case 71:
+				$this->setNucdesend($value);
+				break;
+			case 72:
+				$this->setZonecodes($value);
+				break;
+			case 73:
+				$this->setAccinm($value);
+				break;
+			case 74:
+				$this->setAccdif($value);
+				break;
+			case 75:
 				$this->setId($value);
 				break;
 		} 	}
@@ -2204,7 +2623,18 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[61], $arr)) $this->setObjpndes($arr[$keys[61]]);
 		if (array_key_exists($keys[62], $arr)) $this->setUnimedres($arr[$keys[62]]);
 		if (array_key_exists($keys[63], $arr)) $this->setCodprg($arr[$keys[63]]);
-		if (array_key_exists($keys[64], $arr)) $this->setId($arr[$keys[64]]);
+		if (array_key_exists($keys[64], $arr)) $this->setCodpryonapre($arr[$keys[64]]);
+		if (array_key_exists($keys[65], $arr)) $this->setTieejeanopry($arr[$keys[65]]);
+		if (array_key_exists($keys[66], $arr)) $this->setTieejemespry($arr[$keys[66]]);
+		if (array_key_exists($keys[67], $arr)) $this->setCodobjnvaeta($arr[$keys[67]]);
+		if (array_key_exists($keys[68], $arr)) $this->setSitobjdes($arr[$keys[68]]);
+		if (array_key_exists($keys[69], $arr)) $this->setTieimpmes($arr[$keys[69]]);
+		if (array_key_exists($keys[70], $arr)) $this->setTieimpano($arr[$keys[70]]);
+		if (array_key_exists($keys[71], $arr)) $this->setNucdesend($arr[$keys[71]]);
+		if (array_key_exists($keys[72], $arr)) $this->setZonecodes($arr[$keys[72]]);
+		if (array_key_exists($keys[73], $arr)) $this->setAccinm($arr[$keys[73]]);
+		if (array_key_exists($keys[74], $arr)) $this->setAccdif($arr[$keys[74]]);
+		if (array_key_exists($keys[75], $arr)) $this->setId($arr[$keys[75]]);
 	}
 
 	
@@ -2276,6 +2706,17 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(FordefpryPeer::OBJPNDES)) $criteria->add(FordefpryPeer::OBJPNDES, $this->objpndes);
 		if ($this->isColumnModified(FordefpryPeer::UNIMEDRES)) $criteria->add(FordefpryPeer::UNIMEDRES, $this->unimedres);
 		if ($this->isColumnModified(FordefpryPeer::CODPRG)) $criteria->add(FordefpryPeer::CODPRG, $this->codprg);
+		if ($this->isColumnModified(FordefpryPeer::CODPRYONAPRE)) $criteria->add(FordefpryPeer::CODPRYONAPRE, $this->codpryonapre);
+		if ($this->isColumnModified(FordefpryPeer::TIEEJEANOPRY)) $criteria->add(FordefpryPeer::TIEEJEANOPRY, $this->tieejeanopry);
+		if ($this->isColumnModified(FordefpryPeer::TIEEJEMESPRY)) $criteria->add(FordefpryPeer::TIEEJEMESPRY, $this->tieejemespry);
+		if ($this->isColumnModified(FordefpryPeer::CODOBJNVAETA)) $criteria->add(FordefpryPeer::CODOBJNVAETA, $this->codobjnvaeta);
+		if ($this->isColumnModified(FordefpryPeer::SITOBJDES)) $criteria->add(FordefpryPeer::SITOBJDES, $this->sitobjdes);
+		if ($this->isColumnModified(FordefpryPeer::TIEIMPMES)) $criteria->add(FordefpryPeer::TIEIMPMES, $this->tieimpmes);
+		if ($this->isColumnModified(FordefpryPeer::TIEIMPANO)) $criteria->add(FordefpryPeer::TIEIMPANO, $this->tieimpano);
+		if ($this->isColumnModified(FordefpryPeer::NUCDESEND)) $criteria->add(FordefpryPeer::NUCDESEND, $this->nucdesend);
+		if ($this->isColumnModified(FordefpryPeer::ZONECODES)) $criteria->add(FordefpryPeer::ZONECODES, $this->zonecodes);
+		if ($this->isColumnModified(FordefpryPeer::ACCINM)) $criteria->add(FordefpryPeer::ACCINM, $this->accinm);
+		if ($this->isColumnModified(FordefpryPeer::ACCDIF)) $criteria->add(FordefpryPeer::ACCDIF, $this->accdif);
 		if ($this->isColumnModified(FordefpryPeer::ID)) $criteria->add(FordefpryPeer::ID, $this->id);
 
 		return $criteria;
@@ -2434,6 +2875,28 @@ abstract class BaseFordefpry extends BaseObject  implements Persistent {
 		$copyObj->setUnimedres($this->unimedres);
 
 		$copyObj->setCodprg($this->codprg);
+
+		$copyObj->setCodpryonapre($this->codpryonapre);
+
+		$copyObj->setTieejeanopry($this->tieejeanopry);
+
+		$copyObj->setTieejemespry($this->tieejemespry);
+
+		$copyObj->setCodobjnvaeta($this->codobjnvaeta);
+
+		$copyObj->setSitobjdes($this->sitobjdes);
+
+		$copyObj->setTieimpmes($this->tieimpmes);
+
+		$copyObj->setTieimpano($this->tieimpano);
+
+		$copyObj->setNucdesend($this->nucdesend);
+
+		$copyObj->setZonecodes($this->zonecodes);
+
+		$copyObj->setAccinm($this->accinm);
+
+		$copyObj->setAccdif($this->accdif);
 
 
 		$copyObj->setNew(true);

@@ -1,0 +1,42 @@
+methods:
+  post:
+   - "fordefunimed{codunimed}"
+   - "fordefunimed{desunimed}"
+   - "fordefunimed{nomabrunimed}"
+
+names:
+  fordefunimed{codunimed}:
+    required:  Yes
+    required_msg: El Código de la Unidad de Medida no puedo estar en Blanco.
+    validators: UniqueValidator
+
+  fordefunimed{desunimed}:
+    required:  No
+    validators: DescripcionValidator
+
+  fordefunimed{nomabrunimed}:
+    required:  No
+    validators: AbreviadoValidator
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Fordefunimed
+        column:   codunimed
+        unique_error:   El Código de la Unidad de Medida ya existe. Por Favor, Cambiélo por otro.
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La Descripción de la Unidad de medida no puede tener menos de 2 carácteres
+        max:       50
+        max_error: La Descripción de la Unidad de medida no puede tener más de 50 carácteres
+
+AbreviadoValidator:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: El Nombre Abreviado no puede tener menos de 2 carácteres
+        max:       10
+        max_error: El Nombre Abreviado no puede tener más de 10 carácteres

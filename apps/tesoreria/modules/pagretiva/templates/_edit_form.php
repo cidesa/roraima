@@ -9,57 +9,15 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($tsretiva, 'getId') ?>
-
+<?php echo javascript_include_tag('dFilter','ajax','tools','observe') ?>
 <fieldset id="sf_fieldset_none" class="">
-<legend>Datos de Retencion</legend>
 <div class="form-row">
-  <?php echo label_for('tsretiva[codret]', __($labels['tsretiva{codret}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('tsretiva{codret}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsretiva{codret}')): ?>
-    <?php echo form_error('tsretiva{codret}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
+<?php echo grid_tag($obj);?>
 
-  <?php $value = object_input_tag($tsretiva, 'getCodret', array (
-  'size' => 20,
-  'control_name' => 'tsretiva[codret]',
-)); echo $value ? $value : '&nbsp;' ?>
-<?php echo input_tag('tiporet',$tiporet,'size=50,disabled=true') ?>
-    </div>
+<?php echo input_hidden_tag('exisrecar', '') ?>
+<?php echo input_hidden_tag('exisret', '') ?>
+<?php echo input_hidden_tag('filas', $fila) ?>
 </div>
-</fieldset>
-
-<fieldset id="sf_fieldset_none" class="">
-<legend>Datos de Recargo</legend>
-<div class="form-row">
-  <?php echo label_for('tsretiva[codrec]', __($labels['tsretiva{codrec}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('tsretiva{codrec}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsretiva{codrec}')): ?>
-    <?php echo form_error('tsretiva{codrec}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsretiva, 'getCodrec', array (
-  'size' => 20,
-  'control_name' => 'tsretiva[codrec]',
-)); echo $value ? $value : '&nbsp;' ?>
-&nbsp;
- <?php echo input_tag('nomreca',$nomreca,'size=50,disabled=true') ?> 
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('tsretiva[codpar]', __($labels['tsretiva{codpar}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('tsretiva{codpar}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('tsretiva{codpar}')): ?>
-    <?php echo form_error('tsretiva{codpar}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($tsretiva, 'getCodpar', array (
-  'size' => 32,
-  'control_name' => 'tsretiva[codpar]',
-  )); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
 </fieldset>
 
 <?php include_partial('edit_actions', array('tsretiva' => $tsretiva)) ?>
@@ -67,7 +25,7 @@
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-left"><?php if ($tsretiva->getId()): ?>
+      <li class="float-rigth"><?php if ($tsretiva->getId()): ?>
 <?php echo button_to(__('delete'), 'pagretiva/delete?id='.$tsretiva->getId(), array (
   'post' => true,
   'confirm' => __('Are you sure?'),
@@ -75,3 +33,168 @@
 )) ?><?php endif; ?>
 </li>
   </ul>
+
+<script language="JavaScript" type="text/javascript">
+ function ajax2(e,id)
+ {
+   if ($(id).value!="")
+   {
+    valor=$(id).value;
+ 	valor=valor.pad(4,"0",0);
+ 	$(id).value=valor;
+   }
+
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=aux[1];
+    var col=parseInt(aux[2]);
+
+    var coldes=col+1;
+    var coltip=col+2;
+    var colpar=col+4;
+    var colmonto=col+3;
+    var descripcion=name+"_"+fil+"_"+coldes;
+    var tipo=name+"_"+fil+"_"+coltip;
+    var monto=name+"_"+fil+"_"+colmonto;
+    var partida=name+"_"+fil+"_"+colpar;
+    var cod=$(id).value;
+
+     if (e.keyCode==13 || e.keyCode==9)
+    {
+    if ($(id).value!='')
+    {
+    new Ajax.Request('/tesoreria_dev.php/pagretiva/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), validargrid(id)}, parameters:'ajax=2&cajtexmos='+descripcion+'&cajtexcom='+id+'&tipo='+tipo+'&monto='+monto+'&partida='+partida+'&codigo='+cod})
+    }
+    }
+ }
+
+  function validargrid(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var coldes=col+1;
+   var colpart=col+4;
+   var descripcion=name+"_"+fila+"_"+coldes;
+   var partida=name+"_"+fila+"_"+colpart;
+
+  if ($('exisrecar').value=='N' && $(id).value!="")
+  {
+   alert('El Recargo no Existe');
+  	$(id).value="";
+	$(descripcion).value="";
+	$(partida).value="";
+
+  }
+  else
+  {
+  	if (retencion_repetido(id))
+   {
+	alert('El Recargo ya esta asociado a esa Retención');
+	$(id).value="";
+	$(descripcion).value="";
+	$(partida).value="";
+   }
+  }
+
+ }
+  function totalregistros(letra,posicion,filas)
+  {
+    var fil=0;
+    var total=0;
+    while (fil<filas)
+    {
+      var chk=letra+"_"+fil+"_"+posicion;
+      if ($(chk).value!="")
+      { total=total + 1; }
+     fil++;
+    }
+    return total;
+  }
+
+
+  function retencion_repetido(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var colret=col-2;
+   var ret=name+"_"+fila+"_"+colret;
+   var retencion_recargo=$(ret).value+$(id).value;
+
+   var retencionrepetido=false;
+   var fil=parseInt($('filas').value);
+   var cal=fil+10;
+   var am=totalregistros('ax',1,cal);
+
+   var i=0;
+   while (i<(am))
+   {
+    var retencion="ax"+"_"+i+"_1"
+    var recargo="ax"+"_"+i+"_3";
+
+    var retencion_recargo2=$(retencion).value+$(recargo).value;
+
+    if (i!=fila)
+    {
+      if (retencion_recargo==retencion_recargo2)
+      {
+        retencionrepetido=true;
+        break;
+      }
+    }
+   i++;
+   }
+   return retencionrepetido;
+ }
+
+
+ function ajax(e,id)
+ {
+   if ($(id).value!="")
+   {
+    valor=$(id).value;
+ 	valor=valor.pad(3,"0",0);
+ 	$(id).value=valor;
+   }
+
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=aux[1];
+    var col=parseInt(aux[2]);
+
+    var coldes=col+1;
+    var descripcion=name+"_"+fil+"_"+coldes;
+    var cod=$(id).value;
+
+     if (e.keyCode==13 || e.keyCode==9)
+    {
+     if ($(id).value!='')
+    {
+     new Ajax.Request('/tesoreria_dev.php/pagretiva/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json), validar(id);}, parameters:'ajax=1&cajtexmos='+descripcion+'&cajtexcom='+id+'&codigo='+cod})
+    }
+    }
+ }
+
+ function validar(id)
+ {
+   var aux = id.split("_");
+    var name=aux[0];
+    var fil=parseInt(aux[1]);
+    var col=parseInt(aux[2]);
+
+    var coldes=col+1;
+    var descripcion=name+"_"+fil+"_"+coldes;
+
+ 	if ($('exisret').value=='N')
+ 	{
+ 		alert('La Retención no Existe');
+ 		$(id).value="";
+ 		$(descripcion).value="";
+ 	}
+ }
+</script>

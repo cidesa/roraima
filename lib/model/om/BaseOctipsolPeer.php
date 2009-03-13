@@ -220,6 +220,7 @@ abstract class BaseOctipsolPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(OctipsolPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

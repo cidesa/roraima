@@ -65,6 +65,14 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 
 
 	
+	protected $codalm;
+
+
+	
+	protected $codubi;
+
+
+	
 	protected $id;
 
 	
@@ -73,320 +81,394 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRcpart()
-	{
+  
+  public function getRcpart()
+  {
 
-		return $this->rcpart; 		
-	}
-	
-	public function getCodart()
-	{
+    return trim($this->rcpart);
 
-		return $this->codart; 		
-	}
-	
-	public function getOrdcom()
-	{
+  }
+  
+  public function getCodart()
+  {
 
-		return $this->ordcom; 		
-	}
-	
-	public function getCodcat()
-	{
+    return trim($this->codart);
 
-		return $this->codcat; 		
-	}
-	
-	public function getCanrec()
-	{
+  }
+  
+  public function getOrdcom()
+  {
 
-		return number_format($this->canrec,2,',','.');
-		
-	}
-	
-	public function getCandev()
-	{
+    return trim($this->ordcom);
 
-		return number_format($this->candev,2,',','.');
-		
-	}
-	
-	public function getCantot()
-	{
+  }
+  
+  public function getCodcat()
+  {
 
-		return number_format($this->cantot,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    return trim($this->codcat);
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getMonrgo()
-	{
+  }
+  
+  public function getCanrec($val=false)
+  {
 
-		return number_format($this->monrgo,2,',','.');
-		
-	}
-	
-	public function getMondes()
-	{
+    if($val) return number_format($this->canrec,2,',','.');
+    else return $this->canrec;
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getCanasilot()
-	{
+  }
+  
+  public function getCandev($val=false)
+  {
 
-		return number_format($this->canasilot,2,',','.');
-		
-	}
-	
-	public function getCodfal()
-	{
+    if($val) return number_format($this->candev,2,',','.');
+    else return $this->candev;
 
-		return $this->codfal; 		
-	}
-	
-	public function getFecest($format = 'Y-m-d')
-	{
+  }
+  
+  public function getCantot($val=false)
+  {
 
-		if ($this->fecest === null || $this->fecest === '') {
-			return null;
-		} elseif (!is_int($this->fecest)) {
-						$ts = strtotime($this->fecest);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecest] as date/time value: " . var_export($this->fecest, true));
-			}
-		} else {
-			$ts = $this->fecest;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->cantot,2,',','.');
+    else return $this->cantot;
 
-	
-	public function getSerial()
-	{
+  }
+  
+  public function getMontot($val=false)
+  {
 
-		return $this->serial; 		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getMonrgo($val=false)
+  {
+
+    if($val) return number_format($this->monrgo,2,',','.');
+    else return $this->monrgo;
+
+  }
+  
+  public function getMondes($val=false)
+  {
+
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
+
+  }
+  
+  public function getCanasilot($val=false)
+  {
+
+    if($val) return number_format($this->canasilot,2,',','.');
+    else return $this->canasilot;
+
+  }
+  
+  public function getCodfal()
+  {
+
+    return trim($this->codfal);
+
+  }
+  
+  public function getFecest($format = 'Y-m-d')
+  {
+
+    if ($this->fecest === null || $this->fecest === '') {
+      return null;
+    } elseif (!is_int($this->fecest)) {
+            $ts = adodb_strtotime($this->fecest);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecest] as date/time value: " . var_export($this->fecest, true));
+      }
+    } else {
+      $ts = $this->fecest;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getSerial()
+  {
+
+    return trim($this->serial);
+
+  }
+  
+  public function getCodalm()
+  {
+
+    return trim($this->codalm);
+
+  }
+  
+  public function getCodubi()
+  {
+
+    return trim($this->codubi);
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRcpart($v)
 	{
 
-		if ($this->rcpart !== $v) {
-			$this->rcpart = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::RCPART;
-		}
-
+    if ($this->rcpart !== $v) {
+        $this->rcpart = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::RCPART;
+      }
+  
 	} 
 	
 	public function setCodart($v)
 	{
 
-		if ($this->codart !== $v) {
-			$this->codart = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::CODART;
-		}
-
+    if ($this->codart !== $v) {
+        $this->codart = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::CODART;
+      }
+  
 	} 
 	
 	public function setOrdcom($v)
 	{
 
-		if ($this->ordcom !== $v) {
-			$this->ordcom = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::ORDCOM;
-		}
-
+    if ($this->ordcom !== $v) {
+        $this->ordcom = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::ORDCOM;
+      }
+  
 	} 
 	
 	public function setCodcat($v)
 	{
 
-		if ($this->codcat !== $v) {
-			$this->codcat = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::CODCAT;
-		}
-
+    if ($this->codcat !== $v) {
+        $this->codcat = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::CODCAT;
+      }
+  
 	} 
 	
 	public function setCanrec($v)
 	{
 
-		if ($this->canrec !== $v) {
-			$this->canrec = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::CANREC;
-		}
-
+    if ($this->canrec !== $v) {
+        $this->canrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartrcpPeer::CANREC;
+      }
+  
 	} 
 	
 	public function setCandev($v)
 	{
 
-		if ($this->candev !== $v) {
-			$this->candev = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::CANDEV;
-		}
-
+    if ($this->candev !== $v) {
+        $this->candev = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartrcpPeer::CANDEV;
+      }
+  
 	} 
 	
 	public function setCantot($v)
 	{
 
-		if ($this->cantot !== $v) {
-			$this->cantot = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::CANTOT;
-		}
-
+    if ($this->cantot !== $v) {
+        $this->cantot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartrcpPeer::CANTOT;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartrcpPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setMonrgo($v)
 	{
 
-		if ($this->monrgo !== $v) {
-			$this->monrgo = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::MONRGO;
-		}
-
+    if ($this->monrgo !== $v) {
+        $this->monrgo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartrcpPeer::MONRGO;
+      }
+  
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartrcpPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setCanasilot($v)
 	{
 
-		if ($this->canasilot !== $v) {
-			$this->canasilot = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::CANASILOT;
-		}
-
+    if ($this->canasilot !== $v) {
+        $this->canasilot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CaartrcpPeer::CANASILOT;
+      }
+  
 	} 
 	
 	public function setCodfal($v)
 	{
 
-		if ($this->codfal !== $v) {
-			$this->codfal = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::CODFAL;
-		}
-
+    if ($this->codfal !== $v) {
+        $this->codfal = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::CODFAL;
+      }
+  
 	} 
 	
 	public function setFecest($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecest] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecest !== $ts) {
-			$this->fecest = $ts;
-			$this->modifiedColumns[] = CaartrcpPeer::FECEST;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecest] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecest !== $ts) {
+      $this->fecest = $ts;
+      $this->modifiedColumns[] = CaartrcpPeer::FECEST;
+    }
 
 	} 
 	
 	public function setSerial($v)
 	{
 
-		if ($this->serial !== $v) {
-			$this->serial = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::SERIAL;
-		}
+    if ($this->serial !== $v) {
+        $this->serial = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::SERIAL;
+      }
+  
+	} 
+	
+	public function setCodalm($v)
+	{
 
+    if ($this->codalm !== $v) {
+        $this->codalm = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::CODALM;
+      }
+  
+	} 
+	
+	public function setCodubi($v)
+	{
+
+    if ($this->codubi !== $v) {
+        $this->codubi = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::CODUBI;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CaartrcpPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CaartrcpPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->rcpart = $rs->getString($startcol + 0);
+      $this->rcpart = $rs->getString($startcol + 0);
 
-			$this->codart = $rs->getString($startcol + 1);
+      $this->codart = $rs->getString($startcol + 1);
 
-			$this->ordcom = $rs->getString($startcol + 2);
+      $this->ordcom = $rs->getString($startcol + 2);
 
-			$this->codcat = $rs->getString($startcol + 3);
+      $this->codcat = $rs->getString($startcol + 3);
 
-			$this->canrec = $rs->getFloat($startcol + 4);
+      $this->canrec = $rs->getFloat($startcol + 4);
 
-			$this->candev = $rs->getFloat($startcol + 5);
+      $this->candev = $rs->getFloat($startcol + 5);
 
-			$this->cantot = $rs->getFloat($startcol + 6);
+      $this->cantot = $rs->getFloat($startcol + 6);
 
-			$this->montot = $rs->getFloat($startcol + 7);
+      $this->montot = $rs->getFloat($startcol + 7);
 
-			$this->monrgo = $rs->getFloat($startcol + 8);
+      $this->monrgo = $rs->getFloat($startcol + 8);
 
-			$this->mondes = $rs->getFloat($startcol + 9);
+      $this->mondes = $rs->getFloat($startcol + 9);
 
-			$this->canasilot = $rs->getFloat($startcol + 10);
+      $this->canasilot = $rs->getFloat($startcol + 10);
 
-			$this->codfal = $rs->getString($startcol + 11);
+      $this->codfal = $rs->getString($startcol + 11);
 
-			$this->fecest = $rs->getDate($startcol + 12, null);
+      $this->fecest = $rs->getDate($startcol + 12, null);
 
-			$this->serial = $rs->getString($startcol + 13);
+      $this->serial = $rs->getString($startcol + 13);
 
-			$this->id = $rs->getInt($startcol + 14);
+      $this->codalm = $rs->getString($startcol + 14);
 
-			$this->resetModified();
+      $this->codubi = $rs->getString($startcol + 15);
 
-			$this->setNew(false);
+      $this->id = $rs->getInt($startcol + 16);
 
-						return $startcol + 15; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Caartrcp object", $e);
-		}
-	}
+      $this->resetModified();
+
+      $this->setNew(false);
+
+      $this->afterHydrate();
+
+            return $startcol + 17; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Caartrcp object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -443,6 +525,7 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CaartrcpPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CaartrcpPeer::doUpdate($this, $con);
@@ -551,6 +634,12 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 				return $this->getSerial();
 				break;
 			case 14:
+				return $this->getCodalm();
+				break;
+			case 15:
+				return $this->getCodubi();
+				break;
+			case 16:
 				return $this->getId();
 				break;
 			default:
@@ -577,7 +666,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 			$keys[11] => $this->getCodfal(),
 			$keys[12] => $this->getFecest(),
 			$keys[13] => $this->getSerial(),
-			$keys[14] => $this->getId(),
+			$keys[14] => $this->getCodalm(),
+			$keys[15] => $this->getCodubi(),
+			$keys[16] => $this->getId(),
 		);
 		return $result;
 	}
@@ -636,6 +727,12 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 				$this->setSerial($value);
 				break;
 			case 14:
+				$this->setCodalm($value);
+				break;
+			case 15:
+				$this->setCodubi($value);
+				break;
+			case 16:
 				$this->setId($value);
 				break;
 		} 	}
@@ -659,7 +756,9 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[11], $arr)) $this->setCodfal($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setFecest($arr[$keys[12]]);
 		if (array_key_exists($keys[13], $arr)) $this->setSerial($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setId($arr[$keys[14]]);
+		if (array_key_exists($keys[14], $arr)) $this->setCodalm($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setCodubi($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setId($arr[$keys[16]]);
 	}
 
 	
@@ -681,6 +780,8 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CaartrcpPeer::CODFAL)) $criteria->add(CaartrcpPeer::CODFAL, $this->codfal);
 		if ($this->isColumnModified(CaartrcpPeer::FECEST)) $criteria->add(CaartrcpPeer::FECEST, $this->fecest);
 		if ($this->isColumnModified(CaartrcpPeer::SERIAL)) $criteria->add(CaartrcpPeer::SERIAL, $this->serial);
+		if ($this->isColumnModified(CaartrcpPeer::CODALM)) $criteria->add(CaartrcpPeer::CODALM, $this->codalm);
+		if ($this->isColumnModified(CaartrcpPeer::CODUBI)) $criteria->add(CaartrcpPeer::CODUBI, $this->codubi);
 		if ($this->isColumnModified(CaartrcpPeer::ID)) $criteria->add(CaartrcpPeer::ID, $this->id);
 
 		return $criteria;
@@ -739,6 +840,10 @@ abstract class BaseCaartrcp extends BaseObject  implements Persistent {
 		$copyObj->setFecest($this->fecest);
 
 		$copyObj->setSerial($this->serial);
+
+		$copyObj->setCodalm($this->codalm);
+
+		$copyObj->setCodubi($this->codubi);
 
 
 		$copyObj->setNew(true);

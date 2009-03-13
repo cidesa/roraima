@@ -45,213 +45,241 @@ abstract class BaseHisconb1 extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodcta()
-	{
+  
+  public function getCodcta()
+  {
 
-		return $this->codcta; 		
-	}
-	
-	public function getFecini($format = 'Y-m-d')
-	{
+    return trim($this->codcta);
 
-		if ($this->fecini === null || $this->fecini === '') {
-			return null;
-		} elseif (!is_int($this->fecini)) {
-						$ts = strtotime($this->fecini);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
-			}
-		} else {
-			$ts = $this->fecini;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  }
+  
+  public function getFecini($format = 'Y-m-d')
+  {
 
-	
-	public function getFeccie($format = 'Y-m-d')
-	{
+    if ($this->fecini === null || $this->fecini === '') {
+      return null;
+    } elseif (!is_int($this->fecini)) {
+            $ts = adodb_strtotime($this->fecini);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecini] as date/time value: " . var_export($this->fecini, true));
+      }
+    } else {
+      $ts = $this->fecini;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		if ($this->feccie === null || $this->feccie === '') {
-			return null;
-		} elseif (!is_int($this->feccie)) {
-						$ts = strtotime($this->feccie);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
-			}
-		} else {
-			$ts = $this->feccie;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+  
+  public function getFeccie($format = 'Y-m-d')
+  {
 
-	
-	public function getPereje()
-	{
+    if ($this->feccie === null || $this->feccie === '') {
+      return null;
+    } elseif (!is_int($this->feccie)) {
+            $ts = adodb_strtotime($this->feccie);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [feccie] as date/time value: " . var_export($this->feccie, true));
+      }
+    } else {
+      $ts = $this->feccie;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
 
-		return $this->pereje; 		
-	}
-	
-	public function getTotdeb()
-	{
+  
+  public function getPereje()
+  {
 
-		return number_format($this->totdeb,2,',','.');
-		
-	}
-	
-	public function getTotcre()
-	{
+    return trim($this->pereje);
 
-		return number_format($this->totcre,2,',','.');
-		
-	}
-	
-	public function getSalact()
-	{
+  }
+  
+  public function getTotdeb($val=false)
+  {
 
-		return number_format($this->salact,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->totdeb,2,',','.');
+    else return $this->totdeb;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getTotcre($val=false)
+  {
+
+    if($val) return number_format($this->totcre,2,',','.');
+    else return $this->totcre;
+
+  }
+  
+  public function getSalact($val=false)
+  {
+
+    if($val) return number_format($this->salact,2,',','.');
+    else return $this->salact;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodcta($v)
 	{
 
-		if ($this->codcta !== $v) {
-			$this->codcta = $v;
-			$this->modifiedColumns[] = Hisconb1Peer::CODCTA;
-		}
-
+    if ($this->codcta !== $v) {
+        $this->codcta = $v;
+        $this->modifiedColumns[] = Hisconb1Peer::CODCTA;
+      }
+  
 	} 
 	
 	public function setFecini($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecini !== $ts) {
-			$this->fecini = $ts;
-			$this->modifiedColumns[] = Hisconb1Peer::FECINI;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecini] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecini !== $ts) {
+      $this->fecini = $ts;
+      $this->modifiedColumns[] = Hisconb1Peer::FECINI;
+    }
 
 	} 
 	
 	public function setFeccie($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->feccie !== $ts) {
-			$this->feccie = $ts;
-			$this->modifiedColumns[] = Hisconb1Peer::FECCIE;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [feccie] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->feccie !== $ts) {
+      $this->feccie = $ts;
+      $this->modifiedColumns[] = Hisconb1Peer::FECCIE;
+    }
 
 	} 
 	
 	public function setPereje($v)
 	{
 
-		if ($this->pereje !== $v) {
-			$this->pereje = $v;
-			$this->modifiedColumns[] = Hisconb1Peer::PEREJE;
-		}
-
+    if ($this->pereje !== $v) {
+        $this->pereje = $v;
+        $this->modifiedColumns[] = Hisconb1Peer::PEREJE;
+      }
+  
 	} 
 	
 	public function setTotdeb($v)
 	{
 
-		if ($this->totdeb !== $v) {
-			$this->totdeb = $v;
-			$this->modifiedColumns[] = Hisconb1Peer::TOTDEB;
-		}
-
+    if ($this->totdeb !== $v) {
+        $this->totdeb = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Hisconb1Peer::TOTDEB;
+      }
+  
 	} 
 	
 	public function setTotcre($v)
 	{
 
-		if ($this->totcre !== $v) {
-			$this->totcre = $v;
-			$this->modifiedColumns[] = Hisconb1Peer::TOTCRE;
-		}
-
+    if ($this->totcre !== $v) {
+        $this->totcre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Hisconb1Peer::TOTCRE;
+      }
+  
 	} 
 	
 	public function setSalact($v)
 	{
 
-		if ($this->salact !== $v) {
-			$this->salact = $v;
-			$this->modifiedColumns[] = Hisconb1Peer::SALACT;
-		}
-
+    if ($this->salact !== $v) {
+        $this->salact = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = Hisconb1Peer::SALACT;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = Hisconb1Peer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = Hisconb1Peer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codcta = $rs->getString($startcol + 0);
+      $this->codcta = $rs->getString($startcol + 0);
 
-			$this->fecini = $rs->getDate($startcol + 1, null);
+      $this->fecini = $rs->getDate($startcol + 1, null);
 
-			$this->feccie = $rs->getDate($startcol + 2, null);
+      $this->feccie = $rs->getDate($startcol + 2, null);
 
-			$this->pereje = $rs->getString($startcol + 3);
+      $this->pereje = $rs->getString($startcol + 3);
 
-			$this->totdeb = $rs->getFloat($startcol + 4);
+      $this->totdeb = $rs->getFloat($startcol + 4);
 
-			$this->totcre = $rs->getFloat($startcol + 5);
+      $this->totcre = $rs->getFloat($startcol + 5);
 
-			$this->salact = $rs->getFloat($startcol + 6);
+      $this->salact = $rs->getFloat($startcol + 6);
 
-			$this->id = $rs->getInt($startcol + 7);
+      $this->id = $rs->getInt($startcol + 7);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 8; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Hisconb1 object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 8; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Hisconb1 object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -308,6 +336,7 @@ abstract class BaseHisconb1 extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = Hisconb1Peer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += Hisconb1Peer::doUpdate($this, $con);

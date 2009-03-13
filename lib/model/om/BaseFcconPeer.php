@@ -285,6 +285,7 @@ abstract class BaseFcconPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(FcconPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

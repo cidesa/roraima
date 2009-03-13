@@ -205,6 +205,7 @@ abstract class BaseNptipgasPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(NptipgasPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

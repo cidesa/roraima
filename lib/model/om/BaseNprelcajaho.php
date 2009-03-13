@@ -37,132 +37,160 @@ abstract class BaseNprelcajaho extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getCodemp()
-	{
+  
+  public function getCodemp()
+  {
 
-		return $this->codemp; 		
-	}
-	
-	public function getConret()
-	{
+    return trim($this->codemp);
 
-		return number_format($this->conret,2,',','.');
-		
-	}
-	
-	public function getConapo()
-	{
+  }
+  
+  public function getConret($val=false)
+  {
 
-		return number_format($this->conapo,2,',','.');
-		
-	}
-	
-	public function getConpre()
-	{
+    if($val) return number_format($this->conret,2,',','.');
+    else return $this->conret;
 
-		return number_format($this->conpre,2,',','.');
-		
-	}
-	
-	public function getConseg()
-	{
+  }
+  
+  public function getConapo($val=false)
+  {
 
-		return number_format($this->conseg,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+    if($val) return number_format($this->conapo,2,',','.');
+    else return $this->conapo;
 
-		return $this->id; 		
-	}
+  }
+  
+  public function getConpre($val=false)
+  {
+
+    if($val) return number_format($this->conpre,2,',','.');
+    else return $this->conpre;
+
+  }
+  
+  public function getConseg($val=false)
+  {
+
+    if($val) return number_format($this->conseg,2,',','.');
+    else return $this->conseg;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setCodemp($v)
 	{
 
-		if ($this->codemp !== $v) {
-			$this->codemp = $v;
-			$this->modifiedColumns[] = NprelcajahoPeer::CODEMP;
-		}
-
+    if ($this->codemp !== $v) {
+        $this->codemp = $v;
+        $this->modifiedColumns[] = NprelcajahoPeer::CODEMP;
+      }
+  
 	} 
 	
 	public function setConret($v)
 	{
 
-		if ($this->conret !== $v) {
-			$this->conret = $v;
-			$this->modifiedColumns[] = NprelcajahoPeer::CONRET;
-		}
-
+    if ($this->conret !== $v) {
+        $this->conret = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NprelcajahoPeer::CONRET;
+      }
+  
 	} 
 	
 	public function setConapo($v)
 	{
 
-		if ($this->conapo !== $v) {
-			$this->conapo = $v;
-			$this->modifiedColumns[] = NprelcajahoPeer::CONAPO;
-		}
-
+    if ($this->conapo !== $v) {
+        $this->conapo = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NprelcajahoPeer::CONAPO;
+      }
+  
 	} 
 	
 	public function setConpre($v)
 	{
 
-		if ($this->conpre !== $v) {
-			$this->conpre = $v;
-			$this->modifiedColumns[] = NprelcajahoPeer::CONPRE;
-		}
-
+    if ($this->conpre !== $v) {
+        $this->conpre = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NprelcajahoPeer::CONPRE;
+      }
+  
 	} 
 	
 	public function setConseg($v)
 	{
 
-		if ($this->conseg !== $v) {
-			$this->conseg = $v;
-			$this->modifiedColumns[] = NprelcajahoPeer::CONSEG;
-		}
-
+    if ($this->conseg !== $v) {
+        $this->conseg = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NprelcajahoPeer::CONSEG;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = NprelcajahoPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = NprelcajahoPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->codemp = $rs->getString($startcol + 0);
+      $this->codemp = $rs->getString($startcol + 0);
 
-			$this->conret = $rs->getFloat($startcol + 1);
+      $this->conret = $rs->getFloat($startcol + 1);
 
-			$this->conapo = $rs->getFloat($startcol + 2);
+      $this->conapo = $rs->getFloat($startcol + 2);
 
-			$this->conpre = $rs->getFloat($startcol + 3);
+      $this->conpre = $rs->getFloat($startcol + 3);
 
-			$this->conseg = $rs->getFloat($startcol + 4);
+      $this->conseg = $rs->getFloat($startcol + 4);
 
-			$this->id = $rs->getInt($startcol + 5);
+      $this->id = $rs->getInt($startcol + 5);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 6; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Nprelcajaho object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 6; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Nprelcajaho object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -219,6 +247,7 @@ abstract class BaseNprelcajaho extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = NprelcajahoPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += NprelcajahoPeer::doUpdate($this, $con);

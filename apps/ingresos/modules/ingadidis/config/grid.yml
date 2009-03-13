@@ -1,0 +1,27 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   cimovadi
+  ancho:                   600
+  anchogrid:               600
+  filas:                   1
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Código Presupuestario
+  tipo:                    t
+  nombrecampo:             codpre
+  esgrabable:			   true
+  html:                    []
+
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monmov
+  esgrabable:			   true
+  html:                    []
+
+3:       # Columna 3
+  titulo:                  Disponible
+  tipo:                    m
+  html:                    []

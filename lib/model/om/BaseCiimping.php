@@ -53,228 +53,259 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 	
 	protected $alreadyInValidation = false;
 
-	
-	public function getRefing()
-	{
+  
+  public function getRefing()
+  {
 
-		return $this->refing; 		
-	}
-	
-	public function getCodpre()
-	{
+    return trim($this->refing);
 
-		return $this->codpre; 		
-	}
-	
-	public function getMoning()
-	{
+  }
+  
+  public function getCodpre()
+  {
 
-		return number_format($this->moning,2,',','.');
-		
-	}
-	
-	public function getMonrec()
-	{
+    return trim($this->codpre);
 
-		return number_format($this->monrec,2,',','.');
-		
-	}
-	
-	public function getMondes()
-	{
+  }
+  
+  public function getMoning($val=false)
+  {
 
-		return number_format($this->mondes,2,',','.');
-		
-	}
-	
-	public function getMontot()
-	{
+    if($val) return number_format($this->moning,2,',','.');
+    else return $this->moning;
 
-		return number_format($this->montot,2,',','.');
-		
-	}
-	
-	public function getFecing($format = 'Y-m-d')
-	{
+  }
+  
+  public function getMonrec($val=false)
+  {
 
-		if ($this->fecing === null || $this->fecing === '') {
-			return null;
-		} elseif (!is_int($this->fecing)) {
-						$ts = strtotime($this->fecing);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
-			}
-		} else {
-			$ts = $this->fecing;
-		}
-		if ($format === null) {
-			return $ts;
-		} elseif (strpos($format, '%') !== false) {
-			return strftime($format, $ts);
-		} else {
-			return date($format, $ts);
-		}
-	}
+    if($val) return number_format($this->monrec,2,',','.');
+    else return $this->monrec;
 
-	
-	public function getStaimp()
-	{
+  }
+  
+  public function getMondes($val=false)
+  {
 
-		return $this->staimp; 		
-	}
-	
-	public function getMonaju()
-	{
+    if($val) return number_format($this->mondes,2,',','.');
+    else return $this->mondes;
 
-		return number_format($this->monaju,2,',','.');
-		
-	}
-	
-	public function getId()
-	{
+  }
+  
+  public function getMontot($val=false)
+  {
 
-		return $this->id; 		
-	}
+    if($val) return number_format($this->montot,2,',','.');
+    else return $this->montot;
+
+  }
+  
+  public function getFecing($format = 'Y-m-d')
+  {
+
+    if ($this->fecing === null || $this->fecing === '') {
+      return null;
+    } elseif (!is_int($this->fecing)) {
+            $ts = adodb_strtotime($this->fecing);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse value of [fecing] as date/time value: " . var_export($this->fecing, true));
+      }
+    } else {
+      $ts = $this->fecing;
+    }
+    if ($format === null) {
+      return $ts;
+    } elseif (strpos($format, '%') !== false) {
+      return adodb_strftime($format, $ts);
+    } else {
+      return @adodb_date($format, $ts);
+    }
+  }
+
+  
+  public function getStaimp()
+  {
+
+    return trim($this->staimp);
+
+  }
+  
+  public function getMonaju($val=false)
+  {
+
+    if($val) return number_format($this->monaju,2,',','.');
+    else return $this->monaju;
+
+  }
+  
+  public function getId()
+  {
+
+    return $this->id;
+
+  }
 	
 	public function setRefing($v)
 	{
 
-		if ($this->refing !== $v) {
-			$this->refing = $v;
-			$this->modifiedColumns[] = CiimpingPeer::REFING;
-		}
-
+    if ($this->refing !== $v) {
+        $this->refing = $v;
+        $this->modifiedColumns[] = CiimpingPeer::REFING;
+      }
+  
 	} 
 	
 	public function setCodpre($v)
 	{
 
-		if ($this->codpre !== $v) {
-			$this->codpre = $v;
-			$this->modifiedColumns[] = CiimpingPeer::CODPRE;
-		}
-
+    if ($this->codpre !== $v) {
+        $this->codpre = $v;
+        $this->modifiedColumns[] = CiimpingPeer::CODPRE;
+      }
+  
 	} 
 	
 	public function setMoning($v)
 	{
 
-		if ($this->moning !== $v) {
-			$this->moning = $v;
-			$this->modifiedColumns[] = CiimpingPeer::MONING;
-		}
-
+    if ($this->moning !== $v) {
+        $this->moning = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiimpingPeer::MONING;
+      }
+  
 	} 
 	
 	public function setMonrec($v)
 	{
 
-		if ($this->monrec !== $v) {
-			$this->monrec = $v;
-			$this->modifiedColumns[] = CiimpingPeer::MONREC;
-		}
-
+    if ($this->monrec !== $v) {
+        $this->monrec = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiimpingPeer::MONREC;
+      }
+  
 	} 
 	
 	public function setMondes($v)
 	{
 
-		if ($this->mondes !== $v) {
-			$this->mondes = $v;
-			$this->modifiedColumns[] = CiimpingPeer::MONDES;
-		}
-
+    if ($this->mondes !== $v) {
+        $this->mondes = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiimpingPeer::MONDES;
+      }
+  
 	} 
 	
 	public function setMontot($v)
 	{
 
-		if ($this->montot !== $v) {
-			$this->montot = $v;
-			$this->modifiedColumns[] = CiimpingPeer::MONTOT;
-		}
-
+    if ($this->montot !== $v) {
+        $this->montot = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiimpingPeer::MONTOT;
+      }
+  
 	} 
 	
 	public function setFecing($v)
 	{
 
-		if ($v !== null && !is_int($v)) {
-			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
-			}
-		} else {
-			$ts = $v;
-		}
-		if ($this->fecing !== $ts) {
-			$this->fecing = $ts;
-			$this->modifiedColumns[] = CiimpingPeer::FECING;
-		}
+    if ($v !== null && !is_int($v)) {
+      $ts = adodb_strtotime($v);
+      if ($ts === -1 || $ts === false) {         throw new PropelException("Unable to parse date/time value for [fecing] from input: " . var_export($v, true));
+      }
+    } else {
+      $ts = $v;
+    }
+    if ($this->fecing !== $ts) {
+      $this->fecing = $ts;
+      $this->modifiedColumns[] = CiimpingPeer::FECING;
+    }
 
 	} 
 	
 	public function setStaimp($v)
 	{
 
-		if ($this->staimp !== $v) {
-			$this->staimp = $v;
-			$this->modifiedColumns[] = CiimpingPeer::STAIMP;
-		}
-
+    if ($this->staimp !== $v) {
+        $this->staimp = $v;
+        $this->modifiedColumns[] = CiimpingPeer::STAIMP;
+      }
+  
 	} 
 	
 	public function setMonaju($v)
 	{
 
-		if ($this->monaju !== $v) {
-			$this->monaju = $v;
-			$this->modifiedColumns[] = CiimpingPeer::MONAJU;
-		}
-
+    if ($this->monaju !== $v) {
+        $this->monaju = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = CiimpingPeer::MONAJU;
+      }
+  
 	} 
 	
 	public function setId($v)
 	{
 
-		if ($this->id !== $v) {
-			$this->id = $v;
-			$this->modifiedColumns[] = CiimpingPeer::ID;
-		}
-
+    if ($this->id !== $v) {
+        $this->id = $v;
+        $this->modifiedColumns[] = CiimpingPeer::ID;
+      }
+  
 	} 
-	
-	public function hydrate(ResultSet $rs, $startcol = 1)
-	{
-		try {
+  
+  public function hydrate(ResultSet $rs, $startcol = 1)
+  {
+    try {
 
-			$this->refing = $rs->getString($startcol + 0);
+      $this->refing = $rs->getString($startcol + 0);
 
-			$this->codpre = $rs->getString($startcol + 1);
+      $this->codpre = $rs->getString($startcol + 1);
 
-			$this->moning = $rs->getFloat($startcol + 2);
+      $this->moning = $rs->getFloat($startcol + 2);
 
-			$this->monrec = $rs->getFloat($startcol + 3);
+      $this->monrec = $rs->getFloat($startcol + 3);
 
-			$this->mondes = $rs->getFloat($startcol + 4);
+      $this->mondes = $rs->getFloat($startcol + 4);
 
-			$this->montot = $rs->getFloat($startcol + 5);
+      $this->montot = $rs->getFloat($startcol + 5);
 
-			$this->fecing = $rs->getDate($startcol + 6, null);
+      $this->fecing = $rs->getDate($startcol + 6, null);
 
-			$this->staimp = $rs->getString($startcol + 7);
+      $this->staimp = $rs->getString($startcol + 7);
 
-			$this->monaju = $rs->getFloat($startcol + 8);
+      $this->monaju = $rs->getFloat($startcol + 8);
 
-			$this->id = $rs->getInt($startcol + 9);
+      $this->id = $rs->getInt($startcol + 9);
 
-			$this->resetModified();
+      $this->resetModified();
 
-			$this->setNew(false);
+      $this->setNew(false);
 
-						return $startcol + 10; 
-		} catch (Exception $e) {
-			throw new PropelException("Error populating Ciimping object", $e);
-		}
-	}
+      $this->afterHydrate();
+
+            return $startcol + 10; 
+    } catch (Exception $e) {
+      throw new PropelException("Error populating Ciimping object", $e);
+    }
+  }
+
+
+  protected function afterHydrate()
+  {
+
+  }
+    
+  
+  public function __call($m, $a)
+    {
+      $prefijo = substr($m,0,3);
+    $metodo = strtolower(substr($m,3));
+        if($prefijo=='get'){
+      if(isset($this->$metodo)) return $this->$metodo;
+      else return '';
+    }elseif($prefijo=='set'){
+      if(isset($this->$metodo)) $this->$metodo = $a[0];
+    }else call_user_func_array($m, $a);
+
+    }
 
 	
 	public function delete($con = null)
@@ -331,6 +362,7 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = CiimpingPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += CiimpingPeer::doUpdate($this, $con);
