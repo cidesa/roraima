@@ -5,7 +5,7 @@
 
   var expresionfloat =  /^(\d{1,3}\,){0,6}(\d{1,3})(\.\d{1,6})$/;
   var expresionfloat_1 =  /^(\d{1,10})(\.\d{1,6})?$/;
-  var expresionfloat_2 =  /^(\d{1,3}\,){1,6}(\d{3,3})(\.\d{1,6})?$/;
+  var expresionfloat_2 =  /^(\d{1,3}\,){1,6}(\d{3,3})(\.\d{1,6})$/;
 
 
 
