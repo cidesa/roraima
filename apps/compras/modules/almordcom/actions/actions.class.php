@@ -685,7 +685,7 @@ class almordcomActions extends autoalmordcomActions
       if (Herramientas::getX_vacio('ordcom','Caartord','ordcom',$ordcom)!='')
         $filas_arreglo=0;
       else
-        $filas_arreglo=50;
+        $filas_arreglo=150;
     }
     elseif ($referencia==1)
     {
