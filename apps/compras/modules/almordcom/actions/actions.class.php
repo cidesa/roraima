@@ -780,7 +780,7 @@ class almordcomActions extends autoalmordcomActions
     if ($referencia==0 and $filas_arreglo>0) $col5->setHTML('type="text" size="10"');
     if ($referencia==1 or $filas_arreglo==0) $col5->setHTML('type="text" size="10" readonly=true');
     //if ($referencia==0) $col5->setJScript('onKeypress="entermonto(event,this.id); if (verificar_datos(this.id)){actualizo_cod_presupuestario(this.id);actualizar_total_grid_detalle_datos(event,this.id);actualizar_grid_dependientes();actualizar_check_para_recargo();actualizar_sumatoria_detallada_orden();actualizar_sumatoria_recargo_mas_orden();verifica_presupuesto(event,this.id);}"');
-    if ($referencia==0 and $filas_arreglo>0) $col5->setJScript('onKeypress="entermonto(event,this.id); if (verificar_datos(this.id)){actualizo_cod_presupuestario(this.id);actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);}"');
+    if ($referencia==0 and $filas_arreglo>0) $col5->setJScript('onKeypress="entermonto3d(event,this.id); if (verificar_datos(this.id)){actualizo_cod_presupuestario(this.id);actualizar_total_grid_detalle_datos(event,this.id,"N");recalcularecargos(event,this.id);actualizar_grid_dependientes();verifica_presupuesto(event,this.id);}"');
     //if ($referencia==1) $col5->setJScript('onKeypress="entermonto(event,this.id);actualizar_sumatoria_total_cuando_esta_referida();actualizar_grid_dependientes()"');
 
     $col6 = clone $col5;
