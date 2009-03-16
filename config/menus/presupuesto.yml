@@ -3,7 +3,7 @@ presupuesto:
     activo: true #true/false
     descripcion: Módulo de Prespuesto
     imagen: presupuesto.gif
-    nombre: Contabilidad Presupuestaria
+    nombre: Ejecución Presupuestaria
     urls:
       Cambiar Contraseña:
         modulo: autenticacion.php
