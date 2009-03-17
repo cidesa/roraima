@@ -116,7 +116,7 @@ class pagemiordActions extends autopagemiordActions
          case ('I' || 'N'):
            $sql="select a.numche as numche,b.feclib as fecemi,b.tipmov as tipo,d.destip as destip,c.nomcue as nomcue
                  from opordche a, tsmovlib b, tsdefban c,tstipmov d
-                 where a.numche=b.reflib and
+                 where a.numche=b.reflib and a.codcta=b.numcue and
                  b.numcue=c.numcue and
                  b.tipmov=d.codtip and d.debcre='C' and
                  a.numord='".$this->opordpag->getNumord()."'";
