@@ -69,7 +69,8 @@ class cidesaUser extends sfBasicSecurityUser
         $this->setAttribute('usuario_id', $objUsuario[0]->getId());
 
         $_SESSION["x"] = sfConfig::get('app_contabilidadpresupuesto');
-        $_SESSION["sf_config_dir"] = implode("/",explode("/",sfConfig::get('sf_config_dir'),-2))."/"._CIDESA_CONFIG_;
+        cidesaTools::exitsfile(implode("/",explode("/",sfConfig::get('sf_config_dir'),-2))."/"._CIDESA_CONFIG_) ? $dir = implode("/",explode("/",sfConfig::get('sf_config_dir'),-2))."/"._CIDESA_CONFIG_ : $dir = sfConfig::get('sf_config_dir');
+        $_SESSION["sf_config_dir"] = $dir;
         $_SESSION["codemp"]=$codemp;   //codigo empresa
         $_SESSION["nomemp"]=$objemp->getNomemp();
         //$_SESSION["sesion_usuario"]=$objUsuario[0]->getNomuse();
