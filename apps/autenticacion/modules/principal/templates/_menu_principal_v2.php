@@ -53,7 +53,8 @@ function addNodo($nodo,$indice,$dirs,$dir = '',$nombrenodopadre='Nodo Padre',$ar
       }
       //if($esreporte){
 			$menustring[] = $nombrenodopadre.' : '.$k;
-		if($arrlis)			
+
+		if($arrlis && strrpos($dir,"reporte/"))			
 		{
 			if((!in_array(strtolower($val),$arrlis)) && (strrpos(strtolower($val),".php")))		
 			$val='basereporte.php?r='.str_replace('.php','',$val);		  	
@@ -175,7 +176,8 @@ dojo.require("dojo.widget.TreeContextMenu");
 
 <?php
 
-  $dir = sfConfig::get('sf_root_dir').'/config/menus/'.strtolower($modulo).'.yml';
+  $dir=CIDESA_CONFIG.'/menus/'.strtolower($modulo).'.yml';
+  cidesaTools::exitsfile($dir) ? $dir=$dir : $dir = sfConfig::get('sf_root_dir').'/config/menus/'.strtolower($modulo).'.yml';;  
 
   $menuyml = sfYaml::load($dir);
 
