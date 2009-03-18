@@ -1,0 +1,4 @@
+config/app.yml:
+  class:    cidesaDefineEnvironmentConfigHandler
+  param:
+    prefix: app_  
