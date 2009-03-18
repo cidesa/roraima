@@ -177,7 +177,7 @@ dojo.require("dojo.widget.TreeContextMenu");
 <?php
 
   $dir=CIDESA_CONFIG.'/menus/'.strtolower($modulo).'.yml';
-  cidesaTools::exitsfile($dir) ? $dir=$dir : $dir = sfConfig::get('sf_root_dir').'/config/menus/'.strtolower($modulo).'.yml';;  
+  cidesaTools::exitsfile($dir) ? $dir=$dir : $dir = sfConfig::get('sf_root_dir').'/config/menus/'.strtolower($modulo).'.yml';
 
   $menuyml = sfYaml::load($dir);
 
@@ -188,11 +188,10 @@ dojo.require("dojo.widget.TreeContextMenu");
 //  $modulo = substr($mod,0,strlen($mod)-4);
 
   $imagen = $menuyml[$modulo]['opciones']['imagen'];
-  $nombre = $menuyml[$modulo]['opciones']['nombre'];
-  $urls = $menuyml[$modulo]['opciones']['urls'];
+  $nombre = $menuyml[$modulo]['opciones']['nombre'];  
+  $urls = $menuyml[$modulo]['opciones']['urls'];    
+  cidesaTools::isisset(sfConfig::get('app_reportes_web')) ?  $urls['Reportes']['absoluta']=sfConfig::get('app_reportes_web').'/'.$modulo : '' ;
   $imagenes = $menuyml[$modulo]['opciones']['imagenes'];
-
-
   $menu = $menuyml[$modulo]['menu'];
 
   if(is_array($menureportesyml)){
