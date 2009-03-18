@@ -2,9 +2,9 @@
 include(SF_ROOT_DIR.DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.'adodb-time.inc.php');
 //$so = 'Windows';
 $so = 'Linux';
-define('CIDESA_CONFIG', '../../configurations');
-define('CIDESA_CONFIG_', '../configurations');
-define('_CIDESA_CONFIG_', 'configurations');
+$auxdir = implode("/",explode("/",SF_ROOT_DIR,-1));
+define('CIDESA_CONFIG', $auxdir."/".'configurations');
+define('CIDESA_CONFIG_NAME', 'configurations');
 if($so == 'Linux')
 {
   // directorios symfony para Linux
