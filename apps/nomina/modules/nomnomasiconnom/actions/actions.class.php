@@ -10,6 +10,12 @@
  */
 class nomnomasiconnomActions extends autonomnomasiconnomActions
 {
+
+ /* public function executeIndex()
+  {
+    return $this->redirect('nomnomasiconnom/edit');
+  }*/
+
   public function executeEdit()
   {
     $this->npasiconemp = $this->getNpasiconempOrCreate();
@@ -253,7 +259,7 @@ $this->Bitacora('Guardo');
 	}
   }
 
-  protected function getNpasiconempOrCreate($id = 'id', $concepto = 'concepto')
+  protected function getNpasiconempOrCreate($id = 'id', $concepto = 'concepto', $nomina= 'nomina')
   {
     if (!$this->getRequestParameter($concepto))
     {
@@ -266,10 +272,11 @@ $this->Bitacora('Guardo');
       $c = new Criteria();
   	  $c->add(NpasiconempPeer::CODCON,$this->getRequestParameter($concepto));
   	  $npasiconemp = NpasiconempPeer::doSelectOne($c);
-      $nomina=Herramientas::getX('CODCON','Npasiconnom','Codnom',$npasiconemp->getCodcon());
+  	  $nomina=$this->getRequestParameter($nomina);
+      if ($nomina=="") $nomina=Herramientas::getX('CODCON','Npasiconnom','Codnom',$npasiconemp->getCodcon());
       $frecal=Herramientas::getX('CODNOM','Npnomina','frecal',$nomina);
       $this->configGrid($nomina,$frecal,$npasiconemp->getCodcon());
-
+      $npasiconemp->setCodnom2($nomina);
       $this->forward404Unless($npasiconemp);
     }
 
