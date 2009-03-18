@@ -22,10 +22,12 @@ generator:
       acumulado: { name: Acumulado}
       codnom2: { name: Tipo de Nómina}
       desnom: { name: Nombre Nómina}
+      nomnom: { name: Nombre Nómina}
+      codnom: { name: Código Nómina}
     list:
       title:          Empleados con Conceptos Asignados
       filters:        [codcon]
-      display:        [=codcon, nomcon]
+      display:        [=codcon, nomcon, codnom, nomnom]
       fields:
         fecini: { params: date_format='dd/MM/yy' }
       object_actions:

@@ -10,9 +10,23 @@
 class Npasiconemp extends BaseNpasiconemp
 {
 
-  private $check = '';
-  private $status = '';
+   private $check = '';
+   private $status = '';
    private $codnom = '';
+   protected $codnom2='';
+
+
+   public function hydrate(ResultSet $rs, $startcol = 1)
+   {
+        parent::hydrate($rs, $startcol);
+	    $c = new Criteria();
+		$c->add(NpasiconnomPeer::CODCON,self::getCodcon());
+		$nomina = NpasiconnomPeer::doSelectone($c);
+		if ($nomina)
+			$this->codnom2 = $nomina->getCodnom();
+   }
+
+
 
   public function setCheck($val)
   {
@@ -96,21 +110,10 @@ class Npasiconemp extends BaseNpasiconemp
 		return ' ';
 	}
 
-    public function getCodnom2()
-	{
-		$c = new Criteria();
-		$c->add(NpasiconnomPeer::CODCON,self::getCodcon());
-		$nomina = NpasiconnomPeer::doSelectone($c);
-		if ($nomina)
-		return $nomina->getCodnom();
-		else
-		return '';
-	}
-
   public function getDesnom()
   {
     $c = new Criteria();
-    $c->add(NpnominaPeer::CODNOM,self::getCodnom2());
+    $c->add(NpnominaPeer::CODNOM, $this->codnom2);
 	$nomnom = NpnominaPeer::doSelectone($c);
 	if ($nomnom)
 	return $nomnom->getNomnom();
