@@ -58,9 +58,10 @@ class sfDatabaseManager
   public function initialize()
   {
     // load database configuration
-
-    require(sfConfigCache::getInstance()->checkConfig(CIDESA_CONFIG_.'/databases.yml'));
-    #require(sfConfigCache::getInstance()->checkConfig(sfConfig::get('sf_app_config_dir_name').'/databases2.yml'));
+	$dir=CIDESA_CONFIG.'/databases.yml';
+	cidesaTools::exitsfile($dir) ? $dir = $dir : $dir =  sfConfig::get('sf_app_config_dir_name').'/databases.yml';
+    require(sfConfigCache::getInstance()->checkConfig($dir));
+    #require(sfConfigCache::getInstance()->checkConfig(sfConfig::get('sf_app_config_dir_name').'/databases.yml'));
   }
 
   /**

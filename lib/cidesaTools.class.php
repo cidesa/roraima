@@ -22,16 +22,39 @@
     $config = array();
 
 	 /**
-   * Retrieves a config parameter.
+   * Verifica existencia de directorios o archivos.
    *
    * @param string A ruta o directorio 
-   * @param mixed  A valor por defecto a devolver en caso que no exista el directorio o el archivo
    *
-   * @return default en caso de no existir el directorio o el archivo, de lo contrario devuelve true
+   * @return false en caso de no existir la variable
    */
   public static function exitsfile($name)
   {
   	return file_exists($name) ? true : false;
+  }
+  
+   /**
+   * Verifica si una variable esta vacia.
+   *
+   * @param string A Variable    
+   *
+   * @return false en caso de no existir la variable
+   */
+  public static function isempty($var)
+  {
+  	return empty($var) ? true : false;
+  }
+  
+  /**
+   * Verifica si una variable esta definida.
+   *
+   * @param string A Variable    
+   *
+   * @return false en caso de no existir la variable
+   */
+  public static function isisset($var)
+  {
+  	return isset($var) ? true : false;
   }
 
  }
