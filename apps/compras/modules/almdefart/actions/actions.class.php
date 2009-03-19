@@ -16,7 +16,7 @@ class almdefartActions extends autoalmdefartActions
 
     public function validateEdit()
     { $resp=-1;
-      if($this->getRequest()->getMethod() == sfRequest::POST)
+ /*     if($this->getRequest()->getMethod() == sfRequest::POST)
       {
         $this->cadefart = $this->getCadefartOrCreate();
         $this->updateCadefartFromRequest();
@@ -27,7 +27,8 @@ class almdefartActions extends autoalmdefartActions
         if ($this->coderror1<>-1 || $this->coderror2<>-1){
           return false;
         }else return true;
-      }else return true;
+      }else return true;*/
+      return true;
     }
 
   public function executeIndex()

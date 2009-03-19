@@ -282,6 +282,7 @@ if ($cadefart->getAsiparrec()=='P')  {
   <?php $value = object_input_tag($cadefart, 'getCorcom', array (
   'size' => 7,
   'maxlength' => 8,
+  'readonly'  =>  $cadefart->getCorcom()!=0 ? true : false ,
   'control_name' => 'cadefart[corcom]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -297,6 +298,7 @@ if ($cadefart->getAsiparrec()=='P')  {
   <?php $value = object_input_tag($cadefart, 'getCorrec2', array (
   'size' => 7,
   'maxlength' => 8,
+  'readonly'  =>  $cadefart->getCorrec2()!=0 ? true : false ,
   'control_name' => 'cadefart[correc2]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -312,6 +314,7 @@ if ($cadefart->getAsiparrec()=='P')  {
   <?php $value = object_input_tag($cadefart, 'getCorreq2', array (
   'size' => 7,
   'maxlength' => 8,
+  'readonly'  =>  $cadefart->getCorreq2()!=0 ? true : false ,
   'control_name' => 'cadefart[correq2]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
@@ -327,9 +330,11 @@ if ($cadefart->getAsiparrec()=='P')  {
   <?php $value = object_input_tag($cadefart, 'getCordes2', array (
   'size' => 7,
   'maxlength' => 8,
+  'readonly'  =>  $cadefart->getCordes2()!=0 ? true : false ,
   'control_name' => 'cadefart[cordes2]',
 )); echo $value ? $value : '&nbsp;' ?>
-    </div>
+
+  </div>
 
 <br>
 
@@ -343,6 +348,7 @@ if ($cadefart->getAsiparrec()=='P')  {
   'size' => 7,
   'maxlength' => 8,
   'control_name' => 'cadefart[corser]',
+  'readonly'  =>  $cadefart->getCorser()!=0 ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -358,6 +364,7 @@ if ($cadefart->getAsiparrec()=='P')  {
   'size' => 7,
   'maxlength' => 8,
   'control_name' => 'cadefart[corsol]',
+  'readonly'  =>  $cadefart->getCorsol()!=0 ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -373,6 +380,7 @@ if ($cadefart->getAsiparrec()=='P')  {
   'size' => 7,
   'maxlength' => 8,
   'control_name' => 'cadefart[corcot2]',
+  'readonly'  =>  $cadefart->getCorcot2()!=0 ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -388,6 +396,7 @@ if ($cadefart->getAsiparrec()=='P')  {
   'size' => 7,
   'maxlength' => 8,
   'control_name' => 'cadefart[almcorre]',
+  'readonly'  =>  $cadefart->getAlmcorre()!=0 ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
   <br>
@@ -401,6 +410,7 @@ if ($cadefart->getAsiparrec()=='P')  {
   'size' => 7,
   'maxlength' => 8,
   'control_name' => 'cadefart[corent]',
+  'readonly'  =>  $cadefart->getCorent()!=0 ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
   <br>
@@ -414,6 +424,7 @@ if ($cadefart->getAsiparrec()=='P')  {
   'size' => 7,
   'maxlength' => 8,
   'control_name' => 'cadefart[corsal]',
+  'readonly'  =>  $cadefart->getCorsal()!=0 ? true : false ,
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
