@@ -99,7 +99,7 @@
  <?php $value = object_textarea_tag($caregart, 'getDesart', array (
   'size' => '80x5',
   'control_name' => 'caregart[desart]',
-  'maxlength' => 1000,
+  'maxlength' => 1500,
 )); echo $value ? $value : '&nbsp;' ?>
    </div>
 
