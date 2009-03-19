@@ -78,8 +78,8 @@ DescripcionValidator:
     param:
         min:       2
         min_error: La Descripción no puede tener menos de 2 caracteres
-        max:       1000
-        max_error: La Descripción no puede pasar mas de 250 caracteres
+        max:       1500
+        max_error: La Descripción no puede pasar mas de 1500 caracteres
 
 UnidadaltValidator:
     class: sfStringValidator

@@ -465,3 +465,9 @@ ALTER TABLE contabc_numcom_seq OWNER TO postgres;
 
 ALTER TABLE "opdefemp"
   ADD COLUMN "codcatcajchi" character varying(32);
+  
+-- Se agrego para aumentar el tamaño de los decimales en la cantidad de la orden de compra
+ALTER TABLE caartord ALTER canord TYPE numeric(14,3);
+ALTER TABLE caresordcom ALTER canord TYPE numeric(14,3);
+ 
+ALTER TABLE caregart ALTER desart TYPE character varying(1500);
