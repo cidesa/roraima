@@ -1822,7 +1822,7 @@ class Nomina {
         break;
 
       case "SIMESANT" :
-          $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and a.codcar='" . $cargo . "' and a.codnom=c.codnom and TO_CHAR(A.FECNOM,'MM')=LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-1,'99')),2,'0') AND TO_CHAR(A.FECNOM,'YYYY')=TO_CHAR(C.PROFEC,'YYYY') ";
+           $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "'  and a.codcar='" . $cargo . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM')=LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-1,'99')),2,'0') AND TO_CHAR(A.FECNOM,'YYYY')=TO_CHAR(C.PROFEC,'YYYY') ";
           if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
              $valor = $tabla[0]["campo"];
           }
@@ -2927,7 +2927,7 @@ class Nomina {
         break;
 
       case "SIMESANT" :
-         $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and a.codcar='" . $cargo . "' and a.codnom=c.codnom and TO_CHAR(A.FECNOM,'MM')=LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-1,'99')),2,'0') AND TO_CHAR(A.FECNOM,'YYYY')=TO_CHAR(C.PROFEC,'YYYY') ";
+         $criterio = "Select coalesce(SUM(Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "'  and a.codcar='" . $cargo . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM')=LPAD(TRIM(to_char(to_number(to_char(c.profec,'MM'),'99')-1,'99')),2,'0') AND TO_CHAR(A.FECNOM,'YYYY')=TO_CHAR(C.PROFEC,'YYYY') ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
            $valor = $tabla[0]["campo"];
         }
