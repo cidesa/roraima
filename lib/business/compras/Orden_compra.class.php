@@ -1896,61 +1896,62 @@ class Orden_compra
                   }
 
 
-                Herramientas::EliminarRegistro("Caresordcom", "Ordcom", $caordcom->getOrdcom());
-                Herramientas::EliminarRegistro("Caordconpag", "Ordcom", $caordcom->getOrdcom());
-                Herramientas::EliminarRegistro("Caordforent", "Ordcom", $caordcom->getOrdcom());
+                  Herramientas::EliminarRegistro("Caresordcom", "Ordcom", $caordcom->getOrdcom());
+                  Herramientas::EliminarRegistro("Caordconpag", "Ordcom", $caordcom->getOrdcom());
+                  Herramientas::EliminarRegistro("Caordforent", "Ordcom", $caordcom->getOrdcom());
 
-                $c= new Criteria();
-                    $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
-                    $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
-                    $cadisrgo_del = CadisrgoPeer::doSelect($c);
-                    foreach ($cadisrgo_del as $arreglo)
-                    {
-                      $arreglo->delete();
-                    }
-
-                Herramientas::EliminarRegistro("Caartfec", "Ordcom", $caordcom->getOrdcom());
-                Herramientas::EliminarRegistro("Caordcom", "Ordcom", $caordcom->getOrdcom());
-
-            if ($afectacompro='S')
-                  self::Eliminar_compromiso($caordcom);
-                self::Eliminar_recargos($caordcom);
-                //Actualizamos la Solicitud de Egresos
-                $i=0;
-                if ($caordcom->getRefsol()!='')
-                {
-                  $sql="SELECT codart,codcat,canord FROM Caartord WHERE ordcom='".$caordcom->getOrdcom()."'";
-                  $result=array();
-                  if (Herramientas::BuscarDatos($sql,&$result))
+                  $c= new Criteria();
+                  $c->add(CadisrgoPeer::REQART,$caordcom->getOrdcom());
+                  $c->add(CadisrgoPeer::TIPDOC,$caordcom->getDoccom());
+                  $cadisrgo_del = CadisrgoPeer::doSelect($c);
+                  foreach ($cadisrgo_del as $arreglo)
                   {
-                    $i=0;
-                    while ($i<count($result))
-                    {
-                      if (str_replace("'","",$result[$i]['codart'])!='')
-                      {
-                      $sql1="SELECT canord FROM Caartsol WHERE reqart='".$caordcom->getRefsol()."'";
-                      $result1=array();
-                      if (Herramientas::BuscarDatos($sql1,&$result1))
-                      {
-                              if (($result1[0]['canord']-$result[$i]['canord'])>0)
-                            $sql2="Update Caartsol set canord=canord-".$result[$i][canord]." where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and codcat='".$result[$i]['codcat']."'";
-                          else
-                            $sql2="Update Caartsol set canord=0 where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and codcat='".$result[$i]['codcat']."'";
-                          Herramientas::insertarRegistros($sql2);
-                      }
-                        }
-                        $i++;
-                      }
-                    }
+                    $arreglo->delete();
                   }
-                      Herramientas::EliminarRegistro("Caartord", "Ordcom", $caordcom->getOrdcom());
+
+                  Herramientas::EliminarRegistro("Caartfec", "Ordcom", $caordcom->getOrdcom());
+
+                  if ($afectacompro='S')
+                    self::Eliminar_compromiso($caordcom);
+                  self::Eliminar_recargos($caordcom);
+                  //Actualizamos la Solicitud de Egresos
+                  $i=0;
+                  if ($caordcom->getRefsol()!='')
+                  {
+                    $sql="SELECT codart,codcat,canord FROM Caartord WHERE ordcom='".$caordcom->getOrdcom()."'";
+                    $result=array();
+                    if (Herramientas::BuscarDatos($sql,&$result))
+                    {
+                      $i=0;
+                      while ($i<count($result))
+                      {
+                        if (str_replace("'","",$result[$i]['codart'])!='')
+                        {
+                        $sql1="SELECT canord FROM Caartsol WHERE reqart='".$caordcom->getRefsol()."'";
+                        $result1=array();
+                        if (Herramientas::BuscarDatos($sql1,&$result1))
+                        {
+                                if (($result1[0]['canord']-$result[$i]['canord'])>0)
+                              $sql2="Update Caartsol set canord=canord-".$result[$i][canord]." where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and codcat='".$result[$i]['codcat']."'";
+                            else
+                              $sql2="Update Caartsol set canord=0 where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and codcat='".$result[$i]['codcat']."'";
+                            Herramientas::insertarRegistros($sql2);
+                        }
+                          }
+                          $i++;
+                        }
+                      }
+                  }
+                  Herramientas::EliminarRegistro("Caartord", "Ordcom", $caordcom->getOrdcom());
+                  Herramientas::EliminarRegistro("Caordcom", "Ordcom", $caordcom->getOrdcom());
+                    
               }
               }
               else
-            {
+              {
                   $coderror=173;
                 return false;
-            }
+              }
             }
           else
           {
