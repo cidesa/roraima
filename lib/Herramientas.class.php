@@ -239,7 +239,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
             if ($form->getRequestParameter($caja)=="0,00")
                 $valor = $form->getRequestParameter($caja);
             else
-               $valor = Herramientas::toFloat($form->getRequestParameter($caja));
+               $valor = Herramientas::toFloat($form->getRequestParameter($caja),3);
         }elseif ($tipos[$pos-1]=="f"){
           $dateFormat = new sfDateFormat('es_VE');
           $str_fecha = $form->getRequestParameter($caja);
@@ -297,7 +297,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
               if ($form->getRequestParameter($caja)=="0,00")
                 $valor = $form->getRequestParameter($caja);
               else
-               $valor = Herramientas::toFloat($form->getRequestParameter($caja));
+               $valor = Herramientas::toFloat($form->getRequestParameter($caja),3);
             }
             elseif ($tipos[$pos-1]=="f"){
               $dateFormat = new sfDateFormat('es_VE');
@@ -1367,7 +1367,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
     }catch(Exception $e){return 0.00;}
   }
 
-  public static function toFloat($value)
+  public static function toFloat($value,$decimales=2)
   {
     $valorfloat = 0.0;
     if ( ($value==" ") || ($value=="") || ($value=="NaN"))
@@ -1385,7 +1385,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
           $valorfloat = 0.00;
       }
     }
-    return round($valorfloat,2);
+    return round($valorfloat,$decimales);
   }
 
   public static function getBuscar_correlativo($valor,$tblcorr,$campocorr,$tabla,$campocom)
