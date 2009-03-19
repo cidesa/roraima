@@ -1370,7 +1370,7 @@ propel:
       required: true
     desart:
       type: VARCHAR
-      size: 1000
+      size: 1500
       required: true
     codcta:
       type: VARCHAR
