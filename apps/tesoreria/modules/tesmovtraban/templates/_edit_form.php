@@ -323,7 +323,7 @@
 			   'url'      => 'tesmovtraban/ajax',
 			   'script'   => true,
 			   'complete' => 'CatalogoGrid2()',
-			   'with' => "'ajax=3&reftra='+document.getElementById('tsmovtra_reftra').value+'&numcom='+document.getElementById('tsmovtra_numcom').value+'&fectra='+document.getElementById('tsmovtra_fectra').value+'&grabar='+'N'+'&formulario='+'sf_admin/tesmovtraban/confincomgen'+'&destra='+document.getElementById('tsmovtra_destra').value+'&ctas='+document.getElementById('tsmovtra_ctacon_ori').value+'_'+document.getElementById('tsmovtra_ctacon_des').value+'&tipmov='+document.getElementById('tsmovtra_tipmovdesd').value+'_'+document.getElementById('tsmovtra_tipmovhast').value+'&mov='+'D_C'+'&montos='+document.getElementById('tsmovtra_montra').value+'_'+document.getElementById('tsmovtra_montra').value"
+			   'with' => "'ajax=3&reftra='+document.getElementById('tsmovtra_reftra').value+'&numcom='+document.getElementById('tsmovtra_numcom').value+'&fectra='+document.getElementById('tsmovtra_fectra').value+'&grabar='+'N'+'&formulario='+'sf_admin/tesmovtraban/confincomgen'+'&destra='+document.getElementById('tsmovtra_destra').value+'&ctas='+document.getElementById('tsmovtra_ctacon_des').value+'_'+document.getElementById('tsmovtra_ctacon_ori').value+'&tipmov='+document.getElementById('tsmovtra_tipmovdesd').value+'_'+document.getElementById('tsmovtra_tipmovhast').value+'&mov='+'D_C'+'&montos='+document.getElementById('tsmovtra_montra').value+'_'+document.getElementById('tsmovtra_montra').value"
     ),array('class' => 'botoncat')) ?>
 </th>
 </tr>
