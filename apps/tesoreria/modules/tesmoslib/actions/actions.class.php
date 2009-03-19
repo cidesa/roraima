@@ -79,7 +79,7 @@ $this->Bitacora('Guardo');
   		    break;
       	}
       	case '2':
-      	{	
+      	{
           $nrocta=$this->getRequestParameter('nrocta');
       		$this->getUser()->setAttribute('tes_numcue',$nrocta);
 			    $mes=$this->getRequestParameter('mes');
@@ -96,7 +96,7 @@ $this->Bitacora('Guardo');
 			    if ($mes!='')
     			{
   			    $fechacon=$mes .'/'.$periodo;
-            print $fechacon;
+          //  print $fechacon;
         		$this->c=new Criteria();
       		  // $this->c->add(TsmovlibPeer::NUMCUE,trim($nrocta));
       		  $this->c->add(TsmovlibPeer::STACON,'N');
