@@ -48,7 +48,7 @@ class almreqActions extends autoalmreqActions
       if ($this->saveCareqart($this->careqart)==-1)
 	  {
 	      $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+		  $this->Bitacora('Guardo');
 
  		  $this->careqart->setId(Herramientas::getX_vacio('reqart','careqart','id',$this->careqart->getReqart()));
 
@@ -261,6 +261,7 @@ $this->Bitacora('Guardo');
   {
   	// Si en el parametro reqreqapr  de Cadefart, no requiere que la requisicion esta aprobada para despacharla
   	// entonces de una vez grabo la requisicion como aprobada
+
   	 if ($this->autorizareq=="") $careqart->setAprreq('S');
 
      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
@@ -335,6 +336,12 @@ $this->Bitacora('Guardo');
 	        {
 	          $codcatvacio=true;
 	          $error=179;
+	        }
+
+	        if ($x[$j]->getCanreq()==0)
+	        {
+	          $codcatvacio=true;
+	          $error=1011;
 	        }
         }
         $j++;
