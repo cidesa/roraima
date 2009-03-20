@@ -390,5 +390,103 @@ $this->Bitacora('Guardo');
     }// if ( $this->mensaje=="")
   }
 
+  public function executeDelete()
+  {
+    $this->tsmovtra = TsmovtraPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->tsmovtra);
+
+    $id=$this->getRequestParameter('id');
+   try
+   {
+   //Eliminan movimientos según libros
+    $c= new Criteria();
+    $c->add(TsmovlibPeer::NUMCUE,$this->tsmovtra->getCtaori());
+    $c->add(TsmovlibPeer::REFLIB,$this->tsmovtra->getReftra());
+    $c->add(TsmovlibPeer::TIPMOV,$this->tsmovtra->getTipmovhast());
+    $resul1= TsmovlibPeer::doSelectOne($c);
+    if ($resul1)
+    {
+      if ($resul1->getStacon()!="C")
+      {
+      	$resul1->delete();
+      }
+    }
+    else
+    {
+    	$this->setFlash('notice','Movimiento Origen según Libro no pudo ser Eliminado');
+    }
+
+    $c= new Criteria();
+    $c->add(TsmovlibPeer::NUMCUE,$this->tsmovtra->getCtades());
+    $c->add(TsmovlibPeer::REFLIB,$this->tsmovtra->getReftra());
+    $c->add(TsmovlibPeer::TIPMOV,$this->tsmovtra->getTipmovdesd());
+    $resul2= TsmovlibPeer::doSelectOne($c);
+    if ($resul2)
+    {
+      if ($resul2->getStacon()!="C")
+      {
+      	$resul2->delete();
+      }
+    }
+    else
+    {
+    	$this->setFlash('notice','Movimiento Destino según Libro no pudo ser Eliminado');
+    }
+    //Se eliminan el comprobante
+    $a= new Criteria();
+    $a->add(ContabcPeer::NUMCOM,$this->tsmovtra->getNumcom());
+    $a->add(ContabcPeer::FECCOM,$this->tsmovtra->getFectra());
+    $reg1= ContabcPeer::doSelectOne($a);
+    if ($reg1)
+    {
+      if ($reg1->getStacom()=='A')
+      {
+      	$this->setFlash('notice','El Comprobante ya esta Actualizado');
+      }
+
+      if ($reg1->getStacom()=='N')
+      {
+        $this->setFlash('notice','El Comprobante ya esta Anulado');
+      }
+
+      if ($reg1->getStacom()=='D')
+      {
+        $a= new Criteria();
+	    $a->add(Contabc1Peer::NUMCOM,$this->tsmovtra->getNumcom());
+	    $a->add(Contabc1Peer::FECCOM,$this->tsmovtra->getFectra());
+	    Contabc1Peer::doDelete($a);
+
+	    $reg1->delete();
+      }
+    }
+    else
+    {
+      $this->setFlash('notice','El Comprobante no pudo ser Eliminado');
+    }
+
+    //Se eliminan los pagos
+    $a= new Criteria();
+    $a->add(CppagosPeer::REFPAG,$this->tsmovtra->getReftra());
+    $reg2= CppagosPeer::doSelectOne($a);
+    if ($reg2)
+    {
+      $a= new Criteria();
+      $a->add(CpimppagPeer::REFPAG,$this->tsmovtra->getReftra());
+      CpimppagPeer::doDelete($a);
+      $reg2->delete();
+    }
+
+    Tesoreria::Actualiza_bancostra('A', 'D', $this->tsmovtra->getCtaori(), $this->tsmovtra->getMontra());
+    Tesoreria::Actualiza_bancostra('A', 'C', $this->tsmovtra->getCtades(), $this->tsmovtra->getMontra());
+    $this->tsmovtra->delete();
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'Could not delete the selected Tsmovtra. Make sure it does not have any associated items.');
+      return $this->forward('tesmovtraban', 'list');
+    }
+
+    return $this->redirect('tesmovtraban/list');
+  }
 
 }
