@@ -594,6 +594,9 @@
 447:
   cod: 447
   msj: El empleado ya existe para esa nomina con ese cargo
+448:
+  cod: 448
+  msj: Esta Nómina Especial ya ha sido definida
 ###############OBRAS################
 1000:
     cod: 1000
