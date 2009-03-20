@@ -771,7 +771,7 @@ class Orden_compra
             $mitotal=$elmonto;
             $codigo_presupuestario = str_replace("'","",$result[0]['codpre']);
             $mondis=Herramientas::Monto_disponible($codigo_presupuestario);
-            if ($mitotal < $mondis)
+            if ($mitotal <= $mondis)
             {
                 $chequear_disponibilidad_recargo = true;
                 $sobregiro_recargo = false;
@@ -786,7 +786,7 @@ class Orden_compra
                 $codigo_presupuestario = $grid_total_unidad[$j][0].'-'.$result[0]['codpre'];
                 $mitotal=$grid_total_unidad[$j][1];
                 $mondis=Herramientas::Monto_disponible($codigo_presupuestario);
-                if ($mitotal < $mondis)
+                if ($mitotal <= $mondis)
                 {
                     $chequear_disponibilidad_recargo = true;
                     $sobregiro_recargo = false;
