@@ -310,7 +310,7 @@ class Tesoreria {
           $tsconcil->save();
 
           $fec=explode('/',$fechas);
-          $fecfin=$fec[1]."-".$fec[0]."-".$fec[2];
+          $fecfin=$fec[2]."-".$fec[1]."-".$fec[0];
 
           $c = new Criteria();
           $c->add(TsmovlibPeer :: NUMCUE, $nro);
@@ -360,7 +360,7 @@ class Tesoreria {
           //$fechas = $dateFormat->format($fechas, 'i', $dateFormat->getInputPattern('d'));
 
           $fec=explode('/',$fechas);
-          $fecfin=$fec[1]."-".$fec[0]."-".$fec[2];
+          $fecfin=$fec[2]."-".$fec[1]."-".$fec[0];
 
           $c = new Criteria();
           $c->add(TsmovbanPeer :: NUMCUE, $nro);
