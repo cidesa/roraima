@@ -685,7 +685,7 @@ class Tesoreria {
       $tsmov->setTipmov($tipmovdesd);
       $tsmov->setFeclib($objeto->getFectra());
       $tsmov->setFecing($objeto->getFectra());
-      $tsmov->setDeslib('TRANSFERENCIA DE LA CUENTA ' . $objeto->getCtades());
+      $tsmov->setDeslib('TRANSFERENCIA DE LA CUENTA ' . $objeto->getCtaori().'. '.$objeto->getDestra());
       $tsmov->setMonmov($objeto->getMontra());
       $ctahasta = Herramientas :: getX_vacio('numcue', 'TSdefban', 'CodCta', $objeto->getCtades());
       $tsmov->setCodcta($ctahasta);
@@ -726,7 +726,7 @@ class Tesoreria {
       $tsmov2->setFeclib($objeto->getFectra());
       $tsmov2->setFecing($objeto->getFectra());
       $tsmov2->setTipmov($tipmovhast);
-      $tsmov2->setDeslib('TRANSFERENCIA DE LA CUENTA ' . $objeto->getCtades());
+      $tsmov2->setDeslib('TRANSFERENCIA A LA CUENTA ' . $objeto->getCtades().'. '.$objeto->getDestra());
       $tsmov2->setMonmov($objeto->getMontra());
       $ctadesde = Herramientas :: getX_vacio('numcue', 'TSdefban', 'CodCta', $objeto->getCtaori());
       $tsmov2->setCodcta($ctadesde);

@@ -397,9 +397,17 @@ function llenar_desnumcom(e)
 </form>
 
 <ul class="sf_admin_actions">
-      <li class="float-rigth"><?php if ($tsmovtra->getId() && $tsmovtra->getStatus()!='N'): ?>
+<?php if ($tsmovtra->getId() && $tsmovtra->getStatus()!='N'): ?>
+<li class="float-rigth">
 <input type="button" name="Submit" value="Anular" onclick="javascript:Anular();" />
-<?php endif; ?>
 </li>
-  </ul>
+<li class="float-rigth">
+<?php echo button_to(__('delete'), 'tesmovtraban/delete?id='.$tsmovtra->getId(), array (
+  'post' => true,
+  'confirm' => __('Are you sure?'),
+  'class' => 'sf_admin_action_delete',
+)) ?>
+</li>
+<?php endif; ?>
+</ul>
 
