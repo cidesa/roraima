@@ -10,6 +10,7 @@
  */
 class nomespconceptosActions extends autonomespconceptosActions
 {
+ public  $coderr=-1;
 
  public function executeList()
   {
@@ -251,4 +252,55 @@ $this->Bitacora('Guardo');
     return $this->redirect('nomespconceptos/list');
   }
 
+  public function validateEdit()
+  {
+    $this->coderr =-1;
+
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+
+      $this->npnomespnomtip = $this->getNpnomespnomtipOrCreate();
+
+      $this->updateNpnomespnomtipFromRequest();
+
+      if (!$this->npnomespnomtip->getId())
+      {
+      	$c= new Criteria();
+      	$c->add(NpnomespconnomtipPeer::CODNOMESP,$this->npnomespnomtip->getCodnomesp());
+      	$c->add(NpnomespconnomtipPeer::CODNOM,$this->npnomespnomtip->getCodnom());
+      	$datos=NpnomespconnomtipPeer::doSelectOne($c);
+      	if ($datos)
+      	{
+  			$this->coderr=448;
+            return false;
+      	}
+      }
+
+      if($this->coderr!=-1){
+        return false;
+      } else return true;
+
+    }else return true;
+  }
+
+    public function handleErrorEdit()
+    {
+      $this->preExecute();
+      $this->npnomespnomtip = $this->getNpnomespnomtipOrCreate();
+      try
+      {
+       $this->updateNpnomespnomtipFromRequest();
+      }
+      catch (Exception $ex){}
+      $this->labels = $this->getLabels();
+      if($this->getRequest()->getMethod() == sfRequest::POST)
+      {
+        if($this->coderr!=-1)
+        {
+            $err = Herramientas::obtenerMensajeError($this->coderr);
+            $this->getRequest()->setError('',$err);
+
+        }
+      }
+      return sfView::SUCCESS;
+    }
 }
