@@ -1,3 +1,7 @@
+  var codpres = new Array();
+  var codarts = new Array();
+  var codartunis = new Array();  
+
 
 //<----------------------------Funciones solo del editform---------------------------------------->
 
@@ -31,7 +35,7 @@
   {
     var motivo='Motivo de la Anulacion';
     var fecha= $('caordcom_fecord').value;
-  if(confirm('¿Estas Seguro?'))
+  if(confirm('Â¿Estas Seguro?'))
   {
     var valor = prompt('Desea Anular Orden con fecha: '+$('caordcom_fecord').value+' de C&oacute;digo:',motivo);
     var fecha = prompt('Desea Anular Orden con fecha:',fecha);
@@ -237,9 +241,9 @@
    if (!(verificar_codigo_repetido(id)))
    {
       i=id.split('_');
-        fila=i[1];
+      fila=i[1];
       var codigo_presupuestario= "ax_"+fila+"_14";
-    var codigo=$(codigo_presupuestario).value;
+      var codigo=$(codigo_presupuestario).value;
       if (e.keyCode==13 || e.keyCode==9)
       {
         if (codigo!="")
@@ -283,46 +287,34 @@
      var col_fila_codigo_uni_com = "ax_"+i+"_4";
      if ($(col_fila_codigo_art_com).value!="")
      {
-      while (f < $('numero_filas_orden').value)
-        {
-              var col_fila_codigo_art = "ax_"+f+"_2";
-              var col_fila_codigo_uni = "ax_"+f+"_4";
-
-
-              var artuni_com=$(col_fila_codigo_art_com).value+$(col_fila_codigo_uni_com).value
-              var artuni=$(col_fila_codigo_art).value+$(col_fila_codigo_uni).value
-
-              if (col_fila_codigo_art_com!=col_fila_codigo_art)
-              {
-                if (artuni_com==artuni)
-                {
-                  contador_repetido++;
-                  break;
-                }
-              }
-            f++;
-        }
-      }
-      if (contador_repetido>0)
-      {
-          var unidad_art = "ax_"+i+"_13";
-          var partida_art = "ax_"+i+"_15";
-          var codigo_pre = "ax_"+i+"_14";
-          var coduni_art = "ax_"+i+"_4";
-          var nombre_art = "ax_"+i+"_3";
-          var codigo_art= "ax_"+i+"_2";
-        $(unidad_art).value="";
-        $(partida_art).value="";
-        $(codigo_pre).value="";
-        $(coduni_art).value="";
-        $(nombre_art).value="";
-        $(codigo_art).value="";
-          alert_('C&oacute;digo de articulo repetido, Verifique sus datos');
-          articulorepetido=true;
-      }
-      i=0;
-      f=0;
-      return articulorepetido;
+       artuni_com=$(col_fila_codigo_uni_com).value+'-'+$(col_fila_codigo_art_com).value
+       codartunis.each(function(item) {
+         if (artuni_com==item)
+         {
+           contador_repetido++;
+         }        
+       });
+     }
+     if (contador_repetido>1)
+     {
+       var unidad_art = "ax_"+i+"_13";
+       var partida_art = "ax_"+i+"_15";
+       var codigo_pre = "ax_"+i+"_14";
+       var coduni_art = "ax_"+i+"_4";
+       var nombre_art = "ax_"+i+"_3";
+       var codigo_art= "ax_"+i+"_2";
+       $(unidad_art).value="";
+       $(partida_art).value="";
+       $(codigo_pre).value="";
+       $(coduni_art).value="";
+       $(nombre_art).value="";
+       $(codigo_art).value="";
+       alert_('C&oacute;digo de articulo repetido, Verifique sus datos');
+       articulorepetido=true;
+     }
+     i=0;
+     f=0;
+     return articulorepetido;
   }
 
 
@@ -352,6 +344,7 @@
     {
         i=id.split('_');
         fil=i[1];
+        var col_fila_codigo_art = "ax_"+fil+"_2";
         var col_fila_unidad_art = "ax_"+fil+"_4";
         var col_fila_partida_art = "ax_"+fil+"_15";
         var col_fila_codigo_pre = "ax_"+fil+"_14";
@@ -363,6 +356,9 @@
         valor_cat_unidad=valor_cat_unidad.replace('--','-');
         valor_cat_unidad=valor_cat_unidad.replace('--','-');
         $(col_fila_codigo_pre).value=valor_cat_unidad;
+        codpres[fil] = valor_cat_unidad;
+        codartunis[fil] = $(col_fila_unidad_art).value + '-' + $(col_fila_codigo_art).value;
+        codarts[fil] = $(col_fila_codigo_art).value;
      }
     }
 
@@ -479,6 +475,9 @@
      f=0;
      while (f < $('numero_filas_orden').value)
       {
+        col_fila_art_1 = "ax_"+f+"_2";
+        col_fila_art_2 = "ax_"+(f+1)+"_2";
+        if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
          c=2;
          c2=1;
           while (c<=9)
@@ -498,13 +497,18 @@
 
              $(col_fila_cantidad_recargo_grid_b).value=$(col_fila_cantidad_recargo_grid_a).value;
              $(col_fila_cantidad_total_grid_b).value=$(col_fila_cantidad_total_grid_a).value;
-    f++;
-  }
+      f++;
+    }
 
      // colocar los datos en el grid entregas
      f=0;
      while (f < $('numero_filas_orden').value)
       {
+        col_fila_art_1 = "ax_"+f+"_2";
+        col_fila_art_2 = "ax_"+(f+1)+"_2";
+        if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
+        
+        
             var col_fila_codigo_datos = "ax_"+f+"_2";
              var col_fila_codigo_entregas = "cx_"+f+"_1";
 
@@ -547,6 +551,10 @@
     total_monto_orden_pago=0;
     while (i < $('numero_filas_orden').value)
     {
+        col_fila_art_1 = "ax_"+i+"_2";
+        col_fila_art_2 = "ax_"+(i+1)+"_2";
+        if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
+      
         var fila_grid_detalle= "ax_"+i+"_12";
         var monto_por_fila=toFloat(fila_grid_detalle);
         total_monto_orden_pago = total_monto_orden_pago + monto_por_fila;
@@ -739,6 +747,11 @@
      total_cantidad_por_monto=0;
      while (i < $('numero_filas_orden').value)
       {
+        col_fila_art_1 = "ax_"+i+"_2";
+        col_fila_art_2 = "ax_"+(i+1)+"_2";
+        if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
+
+        
         var fila_cantidad = "ax_"+i+"_5";
         var fila_costo = "ax_"+i+"_9";
         var fila_descuento = "ax_"+i+"_10";
@@ -772,7 +785,7 @@
     var categoria=name+"_"+fil+"_"+colcat;
     if ($(categoria).value=='')
     {
-     alert('Debe introducir el Código de la Unidad');
+     alert('Debe introducir el Cï¿½digo de la Unidad');
      $(id).value='';
      $(id).value='0,00';
      return false;
