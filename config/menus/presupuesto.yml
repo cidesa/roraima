@@ -17,9 +17,6 @@ presupuesto:
       Aprobación del Compromiso:
         modulo: presupuesto.php
         modulo_dev: presupuesto_dev.php
-      Crear Títulos:
-        modulo: presupuesto.php
-        modulo_dev: presupuesto_dev.php
       Asignación Fuente de Financiamiento:
         modulo: presupuesto.php
         modulo_dev: presupuesto_dev.php
@@ -46,7 +43,6 @@ presupuesto:
       Asignar Partidas:                                       PreAsiPar.php
       Artículos de Ley:                                       PreArtLey.php
       Aprobación:                                             PreDefApr
-      Crear Títulos:                                          precretit
       Documentos:
         Precompromisos:                                       PreDocPre.php
         Compromisos:                                          PreDocCom.php
