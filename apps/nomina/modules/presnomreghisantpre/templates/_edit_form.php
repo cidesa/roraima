@@ -92,9 +92,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
     <br><br>
-</div>
-    <br><br>
-  <?php echo label_for('npantpre[observacion]', __($labels['npantpre{observacion}']), 'class="required" ') ?>
+    <?php echo label_for('npantpre[observacion]', __($labels['npantpre{observacion}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npantpre{observacion}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npantpre{observacion}')): ?>
     <?php echo form_error('npantpre{observacion}', array('class' => 'form-error-msg')) ?>
@@ -104,9 +102,11 @@
   'size' => '80x4',
   'control_name' => 'npantpre[observacion]',
 )); echo $value ? $value : '&nbsp;' ?>
-    <br><br>
 
 </div>
+
+
+
 </fieldset>
 
 <?php include_partial('edit_actions', array('npantpre' => $npantpre)) ?>
