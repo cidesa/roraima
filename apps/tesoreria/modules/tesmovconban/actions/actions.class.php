@@ -85,7 +85,7 @@ class tesmovconbanActions extends autotesmovconbanActions
 				Tesoreria::hacer_Banco_No_Libro($nro,$mes,$ano,$fechas);
 				Tesoreria::hacer_No_Conciliables($nro,$mes,$ano,$fechas);
 				$this->setFlash('notice', 'La Conciliación fué Realizada Exitosamente');
-			}
+			}else $this->setFlash('notice', 'La Conciliación ya fue realizada');
 	   }
 	   else
 	   {
