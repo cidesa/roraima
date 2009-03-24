@@ -16,7 +16,7 @@ compras:
     imagenes:
       default: OperatorClass.png
   menu:
-    Contratistas de Bienes o Servicio y Cooperativas:
+    Definiciones
       Definición de Grupos de Recaudos:                       AlmTipRecPro
       Definición de Recaudos:                                 AlmRegRec
       Registro de Contratistas de Bienes o Servicio y Cooperativas:                  AlmRegPro
