@@ -740,13 +740,14 @@ public static function Validar_Vacdefgen($grid)
                 }
                    	$dato1=$m->getCodconvac();
                	   	$dato2=$m->getCodconuti();
+               	   	$datocodnom=$m->getCodnomvac();
                	   	$k=0;
                	   	foreach ($z as $n)
                	   	{  if ($val<>-1)
                        {
                 	       break;
                        }
-               	    if (($dato1==$n->getCodconvac() || $dato2==$n->getCodconvac() || $dato1==$n->getCodconuti() ||$dato2==$n->getCodconuti())  and $k!=$j)
+               	    if (($dato1==$n->getCodconvac() || $dato2==$n->getCodconvac() || $dato1==$n->getCodconuti() ||$dato2==$n->getCodconuti())  and  $datocodnom==$n->getCodnomvac()  and $k!=$j)
                	     {
                	     	$val=410;
                	     	break;
