@@ -12,7 +12,7 @@ class Npasiconemp extends BaseNpasiconemp
 
    private $check = '';
    private $status = '';
-   private $codnom = '';
+   protected $codnom = '';
    protected $codnom2='';
 
 
@@ -24,6 +24,12 @@ class Npasiconemp extends BaseNpasiconemp
 		$nomina = NpasiconnomPeer::doSelectone($c);
 		if ($nomina)
 			$this->codnom2 = $nomina->getCodnom();
+	    $c = new Criteria();
+		$c->add(NpdefmovPeer::CODCON,self::getCodcon());
+		$c->addJoin(NpnominaPeer::CODNOM,NpdefmovPeer::CODNOM);
+		$nomnom = NpnominaPeer::doSelectone($c);
+		if ($nomnom)
+		   $this->codnom = $nomnom->getCodnom();
    }
 
 
@@ -64,23 +70,12 @@ class Npasiconemp extends BaseNpasiconemp
 		return ' ';
 	}
 
-	public function getCodnom()
-	{
-		$c = new Criteria();
-		$c->add(NpdefmovPeer::CODCON,self::getCodcon());
-		$c->addJoin(NpnominaPeer::CODNOM,NpdefmovPeer::CODNOM);
-		$nomnom = NpnominaPeer::doSelectone($c);
-		if ($nomnom)
-		return $nomnom->getCodnom();
-		else
-		return ' ';
-	}
+
 
 	public function getNomnom()
 	{
 		$c = new Criteria();
-		//$c->add(NpdefmovPeer::CODCON,self::getCodcon());
-		$c->add(NpnominaPeer::CODNOM,self::getCodnom());
+		$c->add(NpnominaPeer::CODNOM,$this->codnom);
 		$nomnom = NpnominaPeer::doSelectone($c);
 		if ($nomnom)
 		return $nomnom->getNomnom();
