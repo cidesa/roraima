@@ -21,13 +21,11 @@ generator:
       max_per_page:	  10
       object_actions:
         _edit:        ~
-        _delete:      ~
-
+      actions:
+        _create:    NONE
     edit:
       title:          Movimientos por Concepto
       display:        [codcon, codemp, nomemp, codcar, nomcar, monto, cantidad]
       actions:
         _list:        ~
         _save:        ~
-        _delete:      ~
-        _create:      ~

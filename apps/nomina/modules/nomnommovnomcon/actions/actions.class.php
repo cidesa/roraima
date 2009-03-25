@@ -20,29 +20,10 @@ class nomnommovnomconActions extends autonomnommovnomconActions
     $this->filters = $this->getUser()->getAttributeHolder()->getAll('sf_admin/npasiconemp/filters');
 
     // pager
-    $this->pager = new sfPropelPager('Npasiconemp', 10);
+    $this->pager = new sfPropelPager('Npasiconnom', 10);
     $c = new Criteria();
     $c->addJoin(NpasiconnomPeer::CODCON,NpasiconempPeer::CODCON);
     $c->setDistinct();
-    /*$c->addSelectColumn(NpasiconnomPeer::CODNOM);
-    $c->addSelectColumn(NpasiconnomPeer::CODCON);
-    $c->addSelectColumn("'' AS FRECON");
-    $c->addSelectColumn("'' AS ACTIVO");
-    $c->addSelectColumn("max(ID) AS ID");
-    $c->addGroupByColumn(NpasiconnomPeer::CODNOM);
-    $c->addGroupByColumn(NpasiconnomPeer::CODCON); */
-    /*$c->addSelectColumn("'' AS NOMCON");
-    $c->addSelectColumn("'' AS NOMCAR");
-    $c->addSelectColumn("0 AS CANTIDAD");
-    $c->addSelectColumn("0 AS MONTO");
-    $c->addSelectColumn("'yyyy-mm-dd' AS FECINI");
-    $c->addSelectColumn("'yyyy-mm-dd' AS FECEXP");
-    $c->addSelectColumn("'' AS FRECON");
-    $c->addSelectColumn("'' AS ASIDED");
-    $c->addSelectColumn("'' AS ACUCON");
-    $c->addSelectColumn("'' AS CALCON");
-    $c->addSelectColumn("'' AS ACTIVO");
-    $c->addSelectColumn("0 AS ACUMULADO"); */
     $this->addSortCriteria($c);
     $this->addFiltersCriteria($c);
     $this->pager->setCriteria($c);
@@ -133,12 +114,13 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 		$opciones->setFilas($filas_arreglo);
 		$opciones->setTabla('Npasiconemp');
 		$opciones->setName('a');
-		$opciones->setAnchoGrid(800);
+		$opciones->setAnchoGrid(700);
+		$opciones->setAncho(700);
 		$opciones->setTitulo('Empleados');
 		$opciones->setHTMLTotalFilas(' ');
 
 		// Se generan las columnas
-		$col1 = new Columna('Cód Emp');
+		$col1 = new Columna('Cód. Emp');
 		$col1->setTipo(Columna::TEXTO);
 		$col1->setAlineacionObjeto(Columna::CENTRO);
 		$col1->setAlineacionContenido(Columna::CENTRO);
@@ -152,7 +134,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 		$col2->setAlineacionObjeto(Columna::IZQUIERDA);
 		$col2->setAlineacionContenido(Columna::IZQUIERDA);
 		$col2->setNombreCampo('nomemp');
-		$col2->setHTML('type="text" size="30" readonly=true');
+		$col2->setHTML('type="text" size="40" readonly=true');
 
 		$col3 = new Columna('Monto');
 		$col3->setTipo(Columna::MONTO);
@@ -183,7 +165,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 
 
 
-  protected function getNpasiconempOrCreate($id = 'id')
+  protected function getNpasiconempOrCreate($id = 'id', $codcon = 'codcon', $codnom= 'codnom')
   {
     if (!$this->getRequestParameter($id))
     {
@@ -193,8 +175,16 @@ class nomnommovnomconActions extends autonomnommovnomconActions
     }
     else
     {
-      $npasiconemp = NpasiconempPeer::retrieveByPk($this->getRequestParameter($id));
+
+      $c = new Criteria();
+ 	  $c->add(NpasiconempPeer::CODCON,$this->getRequestParameter($codcon));
+  	  $npasiconemp = NpasiconempPeer::doSelectOne($c);
+  	  if (!$npasiconemp) $npasiconemp = new Npasiconemp();
+  	  $nomina=$this->getRequestParameter($codnom);
+      if ($nomina=="") $nomina=Herramientas::getX('CODCON','Npasiconnom','Codnom',$npasiconemp->getCodcon());
+      $npasiconemp->setCodnom($nomina);
       $this->configGrid($npasiconemp->getCodnom(),$npasiconemp->getCodcon());
+
 
       $this->forward404Unless($npasiconemp);
     }
@@ -235,6 +225,7 @@ class nomnommovnomconActions extends autonomnommovnomconActions
 	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
 	Nomina::salvarNomnommovnomcon($npasiconemp,$grid);
   }
+
 
 
 }
