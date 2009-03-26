@@ -200,7 +200,7 @@ $this->Bitacora('Guardo');
 		$col3->setAlineacionObjeto(Columna::CENTRO);
 		$col3->setAlineacionContenido(Columna::CENTRO);
 		$col3->setNombreCampo('diasdisfutar');
-		$col3->setHTML('type="text" size="10"');
+		$col3->setHTML('type="text" size="10" readonly= true');
 		$col3->setJScript('onBlur="javascript:event.keyCode=13; enternumero(event,this.id); calcular_dias(this.id);"');
 
 		$col4 = new Columna('Días Disfrutados');
