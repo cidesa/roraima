@@ -2052,6 +2052,28 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
 
   }
 
+  public static function getNextvalSecuencia($seq){
+
+    $result=array();
+
+    $sql="SELECT nextval('".$seq."') as val;";
+
+    if(Herramientas::BuscarDatos($sql,&$result)){
+      return $result[0]['val'];
+    }else return 0;
+
+  }
+
+
+  public static function ValidarGrid($grid)
+  {
+    $x = $grid[0];
+    if (empty($x))
+    {
+      return 4;
+    }
+      return -1;
+  }
 }
 
 class H extends Herramientas
