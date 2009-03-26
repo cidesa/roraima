@@ -268,9 +268,19 @@ class almordcomActions extends autoalmordcomActions
 
   public function executeAjaxcompromiso()
   {
-        $this->getUser()->getAttributeHolder()->remove('genero_compromiso');
+    $this->getUser()->getAttributeHolder()->remove('genero_compromiso');
     $this->getUser()->setAttribute('genero_compromiso', 'S');
-    //print $this->getUser()->getAttribute('genero_compromiso');
+
+    $this->caordcom = $this->getCaordcomOrCreate();
+    $this->updateCaordcomFromRequest();
+    Orden_compra::Grabar_compromiso($this->caordcom);
+
+    $msj="Se genero el Compromiso satisfactoriamente";
+
+    $javascript="alert('".$msj."')";
+    $output = '[["javascript","'.$javascript.'",""]]';
+
+    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
 
@@ -1626,8 +1636,16 @@ class almordcomActions extends autoalmordcomActions
           $this->getUser()->getAttributeHolder()->remove('credito');
           $this->getUser()->getAttributeHolder()->remove('grid');
 
-        Tesoreria::Salvarconfincomgen($numcom,$feccom,$descom,$debito,$credito);
-        Tesoreria::Salvar_asientosconfincomgen($numcom,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$this->getUser()->getAttribute('formulario')));
+          $reftra = $caordcom->getOrdcom();
+
+          Tesoreria::Salvarconfincomgen($numcom,$feccom,$descom,$debito,$credito);
+          Tesoreria::Salvar_asientosconfincomgen($numcom,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$this->getUser()->getAttribute('formulario')));
+          $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+          //$caordcom->setNumcom($numcom);
+          //$caordcom->save();
+
+          //Tesoreria::Salvarconfincomgen($numcom,$feccom,$descom,$debito,$credito);
+          //Tesoreria::Salvar_asientosconfincomgen($numcom,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$this->getUser()->getAttribute('formulario')));
       }
       return $coderror;
   }//  if (Orden_compra::Salvar($caordcom,$arreglo_arreglo,$arreglo_objetos,$arreglo_campos))

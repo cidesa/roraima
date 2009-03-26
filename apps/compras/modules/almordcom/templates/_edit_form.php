@@ -302,12 +302,9 @@ else
 <? if (($caordcom->getId()!='') and ($aprobacion=='S')) { ?>
 &nbsp;&nbsp;&nbsp;&nbsp;
 <?php echo submit_to_remote('Submit2', 'Generar Compromiso', array(
-         'update'   => 'comp',
-         'before'   => 'var variable=document.getElementById("caordcom_ordcom").value;i=0;while (i<8){ variable=variable.replace("#","-");i++;}',
          'url'      => 'almordcom/ajaxcompromiso',
          'script'   => true,
-         'complete' => 'AjaxJSON(request, json)',
-      'with' => "'formulario=sf_admin/almordcom/confincomgen'+'&reftra='+variable")) ?>
+         'complete' => 'AjaxJSON(request, json)' )) ?>
 
 <? }?>
 
