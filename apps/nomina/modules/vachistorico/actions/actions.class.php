@@ -97,7 +97,7 @@ class vachistoricoActions extends autovachistoricoActions
     $col3->setAlineacionObjeto(Columna::CENTRO);
     $col3->setAlineacionContenido(Columna::CENTRO);
     $col3->setJScript('onBlur="javascript:event.keyCode=13; enternumero(event,this.id); calcular_dias(this.id)"');
-    $col3->setHTML('type="text" size="8" ' );
+    $col3->setHTML('type="text" size="8" readonly= true' );
 
     $col4 = new Columna('Dias disfrutados');
     $col4->setTipo(Columna::TEXTO);
