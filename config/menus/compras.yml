@@ -17,7 +17,7 @@ compras:
       default: OperatorClass.png
   menu:
     Definiciones:
-      Definiciones de Almacen:                                 AlmDefAlm
+      Definiciones de Almacen:                                AlmDefAlm
       Definición de Artículos:                                AlmDefArt
       Definición de Ubicaciones:                              AlmDefUbi
       Definición de Grupos de Recaudos:                       AlmTipRecPro
@@ -30,7 +30,7 @@ compras:
       Definición de Tipos de Entrada:                         AlmTipEnt
       Definición de Tipos de Salida:                          AlmTipSal
       Definición de Tipo de Proyecto:                         almtippro
-    Artículos: 
+    Artículos:
       Ramos de Artículos:                                     AlmRamArt
       Registro de Artículos y+o Servicios:                    AlmRegArt
       Registro de Recargos:                                   AlmRegRgo
