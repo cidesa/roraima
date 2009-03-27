@@ -122,7 +122,7 @@
   <?php $value = object_input_tag($carcpart, 'getCodpro', array (
   'size' => 20,
   'control_name' => 'carcpart[codpro]',
-  'maxlength' => 10,
+  'maxlength' => 20,
   'readonly' => true,
 )); echo $value ? $value : '&nbsp;' ?>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
