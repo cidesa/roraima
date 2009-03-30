@@ -695,7 +695,7 @@ class almordcomActions extends autoalmordcomActions
       if (Herramientas::getX_vacio('ordcom','Caartord','ordcom',$ordcom)!='')
         $filas_arreglo=0;
       else
-        $filas_arreglo=150;
+        $filas_arreglo=50;
     }
     elseif ($referencia==1)
     {
@@ -1325,7 +1325,7 @@ class almordcomActions extends autoalmordcomActions
     $c = new Criteria();
     $c->add(CaresordcomPeer::ORDCOM,$ordcom);
     $per4 = CaresordcomPeer::doSelect($c);
-    $filas_arreglo=150;
+    $filas_arreglo=50;
 
     $mascaraarticulo=$this->mascaraarticulo;
     $formatocategoria=$this->formatocategoria;
@@ -1439,7 +1439,7 @@ class almordcomActions extends autoalmordcomActions
     $opciones = new OpcionesGrid();
     // Se configuran las opciones globales del Grid
     $opciones->setEliminar(false);
-    $opciones->setFilas(150);
+    $opciones->setFilas(50);
     $opciones->setTabla('Caartord');
     $opciones->setName('z');
     $opciones->setAncho(600);
@@ -1497,7 +1497,7 @@ class almordcomActions extends autoalmordcomActions
     $c = new Criteria();
     $c->add(CaartfecPeer::ORDCOM,$ordcom);
     $per5 = CaartfecPeer::doSelect($c);
-    $filas_arreglo=150;
+    $filas_arreglo=50;
 
     $mascaraarticulo=$this->mascaraarticulo;
     $formatocategoria=$this->formatocategoria;
