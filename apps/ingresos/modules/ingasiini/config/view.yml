@@ -1,0 +1,34 @@
+default:
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Ingresos
+    robots:       modulo, ingresos
+    description:  Módulo de Ingresos
+    keywords:     Módulo, Ingresos
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, ajax, ingresos/ingasiini ]
+
+  has_layout:     on
+  layout:         layout
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Módulo Ingresos
+    robots:       modulo, ingresos
+    description:  Módulo de Ingresos
+    keywords:     Módulo, Ingresos
+    language:     en
+
+  stylesheets:    [main]
+
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, ajax, ingresos/ingasiini ]
+
+  has_layout:     on
+  layout:         layout

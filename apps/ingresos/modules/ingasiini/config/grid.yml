@@ -1,0 +1,44 @@
+opciones:                  # Opciones generales
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                true
+  tabla:                   ciasiini
+  ancho:                   500
+  anchogrid:               550
+  filas:                   2
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Período
+  tipo:                    t
+  nombrecampo:             perpre
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monasi
+  esgrabable:			   true
+  html:                    []
+
+  name:                    a
+  eliminar:                true
+  tabla:                   ciasiini
+  ancho:                   500
+  anchogrid:               550
+  filas:                   2
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Período
+  tipo:                    t
+  nombrecampo:             perpre
+  esgrabable:			   true
+  html:                    []
+2:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  nombrecampo:             monasi
+  esgrabable:			   true
+  html:                    []
+
