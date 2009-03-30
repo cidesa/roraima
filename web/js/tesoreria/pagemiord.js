@@ -1763,7 +1763,7 @@
 
    if ($('elislr').value==0)
    {
-     alert('No hay Retención de I.S.L.R');
+     alert('No hay Retenciï¿½n de I.S.L.R');
      $(id).checked=false;
    }
    else
@@ -1985,7 +1985,7 @@
 
      if (!validarnumero(id))
      {
-       alert('Monto Inválido');
+       alert('Monto Invï¿½lido');
        $(id).value="0,00";
      }
 
@@ -2004,7 +2004,7 @@
     }
     var am=totalregistros('ex',1,10);
     var filas=parseInt($('numgridret').value);
-    var bm=totalregistros('dx',1,filas);
+    var bm=totalregistros('dx',2,filas);
     if (($('id').value=='' && am!=0) || ($('id').value!='' && bm!=0))
     {
     if ($(alic).value!="")
@@ -2109,26 +2109,26 @@
 
   if (codpresu_repetido(id))
   {
-  alert('El Código Presupuestario se encuentra repetido');
+  alert('El Cï¿½digo Presupuestario se encuentra repetido');
   $(id).value="";
   }
   else
   {
    if ($('noexiste').value=='N' &&  $(id).value!="")
    {
-      alert('El Código Presupuestario no Existe');
+      alert('El Cï¿½digo Presupuestario no Existe');
     $(id).value="";
     $(iva).value="";
    }
    else if ($('nonivel').value=='N' &&  $(id).value!="")
    {
-      alert('El Código Presupuestario no es de Último Nivel');
+      alert('El Cï¿½digo Presupuestario no es de ï¿½ltimo Nivel');
     $(id).value="";
     $(iva).value="";
    }
    else if ($('noasigna').value=='N' &&  $(id).value!="")
    {
-      alert('El Código Presupuestario no tiene Asignación Inicial');
+      alert('El Cï¿½digo Presupuestario no tiene Asignaciï¿½n Inicial');
     $(id).value="";
     $(iva).value="";
    }
@@ -2181,7 +2181,7 @@
 
    if ($('errormonto').value=='512' && $(id).value!="0,00")
    {
-      alert('El Titulo Presupuestario no tiene Asignación Inicial');
+      alert('El Titulo Presupuestario no tiene Asignaciï¿½n Inicial');
     $(id).value="0,00";
     sumardatosgrid2(e);
 
@@ -2459,7 +2459,7 @@ function ajaxretenciones(e,id)
 
    if ($('errormonto').value=='512')
    {
-    alert('El Titulo Presupuestario no tiene Asignación Inicial');
+    alert('El Titulo Presupuestario no tiene Asignaciï¿½n Inicial');
    }
   }
 
@@ -2486,7 +2486,7 @@ function ajaxretenciones(e,id)
   {
     if ($('refcomv').value!="")
     {
-      if(confirm("Se Generara la Orden de Pago para la Valuación de  "+$('refcomv').value)+" Correspondiente al Contrato "+$('tipcon').value)
+      if(confirm("Se Generara la Orden de Pago para la Valuaciï¿½n de  "+$('refcomv').value)+" Correspondiente al Contrato "+$('tipcon').value)
       {
         var monval=$('monval').value;
         var refcom=$('refcomv').value;
