@@ -49,6 +49,18 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 
 
 	
+	protected $pricar;
+
+
+	
+	protected $canhom;
+
+
+	
+	protected $canmuj;
+
+
+	
 	protected $id;
 
 	
@@ -134,6 +146,30 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
   {
 
     return trim($this->codtip);
+
+  }
+  
+  public function getPricar($val=false)
+  {
+
+    if($val) return number_format($this->pricar,2,',','.');
+    else return $this->pricar;
+
+  }
+  
+  public function getCanhom($val=false)
+  {
+
+    if($val) return number_format($this->canhom,2,',','.');
+    else return $this->canhom;
+
+  }
+  
+  public function getCanmuj($val=false)
+  {
+
+    if($val) return number_format($this->canmuj,2,',','.');
+    else return $this->canmuj;
 
   }
   
@@ -244,6 +280,36 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setPricar($v)
+	{
+
+    if ($this->pricar !== $v) {
+        $this->pricar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosPeer::PRICAR;
+      }
+  
+	} 
+	
+	public function setCanhom($v)
+	{
+
+    if ($this->canhom !== $v) {
+        $this->canhom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosPeer::CANHOM;
+      }
+  
+	} 
+	
+	public function setCanmuj($v)
+	{
+
+    if ($this->canmuj !== $v) {
+        $this->canmuj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = NpcargosPeer::CANMUJ;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -278,7 +344,13 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 
       $this->codtip = $rs->getString($startcol + 9);
 
-      $this->id = $rs->getInt($startcol + 10);
+      $this->pricar = $rs->getFloat($startcol + 10);
+
+      $this->canhom = $rs->getFloat($startcol + 11);
+
+      $this->canmuj = $rs->getFloat($startcol + 12);
+
+      $this->id = $rs->getInt($startcol + 13);
 
       $this->resetModified();
 
@@ -286,7 +358,7 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 11; 
+            return $startcol + 14; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Npcargos object", $e);
     }
@@ -480,6 +552,15 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 				return $this->getCodtip();
 				break;
 			case 10:
+				return $this->getPricar();
+				break;
+			case 11:
+				return $this->getCanhom();
+				break;
+			case 12:
+				return $this->getCanmuj();
+				break;
+			case 13:
 				return $this->getId();
 				break;
 			default:
@@ -502,7 +583,10 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 			$keys[7] => $this->getComcar(),
 			$keys[8] => $this->getPasocp(),
 			$keys[9] => $this->getCodtip(),
-			$keys[10] => $this->getId(),
+			$keys[10] => $this->getPricar(),
+			$keys[11] => $this->getCanhom(),
+			$keys[12] => $this->getCanmuj(),
+			$keys[13] => $this->getId(),
 		);
 		return $result;
 	}
@@ -549,6 +633,15 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 				$this->setCodtip($value);
 				break;
 			case 10:
+				$this->setPricar($value);
+				break;
+			case 11:
+				$this->setCanhom($value);
+				break;
+			case 12:
+				$this->setCanmuj($value);
+				break;
+			case 13:
 				$this->setId($value);
 				break;
 		} 	}
@@ -568,7 +661,10 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[7], $arr)) $this->setComcar($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setPasocp($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setCodtip($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
+		if (array_key_exists($keys[10], $arr)) $this->setPricar($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCanhom($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCanmuj($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
 	}
 
 	
@@ -586,6 +682,9 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpcargosPeer::COMCAR)) $criteria->add(NpcargosPeer::COMCAR, $this->comcar);
 		if ($this->isColumnModified(NpcargosPeer::PASOCP)) $criteria->add(NpcargosPeer::PASOCP, $this->pasocp);
 		if ($this->isColumnModified(NpcargosPeer::CODTIP)) $criteria->add(NpcargosPeer::CODTIP, $this->codtip);
+		if ($this->isColumnModified(NpcargosPeer::PRICAR)) $criteria->add(NpcargosPeer::PRICAR, $this->pricar);
+		if ($this->isColumnModified(NpcargosPeer::CANHOM)) $criteria->add(NpcargosPeer::CANHOM, $this->canhom);
+		if ($this->isColumnModified(NpcargosPeer::CANMUJ)) $criteria->add(NpcargosPeer::CANMUJ, $this->canmuj);
 		if ($this->isColumnModified(NpcargosPeer::ID)) $criteria->add(NpcargosPeer::ID, $this->id);
 
 		return $criteria;
@@ -636,6 +735,12 @@ abstract class BaseNpcargos extends BaseObject  implements Persistent {
 		$copyObj->setPasocp($this->pasocp);
 
 		$copyObj->setCodtip($this->codtip);
+
+		$copyObj->setPricar($this->pricar);
+
+		$copyObj->setCanhom($this->canhom);
+
+		$copyObj->setCanmuj($this->canmuj);
 
 
 		if ($deepCopy) {

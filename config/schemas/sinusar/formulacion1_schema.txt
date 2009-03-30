@@ -250,47 +250,6 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-  forcargos:
-    #_attributes:
-      #idMethod: native
-    codcar:
-      type: VARCHAR
-      size: 16
-      required: true
-    nomcar:
-      type: VARCHAR
-      size: 50
-      required: true
-    suecar:
-      type: NUMERIC
-      size: 14
-      scale: 2
-      required: true
-    stacar:
-      type: VARCHAR
-      size: 1
-      required: true
-    codocp:
-      type: VARCHAR
-      size: 10
-    punmin:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    graocp:
-      type: VARCHAR
-      size: 3
-    comcar:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    pasocp:
-      type: VARCHAR
-      size: 3
-    id:
-      type: INTEGER
-      required: true
-      autoIncrement: true
   forcarocp:
     #_attributes:
       #idMethod: native

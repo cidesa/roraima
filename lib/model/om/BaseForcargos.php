@@ -45,7 +45,29 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 
 
 	
+	protected $codtip;
+
+
+	
+	protected $pricar;
+
+
+	
+	protected $canhom;
+
+
+	
+	protected $canmuj;
+
+
+	
 	protected $id;
+
+	
+	protected $collForprocars;
+
+	
+	protected $lastForprocarCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -117,6 +139,37 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
   {
 
     return trim($this->pasocp);
+
+  }
+  
+  public function getCodtip()
+  {
+
+    return trim($this->codtip);
+
+  }
+  
+  public function getPricar($val=false)
+  {
+
+    if($val) return number_format($this->pricar,2,',','.');
+    else return $this->pricar;
+
+  }
+  
+  public function getCanhom($val=false)
+  {
+
+    if($val) return number_format($this->canhom,2,',','.');
+    else return $this->canhom;
+
+  }
+  
+  public function getCanmuj($val=false)
+  {
+
+    if($val) return number_format($this->canmuj,2,',','.');
+    else return $this->canmuj;
 
   }
   
@@ -217,6 +270,46 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodtip($v)
+	{
+
+    if ($this->codtip !== $v) {
+        $this->codtip = $v;
+        $this->modifiedColumns[] = ForcargosPeer::CODTIP;
+      }
+  
+	} 
+	
+	public function setPricar($v)
+	{
+
+    if ($this->pricar !== $v) {
+        $this->pricar = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcargosPeer::PRICAR;
+      }
+  
+	} 
+	
+	public function setCanhom($v)
+	{
+
+    if ($this->canhom !== $v) {
+        $this->canhom = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcargosPeer::CANHOM;
+      }
+  
+	} 
+	
+	public function setCanmuj($v)
+	{
+
+    if ($this->canmuj !== $v) {
+        $this->canmuj = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = ForcargosPeer::CANMUJ;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -249,7 +342,15 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 
       $this->pasocp = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->codtip = $rs->getString($startcol + 9);
+
+      $this->pricar = $rs->getFloat($startcol + 10);
+
+      $this->canhom = $rs->getFloat($startcol + 11);
+
+      $this->canmuj = $rs->getFloat($startcol + 12);
+
+      $this->id = $rs->getInt($startcol + 13);
 
       $this->resetModified();
 
@@ -257,7 +358,7 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 14; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Forcargos object", $e);
     }
@@ -338,11 +439,20 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 				if ($this->isNew()) {
 					$pk = ForcargosPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForcargosPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collForprocars !== null) {
+				foreach($this->collForprocars as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -384,6 +494,14 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collForprocars !== null) {
+					foreach($this->collForprocars as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 
 			$this->alreadyInValidation = false;
@@ -431,6 +549,18 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 				return $this->getPasocp();
 				break;
 			case 9:
+				return $this->getCodtip();
+				break;
+			case 10:
+				return $this->getPricar();
+				break;
+			case 11:
+				return $this->getCanhom();
+				break;
+			case 12:
+				return $this->getCanmuj();
+				break;
+			case 13:
 				return $this->getId();
 				break;
 			default:
@@ -452,7 +582,11 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 			$keys[6] => $this->getGraocp(),
 			$keys[7] => $this->getComcar(),
 			$keys[8] => $this->getPasocp(),
-			$keys[9] => $this->getId(),
+			$keys[9] => $this->getCodtip(),
+			$keys[10] => $this->getPricar(),
+			$keys[11] => $this->getCanhom(),
+			$keys[12] => $this->getCanmuj(),
+			$keys[13] => $this->getId(),
 		);
 		return $result;
 	}
@@ -496,6 +630,18 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 				$this->setPasocp($value);
 				break;
 			case 9:
+				$this->setCodtip($value);
+				break;
+			case 10:
+				$this->setPricar($value);
+				break;
+			case 11:
+				$this->setCanhom($value);
+				break;
+			case 12:
+				$this->setCanmuj($value);
+				break;
+			case 13:
 				$this->setId($value);
 				break;
 		} 	}
@@ -514,7 +660,11 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setGraocp($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setComcar($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setPasocp($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setCodtip($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setPricar($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCanhom($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setCanmuj($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setId($arr[$keys[13]]);
 	}
 
 	
@@ -531,6 +681,10 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(ForcargosPeer::GRAOCP)) $criteria->add(ForcargosPeer::GRAOCP, $this->graocp);
 		if ($this->isColumnModified(ForcargosPeer::COMCAR)) $criteria->add(ForcargosPeer::COMCAR, $this->comcar);
 		if ($this->isColumnModified(ForcargosPeer::PASOCP)) $criteria->add(ForcargosPeer::PASOCP, $this->pasocp);
+		if ($this->isColumnModified(ForcargosPeer::CODTIP)) $criteria->add(ForcargosPeer::CODTIP, $this->codtip);
+		if ($this->isColumnModified(ForcargosPeer::PRICAR)) $criteria->add(ForcargosPeer::PRICAR, $this->pricar);
+		if ($this->isColumnModified(ForcargosPeer::CANHOM)) $criteria->add(ForcargosPeer::CANHOM, $this->canhom);
+		if ($this->isColumnModified(ForcargosPeer::CANMUJ)) $criteria->add(ForcargosPeer::CANMUJ, $this->canmuj);
 		if ($this->isColumnModified(ForcargosPeer::ID)) $criteria->add(ForcargosPeer::ID, $this->id);
 
 		return $criteria;
@@ -580,6 +734,23 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 
 		$copyObj->setPasocp($this->pasocp);
 
+		$copyObj->setCodtip($this->codtip);
+
+		$copyObj->setPricar($this->pricar);
+
+		$copyObj->setCanhom($this->canhom);
+
+		$copyObj->setCanmuj($this->canmuj);
+
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getForprocars() as $relObj) {
+				$copyObj->addForprocar($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -602,6 +773,111 @@ abstract class BaseForcargos extends BaseObject  implements Persistent {
 			self::$peer = new ForcargosPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initForprocars()
+	{
+		if ($this->collForprocars === null) {
+			$this->collForprocars = array();
+		}
+	}
+
+	
+	public function getForprocars($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseForprocarPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collForprocars === null) {
+			if ($this->isNew()) {
+			   $this->collForprocars = array();
+			} else {
+
+				$criteria->add(ForprocarPeer::CODCAR, $this->getCodcar());
+
+				ForprocarPeer::addSelectColumns($criteria);
+				$this->collForprocars = ForprocarPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(ForprocarPeer::CODCAR, $this->getCodcar());
+
+				ForprocarPeer::addSelectColumns($criteria);
+				if (!isset($this->lastForprocarCriteria) || !$this->lastForprocarCriteria->equals($criteria)) {
+					$this->collForprocars = ForprocarPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastForprocarCriteria = $criteria;
+		return $this->collForprocars;
+	}
+
+	
+	public function countForprocars($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseForprocarPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(ForprocarPeer::CODCAR, $this->getCodcar());
+
+		return ForprocarPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addForprocar(Forprocar $l)
+	{
+		$this->collForprocars[] = $l;
+		$l->setForcargos($this);
+	}
+
+
+	
+	public function getForprocarsJoinNpprofesion($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseForprocarPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collForprocars === null) {
+			if ($this->isNew()) {
+				$this->collForprocars = array();
+			} else {
+
+				$criteria->add(ForprocarPeer::CODCAR, $this->getCodcar());
+
+				$this->collForprocars = ForprocarPeer::doSelectJoinNpprofesion($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(ForprocarPeer::CODCAR, $this->getCodcar());
+
+			if (!isset($this->lastForprocarCriteria) || !$this->lastForprocarCriteria->equals($criteria)) {
+				$this->collForprocars = ForprocarPeer::doSelectJoinNpprofesion($criteria, $con);
+			}
+		}
+		$this->lastForprocarCriteria = $criteria;
+
+		return $this->collForprocars;
 	}
 
 } 

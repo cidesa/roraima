@@ -13,7 +13,7 @@ abstract class BaseForcargosPeer {
 	const CLASS_DEFAULT = 'lib.model.Forcargos';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -47,6 +47,18 @@ abstract class BaseForcargosPeer {
 	const PASOCP = 'forcargos.PASOCP';
 
 	
+	const CODTIP = 'forcargos.CODTIP';
+
+	
+	const PRICAR = 'forcargos.PRICAR';
+
+	
+	const CANHOM = 'forcargos.CANHOM';
+
+	
+	const CANMUJ = 'forcargos.CANMUJ';
+
+	
 	const ID = 'forcargos.ID';
 
 	
@@ -55,18 +67,18 @@ abstract class BaseForcargosPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcar', 'Nomcar', 'Suecar', 'Stacar', 'Codocp', 'Punmin', 'Graocp', 'Comcar', 'Pasocp', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ForcargosPeer::CODCAR, ForcargosPeer::NOMCAR, ForcargosPeer::SUECAR, ForcargosPeer::STACAR, ForcargosPeer::CODOCP, ForcargosPeer::PUNMIN, ForcargosPeer::GRAOCP, ForcargosPeer::COMCAR, ForcargosPeer::PASOCP, ForcargosPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcar', 'nomcar', 'suecar', 'stacar', 'codocp', 'punmin', 'graocp', 'comcar', 'pasocp', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codcar', 'Nomcar', 'Suecar', 'Stacar', 'Codocp', 'Punmin', 'Graocp', 'Comcar', 'Pasocp', 'Codtip', 'Pricar', 'Canhom', 'Canmuj', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ForcargosPeer::CODCAR, ForcargosPeer::NOMCAR, ForcargosPeer::SUECAR, ForcargosPeer::STACAR, ForcargosPeer::CODOCP, ForcargosPeer::PUNMIN, ForcargosPeer::GRAOCP, ForcargosPeer::COMCAR, ForcargosPeer::PASOCP, ForcargosPeer::CODTIP, ForcargosPeer::PRICAR, ForcargosPeer::CANHOM, ForcargosPeer::CANMUJ, ForcargosPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcar', 'nomcar', 'suecar', 'stacar', 'codocp', 'punmin', 'graocp', 'comcar', 'pasocp', 'codtip', 'pricar', 'canhom', 'canmuj', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codcar' => 0, 'Nomcar' => 1, 'Suecar' => 2, 'Stacar' => 3, 'Codocp' => 4, 'Punmin' => 5, 'Graocp' => 6, 'Comcar' => 7, 'Pasocp' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (ForcargosPeer::CODCAR => 0, ForcargosPeer::NOMCAR => 1, ForcargosPeer::SUECAR => 2, ForcargosPeer::STACAR => 3, ForcargosPeer::CODOCP => 4, ForcargosPeer::PUNMIN => 5, ForcargosPeer::GRAOCP => 6, ForcargosPeer::COMCAR => 7, ForcargosPeer::PASOCP => 8, ForcargosPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('codcar' => 0, 'nomcar' => 1, 'suecar' => 2, 'stacar' => 3, 'codocp' => 4, 'punmin' => 5, 'graocp' => 6, 'comcar' => 7, 'pasocp' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Codcar' => 0, 'Nomcar' => 1, 'Suecar' => 2, 'Stacar' => 3, 'Codocp' => 4, 'Punmin' => 5, 'Graocp' => 6, 'Comcar' => 7, 'Pasocp' => 8, 'Codtip' => 9, 'Pricar' => 10, 'Canhom' => 11, 'Canmuj' => 12, 'Id' => 13, ),
+		BasePeer::TYPE_COLNAME => array (ForcargosPeer::CODCAR => 0, ForcargosPeer::NOMCAR => 1, ForcargosPeer::SUECAR => 2, ForcargosPeer::STACAR => 3, ForcargosPeer::CODOCP => 4, ForcargosPeer::PUNMIN => 5, ForcargosPeer::GRAOCP => 6, ForcargosPeer::COMCAR => 7, ForcargosPeer::PASOCP => 8, ForcargosPeer::CODTIP => 9, ForcargosPeer::PRICAR => 10, ForcargosPeer::CANHOM => 11, ForcargosPeer::CANMUJ => 12, ForcargosPeer::ID => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('codcar' => 0, 'nomcar' => 1, 'suecar' => 2, 'stacar' => 3, 'codocp' => 4, 'punmin' => 5, 'graocp' => 6, 'comcar' => 7, 'pasocp' => 8, 'codtip' => 9, 'pricar' => 10, 'canhom' => 11, 'canmuj' => 12, 'id' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -137,6 +149,14 @@ abstract class BaseForcargosPeer {
 		$criteria->addSelectColumn(ForcargosPeer::COMCAR);
 
 		$criteria->addSelectColumn(ForcargosPeer::PASOCP);
+
+		$criteria->addSelectColumn(ForcargosPeer::CODTIP);
+
+		$criteria->addSelectColumn(ForcargosPeer::PRICAR);
+
+		$criteria->addSelectColumn(ForcargosPeer::CANHOM);
+
+		$criteria->addSelectColumn(ForcargosPeer::CANMUJ);
 
 		$criteria->addSelectColumn(ForcargosPeer::ID);
 
@@ -240,6 +260,7 @@ abstract class BaseForcargosPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
+		$criteria->remove(ForcargosPeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 

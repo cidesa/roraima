@@ -1,7 +1,7 @@
 generator:
   class:              sfPropelAdminGenerator
   param:
-    model_class:      Npcargos
+    model_class:      Forcargos
     theme:            default
 
     fields:
@@ -29,8 +29,8 @@ generator:
         _delete:      ~
     edit:
       fields:
-        profecargo:                    { type: admin_double_list, params: through_class=Npprocar}
-      title:                           Edición de Cargos
+        profecargo:                    { type: admin_double_list, params: through_class=Forprocar}
+      title:                           Edición de Cargos Formulados
       display:                         [=codcar, nomcar, codtip, graocp, suecar, punmin, stacar, profecargo, comcar, pricar, canmuj, canhom]
       actions:
         _list:                 ~

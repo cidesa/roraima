@@ -9,4 +9,8 @@
  */ 
 class Forcargos extends BaseForcargos
 {
+	public function getNomtip()
+	{
+		return Herramientas::getX('codtipcar','Nptipcar','destipcar',self::getCodtip());
+	}
 }

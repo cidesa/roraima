@@ -9,15 +9,21 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 
 
 	
-	protected $codniv;
+	protected $codprofes;
 
 
 	
-	protected $desniv;
+	protected $codcar;
 
 
 	
 	protected $id;
+
+	
+	protected $aNpprofesion;
+
+	
+	protected $aForcargos;
 
 	
 	protected $alreadyInSave = false;
@@ -26,17 +32,17 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 	protected $alreadyInValidation = false;
 
   
-  public function getCodniv()
+  public function getCodprofes()
   {
 
-    return trim($this->codniv);
+    return trim($this->codprofes);
 
   }
   
-  public function getDesniv()
+  public function getCodcar()
   {
 
-    return trim($this->desniv);
+    return trim($this->codcar);
 
   }
   
@@ -47,24 +53,32 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 
   }
 	
-	public function setCodniv($v)
+	public function setCodprofes($v)
 	{
 
-    if ($this->codniv !== $v) {
-        $this->codniv = $v;
-        $this->modifiedColumns[] = ForprocarPeer::CODNIV;
+    if ($this->codprofes !== $v) {
+        $this->codprofes = $v;
+        $this->modifiedColumns[] = ForprocarPeer::CODPROFES;
       }
   
+		if ($this->aNpprofesion !== null && $this->aNpprofesion->getCodprofes() !== $v) {
+			$this->aNpprofesion = null;
+		}
+
 	} 
 	
-	public function setDesniv($v)
+	public function setCodcar($v)
 	{
 
-    if ($this->desniv !== $v) {
-        $this->desniv = $v;
-        $this->modifiedColumns[] = ForprocarPeer::DESNIV;
+    if ($this->codcar !== $v) {
+        $this->codcar = $v;
+        $this->modifiedColumns[] = ForprocarPeer::CODCAR;
       }
   
+		if ($this->aForcargos !== null && $this->aForcargos->getCodcar() !== $v) {
+			$this->aForcargos = null;
+		}
+
 	} 
 	
 	public function setId($v)
@@ -81,9 +95,9 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
   {
     try {
 
-      $this->codniv = $rs->getString($startcol + 0);
+      $this->codprofes = $rs->getString($startcol + 0);
 
-      $this->desniv = $rs->getString($startcol + 1);
+      $this->codcar = $rs->getString($startcol + 1);
 
       $this->id = $rs->getInt($startcol + 2);
 
@@ -170,10 +184,27 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aNpprofesion !== null) {
+				if ($this->aNpprofesion->isModified()) {
+					$affectedRows += $this->aNpprofesion->save($con);
+				}
+				$this->setNpprofesion($this->aNpprofesion);
+			}
+
+			if ($this->aForcargos !== null) {
+				if ($this->aForcargos->isModified()) {
+					$affectedRows += $this->aForcargos->save($con);
+				}
+				$this->setForcargos($this->aForcargos);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = ForprocarPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
+					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
 					$affectedRows += ForprocarPeer::doUpdate($this, $con);
@@ -216,6 +247,20 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
+												
+			if ($this->aNpprofesion !== null) {
+				if (!$this->aNpprofesion->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aNpprofesion->getValidationFailures());
+				}
+			}
+
+			if ($this->aForcargos !== null) {
+				if (!$this->aForcargos->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aForcargos->getValidationFailures());
+				}
+			}
+
+
 			if (($retval = ForprocarPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
@@ -240,10 +285,10 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				return $this->getCodniv();
+				return $this->getCodprofes();
 				break;
 			case 1:
-				return $this->getDesniv();
+				return $this->getCodcar();
 				break;
 			case 2:
 				return $this->getId();
@@ -258,8 +303,8 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 	{
 		$keys = ForprocarPeer::getFieldNames($keyType);
 		$result = array(
-			$keys[0] => $this->getCodniv(),
-			$keys[1] => $this->getDesniv(),
+			$keys[0] => $this->getCodprofes(),
+			$keys[1] => $this->getCodcar(),
 			$keys[2] => $this->getId(),
 		);
 		return $result;
@@ -277,10 +322,10 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 	{
 		switch($pos) {
 			case 0:
-				$this->setCodniv($value);
+				$this->setCodprofes($value);
 				break;
 			case 1:
-				$this->setDesniv($value);
+				$this->setCodcar($value);
 				break;
 			case 2:
 				$this->setId($value);
@@ -292,8 +337,8 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 	{
 		$keys = ForprocarPeer::getFieldNames($keyType);
 
-		if (array_key_exists($keys[0], $arr)) $this->setCodniv($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setDesniv($arr[$keys[1]]);
+		if (array_key_exists($keys[0], $arr)) $this->setCodprofes($arr[$keys[0]]);
+		if (array_key_exists($keys[1], $arr)) $this->setCodcar($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
 	}
 
@@ -302,8 +347,8 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 	{
 		$criteria = new Criteria(ForprocarPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(ForprocarPeer::CODNIV)) $criteria->add(ForprocarPeer::CODNIV, $this->codniv);
-		if ($this->isColumnModified(ForprocarPeer::DESNIV)) $criteria->add(ForprocarPeer::DESNIV, $this->desniv);
+		if ($this->isColumnModified(ForprocarPeer::CODPROFES)) $criteria->add(ForprocarPeer::CODPROFES, $this->codprofes);
+		if ($this->isColumnModified(ForprocarPeer::CODCAR)) $criteria->add(ForprocarPeer::CODCAR, $this->codcar);
 		if ($this->isColumnModified(ForprocarPeer::ID)) $criteria->add(ForprocarPeer::ID, $this->id);
 
 		return $criteria;
@@ -335,9 +380,9 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setCodniv($this->codniv);
+		$copyObj->setCodprofes($this->codprofes);
 
-		$copyObj->setDesniv($this->desniv);
+		$copyObj->setCodcar($this->codcar);
 
 
 		$copyObj->setNew(true);
@@ -361,6 +406,64 @@ abstract class BaseForprocar extends BaseObject  implements Persistent {
 			self::$peer = new ForprocarPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setNpprofesion($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodprofes(NULL);
+		} else {
+			$this->setCodprofes($v->getCodprofes());
+		}
+
+
+		$this->aNpprofesion = $v;
+	}
+
+
+	
+	public function getNpprofesion($con = null)
+	{
+		if ($this->aNpprofesion === null && (($this->codprofes !== "" && $this->codprofes !== null))) {
+						include_once 'lib/model/om/BaseNpprofesionPeer.php';
+
+			$this->aNpprofesion = NpprofesionPeer::retrieveByPK($this->codprofes, $con);
+
+			
+		}
+		return $this->aNpprofesion;
+	}
+
+	
+	public function setForcargos($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodcar(NULL);
+		} else {
+			$this->setCodcar($v->getCodcar());
+		}
+
+
+		$this->aForcargos = $v;
+	}
+
+
+	
+	public function getForcargos($con = null)
+	{
+		if ($this->aForcargos === null && (($this->codcar !== "" && $this->codcar !== null))) {
+						include_once 'lib/model/om/BaseForcargosPeer.php';
+
+			$this->aForcargos = ForcargosPeer::retrieveByPK($this->codcar, $con);
+
+			
+		}
+		return $this->aForcargos;
 	}
 
 } 

@@ -30,7 +30,9 @@ class ForcargosMapBuilder {
 		$tMap = $this->dbMap->addTable('forcargos');
 		$tMap->setPhpName('Forcargos');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
+
+		$tMap->setPrimaryKeyMethodInfo('forcargos_SEQ');
 
 		$tMap->addColumn('CODCAR', 'Codcar', 'string', CreoleTypes::VARCHAR, true, 16);
 
@@ -49,6 +51,14 @@ class ForcargosMapBuilder {
 		$tMap->addColumn('COMCAR', 'Comcar', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('PASOCP', 'Pasocp', 'string', CreoleTypes::VARCHAR, false, 3);
+
+		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, false, 3);
+
+		$tMap->addColumn('PRICAR', 'Pricar', 'double', CreoleTypes::NUMERIC, false, 20);
+
+		$tMap->addColumn('CANHOM', 'Canhom', 'double', CreoleTypes::NUMERIC, false, 6);
+
+		$tMap->addColumn('CANMUJ', 'Canmuj', 'double', CreoleTypes::NUMERIC, false, 6);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
