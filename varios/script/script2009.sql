@@ -471,3 +471,68 @@ ALTER TABLE caartord ALTER canord TYPE numeric(14,3);
 ALTER TABLE caresordcom ALTER canord TYPE numeric(14,3);
  
 ALTER TABLE caregart ALTER desart TYPE character varying(1500);
+
+--30/03/2009  Tabla para la forma nueva de formulacion forcargos que parte de npcargos
+
+ALTER TABLE "npcargos"
+--    ADD COLUMN "comcar" numeric(20,3), -- puede ser que este campo ya exista
+    ADD COLUMN "pricar" numeric(20,3),
+    ADD COLUMN "canmuj" numeric(6),    
+    ADD COLUMN "canhom" numeric(6);
+
+CREATE SEQUENCE forcargos_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE forcargos_seq OWNER TO postgres;
+
+
+--SI LA TABLA EXISTE Y ESTA VACIA APLICAR LA SIGUIENTE INSTRUCCION  en comentario
+--drop table forcargos;
+
+CREATE TABLE forcargos
+(
+  codcar character varying(16),
+  nomcar character varying(100),
+  suecar numeric(20,3),
+  stacar character varying(1),
+  codocp character varying(16),
+  punmin numeric(14,2),
+  graocp character varying(3),
+  comcar numeric(20,3),
+  pasocp character varying(3),
+  codtip character varying(3),
+  pricar numeric(20,3),
+  canmuj numeric(6),
+  canhom numeric(6),
+  id integer NOT NULL DEFAULT nextval('forcargos_seq'::regclass),
+  CONSTRAINT forcargos_pkey PRIMARY KEY (codcar),
+  CONSTRAINT forcargos_id_key UNIQUE (id)
+)
+WITH (OIDS=FALSE);
+ALTER TABLE forcargos OWNER TO postgres;
+
+
+CREATE SEQUENCE forprocar_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 2
+  CACHE 1;
+ALTER TABLE forprocar_seq OWNER TO postgres;
+
+
+CREATE TABLE forprocar
+(
+  codprofes character varying(4) NOT NULL,
+  codcar character varying(16) NOT NULL,
+  id integer NOT NULL DEFAULT nextval('forprocar_seq'::regclass),
+  CONSTRAINT "forprocar_FK_2" FOREIGN KEY (codcar)
+      REFERENCES forcargos (codcar) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT unique_forcargos_id UNIQUE (id)
+)
+WITH (OIDS=FALSE);
+ALTER TABLE forprocar OWNER TO postgres;

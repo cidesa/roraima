@@ -101,19 +101,84 @@
 
 <br>
 
-  <?php echo label_for('npcargos[suecar]', __($labels['npcargos{suecar}']), 'class="required" ') ?>
-  <div class="content<?php if ($sf_request->hasError('npcargos{suecar}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('npcargos{suecar}')): ?>
-    <?php echo form_error('npcargos{suecar}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($npcargos, array('getSuecar',true), array (
-  'size' => 7,
-  'maxlength' => 21,
-  'control_name' => 'npcargos[suecar]',
-  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
-)); echo $value ? $value : '&nbsp;' ?>
+<table>
+	<tr>
+		<td>
+			<?php echo label_for('npcargos[suecar]', __($labels['npcargos{suecar}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{suecar}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{suecar}')): ?>
+			    <?php echo form_error('npcargos{suecar}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php $value = object_input_tag($npcargos, array('getSuecar',true), array (
+			  'size' => 7,
+			  'maxlength' => 21,
+			  'control_name' => 'npcargos[suecar]',
+			  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+			)); echo $value ? $value : '&nbsp;' ?>
+			    </div>
+		</td>
+		<td>
+			<?php echo label_for('npcargos[comcar]', __($labels['npcargos{comcar}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{comcar}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{comcar}')): ?>
+			    <?php echo form_error('npcargos{comcar}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php $value = object_input_tag($npcargos, array('getComcar',true), array (
+			  'size' => 7,
+			  'maxlength' => 21,
+			  'control_name' => 'npcargos[comcar]',
+			  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+			)); echo $value ? $value : '&nbsp;' ?>
     </div>
+		</td>
+		<td>
+			<?php echo label_for('npcargos[pricar]', __($labels['npcargos{pricar}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{pricar}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{pricar}')): ?>
+			    <?php echo form_error('npcargos{pricar}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php $value = object_input_tag($npcargos, array('getPricar',true), array (
+			  'size' => 7,
+			  'maxlength' => 21,
+			  'control_name' => 'npcargos[pricar]',
+			  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
+			)); echo $value ? $value : '&nbsp;' ?>
+			    </div>
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			<?php echo label_for('npcargos[canmuj]', __($labels['npcargos{canmuj}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{canmuj}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{canmuj}')): ?>
+			    <?php echo form_error('npcargos{canmuj}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php $value = object_input_tag($npcargos, array('getCanmuj',true), array (
+			  'size' => 7,
+			  'maxlength' => 21,
+			  'control_name' => 'npcargos[canmuj]',
+			)); echo $value ? $value : '&nbsp;' ?>
+		</td>
+		<td><?php echo label_for('npcargos[canhom]', __($labels['npcargos{canhom}']), 'class="required" ') ?>
+			  <div class="content<?php if ($sf_request->hasError('npcargos{canhom}')): ?> form-error<?php endif; ?>">
+			  <?php if ($sf_request->hasError('npcargos{canhom}')): ?>
+			    <?php echo form_error('npcargos{canhom}', array('class' => 'form-error-msg')) ?>
+			  <?php endif; ?>
+			
+			  <?php $value = object_input_tag($npcargos, array('getCanhom',true), array (
+			  'size' => 7,
+			  'maxlength' => 21,
+			  'control_name' => 'npcargos[canhom]', 
+			)); echo $value ? $value : '&nbsp;'?> 
+		</td>			
+	</tr>
+</table>
+  
+
 
 <br>
 <table>

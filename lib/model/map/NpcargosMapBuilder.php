@@ -54,6 +54,12 @@ class NpcargosMapBuilder {
 
 		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, false, 4);
 
+		$tMap->addColumn('PRICAR', 'Pricar', 'double', CreoleTypes::NUMERIC, false, 20);
+
+		$tMap->addColumn('CANHOM', 'Canhom', 'double', CreoleTypes::NUMERIC, false, 6);
+
+		$tMap->addColumn('CANMUJ', 'Canmuj', 'double', CreoleTypes::NUMERIC, false, 6);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

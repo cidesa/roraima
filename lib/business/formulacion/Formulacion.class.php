@@ -1599,5 +1599,70 @@ public static function salvarFordefest($estado)
   }
 /***************************************************************************/
 
+  public static function salvarForcargos($cargos, $ids, $grid) {
+#  	H::printr($cargos);
+    $cargos->save();
+    $c = new Criteria();
+    $c->add(NpasiconempPeer :: CODCAR, $cargos->getCodcar());
+    $resul = NpasiconempPeer :: doSelect($c);
+    if ($resul) {
+      foreach ($resul as $datos) {
+        $datos->setNomcar($cargos->getNomcar());
+        $datos->save();
+      }
+    }
+
+    $c = new Criteria();
+    $c->add(NpasicarempPeer :: CODCAR, $cargos->getCodcar());
+    $resul = NpasicarempPeer :: doSelect($c);
+    if ($resul) {
+      foreach ($resul as $datos) {
+        $datos->setNomcar($cargos->getNomcar());
+        $datos->save();
+      }
+    }
+    self :: grabarProfesion($cargos, $ids);
+    self :: grabarPerfil($cargos, $grid);
+  }
+  
+    public static function grabarProfesion($cargos, $ids) {
+    $c = new Criteria();
+    $c->add(ForprocarPeer :: CODCAR, $cargos->getCodcar());
+    ForprocarPeer :: doDelete($c);
+
+    if (is_array($ids)) {
+      foreach ($ids as $id) {
+        $Forprocar = new Forprocar();
+        $Forprocar->setCodcar($cargos->getCodcar());
+        $c = new criteria();
+        $c->add(NpprofesionPeer :: ID, $id);
+        $objprofe = NpprofesionPeer :: doSelectOne($c);
+        $Forprocar->setCodprofes($objprofe->getCodprofes());
+        $Forprocar->save();
+      }
+    }
+  }
+
+  public static function grabarPerfil($cargos, $grid) {
+    $cargo = $cargos->getCodcar();
+    $c = $grid[0];
+    $l = 0;
+    while ($l < count($c)) {
+      if ($c[$l]->getCodperfil() != "") {
+        $c[$l]->setCodcar($cargo);
+        $c[$l]->save();
+      }
+      $l++;
+    }
+    $d = $grid[1];
+    $l = 0;
+    if (!empty ($d[$l])) {
+      while ($l < count($d)) {
+        $d[$l]->delete();
+        $l++;
+      }
+    }
+  }
+
 }
 ?>

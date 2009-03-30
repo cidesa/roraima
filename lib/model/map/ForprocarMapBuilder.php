@@ -30,11 +30,13 @@ class ForprocarMapBuilder {
 		$tMap = $this->dbMap->addTable('forprocar');
 		$tMap->setPhpName('Forprocar');
 
-		$tMap->setUseIdGenerator(false);
+		$tMap->setUseIdGenerator(true);
 
-		$tMap->addColumn('CODNIV', 'Codniv', 'string', CreoleTypes::VARCHAR, false, 16);
+		$tMap->setPrimaryKeyMethodInfo('forprocar_SEQ');
 
-		$tMap->addColumn('DESNIV', 'Desniv', 'string', CreoleTypes::VARCHAR, false, 259);
+		$tMap->addForeignKey('CODPROFES', 'Codprofes', 'string', CreoleTypes::VARCHAR, 'npprofesion', 'CODPROFES', true, 4);
+
+		$tMap->addForeignKey('CODCAR', 'Codcar', 'string', CreoleTypes::VARCHAR, 'forcargos', 'CODCAR', true, 16);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

@@ -1,44 +1,45 @@
 <?php
 
 /**
- * nomdefespcar actions.
+ * forcargos actions.
  *
  * @package    siga
- * @subpackage nomdefespcar
+ * @subpackage forcargos
  * @author     Your name here
  * @version    SVN: $Id: actions.class.php 2288 2006-10-02 15:22:13Z fabien $
  */
-class nomdefespcarActions extends autonomdefespcarActions
+class forcargosActions extends autoforcargosActions
 {
-  public $coderror1=-1;
+
+   public $coderror1=-1;
 
   public function executeEdit()
   {
-    $this->npcargos = $this->getNpcargosOrCreate();
+    $this->forcargos = $this->getForcargosOrCreate();
     $this->setVars();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
-      $this->updateNpcargosFromRequest();
+      $this->updateForcargosFromRequest();
 
-      $this->saveNpcargos($this->npcargos);
+      $this->saveForcargos($this->forcargos);
 
-      $this->npcargos->setId(Herramientas::getX_vacio('codcar','npcargos','id',$this->npcargos->getCodcar()));
+      $this->forcargos->setId(Herramientas::getX_vacio('codcar','forcargos','id',$this->forcargos->getCodcar()));
 
       $this->setFlash('notice', 'Your modifications have been saved');
 $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
-        return $this->redirect('nomdefespcar/create');
+        return $this->redirect('forcargos/create');
       }
       else if ($this->getRequestParameter('save_and_list'))
       {
-        return $this->redirect('nomdefespcar/list');
+        return $this->redirect('forcargos/list');
       }
       else
       {
-        return $this->redirect('nomdefespcar/edit?id='.$this->npcargos->getId());
+        return $this->redirect('forcargos/edit?id='.$this->forcargos->getId());
       }
     }
     else
@@ -47,58 +48,58 @@ $this->Bitacora('Guardo');
     }
   }
 
-  protected function updateNpcargosFromRequest()
+  protected function updateForcargosFromRequest()
   {
-    $npcargos = $this->getRequestParameter('npcargos');
+    $forcargos = $this->getRequestParameter('forcargos');
     $this->setVars();
 
-    if (isset($npcargos['codcar']))
+    if (isset($forcargos['codcar']))
     {
-      $this->npcargos->setCodcar($npcargos['codcar']);
+      $this->forcargos->setCodcar($forcargos['codcar']);
     }
-    if (isset($npcargos['nomcar']))
+    if (isset($forcargos['nomcar']))
     {
-      $this->npcargos->setNomcar($npcargos['nomcar']);
+      $this->forcargos->setNomcar($forcargos['nomcar']);
     }
-    if (isset($npcargos['codtip']))
+    if (isset($forcargos['codtip']))
     {
-      $this->npcargos->setCodtip($npcargos['codtip']);
+      $this->forcargos->setCodtip($forcargos['codtip']);
     }
-    if (isset($npcargos['graocp']))
+    if (isset($forcargos['graocp']))
     {
-      $this->npcargos->setGraocp($npcargos['graocp']);
+      $this->forcargos->setGraocp($forcargos['graocp']);
     }
-    if (isset($npcargos['suecar']))
+    if (isset($forcargos['suecar']))
     {
-      $this->npcargos->setSuecar($npcargos['suecar']);
+      $this->forcargos->setSuecar($forcargos['suecar']);
     }
-    if (isset($npcargos['punmin']))
+    if (isset($forcargos['punmin']))
     {
-      $this->npcargos->setPunmin($npcargos['punmin']);
+      $this->forcargos->setPunmin($forcargos['punmin']);
     }
-    if (isset($npcargos['stacar']))
+    if (isset($forcargos['stacar']))
     {
-      $this->npcargos->setStacar($npcargos['stacar']);
+      $this->forcargos->setStacar($forcargos['stacar']);
     }
-    if (isset($npcargos['profecargo']))
+    if (isset($forcargos['profecargo']))
     {
-      $this->npcargos->setProfecargo($npcargos['profecargo']);
+      $this->forcargos->setProfecargo($forcargos['profecargo']);
     }
-	if (isset($npcargos['comcar']))
+	if (isset($forcargos['comcar']))
     {
-      $this->npcargos->setComcar($npcargos['comcar']);
+      $this->forcargos->setComcar($forcargos['comcar']);
     }
-	if (isset($npcargos['pricar']))
+	if (isset($forcargos['pricar']))
     {
-      $this->npcargos->setPricar($npcargos['pricar']);
+      $this->forcargos->setPricar($forcargos['pricar']);
     }
-	if (isset($npcargos['canmuj']))
+	if (isset($forcargos['canmuj']))
     {
-      $this->npcargos->setCanmuj($npcargos['canmuj']);
+      $this->forcargos->setCanmuj($forcargos['canmuj']);
     }
-	if (isset($npcargos['canhom']))
+	if (isset($forcargos['canhom']))
     {
-      $this->npcargos->setCanhom($npcargos['canhom']);
+      $this->forcargos->setCanhom($forcargos['canhom']);
     }
   }
 
@@ -133,42 +134,43 @@ $this->Bitacora('Guardo');
 	{
 		if ($this->getRequestParameter('ajax')=='1')
 	    {
-		 	$this->tags=Herramientas::autocompleteAjax('CODTIPCAR','Nptipcar','CODTIPCAR',$this->getRequestParameter('npcargos[codtip]'));
+		 	$this->tags=Herramientas::autocompleteAjax('CODTIPCAR','Nptipcar','CODTIPCAR',$this->getRequestParameter('forcargos[codtip]'));
 	    }
 	    else if ($this->getRequestParameter('ajax')=='2')
 	    {
-		 	$this->tags=Herramientas::autocompleteAjax('GRACAR','Npcomocp','GRACAR',$this->getRequestParameter('npcargos[graocp]'));
+		 	$this->tags=Herramientas::autocompleteAjax('GRACAR','Npcomocp','GRACAR',$this->getRequestParameter('forcargos[graocp]'));
 	    }
 	}
 
-protected function saveNpcargos($npcargos)
+protected function saveForcargos($forcargos)
   {
   	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
-    Nomina::salvarNomdefespcar($npcargos,$this->getRequestParameter('associated_profecargo'),$grid);
+	#H::printr($forcargos);
+    Formulacion::salvarForcargos($forcargos,$this->getRequestParameter('associated_profecargo'),$grid);
   }
 
-  protected function getNpcargosOrCreate($id = 'id')
+  protected function getForcargosOrCreate($id = 'id')
   {
     if (!$this->getRequestParameter($id))
     {
-      $npcargos = new Npcargos();
+      $forcargos = new Forcargos();
       $this->configGrid();
     }
     else
     {
-      $npcargos = NpcargosPeer::retrieveByPk($this->getRequestParameter($id));
-      $this->configGrid($npcargos->getCodcar());
-      $this->forward404Unless($npcargos);
+      $forcargos = ForcargosPeer::retrieveByPk($this->getRequestParameter($id));
+      $this->configGrid($forcargos->getCodcar());
+      $this->forward404Unless($forcargos);
     }
 
-    return $npcargos;
+    return $forcargos;
   }
 
   public function handleErrorEdit()
   {
     $this->preExecute();
-    $this->npcargos = $this->getNpcargosOrCreate();
-    $this->updateNpcargosFromRequest();
+    $this->forcargos = $this->getForcargosOrCreate();
+    $this->updateForcargosFromRequest();
     $this->setVars();
 
     Herramientas::CargarDatosGrid($this,$this->obj);
@@ -179,7 +181,7 @@ protected function saveNpcargos($npcargos)
       if($this->coderror1!=-1)
       {
        $err = Herramientas::obtenerMensajeError($this->coderror1);
-       $this->getRequest()->setError('npcargos{codcar}',$err);
+       $this->getRequest()->setError('forcargos{codcar}',$err);
       }
     }
 
@@ -192,10 +194,10 @@ protected function saveNpcargos($npcargos)
     {
       if($this->getRequest()->getMethod() == sfRequest::POST)
       {
-        $this->npcargos = $this->getNpcargosOrCreate();
-        $this->updateNpcargosFromRequest();
+        $this->forcargos = $this->getForcargosOrCreate();
+        $this->updateForcargosFromRequest();
 
-        $this->coderror1=Nomina::validarNomdefespcar($this->npcargos);
+        $this->coderror1=Nomina::validarNomdefespcar($this->forcargos);
         if ($this->coderror1<>-1){
           return false;
         }else return true;
@@ -259,39 +261,58 @@ protected function saveNpcargos($npcargos)
 
   public function executeDelete()
   {
-    $this->npcargos = NpcargosPeer::retrieveByPk($this->getRequestParameter('id'));
-    $this->forward404Unless($this->npcargos);
+    $this->forcargos = ForcargosPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->forcargos);
 
     $id=$this->getRequestParameter('id');
-    if (!Nomina::Buscar_CodigoHijo2($this->npcargos->getCodcar()))
+    if (!Nomina::Buscar_CodigoHijo2($this->forcargos->getCodcar()))
     {
       $c=new Criteria();
-      $c->add(NpasicarnomPeer::CODCAR,$this->npcargos->getCodcar());
+      $c->add(NpasicarnomPeer::CODCAR,$this->forcargos->getCodcar());
       $dato=NpasicarnomPeer::doSelect($c);
       if (!$dato)
       {
-       $this->deleteNpcargos($this->npcargos);
+       $this->deleteForcargos($this->forcargos);
       }
       else
       {
        $this->setFlash('notice','El Cargo no puede ser eliminado, ya que se encuentra asociado a una Nómina');
-       return $this->redirect('nomdefespcar/edit?id='.$id);
+       return $this->redirect('forcargos/edit?id='.$id);
       }
     }
     else
     {
      	$this->setFlash('notice','El Cargo no puede ser eliminado, ya que posee cargos que dependen de el');
-        return $this->redirect('nomdefespcar/edit?id='.$id);
+        return $this->redirect('forcargos/edit?id='.$id);
     }
 
-    return $this->redirect('nomdefespcar/list');
+    return $this->redirect('forcargos/list');
   }
 
-  protected function deleteNpcargos($npcargos)
+  protected function deleteForcargos($forcargos)
   {
-    Herramientas::EliminarRegistro('Npprocar','Codcar',$npcargos->getCodcar());
-    Herramientas::EliminarRegistro('Nppercar','Codcar',$npcargos->getCodcar());
-    $npcargos->delete();
+    Herramientas::EliminarRegistro('Forprocar','Codcar',$forcargos->getCodcar());
+    Herramientas::EliminarRegistro('Nppercar','Codcar',$forcargos->getCodcar());
+    $forcargos->delete();
+  }
+  public static function validarForcagos($cargo) {
+    $codcar = $cargo->getCodcar();
+    $formato = Herramientas :: ObtenerFormato('npdefgen', 'forcar');
+    $posrup1 = Herramientas :: instr($formato, '-', 0, 1);
+    $posrup1 = $posrup1 -1;
+    if (strlen(trim($codcar)) < $posrup1) {
+      return 101;
+    }
+
+    Herramientas :: FormarCodigoPadre($codcar, & $nivelcodigo, & $ultimo, $formato);
+    if (!(Herramientas :: buscarCodigoPadre('Codcar', 'Forcargos', $ultimo))) {
+      if ($nivelcodigo == 0) {
+        return 100;
+      } else
+        return -1;
+    } else
+      return -1;
+
   }
 
 }
