@@ -28,8 +28,8 @@ class presnomregsalintindActions extends autopresnomregsalintindActions
 
 
       $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
-
+	$id= $this->npsalint->getId();
+         $this->SalvarBitacora($id ,'Guardo');
       if ($this->getRequestParameter('save_and_add'))
       {
         return $this->redirect('presnomregsalintind/create');
