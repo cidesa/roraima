@@ -880,7 +880,7 @@ function salvarmontorecargos()
 {
   var cadena='';
   var fil=0;
-  while (fil<50)
+  while (fil<150)
     {
       var codrgo="rx"+"_"+fil+"_1";
       if ($(codrgo))
@@ -893,8 +893,8 @@ function salvarmontorecargos()
       var monrgo="rx"+"_"+fil+"_5";
       var codpar="rx"+"_"+fil+"_6";
       var cadena=cadena + $(codrgo).value+'_' + $(desrgo).value+'_' + $(monrgoc).value +'_'+ $(tiprgo).value+'_' + $(monrgo).value +'_' + $(codpar).value + '!';
-       } else {fil=50;}
-      }else {fil=50;}
+       } else {fil=150;}
+      }else {fil=150;}
       fil++;
     }
 
@@ -1267,7 +1267,7 @@ function salvarmontorecargos()
   if (id=='')
   {
      f=0;
-     total=50;
+     total=150;
      while (f < total)
       {
        var col_fila_codpar_res = "zx_"+f+"_1";
@@ -1281,7 +1281,7 @@ function salvarmontorecargos()
        }
        else
        {
-         f=50;
+         f=150;
        }
        f++;
       }
@@ -1302,7 +1302,7 @@ function salvarmontorecargos()
              var cal= ncol_fila_monto - ncol_fila_montorec;
 
              j=0;
-             total=50;
+             total=150;
              encontro=false;
              while (j < total)
              {
@@ -1317,12 +1317,12 @@ function salvarmontorecargos()
 	                   totalpar=toFloat(col_fila_monto_res);
 	                   totaltotal=totalpar+totalart;
 	                   $(col_fila_monto_res).value=format(totaltotal.toFixed(2),'.',',','.');
-	                   j=50;
+	                   j=150;
 	                   encontro=true;
 	               }
 	            }
 	            else
-	            { j=50; }
+	            { j=150; }
                j++;
              }
              if (!encontro)
@@ -1336,7 +1336,7 @@ function salvarmontorecargos()
     	     }
             }
             else
-              f=50;
+              f=150;
            f++;
       }
       GenerarResumenPartidasRecargo(id,filaresumen);
@@ -1373,7 +1373,7 @@ function salvarmontorecargos()
 		        var ccodpar=aux3[5];
 
                 j=0;
-                total=50;
+                total=150;
                encontro=false;
                while (j < total)
                {
@@ -1388,12 +1388,12 @@ function salvarmontorecargos()
 	                   totalpar=toFloat(col_fila_monto_res);
 	                   totaltotal=totalpar+totalart;
 	                   $(col_fila_monto_res).value=format(totaltotal.toFixed(2),'.',',','.');
-	                   j=50;
+	                   j=150;
 	                   encontro=true;
 	               }
 	             }
 	             else
-	             { j=50; }
+	             { j=150; }
                  j++;
                 }
                  if (!encontro)
@@ -1410,7 +1410,7 @@ function salvarmontorecargos()
            }
             }
             else
-              f=50;
+              f=150;
            f++;
       }
   }
