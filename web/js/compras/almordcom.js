@@ -1,6 +1,6 @@
   var codpres = new Array();
   var codarts = new Array();
-  var codartunis = new Array();  
+  var codartunis = new Array();
 
 
 //<----------------------------Funciones solo del editform---------------------------------------->
@@ -292,7 +292,7 @@
          if (artuni_com==item)
          {
            contador_repetido++;
-         }        
+         }
        });
      }
      if (contador_repetido>1)
@@ -436,34 +436,34 @@
         fil=i[1];
         //operaciones de suma y resta y multiplicacion en el grid detalle orden
 
-                var fila_canord="ax"+"_"+fil+"_5";
-                var fila_canaju="ax"+"_"+fil+"_6";
-              var fila_canrec="ax"+"_"+fil+"_7";
-            var fila_costo = "ax_"+fil+"_9";
-            var fila_descuento = "ax_"+fil+"_10";
-            var fila_recargo = "ax_"+fil+"_11";
-            var fila_total_monto_por_cantidad = "ax_"+fil+"_12";
+        var fila_canord="ax"+"_"+fil+"_5";
+        var fila_canaju="ax"+"_"+fil+"_6";
+        var fila_canrec="ax"+"_"+fil+"_7";
+        var fila_costo = "ax_"+fil+"_9";
+        var fila_descuento = "ax_"+fil+"_10";
+        var fila_recargo = "ax_"+fil+"_11";
+        var fila_total_monto_por_cantidad = "ax_"+fil+"_12";
 
-                var valcanord=toFloat(fila_canord);
-                var valcanaju=toFloat(fila_canaju);
-                var valcanrec=toFloat(fila_canrec);
-            var costo_art_total=toFloat(fila_costo);
-            var recargo_art_total=toFloat(fila_recargo);
+        var valcanord=toFloat(fila_canord);
+        var valcanaju=toFloat(fila_canaju);
+        var valcanrec=toFloat(fila_canrec);
+        var costo_art_total=toFloat(fila_costo);
+        var recargo_art_total=toFloat(fila_recargo);
 
-            if (caldes=="S")
-            {
-                descuento_art = calculo_descuento_por_tipo(fil);
-              var descuento_art_total = FloatVEtoFloat(descuento_art);
-            }
-            else
-            {
-                  var descuento_art_total=toFloat(fila_descuento);
-            }
+        if (caldes=="S")
+        {
+            descuento_art = calculo_descuento_por_tipo(fil);
+          var descuento_art_total = FloatVEtoFloat(descuento_art);
+        }
+        else
+        {
+              var descuento_art_total=toFloat(fila_descuento);
+        }
 
 
-                var cantot=valcanord-valcanaju-valcanrec;
-              total_cantidad_por_monto=(cantot*costo_art_total)+recargo_art_total-descuento_art_total;
-            $(fila_total_monto_por_cantidad).value=format(total_cantidad_por_monto.toFixed(2),'.',',','.');
+        var cantot=valcanord-valcanaju-valcanrec;
+        total_cantidad_por_monto=(cantot*costo_art_total)+recargo_art_total-descuento_art_total;
+        $(fila_total_monto_por_cantidad).value=format(total_cantidad_por_monto.toFixed(2),'.',',','.');
       }
     }
 
@@ -507,8 +507,8 @@
         col_fila_art_1 = "ax_"+f+"_2";
         col_fila_art_2 = "ax_"+(f+1)+"_2";
         if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
-        
-        
+
+
             var col_fila_codigo_datos = "ax_"+f+"_2";
              var col_fila_codigo_entregas = "cx_"+f+"_1";
 
@@ -554,7 +554,7 @@
         col_fila_art_1 = "ax_"+i+"_2";
         col_fila_art_2 = "ax_"+(i+1)+"_2";
         if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
-      
+
         var fila_grid_detalle= "ax_"+i+"_12";
         var monto_por_fila=toFloat(fila_grid_detalle);
         total_monto_orden_pago = total_monto_orden_pago + monto_por_fila;
@@ -751,7 +751,7 @@
         col_fila_art_2 = "ax_"+(i+1)+"_2";
         if($(col_fila_art_1).value=="" && $(col_fila_art_1).value=="") break;
 
-        
+
         var fila_cantidad = "ax_"+i+"_5";
         var fila_costo = "ax_"+i+"_9";
         var fila_descuento = "ax_"+i+"_10";
@@ -785,7 +785,7 @@
     var categoria=name+"_"+fil+"_"+colcat;
     if ($(categoria).value=='')
     {
-     alert('Debe introducir el C�digo de la Unidad');
+     alert('Debe introducir el Código de la Unidad');
      $(id).value='';
      $(id).value='0,00';
      return false;
@@ -1032,6 +1032,7 @@ function salvarmontorecargos()
       var cmonrgotab=toFloat2(aux3[2]);
       var ctiprgo=aux3[3];
       var cmonrgo=toFloat2(aux3[4]);
+      var ccodpar=aux3[5];
 
     if (ctiprgo=='M')
     {
@@ -1046,7 +1047,7 @@ function salvarmontorecargos()
 
         cmonrgotabfor=format(cmonrgotab.toFixed(2),'.',',','.');
         cmonrgofor=format(cmonrgo.toFixed(2),'.',',','.');
-        cadena=cadena + ccodrgo+'_' + cdesrgo+'_' + cmonrgotabfor +'_'+ ctiprgo +'_' + cmonrgofor + '!';
+        cadena=cadena + ccodrgo+'_' + cdesrgo+'_' + cmonrgotabfor +'_'+ ctiprgo +'_' + cmonrgofor +'_' + ccodpar + '!';
         monrgotot=monrgotot+cmonrgo;
       z++;
       }//while
@@ -1233,6 +1234,7 @@ function salvarmontorecargos()
         var cmonrgotab=toFloat2(aux3[2]);
         var ctiprgo=aux3[3];
         var cmonrgo=toFloat2(aux3[4]);
+        var ccodpar=aux3[5];
 
       if (ctiprgo=='M')
       {
@@ -1247,7 +1249,7 @@ function salvarmontorecargos()
 
             cmonrgotabfor=format(cmonrgotab.toFixed(2),'.',',','.');
             cmonrgofor=format(cmonrgo.toFixed(2),'.',',','.');
-            cadena=cadena + ccodrgo+'_' + cdesrgo+'_' + cmonrgotabfor +'_'+ ctiprgo +'_' + cmonrgofor + '!';
+            cadena=cadena + ccodrgo+'_' + cdesrgo+'_' + cmonrgotabfor +'_'+ ctiprgo +'_' + cmonrgofor +'_' + ccodpar + '!';
             monrgotot=monrgotot+cmonrgo;
         z++;
         }//while
