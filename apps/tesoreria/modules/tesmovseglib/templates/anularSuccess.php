@@ -108,8 +108,8 @@ function salvar()
 	var feccomadi=document.getElementById('feccomadi').value;
 	var compadic=document.getElementById('compadic').value;
 	var fechacom=document.getElementById('fechacom').value;
-	var numcom=document.getElementById('numcom').value;
-	var numcom2=document.getElementById('tsmovlib_numcom').value;
+	var numcom=document.getElementById('numcom').value.replace(/#/gi,'*');
+	var numcom2=document.getElementById('tsmovlib_numcom').value.replace(/#/gi,'*');
 	var id='<? print $tsmovlib->getId(); ?>';
 	var numcue='<? print $tsmovlib->getNumcue(); ?>';
 	var tipmov='<? print $tsmovlib->getTipmov(); ?>';
@@ -120,13 +120,10 @@ function salvar()
 	f.submit();
 }
 
-valor=document.getElementById('tsmovlib_numcom').value;
-mas=valor.substr(1,7);
-document.getElementById('tsmovlib_numcom').value="A"+mas;
-
 valor2=document.getElementById('tsmovlib_reflib').value;
 mas2=valor2.substr(1,7);
 document.getElementById('tsmovlib_reflib').value="A"+mas2;
+document.getElementById('tsmovlib_numcom').value="########";
 
 
 </script>
