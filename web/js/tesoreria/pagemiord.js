@@ -2002,57 +2002,61 @@
     {
       $(name+"_"+fil+"_"+colum).value=format(cal.toFixed(2),'.',',','.');
     }
-    var am=totalregistros('ex',1,10);
+    var am=totalregistros('ex',2,10);
     var filas=parseInt($('numgridret').value);
-    var bm=totalregistros('dx',2,filas);
+    var bm=totalregistros('dx',12,filas);
     if (($('id').value=='' && am!=0) || ($('id').value!='' && bm!=0))
     {
-    if ($(alic).value!="")
-    {
-     var calculos=(((montotfac-monexento)/(100+alicuota))*100);
-     $(name+"_"+fil+"_11").value=format(calculos.toFixed(2),'.',',','.');
+      if ($(alic).value!="")
+      {
+        var calculos=(((montotfac-monexento)/(100+alicuota))*100);
+        $(name+"_"+fil+"_11").value=format(calculos.toFixed(2),'.',',','.');
 
-     var baseimpo=toFloat(name+"_"+fil+"_11");
+        var baseimpo=toFloat(name+"_"+fil+"_11");
 
-    calc=((baseimpo*alicuota)/100);
-    $(name+"_"+fil+"_12").value=format(calc.toFixed(2),'.',',','.');
+        calc=((baseimpo*alicuota)/100);
+        $(name+"_"+fil+"_12").value=format(calc.toFixed(2),'.',',','.');
 
-    if ($('id').value=="")
-    {
-     num=((baseimpo*alicuota)/100);
-     index=$(alic).selectedIndex;
-     var cod=$(alic).options[index].text;
-     var codigo=cod.split("_");
-     $(retenido).value= calculaRetiva(num,codigo[0]);
-    }
-    else
-    {
-     num=((baseimpo*alicuota)/100);
-     index=$(alic).selectedIndex;
-     var cod=$(alic).options[index].text;
-     var codigo=cod.split("_");
-     $(retenido).value= calculaRetivac(num,codigo[0]);
-    }
-    }
-    else
-    {
-     var calculos=(((montotfac-monexento)/(100+0))*100);
-     $(name+"_"+fil+"_11").value=format(calculos.toFixed(2),'.',',','.');
+        if ($('id').value=="")
+        {
+          //num=((baseimpo*alicuota)/100);
+          num=toFloat(name+"_"+fil+"_12");
+          index=$(alic).selectedIndex;
+          var cod=$(alic).options[index].text;
+          var codigo=cod.split("_");
+          $(retenido).value= calculaRetiva(num,codigo[0]);
+        }
+        else
+        {
+         // num=((baseimpo*alicuota)/100);
+          num=toFloat(name+"_"+fil+"_12");
+          index=$(alic).selectedIndex;
+          var cod=$(alic).options[index].text;
+          var codigo=cod.split("_");
+          $(retenido).value= calculaRetivac(num,codigo[0]);
+        }
+      }
+      else
+      {
+        var calculos=(((montotfac-monexento)/(100+0))*100);
+        $(name+"_"+fil+"_11").value=format(calculos.toFixed(2),'.',',','.');
 
-     var baseimpo=toFloat(name+"_"+fil+"_11");
+        var baseimpo=toFloat(name+"_"+fil+"_11");
 
-    calc=((baseimpo*0)/100);
-    $(name+"_"+fil+"_12").value=format(calc.toFixed(2),'.',',','.');
+        calc=((baseimpo*0)/100);
+        $(name+"_"+fil+"_12").value=format(calc.toFixed(2),'.',',','.');
 
-    if ($('id').value=="")
-    {
-     $(retenido).value= "0,00";
-    }
-    else
-    {
-     $(retenido).value= "0,00";
-    }
-    }
+        if ($('id').value=="")
+        {
+         $(retenido).value= "0,00";
+        }
+        else
+        {
+         $(retenido).value= "0,00";
+        }
+      }
+   }else{
+
    }
   }
  }
