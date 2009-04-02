@@ -15,6 +15,7 @@ class tesmovseglibActions extends autotesmovseglibActions
   public  $coderror1=-1;
   public  $coderror2=-1;
   public  $coderror4=-1;
+  public  $coderror5=-1;  
 
  public function validateEdit()
   {
@@ -22,6 +23,22 @@ class tesmovseglibActions extends autotesmovseglibActions
     {
       $this->tsmovlib = $this->getTsmovlibOrCreate();
       try{ $this->updateTsmovlibFromRequest();}catch(Exception $ex){}
+
+      $c = new Criteria();
+      $c->add(TstipmovPeer::CODTIP,$this->tsmovlib->getTipmov());
+      
+      $tstipmov = TstipmovPeer::doSelectOne($c);
+      
+      if($tstipmov){
+        if($tstipmov->getDebcre()=='C'){
+          $contaba = ContabaPeer::doSelectOne(new Criteria());
+          $saldo=0;
+          if(!Tesoreria::chequear_disponibilidad_financiera($this->tsmovlib->getNumcue(),$this->tsmovlib->getMonmov(),$contaba->getFecini(),$this->tsmovlib->getFeclib(),$saldo)){
+            $this->coderror5 = 195;
+          } 
+        }
+      }
+
 
       if (Tesoreria::validarFechaPerContable($this->getRequestParameter('tsmovlib[feclib]')))
       {
@@ -62,6 +79,11 @@ class tesmovseglibActions extends autotesmovseglibActions
      {
        $err = Herramientas::obtenerMensajeError($this->coderror2);
        $this->getRequest()->setError('tsmovlib{feclib}',$err);
+     }
+     if($this->coderror5!=-1)
+     {
+       $err = Herramientas::obtenerMensajeError($this->coderror5);
+       $this->getRequest()->setError('tsmovlib{monmov}',$err);
      }
 
     if($this->coderror4!=-1)
@@ -501,6 +523,34 @@ $this->Bitacora('Guardo');
       }
         return sfView::HEADER_ONLY;
 
+    }elseif($this->getRequestParameter('ajax')=='5'){
+      
+      $numcue=$this->getRequestParameter('numcue');
+      $feclib=$this->getRequestParameter('feclib');
+      $monmov=H::toFloat($this->getRequestParameter('monmov'));
+      $tipmov=$this->getRequestParameter('tipmov');
+      $output = '[["","",""]]';
+      
+      $c = new Criteria();
+      $c->add(TstipmovPeer::CODTIP,$tipmov);
+      
+      $tstipmov = TstipmovPeer::doSelectOne($c);
+      
+      if($tstipmov){
+        if($tstipmov->getDebcre()=='C'){
+          $contaba = ContabaPeer::doSelectOne(new Criteria());
+          $saldo=0;
+          if(!Tesoreria::chequear_disponibilidad_financiera($numcue,$monmov,$contaba->getFecini(),$feclib,$saldo)){
+            $coderr = 195;
+            $output = '[["javascript","alert(\''.H::obtenerMensajeError($coderr).'\')",""],["tsmovlib_monmov","0,00",""]]';
+          } 
+        }
+      }
+      
+     
+
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      return sfView::HEADER_ONLY;    
     }
   }
 

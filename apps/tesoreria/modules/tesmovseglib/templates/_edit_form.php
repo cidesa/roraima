@@ -202,7 +202,14 @@
   'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
   'control_name' => 'tsmovlib[monmov]',
   'onKeyPress' => "javascript:if (event.keyCode==13 || event.keyCode==9){document.getElementById('tsmovlib_fecing').focus();}",
-  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
+//  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event, this.id)",
+    'onBlur'=> "javascript:event.keyCode=13;entermontootro(event, this.id); ".remote_function(array(
+        'url'      => 'tesmovseglib/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('tsmovlib_monmov').value != '0,00' && $('id').value == ''",
+          'with' => "'ajax=5&cajtexmos=tsmovlib_monmov&monmov='+this.value+'&numcue='+$('tsmovlib_numcue').value+'&tipmov='+$('tsmovlib_tipmov').value+'&feclib='+$('tsmovlib_feclib').value",
+
+        )),  
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
     </th>
