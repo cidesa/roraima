@@ -268,6 +268,7 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
 
   protected function deleting($<?php echo $this->getSingularName() ?>)
   {
+  	$<?php echo $this->getSingularName() ?>->delete();
     return -1;
 
   }
@@ -782,7 +783,11 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
     }
   }
 
-
+  public function Bitacora($acc)
+  {
+	$id= $this-><?php echo $this->getSingularName()?>->getId();
+    $this->SalvarBitacora($id ,$acc);
+  }
 
 
 
