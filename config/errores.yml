@@ -346,6 +346,9 @@
 525:
   cod: 525
   msj: No puede salvar sin introducir  al menos un articulo
+529:
+  cod: 529
+  msj: La Fecha no se encuentra de un Perido Contable Abierto.
 3:
   cod: 3
   msj: La contraseña es diferente.

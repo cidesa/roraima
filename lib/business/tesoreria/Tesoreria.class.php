@@ -1705,5 +1705,22 @@ class Tesoreria {
     }// if ($tsdefban)
   }
 
+  public static function validaPeriodoCerrado($fecha)
+  {
+    $dateFormat = new sfDateFormat('es_VE');
+    $fec = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+
+    $c= new Criteria();
+    $c->add(Contaba1Peer::FECDES,$fec,Criteria::LESS_EQUAL);
+    $c->add(Contaba1Peer::FECHAS,$fec,Criteria::GREATER_EQUAL);
+    $c->add(Contaba1Peer::STATUS,'A');
+    $conta1=Contaba1Peer::doSelectOne($c);
+    if ($conta1)
+    {
+      return false;
+    }else
+    {return true;}
+  }
+
 
 }

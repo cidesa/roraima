@@ -10,6 +10,26 @@
  */
 class pagemiretActions extends autopagemiretActions
 {
+	public  $coderror1=-1;
+
+	public function validateEdit()
+  {
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->opordpag = $this->getOpordpagOrCreate();
+      try{ $this->updateOpordpagFromRequest();}catch(Exception $ex){}
+      if ($this->opordpag->getId()=="")
+      {
+      	if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('opordpag[fecemi]'))==true)
+      	{
+          $this->coderror1=529;
+          return false;
+      	}
+      }
+      return true;
+    }else return true;
+  }
+
   public function executeIndex()
   {
      return $this->redirect('pagemiret/edit');
@@ -492,6 +512,15 @@ $this->Bitacora('Guardo');
      $this->tiporet='';
     }
     $this->labels = $this->getLabels();
+
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderror1!=-1)
+      {
+       $err = Herramientas::obtenerMensajeError($this->coderror1);
+       $this->getRequest()->setError('opordpag{fecemi}',$err);
+      }
+    }
 
     return sfView::SUCCESS;
   }

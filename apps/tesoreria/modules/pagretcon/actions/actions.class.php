@@ -47,7 +47,7 @@ class pagretconActions extends autopagretconActions
       $this->opretcon->setId(self::obtenerId($this->opretcon->getCodnom(),$this->opretcon->getCodcon(),$this->opretcon->getCodtip()));
 
       $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+      $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
