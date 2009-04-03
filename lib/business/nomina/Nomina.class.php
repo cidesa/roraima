@@ -6090,7 +6090,7 @@ class Nomina {
         $npsalint->setCodemp($codemp);
         $npsalint->setCodasi($arr_codasi[$h]["codasi"]);
         $npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
-        $npsalint->setMonasi($monasi);
+        //$npsalint->setMonasi($monasi);
         $fecinicon = $x[$j]["fecinicon"];
         $fecfincon = $x[$j]["fecfincon"];
         $npsalint->setFecinicon($fecinicon);
