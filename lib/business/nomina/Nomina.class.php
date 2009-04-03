@@ -6082,14 +6082,14 @@ class Nomina {
       $h = 0;
       while ($h < count($arr_codasi)) {
 
-        if($montoasiref!=$x[$j][$arr_codasi[$h]["codasi"]] && $x[$j][$arr_codasi[$h]["codasi"]]!=0)
+      /*  if($montoasiref!=$x[$j][$arr_codasi[$h]["codasi"]] && $x[$j][$arr_codasi[$h]["codasi"]]!=0)
         {
           $monasi=$x[$j][$arr_codasi[$h]["codasi"]];
-        }
+        }*/
         $npsalint = new Npsalint();
         $npsalint->setCodemp($codemp);
         $npsalint->setCodasi($arr_codasi[$h]["codasi"]);
-        //$npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
+        $npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
         $npsalint->setMonasi($monasi);
         $fecinicon = $x[$j]["fecinicon"];
         $fecfincon = $x[$j]["fecfincon"];
