@@ -1255,7 +1255,8 @@ function salvarmontorecargos()
         }//while
         $(infrecargos).value=cadena;
         $(recargo).value=format(monrgotot.toFixed(2),'.',',','.');
-          montottot=monuni-mondto+monrgotot;
+        var monrgototcaj=toFloat(recargo);
+        montottot=monuni-mondto+monrgototcaj;
         $(total).value=format(montottot.toFixed(2),'.',',','.');
 
       }//  if ($(haydist).value!="")
