@@ -15,6 +15,7 @@ class pagemiordActions extends autopagemiordActions
   public  $coderror3=-1;
   public  $coderror4=-1;
   public  $coderror5=-1;
+  public  $coderror6=-1;
   public  $codigo="";
   public  $monto="";
   public  $salvarretencion=-1;
@@ -31,17 +32,23 @@ class pagemiordActions extends autopagemiordActions
      // $grid1 = Herramientas::CargarDatosGrid($this,$this->obj2);
       if ($this->opordpag->getId()=="")
       {
-       if ($this->opordpag->getTipcau()!=$this->ordpagnom && $this->opordpag->getTipcau()!=$this->ordpagapo && $this->opordpag->getTipcau()!=$this->ordpagliq && $this->opordpag->getTipcau()!=$this->ordpagfid)
-      {
-        $this->configGridApliret();
-        $grid2 = Herramientas::CargarDatosGrid($this,$this->obj5);
-        $grid3 = Herramientas::CargarDatosGrid($this,$this->obj6);
-        if ((count($grid2[0])>0) && ($this->getRequestParameter('opordpag[presiono]')!='S'))
-        {
-          $this->salvarretencion=516;
+      	if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('opordpag[fecemi]'))==true)
+      	{
+          $this->coderror6=529;
           return false;
+      	}
+
+        if ($this->opordpag->getTipcau()!=$this->ordpagnom && $this->opordpag->getTipcau()!=$this->ordpagapo && $this->opordpag->getTipcau()!=$this->ordpagliq && $this->opordpag->getTipcau()!=$this->ordpagfid)
+        {
+          $this->configGridApliret();
+          $grid2 = Herramientas::CargarDatosGrid($this,$this->obj5);
+          $grid3 = Herramientas::CargarDatosGrid($this,$this->obj6);
+          if ((count($grid2[0])>0) && ($this->getRequestParameter('opordpag[presiono]')!='S'))
+          {
+            $this->salvarretencion=516;
+            return false;
+          }
         }
-      }
 
         if (self::validarGeneraComprobante())
       {
@@ -251,6 +258,11 @@ $this->Bitacora('Guardo');
        $err3 = Herramientas::obtenerMensajeError($this->coderror5);
        $this->getRequest()->setError('',$err3);
      }
+     if($this->coderror6!=-1)
+     {
+       $err3 = Herramientas::obtenerMensajeError($this->coderror6);
+       $this->getRequest()->setError('opordpag{fecemi}',$err3);
+     }
      if($this->salvarretencion!=-1)
      {
        $err4 = Herramientas::obtenerMensajeError($this->salvarretencion);
@@ -307,8 +319,11 @@ $this->Bitacora('Guardo');
           $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
 
-          Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
-          Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+          //Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
+          //Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+          $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+          $opordpag->setNumcom($numcom);
+          $numerocomp = $numcom;
          }
          $i++;
         }
@@ -322,6 +337,7 @@ $this->Bitacora('Guardo');
      else { $factura=Herramientas::CargarDatosGrid($this,$this->obj2,true);}
      $retenc=Herramientas::CargarDatosGrid($this,$this->obj6,true);
      OrdendePago::salvarPagemiord($opordpag,$detalle,$factura,$retenc,$opordpag->getReferencias(),$opordpag->getCuentarendicion(),$numerocomp);
+
      if ($opordpag->getTipcau()==$this->getRequestParameter('opnomina'))
      {
        $sql="DELETE FROM NPCIENOM WHERE CODNOM='".$this->getRequestParameter('tipnom')."' And CODTIPGAS='".$this->getRequestParameter('gasto')."' And CODBAN='".$this->getRequestParameter('banco')."' And (ASIDED='A' OR ASIDED='D') And FECNOM=TO_DATE('".$this->getRequestParameter('fechanomina')."','YYYY-MM-DD')";
@@ -1446,10 +1462,15 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     $col4->setTitulo('Referencia');
     $col4->setNombreCampo('refere');
 
+    $col5 = clone $col1;
+    $col5->setTitulo('unomil');
+    $col5->setNombreCampo('estaunomil');
+
     $opciones->addColumna($col1);
     $opciones->addColumna($col2);
     $opciones->addColumna($col3);
     $opciones->addColumna($col4);
+    $opciones->addColumna($col5);
 
     $this->obj6 = $opciones->getConfig($per);
   }
@@ -2106,7 +2127,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
   public function executeAnular()
   {
-   $this->referencia=$this->getRequestParameter('referencia');
+   $this->referencia="########";//$this->getRequestParameter('referencia');
    $numord=$this->getRequestParameter('numord');
    $fecemi=$this->getRequestParameter('fecemi');
    $this->compadic=$this->getRequestParameter('compadic');
@@ -2345,7 +2366,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
             }else { return $this->msj="La Orden no fue eliminada";}
             }else { return $this->msj="La Orden ya fue pagada en el Módulo de Bancos";}
           }
-        }else { return $this->msj="No se Puede Eliminar la Orden ya que el Comprobante Contable asociado esta actualizado";}
+        }else { return $this->msj="No se Puede Eliminar la Orden ya que el Comprobante Contable asociado no existe o esta actualizado";}
        }//if ($opordpag)
     }//else orden de pago normal
   }
