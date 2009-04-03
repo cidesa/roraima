@@ -18,7 +18,6 @@ generator:
       display:        [=codcon, destipcon, codnom, nomnom, codemp, nomemp]
       object_actions:
         _edit:        ~
-        _delete:      ~
         _create:      none
       max_per_page:   5
 
