@@ -17,6 +17,7 @@ class bieregsegmueActions extends autobieregsegmueActions
   {
     $this->bnsegmue = $this->getBnsegmueOrCreate();
     $this->setVars();
+    $this->configGrid();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -25,7 +26,7 @@ class bieregsegmueActions extends autobieregsegmueActions
       $this->saveBnsegmue($this->bnsegmue);
 
       $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+     $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -94,14 +95,14 @@ protected function updateBnsegmueFromRequest()
     {
       $this->bnsegmue->setNomsegmue($bnsegmue['nomsegmue']);
     }
-    if (isset($bnsegmue['cobsegmue']))
+/*    if (isset($bnsegmue['cobsegmue']))
     {
       $this->bnsegmue->setCobsegmue($bnsegmue['cobsegmue']);
     }
-    if (isset($bnsegmue['monsegmue']))
+   if (isset($bnsegmue['monsegmue']))
     {
       $this->bnsegmue->setMonsegmue($bnsegmue['monsegmue']);
-    }
+    }*/
     if (isset($bnsegmue['fecsegven']))
     {
       if ($bnsegmue['fecsegven'])
@@ -165,7 +166,7 @@ protected function updateBnsegmueFromRequest()
 	 case '0':
 
       $descob=BncobsegPeer::getDesubi($codigo);
-      $output = '[["'.$cajtexmos.'","'.$descob.'",""]]';
+      $output = '[["'.$cajtexmos.'","'.$descob.'",""],["'.$cajtexcom.'","4","c"]]';
 
      break;
       case '1':
@@ -206,8 +207,8 @@ protected function updateBnsegmueFromRequest()
     $coderr = -1;
 
     try {
-
-      $coderr = Muebles::salvarbieregsegmue($Bnsegmue);
+      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+      $coderr = Muebles::salvarbieregsegmue($Bnsegmue,$grid);
 
       if(is_array($coderr)){
         foreach ($coderror as $ERR){
@@ -271,6 +272,8 @@ public function validateEdit()
     {
        $this->bnsegmue = $this->getBnsegmueOrCreate();
        $this->updateBnsegmueFromRequest();
+	   $this->configGrid();
+	   $grid=Herramientas::CargarDatosGrid($this,$this->obj);
 
     if (!$this->bnsegmue->getId())
      { Muebles::validarBieregsegmue($this->bnsegmue,&$msj);
@@ -308,12 +311,14 @@ public function validateEdit()
       }
   }
 
-public function handleErrorEdit()
+ public function handleErrorEdit()
   {
     $this->preExecute();
     $this->bnsegmue = $this->getBnsegmueOrCreate();
     $this->updateBnsegmueFromRequest();
 	$this->setVars();
+	$this->configGrid();
+	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
     $this->labels = $this->getLabels();
 
 	 if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -326,4 +331,59 @@ public function handleErrorEdit()
     return sfView::SUCCESS;
   }
 
+   public function configGrid()
+   {
+      $c= new Criteria();
+      $c->add(BncobsegmuePeer::CODMUE,$this->bnsegmue->getCodmue());
+      $c->add(BncobsegmuePeer::CODACT,$this->bnsegmue->getCodact());
+      $c->add(BncobsegmuePeer::NROSEGMUE,$this->bnsegmue->getNrosegmue());
+
+      $per=BncobsegmuePeer::doSelect($c);
+
+      $opciones = new OpcionesGrid();
+      $opciones->setEliminar(true);
+      $opciones->setTabla('Bncobsegmue');
+      $opciones->setAnchoGrid(650);
+      $opciones->setAncho(650);
+      $opciones->setName('a');
+      $opciones->setTitulo('Coberturas');
+      $opciones->setHTMLTotalFilas(' ');
+      $opciones->setFilas(10);
+
+
+      $obj= array ('codcob' => '1','descob' =>'2');
+      $col1 = new Columna('Código Cobertura');
+      $col1->setTipo(Columna::TEXTO);
+      $col1->setEsGrabable(true);
+      $col1->setAlineacionObjeto(Columna::CENTRO);
+      $col1->setAlineacionContenido(Columna::CENTRO);
+      $col1->setNombreCampo('codcob');
+      $col1->setHTML('type="text" size="10"');
+      $col1->setCatalogo('Bncobseg','sf_admin_edit_form',$obj,'Bncobseg_Bieregsegmue');
+	  $col1->setAjax('bieregsegmue',0,2);
+
+
+
+	  $col2 = new Columna('Nombre');
+      $col2->setTipo(Columna::TEXTO);
+      $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+      $col2->setAlineacionContenido(Columna::IZQUIERDA);
+      $col2->setNombreCampo('descob');
+      $col2->setHTML('type="text" size="50" readonly=true');
+
+       $col3 = new Columna('Monto');
+       $col3->setEsGrabable(true);
+       $col3->setTipo(Columna::MONTO);
+       $col3->setAlineacionContenido(Columna::DERECHA);
+       $col3->setAlineacionObjeto(Columna::DERECHA);
+       $col3->setNombreCampo('monto');
+       $col3->setEsNumerico(true);
+       $col3->setHTML('type="text" size="10"');
+       $col3->setJScript('onKeypress="entermonto(event,this.id)"');
+
+      $opciones->addColumna($col1);
+      $opciones->addColumna($col2);
+      $opciones->addColumna($col3);
+      $this->obj = $opciones->getConfig($per);
+  }
 }

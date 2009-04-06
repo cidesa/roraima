@@ -1291,3 +1291,57 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
+  bncobsegmue:
+    #_attributes:
+      #idMethod: native
+    codact:
+      type: VARCHAR
+      size: 30
+      required: true
+    codmue:
+      type: VARCHAR
+      size: 20
+      required: true
+    nrosegmue:
+      type: VARCHAR
+      size: 6
+      required: true
+    codcob:
+      type: VARCHAR
+      size: 4
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true
+  bncobseginm:
+    #_attributes:
+      #idMethod: native
+    codact:
+      type: VARCHAR
+      size: 30
+      required: true
+    codinm:
+      type: VARCHAR
+      size: 20
+      required: true
+    nrosegmue:
+      type: VARCHAR
+      size: 6
+      required: true
+    codcob:
+      type: VARCHAR
+      size: 4
+      required: true
+    monto:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+      type: INTEGER
+      required: true
+      autoIncrement: true

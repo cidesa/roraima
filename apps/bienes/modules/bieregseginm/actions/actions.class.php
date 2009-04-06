@@ -16,6 +16,7 @@ class bieregseginmActions extends autobieregseginmActions
   {
     $this->bnseginm = $this->getBnseginmOrCreate();
     $this->setVars();
+    $this->configGrid();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -24,7 +25,8 @@ class bieregseginmActions extends autobieregseginmActions
       $this->saveBnseginm($this->bnseginm);
 
       $this->setFlash('notice', 'Your modifications have been saved');
-$this->Bitacora('Guardo');
+
+      $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -178,7 +180,7 @@ $this->Bitacora('Guardo');
 
         $dato=BncobsegPeer::getDesubi($codigo);
 
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","4","c"]]';
 
 
         break;
@@ -187,10 +189,17 @@ $this->Bitacora('Guardo');
         $output = '[["","",""],["","",""],["","",""]]';
 
         case '4':
+        $codact="";
+       	$desinm="";
 
-       	$codact=BnreginmPeer::getCodact($codigo);
-
-       	$desinm=BnreginmPeer::getDesinm1($codigo);
+        $c= new Criteria();
+        $c->add(BnreginmPeer::CODINM,$codigo );
+        $datos=BnreginmPeer::doSelectOne($c);
+		if ($datos)
+		{
+       		$codact=$datos->getCodact();
+       		$desinm=$datos->getDesinm();
+		}
 
         $output = '[["'.$cajtexmos.'","'.$codact.'",""], ["'.$cajtexcom.'","'.$desinm.'",""]]';
 
@@ -224,15 +233,19 @@ $this->Bitacora('Guardo');
   {
     if($this->getRequest()->getMethod() == sfRequest::POST)
     {
-       $this->bnseginm = $this->getBnseginmOrCreate();
-       $this->updateBnseginmFromRequest();
-
+     $this->bnseginm = $this->getBnseginmOrCreate();
+     $this->updateBnseginmFromRequest();
+	 $this->configGrid();
+	 $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+     if (!$this->bnseginm->getId())
+     {
       Inmuebles::validarBieregseginm($this->bnseginm,&$msj);
       $this->coderror=$msj;
       if ($this->coderror<>-1)
       {
         return false;
       }else return true;
+     }else return true;
     }else return true;
   }
 
@@ -243,6 +256,8 @@ $this->Bitacora('Guardo');
     $this->bnseginm = $this->getBnseginmOrCreate();
     $this->updateBnseginmFromRequest();
     $this->setVars();
+	$this->configGrid();
+	$grid=Herramientas::CargarDatosGrid($this,$this->obj);
 
      $this->labels = $this->getLabels();
     if($this->getRequest()->getMethod() == sfRequest::POST)
@@ -256,7 +271,91 @@ $this->Bitacora('Guardo');
 
   }
 
+   public function configGrid()
+   {
+      $c= new Criteria();
+      $c->add(BncobseginmPeer::CODINM,$this->bnseginm->getCodmue());
+      $c->add(BncobseginmPeer::CODACT,$this->bnseginm->getCodact());
+      $c->add(BncobseginmPeer::NROSEGMUE,$this->bnseginm->getNroseginm());
+      $per=BncobseginmPeer::doSelect($c);
 
 
+      $opciones = new OpcionesGrid();
+      $opciones->setEliminar(true);
+      $opciones->setTabla('Bncobseginm');
+      $opciones->setAnchoGrid(650);
+      $opciones->setAncho(650);
+      $opciones->setName('a');
+      $opciones->setTitulo('Coberturas');
+      $opciones->setHTMLTotalFilas(' ');
+      $opciones->setFilas(10);
+
+
+      $obj= array ('codcob' => '1','descob' =>'2');
+      $col1 = new Columna('Código Cobertura');
+      $col1->setTipo(Columna::TEXTO);
+      $col1->setEsGrabable(true);
+      $col1->setAlineacionObjeto(Columna::CENTRO);
+      $col1->setAlineacionContenido(Columna::CENTRO);
+      $col1->setNombreCampo('codcob');
+      $col1->setHTML('type="text" size="10"');
+      $col1->setCatalogo('Bncobseg','sf_admin_edit_form',$obj,'Bncobseg_Bieregseginm');
+	  $col1->setAjax('bieregseginm',3,2);
+
+
+
+	  $col2 = new Columna('Nombre');
+      $col2->setTipo(Columna::TEXTO);
+      $col2->setAlineacionObjeto(Columna::IZQUIERDA);
+      $col2->setAlineacionContenido(Columna::IZQUIERDA);
+      $col2->setNombreCampo('descob');
+      $col2->setHTML('type="text" size="50" readonly=true');
+
+       $col3 = new Columna('Monto');
+       $col3->setEsGrabable(true);
+       $col3->setTipo(Columna::MONTO);
+       $col3->setAlineacionContenido(Columna::DERECHA);
+       $col3->setAlineacionObjeto(Columna::DERECHA);
+       $col3->setNombreCampo('monto');
+       $col3->setEsNumerico(true);
+       $col3->setHTML('type="text" size="10"');
+       $col3->setJScript('onKeypress="entermonto(event,this.id)"');
+
+      $opciones->addColumna($col1);
+      $opciones->addColumna($col2);
+      $opciones->addColumna($col3);
+      $this->obj = $opciones->getConfig($per);
+  }
+
+  public function saveBnseginm($bnseginm)
+  {
+    $coderr = -1;
+
+    try {
+      $grid=Herramientas::CargarDatosGrid($this,$this->obj);
+      $coderr = Inmuebles::salvarbieregseginm($bnseginm,$grid);
+
+      if(is_array($coderr)){
+        foreach ($coderror as $ERR){
+          $err = Herramientas::obtenerMensajeError($ERR);
+          $this->getRequest()->setError('',$err);
+          $this->ActualizarGrid();
+        }
+      }elseif($coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($coderr);
+        $this->getRequest()->setError('',$err);
+        $this->ActualizarGrid();
+      }
+
+    } catch (Exception $ex) {
+
+      $coderror = 0;
+      $err = Herramientas::obtenerMensajeError($coderr);
+      $this->getRequest()->setError('',$err);
+
+    }
+
+
+  }
 
 }

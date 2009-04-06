@@ -13,9 +13,35 @@ class Inmuebles
 	 * @param $Bnseginm Object a guardar
 	 * @return void
 	 */
-  public static function salvarbieregseginm($Bnseginm)
+  public static function salvarbieregseginm($bnseginm,$grid)
   {
-  	return self::salvarseginm($Bnseginm);
+  	if ( self::salvarseginm($bnseginm)==-1)
+  	{
+  	 	//salvar detalle
+  	$codact = $bnseginm->getCodact();
+  	$codmue = $bnseginm->getCodmue();
+    $nrosegmue = $bnseginm->getNroseginm();
+
+    $x = $grid[0];
+    $j = 0;
+
+    while ($j < count($x)) {
+      $x[$j]->setCodact($codact);
+      $x[$j]->setCodinm($codmue);
+      $x[$j]->setNrosegmue($nrosegmue);
+      $x[$j]->save();
+      $j++;
+    }
+    $z = $grid[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+   return -1;
+  	}
   }
 
   public static function salvarseginm($bnseginm)

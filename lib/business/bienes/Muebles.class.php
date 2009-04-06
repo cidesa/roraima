@@ -24,9 +24,36 @@ class Muebles
 	 * @param $Bnsegmue Object a guardar
 	 * @return void
 	 */
-  public static function salvarbieregsegmue($Bnsegmue)
+  public static function salvarbieregsegmue($bnsegmue,$grid)
   {
-  	return self::salvarsegmue($Bnsegmue);
+  	if ( self::salvarsegmue($bnsegmue)==-1)
+  	{
+  	//salvar detalle
+  	$codact = $bnsegmue->getCodact();
+  	$codmue = $bnsegmue->getCodmue();
+  	$nrosegmue = $bnsegmue->getNrosegmue();
+
+    $x = $grid[0];
+    $j = 0;
+
+    while ($j < count($x)) {
+      $x[$j]->setCodact($codact);
+      $x[$j]->setCodmue($codmue);
+      $x[$j]->setNrosegmue($nrosegmue);
+      $x[$j]->save();
+      $j++;
+    }
+    $z = $grid[1];
+    $j = 0;
+    if (!empty ($z[$j])) {
+      while ($j < count($z)) {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+   return -1;
+  	}
+
   }
 
   public static function salvarsegmue($bnsegmue)
