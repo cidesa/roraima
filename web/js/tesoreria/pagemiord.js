@@ -520,6 +520,7 @@
     var aux15="ex"+"_"+fil+"_7";
     var aux16="ex"+"_"+fil+"_8";
     var aux17="ex"+"_"+fil+"_6";
+    var auxmil="ex"+"_"+fil+"_13";
 
     var base=toFloat(aux3);
     var monreten=toFloat(aux4);
@@ -577,9 +578,11 @@
        var aux10="fx"+"_"+posenc+"_2";
        var aux11="fx"+"_"+posenc+"_3";
        var aux12="fx"+"_"+posenc+"_4";
+       var aux13="fx"+"_"+posenc+"_5";
 
        $(aux9).value=$(aux8).value;
        $(aux10).value=$(aux7).value;
+       $(aux13).value=$(auxmil).value;
        var resta=retencion-sustraendo;
        var calculo1=redondear(resta,8);
        $(aux11).value=format(calculo1.toFixed(2),'.',',','.');
@@ -676,8 +679,10 @@
         var aux10="fx"+"_"+posenc+"_2";
         var aux11="fx"+"_"+posenc+"_3";
         var aux12="fx"+"_"+posenc+"_4";
+        var aux13="fx"+"_"+posenc+"_5";
         $(aux9).value=$(aux8).value;
         $(aux10).value=$(aux7).value;
+        $(aux13).value=$(auxmil).value;
         if (retencion>sustraendo)
         {
           var calculo1=(retencion-sustraendo);
@@ -789,11 +794,13 @@
      caj2="fx"+"_"+g+"_2";
      caj3="fx"+"_"+g+"_3";
      caj4="fx"+"_"+g+"_4";
+     caj5="fx"+"_"+g+"_5";
 
      $(caj1).value="";
      $(caj2).value="";
      $(caj3).value="0,00";
      $(caj4).value="";
+     $(caj5).value="";
      g++;
    }
    var cienxcien=0;
@@ -818,6 +825,7 @@
   {
     var base="ex"+"_"+fil+"_10";
     var montoret="ex"+"_"+fil+"_11";
+    var unomil="ex"+"_"+fil+"_13";
     var esta="ex"+"_"+fil+"_9";
     var tipret="ex"+"_"+fil+"_1";
 
@@ -909,9 +917,11 @@
           var aux10="fx"+"_"+posenc+"_2";
           var aux11="fx"+"_"+posenc+"_3";
           var aux12="fx"+"_"+posenc+"_4";
+          var aux13="fx"+"_"+posenc+"_5";
 
           $(aux9).value=$(id4).value;
           $(aux10).value=$(tipret).value;
+          $(aux13).value=$(unomil).value;
           var multi=0;
           if ($(montoret).value!="")
           {
@@ -1022,9 +1032,11 @@
         var aux10="fx"+"_"+posenc+"_2";
         var aux11="fx"+"_"+posenc+"_3";
         var aux12="fx"+"_"+posenc+"_4";
+        var aux13="fx"+"_"+posenc+"_5";
 
         $(aux9).value=$(id4).value;
         $(aux10).value=$(tipret).value;
+        $(aux13).value=$(unomil).value;
         var multi=0;
         if ($(montoret).value!="")
         {
@@ -1079,9 +1091,11 @@
         var aux10="fx"+"_"+posenc+"_2";
         var aux11="fx"+"_"+posenc+"_3";
         var aux12="fx"+"_"+posenc+"_4";
+        var aux13="fx"+"_"+posenc+"_5";
 
         $(aux9).value=$(id4).value;
         $(aux10).value=$(tipret).value;
+        $(aux13).value=$(unomil).value;
         var multi=0;
         if ($(montoret).value!="")
         {
@@ -1679,6 +1693,7 @@
          $(basemil).value=format(calculo.toFixed(2),'.',',','.');
          $(basemil).disabled=false;
          $(porcentmil).value=format(porcentaje,'.',',','.');
+         var cal2=monto1XMILN();
       }
       else
       {
@@ -1691,11 +1706,24 @@
          $(basemil).value=format(calculo.toFixed(2),'.',',','.');
          $(basemil).disabled=false;
          $(porcentmil).value=format(porcentaje2,'.',',','.');
+         var cal2=monto1XMILC();
       }
-      var base=toFloat(basemil);
+      /*var base=toFloat(basemil);
+      var cal=((base*($('eltimbre').value))/calcularbi);
+      if (cal==cal2)
+      {
+        var calfin=cal;
+      }else if (cal2>cal)
+      {
+       var rest=cal2 - cal;
+       var calfin=cal2-rest;
+      }
+      else
+      {
+        var calfin=cal2;
+      }*/
 
-      cal=((base*($('eltimbre').value))/calcularbi);
-      $(montomil).value=format(cal.toFixed(2),'.',',','.');
+      $(montomil).value=format(cal2.toFixed(2),'.',',','.');
    }
  }
 
@@ -2513,4 +2541,44 @@ function ajaxretenciones(e,id)
     }
   }
 
+
+function monto1XMILN()
+ {
+   montounomil=0;
+   total=totalregistros('fx',2,300);
+   j=0;
+   while (j<total)
+   {
+     var monto1="fx"+"_"+j+"_3";
+     var unoxmil="fx"+"_"+j+"_5";
+     var num1=toFloat(monto1);
+
+    if ($(unoxmil).value=="S")
+    {
+      montounomil= montounomil + num1;
+    }
+    j++;
+  }
+  return montounomil;
+ }
+
+  function monto1XMILC()
+ {
+   var montounomil=0;
+   var total=$('numgridret').value;
+   var j=0;
+   while (j<total)
+   {
+     var monto1="dx"+"_"+j+"_12";
+     var unoxmil="dx"+"_"+j+"_11";
+     var num1=toFloat(monto1);
+
+    if ($(unoxmil).value=="S")
+    {
+      montounomil = montounomil +num1;
+    }
+    j++;
+  }
+  return montounomil;
+ }
 
