@@ -607,7 +607,7 @@ $this->Bitacora('Guardo');
    protected function deleteTsdefban($tsdefban)
    {
      $c= new Criteria();
-     $c->add(TsdefchequeraPeer::CODCUE,$tsdefban->getCodcue());
+     $c->add(TsdefchequeraPeer::NUMCUE,$tsdefban->getNumcue());
      TsdefchequeraPeer::doDelete($c);
 
      $tsdefban->delete();
