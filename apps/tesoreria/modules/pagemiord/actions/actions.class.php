@@ -1625,7 +1625,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
       $descripcion2=htmlspecialchars($descripcion2);
       $tipos=$tipo;
       $destipos=$destipo;
-      $dato=OpbenefiPeer::getDato($elrif,'Nomben');
+      $dato=htmlspecialchars(OpbenefiPeer::getDato($elrif,'Nomben'));
       $dato1=OpbenefiPeer::getDato($elrif,'Codcta');
       $dato2=OpbenefiPeer::getDato2($dato1,'Descta');
       if ($msj=='')
@@ -1643,7 +1643,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
         $descripcion2=htmlspecialchars($descripcion2);
         $tipos=$tipo;
         $destipos=$destipo;
-        $dato=OpbenefiPeer::getDato($elrif,'Nomben');
+        $dato=htmlspecialchars(OpbenefiPeer::getDato($elrif,'Nomben'));
         $dato1=OpbenefiPeer::getDato($elrif,'Codcta');
         $dato2=OpbenefiPeer::getDato2($dato1,'Descta');
         $dato3=FortipfinPeer::getDesfin($financiamiento);
