@@ -223,7 +223,7 @@ $this->Bitacora('Guardo');
         $codact = Herramientas::getX('codmue','Bnregmue','codact',$this->getRequestParameter('codigo'));
         $desmue = Herramientas::getX('codmue','Bnregmue','desmue',$this->getRequestParameter('codigo'));
 
-        $codubi=Herramientas::getX('codact','Bnregmue','codubi',$codact);
+        $codubi=Herramientas::getX('codmue','Bnregmue','codubi',$this->getRequestParameter('codigo'));
         $desubi=Herramientas::getX('codubi','Bnubibie','desubi',$codubi);
 
         $output = '[["'.$cajtexmos.'","'.$codact.'",""],["'.$cajtexcom.'","'.$desmue.'"],["'.$cajtexubi.'","'.$codubi.'"],["'.$cajtexdesubi.'","'.$desubi.'"]]';
