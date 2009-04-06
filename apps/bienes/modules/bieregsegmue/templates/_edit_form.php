@@ -53,7 +53,8 @@
  <?php $value = object_input_tag($bnsegmue, 'getCodmue', array (
   'size' => 15,
   'control_name' => 'bnsegmue[codmue]',
-  'onBlur'=> "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bnsegmue_codmue').value=valor;document.getElementById('bnsegmue_codmue').disabled=false; ".remote_function(array(
+ // 'onBlur'=> "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bnsegmue_codmue').value=valor;document.getElementById('bnsegmue_codmue').disabled=false; ".remote_function(array(
+    'onBlur'=> "javascript: document.getElementById('bnsegmue_codmue').disabled=false; ".remote_function(array(
   			'url'      => 'bieregsegmue/ajax',
   			'complete' => 'AjaxJSON(request, json)',
   			'with' => "'ajax=1&cajtexmos=bnsegmue_codact&cajtexcom=bnsegmue_desmue&codigo='+this.value",
@@ -129,47 +130,8 @@
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
 <br>
-<?php echo label_for('bnsegmue[cobsegmue]', __($labels['bnsegmue{cobsegmue}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('bnsegmue{cobsegmue}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('bnsegmue{cobsegmue}')): ?>
-    <?php echo form_error('bnsegmue{cobsegmue}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-<?php $value = object_input_tag($bnsegmue,'getCobsegmue', array (
-  'size' => 15,
-  'control_name' => 'bnsegmue[cobsegmue]',
-   'onBlur'=> "javascript: valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('bnsegmue_cobsegmue').value=valor;document.getElementById('bnsegmue_cobsegmue').disabled=false; ".remote_function(array(
-  			'url'      => 'bieregsegmue/ajax',
-  			'complete' => 'AjaxJSON(request, json)',
-  			'with' => "'ajax=0&cajtexmos=bnsegmue_descob&codigo='+this.value",
-       		)),
-)); echo $value ? $value : '&nbsp;' ?>
-
-<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bncobseg_Bieregsegmue/clase/Bncobseg/frame/sf_admin_edit_form/obj1/bnsegmue_cobsegmue/obj2/bnsegmue_descob/campo1/codcob/campo2/descob'); ?>
-
-<?php $value = object_input_tag($bnsegmue, 'getDescob', array (
-  'size' => 50,
-  'control_name' => 'bnsegmue[descob]',
-  'disabled' => true,
-)); echo $value ? $value : '&nbsp;' ?>
-   </div>
 <table>
 <tr>
-<th>
-<?php echo label_for('bnsegmue[monsegmue]', __($labels['bnsegmue{monsegmue}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('bnsegmue{monsegmue}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('bnsegmue{monsegmue}')): ?>
-    <?php echo form_error('bnsegmue{monsegmue}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($bnsegmue, array('getMonsegmue',true), array (
-  'size' => 7,
-  'control_name' => 'bnsegmue[monsegmue]',
-  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
-)); echo $value ? $value : '&nbsp;' ?>
-</div>
-</th>
-<th></th>
 <th>
 <?php echo label_for('bnsegmue[fecsegven]', __($labels['bnsegmue{fecsegven}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('bnsegmue{fecsegven}')): ?> form-error<?php endif; ?>">
@@ -213,6 +175,12 @@
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
 <?php echo input_hidden_tag('fecha_actual', date("d/m/Y")) ?>
+</div>
+</fieldset>
+
+<fieldset>
+<div class="form-row">
+<?php echo grid_tag($obj);?>
 </div>
 </fieldset>
 <?php include_partial('edit_actions', array('bnsegmue' => $bnsegmue)) ?>

@@ -17,7 +17,7 @@ array()) ?></h1>
 
 <div id="sf_admin_content">
 <?php include_partial('bieregseginm/edit_messages', array('bnseginm' => $bnseginm, 'labels' => $labels)) ?>
-<?php include_partial('bieregseginm/edit_form', array('bnseginm' => $bnseginm, 'labels' => $labels, 'mascaracatalogo' => $mascaracatalogo, 'mascaraformatoubi' => $mascaraformatoubi, 'mascaralonformato' => $mascaralonformato, 'mascaralonubicacion' => $mascaralonubicacion)) ?>
+<?php include_partial('bieregseginm/edit_form', array('bnseginm' => $bnseginm, 'labels' => $labels, 'mascaracatalogo' => $mascaracatalogo, 'mascaraformatoubi' => $mascaraformatoubi, 'mascaralonformato' => $mascaralonformato, 'mascaralonubicacion' => $mascaralonubicacion, 'obj' => $obj)) ?>
 </div>
 
 <div id="sf_admin_footer">

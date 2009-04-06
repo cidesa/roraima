@@ -5,8 +5,6 @@ methods:
    - "bnseginm{nroseginm}"
    - "bnseginm{fecseginm}"
    - "bnseginm{nomseginm}"
-   - "bnseginm{cobseginm}"
-   - "bnseginm{monseginm}"
    - "bnseginm{fecsegven}"
    - "bnseginm{proseginm}"
 
@@ -33,16 +31,6 @@ names:
     required_msg: La Compañia Aseguradora no puede estar en Blanco.
     validators: DescripcionValidator
 
-  bnseginm{cobseginm}:
-    required:  Yes
-    required_msg: La Cobertura no puede estar en Blanco.
-    #validators: ExistValidator
-
-  bnseginm{monseginm}:
-    required:  Yes
-    required_msg: El Monto no puede estar en Blanco.
-    validators: MyNumberValidator 
-    
   bnseginm{fecsegven}:
     required:  Yes
     required_msg: La Fecha no puede estar en Blanco

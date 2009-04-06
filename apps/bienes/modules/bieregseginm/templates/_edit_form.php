@@ -52,7 +52,8 @@
   <?php $value = object_input_tag($bnseginm, 'getCodmue', array (
   'size' => 20,
   'control_name' => 'bnseginm[codmue]',
-  'onBlur'=> "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bnseginm_codmue').value=valor;document.getElementById('bnseginm_codmue').disabled=false; ".remote_function(array(
+  //'onBlur'=> "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bnseginm_codmue').value=valor;document.getElementById('bnseginm_codmue').disabled=false; ".remote_function(array(
+  'onBlur'=> "javascript: document.getElementById('bnseginm_codmue').disabled=false; ".remote_function(array(
   			'url'      => 'bieregseginm/ajax',
   			'complete' => 'AjaxJSON(request, json)',
   			'with' => "'ajax=4&cajtexmos=bnseginm_codact&cajtexcom=bnseginm_desinm&codigo='+this.value",
@@ -130,50 +131,8 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
     <br>
-
-<?php echo label_for('bnseginm[cobseginm]', __($labels['bnseginm{cobseginm}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('bnseginm{cobseginm}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('bnseginm{cobseginm}')): ?>
-    <?php echo form_error('bnseginm{cobseginm}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-
-  <?php $value = object_input_tag($bnseginm,'getCobseginm', array (
-  'size' => 15,
-  'control_name' => 'bnseginm[cobseginm]',
-   'onBlur'=> "javascript: valor=this.value; valor=valor.pad(4, '0',0);document.getElementById('bnseginm_cobseginm').value=valor;document.getElementById('bnseginm_cobseginm').disabled=false; ".remote_function(array(
-  			'url'      => 'bieregseginm/ajax',
-  			'complete' => 'AjaxJSON(request, json)',
-  			'with' => "'ajax=3&cajtexmos=bnseginm_descob&codigo='+this.value",
-       		)),
-)); echo $value ? $value : '&nbsp;' ?>
-
-
-<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bncobseg_Bieregseginm/clase/Bncobseg/frame/sf_admin_edit_form/obj1/bnseginm_cobseginm/obj2/bnseginm_descob/campo1/codcob/campo2/descob'); ?>
-    <?php $value = object_input_tag($bnseginm, 'getDescob', array (
-  'size' => 20,
-  'disabled' => true,
-  'control_name' => 'bnseginm[descob]',
-)); echo $value ? $value : '&nbsp;' ?>
-</div>
-<br><br>
 <table>
 <tr>
-<th>
-<?php echo label_for('bnseginm[monseginm]', __($labels['bnseginm{monseginm}']), 'class="required"') ?>
-  <div class="content<?php if ($sf_request->hasError('bnseginm{monseginm}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('bnseginm{monseginm}')): ?>
-    <?php echo form_error('bnseginm{monseginm}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_tag($bnseginm, array('getMonseginm',true), array (
-  'size' => 7,
-  'control_name' => 'bnseginm[monseginm]',
-  'onBlur' => "javascript:event.keyCode=13;return entermontootro(event,this.id)",
-)); echo $value ? $value : '&nbsp;' ?>
-  </div>
-</th>
-<th></th>
 <th>
 <?php echo label_for('bnseginm[fecsegven]', __($labels['bnseginm{fecsegven}']), 'class="required"') ?>
   <div class="content<?php if ($sf_request->hasError('bnseginm{fecsegven}')): ?> form-error<?php endif; ?>">
@@ -221,7 +180,11 @@
 <?php echo input_hidden_tag('fecha_actual', date("d/m/Y")) ?>
 
 </fieldset>
-
+<fieldset>
+<div class="form-row">
+<?php echo grid_tag($obj);?>
+</div>
+</fieldset>
 <?php include_partial('edit_actions', array('bnseginm' => $bnseginm)) ?>
 
 </form>
