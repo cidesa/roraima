@@ -118,16 +118,14 @@ class tesmovseglibActions extends autotesmovseglibActions
     {
       if ($this->getUser()->getAttribute('grabo',null,$this->getUser()->getAttribute('formulario'))=='S')
       {
-        $numcom='';
         $getform=$this->getRequestParameter('formulario');
         $formulario=split('!',$getform);
 
-        $this->getUser()->setAttribute('space',$formulario[0]);
+      $this->getUser()->setAttribute('space',$formulario[0]);
         $i=0;
         while ($i<count($formulario)-1)
         {
-          //print 'Entro';exit();
-          $formcont="sf_admin/tesmovseglib/confincomgen".$i;
+            $formcont="sf_admin/tesmovseglib/confincomgen".$i;
           $numcom=$this->getUser()->getAttribute('contabc[numcom]',null,$formcont);
           $reftra=$this->getUser()->getAttribute('contabc[reftra]',null,$formcont);
           $feccom=$this->getUser()->getAttribute('contabc[feccom]',null,$formcont);
@@ -143,14 +141,12 @@ class tesmovseglibActions extends autotesmovseglibActions
           $this->getUser()->getAttributeHolder()->remove('debito',$formcont);
           $this->getUser()->getAttributeHolder()->remove('credito',$formcont);
           $this->getUser()->getAttributeHolder()->remove('grid',$formcont);
-
-          $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formcont));
-          $tsmovlib->setNumcom($numcom);
-          //Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
-          //Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[0]));
+          if($numcom){
+            Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
+            Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[0]));
+          }
           $i++;
         }
-
         $this->getUser()->getAttributeHolder()->remove('grabo',$formulario[0]);
         Tesoreria::salvarTesmovseglib($tsmovlib,$numcom);
         Tesoreria::actualiza_Bancos('A', $tsmovlib->getDebcre(), $tsmovlib->getNumcue(), $tsmovlib->getMonmov());
@@ -286,7 +282,26 @@ class tesmovseglibActions extends autotesmovseglibActions
       $this->eti='';
       $this->color='';
 
-      $cadcorcomcont = "########";
+     $c = new Criteria();
+      $datos = CpdefnivPeer::doSelectOne($c);
+      if ($datos){
+   		$corcomcont = (int)$datos->getCorcomcont() + 1;
+   		$cadcorcomcont = str_pad((string)$corcomcont, 8, "0", STR_PAD_LEFT);;
+   		$valido = false;
+   		while(!$valido){
+   			$c2 = new Criteria();
+	   		$c2->add(ContabcPeer::NUMCOM,$cadcorcomcont);
+	   		$contabc = ContabcPeer::doSelectOne($c2);
+	   		if($contabc){
+	   			$corcomcont++;
+	   			$cadcorcomcont = str_pad((string)$corcomcont, 8, "0", STR_PAD_LEFT);
+	   		}
+	   		else {
+	   			$valido = true;
+	   		}
+   		}
+   	  }
+   	  else $cadcorcomcont = "00000000";
    	  $this->tsmovlib->setNumcom($cadcorcomcont);
     }
 
@@ -382,8 +397,7 @@ $this->Bitacora('Guardo');
           if ($tipmov=='')
           {$valida=false;}
           $numcom=$this->getRequestParameter('numcom');
-          if($numcom=='********') $numcom='########';
-          if ($numcom=='')
+            if ($numcom=='')
           {$valida=false;}
 
           if($valida){
@@ -399,7 +413,7 @@ $this->Bitacora('Guardo');
             $this->getUser()->getAttributeHolder()->remove('formulario');
             $grabar=$this->getRequestParameter('grabar');
             $reftra=$this->getRequestParameter('reftra');
-            //$numcom=$this->getRequestParameter('numcom');
+            $numcom=$this->getRequestParameter('numcom');
             $fectra=$this->getRequestParameter('fectra');
             $destra= $this->getRequestParameter('destra');
             $ctas=$this->getRequestParameter('ctas');
@@ -445,7 +459,7 @@ $this->Bitacora('Guardo');
             $this->getUser()->getAttributeHolder()->remove('formulario');
             $grabar=$this->getRequestParameter('grabar');
             $reftra=$this->getRequestParameter('reftra');
-            //$numcom=$this->getRequestParameter('numcom');
+            $numcom=$this->getRequestParameter('numcom');
             $fectra=$this->getRequestParameter('fectra');
             $destra= $this->getRequestParameter('destra');
             $ctas=$this->getRequestParameter('ctas');
@@ -1006,9 +1020,6 @@ $this->Bitacora('Guardo');
     $fechacom=$this->getRequestParameter('fechacom');
     $numcom=$this->getRequestParameter('numcom');
     $numcom2=$this->getRequestParameter('numcom2');
-    if($numcom2=='********') $numcom2 = "########";
-    if($numcom=='********') $numcom = "########";
-
     $this->msg='';
 
     $sql="Select stacon,tipmov,monmov,codcta,numcue From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
@@ -1056,10 +1067,7 @@ $this->Bitacora('Guardo');
             $afecta=$tstipmov[0]["debcre"];
           }
 
-          // Generar Nuevo comprobante contable
-          if($numcom2=='########') $numcom2=Comprobante::Buscar_Correlativo();
-          Tesoreria::anular_Eliminar('A',$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$feclib,$reflib2);
-
+        
           // GENERAR NUEVO MOVIMIENTO SEGUN LIBRO
           $tsmovlibA= new Tsmovlib();
           $dateFormat = new sfDateFormat($this->getUser()->getCulture());
@@ -1090,6 +1098,7 @@ $this->Bitacora('Guardo');
           $tsmovlibA->save();
 
           Tesoreria::actualiza_Bancos('A','D',$numcue,$monmov);
+          Tesoreria::anular_Eliminar('A',$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$feclib);
         }
       }
     return sfView::SUCCESS;

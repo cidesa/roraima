@@ -15,7 +15,6 @@ class pagemiordActions extends autopagemiordActions
   public  $coderror3=-1;
   public  $coderror4=-1;
   public  $coderror5=-1;
-  public  $coderror6=-1;
   public  $codigo="";
   public  $monto="";
   public  $salvarretencion=-1;
@@ -319,11 +318,8 @@ $this->Bitacora('Guardo');
           $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
 
-          //Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
-          //Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
-          $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
-          $opordpag->setNumcom($numcom);
-          $numerocomp = $numcom;
+          Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
+          Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
          }
          $i++;
         }
@@ -2127,7 +2123,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
   public function executeAnular()
   {
-   $this->referencia="########";//$this->getRequestParameter('referencia');
+   $this->referencia=$this->getRequestParameter('referencia');
    $numord=$this->getRequestParameter('numord');
    $fecemi=$this->getRequestParameter('fecemi');
    $this->compadic=$this->getRequestParameter('compadic');
