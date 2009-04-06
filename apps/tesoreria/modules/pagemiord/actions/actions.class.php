@@ -1621,7 +1621,8 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
     {
       OrdendePago::datosRefere($this->getRequestParameter('codigo'),$this->getRequestParameter('fecha2'),&$fecha,&$descripcion,&$tipo,&$destipo,&$elrif,&$descripcion2,&$msj);
       $fechas=$fecha;
-      $descripcions=$descripcion;
+      $descripcions=htmlspecialchars($descripcion);
+      $descripcion2=htmlspecialchars($descripcion2);
       $tipos=$tipo;
       $destipos=$destipo;
       $dato=OpbenefiPeer::getDato($elrif,'Nomben');
@@ -1638,7 +1639,8 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
      {
         OrdendePago::datosRefere2($this->getRequestParameter('codigo'),$this->getRequestParameter('fecha2'),$this->getRequestParameter('arreglo'),&$fecha,&$descripcion,&$tipo,&$elrif,&$descripcion2,&$destipo,&$financiamiento,&$oppermanente,&$opper,&$msj);
         $fechas=$fecha;
-        $descripcions=$descripcion;
+        $descripcions=htmlspecialchars($descripcion);
+        $descripcion2=htmlspecialchars($descripcion2);
         $tipos=$tipo;
         $destipos=$destipo;
         $dato=OpbenefiPeer::getDato($elrif,'Nomben');
