@@ -223,7 +223,7 @@
 
 &nbsp;&nbsp;
 
- <? echo input_tag('desubi',$bnreginm->getNomubicac(),'size=41')?>
+ <? echo input_tag('desubi',$bnreginm->getDesubi(),'size=41')?>
     </div>
 </div>
 
