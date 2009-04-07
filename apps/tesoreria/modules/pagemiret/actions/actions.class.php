@@ -279,8 +279,8 @@ $this->Bitacora('Guardo');
     	if(!isset($date[0])) $date[0] = 0;
     	if(!isset($date[1])) $date[1] = 0;
     	if(!isset($date[2])) $date[2] = 0;
-    	$fecha = date("Y-m-d",mktime(0,0,0,$date[0],$date[1],$date[2]));
-    	$sqlfecdes = " AND A.FECEMI >= '$fecha'";
+      
+    	$sqlfecdes = " AND A.FECEMI >= '$date[2]-$date[1]-$date[0]'";
     }else{
     	$sqlfecdes = "";
     }
@@ -290,8 +290,8 @@ $this->Bitacora('Guardo');
     	if(!isset($date[0])) $date[0] = 0;
     	if(!isset($date[1])) $date[1] = 0;
     	if(!isset($date[2])) $date[2] = 0;
-    	$fecha = date("Y-m-d",mktime(0,0,0,$date[0],$date[1],$date[2]));
-    	$sqlfechas = " AND A.FECEMI <= '$fecha' ";
+
+    	$sqlfechas = " AND A.FECEMI <= '$date[2]-$date[1]-$date[0]' ";
     }else{
     	$sqlfechas = "";
     }
@@ -317,7 +317,8 @@ $this->Bitacora('Guardo');
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(false);
     $opciones->setTabla('Opretord');
-    $opciones->setAnchoGrid(800);
+    $opciones->setAnchoGrid(700);
+    $opciones->setAncho(850); 
     $opciones->setTitulo('');
     $opciones->setFilas(0);
     $opciones->setHTMLTotalFilas(' ');
@@ -336,7 +337,7 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setNombreCampo('numord');
-    $col2->setHTML('type="text" size="20" readonly=true');
+    $col2->setHTML('type="text" size="15" readonly=true');
 
     $col3 = new Columna('Fecha');
   	$col3->setTipo(Columna::FECHA);
@@ -352,7 +353,7 @@ $this->Bitacora('Guardo');
     $col4->setAlineacionObjeto(Columna::CENTRO);
     $col4->setAlineacionContenido(Columna::CENTRO);
     $col4->setNombreCampo('codpre');
-    $col4->setHTML('type="text" size="25" readonly=true');
+    $col4->setHTML('type="text" size="30" readonly=true');
 
     $col5 = new Columna('Monto Retención');
     $col5->setTipo(Columna::MONTO);
@@ -361,7 +362,7 @@ $this->Bitacora('Guardo');
     $col5->setAlineacionObjeto(Columna::IZQUIERDA);
     $col5->setNombreCampo('monret');
     $col5->setEsNumerico(true);
-    $col5->setHTML('type="text" size="10" readonly=true');
+    $col5->setHTML('type="text" size="15" readonly=true');
     $col5->setEsTotal(true,'opordpag_monord');
 
     $opciones->addColumna($col1);
