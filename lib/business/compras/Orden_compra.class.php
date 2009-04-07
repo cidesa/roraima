@@ -1931,7 +1931,7 @@ class Orden_compra
                         $result1=array();
                         if (Herramientas::BuscarDatos($sql1,&$result1))
                         {
-                                if (($result1[0]['canord']-$result[$i]['canord'])>0)
+                            if (($result1[0]['canord']-$result[$i]['canord'])>0)
                               $sql2="Update Caartsol set canord=canord-".$result[$i][canord]." where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and codcat='".$result[$i]['codcat']."'";
                             else
                               $sql2="Update Caartsol set canord=0 where reqart='".$caordcom->getRefsol()."' and codart='".$result[$i]['codart']."' and codcat='".$result[$i]['codcat']."'";
@@ -1944,7 +1944,7 @@ class Orden_compra
                   }
                   Herramientas::EliminarRegistro("Caartord", "Ordcom", $caordcom->getOrdcom());
                   Herramientas::EliminarRegistro("Caordcom", "Ordcom", $caordcom->getOrdcom());
-                    
+
               }
               }
               else
@@ -1976,13 +1976,14 @@ class Orden_compra
   public static function Hay_recepcion($caordcom)
   {
      $j=0;
-     $sql="SELECT canaju FROM Caartord WHERE ordcom='".$caordcom->getOrdcom()."'";
+     $sql="SELECT canrec FROM Caartord WHERE ordcom='".$caordcom->getOrdcom()."'";
+
      $result=array();
       if (Herramientas::BuscarDatos($sql,&$result))
       {
         while ($j<count($result))
         {
-          if (str_replace("'","",$result[$j]['canaju'])>0)
+          if (str_replace("'","",$result[$j]['canrec'])>0)
           {
               return true;
               break;
