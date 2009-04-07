@@ -19,6 +19,8 @@
 <body>
 
 <?
+$nom=array();
+$keys=array();
 if ($seguir)
 {
 	$nom=array_keys($arre[0]);

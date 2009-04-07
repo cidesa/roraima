@@ -4,3 +4,7 @@
 	echo grid_tag_v2($opordpag->getObjeto());
 ?>
 </div>
+
+<script language="JavaScript" type="text/javascript">
+  ActualizarSaldosGrid("a",new Array("opordpag_monord"));
+</script>

@@ -13,7 +13,7 @@ class tesmovemicheActions extends autotesmovemicheActions
  private $coderror1 =-1;
  private $coderror2 =-1;
  private $coderror3 =-1;
- private $coderror5 =-1;
+ private $coderror4 =-1; 
  private $arraynumche="";
  private $form="sf_admin/tesmovemiche/confincomgen";
 
@@ -93,7 +93,7 @@ $this->Bitacora('Guardo');
     }
     if (isset($tscheemi['numche']))
     {
-      $this->tscheemi->setNumche(str_pad($tscheemi['numche'],8,"0",STR_PAD_LEFT));
+      $this->tscheemi->setNumche($tscheemi['numche']);
     }
     if (isset($tscheemi['numcue']))
     {
@@ -277,6 +277,16 @@ $this->Bitacora('Guardo');
       }
       else if ($this->getRequestParameter('ajax')=='5')
       {
+        $canord = $this->getRequestParameter('canord');  // Cantidad a Pagar
+        $desord = $this->getRequestParameter('desord');  // Descuento de la cantidad a pagar
+        $montotordpag = $this->getRequestParameter('tscheemi_montotordpag');  // Monto parcial a pagar
+        $numcue = $this->getRequestParameter('tscheemi_numcue');  // Numero de Cuenta
+        $fecemi = $this->getRequestParameter('tscheemi_fecemi');  // Fecha del movimiento
+        
+        $montoavalidar = H::toFloat($montotordpag) + (H::toFloat($canord)-H::toFloat($desord));
+        $contaba = ContabaPeer::doSelectOne(new Criteria());
+        
+        
       	$id=$this->getRequestParameter('id');
       	$c= new Criteria();
       	$c->add(OpordpagPeer::NUMORD,$this->getRequestParameter('numord'));
@@ -288,15 +298,44 @@ $this->Bitacora('Guardo');
       	$dateFormat = new sfDateFormat('es_VE');
         $fecemi = $dateFormat->format($fecemi, 'i', $dateFormat->getInputPattern('d'));
 
-        if(Tesoreria::chequear_disponibilidad_financiera($resul))
+        if(Tesoreria::chequear_disponibilidad_financiera($numcue,$montoavalidar,$contaba->getFecini(),$fecemi,$saldo)) 
           $msj = ',["javascript","actualizarsaldocheck(\''.$id.'\',\'tscheemi_montotordpag\',1,\'OP\'); ",""]';
         else
           $msj = ',["javascript","$(\''.$id.'\').checked=false; mens=\'No existe disponibilidad financiera en la cuenta seleccionada\';alert(mens);",""]';
       	if(strtotime($resul->getFecemi()) > strtotime($fecemi)) $msj .= ',["javascript","mens=\'La fecha de emisión del cheque es menor a la de la orden de pago seleccionada...\';alert(mens);",""]';
 
-        $output = '[["'.$cajtexmos.'","'.$dato.'",""]'.$msj.']';
+        $output = '[["'.$cajtexmos.'","'.$dato.'",""],["saldo","'.$saldo.'",""]'.$msj.']';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         return sfView::HEADER_ONLY;
+      }elseif($this->getRequestParameter('ajax')=='6'){
+        $canord = $this->getRequestParameter('canord');  // Cantidad a Pagar
+        $numcue = $this->getRequestParameter('numcue');  // Numero de Cuenta
+        $fecemi = $this->getRequestParameter('fecemi');  // Fecha del movimiento
+        $obj = $this->getRequestParameter('obj');  // input a borrar en caso de error
+        $obj1 = $this->getRequestParameter('obj1');  // input a borrar en caso de error
+        $tipord = $this->getRequestParameter('tipord');  // tipo de orden, para saber si se valida disponibilidad presupuestaria o financiera o las 2
+        $codpre = $this->getRequestParameter('codpre'); // Codigo presupuestario
+        $contaba = ContabaPeer::doSelectOne(new Criteria());
+        $saldo=0;
+      	$dateFormat = new sfDateFormat('es_VE');
+        $fecemi = $dateFormat->format($fecemi, 'i', $dateFormat->getInputPattern('d'));
+        $msj = '';
+        
+        if(!Tesoreria::chequear_disponibilidad_financiera($numcue,H::toFloat($canord),$contaba->getFecini(),$fecemi,$saldo)) 
+          $msj = '[["javascript","$(\''.$obj.'\').value=\'0,0\'; $(\''.$obj1.'\').value=\'0,0\'; mens=\'No existe disponibilidad financiera en la cuenta seleccionada\';alert(mens);",""]]';
+
+        if($tipord=='ordpagdir' && $msj==''){
+          if(!OrdendePago::montoValido(1,H::toFloat($canord),'N',$codpre,1,&$msj,&$mondis,&$sobregiro))
+          {
+            $msj = '[["javascript","$(\''.$obj.'\').value=\'0,0\'; $(\''.$obj1.'\').value=\'0,0\'; mens=\''.Herramientas::obtenerMensajeError($msj).'\';alert(mens);",""]]';
+          }//else $msj = '[["javascript","alert(\''.$mondis.'\');",""]]';;
+        }
+
+        if($msj=='') $msj = '[["javascript","true;",""]]';
+
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$msj.')');
+        return sfView::HEADER_ONLY;
+        
       }
 
 
@@ -716,7 +755,7 @@ $this->Bitacora('Guardo');
     $col3->setAlineacionObjeto(Columna::DERECHA);
     $col3->setEsNumerico(true);
     $col3->setHTML('type="text" size="10"');
-    $col3->setJScript('onKeypress="entermonto_b(event,this.id)"');
+    $col3->setJScript('onKeypress="entermontoordpagdir(event,this.id)"');
     $col3->setEsTotal(true,'tscheemi_totnetpagdir');
 
   // Se guardan las columnas en el objetos de opciones
@@ -926,8 +965,6 @@ $this->Bitacora('Guardo');
             $credito=$this->getUser()->getAttribute('credito',null,$f[$i]);
             $grid=$this->getUser()->getAttribute('grid',null,$f[$i]);
 
-            $numcomche=$numcomche."_".$numcom;
-
             $this->getUser()->getAttributeHolder()->remove('contabc[numcom]',$f[$i]);
             $this->getUser()->getAttributeHolder()->remove('contabc[reftra]',$f[$i]);
             $this->getUser()->getAttributeHolder()->remove('contabc[feccom]',$f[$i]);
@@ -936,9 +973,11 @@ $this->Bitacora('Guardo');
             $this->getUser()->getAttributeHolder()->remove('credito',$f[$i]);
             $this->getUser()->getAttributeHolder()->remove('grid',$f[$i]);
 
- 
-            Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
-            Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$f[$i]));
+            $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$f[$i]));
+            $numcomche=$numcomche."_".$numcom;
+
+            //Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
+            //Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$f[$i]));
           }
           else
           {
@@ -1036,10 +1075,11 @@ $this->Bitacora('Guardo');
        $err = Herramientas::obtenerMensajeError($this->coderror3);
        $this->getRequest()->setError('',$err);
       }
-      if($this->coderror5!=-1)
+
+      if($this->coderror4!=-1)
       {
-       $err = Herramientas::obtenerMensajeError($this->coderror5);
-       $this->getRequest()->setError('tscheemi{fecemi}',$err);
+       $err = Herramientas::obtenerMensajeError($this->coderror4);
+       $this->getRequest()->setError('',$err);
       }
     }
     return sfView::SUCCESS;
@@ -1052,11 +1092,10 @@ $this->Bitacora('Guardo');
     {
       $this->tscheemi = $this->getTscheemiOrCreate();
       try{ $this->updateTscheemiFromRequest();}catch(Exception $ex){}
-      if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tscheemi[fecemi]'))==true)
-  	  {
-        $this->coderror5=529;
-        return false;
-  	  }
+
+      $contaba = ContabaPeer::doSelectOne(new Criteria());
+      $saldo=0;
+      if(!Tesoreria::chequear_disponibilidad_financiera($this->tscheemi->getNumcue(),$this->tscheemi->getMonche(),$contaba->getFecini(),$this->tscheemi->getFecemi(),$saldo)){$this->coderr2 = 195; return false;} 
 
       if ($this->getUser()->getAttribute('tschemi_operacion','vacio')!='ordpag')//CHEQUE DE ORDEN DE PAGO
       {
@@ -1105,7 +1144,7 @@ $this->Bitacora('Guardo');
            $x=$grid[0];
            if (count($x)>0)
            {
-           	    if (!Cheques::validarDisponibilidadPresu($grid,&$errcodigo))
+           	if (!Cheques::validarDisponibilidadPresu($grid,&$errcodigo))
 		        {
 		          $this->coderror3=$errcodigo;
 		          return false;

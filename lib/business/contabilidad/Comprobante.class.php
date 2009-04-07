@@ -132,6 +132,59 @@ class Comprobante
     {
     return $this->msgerr;
     }
+
+  public static function Buscar_Correlativo()
+  {
+    $num=0;
+    $numcom='';
+    $valido = false;
+    while(!$valido){
+      $num = H::getNextvalSecuencia('contabc_numcom_seq');
+      $numcom = str_pad((string)$num, 8, "0", STR_PAD_LEFT);
+      $c = new Criteria();
+      $c->add(ContabcPeer::NUMCOM,$numcom);
+      $contabc = ContabcPeer::doSelectOne($c);
+      if(!$contabc){
+        $valido = true;
+      }
+    }
+    return $numcom;
+  }
+
+
+  // Funcion para guardar los comprobantes contables
+  public static function SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid, $guarda)
+  {
+    if($numcom=='########'){
+      $numcom = Comprobante::Buscar_Correlativo();
+    }
+    
+    Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
+    Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$guarda);
+    
+    return $numcom;
+  }
+  
+  public static function ActualizarReferenciaComprobante($numcom, $refasi)
+  {
+    $c = new Criteria();
+    $c->add(ContabcPeer::NUMCOM,$numcom);
+    $contabc = ContabcPeer::doSelectOne($c);
+    if($contabc){
+      $contabc->setReftra($refasi);
+      $contabc->save();
+      $c = new Criteria();
+      $c->add(Contabc1Peer::NUMCOM,$numcom);
+      $contabc1 = Contabc1Peer::doSelect($c);
+      foreach($contabc1 as $det)
+      {
+        $det->setRefasi($refasi);
+        $det->save();
+      }
+      return true;
+    }else return false;
+  }
+
 }
 
 ?>

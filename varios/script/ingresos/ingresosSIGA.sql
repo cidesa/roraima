@@ -270,6 +270,7 @@ CREATE TABLE "ciimping"
 (
   "refing" VARCHAR(8)  NOT NULL,
   "codpre" VARCHAR(32)  NOT NULL,
+  "codtiprub" VARCHAR(3),
   "moning" NUMERIC(14,2),
   "monrec" NUMERIC(14,2),
   "mondes" NUMERIC(14,2),
@@ -424,10 +425,10 @@ CREATE TABLE "cireging"
 (
   "refing" VARCHAR(8)  NOT NULL,
   "fecing" DATE  NOT NULL,
-  "desing" VARCHAR(500),
-  "codtip" VARCHAR(3),
+  "desing" VARCHAR(500)  NOT NULL,
+  "codtip" VARCHAR(3)  NOT NULL,
   "rifcon" VARCHAR(15),
-  "moning" NUMERIC(14,2),
+  "moning" NUMERIC(14,2)  NOT NULL,
   "monrec" NUMERIC(14,2),
   "mondes" NUMERIC(14,2),
   "montot" NUMERIC(14,2),
@@ -540,23 +541,23 @@ COMMENT ON TABLE "citrasla" IS '';
 
 
 -----------------------------------------------------------------------------
--- cirubro
+-- citiprub
 -----------------------------------------------------------------------------
 
-DROP TABLE IF EXISTS "cirubro" CASCADE;
+DROP TABLE IF EXISTS "citiprub" CASCADE;
 
-DROP SEQUENCE IF EXISTS "cirubro_seq";
+DROP SEQUENCE IF EXISTS "citiprub_seq";
 
-CREATE SEQUENCE "cirubro_seq";
+CREATE SEQUENCE "citiprub_seq";
 
 
-CREATE TABLE "cirubro"
+CREATE TABLE "citiprub"
 (
   "codtiprub" VARCHAR(3)  NOT NULL,
   "destiprub" VARCHAR(250)  NOT NULL,
-  "id" INTEGER  NOT NULL DEFAULT nextval('cirubro_seq'::regclass),
+  "id" INTEGER  NOT NULL DEFAULT nextval('citiprub_seq'::regclass),
   PRIMARY KEY ("id")
 );
 
-COMMENT ON TABLE "cirubro" IS '';
+COMMENT ON TABLE "citiprub" IS '';
 

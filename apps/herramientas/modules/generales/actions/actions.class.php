@@ -219,4 +219,28 @@ class generalesActions extends sfActions
         $this->seguir = true;
     }
   }
+  
+// Acciones de errores de autenticación
+
+  public function executeRouting()
+  {
+
+  }
+
+  public function executeError404()
+  {
+
+  }
+
+  public function executeNologin()
+  {
+    $this->getUser()->setAttribute('urlreferente',$this->getRequest()->getUri());
+  }
+
+  public function executeNocredentials()
+  {
+
+  }
+  
+  
 }

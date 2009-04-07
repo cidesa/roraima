@@ -27,9 +27,13 @@ generator:
       display:
         "Datos": [numord, _fecemi, desord, _coduni, _tipfin, monord]
         "Imputaciones Presupuestarias": [_grid]
-      hide: [tipcau, cedrif, mascaraubi, lonubi, codcat]
+      hide: [tipcau, cedrif, mascaraubi, lonubi, codcat, idrefer, totalcomprobantes, numcom]
       actions:
         _list:        ~
         _save:        ~
         _delete:      ~
         _create:      ~
+        _anular:
+          name: Anular
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anular()"

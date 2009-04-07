@@ -1509,7 +1509,7 @@ public static function CargarDatosGrid(&$form,$obj,$arreglo = false)
       $clase = array();
     }
     //print $tabla.'='.$form->getRequestParameter($id).':id    ';
-    if((trim($form->getRequestParameter($id))!="")) { // Modificación
+    if((trim($form->getRequestParameter($id))!="") and  $form->getRequestParameter($id)!="0,00") { // Modificación
       if(!$arreglo){
         eval('$clase = '.$tabla.'Peer::retrieveByPk($form->getRequestParameter($id));');
       }else{
@@ -2024,7 +2024,7 @@ public static function obtenerDiaMesOAno($fecha,$formato,$dmoa)
     return $valor;
   }
 
-  public function FormatoNum($varmonto,$format='VE')
+  public static function FormatoNum($varmonto,$format='VE')
   {
     if($format=='VE')
     {

@@ -124,13 +124,13 @@
 			  'url'      => 'tesmovtraban/ajax',
 			  'complete' => 'AjaxJSON(request, json)',
 			  'condition' => "$('tsmovtra_ctaori').value != '' && $('id').value == ''",
-  			  'with' => "'ajax=1&cajtexmos=tsmovtra_nombancodesde&cajtexcom=tsmovtra_ctacon_ori&codigo='+this.value",
+  			  'with' => "'ajax=1&cajtexmos=tsmovtra_nombancodesde&cajtexcom=tsmovtra_ctacon_ori&codigo='+this.value+'&montra='+$('tsmovtra_montra').value+'&fectra='+$('tsmovtra_fectra').value",
 
 			  ))),
      array('use_style' => 'true')
   )
 ?>&nbsp;
-  <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Tsmovtra_tesmovtraban/clase/Tsdefban/frame/sf_admin_edit_form/obj1/tsmovtra_nombancodesde/obj2/tsmovtra_ctaori/obj3/tsmovtra_ctacon_ori/campo1/nomcue/campo2/numcue/campo3/codcta/param1/1','','','botoncat')?>
+  <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Tsmovtra_tesmovtraban/clase/Tsdefban/frame/sf_admin_edit_form/obj1/tsmovtra_ctaori/obj2/tsmovtra_nombancodesde/campo1/numcue/campo2/nomcue/campo3/codcta/param1/1','','','botoncat')?>
 <br>
   <?php $value = object_input_tag($tsmovtra, 'getNombancodesde', array (
   'size' => 30,
@@ -272,7 +272,7 @@
   'maxlength' => 8,
   'readonly' => $tsmovtra->getId()!='' ? true : false ,
   'control_name' => 'tsmovtra[numcom]',
-  'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('tsmovtra_numcom').value=valor;document.getElementById('tsmovtra_numcom').disabled=false;",
+  'onBlur'  => "javascript:event.keyCode=13; enter(event,this.value,this.id);",
 )); echo $value ? $value : '&nbsp;' ?></div>
 </th>
 <th>
@@ -323,7 +323,7 @@
 			   'url'      => 'tesmovtraban/ajax',
 			   'script'   => true,
 			   'complete' => 'CatalogoGrid2()',
-			   'with' => "'ajax=3&reftra='+document.getElementById('tsmovtra_reftra').value+'&numcom='+document.getElementById('tsmovtra_numcom').value+'&fectra='+document.getElementById('tsmovtra_fectra').value+'&grabar='+'N'+'&formulario='+'sf_admin/tesmovtraban/confincomgen'+'&destra='+document.getElementById('tsmovtra_destra').value+'&ctas='+document.getElementById('tsmovtra_ctacon_des').value+'_'+document.getElementById('tsmovtra_ctacon_ori').value+'&tipmov='+document.getElementById('tsmovtra_tipmovdesd').value+'_'+document.getElementById('tsmovtra_tipmovhast').value+'&mov='+'D_C'+'&montos='+document.getElementById('tsmovtra_montra').value+'_'+document.getElementById('tsmovtra_montra').value"
+			   'with' => "'ajax=3&reftra='+$('tsmovtra_reftra').value+'&numcom='+$('tsmovtra_numcom').value.replace(/#/gi,'*')+'&fectra='+document.getElementById('tsmovtra_fectra').value+'&grabar='+'N'+'&formulario='+'sf_admin/tesmovtraban/confincomgen'+'&destra='+document.getElementById('tsmovtra_destra').value+'&ctas='+document.getElementById('tsmovtra_ctacon_des').value+'_'+document.getElementById('tsmovtra_ctacon_ori').value+'&tipmov='+document.getElementById('tsmovtra_tipmovdesd').value+'_'+document.getElementById('tsmovtra_tipmovhast').value+'&mov='+'D_C'+'&montos='+document.getElementById('tsmovtra_montra').value+'_'+document.getElementById('tsmovtra_montra').value"
     ),array('class' => 'botoncat')) ?>
 </th>
 </tr>
@@ -387,8 +387,9 @@ function llenar_desnumcom(e)
 
   function Anular()
   {
-  	var obj1=$('tsmovtra_reftra').value;
-  	window.open('/tesoreria_dev.php/tesmovtraban/anular?obj1='+obj1,'...','menubar=no,toolbar=no,scrollbars=yes,width=500,height=300,resizable=yes,left=500,top=80')
+  	var obj1=$('tsmovtra_reftra').value.replace(/#/gi,'*');
+  	<?php if (SF_ENVIRONMENT=='dev') $dev ='_dev'; else $dev=''; ?>
+    window.open('/tesoreria<?php echo $dev ?>.php/tesmovtraban/anular?obj1='+obj1,'...','menubar=no,toolbar=no,scrollbars=yes,width=500,height=300,resizable=yes,left=500,top=80')
   }
 </script>
 

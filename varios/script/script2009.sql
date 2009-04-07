@@ -344,28 +344,28 @@ ALTER TABLE "SIMA002".fafactur ADD COLUMN codcaj integer;
 --02/03/2009 Desireé Martínez
 ALTER TABLE fabancos
    ALTER COLUMN nomban SET NOT NULL;
-ALTER TABLE "SIMA002".fabancos ADD COLUMN codban character varying(20) NOT NULL;
+ALTER TABLE fabancos ADD COLUMN codban character varying(20) NOT NULL;
 ALTER TABLE fabancos ALTER COLUMN nomban SET STATISTICS -1;
 
--- View: ""SIMA002".faallbancos" Contiene las union de la tabla tsdefban y fabancos
+-- View: "faallbancos" Contiene las union de la tabla tsdefban y fabancos
 
--- DROP VIEW "SIMA002".faallbancos;
+-- DROP VIEW faallbancos;
 
-CREATE OR REPLACE VIEW "SIMA002".faallbancos AS
+CREATE OR REPLACE VIEW faallbancos AS
  SELECT tsdefban.nomcue AS banco, tsdefban.numcue AS ctaban, tsdefban.id
-   FROM "SIMA002".tsdefban
+   FROM tsdefban
 UNION ALL
  SELECT fabancos.nomban AS banco, fabancos.codban AS ctaban, fabancos.id
-   FROM "SIMA002".fabancos
+   FROM fabancos
   ORDER BY 1;
 
-ALTER TABLE "SIMA002".faallbancos OWNER TO postgres;
+ALTER TABLE faallbancos OWNER TO postgres;
 
-ALTER TABLE "SIMA002".caordcom ALTER codpro TYPE character varying(15);
+ALTER TABLE caordcom ALTER codpro TYPE character varying(15);
 
 --03/03/2009 Ya estoy cansada del retrabajo cosas que ya tenia hechas sigo cambiando me pregunto porque sera
-ALTER TABLE "SIMA002".fafactur DROP COLUMN codconpag;
-ALTER TABLE "SIMA002".fafactur ADD COLUMN codconpag integer;
+ALTER TABLE fafactur DROP COLUMN codconpag;
+ALTER TABLE fafactur ADD COLUMN codconpag integer;
 
 --03/03/2009 ERIVERO
 alter table caartdph add codalm varchar(6);
@@ -465,12 +465,21 @@ ALTER TABLE contabc_numcom_seq OWNER TO postgres;
 
 ALTER TABLE "opdefemp"
   ADD COLUMN "codcatcajchi" character varying(32);
-  
+
 -- Se agrego para aumentar el tamaño de los decimales en la cantidad de la orden de compra
 ALTER TABLE caartord ALTER canord TYPE numeric(14,3);
 ALTER TABLE caresordcom ALTER canord TYPE numeric(14,3);
- 
+
 ALTER TABLE caregart ALTER desart TYPE character varying(1500);
+
+--27/03/2009 Desi ...Se agrego los campos fecanu y desanu para la anulacion de las transacciones
+ALTER TABLE "cobtransa"
+    ADD COLUMN "fecanu" date,
+    ADD COLUMN "desanu" varchar(250);
+
+ALTER TABLE caartord ALTER desart TYPE character varying(1500);
+ALTER TABLE caresordcom ALTER desres TYPE character varying(2000);
+ALTER TABLE caartfec ALTER desart TYPE character varying(2000);
 
 --30/03/2009  Tabla para la forma nueva de formulacion forcargos que parte de npcargos
 

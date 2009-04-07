@@ -55,6 +55,9 @@ class Cheques
       $tsmovlib->setStacon("N");
       $tsmovlib->setFecing(date("Y-m-d"));
       $tsmovlib->save();
+      
+      Comprobante::ActualizarReferenciaComprobante($Comprobante,$numche);
+      
     }
     else
     {
@@ -570,7 +573,7 @@ class Cheques
     if ($tippag=='S') //Pago Simple
     {
       $x=$grid[0];
-      $numche=str_pad($tscheemi->getNumche(),8,"0",STR_PAD_LEFT);
+      $numche=$tscheemi->getNumche();
       $j=0;
       $concom=0;
      if ($gencom!="S") $minumcom=split("_",$numcomarr);
@@ -711,7 +714,7 @@ class Cheques
     {
       $x=$grid[0];
       $j=0;
-      $numche=str_pad($tscheemi->getNumche(),8,"0",STR_PAD_LEFT);
+      $numche=$tscheemi->getNumche();
       $CtaDcto="";
       $Monto=0;
       $MontRet=0;
@@ -842,7 +845,7 @@ class Cheques
       $x=$grid[0];
       $arraynumche="";
       $j=0;
-      $numche=str_pad($tscheemi->getNumche(),8,"0",STR_PAD_LEFT);
+      $numche=$tscheemi->getNumche();
       $MontOP = 0;
       $DescOp="";
       $TipCompro="";
@@ -893,7 +896,7 @@ class Cheques
       $x=$grid[0];
       $arraynumche="";
       $j=0;
-      $numche=str_pad($tscheemi->getNumche(),8,"0",STR_PAD_LEFT);
+      $numche=$tscheemi->getNumche();
       $MontOP = 0;
       $DescOp="";
       $TipCompro="";
@@ -947,7 +950,7 @@ class Cheques
       $x=$grid[0];
       $arraynumche="";
       $j=0;
-      $numche=str_pad($tscheemi->getNumche(),8,"0",STR_PAD_LEFT);
+      $numche=$tscheemi->getNumche();
       $MontOP=0;
       $CuentaDes="";
       $MontDcto=0;
@@ -1049,8 +1052,8 @@ class Cheques
                                              $operacion,&$arrcompro)
   {
    //$Comprob=$numcomcon;
-   $Comprob = self::Buscar_Correlativo_Comprobante();
-   if (!self::Verificar_Comprobante($Comprob))
+   $Comprob = "########";
+   if (true)
    {
       $ctas="";$movs="";$montos="";$desc="";
       $CtaBan = Herramientas::getX('numcue','Tsdefban','Codcta',$tscheemi->getNumcue());

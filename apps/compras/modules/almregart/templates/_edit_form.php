@@ -346,7 +346,7 @@
 
 
 <?php 
-    if($sf_user->getAttribute('menu','','cidesa/autenticacion')=='facturacion'){
+    if($sf_user->getAttribute('menu','','autenticacion')=='facturacion'){
       echo '<fieldset>';
       include_partial('almregart/facturacion', array('caregart' => $caregart, 'mascaraarticulo' => $mascaraarticulo, 'longart' => $longart, 'mascaracontabilidad' => $mascaracontabilidad, 'longcont' => $longcont, 'mascarapartida' => $mascarapartida, 'longpar' => $longpar, 'mascaraubicacion' => $mascaraubicacion, 'longubi' => $longubi, 'mascaracatsnc' => $mascaracatsnc, 'longcatsnc' => $longcatsnc, 'labels' => $labels, 'obj' => $obj, 'mensaler' => $mensaler));
       echo '</fieldset>';
