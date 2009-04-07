@@ -111,7 +111,7 @@ class confincomgenActions extends autoconfincomgenActions
 
 
     array_multisort($new_movs,SORT_DESC,$new_ctas,$new_descs,$new_montos);
-	$this->ctas='';
+	  $this->ctas='';
     $this->desc_ctas='';
     $this->arreglo_mov='';
     $this->arreglo_montos='';
@@ -259,7 +259,7 @@ $this->Bitacora('Guardo');
 
 
     array_multisort($new_movs,SORT_DESC,$new_ctas,$new_descs,$new_montos);
-	$this->ctas='';
+	  $this->ctas='';
     $this->desc_ctas='';
     $this->arreglo_mov='';
     $this->arreglo_montos='';
@@ -342,10 +342,10 @@ $this->Bitacora('Guardo');
     $opciones = new OpcionesGrid();
     $opciones->setEliminar(true);
     $opciones->setTabla('Contabc1');
-    $opciones->setAncho(1200);
-    $opciones->setAnchoGrid(1200);
+    $opciones->setAncho(870);
+    $opciones->setAnchoGrid(900);
     $opciones->setTitulo('Asientos Contable');
-	$opciones->setFilas(50);
+	  $opciones->setFilas(50);
     $opciones->setHTMLTotalFilas(' ');
 
     $col1 = new Columna('Código de Cuenta');
@@ -354,7 +354,7 @@ $this->Bitacora('Guardo');
     $col1->setAlineacionObjeto(Columna::IZQUIERDA);
     $col1->setAlineacionContenido(Columna::IZQUIERDA);
     $col1->setNombreCampo('codcta');
-    $col1->setHTML('type="text" size="25" maxlength="25"');
+    $col1->setHTML('type="text" size="15" maxlength="25"');
     $col1->setCatalogo('contabb','sf_admin_edit_form', array('codcta' => 1,'descta' => 2,),'Confincomgen_Contabb');
     $col1->setJScript('onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$formatocontable.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}"');
     $col1->setAjax('confincomgen',1,2);
@@ -364,20 +364,20 @@ $this->Bitacora('Guardo');
     $col2->setAlineacionObjeto(Columna::IZQUIERDA);
     $col2->setAlineacionContenido(Columna::IZQUIERDA);
     $col2->setNombreCampo('Descta');
-    $col2->setHTML('type="text" size="60" disabled=true  maxlength="250" ');
+    $col2->setHTML('type="text" size="40" disabled=true  maxlength="250" ');
 
     $col3 = new Columna('Referencia');
     $col3->setTipo(Columna::TEXTO);
     $col3->setAlineacionObjeto(Columna::DERECHA);
     $col3->setAlineacionContenido(Columna::DERECHA);
     $col3->setNombreCampo('Refasi');
-    $col3->setHTML('type="text" size="8" maxlength="8" ');
+    $col3->setHTML('type="text" size="10" maxlength="8" ');
 
-	$col4 = new Columna('Fecha');
-	$col4->setNombreCampo('Feccom');
-	$col4->setTipo(Columna::FECHA);
-	$col4->setHTML('size="50"');
-	$col4->setEsGrabable(true);
+  	$col4 = new Columna('Fecha');
+  	$col4->setNombreCampo('Feccom');
+  	$col4->setTipo(Columna::FECHA);
+  	$col4->setHTML('size="8"');
+  	$col4->setEsGrabable(true);
 
     $col5 = new Columna('Débito');
     $col5->setTipo(Columna::MONTO);
@@ -386,7 +386,7 @@ $this->Bitacora('Guardo');
     $col5->setAlineacionObjeto(Columna::DERECHA);
     $col5->setNombreCampo('Mondebito');
     $col5->setEsNumerico(true);
-    $col5->setHTML('type="text" size="20" readonly="false"');
+    $col5->setHTML('type="text" size="12" readonly="false"');
     $col5->setJScript('onKeypress="javascript:entermonto(event,this.id);inhabilitar_campo(event,this.id);"');
     $col5->setEsTotal(true,'debito');
 
@@ -397,7 +397,7 @@ $this->Bitacora('Guardo');
     $col6->setAlineacionObjeto(Columna::DERECHA);
     $col6->setNombreCampo('Moncredito');
     $col6->setEsNumerico(true);
-    $col6->setHTML('type="text" size="20" readonly="false"');
+    $col6->setHTML('type="text" size="12" readonly="false"');
     $col6->setJScript('onKeypress="javascript:entermonto(event,this.id);inhabilitar_campo(event,this.id)"');
     $col6->setEsTotal(true,'credito');
 

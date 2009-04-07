@@ -147,9 +147,25 @@ function totalizarMonto(e)
         }
         else
         {
-          alert('Código del Artículo está Repetido');
+          alert('Cï¿½digo del Artï¿½culo estï¿½ Repetido');
           $(id).value="";
         }
       }
     }
  }
+
+  function anular()
+  {
+   if ($('opordpag_numcom').value!="")
+    {
+     var referencia="RE"+$('opordpag_numcom').value.substr(2,6);
+    }
+    else
+    {
+     var referencia=$('opordpag_numord').value;
+    }
+
+    var numord=$('opordpag_numord').value;
+    var fecemi=$('opordpag_fecemi').value;
+    window.open(getUrlModulo()+'anular?numord='+numord+'&referencia='+referencia+'&fecemi='+fecemi,'...','menubar=no,toolbar=no,scrollbars=yes,width=700,height=250,resizable=yes,left=400,top=120');
+  }

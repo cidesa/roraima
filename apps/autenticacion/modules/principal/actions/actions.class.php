@@ -25,7 +25,7 @@ class principalActions extends sfActions
 
     $this->modulo = $this->getRequestParameter('m','');
 
-    $this->getUser()->setAttribute('menu',$this->modulo,'cidesa/autenticacion');
+    $this->getUser()->setAttribute('menu',$this->modulo,'autenticacion');
 
 
   }

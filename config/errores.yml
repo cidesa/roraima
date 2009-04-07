@@ -14,7 +14,7 @@
   msj: No se Encuentra este Documento
 4:
   cod: 4
-  msj: Debe tener al meno un Registro en el Grid
+  msj: Debe tener al menos un Registro en el Grid
 5:
   cod: 5
   msj: Por que Existen Datos que Depende de Este
@@ -255,6 +255,12 @@
 193:
   cod: 193
   msj: La fecha de Entrega no puede ser menor que la Fecha de Emisión del Cheque
+194:
+  cod: 194
+  msj: La cuenta bancaria origen no puede ser igual a la cuenta bancaria destino
+195:
+  cod: 195
+  msj: No Existe Disponibilidad Financiera en la cuenta de banco
 
 ################### NOMINA ####################
 400:
@@ -346,9 +352,15 @@
 525:
   cod: 525
   msj: No puede salvar sin introducir  al menos un articulo
-529:
-  cod: 529
-  msj: La Fecha no se encuentra de un Perido Contable Abierto.
+526:
+  cod: 526
+  msj: No se Puede Eliminar la Orden ya que el Comprobante Contable asociado esta actualizado.
+527:
+  cod: 527
+  msj: La Orden ya fue pagada en el Módulo de Bancos.
+527:
+  cod: 527
+  msj: No puede salvar si tener al menos una imputación Presupuestaria.
 3:
   cod: 3
   msj: La contraseña es diferente.
@@ -795,6 +807,9 @@
 1145:
     cod:1145
     msj: El Cliente Ya Sobrepaso el Límite de Credito
+1146:
+    cod:1146
+    msj: La Condición de Pago no corresponde con la Forma de Pago.
 ########## Licitaciones ########
 901:
     cod: 901
@@ -838,6 +853,26 @@
 1502:
     cod: 1502
     msj: No se puede eliminar el ajuste
+
+1503:
+    cod: 1503
+    msj: No se puede eliminar Título Presupuestario Padre
+
+1504:
+    cod: 1504
+    msj: No se puede realizar el ajuste. Movimientos del ajuste no pueden estar vacíos
+
+1505:
+    cod: 1505
+    msj: El Movimiento en Libros no puede ser Eliminado porque No Existe
+
+1506:
+    cod: 1506
+    msj: El Movimiento en Libros no pudo ser Eliminado
+
+1507:
+    cod: 1507
+    msj: Este movimiento se encuentra Anulado
 
 ########## Atencion al Ciudadano ########
 1400:
@@ -892,3 +927,31 @@
 1305:
   cod: 1305
   msj: El Monto del Financiamiento no puede ser Menor a la Asignacion Inicial
+
+
+########### Hacienda ##############
+
+701:
+  cod: 701
+  msj: Código y Año ya Existe, Intente con otro.
+
+702:
+  cod: 702
+  msj: Id no Encontrado, fallo al borrar Detalle.
+
+############Cuentas x Cobrar#########
+1800:
+  cod: 1800
+  msj: No Puede Salvar sin haber seleccionado un Documento a Pagar
+1801:
+  cod: 1801
+  msj: No Puede Salvar sin haber Registrado un Pago
+1802:
+  cod: 1802
+  msj: No Puede Salvar sin haber Seleccionar el Banco y Num. de Referencia
+1803:
+  cod: 1803
+  msj: No Puede Salvar porque este Cliente no esta como Beneficiario para realizar el Ingreso
+1804:
+  cod: 1804
+  msj:  No se puede eliminar debido a que el Movimiento según Libro esta conciliado o el Comprobante esta actualizado.

@@ -14,4 +14,4 @@ default:
   javascripts:    [%SF_PROTOTYPE_WEB_DIR%/js/prototype]
 
   has_layout:     on
-  layout:         layout
+  layout:         layout_generales

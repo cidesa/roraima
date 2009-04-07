@@ -22,6 +22,9 @@ function CatalogoGrid()
        }
        neto=monto-dto;
        document.getElementById(idtot).value=format(neto.toFixed(2),'.',',','.');
+
+       new Ajax.Request('/'+getScriptname()+'/tesmovemiche/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&fecemi='+$('tscheemi_fecemi').value+'&numcue='+$('tscheemi_numcue').value+'&canord='+$('tscheemi_montotpagnap').value+'&obj=tscheemi_montotpagnap&obj1=tscheemi_totnetpagnap'})
+        
        }
       else
      {
@@ -30,6 +33,7 @@ function CatalogoGrid()
       document.getElementById(id).focus();
       document.getElementById(id).select();
       }
+      
    }
    } //end function
 
@@ -137,3 +141,17 @@ function CatalogoGrid()
       document.getElementById(id).select();
       }
    } //end function
+
+  function entermontoordpagdir(event,id)
+  {
+    var aux = id.split("_");
+    var name=aux[0];
+    var fil=aux[1];
+    var col=parseInt(aux[2]);
+    var codpre=name+"_"+fil+"_1";
+    var canord=name+"_"+fil+"_3";    
+    
+    entermonto_b(event,id);
+    if(event.keyCode==13) new Ajax.Request('/'+getScriptname()+'/tesmovemiche/ajax', {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=6&fecemi='+$('tscheemi_fecemi').value+'&numcue='+$('tscheemi_numcue').value+'&canord='+$(canord).value+'&obj='+canord+'&obj1=tscheemi_totnetpagdir&tipord=ordpagdir&codpre='+$(codpre).value});
+    return true;
+  }

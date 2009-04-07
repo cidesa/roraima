@@ -26,6 +26,7 @@ class Opordpag extends BaseOpordpag
   protected $objeto=array();
   protected $mascaraubi = "";
   protected $lonubi = 0;
+  protected $idrefer="";
   protected $codcat="";
 
 

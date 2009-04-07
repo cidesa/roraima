@@ -1692,6 +1692,7 @@
          var calculo=((montotfac-monimpuesto)*porislr/100);
          $(basemil).value=format(calculo.toFixed(2),'.',',','.');
          $(basemil).disabled=false;
+
          $(porcentmil).value=format(porcentaje,'.',',','.');
          var cal2=monto1XMILN();
       }

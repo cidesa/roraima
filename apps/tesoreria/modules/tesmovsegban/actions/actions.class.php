@@ -10,26 +10,6 @@
  */
 class tesmovsegbanActions extends autotesmovsegbanActions
 {
-  public  $coderror1=-1;
-
-	public function validateEdit()
-  {
-    if($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->tsmovban = $this->getTsmovbanOrCreate();
-      try{ $this->updateTsmovbanFromRequest();}catch(Exception $ex){}
-      if ($this->tsmovban->getId()=="")
-      {
-      	if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovban[fecban]'))==true)
-      	{
-          $this->coderror1=529;
-          return false;
-      	}
-      }
-      return true;
-    }else return true;
-  }
-
 
 	public function executeEdit()
 	{
@@ -258,16 +238,6 @@ $this->Bitacora('Guardo');
 
 
     $this->labels = $this->getLabels();
-
-
-    if($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      if($this->coderror1!=-1)
-      {
-       $err = Herramientas::obtenerMensajeError($this->coderror1);
-       $this->getRequest()->setError('tsmovban{fecban}',$err);
-      }
-    }
 
     return sfView::SUCCESS;
   }

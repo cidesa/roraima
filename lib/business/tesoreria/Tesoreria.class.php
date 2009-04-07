@@ -495,52 +495,28 @@ class Tesoreria {
   //formulario confincomgen
   /********************************************************************************************************/
 
-  public static function Salvarconfincomgen($numcom, $reftra, $feccom, $descom, $debito, $credito) {
-    $c = new Criteria();
-    $c->add(ContabcPeer :: NUMCOM, $numcom);
-    $contabcr = ContabcPeer :: doSelectOne($c);
+  public static function Salvarconfincomgen($numcom, $reftra, $feccom, $descom, $debito, $credito)
+  {
 
     $dateFormat = new sfDateFormat('es_VE');
     $feccom_mod = $dateFormat->format($feccom, 'i', $dateFormat->getInputPattern('d'));
 
-    if ($contabcr) {
-      $contabcr->setNumcom($numcom);
-      $contabcr->setReftra($reftra);
-      $contabcr->setFeccom($feccom_mod);
-      $contabcr->setDescom($descom);
-      if ($debito == $credito) {
-        $contabcr->setStaCom('D');
-      } else {
-        $contabcr->setStaCom('E');
-      }
-      $contabcr->setTipcom(null);
-      $contabcr->setMoncom($debito);
-      $compgene = $numcom;
-      $contabcr->save();
+    $contabc2 = new Contabc();
+    $contabc2->setNumcom($numcom);
+    $contabc2->setReftra($reftra);
+    $contabc2->setFeccom($feccom_mod);
+    $contabc2->setDescom($descom);
+
+    if ($debito == $credito) {
+      $contabc2->setStaCom('D');
     } else {
-      $contabc2 = new Contabc();
-      $contabc2->setNumcom($numcom);
-      $contabc2->setReftra($reftra);
-      $contabc2->setFeccom($feccom_mod);
-      $contabc2->setDescom($descom);
-
-      if ($debito == $credito) {
-        $contabc2->setStaCom('D');
-      } else {
-        $contabc2->setStaCom('E');
-      }
-      $contabc2->setTipcom(null);
-      $contabc2->setMoncom($debito);
-      $compgene = $numcom;
-      $contabc2->save();
-
-      $c = new Criteria();
-   	  $datos = CpdefnivPeer::doSelectOne($c);
-      if ($datos){
-      	$datos->setCorcomcont((string)$numcom);
-   		$datos->save();
-      }
+      $contabc2->setStaCom('E');
     }
+    $contabc2->setTipcom(null);
+    $contabc2->setMoncom($debito);
+    $compgene = $numcom;
+    $contabc2->save();
+
   }
 
   public static function Salvar_asientosconfincomgen($numcom, $reftra, $feccom, $grid, $guarda)
@@ -1007,16 +983,16 @@ class Tesoreria {
     }
   }
 
-  public static function anular_Eliminar($accion, $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib) {
+  public static function anular_Eliminar($accion, $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib,$reflib2='') {
     if ($accion == 'E') {
-      self :: buscar_Comprobante('E', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib);
+      self :: buscar_Comprobante('E', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib, $reflib2);
     }
     if ($accion == 'A') {
-      self :: buscar_Comprobante('A', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib);
+      self :: buscar_Comprobante('A', $numcomadi, $feccomadi, $compadic, $fechacom, $numcom, $numcom2, $feclib, $reflib2);
     }
   }
 
-  public static function buscar_Comprobante($accion,$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$feclib)
+  public static function buscar_Comprobante($accion,$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$feclib, $reflib2='')
   {
     if ($accion=='E')
     {
@@ -1065,46 +1041,49 @@ class Tesoreria {
     }
     else
     {
+      if($numcom2=='########') $numcom2 = Comprobante::Buscar_Correlativo();
+
       $sql="Select descom,moncom from CONTABC where NumCom = '".$numcom."'";
-        if (Herramientas::BuscarDatos($sql,&$contabc))
+      if (Herramientas::BuscarDatos($sql,&$contabc))
+      {
+        $dateFormat = new sfDateFormat('es_VE');
+        $fec = $dateFormat->format($feclib, 'i', $dateFormat->getInputPattern('d'));
+
+        $tcontabc= new Contabc();
+        $tcontabc->setNumcom($numcom2);
+        $tcontabc->setFeccom($fec);
+        $tcontabc->setDescom($contabc[0]["descom"]);
+        $tcontabc->setStacom('D');
+        $tcontabc->setTipcom(null);
+        $tcontabc->setReftra($reflib2);
+        $tcontabc->setMoncom($contabc[0]["moncom"]);
+        $tcontabc->save();
+
+        $sql2="Select codcta,numasi,refasi,desasi,debcre,monasi from CONTABC1 where NumCom = '".$numcom."' AND FECCOM=TO_DATE('".$fechacom."','YYYY-MM-DD')";
+        if (Herramientas::BuscarDatos($sql2,&$result2))
         {
-          $dateFormat = new sfDateFormat('es_VE');
-          $fec = $dateFormat->format($feclib, 'i', $dateFormat->getInputPattern('d'));
-
-          $tcontabc= new Contabc();
-          $tcontabc->setNumcom($numcom2);
-          $tcontabc->setFeccom($fec);
-          $tcontabc->setDescom($contabc[0]["descom"]);
-          $tcontabc->setStacom('D');
-          $tcontabc->setTipcom(null);
-          $tcontabc->setMoncom($contabc[0]["moncom"]);
-          $tcontabc->save();
-
-          $sql2="Select codcta,numasi,refasi,desasi,debcre,monasi from CONTABC1 where NumCom = '".$numcom."' AND FECCOM=TO_DATE('".$fechacom."','YYYY-MM-DD')";
-          if (Herramientas::BuscarDatos($sql2,&$result2))
+          foreach ($result2 as $contabc1)
           {
-            foreach ($result2 as $contabc1)
+            $tcontabc1= new Contabc1();
+            $tcontabc1->setNumcom($numcom2);
+            $tcontabc1->setFeccom($fec);
+            $tcontabc1->setCodcta($contabc1["codcta"]);
+            $tcontabc1->setNumasi($contabc1["numasi"]);
+            $tcontabc1->setRefasi($reflib2);
+            $tcontabc1->setDesasi($contabc1["desasi"]);
+            if ($contabc1["debcre"]=='D')
             {
-              $tcontabc1= new Contabc1();
-              $tcontabc1->setNumcom($numcom2);
-              $tcontabc1->setFeccom($fec);
-              $tcontabc1->setCodcta($contabc1["codcta"]);
-              $tcontabc1->setNumasi($contabc1["numasi"]);
-              $tcontabc1->setRefasi($contabc1["refasi"]);
-              $tcontabc1->setDesasi($contabc1["desasi"]);
-              if ($contabc1["debcre"]=='D')
-              {
-                $tcontabc1->setDebcre('C');
-              }
-              else
-              {
-                $tcontabc1->setDebcre('D');
-              }
-              $tcontabc1->setMonasi($contabc1["monasi"]);
-              $tcontabc1->save();
+              $tcontabc1->setDebcre('C');
             }
+            else
+            {
+              $tcontabc1->setDebcre('D');
+            }
+            $tcontabc1->setMonasi($contabc1["monasi"]);
+            $tcontabc1->save();
           }
         }
+      }
       else
       {
         return 'El Comprobante Nro. '.$numcom.' no fué anulado, y falta que se genere el comprobante INVERSO.';
@@ -1261,7 +1240,7 @@ class Tesoreria {
 
   public static function reversarComprobante($numerocomprobante,$fecanu)
   {
-    $numcom="A".substr($numerocomprobante,1,7);
+    $numcom=Comprobante::Buscar_Correlativo();
     $c= new Criteria();
     $c->add(ContabcPeer::NUMCOM,$numerocomprobante);
     $resulta=ContabcPeer::doSelectOne($c);
@@ -1480,6 +1459,7 @@ class Tesoreria {
     $tsmovlib->setStatus('C');
     $tsmovlib->setStacon('N');
     $tsmovlib->save();
+
   }
 
   public static function VerificarChequeCaducado($numcue,$fecemiche)
@@ -1529,16 +1509,45 @@ class Tesoreria {
    	else return "00000000";
    }
 
-  public static function chequear_disponibilidad_financiera($tsmovlib)
+  public static function chequear_disponibilidad_financiera($banco='',$monto=0, $fechad='',$fechah='',&$saldo)
   {
-    // TODO: migrar el codigo de VB
-    return true;
+    $saldo = Tesoreria::Monto_disponible_financiero($banco,$fechad,$fechah);
+    //print $saldo;
+    if($saldo < $monto){
+      return false;
+    }else return true;
   }
 
-  public static function Monto_disponible_financiero($banco,$fechad,$fechah,&$mondis)
+  public static function Monto_disponible_financiero($banco,$fechad,$fechah)
   {
-  	$mondis = 999999999;
-  	return true;
+    $anterior=0;
+    $deb=0;
+    $cre=0;
+    $contaba = ContabaPeer::doSelectOne(new Criteria());
+
+    if($contaba){
+      $fechainicio = $contaba->getFecini();
+    }
+    $c = new Criteria();
+    $c->add(TsdefbanPeer::NUMCUE,$banco);
+    $tsdefban = TsdefbanPeer::doSelectOne($c);
+    if($tsdefban){
+      $fecha = date('');
+      $anterior=$tsdefban->getAntlib();
+    }
+
+    $sql = "SELECT COALESCE(  SUM(  case when A.DEBCRE='D' then B.MONMOV else 0 end),0) as debitos , COALESCE( SUM(  case when A.DEBCRE='C' then B.MONMOV else 0 end),0) as creditos
+    FROM TSTIPMOV A,TSMOVLIB B,TSDEFBAN c WHERE B.NUMCUE = '".$banco."' AND b.numcue = c.numcue and
+    B.TIPMOV = A.CODTIP AND
+    B.FECLib <= TO_DATE('".$fechah."','yyyy-MM-DD') AND
+    B.FECLib >=TO_DATE('".$fechad."','yyyy-MM-DD')";
+    //print $sql;
+    if(Herramientas :: BuscarDatos($sql, &$result)){
+      $deb = $result[0]['debitos'];
+      $cre = $result[0]['creditos'];
+    }
+
+  	return $anterior + $deb - $cre;
   }
 
   public static function salvarSalidasCajas($tssalcaj,$grid)
@@ -1705,21 +1714,265 @@ class Tesoreria {
     }// if ($tsdefban)
   }
 
-  public static function validaPeriodoCerrado($fecha)
+  public static function salvarRendicionCajaChica($opordpag,$grid,$numerocomp)
   {
-    $dateFormat = new sfDateFormat('es_VE');
-    $fec = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+  	self::grabarOrden($opordpag,$numerocomp);
+  	self::grabarDetalleOrden($opordpag,$grid);
+  	self::grabarCausado($opordpag);
+  	self::grabarImpcau($opordpag,$grid);
 
-    $c= new Criteria();
-    $c->add(Contaba1Peer::FECDES,$fec,Criteria::LESS_EQUAL);
-    $c->add(Contaba1Peer::FECHAS,$fec,Criteria::GREATER_EQUAL);
-    $c->add(Contaba1Peer::STATUS,'A');
-    $conta1=Contaba1Peer::doSelectOne($c);
-    if ($conta1)
+  	$a= new Criteria();
+  	$a->add(TssalcajPeer::FECSAL,$opordpag->getFecemi(),Criteria::LESS_EQUAL);
+  	$data= TssalcajPeer::doSelect($a);
+  	if ($data)
+  	{
+      foreach ($data as $obj)
+  	 {
+  	   $obj->setStasal('R');
+  	   $obj->save();
+  	  }
+  	}
+  }
+
+  public static function grabarCausado($opordpag)
+  {
+    $cpcausad= new Cpcausad();
+    $cpcausad->setRefcau($opordpag->getNumord());
+    $cpcausad->setTipcau($opordpag->getTipcau());
+    $cpcausad->setRefcom(null);
+    $cpcausad->setTipcom(null);
+    $cpcausad->setFeccau($opordpag->getFecemi());
+    $cpcausad->setAnocau(substr($opordpag->getFecemi(),0,4));
+    $cpcausad->setDesanu(null);
+    $cpcausad->setMoncau($opordpag->getMonord());
+    $cpcausad->setSalaju(0);
+    $cpcausad->setStaanu('A');
+    $cpcausad->save();
+  }
+
+  public static function grabarImpcau($opordpag,$grid)
+  {
+  	$referencia=$opordpag->getNumord();
+  	$g= new Criteria();
+  	$g->add(CpimpcauPeer::REFCAU,$referencia);
+  	CpimpcauPeer::doDelete($g);
+
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
     {
-      return false;
-    }else
-    {return true;}
+      if ($x[$j]["codpre"]!='' && $x[$j]["moncau"]!=0)
+      {
+        $cpimpcau= new Cpimpcau();
+        $cpimpcau->setRefcau($referencia);
+        $cpimpcau->setCodpre($x[$j]["codpre"]);
+        $cpimpcau->setMonimp($x[$j]["moncau"]);
+        $cpimpcau->setMonaju(0);
+        $cpimpcau->setStaimp('A');
+        $cpimpcau->setRefere('NULO');
+        $cpimpcau->setRefprc('NULO');
+        $cpimpcau->save();
+      }
+      $j++;
+    }
+  }
+
+  public static function grabarComprobante($opordpag,$grid,&$msjuno,&$arrcompro)
+  {
+    if ($opordpag->getNumord()=='########')
+    {
+       if (Herramientas::getVerCorrelativo('numini','opdefemp',&$r))
+       {
+       	 $encontrado=false;
+         while (!$encontrado)
+         {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $c= new Criteria();
+          $c->add(OpordpagPeer::NUMORD,$numero);
+          $resul= OpordpagPeer::doSelectOne($c);
+          if ($resul)
+          {
+          	$r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+         }
+         $numorden=$numero;
+      }
+    }
+    else
+    {
+      $numorden=str_replace('#','0',$opordpag->getNumord());
+    }
+
+    $numcom=OrdendePago::Buscar_Correlativo();
+    $reftra=$numorden;
+    $codigocuenta="";
+    $tipo="";
+    $des="";
+    $monto="";
+    $codigocuentas="";
+    $tipo1="";
+    $desc="";
+    $monto1="";
+    $codigocuenta2="";
+    $tipo2="";
+    $des2="";
+    $monto2="";
+    $cuentas="";
+    $tipos="";
+    $montos="";
+    $descr="";
+    $msjuno="";
+
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+        $c= new Criteria();
+        $c->add(CpdeftitPeer::CODPRE,$x[$j]["codpre"]);
+        $regis = CpdeftitPeer::doSelectOne($c);
+        if ($regis)
+        {
+          if(!is_null($regis->getCodcta()))
+          {
+            $cuenta=$regis->getCodcta();
+          }else {$cuenta='';}
+
+          $b= new Criteria();
+          $b->add(ContabbPeer::CODCTA,$cuenta);
+          $regis2 = ContabbPeer::doSelectOne($b);
+          if ($regis2)
+          {
+            $moncau=$x[$j]["moncau"];
+            if ($moncau>0)
+            {
+              $codigocuenta=$regis2->getCodcta();
+              $tipo='D';
+              $des="";
+              $moncau=$x[$j]["moncau"];
+              $monto=$moncau;
+           }
+          }else { $msjuno='El Código Presupuestario'.$x[$j]["codpre"].' no tiene asociado Codigo Contable válido'; return true;}
+        }
+         if ($j==0)
+         {
+           $codigocuentas=$codigocuenta;
+           $desc=$des;
+           $tipo1=$tipo;
+           $monto1=$monto;
+         }
+         else
+         {
+          $codigocuentas=$codigocuentas.'_'.$codigocuenta;
+          $desc=$desc.'_'.$des;
+          $tipo1=$tipo1.'_'.$tipo;
+          $monto1=$monto1.'_'.$monto;
+          }
+
+      $j++;
+    }
+
+      $n= new Criteria();
+      $n->addJoin(OpdefempPeer::CEDRIFCAJCHI,OpbenefiPeer::CEDRIF);
+      $resul= OpbenefiPeer::doSelectOne($n);
+      if ($resul)
+      {
+        if (!is_null($resul->getCodcta()))
+        {
+         $codigocuenta2=$resul->getCodcta();
+        }else $codigocuenta2="";
+        if ($opordpag->getMonord()>0)
+        {
+          $tipo2='C';
+          $des2="";
+          $b=$opordpag->getMonord();
+          $monto2=$b;
+        }
+      }
+      $cuentas=$codigocuenta2.'_'.$codigocuentas;
+      $descr=$des2.'_'.$desc;
+      $tipos=$tipo2.'_'.$tipo1;
+      $montos=$monto2.'_'.$monto1;
+
+
+      $clscommpro=new Comprobante();
+	  $clscommpro->setGrabar("N");
+	  $clscommpro->setNumcom($numcom);
+	  $clscommpro->setReftra($reftra);
+	  $clscommpro->setFectra(date("d/m/Y",strtotime($opordpag->getFecemi())));
+	  $clscommpro->setDestra($opordpag->getDesord());
+	  $clscommpro->setCtas($cuentas);
+	  $clscommpro->setDesc($descr);
+	  $clscommpro->setMov($tipos);
+	  $clscommpro->setMontos($montos);
+	  $arrcompro[]=$clscommpro;
+  }
+
+  public static function grabarOrden($opordpag,$numerocomp)
+  {
+  	if ($opordpag->getNumord()=='########')
+    {
+       if (Herramientas::getVerCorrelativo('numini','opdefemp',&$r))
+       {
+       	 $encontrado=false;
+         while (!$encontrado)
+         {
+          $numero=str_pad($r, 8, '0', STR_PAD_LEFT);
+          $c= new Criteria();
+          $c->add(OpordpagPeer::NUMORD,$numero);
+          $resul= OpordpagPeer::doSelectOne($c);
+          if ($resul)
+          {
+          	$r=$r+1;
+          }
+          else
+          {
+            $encontrado=true;
+          }
+         }
+         $opordpag->setNumord($numero);
+      }
+     H::getSalvarCorrelativo('numini','opdefemp','Referencia',$r,&$msg);
+    }
+    else
+    {
+      $opordpag->setNumord(str_replace('#','0',$opordpag->getNumord()));
+    }
+
+    $opordpag->setMonret(0);
+    $opordpag->setMondes(0);
+    $opordpag->setNomben(H::getX('Cedrif','Opbenefi','Nomben',$opordpag->getCedrif()));
+    $opordpag->setNumche(null);
+    $opordpag->setCtaban(null);
+    $opordpag->setCtapag(H::getX('Cedrif','Opbenefi','Codcta',$opordpag->getCedrif()));
+    $opordpag->setNumcom($numerocomp);
+    $opordpag->setStatus('N');
+    $opordpag->save();
+  }
+
+  public static function grabarDetalleOrden($opordpag,$grid)
+  {
+    $referencia=$opordpag->getNumord();
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]["codpre"]!='')
+      {
+        $opdetord= new Opdetord();
+        $opdetord->setNumord($referencia);
+        $opdetord->setRefcom('NULO');
+        $opdetord->setCodpre($x[$j]["codpre"]);
+        $opdetord->setMoncau($x[$j]["moncau"]);
+        $opdetord->setMonret(0);
+        $opdetord->setMondes(0);
+        $opdetord->save();
+      }
+      $j++;
+    }
   }
 
 

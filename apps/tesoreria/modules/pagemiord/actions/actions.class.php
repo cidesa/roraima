@@ -31,12 +31,6 @@ class pagemiordActions extends autopagemiordActions
      // $grid1 = Herramientas::CargarDatosGrid($this,$this->obj2);
       if ($this->opordpag->getId()=="")
       {
-      	if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('opordpag[fecemi]'))==true)
-      	{
-          $this->coderror6=529;
-          return false;
-      	}
-
         if ($this->opordpag->getTipcau()!=$this->ordpagnom && $this->opordpag->getTipcau()!=$this->ordpagapo && $this->opordpag->getTipcau()!=$this->ordpagliq && $this->opordpag->getTipcau()!=$this->ordpagfid)
         {
           $this->configGridApliret();
@@ -257,11 +251,6 @@ $this->Bitacora('Guardo');
        $err3 = Herramientas::obtenerMensajeError($this->coderror5);
        $this->getRequest()->setError('',$err3);
      }
-     if($this->coderror6!=-1)
-     {
-       $err3 = Herramientas::obtenerMensajeError($this->coderror6);
-       $this->getRequest()->setError('opordpag{fecemi}',$err3);
-     }
      if($this->salvarretencion!=-1)
      {
        $err4 = Herramientas::obtenerMensajeError($this->salvarretencion);
@@ -318,8 +307,11 @@ $this->Bitacora('Guardo');
           $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
 
-          Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
-          Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+          //Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
+          //Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+          $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+          $opordpag->setNumcom($numcom);
+          $numerocomp = $numcom;
          }
          $i++;
         }
@@ -2125,7 +2117,7 @@ group by numret,a.codtip,b.destip,b.basimp,b.porret,b.factor,b.porsus,b.unitri,c
 
   public function executeAnular()
   {
-   $this->referencia=$this->getRequestParameter('referencia');
+   $this->referencia="########";//$this->getRequestParameter('referencia');
    $numord=$this->getRequestParameter('numord');
    $fecemi=$this->getRequestParameter('fecemi');
    $this->compadic=$this->getRequestParameter('compadic');

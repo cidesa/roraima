@@ -293,6 +293,7 @@ class OrdendePago
      $orden->setCtapag($cuentaporpagarrendicion);
    }
    $orden->save();
+   Comprobante::ActualizarReferenciaComprobante($numerocomp,$orden->getNumord());
 
   }
 
@@ -382,32 +383,10 @@ class OrdendePago
     }else { $partidas='';}
   }
 
-  public static function Buscar_Correlativo(){
-    $c = new Criteria();
-    $datos = CpdefnivPeer::doSelectOne($c);
-    if ($datos){
-      $corcomcont = (int)$datos->getCorcomcont();
-      $newcorcomcont = $corcomcont + 1;
-      $valido = false;
-      while(!$valido){
-      	$cadcorcomcont = str_pad((string)$newcorcomcont, 8, "0", STR_PAD_LEFT);
-        $c2 = new Criteria();
-        $c2->add(ContabcPeer::NUMCOM,$cadcorcomcont);
-        $contabc = ContabcPeer::doSelectOne($c2);
-        if($contabc){
-          $newcorcomcont++;
-        }
-        else {
-          $valido = true;
-        }
-      }
-      $cadcorcomcont = str_pad((string)$newcorcomcont, 8, "0", STR_PAD_LEFT);
-      //$datos->setCorcomcont((string)$newcorcomcont);
-      //$datos->save();
-      return $cadcorcomcont;
-    }
-    else return "00000000";
-   }
+  public static function Buscar_Correlativo()
+  {
+    return Comprobante::Buscar_Correlativo();
+  }
 
   public static function grabarComprobante($orden,$grid,&$cuentaporpagarrendicion,&$mensaje,&$msjuno,&$msjdos,&$arrcompro)
   {
@@ -418,6 +397,7 @@ class OrdendePago
     {
       if ($orden->getNumord()=='########')
       {
+        /*
         $encontrado=false;
         while (!$encontrado)
         {
@@ -434,6 +414,8 @@ class OrdendePago
           }
         }
         $numeroorden=str_pad($r, 8, '0', STR_PAD_LEFT);
+        */
+        $numeroorden = '########';
       }
       else
       {
@@ -441,7 +423,8 @@ class OrdendePago
       }
     }
 
-    $numerocomprob= self::Buscar_Correlativo();
+    $numerocomprob= '########';
+    //$numerocomprob= self::Buscar_Correlativo();
     $reftra = $numeroorden;
     $cuentaporpagarrendicion="";
     $codigocuenta="";
@@ -912,8 +895,8 @@ class OrdendePago
        $causado->setSalaju(0);
        $causado->setStacau('A');
        $causado->setCedrif($orden->getCedrif());
-
        $causado->save();
+
        if ($referencias=='')
        { $referencias='_';}
        $refere=split('_',$referencias);
@@ -1804,7 +1787,7 @@ class OrdendePago
     $resul= ContabcPeer::doSelectOne($c);
     if ($resul)
     {
-      $numcom= 'RE'.substr($resul->getNumcom(),2,6);
+      $numcom= Comprobante::Buscar_Correlativo();
       $fecha_aux=split("/",$fecha);
       $dateFormat = new sfDateFormat('es_VE');
       $fec = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
@@ -1817,6 +1800,7 @@ class OrdendePago
       $contabc->setDescom($desc);
       $contabc->setStacom('D');
       $contabc->setTipcom(null);
+      $contabc->setReftra($resul->getReftra());
       $contabc->setMoncom($resul->getMoncom());
       $contabc->save();
 
@@ -1828,7 +1812,7 @@ class OrdendePago
       {
         foreach ($resul2 as $datos)
         {
-          $numcom1= 'RE'.substr($datos->getNumcom(),2,6);
+          $numcom1= $numcom;
           $contabc1= new Contabc1();
           $contabc1->setNumcom($numcom1);
           if (checkdate(intval($fecha_aux[1]),intval($fecha_aux[0]),intval($fecha_aux[2])))

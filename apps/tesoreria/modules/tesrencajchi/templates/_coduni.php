@@ -1,5 +1,5 @@
 <?php
-//eval('$masc = $opordpag->get'.Mascaraubi.'();');
+
 $masc=$opordpag->getMascaraubi();
 
 $value = object_input_tag($opordpag, 'getCoduni', array (
@@ -12,7 +12,7 @@ $value = object_input_tag($opordpag, 'getCoduni', array (
         'url'      => 'tesrencajchi/ajax',
         'condition' => "$('opordpag_coduni').value != '' && $('id').value == ''",
         'complete' => 'AjaxJSON(request, json)',
-        'with' => "'ajax=2&cajtexmos=opordpag_desubi&cajtexcom=opordpag_codubi&codigo='+this.value"
+        'with' => "'ajax=2&cajtexmos=opordpag_desubi&cajtexcom=opordpag_coduni&codigo='+this.value"
         ))
 )); echo $value ? $value : '&nbsp;' ?>
 

@@ -72,9 +72,9 @@ class Presupuesto
 
       while ($j < count($x))  {
         $c = new Criteria();
-      $c->add(CpdisfuefinPeer::FUEFIN,$x[$j]->getCodfin());
-      $c->add(CpdisfuefinPeer::CODPRE,$clasemodelo->getCodpre());
-      CpdisfuefinPeer::doDelete($c);
+        $c->add(CpdisfuefinPeer::FUEFIN,$x[$j]->getCodfin());
+        $c->add(CpdisfuefinPeer::CODPRE,$clasemodelo->getCodpre());
+        CpdisfuefinPeer::doDelete($c);
 
     if ($x[$j]->getMonasi2()>0){
         if (Herramientas::getVerCorrelativo('corfue','cpdefniv',&$r))
@@ -82,16 +82,16 @@ class Presupuesto
           $ref = str_pad($r, 8, '0', STR_PAD_LEFT);
           H::getSalvarCorrelativo('corfue','cpdefniv','Registo Solicitud Fuente de Financiamiento',$ref,&$msg);
 
-      $c = new Cpdisfuefin();
-          $c->setCorrel($ref);
-          $c->setCodpre($clasemodelo->getCodpre());
+        $c = new Cpdisfuefin();
+        $c->setCorrel($ref);
+        $c->setCodpre($clasemodelo->getCodpre());
         $c->setFuefin($x[$j]->getCodfin());
         $ano=substr(Herramientas::getX('codemp','cpdefniv','fecper','001'),0,4);
-          $c->setFecdis($ano.date('-m-d'));
+        $c->setFecdis($ano.date('-m-d'));
         $c->setOrigen('INICIAL');
         $c->setMonasi($x[$j]->getMonasi2());
         $c->setStatus('A');
-             $c->save();
+        $c->save();
       }else{
         return 1303;
       }

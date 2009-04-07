@@ -87,7 +87,7 @@
 </form>
 <script language="JavaScript" type="text/javascript">
   $('tsmovtra_reftraanu').value="A"+$('reftra').value.substr(1,7);
-  $('tsmovtra_numcomanu').value="A"+$('numcom').value.substr(1,7);
+  $('tsmovtra_numcomanu').value='########';
   $('tsmovtra_destraanu').value='Transferencia Anulada';
 
 function salvar()
@@ -101,7 +101,7 @@ function salvar()
   var fecanu=$('tsmovtra_fecanu').value;
   var movdeb=$('movdeb').value;
   var movcre=$('movcre').value;
-  var numcom=$('tsmovtra_numcomanu').value;
+  var numcom=$('tsmovtra_numcomanu').value.replace(/#/gi,'*');
 
   var f=document.sf_admin_edit_form;
   f.action='salvaranu?reftra='+reftra+'&reftra2='+reftra2+'&destra='+destra+'&monto='+monto+'&ctaori='+ctaori+'&ctades='+ctades+'&fecanu='+fecanu+'&movdeb='+movdeb+'&numcom='+numcom+'&movcre='+movcre;

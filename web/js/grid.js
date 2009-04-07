@@ -190,7 +190,8 @@
 
         // Ciclo para recorrer todos los objetos tipo monto del Grid
         objs_montos.each(function(elemento) {
-
+         //var cal=toFloat2(elemento.value);
+         //$(elemento).value=format(cal.toFixed(2),'.',',','.');
           // ACUMULAR LOS CAMPOS DEL GRID y PROBAR CODIGO
           valor = FloatVEtoFloat(elemento.value);
           acumtotales[columna] += valor;

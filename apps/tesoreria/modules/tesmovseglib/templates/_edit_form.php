@@ -60,7 +60,7 @@
   )
   ?><?php echo input_hidden_tag('tsmovlib[ctacon]', $tsmovlib->getCtacon()) ?>
 
-<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Tsmovlib_tesmovdeglib/clase/Tsdefban/frame/sf_admin_edit_form/obj1/tsmovlib_nomcue/obj2/tsmovlib_numcue/obj3/tsmovlib_ctacon/campo1/nomcue/campo2/numcue/campo3/codcta/param1/1','','','botoncat')?>
+<?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Tsmovlib_tesmovdeglib/clase/Tsdefban/frame/sf_admin_edit_form/obj1/tsmovlib_numcue/obj2/tsmovlib_nomcue/obj3/tsmovlib_ctacon/campo1/numcue/campo2/nomcue/campo3/codcta/param1/1','','','botoncat')?>
 
 <?php $value = object_input_tag($tsmovlib, 'getNomcue', array (
   'disabled' => true,
@@ -107,7 +107,8 @@
       'control_name' => 'tsmovlib[feclib]',
       'date_format' => 'dd/MM/yy',
       'onkeyup' => "javascript: mascara(this,'/',patron,true)",
-      'onBlur'  => "javascript: fecmov(this.value);",
+      'onchange'  => "javascript: fecmov(this.value);",
+      'onblur'  => "javascript: fecmov(this.value);",
     )); echo $value ? $value : '&nbsp;' ?>
         </div>
    </th>
@@ -252,7 +253,7 @@
   'size' => 20,
   'readonly'  =>  $tsmovlib->getId()!='' ? true : false ,
   'control_name' => 'tsmovlib[numcom]',
-  'onBlur' => "javascript:valor=this.value;	valor=valor.pad(8, '0',0);document.getElementById('tsmovlib_numcom').value=valor;",
+  'onBlur' => "javascript:event.keyCode=13; enter(event,this.value,this.id);",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
@@ -291,7 +292,7 @@
          'before'   => 'if ($("tsmovlib_debcre").value=="C"){ var dc="D"}else { var dc="C"}',
          'script'   => true,
          'complete' => 'AjaxJSON(request, json)',
-         'with' => "'ajax=3&numcom='+document.getElementById('tsmovlib_numcom').value+'&reftra='+document.getElementById('tsmovlib_reflib').value+'&tipo='+document.getElementById('tsmovlib_tipmov').value+'&fectra='+document.getElementById('tsmovlib_feccom').value+'&grabar=N'+'&destra='+document.getElementById('descom').value+'&ctas='+document.getElementById('tsmovlib_ctacon').value+'_'+document.getElementById('ctaeje').value+'&tipmov=X&mov='+document.getElementById('tsmovlib_debcre').value+'_'+dc+'&montos='+document.getElementById('tsmovlib_monmov').value+'_'+document.getElementById('tsmovlib_monmov').value+'&formulario=sf_admin/tesmovseglib/confincomgen'")
+         'with' => "'ajax=3&reftra='+document.getElementById('tsmovlib_reflib').value+'&tipo='+document.getElementById('tsmovlib_tipmov').value+'&fectra='+document.getElementById('tsmovlib_feccom').value+'&grabar=N'+'&destra='+document.getElementById('descom').value+'&ctas='+document.getElementById('tsmovlib_ctacon').value+'_'+document.getElementById('ctaeje').value+'&tipmov=X&mov='+document.getElementById('tsmovlib_debcre').value+'_'+dc+'&montos='+document.getElementById('tsmovlib_monmov').value+'_'+document.getElementById('tsmovlib_monmov').value+'&formulario=sf_admin/tesmovseglib/confincomgen&numcom='+$('tsmovlib_numcom').value.replace(/#/gi,'*')")
          ,array('id' => 'btncompro',)) ?>
 <? }?>
 </div>
@@ -450,7 +451,6 @@ function deslib()
   	document.getElementById('descom').value=document.getElementById('tsmovlib_deslib').value;
   }
 }
-
 
 
 </script>

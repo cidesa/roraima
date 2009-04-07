@@ -21,26 +21,7 @@ class tesmovtrabanActions extends autotesmovtrabanActions {
            { $this->etiqueta="ANULADA EL ".date('d/m/Y',strtotime($this->tsmovtra->getFecanu()));}
            else { $this->etiqueta="ANULADA";}
        } else {
-       	$c = new Criteria();
-      $datos = CpdefnivPeer::doSelectOne($c);
-      if ($datos){
-   		$corcomcont = (int)$datos->getCorcomcont() + 1;
-   		$cadcorcomcont = str_pad((string)$corcomcont, 8, "0", STR_PAD_LEFT);;
-   		$valido = false;
-   		while(!$valido){
-   			$c2 = new Criteria();
-	   		$c2->add(ContabcPeer::NUMCOM,$cadcorcomcont);
-	   		$contabc = ContabcPeer::doSelectOne($c2);
-	   		if($contabc){
-	   			$corcomcont++;
-	   			$cadcorcomcont = str_pad((string)$corcomcont, 8, "0", STR_PAD_LEFT);
-	   		}
-	   		else {
-	   			$valido = true;
-	   		}
-   		}
-   	  }
-   	  else $cadcorcomcont = "00000000";
+      $cadcorcomcont = "########";
    	  $this->tsmovtra->setNumcom($cadcorcomcont);
      }
 
@@ -167,7 +148,7 @@ $this->Bitacora('Guardo');
        if ($modifica=="N")
        {
 		if ($tsmovtra2['tipmovdesd'] and ($tsmovtra2['tipmovhast'])) {
-			Tesoreria :: Salvartesmovtraban($tsmovtra, $tsmovtra2['tipmovdesd'], $tsmovtra2['tipmovhast']);
+
 			if ($this->getUser()->getAttribute('grabar', null, $this->getUser()->getAttribute('formulario')) != 'S') {
 				//obtengo las sessiones
 				$grid = $this->getUser()->getAttribute('grid', null, $this->getUser()->getAttribute('formulario'));
@@ -188,11 +169,17 @@ $this->Bitacora('Guardo');
 				$this->getUser()->getAttributeHolder()->remove('debito');
 				$this->getUser()->getAttributeHolder()->remove('credito');
 				// guardo el grid
-				Tesoreria :: Salvarconfincomgen($numcom, $reftra, $feccom, $descom, $debito, $credito);
-				Tesoreria :: Salvar_asientosconfincomgen($numcom, $reftra, $feccom, $grid, $guardar);
+        $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$guardar);
+
+				//Tesoreria :: Salvarconfincomgen($numcom, $reftra, $feccom, $descom, $debito, $credito);
+				//Tesoreria :: Salvar_asientosconfincomgen($numcom, $reftra, $feccom, $grid, $guardar);
 			}
-		}
-       }//if ($modifica=="N")
+      $tsmovtra->setNumcom($numcom);
+      $tsmovtra->save();
+ 			Tesoreria :: Salvartesmovtraban($tsmovtra, $tsmovtra2['tipmovdesd'], $tsmovtra2['tipmovhast']);
+      
+		 }
+   }//if ($modifica=="N")
 	}
 
 	protected function deleteTsmovtra($tsmovtra) {
@@ -221,7 +208,17 @@ $this->Bitacora('Guardo');
 	{
 	 $dato = TsdefbanPeer :: getNomcue($this->getRequestParameter('codigo'));
 	 $dato2 = TsdefbanPeer :: getCta_cont($this->getRequestParameter('codigo'));
-	 $output = '[["' . $cajtexmos . '","' . $dato . '",""],["' . $cajtexcom . '","' . $dato2 . '"]]';
+   $montra = $this->getRequestParameter('montra');
+   $fectra = $this->getRequestParameter('fectra');
+   $error='';
+   
+   $contaba = ContabaPeer::doSelectOne(new Criteria());
+   $saldo=0;
+   if(!Tesoreria::chequear_disponibilidad_financiera($this->getRequestParameter('codigo'),$montra(),$contaba->getFecini(),$fectra,$saldo)) $error= ',["javascript","alert(\'No Existe Disponibilidad Financiera para esta cuenta.\')",""]';
+
+	 $output = '[["' . $cajtexmos . '","' . $dato . '",""],["' . $cajtexcom . '","' . $dato2 . '"]'.$error.']';
+
+   
 	}else if ($this->getRequestParameter('ajax') == '2')
 	{
 	 $dato = TstipmovPeer :: getMovimiento($this->getRequestParameter('codigo'));
@@ -233,7 +230,9 @@ $this->Bitacora('Guardo');
 	 $this->LlenarAttribute('grabar', $this->getUser()->getAttribute('formulario'));
 	 $this->LlenarAttribute('reftra', $this->getUser()->getAttribute('formulario'));
 	 $this->getUser()->getAttributeHolder()->remove('numcomp');
-	 $this->getUser()->setAttribute('numcomp', $this->getRequestParameter('numcom'), $this->getUser()->getAttribute('formulario'));
+   $numcom = $this->getRequestParameter('numcom');
+   if($numcom=='********') $numcom = '########';
+	 $this->getUser()->setAttribute('numcomp', $numcom, $this->getUser()->getAttribute('formulario'));
 	 $this->LlenarAttribute('fectra', $this->getUser()->getAttribute('formulario'));
 	 $this->LlenarAttribute('destra', $this->getUser()->getAttribute('formulario'));
 	 $this->LlenarAttribute('ctas', $this->getUser()->getAttribute('formulario'));
@@ -280,7 +279,6 @@ $this->Bitacora('Guardo');
   public function validateEdit()
   {
     $this->coderr =-1;
-    $this->coderr1 =-1;
 
 
 
@@ -289,14 +287,16 @@ $this->Bitacora('Guardo');
       $this->etiqueta="";
       try{ $this->updateTsmovtraFromRequest();}catch(Exception $ex){}
 
-      if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovtra[fectra]'))==true)
-  	  {
-        $this->coderr1=529;
-        return false;
-  	  }
-
- $numcom = $this->getUser()->getAttribute('contabc[numcom]', null, $this->getUser()->getAttribute('formulario'));
-      if (!$this->tsmovtra->getId() and $numcom=="") { $this->coderr = 508; return false;}
+      if($this->tsmovtra->getCtaori()==$this->tsmovtra->getCtades()) $this->coderr = 194;
+      else{
+        $contaba = ContabaPeer::doSelectOne(new Criteria());
+        $saldo=0;
+        if(!Tesoreria::chequear_disponibilidad_financiera($this->tsmovtra->getCtaori(),$this->tsmovtra->getMontra(),$contaba->getFecini(),$this->tsmovtra->getFectra(),$saldo)) $this->coderr = 195;
+        else{
+          $numcom = $this->getUser()->getAttribute('contabc[numcom]', null, $this->getUser()->getAttribute('formulario'));
+          if (!$this->tsmovtra->getId() and $numcom=="") { $this->coderr = 508; return false;}
+        }
+      }
 
       if($this->coderr!=-1){
         return false;
@@ -321,12 +321,8 @@ $this->Bitacora('Guardo');
       if($this->coderr!=-1){
         $err = Herramientas::obtenerMensajeError($this->coderr);
         $this->getRequest()->setError('',$err);
-      }
-      if($this->coderr1!=-1){
-        $err = Herramientas::obtenerMensajeError($this->coderr1);
-        $this->getRequest()->setError('tsmovtra{fectra}',$err);
-      }
 
+      }
     }
     return sfView::SUCCESS;
   }
@@ -338,6 +334,7 @@ $this->Bitacora('Guardo');
 	$c = new Criteria();
 	$c->add(TsmovtraPeer::REFTRA,$obj1);
 	$this->tsmovtra = TsmovtraPeer::doSelectOne($c);
+  if(!$this->tsmovtra) $this->tsmovtra = new Tsmovtra();
 	sfView::SUCCESS;
   }
 
@@ -353,6 +350,7 @@ $this->Bitacora('Guardo');
   	$movdeb=$this->getRequestParameter('movdeb');
   	$movcre=$this->getRequestParameter('movcre');
   	$numcom=$this->getRequestParameter('numcom');
+    if($numcom=='********') $numcom='########';
     $this->mensaje="";
     //verificar si el movimiento segun libro asociado a la transferencia no esta conciliado
      $c= new Criteria();

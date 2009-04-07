@@ -1,12 +1,11 @@
-SET SEARCH_PATH TO "SIMA004";
 
 -----------------------------------------------------------------------------
 -- atestados
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atestados" CASCADE;
+DROP TABLE IF EXISTS "atestados" CASCADE;
 
--- DROP SEQUENCE   "atestados_seq";
+DROP SEQUENCE IF EXISTS "atestados_seq";
 
 CREATE SEQUENCE "atestados_seq";
 
@@ -25,9 +24,9 @@ COMMENT ON TABLE "atestados" IS '';
 -- atmunicipios
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atmunicipios" CASCADE;
+DROP TABLE IF EXISTS "atmunicipios" CASCADE;
 
--- DROP SEQUENCE   "atmunicipios_seq";
+DROP SEQUENCE IF EXISTS "atmunicipios_seq";
 
 CREATE SEQUENCE "atmunicipios_seq";
 
@@ -49,9 +48,9 @@ ALTER TABLE "atmunicipios" ADD CONSTRAINT "atmunicipios_FK_1" FOREIGN KEY ("ates
 -- atparroquias
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atparroquias" CASCADE;
+DROP TABLE IF EXISTS "atparroquias" CASCADE;
 
--- DROP SEQUENCE   "atparroquias_seq";
+DROP SEQUENCE IF EXISTS "atparroquias_seq";
 
 CREATE SEQUENCE "atparroquias_seq";
 
@@ -73,9 +72,9 @@ ALTER TABLE "atparroquias" ADD CONSTRAINT "atparroquias_FK_1" FOREIGN KEY ("atmu
 -- attipayu
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "attipayu" CASCADE;
+DROP TABLE IF EXISTS "attipayu" CASCADE;
 
--- DROP SEQUENCE   "attipayu_seq";
+DROP SEQUENCE IF EXISTS "attipayu_seq";
 
 CREATE SEQUENCE "attipayu_seq";
 
@@ -96,9 +95,9 @@ COMMENT ON TABLE "attipayu" IS '';
 -- atrecaud
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atrecaud" CASCADE;
+DROP TABLE IF EXISTS "atrecaud" CASCADE;
 
--- DROP SEQUENCE   "atrecaud_seq";
+DROP SEQUENCE IF EXISTS "atrecaud_seq";
 
 CREATE SEQUENCE "atrecaud_seq";
 
@@ -119,9 +118,9 @@ COMMENT ON TABLE "atrecaud" IS '';
 -- atrecayu
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atrecayu" CASCADE;
+DROP TABLE IF EXISTS "atrecayu" CASCADE;
 
--- DROP SEQUENCE   "atrecayu_seq";
+DROP SEQUENCE IF EXISTS "atrecayu_seq";
 
 CREATE SEQUENCE "atrecayu_seq";
 
@@ -142,33 +141,12 @@ ALTER TABLE "atrecayu" ADD CONSTRAINT "atrecayu_FK_1" FOREIGN KEY ("attipayu_id"
 ALTER TABLE "atrecayu" ADD CONSTRAINT "atrecayu_FK_2" FOREIGN KEY ("atrecaud_id") REFERENCES "atrecaud" ("id");
 
 -----------------------------------------------------------------------------
--- attiping
------------------------------------------------------------------------------
-
--- DROP TABLE   "attiping" CASCADE;
-
--- DROP SEQUENCE   "attiping_seq";
-
-CREATE SEQUENCE "attiping_seq";
-
-
-CREATE TABLE "attiping"
-(
-  "tiping" VARCHAR(50),
-  "id" INTEGER  NOT NULL DEFAULT nextval('attiping_seq'::regclass),
-  PRIMARY KEY ("id")
-);
-
-COMMENT ON TABLE "attiping" IS '';
-
-
------------------------------------------------------------------------------
 -- atciudadano
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atciudadano" CASCADE;
+DROP TABLE IF EXISTS "atciudadano" CASCADE;
 
--- DROP SEQUENCE   "atciudadano_seq";
+DROP SEQUENCE IF EXISTS "atciudadano_seq";
 
 CREATE SEQUENCE "atciudadano_seq";
 
@@ -223,12 +201,33 @@ ALTER TABLE "atciudadano" ADD CONSTRAINT "atciudadano_FK_3" FOREIGN KEY ("atparr
 ALTER TABLE "atciudadano" ADD CONSTRAINT "atciudadano_FK_4" FOREIGN KEY ("attiping_id") REFERENCES "attiping" ("id");
 
 -----------------------------------------------------------------------------
+-- attiping
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "attiping" CASCADE;
+
+DROP SEQUENCE IF EXISTS "attiping_seq";
+
+CREATE SEQUENCE "attiping_seq";
+
+
+CREATE TABLE "attiping"
+(
+  "tiping" VARCHAR(50),
+  "id" INTEGER  NOT NULL DEFAULT nextval('attiping_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "attiping" IS '';
+
+
+-----------------------------------------------------------------------------
 -- attipviv
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "attipviv" CASCADE;
+DROP TABLE IF EXISTS "attipviv" CASCADE;
 
--- DROP SEQUENCE   "attipviv_seq";
+DROP SEQUENCE IF EXISTS "attipviv_seq";
 
 CREATE SEQUENCE "attipviv_seq";
 
@@ -247,9 +246,9 @@ COMMENT ON TABLE "attipviv" IS '';
 -- attipproviv
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "attipproviv" CASCADE;
+DROP TABLE IF EXISTS "attipproviv" CASCADE;
 
--- DROP SEQUENCE   "attipproviv_seq";
+DROP SEQUENCE IF EXISTS "attipproviv_seq";
 
 CREATE SEQUENCE "attipproviv_seq";
 
@@ -263,109 +262,14 @@ CREATE TABLE "attipproviv"
 
 COMMENT ON TABLE "attipproviv" IS '';
 
------------------------------------------------------------------------------
--- atestayu
------------------------------------------------------------------------------
-
--- DROP TABLE   "atestayu" CASCADE;
-
--- DROP SEQUENCE   "atestayu_seq";
-
-CREATE SEQUENCE "atestayu_seq";
-
-
-CREATE TABLE "atestayu"
-(
-  "desest" VARCHAR(50)  NOT NULL,
-  "comest" VARCHAR(1)  NOT NULL,
-  "id" INTEGER  NOT NULL DEFAULT nextval('atestayu_seq'::regclass),
-  PRIMARY KEY ("id")
-);
-
-COMMENT ON TABLE "atestayu" IS '';
-
------------------------------------------------------------------------------
--- attrasoc
------------------------------------------------------------------------------
-
--- DROP TABLE   "attrasoc" CASCADE;
-
--- DROP SEQUENCE   "attrasoc_seq";
-
-CREATE SEQUENCE "attrasoc_seq";
-
-
-CREATE TABLE "attrasoc"
-(
-  "cedtra" VARCHAR(12),
-  "nomtra" VARCHAR(50),
-  "apetra" VARCHAR(50),
-  "nrocol" VARCHAR(50),
-  "id" INTEGER  NOT NULL DEFAULT nextval('attrasoc_seq'::regclass),
-  PRIMARY KEY ("id")
-);
-
-COMMENT ON TABLE "attrasoc" IS '';
-
------------------------------------------------------------------------------
--- atayudas
------------------------------------------------------------------------------
-
--- DROP TABLE   "atayudas" CASCADE;
-
--- DROP SEQUENCE   "atayudas_seq";
-
-CREATE SEQUENCE "atayudas_seq";
-
--- DROP SEQUENCE   "atayudas_nroexp_seq";
-
-CREATE SEQUENCE "atayudas_nroexp_seq";
-
-
-CREATE TABLE "atayudas"
-(
-  "nroexp" INTEGER  NOT NULL DEFAULT nextval('atayudas_seq'::regclass),
-  "atsolici" INTEGER  NOT NULL,
-  "atbenefi" INTEGER  NOT NULL,
-  "attipayu_id" INTEGER,
-  "atestayu_id" INTEGER,
-  "attrasoc_id" INTEGER,
-  "caprovee_id" INTEGER,
-  "proayu" VARCHAR(100),
-  "nroofi" VARCHAR(50),
-  "desayu" VARCHAR(50)  NOT NULL,
-  "motayu" VARCHAR(50)  NOT NULL,
-  "created_at" TIMESTAMP,
-  "updated_at" TIMESTAMP,
-  "usucre" VARCHAR(50),
-  "usumod" VARCHAR(50),
-  "codpre" VARCHAR(50),
-  "id" INTEGER  NOT NULL DEFAULT nextval('atayudas_seq'::regclass),
-  PRIMARY KEY ("id")
-);
-
-COMMENT ON TABLE "atayudas" IS '';
-
-
-ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_1" FOREIGN KEY ("atsolici") REFERENCES "atciudadano" ("id");
-
-ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_2" FOREIGN KEY ("atbenefi") REFERENCES "atciudadano" ("id");
-
-ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_3" FOREIGN KEY ("attipayu_id") REFERENCES "attipayu" ("id");
-
-ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_4" FOREIGN KEY ("atestayu_id") REFERENCES "atestayu" ("id");
-
-ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_5" FOREIGN KEY ("attrasoc_id") REFERENCES "attrasoc" ("id");
-
--- ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_6" FOREIGN KEY ("caprovee_id") REFERENCES "caprovee" ("id");
 
 -----------------------------------------------------------------------------
 -- atestsoceco
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atestsoceco" CASCADE;
+DROP TABLE IF EXISTS "atestsoceco" CASCADE;
 
--- DROP SEQUENCE   "atestsoceco_seq";
+DROP SEQUENCE IF EXISTS "atestsoceco_seq";
 
 CREATE SEQUENCE "atestsoceco_seq";
 
@@ -405,12 +309,36 @@ ALTER TABLE "atestsoceco" ADD CONSTRAINT "atestsoceco_FK_3" FOREIGN KEY ("attipv
 ALTER TABLE "atestsoceco" ADD CONSTRAINT "atestsoceco_FK_4" FOREIGN KEY ("attipproviv_id") REFERENCES "attipproviv" ("id");
 
 -----------------------------------------------------------------------------
+-- attrasoc
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "attrasoc" CASCADE;
+
+DROP SEQUENCE IF EXISTS "attrasoc_seq";
+
+CREATE SEQUENCE "attrasoc_seq";
+
+
+CREATE TABLE "attrasoc"
+(
+  "cedtra" VARCHAR(12),
+  "nomtra" VARCHAR(50),
+  "apetra" VARCHAR(50),
+  "nrocol" VARCHAR(50),
+  "id" INTEGER  NOT NULL DEFAULT nextval('attrasoc_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "attrasoc" IS '';
+
+
+-----------------------------------------------------------------------------
 -- atgrufam
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atgrufam" CASCADE;
+DROP TABLE IF EXISTS "atgrufam" CASCADE;
 
--- DROP SEQUENCE   "atgrufam_seq";
+DROP SEQUENCE IF EXISTS "atgrufam_seq";
 
 CREATE SEQUENCE "atgrufam_seq";
 
@@ -434,14 +362,61 @@ COMMENT ON TABLE "atgrufam" IS '';
 
 ALTER TABLE "atgrufam" ADD CONSTRAINT "atgrufam_FK_1" FOREIGN KEY ("atciudadano_id") REFERENCES "atciudadano" ("id");
 
+-----------------------------------------------------------------------------
+-- atayudas
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "atayudas" CASCADE;
+
+DROP SEQUENCE IF EXISTS "atayudas_seq";
+
+CREATE SEQUENCE "atayudas_seq";
+
+
+CREATE TABLE "atayudas"
+(
+  "nroexp" INTEGER  NOT NULL,
+  "atsolici" INTEGER  NOT NULL,
+  "atbenefi" INTEGER  NOT NULL,
+  "attipayu_id" INTEGER,
+  "atestayu_id" INTEGER,
+  "attrasoc_id" INTEGER,
+  "caprovee_id" INTEGER,
+  "proayu" VARCHAR(100),
+  "nroofi" VARCHAR(50),
+  "desayu" VARCHAR(50)  NOT NULL,
+  "motayu" VARCHAR(50)  NOT NULL,
+  "created_at" TIMESTAMP,
+  "updated_at" TIMESTAMP,
+  "usucre" VARCHAR(50),
+  "usumod" VARCHAR(50),
+  "codpre" VARCHAR(50),
+  "id" INTEGER  NOT NULL DEFAULT nextval('atayudas_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "atayudas" IS '';
+
+
+ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_1" FOREIGN KEY ("atsolici") REFERENCES "atciudadano" ("id");
+
+ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_2" FOREIGN KEY ("atbenefi") REFERENCES "atciudadano" ("id");
+
+ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_3" FOREIGN KEY ("attipayu_id") REFERENCES "attipayu" ("id");
+
+ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_4" FOREIGN KEY ("atestayu_id") REFERENCES "atestayu" ("id");
+
+ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_5" FOREIGN KEY ("attrasoc_id") REFERENCES "attrasoc" ("id");
+
+ALTER TABLE "atayudas" ADD CONSTRAINT "atayudas_FK_6" FOREIGN KEY ("caprovee_id") REFERENCES "caprovee" ("id");
 
 -----------------------------------------------------------------------------
 -- atdetrecayu
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atdetrecayu" CASCADE;
+DROP TABLE IF EXISTS "atdetrecayu" CASCADE;
 
--- DROP SEQUENCE   "atdetrecayu_seq";
+DROP SEQUENCE IF EXISTS "atdetrecayu_seq";
 
 CREATE SEQUENCE "atdetrecayu_seq";
 
@@ -462,12 +437,34 @@ ALTER TABLE "atdetrecayu" ADD CONSTRAINT "atdetrecayu_FK_1" FOREIGN KEY ("atayud
 ALTER TABLE "atdetrecayu" ADD CONSTRAINT "atdetrecayu_FK_2" FOREIGN KEY ("atrecaud_id") REFERENCES "atrecaud" ("id");
 
 -----------------------------------------------------------------------------
+-- atestayu
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "atestayu" CASCADE;
+
+DROP SEQUENCE IF EXISTS "atestayu_seq";
+
+CREATE SEQUENCE "atestayu_seq";
+
+
+CREATE TABLE "atestayu"
+(
+  "desest" VARCHAR(50)  NOT NULL,
+  "comest" VARCHAR(1)  NOT NULL,
+  "id" INTEGER  NOT NULL DEFAULT nextval('atestayu_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "atestayu" IS '';
+
+
+-----------------------------------------------------------------------------
 -- atgrudon
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atgrudon" CASCADE;
+DROP TABLE IF EXISTS "atgrudon" CASCADE;
 
--- DROP SEQUENCE   "atgrudon_seq";
+DROP SEQUENCE IF EXISTS "atgrudon_seq";
 
 CREATE SEQUENCE "atgrudon_seq";
 
@@ -487,9 +484,9 @@ COMMENT ON TABLE "atgrudon" IS '';
 -- atdonaciones
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atdonaciones" CASCADE;
+DROP TABLE IF EXISTS "atdonaciones" CASCADE;
 
--- DROP SEQUENCE   "atdonaciones_seq";
+DROP SEQUENCE IF EXISTS "atdonaciones_seq";
 
 CREATE SEQUENCE "atdonaciones_seq";
 
@@ -512,9 +509,9 @@ ALTER TABLE "atdonaciones" ADD CONSTRAINT "atdonaciones_FK_1" FOREIGN KEY ("atgr
 -- atdetayu
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atdetayu" CASCADE;
+DROP TABLE IF EXISTS "atdetayu" CASCADE;
 
--- DROP SEQUENCE   "atdetayu_seq";
+DROP SEQUENCE IF EXISTS "atdetayu_seq";
 
 CREATE SEQUENCE "atdetayu_seq";
 
@@ -540,12 +537,41 @@ ALTER TABLE "atdetayu" ADD CONSTRAINT "atdetayu_FK_1" FOREIGN KEY ("atayudas_id"
 ALTER TABLE "atdetayu" ADD CONSTRAINT "atdetayu_FK_2" FOREIGN KEY ("atdonaciones_id") REFERENCES "atdonaciones" ("id");
 
 -----------------------------------------------------------------------------
+-- atfacturas
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "atfacturas" CASCADE;
+
+DROP SEQUENCE IF EXISTS "atfacturas_seq";
+
+CREATE SEQUENCE "atfacturas_seq";
+
+
+CREATE TABLE "atfacturas"
+(
+  "atayudas_id" INTEGER,
+  "numfac" VARCHAR(50)  NOT NULL,
+  "basimp" NUMERIC(14,2),
+  "iva" NUMERIC(14,2),
+  "exentos" NUMERIC(14,2),
+  "total" NUMERIC(14,2),
+  "nrospd" VARCHAR(50),
+  "id" INTEGER  NOT NULL DEFAULT nextval('atfacturas_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "atfacturas" IS '';
+
+
+ALTER TABLE "atfacturas" ADD CONSTRAINT "atfacturas_FK_1" FOREIGN KEY ("atayudas_id") REFERENCES "atayudas" ("id");
+
+-----------------------------------------------------------------------------
 -- atunidades
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atunidades" CASCADE;
+DROP TABLE IF EXISTS "atunidades" CASCADE;
 
--- DROP SEQUENCE   "atunidades_seq";
+DROP SEQUENCE IF EXISTS "atunidades_seq";
 
 CREATE SEQUENCE "atunidades_seq";
 
@@ -571,9 +597,9 @@ COMMENT ON TABLE "atunidades" IS '';
 -- atreclamos
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atreclamos" CASCADE;
+DROP TABLE IF EXISTS "atreclamos" CASCADE;
 
--- DROP SEQUENCE   "atreclamos_seq";
+DROP SEQUENCE IF EXISTS "atreclamos_seq";
 
 CREATE SEQUENCE "atreclamos_seq";
 
@@ -602,9 +628,9 @@ ALTER TABLE "atreclamos" ADD CONSTRAINT "atreclamos_FK_1" FOREIGN KEY ("atunidad
 -- atdenuncias
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atdenuncias" CASCADE;
+DROP TABLE IF EXISTS "atdenuncias" CASCADE;
 
--- DROP SEQUENCE   "atdenuncias_seq";
+DROP SEQUENCE IF EXISTS "atdenuncias_seq";
 
 CREATE SEQUENCE "atdenuncias_seq";
 
@@ -633,9 +659,9 @@ ALTER TABLE "atdenuncias" ADD CONSTRAINT "atdenuncias_FK_1" FOREIGN KEY ("atunid
 -- ataudiencias
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "ataudiencias" CASCADE;
+DROP TABLE IF EXISTS "ataudiencias" CASCADE;
 
--- DROP SEQUENCE   "ataudiencias_seq";
+DROP SEQUENCE IF EXISTS "ataudiencias_seq";
 
 CREATE SEQUENCE "ataudiencias_seq";
 
@@ -663,34 +689,93 @@ ALTER TABLE "ataudiencias" ADD CONSTRAINT "ataudiencias_FK_1" FOREIGN KEY ("atci
 
 ALTER TABLE "ataudiencias" ADD CONSTRAINT "ataudiencias_FK_2" FOREIGN KEY ("atunidades_id") REFERENCES "atunidades" ("id");
 
-
 -----------------------------------------------------------------------------
--- atfacturas
+-- caprovee
 -----------------------------------------------------------------------------
 
--- DROP TABLE   "atfacturas" CASCADE;
+--DROP TABLE IF EXISTS "caprovee" CASCADE;
 
--- DROP SEQUENCE   "atfacturas_seq";
+--DROP SEQUENCE IF EXISTS "caprovee_seq";
 
-CREATE SEQUENCE "atfacturas_seq";
+CREATE SEQUENCE "caprovee_seq";
 
 
-CREATE TABLE "atfacturas"
+CREATE TABLE "caprovee"
 (
-  "atayudas_id" INTEGER,
-  "numfac" VARCHAR(50)  NOT NULL,
-  "basimp" NUMERIC(14,2),
-  "iva" NUMERIC(14,2),
-  "exentos" NUMERIC(14,2),
-  "total" NUMERIC(14,2),
-  "nrospd" VARCHAR(50)  NOT NULL,
-  "id" INTEGER  NOT NULL DEFAULT nextval('atfacturas_seq'::regclass),
+  "codpro" VARCHAR(15)  NOT NULL,
+  "nompro" VARCHAR(250)  NOT NULL,
+  "rifpro" VARCHAR(15)  NOT NULL,
+  "nitpro" VARCHAR(15),
+  "dirpro" VARCHAR(100),
+  "telpro" VARCHAR(30),
+  "faxpro" VARCHAR(15),
+  "email" VARCHAR(100),
+  "limcre" NUMERIC(14,2),
+  "codcta" VARCHAR(32),
+  "regmer" VARCHAR(15),
+  "fecreg" DATE,
+  "tomreg" VARCHAR(15),
+  "folreg" VARCHAR(15),
+  "capsus" NUMERIC(14,2),
+  "cappag" NUMERIC(14,2),
+  "rifrepleg" VARCHAR(15),
+  "nomrepleg" VARCHAR(50),
+  "dirrepleg" VARCHAR(100),
+  "nrocei" VARCHAR(30),
+  "codram" VARCHAR(6),
+  "fecinscir" DATE,
+  "numinscir" VARCHAR(20),
+  "nacpro" VARCHAR(1),
+  "codord" VARCHAR(32),
+  "codpercon" VARCHAR(32),
+  "codtiprec" VARCHAR(4),
+  "codordadi" VARCHAR(32),
+  "codperconadi" VARCHAR(32),
+  "tipo" VARCHAR(1),
+  "fecven" DATE,
+  "ciudad" VARCHAR(100),
+  "codordmercon" VARCHAR(32),
+  "codpermercon" VARCHAR(32),
+  "codordcontra" VARCHAR(32),
+  "codpercontra" VARCHAR(32),
+  "temcodpro" VARCHAR(10),
+  "temrifpro" VARCHAR(15),
+  "codctasec" VARCHAR(32),
+  "codtipemp" VARCHAR(4),
+  "id" INTEGER  NOT NULL DEFAULT nextval('caprovee_seq'::regclass),
+  PRIMARY KEY ("id"),
+  CONSTRAINT "u_caprovee" UNIQUE ("rifpro")
+);
+
+COMMENT ON TABLE "caprovee" IS '';
+
+
+-----------------------------------------------------------------------------
+-- atdefemp
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "atdefemp" CASCADE;
+
+DROP SEQUENCE IF EXISTS "atdefemp_seq";
+
+CREATE SEQUENCE "atdefemp_seq";
+
+
+CREATE TABLE "atdefemp"
+(
+  "codemp" VARCHAR(15)  NOT NULL,
+  "nomemp" VARCHAR(100)  NOT NULL,
+  "diremp" VARCHAR(100)  NOT NULL,
+  "telemp" VARCHAR(30)  NOT NULL,
+  "faxemp" VARCHAR(15),
+  "emaemp" VARCHAR(100),
+  "percon" VARCHAR(150),
+  "repleg" VARCHAR(150),
+  "preasi" NUMERIC(14,2),
+  "monlimben" NUMERIC(14,2),
+  "id" INTEGER  NOT NULL DEFAULT nextval('atdefemp_seq'::regclass),
   PRIMARY KEY ("id")
 );
 
-COMMENT ON TABLE "atfacturas" IS '';
-
-
-ALTER TABLE "atfacturas" ADD CONSTRAINT "atfacturas_FK_1" FOREIGN KEY ("atayudas_id") REFERENCES "atayudas" ("id");
-
+COMMENT ON TABLE "atdefemp" IS '';
 
