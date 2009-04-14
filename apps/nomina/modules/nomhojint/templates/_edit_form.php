@@ -24,11 +24,24 @@
     <?php echo form_error('nphojint{codemp}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
+
+<? if ($nphojint->getId()=='') { ?>
   <?php $value = object_input_tag($nphojint, 'getCodemp', array (
-  'size' => 20,
+  'size' => 16,
   'maxlength' => 16,
   'control_name' => 'nphojint[codemp]',
 )); echo $value ? $value : '&nbsp;' ?>
+
+<? }else{ ?>
+    <?php $value = object_input_tag($nphojint, 'getCodemp', array (
+  'size' => 16,
+  'maxlength' => 16,
+  'readonly' => true,
+  'control_name' => 'nphojint[codemp]',
+)); echo $value ? $value : '&nbsp;' ?>
+
+<? } ?>
+
     </div></th>
    <th>&nbsp;&nbsp;</th>
    <th> <?php echo label_for('nphojint[nomemp]', __($labels['nphojint{nomemp}']), 'class="required" style="width:150px"') ?>
