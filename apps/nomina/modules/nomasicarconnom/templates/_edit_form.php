@@ -117,7 +117,7 @@
  </div>
 </th>
 <th>
- <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Nomasicarconnom_Npasicarnom/clase/npasicarnom/frame/sf_admin_edit_form/obj1/npasicaremp_codcar/obj2/npasicaremp_nomcar/obj3/sueldo/campo1/codcar/campo2/nomcar/campo3/sueldo/param1/'+$('npasicaremp_codnom').value+'") ?>   </div>
+ <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo')."/metodo/Nomasicarconnom_Npasicarnom/clase/Npcargos/frame/sf_admin_edit_form/obj1/npasicaremp_codcar/obj2/npasicaremp_nomcar/obj3/sueldo/campo1/codcar/campo2/nomcar/campo3/sueldo/param1/'+$('npasicaremp_codnom').value+'") ?>   </div>
 <th>
 <?php $value = object_input_tag($npasicaremp, 'getNomcar', array (
   'readonly' => true,
