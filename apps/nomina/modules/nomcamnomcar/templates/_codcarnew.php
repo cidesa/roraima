@@ -7,5 +7,5 @@
   'campoprincipal' => 'codcar',
   'camposecundario'=> 'nomcarnew',
   'campobase' => 'id',
-  ), 'Nomasicarconnom_Npasicarnom', 'npasicarnom', $catparams, '' );
+  ), 'Nomasicarconnom_Npasicarnom', 'Npcargos', $catparams, '' );
 ?>

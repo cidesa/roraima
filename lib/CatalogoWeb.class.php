@@ -3816,20 +3816,21 @@ public function Tsmovlib_tesmovdeglib2()
 
       $this->c = new Criteria();
 
-      $this->c->addSelectColumn('distinct('.NpasicarnomPeer::CODNOM.')');
+      /*$this->c->addSelectColumn('distinct('.NpasicarnomPeer::CODNOM.')');
       $this->c->addSelectColumn(NpasicarnomPeer::CODCAR);
-      $this->c->addSelectColumn("'999' AS ID");
+      $this->c->addSelectColumn("'999' AS ID");*/
+
+      $this->c->addJoin(NpcargosPeer::CODCAR, NpasicarnomPeer :: CODCAR);
 
       if($params) $this->c->add(NpasicarnomPeer::CODNOM,$params[0]);
 
       $this->columnas = array (
         NpcargosPeer :: NOMCAR => 'Cargo',
-        NpasicarnomPeer :: CODCAR => 'Código',
+        NpcargosPeer :: CODCAR => 'Código',
         NpcargosPeer :: SUECAR => 'Sueldo',
         NpcargosPeer :: GRAOCP => 'Grado',
       );
   }
-
 
   public function Bieregactinmd_Bnclafun()
   {
