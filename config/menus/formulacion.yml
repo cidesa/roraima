@@ -57,7 +57,7 @@ formulacion:
         Unidades Ejecutoras:                                  fordefcatpre
       Formulación:
         Formulación POA:                                      ForPoa
-        Formulación POA por Unidad Ejecutora:                 ForPoa_UAE
+        #Formulación POA por Unidad Ejecutora:                 ForPoa_UAE
         Crea Asignación Inicial:                              ForCreaAsiIni
         Seguimientos Metas Formuladas en el POA:              ForSegPoa
     Reportes:
