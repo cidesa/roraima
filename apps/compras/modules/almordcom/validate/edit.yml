@@ -14,6 +14,7 @@ methods:
 #   - "caordcom{coduni}"
 #   - "caordcom{codemp}"
    - "caordcom{fecord}"
+   - "caordcom{tipord}"
 
 names:
   caordcom{ordcom}:
@@ -82,6 +83,10 @@ names:
   caordcom{fecord}:
     required:  No
     validators: FechaValidator
+
+  caordcom{tipord}:
+    required:  Yes
+    required_msg: El Tipo de Orden de Compra no puede estar vacio
 
 Validator_ordcom:
     class: sfPropelUniqueValidator
