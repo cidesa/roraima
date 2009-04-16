@@ -55,20 +55,22 @@ function CatalogoGrid()
         if (tipo=='OP') {var cedrif=name+"_"+fil+"_"+11}
 
         var monto=name+"_"+fil+"_"+colmonto;
+        var montodes=name+"_"+fil+"_"+(colmonto-1);
 
         var monordpag=toFloat(monto);
+        var mondesordpag=toFloat(montodes);
         var montototal=toFloat(idtotal);
 
 
          if (document.getElementById(id).checked==true) //fila seleccionada
          {
-           neto=montototal+monordpag;
+           neto=montototal+(monordpag-mondesordpag);
            document.getElementById(idtotal).value=format(neto.toFixed(2),'.',',','.');
            //if (tipo=='OP') {$('tscheemi_cedrif').value=document.getElementById(cedrif).value;}
          }
          else
          {
-            neto=montototal-monordpag;
+            neto=montototal-(monordpag-mondesordpag);
             if (neto<0) {neto=0;}
             document.getElementById(idtotal).value=format(neto.toFixed(2),'.',',','.');
             //if (tipo=='OP' && neto==0) {$('tscheemi_cedrif').value="";}
