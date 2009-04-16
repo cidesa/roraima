@@ -66,8 +66,8 @@ class <?php echo $this->getGeneratedModuleName() ?>Actions extends sfActions
       $this->save<?php echo $this->getClassName() ?>($this-><?php echo $this->getSingularName() ?>);
 
       $this->setFlash('notice', 'Your modifications have been saved');
-	  
-	  $this->Bitacora('Guardo');
+
+    $this->Bitacora('Guardo');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -462,7 +462,7 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
     return sfView::HEADER_ONLY;
   }
-  
+
   public function SalvarBitacora($id, $acc)
   {
     try{
@@ -482,11 +482,14 @@ $column = sfPropelManyToMany::getColumn($class, $through_class);
 
     }
   }
-  
+
   public function Bitacora($acc)
   {
-	$id= $this-><?php echo $this->getSingularName()?>->getId();
-    $this->SalvarBitacora($id ,$acc);
+    if ($this-><?php echo $this->getSingularName()?> )
+    {
+      $id= $this-><?php echo $this->getSingularName()?>->getId();
+      $this->SalvarBitacora($id ,$acc);
+    }
   }
-  
+
 }
