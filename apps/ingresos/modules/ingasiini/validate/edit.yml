@@ -1,5 +1,31 @@
 methods:
 methods:
+methods:
+  post:
+   - "ciasiini{codpre}"
+   - "ciasiini{anopre}"
+   - "ciasiini{monasi}"
+
+names:
+  ciasiini{codpre}:
+    required:  Yes
+    required_msg: El código no puede estar en Blanco
+    #validators: Validator_codpre
+
+  ciasiini{anopre}:
+    required:  Yes
+    required_msg: El año no puede estar en Blanco
+
+  ciasiini{monasi}:
+    required:  Yes
+    required_msg: El monto a asignar no puede estar en Blanco
+
+Validator_codpre:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Ciasiini
+        column:       codpre
+        unique_error: El registro ya Existe intente con otro.
   post:
    - "ciasiini{codpre}"
    - "ciasiini{anopre}"
