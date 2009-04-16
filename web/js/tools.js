@@ -1188,17 +1188,6 @@ function totalregistros(letra,posicion,filas)
 
     }
 
-    function enter(e,valor,id)
-    {
-     if (e.keyCode==13 || e.keyCode==9)
-     {
-       if (valor!='')
-       { valor=valor.pad(8, '0',0);}
-       else{valor=valor.pad(8, '#',0);}
-
-       $(id).value=valor;
-     }
-    }
 
     function getScriptname() {
       return window.location.toString().split('/')[3];
