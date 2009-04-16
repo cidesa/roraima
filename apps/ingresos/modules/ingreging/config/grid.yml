@@ -2,9 +2,9 @@ opciones:                  # Opciones generales
   name:                    a
   eliminar:                true
   tabla:                   ciimping
-  ancho:                   1000
+  ancho:                   1220
   anchogrid:               600
-  filas:                   10
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
@@ -36,6 +36,15 @@ opciones:                  # Opciones generales
   tipo:                    m
   nombrecampo:             montot
   esgrabable:			   true
-  html:
-
-
+  html:                    [size=10 readonly=true]
+6:       # Columna 6
+  titulo:                  Rubro
+  tipo:                    t
+  nombrecampo:             codtiprub
+  esgrabable:			   true
+7:       # Columna 7
+  titulo:                  Descripcion
+  tipo:                    t
+  nombrecampo:             destiprub
+  esgrabable:			   false
+  html:                    [size=20 readonly=true]

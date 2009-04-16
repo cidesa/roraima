@@ -2,5 +2,5 @@
 <?php
 
   if($sf_params->get('ajax')=='1'){  ?>
-<?php $value = get_partial('gridmov', array('type' => 'edit', 'ciajuste' => $ciajuste)); echo $value ? $value : '&nbsp;' ?>
+<?php $value = get_partial('grid', array('type' => 'edit', 'ciajuste' => $ciajuste)); echo $value ? $value : '&nbsp;' ?>
  <?php }  ?>

@@ -40,11 +40,12 @@ class viaregsolviaActions extends autoviaregsolviaActions
 
    //Codigo Ente
    $this->columnas[1][0]->setCatalogo('viaregente','sf_admin_edit_form', array('desente'=>'2','id'=>'1'), 'Viaregsolvia_Viaregente');
-   $signo="+";
-   $this->columnas[1][0]->setHTML(' onBlur="toAjaxUpdater(obtenerColumna(this.id,4,'.chr(39).$signo.chr(39).'),4,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signo.chr(39).'));" ');
 
    //Cod/Actividad
    $this->columnas[1][2]->setCatalogo('viaregact','sf_admin_edit_form', array('desact'=>'4','id'=>'3'), 'Viaregsolvia_Viaregact');
+   $signo="+";
+   $signo2="-";
+   $this->columnas[1][2]->setHTML(' onBlur="toAjaxUpdater(obtenerColumna(this.id,2,'.chr(39).$signo.chr(39).'),4,getUrlModuloAjax(),this.value+'.chr(39).'!'.chr(39).'+obtenerColumna(this.id,1,'.chr(39).$signo.chr(39).')+'.chr(39).'!'.chr(39).'+$F(obtenerColumna(this.id,2,'.chr(39).$signo2.chr(39).')));" ');
 
    //Ciudad
      $this->columnas[1][4]->setCombo(self::ListaCiudades());
@@ -60,7 +61,6 @@ class viaregsolviaActions extends autoviaregsolviaActions
 
   public function ListaMoneda()
   {
-
     $c = new Criteria;
     $c->addAscendingOrderByColumn(TsdesmonPeer::NOMMON);
     $lista = TsdesmonPeer::doSelect($c);
@@ -158,15 +158,16 @@ class viaregsolviaActions extends autoviaregsolviaActions
     return $dat;
   }
 
-  public function ListaCiudades($codente='')
+  public function ListaCiudades($codente='',$reg='')
   {
+    //H::printR($reg);
     $c = new Criteria();
     if ($codente)   $c->add(ViaciuentePeer::VIAREGENTE_ID,$codente);
+    //else $c->add(ViaciuentePeer::VIAREGENTE_ID,$reg->getViaregente_id());
     $c->addJoin(ViaciuentePeer::OCCIUDAD_ID,OcciudadPeer::ID);
     $lista = OcciudadPeer::doSelect($c);
 
     $financ = array();
-    //H::printR($lista);
     if ($lista){
       foreach($lista as $obj_financ)
       {
@@ -366,12 +367,13 @@ class viaregsolviaActions extends autoviaregsolviaActions
           return sfView::HEADER_ONLY;
         break;
 
-      case 4:
+      case 4:         //Ajax de Codigo de la Actividad
         $datos     = split('!',$this->getRequestParameter('codigo'));
-        $codente   = $datos[0];
+        $codact    = $datos[0];
         $cajtexmos = $datos[1];
+        $codente   = $datos[2];
 
-        $desente = Herramientas::getX('id','viaregente','desente',$codente);
+        $desente = Herramientas::getX('id','viaregact','desact',$codact);
 
         $output = '[["'.$cajtexmos.'","'.$desente.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -403,6 +405,23 @@ class viaregsolviaActions extends autoviaregsolviaActions
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
     return sfView::HEADER_ONLY;
+      break;
+
+      case 6:         //Ajax de Codigo del Ente
+        $datos     = split('!',$this->getRequestParameter('codigo'));
+        $codente   = $datos[0];
+        $cajtexmos = $datos[1];
+
+        $desente = Herramientas::getX('id','viaregente','desente',$codente);
+
+        $output = '[["'.$cajtexmos.'","'.$desente.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+    return sfView::HEADER_ONLY;
+        //$this->ciudad = self::ListaCiudades($codente);
+
+      break;
+
       default:
         $output = '[["","",""],["","",""],["","",""]]';
     }

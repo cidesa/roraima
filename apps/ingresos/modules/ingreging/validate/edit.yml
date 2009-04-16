@@ -13,22 +13,21 @@ methods:
 names:
   cireging{refing}:
     required:  Yes
-    required_msg: La referencia no puede estar en Blanco
-    validators: Validator_refing
+    required_msg: La Referencia no puede estar en Blanco
 
   cireging{fecing}:
     required:  Yes
-    required_msg: La fecha no puede estar en Blanco
+    required_msg: La Fecha no puede estar en Blanco
     validators: FechaValidator
 
   cireging{desing}:
     required:  Yes
-    required_msg: La descripción no puede estar en Blanco
+    required_msg: La Descripción no puede estar en Blanco
     validators: Validator_desing
 
   cireging{codtip}:
     required:  Yes
-    required_msg: Debe seleccionar el tipo de ingreso
+    required_msg: Debe seleccionar el Tipo de Ingreso
 
   cireging{rifcon}:
     required:  Yes
@@ -36,27 +35,20 @@ names:
 
   #cireging{ctaban}:
    # required:  Yes
-    #required_msg: Debe seleccionar una cuenta bancaria
+    #required_msg: Debe seleccionar una Cuenta Bancaria
 
   cireging{tipmov}:
     required:  Yes
-    required_msg: Debe seleccionar el tipo de movimiento
+    required_msg: Debe seleccionar el Tipo de Movimiento
 
   cireging{numdep}:
     required:  Yes
-    required_msg: El número de deposito no puede estar en blanco
+    required_msg: El Número de Deposito no puede estar en blanco
 
   cireging{numofi}:
     required:  Yes
-    required_msg: El número de oficio no puede estar en blanco
+    required_msg: El Número de Oficio no puede estar en blanco
 
-
-Validator_refing:
-    class: sfPropelUniqueValidator
-    param:
-        class:        Cireging
-        column:       refing
-        unique_error: El registro ya Existe intente con otro.
 
 Validator_desing:
     class: sfStringValidator

@@ -4,28 +4,31 @@ generator:
     model_class:      Ciajuste
     theme:            cidesaGenerator
     fields:
-      refaju:      { name: Referencia, params: size=12 }
+      refaju:      { name: Referencia, params: size=8 maxlength=8 }
       fecaju:      { name: Fecha }
       desaju:      { name: Descripción, type: textarea_tag, params: size=50x2 }
       refere:      { name: Referencia }
       totaju:      { name: Total }
       refmov:      { name: Refiere a Movimiento }
-      grid:        { name: Movimientos del Ajuste }
+      grid:        { name: . }
 
     list:
       title:          Ajustes Ejecución
+      fields:
+        desaju:      { name: Descripción, params: size=15 }
       display:        [ =refaju, desaju ]
       object_actions:
         _edit:        ~
         _delete:      ~
       filters:        [ refaju, desaju ]
-      max_per_page:   5
+      max_per_page:   10
       sort: refaju
     edit:
       title:          Edición de Ajustes Ejecución
       display:
         Datos del Ajuste:   [ _refaju, _fecaju, desaju, _refmov, _refere ]
         Movimientos del Ajuste: [ _grid, totaju ]
+      hide:  [ longpre, staaju ]
       actions:
         _list:        ~
         _save:        ~
@@ -33,4 +36,5 @@ generator:
         _create:      ~
         _anular:
           name: Anular
-          params: class="sf_admin_action_save" onClick="anular()"
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anular()"

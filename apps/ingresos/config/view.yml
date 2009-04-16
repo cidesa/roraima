@@ -4,14 +4,14 @@ default:
 
   metas:
     title:        Módulo Ingresos
-    robots:       modulo, ingresos
+    robots:       index, follow
     description:  Módulo de Ingresos
-    keywords:     Módulo, Ingresos
+    keywords:     Módulo de Ingresos
     language:     en
 
   stylesheets:    [main]
 
-  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, ajax, ingresos/ingresos ]
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, observe, ajax, dFilter]
 
   has_layout:     on
   layout:         layout

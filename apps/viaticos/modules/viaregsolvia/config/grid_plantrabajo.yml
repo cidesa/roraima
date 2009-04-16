@@ -13,6 +13,8 @@ opciones:                  # Opciones generales
   nombrecampo:             viaregente_id
   esgrabable:              true
   html:                    [ size="10"]
+#  ajax:                    [ 6 ]
+  ajaxfila:                true
 2:       # Columna 2
   titulo:                  Descripcion
   tipo:                    t

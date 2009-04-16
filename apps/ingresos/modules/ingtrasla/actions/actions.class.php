@@ -14,80 +14,123 @@ class ingtraslaActions extends autoingtraslaActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-	$this->setVars();
-	$this->configGrid();
+  $this->setVars();
+    if ($this->citrasla->getStatra()=='N') //Nulo
+    {
+      $this->configGrid_Nulo();
+    }else{
+      $this->configGrid();
+    }
   }
 
+
+
+   public function configGrid_Nulo(){
+
+    $c = new Criteria();
+    $c->add(CimovtraPeer::REFTRA,$this->citrasla->getReftra());
+    $per = CimovtraPeer::doSelect($c);
+    $mascara=$this->mascarapresupuesto;
+    $longitud=$this->longpre;
+
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/ingtrasla/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
+    $this->columnas[0]->setEliminar(false);
+    $this->columnas[0]->setFilas(0);
+    $this->columnas[1][0]->setHTML('readonly=true size="'.chr(39).$longitud.chr(39).'"');
+    $this->columnas[1][1]->setHTML('readonly=true size="'.chr(39).$longitud.chr(39).'"');
+    $this->columnas[1][2]->setHTML('readonly=true size="10"');
+
+    $this->grid = $this->columnas[0]->getConfig($per);
+    $this->citrasla->setGrid($this->grid);
+  }
 
    public function configGrid(){
 
     $c = new Criteria();
     $c->add(CimovtraPeer::REFTRA,$this->citrasla->getReftra());
     $per = CimovtraPeer::doSelect($c);
-	$mascara=$this->mascarapresupuesto;
-	$longitud=$this->longpre;
-
+    $mascara=$this->mascarapresupuesto;
+    $longitud=$this->longpre;
 
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/ingtrasla/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
 
-    $obj= array('codpre' => 1);
+    $obj1= array('codpre' => 1);
+    $obj2= array('codpre' => 2);
     $params= array('param1' => $longitud, 'val2');
-    $this->columnas[1][0]->setCatalogo('Cideftit','sf_admin_edit_form',$obj,'Cideftit_Ingtrasla',$params);
-    $this->columnas[1][1]->setCatalogo('Cideftit','sf_admin_edit_form',$obj,'Cideftit_Ingtrasla',$params);
-    $this->columnas[1][0]->setHTML('type="text" size="17" maxlength="'.chr(39).$longitud.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="vacio(event,this.id),ajaxexiste(event,this.id),escodigodestino(event,this.id)"');
-    $this->columnas[1][1]->setHTML('type="text" size="17" maxlength="'.chr(39).$longitud.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="vacio(event,this.id),ajaxexiste(event,this.id),escodigoorigen(event,this.id),ajaxcodpre(event,this.id)"');
-    $this->columnas[1][2]->setHTML('onBlur="event.keyCode=13;return formatoDecimal(event,this.id),valcod(event,this.id),haydisponibilidad(event,this.id),vacios(event,this.id),movimientorepetido(event,this.id),calculartotal()"');
+    $this->columnas[1][0]->setCatalogo('Cideftit','sf_admin_edit_form',$obj1,'Ingtrasla_cideftit',$params);
+    $this->columnas[1][1]->setCatalogo('Cideftit','sf_admin_edit_form',$obj2,'Ingtrasla_cideftit',$params);
+    $this->columnas[1][0]->setHTML('type="text" size="'.chr(39).$longitud.chr(39).'" maxlength="'.chr(39).$longitud.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="vacio(event,this.id),ajaxexiste(event,this.id),esultimonivel(event,this.id),escodigodestino(event,this.id)"');
+    $this->columnas[1][1]->setHTML('type="text" size="'.chr(39).$longitud.chr(39).'" maxlength="'.chr(39).$longitud.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="ajaxcodpre(event,this.id),ajaxexiste(event,this.id),esultimonivel(event,this.id),escodigoorigen(event,this.id)"');
+    $this->columnas[1][2]->setHTML('size="10" onBlur="event.keyCode=13;return formatoDecimal(event,this.id),valcod(event,this.id),haydisponibilidad(event,this.id),vacios(event,this.id),movimientorepetido(event,this.id),calculartotal()"');
     $this->columnas[1][2]->setEsTotal(true,'citrasla_tottra');
 
     $this->grid = $this->columnas[0]->getConfig($per);
     $this->citrasla->setGrid($this->grid);
   }
 
+
   public function setVars()
   {
+    $this->mascarapresupuesto = Herramientas::getX('Codemp','Cidefniv','Forpre','001');
+    $this->longpre=strlen($this->mascarapresupuesto);
+   }
 
-
-  	$this->mascarapresupuesto = Herramientas::getX('Codemp','Cidefniv','Forpre','001');
-  	$this->longpre=strlen($this->mascarapresupuesto);
-
-
-    }
-
-    public function executeSalvaranu()
+  public function executeSalvaranu()
   {
     $refanu=$this->getRequestParameter('refanu');
     $fecanu=$this->getRequestParameter('fecanu');
     $desanu=$this->getRequestParameter('desanu');
 
+    $c= new Criteria();
+    $c->add(CimovtraPeer::REFTRA,$refanu);
+    $reg=CimovtraPeer::doSelect($c);
+    $anular=1;
+    $this->msg='-1';
 
-    $c = new Criteria();
-    $c->add(CitraslaPeer::REFTRA,$refanu);
-    $this->citrasla = CitraslaPeer::doSelectOne($c);
+    $anular = Ingresos::verificardisponibilidad($reg);
 
+    if ($anular==1){
+      $c = new Criteria();
+      $c->add(CitraslaPeer::REFTRA,$refanu);
+      $this->citrasla = CitraslaPeer::doSelectOne($c);
 
-    $this->citrasla->setDesanu($desanu);
-    $this->citrasla->setFecanu($fecanu);
-    $this->citrasla->setStatra('N');
-    $this->citrasla->save();
+      $this->citrasla->setDesanu($desanu);
+      $this->citrasla->setFecanu($fecanu);
+      $this->citrasla->setStatra('N');
+      $this->citrasla->save();
 
-	//Anular Mov_tra
-  	$c = new Criteria();
-  	$c->add(CimovtraPeer::REFTRA,$refanu);
-    $per = CimovtraPeer::doSelect($c);
+    //Anular Mov_tra
+      $c = new Criteria();
+      $c->add(CimovtraPeer::REFTRA,$refanu);
+      $per = CimovtraPeer::doSelect($c);
 
-    foreach ($per as $dato){
-    	$dato->setStamov('N');
+      foreach ($per as $dato){
+        $dato->setStamov('N');
         $dato->save();
-    }
+      }
 
+      $this->msg="Traslado anulado exitosamente";
+
+    }//else if ($anular==0){
+     // $this->msg="No se pudo anular la adici&oacute;n o disminuci&oacute;n, el monto de la partida es menor que el monto de la adici&oacute;n o disminuci&oacute;n y al disminuirla por el monto de la adici&oacute;n o disminuci&oacute;n quedar&iacute;a negativa";
+
+    //}
+    else if ($anular==2){
+      $this->msg="No se pudo Anular el Traslado, el Monto de la Partida es Menor que el Monto del Traslado y al Disminuirla por el Monto del Traslado quedaria Negativa";
+
+    }else if ($anular==3){
+      $this->msg="Existe Partida que no se encuentra en la Base de Datos, Por favor Verifique";
+    }
 
     sfView::SUCCESS;
   }
 
-    public function executeAnular()
-    {
+  public function executeAnular()
+  {
     $reftra=$this->getRequestParameter('reftra');
     $fectra=$this->getRequestParameter('fectra');
+    $fectra = split('/', $fectra);
+    $fectra = $fectra[2] . "-" . $fectra[1] . "-" . $fectra[0];
 
     $c = new Criteria();
     $c->add(CitraslaPeer::REFTRA,$reftra);
@@ -116,65 +159,73 @@ class ingtraslaActions extends autoingtraslaActions
         // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
         $output = '[["","",""],["","",""],["","",""]]';
       case '2':
-      	$codigo = $this->getRequestParameter('codigo');
-      	$cajtexcom = $this->getRequestParameter('cajtexcom');
+        $codigo = $this->getRequestParameter('codigo');
+        $cajtexcom = $this->getRequestParameter('cajtexcom');
 
         $c= new Criteria();
         $c->add(CideftitPeer::CODPRE,$codigo);
         $reg=CideftitPeer::doSelectOne($c);
 
-      	if ($reg)
-      	{
-          $output = '[["","",""]]';
-        }
-        else
+        if ($reg)
         {
-          $javascript="alert('Código presupuestario no existe');$(id).value='';";
+          $output = '[["","",""]]';
 
-        $output = '[["javascript","'.$javascript.'",""]]';
-    	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-    	return sfView::HEADER_ONLY;
+        }else{
+          $javascript="alert('Código presupuestario no existe');$(id).value='';";
+          $output = '[["javascript","'.$javascript.'",""]]';
+
         }
+
+          $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+          return sfView::HEADER_ONLY;
         break;
 
       case '3':
 
         $codigo = $this->getRequestParameter('codigo');
-      	$monto = $this->getRequestParameter('monto');
-      	$javascript="";
+        $monto = H::convnume($this->getRequestParameter('monto'));
+        $javascript="";
+
+        $sql="Select substr(feccie,1,4) as ano from cidefniv where codemp='001'";
+
+      Herramientas::BuscarDatos($sql,&$ano);
+
+    $anocierre=$ano[0]["ano"];
 
         $c= new Criteria();
         $c->add(CiasiiniPeer::CODPRE,$codigo);
-        $c->add(CiasiiniPeer::ANOPRE,substr((CidefnivPeer::FECCIE),0,4));
+        $c->add(CiasiiniPeer::ANOPRE,$anocierre);
         $reg=CiasiiniPeer::doSelectOne($c);
+        //H::printR($reg);exit;
 
 
         if ($monto>$reg->getMondis()){
-          $javascript="alert('No existe disponibilidad para hacer este traslado');$(id).value='0,00';";
+          $javascript="alert('No existe disponibilidad para hacer este traslado');$(idmonto).value='0.00';";
         }
         $output = '[["javascript","'.$javascript.'",""]]';
-    	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-    	return sfView::HEADER_ONLY;
-    	break;
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      return sfView::HEADER_ONLY;
+      break;
 
       case '4':
 
         $codigo= $this->getRequestParameter('codigo');
         $c = new Criteria();
-  		$c->add(CiasiiniPeer::PERPRE,'00');
-  		$c->add(CiasiiniPeer::CODPRE,$codigo);
-    	$asignacion = CiasiiniPeer::doSelect($c);
+      $c->add(CiasiiniPeer::PERPRE,'00');
+      $c->add(CiasiiniPeer::CODPRE,$codigo);
+      $asignacion = CiasiiniPeer::doSelect($c);
 
 
         if (count($asignacion)==0){
 
-        	$javascript = "alert('El t&iacute;tulo presupuestario no tiene asignaci&oacute;n inicial');$(cod).value='';$(id).value='';";
-        	$output = '[["javascript","'.$javascript.'",""]]';
-    		$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-    		return sfView::HEADER_ONLY;
+          $javascript = "alert('El t&iacute;tulo presupuestario no tiene asignaci&oacute;n inicial');$(cod).value='';$(id).value='';";
+          $output = '[["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
         }
 
-    	break;
+
+      break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -197,36 +248,39 @@ class ingtraslaActions extends autoingtraslaActions
   public function validateEdit()
   {
     $this->coderr =-1;
-
-
-
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
+       $this->citrasla  =  $this->getCitraslaOrCreate();
+       $this->configGrid();
+       $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
 
+       $this->coderr = Herramientas::ValidarGrid($grid);
 
       if($this->coderr!=-1){
         return false;
       } else return true;
 
     }else return true;
-
-
-
   }
+
+
 
   protected function saving($citrasla)
   {
-    $fecha=$citrasla->getFectra();
-    $sql="select pereje from cipereje where '".$fecha."'>=fecdes and '".$fecha."'<=fechas";
-	H::BuscarDatos($sql,&$dato);
-	$citrasla->setPertra($dato[0]["pereje"]);
-	$citrasla->setAnotra(substr($fecha,0,4));
-	$citrasla->setStatra('A');
-    $citrasla->save();
-    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
-    Ingresos::salvarDetalletraslado($citrasla, $grid);
-    return -1;
+    try{
+      $fecha=$citrasla->getFectra();
+      $sql="select pereje from cipereje where '".$fecha."'>=fecdes and '".$fecha."'<=fechas";
+      H::BuscarDatos($sql,&$dato);
+      $citrasla->setPertra($dato[0]["pereje"]);
+      $citrasla->setAnotra(substr($fecha,0,4));
+      $citrasla->setStatra(H::iif(($citrasla->getStatra()==''),'A',$citrasla->getStatra()));
+      $citrasla->save();
+      $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+      return Ingresos::salvarDetalletraslado($citrasla, $grid);
 
+    } catch (Exception $ex){
+      return 0;
+    }
   }
 
   protected function deleting($citrasla)
@@ -234,5 +288,12 @@ class ingtraslaActions extends autoingtraslaActions
     $citrasla->delete();
   }
 
+
+
+  public function updateError()
+  {
+    $this->editing();
+    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
+  }
 
 }

@@ -2,9 +2,9 @@ opciones:                  # Opciones generales
   name:                    a
   eliminar:                true
   tabla:                   ciniveles
-  ancho:                   650
+  ancho:                   300
   anchogrid:               550
-  filas:                   16
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
@@ -18,15 +18,13 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             lonniv
   esgrabable:			   true
-  html:                    []
-
+  html:                    [ size=5 ]
 3:       # Columna 3
   titulo:                  Nombre Abreviado
   tipo:                    t
   nombrecampo:             nomabr
   esgrabable:			   true
-  html:                    []
-
+  html:                    [ size=5 ]
 4:       # Columna 4
   titulo:                  Nombre Extendido
   tipo:                    t

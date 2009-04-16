@@ -1,0 +1,27 @@
+opciones:                  # Opciones generales
+  name:                    a
+  eliminar:                false
+  tabla:                   ciasiini
+  ancho:                   100
+  anchogrid:               350
+  filas:                   0
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:       # Columna 1
+  titulo:                  Movimiento
+  tipo:                    t
+  nombrecampo:             movimiento
+  esgrabable:			   false
+  html:                    [size=10 readonly=true]
+2:       # Columna 2
+  titulo:                  Montos
+  tipo:                    m
+  nombrecampo:             montos
+  esgrabable:			   false
+  html:                    [size=20 readonly=true]
+3:       # Columna 3
+  titulo:                  Porcentaje
+  tipo:                    m
+  nombrecampo:             porc
+  esgrabable:			   false
+  html:                    [size=4 readonly=true]

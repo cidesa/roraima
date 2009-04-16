@@ -1,10 +1,10 @@
 opciones:                  # Opciones generales
-  name:                    b
+  name:                    a
   eliminar:                true
   tabla:                   cimovaju
   ancho:                   650
-  anchogrid:               600
-  filas:                   10
+  anchogrid:               650
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
@@ -12,15 +12,18 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             codpre
   esgrabable:			   true
-  html:                    []
+  html:                    [ size="32" ]
 2:       # Columna 2
   titulo:                  Monto Ajuste
   tipo:                    m
+  esnumerico:              true
   nombrecampo:             montot
   esgrabable:			   true
-  html:                    []
+  html:                    [ size="10" ]
 3:       # Columna 3
   titulo:                  Monto
+  nombrecampo:             montot
   tipo:                    m
-  html:
+  esnumerico:              true
+  html:                    [ readonly="true" size="10"]
 

@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        Módulo de Compras
+    title:        Módulo de Ingresos
     robots:       index, follow
-    description:  Módulo de Compras
-    keywords:     Módulo de Compras
+    description:  Módulo de Ingresos
+    keywords:     Módulo de Ingresos
     language:     en
 
   stylesheets:    [main]

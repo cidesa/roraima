@@ -3,16 +3,16 @@
 <?php
 if($ciajuste->getId()==''){
  echo Catalogo($ciajuste,1,array(
-  'getprincipal' => 'getRefing',
+  'getprincipal' => 'getRefere',
   'getsecundario' => 'getDesing',
-  'campoprincipal' => 'refing',
+  'campoprincipal' => 'refere',
   'camposecundario' => 'desing',
   'campobase' => 'cireging_id'
   ), 'Ingajustenew_cireging', 'cireging','','','divgrid');
 
 }else
 {
- echo object_input_hidden_tag($ciajuste, 'getRefere',array('control_name' => 'ciajuste[refere]')) ?>
+ ?>
   <?php $value = object_input_tag($ciajuste, 'getRefere', array (
   'size' => 20,
   'maxlength' => 25,

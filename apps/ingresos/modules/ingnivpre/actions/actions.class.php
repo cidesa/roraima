@@ -15,15 +15,15 @@ class ingnivpreActions extends autoingnivpreActions
   public function editing()
   {
 
-		$this->configGridPer();
-		$this->configGrid();
+    $this->configGridPer();
+    $this->configGrid();
 
   }
 
   public function executeIndex()
   {
-  	$c= new	Criteria();
-  	$data=CidefnivPeer::doSelectOne($c);
+    $c= new	Criteria();
+    $data=CidefnivPeer::doSelectOne($c);
     if ($data)
     {
       $id=$data->getId();
@@ -168,6 +168,22 @@ class ingnivpreActions extends autoingnivpreActions
     {
       $this->cidefniv->setGridper($cidefniv['gridper']);
     }
+    if (isset($cidefniv['coring']))
+    {
+      $this->cidefniv->setCoring($cidefniv['coring']);
+    }
+    if (isset($cidefniv['cortras']))
+    {
+      $this->cidefniv->setCortras($cidefniv['cortras']);
+    }
+    if (isset($cidefniv['coraju']))
+    {
+      $this->cidefniv->setCoraju($cidefniv['coraju']);
+    }
+    if (isset($cidefniv['coradi']))
+    {
+      $this->cidefniv->setCoradi($cidefniv['coradi']);
+    }
 
   }
 
@@ -179,20 +195,20 @@ class ingnivpreActions extends autoingnivpreActions
     $per = CinivelesPeer::doSelect($c);
 
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/ingnivpre/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
-	$this->columnas[1][0]->setCombo(Ingresos::ListaCatpar());
+    $this->columnas[1][0]->setCombo(Ingresos::ListaCatpar());
     $this->columnas[1][0]->setHTML('onChange="validarcatpar()"');
-    $this->columnas[1][1]->setHTML('maxlength="2" onKeyPress="actualizarformato()"');
+    $this->columnas[1][1]->setHTML('maxlength="2" onBlur="actualizarformato(this.id)"');
 
-	$valor=Ingresos::movimientos();
+  $valor=Ingresos::movimientos();
 
-	if($valor==1){
+  if($valor==1){
 
-		$this->columnas[1][0]->setHTML('disabled=true');
-		$this->columnas[1][1]->setHTML('readonly=true');
-		$this->columnas[1][2]->setHTML('readonly=true');
-		$this->columnas[1][3]->setHTML('readonly=true');
+    $this->columnas[1][0]->setHTML('disabled=true');
+    $this->columnas[1][1]->setHTML('readonly=true');
+    $this->columnas[1][2]->setHTML('readonly=true');
+    $this->columnas[1][3]->setHTML('readonly=true');
 
-	}
+  }
 
     //$this->columnas[1][0]->setCombo(Ingresos::ListaCatpar());
     //$this->columnas[1][0]->setHTML('onChange="validarcatpar()"');
@@ -205,27 +221,25 @@ class ingnivpreActions extends autoingnivpreActions
   }
 
    public function configGridPer($genera='', $arreglo=array()){
-	if ($genera=='')
-	{
-    	$c = new Criteria();
-    	$per = CiperejePeer::doSelect($c);
-	}else{
-		$per = $arreglo;
-	}
-
-
+  if ($genera=='')
+  {
+      $c = new Criteria();
+      $per = CiperejePeer::doSelect($c);
+  }else{
+    $per = $arreglo;
+  }
 
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/ingnivpre/'.sfConfig::get('sf_app_module_config_dir_name').'/gridper');
 
     $valor=Ingresos::movimientos();
 
-	if($valor==1){
+  if($valor==1){
 
-		$this->columnas[1][0]->setHTML('readonly=true');
-		$this->columnas[1][1]->setHTML('readonly=true');
-		$this->columnas[1][2]->setHTML('readonly=true');
+   // $this->columnas[1][0]->setHTML('readonly=true');
+  //  $this->columnas[1][1]->setHTML('readonly=true');
+   // $this->columnas[1][2]->setHTML('readonly=true');
 
-	}
+  }
 
 
     $this->grid2 = $this->columnas[0]->getConfig($per);
@@ -257,30 +271,30 @@ class ingnivpreActions extends autoingnivpreActions
         $fecfinal=$this->getRequestParameter('fecfinal','');
         $numper=$this->getRequestParameter('numper','');
         $id='';
-        	$i=1;
+          $i=1;
 
-	$this->incmes=12/$numper;
-	$this->contador=1;
-	$per=new Cipereje();
-	$this->per1=array();
+  $this->incmes=12/$numper;
+  $this->contador=1;
+  $per=new Cipereje();
+  $this->per1=array();
     $j=0;
 
-	while ($i<=$numper){
-	//print $fecha.$incmes.$fecfinal.$numper.$contador;
+  while ($i<=$numper){
+  //print $fecha.$incmes.$fecfinal.$numper.$contador;
        $datos=Ingresos::generarperiodos($fecha,$this->incmes,$fecfinal,$numper,$this->contador);
-	   $this->per1[$j]["pereje"]=$datos[0];
-	   $this->per1[$j]["fecdes"]=$datos[1];
-	   $this->per1[$j]["fechas"]=$datos[2];
-	   $this->per1[$j]["id"]='9';
-	   $this->contador=$this->contador+1;
-	   $fec=substr($datos[2],6,4)."-".substr($datos[2],3,2)."-".substr($datos[2],0,2);
-	   $fech=H::dateAdd('d',1,$fec,'+');
-	   $fecha=substr($fech,8,2)."/".substr($fech,5,2)."/".substr($fech,0,4);
+     $this->per1[$j]["pereje"]=$datos[0];
+     $this->per1[$j]["fecdes"]=$datos[1];
+     $this->per1[$j]["fechas"]=$datos[2];
+     $this->per1[$j]["id"]='9';
+     $this->contador=$this->contador+1;
+     $fec=substr($datos[2],6,4)."-".substr($datos[2],3,2)."-".substr($datos[2],0,2);
+     $fech=H::dateAdd('d',1,$fec,'+');
+     $fecha=substr($fech,8,2)."/".substr($fech,5,2)."/".substr($fech,0,4);
 
-	   $i++;
-	   $j++;
-	}
-		$genera='S';
+     $i++;
+     $j++;
+  }
+    $genera='S';
         $this->configGridPer($genera,$this->per1);
         $output = '[["","",""]]';
         break;
@@ -356,10 +370,10 @@ class ingnivpreActions extends autoingnivpreActions
   protected function saving($cidefniv)
   {
 
-  	$cidefniv->setCodemp('001');
-  	$cidefniv->setLoncod(32);
-  	$cidefniv->setPeract('01');
-  	$cidefniv->setEtadef('1');
+    $cidefniv->setCodemp('001');
+    $cidefniv->setLoncod(32);
+    $cidefniv->setPeract('01');
+    $cidefniv->setEtadef('1');
     $cidefniv->save();
     $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
     $grid2 = Herramientas::CargarDatosGridv2($this,$this->grid2,true);
@@ -372,10 +386,10 @@ class ingnivpreActions extends autoingnivpreActions
   protected function deleting($cidefniv)
   {
 
-		$cidefniv->delete();
+    $cidefniv->delete();
         return -1;
 
-  	}
+    }
 
 
 

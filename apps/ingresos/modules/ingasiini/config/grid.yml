@@ -1,11 +1,10 @@
 opciones:                  # Opciones generales
-opciones:                  # Opciones generales
   name:                    a
-  eliminar:                true
+  eliminar:                false
   tabla:                   ciasiini
-  ancho:                   500
-  anchogrid:               550
-  filas:                   2
+  ancho:                   200
+  anchogrid:               250
+  filas:                   0
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
@@ -13,32 +12,37 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             perpre
   esgrabable:			   true
-  html:                    []
+  html:                    [ size=2 ]
 2:       # Columna 2
   titulo:                  Monto
   tipo:                    m
   nombrecampo:             monasi
   esgrabable:			   true
-  html:                    []
-
-  name:                    a
-  eliminar:                true
-  tabla:                   ciasiini
-  ancho:                   500
-  anchogrid:               550
-  filas:                   2
-  titulo:                  ' '
-  htmltotalfilas:          ' '
-1:       # Columna 1
-  titulo:                  Período
+  html:                    [ size=10 ]
+3:       # Columna 3
+  titulo:                  codpre
   tipo:                    t
-  nombrecampo:             perpre
+  nombrecampo:             codpre
+  oculta:                  true
   esgrabable:			   true
-  html:                    []
-2:       # Columna 2
-  titulo:                  Monto
-  tipo:                    m
-  nombrecampo:             monasi
-  esgrabable:			   true
-  html:                    []
+4:       # Columna 4
+  titulo:                  nombre
+  tipo:                    t
+  nombrecampo:             nombre
+  oculta:                  true
+5:       # Columna 5
+  titulo:                  anopre
+  tipo:                    t
+  nombrecampo:             anopre
+  oculta:                  true
+6:       # Columna 6
+  titulo:                  mondis
+  tipo:                    t
+  nombrecampo:             mondis
+  oculta:                  true
+7:       # Columna 7
+  titulo:                  status
+  tipo:                    t
+  nombrecampo:             status
+  oculta:                  true
 

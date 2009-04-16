@@ -14,19 +14,14 @@ class ingregingActions extends autoingregingActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-		$this->setVars();
-		$this->configGrid();
-
+    $this->setVars();
+    $this->configGrid();
   }
 
   public function setVars()
   {
-
-
-  	$this->mascarapresupuesto = Herramientas::getX('Codemp','Cidefniv','Forpre','001');
-  	$this->longpre=strlen($this->mascarapresupuesto);
-
-
+    $this->mascarapresupuesto = Herramientas::getX('Codemp','Cidefniv','Forpre','001');
+    $this->longpre=strlen($this->mascarapresupuesto);
   }
 
   protected function updateCiregingFromRequest()
@@ -126,81 +121,63 @@ class ingregingActions extends autoingregingActions
     $c = new Criteria();
     $c->add(CiimpingPeer::REFING,$this->cireging->getRefing());
     $per = CiimpingPeer::doSelect($c);
-    //H::printR($per);exit;
-	$mascara=$this->mascarapresupuesto;
-	$longitud=$this->longpre;
+
+    $mascara  = $this->mascarapresupuesto;
+    $longitud = $this->longpre;
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/ingreging/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
 
-	$c1= new Criteria();
-	$c1->add(CiregingPeer::REFING,$this->cireging->getRefing());
-	$p= CiregingPeer::doSelectOne($c1);
+    $c1= new Criteria();
+    $c1->add(CiregingPeer::REFING,$this->cireging->getRefing());
+    $p= CiregingPeer::doSelectOne($c1);
 
     $obj= array('codpre' => 1);
     $params= array('param1' => $longitud, 'val2');
-    $this->columnas[1][0]->setCatalogo('Cideftit','sf_admin_edit_form',$obj,'Ingadidis_cideftit',$params);
-    $this->columnas[1][0]->setHTML('type="text" size="17" maxlength="'.chr(39).$longitud.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="ajaxcodpre(event,this.id),repetido(event,this.id)"');
-    $this->columnas[1][1]->setHTML('onBlur="event.keyCode=13;return formatoDecimal(event,this.id),valcod(event,this.id)"');
+    $this->columnas[1][0]->setCatalogo('Cideftit','sf_admin_edit_form',$obj,'Ingreging_cideftit',$params);
+    $this->columnas[1][0]->setHTML('type="text" size="'.chr(39).$longitud.chr(39).'" maxlength="'.chr(39).$longitud.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="if (vallong(event,this.id,"'.$longitud.'")){ ajaxcodpre(event,this.id),repetido(event,this.id) }"');
+    $this->columnas[1][1]->setHTML('size="10" onBlur="event.keyCode=13;return formatoDecimal(event,this.id),valcod(event,this.id)"');
     $this->columnas[1][1]->setEsTotal(true,'cireging_moning');
-    $this->columnas[1][3]->setHTML('onBlur="event.keyCode=13;return formatoDecimal(event,this.id),calculardcto(),calcularneto()"');
+    $this->columnas[1][3]->setHTML('size="10" onBlur="event.keyCode=13;return formatoDecimal(event,this.id),calculardcto(),calcularneto()"');
     $this->columnas[1][3]->setEsTotal(true,'cireging_monrec');
     $this->columnas[1][4]->setEsTotal(true,'cireging_mondes');
+    $this->columnas[1][5]->setCatalogo('Citiprub','sf_admin_edit_form',array('destiprub'=>'7','codtiprub'=>'6'),'Ingreging_citiprub');
+    $this->columnas[1][5]->setAjax('ingreging',3,7);
 
-
-	if ($p!=''){
-		//$this->columnas[1][4]->setOculta(true);
-		$this->columnas[1][0]->setHTML('readonly=true');
-		$this->columnas[1][1]->setHTML('readonly=true');
-		$this->columnas[1][2]->setHTML('readonly=true');
-		$this->columnas[1][3]->setHTML('readonly=true');
-		$this->columnas[1][4]->setHTML('readonly=true');
-	}else{
-		//$this->columnas[1][4]->setOculta(false);
-	}
-
+  if ($p!=''){
+//  if ($this->cireging->getId()){
+    $this->columnas[1][0]->setHTML('readonly=true');
+    $this->columnas[1][1]->setHTML('readonly=true');
+    $this->columnas[1][2]->setHTML('readonly=true');
+    $this->columnas[1][3]->setHTML('readonly=true');
+    $this->columnas[1][4]->setHTML('readonly=true');
+  }
 
     $this->grid = $this->columnas[0]->getConfig($per);
     $this->cireging->setGrid($this->grid);
-
 
   }
 
   public function executeAjax()
   {
 
-    $codigo = $this->getRequestParameter('codigo');
-
-    // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
-    $ajax = $this->getRequestParameter('ajax','');
-
-    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
-    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
-    // los datos de los objetos de la vista como pasa en un submit normal.
+    $codigo    = $this->getRequestParameter('codigo','');
+    $ajax      = $this->getRequestParameter('ajax','');
+    $cajtexmos = $this->getRequestParameter('cajtexmos','');
+    $cajtexcom = $this->getRequestParameter('cajtexcom');
 
     switch ($ajax){
       case '1':
-        $codigo = $this->getRequestParameter('codigo');
+        $destip = Herramientas::getX('codtip','tstipmov','destip',$codigo);
 
-        $c= new Criteria();
-        $c->add(TstipmovPeer::CODTIP,$codigo);
-        $datos=TstipmovPeer::doSelectOne($c);
-        if ($datos){
-        	$descripcion=$datos->getDestip();
-        }else{
-        	$descripcion='';
-        }
-        $output = '[["cireging_destipmov","'.$descripcion.'",""]]';
+        $output = '[["cireging_destipmov","'.$destip.'",""]]';
         break;
       case '2':
-      	$codigo = $this->getRequestParameter('codigo');
-      	$cajtexcom = $this->getRequestParameter('cajtexcom');
 
         $c= new Criteria();
         $c->add(CideftitPeer::CODPRE,$codigo);
         $reg=CideftitPeer::doSelectOne($c);
 
-      	if ($reg)
-      	{
+        if ($reg)
+        {
           $output = '[["","",""]]';
         }
         else
@@ -208,9 +185,18 @@ class ingregingActions extends autoingregingActions
           $javascript="alert('Código presupuestario no existe');$(id).value='';";
 
         $output = '[["javascript","'.$javascript.'",""]]';
-    	$this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-    	return sfView::HEADER_ONLY;
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
         }
+      break;
+
+      case '3':
+        $destiprub = Herramientas::getX('codtiprub','citiprub','destiprub',$codigo);
+        $output = '[["'.$cajtexmos.'","'.$destiprub.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+        break;
+
       default:
         $output = '[["","",""],["","",""],["","",""]]';
     }
@@ -231,28 +217,13 @@ class ingregingActions extends autoingregingActions
   public function validateEdit()
   {
     $this->coderr =-1;
-
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
-
     if($this->getRequest()->getMethod() == sfRequest::POST){
 
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+       $this->cireging  =  $this->getCiregingOrCreate();
+       $this->editing();
+       $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
 
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
+       $this->coderr = Herramientas::ValidarGrid($grid);
 
       if($this->coderr!=-1){
         return false;
@@ -271,13 +242,8 @@ class ingregingActions extends autoingregingActions
    */
   public function updateError()
   {
-    //$this->configGrid($reg = array(),$regelim = array());
     $this->editing();
-
-    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-    //$this->configGrid($grid[0],$grid[1]);
-
+    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
   }
 
   public function executeAjaxcomprobante()
@@ -286,50 +252,48 @@ class ingregingActions extends autoingregingActions
      $this->updateCiregingFromRequest();
      $this->editing();
      $detalle=Herramientas::CargarDatosGridv2($this,$this->grid);
-     $concom=0;
-     $mensaje1="";
-     $msj1="";
-     $msj2="";
-     $cuentaporpagarrendicion="";
-     $mensajeuno="";
-     $msjuno="";
-     $msjdos="";
-     $msjtres="";
-     $comprobante="";
-     $this->mensajeuno="";
-     $this->msj1="";
-     $this->msj2="";
-     $this->mensaje1="";
-     $this->msjuno="";
-     $this->msjdos="";
-     $this->msjtres="";
-     $this->i="";
-     $this->formulario=array();
 
+     $concom   = 0;
+     $mensaje1 = "";
+     $msj1     = "";
+     $msj2     = "";
+     $cuentaporpagarrendicion = "";
+     $mensajeuno  = "";
+     $msjuno      = "";
+     $msjdos      = "";
+     $msjtres     = "";
+     $comprobante = "";
+     $this->mensajeuno = "";
+     $this->msj1     = "";
+     $this->msj2     = "";
+     $this->mensaje1 = "";
+     $this->msjuno   = "";
+     $this->msjdos   = "";
+     $this->msjtres  = "";
+     $this->i        = "";
+     $this->formulario = array();
 
      if ($this->cireging->getRifcon()=="" || $this->cireging->getCtaban()=="" || count($detalle[0])==0)
      {
-       $msjtres="No se puede Generar el Comprobante, Verique si introdujo los Datos del Beneficiario, el Código Contable y las Imputaciones Presupuestarias, para luego generar el comprobante";
-     }
-     else{
+       $this->msjtres="No se puede Generar el Comprobante, Verique si introdujo los Datos del Beneficiario, el Código Contable y las Imputaciones Presupuestarias, para luego generar el comprobante";
 
-     if ($this->cireging->getRifcon()=="" || $this->cireging->getCtaban()=="")
+     }else{
+       if ($this->cireging->getRifcon()=="" || $this->cireging->getCtaban()=="")
+       {
+         $this->msjtres="No se puede Generar el Comprobante, Verique si introdujo los Datos del Beneficiario y el Código Contable, para luego generar el comprobante";
+       }
+     }
+
+     if ($this->msjtres=="")
      {
-       $msjtres="No se puede Generar el Comprobante, Verique si introdujo los Datos del Beneficiario y el Código Contable, para luego generar el comprobante";
-     }
-     }
+      $x = Ingresos::grabarComprobante($this->cireging,$detalle,&$comprobante);
+      $concom = $concom + 1;
 
-     if ($msjtres=="")
-     {
-
-      $x=Ingresos::grabarComprobante($this->cireging,$detalle,&$comprobante);
-      $concom=$concom + 1;
-
-      $form="sf_admin/ingreging/confincomgen";
-      $i=0;
-      while ($i<$concom)
+      $form = "sf_admin/ingreging/confincomgen";
+      $i    = 0;
+      while ($i < $concom)
       {
-       $f[$i]=$form.$i;
+       $f[$i] = $form.$i;
        $this->getUser()->setAttribute('grabar',$comprobante[$i]->getGrabar(),$f[$i]);
        $this->getUser()->setAttribute('reftra',$comprobante[$i]->getReftra(),$f[$i]);
        $this->getUser()->setAttribute('numcomp',$comprobante[$i]->getNumcom(),$f[$i]);
@@ -342,23 +306,30 @@ class ingregingActions extends autoingregingActions
        $this->getUser()->setAttribute('montos', $comprobante[$i]->getMontos(),$f[$i]);
        $i++;
       }
-      $this->i=$concom-1;
-      $this->formulario=$f;
+      $this->i = $concom - 1;
+      $this->formulario = $f;
      }
-      $output = '[["","",""]]';
+
+      $output =  '[["","",""]]';
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   }
 
   public function executeAnular()
   {
-    $refing=$this->getRequestParameter('refing');
-    $fecing=$this->getRequestParameter('fecing');
+    $refing = $this->getRequestParameter('refing');
+    echo $fecing = $this->getRequestParameter('fecing');
+    exit();
+    $fectra = split('/', $fectra);
+    $fectra = $fectra[2] . "-" . $fectra[1] . "-" . $fectra[0];
 
+    //Buscamos el movimiento a anular
     $c = new Criteria();
     $c->add(CiregingPeer::REFING,$refing);
     $c->add(CiregingPeer::FECING,$fecing);
     $this->cireging = CiregingPeer::doSelectOne($c);
+
     sfView::SUCCESS;
+
   }
 
   public function executeSalvaranu()
@@ -367,20 +338,18 @@ class ingregingActions extends autoingregingActions
     $fecanu=$this->getRequestParameter('fecanu');
     $desanu=$this->getRequestParameter('desanu');
 
-
+  //Buscamo el registro para su anulacion
     $c = new Criteria();
     $c->add(CiregingPeer::REFING,$refanu);
     $c->add(CiregingPeer::FECING,$fecanu);
     $this->cireging = CiregingPeer::doSelectOne($c);
 
-    //H::printR($this->cireging); exit;
+      $this->cireging->setDesanu($desanu);
+      $this->cireging->setFecanu($fecanu);
+      $this->cireging->setStaing('N');
+      $this->cireging->save();
 
-    $this->cireging->setDesanu($desanu);
-    $this->cireging->setFecanu($fecanu);
-    $this->cireging->setStaing('N');
-    $this->cireging->save();
-
-	//Anular Imp_Prc
+  //Anular el detalle del movimiento Imp_Prc
     $c = new Criteria();
     $c->add(CiimpingPeer::REFING,$refanu);
     $c->add(CiimpingPeer::FECING,$fecanu);
@@ -389,16 +358,16 @@ class ingregingActions extends autoingregingActions
     //H::printR($detalle); exit;
 
     foreach ($detalle as $imping){
-    	$imping->setStaimp('N');
-      	$imping->save();
+      $imping->setStaimp('N');
+      $imping->save();
     }
 
    ////////////////////////////
 
-	//Ingresos::buscar_comprobante($this->cireging,'A',$fecanu);
+  Ingresos::buscar_comprobante($this->cireging,'A',$fecanu);
 
-
-	Ingresos::generar_msl_anulado($this->cireging);
+  //Anulamos el comprobante
+   $this->msg = Ingresos::generar_msl_anulado($this->cireging);
 
     sfView::SUCCESS;
   }
@@ -406,28 +375,23 @@ class ingregingActions extends autoingregingActions
 
   public function saving($cireging)
   {
-
-    $ano=substr($cireging->getFecing(),0,4);
-  	$cireging->setAnoing($ano);
-  	$cireging->setStaing('A');
-    $cireging->save();
     $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
-    $graboing=Ingresos::salvarImping($cireging, $grid);
-    $grabodet=Ingresos::generar_movimientos_segun_libros($cireging);
+    if ($cireging->getId())   //Modificaciones
+    {
+      return Ingresos::SalvarIngreging($cireging, $grid);
+    }else {   //Nuevo
+      $cireging->setStaliq('N');
+      self::GenerarComprobante(&$cireging, $grid);
+      return Ingresos::SalvarIngreging($cireging, $grid);
+    }
+  }
 
+  public function GenerarComprobante($cireging, $grid)
+  {
       $concom=1;
       $form="sf_admin/ingreging/confincomgen";
-      if ($concom!=1)
-      {
-       $grabo=$this->getUser()->getAttribute('grabo',null,$form.'1');
-       $numerocomp=$this->getUser()->getAttribute('contabc[numcom]',null,$form.'1');
-      }
-      else
-      {
-       $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
-       $numerocomp=$this->getUser()->getAttribute('contabc[numcom]',null,$form.'0');
-      }
-
+      $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+      $numerocomp=$this->getUser()->getAttribute('contabc[numcom]',null,$form.'0');
       if ($grabo=='S')
       {
         $i=0;
@@ -444,7 +408,6 @@ class ingregingActions extends autoingregingActions
           $credito=$this->getUser()->getAttribute('credito',null,$formulario[$i]);
           $grid=$this->getUser()->getAttribute('grid',null,$formulario[$i]);
 
-
           $this->getUser()->getAttributeHolder()->remove('contabc[numcom]',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('contabc[reftra]',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('contabc[feccom]',$formulario[$i]);
@@ -453,86 +416,64 @@ class ingregingActions extends autoingregingActions
           $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
 
-          $this->numero=$numcom;
+          $this->numero = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
 
-
-          $cireging->setNumcom($numcom);
-          $cireging->save();
-          Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
-          Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
-
-
+          $cireging->setNumcom($this->numero);
          }
          $i++;
         }
       }
+      $this->getUser()->getAttributeHolder()->remove('grabo',$form.'0');
 
-
-       Herramientas::getSalvarCorrelativo('cortras','cidefniv','Referencia',$numcom,$msg);
-
-      //$this->getUser()->getAttributeHolder()->remove('grabo',$form.'0');
-      //$this->getUser()->getAttributeHolder()->remove('grabo',$form.'1');
-
-    return -1;
+     // $grid=Herramientas::CargarDatosGridv2($this,$this->objeto,true);
 
   }
+
+
 
   public function deleting($cireging)
   {
+    try{
+      $c1= new Criteria();
+      $c1->add(TsmovlibPeer::NUMCUE,$cireging->getCtaban());
+      $c1->add(TsmovlibPeer::REFLIB,$cireging->getNumdep());
+      $c1->add(TsmovlibPeer::TIPMOV,$cireging->getTipmov());
+      $mov=TsmovlibPeer::doSelectOne($c1);
 
-	$c1= new Criteria();
-	$c1->add(TsmovlibPeer::NUMCUE,$cireging->getCtaban());
-	$c1->add(TsmovlibPeer::REFLIB,$cireging->getNumdep());
-	$c1->add(TsmovlibPeer::TIPMOV,$cireging->getTipmov());
-	$mov=TsmovlibPeer::doSelectOne($c1);
+      if ($mov){
+        if ($mov->getStacon()!='C'){
+            $mov->delete();
 
+          }else{
+            return 1506;
+          }
+      }else{
+          return 1505;
+      }
 
-	if ($mov){
+        $c= new Criteria();
+        $c->add(CiimpingPeer::REFING,$cireging->getRefing());
+        $c->add(CiimpingPeer::FECING,$cireging->getFecing());
+        CiimpingPeer::doDelete($c);
 
-	if ($mov->getStacon()!='C'){
-    	$mov->delete();
+      //Eliminacion del Comprobante
+        $c= new Criteria();
+        $c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
+        $c->add(ContabcPeer::FECCOM,$cireging->getFecing());
+        ContabcPeer::doDelete($c);
 
-    }else{
-    	$this->setFlash('notice','El movimiento en libros no pudo ser eliminado');
-        return $this->redirect('ingreging/edit?id='.$cireging->getId());
+        $c= new Criteria();
+        $c->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
+        $c->add(Contabc1Peer::FECCOM,$cireging->getFecing());
+        Contabc1Peer::doDelete($c);
+
+        $cireging->delete();
+
+        return -1;
+
+    } catch (Exception $ex){
+      return 0;
     }
-	}else{
-    	$this->setFlash('notice','El movimiento en libros no puede ser eliminado porque no existe');
-        return $this->redirect('ingreging/edit?id='.$cireging->getId());
-	}
-
-
-  	$c= new Criteria();
-  	$c->add(CiimpingPeer::REFING,$cireging->getRefing());
-  	$datos=CiimpingPeer::doSelect($c);
-
-  	foreach ($datos as $per2){
-    	$per2->delete();
-    }
-
-    $c= new Criteria();
-  	$c->add(ContabcPeer::NUMCOM,$cireging->getRefing());
-  	$c->add(ContabcPeer::FECCOM,$cireging->getFecing());
-  	$datos=ContabcPeer::doSelect($c);
-
-  	foreach ($datos as $per2){
-    	$per2->delete();
-    }
-
-    $c= new Criteria();
-  	$c->add(Contabc1Peer::NUMCOM,$cireging->getRefing());
-  	$c->add(Contabc1Peer::FECCOM,$cireging->getFecing());
-  	$datos=Contabc1Peer::doSelect($c);
-
-  	foreach ($datos as $per2){
-    	$per2->delete();
-    }
-
-    $cireging->delete();
-
-    return -1;
-
   }
-
 
 }

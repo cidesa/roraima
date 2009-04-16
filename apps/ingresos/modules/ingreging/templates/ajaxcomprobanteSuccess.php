@@ -11,11 +11,11 @@
 <?
 if ($msjtres=="")
 {
-$x=0;
-$formu='';
+$x     = 0;
+$formu = '';
 while ($x<count($formulario))
 {
-  $formu=$formu.$formulario[$x].'*';
+  $formu = $formu.$formulario[$x].'*';
   $x++;
 }
 ?>
