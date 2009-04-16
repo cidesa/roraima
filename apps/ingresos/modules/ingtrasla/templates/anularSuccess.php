@@ -34,10 +34,9 @@
     //'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('cireging_refing').value=valor; if(document.getElementById('cireging_refing').value==''){document.getElementById('cireging_refing').value=document.getElementById('cireging_refing').value}",
   )); echo $value ? $value : '&nbsp;' ?>
       </div>
-  </div>
 
+<br>
 
-  <div class="form-row">
     <?php echo label_for('citrasla[fectra]', __('Fecha'), 'class="required" ') ?>
     <div class="content<?php if ($sf_request->hasError('citrasla{fectra}')): ?> form-error<?php endif; ?>">
     <?php if ($sf_request->hasError('citrasla{fectra}')): ?>
@@ -49,12 +48,14 @@
     'calendar_button_img' => '/sf/sf_admin/images/date.png',
     'control_name' => 'citrasla[fectra]',
     'date_format' => 'dd/MM/yy',
-  )); echo $value ? $value : '&nbsp;' ?>
+    'size' => 10,
+    'maxlength' => 10,
+    'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+    ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
       </div>
-  </div>
 
+<br>
 
-<div class="form-row">
   <?php echo label_for('label1', __('Motivo Anulación'), 'class="required" ') ?>
 
   <?php $value = input_tag('desanu', '', array (
@@ -62,11 +63,18 @@
   'size' => 80,
   'maxlength' => 100,
 )); echo $value ? $value : '&nbsp;' ?>
+
+
+<br><br><br>
+<div align="center">
+   <input type="button" value="       Guardar" onClick="salvar();" class='sf_admin_action_save'>
+   &nbsp;
+   &nbsp;&nbsp;
+   <input type="button" onclick="javascript:self.close();" class="sf_admin_action_cancel" value="        Cerrar" name="cerrar"/>
+
+</div>
 </div>
 
-<div class="form-row" align="center">
-   <input type="button" value="Salvar" onClick="salvar();">
-</div>
 
 </div>
 </form>
@@ -79,13 +87,17 @@ document.getElementById('desanu').focus();
 
 function salvar()
 {
-	var refanu=document.getElementById('citrasla_reftra').value;
-	var fecanu=document.getElementById('citrasla_fectra').value;
-	var desanu=document.getElementById('desanu').value;
+  var refanu = $('citrasla_reftra').value;
+  var fecanu = $('citrasla_fectra').value;
+  var desanu = $('desanu').value;
 
-	f=document.sf_admin_edit_form;
-	f.action='salvaranu?refanu='+refanu+'&fecanu='+fecanu+'&desanu='+desanu;
-	f.submit();
+  if ((refanu!='') && (fecanu!='') && (desanu!='')){
+    f=document.sf_admin_edit_form;
+    f.action='salvaranu?refanu='+refanu+'&fecanu='+fecanu+'&desanu='+desanu;
+    f.submit();
+  }else{
+    alert('Ante de Continuar, Debe llenar todos los datos');
+  }
 }
 
 

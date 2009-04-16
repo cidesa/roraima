@@ -14,9 +14,8 @@ class ingadidisActions extends autoingadidisActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-  		$this->setVars();
-		$this->configGrid();
-
+    $this->setVars();
+    $this->configGrid();
   }
 
   protected function updateCiadidisFromRequest()
@@ -117,30 +116,90 @@ class ingadidisActions extends autoingadidisActions
     $c = new Criteria();
     $c->add(CimovadiPeer::REFADI,$this->ciadidis->getRefadi());
     $per = CimovadiPeer::doSelect($c);
-	$mascara=$this->mascarapresupuesto;
-	$longitud=$this->longpre;
+
+    $mascara  = $this->mascarapresupuesto;
+    $longitud = $this->longpre;
+
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/ingadidis/'.sfConfig::get('sf_app_module_config_dir_name').'/grid');
 
     $obj= array('codpre' => 1);
     $params= array('param1' => $longitud, 'val2');
     $this->columnas[1][0]->setCatalogo('Cideftit','sf_admin_edit_form',$obj,'Ingadidis_cideftit',$params);
-    $this->columnas[1][1]->setEsTotal(true,'ciadidis_totadi');
-
+    $this->columnas[1][0]->setHTML('type="text" size="17" maxlength="'.chr(39).$longitud.chr(39).'" onKeyDown="javascript:return dFilter (event.keyCode, this,'.chr(39).$mascara.chr(39).')" onKeyPress="javascript:cadena=rayaenter(event,this.value);if (event.keyCode==13 || event.keyCode==9){document.getElementById(this.id).value=cadena;}" onBlur="vacio(event,this.id),ajaxexiste(event,this.id),repetido(event,this.id),hayasignacion(event,this.id)"');
+    $this->columnas[1][1]->setHTML('onBlur="event.keyCode=13;return formatoDecimal(event,this.id),valcod(event,this.id),haydisponibilidad(event,this.id),calculartotal()"');
     $this->grid = $this->columnas[0]->getConfig($per);
     $this->ciadidis->setGrid($this->grid);
 
-
   }
 
-    public function setVars()
-  {
+   public function setVars()
+   {
+      $this->mascarapresupuesto = Herramientas::getX('Codemp','Cidefniv','Forpre','001');
+      $this->longpre = strlen($this->mascarapresupuesto);
+   }
 
 
-  	$this->mascarapresupuesto = Herramientas::getX('Codemp','Cidefniv','Forpre','001');
-  	$this->longpre=strlen($this->mascarapresupuesto);
+   public function executeSalvaranu()
+   {
+     $refanu = $this->getRequestParameter('refanu');
+     $fecanu = $this->getRequestParameter('fecanu');
+     $desanu = $this->getRequestParameter('desanu');
+     $adidis = $this->getRequestParameter('adidis');
 
+     $c= new Criteria();
+     $c->add(CimovadiPeer::REFADI,$refanu);
+     $reg = CimovadiPeer::doSelect($c);
+     $anular = 1;
+     $this->msg='-1';
 
+    if ($adidis=='A'){
+      $anular = Ingresos::verificardisponibilidad($reg);
     }
+
+    if ($anular==1){
+      $c = new Criteria();
+      $c->add(CiadidisPeer::REFADI,$refanu);
+      $this->ciadidis = CiadidisPeer::doSelectOne($c);
+
+      $this->ciadidis->setDesanu($desanu);
+      $this->ciadidis->setFecanu($fecanu);
+      $this->ciadidis->setStaadi('N');
+      $this->ciadidis->save();
+
+    //Anular Mov_adi
+      $c = new Criteria();
+      $c->add(CimovadiPeer::REFADI,$refanu);
+      $per = CimovadiPeer::doSelect($c);
+
+      foreach ($per as $dato){
+        $dato->setStamov('N');
+        $dato->save();
+      }
+    }//else if ($anular==0){
+     // $this->msg="No se pudo anular la adici&oacute;n o disminuci&oacute;n, el monto de la partida es menor que el monto de la adici&oacute;n o disminuci&oacute;n y al disminuirla por el monto de la adici&oacute;n o disminuci&oacute;n quedar&iacute;a negativa";
+
+    //}
+    else if ($anular==2){
+      $this->msg="No se puede Eliminar o Anular la Adicion, Ya que el Monto de la Adicion quedaria Negativa";
+
+    }else if ($anular==3){
+      $this->msg="Existe Partida que no se encuentra en la Base de Datos, Por favor Verifique";
+    }
+
+    sfView::SUCCESS;
+  }
+
+    public function executeAnular()
+    {
+    $refadi=$this->getRequestParameter('refadi');
+    $fecadi=$this->getRequestParameter('fecadi');
+
+    $c = new Criteria();
+    $c->add(CiadidisPeer::REFADI,$refadi);
+    $c->add(CiadidisPeer::FECADI,$fecadi);
+    $this->ciadidis = CiadidisPeer::doSelectOne($c);
+    sfView::SUCCESS;
+  }
 
 
   public function executeAjax()
@@ -162,6 +221,96 @@ class ingadidisActions extends autoingadidisActions
         // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
         $output = '[["","",""],["","",""],["","",""]]';
         break;
+      case '2':
+        $codigo = $this->getRequestParameter('codigo');
+        $cajtexcom = $this->getRequestParameter('cajtexcom');
+
+        $c= new Criteria();
+        $c->add(CideftitPeer::CODPRE,$codigo);
+        $reg=CideftitPeer::doSelectOne($c);
+
+        if ($reg)
+        {
+          $output = '[["","",""]]';
+        }
+        else
+        {
+          $javascript="alert('Código presupuestario no existe');$(id).value='';";
+
+        $output = '[["javascript","'.$javascript.'",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+      return sfView::HEADER_ONLY;
+        }
+        break;
+
+      case '3':
+        $codigo = $this->getRequestParameter('codigo');
+        $mon    = $this->getRequestParameter('monto');
+        $ano    = $this->getRequestParameter('ano');
+        $cajtexmos  = $this->getRequestParameter('cajtexmos');
+        $tipo       = $this->getRequestParameter('tipo');
+        $javascript = "";
+
+        $monto=H::convnume($mon);
+
+        $c= new Criteria();
+        $c->add(CiasiiniPeer::CODPRE,$codigo);
+        $c->add(CiasiiniPeer::ANOPRE,$ano);
+        $c->add(CiasiiniPeer::PERPRE,'00');
+        $reg=CiasiiniPeer::doSelectOne($c);
+
+    if ($reg){
+
+    $monaux=$reg->getMondis();
+
+    if ($tipo=='D'){
+
+        if ($monto>$monaux){
+
+          $javascript="alert_('No existe disponibilidad para hacer esta disminuci&oacute;n');";
+          $output = '[["javascript","'.$javascript.'",""]]';
+          $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+        }else{
+
+          $dispon=$monaux-$monto;
+          $disponible=H::FormatoMonto($dispon,'2');
+          $output = '[["'.$cajtexmos.'","'.$disponible.'",""]]';
+          $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+        }
+        }else{
+
+          $dispon=$monaux+$monto;
+          $disponible=H::FormatoMonto($dispon,'2');
+          $output = '[["'.$cajtexmos.'","'.$disponible.'",""]]';
+          $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+
+        }
+
+        }
+
+      return sfView::HEADER_ONLY;
+      break;
+
+      case '4':
+
+        $codigo= $this->getRequestParameter('codigo');
+        $c = new Criteria();
+        $c->add(CiasiiniPeer::PERPRE,'00');
+        $c->add(CiasiiniPeer::CODPRE,$codigo);
+        $asignacion = CiasiiniPeer::doSelect($c);
+
+        if (count($asignacion)==0){
+          $javascript = "alert('El t&iacute;tulo presupuestario no tiene asignaci&oacute;n inicial');";
+          $output = '[["javascript","'.$javascript.'",""]]';
+          $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+        }
+
+      $output = '[["","",""],["","",""],["","",""]]';
+      break;
+
       default:
         $output = '[["","",""],["","",""],["","",""]]';
     }
@@ -183,36 +332,18 @@ class ingadidisActions extends autoingadidisActions
   {
     $this->coderr =-1;
 
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
-
     if($this->getRequest()->getMethod() == sfRequest::POST){
+       $this->ciadidis  =  $this->getCiadidisOrCreate();
+       $this->editing();
+       $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
 
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
-
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
-
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
-
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
-
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
+       $this->coderr = Herramientas::ValidarGrid($grid);
 
       if($this->coderr!=-1){
         return false;
       } else return true;
 
     }else return true;
-
-
-
   }
 
   /**
@@ -222,9 +353,9 @@ class ingadidisActions extends autoingadidisActions
    */
   public function updateError()
   {
-    //$this->configGrid();
+    $this->editing();
 
-    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
+    $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
 
     //$this->configGrid($grid[0],$grid[1]);
 
@@ -232,19 +363,18 @@ class ingadidisActions extends autoingadidisActions
 
   public function saving($ciadidis)
   {
-
-  	$ano=substr(date('d/m/YY'),6,4);
-  	$ciadidis->setAnoadi($ano);
-  	$ciadidis->setStaadi('A');
-    $ciadidis->save();
     $grid = Herramientas::CargarDatosGridv2($this,$this->grid);
-    Ingresos::salvarMovadi($ciadidis, $grid);
-    return -1;
+    return Ingresos::SalvarIngadidis($ciadidis, $grid);
   }
 
   public function deleting($clasemodelo)
   {
-    return parent::deleting($clasemodelo);
+    if ($clasemodelo->getStaadi()!='N')
+    {
+      return parent::deleting($clasemodelo);
+    }else{
+     return 1507;
+    }
   }
 
 

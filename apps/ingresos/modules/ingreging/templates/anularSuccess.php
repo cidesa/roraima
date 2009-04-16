@@ -28,16 +28,14 @@
     <?php endif; ?>
 
     <?php $value = object_input_tag($cireging, 'getRefing', array (
-    'size' => 20,
+    'size' => 10,
     'control_name' => 'cireging[refing]',
     'readonly' => true,
-    //'onBlur'  => "javascript: valor=this.value; valor=valor.pad(8, '0',0);document.getElementById('cireging_refing').value=valor; if(document.getElementById('cireging_refing').value==''){document.getElementById('cireging_refing').value=document.getElementById('cireging_refing').value}",
   )); echo $value ? $value : '&nbsp;' ?>
       </div>
-  </div>
 
+<br>
 
-  <div class="form-row">
     <?php echo label_for('cireging[fecing]', __('Fecha'), 'class="required" ') ?>
     <div class="content<?php if ($sf_request->hasError('cireging{fecing}')): ?> form-error<?php endif; ?>">
     <?php if ($sf_request->hasError('cireging{fecing}')): ?>
@@ -46,15 +44,17 @@
 
     <?php $value = object_input_date_tag($cireging, 'getFecing', array (
     'rich' => true,
-    'calendar_button_img' => '/sf/sf_admin/images/date.png',
-    'control_name' => 'cireging[fecing]',
-    'date_format' => 'dd/MM/yy',
-  )); echo $value ? $value : '&nbsp;' ?>
+  'calendar_button_img' => '/sf/sf_admin/images/date.png',
+  'control_name' => 'cireging[fecing]',
+  'date_format' => 'dd/MM/yyyy',
+  'size' => 10,
+  'maxlength' => 10,
+  'onkeyup' => "javascript: mascara(this,'/',patron,true)",
+ ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
       </div>
-  </div>
 
+<br>
 
-<div class="form-row">
   <?php echo label_for('label1', __('Motivo Anulación'), 'class="required" ') ?>
 
   <?php $value = input_tag('desanu', '', array (
@@ -62,10 +62,16 @@
   'size' => 80,
   'maxlength' => 100,
 )); echo $value ? $value : '&nbsp;' ?>
-</div>
 
-<div class="form-row" align="center">
-   <input type="button" value="Salvar" onClick="salvar();">
+
+<br><br><br>
+<div align="center">
+   <input type="button" value="       Guardar" onClick="salvar();" class='sf_admin_action_save'>
+   &nbsp;
+   &nbsp;&nbsp;
+   <input type="button" onclick="javascript:self.close();" class="sf_admin_action_cancel" value="        Cerrar" name="cerrar"/>
+
+</div>
 </div>
 
 </div>
@@ -79,16 +85,18 @@ document.getElementById('desanu').focus();
 
 function salvar()
 {
-	var refanu=document.getElementById('cireging_refing').value;
-	var fecanu=document.getElementById('cireging_fecing').value;
-	var desanu=document.getElementById('desanu').value;
+  var refanu = $('cireging_refing').value;
+  var fecanu = $('cireging_fecing').value;
+  var desanu = $('desanu').value;
 
-	f=document.sf_admin_edit_form;
-	f.action='salvaranu?refanu='+refanu+'&fecanu='+fecanu+'&desanu='+desanu;
-	f.submit();
+  if ((refanu!='') && (fecanu!='') && (desanu!='')){
+    f = document.sf_admin_edit_form;
+    f.action = 'salvaranu?refanu='+refanu+'&fecanu='+fecanu+'&desanu='+desanu;
+    f.submit();
+  }else{
+    alert('Ante de Continuar, Debe llenar todos los datos');
+  }
 }
-
-
 
 </script>
 

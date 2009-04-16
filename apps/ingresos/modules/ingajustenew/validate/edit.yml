@@ -1,34 +1,34 @@
 methods:
   post:
-   - "citrasla{reftra}"
-   - "citrasla{fectra}"
-   - "citrasla{destra}"
-
+   - "ciajuste{refaju}"
+   - "ciajuste{fecaju}"
+   - "ciajuste{desaju}"
 
 names:
-  citrasla{reftra}:
+
+  ciajuste{refaju}:
     required:  Yes
     required_msg: La referencia no puede estar en Blanco
-    validators: Validator_reftra
+    validators: Validator_refaju
 
-  citrasla{fectra}:
+  ciajuste{fecaju}:
     required:  Yes
     required_msg: La fecha no puede estar en Blanco
     validators: FechaValidator
 
-  citrasla{destra}:
+  ciajuste{desaju}:
     required:  Yes
     required_msg: La descripción no puede estar en Blanco
-    validators: Validator_destra
+    validators: Validator_desaju
 
-Validator_reftra:
+Validator_refaju:
     class: sfPropelUniqueValidator
     param:
-        class:        Citrasla
-        column:       reftra
+        class:        Ciajuste
+        column:       refaju
         unique_error: El registro ya Existe intente con otro.
 
-Validator_destra:
+Validator_desaju:
     class: sfStringValidator
     param:
         min:       2

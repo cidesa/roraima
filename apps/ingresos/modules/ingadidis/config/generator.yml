@@ -9,7 +9,8 @@ generator:
       desadi:      { name: Descripción, type: textarea_tag, params: size=50x2}
       adidis:      { name: Tipo }
       totadi:      { name: Total }
-      grid:        { name: Movimientos de la Adición/Disminución }
+      grid:        { name: . }
+      estatus:     { name: . }
 
     list:
       title:          Adiciones/Disminuciones
@@ -17,16 +18,25 @@ generator:
       object_actions:
         _edit:        ~
         _delete:      ~
-      filters:        [ refadi, desadi ]
-      max_per_page:   5
+      filters:       [ refadi, desadi ]
+      fields:
+        refadi:  {params: size=10}
+        desadi:  {params: size=10x2}
+      max_per_page:   10
       sort: refadi
     edit:
+      hide:  [ staadi ]
       title:          Edición de Adiciones/Disminuciones
       display:
-        Datos de la Adición/Disminución:   [ refadi, fecadi, desadi, _adidis ]
+        NONE:  [ _estatus ]
+        Datos de la Adición/Disminución:   [ _refadi, _fecadi, desadi, _adidis ]
         Movimientos de la Adición/Disminución: [ _grid, totadi ]
       actions:
         _list:        ~
         _save:        ~
         _delete:      ~
         _create:      ~
+        _anular:
+          name: Anular
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anular()"  confirm="Realmente desea Anular este Movimiento?"

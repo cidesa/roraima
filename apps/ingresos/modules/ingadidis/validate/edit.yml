@@ -13,11 +13,12 @@ names:
   ciadidis{fecadi}:
     required:  Yes
     required_msg: La fecha no puede estar en Blanco
+    validators: FechaValidator
 
 
   ciadidis{desadi}:
     required:  Yes
-    required_msg: La descripción no puede estar en Blanco
+    required_msg: La Descripción no puede estar en Blanco
     validators: Validator_desadi
 
 Validator_refadi:
@@ -34,3 +35,13 @@ Validator_desadi:
         min_error: La descripción no puede tener menos de 2 caracteres
         max:       250
         min_error: La descripción no puede tener mas de 250 caracteres
+
+FechaValidator:
+    class: CidesaDateValidator
+    param:
+        class:        Cidefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida

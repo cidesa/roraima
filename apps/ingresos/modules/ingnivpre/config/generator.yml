@@ -17,9 +17,12 @@ generator:
       staprc:      { name: Precompromiso }
       coraep:      { name: Inicio de Correlativo de AEP, params: maxlength=8,size=10}
       #periodos:    { name: Períodos }
-      grid:        { name: Detalle Códigos Presupuestarios }
-      gridper:     { name: Períodos }
-
+      grid:        { name: . }
+      gridper:     { name: . }
+      coring:      { name: Ingreso, params: size=3 }
+      cortras:      { name: Traslado, params: size=3 }
+      coraju:      { name: Ajuste, params: size=3 }
+      coradi:      { name: Adicion, params: size=3 }
 
     list:
       title:          Definición de Niveles Presupuestarios
@@ -36,5 +39,6 @@ generator:
         Detalles del Código Presupuestario:     [ _grid, _forpre]
         Configuraciones Generales:              [ _asiper, _fecper, _fecini, _feccie, _numper, _staprc, coraep]
         Distribución de los Períodos:           [ _gridper ]
+        Correlativos: [ coring, cortras, coraju, coradi]
       actions:
         _save:        ~

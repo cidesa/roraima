@@ -1,10 +1,10 @@
 opciones:                  # Opciones generales
   name:                    b
-  eliminar:                true
+  eliminar:                false
   tabla:                   cipereje
-  ancho:                   500
-  anchogrid:               550
-  filas:                   1
+  ancho:                   400
+  anchogrid:               440
+  filas:                   0
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
@@ -12,17 +12,16 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             pereje
   esgrabable:			   true
-  html:                    []
+  html:                    [ size=3 readonly=true ]
 2:       # Columna 2
   titulo:                  Fecha Desde
   tipo:                    f
   nombrecampo:             fecdes
   esgrabable:			   true
-  html:                    []
-
+  html:                    [ size=10 readonly=true ]
 3:       # Columna 3
   titulo:                  Fecha Hasta
   tipo:                    f
   nombrecampo:             fechas
   esgrabable:			   true
-  html:                    []
+  html:                    [ size=10 readonly=true ]

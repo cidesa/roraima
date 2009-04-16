@@ -10,8 +10,8 @@
 
 
 <?php
-
+$hay=Ingresos::movimientos();
 echo select_tag('cidefniv[ruppar]', options_for_select(Array(' ','1','2','3','4','5','6','7','8'),$cidefniv->getRuppar()),array(
   'onchange' => "javascript: niveldisponibilidad()",
-  'disabled' => $cidefniv->getId()!='' ? true : false ,
+  'disabled' => $hay == 1 ? true : false ,
 )); ?>

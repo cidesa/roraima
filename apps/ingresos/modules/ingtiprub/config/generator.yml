@@ -1,10 +1,10 @@
 generator:
   class:              cidesaPropelAdminGenerator
   param:
-    model_class:      Cirubro
+    model_class:      Citiprub
     theme:            cidesaGenerator
     fields:
-      codtiprub:      { name: Código }
+      codtiprub:      { name: Código, params: size=3 maxlength=3 }
       destiprub:      { name: Descripción, type: textarea_tag, params: size=50x2 }
 
     list:
@@ -14,10 +14,12 @@ generator:
         _edit:        ~
         _delete:      ~
       filters:        [ codtiprub, destiprub ]
-      max_per_page:   5
+      max_per_page:   10
       sort: codtiprub
     edit:
       title:          Edición de Tipos de Rubros
+      fields:
+        codtiprub:      { name: Código, params: size=3 readonly=true }
       display:        [ codtiprub, destiprub ]
       actions:
         _list:        ~

@@ -11,15 +11,18 @@ generator:
       rifcon:      { name: C.I/R.I.F Contribuyente }
       ctaban:      { name: Cuenta Bancaria Nro. }
       tipmov:      { name: Tipo de Movimiento }
-      numdep:      { name: Número de Depósito }
-      numofi:      { name: Número de Oficio }
+      numdep:      { name: Número de Depósito, params: size=20  maxlength=50  }
+      numofi:      { name: Número de Oficio, params: size=20 maxlength=50 }
       moning:      { name: Ingreso }
       monrec:      { name: Recargo }
       mondes:      { name: Descuento }
       montot:      { name: Neto }
       previs:      { name: Previsto }
-      grid:        { name: Detalles del Ingreso }
+      grid:        { name: . }
+      staing:      { name: Status del Ingreso }
+      estatus:        { name: . }
       #comprobante: { name: Generar Comprobante }
+      numcom:        { name: numero del comprobante }
 
     list:
       title:          Ingresos
@@ -27,15 +30,18 @@ generator:
       object_actions:
         _edit:        ~
         _delete:      ~
-      filters:        [ refing, desing ]
-      max_per_page:   5
+      filters:        [ refing, desing, rifcon, fecing ]
+      max_per_page:   10
       sort: refing
+      fields:
+        refing:  {params: size=10}
+        desing:  {params: size=10x2}
     edit:
       title:          Edición de Ingresos
       display:
-        Datos del Ingreso:   [ _refing, _fecing, desing, _codtip, _rifcon, _ctaban, _tipmov, _numdep, _numofi, _previs ]
+        Datos del Ingreso:   [ _estatus, _refing, _fecing, desing, _codtip, _rifcon, _ctaban, _tipmov, numdep, numofi, _previs ]
         Detalles del Ingreso: [ _grid, _moning, _monrec, _mondes, _montot, _comprobante ]
-      hide:  [ idrefer ]
+      hide:  [ idrefer, staing, idrefer ]
       actions:
         _list:        ~
         _save:        ~
@@ -43,4 +49,5 @@ generator:
         _create:      ~
         _anular:
           name: Anular
-          params: class="sf_admin_action_save" onClick="anular()"
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anular()" confirm="Realmente desea Anular este Movimiento?"

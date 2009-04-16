@@ -2,6 +2,7 @@
   if ($ciajuste->getId()!=''){
   $value = object_input_date_tag($ciajuste, 'getFecaju', array (
   'readonly' => true,
+  'size' => 10,
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'ciajuste[fecaju]',
@@ -13,6 +14,7 @@
 
   $value = object_input_date_tag($ciajuste, 'getFecaju', array (
   'rich' => true,
+  'size' => 10,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
   'control_name' => 'ciajuste[fecaju]',
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",

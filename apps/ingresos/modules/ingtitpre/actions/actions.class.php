@@ -63,6 +63,7 @@ class ingtitpreActions extends autoingtitpreActions
   {
     $codigo = $this->getRequestParameter('codigo','');
     $ajax = $this->getRequestParameter('ajax','');
+    $cajtexmos=$this->getRequestParameter('cajtexmos');
     $javascript="";
     switch ($ajax){
       case '1':
@@ -76,18 +77,32 @@ class ingtitpreActions extends autoingtitpreActions
           if (!H::buscarCodigoPadre('codpre','cideftit', $cod))
           {
            $seguir=false;
-           $javascript="alert('Código Presupuestario inválido, no se ha definido el nivel anterior'); $('cideftit_codpre').value='';";
+           $javascript="alert('Código Presupuestario inválido, no se ha definido el nivel anterior');";
     	   break;
           }else{
           	$i++;
           	$cod=$cod."-".$cad[$i];
           }
         }
-        $output = '[["","'.$javascript.'",""]]';
+        $output = '[["javascript","'.$javascript.'",""]]';
        break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
        break;
+       case '2':
+        $codigo = $this->getRequestParameter('codigo','');
+    	$cajtexmos=$this->getRequestParameter('cajtexmos');
+        $dato=ContabbPeer::getDescta($this->getRequestParameter('codigo'));
+    	$dato2=ContabbPeer::getCargab($this->getRequestParameter('codigo'));
+    	//print($dato2);exit;
+    	if ($dato2=='S'){
+    		$output = '[["'.$cajtexmos.'","'.$dato.'",""]]';
+    	}else{
+    		$javascript="alert('El código contable no es cargable');$('cideftit_codcta').value='';";
+    		$output = '[["javascript","'.$javascript.'",""]]';
+    	}
+
+
     }
 
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
@@ -152,8 +167,19 @@ class ingtitpreActions extends autoingtitpreActions
           	$cod=$cod."-".$cad[$i];
       }
     }
-    if ($seguir){$cideftit->save();}
-	//print $error; exit;
+    if ($seguir){
+    	$cideftit->save();
+    	$c = new Criteria();
+    	$c->add(CiasiiniPeer::CODPRE,$cideftit->getCodpre());
+    	$asig=CiasiiniPeer::doSelect($c);
+
+      foreach ($asig as $per2){//Modificacion del nombre en la asignacion inicial
+
+		 $per2->setNompre($cideftit->getNompre());
+         $per2->save();
+      }
+
+    }
     return $error;
   }
 
@@ -161,13 +187,23 @@ class ingtitpreActions extends autoingtitpreActions
   {
   	//$error=-1;
 
+	//Verificamos que el codigo presupuestario no tenga movimiento asociados
   	if (Ingresos::movcod($cideftit->getCodpre())==1){
   		$error=1501;
   	}else{
   		$error=-1;
   	}
 
-	if ($error!=1501){
+	//Verificamos que no sea codigo padre
+  	if (strlen($cideftit->getCodpre())==$this->longpre){
+
+  		$error=1503;
+
+  	}else{
+  		$error=-1;
+  	}
+
+	if ($error!=1501 and $error!=1503){
 		$cideftit->delete();
 	}
 

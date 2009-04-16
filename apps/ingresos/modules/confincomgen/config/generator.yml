@@ -1,0 +1,30 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Contabc
+    theme:            default
+
+    fields:
+      numcom: { name: Número}
+      feccom: { name: Fecha, params: date_format='dd/MM/yyyy'}
+      descom: { name: Descripcion}
+      moncom: { name: Monto }
+      reftra: { name: Referencia }
+
+    list:
+      title:          Comprobantes
+      display:        [=numcom, reftra, feccom, descom, moncom]
+      filters:        [numcom, reftra, feccom]
+      max_per_page:   10
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      sort:  numcom
+
+    edit:
+      title:          Comprobante Contable
+      display:        [numcom, reftra, feccom, descom, moncom]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

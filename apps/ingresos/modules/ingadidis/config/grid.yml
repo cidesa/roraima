@@ -2,7 +2,7 @@ opciones:                  # Opciones generales
   name:                    a
   eliminar:                true
   tabla:                   cimovadi
-  ancho:                   600
+  ancho:                   550
   anchogrid:               600
   filas:                   1
   titulo:                  ' '
@@ -12,16 +12,16 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             codpre
   esgrabable:			   true
-  html:                    []
+  html:                    [ ]
 
 2:       # Columna 2
   titulo:                  Monto
   tipo:                    m
   nombrecampo:             monmov
   esgrabable:			   true
-  html:                    []
+  html:                    [ ]
 
 3:       # Columna 3
   titulo:                  Disponible
   tipo:                    m
-  html:                    []
+  html:                    [readonly=true]

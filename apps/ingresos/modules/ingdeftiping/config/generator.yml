@@ -4,17 +4,18 @@ generator:
     model_class:      Citiping
     theme:            cidesaGenerator
     fields:
-      codtip:      { name: Código }
-      destip:      { name: Descripción }
-
+      codtip:      { name: Código, params: size=3 maxlength=3 onBlur="this.value=this.value.pad(3, '0',0);"  }
+      destip:      { name: Descripción , params: size=40  }
     list:
       title:          Tipos de Ingresos
+      fields:
+        destip:      { name: Descripción , params: size=15  }
       display:        [ =codtip, destip ]
       object_actions:
         _edit:        ~
         _delete:      ~
       filters:        [ codtip, destip ]
-      max_per_page:   5
+      max_per_page:   10
       sort: codtip
     edit:
       title:          Edición de Tipos de Ingresos

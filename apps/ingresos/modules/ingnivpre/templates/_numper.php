@@ -10,9 +10,9 @@
 
 
 <?php
-
+  $hay=Ingresos::movimientos();
 echo select_tag('cidefniv[numper]', options_for_select(Constantes::ListaNumPeriodos(),$cidefniv->getNumper()),array(
    'onchange' => "javascript: cargargridper()",
-   'disabled' => $cidefniv->getId()!='' ? true : false ,
+   'disabled' => $hay == 1 ? true : false ,
 )); ?>
 

@@ -9,23 +9,26 @@ generator:
       pertra:      { name: Período, params: size=12 }
       destra:      { name: Descripción, type: textarea_tag, params: size=50x2 }
       tottra:      { name: Total }
-      grid:        { name: Movimientos del Traslado }
+      grid:        { name: . }
+      etiqueta:    {name: .}
 
     list:
       title:          Traslados
+      fields:
+        destra:      { name: Descripción, type: textarea_tag, params: size=12 }
       display:        [ =reftra, destra ]
       object_actions:
         _edit:        ~
         _delete:      ~
-      filters:        [ reftra, destra ]
+      filters:        [ reftra, destra, fectra ]
       max_per_page:   5
       sort: reftra
     edit:
       title:          Edición de Traslados
       display:
-        Datos del Traslado:  [ _reftra, _fectra, destra]
+        Datos del Traslado:  [ _etiqueta, _reftra, _fectra, destra]
         Movimientos del Traslado: [_grid, _tottra]
-
+      hide:  [ longpre, statra ]
       actions:
         _list:        ~
         _save:        ~
@@ -33,4 +36,5 @@ generator:
         _create:      ~
         _anular:
           name: Anular
+          only_for: edit
           params: class="sf_admin_action_delete" onClick="anular()"
