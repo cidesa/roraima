@@ -242,5 +242,43 @@ class generalesActions extends sfActions
 
   }
   
+  public function executeGuardarestado()
+  {
+    $ph = sfContext::getInstance()->getRequest()->getParameterHolder()->getAll();
+    $dirarch = "uploads/".$ph['archivo'].".yml";
+    if(file_exists($dirarch)) unlink($dirarch);
+    
+    $this->archivo = $dirarch;
+    
+    $ar=fopen($this->archivo,"a");
+    fputs($ar,sfYaml::dump($ph));
+    fclose($ar);
+    //$json = to_json($ph);
+    
+    //$this->getResponse()->setHttpHeader("X-JSON", '('.$json.')');
+    //return sfView::HEADER_ONLY;    
+    
+  }
+  
+  public function executeCargarestado()
+  {
+    
+    
+  }
+  
+  public function executeUpload()
+  {
+    $fileName = $this->getRequest()->getFileName('file');
+ 
+    $this->getRequest()->moveFile('file', sfConfig::get('sf_upload_dir').'/'.$fileName);
+    
+    
+    $this->arch = sfYaml::load(sfConfig::get('sf_upload_dir').'/'.$fileName);
+    
+    
+    
+    
+
+  }
   
 }

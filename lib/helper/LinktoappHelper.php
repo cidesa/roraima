@@ -26,7 +26,8 @@ function cross_app_link_to($app, $route, $args=null)
   if (file_exists($appRoutingFile))
   {
     $yml = sfYaml::load($appRoutingFile) ;
-    $routeUrl = $yml[$route]['url'] ;
+    if(isset($yml[$route]['url'])) $routeUrl = $yml[$route]['url'];
+    else $routeUrl=$route;
     if ($args)
     {
       foreach ($args as $k => $v)

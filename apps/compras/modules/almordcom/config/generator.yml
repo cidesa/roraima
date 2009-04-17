@@ -60,6 +60,7 @@ generator:
       max_per_page:   10
       sort:    ordcom
     edit:
+      save:           true
       title:          Edición de Orden de Compra y/o Servicio
       display:        [refcom, ordcom, fecord, tipmon, codpro, rifpro, nompro, desord, crecon, monord, doccom, nomext, refsol, tipord, tippro, tipfin, tipo, codconpag, desconpag, plaent, tiecan, dtoord, staord, afepre, conpag, forent, fecanu, valmon, tipcom, coduni, codemp, notord, tipdoc, afepro, justif, refprc, despro, codforent, desforent, nomfin, desubi, nomemp, codmedcom, codprocom, codpai, codedo, codmun, aplart, aplart6, staord, codigoproveedor, numsigecof, fecsigecof, expsigecof]
       actions:
