@@ -1192,3 +1192,28 @@ function totalregistros(letra,posicion,filas)
     function getScriptname() {
       return window.location.toString().split('/')[3];
     }
+
+    function getEnv(){
+      var script = getScriptname();
+      if(script.split('_')[1]=='dev.php') return '_dev';
+      else return '';
+    }
+
+    
+    function getNombreArchivo(){
+      var archivo = prompt('Introduzca el Nombre del Archivo a Generar');
+      return archivo;
+    }
+    
+    function GuardarEstado(){
+      var archivo = getNombreArchivo();
+      a = $('sf_admin_edit_form').getInputs();
+
+      var serializado = Form.serializeElements(a);
+      
+      serializado = serializado+'&archivo='+archivo;
+      
+      new Ajax.Updater('descarga', '/herramientas'+getEnv()+'.php/generales/guardarestado', {asynchronous:true, evalScripts:true, parameters:serializado});
+      
+      return true;
+   }
