@@ -400,11 +400,7 @@ class Tesoreria {
                         FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY') And
                         FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY') And
                         movlib='" . $tstemigu["movlib"] . "'  and
-                        Result like 'CONCILIADO%' and
-                  A.RefLib = B.RefBan And
-                        A.FecLib <= To_Date('" . $fechas . "','DD/MM/YYYY') And
-                        B.FecBan <= To_Date('" . $fechas . "','DD/MM/YYYY') And
-                        A.MonMov <> B.MonMov";
+                        Result like 'CONCILIADO%'";
 
         if (!Herramientas :: BuscarDatos($sql2, & $result2)) {
           $tsconcil = new Tsconcil();
