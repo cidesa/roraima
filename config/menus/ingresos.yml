@@ -20,14 +20,13 @@ ingresos:
       Definiciones Especificas:
         Niveles:                                              ingnivpre
         Titulos:                                              ingtitpre
-        Asignación Inicial:                                  ingasiini
+        Asignación Inicial:                                   ingasiini
         Contribuyentes:                                       ingdatcon
         Tipos de Ingresos:                                    ingdeftiping
         Tipos de Rubros:                                      ingtiprub
       Registro de Ingresos:                                   ingreging
-      Ejecución Global:                                      ingejeglo
-      Reclasificación de Ingresos:                           ingreclaing
-      Ajuste de Ingresos:                                    ingajustenew
+      Ejecución Global:                                       ingejeglo
+      Ajuste de Ingresos:                                     ingajustenew
       Traslados:                                              ingtrasla
       Adiciones Disminuciones:                                ingadidis
     Reportes:

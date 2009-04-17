@@ -235,12 +235,12 @@ nomina:
         #RELACION NOMINA CONCEPTO:                                   nprrelconhis.php
         #Resumen de Costos por Cargos:                               nprresumen_costos_cargos.php
       Prestaciones:
-        #Antiguedad Prestaciones Sociales Nuevo Régimen:              NPCALPRESOC_RN.php
+        Antiguedad Prestaciones Sociales Nuevo Régimen:              NPCALPRESOC_RN.php
         Antiguedad Prestaciones Sociales Antiguo Régimen:            NPCALPRESOC_RV.php
-        #Anticipos sobre Prestaciones Sociales:                       nprcalantpresoc.php
+        Anticipos sobre Prestaciones Sociales:                       nprcalantpresoc.php
         Compensación Bono Transferencia:                             nprbonotransf.php
-        #Intereses sobre Prestaciones Sociales Nuevo Régimen:         NPRINTPRESOC_RN.php
-        #Liquidación de Cuentas:                                      nprprestliquidacion.php
+        Intereses sobre Prestaciones Sociales Nuevo Régimen:         NPRINTPRESOC_RN.php
+        Liquidación de Cuentas:                                      nprprestliquidacion.php
       Vacaciones:
         Solicitud de Vacaciones:                                     npvac_solicitud.php
         Histórico de Vacaciones Disfrutadas por Empleado:            npvac_historico.php

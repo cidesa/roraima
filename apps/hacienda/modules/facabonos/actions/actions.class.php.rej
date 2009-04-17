@@ -1,8 +1,0 @@
-@@ -34,6 +34,7 @@
-       $this->saveFcabonos($this->fcabonos);
- 
-       $this->setFlash('notice', 'Your modifications have been saved');
-+$this->Bitacora('Guardo');
- 
-       if ($this->getRequestParameter('save_and_add'))
-       {

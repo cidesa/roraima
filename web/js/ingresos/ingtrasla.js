@@ -58,36 +58,40 @@
 
     var cod2=$(id).value;
     var aux = id.split("_");
-   	var name=aux[0];
-   	var fila=aux[1];
+     var name=aux[0];
+     var fila=aux[1];
 
-   	var cod="ax_"+fila+"_1";
-   	var cod1=$(cod).value;
+     var cod="ax_"+fila+"_1";
+     var cod1=$(cod).value;
 
-	if (cod1!=''){
+  if (cod1!='' && cod1!='undefined'){
 
-    if ($(id).value!="")
+    if ($(id).value!="" && $(id).value!='undefined')
       {
         if (cod1!=cod2){
 
-        			new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&codigo='+cod1})
+              new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=4&codigo='+cod1})
 
         }else{
-        		   alert_('Título presupuestario repetido');}
+               alert_('Título presupuestario repetido');}
      }else{
-        		   alert_('El título presupuestario no puede estar vacio');}
+               alert_('El título presupuestario no puede estar vacio');}
 
    }else{
-        		   alert_('El título presupuestario origen no puede estar vacio');}
+               alert_('El título presupuestario origen no puede estar vacio');}
 
   }
 
 
   function anular()
   {
-    var reftra=document.getElementById('citrasla_reftra').value;
-    var fectra=document.getElementById('citrasla_fectra').value;
-    window.open('/ingresos_dev.php/ingtrasla/anular?reftra='+reftra+'&fectra='+fectra,'...','menubar=no,toolbar=no,scrollbars=yes,width=700,height=250,resizable=yes,left=400,top=120');
+    if ($('citrasla_statra').value!='N'){  //Si no esta nulo del documento
+      var reftra=document.getElementById('citrasla_reftra').value;
+      var fectra=document.getElementById('citrasla_fectra').value;
+      window.open(getUrlModulo()+'anular?reftra='+reftra+'&fectra='+fectra,'...','menubar=no,toolbar=no,scrollbars=yes,width=700,height=250,resizable=yes,left=400,top=120');
+   }else{
+      alert('Ya se encuentra Anulado...');
+    }
   }
 
 
@@ -104,11 +108,11 @@
     var id="ax_"+fil+"_1";
     var mon="ax_"+fil+"_3";
 
-	if ($(id).value!=''){
+  if ($(id).value!=''){
 
-		var mont=toFloat(mon);
-		total=total+mont;
-	}
+    var mont=toFloat(mon);
+    total=total+mont;
+  }
 
    fil++;
    }
@@ -126,6 +130,8 @@
 
    var idcod="ax_"+fila+"_1";
    var codigo=$(idcod).value;
+   var idmonto="ax_"+fila+"_2";
+
 
    new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=3&monto='+monto+'&codigo='+codigo})
 
@@ -152,7 +158,7 @@
 
  function vacio(e,id){
 
-    if ($(id).value=='undefined'){
+    if ($(id).value=='undefined' && $(id).value==''){
      alert_('C&oacute;digo Presupuestario no puede estar vac&iacute;o');
      $(id).value='';
    }
@@ -176,7 +182,7 @@
 
     var cod=$(id).value;
 
-      if ($(id).value!="")
+      if ($(id).value!="" && $(id).value!='undefined')
       {
         new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=2&cajtexcom='+id+'&codigo='+cod})
       }
@@ -189,11 +195,13 @@
     var cod2=$(id).value;
     while (i<am)
     {
+       if (cod2!=''){
        var caux="ax_"+i+"_1";
        var codaux=$(caux).value;
        if (cod2==codaux){
           alert_('El título presupuestario no puede ser origen del movimiento');
           $(id).value='';
+       }
        }
        i++;
     }
@@ -210,8 +218,8 @@
        var caux="ax_"+i+"_2";
        var codaux=$(caux).value;
        if (cod1==codaux){
- 		   alert_('El título presupuestario no puede ser destino del movimiento');
- 		   $(id).value='';
+        alert_('El título presupuestario no puede ser destino del movimiento');
+        $(id).value='';
        }
        i++;
     }
@@ -249,4 +257,20 @@
     }
    i++;
    }
+ }
+
+  function esultimonivel(e,id){
+
+  var valor=$(id).value;
+   var longitud=valor.length;
+   var longpre=$('citrasla_longpre').value;
+
+   if (valor!='' && valor!='undefined'){
+
+   if (longitud!=longpre){
+     alert_('El C&oacute;digo Presupuestario debe ser de &uacute;ltimo nivel');
+     $(id).value='';
+   }
+   }
+
  }

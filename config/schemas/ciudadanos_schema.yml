@@ -602,3 +602,43 @@ propel:
     _uniques:
       u_caprovee:
         - rifpro
+  atdefemp:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 15
+      required: true
+    nomemp:
+      type: VARCHAR
+      size: 100
+      required: true
+    diremp:
+      type: VARCHAR
+      size: 100
+      required: true
+    telemp:
+      type: VARCHAR
+      size: 30
+      required: true
+    faxemp:
+      type: VARCHAR
+      size: 15
+    emaemp:
+      type: VARCHAR
+      size: 100
+    percon:
+      type: VARCHAR
+      size: 150
+    repleg:
+      type: VARCHAR
+      size: 150
+    preasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monlimben:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:

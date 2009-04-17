@@ -57,54 +57,26 @@ hacienda:
         Estado:                                               oycdefdivest
         Ciudad:                                               oycdefdivciu
     Atención al Contribuyente:
-      Registro de Contribuyente:                              facdatcon
-    Desarrollando:
+      Registro de Contribuyente:                            facdatcon
+      Registro de Cajeros:                                  fcajero
       Licencia de Actividades Economicas:
-        Solicitud:                                            facpicsollic
-        Otorgamiento:                                         facpiclic
-    Definiciones Especificas faltantes:
-      Registro de Informacion del Sistema:                    IngDefIns
-      Catálogo de Fuentes de Ingresos:                        IngFueIng
-      Definición de Recargos:                                 facrecliq
-      Definición de Unidades Receptoras:                      IngDefUniRec
-      Definición de Recaudos:                                 almregrec   #Éste Módulo es de compras, hay que configurarlo
-      Definiciones para las Fuentes de Ingresos:
-      Actividades Económicas:
-        Rango en Bs. para el pago de Impuestos:               facranpagimp
-        Actividades Comerciales:                              facdefactcom
-      Inmuebles:
-        Uso de Inmuebles:                                     facusoinm
-        Caracteristicas de Inmuebles:                         faccarinm
-        Situaciones Juridicas de Inmuebles:                   facsitjurinm
-        Catastro:
-          Codigo Catastral Fiscal:                            faccodcatfis
-          Catastro con Fines Fiscales:                        faccatfinfis
-          #Cuadro para Calculo del Impuesto:                  facranpaginm
-      Tipos de Solvencias:                                    facdefsol
-      Rutas:                                                  facdefrut
-      Definiciones de la Alcaldía:                            facdefespins
-      Atención al Contribuyente:
-        Registro de Cajeros:                                  fcajero
-        Registro de Contribuyente:                            facdatcon
-        Licencia de Actividades Economicas:
-          Solicitud:                                          facpicsollic
-          #Otorgamiento:                                      Facpiclic
-        Inmuebles Urbanos:                                    facinmreg
-        Estado de Cuenta Integral:                            facestcueint
+        Solicitud:                                          facpicsollic
+      Inmuebles Urbanos:                                    facinmreg
+      Estado de Cuenta Integral:                            facestcueint
         #Estado de Cuenta por Referencia:                     facestcueintref
         #Solvencias:                                          facsolvencia
-        Reparos Fiscales:                                     facrepfisliq
-      Declaración/Liquidación:
-        Actividades Económicas:                               facpicliq
-        #Inmuebles Urbanos:                                   facinmdec
-        Otros Ingresos:                                       facotringreg
-      Recaudación:
-        Convenios de Pago:                                    facconvenio
-        Pagos:                                                facrecpag
-        Abonos:                                               facabonos
-        Deudas:                                               facrecdeu
-        #Actualizacion de Deudas:                             facactdeuret
-        Generar Comprobante Contable:                         facingresos
+      Reparos Fiscales:                                     facrepfisliq
+    Declaración/Liquidación:
+      Actividades Económicas:                               facpicliq
+      #Inmuebles Urbanos:                                   facinmdec
+      Otros Ingresos:                                       facotringreg
+    Recaudación:
+      Convenios de Pago:                                    facconvenio
+      Pagos:                                                facrecpag
+      Abonos:                                               facabonos
+      Deudas:                                               facrecdeu
+      #Actualizacion de Deudas:                             facactdeuret
+      Generar Comprobante Contable:                         facingresos
     Reportes:
       Catálogo de Fuentes Ingresos:                           inrfueing
       Alfabético de Contribuyentes:                           inralfcon

@@ -15,6 +15,7 @@ class Cireging extends BaseCireging
    protected $destip="";
    protected $nomcue="";
    protected $tipmov="";
+   protected $refere="";
 
 
 
@@ -47,6 +48,11 @@ class Cireging extends BaseCireging
 	public function getIdrefer()
       {
     	return Herramientas::getX_vacio('numcom','contabc','id',self::getNumcom());
+      }
+
+      public function getRefere()
+      {
+    	return self::getRefing();
       }
 
 }

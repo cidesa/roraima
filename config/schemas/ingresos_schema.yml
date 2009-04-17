@@ -410,6 +410,9 @@ propel:
       type: VARCHAR
       size: 32
       required: true
+    codtiprub:
+      type: VARCHAR
+      size: 3
     moning:
       type: NUMERIC
       size: 14
@@ -569,37 +572,40 @@ propel:
   cireging:
     #_attributes:
       #idMethod: native
-    refing:
+    refing:                   #referencia
       type: VARCHAR
       size: 8
       required: true
       ##primaryKey: true
-    fecing:
+    fecing:                   #fecha
       type: DATE
       required: true
       ##primaryKey: true
-    desing:
+    desing:                   #descripcion
       type: VARCHAR
       size: 500
-    codtip:
+      required: true
+    codtip:                   #tipo
       type: VARCHAR
       size: 3
-    rifcon:
+      required: true
+    rifcon:                   #rif
       type: VARCHAR
       size: 15
-    moning:
+    moning:                   #monto ingreso
       type: NUMERIC
       size: 14
       scale: 2
-    monrec:
+      required: true
+    monrec:                   #monto recargo
       type: NUMERIC
       size: 14
       scale: 2
-    mondes:
+    mondes:                   #monto descuento
       type: NUMERIC
       size: 14
       scale: 2
-    montot:
+    montot:                   #monto total
       type: NUMERIC
       size: 14
       scale: 2
@@ -608,22 +614,22 @@ propel:
       size: 250
     fecanu:
       type: DATE
-    staing:
+    staing:                   #status
       type: VARCHAR
       size: 1
-    ctaban:
+    ctaban:                   #cta bancaria
       type: VARCHAR
       size: 20
-    tipmov:
+    tipmov:                   #tipo de movimiento
       type: VARCHAR
       size: 4
     previs:
       type: VARCHAR
       size: 1
-    anoing:
+    anoing:                   #ano ingreso
       type: VARCHAR
       size: 4
-    numdep:
+    numdep:                   #numero de deposito
       type: VARCHAR
       size: 50
     numofi:
@@ -759,7 +765,7 @@ propel:
       type: INTEGER
       required: true
       autoIncrement: true
-  cirubro:
+  citiprub:
     #_attributes:
       #idMethod: native
     codtiprub:

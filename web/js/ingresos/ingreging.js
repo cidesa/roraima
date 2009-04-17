@@ -13,22 +13,22 @@
     var desc="ax_"+fil+"_4";
     var neto="ax_"+fil+"_5";
 
-	if ($(id).value!=''){
+  if ($(id).value!=''){
 
-		var mon=toFloat(monto);
-		var rec=toFloat(recar);
-		var des=toFloat(desc);
-		net=mon+rec-des;
-		if (net<0){
-		  alert('Neto no puede ser menor que cero');
-		  $(desc).value='';
-		}else{
-		$(neto).value=format(net.toFixed(2),'.',',','.');
-		}
+    var mon=toFloat(monto);
+    var rec=toFloat(recar);
+    var des=toFloat(desc);
+    net=mon+rec-des;
+    if (net<0){
+      alert('Neto no puede ser menor que cero');
+      $(desc).value='';
+    }else{
+    $(neto).value=format(net.toFixed(2),'.',',','.');
+    }
 
-	}
+  }
 
-	netototal=netototal+net;
+  netototal=netototal+net;
 
    fil++;
    }
@@ -51,11 +51,11 @@
     var id="ax_"+fil+"_1";
     var desc="ax_"+fil+"_4";
 
-	if ($(id).value!=''){
+  if ($(id).value!=''){
 
-		var des=toFloat(desc);
-		dctototal=dctototal+des;
-	}
+    var des=toFloat(desc);
+    dctototal=dctototal+des;
+  }
 
    fil++;
    }
@@ -78,9 +78,9 @@
 
   function valdes(e,id){
 
-  	var des=toFloat(id);
+    var des=toFloat(id);
 
-  	var aux = id.split("_");
+    var aux = id.split("_");
     var name=aux[0];
     var fil=parseInt(aux[1]);
 
@@ -92,15 +92,15 @@
 
     var sum=moning+monrec;
 
-  	if (monrec==0 && des>moning){
-  	  alert("El descuento no puede ser mayor que el monto del ingreso");
-  	  $(id).value="";
-  	}
+    if (monrec==0 && des>moning){
+      alert("El descuento no puede ser mayor que el monto del ingreso");
+      $(id).value="";
+    }
 
-  	if (des>sum){
-  	  alert("El descuento no puede ser mayor que el monto del ingreso + monto del recargo");
-  	  $(id).value="";
-  	}
+    if (des>sum){
+      alert("El descuento no puede ser mayor que el monto del ingreso + monto del recargo");
+      $(id).value="";
+    }
 
   }
 
@@ -108,14 +108,18 @@
 
   function anular()
   {
-    var refing=document.getElementById('cireging_refing').value;
-    var fecing=document.getElementById('cireging_fecing').value;
-    window.open('/ingresos_dev.php/ingreging/anular?refing='+refing+'&fecing='+fecing,'...','menubar=no,toolbar=no,scrollbars=yes,width=700,height=250,resizable=yes,left=400,top=120');
+    if ($('cireging_staing').value!='N'){  //Si no esta nulo del documento
+      var refing=$('cireging_refing').value;
+      var fecing=$('cireging_fecing').value;
+      window.open(getUrlModulo()+'anular?refing='+refing+'&fecing='+fecing,'...','menubar=no,toolbar=no,scrollbars=yes,width=700,height=250,resizable=yes,left=400,top=120');
+    }else{
+      alert('Ya se encuentra Anulado...');
+    }
   }
 
   function comprobante(formulario)
   {
-      window.open('/ingresos_dev.php/confincomgen/edit/?formulario='+formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+      window.open(getUrlModulo()+'/confincomgen/edit/?formulario='+formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
   }
 
 
@@ -131,7 +135,7 @@
 
   function consultarComp()
   {
-    window.open('/ingresos_dev.php/confincomgen/edit/id/'+document.getElementById("cireging_idrefer").value,'...','menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+    window.open(getUrlModulo()+'/confincomgen/edit/id/'+document.getElementById("cireging_idrefer").value,'...','menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
   }
 
  function repetido(e,id)
@@ -153,10 +157,23 @@
     {
       if (codpre==codpre2)
       {
-        alert('Codigo repetido');
+        alert('Codigo presupuestario repetido');
         $(id).value='';
       }
     }
    i++;
    }
+ }
+
+ function vallong(e,id,longitud){
+
+   var cod=$(id).value;
+   var lon=cod.length;
+
+   if (lon!=longitud && $F(id)!=''){
+        alert('Codigo presupuestario incorrecto. Debe ser un codigo de ultimo nivel');
+        $(id).value='';
+          return false;
+   }
+  return true;
  }
