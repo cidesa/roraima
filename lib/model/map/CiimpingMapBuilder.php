@@ -38,6 +38,8 @@ class CiimpingMapBuilder {
 
 		$tMap->addColumn('CODPRE', 'Codpre', 'string', CreoleTypes::VARCHAR, true, 32);
 
+		$tMap->addColumn('CODTIPRUB', 'Codtiprub', 'string', CreoleTypes::VARCHAR, false, 3);
+
 		$tMap->addColumn('MONING', 'Moning', 'double', CreoleTypes::NUMERIC, false, 14);
 
 		$tMap->addColumn('MONREC', 'Monrec', 'double', CreoleTypes::NUMERIC, false, 14);

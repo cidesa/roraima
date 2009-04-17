@@ -17,6 +17,10 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 
 
 	
+	protected $codtiprub;
+
+
+	
 	protected $moning;
 
 
@@ -65,6 +69,13 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
   {
 
     return trim($this->codpre);
+
+  }
+  
+  public function getCodtiprub()
+  {
+
+    return trim($this->codtiprub);
 
   }
   
@@ -164,6 +175,16 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCodtiprub($v)
+	{
+
+    if ($this->codtiprub !== $v) {
+        $this->codtiprub = $v;
+        $this->modifiedColumns[] = CiimpingPeer::CODTIPRUB;
+      }
+  
+	} 
+	
 	public function setMoning($v)
 	{
 
@@ -259,21 +280,23 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 
       $this->codpre = $rs->getString($startcol + 1);
 
-      $this->moning = $rs->getFloat($startcol + 2);
+      $this->codtiprub = $rs->getString($startcol + 2);
 
-      $this->monrec = $rs->getFloat($startcol + 3);
+      $this->moning = $rs->getFloat($startcol + 3);
 
-      $this->mondes = $rs->getFloat($startcol + 4);
+      $this->monrec = $rs->getFloat($startcol + 4);
 
-      $this->montot = $rs->getFloat($startcol + 5);
+      $this->mondes = $rs->getFloat($startcol + 5);
 
-      $this->fecing = $rs->getDate($startcol + 6, null);
+      $this->montot = $rs->getFloat($startcol + 6);
 
-      $this->staimp = $rs->getString($startcol + 7);
+      $this->fecing = $rs->getDate($startcol + 7, null);
 
-      $this->monaju = $rs->getFloat($startcol + 8);
+      $this->staimp = $rs->getString($startcol + 8);
 
-      $this->id = $rs->getInt($startcol + 9);
+      $this->monaju = $rs->getFloat($startcol + 9);
+
+      $this->id = $rs->getInt($startcol + 10);
 
       $this->resetModified();
 
@@ -281,7 +304,7 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 10; 
+            return $startcol + 11; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Ciimping object", $e);
     }
@@ -435,27 +458,30 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 				return $this->getCodpre();
 				break;
 			case 2:
-				return $this->getMoning();
+				return $this->getCodtiprub();
 				break;
 			case 3:
-				return $this->getMonrec();
+				return $this->getMoning();
 				break;
 			case 4:
-				return $this->getMondes();
+				return $this->getMonrec();
 				break;
 			case 5:
-				return $this->getMontot();
+				return $this->getMondes();
 				break;
 			case 6:
-				return $this->getFecing();
+				return $this->getMontot();
 				break;
 			case 7:
-				return $this->getStaimp();
+				return $this->getFecing();
 				break;
 			case 8:
-				return $this->getMonaju();
+				return $this->getStaimp();
 				break;
 			case 9:
+				return $this->getMonaju();
+				break;
+			case 10:
 				return $this->getId();
 				break;
 			default:
@@ -470,14 +496,15 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getRefing(),
 			$keys[1] => $this->getCodpre(),
-			$keys[2] => $this->getMoning(),
-			$keys[3] => $this->getMonrec(),
-			$keys[4] => $this->getMondes(),
-			$keys[5] => $this->getMontot(),
-			$keys[6] => $this->getFecing(),
-			$keys[7] => $this->getStaimp(),
-			$keys[8] => $this->getMonaju(),
-			$keys[9] => $this->getId(),
+			$keys[2] => $this->getCodtiprub(),
+			$keys[3] => $this->getMoning(),
+			$keys[4] => $this->getMonrec(),
+			$keys[5] => $this->getMondes(),
+			$keys[6] => $this->getMontot(),
+			$keys[7] => $this->getFecing(),
+			$keys[8] => $this->getStaimp(),
+			$keys[9] => $this->getMonaju(),
+			$keys[10] => $this->getId(),
 		);
 		return $result;
 	}
@@ -500,27 +527,30 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 				$this->setCodpre($value);
 				break;
 			case 2:
-				$this->setMoning($value);
+				$this->setCodtiprub($value);
 				break;
 			case 3:
-				$this->setMonrec($value);
+				$this->setMoning($value);
 				break;
 			case 4:
-				$this->setMondes($value);
+				$this->setMonrec($value);
 				break;
 			case 5:
-				$this->setMontot($value);
+				$this->setMondes($value);
 				break;
 			case 6:
-				$this->setFecing($value);
+				$this->setMontot($value);
 				break;
 			case 7:
-				$this->setStaimp($value);
+				$this->setFecing($value);
 				break;
 			case 8:
-				$this->setMonaju($value);
+				$this->setStaimp($value);
 				break;
 			case 9:
+				$this->setMonaju($value);
+				break;
+			case 10:
 				$this->setId($value);
 				break;
 		} 	}
@@ -532,14 +562,15 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setRefing($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setCodpre($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setMoning($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setMonrec($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setMondes($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setMontot($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setFecing($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setStaimp($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setMonaju($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
+		if (array_key_exists($keys[2], $arr)) $this->setCodtiprub($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setMoning($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setMonrec($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setMondes($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setMontot($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setFecing($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setStaimp($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setMonaju($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setId($arr[$keys[10]]);
 	}
 
 	
@@ -549,6 +580,7 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(CiimpingPeer::REFING)) $criteria->add(CiimpingPeer::REFING, $this->refing);
 		if ($this->isColumnModified(CiimpingPeer::CODPRE)) $criteria->add(CiimpingPeer::CODPRE, $this->codpre);
+		if ($this->isColumnModified(CiimpingPeer::CODTIPRUB)) $criteria->add(CiimpingPeer::CODTIPRUB, $this->codtiprub);
 		if ($this->isColumnModified(CiimpingPeer::MONING)) $criteria->add(CiimpingPeer::MONING, $this->moning);
 		if ($this->isColumnModified(CiimpingPeer::MONREC)) $criteria->add(CiimpingPeer::MONREC, $this->monrec);
 		if ($this->isColumnModified(CiimpingPeer::MONDES)) $criteria->add(CiimpingPeer::MONDES, $this->mondes);
@@ -590,6 +622,8 @@ abstract class BaseCiimping extends BaseObject  implements Persistent {
 		$copyObj->setRefing($this->refing);
 
 		$copyObj->setCodpre($this->codpre);
+
+		$copyObj->setCodtiprub($this->codtiprub);
 
 		$copyObj->setMoning($this->moning);
 

@@ -2649,10 +2649,7 @@ $this->c= new Criteria();
     $this->columnas = array (
       UsuariosPeer :: CEDEMP => 'Cédula',
       UsuariosPeer :: NOMUSE => 'Nombre',
-      UsuariosPeer :: DIREMP => 'Dirección',
-      UsuariosPeer :: TELEMP => 'Teléfono',
-      UsuariosPeer :: LOGUSE => 'Usuario',
-      UsuariosPeer :: PASUSE => 'Contraseña'
+      UsuariosPeer :: LOGUSE => 'Usuario'
     );
   }
 
@@ -3832,6 +3829,7 @@ public function Tsmovlib_tesmovdeglib2()
       );
   }
 
+
   public function Bieregactinmd_Bnclafun()
   {
     $this->c = new Criteria();
@@ -4075,6 +4073,7 @@ public function Tsmovlib_tesmovdeglib2()
 
     public function Ingtitpre_contabb() {
     $this->c = new Criteria();
+    $this->c->add(ContabbPeer::CARGAB,'C');
     $this->c->addAscendingOrderByColumn(ContabbPeer::CODCTA);
     $this->c->addAscendingOrderByColumn(ContabbPeer::DESCTA);
 
@@ -4084,8 +4083,11 @@ public function Tsmovlib_tesmovdeglib2()
     );
   }
 
-    public function Ingadidis_cideftit() {
+    public function Ingadidis_cideftit($mask=array())
+    {
     $this->c = new Criteria();
+    $this->sql = "length(Cideftit.Codpre) = '" . $mask[0] . "'";
+    $this->c->add(CideftitPeer :: CODPRE, $this->sql, Criteria :: CUSTOM);
     $this->c->addAscendingOrderByColumn(CideftitPeer::CODPRE);
     $this->c->addAscendingOrderByColumn(CideftitPeer::NOMPRE);
 
@@ -4093,7 +4095,7 @@ public function Tsmovlib_tesmovdeglib2()
       CideftitPeer :: CODPRE => 'Código',
       CideftitPeer :: NOMPRE => 'Nombre',
     );
-  }
+    }
 
 
     public function Ingreging_ciconrep() {
@@ -4118,6 +4120,49 @@ public function Tsmovlib_tesmovdeglib2()
     );
   }
 
+   public function Ingtrasla_cideftit($mask)
+   {
+    $this->c = new Criteria();
+    $this->sql = "length(Cideftit.Codpre) = '" . $mask[0] . "'";
+    $this->c->add(CideftitPeer :: CODPRE, $this->sql, Criteria :: CUSTOM);
+    $this->c->add(CiasiiniPeer::PERPRE,'00');
+    $this->c->addJoin(CideftitPeer::CODPRE,CiasiiniPeer::CODPRE);
+
+    $this->columnas = array (
+      CideftitPeer :: CODPRE => 'Código',
+      CideftitPeer :: NOMPRE => 'Nombre',
+    );
+  }
+
+  public function Ingreging_cideftit($mask) {
+    $this->c = new Criteria();
+    $this->sql = "length(Cideftit.Codpre) = '" . $mask[0] . "'";
+    $this->c->add(CideftitPeer :: CODPRE, $this->sql, Criteria :: CUSTOM);
+    //$this->c->add(CiasiiniPeer::PERPRE,'00');
+    //$this->c->addJoin(CideftitPeer::CODPRE,CiasiiniPeer::CODPRE);
+
+    $this->columnas = array (
+      CideftitPeer :: CODPRE => 'Código',
+      CideftitPeer :: NOMPRE => 'Nombre',
+    );
+  }
+
+    public function Ingajustenew_cideftit($mask) {
+
+
+    $this->c = new Criteria();
+    $this->sql = "length(Cideftit.Codpre) = '" . $mask[0] . "'";
+    $this->c->add(CideftitPeer :: CODPRE, $this->sql, Criteria :: CUSTOM);
+    $this->c->add(CiasiiniPeer::PERPRE,'00');
+    $this->c->addJoin(CideftitPeer::CODPRE,CiasiiniPeer::CODPRE);
+
+    $this->columnas = array (
+      CideftitPeer :: CODPRE => 'Código',
+      CideftitPeer :: NOMPRE => 'Nombre',
+    );
+  }
+
+
     public function Ingreging_tsdefban() {
     $this->c = new Criteria();
     $this->c->addAscendingOrderByColumn(TsdefbanPeer::NUMCUE);
@@ -4140,6 +4185,17 @@ public function Tsmovlib_tesmovdeglib2()
       TstipmovPeer :: DESTIP => 'Descripción',
     );
   }
+
+
+    public function Ingreging_citiprub() {
+      $this->c = new Criteria();
+      $this->c->addAscendingOrderByColumn(CitiprubPeer::CODTIPRUB);
+
+      $this->columnas = array (
+        CitiprubPeer :: CODTIPRUB => 'Código',
+        CitiprubPeer :: DESTIPRUB => 'Descripción',
+      );
+    }
 
    public function Contabb_ConFinCue() {
     $this->c = new Criteria();
@@ -4263,6 +4319,15 @@ public function Tsmovlib_tesmovdeglib2()
   }
 
   public function Contabb_Farecarg()
+  {
+    $this->c= new Criteria();
+    $this->c->add(ContabbPeer::CARGAB,'C');
+    $this->c->addAscendingOrderByColumn(ContabbPeer::CODCTA);
+
+    $this->columnas = array (ContabbPeer::CODCTA => 'Cuenta', ContabbPeer::DESCTA => 'Descripción');
+  }
+
+  public function Contabb_Fadefart()
   {
     $this->c= new Criteria();
     $this->c->add(ContabbPeer::CARGAB,'C');
@@ -4811,6 +4876,7 @@ public function Tsmovlib_tesmovdeglib2()
   public function Facfueing_Ingrec()
   {
       $this->c = new Criteria();
+      $this->c->add(ContabbPeer::CARGAB,'C',Criteria::EQUAL);
       $this->c->addAscendingOrderByColumn(ContabbPeer::CODCTA);
       $this->c->addAscendingOrderByColumn(ContabbPeer::DESCTA);
       $this->columnas = array (
@@ -4999,6 +5065,45 @@ A.CODREDE"
       TsdefbanPeer :: NOMCUE => 'Descripción',
     );
   }
+
+  public function Facpicsollic_FCRegInm()
+  {
+    $this->c = new Criteria();
+    $this->columnas = array (
+      FcreginmPeer :: CODCATINM => 'Código Catastral',
+      FcreginmPeer :: NOMCON => 'Descripción',
+    );
+
+  }
+
+  public function Facpicsollic_Fcrutas()
+  {
+    $this->c = new Criteria();
+    $this->columnas = array (
+      FcrutasPeer :: CODRUT => 'Código',
+      FcrutasPeer :: DESRUT => 'Descripción',
+    );
+
+  }
+
+
+  public function Facpicsollic_Fcactcom()
+  {
+    //sql = "Select a.DesAct as Descripcion, a.CodAct as Codigo_Actividad, case2(a.Exoner,'S','SI','NO') as Exonerable from FCACTCOM a,FCDEFINS b Where Length(RTRIM(a.CodAct)) = Length(RTRIM(b.ForAct)) order by a.DesAct"
+    $this->c= new Criteria();
+    $this->sql = "length(rtrim(fcactcom.codact)) = length(rtrim(fcdefins.foract))";
+    $this->c->add(FcdefinsPeer::FORACT, $this->sql, Criteria::CUSTOM);
+    $this->columnas = array (
+        FcactcomPeer::CODACT => 'Código Actividad',
+        FcactcomPeer::DESACT => 'Descripción',
+        FcactcomPeer::EXONER => 'Exonerado'
+    );
+  }
+
+
+
+
+
 }
 
 ?>

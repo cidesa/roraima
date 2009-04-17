@@ -16,12 +16,10 @@ compras:
     imagenes:
       default: OperatorClass.png
   menu:
-    Definiciones:
-      Definiciones de Almacen:                                AlmDefAlm
-      Definición de Artículos:                                AlmDefArt
-      Definición de Ubicaciones:                              AlmDefUbi
+    Contratistas de Bienes o Servicio y Cooperativas:
       Definición de Grupos de Recaudos:                       AlmTipRecPro
       Definición de Recaudos:                                 AlmRegRec
+      Registro de Contratistas de Bienes o Servicio y Cooperativas:                  AlmRegPro
       Definición de Condiciones de Pago:                      AlmConPag
       Definición de Formas de Entrega:                        AlmForEnt
       Definición de Razones de Compra:                        AlmRazCom
@@ -31,12 +29,13 @@ compras:
       Definición de Tipos de Salida:                          AlmTipSal
       Definición de Tipo de Proyecto:                         almtippro
     Artículos:
+      Definición de Artículos:                                AlmDefArt
+      Definición de Ubicaciones:                              AlmDefUbi
       Ramos de Artículos:                                     AlmRamArt
       Registro de Artículos y+o Servicios:                    AlmRegArt
       Registro de Recargos:                                   AlmRegRgo
      # Asociación  de Retenciones a Servicios:                 AlmRetSer
     Compras:
-      Registro de Contratistas de Bienes o Servicio y Cooperativas:                  AlmRegPro
       Requisiciones por Departamento (Solicitud de Egresos):  AlmSolEgr
       Aprobación de Solicitud de Egresos:                     AlmAprSolEgr
       Cotizaciones:                                           AlmCotiza
@@ -46,6 +45,7 @@ compras:
       #Registro de Contratos:                                 AlmContrato
       Ajuste a Ordenes de Compra:                             AlmAjuOC
     Almacen:
+      Definiciones Generales:                                 AlmDefAlm
       Requisiciones:                                          AlmReq
       Aprobación de Requisiciones en Lote:                    AlmAprReq
       Recepción de Ordenes de Compra:                         AlmOrdRec

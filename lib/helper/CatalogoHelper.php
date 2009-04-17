@@ -17,26 +17,38 @@ function Catalogo($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_params = 
   $name = explode('.',$name);
   $name = strtolower($name[2]);
 
+  //Validaciones para el tamano de los campos
+  if (!(array_key_exists('tamanoprincipal',$oit)))
+  {
+    $oit['tamanoprincipal']=20;
+  }
+
+  if (!(array_key_exists('tamanosecundario',$oit)))
+  {
+    $oit['tamanosecundario']=40;
+  }
+  /////////
+
   if (($id==1) and ($objeto->getId()!='')){
 
-		  $value = object_input_tag($objeto, $oit['getprincipal'] , array (
-		  'size' => 20,
-		  'readonly' => true,
-		  'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
+      $value = object_input_tag($objeto, $oit['getprincipal'] , array (
+      'size' => $oit['tamanoprincipal'],
+      'readonly' => true,
+      'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
 
-		)); echo $value ? $value : '&nbsp; ';
-		echo '&nbsp;';
+    )); echo $value ? $value : '&nbsp; ';
+    echo '&nbsp;';
 
-		    echo object_input_hidden_tag($objeto, 'get'.H::getCampoModelo($oit['campobase']), array(
-		      'control_name' => $name.'['.strtolower($oit['campobase']).']',
-		    ));
+        echo object_input_hidden_tag($objeto, 'get'.H::getCampoModelo($oit['campobase']), array(
+          'control_name' => $name.'['.strtolower($oit['campobase']).']',
+        ));
 
 
-		  $value = object_input_tag($objeto, $oit['getsecundario'], array (
-		  'size' => 40,
-		  'disabled' => true,
-		  'control_name' => $name.'['.strtolower($oit['camposecundario']).']',
-		)); echo $value ? $value : '&nbsp;';
+      $value = object_input_tag($objeto, $oit['getsecundario'], array (
+      'size' => $oit['tamanosecundario'],
+      'disabled' => true,
+      'control_name' => $name.'['.strtolower($oit['camposecundario']).']',
+    )); echo $value ? $value : '&nbsp;';
 
 
   }else{
@@ -44,7 +56,7 @@ function Catalogo($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_params = 
 
   if ($ajaxindex==0){
   $value = object_input_tag($objeto, $oit['getprincipal'] , array (
-  'size' => 20,
+  'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
    'update' => $div,
@@ -61,7 +73,7 @@ echo '&nbsp;';
 
 if ($div==''){
   $value = object_input_tag($objeto, $oit['getprincipal'] , array (
-  'size' => 20,
+  'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
    'url'      => sfContext::getInstance()->getModuleName().'/ajax',
@@ -73,9 +85,8 @@ if ($div==''){
 
 }
 else {
-
   $value = object_input_tag($objeto, $oit['getprincipal'] , array (
-  'size' => 20,
+  'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
    'update' => $div,
@@ -98,7 +109,7 @@ echo '&nbsp;';
 echo '&nbsp;';
 
   $value = object_input_tag($objeto, $oit['getsecundario'], array (
-  'size' => 40,
+  'size' => $oit['tamanosecundario'],
   'disabled' => true,
   'control_name' => $name.'['.strtolower($oit['camposecundario']).']',
 )); echo $value ? $value : '&nbsp;';
@@ -115,7 +126,7 @@ function CatalogoSimple($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_par
   $name = strtolower($name[2]);
 if ($div==''){
   $value = object_input_tag($objeto, $oit['getprincipal'] , array (
-  'size' => 20,
+  'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
    'url'      => sfContext::getInstance()->getModuleName().'/ajax',
@@ -126,7 +137,7 @@ if ($div==''){
 }
 else {
   $value = object_input_tag($objeto, $oit['getprincipal'] , array (
-  'size' => 20,
+  'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
    'update' => $div,

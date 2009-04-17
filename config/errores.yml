@@ -358,9 +358,12 @@
 527:
   cod: 527
   msj: La Orden ya fue pagada en el Módulo de Bancos.
-527:
-  cod: 527
+528:
+  cod: 528
   msj: No puede salvar si tener al menos una imputación Presupuestaria.
+529:
+  cod: 529
+  msj: La Fecha no se encuentra de un Perido Contable Abierto.
 3:
   cod: 3
   msj: La contraseña es diferente.
@@ -873,6 +876,10 @@
 1507:
     cod: 1507
     msj: Este movimiento se encuentra Anulado
+
+1508:
+    cod: 1508
+    msj: La referencia no puede estar en Blanco
 
 ########## Atencion al Ciudadano ########
 1400:

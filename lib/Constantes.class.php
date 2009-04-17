@@ -222,7 +222,7 @@ public static function PagoDoble()
     }
 
   public static function ListaMeses()
-   {return array('01' => '01-Enero', '02' => '02-Febrero', '03' => '03-Marzo', '04' => '04-Abril', '05' => '05-Mayo', '06' => '06-Junio', '07' => '07-Julio', '08' => '08-Agosto', '09' => '09-Septiembre', '10' => '10-Octubre', '11' => '11-*Noviembre', '12' => '12-Diciembre');}
+   {return array('01' => '01-Enero', '02' => '02-Febrero', '03' => '03-Marzo', '04' => '04-Abril', '05' => '05-Mayo', '06' => '06-Junio', '07' => '07-Julio', '08' => '08-Agosto', '09' => '09-Septiembre', '10' => '10-Octubre', '11' => '11-Noviembre', '12' => '12-Diciembre');}
 
   public static function Permisologias()
   {
@@ -322,7 +322,7 @@ public static function PagoDoble()
 
   public static function Modo_Fcdefrecint()
   {
-    return array('T' => 'Tasa','P' => 'Porcentaje','M' => 'Monto');
+    return array('' => 'Seleccione','T' => 'Tasa','P' => 'Porcentaje','M' => 'Monto');
   }
 
   public static function Modo_Fcmultas()
@@ -394,4 +394,19 @@ public static function PagoDoble()
   {
     return array('0' => 'Pago Unico','1' => 'Anualidad','2' => 'Mensualidad','3' => 'Semanal','4' => 'Diario');
   }
+
+  public static function Tipinm_Facpicsollic()
+  {
+    return array('U' => 'Un Inmueble','M' => 'Mas de un Inmueble','P' => 'Parte de Inmueble');
+  }
+
+  public static function Tipest_Facpicsollic()
+  {
+    return array('I' => 'Industrial','C' => 'Comercial','S' => 'Indole Similar');
+  }
+
+  public static function ListaNumPeriodos2()
+    {return array('00' => '00', '01' => '01', '02' => '02', '03' => '03', '04' => '04', '05' => '05', '06' => '06','07' => '07','08' => '08','09' => '09','10' => '10','11' => '11','12' => '12');}
+
+
 }

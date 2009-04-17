@@ -38,13 +38,13 @@ class CiregingMapBuilder {
 
 		$tMap->addColumn('FECING', 'Fecing', 'int', CreoleTypes::DATE, true, null);
 
-		$tMap->addColumn('DESING', 'Desing', 'string', CreoleTypes::VARCHAR, false, 500);
+		$tMap->addColumn('DESING', 'Desing', 'string', CreoleTypes::VARCHAR, true, 500);
 
-		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, false, 3);
+		$tMap->addColumn('CODTIP', 'Codtip', 'string', CreoleTypes::VARCHAR, true, 3);
 
 		$tMap->addColumn('RIFCON', 'Rifcon', 'string', CreoleTypes::VARCHAR, false, 15);
 
-		$tMap->addColumn('MONING', 'Moning', 'double', CreoleTypes::NUMERIC, false, 14);
+		$tMap->addColumn('MONING', 'Moning', 'double', CreoleTypes::NUMERIC, true, 14);
 
 		$tMap->addColumn('MONREC', 'Monrec', 'double', CreoleTypes::NUMERIC, false, 14);
 

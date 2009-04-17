@@ -237,22 +237,22 @@ class Viaticos
     $x            = $grid[0];
     $j            = 0;    //Puntero del grid_Gastos
     $pl           = 0;   //Puntero del grid_plan de trabajo
-      $total_gastos = 0;
+    $total_gastos = 0;
     while ($pl<count($x))
     {
-        $j            = 0;    //Puntero del grid_Gastos
-        $reg          = $x[$pl]->getGastos();
+      $j            = 0;    //Puntero del grid_Gastos
+      $reg          = $x[$pl]->getGastos();
       $gastos_filas = split("/",$reg);
       array_pop($gastos_filas);  //Elimina la ultima posicion del array
 
-    $c = new criteria();
-    $c->add(ViaregdetgassolviaPeer::VIAREGDETSOLVIA_ID,$x[$pl]->getId());
-    ViaregdetgassolviaPeer::doDelete($c);
+      $c = new criteria();
+      $c->add(ViaregdetgassolviaPeer::VIAREGDETSOLVIA_ID,$x[$pl]->getId());
+      ViaregdetgassolviaPeer::doDelete($c);
 
       while ($j<count($gastos_filas))
       {
         $gastos = split("_",substr($gastos_filas[$j],0,strlen($gastos_filas[$j])-2));
-      $total_gastos += H::QuitarMonto($gastos[1]);
+        $total_gastos += H::QuitarMonto($gastos[1]);
         $c = new Viaregdetgassolvia();
         $c->setViaregdetsolviaid($x[$pl]->getId());
         $c->setViaregtipserid($gastos[0]);

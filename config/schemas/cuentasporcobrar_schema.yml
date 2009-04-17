@@ -89,7 +89,7 @@ propel:
       required: true
     coddes:
       type: VARCHAR
-      size: 3
+      size: 4
       required: true
       ##primaryKey: true
     fecdes:
@@ -125,7 +125,7 @@ propel:
       size: 20
     codban:
       type: VARCHAR
-      size: 3
+      size: 20
     monpag:
       type: NUMERIC
       size: 14
@@ -369,7 +369,7 @@ propel:
       required: true
     codrec:
       type: VARCHAR
-      size: 3
+      size: 4
       required: true
       ##primaryKey: true
     fecrec:
@@ -543,6 +543,11 @@ propel:
       size: 8
     feccom:
       type: DATE
+    fecanu:
+      type: DATE
+    desanu:
+      type: VARCHAR
+      size: 250
     fatipmov_id:
       type: INTEGER
       required: true

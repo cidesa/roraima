@@ -1,33 +1,39 @@
 
-function actualizarformato()//Actualiza el formato de los niveles presupuestarios
+function actualizarformato(id)//Actualiza el formato de los niveles presupuestarios
 {
-   var am=totalregistros('ax',1,10);
-   var fil=0;
-
    $('cidefniv_forpre').value='';
-
-   while (fil<am)
+   var fil=0;
+   var fila = true;
+   if ($F(obtenerColumnaAnterior(id))!='')
    {
-    var id="ax_"+fil+"_2";
-	if ($(id).value!=''){
+     while (fila==true)
+     {
+        var aux="ax_"+fil+"_2";
+        if (($(aux) && ($(aux).value!='')))
+        {
+          var rup='';
+          var k=1;
+          var lon=parseInt($(aux).value);
 
-	var rup='';
-	var k=1;
-	var lon=parseInt($(id).value);
-    while (k<=lon){
-	    rup=rup+'#';
-		k++;
-	}
-	if($('cidefniv_forpre').value!=''){
-	  $('cidefniv_forpre').value=$('cidefniv_forpre').value+"-"+rup;
+          while (k<=lon){
+            rup=rup+'#';
+            k++;
+          }
 
-	}else{
-	$('cidefniv_forpre').value=rup;
-	}
-	}
-   fil++;
-   }
+          if($('cidefniv_forpre').value!=''){
+            $('cidefniv_forpre').value=$('cidefniv_forpre').value+"-"+rup;
 
+          }else{
+            $('cidefniv_forpre').value=rup;
+          }
+        }else{
+          fila=false;
+        }
+     fil++;
+     }
+  }else{
+    alert('Debe seleccionar un Tipo (Categoria/Partida)');
+  }
  }
 
 
@@ -38,8 +44,9 @@ function actualizarformato()//Actualiza el formato de los niveles presupuestario
  var numper=$('cidefniv_numper').value;
  var fecfinal=$('cidefniv_feccie').value;
 
-
- new Ajax.Updater('gridperiodos', getUrlModuloAjax(), {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&fecha='+fecha+'&numper='+numper+'&fecfinal='+fecfinal});
+  if ((fecha!='') && (numper!='') && (fecfinal!='')){
+     new Ajax.Updater('gridperiodos', getUrlModuloAjax(), {asynchronous:true, evalScripts:true, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&fecha='+fecha+'&numper='+numper+'&fecfinal='+fecfinal});
+   }
 
 
  }
@@ -75,8 +82,8 @@ function actualizarformato()//Actualiza el formato de los niveles presupuestario
  var fechaper = new Date(anoper,mesper,diaper);
 
  if (fechaini>fechaper){
- 	alert_('La Fecha de Inicio debe estar dentro del Per&iacute;odo');
- 	$('cidefniv_fecini').value='';
+   alert_('La Fecha de Inicio debe estar dentro del Periodo');
+   $('cidefniv_fecini').value='';
  }
 
  }
@@ -110,13 +117,13 @@ var fechacie = new Date(anocie,mescie,diacie);
 
 
  if (fechacie<fechaini){
- 	alert('La Fecha de Cierre debe ser mayor que la Fecha de Inicio');
- 	$('cidefniv_feccie').value='';
+   alert('La Fecha de Cierre debe ser mayor que la Fecha de Inicio');
+   $('cidefniv_feccie').value='';
  }
 
   if (fechacie>fechaper){
- 	alert('La Fecha de Cierre est&aacute; fuera del Per&iacute;odo');
- 	$('cidefniv_feccie').value='';
+   alert('La Fecha de Cierre esta fuera del Periodo');
+   $('cidefniv_feccie').value='';
   }
 
  }
@@ -132,39 +139,39 @@ var fechacie = new Date(anocie,mescie,diacie);
    while (fil<am)
    {
     var id="ax_"+fil+"_1";
-	var val=$(id).value;
+  var val=$(id).value;
 
-	if ($(id).value!='Seleccione'){
+  if ($(id).value!='Seleccione'){
 
-	  if ($(id).value=='C')
-		{
-		   concat=concat+1;
-		}
+    if ($(id).value=='C')
+    {
+       concat=concat+1;
+    }
 
-	  if ($(id).value=='P'){
+    if ($(id).value=='P'){
 
-		   conpar=conpar+1;
-		}
+       conpar=conpar+1;
+    }
 
-	}
+  }
    fil++;
    }
 
-	if (concat>$('cidefniv_rupcat').value){
-		alert_('El N&uacute;mero de Rupruras para la Categor&iacute;a ya est&aacute; satisfecho');
-		var fila=concat-1+conpar;
-		id="ax_"+fila+"_1";
-		$(id).value='';
-	}
+  if (concat>$('cidefniv_rupcat').value){
+    alert_('El N&uacute;mero de Rupruras para la Categor&iacute;a ya est&aacute; satisfecho');
+    var fila=concat-1+conpar;
+    id="ax_"+fila+"_1";
+    $(id).value='';
+  }
 
-	if (conpar>$('cidefniv_ruppar').value)
-	{
-		alert_('El N&uacute;mero de Rupturas para la Partida ya est&aacute; satisfecho');
-		var fila=conpar-1+concat;
-		id="ax_"+fila+"_1";
-		$(id).value='';
+  if (conpar>$('cidefniv_ruppar').value)
+  {
+    alert_('El N&uacute;mero de Rupturas para la Partida ya est&aacute; satisfecho');
+    var fila=conpar-1+concat;
+    id="ax_"+fila+"_1";
+    $(id).value='';
 
-	}
+  }
 
  }
 

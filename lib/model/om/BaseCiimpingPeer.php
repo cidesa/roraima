@@ -13,7 +13,7 @@ abstract class BaseCiimpingPeer {
 	const CLASS_DEFAULT = 'lib.model.Ciimping';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseCiimpingPeer {
 
 	
 	const CODPRE = 'ciimping.CODPRE';
+
+	
+	const CODTIPRUB = 'ciimping.CODTIPRUB';
 
 	
 	const MONING = 'ciimping.MONING';
@@ -55,18 +58,18 @@ abstract class BaseCiimpingPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Refing', 'Codpre', 'Moning', 'Monrec', 'Mondes', 'Montot', 'Fecing', 'Staimp', 'Monaju', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CiimpingPeer::REFING, CiimpingPeer::CODPRE, CiimpingPeer::MONING, CiimpingPeer::MONREC, CiimpingPeer::MONDES, CiimpingPeer::MONTOT, CiimpingPeer::FECING, CiimpingPeer::STAIMP, CiimpingPeer::MONAJU, CiimpingPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('refing', 'codpre', 'moning', 'monrec', 'mondes', 'montot', 'fecing', 'staimp', 'monaju', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Refing', 'Codpre', 'Codtiprub', 'Moning', 'Monrec', 'Mondes', 'Montot', 'Fecing', 'Staimp', 'Monaju', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CiimpingPeer::REFING, CiimpingPeer::CODPRE, CiimpingPeer::CODTIPRUB, CiimpingPeer::MONING, CiimpingPeer::MONREC, CiimpingPeer::MONDES, CiimpingPeer::MONTOT, CiimpingPeer::FECING, CiimpingPeer::STAIMP, CiimpingPeer::MONAJU, CiimpingPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('refing', 'codpre', 'codtiprub', 'moning', 'monrec', 'mondes', 'montot', 'fecing', 'staimp', 'monaju', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Refing' => 0, 'Codpre' => 1, 'Moning' => 2, 'Monrec' => 3, 'Mondes' => 4, 'Montot' => 5, 'Fecing' => 6, 'Staimp' => 7, 'Monaju' => 8, 'Id' => 9, ),
-		BasePeer::TYPE_COLNAME => array (CiimpingPeer::REFING => 0, CiimpingPeer::CODPRE => 1, CiimpingPeer::MONING => 2, CiimpingPeer::MONREC => 3, CiimpingPeer::MONDES => 4, CiimpingPeer::MONTOT => 5, CiimpingPeer::FECING => 6, CiimpingPeer::STAIMP => 7, CiimpingPeer::MONAJU => 8, CiimpingPeer::ID => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('refing' => 0, 'codpre' => 1, 'moning' => 2, 'monrec' => 3, 'mondes' => 4, 'montot' => 5, 'fecing' => 6, 'staimp' => 7, 'monaju' => 8, 'id' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Refing' => 0, 'Codpre' => 1, 'Codtiprub' => 2, 'Moning' => 3, 'Monrec' => 4, 'Mondes' => 5, 'Montot' => 6, 'Fecing' => 7, 'Staimp' => 8, 'Monaju' => 9, 'Id' => 10, ),
+		BasePeer::TYPE_COLNAME => array (CiimpingPeer::REFING => 0, CiimpingPeer::CODPRE => 1, CiimpingPeer::CODTIPRUB => 2, CiimpingPeer::MONING => 3, CiimpingPeer::MONREC => 4, CiimpingPeer::MONDES => 5, CiimpingPeer::MONTOT => 6, CiimpingPeer::FECING => 7, CiimpingPeer::STAIMP => 8, CiimpingPeer::MONAJU => 9, CiimpingPeer::ID => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('refing' => 0, 'codpre' => 1, 'codtiprub' => 2, 'moning' => 3, 'monrec' => 4, 'mondes' => 5, 'montot' => 6, 'fecing' => 7, 'staimp' => 8, 'monaju' => 9, 'id' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -123,6 +126,8 @@ abstract class BaseCiimpingPeer {
 		$criteria->addSelectColumn(CiimpingPeer::REFING);
 
 		$criteria->addSelectColumn(CiimpingPeer::CODPRE);
+
+		$criteria->addSelectColumn(CiimpingPeer::CODTIPRUB);
 
 		$criteria->addSelectColumn(CiimpingPeer::MONING);
 
