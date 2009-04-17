@@ -486,7 +486,7 @@ ALTER TABLE caartfec ALTER desart TYPE character varying(2000);
 ALTER TABLE "npcargos"
 --    ADD COLUMN "comcar" numeric(20,3), -- puede ser que este campo ya exista
     ADD COLUMN "pricar" numeric(20,3),
-    ADD COLUMN "canmuj" numeric(6),    
+    ADD COLUMN "canmuj" numeric(6),
     ADD COLUMN "canhom" numeric(6);
 
 CREATE SEQUENCE forcargos_seq
@@ -545,3 +545,52 @@ CREATE TABLE forprocar
 )
 WITH (OIDS=FALSE);
 ALTER TABLE forprocar OWNER TO postgres;
+
+--06/04/2009
+-----------------------------------------------------------------------------
+-- bncobsegmue
+-----------------------------------------------------------------------------
+
+
+CREATE SEQUENCE "bncobsegmue_seq";
+
+
+CREATE TABLE "bncobsegmue"
+(
+  "codact" VARCHAR(30)  NOT NULL,
+  "codmue" VARCHAR(20)  NOT NULL,
+  "nrosegmue" VARCHAR(6)  NOT NULL,
+  "codcob" VARCHAR(4)  NOT NULL,
+  "monto" NUMERIC(14,2),
+  "id" INTEGER  NOT NULL DEFAULT nextval('bncobsegmue_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "bncobsegmue" IS '';
+
+
+-----------------------------------------------------------------------------
+-- bncobseginm
+-----------------------------------------------------------------------------
+
+
+
+CREATE SEQUENCE "bncobseginm_seq";
+
+
+CREATE TABLE "bncobseginm"
+(
+  "codact" VARCHAR(30)  NOT NULL,
+  "codinm" VARCHAR(20)  NOT NULL,
+  "nrosegmue" VARCHAR(6)  NOT NULL,
+  "codcob" VARCHAR(4)  NOT NULL,
+  "monto" NUMERIC(14,2),
+  "id" INTEGER  NOT NULL DEFAULT nextval('bncobseginm_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "bncobseginm" IS '';
+
+--06/04/2009 Matriz de Compras Barcelona Generar Comprobante Automatico en la orden de Compra
+ALTER TABLE "opdefemp"
+  ADD COLUMN "gencomalc" varchar(1)
