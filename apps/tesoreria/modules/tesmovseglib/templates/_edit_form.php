@@ -336,29 +336,33 @@ function deshabilitarbotones()
 
   function anular()
   {
-    var numcue=document.getElementById('tsmovlib_numcue').value;
-    var reflib=document.getElementById('tsmovlib_reflib').value;
-    var refpag=document.getElementById('refpag').value;
-    var feclib=document.getElementById('tsmovlib_feclib').value;
-    var compadic=document.getElementById('compadic').value;
-    window.open('/tesoreria_dev.php/tesmovseglib/anular?numcue='+numcue+'&reflib='+reflib+'&refpag='+refpag+'&feclib='+feclib+'&compadic='+compadic,'...','menubar=no,toolbar=no,scrollbars=yes,width=700,height=250,resizable=yes,left=400,top=120');
+    if (confirm('¿Desea Anular el Movimiento Segun Libros?')) {    
+      var numcue=document.getElementById('tsmovlib_numcue').value;
+      var reflib=document.getElementById('tsmovlib_reflib').value;
+      var refpag=document.getElementById('refpag').value;
+      var feclib=document.getElementById('tsmovlib_feclib').value;
+      var compadic=document.getElementById('compadic').value;
+      window.open('/tesoreria_dev.php/tesmovseglib/anular?numcue='+numcue+'&reflib='+reflib+'&refpag='+refpag+'&feclib='+feclib+'&compadic='+compadic,'...','menubar=no,toolbar=no,scrollbars=yes,width=700,height=250,resizable=yes,left=400,top=120');
+    }
   }
 
   function eliminar()
   {
-    var numcue=document.getElementById('tsmovlib_numcue').value;
-    var reflib=document.getElementById('tsmovlib_reflib').value;
-    var refpag=document.getElementById('refpag').value;
-    var feclib=document.getElementById('tsmovlib_feclib').value;
-    var monmov=document.getElementById('tsmovlib_monmov').value;
-    var numcom=document.getElementById('tsmovlib_numcom').value;
-    var feccom=document.getElementById('tsmovlib_feccom').value;
-    var tipmov=document.getElementById('tsmovlib_tipmov').value;
-    var numcomadi=document.getElementById('numcomadi').value;
-    var feccomadi=document.getElementById('feccomadi').value;
-    var compadic=document.getElementById('compadic').value;
-    var debcre=document.getElementById('tsmovlib_debcre').value;
-    location.href='/tesoreria_dev.php/tesmovseglib/ajax?ajax=4&numcue='+numcue+'&reflib='+reflib+'&refpag='+refpag+'&feclib='+feclib+'&numcom='+numcom+'&feccom='+feccom+'&tipmov='+tipmov+'&debcre='+debcre+'&monmov='+monmov+'&numcomadi='+numcomadi+'&feccomadi='+feccomadi+'&compadic='+compadic;
+    if (confirm('¿Desea Eliminar el Movimiento Segun Libros?')) {
+      var numcue=document.getElementById('tsmovlib_numcue').value;
+      var reflib=document.getElementById('tsmovlib_reflib').value;
+      var refpag=document.getElementById('refpag').value;
+      var feclib=document.getElementById('tsmovlib_feclib').value;
+      var monmov=document.getElementById('tsmovlib_monmov').value;
+      var numcom=document.getElementById('tsmovlib_numcom').value;
+      var feccom=document.getElementById('tsmovlib_feccom').value;
+      var tipmov=document.getElementById('tsmovlib_tipmov').value;
+      var numcomadi=document.getElementById('numcomadi').value;
+      var feccomadi=document.getElementById('feccomadi').value;
+      var compadic=document.getElementById('compadic').value;
+      var debcre=document.getElementById('tsmovlib_debcre').value;
+      location.href='/tesoreria_dev.php/tesmovseglib/ajax?ajax=4&numcue='+numcue+'&reflib='+reflib+'&refpag='+refpag+'&feclib='+feclib+'&numcom='+numcom+'&feccom='+feccom+'&tipmov='+tipmov+'&debcre='+debcre+'&monmov='+monmov+'&numcomadi='+numcomadi+'&feccomadi='+feccomadi+'&compadic='+compadic;
+    }
   }
 
 </script>

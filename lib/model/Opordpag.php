@@ -30,9 +30,8 @@ class Opordpag extends BaseOpordpag
   protected $codcat="";
 
 
-   public function hydrate(ResultSet $rs, $startcol = 1)
+   public function afterHydrate()
    {
-      parent::hydrate($rs, $startcol);
       $this->montotal= (self::getMonord()-self::getMondes()-self::getMonpag()-self::getMonret()- Cheques::ObtenerAjuste(self::getNumord()) );
    }
 
