@@ -17,7 +17,7 @@ generator:
       stacon:   { name: Estatus Contable}
     list:
       title:          Movimientos Según Bancos
-      filters:        [numcue, tipmov, fecban]
+      filters:        [numcue, refban, tipmov, fecban]
       display:        [=numcue, nombanco, refban, tipmov, nommovim, fecban]
       sort:           numcue
       max_per_page:	  8
