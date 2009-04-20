@@ -11,7 +11,7 @@ default:
 
   stylesheets:    [main]
 
-  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, ajax, cuentasxcobrar/cobdocume ]
+  javascripts:    [ %SF_PROTOTYPE_WEB_DIR%/js/prototype, %SF_PROTOTYPE_WEB_DIR%/js/scriptaculous, tools, ajax, observe, cuentasxcobrar/cobdocume ]
 
   has_layout:     on
   layout:         layout

@@ -1,0 +1,43 @@
+opciones:                  # Opciones generales
+  name:                    c
+  eliminar:                true
+  tabla:                   cobrectra
+  ancho:				   300
+  anchogrid:               600
+  filas:                   15
+  titulo:                  ' '
+  htmltotalfilas:          ' '
+1:
+  titulo:                  Documento
+  tipo:                    t
+  nombrecampo:             refdoc
+  esgrabable:              true
+  html:                    [size="20" readonly=true]
+2:       # Columna 1
+  titulo:                  Recargo
+  tipo:                    c
+  nombrecampo:             codrec
+  html:                    [ ]
+  esgrabable:              true
+3:       # Columna 2
+  titulo:                  Monto
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monrec
+  esnumerico:              true
+  html:                    [size="15"]
+4:
+  titulo:                  Blanco
+  tipo:                    t
+  nombrecampo:             codcta
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]
+5:
+  titulo:                  monori
+  tipo:                    m
+  nombrecampo:             monori
+  esgrabable:              true
+  esnumerico:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]

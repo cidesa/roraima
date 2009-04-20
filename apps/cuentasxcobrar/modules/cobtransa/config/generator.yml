@@ -13,9 +13,15 @@ generator:
       destra: { name: Descripción, type: textarea_tag, params: size=80x5 maxlength=1000 onkeyup="ismaxlength(this)"}
       documentos: { name: .}
       formasdepago: { name: .}
-      montra: { name: Monto a Pagar, params: readonly=true }
+      grid_recargos: { name: Recargos}
+      grid_descuentos: { name: Descuentos}
+      tottra: { name: Monto a Pagar, params: readOnly=true }
+      botones: { name: .}
+      comprobante: { name: .}
+      codtip: { name: Tipo de Movimiento}
+      destip: { name: Descripción}
     list:
-      title: Cobranzas-Transacciones
+      title:   Transacciones
       display: [=numtra, destra, fectra, codcli, nompro ]
       filters: [numtra, fectra, codcli]
       fields:
@@ -28,14 +34,19 @@ generator:
       sort:    numtra
 
     edit:
-      title:  Cobranzas-Transacciones
+      title:  Edición de Transacciones
       display:
-        "Datos del Cliente": [_codcli, rifpro]
-        "Datos Transacción": [numtra, _fatipmov_id, fectra, destra]
-        "Documentos": [_documentos, montra]
-        "Formas de Pago": [_formasdepago]
+        "Datos Generales": [numtra, fectra, _codcli, rifpro, _fatipmov_id, destra, tottra, _comprobante]
+        "NONE": [_grid_recargos, _grid_descuentos, _botones]
+        "Documentos": [_documentos]
+        "Formas de Pago": [_codtip, _formasdepago]
+      hide:  [filasdet, totmonpag, totmonrec, totmondes, totmonnet, monpagado, filasfor, hayingreso, docfil, orifil, recvie, desvie, fildet, numcom, filgenmov, totalcomprobantes, idrefer]
       actions:
         _list:        ~
         _save:        ~
         _delete:      ~
         _create:      ~
+        _anular:
+          name: Anular
+          only_for: edit
+          params: class="sf_admin_action_delete" onClick="anular()"

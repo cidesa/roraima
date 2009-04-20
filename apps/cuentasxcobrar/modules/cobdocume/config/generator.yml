@@ -13,12 +13,13 @@ generator:
       fatipmov_id: { name: Tipo de Movimiento }
       desdoc: { name: Descripción, type: textarea_tag, params: size=80x5 maxlength=1000 onkeyup="ismaxlength(this)"}
       mondoc: { name: Saldo Original, params: onBlur="event.keyCode=13; formatoDecimal(event,this.id); toAjax(2,getUrlModulo()+'ajax',this.value,'','&codcli='+$('cobdocume_codcli').value+'')" }
-      recdoc: { name: Recargos }
-      dscdoc: { name: Descuentos }
-      abodoc: { name: Abonos }
-      saldoc: { name: Saldo Actual }
+      recdoc: { name: Recargos, params:  readonly=true }
+      dscdoc: { name: Descuentos, params:  readonly=true }
+      abodoc: { name: Abonos, params:  readonly=true  }
+      saldoc: { name: Saldo Actual, params:  readonly=true  }
       grid_recargos: { name: . }
       grid_descuentos: { name: . }
+      comprobante: { name: . }
 
     list:
       title: Cobranzas-Documentos
@@ -38,10 +39,10 @@ generator:
       display:
         "Datos del Cliente": [_codcli, rifpro]
         "Datos del Documento": [refdoc, _fatipmov_id, fecemi, fecven, desdoc]
-        "Saldos": [mondoc, recdoc, dscdoc, abodoc, saldoc ]
+        "Saldos": [mondoc, recdoc, dscdoc, abodoc, saldoc, _comprobante ]
         "Recargos": [ _grid_recargos ]
         "Descuentos": [ _grid_descuentos ]
-
+      hide:  [ totalcomprobantes, refcomcon]
       actions:
         _list:        ~
         _save:        ~

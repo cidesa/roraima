@@ -1,10 +1,10 @@
 opciones:                  # Opciones generales
   name:                    b
   eliminar:                false
-  tabla:                   fatippag
+  tabla:                   cobdetfor
   anchogrid:               800
-  ancho:                   700
-  filas:                   0
+  ancho:                   1000
+  filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
 1:       # Columna 1
@@ -12,36 +12,58 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             destippag
   esgrabable:              true
-  html:                    [size="20"]
+  html:                    [size="20" readonly=true]
 2:
-  titulo:                  Id
-  tipo:                    t
-  esgrabable:              true
-  nombrecampo:             id
-  oculta:                  true
-  html:                    [size="5"]
-3:
   titulo:                  Monto
   tipo:                    m
   esgrabable:              true
   nombrecampo:             monpag
   esnumerico:              true
   html:                    [size="10"]
-4:
+3:
   titulo:                  Número
   tipo:                    t
-  nombrecampo:             numero
+  nombrecampo:             numide2
   esgrabable:              true
-  html:                    [size="10"]
-5:
-  titulo:                  Código de Banco
-  tipo:                    t
-  nombrecampo:             codban
-  esgrabable:              true
-  html:                    [size="10"]
-6:
+  html:                    [size="15" readonly=true maxlength=8]
+4:
   titulo:                  Banco
   tipo:                    t
   nombrecampo:             desban
   esgrabable:              true
+  oculta:                  true
+  html:                    [size="20" readonly=true]
+5:
+  titulo:                  Banco
+  tipo:                    c
+  nombrecampo:             codban
+  html:                    [ ]
+  esgrabable:              true
+6:
+  titulo:                  Id
+  tipo:                    t
+  esgrabable:              true
+  nombrecampo:             fatippag_id
+  oculta:                  true
+  html:                    [size="5"]
+7:
+  titulo:                  Otro
+  tipo:                    t
+  nombrecampo:             genmov
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="20"]
+8:
+  titulo:                  Otro2
+  tipo:                    t
+  nombrecampo:             gening
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="20"]
+9:
+  titulo:                  Tipo Movimiento
+  tipo:                    t
+  nombrecampo:             codtip
+  esgrabable:              true
+  oculta:                  true
   html:                    [size="20"]

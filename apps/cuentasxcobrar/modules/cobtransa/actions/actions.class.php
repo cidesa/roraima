@@ -14,44 +14,156 @@ class cobtransaActions extends autocobtransaActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
-     if ($this->cobtransa->getId())
-     $this->configGrid($this->cobtransa->getCodcli());
-     else $this->configGrid($this->getRequestParameter('cobtransa[codcli]'));
-
-     $this->configGridFormaPago();
+     $this->configGrid();
      $this->cobtransa->afterHydrate();
   }
 
-   public function configGrid($codcli="")
+  public function configGrid()
+  {
+  	 if ($this->cobtransa->getId())
+  	 {
+  	  $this->configGridDet($this->cobtransa->getNumtra());
+  	  $this->configGridFormaPago($this->cobtransa->getNumtra());
+  	 }
+     else
+     {
+       $this->configGridDet($this->cobtransa->getNumtra(),$this->getRequestParameter('cobtransa[codcli]'));
+       $this->configGridFormaPago($this->cobtransa->getNumtra(),$this->getRequestParameter('cobtransa[codcli]'));
+     }
+
+     $this->cobtransa->setFilasdet($this->filasdet);
+
+     $this->cobtransa->setFilasfor($this->filasfor);
+     $this->configGridRecargos($this->cobtransa->getNumtra(),$this->cobtransa->getCodcli());
+     $this->configGridDescuento($this->cobtransa->getNumtra(),$this->cobtransa->getCodcli());
+  }
+
+
+   public function configGridDet($numtra="", $codcli="")
    {
-    $reg=array();
+     if ($codcli!="")
+     {
+	   $this->sql=" codcli='" .$codcli."' And (MonDoc + RecDoc - DscDoc - AboDoc) > 0 order by RefDoc";
+	   $a= new Criteria();
+	   $a->add(CobdocumePeer::STADOC,'A');
+	   $a->add(CobdocumePeer::CODCLI,$this->sql,Criteria::CUSTOM);
+	   $reg= CobdocumePeer::doSelect($a);
+     }
+     else
+     {
+       $a= new Criteria();
+	   $a->add(CobdettraPeer::NUMTRA,$numtra);
+	   $reg= CobdettraPeer::doSelect($a);
+     }
 
-    $this->sql=" codcli='" .$codcli."' And (MonDoc + RecDoc - DscDoc - AboDoc) > 0 order by RefDoc";
-    $a= new Criteria();
-    $a->add(CobdocumePeer::STADOC,'A');
-    $a->add(CobdocumePeer::CODCLI,$this->sql,Criteria::CUSTOM);
-    $reg= CobdocumePeer::doSelect($a);
-
+     $this->filasdet=count($reg);
 
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/cobtransa/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_documentos');
+    if ($codcli!="")
+    {
+      $this->columnas[0]->setTabla('Cobdocume');
+    }
+    $this->columnas[1][5]->setHTML('size=10 onKeyPress=apagar(event,this.id);');
+    $this->columnas[1][7]->setHTML('size=10 readonly=true onBlur=ValidarMontoGridv2(this); mostrar1(this.id);');
+    $this->columnas[1][8]->setHTML('size=10 readonly=true onBlur=ValidarMontoGridv2(this); mostrar2(this.id);');
 
-    //$this->columnas[1][5]->setEsTotal(true,'cobtransa_montra');
-     $this->columnas[1][5]->setHTML('onBlur=javascript: ValidarMontoGridv2(this);CalculaTotales(this); ');
+
 
     $this->objdocumentos = $this->columnas[0]->getConfig($reg);
     $this->cobtransa->setObjdocumentos($this->objdocumentos);
   }
 
-   public function configGridFormaPago()
+   public function configGridFormaPago($numtra='',$nuevo='')
    {
-    $reg=array();
-    $a= new Criteria();
-    $reg= FatippagPeer::doSelect($a);
+    $reg1=array();
+    if ($nuevo!="")
+    {
+      $a= new Criteria();
+      $reg1= FatippagPeer::doSelect($a);
+    }
+    else
+    {
+      $a= new Criteria();
+      $a->add(CobdetforPeer::NUMTRA,$numtra);
+      $reg1= CobdetforPeer::doSelect($a);
+    }
 
-
+    $this->filasfor=count($reg1);
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/cobtransa/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_formapago');
-    $this->objformapagos = $this->columnas[0]->getConfig($reg);
+    if ($nuevo!="")
+    {
+      $this->columnas[0]->setTabla('Fatippag');
+    }
+    $this->columnas[1][1]->setHTML('size=10 onKeyPress=montopagar(event,this.id);');
+    $this->columnas[1][4]->setCombo($this->cobtransa->getBancos());
+    $this->columnas[1][4]->setHTML('disabled=true');
+    $this->objformapagos = $this->columnas[0]->getConfig($reg1);
+
     $this->cobtransa->setObjformapagos($this->objformapagos);
+  }
+
+   public function configGridRecargos($numtra,$codcli)
+   {
+   	$reg=array();
+
+     $c = new Criteria();
+     $c->add(CobrectraPeer::NUMTRA,$numtra);
+     $c->add(CobrectraPeer::CODCLI,$codcli);
+     $reg =  CobrectraPeer::doSelect($c);
+
+
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/cobtransa/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_recargos');
+  /*if ($this->cobtransa->getId())
+  {
+    $this->columnas[0]->setFilas(0);
+    $this->columnas[0]->setEliminar(false);
+    $this->columnas[1][0]->setTipo(Columna::TEXTO);
+    $this->columnas[1][0]->setAlineacionObjeto(Columna::CENTRO);
+    $this->columnas[1][0]->setAlineacionContenido(Columna::CENTRO);
+    $this->columnas[1][0]->setNombreCampo('coddesrec');
+    $this->columnas[1][0]->setHTML('type="text" size="40" readonly=true');
+    $this->columnas[1][1]->setHTML('readonly=true;');
+  }else
+  {*/
+    $this->columnas[1][1]->setCombo($this->cobtransa->getRecargos());
+    $this->columnas[1][1]->setHTML('onChange=recargos(this.id);');
+    $this->columnas[1][2]->setHTML('size=10 onKeyPress=montorecarg(event,this.id);');
+  //}
+    $this->objrecargos = $this->columnas[0]->getConfig($reg);
+    $this->cobtransa->setObjrecargos($this->objrecargos);
+  }
+
+   public function configGridDescuento($numtra='',$codcli='')
+   {
+   	$reg=array();
+
+    $c = new Criteria();
+    $c->add(CobdestraPeer::NUMTRA,$numtra);
+    $c->add(CobdestraPeer::CODCLI,$codcli);
+    $reg =  CobdestraPeer::doSelect($c);
+
+    $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/cobtransa/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_descuentos');
+
+   /*if ($this->cobtransa->getId())
+   {
+    $this->columnas[0]->setFilas(0);
+    $this->columnas[0]->setEliminar(false);
+    $this->columnas[1][0]->setTipo(Columna::TEXTO);
+    $this->columnas[1][0]->setAlineacionObjeto(Columna::CENTRO);
+    $this->columnas[1][0]->setAlineacionContenido(Columna::CENTRO);
+    $this->columnas[1][0]->setNombreCampo('coddesdto');
+    $this->columnas[1][0]->setHTML('type="text" size="40" readonly=true');
+    $this->columnas[1][1]->setHTML('readonly=true;');
+   }else
+   {*/
+    $this->columnas[1][1]->setCombo($this->cobtransa->getDescuentos());
+    $this->columnas[1][1]->setHTML('onChange=descuentos(this.id);');
+    $this->columnas[1][2]->setHTML('size=10 onKeyPress=montodescuentos(event,this.id);');
+    //$this->columnas[1][1]->setEsTotal(true,'cobdocume_dscdoc');
+   //}
+
+    $this->objdescuentos = $this->columnas[0]->getConfig($reg);
+    $this->cobtransa->setObjdescuentos($this->objdescuentos);
   }
 
 
@@ -59,28 +171,19 @@ class cobtransaActions extends autocobtransaActions
   {
 
     $codigo = $this->getRequestParameter('codigo','');
-    // Esta variable ajax debe ser usada en cada llamado para identificar
-    // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
-
-    // Se debe enviar en la petición ajax desde el cliente los datos que necesitemos
-    // para generar el código de retorno, esto porque en un llamado Ajax no se devuelven
-    // los datos de los objetos de la vista como pasa en un submit normal.
-
     switch ($ajax){
-   case '1':
+	   case '1':
+	   $this->ajax='1';
           $cajnompro = 'cobtransa_nompro';
           $cajrifpro = 'cobtransa_rifpro';
           $cajcodcli = 'cobtransa_codcli';
-
+          $rifpro=""; $nompro=""; $javascript="";
 
           $c = new Criteria();
           $c->add(FaclientePeer::CODPRO,$codigo);
-
           $cliente = FaclientePeer::doSelectOne($c);
-
           if($cliente){
-           //$sql="Select * From CobDocume Where  ='" .$codigo."' And (MonDoc + RecDoc - DscDoc - AboDoc) > 0 and StaDoc='A' order by RefDoc";
            $this->sql=" codcli='".$codigo."' And (MonDoc + RecDoc - DscDoc - AboDoc) > 0 order by RefDoc";
            $a= new Criteria();
 		   $a->add(CobdocumePeer::STADOC,'A');
@@ -90,22 +193,140 @@ class cobtransaActions extends autocobtransaActions
            {
            	$rifpro = $cliente->getRifpro();
         	$nompro = $cliente->getNompro();
-            $output = '[["'.$cajrifpro.'","'.$rifpro.'",""],["'.$cajnompro.'","'.$nompro.'",""]]';
+        	$javascript="cargardatosfor();";
            }
            else
            {
            	$javascript="alert('No existen documentos por pagar para el Cliente o Empleado')";
-           	$output = '[["'.$cajcodcli.'","",""],["'.$cajrifpro.'","",""],["'.$cajnompro.'","",""],["javascript","'.$javascript.'",""]]';
+           	$codigo="";
            }
 
           }
           else{
           	$javascript="alert('El Cliente no esta registrado')";
-            $output = '[["'.$cajcodcli.'","",""],["'.$cajrifpro.'","",""],["'.$cajnompro.'","",""],["javascript","'.$javascript.'",""]]';
+            $codigo="";
           }
         $this->cobtransa = $this->getCobtransaOrCreate();
-        $this->configGrid($codigo);
+        $this->configGridDet('',$codigo);
+        $output = '[["'.$cajcodcli.'","'.$codigo.'",""],["'.$cajrifpro.'","'.$rifpro.'",""],["'.$cajnompro.'","'.$nompro.'",""],["javascript","'.$javascript.'",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        break;
+      case '2':
+        $this->ajax='';
+        $javascript="";
+        $a= new Criteria();
+        $reg1= FatippagPeer::doSelect($a);
+        if (!$reg1) $javascript="alert('No existen formas de Pago definidas'); ";
+        $this->cobtransa = $this->getCobtransaOrCreate();
+        $this->configGridFormaPago('','a');
+        $output = '[["javascript","'.$javascript.'",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        break;
+      case '3':
+        if ($codigo!="")
+        {
+          $documento=$this->getRequestParameter('doc');
+          $codcta=$this->getRequestParameter('codcta');
+          $monrec=$this->getRequestParameter('monrec');
+          $monori=$this->getRequestParameter('monori');
+          $javascript="";
+          $a= new Criteria();
+          $a->add(CarecargPeer::CODRGO,$codigo);
+          $result= CarecargPeer::doSelectOne($a);
+          if ($result)
+          {
+          	$cuenta=$result->getCodcta();
+            if ($result->getTiprgo()=='P')
+            {
+             $valmonrec=(($result->getMonrgo()*$monori)/100);
+             $montorec=number_format($valmonrec,2,',','.');
+             $javascript="sumar_recargos('$documento');";
+            }
+            else
+            {
+              $valmonrec=$result->getMonrgo();
+              $montorec=number_format($valmonrec,2,',','.');
+              $javascript="sumar_recargos('$documento');";
+            }
+          }
+          else
+          {
+            $montorec="0,00"; $cuenta="";
+          	$javascript="alert('Se Debe Incluir el Tipo de Recargo Primero');";
+          }
+        }
+
+        $output = '[["'.$monrec.'","'.$montorec.'",""],["'.$codcta.'","'.$cuenta.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+       break;
+      case '4':
+        if ($codigo!="")
+        {
+          $documento=$this->getRequestParameter('doc');
+          $codcta=$this->getRequestParameter('codcon');
+          $mondes=$this->getRequestParameter('mondes');
+          $monori=$this->getRequestParameter('monori');
+          $javascript="";
+          $a= new Criteria();
+          $a->add(FadesctoPeer::CODDESC,$codigo);
+          $result= FadesctoPeer::doSelectOne($a);
+          if ($result)
+          {
+            $cuenta=$result->getCodcta();
+            if ($result->getTipdesc()=='P')
+            {
+     	      $valmondes=(($result->getMondesc()*$monori)/100);
+     	      $mondesc=number_format($valmondes,2,',','.');
+     	      $javascript="sumar_descuentos('$documento');";
+            }
+            else
+            {
+              $valmondes=$result->getMondesc();
+     	      $mondesc=number_format($valmondes,2,',','.');
+     	      $javascript="sumar_descuentos('$documento');";
+            }
+          }
+          else
+          {
+          	$javascript="alert('Se Debe Incluir el Tipo de Descuento Primero');";
+          }
+        }
+        $output = '[["'.$mondes.'","'.$mondesc.'",""],["'.$codcta.'","'.$cuenta.'",""],["javascript","'.$javascript.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
+       break;
+      case '5':
+	        $dateFormat = new sfDateFormat('es_VE');
+		    $fecha = $dateFormat->format($this->getRequestParameter('codigo'), 'i', $dateFormat->getInputPattern('d'));
+
+		    $c= new Criteria();
+		    $c->add(CobtransaPeer::NUMTRA,$this->getRequestParameter('numtra'));
+		    $data=CobtransaPeer::doSelectOne($c);
+		    if ($data)
+		    {
+		      if ($fecha<$data->getFectra())
+		      {
+		        $msj="alert('La Fecha de Anulacion no puede ser menor a la fecha de la Transaccion'); $('cobtransa_fecanu').value=''";
+		      }
+		      else
+		      {
+		        $msj="";
+		      }
+		    }
+		    else
+		    {
+		      $msj="";
+		    }
+		    $output = '[["javascript","'.$msj.'",""]]';
+		    $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+		    return sfView::HEADER_ONLY;
+        break;
+      case '6':
+        $dato=TstipmovPeer::getDestip($codigo);
+        $output = '[["cobtransa_destip","'.$dato.'",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+        return sfView::HEADER_ONLY;
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -118,28 +339,93 @@ class cobtransaActions extends autocobtransaActions
   public function validateEdit()
   {
     $this->coderr =-1;
-
-    // Se deben llamar a las funciones necesarias para cargar los
-    // datos de la vista que serán usados en las funciones de validación.
-    // Por ejemplo:
-
     if($this->getRequest()->getMethod() == sfRequest::POST){
+     $this->cobtransa = $this->getCobtransaOrCreate();
+      try{ $this->updateCobtransaFromRequest();}
+      catch (Exception $ex){}
+      $this->configGrid();
+      $gridfor=Herramientas::CargarDatosGridv2($this,$this->objformapagos);
+      $gridpag = Herramientas::CargarDatosGridv2($this,$this->objdocumentos);
 
-      // $this->configGrid();
-      // $grid = Herramientas::CargarDatosGrid($this,$this->obj);
+      if ($this->cobtransa->getTottra()<=0)
+      {
+        $this->coderr=1800;
+        return false;
+      }
 
-      // Aqui van los llamados a los métodos de las clases del
-      // negocio para validar los datos.
-      // Los resultados de cada llamado deben ser analizados por ejemplo:
+      if ($this->cobtransa->getMonpagado()<=0)
+      {
+        $this->coderr=1801;
+        return false;
+      }
 
-      // $resp = Compras::validarAlmajuoc($this->caajuoc,$grid);
+      $x=$gridfor[0];
+      $i=0;
+      if (count($x)==0)
+      {
+      	while($i<count($x))
+      	{
+      		if ($x[$i]->getMonpag()>0)
+      		{
+      		  $o= new Criteria();
+      		  $o->add(FatippagPeer::ID,$x[$i]->getFatippagId());
+      		  $resul= FatippagPeer::doSelectOne($o);
+      		  if ($resul)
+      		  {
+      		  	if ($resul->getGenmov()=='S')
+      		  	{
+      		  		if ($x[$i]->getNumide2()=="" && $x[$i]->getCodban()=="")
+      		  		{
+      		           $this->coderr=1802;
+                       return false;
+      		  		}
+      		  	}
+      		  }
 
-       //$resp=Herramientas::ValidarCodigo($valor,$this->tstipmov,$campo);
+      		}
+      		$i++;
+      	}
 
-      // al final $resp es analizada en base al código que retorna
-      // Todas las funciones de validación y procesos del negocio
-      // deben retornar códigos >= -1. Estos código serám buscados en
-      // el archivo errors.yml en la función handleErrorEdit()
+      }
+
+      $y=$gridpag[0];
+      $l=0;
+      if (count($y)==0)
+      {
+      	while($l<count($y))
+      	{
+      		if ($y[$l]->getMonpag()>0)
+      		{
+      		  $o= new Criteria();
+      		  $o->add(CobdocumePeer::REFDOC,$y[$l]->getRefdoc());
+      		  $o->add(CobdocumePeer::CODCLI,$this->cobtransa->getCodcli());
+      		  $resul= CobdocumePeer::doSelectOne($o);
+      		  if ($resul)
+      		  {
+      		  	$reffac=$resul->getReffac();
+      		  	if ($reffac!='')
+      		  	{
+      		  		if ($this->cobtransa->getHayingreso()=='S')
+      		  		{
+      		  		  $q= new Criteria();
+      		  		  $q->add(OpbenefiPeer::CEDRIF,$this->cobtransa->getRifpro());
+      		  		  $resul2= OpbenefiPeer::doSelectOne($q);
+      		  		  if (!$resul)
+      		  		  {
+      		  		  	$this->coderr=1803;
+                        return false;
+      		  		  }
+
+      		  		}
+      		  	}
+      		  }
+
+      		}
+      		$i++;
+      	}
+
+      }
+
 
       if($this->coderr!=-1){
         return false;
@@ -151,45 +437,217 @@ class cobtransaActions extends autocobtransaActions
 
   }
 
-  /**
-   * Función para actualziar el grid en el post si ocurre un error
-   * Se pueden colocar aqui los grids adicionales
-   *
-   */
   public function updateError()
   {
-    //$this->configGrid();
+    $this->configGrid();
 
-    //$grid = Herramientas::CargarDatosGrid($this,$this->obj);
+    $grid1 = Herramientas::CargarDatosGridv2($this,$this->objdocumentos);
+    $grid2 = Herramientas::CargarDatosGridv2($this,$this->objformapagos);
+    $grid3 = Herramientas::CargarDatosGridv2($this,$this->objrecargos);
+    $grid4 = Herramientas::CargarDatosGridv2($this,$this->objdescuentos);
+  }
 
-    //$this->configGrid($grid[0],$grid[1]);
+   protected function saving($cobtransa)
+  {
+  	if ($cobtransa->getId())
+  	{
+       $cobtransa->save();
+  	}
+  	else
+  	{
+  	  $numcom=null;
+  	  $form="sf_admin/cobtransa/confincomgen";
+      $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+      $numerocomp=$this->getUser()->getAttribute('contabc[numcom]',null,$form.'0');
+      if ($grabo=='S')
+      {
+        $i=0;
+        $concom=$this->getRequestParameter('cobtransa[totalcomprobantes]');
+        while ($i<$concom)
+        {
+         $formulario[$i]=$form.$i;
+         if ($this->getUser()->getAttribute('grabo',null,$formulario[$i])=='S')
+         {
+          $numcom=$this->getUser()->getAttribute('contabc[numcom]',null,$formulario[$i]);
+          $reftra=$this->getUser()->getAttribute('contabc[reftra]',null,$formulario[$i]);
+          $feccom=$this->getUser()->getAttribute('contabc[feccom]',null,$formulario[$i]);
+          $descom=$this->getUser()->getAttribute('contabc[descom]',null,$formulario[$i]);
+          $debito=$this->getUser()->getAttribute('debito',null,$formulario[$i]);
+          $credito=$this->getUser()->getAttribute('credito',null,$formulario[$i]);
+          $grid=$this->getUser()->getAttribute('grid',null,$formulario[$i]);
+
+          $this->getUser()->getAttributeHolder()->remove('contabc[numcom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[reftra]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[feccom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[descom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('debito',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
+
+          Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
+          Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+         }
+         $i++;
+        }
+      }
+      $this->getUser()->getAttributeHolder()->remove('grabo',$form.'0');
+
+     	$grid1 = Herramientas::CargarDatosGridv2($this,$this->objdocumentos);
+     	$grid2 = Herramientas::CargarDatosGridv2($this,$this->objformapagos);
+	    $grid3 = Herramientas::CargarDatosGridv2($this,$this->objrecargos);
+	    $grid4 = Herramientas::CargarDatosGridv2($this,$this->objdescuentos);
+   	    Cuentasxcobrar::salvarTransacciones($cobtransa,$grid1,$grid2,$grid3,$grid4,$numcom);
+  	}
+    return -1;
 
   }
 
-  public function saving($clasemodelo)
+  protected function deleting($cobtransa)
   {
-    return parent::saving($clasemodelo);
-  }
-
-  public function deleting($clasemodelo)
-  {
-    return parent::deleting($clasemodelo);
-  }
-
-  public function handleErrorEdit()
-  {
-    $this->updateError();
-
-
-    $this->labels = $this->getLabels();
-    if($this->getRequest()->getMethod() == sfRequest::POST)
+  	if (!Cuentasxcobrar::verificarHijos($cobtransa->getNumtra(),&$msj))
     {
-      if($this->coderr!=-1){
-        $err = Herramientas::obtenerMensajeError($this->coderr);
-        $this->getRequest()->setError('',$err);
+      $q= new Criteria();
+      $q->add(ContabcPeer::NUMCOM,$cobtransa->getNumcom());
+      $q->add(ContabcPeer::FECCOM,$cobtransa->getFeccom());
+      $dat= ContabcPeer::doSelectOne($q);
+      if ($dat)
+      {
+      	$q1= new Criteria();
+        $q1->add(Contabc1Peer::NUMCOM,$cobtransa->getNumcom());
+        $q1->add(Contabc1Peer::FECCOM,$cobtransa->getFeccom());
+        Contabc1Peer::doDelete($q1);
+        $dat->delete();
+      }
 
+      Cuentasxcobrar::eliminarMovlibTrassacion($cobtransa->getNumtra());
+  	  Herramientas::EliminarRegistro('Cobrectra','Numtra',$cobtransa->getNumtra());
+  	  Herramientas::EliminarRegistro('Cobdestra','Numtra',$cobtransa->getNumtra());
+  	  Herramientas::EliminarRegistro('Cobdetfor','Numtra',$cobtransa->getNumtra());
+  	  Herramientas::EliminarRegistro('Cobdettra','Numtra',$cobtransa->getNumtra());
+  	  Cuentasxcobrar::actualizaTransacion($cobtransa->getNumtra(),$cobtransa->getFectra(),$cobtransa->getCodcli());
+  	  $cobtransa->delete();
+
+    }
+    {
+      return 1804;
+    }
+    return -1;
+
+  }
+
+  public function executeAnular()
+  {
+   $this->referencia=$this->getRequestParameter('referencia');
+   $numtra=$this->getRequestParameter('numtra');
+   $fectra=$this->getRequestParameter('fectra');
+
+   $dateFormat = new sfDateFormat('es_VE');
+   $fec = $dateFormat->format($fectra, 'i', $dateFormat->getInputPattern('d'));
+
+   $c = new Criteria();
+   $c->add(CobtransaPeer::NUMTRA,$numtra);
+   $c->add(CobtransaPeer::FECTRA,$fec);
+   $this->cobtransa = CobtransaPeer::doSelectOne($c);
+   sfView::SUCCESS;
+  }
+
+  public function executeSalvaranu()
+  {
+    $numtra=$this->getRequestParameter('numtra');
+    $fecanu=$this->getRequestParameter('fecanu');
+    $desanu=$this->getRequestParameter('desanu');
+    $this->msg='';
+    $fecha_aux=split("/",$fecanu);
+    $dateFormat = new sfDateFormat('es_VE');
+    $fec = $dateFormat->format($fecanu, 'i', $dateFormat->getInputPattern('d'));
+
+    $c= new Criteria();
+    $c->add(CobtransaPeer::NUMTRA,$numtra);
+    $resul= CobtransaPeer::doSelectOne($c);
+    if ($resul)
+    {
+      if ($fec>=$resul->getFectra())
+      {
+        if (!Cuentasxcobrar::verificarHijos($numtra,&$msj))
+        {
+          Cuentasxcobrar::actualizaTransacion($numtra,$resul->getFectra(),$resul->getCodcli());
+
+          $resul->setFecanu($fec);
+          $resul->setDesanu($desanu);
+          $resul->setStatus('N');
+          $resul->save();
+
+         Cuentasxcobrar::anularComprobante($resul->getNumcom(),$resul->getFeccom());
+         Cuentasxcobrar::anularMovlib($numtra,$fec);
+
+        }
+        else
+        {
+          $this->msg=$msj;
+          return sfView::SUCCESS;
+        }
+      }
+      else
+      {
+        $this->msg="Transaccion no se puede Anular con una Fecha Menor a la de Emision";
+        return sfView::SUCCESS;
       }
     }
     return sfView::SUCCESS;
   }
+
+
+     public function executeAjaxcomprobante()
+  {
+     $this->cobtransa = $this->getCobtransaOrCreate();
+     $this->updateCobtransaFromRequest();
+     $concom=0; $msjuno=""; $msjtres=""; $comprobante=""; $this->msjuno=""; $this->msjtres=""; $this->i=""; $this->formulario=array();
+     $this->configGrid();
+     $formapagos=Herramientas::CargarDatosGridv2($this,$this->objformapagos);
+     $recargos=Herramientas::CargarDatosGridv2($this,$this->objrecargos);
+     $descuentos=Herramientas::CargarDatosGridv2($this,$this->objdescuentos);
+     if ($this->cobtransa->getCodcli()=="" || count($formapagos[0])==0)
+     {
+       $msjtres="No se puede Generar el Comprobante, Verique si introdujo los Datos del Cliente ó los Documentos, para luego generar el comprobante";
+     }
+
+     if ($msjtres=="")
+     {
+      $x=Cuentasxcobrar::generarComprobante($this->cobtransa,$formapagos,$recargos,$descuentos,&$msjuno,&$comprobante);
+      $concom=$concom + 1;
+
+      if ($msjuno=="")
+      {
+	      $form="sf_admin/cobtransa/confincomgen";
+	      $i=0;
+	      while ($i<$concom)
+	      {
+	       $f[$i]=$form.$i;
+	       $this->getUser()->setAttribute('grabar',$comprobante[$i]->getGrabar(),$f[$i]);
+	       $this->getUser()->setAttribute('reftra',$comprobante[$i]->getReftra(),$f[$i]);
+	       $this->getUser()->setAttribute('numcomp',$comprobante[$i]->getNumcom(),$f[$i]);
+	       $this->getUser()->setAttribute('fectra',$comprobante[$i]->getFectra(),$f[$i]);
+	       $this->getUser()->setAttribute('destra',$comprobante[$i]->getDestra(),$f[$i]);
+	       $this->getUser()->setAttribute('ctas', $comprobante[$i]->getCtas(),$f[$i]);
+	       $this->getUser()->setAttribute('desctas', $comprobante[$i]->getDesc(),$f[$i]);
+	       $this->getUser()->setAttribute('tipmov', '');
+	       $this->getUser()->setAttribute('mov', $comprobante[$i]->getMov(),$f[$i]);
+	       $this->getUser()->setAttribute('montos', $comprobante[$i]->getMontos(),$f[$i]);
+	       $i++;
+	      }
+	      $this->i=$concom-1;
+	      $this->formulario=$f;
+	      }else
+	      {
+	        $this->msjuno=$msjuno;
+	      }
+     }
+     else
+     {
+        $this->msjtres=$msjtres;
+     }
+      $output = '[["cobtransa_totalcomprobantes","'.$concom.'",""],["","",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+  }
+
 }
