@@ -1,0 +1,71 @@
+methods:
+  post:
+   - "cobtransa{numtra}"
+   - "cobtransa{codcli}"
+   - "cobtransa{destra}"
+   - "cobtransa{tottra}"
+   - "cobtransa{fectra}"
+
+names:
+  cobtransa{numtra}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Número de la Transacción
+    validators: UniqueValidator
+
+  cobtransa{fectra}:
+    required:  Yes
+    required_msg: No puede salvar sin introducir la Fecha del Pago
+    validators: Fecha2Validator, FechaValidator
+
+  cobtransa{destra}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir la  Descripción
+    validators: DescripcionValidator
+
+  cobtransa{tottra}:
+    required:  Yes
+    required_msg: No puede salvar sin Tener un Monto a Pagar
+
+  cobtransa{codcli}:
+    required:  Yes
+    required_msg: No puede salvar sin Introducir el Código del Cliente/Empleado
+    validators: ClienteValidator
+
+FechaValidator:
+    class: CidesaDateValidator
+    param:
+        class:        Cpdefniv
+        columnmin:    fecini
+        columnmax:    feccie
+        min_error:    La Fecha Especificada no puede ser Menor a la Fecha de Inicio del Período
+        max_error:    La Fecha Especificada no puede ser Mayor a la Fecha de Fin del Período
+        date_error:   Fecha Inválida
+
+DescripcionValidator:
+    class: sfStringValidator
+    param:
+        min:       5
+        min_error: La Descripción no puede tener menos de 5 caracteres
+        max:       100
+        max_error: La Descripción no puede tener más de 100 caracteres
+
+UniqueValidator:
+    class: sfPropelUniqueValidator
+    param:
+        class:    Cobtransa
+        column:   numtra
+        unique_error:   EL Número de Transacción ya existe. Por Favor, Cambiélo por otro.
+
+ClienteValidator:
+    class: CidesaExistValidator
+    param:
+        class:    Facliente
+        column:   codpro
+        unique_error:  El Cliente no existe.
+
+Fecha2Validator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida

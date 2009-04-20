@@ -113,10 +113,10 @@ class cobdocumeActions extends autocobdocumeActions
           	//verificar si el cliente tiene todos los recaudos
            $this->sql="CODREC NOT IN (SELECT CODREC FROM COBRECCLI WHERE CODCLI='".$cliente->getCodpro()."')";
            $a= new Criteria();
-           $a->add(FarecaudPeer::LIMREC,'S');
-           $a->add(FarecaudPeer::CODTIPREC,$cliente->getCodtiprec());
-           $a->add(FarecaudPeer::CODREC,$this->sql,Criteria::CUSTOM);
-           $regi= FarecaudPeer::doSelectOne($a);
+           $a->add(CarecaudPeer::LIMREC,'S');
+           $a->add(CarecaudPeer::CODTIPREC,$cliente->getCodtiprec());
+           $a->add(CarecaudPeer::CODREC,$this->sql,Criteria::CUSTOM);
+           $regi= CarecaudPeer::doSelectOne($a);
            if (!$regi)
            {
             $rifpro = $cliente->getRifpro();
@@ -144,12 +144,13 @@ class cobdocumeActions extends autocobdocumeActions
             {
 				$javascript="alert('Primero debe introducir el Cliente...')";
 	            $cajmon='cobdocume_mondoc';
-	            $output = '[["'.$cajmon.'","0,00",""],,["'.$cajsaldoc.'","0,00",""],["javascript","'.$javascript.'",""]]';
+	            $output = '[["'.$cajmon.'","0,00",""],["'.$cajsaldoc.'","0,00",""],["javascript","'.$javascript.'",""]]';
             }
             else
             {
 	            $montodoc= $this->getRequestParameter('codigo',0);
 	            $output = '[["'.$cajsaldoc.'","'.$montodoc.'",""]]';
+	            $montodoc=H::convnume($montodoc);
 	            $c = new Criteria();
 	       		$c->add(FaclientePeer::CODPRO,$codcli);
 	       		$cliente = FaclientePeer::doSelectOne($c);
@@ -163,9 +164,10 @@ class cobdocumeActions extends autocobdocumeActions
 	 				  $sqla = "Select Sum(MonDoc) as cargos, Sum(AboDoc) as abonos From CobDocume Where StaDoc='A' and CodCli ='" .$codcli."'";
 	                  if (Herramientas::BuscarDatos($sqla,&$resulta))
 	                  {
-	                     $deuda =$result[0]['cargos']-$result[0]['abonos'];
+	                     $deuda =$resulta[0]['cargos']-$resulta[0]['abonos'];
 	                  }
 	                  $deudatotal=$deuda +$montodoc;
+
 	                  if ($deudatotal>$limcre)
 	                  {
 	                  	$javascript="alert('Ya excedio el límite de crédito')";
@@ -286,22 +288,61 @@ class cobdocumeActions extends autocobdocumeActions
   public function updateError()
   {
     $this->cobdocume= $this->getCobdocumeOrCreate();
-    $this->updateCobdocumeFromRequest();
+    try{ $this->updateCobdocumeFromRequest();}
+      catch (Exception $ex){}
     $this->configGrid();
     $this->configGridDto();
   }
 
   public function saving($cobdocume)
   {
-    $cobdocume->setOridoc("CXC");
-    $cobdocume->setNumcom("aaaa");
-    $cobdocume->setFeccom("2009-05-05");
+    $numerocomp="";
     if ($cobdocume->getId())
   	{
   	  $cobdocume->save();
   	}
   	else
   	{
+      ///////////////PARA GRABAR EL COMPROBANTE ////////////////////////
+      $numcom=null;
+  	  $form="sf_admin/cobdocume/confincomgen";
+      $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+      $numerocomp=$this->getUser()->getAttribute('contabc[numcom]',null,$form.'0');
+      if ($grabo=='S')
+      {
+        $i=0;
+        $concom=$cobdocume->getTotalcomprobantes();
+        while ($i<$concom)
+        {
+         $formulario[$i]=$form.$i;
+         if ($this->getUser()->getAttribute('grabo',null,$formulario[$i])=='S')
+         {
+          $numcom=$this->getUser()->getAttribute('contabc[numcom]',null,$formulario[$i]);
+          $reftra=$this->getUser()->getAttribute('contabc[reftra]',null,$formulario[$i]);
+          $feccom=$this->getUser()->getAttribute('contabc[feccom]',null,$formulario[$i]);
+          $descom=$this->getUser()->getAttribute('contabc[descom]',null,$formulario[$i]);
+          $debito=$this->getUser()->getAttribute('debito',null,$formulario[$i]);
+          $credito=$this->getUser()->getAttribute('credito',null,$formulario[$i]);
+          $grid=$this->getUser()->getAttribute('grid',null,$formulario[$i]);
+
+          $this->getUser()->getAttributeHolder()->remove('contabc[numcom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[reftra]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[feccom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[descom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('debito',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
+
+          $numerocomp = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+          $i++;
+         }
+        }
+      }
+      $this->getUser()->getAttributeHolder()->remove('grabo',$form.'0');
+      /////////////////////////////////////////////////
+     $cobdocume->setOridoc("CXC");
+     if ($numerocomp!="") $cobdocume->setNumcom($numerocomp);
+     $cobdocume->setFeccom($cobdocume->getFecemi());
      $grid=Herramientas::CargarDatosGridv2($this,$this->objrecargos);
      $grid2=Herramientas::CargarDatosGridv2($this,$this->objdescuentos);
      Cuentasxcobrar::salvarDocumentos($cobdocume,$grid,$grid2);
@@ -315,20 +356,71 @@ class cobdocumeActions extends autocobdocumeActions
     return parent::deleting($clasemodelo);
   }
 
-  public function handleErrorEdit()
+
+  public function executeAjaxcomprobante()
   {
-    $this->updateError();
+     $this->cobdocume= $this->getCobdocumeOrCreate();
+     $this->updateCobdocumeFromRequest();
+     $this->editing();
+     $c = new Criteria();
+     $c->add(FaclientePeer::CODPRO,$this->cobdocume->getCodcli());
+     $cliente = FaclientePeer::doSelectOne($c);
+     if ($cliente) $this->cobdocume->setCodctacli($cliente->getCodcta());
+
+     $grid=Herramientas::CargarDatosGridv2($this,$this->objrecargos);
+     $grid2=Herramientas::CargarDatosGridv2($this,$this->objdescuentos);
+     $mensaje="";
+     $comprobante="";
+     $concom=0; $msjuno=""; $msjdos=""; $comprobante="";
+     $this->msjuno="";$this->msjdos="";
+     $this->i="";
+     $this->formulario=array();
 
 
-    $this->labels = $this->getLabels();
-    if($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      if($this->coderr!=-1){
-        $err = Herramientas::obtenerMensajeError($this->coderr);
-        $this->getRequest()->setError('',$err);
+     if ($this->cobdocume->getRefdoc()=="" || $this->cobdocume->getCodcli()=="" || $this->cobdocume->getFecemi()=="" || $this->cobdocume->getFecVen()==""|| $this->cobdocume->getDesdoc()==""|| $this->cobdocume->getFatipmovId()=="" || $this->cobdocume->getMondoc()==0)
+     {
+       $this->mensaje="No se puede Generar el Comprobante, Verique si introdujo todos los Datos: Cod. del Cliente, Referencia del Documento, Fecha Emisión, Fecha Vencimiento, Descripcion, Tipo de Movimiento,  y Saldo Original, para luego generar el comprobante";
+     }
 
-      }
-    }
-    return sfView::SUCCESS;
+
+     if ($this->mensaje=="")
+     {
+
+      Cuentasxcobrar::generar_comprobante($this->cobdocume,$grid,$grid2,&$comprobante);
+      $concom=$concom + 1;
+
+      if ($msjuno=="")
+      {
+	      $form="sf_admin/cobdocume/confincomgen";
+	      $i=0;
+	      while ($i<$concom)
+	      {
+	       $f[$i]=$form.$i;
+	       $this->getUser()->setAttribute('grabar',$comprobante[$i]->getGrabar(),$f[$i]);
+	       $this->getUser()->setAttribute('reftra',$comprobante[$i]->getReftra(),$f[$i]);
+	       $this->getUser()->setAttribute('numcomp',$comprobante[$i]->getNumcom(),$f[$i]);
+	       $this->getUser()->setAttribute('fectra',$comprobante[$i]->getFectra(),$f[$i]);
+	       $this->getUser()->setAttribute('destra',$comprobante[$i]->getDestra(),$f[$i]);
+	       $this->getUser()->setAttribute('ctas', $comprobante[$i]->getCtas(),$f[$i]);
+	       $this->getUser()->setAttribute('desctas', $comprobante[$i]->getDesc(),$f[$i]);
+	       $this->getUser()->setAttribute('tipmov', '');
+	       $this->getUser()->setAttribute('mov', $comprobante[$i]->getMov(),$f[$i]);
+	       $this->getUser()->setAttribute('montos', $comprobante[$i]->getMontos(),$f[$i]);
+	       $i++;
+	      }
+	      $this->i=$concom-1;
+	      $this->formulario=$f;
+	      }else
+	      {
+	        $this->msjuno=$msjuno;
+	      }
+     }
+     else
+     {
+        $this->msjdos=$msjdos;
+     }
+      $output = '[["cobdocume_totalcomprobantes","'.$concom.'",""],["","",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   }
+
 }

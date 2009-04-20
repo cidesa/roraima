@@ -16,6 +16,15 @@ class Cobdocume extends BaseCobdocume
 	protected $montotal=0;
 	protected $montotalformato=0;
 	protected $monpagado=0;
+	protected $monpag=0;
+	protected $monrec=0;
+	protected $mondsc=0;
+	protected $recargos="";
+	protected $descuentos="";
+	protected $marca="";
+	protected $codctacli="";
+	protected $totalcomprobantes=0;
+    protected $refcomcon="";
 
   public function afterHydrate()
   {
@@ -27,7 +36,9 @@ class Cobdocume extends BaseCobdocume
     	$this->rifpro=$cliente->getRifpro();
     	$this->nompro=$cliente->getNompro();
     }
+
     $this->montotal= self::getMondoc() + self::getRecdoc() - self::getDscdoc();
+    $this->monpagado=number_format(self::getAbodoc(),2,',','.');
     $this->montotalformato=number_format($this->montotal,2,',','.');
   }
 
@@ -73,5 +84,9 @@ class Cobdocume extends BaseCobdocume
 	  return $resp;
 	}
 
+   public function getRefcomcon()
+   {
+     return Herramientas::getX_vacio('numcom','contabc','id',self::getNumcom());
+    }
 
 }

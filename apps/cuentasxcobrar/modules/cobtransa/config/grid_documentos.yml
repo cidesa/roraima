@@ -1,51 +1,51 @@
 opciones:                  # Opciones generales
   name:                    a
   eliminar:                false
-  tabla:                   cobdocume
-  anchogrid:               800
-  ancho:                   900
+  tabla:                   cobdettra
+  anchogrid:               1100
+  ancho:                   1200
   filas:                   1
   titulo:                  ' '
   htmltotalfilas:          ' '
-1:       # Columna 1
+1:
   titulo:                  Ref. Documento
   tipo:                    t
   nombrecampo:             refdoc
   esgrabable:              true
-  html:                    [size="10"]
+  html:                    [size="10" readonly=true]
 2:
   titulo:                  Fecha Emisión
   tipo:                    f
   esgrabable:              true
   nombrecampo:             fecemi
   vacia:                   true
-  html:                    [size="10"]
+  html:                    [size="10" readonly=true]
 3:
   titulo:                  Fecha Vencimiento
   tipo:                    f
   esgrabable:              true
   nombrecampo:             fecven
   vacia:                   true
-  html:                    [size="10"]
+  html:                    [size="10" readonly=true]
 4:
   titulo:                  Monto Total
   tipo:                    m
   esgrabable:              true
   nombrecampo:             montotalformato
   esnumerico:              true
-  html:                    [size="10"]
+  html:                    [size="10" readonly=true]
 5:
   titulo:                  Saldo Documento
   tipo:                    m
   esgrabable:              true
   nombrecampo:             saldoc
   esnumerico:              true
-  html:                    [size="10"]
+  html:                    [size="10" readonly=true]
 6:
   titulo:                  Monto a Pagar
   tipo:                    m
   esgrabable:              true
-  nombrecampo:             abodoc
+  nombrecampo:             monpag
   esnumerico:              true
   html:                    [size="10"]
 7:
@@ -54,4 +54,51 @@ opciones:                  # Opciones generales
   esgrabable:              true
   nombrecampo:             monpagado
   esnumerico:              true
-  html:                    [size="10"]
+  html:                    [size="10" readonly=true]
+8:
+  titulo:                  Click Recargo
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             monrec
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+9:
+  titulo:                  Click Descuento
+  tipo:                    m
+  esgrabable:              true
+  nombrecampo:             mondsc
+  esnumerico:              true
+  html:                    [size="10" readonly=true]
+10:
+  titulo:                  Recargos
+  tipo:                    t
+  nombrecampo:             recargos
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]
+11:
+  titulo:                  Descuento
+  tipo:                    t
+  nombrecampo:             descuentos
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]
+12:
+  titulo:                  marca
+  tipo:                    t
+  nombrecampo:             marca
+  esgrabable:              true
+  oculta:                  true
+  html:                    [size="10" readonly=true]
+#13:
+#  titulo:                  Aplica Recargos
+#  tipo:                    t
+#  esgrabable:              false
+#  nombrecampo:             btnrec
+#  html:                    'type="text" size="1" style="border:none" class="imagenalmacen" onClick="mostrar1(this.id)"'
+#14:
+#  titulo:                  Aplica Descuentos
+#  tipo:                    t
+# esgrabable:              false
+#  nombrecampo:             btndes
+#  html:                    'type="text" size="1" style="border:none" class="imagenalmacen" onClick="mostrar2(this.id)"'

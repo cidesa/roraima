@@ -1,0 +1,86 @@
+methods:
+  post:
+   - "cobdocume{refdoc}"
+   - "cobdocume{codcli}"
+   - "cobdocume{fecemi}"
+   - "cobdocume{fecven}"
+   - "cobdocume{mondoc}"
+   - "cobdocume{desdoc}"
+   - "cobdocume{fatipmov_id}"
+
+names:
+  cobdocume{refdoc}:
+    required:  Yes
+    required_msg: La referencia del Documento no puede estar en Blanco
+    validators: Validator_refdoc
+
+  cobdocume{codcli}:
+    required:  Yes
+    required_msg: El código del Cliente no puede estar en Blanco
+    validators: Validator_codcli
+
+  cobdocume{fecemi}:
+    required:  Yes
+    required_msg: La fecha de Emisión no puede estar en Blanco
+    validators: FechaValidator
+
+  cobdocume{fecven}:
+    required:  Yes
+    required_msg: La fecha de Emisión no puede estar en Blanco
+    validators: FechaValidator
+
+  cobdocume{desdoc}:
+    required:  Yes
+    required_msg: La descripción no puede estar en Blanco
+    validators: Validator_desdoc
+
+  cobdocume{mondoc}:
+    required:  Yes
+    required_msg: Debe seleccionar el Saldo Original
+    validators: MyNumberValidator
+
+  cobdocume{fatipmov_id}:
+    required:  Yes
+    required_msg: Debe seleccionar un Tipo de Movimiento
+
+
+Validator_refdoc:
+    class: sfPropelUniqueValidator
+    param:
+        class:        Cobdocume
+        column:       refdoc
+        unique_error: El registro ya Existe intente con otro.
+
+Validator_desdoc:
+    class: sfStringValidator
+    param:
+        min:       2
+        min_error: La descripción no puede tener menos de 2 caracteres
+        max:       250
+        min_error: La descripción no puede tener mas de 250 caracteres
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
+
+Validator_codcli:
+    class: CidesaExistValidator
+    param:
+        class:        Facliente
+        column:       codpro
+        unique_error: El proveedor debe estar registrado.
+
+MyNumberValidator:
+    class: sfNumberValidator
+    param:
+        type:         decimal
+        type_error:   Por favor, Introduzca Números Decimales
+        nan_error:    Por Favor, introduzca un Número Decimal
+        min:          0.0
+        min_error:    El valor tiene que ser mayor que cero
+        max:          500.0
+        max_error:    El valor debe contener maximo 9999999999.99
+
