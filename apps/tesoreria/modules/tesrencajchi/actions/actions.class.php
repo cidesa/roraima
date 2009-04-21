@@ -161,6 +161,12 @@ class tesrencajchiActions extends autotesrencajchiActions
       try{ $this->updateOpordpagFromRequest();}
       catch (Exception $ex){}
       $this->setVars();
+
+      if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('opordpag[fecemi]'))==true)
+      	{
+          $this->coderr=529;
+          return false;
+      	}
       $this->configGrid();
       $grid=Herramientas::CargarDatosGridv2($this,$this->objeto,true);
       $x=$grid[0];
@@ -274,8 +280,8 @@ class tesrencajchiActions extends autotesrencajchiActions
           $documento=Herramientas::getX('Tipcau','Cpdoccau','Refier',$opordpag->getTipcau());
           if ($data->getNumcom()!='')
           {
-          $numcomprob=$data->getNumcom();
-          OrdendePago::eliminarComprob($data->getFecemi(),$numcomprob);
+           $numcomprob=$data->getNumcom();
+           OrdendePago::eliminarComprob($data->getFecemi(),$numcomprob);
           }
          /* else
           {

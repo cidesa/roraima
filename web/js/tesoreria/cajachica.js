@@ -147,7 +147,7 @@ function totalizarMonto(e)
         }
         else
         {
-          alert('Cï¿½digo del Artï¿½culo estï¿½ Repetido');
+          alert('Código del Artículo está Repetido');
           $(id).value="";
         }
       }
@@ -169,3 +169,82 @@ function totalizarMonto(e)
     var fecemi=$('opordpag_fecemi').value;
     window.open(getUrlModulo()+'anular?numord='+numord+'&referencia='+referencia+'&fecemi='+fecemi,'...','menubar=no,toolbar=no,scrollbars=yes,width=700,height=250,resizable=yes,left=400,top=120');
   }
+
+ function ajaxcuentas(e,id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
+
+   var coldes=col+1;
+   var descripcion=name+"_"+fil+"_"+coldes;
+   var cod=$(id).value;
+
+   if (e.keyCode==13 || e.keyCode==9)
+   {
+     if ($(id).value!="")
+     {
+        if (!cuenta_repetida(id))
+        {
+          new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&cajtexmos='+descripcion+'&cajtexcom='+id+'&codigo='+cod})
+        }
+        else
+        {
+          alert('La Cuenta Contable está Repetida');
+          $(id).value="";
+        }
+      }
+    }
+ }
+
+  function ajaxcuentas2(e,id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fil=parseInt(aux[1]);
+   var col=parseInt(aux[2]);
+
+   var coldes=col+1;
+   var descripcion=name+"_"+fil+"_"+coldes;
+   var cod=$(id).value;
+
+   if (e.keyCode==13 || e.keyCode==9)
+   {
+     if ($(id).value!="")
+     {
+      new Ajax.Request(getUrlModuloAjax(), {asynchronous:true, evalScripts:false, onComplete:function(request, json){AjaxJSON(request, json)}, parameters:'ajax=1&cajtexmos='+descripcion+'&cajtexcom='+id+'&codigo='+cod})
+     }
+    }
+ }
+
+ function cuenta_repetida(id)
+ {
+   var aux = id.split("_");
+   var name=aux[0];
+   var fila=aux[1];
+   var col=parseInt(aux[2]);
+
+   var cuenta=$(id).value;
+
+   var cuentarepetida=false;
+   var am=totalregistros('ax',1,30);
+   var i=0;
+   while (i<am)
+   {
+    var codigo="ax"+"_"+i+"_1";
+
+    var cuenta2=$(codigo).value;
+
+    if (i!=fila)
+    {
+      if (cuenta==cuenta2)
+      {
+        cuentarepetida=true;
+        break;
+      }
+    }
+   i++;
+   }
+   return cuentarepetida;
+ }

@@ -1971,5 +1971,48 @@ class Tesoreria {
     }
   }
 
+  public static function validaPeriodoCerrado($fecha)
+  {
+    $dateFormat = new sfDateFormat('es_VE');
+    $fec = $dateFormat->format($fecha, 'i', $dateFormat->getInputPattern('d'));
+
+    $c= new Criteria();
+    $c->add(Contaba1Peer::FECDES,$fec,Criteria::LESS_EQUAL);
+    $c->add(Contaba1Peer::FECHAS,$fec,Criteria::GREATER_EQUAL);
+    $c->add(Contaba1Peer::STATUS,'A');
+    $conta1=Contaba1Peer::doSelectOne($c);
+    if ($conta1)
+    {
+      return false;
+    }else
+    {return true;}
+  }
+
+  public static function salvarRelaciones($tsrelasiord,$grid)
+  {
+    $x=$grid[0];
+    $j=0;
+    while ($j<count($x))
+    {
+      if ($x[$j]->getCtagasxpag()!='' && $x[$j]->getCtaordxpag()!='')
+      {
+        $x[$j]->save();
+      }
+      $j++;
+    }
+
+    $z=$grid[1];
+    $j=0;
+    if (!empty($z[$j]))
+    {
+      while ($j<count($z))
+      {
+        $z[$j]->delete();
+        $j++;
+      }
+    }
+
+  }
+
 
 }

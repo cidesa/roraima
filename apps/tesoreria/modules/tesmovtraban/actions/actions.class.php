@@ -177,7 +177,7 @@ $this->Bitacora('Guardo');
       $tsmovtra->setNumcom($numcom);
       $tsmovtra->save();
  			Tesoreria :: Salvartesmovtraban($tsmovtra, $tsmovtra2['tipmovdesd'], $tsmovtra2['tipmovhast']);
-      
+
 		 }
    }//if ($modifica=="N")
 	}
@@ -211,14 +211,14 @@ $this->Bitacora('Guardo');
    $montra = $this->getRequestParameter('montra');
    $fectra = $this->getRequestParameter('fectra');
    $error='';
-   
+
    $contaba = ContabaPeer::doSelectOne(new Criteria());
    $saldo=0;
    if(!Tesoreria::chequear_disponibilidad_financiera($this->getRequestParameter('codigo'),$montra(),$contaba->getFecini(),$fectra,$saldo)) $error= ',["javascript","alert(\'No Existe Disponibilidad Financiera para esta cuenta.\')",""]';
 
 	 $output = '[["' . $cajtexmos . '","' . $dato . '",""],["' . $cajtexcom . '","' . $dato2 . '"]'.$error.']';
 
-   
+
 	}else if ($this->getRequestParameter('ajax') == '2')
 	{
 	 $dato = TstipmovPeer :: getMovimiento($this->getRequestParameter('codigo'));
@@ -279,6 +279,7 @@ $this->Bitacora('Guardo');
   public function validateEdit()
   {
     $this->coderr =-1;
+    $this->coderr1 =-1;
 
 
 
@@ -286,6 +287,12 @@ $this->Bitacora('Guardo');
       $this->tsmovtra = $this->getTsmovtraOrCreate();
       $this->etiqueta="";
       try{ $this->updateTsmovtraFromRequest();}catch(Exception $ex){}
+
+      if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovtra[fectra]'))==true)
+  	  {
+        $this->coderr1=529;
+        return false;
+  	  }
 
       if($this->tsmovtra->getCtaori()==$this->tsmovtra->getCtades()) $this->coderr = 194;
       else{
@@ -321,8 +328,12 @@ $this->Bitacora('Guardo');
       if($this->coderr!=-1){
         $err = Herramientas::obtenerMensajeError($this->coderr);
         $this->getRequest()->setError('',$err);
-
       }
+      if($this->coderr1!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderr1);
+        $this->getRequest()->setError('tsmovtra{fectra}',$err);
+      }
+
     }
     return sfView::SUCCESS;
   }

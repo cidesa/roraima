@@ -41,7 +41,7 @@ class tesmovsalcajActions extends autotesmovsalcajActions
       $this->columnas[1][0]->setCatalogo('caregart','sf_admin_edit_form',$obj,'Caregart_Fapedido',$params);
       $this->columnas[1][2]->setHTML(' size="10" onKeyPress=totalizarMonto(event);');
       $this->columnas[1][3]->setHTML(' size="10" onKeyPress=totalizarMonto(event);');
-      $this->columnas[1][4]->setEsTotal(true,'tssalcaj_monsal');
+      $this->columnas[1][2]->setEsTotal(true,'tssalcaj_monsal');
     }
     else
     {
@@ -50,7 +50,7 @@ class tesmovsalcajActions extends autotesmovsalcajActions
       $this->columnas[1][0]->setHTML('type="text" size="17" readonly=true; ');
       $this->columnas[1][2]->setHTML(' size="10" readonly=true; ');
       $this->columnas[1][3]->setHTML(' size="10" readonly=true; ');
-      $this->columnas[1][4]->setEsTotal(true,'tssalcaj_monsal');
+      $this->columnas[1][2]->setEsTotal(true,'tssalcaj_monsal');
     }
 
     $this->obj =$this->columnas[0]->getConfig($detalle);
@@ -83,7 +83,8 @@ class tesmovsalcajActions extends autotesmovsalcajActions
         $output = '[["tssalcaj_nomben","'.$dato1.'",""],["tssalcaj_ctapag","'.$dato2.'",""],["javascript","'.$javascript.'",""]]';
         break;
       case '2':
-          $fecha=date('Y-m-d',strtotime($codigo));
+          $dateFormat = new sfDateFormat('es_VE');
+          $fecha = $dateFormat->format($codigo, 'i', $dateFormat->getInputPattern('d'));
           $fec1=split("-",$fecha);
           if (checkdate(intval($fec1[1]), intval($fec1[2]), intval($fec1[0])))
           {

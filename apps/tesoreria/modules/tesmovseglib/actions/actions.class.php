@@ -15,7 +15,8 @@ class tesmovseglibActions extends autotesmovseglibActions
   public  $coderror1=-1;
   public  $coderror2=-1;
   public  $coderror4=-1;
-  public  $coderror5=-1;  
+  public  $coderror5=-1;
+  public  $coderror6=-1;
 
  public function validateEdit()
   {
@@ -24,18 +25,24 @@ class tesmovseglibActions extends autotesmovseglibActions
       $this->tsmovlib = $this->getTsmovlibOrCreate();
       try{ $this->updateTsmovlibFromRequest();}catch(Exception $ex){}
 
+      if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
+  	{
+      $this->coderror6=529;
+      return false;
+  	}
+
       $c = new Criteria();
       $c->add(TstipmovPeer::CODTIP,$this->tsmovlib->getTipmov());
-      
+
       $tstipmov = TstipmovPeer::doSelectOne($c);
-      
+
       if($tstipmov){
         if($tstipmov->getDebcre()=='C'){
           $contaba = ContabaPeer::doSelectOne(new Criteria());
           $saldo=0;
           if(!Tesoreria::chequear_disponibilidad_financiera($this->tsmovlib->getNumcue(),$this->tsmovlib->getMonmov(),$contaba->getFecini(),$this->tsmovlib->getFeclib(),$saldo)){
             $this->coderror5 = 195;
-          } 
+          }
         }
       }
 
@@ -85,6 +92,11 @@ class tesmovseglibActions extends autotesmovseglibActions
        $err = Herramientas::obtenerMensajeError($this->coderror5);
        $this->getRequest()->setError('tsmovlib{monmov}',$err);
      }
+     if($this->coderror6!=-1)
+     {
+       $err = Herramientas::obtenerMensajeError($this->coderror6);
+       $this->getRequest()->setError('tsmovlib{feclib}',$err);
+     }
 
     if($this->coderror4!=-1)
      {
@@ -131,14 +143,14 @@ class tesmovseglibActions extends autotesmovseglibActions
           $this->getUser()->getAttributeHolder()->remove('debito',$formcont);
           $this->getUser()->getAttributeHolder()->remove('credito',$formcont);
           $this->getUser()->getAttributeHolder()->remove('grid',$formcont);
-          
+
           $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formcont));
           $tsmovlib->setNumcom($numcom);
           //Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
           //Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[0]));
           $i++;
         }
-        
+
         $this->getUser()->getAttributeHolder()->remove('grabo',$formulario[0]);
         Tesoreria::salvarTesmovseglib($tsmovlib,$numcom);
         Tesoreria::actualiza_Bancos('A', $tsmovlib->getDebcre(), $tsmovlib->getNumcue(), $tsmovlib->getMonmov());
@@ -510,18 +522,18 @@ $this->Bitacora('Guardo');
         return sfView::HEADER_ONLY;
 
     }elseif($this->getRequestParameter('ajax')=='5'){
-      
+
       $numcue=$this->getRequestParameter('numcue');
       $feclib=$this->getRequestParameter('feclib');
       $monmov=H::toFloat($this->getRequestParameter('monmov'));
       $tipmov=$this->getRequestParameter('tipmov');
       $output = '[["","",""]]';
-      
+
       $c = new Criteria();
       $c->add(TstipmovPeer::CODTIP,$tipmov);
-      
+
       $tstipmov = TstipmovPeer::doSelectOne($c);
-      
+
       if($tstipmov){
         if($tstipmov->getDebcre()=='C'){
           $contaba = ContabaPeer::doSelectOne(new Criteria());
@@ -529,17 +541,17 @@ $this->Bitacora('Guardo');
           if(!Tesoreria::chequear_disponibilidad_financiera($numcue,$monmov,$contaba->getFecini(),$feclib,$saldo)){
             $coderr = 195;
             $output = '[["javascript","alert(\''.H::obtenerMensajeError($coderr).'\')",""],["tsmovlib_monmov","0,00",""]]';
-          } 
+          }
         }
       }
-      
-     
+
+
 
       $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
-      return sfView::HEADER_ONLY;      
+      return sfView::HEADER_ONLY;
     }
   }
-  
+
 
   public function esTipoEjecutivo($tipo)
   {
@@ -996,7 +1008,7 @@ $this->Bitacora('Guardo');
     $numcom2=$this->getRequestParameter('numcom2');
     if($numcom2=='********') $numcom2 = "########";
     if($numcom=='********') $numcom = "########";
-    
+
     $this->msg='';
 
     $sql="Select stacon,tipmov,monmov,codcta,numcue From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";

@@ -15,6 +15,7 @@ class pagemiordActions extends autopagemiordActions
   public  $coderror3=-1;
   public  $coderror4=-1;
   public  $coderror5=-1;
+  public  $coderror6=-1;
   public  $codigo="";
   public  $monto="";
   public  $salvarretencion=-1;
@@ -31,6 +32,12 @@ class pagemiordActions extends autopagemiordActions
      // $grid1 = Herramientas::CargarDatosGrid($this,$this->obj2);
       if ($this->opordpag->getId()=="")
       {
+      	if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('opordpag[fecemi]'))==true)
+      	{
+          $this->coderror6=529;
+          return false;
+      	}
+
         if ($this->opordpag->getTipcau()!=$this->ordpagnom && $this->opordpag->getTipcau()!=$this->ordpagapo && $this->opordpag->getTipcau()!=$this->ordpagliq && $this->opordpag->getTipcau()!=$this->ordpagfid)
         {
           $this->configGridApliret();
@@ -250,6 +257,11 @@ $this->Bitacora('Guardo');
      {
        $err3 = Herramientas::obtenerMensajeError($this->coderror5);
        $this->getRequest()->setError('',$err3);
+     }
+     if($this->coderror6!=-1)
+     {
+       $err3 = Herramientas::obtenerMensajeError($this->coderror6);
+       $this->getRequest()->setError('opordpag{fecemi}',$err3);
      }
      if($this->salvarretencion!=-1)
      {
