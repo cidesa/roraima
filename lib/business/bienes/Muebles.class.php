@@ -249,7 +249,6 @@ public static function Validar_biedisactmuenew($valor1,$valor2)
 
     if (!$desincorpora)
     {
-
         $codigocuenta1  = $ctadepcar;
         $desc1 = $descripC;
         $tipo1 = 'D';

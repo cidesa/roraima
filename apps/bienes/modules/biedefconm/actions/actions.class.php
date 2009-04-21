@@ -220,19 +220,23 @@ $this->Bitacora('Guardo');
        $this->bndefcon = $this->getBndefconOrCreate();
        $this->updateBndefconFromRequest();
 
-      Muebles::validarBndefcon($this->bndefcon,&$msj);
-      $this->coderror=$msj;
-      if ($this->coderror<>-1)
-      {
-        return false;
-      }else return true;
+       if ($this->bndefcon->getId()=='')
+       {
+          Muebles::validarBndefcon($this->bndefcon,&$msj);
+          $this->coderror=$msj;
+          if ($this->coderror<>-1)
+          {
+            return false;
+          }else return true;
+       }
+       return true;
     }else return true;
   }
 
 
   public function handleErrorEdit()
   {
-  	$this->preExecute();
+    $this->preExecute();
     $this->bndefcon = $this->getBndefconOrCreate();
     $this->updateBndefconFromRequest();
     $this->setVars();
