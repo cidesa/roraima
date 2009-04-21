@@ -11,17 +11,17 @@ class Bndisinm extends BaseBndisinm
 {
   public function getDesinm()
   {
-  	return Herramientas::getX('CODINM','Bnreginm','Desinm',self::getCodmue());
+    return Herramientas::getX('CODINM','Bnreginm','Desinm',self::getCodmue());
    }
 
   public function getDesubiori()
   {
-  	return Herramientas::getX('CODUBI','Bnubibie','Desubi',self::getCodubiori());
+    return Herramientas::getX('CODUBI','Bnubibie','Desubi',self::getCodubiori());
    }
 
   public function getDesubides()
   {
-  	return Herramientas::getX('CODUBI','Bnubibie','Desubi',self::getCodubides());
+    return Herramientas::getX('CODUBI','Bnubibie','Desubi',self::getCodubides());
    }
 
    public function getDesmot(){
@@ -29,4 +29,11 @@ class Bndisinm extends BaseBndisinm
     return Herramientas::getX('codmot','Bnmotdis','desmot',self::getMotdisinm());
 
   }
+
+  public function getIdrefer()
+  {
+    $numerocomprobante="ACI".substr(self::getNrodisinm(),-5,10);
+    return Herramientas::getX_vacio('reftra','contabc','id',$numerocomprobante);
+  }
+
 }

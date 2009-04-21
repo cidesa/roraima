@@ -18,6 +18,7 @@
 <?php use_helper('tabs') ?>
 
 <?php echo object_input_hidden_tag($bndisinm, 'getId') ?>
+<?php echo object_input_hidden_tag($bndisinm, 'getIdrefer') ?>
 
 
 <fieldset id="sf_fieldset_none" class="">
@@ -65,10 +66,10 @@
   </th>
 </tr>
 </table>
-</div>
 
-<div class="form-row">
-  <?php echo label_for('bndisim[desinm]', __('Descripción Catálogo'), 'class="required" ') ?>
+<br>
+
+  <?php echo label_for('bndisim[desinm]', __('Descripción Catálogo:'), 'class="required" ') ?>
    <?php $value = object_input_tag($bndisinm, 'getDesinm', array (
   'size' => 60,
   'disabled' => true,
@@ -93,7 +94,7 @@
   'onBlur'  => "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bndisinm_nrodisinm').value=valor;document.getElementById('bndisinm[nrodisinm').disabled=false;",
 )); echo $value ? $value : '&nbsp;' ?>
 
-<strong>Tipo</strong>&nbsp;&nbsp;&nbsp;
+<strong>Tipo :</strong>&nbsp;&nbsp;&nbsp;
 <?php echo select_tag('bndisinm[tipdisinm]', options_for_select($tipos,$bndisinm->getTipdisinm())); ?>
     </div>
 <br>
@@ -125,7 +126,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>
-  <strong>Fecha</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <strong>Fecha:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
   <?php $value = object_input_date_tag($bndisinm, 'getFecdisinm', array (
   'rich' => true,
@@ -135,7 +136,7 @@
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?>
    &nbsp;&nbsp;
-<strong>Fecha Devoluci&oacute;n</strong>&nbsp;&nbsp;&nbsp;&nbsp;
+<strong>Fecha Devoluci&oacute;n:</strong>&nbsp;&nbsp;&nbsp;&nbsp;
 <?php $value = object_input_date_tag($bndisinm, 'getFecdevdis', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
@@ -144,7 +145,7 @@
   'onkeyup' => "javascript: mascara(this,'/',patron,true)",
 )); echo $value ? $value : '&nbsp;' ?>
 &nbsp;&nbsp;&nbsp;
-<strong>Monto</strong>&nbsp;
+<strong>Monto:</strong>&nbsp;
 <?php $value = object_input_tag($bndisinm, array('getMondisinm',true), array (
   'size' => 10,
   'control_name' => 'bndisinm[mondisinm]',
@@ -196,9 +197,9 @@
   'control_name' => 'bndisinm[desubiori]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 
-<div class="form-row">
+<br>
+
   <?php echo label_for('bndisinm[codubides]', __($labels['bndisinm{codubides}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('bndisinm{codubides}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('bndisinm{codubides}')): ?>
@@ -226,6 +227,9 @@
     </div>
 </div>
 </fieldset>
+
+<br>
+
 <fieldset id="sf_fieldset_none" class="">
 <div class="form-row">
   <?php echo label_for('bndisinm[obsdisinm]', __($labels['bndisinm{obsdisinm}']), 'class="required" ') ?>
@@ -242,6 +246,39 @@
 </div>
 
 </fieldset>
+
+<ul class="sf_admin_actions">
+<li>
+<?
+  if(SF_ENVIRONMENT=='dev') $dev = '_dev';
+  else $dev = '';
+
+if ($bndisinm->getId()=='') { ?>
+<?php echo submit_to_remote('Submit2', 'Generar Comprobante', array(
+         'update'   => 'comp',
+         'url'      => 'biedisactinm/ajaxcomprobante',
+         'script'   => true,
+         'complete' => 'AjaxJSON(request, json)',
+         'submit' => 'sf_admin_edit_form',
+         ),array('use_style' => 'true', 'class' => 'sf_admin_action_save',)) ?>
+</li>
+<? } else if ($bndisinm->getIdrefer()!='') { ?>
+<li><input name="Comprobante" type="button" value="Comprobantes" class="sf_admin_action_save" onClick="consultarComp()"></li>
+<?php } ?>
+</ul>
+
+<div id="comp"></div>
+<script language="JavaScript" type="text/javascript">
+  function comprobante(formulario)
+  {
+      window.open('/tesoreria_dev.php/confincomgen/edit/?formulario='+formulario,formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+  }
+
+   function consultarComp()
+  {
+    window.open('/tesoreria_dev.php/confincomgen/edit/id/'+$("idrefer").value,'...','menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+  }
+</script>
 
 <?php include_partial('edit_actions', array('bndisinm' => $bndisinm)) ?>
 

@@ -6,11 +6,14 @@
     <li><?php echo button_to(__('list'), 'biedisactmuenew/list?id='.$bndismue->getId(), array (
   'class' => 'sf_admin_action_list',
 )) ?></li>
-    <li><?php echo submit_tag_click(__('save'), array (
-  'name' => 'save',
-  'form' => 'sf_admin_edit_form',
-  'class' => 'sf_admin_action_save',
-)) ?></li>
+  <?php if ($bndismue->getId()==''){ ?>
+      <li><?php echo submit_tag_click(__('save'), array (
+    'name' => 'save',
+    'form' => 'sf_admin_edit_form',
+    'class' => 'sf_admin_action_save',
+  )) ?></li>
+  <?php } ?>
+
     <li><?php echo button_to(__('create'), 'biedisactmuenew/create', array (
   'class' => 'sf_admin_action_create',
 )) ?></li>

@@ -294,9 +294,9 @@ $this->Bitacora('Guardo');
             $c->add(BnregmuePeer::CODACT,$this->bndismue->getCodact());
             $c->add(BnregmuePeer::CODMUE,$this->bndismue->getCodmue());
             $bnregmue = BnregmuePeer::doSelectOne($c);
-            if ($bnregmue)
-            {
-                  $x = Bienes::grabarComprobante($this->bndismue,$bnregmue,&$comprobante,$desincorpora,$bndefcon);
+              if ($bnregmue)
+              {
+                  $x = Muebles::grabarComprobante($this->bndismue,$bnregmue,&$comprobante,$desincorpora,$bndefcon);
                   $concom = $concom + 1;
 
                   $form = "sf_admin/biedisactmuenew/confincomgen";
@@ -342,8 +342,11 @@ $this->Bitacora('Guardo');
     $this->coderror = Muebles::Validar_biedisactmuenew($bndismue->getFecdismue(),$bndismue->getFecdevdis());
     if ($this->coderror==-1)
     {
-      self::GenerarComprobante(&$bndismue, array());
-      return Bienes::SalvarBiedisactmuenew($bndismue);
+      if (!$bndismue->getId())
+      {
+        self::GenerarComprobante(&$bndismue, array());
+        return Muebles::SalvarBiedisactmuenew($bndismue);
+      }
     }
     return $this->coderror;
   }
@@ -403,6 +406,11 @@ public function handleErrorEdit()
     $this->labels = $this->getLabels();
 
     return sfView::SUCCESS;
+  }
+
+  protected function deleteBndismue($bndismue)
+  {
+    return Muebles::EliminarBiedisactmuenew($bndismue);
   }
 
 }
