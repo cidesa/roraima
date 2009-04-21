@@ -236,22 +236,159 @@ public function setVars()
     return sfView::SUCCESS;
   }
 
-protected function saveBndisinm($bndisinm)
-
- {
-
+  protected function saveBndisinm($bndisinm)
+  {
     $this->coderror = Inmuebles::Validar_biedisactinm($bndisinm->getFecdisinm(),$bndisinm->getFecdevdis());
-
     if ($this->coderror==-1)
     {
-     $bndisinm->save();
+      if (!$bndisinm->getId())
+      {
+        self::GenerarComprobante(&$bndisinm, array());
+        return Inmuebles::SalvarBiedisactinm($bndisinm);
+      }
+    }
     return $this->coderror;
+  }
+
+
+  public function GenerarComprobante($bndismue, $grid)
+  {
+      $concom=1;
+      $form="sf_admin/biedisactinm/confincomgen";
+      $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+      $numerocomp=$this->getUser()->getAttribute('contabc[numcom]',null,$form.'0');
+      if ($grabo=='S')
+      {
+        $i=0;
+        while ($i<$concom)
+        {
+         $formulario[$i]=$form.$i;
+         if ($this->getUser()->getAttribute('grabo',null,$formulario[$i])=='S')
+         {
+          $numcom=$this->getUser()->getAttribute('contabc[numcom]',null,$formulario[$i]);
+          $reftra=$this->getUser()->getAttribute('contabc[reftra]',null,$formulario[$i]);
+          $feccom=$this->getUser()->getAttribute('contabc[feccom]',null,$formulario[$i]);
+          $descom=$this->getUser()->getAttribute('contabc[descom]',null,$formulario[$i]);
+          $debito=$this->getUser()->getAttribute('debito',null,$formulario[$i]);
+          $credito=$this->getUser()->getAttribute('credito',null,$formulario[$i]);
+          $grid=$this->getUser()->getAttribute('grid',null,$formulario[$i]);
+
+          $this->getUser()->getAttributeHolder()->remove('contabc[numcom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[reftra]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[feccom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[descom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('debito',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
+
+          $this->numero = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+
+          //$bndismue->setNumcom($this->numero);
+         }
+         $i++;
+        }
+      }
+      $this->getUser()->getAttributeHolder()->remove('grabo',$form.'0');
+
+     // $grid=Herramientas::CargarDatosGridv2($this,$this->objeto,true);
+
+  }
+
+
+  public function executeAjaxcomprobante()
+  {
+    $this->bndisinm = $this->getBndisinmOrCreate();
+    $this->updateBndisinmFromRequest();
+
+    $c = new Criteria();
+    $c->add(BndisbiePeer::CODDIS,substr($this->bndisinm->getTipdisinm(),0,10));
+    $bndisbie = BndisbiePeer::doSelectOne($c);
+
+    if ($bndisbie){
+      if ($bndisbie->getDesinc()=='S'){
+
+        $desincorpora = true;
+      }else{
+        $desincorpora = false;
+      }
+
+               $concom   = 0;
+               $mensaje1 = "";
+               $msj1     = "";
+               $msj2     = "";
+               $cuentaporpagarrendicion = "";
+               $mensajeuno  = "";
+               $msjuno      = "";
+               $msjdos      = "";
+               $msjtres     = "";
+               $comprobante = "";
+               $this->mensajeuno = "";
+               $this->msj1     = "";
+               $this->msj2     = "";
+               $this->mensaje1 = "";
+               $this->msjuno   = "";
+               $this->msjdos   = "";
+               $this->msjtres  = "";
+               $this->i        = "";
+               $this->formulario = array();
+
+      if ($bndisbie->getAfecon()=='S'){
+        $c = new Criteria();
+        $c->add(BndefconiPeer::CODACT,$this->bndisinm->getCodact());
+        $c->add(BndefconiPeer::CODINM,$this->bndisinm->getCodmue());
+        $bndefcon = BndefconPeer::doSelectOne($c);
+
+          if ($bndefcon){
+            $c = new Criteria();
+            $c->add(BnreginmPeer::CODACT,$this->bndisinm->getCodact());
+            $c->add(BnreginmPeer::CODINM,$this->bndisinm->getCodmue());
+            $bnreginm = BnreginmPeer::doSelectOne($c);
+              if ($bnreginm)
+              {
+                  $x = Inmuebles::grabarComprobante($this->bndisinm,$bnreginm,&$comprobante,$desincorpora,$bndefcon);
+                  $concom = $concom + 1;
+
+                  $form = "sf_admin/biedisactinm/confincomgen";
+                  $i    = 0;
+                  while ($i < $concom)
+                  {
+                     $f[$i] = $form.$i;
+                     $this->getUser()->setAttribute('grabar',$comprobante[$i]->getGrabar(),$f[$i]);
+                     $this->getUser()->setAttribute('reftra',$comprobante[$i]->getReftra(),$f[$i]);
+                     $this->getUser()->setAttribute('numcomp',$comprobante[$i]->getNumcom(),$f[$i]);
+                     $this->getUser()->setAttribute('fectra',$comprobante[$i]->getFectra(),$f[$i]);
+                     $this->getUser()->setAttribute('destra',$comprobante[$i]->getDestra(),$f[$i]);
+                     $this->getUser()->setAttribute('ctas', $comprobante[$i]->getCtas(),$f[$i]);
+                     $this->getUser()->setAttribute('desctas', $comprobante[$i]->getDesc(),$f[$i]);
+                     $this->getUser()->setAttribute('tipmov', '');
+                     $this->getUser()->setAttribute('mov', $comprobante[$i]->getMov(),$f[$i]);
+                     $this->getUser()->setAttribute('montos', $comprobante[$i]->getMontos(),$f[$i]);
+                     $i++;
+                  }
+                  $this->i = $concom - 1;
+                  $this->formulario = $f;
+
+              // }
+              }
+            }else{
+              $this->msjtres="El Activo de esta Disposicion genera un Movimiento contable, pero este no puede ser realizado ya que dicho Activo no tiene Definicion Contable";
+            }
+          }else{
+            $this->msjtres="No se Puede Generar el Movimiento Contable por el Tipo de Definicion de este Movimiento.";
+        }
+    }else{
+      $this->msjtres="Este movimiento esta definido, que no se pueda generar movimiento contable";
     }
 
-    return $this->coderror;
- }
+      $output =  '[["","",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+  }
 
 
+  protected function deleteBndisinm($bndisinm)
+  {
+    return Inmuebles::EliminarBiedisactinm($bndisinm);
+  }
 
 
 }

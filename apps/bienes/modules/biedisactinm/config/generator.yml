@@ -20,12 +20,12 @@ generator:
       codubides: { name: Ubicación}
       desubides: { name: Descripción}
       obsdisinm: { name: Observación}
-      stadisinm: { name: Estatus}
+      stadisinm: { name: Estatus[A/D]}
       vidutil:   { name: Vida Util}
     list:
       title:          Disposición de Inmuebles
-      filters:        [codact, codmue, desinm]
-      display:        [=codact, codmue, desinm, stadisinm]
+      filters:        [codact, codmue, desinm, fecdisinm, nrodisinm, stadisinm]
+      display:        [=codact, codmue, desinm, nrodisinm, stadisinm]
       fields:
         fecdisinm: { params: date_format='dd/MM/yy' }
         fecdevdis: { params: date_format='dd/MM/yy' }
@@ -39,7 +39,10 @@ generator:
       display:       [=codact, codmue, desinm, nrodisinm, tipdisinm, motdisinm, desmot, fecdisinm, fecdevdis, mondisinm, detdisinm, codubiori, desubiori, codubides, desubides, obsdisinm, stadisinm]
       actions:
         _list:       ~
-        _save:       ~
+        _save:
+          only_for: create
+          params: class="sf_admin_action_delete" onClick="anular()"
+
         _create:      ~
         _delete:     ~
       fields:

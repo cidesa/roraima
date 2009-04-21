@@ -18,6 +18,8 @@
 <?php use_helper('tabs') ?>
 
 <?php echo object_input_hidden_tag($bndismue, 'getId') ?>
+<?php echo object_input_hidden_tag($bndismue, 'getIdrefer') ?>
+
 <fieldset id="sf_fieldset_none" class="">
 <legend>Datos</legend>
 <div class="form-row">
@@ -268,8 +270,8 @@ if ($bndismue->getId()=='') { ?>
          'submit' => 'sf_admin_edit_form',
          ),array('use_style' => 'true', 'class' => 'sf_admin_action_save',)) ?>
 </li>
-<? } else { ?>
-<li><!--input name="Comprobante" type="button" value="Comprobantes" class="sf_admin_action_save" onClick="consultarComp()"--></li>
+<? } else if ($bndismue->getIdrefer()!='') { ?>
+<li><input name="Comprobante" type="button" value="Comprobantes" class="sf_admin_action_save" onClick="consultarComp()"></li>
 <?php } ?>
 </ul>
 
@@ -282,7 +284,7 @@ if ($bndismue->getId()=='') { ?>
 
    function consultarComp()
   {
-    window.open('/tesoreria_dev.php/confincomgen/edit/id/'+$("bndismue_idrefer").value,'...','menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+    window.open('/tesoreria_dev.php/confincomgen/edit/id/'+$("idrefer").value,'...','menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
   }
 </script>
 <?php include_partial('edit_actions', array('bndismue' => $bndismue)) ?>

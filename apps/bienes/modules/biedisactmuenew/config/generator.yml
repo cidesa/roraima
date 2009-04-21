@@ -25,7 +25,7 @@ generator:
       motdismue: { name: No se}
     list:
       title:          Disposición de Muebles
-      filters:        [codact, desmue, fecdismue, stadismue]
+      filters:        [codact, codmue, desmue, fecdismue, stadismue]
       display:        [=codact, codmue, desmue, stadismue]
       fields:
         fecdismue: { params: date_format='dd/MM/yy' }
@@ -40,9 +40,12 @@ generator:
       display:       [codact, codmue, desmue, nrodismue, tipdismue, codmot, desmot, fecdismue, fecdevdis, mondismue, vidutil, detdismue, codubiori, desubiori, codubides, desubides, obsdismue, stadismue, _comprobante]
       actions:
         _list:        ~
-        _save:        ~
         _create:      ~
         _delete:      ~
+        _save:
+          only_for: create
+          params: class="sf_admin_action_delete" onClick="anular()"
+
       fields:
         fecdismue: { params: date_format='dd/MM/yy' }
         fecdevdis: { params: date_format='dd/MM/yy' }
