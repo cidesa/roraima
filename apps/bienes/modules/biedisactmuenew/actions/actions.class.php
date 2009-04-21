@@ -10,7 +10,7 @@
  */
 class biedisactmuenewActions extends autobiedisactmuenewActions
 {
-	 private static $coderror=-1;
+   private static $coderror=-1;
 
   public function CargarTipos()
   {
@@ -40,29 +40,29 @@ class biedisactmuenewActions extends autobiedisactmuenewActions
      if ($this->saveBndismue($this->bndismue)==-1)
       {
 
-	      $this->setFlash('notice', 'Your modifications have been saved');
+        $this->setFlash('notice', 'Your modifications have been saved');
 $this->Bitacora('Guardo');
 
-	      if ($this->getRequestParameter('save_and_add'))
-	      {
-	        return $this->redirect('biedisactmuenew/create');
-	      }
-	      else if ($this->getRequestParameter('save_and_list'))
-	      {
-	        return $this->redirect('biedisactmuenew/list');
-	      }
-	      else
-	      {
-	        return $this->redirect('biedisactmuenew/edit?id='.$this->bndismue->getId());
-	      }
+        if ($this->getRequestParameter('save_and_add'))
+        {
+          return $this->redirect('biedisactmuenew/create');
+        }
+        else if ($this->getRequestParameter('save_and_list'))
+        {
+          return $this->redirect('biedisactmuenew/list');
+        }
+        else
+        {
+          return $this->redirect('biedisactmuenew/edit?id='.$this->bndismue->getId());
+        }
      }
-	    else
-	      {
-		          $this->labels = $this->getLabels();
-		          $err = Herramientas::obtenerMensajeError($this->coderror);
-	         	  $this->getRequest()->setError('',$err);
-		          return sfView::SUCCESS;
-	      }
+      else
+        {
+              $this->labels = $this->getLabels();
+              $err = Herramientas::obtenerMensajeError($this->coderror);
+               $this->getRequest()->setError('',$err);
+              return sfView::SUCCESS;
+        }
 
     }
     else
@@ -245,18 +245,150 @@ $this->Bitacora('Guardo');
       return sfView::HEADER_ONLY;
   }
 
+
+  public function executeAjaxcomprobante()
+  {
+    $this->bndismue = $this->getBndismueOrCreate();
+    $this->updateBndismueFromRequest();
+
+    $c = new Criteria();
+    $c->add(BndisbiePeer::CODDIS,substr($this->bndismue->getTipdismue(),0,10));
+    $bndisbie = BndisbiePeer::doSelectOne($c);
+
+    if ($bndisbie){
+      if ($bndisbie->getDesinc()=='S'){
+
+        $desincorpora = true;
+      }else{
+        $desincorpora = false;
+      }
+
+               $concom   = 0;
+               $mensaje1 = "";
+               $msj1     = "";
+               $msj2     = "";
+               $cuentaporpagarrendicion = "";
+               $mensajeuno  = "";
+               $msjuno      = "";
+               $msjdos      = "";
+               $msjtres     = "";
+               $comprobante = "";
+               $this->mensajeuno = "";
+               $this->msj1     = "";
+               $this->msj2     = "";
+               $this->mensaje1 = "";
+               $this->msjuno   = "";
+               $this->msjdos   = "";
+               $this->msjtres  = "";
+               $this->i        = "";
+               $this->formulario = array();
+
+      if ($bndisbie->getAfecon()=='S'){
+        $c = new Criteria();
+        $c->add(BndefconPeer::CODACT,$this->bndismue->getCodact());
+        $c->add(BndefconPeer::CODMUE,$this->bndismue->getCodmue());
+        $bndefcon = BndefconPeer::doSelectOne($c);
+
+          if ($bndefcon){
+            $c = new Criteria();
+            $c->add(BnregmuePeer::CODACT,$this->bndismue->getCodact());
+            $c->add(BnregmuePeer::CODMUE,$this->bndismue->getCodmue());
+            $bnregmue = BnregmuePeer::doSelectOne($c);
+            if ($bnregmue)
+            {
+                  $x = Bienes::grabarComprobante($this->bndismue,$bnregmue,&$comprobante,$desincorpora,$bndefcon);
+                  $concom = $concom + 1;
+
+                  $form = "sf_admin/biedisactmuenew/confincomgen";
+                  $i    = 0;
+                  while ($i < $concom)
+                  {
+                     $f[$i] = $form.$i;
+                     $this->getUser()->setAttribute('grabar',$comprobante[$i]->getGrabar(),$f[$i]);
+                     $this->getUser()->setAttribute('reftra',$comprobante[$i]->getReftra(),$f[$i]);
+                     $this->getUser()->setAttribute('numcomp',$comprobante[$i]->getNumcom(),$f[$i]);
+                     $this->getUser()->setAttribute('fectra',$comprobante[$i]->getFectra(),$f[$i]);
+                     $this->getUser()->setAttribute('destra',$comprobante[$i]->getDestra(),$f[$i]);
+                     $this->getUser()->setAttribute('ctas', $comprobante[$i]->getCtas(),$f[$i]);
+                     $this->getUser()->setAttribute('desctas', $comprobante[$i]->getDesc(),$f[$i]);
+                     $this->getUser()->setAttribute('tipmov', '');
+                     $this->getUser()->setAttribute('mov', $comprobante[$i]->getMov(),$f[$i]);
+                     $this->getUser()->setAttribute('montos', $comprobante[$i]->getMontos(),$f[$i]);
+                     $i++;
+                  }
+                  $this->i = $concom - 1;
+                  $this->formulario = $f;
+
+              // }
+              }
+            }else{
+              $this->msjtres="El Activo de esta Disposicion genera un Movimiento contable, pero este no puede ser realizado ya que dicho Activo no tiene Definicion Contable";
+            }
+          }else{
+            $this->msjtres="No se Puede Generar el Movimiento Contable por el Tipo de Definicion de este Movimiento.";
+        }
+    }else{
+      $this->msjtres="Este movimiento esta definido, que no se pueda generar movimiento contable";
+    }
+
+      $output =  '[["","",""]]';
+      $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
+  }
+
+
  protected function saveBndismue($bndismue)
   {
 
     $this->coderror = Muebles::Validar_biedisactmuenew($bndismue->getFecdismue(),$bndismue->getFecdevdis());
     if ($this->coderror==-1)
     {
-    $bndismue->save();
-    return $this->coderror;
+      self::GenerarComprobante(&$bndismue, array());
+      return Bienes::SalvarBiedisactmuenew($bndismue);
     }
-
-
     return $this->coderror;
+  }
+
+
+  public function GenerarComprobante($bndismue, $grid)
+  {
+      $concom=1;
+      $form="sf_admin/biedisactmuenew/confincomgen";
+      $grabo=$this->getUser()->getAttribute('grabo',null,$form.'0');
+      $numerocomp=$this->getUser()->getAttribute('contabc[numcom]',null,$form.'0');
+      if ($grabo=='S')
+      {
+        $i=0;
+        while ($i<$concom)
+        {
+         $formulario[$i]=$form.$i;
+         if ($this->getUser()->getAttribute('grabo',null,$formulario[$i])=='S')
+         {
+          $numcom=$this->getUser()->getAttribute('contabc[numcom]',null,$formulario[$i]);
+          $reftra=$this->getUser()->getAttribute('contabc[reftra]',null,$formulario[$i]);
+          $feccom=$this->getUser()->getAttribute('contabc[feccom]',null,$formulario[$i]);
+          $descom=$this->getUser()->getAttribute('contabc[descom]',null,$formulario[$i]);
+          $debito=$this->getUser()->getAttribute('debito',null,$formulario[$i]);
+          $credito=$this->getUser()->getAttribute('credito',null,$formulario[$i]);
+          $grid=$this->getUser()->getAttribute('grid',null,$formulario[$i]);
+
+          $this->getUser()->getAttributeHolder()->remove('contabc[numcom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[reftra]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[feccom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('contabc[descom]',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('debito',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
+          $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
+
+          $this->numero = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+
+          //$bndismue->setNumcom($this->numero);
+         }
+         $i++;
+        }
+      }
+      $this->getUser()->getAttributeHolder()->remove('grabo',$form.'0');
+
+     // $grid=Herramientas::CargarDatosGridv2($this,$this->objeto,true);
 
   }
 

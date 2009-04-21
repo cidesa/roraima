@@ -33,9 +33,14 @@
   <?php $value = object_input_tag($bndismue, 'getCodact', array (
   'size' => 15,
   'control_name' => 'bndismue[codact]',
-    'maxlength' => strlen($mascaracatalogo),
-   'onKeypress' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
-
+  'maxlength' => strlen($mascaracatalogo),
+  'onKeypress' => "javascript:return dFilter (event.keyCode, this,'$mascaracatalogo')",
+  'onBlur'=> remote_function(array(
+  'url'      => 'biedisactmuenew/ajax',
+  'condition' => "$('bndismue_codact').value != '' && $('id').value == '' && $('bndismue_codmue').value != ''",
+  'complete' => 'AjaxJSON(request, json)',
+  'with' => "'ajax=1&cajtexmos=bndismue_codact&cajtexcom=bndismue_desmue&cajtexubi=bndismue_codubiori&cajtexdesubi=bndismue_desubiori&codigo='+$('bndismue_codmue').value",
+)),
 )); echo $value ? $value : '&nbsp;' ?>
 
 <?php echo  button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Bnregmue_Biedisactmuenew/clase/Bnregmue/frame/sf_admin_edit_form/obj1/bndismue_codact/obj2/bndismue_codmue/obj3/bndismue_desmue/campo1/codact/campo2/codmue/campo3/desmue/param1/')?>
@@ -242,8 +247,44 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+
+
+
 </fieldset>
 
+
+<ul class="sf_admin_actions">
+<li>
+<?
+  if(SF_ENVIRONMENT=='dev') $dev = '_dev';
+  else $dev = '';
+
+if ($bndismue->getId()=='') { ?>
+<?php echo submit_to_remote('Submit2', 'Generar Comprobante', array(
+         'update'   => 'comp',
+         'url'      => 'biedisactmuenew/ajaxcomprobante',
+         'script'   => true,
+         'complete' => 'AjaxJSON(request, json)',
+         'submit' => 'sf_admin_edit_form',
+         ),array('use_style' => 'true', 'class' => 'sf_admin_action_save',)) ?>
+</li>
+<? } else { ?>
+<li><!--input name="Comprobante" type="button" value="Comprobantes" class="sf_admin_action_save" onClick="consultarComp()"--></li>
+<?php } ?>
+</ul>
+
+<div id="comp"></div>
+<script language="JavaScript" type="text/javascript">
+  function comprobante(formulario)
+  {
+      window.open('/tesoreria_dev.php/confincomgen/edit/?formulario='+formulario,formulario,'menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+  }
+
+   function consultarComp()
+  {
+    window.open('/tesoreria_dev.php/confincomgen/edit/id/'+$("bndismue_idrefer").value,'...','menubar=no,toolbar=no,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80');
+  }
+</script>
 <?php include_partial('edit_actions', array('bndismue' => $bndismue)) ?>
 
 </form>
