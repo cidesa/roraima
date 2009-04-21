@@ -390,6 +390,10 @@
   cod: 203
   msj: El Código del Activo ya existe para este Catalogo. Por favor, Cambiélo por otro.
 
+204:
+  cod: 204
+  msj: El Activo de esta Disposicion genera un Movimiento contable, pero este no puede ser realizado ya que dicho Activo no tiene Definicion Contable
+
 ################### FORMULACION ####################
 # Definiciones Generales (Fordefgen)
 300:

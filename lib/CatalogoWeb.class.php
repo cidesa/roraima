@@ -900,8 +900,9 @@ class CatalogoWeb extends BaseCatalogoWeb {
   /****************************************************************************************/
 
   /*************************** Formulacion : Forpoa : Acción Especificas *******************/
-  public function Fordefpryaccmet_Forpoa($params) {
+  public function Fordefpryaccmet_Forpoa($params = array()) {
     $this->c = new Criteria();
+    $this->c->add(FordefpryaccmetPeer :: CODPRO, $params[0]);
     $this->c->add(FordefpryaccmetPeer :: CODPRO, $params[0]);
     $this->c->add(FordefpryaccmetPeer :: CODACCESP, $params[1]);
     //   $this->c->addAscendingOrderByColumn(FordefpryaccmetPeer::CODACCESP);
