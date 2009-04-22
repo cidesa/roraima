@@ -108,7 +108,7 @@ compras:
         Stock Mínimo:                                         CARSTOMIN.php
         Punto de Reorden:                                     CARPTOREO.php
     Mantenimiento:
-      Clasificador de Partidas Presupuestarias:               NomManClaPre.php
+      #Clasificador de Partidas Presupuestarias:               NomManClaPre.php
       Traspaso de Inventario Fisico a Lógico:                 almtrainv
       Cambiar Contraseña:                                     cambiopasswd
       #Importar Productos:                                    ImportarProductos.php
