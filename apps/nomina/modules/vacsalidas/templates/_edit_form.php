@@ -69,7 +69,10 @@
 
 <fieldset>
 <div class="form-row">
-  <?php echo label_for('npvacsalidas[fecvac]', __($labels['npvacsalidas{fecvac}']), 'class="required" ') ?>
+<table>
+<tr>
+<th>
+  <?php echo label_for('npvacsalidas[fecvac]', __($labels['npvacsalidas{fecvac}']), 'class="required" Style="width:120px"') ?>
   <div class="content<?php if ($sf_request->hasError('npvacsalidas{fecvac}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npvacsalidas{fecvac}')): ?>
     <?php echo form_error('npvacsalidas{fecvac}', array('class' => 'form-error-msg')) ?>
@@ -91,8 +94,18 @@
   'with' => "'ajax=2&cajtexdiasvac=npvacsalidas_diasdisfrutar&cajtexfecdesde=npvacsalidas_fecdes&cajtexfechasta=npvacsalidas_fechas&cajtexfecobserva=npvacsalidas_observa&cajtexdiaspend=diaspend&fecing='+$('npvacsalidas_fecing').value+'&codemp='+$('npvacsalidas_codemp').value+'&fecha='+this.value",
         )),*/
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
-<strong>Fecha de Salida</strong>
+    </div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+</tr>
+<tr>
+<th>
+<?php echo label_for('npvacsalidas[fecdes]', __($labels['npvacsalidas{fecdes}']), 'class="required" Style="width:120px"') ?>
 <?php $value = object_input_date_tag($npvacsalidas, 'getFecdes', array (
   'rich' => true,
   'calendar_button_img' => '/sf/sf_admin/images/date.png',
@@ -108,8 +121,13 @@
   'with' => "'ajax=4&cajtexdiasvac=npvacsalidas_diasdisfrutar&cajtexdiaspend=diaspend&cajtexfechas=npvacsalidas_fechas&diasvac='+$('npvacsalidas_diasdisfrutar').value+'&codemp='+$('npvacsalidas_codemp').value+'&fecing='+$('npvacsalidas_fecing').value+'&fecdes='+this.value+'&diaspend='+$('diaspend').value",
         )),
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;
-<strong>Fecha de Incorporaci&oacute;n</strong>
+<div class="sf_admin_edit_help"><?php echo __('Primer Día de Vacaciones del Empleado') ?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+<?php echo label_for('npvacsalidas[fechas]', __($labels['npvacsalidas{fechas}']), 'class="required" Style="width:120px"') ?>
  <?php $value = object_input_date_tag($npvacsalidas, 'getFechas', array (
   'readonly' => true,
   'rich' => true,
@@ -120,8 +138,9 @@
   'control_name' => 'npvacsalidas[fechas]',
   'date_format' => 'dd/MM/yyyy',
 ),date('Y-m-d')); echo $value ? $value : '&nbsp;' ?>
-    </div>
-<br>
+</th>
+<tr>
+<th>
   <?php echo label_for('npvacsalidas[diasdisfrutar]', __($labels['npvacsalidas{diasdisfrutar}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('npvacsalidas{diasdisfrutar}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npvacsalidas{diasdisfrutar}')): ?>
@@ -140,13 +159,19 @@
   'with' => "'ajax=3&cajtexdiasvac=npvacsalidas_diasdisfrutar&cajtexdiaspend=diaspend&cajtexfechas=npvacsalidas_fechas&fecdesde='+$('npvacsalidas_fecdes').value+'&diaspend='+$('diaspend').value+'&fecing='+$('npvacsalidas_fecing').value+'&fecvac='+$('npvacsalidas_fecvac').value+'&codemp='+$('npvacsalidas_codemp').value+'&diasvac='+this.value",
         )),
 )); echo $value ? $value : '&nbsp;' ?>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<strong>D&iacute;as Pendientes</strong>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th>
+ <?php echo label_for('npvacsalidas[diaspend]', __($labels['npvacsalidas{diaspend}']), 'class="required" ') ?>
 &nbsp;
 <?php echo input_tag('diaspend','0',array('size' => 7,'disabled' => true,)) ?>
     </div>
-<br>
-  <?php echo label_for('npvacsalidas[observa]', __($labels['npvacsalidas{observa}']), 'class="required" ') ?>
+</th>
+</tr>
+</table>
+ <?php echo label_for('npvacsalidas[observa]', __($labels['npvacsalidas{observa}']), 'class="required" Style="width:125px"') ?>
   <div class="content<?php if ($sf_request->hasError('npvacsalidas{observa}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('npvacsalidas{observa}')): ?>
     <?php echo form_error('npvacsalidas{observa}', array('class' => 'form-error-msg')) ?>

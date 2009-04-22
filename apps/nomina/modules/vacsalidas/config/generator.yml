@@ -12,6 +12,7 @@ generator:
       fechas: { name: Fecha de Incorporaci&oacute;n, params: date_format='dd/MM/yyyy'}
       diasdisfrutar: { name: D&iacute;as  de Vacaciones}
       observa: { name: Observaciones}
+      diaspend: { name: Días Pendientes}
 
     list:
       title:          Solicitudes de Vacaciones
@@ -23,7 +24,7 @@ generator:
       max_per_page:   5
     edit:
       title:          Registro de Solicitudes de Vacaciones
-      display:        [=codemp, nomemp, fecing, fecvac, fecdes, fechas, diasdisfrutar, observa]
+      display:        [=codemp, nomemp, fecing, fecvac, fecdes, fechas, diasdisfrutar, observa, diaspend]
       actions:
         _list:        ~
         _save:        ~
