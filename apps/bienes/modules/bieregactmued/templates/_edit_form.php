@@ -51,7 +51,6 @@
   'size' => 12,
   'control_name' => 'bnregmue[codmue]',
   'maxlength' => 20,
-  'onBlur'=> "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bnregmue_codmue').value=valor;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 <br>

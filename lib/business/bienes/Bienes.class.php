@@ -15,7 +15,7 @@ class Bienes
          $codmue=$articulo->getCodmue();
 
      $c = new Criteria();
-     $c->add(BnregmuePeer::CODACT,$codact);
+     //$c->add(BnregmuePeer::CODACT,$codact);
      $c->add(BnregmuePeer::CODMUE,$codmue);
      $objBnregmue = BnregmuePeer::doSelectOne($c);
 
@@ -41,7 +41,7 @@ class Bienes
      $codinm=$articulo->getCodinm();
 
      $c = new Criteria();
-     $c->add(BnreginmPeer::CODACT,$codact);
+     //$c->add(BnreginmPeer::CODACT,$codact);
      $c->add(BnreginmPeer::CODINM,$codinm);
      $objBnreginm = BnreginmPeer::doSelectOne($c);
 

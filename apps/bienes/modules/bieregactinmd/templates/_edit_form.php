@@ -51,7 +51,6 @@
   'size' => 12,
   'maxlength' => 20,
   'control_name' => 'bnreginm[codinm]',
-  'onBlur'=> "javascript: valor=this.value; valor=valor.pad(10, '0',0);document.getElementById('bnreginm_codinm').value=valor;",
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
