@@ -5424,7 +5424,7 @@ class Nomina {
       $i = 0;
       $jornada = false;
       self :: cargarDatosNpvacsalidas($codemp, $fechaing, & $arreglo, & $diaslaborales, & $fecvac, & $diaspend, $fechadesde);
-      while ($i < $diasvac) {
+      while ($i <= $diasvac) {
         $valor = Herramientas :: dateAdd('d', 1, $valor, '+');
 
         if (self :: diaLaboral($valor, $jornada, $diaslaborales)) {
@@ -5444,9 +5444,14 @@ class Nomina {
         }
       }
 
-      $valor = Herramientas :: dateAdd('d', 2, $valor, '+');
-      if (!self :: diaLaboral($valor, $jornada, $diaslaborales))
+     // $valor = Herramientas :: dateAdd('d', 1, $valor, '+');
+    /*  if (!self :: diaLaboral($valor, $jornada, $diaslaborales))
+        $valor = Herramientas :: dateAdd('d', 1, $valor, '+');*/
+
+      while (!self :: diaLaboral($valor, $jornada, $diaslaborales))
+      {
         $valor = Herramientas :: dateAdd('d', 1, $valor, '+');
+      }// end while
 
       $fechahasta = $valor;
     } else {
