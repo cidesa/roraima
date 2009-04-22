@@ -31,6 +31,7 @@ class Cobtransa extends BaseCobtransa
 	public function getFatipmovcre()
 	{
 		$c=new Criteria();
+    $resp=array();    
 		$c->add(FatipmovPeer::DEBCRE,"C");
         $datos= FatipmovPeer::doSelect($c);
 		 if($datos){
