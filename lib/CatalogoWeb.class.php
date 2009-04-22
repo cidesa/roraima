@@ -3193,6 +3193,7 @@ $this->c= new Criteria();
       ContabcPeer :: NUMCOM => 'Numero',
       ContabcPeer :: FECCOM => 'Fecha',
       ContabcPeer :: STACOM => 'Estatus',
+      ContabcPeer :: REFTRA => 'Referencia',
     );
   }
 
