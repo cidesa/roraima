@@ -54,6 +54,7 @@
     'calendar_button_img' => '/sf/sf_admin/images/date.png',
     'control_name' => 'tsmovlib[feclib]',
     'date_format' => 'dd/MM/yy',
+    'value'=>date('d/m/Y'),
   )); echo $value ? $value : '&nbsp;' ?>
       </div>
   </div>
