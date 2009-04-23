@@ -1080,27 +1080,33 @@ class Factura {
 
   public static function documentoXCobrar($fafactur)
   {
-    $cobdocume= new Cobdocume();
-    $cobdocume->setCodcli($fafactur->setCodcli());
-    $cobdocume->setRefdoc(str_pad($fafactur->getReffac(),10,'0',STR_PAD_LEFT));
-    $cobdocume->setCodmov('001');
-    $cobdocume->setFecemi($fafactur->getFecfac());
-    $fecven=H::dateAdd('m',1,$fafactur->getFecfac(),'+');
-    $cobdocume->setFecven($fecven);
-    $cobdocume->setOridoc('FAC');
-    $cobdocume->setDesdoc($fafactur->setDesfac());
-    $mondoc=(H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getTotmonrgo()));
-    $cobdocume->setMondoc($mondoc);
-    $cobdocume->setRecdoc(H::convnume($fafactur->getTotmonrgo()));
-    $cobdocume->setDscdoc(H::convnume($fafactur->getMondesc()));
-    $cobdocume->setAbodoc(H::convnume($fafactur->getMoncan()));
-    $salact=H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getMondesc()) - H::convnume($fafactur->getMoncan());
-    $cobdocume->setSaldoc($salact);
-    $cobdocume->setStadoc('A');
-    $cobdocume->setReffac($fafactur->getReffac());
-    $cobdocume->setNumcom($fafactur->getNumcom());
-    $cobdocume->setFeccom($fafactur->getFecfac());
-    $cobdocume->save();
+    $fatipmov = FatipmovPeer::getFirst();
+    if(!$fatipmov){
+      
+    }else{
+      $cobdocume= new Cobdocume();
+      $cobdocume->setCodcli($fafactur->setCodcli());
+      $cobdocume->setRefdoc(str_pad($fafactur->getReffac(),10,'0',STR_PAD_LEFT));
+      //$cobdocume->setCodmov('001');
+      $cobdocume->setFatipmovId($fatipmov->getId());
+      $cobdocume->setFecemi($fafactur->getFecfac());
+      $fecven=H::dateAdd('m',1,$fafactur->getFecfac(),'+');
+      $cobdocume->setFecven($fecven);
+      $cobdocume->setOridoc('FAC');
+      $cobdocume->setDesdoc($fafactur->setDesfac());
+      $mondoc=(H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getTotmonrgo()));
+      $cobdocume->setMondoc($mondoc);
+      $cobdocume->setRecdoc(H::convnume($fafactur->getTotmonrgo()));
+      $cobdocume->setDscdoc(H::convnume($fafactur->getMondesc()));
+      $cobdocume->setAbodoc(H::convnume($fafactur->getMoncan()));
+      $salact=H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getMondesc()) - H::convnume($fafactur->getMoncan());
+      $cobdocume->setSaldoc($salact);
+      $cobdocume->setStadoc('A');
+      $cobdocume->setReffac($fafactur->getReffac());
+      $cobdocume->setNumcom($fafactur->getNumcom());
+      $cobdocume->setFeccom($fafactur->getFecfac());
+      $cobdocume->save();
+    }
   }
 
   public static function recargosXCobrar($fafactur,$grid4)
