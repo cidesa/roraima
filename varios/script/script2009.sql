@@ -632,3 +632,14 @@ alter table cpdefniv alter column cortrasla type integer;
 alter table cpdefniv alter column corsoladidis type integer;
 alter table cpdefniv alter column coradidis type integer;
 alter table cpdefniv alter column coraju type integer;
+
+-- Para que funcione bien las conciliaciones bancarias
+ALTER TABLE tsconcil DROP CONSTRAINT itsconcil;
+
+ALTER TABLE tsconcil ADD CONSTRAINT itsconcil PRIMARY KEY (numcue, mescon, anocon, refere, movlib, movban);
+
+-- Campos que no fueron incluidos al 23-04-09
+ALTER TABLE cpdefniv ADD COLUMN btneli boolean;
+
+ALTER TABLE cpdefniv ADD COLUMN btnanu boolean;
+
