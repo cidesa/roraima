@@ -32,12 +32,16 @@ presupuesto:
       Ejecución Global por Financiamiento:
         modulo: presupuesto.php
         modulo_dev: presupuesto_dev.php
+      Configuraciones Generales:
+        modulo: presupuesto.php
+        modulo_dev: presupuesto_dev.php
       Reportes:
         absoluta: reportes/reportes/presupuesto
     imagenes:
       default: OperatorClass.png
   menu:
     Definiciones Específicas:
+      Configuraciones Generales:                              precongen
       Niveles Presupuestarios:                                PreNivPre.php
       Titulos Presupuestarios:                                PreTitPre.php
       Tipos de Financiamiento:                                pretitfin

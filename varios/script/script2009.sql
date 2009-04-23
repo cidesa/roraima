@@ -338,8 +338,8 @@ ALTER TABLE nphojint OWNER TO postgres;
   COMMENT ON COLUMN nphojint.profes IS 'Profesional (Si o No)';
 
 --25/02/2009 se modifico esta columnna debido a que la tabla de fadefcaj se modifico y se elimino latabla facajcorrelat
-ALTER TABLE "SIMA002".fafactur DROP COLUMN codcaj;
-ALTER TABLE "SIMA002".fafactur ADD COLUMN codcaj integer;
+ALTER TABLE  fafactur DROP COLUMN codcaj;
+ALTER TABLE  fafactur ADD COLUMN codcaj integer;
 
 --02/03/2009 Desireé Martínez
 ALTER TABLE fabancos
@@ -591,6 +591,44 @@ CREATE TABLE "bncobseginm"
 
 COMMENT ON TABLE "bncobseginm" IS '';
 
---06/04/2009 Matriz de Compras Barcelona Generar Comprobante Automatico en la orden de Compra
+--06/04/2009 Matriz de Compras Barcelona Generar Comprobante en la orden de Compra para alcaldias
 ALTER TABLE "opdefemp"
-  ADD COLUMN "gencomalc" varchar(1)
+  ADD COLUMN "gencomalc" varchar(1);
+
+-----------------------------------------------------------------------------
+-- tsrelasiord para la orden de pago y cheque
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "tsrelasiord" CASCADE;
+
+DROP SEQUENCE IF EXISTS "tsrelasiord_seq";
+
+CREATE SEQUENCE "tsrelasiord_seq";
+
+
+CREATE TABLE "tsrelasiord"
+(
+  "ctagasxpag" VARCHAR(32),
+  "ctaordxpag" VARCHAR(32),
+  "id" INTEGER  NOT NULL DEFAULT nextval('tsrelasiord_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "tsrelasiord" IS '';
+
+--22/04/2009  Campo para la configuracion del código del artículo generado con correlativo
+ALTER TABLE "cadefart"
+  ADD COLUMN "gencorart" varchar(1);
+
+
+--23/04/2009
+--Se cambio los atributos de los campos a integer
+alter table cpdefniv alter column corprc type integer;
+alter table cpdefniv alter column corcom type integer;
+alter table cpdefniv alter column corcau type integer;
+alter table cpdefniv alter column corpag type integer;
+alter table cpdefniv alter column corsoltra type integer;
+alter table cpdefniv alter column cortrasla type integer;
+alter table cpdefniv alter column corsoladidis type integer;
+alter table cpdefniv alter column coradidis type integer;
+alter table cpdefniv alter column coraju type integer;
