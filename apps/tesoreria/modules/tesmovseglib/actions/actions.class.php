@@ -1058,7 +1058,7 @@ $this->Bitacora('Guardo');
 
           // Generar Nuevo comprobante contable
           if($numcom2=='########') $numcom2=Comprobante::Buscar_Correlativo();
-          Tesoreria::anular_Eliminar('A',$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$feclib,$reflib2);
+          Tesoreria::anular_Eliminar('A',$numcomadi,$feccomadi,$compadic,$fechacom,$numcom,$numcom2,$fecanu,$reflib2);
 
           // GENERAR NUEVO MOVIMIENTO SEGUN LIBRO
           $tsmovlibA= new Tsmovlib();
