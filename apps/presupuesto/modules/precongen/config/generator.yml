@@ -1,0 +1,28 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Cpdefniv
+    theme:            cidesaGenerator
+    fields:
+      corprc:    {name: Precompromiso}
+      corcom:    {name: Compromiso}
+      corcau:    {name: Causado}
+      corpag:    {name: Pagado}
+      corsoltra: {name: Solicitud de Traslado}
+      cortrasla:    {name: Traslado}
+      corsoladidis: {name: Solicitud de Adicion/Disminucion}
+      coradidis:    {name: Adicion/Disminucion}
+      coraju:    {name: Ajuste}
+      btnanu:    {name: Anular}
+      btneli:    {name: Eliminar}
+
+    edit:
+      title: Configuracion Generales
+      display:
+        Correlativos:  [corprc, corcom, corcau, corpag, corsoltra, cortrasla, corsoladidis, coradidis, coraju]
+        Generales:  [btnanu, btneli]
+
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~

@@ -335,30 +335,42 @@ propel:
     unidad:
       type: VARCHAR
       size: 100
+    cortrasla:
+      type: INTEGER
+      size: 8
+    coradidis:
+      type: INTEGER
+      size: 8
     corprc:
-      type: NUMERIC
+      type: INTEGER
       size: 8
     corcom:
-      type: NUMERIC
+      type: INTEGER
       size: 8
     corcau:
-      type: NUMERIC
+      type: INTEGER
       size: 8
     corpag:
-      type: NUMERIC
+      type: INTEGER
       size: 8
     corsoladidis:
-      type: NUMERIC
+      type: INTEGER
       size: 8
     corsoltra:
-      type: NUMERIC
+      type: INTEGER
       size: 8
     coraju:
-      type: NUMERIC
+      type: INTEGER
       size: 8
     corfue:          #Correlativo Fuente de Financiamiento
-      type: NUMERIC
+      type: INTEGER
       size: 8
+    btnanu:
+      type: BOOLEAN
+      default: true
+    btneli:
+      type: BOOLEAN
+      default: true
     id:
       type: INTEGER
       required: true

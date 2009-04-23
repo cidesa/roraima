@@ -109,6 +109,14 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
 
 	
+	protected $cortrasla;
+
+
+	
+	protected $coradidis;
+
+
+	
 	protected $corprc;
 
 
@@ -138,6 +146,14 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
 	
 	protected $corfue;
+
+
+	
+	protected $btnanu = true;
+
+
+	
+	protected $btneli = true;
 
 
 	
@@ -375,67 +391,87 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
   }
   
-  public function getCorprc($val=false)
+  public function getCortrasla()
   {
 
-    if($val) return number_format($this->corprc,2,',','.');
-    else return $this->corprc;
+    return $this->cortrasla;
 
   }
   
-  public function getCorcom($val=false)
+  public function getCoradidis()
   {
 
-    if($val) return number_format($this->corcom,2,',','.');
-    else return $this->corcom;
+    return $this->coradidis;
 
   }
   
-  public function getCorcau($val=false)
+  public function getCorprc()
   {
 
-    if($val) return number_format($this->corcau,2,',','.');
-    else return $this->corcau;
+    return $this->corprc;
 
   }
   
-  public function getCorpag($val=false)
+  public function getCorcom()
   {
 
-    if($val) return number_format($this->corpag,2,',','.');
-    else return $this->corpag;
+    return $this->corcom;
 
   }
   
-  public function getCorsoladidis($val=false)
+  public function getCorcau()
   {
 
-    if($val) return number_format($this->corsoladidis,2,',','.');
-    else return $this->corsoladidis;
+    return $this->corcau;
 
   }
   
-  public function getCorsoltra($val=false)
+  public function getCorpag()
   {
 
-    if($val) return number_format($this->corsoltra,2,',','.');
-    else return $this->corsoltra;
+    return $this->corpag;
 
   }
   
-  public function getCoraju($val=false)
+  public function getCorsoladidis()
   {
 
-    if($val) return number_format($this->coraju,2,',','.');
-    else return $this->coraju;
+    return $this->corsoladidis;
 
   }
   
-  public function getCorfue($val=false)
+  public function getCorsoltra()
   {
 
-    if($val) return number_format($this->corfue,2,',','.');
-    else return $this->corfue;
+    return $this->corsoltra;
+
+  }
+  
+  public function getCoraju()
+  {
+
+    return $this->coraju;
+
+  }
+  
+  public function getCorfue()
+  {
+
+    return $this->corfue;
+
+  }
+  
+  public function getBtnanu()
+  {
+
+    return $this->btnanu;
+
+  }
+  
+  public function getBtneli()
+  {
+
+    return $this->btneli;
 
   }
   
@@ -717,11 +753,31 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setCortrasla($v)
+	{
+
+    if ($this->cortrasla !== $v) {
+        $this->cortrasla = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::CORTRASLA;
+      }
+  
+	} 
+	
+	public function setCoradidis($v)
+	{
+
+    if ($this->coradidis !== $v) {
+        $this->coradidis = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::CORADIDIS;
+      }
+  
+	} 
+	
 	public function setCorprc($v)
 	{
 
     if ($this->corprc !== $v) {
-        $this->corprc = Herramientas::toFloat($v);
+        $this->corprc = $v;
         $this->modifiedColumns[] = CpdefnivPeer::CORPRC;
       }
   
@@ -731,7 +787,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 	{
 
     if ($this->corcom !== $v) {
-        $this->corcom = Herramientas::toFloat($v);
+        $this->corcom = $v;
         $this->modifiedColumns[] = CpdefnivPeer::CORCOM;
       }
   
@@ -741,7 +797,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 	{
 
     if ($this->corcau !== $v) {
-        $this->corcau = Herramientas::toFloat($v);
+        $this->corcau = $v;
         $this->modifiedColumns[] = CpdefnivPeer::CORCAU;
       }
   
@@ -751,7 +807,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 	{
 
     if ($this->corpag !== $v) {
-        $this->corpag = Herramientas::toFloat($v);
+        $this->corpag = $v;
         $this->modifiedColumns[] = CpdefnivPeer::CORPAG;
       }
   
@@ -761,7 +817,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 	{
 
     if ($this->corsoladidis !== $v) {
-        $this->corsoladidis = Herramientas::toFloat($v);
+        $this->corsoladidis = $v;
         $this->modifiedColumns[] = CpdefnivPeer::CORSOLADIDIS;
       }
   
@@ -771,7 +827,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 	{
 
     if ($this->corsoltra !== $v) {
-        $this->corsoltra = Herramientas::toFloat($v);
+        $this->corsoltra = $v;
         $this->modifiedColumns[] = CpdefnivPeer::CORSOLTRA;
       }
   
@@ -781,7 +837,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 	{
 
     if ($this->coraju !== $v) {
-        $this->coraju = Herramientas::toFloat($v);
+        $this->coraju = $v;
         $this->modifiedColumns[] = CpdefnivPeer::CORAJU;
       }
   
@@ -791,8 +847,28 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 	{
 
     if ($this->corfue !== $v) {
-        $this->corfue = Herramientas::toFloat($v);
+        $this->corfue = $v;
         $this->modifiedColumns[] = CpdefnivPeer::CORFUE;
+      }
+  
+	} 
+	
+	public function setBtnanu($v)
+	{
+
+    if ($this->btnanu !== $v || $v === true) {
+        $this->btnanu = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::BTNANU;
+      }
+  
+	} 
+	
+	public function setBtneli($v)
+	{
+
+    if ($this->btneli !== $v || $v === true) {
+        $this->btneli = $v;
+        $this->modifiedColumns[] = CpdefnivPeer::BTNELI;
       }
   
 	} 
@@ -861,23 +937,31 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
       $this->unidad = $rs->getString($startcol + 24);
 
-      $this->corprc = $rs->getFloat($startcol + 25);
+      $this->cortrasla = $rs->getInt($startcol + 25);
 
-      $this->corcom = $rs->getFloat($startcol + 26);
+      $this->coradidis = $rs->getInt($startcol + 26);
 
-      $this->corcau = $rs->getFloat($startcol + 27);
+      $this->corprc = $rs->getInt($startcol + 27);
 
-      $this->corpag = $rs->getFloat($startcol + 28);
+      $this->corcom = $rs->getInt($startcol + 28);
 
-      $this->corsoladidis = $rs->getFloat($startcol + 29);
+      $this->corcau = $rs->getInt($startcol + 29);
 
-      $this->corsoltra = $rs->getFloat($startcol + 30);
+      $this->corpag = $rs->getInt($startcol + 30);
 
-      $this->coraju = $rs->getFloat($startcol + 31);
+      $this->corsoladidis = $rs->getInt($startcol + 31);
 
-      $this->corfue = $rs->getFloat($startcol + 32);
+      $this->corsoltra = $rs->getInt($startcol + 32);
 
-      $this->id = $rs->getInt($startcol + 33);
+      $this->coraju = $rs->getInt($startcol + 33);
+
+      $this->corfue = $rs->getInt($startcol + 34);
+
+      $this->btnanu = $rs->getBoolean($startcol + 35);
+
+      $this->btneli = $rs->getBoolean($startcol + 36);
+
+      $this->id = $rs->getInt($startcol + 37);
 
       $this->resetModified();
 
@@ -885,7 +969,7 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 34; 
+            return $startcol + 38; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Cpdefniv object", $e);
     }
@@ -1108,30 +1192,42 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 				return $this->getUnidad();
 				break;
 			case 25:
-				return $this->getCorprc();
+				return $this->getCortrasla();
 				break;
 			case 26:
-				return $this->getCorcom();
+				return $this->getCoradidis();
 				break;
 			case 27:
-				return $this->getCorcau();
+				return $this->getCorprc();
 				break;
 			case 28:
-				return $this->getCorpag();
+				return $this->getCorcom();
 				break;
 			case 29:
-				return $this->getCorsoladidis();
+				return $this->getCorcau();
 				break;
 			case 30:
-				return $this->getCorsoltra();
+				return $this->getCorpag();
 				break;
 			case 31:
-				return $this->getCoraju();
+				return $this->getCorsoladidis();
 				break;
 			case 32:
-				return $this->getCorfue();
+				return $this->getCorsoltra();
 				break;
 			case 33:
+				return $this->getCoraju();
+				break;
+			case 34:
+				return $this->getCorfue();
+				break;
+			case 35:
+				return $this->getBtnanu();
+				break;
+			case 36:
+				return $this->getBtneli();
+				break;
+			case 37:
 				return $this->getId();
 				break;
 			default:
@@ -1169,15 +1265,19 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 			$keys[22] => $this->getNomgob(),
 			$keys[23] => $this->getNomsec(),
 			$keys[24] => $this->getUnidad(),
-			$keys[25] => $this->getCorprc(),
-			$keys[26] => $this->getCorcom(),
-			$keys[27] => $this->getCorcau(),
-			$keys[28] => $this->getCorpag(),
-			$keys[29] => $this->getCorsoladidis(),
-			$keys[30] => $this->getCorsoltra(),
-			$keys[31] => $this->getCoraju(),
-			$keys[32] => $this->getCorfue(),
-			$keys[33] => $this->getId(),
+			$keys[25] => $this->getCortrasla(),
+			$keys[26] => $this->getCoradidis(),
+			$keys[27] => $this->getCorprc(),
+			$keys[28] => $this->getCorcom(),
+			$keys[29] => $this->getCorcau(),
+			$keys[30] => $this->getCorpag(),
+			$keys[31] => $this->getCorsoladidis(),
+			$keys[32] => $this->getCorsoltra(),
+			$keys[33] => $this->getCoraju(),
+			$keys[34] => $this->getCorfue(),
+			$keys[35] => $this->getBtnanu(),
+			$keys[36] => $this->getBtneli(),
+			$keys[37] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1269,30 +1369,42 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 				$this->setUnidad($value);
 				break;
 			case 25:
-				$this->setCorprc($value);
+				$this->setCortrasla($value);
 				break;
 			case 26:
-				$this->setCorcom($value);
+				$this->setCoradidis($value);
 				break;
 			case 27:
-				$this->setCorcau($value);
+				$this->setCorprc($value);
 				break;
 			case 28:
-				$this->setCorpag($value);
+				$this->setCorcom($value);
 				break;
 			case 29:
-				$this->setCorsoladidis($value);
+				$this->setCorcau($value);
 				break;
 			case 30:
-				$this->setCorsoltra($value);
+				$this->setCorpag($value);
 				break;
 			case 31:
-				$this->setCoraju($value);
+				$this->setCorsoladidis($value);
 				break;
 			case 32:
-				$this->setCorfue($value);
+				$this->setCorsoltra($value);
 				break;
 			case 33:
+				$this->setCoraju($value);
+				break;
+			case 34:
+				$this->setCorfue($value);
+				break;
+			case 35:
+				$this->setBtnanu($value);
+				break;
+			case 36:
+				$this->setBtneli($value);
+				break;
+			case 37:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1327,15 +1439,19 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[22], $arr)) $this->setNomgob($arr[$keys[22]]);
 		if (array_key_exists($keys[23], $arr)) $this->setNomsec($arr[$keys[23]]);
 		if (array_key_exists($keys[24], $arr)) $this->setUnidad($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setCorprc($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setCorcom($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setCorcau($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setCorpag($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setCorsoladidis($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setCorsoltra($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setCoraju($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setCorfue($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setId($arr[$keys[33]]);
+		if (array_key_exists($keys[25], $arr)) $this->setCortrasla($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setCoradidis($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setCorprc($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setCorcom($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setCorcau($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setCorpag($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setCorsoladidis($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setCorsoltra($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setCoraju($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setCorfue($arr[$keys[34]]);
+		if (array_key_exists($keys[35], $arr)) $this->setBtnanu($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setBtneli($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setId($arr[$keys[37]]);
 	}
 
 	
@@ -1368,6 +1484,8 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CpdefnivPeer::NOMGOB)) $criteria->add(CpdefnivPeer::NOMGOB, $this->nomgob);
 		if ($this->isColumnModified(CpdefnivPeer::NOMSEC)) $criteria->add(CpdefnivPeer::NOMSEC, $this->nomsec);
 		if ($this->isColumnModified(CpdefnivPeer::UNIDAD)) $criteria->add(CpdefnivPeer::UNIDAD, $this->unidad);
+		if ($this->isColumnModified(CpdefnivPeer::CORTRASLA)) $criteria->add(CpdefnivPeer::CORTRASLA, $this->cortrasla);
+		if ($this->isColumnModified(CpdefnivPeer::CORADIDIS)) $criteria->add(CpdefnivPeer::CORADIDIS, $this->coradidis);
 		if ($this->isColumnModified(CpdefnivPeer::CORPRC)) $criteria->add(CpdefnivPeer::CORPRC, $this->corprc);
 		if ($this->isColumnModified(CpdefnivPeer::CORCOM)) $criteria->add(CpdefnivPeer::CORCOM, $this->corcom);
 		if ($this->isColumnModified(CpdefnivPeer::CORCAU)) $criteria->add(CpdefnivPeer::CORCAU, $this->corcau);
@@ -1376,6 +1494,8 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(CpdefnivPeer::CORSOLTRA)) $criteria->add(CpdefnivPeer::CORSOLTRA, $this->corsoltra);
 		if ($this->isColumnModified(CpdefnivPeer::CORAJU)) $criteria->add(CpdefnivPeer::CORAJU, $this->coraju);
 		if ($this->isColumnModified(CpdefnivPeer::CORFUE)) $criteria->add(CpdefnivPeer::CORFUE, $this->corfue);
+		if ($this->isColumnModified(CpdefnivPeer::BTNANU)) $criteria->add(CpdefnivPeer::BTNANU, $this->btnanu);
+		if ($this->isColumnModified(CpdefnivPeer::BTNELI)) $criteria->add(CpdefnivPeer::BTNELI, $this->btneli);
 		if ($this->isColumnModified(CpdefnivPeer::ID)) $criteria->add(CpdefnivPeer::ID, $this->id);
 
 		return $criteria;
@@ -1457,6 +1577,10 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 
 		$copyObj->setUnidad($this->unidad);
 
+		$copyObj->setCortrasla($this->cortrasla);
+
+		$copyObj->setCoradidis($this->coradidis);
+
 		$copyObj->setCorprc($this->corprc);
 
 		$copyObj->setCorcom($this->corcom);
@@ -1472,6 +1596,10 @@ abstract class BaseCpdefniv extends BaseObject  implements Persistent {
 		$copyObj->setCoraju($this->coraju);
 
 		$copyObj->setCorfue($this->corfue);
+
+		$copyObj->setBtnanu($this->btnanu);
+
+		$copyObj->setBtneli($this->btneli);
 
 
 		$copyObj->setNew(true);

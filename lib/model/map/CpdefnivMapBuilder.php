@@ -84,21 +84,29 @@ class CpdefnivMapBuilder {
 
 		$tMap->addColumn('UNIDAD', 'Unidad', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('CORPRC', 'Corprc', 'double', CreoleTypes::NUMERIC, false, 8);
+		$tMap->addColumn('CORTRASLA', 'Cortrasla', 'int', CreoleTypes::INTEGER, false, 8);
 
-		$tMap->addColumn('CORCOM', 'Corcom', 'double', CreoleTypes::NUMERIC, false, 8);
+		$tMap->addColumn('CORADIDIS', 'Coradidis', 'int', CreoleTypes::INTEGER, false, 8);
 
-		$tMap->addColumn('CORCAU', 'Corcau', 'double', CreoleTypes::NUMERIC, false, 8);
+		$tMap->addColumn('CORPRC', 'Corprc', 'int', CreoleTypes::INTEGER, false, 8);
 
-		$tMap->addColumn('CORPAG', 'Corpag', 'double', CreoleTypes::NUMERIC, false, 8);
+		$tMap->addColumn('CORCOM', 'Corcom', 'int', CreoleTypes::INTEGER, false, 8);
 
-		$tMap->addColumn('CORSOLADIDIS', 'Corsoladidis', 'double', CreoleTypes::NUMERIC, false, 8);
+		$tMap->addColumn('CORCAU', 'Corcau', 'int', CreoleTypes::INTEGER, false, 8);
 
-		$tMap->addColumn('CORSOLTRA', 'Corsoltra', 'double', CreoleTypes::NUMERIC, false, 8);
+		$tMap->addColumn('CORPAG', 'Corpag', 'int', CreoleTypes::INTEGER, false, 8);
 
-		$tMap->addColumn('CORAJU', 'Coraju', 'double', CreoleTypes::NUMERIC, false, 8);
+		$tMap->addColumn('CORSOLADIDIS', 'Corsoladidis', 'int', CreoleTypes::INTEGER, false, 8);
 
-		$tMap->addColumn('CORFUE', 'Corfue', 'double', CreoleTypes::NUMERIC, false, 8);
+		$tMap->addColumn('CORSOLTRA', 'Corsoltra', 'int', CreoleTypes::INTEGER, false, 8);
+
+		$tMap->addColumn('CORAJU', 'Coraju', 'int', CreoleTypes::INTEGER, false, 8);
+
+		$tMap->addColumn('CORFUE', 'Corfue', 'int', CreoleTypes::INTEGER, false, 8);
+
+		$tMap->addColumn('BTNANU', 'Btnanu', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
+		$tMap->addColumn('BTNELI', 'Btneli', 'boolean', CreoleTypes::BOOLEAN, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

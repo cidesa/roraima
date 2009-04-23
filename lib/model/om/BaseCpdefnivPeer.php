@@ -13,7 +13,7 @@ abstract class BaseCpdefnivPeer {
 	const CLASS_DEFAULT = 'lib.model.Cpdefniv';
 
 	
-	const NUM_COLUMNS = 34;
+	const NUM_COLUMNS = 38;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -95,6 +95,12 @@ abstract class BaseCpdefnivPeer {
 	const UNIDAD = 'cpdefniv.UNIDAD';
 
 	
+	const CORTRASLA = 'cpdefniv.CORTRASLA';
+
+	
+	const CORADIDIS = 'cpdefniv.CORADIDIS';
+
+	
 	const CORPRC = 'cpdefniv.CORPRC';
 
 	
@@ -119,6 +125,12 @@ abstract class BaseCpdefnivPeer {
 	const CORFUE = 'cpdefniv.CORFUE';
 
 	
+	const BTNANU = 'cpdefniv.BTNANU';
+
+	
+	const BTNELI = 'cpdefniv.BTNELI';
+
+	
 	const ID = 'cpdefniv.ID';
 
 	
@@ -127,18 +139,18 @@ abstract class BaseCpdefnivPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Loncod', 'Rupcat', 'Ruppar', 'Nivdis', 'Forpre', 'Asiper', 'Numper', 'Peract', 'Fecper', 'Fecini', 'Feccie', 'Etadef', 'Staprc', 'Coraep', 'Gencom', 'Numcom', 'Caraep', 'Tiptraprc', 'Fueord', 'Fuecre', 'Fuetra', 'Nomgob', 'Nomsec', 'Unidad', 'Corprc', 'Corcom', 'Corcau', 'Corpag', 'Corsoladidis', 'Corsoltra', 'Coraju', 'Corfue', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (CpdefnivPeer::CODEMP, CpdefnivPeer::LONCOD, CpdefnivPeer::RUPCAT, CpdefnivPeer::RUPPAR, CpdefnivPeer::NIVDIS, CpdefnivPeer::FORPRE, CpdefnivPeer::ASIPER, CpdefnivPeer::NUMPER, CpdefnivPeer::PERACT, CpdefnivPeer::FECPER, CpdefnivPeer::FECINI, CpdefnivPeer::FECCIE, CpdefnivPeer::ETADEF, CpdefnivPeer::STAPRC, CpdefnivPeer::CORAEP, CpdefnivPeer::GENCOM, CpdefnivPeer::NUMCOM, CpdefnivPeer::CARAEP, CpdefnivPeer::TIPTRAPRC, CpdefnivPeer::FUEORD, CpdefnivPeer::FUECRE, CpdefnivPeer::FUETRA, CpdefnivPeer::NOMGOB, CpdefnivPeer::NOMSEC, CpdefnivPeer::UNIDAD, CpdefnivPeer::CORPRC, CpdefnivPeer::CORCOM, CpdefnivPeer::CORCAU, CpdefnivPeer::CORPAG, CpdefnivPeer::CORSOLADIDIS, CpdefnivPeer::CORSOLTRA, CpdefnivPeer::CORAJU, CpdefnivPeer::CORFUE, CpdefnivPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'loncod', 'rupcat', 'ruppar', 'nivdis', 'forpre', 'asiper', 'numper', 'peract', 'fecper', 'fecini', 'feccie', 'etadef', 'staprc', 'coraep', 'gencom', 'numcom', 'caraep', 'tiptraprc', 'fueord', 'fuecre', 'fuetra', 'nomgob', 'nomsec', 'unidad', 'corprc', 'corcom', 'corcau', 'corpag', 'corsoladidis', 'corsoltra', 'coraju', 'corfue', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Loncod', 'Rupcat', 'Ruppar', 'Nivdis', 'Forpre', 'Asiper', 'Numper', 'Peract', 'Fecper', 'Fecini', 'Feccie', 'Etadef', 'Staprc', 'Coraep', 'Gencom', 'Numcom', 'Caraep', 'Tiptraprc', 'Fueord', 'Fuecre', 'Fuetra', 'Nomgob', 'Nomsec', 'Unidad', 'Cortrasla', 'Coradidis', 'Corprc', 'Corcom', 'Corcau', 'Corpag', 'Corsoladidis', 'Corsoltra', 'Coraju', 'Corfue', 'Btnanu', 'Btneli', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (CpdefnivPeer::CODEMP, CpdefnivPeer::LONCOD, CpdefnivPeer::RUPCAT, CpdefnivPeer::RUPPAR, CpdefnivPeer::NIVDIS, CpdefnivPeer::FORPRE, CpdefnivPeer::ASIPER, CpdefnivPeer::NUMPER, CpdefnivPeer::PERACT, CpdefnivPeer::FECPER, CpdefnivPeer::FECINI, CpdefnivPeer::FECCIE, CpdefnivPeer::ETADEF, CpdefnivPeer::STAPRC, CpdefnivPeer::CORAEP, CpdefnivPeer::GENCOM, CpdefnivPeer::NUMCOM, CpdefnivPeer::CARAEP, CpdefnivPeer::TIPTRAPRC, CpdefnivPeer::FUEORD, CpdefnivPeer::FUECRE, CpdefnivPeer::FUETRA, CpdefnivPeer::NOMGOB, CpdefnivPeer::NOMSEC, CpdefnivPeer::UNIDAD, CpdefnivPeer::CORTRASLA, CpdefnivPeer::CORADIDIS, CpdefnivPeer::CORPRC, CpdefnivPeer::CORCOM, CpdefnivPeer::CORCAU, CpdefnivPeer::CORPAG, CpdefnivPeer::CORSOLADIDIS, CpdefnivPeer::CORSOLTRA, CpdefnivPeer::CORAJU, CpdefnivPeer::CORFUE, CpdefnivPeer::BTNANU, CpdefnivPeer::BTNELI, CpdefnivPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'loncod', 'rupcat', 'ruppar', 'nivdis', 'forpre', 'asiper', 'numper', 'peract', 'fecper', 'fecini', 'feccie', 'etadef', 'staprc', 'coraep', 'gencom', 'numcom', 'caraep', 'tiptraprc', 'fueord', 'fuecre', 'fuetra', 'nomgob', 'nomsec', 'unidad', 'cortrasla', 'coradidis', 'corprc', 'corcom', 'corcau', 'corpag', 'corsoladidis', 'corsoltra', 'coraju', 'corfue', 'btnanu', 'btneli', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Loncod' => 1, 'Rupcat' => 2, 'Ruppar' => 3, 'Nivdis' => 4, 'Forpre' => 5, 'Asiper' => 6, 'Numper' => 7, 'Peract' => 8, 'Fecper' => 9, 'Fecini' => 10, 'Feccie' => 11, 'Etadef' => 12, 'Staprc' => 13, 'Coraep' => 14, 'Gencom' => 15, 'Numcom' => 16, 'Caraep' => 17, 'Tiptraprc' => 18, 'Fueord' => 19, 'Fuecre' => 20, 'Fuetra' => 21, 'Nomgob' => 22, 'Nomsec' => 23, 'Unidad' => 24, 'Corprc' => 25, 'Corcom' => 26, 'Corcau' => 27, 'Corpag' => 28, 'Corsoladidis' => 29, 'Corsoltra' => 30, 'Coraju' => 31, 'Corfue' => 32, 'Id' => 33, ),
-		BasePeer::TYPE_COLNAME => array (CpdefnivPeer::CODEMP => 0, CpdefnivPeer::LONCOD => 1, CpdefnivPeer::RUPCAT => 2, CpdefnivPeer::RUPPAR => 3, CpdefnivPeer::NIVDIS => 4, CpdefnivPeer::FORPRE => 5, CpdefnivPeer::ASIPER => 6, CpdefnivPeer::NUMPER => 7, CpdefnivPeer::PERACT => 8, CpdefnivPeer::FECPER => 9, CpdefnivPeer::FECINI => 10, CpdefnivPeer::FECCIE => 11, CpdefnivPeer::ETADEF => 12, CpdefnivPeer::STAPRC => 13, CpdefnivPeer::CORAEP => 14, CpdefnivPeer::GENCOM => 15, CpdefnivPeer::NUMCOM => 16, CpdefnivPeer::CARAEP => 17, CpdefnivPeer::TIPTRAPRC => 18, CpdefnivPeer::FUEORD => 19, CpdefnivPeer::FUECRE => 20, CpdefnivPeer::FUETRA => 21, CpdefnivPeer::NOMGOB => 22, CpdefnivPeer::NOMSEC => 23, CpdefnivPeer::UNIDAD => 24, CpdefnivPeer::CORPRC => 25, CpdefnivPeer::CORCOM => 26, CpdefnivPeer::CORCAU => 27, CpdefnivPeer::CORPAG => 28, CpdefnivPeer::CORSOLADIDIS => 29, CpdefnivPeer::CORSOLTRA => 30, CpdefnivPeer::CORAJU => 31, CpdefnivPeer::CORFUE => 32, CpdefnivPeer::ID => 33, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'loncod' => 1, 'rupcat' => 2, 'ruppar' => 3, 'nivdis' => 4, 'forpre' => 5, 'asiper' => 6, 'numper' => 7, 'peract' => 8, 'fecper' => 9, 'fecini' => 10, 'feccie' => 11, 'etadef' => 12, 'staprc' => 13, 'coraep' => 14, 'gencom' => 15, 'numcom' => 16, 'caraep' => 17, 'tiptraprc' => 18, 'fueord' => 19, 'fuecre' => 20, 'fuetra' => 21, 'nomgob' => 22, 'nomsec' => 23, 'unidad' => 24, 'corprc' => 25, 'corcom' => 26, 'corcau' => 27, 'corpag' => 28, 'corsoladidis' => 29, 'corsoltra' => 30, 'coraju' => 31, 'corfue' => 32, 'id' => 33, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Loncod' => 1, 'Rupcat' => 2, 'Ruppar' => 3, 'Nivdis' => 4, 'Forpre' => 5, 'Asiper' => 6, 'Numper' => 7, 'Peract' => 8, 'Fecper' => 9, 'Fecini' => 10, 'Feccie' => 11, 'Etadef' => 12, 'Staprc' => 13, 'Coraep' => 14, 'Gencom' => 15, 'Numcom' => 16, 'Caraep' => 17, 'Tiptraprc' => 18, 'Fueord' => 19, 'Fuecre' => 20, 'Fuetra' => 21, 'Nomgob' => 22, 'Nomsec' => 23, 'Unidad' => 24, 'Cortrasla' => 25, 'Coradidis' => 26, 'Corprc' => 27, 'Corcom' => 28, 'Corcau' => 29, 'Corpag' => 30, 'Corsoladidis' => 31, 'Corsoltra' => 32, 'Coraju' => 33, 'Corfue' => 34, 'Btnanu' => 35, 'Btneli' => 36, 'Id' => 37, ),
+		BasePeer::TYPE_COLNAME => array (CpdefnivPeer::CODEMP => 0, CpdefnivPeer::LONCOD => 1, CpdefnivPeer::RUPCAT => 2, CpdefnivPeer::RUPPAR => 3, CpdefnivPeer::NIVDIS => 4, CpdefnivPeer::FORPRE => 5, CpdefnivPeer::ASIPER => 6, CpdefnivPeer::NUMPER => 7, CpdefnivPeer::PERACT => 8, CpdefnivPeer::FECPER => 9, CpdefnivPeer::FECINI => 10, CpdefnivPeer::FECCIE => 11, CpdefnivPeer::ETADEF => 12, CpdefnivPeer::STAPRC => 13, CpdefnivPeer::CORAEP => 14, CpdefnivPeer::GENCOM => 15, CpdefnivPeer::NUMCOM => 16, CpdefnivPeer::CARAEP => 17, CpdefnivPeer::TIPTRAPRC => 18, CpdefnivPeer::FUEORD => 19, CpdefnivPeer::FUECRE => 20, CpdefnivPeer::FUETRA => 21, CpdefnivPeer::NOMGOB => 22, CpdefnivPeer::NOMSEC => 23, CpdefnivPeer::UNIDAD => 24, CpdefnivPeer::CORTRASLA => 25, CpdefnivPeer::CORADIDIS => 26, CpdefnivPeer::CORPRC => 27, CpdefnivPeer::CORCOM => 28, CpdefnivPeer::CORCAU => 29, CpdefnivPeer::CORPAG => 30, CpdefnivPeer::CORSOLADIDIS => 31, CpdefnivPeer::CORSOLTRA => 32, CpdefnivPeer::CORAJU => 33, CpdefnivPeer::CORFUE => 34, CpdefnivPeer::BTNANU => 35, CpdefnivPeer::BTNELI => 36, CpdefnivPeer::ID => 37, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'loncod' => 1, 'rupcat' => 2, 'ruppar' => 3, 'nivdis' => 4, 'forpre' => 5, 'asiper' => 6, 'numper' => 7, 'peract' => 8, 'fecper' => 9, 'fecini' => 10, 'feccie' => 11, 'etadef' => 12, 'staprc' => 13, 'coraep' => 14, 'gencom' => 15, 'numcom' => 16, 'caraep' => 17, 'tiptraprc' => 18, 'fueord' => 19, 'fuecre' => 20, 'fuetra' => 21, 'nomgob' => 22, 'nomsec' => 23, 'unidad' => 24, 'cortrasla' => 25, 'coradidis' => 26, 'corprc' => 27, 'corcom' => 28, 'corcau' => 29, 'corpag' => 30, 'corsoladidis' => 31, 'corsoltra' => 32, 'coraju' => 33, 'corfue' => 34, 'btnanu' => 35, 'btneli' => 36, 'id' => 37, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, )
 	);
 
 	
@@ -242,6 +254,10 @@ abstract class BaseCpdefnivPeer {
 
 		$criteria->addSelectColumn(CpdefnivPeer::UNIDAD);
 
+		$criteria->addSelectColumn(CpdefnivPeer::CORTRASLA);
+
+		$criteria->addSelectColumn(CpdefnivPeer::CORADIDIS);
+
 		$criteria->addSelectColumn(CpdefnivPeer::CORPRC);
 
 		$criteria->addSelectColumn(CpdefnivPeer::CORCOM);
@@ -257,6 +273,10 @@ abstract class BaseCpdefnivPeer {
 		$criteria->addSelectColumn(CpdefnivPeer::CORAJU);
 
 		$criteria->addSelectColumn(CpdefnivPeer::CORFUE);
+
+		$criteria->addSelectColumn(CpdefnivPeer::BTNANU);
+
+		$criteria->addSelectColumn(CpdefnivPeer::BTNELI);
 
 		$criteria->addSelectColumn(CpdefnivPeer::ID);
 
