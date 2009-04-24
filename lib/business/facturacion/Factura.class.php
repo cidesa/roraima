@@ -133,7 +133,7 @@ class Factura {
           $contabc2->setNumcom($correl);
           $contabc2->setFeccom($fafactur->getFecfac());
           $contabc2->setDebcre('C');
-          $contabc2->setCodcta($cuenta);
+          $contabc2->setCodcta($cuenta2);
           $contabc2->setNumasi($numasi);
           $contabc2->setRefasi($numcomord);
           $contabc2->setDesasi(H::getX('Codcta','Contabb','Descta',$cuenta2));
@@ -183,6 +183,7 @@ class Factura {
 	            $contabc1->setNumasi($numasi);
 	            $contabc1->setRefasi($numcomord);
 	            $contabc1->setDesasi(H::getX('Codcta','Contabb','Descta',$cuenta));
+	            $contabc1->setMonasi($monto);
 	      	  }
 	      	}
 	      	else
@@ -219,6 +220,7 @@ class Factura {
 	            $contabc2->setNumasi($numasi);
 	            $contabc2->setRefasi($numcomord);
 	            $contabc2->setDesasi($fafactur->getDesfac());
+	            $contabc2->setMonasi($monto);
 	            $contabc2->save();
 	      	  }
 	      	}
@@ -1085,7 +1087,7 @@ class Factura {
       
     }else{
       $cobdocume= new Cobdocume();
-      $cobdocume->setCodcli($fafactur->setCodcli());
+      $cobdocume->setCodcli($fafactur->getCodcli());
       $cobdocume->setRefdoc(str_pad($fafactur->getReffac(),10,'0',STR_PAD_LEFT));
       //$cobdocume->setCodmov('001');
       $cobdocume->setFatipmovId($fatipmov->getId());
@@ -1093,7 +1095,7 @@ class Factura {
       $fecven=H::dateAdd('m',1,$fafactur->getFecfac(),'+');
       $cobdocume->setFecven($fecven);
       $cobdocume->setOridoc('FAC');
-      $cobdocume->setDesdoc($fafactur->setDesfac());
+      $cobdocume->setDesdoc($fafactur->getDesfac());
       $mondoc=(H::convnume($fafactur->getTottotart()) - H::convnume($fafactur->getTotmonrgo()));
       $cobdocume->setMondoc($mondoc);
       $cobdocume->setRecdoc(H::convnume($fafactur->getTotmonrgo()));
@@ -1429,6 +1431,8 @@ class Factura {
   {
   	$msj="";
   	$p="";
+  	$fila1=""; $fila2=""; $fila3=""; $fila4=""; $fila5=""; $fila6="0,00"; $fila7="0,00"; $fila8="0,00"; $fila9="0,00"; $fila10="0,00"; $fila11="0,00"; $fila12="0,00";
+  	$fila13="0,00"; $fila14="0,00"; $fila15="0,00"; $fila16="0,00"; $fila17=""; $fila18="0,00"; $fila19=""; $fila20=""; $fila21=""; $fila22="0,00";
     $c= new Criteria();
 	$c->add(FaartpedPeer::NROPED,$codreferencia);
 	$reg2= FaartpedPeer::doSelect($c);
@@ -1456,7 +1460,7 @@ class Factura {
           	$encontro=true;
           }
           $diferencia= $objdato->getCantot() - $cant_total;
-          if ($encontro=false)
+          if ($encontro==false)
           {
 	         $fila1='0';
 	         $fila2=$codreferencia;
@@ -1470,7 +1474,7 @@ class Factura {
              	$fila4=$reg->getDesart();
              	$fila5=$reg->getUnimed();
              	$fila14=number_format($reg->getDistot(),2,',','.');
-             	if ($reg->getCtava()=="")
+             	if ($reg->getCtavta()=="")
              	{
              	  $sin_cta_aso='N';
              	}else $sin_cta_aso='S';
@@ -1508,7 +1512,7 @@ class Factura {
              $fila9="0,00";
              $cal=H::convnume($fila10)*H::convnume($fila8);
              $fila13=number_format($cal,2,',','.');
-	         $encontro=true;
+	         //$encontro=true;
 	         //cambio moneda
 
           }
@@ -1528,7 +1532,7 @@ class Factura {
              	$fila4=$reg->getDesart();
              	$fila5=$reg->getUnimed();
              	$fila14=number_format($reg->getDistot(),2,',','.');
-             	if ($reg->getCtava()=="")
+             	if ($reg->getCtavta()=="")
              	{
              	  $sin_cta_aso='N';
              	}else $sin_cta_aso='S';
@@ -1565,7 +1569,7 @@ class Factura {
              $fila9="0,00";
              $cal=H::convnume($fila10)*H::convnume($fila7);
              $fila13=number_format($cal,2,',','.');
-	         $encontro=true;
+	         //$encontro=true;
 	         //cambio moneda
         }
 
@@ -1584,6 +1588,8 @@ class Factura {
   {
   	$msj="";
   	$p="";
+  	$fila1=""; $fila2=""; $fila3=""; $fila4=""; $fila5=""; $fila6="0,00"; $fila7="0,00"; $fila8="0,00"; $fila9="0,00"; $fila10="0,00"; $fila11="0,00"; $fila12="0,00";
+  	$fila13="0,00"; $fila14="0,00"; $fila15="0,00"; $fila16="0,00"; $fila17=""; $fila18="0,00"; $fila19=""; $fila20=""; $fila21=""; $fila22="0,00";
     if ($tipref=='D' || $tipref=='VC')
     {
       $c= new Criteria();
@@ -1594,20 +1600,24 @@ class Factura {
       	$arreglodet="";
         foreach ($resul as $objdato)
 	    {
-          $sql="Select codart as codart From FaArtFac where CODART='".$objdato->getCodart()."' AND codref = '".$codreferencia."' and RefFac in (Select RefFac from FaFactur where TipRef='".$tipref."')";
+	      $diferencia=0;
+          $cant_total=0;
+
+          $sql="Select codart as codart, cantot as cantot From FaArtFac where CODART='".$objdato->getCodart()."' AND codref = '".$codreferencia."' and RefFac in (Select RefFac from FaFactur where TipRef='".$tipref."')";
           if (Herramientas::BuscarDatos($sql,&$result))
           {
-            $encontro=false;
             $e=0;
             while ($e<count($result))
             {
-          	  if ($objdato->getCodart()==$result[$e]["codart"])
-          	  {
-          	  	 $encontro=true;
-          	  	 //break;
-          	  }
+          	  $cant_total= $cant_total + $result[$e]["cantot"];
           	  $e++;
             }
+            $encontro=false;
+            if ($objdato->getCandph()<= $cant_total)
+            {
+           	 $encontro=true;
+            }
+            $diferencia= $objdato->getCandph() - $cant_total;
 
             if ($encontro==false)
             {
@@ -1625,13 +1635,13 @@ class Factura {
 	             	$fila5=$reg->getUnimed();
 	             	$fila6=number_format($reg->getDistot(),2,',','.');
 	             	$fila14=number_format($reg->getDistot(),2,',','.');
-	             	if ($reg->getCtava()=="")
+	             	if ($reg->getCtavta()=="")
 	             	{
 	             	  $sin_cta_aso='N';
 	             	}else $sin_cta_aso='S';
 	             }
 
-	             $fila9=number_format($objdato->getCandph(),2,',','.');
+	             $fila9=number_format($diferencia,2,',','.');
 
 	             $a= new Criteria();
 	             $a->add(CadphartPeer::DPHART,$objdato->getDphart());
@@ -1675,7 +1685,7 @@ class Factura {
 	             $fila19="";
 	             $fila20='0';
 	             $fila22="";
-		         $encontro=true;
+		         //$encontro=true;
 		         //cambio moneda
             }
           }
@@ -1696,7 +1706,7 @@ class Factura {
 	             	$fila5=$reg->getUnimed();
 	             	$fila6=number_format($reg->getDistot(),2,',','.');
 	             	$fila14=number_format($reg->getDistot(),2,',','.');
-	             	if ($reg->getCtava()=="")
+	             	if ($reg->getCtavta()=="")
 	             	{
 	             	  $sin_cta_aso='N';
 	             	}else $sin_cta_aso='S';
@@ -1749,7 +1759,7 @@ class Factura {
 	             $fila22="";
 	             $cal=H::convnume($fila10)*H::convnume($fila9);
                  $fila13=number_format($cal,2,',','.');
-		         $encontro=true;
+		         //$encontro=true;
 		         //cambio moneda
 
           }
@@ -1864,7 +1874,7 @@ class Factura {
   public static function PreciosRepetidos($grid)
   {
   	$precios_repetidos=false;
-    return $precios_repetidos;    
+    return $precios_repetidos;
   	$x=$grid[0];
     $i=0;
     if (count($x)>0)
@@ -1934,7 +1944,7 @@ class Factura {
     {
 	  while ($i<count($x))
 	  {
-	    if ($x[$i]->getMonpag()!="0.00")
+	    if ($x[$i]->getMonpag()!="0,00")
 	    {
 	      $monto_pago= $monto_pago + $x[$i]->getMonpag();
 	    }
