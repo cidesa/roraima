@@ -13,4 +13,11 @@ class Fatipmov extends BaseFatipmov
   {
     return $this->desmov;
   }
+  
+  public static function getFirst()
+  {
+    $c= Criteria();
+    $c->addAscendingOrderByColumn(FatipmovPeer::ID);
+    return FatipmovPeer::doSelectOne($c);
+  }
 }
