@@ -1864,6 +1864,7 @@ class Factura {
   public static function PreciosRepetidos($grid)
   {
   	$precios_repetidos=false;
+    return $precios_repetidos;    
   	$x=$grid[0];
     $i=0;
     if (count($x)>0)
