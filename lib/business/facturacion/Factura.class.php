@@ -1868,38 +1868,38 @@ class Factura {
     $i=0;
     if (count($x)>0)
     {
-	  while ($i<count($x))
-	  {
-	   	$j=0;
-         while ($j<count($x))
+  	  while ($i<count($x))
+  	  {
+  	   	$j=0;
+        while ($j<count($x))
   	    {
-         if ($i!=$j)
-         {
-          if ($x[$i]->getCodart()==$x[$j]->getCodart())
+          if ($i!=$j)
           {
-          	if ($x[$i]->getPrecio()=="")
-          	{
-          	  if ($x[$i]->getPrecioe()!=$x[$j]->getPrecioe())
-          	  {
-          	  	$precios_repetidos=true;
-          	  	break;
-          	  }
-          	}
-          	else
-          	{
-          	  if ($x[$i]->getPrecio()!=$x[$j]->getPrecio())
-          	  {
-          	  	$precios_repetidos=true;
-          	  	break;
-          	  }
-          	}
+            if ($x[$j]->getCodart() !='' && $x[$i]->getCodart()==$x[$j]->getCodart())
+            {
+            	if ($x[$i]->getPrecio()=="0,00")
+            	{
+            	  if ($x[$i]->getPrecioe()!=$x[$j]->getPrecioe())
+            	  {
+            	  	$precios_repetidos=true;
+            	  	return $precios_repetidos;
+            	  }
+            	}
+            	else
+            	{
+            	  if ($x[$i]->getPrecio()!=$x[$j]->getPrecio())
+            	  {
+            	  	$precios_repetidos=true;
+            	  	return $precios_repetidos;
+            	  }
+              }
+            }
           }
-         }
-	      $j++;
-	    }
-	   }
-	   $i++;
-     }
+	        $j++;
+	      }
+ 	    $i++;
+ 	    }
+    }
     return $precios_repetidos;
   }
 
