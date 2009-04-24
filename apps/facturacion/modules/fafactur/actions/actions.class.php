@@ -753,12 +753,12 @@ class fafacturActions extends autofafacturActions {
          return false;
         }
 
-        $grid=Herramientas::CargarDatosGridv2($this,$this->obj);
-        if (Factura::PreciosRepetidos($grid))
-        {
-      	  $this->coderr=1136;
-          return false;
-        }
+        //$grid=Herramientas::CargarDatosGridv2($this,$this->obj);
+        //if (Factura::PreciosRepetidos($grid))
+        //{
+      	//  $this->coderr=1136;
+        //  return false;
+        //}
 
         $grid2=Herramientas::CargarDatosGridv2($this,$this->obj3);
         if (Factura::Verificar_pago($grid2,H::convnume($this->getRequestParameter('fafactur[monfac]')),$this->getRequestParameter('fafactur[tipconpag]')))
