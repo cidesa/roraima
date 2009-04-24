@@ -67,6 +67,9 @@ class cidesaUser extends sfBasicSecurityUser
         $this->setAttribute('usuario', $objUsuario[0]->getNomuse());
         $this->setAttribute('loguse', $objUsuario[0]->getLoguse());
         $this->setAttribute('usuario_id', $objUsuario[0]->getId());
+		$this->setAttribute('contabilidadpresupuesto', sfConfig::get('app_contabilidadpresupuesto'));
+		$this->setAttribute('reportes', sfConfig::get('app_reportes'));
+		$this->setAttribute('reportes_web', sfConfig::get('app_reportes_web'));		
 
         $_SESSION["x"] = sfConfig::get('app_contabilidadpresupuesto');
         cidesaTools::exitsfile(CIDESA_CONFIG) ? $dir = CIDESA_CONFIG : $dir = sfConfig::get('sf_config_dir');
