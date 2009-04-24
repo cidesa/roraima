@@ -31,7 +31,7 @@ Cliente_Validator:
     class: CidesaExistValidator
     param:
         class:    Facliente
-        column:   Rifpro
+        column:   rifpro
         unique_error:  El Cliente no Existe.
 
 CorrelValidator:
