@@ -632,7 +632,7 @@ class fafacturActions extends autofafacturActions {
 						}
 						$javascript=$javascript." datosRecargos(); ";
 					} else {
-						$javascript = "alert('El Artículo no posee Cuenta de Venta asociada'); $('$cajtexcom').value=''; ";
+						$javascript = "alert('El Artículo no posee Cuenta de Venta asociada'); $('$cajtexcom').value='0,0'; ";
 					}
 				} else {
 					$javascript = "alert('El Código del Artículo no Existe'); $('$cajtexcom').value='';";
@@ -658,12 +658,20 @@ class fafacturActions extends autofafacturActions {
 				$this->ajaxs = '13';
 				$this->fafactur = $this->getFafacturOrCreate();
 				$this->configGridPedDes($this->getRequestParameter('tipref'), $this->getRequestParameter('cedula'));
+				if ($this->fil1!=0)
+				{
 				$javascript = "$('listaPedidosDespachos').show(); ";
 				if ($this->getRequestParameter('tipref') == 'P')
 					$javascript = $javascript .
 					"$('label2').innerHTML ='Pedidos Emitidos';";
 				else
 					$javascript = $javascript . "$('label2').innerHTML ='Despachos Emitidos';";
+				}else
+				{
+					if ($this->getRequestParameter('tipref') == 'P')
+					$javascript="alert('El Beneficiario no tiene Pedidos asociados')";
+					else $javascript="alert('El Beneficiario no tiene Despachos asociados')";
+				}
 				$output = '[["javascript","' . $javascript . '",""]]';
 				$this->getResponse()->setHttpHeader("X-JSON", '(' . $output . ')');
 				break;
@@ -673,14 +681,14 @@ class fafacturActions extends autofafacturActions {
 				if ($this->getRequestParameter('tipref') == 'P') {
 					Factura :: arregloPedidos($this->getRequestParameter('codrefer'), $this->getRequestParameter('tipref'), & $encontro, & $msj, & $arreglodet, & $p,&$sin_cta_aso);
 					if ($msj == "") {
-						if ($encontro == false) {
-							$javascript = "alert('El Pedido ya fue Facturado en su Totalidad');";
+						if ($encontro == true) {
+							$javascript = "alert('El Pedido ya fue Facturado en su Totalidad'); $('listaPedidosDespachos').hide(); ";
 						} else {
 							$javascript = "colocarArticulos('$arreglodet'); ";
 							if ($p != "") {
-								$javascript = $javascript . "recalcularRecargos(); montoTotal(); $('descuent').show(); $('recarg').show(); $('listaPedidosDespachos').hide();   mostrarPromedio();";
+								$javascript = $javascript . "recalcularRecargos(); montoTotal();  $('listaPedidosDespachos').hide();   $('descuent').show(); $('recarg').show(); mostrarPromedio();";
 							} else {
-								$javascript = $javascript . " $('descuent').show(); $('recarg').show(); $('listaPedidosDespachos').hide();   mostrarPromedio();";
+								$javascript = $javascript . " $('listaPedidosDespachos').hide();  $('descuent').show(); $('recarg').show(); mostrarPromedio();";
 							}
 						}
 					} else {
@@ -691,14 +699,14 @@ class fafacturActions extends autofafacturActions {
 						Factura :: arregloDespachos($this->getRequestParameter('codrefer'), $this->getRequestParameter('tipref'), & $encontro, & $msj, & $arreglodet, & $p,&$sin_cta_aso);
 					}
 					if ($msj == "") {
-						if ($encontro == false) {
-							$javascript = "alert('El Despacho ya fue Facturado en su Totalidad');";
+						if ($encontro == true) {
+							$javascript = "alert('El Despacho ya fue Facturado en su Totalidad'); $('listaPedidosDespachos').hide(); ";
 						} else {
 							$javascript = "colocarArticulos('$arreglodet'); ";
 							if ($p != "") {
-								$javascript = $javascript . "recalcularRecargos(); $('listaPedidosDespachos').hide(); mostrarPromedio();";
+								$javascript = $javascript . "recalcularRecargos(); $('recarg').show(); $('descuent').show(); $('listaPedidosDespachos').hide(); mostrarPromedio();";
 							} else {
-								$javascript = $javascript . " $('descuent').show(); $('recarg').show(); $('listaPedidosDespachos').hide(); mostrarPromedio();";
+								$javascript = $javascript . " $('recarg').show(); $('descuent').show(); $('listaPedidosDespachos').hide(); mostrarPromedio();";
 							}
 						}
 					} else {
@@ -753,17 +761,16 @@ class fafacturActions extends autofafacturActions {
          return false;
         }
 
-        //$grid=Herramientas::CargarDatosGridv2($this,$this->obj);
-        //if (Factura::PreciosRepetidos($grid))
-        //{
-      	//  $this->coderr=1136;
-        //  return false;
-        //}
-
-        $grid2=Herramientas::CargarDatosGridv2($this,$this->obj3);
-        if (Factura::Verificar_pago($grid2,H::convnume($this->getRequestParameter('fafactur[monfac]')),$this->getRequestParameter('fafactur[tipconpag]')))
+        $grid=Herramientas::CargarDatosGridv2($this,$this->obj1);
+        if (Factura::PreciosRepetidos($grid))
         {
-          $this->coderr=1136;
+      	  $this->coderr=1136;
+          return false;
+        }
+        $grid2=Herramientas::CargarDatosGridv2($this,$this->obj3);
+        if (Factura::Verificar_pago($grid2,H::convnume($this->getRequestParameter('fafactur[monfac]')),$this->getRequestParameter('fafactur[tipconpag]'))==false)
+        {
+          $this->coderr=1146;
           return false;
         }
 
@@ -786,7 +793,7 @@ class fafacturActions extends autofafacturActions {
 	       }
            if ($this->getRequestParameter('fafactur[tipref]')=='V')
 	       {
-	       	 if ($x[$i]->getCansol()=="0.00")
+	       	 if ($x[$i]->getCansol()=="0,00")
 	         {
 	       	  $this->coderr=1140;
 	       	  return false;
@@ -794,14 +801,14 @@ class fafacturActions extends autofafacturActions {
 	       }
 	       if ($this->getRequestParameter('fafactur[tipref]')=='P')
 	       {
-	       	 if ($x[$i]->getCanent()=="0.00")
+	       	 if ($x[$i]->getCanent()=="0,00")
 	         {
 	       	  $this->coderr=1142;
 	       	  return false;
 	         }
 	       }
 
-	       if ($x[$i]->getPrecio()=="0.00" && $x[$i]->getPrecioe()=="0.00")
+	       if ($x[$i]->getPrecio()=="0,00" && $x[$i]->getPrecioe()=="0,00")
 	       {
 	       	  $this->coderr=1141;
 	       	  return false;
@@ -813,7 +820,7 @@ class fafacturActions extends autofafacturActions {
           $l=0;
 	      while ($l<count($y))
 	      {
-            if ($y[$l]->getMonpag()=="0.00" && $this->getRequestParameter('fafactur[tipconpag]')=='C')
+            if ($y[$l]->getMonpag()=="0,00" && $this->getRequestParameter('fafactur[tipconpag]')=='C')
             {
 	       	  $this->coderr=1143;
 	       	  return false;
@@ -977,13 +984,17 @@ class fafacturActions extends autofafacturActions {
 		if ($fafactur->getNumcominv() != "") {
 			Factura :: eliminarComprob($fafactur->getNumcominv());
 		}
+    $fafactur->delete();
 		return -1;
 	}
 
   protected function updateError()
   {
     $this->configGrid();
-
+    $grid=Herramientas::CargarDatosGridv2($this,$this->obj1);
+    $grid3=Herramientas::CargarDatosGridv2($this,$this->obj2);
+    $grid2=Herramientas::CargarDatosGridv2($this,$this->obj3);
+    $grid4=Herramientas::CargarDatosGridv2($this,$this->obj4);
     return true;
   }
 }
