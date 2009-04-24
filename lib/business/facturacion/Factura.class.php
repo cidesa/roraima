@@ -535,11 +535,11 @@ class Factura {
 
   public static function grabarComprobanteMaestro($fafactur,$arrasientos,&$pos)
   {
-    $numcomprob="FA".substr($fafactur->getReffac(),2,6);
+    //$numcomprob="FA".substr($fafactur->getReffac(),2,6);
     $correl3=OrdendePago::Buscar_Correlativo();
     $contabc = new Contabc();
     $contabc->setNumcom($correl3);
-    $contabc->setReftra($numcomprob);
+    $contabc->setReftra($fafactur->getReffac());
     $contabc->setFeccom($fafactur->getFecfac());
     $contabc->setDescom($fafactur->getDesfac());
     $contabc->setStacom('D');
@@ -1080,7 +1080,7 @@ class Factura {
 
   public static function documentoXCobrar($fafactur)
   {
-    $fatipmov = FatipmovPeer::getFirst();
+    $fatipmov = Fatipmov::getFirst();
     if(!$fatipmov){
       
     }else{
