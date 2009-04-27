@@ -2169,8 +2169,8 @@ class Nomina {
             if (checkdate(intval($fec1_aux[1]), intval($fec1_aux[0]), intval($fec1_aux[2])) && checkdate(intval($fec2_aux[1]), intval($fec2_aux[0]), intval($fec2_aux[2]))) {
               $criterio = "Select sum(monto) as monto from nphiscon where  codnom='" . substr($token, 1, 3) . "'
                                           and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
-              $criterio2 = " fecnom>=TO_DATE('" . $fec1 . "','yyyy-mm-dd') and
-                                          fecnom<=TO_DATE('" . $fec2 . "','yyyy-mm-dd') ";
+              $criterio2 = " fecnom>=TO_DATE('" . $fec1 . "','dd/mm/yyyy') and
+                                          fecnom<=TO_DATE('" . $fec2 . "','dd/mm/yyyy') ";
 
 
               if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
@@ -3338,8 +3338,8 @@ class Nomina {
             if (checkdate(intval($fec1_aux[1]), intval($fec1_aux[0]), intval($fec1_aux[2])) && checkdate(intval($fec2_aux[1]), intval($fec2_aux[0]), intval($fec2_aux[2]))) {
               $criterio = "Select sum(monto) as monto from nphiscon where  codnom='" . substr($campo, 1, 3) . "'
                                           and codemp='" . $empleado . "'  and codcon='" . substr($campo, 4, 3) . "' and ";
-              $criterio2 = " TO_DATE(TO_CHAR(fecnom,'DD/MM/YYYY'),'DD/MM/YYYY')>=TO_DATE('" . $fec1 . "','DD/MM/YYYY') and
-                                          TO_DATE(TO_CHAR(fecnom,'DD/MM/YYYY'),'DD/MM/YYYY')<=TO_DATE('" . $fec2 . "','DD/MM/YYYY') ";
+              $criterio2 = " TO_DATE(TO_CHAR(fecnom,'DD/MM/YYYY'),'DD/MM/YYYY')>=TO_DATE('" . $fec1 . "','dd/mm/yyyy') and
+                                          TO_DATE(TO_CHAR(fecnom,'DD/MM/YYYY'),'DD/MM/YYYY')<=TO_DATE('" . $fec2 . "','dd/mm/yyyy') ";
               if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
                 if (empty ($tabla[0]["monto"])) {
                   $aux = $tabla[0]["monto"];
