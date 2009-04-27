@@ -29,15 +29,23 @@ class Cobdetfor extends BaseCobdetfor
 
   public function getCodtip(){
 
-  	 $val=substr(self::getNumide(),0,4);
+    $genmov=Herramientas::getX('Id','Fatippag','Genmov',self::getFatippagId());
+    if ($genmov=='S')
+    {
+      $val=substr(self::getNumide(),0,4);
+    }else $val="";
 
      return $val;
   }
 
   public function getNumide2(){
-
+    $genmov=Herramientas::getX('Id','Fatippag','Genmov',self::getFatippagId());
+    if ($genmov=='S')
+    {
      $longitud=strlen(self::getNumide());
   	 $val=substr(self::getNumide(),4,$longitud);
+    }else  $val=self::getNumide();
+
 
      return $val;
   }

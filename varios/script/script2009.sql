@@ -643,3 +643,13 @@ ALTER TABLE cpdefniv ADD COLUMN btneli boolean;
 
 ALTER TABLE cpdefniv ADD COLUMN btnanu boolean;
 
+--Campos que le faltan a la bd de suvinca
+ALTER TABLE "cireging"
+  ADD COLUMN "numdep" varchar(50),
+  ADD COLUMN "numofi" VARCHAR(50),
+  ADD COLUMN "numcom" VARCHAR(8),
+  ADD COLUMN "reflib" VARCHAR(20),
+  ADD COLUMN "staliq" VARCHAR(1),
+  ADD COLUMN "fecliq" DATE,
+  ADD COLUMN "refliq" VARCHAR(10),
+  ADD COLUMN "desliq" VARCHAR(250);
