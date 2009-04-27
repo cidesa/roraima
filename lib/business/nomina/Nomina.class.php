@@ -1831,17 +1831,17 @@ class Nomina {
           {
             $valor = 0;
           }*/
-        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=to_char(c.profec,'MM-yyyy')  ";
+        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='06728565' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=to_char(c.profec,'MM-yyyy')  ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
-           $valor = $tabla[0]["campo"];
+         $valor = $tabla[0]["campo"];
         }
         else
         {
           $valor = 0;
         }
-        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npnomcal A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom ";
+        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npnomcal A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='06728565' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
-           $valor = $valor+$tabla[0]["campo"];
+        $valor = $valor+$tabla[0]["campo"];
         }
         else
         {
@@ -2162,8 +2162,8 @@ class Nomina {
           } // fin PROMEDIO
           elseif (substr($token, 23, 1) == 'S') // SUM
           {
-            $fec1 = substr($token, 7, 2) . '/' . substr($token, 9, 2) . '/' . substr($token, 11, 4);
-            $fec2 = substr($token, 15, 2) . '/' . substr($token, 17, 2) . '/' . substr($token, 19, 4);
+            $fec1 = substr($token, 9, 2) . '/' . substr($token, 7, 2) . '/' . substr($token, 11, 4);
+            $fec2 = substr($token, 17, 2) . '/' . substr($token, 15, 2) . '/' . substr($token, 19, 4);
             $fec1_aux = split("/", $fec1);
             $fec2_aux = split("/", $fec2);
             if (checkdate(intval($fec1_aux[1]), intval($fec1_aux[0]), intval($fec1_aux[2])) && checkdate(intval($fec2_aux[1]), intval($fec2_aux[0]), intval($fec2_aux[2]))) {
@@ -2171,6 +2171,8 @@ class Nomina {
                                           and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
               $criterio2 = " fecnom>=TO_DATE('" . $fec1 . "','yyyy-mm-dd') and
                                           fecnom<=TO_DATE('" . $fec2 . "','yyyy-mm-dd') ";
+
+
               if (Herramientas :: BuscarDatos($criterio . $criterio2, & $tabla)) {
                 if (empty ($tabla[0]["monto"]) || $tabla[0]["monto"] == null) {
                   $aux = 0;
@@ -2178,6 +2180,7 @@ class Nomina {
                   $aux = $tabla[0]["monto"];
                 }
                 $valor = $aux;
+
               }
             } else // no son fechas
               {
@@ -3290,8 +3293,9 @@ class Nomina {
         {
           if (substr($campo, 23, 1) == 'P') // PROMEDIO
             {
-            $fec1 = substr($campo, 7, 2) . '/' . substr($campo, 9, 2) . '/' . substr($campo, 11, 4);
-            $fec2 = substr($campo, 15, 2) . '/' . substr($campo, 17, 2) . '/' . substr($campo, 19, 4);
+
+            $fec1 = substr($campo, 9, 2) . '/' . substr($campo, 7, 2) . '/' . substr($campo, 11, 4);
+            $fec2 = substr($campo, 17, 2) . '/' . substr($campo, 15, 2) . '/' . substr($campo, 19, 4);
             $fec1_aux = split("/", $fec1);
             $fec2_aux = split("/", $fec2);
             if (checkdate(intval($fec1_aux[1]), intval($fec1_aux[0]), intval($fec1_aux[2])) && checkdate(intval($fec2_aux[1]), intval($fec2_aux[0]), intval($fec2_aux[2]))) {
