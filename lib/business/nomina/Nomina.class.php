@@ -1831,7 +1831,7 @@ class Nomina {
           {
             $valor = 0;
           }*/
-        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='06728565' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=to_char(c.profec,'MM-yyyy')  ";
+        $criterio = "Select coalesce(SUM(a.Monto),0) as campo from npHISCON A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom and TO_CHAR(A.FECNOM,'MM-yyyy')=to_char(c.profec,'MM-yyyy')  ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
          $valor = $tabla[0]["campo"];
         }
@@ -1839,7 +1839,7 @@ class Nomina {
         {
           $valor = 0;
         }
-        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npnomcal A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='06728565' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom ";
+        $criterio = "Select coalesce(SUM(a.saldo),0) as campo from npnomcal A,NPCONSALINT B,NPNOMINA C where  A.CODCON=B.CODCON  and a.codemp='" . $empleado . "' AND  a.codNOM='" . $nomina . "' and  b.codNOM='" . $nomina . "' and a.codnom=c.codnom and a.codnom=b.codnom ";
         if (Herramientas :: BuscarDatos($criterio, & $tabla)) {
         $valor = $valor+$tabla[0]["campo"];
         }
@@ -2167,7 +2167,7 @@ class Nomina {
             $fec1_aux = split("/", $fec1);
             $fec2_aux = split("/", $fec2);
             if (checkdate(intval($fec1_aux[1]), intval($fec1_aux[0]), intval($fec1_aux[2])) && checkdate(intval($fec2_aux[1]), intval($fec2_aux[0]), intval($fec2_aux[2]))) {
-              $criterio = "Select sum(monto) as monto from nphiscon where  codnom='" . substr($token, 1, 3) . "'
+              $criterio = "Select coalesce(SUM(monto),0) as monto from nphiscon where  codnom='" . substr($token, 1, 3) . "'
                                           and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
               $criterio2 = " fecnom>=TO_DATE('" . $fec1 . "','dd/mm/yyyy') and
                                           fecnom<=TO_DATE('" . $fec2 . "','dd/mm/yyyy') ";
@@ -2179,14 +2179,14 @@ class Nomina {
                 } else {
                   $aux = $tabla[0]["monto"];
                 }
-                $valor = $aux;
+              $valor = $aux;
 
               }
             } else // no son fechas
               {
               $numero = floatval(substr($token, 24));
               $diferencia = Herramientas :: dateAdd('m', $numero, $fecnom, '-');
-              $criterio = "Select sum(monto) as monto from nphiscon where  codnom='" . substr($token, 1, 3) . "'
+              $criterio = "Select coalesce(SUM(monto),0) as monto from nphiscon where  codnom='" . substr($token, 1, 3) . "'
                                           and codemp='" . $empleado . "'  and codcon='" . substr($token, 4, 3) . "' and ";
               $criterio2 = " fecnom>=TO_DATE('" . $diferencia . "','yyyy-mm-dd') and
                                           fecnom<=TO_DATE('" . $fecnom . "','yyyy-mm-dd') ";
