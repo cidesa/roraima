@@ -362,6 +362,7 @@ class Factura {
         }
 	  	$j++;
 	  }
+    }
 
      if ($fafactur->getVuelto()>0)  //Asiento Contable del Vuelto
      {
@@ -494,8 +495,7 @@ class Factura {
 
         }
       	$j++;
-      }
-    }
+      }    
   }
 
   public static function guardarAsientos($ctacont,$desdoc,$debcre,$monto,&$arrasientos,&$pos)
@@ -546,7 +546,7 @@ class Factura {
     $contabc->setDescom($fafactur->getDesfac());
     $contabc->setStacom('D');
     $contabc->setTipcom(null);
-    $contabc->setMoncom($fafactur->getMoncan());
+    $contabc->setMoncom($fafactur->getMonfac());
     $contabc->save();
 
     self::grabarComprobanteDetalle($fafactur,$correl3,$arrasientos,&$pos);

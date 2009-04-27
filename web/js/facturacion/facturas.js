@@ -1059,8 +1059,16 @@
 
     var nmoncanc= toFloat('fafactur_moncan');
     var calculo= montota - ntotaldesc - nmoncanc;
-    $('fafactur_vuelto').value=format(calculo.toFixed(2),'.',',','.');
     $('fafactur_monres').value=format(calculo.toFixed(2),'.',',','.');
+    if (nmoncanc>0)
+    {
+    $('fafactur_vuelto').value=format(calculo.toFixed(2),'.',',','.');
+    }
+    else
+    {
+     $('fafactur_vuelto').value="0,00";
+    }
+
   }
 
  function recargo_repetido(id)
@@ -1301,6 +1309,8 @@
 
    if ($('fafactur_tipref').value=='P')
    {
+   	 $('descuent').hide();
+   	 $('recarg').hide();
    	 $('fafactur_combo').readonly=true;
    	 $$('.botoncat')[2].hide();
      $('pedid').show();
@@ -1309,6 +1319,7 @@
    if ($('fafactur_tipref').value=='D' || $('fafactur_tipref').value=='VC')
    {
    	 $('despach').show();
+   	 $('recarg').hide();
    	 $('pedid').hide();
    	 $('fafactur_combo').readonly=true;
    	 $$('.botoncat')[2].hide();
@@ -2595,7 +2606,7 @@
    var num1=toFloat(id);
    var num0=toFloat(cansol);
    var num3=toFloat(distot);
-   var num6=toFloat(colcanpreart);
+   var num6=toFloat(canpreart);
 
   if (am>0 && $(id).value!="")
   {
@@ -2659,7 +2670,7 @@
                }
              }
 
-             if ($(precio).value!="")
+             if ($(precio).value!="" || $(precio2).value!="")
              {
                var producto= num4*num1;
                if (!validarnumero(monrgo))
@@ -2764,7 +2775,6 @@
    var num1=toFloat(id);
    var num0=toFloat(cansol);
    var num3=toFloat(distot);
-   var num6=toFloat(colcanpreart);
 
     var am=totalregistros('ax',3,25);
     if (am>0 && $(id).value!="")
