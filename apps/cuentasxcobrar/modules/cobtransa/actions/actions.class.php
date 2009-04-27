@@ -96,7 +96,7 @@ class cobtransaActions extends autocobtransaActions
     }
     $this->columnas[1][1]->setHTML('size=10 onKeyPress=montopagar(event,this.id);');
     $this->columnas[1][4]->setCombo($this->cobtransa->getBancos());
-    $this->columnas[1][4]->setHTML('disabled=true');
+    //$this->columnas[1][4]->setHTML('disabled=true');
     $this->objformapagos = $this->columnas[0]->getConfig($reg1);
 
     $this->cobtransa->setObjformapagos($this->objformapagos);
@@ -484,8 +484,7 @@ class cobtransaActions extends autocobtransaActions
           $this->getUser()->getAttributeHolder()->remove('credito',$formulario[$i]);
           $this->getUser()->getAttributeHolder()->remove('grid',$formulario[$i]);
 
-          Tesoreria::Salvarconfincomgen($numcom,$reftra,$feccom,$descom,$debito,$credito);
-          Tesoreria::Salvar_asientosconfincomgen($numcom,$reftra,$feccom,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
+          $numcom = Comprobante::SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid,$this->getUser()->getAttribute('grabar',null,$formulario[$i]));
          }
          $i++;
         }
@@ -523,16 +522,15 @@ class cobtransaActions extends autocobtransaActions
   	  Herramientas::EliminarRegistro('Cobrectra','Numtra',$cobtransa->getNumtra());
   	  Herramientas::EliminarRegistro('Cobdestra','Numtra',$cobtransa->getNumtra());
   	  Herramientas::EliminarRegistro('Cobdetfor','Numtra',$cobtransa->getNumtra());
-  	  Herramientas::EliminarRegistro('Cobdettra','Numtra',$cobtransa->getNumtra());
   	  Cuentasxcobrar::actualizaTransacion($cobtransa->getNumtra(),$cobtransa->getFectra(),$cobtransa->getCodcli());
+  	  Herramientas::EliminarRegistro('Cobdettra','Numtra',$cobtransa->getNumtra());
   	  $cobtransa->delete();
+  	  return -1;
 
-    }
+    }else
     {
       return 1804;
     }
-    return -1;
-
   }
 
   public function executeAnular()

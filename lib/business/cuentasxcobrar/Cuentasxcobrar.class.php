@@ -462,35 +462,50 @@ class Cuentasxcobrar {
   }
 
 
-    public static function generarComprobante($cobtransa,$formapagos,$recargos,$descuentos,&$msjuno,&$arrcompro)
+  public static function generarComprobante($cobtransa,$formapagos,$recargos,$descuentos,&$msjuno,&$arrcompro)
   {
-  	$refnumtra="CC".substr($cobtransa->getNumtra(),2,6);
-    $numcom=OrdendePago::Buscar_Correlativo();
+  	$refnumtra="CC".substr($cobtransa->getNumtra(),4,6);
+    $numcom='########';;
     $reftra=$refnumtra;
     $codigocuenta=""; $tipo=""; $des=""; $monto="";  $codigocuentas=""; $tipo1=""; $desc="";
     $monto1=""; $codigocuenta2=""; $tipo2=""; $des2=""; $monto2=""; $cuentas=""; $tipos="";
     $montos=""; $descr=""; $msjuno="";
 
-    $debcre=H::getX('Id','Fatipmov','Debcre',$cobtransa->getFatipmovId());
-    $ctacli=H::getX('Codpro','Facliente','Codcta',$cobtransa->getCodcli());
+    $r= new Criteria();
+    $r->add(FatipmovPeer::ID,$cobtransa->getFatipmovId());
+    $dat= FatipmovPeer::doSelectOne($r);
+    if ($dat)
+    {
+      $debcre=$dat->getDebcre();
+      $ctacon=$dat->getCodcta();
+    }
+
+    $e= new Criteria();
+    $e->add(FaclientePeer::CODPRO,$cobtransa->getCodcli());
+    $dat1= FaclientePeer::doSelectOne($e);
+    if ($dat1)
+    {
+    	$ctacli=$dat1->getCodcta();
+    }
 
     if ($debcre=='C')
     {
       $x=$formapagos[0];
       $j=0;
+      $y=0;
       if (count($x)>0)
       {
 	      while ($j<count($x))
 	      {
             if ($x[$j]->getMonpag()>0)
             {
-              $codigocuenta="";
+              $codigocuenta=$ctacon;
               $tipo='D';
               $des="";
               $moncau=$x[$j]->getMonpag();
               $monto=$moncau;
 
-              if ($j==0)
+              if ($y==0)
 	          {
 	            $codigocuentas=$codigocuenta;
 	            $desc=$des;
@@ -504,6 +519,7 @@ class Cuentasxcobrar {
 	          $tipo1=$tipo1.'_'.$tipo;
 	          $monto1=$monto1.'_'.$monto;
 	          }
+	          $y++;
             }
 	    	$j++;
 	      }
@@ -525,7 +541,7 @@ class Cuentasxcobrar {
               $moncau=$z[$a]->getMondes();
               $monto=$moncau;
 
-              if ($j==0)
+              if ($y==0)
 	          {
 	            $codigocuentas=$codigocuenta;
 	            $desc=$des;
@@ -539,6 +555,7 @@ class Cuentasxcobrar {
 	          $tipo1=$tipo1.'_'.$tipo;
 	          $monto1=$monto1.'_'.$monto;
 	          }
+	          $y++;
              }
             }
 	    	$a++;
@@ -570,7 +587,7 @@ class Cuentasxcobrar {
               $moncau=$y[$l]->getMonrec();
               $monto=$moncau;
 
-              if ($j==0)
+              if ($y==0)
 	          {
 	            $codigocuentas=$codigocuenta;
 	            $desc=$des;
@@ -584,6 +601,7 @@ class Cuentasxcobrar {
 	          $tipo1=$tipo1.'_'.$tipo;
 	          $monto1=$monto1.'_'.$monto;
 	          }
+	          $y++;
              }
             }
 	      $l++;
@@ -604,6 +622,7 @@ class Cuentasxcobrar {
 
       $y=$recargos[0];
 	  $l=0;
+	  $t=0;
       if (count($y)>0)
       {
 	      while ($l<count($y))
@@ -618,7 +637,7 @@ class Cuentasxcobrar {
               $moncau=$y[$l]->getMonrec();
               $monto=$moncau;
 
-              if ($l==0)
+              if ($t==0)
 	          {
 	            $codigocuentas=$codigocuenta;
 	            $desc=$des;
@@ -632,6 +651,7 @@ class Cuentasxcobrar {
 	          $tipo1=$tipo1.'_'.$tipo;
 	          $monto1=$monto1.'_'.$monto;
 	          }
+	          $t++;
              }
             }
 	      $l++;
@@ -646,13 +666,13 @@ class Cuentasxcobrar {
 	      {
             if ($x[$j]->getMonpag()>0)
             {
-              $codigocuenta="";
+              $codigocuenta=$ctacon;
               $tipo='C';
               $des="";
               $moncau=$x[$j]->getMonpag();
               $monto=$moncau;
 
-		      if ($l==0)
+		      if ($t==0)
 		      {
 		        $codigocuentas=$codigocuenta;
 		        $desc=$des;
@@ -666,6 +686,7 @@ class Cuentasxcobrar {
 		      $tipo1=$tipo1.'_'.$tipo;
 		      $monto1=$monto1.'_'.$monto;
 		      }
+		      $t++;
             }
 	    	$j++;
 	      }
@@ -687,7 +708,7 @@ class Cuentasxcobrar {
               $moncau=$z[$a]->getMondes();
               $monto=$moncau;
 
-              if ($l==0)
+              if ($t==0)
 	          {
 	            $codigocuentas=$codigocuenta;
 	            $desc=$des;
@@ -701,6 +722,7 @@ class Cuentasxcobrar {
 	          $tipo1=$tipo1.'_'.$tipo;
 	          $monto1=$monto1.'_'.$monto;
 	          }
+	          $t++;
              }
             }
 	    	$a++;
@@ -746,11 +768,10 @@ class Cuentasxcobrar {
       foreach ($reg as $obj)
       {
       	$val=strlen($obj->getNumide());
-      	//$val2=$val-4; // -4 porque esa es la longitud del codtip(Tipo de Movimiento)
 
         $c= new Criteria();
         $c->add(TsmovlibPeer::NUMCUE,$obj->getCodban());
-        $c->add(TsmovlibPeer::REFLIB,substr($obj->getNumide(),5,$val));
+        $c->add(TsmovlibPeer::REFLIB,substr($obj->getNumide(),4,$val));
         $c->add(TsmovlibPeer::TIPMOV,substr($obj->getNumide(),0,4));
         $data= TsmovlibPeer::doSelectOne($c);
         if ($data)
@@ -786,7 +807,7 @@ class Cuentasxcobrar {
      $r= new Criteria();
      $r->add(CiregingPeer::REFING,$refdoc);
      $r->add(CiregingPeer::FECING,$fectra);
-     $reg= CiregingPeer::doSelect($r);
+     $reg= CiregingPeer::doSelectOne($r);
      if ($reg)
      {
      	$t= new Criteria();
@@ -794,10 +815,8 @@ class Cuentasxcobrar {
  	    $t->add(CiimpingPeer::FECING,$fectra);
  	    CiimpingPeer::doDelete($t);
 
-     	foreach ($reg as $objdat)
-     	{
-     	  $objdat->delete();
-     	}
+    	$reg->delete();
+
      }
   }
 
@@ -882,8 +901,7 @@ class Cuentasxcobrar {
       foreach ($resultados as $objeto)
       {
         $val=strlen($objeto->getNumide());
-      	//$val2=$val-4; // -4 porque esa es la longitud del codtip(Tipo de Movimiento)
-      	$sreflib=substr($objeto->getNumide(),5,$val);
+      	$sreflib=substr($objeto->getNumide(),4,$val);
 
         $c= new Criteria();
         $c->add(TsmovlibPeer::NUMCUE,$objeto->getCodban());
@@ -947,7 +965,12 @@ class Cuentasxcobrar {
               $cobdetfor->setCodcli($cobtransa->getCodcli());
               $cobdetfor->setCorrel($j);
               $cobdetfor->setFatippagId($x[$j]->getFatippagId());
-              $cobdetfor->setNumide($x[$j]->getCodtip().$x[$j]->getNumide2());
+              if ($x[$j]->getCodtip()!="")
+              {
+                $cobdetfor->setNumide($x[$j]->getCodtip().$x[$j]->getNumide2());
+              }else {
+              	$cobdetfor->setNumide($x[$j]->getNumide2());
+              }
               $cobdetfor->setCodban($x[$j]->getCodban());
               $cobdetfor->setMonpag($x[$j]->getMonpag());
               $cobdetfor->save();
@@ -963,7 +986,7 @@ class Cuentasxcobrar {
                   $montoop=$x[$j]->getMonpag();
                   $numreflib=$x[$j]->getNumide2();
                   $comprob=$cobtransa->getNumcom();
-                  self::generaMovlibTransacciones($x[$j]->getCodban(),$numreflib,$cobtransa->getFectra(),$x[$j]->getCodtip(),$desocp,$montoop,$comprob);
+                 self::generaMovlibTransacciones($x[$j]->getCodban(),$numreflib,$cobtransa->getFectra(),$x[$j]->getCodtip(),$desocp,$montoop,$comprob);
               	}
               }
 		  	}
@@ -1007,7 +1030,7 @@ class Cuentasxcobrar {
   {
   	$q= new Criteria();
   	$q->add(CobdetforPeer::NUMTRA,$numtra);
-  	$resul= CobdetforPeer::doSelectOne($q);
+  	$resul= CobdetforPeer::doSelect($q);
   	if ($resul)
   	{
   		foreach ($resul as $obj)

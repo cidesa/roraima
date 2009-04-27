@@ -588,18 +588,18 @@ function recargos(id)
       }
 
       //en caso de que se la columna 3
-       $(numero).readOnly=true;
-       if ($(genmov).value=='S')
-       {
-        $(numero).readOnly=false;
-       }
+       //$(numero).readOnly=true;
+//       if ($(genmov).value=='S')
+//       {
+  //      $(numero).readOnly=false;
+    //   }
 
        //en caso de que se la columna 4
-        $(banco).disabled=true;
-        if ($(genmov).value=='S')
-       {
-        $(banco).disabled=false;
-       }
+      //  $(banco).disabled=true;
+      //  if ($(genmov).value=='S')
+       //{
+        //$(banco).disabled=false;
+       //}
      i++;
     }
   }

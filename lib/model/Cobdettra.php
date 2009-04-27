@@ -28,6 +28,7 @@ class Cobdettra extends BaseCobdettra
 	$documentos = CobdocumePeer::doSelectOne($c);
     if($documentos)
     {
+    $this->saldoc=number_format($documentos->getSaldoc(),2,',','.');
     $this->montotal= $documentos->getMondoc() + $documentos->getRecdoc() - $documentos->getDscdoc();
     $this->monpagado=number_format($documentos->getAbodoc(),2,',','.');
     $this->montotalformato=number_format($this->montotal,2,',','.');

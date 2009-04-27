@@ -25,7 +25,7 @@ opciones:                  # Opciones generales
   tipo:                    t
   nombrecampo:             numide2
   esgrabable:              true
-  html:                    [size="15" readonly=true maxlength=8]
+  html:                    [size="15" maxlength=8]
 4:
   titulo:                  Banco
   tipo:                    t
