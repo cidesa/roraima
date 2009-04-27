@@ -461,7 +461,7 @@ if ( ($opordpag->getId()!='')) //ES CONSULTA
     }
 ?>
 
-<filedset>
+<fieldset>
 <div id="anul" style="display:none">
  <?php echo label_for('opordpag[desanu]', __($labels['opordpag{desanu}']), '') ?>
   <div class="content<?php if ($sf_request->hasError('opordpag{desanu}')): ?> form-error<?php endif; ?>">
@@ -832,10 +832,8 @@ function num(e) {
 
             var status='Todas';
 
-        //$this->despacho=str_replace('*',' ',$_GET["despacho"]);
           var  ruta='http://'+'<? echo $this->getContext()->getRequest()->getHost();?>';
-          //pagina=ruta+"/reportes/reportes/tesoreria/r.php=?r=oprordpre.php&ordpagdes="+ordpagdes+"&ordpaghas="+ordpaghas+"&codprodes="+codprodes+"&codprohas="+codprohas+"&fecorddes="+fecorddes+"&fecordhas="+fecordhas;
-          pagina=ruta+"/reportes/reportes/tesoreria/roprordpre.php?ordpagdes="+ordpagdes+"&ordpaghas="+ordpaghas+"&codprodes="+codprodes+"&codprohas="+codprohas+"&tiporddes="+tiporddes+"&tipordhas="+tipordhas+"&fecorddes="+fecorddes+"&fecordhas="+fecordhas+"&status="+status;
+          pagina=ruta+"/<? echo $sf_user->getAttribute('reportes_web');?>/tesoreria/r.php?r=oprordpre.php&ordpagdes="+ordpagdes+"&ordpaghas="+ordpaghas;
           window.open(pagina,1,"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
       }
   }
