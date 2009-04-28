@@ -495,7 +495,7 @@ class Factura {
 
         }
       	$j++;
-      }    
+      }
   }
 
   public static function guardarAsientos($ctacont,$desdoc,$debcre,$monto,&$arrasientos,&$pos)
@@ -1084,7 +1084,7 @@ class Factura {
   {
     $fatipmov = Fatipmov::getFirst();
     if(!$fatipmov){
-      
+
     }else{
       $cobdocume= new Cobdocume();
       $cobdocume->setCodcli($fafactur->getCodcli());
