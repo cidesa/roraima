@@ -1008,9 +1008,18 @@ $this->Bitacora('Guardo');
     $numcom2=$this->getRequestParameter('numcom2');
     if($numcom2=='********') $numcom2 = "########";
     if($numcom=='********') $numcom = "########";
-
+    $this->msgpercer="";
+    $idmovseglib=$this->getRequestParameter('id');
+    $this->id=$idmovseglib;
     $this->msg='';
 
+   if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
+   {
+     $coderror=529;
+     $this->msgpercer = Herramientas::obtenerMensajeError($coderror);
+   }
+   else
+   {
     $sql="Select stacon,tipmov,monmov,codcta,numcue From TsMovLib Where NumCue = '".$numcue."' And RefLib = '".$reflib."' and TipMov = '".$tipmov."' ";
     if (Herramientas::BuscarDatos($sql,&$tsmovlib))
       {
@@ -1090,8 +1099,9 @@ $this->Bitacora('Guardo');
           $tsmovlibA->save();
 
           Tesoreria::actualiza_Bancos('A','D',$numcue,$monmov);
-        }
-      }
+        }//if (!$tsmovlib[0]["stacon"]!='C')
+      }//  if (Herramientas::BuscarDatos($sql,&$tsmovlib))
+     }//else if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tsmovlib[feclib]'))==true)
     return sfView::SUCCESS;
   }
 
