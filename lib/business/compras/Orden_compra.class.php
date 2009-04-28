@@ -343,7 +343,7 @@ class Orden_compra
                   if (Herramientas::BuscarDatos($sql2,&$result2))
                   {
                     $grid['id']=$i;
-                    if ($result[0]['monrgo']>0)
+                    if ($result[$i]['monrgo']>0)
                        $grid['check'] = '1';
                     else
                       $grid['check'] = '0';
