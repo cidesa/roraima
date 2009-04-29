@@ -28,6 +28,8 @@ class Opordpag extends BaseOpordpag
   protected $lonubi = 0;
   protected $idrefer="";
   protected $codcat="";
+  protected $genctaord="";
+  protected $filasord=0;
 
 
    public function afterHydrate()
@@ -133,5 +135,32 @@ class Opordpag extends BaseOpordpag
   {
     return $this->fechas;
   }
+
+  public function getGenctaord()
+    {
+      $d= new Criteria();
+      $data=OpdefempPeer::doSelectOne($d);
+      if ($data)
+      {
+      	$si=$data->getGenctaord();
+      }else $si=null;
+      return $si;
+    }
+
+  public function getDesmotanu()
+  {
+  return Herramientas::getX('CODMOTANU','Tsmotanu','Desmotanu',self::getCodmotanu());
+  }
+
+  public function getReqaprord()
+    {
+      $d= new Criteria();
+      $data=OpdefempPeer::doSelectOne($d);
+      if ($data)
+      {
+      	$si=$data->getReqaprord();
+      }else $si=null;
+      return $si;
+    }
 
 }
