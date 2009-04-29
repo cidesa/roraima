@@ -5103,6 +5103,79 @@ A.CODREDE"
   }
 
 
+  public function Cpcompro_PreAjuste($params= array())
+  {
+    $this->c = new Criteria();
+    $this->c->add(CpcomproPeer::STACOM,'A');
+    $this->sql = "feccom <= to_date('$params[0]','dd/mm/yyyy')";
+    $this->c->add(CpcomproPeer::FECCOM, $this->sql, Criteria::CUSTOM);
+    $this->sql = "(moncom-salaju-salcau) > 0";
+    $this->c->add(CpcomproPeer::MONCOM, $this->sql, Criteria::CUSTOM);
+    $this->c->addAscendingOrderByColumn(CpcomproPeer :: REFCOM);
+
+
+    $this->columnas = array (
+      CpcomproPeer :: REFCOM => 'Referencia',
+      CpcomproPeer :: FECCOM => 'Fecha',
+      CpcomproPeer :: DESCOM => 'Descripcion',
+      CpcomproPeer :: MONCOM => 'Monto'
+    );
+  }
+
+  public function Cpcausad_PreAjuste($params= array())
+  {
+    $this->c = new Criteria();
+    $this->c->add(CpcausadPeer::STACAU,'A');
+    $this->sql = "feccau <= to_date('$params[0]','dd/mm/yyyy')";
+    $this->c->add(CpcausadPeer::FECCAU, $this->sql, Criteria::CUSTOM);
+    $this->sql = "(moncau-salaju-salpag) > 0";
+    $this->c->add(CpcausadPeer::MONCAU, $this->sql, Criteria::CUSTOM);
+    $this->c->addAscendingOrderByColumn(CpcausadPeer :: REFCAU);
+
+    $this->columnas = array (
+      CpcausadPeer :: REFCAU => 'Referencia',
+      CpcausadPeer :: FECCAU => 'Fecha',
+      CpcausadPeer :: DESCAU => 'Descripcion',
+      CpcausadPeer :: MONCAU => 'Monto'
+    );
+  }
+
+  public function Cppagos_PreAjuste($params= array())
+  {
+    $this->c = new Criteria();
+    $this->c->add(CppagosPeer::STAPAG,'A');
+    $this->sql = "fecpag <= to_date('$params[0]','dd/mm/yyyy')";
+    $this->c->add(CppagosPeer::FECPAG, $this->sql, Criteria::CUSTOM);
+    $this->sql = "(monpag-salaju) > 0";
+    $this->c->add(CppagosPeer::MONPAG, $this->sql, Criteria::CUSTOM);
+    $this->c->addAscendingOrderByColumn(CppagosPeer :: REFPAG);
+
+    $this->columnas = array (
+      CppagosPeer :: REFPAG => 'Referencia',
+      CppagosPeer :: FECPAG => 'Fecha',
+      CppagosPeer :: DESPAG => 'Descripcion',
+      CppagosPeer :: MONPAG => 'Monto'
+    );
+  }
+
+  public function Cpprecom_PreAjuste($params= array())
+  {
+    $this->c = new Criteria();
+    $this->c->add(CpprecomPeer::STAPRC,'A');
+    $this->sql = "fecprc <= to_date('$params[0]','dd/mm/yyyy')";
+    $this->c->add(CpprecomPeer::FECPRC, $this->sql, Criteria::CUSTOM);
+    $this->sql = "(monprc-salaju-salcom) > 0";
+    $this->c->add(CpprecomPeer::MONPRC, $this->sql, Criteria::CUSTOM);
+    $this->c->addAscendingOrderByColumn(CpprecomPeer :: REFPRC);
+
+    $this->columnas = array (
+      CpprecomPeer :: REFPRC => 'Referencia',
+      CpprecomPeer :: FECPRC => 'Fecha',
+      CpprecomPeer :: DESPRC => 'Descripcion',
+      CpprecomPeer :: MONPRC => 'Monto'
+    );
+  }
+
 
 
 
