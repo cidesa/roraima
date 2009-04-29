@@ -16,10 +16,10 @@ compras:
     imagenes:
       default: OperatorClass.png
   menu:
-    Contratistas de Bienes o Servicio y Cooperativas:
+    Definiciones Generales:
       Definición de Grupos de Recaudos:                       AlmTipRecPro
       Definición de Recaudos:                                 AlmRegRec
-      Registro de Contratistas de Bienes o Servicio y Cooperativas:                  AlmRegPro
+      Registro de Proveedores:                                AlmRegPro
       Definición de Condiciones de Pago:                      AlmConPag
       Definición de Formas de Entrega:                        AlmForEnt
       Definición de Razones de Compra:                        AlmRazCom
@@ -28,10 +28,10 @@ compras:
       Definición de Tipos de Entrada:                         AlmTipEnt
       Definición de Tipos de Salida:                          AlmTipSal
       Definición de Tipo de Proyecto:                         almtippro
-    Artículos:
-      Definición de Artículos:                                AlmDefArt
       Definición de Ubicaciones:                              AlmDefUbi
       Ramos de Artículos:                                     AlmRamArt
+    Artículos:
+      Definición de Artículos:                                AlmDefArt
       Registro de Artículos y+o Servicios:                    AlmRegArt
       Registro de Recargos:                                   AlmRegRgo
      # Asociación  de Retenciones a Servicios:                 AlmRetSer
