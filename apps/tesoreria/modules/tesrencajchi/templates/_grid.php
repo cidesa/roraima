@@ -6,5 +6,5 @@
 </div>
 
 <script language="JavaScript" type="text/javascript">
-  ActualizarSaldosGrid("a",new Array("opordpag_monord"));
+  totalfil('<?php echo $opordpag->getFilasord() ?>');
 </script>

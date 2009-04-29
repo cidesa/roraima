@@ -208,7 +208,8 @@ class tesmovsalcajActions extends autotesmovsalcajActions
    $c->add(TsmovlibPeer::REFLIB,$tssalcaj->getRefsal());
    $c->add(TsmovlibPeer::NUMCUE,$tssalcaj->getNumcue());
    TsmovlibPeer::doDelete($c);
-   //return -1;
+   $tssalcaj->delete();
+   return -1;
   }
 
 

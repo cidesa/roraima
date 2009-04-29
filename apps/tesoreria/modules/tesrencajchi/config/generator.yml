@@ -27,7 +27,7 @@ generator:
       display:
         "Datos": [numord, _fecemi, desord, _coduni, _tipfin, monord]
         "Imputaciones Presupuestarias": [_grid]
-      hide: [tipcau, cedrif, mascaraubi, lonubi, codcat, idrefer, totalcomprobantes, numcom]
+      hide: [tipcau, cedrif, mascaraubi, lonubi, codcat, idrefer, totalcomprobantes, numcom, filasord]
       actions:
         _list:        ~
         _save:        ~

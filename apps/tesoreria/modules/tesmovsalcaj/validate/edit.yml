@@ -7,7 +7,7 @@ names:
   tssalcaj{refsal}:
     required:  Yes
     required_msg: El Número de Recibo no puedo estar en Blanco
-    #validators: UniqueValidator
+    validators: UniqueValidator
 
   tssalcaj{fecsal}:
     required:  Yes
