@@ -260,6 +260,7 @@ function totalizarMonto(e)
     var nmonto=toFloat(monto);
 
     total =  total +nmonto;
+    $(monto).value=format(nmonto.toFixed(2),'.',',','.');
 
   	i++;
   }
