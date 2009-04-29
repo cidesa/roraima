@@ -4793,6 +4793,7 @@ public function Tsmovlib_tesmovdeglib2()
            $this->c->add(CadetcotPeer::PRIORI,1);
            $this->c->addJoin(CacotizaPeer::REFCOT,CadetcotPeer::REFCOT);
            $this->c->addJoin(CaproveePeer::CODPRO,CacotizaPeer::CODPRO);
+           $this->c->setDistinct();
 
            $this->columnas = array (
         CaproveePeer::RIFPRO => 'Rif',
