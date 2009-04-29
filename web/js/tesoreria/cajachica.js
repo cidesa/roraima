@@ -248,3 +248,20 @@ function totalizarMonto(e)
    }
    return cuentarepetida;
  }
+
+ function totalfil(fil)
+ {
+  var filas=parseInt(fil);
+  var i=0;
+  var total=0;
+  while (i<filas)
+  {
+    var monto="ax_"+i+"_2";
+    var nmonto=toFloat(monto);
+
+    total =  total +nmonto;
+
+  	i++;
+  }
+  $('opordpag_monord').value=format(total.toFixed(2),'.',',','.');
+ }

@@ -62,6 +62,8 @@ class tesrencajchiActions extends autotesrencajchiActions
       $c->add(OpdetordPeer::NUMORD,$numord);
       $detalle = OpdetordPeer::doSelect($c);
     }
+    $this->filajax=count($detalle);
+    $this->opordpag->setFilasord($this->filajax);
 
     $this->columnas = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/tesrencajchi/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_opdetord');
     $this->columnas[1][1]->setEsTotal(true,'opordpag_monord');
@@ -80,13 +82,16 @@ class tesrencajchiActions extends autotesrencajchiActions
     $javascript="";
     switch ($ajax){
       case '1':
+        $javascript="";
         //$fecha=date('Y-m-d',strtotime($codigo));
         $this->params=array();
         $this->labels = $this->getLabels();
         $this->opordpag = $this->getOpordpagOrCreate();
         $this->setVars();
         $this->configGridDetalle('',$this->opordpag->getCodcat(),$this->opordpag->getTipcau(),$codigo);
-        $output = '[["","",""],["","",""],["","",""]]';
+        $filajax=$this->filajax;
+        $javascript="totalfil('$filajax');";
+        $output = '[["javascript","'.$javascript.'",""],["","",""],["","",""]]';
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         break;
       case '2':
