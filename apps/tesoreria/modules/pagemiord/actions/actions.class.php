@@ -121,7 +121,7 @@ class pagemiordActions extends autopagemiordActions
            $this->eti="EN CONTRALORIA";
            break;
          case ('I' || 'N'):
-           $sql="select a.numche as numche,b.feclib as fecemi,b.tipmov as tipo,d.destip as destip,c.nomcue as nomcue
+          $sql="select a.numche as numche,b.feclib as fecemi,b.tipmov as tipo,d.destip as destip,c.nomcue as nomcue, a.tipmov as tipmovche
                  from opordche a, tsmovlib b, tsdefban c,tstipmov d
                  where a.numche=b.reflib and a.codcta=b.numcue and
                  b.numcue=c.numcue and
@@ -141,10 +141,33 @@ class pagemiordActions extends autopagemiordActions
                $this->eti="PAGADA CON ";
              }
 
+             if ($result[0]["tipmovche"]!="")
+             {
+              ///////////////////////////////////////
+               $sql="select a.numche as numche,b.feclib as fecemi,b.tipmov as tipo,d.destip as destip,c.nomcue as nomcue, a.tipmov as tipmovche
+                 from opordche a, tsmovlib b, tsdefban c,tstipmov d
+                 where a.numche=b.reflib and a.codcta=b.numcue and a.tipmov=b.tipmov and
+                 b.numcue=c.numcue and
+                 b.tipmov=d.codtip and d.debcre='C' and
+                 a.numord='".$this->opordpag->getNumord()."'";
+           		$resultad=array();
+          		if (Herramientas::BuscarDatos($sql,$resultad))
+           		{
+           		     foreach ($resultad as $datos)
+		             {
+		               $this->eti=$this->eti.$datos["destip"]." N° ".$datos["numche"]." EL ".date('d/m/Y',strtotime($datos["fecemi"]))." - ".$datos["nomcue"].", ";
+		             }
+           		}
+           		else $this->eti="";
+              ///////////////////////////////////////
+             }
+			else
+			{
              foreach ($result as $datos)
              {
                $this->eti=$this->eti.$datos["destip"]." N° ".$datos["numche"]." EL ".date('d/m/Y',strtotime($datos["fecemi"]))." - ".$datos["nomcue"].", ";
              }
+			}
 
              $this->eti=substr($this->eti,0,strlen($this->eti)-2);
            }

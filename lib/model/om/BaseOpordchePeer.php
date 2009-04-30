@@ -13,7 +13,7 @@ abstract class BaseOpordchePeer {
 	const CLASS_DEFAULT = 'lib.model.Opordche';
 
 	
-	const NUM_COLUMNS = 5;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -32,6 +32,9 @@ abstract class BaseOpordchePeer {
 	const MONPAG = 'opordche.MONPAG';
 
 	
+	const TIPMOV = 'opordche.TIPMOV';
+
+	
 	const ID = 'opordche.ID';
 
 	
@@ -40,18 +43,18 @@ abstract class BaseOpordchePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord', 'Numche', 'Codcta', 'Monpag', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OpordchePeer::NUMORD, OpordchePeer::NUMCHE, OpordchePeer::CODCTA, OpordchePeer::MONPAG, OpordchePeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord', 'numche', 'codcta', 'monpag', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Numord', 'Numche', 'Codcta', 'Monpag', 'Tipmov', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OpordchePeer::NUMORD, OpordchePeer::NUMCHE, OpordchePeer::CODCTA, OpordchePeer::MONPAG, OpordchePeer::TIPMOV, OpordchePeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numord', 'numche', 'codcta', 'monpag', 'tipmov', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numord' => 0, 'Numche' => 1, 'Codcta' => 2, 'Monpag' => 3, 'Id' => 4, ),
-		BasePeer::TYPE_COLNAME => array (OpordchePeer::NUMORD => 0, OpordchePeer::NUMCHE => 1, OpordchePeer::CODCTA => 2, OpordchePeer::MONPAG => 3, OpordchePeer::ID => 4, ),
-		BasePeer::TYPE_FIELDNAME => array ('numord' => 0, 'numche' => 1, 'codcta' => 2, 'monpag' => 3, 'id' => 4, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, )
+		BasePeer::TYPE_PHPNAME => array ('Numord' => 0, 'Numche' => 1, 'Codcta' => 2, 'Monpag' => 3, 'Tipmov' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (OpordchePeer::NUMORD => 0, OpordchePeer::NUMCHE => 1, OpordchePeer::CODCTA => 2, OpordchePeer::MONPAG => 3, OpordchePeer::TIPMOV => 4, OpordchePeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('numord' => 0, 'numche' => 1, 'codcta' => 2, 'monpag' => 3, 'tipmov' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -112,6 +115,8 @@ abstract class BaseOpordchePeer {
 		$criteria->addSelectColumn(OpordchePeer::CODCTA);
 
 		$criteria->addSelectColumn(OpordchePeer::MONPAG);
+
+		$criteria->addSelectColumn(OpordchePeer::TIPMOV);
 
 		$criteria->addSelectColumn(OpordchePeer::ID);
 

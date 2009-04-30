@@ -645,6 +645,7 @@ class Cheques
               $opordche->setNumord($x[$j]->getNumord());
               $opordche->setNumche($numche);
               $opordche->setCodcta($tscheemi->getNumcue());
+              $opordche->setTipmov($tscheemi->getTipdoc());
               $monpagopordche=$x[$j]->getMontotalGrid() + $x[$j]->getMondes();
               $opordche->setMonpag($monpagopordche);
               $opordche->save();
@@ -789,6 +790,9 @@ class Cheques
               $opordche->setNumord($x[$j]->getNumord());
               $opordche->setNumche($numche);
               $opordche->setCodcta($tscheemi->getNumcue());
+              $opordche->setTipmov($tscheemi->getTipdoc());
+
+
               $monpagopordche=$x[$j]->getMontotalGrid() + $x[$j]->getMondes();
               $opordche->setMonpag($monpagopordche);
               $opordche->save();

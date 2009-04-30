@@ -25,6 +25,10 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 
 
 	
+	protected $tipmov;
+
+
+	
 	protected $id;
 
 	
@@ -60,6 +64,13 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->monpag,2,',','.');
     else return $this->monpag;
+
+  }
+  
+  public function getTipmov()
+  {
+
+    return trim($this->tipmov);
 
   }
   
@@ -110,6 +121,16 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setTipmov($v)
+	{
+
+    if ($this->tipmov !== $v) {
+        $this->tipmov = $v;
+        $this->modifiedColumns[] = OpordchePeer::TIPMOV;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -132,7 +153,9 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 
       $this->monpag = $rs->getFloat($startcol + 3);
 
-      $this->id = $rs->getInt($startcol + 4);
+      $this->tipmov = $rs->getString($startcol + 4);
+
+      $this->id = $rs->getInt($startcol + 5);
 
       $this->resetModified();
 
@@ -140,7 +163,7 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 5; 
+            return $startcol + 6; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opordche object", $e);
     }
@@ -300,6 +323,9 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 				return $this->getMonpag();
 				break;
 			case 4:
+				return $this->getTipmov();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -316,7 +342,8 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 			$keys[1] => $this->getNumche(),
 			$keys[2] => $this->getCodcta(),
 			$keys[3] => $this->getMonpag(),
-			$keys[4] => $this->getId(),
+			$keys[4] => $this->getTipmov(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -345,6 +372,9 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 				$this->setMonpag($value);
 				break;
 			case 4:
+				$this->setTipmov($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -358,7 +388,8 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setNumche($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setCodcta($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setMonpag($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setId($arr[$keys[4]]);
+		if (array_key_exists($keys[4], $arr)) $this->setTipmov($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -370,6 +401,7 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpordchePeer::NUMCHE)) $criteria->add(OpordchePeer::NUMCHE, $this->numche);
 		if ($this->isColumnModified(OpordchePeer::CODCTA)) $criteria->add(OpordchePeer::CODCTA, $this->codcta);
 		if ($this->isColumnModified(OpordchePeer::MONPAG)) $criteria->add(OpordchePeer::MONPAG, $this->monpag);
+		if ($this->isColumnModified(OpordchePeer::TIPMOV)) $criteria->add(OpordchePeer::TIPMOV, $this->tipmov);
 		if ($this->isColumnModified(OpordchePeer::ID)) $criteria->add(OpordchePeer::ID, $this->id);
 
 		return $criteria;
@@ -408,6 +440,8 @@ abstract class BaseOpordche extends BaseObject  implements Persistent {
 		$copyObj->setCodcta($this->codcta);
 
 		$copyObj->setMonpag($this->monpag);
+
+		$copyObj->setTipmov($this->tipmov);
 
 
 		$copyObj->setNew(true);
