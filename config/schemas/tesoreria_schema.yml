@@ -726,6 +726,10 @@ propel:
       type: NUMERIC
       size: 20
       scale: 2
+    tipmov:
+      type: VARCHAR
+      size: 4
+      required: true
     id:
       type: INTEGER
       required: true

@@ -653,3 +653,8 @@ ALTER TABLE "cireging"
   ADD COLUMN "fecliq" DATE,
   ADD COLUMN "refliq" VARCHAR(10),
   ADD COLUMN "desliq" VARCHAR(250);
+
+
+--30/04/2008 Añadir campo tipmov a Opordche para poder buscar exactamente el movimiento asociado al cheque en la tabla TSMOVLIB
+ALTER TABLE "opordche"
+  ADD COLUMN "tipmov" VARCHAR(4);
