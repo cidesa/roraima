@@ -15,6 +15,7 @@ class tesmovemicheActions extends autotesmovemicheActions
  private $coderror3 =-1;
  private $coderror4 =-1;
  private $coderror5 =-1;
+ private $coderror6 =-1;
  private $arraynumche="";
  private $form="sf_admin/tesmovemiche/confincomgen";
 
@@ -1088,6 +1089,12 @@ $this->Bitacora('Guardo');
        $err = Herramientas::obtenerMensajeError($this->coderror5);
        $this->getRequest()->setError('tscheemi{fecemi}',$err);
       }
+
+      if($this->coderror6!=-1)
+      {
+       $err = Herramientas::obtenerMensajeError($this->coderror6);
+       $this->getRequest()->setError('tscheemi{fecemi}',$err);
+      }
     }
     return sfView::SUCCESS;
   }
@@ -1099,11 +1106,20 @@ $this->Bitacora('Guardo');
     {
       $this->tscheemi = $this->getTscheemiOrCreate();
       try{ $this->updateTscheemiFromRequest();}catch(Exception $ex){}
+
+  	  if (!Herramientas::validarPeriodoPresuesto($this->getRequestParameter('tscheemi[fecemi]')))
+      {
+        $this->coderror5=142;
+        return false;
+      }
+
+
       if (Tesoreria::validaPeriodoCerrado($this->getRequestParameter('tscheemi[fecemi]'))==true)
   	  {
-        $this->coderror5=529;
+        $this->coderror6=529;
         return false;
   	  }
+
 
       $contaba = ContabaPeer::doSelectOne(new Criteria());
       $saldo=0;
