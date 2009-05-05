@@ -243,13 +243,19 @@ $this->Bitacora('Guardo');
 	{
 	$c = new Criteria();
 	$c->add(CaartsolPeer::REQART,$reqart);
-	$lista_tip = CaartsolPeer::doSelect($c);
+	$articulos = CaartsolPeer::doSelect($c);
+
 
 	$tipos = array();
+	$result= array();
 
-	foreach($lista_tip as $obj_tip)
+	foreach($articulos as $art)
 	{
-	  $tipos += array($obj_tip->getCodart() => $obj_tip->getCodart()." - ".$obj_tip->getDesartsol());
+	 $sql="select a.* from cadetcot a, cacotiza b where a.refcot=b.refcot  and b.refsol= '".$reqart."' and a.codart='".$art->getCodart()."' and not(a.priori) isnull";
+	 if (!Herramientas::BuscarDatos($sql,&$result))
+     {
+	  $tipos += array($art->getCodart() => $art->getCodart()." - ".$art->getDesartsol());
+     }
 	}
 	return $tipos;
     }
@@ -329,8 +335,9 @@ $this->Bitacora('Guardo');
 
 	public function executeGrid()
 	{
+	  $this->ajax="";
 	  if ($this->getRequestParameter('ajax')=='1')
-	  {
+	  { $this->ajax="1";
         $this->configGrid($this->getRequestParameter('reqart'),$this->getRequestParameter('codart'));
 	  }
 	}
@@ -349,4 +356,22 @@ $this->Bitacora('Guardo');
       return $this->coderror;
 	}
   }
+
+    public function executeAjax()
+	{
+	 $reqart=$this->getRequestParameter('reqart');
+	 $c = new Criteria();
+	 $c->add(CaartsolPeer::REQART,$reqart);
+	 $articulos = CaartsolPeer::doSelect($c);
+
+	 $tipos = array();
+
+
+	 foreach($articulos as $art)
+	 {
+	   $tipos += array($art->getCodart() => $art->getCodart()." - ".$art->getDesartsol());
+	 }
+	 $this->articulos= $tipos;
+
+	}
 }
