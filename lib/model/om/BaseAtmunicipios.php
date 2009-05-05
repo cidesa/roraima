@@ -754,4 +754,74 @@ abstract class BaseAtmunicipios extends BaseObject  implements Persistent {
 		return $this->collAtciudadanos;
 	}
 
+
+	
+	public function getAtciudadanosJoinAttipproviv($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+				$this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATMUNICIPIOS_ID, $this->getId());
+
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAttipproviv($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtciudadanoPeer::ATMUNICIPIOS_ID, $this->getId());
+
+			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAttipproviv($criteria, $con);
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+
+		return $this->collAtciudadanos;
+	}
+
+
+	
+	public function getAtciudadanosJoinAttipviv($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+				$this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATMUNICIPIOS_ID, $this->getId());
+
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAttipviv($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtciudadanoPeer::ATMUNICIPIOS_ID, $this->getId());
+
+			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAttipviv($criteria, $con);
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+
+		return $this->collAtciudadanos;
+	}
+
 } 

@@ -149,6 +149,18 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 
 	
+	protected $segpri;
+
+
+	
+	protected $attipproviv_id;
+
+
+	
+	protected $attipviv_id;
+
+
+	
 	protected $id;
 
 	
@@ -165,6 +177,12 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 	
 	protected $aAtinsrefier;
+
+	
+	protected $aAttipproviv;
+
+	
+	protected $aAttipviv;
 
 	
 	protected $collAtestsocecos;
@@ -461,6 +479,27 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
   {
 
     return trim($this->insayuant);
+
+  }
+  
+  public function getSegpri()
+  {
+
+    return $this->segpri;
+
+  }
+  
+  public function getAttipprovivId()
+  {
+
+    return $this->attipproviv_id;
+
+  }
+  
+  public function getAttipvivId()
+  {
+
+    return $this->attipviv_id;
 
   }
   
@@ -848,6 +887,44 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setSegpri($v)
+	{
+
+    if ($this->segpri !== $v) {
+        $this->segpri = $v;
+        $this->modifiedColumns[] = AtciudadanoPeer::SEGPRI;
+      }
+  
+	} 
+	
+	public function setAttipprovivId($v)
+	{
+
+    if ($this->attipproviv_id !== $v) {
+        $this->attipproviv_id = $v;
+        $this->modifiedColumns[] = AtciudadanoPeer::ATTIPPROVIV_ID;
+      }
+  
+		if ($this->aAttipproviv !== null && $this->aAttipproviv->getId() !== $v) {
+			$this->aAttipproviv = null;
+		}
+
+	} 
+	
+	public function setAttipvivId($v)
+	{
+
+    if ($this->attipviv_id !== $v) {
+        $this->attipviv_id = $v;
+        $this->modifiedColumns[] = AtciudadanoPeer::ATTIPVIV_ID;
+      }
+  
+		if ($this->aAttipviv !== null && $this->aAttipviv->getId() !== $v) {
+			$this->aAttipviv = null;
+		}
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -932,7 +1009,13 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
       $this->insayuant = $rs->getString($startcol + 34);
 
-      $this->id = $rs->getInt($startcol + 35);
+      $this->segpri = $rs->getBoolean($startcol + 35);
+
+      $this->attipproviv_id = $rs->getInt($startcol + 36);
+
+      $this->attipviv_id = $rs->getInt($startcol + 37);
+
+      $this->id = $rs->getInt($startcol + 38);
 
       $this->resetModified();
 
@@ -940,7 +1023,7 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 36; 
+            return $startcol + 39; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Atciudadano object", $e);
     }
@@ -1051,6 +1134,20 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 					$affectedRows += $this->aAtinsrefier->save($con);
 				}
 				$this->setAtinsrefier($this->aAtinsrefier);
+			}
+
+			if ($this->aAttipproviv !== null) {
+				if ($this->aAttipproviv->isModified()) {
+					$affectedRows += $this->aAttipproviv->save($con);
+				}
+				$this->setAttipproviv($this->aAttipproviv);
+			}
+
+			if ($this->aAttipviv !== null) {
+				if ($this->aAttipviv->isModified()) {
+					$affectedRows += $this->aAttipviv->save($con);
+				}
+				$this->setAttipviv($this->aAttipviv);
 			}
 
 
@@ -1169,6 +1266,18 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 			if ($this->aAtinsrefier !== null) {
 				if (!$this->aAtinsrefier->validate($columns)) {
 					$failureMap = array_merge($failureMap, $this->aAtinsrefier->getValidationFailures());
+				}
+			}
+
+			if ($this->aAttipproviv !== null) {
+				if (!$this->aAttipproviv->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aAttipproviv->getValidationFailures());
+				}
+			}
+
+			if ($this->aAttipviv !== null) {
+				if (!$this->aAttipviv->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aAttipviv->getValidationFailures());
 				}
 			}
 
@@ -1342,6 +1451,15 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 				return $this->getInsayuant();
 				break;
 			case 35:
+				return $this->getSegpri();
+				break;
+			case 36:
+				return $this->getAttipprovivId();
+				break;
+			case 37:
+				return $this->getAttipvivId();
+				break;
+			case 38:
 				return $this->getId();
 				break;
 			default:
@@ -1389,7 +1507,10 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 			$keys[32] => $this->getAtinsrefierId(),
 			$keys[33] => $this->getAyusolant(),
 			$keys[34] => $this->getInsayuant(),
-			$keys[35] => $this->getId(),
+			$keys[35] => $this->getSegpri(),
+			$keys[36] => $this->getAttipprovivId(),
+			$keys[37] => $this->getAttipvivId(),
+			$keys[38] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1511,6 +1632,15 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 				$this->setInsayuant($value);
 				break;
 			case 35:
+				$this->setSegpri($value);
+				break;
+			case 36:
+				$this->setAttipprovivId($value);
+				break;
+			case 37:
+				$this->setAttipvivId($value);
+				break;
+			case 38:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1555,7 +1685,10 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[32], $arr)) $this->setAtinsrefierId($arr[$keys[32]]);
 		if (array_key_exists($keys[33], $arr)) $this->setAyusolant($arr[$keys[33]]);
 		if (array_key_exists($keys[34], $arr)) $this->setInsayuant($arr[$keys[34]]);
-		if (array_key_exists($keys[35], $arr)) $this->setId($arr[$keys[35]]);
+		if (array_key_exists($keys[35], $arr)) $this->setSegpri($arr[$keys[35]]);
+		if (array_key_exists($keys[36], $arr)) $this->setAttipprovivId($arr[$keys[36]]);
+		if (array_key_exists($keys[37], $arr)) $this->setAttipvivId($arr[$keys[37]]);
+		if (array_key_exists($keys[38], $arr)) $this->setId($arr[$keys[38]]);
 	}
 
 	
@@ -1598,6 +1731,9 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AtciudadanoPeer::ATINSREFIER_ID)) $criteria->add(AtciudadanoPeer::ATINSREFIER_ID, $this->atinsrefier_id);
 		if ($this->isColumnModified(AtciudadanoPeer::AYUSOLANT)) $criteria->add(AtciudadanoPeer::AYUSOLANT, $this->ayusolant);
 		if ($this->isColumnModified(AtciudadanoPeer::INSAYUANT)) $criteria->add(AtciudadanoPeer::INSAYUANT, $this->insayuant);
+		if ($this->isColumnModified(AtciudadanoPeer::SEGPRI)) $criteria->add(AtciudadanoPeer::SEGPRI, $this->segpri);
+		if ($this->isColumnModified(AtciudadanoPeer::ATTIPPROVIV_ID)) $criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->attipproviv_id);
+		if ($this->isColumnModified(AtciudadanoPeer::ATTIPVIV_ID)) $criteria->add(AtciudadanoPeer::ATTIPVIV_ID, $this->attipviv_id);
 		if ($this->isColumnModified(AtciudadanoPeer::ID)) $criteria->add(AtciudadanoPeer::ID, $this->id);
 
 		return $criteria;
@@ -1698,6 +1834,12 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 		$copyObj->setAyusolant($this->ayusolant);
 
 		$copyObj->setInsayuant($this->insayuant);
+
+		$copyObj->setSegpri($this->segpri);
+
+		$copyObj->setAttipprovivId($this->attipproviv_id);
+
+		$copyObj->setAttipvivId($this->attipviv_id);
 
 
 		if ($deepCopy) {
@@ -1891,6 +2033,64 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aAtinsrefier;
+	}
+
+	
+	public function setAttipproviv($v)
+	{
+
+
+		if ($v === null) {
+			$this->setAttipprovivId(NULL);
+		} else {
+			$this->setAttipprovivId($v->getId());
+		}
+
+
+		$this->aAttipproviv = $v;
+	}
+
+
+	
+	public function getAttipproviv($con = null)
+	{
+		if ($this->aAttipproviv === null && ($this->attipproviv_id !== null)) {
+						include_once 'lib/model/om/BaseAttipprovivPeer.php';
+
+			$this->aAttipproviv = AttipprovivPeer::retrieveByPK($this->attipproviv_id, $con);
+
+			
+		}
+		return $this->aAttipproviv;
+	}
+
+	
+	public function setAttipviv($v)
+	{
+
+
+		if ($v === null) {
+			$this->setAttipvivId(NULL);
+		} else {
+			$this->setAttipvivId($v->getId());
+		}
+
+
+		$this->aAttipviv = $v;
+	}
+
+
+	
+	public function getAttipviv($con = null)
+	{
+		if ($this->aAttipviv === null && ($this->attipviv_id !== null)) {
+						include_once 'lib/model/om/BaseAttipvivPeer.php';
+
+			$this->aAttipviv = AttipvivPeer::retrieveByPK($this->attipviv_id, $con);
+
+			
+		}
+		return $this->aAttipviv;
 	}
 
 	

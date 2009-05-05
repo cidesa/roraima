@@ -6,10 +6,10 @@ methods:
    - "atciudadano{tipo}"
    - "atciudadano{fecnac}"
    - "atciudadano{sexo}"
-   - "atciudadano{estciv}"
-   - "atciudadano{atestados_id}"
-   - "atciudadano{atmunicipios_id}"
-   - "atciudadano{atparroquias_id}"
+#   - "atciudadano{estciv}"
+#   - "atciudadano{atestados_id}"
+#   - "atciudadano{atmunicipios_id}"
+#   - "atciudadano{atparroquias_id}"
 
 names:
   atciudadano{cedciu}:
@@ -43,22 +43,22 @@ names:
     required_msg: Este campo es requerido
     validators: MyStringValidator3
 
-  atciudadano{estciv}:
-    required:  Yes
-    required_msg: Este campo es requerido
-    validators: MyStringValidator3
+#  atciudadano{estciv}:
+#    required:  Yes
+#    required_msg: Este campo es requerido
+#    validators: MyStringValidator3
 
-  atciudadano{atestados_id}:
-    required:  Yes
-    required_msg: Este campo es requerido
+#  atciudadano{atestados_id}:
+#    required:  Yes
+#    required_msg: Este campo es requerido
 
-  atciudadano{atmunicipios_id}:
-    required:  Yes
-    required_msg: Este campo es requerido
+#  atciudadano{atmunicipios_id}:
+#    required:  Yes
+#    required_msg: Este campo es requerido
 
-  atciudadano{atparroquias_id}:
-    required:  Yes
-    required_msg: Este campo es requerido
+#  atciudadano{atparroquias_id}:
+#    required:  Yes
+#    required_msg: Este campo es requerido
 
 
 MyStringValidator1:

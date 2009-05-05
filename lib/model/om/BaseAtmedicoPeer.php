@@ -13,7 +13,7 @@ abstract class BaseAtmedicoPeer {
 	const CLASS_DEFAULT = 'lib.model.Atmedico';
 
 	
-	const NUM_COLUMNS = 8;
+	const NUM_COLUMNS = 9;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -41,6 +41,9 @@ abstract class BaseAtmedicoPeer {
 	const TELDOSMED = 'atmedico.TELDOSMED';
 
 	
+	const NROCOLMED = 'atmedico.NROCOLMED';
+
+	
 	const ID = 'atmedico.ID';
 
 	
@@ -49,18 +52,18 @@ abstract class BaseAtmedicoPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Cedrifmed', 'Nombremed', 'Apellimed', 'Dirhabmed', 'Dirtramed', 'Telunomed', 'Teldosmed', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (AtmedicoPeer::CEDRIFMED, AtmedicoPeer::NOMBREMED, AtmedicoPeer::APELLIMED, AtmedicoPeer::DIRHABMED, AtmedicoPeer::DIRTRAMED, AtmedicoPeer::TELUNOMED, AtmedicoPeer::TELDOSMED, AtmedicoPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('cedrifmed', 'nombremed', 'apellimed', 'dirhabmed', 'dirtramed', 'telunomed', 'teldosmed', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Cedrifmed', 'Nombremed', 'Apellimed', 'Dirhabmed', 'Dirtramed', 'Telunomed', 'Teldosmed', 'Nrocolmed', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (AtmedicoPeer::CEDRIFMED, AtmedicoPeer::NOMBREMED, AtmedicoPeer::APELLIMED, AtmedicoPeer::DIRHABMED, AtmedicoPeer::DIRTRAMED, AtmedicoPeer::TELUNOMED, AtmedicoPeer::TELDOSMED, AtmedicoPeer::NROCOLMED, AtmedicoPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('cedrifmed', 'nombremed', 'apellimed', 'dirhabmed', 'dirtramed', 'telunomed', 'teldosmed', 'nrocolmed', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Cedrifmed' => 0, 'Nombremed' => 1, 'Apellimed' => 2, 'Dirhabmed' => 3, 'Dirtramed' => 4, 'Telunomed' => 5, 'Teldosmed' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (AtmedicoPeer::CEDRIFMED => 0, AtmedicoPeer::NOMBREMED => 1, AtmedicoPeer::APELLIMED => 2, AtmedicoPeer::DIRHABMED => 3, AtmedicoPeer::DIRTRAMED => 4, AtmedicoPeer::TELUNOMED => 5, AtmedicoPeer::TELDOSMED => 6, AtmedicoPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('cedrifmed' => 0, 'nombremed' => 1, 'apellimed' => 2, 'dirhabmed' => 3, 'dirtramed' => 4, 'telunomed' => 5, 'teldosmed' => 6, 'id' => 7, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+		BasePeer::TYPE_PHPNAME => array ('Cedrifmed' => 0, 'Nombremed' => 1, 'Apellimed' => 2, 'Dirhabmed' => 3, 'Dirtramed' => 4, 'Telunomed' => 5, 'Teldosmed' => 6, 'Nrocolmed' => 7, 'Id' => 8, ),
+		BasePeer::TYPE_COLNAME => array (AtmedicoPeer::CEDRIFMED => 0, AtmedicoPeer::NOMBREMED => 1, AtmedicoPeer::APELLIMED => 2, AtmedicoPeer::DIRHABMED => 3, AtmedicoPeer::DIRTRAMED => 4, AtmedicoPeer::TELUNOMED => 5, AtmedicoPeer::TELDOSMED => 6, AtmedicoPeer::NROCOLMED => 7, AtmedicoPeer::ID => 8, ),
+		BasePeer::TYPE_FIELDNAME => array ('cedrifmed' => 0, 'nombremed' => 1, 'apellimed' => 2, 'dirhabmed' => 3, 'dirtramed' => 4, 'telunomed' => 5, 'teldosmed' => 6, 'nrocolmed' => 7, 'id' => 8, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
 	);
 
 	
@@ -127,6 +130,8 @@ abstract class BaseAtmedicoPeer {
 		$criteria->addSelectColumn(AtmedicoPeer::TELUNOMED);
 
 		$criteria->addSelectColumn(AtmedicoPeer::TELDOSMED);
+
+		$criteria->addSelectColumn(AtmedicoPeer::NROCOLMED);
 
 		$criteria->addSelectColumn(AtmedicoPeer::ID);
 

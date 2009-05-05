@@ -93,6 +93,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 
 	
+	protected $monapr;
+
+
+	
 	protected $atmedico_id;
 
 
@@ -195,6 +199,12 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 	
 	protected $lastAtdocayuCriteria = null;
+
+	
+	protected $collAtpresupuestos;
+
+	
+	protected $lastAtpresupuestoCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -378,6 +388,14 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
     if($val) return number_format($this->monayu,2,',','.');
     else return $this->monayu;
+
+  }
+  
+  public function getMonapr($val=false)
+  {
+
+    if($val) return number_format($this->monapr,2,',','.');
+    else return $this->monapr;
 
   }
   
@@ -766,6 +784,16 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setMonapr($v)
+	{
+
+    if ($this->monapr !== $v) {
+        $this->monapr = Herramientas::toFloat($v);
+        $this->modifiedColumns[] = AtayudasPeer::MONAPR;
+      }
+  
+	} 
+	
 	public function setAtmedicoId($v)
 	{
 
@@ -957,29 +985,31 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
       $this->monayu = $rs->getFloat($startcol + 20);
 
-      $this->atmedico_id = $rs->getInt($startcol + 21);
+      $this->monapr = $rs->getFloat($startcol + 21);
 
-      $this->respat = $rs->getString($startcol + 22);
+      $this->atmedico_id = $rs->getInt($startcol + 22);
 
-      $this->infmed = $rs->getString($startcol + 23);
+      $this->respat = $rs->getString($startcol + 23);
 
-      $this->obsmed = $rs->getString($startcol + 24);
+      $this->infmed = $rs->getString($startcol + 24);
 
-      $this->fecdiasoc = $rs->getDate($startcol + 25, null);
+      $this->obsmed = $rs->getString($startcol + 25);
 
-      $this->usudiasoc = $rs->getString($startcol + 26);
+      $this->fecdiasoc = $rs->getDate($startcol + 26, null);
 
-      $this->resdiasoc = $rs->getString($startcol + 27);
+      $this->usudiasoc = $rs->getString($startcol + 27);
 
-      $this->fecvisdoc = $rs->getDate($startcol + 28, null);
+      $this->resdiasoc = $rs->getString($startcol + 28);
 
-      $this->usuvisdoc = $rs->getString($startcol + 29);
+      $this->fecvisdoc = $rs->getDate($startcol + 29, null);
 
-      $this->resvisdoc = $rs->getString($startcol + 30);
+      $this->usuvisdoc = $rs->getString($startcol + 30);
 
-      $this->fecsol = $rs->getDate($startcol + 31, null);
+      $this->resvisdoc = $rs->getString($startcol + 31);
 
-      $this->id = $rs->getInt($startcol + 32);
+      $this->fecsol = $rs->getDate($startcol + 32, null);
+
+      $this->id = $rs->getInt($startcol + 33);
 
       $this->resetModified();
 
@@ -987,7 +1017,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 33; 
+            return $startcol + 34; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Atayudas object", $e);
     }
@@ -1190,6 +1220,14 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collAtpresupuestos !== null) {
+				foreach($this->collAtpresupuestos as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -1327,6 +1365,14 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 					}
 				}
 
+				if ($this->collAtpresupuestos !== null) {
+					foreach($this->collAtpresupuestos as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -1409,39 +1455,42 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				return $this->getMonayu();
 				break;
 			case 21:
-				return $this->getAtmedicoId();
+				return $this->getMonapr();
 				break;
 			case 22:
-				return $this->getRespat();
+				return $this->getAtmedicoId();
 				break;
 			case 23:
-				return $this->getInfmed();
+				return $this->getRespat();
 				break;
 			case 24:
-				return $this->getObsmed();
+				return $this->getInfmed();
 				break;
 			case 25:
-				return $this->getFecdiasoc();
+				return $this->getObsmed();
 				break;
 			case 26:
-				return $this->getUsudiasoc();
+				return $this->getFecdiasoc();
 				break;
 			case 27:
-				return $this->getResdiasoc();
+				return $this->getUsudiasoc();
 				break;
 			case 28:
-				return $this->getFecvisdoc();
+				return $this->getResdiasoc();
 				break;
 			case 29:
-				return $this->getUsuvisdoc();
+				return $this->getFecvisdoc();
 				break;
 			case 30:
-				return $this->getResvisdoc();
+				return $this->getUsuvisdoc();
 				break;
 			case 31:
-				return $this->getFecsol();
+				return $this->getResvisdoc();
 				break;
 			case 32:
+				return $this->getFecsol();
+				break;
+			case 33:
 				return $this->getId();
 				break;
 			default:
@@ -1475,18 +1524,19 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 			$keys[18] => $this->getCodpre(),
 			$keys[19] => $this->getDetayu(),
 			$keys[20] => $this->getMonayu(),
-			$keys[21] => $this->getAtmedicoId(),
-			$keys[22] => $this->getRespat(),
-			$keys[23] => $this->getInfmed(),
-			$keys[24] => $this->getObsmed(),
-			$keys[25] => $this->getFecdiasoc(),
-			$keys[26] => $this->getUsudiasoc(),
-			$keys[27] => $this->getResdiasoc(),
-			$keys[28] => $this->getFecvisdoc(),
-			$keys[29] => $this->getUsuvisdoc(),
-			$keys[30] => $this->getResvisdoc(),
-			$keys[31] => $this->getFecsol(),
-			$keys[32] => $this->getId(),
+			$keys[21] => $this->getMonapr(),
+			$keys[22] => $this->getAtmedicoId(),
+			$keys[23] => $this->getRespat(),
+			$keys[24] => $this->getInfmed(),
+			$keys[25] => $this->getObsmed(),
+			$keys[26] => $this->getFecdiasoc(),
+			$keys[27] => $this->getUsudiasoc(),
+			$keys[28] => $this->getResdiasoc(),
+			$keys[29] => $this->getFecvisdoc(),
+			$keys[30] => $this->getUsuvisdoc(),
+			$keys[31] => $this->getResvisdoc(),
+			$keys[32] => $this->getFecsol(),
+			$keys[33] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1566,39 +1616,42 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				$this->setMonayu($value);
 				break;
 			case 21:
-				$this->setAtmedicoId($value);
+				$this->setMonapr($value);
 				break;
 			case 22:
-				$this->setRespat($value);
+				$this->setAtmedicoId($value);
 				break;
 			case 23:
-				$this->setInfmed($value);
+				$this->setRespat($value);
 				break;
 			case 24:
-				$this->setObsmed($value);
+				$this->setInfmed($value);
 				break;
 			case 25:
-				$this->setFecdiasoc($value);
+				$this->setObsmed($value);
 				break;
 			case 26:
-				$this->setUsudiasoc($value);
+				$this->setFecdiasoc($value);
 				break;
 			case 27:
-				$this->setResdiasoc($value);
+				$this->setUsudiasoc($value);
 				break;
 			case 28:
-				$this->setFecvisdoc($value);
+				$this->setResdiasoc($value);
 				break;
 			case 29:
-				$this->setUsuvisdoc($value);
+				$this->setFecvisdoc($value);
 				break;
 			case 30:
-				$this->setResvisdoc($value);
+				$this->setUsuvisdoc($value);
 				break;
 			case 31:
-				$this->setFecsol($value);
+				$this->setResvisdoc($value);
 				break;
 			case 32:
+				$this->setFecsol($value);
+				break;
+			case 33:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1629,18 +1682,19 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[18], $arr)) $this->setCodpre($arr[$keys[18]]);
 		if (array_key_exists($keys[19], $arr)) $this->setDetayu($arr[$keys[19]]);
 		if (array_key_exists($keys[20], $arr)) $this->setMonayu($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setAtmedicoId($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setRespat($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setInfmed($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setObsmed($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setFecdiasoc($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setUsudiasoc($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setResdiasoc($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setFecvisdoc($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setUsuvisdoc($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setResvisdoc($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setFecsol($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setId($arr[$keys[32]]);
+		if (array_key_exists($keys[21], $arr)) $this->setMonapr($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setAtmedicoId($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setRespat($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setInfmed($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setObsmed($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setFecdiasoc($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setUsudiasoc($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setResdiasoc($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setFecvisdoc($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setUsuvisdoc($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setResvisdoc($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setFecsol($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setId($arr[$keys[33]]);
 	}
 
 	
@@ -1669,6 +1723,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AtayudasPeer::CODPRE)) $criteria->add(AtayudasPeer::CODPRE, $this->codpre);
 		if ($this->isColumnModified(AtayudasPeer::DETAYU)) $criteria->add(AtayudasPeer::DETAYU, $this->detayu);
 		if ($this->isColumnModified(AtayudasPeer::MONAYU)) $criteria->add(AtayudasPeer::MONAYU, $this->monayu);
+		if ($this->isColumnModified(AtayudasPeer::MONAPR)) $criteria->add(AtayudasPeer::MONAPR, $this->monapr);
 		if ($this->isColumnModified(AtayudasPeer::ATMEDICO_ID)) $criteria->add(AtayudasPeer::ATMEDICO_ID, $this->atmedico_id);
 		if ($this->isColumnModified(AtayudasPeer::RESPAT)) $criteria->add(AtayudasPeer::RESPAT, $this->respat);
 		if ($this->isColumnModified(AtayudasPeer::INFMED)) $criteria->add(AtayudasPeer::INFMED, $this->infmed);
@@ -1753,6 +1808,8 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 		$copyObj->setMonayu($this->monayu);
 
+		$copyObj->setMonapr($this->monapr);
+
 		$copyObj->setAtmedicoId($this->atmedico_id);
 
 		$copyObj->setRespat($this->respat);
@@ -1797,6 +1854,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 			foreach($this->getAtdocayus() as $relObj) {
 				$copyObj->addAtdocayu($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getAtpresupuestos() as $relObj) {
+				$copyObj->addAtpresupuesto($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -2608,6 +2669,286 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 	{
 		$this->collAtdocayus[] = $l;
 		$l->setAtayudas($this);
+	}
+
+	
+	public function initAtpresupuestos()
+	{
+		if ($this->collAtpresupuestos === null) {
+			$this->collAtpresupuestos = array();
+		}
+	}
+
+	
+	public function getAtpresupuestos($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtpresupuestoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtpresupuestos === null) {
+			if ($this->isNew()) {
+			   $this->collAtpresupuestos = array();
+			} else {
+
+				$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+				AtpresupuestoPeer::addSelectColumns($criteria);
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+				AtpresupuestoPeer::addSelectColumns($criteria);
+				if (!isset($this->lastAtpresupuestoCriteria) || !$this->lastAtpresupuestoCriteria->equals($criteria)) {
+					$this->collAtpresupuestos = AtpresupuestoPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastAtpresupuestoCriteria = $criteria;
+		return $this->collAtpresupuestos;
+	}
+
+	
+	public function countAtpresupuestos($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtpresupuestoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+		return AtpresupuestoPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addAtpresupuesto(Atpresupuesto $l)
+	{
+		$this->collAtpresupuestos[] = $l;
+		$l->setAtayudas($this);
+	}
+
+
+	
+	public function getAtpresupuestosJoinAtproveeRelatedByAtprovee1($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtpresupuestoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtpresupuestos === null) {
+			if ($this->isNew()) {
+				$this->collAtpresupuestos = array();
+			} else {
+
+				$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee1($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+			if (!isset($this->lastAtpresupuestoCriteria) || !$this->lastAtpresupuestoCriteria->equals($criteria)) {
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee1($criteria, $con);
+			}
+		}
+		$this->lastAtpresupuestoCriteria = $criteria;
+
+		return $this->collAtpresupuestos;
+	}
+
+
+	
+	public function getAtpresupuestosJoinAtproveeRelatedByAtprovee2($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtpresupuestoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtpresupuestos === null) {
+			if ($this->isNew()) {
+				$this->collAtpresupuestos = array();
+			} else {
+
+				$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee2($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+			if (!isset($this->lastAtpresupuestoCriteria) || !$this->lastAtpresupuestoCriteria->equals($criteria)) {
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee2($criteria, $con);
+			}
+		}
+		$this->lastAtpresupuestoCriteria = $criteria;
+
+		return $this->collAtpresupuestos;
+	}
+
+
+	
+	public function getAtpresupuestosJoinAtproveeRelatedByAtprovee3($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtpresupuestoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtpresupuestos === null) {
+			if ($this->isNew()) {
+				$this->collAtpresupuestos = array();
+			} else {
+
+				$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee3($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+			if (!isset($this->lastAtpresupuestoCriteria) || !$this->lastAtpresupuestoCriteria->equals($criteria)) {
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee3($criteria, $con);
+			}
+		}
+		$this->lastAtpresupuestoCriteria = $criteria;
+
+		return $this->collAtpresupuestos;
+	}
+
+
+	
+	public function getAtpresupuestosJoinAtproveeRelatedByAtprovee4($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtpresupuestoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtpresupuestos === null) {
+			if ($this->isNew()) {
+				$this->collAtpresupuestos = array();
+			} else {
+
+				$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee4($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+			if (!isset($this->lastAtpresupuestoCriteria) || !$this->lastAtpresupuestoCriteria->equals($criteria)) {
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee4($criteria, $con);
+			}
+		}
+		$this->lastAtpresupuestoCriteria = $criteria;
+
+		return $this->collAtpresupuestos;
+	}
+
+
+	
+	public function getAtpresupuestosJoinAtproveeRelatedByAtprovee5($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtpresupuestoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtpresupuestos === null) {
+			if ($this->isNew()) {
+				$this->collAtpresupuestos = array();
+			} else {
+
+				$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee5($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+			if (!isset($this->lastAtpresupuestoCriteria) || !$this->lastAtpresupuestoCriteria->equals($criteria)) {
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee5($criteria, $con);
+			}
+		}
+		$this->lastAtpresupuestoCriteria = $criteria;
+
+		return $this->collAtpresupuestos;
+	}
+
+
+	
+	public function getAtpresupuestosJoinAtproveeRelatedByAtprovee6($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtpresupuestoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtpresupuestos === null) {
+			if ($this->isNew()) {
+				$this->collAtpresupuestos = array();
+			} else {
+
+				$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee6($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtpresupuestoPeer::ATAYUDAS_ID, $this->getId());
+
+			if (!isset($this->lastAtpresupuestoCriteria) || !$this->lastAtpresupuestoCriteria->equals($criteria)) {
+				$this->collAtpresupuestos = AtpresupuestoPeer::doSelectJoinAtproveeRelatedByAtprovee6($criteria, $con);
+			}
+		}
+		$this->lastAtpresupuestoCriteria = $criteria;
+
+		return $this->collAtpresupuestos;
 	}
 
 } 

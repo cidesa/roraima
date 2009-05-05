@@ -1,26 +1,7 @@
 ---
 propel:
   _attributes: { noXsd: false, defaultIdMethod: native, package: lib.model }
-  atestados:
-    desest:
-      type: VARCHAR
-      size: 30
-      required: true
-    id:
-  atmunicipios:
-    atestados_id:
-    desmun:
-      type: VARCHAR
-      size: 30
-      required: true
-    id:
-  atparroquias:
-    atmunicipios_id:
-    despar:at
-      type: VARCHAR
-      size: 30
-      required: true
-    id:
+
   attipayu:                        # Tipos de Ayudas
     codayu:
       type: VARCHAR
@@ -51,6 +32,26 @@ propel:
   atrecayu:                        # Asignar Recaudos a Ayudas
     attipayu_id:
     atrecaud_id:
+    id:
+  atestados:
+    desest:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+  atmunicipios:
+    atestados_id:
+    desmun:
+      type: VARCHAR
+      size: 30
+      required: true
+    id:
+  atparroquias:
+    atmunicipios_id:
+    despar:
+      type: VARCHAR
+      size: 30
+      required: true
     id:
   atciudadano:                         # Ciudadano
     cedciu:
@@ -145,6 +146,17 @@ propel:
       type: NUMERIC
       size: 14
       scale: 2
+    atinsrefier_id:
+    ayusolant:
+      type: VARCHAR
+      size: 1
+    insayuant:
+      type: VARCHAR
+      size: 50
+    segpri:
+      type: BOOLEAN
+    attipproviv_id:
+    attipviv_id:
     id:
   attiping:                 # Tipo de Ingreso
     tiping:
@@ -241,8 +253,14 @@ propel:
     id:
   atayudas:                              # Ayudas a ciudadanos
     nroexp:
+      type: VARCHAR
+      size: 50
+    refdoc:
       type: INTEGER
-      autoIncrement: true
+      foreignTable: caordcom
+      foreignReference: id
+    priayu:
+      type: INTEGER
       required: true
     atsolici:
       type: INTEGER
@@ -255,6 +273,7 @@ propel:
       foreignTable: atciudadano
       foreignReference: id
     attipayu_id:
+    atrubros_id:
     atestayu_id:
     attrasoc_id:
     caprovee_id:
@@ -267,11 +286,9 @@ propel:
     desayu:
       type: VARCHAR
       size: 50
-      required: true
     motayu:
       type: VARCHAR
       size: 50
-      required: true
     created_at:
     updated_at:
     usucre:
@@ -283,6 +300,45 @@ propel:
     codpre:
       type: VARCHAR
       size: 50
+    detayu:
+      type: VARCHAR
+      size: 1000
+    monayu:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monapr:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    atmedico_id:
+    respat:
+      type: VARCHAR
+      size: 5000
+    infmed:
+      type: VARCHAR
+      size: 5000
+    obsmed:
+      type: VARCHAR
+      size: 5000
+    fecdiasoc:
+      type: DATE
+    usudiasoc:
+      type: VARCHAR
+      size: 100
+    resdiasoc:
+      type: VARCHAR
+      size: 5000
+    fecvisdoc:
+      type: DATE
+    usuvisdoc:
+      type: VARCHAR
+      size: 100
+    resvisdoc:
+      type: VARCHAR
+      size: 5000
+    fecsol:
+      type: DATE
     id:
   atdetrecayu:                           # Detalle de recaudos entregados para llevar a cabo la ayuda
     atayudas_id:
@@ -308,8 +364,7 @@ propel:
       size: 100
       required: true
     id:
-  atdonaciones:                 # Articuos a Donar
-    atgrudon_id:
+  atdonaciones:                 # Articulos a Donar
     coddon:
       type: VARCHAR
       size: 10
@@ -317,6 +372,10 @@ propel:
     desdon:
       type: VARCHAR
       size: 100
+      required: true
+    unidon:
+      type: VARCHAR
+      size: 50
       required: true
     id:
   atdetayu:                              # Detalle de la ayuda solicitada
@@ -334,7 +393,7 @@ propel:
       scale: 2
     unidad:
       type: VARCHAR
-      size: 20
+      size: 50
     id:
   atfacturas:
     atayudas_id:
@@ -470,6 +529,113 @@ propel:
       type: VARCHAR
       size: 30
     id:
+  atrubros:       #Rubros, subgrupo de tipos de ayudas
+    attipayu_id:
+    desrub:
+      type: VARCHAR
+      size: 100
+      required: true
+    id:
+  atdefemp:
+    #_attributes:
+      #idMethod: native
+    codemp:
+      type: VARCHAR
+      size: 15
+      required: true
+    nomemp:
+      type: VARCHAR
+      size: 100
+      required: true
+    diremp:
+      type: VARCHAR
+      size: 100
+      required: true
+    telemp:
+      type: VARCHAR
+      size: 30
+      required: true
+    faxemp:
+      type: VARCHAR
+      size: 15
+    emaemp:
+      type: VARCHAR
+      size: 100
+    percon:
+      type: VARCHAR
+      size: 150
+    repleg:
+      type: VARCHAR
+      size: 150
+    preasi:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    monlimben:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    id:
+  atdetrecrub:                           # Detalle de recaudos por rubros
+    atrubros_id:
+    atrecaud_id:
+    requerido:
+      type: VARCHAR
+      size: 1
+      required: true
+    id:
+  atmedico:                         # Medico Tratante
+    cedrifmed:
+      type: VARCHAR
+      size: 15
+      required: true
+    nombremed:
+      type: VARCHAR
+      size: 50
+      required: true
+    apellimed:
+      type: VARCHAR
+      size: 50
+      required: true
+    dirhabmed:
+      type: VARCHAR
+      size: 100
+    dirtramed:
+      type: VARCHAR
+      size: 100
+    telunomed:
+      type: VARCHAR
+      size: 25
+    teldosmed:
+      type: VARCHAR
+      size: 25
+    nrocolmed:
+      type: VARCHAR
+      size: 25    
+    id:
+  atinsrefier:
+    desinsref:
+      type: VARCHAR
+      size: 50
+      required: true
+    id:
+  atdocayu:
+    atayudas_id:
+    image:
+      type: VARCHAR
+      size: 100
+      required: true
+    desimg:
+      type: VARCHAR
+      size: 50
+      required: true
+    id:
+
+
+
+
+# Enlaces
+
   caprovee:
     codpro:
       type: VARCHAR
@@ -602,43 +768,211 @@ propel:
     _uniques:
       u_caprovee:
         - rifpro
-  atdefemp:
-    #_attributes:
-      #idMethod: native
-    codemp:
+  caordcom:
+    ordcom:
+      type: VARCHAR
+      size: 8
+      required: true
+    fecord:
+      type: DATE
+      required: true
+    codpro:
       type: VARCHAR
       size: 15
       required: true
-    nomemp:
+    desord:
       type: VARCHAR
-      size: 100
-      required: true
-    diremp:
+      size: 1000
+    crecon:
       type: VARCHAR
-      size: 100
-      required: true
-    telemp:
+      size: 2
+    plaent:
+      type: VARCHAR
+      size: 25
+    tiecan:
+      type: VARCHAR
+      size: 25
+    monord:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    dtoord:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    refcom:
+      type: VARCHAR
+      size: 8
+    staord:
+      type: VARCHAR
+      size: 1
+    afepre:
+      type: VARCHAR
+      size: 1
+    conpag:
+      type: VARCHAR
+      size: 1000
+    forent:
+      type: VARCHAR
+      size: 1000
+    fecanu:
+      type: DATE
+    tipmon:
+      type: VARCHAR
+      size: 3
+    valmon:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    tipcom:
+      type: VARCHAR
+      size: 1
+    tipord:
+      type: VARCHAR
+      size: 1
+    tipo:
+      type: VARCHAR
+      size: 1
+    coduni:
       type: VARCHAR
       size: 30
-      required: true
-    faxemp:
+    codemp:
       type: VARCHAR
-      size: 15
-    emaemp:
+      size: 16
+    notord:
+      type: VARCHAR
+      size: 1000
+    tipdoc:
+      type: VARCHAR
+      size: 4
+    tippro:
+      type: VARCHAR
+      size: 4
+    afepro:
+      type: VARCHAR
+      size: 1
+    doccom:
+      type: VARCHAR
+      size: 4
+    refsol:
+      type: VARCHAR
+      size: 8
+    tipfin:
+      type: VARCHAR
+      size: 4
+    justif:
+      type: VARCHAR
+      size: 1000
+    refprc:
+      type: VARCHAR
+      size: 1
+    codmedcom:
+      type: VARCHAR
+      size: 4
+    codprocom:
+      type: VARCHAR
+      size: 4
+    codpai:
+      type: VARCHAR
+      size: 4
+    codedo:
+      type: VARCHAR
+      size: 4
+    codmun:
+      type: VARCHAR
+      size: 4
+    aplart:
+      type: VARCHAR
+      size: 2
+    aplart6:
+      type: VARCHAR
+      size: 2
+    numsigecof:
+      type: VARCHAR
+      size: 8
+    fecsigecof:
+      type: DATE
+    expsigecof:
+      type: VARCHAR
+      size: 8
+    id:
+      type: integer
+      required: true
+      primaryKey: true
+      autoincrement: true
+  atprovee:
+    nompro:
       type: VARCHAR
       size: 100
-    percon:
+    rifpro:
       type: VARCHAR
-      size: 150
-    repleg:
+      size: 100
+    nitpro:
       type: VARCHAR
-      size: 150
-    preasi:
+      size: 100
+    dirpro:
+      type: VARCHAR
+      size: 1000    
+    telpro:
+      type: VARCHAR
+      size: 100
+    id:    
+  atpresupuesto:
+    atayudas_id:
+    atprovee1:
+      type: INTEGER
+      required: true
+      foreignTable: atprovee
+      foreignReference: id
+    monto1:
       type: NUMERIC
       size: 14
       scale: 2
-    monlimben:
+    atprovee2:
+      type: INTEGER
+      required: true
+      foreignTable: atprovee
+      foreignReference: id
+    monto2:
       type: NUMERIC
       size: 14
       scale: 2
-    id:
+    atprovee3:
+      type: INTEGER
+      required: true
+      foreignTable: atprovee
+      foreignReference: id
+    monto3:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    atprovee4:
+      type: INTEGER
+      required: true
+      foreignTable: atprovee
+      foreignReference: id
+    monto4:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    atprovee5:
+      type: INTEGER
+      required: true
+      foreignTable: atprovee
+      foreignReference: id
+    monto5:
+      type: NUMERIC
+      size: 14
+      scale: 2
+    atprovee6:
+      type: INTEGER
+      required: true
+      foreignTable: atprovee
+      foreignReference: id
+    monto6:
+      type: NUMERIC
+      size: 14
+      scale: 2
+
+    
+    

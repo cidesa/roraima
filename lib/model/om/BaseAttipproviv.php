@@ -16,6 +16,12 @@ abstract class BaseAttipproviv extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collAtciudadanos;
+
+	
+	protected $lastAtciudadanoCriteria = null;
+
+	
 	protected $collAtestsocecos;
 
 	
@@ -164,6 +170,14 @@ abstract class BaseAttipproviv extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collAtciudadanos !== null) {
+				foreach($this->collAtciudadanos as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			if ($this->collAtestsocecos !== null) {
 				foreach($this->collAtestsocecos as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
@@ -212,6 +226,14 @@ abstract class BaseAttipproviv extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collAtciudadanos !== null) {
+					foreach($this->collAtciudadanos as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 				if ($this->collAtestsocecos !== null) {
 					foreach($this->collAtestsocecos as $referrerFK) {
@@ -332,6 +354,10 @@ abstract class BaseAttipproviv extends BaseObject  implements Persistent {
 		if ($deepCopy) {
 									$copyObj->setNew(false);
 
+			foreach($this->getAtciudadanos() as $relObj) {
+				$copyObj->addAtciudadano($relObj->copy($deepCopy));
+			}
+
 			foreach($this->getAtestsocecos() as $relObj) {
 				$copyObj->addAtestsoceco($relObj->copy($deepCopy));
 			}
@@ -359,6 +385,286 @@ abstract class BaseAttipproviv extends BaseObject  implements Persistent {
 			self::$peer = new AttipprovivPeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initAtciudadanos()
+	{
+		if ($this->collAtciudadanos === null) {
+			$this->collAtciudadanos = array();
+		}
+	}
+
+	
+	public function getAtciudadanos($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+			   $this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+				AtciudadanoPeer::addSelectColumns($criteria);
+				$this->collAtciudadanos = AtciudadanoPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+				AtciudadanoPeer::addSelectColumns($criteria);
+				if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+					$this->collAtciudadanos = AtciudadanoPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+		return $this->collAtciudadanos;
+	}
+
+	
+	public function countAtciudadanos($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+		return AtciudadanoPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addAtciudadano(Atciudadano $l)
+	{
+		$this->collAtciudadanos[] = $l;
+		$l->setAttipproviv($this);
+	}
+
+
+	
+	public function getAtciudadanosJoinAtestados($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+				$this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtestados($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtestados($criteria, $con);
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+
+		return $this->collAtciudadanos;
+	}
+
+
+	
+	public function getAtciudadanosJoinAtmunicipios($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+				$this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtmunicipios($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtmunicipios($criteria, $con);
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+
+		return $this->collAtciudadanos;
+	}
+
+
+	
+	public function getAtciudadanosJoinAtparroquias($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+				$this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtparroquias($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtparroquias($criteria, $con);
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+
+		return $this->collAtciudadanos;
+	}
+
+
+	
+	public function getAtciudadanosJoinAttiping($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+				$this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAttiping($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAttiping($criteria, $con);
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+
+		return $this->collAtciudadanos;
+	}
+
+
+	
+	public function getAtciudadanosJoinAtinsrefier($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+				$this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtinsrefier($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAtinsrefier($criteria, $con);
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+
+		return $this->collAtciudadanos;
+	}
+
+
+	
+	public function getAtciudadanosJoinAttipviv($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtciudadanoPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtciudadanos === null) {
+			if ($this->isNew()) {
+				$this->collAtciudadanos = array();
+			} else {
+
+				$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAttipviv($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtciudadanoPeer::ATTIPPROVIV_ID, $this->getId());
+
+			if (!isset($this->lastAtciudadanoCriteria) || !$this->lastAtciudadanoCriteria->equals($criteria)) {
+				$this->collAtciudadanos = AtciudadanoPeer::doSelectJoinAttipviv($criteria, $con);
+			}
+		}
+		$this->lastAtciudadanoCriteria = $criteria;
+
+		return $this->collAtciudadanos;
 	}
 
 	

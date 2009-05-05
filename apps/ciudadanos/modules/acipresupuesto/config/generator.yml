@@ -1,0 +1,42 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Atpresupuesto
+    theme:            cidesaGenerator
+
+    fields:
+      atayudas_id:      { name: Nro. Expediente/Solicitud }
+
+      atprovee1:      { name: Proveedor }
+      monto1:         { name: Monto }
+      atprovee2:      { name: Proveedor }
+      monto2:         { name: Monto }
+      atprovee3:      { name: Proveedor }
+      monto3:         { name: Monto }
+      atprovee4:      { name: Proveedor }
+      monto4:         { name: Monto }
+      atprovee5:      { name: Proveedor }
+      monto5:         { name: Monto }
+      atprovee6:      { name: Proveedor }
+      monto6:         { name: Monto }
+      
+
+    list:
+      title:          Registro de Presupuestos
+      display:        [=atayudas_id, nomsolben]
+      object_actions:
+        _edit:        ~
+        _delete:      ~
+      filters:        [atayudas_id]
+      max_per_page:   10
+    edit:
+      title:          Edición de Presupuestos
+      display:
+        Datos de Expediente/Solicitud: [_expediente]
+        Presupuesto Consignado: [atprovee1, monto1, atprovee2, monto2, atprovee3, monto3]
+        Presupuesto por OGAS: [atprovee4, monto4, atprovee5, monto5, atprovee6, monto6]
+      actions:
+        _list:        ~
+        _save:        ~
+        _delete:      ~
+        _create:      ~

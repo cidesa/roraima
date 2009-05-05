@@ -1,0 +1,14 @@
+methods:
+  post:
+   - "atprovee{nompro}"
+   - "atprovee{rifpro}"
+
+names:
+  atprovee{nompro}:
+    required:  Yes
+    required_msg: El nombre del proveedor es requerido
+
+  atprovee{rifpro}:
+    required:  Yes
+    required_msg: El rif del proveedor es requerido
+

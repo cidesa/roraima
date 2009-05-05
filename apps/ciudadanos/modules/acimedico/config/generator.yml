@@ -12,6 +12,7 @@ generator:
       dirtramed:      { name: Dirección Trabajo }
       telunomed:      { name: Telefono Uno}
       teldosmed:      { name: Telefono Dos}
+      nrocolmed:      { name: Nro. Colegio de Médicos}
     list:
       title:          Registro de Médico Tratante
       display:        [=cedrifmed, nombremed, apellimed]
@@ -28,7 +29,7 @@ generator:
     edit:
       title:          Edición de Médico Tratante
       display:
-        Datos Personales: [cedrifmed, nombremed, apellimed]
+        Datos Personales: [cedrifmed, nombremed, apellimed, nrocolmed]
         Información de Contacto: [dirhabmed, dirtramed, telunomed, teldosmed ]
       actions:
         _list:        ~

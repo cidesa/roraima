@@ -1,15 +1,17 @@
 methods:
   post:
-   - "atayudas{atsolici}"
+
+   - "atayudas{atbenefi}"
+   - "atayudas{fecsol}"   
    - "atayudas{attipayu_id}"
-   - "atayudas{desayu}"
-   - "atayudas{motayu}"
+#   - "atayudas{desayu}"
+#   - "atayudas{motayu}"
 
 names:
 
-  atayudas{atsolici}:
+  atayudas{atbenefi}:
     required:  Yes
-    required_msg: Debe Seleccionar un Solicitante
+    required_msg: Debe Seleccionar un Beneficiario
     validators: MyStringValidator1
 
   atayudas{attipayu_id}:
@@ -17,15 +19,27 @@ names:
     required_msg:
     validators: MyStringValidator2
 
-  atayudas{desayu}:
+  atayudas{fecsol}:
     required:  Yes
-    required_msg: La descripción de la ayuda no puede estar vacío
-    validators: MyStringValidator3
+    required_msg: La Fecha no puedo estar en Blanco
+    validators: FechaValidator
 
-  atayudas{motayu}:
-    required:  Yes
-    required_msg: El motivo de la ayuda no puede estar vacío
-    validators: MyStringValidator4
+#  atayudas{desayu}:
+#    required:  Yes
+#    required_msg: La descripción de la ayuda no puede estar vacío
+#    validators: MyStringValidator3
+
+#  atayudas{motayu}:
+#    required:  Yes
+#    required_msg: El motivo de la ayuda no puede estar vacío
+#    validators: MyStringValidator4
+
+FechaValidator:
+    class: sfRegexValidator
+    param:
+        match:      yes
+        pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
+        match_error: La Fecha  introducida es invalida
 
 MyStringValidator1:
     class: sfStringValidator

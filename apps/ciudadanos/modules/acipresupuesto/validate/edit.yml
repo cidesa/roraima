@@ -1,0 +1,16 @@
+methods:
+  post:
+   - "atpresupuesto{atayudas_id}"
+
+names:
+  atpresupuesto{atayudas_id}:
+    required:  Yes
+    required_msg: Debe seleccionar una solicitud/expediente
+    validators: ExistValidator
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:    atayudas
+        column:   id
+        unique_error:   El nro de solicitud/expediente no existe

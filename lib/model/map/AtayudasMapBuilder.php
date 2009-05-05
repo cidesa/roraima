@@ -76,6 +76,8 @@ class AtayudasMapBuilder {
 
 		$tMap->addColumn('MONAYU', 'Monayu', 'double', CreoleTypes::NUMERIC, false, 14);
 
+		$tMap->addColumn('MONAPR', 'Monapr', 'double', CreoleTypes::NUMERIC, false, 14);
+
 		$tMap->addForeignKey('ATMEDICO_ID', 'AtmedicoId', 'int', CreoleTypes::INTEGER, 'atmedico', 'ID', false, null);
 
 		$tMap->addColumn('RESPAT', 'Respat', 'string', CreoleTypes::VARCHAR, false, 5000);

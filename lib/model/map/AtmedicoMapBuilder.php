@@ -48,6 +48,8 @@ class AtmedicoMapBuilder {
 
 		$tMap->addColumn('TELDOSMED', 'Teldosmed', 'string', CreoleTypes::VARCHAR, false, 25);
 
+		$tMap->addColumn('NROCOLMED', 'Nrocolmed', 'string', CreoleTypes::VARCHAR, false, 25);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 
