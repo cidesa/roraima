@@ -7,4 +7,5 @@
   'camposecundario'=> 'nombremed',
   'campobase' => 'atmedico_id',
   ), 'Atmedico_Aciayudas', 'atmedico', '' );
+  echo "&nbsp;&nbsp;&nbsp;&nbsp;". "<a href=\"javascript: var w = window.open('/ciudadanos'+getEnv()+'.php/acimedico/create','','dependent=1,toolbar=0,directories=0,status=0,menubar=0,scrollbars=1,resizable=1,width=ancho,height=alto')\">Nuevo Medico Tratante</a>"
 ?>

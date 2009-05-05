@@ -9,7 +9,7 @@ generator:
       atsolici:
         name: Solicitante
       atbenefi:
-        name: Paciente
+        name: Paciente/Beneficiario
       attipayu_id:
         name: Grupo de Rubros
         params:     text_method=getDesayu onchange=toAjaxUpdater('divrubros',5,getUrlModulo()+'ajax',this.value,'','');
