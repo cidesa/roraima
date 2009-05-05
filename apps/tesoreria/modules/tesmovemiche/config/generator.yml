@@ -21,6 +21,7 @@ generator:
       tipdoc: { name: Tipo de Documento, params: maxlength=4}
       fecing: { name: Fecha de Emision, params: date_format='dd/MM/yyyy'}
       anopre: { name: Año, params: maxlength=4}
+      nombensus: { name: Cesionario Autorizado}
     list:
       title:          Emisión de Pagos
       filters:        [numche, numcue, cedrif]
@@ -32,7 +33,7 @@ generator:
         _delete:      ~
     edit:
       title:          Emisión de Pagos
-      display:        [tipdoc, destip, numche, numcue, nomcue, cedrif, nomben, fecemi, monche, tippagordpag, descriordpag, montotordpag, montotcompro, montotprecom, conceppagnap, montotpagnap, mondtopagnap, condtopagnap, totnetpagnap, conceppagdir, totnetpagdir, mondtopagdir, condtopagdir, operacion]
+      display:        [tipdoc, destip, numche, numcue, nomcue, cedrif, nomben, fecemi, monche, tippagordpag, descriordpag, montotordpag, montotcompro, montotprecom, conceppagnap, montotpagnap, mondtopagnap, condtopagnap, totnetpagnap, conceppagdir, totnetpagdir, mondtopagdir, condtopagdir, operacion, nombensus]
       actions:
         _save:         ~
         _create:       ~

@@ -1006,6 +1006,7 @@ class OrdendePago
   public static function datosRefere2($codigo,$fec,$referencias,&$fecha,&$descripcion,&$tipo,&$elrif,&$descripcion2,&$destipo,&$financiamiento,&$oppermanente,&$montocuo,&$msj)
   {
     $montocausado=0;
+    $msj="";
     $montoajustado=0;
 
     $c= new Criteria();
@@ -1017,6 +1018,16 @@ class OrdendePago
       {
         if ($datos->getStacom()=='A')
         {
+          $t= new Criteria();
+          $t->add(CpdoccomPeer::TIPCOM,$datos->getTipcom());
+          $trajo=CpdoccomPeer::doSelectOne($t);
+          if ($trajo)
+          {
+          	if ($trajo->getReqaut()=='S')
+          	{
+          		if ($datos->getAprcom()=='A')
+          		{
+
           $SQL = "Select Sum(MonCau) as moncau from cpimpcom where refcom='".$codigo."'";
           if (Herramientas::BuscarDatos($SQL,&$reg))
           {
@@ -1095,6 +1106,90 @@ class OrdendePago
 
             }else { $msj='La Fecha de la Orden de Pago es menor a la del Compromiso';}
           }else { $msj='El Compromiso se encuentra totalmente Causado';}
+        }else { $msj='El Compromiso no se encuentra Aprobado';}
+        }
+        else
+        {
+        	$SQL = "Select Sum(MonCau) as moncau from cpimpcom where refcom='".$codigo."'";
+          if (Herramientas::BuscarDatos($SQL,&$reg))
+          {
+            $montocausado= $reg[0]['moncau'];
+          }
+
+          $SQL1 = "Select Sum(monaju) as monaju from cpimpcom where refcom='".$codigo."'";
+          if (Herramientas::BuscarDatos($SQL1,&$reg2))
+          {
+            $montoajustado= $reg2[0]['monaju'];
+          }
+
+          if (($datos->getMoncom()) > ($montocausado+$montoajustado))
+          {
+            $dateFormat = new sfDateFormat('es_VE');
+            $fec2 = $dateFormat->format($fec, 'i', $dateFormat->getInputPattern('d'));
+
+            if ($datos->getFeccom()<= $fec2)
+            {
+              $descripcion=$datos->getDescom();
+              $fecha=date("d/m/Y",strtotime($datos->getFeccom()));
+              $tipo=$datos->getTipcom();
+              $elrif=$datos->getCedrif();
+              $descripcion2=$datos->getDescom();
+
+              $c= new Criteria();
+              $c->add(CpdoccomPeer::TIPCOM,$tipo);
+              $datos3= CpdoccomPeer::doSelectOne($c);
+              if ($datos3)
+              {
+                $destipo=$datos3->getNomext();
+              }else {$destipo='';}
+              $monedacom=0;
+              $monedaord=0;
+              $c= new Criteria();
+              $c->add(CaordcomPeer::ORDCOM,$codigo);
+              $datos2= CaordcomPeer::doSelectOne($c);
+              if ($datos2)
+              {
+                $financiamiento=$datos2->getTipfin();
+
+                $sql="Select valmon from Tsdesmon where codmon='".$datos2->getTipmon()."' and fecmon=To_Date('".$fec."','DD/MM/YYYY') ";
+                if (!Herramientas::BuscarDatos($sql,&$result))
+                {
+                  $c = new Criteria();
+                  $c->add(TsdesmonPeer::CODMON,$datos2->getTipmon());
+                  $c->addDescendingOrderByColumn(TsdesmonPeer::FECMON);
+                  $reg = TsdesmonPeer::doSelectOne($c);
+                  if ($reg)
+                  {
+                    $monedaord=$reg->getValmon();
+                  }else {$monedaord=0;}
+                }else {$monedaord=$result[0]['valmon'];}
+                $monedacom=$datos2->getValmon();
+              }else {$monedacom=0;}
+              if ($monedacom!=$monedaord)
+              {
+                $monedaord='aqui se llama a la cajita para introducir la nueva tasa cambiaria';
+              }
+
+
+              /*$c= new Criteria();
+               $c->add(OpdetperPeer::REFOPP,$codigo);
+               $c->add(OpdetperPeer::FECPAG,null,CRITERIA::ISNULL);
+               $c->addAscendingOrderByColumn(OpdetperPeer::FECINICUO);
+               $registro= OpdetperPeer::doSelectOne($c);
+               if ($registro)
+               {
+               $oppermanente=$codigo;
+               $montocuo=$registro->getMoncuo();
+
+               }else {$oppermanente=''; $montocuo='';}*/
+
+              $oppermanente='';
+              $montocuo='';
+
+            }else { $msj='La Fecha de la Orden de Pago es menor a la del Compromiso';}
+          }else { $msj='El Compromiso se encuentra totalmente Causado';}
+        }
+        }else { $msj='El Tipo de Compromiso no existe';}
         }else { $msj='El Compromiso se encuentra anulado';}
       }else { $msj='La Referencia ya fue Causada';}
     }else { $msj='La Referencia No existe';}

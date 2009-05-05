@@ -187,6 +187,20 @@
 
 <br>
 
+  <?php echo label_for('opordpag[nombensus]', __($labels['opordpag{nombensus}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('opordpag{nombensus}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opordpag{nombensus}')): ?>
+    <?php echo form_error('opordpag{nombensus}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($opordpag, 'getNombensus', array (
+  'size' => 80,
+  'control_name' => 'opordpag[nombensus]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+<br>
+
  <table>
    <tr>
     <th><?php echo label_for('opordpag[ctapag]', __($labels['opordpag{ctapag}']), 'class="required" ') ?>

@@ -32,6 +32,7 @@ generator:
       numsigecof: { name: Número}
       fecsigecof: { name: Fecha}
       expsigecof: { name: Expediente}
+      nombensus: { name: Cesionario Autorizado}
 
     list:
       title:          Ordenes de Pago
@@ -43,7 +44,7 @@ generator:
         _edit:        ~
     edit:
       title:          Edición de la Orden de Pago
-      display:        [=numord, fecemi, tipcau, nomext, desord, cedrif, nomben, codctasec, ctapag, descta, coduni, desubi, tipfin, nomext2, obsord, monord, mondes, monret, numcom, feccom, status, idrefer, fecanu, desanu, referencias, documento, afectapre, totalcomprobantes, cuentarendicion, vacio, presiono, numsigecof, fecsigecof, expsigecof]
+      display:        [=numord, fecemi, tipcau, nomext, desord, cedrif, nomben, codctasec, ctapag, descta, coduni, desubi, tipfin, nomext2, obsord, monord, mondes, monret, numcom, feccom, status, idrefer, fecanu, desanu, referencias, documento, afectapre, totalcomprobantes, cuentarendicion, vacio, presiono, numsigecof, fecsigecof, expsigecof, nombensus]
       actions:
         _list:        ~
         _save:        ~
