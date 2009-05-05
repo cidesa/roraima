@@ -365,21 +365,18 @@ $this->Bitacora('Guardo');
           {
              $operacion="ordpag";
              $this->configGridOrdPag($mostrardato,$this->getRequestParameter('cedrif'),$this->getRequestParameter('fecemi'));
-             $javascript="$('alterno').hide();";
           }
 
           if ($refiere=="C")
           {
             $operacion="compro";
             $this->configGridCompro($mostrardato,$this->getRequestParameter('cedrif'));
-            $javascript="$('alterno').show();";
           }
 
           if ($refiere=="P")
           {
              $operacion="precom";
              $this->configGridPrecom($mostrardato,$this->getRequestParameter('cedrif'));
-             $javascript="$('alterno').show();";
           }
 
           if ($refiere == "N")
@@ -387,13 +384,11 @@ $this->Bitacora('Guardo');
              if (($refprc=="N") and ($refcom=="N") and ($refcau=="N") and ($refpag=="N") and ($aumdis=="N"))
              {
                  $operacion="pagnopre";
-                 $javascript="$('alterno').show();";
              }
             else
              {
                 $operacion="pagdir";
                 $this->configGridPagDir();
-                $javascript="$('alterno').show();";
               }
           }//if ($refprc=="N") and ($refcom=="N") and ($refcau=="N") and ($refpag=="N") and ($aumdis=="N")
 

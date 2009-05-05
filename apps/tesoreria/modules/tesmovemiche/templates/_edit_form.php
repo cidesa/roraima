@@ -118,7 +118,6 @@
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
 <br>
-<div id="alterno" style="display:none">
   <?php echo label_for('tscheemi[nombensus]', __($labels['tscheemi{nombensus}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tscheemi{nombensus}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tscheemi{nombensus}')): ?>
@@ -130,7 +129,6 @@
   'control_name' => 'tscheemi[nombensus]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
-</div>
 <br>
 <?php echo label_for('tscheemi[fecemi]', __($labels['tscheemi{fecemi}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tscheemi{fecemi}')): ?> form-error<?php endif; ?>">
