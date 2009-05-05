@@ -170,7 +170,19 @@
 </div>
 <?php include_partial('edit_actions', array('tscheemi' => $tscheemi)) ?>
 </form>
+<?
+  $pdfparform="n";
 
+  $dirrepconfig = $sf_user->getAttribute('reportes').'reportes/config.yml';
+
+  $configyml = sfYaml::load($dirrepconfig);
+
+
+  if(is_array($configyml)){
+    if(array_key_exists('tesoreria',$configyml)) $pdfparform = $configyml["tesoreria"]["tsrvoucher"]["parameterform"];
+  }
+
+?>
 <script type="text/javascript">
 var impche='<?php if($tscheemi->getEscheque()==true && $tscheemi->getId()!="") echo $impche; else echo 'N'?>';
 
@@ -179,12 +191,17 @@ if (impche=='S')
     if(confirm("¿Desea imprimir el/los Cheques emitidos?"))
     {
       var  numches='<? print $numches;?>';
+      var  mosparform='<? print $pdfparform;?>';
       var anumche=numches.split(",");
       for(r=0;r<anumche.length;r++)
       {
-          var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
-          pagina=ruta+"/reportes/reportes/tesoreria/r.php=?r=tsrvoucher1.php&numchedes="+anumche[r]+"&numchehas="+anumche[r];
-          window.open(pagina,anumche[r],"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
+         var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
+         if (mosparform=='S')
+            pagina=ruta+"/reportes/reportes/tesoreria/r.php=?r=tsrvoucher1.php&numchedes="+anumche[r]+"&numchehas="+anumche[r];
+         else
+             pagina=ruta+"/reportes/reportes/tesoreria/tsrvoucher1.php=?numchedes="+anumche[r]+"&numchehas="+anumche[r];
+
+         window.open(pagina,anumche[r],"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
       }
     }
 }
