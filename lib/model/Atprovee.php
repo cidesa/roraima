@@ -9,4 +9,9 @@
  */ 
 class Atprovee extends BaseAtprovee
 {
+	
+	public function __toString()
+	{
+		return $this->rifpro." - ".$this->nompro;
+	}
 }
