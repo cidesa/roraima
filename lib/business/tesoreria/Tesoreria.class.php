@@ -1505,11 +1505,12 @@ class Tesoreria {
    	else return "00000000";
    }
 
-  public static function chequear_disponibilidad_financiera($banco='',$monto=0, $fechad='',$fechah='',&$saldo)
+
+   public static function chequear_disponibilidad_financiera($banco='',$monto=0, $fechad='',$fechah='',&$saldo)
   {
     $saldo = Tesoreria::Monto_disponible_financiero($banco,$fechad,$fechah);
-    //print $saldo;
-    if($saldo < $monto){
+    $saldo=round($saldo,2);
+    if(H::tofloat($saldo) < H::tofloat($monto)){
       return false;
     }else return true;
   }
