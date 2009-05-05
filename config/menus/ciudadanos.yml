@@ -11,9 +11,6 @@ ciudadanos:
       default:
         modulo: ciudadanos.php
         modulo_dev: ciudadanos_dev.php
-      Definicion de Proveedores:
-        modulo: compras.php
-        modulo_dev: compras_dev.php
       Reportes:
         absoluta: reportes/reportes/ciudadanos
     imagenes:
@@ -21,15 +18,14 @@ ciudadanos:
   menu:
     Definiciones:
       Empresa:                                                acidefemp
-      Recaudos:                                               acirecaud
-      Definicion de Proveedores:                              AlmRegPro
-      Ayudas:
-        Grupos de Rubros:                                     acitipayu
-        Rubros:                                               acirubros
-      #Asignar Recaudos a Tipos de Donaciones:                 acirecayu
-      Unidades:                                               aciunidad
-      #Grupos de Articulos:                                    acigrupos
-      Articulos a Donar:                                      acidonaciones
+      Requisitos de Pacientes:                                acirecaud
+      Definicion de Proveedores:                              aciprovee
+      Tipos de Donaciones:                                    acitipayu
+      Tipos de Rubros:                                        acirubros
+      #Asignar Recaudos a Tipos de Donaciones:                acirecayu
+      Unidades de la Organización:                            aciunidad
+      #Grupos de Articulos:                                   acigrupos
+      Ayuda/Beneficio a Otorgar:                              acidonaciones
       Médico Tratante:                                        acimedico
       Estados de Donaciones:                                  aciestayu
       Trabajadores Sociales:                                  acitrasoc
@@ -42,16 +38,17 @@ ciudadanos:
         Municipios:                                           municipios
         Parroquias:                                           parroquias
     Solicitudes:
-      Pacientes/Solicitantes/Ciudadanos:                  aciciudadano
+      Pacientes/Solicitantes:                                 aciciudadano
       Donaciones:                                             aciayudas
       Reclamos:                                               acireclam
       Denuncias:                                              acidenunc
       Audiencias:                                             aciaudien
       Estado de Donación:                                     acistasol
-    Atención:
+    Atención al Público:
       Donaciones:
         Expedientes:                                          aciateayu
         Estudio Socio-Económico:                              aciestsoceco
+        Presupuestos:                                         acipresupuesto
         Cargar Documentos:                                    acidocdig
       Reclamos:                                               aciaterec
       Denuncias:                                              aciateden

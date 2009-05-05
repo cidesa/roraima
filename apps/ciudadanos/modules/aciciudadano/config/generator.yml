@@ -12,6 +12,7 @@ generator:
       _sexo:       { name: Teléfono, params: size=20 }
 
       fecnac:      { name: Fecha Nacimiento }
+      edaact:      { name: Edad, params: size=4  }
       pais:        { name: Pais Nacimiento }
       conext:      { name: Con Ext }
       lugnac:      { name: Lugar de Nacimiento }
@@ -34,11 +35,12 @@ generator:
       grains:      { name: Grado de Instrucción }
       traciu:      { name: ¿Tiene Trabajo? }
       nomemp:      { name: Empresa }
-      diremp:      { name: Dirección Empresa }
-      telemp:      { name: Telefono Empresa }
+      diremp:      { name: Dirección del lugar de trabajo }
+      telemp:      { name: Telefono }
       attiping_id: { name: Tipo Ingreso } # Mensual, semanal, quincenal
-      moning:      { name: Monto Ingreso }
-
+      moning:      { name: Ingresos }
+      attipviv_id: { name: Tipo de Vivienda }
+      attipproviv_id: { name: Tenencia de la Vivienda }
       estados:  { name: Estado }
       municipios:  { name: Municipio }
       parroquias:  { name: Parroquia }
@@ -47,6 +49,8 @@ generator:
       atinsrefier_id:  {name:  Instituciones }
       ayusolant:  {name:  Seleccione }
       insayuant :  {name:  Institución, params: size=50 maxlength=50 }
+      
+      segpri: { name: ¿Tiene Seguro Privado? }
 
     list:
       title:          Registro de Paciente/Solicitante/Ciudadano
@@ -62,15 +66,15 @@ generator:
       title:          Edición de Paciente/Solicitante/Ciudadano
       display:
         Datos Personales: [cedciu, nomciu, apeciu, _sexo, _estciv]
-        Datos Nacimiento: [fecnac, pais, conext, lugnac, nacciu, dirnac ]
-        Dirección Habitacion:        [_atestados_id, _atmunicipios_id, _atparroquias_id, ciudad, caserio]
+        Datos Nacimiento: [fecnac, edaact, pais, nacciu, segpri ]
+        Dirección Habitacion:        [_atestados_id, _atmunicipios_id, _atparroquias_id, ciudad, caserio, attipviv_id, attipproviv_id]
         Información de Contacto: [dirhab, telhab, teladihab ]
         Participación Comunal: [concomciu, carconcomciu ]
-        Información Profesional: [traciu, grains, prociu, nomemp, diremp, dirtra, telemp, attiping_id, moning ]
+        Información Profesional: [traciu, grains, prociu, diremp, telemp, attiping_id, moning ]
         Procedencia:      [_tipo]
-        Grupo Familiar:   [_grufam]
+        Carga Familiar:   [_grufam]
         Referido por:     [atinsrefier_id]
-        Ayuda Solicituda Anteriormente:     [_ayusolant, insayuant]
+        Ayuda Solicitada Anteriormente:     [_ayusolant, insayuant]
       actions:
         _list:        ~
         _save:        ~

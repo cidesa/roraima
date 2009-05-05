@@ -15,6 +15,7 @@ class Atciudadano extends BaseAtciudadano
   protected $nomsol = '';
   protected $cedben = '';
   protected $nomben = '';
+  protected $edaact = '';  
 
   public function afterHydrate()
   {
@@ -23,11 +24,18 @@ class Atciudadano extends BaseAtciudadano
     $this->cedben = $this->getCedciu();
     $this->nomben = $this->getNomciu().' '.$this->getApeciu();
 
+		$sql = "select  Extract(year from age(now(),'" . self::getFecnac() . "')) as edad";
+		if (Herramientas :: BuscarDatos($sql, & $result))
+			$this->edaact = $result[0]['edad'];
+		else
+		  $this->edaact = 0;
+
   }
 
   public function __toString()
   {
     return $this->getNomciu().' '.$this->getApeciu();
   }
+    
 
 }

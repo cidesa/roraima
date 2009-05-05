@@ -29,6 +29,10 @@ class aciayudasActions extends autoaciayudasActions
   // Para incluir funcionalidades al executeEdit()
   public function editing()
   {
+    if (!$this->getRequestParameter('id'))
+    {
+      $this->atayudas->setFecsol(date('Y-m-d'));
+    }
     $rubros = Ciudadanos::getRubros($this->atayudas->getAttipayuId());
     $this->atayudas->setRubros($rubros);
 
@@ -329,6 +333,8 @@ class aciayudasActions extends autoaciayudasActions
       $griditems = Herramientas::CargarDatosGridv2($this,$this->atayudas->getObjitems());
 
       $gridr = Herramientas::CargarDatosGridv2($this,$this->atayudas->getObjrecaudos());
+      
+      if($Atayudas->getAtsolici()=='') $Atayudas->setAtsolici($Atayudas->getAtbenefi());
 
       $coderr = Ciudadanos::salvarAciayudas($Atayudas,$griditems,$gridr);
       return $coderr;

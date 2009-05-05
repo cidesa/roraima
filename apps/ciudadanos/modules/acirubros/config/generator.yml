@@ -5,9 +5,9 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      attipayu_id:         { name: Grupo de Rubro, validate: Vstring_1_50, msj_error: Debe seleccionar un Tipo de Ayuda }
+      attipayu_id:         { name: Tipo de Donación, validate: Vstring_1_50, msj_error: Debe seleccionar un Tipo de Ayuda }
       desrub:              { name: Descripción, validate: Vstring_1_100, msj_error: Debe insertar la Descripción del Rubro }
-      destipayu:           { name: Grupo }
+      destipayu:           { name: Rubros }
     list:
         fields:
           desdon:            { name: Rubros, params: size=10 }

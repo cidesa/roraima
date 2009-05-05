@@ -104,6 +104,12 @@ class AtciudadanoMapBuilder {
 
 		$tMap->addColumn('INSAYUANT', 'Insayuant', 'string', CreoleTypes::VARCHAR, false, 50);
 
+		$tMap->addColumn('SEGPRI', 'Segpri', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
+		$tMap->addForeignKey('ATTIPPROVIV_ID', 'AttipprovivId', 'int', CreoleTypes::INTEGER, 'attipproviv', 'ID', false, null);
+
+		$tMap->addForeignKey('ATTIPVIV_ID', 'AttipvivId', 'int', CreoleTypes::INTEGER, 'attipviv', 'ID', false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

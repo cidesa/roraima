@@ -1,3 +1,3 @@
 
-<?php echo input_tag('filters[atayudas_id]', isset($filters['atayudas_id']) ? $filters['atayudas_id'] : '','size=5') ?>
+<?php echo input_tag('filters[nroexp]', isset($filters['nroexp']) ? $filters['nroexp'] : '','size=5') ?>
 

@@ -37,6 +37,10 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
 
 
 	
+	protected $nrocolmed;
+
+
+	
 	protected $id;
 
 	
@@ -98,6 +102,13 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
   {
 
     return trim($this->teldosmed);
+
+  }
+  
+  public function getNrocolmed()
+  {
+
+    return trim($this->nrocolmed);
 
   }
   
@@ -178,6 +189,16 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setNrocolmed($v)
+	{
+
+    if ($this->nrocolmed !== $v) {
+        $this->nrocolmed = $v;
+        $this->modifiedColumns[] = AtmedicoPeer::NROCOLMED;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -206,7 +227,9 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
 
       $this->teldosmed = $rs->getString($startcol + 6);
 
-      $this->id = $rs->getInt($startcol + 7);
+      $this->nrocolmed = $rs->getString($startcol + 7);
+
+      $this->id = $rs->getInt($startcol + 8);
 
       $this->resetModified();
 
@@ -214,7 +237,7 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 8; 
+            return $startcol + 9; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Atmedico object", $e);
     }
@@ -399,6 +422,9 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
 				return $this->getTeldosmed();
 				break;
 			case 7:
+				return $this->getNrocolmed();
+				break;
+			case 8:
 				return $this->getId();
 				break;
 			default:
@@ -418,7 +444,8 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
 			$keys[4] => $this->getDirtramed(),
 			$keys[5] => $this->getTelunomed(),
 			$keys[6] => $this->getTeldosmed(),
-			$keys[7] => $this->getId(),
+			$keys[7] => $this->getNrocolmed(),
+			$keys[8] => $this->getId(),
 		);
 		return $result;
 	}
@@ -456,6 +483,9 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
 				$this->setTeldosmed($value);
 				break;
 			case 7:
+				$this->setNrocolmed($value);
+				break;
+			case 8:
 				$this->setId($value);
 				break;
 		} 	}
@@ -472,7 +502,8 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[4], $arr)) $this->setDirtramed($arr[$keys[4]]);
 		if (array_key_exists($keys[5], $arr)) $this->setTelunomed($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setTeldosmed($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setId($arr[$keys[7]]);
+		if (array_key_exists($keys[7], $arr)) $this->setNrocolmed($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
 	}
 
 	
@@ -487,6 +518,7 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AtmedicoPeer::DIRTRAMED)) $criteria->add(AtmedicoPeer::DIRTRAMED, $this->dirtramed);
 		if ($this->isColumnModified(AtmedicoPeer::TELUNOMED)) $criteria->add(AtmedicoPeer::TELUNOMED, $this->telunomed);
 		if ($this->isColumnModified(AtmedicoPeer::TELDOSMED)) $criteria->add(AtmedicoPeer::TELDOSMED, $this->teldosmed);
+		if ($this->isColumnModified(AtmedicoPeer::NROCOLMED)) $criteria->add(AtmedicoPeer::NROCOLMED, $this->nrocolmed);
 		if ($this->isColumnModified(AtmedicoPeer::ID)) $criteria->add(AtmedicoPeer::ID, $this->id);
 
 		return $criteria;
@@ -531,6 +563,8 @@ abstract class BaseAtmedico extends BaseObject  implements Persistent {
 		$copyObj->setTelunomed($this->telunomed);
 
 		$copyObj->setTeldosmed($this->teldosmed);
+
+		$copyObj->setNrocolmed($this->nrocolmed);
 
 
 		if ($deepCopy) {

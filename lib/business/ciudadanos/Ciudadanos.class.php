@@ -231,7 +231,7 @@ class Ciudadanos {
       $muns = AtmunicipiosPeer::doSelect($c);
       if($muns){
         foreach($muns as $m){
-          $muni[$m->getId()] = $m->getDesmun();
+          $muni[$m->getId()] = $m->getDesest().' - '.$m->getDesmun();
         }
       }
       return $muni;

@@ -8,7 +8,7 @@ generator:
       codrec:      { name: Código }
       desrec:      { name: Descripción }
     list:
-      title:          Definición de Recaudos
+      title:          Definición de Requisitos de Pacientes
       display:        [=codrec, desrec]
       object_actions:
         _edit:        ~
@@ -17,7 +17,7 @@ generator:
       max_per_page:   5
       sort:  codrec
     edit:
-      title:          Edición de Recaudos
+      title:          Edición de Requisitos de Pacientes
       display:        [codrec, desrec, _requerido ]
       actions:
         _list:        ~

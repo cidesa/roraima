@@ -16,13 +16,13 @@ generator:
       atrubros_id: { name: Rubro }
       caprovee_id: { name: Proveedor }
       cedula:      { name: Cedula }
-      desayu:      { name: Descipción, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      desayu:      { name: Observación, type: textarea_tag, params: cols=60 rows=2 rich=false }
       motayu:      { name: Motivo, type: textarea_tag, params: cols=60 rows=2 rich=false }
       detalleayudas: {name: Detalle Ayuda}
       detallerecaudos: {name: Detalle Recaudos}
       detayu:      { name: Detalle }
       atmedico_id:      { name: Médico Tratante }
-      respat:   { name: Resumen de la Patología, type: textarea_tag, params: size=70x3 maxlength=5000 }
+      respat:   { name: Diagnóstico, type: textarea_tag, params: size=70x3 maxlength=5000 }
       infmed:   { name: Informe Médico, type: textarea_tag, params: size=70x3 maxlength=5000 }
       obsmed:   { name: Observación, type: textarea_tag, params: size=70x3 maxlength=5000 }
       fecdiasoc:     { name: Fecha }
@@ -34,6 +34,7 @@ generator:
       monayu:    { name: Monto en Bolívares (Bs.)}
       fecsol:     { name: Fecha }
       refdoc:     { name: Orden de Pago }
+      priayu:     { name: Prioridad de Atención }
     list:
       title:          Solicitud de Ayudas
       display:        [=id, =nombre, desayu]
@@ -47,17 +48,17 @@ generator:
       title:          Edición de Solicitud de Ayuda
       display:
         Expediente:   [ _expediente, fecsol ]
-        Solicitante:  [_atsolici, _atbenefi]
+        Solicitante:  [_atbenefi, _atsolici]
         Prioridad:    [_priayu]
 #        Proveedor:    [_caprovee_id]
-        Ayuda:        [attipayu_id, _atrubros_id, motayu, desayu]
+        Ayuda:        [attipayu_id, _atrubros_id, desayu]
         Detalle de Recaudos: [_detallerecaudos]
-        Diagnostico del Caso: [_atmedico_id, respat, infmed, obsmed]
+        Diagnostico Socioeconómico: [_atmedico_id, respat, obsmed]
         Diagnostico Social: [fecdiasoc, usudiasoc, resdiasoc]
-        Informe de Visita Domiciliaria: [fecvisdoc, usuvisdoc, resvisdoc]
+#        Informe de Visita Domiciliaria: [fecvisdoc, usuvisdoc, resvisdoc]
         Detalle de Ayuda: [_detalleayudas]
- #       Detalle de Ayuda: [_detayu]
-        Monto Total de la Ayuda: [monayu]
+#        Detalle de Ayuda: [_detayu]
+        Monto Total de la Ayuda Solicitada: [monayu]
 
       actions:
         _save:        ~
