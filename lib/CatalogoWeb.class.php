@@ -289,6 +289,17 @@ class CatalogoWeb extends BaseCatalogoWeb {
   public function Cpcompro_Pagemiord() {
     $this->c = new Criteria();
     $this->c->add(CpcomproPeer :: MONCOM, CpcomproPeer :: SALCAU, Criteria :: NOT_EQUAL);
+
+    $a= new Criteria();
+    $dato=CadefartPeer::doSelectOne($a);
+    if ($dato)
+    {
+    	if ($dato->getComreqapr()=='S')
+    	{
+    		$this->c->add(CpcomproPeer :: APRCOM, 'S');
+    	}
+    }
+
     $this->c->add(CpcomproPeer :: STACOM, 'N', Criteria :: NOT_EQUAL);
     //   $this->c->addAscendingOrderByColumn(CpcomproPeer::REFCOM);
 

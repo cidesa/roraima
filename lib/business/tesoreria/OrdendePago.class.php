@@ -1019,13 +1019,12 @@ class OrdendePago
         if ($datos->getStacom()=='A')
         {
           $t= new Criteria();
-          $t->add(CpdoccomPeer::TIPCOM,$datos->getTipcom());
-          $trajo=CpdoccomPeer::doSelectOne($t);
+          $trajo=CadefartPeer::doSelectOne($t);
           if ($trajo)
           {
-          	if ($trajo->getReqaut()=='S')
+          	if ($trajo->getComreqapr()=='S')
           	{
-          		if ($datos->getAprcom()=='A')
+          		if ($datos->getAprcom()=='S')
           		{
 
           $SQL = "Select Sum(MonCau) as moncau from cpimpcom where refcom='".$codigo."'";
