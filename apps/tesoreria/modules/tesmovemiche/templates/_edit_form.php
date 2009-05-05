@@ -118,6 +118,20 @@
 )); echo $value ? $value : '&nbsp;' ?>
 </div>
 <br>
+<div id="alterno" style="display:none">
+  <?php echo label_for('tscheemi[nombensus]', __($labels['tscheemi{nombensus}']), 'class="required" ') ?>
+  <div class="content<?php if ($sf_request->hasError('tscheemi{nombensus}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('tscheemi{nombensus}')): ?>
+    <?php echo form_error('tscheemi{nombensus}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_input_tag($tscheemi, 'getNombensus', array (
+  'size' => 80,
+  'control_name' => 'tscheemi[nombensus]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+<br>
 <?php echo label_for('tscheemi[fecemi]', __($labels['tscheemi{fecemi}']), 'class="required" ') ?>
   <div class="content<?php if ($sf_request->hasError('tscheemi{fecemi}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('tscheemi{fecemi}')): ?>
@@ -172,7 +186,6 @@ if (impche=='S')
       {
           var  ruta='http://'+'<?echo $this->getContext()->getRequest()->getHost();?>';
           pagina=ruta+"/reportes/reportes/tesoreria/r.php=?r=tsrvoucher1.php&numchedes="+anumche[r]+"&numchehas="+anumche[r];
-          //pagina=ruta+"/reportes/reportes/tesoreria/rtsrvoucher1.php?che1="+anumche[r]+"&che2="+anumche[r];
           window.open(pagina,anumche[r],"menubar=yes,toolbar=yes,scrollbars=yes,width=1200,height=800,resizable=yes,left=1000,top=80")
       }
     }

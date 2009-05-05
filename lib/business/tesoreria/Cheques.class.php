@@ -529,6 +529,7 @@ class Cheques
 
       if (trim($cedrif)!="") $tscheeminew->setCedrif($cedrif);
       $tscheeminew->setNumche($numche);
+      $tscheeminew->setNombensus($tscheemi->getNombensus());
       $tscheeminew->setFecent($tscheemi->getFecemi());
       $tscheeminew->setMonche($Monto);
       $tscheeminew->setStatus("C");//Activo

@@ -205,6 +205,10 @@ $this->Bitacora('Guardo');
     {
       $this->tscheemi->setOperacion($tscheemi['operacion']);
     }
+    if (isset($tscheemi['nombensus']))
+    {
+      $this->tscheemi->setNombensus($tscheemi['nombensus']);
+    }
      //Se guarda el nombre del usuario actual del sistema
      $this->tscheemi->setCodemi($this->getUser()->getAttribute('usuario'));
   }
@@ -217,6 +221,7 @@ $this->Bitacora('Guardo');
     $mostrardato=$this->getRequestParameter('mostrardato');
     $output='';
     $jstscheemi='';
+    $javascript="";
 
     if ($this->getRequestParameter('ajax')=='1')//TIPO DE DOCUMENTO
     {
@@ -360,18 +365,21 @@ $this->Bitacora('Guardo');
           {
              $operacion="ordpag";
              $this->configGridOrdPag($mostrardato,$this->getRequestParameter('cedrif'),$this->getRequestParameter('fecemi'));
+             $javascript="$('alterno').hide();";
           }
 
           if ($refiere=="C")
           {
             $operacion="compro";
             $this->configGridCompro($mostrardato,$this->getRequestParameter('cedrif'));
+            $javascript="$('alterno').show();";
           }
 
           if ($refiere=="P")
           {
              $operacion="precom";
              $this->configGridPrecom($mostrardato,$this->getRequestParameter('cedrif'));
+             $javascript="$('alterno').show();";
           }
 
           if ($refiere == "N")
@@ -379,11 +387,13 @@ $this->Bitacora('Guardo');
              if (($refprc=="N") and ($refcom=="N") and ($refcau=="N") and ($refpag=="N") and ($aumdis=="N"))
              {
                  $operacion="pagnopre";
+                 $javascript="$('alterno').show();";
              }
             else
              {
                 $operacion="pagdir";
                 $this->configGridPagDir();
+                $javascript="$('alterno').show();";
               }
           }//if ($refprc=="N") and ($refcom=="N") and ($refcau=="N") and ($refpag=="N") and ($aumdis=="N")
 
@@ -395,9 +405,9 @@ $this->Bitacora('Guardo');
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //AJAX-JSON
           if ($this->getRequestParameter('ajax')=='2')//BENEFICIARIO
-                $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$valormayuscula.'",""],["tscheemi_operacion","'.$operacion.'",""],["ctapag","'.$codcta.'",""],["desctacre","'.$desctacre.'",""]'.$jstscheemi.']';
+                $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$valormayuscula.'",""],["javascript","'.$javascript.'",""],["tscheemi_operacion","'.$operacion.'",""],["ctapag","'.$codcta.'",""],["desctacre","'.$desctacre.'",""]'.$jstscheemi.']';
           else
-                $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$valormayuscula.'",""],["tscheemi_operacion","'.$operacion.'",""]'.$jstscheemi.']';
+                $output = '[["'.$cajtexmos.'","'.$dato.'",""],["'.$cajtexcom.'","'.$valormayuscula.'",""],["javascript","'.$javascript.'",""],["tscheemi_operacion","'.$operacion.'",""]'.$jstscheemi.']';
 
           $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
   }

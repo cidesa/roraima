@@ -450,6 +450,10 @@ $this->Bitacora('Guardo');
     {
       $this->opordpag->setNomben($opordpag['nomben']);
     }
+    if (isset($opordpag['nombensus']))
+    {
+      $this->opordpag->setNombensus($opordpag['nombensus']);
+    }
     if (isset($opordpag['ctapag']))
     {
       $this->opordpag->setCtapag($opordpag['ctapag']);
