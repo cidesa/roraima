@@ -70,20 +70,19 @@
   <?php if ($sf_request->hasError('casolart{articulo}')): ?>
     <?php echo form_error('casolart{articulo}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
-
+<div id="divCombo">
  <?php echo select_tag('casolart[articulo]', options_for_select($articulos,$casolart->getArticulo(),'include_custom=Seleccione un Artículo'),array('onChange'=> remote_function(array(
 	'update'   => 'divGrid',
     'script'   => true,
 	'url'      => 'almpriori/grid?ajax=1',
 	'with'   => "'reqart='+document.getElementById('casolart_reqart').value+'&codart='+this.value"
-  )))); ?></div>
+  )))); ?></div></div>
    </th>
    <th>
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
    </th>
    <th>
-   <?php echo label_for('casolart[actsolegr]', __($labels['casolart{actsolegr}']), 'class="required"  Style="width:200px"') ?>
+   <?php echo label_for('casolart[actsolegr]', __($labels['casolart{actsolegr}']), 'class="required"  Style="width:100px"') ?>
   <div class="content<?php if ($sf_request->hasError('casolart{actsolegr}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('casolart{actsolegr}')): ?>
     <?php echo form_error('casolart{actsolegr}', array('class' => 'form-error-msg')) ?>
@@ -93,6 +92,17 @@
   'control_name' => 'casolart[actsolegr]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
+   </th>
+     <th>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   </th>
+   <th>
+         <?php echo submit_to_remote('genpri', 'Mostrar todos los Artículos', array(
+         'url'      => 'almpriori/ajax',
+		 'update'   => 'divCombo',
+         'script'   => true,
+         'with'   => "'reqart='+document.getElementById('casolart_reqart').value"
+    )) ?>
    </th>
    </tr>
   </table>
@@ -187,6 +197,7 @@
 		      }
 		 }
 	}
+
 
 </script>
 

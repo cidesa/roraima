@@ -3,12 +3,12 @@
 // date: 2007/04/09 17:27:37
 ?>
 <?php use_helper('Object', 'Validation', 'Javascript', 'Grid', 'SubmitClick') ?>
+<?php if ($ajax=="1")
+{ ?>
 <form name="form1" id="form1">
 <?
   echo grid_tag($grid);
 ?>
 </form>
 <?php echo input_hidden_tag('totreg', $fila) ?>
-<script language="JavaScript" type="text/javascript">
- // 	colocar_prioridad();
-</script>
+<? }?>
