@@ -7,17 +7,83 @@ generator:
     fields:
       atayudas_id:      { name: Nro. Expediente/Solicitud }
 
-      atprovee1:      { name: Proveedor }
+      atprovee1:
+        name: Proveedor
+        catalogo:  
+          catalogoweb: Atprovee_aciprovee
+          clase: Atprovee
+          ajax: 1
+          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro1" camposecundario="nompro1" campobase = "atprovee1"
+          #catalogoparams:
+          #ajaxparams:  
+          divupdate: divgridprovee
+          #id:
       monto1:         { name: Monto }
-      atprovee2:      { name: Proveedor }
+
+      atprovee2:
+        name: Proveedor
+        catalogo:  
+          catalogoweb: Atprovee_aciprovee
+          clase: Atprovee
+          ajax: 1
+          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro2" camposecundario="nompro2" campobase = "atprovee2"
+          #catalogoparams:
+          #ajaxparams:  
+          divupdate: divgridprovee
+          #id:
       monto2:         { name: Monto }
-      atprovee3:      { name: Proveedor }
+      
+      atprovee3:
+        name: Proveedor
+        catalogo:  
+          catalogoweb: Atprovee_aciprovee
+          clase: Atprovee
+          ajax: 1
+          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro3" camposecundario="nompro3" campobase = "atprovee3"
+          #catalogoparams:
+          #ajaxparams:  
+          divupdate: divgridprovee
+          #id:
       monto3:         { name: Monto }
-      atprovee4:      { name: Proveedor }
+      
+      atprovee4:
+        name: Proveedor
+        catalogo:  
+          catalogoweb: Atprovee_aciprovee
+          clase: Atprovee
+          ajax: 1
+          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro4" camposecundario="nompro4" campobase = "atprovee4"
+          #catalogoparams:
+          #ajaxparams:  
+          divupdate: divgridprovee
+          #id:
       monto4:         { name: Monto }
-      atprovee5:      { name: Proveedor }
+
+      atprovee5:
+        name: Proveedor
+        catalogo:  
+          catalogoweb: Atprovee_aciprovee
+          clase: Atprovee
+          ajax: 1
+          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro5" camposecundario="nompro5" campobase = "atprovee5"
+          #catalogoparams:
+          #ajaxparams:  
+          divupdate: divgridprovee
+          #id:
       monto5:         { name: Monto }
-      atprovee6:      { name: Proveedor }
+      
+      atprovee6:
+        name: Proveedor
+        catalogo:  
+          catalogoweb: Atprovee_aciprovee
+          clase: Atprovee
+          ajax: 1
+          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro6" camposecundario="nompro6" campobase = "atprovee6"
+          #catalogoparams:
+          #ajaxparams:  
+          divupdate: divgridprovee
+          #id:
+
       monto6:         { name: Monto }
       
 

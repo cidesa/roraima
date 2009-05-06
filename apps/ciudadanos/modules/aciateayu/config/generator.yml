@@ -14,14 +14,16 @@ generator:
         name: Grupo de Rubros
         params:     text_method=getDesayu onchange=toAjaxUpdater('divrubros',5,getUrlModulo()+'ajax',this.value,'','');
       atrubros_id: { name: Rubro }
-      caprovee_id: { name: Proveedor }
+      atprovee_id:
+        name: Proveedor Aprobado
+        
       attrasoc_id: { name: Trabajador Social }
       atestayu_id: { name: Estado de la Ayuda, params: style="font-size:18px;" }
       proayu:      { name: Procedencia }
       codpre:      { name: Código Presupuestario }
       nroofi:      { name: Nro. de Oficio, params: size=6 }
       cedula:      { name: Cedula }
-      desayu:      { name: Descripción, type: textarea_tag, params: cols=60 rows=2 rich=false }
+      desayu:      { name: Observación, type: textarea_tag, params: cols=60 rows=2 rich=false }
       motayu:      { name: Motivo, type: textarea_tag, params: cols=60 rows=2 rich=false }
       detalleayudas: {name: Detalle Ayuda}
       detallerecaudos: {name: Detalle Recaudos}
@@ -43,6 +45,7 @@ generator:
       usuvisdoc:     { name: Elaborado Por, params: size=100 maxlength=100 }
       resvisdoc:   { name: Resumen, type: textarea_tag, params: size=70x3 maxlength=5000 }
       monayu:    { name: Monto en Bolívares (Bs.)}
+      monapr:    { name: Monto Aprobado en Bolívares (Bs.)}
       fecsol:     { name: Fecha }
       refdoc:     { name: Orden de Compra }
     list:
@@ -63,17 +66,18 @@ generator:
         Prioridad:    [_priayu]
         Procedencia:  [proayu, nroofi ]
         Proveedor:    [_caprovee_id]
-        Inf. Presupuestaria: [_codpre]
+   #     Inf. Presupuestaria: [_codpre]
         Trabajador Social: [attrasoc_id]
         Estudio Socio-Economico: [_estsoceco]
-        Ayuda:        [attipayu_id, _atrubros_id, motayu, desayu]
+        Ayuda:        [attipayu_id, _atrubros_id, desayu]
         Detalle de Recaudos: [_detallerecaudos]
         Diagnostico del Caso: [_atmedico_id, respat, infmed, obsmed]
         Diagnostico Social: [fecdiasoc, usudiasoc, resdiasoc]
         Informe de Visita Domiciliaria: [fecvisdoc, usuvisdoc, resvisdoc]
         Detalle de Ayuda: [_detalleayudas]
     #    Detalle de Ayuda: [_detayu]
-        Monto Total de la Ayuda: [monayu]
+        Monto Total solicitado: [monayu]
+        Monto Total aprobado: [monapr]        
         Información del Gasto: [_refdoc]
       actions:
         _list:        ~

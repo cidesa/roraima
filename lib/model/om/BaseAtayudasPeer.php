@@ -47,7 +47,7 @@ abstract class BaseAtayudasPeer {
 	const ATTRASOC_ID = 'atayudas.ATTRASOC_ID';
 
 	
-	const CAPROVEE_ID = 'atayudas.CAPROVEE_ID';
+	const ATPROVEE_ID = 'atayudas.ATPROVEE_ID';
 
 	
 	const PROAYU = 'atayudas.PROAYU';
@@ -127,17 +127,17 @@ abstract class BaseAtayudasPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroexp', 'Refdoc', 'Priayu', 'Atsolici', 'Atbenefi', 'AttipayuId', 'AtrubrosId', 'AtestayuId', 'AttrasocId', 'CaproveeId', 'Proayu', 'Nroofi', 'Desayu', 'Motayu', 'CreatedAt', 'UpdatedAt', 'Usucre', 'Usumod', 'Codpre', 'Detayu', 'Monayu', 'Monapr', 'AtmedicoId', 'Respat', 'Infmed', 'Obsmed', 'Fecdiasoc', 'Usudiasoc', 'Resdiasoc', 'Fecvisdoc', 'Usuvisdoc', 'Resvisdoc', 'Fecsol', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP, AtayudasPeer::REFDOC, AtayudasPeer::PRIAYU, AtayudasPeer::ATSOLICI, AtayudasPeer::ATBENEFI, AtayudasPeer::ATTIPAYU_ID, AtayudasPeer::ATRUBROS_ID, AtayudasPeer::ATESTAYU_ID, AtayudasPeer::ATTRASOC_ID, AtayudasPeer::CAPROVEE_ID, AtayudasPeer::PROAYU, AtayudasPeer::NROOFI, AtayudasPeer::DESAYU, AtayudasPeer::MOTAYU, AtayudasPeer::CREATED_AT, AtayudasPeer::UPDATED_AT, AtayudasPeer::USUCRE, AtayudasPeer::USUMOD, AtayudasPeer::CODPRE, AtayudasPeer::DETAYU, AtayudasPeer::MONAYU, AtayudasPeer::MONAPR, AtayudasPeer::ATMEDICO_ID, AtayudasPeer::RESPAT, AtayudasPeer::INFMED, AtayudasPeer::OBSMED, AtayudasPeer::FECDIASOC, AtayudasPeer::USUDIASOC, AtayudasPeer::RESDIASOC, AtayudasPeer::FECVISDOC, AtayudasPeer::USUVISDOC, AtayudasPeer::RESVISDOC, AtayudasPeer::FECSOL, AtayudasPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroexp', 'refdoc', 'priayu', 'atsolici', 'atbenefi', 'attipayu_id', 'atrubros_id', 'atestayu_id', 'attrasoc_id', 'caprovee_id', 'proayu', 'nroofi', 'desayu', 'motayu', 'created_at', 'updated_at', 'usucre', 'usumod', 'codpre', 'detayu', 'monayu', 'monapr', 'atmedico_id', 'respat', 'infmed', 'obsmed', 'fecdiasoc', 'usudiasoc', 'resdiasoc', 'fecvisdoc', 'usuvisdoc', 'resvisdoc', 'fecsol', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Nroexp', 'Refdoc', 'Priayu', 'Atsolici', 'Atbenefi', 'AttipayuId', 'AtrubrosId', 'AtestayuId', 'AttrasocId', 'AtproveeId', 'Proayu', 'Nroofi', 'Desayu', 'Motayu', 'CreatedAt', 'UpdatedAt', 'Usucre', 'Usumod', 'Codpre', 'Detayu', 'Monayu', 'Monapr', 'AtmedicoId', 'Respat', 'Infmed', 'Obsmed', 'Fecdiasoc', 'Usudiasoc', 'Resdiasoc', 'Fecvisdoc', 'Usuvisdoc', 'Resvisdoc', 'Fecsol', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP, AtayudasPeer::REFDOC, AtayudasPeer::PRIAYU, AtayudasPeer::ATSOLICI, AtayudasPeer::ATBENEFI, AtayudasPeer::ATTIPAYU_ID, AtayudasPeer::ATRUBROS_ID, AtayudasPeer::ATESTAYU_ID, AtayudasPeer::ATTRASOC_ID, AtayudasPeer::ATPROVEE_ID, AtayudasPeer::PROAYU, AtayudasPeer::NROOFI, AtayudasPeer::DESAYU, AtayudasPeer::MOTAYU, AtayudasPeer::CREATED_AT, AtayudasPeer::UPDATED_AT, AtayudasPeer::USUCRE, AtayudasPeer::USUMOD, AtayudasPeer::CODPRE, AtayudasPeer::DETAYU, AtayudasPeer::MONAYU, AtayudasPeer::MONAPR, AtayudasPeer::ATMEDICO_ID, AtayudasPeer::RESPAT, AtayudasPeer::INFMED, AtayudasPeer::OBSMED, AtayudasPeer::FECDIASOC, AtayudasPeer::USUDIASOC, AtayudasPeer::RESDIASOC, AtayudasPeer::FECVISDOC, AtayudasPeer::USUVISDOC, AtayudasPeer::RESVISDOC, AtayudasPeer::FECSOL, AtayudasPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroexp', 'refdoc', 'priayu', 'atsolici', 'atbenefi', 'attipayu_id', 'atrubros_id', 'atestayu_id', 'attrasoc_id', 'atprovee_id', 'proayu', 'nroofi', 'desayu', 'motayu', 'created_at', 'updated_at', 'usucre', 'usumod', 'codpre', 'detayu', 'monayu', 'monapr', 'atmedico_id', 'respat', 'infmed', 'obsmed', 'fecdiasoc', 'usudiasoc', 'resdiasoc', 'fecvisdoc', 'usuvisdoc', 'resvisdoc', 'fecsol', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Nroexp' => 0, 'Refdoc' => 1, 'Priayu' => 2, 'Atsolici' => 3, 'Atbenefi' => 4, 'AttipayuId' => 5, 'AtrubrosId' => 6, 'AtestayuId' => 7, 'AttrasocId' => 8, 'CaproveeId' => 9, 'Proayu' => 10, 'Nroofi' => 11, 'Desayu' => 12, 'Motayu' => 13, 'CreatedAt' => 14, 'UpdatedAt' => 15, 'Usucre' => 16, 'Usumod' => 17, 'Codpre' => 18, 'Detayu' => 19, 'Monayu' => 20, 'Monapr' => 21, 'AtmedicoId' => 22, 'Respat' => 23, 'Infmed' => 24, 'Obsmed' => 25, 'Fecdiasoc' => 26, 'Usudiasoc' => 27, 'Resdiasoc' => 28, 'Fecvisdoc' => 29, 'Usuvisdoc' => 30, 'Resvisdoc' => 31, 'Fecsol' => 32, 'Id' => 33, ),
-		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP => 0, AtayudasPeer::REFDOC => 1, AtayudasPeer::PRIAYU => 2, AtayudasPeer::ATSOLICI => 3, AtayudasPeer::ATBENEFI => 4, AtayudasPeer::ATTIPAYU_ID => 5, AtayudasPeer::ATRUBROS_ID => 6, AtayudasPeer::ATESTAYU_ID => 7, AtayudasPeer::ATTRASOC_ID => 8, AtayudasPeer::CAPROVEE_ID => 9, AtayudasPeer::PROAYU => 10, AtayudasPeer::NROOFI => 11, AtayudasPeer::DESAYU => 12, AtayudasPeer::MOTAYU => 13, AtayudasPeer::CREATED_AT => 14, AtayudasPeer::UPDATED_AT => 15, AtayudasPeer::USUCRE => 16, AtayudasPeer::USUMOD => 17, AtayudasPeer::CODPRE => 18, AtayudasPeer::DETAYU => 19, AtayudasPeer::MONAYU => 20, AtayudasPeer::MONAPR => 21, AtayudasPeer::ATMEDICO_ID => 22, AtayudasPeer::RESPAT => 23, AtayudasPeer::INFMED => 24, AtayudasPeer::OBSMED => 25, AtayudasPeer::FECDIASOC => 26, AtayudasPeer::USUDIASOC => 27, AtayudasPeer::RESDIASOC => 28, AtayudasPeer::FECVISDOC => 29, AtayudasPeer::USUVISDOC => 30, AtayudasPeer::RESVISDOC => 31, AtayudasPeer::FECSOL => 32, AtayudasPeer::ID => 33, ),
-		BasePeer::TYPE_FIELDNAME => array ('nroexp' => 0, 'refdoc' => 1, 'priayu' => 2, 'atsolici' => 3, 'atbenefi' => 4, 'attipayu_id' => 5, 'atrubros_id' => 6, 'atestayu_id' => 7, 'attrasoc_id' => 8, 'caprovee_id' => 9, 'proayu' => 10, 'nroofi' => 11, 'desayu' => 12, 'motayu' => 13, 'created_at' => 14, 'updated_at' => 15, 'usucre' => 16, 'usumod' => 17, 'codpre' => 18, 'detayu' => 19, 'monayu' => 20, 'monapr' => 21, 'atmedico_id' => 22, 'respat' => 23, 'infmed' => 24, 'obsmed' => 25, 'fecdiasoc' => 26, 'usudiasoc' => 27, 'resdiasoc' => 28, 'fecvisdoc' => 29, 'usuvisdoc' => 30, 'resvisdoc' => 31, 'fecsol' => 32, 'id' => 33, ),
+		BasePeer::TYPE_PHPNAME => array ('Nroexp' => 0, 'Refdoc' => 1, 'Priayu' => 2, 'Atsolici' => 3, 'Atbenefi' => 4, 'AttipayuId' => 5, 'AtrubrosId' => 6, 'AtestayuId' => 7, 'AttrasocId' => 8, 'AtproveeId' => 9, 'Proayu' => 10, 'Nroofi' => 11, 'Desayu' => 12, 'Motayu' => 13, 'CreatedAt' => 14, 'UpdatedAt' => 15, 'Usucre' => 16, 'Usumod' => 17, 'Codpre' => 18, 'Detayu' => 19, 'Monayu' => 20, 'Monapr' => 21, 'AtmedicoId' => 22, 'Respat' => 23, 'Infmed' => 24, 'Obsmed' => 25, 'Fecdiasoc' => 26, 'Usudiasoc' => 27, 'Resdiasoc' => 28, 'Fecvisdoc' => 29, 'Usuvisdoc' => 30, 'Resvisdoc' => 31, 'Fecsol' => 32, 'Id' => 33, ),
+		BasePeer::TYPE_COLNAME => array (AtayudasPeer::NROEXP => 0, AtayudasPeer::REFDOC => 1, AtayudasPeer::PRIAYU => 2, AtayudasPeer::ATSOLICI => 3, AtayudasPeer::ATBENEFI => 4, AtayudasPeer::ATTIPAYU_ID => 5, AtayudasPeer::ATRUBROS_ID => 6, AtayudasPeer::ATESTAYU_ID => 7, AtayudasPeer::ATTRASOC_ID => 8, AtayudasPeer::ATPROVEE_ID => 9, AtayudasPeer::PROAYU => 10, AtayudasPeer::NROOFI => 11, AtayudasPeer::DESAYU => 12, AtayudasPeer::MOTAYU => 13, AtayudasPeer::CREATED_AT => 14, AtayudasPeer::UPDATED_AT => 15, AtayudasPeer::USUCRE => 16, AtayudasPeer::USUMOD => 17, AtayudasPeer::CODPRE => 18, AtayudasPeer::DETAYU => 19, AtayudasPeer::MONAYU => 20, AtayudasPeer::MONAPR => 21, AtayudasPeer::ATMEDICO_ID => 22, AtayudasPeer::RESPAT => 23, AtayudasPeer::INFMED => 24, AtayudasPeer::OBSMED => 25, AtayudasPeer::FECDIASOC => 26, AtayudasPeer::USUDIASOC => 27, AtayudasPeer::RESDIASOC => 28, AtayudasPeer::FECVISDOC => 29, AtayudasPeer::USUVISDOC => 30, AtayudasPeer::RESVISDOC => 31, AtayudasPeer::FECSOL => 32, AtayudasPeer::ID => 33, ),
+		BasePeer::TYPE_FIELDNAME => array ('nroexp' => 0, 'refdoc' => 1, 'priayu' => 2, 'atsolici' => 3, 'atbenefi' => 4, 'attipayu_id' => 5, 'atrubros_id' => 6, 'atestayu_id' => 7, 'attrasoc_id' => 8, 'atprovee_id' => 9, 'proayu' => 10, 'nroofi' => 11, 'desayu' => 12, 'motayu' => 13, 'created_at' => 14, 'updated_at' => 15, 'usucre' => 16, 'usumod' => 17, 'codpre' => 18, 'detayu' => 19, 'monayu' => 20, 'monapr' => 21, 'atmedico_id' => 22, 'respat' => 23, 'infmed' => 24, 'obsmed' => 25, 'fecdiasoc' => 26, 'usudiasoc' => 27, 'resdiasoc' => 28, 'fecvisdoc' => 29, 'usuvisdoc' => 30, 'resvisdoc' => 31, 'fecsol' => 32, 'id' => 33, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, )
 	);
 
@@ -210,7 +210,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addSelectColumn(AtayudasPeer::ATTRASOC_ID);
 
-		$criteria->addSelectColumn(AtayudasPeer::CAPROVEE_ID);
+		$criteria->addSelectColumn(AtayudasPeer::ATPROVEE_ID);
 
 		$criteria->addSelectColumn(AtayudasPeer::PROAYU);
 
@@ -535,7 +535,7 @@ abstract class BaseAtayudasPeer {
 
 
 	
-	public static function doCountJoinCaprovee(Criteria $criteria, $distinct = false, $con = null)
+	public static function doCountJoinAtprovee(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
 
@@ -551,7 +551,7 @@ abstract class BaseAtayudasPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$rs = AtayudasPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -920,7 +920,7 @@ abstract class BaseAtayudasPeer {
 
 
 	
-	public static function doSelectJoinCaprovee(Criteria $c, $con = null)
+	public static function doSelectJoinAtprovee(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -930,9 +930,9 @@ abstract class BaseAtayudasPeer {
 
 		AtayudasPeer::addSelectColumns($c);
 		$startcol = (AtayudasPeer::NUM_COLUMNS - AtayudasPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		CaproveePeer::addSelectColumns($c);
+		AtproveePeer::addSelectColumns($c);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
@@ -944,7 +944,7 @@ abstract class BaseAtayudasPeer {
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
@@ -952,7 +952,7 @@ abstract class BaseAtayudasPeer {
 
 			$newObject = true;
 			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getCaprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+				$temp_obj2 = $temp_obj1->getAtprovee(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 					$newObject = false;
 										$temp_obj2->addAtayudas($obj1); 					break;
 				}
@@ -1044,7 +1044,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1090,8 +1090,8 @@ abstract class BaseAtayudasPeer {
 		AttrasocPeer::addSelectColumns($c);
 		$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
 
-		CaproveePeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + CaproveePeer::NUM_COLUMNS;
+		AtproveePeer::addSelectColumns($c);
+		$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
 
 		AtmedicoPeer::addSelectColumns($c);
 		$startcol11 = $startcol10 + AtmedicoPeer::NUM_COLUMNS;
@@ -1110,7 +1110,7 @@ abstract class BaseAtayudasPeer {
 
 		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1289,7 +1289,7 @@ abstract class BaseAtayudasPeer {
 
 
 					
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -1299,7 +1299,7 @@ abstract class BaseAtayudasPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getCaprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+				$temp_obj9 = $temp_obj1->getAtprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj9->addAtayudas($obj1); 					break;
 				}
@@ -1368,7 +1368,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1408,7 +1408,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1448,7 +1448,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1490,7 +1490,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1532,7 +1532,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1574,7 +1574,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1616,7 +1616,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$criteria->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1630,7 +1630,7 @@ abstract class BaseAtayudasPeer {
 
 
 	
-	public static function doCountJoinAllExceptCaprovee(Criteria $criteria, $distinct = false, $con = null)
+	public static function doCountJoinAllExceptAtprovee(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
 
@@ -1702,7 +1702,7 @@ abstract class BaseAtayudasPeer {
 
 		$criteria->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$criteria->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$criteria->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$rs = AtayudasPeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
@@ -1743,8 +1743,8 @@ abstract class BaseAtayudasPeer {
 		AttrasocPeer::addSelectColumns($c);
 		$startcol8 = $startcol7 + AttrasocPeer::NUM_COLUMNS;
 
-		CaproveePeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + CaproveePeer::NUM_COLUMNS;
+		AtproveePeer::addSelectColumns($c);
+		$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
 
 		AtmedicoPeer::addSelectColumns($c);
 		$startcol10 = $startcol9 + AtmedicoPeer::NUM_COLUMNS;
@@ -1761,7 +1761,7 @@ abstract class BaseAtayudasPeer {
 
 		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -1909,7 +1909,7 @@ abstract class BaseAtayudasPeer {
 				$obj7->addAtayudas($obj1);
 			}
 
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -1919,7 +1919,7 @@ abstract class BaseAtayudasPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getCaprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+				$temp_obj8 = $temp_obj1->getAtprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj8->addAtayudas($obj1);
 					break;
@@ -1986,8 +1986,8 @@ abstract class BaseAtayudasPeer {
 		AttrasocPeer::addSelectColumns($c);
 		$startcol7 = $startcol6 + AttrasocPeer::NUM_COLUMNS;
 
-		CaproveePeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + CaproveePeer::NUM_COLUMNS;
+		AtproveePeer::addSelectColumns($c);
+		$startcol8 = $startcol7 + AtproveePeer::NUM_COLUMNS;
 
 		AtmedicoPeer::addSelectColumns($c);
 		$startcol9 = $startcol8 + AtmedicoPeer::NUM_COLUMNS;
@@ -2002,7 +2002,7 @@ abstract class BaseAtayudasPeer {
 
 		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -2128,7 +2128,7 @@ abstract class BaseAtayudasPeer {
 				$obj6->addAtayudas($obj1);
 			}
 
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -2138,7 +2138,7 @@ abstract class BaseAtayudasPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getCaprovee(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+				$temp_obj7 = $temp_obj1->getAtprovee(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj7->addAtayudas($obj1);
 					break;
@@ -2205,8 +2205,8 @@ abstract class BaseAtayudasPeer {
 		AttrasocPeer::addSelectColumns($c);
 		$startcol7 = $startcol6 + AttrasocPeer::NUM_COLUMNS;
 
-		CaproveePeer::addSelectColumns($c);
-		$startcol8 = $startcol7 + CaproveePeer::NUM_COLUMNS;
+		AtproveePeer::addSelectColumns($c);
+		$startcol8 = $startcol7 + AtproveePeer::NUM_COLUMNS;
 
 		AtmedicoPeer::addSelectColumns($c);
 		$startcol9 = $startcol8 + AtmedicoPeer::NUM_COLUMNS;
@@ -2221,7 +2221,7 @@ abstract class BaseAtayudasPeer {
 
 		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -2347,7 +2347,7 @@ abstract class BaseAtayudasPeer {
 				$obj6->addAtayudas($obj1);
 			}
 
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -2357,7 +2357,7 @@ abstract class BaseAtayudasPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj7 = $temp_obj1->getCaprovee(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
+				$temp_obj7 = $temp_obj1->getAtprovee(); 				if ($temp_obj7->getPrimaryKey() === $obj7->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj7->addAtayudas($obj1);
 					break;
@@ -2427,8 +2427,8 @@ abstract class BaseAtayudasPeer {
 		AttrasocPeer::addSelectColumns($c);
 		$startcol8 = $startcol7 + AttrasocPeer::NUM_COLUMNS;
 
-		CaproveePeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + CaproveePeer::NUM_COLUMNS;
+		AtproveePeer::addSelectColumns($c);
+		$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
 
 		AtmedicoPeer::addSelectColumns($c);
 		$startcol10 = $startcol9 + AtmedicoPeer::NUM_COLUMNS;
@@ -2445,7 +2445,7 @@ abstract class BaseAtayudasPeer {
 
 		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -2593,7 +2593,7 @@ abstract class BaseAtayudasPeer {
 				$obj7->addAtayudas($obj1);
 			}
 
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -2603,7 +2603,7 @@ abstract class BaseAtayudasPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getCaprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+				$temp_obj8 = $temp_obj1->getAtprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj8->addAtayudas($obj1);
 					break;
@@ -2673,8 +2673,8 @@ abstract class BaseAtayudasPeer {
 		AttrasocPeer::addSelectColumns($c);
 		$startcol8 = $startcol7 + AttrasocPeer::NUM_COLUMNS;
 
-		CaproveePeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + CaproveePeer::NUM_COLUMNS;
+		AtproveePeer::addSelectColumns($c);
+		$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
 
 		AtmedicoPeer::addSelectColumns($c);
 		$startcol10 = $startcol9 + AtmedicoPeer::NUM_COLUMNS;
@@ -2691,7 +2691,7 @@ abstract class BaseAtayudasPeer {
 
 		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -2839,7 +2839,7 @@ abstract class BaseAtayudasPeer {
 				$obj7->addAtayudas($obj1);
 			}
 
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -2849,7 +2849,7 @@ abstract class BaseAtayudasPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getCaprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+				$temp_obj8 = $temp_obj1->getAtprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj8->addAtayudas($obj1);
 					break;
@@ -2919,8 +2919,8 @@ abstract class BaseAtayudasPeer {
 		AttrasocPeer::addSelectColumns($c);
 		$startcol8 = $startcol7 + AttrasocPeer::NUM_COLUMNS;
 
-		CaproveePeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + CaproveePeer::NUM_COLUMNS;
+		AtproveePeer::addSelectColumns($c);
+		$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
 
 		AtmedicoPeer::addSelectColumns($c);
 		$startcol10 = $startcol9 + AtmedicoPeer::NUM_COLUMNS;
@@ -2937,7 +2937,7 @@ abstract class BaseAtayudasPeer {
 
 		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -3085,7 +3085,7 @@ abstract class BaseAtayudasPeer {
 				$obj7->addAtayudas($obj1);
 			}
 
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -3095,7 +3095,7 @@ abstract class BaseAtayudasPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getCaprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+				$temp_obj8 = $temp_obj1->getAtprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj8->addAtayudas($obj1);
 					break;
@@ -3165,8 +3165,8 @@ abstract class BaseAtayudasPeer {
 		AtestayuPeer::addSelectColumns($c);
 		$startcol8 = $startcol7 + AtestayuPeer::NUM_COLUMNS;
 
-		CaproveePeer::addSelectColumns($c);
-		$startcol9 = $startcol8 + CaproveePeer::NUM_COLUMNS;
+		AtproveePeer::addSelectColumns($c);
+		$startcol9 = $startcol8 + AtproveePeer::NUM_COLUMNS;
 
 		AtmedicoPeer::addSelectColumns($c);
 		$startcol10 = $startcol9 + AtmedicoPeer::NUM_COLUMNS;
@@ -3183,7 +3183,7 @@ abstract class BaseAtayudasPeer {
 
 		$c->addJoin(AtayudasPeer::ATESTAYU_ID, AtestayuPeer::ID);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 		$c->addJoin(AtayudasPeer::ATMEDICO_ID, AtmedicoPeer::ID);
 
@@ -3331,7 +3331,7 @@ abstract class BaseAtayudasPeer {
 				$obj7->addAtayudas($obj1);
 			}
 
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -3341,7 +3341,7 @@ abstract class BaseAtayudasPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj8 = $temp_obj1->getCaprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
+				$temp_obj8 = $temp_obj1->getAtprovee(); 				if ($temp_obj8->getPrimaryKey() === $obj8->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj8->addAtayudas($obj1);
 					break;
@@ -3382,7 +3382,7 @@ abstract class BaseAtayudasPeer {
 
 
 	
-	public static function doSelectJoinAllExceptCaprovee(Criteria $c, $con = null)
+	public static function doSelectJoinAllExceptAtprovee(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -3660,8 +3660,8 @@ abstract class BaseAtayudasPeer {
 		AttrasocPeer::addSelectColumns($c);
 		$startcol9 = $startcol8 + AttrasocPeer::NUM_COLUMNS;
 
-		CaproveePeer::addSelectColumns($c);
-		$startcol10 = $startcol9 + CaproveePeer::NUM_COLUMNS;
+		AtproveePeer::addSelectColumns($c);
+		$startcol10 = $startcol9 + AtproveePeer::NUM_COLUMNS;
 
 		$c->addJoin(AtayudasPeer::REFDOC, CaordcomPeer::ID);
 
@@ -3677,7 +3677,7 @@ abstract class BaseAtayudasPeer {
 
 		$c->addJoin(AtayudasPeer::ATTRASOC_ID, AttrasocPeer::ID);
 
-		$c->addJoin(AtayudasPeer::CAPROVEE_ID, CaproveePeer::ID);
+		$c->addJoin(AtayudasPeer::ATPROVEE_ID, AtproveePeer::ID);
 
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -3845,7 +3845,7 @@ abstract class BaseAtayudasPeer {
 				$obj8->addAtayudas($obj1);
 			}
 
-			$omClass = CaproveePeer::getOMClass();
+			$omClass = AtproveePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -3855,7 +3855,7 @@ abstract class BaseAtayudasPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj9 = $temp_obj1->getCaprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
+				$temp_obj9 = $temp_obj1->getAtprovee(); 				if ($temp_obj9->getPrimaryKey() === $obj9->getPrimaryKey()) {
 					$newObject = false;
 					$temp_obj9->addAtayudas($obj1);
 					break;

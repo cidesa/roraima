@@ -868,7 +868,7 @@ abstract class BaseAttipayu extends BaseObject  implements Persistent {
 
 
 	
-	public function getAtayudassJoinCaprovee($criteria = null, $con = null)
+	public function getAtayudassJoinAtprovee($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseAtayudasPeer.php';
 		if ($criteria === null) {
@@ -886,14 +886,14 @@ abstract class BaseAttipayu extends BaseObject  implements Persistent {
 
 				$criteria->add(AtayudasPeer::ATTIPAYU_ID, $this->getId());
 
-				$this->collAtayudass = AtayudasPeer::doSelectJoinCaprovee($criteria, $con);
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtprovee($criteria, $con);
 			}
 		} else {
 									
 			$criteria->add(AtayudasPeer::ATTIPAYU_ID, $this->getId());
 
 			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
-				$this->collAtayudass = AtayudasPeer::doSelectJoinCaprovee($criteria, $con);
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtprovee($criteria, $con);
 			}
 		}
 		$this->lastAtayudasCriteria = $criteria;

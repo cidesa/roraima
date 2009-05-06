@@ -5187,7 +5187,17 @@ A.CODREDE"
       CpprecomPeer :: MONPRC => 'Monto'
     );
   }
+  
+  public function Atprovee_aciprovee($params='')
+  {
+  	$this->c = new Criteria();
 
+    $this->columnas = array (
+      AtproveePeer::RIFPRO => 'Rif',
+      AtproveePeer::NOMPRO => 'Razón Social',
+    );
+    
+  }
 
 
 

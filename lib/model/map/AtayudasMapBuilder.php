@@ -52,15 +52,15 @@ class AtayudasMapBuilder {
 
 		$tMap->addForeignKey('ATTRASOC_ID', 'AttrasocId', 'int', CreoleTypes::INTEGER, 'attrasoc', 'ID', false, null);
 
-		$tMap->addForeignKey('CAPROVEE_ID', 'CaproveeId', 'int', CreoleTypes::INTEGER, 'caprovee', 'ID', false, null);
+		$tMap->addForeignKey('ATPROVEE_ID', 'AtproveeId', 'int', CreoleTypes::INTEGER, 'atprovee', 'ID', false, null);
 
 		$tMap->addColumn('PROAYU', 'Proayu', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('NROOFI', 'Nroofi', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('DESAYU', 'Desayu', 'string', CreoleTypes::VARCHAR, true, 50);
+		$tMap->addColumn('DESAYU', 'Desayu', 'string', CreoleTypes::VARCHAR, false, 50);
 
-		$tMap->addColumn('MOTAYU', 'Motayu', 'string', CreoleTypes::VARCHAR, true, 50);
+		$tMap->addColumn('MOTAYU', 'Motayu', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addColumn('CREATED_AT', 'CreatedAt', 'int', CreoleTypes::TIMESTAMP, false, null);
 

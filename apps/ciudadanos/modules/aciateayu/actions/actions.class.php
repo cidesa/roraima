@@ -113,6 +113,7 @@ class aciateayuActions extends autoaciateayuActions
 
 
     $codigo = $this->getRequestParameter('codigo','');
+    $inputtag = $this->getRequestParameter('cajtexmos','');
     // Esta variable ajax debe ser usada en cada llamado para identificar
     // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
@@ -156,6 +157,14 @@ class aciateayuActions extends autoaciateayuActions
         $this->atayudas->setRubros(Ciudadanos::getRubros($codigo));
         $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
         break;
+      case '6':
+        $c = new Criteria();
+        $c->add(AtproveePeer::RIFPRO, $codigo);
+        $atprovee = AtproveePeer::doSelectOne($c);
+        if($atprovee){
+          $output = '[["'.$inputtag.'","'.$atprovee->getNompro().'",""],["","",""],["","",""]]';
+        }else $output = '[["","",""],["","",""],["","",""]]';
+        $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
       case '8':
         $c = new Criteria();
         $c->add(CpdeftitPeer::CODPRE,"trim(".CpdeftitPeer::CODPRE.")='".$codigo."'",Criteria::CUSTOM);

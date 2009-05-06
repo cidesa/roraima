@@ -30,9 +30,9 @@ function grid_tag($obj,$objelim = array())
   $funcionajax = $obj["funcionajax"];
   $jseliminar = $obj["jseliminar"];
 
+  $modulo = sfContext::getInstance()->getModuleName();
 
   if(sfContext::getInstance()->getRequest()->getMethod() == sfRequest::POST && sfContext::getInstance()->getRequest()->isXmlHttpRequest()==false){
-    $modulo = sfContext::getInstance()->getModuleName();
 
     if(sfContext::getInstance()->getUser()->hasAttribute('grid_'.$name,'cidesa/forms/'.$modulo)){
       $grid_en_sesion = sfContext::getInstance()->getUser()->getAttributeHolder()->get('grid_'.$name,null,'cidesa/forms/'.$modulo);
@@ -781,9 +781,11 @@ function grid_tag_v2($obj,$objelim = array())
   $ajaxcolumna= $obj["ajaxcolumna"];
   $ajaxgrid   = $obj["ajaxgrid"];
   $ajaxadicionales = $obj["ajaxadicionales"];
+  
+  $modulo = sfContext::getInstance()->getModuleName();  
 
   if(sfContext::getInstance()->getRequest()->getMethod() == sfRequest::POST && sfContext::getInstance()->getRequest()->isXmlHttpRequest()==false){
-    $modulo = sfContext::getInstance()->getModuleName();
+
 
     if(sfContext::getInstance()->getUser()->hasAttribute('grid_'.$name,'cidesa/forms/'.$modulo)){
       $grid_en_sesion = sfContext::getInstance()->getUser()->getAttributeHolder()->get('grid_'.$name,null,'cidesa/forms/'.$modulo);
@@ -893,6 +895,7 @@ function grid_tag_v2($obj,$objelim = array())
 
     $j=0;
     $acumtagw='';
+    $ajaxadic = '';
     while ($j<count($campos)) {
       $jmasuno=$j+1;
       $campo=$campos[$j];
@@ -1128,10 +1131,18 @@ function grid_tag_v2($obj,$objelim = array())
     while ($j<count($campos)) {
       $jmasuno=$j+1;
       $campo=$campos[$j];
-
+      $camposadic = $ajaxadicionales[$j];
       //////////
       // Ajax //
       //////////
+      $modulo = sfContext::getInstance()->getRequest()->getParameter('module');
+
+      $ajaxadic = '';
+      for($g=0;$g<count($camposadic);$g++){
+        $ajaxadic .= "'$camposadic[$g]'";
+        if($g!=(count($camposadic)-1)) $ajaxadic .= ",";
+      }
+
       if ($ajax[$j]!="") {
         $aj=split("-",$ajax[$j]);
         $mos=$name.substr($aj[1],0,1)."_".$i.'?'."_".substr($aj[1],1,strlen($aj[1]));
@@ -1139,11 +1150,11 @@ function grid_tag_v2($obj,$objelim = array())
         $for=$aj[3];
         $blur=" accionAjax('".url_for($for.'/ajax')."','$funcionajax[$j]','$aj[0]','$mos','$com',this.value); ";
       }elseif($ajaxfila[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i.'?'."'); ";
+         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxfila')."','".$name."','fila','".$i.'?'."',new Array(".$ajaxadic.")); ";
       }elseif($ajaxcolumna[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".$j."'); ";
+         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxcolumna')."','".$name."','columna','".$j."',new Array(".$ajaxadic.")); ";
       }elseif($ajaxgrid[$j]) {
-         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','columna','0'); ";
+         $blur=" accionRemotaGrid('".url_for($modulo.'/ajaxgrid')."','".$name."','columna','0',new Array(".$ajaxadic.")); ";
       }else $blur="";
 
       ///////////////

@@ -14,4 +14,5 @@ class Atprovee extends BaseAtprovee
 	{
 		return $this->rifpro." - ".$this->nompro;
 	}
+  
 }

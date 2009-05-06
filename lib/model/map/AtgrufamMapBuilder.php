@@ -46,7 +46,7 @@ class AtgrufamMapBuilder {
 
 		$tMap->addColumn('PARFAM', 'Parfam', 'string', CreoleTypes::VARCHAR, true, 50);
 
-		$tMap->addColumn('OCUFAM', 'Ocufam', 'string', CreoleTypes::VARCHAR, true, 50);
+		$tMap->addColumn('OCUFAM', 'Ocufam', 'string', CreoleTypes::VARCHAR, false, 50);
 
 		$tMap->addColumn('MONING', 'Moning', 'double', CreoleTypes::NUMERIC, false, 14);
 

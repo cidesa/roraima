@@ -32,6 +32,12 @@ abstract class BaseAtprovee extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $collAtayudass;
+
+	
+	protected $lastAtayudasCriteria = null;
+
+	
 	protected $collAtpresupuestosRelatedByAtprovee1;
 
 	
@@ -286,6 +292,14 @@ abstract class BaseAtprovee extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collAtayudass !== null) {
+				foreach($this->collAtayudass as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			if ($this->collAtpresupuestosRelatedByAtprovee1 !== null) {
 				foreach($this->collAtpresupuestosRelatedByAtprovee1 as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
@@ -374,6 +388,14 @@ abstract class BaseAtprovee extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collAtayudass !== null) {
+					foreach($this->collAtayudass as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 				if ($this->collAtpresupuestosRelatedByAtprovee1 !== null) {
 					foreach($this->collAtpresupuestosRelatedByAtprovee1 as $referrerFK) {
@@ -578,6 +600,10 @@ abstract class BaseAtprovee extends BaseObject  implements Persistent {
 		if ($deepCopy) {
 									$copyObj->setNew(false);
 
+			foreach($this->getAtayudass() as $relObj) {
+				$copyObj->addAtayudas($relObj->copy($deepCopy));
+			}
+
 			foreach($this->getAtpresupuestosRelatedByAtprovee1() as $relObj) {
 				$copyObj->addAtpresupuestoRelatedByAtprovee1($relObj->copy($deepCopy));
 			}
@@ -625,6 +651,356 @@ abstract class BaseAtprovee extends BaseObject  implements Persistent {
 			self::$peer = new AtproveePeer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function initAtayudass()
+	{
+		if ($this->collAtayudass === null) {
+			$this->collAtayudass = array();
+		}
+	}
+
+	
+	public function getAtayudass($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+			   $this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				AtayudasPeer::addSelectColumns($criteria);
+				$this->collAtayudass = AtayudasPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				AtayudasPeer::addSelectColumns($criteria);
+				if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+					$this->collAtayudass = AtayudasPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+		return $this->collAtayudass;
+	}
+
+	
+	public function countAtayudass($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+		return AtayudasPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addAtayudas(Atayudas $l)
+	{
+		$this->collAtayudass[] = $l;
+		$l->setAtprovee($this);
+	}
+
+
+	
+	public function getAtayudassJoinCaordcom($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinCaordcom($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinCaordcom($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
+
+	
+	public function getAtayudassJoinAtciudadanoRelatedByAtsolici($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtciudadanoRelatedByAtsolici($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtciudadanoRelatedByAtsolici($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
+
+	
+	public function getAtayudassJoinAtciudadanoRelatedByAtbenefi($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtciudadanoRelatedByAtbenefi($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtciudadanoRelatedByAtbenefi($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
+
+	
+	public function getAtayudassJoinAttipayu($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAttipayu($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAttipayu($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
+
+	
+	public function getAtayudassJoinAtrubros($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtrubros($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtrubros($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
+
+	
+	public function getAtayudassJoinAtestayu($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtestayu($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtestayu($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
+
+	
+	public function getAtayudassJoinAttrasoc($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAttrasoc($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAttrasoc($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
+	}
+
+
+	
+	public function getAtayudassJoinAtmedico($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseAtayudasPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collAtayudass === null) {
+			if ($this->isNew()) {
+				$this->collAtayudass = array();
+			} else {
+
+				$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtmedico($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(AtayudasPeer::ATPROVEE_ID, $this->getId());
+
+			if (!isset($this->lastAtayudasCriteria) || !$this->lastAtayudasCriteria->equals($criteria)) {
+				$this->collAtayudass = AtayudasPeer::doSelectJoinAtmedico($criteria, $con);
+			}
+		}
+		$this->lastAtayudasCriteria = $criteria;
+
+		return $this->collAtayudass;
 	}
 
 	

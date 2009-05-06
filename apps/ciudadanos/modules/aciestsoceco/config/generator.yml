@@ -31,7 +31,7 @@ generator:
     list:
       fields:
         atayudas_id:  {name: Expediente, type: input_tag }
-      title:          Registro de Estudios Socio-Economicos
+      title:          Registro de Informe de Visita Domiciliaria
       display:        [=nroexp, nomsol, nomben]
       object_actions:
         _edit:        ~
@@ -39,7 +39,7 @@ generator:
       filters:        [_atayudas_id]
       max_per_page:   5
     edit:
-      title:          Edición de Estudios Socio-Economicos
+      title:          Edición de Informe de Visita Domiciliaria
       display:
         Expediente:         [_expediente]
         Estado de Vivienda: [attipviv_id, attipproviv_id ]
