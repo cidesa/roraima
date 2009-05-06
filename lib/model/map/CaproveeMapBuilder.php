@@ -72,6 +72,8 @@ class CaproveeMapBuilder {
 
 		$tMap->addColumn('DIRREPLEG', 'Dirrepleg', 'string', CreoleTypes::VARCHAR, false, 100);
 
+		$tMap->addColumn('TELREPLEG', 'Telrepleg', 'string', CreoleTypes::VARCHAR, false, 30);
+
 		$tMap->addColumn('NROCEI', 'Nrocei', 'string', CreoleTypes::VARCHAR, false, 30);
 
 		$tMap->addColumn('CODRAM', 'Codram', 'string', CreoleTypes::VARCHAR, false, 6);
