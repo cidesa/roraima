@@ -60,12 +60,12 @@ class Atpresupuesto extends BaseAtpresupuesto
     $atprovee5 = $this->getAtproveeRelatedByAtprovee5();
     $atprovee6 = $this->getAtproveeRelatedByAtprovee6();
                         
-    if($atprovee1){$rifpro1 = $atprovee1->getRifpro(); $nompro1 = $atprovee1->getNompro();} 
-    if($atprovee2){$rifpro2 = $atprovee2->getRifpro(); $nompro2 = $atprovee2->getNompro();} 
-    if($atprovee3){$rifpro3 = $atprovee3->getRifpro(); $nompro3 = $atprovee3->getNompro();} 
-    if($atprovee4){$rifpro4 = $atprovee4->getRifpro(); $nompro4 = $atprovee4->getNompro();} 
-    if($atprovee5){$rifpro5 = $atprovee5->getRifpro(); $nompro5 = $atprovee5->getNompro();} 
-    if($atprovee6){$rifpro6 = $atprovee6->getRifpro(); $nompro6 = $atprovee6->getNompro();} 
+    if($atprovee1){$this->rifpro1 = $atprovee1->getRifpro(); $this->nompro1 = $atprovee1->getNompro();} 
+    if($atprovee2){$this->rifpro2 = $atprovee2->getRifpro(); $this->nompro2 = $atprovee2->getNompro();} 
+    if($atprovee3){$this->rifpro3 = $atprovee3->getRifpro(); $this->nompro3 = $atprovee3->getNompro();} 
+    if($atprovee4){$this->rifpro4 = $atprovee4->getRifpro(); $this->nompro4 = $atprovee4->getNompro();} 
+    if($atprovee5){$this->rifpro5 = $atprovee5->getRifpro(); $this->nompro5 = $atprovee5->getNompro();} 
+    if($atprovee6){$this->rifpro6 = $atprovee6->getRifpro(); $this->nompro6 = $atprovee6->getNompro();} 
     
 
   }
