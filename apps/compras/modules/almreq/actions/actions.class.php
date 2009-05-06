@@ -286,7 +286,7 @@ class almreqActions extends autoalmreqActions
     $this->longcat=strlen($this->formatocategoria);
     $this->forubi = Herramientas::ObtenerFormato('Bndefins','forubi');
     $this->lonubi= Herramientas::ObtenerFormato('Bndefins','lonubi');
-    $this->autorizareq= Herramientas::ObtenerFormato('Cadefart','Prcreqapr');
+    $this->autorizareq= Herramientas::ObtenerFormato('Cadefart','reqreqapr');
   }
 
   public function handleErrorEdit()
