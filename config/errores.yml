@@ -619,6 +619,9 @@
 448:
   cod: 448
   msj: Esta Nómina Especial ya ha sido definida
+449:
+  cod: 449
+  msj: Información Bancaria. Para el Tipo de Pago Deposito se deben llenar el Banco, Nro de Cuenta y Tipo de Cuenta.
 ###############OBRAS################
 1000:
     cod: 1000

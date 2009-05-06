@@ -298,7 +298,6 @@
   <?php echo select_tag('nphojint[codpai]', options_for_select($estados,$nphojint->getCodpai(),'include_custom=Seleccione Uno'),array('onChange'=> remote_function(array(
     'update'   => 'divMunicipios',
     'url'      => 'nomhojint/combo?par=1',
-        'complete' => 'AjaxJSON(request, json)',
     'with' => "'estado='+this.value"
   ))));?>
     </div></th>
@@ -411,7 +410,6 @@
    <?php echo select_tag('nphojint[codpa2]', options_for_select($estados2,$nphojint->getCodpa2(),'include_custom=Seleccione Uno'),array('onChange'=> remote_function(array(
     'update'   => 'divMunicipios2',
     'url'      => 'nomhojint/combo?par=4',
-        'complete' => 'AjaxJSON(request, json)',
     'with' => "'estado2='+this.value"
   ))));?>
     </div></th>
