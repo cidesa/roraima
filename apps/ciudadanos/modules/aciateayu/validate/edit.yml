@@ -3,8 +3,8 @@ methods:
 #   - "atayudas{atsolici_id}"
    - "atayudas{attipayu_id}"
    - "atayudas{atestayu_id}"
-   - "atayudas{desayu}"
-   - "atayudas{motayu}"
+#   - "atayudas{desayu}"
+#   - "atayudas{motayu}"
 
 names:
 
@@ -23,15 +23,15 @@ names:
     required_msg:
     validators: MyStringValidator2
 
-  atayudas{desayu}:
-    required:  Yes
-    required_msg: La descripción de la ayuda no puede estar vacío
-    validators: MyStringValidator3
+#  atayudas{desayu}:
+#    required:  Yes
+#    required_msg: La descripción de la ayuda no puede estar vacío
+#    validators: MyStringValidator3
 
-  atayudas{motayu}:
-    required:  Yes
-    required_msg: El motivo de la ayuda no puede estar vacío
-    validators: MyStringValidator4
+#  atayudas{motayu}:
+#    required:  Yes
+#    required_msg: El motivo de la ayuda no puede estar vacío
+#    validators: MyStringValidator4
 
 MyStringValidator1:
     class: sfStringValidator
