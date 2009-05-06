@@ -13,7 +13,7 @@ generator:
           catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
-          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro1" camposecundario="nompro1" campobase = "atprovee1"
+          parametros: getprincipal="getRifpro1" getsecundario="getNompro1" campoprincipal="rifpro1" camposecundario="nompro1" campobase = "atprovee1"
           #catalogoparams:
           #ajaxparams:  
           divupdate: divgridprovee
@@ -26,7 +26,7 @@ generator:
           catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
-          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro2" camposecundario="nompro2" campobase = "atprovee2"
+          parametros: getprincipal="getRifpro2" getsecundario="getNompro2" campoprincipal="rifpro2" camposecundario="nompro2" campobase = "atprovee2"
           #catalogoparams:
           #ajaxparams:  
           divupdate: divgridprovee
@@ -39,7 +39,7 @@ generator:
           catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
-          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro3" camposecundario="nompro3" campobase = "atprovee3"
+          parametros: getprincipal="getRifpro3" getsecundario="getNompro3" campoprincipal="rifpro3" camposecundario="nompro3" campobase = "atprovee3"
           #catalogoparams:
           #ajaxparams:  
           divupdate: divgridprovee
@@ -52,7 +52,7 @@ generator:
           catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
-          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro4" camposecundario="nompro4" campobase = "atprovee4"
+          parametros: getprincipal="getRifpro4" getsecundario="getNompro4" campoprincipal="rifpro4" camposecundario="nompro4" campobase = "atprovee4"
           #catalogoparams:
           #ajaxparams:  
           divupdate: divgridprovee
@@ -65,7 +65,7 @@ generator:
           catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
-          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro5" camposecundario="nompro5" campobase = "atprovee5"
+          parametros: getprincipal="getRifpro5" getsecundario="getNompro5" campoprincipal="rifpro5" camposecundario="nompro5" campobase = "atprovee5"
           #catalogoparams:
           #ajaxparams:  
           divupdate: divgridprovee
@@ -78,7 +78,7 @@ generator:
           catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
-          parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro6" camposecundario="nompro6" campobase = "atprovee6"
+          parametros: getprincipal="getRifpro6" getsecundario="getNompro6" campoprincipal="rifpro6" camposecundario="nompro6" campobase = "atprovee6"
           #catalogoparams:
           #ajaxparams:  
           divupdate: divgridprovee
