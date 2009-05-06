@@ -10,23 +10,33 @@
  */
 class nomhojintActions extends autonomhojintActions
 {
-  public  $coderror1=-1;
-  public  $coderror2=-1;
-  public  $coderror3=-1;
-  public  $coderror4=-1;
+  protected $coderr = -1;
 
   public function validateEdit()
   {
-    if($this->getRequest()->getMethod() == sfRequest::POST)
-    {
-      $this->nphojint = $this->getNphojintOrCreate();
-        if ($this->coderror1<>-1 || $this->coderror2<>-1 || $this->coderror3<>-1)
-        {
-          return false;
-        }else return true;
-    }else return true;
-  }
+    $this->coderr =-1;
 
+    if($this->getRequest()->getMethod() == sfRequest::POST){
+
+      $this->nphojint = $this->getNphojintOrCreate();
+      $this->updateNphojintFromRequest();
+
+      if  ($this->nphojint->getCodtippag()=="01")
+      {
+      	if  ($this->nphojint->getCodban()=="" or $this->nphojint->getNumcue()=="" or $this->nphojint->getTipcue()=="")
+      	 $this->coderr=449;
+      }
+
+
+      if($this->coderr!=-1){
+        return false;
+      } else return true;
+
+    }else return true;
+
+
+
+  }
 
 
 
@@ -221,15 +231,21 @@ $this->Bitacora('Guardo');
     }
   }
 
+
+
   public function handleErrorEdit()
   {
     $this->preExecute();
     $this->nphojint = $this->getNphojintOrCreate();
     $this->updateNphojintFromRequest();
-    $this->setVars();
-
     $this->labels = $this->getLabels();
-
+    if($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      if($this->coderr!=-1){
+        $err = Herramientas::obtenerMensajeError($this->coderr);
+        $this->getRequest()->setError('',$err);
+      }
+    }
     return sfView::SUCCESS;
   }
 
