@@ -5,9 +5,9 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      coddon:              { name: Código Artículos, validate: Vstring_1_50, msj_error: Debe tipear un código }
-      desdon:              { name: Descripción, validate: Vstring_1_50, msj_error: Debe insertar la descripción de la Donación/Ayuda }
-      unidon:              { name: Unidad de Medida, validate: Vstring_1_50, msj_error: Debe insertar la Unidad de Medida }
+      coddon:              { name: Código Artículos, params: size=14, validate: Vstring_1_50, msj_error: Debe tipear un código }
+      desdon:              { name: Descripción, params: size=80, validate: Vstring_1_50, msj_error: Debe insertar la descripción de la Donación/Ayuda }
+      unidon:              { name: Unidad de Medida, params: size=8, validate: Vstring_1_50, msj_error: Debe insertar la Unidad de Medida }
     list:
       fields:
         desdon:            { name: Ayuda/Beneficio, params: size=10 }

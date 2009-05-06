@@ -245,7 +245,6 @@ propel:
     ocufam: # Ocupacion del familiar
       type: VARCHAR
       size: 50
-      required: true
     moning:
       type: NUMERIC
       size: 14
@@ -276,7 +275,7 @@ propel:
     atrubros_id:
     atestayu_id:
     attrasoc_id:
-    caprovee_id:
+    atprovee_id:
     proayu:
       type: VARCHAR
       size: 100
@@ -367,7 +366,7 @@ propel:
   atdonaciones:                 # Articulos a Donar
     coddon:
       type: VARCHAR
-      size: 10
+      size: 50
       required: true
     desdon:
       type: VARCHAR
@@ -636,138 +635,6 @@ propel:
 
 # Enlaces
 
-  caprovee:
-    codpro:
-      type: VARCHAR
-      size: 15
-      required: true
-    nompro:
-      type: VARCHAR
-      size: 250
-      required: true
-    rifpro:
-      type: VARCHAR
-      size: 15
-      required: true
-    nitpro:
-      type: VARCHAR
-      size: 15
-    dirpro:
-      type: VARCHAR
-      size: 100
-    telpro:
-      type: VARCHAR
-      size: 30
-    faxpro:
-      type: VARCHAR
-      size: 15
-    email:
-      type: VARCHAR
-      size: 100
-    limcre:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    codcta:
-      type: VARCHAR
-      size: 32
-    regmer:
-      type: VARCHAR
-      size: 15
-    fecreg:
-      type: DATE
-    tomreg:
-      type: VARCHAR
-      size: 15
-    folreg:
-      type: VARCHAR
-      size: 15
-    capsus:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    cappag:
-      type: NUMERIC
-      size: 14
-      scale: 2
-    rifrepleg:
-      type: VARCHAR
-      size: 15
-    nomrepleg:
-      type: VARCHAR
-      size: 50
-    dirrepleg:
-      type: VARCHAR
-      size: 100
-    nrocei:
-      type: VARCHAR
-      size: 30
-    codram:
-      type: VARCHAR
-      size: 6
-    fecinscir:
-      type: DATE
-    numinscir:
-      type: VARCHAR
-      size: 20
-    nacpro:
-      type: VARCHAR
-      size: 1
-    codord:
-      type: VARCHAR
-      size: 32
-    codpercon:
-      type: VARCHAR
-      size: 32
-    codtiprec:
-      type: VARCHAR
-      size: 4
-    codordadi:
-      type: VARCHAR
-      size: 32
-    codperconadi:
-      type: VARCHAR
-      size: 32
-    tipo:
-      type: VARCHAR
-      size: 1
-    fecven:
-      type: DATE
-    ciudad:
-      type: VARCHAR
-      size: 100
-    codordmercon:
-      type: VARCHAR
-      size: 32
-    codpermercon:
-      type: VARCHAR
-      size: 32
-    codordcontra:
-      type: VARCHAR
-      size: 32
-    codpercontra:
-      type: VARCHAR
-      size: 32
-    temcodpro:
-      type: VARCHAR
-      size: 10
-    temrifpro:
-      type: VARCHAR
-      size: 15
-    codctasec:
-      type: VARCHAR
-      size: 32
-    codtipemp:
-      type: VARCHAR
-      size: 4
-    id:
-      type: integer
-      required: true
-      primaryKey: true
-      autoincrement: true
-    _uniques:
-      u_caprovee:
-        - rifpro
   caordcom:
     ordcom:
       type: VARCHAR

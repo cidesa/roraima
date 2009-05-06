@@ -5,7 +5,7 @@ generator:
     theme:            cidesaGenerator
 
     fields:
-      nompro:      { name: Razón Social }
+      nompro:       {name: Razón Social}
       rifpro:         { name: Rif }
       nitpro:      { name: Nit }
       dirpro:         { name: Dirección }

@@ -45,7 +45,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 
 	
-	protected $caprovee_id;
+	protected $atprovee_id;
 
 
 	
@@ -165,7 +165,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 	protected $aAttrasoc;
 
 	
-	protected $aCaprovee;
+	protected $aAtprovee;
 
 	
 	protected $aAtmedico;
@@ -276,10 +276,10 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
   }
   
-  public function getCaproveeId()
+  public function getAtproveeId()
   {
 
-    return $this->caprovee_id;
+    return $this->atprovee_id;
 
   }
   
@@ -646,16 +646,16 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setCaproveeId($v)
+	public function setAtproveeId($v)
 	{
 
-    if ($this->caprovee_id !== $v) {
-        $this->caprovee_id = $v;
-        $this->modifiedColumns[] = AtayudasPeer::CAPROVEE_ID;
+    if ($this->atprovee_id !== $v) {
+        $this->atprovee_id = $v;
+        $this->modifiedColumns[] = AtayudasPeer::ATPROVEE_ID;
       }
   
-		if ($this->aCaprovee !== null && $this->aCaprovee->getId() !== $v) {
-			$this->aCaprovee = null;
+		if ($this->aAtprovee !== null && $this->aAtprovee->getId() !== $v) {
+			$this->aAtprovee = null;
 		}
 
 	} 
@@ -961,7 +961,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
       $this->attrasoc_id = $rs->getInt($startcol + 8);
 
-      $this->caprovee_id = $rs->getInt($startcol + 9);
+      $this->atprovee_id = $rs->getInt($startcol + 9);
 
       $this->proayu = $rs->getString($startcol + 10);
 
@@ -1154,11 +1154,11 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				$this->setAttrasoc($this->aAttrasoc);
 			}
 
-			if ($this->aCaprovee !== null) {
-				if ($this->aCaprovee->isModified()) {
-					$affectedRows += $this->aCaprovee->save($con);
+			if ($this->aAtprovee !== null) {
+				if ($this->aAtprovee->isModified()) {
+					$affectedRows += $this->aAtprovee->save($con);
 				}
-				$this->setCaprovee($this->aCaprovee);
+				$this->setAtprovee($this->aAtprovee);
 			}
 
 			if ($this->aAtmedico !== null) {
@@ -1307,9 +1307,9 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->aCaprovee !== null) {
-				if (!$this->aCaprovee->validate($columns)) {
-					$failureMap = array_merge($failureMap, $this->aCaprovee->getValidationFailures());
+			if ($this->aAtprovee !== null) {
+				if (!$this->aAtprovee->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aAtprovee->getValidationFailures());
 				}
 			}
 
@@ -1419,7 +1419,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				return $this->getAttrasocId();
 				break;
 			case 9:
-				return $this->getCaproveeId();
+				return $this->getAtproveeId();
 				break;
 			case 10:
 				return $this->getProayu();
@@ -1512,7 +1512,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 			$keys[6] => $this->getAtrubrosId(),
 			$keys[7] => $this->getAtestayuId(),
 			$keys[8] => $this->getAttrasocId(),
-			$keys[9] => $this->getCaproveeId(),
+			$keys[9] => $this->getAtproveeId(),
 			$keys[10] => $this->getProayu(),
 			$keys[11] => $this->getNroofi(),
 			$keys[12] => $this->getDesayu(),
@@ -1580,7 +1580,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 				$this->setAttrasocId($value);
 				break;
 			case 9:
-				$this->setCaproveeId($value);
+				$this->setAtproveeId($value);
 				break;
 			case 10:
 				$this->setProayu($value);
@@ -1670,7 +1670,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setAtrubrosId($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setAtestayuId($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setAttrasocId($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCaproveeId($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setAtproveeId($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setProayu($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setNroofi($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setDesayu($arr[$keys[12]]);
@@ -1711,7 +1711,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(AtayudasPeer::ATRUBROS_ID)) $criteria->add(AtayudasPeer::ATRUBROS_ID, $this->atrubros_id);
 		if ($this->isColumnModified(AtayudasPeer::ATESTAYU_ID)) $criteria->add(AtayudasPeer::ATESTAYU_ID, $this->atestayu_id);
 		if ($this->isColumnModified(AtayudasPeer::ATTRASOC_ID)) $criteria->add(AtayudasPeer::ATTRASOC_ID, $this->attrasoc_id);
-		if ($this->isColumnModified(AtayudasPeer::CAPROVEE_ID)) $criteria->add(AtayudasPeer::CAPROVEE_ID, $this->caprovee_id);
+		if ($this->isColumnModified(AtayudasPeer::ATPROVEE_ID)) $criteria->add(AtayudasPeer::ATPROVEE_ID, $this->atprovee_id);
 		if ($this->isColumnModified(AtayudasPeer::PROAYU)) $criteria->add(AtayudasPeer::PROAYU, $this->proayu);
 		if ($this->isColumnModified(AtayudasPeer::NROOFI)) $criteria->add(AtayudasPeer::NROOFI, $this->nroofi);
 		if ($this->isColumnModified(AtayudasPeer::DESAYU)) $criteria->add(AtayudasPeer::DESAYU, $this->desayu);
@@ -1784,7 +1784,7 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 
 		$copyObj->setAttrasocId($this->attrasoc_id);
 
-		$copyObj->setCaproveeId($this->caprovee_id);
+		$copyObj->setAtproveeId($this->atprovee_id);
 
 		$copyObj->setProayu($this->proayu);
 
@@ -2089,32 +2089,32 @@ abstract class BaseAtayudas extends BaseObject  implements Persistent {
 	}
 
 	
-	public function setCaprovee($v)
+	public function setAtprovee($v)
 	{
 
 
 		if ($v === null) {
-			$this->setCaproveeId(NULL);
+			$this->setAtproveeId(NULL);
 		} else {
-			$this->setCaproveeId($v->getId());
+			$this->setAtproveeId($v->getId());
 		}
 
 
-		$this->aCaprovee = $v;
+		$this->aAtprovee = $v;
 	}
 
 
 	
-	public function getCaprovee($con = null)
+	public function getAtprovee($con = null)
 	{
-		if ($this->aCaprovee === null && ($this->caprovee_id !== null)) {
-						include_once 'lib/model/om/BaseCaproveePeer.php';
+		if ($this->aAtprovee === null && ($this->atprovee_id !== null)) {
+						include_once 'lib/model/om/BaseAtproveePeer.php';
 
-			$this->aCaprovee = CaproveePeer::retrieveByPK($this->caprovee_id, $con);
+			$this->aAtprovee = AtproveePeer::retrieveByPK($this->atprovee_id, $con);
 
 			
 		}
-		return $this->aCaprovee;
+		return $this->aAtprovee;
 	}
 
 	

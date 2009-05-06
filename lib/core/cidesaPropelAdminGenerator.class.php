@@ -81,7 +81,7 @@ class cidesaPropelAdminGenerator extends sfPropelAdminGenerator {
     $type = $column->getCreoleType();
     if ($type == CreoleTypes::DATE)
     {
-      $params = array_merge(array('rich' => true, 'calendar_button_img' => sfConfig::get('sf_admin_web_dir').'/images/date.png'), $params);
+      $params = array_merge(array('rich' => true, 'calendar_button_img' => sfConfig::get('sf_admin_web_dir').'/images/date.png','onkeyup' => "javascript: mascara(this,'/',patron,true)"), $params);
     }
     else if ($type == CreoleTypes::TIMESTAMP)
     {
@@ -127,7 +127,7 @@ class cidesaPropelAdminGenerator extends sfPropelAdminGenerator {
     else if ($type == CreoleTypes::DATE)
     {
       // rich=false not yet implemented
-      return $this->getPHPObjectHelper('input_date_tag', $column, $params, array('rich' => true));
+      return $this->getPHPObjectHelper('input_date_tag', $column, $params, array('rich' => true,'onkeyup' => "javascript: mascara(this,'/',patron,true)"));
     }
     else if ($type == CreoleTypes::TIMESTAMP)
     {

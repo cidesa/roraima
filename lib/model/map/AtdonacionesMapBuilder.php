@@ -34,7 +34,7 @@ class AtdonacionesMapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('atdonaciones_SEQ');
 
-		$tMap->addColumn('CODDON', 'Coddon', 'string', CreoleTypes::VARCHAR, true, 10);
+		$tMap->addColumn('CODDON', 'Coddon', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addColumn('DESDON', 'Desdon', 'string', CreoleTypes::VARCHAR, true, 100);
 

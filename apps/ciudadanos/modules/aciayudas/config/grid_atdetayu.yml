@@ -21,7 +21,7 @@ opciones:                  # Opciones generales
   html:                    [size="10" ]
   oculta:                  false
   esgrabable:              true
-  ajaxfila:                false
+  ajaxfila:                true
 3:       # Columna 3
   titulo:                  Descripción
   tipo:                    t

@@ -2585,7 +2585,7 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 
 	
-	public function getAtayudassRelatedByAtsoliciJoinCaprovee($criteria = null, $con = null)
+	public function getAtayudassRelatedByAtsoliciJoinAtprovee($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseAtayudasPeer.php';
 		if ($criteria === null) {
@@ -2603,14 +2603,14 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 				$criteria->add(AtayudasPeer::ATSOLICI, $this->getId());
 
-				$this->collAtayudassRelatedByAtsolici = AtayudasPeer::doSelectJoinCaprovee($criteria, $con);
+				$this->collAtayudassRelatedByAtsolici = AtayudasPeer::doSelectJoinAtprovee($criteria, $con);
 			}
 		} else {
 									
 			$criteria->add(AtayudasPeer::ATSOLICI, $this->getId());
 
 			if (!isset($this->lastAtayudasRelatedByAtsoliciCriteria) || !$this->lastAtayudasRelatedByAtsoliciCriteria->equals($criteria)) {
-				$this->collAtayudassRelatedByAtsolici = AtayudasPeer::doSelectJoinCaprovee($criteria, $con);
+				$this->collAtayudassRelatedByAtsolici = AtayudasPeer::doSelectJoinAtprovee($criteria, $con);
 			}
 		}
 		$this->lastAtayudasRelatedByAtsoliciCriteria = $criteria;
@@ -2900,7 +2900,7 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 
 	
-	public function getAtayudassRelatedByAtbenefiJoinCaprovee($criteria = null, $con = null)
+	public function getAtayudassRelatedByAtbenefiJoinAtprovee($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseAtayudasPeer.php';
 		if ($criteria === null) {
@@ -2918,14 +2918,14 @@ abstract class BaseAtciudadano extends BaseObject  implements Persistent {
 
 				$criteria->add(AtayudasPeer::ATBENEFI, $this->getId());
 
-				$this->collAtayudassRelatedByAtbenefi = AtayudasPeer::doSelectJoinCaprovee($criteria, $con);
+				$this->collAtayudassRelatedByAtbenefi = AtayudasPeer::doSelectJoinAtprovee($criteria, $con);
 			}
 		} else {
 									
 			$criteria->add(AtayudasPeer::ATBENEFI, $this->getId());
 
 			if (!isset($this->lastAtayudasRelatedByAtbenefiCriteria) || !$this->lastAtayudasRelatedByAtbenefiCriteria->equals($criteria)) {
-				$this->collAtayudassRelatedByAtbenefi = AtayudasPeer::doSelectJoinCaprovee($criteria, $con);
+				$this->collAtayudassRelatedByAtbenefi = AtayudasPeer::doSelectJoinAtprovee($criteria, $con);
 			}
 		}
 		$this->lastAtayudasRelatedByAtbenefiCriteria = $criteria;

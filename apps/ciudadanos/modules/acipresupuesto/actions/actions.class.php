@@ -18,74 +18,11 @@ class acipresupuestoActions extends autoacipresupuestoActions
 
   }
 
-  public function configGrid($reg = array(),$regelim = array())
-  {
-    $this->regelim = $regelim;
-
-    if(!count($reg)>0)
-    {
-      // Aquí va el código para traernos los registros que contendrá el grid
-      $reg = array();
-      // Aquí va el código para generar arreglo de configuración del grid
-    $this->obj = array();
-    }
-
-    // Insertar el criterio de la busqueda de registros del Grid
-    // Por ejemplo:
-
-    // $c = new Criteria();
-    // $c->add(CaartaocPeer::AJUOC ,$this->caajuoc->getAjuoc());
-    // $reg = CaartaocPeer::doSelect($c);
-
-    // De esta forma se carga la configuración del grid de un archivo yml
-    // y se le pasa el parámetro de los registros encontrados ($reg)
-    //                                                                            /nombreformulario/
-    // $this->obj = Herramientas::getConfigGrid(sfConfig::get('sf_app_module_dir').'/formulario/'.sfConfig::get('sf_app_module_config_dir_name').'/grid_caartaoc',$reg);
-
-    // Si no se quiere cargar la configuración del grid de un .yml, sedebe hacer a pie.
-    // Por ejemplo:
-
-    /*
-    // Se crea el objeto principal de la clase OpcionesGrid
-    $opciones = new OpcionesGrid();
-    // Se configuran las opciones globales del Grid
-    $opciones->setEliminar(true);
-    $opciones->setTabla('Caartalm');
-    $opciones->setAnchoGrid(1150);
-    $opciones->setTitulo('Existencia por Almacenes');
-    $opciones->setHTMLTotalFilas(' ');
-    // Se generan las columnas
-    $col1 = new Columna('Cod. Almacen');
-    $col1->setTipo(Columna::TEXTO);
-    $col1->setEsGrabable(true);
-    $col1->setAlineacionObjeto(Columna::CENTRO);
-    $col1->setAlineacionContenido(Columna::CENTRO);
-    $col1->setNombreCampo('codalm');
-    $col1->setCatalogo('cadefalm','sf_admin_edit_form','2');
-    $col1->setAjax(2,2);
-
-    $col2 = new Columna('Descripción');
-    $col2->setTipo(Columna::TEXTO);
-    $col2->setAlineacionObjeto(Columna::IZQUIERDA);
-    $col2->setAlineacionContenido(Columna::IZQUIERDA);
-    $col2->setNombreCampo('codalm');
-    $col2->setHTML('type="text" size="25" disabled=true');
-
-    // Se guardan las columnas en el objetos de opciones
-    $opciones->addColumna($col1);
-    $opciones->addColumna($col2);
-
-    // Se genera el arreglo de opciones necesario para generar el grid
-    $this->obj = $opciones->getConfig($per);
-     */
-
-
-  }
-
   public function executeAjax()
   {
 
     $codigo = $this->getRequestParameter('codigo','');
+    $inputtag = $this->getRequestParameter('cajtexmos','');
     // Esta variable ajax debe ser usada en cada llamado para identificar
     // que objeto hace el llamado y por consiguiente ejecutar el código necesario
     $ajax = $this->getRequestParameter('ajax','');
@@ -96,10 +33,14 @@ class acipresupuestoActions extends autoacipresupuestoActions
 
     switch ($ajax){
       case '1':
-        // La variable $output es usada para retornar datos en formato de arreglo para actualizar
-        // objetos en la vista. mas informacion en
-        // http://201.210.211.26:8080/www/wiki/index.php/Agregar_Ajax_para_buscar_una_descripcion
-        $output = '[["","",""],["","",""],["","",""]]';
+        $c = new Criteria();
+        $c->add(AtproveePeer::RIFPRO, $codigo);
+        $atprovee = AtproveePeer::doSelectOne($c);
+        if($atprovee){
+          $output = '[["'.$inputtag.'","'.$atprovee->getNompro().'",""],["","",""],["","",""]]';
+        }else $output = '[["","",""],["","",""],["","",""]]';
+        
+        
         break;
       default:
         $output = '[["","",""],["","",""],["","",""]]';
@@ -108,12 +49,7 @@ class acipresupuestoActions extends autoacipresupuestoActions
     // Instruccion para escribir en la cabecera los datos a enviar a la vista
     $this->getResponse()->setHttpHeader("X-JSON", '('.$output.')');
 
-    // Si solo se va usar ajax para actualziar datos en objetos ya existentes se debe
-    // mantener habilitar esta instrucción
     return sfView::HEADER_ONLY;
-
-    // Si por el contrario se quiere reemplazar un div en la vista, se debe deshabilitar
-    // por supuesto tomando en cuenta que debe existir el archivo ajaxSuccess.php en la carpeta templates.
 
   }
 
