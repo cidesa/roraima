@@ -13,7 +13,7 @@ generator:
 
     list:
       title:          Registro de Proveedores
-      display:        [=nompro, rifpro,dirpro]
+      display:        [=nompro, rifpro, dirpro]
       object_actions:
         _edit:        ~
         _delete:      ~
