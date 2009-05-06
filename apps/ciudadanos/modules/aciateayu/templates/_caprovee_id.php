@@ -6,5 +6,5 @@
   'campoprincipal' => 'rifpro',
   'camposecundario'=> 'nompro',
   'campobase' => 'atprovee_id',
-  ), 'Atprovee_Aciayudas', 'atprovee', '' );
+  ), 'Atprovee_Aciprovee', 'atprovee', '' );
 ?>

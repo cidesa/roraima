@@ -5188,7 +5188,7 @@ A.CODREDE"
     );
   }
   
-  public function Atprovee_aciprovee($params='')
+  public function Atprovee_Aciprovee($params='')
   {
   	$this->c = new Criteria();
 
