@@ -10,7 +10,7 @@ generator:
       atprovee1:
         name: Proveedor
         catalogo:  
-          catalogoweb: Atprovee_aciprovee
+          catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
           parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro1" camposecundario="nompro1" campobase = "atprovee1"
@@ -23,7 +23,7 @@ generator:
       atprovee2:
         name: Proveedor
         catalogo:  
-          catalogoweb: Atprovee_aciprovee
+          catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
           parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro2" camposecundario="nompro2" campobase = "atprovee2"
@@ -36,7 +36,7 @@ generator:
       atprovee3:
         name: Proveedor
         catalogo:  
-          catalogoweb: Atprovee_aciprovee
+          catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
           parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro3" camposecundario="nompro3" campobase = "atprovee3"
@@ -49,7 +49,7 @@ generator:
       atprovee4:
         name: Proveedor
         catalogo:  
-          catalogoweb: Atprovee_aciprovee
+          catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
           parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro4" camposecundario="nompro4" campobase = "atprovee4"
@@ -62,7 +62,7 @@ generator:
       atprovee5:
         name: Proveedor
         catalogo:  
-          catalogoweb: Atprovee_aciprovee
+          catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
           parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro5" camposecundario="nompro5" campobase = "atprovee5"
@@ -75,7 +75,7 @@ generator:
       atprovee6:
         name: Proveedor
         catalogo:  
-          catalogoweb: Atprovee_aciprovee
+          catalogoweb: Atprovee_Aciprovee
           clase: Atprovee
           ajax: 1
           parametros: getprincipal="getRifpro" getsecundario="getNompro" campoprincipal="rifpro6" camposecundario="nompro6" campobase = "atprovee6"
