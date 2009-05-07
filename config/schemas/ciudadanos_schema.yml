@@ -207,6 +207,208 @@ propel:
     otros:  # Otras informaciones
       type: VARCHAR
       size: 1000
+    motvis:				# motivo Visita
+      type: VARCHAR
+      size: 5000
+    ###  Nuevo Campos Oro Negro ###
+    parfri:				# Pared frisada
+      type: BOOLEAN
+    parintext:			# Pare interna (I) o externa (E) frisada
+      type: VARCHAR
+      size: 1
+    obspar:
+      type: VARCHAR
+      size: 1000    
+    parsinfri:				# Pared sin frisada
+      type: BOOLEAN
+    parsinintext:			# Pare interna (I) o externa (E) sin frisar
+      type: VARCHAR
+      size: 1
+    parmad:					# Paredes de Madera
+      type: BOOLEAN
+    parzin:					# Paredes de Zinc
+      type: BOOLEAN
+    parmatdes:					# Paredes de Materiales de Desechos
+      type: BOOLEAN
+    suecemrus:					# Suelo de cemento rustico
+      type: BOOLEAN
+    suecempul:					# Suelo de cemento pulido
+      type: BOOLEAN
+    suetie:					# Suelo de Tierra
+      type: BOOLEAN
+    suecer:					# Suelo de Cerámica
+      type: BOOLEAN
+    suegra:					# Suelo de granito
+      type: BOOLEAN
+    suepar:					# Suelo de parquet
+      type: BOOLEAN
+    suelin:					# Suelo de Linoleo
+      type: BOOLEAN
+    obssue:					# Observaciones del suelo
+      type: VARCHAR
+      size: 1000    
+    teczin:					# Techo de Zinc
+      type: BOOLEAN			
+    tecmatdes:					# Techo de materiales de desechos
+      type: BOOLEAN			
+    tecace:					# Techo de Acerolí
+      type: BOOLEAN			
+    teccar:					# Techo de Cartón
+      type: BOOLEAN			
+    tectej:					# Techo de tejas
+      type: BOOLEAN			
+    tecado:					# Techo de Adobe
+      type: BOOLEAN			
+    obstec:					# Observaciones del Techo
+      type: VARCHAR
+      size: 1000    
+    vivnroamb:				# Vivienda - Nro de Ambientes
+      type: INTEGER
+    vivnrohab:				# Vivienda - Nro de Habitaciones
+      type: INTEGER
+    vivnroban:				# Vivienda - Nro de Habitaciones
+      type: INTEGER
+    bandenviv:				# Baños dentro de la vivienda
+      type: INTEGER
+    banfueviv:				# Baños fuera de la vivienda
+      type: INTEGER
+    vivlet:					# Vivienda - Letrina
+      type: BOOLEAN			
+    vivwat:					# Vivienda - Walter Clock
+      type: BOOLEAN			
+    vivotr:					# Vivienda - Otro
+      type: BOOLEAN			
+    vivduc:					# Vivienda - Ducha
+      type: BOOLEAN			
+    vivlav:					# Vivienda - Lavamanos
+      type: BOOLEAN			
+    vivpar:					# Vivienda - Paredes
+      type: VARCHAR
+      size: 100
+    vivpis:					# Vivienda - Pisos
+      type: VARCHAR
+      size: 100
+    vivsal:					# Vivienda - sala
+      type: BOOLEAN
+    vivcom:					# Vivienda - comedor
+      type: BOOLEAN
+    vivsalcom:					# Vivienda - Sala-Comedor
+      type: BOOLEAN
+    vivcocdenviv:					# Vivienda - Cocina dentro de la vivienda
+      type: BOOLEAN
+    vivcocfueviv:					# Vivienda - Cocina fuera de la vivienda
+      type: BOOLEAN
+    viaaccvivasf:					# Vias de acceso a la vivienda - Asfaltada
+      type: BOOLEAN
+    viaaccvivtie:					# Vias de acceso a la vivienda - Tierra
+      type: BOOLEAN
+    viaaccvivesc:					# Vias de acceso a la vivienda - Escaleras
+      type: BOOLEAN
+    tramet:					# transporte - metro
+      type: BOOLEAN
+    trafer:					# transporte - ferrocarril
+      type: BOOLEAN
+    tracam:					# transporte - camioneta
+      type: BOOLEAN
+    trajee:					# transporte - Jeep
+      type: BOOLEAN
+    tralan:					# transporte - Lancha
+      type: BOOLEAN
+    trabar:					# transporte - barco
+      type: BOOLEAN
+    tracami:					# transporte - caminata
+      type: BOOLEAN
+    agufredia:					# Agua Frecuencia - Diaria
+      type: BOOLEAN
+    agufreint:					# Agua Frecuencia - Interdiaria
+      type: BOOLEAN
+    agufresem:					# Agua Frecuencia - Semanal
+      type: BOOLEAN
+    agufre15d:					# Agua Frecuencia - Cada 15 dias
+      type: BOOLEAN
+    aguportub:					# Agua por tuberias
+      type: BOOLEAN
+    agupordep:					# Agua por depositos
+      type: BOOLEAN
+    aguserdes:					# Agua Servida desague
+      type: BOOLEAN
+    aguserpoz:					# Agua Servida pozo séptico
+      type: BOOLEAN
+    aseurbdia:					# Aseo Urbano Diario
+      type: BOOLEAN
+    aseurbint:					# Aseo Urbano Interdiario
+      type: BOOLEAN
+    aseurbsem:					# Aseo Urbano Semanal
+      type: BOOLEAN
+    aseurb15d:					# Aseo Urbano cada 15dias
+      type: BOOLEAN
+    elepag:					# Electricidad Pagada
+      type: BOOLEAN
+    elepar:					# Electricidad Parasitaza
+      type: BOOLEAN
+    gasbom:					# gas por bombonas
+      type: BOOLEAN
+    gasdir:					# gas directo
+      type: BOOLEAN
+    toting:					# Socio Economica - Total ingreso
+      type: NUMERIC
+      size: 14
+      scale: 2
+    egrviv:					# Socio Economica - Egreso en la vivienda
+      type: NUMERIC
+      size: 14
+      scale: 2
+    egrtra:					# Socio Economica - Egreso en transporte
+      type: NUMERIC
+      size: 14
+      scale: 2
+    egredu:					# Socio Economica - Egreso en educacion
+      type: NUMERIC
+      size: 14
+      scale: 2
+    egrali:					# Socio Economica - Egreso en alimentacion
+      type: NUMERIC
+      size: 14
+      scale: 2
+    egrtel:					# Socio Economica - Egreso en telefono
+      type: NUMERIC
+      size: 14
+      scale: 2
+    egrluzase:					# Socio Economica - Egreso en luz y aseo
+      type: NUMERIC
+      size: 14
+      scale: 2
+    egragu:					# Socio Economica - Egreso en agua
+      type: NUMERIC
+      size: 14
+      scale: 2
+    egrgas:					# Socio Economica - Egreso en gas
+      type: NUMERIC
+      size: 14
+      scale: 2
+    egrotr:					# Socio Economica - Egreso otros
+      type: NUMERIC
+      size: 14
+      scale: 2
+    totegr:					# Socio Economica - Total Egreso
+      type: NUMERIC
+      size: 14
+      scale: 2
+    diasoc:					# Diagnostico Social
+      type: VARCHAR
+      size: 5000
+    trasoc:					# Tratamiento Social
+      type: VARCHAR
+      size: 5000
+    recome:					# recomendaciones
+      type: VARCHAR
+      size: 5000
+    diasoc:					# Diagnostico Social
+      type: VARCHAR
+      size: 5000
+    observ:					# Observaciones
+      type: VARCHAR
+      size: 5000
     id:
   attrasoc:                     # Trabajadora Social
     cedtra:

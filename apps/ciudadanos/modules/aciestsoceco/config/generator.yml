@@ -22,11 +22,103 @@ generator:
       carvivpis:   { name: Pisos  } # Caract. Viv. Piso
       carvivpar:   { name: Paredes  } # Caract. Viv. Paredes
       carvivtec:   { name: Techo  } # Caract. Viv. Techo
-      anasoceco:   { name: Analisis Socio-Economico,  type: textarea_tag, params: size=100x10  } # Analisis socio-economico
+      anasoceco:   { name: .,  type: textarea_tag, params: size=100x10  } # Analisis socio-economico
       anafam:      { name: Analisis Familiar,  type: textarea_tag, params: size=100x10  } # Analisis familiar
       otros:       { name: Observaciones Adicionales,  type: textarea_tag, params: size=100x10  } # Observaciones
       nomsol:      { name: Nombre Solicitante }
       nomben:      { name: Nombre Beneficiario }
+      # Nuevos Campos para Oro negro
+      motvis:      { name: . }
+      parfri:      { name: Paredes de Bloque Frisada }
+      parintext:   { name: Paredes de Bloque Frisada (Interiores/Exteriores) }
+      obspar:      { name: Observaciones }
+      parsinfri:   { name: Paredes de Bloque Sin Frisada }
+      parsinintext:   { name: Paredes de Bloque Sin Frisada (Interiores/Exteriores) }
+      parmad:      { name: Paredes de Madera }
+      parzin:      { name: Paredes de Zinc }
+      parmatdes:   { name: Paredes de Materiales de Desechos }      
+      suecemrus:      { name: Suelo de Cemento Rustico }
+      suecempul:      { name: Suelo de Cemento Pulido }      
+      suetie:      { name: Suelo de Tierra }
+      suecer:      { name: Suelo de Cerámica }
+      suegra:      { name: Suelo de Granito }
+      suepar:      { name: Suelo de Parquet }
+      suelin:      { name: Suelo de Linóleo }
+      obssue:      { name: Observaciones }
+      teczin:      { name: Zinc }
+      tecmatdes:      { name: Materiales de Desecho }
+      tecace:      { name: Acerolí }
+      teccar:      { name: Cartón }
+      tectej:      { name: Tejas }
+      tecado:      { name: Adobe }
+      obstec:      { name: Observaciones }
+
+      vivnroamb:      { name: Nro. Ambientes }
+      vivnrohab:      { name: Nro. Habitaciones }
+      vivnroban:      { name: Nro. Baños }
+      bandenviv:      { name: Baños dentro de la Vivienda }
+      banfueviv:      { name: Baños fuera de la Vivienda }
+      vivlet:      { name: Letrina }
+      vivwat:      { name: Inodoro }
+      vivotr:      { name: Otro }
+      vivduc:      { name: Ducha }
+      vivlav:      { name: Lavamanos }
+      vivpar:      { name: Paredes }
+      vivpis:      { name: Piso }
+      vivsal:      { name: Sala }
+      vivcom:      { name: Comedor }
+      vivsalcom:      { name: Sala-Comedor }
+      vivcocdenviv:      { name: Cocina Dentro de la Vivienda }
+      vivcocfueviv:      { name: Cocina Fuera de la Vivienda }
+      
+      viaaccvivasf:     { name: Calle Asfaltada }
+      viaaccvivtie:     { name: Calle de Tierra }
+      viaaccvivesc:     { name: Escaleras }
+      
+      tramet:     { name: Metro }
+      trafer:     { name: Ferrocarril }
+      tracam:     { name: Cambioneta }
+      trajee:     { name: Jeep }
+      tralan:     { name: lancha }
+      trabar:     { name: Barco }
+      tracami:     { name: Caminata }
+      
+      agufredia:     { name: Diaria }
+      agufreint:     { name: inter diaria }
+      agufresem:     { name: Semanal }
+      agufre15d:     { name: Cada 15 Días o mas }
+      aguportub:     { name: Trasporte por Tuberías }
+      agupordep:     { name: transporte por Depositos o Sisternas }
+      
+      aguserdes:     { name: Por Desagues }
+      aguserpoz:     { name: Pozos sépticos }
+      
+      aseurbdia:     { name: Diario }
+      aseurbint:     { name: Inter diaria }
+      aseurbsem:     { name: Semanal }
+      aseurb15d:     { name: Cada 15 Días }
+      
+      elepag:     { name: Pagada }
+      elepar:     { name: Parasitaria (Conexion Ilegal) }
+      
+      gasbom:     { name: Bombonas }
+      gasdir:     { name: Directo }
+      
+      toting:     { name: Total Ingresos }
+      egrviv:     { name: Egreso por Vivienda }
+      egrtra:     { name: Egreso por Transporte }
+      egredu:     { name: Egreso por Educación }
+      egrali:     { name: Egreso por Alimento }
+      egrtel:     { name: Egreso por Comunicacion (Telefonía) }
+      egragu:     { name: Egreso por Agua }
+      egrgas:     { name: Egreso por Gas }
+      egrotr:     { name: Otros Egresos }
+      totegr:     { name: Total Egresos }
+      
+      diasoc:     { name: .,  type: textarea_tag, params: size=100x10  }
+      trasoc:     { name: .,  type: textarea_tag, params: size=100x10  }
+      recome:     { name: .,  type: textarea_tag, params: size=100x10  }
+      observ:     { name: .,  type: textarea_tag, params: size=100x10  }
 
     list:
       fields:
@@ -42,12 +134,32 @@ generator:
       title:          Edición de Informe de Visita Domiciliaria
       display:
         Expediente:         [_expediente]
-        Estado de Vivienda: [attipviv_id, attipproviv_id ]
-        Características de la Vivienda: [carvivsal, carvivcom, carvivhab, carvivcoc, carvivban, carvivpat, carvivarever, carvivpis, carvivpar, carvivtec]
-        #Informacion Familiar:  [_grufam]
-        Analisis Familiar: [anafam]
+        Motivo de la Visita Domiciliaria: [motvis]
+        Área Físico-Ambiental: [attipviv_id, attipproviv_id, parfri, _parintext, obspar, parsinfri, _parsinintext, parmad, parzin, parmatdes ]
+        Características del Suelo: [suecemrus, suecempul, suetie, suecer, suegra, suepar, suelin, obssue ]
+        Características del Techo: [teczin, tecmatdes, tecace, teccar, tectej, tecado, obstec]
+        Distribución de los espacios internos de la vivienda: [vivnroamb, vivnrohab, vivnroban, bandenviv, banfueviv, vivlet, vivwat, vivotr, vivduc, vivlav, vivpar, vivpis, vivsal, vivcom, vivsalcom, vivcocdenviv, vivcocfueviv]
+        Servicios Públicos - Vias de Accesos a la Vivienda: [viaaccvivasf, viaaccvivtie, viaaccvivesc]
+        Servicios Públicos - Transporte: [tramet, trafer, tracam, trajee, tralan, trabar, tracami ]
+        Servicios Públicos - Agua Potable: [agufredia, agufreint, agufresem, agufre15d, aguportub, agupordep]
+        Servicios Públicos - Aguas Servidas: [aguserdes, aguserpoz]
+        Servicios Públicos - Aseo Urbano: [aseurbdia, aseurbint, aseurbsem, aseurb15d]
+        Servicios Públicos - Sistema de Luz: [elepag, elepar]
+        Servicios Públicos - Gas: [gasbom, gasdir]
+        Área Socio-Económica: [toting, egrviv, egrtra, egredu, egrali, egrtel, egragu, egrgas, egrotr, totegr]
         Analisis Socio-Economico: [anasoceco]
-        Informacion Adicional:    [otros]
+        Diagnóstico Social: [diasoc]
+        Tratamiento Social: [trasoc]
+        Recomendaciones: [recome]
+        Observaciones: [observ]
+        
+        
+        #Estado de Vivienda: [attipviv_id, attipproviv_id ]
+        #Características de la Vivienda: [carvivsal, carvivcom, carvivhab, carvivcoc, carvivban, carvivpat, carvivarever, carvivpis, carvivpar, carvivtec]
+        #Informacion Familiar:  [_grufam]
+        #Analisis Familiar: [anafam]
+        
+        #Informacion Adicional:    [otros]
       actions:
         _list:        ~
         _save:        ~
