@@ -3202,6 +3202,7 @@ $this->c= new Criteria();
 
     $this->columnas = array (
       ContabcPeer :: NUMCOM => 'Numero',
+      ContabcPeer :: DESCOM => 'Descripcion',
       ContabcPeer :: FECCOM => 'Fecha',
       ContabcPeer :: STACOM => 'Estatus',
       ContabcPeer :: REFTRA => 'Referencia',
@@ -5187,7 +5188,7 @@ A.CODREDE"
       CpprecomPeer :: MONPRC => 'Monto'
     );
   }
-  
+
   public function Atprovee_Aciprovee($params='')
   {
   	$this->c = new Criteria();
@@ -5196,7 +5197,7 @@ A.CODREDE"
       AtproveePeer::RIFPRO => 'Rif',
       AtproveePeer::NOMPRO => 'Razón Social',
     );
-    
+
   }
 
 
