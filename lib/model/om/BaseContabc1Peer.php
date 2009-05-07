@@ -212,6 +212,442 @@ abstract class BaseContabc1Peer {
 		}
 		return $results;
 	}
+
+	
+	public static function doCountJoinContabc(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(Contabc1Peer::NUMCOM, ContabcPeer::NUMCOM);
+
+		$rs = Contabc1Peer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinContabb(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(Contabc1Peer::CODCTA, ContabbPeer::CODCTA);
+
+		$rs = Contabc1Peer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinContabc(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		Contabc1Peer::addSelectColumns($c);
+		$startcol = (Contabc1Peer::NUM_COLUMNS - Contabc1Peer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		ContabcPeer::addSelectColumns($c);
+
+		$c->addJoin(Contabc1Peer::NUMCOM, ContabcPeer::NUMCOM);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = Contabc1Peer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = ContabcPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getContabc(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addContabc1($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initContabc1s();
+				$obj2->addContabc1($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinContabb(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		Contabc1Peer::addSelectColumns($c);
+		$startcol = (Contabc1Peer::NUM_COLUMNS - Contabc1Peer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		ContabbPeer::addSelectColumns($c);
+
+		$c->addJoin(Contabc1Peer::CODCTA, ContabbPeer::CODCTA);
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = Contabc1Peer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = ContabbPeer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol);
+
+			$newObject = true;
+			foreach($results as $temp_obj1) {
+				$temp_obj2 = $temp_obj1->getContabb(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+										$temp_obj2->addContabc1($obj1); 					break;
+				}
+			}
+			if ($newObject) {
+				$obj2->initContabc1s();
+				$obj2->addContabc1($obj1); 			}
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAll(Criteria $criteria, $distinct = false, $con = null)
+	{
+		$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(Contabc1Peer::NUMCOM, ContabcPeer::NUMCOM);
+
+		$criteria->addJoin(Contabc1Peer::CODCTA, ContabbPeer::CODCTA);
+
+		$rs = Contabc1Peer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAll(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+				if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		Contabc1Peer::addSelectColumns($c);
+		$startcol2 = (Contabc1Peer::NUM_COLUMNS - Contabc1Peer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		ContabcPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + ContabcPeer::NUM_COLUMNS;
+
+		ContabbPeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + ContabbPeer::NUM_COLUMNS;
+
+		$c->addJoin(Contabc1Peer::NUMCOM, ContabcPeer::NUMCOM);
+
+		$c->addJoin(Contabc1Peer::CODCTA, ContabbPeer::CODCTA);
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = Contabc1Peer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+
+					
+			$omClass = ContabcPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2 = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getContabc(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addContabc1($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initContabc1s();
+				$obj2->addContabc1($obj1);
+			}
+
+
+					
+			$omClass = ContabbPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj3 = new $cls();
+			$obj3->hydrate($rs, $startcol3);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj3 = $temp_obj1->getContabb(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj3->addContabc1($obj1); 					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj3->initContabc1s();
+				$obj3->addContabc1($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doCountJoinAllExceptContabc(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(Contabc1Peer::CODCTA, ContabbPeer::CODCTA);
+
+		$rs = Contabc1Peer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doCountJoinAllExceptContabb(Criteria $criteria, $distinct = false, $con = null)
+	{
+				$criteria = clone $criteria;
+
+				$criteria->clearSelectColumns()->clearOrderByColumns();
+		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT_DISTINCT);
+		} else {
+			$criteria->addSelectColumn(Contabc1Peer::COUNT);
+		}
+
+				foreach($criteria->getGroupByColumns() as $column)
+		{
+			$criteria->addSelectColumn($column);
+		}
+
+		$criteria->addJoin(Contabc1Peer::NUMCOM, ContabcPeer::NUMCOM);
+
+		$rs = Contabc1Peer::doSelectRS($criteria, $con);
+		if ($rs->next()) {
+			return $rs->getInt(1);
+		} else {
+						return 0;
+		}
+	}
+
+
+	
+	public static function doSelectJoinAllExceptContabc(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		Contabc1Peer::addSelectColumns($c);
+		$startcol2 = (Contabc1Peer::NUM_COLUMNS - Contabc1Peer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		ContabbPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + ContabbPeer::NUM_COLUMNS;
+
+		$c->addJoin(Contabc1Peer::CODCTA, ContabbPeer::CODCTA);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = Contabc1Peer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = ContabbPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getContabb(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addContabc1($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initContabc1s();
+				$obj2->addContabc1($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
+
+	
+	public static function doSelectJoinAllExceptContabb(Criteria $c, $con = null)
+	{
+		$c = clone $c;
+
+								if ($c->getDbName() == Propel::getDefaultDB()) {
+			$c->setDbName(self::DATABASE_NAME);
+		}
+
+		Contabc1Peer::addSelectColumns($c);
+		$startcol2 = (Contabc1Peer::NUM_COLUMNS - Contabc1Peer::NUM_LAZY_LOAD_COLUMNS) + 1;
+
+		ContabcPeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + ContabcPeer::NUM_COLUMNS;
+
+		$c->addJoin(Contabc1Peer::NUMCOM, ContabcPeer::NUMCOM);
+
+
+		$rs = BasePeer::doSelect($c, $con);
+		$results = array();
+
+		while($rs->next()) {
+
+			$omClass = Contabc1Peer::getOMClass();
+
+			$cls = Propel::import($omClass);
+			$obj1 = new $cls();
+			$obj1->hydrate($rs);
+
+			$omClass = ContabcPeer::getOMClass();
+
+
+			$cls = Propel::import($omClass);
+			$obj2  = new $cls();
+			$obj2->hydrate($rs, $startcol2);
+
+			$newObject = true;
+			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
+				$temp_obj1 = $results[$j];
+				$temp_obj2 = $temp_obj1->getContabc(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+					$newObject = false;
+					$temp_obj2->addContabc1($obj1);
+					break;
+				}
+			}
+
+			if ($newObject) {
+				$obj2->initContabc1s();
+				$obj2->addContabc1($obj1);
+			}
+
+			$results[] = $obj1;
+		}
+		return $results;
+	}
+
 	
 	public static function getTableMap()
 	{

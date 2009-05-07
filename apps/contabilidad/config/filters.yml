@@ -1,0 +1,11 @@
+rendering: ~
+web_debug: ~
+AutosetSchemaFIlter:
+  class: AutosetSchemaFIlter
+security:  ~
+
+
+cache:     ~
+common:    ~
+flash:     ~
+execution: ~

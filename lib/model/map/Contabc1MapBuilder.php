@@ -34,13 +34,13 @@ class Contabc1MapBuilder {
 
 		$tMap->setPrimaryKeyMethodInfo('contabc1_SEQ');
 
-		$tMap->addColumn('NUMCOM', 'Numcom', 'string', CreoleTypes::VARCHAR, true, 8);
+		$tMap->addForeignKey('NUMCOM', 'Numcom', 'string', CreoleTypes::VARCHAR, 'contabc', 'NUMCOM', true, 8);
 
 		$tMap->addColumn('FECCOM', 'Feccom', 'int', CreoleTypes::DATE, true, null);
 
 		$tMap->addColumn('DEBCRE', 'Debcre', 'string', CreoleTypes::VARCHAR, true, 1);
 
-		$tMap->addColumn('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, true, 32);
+		$tMap->addForeignKey('CODCTA', 'Codcta', 'string', CreoleTypes::VARCHAR, 'contabb', 'CODCTA', true, 32);
 
 		$tMap->addColumn('NUMASI', 'Numasi', 'double', CreoleTypes::NUMERIC, false, 3);
 

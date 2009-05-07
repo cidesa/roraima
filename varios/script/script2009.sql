@@ -620,6 +620,39 @@ COMMENT ON TABLE "tsrelasiord" IS '';
 ALTER TABLE "cadefart"
   ADD COLUMN "gencorart" varchar(1);
 
+--23/04/2009  Campo para la configuracion de la aprobacion de la Orden de Pago, motivo de anulacion
+ALTER TABLE "opdefemp"
+  ADD COLUMN "reqaprord" varchar(1),
+  ADD COLUMN "ordcomptot" varchar(1),
+  ADD COLUMN "ordmotanu" varchar(1);
+
+--23/04/2009
+ALTER TABLE "opordpag"
+  ADD COLUMN "aprobado" varchar(1),
+  ADD COLUMN "codmotanu" varchar(4),
+  ADD COLUMN "usuanu" varchar(250);
+
+-----------------------------------------------------------------------------
+-- tsmotanu para la anúlacion de la orden de pago
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "tsmotanu" CASCADE;
+
+DROP SEQUENCE IF EXISTS "tsmotanu_seq";
+
+CREATE SEQUENCE "tsmotanu_seq";
+
+
+CREATE TABLE "tsmotanu"
+(
+  "codmotanu" VARCHAR(4),
+  "desmotanu" VARCHAR(250),
+  "id" INTEGER  NOT NULL DEFAULT nextval('tsmotanu_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "tsmotanu" IS '';
+
 
 --23/04/2009
 --Se cambio los atributos de los campos a integer
@@ -632,6 +665,9 @@ alter table cpdefniv alter column cortrasla type integer;
 alter table cpdefniv alter column corsoladidis type integer;
 alter table cpdefniv alter column coradidis type integer;
 alter table cpdefniv alter column coraju type integer;
+alter table cpdefniv add column btneli boolean DEFAULT true;
+alter table cpdefniv add column btnanu boolean DEFAULT true;
+
 
 -- Para que funcione bien las conciliaciones bancarias
 ALTER TABLE tsconcil DROP CONSTRAINT itsconcil;
@@ -642,6 +678,11 @@ ALTER TABLE tsconcil ADD CONSTRAINT itsconcil PRIMARY KEY (numcue, mescon, anoco
 ALTER TABLE cpdefniv ADD COLUMN btneli boolean;
 
 ALTER TABLE cpdefniv ADD COLUMN btnanu boolean;
+
+
+--24-04-09-  Correlativo de los comprobantes
+alter table contaba add column corcomp varchar(10);
+alter table contaba add column btnelicomanu boolean default (false);
 
 --Campos que le faltan a la bd de suvinca
 ALTER TABLE "cireging"
@@ -654,7 +695,123 @@ ALTER TABLE "cireging"
   ADD COLUMN "refliq" VARCHAR(10),
   ADD COLUMN "desliq" VARCHAR(250);
 
+--28/04/2008 Cambios para las aprobaciones(parametrizable) de ordenes en Ordenamiento y Tesoreria (Matriz Barcelona)
+ALTER TABLE "opordpag"
+  DROP COLUMN aprobado,
+  ADD COLUMN "aprobadoord" varchar(1),
+  ADD COLUMN "aprobadotes" VARCHAR(1);
+
+--28/04/2008 Para la configuracion de Maneja o No Bloqueo de Cuentas (Concurrencia entre usuarios)(Matriz Barcelona)
+ALTER TABLE "opdefemp"
+  ADD COLUMN "manbloqban" varchar(1);
+
+-----------------------------------------------------------------------------
+-- tsbloqban
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "tsbloqban" CASCADE;
+
+DROP SEQUENCE IF EXISTS "tsbloqban_seq";
+
+CREATE SEQUENCE "tsbloqban_seq";
+
+
+CREATE TABLE "tsbloqban"
+(
+  "numcue" VARCHAR(20),
+  "id" INTEGER  NOT NULL DEFAULT nextval('tsbloqban_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "tsbloqban" IS '';
 
 --30/04/2008 Añadir campo tipmov a Opordche para poder buscar exactamente el movimiento asociado al cheque en la tabla TSMOVLIB
 ALTER TABLE "opordche"
   ADD COLUMN "tipmov" VARCHAR(4);
+
+-----------------------------------------------------------------------------
+-- atciudadano
+-----------------------------------------------------------------------------
+
+ALTER TABLE "atciudadano" ADD COLUMN "segpri" BOOLEAN;
+ALTER TABLE "atciudadano" ADD COLUMN "attipproviv_id" INTEGER;
+ALTER TABLE "atciudadano" ADD COLUMN "attipviv_id" INTEGER;
+
+-----------------------------------------------------------------------------
+-- atmedico
+-----------------------------------------------------------------------------
+
+ALTER TABLE "atmedico" ADD COLUMN "nrocolmed" VARCHAR(25);
+
+
+-----------------------------------------------------------------------------
+-- atprovee
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "atprovee" CASCADE;
+
+DROP SEQUENCE IF EXISTS "atprovee_seq";
+
+CREATE SEQUENCE "atprovee_seq";
+
+
+CREATE TABLE "atprovee"
+(
+  "nompro" VARCHAR(100),
+  "rifpro" VARCHAR(100),
+  "nitpro" VARCHAR(100),
+  "dirpro" VARCHAR(1000),
+  "telpro" VARCHAR(100),
+  "id" INTEGER  NOT NULL DEFAULT nextval('atprovee_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "atprovee" IS '';
+
+
+-----------------------------------------------------------------------------
+-- atpresupuesto
+-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS "atpresupuesto" CASCADE;
+
+DROP SEQUENCE IF EXISTS "atpresupuesto_seq";
+
+CREATE SEQUENCE "atpresupuesto_seq";
+
+
+CREATE TABLE "atpresupuesto"
+(
+  "atayudas_id" INTEGER,
+  "atprovee1" INTEGER  NOT NULL,
+  "monto1" NUMERIC(14,2),
+  "atprovee2" INTEGER  NOT NULL,
+  "monto2" NUMERIC(14,2),
+  "atprovee3" INTEGER  NOT NULL,
+  "monto3" NUMERIC(14,2),
+  "atprovee4" INTEGER  NOT NULL,
+  "monto4" NUMERIC(14,2),
+  "atprovee5" INTEGER  NOT NULL,
+  "monto5" NUMERIC(14,2),
+  "atprovee6" INTEGER  NOT NULL,
+  "monto6" NUMERIC(14,2),
+  "id" INTEGER  NOT NULL DEFAULT nextval('atpresupuesto_seq'::regclass),
+  PRIMARY KEY ("id")
+);
+
+COMMENT ON TABLE "atpresupuesto" IS '';
+
+
+ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_1" FOREIGN KEY ("atayudas_id") REFERENCES "atayudas" ("id");
+
+ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_2" FOREIGN KEY ("atprovee1") REFERENCES "atprovee" ("id");
+
+ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_3" FOREIGN KEY ("atprovee2") REFERENCES "atprovee" ("id");
+
+ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_4" FOREIGN KEY ("atprovee3") REFERENCES "atprovee" ("id");
+
+ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_5" FOREIGN KEY ("atprovee4") REFERENCES "atprovee" ("id");
+
+ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_6" FOREIGN KEY ("atprovee5") REFERENCES "atprovee" ("id");
+
+ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_7" FOREIGN KEY ("atprovee6") REFERENCES "atprovee" ("id");

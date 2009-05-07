@@ -1,0 +1,17 @@
+generator:
+  class:              cidesaPropelAdminGenerator
+  param:
+    model_class:      Contaba
+    theme:            cidesaGenerator
+    fields:
+      corcomp:         { name: Comprobantes Contables, params: include_custom= "Seleccione" }
+      btnelicomanu:    { name: Desactivar la Opción de Eliminar Comprobantes Anulados }
+
+    edit:
+      title: Configuracion Generales
+      display:
+        Formatos y Correlativos:  [_corcomp]
+        Generales:  [btnelicomanu]
+
+      actions:
+        _save:        ~

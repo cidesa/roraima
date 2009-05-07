@@ -23,6 +23,4 @@ generator:
         Generales:  [btnanu, btneli]
 
       actions:
-        _list:        ~
         _save:        ~
-        _delete:      ~

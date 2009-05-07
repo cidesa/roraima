@@ -58,6 +58,12 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 	protected $lastContabb1Criteria = null;
 
 	
+	protected $collContabc1s;
+
+	
+	protected $lastContabc1Criteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -427,6 +433,14 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collContabc1s !== null) {
+				foreach($this->collContabc1s as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -470,6 +484,14 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 
 				if ($this->collContabb1s !== null) {
 					foreach($this->collContabb1s as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collContabc1s !== null) {
+					foreach($this->collContabc1s as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -690,6 +712,10 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 				$copyObj->addContabb1($relObj->copy($deepCopy));
 			}
 
+			foreach($this->getContabc1s() as $relObj) {
+				$copyObj->addContabc1($relObj->copy($deepCopy));
+			}
+
 		} 
 
 		$copyObj->setNew(true);
@@ -783,6 +809,111 @@ abstract class BaseContabb extends BaseObject  implements Persistent {
 	{
 		$this->collContabb1s[] = $l;
 		$l->setContabb($this);
+	}
+
+	
+	public function initContabc1s()
+	{
+		if ($this->collContabc1s === null) {
+			$this->collContabc1s = array();
+		}
+	}
+
+	
+	public function getContabc1s($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseContabc1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collContabc1s === null) {
+			if ($this->isNew()) {
+			   $this->collContabc1s = array();
+			} else {
+
+				$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+				Contabc1Peer::addSelectColumns($criteria);
+				$this->collContabc1s = Contabc1Peer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+				Contabc1Peer::addSelectColumns($criteria);
+				if (!isset($this->lastContabc1Criteria) || !$this->lastContabc1Criteria->equals($criteria)) {
+					$this->collContabc1s = Contabc1Peer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastContabc1Criteria = $criteria;
+		return $this->collContabc1s;
+	}
+
+	
+	public function countContabc1s($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseContabc1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+		return Contabc1Peer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addContabc1(Contabc1 $l)
+	{
+		$this->collContabc1s[] = $l;
+		$l->setContabb($this);
+	}
+
+
+	
+	public function getContabc1sJoinContabc($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseContabc1Peer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collContabc1s === null) {
+			if ($this->isNew()) {
+				$this->collContabc1s = array();
+			} else {
+
+				$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+				$this->collContabc1s = Contabc1Peer::doSelectJoinContabc($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(Contabc1Peer::CODCTA, $this->getCodcta());
+
+			if (!isset($this->lastContabc1Criteria) || !$this->lastContabc1Criteria->equals($criteria)) {
+				$this->collContabc1s = Contabc1Peer::doSelectJoinContabc($criteria, $con);
+			}
+		}
+		$this->lastContabc1Criteria = $criteria;
+
+		return $this->collContabc1s;
 	}
 
 } 
