@@ -138,9 +138,27 @@ class Comprobante
     $num=0;
     $numcom='';
     $valido = false;
+    $formato = '';
+    $longitud='8';
+		//Verificamos el formato del correlativo,
+		//ya que es parametrizable
+      $c = new Criteria();
+      $c->add(ContabaPeer::CODEMP,'001');
+      $per = ContabaPeer::doSelectOne($c);
+
+      if ($per->getCorcomp()=='AAMM####'){
+      	$formato = date('ym');
+      	$longitud='4';
+
+      }elseif ($per->getCorcomp()=='MMAA####'){
+      	$formato = date('my');
+		$longitud='4';
+      }
+
     while(!$valido){
       $num = H::getNextvalSecuencia('contabc_numcom_seq');
-      $numcom = str_pad((string)$num, 8, "0", STR_PAD_LEFT);
+      $numcom = $formato.str_pad((string)$num, $longitud, "0", STR_PAD_LEFT);
+
       $c = new Criteria();
       $c->add(ContabcPeer::NUMCOM,$numcom);
       $contabc = ContabcPeer::doSelectOne($c);
@@ -150,7 +168,6 @@ class Comprobante
     }
     return $numcom;
   }
-
 
   // Funcion para guardar los comprobantes contables
   public static function SalvarComprobante($numcom,$reftra,$feccom,$descom,$debito,$credito,$grid, $guarda)

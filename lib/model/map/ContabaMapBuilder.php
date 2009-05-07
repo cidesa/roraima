@@ -124,7 +124,11 @@ class ContabaMapBuilder {
 
 		$tMap->addColumn('CODCTAINGDEV', 'Codctaingdev', 'string', CreoleTypes::VARCHAR, false, 32);
 
-		$tMap->addColumn('UNIDAD', 'Unidad', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('UNIDAD', 'Unidad', 'string', CreoleTypes::VARCHAR, false, 10);
+
+		$tMap->addColumn('CORCOMP', 'Corcomp', 'string', CreoleTypes::VARCHAR, false, 100);
+
+		$tMap->addColumn('BTNELICOMANU', 'Btnelicomanu', 'boolean', CreoleTypes::BOOLEAN, false, null);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 

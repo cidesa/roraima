@@ -23,9 +23,6 @@ abstract class BaseContabcPeer {
 	const NUMCOM = 'contabc.NUMCOM';
 
 	
-	const REFTRA = 'contabc.REFTRA';
-
-	
 	const FECCOM = 'contabc.FECCOM';
 
 	
@@ -41,6 +38,9 @@ abstract class BaseContabcPeer {
 	const TIPCOM = 'contabc.TIPCOM';
 
 	
+	const REFTRA = 'contabc.REFTRA';
+
+	
 	const ID = 'contabc.ID';
 
 	
@@ -49,17 +49,17 @@ abstract class BaseContabcPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcom', 'Reftra', 'Feccom', 'Descom', 'Moncom', 'Stacom', 'Tipcom', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM, ContabcPeer::REFTRA, ContabcPeer::FECCOM, ContabcPeer::DESCOM, ContabcPeer::MONCOM, ContabcPeer::STACOM, ContabcPeer::TIPCOM, ContabcPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcom', 'reftra', 'feccom', 'descom', 'moncom', 'stacom', 'tipcom', 'id', ),
+		BasePeer::TYPE_PHPNAME => array ('Numcom', 'Feccom', 'Descom', 'Moncom', 'Stacom', 'Tipcom', 'Reftra', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM, ContabcPeer::FECCOM, ContabcPeer::DESCOM, ContabcPeer::MONCOM, ContabcPeer::STACOM, ContabcPeer::TIPCOM, ContabcPeer::REFTRA, ContabcPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcom', 'feccom', 'descom', 'moncom', 'stacom', 'tipcom', 'reftra', 'id', ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Numcom' => 0, 'Reftra' => 1, 'Feccom' => 2, 'Descom' => 3, 'Moncom' => 4, 'Stacom' => 5, 'Tipcom' => 6, 'Id' => 7, ),
-		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM => 0, ContabcPeer::REFTRA => 1, ContabcPeer::FECCOM => 2, ContabcPeer::DESCOM => 3, ContabcPeer::MONCOM => 4, ContabcPeer::STACOM => 5, ContabcPeer::TIPCOM => 6, ContabcPeer::ID => 7, ),
-		BasePeer::TYPE_FIELDNAME => array ('numcom' => 0, 'reftra' => 1, 'feccom' => 2, 'descom' => 3, 'moncom' => 4, 'stacom' => 5, 'tipcom' => 6, 'id' => 7, ),
+		BasePeer::TYPE_PHPNAME => array ('Numcom' => 0, 'Feccom' => 1, 'Descom' => 2, 'Moncom' => 3, 'Stacom' => 4, 'Tipcom' => 5, 'Reftra' => 6, 'Id' => 7, ),
+		BasePeer::TYPE_COLNAME => array (ContabcPeer::NUMCOM => 0, ContabcPeer::FECCOM => 1, ContabcPeer::DESCOM => 2, ContabcPeer::MONCOM => 3, ContabcPeer::STACOM => 4, ContabcPeer::TIPCOM => 5, ContabcPeer::REFTRA => 6, ContabcPeer::ID => 7, ),
+		BasePeer::TYPE_FIELDNAME => array ('numcom' => 0, 'feccom' => 1, 'descom' => 2, 'moncom' => 3, 'stacom' => 4, 'tipcom' => 5, 'reftra' => 6, 'id' => 7, ),
 		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
 	);
 
@@ -116,8 +116,6 @@ abstract class BaseContabcPeer {
 
 		$criteria->addSelectColumn(ContabcPeer::NUMCOM);
 
-		$criteria->addSelectColumn(ContabcPeer::REFTRA);
-
 		$criteria->addSelectColumn(ContabcPeer::FECCOM);
 
 		$criteria->addSelectColumn(ContabcPeer::DESCOM);
@@ -127,6 +125,8 @@ abstract class BaseContabcPeer {
 		$criteria->addSelectColumn(ContabcPeer::STACOM);
 
 		$criteria->addSelectColumn(ContabcPeer::TIPCOM);
+
+		$criteria->addSelectColumn(ContabcPeer::REFTRA);
 
 		$criteria->addSelectColumn(ContabcPeer::ID);
 

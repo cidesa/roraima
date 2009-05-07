@@ -11,11 +11,15 @@ contabilidad:
       default:
         modulo: contabilidadpresupuesto/aplicaciones/contabilidad
         modulo_dev: contabilidadpresupuesto/aplicaciones/contabilidad
+      Configuraciones Generales:
+        modulo: contabilidad.php
+        modulo_dev: contabilidad_dev.php
       Reportes:
         absoluta: reportes/reportes/contabilidad
     imagenes:
       default: OperatorClass.png
   menu:
+    Configuraciones Generales:                                confincongen
     Definiciones Específicas de Institución:                  ConFinIns.php
     Catálogo de Cuentas:                                      ConFinCue.php
     Tipos de Cuentas:                                         ConFinTipCueCon.php

@@ -44,6 +44,12 @@ abstract class BaseContabc1 extends BaseObject  implements Persistent {
 	protected $id;
 
 	
+	protected $aContabc;
+
+	
+	protected $aContabb;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -138,6 +144,10 @@ abstract class BaseContabc1 extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = Contabc1Peer::NUMCOM;
       }
   
+		if ($this->aContabc !== null && $this->aContabc->getNumcom() !== $v) {
+			$this->aContabc = null;
+		}
+
 	} 
 	
 	public function setFeccom($v)
@@ -175,6 +185,10 @@ abstract class BaseContabc1 extends BaseObject  implements Persistent {
         $this->modifiedColumns[] = Contabc1Peer::CODCTA;
       }
   
+		if ($this->aContabb !== null && $this->aContabb->getCodcta() !== $v) {
+			$this->aContabb = null;
+		}
+
 	} 
 	
 	public function setNumasi($v)
@@ -332,6 +346,22 @@ abstract class BaseContabc1 extends BaseObject  implements Persistent {
 			$this->alreadyInSave = true;
 
 
+												
+			if ($this->aContabc !== null) {
+				if ($this->aContabc->isModified()) {
+					$affectedRows += $this->aContabc->save($con);
+				}
+				$this->setContabc($this->aContabc);
+			}
+
+			if ($this->aContabb !== null) {
+				if ($this->aContabb->isModified()) {
+					$affectedRows += $this->aContabb->save($con);
+				}
+				$this->setContabb($this->aContabb);
+			}
+
+
 						if ($this->isModified()) {
 				if ($this->isNew()) {
 					$pk = Contabc1Peer::doInsert($this, $con);
@@ -377,6 +407,20 @@ abstract class BaseContabc1 extends BaseObject  implements Persistent {
 			$retval = null;
 
 			$failureMap = array();
+
+
+												
+			if ($this->aContabc !== null) {
+				if (!$this->aContabc->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aContabc->getValidationFailures());
+				}
+			}
+
+			if ($this->aContabb !== null) {
+				if (!$this->aContabb->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aContabb->getValidationFailures());
+				}
+			}
 
 
 			if (($retval = Contabc1Peer::doValidate($this, $columns)) !== true) {
@@ -590,6 +634,64 @@ abstract class BaseContabc1 extends BaseObject  implements Persistent {
 			self::$peer = new Contabc1Peer();
 		}
 		return self::$peer;
+	}
+
+	
+	public function setContabc($v)
+	{
+
+
+		if ($v === null) {
+			$this->setNumcom(NULL);
+		} else {
+			$this->setNumcom($v->getNumcom());
+		}
+
+
+		$this->aContabc = $v;
+	}
+
+
+	
+	public function getContabc($con = null)
+	{
+		if ($this->aContabc === null && (($this->numcom !== "" && $this->numcom !== null))) {
+						include_once 'lib/model/om/BaseContabcPeer.php';
+
+			$this->aContabc = ContabcPeer::retrieveByPK($this->numcom, $con);
+
+			
+		}
+		return $this->aContabc;
+	}
+
+	
+	public function setContabb($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCodcta(NULL);
+		} else {
+			$this->setCodcta($v->getCodcta());
+		}
+
+
+		$this->aContabb = $v;
+	}
+
+
+	
+	public function getContabb($con = null)
+	{
+		if ($this->aContabb === null && (($this->codcta !== "" && $this->codcta !== null))) {
+						include_once 'lib/model/om/BaseContabbPeer.php';
+
+			$this->aContabb = ContabbPeer::retrieveByPK($this->codcta, $con);
+
+			
+		}
+		return $this->aContabb;
 	}
 
 } 

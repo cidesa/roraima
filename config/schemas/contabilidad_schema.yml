@@ -6,7 +6,7 @@ propel:
       size: 3
       required: true
 #      index: unique
-      primaryKey: true
+#      primaryKey: true
     loncta:
       type: NUMERIC
       size: 2
@@ -142,9 +142,15 @@ propel:
     codctaingdev:
       type: VARCHAR
       size: 32
-    unidad:
+    unidad:unidad
+      type: VARCHAR
+      size: 10
+    corcomp:    #Correlativo Comprobante
       type: VARCHAR
       size: 100
+    btnelicomanu:    #Boton de Eliminar comprobantes anulados
+      type: BOOLEAN
+      default: false
     id:
       type: INTEGER
       required: true
@@ -180,7 +186,7 @@ propel:
       size: 32
       required: true
 #      index: unique
-      primaryKey: true
+      #primaryKeytrue
     descta:
       type: VARCHAR
       size: 250
@@ -233,7 +239,7 @@ propel:
       size: 32
       required: true
 #      index: unique
-      primaryKey: true
+      #primaryKeytrue
       foreignTable: contabb
       foreignReference: codcta
     fecini:
@@ -291,7 +297,7 @@ propel:
       size: 8
       required: true
 #      index: unique
-      primaryKey: true
+      #primaryKey:true
     feccom:
       type: DATE
       required: true
@@ -309,6 +315,9 @@ propel:
     tipcom:
       type: VARCHAR
       size: 3
+    reftra:
+      type: VARCHAR
+      size: 8
     id:
       type: INTEGER
       required: true
@@ -322,7 +331,7 @@ propel:
       size: 8
       required: true
 #      index: unique
-      primaryKey: true
+      #primaryKey:true
       foreignTable: contabc
       foreignReference: numcom
     feccom:
