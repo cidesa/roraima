@@ -1,24 +1,24 @@
 methods:
   post:
    - "atestsoceco{atayudas_id}"
-   - "atestsoceco{anasoceco}"
-   - "atestsoceco{anafam}"
+#   - "atestsoceco{anasoceco}"
+#   - "atestsoceco{anafam}"
 
 names:
   atestsoceco{atayudas_id}:
     required:  Yes
     required_msg: Debe seleccionar el expediente al cual va a realizar el estudio
-    validators: MyStringValidator1
+    validators: MyStringValidator1, ExistValidator
 
-  atestsoceco{anasoceco}:
-    required:  Yes
-    required_msg: Este campo debe contener datos
-    validators: MyStringValidator5
+#  atestsoceco{anasoceco}:
+#    required:  Yes
+#    required_msg: Este campo debe contener datos
+#    validators: MyStringValidator5
 
-  atestsoceco{anafam}:
-    required:  Yes
-    required_msg: Este campo debe contener datos
-    validators: MyStringValidator5
+#  atestsoceco{anafam}:
+#    required:  Yes
+#    required_msg: Este campo debe contener datos
+#    validators: MyStringValidator5
 
 
 MyStringValidator1:
@@ -78,3 +78,10 @@ Vfecha_1:
         match:      yes
         pattern:    /^(3[01]|2?[0-9]|1?[0-9]|0?[1-9]|[12]d)\/(0?[1-9]|1[012])\/(\d{4})$/
         match_error: La Fecha  introducida es invalida
+
+ExistValidator:
+    class: CidesaExistValidator
+    param:
+        class:        atayudas
+        column:       id
+        unique_error: El Nro de Expediente debe existir.
