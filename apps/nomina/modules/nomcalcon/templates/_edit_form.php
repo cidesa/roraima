@@ -210,7 +210,7 @@
 				<fieldset>
 				 <div class="form-row">
 				    <?php echo label_for('label2', __('En los Ultimos'), array('class' => 'required', 'style' => 'width:100px' )) ?>
-					<?php echo input_tag('ultmes','0',array('size' => 5)) ?> <?php echo '&nbsp;&nbsp;&nbsp;'.__('Meses')?>
+					<?php echo input_tag('ultmes','0',array('size' => 5)) ?> <?php echo select_tag('mesper',array('M' => 'Meses', 'P' => 'Períodos'));?>
 					<?php echo input_hidden_tag('cajaux2', '') ?>
 
 				 </div>

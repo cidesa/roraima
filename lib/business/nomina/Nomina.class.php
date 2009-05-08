@@ -4911,8 +4911,8 @@ class Nomina {
         $arreglo[$i]["perini"] = $anodesde;
         $arreglo[$i]["perfin"] = $anohasta;
 
-        $sql = "SELECT A.ANTAPVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND '" . $anohasta . "' BETWEEN TO_CHAR(ANOVIG,'YYYY') AND TO_CHAR(ANOVIGHAS,'YYYY')";
-
+        $sql = "SELECT A.ANTAPVAC FROM NPBONOCONT A, NPASIEMPCONT B WHERE A.CODTIPCON=B.CODTIPCON AND B.CODEMP='" . $codemp . "' AND TO_DATE(" . $anohasta . ",'YYYY') BETWEEN TO_DATE(ANOVIG,'YYYY') AND TO_DATE(ANOVIGHAS,'YYYY')";
+     
         $resp = Herramientas :: BuscarDatos($sql, & $per);
 
         $antiguedadAP = '';
@@ -5528,7 +5528,7 @@ class Nomina {
                 A.codnom='" . $nomina . "'
                 And B.Ano Between " . ($anohasta -1) . " and " . $anofin . "
                 And " . $anofin . "-B.ano between A.rangodesde and A.rangohasta
-                And C.PERINI=B.ANO::varchar
+                And C.PERINI=B.ANO
                 And C.CODEMP='" . $codemp . "'
 
               ) as subconsulta
@@ -6382,9 +6382,7 @@ class Nomina {
     return -1;
   }
 
-  public static function salvarNpsalintind($npsalint, $grid) {
-
-
+   public static function salvarNpsalintind($npsalint, $grid) {
 
     $x = $grid[0];
 
@@ -6401,58 +6399,37 @@ class Nomina {
 
     //Herramientas::PrintR($x);
     $j = 0;
+    $montoasiref=-1;
     $monasi=0;
-    $valmon=0;
-    $valmonaux=0;
-    $monasicomp0=0;
-    $monasicomp1=0;
-    $monasicomp2=0;
-    $monasicomp3=0;
-    $monasicomp4=0;
-    $monasicomp5=0;
-    $monasicomp6=0;
-    $monasicomp7=0;
-    $monasicomp8=0;
-    $monasicomp9=0;
-    $monasicomp10=0;
-    $monasicomp11=0;
-    $monasicomp12=0;
-    $monasicomp13=0;
-    $monasicomp14=0;
     while ($j < count($x)) {
       $h = 0;
-
       while ($h < count($arr_codasi)) {
-       eval('$valmon=$monasicomp'.$h.';');
-       if($valmon!=$x[$j][$arr_codasi[$h]["codasi"]] && $x[$j][$arr_codasi[$h]["codasi"]]!=0)
+
+      /*  if($montoasiref!=$x[$j][$arr_codasi[$h]["codasi"]] && $x[$j][$arr_codasi[$h]["codasi"]]!=0)
         {
-          eval('$monasi'.$h.'=$x[$j][$arr_codasi[$h]["codasi"]];');
-        }
-        else
-        {
-          eval('$monasi'.$h.'=$monasicomp'.$h.';');
-        }
+          $monasi=$x[$j][$arr_codasi[$h]["codasi"]];
+        }*/
         $npsalint = new Npsalint();
         $npsalint->setCodemp($codemp);
         $npsalint->setCodasi($arr_codasi[$h]["codasi"]);
-        //$npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
+        $npsalint->setMonasi($x[$j][$arr_codasi[$h]["codasi"]]);
+        //$npsalint->setMonasi($monasi);
         $fecinicon = $x[$j]["fecinicon"];
         $fecfincon = $x[$j]["fecfincon"];
         $npsalint->setFecinicon($fecinicon);
         $npsalint->setFecfincon($fecfincon);
         $npsalint->setCodcon($codcon);
-        eval('$npsalint->setMonasi($monasi'.$h.');');
-	    $npsalint->save();
-
-        #eval('$valmonaux=$x[$j][$arr_codasi[$h]["codasi"]];');
-        if ($x[$j][$arr_codasi[$h]["codasi"]]!=0)
-        	eval('$monasicomp'.$h.'=$x[$j][$arr_codasi[$h]["codasi"]];');
+        $npsalint->save();
+        //print "<br> A grabar, codemp ".$codemp." Cod Asi ".$arr_codasi[$h]["codasi"]. " Monasi ".$x[$j][$arr_codasi[$h]["codasi"]];
+        //print "<br> A grabar, fecinicon ".$fecinicon." fecfincon ".$fecfincon;
+        $montoasiref=$x[$j][$arr_codasi[$h]["codasi"]];
         $h++;
       }
       $j++;
     }
     return -1;
   }
+
 
   public static function validarNomcamnomcar($npasicaremp, $codnom, $codcar, $codcat, $feccam) {
 

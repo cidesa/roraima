@@ -332,7 +332,7 @@
 		{
 			if (isNaN(parseInt(dato4)))
 			{
-				alert('No puede aceptar con el numero de meses igual a 0');
+				alert('No puede aceptar con el numero de meses o peridos igual a 0');
 				$('ultmes').value='0';
 				encontrado = false;
 			}
@@ -358,9 +358,12 @@
 		var opci = fecini + fecfin + opcion;
 
 		if (dato4=='0')
-			opci = opci + '0';
+			opci = opci + 'O'+'0';
 		if (dato4!='0')
-		    opci = opci + dato4;
+		{
+		    opci = opci + $('mesper').value+dato4;
+
+		 }
 
         var condicion = $('cajaux2').value;
         if (encontrado==true && condicion!='')
