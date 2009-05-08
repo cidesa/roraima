@@ -30,12 +30,6 @@ abstract class BaseNpprofesion extends BaseObject  implements Persistent {
 	protected $lastNpprocarCriteria = null;
 
 	
-	protected $collForprocars;
-
-	
-	protected $lastForprocarCriteria = null;
-
-	
 	protected $alreadyInSave = false;
 
 	
@@ -224,14 +218,6 @@ abstract class BaseNpprofesion extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->collForprocars !== null) {
-				foreach($this->collForprocars as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -275,14 +261,6 @@ abstract class BaseNpprofesion extends BaseObject  implements Persistent {
 
 				if ($this->collNpprocars !== null) {
 					foreach($this->collNpprocars as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collForprocars !== null) {
-					foreach($this->collForprocars as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -426,10 +404,6 @@ abstract class BaseNpprofesion extends BaseObject  implements Persistent {
 				$copyObj->addNpprocar($relObj->copy($deepCopy));
 			}
 
-			foreach($this->getForprocars() as $relObj) {
-				$copyObj->addForprocar($relObj->copy($deepCopy));
-			}
-
 		} 
 
 		$copyObj->setNew(true);
@@ -558,111 +532,6 @@ abstract class BaseNpprofesion extends BaseObject  implements Persistent {
 		$this->lastNpprocarCriteria = $criteria;
 
 		return $this->collNpprocars;
-	}
-
-	
-	public function initForprocars()
-	{
-		if ($this->collForprocars === null) {
-			$this->collForprocars = array();
-		}
-	}
-
-	
-	public function getForprocars($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseForprocarPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collForprocars === null) {
-			if ($this->isNew()) {
-			   $this->collForprocars = array();
-			} else {
-
-				$criteria->add(ForprocarPeer::CODPROFES, $this->getCodprofes());
-
-				ForprocarPeer::addSelectColumns($criteria);
-				$this->collForprocars = ForprocarPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(ForprocarPeer::CODPROFES, $this->getCodprofes());
-
-				ForprocarPeer::addSelectColumns($criteria);
-				if (!isset($this->lastForprocarCriteria) || !$this->lastForprocarCriteria->equals($criteria)) {
-					$this->collForprocars = ForprocarPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastForprocarCriteria = $criteria;
-		return $this->collForprocars;
-	}
-
-	
-	public function countForprocars($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseForprocarPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(ForprocarPeer::CODPROFES, $this->getCodprofes());
-
-		return ForprocarPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addForprocar(Forprocar $l)
-	{
-		$this->collForprocars[] = $l;
-		$l->setNpprofesion($this);
-	}
-
-
-	
-	public function getForprocarsJoinForcargos($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseForprocarPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collForprocars === null) {
-			if ($this->isNew()) {
-				$this->collForprocars = array();
-			} else {
-
-				$criteria->add(ForprocarPeer::CODPROFES, $this->getCodprofes());
-
-				$this->collForprocars = ForprocarPeer::doSelectJoinForcargos($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(ForprocarPeer::CODPROFES, $this->getCodprofes());
-
-			if (!isset($this->lastForprocarCriteria) || !$this->lastForprocarCriteria->equals($criteria)) {
-				$this->collForprocars = ForprocarPeer::doSelectJoinForcargos($criteria, $con);
-			}
-		}
-		$this->lastForprocarCriteria = $criteria;
-
-		return $this->collForprocars;
 	}
 
 } 
