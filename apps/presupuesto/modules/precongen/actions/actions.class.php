@@ -187,7 +187,6 @@ class precongenActions extends autoprecongenActions
 
   public function saving($clasemodelo)
   {
-  	H::printR($clasemodelo);exit();
     return parent::saving($clasemodelo);
   }
 
