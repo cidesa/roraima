@@ -1040,6 +1040,210 @@ End Function*/
 
   }
 
+  public static function AguinaldosFracionados($codnom,$codemp,$fecegr,$ultimosueldo,$totarr,$estaliquidado)
+  {  	  
+	   if (!$estaliquidado && $totarr>0)
+	   {  #NO ESTA LIQUIDADO
+	   	  #Primero verificamos cuantos meses cumplidos trabajados tiene el trabajador en el año 
+	   	  $anoegr=date('Y',strtotime($fecegr));
+		  $fecegrf=date('d/m/Y',strtotime($fecegr));
+		  $sqlmeses = "select to_char(to_date('".$fecegrf."','dd/mm/yyyy'),'mm')::numeric -to_char(to_date('01/01/$anoegr','dd/mm/yyyy'),'mm')::numeric as meses;";	  	  
+		  if (Herramientas::BuscarDatos($sqlmeses,&$result))
+		   	$meses = $result[0]['meses'];
+		  else
+		 	$meses = 0;
+		  
+		  #BUSCAMOS SI COBRÓ UTILIDADES EN EL PERÍODO
+          $sqluti = "Select * from NPHisCon where CodEmp='$codemp' and CodCon in (Select CodConUti from NPVacDefGen) and TO_CHAR(FecNom,'YYYY')='$anoegr'";
+		  if (!Herramientas::BuscarDatos($sqluti,&$result))
+		  { # NO COBRO UTILIDADES
+		  	if($meses>=1)
+			{
+				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
+				$montouti = ($ialiuti-19) / 12;
+				$montouti = $montouti * $meses;
+				#YA NO SE CALCULA LA PARTE DE INCIDENCIA
+				$montoinc = 0;
+				$montoinc = $montoinc * $montouti;
+				
+				if($utilinc)
+				{
+					$sql = "Select coalesce(max(saltot),0) as Monto from NPImpPresoc where CodEmp='$codemp' And Tipo='P'";
+					if (Herramientas::BuscarDatos($sql,&$result))
+					{
+						$montouti = $montouti * $result[0]['monto'];
+						$diasuti = $montouti / $result[0]['monto'];
+					}else
+					    $diasuti = 0;
+				}else
+				{
+					$montouti = $montouti * ($ultimosueldo/30);
+					$diasuti = 0;
+				}
+				#ARREGLO DEL GRID
+			    $sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
+				if (Herramientas::BuscarDatos($sql,&$result))
+					$partida = $result[0]['codpar'];
+				else
+				    $partida='';	
+				$arr=$arrasi[$totarr]['orden'] = '5';
+				$arr=$arrasi[$totarr]['dias'] = $diasuti;
+				$arr=$arrasi[$totarr]['monto'] = $montouti + $montoinc;
+				$arr=$arrasi[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
+				$arr=$arrasi[$totarr]['partida'] = $partida;
+			}else
+			{
+				#NO SE LE PAGA NADA
+			}
+		  }else
+		  {
+		  	#SI COBRO UTILIDADES EN EL PERIODO
+		  	if($meses>=1)
+			{
+				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
+				$montouti = ($ialiuti-19) / 12;
+				$montouti = $montouti * (12 - $meses);
+				#YA NO SE CALCULA LA PARTE DE INCIDENCIA
+				$montoinc = 0;
+				$montoinc = $montoinc * $montouti;
+				
+				if($utilinc)
+				{
+					$sql = "Select coalesce(max(saltot),0) as Monto from NPImpPresoc where CodEmp='$codemp' And Tipo='P'";
+					if (Herramientas::BuscarDatos($sql,&$result))
+						$montouti = $montouti * $result[0]['monto'];				
+				}else
+				{
+					$montouti = $montouti * ($ultimosueldo/30);
+				}
+				#ARREGLO DEL GRID
+				$sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
+				if (Herramientas::BuscarDatos($sql,&$result))
+					$partida = $result[0]['codpar'];
+				else
+				    $partida='';	
+				$arr=$arrasi[$totarr]['orden'] = '5';
+				$arr=$arrasi[$totarr]['dias'] = '0';
+				$arr=$arrasi[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
+				$arr=$arrasi[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
+				$arr=$arrasi[$totarr]['partida'] = $partida;
+				
+			}else
+			{
+				PrestacionesSociales::TraerAlicuota($codemp,'01/01/'.$anoegr,$fecegrf,&$ialiuti,&$ialibono,&$icalinc,&$utilinc);
+				$montouti = $ialiuti / 12;
+				#YA NO SE CALCULA INCIDENCIA
+				$montoinc = 0;
+				$montoinc = $montoinc * $montouti;
+				$montouti = $montouti * ($ultimosueldo/30);
+				#ARREGLO DEL GRID
+				$sql = "Select * from NPDefPreLiq where CODNOM='$codnom' AND CodCon='005' and PerDes<='$anoegr' and PerHas>='$anoegr'";
+				if (Herramientas::BuscarDatos($sql,&$result))
+					$partida = $result[0]['codpar'];
+				else
+				    $partida='';	
+				$arr=$arrasi[$totarr]['orden'] = '5';
+				$arr=$arrasi[$totarr]['dias'] = '0';
+				$arr=$arrasi[$totarr]['monto'] = ($montouti + $montoinc)*(-1);
+				$arr=$arrasi[$totarr]['descripcion'] = 'AGUINALDOS FRACCIONADOS';				
+				$arr=$arrasi[$totarr]['partida'] = $partida;
+			}	
+		  } 
+		  
+	   }
+	   else
+	   {
+	   	 #YA ESTA LIQUIDADO
+	   	 #SE CALCULO AL PRINCIPIO	   	 
+	   } 
+  }
+  
+  public static function TraerAlicuota($codemp,$fechaini,$fechafin,&$ialiuti,&$ialibono,&$icalinc,&$utilinc)
+  {
+  	$sql = "Select * from NPAsiEmpCont where CodEmp='$codemp'";
+	if (Herramientas::BuscarDatos($sql,&$result))
+		$contrato = $result[0]['codtipcon'];
+	else
+		$contrato = '001';
+	
+	$sql = "select ((select fecing from nphojint where codemp='$codemp')-to_date('$fechaini','dd/mm/yyyy'))::numeric/365 as anoser;";
+	if (Herramientas::BuscarDatos($sql,&$result))
+		$anoser = $result[0]['anoser'];		
+	else
+		$anoser=0;		
+	
+	$sql = "select * from npbonocont 
+	       where 
+		    anovig<= to_date('$fechaini','dd/mm/yyyy') and 
+			anovighas >= to_date('$fechafin','dd/mm/yyyy') and 
+			$anoser>= desde and $anoser<= hasta and 
+			codtipcon = '$contrato'
+			order by anovig desc
+			";	
+    if (Herramientas::BuscarDatos($sql,&$result))
+	{
+		$ialiuti = $result[0]['diauti'];
+		$ialibono = $result[0]['diavac'];
+		$icalinc = $result[0]['calinc'];		
+		#UtilInt = (ObtenerValorRegistro(rsTemp!UtilInt) = "S")
+		$icalinc == "S" ? $utilinc=true : $utilinc=false;		
+	}else
+	{
+		$ialiuti = 1;
+		$ialibono = 1;
+		$icalinc = "N";		
+		$utilinc=false;		
+	}			
+  	
+  }
+  
+   public static function salvar_liquidacion($clase,$grida,$gridd)
+  {
+  	  #SALVAR ASIGANCIONES
+      $x=$grida[0];
+	  $i=0;
+	  $codemp=$clase->getCodemp();
+	  $c = new Criteria();
+	  $c->Add(NpliquidacionDetPeer::CODEMP,$codemp);
+	  NpliquidacionDetPeer::doDelete($c);
+	  while ($i<count($x))
+	  {
+	  	$npliq = new NpliquidacionDet();
+    	$npliq->setCodemp($codemp);
+		$npliq->setConcepto($x[$i]['concepto']);
+		$npliq->setMonto($x[$i]['monto']);
+		$npliq->setAsided('A');
+		$npliq->setNumreg($i);
+		$npliq->setCodpre($x[$i]['codpre']);
+		$npliq->setCodcon($x[$i]['codcon']);
+		$npliq->setNumord('');
+		$npliq->setDias($x[$i]['dias']);
+    	$npliq->save();
+       $i++;
+      }      
+	  #SALVAR DEDUCCIONES
+	  $x=$gridd[0];
+	  $i=0;
+	  $codemp=$clase->getCodemp();
+	  while ($i<count($x))
+	  {
+    	$npliq = new NpliquidacionDet();
+    	$npliq->setCodemp($codemp);
+		$npliq->setConcepto($x[$i]['concepto']);
+		$npliq->setMonto($x[$i]['monto']);
+		$npliq->setAsided('D');
+		$npliq->setNumreg($i);
+		$npliq->setCodpre($x[$i]['codpre']);
+		$npliq->setCodcon($x[$i]['codcon']);
+		$npliq->setNumord('');
+		$npliq->setDias($x[$i]['dias']);
+    	$npliq->save();
+       $i++;
+      }
+	  
+	return -1;
+  }
+  
   }
 
 ?>
