@@ -640,7 +640,7 @@ BEGIN
 --      End If;
 
 
-      IF To_Number(To_char(FecFin,'DD'),99)<To_Number(To_char(FecIni,'DD'),99) Then
+      IF To_Number(To_char(FecFin,'DD'),'99')<To_Number(To_char(FecIni,'DD'),'99') Then
          DiaResta:=-1;
       Else
          DiaResta:=0;
@@ -652,9 +652,9 @@ BEGIN
        Dias:=0;
       --Dias:=ROUND(FraccionM*(To_Number(To_Char(Last_Day(Add_months(FecFin, DiaResta)),'DD'),99)));
       --FraccionD:=Dias-Trunc(Dias);
-       IF To_Number(To_char(FecFin,'DD'),99)<To_Number(To_char(FecIni,'DD'),99) Then
-            Dias:=To_Number(To_Char(Last_Day(Add_months(FecFin, DiaResta)),'DD'),99)-To_number(TO_CHAR(FecIni,'DD'),99);
-            Dias=Dias + To_number(TO_CHAR(FecFin,'DD'),99);
+       IF To_Number(To_char(FecFin,'DD'),'99')<To_Number(To_char(FecIni,'DD'),'99') Then
+            Dias:=To_Number(To_Char(Last_Day(Add_months(FecFin, DiaResta)),'DD'),'99')-To_number(TO_CHAR(FecIni,'DD'),'99');
+            Dias=Dias + To_number(TO_CHAR(FecFin,'DD'),'99');
        END IF;
        FraccionD:=Dias-Trunc(Dias);
 
@@ -668,11 +668,11 @@ BEGIN
          END IF;
         ELSE
        --SI NO ES ULTIMO DE MES PERO LA FECHA DE INICIO ES 01/XX/YYYY ENTONCES DIAS = DIA DE FECHA FIN
-        DIAS:=TO_NUMBER(TO_CHAR(FECFIN,'DD'),99);
+        DIAS:=TO_NUMBER(TO_CHAR(FECFIN,'DD'),'99');
         END IF;
       ELSE
          IF TO_CHAR(FECINI,'DD')<TO_CHAR(FECFIN,'DD') THEN
-            Dias:=To_NumBer(TO_CHAR(FECFIN,'DD'),99)-To_number(TO_CHAR(FECINI,'DD'),99);
+            Dias:=To_NumBer(TO_CHAR(FECFIN,'DD'),'99')-To_number(TO_CHAR(FECINI,'DD'),'99');
          END IF;
       END IF;
 
@@ -725,7 +725,7 @@ BEGIN
 END;
 $BODY$
   LANGUAGE 'plpgsql' VOLATILE;
-ALTER FUNCTION cuantotiempo(fecini date, fecfin date, frecuencia character varying, modo character varying) OWNER TO postgres;
+ALTER FUNCTION cuantotiempo(date, date, character varying, character varying) OWNER TO postgres;
 
 
 CREATE OR REPLACE FUNCTION last_day(date)
