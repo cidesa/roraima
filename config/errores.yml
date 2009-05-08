@@ -622,6 +622,39 @@
 449:
   cod: 449
   msj: Información Bancaria. Para el Tipo de Pago Deposito se deben llenar el Banco, Nro de Cuenta y Tipo de Cuenta.
+450:
+  cod: 450
+  msj: No puede haber un registro con el campo Concepto Prestaciones en blanco en el grid Asignaciones
+451:
+  cod: 451
+  msj: No puede haber un registro con el Monto en blanco en el grid Asignaciones
+452:
+  cod: 452
+  msj: No puede haber un registro con el Codigo Presupuestario en blanco  en el grid Asignaciones
+453:
+  cod: 453
+  msj: No puede haber un registro con el Tipo de Concepto en blanco  en el grid Asignaciones
+454:
+  cod: 454
+  msj: No puede haber un registro con el Numero de Dias en blanco en el grid Asignaciones
+455:
+  cod: 455
+  msj: No puede haber un registro con el campo Concepto Prestaciones en blanco en el grid Deducciones
+456:
+  cod: 456
+  msj: No puede haber un registro con el Monto en blanco en el grid Deducciones
+457:
+  cod: 457
+  msj: No puede haber un registro con el Codigo Presupuestario en blanco  en el grid Deducciones
+458:
+  cod: 458
+  msj: No puede haber un registro con el Tipo de Concepto en blanco  en el grid Deducciones
+459:
+  cod: 459
+  msj: No puede haber un registro con el Numero de Dias en blanco en el grid Deducciones 
+460:
+  cod: 460
+  msj: Liquidaciones ya pagadas no se pueden modificar   
 ###############OBRAS################
 1000:
     cod: 1000
