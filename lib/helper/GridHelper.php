@@ -869,6 +869,15 @@ function grid_tag_v2($obj,$objelim = array())
   }
 
   $tagb =  '</tr></thead>';
+  
+   ///////////////////////////////////
+  // Generar el Arreglo de Totales para el boton eliminar//
+  ///////////////////////////////////
+  $campostotales = '';
+  for($g=0;$g<count($totales);$g++){
+    $campostotales .= $totales[$g];
+    if($g!=(count($totales)-1)) $campostotales .= ",";
+  }
 
   /////////////////////
   // Cuerpo del Grid //
@@ -888,7 +897,7 @@ function grid_tag_v2($obj,$objelim = array())
     if ($eliminar) {
       $tagf .= '<td class="grid_fila" align="center" height="15"><input readonly=true style="border:none" class="imagenborrar" name="'.$name.'x_'.$i.'_0" id="'.$name.'x_'.$i.'_0" size="1" ';
       $tagf .= ' onClick="';
-      $tagf .= "EliminarFilaGrid('$name',$i);";
+      $tagf .= " EliminarFilaGrid('$name',$i,'$campostotales');";
       $tagf .= '" '.$jseliminar.' ></td>';
     }
 
@@ -1110,9 +1119,8 @@ function grid_tag_v2($obj,$objelim = array())
   ////////////////////////
   // Resto de las Filas //
   ////////////////////////
-
+  
   //print_r($tiposobj);
-
   $tagciclo3='';
   $catobj = '';
   $y = $filas;
@@ -1122,7 +1130,7 @@ function grid_tag_v2($obj,$objelim = array())
     if ($eliminar) {
       $tagf .= '<td class="grid_fila" align="center" height="15"><input readonly=true style="border:none" class="imagenborrar" name="'.$name.'x_'.$i.'?'.'_0" id="'.$name.'x_'.$i.'?'.'_0" size="1" ';
       $tagf .= ' onClick="';
-      $tagf .= "EliminarFilaGrid('$name',$i".'?'.");";
+      $tagf .= "EliminarFilaGrid('$name',$i".'?'.",'$campostotales');";
       $tagf .= '" '.$jseliminar.' ></td>';
     }
 
@@ -1332,7 +1340,6 @@ function grid_tag_v2($obj,$objelim = array())
     $campostotales .= "'$totales[$g]'";
     if($g!=(count($totales)-1)) $campostotales .= ",";
   }
-
   $aj = false;
   foreach($ajax as $a)
   {
@@ -1347,7 +1354,7 @@ function grid_tag_v2($obj,$objelim = array())
 
   if(!$aj && !$ac) $acum = 'false';
   else $acum = 'true';
-
+  
   ///////////////////////////////////////
   // JavaScripts de variables del Grid //
   ///////////////////////////////////////
@@ -1366,7 +1373,6 @@ function grid_tag_v2($obj,$objelim = array())
       '</script>';
 
   $tagt=$tagsrc.$tag.$tagciclo1.$tagb.$tagciclo2.$tagciclo3.$tag2.$scriptActSal;
-
 
   return $tagt;
 }
