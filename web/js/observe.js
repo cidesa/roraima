@@ -9,7 +9,7 @@
     form = $('sf_admin_edit_form');
     arreglo = Array();
 
-    if(form) arreglo = $$('input[type=text]', 'select'); // -> only text inputs
+    if(form) arreglo = $$('input[type=text]', 'select','textarea'); // -> only text inputs
 
     var i = 0;
     arreglo.each(function(e,index){
@@ -28,7 +28,7 @@
   }
 
   ///////////////////////////////////////////////////
-  // Observar si se cargado la página por completo //
+  // Observar si se cargado la pï¿½gina por completo //
   ///////////////////////////////////////////////////
     Event.observe(window, 'load',
       function() {
@@ -43,8 +43,7 @@
     if(event.keyCode == Event.KEY_RETURN && form) {
 
       var obj = Event.element(event);
-
-      var indice = parseInt(obj.tabindex);;
+      var indice = parseInt(obj.tabindex);
       /*arreglo.each(function(e,index){
         if(e.name == obj.name) indice = index;
       });
@@ -58,15 +57,19 @@
           {
             arreglo[indice+i].focus();
             try{arreglo[indice+i].select();}catch(e){}
-            salir=true;
+            salir=true;				
           }else {
             i++;
           }
         }catch(e){
-          arreglo[indice].blur();
-          arreglo[indice].focus();
-          try{arreglo[indice].select();}catch(e){}
-          salir=true;
+		  if(arreglo[indice])	
+		  if(!arreglo[indice].disabled && !arreglo[indice].readOnly)
+		  {
+		  	arreglo[indice].blur();
+	        arreglo[indice].focus();
+	        //try{arreglo[indice].select();}catch(e){}	        
+		  }
+		  salir=true;	          
         }
       }
       /*
