@@ -14,8 +14,14 @@ function Catalogo($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_params = 
 {
   $peer = $objeto->getPeer();
   $name = $peer->getOMClass();
+
   $name = explode('.',$name);
-  $name = strtolower($name[2]);
+  //Para que funcione con lib.model.catastro.clase
+  //sin perder lib.model.clase
+  
+  if (count($name)>3){   $name = strtolower($name[3]);  }else{   $name = strtolower($name[2]); }
+  if($name='npliquidaciondet') $name = 'npliquidacion_det';
+
 
   //Validaciones para el tamano de los campos
   if (!(array_key_exists('tamanoprincipal',$oit)))
@@ -59,7 +65,8 @@ function Catalogo($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_params = 
   'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
-   'update' => $div,
+   'update' => $div,   
+   'script' => true,
    'url'      => sfContext::getInstance()->getModuleName().'/catalogo',
    'complete' => 'AjaxJSON(request, json)',
    'condition' => "$('".$name.'_'.strtolower($oit['campoprincipal'])."').value != ''",
@@ -76,7 +83,8 @@ if ($div==''){
   'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
-   'url'      => sfContext::getInstance()->getModuleName().'/ajax',
+   'url'      => sfContext::getInstance()->getModuleName().'/ajax',   
+   'script' => true,
    'complete' => 'AjaxJSON(request, json)',
    'condition' => "$('".$name.'_'.strtolower($oit['campoprincipal'])."').value != ''",
    'with' => "'ajax=".$ajaxindex."&cajtexmos=".$name.'_'.strtolower($oit['camposecundario'])."&codigo='+this.value".$params_ajax
@@ -90,9 +98,10 @@ else {
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
    'update' => $div,
+   'script' => true,
    'url'      => sfContext::getInstance()->getModuleName().'/ajax',
    'complete' => 'AjaxJSON(request, json)',
-   'condition' => "$('".$name.'_'.strtolower($oit['campoprincipal'])."').value != ''",
+   'condition' => "$('".$name.'_'.strtolower($oit['campoprincipal'])."').value != '' && $('".$name.'_'.strtolower($oit['campoprincipal'])."').readOnly==false ",
    'with' => "'ajax=".$ajaxindex."&cajtexmos=".$name.'_'.strtolower($oit['camposecundario'])."&codigo='+this.value".$params_ajax
       ))
 )); echo $value ? $value : '&nbsp;';
@@ -110,7 +119,7 @@ echo '&nbsp;';
 
   $value = object_input_tag($objeto, $oit['getsecundario'], array (
   'size' => $oit['tamanosecundario'],
-  'disabled' => true,
+  'readonly' => true,
   'control_name' => $name.'['.strtolower($oit['camposecundario']).']',
 )); echo $value ? $value : '&nbsp;';
 
@@ -123,13 +132,18 @@ function CatalogoSimple($objeto,$ajaxindex, $oit=array(),$metodo,$clase,$uri_par
   $peer = $objeto->getPeer();
   $name = $peer->getOMClass();
   $name = explode('.',$name);
-  $name = strtolower($name[2]);
+
+  //Para que funcione con lib.model.catastro.clase
+  //sin perder lib.model.clase
+  if (count($name)>3){   $name = strtolower($name[3]);  }else{   $name = strtolower($name[2]); }
+
 if ($div==''){
   $value = object_input_tag($objeto, $oit['getprincipal'] , array (
   'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
-   'url'      => sfContext::getInstance()->getModuleName().'/ajax',
+   'url'      => sfContext::getInstance()->getModuleName().'/ajax',   
+   'script' => true,
    'complete' => 'AjaxJSON(request, json)',
    'condition' => "$('".$name.'_'.strtolower($oit['campoprincipal'])."').value != ''",
       ))
@@ -140,7 +154,8 @@ else {
   'size' => $oit['tamanoprincipal'],
   'control_name' => $name.'['.strtolower($oit['campoprincipal']).']',
   'onBlur'=> remote_function(array(
-   'update' => $div,
+   'update' => $div,      
+   'script' => true,
    'url'      => sfContext::getInstance()->getModuleName().'/ajax',
    'complete' => 'AjaxJSON(request, json)',
    'condition' => "$('".$name.'_'.strtolower($oit['campoprincipal'])."').value != ''",
