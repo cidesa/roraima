@@ -251,6 +251,10 @@ $this->Bitacora('Guardo');
     {
       $this->opdefemp->setNomcat($opdefemp['nomcat']);
     }
+    if (isset($opdefemp['ordret']))
+    {
+      $this->opdefemp->setOrdret($opdefemp['ordret']);
+    }
   }
 
   protected function saveOpdefemp($opdefemp)

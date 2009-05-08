@@ -38,6 +38,7 @@ generator:
       nomben:  { name: Beneficiario}
       codcatcajchi:  { name: Código Categoría}
       nomcat:  { name: Nombre}
+      ordret:    { name: Retenciones  }
     list:
       title:          Definición de Empresa
       display:        [=codemp, nomemp, diremp]
@@ -46,7 +47,7 @@ generator:
       max_per_page:   1
     edit:
       title:          Definición de Empresa
-      display:        [codemp, nomemp, diremp, ctapag, nomctapag, ctades, nomctades, numini, forubi, ordnom, ordobr, tipeje, ordliq, ordfid, ordval, unitri, genctaord, gencomadi, gencaubon, vercomret, genordret, emichepag, cuecajchi, nomcuecajchi, tipcajchi, nomtipcajchi, monapecajchi, porrepcajchi, tiprencajchi, nomtiprencajchi, numinicajchi, cedrifcajchi, nomben, codcatcajchi, nomcat]
+      display:        [codemp, nomemp, diremp, ctapag, nomctapag, ctades, nomctades, numini, forubi, ordnom, ordobr, tipeje, ordliq, ordfid, ordval, unitri, genctaord, gencomadi, gencaubon, vercomret, genordret, emichepag, cuecajchi, nomcuecajchi, tipcajchi, nomtipcajchi, monapecajchi, porrepcajchi, tiprencajchi, nomtiprencajchi, numinicajchi, cedrifcajchi, nomben, codcatcajchi, nomcat, ordret]
       fields:
         genctaord:  {type: checkbox_tag}
         gencomadi: {type: checkbox_tag}

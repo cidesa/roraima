@@ -72,8 +72,13 @@ class Opdefemp extends BaseOpdefemp
 		return Herramientas::getX('cedrif','Opbenefi','nomben',self::getCedrifcajchi());
 	}
 
-     public function getNomcat()
+    public function getNomcat()
 	{
 		return Herramientas::getX('codcat','Npcatpre','nomcat',self::getCodcatcajchi());
+	}
+
+	public function getNomtipret()
+	{
+		return Herramientas::getX('tipcau','cpdoccau','nomext',self::getOrdret());
 	}
 }

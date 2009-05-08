@@ -394,6 +394,40 @@
   'disabled' => true,
   'control_name' => 'opdefemp[nomtipobr]',
   )); echo $value ? $value : '&nbsp;' ?>
+<br><br>
+<table>
+<tr>
+<th>
+  <?php echo label_for('opdefemp[ordret]', __($labels['opdefemp{ordret}']), 'class="required" Style="width:40px"') ?>
+  <div class="content<?php if ($sf_request->hasError('opdefemp{ordret}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('opdefemp{ordret}')): ?>
+    <?php echo form_error('opdefemp{ordret}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+ <?php echo input_auto_complete_tag('opdefemp[ordret]', $opdefemp->getOrdret(),
+  'pagdefemp/autocomplete?ajax=5',  array('autocomplete' => 'off','maxlength' => 4,
+  'onKeyPress' => "javascript:cadena=this.value;cadena=cadena.toUpperCase();document.getElementById('opdefemp_ordret').value=cadena",
+  'onBlur'=> remote_function(array(
+        'url'      => 'pagdefemp/ajax',
+        'complete' => 'AjaxJSON(request, json)',
+        'condition' => "$('opdefemp_ordret').value != '' ",
+        'script' => true,
+        'with' => "'ajax=1&cajtexmos=opdefemp_nomtipret&codigo='+this.value"
+        ))),
+     array('use_style' => 'true',)
+  )
+?></div>
+</th>
+<th>
+&nbsp;&nbsp;&nbsp; <?php echo button_to_popup('...',cross_app_link_to('herramientas','catalogo').'/metodo/Opdefemp_pagdefemp2/clase/Cpdoccau/frame/sf_admin_edit_form/obj1/opdefemp_nomtipret/obj2/opdefemp_ordret/campo1/nomext/campo2/tipcau/param1/1')?>
+</th>
+</tr>
+</table>
+<?php $value = object_input_tag($opdefemp, 'getNomtipret', array (
+  'size' => 60,
+  'disabled' => true,
+  'control_name' => 'opdefemp[nomtipret]',
+  )); echo $value ? $value : '&nbsp;' ?>
 </div>
   </fieldset>
  </th>

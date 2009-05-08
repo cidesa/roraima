@@ -815,3 +815,8 @@ ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_5" FOREIGN KEY ("at
 ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_6" FOREIGN KEY ("atprovee5") REFERENCES "atprovee" ("id");
 
 ALTER TABLE "atpresupuesto" ADD CONSTRAINT "atpresupuesto_FK_7" FOREIGN KEY ("atprovee6") REFERENCES "atprovee" ("id");
+
+
+--07/05/2009
+ALTER TABLE "opdefemp"
+  ADD COLUMN "ordret" VARCHAR(4);
