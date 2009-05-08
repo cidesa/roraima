@@ -9,7 +9,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getFecing', array (
-  'disabled' => true,
+  'readonly' => true,
   'control_name' => 'npliquidacion_det[fecing]',
 )); echo $value ? $value : '&nbsp;' ?>
     <?php if($labels['npliquidacion_det{fecing}']!='.:') { ?>
@@ -25,7 +25,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getFeccor', array (
-  'disabled' => true,
+  'readonly' => true,
   'control_name' => 'npliquidacion_det[feccor]',
 )); echo $value ? $value : '&nbsp;' ?>
     <?php if($labels['npliquidacion_det{feccor}']!='.:') { ?>
@@ -41,7 +41,7 @@
   <?php endif; }?>
 
   <?php $value = object_input_tag($npliquidacion_det, 'getFecegr', array (
-  'disabled' => true,
+  'readonly' => true,
   'control_name' => 'npliquidacion_det[fecegr]',
 )); echo $value ? $value : '&nbsp;' ?>
     <?php if($labels['npliquidacion_det{fecegr}']!='.:') { ?>
