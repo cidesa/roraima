@@ -4400,6 +4400,8 @@ propel:
     numord:
       type: VARCHAR
       size: 8
+    dias:
+      type: INTEGER
     id:
       type: INTEGER
       required: true
