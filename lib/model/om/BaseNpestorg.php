@@ -24,12 +24,6 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 	protected $id;
 
 	
-	protected $collViadettipsers;
-
-	
-	protected $lastViadettipserCriteria = null;
-
-	
 	protected $alreadyInSave = false;
 
 	
@@ -210,14 +204,6 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
-			if ($this->collViadettipsers !== null) {
-				foreach($this->collViadettipsers as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -258,14 +244,6 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
-
-				if ($this->collViadettipsers !== null) {
-					foreach($this->collViadettipsers as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
 
 
 			$this->alreadyInValidation = false;
@@ -397,15 +375,6 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 		$copyObj->setTelext($this->telext);
 
 
-		if ($deepCopy) {
-									$copyObj->setNew(false);
-
-			foreach($this->getViadettipsers() as $relObj) {
-				$copyObj->addViadettipser($relObj->copy($deepCopy));
-			}
-
-		} 
-
 		$copyObj->setNew(true);
 
 		$copyObj->setId(NULL); 
@@ -427,146 +396,6 @@ abstract class BaseNpestorg extends BaseObject  implements Persistent {
 			self::$peer = new NpestorgPeer();
 		}
 		return self::$peer;
-	}
-
-	
-	public function initViadettipsers()
-	{
-		if ($this->collViadettipsers === null) {
-			$this->collViadettipsers = array();
-		}
-	}
-
-	
-	public function getViadettipsers($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseViadettipserPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collViadettipsers === null) {
-			if ($this->isNew()) {
-			   $this->collViadettipsers = array();
-			} else {
-
-				$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
-
-				ViadettipserPeer::addSelectColumns($criteria);
-				$this->collViadettipsers = ViadettipserPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
-
-				ViadettipserPeer::addSelectColumns($criteria);
-				if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
-					$this->collViadettipsers = ViadettipserPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastViadettipserCriteria = $criteria;
-		return $this->collViadettipsers;
-	}
-
-	
-	public function countViadettipsers($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseViadettipserPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
-
-		return ViadettipserPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addViadettipser(Viadettipser $l)
-	{
-		$this->collViadettipsers[] = $l;
-		$l->setNpestorg($this);
-	}
-
-
-	
-	public function getViadettipsersJoinOcciudad($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseViadettipserPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collViadettipsers === null) {
-			if ($this->isNew()) {
-				$this->collViadettipsers = array();
-			} else {
-
-				$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
-
-				$this->collViadettipsers = ViadettipserPeer::doSelectJoinOcciudad($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
-
-			if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
-				$this->collViadettipsers = ViadettipserPeer::doSelectJoinOcciudad($criteria, $con);
-			}
-		}
-		$this->lastViadettipserCriteria = $criteria;
-
-		return $this->collViadettipsers;
-	}
-
-
-	
-	public function getViadettipsersJoinViaregtipser($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseViadettipserPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collViadettipsers === null) {
-			if ($this->isNew()) {
-				$this->collViadettipsers = array();
-			} else {
-
-				$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
-
-				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtipser($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(ViadettipserPeer::NPESTORG_CODNIV, $this->getCodniv());
-
-			if (!isset($this->lastViadettipserCriteria) || !$this->lastViadettipserCriteria->equals($criteria)) {
-				$this->collViadettipsers = ViadettipserPeer::doSelectJoinViaregtipser($criteria, $con);
-			}
-		}
-		$this->lastViadettipserCriteria = $criteria;
-
-		return $this->collViadettipsers;
 	}
 
 } 

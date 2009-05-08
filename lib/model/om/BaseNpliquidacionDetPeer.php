@@ -13,7 +13,7 @@ abstract class BaseNpliquidacionDetPeer {
 	const CLASS_DEFAULT = 'lib.model.NpliquidacionDet';
 
 	
-	const NUM_COLUMNS = 9;
+	const NUM_COLUMNS = 10;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -44,6 +44,9 @@ abstract class BaseNpliquidacionDetPeer {
 	const NUMORD = 'npliquidacion_det.NUMORD';
 
 	
+	const DIAS = 'npliquidacion_det.DIAS';
+
+	
 	const ID = 'npliquidacion_det.ID';
 
 	
@@ -52,18 +55,18 @@ abstract class BaseNpliquidacionDetPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Concepto', 'Monto', 'Asided', 'Numreg', 'Codpre', 'Codcon', 'Numord', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (NpliquidacionDetPeer::CODEMP, NpliquidacionDetPeer::CONCEPTO, NpliquidacionDetPeer::MONTO, NpliquidacionDetPeer::ASIDED, NpliquidacionDetPeer::NUMREG, NpliquidacionDetPeer::CODPRE, NpliquidacionDetPeer::CODCON, NpliquidacionDetPeer::NUMORD, NpliquidacionDetPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'concepto', 'monto', 'asided', 'numreg', 'codpre', 'codcon', 'numord', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Concepto', 'Monto', 'Asided', 'Numreg', 'Codpre', 'Codcon', 'Numord', 'Dias', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (NpliquidacionDetPeer::CODEMP, NpliquidacionDetPeer::CONCEPTO, NpliquidacionDetPeer::MONTO, NpliquidacionDetPeer::ASIDED, NpliquidacionDetPeer::NUMREG, NpliquidacionDetPeer::CODPRE, NpliquidacionDetPeer::CODCON, NpliquidacionDetPeer::NUMORD, NpliquidacionDetPeer::DIAS, NpliquidacionDetPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'concepto', 'monto', 'asided', 'numreg', 'codpre', 'codcon', 'numord', 'dias', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Concepto' => 1, 'Monto' => 2, 'Asided' => 3, 'Numreg' => 4, 'Codpre' => 5, 'Codcon' => 6, 'Numord' => 7, 'Id' => 8, ),
-		BasePeer::TYPE_COLNAME => array (NpliquidacionDetPeer::CODEMP => 0, NpliquidacionDetPeer::CONCEPTO => 1, NpliquidacionDetPeer::MONTO => 2, NpliquidacionDetPeer::ASIDED => 3, NpliquidacionDetPeer::NUMREG => 4, NpliquidacionDetPeer::CODPRE => 5, NpliquidacionDetPeer::CODCON => 6, NpliquidacionDetPeer::NUMORD => 7, NpliquidacionDetPeer::ID => 8, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'concepto' => 1, 'monto' => 2, 'asided' => 3, 'numreg' => 4, 'codpre' => 5, 'codcon' => 6, 'numord' => 7, 'id' => 8, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Concepto' => 1, 'Monto' => 2, 'Asided' => 3, 'Numreg' => 4, 'Codpre' => 5, 'Codcon' => 6, 'Numord' => 7, 'Dias' => 8, 'Id' => 9, ),
+		BasePeer::TYPE_COLNAME => array (NpliquidacionDetPeer::CODEMP => 0, NpliquidacionDetPeer::CONCEPTO => 1, NpliquidacionDetPeer::MONTO => 2, NpliquidacionDetPeer::ASIDED => 3, NpliquidacionDetPeer::NUMREG => 4, NpliquidacionDetPeer::CODPRE => 5, NpliquidacionDetPeer::CODCON => 6, NpliquidacionDetPeer::NUMORD => 7, NpliquidacionDetPeer::DIAS => 8, NpliquidacionDetPeer::ID => 9, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'concepto' => 1, 'monto' => 2, 'asided' => 3, 'numreg' => 4, 'codpre' => 5, 'codcon' => 6, 'numord' => 7, 'dias' => 8, 'id' => 9, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
 	);
 
 	
@@ -132,6 +135,8 @@ abstract class BaseNpliquidacionDetPeer {
 		$criteria->addSelectColumn(NpliquidacionDetPeer::CODCON);
 
 		$criteria->addSelectColumn(NpliquidacionDetPeer::NUMORD);
+
+		$criteria->addSelectColumn(NpliquidacionDetPeer::DIAS);
 
 		$criteria->addSelectColumn(NpliquidacionDetPeer::ID);
 

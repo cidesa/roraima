@@ -41,6 +41,10 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 
 
 	
+	protected $dias;
+
+
+	
 	protected $id;
 
 	
@@ -105,6 +109,13 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
   {
 
     return trim($this->numord);
+
+  }
+  
+  public function getDias()
+  {
+
+    return $this->dias;
 
   }
   
@@ -195,6 +206,16 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setDias($v)
+	{
+
+    if ($this->dias !== $v) {
+        $this->dias = $v;
+        $this->modifiedColumns[] = NpliquidacionDetPeer::DIAS;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -225,7 +246,9 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 
       $this->numord = $rs->getString($startcol + 7);
 
-      $this->id = $rs->getInt($startcol + 8);
+      $this->dias = $rs->getInt($startcol + 8);
+
+      $this->id = $rs->getInt($startcol + 9);
 
       $this->resetModified();
 
@@ -233,7 +256,7 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 9; 
+            return $startcol + 10; 
     } catch (Exception $e) {
       throw new PropelException("Error populating NpliquidacionDet object", $e);
     }
@@ -405,6 +428,9 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 				return $this->getNumord();
 				break;
 			case 8:
+				return $this->getDias();
+				break;
+			case 9:
 				return $this->getId();
 				break;
 			default:
@@ -425,7 +451,8 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 			$keys[5] => $this->getCodpre(),
 			$keys[6] => $this->getCodcon(),
 			$keys[7] => $this->getNumord(),
-			$keys[8] => $this->getId(),
+			$keys[8] => $this->getDias(),
+			$keys[9] => $this->getId(),
 		);
 		return $result;
 	}
@@ -466,6 +493,9 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 				$this->setNumord($value);
 				break;
 			case 8:
+				$this->setDias($value);
+				break;
+			case 9:
 				$this->setId($value);
 				break;
 		} 	}
@@ -483,7 +513,8 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setCodpre($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setCodcon($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setNumord($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setId($arr[$keys[8]]);
+		if (array_key_exists($keys[8], $arr)) $this->setDias($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setId($arr[$keys[9]]);
 	}
 
 	
@@ -499,6 +530,7 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(NpliquidacionDetPeer::CODPRE)) $criteria->add(NpliquidacionDetPeer::CODPRE, $this->codpre);
 		if ($this->isColumnModified(NpliquidacionDetPeer::CODCON)) $criteria->add(NpliquidacionDetPeer::CODCON, $this->codcon);
 		if ($this->isColumnModified(NpliquidacionDetPeer::NUMORD)) $criteria->add(NpliquidacionDetPeer::NUMORD, $this->numord);
+		if ($this->isColumnModified(NpliquidacionDetPeer::DIAS)) $criteria->add(NpliquidacionDetPeer::DIAS, $this->dias);
 		if ($this->isColumnModified(NpliquidacionDetPeer::ID)) $criteria->add(NpliquidacionDetPeer::ID, $this->id);
 
 		return $criteria;
@@ -545,6 +577,8 @@ abstract class BaseNpliquidacionDet extends BaseObject  implements Persistent {
 		$copyObj->setCodcon($this->codcon);
 
 		$copyObj->setNumord($this->numord);
+
+		$copyObj->setDias($this->dias);
 
 
 		$copyObj->setNew(true);
