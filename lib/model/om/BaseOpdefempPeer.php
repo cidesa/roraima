@@ -13,7 +13,7 @@ abstract class BaseOpdefempPeer {
 	const CLASS_DEFAULT = 'lib.model.Opdefemp';
 
 	
-	const NUM_COLUMNS = 34;
+	const NUM_COLUMNS = 35;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -119,6 +119,9 @@ abstract class BaseOpdefempPeer {
 	const CODCATCAJCHI = 'opdefemp.CODCATCAJCHI';
 
 	
+	const ORDRET = 'opdefemp.ORDRET';
+
+	
 	const ID = 'opdefemp.ID';
 
 	
@@ -127,18 +130,18 @@ abstract class BaseOpdefempPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Ctapag', 'Ctades', 'Numini', 'Ordnom', 'Ordobr', 'Unitri', 'Vercomret', 'Genctaord', 'Forubi', 'Tipaju', 'Tipeje', 'Numaut', 'Tipmov', 'Coriva', 'Ctabono', 'Ctavaca', 'Gencaubon', 'Gencomadi', 'Unidad', 'Ordliq', 'Ordfid', 'Ordval', 'Genordret', 'Emichepag', 'Cuecajchi', 'Tipcajchi', 'Monapecajchi', 'Porrepcajchi', 'Tiprencajchi', 'Numinicajchi', 'Cedrifcajchi', 'Codcatcajchi', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (OpdefempPeer::CODEMP, OpdefempPeer::CTAPAG, OpdefempPeer::CTADES, OpdefempPeer::NUMINI, OpdefempPeer::ORDNOM, OpdefempPeer::ORDOBR, OpdefempPeer::UNITRI, OpdefempPeer::VERCOMRET, OpdefempPeer::GENCTAORD, OpdefempPeer::FORUBI, OpdefempPeer::TIPAJU, OpdefempPeer::TIPEJE, OpdefempPeer::NUMAUT, OpdefempPeer::TIPMOV, OpdefempPeer::CORIVA, OpdefempPeer::CTABONO, OpdefempPeer::CTAVACA, OpdefempPeer::GENCAUBON, OpdefempPeer::GENCOMADI, OpdefempPeer::UNIDAD, OpdefempPeer::ORDLIQ, OpdefempPeer::ORDFID, OpdefempPeer::ORDVAL, OpdefempPeer::GENORDRET, OpdefempPeer::EMICHEPAG, OpdefempPeer::CUECAJCHI, OpdefempPeer::TIPCAJCHI, OpdefempPeer::MONAPECAJCHI, OpdefempPeer::PORREPCAJCHI, OpdefempPeer::TIPRENCAJCHI, OpdefempPeer::NUMINICAJCHI, OpdefempPeer::CEDRIFCAJCHI, OpdefempPeer::CODCATCAJCHI, OpdefempPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp', 'ctapag', 'ctades', 'numini', 'ordnom', 'ordobr', 'unitri', 'vercomret', 'genctaord', 'forubi', 'tipaju', 'tipeje', 'numaut', 'tipmov', 'coriva', 'ctabono', 'ctavaca', 'gencaubon', 'gencomadi', 'unidad', 'ordliq', 'ordfid', 'ordval', 'genordret', 'emichepag', 'cuecajchi', 'tipcajchi', 'monapecajchi', 'porrepcajchi', 'tiprencajchi', 'numinicajchi', 'cedrifcajchi', 'codcatcajchi', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp', 'Ctapag', 'Ctades', 'Numini', 'Ordnom', 'Ordobr', 'Unitri', 'Vercomret', 'Genctaord', 'Forubi', 'Tipaju', 'Tipeje', 'Numaut', 'Tipmov', 'Coriva', 'Ctabono', 'Ctavaca', 'Gencaubon', 'Gencomadi', 'Unidad', 'Ordliq', 'Ordfid', 'Ordval', 'Genordret', 'Emichepag', 'Cuecajchi', 'Tipcajchi', 'Monapecajchi', 'Porrepcajchi', 'Tiprencajchi', 'Numinicajchi', 'Cedrifcajchi', 'Codcatcajchi', 'Ordret', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (OpdefempPeer::CODEMP, OpdefempPeer::CTAPAG, OpdefempPeer::CTADES, OpdefempPeer::NUMINI, OpdefempPeer::ORDNOM, OpdefempPeer::ORDOBR, OpdefempPeer::UNITRI, OpdefempPeer::VERCOMRET, OpdefempPeer::GENCTAORD, OpdefempPeer::FORUBI, OpdefempPeer::TIPAJU, OpdefempPeer::TIPEJE, OpdefempPeer::NUMAUT, OpdefempPeer::TIPMOV, OpdefempPeer::CORIVA, OpdefempPeer::CTABONO, OpdefempPeer::CTAVACA, OpdefempPeer::GENCAUBON, OpdefempPeer::GENCOMADI, OpdefempPeer::UNIDAD, OpdefempPeer::ORDLIQ, OpdefempPeer::ORDFID, OpdefempPeer::ORDVAL, OpdefempPeer::GENORDRET, OpdefempPeer::EMICHEPAG, OpdefempPeer::CUECAJCHI, OpdefempPeer::TIPCAJCHI, OpdefempPeer::MONAPECAJCHI, OpdefempPeer::PORREPCAJCHI, OpdefempPeer::TIPRENCAJCHI, OpdefempPeer::NUMINICAJCHI, OpdefempPeer::CEDRIFCAJCHI, OpdefempPeer::CODCATCAJCHI, OpdefempPeer::ORDRET, OpdefempPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp', 'ctapag', 'ctades', 'numini', 'ordnom', 'ordobr', 'unitri', 'vercomret', 'genctaord', 'forubi', 'tipaju', 'tipeje', 'numaut', 'tipmov', 'coriva', 'ctabono', 'ctavaca', 'gencaubon', 'gencomadi', 'unidad', 'ordliq', 'ordfid', 'ordval', 'genordret', 'emichepag', 'cuecajchi', 'tipcajchi', 'monapecajchi', 'porrepcajchi', 'tiprencajchi', 'numinicajchi', 'cedrifcajchi', 'codcatcajchi', 'ordret', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Ctapag' => 1, 'Ctades' => 2, 'Numini' => 3, 'Ordnom' => 4, 'Ordobr' => 5, 'Unitri' => 6, 'Vercomret' => 7, 'Genctaord' => 8, 'Forubi' => 9, 'Tipaju' => 10, 'Tipeje' => 11, 'Numaut' => 12, 'Tipmov' => 13, 'Coriva' => 14, 'Ctabono' => 15, 'Ctavaca' => 16, 'Gencaubon' => 17, 'Gencomadi' => 18, 'Unidad' => 19, 'Ordliq' => 20, 'Ordfid' => 21, 'Ordval' => 22, 'Genordret' => 23, 'Emichepag' => 24, 'Cuecajchi' => 25, 'Tipcajchi' => 26, 'Monapecajchi' => 27, 'Porrepcajchi' => 28, 'Tiprencajchi' => 29, 'Numinicajchi' => 30, 'Cedrifcajchi' => 31, 'Codcatcajchi' => 32, 'Id' => 33, ),
-		BasePeer::TYPE_COLNAME => array (OpdefempPeer::CODEMP => 0, OpdefempPeer::CTAPAG => 1, OpdefempPeer::CTADES => 2, OpdefempPeer::NUMINI => 3, OpdefempPeer::ORDNOM => 4, OpdefempPeer::ORDOBR => 5, OpdefempPeer::UNITRI => 6, OpdefempPeer::VERCOMRET => 7, OpdefempPeer::GENCTAORD => 8, OpdefempPeer::FORUBI => 9, OpdefempPeer::TIPAJU => 10, OpdefempPeer::TIPEJE => 11, OpdefempPeer::NUMAUT => 12, OpdefempPeer::TIPMOV => 13, OpdefempPeer::CORIVA => 14, OpdefempPeer::CTABONO => 15, OpdefempPeer::CTAVACA => 16, OpdefempPeer::GENCAUBON => 17, OpdefempPeer::GENCOMADI => 18, OpdefempPeer::UNIDAD => 19, OpdefempPeer::ORDLIQ => 20, OpdefempPeer::ORDFID => 21, OpdefempPeer::ORDVAL => 22, OpdefempPeer::GENORDRET => 23, OpdefempPeer::EMICHEPAG => 24, OpdefempPeer::CUECAJCHI => 25, OpdefempPeer::TIPCAJCHI => 26, OpdefempPeer::MONAPECAJCHI => 27, OpdefempPeer::PORREPCAJCHI => 28, OpdefempPeer::TIPRENCAJCHI => 29, OpdefempPeer::NUMINICAJCHI => 30, OpdefempPeer::CEDRIFCAJCHI => 31, OpdefempPeer::CODCATCAJCHI => 32, OpdefempPeer::ID => 33, ),
-		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'ctapag' => 1, 'ctades' => 2, 'numini' => 3, 'ordnom' => 4, 'ordobr' => 5, 'unitri' => 6, 'vercomret' => 7, 'genctaord' => 8, 'forubi' => 9, 'tipaju' => 10, 'tipeje' => 11, 'numaut' => 12, 'tipmov' => 13, 'coriva' => 14, 'ctabono' => 15, 'ctavaca' => 16, 'gencaubon' => 17, 'gencomadi' => 18, 'unidad' => 19, 'ordliq' => 20, 'ordfid' => 21, 'ordval' => 22, 'genordret' => 23, 'emichepag' => 24, 'cuecajchi' => 25, 'tipcajchi' => 26, 'monapecajchi' => 27, 'porrepcajchi' => 28, 'tiprencajchi' => 29, 'numinicajchi' => 30, 'cedrifcajchi' => 31, 'codcatcajchi' => 32, 'id' => 33, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, )
+		BasePeer::TYPE_PHPNAME => array ('Codemp' => 0, 'Ctapag' => 1, 'Ctades' => 2, 'Numini' => 3, 'Ordnom' => 4, 'Ordobr' => 5, 'Unitri' => 6, 'Vercomret' => 7, 'Genctaord' => 8, 'Forubi' => 9, 'Tipaju' => 10, 'Tipeje' => 11, 'Numaut' => 12, 'Tipmov' => 13, 'Coriva' => 14, 'Ctabono' => 15, 'Ctavaca' => 16, 'Gencaubon' => 17, 'Gencomadi' => 18, 'Unidad' => 19, 'Ordliq' => 20, 'Ordfid' => 21, 'Ordval' => 22, 'Genordret' => 23, 'Emichepag' => 24, 'Cuecajchi' => 25, 'Tipcajchi' => 26, 'Monapecajchi' => 27, 'Porrepcajchi' => 28, 'Tiprencajchi' => 29, 'Numinicajchi' => 30, 'Cedrifcajchi' => 31, 'Codcatcajchi' => 32, 'Ordret' => 33, 'Id' => 34, ),
+		BasePeer::TYPE_COLNAME => array (OpdefempPeer::CODEMP => 0, OpdefempPeer::CTAPAG => 1, OpdefempPeer::CTADES => 2, OpdefempPeer::NUMINI => 3, OpdefempPeer::ORDNOM => 4, OpdefempPeer::ORDOBR => 5, OpdefempPeer::UNITRI => 6, OpdefempPeer::VERCOMRET => 7, OpdefempPeer::GENCTAORD => 8, OpdefempPeer::FORUBI => 9, OpdefempPeer::TIPAJU => 10, OpdefempPeer::TIPEJE => 11, OpdefempPeer::NUMAUT => 12, OpdefempPeer::TIPMOV => 13, OpdefempPeer::CORIVA => 14, OpdefempPeer::CTABONO => 15, OpdefempPeer::CTAVACA => 16, OpdefempPeer::GENCAUBON => 17, OpdefempPeer::GENCOMADI => 18, OpdefempPeer::UNIDAD => 19, OpdefempPeer::ORDLIQ => 20, OpdefempPeer::ORDFID => 21, OpdefempPeer::ORDVAL => 22, OpdefempPeer::GENORDRET => 23, OpdefempPeer::EMICHEPAG => 24, OpdefempPeer::CUECAJCHI => 25, OpdefempPeer::TIPCAJCHI => 26, OpdefempPeer::MONAPECAJCHI => 27, OpdefempPeer::PORREPCAJCHI => 28, OpdefempPeer::TIPRENCAJCHI => 29, OpdefempPeer::NUMINICAJCHI => 30, OpdefempPeer::CEDRIFCAJCHI => 31, OpdefempPeer::CODCATCAJCHI => 32, OpdefempPeer::ORDRET => 33, OpdefempPeer::ID => 34, ),
+		BasePeer::TYPE_FIELDNAME => array ('codemp' => 0, 'ctapag' => 1, 'ctades' => 2, 'numini' => 3, 'ordnom' => 4, 'ordobr' => 5, 'unitri' => 6, 'vercomret' => 7, 'genctaord' => 8, 'forubi' => 9, 'tipaju' => 10, 'tipeje' => 11, 'numaut' => 12, 'tipmov' => 13, 'coriva' => 14, 'ctabono' => 15, 'ctavaca' => 16, 'gencaubon' => 17, 'gencomadi' => 18, 'unidad' => 19, 'ordliq' => 20, 'ordfid' => 21, 'ordval' => 22, 'genordret' => 23, 'emichepag' => 24, 'cuecajchi' => 25, 'tipcajchi' => 26, 'monapecajchi' => 27, 'porrepcajchi' => 28, 'tiprencajchi' => 29, 'numinicajchi' => 30, 'cedrifcajchi' => 31, 'codcatcajchi' => 32, 'ordret' => 33, 'id' => 34, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, )
 	);
 
 	
@@ -257,6 +260,8 @@ abstract class BaseOpdefempPeer {
 		$criteria->addSelectColumn(OpdefempPeer::CEDRIFCAJCHI);
 
 		$criteria->addSelectColumn(OpdefempPeer::CODCATCAJCHI);
+
+		$criteria->addSelectColumn(OpdefempPeer::ORDRET);
 
 		$criteria->addSelectColumn(OpdefempPeer::ID);
 

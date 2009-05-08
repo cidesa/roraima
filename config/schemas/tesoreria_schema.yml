@@ -466,6 +466,10 @@ propel:
     codcatcajchi:
       type: VARCHAR
       size: 32
+    ordret:
+      type: VARCHAR
+      size: 4
+      required: true
     id:
       type: INTEGER
       required: true

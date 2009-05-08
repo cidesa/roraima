@@ -100,6 +100,8 @@ class OpdefempMapBuilder {
 
 		$tMap->addColumn('CODCATCAJCHI', 'Codcatcajchi', 'string', CreoleTypes::VARCHAR, false, 32);
 
+		$tMap->addColumn('ORDRET', 'Ordret', 'string', CreoleTypes::VARCHAR, true, 4);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

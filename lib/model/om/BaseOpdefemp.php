@@ -141,6 +141,10 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
 
 	
+	protected $ordret;
+
+
+	
 	protected $id;
 
 	
@@ -382,6 +386,13 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
   {
 
     return trim($this->codcatcajchi);
+
+  }
+  
+  public function getOrdret()
+  {
+
+    return trim($this->ordret);
 
   }
   
@@ -722,6 +733,16 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
   
 	} 
 	
+	public function setOrdret($v)
+	{
+
+    if ($this->ordret !== $v) {
+        $this->ordret = $v;
+        $this->modifiedColumns[] = OpdefempPeer::ORDRET;
+      }
+  
+	} 
+	
 	public function setId($v)
 	{
 
@@ -802,7 +823,9 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
       $this->codcatcajchi = $rs->getString($startcol + 32);
 
-      $this->id = $rs->getInt($startcol + 33);
+      $this->ordret = $rs->getString($startcol + 33);
+
+      $this->id = $rs->getInt($startcol + 34);
 
       $this->resetModified();
 
@@ -810,7 +833,7 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 
       $this->afterHydrate();
 
-            return $startcol + 34; 
+            return $startcol + 35; 
     } catch (Exception $e) {
       throw new PropelException("Error populating Opdefemp object", $e);
     }
@@ -1057,6 +1080,9 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 				return $this->getCodcatcajchi();
 				break;
 			case 33:
+				return $this->getOrdret();
+				break;
+			case 34:
 				return $this->getId();
 				break;
 			default:
@@ -1102,7 +1128,8 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 			$keys[30] => $this->getNuminicajchi(),
 			$keys[31] => $this->getCedrifcajchi(),
 			$keys[32] => $this->getCodcatcajchi(),
-			$keys[33] => $this->getId(),
+			$keys[33] => $this->getOrdret(),
+			$keys[34] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1218,6 +1245,9 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 				$this->setCodcatcajchi($value);
 				break;
 			case 33:
+				$this->setOrdret($value);
+				break;
+			case 34:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1260,7 +1290,8 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[30], $arr)) $this->setNuminicajchi($arr[$keys[30]]);
 		if (array_key_exists($keys[31], $arr)) $this->setCedrifcajchi($arr[$keys[31]]);
 		if (array_key_exists($keys[32], $arr)) $this->setCodcatcajchi($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setId($arr[$keys[33]]);
+		if (array_key_exists($keys[33], $arr)) $this->setOrdret($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setId($arr[$keys[34]]);
 	}
 
 	
@@ -1301,6 +1332,7 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(OpdefempPeer::NUMINICAJCHI)) $criteria->add(OpdefempPeer::NUMINICAJCHI, $this->numinicajchi);
 		if ($this->isColumnModified(OpdefempPeer::CEDRIFCAJCHI)) $criteria->add(OpdefempPeer::CEDRIFCAJCHI, $this->cedrifcajchi);
 		if ($this->isColumnModified(OpdefempPeer::CODCATCAJCHI)) $criteria->add(OpdefempPeer::CODCATCAJCHI, $this->codcatcajchi);
+		if ($this->isColumnModified(OpdefempPeer::ORDRET)) $criteria->add(OpdefempPeer::ORDRET, $this->ordret);
 		if ($this->isColumnModified(OpdefempPeer::ID)) $criteria->add(OpdefempPeer::ID, $this->id);
 
 		return $criteria;
@@ -1397,6 +1429,8 @@ abstract class BaseOpdefemp extends BaseObject  implements Persistent {
 		$copyObj->setCedrifcajchi($this->cedrifcajchi);
 
 		$copyObj->setCodcatcajchi($this->codcatcajchi);
+
+		$copyObj->setOrdret($this->ordret);
 
 
 		$copyObj->setNew(true);
