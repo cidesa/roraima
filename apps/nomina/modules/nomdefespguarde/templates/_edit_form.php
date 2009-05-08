@@ -24,9 +24,9 @@
   <?php endif; ?>
 
   <?php echo input_auto_complete_tag('npguarde[codcon]', $npguarde->getCodcon(),
-    'nomdefespguarde/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => 3,
+    'nomdefespguarde/autocomplete?ajax=1',  array('autocomplete' => 'off','maxlength' => '3', 'size'	=> '5',
 	'onBlur'=> remote_function(array(
-              'size'	=> 5,
+
               'condition' => "$('npguarde_codcon').value != '' 	",
 			  'url'      => 'nomdefespguarde/ajax',
 			  'complete' => 'AjaxJSON(request, json)',

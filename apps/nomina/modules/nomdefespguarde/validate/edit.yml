@@ -17,7 +17,7 @@ names:
 ExistValidator:
     class: CidesaExistValidator
     param:
-        class:    Npguarde
+        class:    Npdefcpt
         column:   codcon
         unique_error:   El Concepto no existe
 
