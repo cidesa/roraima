@@ -2,24 +2,25 @@ methods:
   post:
    - "npguarde{codcon}"
    - "npguarde{nomgua}"
-  
-names: 
+
+names:
   npguarde{codcon}:
     required:  Yes
-    required_msg: El código no puede estar en Blanco
-    validators: Validator_codcon
-    
+    required_msg: El Código no puede estar en Blanco
+    validators: ExistValidator
+
   npguarde{nomgua}:
-    required:  No
+    required:  Yes
+    required_msg: El Nombre de la Guarderia no puede estar en Blanco
     validators: Validator_nomgua
-    
-Validator_codcon:
-    class: sfPropelUniqueValidator
+
+ExistValidator:
+    class: CidesaExistValidator
     param:
-        class:        Npguarde
-        column:       codcon
-        unique_error: El registro ya Existe intente con otro.
-    
+        class:    Npguarde
+        column:   codcon
+        unique_error:   El Concepto no existe
+
 Validator_nomgua:
     class: sfStringValidator
     param:
