@@ -93,7 +93,7 @@ class Constantes
 
  public static function ListaConceptos()
   {
-   return array('001' => 'Prestaciones Sociales', '002' => 'Intereses Sobre Prestaciones Sociales', '003' => 'Días Adicionas', '004' => 'Vacaciones Fraccionadas', '005' => 'Bono Vacacional Fraccionado', '006' => 'Aguinaldo Fracionados', '006' => 'Anticipo de Prestaciones');
+   return array('000' => 'Prestaciones Sociales', '001' => 'Intereses Sobre Prestaciones Sociales', '002' => 'Días Adicionas', '003' => 'Vacaciones Fraccionadas', '004' => 'Bono Vacacional Fraccionado', '005' => 'Aguinaldo Fracionados', '006' => 'Anticipo de Prestaciones');
   }
 
 
@@ -187,7 +187,7 @@ public static function PagoDoble()
     'MESF' => 'MESF   Retorna el Mes de una Fecha', 'ANOF' => 'ANOF   Retorna el Año de una Fecha', 'CATRAB' => 'CATRAB   Cumpleaños del Trabajador', 'NHIJ' => 'NHIJ   Nº De Hijos', 'SC' => 'SC   Sueldo + Compensación', 'SCAR' => 'SCAR   Sueldo del Cargo', 'DBV' => 'DBV   Días de Bono Vacacional',
     'PV' => 'PV   Períodos Vacacionales a Disfrutar', 'PHIJO' => 'PHIJO Monto Prima Hijo', 'NHIJO' => 'NHIJO Hijos Menores a Edad Suministrada', 'PPROF' => 'PPROF Monto Prima Profesionalizacion', 'PROFE' => 'PROFE Profesion activa del Empleado', 'PCARG' => 'PCARG Monto Cargo Colateral', 'CGUAR' => 'CGUAR Monto Por Guardería', 'ACUC' => 'ACUC  Acumulador de Conceptos por Empleado',
     'STAB' => 'STAB   Sueldo según Escala', 'CTAB' => 'CTAB   Compensación según Escala', 'MCES' => 'MCES   Monto de Cesta Tickets', 'ADIC' => 'ADIC   Dias Adicionales Prestacion Antiguedad','DHAB' => 'DHAB   Días Habiles del Período','DHABM' => 'DHABM   Días Habiles del Mes','CARG' => 'CARG   Cargo Actual del Empleado','NHMENEDA' => 'NHMENEDA   Numero de hijos Mayores Menores a una edad',
-    'NHMAYEDA' => 'NHMAYEDA   Numero de hijos Mayores a una edad','SIMESANT' => 'SIMESANT   FIDEICOMISO', 'SIANOANT' => 'SIANOANT   Suma Conceptos Salario Integral' );
+    'NHMAYEDA' => 'NHMAYEDA   Numero de hijos Mayores a una edad','SIMESANT' => 'SIMESANT   FIDEICOMISO', 'SIANOANT' => 'SIANOANT   Suma Conceptos Salario Integral', 'DNLAB' => 'DNLAB   Días No Laborados' );
   }
 
 
@@ -413,5 +413,24 @@ public static function PagoDoble()
     return array('####' => '####','AAMM####' => 'AAMM####','MMAA####' => 'MMAA####');
   }
 
+  public static function ListaRelaInst()
+  {
+    return array('C' => 'Constribuyente', 'CC' => 'Consejo Comunales', 'P' => 'Proveedor');
+  }
+
+  public static function ListaCondOcupac()
+  {
+    return array('AR' => 'Arrendatario', 'A' => 'Administrador', 'P' => 'Propietario');
+  }
+
+  public static function ListaCaractConst()
+  {
+    return array('PA' => 'Paredes', 'T' => 'Techos', 'P' => 'Piso', 'A' => 'Acabado', 'E' => 'Edad', 'S' => 'Sanitarios');
+  }
+
+  public static function ListaCaractTierra()
+  {
+    return array('T' => 'Tipo', 'F' => 'Forma', 'D' => 'Dimensiones', 'S' => 'Servicios');
+  }
 
 }
